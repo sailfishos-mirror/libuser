@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
 import gtk
-import gnome.ui
 
 def libuser_gtk_prompt_callback(prompts):
-	dialog = gnome.ui.GnomeDialog(b1 = gnome.ui.STOCK_BUTTON_OK)
+	dialog = gtk.Dialog(b1 = gtk.STOCK_BUTTON_OK)
 
 	table = gtk.GtkTable(rows = len(prompts), cols = 2)
 	dialog.vbox.pack_start(table)

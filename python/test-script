@@ -66,7 +66,7 @@ try:
 	print "--------- Looking at user's directory."
 	os.system("ls " + dir[0])
 	print "--------- Looking at mail spool directory."
-	os.system("ls /var/mail/*")
+	os.system("ls -l /var/mail/*")
 except:
 	pass
 
