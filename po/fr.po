@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-03-05 16:14GMT\n"
-"Last-Translator:  <bettina@redhat.it>\n"
+"PO-Revision-Date: 2002-04-16 12:05GMT\n"
+"Last-Translator: Bettina De Monti <bettina@redhat.it>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -218,9 +218,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "Erreur lors de la création de %s : %s.\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "Erreur lors de la création de %s : %s.\n"
+msgstr "Erreur lors de la création du spoule de mail.\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -260,8 +259,7 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -684,3 +682,4 @@ msgstr "Obtention attributs utilisateur par défaut :\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
+
