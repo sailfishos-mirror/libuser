@@ -28,12 +28,13 @@
 
 #define DEFAULT_ID 100
 
-static void
+static int
 dump_attribute(gpointer key, gpointer value, gpointer data)
 {
 	GList *list;
 	for(list = (GList*) value; list; list = g_list_next(list))
 		g_print(" %s = %s\n", (char*) key, (char*) list->data);
+	return 0;
 }
 
 static void
@@ -44,7 +45,7 @@ lu_ent_dump(struct lu_ent *ent)
 	g_print(_(" magic = %08x\n"), ent->magic);
 	g_print(_(" type = %s\n"), ent->type == lu_user ? _("user") : (ent->type == lu_group ? _("group") : _("unknown")));
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	g_hash_table_foreach(ent->attributes, dump_attribute, NULL);
+	g_tree_traverse(ent->attributes, dump_attribute, G_IN_ORDER, NULL);
 }
 
 /**
@@ -101,8 +102,8 @@ lu_ent_new()
 	ent->magic = LU_ENT_MAGIC;
 	ent->acache = lu_string_cache_new(FALSE);
 	ent->vcache = lu_string_cache_new(TRUE);
-	ent->original_attributes = g_hash_table_new(g_str_hash, lu_str_case_equal);
-	ent->attributes = g_hash_table_new(g_str_hash, lu_str_case_equal);
+	ent->original_attributes = g_tree_new(lu_strcasecmp);
+	ent->attributes = g_tree_new(lu_strcasecmp);
 	return ent;
 }
 
@@ -152,32 +153,34 @@ lu_ent_set_source_info(struct lu_ent *ent, const char *source)
 	}
 }
 
-static void
+static int
 copy_original_list(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_ent *e = data;
 	GList *v = value;
-	g_return_if_fail(data != NULL);
-	g_return_if_fail(e->magic == LU_ENT_MAGIC);
+	g_return_val_if_fail(data != NULL, 1);
+	g_return_val_if_fail(e->magic == LU_ENT_MAGIC, 1);
 	lu_ent_clear_original(e, key);
 	while(v) {
 		lu_ent_add_original(e, key, v->data);
 		v = g_list_next(v);
 	}
+	return 0;
 }
 
-static void
+static int
 copy_list(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_ent *dest = data;
 	GList *v = value;
-	g_return_if_fail(data != NULL);
-	g_return_if_fail(dest->magic == LU_ENT_MAGIC);
+	g_return_val_if_fail(data != NULL, 1);
+	g_return_val_if_fail(dest->magic == LU_ENT_MAGIC, 1);
 	lu_ent_clear(dest, key);
 	while(v) {
 		lu_ent_add(dest, key, v->data);
 		v = g_list_next(v);
 	}
+	return 0;
 }
 
 /**
@@ -193,7 +196,7 @@ copy_list(gpointer key, gpointer value, gpointer data)
 void
 lu_ent_revert(struct lu_ent *source)
 {
-	g_hash_table_foreach(source->original_attributes, copy_list, source);
+	g_tree_traverse(source->original_attributes, copy_list, G_IN_ORDER, source);
 }
 
 /**
@@ -221,8 +224,8 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 	dest->type = source->type;
 	lu_ent_set_source_info(dest, source->source_info);
 	lu_ent_set_source_auth(dest, source->source_auth);
-	g_hash_table_foreach(source->original_attributes, copy_original_list, dest);
-	g_hash_table_foreach(source->attributes, copy_list, dest);
+	g_tree_traverse(source->original_attributes, copy_original_list, G_IN_ORDER, dest);
+	g_tree_traverse(source->attributes, copy_list, G_IN_ORDER, dest);
 #ifdef DEBUG_USERENT
 	g_print(_("\nAfter copy:\n"));
 	lu_ent_dump(source);
@@ -386,8 +389,8 @@ lu_ent_free(struct lu_ent *ent)
 #endif
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	g_hash_table_destroy(ent->original_attributes);
-	g_hash_table_destroy(ent->attributes);
+	g_tree_destroy(ent->original_attributes);
+	g_tree_destroy(ent->attributes);
 	ent->acache->free(ent->acache);
 	ent->vcache->free(ent->vcache);
 	memset(ent, 0, sizeof(struct lu_ent));
@@ -422,11 +425,12 @@ lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
 	lu_ent_add(ent, attr, val);
 }
 
-static void
+static int
 get_hash_keys(gpointer key, gpointer value, gpointer data)
 {
 	GList **list = data;
 	*list = g_list_append(*list, key);
+	return 0;
 }
 
 /**
@@ -441,9 +445,8 @@ get_hash_keys(gpointer key, gpointer value, gpointer data)
 gboolean
 lu_ent_has(struct lu_ent *ent, const char *attribute)
 {
-	gpointer orig_key = NULL, value = NULL;
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	return g_hash_table_lookup_extended(ent->attributes, attribute, &orig_key, &value);
+	return g_tree_lookup(ent->attributes, ent->acache->cache(ent->acache, attribute)) != NULL;
 }
 
 /**
@@ -459,7 +462,7 @@ lu_ent_get_attributes(struct lu_ent *ent)
 {
 	GList *ret = NULL;
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
-	g_hash_table_foreach(ent->attributes, get_hash_keys, &ret);
+	g_tree_traverse(ent->attributes, get_hash_keys, G_IN_ORDER, &ret);
 	return ret;
 }
 
@@ -477,8 +480,7 @@ lu_ent_get(struct lu_ent *ent, const char *attr)
 {
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	attr = ent->acache->cache(ent->acache, attr);
-	return g_hash_table_lookup(ent->attributes, (char*)attr);
+	return g_tree_lookup(ent->attributes, ent->acache->cache(ent->acache, attr));
 }
 
 GList *
@@ -486,14 +488,13 @@ lu_ent_get_original(struct lu_ent *ent, const char *attr)
 {
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	attr = ent->acache->cache(ent->acache, attr);
-	return g_hash_table_lookup(ent->original_attributes, (char*)attr);
+	return g_tree_lookup(ent->original_attributes, ent->acache->cache(ent->acache, attr));
 }
 
 typedef GList* (get_fn)(struct lu_ent *, const char *);
 
 static void
-lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
+lu_ent_addx(struct lu_ent *ent, get_fn *get, GTree *tree,
 	    const char *attr, const char *val)
 {
 	GList *list = NULL, *tmp = NULL;
@@ -516,7 +517,7 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
 	val = ent->vcache->cache(ent->vcache, val);
 	list = g_list_append(list, (char*)val);
 
-	g_hash_table_insert(hash, (char*)attr, list);
+	g_tree_insert(tree, (char*)attr, list);
 }
 
 /**
@@ -568,7 +569,7 @@ lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 	val = ent->vcache->cache(ent->vcache, val);
 	list = g_list_remove(list, (char*)val);
 
-	g_hash_table_insert(ent->attributes, (char*)attr, list);
+	g_tree_insert(ent->attributes, (char*)attr, list);
 }
 
 /**
@@ -593,7 +594,7 @@ lu_ent_clear(struct lu_ent *ent, const char *attr)
 
 	tmp = lu_ent_get(ent, attr);
 
-	g_hash_table_remove(ent->attributes, attr);
+	g_tree_remove(ent->attributes, ent->acache->cache(ent->acache, attr));
 
 	g_list_free(tmp);
 }
@@ -611,7 +612,7 @@ lu_ent_clear_original(struct lu_ent *ent, const char *attr)
 
 	tmp = lu_ent_get_original(ent, attr);
 
-	g_hash_table_remove(ent->original_attributes, attr);
+	g_tree_remove(ent->original_attributes, ent->acache->cache(ent->acache, attr));
 
 	g_list_free(tmp);
 }

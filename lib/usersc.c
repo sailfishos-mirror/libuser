@@ -33,21 +33,22 @@ lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 	if(string == NULL) {
 		return NULL;
 	}
-	if((ret = g_hash_table_lookup(cache->table, (char*)string)) == NULL) {
+	if((ret = g_tree_lookup(cache->tree, (char*)string)) == NULL) {
 		ret = g_strdup(string);
-		g_hash_table_insert(cache->table, ret, ret);
+		g_tree_insert(cache->tree, ret, ret);
 	}
 	return ret;
 }
 
 /* Add each key to the list passed in through data. */
-static void
+static int
 get_keys(gpointer key, gpointer value, gpointer data)
 {
 	GList **list = data;
 	if(key) {
 		*list = g_list_append(*list, key);
 	}
+	return 0;
 }
 
 /* Free all of the keys in the cache.  All of the items are keys. */
@@ -58,8 +59,8 @@ lu_string_cache_free(struct lu_string_cache *cache)
 	char *tmp;
 
 	g_return_if_fail(cache != NULL);
-	g_hash_table_foreach(cache->table, get_keys, &list);
-	g_hash_table_destroy(cache->table);
+	g_tree_traverse(cache->tree, get_keys, G_IN_ORDER, &list);
+	g_tree_destroy(cache->tree);
 
 	for(i = list; i; i = g_list_next(i)) {
 		if((tmp = i->data) != NULL) {
@@ -87,9 +88,9 @@ lu_string_cache_new(gboolean case_sensitive)
 	struct lu_string_cache *cache;
 	cache = g_malloc0(sizeof(struct lu_string_cache));
 	if(case_sensitive) {
-		cache->table = g_hash_table_new(g_str_hash, lu_str_equal);
+		cache->tree = g_tree_new(lu_strcmp);
 	} else {
-		cache->table = g_hash_table_new(g_str_hash, lu_str_case_equal);
+		cache->tree = g_tree_new(lu_strcasecmp);
 	}
 	cache->cache = lu_string_cache_cache;
 	cache->free = lu_string_cache_free;

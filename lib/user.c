@@ -58,7 +58,7 @@ enum lu_dispatch_id {
  *
  * Returns: nothing.
  **/
-static void
+static int
 lu_module_unload(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *module;
@@ -71,6 +71,7 @@ lu_module_unload(gpointer key, gpointer value, gpointer data)
 	if(handle != NULL) {
 		g_module_close(handle);
 	}
+	return 0;
 }
 
 static gboolean
@@ -99,7 +100,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 	for(p = strtok_r(wlist, SEPARATOR, &q);
 	    p != NULL;
 	    p = strtok_r(NULL, SEPARATOR, &q)) {
-		if(g_hash_table_lookup(ctx->modules, p) == NULL) {
+		if(g_tree_lookup(ctx->modules, ctx->scache->cache(ctx->scache, p)) == NULL) {
 			tmp = g_strconcat(module_dir, "/libuser_", p, ".so", NULL);
 			module_file = ctx->scache->cache(ctx->scache, tmp);
 			g_free(tmp);
@@ -149,7 +150,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 				key = ctx->scache->cache(ctx->scache, p);
 				module->lu_context = ctx;
 				module->module_handle = handle;
-				g_hash_table_insert(ctx->modules, key, module);
+				g_tree_insert(ctx->modules, key, module);
 				*names = g_list_append(*names, key);
 			}
 		} else {
@@ -266,7 +267,7 @@ lu_start(const char *auth_name, enum lu_type auth_type, const char *info_modules
 	ctx->auth_name = ctx->scache->cache(ctx->scache, auth_name);
 	ctx->auth_type = auth_type;
 
-	ctx->modules = g_hash_table_new(g_str_hash, lu_str_case_equal);
+	ctx->modules = g_tree_new(lu_strcasecmp);
 
 	if(info_modules == NULL) {
 		info_modules = lu_cfg_read_single(ctx, "defaults/info_modules", "files");
@@ -303,8 +304,8 @@ lu_end(struct lu_context *context)
 	g_assert(context != NULL);
 
 	if(context->modules != NULL) {
-		g_hash_table_foreach(context->modules, lu_module_unload, NULL);
-		g_hash_table_destroy(context->modules);
+		g_tree_traverse(context->modules, lu_module_unload, G_IN_ORDER, NULL);
+		g_tree_destroy(context->modules);
 	}
 
 	lu_cfg_done(context);
@@ -485,7 +486,7 @@ run_list(struct lu_context *context, GList *modules, enum lu_module_type type,
 	for(i = 0, success = FALSE;
 	    (c = g_list_nth(modules, i)) != NULL;
 	    i++) {
-		module = g_hash_table_lookup(context->modules, (char*)c->data);
+		module = g_tree_lookup(context->modules, context->scache->cache(context->scache, (char*)c->data));
 		g_assert(module != NULL);
 		success = run_single(context, module, type, id, ent, data, error);
 		if(success) {
@@ -576,10 +577,8 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 		case user_del:
 		case group_mod:
 		case group_del:
-		case user_setpass:
-		case group_setpass:
-			auth_module = g_hash_table_lookup(context->modules, tmp->source_auth);
-			info_module = g_hash_table_lookup(context->modules, tmp->source_info);
+			auth_module = g_tree_lookup(context->modules, context->scache->cache(context->scache, tmp->source_auth));
+			info_module = g_tree_lookup(context->modules, context->scache->cache(context->scache, tmp->source_info));
 			g_assert(auth_module != NULL);
 			g_assert(info_module != NULL);
 			if(run_single(context, auth_module, auth, id, tmp, data, error) &&
@@ -587,13 +586,18 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 				success = TRUE;
 			}
 			break;
+		case user_setpass:
+		case group_setpass:
+			auth_module = g_tree_lookup(context->modules, context->scache->cache(context->scache, tmp->source_auth));
+			success = run_single(context, auth_module, auth, id, tmp, data, error);
+			break;
 		case user_lock:
 		case user_unlock:
 		case user_islocked:
 		case group_lock:
 		case group_unlock:
 		case group_islocked:
-			auth_module = g_hash_table_lookup(context->modules, tmp->source_auth);
+			auth_module = g_tree_lookup(context->modules, context->scache->cache(context->scache, tmp->source_auth));
 			g_assert(auth_module != NULL);
 			success = run_single(context, auth_module, auth, id, tmp, data, error);
 			break;
@@ -928,22 +932,24 @@ struct enumerate_data {
 	struct lu_error **error;
 };
 
-static void
+static int
 lu_enumerate_users(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *mod = (struct lu_module *)value;
 	struct enumerate_data *en = (struct enumerate_data*) data;
 	if((en->error == NULL) || (*(en->error) == NULL))
-	en->list = g_list_concat(en->list, mod->users_enumerate(mod, en->pattern, en->error));
+		en->list = g_list_concat(en->list, mod->users_enumerate(mod, en->pattern, en->error));
+	return 0;
 }
 
-static void
+static int
 lu_enumerate_groups(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *mod = (struct lu_module *)value;
 	struct enumerate_data *en = (struct enumerate_data*) data;
 	if((en->error == NULL) || (*(en->error) == NULL))
-	en->list = g_list_concat(en->list, mod->groups_enumerate(mod, en->pattern, en->error));
+		en->list = g_list_concat(en->list, mod->groups_enumerate(mod, en->pattern, en->error));
+	return 0;
 }
 
 static GList *
@@ -963,7 +969,7 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 
 	if(module) {
 		module_rw = g_strdup(module);
-		mod = g_hash_table_lookup(context->modules, module);
+		mod = g_tree_lookup(context->modules, context->scache->cache(context->scache, module));
 		if(mod != NULL) {
 			if(type == lu_user) {
 				lu_enumerate_users(module_rw, mod, &data);
@@ -974,9 +980,9 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 		g_free(module_rw);
 	} else {
 		if(type == lu_user) {
-			g_hash_table_foreach(context->modules, lu_enumerate_users, &data);
+			g_tree_traverse(context->modules, lu_enumerate_users, G_IN_ORDER, &data);
 		} else {
-			g_hash_table_foreach(context->modules, lu_enumerate_groups, &data);
+			g_tree_traverse(context->modules, lu_enumerate_groups, G_IN_ORDER, &data);
 		}
 	}
 	return data.list;

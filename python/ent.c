@@ -291,13 +291,11 @@ libuser_entity_has_key(struct libuser_entity *self, PyObject *item)
 
 	DEBUG_ENTRY;
 
-	if(!PyString_Check(item)) {
-		PyErr_SetString(PyExc_TypeError, "expected a string");
+	if(!PyArg_ParseTuple(item, "s", &attr)) {
+		PyErr_SetString(PyExc_TypeError, "expected a tuple or string");
 		DEBUG_EXIT;
 		return NULL;
 	}
-	attr = PyString_AsString(item);
-
 	return Py_BuildValue("i", lu_ent_has(self->ent, attr) ? 1 : 0);
 }
 

@@ -25,12 +25,14 @@
 #include <stdlib.h>
 #include "../include/libuser/user_private.h"
 
-static void
+static int
 dump_attribute(gpointer key, gpointer value, gpointer data)
 {
 	GList *list;
+	g_print("%s\n", (char*) key);
 	for(list = (GList*) value; list; list = g_list_next(list))
 		g_print(" %s = %s\n", (char*) key, (char*) list->data);
+	return 0;
 }
 
 int main(int argc, char **argv)
@@ -69,14 +71,17 @@ int main(int argc, char **argv)
 	g_print(gettext("Getting default user attributes:\n"));
 	ent = lu_ent_new();
 	lu_user_default(ctx, "newuser", FALSE, ent);
-	g_hash_table_foreach(ent->attributes, dump_attribute, NULL);
+	g_tree_traverse(ent->attributes, dump_attribute, G_IN_ORDER, NULL);
+
+	ret = lu_ent_get(ent, "UIDNUMBER");
+	dump_attribute("UIDNUMBER", ret, NULL);
 
 	g_print(gettext("Copying user structure:\n"));
 	tmp = lu_ent_new();
 	lu_ent_copy(ent, tmp);
 	temp = lu_ent_new();
 	lu_ent_copy(tmp, temp);
-	g_hash_table_foreach(temp->attributes, dump_attribute, NULL);
+	g_tree_traverse(temp->attributes, dump_attribute, G_IN_ORDER, NULL);
 
 	lu_ent_free(ent);
 	lu_ent_free(tmp);

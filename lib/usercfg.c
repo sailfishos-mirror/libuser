@@ -65,7 +65,7 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		close(fd);
 	}
 
-	config->cache = lu_string_cache_new(TRUE);
+	config->cache = lu_string_cache_new(FALSE);
 	context->config = config;
 
 	return TRUE;

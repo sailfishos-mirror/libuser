@@ -38,7 +38,7 @@ lu_str_case_equal(gconstpointer v1, gconstpointer v2)
 {
 	g_return_val_if_fail(v1 != NULL, 0);
 	g_return_val_if_fail(v2 != NULL, 0);
-	return (g_strcasecmp((char*)v1, (char*)v2) == 0);
+	return g_strcasecmp((char*)v1, (char*)v2) == 0;
 }
 
 gint
@@ -46,7 +46,23 @@ lu_str_equal(gconstpointer v1, gconstpointer v2)
 {
 	g_return_val_if_fail(v1 != NULL, 0);
 	g_return_val_if_fail(v2 != NULL, 0);
-	return (strcmp((char*)v1, (char*)v2) == 0);
+	return strcmp((char*)v1, (char*)v2) == 0;
+}
+
+gint
+lu_strcasecmp(gconstpointer v1, gconstpointer v2)
+{
+	g_return_val_if_fail(v1 != NULL, 0);
+	g_return_val_if_fail(v2 != NULL, 0);
+	return g_strcasecmp((char*)v1, (char*)v2);
+}
+
+gint
+lu_strcmp(gconstpointer v1, gconstpointer v2)
+{
+	g_return_val_if_fail(v1 != NULL, 0);
+	g_return_val_if_fail(v2 != NULL, 0);
+	return strcmp((char*)v1, (char*)v2);
 }
 
 #define UNACCEPTABLE "!*:$,"

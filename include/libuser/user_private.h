@@ -39,7 +39,7 @@
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
 typedef struct lu_string_cache {
-	GHashTable *table;
+	GTree *tree;
 	char * (*cache)(struct lu_string_cache *, const char *);
 	void (*free)(struct lu_string_cache *);
 } lu_string_cache_t;
@@ -59,9 +59,9 @@ struct lu_ent {
 	enum lu_type type;		/* User or group? */
 	struct lu_string_cache *acache;	/* String cache for attribute names. */
 	struct lu_string_cache *vcache;	/* String cache for attribute values. */
-	GHashTable *original_attributes;/* GLists of the original values
+	GTree *original_attributes;	/* GLists of the original values
 					   associated with attribute names. */
-	GHashTable *attributes;		/* GLists of values associated with
+	GTree *attributes;		/* GLists of values associated with
 					   attribute names. */
 	const char *source_info;	/* Name of the info module this user was
 					   looked up in. */
@@ -71,8 +71,8 @@ struct lu_ent {
 
 /* What type of function a module serves. */
 typedef enum lu_module_type {
-	auth = 0xba1f,
-	info = 0xdc32,
+	auth = 0xca1f,
+	info = 0xec32,
 } lu_module_type_t;
 
 /* A context structure. */
@@ -92,7 +92,7 @@ struct lu_context {
 					   names. */
 	GList *info_module_names;	/* A list of loaded information module
 					   names. */
-	GHashTable *modules;		/* A hash table, keyed by module name,
+	GTree *modules;			/* A tree, keyed by module name,
 					   of module structures. */
 };
 
@@ -194,6 +194,8 @@ GList *lu_g_list_copy(GList *list);
 
 gint lu_str_equal(gconstpointer v1, gconstpointer v2);
 gint lu_str_case_equal(gconstpointer v1, gconstpointer v2);
+gint lu_strcmp(gconstpointer v1, gconstpointer v2);
+gint lu_strcasecmp(gconstpointer v1, gconstpointer v2);
 
 guint lu_strv_len(gchar **v);
 

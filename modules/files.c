@@ -65,7 +65,7 @@ static const struct format_specifier
 format_group[] = {
 	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
 	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
-	{3, LU_GIDNUMBER, NULL, NULL, TRUE, FALSE},
+	{3, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
 	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
 };
 static const size_t
@@ -772,6 +772,10 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
 		if(!formats[i].multiple) {
+			if(values == NULL) {
+				lu_error_new(error, lu_error_generic, "entity has no `%s' attribute", formats[i].attribute);
+				return FALSE;
+			}
 			p = (char*)values->data ?: "";
 			/* if there's a prefix, strip it */
 			if(formats[i].prefix) {
