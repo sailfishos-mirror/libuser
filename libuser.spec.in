@@ -5,7 +5,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -97,7 +97,7 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Wed Aug 06 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-2
+* Wed Aug 06 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-3
 - Add SELinux support
 
 * Wed Feb 19 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.7-1
