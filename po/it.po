@@ -3,6 +3,7 @@
 # translation of it.po to
 # translation of it.po to
 # translation of it.po to
+# translation of it.po to
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004.
@@ -12,7 +13,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-01 00:14+0100\n"
-"PO-Revision-Date: 2004-11-04 18:16+0100\n"
+"PO-Revision-Date: 2004-11-05 00:24+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
