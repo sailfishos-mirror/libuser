@@ -404,9 +404,9 @@ msgid "Password changed.\n"
 msgstr "Hasło zostało zmienione.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Grupa %s nie istnieje.\n"
+msgstr "Grupa %jd nie istnieje\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -439,15 +439,15 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s nie miał numeru gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr ""
-"Nie istnieje żadna grupa z GID równym %ld, nie ma możliwości usunięcia.\n"
+"Nie istnieje żadna grupa z GID równym %jd, nie usuwam.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Grupa z GID równym %ld nie posiada nazwy.\n"
+msgstr "Grupa z GID równym %jd nie posiada nazwy.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -956,9 +956,9 @@ msgid "Invalid ID %s\n"
 msgstr "Niewłaściwy identyfikator %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Szukanie grupy o identyfikatorze %d.\n"
+msgstr "Szukanie grupy o ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -966,9 +966,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Szukanie grupy %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Szukanie użytkownika o identyfikatorze %d.\n"
+msgstr "Szukanie użytkownika o ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
