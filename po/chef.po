@@ -1,5 +1,5 @@
 msgid ""
-msgstr "POT-Creation-Date: 2001-06-01 19:11-0400\n"
+msgstr "POT-Creation-Date: 2001-06-01 19:15-0400\n"
 
 #: apps/apputil.c:36 apps/apputil.c:44 apps/apputil.c:52
 msgid "Feature not implemented: "
@@ -310,7 +310,7 @@ msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 msgid "Couldn't stat or invalid permissions on '%s'.\n"
 msgstr ""
 
-#: modules/files.c:1150 modules/files.c:1198
+#: modules/files.c:1151 modules/files.c:1199
 msgid "Not executing with superuser privileges."
 msgstr ""
 

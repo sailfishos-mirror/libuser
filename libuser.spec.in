@@ -62,10 +62,13 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
-* Wed May 30 2001 Nalin Dahyabhai <nalin@redhat.com> 0.10
+* Fri Jun  1 2001 Nalin Dahyabhai <nalin@redhat.com> 0.10
+- finish the python bindings and verify that the file backend works again
+
+* Wed May 30 2001 Nalin Dahyabhai <nalin@redhat.com>
 - remove a redundant check which was breaking modifications
 
-* Tue May 29 2001 Nalin Dahyabhai <nalin@redhat.com> 0.10
+* Tue May 29 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish adding setpass methods
 
 * Wed May  2 2001 Nalin Dahyabhai <nalin@redhat.com> 0.9

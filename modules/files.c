@@ -229,7 +229,8 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			gchar **w;
 			int j;
 			lu_ent_clear(ent, formats[i].attribute);
-			w = g_strsplit(v[formats[i].position - 1], ",", 0);
+			w = g_strsplit(v[formats[i].position - 1] ?: "",
+				       ",", 0);
 			lu_ent_clear(ent, formats[i].attribute);
 			lu_ent_clear_original(ent, formats[i].attribute);
 			for(j = 0; (w != NULL) && (w[j] != NULL); j++) {
