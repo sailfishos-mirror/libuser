@@ -34,11 +34,14 @@
 #define getenv(string) __secure_getenv(string)
 #endif
 
+/* We read the configuration file at startup only, so we need to keep a
+ * copy of it around. */
 struct config_config {
 	struct lu_string_cache *cache;
 	char *data;
 };
 
+/* Initialize the configuration structure. */
 gboolean
 lu_cfg_init(struct lu_context *context, struct lu_error **error)
 {
@@ -46,16 +49,21 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	struct stat st;
 	const char *filename = SYSCONFDIR "/libuser.conf";
 	struct config_config *config = NULL;
+	const char *t;
 
 	g_assert(context != NULL);
 
+	/* Allow the LIBUSER_CONF environment variable to override where
+	 * we get the configuration file is, but only if we can trust the
+	 * environment. */
 	if ((getuid() == geteuid()) && (getgid() == getegid())) {
-		const char *t = getenv("LIBUSER_CONF");
+		t = getenv("LIBUSER_CONF");
 		if (t != NULL) {
 			filename = t;
 		}
 	}
 
+	/* Try to open the file. */
 	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -64,19 +72,23 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		return FALSE;
 	}
 
+	/* Create a new structure to save the data. */
 	config = g_malloc0(sizeof(struct config_config));
 	if (fstat(fd, &st) != -1) {
+		/* Read the file's contents in. */
 		config->data = g_malloc0(st.st_size + 1);
 		read(fd, config->data, st.st_size);
 	}
 	close(fd);
 
+	/* Finish up. */
 	config->cache = lu_string_cache_new(FALSE);
 	context->config = config;
 
 	return TRUE;
 }
 
+/* Free a configuration context structure. */
 void
 lu_cfg_done(struct lu_context *context)
 {
@@ -86,6 +98,9 @@ lu_cfg_done(struct lu_context *context)
 	g_assert(context->config != NULL);
 
 	config = (struct config_config *) context->config;
+
+	/* Free the cache, the file contents, and finally the config structure
+	 * itself. */
 	config->cache->free(config->cache);
 	g_free(config->data);
 	g_free(config);

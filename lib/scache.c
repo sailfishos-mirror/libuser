@@ -55,7 +55,7 @@ lu_string_cache_free(struct lu_string_cache *cache)
 	char *tmp;
 
 	g_return_if_fail(cache != NULL);
-	g_tree_traverse(cache->tree, get_keys, G_IN_ORDER, &list);
+	g_tree_foreach(cache->tree, get_keys, &list);
 	g_tree_destroy(cache->tree);
 
 	for (i = list; i; i = g_list_next(i)) {

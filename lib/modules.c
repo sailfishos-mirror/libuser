@@ -177,6 +177,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 			g_return_val_if_fail(module->users_enumerate_full != NULL,
 					     FALSE);
+			g_return_val_if_fail(module->users_enumerate_by_group_full != NULL,
+					     FALSE);
 
 			g_return_val_if_fail(module->group_lookup_name != NULL,
 					     FALSE);
@@ -198,6 +200,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 			g_return_val_if_fail(module->groups_enumerate_full != NULL,
 					     FALSE);
+			g_return_val_if_fail(module->groups_enumerate_by_user_full != NULL,
+					     FALSE);
 
 			g_return_val_if_fail(module->close != NULL, FALSE);
 		}
@@ -205,6 +209,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	return TRUE;
 }
 
+/* Unload a given module, implemented as a callback for a GTree where the
+ * module's name is a key, and the module structure is the value. */
 int
 lu_module_unload(gpointer key, gpointer value, gpointer data)
 {

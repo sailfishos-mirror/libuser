@@ -44,6 +44,7 @@ enum lu_dispatch_id {
 	users_enumerate,
 	users_enumerate_by_group,
 	users_enumerate_full,
+	users_enumerate_by_group_full,
 	group_lookup_name,
 	group_lookup_id,
 	group_add,
@@ -55,8 +56,9 @@ enum lu_dispatch_id {
 	group_is_locked,
 	group_setpass,
 	groups_enumerate,
-	groups_enumerate_by_user,
 	groups_enumerate_full,
+	groups_enumerate_by_user,
+	groups_enumerate_by_user_full,
 };
 
 struct lu_context *
@@ -212,6 +214,14 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate_full(module, sdata, error);
 		return TRUE;
+	case users_enumerate_by_group_full:
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
+		g_return_val_if_fail(ret != NULL, FALSE);
+		*ret = module->users_enumerate_by_group_full(module,
+							     sdata, ldata,
+							     error);
+		return TRUE;
 	case group_lookup_name:
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
@@ -265,6 +275,12 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate_full(module, sdata, error);
+		return TRUE;
+	case groups_enumerate_by_user_full:
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
+		g_return_val_if_fail(ret != NULL, FALSE);
+		*ret = module->groups_enumerate_by_user_full(module, sdata, error);
 		return TRUE;
 	case uses_elevated_privileges:
 		return module->uses_elevated_privileges(module);
@@ -805,6 +821,30 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 	GArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate_full, pattern, 0,
+		    NULL, (gpointer*) &ret, error);
+	return ret;
+}
+
+GArray *
+lu_users_enumerate_by_group_full(struct lu_context * context,
+				 const char *pattern,
+				 struct lu_error ** error)
+{
+	GArray *ret = NULL;
+	LU_ERROR_CHECK(error);
+	lu_dispatch(context, users_enumerate_by_group_full, pattern, 0,
+		    NULL, (gpointer*) &ret, error);
+	return ret;
+}
+
+GArray *
+lu_groups_enumerate_by_user_full(struct lu_context * context,
+				 const char *pattern,
+				 struct lu_error ** error)
+{
+	GArray *ret = NULL;
+	LU_ERROR_CHECK(error);
+	lu_dispatch(context, groups_enumerate_by_user_full, pattern, 0,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
