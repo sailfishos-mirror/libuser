@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-24 15:26+0200\n"
+"PO-Revision-Date: 2003-02-26 20:19+0200\n"
 "Last-Translator: Leonid Kanter <leon@geon.donetsk.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -663,8 +663,7 @@ msgstr "нет файла shadow -- запрещено"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -832,9 +831,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "Авторизованный пользователь LDAP SASL"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "ошибка загрузки модуля"
+msgstr "ошибка инициализации модуля"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -921,3 +919,4 @@ msgstr "Получение стандартных атрибутов польз�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Копирование структуры пользователя:\n"
+
