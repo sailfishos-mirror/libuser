@@ -1,11 +1,11 @@
 %if %{?WITH_SELINUX:0}%{!?WITH_SELINUX:1}
-%define WITH_SELINUX 1
+%define WITH_SELINUX 0
 %endif
 %define python 2.2
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 4.sel
+Release: 5
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -97,8 +97,8 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Fri Sep 05 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-4.sel
-- Turn on SELinux 
+* Mon Sep 08 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-5
+- Turn off SELinux 
 
 * Wed Aug 06 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-3
 - Add SELinux support
