@@ -3,12 +3,13 @@
 # Czech translation for libuser
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Milan Kerslager <kerslage@linux.cz>, 2002
+# Miloslav Trmac <mitr@volny.cz>, 2002.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-09-06 00:41+0200\n"
+"PO-Revision-Date: 2002-12-13 11:50+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -406,28 +407,28 @@ msgstr "chyba pøi ètení z terminálu"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "jméno není nastaveno"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "jméno je pøíli¹ krátké"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "jméno obsahuje ne-ASCII znaky"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "jméno obsahuje øídící znaky"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "jméno obsahuje whitespace"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "jméno obsahuje neplatný znak `%c'"
 
 #: lib/util.c:200
 #, c-format
