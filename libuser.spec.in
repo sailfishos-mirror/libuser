@@ -8,7 +8,7 @@ License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 BuildPrereq: pam-devel, popt, python-devel
-BuildPrereq: gtk-doc, sgml-tools
+BuildPrereq: gtk-doc, linuxdoc-tools
 Summary: A user and group account administration library.
 
 %description
