@@ -1,3 +1,6 @@
+0.6
+* See changelog in libuser.spec.in from here on.
+
 0.5
 * Implemented the krb5 back-end (user add, modify, delete only).
 * Lookups in the files module use O_RDONLY instead of O_RDWR.

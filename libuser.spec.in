@@ -66,3 +66,5 @@ rm -fr $RPM_BUILD_ROOT
 %changelog
 * Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - initial packaging
+- implement LDAP back-end
+- fix naming attribute for users (should be uid, not gid)

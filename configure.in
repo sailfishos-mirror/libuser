@@ -67,8 +67,8 @@ if test x$ldap != xno ; then
 		LDAP_LIBS="$LIBS -L$ldap/lib"
 	fi
 	AC_CHECK_HEADERS(ldap.h)
-	AC_CHECK_LIB(lber,ber_alloc,LDAP_LIBS="$LDAP_LIBS -llber",,$LDAP_LIBS $LIBS)
-	AC_CHECK_LIB(ldap,ldap_sasl_bind_s,LDAP_LIBS="$LDAP_LIBS -lldap",,$LDAP_LIBS $LIBS)
+	AC_CHECK_LIB(lber,ber_alloc,LDAP_LIBS="-llber $LDAP_LIBS",,$LDAP_LIBS $LIBS)
+	AC_CHECK_LIB(ldap,ldap_sasl_bind_s,LDAP_LIBS="-lldap $LDAP_LIBS",,$LDAP_LIBS $LIBS)
 fi
 
 AC_HEADER_STDC
