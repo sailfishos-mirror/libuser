@@ -144,7 +144,8 @@ if test x$sasl != xno ; then
 			     LIBS="-lsasl $LIBS"
 			     MODULES="$MODULES ${PACKAGE}_sasldb.so"
 			     ,,$LDFLAGS $LIBS))
-	AC_CHECK_FUNCS(sasl_user_exists)
+	AC_CHECK_FUNCS(sasl_user_exists,,
+		AC_CHECK_LIB(sasl,sasl_user_exists,AC_DEFINE(HAVE_SASL_USER_EXISTS)))
 	LIBS="$LIBSAVE"
 fi
 
