@@ -100,6 +100,7 @@ set_default_context(const char *filename, security_context_t *prev_context,
 	(void)prev_context;
 	(void)error;
 #ifdef WITH_SELINUX
+	*prev_context = NULL;
 	if (is_selinux_enabled() > 0) {
 		security_context_t scontext;
 
