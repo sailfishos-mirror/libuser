@@ -91,6 +91,8 @@ popd
 %changelog
 * Wed Feb 19 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.7-1
 - ldap: set error codes correctly when we encounter failures initializing
+- don't double-close modules which fail initialization
+- ldap: don't set an error in cases where one is already set
 
 * Tue Feb 18 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.6-1
 - use a crypt salt consistent with the defaults/crypt_style setting when

@@ -2338,8 +2338,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	/* Try to bind to the server to verify that we can. */
 	ldap = bind_server(ctx, error);
 	if (ldap == NULL) {
-		lu_error_new(error, lu_error_init,
-			     _("error connecting to server"));
 		g_free(ret);
 		g_free(ctx);
 		return NULL;

@@ -116,7 +116,6 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					lu_error_free(error);
 					continue;
 				} else {
-					g_module_close(handle);
 					g_free(modlist);
 					return FALSE;
 				}
