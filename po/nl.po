@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser RH8.1\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2003-02-23 08:09+0100\n"
+"PO-Revision-Date: 2003-02-26 20:28+0100\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Fout bij initialiseren PAM.\n"
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Authentificatie mislukt voor %s.\n"
+msgstr "Aanmeldingscontrole mislukt voor %s.\n"
 
 #: apps/apputil.c:454
 #, c-format
