@@ -18,6 +18,7 @@ AH_VERBATIM([_],[
 AH_VERBATIM([N_],[
 #define N_(String) (String)
 ],[Common gettext macro.])
+AC_DEFINE(_GNU_SOURCE,,[Use all available glibc features.])
 
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
