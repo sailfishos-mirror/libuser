@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-27 06:41+0200\n"
+"POT-Creation-Date: 2004-09-28 22:52+0200\n"
 "PO-Revision-Date: 2004-06-26 19:35+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -616,59 +616,59 @@ msgstr "ім'я містить неправильний символ `%c'"
 msgid "error locking file: %s"
 msgstr "помилка блокування файлу: %s"
 
-#: modules/files.c:171 modules/files.c:514 modules/files.c:886
-#: modules/files.c:1158 modules/files.c:1359 modules/files.c:1570
-#: modules/files.c:1660 modules/files.c:1864 modules/files.c:2054
-#: modules/files.c:2071 modules/files.c:2161 modules/files.c:2180
-#: modules/files.c:2248 modules/files.c:2269 modules/files.c:2366
-#: modules/files.c:2385 modules/files.c:2444 modules/files.c:2463
-#: modules/files.c:2564 modules/files.c:2581
+#: modules/files.c:172 modules/files.c:515 modules/files.c:887
+#: modules/files.c:1159 modules/files.c:1360 modules/files.c:1571
+#: modules/files.c:1661 modules/files.c:1865 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2162 modules/files.c:2181
+#: modules/files.c:2249 modules/files.c:2270 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "не вдається відкрити `%s': %s"
 
-#: modules/files.c:187 modules/files.c:223 modules/files.c:261
-#: modules/files.c:898 modules/files.c:1371
+#: modules/files.c:188 modules/files.c:224 modules/files.c:262
+#: modules/files.c:899 modules/files.c:1372
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "не вдається отримати відомості про `%s': %s"
 
-#: modules/files.c:198
+#: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "помилка створення `%s': %s"
 
-#: modules/files.c:214
+#: modules/files.c:215
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервний файл `%s' існує та не є звичайним файлом"
 
-#: modules/files.c:928 modules/files.c:1380
+#: modules/files.c:929 modules/files.c:1381
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "не вдається прочитати з `%s': %s"
 
-#: modules/files.c:937 modules/files.c:944
+#: modules/files.c:938 modules/files.c:945
 msgid "entry already present in file"
 msgstr "запис вже існує у файлі"
 
-#: modules/files.c:951 modules/files.c:966 modules/files.c:1430
-#: modules/files.c:1438
+#: modules/files.c:952 modules/files.c:967 modules/files.c:1431
+#: modules/files.c:1439
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "не вдається записати `%s': %s"
 
-#: modules/files.c:1125 modules/files.c:1133 modules/files.c:1235
-#: modules/files.c:1243
+#: modules/files.c:1126 modules/files.c:1134 modules/files.c:1236
+#: modules/files.c:1244
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "об'єкт не має атрибута %s"
 
-#: modules/files.c:2847 modules/files.c:2917
+#: modules/files.c:2848 modules/files.c:2918
 msgid "not executing with superuser privileges"
 msgstr "виконується без привілей адміністратора"
 
-#: modules/files.c:2930
+#: modules/files.c:2931
 msgid "no shadow file present -- disabling"
 msgstr "немає файлу shadow -- заборонено"
 
@@ -730,115 +730,115 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Пароль Kerberos для Admin Principal"
 
-#: modules/ldap.c:192 modules/ldap.c:225
+#: modules/ldap.c:199
 msgid "error initializing ldap library"
 msgstr "помилка ініціалізації бібліотеки ldap"
 
-#: modules/ldap.c:203 modules/ldap.c:236
+#: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "не вдається встановити LDAP протокол для версії %d"
 
-#: modules/ldap.c:213
+#: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
 msgstr "не вдається узгодити TLS с сервером LDAP"
 
-#: modules/ldap.c:396
+#: modules/ldap.c:381
 msgid "could not bind to LDAP server"
 msgstr "не вдається під'єднатись до сервера LDAP"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:393
 msgid "could not search LDAP server"
 msgstr "не вдається виконати пошук на LDAP сервері"
 
-#: modules/ldap.c:417
+#: modules/ldap.c:402
 msgid "LDAP server appears to have no root DSE"
 msgstr "Схоже, що сервер LDAP не має кореневого DSE"
 
-#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
-#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
+#: modules/ldap.c:626 modules/ldap.c:1372 modules/ldap.c:1511
+#: modules/ldap.c:1572 modules/ldap.c:1688 modules/ldap.c:1784
 msgid "error mapping name to LDAP distinguished name"
 msgstr "помилка перетворення імені у форму, зрозумілу для LDAP"
 
-#: modules/ldap.c:651
+#: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "помилка перетворення імені у форму, зрозумілу для бази LDAP"
 
-#: modules/ldap.c:1364
+#: modules/ldap.c:1349
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "об'єкт користувача не має атрибута %s"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1358
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "об'єкт користувача створений без `%s'"
 
-#: modules/ldap.c:1398
+#: modules/ldap.c:1383
 msgid "could not convert internal data to LDAPMods"
 msgstr "не вдається перетворити внутрішні дані у LDAPMods"
 
-#: modules/ldap.c:1435 modules/ldap.c:1656
+#: modules/ldap.c:1423 modules/ldap.c:1644
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "помилка зміни запису каталогу LDAP: %s"
 
-#: modules/ldap.c:1462
+#: modules/ldap.c:1450
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "помилка перейменування запису каталогу LDAP: %s\n"
 
-#: modules/ldap.c:1511
+#: modules/ldap.c:1499
 #, c-format
 msgid "object had no %s attribute"
 msgstr "об'єкт не мав атрибута %s"
 
-#: modules/ldap.c:1535
+#: modules/ldap.c:1523
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "помилка видалення запису каталогу LDAP: %s.\n"
 
-#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
-#: modules/ldap.c:1785
+#: modules/ldap.c:1560 modules/ldap.c:1582 modules/ldap.c:1675
+#: modules/ldap.c:1773
 #, c-format
 msgid "object has no %s attribute"
 msgstr "об'єкт не має атрибута %s"
 
-#: modules/ldap.c:1720
+#: modules/ldap.c:1708
 msgid "no such object in LDAP directory"
 msgstr "немає такого об'єкта у каталозі LDAP"
 
-#: modules/ldap.c:1732
+#: modules/ldap.c:1720
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "не знайдено атрибут `%s"
 
-#: modules/ldap.c:1895
+#: modules/ldap.c:1883
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "помилка встановлення паролю в каталозі LDAP для %s: %s"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2443
 msgid "LDAP Server Name"
 msgstr "Назва сервера LDAP"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2449
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2467
+#: modules/ldap.c:2455
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2462
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind пароль"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2468
 msgid "LDAP SASL User"
 msgstr "Користувач LDAP SASL"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2475
 msgid "LDAP SASL Authorization User"
 msgstr "Авторизований користувач LDAP SASL"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-27 06:41+0200\n"
+"POT-Creation-Date: 2004-09-28 22:52+0200\n"
 "PO-Revision-Date: 2003-12-30 16:56+0530\n"
 "Last-Translator: tamilpc <tamilpc@ambalam.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
@@ -615,59 +615,59 @@ msgstr "தவறான எழுத்தை கொண்டது `%c'"
 msgid "error locking file: %s"
 msgstr "கோப்பை மூடுவதில் பிழை : %s"
 
-#: modules/files.c:171 modules/files.c:514 modules/files.c:886
-#: modules/files.c:1158 modules/files.c:1359 modules/files.c:1570
-#: modules/files.c:1660 modules/files.c:1864 modules/files.c:2054
-#: modules/files.c:2071 modules/files.c:2161 modules/files.c:2180
-#: modules/files.c:2248 modules/files.c:2269 modules/files.c:2366
-#: modules/files.c:2385 modules/files.c:2444 modules/files.c:2463
-#: modules/files.c:2564 modules/files.c:2581
+#: modules/files.c:172 modules/files.c:515 modules/files.c:887
+#: modules/files.c:1159 modules/files.c:1360 modules/files.c:1571
+#: modules/files.c:1661 modules/files.c:1865 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2162 modules/files.c:2181
+#: modules/files.c:2249 modules/files.c:2270 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "திறக்க முடியவில்லை`%s': %s"
 
-#: modules/files.c:187 modules/files.c:223 modules/files.c:261
-#: modules/files.c:898 modules/files.c:1371
+#: modules/files.c:188 modules/files.c:224 modules/files.c:262
+#: modules/files.c:899 modules/files.c:1372
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "இயக்க முடியவில்லை'%s': %s"
 
-#: modules/files.c:198
+#: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "உருவாக்குவதில் பிழை `%s': %s"
 
-#: modules/files.c:214
+#: modules/files.c:215
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "காப்புநகல் கோப்பு %s' உள்ளது மற்றும் கோப்பு சீறான படிவத்தில் இல்லை"
 
-#: modules/files.c:928 modules/files.c:1380
+#: modules/files.c:929 modules/files.c:1381
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "படிக்க முடியவில்லை`%s': %s"
 
-#: modules/files.c:937 modules/files.c:944
+#: modules/files.c:938 modules/files.c:945
 msgid "entry already present in file"
 msgstr "உள்ளீடு எற்கனவே கோப்பில் உள்ளது"
 
-#: modules/files.c:951 modules/files.c:966 modules/files.c:1430
-#: modules/files.c:1438
+#: modules/files.c:952 modules/files.c:967 modules/files.c:1431
+#: modules/files.c:1439
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "எழுத முடியவில்லை`%s': %s"
 
-#: modules/files.c:1125 modules/files.c:1133 modules/files.c:1235
-#: modules/files.c:1243
+#: modules/files.c:1126 modules/files.c:1134 modules/files.c:1236
+#: modules/files.c:1244
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "உருபொருளிடம் %s   குணங்கள் இல்லை"
 
-#: modules/files.c:2847 modules/files.c:2917
+#: modules/files.c:2848 modules/files.c:2918
 msgid "not executing with superuser privileges"
 msgstr "சிறப்பு பயனாளர் சலுகைகளை செயல்படுத்தவில்லை"
 
-#: modules/files.c:2930
+#: modules/files.c:2931
 msgid "no shadow file present -- disabling"
 msgstr "நிழல் கோப்பு இல்லை - முடக்கி"
 
@@ -729,115 +729,115 @@ msgstr "கிரபிரோஸ் அட்மின் பிரின்ஸ�
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos கடவுச்சொல்க்கான நிர்வாக கோட்பாடுகள்"
 
-#: modules/ldap.c:192 modules/ldap.c:225
+#: modules/ldap.c:199
 msgid "error initializing ldap library"
 msgstr " ldap நுலகத்தை துக்குவதில் பிழை"
 
-#: modules/ldap.c:203 modules/ldap.c:236
+#: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP நெறிமுறையினை  பதிப்புக்காக அமைக்க இயலவில்லை %d"
 
-#: modules/ldap.c:213
+#: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
 msgstr " TLS யுடன் LDAP  வழங்கனை பேரம் செய்யமுடியாது."
 
-#: modules/ldap.c:396
+#: modules/ldap.c:381
 msgid "could not bind to LDAP server"
 msgstr " LDAP வழங்கனுடன் ஒன்றினைக்க முடியவில்லை"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:393
 msgid "could not search LDAP server"
 msgstr " LDAP வழங்கனுடன் தேட முடியவில்லை"
 
-#: modules/ldap.c:417
+#: modules/ldap.c:402
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP வழங்கனில் DSE வேர் இல்லை"
 
-#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
-#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
+#: modules/ldap.c:626 modules/ldap.c:1372 modules/ldap.c:1511
+#: modules/ldap.c:1572 modules/ldap.c:1688 modules/ldap.c:1784
 msgid "error mapping name to LDAP distinguished name"
 msgstr "மாறுபடுத்தபட்ட பெயர் LDAP  யில் படமிடல் பெயரில் பிழை "
 
-#: modules/ldap.c:651
+#: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "மாறுபடுத்தபட்ட பெயர் LDAP தளத்தில் யில் படமிடல் பெயரில் பிழை "
 
-#: modules/ldap.c:1364
+#: modules/ldap.c:1349
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "பயனர் பொருளில்  %s  பண்புகள் இல்லை"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1358
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "பயனர் பொருள் உருவாக்கத்தில்  `%s' இல்லை"
 
-#: modules/ldap.c:1398
+#: modules/ldap.c:1383
 msgid "could not convert internal data to LDAPMods"
 msgstr "உள் தகவலை LDAP பாங்காக மாற்ற இயலவில்லை"
 
-#: modules/ldap.c:1435 modules/ldap.c:1656
+#: modules/ldap.c:1423 modules/ldap.c:1644
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr " LDAP கோப்பு உள்ளிடு மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1462
+#: modules/ldap.c:1450
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr " LDAP கோப்பு உள்ளிடு பெயர் மாற்றுவதில் பிழை: %s\n"
 
-#: modules/ldap.c:1511
+#: modules/ldap.c:1499
 #, c-format
 msgid "object had no %s attribute"
 msgstr "பொருலில் %s பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1535
+#: modules/ldap.c:1523
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr " LDAP கோப்பு உள்ளிடு நீக்குவதில் பிழை: %s\n"
 
-#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
-#: modules/ldap.c:1785
+#: modules/ldap.c:1560 modules/ldap.c:1582 modules/ldap.c:1675
+#: modules/ldap.c:1773
 #, c-format
 msgid "object has no %s attribute"
 msgstr "பொருளுக்கு  %s   பண்புக்கூறு இல்லை"
 
-#: modules/ldap.c:1720
+#: modules/ldap.c:1708
 msgid "no such object in LDAP directory"
 msgstr "அப்படிபட்ட பொருள் எதுவும் LDAP  கோப்புறையில் இல்லை"
 
-#: modules/ldap.c:1732
+#: modules/ldap.c:1720
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'  பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1895
+#: modules/ldap.c:1883
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP  கோப்புறையில் %s: %s கடவுச்சொல் அமைப்பதில் பிழை"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2443
 msgid "LDAP Server Name"
 msgstr "LDAP வழங்கன் பெயர்"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2449
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடுதல் தளம் DN"
 
-#: modules/ldap.c:2467
+#: modules/ldap.c:2455
 msgid "LDAP Bind DN"
 msgstr "LDAP அமுக்குவது DN"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2462
 msgid "LDAP Bind Password"
 msgstr "LDAP அமுக்கும் கடவுச்சொல்"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2468
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2475
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ஓப்புச்சான்றுபெற்ற பயனர்"
 

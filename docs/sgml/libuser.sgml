@@ -1,9 +1,9 @@
 <!doctype linuxdoc system>
 <article>
 
-<title>libuser 0.7</title>
+<title>libuser 0.52.2</title>
 <author>Nalin Dahyabhai <tt/&lt;nalin@redhat.com&gt;/
-<date>2 January 2001
+<date>28 September 2004
 <abstract>This is the libuser administrator and programmer's guide.  It
 first describes the motivation for the existence of this library, and
 then delves into the library interface used by both libuser modules and
@@ -169,13 +169,14 @@ module links with.
 
 <p>The ldap module implements both information and authentication data stores
 using an LDAP directory and a schema which (should) conform to RFC2307.  The
-module expects the client and server to support access using LDAPv3 with TLS.
+module expects the client and server to support access using LDAPv3 with TLS;
+TLS is not required if the server is specified by URI.
 
 <p>This module uses the <bf>ldap</bf> section of the configuration file
 to store configuration data.  It presently recognizes these flags:
 
 <itemize>
-<item>server - the hostname of the LDAP server
+<item>server - the hostname or URI of the LDAP server
 <item>basedn - the distinguished name which is the root of your tree
 <item>user - the user name with which to perform SASL binds
 <item>authuser - the authorization user name with which to perform SASL binds

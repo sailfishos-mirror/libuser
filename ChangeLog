@@ -1,3 +1,13 @@
+2004-09-28  Miloslav Trmac  <mitr@volny.cz>
+
+	* configure.in: Version 0.52.2.
+
+	* modules/ldap.c (lu_ldap_set): Beautify debug messages.
+
+	* modules/ldap.c (connect_server): Allow ldap URIs, don't require TLS
+	for servers specified by URIs.
+	* docs/sgml/libuser.sgml: Document URI support.
+
 2004-09-27  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.1.

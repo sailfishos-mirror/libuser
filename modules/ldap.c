@@ -180,13 +180,20 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 {
 	LDAP *ldap = NULL;
 	LDAPControl *server = NULL, *client = NULL;
-	int version, ret;
+	int version, ret, start_tls;
 
 	g_assert(context != NULL);
 	LU_ERROR_CHECK(error);
 
 	/* Create the LDAP context. */
-	ldap = ldap_open(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
+	ret = ldap_initialize(&ldap, context->prompts[LU_LDAP_SERVER].value);
+	if (ret == LDAP_SUCCESS)
+		start_tls = FALSE;
+	else {
+		ldap = ldap_open(context->prompts[LU_LDAP_SERVER].value,
+				 LDAP_PORT);
+		start_tls = TRUE;
+	}
 	if (ldap == NULL) {
 		lu_error_new(error, lu_error_init,
 			     _("error initializing ldap library"));
@@ -208,36 +215,13 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 
 	/* Try to start TLS. */
 	ret = ldap_start_tls_s(ldap, &server, &client);
-	if (ret != LDAP_SUCCESS) {
+	/* Note that TLS not required for ldap:// URLs (unlike simple server
+	   names). */
+	if (ret != LDAP_SUCCESS && start_tls) {
 		lu_error_new(error, lu_error_init,
 			     _("could not negotiate TLS with LDAP server"));
 		close_server(ldap);
 		return NULL;
-	}
-
-	/* If we need to, try the LDAPS route. */
-	if (ldap == NULL) { /* FIXME: dead code */
-		/* Create the LDAP context. */
-		ldap = ldap_open(context->prompts[LU_LDAP_SERVER].value,
-				 LDAPS_PORT);
-		if (ldap == NULL) {
-			lu_error_new(error, lu_error_init,
-				     _("error initializing ldap library"));
-			return NULL;
-		}
-
-		/* Switch to LDAPv3, which we probably(?) need. */
-		version = LDAP_VERSION3;
-		ret = ldap_set_option(ldap,
-				      LDAP_OPT_PROTOCOL_VERSION,
-				      &version);
-		if (ret != LDAP_OPT_SUCCESS) {
-			lu_error_new(error, lu_error_init,
-				     _("could not set LDAP protocol to version %d"),
-				     version);
-			close_server(ldap);
-			return NULL;
-		}
 	}
 
 	return ldap;
@@ -323,6 +307,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	g_free(key);
 	g_free(tmp);
 
+	/* FIXME: doesn't try simple if SASL fails. */
 	/* Try to bind to the server using SASL. */
 	binddn = context->prompts[LU_LDAP_BINDDN].value;
 	if (nonempty(context->prompts[LU_LDAP_AUTHUSER].value)) {
@@ -1398,12 +1383,11 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			     _("could not convert internal data to LDAPMods"));
 		return FALSE;
 	}
-#ifdef DEBUG
-	dump_mods(mods);
-	g_message("Modifying `%s'.\n", dn);
-#endif
-
 	if (add) {
+#ifdef DEBUG
+		dump_mods(mods);
+		g_message("Adding `%s'.\n", dn);
+#endif
 		err = ldap_add_ext_s(ctx->ldap, dn, mods, &server, &client);
 		if (err == LDAP_SUCCESS)
 			ret = TRUE;
@@ -1415,6 +1399,10 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			goto err_mods;
 		}
 	} else {
+#ifdef DEBUG
+		dump_mods(mods);
+		g_message("Modifying `%s'.\n", dn);
+#endif
 		/* Attempt the modify operation. */
 		err = ldap_modify_ext_s(ctx->ldap, dn, mods, &server, &client);
 		if (err == LDAP_SUCCESS)
