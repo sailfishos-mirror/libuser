@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-04-16 12:48+0200\n"
+"PO-Revision-Date: 2003-01-08 12:48+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -403,28 +403,28 @@ msgstr "fejl ved læsning fra terminal"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "Navn er ikke sat"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "navn er for kort"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "Navn indeholder tegn udenfor ASCII"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "Navn indeholder kontroltegn"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "Navn indeholder blanktegn"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "navn indeholder ugyldigt tegn '%c'"
 
 #: lib/util.c:200
 #, c-format
