@@ -198,7 +198,7 @@ main(int argc, const char **argv)
 		members = g_strsplit(addMembers, ",", 0);
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
-				g_value_set_string(&val, admins[c]);
+				g_value_set_string(&val, members[c]);
 				lu_ent_add(ent, LU_MEMBERUID, &val);
 				g_value_reset(&val);
 			}
@@ -214,7 +214,7 @@ main(int argc, const char **argv)
 		members = g_strsplit(remMembers, ",", 0);
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
-				g_value_set_string(&val, admins[c]);
+				g_value_set_string(&val, members[c]);
 				lu_ent_del(ent, LU_MEMBERUID, &val);
 				g_value_reset(&val);
 			}
