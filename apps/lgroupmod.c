@@ -42,7 +42,6 @@ main(int argc, const char **argv)
 	struct lu_ent *ent = NULL;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
-	GList *values;
 	int c;
 
         poptContext popt;
