@@ -1,8 +1,8 @@
 # Slovak translations for libuser package
 # Slovenské preklady pre balík libuser.
-# Copyright (C) 2003, 2004 Red Hat, Inc.
+# Copyright (C) 2003, 2004, 2005 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
-# Marcel Telka <marcel@telka.sk>, 2003, 2004.
+# Marcel Telka <marcel@telka.sk>, 2003, 2004, 2005.
 #
 # $Id$
 #
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-11-16 21:52+0100\n"
+"PO-Revision-Date: 2005-03-05 08:27+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -31,15 +31,15 @@ msgstr "Chyba pri vytváraní `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Chyba pri vytváraní skupiny `%s': %s\n"
+msgstr "Chyba pri zmene vlastníka `%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Chyba pri vytváraní `%s': %s"
+msgstr "Chyba pri zápise `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -709,9 +709,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "zálohový súbor `%s' existuje a nie je to bežný súbor"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "verzia knižnice/modulu nezodpovedá"
+msgstr "veľkosť záložného súboru nezodpovedá"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -1015,6 +1014,3 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
-
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "nepodarilo sa obnoviť predvolený bezpečnostný kontext na `%s': %s"
