@@ -79,7 +79,7 @@ popd
 %attr(0644,root,root) %{_libdir}/*.a
 %attr(0644,root,root) %{_libdir}/*.la
 %attr(0755,root,root) %{_libdir}/*.so
-%attr(0644,root,root) %{_mandir}/man3/*
+#%attr(0644,root,root) %{_mandir}/man3/*
 
 %attr(0644,root,root) %{_libdir}/pkgconfig/*
 
