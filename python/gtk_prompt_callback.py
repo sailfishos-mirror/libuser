@@ -3,9 +3,11 @@
 import gtk
 
 def libuser_gtk_prompt_callback(prompts):
-	dialog = gtk.Dialog(b1 = gtk.STOCK_BUTTON_OK)
+	dialog = gtk.Dialog()
+	dialog.add_button(gtk.STOCK_OK, 1)
+	dialog.add_button(gtk.STOCK_CANCEL, 0)
 
-	table = gtk.GtkTable(rows = len(prompts), cols = 2)
+	table = gtk.Table(len(prompts), 2)
 	dialog.vbox.pack_start(table)
 
 	table.set_row_spacings(4)
@@ -15,11 +17,11 @@ def libuser_gtk_prompt_callback(prompts):
 	for i in range(len(prompts)):
 		prompt = prompts[i]
 
-		label = gtk.GtkLabel(prompt.prompt)
+		label = gtk.Label(prompt.prompt)
 		label.set_alignment(1.0, 0.5)
 		table.attach(label, 0, 1, i, i + 1)
 
-		entry = gtk.GtkEntry()
+		entry = gtk.Entry()
 		entry.set_visibility(prompt.visible)
 		entry.set_text(prompt.default_value)
 		table.attach(entry, 1, 2, i, i + 1)
@@ -28,7 +30,7 @@ def libuser_gtk_prompt_callback(prompts):
 		
 	table.show_all()
 
-	print dialog.run_and_close()
+	print dialog.run()
 
 	for (prompt, entry) in ret_list:
 		prompt.value = entry.get_text()
