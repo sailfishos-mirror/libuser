@@ -698,6 +698,7 @@ lu_dispatch(struct lu_context *context,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
 				lu_ent_copy(tmp, entity);
+				lu_ent_commit(entity);
 			}
 			success = TRUE;
 		}
@@ -723,6 +724,14 @@ lu_dispatch(struct lu_context *context,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
+			switch (id) {
+				case user_mod:
+				case group_mod:
+					lu_ent_commit(entity);
+					break;
+				default:
+					break;
+			}
 			success = TRUE;
 		}
 		break;
