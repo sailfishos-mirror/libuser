@@ -29,12 +29,26 @@
 #include <locale.h>
 #include "apputil.h"
 
+#define UNACCEPTABLE "!*:$,"
+#define ACCEPTABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+		   "abcdefghijklmnopqrstuvwxyz" \
+		   "0123456789/."
+
+static gboolean
+is_acceptable(const char c)
+{
+#ifdef VIOLATE_SUSV2
+	return (strchr(UNACCEPTABLE, output[got]) == NULL);
+#else
+	return (strchr(ACCEPTABLE, output[got]) != NULL);
+#endif
+}
+
 static void
 fill_urandom(char *output, size_t length)
 {
 	int fd;
 	size_t got = 0;
-	const char *unacceptable = "!*:$,";
 
 	fd = open("/dev/urandom", O_RDONLY);
 	g_return_if_fail(fd != -1);
@@ -45,7 +59,7 @@ fill_urandom(char *output, size_t length)
 		read(fd, output + got, 1);
 		if(isprint(output[got]) &&
 		   !isspace(output[got]) &&
-		   !strchr(unacceptable, output[got])) {
+		   is_acceptable(output[got])) {
 			got++;
 		}
 	}
