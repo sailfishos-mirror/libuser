@@ -34,7 +34,7 @@ fill_urandom(char *output, size_t length)
 {
 	int fd;
 	size_t got = 0;
-	const char *unacceptable = "!*:$";
+	const char *unacceptable = "!*:$,";
 
 	fd = open("/dev/urandom", O_RDONLY);
 	g_return_if_fail(fd != -1);

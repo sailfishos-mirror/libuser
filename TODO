@@ -13,7 +13,7 @@ Medium:
 * Create variants of the apps that are hard-coded to use files only, for
   use in batch environments like post-package-install.
 * Write an NIS back-end using yp_update functionality in glibc, maybe
-  using the routines declared in /usr/include/rpcsvc/ypupd.h
+  using the routines declared in /usr/include/rpcsvc/libnis.h
 * Write man pages.
 
 Hard:
