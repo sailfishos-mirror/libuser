@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-02-21 12:11-0500\n"
+"POT-Creation-Date: 2002-02-21 17:55-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -565,12 +565,12 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
 #: modules/files.c:109 modules/files.c:453 modules/files.c:822
-#: modules/files.c:1115 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:1115 modules/files.c:1321 modules/files.c:1550
+#: modules/files.c:1658 modules/files.c:1857 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2158 modules/files.c:2177
+#: modules/files.c:2241 modules/files.c:2262 modules/files.c:2354
+#: modules/files.c:2373 modules/files.c:2428 modules/files.c:2447
+#: modules/files.c:2544 modules/files.c:2561
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -579,7 +579,7 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:838 modules/files.c:1338
+#: modules/files.c:838 modules/files.c:1337
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se ha podido empezar `%s': %s"
@@ -600,7 +600,7 @@ msgstr "el archivo de copia de seguridad `%s' era un symlink"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:871 modules/files.c:1350
+#: modules/files.c:871 modules/files.c:1349
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
@@ -614,8 +614,8 @@ msgstr "la entrada ya se ha hecho presente en el archivo"
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:912 modules/files.c:933 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:912 modules/files.c:933 modules/files.c:1408
+#: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -632,13 +632,13 @@ msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2792 modules/files.c:2862
+#: modules/files.c:2791 modules/files.c:2861
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2875
+#: modules/files.c:2874
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 

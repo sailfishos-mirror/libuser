@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
-"POT-Creation-Date: 2002-02-21 12:11-0500\n"
+"POT-Creation-Date: 2002-02-21 17:55-0500\n"
 "PO-Revision-Date: 2002-01-06 17:17-0400\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -399,18 +399,18 @@ msgid "error locking file: %s"
 msgstr "ファイルのロック中にエラー: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:822
-#: modules/files.c:1115 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:1115 modules/files.c:1321 modules/files.c:1550
+#: modules/files.c:1658 modules/files.c:1857 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2158 modules/files.c:2177
+#: modules/files.c:2241 modules/files.c:2262 modules/files.c:2354
+#: modules/files.c:2373 modules/files.c:2428 modules/files.c:2447
+#: modules/files.c:2544 modules/files.c:2561
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s'を開けません: %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:838 modules/files.c:1338
+#: modules/files.c:838 modules/files.c:1337
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'のstat情報を取得できません: %s"
@@ -425,7 +425,7 @@ msgstr "`%s'の作成中にエラー: %s"
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "バックアップファイル`%s'はシンボリックリンクでした"
 
-#: modules/files.c:871 modules/files.c:1350
+#: modules/files.c:871 modules/files.c:1349
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'から読みこめません: %s"
@@ -434,8 +434,8 @@ msgstr "`%s'から読みこめません: %s"
 msgid "entry already present in file"
 msgstr "エントリはファイルにすでにあります"
 
-#: modules/files.c:912 modules/files.c:933 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:912 modules/files.c:933 modules/files.c:1408
+#: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'に書き込めません: %s"
@@ -446,11 +446,11 @@ msgstr "`%s'に書き込めません: %s"
 msgid "entity object has no %s attribute"
 msgstr "エンティティオブジェクトには%s属性はありません"
 
-#: modules/files.c:2792 modules/files.c:2862
+#: modules/files.c:2791 modules/files.c:2861
 msgid "not executing with superuser privileges"
 msgstr "スーパーユーザ特権で実行できません"
 
-#: modules/files.c:2875
+#: modules/files.c:2874
 msgid "no shadow file present -- disabling"
 msgstr "shadowファイルはありません -- 無効になっています"
 

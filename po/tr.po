@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-02-21 12:11-0500\n"
+"POT-Creation-Date: 2002-02-21 17:55-0500\n"
 "PO-Revision-Date: 2001-09-06 23:33+300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -408,18 +408,18 @@ msgid "error locking file: %s"
 msgstr "dosya kilitlenirken hata: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:822
-#: modules/files.c:1115 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:1115 modules/files.c:1321 modules/files.c:1550
+#: modules/files.c:1658 modules/files.c:1857 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2158 modules/files.c:2177
+#: modules/files.c:2241 modules/files.c:2262 modules/files.c:2354
+#: modules/files.c:2373 modules/files.c:2428 modules/files.c:2447
+#: modules/files.c:2544 modules/files.c:2561
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' açýlamadý: %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:838 modules/files.c:1338
+#: modules/files.c:838 modules/files.c:1337
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' durum bilgisi alýnamadý: %s"
@@ -434,7 +434,7 @@ msgstr "`%s' oluþturulurken hata: %s"
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "yedek dosyasý `%s' bir sembolik bað"
 
-#: modules/files.c:871 modules/files.c:1350
+#: modules/files.c:871 modules/files.c:1349
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'den okunamadý: %s"
@@ -443,8 +443,8 @@ msgstr "`%s'den okunamadý: %s"
 msgid "entry already present in file"
 msgstr "girdi zaten dosyada var"
 
-#: modules/files.c:912 modules/files.c:933 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:912 modules/files.c:933 modules/files.c:1408
+#: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'e yazýlamadý: %s"
@@ -455,11 +455,11 @@ msgstr "`%s'e yazýlamadý: %s"
 msgid "entity object has no %s attribute"
 msgstr "öðe nesnesi %s özelliðine sahip deðil"
 
-#: modules/files.c:2792 modules/files.c:2862
+#: modules/files.c:2791 modules/files.c:2861
 msgid "not executing with superuser privileges"
 msgstr "root yetkileriyle çalýþtýrýlmýyor"
 
-#: modules/files.c:2875
+#: modules/files.c:2874
 msgid "no shadow file present -- disabling"
 msgstr "shadow dosyasý yok -- iptal ediliyor"
 
