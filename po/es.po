@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2004-11-03 09:46+1000\n"
+"PO-Revision-Date: 2004-11-03 09:52+1000\n"
 "Last-Translator: Yelitza Louze <ylouze@redhat.com>\n"
 "Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -639,7 +639,7 @@ msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
 #: lib/config.c:79
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "no se pudo comenzar el archivo de configuración `%s': %s"
+msgstr "no se pudo hacer stat del archivo de configuración `%s': %s"
 
 # lib/usercfg.c:56
 # lib/usercfg.c:56
@@ -708,7 +708,7 @@ msgstr "error al cerrar el fichero"
 # lib/userutil.c:177
 #: lib/error.c:66
 msgid "error statting file"
-msgstr "error al determinar el fichero"
+msgstr "error al hacer stat del archivo"
 
 # modules/files.c:135
 # lib/userutil.c:177
@@ -873,7 +873,7 @@ msgstr "no se ha podido abrir `%s': %s"
 #: modules/files.c:896 modules/files.c:1370
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "no se ha podido empezar `%s': %s"
+msgstr "no se pudo efectuar el stat `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
