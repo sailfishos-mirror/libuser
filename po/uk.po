@@ -306,7 +306,8 @@ msgstr "Помилка відкривання `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "помилка створення облікового рахунку для `%s':неправильний формат рядка.\n"
+msgstr ""
+"помилка створення облікового рахунку для `%s':неправильний формат рядка.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
