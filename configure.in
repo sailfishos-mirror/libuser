@@ -22,15 +22,6 @@ AM_GNU_GETTEXT_VERSION([0.14.1])
 GETTEXT_PACKAGE=libuser
 AC_SUBST(GETTEXT_PACKAGE)
 
-AM_MAINTAINER_MODE
-if test x$GCC = xyes; then
-    if test x$MAINTAINER_MODE = xyes; then
-	CFLAGS="$CFLAGS -Wall -Wimplicit -Wcast-align -Wpointer-arith -Wimplicit-prototypes -Wmissing-prototypes"
-    else
-        CFLAGS="$CFLAGS -Wall"
-    fi
-fi
-
 LIBSAVE="$LIBS"
 AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
 CRYPT_LIBS="$LIBS"
@@ -48,10 +39,9 @@ LIBS="$LIBSAVE"
 LIBSAVE="$LIBS"
 
 popt=/usr
-AC_ARG_WITH(popt,
-[  --without-popt=DIR       Use popt headers and libraries under DIR],
-[
-if test x$withval != x -a x$withval != xyes ; then
+AC_ARG_WITH([popt], AS_HELP_STRING([--with-popt=DIR],
+				   [use popt headers and libraries under DIR]),
+[if test "x$withval" != x -a "x$withval" != xyes ; then
 	popt=$withval
 fi
 ])
@@ -71,10 +61,10 @@ LIBS="$LIBSAVE"
 MODULES="$MODULES ${PACKAGE}_files.so"
 MODULES="$MODULES ${PACKAGE}_shadow.so"
 
-AC_ARG_WITH(ldap,
-[  --with-ldap=DIR       Use OpenLDAP 2.x headers and libraries under DIR],
-[
-if test x$withval != x -a x$withval != xno ; then
+AC_ARG_WITH([ldap],
+	    AS_HELP_STRING([--with-ldap=DIR],
+			   [use OpenLDAP 2.x headers and libraries under DIR]),
+[if test "x$withval" != x -a "x$withval" != xno ; then
 	ldap=$withval
 else
 	ldap=no
@@ -112,10 +102,10 @@ if test x$ldap != xno ; then
 	LIBS="$LIBSAVE"
 fi
 
-AC_ARG_WITH(sasl,
-[  --with-sasl=DIR       Use Cyrus SASL headers and libraries under DIR],
-[
-if test x$withval != x -a x$withval != xno ; then
+AC_ARG_WITH([sasl],
+	    AS_HELP_STRING([--with-sasl=DIR],
+			   [use Cyrus SASL headers and libraries under DIR]),
+[if test "x$withval" != x -a "x$withval" != xno ; then
 	sasl=$withval
 else
 	sasl=no
@@ -150,18 +140,21 @@ if test x$sasl != xno ; then
 fi
 
 PYTHON_VERSION=2.2
-AC_ARG_WITH(python-version,
-[  --with-python-version=2.2 Version of Python to build modules for],
-[PYTHON_VERSION=$withval])
+AC_ARG_WITH([python-version],
+	    AS_HELP_STRING([--with-python-version=2.2],
+			   [version of Python to build modules for]),
+	    [PYTHON_VERSION=$withval])
 
 PYTHON_INC=/usr/include/python${PYTHON_VERSION}
-AC_ARG_WITH(python-path,
-[  --with-python-path=DIR Directory headers for your version of Python are in],
-[PYTHON_INC=$withval])
+AC_ARG_WITH([python-path],
+	    AS_HELP_STRING([--with-python-path=DIR],
+			[directory headers for your version of Python are in]),
+	    [PYTHON_INC=$withval])
 
-AC_ARG_ENABLE(quota,
-[  --enable-quota    Provided support for configuring quotas],
-[quota=$withval],[quota=no])
+AC_ARG_ENABLE([quota],
+	      AS_HELP_STRING([--enable-quota],
+			     [provide support for configuring quotas]),
+	      [quota=$withval],[quota=no])
 if test x$quota != xno ; then
 	AC_DEFINE(QUOTALIB,libuserquota.la,[quota library])
 	AC_DEFINE(QUOTAMODULE,libuserquotamodule.so,[quota python module])
@@ -190,6 +183,33 @@ AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
 AC_CHECK_FUNC(__secure_getenv)
 AC_CHECK_FUNC(strstr)
 AC_CHECK_FUNC(strtol)
+
+# Modify CFLAGS after all tests are run (some of them could fail because
+# of the -Werror).
+if test "$GCC" = yes ; then
+    AC_CACHE_CHECK([for available GCC warning flags],
+		   [mitr_cv_prog_gcc_warnings],
+    [mitr_cv_prog_gcc_warnings=""
+    for i in -Wall -Wcast-align -Wmissing-noreturn -Wnested-externs dnl
+-Wpointer-arith -Wstrict-prototypes -Wundef; do
+        oldcflags=$CFLAGS
+        CFLAGS="$CFLAGS $i"
+        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [])],
+		[mitr_cv_prog_gcc_warnings="$mitr_cv_prog_gcc_warnings $i"])
+	CFLAGS=$oldcflags
+     done])
+     CFLAGS="$CFLAGS $mitr_cv_prog_gcc_warnings"
+     AC_MSG_CHECKING([whether we should use -Werror])
+     AC_ARG_ENABLE([Werror],
+		   AS_HELP_STRING([--enable-Werror],
+			[use -Werror if compiling with gcc (default is NO)]),
+		   [], enable_Werror=no)
+     if test "x$enable_Werror" != xno; then
+	CFLAGS="$CFLAGS -Werror"
+     fi
+     AC_MSG_RESULT([$enable_Werror])
+fi
+
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix=${prefix}

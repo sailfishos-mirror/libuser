@@ -34,6 +34,8 @@
 #include "../lib/user.h"
 #include "apputil.h"
 
+#define INVALID_LONG LONG_MIN
+
 /* Parse the first element of a value array for a count of days, and return
  * the value.  If the array is empty, or invalid somehow, return the default
  * of -1.  */
@@ -85,9 +87,9 @@ int
 main(int argc, const char **argv)
 {
 	char buf[LINE_MAX];
-	long shadowMin = INVALID, shadowMax = INVALID,
-	     shadowLastChange = INVALID, shadowInactive = INVALID,
-	     shadowExpire = INVALID, shadowWarning = INVALID;
+	long shadowMin = INVALID_LONG, shadowMax = INVALID_LONG,
+	     shadowLastChange = INVALID_LONG, shadowInactive = INVALID_LONG,
+	     shadowExpire = INVALID_LONG, shadowWarning = INVALID_LONG;
 	const char *user = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
@@ -119,7 +121,7 @@ main(int argc, const char **argv)
 		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0,
 		 "days before expiration to begin warning user", "NUM"},
 		POPT_AUTOHELP
-		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_TABLEEND
 	};
 
 	/* Set up i18n. */
@@ -233,37 +235,37 @@ main(int argc, const char **argv)
 		/* Set values using parameters given on the command-line. */
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);
-		if (shadowLastChange != INVALID) {
+		if (shadowLastChange != INVALID_LONG) {
 			g_value_set_long(&value, shadowLastChange);
 			lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
 			lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 			g_value_reset(&value);
 		}
-		if (shadowMin != INVALID) {
+		if (shadowMin != INVALID_LONG) {
 			g_value_set_long(&value, shadowMin);
 			lu_ent_clear(ent, LU_SHADOWMIN);
 			lu_ent_add(ent, LU_SHADOWMIN, &value);
 			g_value_reset(&value);
 		}
-		if (shadowMax != INVALID) {
+		if (shadowMax != INVALID_LONG) {
 			g_value_set_long(&value, shadowMax);
 			lu_ent_clear(ent, LU_SHADOWMAX);
 			lu_ent_add(ent, LU_SHADOWMAX, &value);
 			g_value_reset(&value);
 		}
-		if (shadowWarning != INVALID) {
+		if (shadowWarning != INVALID_LONG) {
 			g_value_set_long(&value, shadowWarning);
 			lu_ent_clear(ent, LU_SHADOWWARNING);
 			lu_ent_add(ent, LU_SHADOWWARNING, &value);
 			g_value_reset(&value);
 		}
-		if (shadowInactive != INVALID) {
+		if (shadowInactive != INVALID_LONG) {
 			g_value_set_long(&value, shadowInactive);
 			lu_ent_clear(ent, LU_SHADOWINACTIVE);
 			lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
 			g_value_reset(&value);
 		}
-		if (shadowExpire != INVALID) {
+		if (shadowExpire != INVALID_LONG) {
 			g_value_set_long(&value, shadowExpire);
 			lu_ent_clear(ent, LU_SHADOWEXPIRE);
 			lu_ent_add(ent, LU_SHADOWEXPIRE, &value);

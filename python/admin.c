@@ -47,7 +47,7 @@ static void
 libuser_admin_destroy(PyObject *self)
 {
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	int i;
+	size_t i;
 	DEBUG_ENTRY;
 	/* Free the context. */
 	if (me->ctx != NULL) {
@@ -438,6 +438,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	long uidNumber = 0, gidNumber = 0;
 	struct lu_error *error = NULL;
 
+	(void)self;
 	DEBUG_ENTRY;
 
 	/* Expect an object and a string. */
@@ -512,6 +513,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	char *keywords[] = { "home", NULL };
 	struct lu_error *error = NULL;
 
+	(void)self;
 	DEBUG_ENTRY;
 
 	/* We expect an object. */
@@ -564,6 +566,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	char *keywords[] = { "entity", "newhome", NULL };
 	struct lu_error *error = NULL;
 
+	(void)self;
 	DEBUG_ENTRY;
 
 	/* We expect an object and an optional string. */
@@ -1057,7 +1060,7 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	int i;
+	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect a possible pattern. */
@@ -1091,7 +1094,7 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	int i;
+	size_t i;
 
 	DEBUG_ENTRY;
 	/* Possibly expect a pattern. */
@@ -1368,7 +1371,7 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 METH_VARARGS | METH_KEYWORDS,
 	 "return the first available gid"},
 
-	{NULL, NULL, 0},
+	{NULL, NULL, 0, NULL},
 };
 
 static PyTypeObject AdminType = {

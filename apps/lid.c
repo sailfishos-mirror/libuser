@@ -43,7 +43,8 @@ main(int argc, const char **argv)
 	GValue *value;
 	int interactive = FALSE;
 	int groupflag = FALSE, nameonly = FALSE;
-	int c, i;
+	int c;
+	size_t i;
 	poptContext popt;
 	struct passwd *pwd = NULL;
 	struct group *grp = NULL;
@@ -56,7 +57,7 @@ main(int argc, const char **argv)
 		{"onlynames", 'n', POPT_ARG_NONE, &nameonly, 0,
 		 "only list membership information by name, and not UID/GID",
 		 NULL},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);

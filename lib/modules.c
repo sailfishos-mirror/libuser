@@ -33,9 +33,10 @@ gboolean
 lu_modules_load(struct lu_context *ctx, const char *module_list,
 	       	GValueArray **names, struct lu_error **error)
 {
-	char *p, *q, *tmp, *symbol, *modlist, *module_file = NULL;
+	char *q, *tmp, *symbol, *modlist, *module_file = NULL;
 	GModule *handle = NULL;
-	const char *module_dir = NULL, *module_name;
+	const char *module_dir = NULL;
+	char *module_name;
 	lu_module_init_t module_init = NULL;
 	struct lu_module *module = NULL;
 
@@ -89,7 +90,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 			symbol = ctx->scache->cache(ctx->scache, tmp);
 			g_free(tmp);
 			g_module_symbol(handle, symbol,
-					(gpointer *)&module_init);
+					(gpointer)&module_init);
 
 			/* If we couldn't find the entry point, error out. */
 			if (module_init == NULL) {
@@ -225,6 +226,9 @@ lu_module_unload(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *module;
 	GModule *handle = NULL;
+
+	(void)key;
+	(void)data;
 	/* Give the module a chance to clean itself up. */
 	if (value != NULL) {
 		module = (struct lu_module *) value;

@@ -51,8 +51,8 @@ main(int argc, const char **argv)
 		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
 		 "gid to force for new group", "NUM"},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
-		 "make this a system group"},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		 "make this a system group", NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	/* Set up i18n. */
@@ -102,7 +102,7 @@ main(int argc, const char **argv)
 
 	/* If the user specified a particular GID number, override the
 	 * default. */
-	if (gidNumber != INVALID) {
+	if ((gid_t)gidNumber != INVALID) {
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);
 		g_value_set_long(&value, gidNumber);

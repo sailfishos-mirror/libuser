@@ -1,3 +1,4 @@
+# -*- rpm-spec -*-
 %if %{?WITH_SELINUX:0}%{!?WITH_SELINUX:1}
 %define WITH_SELINUX 1
 %endif

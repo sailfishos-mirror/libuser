@@ -131,7 +131,7 @@ to prepare for creation of the user.
 
 @ctx: a context
 @name: new user name
-@system: non-zero if the user is a system user
+@system_account: non-zero if the user is a system user
 @ent: an entity
 @Returns: %TRUE on success
 
@@ -245,7 +245,7 @@ should be freed by the caller.
 
 <!-- ##### FUNCTION lu_users_enumerate_by_group ##### -->
 <para>
-Returns a list of all users with a primary group @group.
+Returns a list of all members of a group @group.
 </para>
 
 @context: a context
@@ -285,7 +285,7 @@ Looks up a group by GID.
 </para>
 
 @context: a context
-@uid: group ID
+@gid: group ID
 @ent: an entity filled with received information
 @error: filled with a #lu_error if an error occurs
 @Returns: %TRUE on success
@@ -299,7 +299,7 @@ to prepare for creation of the group.
 
 @ctx: a context
 @name: new group name
-@system: non-zero if the group is a system group
+@system_account: non-zero if the group is a system group
 @ent: an entity
 @Returns: %TRUE on success
 
@@ -433,3 +433,5 @@ Returns a list of entities, one for each group matching a pattern.
 @error: filled with a #lu_error if an error occurs
 @Returns: a list of pointers to group entities.  The entities and the
 list should be freed by the caller.
+
+

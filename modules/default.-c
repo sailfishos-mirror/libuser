@@ -47,6 +47,10 @@ lu_common_user_default(struct lu_module *module,
 {
 	GValue value;
 	char *tmp;
+
+	(void)module;
+	(void)is_system;
+	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
 	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
@@ -91,6 +95,10 @@ lu_common_group_default(struct lu_module *module,
 		        struct lu_ent *ent, struct lu_error **error)
 {
 	GValue value;
+
+	(void)module;
+	(void)is_system;
+	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
 	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
@@ -110,6 +118,10 @@ lu_common_suser_default(struct lu_module *module,
 {
 	GValue value;
 	const char *today;
+
+	(void)module;
+	(void)is_system;
+	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
 	today = lu_util_shadow_current_date(ent->cache);
 	memset(&value, 0, sizeof(value));
@@ -188,7 +200,7 @@ lu_common_default_salt_specifier(struct lu_module *module)
 		{"blowfish", salt_initializer_blowfish},
 	};
 	const char *salt_type = NULL;
-	int i;
+	size_t i;
 
 	g_return_val_if_fail(module != NULL, "");
 

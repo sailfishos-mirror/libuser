@@ -228,6 +228,7 @@ lu_cfg_read(struct lu_context *context, const char *key,
 		process_line(line, config->cache, &section, &k, &value);
 
 		/* If we have a valid line, */
+		/* FIXME: s/key/k/ in the following two lines */
 		if (section && key && value &&
 		    strlen(section) && strlen(key) && strlen(value)) {
 			/* format the section and key as a path and if the

@@ -57,11 +57,11 @@ main(int argc, const char **argv)
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 	char **fields;
 	size_t fields_len;
-	int pcount, i;
+	size_t pcount, i;
 	struct passwd *pwd = NULL;
 
 	/* Set up i18n. */

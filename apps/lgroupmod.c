@@ -39,7 +39,8 @@ main(int argc, const char **argv)
 		   *addMembers = NULL, *remMembers = NULL, *group = NULL,
 		   *tmp = NULL;
 	char **admins = NULL, **members = NULL;
-	long gidNumber = INVALID, oldGidNumber = INVALID;
+	long gidNumber = INVALID;
+	gid_t oldGidNumber = INVALID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
@@ -47,7 +48,8 @@ main(int argc, const char **argv)
 	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
-	int c, i;
+	int c;
+	size_t i;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -69,9 +71,9 @@ main(int argc, const char **argv)
 		 "list of group members to add", "STRING"},
 		{"member-remove", 'm', POPT_ARG_STRING, &remMembers, 0,
 		 "list of group members to remove", "STRING"},
-		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock group"},
-		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0, "unlock group"},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock group", NULL},
+		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0, "unlock group", NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -118,7 +120,7 @@ main(int argc, const char **argv)
 	}
 
 	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
-		 addMembers || remMembers || (gidNumber != INVALID);
+		 addMembers || remMembers || ((gid_t)gidNumber != INVALID);
 
 	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
@@ -131,7 +133,7 @@ main(int argc, const char **argv)
 			g_value_unset(&val);
 		}
 	}
-	if (gidNumber != INVALID) {
+	if ((gid_t)gidNumber != INVALID) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if (values) {
 			value = g_value_array_get_nth(values, 0);
@@ -261,7 +263,7 @@ main(int argc, const char **argv)
 
 	lu_ent_free(ent);
 
-	if ((oldGidNumber != INVALID) && (gidNumber != INVALID)) {
+	if ((oldGidNumber != INVALID) && ((gid_t)gidNumber != INVALID)) {
 		values = lu_users_enumerate_by_group(ctx, gid, &error);
 		if (error != NULL) {
 			lu_error_free(&error);

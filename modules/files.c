@@ -97,7 +97,7 @@ lu_files_create_backup(const char *filename,
 	char *backupname;
 	struct stat ist, ost;
 	char buf[CHUNK_SIZE];
-	size_t len;
+	ssize_t len;
 
 	g_assert(filename != NULL);
 	g_assert(strlen(filename) > 0);
@@ -121,7 +121,7 @@ lu_files_create_backup(const char *filename,
 	if (fstat(ifd, &ist) == -1) {
 		close(ifd);
 		lu_util_lock_free(ilock);
-		close(ifd);
+		close(ifd); /* FIXME: double close */
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
@@ -259,8 +259,8 @@ static gboolean
 parse_generic(const gchar *line, const struct format_specifier *formats,
 	      size_t format_count, struct lu_ent *ent)
 {
-	int i, field;
-	int minimum = 1;
+	size_t i;
+	int field, minimum = 1;
 	gchar **v = NULL;
 	GValue value;
 
@@ -271,7 +271,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 		minimum = MAX(minimum, formats[i].position);
 	}
 	v = g_strsplit(line, ":", format_count);
-	if (lu_strv_len(v) < minimum - 1) {
+	if (lu_strv_len(v) < (size_t)(minimum - 1)) {
 		g_warning("entry is incorrectly formatted");
 		return FALSE;
 	}
@@ -653,7 +653,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	GValueArray *values;
 	GValue value, *val;
 	char *ret = NULL, *p, *tmp;
-	int i, j;
+	size_t i, j;
 
 	g_return_val_if_fail(ent != NULL, NULL);
 	memset(&value, 0, sizeof(value));
@@ -928,7 +928,7 @@ generic_add(struct lu_module *module, const char *base_name,
 	}
 	/* Attempt to write the entire line to the end. */
 	r = write(fd, line, strlen(line));
-	if (r != strlen(line)) {
+	if ((size_t)r != strlen(line)) {
 		/* Oh, come on! */
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"),
@@ -963,6 +963,9 @@ static gboolean
 lu_files_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
 {
+	(void)module;
+	(void)ent;
+	(void)error;
 	return TRUE;
 }
 
@@ -983,6 +986,8 @@ lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 {
 	GValue svalue;
 
+	(void)module;
+	(void)error;
 	/* Make sure the regular password says "shadow!" */
 	memset(&svalue, 0, sizeof(svalue));
 	g_value_init(&svalue, G_TYPE_STRING);
@@ -1009,6 +1014,9 @@ static gboolean
 lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
+	(void)module;
+	(void)ent;
+	(void)error;
 	return TRUE;
 }
 
@@ -1029,6 +1037,8 @@ lu_shadow_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 {
 	GValue svalue;
 
+	(void)module;
+	(void)error;
 	/* Make sure the regular password says "shadow!" */
 	memset(&svalue, 0, sizeof(svalue));
 	g_value_init(&svalue, G_TYPE_STRING);
@@ -1060,7 +1070,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	char *filename = NULL, *key = NULL;
 	int fd = -1;
 	gpointer lock;
-	int i, j;
+	size_t i, j;
 	const char *dir = NULL;
 	char *p, *q, *new_value;
 	GValueArray *names = NULL, *values = NULL;
@@ -1394,7 +1404,7 @@ generic_del(struct lu_module *module, const char *base_name,
 	/* If the resulting memory chunk is the same size as the file, then
 	 * nothing's changed. */
 	len = strlen(contents);
-	if (len == st.st_size) {
+	if ((off_t)len == st.st_size) {
 		g_free(contents);
 		lu_util_lock_free(lock);
 		close(fd);
@@ -1416,7 +1426,7 @@ generic_del(struct lu_module *module, const char *base_name,
 	}
 
 	/* Write the new contents out. */
-	if (write(fd, contents, len) != len) {
+	if ((size_t)write(fd, contents, len) != len) {
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"), filename,
 			     strerror(errno));
@@ -2354,6 +2364,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	const char *dir = NULL;
 	FILE *fp;
 
+	(void)uid;
 	g_assert(module != NULL);
 	g_assert(user != NULL);
 
@@ -2653,6 +2664,10 @@ lu_files_users_enumerate_by_group_full(struct lu_module *module,
 				       uid_t uid,
 				       struct lu_error **error)
 {
+	(void)module;
+	(void)user;
+	(void)uid;
+	(void)error;
 	/* Implement the placeholder. */
 	return NULL;
 }
@@ -2663,6 +2678,10 @@ lu_files_groups_enumerate_by_user_full(struct lu_module *module,
 				       uid_t uid,
 				       struct lu_error **error)
 {
+	(void)module;
+	(void)user;
+	(void)uid;
+	(void)error;
 	/* Implement the placeholder. */
 	return NULL;
 }
@@ -2672,6 +2691,9 @@ lu_shadow_users_enumerate(struct lu_module *module,
 			  const char *pattern,
 			  struct lu_error **error)
 {
+	(void)module;
+	(void)pattern;
+	(void)error;
 	return NULL;
 }
 
@@ -2680,6 +2702,9 @@ lu_shadow_groups_enumerate(struct lu_module *module,
 			   const char *pattern,
 			   struct lu_error **error)
 {
+	(void)module;
+	(void)pattern;
+	(void)error;
 	return NULL;
 }
 
@@ -2689,6 +2714,10 @@ lu_shadow_users_enumerate_by_group(struct lu_module *module,
 				   gid_t gid,
 				   struct lu_error **error)
 {
+	(void)module;
+	(void)group;
+	(void)gid;
+	(void)error;
 	return NULL;
 }
 
@@ -2698,6 +2727,10 @@ lu_shadow_groups_enumerate_by_user(struct lu_module *module,
 				   uid_t uid,
 				   struct lu_error **error)
 {
+	(void)module;
+	(void)user;
+	(void)uid;
+	(void)error;
 	return NULL;
 }
 
@@ -2727,6 +2760,10 @@ lu_shadow_users_enumerate_by_group_full(struct lu_module *module,
 					gid_t gid,
 					struct lu_error **error)
 {
+	(void)module;
+	(void)group;
+	(void)gid;
+	(void)error;
 	/* Implement the placeholder. */
 	return NULL;
 }
@@ -2737,6 +2774,10 @@ lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
 					uid_t uid,
 					struct lu_error **error)
 {
+	(void)module;
+	(void)user;
+	(void)uid;
+	(void)error;
 	/* Implement the placeholder. */
 	return NULL;
 }

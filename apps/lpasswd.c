@@ -59,7 +59,7 @@ main(int argc, const char **argv)
 		 "read new plain password from given descriptor", NULL},
 		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0,
 		 "read new crypted password from given descriptor", NULL},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);

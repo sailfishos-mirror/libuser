@@ -123,6 +123,8 @@ quota_toggle_ext(struct mntent *ent, const char *option, int command,
 	struct stat st;
 	int ret = 0, fd;
 
+	/* FIXME: hardcoded GRPQUOTA???
+	   FIXME: "quota" implies "usrquota" or both? */
 	if (hasmntopt(ent, option) ||
 	    ((strcmp(option, "usrquota") == 0)
 	     && hasmntopt(ent, "quota"))) {

@@ -135,8 +135,7 @@ const char *
 lu_make_crypted(const char *plain, const char *previous)
 {
 	char salt[2048];
-	int i;
-	size_t len = 0;
+	size_t i, len = 0;
 
 	if (previous == NULL) {
 		previous = LU_DEFAULT_SALT_TYPE;
@@ -377,7 +376,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	pattern = g_strdup_printf("%s:", first);
 	len = strlen(pattern);
 	line = buf;
-	if ((st.st_size >= len) && (memcmp(buf, pattern, len) == 0)) {
+	if ((st.st_size >= (off_t)len) && (memcmp(buf, pattern, len) == 0)) {
 		/* found it on the first line */
 	} else
 		while ((line =
@@ -393,7 +392,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		}
 
 	if (line != NULL) {
-		int i = 1;
+		unsigned i = 1;
 		char *p;
 		start = end = NULL;
 
@@ -449,7 +448,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	char *pattern = NULL;
 	char *line = NULL, *start = NULL, *end = NULL;
 	gboolean ret = FALSE;
-	int fi = 1;
+	unsigned fi = 1;
 
 	LU_ERROR_CHECK(error);
 
@@ -600,7 +599,7 @@ lu_account_name_is_valid(const char *prospective_name)
 		return FALSE;
 	}
 	/* Validate a name using the method shadow 4.0.3 uses:
-	 * [a-z_][0-9a-z_-]* */
+	 * [a-z_][0-9a-z_-]*\$? */
 	if ((prospective_name[0] != '_') &&
 	    !((prospective_name[0] >= 'a') &&
 	      (prospective_name[0] <= 'z'))) {

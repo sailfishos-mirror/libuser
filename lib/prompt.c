@@ -38,6 +38,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 	char buf[LINE_MAX];
 	struct termios otermios, ntermios;
 
+	(void)calldata;
 	LU_ERROR_CHECK(error);
 
 	if (count > 0) {

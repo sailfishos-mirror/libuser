@@ -30,6 +30,7 @@
 #include "user.h"
 #include "user_private.h"
 
+/* FIXME: Is return value translated or not? */
 const char *
 lu_strerror(struct lu_error *error)
 {
@@ -140,7 +141,7 @@ lu_error_is_error(enum lu_status code)
 
 void
 lu_error_new(struct lu_error **error, enum lu_status code,
-	     const char *desc, ...)
+	     const char *fmt, ...)
 {
 	struct lu_error *ret;
 	va_list args;
@@ -149,9 +150,9 @@ lu_error_new(struct lu_error **error, enum lu_status code,
 		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
-		va_start(args, desc);
-		ret->string = desc ?
-			g_strdup_vprintf(desc, args) :
+		va_start(args, fmt);
+		ret->string = fmt ?
+			g_strdup_vprintf(fmt, args) :
 			g_strdup_printf(lu_strerror(ret), strerror(errno));
 		va_end(args);
 		*error = ret;

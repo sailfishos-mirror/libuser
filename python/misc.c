@@ -341,6 +341,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 static int
 libuser_prompt_print(struct libuser_prompt *self, FILE * fp, int flags)
 {
+	(void)flags;
 	fprintf(fp,
 		"(key = \"%s\", prompt = \"%s\", domain = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
 		self->prompt.key ? : "",

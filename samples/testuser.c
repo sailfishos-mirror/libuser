@@ -31,7 +31,8 @@ dump_attribute(const char *attribute, struct lu_ent *ent)
 {
 	GValueArray *array;
 	GValue *value;
-	int i;
+	size_t i;
+
 	array = lu_ent_get(ent, attribute);
 	if (array != NULL) {
 		for (i = 0; i < array->n_values; i++) {
@@ -49,13 +50,13 @@ dump_attribute(const char *attribute, struct lu_ent *ent)
 }
 
 int
-main(int argc, char **argv)
+main(void)
 {
 	struct lu_context *ctx;
 	struct lu_ent *ent, *tmp, *temp;
 	struct lu_error *error = NULL;
 	GList *ret = NULL;
-	int i;
+	size_t i;
 	void *control = NULL;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);

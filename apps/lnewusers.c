@@ -61,7 +61,7 @@ main(int argc, const char **argv)
 		{"nocreatemail", 'n', POPT_ARG_NONE, &nocreatemail, 0,
 		 "don't create mail spools", NULL},
 		POPT_AUTOHELP
-		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_TABLEEND
 	};
 
 	/* Initialize i18n support. */
@@ -109,11 +109,11 @@ main(int argc, const char **argv)
 	while (fgets(buf, sizeof(buf), fp)) {
 		/* Strip off the end-of-line terminators. */
 		if (strchr(buf, '\r')) {
-			char *p = strchr(buf, '\r');
+			p = strchr(buf, '\r');
 			*p = '\0';
 		}
 		if (strchr(buf, '\n')) {
-			char *p = strchr(buf, '\n');
+			p = strchr(buf, '\n');
 			*p = '\0';
 		}
 

@@ -177,12 +177,12 @@ lu_context_t *context
 <FUNCTION>
 <NAME>lu_user_default</NAME>
 <RETURNS>gboolean  </RETURNS>
-lu_context_t *ctx, const char *name,gboolean system, struct lu_ent *ent
+lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_default</NAME>
 <RETURNS>gboolean  </RETURNS>
-lu_context_t *ctx, const char *name,gboolean system, struct lu_ent *ent
+lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_lookup_name</NAME>

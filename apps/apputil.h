@@ -24,7 +24,7 @@
 #include <sys/types.h>
 #include "../lib/user.h"
 
-#define INVALID (-0x80000000)
+#define INVALID ((id_t)(-0x80000000)) /* FIXME: might be a valid id_t value */
 #ifndef _
 #define _(String) gettext(String)
 #endif
@@ -44,7 +44,7 @@ void lu_authenticate_unprivileged(const char *user, const char *appname);
 char *lu_strconcat(char *existing, const char *appendee);
 
 void lu_hup_nscd(void);
-void lu_signal_nscd(int signal);
+void lu_signal_nscd(int signum);
 
 gboolean lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 				    gboolean action);

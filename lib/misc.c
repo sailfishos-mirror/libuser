@@ -60,7 +60,7 @@ lu_get_modules(struct lu_context *context)
 {
 	char *tmp = NULL, *ret = NULL;
 	GValue *value;
-	int i;
+	size_t i;
 
 	for (i = 0; i < context->module_names->n_values; i++) {
 		value = g_value_array_get_nth(context->module_names, i);

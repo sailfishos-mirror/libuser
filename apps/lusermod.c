@@ -44,7 +44,7 @@ main(int argc, const char **argv)
 	struct lu_error *error = NULL;
 	GValueArray *values, *members, *admins;
 	GValue *value, val;
-	int i, j;
+	size_t i, j;
 	int change = FALSE, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -58,7 +58,7 @@ main(int argc, const char **argv)
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
 		 "home directory", "STRING"},
 		{"movedirectory", 'm', POPT_ARG_NONE, &move_home, 0,
-		 "move home directory contents"},
+		 "move home directory contents", NULL},
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "set shell for user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
@@ -71,10 +71,10 @@ main(int argc, const char **argv)
 		 "plaintext password for the user", "STRING"},
 		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
 		 "pre-hashed password for the user", "STRING"},
-		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock account"},
+		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock account", NULL},
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0,
-		 "unlock account"},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
+		 "unlock account", NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	/* Set up i18n. */
@@ -130,18 +130,18 @@ main(int argc, const char **argv)
 	/* Determine if we actually need to change anything. */
 	change = userPassword || cryptedUserPassword || uid || gecos ||
 		 homeDirectory || loginShell ||
-		 (uidNumber != INVALID) || (gidNumber != INVALID);
+		 ((uid_t)uidNumber != INVALID) || ((gid_t)gidNumber != INVALID);
 
 	/* Change the user's UID and GID. */
 	memset(&val, 0, sizeof(val));
 	g_value_init(&val, G_TYPE_LONG);
 
-	if (uidNumber != INVALID) {
+	if ((uid_t)uidNumber != INVALID) {
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
 	}
-	if (gidNumber != INVALID) {
+	if ((gid_t)gidNumber != INVALID) {
 		g_value_set_long(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
@@ -260,9 +260,9 @@ main(int argc, const char **argv)
 			}
 			/* Search for this user in the member list. */
 			for (j = 0;
-			     (members != NULL) && (i < members->n_values);
+			     (members != NULL) && (j < members->n_values);
 			     j++) {
-				value = g_value_array_get_nth(values, i);
+				value = g_value_array_get_nth(values, j);
 				username = g_value_get_string(value);
 				/* If it holds the user's old name, then
 				 * set its value to the new name. */
@@ -273,9 +273,9 @@ main(int argc, const char **argv)
 			}
 			/* Do the same for the administrator list. */
 			for (j = 0;
-			     (admins != NULL) && (i < admins->n_values);
+			     (admins != NULL) && (j < admins->n_values);
 			     j++) {
-				value = g_value_array_get_nth(values, i);
+				value = g_value_array_get_nth(values, j);
 				username = g_value_get_string(value);
 				/* If it holds the user's old name, then
 				 * set its value to the new name. */

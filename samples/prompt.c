@@ -28,7 +28,7 @@
 #include "../lib/user_private.h"
 
 int
-main(int argc, char **argv)
+main(void)
 {
 	struct lu_prompt prompts[] = {
 		{"main/name", "Name", PACKAGE, TRUE,
@@ -39,7 +39,7 @@ main(int argc, char **argv)
 		 g_strdup("anonymous"), NULL, NULL},
 	};
 	struct lu_error *error = NULL;
-	int i;
+	size_t i;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);

@@ -56,7 +56,7 @@ lu_ent_new_typed(enum lu_entity_type entity_type)
 void
 lu_ent_free(struct lu_ent *ent)
 {
-	int i;
+	size_t i;
 	struct lu_attribute *attr;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
@@ -93,7 +93,7 @@ lu_ent_free(struct lu_ent *ent)
 void
 lu_ent_dump(struct lu_ent *ent, FILE *fp)
 {
-	int i, j;
+	size_t i, j;
 	struct lu_attribute *attribute;
 	GValue *value;
 	g_return_if_fail(ent != NULL);
@@ -137,7 +137,6 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 					   struct lu_attribute,
 					   i);
 		for (j = 0; j < attribute->values->n_values; j++) {
-			GValue *value;
 			value = g_value_array_get_nth(attribute->values, j);
 			if (G_VALUE_HOLDS_STRING(value)) {
 				fprintf(fp, " %s = `%s'\n",
@@ -157,7 +156,6 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 					   struct lu_attribute,
 					   i);
 		for (j = 0; j < attribute->values->n_values; j++) {
-			GValue *value;
 			value = g_value_array_get_nth(attribute->values, j);
 			if (G_VALUE_HOLDS_STRING(value)) {
 				fprintf(fp, " %s = `%s'\n",
@@ -178,7 +176,7 @@ void
 lu_ent_add_module(struct lu_ent *ent, const char *source)
 {
 	GValue value, *val;
-	int i;
+	size_t i;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(ent->modules != NULL);
@@ -236,7 +234,7 @@ clear_attribute_list(GArray *dest)
 static void
 copy_attributes(GArray *source, GArray *dest)
 {
-	int i;
+	size_t i;
 	struct lu_attribute *attr, newattr;
 	/* First, clear the destination list of all attributes. */
 	clear_attribute_list(dest);
@@ -284,7 +282,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 {
 	struct lu_attribute *attr;
 	GQuark aquark;
-	int i;
+	size_t i;
 	char *lattr;
 	g_return_val_if_fail(list != NULL, NULL);
 	g_return_val_if_fail(attribute != NULL, NULL);
@@ -294,6 +292,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 		lattr[i] = g_ascii_tolower(lattr[i]);
 	}
 	aquark = g_quark_from_string(lattr);
+	/* FIXME: free lattr */
 	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
@@ -321,7 +320,7 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
 	struct lu_attribute newattr;
-	int i;
+	size_t i;
 	char *lattr;
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attr != NULL);
@@ -355,7 +354,7 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	GValueArray *dest;
 	GValue *current;
 	struct lu_attribute newattr;
-	int i;
+	size_t i;
 	char *lattr;
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(value != NULL);
@@ -438,7 +437,7 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 	GValueArray *dest;
 	GValue *tvalue;
 	char *svalue, *tmp;
-	int i;
+	size_t i;
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(value != NULL);
 	g_return_if_fail(attr != NULL);
@@ -466,7 +465,7 @@ static GList *
 lu_ent_get_attributes_int(GArray *list)
 {
 	struct lu_attribute *attr;
-	int i;
+	size_t i;
 	GList *ret = NULL;
 	g_return_val_if_fail(list != NULL, NULL);
 	for (i = 0; i < list->len; i++) {

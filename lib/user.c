@@ -31,7 +31,7 @@
 #include "modules.h"
 #include "util.h"
 
-#define INVALID (-0x80000000)
+#define INVALID ((id_t)(-0x80000000)) /* FIXME: this is a valid id_t value */
 #define DEFAULT_ID 500
 #define INVALID_NAME_CHARS ":,."
 
@@ -226,14 +226,14 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 	return TRUE;
 }
 
-static long
+static id_t
 extract_id(struct lu_ent *ent)
 {
 	GValueArray *array;
 	GValue *value;
 	const char *idstring;
 	char *p;
-	long ret;
+	id_t ret;
 	g_return_val_if_fail(ent != NULL, INVALID);
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), INVALID);
 	array = lu_ent_get(ent,
@@ -251,7 +251,7 @@ extract_id(struct lu_ent *ent)
 	} else
 	if (G_VALUE_HOLDS_STRING(value)) {
 		idstring = g_value_get_string(value);
-		ret = strtol(idstring, &p, 0);
+		ret = strtol(idstring, &p, 0); /* FIXME: strtoul? */
 		if (*p != '\0') {
 			ret = INVALID;
 		}
@@ -259,6 +259,7 @@ extract_id(struct lu_ent *ent)
 	return ret;
 }
 
+/* FIXME: uid_t */
 static long
 convert_user_name_to_id(struct lu_context *context, const char *sdata)
 {
@@ -280,6 +281,7 @@ convert_user_name_to_id(struct lu_context *context, const char *sdata)
 	return ret;
 }
 
+/* FIXME: gid_t */
 static long
 convert_group_name_to_id(struct lu_context *context, const char *sdata)
 {
@@ -331,7 +333,7 @@ run_single(struct lu_context *context,
 	   struct lu_error **error)
 {
 	GPtrArray *ptrs;
-	int i;
+	size_t i;
 
 	g_assert(context != NULL);
 	g_assert(module != NULL);
@@ -564,7 +566,7 @@ logic_or(gboolean a, gboolean b)
 static void
 remove_duplicate_values(GValueArray *array)
 {
-	int i, j;
+	size_t i, j;
 	GValue *ivalue, *jvalue;
 	gboolean same;
 	for (i = 0; i < array->n_values; i++) {
@@ -606,7 +608,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 {
 	GPtrArray *ret = NULL;
 	GTree *tree;
-	int i, j;
+	size_t i, j;
 	const char *attr;
 	struct lu_ent *current, *saved;
 	GQuark key;
@@ -641,7 +643,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 			values = lu_ent_get(current, LU_GROUPNAME);
 			which = &groups;
 		} else {
-			g_warning("Unknown entity(%d) type: %d.\n",
+			g_warning("Unknown entity(%zu) type: %d.\n",
 				  i, current->type);
 			g_assert_not_reached();
 		}
@@ -718,7 +720,7 @@ run_list(struct lu_context *context,
 	 enum lu_dispatch_id id,
 	 const char *sdata, long ldata,
 	 struct lu_ent *entity,
-	 gpointer *ret,
+	 gpointer ret,
 	 struct lu_error **firsterror)
 {
 	struct lu_module *module;
@@ -730,7 +732,7 @@ run_list(struct lu_context *context,
 	char *name;
 	gboolean success, tsuccess;
 	struct lu_error *lasterror = NULL;
-	int i, j;
+	size_t i, j;
 
 	LU_ERROR_CHECK(firsterror);
 
@@ -790,7 +792,7 @@ run_list(struct lu_context *context,
 			case groups_enumerate:
 			case groups_enumerate_by_user:
 				tmp_value_array = scratch;
-				value_array = *ret;
+				value_array = *(GValueArray **)ret;
 				if (value_array == NULL) {
 					value_array = g_value_array_new(0);
 				}
@@ -804,7 +806,7 @@ run_list(struct lu_context *context,
 					g_value_array_free(tmp_value_array);
 				}
 				remove_duplicate_values(value_array);
-				*ret = value_array;
+				*(GValueArray **)ret = value_array;
 				break;
 			case users_enumerate_full:
 			case users_enumerate_by_group_full:
@@ -812,7 +814,7 @@ run_list(struct lu_context *context,
 			case groups_enumerate_by_user_full:
 				/* FIXME: do some kind of merging here. */
 				tmp_ptr_array = scratch;
-				ptr_array = *ret;
+				ptr_array = *(GPtrArray **)ret;
 				if (ptr_array == NULL) {
 					ptr_array = g_ptr_array_new();
 				}
@@ -825,7 +827,7 @@ run_list(struct lu_context *context,
 					g_ptr_array_free(tmp_ptr_array, TRUE);
 				}
 				/* remove_duplicate_ptrs(ptr_array); */
-				*ret = ptr_array;
+				*(GPtrArray **)ret = ptr_array;
 				break;
 			case user_lookup_name:
 			case user_lookup_id:
@@ -906,9 +908,9 @@ lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
 static gboolean
 lu_dispatch(struct lu_context *context,
 	    enum lu_dispatch_id id,
-	    const char *sdata, long ldata,
+	    const char *sdata, id_t ldata,
 	    struct lu_ent *entity,
-	    gpointer *ret,
+	    gpointer ret,
 	    struct lu_error **error)
 {
 	struct lu_ent *tmp = NULL;
@@ -917,7 +919,7 @@ lu_dispatch(struct lu_context *context,
 	GPtrArray *ptrs = NULL;
 	GValue *value = NULL;
 	gpointer scratch = NULL;
-	int i;
+	size_t i;
 
 	LU_ERROR_CHECK(error);
 
@@ -1104,8 +1106,8 @@ lu_dispatch(struct lu_context *context,
 		/* Get the lists. */
 		if (run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, (gpointer*)&values, error)) {
-			*ret = values;
+			    sdata, ldata, tmp, &values, error)) {
+			*(GValueArray **)ret = values;
 			success = TRUE;
 		}
 		break;
@@ -1128,7 +1130,7 @@ lu_dispatch(struct lu_context *context,
 		/* Get the lists. */
 		if (run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, (gpointer*)&ptrs, error)) {
+			    sdata, ldata, tmp, &ptrs, error)) {
 			if (ptrs != NULL) {
 				for (i = 0; i < ptrs->len; i++) {
 					struct lu_ent *ent;
@@ -1136,12 +1138,13 @@ lu_dispatch(struct lu_context *context,
 					lu_ent_revert(ent);
 				}
 			}
-			*ret = ptrs;
+			*(GPtrArray **)ret = ptrs;
 			success = TRUE;
 		}
 		/* Clean up results. */
-		if (*ret != NULL) {
-			*ret = merge_ent_array_duplicates(*ret);
+		if (*(GPtrArray **)ret != NULL) {
+			*(GPtrArray **)ret
+				= merge_ent_array_duplicates(*(GPtrArray **)ret);
 		}
 		break;
 	case uses_elevated_privileges:
@@ -1522,7 +1525,7 @@ lu_users_enumerate(struct lu_context * context, const char *pattern,
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, users_enumerate, pattern, INVALID,
-		    NULL, (gpointer*)&ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1533,7 +1536,7 @@ lu_groups_enumerate(struct lu_context * context, const char *pattern,
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate, pattern, INVALID,
-		    NULL, (gpointer*) &ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1544,7 +1547,7 @@ lu_users_enumerate_by_group(struct lu_context * context, const char *group,
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, users_enumerate_by_group, group, INVALID,
-		    NULL, (gpointer*) &ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1555,7 +1558,7 @@ lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate_by_user, user, INVALID,
-		    NULL, (gpointer*) &ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1566,7 +1569,7 @@ lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, users_enumerate_full, pattern, INVALID,
-		    NULL, (gpointer*) &ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1577,7 +1580,7 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate_full, pattern, INVALID,
-		    NULL, (gpointer*) &ret, error);
+		    NULL, &ret, error);
 	return ret;
 }
 
@@ -1642,7 +1645,7 @@ lu_get_first_unused_id(struct lu_context *ctx,
 				lu_error_free(&error);
 			}
 			break;
-		} while (id != 0);
+		} while (id != 0); /* FIXME: not (id_t)-1 */
 	} else if (type == lu_group) {
 		struct group grp, *err;
 		struct lu_error *error = NULL;
@@ -1678,14 +1681,14 @@ lu_default_int(struct lu_context *context, const char *name,
 {
 	GList *keys, *p;
 	GValue value;
-	char *top, *idkey, *idkeystring, *cfgkey, *tmp, *end;
+	char *cfgkey, *tmp, *end;
 	char buf[LINE_MAX * 4];
-	const char *val, *key;
+	const char *top, *idkey, *idkeystring, *val, *key;
 	gulong id = DEFAULT_ID;
 	struct group grp, *err;
 	struct lu_error *error = NULL;
 	gpointer macguffin = NULL;
-	int i;
+	size_t i;
 
 	g_return_val_if_fail(context != NULL, FALSE);
 	g_return_val_if_fail(name != NULL, FALSE);
@@ -1910,14 +1913,14 @@ lu_default_int(struct lu_context *context, const char *name,
 
 gboolean
 lu_user_default(struct lu_context *context, const char *name,
-		gboolean system, struct lu_ent *ent)
+		gboolean system_account, struct lu_ent *ent)
 {
-	return lu_default_int(context, name, lu_user, system, ent);
+	return lu_default_int(context, name, lu_user, system_account, ent);
 }
 
 gboolean
 lu_group_default(struct lu_context *context, const char *name,
-		 gboolean system, struct lu_ent *ent)
+		 gboolean system_account, struct lu_ent *ent)
 {
-	return lu_default_int(context, name, lu_group, system, ent);
+	return lu_default_int(context, name, lu_group, system_account, ent);
 }

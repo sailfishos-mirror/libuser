@@ -34,6 +34,7 @@ main(int argc, char **argv)
 	struct lu_error *error = NULL;
 	gboolean group = FALSE, full = FALSE;
 	int c;
+	size_t i;
 	struct lu_ent *ent;
 	GValueArray *names;
 	GValue *name;
@@ -72,8 +73,8 @@ main(int argc, char **argv)
 			names = lu_groups_enumerate(lu, argv[optind], &error);
 		}
 
-		for (c = 0; (names != NULL) && (c < names->n_values); c++) {
-			name = g_value_array_get_nth(names, c);
+		for (i = 0; (names != NULL) && (i < names->n_values); i++) {
+			name = g_value_array_get_nth(names, i);
 			g_print(" Found %s named `%s'.\n",
 				group ? "group" : "user",
 				g_value_get_string(name));
@@ -87,8 +88,8 @@ main(int argc, char **argv)
 		} else {
 			accounts = lu_groups_enumerate_full(lu, argv[optind], &error);
 		}
-		for (c = 0; (accounts != NULL) && (c < accounts->len); c++) {
-			ent = g_ptr_array_index(accounts, c);
+		for (i = 0; (accounts != NULL) && (i < accounts->len); i++) {
+			ent = g_ptr_array_index(accounts, i);
 			g_print("Found account:\n");
 			lu_ent_dump(ent, stdout);
 			lu_ent_free(ent);

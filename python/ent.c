@@ -42,7 +42,7 @@ convert_value_array_pylist(GValueArray *array)
 {
 	PyObject *ret = NULL;
 	GValue *value;
-	int i;
+	size_t i;
 	long l;
 	const char *s;
 
@@ -267,6 +267,8 @@ libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
 {
 	GList *i;
 	PyObject *ret;
+
+	(void)args;
 	DEBUG_ENTRY;
 	ret = PyList_New(0);
 	for (i = lu_ent_get_attributes(self->ent);
@@ -282,6 +284,7 @@ libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
 static PyObject *
 libuser_entity_modules(struct libuser_entity *self, PyObject * args)
 {
+	(void)args;
 	DEBUG_CALL;
 	return convert_value_array_pylist(self->ent->modules);
 }
@@ -427,6 +430,7 @@ libuser_entity_clear_all(struct libuser_entity *self, PyObject * args)
 static PyObject *
 libuser_entity_revert(struct libuser_entity *self, PyObject * args)
 {
+	(void)args;
 	DEBUG_ENTRY;
 	lu_ent_revert(self->ent);
 	DEBUG_EXIT;
@@ -604,7 +608,7 @@ static PyMethodDef libuser_entity_methods[] = {
 	 "were set when the entity was looked up"},
 	{"modules", (PyCFunction) libuser_entity_modules, 0,
 	 "get a list of the modules which generated or looked up this object"},
-	{NULL, NULL, 0},
+	{NULL, NULL, 0, NULL},
 };
 
 static PyTypeObject EntityType = {

@@ -54,9 +54,9 @@ const char *lu_get_modules(lu_context_t *context);
 gboolean lu_uses_elevated_privileges (lu_context_t *context);
 
 gboolean lu_user_default(lu_context_t *ctx, const char *name,
-			 gboolean system, struct lu_ent *ent);
+			 gboolean system_account, struct lu_ent *ent);
 gboolean lu_group_default(lu_context_t *ctx, const char *name,
-			  gboolean system, struct lu_ent *ent);
+			  gboolean system_account, struct lu_ent *ent);
 
 gboolean lu_user_lookup_name(lu_context_t *context,
 			     const char *name, struct lu_ent *ent,

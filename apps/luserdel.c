@@ -54,7 +54,7 @@ main(int argc, const char **argv)
 		 NULL},
 		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0,
 		 "remove the user's home directory", NULL},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);

@@ -17,6 +17,7 @@
 
 #ident "$Id$"
 
+#include <Python.h>
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
@@ -27,7 +28,6 @@
 #include <glib.h>
 #include "../lib/user.h"
 #include "../lib/user_private.h"
-#include <Python.h>
 #include "common.h"
 
 #include "admin.c"
@@ -42,6 +42,7 @@ libuser_get_user_shells(PyObject * ignored)
 	PyObject *ret = NULL;
 	const char *shell;
 
+	(void)ignored;
 	DEBUG_ENTRY;
 
 	ret = PyList_New(0);
@@ -68,7 +69,7 @@ static PyMethodDef libuser_methods[] = {
 	 "create and return a new prompt record"},
 	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
 	 "return a list of valid shells"},
-	{NULL, NULL, 0},
+	{NULL, NULL, 0, NULL},
 };
 
 void

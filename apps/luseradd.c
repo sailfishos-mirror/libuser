@@ -40,7 +40,8 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL, *groupEnt = NULL;
 	struct lu_error *error = NULL;
-	long uidNumber = INVALID, gidNumber = INVALID;
+	long uidNumber = INVALID;
+	gid_t gidNumber = INVALID;
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
@@ -73,7 +74,7 @@ main(int argc, const char **argv)
 		 "plaintext password for use with group", "STRING"},
 		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
 		 "pre-hashed password for use with group", "STRING"},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_AUTOHELP POPT_TABLEEND
 	};
 
 	/* Initialize i18n. */
@@ -231,7 +232,7 @@ main(int argc, const char **argv)
 
 	g_value_init(&val, G_TYPE_LONG);
 
-	if (uidNumber != INVALID) {
+	if ((uid_t)uidNumber != INVALID) {
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);

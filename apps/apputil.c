@@ -64,7 +64,6 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 
 	LU_ERROR_CHECK(error);
 
-	/* If the destination directory exists, return. */
 	dir = opendir(skeleton);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
@@ -297,6 +296,7 @@ lu_strconcat(char *existing, const char *appendee)
 	return existing;
 }
 
+#if 0
 struct conv_data {
 	lu_prompt_fn *prompt;
 	gpointer callback_data;
@@ -390,6 +390,7 @@ lu_converse(int num_msg, const struct pam_message **msg,
 
 	return PAM_CONV_ERR;
 }
+#endif
 
 /* Authenticate the user if the invoking user is not privileged.  If
  * authentication fails, exit immediately. */
@@ -398,7 +399,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 {
 	pam_handle_t *pamh;
 	struct pam_conv conv;
-	const char *puser = user;
+	const void *puser = user;
 	int ret;
 
 #if 0
@@ -441,15 +442,15 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	/* Use PAM to authenticate the user. */
 	ret = pam_authenticate(pamh, 0);
 	if (ret != PAM_SUCCESS) {
-		pam_get_item(pamh, PAM_USER, (const void **) &puser);
+		pam_get_item(pamh, PAM_USER, &puser);
 		fprintf(stderr, _("Authentication failed for %s.\n"),
-			puser);
+			(const char *)puser);
 		pam_end(pamh, 0);
 		exit(1);
 	}
 
 	/* Make sure we authenticated the user we wanted to authenticate. */
-	ret = pam_get_item(pamh, PAM_USER, (const void **) &puser);
+	ret = pam_get_item(pamh, PAM_USER, &puser);
 	if (ret != PAM_SUCCESS) {
 		fprintf(stderr, _("Internal PAM error `%s'.\n"),
 			pam_strerror(pamh, ret));
@@ -464,10 +465,10 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 
 	/* Check if the user is allowed to run this program. */
 	if (pam_acct_mgmt(pamh, 0) != PAM_SUCCESS) {
-		const char *puser = user;
-		pam_get_item(pamh, PAM_USER, (const void **) &puser);
+		puser = user;
+		pam_get_item(pamh, PAM_USER, &puser);
 		fprintf(stderr, _("Authentication failed for %s.\n"),
-			puser);
+			(const char *)puser);
 		pam_end(pamh, 0);
 		exit(1);
 	}
@@ -513,7 +514,8 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	GValueArray *array;
 	GValue *value;
 	const char *spooldir;
-	long uid, gid;
+	uid_t uid;
+	gid_t gid;
 	char *p, *username;
 	struct group grp, *err;
 	struct lu_ent *groupEnt;
@@ -573,10 +575,10 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	g_return_val_if_fail(gid != INVALID, FALSE);
 
 	/* Now get the user's UID. */
+	uid = INVALID;
 	array = lu_ent_get(ent, LU_UIDNUMBER);
 	if (array != NULL) {
 		value = g_value_array_get_nth(array, 0);
-		uid = INVALID;
 		if (G_VALUE_HOLDS_LONG(value)) {
 			uid = g_value_get_long(value);
 		} else
