@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2005-02-21 16:04+0100\n"
+"PO-Revision-Date: 2005-03-24 23:35+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -27,15 +27,15 @@ msgstr "Feil under oppretting av `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Feil under oppretting av gruppe «%s»: %s\n"
+msgstr "Feil under endring av eierskap for «%s»: %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Feil under oppretting av `%s': %s"
+msgstr "Feil under skriving av `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -705,9 +705,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "sikkerhetskopien «%s» eksisterer og er ikke en vanlig fil"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "feil med bibliotek-/modulversjon"
+msgstr "feil størrelse på sikkerhetskopi"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
