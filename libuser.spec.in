@@ -5,6 +5,7 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
+BuildPrereq: krb5-devel, popt, sgml-tools
 Summary: A user account administration library.
 
 %description
@@ -29,6 +30,9 @@ files useful for developing applications with libuser.
 %build
 %configure
 make
+pushd docs/sgml
+make
+popd
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -43,7 +47,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS COPYING NEWS README TODO docs/*
+%doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html
 %config %{_sysconfdir}/libuser.conf
 %dir %{_libdir}/libuser
 %{_libdir}/libuser.so.*.*
