@@ -154,12 +154,13 @@ static char *lu_ldap_group_attributes[] = {
 
 struct lu_ldap_context {
 	struct lu_context *global_context;
+	struct lu_module *module;
 	struct lu_prompt prompts[LU_LDAP_MAX];
 	LDAP *ldap;
 };
 
 static void
-close_server(LDAP * ldap)
+close_server(LDAP *ldap)
 {
 	ldap_unbind_s(ldap);
 }
@@ -175,7 +176,7 @@ getuser()
 }
 
 static int
-interact(LDAP * ld, unsigned flags, void *context, void *interact_data)
+interact(LDAP *ld, unsigned flags, void *context, void *interact_data)
 {
 	sasl_interact_t *interact;
 	struct lu_ldap_context *ctx = (struct lu_ldap_context *) context;
@@ -217,22 +218,28 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 {
 	LDAP *ldap = NULL;
 	LDAPControl *server = NULL, *client = NULL;
+	LDAPMessage *results, *entry;
 	int version = LDAP_VERSION3;
-	char *generated_binddn = "", *tmp;
-	char *user;
+	char *generated_binddn = "", *tmp, *key;
+	char *user, **values;
+	char *password;
 	struct lu_string_cache *scache = NULL;
+	struct berval cred, *pcred;
+	gboolean sasl = FALSE;
+	char *saslmechs[] = {"supportedSASLmechanisms", NULL};
 
 	g_assert(context != NULL);
 	LU_ERROR_CHECK(error);
 
-	ldap =
-	    ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
+	/* Create the LDAP context. */
+	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if (ldap == NULL) {
 		lu_error_new(error, lu_error_init,
 			     _("error initializing ldap library"));
 		return NULL;
 	}
 
+	/* Generate the DN we might want to bind to. */
 	scache = context->global_context->scache;
 	user = getuser();
 	if (user) {
@@ -240,32 +247,93 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 		free(user);
 		user = tmp;
 	}
+	key = g_strdup_printf("%s/%s", context->module->name, "userBranch");
 	tmp = g_strdup_printf("uid=%s,%s,%s", user,
 			      lu_cfg_read_single(context->global_context,
-						 "ldap/userBranch",
+						 key,
 						 USERBRANCH),
 			      context->prompts[LU_LDAP_BASEDN].value);
 	generated_binddn = scache->cache(scache, tmp);
+	g_free(key);
 	g_free(tmp);
 
+	/* Switch to LDAPv3, which gives us some more features we need. */
 	if (ldap_set_option(ldap,
 			    LDAP_OPT_PROTOCOL_VERSION,
 			    &version) != LDAP_OPT_SUCCESS) {
 		lu_error_new(error, lu_error_init,
-			     _
-			     ("could not set LDAP protocol to version %d"),
+			     _("could not set LDAP protocol to version %d"),
 			     version);
 		close_server(ldap);
 		return NULL;
 	}
 
+	/* Try to start TLS. */
 	if (ldap_start_tls_s(ldap, &server, &client) != LDAP_SUCCESS) {
 		lu_error_new(error, lu_error_init,
-			     _
-			     ("could not negotiate TLS with LDAP server"));
+			     _("could not negotiate TLS with LDAP server"));
 		close_server(ldap);
 		return NULL;
 	}
+
+	/* Try to bind to the server using SASL. */
+	if (context->prompts[LU_LDAP_USER].value != NULL) {
+		ldap_set_option(ldap, LDAP_OPT_X_SASL_AUTHCID,
+				context->prompts[LU_LDAP_USER].value);
+	}
+	if (context->prompts[LU_LDAP_AUTHUSER].value != NULL) {
+		ldap_set_option(ldap, LDAP_OPT_X_SASL_AUTHZID,
+				context->prompts[LU_LDAP_AUTHUSER].value);
+	}
+	if (context->prompts[LU_LDAP_PASSWORD].value != NULL) {
+		password = context->prompts[LU_LDAP_PASSWORD].value;
+		cred.bv_len = strlen(password);
+		cred.bv_val = password;
+		pcred = &cred;
+	} else {
+		password = NULL;
+		pcred = NULL;
+	}
+	if (ldap_sasl_bind_s(ldap, generated_binddn, NULL, pcred,
+			     &server, &client, &pcred) != LDAP_SUCCESS) {
+		if (ldap_simple_bind_s(ldap, generated_binddn,
+				       password) != LDAP_SUCCESS) {
+			lu_error_new(error, lu_error_init,
+				     _("could not bind to LDAP server"));
+			close_server(ldap);
+			return NULL;
+		}
+	}
+	return ldap;
+#if 0
+	/* Check if there are any supported SASL mechanisms. */
+	if (ldap_search_ext_s(ldap, LDAP_ROOT_DSE, LDAP_SCOPE_BASE,
+			      NULL, saslmechs, FALSE,
+			      &server, &client,
+			      NULL, 0, &results) != LDAP_SUCCESS) {
+		lu_error_new(error, lu_error_init,
+			     _("could not search LDAP server"));
+		close_server(ldap);
+		return NULL;
+	}
+
+	/* Get the DSE entry. */
+	entry = ldap_first_entry(ldap, results);
+	if (entry == NULL) {
+		lu_error_new(error, lu_error_init,
+			     _("LDAP server appears to have no root DSE"));
+		close_server(ldap);
+		return NULL;
+	}
+
+	/* Get the list of supported mechanisms. */
+	values = ldap_get_values(ldap, entry, saslmechs[0]);
+	if ((values != NULL) && (strlen(values[0]) > 0)) {
+		sasl = TRUE;
+	}
+
+
+
 
 	if (ldap_sasl_interactive_bind_s(ldap, NULL, NULL, NULL, NULL,
 					 LDAP_SASL_AUTOMATIC |
@@ -279,14 +347,10 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 			    (ldap, generated_binddn,
 			     context->prompts[LU_LDAP_PASSWORD].value) !=
 			    LDAP_SUCCESS) {
-				lu_error_new(error, lu_error_init,
-					     _
-					     ("could not bind to LDAP server"));
-				close_server(ldap);
-				return NULL;
 			}
 
 	return ldap;
+#endif
 }
 
 /* Generate the distinguished name which corresponds to the lu_ent structure. */
@@ -309,7 +373,7 @@ lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent,
 	g_assert(configKey != NULL);
 	g_assert(strlen(configKey) > 0);
 
-	tmp = g_strdup_printf("ldap/%s", configKey);
+	tmp = g_strdup_printf("%s/%s", module->name, configKey);
 	branch = lu_cfg_read_single(module->lu_context, tmp, def);
 	g_free(tmp);
 
@@ -339,7 +403,7 @@ lu_ldap_base(struct lu_module *module, const char *configKey,
 	g_assert(configKey != NULL);
 	g_assert(strlen(configKey) > 0);
 
-	tmp = g_strdup_printf("ldap/%s", configKey);
+	tmp = g_strdup_printf("%s/%s", module->name, configKey);
 	branch = lu_cfg_read_single(module->lu_context, tmp, def);
 	g_free(tmp);
 
@@ -389,19 +453,19 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 
 	ctx = module->module_context;
 
-	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name, configKey,
-			       def);
+	/* Map the user or group name to a distinguished name. */
+	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name, configKey, def);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _
-			     ("error mapping name to LDAP distinguished name"));
+			     _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
+
+	/* Get the 
 	base = lu_ldap_base(module, configKey, def);
 	if (base == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _
-			     ("error mapping name to LDAP base distinguished name"));
+			     _("error mapping name to LDAP base distinguished name"));
 		return FALSE;
 	}
 
@@ -1383,7 +1447,7 @@ lu_ldap_enumerate(struct lu_module *module,
 
 	ctx = module->module_context;
 
-	tmp = g_strdup_printf("ldap/%s", configKey);
+	tmp = g_strdup_printf("%s/%s", module->name, configKey);
 	branch = lu_cfg_read_single(module->lu_context, tmp, def);
 	g_free(tmp);
 
@@ -1593,7 +1657,7 @@ lu_ldap_close_module(struct lu_module *module)
 }
 
 struct lu_module *
-lu_ldap_init(struct lu_context *context, struct lu_error **error)
+libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 {
 	struct lu_module *ret = NULL;
 	struct lu_ldap_context *ctx = NULL;
