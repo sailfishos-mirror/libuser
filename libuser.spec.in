@@ -87,6 +87,11 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Mon May 20 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51-1
+- files: ignore blank lines in files
+- libuser: disallow creation of accounts with names containing whitespace,
+  control characters, or non-ASCII characters
+
 * Tue Apr 16 2002 Nalin Dahyabhai <nalin@redhat.com> 0.50.2-1
 - refresh translations
 - fix a heap-corruption bug in the python bindings
