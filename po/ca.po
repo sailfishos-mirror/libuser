@@ -2,14 +2,15 @@
 # Copyright (C) 2004 Free Software Foundation
 # This file is distributed under the same license as the libuser package.
 # Isabel Cama <c.gomez.febrel@terra.es>, 2004.
+# Xavier Conde Rueda <xaviconde@eresmas.com>, 2004
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-03-07 04:27+0100\n"
-"Last-Translator: isabel cama <c.gomez.febrel@terra.es>\n"
+"PO-Revision-Date: 2004-12-20 01:12+0100\n"
+"Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,17 +44,16 @@ msgstr "S'ha produït un error intern.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s no té permís per canviar la informació de finger de %s\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "error desconegut"
+msgstr "Context d'usuari desconegut"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "No s'ha pogut establir el context predeterminat per a /etc/passwd\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -78,7 +78,7 @@ msgstr "L'usuari és discordant.\n"
 #: apps/lchage.c:140 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
 #: apps/luserdel.c:66 apps/lusermod.c:92
 msgid "[OPTION...] user"
-msgstr "[Opció...] usuari"
+msgstr "[OPCIÓ...] usuari"
 
 #: apps/lchage.c:143 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:89 apps/lid.c:71 apps/lnewusers.c:78
@@ -162,13 +162,13 @@ msgid "Account Expires:\t%s\n"
 msgstr "El compte venç el:\t%s\n"
 
 #: apps/lchage.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "No s'ha pogut modificar la informació d'envelliment de %s.\n"
+msgstr "No s'ha pogut modificar la informació d'envelliment de %s: %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
-msgstr "[Opció...] [usuari]"
+msgstr "[OPCIÓ...] [usuari]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
@@ -237,13 +237,13 @@ msgid "Shell changed.\n"
 msgstr "L'intèrpret d'ordres ha canviat.\n"
 
 #: apps/lchsh.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "L'intèrpret d'ordres ha canviat.\n"
+msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 msgid "[OPTION...] group"
-msgstr "[opció...] grup"
+msgstr "[OPCIÓ...] grup"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:97
 #, c-format
@@ -253,12 +253,12 @@ msgstr "No s'ha especificat cap nom de grup.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "L'ID del grup %s no és vàlid\n"
 
 #: apps/lgroupadd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "No s'ha pogut crear el grup.\n"
+msgstr "No s'ha pogut crear el grup: %s.\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, c-format
@@ -266,34 +266,34 @@ msgid "Group %s does not exist.\n"
 msgstr "El grup %s no existeix.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
 msgstr "No s'ha pogut suprimir el grup %s: %s.\n"
 
 #: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "S'han especificat -L i -U.\n"
+msgstr "S'han especificat -L i -U a la vegada.\n"
 
 #: apps/lgroupmod.c:238 apps/lgroupmod.c:247
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "No s'ha pogut definir la contrasenya pel grup %s.\n"
+msgstr "No s'ha pogut definir la contrasenya per al grup %s: %s\n"
 
 #: apps/lgroupmod.c:256
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "No s'ha pogut bloquejar el grup %s.\n"
+msgstr "No s'ha pogut bloquejar el grup %s: %s\n"
 
 #: apps/lgroupmod.c:265
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "No s'ha pogut desbloquejar el grup %s.\n"
+msgstr "No s'ha pogut desbloquejar el grup %s: %s\n"
 
 #: apps/lgroupmod.c:272
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "No s'ha pogut modificar el grup %s: %s.\n"
+msgstr "No s'ha pogut modificar el grup %s: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -308,11 +308,11 @@ msgstr "No s'ha especificat cap nom de grup, el gid %d no té nom.\n"
 #: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "No s'ha esfecificat cap nom d'usuari. Es farà servir %s.\n"
+msgstr "No s'ha especificat cap nom d'usuari. Es farà servir %s.\n"
 
 #: apps/lnewusers.c:75
 msgid "[OPTION...]"
-msgstr "[Opció...]"
+msgstr "[OPCIÓ...]"
 
 #: apps/lnewusers.c:98
 #, c-format
@@ -329,22 +329,22 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "L'ID de l'usuari %s no és vàlid\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "No es pot crear un compte amb l'UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "S'ha produït un error en crear un grup per a '%s' amb el GID %ld.\n"
+msgstr "S'ha produït un error en crear un grup per a '%s' amb el GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr ""
-"S'ha produït un error en configurar la contrasenya inicial per a %s: %s\n"
+"S'ha produït un error en establir la contrasenya inicial per a %s: %s\n"
 
 #: apps/lnewusers.c:308
 #, c-format
@@ -402,14 +402,14 @@ msgid "Password changed.\n"
 msgstr "S'ha canviat la contrasenya.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "El grup %s no existeix.\n"
+msgstr "El grup %jd no existeix\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "S'ha produït un error en crear el grup '%s'.\n"
+msgstr "S'ha produït un error en crear el grup '%s': %s.\n"
 
 #: apps/luseradd.c:286
 #, c-format
@@ -434,17 +434,17 @@ msgstr "L'usuari %s no s'ha pogut suprimir: %s.\n"
 #: apps/luserdel.c:109
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "A %s li falta el número de gid.\n"
+msgstr "A %s li falta el nombre de gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "No existeix cap grup amb el gid %ld. No se suprimirà.\n"
+msgstr "No existeix cap grup amb el gid %jd. No se suprimirà.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "El grup amb el GID %ld no tenia un nom de grup.\n"
+msgstr "El grup amb el GID %jd no tenia un nom de grup.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -507,18 +507,18 @@ msgid "could not open configuration file `%s': %s"
 msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
+msgstr "no s'ha pogut obtenir informació del fitxer de configuració '%s': %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
+msgstr "no s'ha pogut llegir el fitxer de configuració '%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr "èxit"
+msgstr "correcte"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
@@ -530,7 +530,7 @@ msgstr "error genèric"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr "no hi ha prou privilegis"
+msgstr "no té prou privilegis"
 
 #: lib/error.c:50
 msgid "access denied"
@@ -598,7 +598,7 @@ msgstr "la versió del mòdul o de la biblioteca no coincideix"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "en desbloquejar, el camp de la contrasenya quedarà buit"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -636,7 +636,7 @@ msgstr "el nom és massa curt"
 
 #: lib/user.c:206
 msgid "name contains non-ASCII characters"
-msgstr "el nom conté caràcters que no són ASCII "
+msgstr "el nom conté caràcters que no són ASCII"
 
 #: lib/user.c:213
 msgid "name contains control characters"
@@ -657,19 +657,20 @@ msgid "error locking file: %s"
 msgstr "s'ha produït un error en bloquejar el fitxer: %s"
 
 #: modules/files.c:112
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "no s'ha pogut escriure a '%s': %s"
+msgstr "no s'ha pogut obtenir el context de seguretat de '%s': %s"
 
 #: modules/files.c:118
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "no s'ha pogut obtenir l'estat '%s': %s"
+msgstr "no s'ha pogut establir el context de seguretat predeterminat: %s"
 
 #: modules/files.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "no s'ha pogut escriure a '%s': %s"
+msgstr ""
+"no s'ha pogut establir el context de seguretat predeterminat a '%s': %s"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -686,7 +687,7 @@ msgstr "no s'ha pogut obrir '%s': %s"
 #: modules/files.c:886 modules/files.c:1351
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "no s'ha pogut obtenir l'estat '%s': %s"
+msgstr "no s'ha pogut obtenir informació de '%s': %s"
 
 #: modules/files.c:196
 #, c-format
@@ -720,13 +721,12 @@ msgid "entity object has no %s attribute"
 msgstr "l'objecte de l'entitat no té l'atribut %s"
 
 #: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
-#, fuzzy
 msgid "error encrypting password"
-msgstr "s'ha produït un error en configurar la contrasenya per a '%s'"
+msgstr "s'ha produït un error en xifrar la contrasenya"
 
 #: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
-msgstr "no s'està executant amb permisos del superusuari"
+msgstr "no s'està executant amb permisos de superusuari"
 
 #: modules/files.c:2967
 msgid "no shadow file present -- disabling"
@@ -736,8 +736,8 @@ msgstr "no hi ha cap fitxer shadow present -- es deshabilitarà"
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"s'ha produït un error en connectar amb el servidor kadm5 pel servei '%s' en "
-"el regne '%s': %s"
+"s'ha produït un error en connectar amb el servidor kadm5 per al servei '%s' "
+"en el regne '%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -799,20 +799,22 @@ msgstr "s'ha produït un error en inicialitzar la biblioteca ldap"
 #: modules/ldap.c:213
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "no s'ha pogut establir el protocol LDAP a la versió %d"
+msgstr "no s'ha pogut establir la versió del protocol LDAP a %d"
 
 #: modules/ldap.c:225
 msgid "could not negotiate TLS with LDAP server"
-msgstr "el TLS no ha pogut negociar amb el servidor del LDAP"
+msgstr "el TLS no ha pogut negociar amb el servidor de LDAP"
 
 #: modules/ldap.c:408
 msgid "could not bind to LDAP server"
-msgstr "no s'ha pogut crear un vincle amb el servidor del LDAP"
+msgstr "no s'ha pogut crear un vincle amb el servidor de LDAP"
 
 #: modules/ldap.c:411
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "no s'ha pogut crear un vincle amb el servidor del LDAP"
+msgstr ""
+"no s'ha pogut vincular amb el servidor de LDAP. El primer intent ha estat "
+"com a '%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -847,11 +849,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "no s'han pogut convertir les dades internes a LDAPMods"
 
 #: modules/ldap.c:1410
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr ""
-"s'ha produït un error en canviar el nom de l'entrada del directori del LDAP: "
-"%s\n"
+msgstr "s'ha produït un error en crear l'entrada del directori de LDAP: %s"
 
 #: modules/ldap.c:1436 modules/ldap.c:1674
 #, c-format
@@ -860,11 +860,9 @@ msgstr ""
 "s'ha produït un error en modificar el registre del directori del LDAP: %s"
 
 #: modules/ldap.c:1463
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr ""
-"s'ha produït un error en canviar el nom de l'entrada del directori del LDAP: "
-"%s\n"
+msgstr "s'ha produït un error en canviar l'entrada del directori del LDAP: %s"
 
 #: modules/ldap.c:1512
 #, c-format
@@ -872,10 +870,9 @@ msgid "object had no %s attribute"
 msgstr "l'objecte no tenia cap atribut %s"
 
 #: modules/ldap.c:1536
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr ""
-"s'ha produït un error en eliminar el registre del directori LDAP: %s.\n"
+msgstr "s'ha produït un error en eliminar l'entrada del directori LDAP: %s"
 
 #: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
 #: modules/ldap.c:1803
@@ -885,35 +882,35 @@ msgstr "l'objecte no té cap atribut %s"
 
 #: modules/ldap.c:1738
 msgid "no such object in LDAP directory"
-msgstr "aquest objecte no existeix en el directori del LDAP"
+msgstr "aquest objecte no existeix en el directori LDAP"
 
 #: modules/ldap.c:1750
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "no s'ha trobat cap atribut `%s'"
+msgstr "no s'ha trobat cap atribut '%s'"
 
 #: modules/ldap.c:1912
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
-"s'ha produït un error en establir una contrasenya en el directori del LDAP "
-"per a %s: %s"
+"s'ha produït un error en establir una contrasenya en el directori LDAP per a "
+"%s: %s"
 
 #: modules/ldap.c:2484
 msgid "LDAP Server Name"
-msgstr "Nom del servidor del LDAP"
+msgstr "Nom del servidor LDAP"
 
 #: modules/ldap.c:2490
 msgid "LDAP Search Base DN"
-msgstr "DN de la base de cerca del LDAP"
+msgstr "DN de la base de cerca de LDAP"
 
 #: modules/ldap.c:2496
 msgid "LDAP Bind DN"
-msgstr "DN del vincle del LDAP"
+msgstr "DN del vincle de LDAP"
 
 #: modules/ldap.c:2503
 msgid "LDAP Bind Password"
-msgstr "Contrasenya del vincle del LDAP"
+msgstr "Contrasenya del vincle de LDAP"
 
 #: modules/ldap.c:2509
 msgid "LDAP SASL User"
@@ -963,12 +960,12 @@ msgstr "S'ha produït un error en inicialitzar %s: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "L'ID %s no és vàlid\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "S'està cercant un grup amb ID %d.\n"
+msgstr "S'està cercant un grup amb ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -976,9 +973,9 @@ msgid "Searching for group named %s.\n"
 msgstr "S'està cercant un grup anomenat %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "S'està cercant un usuari amb ID %d.\n"
+msgstr "S'està cercant un usuari amb ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1012,26 +1009,3 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
-
-#, fuzzy
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "no s'ha pogut escriure a '%s': %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "s'ha produït un error del SASL en crear un usuari del Cyrus: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr ""
-#~ "s'ha produït un error del SASL en eliminar un usuari del Cyrus: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "S'ha produït un error en inicialitzar %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "No s'ha pogut suprimir el grup %s.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "No s'ha pogut modificar el grup %s.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "s'ha produït un error en inicialitzar el mòdul"
