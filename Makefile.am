@@ -1,5 +1,5 @@
-SUBDIRS = intl  m4  po docs lib apps samples python modules
-EXTRA_DIST = config.rpath  libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt docs/reference/libuser.args docs/reference/libuser.hierarchy docs/reference/libuser.signals docs/reference/libuser.types
+SUBDIRS = intl m4  intl  m4  po docs lib apps samples python modules
+EXTRA_DIST = config.rpath  config.rpath  libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt docs/reference/libuser.args docs/reference/libuser.hierarchy docs/reference/libuser.signals docs/reference/libuser.types
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig
 
