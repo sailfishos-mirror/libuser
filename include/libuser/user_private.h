@@ -45,10 +45,10 @@ typedef struct lu_string_cache {
 } lu_string_cache_t;
 
 /** Create a new cache.
-  * \param case_sensitive Whether or not case should factor into whether
+  * @param case_sensitive Whether or not case should factor into whether
   * strings in the cache should be considered equal if they differ only
   * in case.  TRUE means that we are case-sensitive when comparing.
-  * \returns A new cache object.  Add strings to the cache using the
+  * @return A new cache object.  Add strings to the cache using the
   * cache() method, and free it by passing its address to its free() method.
   */
 struct lu_string_cache *lu_string_cache_new(gboolean case_sensitive);

@@ -25,6 +25,7 @@
 #include <errno.h>
 #include <glib.h>
 
+/** An error type. */
 enum lu_error_code {
 	lu_error_success = 0,		/** No error. */
 	lu_error_config_disabled,	/** Disabled in configuration -- non-fatal. */
@@ -59,6 +60,8 @@ typedef struct lu_error {
 	char *string;
 } lu_error_t;
 
+/** Checks that a passed-in error pointer is not already populated, and calls
+  * abort() if it is. */
 #define LU_ERROR_CHECK(err_p_p) \
 do { \
 	struct lu_error **__err = (err_p_p); \

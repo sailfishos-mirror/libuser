@@ -30,15 +30,17 @@
 #include <unistd.h>
 #include "../include/libuser/user.h"
 
+/** @file userprmt.c */
+
 /**
  * lu_prompt_console:
- * @prompts: An array of structures used to pass prompts and answers into and out of the function.
- * @count: The length of the prompts array.
- * @calldata: Ignored.
+ * @param prompts An array of structures used to pass prompts and answers into and out of the function.
+ * @param count The length of the prompts array.
+ * @param calldata Ignored.
  *
  * This function prompts the user for information, including items which have default answers supplied by the caller.
  *
- * Returns: TRUE on success, or FALSE on error.
+ * @return TRUE on success, or FALSE on error.
  **/
 gboolean
 lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
@@ -111,14 +113,14 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 
 /**
  * lu_prompt_console_quiet:
- * @prompts: An array of structures used to pass prompts and answers into and out of the function.
- * @count: The length of the prompts array.
- * @calldata: Ignored.
+ * @param prompts An array of structures used to pass prompts and answers into and out of the function.
+ * @param count The length of the prompts array.
+ * @param calldata Ignored.
  *
  * This function prompts the user for information.  Items which have default answers supplied by the caller will be returned
  * with their default values set.
  *
- * Returns: TRUE, or FALSE on error.
+ * @return TRUE, or FALSE on error.
  **/
 gboolean
 lu_prompt_console_quiet(struct lu_prompt *prompts, int count, gpointer calldata, struct lu_error **error)

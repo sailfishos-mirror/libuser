@@ -55,12 +55,13 @@ the group name for a group entity. */
 #define LU_SHADOWFLAG		"shadowFlag"		/**< Reserved. */
 
 /** Additional fields carried by some structures.  If they have them, it's safe to change them. */
-#define LU_GIVENNAME		"givenName"
-#define LU_SN			"sn"
-#define LU_ROOMNUMBER		"roomNumber"
-#define LU_TELEPHONENUMBER	"telephoneNumber"
-#define LU_HOMEPHONE		"homePhone"
+#define LU_GIVENNAME		"givenName"		/**< A user's given name. */
+#define LU_SN			"sn"			/**< A user's family's name. */
+#define LU_ROOMNUMBER		"roomNumber"		/**< Office number for a user. */
+#define LU_TELEPHONENUMBER	"telephoneNumber"	/**< Office phone number for a user. */
+#define LU_HOMEPHONE		"homePhone"		/**< Home phone number for a user. */
 
+/** A memory structure which holds the attributes of a user or group. */
 typedef struct lu_ent lu_ent_t;
 
 struct lu_ent *lu_ent_new(void);

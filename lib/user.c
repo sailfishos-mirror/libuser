@@ -17,6 +17,8 @@
 
 #ident "$Id$"
 
+/** @file user.c */
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -52,12 +54,12 @@ enum lu_dispatch_id {
 
 /**
  * lu_module_unload:
- * @key: A string representation of the module's name.
- * @value: A pointer to the module's #lu_module_t structure.
+ * @param key A string representation of the module's name.
+ * @param value A pointer to the module's #lu_module_t structure.
  *
  * Unloads a libuser module from memory.
  *
- * Returns: nothing.
+ * @return nothing.
  **/
 static int
 lu_module_unload(gpointer key, gpointer value, gpointer data)
@@ -210,16 +212,16 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 
 /**
  * lu_set_info_modules:
- * @context: A valid library context, initialized by calling lu_start().
- * @list: A string containing a comma-separated or whitespace-separated list of modules to search in.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A valid library context, initialized by calling lu_start().
+ * @param list A string containing a comma-separated or whitespace-separated list of modules to search in.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * Sets the list of modules which will be queried when looking up information
  * about users and groups.  The first module in the list which admits to having
  * some idea of who the user or group is will be deemed authoritative for
  * general information for that user or group.
  *
- * Returns: TRUE on success, FALSE on failure, with @error set.
+ * @return TRUE on success, FALSE on failure, with @error set.
  **/
 gboolean
 lu_set_info_modules(struct lu_context *context, const char *list, struct lu_error **error)
@@ -231,16 +233,16 @@ lu_set_info_modules(struct lu_context *context, const char *list, struct lu_erro
 
 /**
  * lu_set_auth_modules:
- * @context: A valid library context, initialized by calling lu_start().
- * @list: A string containing a comma-separated or whitespace-separated list of modules to search in.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A valid library context, initialized by calling lu_start().
+ * @param list A string containing a comma-separated or whitespace-separated list of modules to search in.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * Sets the list of modules which will be queried when looking up authentication
  * information about users and groups.  The first module in the list which
  * admits to having some idea of who the user or group is will be deemed
  * authoritative for authentication information for that user or group.
  *
- * Returns: TRUE on success, FALSE on failure, with @error set.
+ * @return TRUE on success, FALSE on failure, with @error set.
  **/
 gboolean
 lu_set_auth_modules(struct lu_context *context, const char *list, struct lu_error **error)
@@ -252,15 +254,15 @@ lu_set_auth_modules(struct lu_context *context, const char *list, struct lu_erro
 
 /**
  * lu_set_prompter:
- * @context: A valid library context, initialized by calling lu_start().
- * @prompter: The address of a function with the same prototype as lu_prompt_console().
- * @prompter_data: Data which will be passed to @prompter as its @callback_data parameter.
+ * @param context A valid library context, initialized by calling lu_start().
+ * @param prompter The address of a function with the same prototype as lu_prompt_console().
+ * @param prompter_data Data which will be passed to @prompter as its @callback_data parameter.
  *
  * Sets the function modules loaded by libuser will use to ask the application's user for information.  This typically includes
  * login and password information when the module needs access to network services.  The default prompter is #lu_prompt_console,
  * but an application can (and if it's a graphical application, definitely should) replace it with its own version.
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter, gpointer prompter_data)
@@ -272,13 +274,13 @@ lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter, gpointer pro
 
 /**
  * lu_get_prompter:
- * @context: A valid library context, initialized by calling lu_start().
- * @prompter: The address of a pointer to a function with the same prototype as lu_prompt_console().
- * @prompter_data: The address of a pointer which will hold data which should be passed to @prompter as its @callback_data parameter.
+ * @param context A valid library context, initialized by calling lu_start().
+ * @param prompter The address of a pointer to a function with the same prototype as lu_prompt_console().
+ * @param prompter_data The address of a pointer which will hold data which should be passed to @prompter as its @callback_data parameter.
  *
  * This is a companion function to lu_set_prompter().
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter, gpointer *prompter_data)
@@ -293,11 +295,11 @@ lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter, gpointer *p
 
 /**
  * lu_get_auth_modules:
- * @context: A valid library context, initialized by calling lu_start().
+ * @param context A valid library context, initialized by calling lu_start().
  *
  * This function returns the list of currently-loaded auth modules as a string.
  *
- * Returns: a string which must not be freed.
+ * @return a string which must not be freed.
  **/
 const char *
 lu_get_auth_modules(struct lu_context *context)
@@ -326,11 +328,11 @@ lu_get_auth_modules(struct lu_context *context)
 
 /**
  * lu_get_info_modules:
- * @context: A valid library context, initialized by calling lu_start().
+ * @param context A valid library context, initialized by calling lu_start().
  *
  * This function returns the list of currently-loaded info modules as a string.
  *
- * Returns: a string which must not be freed.
+ * @return a string which must not be freed.
  **/
 const char *
 lu_get_info_modules(struct lu_context *context)
@@ -359,18 +361,18 @@ lu_get_info_modules(struct lu_context *context)
 
 /**
  * lu_start:
- * @auth_name: A suggested name to use when initializing modules.
- * @auth_type: Whether &auth_name; is a user or group.
- * @info_modules: An initial list of modules to use.  If the application intends to cause modules to be added or removed during
+ * @param auth_name A suggested name to use when initializing modules.
+ * @param auth_type Whether &auth_name; is a user or group.
+ * @param info_modules An initial list of modules to use.  If the application intends to cause modules to be added or removed during
  * the course of its operation, it should pass an initial string here, and pass in #NULL otherwise.
- * @info_modules: An initial list of modules to use.  If the application intends to cause modules to be added or removed during
+ * @param info_modules An initial list of modules to use.  If the application intends to cause modules to be added or removed during
  * the course of its operation, it should pass an initial string here, and pass in #NULL otherwise.
- * @prompter: A function which modules will be able to call to interact with the application's user.
- * @prompter_data: Data to be passed to @prompter when it is called.
+ * @param prompter A function which modules will be able to call to interact with the application's user.
+ * @param prompter_data Data to be passed to @prompter when it is called.
  *
  * Initializes the library.
  *
- * Returns: A library context.
+ * @return A library context.
  **/
 struct lu_context *
 lu_start(const char *auth_name, enum lu_type auth_type, const char *info_modules, const char *auth_modules,
@@ -423,11 +425,11 @@ lu_start(const char *auth_name, enum lu_type auth_type, const char *info_modules
 
 /**
  * lu_end:
- * @context: A library context.
+ * @param context A library context.
  *
  * Shuts down the library.
  *
- * Returns: void
+ * @return void
  */
 void
 lu_end(struct lu_context *context)
@@ -751,16 +753,16 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 
 /**
  * lu_user_lookup_name:
- * @context: A library context.
- * @name: A user name.
- * @ent: An entity structure.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param name A user name.
+ * @param ent An entity structure.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to look up information about a user given only the user's @name.  All loaded modules are queried,
  * first for information about how the user is authenticated, and then for general information about the user (UID, home
  * directory, and so on).  If a match is found, information about the user is stored in @ent.
  *
- * Returns: TRUE if the user is found, FALSE if the user is not found, with @error filled in.
+ * @return TRUE if the user is found, FALSE if the user is not found, with @error filled in.
  **/
 gboolean
 lu_user_lookup_name(struct lu_context *context, const char *name, struct lu_ent *ent, struct lu_error **error)
@@ -771,16 +773,16 @@ lu_user_lookup_name(struct lu_context *context, const char *name, struct lu_ent 
 
 /**
  * lu_group_lookup_name:
- * @context: A library context.
- * @name: A group name.
- * @ent: An entity structure.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param name A group name.
+ * @param ent An entity structure.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to look up information about a group given only the group's @name.  All loaded modules are queried,
  * first for information about how the group is authenticated, and then for general information about the group (GID, members,
  * and so on).  If a match is found, information about the group is stored in @ent.
  *
- * Returns: TRUE if the user is found, FALSE if the user is not found.
+ * @return TRUE if the user is found, FALSE if the user is not found.
  **/
 gboolean
 lu_group_lookup_name(struct lu_context *context, const char *name, struct lu_ent *ent, struct lu_error **error)
@@ -791,16 +793,16 @@ lu_group_lookup_name(struct lu_context *context, const char *name, struct lu_ent
 
 /**
  * lu_user_lookup_id:
- * @context: A library context.
- * @uid: A numeric user ID.
- * @ent: An entity structure.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param uid A numeric user ID.
+ * @param ent An entity structure.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to look up information about a user given only the user's UID.  All loaded modules are queried,
  * first for information about how the user is authenticated, and then for general information about the user (UID, home
  * directory, and so on).  If a match is found, information about the user is stored in @ent.
  *
- * Returns: TRUE if the user is found, FALSE if the user is not found.
+ * @return TRUE if the user is found, FALSE if the user is not found.
  **/
 gboolean
 lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent, struct lu_error **error)
@@ -811,16 +813,16 @@ lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent, str
 
 /**
  * lu_group_lookup_id:
- * @context: A library context.
- * @gid: A numeric group ID.
- * @ent: An entity structure.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param gid A numeric group ID.
+ * @param ent An entity structure.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to look up information about a group given only the group's #GID.  All loaded modules are queried,
  * first for information about how the group is authenticated, and then for general information about the group (GID, members,
  * and so on).  If a match is found, information about the group is stored in @ent.
  *
- * Returns: TRUE if the user is found, FALSE if the user is not found.
+ * @return TRUE if the user is found, FALSE if the user is not found.
  **/
 gboolean
 lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent, struct lu_error **error)
@@ -831,13 +833,13 @@ lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent, st
 
 /**
  * lu_user_add:
- * @context: A library context.
- * @ent: Information about the user about whom information should be stored in the user information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param ent Information about the user about whom information should be stored in the user information databases.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function adds information about the user given in the @ent structure to the system databases.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_add(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -848,13 +850,13 @@ lu_user_add(struct lu_context *context, struct lu_ent *ent, struct lu_error **er
 
 /**
  * lu_group_add:
- * @context: A library context.
- * @ent: Information about the group about which information should be stored in the group information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param ent Information about the group about which information should be stored in the group information databases.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function adds information about the group given in the @ent structure to the system databases.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_add(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -865,14 +867,14 @@ lu_group_add(struct lu_context *context, struct lu_ent *ent, struct lu_error **e
 
 /**
  * lu_user_modify:
- * @context: A library context.
- * @ent: Information about the user about whom information should be modified in the user information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param ent Information about the user about whom information should be modified in the user information databases.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function modifies information about the user given in the @ent structure in the system databases so that they match
  * the data stored in the structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_modify(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -883,14 +885,14 @@ lu_user_modify(struct lu_context *context, struct lu_ent *ent, struct lu_error *
 
 /**
  * lu_group_modify:
- * @context: A library context.
- * @ent: Information about the group about which information should be modified in the group information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param ent Information about the group about which information should be modified in the group information databases.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function modifies information about the group given in the @ent structure in the system databases so that they match
  * the data stored in the structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_modify(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -901,13 +903,13 @@ lu_group_modify(struct lu_context *context, struct lu_ent *ent, struct lu_error 
 
 /**
  * lu_user_delete:
- * @context: A library context.
- * @ent: Information about the user about whom information should be removed from the user information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent Information about the user about whom information should be removed from the user information databases.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function removes information about the user given in the @ent structure from the system databases.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_delete(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -918,13 +920,13 @@ lu_user_delete(struct lu_context *context, struct lu_ent *ent, struct lu_error *
 
 /**
  * lu_group_delete:
- * @context: A library context.
- * @ent: Information about the group about which information should be removed from the group information databases.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent Information about the group about which information should be removed from the group information databases.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function removes information about the group given in the @ent structure from the system databases.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_delete(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -935,13 +937,13 @@ lu_group_delete(struct lu_context *context, struct lu_ent *ent, struct lu_error 
 
 /**
  * lu_user_lock:
- * @context: A library context.
- * @ent: A structure containing information describing the user whose account should be locked.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure containing information describing the user whose account should be locked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function disables access to the given account without removing it from the system database.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_lock(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -952,14 +954,14 @@ lu_user_lock(struct lu_context *context, struct lu_ent *ent, struct lu_error **e
 
 /**
  * lu_user_unlock:
- * @context: A library context.
- * @ent: A structure describing the user account which should be unlocked.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure describing the user account which should be unlocked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to undo the effects of the lu_user_lock() function.  Access to the account will be made again
  * possible.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_unlock(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -968,6 +970,16 @@ lu_user_unlock(struct lu_context *context, struct lu_ent *ent, struct lu_error *
 	return lu_dispatch(context, user_unlock, NULL, ent, error);
 }
 
+/**
+ * lu_user_islocked:
+ * @context A library context.
+ * @ent A structure describing the user account which should be checked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * This function checks if a user's account is locked.
+ *
+ * @return TRUE if the account is locked, FALSE if it is not locked or on failure.
+ **/
 gboolean
 lu_user_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
 {
@@ -977,14 +989,14 @@ lu_user_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_error
 
 /**
  * lu_user_setpass:
- * @context: A library context.
- * @ent: A structure describing the user account which should have its password changed.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure describing the user account which should have its password changed.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to set or reset the password on a user account.  It may use the default prompter, or a prompter
  * function which the calling application has specified when calling lu_start() or lu_set_prompter().
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_user_setpass(struct lu_context *context, struct lu_ent *ent, const char *password, struct lu_error **error)
@@ -1002,13 +1014,13 @@ lu_user_setpass(struct lu_context *context, struct lu_ent *ent, const char *pass
 
 /**
  * lu_group_lock:
- * @context: A library context.
- * @ent: A structure containing information describing the group account which should be locked.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure containing information describing the group account which should be locked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function disables access to the given group account without removing it from the system database.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_lock(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -1019,14 +1031,14 @@ lu_group_lock(struct lu_context *context, struct lu_ent *ent, struct lu_error **
 
 /**
  * lu_group_unlock:
- * @context: A library context.
- * @ent: A structure describing the group account which should be unlocked.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure describing the group account which should be unlocked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to undo the effects of the lu_group_lock() function.  Access to the account will be made again
  * possible.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_unlock(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
@@ -1035,6 +1047,16 @@ lu_group_unlock(struct lu_context *context, struct lu_ent *ent, struct lu_error 
 	return lu_dispatch(context, group_unlock, NULL, ent, error);
 }
 
+/**
+ * lu_group_islocked:
+ * @context A library context.
+ * @ent A structure describing the group account which should be checked.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * This function checks if a group account is locked.
+ *
+ * @return TRUE if the account is locked, FALSE if it is not locked or on failure.
+ **/
 gboolean
 lu_group_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_error **error)
 {
@@ -1044,15 +1066,15 @@ lu_group_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_erro
 
 /**
  * lu_group_setpass:
- * @context: A library context.
- * @ent: A structure describing the group account which should have its password changed.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @context A library context.
+ * @ent A structure describing the group account which should have its password changed.
+ * @error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * This function can be used to set or reset the password on a group account.  It may use the default prompter, or a prompter
  * function which the calling application has specified when calling lu_start() or lu_set_prompter().  Note that whether or not
  * group passwords are supported at all depends entirely on which authentication modules are being used.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 gboolean
 lu_group_setpass(struct lu_context *context, struct lu_ent *ent, const char *password, struct lu_error **error)
@@ -1155,15 +1177,15 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 
 /**
  * lu_users_enumerate:
- * @context: A library context.
- * @pattern: A glob-style pattern which the library will match user names against before returning them.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param pattern A glob-style pattern which the library will match user names against before returning them.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
- * The lu_users_enumerate() function will query loaded modules for a list of users who match the given @pattern and return
+ * The lu_users_enumerate() function will query loaded modules for a list of users who match the given @a pattern and return
  * the answers as a #GList.
  *
- * Returns: A #GList which must be freed by calling g_list_free().
+ * @return A #GList which must be freed by calling g_list_free().
  **/
 GList *
 lu_users_enumerate(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
@@ -1174,15 +1196,15 @@ lu_users_enumerate(struct lu_context *context, const char *pattern, const char *
 
 /**
  * lu_groups_enumerate:
- * @context: A library context.
- * @pattern: A glob-style pattern which the library will match group names against before returning them.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param pattern A glob-style pattern which the library will match group names against before returning them.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * The lu_groups_enumerate() function will query loaded modules for a list of groups who match the given @pattern and return
  * the answers as a #GList.
  *
- * Returns: A #GList which must be freed by calling g_list_free().
+ * @return A #GList which must be freed by calling g_list_free().
  */
 GList *
 lu_groups_enumerate(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
@@ -1204,15 +1226,15 @@ lu_enumerate_users_by_group(gpointer key, gpointer value, gpointer cbdata)
 
 /**
  * lu_users_enumerate_by_group:
- * @context: A library context.
- * @group: The name or GID (in string form) of the group we need a list of members from.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param group The name or GID (in string form) of the group we need a list of members from.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * The lu_users_enumerate_by_group() function will query loaded modules for a list of users in the named group, either because
  * it is a user's primary group, or through supplemental membership.
  *
- * Returns: A #GList which must be freed by calling g_list_free().
+ * @return A #GList which must be freed by calling g_list_free().
  */
 GList *
 lu_users_enumerate_by_group(struct lu_context *context, const char *group, const char *module, struct lu_error **error)
@@ -1270,15 +1292,15 @@ lu_enumerate_groups_by_user(gpointer key, gpointer value, gpointer cbdata)
 
 /**
  * lu_groups_enumerate_by_user:
- * @context: A library context.
- * @group: The name or UID (in string form) of the user we need a list of groups for.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param group The name or UID (in string form) of the user we need a list of groups for.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * The lu_groups_enumerate_by_user() function will query loaded modules for a list of groups a user is in, either because
  * it is the user's primary group, or through supplemental memberships.
  *
- * Returns: A #GList which must be freed by calling g_list_free().  The primary group will be listed first.
+ * @return A #GList which must be freed by calling g_list_free().  The primary group will be listed first.
  */
 GList *
 lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const char *module, struct lu_error **error)
@@ -1349,15 +1371,15 @@ lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const 
 
 /**
  * lu_users_enumerate_all:
- * @context: A library context.
- * @pattern: A glob-style pattern which the library will match user names against before returning them.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param pattern A glob-style pattern which the library will match user names against before returning them.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * The lu_users_enumerate_all() function will query loaded modules for a list of users who match the given @pattern and return
  * the answers as a #GList of #lu_ent structures.
  *
- * Returns: A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
+ * @return A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
  */
 GList *
 lu_users_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
@@ -1368,15 +1390,15 @@ lu_users_enumerate_all(struct lu_context *context, const char *pattern, const ch
 
 /**
  * lu_groups_enumerate_all:
- * @context: A library context.
- * @pattern: A glob-style pattern which the library will match group names against before returning them.
- * @module: The name of a module which will be queried specifically.
- * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ * @param context A library context.
+ * @param pattern A glob-style pattern which the library will match group names against before returning them.
+ * @param module The name of a module which will be queried specifically.
+ * @param error A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
  *
  * The lu_groups_enumerate_all() function will query loaded modules for a list of groups who match the given @pattern and return
  * the answers as a #GList of #lu_ent structures.
  *
- * Returns: A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
+ * @return A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
  */
 GList *
 lu_groups_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)

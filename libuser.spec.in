@@ -32,6 +32,9 @@ files useful for developing applications with libuser.
 %configure
 make
 make -C docs/sgml
+make -C generated_docs/latex refman.ps
+rm -f generated_docs/latex/refman.ps.bz2
+bzip2 generated_docs/latex/refman.ps
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -61,6 +64,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files devel
 %defattr(-,root,root)
+%doc generated_docs/html generated_docs/latex/refman.ps.bz2
 %attr(0755,root,root) %dir %{_includedir}/libuser
 %attr(0644,root,root) %{_includedir}/libuser/*
 %attr(0644,root,root) %{_libdir}/libuser.a
@@ -77,6 +81,7 @@ rm -fr $RPM_BUILD_ROOT
 - HUP nscd on modifications
 - userutil.c: mmap files we're reading for probable speed gain
 - userutil.c: be conservative with the amount of random data we read
+- docs fixes
 
 * Wed Aug 15 2001 Nalin Dahyabhai <nalin@redhat.com> 0.28-1
 - apps: print usage on errors

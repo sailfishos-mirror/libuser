@@ -27,8 +27,12 @@
 #include <string.h>
 #include "../include/libuser/user_private.h"
 
-#define DEFAULT_ID 100
+/** The default user and group ID to use if none is given in the configuration file. */
+#define DEFAULT_ID 500
+
 #undef  DEBUG
+
+/** @file userent.c */
 
 static int
 dump_attribute(gpointer key, gpointer value, gpointer data)
@@ -52,13 +56,13 @@ lu_ent_dump(struct lu_ent *ent)
 
 /**
  * lu_get_free_id:
- * @ctx: A library context.
- * @type: An indicator of whether the application needs an unused UID or GID.
- * @id: An initial guess at what the returned ID might be.
+ * @param ctx A library context.
+ * @param type An indicator of whether the application needs an unused UID or GID.
+ * @param id An initial guess at what the returned ID might be.
  *
  * The lu_get_free_id() function returns an unused UID or GID, using @id as a first guess at what a free ID might be.
  *
- * Returns: a UID or GID if one is found, 0 on failure.
+ * @return a UID or GID if one is found, 0 on failure.
  **/
 static glong
 lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
@@ -140,7 +144,7 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
  *
  * This function creates and returns a new entity structure, suitable for passing into other functions provided by the library.
  *
- * Returns: a new entity structure.
+ * @return a new entity structure.
  **/
 struct lu_ent *
 lu_ent_new()
@@ -157,14 +161,14 @@ lu_ent_new()
 
 /**
  * lu_ent_set_source_auth:
- * @ent: An entity structure.
- * @source: The name of a module which should be taken as authoritative for authentication information pertaining to the user
+ * @param ent An entity structure.
+ * @param source The name of a module which should be taken as authoritative for authentication information pertaining to the user
  * or group described by the entity structure.
  *
  * This function can be used to override the data store where authentication information for a user or group will subsequently
  * be recorded.  This function should only be used with great care, for careless use will disrupt the integrity of data stores.
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_ent_set_source_auth(struct lu_ent *ent, const char *source)
@@ -180,14 +184,14 @@ lu_ent_set_source_auth(struct lu_ent *ent, const char *source)
 
 /**
  * lu_ent_set_source_info:
- * @ent: An entity structure.
- * @source: The name of a module which should be taken as authoritative for information pertaining to the user or group
+ * @param ent An entity structure.
+ * @param source The name of a module which should be taken as authoritative for information pertaining to the user or group
  * described by the entity structure.
  *
  * This function can be used to override the data store where information for a user or group will subsequently be recorded.
  * This function should only be used with great care, for careless use will disrupt the integrity of data stores.
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_ent_set_source_info(struct lu_ent *ent, const char *source)
@@ -233,13 +237,13 @@ copy_list(gpointer key, gpointer value, gpointer data)
 
 /**
  * lu_ent_revert:
- * @source: An entity whose attribute values should be reset to those returned by the last lookup performed with the structure
+ * @param source An entity whose attribute values should be reset to those returned by the last lookup performed with the structure
  * or when the structure was first created.
  *
  * This function can be used to undo changes to the in-memory structure which is used for storing information about users and
  * groups.
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_ent_revert(struct lu_ent *source)
@@ -249,13 +253,13 @@ lu_ent_revert(struct lu_ent *source)
 
 /**
  * lu_ent_copy:
- * @source: An entity object, the contents of which should be copied to @dest.
- * @dest: An entity object which will be modified to resemble the @source object.
+ * @param source An entity object, the contents of which should be copied to @dest.
+ * @param dest An entity object which will be modified to resemble the @source object.
  *
  * This function can be used to create a temporary copy of an entity structure which can be manipulated without changes being
  * made the an original.
  *
- * Returns: void
+ * @return void
  **/
 void
 lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
@@ -392,15 +396,15 @@ lu_default(struct lu_context *context, const char *name,
 
 /**
  * lu_user_default:
- * @context: A library context.
- * @name: A name for the new user.
- * @system: Specifies whether or not this will be a "system" account.
- * @ent: An entity structure which will contain information suitable for passing to lu_user_add().
+ * @param context A library context.
+ * @param name A name for the new user.
+ * @param system Specifies whether or not this will be a "system" account.
+ * @param ent An entity structure which will contain information suitable for passing to lu_user_add().
  *
  * This function seeds an entity structure with the given name, allocates an unused UID using lu_get_free_id(), and sets
  * defaults necessary to create a well-formed user account.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_user_default(struct lu_context *context, const char *name, gboolean system, struct lu_ent *ent)
@@ -412,15 +416,15 @@ lu_user_default(struct lu_context *context, const char *name, gboolean system, s
 
 /**
  * lu_group_default:
- * @context: A library context.
- * @name: A name for the new group.
- * @system: Specifies whether or not this will be a "system" account.
- * @ent: An entity structure which will contain information suitable for passing to lu_group_add().
+ * @param context A library context.
+ * @param name A name for the new group.
+ * @param system Specifies whether or not this will be a "system" account.
+ * @param ent An entity structure which will contain information suitable for passing to lu_group_add().
  *
  * This function seeds an entity structure with the given name, allocates an unused GID using lu_get_free_id(), and sets
  * defaults necessary to create a well-formed group account.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_group_default(struct lu_context *context, const char *name, gboolean system, struct lu_ent *ent)
@@ -432,11 +436,11 @@ lu_group_default(struct lu_context *context, const char *name, gboolean system, 
 
 /**
  * lu_ent_free:
- * @ent: An entity structure which will be destroyed.
+ * @param ent An entity structure which will be destroyed.
  *
  * This function destroys an entity structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_free(struct lu_ent *ent)
@@ -456,13 +460,13 @@ lu_ent_free(struct lu_ent *ent)
 
 /**
  * lu_ent_set_original:
- * @ent: An entity structure which will be modified.
- * @attr: The attribute of the entity structure which will have its original value replaced.
- * @val: A new value for the attribute.
+ * @param ent An entity structure which will be modified.
+ * @param attr The attribute of the entity structure which will have its original value replaced.
+ * @param val A new value for the attribute.
  *
  * This function modifies original copy of the given attribute of a structure so that it is equal to @val.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
@@ -475,13 +479,13 @@ lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
 
 /**
  * lu_ent_set_numeric_original:
- * @ent: An entity structure which will be modified.
- * @attr: The attribute of the entity structure whose original value will be replaced.
- * @val: A new value for the attribute.
+ * @param ent An entity structure which will be modified.
+ * @param attr The attribute of the entity structure whose original value will be replaced.
+ * @param val A new value for the attribute.
  *
  * This function modifies the original value of the given attribute of a structure so that it is equal to @val.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr, long val)
@@ -493,13 +497,13 @@ lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr, long val)
 
 /**
  * lu_ent_set:
- * @ent: An entity structure which will be modified.
- * @attr: The attribute of the entity structure which will be replaced.
- * @val: A new value for the attribute.
+ * @param ent An entity structure which will be modified.
+ * @param attr The attribute of the entity structure which will be replaced.
+ * @param val A new value for the attribute.
  *
  * This function modifies the given attribute of a structure so that it is equal to @val.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
@@ -512,13 +516,13 @@ lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
 
 /**
  * lu_ent_set_numeric:
- * @ent: An entity structure which will be modified.
- * @attr: The attribute of the entity structure which will be replaced.
- * @val: A new value for the attribute.
+ * @param ent An entity structure which will be modified.
+ * @param attr The attribute of the entity structure which will be replaced.
+ * @param val A new value for the attribute.
  *
- * This function modifies the given attribute of a structure so that it is equal to @val.
+ * This function modifies the given attribute of a structure so that it is equal to @param val.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_set_numeric(struct lu_ent *ent, const char *attr, long val)
@@ -538,12 +542,12 @@ get_hash_keys(gpointer key, gpointer value, gpointer data)
 
 /**
  * lu_ent_has:
- * @ent: An entity structure which will be queried.
- * @attribute: The attribute which we are checking the entity for values for.
+ * @param ent An entity structure which will be queried.
+ * @param attribute The attribute which we are checking the entity for values for.
  *
  * This function returns a boolean indicating whether or not the entity has values for a particular attribute.
  *
- * Returns: TRUE if there is a value, FALSE if there is not.
+ * @return TRUE if there is a value, FALSE if there is not.
  **/
 gboolean
 lu_ent_has(struct lu_ent *ent, const char *attribute)
@@ -554,11 +558,11 @@ lu_ent_has(struct lu_ent *ent, const char *attribute)
 
 /**
  * lu_ent_get_attributes:
- * @ent: An entity structure which will be queried.
+ * @param ent An entity structure which will be queried.
  *
  * This function returns a list of the attributes for which the entity structure has values defined.
  *
- * Returns: A #GList which should be freed with g_list_free().
+ * @return A #GList which should be freed with g_list_free().
  **/
 GList *
 lu_ent_get_attributes(struct lu_ent *ent)
@@ -571,11 +575,11 @@ lu_ent_get_attributes(struct lu_ent *ent)
 
 /**
  * lu_ent_clear_all:
- * @ent: An entity structure which will be reset to a blank state, as it was when it was first allocated.
+ * @param ent An entity structure which will be reset to a blank state, as it was when it was first allocated.
  *
  * This function clears all values for all attributes this entity structure has.
  *
- * Returns: nothing.
+ * @return nothing.
  */
 void
 lu_ent_clear_all(struct lu_ent *ent)
@@ -591,12 +595,12 @@ lu_ent_clear_all(struct lu_ent *ent)
 
 /**
  * lu_ent_get:
- * @ent: An entity structure which will be queried.
- * @attr: The attribute of the structure which will be queried.
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be queried.
  *
  * This function returns a list of the values for the named attribute of the entity structure.
  *
- * Returns: A #GList which must be freed by calling g_list_free().
+ * @return A #GList which must not be freed.
  **/
 GList *
 lu_ent_get(struct lu_ent *ent, const char *attr)
@@ -606,6 +610,15 @@ lu_ent_get(struct lu_ent *ent, const char *attr)
 	return g_tree_lookup(ent->attributes, ent->acache->cache(ent->acache, attr));
 }
 
+/**
+ * lu_ent_get_original:
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be queried.
+ *
+ * This function returns a list of the original values for the named attribute of the entity structure.
+ *
+ * @return A #GList which must not be freed.
+ **/
 GList *
 lu_ent_get_original(struct lu_ent *ent, const char *attr)
 {
@@ -645,13 +658,13 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GTree *tree,
 
 /**
  * lu_ent_add:
- * @ent: An entity structure which will be queried.
- * @attr: The attribute of the structure which will be modified.
- * @val: The value which will be added to the structure's list of values for the named attribute.
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be modified.
+ * @param val The value which will be added to the structure's list of values for the named attribute.
  *
  * This function adds a single value to the list of the values of the named attribute contained in the entity structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_add(struct lu_ent *ent, const char *attr, const char *val)
@@ -659,6 +672,16 @@ lu_ent_add(struct lu_ent *ent, const char *attr, const char *val)
 	lu_ent_addx(ent, lu_ent_get, ent->attributes, attr, val);
 }
 
+/**
+ * lu_ent_add_original:
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be modified.
+ * @param val The value which will be added to the structure's list of original values for the named attribute.
+ *
+ * This function adds a single value to the list of original values of the named attribute contained in the entity structure.
+ *
+ * @return TRUE on success, FALSE on failure.
+ **/
 void
 lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val)
 {
@@ -667,13 +690,13 @@ lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val)
 
 /**
  * lu_ent_del:
- * @ent: An entity structure which will be queried.
- * @attr: The attribute of the structure which will be modified.
- * @val: The value which will be removed from the structure's list of values for the named attribute.
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be modified.
+ * @param val The value which will be removed from the structure's list of values for the named attribute.
  *
  * This function removes a single value from the list of the values of the named attribute contained in the entity structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
@@ -697,12 +720,12 @@ lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 
 /**
  * lu_ent_clear:
- * @ent: An entity structure which will be queried.
- * @attr: The attribute of the structure which will be removed.
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be removed.
  *
  * This function removes all values of the named attribute contained in the entity structure.
  *
- * Returns: TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  **/
 void
 lu_ent_clear(struct lu_ent *ent, const char *attr)
@@ -722,6 +745,15 @@ lu_ent_clear(struct lu_ent *ent, const char *attr)
 	g_list_free(tmp);
 }
 
+/**
+ * lu_ent_clear_original:
+ * @param ent An entity structure which will be queried.
+ * @param attr The attribute of the structure which will be removed.
+ *
+ * This function removes all original values for a given attribute from the entity structure.
+ *
+ * @return nothing.
+ **/
 void
 lu_ent_clear_original(struct lu_ent *ent, const char *attr)
 {

@@ -41,7 +41,7 @@ typedef struct lu_prompt {
 	const char *default_value;
  	/** The user's response. */
 	char *value;
- 	/** A function which can free the value. */
+ 	/** A function which can free the user's response. */
 	void(*free_value)(char *);
 } lu_prompt_t;
 

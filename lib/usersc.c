@@ -23,6 +23,7 @@
 #include <string.h>
 #include "../include/libuser/user_private.h"
 
+/** @file usersc.c */
 /* Cache a string.  We do this so that we only have to keep track of one
    pointer to it, and we have a well-defined time when it will be freed.
    This may all be replaced by GQuark-based stuff when glib-2.0 is released. */
@@ -77,10 +78,10 @@ lu_string_cache_free(struct lu_string_cache *cache)
 
 /**
  * lu_string_cache_new:
- * case_sensitive: A #boolean indicating whether or not the new cache should be sensitive to case.
+ * @param case_sensitive A #boolean indicating whether or not the new cache should be sensitive to case.
  *
  * Creates and returns a new string cache, which may or may not be case-sensitive.
- *
+ * @return A new string cache.
  **/
 struct lu_string_cache *
 lu_string_cache_new(gboolean case_sensitive)

@@ -6,7 +6,7 @@ dist-hook:
 	make -f Makefile.in -C po Makefile
 
 doc:
-	doxygen libuser.g
+	doxygen libuser.g 2> doxygen.out
 
 VERSION=$(shell awk '/Version:/ { print $$2 }' libuser.spec)
 RELEASE=$(shell awk '/Release:/ { print $$2 }' libuser.spec)

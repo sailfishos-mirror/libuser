@@ -38,6 +38,10 @@
 #define LU_MAX_LOCK_ATTEMPTS 30
 #include "../include/libuser/user_private.h"
 
+/** @file userutil.c */
+
+/** A function which returns non-zero if the strings are equal, and
+  * zero if they are unequal.  Case-insensitive version. */
 gint
 lu_str_case_equal(gconstpointer v1, gconstpointer v2)
 {
@@ -46,6 +50,8 @@ lu_str_case_equal(gconstpointer v1, gconstpointer v2)
 	return g_strcasecmp((char*)v1, (char*)v2) == 0;
 }
 
+/** A function which returns non-zero if the strings are equal, and
+  * zero if they are unequal.  Case-sensitive version. */
 gint
 lu_str_equal(gconstpointer v1, gconstpointer v2)
 {
@@ -54,6 +60,7 @@ lu_str_equal(gconstpointer v1, gconstpointer v2)
 	return strcmp((char*)v1, (char*)v2) == 0;
 }
 
+/** A wrapper for strcasecmp(). */
 gint
 lu_strcasecmp(gconstpointer v1, gconstpointer v2)
 {
@@ -62,6 +69,7 @@ lu_strcasecmp(gconstpointer v1, gconstpointer v2)
 	return g_strcasecmp((char*)v1, (char*)v2);
 }
 
+/** A wrapper for strcmp(). */
 gint
 lu_strcmp(gconstpointer v1, gconstpointer v2)
 {
@@ -70,7 +78,10 @@ lu_strcmp(gconstpointer v1, gconstpointer v2)
 	return strcmp((char*)v1, (char*)v2);
 }
 
+/** A list of disallowed salt characters, if we're violating SUSv2 by allowing
+  * more characters to be salt characters. */
 #define UNACCEPTABLE "!*:$,"
+/** A list of allowed salt characters, according to SUSv2. */
 #define ACCEPTABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
 		   "abcdefghijklmnopqrstuvwxyz" \
 		   "./0123456789"
@@ -111,12 +122,12 @@ fill_urandom(char *output, size_t length)
 
 /**
  * lu_make_crypted:
- * @plain: A password.
- * @previous: An optional salt to use, which also indicates the crypt() variation to be used.
+ * @param plain A password.
+ * @param previous An optional salt to use, which also indicates the crypt() variation to be used.
  *
  * Generates a hashed version of @plain by calling the crypt() function, using the hashing method specified in @previous.
  *
- * Returns: a static global string which must not be freed.
+ * @return a static global string which must not be freed.
  */
 const char *
 lu_make_crypted(const char *plain, const char *previous)
@@ -158,11 +169,11 @@ lu_make_crypted(const char *plain, const char *previous)
 
 /**
  * lu_util_lock_obtain:
- * @fd: An open file descriptor.
+ * @param fd An open file descriptor.
  *
  * Locks the passed-in descriptor for writing, and returns an opaque lock pointer if the lock succeeds.
  * 
- * Returns: an opaque lock pointer if locking succeeds, NULL on failure.
+ * @return an opaque lock pointer if locking succeeds, NULL on failure.
  */
 gpointer
 lu_util_lock_obtain(int fd, struct lu_error **error)
@@ -201,12 +212,12 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 
 /**
  * lu_util_lock_free:
- * @fd: An open file descriptor.
- * @lock: A lock returned by a previous call to lu_util_lock_obtain().
+ * @param fd An open file descriptor.
+ * @param lock A lock returned by a previous call to lu_util_lock_obtain().
  *
  * Unlocks a file.
  * 
- * Returns: void
+ * @return void
  */
 void
 lu_util_lock_free(int fd, gpointer lock)
@@ -312,11 +323,11 @@ lu_util_line_get_matching3(int fd, const char *part, struct lu_error **error)
 
 /**
  * lu_strv_len:
- * @v: an array of strings
+ * @param v an array of strings
  *
  * Count the length of an array of strings.
  * 
- * Returns: the number of elements in the array, or 0 if @v is NULL.
+ * @return the number of elements in the array, or 0 if @v is NULL.
  */
 guint
 lu_strv_len(gchar **v)
@@ -329,13 +340,13 @@ lu_strv_len(gchar **v)
 
 /**
  * lu_util_field_read:
- * @fd: Descriptor of open, locked file.
- * @first: Contents of the first field to match the right line with.
- * @field: The number of the field.  Minimum is 1.
+ * @param fd Descriptor of open, locked file.
+ * @param first Contents of the first field to match the right line with.
+ * @param field The number of the field.  Minimum is 1.
  *
  * Read the nth colon-separated field on the line which has first as its first field.
  *
- * Returns: An allocated string which must be freed with g_free().
+ * @return An allocated string which must be freed with g_free().
  */
 char *
 lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_error **error)
@@ -441,14 +452,14 @@ lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_erro
 
 /**
  * lu_util_field_write:
- * @fd: Descriptor of open, locked file.
- * @first: Contents of the first field to match the right line with.
- * @field: The number of the field.  Minimum is 1.
- * @value: The new value for the field.
+ * @param fd Descriptor of open, locked file.
+ * @param first Contents of the first field to match the right line with.
+ * @param field The number of the field.  Minimum is 1.
+ * @param value The new value for the field.
  *
  * Modify the nth colon-separated field on the line which has first as its first field.
  *
- * Returns: A boolean indicating success or failure.
+ * @return A boolean indicating success or failure.
  */
 gboolean
 lu_util_field_write(int fd, const char *first, unsigned int field, const char *value, struct lu_error **error)
@@ -574,6 +585,13 @@ lu_util_field_write(int fd, const char *first, unsigned int field, const char *v
 	return ret;
 }
 
+/**
+ * lu_util_shadow_current_date:
+ * @param cache A string cache where the returned string will be stored.
+ *
+ * @return A shadow-style version of today's date (i.e., formatted as the
+ * number of days which have passed since 1 January 1970).
+ */
 char *
 lu_util_shadow_current_date(struct lu_string_cache *cache)
 {

@@ -28,6 +28,8 @@
 #include <fcntl.h>
 #include "../include/libuser/user_private.h"
 
+/** @file usercfg.c */
+
 struct config_config {
 	struct lu_string_cache *cache;
 	char *data;
@@ -148,13 +150,13 @@ process_line(char *line, struct lu_string_cache *cache, char **section, char **k
 
 /**
  * lu_cfg_read:
- * @context: A valid library context.
- * @key: A hierarchical name for the setting being queried.
- * @default_value: A default value which will be returned in the @key is not found.  It may be #NULL.
+ * @param context A valid library context.
+ * @param key A hierarchical name for the setting being queried.
+ * @param default_value A default value which will be returned in the @key is not found.  It may be #NULL.
  *
  * Reads the values of a configuration setting from libuser's configuration settings (wherever they may be).
  *
- * Returns: A #GList of strings.
+ * @return A #GList of strings.
  **/
 GList *
 lu_cfg_read(struct lu_context *context, const char *key, const char *default_value)
@@ -204,12 +206,12 @@ lu_cfg_read(struct lu_context *context, const char *key, const char *default_val
 
 /**
  * lu_cfg_read_keys:
- * @context: A valid library context.
- * @parent_key: A hierarchical name for the setting whose children are being queried.
+ * @param context A valid library context.
+ * @param parent_key A hierarchical name for the setting whose children are being queried.
  *
  * Reads the values of a configuration setting on the level of the configuration hierarchy immediately below the @parent_key.
  *
- * Returns: A #GList of strings.
+ * @return A #GList of strings.
  **/
 GList *
 lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
@@ -245,13 +247,13 @@ lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
 
 /**
  * lu_cfg_read_single:
- * @context: A valid library context.
- * @key: A hierarchical name for the setting being queried.
- * @default_value: A default value which will be returned in the @key is not found.  It may be #NULL.
+ * @param context A valid library context.
+ * @param key A hierarchical name for the setting being queried.
+ * @param default_value A default value which will be returned in the @key is not found.  It may be #NULL.
  *
  * Reads the values of a named configuration setting.
  *
- * Returns: A single string containing any of the values the @key contains, or the @default_value if none are found.
+ * @return A single string containing any of the values the @key contains, or the @default_value if none are found.
  **/
 const char *
 lu_cfg_read_single(struct lu_context *context, const char *key, const char *default_value)

@@ -30,6 +30,8 @@
 #include <string.h>
 #include "../include/libuser/user.h"
 
+/** @file usererr.c */
+
 static const char *
 lu_strerror(enum lu_error_code code)
 {
@@ -82,13 +84,13 @@ lu_strerror(enum lu_error_code code)
 
 /**
  * lu_error_new:
- * error: A pointer to a pointer to a #lu_error_t which will be used to hold information about this error.
- * code: An #lu_error_code describing the error.
- * desc: A format string (followed by arguments) giving a more detailed description of the error.  May be #NULL.
+ * @param error A pointer to a pointer to a #lu_error_t which will be used to hold information about this error.
+ * @param code An #lu_error_code describing the error.
+ * @param desc A format string (followed by arguments) giving a more detailed description of the error.  May be #NULL.
  *
  * This function sets an #lu_error_t pointer to a value which can be passed up to a calling function.
  *
- * Returns: nothing.
+ * @return nothing.
  **/
 void
 lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc, ...)
@@ -113,11 +115,11 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 
 /**
  * lu_error_free:
- * error: A pointer to a pointer to a #lu_error_t which must be cleared.
+ * @param error A pointer to a pointer to a #lu_error_t which must be cleared.
  *
  * This function clears an #lu_error_t pointer.
  *
- * Returns: nothing.
+ * @return nothing.
  **/
 void
 lu_error_free(struct lu_error **error)
