@@ -336,8 +336,8 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
 	 * don't really care about. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
-					 &EntityType, &ent, &garbage)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords,
+					 &EntityType, &ent)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -376,8 +376,8 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
 	 * don't really care about. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
-					 &EntityType, &ent, &garbage)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords,
+					 &EntityType, &ent)) {
 		DEBUG_EXIT;
 	}
 	/* Run the function. */
@@ -703,9 +703,7 @@ libuser_admin_modify_user(PyObject *self, PyObject *args,
 			subargs = PyTuple_New(1);
 			PyTuple_SetItem(subargs, 0, ent);
 			subkwargs = PyDict_New();
-			ret =
-			    libuser_admin_move_home(self, subargs,
-						    subkwargs);
+			ret = libuser_admin_move_home(self, subargs, subkwargs);
 		}
 	}
 
@@ -906,7 +904,7 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 	char *module = NULL, *group = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
-	char *keywords[] = { "group", "module", NULL };
+	char *keywords[] = { "group", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
@@ -932,7 +930,7 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 	char *module = NULL, *user = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
-	char *keywords[] = { "user", "module", NULL };
+	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
@@ -1026,7 +1024,7 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 	char *module = NULL, *group = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
-	char *keywords[] = { "group", "module", NULL };
+	char *keywords[] = { "group", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 	int i;
 
@@ -1057,7 +1055,7 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	char *module = NULL, *user = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
-	char *keywords[] = { "user", "module", NULL };
+	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 	int i;
 

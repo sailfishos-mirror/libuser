@@ -6,8 +6,6 @@
 #define FIXME fprintf(stderr, "Function %s not implemented.\n", __FUNCTION__); \
 return NULL;
 
-#define DEBUG
-
 #undef  DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING

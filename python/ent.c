@@ -298,7 +298,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 	DEBUG_ENTRY;
 
 	/* We expect a string and some kind of object. */
-	if (PyArg_ParseTuple(args, "sO!", &attr, &list, &PyList_Type)) {
+	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
 		/* It's a list. */
 		size = PyList_Size(list);
 #ifdef DEBUG_BINDING
