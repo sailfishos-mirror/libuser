@@ -61,6 +61,10 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
+* Wed Jan 10 2001 Nalin Dahyabhai <nalin@redhat.com>
+- the great adding-of-the-copyright-statements
+- take more care when creating backup files in the files module
+
 * Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com>
 - add openldap-devel as a buildprereq
 - krb5: use a continuous connection

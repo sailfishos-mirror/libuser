@@ -1,12 +1,23 @@
 Easy:
-* Get SASL binds working with LDAP.
+* Add non-administrator startup support to the LDAP and Kerberos modules.
+  The LDAP module should try to bind to the user or group's object using
+  context->auth_name, and Kerberos should connect to the password-changing
+  service instead.
 
 Medium:
-* Implement account locking in LDAP and Kerberos 5.
+* Implement account locking in LDAP.
+* Rework LDAP module lu_ent to LDAPMod mapping to just include additions and
+  deletions instead of wholesale modifies, which may run afoul of server
+  access controls.
 * Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod.
-* Write an NIS back-end to interface with yppasswdd.
+* Create variants of the apps that are hard-coded to use files only, for
+  use in batch environments like post-package-install.
+* Write an NIS back-end using yp_update functionality in glibc, maybe
+  using the routines declared in /usr/include/rpcsvc/ypupd.h
+* Write man pages.
 
 Hard:
+* Write a RADIUS back-end.
 * Add the -m (move home directory) flag to usermod.
 * Add the -r option to luserdel.
 * Add creation and population of home directories to lusermod.

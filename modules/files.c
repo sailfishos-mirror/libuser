@@ -1,13 +1,35 @@
+/* Copyright (C) 2000,2001 Red Hat, Inc.
+ *
+ * This is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Library General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#ident "$Id$"
+
 #include <libuser/user_private.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include "util.h"
+
+/* We define __USE_GNU to get a definition for O_NOFOLLOW. */
+#define __USE_GNU
+#include <fcntl.h>
 
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
@@ -35,7 +57,8 @@ lu_files_create_backup(const char *filename)
 	}
 
 	backupname = g_strconcat(filename, "-", NULL);
-	ofd = open(backupname, O_WRONLY | O_CREAT, ist.st_mode);
+	ofd = open(backupname, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW,
+		   ist.st_mode);
 	if(ofd == -1) {
 		g_warning(_("Couldn't create '%s'.\n"), backupname);
 		g_free(backupname);
@@ -44,7 +67,8 @@ lu_files_create_backup(const char *filename)
 	}
 
 	if((fstat(ofd, &ost) == -1) || !S_ISREG(ost.st_mode)) {
-		g_warning(_("Couldn't stat '%s'.\n"), backupname);
+		g_warning(_("Couldn't stat or invalid permissions on '%s'.\n"),
+			  backupname);
 		g_free(backupname);
 		close(ofd);
 		return FALSE;
