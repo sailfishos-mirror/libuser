@@ -74,6 +74,9 @@ void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
  * us the ability to roll back changes. */
 void lu_ent_revert(struct lu_ent *ent);
 
+/* This function rolls changes forward. */
+void lu_ent_commit(struct lu_ent *ent);
+
 /* These functions are used to set and query "current" data attributes, the
  * values the library itself usually sets. */
 GValueArray *lu_ent_get_current(struct lu_ent *ent, const char *attribute);

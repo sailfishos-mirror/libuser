@@ -112,7 +112,7 @@ lu_get_first_unused_id(struct lu_context *ctx,
 		       glong id)
 {
 	struct lu_ent *ent;
-	char buf[LINE_MAX];
+	char buf[LINE_MAX * 4];
 
 	g_return_val_if_fail(ctx != NULL, -1);
 
@@ -124,9 +124,10 @@ lu_get_first_unused_id(struct lu_context *ctx,
 			/* There may be read-only sources of user information
 			 * on the system, and we want to avoid allocating an ID
 			 * that's already in use by a service we can't write
-			 * to, so check with NSS first. */
-			getpwuid_r(id, &pwd, buf, sizeof(buf), &err);
-			if (err == &pwd) {
+			 * to, so check with NSS first.  FIXME: use growing
+			 * buffers here. */
+			if ((getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0) &&
+			    (err == &pwd)) {
 				id++;
 				continue;
 			}
@@ -233,6 +234,12 @@ lu_ent_revert(struct lu_ent *entity)
 }
 
 void
+lu_ent_commit(struct lu_ent *entity)
+{
+	copy_attributes(entity->pending, entity->current);
+}
+
+void
 lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 {
 	g_return_if_fail(source != NULL);
@@ -257,6 +264,8 @@ lu_ent_get_int(GArray *list, const char *attribute)
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
 			if (attr->name == aquark) {
+				g_assert(attr->values != NULL);
+				g_assert(attr->values->n_values > 0);
 				return attr->values;
 			}
 		}

@@ -20,6 +20,9 @@
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
+#include <sys/types.h>
+#include <grp.h>
+#include <pwd.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +31,8 @@
 #include "misc.h"
 #include "modules.h"
 #include "util.h"
+
+#define INVALID (-0x80000000)
 
 enum lu_dispatch_id {
 	uses_elevated_privileges = 0x0003,
@@ -144,6 +149,76 @@ lu_end(struct lu_context *context)
 	memset(context, 0, sizeof(struct lu_context));
 
 	g_free(context);
+}
+
+static const char *
+extract_name(struct lu_ent *ent)
+{
+	GValueArray *array;
+	GValue *value;
+	g_return_val_if_fail(ent != NULL, NULL);
+	array = lu_ent_get(ent,
+			   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
+	g_return_val_if_fail(array != NULL, NULL);
+	value = g_value_array_get_nth(array, 0);
+	g_return_val_if_fail(value != NULL, NULL);
+	return g_value_get_string(value);
+}
+
+static long
+extract_id(struct lu_ent *ent)
+{
+	GValueArray *array;
+	GValue *value;
+	g_return_val_if_fail(ent != NULL, INVALID);
+	array = lu_ent_get(ent,
+			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
+	g_return_val_if_fail(array != NULL, INVALID);
+	value = g_value_array_get_nth(array, 0);
+	g_return_val_if_fail(value != NULL, INVALID);
+	return g_value_get_long(value);
+}
+
+static long
+convert_user_name_to_id(struct lu_context *context, const char *sdata)
+{
+	struct lu_ent *ent;
+	long ret = INVALID;
+	char buf[LINE_MAX * 4];
+	struct passwd *err, passwd;
+	struct lu_error *error = NULL;
+	if ((getpwnam_r(sdata, &passwd, buf, sizeof(buf), &err) == 0) &&
+	    (err == &passwd)) {
+		ret = passwd.pw_uid;
+		return ret;
+	}
+	ent = lu_ent_new();
+	if (lu_user_lookup_name(context, sdata, ent, &error) == TRUE) {
+		ret = extract_id(ent);
+	}
+	lu_ent_free(ent);
+	return ret;
+}
+
+static long
+convert_group_name_to_id(struct lu_context *context, const char *sdata)
+{
+	struct lu_ent *ent;
+	long ret = INVALID;
+	char buf[LINE_MAX * 4];
+	struct group *err, group;
+	struct lu_error *error = NULL;
+	if ((getgrnam_r(sdata, &group, buf, sizeof(buf), &err) == 0) &&
+	    (err == &group)) {
+		ret = group.gr_gid;
+		return ret;
+	}
+	ent = lu_ent_new();
+	if (lu_group_lookup_name(context, sdata, ent, &error) == TRUE) {
+		ret = extract_id(ent);
+	}
+	lu_ent_free(ent);
+	return ret;
 }
 
 static gboolean
@@ -300,6 +375,40 @@ logic_or(gboolean a, gboolean b)
 	return a || b;
 }
 
+static void
+remove_duplicate_values(GValueArray *array)
+{
+	int i, j;
+	GValue *ivalue, *jvalue;
+	gboolean same;
+	for (i = 0; i < array->n_values; i++) {
+		ivalue = g_value_array_get_nth(array, i);
+		for (j = i + 1; j < array->n_values; j++) {
+			jvalue = g_value_array_get_nth(array, j);
+			if (G_VALUE_TYPE(ivalue) == G_VALUE_TYPE(jvalue)) {
+				same = FALSE;
+				switch (G_VALUE_TYPE(ivalue)) {
+				case G_TYPE_LONG:
+					same =
+						g_value_get_long(ivalue) ==
+						g_value_get_long(jvalue);
+					break;
+				case G_TYPE_STRING:
+					same =
+						g_quark_from_string(g_value_get_string(ivalue)) ==
+						g_quark_from_string(g_value_get_string(jvalue));
+					break;
+				}
+				if (same) {
+					g_value_array_remove(array, j);
+					j--;
+					continue;
+				}
+			}
+		}
+	}
+}
+
 static gboolean
 run_list(struct lu_context *context,
 	 GValueArray *list,
@@ -385,6 +494,7 @@ run_list(struct lu_context *context,
 					}
 					g_value_array_free(tmp_value_array);
 				}
+				remove_duplicate_values(value_array);
 				*ret = value_array;
 				break;
 			case users_enumerate_full:
@@ -404,6 +514,7 @@ run_list(struct lu_context *context,
 					}
 					g_ptr_array_free(tmp_ptr_array, TRUE);
 				}
+				/* remove_duplicate_ptrs(ptr_array); */
 				*ret = ptr_array;
 				break;
 			case user_lookup_name:
@@ -463,6 +574,10 @@ lu_dispatch(struct lu_context *context,
 	switch (id) {
 	case user_lookup_id:
 	case group_lookup_id:
+		/* Make sure data items are right for this call. */
+		sdata = NULL;
+		g_assert(ldata != INVALID);
+		/* Run the list. */
 		if(run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -490,9 +605,13 @@ lu_dispatch(struct lu_context *context,
 			/* No match on that ID. */
 			break;
 		}
-		/* Fall through on successful ID->name conversion. */
+		/* fall through on successful ID->name conversion */
 	case user_lookup_name:
 	case group_lookup_name:
+		/* Make sure data items are right for this call. */
+		g_assert(sdata != NULL);
+		ldata = INVALID;
+		/* Run the list. */
 		if(run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -505,6 +624,12 @@ lu_dispatch(struct lu_context *context,
 		break;
 	case user_add_prep:
 	case group_add_prep:
+		/* Make sure we have both name and ID here. */
+		sdata = sdata ?: extract_name(tmp);
+		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Run the checks and preps. */
 		if(run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -516,6 +641,12 @@ lu_dispatch(struct lu_context *context,
 		break;
 	case user_add:
 	case group_add:
+		/* Make sure we have both name and ID here. */
+		sdata = sdata ?: extract_name(tmp);
+		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Add the account. */
 		if(run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -529,14 +660,18 @@ lu_dispatch(struct lu_context *context,
 	case user_del:
 	case user_lock:
 	case user_unlock:
-	case user_is_locked:
 	case user_setpass:
 	case group_mod:
 	case group_del:
 	case group_setpass:
 	case group_lock:
 	case group_unlock:
-	case group_is_locked:
+		/* Make sure we have both name and ID here. */
+		sdata = sdata ?: extract_name(tmp);
+		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Make the changes. */
 		g_assert(entity != NULL);
 		if(run_list(context, entity->modules,
 			    logic_and, id,
@@ -545,10 +680,39 @@ lu_dispatch(struct lu_context *context,
 			success = TRUE;
 		}
 		break;
-	case users_enumerate:
+	case user_is_locked:
+	case group_is_locked:
+		/* Make sure we have both name and ID here. */
+		sdata = sdata ?: extract_name(tmp);
+		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Run the checks. */
+		g_assert(entity != NULL);
+		if(run_list(context, entity->modules,
+			    logic_or, id,
+			    sdata, ldata, tmp, &scratch, error)) {
+			lu_ent_copy(tmp, entity);
+			success = TRUE;
+		}
+		break;
 	case users_enumerate_by_group:
-	case groups_enumerate:
 	case groups_enumerate_by_user:
+		/* Make sure we have both name and ID here. */
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		if (id == users_enumerate_by_group) {
+			ldata = convert_group_name_to_id(context, sdata);
+		} else
+		if (id == groups_enumerate_by_user) {
+			ldata = convert_user_name_to_id(context, sdata);
+		} else {
+			g_assert_not_reached();
+		}
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* fall through */
+	case users_enumerate:
+	case groups_enumerate:
+		/* Get the lists. */
 		if(run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, (gpointer*)&values, error)) {
@@ -556,10 +720,23 @@ lu_dispatch(struct lu_context *context,
 			success = TRUE;
 		}
 		break;
-	case users_enumerate_full:
-	case groups_enumerate_full:
 	case users_enumerate_by_group_full:
 	case groups_enumerate_by_user_full:
+		/* Make sure we have both name and ID here. */
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		if (id == users_enumerate_by_group_full) {
+			ldata = convert_group_name_to_id(context, sdata);
+		} else
+		if (id == groups_enumerate_by_user_full) {
+			ldata = convert_user_name_to_id(context, sdata);
+		} else {
+			g_assert_not_reached();
+		}
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* fall through */
+	case users_enumerate_full:
+	case groups_enumerate_full:
+		/* Get the lists. */
 		if(run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, (gpointer*)&ptrs, error)) {
@@ -649,8 +826,11 @@ lu_user_add(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
-	if (lu_dispatch(context, user_add_prep, NULL, 0, ent, NULL, error)) {
-		ret = lu_dispatch(context, user_add, NULL, 0, ent, NULL, error);
+	
+	if (lu_dispatch(context, user_add_prep, NULL, INVALID,
+			ent, NULL, error)) {
+		ret = lu_dispatch(context, user_add, NULL, INVALID,
+				  ent, NULL, error);
 	}
 	return ret;
 }
@@ -661,8 +841,9 @@ lu_group_add(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
-	if (lu_dispatch(context, group_add_prep, NULL, 0, ent, NULL, error)) {
-		ret = lu_dispatch(context, group_add, NULL, 0,
+	if (lu_dispatch(context, group_add_prep, NULL, INVALID,
+			ent, NULL, error)) {
+		ret = lu_dispatch(context, group_add, NULL, INVALID,
 				  ent, NULL, error);
 	}
 	return ret;
@@ -673,7 +854,7 @@ lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_mod, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, user_mod, NULL, INVALID, ent, NULL, error);
 }
 
 gboolean
@@ -681,7 +862,7 @@ lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_mod, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, group_mod, NULL, INVALID, ent, NULL, error);
 }
 
 gboolean
@@ -689,7 +870,7 @@ lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_del, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, user_del, NULL, INVALID, ent, NULL, error);
 }
 
 gboolean
@@ -697,7 +878,7 @@ lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_del, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, group_del, NULL, INVALID, ent, NULL, error);
 }
 
 gboolean
@@ -705,7 +886,7 @@ lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	     struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_lock, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, user_lock, NULL, INVALID, ent, NULL, error);
 }
 
 gboolean
@@ -713,7 +894,8 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_unlock, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, user_unlock, NULL, INVALID,
+			   ent, NULL, error);
 }
 
 gboolean
@@ -721,7 +903,8 @@ lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 		 struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_is_locked, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, user_is_locked, NULL, INVALID,
+			   ent, NULL, error);
 }
 
 gboolean
@@ -730,7 +913,8 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret;
 	LU_ERROR_CHECK(error);
-	ret = lu_dispatch(context, user_setpass, password, 0, ent, NULL, error);
+	ret = lu_dispatch(context, user_setpass, password, INVALID,
+			  ent, NULL, error);
 	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
@@ -749,7 +933,8 @@ lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	      struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_lock, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, group_lock, NULL, INVALID,
+			   ent, NULL, error);
 }
 
 gboolean
@@ -757,7 +942,8 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_unlock, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, group_unlock, NULL, INVALID,
+			   ent, NULL, error);
 }
 
 gboolean
@@ -765,7 +951,8 @@ lu_group_islocked(struct lu_context * context, struct lu_ent * ent,
 		  struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_is_locked, NULL, 0, ent, NULL, error);
+	return lu_dispatch(context, group_is_locked, NULL, INVALID,
+			   ent, NULL, error);
 }
 
 gboolean
@@ -774,7 +961,7 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret;
 	LU_ERROR_CHECK(error);
-	ret = lu_dispatch(context, group_setpass, password, 0,
+	ret = lu_dispatch(context, group_setpass, password, INVALID,
 			  ent, NULL, error);
 	if (ret) {
 		GValue value;
@@ -795,7 +982,7 @@ lu_users_enumerate(struct lu_context * context, const char *pattern,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate, pattern, 0,
+	lu_dispatch(context, users_enumerate, pattern, INVALID,
 		    NULL, (gpointer*)&ret, error);
 	return ret;
 }
@@ -806,7 +993,7 @@ lu_groups_enumerate(struct lu_context * context, const char *pattern,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate, pattern, 0,
+	lu_dispatch(context, groups_enumerate, pattern, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -817,7 +1004,7 @@ lu_users_enumerate_by_group(struct lu_context * context, const char *group,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group, group, 0,
+	lu_dispatch(context, users_enumerate_by_group, group, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -828,7 +1015,7 @@ lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user, user, 0,
+	lu_dispatch(context, groups_enumerate_by_user, user, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -839,7 +1026,7 @@ lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_full, pattern, 0,
+	lu_dispatch(context, users_enumerate_full, pattern, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -850,7 +1037,7 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_full, pattern, 0,
+	lu_dispatch(context, groups_enumerate_full, pattern, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -862,7 +1049,7 @@ lu_users_enumerate_by_group_full(struct lu_context * context,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group_full, pattern, 0,
+	lu_dispatch(context, users_enumerate_by_group_full, pattern, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
@@ -874,7 +1061,7 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user_full, pattern, 0,
+	lu_dispatch(context, groups_enumerate_by_user_full, pattern, INVALID,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }

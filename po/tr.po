@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-14 15:39-0500\n"
+"POT-Creation-Date: 2002-01-14 16:32-0500\n"
 "PO-Revision-Date: 2001-09-06 23:33+300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
