@@ -949,6 +949,137 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 	return ret;
 }
 
+/* Get a list of all users who match a particular pattern. */
+static PyObject *
+libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
+				   PyObject *kwargs)
+{
+	GPtrArray *results;
+	const char *pattern = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = { "pattern", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+	int i;
+
+	DEBUG_ENTRY;
+	/* Expect a possible pattern. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|s", keywords,
+					 &pattern)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	/* Read the list of all users. */
+	results = lu_users_enumerate_full(me->ctx, pattern, &error);
+	/* Convert the list to a PyList. */
+	ret = PyList_New(0);
+	for (i = 0; i < results->len; i++) {
+		PyList_Append(ret,
+			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+	}
+	/* FIXME: free the array? */
+	g_ptr_array_free(results, TRUE);
+	DEBUG_EXIT;
+	return ret;
+}
+
+/* Get a list of all groups. */
+static PyObject *
+libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
+				    PyObject *kwargs)
+{
+	GPtrArray *results;
+	const char *pattern = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = { "pattern", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+	int i;
+
+	DEBUG_ENTRY;
+	/* Possibly expect a pattern. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|s", keywords,
+					 &pattern)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	/* Get the list of groups. */
+	results = lu_groups_enumerate_full(me->ctx, pattern, &error);
+	/* Convert the list to a PyList. */
+	ret = PyList_New(0);
+	for (i = 0; i < results->len; i++) {
+		PyList_Append(ret,
+			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+	}
+	/* FIXME: free the array? */
+	g_ptr_array_free(results, TRUE);
+	DEBUG_EXIT;
+	return ret;
+}
+
+/* Get the list of users who belong to a group. */
+static PyObject *
+libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
+					    PyObject *kwargs)
+{
+	GPtrArray *results;
+	char *module = NULL, *group = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = { "group", "module", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+	int i;
+
+	DEBUG_ENTRY;
+	/* Expect the group's name. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &group)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	/* Get a list of the users in this group. */
+	ret = PyList_New(0);
+	for (i = 0; i < results->len; i++) {
+		PyList_Append(ret,
+			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+	}
+	/* FIXME: free the array? */
+	g_ptr_array_free(results, TRUE);
+	DEBUG_EXIT;
+	return ret;
+}
+
+/* Get a list of groups a user belongs to. */
+static PyObject *
+libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
+					    PyObject *kwargs)
+{
+	GPtrArray *results;
+	char *module = NULL, *user = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = { "user", "module", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+	int i;
+
+	DEBUG_ENTRY;
+	/* Expect the user's name. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &user)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	/* Get the list. */
+	ret = PyList_New(0);
+	for (i = 0; i < results->len; i++) {
+		PyList_Append(ret,
+			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+	}
+	/* FIXME: free the array? */
+	g_ptr_array_free(results, TRUE);
+	results = lu_groups_enumerate_by_user_full(me->ctx, user, &error);
+	DEBUG_EXIT;
+	return ret;
+}
+
 static struct PyMethodDef libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction) libuser_admin_lookup_user_name,
 	 METH_VARARGS | METH_KEYWORDS,
@@ -1033,6 +1164,21 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups to which a user belongs"},
 
+	{"enumerateUsersFull", (PyCFunction) libuser_admin_enumerate_users_full,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "get a list of users matching a pattern, in listed databases"},
+	{"enumerateGroupsFull", (PyCFunction) libuser_admin_enumerate_groups_full,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "get a list of groups matching a pattern, in listed databases"},
+	{"enumerateUsersByGroupFull",
+	 (PyCFunction) libuser_admin_enumerate_users_by_group_full,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "get a list of users in a group"},
+	{"enumerateGroupsByUserFull",
+	 (PyCFunction) libuser_admin_enumerate_groups_by_user_full,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "get a list of groups to which a user belongs"},
+
 	{"promptConsole", (PyCFunction) libuser_admin_prompt_console,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "prompt the user for information using the console, and confirming defaults"},
@@ -1084,9 +1230,14 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *name = getlogin(), *info = NULL, *auth = NULL, *p, *q;
 	PyObject *prompt = NULL, *prompt_data = NULL;
-	char *keywords[] =
-	    { "name", "type", "info", "auth", "prompt", "prompt_data",
-		NULL
+	char *keywords[] = {
+		"name",
+		"type",
+		"info",
+		"auth",
+		"prompt",
+		"prompt_data",
+		NULL,
 	};
 	int type = lu_user;
 	struct lu_context *context;

@@ -115,18 +115,18 @@ GValueArray *lu_groups_enumerate_by_user(struct lu_context *context,
 					 const char *user,
 					 struct lu_error **error);
 
-GArray *lu_users_enumerate_full(struct lu_context *context,
-			        const char *pattern,
-			        struct lu_error **error);
-GArray *lu_groups_enumerate_full(struct lu_context *context,
-			         const char *pattern,
-			         struct lu_error **error);
-GArray *lu_users_enumerate_by_group_full(struct lu_context *context,
-					 const char *group,
-					 struct lu_error **error);
-GArray *lu_groups_enumerate_by_user_full(struct lu_context *context,
-					 const char *user,
-					 struct lu_error **error);
+GPtrArray *lu_users_enumerate_full(struct lu_context *context,
+			           const char *pattern,
+			           struct lu_error **error);
+GPtrArray *lu_groups_enumerate_full(struct lu_context *context,
+			            const char *pattern,
+			            struct lu_error **error);
+GPtrArray *lu_users_enumerate_by_group_full(struct lu_context *context,
+					    const char *group,
+					    struct lu_error **error);
+GPtrArray *lu_groups_enumerate_by_user_full(struct lu_context *context,
+					    const char *user,
+					    struct lu_error **error);
 
 G_END_DECLS
 #endif

@@ -319,8 +319,8 @@ run_list(struct lu_context *context,
 	 struct lu_error **error)
 {
 	struct lu_module *module;
-	GArray *array = NULL, *tmp_array;
-	GValueArray *value_array = NULL, *tmp_value_array;
+	GPtrArray *ptr_array = NULL, *tmp_ptr_array = NULL;
+	GValueArray *value_array = NULL, *tmp_value_array = NULL;
 	GValue *value;
 	struct lu_ent *tmp_ent;
 	char *name;
@@ -343,6 +343,7 @@ run_list(struct lu_context *context,
 		 (id == users_enumerate) ||
 		 (id == users_enumerate_by_group) ||
 		 (id == users_enumerate_full) ||
+		 (id == users_enumerate_by_group_full) ||
 		 (id == group_lookup_name) ||
 		 (id == group_lookup_id) ||
 		 (id == group_add) ||
@@ -352,6 +353,7 @@ run_list(struct lu_context *context,
 		 (id == groups_enumerate) ||
 		 (id == groups_enumerate_by_user) ||
 		 (id == groups_enumerate_full) ||
+		 (id == groups_enumerate_by_user_full) ||
 		 (id == uses_elevated_privileges));
 
 	success = FALSE;
@@ -383,19 +385,20 @@ run_list(struct lu_context *context,
 				*ret = value_array;
 				break;
 			case users_enumerate_full:
+			case users_enumerate_by_group_full:
 			case groups_enumerate_full:
-				tmp_array = *ret;
-				if(array == NULL) {
-					size_t size = sizeof(struct lu_ent*);
-					array = g_array_new(FALSE, TRUE, size);
+			case groups_enumerate_by_user_full:
+				tmp_ptr_array = *ret;
+				if(ptr_array == NULL) {
+					ptr_array = g_ptr_array_new();
 				}
-				for(j = 0; j < tmp_array->len; j++) {
-					tmp_ent = g_array_index(tmp_array,
-								struct lu_ent*,
-								j);
-					g_array_append_val(array, tmp_ent);
+				for(j = 0; j < tmp_ptr_array->len; j++) {
+					tmp_ent = g_ptr_array_index(tmp_ptr_array,
+								    j);
+					g_ptr_array_add(ptr_array, tmp_ent);
 				}
-				*ret = array;
+				g_ptr_array_free(tmp_ptr_array, TRUE);
+				*ret = ptr_array;
 				break;
 			case user_lookup_name:
 			case user_lookup_id:
@@ -433,11 +436,11 @@ lu_dispatch(struct lu_context *context,
 	    gpointer *ret,
 	    struct lu_error **error)
 {
-	struct lu_ent *tmp;
+	struct lu_ent *tmp = NULL;
 	gboolean success;
-	GValueArray *values;
-	GArray *array;
-	GValue *value;
+	GValueArray *values = NULL;
+	GPtrArray *ptrs = NULL;
+	GValue *value = NULL;
 
 	LU_ERROR_CHECK(error);
 
@@ -523,17 +526,19 @@ lu_dispatch(struct lu_context *context,
 	case groups_enumerate_by_user:
 		if(run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, (gpointer*)&array, error)) {
-			*ret = array;
+			    sdata, ldata, tmp, (gpointer*)&values, error)) {
+			*ret = values;
 			success = TRUE;
 		}
 		break;
 	case users_enumerate_full:
 	case groups_enumerate_full:
+	case users_enumerate_by_group_full:
+	case groups_enumerate_by_user_full:
 		if(run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, (gpointer*)&values, error)) {
-			*ret = values;
+			    sdata, ldata, tmp, (gpointer*)&ptrs, error)) {
+			*ret = ptrs;
 			success = TRUE;
 		}
 		break;
@@ -809,46 +814,46 @@ lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 	return ret;
 }
 
-GArray *
+GPtrArray *
 lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 		        struct lu_error ** error)
 {
-	GArray *ret = NULL;
+	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, users_enumerate_full, pattern, 0,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
 
-GArray *
+GPtrArray *
 lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 			 struct lu_error ** error)
 {
-	GArray *ret = NULL;
+	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate_full, pattern, 0,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
 
-GArray *
+GPtrArray *
 lu_users_enumerate_by_group_full(struct lu_context * context,
 				 const char *pattern,
 				 struct lu_error ** error)
 {
-	GArray *ret = NULL;
+	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, users_enumerate_by_group_full, pattern, 0,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
 
-GArray *
+GPtrArray *
 lu_groups_enumerate_by_user_full(struct lu_context * context,
 				 const char *pattern,
 				 struct lu_error ** error)
 {
-	GArray *ret = NULL;
+	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
 	lu_dispatch(context, groups_enumerate_by_user_full, pattern, 0,
 		    NULL, (gpointer*) &ret, error);

@@ -3,18 +3,17 @@ format this stuff?
 
 libuser:
 	Fields:
-        	- OBJECTCLASS
-
+        	- USERNAME
+		- USERPASSWORD
+        	- UIDNUMBER
+        	- GIDNUMBER
         	- GECOS
         	- HOMEDIRECTORY
         	- LOGINSHELL
-        	- UID
-        	- UIDNUMBER
-        	- USERNAME
 
-        	- GID
-        	- GIDNUMBER
         	- GROUPNAME
+		- GROUPPASSWORD
+        	- GIDNUMBER
         	- ADMINISTRATORUID
         	- MEMBERUID
 
