@@ -4,6 +4,6 @@ includedir=/usr/include
 Name: libuser
 Description: A user and group account administration library.
 Version: @VERSION@
-Libs: -L${libdir} -luser
-Requires: glib-2.0 gobject-2.0
+Libs: -L${libdir} -luser @CRYPT_LIBS@
+Requires: glib-2.0 gobject-2.0 gmodule-2.0
 Cflags: -I${includedir}
