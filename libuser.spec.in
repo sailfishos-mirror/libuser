@@ -2,7 +2,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 2
+Release: 1
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -89,6 +89,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Tue Feb 18 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.6-1
+- use md5-style crypt() by default when setting new passwords (#79337)
+
 * Thu Feb  6 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.5-2
 - rebuild
 

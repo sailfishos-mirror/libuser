@@ -139,7 +139,7 @@ lu_make_crypted(const char *plain, const char *previous)
 	size_t len = 0;
 
 	if (previous == NULL) {
-		previous = "";
+		previous = LU_DEFAULT_SALT_TYPE;
 	}
 
 	for (i = 0; i < G_N_ELEMENTS(salt_type_info); i++) {

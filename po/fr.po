@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-12-11 16:43-0500\n"
+"POT-Creation-Date: 2003-02-14 19:36-0500\n"
 "PO-Revision-Date: 2002-12-13 22:24+1000\n"
 "Last-Translator: Jean-Paul AUBRY <jpaubry@redhat.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -56,40 +56,47 @@ msgstr "Erreur PAM interne %s.\n"
 msgid "User mismatch.\n"
 msgstr "Non correspondance de l'utilisateur.\n"
 
-#: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:87
+#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[OPTION...] utilisateur"
 
-#: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
-#: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
-#: apps/lusermod.c:90
+#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Erreur lors de l'analyse des arguments : %s.\n"
 
-#: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
 msgstr "Aucun nom d'utilisateur spécifié.\n"
 
-#: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
-#: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
+#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Erreur lors de l'initialisation de %s : %s.\n"
 
-#: apps/lchage.c:156 apps/lgroupadd.c:90 apps/lgroupdel.c:81
-#: apps/lgroupmod.c:104 apps/luseradd.c:116 apps/luseradd.c:277
+#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
+#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
+#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
 #: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 samples/lookup.c:65
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: samples/lookup.c:65
 msgid "unknown error"
 msgstr "erreur inconnue"
 
-#: apps/lchage.c:164 apps/luserdel.c:94 apps/lusermod.c:126
+#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "L'utilisateur %s n'existe pas.\n"
@@ -151,6 +158,82 @@ msgstr "Expiration du compte :\t%s\n"
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Erreur lors de la modification de l'expiration de %s.\n"
 
+#: apps/lchfn.c:74 apps/lchsh.c:61
+#, fuzzy
+msgid "[OPTION...] [user]"
+msgstr "[OPTION...] utilisateur"
+
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#, fuzzy, c-format
+msgid "No user name specified, no name for uid %d.\n"
+msgstr "Aucun nom d'utilisateur spécifié.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchfn.c:102
+#, fuzzy, c-format
+msgid "Changing finger information for %s.\n"
+msgstr "Erreur lors de la modification de l'expiration de %s.\n"
+
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "Erreur lors de l'initialisation de %s.\n"
+
+#: apps/lchfn.c:161
+msgid "Full Name"
+msgstr ""
+
+#: apps/lchfn.c:182
+msgid "Surname"
+msgstr ""
+
+#: apps/lchfn.c:204
+msgid "Given Name"
+msgstr ""
+
+#: apps/lchfn.c:214
+msgid "Office"
+msgstr ""
+
+#: apps/lchfn.c:223
+msgid "Office Phone"
+msgstr ""
+
+#: apps/lchfn.c:232
+msgid "Home Phone"
+msgstr ""
+
+#: apps/lchfn.c:253
+msgid "E-Mail Address"
+msgstr ""
+
+#: apps/lchfn.c:265
+msgid "Finger information not changed:  input error.\n"
+msgstr ""
+
+#: apps/lchfn.c:370
+msgid "Finger information changed.\n"
+msgstr ""
+
+#: apps/lchfn.c:373
+#, c-format
+msgid "Finger information not changed: %s.\n"
+msgstr ""
+
+#. Give the user some idea of what's going on.
+#: apps/lchsh.c:90
+#, c-format
+msgid "Changing shell for %s.\n"
+msgstr ""
+
+#: apps/lchsh.c:122
+msgid "New Shell"
+msgstr ""
+
+#: apps/lchsh.c:150
+msgid "Shell changed.\n"
+msgstr ""
+
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
 msgstr "[OPTION...] groupe"
@@ -159,16 +242,11 @@ msgstr "[OPTION...] groupe"
 msgid "No group name specified.\n"
 msgstr "Aucun nom de groupe spécifié.\n"
 
-#: apps/lgroupadd.c:92
-#, c-format
-msgid "Error initializing %s.\n"
-msgstr "Erreur lors de l'initialisation de %s.\n"
-
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
 msgstr "La création du groupe a échoué.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:116
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Le groupe %s n'existe pas.\n"
@@ -201,6 +279,102 @@ msgstr "Le groupe %s ne peut pas être déverrouillé.\n"
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Le groupe %s ne peut pas être modifié.\n"
+
+#: apps/lid.c:81
+#, fuzzy, c-format
+msgid "No group name specified, using %s.\n"
+msgstr "Aucun nom de groupe spécifié.\n"
+
+#: apps/lid.c:85
+#, fuzzy, c-format
+msgid "No group name specified, no name for gid %d.\n"
+msgstr "Aucun nom de groupe spécifié.\n"
+
+#: apps/lid.c:93
+#, fuzzy, c-format
+msgid "No user name specified, using %s.\n"
+msgstr "Aucun nom d'utilisateur spécifié.\n"
+
+#: apps/lnewusers.c:74
+#, fuzzy
+msgid "[OPTION...]"
+msgstr "[OPTION...] utilisateur"
+
+#: apps/lnewusers.c:98
+#, fuzzy, c-format
+msgid "Error opening `%s': %s.\n"
+msgstr "Erreur lors de la lecture de `%s' : %s"
+
+#: apps/lnewusers.c:131
+#, c-format
+msgid "Error creating account for `%s': line improperly formatted.\n"
+msgstr ""
+
+#: apps/lnewusers.c:138
+msgid "Refusing to create account with UID 0.\n"
+msgstr ""
+
+#. Aargh!  Abandon all hope.
+#: apps/lnewusers.c:237
+#, fuzzy, c-format
+msgid "Error creating group for `%s' with GID %ld.\n"
+msgstr "Erreur lors de la création du groupe `%s'.\n"
+
+#: apps/lnewusers.c:288
+#, fuzzy, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "erreur lors de la configuration du mot de passe pour `%s'"
+
+#: apps/lnewusers.c:310
+#, fuzzy, c-format
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Aucun nouveau répertoire personnel pour %s.\n"
+
+#: apps/lnewusers.c:325
+#, fuzzy, c-format
+msgid "Error creating mail spool for %s.\n"
+msgstr "Erreur lors de la création du spool de mail.\n"
+
+#: apps/lnewusers.c:330
+#, fuzzy, c-format
+msgid "Error creating user account for %s: %s\n"
+msgstr "Erreur lors de la création de %s : %s.\n"
+
+#: apps/lpasswd.c:86
+#, fuzzy, c-format
+msgid "Changing password for %s.\n"
+msgstr "erreur lors de la configuration du mot de passe pour `%s'"
+
+#: apps/lpasswd.c:111
+msgid "New password"
+msgstr ""
+
+#: apps/lpasswd.c:114
+msgid "New password (confirm)"
+msgstr ""
+
+#: apps/lpasswd.c:128
+msgid "Passwords do not match, try again.\n"
+msgstr ""
+
+#: apps/lpasswd.c:133
+msgid "Password change canceled.\n"
+msgstr ""
+
+#: apps/lpasswd.c:190
+#, fuzzy, c-format
+msgid "Error setting password for user %s: %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+
+#: apps/lpasswd.c:197
+#, fuzzy, c-format
+msgid "Error setting password for group %s: %s.\n"
+msgstr "erreur lors de la configuration du mot de passe pour `%s'"
+
+#: apps/lpasswd.c:208
+msgid "Password changed.\n"
+msgstr ""
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -260,7 +434,8 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -382,12 +557,12 @@ msgstr "erreur lors de la conversion du symbole en module"
 msgid "library/module version mismatch"
 msgstr "différence de version du module/de la bibliothèque"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "aucune fonction d'initialisation %s dans `%s'"
 
-#: lib/modules.c:128
+#: lib/modules.c:127
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "différence de version du module dans `%s'"
@@ -436,11 +611,11 @@ msgstr "erreur lors du verrouillage du fichier : %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
-#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2367
-#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
-#: modules/files.c:2565 modules/files.c:2582
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2059
+#: modules/files.c:2076 modules/files.c:2166 modules/files.c:2185
+#: modules/files.c:2253 modules/files.c:2274 modules/files.c:2370
+#: modules/files.c:2389 modules/files.c:2448 modules/files.c:2467
+#: modules/files.c:2568 modules/files.c:2585
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "impossible d'ouvrir `%s' : %s"
@@ -482,11 +657,11 @@ msgstr "impossible d'écrire sur `%s' : %s"
 msgid "entity object has no %s attribute"
 msgstr "l'objet n'a pas d'attribut %s"
 
-#: modules/files.c:2818 modules/files.c:2888
+#: modules/files.c:2821 modules/files.c:2891
 msgid "not executing with superuser privileges"
 msgstr "exécution sans les privilèges du superutilisateur"
 
-#: modules/files.c:2901
+#: modules/files.c:2904
 msgid "no shadow file present -- disabling"
 msgstr "pas de fichier shadow présent -- désactivation."
 
@@ -664,6 +839,51 @@ msgstr "Utilisateur SASL LDAP "
 msgid "LDAP SASL Authorization User"
 msgstr "Utilisateur autorisation SASL LDAP "
 
+#: modules/sasldb.c:128
+#, fuzzy, c-format
+msgid "Cyrus SASL error creating user: %s: %s"
+msgstr "erreur lors de la création de `%s' : %s"
+
+#: modules/sasldb.c:130
+#, fuzzy, c-format
+msgid "Cyrus SASL error creating user: %s"
+msgstr "erreur lors de la création de `%s' : %s"
+
+#: modules/sasldb.c:136
+#, fuzzy, c-format
+msgid "Cyrus SASL error removing user: %s: %s"
+msgstr "Erreur lors de la suppression de `%s': %s"
+
+#: modules/sasldb.c:138
+#, fuzzy, c-format
+msgid "Cyrus SASL error removing user: %s"
+msgstr "Erreur lors de la suppression de `%s': %s"
+
+#: modules/sasldb.c:428 modules/sasldb.c:436
+#, fuzzy, c-format
+msgid "error initializing Cyrus SASL: %s"
+msgstr "Erreur lors de l'initialisation de %s : %s\n"
+
+#: python/admin.c:494
+#, fuzzy
+msgid "error creating home directory for user"
+msgstr "Aucun nouveau répertoire personnel pour %s.\n"
+
+#: python/admin.c:546
+#, fuzzy
+msgid "error removing home directory for user"
+msgstr "erreur lors de la suppression de l'entrée de répertoire LDAP : %s.\n"
+
+#: python/admin.c:623
+#, fuzzy
+msgid "error moving home directory for user"
+msgstr "Aucun vieux répertoire personnel pour %s.\n"
+
+#: python/admin.c:656
+#, fuzzy
+msgid "error creating mail spool for user"
+msgstr "Erreur lors de la création du spool de mail.\n"
+
 #: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
@@ -708,4 +928,3 @@ msgstr "Obtention attributs utilisateur par défaut :\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
-
