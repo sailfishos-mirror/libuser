@@ -365,13 +365,13 @@ run_list(struct lu_context *context,
 		*ret = NULL;
 		tsuccess = run_single(context, module, id,
 				      sdata, ldata, entity, ret, error);
-		if(*ret) switch(id) {
+		if (*ret != NULL) switch(id) {
 			case users_enumerate:
 			case users_enumerate_by_group:
 			case groups_enumerate:
 			case groups_enumerate_by_user:
 				tmp_value_array = *ret;
-				if(value_array == NULL) {
+				if (value_array == NULL) {
 					value_array = g_value_array_new(0);
 				}
 				if (tmp_value_array != NULL) {
@@ -785,14 +785,6 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	}
 	return ret;
 }
-
-struct enumerate_data {
-	GList *list;
-	const char *pattern;
-	uid_t uid;
-	gid_t gid;
-	struct lu_error **error;
-};
 
 GValueArray *
 lu_users_enumerate(struct lu_context * context, const char *pattern,
