@@ -1,5 +1,5 @@
 AC_INIT(configure.ac)
-AM_INIT_AUTOMAKE(libuser,0.39.90)
+AM_INIT_AUTOMAKE(libuser,0.49.90)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
