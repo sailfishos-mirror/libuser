@@ -1,3 +1,4 @@
+# translation of zh_TW.po to Chinese Traditional
 # translation of zh_TW.po to Traditional Chinese
 # Copyright (C) 2002 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
@@ -9,13 +10,13 @@ msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 00:53+0100\n"
-"PO-Revision-Date: 2004-11-02 10:56+1000\n"
+"PO-Revision-Date: 2004-11-14 14:29+1000\n"
 "Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
-"Language-Team: Traditional Chinese <zh@li.org>\n"
+"Language-Team: Chinese Traditional <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: apps/apputil.c:129
 #, c-format
@@ -253,7 +254,7 @@ msgstr "沒有指定群組名稱。\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "無效的群組 ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -327,16 +328,16 @@ msgstr "建立 `%s' 的帳號發生錯誤: 含有不當格式的行列。\n"
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "無效的使用者 ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒絕建立 UID 為 0 的帳號。\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "為 `%s' 的 %ld 群組建立 GID 時發生錯誤：%s\n"
+msgstr "為 `%s' 建立群組時（使用 GID %jd）發生錯誤：%s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -427,14 +428,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s 沒有群組 ID (gid) 號碼。\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %ld 的群組不存在，無法移除。\n"
+msgstr "GID %jd 的群組不存在，無法移除。\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %ld 的群組沒有群組名稱。\n"
+msgstr "GID %jd 的群組沒有群組名稱。\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -941,12 +942,12 @@ msgstr "初始化 %s 錯誤: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "無效的 ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "搜尋是 %d ID 的群組。\n"
+msgstr "搜尋是 %jd ID 的群組。\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -954,9 +955,9 @@ msgid "Searching for group named %s.\n"
 msgstr "搜尋是 %s 名稱的群組。\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "搜尋是 %d ID 的使用者。\n"
+msgstr "搜尋是 %jd ID 的使用者。\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -990,3 +991,4 @@ msgstr "取得預設使用者屬性:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
+
