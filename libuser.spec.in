@@ -97,7 +97,7 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Wed Aug 25 2004 Miloslav Trmac <mitr@volny.cz> - 0.51.8-1
+* Wed Aug 25 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.8-1
 - Update to build with latest autotools and gtk-doc
 - Update ALL_LINGUAS and POTFILES.in
 - Rebuild to depend on newer openldap
