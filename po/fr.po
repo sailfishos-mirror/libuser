@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-02 10:49+1000\n"
+"PO-Revision-Date: 2004-11-15 14:45+1000\n"
 "Last-Translator: Audrey Simons <asimons@redhat.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -253,7 +253,7 @@ msgstr "Aucun nom de groupe spécifié.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ID groupe %s invalide\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -322,22 +322,21 @@ msgstr "Erreur lors de la lecture de `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
+msgstr "Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ID utilisateur %s invalide\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Création du compte avec l'UID 0 refusée.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Erreur lors de la création du groupe `%s' avec le GID %ld : %s\n"
+msgstr "Erreur lors de la création du groupe pour`%s' avec le GID %jd : %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -385,14 +384,12 @@ msgstr "Changement de mot de passe annulé.\n"
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -400,9 +397,9 @@ msgid "Password changed.\n"
 msgstr "Mot de passe changé.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Le groupe %s n'existe pas.\n"
+msgstr "Le groupe %jd n'existe pas\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -435,14 +432,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s n'avait pas de numéro gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Aucun groupe avec GID %ld n'existe. Suppression impossible.\n"
+msgstr "Aucun groupe avec le GID %jd n'existe. Suppression impossible.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Le groupe avec GID %ld n'avait pas de nom de groupe.\n"
+msgstr "Le groupe avec le GID %jd n'avait pas de nom de groupe.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -462,8 +459,7 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:232 apps/lusermod.c:245
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:255
 #, c-format
@@ -599,7 +595,7 @@ msgstr "différence de version du module/de la bibliothèque"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "le déverrouillage viderait le champ du mot de passe"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -939,8 +935,7 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:568
 msgid "error removing home directory for user"
-msgstr ""
-"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:646
 msgid "error moving home directory for user"
@@ -958,12 +953,12 @@ msgstr "Erreur lors de l'initialisation de %s : %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "ID %s invalide\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Recherche du groupe avec ID %d.\n"
+msgstr "Recherche du groupe avec l'ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -971,9 +966,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Recherche du groupe appelé %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Recherche de l'utilisateur avec ID %d.\n"
+msgstr "Recherche de l'utilisateur avec l'ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1030,3 +1025,4 @@ msgstr "Copie de la structure de l'utilisateur :\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "erreur lors de l'initialisation du module"
+
