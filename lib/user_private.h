@@ -272,6 +272,7 @@ void lu_cfg_done(struct lu_context *context);
 /* Set the sources of record for a given entity structure. */
 void lu_ent_add_module(struct lu_ent *ent, const char *source);
 void lu_ent_clear_modules(struct lu_ent *ent);
+struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);

@@ -2576,9 +2576,10 @@ lu_files_enumerate_full(struct lu_module *module,
 		if (key != NULL) {
 			*key = '\0';
 		}
-		key = strchr(buf, ':');
-		if (key != NULL) {
-			*key = '\0';
+		if (strchr(buf, ':')) {
+			key = g_strndup(buf, strchr(buf, ':') - buf);
+		} else {
+			key = g_strdup(buf);
 		}
 		/* If the account name matches the pattern, parse it and add
 		 * it to the list. */
@@ -2589,6 +2590,7 @@ lu_files_enumerate_full(struct lu_module *module,
 			lu_ent_free(ent);
 		}
 		g_free(buf);
+		g_free(key);
 	}
 
 	lu_util_lock_free(lock);

@@ -81,14 +81,6 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 				     ("error while prompting for necessary information"));
 			return FALSE;
 		}
-		if (!PyObject_IsTrue(ret)) {
-			Py_DECREF(ret);
-			Py_DECREF(list);
-			lu_error_new(error, lu_error_generic,
-				     _
-				     ("error while prompting for necessary information"));
-			return FALSE;
-		}
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
 			prompt =

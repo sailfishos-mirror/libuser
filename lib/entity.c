@@ -43,6 +43,14 @@ lu_ent_new()
 	ent->modules = g_value_array_new(1);
 	return ent;
 }
+struct lu_ent *
+lu_ent_new_typed(enum lu_entity_type entity_type)
+{
+	struct lu_ent *ret;
+	ret = lu_ent_new();
+	ret->type = entity_type;
+	return ret;
+}
 
 /* Free an entity object. */
 void

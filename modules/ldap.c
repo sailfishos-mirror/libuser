@@ -640,16 +640,18 @@ lu_ldap_lookup(struct lu_module *module,
 
 	ctx = module->module_context;
 
-	/* Map the user or group name to a distinguished name. */
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
-	if (dn == NULL) {
-		lu_error_new(error, lu_error_generic,
-			     _("error mapping name to LDAP distinguished name"));
-		return FALSE;
+	if (ent != NULL) {
+		/* Map the user or group name to a distinguished name. */
+		dn = lu_ldap_ent_to_dn(module, namingAttr, name,
+				       ent->type == lu_user ?
+				       LU_LDAP_USER | LU_LDAP_SHADOW :
+				       LU_LDAP_GROUP,
+				       configKey, def);
+		if (dn == NULL) {
+			lu_error_new(error, lu_error_generic,
+				     _("error mapping name to LDAP distinguished name"));
+			return FALSE;
+		}
 	}
 
 	/* Get the entry in the directory under which we'll search for this
@@ -674,10 +676,14 @@ lu_ldap_lookup(struct lu_module *module,
 	g_print("Looking up `%s' with filter `%s'.\n", dn, filt);
 #endif
 
-	/* Perform the search and read the first (hopefully only) entry. */
-	if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt,
-			  attributes, FALSE, &messages) == LDAP_SUCCESS) {
-		entry = ldap_first_entry(ctx->ldap, messages);
+	if (ent != NULL) {
+		/* Perform the search and read the first (hopefully only)
+		 * entry. */
+		if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt,
+				  attributes, FALSE,
+				  &messages) == LDAP_SUCCESS) {
+			entry = ldap_first_entry(ctx->ldap, messages);
+		}
 	}
 
 	/* If there isn't an entry with this exact name, search for something
@@ -708,7 +714,14 @@ lu_ldap_lookup(struct lu_module *module,
 		/* If we need to add the data to the array, then create a new
 		 * data item to hold the data. */
 		if (ent_array != NULL) {
-			ent = lu_ent_new();
+			if (applicability & LU_LDAP_USER) {
+				ent = lu_ent_new_typed(lu_user);
+			} else
+			if (applicability & LU_LDAP_GROUP) {
+				ent = lu_ent_new_typed(lu_group);
+			} else {
+				g_assert_not_reached();
+			}
 		}
 		/* Read each of the attributes we asked for. */
 		for (i = 0; attributes[i]; i++) {
