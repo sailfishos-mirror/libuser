@@ -89,6 +89,11 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Feb  5 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.5-1
+- expose lu_get_first_unused_id() as a package-private function
+- provide libuser.ADMIN.getFirstUnusedUid and libuser.ADMIN.getFirstUnusedGid
+  in python
+
 * Thu Dec 19 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.4-1
 - fix not freeing resources properly in files.c(generic_is_locked), spotted by
   Zou Pengcheng

@@ -1177,6 +1177,50 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 }
 #endif
 
+static PyObject *
+libuser_admin_get_first_unused_id_type(struct libuser_admin *self,
+				       PyObject * args, PyObject * kwargs,
+				       enum lu_entity_type enttype)
+{
+	char *keywords[] = { "start", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+
+	glong start = 500;
+
+	g_return_val_if_fail(self != NULL, NULL);
+
+	DEBUG_ENTRY;
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|l", keywords,
+					 &start)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	return Py_BuildValue("l", lu_get_first_unused_id(me->ctx,
+							 enttype,
+							 start));
+}
+
+static PyObject *
+libuser_admin_get_first_unused_uid(struct libuser_admin *self, PyObject * args,
+			           PyObject * kwargs)
+{
+	return libuser_admin_get_first_unused_id_type(self,
+						      args,
+						      kwargs,
+						      lu_user);
+}
+
+static PyObject *
+libuser_admin_get_first_unused_gid(struct libuser_admin *self, PyObject * args,
+			           PyObject * kwargs)
+{
+	return libuser_admin_get_first_unused_id_type(self,
+						      args,
+						      kwargs,
+						      lu_group);
+}
+
 static struct PyMethodDef libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction) libuser_admin_lookup_user_name,
 	 METH_VARARGS | METH_KEYWORDS,
@@ -1312,6 +1356,17 @@ static struct PyMethodDef libuser_admin_methods[] = {
 
 	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
 	 "return a list of valid shells"},
+
+
+	{"getFirstUnusedUid",
+	 (PyCFunction) libuser_admin_get_first_unused_uid,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "return the first available uid"},
+
+	{"getFirstUnusedGid",
+	 (PyCFunction) libuser_admin_get_first_unused_gid,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "return the first available gid"},
 
 	{NULL, NULL, 0},
 };

@@ -209,6 +209,16 @@ libuser:
 						objects.
 					Returns: a true/false value indicating
 						success or failure.
+				- getFirstUnusedUid: Search the system for
+					an unused UID.
+					Arguments:
+						An initial guess (numeric).
+					Returns: an unused UID.
+				- getFirstUnusedGid: Search the system for
+					an unused GID.
+					Arguments:
+						An initial guess (numeric).
+					Returns: an unused GID.
 			Fields:
 				- prompt(function): A method which can be used
 					to process lists of libuser.Prompt

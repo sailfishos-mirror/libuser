@@ -1607,7 +1607,7 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 }
 #endif
 
-static glong
+glong
 lu_get_first_unused_id(struct lu_context *ctx,
 		       enum lu_entity_type type,
 		       glong id)
