@@ -6,7 +6,8 @@
 # to programs (i.e., scripts) working!
 
 [defaults]
-moduledir = @pkglibdir@
+# The default (/usr/lib*/libuser) is usually correct
+# moduledir = /your/custom/directory
 skeleton = @scdir@/skel
 mailspooldir = /var/mail
 modules = files shadow

@@ -1,3 +1,9 @@
+2004-09-23  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.51.11.
+
+	* libuser.conf.in: Avoid mentioning /usr/lib* in config file.
+
 2004-09-21  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/ldap.c (lu_ldap_set): New parameter `add'.  All callers
