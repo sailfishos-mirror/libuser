@@ -77,7 +77,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	if(ctx == NULL) {
 		if(error != NULL) {
 			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
