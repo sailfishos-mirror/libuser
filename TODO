@@ -4,6 +4,7 @@ Easy:
 * Generate mail spool files when adding users.  Procmail isn't setuid any more.
 
 Medium:
+* Glib2 port.
 * Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod (bad idea?)
 * Create variants of the apps that are hard-coded to use files only, for
   use in batch environments like post-package-install, or maybe add a
@@ -23,4 +24,5 @@ Hard:
 * Write a RADIUS back-end.
 * Write an NIS or NIS+ back-end using yppasswd.x in glibc, or maybe using the
   routines declared in /usr/include/rpcsvc/libnis.h
-* Implement an lgpasswd command for local group administration.
+* Implement an lgpasswd command for local group administration by the group's
+  administrators.

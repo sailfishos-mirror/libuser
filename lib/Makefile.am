@@ -1,5 +1,5 @@
 CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
-LIBADD = @GLIB_LIBS@
+LIBADD = @GLIB_LIBS@ @CRYPT_LIBS@
 LDFLAGS = -version-info 1:0:0
 
 lib_LTLIBRARIES = libuser.la

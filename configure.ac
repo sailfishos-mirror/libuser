@@ -1,7 +1,7 @@
 AC_INIT(configure.ac)
 AM_INIT_AUTOMAKE(libuser,0.39.90)
 
-CFLAGS="$CFLAGS -D_GNU_SOURCE -DG_DISABLE_DEPRECATED"
+CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
 AC_PROG_CC
 AC_ISC_POSIX
@@ -12,13 +12,24 @@ AC_PROG_AWK
 
 AM_PROG_LIBTOOL
 
+AH_VERBATIM([_],[
+#define _(String) gettext(String)
+],[Common gettext macro.])
+AH_VERBATIM([N_],[
+#define N_(String) (String)
+],[Common gettext macro.])
+
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
+AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
 ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv tr"
 AM_GNU_GETTEXT
 
+LIBSAVE="$LIBS"
 AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
+CRYPT_LIBS="$LIBS"
+LIBS="$LIBSAVE"
 
 LIBSAVE="$LIBS"
 AC_CHECK_HEADERS(security/pam_appl.h)
@@ -163,6 +174,7 @@ AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
 		   [location where config files will be installed])
 
 AC_SUBST(MODULES)
+AC_SUBST(CRYPT_LIBS)
 AC_SUBST(KRB5_LDADD)
 AC_SUBST(KRB5_LIBS)
 AC_SUBST(LDAP_LDADD)

@@ -18,7 +18,7 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
 #include <libintl.h>
 #include <limits.h>
@@ -35,13 +35,14 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent = NULL, *groupEnt = NULL;
-	int interactive = FALSE, nocreatehome = FALSE;
+	int interactive = FALSE, nocreatehome = FALSE, creategroup = FALSE;
 	int c;
 	char *file = NULL, **fields;
 	FILE *fp = stdin;
 	uid_t uid;
 	gid_t gid;
 	char *homedir, *gidstring;
+	const char *skeleton;
 	long gid_tmp;
 	char *p;
 	GValueArray *values = NULL;
@@ -152,159 +153,159 @@ main(int argc, const char **argv)
 		/* Try to convert the field to a number. */
 		p = NULL;
 		gid_tmp = strtol(gidstring, &p, 10);
+		gid = -2;
 		if ((p == NULL) || (*p != '\0')) {
 			/* It's not a number, so it's a group name --
 			 * see if it's being used. */
-			if (lu_group_lookup_name(ctx, gidstring, ent,
-						 &error)) {
+			if (lu_group_lookup_name(ctx, gidstring, ent, &error)) {
 				/* Retrieve the group's GID. */
 				values = lu_ent_get(ent, LU_GIDNUMBER);
 				if (values != NULL) {
-					}
-					value = 
+					value = g_value_array_get_nth(values,
+								      0);
 					gid = g_value_get_long(value);
-				} else {
-					/* No such group -- create it. */
-					if (error) {
-						lu_error_free(&error);
-					}
-					lu_group_default(ctx, gidstring,
-							 FALSE, ent);
-					if (lu_group_add(ctx, ent, &error)) {
-						/* Save the GID. */
-						values =
-						    lu_ent_get(ent,
-							       LU_GIDNUMBER);
-						gid =
-						    strtol((char *)
-							   values->data,
-							   &p, 10);
-						lu_hup_nscd();
-					} else {
-						/* Aargh!  Abandon all hope. */
-						g_print(_
-							("Error creating group `%s'.\n"),
-							gidstring);
-						if (error) {
-							lu_error_free
-							    (&error);
-						}
-						g_strfreev(fields);
-						continue;
-					}
 				}
+				creategroup = FALSE;
 			} else {
-				/* It's a group number -- see if it's being used. */
-				if (lu_group_lookup_id
-				    (ctx, gid_tmp, ent, &error)) {
-					/* Retrieve the group's GID. */
-					values =
-					    lu_ent_get(ent, LU_GIDNUMBER);
-					gid =
-					    strtol((char *) values->data,
-						   &p, 10);
-				} else {
-					/* No such group -- create one with the user's name. */
-					if (error) {
-						lu_error_free(&error);
-					}
-					lu_group_default(ctx, fields[0],
-							 FALSE, ent);
-					lu_ent_set_numeric(ent,
-							   LU_GIDNUMBER,
-							   gid_tmp);
-					if (lu_group_add(ctx, ent, &error)) {
-						/* Save the GID. */
-						gid = gid_tmp;
-						lu_hup_nscd();
-					} else {
-						/* Aargh!  Abandon all hope. */
-						g_print(_
-							("Error creating group `%s' with GID %ld.\n"),
-							fields[0],
-							gid_tmp);
-						if (error) {
-							lu_error_free
-							    (&error);
-						}
-						g_strfreev(fields);
-						continue;
-					}
-				}
+				/* Mark that we need to create a group for the
+				 * user to be in. */
+				creategroup = TRUE;
 			}
-
-			lu_user_default(ctx, fields[0], FALSE, ent);
-			lu_ent_set(ent, LU_USERNAME, fields[0]);
-			lu_ent_set(ent, LU_UIDNUMBER, fields[2]);
-			lu_ent_set_numeric(ent, LU_GIDNUMBER, gid);
-
-			if (strlen(fields[4])) {
-				lu_ent_set(ent, LU_GECOS, fields[4]);
-			}
-			if (strlen(fields[5])) {
-				homedir = g_strdup(fields[5]);
-				lu_ent_set(ent, LU_HOMEDIRECTORY,
-					   fields[5]);
-			} else {
+		} else {
+			/* It's a group number -- see if it's being used. */
+			gid = gid_tmp;
+			if (lu_group_lookup_id(ctx, gid_tmp, ent, &error)) {
+				/* Retrieve the group's GID. */
+				values = lu_ent_get(ent, LU_GIDNUMBER);
 				if (values != NULL) {
 					value = g_value_array_get_nth(values,
 								      0);
-					homedir = g_value_get_string(value);
-					homedir = g_strdup(homedir);
-				} else {
-					homedir = g_strdup_printf("/home/%s",
-								  fields[0]);
+					gid = g_value_get_long(value);
+				}
+				creategroup = FALSE;
+			} else {
+				/* Mark that we need to create a group for the
+				 * user to be in. */
+				creategroup = TRUE;
+			}
+		}
+		/* If we need to create a group, create a template group and
+		 * try to apply what the user has asked us to. */
+		if (creategroup) {
+			/* If we got a GID, then we need to use the user's name,
+			 * otherwise we need to use the default group name. */
+			if (gid != -2) {
+				lu_group_default(ctx, fields[0], FALSE, ent);
+				memset(&val, 0, sizeof(val));
+				g_value_init(&val, G_TYPE_LONG);
+				g_value_set_long(&val, gid);
+				lu_ent_clear(ent, LU_GIDNUMBER);
+				lu_ent_add(ent, LU_GIDNUMBER, &val);
+			} else {
+				lu_group_default(ctx, "users", FALSE, ent);
+			}
+			/* Try to create the group, and if it works, get its
+			 * GID, which we need to give to this user. */
+			if (lu_group_add(ctx, ent, &error)) {
+				values = lu_ent_get(ent, LU_GIDNUMBER);
+				value = g_value_array_get_nth(values, 0);
+				gid = g_value_get_long(value);
+			} else {
+				/* Aargh!  Abandon all hope. */
+				g_print(_("Error creating group for `%s' with "
+					"GID %ld.\n"), fields[0], gid_tmp);
+				g_strfreev(fields);
+				continue;
+			}
+		}
+
+		/* Create a new user record, and set the user's primary GID. */
+		lu_user_default(ctx, fields[0], FALSE, ent);
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_LONG);
+		g_value_set_long(&val, gid);
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &val);
+
+		/* Set other fields if we've got them. */
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
+		if (strlen(fields[4]) > 0) {
+			g_value_set_string(&val, fields[4]);
+			lu_ent_clear(ent, LU_GECOS);
+			lu_ent_add(ent, LU_GECOS, &val);
+		}
+		if (strlen(fields[5]) > 0) {
+			homedir = g_strdup(fields[5]);
+			g_value_set_string(&val, homedir);
+			lu_ent_clear(ent, LU_HOMEDIRECTORY);
+			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+		} else {
+			if (values != NULL) {
+				value = g_value_array_get_nth(values,
+							      0);
+				homedir = g_strdup(g_value_get_string(value));
+			} else {
+				homedir = g_strdup_printf("/home/%s",
+							  fields[0]);
+			}
+		}
+		if (strlen(fields[6]) > 0) {
+			g_value_set_string(&val, fields[6]);
+			lu_ent_clear(ent, LU_LOGINSHELL);
+			lu_ent_add(ent, LU_LOGINSHELL, &val);
+		}
+
+		/* Now try to add the user's account. */
+		if (lu_user_add(ctx, ent, &error)) {
+			lu_hup_nscd();
+			if (!lu_user_setpass(ctx, ent, fields[1], &error)) {
+				g_print(_("Error setting initial password for "
+					"%s: %s\n"),
+					fields[0],
+					error ?
+					error->string :
+					_("unknown error"));
+				if (error) {
+					lu_error_free(&error);
 				}
 			}
-			if (strlen(fields[6])) {
-				lu_ent_set(ent, LU_LOGINSHELL, fields[6]);
-			}
-
-			if (lu_user_add(ctx, ent, &error)) {
-				lu_hup_nscd();
-				if (!lu_user_setpass
-				    (ctx, ent, fields[1], &error)) {
-					g_print(_
-						("Error setting initial password for %s: %s\n"),
+			/* Unless the nocreatehomedirs flag was given, attempt
+			 * to create the user's home directory. */
+			if (!nocreatehome) {
+				skeleton = lu_cfg_read_single(ctx,
+							      "defaults/skeleton",
+							      "/etc/skel");
+				if (lu_homedir_populate(skeleton,
+							homedir,
+							uid,
+							gid,
+							0700,
+							&error) == FALSE) {
+					g_print(_("Error creating home "
+						"directory for %s: %s\n"),
 						fields[0],
-						error ? error->
-						string :
+						error ?
+						error->string :
 						_("unknown error"));
 					if (error) {
 						lu_error_free(&error);
 					}
 				}
-				if (!nocreatehome) {
-					if (lu_homedir_populate
-					    ("/etc/skel", homedir, uid,
-					     gid, 0700, &error) == FALSE) {
-						g_print(_
-							("Error creating home directory for %s: %s\n"),
-							fields[0],
-							error ? error->
-							string :
-							_
-							("unknown error"));
-						if (error) {
-							lu_error_free
-							    (&error);
-						}
-					}
-				}
-			} else {
-				g_print(_
-					("Error creating user account for %s: %s\n"),
-					fields[0],
-					error ? error->
-					string : _("unknown error"));
-				if (error) {
-					lu_error_free(&error);
-				}
 			}
-
-			g_free(homedir);
+		} else {
+			g_print(_("Error creating user account for %s: "
+				"%s\n"), fields[0],
+				error ?
+				error->string :
+				_("unknown error"));
+			if (error) {
+				lu_error_free(&error);
+			}
 		}
-		if (fields) {
+
+		g_free(homedir);
+		if (fields != NULL) {
 			g_strfreev(fields);
 		}
 		lu_ent_clear_all(ent);

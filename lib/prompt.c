@@ -18,9 +18,8 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
-#define _(String) dgettext(PACKAGE, String)
 #include <libintl.h>
 #include <limits.h>
 #include <stdio.h>

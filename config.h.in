@@ -12,6 +12,9 @@
    language is requested. */
 #undef ENABLE_NLS
 
+/* Stay away from deprecated glib functionality. */
+#undef G_DISABLE_DEPRECATED
+
 /* Define if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
@@ -195,6 +198,10 @@
 /* location where modules will be installed */
 #undef MODULEDIR
 
+
+#define N_(String) (String)
+
+
 /* Name of package */
 #undef PACKAGE
 
@@ -214,6 +221,10 @@
 
 /* Version number of package */
 #undef VERSION
+
+
+#define _(String) gettext(String)
+
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const

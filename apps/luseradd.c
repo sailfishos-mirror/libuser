@@ -18,7 +18,7 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,7 +43,7 @@ main(int argc, const char **argv)
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
-	    system_account = FALSE, interactive = FALSE;
+	    system_account = FALSE, interactive = FALSE, create_group = FALSE;
 	int c;
 
 	poptContext popt;
@@ -51,7 +51,7 @@ main(int argc, const char **argv)
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
-		 "make this a system group", NULL},
+		 "make this a system user", NULL},
 		{"gecos", 'c', POPT_ARG_STRING, &gecos, 0,
 		 "GECOS information for new user", "STRING"},
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
@@ -75,10 +75,12 @@ main(int argc, const char **argv)
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
+	/* Initialize i18n. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
+	/* Parse command-line arguments. */
 	popt = poptGetContext("luseradd", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
@@ -88,14 +90,22 @@ main(int argc, const char **argv)
 		poptPrintUsage(popt, stderr, 0);
 		exit(1);
 	}
-	name = poptGetArg(popt);
 
+	/* Force certain flags one way or another. */
+	if (system_account) {
+		dont_create_home = TRUE;
+	}
+
+	/* We require at least the user's name (I suppose we could just
+	 * make one up, but that could get weird). */
+	name = poptGetArg(popt);
 	if (name == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
+	/* Initialize the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -110,18 +120,14 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	/* If we didn't get the location of a skeleton directory, read
+	 * the name of the directory from the configuration file. */
 	if (skeleton == NULL) {
-		list = lu_cfg_read(ctx, "defaults/skeleton", "/etc/skel");
-		if (list && list->data) {
-			skeleton = g_strdup((char *) list->data);
-			g_list_free(list);
-		}
-	}
-	if (skeleton == NULL) {
-		skeleton = "/etc/skel";
+		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
+					      "/etc/skel");
 	}
 
-	/* Select a group for the user to be in. */
+	/* Select a group name for the user to be in. */
 	if (gid == NULL) {
 		if (dont_create_group) {
 			gid = "users";
@@ -135,162 +141,137 @@ main(int argc, const char **argv)
 		char *p;
 		ent = lu_ent_new();
 		gidNumber = strtol(gid, &p, 10);
+
 		if ((p == NULL) || (*p != '\0')) {
-			/* It's not a number, so it's a group name -- see if
-			 * it's being used. */
-			if (lu_group_lookup_name(ctx, gid, ent, &error)) {
-				/* Retrieve the group's GID. */
-				values = lu_ent_get(ent, LU_GIDNUMBER);
-				value = g_value_array_get_nth(values, 0);
-				gidNumber = g_value_get_long(value);
-			} else {
-				/* No such group -- can we create it? */
-				if (!dont_create_group) {
-					if (error) {
-						lu_error_free(&error);
-					}
-					lu_group_default(ctx, gid, FALSE, ent);
-					if (lu_group_add(ctx, ent, &error)) {
-						/* Save the GID. */
-						values = lu_ent_get(ent,
-								    LU_GIDNUMBER);
-						value = g_value_array_get_nth(values, 0);
-						gidNumber = g_value_get_long(value);
-						lu_hup_nscd();
-					} else {
-						/* Aargh!  Abandon all hope. */
-						g_print(_("Error creating "
-							"group `%s'.\n"), gid);
-						if (error) {
-							lu_error_free(&error);
-						}
-						lu_end(ctx);
-						return 1;
-					}
-				} else {
-					/* Can't get there from here. */
-					g_print(_("No group named `%s' "
-						"exists.\n"), gid);
-					lu_end(ctx);
-					return 1;
-				}
-			}
-		} else {
-			/* It's a group number -- see if it's being used. */
-			if (!lu_group_lookup_id(ctx, gidNumber, ent, &error)) {
-				/* No such group -- can we create one with the user's name? */
-				if (!dont_create_group) {
-					if (error) {
-						lu_error_free(&error);
-					}
-					lu_group_default(ctx, name, FALSE, ent);
-					memset(&val, 0, sizeof(val));
-					g_value_init(&val, G_TYPE_LONG);
-					g_value_set_long(&val, gidNumber);
-					lu_ent_clear(ent, LU_GIDNUMBER);
-					lu_ent_add(ent, LU_GIDNUMBER);
-					if (!lu_group_add(ctx, ent, &error)) {
-						/* Aargh!  Abandon all hope. */
-						g_print(_("Error creating "
-							"group `%s' with GID "
-							"%ld.\n"), name,
-							gidNumber);
-						if (error) {
-							lu_error_free(&error);
-						}
-						lu_end(ctx);
-						return 1;
-					}
-					lu_hup_nscd();
-				} else {
-					/* Can't get there from here. */
-					g_print(_("No group with GID %ld "
-						"exists.\n"), gidNumber);
-					lu_end(ctx);
-					return 1;
-				}
-			}
+			/* It's not a number, so it's a group name. */
+			gidNumber = -2;
 		}
-		lu_ent_free(ent);
 	}
 
+	/* Check if the group exists. */
+	if (gidNumber == -2) {
+		if (lu_group_lookup_name(ctx, gid, ent, &error)) {
+			/* Retrieve the group's GID. */
+			values = lu_ent_get(ent, LU_GIDNUMBER);
+			value = g_value_array_get_nth(values, 0);
+			gidNumber = g_value_get_long(value);
+			create_group = FALSE;
+		} else {
+			/* No such group, we need to create one. */
+			create_group = TRUE;
+		}
+	} else {
+		if (lu_group_lookup_id(ctx, gidNumber, ent, &error)) {
+			create_group = FALSE;
+		} else {
+			/* No such group, we need to create one. */
+			create_group = TRUE;
+		}
+	}
+
+	if (create_group) {
+		if (error) {
+			lu_error_free(&error);
+		}
+		/* Create the group template. */
+		lu_group_default(ctx, gid, FALSE, ent);
+
+		/* Replace the GID with the force one, if we need to. */
+		if (gidNumber != -2) {
+			memset(&val, 0, sizeof(val));
+			g_value_init(&val, G_TYPE_LONG);
+			g_value_set_long(&val, gidNumber);
+			lu_ent_clear(ent, LU_GIDNUMBER);
+			lu_ent_add(ent, LU_GIDNUMBER, &val);
+		}
+
+		/* Try to add the group. */
+		if (lu_group_add(ctx, ent, &error)) {
+			lu_hup_nscd();
+		} else {
+			/* Aargh!  Abandon all hope. */
+			g_print(_("Error creating group `%s'.\n"), gid);
+			if (error) {
+				lu_error_free(&error);
+			}
+			lu_end(ctx);
+			return 1;
+		}
+	}
+
+	/* Create the user record. */
 	ent = lu_ent_new();
 	lu_user_default(ctx, name, system_account, ent);
-	if (gecos)
-		lu_ent_set(ent, LU_GECOS, gecos);
+
+	/* Modify the default UID if we had one passed in. */
+	memset(&val, 0, sizeof(val));
+	g_value_init(&val, G_TYPE_LONG);
 	if (uidNumber != -2) {
-		lu_ent_set_numeric(ent, LU_UIDNUMBER, uidNumber);
-	}
-	if (gidNumber != -2) {
-		lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
-	}
-	if (homeDirectory)
-		lu_ent_set(ent, LU_HOMEDIRECTORY, homeDirectory);
-	if (loginShell)
-		lu_ent_set(ent, LU_LOGINSHELL, loginShell);
-	if (userPassword) {
-		values = lu_ent_get(ent, LU_USERPASSWORD);
-		if (values && values->data) {
-			cryptedUserPassword =
-			    lu_make_crypted(userPassword, values->data);
-		} else {
-			cryptedUserPassword =
-			    lu_make_crypted(userPassword, "$1$");
-		}
-	}
-	if (cryptedUserPassword) {
-		char *tmp = NULL;
-		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_set(ent, LU_USERPASSWORD, tmp);
-		g_free(tmp);
-	}
-	if (userPassword) {
-		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
+		g_value_set_long(&val, uidNumber);
+		lu_ent_clear(ent, LU_UIDNUMBER);
+		lu_ent_add(ent, LU_UIDNUMBER, &val);
 	}
 
+	/* Modify the default GID if we had one passed in. */
+	if (gidNumber != -2) {
+		g_value_set_long(&val, uidNumber);
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &val);
+	}
+
+	/* Modify the default GECOS if we had one passed in. */
+	memset(&val, 0, sizeof(val));
+	g_value_init(&val, G_TYPE_STRING);
+	if (gecos != NULL) {
+		g_value_set_string(&val, gecos);
+		lu_ent_clear(ent, LU_GECOS);
+		lu_ent_add(ent, LU_GECOS, &val);
+	}
+
+	/* Modify the default GID if we had one passed in. */
+	if (homeDirectory != NULL) {
+		g_value_set_string(&val, homeDirectory);
+		lu_ent_clear(ent, LU_HOMEDIRECTORY);
+		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+	}
+
+	/* Modify the default login shell if we had one passed in. */
+	if (loginShell != NULL) {
+		g_value_set_string(&val, loginShell);
+		lu_ent_clear(ent, LU_LOGINSHELL);
+		lu_ent_add(ent, LU_LOGINSHELL, &val);
+	}
+
+	/* Moment-of-truth time. */
 	if (lu_user_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Account creation failed: %s.\n"),
 			error->string);
 		return 3;
 	}
+
 	lu_hup_nscd();
 
-	if (!dont_create_home || system_account) {
-		char *uid_string = NULL, *gid_string = NULL;
-
+	/* If we don't have the the don't-create-home flag, create the user's
+	 * home directory. */
+	if (!dont_create_home) {
+		/* Read the user's UID. */
 		values = lu_ent_get(ent, LU_UIDNUMBER);
-		if (values) {
-			uidNumber =
-			    strtol((char *) values->data, &uid_string, 10);
-		}
+		value = g_value_array_get_nth(values, 0);
+		uidNumber = g_value_get_long(value);
+
+		/* Read the user's GID. */
 		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if (values) {
-			gidNumber =
-			    strtol((char *) values->data, &gid_string, 10);
-		}
+		value = g_value_array_get_nth(values, 0);
+		gidNumber = g_value_get_long(value);
 
-		if (uid_string && (*uid_string != '\0')) {
-			fprintf(stderr, _("Bad UID for %s.\n"), name);
-			return 4;
-		}
-		if (gid_string && (*gid_string != '\0')) {
-			fprintf(stderr, _("Bad GID for %s.\n"), name);
-			return 5;
-		}
-
+		/* Read the user's home directory. */
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		if (values) {
-			homeDirectory = (char *) values->data;
-		}
+		value = g_value_array_get_nth(values, 0);
+		homeDirectory = g_value_get_string(value);
 
-		if (homeDirectory == NULL) {
-			fprintf(stderr, _("No home directory for %s.\n"),
-				name);
-			return 6;
-		}
-		if (lu_homedir_populate
-		    (skeleton, homeDirectory, uidNumber, gidNumber, 0700,
-		     &error) == FALSE) {
+		if (lu_homedir_populate(skeleton, homeDirectory,
+					uidNumber, gidNumber, 0700,
+					&error) == FALSE) {
 			fprintf(stderr, _("Error creating %s: %s.\n"),
 				homeDirectory, error->string);
 			return 7;

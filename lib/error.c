@@ -17,10 +17,8 @@
 
 #ident "$Id$"
 
-#define _(String) dgettext(PACKAGE, String)
-
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
 #include <sys/types.h>
 #include <errno.h>

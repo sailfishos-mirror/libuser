@@ -16,7 +16,9 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "config.h"
+#ifdef HAVE_CONFIG_H
+#include "../../config.h"
+#endif
 #include "entity.h"
 #include "error.h"
 #include "prompt.h"
