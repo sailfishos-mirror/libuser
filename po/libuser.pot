@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-12 10:15-0400\n"
+"POT-Creation-Date: 2001-06-12 11:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,19 +277,19 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: lib/userent.c:153
+#: lib/userent.c:151
 msgid ""
 "\n"
 "Before copy:\n"
 msgstr ""
 
-#: lib/userent.c:168
+#: lib/userent.c:166
 msgid ""
 "\n"
 "After copy:\n"
 msgstr ""
 
-#: lib/userent.c:300
+#: lib/userent.c:298
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr ""

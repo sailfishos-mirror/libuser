@@ -1,5 +1,5 @@
 msgid ""
-msgstr "POT-Creation-Date: 2001-06-12 10:15-0400\n"
+msgstr "POT-Creation-Date: 2001-06-12 11:01-0400\n"
 
 #: apps/apputil.c:36 apps/apputil.c:44 apps/apputil.c:52
 msgid "Feature not implemented: "
@@ -264,7 +264,7 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: lib/userent.c:153
+#: lib/userent.c:151
 msgid ""
 "\n"
 "Before copy:\n"
@@ -272,7 +272,7 @@ msgstr ""
 "\n"
 "Beffure-a cupy:\n"
 
-#: lib/userent.c:168
+#: lib/userent.c:166
 msgid ""
 "\n"
 "After copy:\n"
@@ -280,7 +280,7 @@ msgstr ""
 "\n"
 "Effter cupy:\n"
 
-#: lib/userent.c:300
+#: lib/userent.c:298
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr "freeeeng loo_int et %p.\n"
