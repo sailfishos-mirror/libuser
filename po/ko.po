@@ -6,12 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2002-01-24 16:43+0900\n"
-"Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
-"Language-Team: Red Hat Asia-Pacific\n"
+"PO-Revision-Date: 2002-03-18 08:34GMT+10.00\n"
+"Last-Translator: Michelle Kim <mkim@brisbane.redhat.com>\n"
+"Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=EUC-KR\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Type: text/plain; charset=euc-kr\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: apps/apputil.c:70
 #, c-format
@@ -374,7 +375,7 @@ msgstr "알 수 없는 오류"
 #: lib/modules.c:112
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "`%2$s'에 초기화 기능 %1$s(이)가 없습니다"
+msgstr "`%s'에 초기화 기능 %s(이)가 없습니다"
 
 #: lib/modules.c:138
 #, c-format
@@ -421,9 +422,9 @@ msgid "error creating `%s': %s"
 msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "백업 화일 `%s'(은)는 심볼릭링크 파일입니다"
+msgstr "백업 파일 `%s' 존재하지만 정규 파일이 아닙니다"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -670,3 +671,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
