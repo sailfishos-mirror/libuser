@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2003-02-14 19:36-0500\n"
+"POT-Creation-Date: 2003-02-24 23:52-0500\n"
 "PO-Revision-Date: 2002-07-25 11:46+0300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@superonline.com>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -21,34 +21,34 @@ msgstr "`%s' okunurken hata: %s"
 msgid "Error creating `%s': %s"
 msgstr "`%s' oluşturulurken hata: %s"
 
-#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
+#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' silinirken hata: %s"
 
-#: apps/apputil.c:411 apps/apputil.c:415
+#: apps/apputil.c:421 apps/apputil.c:425
 msgid "Failed to drop privileges.\n"
 msgstr "İzinler bırakılamadı.\n"
 
-#: apps/apputil.c:424
+#: apps/apputil.c:434
 msgid "Internal error.\n"
 msgstr "İç hata.\n"
 
-#: apps/apputil.c:437
+#: apps/apputil.c:447
 msgid "Error initializing PAM.\n"
 msgstr "PAM başlatılırken hata.\n"
 
-#: apps/apputil.c:445 apps/apputil.c:469
+#: apps/apputil.c:455 apps/apputil.c:479
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s için kimlik sınaması başarısız.\n"
 
-#: apps/apputil.c:454
+#: apps/apputil.c:464
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "İç PAM hatası `%s'.\n"
 
-#: apps/apputil.c:460
+#: apps/apputil.c:470
 msgid "User mismatch.\n"
 msgstr "Kullanıcı aynı değil.\n"
 
@@ -556,7 +556,7 @@ msgstr "modül/kitaplık sürümü uyumsuzluğu"
 msgid "no initialization function %s in `%s'"
 msgstr "İlklendirme işlevi %s `%s' içinde yok"
 
-#: lib/modules.c:127
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s' de modül sürümü uyumsuzluğu"
@@ -605,11 +605,11 @@ msgstr "dosya kilitlenirken hata: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2059
-#: modules/files.c:2076 modules/files.c:2166 modules/files.c:2185
-#: modules/files.c:2253 modules/files.c:2274 modules/files.c:2370
-#: modules/files.c:2389 modules/files.c:2448 modules/files.c:2467
-#: modules/files.c:2568 modules/files.c:2585
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
+#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
+#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
+#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
+#: modules/files.c:2569 modules/files.c:2586
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' açılamadı: %s"
@@ -651,11 +651,11 @@ msgstr "`%s'e yazılamadı: %s"
 msgid "entity object has no %s attribute"
 msgstr "öğe nesnesi %s özelliğine sahip değil"
 
-#: modules/files.c:2821 modules/files.c:2891
+#: modules/files.c:2822 modules/files.c:2892
 msgid "not executing with superuser privileges"
 msgstr "root yetkileriyle çalıştırılmıyor"
 
-#: modules/files.c:2904
+#: modules/files.c:2905
 msgid "no shadow file present -- disabling"
 msgstr "shadow dosyası yok -- iptal ediliyor"
 
@@ -743,7 +743,7 @@ msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP sunucusu bir kök DSE'ye sahip görünmüyor"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
-#: modules/ldap.c:1417 modules/ldap.c:1530 modules/ldap.c:1624
+#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP seçkin ismine isim eşlenirken hata"
 
@@ -765,7 +765,7 @@ msgstr "kullanıcı nesnesi `%s' olmaksızın oluşturuldu"
 msgid "could not convert internal data to LDAPMods"
 msgstr "iç veri LDAPMods'a dönüştürülemedi"
 
-#: modules/ldap.c:1271 modules/ldap.c:1482
+#: modules/ldap.c:1271 modules/ldap.c:1483
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi değiştirilirken hata: %s"
@@ -785,49 +785,54 @@ msgstr "nesne %s özelliğini içermiyor"
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAP dizin girdisi silinirken hata: %s.\n"
 
-#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1515
-#: modules/ldap.c:1609
+#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
+#: modules/ldap.c:1610
 #, c-format
 msgid "object has no %s attribute"
 msgstr "nesne %s özelliğini içermiyor"
 
-#: modules/ldap.c:1545
+#: modules/ldap.c:1546
 msgid "no such object in LDAP directory"
 msgstr "LDAP dizininde böyle bir nesne yok"
 
-#: modules/ldap.c:1558
+#: modules/ldap.c:1559
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' özelliği bulunmuyor"
 
-#: modules/ldap.c:1699
+#: modules/ldap.c:1701
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP dizininde %s için parola belirlenirken hata: %s"
 
-#: modules/ldap.c:2241
+#: modules/ldap.c:2243
 msgid "LDAP Server Name"
 msgstr "LDAP Sunucu İsmi"
 
-#: modules/ldap.c:2247
+#: modules/ldap.c:2249
 msgid "LDAP Search Base DN"
 msgstr "LDAP Arama Tabanı DN"
 
-#: modules/ldap.c:2253
+#: modules/ldap.c:2255
 msgid "LDAP Bind DN"
 msgstr "LDAP Bağlantı DN"
 
-#: modules/ldap.c:2260
+#: modules/ldap.c:2262
 msgid "LDAP Bind Password"
 msgstr "LDAP Bağlantı Parolası"
 
-#: modules/ldap.c:2266
+#: modules/ldap.c:2268
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Kullanıcısı"
 
-#: modules/ldap.c:2273
+#: modules/ldap.c:2275
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Yetkilendirme Kullanıcısı"
+
+#: modules/ldap.c:2315
+#, fuzzy
+msgid "error initializing module"
+msgstr "modül yüklenirken hata"
 
 #: modules/sasldb.c:128
 #, fuzzy, c-format
