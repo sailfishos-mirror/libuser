@@ -89,6 +89,10 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Thu Dec 19 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.4-1
+- fix not freeing resources properly in files.c(generic_is_locked), spotted by
+  Zou Pengcheng
+
 * Wed Dec 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.2-1
 - degrade gracefully
 - build with --with-pic and -fPIC

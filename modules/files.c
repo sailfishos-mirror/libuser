@@ -1693,6 +1693,9 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 	ret = value[0] == '!';
 	g_free(value);
 
+	lu_util_lock_free(lock);
+	close(fd);
+	g_free(filename);
 	return ret;
 }
 
