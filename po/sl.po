@@ -1,16 +1,16 @@
 # SLOVENIAN TRANSLATION OF LIBUSER.
-# Copyright (C) 2001 Free Software Foundation, Inc.
+# Copyright (C) 2002 Free Software Foundation, Inc.
 # Roman Maurer <roman.maurer@amis.net>, 2001.
 # $Id$
 # $Source$
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser 7.2\n"
+"Project-Id-Version: libuser 7.3\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-09-05 22:30+0200\n"
+"PO-Revision-Date: 2002-03-29 21:35+0200\n"
 "Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,7 +33,7 @@ msgstr "Napaka pri odstranjevanju ,%s`: %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Pravic ni bilo moè odstraniti.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -49,13 +49,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Avtentikacija za %s ni uspela.\n"
 
 #: apps/apputil.c:449
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Notranja napaka.\n"
+msgstr "Notranja napaka PAM ,%s`.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Napaèen uporabnik.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -64,9 +64,9 @@ msgstr "[IZBIRA...] uporabnik"
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Napaka pri odstranjevanju %s: %s.\n"
+msgstr "Napaka pri razèlenjevanju argumentov: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
@@ -196,9 +196,9 @@ msgid "Group %s could not be modified.\n"
 msgstr "Skupine %s ni moè spremeniti.\n"
 
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Napaka pri ustvarjanju skupine za %s: %s.\n"
+msgstr "Napaka pri ustvarjanju skupine ,%s`.\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -223,12 +223,12 @@ msgstr "%s ni imel ¹tevila gid.\n"
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Ni skupine z GID %ld, zato je ne odstranjujemo.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Skupina #%d ni imela imena skupine.\n"
+msgstr "Skupina %ld ni imela imena skupine.\n"
 
 #: apps/luserdel.c:142
 #, c-format
@@ -266,9 +266,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Uporabnika %s ni moè spremeniti: %s.\n"
 
 #: apps/lusermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Skupine %s ni moè spremeniti.\n"
+msgstr "Skupine %s ni moè spremeniti: %s.\n"
 
 #: apps/lusermod.c:300
 #, c-format
@@ -292,98 +292,87 @@ msgstr "ni moè odpreti nastavitvene datoteke ,%s`: %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr ""
+msgstr "uspeh"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "konfiguracija onemogoèila modul"
 
 #: lib/error.c:45
-#, fuzzy
 msgid "generic error"
-msgstr "Notranja napaka.\n"
+msgstr "splo¹na napaka"
 
 #: lib/error.c:47
-#, fuzzy
 msgid "not enough privileges"
-msgstr "ne izvaja se z dovolilnicami skrbnika"
+msgstr "ni dovolj pravic"
 
 #: lib/error.c:49
 msgid "access denied"
-msgstr ""
+msgstr "dostop zavrnjen"
 
 #: lib/error.c:51
 msgid "bad user/group name"
-msgstr ""
+msgstr "slabo ime uporabnika/skupine"
 
 #: lib/error.c:53
 msgid "bad user/group id"
-msgstr ""
+msgstr "slaba ID uporabnika/skupine"
 
 #: lib/error.c:55
 msgid "user/group name in use"
-msgstr ""
+msgstr "ime uporabnika/skupine ¾e v rabi"
 
 #: lib/error.c:57
 msgid "user/group id in use"
-msgstr ""
+msgstr "ID uporabnika/skupine ¾e v rabi"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "napaka pri rokovanju z atributi terminala"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error opening file"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri odpiranju datoteke"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error locking file"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri zaklepanju datoteke"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error statting file"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri opisovanju datoteke"
 
 #: lib/error.c:67
-#, fuzzy
 msgid "error reading file"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri branju datoteke"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "error writing to file"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri pisanju v datoteko"
 
 #: lib/error.c:71
 msgid "data not found in file"
-msgstr ""
+msgstr "v datoteki ni podatkov"
 
 #: lib/error.c:73
-#, fuzzy
 msgid "internal initialization error"
-msgstr "napaka pri inicializaciji knji¾nice kerberos"
+msgstr "notranja napaka pri inicializaciji"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "error loading module"
-msgstr "napaka pri zaklepanju datoteke: %s"
+msgstr "napaka pri nalaganju modula"
 
 #: lib/error.c:77
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "napaka pri razre¹evanju simbola v modulu"
 
 #: lib/error.c:79
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "neujemanje razlièice modula v ,%s`"
+msgstr "neujemanje razlièice modula/knji¾nice"
 
 #: lib/error.c:84
-#, fuzzy
 msgid "unknown error"
-msgstr "neznano"
+msgstr "neznana napaka"
 
 #: lib/modules.c:112
 #, c-format
@@ -397,16 +386,15 @@ msgstr "neujemanje razlièice modula v ,%s`"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "napaka pri branju atributov terminala"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Dobivamo privete atribute uporabnika:\n"
+msgstr "napaka pri nastavljanju atributov terminala"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "napaka pri branju s terminala"
 
 #: lib/util.c:200
 #, c-format
@@ -436,9 +424,9 @@ msgid "error creating `%s': %s"
 msgstr "napaka pri ustvarjanju ,%s`: %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "rezervna datoteka ,%s` je bila simbolna povezava"
+msgstr "rezervna datoteka ,%s` obstaja in ni obièajna datoteka"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -546,13 +534,12 @@ msgid "could not bind to LDAP server"
 msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
+msgstr "ni bilo moè preiskati stre¾nika LDAP"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "Ni videti, da bi stre¾nik LDAP imel korensko DSE"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -622,9 +609,8 @@ msgid "LDAP Server Name"
 msgstr "Ime stre¾nika LDAP"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP Osnova DN"
+msgstr "Iskalna osnova DN za LDAP"
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
@@ -643,9 +629,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "Uporabnik z odobritvijo SASL v LDAP"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Napaka pri inicializaciji %s: %s.\n"
+msgstr "Napaka pri inicializaciji %s: %s\n"
 
 #: samples/lookup.c:75
 #, c-format
@@ -681,7 +667,7 @@ msgstr "Privzeta imena atributov uporabnika:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "Dobivamo privete atribute uporabnika:\n"
+msgstr "Dobivamo privzete atribute uporabnika:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
@@ -695,18 +681,6 @@ msgstr "Prepisovanje uporabni¹ke strukture:\n"
 
 #~ msgid "entity object has no `%s' attribute"
 #~ msgstr "entitetni objekt nima atributa ,%s`"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Ime skupine ni bilo doloèeno.\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Napaka pri ustvarjanju skupine za %s: %s.\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "I¹èem skupino z ID %d.\n"
 
 #~ msgid "Bad UID for %s.\n"
 #~ msgstr "Slaba UID za %s.\n"
