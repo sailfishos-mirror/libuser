@@ -1,4 +1,5 @@
-/* Copyright (C) 2001 Red Hat, Inc.
+/*
+ * Copyright (C) 2001,2002 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -42,8 +43,8 @@
 int
 main(int argc, const char **argv)
 {
-	const char *user = NULL, *gecos = NULL, *sn, *gn, *email;
-	char *name, *office, *officephone, *homephone;
+	const char *user = NULL, *gecos = NULL, *sn, *gn, *email, *filtered;
+	const char *name, *office, *officephone, *homephone;
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent = NULL;
@@ -155,8 +156,8 @@ main(int argc, const char **argv)
 
 	/* The first prompt is for the full name. */
 	name = (fields_len > 0) ? fields[0] : NULL;
-	prompts[pcount].key = "lchfn/name";
-	prompts[pcount].prompt = NAME_KEY;
+	prompts[pcount].key = NAME_KEY;
+	prompts[pcount].prompt = N_("Full Name");
 	prompts[pcount].domain = PACKAGE;
 	prompts[pcount].visible = TRUE;
 	prompts[pcount].default_value = name;
@@ -267,48 +268,70 @@ main(int argc, const char **argv)
 
 	/* Now iterate over the answers and figure things out. */
 	for (i = 0; i < pcount; i++) {
-		g_value_set_string(&val, prompts[i].value ?: "");
+		if (prompts[i].value == NULL) {
+			filtered = "";
+		} else
+		if (strcmp(prompts[i].value, ".") == 0) {
+			filtered = "";
+		} else {
+			filtered = prompts[i].value;
+		}
+		g_value_set_string(&val, filtered);
 
 		if (strcmp(prompts[i].key, NAME_KEY) == 0) {
-			name = prompts[i].value;
+			name = filtered;
 			lu_ent_clear(ent, LU_COMMONNAME);
-			lu_ent_add(ent, LU_COMMONNAME, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_COMMONNAME, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, SURNAME_KEY) == 0) {
-			sn = prompts[i].value;
+			sn = filtered;
 			lu_ent_clear(ent, LU_SN);
-			lu_ent_add(ent, LU_SN, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_SN, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, GIVENNAME_KEY) == 0) {
-			gn = prompts[i].value;
+			gn = filtered;
 			lu_ent_clear(ent, LU_GIVENNAME);
-			lu_ent_add(ent, LU_GIVENNAME, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_GIVENNAME, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, OFFICE_KEY) == 0) {
-			office = prompts[i].value;
+			office = filtered;
 			lu_ent_clear(ent, LU_ROOMNUMBER);
-			lu_ent_add(ent, LU_ROOMNUMBER, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_ROOMNUMBER, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, OFFICEPHONE_KEY) == 0) {
-			officephone = prompts[i].value;
+			officephone = filtered;
 			lu_ent_clear(ent, LU_TELEPHONENUMBER);
-			lu_ent_add(ent, LU_TELEPHONENUMBER, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_TELEPHONENUMBER, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, HOMEPHONE_KEY) == 0) {
-			homephone = prompts[i].value;
+			homephone = filtered;
 			lu_ent_clear(ent, LU_HOMEPHONE);
-			lu_ent_add(ent, LU_HOMEPHONE, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_HOMEPHONE, &val);
+			}
 		}
 
 		if (strcmp(prompts[i].key, EMAIL_KEY) == 0) {
-			email = prompts[i].value;
+			email = filtered;
 			lu_ent_clear(ent, LU_EMAIL);
-			lu_ent_add(ent, LU_EMAIL, &val);
+			if (strlen(filtered) > 0) {
+				lu_ent_add(ent, LU_EMAIL, &val);
+			}
 		}
 	}
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/* Copyright (C) 2000-2002 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -879,7 +879,6 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Add the account. */
-		lu_ent_commit(tmp);
 		if (run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -907,7 +906,6 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Make the changes. */
 		g_assert(entity != NULL);
-		lu_ent_commit(tmp);
 		if (run_list(context, entity->modules,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
@@ -1041,6 +1039,7 @@ lu_user_lookup_name(struct lu_context * context, const char *name,
 		    struct lu_ent * ent, struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(name != NULL, FALSE);
 	return lu_dispatch(context, user_lookup_name, name, 0,
 			   ent, NULL, error);
 }
@@ -1050,6 +1049,7 @@ lu_group_lookup_name(struct lu_context * context, const char *name,
 		     struct lu_ent * ent, struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(name != NULL, FALSE);
 	return lu_dispatch(context, group_lookup_name, name, 0,
 			   ent, NULL, error);
 }

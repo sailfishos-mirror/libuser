@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
-"POT-Creation-Date: 2002-01-22 20:27-0500\n"
+"POT-Creation-Date: 2002-01-24 16:02-0500\n"
 "PO-Revision-Date: 2002-01-06 17:17-0400\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -13,272 +13,272 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:68
+#: apps/apputil.c:69
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s'の読み込みでエラー: %s"
 
-#: apps/apputil.c:76
+#: apps/apputil.c:77
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s'の作成でエラー: %s"
 
-#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
+#: apps/apputil.c:199 apps/apputil.c:231 apps/apputil.c:248
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s'の削除でエラー: %s"
 
-#: apps/apputil.c:404 apps/apputil.c:408
+#: apps/apputil.c:405 apps/apputil.c:409
 msgid "Failed to drop privileges.\n"
 msgstr ""
 
-#: apps/apputil.c:417
+#: apps/apputil.c:418
 msgid "Internal error.\n"
 msgstr "内部エラー。\n"
 
-#: apps/apputil.c:426
+#: apps/apputil.c:427
 msgid "Error initializing PAM.\n"
 msgstr "PAMの初期化でエラー。\n"
 
-#: apps/apputil.c:434 apps/apputil.c:458
+#: apps/apputil.c:435 apps/apputil.c:459
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%sの認証に失敗しました。\n"
 
-#: apps/apputil.c:443
+#: apps/apputil.c:444
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "内部PAMエラー `%s'。\n"
 
-#: apps/apputil.c:449
+#: apps/apputil.c:450
 msgid "User mismatch.\n"
 msgstr "ユーザの不一致。\n"
 
-#: apps/lchage.c:131 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
+#: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
 msgstr "[OPTION...]ユーザ"
 
-#: apps/lchage.c:134 apps/lgroupadd.c:67 apps/lgroupdel.c:59
-#: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
-#: apps/lusermod.c:90
+#: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
+#: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
+#: apps/lusermod.c:91
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "引数のパースでエラー: %s。\n"
 
-#: apps/lchage.c:143 apps/luseradd.c:103 apps/luserdel.c:75
-#: apps/lusermod.c:101
+#: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lusermod.c:102
 msgid "No user name specified.\n"
 msgstr "ユーザ名が指定されていません。\n"
 
-#: apps/lchage.c:154 apps/lgroupadd.c:87 apps/lgroupdel.c:79
-#: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:112 samples/testuser.c:70
+#: apps/lchage.c:155 apps/lgroupadd.c:88 apps/lgroupdel.c:80
+#: apps/lgroupmod.c:103 apps/luseradd.c:115 apps/luserdel.c:86
+#: apps/lusermod.c:113 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%sの初期化でエラー: %s。\n"
 
-#: apps/lchage.c:157 apps/lgroupadd.c:90 apps/lgroupdel.c:82
-#: apps/lgroupmod.c:105 apps/luseradd.c:117 apps/luserdel.c:88
-#: apps/lusermod.c:115
+#: apps/lchage.c:158 apps/lgroupadd.c:91 apps/lgroupdel.c:83
+#: apps/lgroupmod.c:106 apps/luseradd.c:118 apps/luserdel.c:89
+#: apps/lusermod.c:116
 #, c-format
 msgid "Error initializing %s.\n"
 msgstr "%sの初期化でエラー。\n"
 
-#: apps/lchage.c:167 apps/luserdel.c:97 apps/lusermod.c:130
+#: apps/lchage.c:168 apps/luserdel.c:98 apps/lusermod.c:131
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "ユーザ%sは存在しません。\n"
 
-#: apps/lchage.c:175
+#: apps/lchage.c:176
 msgid "Account is locked.\n"
 msgstr "アカウントはロックされています。\n"
 
-#: apps/lchage.c:177
+#: apps/lchage.c:178
 msgid "Account is not locked.\n"
 msgstr "アカウントはロックされています。\n"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:183
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "最小:\t%d\n"
 
-#: apps/lchage.c:187
+#: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "最大:\t%d\n"
 
-#: apps/lchage.c:192
+#: apps/lchage.c:193
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "警告:\t%d\n"
 
-#: apps/lchage.c:197
+#: apps/lchage.c:198
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "無効:\t%d\n"
 
-#: apps/lchage.c:202 apps/lchage.c:210 apps/lchage.c:221 apps/lchage.c:231
+#: apps/lchage.c:203 apps/lchage.c:211 apps/lchage.c:222 apps/lchage.c:232
 msgid "Never"
 msgstr "なし"
 
-#: apps/lchage.c:204
+#: apps/lchage.c:205
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "最終更新: \t%s\n"
 
-#: apps/lchage.c:214
+#: apps/lchage.c:215
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "パスワード期限切れ:\t%s\n"
 
-#: apps/lchage.c:226
+#: apps/lchage.c:227
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "パスワード無効:\t%s\n"
 
-#: apps/lchage.c:233
+#: apps/lchage.c:234
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "アカウント期限切れ:\t%s\n"
 
-#: apps/lchage.c:280
+#: apps/lchage.c:281
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "%sの期限情報の更新に失敗しました。\n"
 
-#: apps/lgroupadd.c:64 apps/lgroupdel.c:56 apps/lgroupmod.c:81
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
 msgstr "[OPTION...]グループ"
 
-#: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:92
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
 msgstr "グループ名は指定されていません。\n"
 
-#: apps/lgroupadd.c:114
+#: apps/lgroupadd.c:115
 msgid "Group creation failed.\n"
 msgstr "グループの作成に失敗しました。\n"
 
-#: apps/lgroupdel.c:91 apps/lgroupmod.c:119
+#: apps/lgroupdel.c:92 apps/lgroupmod.c:120
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "グループ%sは存在しません。\n"
 
-#: apps/lgroupdel.c:97
+#: apps/lgroupdel.c:98
 #, c-format
 msgid "Group %s could not be deleted.\n"
 msgstr "グループ%sは削除できませんでした。\n"
 
-#: apps/lgroupmod.c:112 apps/lusermod.c:123
+#: apps/lgroupmod.c:113 apps/lusermod.c:124
 msgid "Both -L and -U specified.\n"
 msgstr "-Lと-Uの両方が指定されています。\n"
 
-#: apps/lgroupmod.c:229 apps/lgroupmod.c:239
+#: apps/lgroupmod.c:230 apps/lgroupmod.c:240
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "グループ%sのパスワード設定に失敗しました。\n"
 
-#: apps/lgroupmod.c:248
+#: apps/lgroupmod.c:249
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "グループ%sはロックされませんでした。\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "グループ%sはロック解除出来ませんでした。\n"
 
-#: apps/lgroupmod.c:263
+#: apps/lgroupmod.c:264
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "グループ%sは修正されませんでした。\n"
 
 #. Aargh!  Abandon all hope.
-#: apps/luseradd.c:200 apps/luseradd.c:212
+#: apps/luseradd.c:201 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "グループ`%s'の作成でエラー: %s。\n"
 
-#: apps/luseradd.c:279
+#: apps/luseradd.c:280
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "アカウントの作成に失敗しました: %s。\n"
 
-#: apps/luseradd.c:321
+#: apps/luseradd.c:322
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%sの作成でエラー: %s。\n"
 
-#: apps/luserdel.c:102
+#: apps/luserdel.c:103
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "ユーザ%sは削除できませんでした: %s。\n"
 
-#: apps/luserdel.c:112
+#: apps/luserdel.c:113
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%sにはGID番号がありません。\n"
 
-#: apps/luserdel.c:126
+#: apps/luserdel.c:127
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr "GID %ld のグループが存在しません。削除しません。\n"
 
-#: apps/luserdel.c:132
+#: apps/luserdel.c:133
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "GID %ld のグループにはグループ名がありません。\n"
 
-#: apps/luserdel.c:140
+#: apps/luserdel.c:141
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "グループ%sは削除できませんでした: %s。\n"
 
-#: apps/luserdel.c:154
+#: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%sにはホームディレクトリがありません。\n"
 
-#: apps/luserdel.c:161
+#: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "%sの削除でエラー: %s。\n"
 
-#: apps/lusermod.c:197 apps/lusermod.c:210
+#: apps/lusermod.c:198 apps/lusermod.c:211
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "ユーザ%sのパスワード設定で失敗 %s: %s。\n"
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:222
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "ユーザ%sはロックできませんでした: %s。\n"
 
-#: apps/lusermod.c:229
+#: apps/lusermod.c:230
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "ユーザ%sはロック解除できませんでした: %s。\n"
 
-#: apps/lusermod.c:237
+#: apps/lusermod.c:238
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "ユーザ%sは編集できませんでした: %s。\n"
 
-#: apps/lusermod.c:290
+#: apps/lusermod.c:291
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "グループ%sは修正できませんでした:%s。\n"
 
-#: apps/lusermod.c:301
+#: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%sには古いホームディレクトリがありません。\n"
 
-#: apps/lusermod.c:306
+#: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%sには新しいホームディレクトリはありません。\n"
 
-#: apps/lusermod.c:312
+#: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%sを%sに移動する際にエラー: %s。\n"
@@ -382,297 +382,297 @@ msgstr "`%s'の関数%sで初期化できません"
 msgid "module version mismatch in `%s'"
 msgstr "`%s'のモジュールバージョンの不一致"
 
-#: lib/prompt.c:66
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "ターミナル属性の読み込み中にエラー"
 
-#: lib/prompt.c:75 lib/prompt.c:89
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "ターミナル属性の設定中にエラー"
 
-#: lib/prompt.c:81
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "ターミナルから読み込み中にエラー"
 
-#: lib/util.c:184
+#: lib/util.c:185
 #, c-format
 msgid "error locking file: %s"
 msgstr "ファイルのロック中にエラー: %s"
 
-#: modules/files.c:107 modules/files.c:403 modules/files.c:717
-#: modules/files.c:968 modules/files.c:1144 modules/files.c:1326
-#: modules/files.c:1402 modules/files.c:1572 modules/files.c:1687
-#: modules/files.c:1702 modules/files.c:1777 modules/files.c:1794
-#: modules/files.c:1845 modules/files.c:1864 modules/files.c:1941
-#: modules/files.c:1956 modules/files.c:2031 modules/files.c:2046
+#: modules/files.c:108 modules/files.c:404 modules/files.c:718
+#: modules/files.c:969 modules/files.c:1145 modules/files.c:1327
+#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1688
+#: modules/files.c:1703 modules/files.c:1778 modules/files.c:1795
+#: modules/files.c:1846 modules/files.c:1865 modules/files.c:1942
+#: modules/files.c:1957 modules/files.c:2032 modules/files.c:2047
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s'を開けません: %s"
 
-#: modules/files.c:122 modules/files.c:154 modules/files.c:186
-#: modules/files.c:731 modules/files.c:1158
+#: modules/files.c:123 modules/files.c:155 modules/files.c:187
+#: modules/files.c:732 modules/files.c:1159
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'のstat情報を取得できません: %s"
 
-#: modules/files.c:131
+#: modules/files.c:132
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s'の作成中にエラー: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "バックアップファイル`%s'はシンボリックリンクでした"
 
-#: modules/files.c:748 modules/files.c:1169
+#: modules/files.c:749 modules/files.c:1170
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'から読みこめません: %s"
 
-#: modules/files.c:760 modules/files.c:772
+#: modules/files.c:761 modules/files.c:773
 msgid "entry already present in file"
 msgstr "エントリはファイルにすでにあります"
 
-#: modules/files.c:786 modules/files.c:801 modules/files.c:1199
-#: modules/files.c:1210
+#: modules/files.c:787 modules/files.c:802 modules/files.c:1200
+#: modules/files.c:1211
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'に書き込めません: %s"
 
-#: modules/files.c:938 modules/files.c:947 modules/files.c:1031
-#: modules/files.c:1044
+#: modules/files.c:939 modules/files.c:948 modules/files.c:1032
+#: modules/files.c:1045
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "エンティティオブジェクトには%s属性はありません"
 
-#: modules/files.c:2395 modules/files.c:2463
+#: modules/files.c:2396 modules/files.c:2464
 msgid "not executing with superuser privileges"
 msgstr "スーパーユーザ特権で実行できません"
 
-#: modules/files.c:2476
+#: modules/files.c:2477
 msgid "no shadow file present -- disabling"
 msgstr "shadowファイルはありません -- 無効になっています"
 
-#: modules/krb5.c:104
+#: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr "領域`%s'のサービス`%s'でkadm5サーバに接続できません: %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "ケルベロスライブラリの初期化でエラー"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "ケルベロスのユーザ名`%s'でパースエラー"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "エンティティ構造体には%sおよび%s属性はありません。"
 
-#: modules/krb5.c:310
+#: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "エンティティには%sおよび%s属性はありません。"
 
-#: modules/krb5.c:323
+#: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "エンティティは%sや%s属性なしで作成されました"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "ケルベロスから`%s'の情報を読み込み中にエラー"
 
-#: modules/krb5.c:603
+#: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "エンティティには%s属性はありません"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "`%s'のパスワード設定中にエラー"
 
-#: modules/krb5.c:767
+#: modules/krb5.c:768
 msgid "Kerberos Realm"
 msgstr "ケルベロス領域"
 
-#: modules/krb5.c:774
+#: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
 msgstr "ケルベロス管理プリンシパル"
 
-#: modules/krb5.c:796
+#: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
 msgstr "管理プリンシパルのケルベロスパスワード"
 
-#: modules/ldap.c:245
+#: modules/ldap.c:214 modules/ldap.c:247 modules/ldap.c:2226
 msgid "error initializing ldap library"
 msgstr "LDAPライブラリの初期化でエラー"
 
-#: modules/ldap.c:272
+#: modules/ldap.c:225 modules/ldap.c:258 modules/ldap.c:2238
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAPプロトコルをバージョン%dに設定できませんでした"
 
-#: modules/ldap.c:281
+#: modules/ldap.c:235 modules/ldap.c:2250
 msgid "could not negotiate TLS with LDAP server"
 msgstr "LDAPサーバとTLSネゴシエートできませんでした"
 
-#: modules/ldap.c:312
+#: modules/ldap.c:406
 msgid "could not bind to LDAP server"
 msgstr "LDAPサーバとバインドできませんでした"
 
-#: modules/ldap.c:325
+#: modules/ldap.c:419 modules/ldap.c:2264
 #, fuzzy
 msgid "could not search LDAP server"
 msgstr "LDAPサーバとバインドできませんでした"
 
-#: modules/ldap.c:334
+#: modules/ldap.c:428 modules/ldap.c:2274
 msgid "LDAP server appears to have no root DSE"
 msgstr ""
 
-#: modules/ldap.c:495 modules/ldap.c:1028 modules/ldap.c:1157
-#: modules/ldap.c:1224 modules/ldap.c:1341 modules/ldap.c:1439
+#: modules/ldap.c:626 modules/ldap.c:1167 modules/ldap.c:1283
+#: modules/ldap.c:1346 modules/ldap.c:1459 modules/ldap.c:1553
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP削除名の名前のマッピングでエラー"
 
-#: modules/ldap.c:504
+#: modules/ldap.c:635
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "LDAPベース削除名の名前のマッピングでエラー"
 
-#: modules/ldap.c:591
-msgid "error searching LDAP directory"
-msgstr "LDAPディレクトリの検索でエラー"
-
-#: modules/ldap.c:998
+#: modules/ldap.c:1141
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "ユーザオブジェクトには%s属性はありません"
 
-#: modules/ldap.c:1007
+#: modules/ldap.c:1150
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "ユーザオブジェクトは`%s'なしで生成されました"
 
-#: modules/ldap.c:1037
+#: modules/ldap.c:1176
 msgid "could not convert internal data to LDAPMods"
 msgstr "内部データをLDAPモジュールに変換できませんでした"
 
-#: modules/ldap.c:1061 modules/ldap.c:1289
+#: modules/ldap.c:1200 modules/ldap.c:1411
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAPディレクトリエントリを変更するときにエラー: %s"
 
-#: modules/ldap.c:1090
+#: modules/ldap.c:1220
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "LDAPディレクトリエントリの名前変更でエラー: %s\n"
 
-#: modules/ldap.c:1138
+#: modules/ldap.c:1268
 #, c-format
 msgid "object had no %s attribute"
 msgstr "オブジェクトには%s属性はありません"
 
-#: modules/ldap.c:1169
+#: modules/ldap.c:1295
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAPディレクトリエントリの削除でエラー: %s。\n"
 
-#: modules/ldap.c:1206 modules/ldap.c:1232 modules/ldap.c:1322
-#: modules/ldap.c:1420
+#: modules/ldap.c:1332 modules/ldap.c:1354 modules/ldap.c:1444
+#: modules/ldap.c:1538
 #, c-format
 msgid "object has no %s attribute"
 msgstr "オブジェクトには%s属性はありません"
 
-#: modules/ldap.c:1356
+#: modules/ldap.c:1474
 msgid "no such object in LDAP directory"
 msgstr "LDAPディレクトリにはそのようなオブジェクトはありません"
 
-#: modules/ldap.c:1369
+#: modules/ldap.c:1487
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'属性は見つかりませんでした"
 
-#: modules/ldap.c:1516
+#: modules/ldap.c:1628
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%sのLDAPディレクトリのパスワード設定でエラー: %s"
 
-#: modules/ldap.c:2005
+#: modules/ldap.c:2156
 msgid "LDAP Server Name"
 msgstr "LDAPサーバ名"
 
-#: modules/ldap.c:2011
-msgid "LDAP Base DN"
+#: modules/ldap.c:2162
+#, fuzzy
+msgid "LDAP Search Base DN"
 msgstr "LDAPベースDN"
 
-#: modules/ldap.c:2018
+#: modules/ldap.c:2168
 msgid "LDAP Bind DN"
 msgstr "LDAPバインドDN"
 
-#: modules/ldap.c:2025
+#: modules/ldap.c:2175
 msgid "LDAP Bind Password"
 msgstr "LDAPバインドパスワード"
 
-#: modules/ldap.c:2031
+#: modules/ldap.c:2181
 msgid "LDAP SASL User"
 msgstr "LDAP SASLユーザ"
 
-#: modules/ldap.c:2038
+#: modules/ldap.c:2188
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL認証ユーザ"
 
-#: samples/lookup.c:63
+#: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
 msgstr "%sの初期化でエラー: %s\n"
 
-#: samples/lookup.c:74
+#: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr "ID %dのグループを検索中。\n"
 
-#: samples/lookup.c:77
+#: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
 msgstr "名前が%sのグループを検索中。\n"
 
-#: samples/lookup.c:86
+#: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr "ID %dのユーザを検索中。\n"
 
-#: samples/lookup.c:89
+#: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr "名前が%sのユーザを検索中。\n"
 
-#: samples/lookup.c:103
+#: samples/lookup.c:104
 msgid "Entry not found.\n"
 msgstr "エントリは見つかりませんでした。\n"
 
-#: samples/testuser.c:75
+#: samples/testuser.c:76
 msgid "Default user object classes:\n"
 msgstr "デフォルトユーザオブジェクトクラス:\n"
 
-#: samples/testuser.c:81
+#: samples/testuser.c:82
 msgid "Default user attribute names:\n"
 msgstr "デフォルトユーザ属性名:\n"
 
-#: samples/testuser.c:87
+#: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
 msgstr "デフォルトユーザ属性を取得中:\n"
 
-#: samples/testuser.c:94
+#: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
+
+#~ msgid "error searching LDAP directory"
+#~ msgstr "LDAPディレクトリの検索でエラー"
 
 #~ msgid "no `%s' attribute using `%s' scheme found"
 #~ msgstr "`%s'属性で`%s'スキームを使っているものは見つかりませんでした"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/* Copyright (C) 2000-2002 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under 
  * the terms of the GNU Library General Public License as published by
@@ -67,8 +67,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			}
 			ntermios = otermios;
 			ntermios.c_lflag &= ~ECHO;
-			if (tcsetattr(fileno(stdin), TCSADRAIN, &ntermios)
-			    == -1) {
+			if (tcsetattr(fileno(stdin), TCSADRAIN, &ntermios) == -1) {
 				lu_error_new(error, lu_error_terminal,
 					     _("error setting terminal attributes"));
 				return FALSE;
@@ -80,8 +79,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			return FALSE;
 		}
 		if (prompts[i].visible == FALSE) {
-			if (tcsetattr(fileno(stdin), TCSADRAIN, &otermios)
-			    == -1) {
+			if (tcsetattr(fileno(stdin), TCSADRAIN, &otermios) == -1) {
 				lu_error_new(error, lu_error_terminal,
 					     _("error setting terminal attributes"));
 				return FALSE;

@@ -1,4 +1,5 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/*
+ * Copyright (C) 2000-2002 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -764,14 +765,14 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 	ctx = g_malloc0(sizeof(struct lu_krb5_context));
 
 	ctx->prompts[LU_KRB5_REALM].key = "krb5/realm";
-	ctx->prompts[LU_KRB5_REALM].prompt = _("Kerberos Realm");
+	ctx->prompts[LU_KRB5_REALM].prompt = N_("Kerberos Realm");
 	ctx->prompts[LU_KRB5_REALM].visible = TRUE;
 	ctx->prompts[LU_KRB5_REALM].default_value =
 	    lu_cfg_read_single(context, "krb5/realm",
 			       get_default_realm(context));
 
 	ctx->prompts[LU_KRB5_PRINC].key = "krb5/principal";
-	ctx->prompts[LU_KRB5_PRINC].prompt = _("Kerberos Admin Principal");
+	ctx->prompts[LU_KRB5_PRINC].prompt = N_("Kerberos Admin Principal");
 	ctx->prompts[LU_KRB5_PRINC].visible = TRUE;
 	if (context->auth_name) {
 		tmp = g_strconcat(context->auth_name, "/admin", NULL);
@@ -793,7 +794,7 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 
 	ctx->prompts[LU_KRB5_PASSWORD].key = "krb5/password";
 	ctx->prompts[LU_KRB5_PASSWORD].prompt =
-	    _("Kerberos Password for Admin Principal");
+	    N_("Kerberos Password for Admin Principal");
 	ctx->prompts[LU_KRB5_PASSWORD].visible = FALSE;
 
 	if ((context->prompter == NULL)
