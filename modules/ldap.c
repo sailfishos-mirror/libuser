@@ -1545,6 +1545,7 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 
 	/* Read the entry data. */
 	if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE,
+			  /* FIXME: POSIXACCOUNT for groups? */
 			  "("OBJECTCLASS"="POSIXACCOUNT")", attributes,
 			  FALSE, &messages) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
@@ -1555,6 +1556,7 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 		return FALSE;
 	}
 
+	/* FIXME: s/LU_USERPASSWORD/LU_GROUPPASSWORD for groups */
 	/* Read the values for the attribute we want to change. */
 	values = ldap_get_values(ctx->ldap, entry,
 				 map_to_ldap(ent->cache, LU_USERPASSWORD));
@@ -1598,6 +1600,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	GValue *value;
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
+	/* FIXME: LU_GROUPPASSWORD for groups */
 	char *attributes[] = { LU_USERPASSWORD, NULL };
 	char **values, *addvalues[] = { NULL, NULL }, *rmvalues[] = {
 	NULL, NULL};
@@ -1611,7 +1614,9 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	char filter[LINE_MAX];
 
 	/* Get the user or group's name. */
+#ifdef DEBUG
 	g_print("Setting password to `%s'.\n", password);
+#endif
 	name = lu_ent_get(ent, namingAttr);
 	if (name == NULL) {
 		lu_error_new(error, lu_error_generic,
