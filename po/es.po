@@ -1,21 +1,23 @@
 # translation of es.po to 
-# Copyright (C) 2001,2003 Free Software Foundation, Inc.
+# translation of es.po to
+# translation of es.po to Spanish
+# Copyright (C) 2001,2003, 2004 Free Software Foundation, Inc.
 # Núria Soriano <nsoriano@redhat.es>, 2001.
 # Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
-# Yelitza Louze <ylouze@redhat.com>, 2003
+# Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2003-06-11 15:45+1000\n"
+"PO-Revision-Date: 2004-11-03 09:46+1000\n"
 "Last-Translator: Yelitza Louze <ylouze@redhat.com>\n"
 "Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: KBabel 1.0.2\n"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
@@ -53,19 +55,18 @@ msgstr "Error interno.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s no está autorizado para cambiar la información de finger de %s\n"
 
 # lib/userent.c:46
 # lib/userent.c:47
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "error desconocido"
+msgstr "Contexto de usuario desconocido"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "No se pudo establecer el contexto predeterminado para  /etc/passwd\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
@@ -218,9 +219,9 @@ msgstr "Cuenta caducada:\t%s\n"
 # apps/lchage.c:201
 # apps/lchage.c:201
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "No se pudo modificar la información de paso del tiempo para %s.\n"
+msgstr "Falló al modificar la información de caducidad para %s: %s\n"
 
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
@@ -233,8 +234,7 @@ msgstr "[OPCIÓN...] [usuario]"
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
-"No se ha especificado nombre de usuario, no hay un nombre para el uid %d.\n"
+msgstr "No se ha especificado nombre de usuario, no hay un nombre para el uid %d.\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
@@ -299,9 +299,9 @@ msgid "Shell changed.\n"
 msgstr "Shell modificado.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Shell modificado.\n"
+msgstr "Shell sin modificar: %s\n"
 
 # apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
 # apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
@@ -319,9 +319,9 @@ msgstr "No se ha especificado ningún nombre de grupo.\n"
 # apps/lgroupadd.c:88
 # apps/lgroupadd.c:88
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Creación de grupo fallida.\n"
+msgstr "Falló la creación del grupo: %s\n"
 
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
@@ -333,9 +333,9 @@ msgstr "El grupo %s no existe.\n"
 # apps/luserdel.c:110
 # apps/luserdel.c:110
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "No se ha podido eliminar el grupo %s: %s.\n"
+msgstr "No se ha podido eliminar el grupo %s: %s\n"
 
 # apps/lgroupmod.c:89 apps/lusermod.c:90
 # apps/lgroupmod.c:89 apps/lusermod.c:90
@@ -347,28 +347,28 @@ msgstr "Especificación de -L y -U\n"
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Intento fallido de configuración de la contraseña para el grupo %s.\n"
+msgstr "Falló al tratar de establecer la contraseña para el grupo %s: %s\n"
 
 # apps/lgroupmod.c:174
 # apps/lgroupmod.c:174
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "No se ha podido bloquear el grupo %s.\n"
+msgstr "No se pudo bloquear el grupo %s: %s\n"
 
 # apps/lgroupmod.c:182
 # apps/lgroupmod.c:182
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "No se ha podido desbloquear el grupo %s.\n"
+msgstr "No se ha podido desbloquear el grupo %s: %s\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "El grupo %s no se ha podido modificar:%s\n"
 
@@ -384,8 +384,7 @@ msgstr "No se ha especificado ningún nombre de grupo, usando %s .\n"
 #: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
-"No se ha especificado ningún nombre de grupo, no hay nombre para gid %d.\n"
+msgstr "No se ha especificado ningún nombre de grupo, no hay nombre para gid %d.\n"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
@@ -421,9 +420,9 @@ msgstr "Rechazando la creación de cuenta con UID 0.\n"
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "Error en la creación de un grupo para  `%s' con GID %ld.\n"
+msgstr "Error en la creación de un grupo para  `%s' con GID  %ld: %s\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
@@ -500,9 +499,9 @@ msgstr "Contraseña modificada.\n"
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Error en la creación de un grupo %s?.\n"
+msgstr "Error en la creación del grupo `%s': %s\n"
 
 # apps/luseradd.c:159
 # apps/luseradd.c:159
@@ -638,16 +637,16 @@ msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
 # lib/usercfg.c:56
 # lib/usercfg.c:56
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
+msgstr "no se pudo comenzar el archivo de configuración `%s': %s"
 
 # lib/usercfg.c:56
 # lib/usercfg.c:56
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
+msgstr "no se ha podido leer el archivo de configuración `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -821,33 +820,33 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "no se ha podido escribir en `%s': %s"
+msgstr "no se pudo obtener el contexto de seguridad `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "no se ha podido empezar `%s': %s"
+msgstr "no se ha podido configurar el contexto de seguridad predeterminado: %s"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "no se ha podido escribir en `%s': %s"
+msgstr "no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "no se ha podido escribir en `%s': %s"
+msgstr "no se pudo reestablecer el contexto de seguridad a `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:109 modules/files.c:316 modules/files.c:573
@@ -888,8 +887,7 @@ msgstr "error al crear `%s': %s"
 #: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
-"Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
+msgstr "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
@@ -926,9 +924,8 @@ msgstr "el objeto de entidad no tiene ningún atributo %s"
 # modules/krb5.c:549
 # modules/krb5.c:547
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "error en la configuración de la contraseña para `%s'"
+msgstr "error al encriptar la contraseña"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
@@ -1058,9 +1055,9 @@ msgstr "no se ha podido vincular al servidor LDAP"
 # modules/ldap.c:216
 # modules/ldap.c:213
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "no se ha podido vincular al servidor LDAP"
+msgstr "no se ha podido vincular al servidor LDAP, primer intento como `%s': %s"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
@@ -1110,9 +1107,9 @@ msgstr "no se han podido convertir los datos internos a LDAPMods"
 # modules/ldap.c:598
 # modules/ldap.c:600
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "error al renombrar la entrada del directorio LDAP: %s\n"
+msgstr "error al crear una entrada al directorio LDAP: %s"
 
 # modules/ldap.c:585 modules/ldap.c:748
 # modules/ldap.c:587 modules/ldap.c:751
@@ -1124,9 +1121,9 @@ msgstr "error al modificar la entrada del directorio LDAP: %s"
 # modules/ldap.c:598
 # modules/ldap.c:600
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "error al renombrar la entrada del directorio LDAP: %s\n"
+msgstr "error al renombrar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:640
 # modules/ldap.c:643
@@ -1138,9 +1135,9 @@ msgstr "el objeto no tiene ningún atributo %s"
 # modules/ldap.c:657
 # modules/ldap.c:660
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "error al eliminar la entrada del directorio LDAP: %s.\n"
+msgstr "error al eliminar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
 # modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
@@ -1302,11 +1299,11 @@ msgstr "No se ha encontrado la entrada.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Los avisos fueron exitosos.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Fallaron los avisos.\n"
 
 # samples/testuser.c:59
 # samples/testuser.c:59
@@ -1365,3 +1362,4 @@ msgstr "Copia de la estructura de usuario:\n"
 # lib/userutil.c:177
 #~ msgid "error initializing module"
 #~ msgstr "error inicializando el módulo"
+
