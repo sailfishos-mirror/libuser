@@ -10,49 +10,49 @@ msgstr ""
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: apps/apputil.c:71
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Villa viğ lestur `%s': %s"
+msgstr "Villa viÃ° lestur `%s': %s"
 
 #: apps/apputil.c:79
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "Villa viğ ağ búa til `%s': %s"
+msgstr "Villa viÃ° aÃ° bÃºa til `%s': %s"
 
 #: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "Villa viğ ağ fjarlægja `%s': %s"
+msgstr "Villa viÃ° aÃ° fjarlÃ¦gja `%s': %s"
 
 #: apps/apputil.c:421 apps/apputil.c:425
 msgid "Failed to drop privileges.\n"
-msgstr "Gat ekki minnkağ heimildir.\n"
+msgstr "Gat ekki minnkaÃ° heimildir.\n"
 
 #: apps/apputil.c:434
 msgid "Internal error.\n"
-msgstr "Innvær villa.\n"
+msgstr "InnvÃ¦r villa.\n"
 
 #: apps/apputil.c:447
 msgid "Error initializing PAM.\n"
-msgstr "Villa viğ frumstillingu PAM.\n"
+msgstr "Villa viÃ° frumstillingu PAM.\n"
 
 #: apps/apputil.c:455 apps/apputil.c:479
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Auğkenning mistókst hjá %s.\n"
+msgstr "AuÃ°kenning mistÃ³kst hjÃ¡ %s.\n"
 
 #: apps/apputil.c:464
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Innvær PAM villai `%s'.\n"
+msgstr "InnvÃ¦r PAM villai `%s'.\n"
 
 #: apps/apputil.c:470
 msgid "User mismatch.\n"
-msgstr "Misræmi í notanda.\n"
+msgstr "MisrÃ¦mi Ã­ notanda.\n"
 
 #: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
 #: apps/luserdel.c:65 apps/lusermod.c:87
@@ -64,12 +64,12 @@ msgstr "[ROFI...] notandi"
 #: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Villa viğ ağ şátta viğföng: %s.\n"
+msgstr "Villa viÃ° aÃ° Ã¾Ã¡tta viÃ°fÃ¶ng: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr "Ekkert notandanafn tiltekiğ.\n"
+msgstr "Ekkert notandanafn tiltekiÃ°.\n"
 
 #: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
@@ -77,7 +77,7 @@ msgstr "Ekkert notandanafn tiltekiğ.\n"
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "Villa viğ ağ frumstilla %s: %s.\n"
+msgstr "Villa viÃ° aÃ° frumstilla %s: %s.\n"
 
 #: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
 #: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
@@ -91,7 +91,7 @@ msgstr "Villa viğ ağ frumstilla %s: %s.\n"
 #: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
 #: samples/lookup.c:65
 msgid "unknown error"
-msgstr "óşekkt villa"
+msgstr "Ã³Ã¾ekkt villa"
 
 #: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
@@ -101,11 +101,11 @@ msgstr "Notandinn %s er ekki til.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr "Notandinn er læstur.\n"
+msgstr "Notandinn er lÃ¦stur.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr "Notandinn er ekki læstur.\n"
+msgstr "Notandinn er ekki lÃ¦stur.\n"
 
 #: apps/lchage.c:179
 #, c-format
@@ -120,12 +120,12 @@ msgstr "Mest:\t%d\n"
 #: apps/lchage.c:189
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr "Ağvörun:\t%d\n"
+msgstr "AÃ°vÃ¶run:\t%d\n"
 
 #: apps/lchage.c:194
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr "Óvirkur:\t%d\n"
+msgstr "Ã“virkur:\t%d\n"
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
@@ -134,27 +134,27 @@ msgstr "Aldrei"
 #: apps/lchage.c:201
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "Síğast breytt:\t%s\n"
+msgstr "SÃ­Ã°ast breytt:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Lykilorğiğ rennur út:\t%s\n"
+msgstr "LykilorÃ°iÃ° rennur Ãºt:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "Lykilorğiğ ógilt:\t%s\n"
+msgstr "LykilorÃ°iÃ° Ã³gilt:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Ağgangurinn rennur út:\t%s\n"
+msgstr "AÃ°gangurinn rennur Ãºt:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "Gat ekki breytt úreldingarupplısingum notandans %s.\n"
+msgstr "Gat ekki breytt ÃºreldingarupplÃ½singum notandans %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -163,18 +163,18 @@ msgstr "[ROFI...] [notandi]"
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Ekkert notandanafn tiltekiğ, ekkert heiti fyrir notandanúmer %d.\n"
+msgstr "Ekkert notandanafn tiltekiÃ°, ekkert heiti fyrir notandanÃºmer %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Breyti upplısingum notandans %s.\n"
+msgstr "Breyti upplÃ½singum notandans %s.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr "Villa viğ ağ frumstilla %s.\n"
+msgstr "Villa viÃ° aÃ° frumstilla %s.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
@@ -194,103 +194,103 @@ msgstr "Skrifstofa"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr "Vinnusími"
+msgstr "VinnusÃ­mi"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr "Heimasími"
+msgstr "HeimasÃ­mi"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr "Tölvupóstfang"
+msgstr "TÃ¶lvupÃ³stfang"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr "Upplısingum notandans ekki breytt:  villa.\n"
+msgstr "UpplÃ½singum notandans ekki breytt:  villa.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr "Upplısingum notandans breytt.\n"
+msgstr "UpplÃ½singum notandans breytt.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr "Upplısingum notandans ekki breytt: %s.\n"
+msgstr "UpplÃ½singum notandans ekki breytt: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr "Skipti um skél hjá %s.\n"
+msgstr "Skipti um skÃ©l hjÃ¡ %s.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr "Nı skel"
+msgstr "NÃ½ skel"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr "Skél breytt.\n"
+msgstr "SkÃ©l breytt.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr "[ROFI...] hópur"
+msgstr "[ROFI...] hÃ³pur"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "Enginn hópur tiltekinn.\n"
+msgstr "Enginn hÃ³pur tiltekinn.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
-msgstr "Ekki tókst ağ búa til hópinn,\n"
+msgstr "Ekki tÃ³kst aÃ° bÃºa til hÃ³pinn,\n"
 
 #: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr "Hópurinn %s er ekki til.\n"
+msgstr "HÃ³purinn %s er ekki til.\n"
 
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr "Ekki tókst ağ eyğa hópnum %s.\n"
+msgstr "Ekki tÃ³kst aÃ° eyÃ°a hÃ³pnum %s.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr "Bæği -L og -U tiltekiğ.\n"
+msgstr "BÃ¦Ã°i -L og -U tiltekiÃ°.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "Gat ekki sett lykilorğ á hópinn %s.\n"
+msgstr "Gat ekki sett lykilorÃ° Ã¡ hÃ³pinn %s.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr "Ekki var hægt ağ læsa hópnum %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° lÃ¦sa hÃ³pnum %s.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "Ekki var hægt ağ aflæsa hópnum %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° aflÃ¦sa hÃ³pnum %s.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "Ekki var hægt ağ breyta hópnum %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° breyta hÃ³pnum %s.\n"
 
 #: apps/lid.c:81
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Ekkert hópsheiti tiltekiğ, nota %s.\n"
+msgstr "Ekkert hÃ³psheiti tiltekiÃ°, nota %s.\n"
 
 #: apps/lid.c:85
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Ekkert hópsheiti tiltekiğ, ekkert heiti fyrir gid %d.\n"
+msgstr "Ekkert hÃ³psheiti tiltekiÃ°, ekkert heiti fyrir gid %d.\n"
 
 #: apps/lid.c:93
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Ekkert notandanafn tiltekiğ, nota %s.\n"
+msgstr "Ekkert notandanafn tiltekiÃ°, nota %s.\n"
 
 #: apps/lnewusers.c:74
 msgid "[OPTION...]"
@@ -299,186 +299,186 @@ msgstr "[ROFI...]"
 #: apps/lnewusers.c:98
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Villa viğ ağ opna `%s': %s.\n"
+msgstr "Villa viÃ° aÃ° opna `%s': %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Villa viğ ağ búa til notandaağgang fyrir `%s': rangt sniğnar upplısingar.\n"
+"Villa viÃ° aÃ° bÃºa til notandaaÃ°gang fyrir `%s': rangt sniÃ°nar upplÃ½singar.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr "Ég neita ağ búa til notandaağgang meğ UID 0.\n"
+msgstr "Ã‰g neita aÃ° bÃºa til notandaaÃ°gang meÃ° UID 0.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "Gat ekki búiğ til hópinn `%s' meğ GID %ld.\n"
+msgstr "Gat ekki bÃºiÃ° til hÃ³pinn `%s' meÃ° GID %ld.\n"
 
 #: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "Villa viğ ağ setja lykilorğ fyrir %s: %s\n"
+msgstr "Villa viÃ° aÃ° setja lykilorÃ° fyrir %s: %s\n"
 
 #: apps/lnewusers.c:310
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Villa viğ ağ búa til heimasvæği fyrir %s: %s\n"
+msgstr "Villa viÃ° aÃ° bÃºa til heimasvÃ¦Ã°i fyrir %s: %s\n"
 
 #: apps/lnewusers.c:325
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "Villa viğ ağ búa til pósthólf fyrir %s.\n"
+msgstr "Villa viÃ° aÃ° bÃºa til pÃ³sthÃ³lf fyrir %s.\n"
 
 #: apps/lnewusers.c:330
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Villa viğ ağ búa til notandaağgang fyrir %s: %s\n"
+msgstr "Villa viÃ° aÃ° bÃºa til notandaaÃ°gang fyrir %s: %s\n"
 
 #: apps/lpasswd.c:86
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "Breyti lykilorği notandans %s.\n"
+msgstr "Breyti lykilorÃ°i notandans %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr "Nıtt lykilorğ"
+msgstr "NÃ½tt lykilorÃ°"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr "Nıtt lykilorğ (stağfesta)"
+msgstr "NÃ½tt lykilorÃ° (staÃ°festa)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr "Lykilorğin eru ekki eins. Reyndu aftur.\n"
+msgstr "LykilorÃ°in eru ekki eins. Reyndu aftur.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr "Hætt viğ ağ breyta lykilorği.\n"
+msgstr "HÃ¦tt viÃ° aÃ° breyta lykilorÃ°i.\n"
 
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Villa viğ ağ búa til lykilorğ notandans %s: %s.\n"
+msgstr "Villa viÃ° aÃ° bÃºa til lykilorÃ° notandans %s: %s.\n"
 
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Villa viğ ağ setja lykilorğ fyrir hópinn %s: %s.\n"
+msgstr "Villa viÃ° aÃ° setja lykilorÃ° fyrir hÃ³pinn %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr "Lykilorği breytt.\n"
+msgstr "LykilorÃ°i breytt.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Gat ekki búiğ til hóp `%s'.\n"
+msgstr "Gat ekki bÃºiÃ° til hÃ³p `%s'.\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Gat ekki búiğ til notanda: %s.\n"
+msgstr "Gat ekki bÃºiÃ° til notanda: %s.\n"
 
 #: apps/luseradd.c:318
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "Villa viğ ağ búa %s til: %s.\n"
+msgstr "Villa viÃ° aÃ° bÃºa %s til: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr "Villa viğ ağ búa til pósthólf.\n"
+msgstr "Villa viÃ° aÃ° bÃºa til pÃ³sthÃ³lf.\n"
 
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "Ekki var hægt ağ eyğa notandanum %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° eyÃ°a notandanum %s: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s var ekki meğ gid tölu.\n"
+msgstr "%s var ekki meÃ° gid tÃ¶lu.\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr "Enginn hópur meğ GID %ld er til. Fjarlægi hann ekki.\n"
+msgstr "Enginn hÃ³pur meÃ° GID %ld er til. FjarlÃ¦gi hann ekki.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Hópur meğ GID %ld er ekki meğ hópheiti.\n"
+msgstr "HÃ³pur meÃ° GID %ld er ekki meÃ° hÃ³pheiti.\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "Ekki var hægt ağ eyğa hóp %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° eyÃ°a hÃ³p %s: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s var ekki meğ heimasvæği.\n"
+msgstr "%s var ekki meÃ° heimasvÃ¦Ã°i.\n"
 
 #: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "Villa viğ ağ eyğa %s: %s.\n"
+msgstr "Villa viÃ° aÃ° eyÃ°a %s: %s.\n"
 
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Gat ekki sett lykilorğ notanda %s: %s.\n"
+msgstr "Gat ekki sett lykilorÃ° notanda %s: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Ekki var hægt ağ læsa notandanum %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° lÃ¦sa notandanum %s: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Ekki var hægt ağ aflæsa notandanum %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° aflÃ¦sa notandanum %s: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Ekki var hægt ağ breyta notandanum %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° breyta notandanum %s: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Ekki var hægt ağ breyta hópnum %s: %s.\n"
+msgstr "Ekki var hÃ¦gt aÃ° breyta hÃ³pnum %s: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "Ekkert gamalt heimasvæği til fyrir notandann %s.\n"
+msgstr "Ekkert gamalt heimasvÃ¦Ã°i til fyrir notandann %s.\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "Ekkert nıtt heimasvæği til fyrir notandann %s.\n"
+msgstr "Ekkert nÃ½tt heimasvÃ¦Ã°i til fyrir notandann %s.\n"
 
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "Villa viğ ağ færa %s í %s: %s.\n"
+msgstr "Villa viÃ° aÃ° fÃ¦ra %s Ã­ %s: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "gat ekki opnağ stillingaskrána `%s': %s"
+msgstr "gat ekki opnaÃ° stillingaskrÃ¡na `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr "tókst"
+msgstr "tÃ³kst"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr "slökkt er á einingunni skv. stillingum"
+msgstr "slÃ¶kkt er Ã¡ einingunni skv. stillingum"
 
 #: lib/error.c:46
 msgid "generic error"
@@ -486,123 +486,123 @@ msgstr "almenn villa"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr "er ekki meğ nægar heimildir"
+msgstr "er ekki meÃ° nÃ¦gar heimildir"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr "ağgangi hafnağ"
+msgstr "aÃ°gangi hafnaÃ°"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr "ógildur notandi/hópur"
+msgstr "Ã³gildur notandi/hÃ³pur"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr "ógildur notandi/hópnúmer"
+msgstr "Ã³gildur notandi/hÃ³pnÃºmer"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "notandi/hópur er şegar í notkun"
+msgstr "notandi/hÃ³pur er Ã¾egar Ã­ notkun"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "notandanúmer/hópnúmer er şegar í notkun"
+msgstr "notandanÃºmer/hÃ³pnÃºmer er Ã¾egar Ã­ notkun"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr "gat ekki breytt eiginleikum skjás"
+msgstr "gat ekki breytt eiginleikum skjÃ¡s"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr "villa viğ opnun skráar"
+msgstr "villa viÃ° opnun skrÃ¡ar"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr "villa viğ ağ læsa skrá"
+msgstr "villa viÃ° aÃ° lÃ¦sa skrÃ¡"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr "villa viğ ağ lesa skrá"
+msgstr "villa viÃ° aÃ° lesa skrÃ¡"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr "villa viğ ağ lesa skrá"
+msgstr "villa viÃ° aÃ° lesa skrÃ¡"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr "villa viğ ağ rita skrá"
+msgstr "villa viÃ° aÃ° rita skrÃ¡"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr "gögnin fundust ekki í skránni"
+msgstr "gÃ¶gnin fundust ekki Ã­ skrÃ¡nni"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr "villa viğ ağ frumstillingu"
+msgstr "villa viÃ° aÃ° frumstillingu"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr "villa viğ ağ lesa einingu"
+msgstr "villa viÃ° aÃ° lesa einingu"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "villa viğ ağ fjarlægja merkingu úr einingu"
+msgstr "villa viÃ° aÃ° fjarlÃ¦gja merkingu Ãºr einingu"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "útgáfumismunur eininga eğa skráarsafna"
+msgstr "ÃºtgÃ¡fumismunur eininga eÃ°a skrÃ¡arsafna"
 
 #: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "ekkert frumstillingastef %s í `%s'"
+msgstr "ekkert frumstillingastef %s Ã­ `%s'"
 
 #: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "útgáfumismunur eininga í `%s'"
+msgstr "ÃºtgÃ¡fumismunur eininga Ã­ `%s'"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr "villa viğ ağ lesa einigleika skjás"
+msgstr "villa viÃ° aÃ° lesa einigleika skjÃ¡s"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr "villa viğ ağ setja skjáeiginleika"
+msgstr "villa viÃ° aÃ° setja skjÃ¡eiginleika"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr "villa viğ lestur frá skjá"
+msgstr "villa viÃ° lestur frÃ¡ skjÃ¡"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr "heitiğ er ekki stillt"
+msgstr "heitiÃ° er ekki stillt"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr "heitiğ er of stutt"
+msgstr "heitiÃ° er of stutt"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr "heitiğ inniheldur stafi sem ekki eru ASCII"
+msgstr "heitiÃ° inniheldur stafi sem ekki eru ASCII"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr "heitiğ inniheldur stjórntákn"
+msgstr "heitiÃ° inniheldur stjÃ³rntÃ¡kn"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr "heitiğ inniheldur orğabil"
+msgstr "heitiÃ° inniheldur orÃ°abil"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "heitiğ inniheldur ógilt tákn `%c'"
+msgstr "heitiÃ° inniheldur Ã³gilt tÃ¡kn `%c'"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr "villa viğ ağ læsa skrá: %s"
+msgstr "villa viÃ° aÃ° lÃ¦sa skrÃ¡: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -613,103 +613,103 @@ msgstr "villa viğ ağ læsa skrá: %s"
 #: modules/files.c:2569 modules/files.c:2586
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "gat ekki opnağ `%s': %s"
+msgstr "gat ekki opnaÃ° `%s': %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "gat ekki fundiğ `%s': %s"
+msgstr "gat ekki fundiÃ° `%s': %s"
 
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "villa viğ ağ búa til `%s': %s"
+msgstr "villa viÃ° aÃ° bÃºa til `%s': %s"
 
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "afritiğ `%s' er til og er ekki venjuleg skrá"
+msgstr "afritiÃ° `%s' er til og er ekki venjuleg skrÃ¡"
 
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "gat ekki lesiğ úr `%s': %s"
+msgstr "gat ekki lesiÃ° Ãºr `%s': %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
-msgstr "færslan er şegar til stağar í skránni"
+msgstr "fÃ¦rslan er Ã¾egar til staÃ°ar Ã­ skrÃ¡nni"
 
 #: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "gat ekki ritağ í `%s': %s"
+msgstr "gat ekki ritaÃ° Ã­ `%s': %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "hluturinn er ekki meğ %s eiginleika"
+msgstr "hluturinn er ekki meÃ° %s eiginleika"
 
 #: modules/files.c:2822 modules/files.c:2892
 msgid "not executing with superuser privileges"
-msgstr "er ekki keyrandi meğ rótarheimildum"
+msgstr "er ekki keyrandi meÃ° rÃ³tarheimildum"
 
 #: modules/files.c:2905
 msgid "no shadow file present -- disabling"
-msgstr "engin shadow skrá til stağar -- afvirki"
+msgstr "engin shadow skrÃ¡ til staÃ°ar -- afvirki"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"villa viğ ağ tengjast kadm5 şjóni fyrir şjónustuna `%s' í svæği `%s': %s"
+"villa viÃ° aÃ° tengjast kadm5 Ã¾jÃ³ni fyrir Ã¾jÃ³nustuna `%s' Ã­ svÃ¦Ã°i `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "villa viğ ağ frumstilla kerberos ağgerğasafniğ"
+msgstr "villa viÃ° aÃ° frumstilla kerberos aÃ°gerÃ°asafniÃ°"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "villa viğ ağ şátta notandaheitiğ `%s' fyrir kerberos"
+msgstr "villa viÃ° aÃ° Ã¾Ã¡tta notandaheitiÃ° `%s' fyrir kerberos"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "hlutstrúkúrinn hefur engann %s eğa %s eiginleika"
+msgstr "hlutstrÃºkÃºrinn hefur engann %s eÃ°a %s eiginleika"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "hluturinn hefur engann %s eğa %s eiginleika"
+msgstr "hluturinn hefur engann %s eÃ°a %s eiginleika"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "hluturinn var búinn til án %s eğa %s eiginleika"
+msgstr "hluturinn var bÃºinn til Ã¡n %s eÃ°a %s eiginleika"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "villa viğ ağ lesa upplısingar um `%s úr kerberos"
+msgstr "villa viÃ° aÃ° lesa upplÃ½singar um `%s Ãºr kerberos"
 
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "hluturinn hafği engann %s eiginleika"
+msgstr "hluturinn hafÃ°i engann %s eiginleika"
 
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "villa viğ ağ setja lykilorğ fyrir `%s'"
+msgstr "villa viÃ° aÃ° setja lykilorÃ° fyrir `%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr "Kerberos svæği"
+msgstr "Kerberos svÃ¦Ã°i"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
@@ -717,65 +717,65 @@ msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberos lykilorğ fyrir Admin Principal"
+msgstr "Kerberos lykilorÃ° fyrir Admin Principal"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
-msgstr "villa viğ ağ frumstilla ldap ağgerğasafniğ"
+msgstr "villa viÃ° aÃ° frumstilla ldap aÃ°gerÃ°asafniÃ°"
 
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "gat ekki stillt LDAP prótókollsútgáfuna á %d"
+msgstr "gat ekki stillt LDAP prÃ³tÃ³kollsÃºtgÃ¡funa Ã¡ %d"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr "gat ekki samiğ um TLS viğ LDAP şjóninn"
+msgstr "gat ekki samiÃ° um TLS viÃ° LDAP Ã¾jÃ³ninn"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
-msgstr "gat ekki tengst LDAP şjóni"
+msgstr "gat ekki tengst LDAP Ã¾jÃ³ni"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr "gat ekki leitağ á LDAP şjóni"
+msgstr "gat ekki leitaÃ° Ã¡ LDAP Ã¾jÃ³ni"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP şjónninn virğist ekki hafa rótar DSE"
+msgstr "LDAP Ã¾jÃ³nninn virÃ°ist ekki hafa rÃ³tar DSE"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
 msgid "error mapping name to LDAP distinguished name"
-msgstr "villa viğ ağ tengja nafn viğ LDAP grunnnafn"
+msgstr "villa viÃ° aÃ° tengja nafn viÃ° LDAP grunnnafn"
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "villa viğ ağ tengja nafn viğ LDAP grunnnafn"
+msgstr "villa viÃ° aÃ° tengja nafn viÃ° LDAP grunnnafn"
 
 #: modules/ldap.c:1212
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "notandahluturinn hafği engann %s eiginleika"
+msgstr "notandahluturinn hafÃ°i engann %s eiginleika"
 
 #: modules/ldap.c:1221
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "notandahluturinn var búinn til án `%s'"
+msgstr "notandahluturinn var bÃºinn til Ã¡n `%s'"
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
-msgstr "gat ekki breytt innværum gögnum í LDAPMods"
+msgstr "gat ekki breytt innvÃ¦rum gÃ¶gnum Ã­ LDAPMods"
 
 #: modules/ldap.c:1271 modules/ldap.c:1483
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "villa viğ ağ breyta LDAP færslu: %s"
+msgstr "villa viÃ° aÃ° breyta LDAP fÃ¦rslu: %s"
 
 #: modules/ldap.c:1291
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr "villa viğ ağendurnefna LDAP færslu: %s\n"
+msgstr "villa viÃ° aÃ°endurnefna LDAP fÃ¦rslu: %s\n"
 
 #: modules/ldap.c:1339
 #, c-format
@@ -785,7 +785,7 @@ msgstr "hluturinn hefur engann %s eiginleika"
 #: modules/ldap.c:1366
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "villa viğ ağ fjarlægja færslu úr LDAP: %s.\n"
+msgstr "villa viÃ° aÃ° fjarlÃ¦gja fÃ¦rslu Ãºr LDAP: %s.\n"
 
 #: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
 #: modules/ldap.c:1610
@@ -795,7 +795,7 @@ msgstr "hluturinn hefur engann %s eiginleika"
 
 #: modules/ldap.c:1546
 msgid "no such object in LDAP directory"
-msgstr "enginn slíkur hlutur í LDAP skránum"
+msgstr "enginn slÃ­kur hlutur Ã­ LDAP skrÃ¡num"
 
 #: modules/ldap.c:1559
 #, c-format
@@ -805,11 +805,11 @@ msgstr "enginn `%s' eiginleiki fannst"
 #: modules/ldap.c:1701
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "villa viğ ağ setja lykilorğ í LDAP skrá fyrir %s: %s"
+msgstr "villa viÃ° aÃ° setja lykilorÃ° Ã­ LDAP skrÃ¡ fyrir %s: %s"
 
 #: modules/ldap.c:2243
 msgid "LDAP Server Name"
-msgstr "LDAP şjónn"
+msgstr "LDAP Ã¾jÃ³nn"
 
 #: modules/ldap.c:2249
 msgid "LDAP Search Base DN"
@@ -821,7 +821,7 @@ msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2262
 msgid "LDAP Bind Password"
-msgstr "LDAP lykilorğ"
+msgstr "LDAP lykilorÃ°"
 
 #: modules/ldap.c:2268
 msgid "LDAP SASL User"
@@ -829,94 +829,94 @@ msgstr "LDAP SASL notandi"
 
 #: modules/ldap.c:2275
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL Auğkennir"
+msgstr "LDAP SASL AuÃ°kennir"
 
 #: modules/ldap.c:2315
 msgid "error initializing module"
-msgstr "villa viğ ağ ræsa einingu"
+msgstr "villa viÃ° aÃ° rÃ¦sa einingu"
 
 #: modules/sasldb.c:128
 #, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Cyrus SASL villa viğ ağ búa til notandann %s: %s"
+msgstr "Cyrus SASL villa viÃ° aÃ° bÃºa til notandann %s: %s"
 
 #: modules/sasldb.c:130
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "Cyrus SASL villa viğ ağ búa til notanda: %s"
+msgstr "Cyrus SASL villa viÃ° aÃ° bÃºa til notanda: %s"
 
 #: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Cyrus SASL villa viğ ağ fjarlægja notandann %s: %s"
+msgstr "Cyrus SASL villa viÃ° aÃ° fjarlÃ¦gja notandann %s: %s"
 
 #: modules/sasldb.c:138
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Cyrus SASL villa viğ ağ fjarlægja notandann: %s"
+msgstr "Cyrus SASL villa viÃ° aÃ° fjarlÃ¦gja notandann: %s"
 
 #: modules/sasldb.c:428 modules/sasldb.c:436
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "Villa viğ ağ frumstilla Cyrus SASL: %s"
+msgstr "Villa viÃ° aÃ° frumstilla Cyrus SASL: %s"
 
 #: python/admin.c:494
 msgid "error creating home directory for user"
-msgstr "villa viğ ağ búa til nıtt heimasvæği fyrir notandann"
+msgstr "villa viÃ° aÃ° bÃºa til nÃ½tt heimasvÃ¦Ã°i fyrir notandann"
 
 #: python/admin.c:546
 msgid "error removing home directory for user"
-msgstr "villa viğ ağ fjarlægja heimasvæği notanda"
+msgstr "villa viÃ° aÃ° fjarlÃ¦gja heimasvÃ¦Ã°i notanda"
 
 #: python/admin.c:623
 msgid "error moving home directory for user"
-msgstr "villa viğ ağ færa heimasvæği notanda"
+msgstr "villa viÃ° aÃ° fÃ¦ra heimasvÃ¦Ã°i notanda"
 
 #: python/admin.c:656
 msgid "error creating mail spool for user"
-msgstr "villa viğ ağ búa til pósthólf notandans"
+msgstr "villa viÃ° aÃ° bÃºa til pÃ³sthÃ³lf notandans"
 
 #: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Villa viğ ağ frumstilla %s: %s\n"
+msgstr "Villa viÃ° aÃ° frumstilla %s: %s\n"
 
 #: samples/lookup.c:74
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "Leita ağ hóp númer %d.\n"
+msgstr "Leita aÃ° hÃ³p nÃºmer %d.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Leita ağ hóp sem heitir %s.\n"
+msgstr "Leita aÃ° hÃ³p sem heitir %s.\n"
 
 #: samples/lookup.c:86
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "Leita ağ notanda númer %d.\n"
+msgstr "Leita aÃ° notanda nÃºmer %d.\n"
 
 #: samples/lookup.c:89
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Leita ağ notanda sem heitir %s.\n"
+msgstr "Leita aÃ° notanda sem heitir %s.\n"
 
 #: samples/lookup.c:103
 msgid "Entry not found.\n"
-msgstr "Færslan fannst ekki.\n"
+msgstr "FÃ¦rslan fannst ekki.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr "Sjálfgefnar notendahlutahópar:\n"
+msgstr "SjÃ¡lfgefnar notendahlutahÃ³par:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "Sjálfgefin heiti notandaeiginleika:\n"
+msgstr "SjÃ¡lfgefin heiti notandaeiginleika:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "Sæki sjálfgefna notandaeiginleika:\n"
+msgstr "SÃ¦ki sjÃ¡lfgefna notandaeiginleika:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr "Afrita notendastrúktúr:\n"
+msgstr "Afrita notendastrÃºktÃºr:\n"
