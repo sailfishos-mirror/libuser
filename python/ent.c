@@ -204,6 +204,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 				getindent(), g_value_get_string(&value));
 #endif
 			lu_ent_add(self->ent, name, &value);
+			g_value_unset(&value);
 			DEBUG_EXIT;
 			return 0;
 		}

@@ -49,7 +49,7 @@ struct lu_string_cache {
 struct lu_string_cache *lu_string_cache_new(gboolean case_sensitive);
 
 struct lu_attribute {
-	const char *name;
+	GQuark name;
 	GValueArray *values;
 };
 

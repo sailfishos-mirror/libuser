@@ -55,14 +55,14 @@ lu_ent_free(struct lu_ent *ent)
 	for(i = 0; i < ent->current->len; i++) {
 		attr = &g_array_index(ent->current, struct lu_attribute, i);
 		g_value_array_free(attr->values);
-		attr->name = NULL;
+		attr->name = 0;
 		attr->values = NULL;
 	}
 	g_array_free(ent->current, FALSE);
 	for(i = 0; i < ent->pending->len; i++) {
 		attr = &g_array_index(ent->pending, struct lu_attribute, i);
 		g_value_array_free(attr->values);
-		attr->name = NULL;
+		attr->name = 0;
 		attr->values = NULL;
 	}
 	g_array_free(ent->pending, FALSE);
@@ -99,7 +99,8 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 		for(j = 0; j < attribute->values->n_values; j++) {
 			GValue *value;
 			value = g_value_array_get_nth(attribute->values, j);
-			fprintf(fp, " %s = `%s'\n", attribute->name,
+			fprintf(fp, " %s = `%s'\n",
+				g_quark_to_string(attribute->name),
 				g_value_get_string(value));
 		}
 	}
@@ -208,10 +209,8 @@ clear_attribute_list(GArray *dest)
 static void
 copy_attributes(GArray *source, GArray *dest)
 {
-	int i, j;
+	int i;
 	struct lu_attribute *attr, newattr;
-	GValue *value;
-	GQuark aquark;
 	/* First, clear the list of attributes. */
 	clear_attribute_list(dest);
 	/* Now copy all of the attributes and their values. */
@@ -220,13 +219,8 @@ copy_attributes(GArray *source, GArray *dest)
 		/* Copy the attribute name, then its values, into the holding
 		 * area. */
 		memset(&newattr, 0, sizeof(newattr));
-		aquark = g_quark_from_string(attr->name);
-		newattr.name = g_quark_to_string(aquark);
-		newattr.values = g_value_array_new(attr->values->n_values);
-		for(j = 0; j < attr->values->n_values; j++) {
-			value = g_value_array_get_nth(attr->values, j);
-			g_value_array_append(newattr.values, value);
-		}
+		newattr.name = attr->name;
+		newattr.values = g_value_array_copy(attr->values);
 		/* Now append the attribute to the array. */
 		g_array_append_val(dest, newattr);
 	}
@@ -256,11 +250,13 @@ static GValueArray *
 lu_ent_get_int(GArray *list, const char *attribute)
 {
 	struct lu_attribute *attr;
+	GQuark aquark;
 	int i;
+	aquark = g_quark_from_string(attribute);
 	for(i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		if(attr != NULL) {
-			if(strcasecmp(attr->name, attribute) == 0) {
+		if (attr != NULL) {
+			if (attr->name == aquark) {
 				return attr->values;
 			}
 		}
@@ -278,37 +274,35 @@ static void
 lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
-	GQuark aquark;
 	struct lu_attribute newattr;
 	int i;
 	dest = lu_ent_get_int(list, attr);
 	if(dest == NULL) {
 		memset(&newattr, 0, sizeof(newattr));
-		aquark = g_quark_from_string(attr);
-		newattr.name = g_quark_to_string(aquark);
-		newattr.values = g_value_array_new(values->n_values);
+		newattr.name = g_quark_from_string(attr);
+		newattr.values = g_value_array_new(0);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
 	}
+	while (dest->n_values > 0) {
+		g_value_array_remove(dest, 0);
+	}
 	copy = g_value_array_copy(values);
-	for(i = 0; i < copy->n_values; i++) {
+	for (i = 0; i < copy->n_values; i++) {
 		g_value_array_append(dest, g_value_array_get_nth(copy, i));
 	}
 	g_value_array_free(copy);
-
 }
 
 static void
 lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
-	GQuark aquark;
 	struct lu_attribute newattr;
 	dest = lu_ent_get_int(list, attr);
 	if(dest == NULL) {
 		memset(&newattr, 0, sizeof(newattr));
-		aquark = g_quark_from_string(attr);
-		newattr.name = g_quark_to_string(aquark);
+		newattr.name = g_quark_from_string(attr);
 		newattr.values = g_value_array_new(1);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
@@ -323,7 +317,7 @@ lu_ent_clear_int(GArray *list, const char *attribute)
 	struct lu_attribute *attr;
 	for(i = list->len - 1; i >= 0; i--) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		if(strcasecmp(attr->name, attribute) == 0) {
+		if(strcasecmp(g_quark_to_string(attr->name), attribute) == 0) {
 			break;
 		}
 	}
@@ -374,7 +368,7 @@ lu_ent_get_attributes_int(GArray *list)
 	GList *ret = NULL;
 	for(i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		ret = g_list_prepend(ret, (gpointer)attr->name);
+		ret = g_list_prepend(ret, g_quark_to_string(attr->name));
 	}
 	return g_list_reverse(ret);
 }
