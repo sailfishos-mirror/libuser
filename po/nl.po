@@ -7,12 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser RH8.1\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2003-02-26 20:28+0100\n"
-"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
+"PO-Revision-Date: 2003-08-10 14:20+0200\n"
+"Last-Translator: Peter van Egdom <p.van.egdom@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -271,7 +272,7 @@ msgstr "Groep %s kon niet worden vergrendeld.\n"
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "Groep %s kon niet worden ontgrendeld\n"
+msgstr "Groep %s kon niet worden ontgrendeld.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
@@ -555,7 +556,7 @@ msgstr "bibliotheek/module versies komen niet overeen"
 #: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "geen initialiseringsfuncite %s in `%s'"
+msgstr "geen initialiseringsfunctie %s in `%s'"
 
 # mogelijk moet hier meervoud worden gebruikt
 #: lib/modules.c:127
@@ -663,8 +664,7 @@ msgstr "geen schaduwbestand aanwezig -- uitzetten"
 
 #: modules/krb5.c:105
 #, c-format
-msgid ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr "fout bij verbinden met de kadm5 server voor service `%s' in omgeving `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
@@ -830,7 +830,7 @@ msgstr "LDAP SASL gebruiker"
 
 #: modules/ldap.c:2273
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL authorisatie gebruiker"
+msgstr "LDAP SASL autorisatie gebruiker"
 
 #: modules/sasldb.c:128
 #, c-format
