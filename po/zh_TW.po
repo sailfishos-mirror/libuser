@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-14 14:29+1000\n"
+"PO-Revision-Date: 2004-11-15 08:56+1000\n"
 "Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
 "Language-Team: Chinese Traditional <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -398,9 +398,9 @@ msgid "Password changed.\n"
 msgstr "密碼已變更。\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "%s 群組不存在。\n"
+msgstr "%jd 群組不存在\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -594,7 +594,7 @@ msgstr "函式庫/模組 版本不符"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "解鎖會讓密碼欄成為空白"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -996,5 +996,3 @@ msgstr "取得預設使用者屬性:\n"
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
 
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "無法為`%s'重設預設的安全本文：%s"
