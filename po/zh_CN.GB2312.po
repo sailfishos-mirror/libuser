@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2002-03-23 20:39GMT+10:00\n"
+"PO-Revision-Date: 2002-04-02 16:58GMT+10:00\n"
 "Last-Translator: Sarah Smith <sarahs@redhat.com>\n"
 "Language-Team: Simplified Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,17 @@ msgstr ""
 #: apps/apputil.c:70
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "读取 `%s' 时出错：%s"
+msgstr "读取‘%s’时出错：%s"
 
 #: apps/apputil.c:78
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "创建 %s 时出错：%s"
+msgstr "创建‘%s’时出错：%s"
 
 #: apps/apputil.c:200 apps/apputil.c:232 apps/apputil.c:249
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "删除 %s 时出错：%s"
+msgstr "删除‘%s’时出错：%s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
@@ -50,7 +50,7 @@ msgstr "%s 验证失败。\n"
 #: apps/apputil.c:449
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "%s 内部 PAM 错误。\n"
+msgstr "‘%s’内部 PAM 错误。\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
@@ -197,7 +197,7 @@ msgstr "组群 %s 无法被修改。\n"
 #: apps/luseradd.c:201 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "创建组群 %s 出错。\n"
+msgstr "创建组群‘%s’出错。\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -252,22 +252,22 @@ msgstr "为用户 %s 设立口令失败：%s\n"
 #: apps/lusermod.c:220
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "用户 %s 无法被锁：%s\n"
+msgstr "用户 %s 无法被锁：%s。\n"
 
 #: apps/lusermod.c:228
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "用户 %s 无法被开锁：%s \n"
+msgstr "用户 %s 无法被开锁：%s。\n"
 
 #: apps/lusermod.c:236
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "用户 %s 无法被修改：%s\n"
+msgstr "用户 %s 无法被修改：%s。\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "组群 %s 无法被修改：%s.\n"
+msgstr "组群 %s 无法被修改：%s。\n"
 
 #: apps/lusermod.c:300
 #, c-format
@@ -282,12 +282,12 @@ msgstr "%s 没有新的主目录。\n"
 #: apps/lusermod.c:311
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "将 %s 移至 %s 时出错：%s\n"
+msgstr "将 %s 移至 %s 时出错：%s。\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "无法打开配置文件 %s：%s"
+msgstr "无法打开配置文件‘%s’：%s"
 
 #: lib/error.c:41
 msgid "success"
@@ -376,12 +376,12 @@ msgstr "未知错误"
 #: lib/modules.c:112
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "在 '%s' 中没有初始功能 %s"
+msgstr "没有初始功能 %s 在‘%s’中"
 
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "在'%s' 中模块版本误配"
+msgstr "在‘%s’中模块版本误配"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
@@ -409,28 +409,28 @@ msgstr "锁文件时出错：%s"
 #: modules/files.c:2544 modules/files.c:2561
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "无法打开 '%s'：%s"
+msgstr "无法打开‘%s’：%s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:838 modules/files.c:1337
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "无法 stat `%s'：%s"
+msgstr "无法 stat ‘%s’：%s"
 
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "创建 '%s' 时出错：%s"
+msgstr "创建‘%s’时出错：%s"
 
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "备份文件 '%s' 已存，且不是常规文件"
+msgstr "备份文件‘%s’已存在，且不是常规文件"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "无法从 '%s' 中读取：%s"
+msgstr "无法从‘%s’中读取：%s"
 
 #: modules/files.c:886 modules/files.c:899
 msgid "entry already present in file"
@@ -440,7 +440,7 @@ msgstr "项目已在文件中出现"
 #: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "无法写入 '%s'：%s"
+msgstr "无法写入‘%s’：%s"
 
 #: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
 #: modules/files.c:1208
@@ -459,7 +459,7 @@ msgstr "没有屏蔽文件 -- 正禁用"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "在领域 '%s' 中为 '%s' 服务连接 kadm5 服务器时出错：%s"
+msgstr "为‘%s’服务连接 kadm5 服务器时于领域‘%s’中出错：%s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -470,7 +470,7 @@ msgstr "初始化 kerberos 库时出错"
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "为 kerberos 解析用户名 '%s' 时出错"
+msgstr "为 kerberos 解析用户名‘%s’时出错"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
@@ -490,7 +490,7 @@ msgstr "实体创建时没有包括任何 %s 或 %s 属性"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "从 kerberos 中为 '%s' 读取信息时出错。"
+msgstr "从 kerberos 中为‘%s’读取信息时出错。"
 
 #: modules/krb5.c:604
 #, c-format
@@ -500,7 +500,7 @@ msgstr "实体没有任何 %s 属性"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "为 '%s' 设立口令时出错"
+msgstr "为‘%s’设立口令时出错"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -556,7 +556,7 @@ msgstr "用户对象没有任何 %s 属性"
 #: modules/ldap.c:1151
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "用户对象创建时没有包括 '%s'"
+msgstr "用户对象创建时没有包括‘%s’"
 
 #: modules/ldap.c:1177
 msgid "could not convert internal data to LDAPMods"
@@ -595,7 +595,7 @@ msgstr "在 LDAP 目录中没有此类对象"
 #: modules/ldap.c:1488
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "没有发现任何 '%s' 属性"
+msgstr "没有发现任何‘%s’属性"
 
 #: modules/ldap.c:1629
 #, c-format
