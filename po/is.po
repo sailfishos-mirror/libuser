@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-08-16 12:55+0000\n"
+"PO-Revision-Date: 2002-03-04 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Villa við að fjarlægja `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Gat ekki minnkað heimildir.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -46,13 +46,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Auðkenning mistókst hjá %s.\n"
 
 #: apps/apputil.c:449
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Innvær villa.\n"
+msgstr "Innvær PAM villai `%s'.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Misræmi í notanda.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -61,9 +61,9 @@ msgstr "[ROFI...] notandi"
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Villa við að eyða %s: %s.\n"
+msgstr "Villa við að þátta viðföng: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
@@ -193,9 +193,9 @@ msgid "Group %s could not be modified.\n"
 msgstr "Ekki var hægt að breyta hópnum %s.\n"
 
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Gat ekki búið til hóp fyrir %s.\n"
+msgstr "Gat ekki búið til hóp `%s'.\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -220,12 +220,12 @@ msgstr "%s var ekki með gid tölu.\n"
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Enginn hópur með GID %ld er til. Fjarlægi hann ekki.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Hópur #%d er ekki með hópheiti.\n"
+msgstr "Hópur með GID %ld er ekki með hópheiti.\n"
 
 #: apps/luserdel.c:142
 #, c-format
@@ -263,9 +263,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Ekki var hægt að breyta notandanum %s: %s.\n"
 
 #: apps/lusermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Ekki var hægt að breyta hópnum %s.\n"
+msgstr "Ekki var hægt að breyta hópnum %s: %s.\n"
 
 #: apps/lusermod.c:300
 #, c-format
@@ -289,98 +289,87 @@ msgstr "gat ekki opnað stillingaskrána `%s': %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr ""
+msgstr "tókst"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "slökkt er á einingunni skv. stillingum"
 
 #: lib/error.c:45
-#, fuzzy
 msgid "generic error"
-msgstr "Innvær villa.\n"
+msgstr "almenn villa"
 
 #: lib/error.c:47
-#, fuzzy
 msgid "not enough privileges"
-msgstr "er ekki keyrandi með rótarheimildum"
+msgstr "er ekki með nægar heimildir"
 
 #: lib/error.c:49
 msgid "access denied"
-msgstr ""
+msgstr "aðgangi hafnað"
 
 #: lib/error.c:51
 msgid "bad user/group name"
-msgstr ""
+msgstr "ógildur notandi/hópur"
 
 #: lib/error.c:53
 msgid "bad user/group id"
-msgstr ""
+msgstr "ógildur notandi/hópnúmer"
 
 #: lib/error.c:55
 msgid "user/group name in use"
-msgstr ""
+msgstr "notandi/hópur er þegar í notkun"
 
 #: lib/error.c:57
 msgid "user/group id in use"
-msgstr ""
+msgstr "notandanúmer/hópnúmer er þegar í notkun"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "gat ekki breytt eiginleikum skjás"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error opening file"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við opnun skráar"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error locking file"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við að læsa skrá"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error statting file"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við að lesa skrá"
 
 #: lib/error.c:67
-#, fuzzy
 msgid "error reading file"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við að lesa skrá"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "error writing to file"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við að rita skrá"
 
 #: lib/error.c:71
 msgid "data not found in file"
-msgstr ""
+msgstr "gögnin fundust ekki í skránni"
 
 #: lib/error.c:73
-#, fuzzy
 msgid "internal initialization error"
-msgstr "villa við að frumstilla kerberos aðgerðasafnið"
+msgstr "villa við að frumstillingu"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "error loading module"
-msgstr "villa við að læsa skrá: %s"
+msgstr "villa við að lesa einingu"
 
 #: lib/error.c:77
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "villa við að fjarlægja merkingu úr einingu"
 
 #: lib/error.c:79
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "útgáfumismunur eininga í `%s'"
+msgstr "útgáfumismunur eininga eða skráarsafna"
 
 #: lib/error.c:84
-#, fuzzy
 msgid "unknown error"
-msgstr "óþekkt"
+msgstr "óþekkt villa"
 
 #: lib/modules.c:112
 #, c-format
@@ -394,16 +383,15 @@ msgstr "útgáfumismunur eininga í `%s'"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "villa við að lesa einigleika skjás"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Sæki sjálfgefna notandaeiginleika:\n"
+msgstr "villa við að setja skjáeiginleika"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "villa við lestur frá skjá"
 
 #: lib/util.c:200
 #, c-format
@@ -433,9 +421,9 @@ msgid "error creating `%s': %s"
 msgstr "villa við að búa til `%s': %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "afritið `%s' var tákntengi (symlink)"
+msgstr "afritið `%s' er til og er ekki venjuleg skrá"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -543,13 +531,12 @@ msgid "could not bind to LDAP server"
 msgstr "gat ekki tengst LDAP þjóni"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "gat ekki tengst LDAP þjóni"
+msgstr "gat ekki leitað á LDAP þjóni"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "LDAP þjónninn virðist ekki hafa rótar DSE"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -619,7 +606,6 @@ msgid "LDAP Server Name"
 msgstr "LDAP þjónn"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
 msgstr "LDAP Base DN"
 
@@ -640,9 +626,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Auðkennir"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Villa við að frumstilla %s: %s.\n"
+msgstr "Villa við að frumstilla %s: %s\n"
 
 #: samples/lookup.c:75
 #, c-format
@@ -684,73 +670,3 @@ msgstr "Sæki sjálfgefna notandaeiginleika:\n"
 msgid "Copying user structure:\n"
 msgstr "Afrita notendastrúktúr:\n"
 
-#~ msgid "error searching LDAP directory"
-#~ msgstr "villa við leit í LDAP möppu"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "enginn `%s' eiginleiki með `%s' skemu fannst"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "hluturinn er ekki með `%s' eiginleika"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Enginn hópur tiltekinn.\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Gat ekki búið til hóp fyrir %s.\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Leita að hóp númer %d.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "Ógilt UID fyrir %s.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "Ógilt GID fyrir %s.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "Ekkert heimasvæði til fyrir %s.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "Villa við lestur gamals heimasvæðis notanda %s: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "útskrift af struct lu_ent á %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " magic = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " tegund = %s\n"
-
-#~ msgid "user"
-#~ msgstr "notandi"
-
-#~ msgid "group"
-#~ msgstr "hópur"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Fyrir afritun:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Eftir afritun:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "losa lu_ent á %p.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "Hópur #%d er ekki til.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "Villa við frumstillingu lu.\n"
