@@ -33,6 +33,7 @@ files useful for developing applications with libuser.
 %setup -q
 
 %build
+CFLAGS="$RPM_OPT_FLAGS -fPIC" ; export CFLAGS
 %configure \
 	--with-ldap \
 	--with-python-version=%{python} \
@@ -90,7 +91,7 @@ popd
 %changelog
 * Wed Dec 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.2-1
 - degrade gracefully
-- build with --with-pic
+- build with --with-pic and -fPIC
 - remove unpackaged man page
 
 * Tue Aug 27 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.1-2
