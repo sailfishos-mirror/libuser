@@ -57,11 +57,16 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lgroupadd", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] group"));
 	c = poptGetNextOpt(popt);
-	g_return_val_if_fail(c == -1, 0);
+	if(c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+		poptPrintUsage(popt, stderr, 0);
+		exit(1);
+	}
 	name = poptGetArg(popt);
 
 	if(name == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
+		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 

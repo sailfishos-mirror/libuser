@@ -34,7 +34,7 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gecos = NULL, *homeDirectory = NULL, *loginShell = NULL,
-		   *skeleton = NULL, *name = NULL;
+		   *skeleton = NULL, *name = NULL, *gid = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
@@ -55,7 +55,7 @@ main(int argc, const char **argv)
 		{"skeleton", 'k', POPT_ARG_STRING, &skeleton, 0, "directory with files for the new user", "STRING"},
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0, "shell for new user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0, "uid for new user", "NUM"},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0, "gid for new user", "NUM"},
+		{"gid", 'g', POPT_ARG_STRING, &gid, 0, "gid for new user"},
 		{"nocreatehome", 'M', POPT_ARG_NONE, &dont_create_home, 0, "don't create home directory for user"},
 		{"nocreategroup", 'n', POPT_ARG_NONE, &dont_create_group, 0, "don't create group with same name as user"},
 		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0, "plaintext password for use with group", "STRING"},
@@ -71,11 +71,16 @@ main(int argc, const char **argv)
 	popt = poptGetContext("luseradd", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
-	g_return_val_if_fail(c == -1, 0);
+	if(c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+		poptPrintUsage(popt, stderr, 0);
+		exit(1);
+	}
 	name = poptGetArg(popt);
 
 	if(name == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
+		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
@@ -100,19 +105,79 @@ main(int argc, const char **argv)
 		skeleton = "/etc/skel";
 	}
 
-	if(!dont_create_group) {
+	/* Select a group for the user to be in. */
+	if(gid == NULL) {
+		if(dont_create_group) {
+			gid = "users";
+		} else {
+			gid = name;
+		}
+	}
+
+	/* Try to convert the given GID to a number. */
+	if(gid != NULL) {
+		char *p;
 		ent = lu_ent_new();
-		lu_group_default(ctx, name, system_account, ent);
-		if(gidNumber != -2) {
-			lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
-		}
-		if(lu_group_add(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Error creating group for %s: %s.\n"), name, error->string);
-			return 2;
-		}
-		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if(values && values->data) {
-			gidNumber = atol(values->data);
+		gidNumber = strtol(gid, &p, 10);
+		if((p == NULL) || (*p != '\0')) {
+			/* It's not a number, so it's a group name -- see if it's being used. */
+			if(lu_group_lookup_name(ctx, gid, ent, &error)) {
+				/* Retrieve the group's GID. */
+				values = lu_ent_get(ent, LU_GIDNUMBER);
+				gidNumber = strtol((char*)values->data, &p, 10);
+			} else {
+				/* No such group -- can we create it? */
+				if(!dont_create_group) {
+					if(error) {
+						lu_error_free(&error);
+					}
+					lu_group_default(ctx, gid, FALSE, ent);
+					if(lu_group_add(ctx, ent, &error)) {
+						/* Save the GID. */
+						values = lu_ent_get(ent, LU_GIDNUMBER);
+						gidNumber = strtol((char*)values->data, &p, 10);
+					} else {
+						/* Aargh!  Abandon all hope. */
+						g_print(_("Error creating group `%s'.\n"), gid);
+						if(error) {
+							lu_error_free(&error);
+						}
+						lu_end(ctx);
+						return 1;
+					}
+				} else {
+					/* Can't get there from here. */
+					g_print(_("No group named `%s' exists.\n"), gid);
+					lu_end(ctx);
+					return 1;
+				}
+			}
+		} else {
+			/* It's a group number -- see if it's being used. */
+			if(!lu_group_lookup_id(ctx, gidNumber, ent, &error)) {
+				/* No such group -- can we create one with the user's name? */
+				if(!dont_create_group) {
+					if(error) {
+						lu_error_free(&error);
+					}
+					lu_group_default(ctx, name, FALSE, ent);
+					lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
+					if(!lu_group_add(ctx, ent, &error)) {
+						/* Aargh!  Abandon all hope. */
+						g_print(_("Error creating group `%s' with GID %ld.\n"), name, gidNumber);
+						if(error) {
+							lu_error_free(&error);
+						}
+						lu_end(ctx);
+						return 1;
+					}
+				} else {
+					/* Can't get there from here. */
+					g_print(_("No group with GID %ld exists.\n"), gidNumber);
+					lu_end(ctx);
+					return 1;
+				}
+			}
 		}
 		lu_ent_free(ent);
 	}

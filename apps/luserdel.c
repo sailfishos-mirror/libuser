@@ -58,11 +58,16 @@ main(int argc, const char **argv)
 	popt = poptGetContext("luserdel", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
-	g_return_val_if_fail(c == -1, 0);
+	if(c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+		poptPrintUsage(popt, stderr, 0);
+		exit(1);
+	}
 	user = poptGetArg(popt);
 
 	if(user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
+		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
@@ -96,13 +101,13 @@ main(int argc, const char **argv)
 		} else {
 			gid_t gid = atol(values->data);
 			if(lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
-				fprintf(stderr, _("Group #%d does not exist.\n"), gid);
+				fprintf(stderr, _("No group with GID %ld exists, not removing.\n"), gid);
 				return 5;
 			}
 			if(lu_ent_get(ent, LU_MEMBERUID) == NULL) {
 				values = lu_ent_get(ent, LU_GROUPNAME);
 				if(!(values && values->data)) {
-					fprintf(stderr, _("Group #%d did not have a group name.\n"), gid);
+					fprintf(stderr, _("Group with GID %ld did not have a group name.\n"), gid);
 					return 6;
 				} else {
 					if(strcmp(values->data, user) == 0) {

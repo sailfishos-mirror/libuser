@@ -57,7 +57,11 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lchfn", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] [user]"));
 	c = poptGetNextOpt(popt);
-	g_return_val_if_fail(c == -1, 0);
+	if(c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+		poptPrintUsage(popt, stderr, 0);
+		exit(1);
+	}
 	user = poptGetArg(popt);
 
 	if((user == NULL) || (geteuid() != getuid())) {
@@ -67,6 +71,7 @@ main(int argc, const char **argv)
 			user = strdup(pwd->pw_name);
 		} else {
 			fprintf(stderr, _("No user name specified, no name for uid %d.\n"), getuid());
+			poptPrintUsage(popt, stderr, 0);
 			exit(1);
 		}
 	}

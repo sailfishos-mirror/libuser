@@ -57,7 +57,11 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lnewusers", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...]"));
 	c = poptGetNextOpt(popt);
-	g_return_val_if_fail(c == -1, 0);
+	if(c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+		poptPrintUsage(popt, stderr, 0);
+		exit(1);
+	}
 
 	ctx = lu_start(NULL, lu_user, NULL, NULL, interactive ? lu_prompt_console : lu_prompt_console_quiet, NULL, &error);
 	if(ctx == NULL) {
@@ -81,6 +85,14 @@ main(int argc, const char **argv)
 	groupEnt = lu_ent_new();
 
 	while(fgets(buf, sizeof(buf), fp)) {
+		if(strchr(buf, '\r')) {
+			char *p = strchr(buf, '\r');
+			*p = '\0';
+		}
+		if(strchr(buf, '\n')) {
+			char *p = strchr(buf, '\n');
+			*p = '\0';
+		}
 		fields = g_strsplit(buf, ":", 7);
 		if(fields && fields[0] && fields[1] && fields[2] && fields[3] && fields[4] && fields[5] && fields[6]) {
 			char *homedir, *gidstring;
@@ -118,7 +130,7 @@ main(int argc, const char **argv)
 					if(error) {
 						lu_error_free(&error);
 					}
-					lu_user_default(ctx, gidstring, FALSE, ent);
+					lu_group_default(ctx, gidstring, FALSE, ent);
 					if(lu_group_add(ctx, ent, &error)) {
 						/* Save the GID. */
 						values = lu_ent_get(ent, LU_GIDNUMBER);
@@ -129,6 +141,7 @@ main(int argc, const char **argv)
 						if(error) {
 							lu_error_free(&error);
 						}
+						g_strfreev(fields);
 						continue;
 					}
 				}
@@ -143,7 +156,7 @@ main(int argc, const char **argv)
 					if(error) {
 						lu_error_free(&error);
 					}
-					lu_user_default(ctx, fields[0], FALSE, ent);
+					lu_group_default(ctx, fields[0], FALSE, ent);
 					lu_ent_set_numeric(ent, LU_GIDNUMBER, gid_tmp);
 					if(lu_group_add(ctx, ent, &error)) {
 						/* Save the GID. */
@@ -154,6 +167,7 @@ main(int argc, const char **argv)
 						if(error) {
 							lu_error_free(&error);
 						}
+						g_strfreev(fields);
 						continue;
 					}
 				}
@@ -183,6 +197,13 @@ main(int argc, const char **argv)
 			}
 
 			if(lu_user_add(ctx, ent, &error)) {
+				if(!lu_user_setpass(ctx, ent, fields[1], &error)) {
+					g_print(_("Error setting initial password for %s: %s\n"), fields[0],
+						error ? error->string : _("unknown error"));
+					if(error) {
+						lu_error_free(&error);
+					}
+				}
 				if(!nocreatehome) {
 					if(lu_homedir_populate("/etc/skel", homedir, uid, gid, 0700, &error) == FALSE) {
 						g_print(_("Error creating home directory for %s: %s\n"), fields[0],
@@ -201,6 +222,8 @@ main(int argc, const char **argv)
 			}
 
 			g_free(homedir);
+		} else {
+			g_print(_("Error creating account for `%s': line improperly formatted.\n"), buf);
 		}
 		if(fields) {
 			g_strfreev(fields);
