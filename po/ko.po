@@ -1018,4 +1018,3 @@ msgstr "사용자 구조를 복사함:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "모듈을 초기화하는 도중 오류 발생"
-

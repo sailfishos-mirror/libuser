@@ -663,7 +663,8 @@ msgstr "невозможно задать контекст безопаснос�
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
+msgstr ""
+"невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -728,7 +729,8 @@ msgstr "нет файла shadow -- запрещено"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr ""
+"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1015,4 +1017,3 @@ msgstr "Копирование структуры пользователя:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "ошибка инициализации модуля"
-

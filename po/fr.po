@@ -322,7 +322,8 @@ msgstr "Erreur lors de la lecture de `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
+msgstr ""
+"Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
@@ -384,12 +385,14 @@ msgstr "Changement de mot de passe annulé.\n"
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -459,7 +462,8 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:232 apps/lusermod.c:245
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:255
 #, c-format
@@ -935,7 +939,8 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:568
 msgid "error removing home directory for user"
-msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr ""
+"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:646
 msgid "error moving home directory for user"
@@ -1025,4 +1030,3 @@ msgstr "Copie de la structure de l'utilisateur :\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "erreur lors de l'initialisation du module"
-

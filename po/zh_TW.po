@@ -995,4 +995,3 @@ msgstr "取得預設使用者屬性:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
-

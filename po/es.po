@@ -234,8 +234,7 @@ msgstr "[OPCIÓN...] [usuario]"
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
-"No se especificó nombre de usuario, no hay un nombre para el uid %d.\n"
+msgstr "No se especificó nombre de usuario, no hay un nombre para el uid %d.\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
@@ -390,8 +389,7 @@ msgstr "No se especificó ningún nombre de grupo, usando %s .\n"
 #: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
-"No se especificó ningún nombre de grupo, no hay nombre para gid %d.\n"
+msgstr "No se especificó ningún nombre de grupo, no hay nombre para gid %d.\n"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
@@ -1351,29 +1349,3 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
-
-# modules/files.c:115
-# modules/files.c:633 modules/files.c:644 modules/files.c:952
-# modules/files.c:961
-
-# apps/apputil.c:63
-# modules/files.c:130
-
-# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-
-# apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
-# apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
-# apps/lusermod.c:84
-# apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
-# apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
-# apps/lusermod.c:84
-
-# apps/lgroupdel.c:81
-# apps/lgroupdel.c:81
-
-# apps/lgroupmod.c:189
-# apps/lgroupmod.c:189
-
-# modules/files.c:135
-# lib/userutil.c:177

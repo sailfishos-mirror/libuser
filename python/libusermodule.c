@@ -25,6 +25,7 @@
 #include <grp.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <utmp.h>
 #include <glib.h>
 #include "../lib/user.h"
 #include "../lib/user_private.h"
@@ -144,6 +145,9 @@ initlibuser(void)
 	PyDict_SetItemString(dict, "HOMEPHONE",
 			     PyString_FromString(LU_HOMEPHONE));
 	PyDict_SetItemString(dict, "EMAIL", PyString_FromString(LU_EMAIL));
+
+	/* Miscellaneous. */
+	PyDict_SetItemString(dict, "UT_NAMESIZE", PyInt_FromLong(UT_NAMESIZE));
 
 	DEBUG_EXIT;
 }

@@ -27,6 +27,8 @@ libuser:
         	- SHADOWMIN
         	- SHADOWWARNING
 
+		- UT_NAMESIZE
+
 	Methods:
 		- getUserShells: Returns a list of valid shells for users on
 			the system.
