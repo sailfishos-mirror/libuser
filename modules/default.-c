@@ -19,7 +19,7 @@
 /* This file contains functions suitable for inclusion in modules, for
    initializing user and group records. */
 
-#ident "$Id"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <stdlib.h>
