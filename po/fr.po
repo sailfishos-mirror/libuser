@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2001-07-30 12:50-0400\n"
+"POT-Creation-Date: 2001-08-07 12:05-0400\n"
 "PO-Revision-Date: 2001-08-08 11:24+1\n"
 "Last-Translator: Bettina De Monti <bdemonti@redhat.it>\n"
 "Language-Team: French <LL@li.org>\n"
@@ -38,6 +38,7 @@ msgid "Error initializing PAM.\n"
 msgstr "Erreur lors de l'initialisation de PAM.\n"
 
 #: apps/apputil.c:339
+#, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentification non réussie pour %s.\n"
 
@@ -52,12 +53,14 @@ msgstr "Aucun nom d'utilisateur spécifié.\n"
 #: apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 #: apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
 #: apps/lusermod.c:82
+#, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Erreur lors de l'initialisation de %s : %s.\n"
 
 #: apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 #: apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
 #: apps/lusermod.c:84
+#, c-format
 msgid "Error initializing %s.\n"
 msgstr "Erreur lors de l'initialisation de %s.\n"
 
@@ -276,12 +279,12 @@ msgstr "Aucun nouveau répertoire personnel pour %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Erreur lors du déplacement de %s vers %s : %s.\n"
 
-#: lib/user.c:123
+#: lib/user.c:161
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "aucune fonction d'initialisation %s dans `%s'"
 
-#: lib/user.c:144
+#: lib/user.c:186
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "différence de version du module dans `%s'"
@@ -291,34 +294,34 @@ msgstr "différence de version du module dans `%s'"
 msgid "could not open configuration file `%s': %s"
 msgstr "impossibile d'ouvrir le fichier de configuration `%s': %s"
 
-#: lib/userent.c:44
+#: lib/userent.c:45
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
 msgstr "vidage de struct lu_ent à %p :\n"
 
-#: lib/userent.c:45
+#: lib/userent.c:46
 #, c-format
 msgid " magic = %08x\n"
 msgstr " magic = %08x\n"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 #, c-format
 msgid " type = %s\n"
 msgstr " type = %s\n"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "user"
 msgstr "utilisateur"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "group"
 msgstr "groupe"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "unknown"
 msgstr "inconnu"
 
-#: lib/userent.c:216
+#: lib/userent.c:263
 msgid ""
 "\n"
 "Before copy:\n"
@@ -326,7 +329,7 @@ msgstr ""
 "\n"
 "Avant copier :\n"
 
-#: lib/userent.c:230
+#: lib/userent.c:277
 msgid ""
 "\n"
 "After copy:\n"
@@ -334,214 +337,245 @@ msgstr ""
 "\n"
 "Après copier :\n"
 
-#: lib/userent.c:395
+#: lib/userent.c:442
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr "libération de lu_ent à %p.\n"
 
-#: modules/files.c:115
-#, c-format
-msgid "couldn't open `%s'"
-msgstr "impossible d'ouvrir `%s' "
+#: lib/userutil.c:177
+msgid "error locking file: %s"
+msgstr "erreur lors du verrouillage du fichier : %s"
 
-#: modules/files.c:135
-#, c-format
-msgid "error creating `%s'"
-msgstr "erreur lors de la création de `%s'"
+#: modules/files.c:109 modules/files.c:316 modules/files.c:573
+#: modules/files.c:753 modules/files.c:904 modules/files.c:1068
+#: modules/files.c:1141 modules/files.c:1273 modules/files.c:1365
+#: modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
+#: modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
+#: modules/files.c:1593
+msgid "couldn't open `%s': %s"
+msgstr "impossible d'ouvrir `%s' : %s"
 
-#: modules/files.c:145
+#: modules/files.c:123 modules/files.c:147 modules/files.c:178
+#: modules/files.c:586 modules/files.c:917
+msgid "couldn't stat `%s': %s"
+msgstr "impossible exécuter la fonction stat `%s' : %s"
+
+#: modules/files.c:130
+msgid "error creating `%s': %s"
+msgstr "erreur lors de la création de `%s' : %s"
+
+#: modules/files.c:140
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "le fichier de sauvegarde `%s' était un lien symbolique "
 
-#: modules/files.c:614 modules/files.c:624
+#: modules/files.c:601 modules/files.c:926
+msgid "couldn't read from `%s': %s"
+msgstr "impossible de lire à partir de `%s' : %s"
+
+#: modules/files.c:611 modules/files.c:621
 msgid "entry already present in file"
 msgstr "entrée déjà présente dans le fichier"
 
-#: modules/files.c:730 modules/files.c:737 modules/files.c:823
-#: modules/files.c:833
+#: modules/files.c:633 modules/files.c:644 modules/files.c:952
+#: modules/files.c:961
+msgid "couldn't write to `%s': %s"
+msgstr "impossible d'écrire sur `%s' : %s"
+
+#: modules/files.c:727 modules/files.c:734 modules/files.c:821
+#: modules/files.c:831
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "l'objet n'a pas d'attribut %s"
 
-#: modules/files.c:776
+#: modules/files.c:773
+#, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "l'objet n'a pas d'attribut `%s'"
 
-#: modules/files.c:1676 modules/files.c:1732
+#: modules/files.c:1675 modules/files.c:1731
 msgid "not executing with superuser privileges"
 msgstr "exécution sans les privilèges du superutilisateur"
 
-#: modules/files.c:1744
+#: modules/files.c:1743
 msgid "no shadow file present -- disabling"
 msgstr "pas de fichier shadow présent -- désactivation."
 
-#: modules/krb5.c:104
+#: modules/krb5.c:102
+#, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
 "erreur lors de la connexion au serveur kadm5 pour le service `%s' dans la "
-"zone `%s' : %s" 
+"zone `%s' : %s"
 
-#: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
-#: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
+#: modules/krb5.c:132 modules/krb5.c:189 modules/krb5.c:272 modules/krb5.c:346
+#: modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
 msgid "error initializing kerberos library"
 msgstr "erreur lors de l'initialisation de la bibliothèque kerberos"
 
-#: modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
-#: modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
+#: modules/krb5.c:137 modules/krb5.c:204 modules/krb5.c:297 modules/krb5.c:302
+#: modules/krb5.c:361 modules/krb5.c:406 modules/krb5.c:474 modules/krb5.c:522
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "erreur lors de l'analyse du nom utilisateur '%s' pour kerberos"
 
-#: modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
+#: modules/krb5.c:198 modules/krb5.c:355 modules/krb5.c:400 modules/krb5.c:468
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "la structure de l'entité n'a pas d'attribut %s ou %s"
 
-#: modules/krb5.c:283
+#: modules/krb5.c:281
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "l'entité n'a pas d'attribut %s ou %s"
 
-#: modules/krb5.c:293
+#: modules/krb5.c:291
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "l'entité a été créée sans attribut %s ou %s"
 
-#: modules/krb5.c:415 modules/krb5.c:483
+#: modules/krb5.c:413 modules/krb5.c:481
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "erreur lors de la lecture des information de kerberos pour `%s'"
 
-#: modules/krb5.c:518
+#: modules/krb5.c:516
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "l'entité n'a pas d'attribut %s"
 
-#: modules/krb5.c:549
+#: modules/krb5.c:547
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "erreur lors de la configuration du mot de passe pour `%s'"
 
-#: modules/krb5.c:662
+#: modules/krb5.c:660
 msgid "Kerberos Realm"
 msgstr "Zone Kerberos"
 
-#: modules/krb5.c:667
+#: modules/krb5.c:665
 msgid "Kerberos Admin Principal"
 msgstr "Admin principal Kerberos"
 
-#: modules/krb5.c:682
+#: modules/krb5.c:680
 msgid "Kerberos Password for Admin Principal"
 msgstr "Mot de passe Kerberos pour Admin principal"
 
-#: modules/ldap.c:178
+#: modules/ldap.c:175
 msgid "error initializing ldap library"
 msgstr "erreur lors de l'initialisation de la bibliothèque ldap"
 
-#: modules/ldap.c:196
+#: modules/ldap.c:193
+#, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "impossible de régler le protocole LDAP sur la version %d"
 
-#: modules/ldap.c:202
+#: modules/ldap.c:199
 msgid "could not negotiate TLS with LDAP server"
 msgstr "impossible de négotier TLS avec le serveur LDAP"
 
-#: modules/ldap.c:216
+#: modules/ldap.c:213
 msgid "could not bind to LDAP server"
 msgstr "impossible de se lier au serveur LDAP"
 
-#: modules/ldap.c:316 modules/ldap.c:566 modules/ldap.c:646 modules/ldap.c:709
-#: modules/ldap.c:796 modules/ldap.c:873
+#: modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
+#: modules/ldap.c:799 modules/ldap.c:880
 msgid "error mapping name to LDAP distinguished name"
-msgstr "erreur lors de la configuration du nom à l'identificateur unique de "
+msgstr ""
+"erreur lors de la configuration du nom à l'identificateur unique de "
 "l'utilisateur LDAP"
 
-#: modules/ldap.c:321
+#: modules/ldap.c:318
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "erreur lors de la configuration du nom sur l'identificateur unique de "
+msgstr ""
+"erreur lors de la configuration du nom sur l'identificateur unique de "
 "l'utilisateur de base LDAP"
 
-#: modules/ldap.c:365
+#: modules/ldap.c:364
 msgid "error searching LDAP directory"
 msgstr "erreur lors de la recherche du répertoire LDAP"
 
-#: modules/ldap.c:554
+#: modules/ldap.c:556
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "l'objet utilisateur n'a pas d'attribut %s"
 
-#: modules/ldap.c:560
+#: modules/ldap.c:562
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "l'objet utilisateur a été créé sans `%s'"
 
-#: modules/ldap.c:572
+#: modules/ldap.c:574
 msgid "could not convert internal data to LDAPMods"
 msgstr "impossible de convertir les données internes en LDAPMods"
 
-#: modules/ldap.c:585 modules/ldap.c:748
+#: modules/ldap.c:587 modules/ldap.c:751
+#, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "erreur lors de la modification de l'entrée de répertoire LDAP : %s"
 
-#: modules/ldap.c:598
+#: modules/ldap.c:600
+#, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "erreur lors du changement du nom de l'entrée de répertoire LDAP : %s\n"
 
-#: modules/ldap.c:640
+#: modules/ldap.c:643
 #, c-format
 msgid "object had no %s attribute"
 msgstr "l'objet n'avait pas d'attribut %s"
 
-#: modules/ldap.c:657
+#: modules/ldap.c:660
+#, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "erreur lors de la suppression de l'entrée de répertoire LDAP : %s.\n"
 
-#: modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
+#: modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objet n'a pas d'attribut %s"
 
-#: modules/ldap.c:808
+#: modules/ldap.c:811
 msgid "no such object in LDAP directory"
 msgstr "objet non présent dans le répertoire LDAP"
 
-#: modules/ldap.c:825
+#: modules/ldap.c:828
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "aucun attribut `%s' trouvé en utilisant le schéma `%s'"
 
-#: modules/ldap.c:832
+#: modules/ldap.c:836
+#, c-format
 msgid "no `%s' attribute found"
 msgstr "aucun attribut `%s' trouvé"
 
-#: modules/ldap.c:928
+#: modules/ldap.c:939
+#, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "Erreur lors de la configuration du mot de passe dans le répertoire LDAP pour "
 "%s : %s."
 
-#: modules/ldap.c:1191
+#: modules/ldap.c:1213
 msgid "LDAP Server Name"
 msgstr "Nom du serveur LDAP"
 
-#: modules/ldap.c:1196
+#: modules/ldap.c:1218
 msgid "LDAP Base DN"
 msgstr "LDAP Base DN"
 
-#: modules/ldap.c:1201
+#: modules/ldap.c:1223
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:1206
+#: modules/ldap.c:1228
 msgid "LDAP Bind Password"
 msgstr "Mot de passe LDAP Bind "
 
-#: modules/ldap.c:1212
+#: modules/ldap.c:1234
 msgid "LDAP SASL User"
 msgstr "Utilisateur LDAP SASL"
 
-#: modules/ldap.c:1217
+#: modules/ldap.c:1239
 msgid "LDAP SASL Authorization User"
 msgstr "Utilisateur autorisation LDAP SASL"
 
