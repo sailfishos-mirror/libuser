@@ -51,7 +51,7 @@ struct lu_prompt {
 	char *value;
 	/* A function which can free the user's response.  This is set by the
 	 * prompter function.  If NULL, the response will not be freed, ever. */
-	void (*free_value) (char *);
+	void (*free_value) (void *);
 };
 
 /* A prompter function. */
