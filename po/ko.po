@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
-"POT-Creation-Date: 2002-04-15 17:49-0400\n"
+"POT-Creation-Date: 2002-12-11 16:43-0500\n"
 "PO-Revision-Date: 2002-08-07 11:01+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -84,7 +84,7 @@ msgstr "%s(을)를 초기화하는 도중 오류 발생: %s.\n"
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85
+#: apps/lusermod.c:315 lib/error.c:85 samples/lookup.c:65
 msgid "unknown error"
 msgstr "알 수 없는 오류"
 
@@ -201,6 +201,7 @@ msgstr "%s 그룹의 정지를 해제할 수 없습니다.\n"
 msgid "Group %s could not be modified.\n"
 msgstr "%s 그룹을 편집할 수 없습니다.\n"
 
+#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -380,12 +381,12 @@ msgstr "모듈에서 심볼을 처리하는 도중 오류 발생"
 msgid "library/module version mismatch"
 msgstr "라이브러리/모듈 버젼이 일치하지 않음"
 
-#: lib/modules.c:112
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "`%s'에 초기화 기능 %s(이)가 없습니다"
 
-#: lib/modules.c:138
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s'의 모듈 버젼이 일치하지 않습니다"
@@ -402,6 +403,31 @@ msgstr "터미널 속성을 설정하는 도중 오류 발생"
 msgid "error reading from terminal"
 msgstr "터미널로 부터 읽는 도중 오류 발생"
 
+#: lib/user.c:190
+msgid "name is not set"
+msgstr ""
+
+#: lib/user.c:194
+msgid "name is too short"
+msgstr ""
+
+#: lib/user.c:200
+msgid "name contains non-ASCII characters"
+msgstr ""
+
+#: lib/user.c:207
+msgid "name contains control characters"
+msgstr ""
+
+#: lib/user.c:214
+msgid "name contains whitespace"
+msgstr ""
+
+#: lib/user.c:221
+#, c-format
+msgid "name contains invalid char `%c'"
+msgstr ""
+
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
@@ -410,10 +436,10 @@ msgstr "`' 파일을 잠그는 도중 오류 발생: %s"
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
 #: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
+#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s'(을)를 열 수 없음: %s"
@@ -455,11 +481,11 @@ msgstr "`%s'에 작성할 수 없음: %s"
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:2794 modules/files.c:2864
+#: modules/files.c:2818 modules/files.c:2888
 msgid "not executing with superuser privileges"
 msgstr "수퍼유저 권한으로 실행할 수 없습니다"
 
-#: modules/files.c:2877
+#: modules/files.c:2901
 msgid "no shadow file present -- disabling"
 msgstr "현재 섀도우 파일이 없음 -- 불가능"
 
@@ -640,7 +666,7 @@ msgstr "LDAP SASL 인증 사용자"
 msgid "Error initializing %s: %s\n"
 msgstr "%s(을)를 초기화하는 도중 오류 발생: %s\n"
 
-#: samples/lookup.c:75
+#: samples/lookup.c:74
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr "ID %d의 그룹을 검색하고 있습니다.\n"
@@ -650,17 +676,17 @@ msgstr "ID %d의 그룹을 검색하고 있습니다.\n"
 msgid "Searching for group named %s.\n"
 msgstr "%s 그룹을 검색하고 있습니다.\n"
 
-#: samples/lookup.c:87
+#: samples/lookup.c:86
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr "ID %d의 사용자를 검색하고 있습니다.\n"
 
-#: samples/lookup.c:90
+#: samples/lookup.c:89
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr "%s 사용자를 검색하고 있습니다.\n"
 
-#: samples/lookup.c:104
+#: samples/lookup.c:103
 msgid "Entry not found.\n"
 msgstr "목록(Entry)을 찾을 수 없습니다.\n"
 
@@ -679,4 +705,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-

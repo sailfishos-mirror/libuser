@@ -2,7 +2,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 2
+Release: 1
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -87,6 +87,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Dec 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.2-1
+- degrade gracefully
+
 * Tue Aug 27 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.1-2
 - translation updates
 

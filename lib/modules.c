@@ -34,9 +34,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	       	GValueArray **names, struct lu_error **error)
 {
 	char *p, *q, *tmp, *symbol, *modlist, *module_file = NULL;
-	int i;
 	GModule *handle = NULL;
-	const char *module_dir = NULL, *ctmp;
+	const char *module_dir = NULL, *module_name;
 	lu_module_init_t module_init = NULL;
 	struct lu_module *module = NULL;
 
@@ -52,37 +51,21 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	}
 	*names = g_value_array_new(0);
 
-	/* Iterate over the list, broken out into actual names, and add them
-	 * to the array. */
-	modlist = g_strdup(module_list);
-	for (p = strtok_r(modlist, SEPARATORS, &q);
-	     p != NULL;
-	     p = strtok_r(NULL, SEPARATORS, &q)) {
-		char *cached;
-		GValue value;
-		tmp = g_strndup(p, q ? q - p : strlen(p));
-		cached = ctx->scache->cache(ctx->scache, tmp);
-		g_free(tmp);
-
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);	
-		g_value_set_string(&value, cached);	
-		g_value_array_append(*names, &value);
-		g_value_unset(&value);
-	}
-	g_free(modlist);
-
 	/* Figure out where the modules would be. */
 	module_dir = lu_cfg_read_single(ctx, "defaults/moduledir", MODULEDIR);
 
 	/* Load the modules. */
-	for (i = 0; i < (*names)->n_values; i++) {
-		ctmp = g_value_get_string(g_value_array_get_nth(*names, i));
-		tmp = ctx->scache->cache(ctx->scache, ctmp);
+	modlist = g_strdup(module_list);
+	for (module_name = strtok_r(modlist, SEPARATORS, &q);
+	     module_name != NULL;
+	     module_name = strtok_r(NULL, SEPARATORS, &q)) {
+		GValue value;
+
+		tmp = ctx->scache->cache(ctx->scache, module_name);
 		/* Only load the module if it's not already loaded. */
 		if (g_tree_lookup(ctx->modules, tmp) == NULL) {
 			/* Generate the file name. */
-			tmp = g_strconcat(PACKAGE "_", ctmp, NULL);
+			tmp = g_strconcat(PACKAGE "_", module_name, NULL);
 			module_file = g_module_build_path(module_dir, tmp);
 			g_free(tmp);
 			tmp = module_file;
@@ -95,12 +78,15 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 				/* If the open failed, we return an error. */
 				lu_error_new(error, lu_error_module_load,
 					     "%s", g_module_error());
+				g_module_close(handle);
+				g_free(modlist);
 				return FALSE;
 			}
 
 			/* Determine the name of the module's initialization
 			 * function and try to find it. */
-			tmp = g_strconcat(PACKAGE "_", ctmp, "_init", NULL);
+			tmp = g_strconcat(PACKAGE "_", module_name, "_init",
+					  NULL);
 			symbol = ctx->scache->cache(ctx->scache, tmp);
 			g_free(tmp);
 			g_module_symbol(handle, symbol,
@@ -113,6 +99,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					       "in `%s'"),
 					     symbol, module_file);
 				g_module_close(handle);
+				g_free(modlist);
 				return FALSE;
 			}
 
@@ -121,12 +108,15 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 			module = module_init(ctx, error);
 
 			if (module == NULL) {
+				g_module_close(handle);
 				/* The module initializer sets the error, but
 				 * we need to ignore warnings. */
 				if (lu_error_is_warning((*error)->code)) {
 					lu_error_free(error);
+					continue;
 				} else {
 					g_module_close(handle);
+					g_free(modlist);
 					return FALSE;
 				}
 			} else {
@@ -139,15 +129,15 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 						       "mismatch in `%s'"),
 						     module_file);
 					g_module_close(handle);
+					g_free(modlist);
 					return FALSE;
 				}
 
 				/* Initialize the last two fields in the
-				 * module structure, add it to the module
-				 * tree, and return. */
+				 * module structure and add it to the module
+				 * tree. */
 				module->lu_context = ctx;
 				module->module_handle = handle;
-				tmp = ctx->scache->cache(ctx->scache, ctmp);
 				g_tree_insert(ctx->modules, tmp, module);
 			}
 
@@ -214,8 +204,16 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 
 			g_return_val_if_fail(module->close != NULL, FALSE);
+
+			/* Record that we loaded the module. */
+			memset(&value, 0, sizeof(value));
+			g_value_init(&value, G_TYPE_STRING);	
+			g_value_set_string(&value, tmp);	
+			g_value_array_append(*names, &value);
+			g_value_unset(&value);
 		}
 	}
+	g_free(modlist);
 	return TRUE;
 }
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
-"POT-Creation-Date: 2002-04-15 17:49-0400\n"
+"POT-Creation-Date: 2002-12-11 16:43-0500\n"
 "PO-Revision-Date: 2002-04-16 11:53GMT+10:00\n"
 "Last-Translator: James Hashida <khashida@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -84,7 +84,7 @@ msgstr "%sの初期化でエラー: %s。\n"
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85
+#: apps/lusermod.c:315 lib/error.c:85 samples/lookup.c:65
 msgid "unknown error"
 msgstr "不明なエラー"
 
@@ -201,6 +201,7 @@ msgstr "グループ%sはロック解除出来ませんでした。\n"
 msgid "Group %s could not be modified.\n"
 msgstr "グループ%sは修正されませんでした。\n"
 
+#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -380,12 +381,12 @@ msgstr "モジュールのシンボル解決でエラー"
 msgid "library/module version mismatch"
 msgstr "ライブラリ/モジュールバージョンの不一致"
 
-#: lib/modules.c:112
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "`%s'の関数%sで初期化できません"
 
-#: lib/modules.c:138
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s'のモジュールバージョンの不一致"
@@ -402,6 +403,31 @@ msgstr "ターミナル属性の設定中にエラー"
 msgid "error reading from terminal"
 msgstr "ターミナルから読み込み中にエラー"
 
+#: lib/user.c:190
+msgid "name is not set"
+msgstr ""
+
+#: lib/user.c:194
+msgid "name is too short"
+msgstr ""
+
+#: lib/user.c:200
+msgid "name contains non-ASCII characters"
+msgstr ""
+
+#: lib/user.c:207
+msgid "name contains control characters"
+msgstr ""
+
+#: lib/user.c:214
+msgid "name contains whitespace"
+msgstr ""
+
+#: lib/user.c:221
+#, c-format
+msgid "name contains invalid char `%c'"
+msgstr ""
+
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
@@ -410,10 +436,10 @@ msgstr "ファイルのロック中にエラー: %s"
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
 #: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
+#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s'を開けません: %s"
@@ -455,11 +481,11 @@ msgstr "`%s'に書き込めません: %s"
 msgid "entity object has no %s attribute"
 msgstr "エンティティオブジェクトには%s属性はありません"
 
-#: modules/files.c:2794 modules/files.c:2864
+#: modules/files.c:2818 modules/files.c:2888
 msgid "not executing with superuser privileges"
 msgstr "スーパーユーザ特権で実行できません"
 
-#: modules/files.c:2877
+#: modules/files.c:2901
 msgid "no shadow file present -- disabling"
 msgstr "shadowファイルはありません -- 無効になっています"
 
@@ -638,7 +664,7 @@ msgstr "LDAP SASL認証ユーザ"
 msgid "Error initializing %s: %s\n"
 msgstr "%sの初期化でエラー: %s\n"
 
-#: samples/lookup.c:75
+#: samples/lookup.c:74
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr "ID %dのグループを検索中。\n"
@@ -648,17 +674,17 @@ msgstr "ID %dのグループを検索中。\n"
 msgid "Searching for group named %s.\n"
 msgstr "名前が%sのグループを検索中。\n"
 
-#: samples/lookup.c:87
+#: samples/lookup.c:86
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr "ID %dのユーザを検索中。\n"
 
-#: samples/lookup.c:90
+#: samples/lookup.c:89
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr "名前が%sのユーザを検索中。\n"
 
-#: samples/lookup.c:104
+#: samples/lookup.c:103
 msgid "Entry not found.\n"
 msgstr "エントリは見つかりませんでした。\n"
 
@@ -677,4 +703,3 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
-

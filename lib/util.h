@@ -31,4 +31,6 @@ gint lu_strcasecmp(gconstpointer v1, gconstpointer v2);
 
 gint lu_strcmp(gconstpointer v1, gconstpointer v2);
 
+gboolean lu_account_name_is_valid(const char *prospective_name);
+
 #endif

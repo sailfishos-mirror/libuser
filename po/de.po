@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-04-15 17:49-0400\n"
+"POT-Creation-Date: 2002-12-11 16:43-0500\n"
 "PO-Revision-Date: 2002-04-13 16:05+0200\n"
 "Last-Translator: Harald Hoyer <harald@redhat.de>\n"
 "Language-Team:  <de@li.org>\n"
@@ -84,7 +84,7 @@ msgstr "Fehler beim Initialisieren von %s: %s.\n"
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85
+#: apps/lusermod.c:315 lib/error.c:85 samples/lookup.c:65
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -201,6 +201,7 @@ msgstr "Gruppe %s konnte nicht freigegeben werden.\n"
 msgid "Group %s could not be modified.\n"
 msgstr "Gruppe %s konnte nicht geändert werden.\n"
 
+#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -380,12 +381,12 @@ msgstr "Fehler beim Lösen des Symbols im Modul"
 msgid "library/module version mismatch"
 msgstr "Bibliothek/Modulversion stimmt nicht überein"
 
-#: lib/modules.c:112
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "keine Initialisierungsfunktion %s in `%s'"
 
-#: lib/modules.c:138
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "Fehlende Übereinstimmung von Modulversionen in `%s'"
@@ -402,6 +403,31 @@ msgstr "Fehler beim Einstellen der Terminalattribute"
 msgid "error reading from terminal"
 msgstr "Fehler beim Lesen vom Terminal"
 
+#: lib/user.c:190
+msgid "name is not set"
+msgstr ""
+
+#: lib/user.c:194
+msgid "name is too short"
+msgstr ""
+
+#: lib/user.c:200
+msgid "name contains non-ASCII characters"
+msgstr ""
+
+#: lib/user.c:207
+msgid "name contains control characters"
+msgstr ""
+
+#: lib/user.c:214
+msgid "name contains whitespace"
+msgstr ""
+
+#: lib/user.c:221
+#, c-format
+msgid "name contains invalid char `%c'"
+msgstr ""
+
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
@@ -410,10 +436,10 @@ msgstr "Fehler beim Sperren der Datei: %s"
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
 #: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
-#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
-#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
-#: modules/files.c:2545 modules/files.c:2562
+#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
+#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' konnte nicht geöffnet werden: %s"
@@ -455,11 +481,11 @@ msgstr "nach `%s' konnte nicht geschrieben werden: %s"
 msgid "entity object has no %s attribute"
 msgstr "entity Objekt besitzt kein %s Attribut"
 
-#: modules/files.c:2794 modules/files.c:2864
+#: modules/files.c:2818 modules/files.c:2888
 msgid "not executing with superuser privileges"
 msgstr "Keine Ausführung mit Superuser-Rechten."
 
-#: modules/files.c:2877
+#: modules/files.c:2901
 msgid "no shadow file present -- disabling"
 msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 
@@ -639,7 +665,7 @@ msgstr "LDAP SASL Authorisierungsbenutzer"
 msgid "Error initializing %s: %s\n"
 msgstr "Fehler beim Initialisieren von %s: %s\n"
 
-#: samples/lookup.c:75
+#: samples/lookup.c:74
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr "Suche nach Gruppe mit ID %d.\n"
@@ -649,17 +675,17 @@ msgstr "Suche nach Gruppe mit ID %d.\n"
 msgid "Searching for group named %s.\n"
 msgstr "Suche nach Gruppe mit Namen %s.\n"
 
-#: samples/lookup.c:87
+#: samples/lookup.c:86
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr "Suche nach Benutzer mit ID %d.\n"
 
-#: samples/lookup.c:90
+#: samples/lookup.c:89
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr "Suche nach Benutzer mit Namen %s.\n"
 
-#: samples/lookup.c:104
+#: samples/lookup.c:103
 msgid "Entry not found.\n"
 msgstr "Eintrag wurde nicht gefunden.\n"
 

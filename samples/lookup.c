@@ -62,7 +62,7 @@ main(int argc, char **argv)
 
 	if (lu == NULL) {
 		g_print(gettext("Error initializing %s: %s\n"), PACKAGE,
-			error->string);
+			error ? error->string : gettext("unknown error"));
 		return 1;
 	}
 
@@ -71,15 +71,14 @@ main(int argc, char **argv)
 	tmp = lu_ent_new();
 	if (group) {
 		if (byid) {
-			g_print(gettext
-				("Searching for group with ID %d.\n"), c);
+			g_print(gettext("Searching for group with ID %d.\n"),
+				c);
 			success = lu_group_lookup_id(lu, c, tmp, &error);
 		} else {
 			g_print(gettext("Searching for group named %s.\n"),
 				argv[optind]);
-			success =
-			    lu_group_lookup_name(lu, argv[optind], tmp,
-						 &error);
+			success = lu_group_lookup_name(lu, argv[optind], tmp,
+						       &error);
 		}
 	} else {
 		if (byid) {

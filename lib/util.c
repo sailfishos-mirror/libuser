@@ -590,3 +590,33 @@ lu_util_shadow_current_date(struct lu_string_cache *cache)
 
 	return cache->cache(cache, buf);
 }
+
+gboolean
+lu_account_name_is_valid(const char *prospective_name)
+{
+	int i;
+	g_return_val_if_fail(prospective_name != NULL, FALSE);
+	if (prospective_name[0] == '\0') {
+		return FALSE;
+	}
+	/* Validate a name using the method shadow 4.0.3 uses:
+	 * [a-z_][0-9a-z_-]* */
+	if ((prospective_name[0] != '_') &&
+	    !((prospective_name[0] >= 'a') &&
+	      (prospective_name[0] <= 'z'))) {
+		return FALSE;
+	}
+	for (i = 1; prospective_name[i] != '\0'; i++) {
+		if (!((prospective_name[i] >= 'a') &&
+		      (prospective_name[i] <= 'z')) &&
+		    !((prospective_name[i] >= '0') &&
+		      (prospective_name[i] <= '9')) &&
+		    !(prospective_name[i] == '_') &&
+		    !(prospective_name[i] == '-') &&
+		    !((prospective_name[i] == '$') &&
+		      (prospective_name[i + 1] == '\0'))) {
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
