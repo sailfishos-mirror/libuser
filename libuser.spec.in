@@ -89,6 +89,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Feb 19 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.7-1
+- ldap: set error codes correctly when we encounter failures initializing
+
 * Tue Feb 18 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.6-1
 - use a crypt salt consistent with the defaults/crypt_style setting when
   setting new passwords (#79337)

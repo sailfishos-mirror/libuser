@@ -108,6 +108,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 
 			if (module == NULL) {
 				g_module_close(handle);
+				g_assert(error != NULL);
+				g_assert(*error != NULL);
 				/* The module initializer sets the error, but
 				 * we need to ignore warnings. */
 				if (lu_error_is_warning((*error)->code)) {
