@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 00:53+0100\n"
-"PO-Revision-Date: 2004-11-05 01:06+0900\n"
+"PO-Revision-Date: 2004-11-14 19:15+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -254,7 +254,7 @@ msgstr "グループ名は指定されていません。\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "無効なグループ ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -328,16 +328,16 @@ msgstr "`%s'用のアカウント作成でエラー:  行に不正フォーマ�
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "無効なユーザー ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0でのアカウント作成を拒否中です。\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "`%s' 用に GID %ld でグループ作成中にエラー: %s\n"
+msgstr "`%s' 用に GID %jd でグループ作成中にエラー: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -428,14 +428,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%sにはGID番号がありません。\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %ld のグループが存在しません。削除しません。\n"
+msgstr "GID %jd のグループが存在しないため、削除しません。\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %ld のグループにはグループ名がありません。\n"
+msgstr "GID %jd のグループにはグループ名がありません。\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -942,12 +942,12 @@ msgstr "%sの初期化でエラー: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "無効な ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "ID %dのグループを検索中。\n"
+msgstr "ID %jd のグループを検索中。\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -955,9 +955,9 @@ msgid "Searching for group named %s.\n"
 msgstr "名前が%sのグループを検索中。\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "ID %dのユーザを検索中。\n"
+msgstr "ID %jd のユーザーを検索中。\n"
 
 #: samples/lookup.c:107
 #, c-format
