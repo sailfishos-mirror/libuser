@@ -15,20 +15,20 @@ field_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
 
 homedir_SOURCES = homedir.c
 
-homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
 
 lookup_SOURCES = lookup.c
 
-lookup_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+lookup_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
 
 quotaq_SOURCES = quotaq.c
 
-quotaq_LDADD =  ../lib/libuserquota.la @CRYPT_LIBS@ @INTLLIBS@
+quotaq_LDADD =  ../lib/libuserquota.la @CRYPT_LIBS@ @LTLIBINTL@
 
 prompt_SOURCES = prompt.c
 
-prompt_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+prompt_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
 
 testuser_SOURCES = testuser.c
 
-testuser_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+testuser_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@

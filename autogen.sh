@@ -7,7 +7,7 @@ fi
 set -x
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
 libtoolize --force
-aclocal
+aclocal -I ./m4
 automake -a
 autoheader
 autoconf

@@ -1382,7 +1382,7 @@ generic_del(struct lu_module *module, const char *base_name,
 		} else
 		/* If the data occurs elsewhere, cover it up. */
 		if ((tmp = strstr(contents, fragment2)) != NULL) {
-			char *p = strchr(contents, '\n');
+			char *p = strchr(tmp + 1, '\n');
 			strcpy(tmp, p ? (p + 1) : "");
 			found = TRUE;
 		}

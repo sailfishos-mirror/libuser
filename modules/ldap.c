@@ -209,7 +209,7 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 	LU_ERROR_CHECK(error);
 
 	/* Create the LDAP context. */
-	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
+	ldap = ldap_open(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if (ldap == NULL) {
 		lu_error_new(error, lu_error_init,
 			     _("error initializing ldap library"));
@@ -235,13 +235,13 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 		lu_error_new(error, lu_error_init,
 			     _("could not negotiate TLS with LDAP server"));
 		close_server(ldap);
-		ldap = NULL;
+		return NULL;
 	}
 
 	/* If we need to, try the LDAPS route. */
 	if (ldap == NULL) {
 		/* Create the LDAP context. */
-		ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value,
+		ldap = ldap_open(context->prompts[LU_LDAP_SERVER].value,
 				 LDAPS_PORT);
 		if (ldap == NULL) {
 			lu_error_new(error, lu_error_init,
@@ -374,7 +374,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 		g_print("Attempting SASL bind to `%s'.\n",
 			generated_binddn);
 #endif
-		ret = ldap_sasl_interactive_bind_s(ldap, binddn, NULL,
+		ret = ldap_sasl_interactive_bind_s(ldap, generated_binddn, NULL,
 						   &server, &client,
 						   LDAP_SASL_INTERACTIVE |
 						   LDAP_SASL_QUIET,
@@ -2155,12 +2155,9 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	struct lu_prompt prompts[G_N_ELEMENTS(ctx->prompts)];
 	char *user;
 	const char *bind_type;
-	char **bind_types, **values;
-	int i, version;
+	char **bind_types;
+	int i;
 	LDAP *ldap = NULL;
-	LDAPMessage *results = NULL, *entry = NULL;
-	LDAPControl *server = NULL, *client = NULL;
-	char *saslmechs[] = {"supportedSASLmechanisms", NULL};
 
 	g_assert(context != NULL);
 	g_assert(context->prompter != NULL);
@@ -2213,19 +2210,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 		user = NULL;
 	}
 
-	/* Get the information we're sure we'll need. */
-	i = 0;
-	prompts[i++] = ctx->prompts[LU_LDAP_SERVER];
-	prompts[i++] = ctx->prompts[LU_LDAP_BASEDN];
-	if (context->prompter(prompts, i,
-			      context->prompter_data, error) == FALSE) {
-		g_free(ctx);
-		return NULL;
-	}
-	i = 0;
-	ctx->prompts[LU_LDAP_SERVER] = prompts[i++];
-	ctx->prompts[LU_LDAP_BASEDN] = prompts[i++];
-
 	/* Try to be somewhat smart and allow the user to specify which bind
 	 * type to use, which should prevent us from asking for information
 	 * we can be certain we don't have a use for. */
@@ -2236,103 +2220,34 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 			ctx->bind_simple = TRUE;
 		} else
 		if (g_ascii_strcasecmp(bind_types[i], "sasl") == 0) {
-			/* Do some sanity checking here. */
-			ldap = ldap_init(ctx->prompts[LU_LDAP_SERVER].value,
-					 LDAP_PORT);
-			if (ldap == NULL) {
-				lu_error_new(error, lu_error_init,
-					     _("error initializing ldap library"));
-				g_free(ctx);
-				return NULL;
-			}
-
-			/* Switch to LDAPv3, which gives us some more features
-			 * we need. */
-			version = LDAP_VERSION3;
-			if (ldap_set_option(ldap,
-					    LDAP_OPT_PROTOCOL_VERSION,
-					    &version) != LDAP_OPT_SUCCESS) {
-				lu_error_new(error, lu_error_init,
-					     _("could not set LDAP protocol to version %d"),
-					     version);
-				close_server(ldap);
-				g_free(ctx);
-				return NULL;
-			}
-
-			/* Try to start TLS. */
-			if (ldap_start_tls_s(ldap,
-					     &server,
-					     &client) != LDAP_SUCCESS) {
-				lu_error_new(error, lu_error_init,
-					     _("could not negotiate TLS with LDAP server"));
-				close_server(ldap);
-				g_free(ctx);
-				return NULL;
-			}
-
-			/* Search the root DSE for supported SASL mechanisms. */
-			if (ldap_search_ext_s(ldap,
-					      LDAP_ROOT_DSE, LDAP_SCOPE_BASE,
-					      NULL, saslmechs, FALSE,
-					      &server, &client,
-					      NULL, 0,
-					      &results) != LDAP_SUCCESS) {
-				lu_error_new(error, lu_error_init,
-					     _("could not search LDAP server"));
-				close_server(ldap);
-				g_free(ctx);
-				return NULL;
-			}
-
-			/* Get the DSE entry. */
-			entry = ldap_first_entry(ldap, results);
-			if (entry == NULL) {
-				lu_error_new(error, lu_error_init,
-					     _("LDAP server appears to have no root DSE"));
-				ldap_msgfree(results);
-				close_server(ldap);
-				g_free(ctx);
-				return NULL;
-			}
-
-			/* Read the list of supported mechanisms. */
-			values = ldap_get_values(ldap, entry, saslmechs[0]);
-			if ((values == NULL)||(ldap_count_values(values) == 0)){
-				ctx->bind_sasl = FALSE;
-			} else {
-				ctx->bind_sasl = TRUE;
-			}
-			ldap_msgfree(results);
-			close_server(ldap);
-			ldap = NULL;
+			ctx->bind_sasl = TRUE;
 		}
 	}
 
-	/* Copy out the prompt elements we want answers for. */
+	/* Get the information we're sure we'll need. */
 	i = 0;
+	prompts[i++] = ctx->prompts[LU_LDAP_SERVER];
+	prompts[i++] = ctx->prompts[LU_LDAP_BASEDN];
 	if (ctx->bind_simple) {
 		prompts[i++] = ctx->prompts[LU_LDAP_BINDDN];
+		prompts[i++] = ctx->prompts[LU_LDAP_PASSWORD];
 	}
-	prompts[i++] = ctx->prompts[LU_LDAP_PASSWORD];
 	if (ctx->bind_sasl) {
 		prompts[i++] = ctx->prompts[LU_LDAP_AUTHUSER];
 		prompts[i++] = ctx->prompts[LU_LDAP_AUTHZUSER];
 	}
-
-	/* Ask the hard questions. */
 	if (context->prompter(prompts, i,
 			      context->prompter_data, error) == FALSE) {
 		g_free(ctx);
 		return NULL;
 	}
-
-	/* Copy out the responses to the prompts. */
 	i = 0;
+	ctx->prompts[LU_LDAP_SERVER] = prompts[i++];
+	ctx->prompts[LU_LDAP_BASEDN] = prompts[i++];
 	if (ctx->bind_simple) {
 		ctx->prompts[LU_LDAP_BINDDN] = prompts[i++];
+		ctx->prompts[LU_LDAP_PASSWORD] = prompts[i++];
 	}
-	ctx->prompts[LU_LDAP_PASSWORD] = prompts[i++];
 	if (ctx->bind_sasl) {
 		ctx->prompts[LU_LDAP_AUTHUSER] = prompts[i++];
 		ctx->prompts[LU_LDAP_AUTHZUSER] = prompts[i++];
@@ -2345,6 +2260,15 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->scache = lu_string_cache_new(TRUE);
 	ret->name = ret->scache->cache(ret->scache, "ldap");
 	ctx->module = ret;
+
+	/* Try to bind to the server to verify that we can. */
+	ldap = bind_server(ctx, error);
+	if (ldap == NULL) {
+		g_free(ret);
+		g_free(ctx);
+		return FALSE;
+	}
+	ctx->ldap = ldap;
 
 	/* Initialize the attribute lists with the right names. */
 	for (i = 0; i < G_N_ELEMENTS(lu_ldap_user_attributes); i++) {
@@ -2362,15 +2286,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 					    lu_ldap_group_attributes[i]);
 		}
 	}
-
-	/* Try to bind to the server to verify that we can. */
-	ldap = bind_server(ctx, error);
-	if (ldap == NULL) {
-		g_free(ret);
-		g_free(ctx);
-		return FALSE;
-	}
-	ctx->ldap = ldap;
 
 	/* Set the method pointers. */
 	ret->uses_elevated_privileges = lu_ldap_uses_elevated_privileges;
