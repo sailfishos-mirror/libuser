@@ -14,7 +14,7 @@ scan:
 	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)
 
 tag:
-	./config.status
+	./autogen.sh
 	cvs tag -cFR $(CVSTAG) .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
