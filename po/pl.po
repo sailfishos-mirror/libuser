@@ -82,7 +82,7 @@ msgstr "Błąd podczas inicjalizacji PAM.\n"
 #: apps/apputil.c:615 apps/apputil.c:639
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Autentykacja nie powiodła się dla %s.\n"
+msgstr "Uwierzytelnienie nie powiodła się dla %s.\n"
 
 #: apps/apputil.c:624
 #, c-format
