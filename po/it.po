@@ -4,6 +4,7 @@
 # translation of it.po to
 # translation of it.po to
 # translation of it.po to
+# translation of it.po to
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004.
@@ -13,7 +14,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 00:53+0100\n"
-"PO-Revision-Date: 2004-11-05 00:24+0100\n"
+"PO-Revision-Date: 2004-11-14 10:01+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -49,8 +50,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
-"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:508
 msgid "Unknown user context"
@@ -258,7 +258,7 @@ msgstr "Nessun nome gruppo specificato.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ID gruppo %s non valido\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -334,16 +334,16 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "User ID %s non valida\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Rifiuto di creare un account con UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Errore nella creazione del gruppo %s' con GID %ld: %s\n"
+msgstr "Errore nella creazione del gruppo per '%s' con GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -434,14 +434,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s privo di un numero gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Non esiste nessun gruppo con GID %ld. Rimozione impossibile.\n"
+msgstr "Non esiste nessun gruppo con GID %jd. Rimozione impossibile.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Gruppo con GID %ld privo di nome gruppo.\n"
+msgstr "Gruppo con GID %jd privo di nome gruppo.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -652,8 +652,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:110
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:116
 #, c-format
@@ -668,8 +667,7 @@ msgstr "impossibile impostare l'ambiente di sicurezza predefinito a %s: %s"
 #: modules/files.c:143
 #, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr ""
-"impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
+msgstr "impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
 
 #: modules/files.c:170 modules/files.c:530 modules/files.c:875
 #: modules/files.c:1148 modules/files.c:1340 modules/files.c:1547
@@ -830,8 +828,7 @@ msgstr ""
 
 #: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1362
 #, c-format
@@ -890,8 +887,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1893
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2445
 msgid "LDAP Server Name"
@@ -956,12 +952,12 @@ msgstr "Errore nell'inizializzazione di %s: %s.\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "ID %s non valido\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Ricerca del gruppo con ID %d.\n"
+msgstr "Ricerca del gruppo con ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -969,9 +965,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Ricerca del gruppo di nome %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Ricerca dell'utente con ID %d.\n"
+msgstr "Ricerca dell'utente con ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1005,3 +1001,4 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
