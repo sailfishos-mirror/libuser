@@ -1,6 +1,6 @@
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -73,6 +73,9 @@ rm -fr $RPM_BUILD_ROOT
 #%attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Wed Aug  1 2001 Nalin Dahyabhai <nalin@redhat.com>
+- fix incorrect Py_BuildValue invocation in python module
+
 * Tue Jul 31 2001 Nalin Dahyabhai <nalin@redhat.com>
 - stop leaking descriptors in the files module
 - speed up user creation by reordering some checks for IDs being in use

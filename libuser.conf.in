@@ -32,6 +32,9 @@ shadowInactive = -1
 shadowExpire = -1
 shadowFlag = -1
 
+objectclass = organizationalPerson
+sn = %n
+
 [groupdefaults]
 objectclass = posixGroup
 cn = %n

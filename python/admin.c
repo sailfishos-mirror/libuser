@@ -313,10 +313,10 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 	}
 	if(fn(me->ctx, ent->ent, &error)) {
 		DEBUG_EXIT;
-		return Py_BuildValue("%d", 1);
+		return Py_BuildValue("i", 1);
 	} else {
 		DEBUG_EXIT;
-		return Py_BuildValue("%d", 0);
+		return Py_BuildValue("i", 0);
 	}
 }
 
