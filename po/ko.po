@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-08-07 11:01+1000\n"
+"PO-Revision-Date: 2002-12-12 10:20+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta1\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -405,28 +405,28 @@ msgstr "터미널로 부터 읽는 도중 오류 발생"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "이름이 설정되지 않았습니다."
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "이름이 너무 짧습니다."
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "이름에 아스키 (ASCII)가 아닌 문자가 들어 있습니다."
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "이름에 제어 문자가 포함되어 있습니다."
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "이름에 공백이 포함되어 있습니다."
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "이름에 잘못된 문자 `%c'가 있습니다."
 
 #: lib/util.c:200
 #, c-format
@@ -705,3 +705,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
