@@ -1,5 +1,5 @@
 SUBDIRS = po docs lib apps samples python modules
-EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt docs/reference/libuser.args docs/reference/libuser.hierarchy docs/reference/libuser.signals docs/reference/libuser.types
+EXTRA_DIST = libuser.spec libuser-selinux.patch libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt docs/reference/libuser.args docs/reference/libuser.hierarchy docs/reference/libuser.signals docs/reference/libuser.types
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig
 
