@@ -1,0 +1,922 @@
+# Slovak translations for libuser package
+# Slovenské preklady pre balík libuser.
+# Copyright (C) 2003 Red Hat, Inc.
+# This file is distributed under the same license as the libuser package.
+# Marcel Telka <marcel@telka.sk>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser\n"
+"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"PO-Revision-Date: 2003-07-31 21:59+0200\n"
+"Last-Translator: Marcel Telka <marcel@telka.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/apputil.c:71
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "Chyba pri čítaní `%s': %s"
+
+#: apps/apputil.c:79
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "Chyba pri vytváraní `%s': %s"
+
+#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "Chyba pri odstraňovaní `%s': %s"
+
+#: apps/apputil.c:421 apps/apputil.c:425
+msgid "Failed to drop privileges.\n"
+msgstr "Zlyhalo zahodenie práv.\n"
+
+#: apps/apputil.c:434
+msgid "Internal error.\n"
+msgstr "Interná chyba.\n"
+
+#: apps/apputil.c:447
+msgid "Error initializing PAM.\n"
+msgstr "Chyba inicializácie PAM.\n"
+
+#: apps/apputil.c:455 apps/apputil.c:479
+#, c-format
+msgid "Authentication failed for %s.\n"
+msgstr "Overenie totožnosti zlyhalo pre %s.\n"
+
+#: apps/apputil.c:464
+#, c-format
+msgid "Internal PAM error `%s'.\n"
+msgstr "Interná chyba PAM `%s'.\n"
+
+#: apps/apputil.c:470
+msgid "User mismatch.\n"
+msgstr "Používateľ sa nezhoduje.\n"
+
+#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/luserdel.c:65 apps/lusermod.c:87
+msgid "[OPTION...] user"
+msgstr "[VOĽBA...] používateľ"
+
+#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#, c-format
+msgid "Error parsing arguments: %s.\n"
+msgstr "Chyba pri analýze parametrov: %s.\n"
+
+#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lusermod.c:101
+msgid "No user name specified.\n"
+msgstr "Nebolo zadané meno používateľa.\n"
+
+#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:71
+#, c-format
+msgid "Error initializing %s: %s.\n"
+msgstr "Chyba pri inicializácii %s: %s.\n"
+
+#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
+#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
+#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
+#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
+#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
+#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: samples/lookup.c:65
+msgid "unknown error"
+msgstr "neznáma chyba"
+
+#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/luserdel.c:94 apps/lusermod.c:126
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "Používateľ %s neexistuje.\n"
+
+#: apps/lchage.c:172
+msgid "Account is locked.\n"
+msgstr "Konto je zamknuté.\n"
+
+#: apps/lchage.c:174
+msgid "Account is not locked.\n"
+msgstr "Konto nie je zamknuté.\n"
+
+#: apps/lchage.c:179
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "Minimum:\t%d\n"
+
+#: apps/lchage.c:184
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "Maximum:\t%d\n"
+
+#: apps/lchage.c:189
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "Upozornenie:\t%d\n"
+
+#: apps/lchage.c:194
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "Neaktívne:\t%d\n"
+
+#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+msgid "Never"
+msgstr "Nikdy"
+
+#: apps/lchage.c:201
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "Posledná zmena:\t%s\n"
+
+#: apps/lchage.c:211
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "Platnosť hesla vyprší:\t%s\n"
+
+#: apps/lchage.c:223
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "Heslo neaktívne:\t%s\n"
+
+#: apps/lchage.c:230
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "Platnosť konta vyprší:\t%s\n"
+
+#: apps/lchage.c:277
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Zlyhala úprava informácií o veku pre %s.\n"
+
+#: apps/lchfn.c:74 apps/lchsh.c:61
+msgid "[OPTION...] [user]"
+msgstr "[VOĽBA...] [používateľ]"
+
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#, c-format
+msgid "No user name specified, no name for uid %d.\n"
+msgstr "Nebolo zadané meno používateľa, nie je meno pre uid %d.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchfn.c:102
+#, c-format
+msgid "Changing finger information for %s.\n"
+msgstr "Mením finger informácie pre %s.\n"
+
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "Chyba pri inicializácii %s.\n"
+
+#: apps/lchfn.c:161
+msgid "Full Name"
+msgstr "Celé meno"
+
+#: apps/lchfn.c:182
+msgid "Surname"
+msgstr "Priezvisko"
+
+#: apps/lchfn.c:204
+msgid "Given Name"
+msgstr "Krstné meno"
+
+#: apps/lchfn.c:214
+msgid "Office"
+msgstr "Úrad"
+
+#: apps/lchfn.c:223
+msgid "Office Phone"
+msgstr "Telefón do úradu"
+
+#: apps/lchfn.c:232
+msgid "Home Phone"
+msgstr "Telefón domov"
+
+#: apps/lchfn.c:253
+msgid "E-Mail Address"
+msgstr "E-mail adresa"
+
+#: apps/lchfn.c:265
+msgid "Finger information not changed:  input error.\n"
+msgstr "Finger informácie neboli zmenené: chyba vstupu.\n"
+
+#: apps/lchfn.c:370
+msgid "Finger information changed.\n"
+msgstr "Finger informácie boli zmenené.\n"
+
+#: apps/lchfn.c:373
+#, c-format
+msgid "Finger information not changed: %s.\n"
+msgstr "Finger informácie neboli zmenené: %s.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchsh.c:90
+#, c-format
+msgid "Changing shell for %s.\n"
+msgstr "Mením shell pre %s.\n"
+
+#: apps/lchsh.c:122
+msgid "New Shell"
+msgstr "Nový shell"
+
+#: apps/lchsh.c:150
+msgid "Shell changed.\n"
+msgstr "Shell zmenený.\n"
+
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+msgid "[OPTION...] group"
+msgstr "[VOĽBA...] skupina"
+
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+msgid "No group name specified.\n"
+msgstr "Nebolo zadané meno skupiny.\n"
+
+#: apps/lgroupadd.c:116
+msgid "Group creation failed.\n"
+msgstr "Vytvorenie skupiny zlyhalo.\n"
+
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "Skupina %s neexistuje.\n"
+
+#: apps/lgroupdel.c:94
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "Skupina %s nemohla byť vymazaná.\n"
+
+#: apps/lgroupmod.c:109 apps/lusermod.c:119
+msgid "Both -L and -U specified.\n"
+msgstr "Boli zadané obidve -L a -U.\n"
+
+#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "Zlyhalo nastavenie hesla pre skupinu %s.\n"
+
+#: apps/lgroupmod.c:242
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "Skupina %s nemohla byť uzamknutá.\n"
+
+#: apps/lgroupmod.c:250
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "Skupina %s nemohla byť odomknutá.\n"
+
+#: apps/lgroupmod.c:257
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "Skupina %s nemohla byť zmenená.\n"
+
+#: apps/lid.c:81
+#, c-format
+msgid "No group name specified, using %s.\n"
+msgstr "Nebolo zadané meno skupiny, použijem %s.\n"
+
+#: apps/lid.c:85
+#, c-format
+msgid "No group name specified, no name for gid %d.\n"
+msgstr "Nebolo zadané meno skupiny, gid %d bez mena.\n"
+
+#: apps/lid.c:93
+#, c-format
+msgid "No user name specified, using %s.\n"
+msgstr "Nebolo zadané meno používateľa, použijem %s.\n"
+
+#: apps/lnewusers.c:74
+msgid "[OPTION...]"
+msgstr "[VOĽBA...]"
+
+#: apps/lnewusers.c:98
+#, c-format
+msgid "Error opening `%s': %s.\n"
+msgstr "Chyba pri otváraní `%s': %s.\n"
+
+#: apps/lnewusers.c:131
+#, c-format
+msgid "Error creating account for `%s': line improperly formatted.\n"
+msgstr "Chyba pri vytváraní konta pre `%s': riadok je nesprávne naformátovaný.\n"
+
+#: apps/lnewusers.c:138
+msgid "Refusing to create account with UID 0.\n"
+msgstr "Zamietam vytvorenie konta s UID 0.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/lnewusers.c:237
+#, c-format
+msgid "Error creating group for `%s' with GID %ld.\n"
+msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %ld.\n"
+
+#: apps/lnewusers.c:288
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Chyba pri nastavovaní počiatočného hesla pre %s: %s\n"
+
+#: apps/lnewusers.c:310
+#, c-format
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Chyba pri vytváraní domovského adresára pre %s: %s\n"
+
+#: apps/lnewusers.c:325
+#, c-format
+msgid "Error creating mail spool for %s.\n"
+msgstr "Chyba pri vytváraní odkladacieho priestoru pošty pre %s.\n"
+
+#: apps/lnewusers.c:330
+#, c-format
+msgid "Error creating user account for %s: %s\n"
+msgstr "Chyba pri vytváraní používateľského konta pre %s: %s\n"
+
+#: apps/lpasswd.c:86
+#, c-format
+msgid "Changing password for %s.\n"
+msgstr "Mením heslo pre %s.\n"
+
+#: apps/lpasswd.c:111
+msgid "New password"
+msgstr "Nové heslo"
+
+#: apps/lpasswd.c:114
+msgid "New password (confirm)"
+msgstr "Nové helso (potvrdiť)"
+
+#: apps/lpasswd.c:128
+msgid "Passwords do not match, try again.\n"
+msgstr "Heslá sa nezhodujú, skúste znova.\n"
+
+#: apps/lpasswd.c:133
+msgid "Password change canceled.\n"
+msgstr "Zmena hesla zrušená.\n"
+
+#: apps/lpasswd.c:190
+#, c-format
+msgid "Error setting password for user %s: %s.\n"
+msgstr "Chyba pri nastavovaní hesla pre používateľa %s: %s.\n"
+
+#: apps/lpasswd.c:197
+#, c-format
+msgid "Error setting password for group %s: %s.\n"
+msgstr "Chyby pri nastavovaní hesla pre skupinu %s: %s.\n"
+
+#: apps/lpasswd.c:208
+msgid "Password changed.\n"
+msgstr "Heslo zmenené.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/luseradd.c:197 apps/luseradd.c:209
+#, c-format
+msgid "Error creating group `%s'.\n"
+msgstr "Chyba pri vytváraní skupiny `%s'.\n"
+
+#: apps/luseradd.c:276
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "Vytváranie konta zlyhalo: %s.\n"
+
+#: apps/luseradd.c:318
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "Chyba pri vytváraní %s: %s.\n"
+
+#: apps/luseradd.c:326
+msgid "Error creating mail spool.\n"
+msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"
+
+#: apps/luserdel.c:99
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Používateľ %s nemohol byť vymazaný: %s.\n"
+
+#: apps/luserdel.c:110
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s nemala číslo gid.\n"
+
+#: apps/luserdel.c:125
+#, c-format
+msgid "No group with GID %ld exists, not removing.\n"
+msgstr "Neexistuje skupina s GID %ld, neodstraňujem.\n"
+
+#: apps/luserdel.c:131
+#, c-format
+msgid "Group with GID %ld did not have a group name.\n"
+msgstr "Skupina s GID %ld nemala meno skupiny.\n"
+
+#: apps/luserdel.c:139
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Skupiny %s nemohla byť vymazaná: %s.\n"
+
+#: apps/luserdel.c:155
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s nemal domovský adresár.\n"
+
+#: apps/luserdel.c:162
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "Chyba pri odstraňovaní %s: %s.\n"
+
+#: apps/lusermod.c:193 apps/lusermod.c:206
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Zlyhalo nastavenie hesla pre používateľa %s: %s.\n"
+
+#: apps/lusermod.c:217
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "Používateľ %s nemohol byť zamknutý: %s.\n"
+
+#: apps/lusermod.c:226
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Používateľ %s nemohol byť odomknutý: %s.\n"
+
+#: apps/lusermod.c:235
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "Používateľ %s nemohol byť zmenený: %s.\n"
+
+#: apps/lusermod.c:289
+#, c-format
+msgid "Group %s could not be modified: %s.\n"
+msgstr "Skupina %s nemohla byť zmenená: %s.\n"
+
+#: apps/lusermod.c:302
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "Nie je starý domovský adresár pre %s.\n"
+
+#: apps/lusermod.c:307
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "Nie je nový domovský adresár pre %s.\n"
+
+#: apps/lusermod.c:313
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Chyba pri presune %s do %s: %s.\n"
+
+#: lib/config.c:70
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "nepodarilo sa otvoriť konfiguračný súbor `%s': %s"
+
+#: lib/error.c:42
+msgid "success"
+msgstr "úspech"
+
+#: lib/error.c:44
+msgid "module disabled by configuration"
+msgstr "modul je nakonfigurovaný ako neaktívny"
+
+#: lib/error.c:46
+msgid "generic error"
+msgstr "základná chyba"
+
+#: lib/error.c:48
+msgid "not enough privileges"
+msgstr "nie sú dostatočné práva"
+
+#: lib/error.c:50
+msgid "access denied"
+msgstr "prístup odmietnutý"
+
+#: lib/error.c:52
+msgid "bad user/group name"
+msgstr "zlé meno používateľa/skupiny"
+
+#: lib/error.c:54
+msgid "bad user/group id"
+msgstr "zlé id používateľa/skupiny"
+
+#: lib/error.c:56
+msgid "user/group name in use"
+msgstr "meno používateľa/skupiny sa používa"
+
+#: lib/error.c:58
+msgid "user/group id in use"
+msgstr "id používateľa/skupiny sa používa"
+
+#: lib/error.c:60
+msgid "error manipulating terminal attributes"
+msgstr "chyba pri zaobchádzaní s terminálovými príznakmi"
+
+#: lib/error.c:62
+msgid "error opening file"
+msgstr "chyba pri otváraní súboru"
+
+#: lib/error.c:64
+msgid "error locking file"
+msgstr "chyba pri uzamykaní súboru"
+
+#: lib/error.c:66
+msgid "error statting file"
+msgstr "chyba pri zisťovaní stavu súboru"
+
+#: lib/error.c:68
+msgid "error reading file"
+msgstr "chyba pri čítaní súboru"
+
+#: lib/error.c:70
+msgid "error writing to file"
+msgstr "chyba pri zápise do súboru"
+
+#: lib/error.c:72
+msgid "data not found in file"
+msgstr "údaje neboli v súbore nájdené"
+
+#: lib/error.c:74
+msgid "internal initialization error"
+msgstr "interná chyba inicializácie"
+
+#: lib/error.c:76
+msgid "error loading module"
+msgstr "chyba pri nahrávaní modulu"
+
+#: lib/error.c:78
+msgid "error resolving symbol in module"
+msgstr "chyba pri riešení závislostí symbolov v module"
+
+#: lib/error.c:80
+msgid "library/module version mismatch"
+msgstr "verzia knižnice/modulu nezodpovedá"
+
+#: lib/modules.c:97
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "bez inicializačnej funkcie %s v `%s'"
+
+#: lib/modules.c:128
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "verzia modulu nezodpovedá v `%s'"
+
+#: lib/prompt.c:66
+msgid "error reading terminal attributes"
+msgstr "chyba pri čítaní príznakov terminálu"
+
+#: lib/prompt.c:73 lib/prompt.c:85
+msgid "error setting terminal attributes"
+msgstr "chyba pri nastavovaní príznakov terminálu"
+
+#: lib/prompt.c:79
+msgid "error reading from terminal"
+msgstr "chyba pri čítaní z terminálu"
+
+#: lib/user.c:190
+msgid "name is not set"
+msgstr "meno nie je nastavené"
+
+#: lib/user.c:194
+msgid "name is too short"
+msgstr "meno je príliš krátke"
+
+#: lib/user.c:200
+msgid "name contains non-ASCII characters"
+msgstr "meno obsahuje znaky, ktoré nie sú ASCII"
+
+#: lib/user.c:207
+msgid "name contains control characters"
+msgstr "meno obsahuje riadiace znaky"
+
+#: lib/user.c:214
+msgid "name contains whitespace"
+msgstr "meno obsahuje medzery"
+
+#: lib/user.c:221
+#, c-format
+msgid "name contains invalid char `%c'"
+msgstr "meno obsahuje neplatný znak `%c'"
+
+#: lib/util.c:200
+#, c-format
+msgid "error locking file: %s"
+msgstr "chyba pri zamykaní súboru: %s"
+
+#: modules/files.c:109 modules/files.c:453 modules/files.c:823
+#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
+#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
+#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
+#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
+#: modules/files.c:2569 modules/files.c:2586
+#, c-format
+msgid "couldn't open `%s': %s"
+msgstr "nepodarilo sa otvoriť `%s': %s"
+
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:839 modules/files.c:1338
+#, c-format
+msgid "couldn't stat `%s': %s"
+msgstr "nepodarilo sa zistiť stav `%s': %s"
+
+#: modules/files.c:137
+#, c-format
+msgid "error creating `%s': %s"
+msgstr "chyba pri vytváraní `%s': %s"
+
+#: modules/files.c:153
+#, c-format
+msgid "backup file `%s' exists and is not a regular file"
+msgstr "zálohový súbor `%s' existuje a nie je to bežný súbor"
+
+#: modules/files.c:872 modules/files.c:1350
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "nepodarilo sa čítať z `%s': %s"
+
+#: modules/files.c:887 modules/files.c:900
+msgid "entry already present in file"
+msgstr "položka už existuje v súbore"
+
+#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
+#: modules/files.c:1421
+#, c-format
+msgid "couldn't write to `%s': %s"
+msgstr "nepodarilo sa zapísať do `%s': %s"
+
+#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
+#: modules/files.c:1209
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "objekt entity nemá príznak %s"
+
+#: modules/files.c:2822 modules/files.c:2892
+msgid "not executing with superuser privileges"
+msgstr "nespúšťam s právami superpoužívateľa"
+
+#: modules/files.c:2905
+msgid "no shadow file present -- disabling"
+msgstr "tieňový súbor nie je prítomný -- deaktivujem"
+
+#: modules/krb5.c:105
+#, c-format
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "chyba pri pripájaní ku kadm5 serveru pre službu `%s' v oblasti `%s': %s"
+
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
+msgid "error initializing kerberos library"
+msgstr "chyba pri inicializácii kerberos knižnice"
+
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "chyba pri analýze mena používateľa `%s' pre kerberos"
+
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "štruktúra entity nemá príznaky %s alebo %s"
+
+#: modules/krb5.c:311
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "entita nemá príznaky %s alebo %s"
+
+#: modules/krb5.c:324
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "entita bola vytvorená bez príznakov %s alebo %s"
+
+#: modules/krb5.c:475 modules/krb5.c:563
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "chyba pri čítaní informácií pre `%s' z kerberosu"
+
+#: modules/krb5.c:604
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "entita nemá príznak %s"
+
+#: modules/krb5.c:642
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "chyba pri nastavovaní hesla pre `%s'"
+
+#: modules/krb5.c:768
+msgid "Kerberos Realm"
+msgstr "Kerberos oblasť"
+
+#: modules/krb5.c:775
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos vedúci správca"
+
+#: modules/krb5.c:797
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos heslo pre vedúceho správcu"
+
+#: modules/ldap.c:216 modules/ldap.c:249
+msgid "error initializing ldap library"
+msgstr "chyba pri inicializácii knižnice ldap"
+
+#: modules/ldap.c:227 modules/ldap.c:260
+#, c-format
+msgid "could not set LDAP protocol to version %d"
+msgstr "nepodarilo sa nastaviť LDAP protokol na verziu %d"
+
+#: modules/ldap.c:237
+msgid "could not negotiate TLS with LDAP server"
+msgstr "nepodarilo sa dohodnúť TLS s LDAP serverom"
+
+#: modules/ldap.c:411
+msgid "could not bind to LDAP server"
+msgstr "nepodarilo sa pripojiť k LDAP serveru"
+
+#: modules/ldap.c:424
+msgid "could not search LDAP server"
+msgstr "nepodarilo sa vyhľadať LDAP server"
+
+#: modules/ldap.c:433
+msgid "LDAP server appears to have no root DSE"
+msgstr "LDAP server vyzerá, že nemá koreňové DSE"
+
+#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
+#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+msgid "error mapping name to LDAP distinguished name"
+msgstr "chyba pri mapovaní mena na odlišné LDAP meno"
+
+#: modules/ldap.c:683
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "chyba pri mapovaní mena na základné odlišné LDAP meno"
+
+#: modules/ldap.c:1212
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "objekt používateľa nemal príznak %s"
+
+#: modules/ldap.c:1221
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "objekt používateľa bol vytvorený bez `%s'"
+
+#: modules/ldap.c:1247
+msgid "could not convert internal data to LDAPMods"
+msgstr "nepodarilo sa konvertovať interné údaje do LDAPMods"
+
+#: modules/ldap.c:1271 modules/ldap.c:1483
+#, c-format
+msgid "error modifying LDAP directory entry: %s"
+msgstr "chyba pri úprave položky LDAP adresára: %s"
+
+#: modules/ldap.c:1291
+#, c-format
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "chyba pri premonovávaní položky LDAP adresára: %s\n"
+
+#: modules/ldap.c:1339
+#, c-format
+msgid "object had no %s attribute"
+msgstr "objekt nemal príznak %s"
+
+#: modules/ldap.c:1366
+#, c-format
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "chyba pri odstraňovaní položky LDAP adresára: %s.\n"
+
+#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
+#: modules/ldap.c:1610
+#, c-format
+msgid "object has no %s attribute"
+msgstr "objekt nemá príznak %s"
+
+#: modules/ldap.c:1546
+msgid "no such object in LDAP directory"
+msgstr "nie je taký objekt v LDAP adresári"
+
+#: modules/ldap.c:1559
+#, c-format
+msgid "no `%s' attribute found"
+msgstr "nebol nájdený príznak `%s'"
+
+#: modules/ldap.c:1701
+#, c-format
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "chyba pri nastavovaní hesla v LDAP adresára pre %s: %s"
+
+#: modules/ldap.c:2243
+msgid "LDAP Server Name"
+msgstr "Meno servera LDAP"
+
+#: modules/ldap.c:2249
+msgid "LDAP Search Base DN"
+msgstr "LDAP DN vyhľadávacej základne"
+
+#: modules/ldap.c:2255
+msgid "LDAP Bind DN"
+msgstr "LDAP DN pripájania"
+
+#: modules/ldap.c:2262
+msgid "LDAP Bind Password"
+msgstr "LDAP heslo pripájania"
+
+#: modules/ldap.c:2268
+msgid "LDAP SASL User"
+msgstr "LDAP SASL používateľ"
+
+#: modules/ldap.c:2275
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP SASL udelenie oprávnenia používateľa"
+
+#: modules/ldap.c:2315
+msgid "error initializing module"
+msgstr "chyba pri inicializácii modulu"
+
+#: modules/sasldb.c:128
+#, c-format
+msgid "Cyrus SASL error creating user: %s: %s"
+msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s: %s"
+
+#: modules/sasldb.c:130
+#, c-format
+msgid "Cyrus SASL error creating user: %s"
+msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s"
+
+#: modules/sasldb.c:136
+#, c-format
+msgid "Cyrus SASL error removing user: %s: %s"
+msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s: %s"
+
+#: modules/sasldb.c:138
+#, c-format
+msgid "Cyrus SASL error removing user: %s"
+msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s"
+
+#: modules/sasldb.c:428 modules/sasldb.c:436
+#, c-format
+msgid "error initializing Cyrus SASL: %s"
+msgstr "chyba pri inicializácii Cyrus SASL: %s"
+
+#: python/admin.c:494
+msgid "error creating home directory for user"
+msgstr "chyba pri vytváraní domovského adresára pre používateľa"
+
+#: python/admin.c:546
+msgid "error removing home directory for user"
+msgstr "chyba pri odstraňovaní domovského adresára pre používateľa"
+
+#: python/admin.c:623
+msgid "error moving home directory for user"
+msgstr "chyba pri presúvaní domovského adresára pre používateľa"
+
+#: python/admin.c:656
+msgid "error creating mail spool for user"
+msgstr "chyba pri vytváraní odkladacieho priestoru pošty pre používateľa"
+
+#: samples/lookup.c:64
+#, c-format
+msgid "Error initializing %s: %s\n"
+msgstr "Chyba pri inicializácii %s: %s\n"
+
+#: samples/lookup.c:74
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "Vyhľadávanie skupiny s ID %d.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "Vyhľadávanie skupiny s menom %s.\n"
+
+#: samples/lookup.c:86
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "Vyhľadávanie používateľa s ID %d.\n"
+
+#: samples/lookup.c:89
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "Vyhľadávanie používateľa s menom %s.\n"
+
+#: samples/lookup.c:103
+msgid "Entry not found.\n"
+msgstr "Položka nenájdená.\n"
+
+#: samples/testuser.c:76
+msgid "Default user object classes:\n"
+msgstr "Štandardné objektové triedy používateľa:\n"
+
+#: samples/testuser.c:82
+msgid "Default user attribute names:\n"
+msgstr "Štandardné názvy príznakov používateľa:\n"
+
+#: samples/testuser.c:88
+msgid "Getting default user attributes:\n"
+msgstr "Získavam štandardné príznaky používateľa:\n"
+
+#: samples/testuser.c:95
+msgid "Copying user structure:\n"
+msgstr "Kopírujem štruktúrup používateľa:\n"
