@@ -14,7 +14,7 @@ PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
-ALL_LINGUAS="cs da de es fr is it ja ko no pt ru sl sv tr zh_CN.GB2312 zh_TW.Big5 zh_TW"
+ALL_LINGUAS="cs da de es fr is it ja ko no pt ru sl sv tr zh_TW"
 
 AM_GLIB_GNU_GETTEXT
 GETTEXT_PACKAGE=libuser
