@@ -13,9 +13,9 @@ pkginclude_HEADERS = \
 	entity.h \
 	error.h \
 	prompt.h \
-	quota.h \
 	user.h \
-	user_private.h
+	user_private.h \
+	userquota.h
 
 libuser_la_SOURCES = \
 	config.c \
