@@ -30,7 +30,6 @@
 #include "user.h"
 #include "user_private.h"
 
-/* FIXME: Is return value translated or not? */
 const char *
 lu_strerror(struct lu_error *error)
 {
@@ -40,50 +39,50 @@ lu_strerror(struct lu_error *error)
 		}
 		switch (error->code) {
 			case lu_success:
-				return N_("success");
+				return _("success");
 			case lu_warning_config_disabled:
-				return N_("module disabled by configuration");
+				return _("module disabled by configuration");
 			case lu_error_generic:
-				return N_("generic error");
+				return _("generic error");
 			case lu_error_privilege:
-				return N_("not enough privileges");
+				return _("not enough privileges");
 			case lu_error_access_denied:
-				return N_("access denied");
+				return _("access denied");
 			case lu_error_name_bad:
-				return N_("bad user/group name");
+				return _("bad user/group name");
 			case lu_error_id_bad:
-				return N_("bad user/group id");
+				return _("bad user/group id");
 			case lu_error_name_used:
-				return N_("user/group name in use");
+				return _("user/group name in use");
 			case lu_error_id_used:
-				return N_("user/group id in use");
+				return _("user/group id in use");
 			case lu_error_terminal:
-				return N_("error manipulating terminal attributes");
+				return _("error manipulating terminal attributes");
 			case lu_error_open:
-				return N_("error opening file");
+				return _("error opening file");
 			case lu_error_lock:
-				return N_("error locking file");
+				return _("error locking file");
 			case lu_error_stat:
-				return N_("error statting file");
+				return _("error statting file");
 			case lu_error_read:
-				return N_("error reading file");
+				return _("error reading file");
 			case lu_error_write:
-				return N_("error writing to file");
+				return _("error writing to file");
 			case lu_error_search:
-				return N_("data not found in file");
+				return _("data not found in file");
 			case lu_error_init:
-				return N_("internal initialization error");
+				return _("internal initialization error");
 			case lu_error_module_load:
-				return N_("error loading module");
+				return _("error loading module");
 			case lu_error_module_sym:
-				return N_("error resolving symbol in module");
+				return _("error resolving symbol in module");
 			case lu_error_module_version:
-				return N_("library/module version mismatch");
+				return _("library/module version mismatch");
 			default:
 				break;
 		}
 	}
-	return N_("unknown error");
+	return _("unknown error");
 }
 
 gboolean

@@ -11,6 +11,12 @@ manipulating #lu_error structures.  These structures hold error and status
 information passed between libuser, its modules, and applications.
 </para>
 
+<para>
+A struct #lu_error contains an error code and a human-readable, possibly
+translated error string.  The error string is using the encoding specified
+by %LC_CTYPE locale category.
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
@@ -78,7 +84,7 @@ Check if the error code held by an error structure is an error code.
 <para>
 Converts an #lu_error structure to a string describing the error.
 If the @error->string is %NULL, returns a text representation of
- @error->code, marked for translation but not translated.
+ @error->code.
 </para>
 
 @error: An error

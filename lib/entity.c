@@ -284,6 +284,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	GQuark aquark;
 	size_t i;
 	char *lattr;
+
 	g_return_val_if_fail(list != NULL, NULL);
 	g_return_val_if_fail(attribute != NULL, NULL);
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
@@ -292,7 +293,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 		lattr[i] = g_ascii_tolower(lattr[i]);
 	}
 	aquark = g_quark_from_string(lattr);
-	/* FIXME: free lattr */
+	g_free (lattr);
 	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {

@@ -119,9 +119,8 @@ lu_files_create_backup(const char *filename,
 
 	/* Read the input file's size. */
 	if (fstat(ifd, &ist) == -1) {
-		close(ifd);
 		lu_util_lock_free(ilock);
-		close(ifd); /* FIXME: double close */
+		close(ifd);
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
