@@ -179,8 +179,8 @@ bind_server(struct lu_ldap_context *context)
 		g_free(tmp);
 		if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION,
 				   &version) != LDAP_OPT_SUCCESS) {
-			g_warning(_("Could not force protocol version 3 with "
-				    "LDAP server %s.\n"),
+			g_warning(_("Could not force protocol version %d with "
+				    "LDAP server %s.\n"), version,
 				  context->prompts[LU_LDAP_SERVER].value);
 			close_server(ldap);
 			return NULL;
