@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-04-02 12:48+0200\n"
+"PO-Revision-Date: 2002-04-16 12:48+0200\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -215,9 +215,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "Fejl ved oprettelse af %s: %s.\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "Fejl ved oprettelse af %s: %s.\n"
+msgstr "Fejl ved oprettelse af postkø.\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -693,7 +692,6 @@ msgstr "Kopierer brugerstruktur:\n"
 #~ msgid "Error creating group `%s' with GID %ld.\n"
 #~ msgstr "Fejl ved oprettelse af gruppe for %s: %s.\n"
 
-#, fuzzy
 #~ msgid "No group with GID %ld exists.\n"
 #~ msgstr "Søger efter gruppe med ID %d.\n"
 
