@@ -4,5 +4,7 @@ html.stamp
 libuser.interfaces
 libuser.prerequisites
 libuser-unused.txt
+libuser-undocumented.txt
 sgml.stamp
 tmpl.stamp
+xml
