@@ -20,10 +20,12 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <sys/time.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../include/libuser/user_private.h"
 
 #define DEFAULT_ID 100
@@ -240,6 +242,10 @@ lu_default(struct lu_context *context, const char *name,
 	GList *keys, *vals, *p, *q;
 	char *top, *key, *idkey, *idval, *tmp;
 	gulong id = DEFAULT_ID;
+	struct tm gmt;
+	time_t now;
+	GDate *today, *epoch;
+	long days;
 
 	g_return_val_if_fail(name != NULL, FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
@@ -263,6 +269,14 @@ lu_default(struct lu_context *context, const char *name,
 		top = ent->acache->cache(ent->acache, "groupdefaults");
 		idkey = ent->acache->cache(ent->acache, LU_GIDNUMBER);
 	}
+
+	time(&now);
+	gmt = *(gmtime(&now));
+	today = g_date_new_dmy(gmt.tm_mday, gmt.tm_mon + 1, gmt.tm_year + 1900);
+	epoch = g_date_new_dmy(1, 1, 1970);
+	days = g_date_julian(today) - g_date_julian(epoch);
+	g_date_free(today);
+	g_date_free(epoch);
 
 	if(system) { 
 		id = 1;
@@ -317,6 +331,13 @@ lu_default(struct lu_context *context, const char *name,
 				char *pre = g_strndup(val, strstr(val, "%u") - val);
 				char *post = g_strdup(strstr(val, "%u") + 2);
 				val = g_strconcat(pre, idval, post, NULL);
+				g_free(pre);
+				g_free(post);
+			}
+			if(strstr(val, "%d")) {
+				char *pre = g_strndup(val, strstr(val, "%d") - val);
+				char *post = g_strdup(strstr(val, "%d") + 2);
+				val = g_strdup_printf("%s%ld%s", pre, days, post);
 				g_free(pre);
 				g_free(post);
 			}

@@ -114,6 +114,8 @@ main(int argc, const char **argv)
 	} else
 	if(cryptedPassword != NULL) {
 		password = g_strconcat("{crypt}", cryptedPassword, NULL);
+	} else {
+		/* the password variable is already set */
 	}
 
 	if(!group) {

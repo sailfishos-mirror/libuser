@@ -862,6 +862,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 	LDAPControl *server = NULL, *client = NULL;
 	char filter[LINE_MAX];
 
+	g_print("Setting password to `%s'.\n", password);
 	name = lu_ent_get(ent, namingAttr);
 	if(name == NULL) {
 		lu_error_new(error, lu_error_generic, _("object has no %s attribute"), namingAttr);

@@ -76,6 +76,7 @@ rm -fr $RPM_BUILD_ROOT
 - implement islocked() method in ldap module
 - implement setpass() method in ldap module
 - add lchfn and lchsh apps
+- add %%d substitution to libuser.conf
 
 * Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish adding a sasldb module which manipulates a sasldb file
