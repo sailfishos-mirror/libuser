@@ -97,6 +97,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Aug 06 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-2
+- Add SELinux support
+
 * Wed Feb 19 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.7-1
 - ldap: set error codes correctly when we encounter failures initializing
 - don't double-close modules which fail initialization
