@@ -1,0 +1,605 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001 Red Hat, Inc.
+# Jin-Hee Shin <djoo@redhat.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser \n"
+"POT-Creation-Date: 2001-07-30 12:50-0400\n"
+"PO-Revision-Date: 2001-08-07 11:52+1000\n"
+"Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
+"Language-Team: Red Hat Asia-Pacific\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=EUC-KR\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/apputil.c:58
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "`%s'을 읽는 중 오류발생: %s"
+
+#: apps/apputil.c:63
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "`%s'을 생성하는데 오류발생: %s"
+
+#: apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "`%s'을 삭제 중 오류발생: %s"
+
+#: apps/apputil.c:324
+msgid "Internal error.\n"
+msgstr "내부 오류 발생.\n"
+
+#: apps/apputil.c:332
+
+msgid "Error initializing PAM.\n"
+msgstr "PAM을 초기화 하는중 오류 발생.\n"
+
+#: apps/apputil.c:339
+#, c-format
+msgid "Authentication failed for %s.\n"
+msgstr " %s에 대한 인증 실패.\n"
+
+#: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
+msgid "[OPTION...] user"
+msgstr "[옵션...] 사용자 "
+
+#: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
+msgid "No user name specified.\n"
+msgstr "사용자 이름이 지정되지 않았습니다.\n"
+
+#: apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
+#: apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
+#: apps/lusermod.c:82
+#, c-format
+msgid "Error initializing %s: %s.\n"
+msgstr "%s을 초기화 중 오류발생: %s.\n"
+
+#: apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
+#: apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
+#: apps/lusermod.c:84
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "%s을 초기화중 오류 발생 %s.\n"
+
+#: apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "사용자 %s이  존재하지 않습니다.\n"
+
+#: apps/lchage.c:124
+msgid "Account is locked.\n"
+msgstr "계정이 정지되었습니다.\n"
+
+#: apps/lchage.c:126
+msgid "Account is not locked.\n"
+msgstr "계정이 정지되지 않았습니다.\n"
+
+#: apps/lchage.c:130
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "최소값: \t%d\n"
+
+#: apps/lchage.c:134
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "최대값:\t%d\n"
+
+#: apps/lchage.c:138
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "경고:\t%d\n"
+
+#: apps/lchage.c:142
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "불활성:\t%d\n"
+
+#: apps/lchage.c:146 apps/lchage.c:154 apps/lchage.c:162 apps/lchage.c:170
+msgid "Never"
+msgstr "절대"
+
+#: apps/lchage.c:149
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "마지막 변환:\t%s\n"
+
+#: apps/lchage.c:156
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "패스워드 만기:\t%s\n"
+
+#: apps/lchage.c:165
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "패스워드 불활성:\t%s\n"
+
+#: apps/lchage.c:172
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "계정 만기일:\t%s\n"
+
+#: apps/lchage.c:201
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "%s의 전 정보 편집에 실패.\n"
+
+#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
+msgid "[OPTION...] group"
+msgstr "[옵션...] group"
+
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
+msgid "No group name specified.\n"
+msgstr "그룹 이름이 지정되지 않았습니다.\n"
+
+#: apps/lgroupadd.c:88
+msgid "Group creation failed.\n"
+msgstr "그룹 생성이 실패했습니다.\n"
+
+#: apps/lgroupdel.c:76 apps/lgroupmod.c:96
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "그룹 %s이 존재하지 않습니다.\n"
+
+#: apps/lgroupdel.c:81
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "그룹 %s이 삭제되지 않았습니다.\n"
+
+#: apps/lgroupmod.c:89 apps/lusermod.c:90
+msgid "Both -L and -U specified.\n"
+msgstr "-L 와 -U 둘다 지정되었습니다.\n"
+
+#: apps/lgroupmod.c:155 apps/lgroupmod.c:165
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "그룹 %s의 패스워드 설정에 실패했습니다.\n"
+
+#: apps/lgroupmod.c:174
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "그룹 %s이 정지될 수 없습니다.\n"
+
+#: apps/lgroupmod.c:182
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "그룹 %s 해제 될수 없습니다.\n"
+
+#: apps/lgroupmod.c:189
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "그룹 %s을 편집될 수 없습니다.\n"
+
+#: apps/luseradd.c:112
+#, c-format
+msgid "Error creating group for %s: %s.\n"
+msgstr "%s의 그룹 생성 오류: %s.\n"
+
+#: apps/luseradd.c:159
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "계정 생성이 실패: %s.\n"
+
+#: apps/luseradd.c:176
+#, c-format
+msgid "Bad UID for %s.\n"
+msgstr "%s의 부적절한 UID.\n"
+
+#: apps/luseradd.c:180
+#, c-format
+msgid "Bad GID for %s.\n"
+msgstr "%s의 부적절한 GID.\n"
+
+#: apps/luseradd.c:190
+#, c-format
+msgid "No home directory for %s.\n"
+msgstr "%s의 홈 디렉토리가 없습니다.\n"
+
+#: apps/luseradd.c:194
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "%s의 생성 오류 발생: %s.\n"
+
+#: apps/luserdel.c:87
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "사용자 %s을 삭제될 수 없습니다.: %s.\n"
+
+#: apps/luserdel.c:94
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s은 gid number을  갖고 있지 않았습니다.\n"
+
+#: apps/luserdel.c:99
+#, c-format
+msgid "Group #%d does not exist.\n"
+msgstr "그룹 #%d은 존재 하지 않습니다.\n"
+
+#: apps/luserdel.c:105
+#, c-format
+msgid "Group #%d did not have a group name.\n"
+msgstr "그룹 #%d 은 그룹이름이 없습니다.\n"
+
+#: apps/luserdel.c:110
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "그룹 %s은 삭제될 수 없습니다: %s.\n"
+
+#: apps/luserdel.c:122
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s은 홈 디렉토리가 없습니다.\n"
+
+#: apps/luserdel.c:126
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "%s 삭제 중 오류 발생: %s.\n"
+
+#: apps/lusermod.c:125
+#, c-format
+msgid "Error reading old home directory for %s: %s.\n"
+msgstr "%s의 전 홈 디렉토리를 읽는 중 오류 발생: %s.\n"
+
+#: apps/lusermod.c:133 apps/lusermod.c:142
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "사용자 %s의 패스워드 설정에 실패 : %s.\n"
+
+#: apps/lusermod.c:150
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "사용자 %s이 정지될 수 없습니다: %s.\n"
+
+#: apps/lusermod.c:157
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "사용자 %s이 해제될 수 없습니다: %s.\n"
+
+#: apps/lusermod.c:163
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "사용자 %s이 편집될 수 없습니다: %s.\n"
+
+#: apps/lusermod.c:169
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "%s의 기존 홈디렉토리가 없습니다.\n"
+
+#: apps/lusermod.c:173
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
+
+#: apps/lusermod.c:177
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "%s에서  %s으로 이동중 오류 발생: %s.\n"
+
+#: lib/user.c:123
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "'%s'에서 초기화 기능 %s이 없습니다."
+
+#: lib/user.c:144
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "`%s'에서 모쥴 버젼이 일치하지 않습니다"
+
+#: lib/usercfg.c:56
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "설정 화일`%s'은 열 수 없습니다: %s"
+
+#: lib/userent.c:44
+#, c-format
+msgid "dump of struct lu_ent at %p:\n"
+msgstr "dump of struct lu_ent at %p:\n"
+
+#: lib/userent.c:45
+#, c-format
+msgid " magic = %08x\n"
+msgstr "magic = %08x\n"
+
+#: lib/userent.c:46
+#, c-format
+msgid " type = %s\n"
+msgstr " type = %s\n"
+
+#: lib/userent.c:46
+msgid "user"
+msgstr "사용자"
+
+#: lib/userent.c:46
+msgid "group"
+msgstr "그룹"
+
+#: lib/userent.c:46
+msgid "unknown"
+msgstr "알려지지 않음"
+
+#: lib/userent.c:216
+msgid ""
+"\n"
+"Before copy:\n"
+msgstr ""
+"\n"
+"복사 전:\n"
+
+#: lib/userent.c:230
+msgid ""
+"\n"
+"After copy:\n"
+msgstr ""
+"\n"
+"복사 후:\n"
+
+#: lib/userent.c:395
+#, c-format
+msgid "freeing lu_ent at %p.\n"
+msgstr "freeing lu_ent at %p.\n"
+
+#: modules/files.c:115
+#, c-format
+msgid "couldn't open `%s'"
+msgstr "%s을 열 수 없습니다"
+
+#: modules/files.c:135
+#, c-format
+msgid "error creating `%s'"
+msgstr "`%s'을 생성 중 오류 발생 "
+
+#: modules/files.c:145
+#, c-format
+msgid "backup file `%s' was a symlink"
+msgstr "백업 화일 %s은 심링크였습니다."
+
+#: modules/files.c:614 modules/files.c:624
+msgid "entry already present in file"
+msgstr "현재 화일안에 이미 목록이 있습니다."
+
+#: modules/files.c:730 modules/files.c:737 modules/files.c:823
+#: modules/files.c:833
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "entity라는 개체에 %s라는 속성이 없습니다."
+
+#: modules/files.c:776
+#, c-format
+msgid "entity object has no `%s' attribute"
+msgstr "entity라는 개체에 '%s'라는 속성이 없습니다." 
+
+#: modules/files.c:1676 modules/files.c:1732
+
+msgid "not executing with superuser privileges"
+msgstr "superuser 특권으로 집행되지 않습니다"
+
+#: modules/files.c:1744
+#, 
+msgid "no shadow file present -- disabling"
+msgstr "현재 쉐도우 화일이 없음-- 불가능"
+
+#: modules/krb5.c:104
+#, c-format
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "'%s'의 분류안에 '%s 서비스를 위한 kadm5에 연결 중 오류 발생: %s"
+
+#: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
+#: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
+msgid "error initializing kerberos library"
+msgstr "kerberos 라이브러리 초기화 중 오류 발생"
+
+#: modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
+#: modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "사용자 이름 `%s' kerberos parsing 중 오류 발생"
+
+#: modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "entity structure에  %s이 존재치 않거나  %s에 속성이 없습니다"
+
+#: modules/krb5.c:283
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "entity 에 %s이 존재치 않거나  %s에 속성이 없습니다"
+
+#: modules/krb5.c:293
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "%s이 존재치 않거나 %s에 속성이 없는 entity가 생성되었습니다."
+
+#: modules/krb5.c:415 modules/krb5.c:483
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "kerberos에서  '%s'의 정보을 읽는 도중 오류 발생"
+
+#: modules/krb5.c:518
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "entity라는 개체에 %s라는 속성이 없습니다"
+
+#: modules/krb5.c:549
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "`%s'의 패스워드 설정 중 오류 발생"
+
+#: modules/krb5.c:662
+msgid "Kerberos Realm"
+msgstr "kerberos Realm"
+
+#: modules/krb5.c:667
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Admin Principal "
+
+#: modules/krb5.c:682
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos Password for Admin Principal"
+
+#: modules/ldap.c:178
+msgid "error initializing ldap library"
+msgstr "ldap 라이브러리를 초기화 하는 중 오류 발생"
+
+#: modules/ldap.c:196
+#, c-format
+msgid "could not set LDAP protocol to version %d"
+msgstr "버전 %d에서 LDAP프로토콜을 설정할 수 없었습니다"
+
+#: modules/ldap.c:202
+
+msgid "could not negotiate TLS with LDAP server"
+msgstr "LDAP 서버와 TLS 연결할 수 없습니다"
+
+#: modules/ldap.c:216
+
+msgid "could not bind to LDAP server"
+msgstr "LDAP 서버와 연결할 수 없었습니다"
+
+#: modules/ldap.c:316 modules/ldap.c:566 modules/ldap.c:646 modules/ldap.c:709
+#: modules/ldap.c:796 modules/ldap.c:873
+
+msgid "error mapping name to LDAP distinguished name"
+msgstr "LDAP DN에서 이름을 비교하는 중 오류 발생"
+
+#: modules/ldap.c:321
+
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "LDAP  base DN에서 이름을 비교하는 중 오류 발생"
+
+#: modules/ldap.c:365
+
+msgid "error searching LDAP directory"
+msgstr "LDAP 디렉토리를 검색 중 오류발생"
+
+#: modules/ldap.c:554
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "사용자 개체에 %s의 속성을 갖고 있지 않았습니다"
+
+#: modules/ldap.c:560
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "`%s'이 없는 사용자 개체가 생성되었습니다"
+
+#: modules/ldap.c:572
+msgid "could not convert internal data to LDAPMods"
+msgstr "LDAPMods 에서 내부 데이타로 변환할 수 없었습니다"
+
+#: modules/ldap.c:585 modules/ldap.c:748
+#, c-format
+msgid "error modifying LDAP directory entry: %s"
+msgstr "LDAP 디렉토리 목록을 편집하는 동안 오류 발생: %s"
+
+#: modules/ldap.c:598
+#, c-format
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "LDAP 디렉토리 목록의 이름을 변경 중 오류 발생: %s\n"
+
+#: modules/ldap.c:640
+#, c-format
+msgid "object had no %s attribute"
+msgstr "개체는 %s 속성이 없었습니다."
+#: modules/ldap.c:657
+#, c-format
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "LDAP 디렉토리 목록을 제거 중 오류 발생: %s.\n"
+
+#: modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
+#, c-format
+msgid "object has no %s attribute"
+msgstr "개체는 %s 속성이 없습니다"
+
+#: modules/ldap.c:808
+msgid "no such object in LDAP directory"
+msgstr "LDAP 디렉토리안에 그러한 개체가 없음."
+
+#: modules/ldap.c:825
+#, c-format
+msgid "no `%s' attribute using `%s' scheme found"
+msgstr "'%s' 사용해서 '%s'속성을 찾을 수 없습니다"
+
+#: modules/ldap.c:832
+#, c-format
+msgid "no `%s' attribute found"
+msgstr "'%s'속성을 찾을 수 없습니다."
+
+#: modules/ldap.c:928
+#, c-format
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "%s의 LDAP 디렉토리안에 패스워드 설정 중 오류 발생: %s\n"
+
+#: modules/ldap.c:1191
+msgid "LDAP Server Name"
+msgstr "LDAP 서버 이름"
+
+#: modules/ldap.c:1196
+msgid "LDAP Base DN"
+msgstr "LDAP Base DN "
+
+#: modules/ldap.c:1201
+msgid "LDAP Bind DN"
+msgstr "LDAP Bind DN "
+
+#: modules/ldap.c:1206
+msgid "LDAP Bind Password"
+msgstr "LDAP Bind 패스워드"
+
+#: modules/ldap.c:1212
+msgid "LDAP SASL User"
+msgstr "LDAP SASL 사용자"
+
+#: modules/ldap.c:1217
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP SASL 인증 사용자"
+
+#: samples/lookup.c:60 samples/testuser.c:55
+msgid "Error initializing lu.\n"
+msgstr "lu을 초기화 하는 중 오류 발생.\n"
+
+#: samples/lookup.c:69
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "ID %d을 가진 그룹을 검색 중.\n"
+
+#: samples/lookup.c:72
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "%s 이름을 갖은 그룹을 검색 중.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "ID %d을 가진 사용자를 검색 중.\n"
+
+#: samples/lookup.c:81
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "%s라고 이름을 갖는 사용자를 검색 중.\n"
+
+#: samples/lookup.c:107
+msgid "Entry not found.\n"
+msgstr "목록을 찾을 수 없습니다.\n"
+
+#: samples/testuser.c:59
+msgid "Default user object classes:\n"
+msgstr "기본 사용자 개체 클래스:\n"
+
+#: samples/testuser.c:65
+msgid "Default user attribute names:\n"
+msgstr "기본 사용자 속성 이름들:\n"
+
+#: samples/testuser.c:71
+msgid "Getting default user attributes:\n"
+msgstr "기본 사용자 속성을 읽는 중:\n"
+
+#: samples/testuser.c:79
+msgid "Copying user structure:\n"
+msgstr "사용자 구조를 복사중:\n"
+
+#~ msgid "could not determine expected DN"
+#~ msgstr "예상되는 DN을 결정할 수 없었습니다."
+
+#~ msgid "could not map name to DN"
+#~ msgstr "이름과 DN을 맞출 수 없었습니다."
