@@ -29,6 +29,7 @@
 #include "user_private.h"
 #include "util.h"
 
+/* Create and return a new entity object. */
 struct lu_ent *
 lu_ent_new()
 {
@@ -42,6 +43,7 @@ lu_ent_new()
 	return ent;
 }
 
+/* Free an entity object. */
 void
 lu_ent_free(struct lu_ent *ent)
 {
@@ -49,26 +51,36 @@ lu_ent_free(struct lu_ent *ent)
 	struct lu_attribute *attr;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	/* Free the cache. */
 	ent->cache->free(ent->cache);
+	/* Free each current attribute. */
 	for (i = 0; i < ent->current->len; i++) {
 		attr = &g_array_index(ent->current, struct lu_attribute, i);
+		/* Free the values array in this attribute; the array free
+		 * will get the rest. */
 		g_value_array_free(attr->values);
 		attr->name = 0;
 		attr->values = NULL;
 	}
 	g_array_free(ent->current, FALSE);
+	/* Free each pending attribute. */
 	for (i = 0; i < ent->pending->len; i++) {
 		attr = &g_array_index(ent->pending, struct lu_attribute, i);
+		/* Free the values array in this attribute; the array free
+		 * will get the rest. */
 		g_value_array_free(attr->values);
 		attr->name = 0;
 		attr->values = NULL;
 	}
 	g_array_free(ent->pending, FALSE);
+	/* Free the module list. */
 	g_value_array_free(ent->modules);
 	memset(ent, 0, sizeof(struct lu_ent));
 	g_free(ent);
 }
 
+/* Dump the contents of an entity structure.  This is primarily for
+ * debugging. */
 void
 lu_ent_dump(struct lu_ent *ent, FILE *fp)
 {
@@ -81,6 +93,8 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail((ent->type == lu_user) || (ent->type == lu_group));
 	switch (ent->type) {
+		case lu_invalid:
+			fprintf(fp, " type = invalid\n");
 		case lu_user:
 			fprintf(fp, " type = user\n");
 			break;
@@ -88,8 +102,10 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 			fprintf(fp, " type = group\n");
 			break;
 		default:
+			fprintf(fp, " type = UNKNOWN\n");
 			break;
 	}
+	/* Print the module list. */
 	fprintf(fp, " modules = (");
 	for (i = 0; i < ent->modules->n_values; i++) {
 		value = g_value_array_get_nth(ent->modules, i);
@@ -106,6 +122,7 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 		}
 	}
 	fprintf(fp, ")\n");
+	/* Print the current data values. */
 	for (i = 0; i < ent->current->len; i++) {
 		attribute = &g_array_index(ent->current,
 					   struct lu_attribute,
@@ -127,17 +144,35 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	}
 }
 
+/* Add a module to the list of modules kept for this entity. */
 void
 lu_ent_add_module(struct lu_ent *ent, const char *source)
 {
-	GValue value;
+	GValue value, *val;
+	int i;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(ent->modules != NULL);
+	/* Initialize a value with the string. */
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
 	g_value_set_string(&value, source);
-	g_value_array_append(ent->modules, &value);
+	/* Now scan the array for the value. */
+	for (i = 0; i < ent->modules->n_values; i++) {
+		val = g_value_array_get_nth(ent->modules, i);
+		/* We only add strings, so there had better be only strings
+		 * in this list, otherwise someone is messing with us. */
+		g_assert(G_VALUE_HOLDS_STRING(val));
+		if (strcmp(g_value_get_string(val),
+			   g_value_get_string(&value)) == 0) {
+			break;
+		}
+	}
+	/* If we fell of the end of the array, then the new value is not
+	 * in there, so we should add it. */
+	if (i >= ent->modules->n_values) {
+		g_value_array_append(ent->modules, &value);
+	}
 	g_value_unset(&value);
 }
 

@@ -33,8 +33,8 @@
 
 G_BEGIN_DECLS
 
-#define LU_ENT_MAGIC 0x00000005
-#define LU_MODULE_VERSION 0x00090000
+#define LU_ENT_MAGIC 0x00000006
+#define LU_MODULE_VERSION 0x000a0000
 #define _(String) gettext(String)
 
 /* A string cache structure.  Useful for side-stepping most issues with
@@ -63,7 +63,8 @@ struct lu_ent {
 					   and values, stored as a GArray of
 					   lu_attribute structures. */
 	GValueArray *modules;		/* Names of modules this user's info
-					   was looked up in. */
+					   was looked up in or initialized
+					   using. */
 };
 
 /* A context structure. */

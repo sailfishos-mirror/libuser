@@ -33,7 +33,7 @@ typedef struct lu_context lu_context_t;
 
 /* An enumeration which decides whether we want to modify information about
  * users or groups.  We don't support both simultaneously.  */
-typedef enum lu_entity_type { lu_user, lu_group } lu_entity_type_t;
+typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
 
 lu_context_t *lu_start(const char *authname,
 		       lu_entity_type_t auth_type,
