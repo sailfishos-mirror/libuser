@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2001-08-07 12:05-0400\n"
-"PO-Revision-Date: 2001-08-15 12:59+0200\n"
+"PO-Revision-Date: 2001-08-21 22:20+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -80,12 +80,12 @@ msgstr "Kontot är inte låst.\n"
 #: apps/lchage.c:130
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr "Minsta:\t%d\n"
+msgstr "Kortaste:\t%d\n"
 
 #: apps/lchage.c:134
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "Största:\t%d\n"
+msgstr "Längsta:\t%d\n"
 
 #: apps/lchage.c:138
 #, c-format
