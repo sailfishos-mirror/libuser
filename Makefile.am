@@ -22,3 +22,4 @@ tag:
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh; make dist
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
+	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.gz\".
