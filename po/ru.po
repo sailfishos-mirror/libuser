@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-01-17 02:06+0100\n"
-"PO-Revision-Date: 2004-11-16 21:58+0300\n"
+"PO-Revision-Date: 2005-01-29 12:00+0300\n"
 "Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -716,7 +716,7 @@ msgstr "объект не имеет атрибута %s"
 
 #: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
 msgid "error encrypting password"
-msgstr "ошибка при шифрации пароля"
+msgstr "ошибка при шифровании пароля"
 
 #: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
@@ -836,7 +836,7 @@ msgstr "объект пользователя был создан без `%s'"
 
 #: modules/ldap.c:1397
 msgid "could not convert internal data to LDAPMods"
-msgstr "невозможно преобразоватьвнутренние данные в LDAPMods"
+msgstr "невозможно преобразовать внутренние данные в LDAPMods"
 
 #: modules/ldap.c:1410
 #, c-format
@@ -966,7 +966,7 @@ msgstr "Поиск пользователя с номером %jd.\n"
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Поиск пользователя с номером %s.\n"
+msgstr "Поиск пользователя с именем %s.\n"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
