@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2001-07-25 18:45-0400\n"
+"POT-Creation-Date: 2001-07-26 15:03-0400\n"
 "PO-Revision-Date: 2001-07-26 10:50+ZONE\n"
 "Last-Translator: Valentina Besi <valentina@redhat.it>\n"
 "Language-Team: Italiano <LL@li.org>\n"
@@ -28,223 +28,223 @@ msgstr "Errore durante la creazione di `%s': %s"
 msgid "Error removing `%s': %s"
 msgstr "Errore durante la rimozione di `%s': %s"
 
-#: apps/lchage.c:104 apps/luseradd.c:84 apps/luserdel.c:61 apps/lusermod.c:79
+#: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 msgid "[OPTION...] user"
 msgstr "[OPZIONE...] utente"
 
-#: apps/lchage.c:110 apps/luseradd.c:90 apps/luserdel.c:67 apps/lusermod.c:85
+#: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 msgid "No user name specified.\n"
 msgstr "Nessun nome utente specificato.\n"
 
-#: apps/lchage.c:122 apps/luserdel.c:77 apps/lusermod.c:100
+#: apps/lchage.c:111 apps/luserdel.c:75 apps/lusermod.c:90
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "L'utente %s non esiste.\n"
 
-#: apps/lchage.c:128
+#: apps/lchage.c:117
 msgid "Account is locked.\n"
 msgstr "Account bloccato.\n"
 
-#: apps/lchage.c:130
+#: apps/lchage.c:119
 msgid "Account is not locked.\n"
 msgstr "Account non bloccato.\n"
 
-#: apps/lchage.c:134
+#: apps/lchage.c:123
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Minimo: \t%d\n"
 
-#: apps/lchage.c:138
+#: apps/lchage.c:127
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Massimo:\t%d\n"
 
-#: apps/lchage.c:142
+#: apps/lchage.c:131
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Attenzione:\t%d\n"
 
-#: apps/lchage.c:146
+#: apps/lchage.c:135
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Inattivo:\t%d\n"
 
-#: apps/lchage.c:150 apps/lchage.c:158 apps/lchage.c:168 apps/lchage.c:178
+#: apps/lchage.c:139 apps/lchage.c:147 apps/lchage.c:155 apps/lchage.c:163
 msgid "Never"
 msgstr "Mai"
 
-#: apps/lchage.c:153
+#: apps/lchage.c:142
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Ultima modifica:\t%s\n"
 
-#: apps/lchage.c:162
+#: apps/lchage.c:149
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Scadenza password:\t%s\n"
 
-#: apps/lchage.c:173
+#: apps/lchage.c:158
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Password inattiva:\t%s\n"
 
-#: apps/lchage.c:181
+#: apps/lchage.c:165
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Scadenza account:\t%s\n"
 
-#: apps/lchage.c:210
+#: apps/lchage.c:194
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Modifica delle informazioni relative alla scadenza per %s fallita.\n"
 
-#: apps/lgroupadd.c:61 apps/lgroupdel.c:54 apps/lgroupmod.c:77
+#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
 msgid "[OPTION...] group"
 msgstr "[OPZIONE...]gruppo"
 
-#: apps/lgroupadd.c:67 apps/lgroupdel.c:60 apps/lgroupmod.c:83
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 msgid "No group name specified.\n"
 msgstr "Nessun nome gruppo specificato.\n"
 
-#: apps/lgroupadd.c:86
+#: apps/lgroupadd.c:81
 msgid "Group creation failed.\n"
 msgstr "Creazione gruppo fallita.\n"
 
-#: apps/lgroupdel.c:72 apps/lgroupmod.c:100
+#: apps/lgroupdel.c:69 apps/lgroupmod.c:89
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Il gruppo %s non esiste.\n"
 
-#: apps/lgroupdel.c:77
+#: apps/lgroupdel.c:74
 #, c-format
 msgid "Group %s could not be deleted.\n"
 msgstr "Impossibile eliminare il gruppo %s.\n"
 
-#: apps/lgroupmod.c:93 apps/lusermod.c:93
+#: apps/lgroupmod.c:82 apps/lusermod.c:83
 msgid "Both -L and -U specified.\n"
 msgstr "Né -L né -U sono stati specificati.\n"
 
-#: apps/lgroupmod.c:160 apps/lgroupmod.c:170
+#: apps/lgroupmod.c:148 apps/lgroupmod.c:158
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Configurazione password per il gruppo %s fallita.\n"
 
-#: apps/lgroupmod.c:179
+#: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Impossibile bloccare il gruppo %s.\n"
 
-#: apps/lgroupmod.c:187
+#: apps/lgroupmod.c:175
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Impossibile sbloccare il gruppo %s.\n"
 
-#: apps/lgroupmod.c:194
+#: apps/lgroupmod.c:182
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Impossibile modificare il gruppo %s.\n"
 
-#: apps/luseradd.c:117
+#: apps/luseradd.c:105
 #, c-format
 msgid "Error creating group for %s: %s.\n"
 msgstr "Errore durante la creazione del gruppo per %s: %s.\n"
 
-#: apps/luseradd.c:164
+#: apps/luseradd.c:152
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Creazione account fallita: %s.\n"
 
-#: apps/luseradd.c:181
+#: apps/luseradd.c:169
 #, c-format
 msgid "Bad UID for %s.\n"
 msgstr "UID per %s non valido.\n"
 
-#: apps/luseradd.c:185
+#: apps/luseradd.c:173
 #, c-format
 msgid "Bad GID for %s.\n"
 msgstr "GID per %s non valido.\n"
 
-#: apps/luseradd.c:195
+#: apps/luseradd.c:183
 #, c-format
 msgid "No home directory for %s.\n"
 msgstr "Nessuna directory home per %s.\n"
 
-#: apps/luseradd.c:199
+#: apps/luseradd.c:187
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Errore durante la creazione di %s: %s.\n"
 
-#: apps/luserdel.c:82
+#: apps/luserdel.c:80
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Impossibile eliminare l'utente %s: %s.\n"
 
-#: apps/luserdel.c:89
+#: apps/luserdel.c:87
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s privo di un numero gid.\n"
 
-#: apps/luserdel.c:94
+#: apps/luserdel.c:92
 #, c-format
 msgid "Group #%d does not exist.\n"
 msgstr "Il gruppo #%d non esiste.\n"
 
-#: apps/luserdel.c:100
+#: apps/luserdel.c:98
 #, c-format
 msgid "Group #%d did not have a group name.\n"
 msgstr "Gruppo #%d  privo di nome gruppo.\n"
 
-#: apps/luserdel.c:105
+#: apps/luserdel.c:103
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Impossibile eliminare il gruppo %s: %s.\n"
 
-#: apps/luserdel.c:117
+#: apps/luserdel.c:115
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s privo di directory home.\n"
 
-#: apps/luserdel.c:121
+#: apps/luserdel.c:119
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Errore durante la rimozione di %s: %s.\n"
 
-#: apps/lusermod.c:129
+#: apps/lusermod.c:118
 #, c-format
 msgid "Error reading old home directory for %s: %s.\n"
 msgstr "Errore durante la lettura della vecchia directory home per %s: %s.\n"
 
-#: apps/lusermod.c:137 apps/lusermod.c:146
+#: apps/lusermod.c:126 apps/lusermod.c:135
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Configurazione password per l'utente %s fallita: %s.\n"
 
-#: apps/lusermod.c:154
+#: apps/lusermod.c:143
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Impossibile bloccare l'utente %s: %s.\n"
 
-#: apps/lusermod.c:161
+#: apps/lusermod.c:150
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Impossibile sbloccare l'utente %s: %s.\n"
 
-#: apps/lusermod.c:167
+#: apps/lusermod.c:156
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Impossibile modificare l'utente %s: %s.\n"
 
-#: apps/lusermod.c:173
+#: apps/lusermod.c:162
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Nessuna vecchia directory home per %s.\n"
 
-#: apps/lusermod.c:177
+#: apps/lusermod.c:166
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nessuna nuova directory home per %s.\n"
 
-#: apps/lusermod.c:181
+#: apps/lusermod.c:170
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Errore durante lo spostamento di %s in %s: %s.\n"
@@ -337,71 +337,71 @@ msgstr "voce già presente nel file"
 msgid "entity object has no %s attribute"
 msgstr "nessun attributo %s per l'oggetto entità"
 
-#: modules/files.c:1457 modules/files.c:1513
+#: modules/files.c:1449 modules/files.c:1505
 msgid "Not executing with superuser privileges."
 msgstr "Esecuzione con privilegi di superutente non in corso."
 
-#: modules/files.c:1525
+#: modules/files.c:1517
 msgid "No shadow file present -- disabling."
 msgstr "Nessun file shadow rpesente -- disabilitazione."
 
-#: modules/krb5.c:100
+#: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service %s in realm %s: %s"
 msgstr ""
-"errore durante la connessione al servere kadm5 per il servizio %s nel realm "
-"%s: %s"
+"errore durante la connessione al servere kadm5 per il servizio %s nel realm %"
+"s: %s"
 
-#: modules/krb5.c:130 modules/krb5.c:187 modules/krb5.c:245 modules/krb5.c:319
-#: modules/krb5.c:364 modules/krb5.c:432 modules/krb5.c:481
+#: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
+#: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
 msgid "error initializing kerberos library"
 msgstr "errore durante l'inizializzazione della library di kerberos"
 
-#: modules/krb5.c:135 modules/krb5.c:202 modules/krb5.c:270 modules/krb5.c:275
-#: modules/krb5.c:334 modules/krb5.c:379 modules/krb5.c:447 modules/krb5.c:495
+#: modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
+#: modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "errore durante l'analisi del nome utente `%s' per kerberos"
 
-#: modules/krb5.c:196 modules/krb5.c:328 modules/krb5.c:373 modules/krb5.c:441
+#: modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "nessun attributo %s per la struttura dell'entità %s"
 
-#: modules/krb5.c:254
+#: modules/krb5.c:283
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "nessun attributo %s o %s per l'entità"
 
-#: modules/krb5.c:264
+#: modules/krb5.c:293
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "l'entità è stata creata senza attributi %s o %s"
 
-#: modules/krb5.c:386 modules/krb5.c:454
+#: modules/krb5.c:415 modules/krb5.c:483
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "errore durante la lettura delle informazioni per `%s' da kerberos"
 
-#: modules/krb5.c:489
+#: modules/krb5.c:518
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "nessun attributo %s per l'entità"
 
-#: modules/krb5.c:520
+#: modules/krb5.c:549
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "errore durante la configurazione della password per `%s'"
 
-#: modules/krb5.c:621
+#: modules/krb5.c:650
 msgid "Kerberos Realm"
 msgstr "Realm di kerberos"
 
-#: modules/krb5.c:626
+#: modules/krb5.c:655
 msgid "Kerberos Admin Principal"
 msgstr "Admin principal di kerberos"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:670
 msgid "Kerberos Password for Admin Principal"
 msgstr "Password per Admin Principal di kerberos"
 
@@ -539,4 +539,3 @@ msgstr "Prelievo attributi dell'utente di defalut:\n"
 #: samples/testuser.c:79
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
-

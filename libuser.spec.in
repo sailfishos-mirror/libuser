@@ -38,7 +38,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %install
 rm -fr $RPM_BUILD_ROOT
-%makeinstall
+%makeinstall pkglibdir=$RPM_BUILD_ROOT%{_libdir}/%{name}
 %find_lang %{name}
 
 %post -p /sbin/ldconfig
