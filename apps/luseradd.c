@@ -57,8 +57,10 @@ main(int argc, const char **argv)
 		 "GECOS information for new user", "STRING"},
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
 		 "home directory for new user", "STRING"},
+#ifdef FIXMEFIXMEFIXME
 		{"skeleton", 'k', POPT_ARG_STRING, &skeleton, 0,
 		 "directory with files for the new user", "STRING"},
+#endif
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "shell for new user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
@@ -170,8 +172,6 @@ main(int argc, const char **argv)
 	}
 
 	if(!dont_create_home) {
-		uid_t uid;
-		gid_t gid;
 		char *uid_string = NULL, *gid_string = NULL;
 
 		if(uidNumber != -2) {

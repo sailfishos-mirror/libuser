@@ -28,7 +28,7 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
@@ -77,9 +77,7 @@ fill_urandom(char *output, size_t length)
 
 	while(got < length) {
 		read(fd, output + got, 1);
-		if(isprint(output[got]) &&
-		   !isspace(output[got]) &&
-		   is_acceptable(output[got])) {
+		if(isprint(output[got]) && !isspace(output[got]) && is_acceptable(output[got])) {
 			got++;
 		}
 	}
@@ -90,11 +88,9 @@ fill_urandom(char *output, size_t length)
 /**
  * lu_make_crypted:
  * @plain: A password.
- * @previous: An optional salt to use, which also indicates the crypt()
- * variation to be used.
+ * @previous: An optional salt to use, which also indicates the crypt() variation to be used.
  *
- * Generates a hashed version of &plain; by calling the crypt() function,
- * using the hashing method specified in &previous;.
+ * Generates a hashed version of @plain by calling the crypt() function, using the hashing method specified in @previous.
  *
  * Returns: a static global string which must not be freed.
  */
@@ -137,8 +133,7 @@ lu_make_crypted(const char *plain, const char *previous)
  * lu_util_lock_obtain:
  * @fd: An open file descriptor.
  *
- * Locks the passed-in descriptor for writing, and returns an opaque lock
- * pointer if the lock succeeds.
+ * Locks the passed-in descriptor for writing, and returns an opaque lock pointer if the lock succeeds.
  * 
  * Returns: an opaque lock pointer if locking succeeds, NULL on failure.
  */
@@ -147,6 +142,8 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 {
 	struct flock *lck = NULL;
 	int i;
+
+	LU_ERROR_CHECK(error);
 
 	g_assert(fd != -1);
 
@@ -159,7 +156,7 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 
 	if(i == -1) {
 		g_free(lck);
-		lu_error_set(error, lu_error_lock, NULL);
+		lu_error_new(error, lu_error_lock, NULL);
 		return NULL;
 	}
 
@@ -197,6 +194,8 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	char *ret = NULL, *p, *q, *colon;
 	int i;
 
+	LU_ERROR_CHECK(error);
+
 	g_assert(fd != -1);
 	g_assert(part != NULL);
 	g_assert(field > 0);
@@ -204,7 +203,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	offset = lseek(fd, 0, SEEK_CUR);
 
 	if(fstat(fd, &st) == -1) {
-		lu_error_set(error, lu_error_stat, NULL);
+		lu_error_new(error, lu_error_stat, NULL);
 		return NULL;
 	}
 
@@ -235,8 +234,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 
 			if(colon) {
 				if(strncmp(colon, part, strlen(part)) == 0) {
-					if((colon[strlen(part)] == ':') ||
-					   (colon[strlen(part)] == '\n')) {
+					if((colon[strlen(part)] == ':') || (colon[strlen(part)] == '\n')) {
 						ret = g_strdup(buf);
 						break;
 					}
@@ -255,12 +253,14 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 char *
 lu_util_line_get_matching1(int fd, const char *part, struct lu_error **error)
 {
+	LU_ERROR_CHECK(error);
 	return lu_util_line_get_matchingx(fd, part, 1, error);
 }
 
 char *
 lu_util_line_get_matching3(int fd, const char *part, struct lu_error **error)
 {
+	LU_ERROR_CHECK(error);
 	return lu_util_line_get_matchingx(fd, part, 3, error);
 }
 
@@ -270,7 +270,7 @@ lu_util_line_get_matching3(int fd, const char *part, struct lu_error **error)
  *
  * Count the length of an array of strings.
  * 
- * Returns: the number of elements in the array, or 0 if &v; is NULL.
+ * Returns: the number of elements in the array, or 0 if @v is NULL.
  */
 guint
 lu_strv_len(gchar **v)
@@ -287,14 +287,12 @@ lu_strv_len(gchar **v)
  * @first: Contents of the first field to match the right line with.
  * @field: The number of the field.  Minimum is 1.
  *
- * Read the nth colon-separated field on the line which has first as
- * its first field.
+ * Read the nth colon-separated field on the line which has first as its first field.
  *
  * Returns: An allocated string which must be freed with g_free().
  */
 char *
-lu_util_field_read(int fd, const char *first, unsigned int field,
-		   struct lu_error **error)
+lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_error **error)
 {
 	struct stat st;
 	unsigned char *buf = NULL;
@@ -302,24 +300,26 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	char *line = NULL, *start = NULL, *end = NULL;
 	char *ret;
 
+	LU_ERROR_CHECK(error);
+
 	g_assert(fd != -1);
 	g_assert(first != NULL);
 	g_assert(strlen(first) != 0);
 	g_assert(field >= 1);
 
 	if(fstat(fd, &st) == -1) {
-		lu_error_set(error, lu_error_stat, NULL);
+		lu_error_new(error, lu_error_stat, NULL);
 		return NULL;
 	}
 
 	if(lseek(fd, 0, SEEK_SET) == -1) {
-		lu_error_set(error, lu_error_read, NULL);
+		lu_error_new(error, lu_error_read, NULL);
 		return NULL;
 	}
 
 	buf = g_malloc0(st.st_size + 1);
 	if(read(fd, buf, st.st_size) != st.st_size) {
-		lu_error_set(error, lu_error_read, NULL);
+		lu_error_new(error, lu_error_read, NULL);
 		g_free(buf);
 		return NULL;
 	}
@@ -377,18 +377,19 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	return ret;
 }
 
-/** Modify the nth colon-separated field on the line which has 
- * first as its first field.
- * \param fd Descriptor of open, locked file.
- * \param first Contents of the first field to match the right line with.
- * \param field The number of the field.  Minimum is 1.
- * \param value The new value for the field.
- * \returns A boolean indicating success or failure.
+/**
+ * lu_util_field_write:
+ * @fd: Descriptor of open, locked file.
+ * @first: Contents of the first field to match the right line with.
+ * @field: The number of the field.  Minimum is 1.
+ * @value: The new value for the field.
+ *
+ * Modify the nth colon-separated field on the line which has first as its first field.
+ *
+ * Returns: A boolean indicating success or failure.
  */
 gboolean
-lu_util_field_write(int fd, const char *first,
-		    unsigned int field, const char *value,
-		    struct lu_error **error)
+lu_util_field_write(int fd, const char *first, unsigned int field, const char *value, struct lu_error **error)
 {
 	struct stat st;
 	char *buf;
@@ -397,6 +398,8 @@ lu_util_field_write(int fd, const char *first,
 	gboolean ret = FALSE;
 	int fi = 1;
 
+	LU_ERROR_CHECK(error);
+
 	g_assert(fd != -1);
 	g_assert(first != NULL);
 	g_assert(strlen(first) != 0);
@@ -404,18 +407,18 @@ lu_util_field_write(int fd, const char *first,
 	g_assert(value != NULL);
 
 	if(fstat(fd, &st) == -1) {
-		lu_error_set(error, lu_error_stat, NULL);
+		lu_error_new(error, lu_error_stat, NULL);
 		return FALSE;
 	}
 
 	if(lseek(fd, 0, SEEK_SET) == -1) {
-		lu_error_set(error, lu_error_read, NULL);
+		lu_error_new(error, lu_error_read, NULL);
 		return FALSE;
 	}
 
 	buf = g_malloc0(st.st_size + 1 + strlen(value) + field);
 	if(read(fd, buf, st.st_size) != st.st_size) {
-		lu_error_set(error, lu_error_read, NULL);
+		lu_error_new(error, lu_error_read, NULL);
 		return FALSE;
 	}
 
@@ -457,14 +460,13 @@ lu_util_field_write(int fd, const char *first,
 			end++;
 		}
 	} else {
-		lu_error_set(error, lu_error_search, NULL);
+		lu_error_new(error, lu_error_search, NULL);
 		return FALSE;
 	}
 
 	if((start != NULL) && (end != NULL)) {
 		/* insert the text here, after moving the data around */
-		memmove(start + strlen(value), end,
-			st.st_size - (end - buf) + 1);
+		memmove(start + strlen(value), end, st.st_size - (end - buf) + 1);
 		memcpy(start, value, strlen(value));
 		ret = TRUE;
 	} else {
@@ -477,8 +479,7 @@ lu_util_field_write(int fd, const char *first,
 				end++;
 			}
 			start = end;
-			memmove(start + strlen(value) + (field - fi), end,
-				st.st_size - (end - buf) + 1);
+			memmove(start + strlen(value) + (field - fi), end, st.st_size - (end - buf) + 1);
 			memset(start, ':', field - fi);
 			memcpy(start + (field - fi), value, strlen(value));
 			ret = TRUE;
@@ -488,20 +489,20 @@ lu_util_field_write(int fd, const char *first,
 	if(ret == TRUE) {
 		size_t len;
 		if(lseek(fd, 0, SEEK_SET) == -1) {
-			lu_error_set(error, lu_error_write, NULL);
+			lu_error_new(error, lu_error_write, NULL);
 			return FALSE;
 		}
 		len = strlen(buf);
 		if(write(fd, buf, len) == -1) {
-			lu_error_set(error, lu_error_write, NULL);
+			lu_error_new(error, lu_error_write, NULL);
 			return FALSE;
 		}
 		if(ftruncate(fd, len) == -1) {
-			lu_error_set(error, lu_error_write, NULL);
+			lu_error_new(error, lu_error_write, NULL);
 			return FALSE;
 		}
 	} else {
-		lu_error_set(error, lu_error_search, NULL);
+		lu_error_new(error, lu_error_search, NULL);
 		return FALSE;
 	}
 

@@ -124,6 +124,11 @@ main(int argc, const char **argv)
 	}
 
 	if(list_only) {
+		if(lu_user_islocked(ctx, ent, &error)) {
+			printf(_("Account is locked.\n"));
+		} else {
+			printf(_("Account is not locked.\n"));
+		}
 		values = lu_ent_get(ent, LU_SHADOWMIN);
 		if(values && values->data) {
 			printf(_("Minimum:\t%d\n"), read_ndays(values->data));

@@ -74,6 +74,13 @@ lu_string_cache_free(struct lu_string_cache *cache)
 	g_free(cache);
 }
 
+/**
+ * lu_string_cache_new:
+ * case_sensitive: A #boolean indicating whether or not the new cache should be sensitive to case.
+ *
+ * Creates and returns a new string cache, which may or may not be case-sensitive.
+ *
+ **/
 struct lu_string_cache *
 lu_string_cache_new(gboolean case_sensitive)
 {

@@ -5,7 +5,7 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPrereq: krb5-devel, openldap-devel, popt, python-devel, sgml-tools
+BuildPrereq: popt, python-devel, sgml-tools
 Summary: A user account administration library.
 
 %description
@@ -52,7 +52,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/python1.5/site-packages/*
 %{_libdir}/libuser.so.*.*
 %{_libdir}/libuser_quota.so.*.*
-%{_libdir}/libuser/*.so
+%{_libdir}/%{name}/*.so
 %{_sbindir}/*
 
 %files devel
@@ -67,6 +67,12 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Fri Jul  6 2001 Nalin Dahyabhai <nalin@redhat.com>
+- finish implementing is_locked methods in files/shadow module
+- finish cleanup of the python bindings
+- allow conditional builds of modules so that we can build without
+  all of the prereqs for all of the modules
+
 * Thu Jun 21 2001 Nalin Dahyabhai <nalin@redhat.com>
 - add error reporting facilities
 - split public header into pieces by function

@@ -35,9 +35,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	int remove_home = FALSE;
 	const char *user = NULL;
-	GList *values;
 	int interactive = FALSE;
 	int c;
 

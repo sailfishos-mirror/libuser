@@ -53,146 +53,23 @@ the group name for a group entity. */
 #define LU_SHADOWEXPIRE		"shadowExpire"		/**< The date when the account expires. */
 #define LU_SHADOWFLAG		"shadowFlag"		/**< Reserved. */
 
-/**
- * A user or group structure, conceptualized as a dictionary of lists,
- * keyed by attribute names.
- */
 typedef struct lu_ent lu_ent_t;
 
-/**
- * Creates a new entity structure.  Entity structures are used to hold
- * the attributes of an entry in the data store.
- * @return A valid structure on success.
- * @return NULL on failure.
- */
 struct lu_ent *lu_ent_new(void);
-
-/**
- * Copies on entity structure to another.
- * @param source The structure being duplicated.
- * @param dest The structure which will receive the data.
- * @return Nothing.
- */
 void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
-
-/**
- * Revert any changes which have been made to the structure since it was
- * returned by a lookup request.
- * @param ent The structure which will have its data reverted.
- * @return Nothing.
- */
 void lu_ent_revert(struct lu_ent *ent);
-
-/**
- * Free an entity structure.
- * @param ent The structure which is to be freed.
- * @return Nothing.
- */
 void lu_ent_free(struct lu_ent *ent);
 
-/**
- * Returns a list of strings containing the attributes a particular entry
- * contains.
- * @param ent A valid entity structure.
- * @return A GList* containing names of attributes.
- * @return NULL on failure.
- */
-GList *lu_ent_get_attributes(struct lu_ent *ent);
-
-/**
- * Returns a list of strings containing the values for a particular attribute
- * of an entry.
- * @param ent A valid entity structure.
- * @param attribute The name of an attribute.
- * @return A GList* containing strings if the entity contains the specified attribute.
- * @return NULL on failure.
- */
-GList *lu_ent_get(struct lu_ent *ent, const char *attribute);
-
-/**
- * Returns a list of strings containing the original values for a particular
- * attribute of an entry.  These are the values which lu_ent_revert() will use.
- * @param ent A valid entity structure.
- * @param attribute The name of an attribute.
- * @return A GList* containing the values this structure originally contained
- * when it was first looked up or otherwise initialized.
- * @return NULL on failure.
- */
 GList *lu_ent_get_original(struct lu_ent *ent, const char *attribute);
-
-/**
- * Set a single value for a named attribute.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should take.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-void lu_ent_set(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Set a single value for a named attribute in an entity structure's "original"
- * set of data.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should have.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 void lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Add a new element to the list of values for the given attribute in the
- * given entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should take, in addition to any it
- * already has.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-void lu_ent_add(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Add a new element to the list of original values for the given attribute
- * in the given entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr A value the attribute should take, in addition to those it
- * already held when it was looked up.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 void lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val);
-/**
- * Remove a value for an attribute from the list of values in the entity
- * structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr A value for the attribute which should be removed.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-void lu_ent_del(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Remove all values for an attribute from the list of values in the entity
- * structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-void lu_ent_clear(struct lu_ent *ent, const char *attr);
-
-/**
- * Remove all original values for an attribute from the list of values in
- * the entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 void lu_ent_clear_original(struct lu_ent *ent, const char *attr);
+
+GList *lu_ent_get(struct lu_ent *ent, const char *attribute);
+void lu_ent_set(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_add(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_clear(struct lu_ent *ent, const char *attr);
+void lu_ent_del(struct lu_ent *ent, const char *attr, const char *val);
+GList *lu_ent_get_attributes(struct lu_ent *ent);
 
 #endif

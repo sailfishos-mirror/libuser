@@ -20,7 +20,7 @@
 
 #include <glib.h>
 #include <gmodule.h>
-#include <libuser/user.h>
+#include "user.h"
 
 #define LU_ENT_MAGIC 0x19d381c2
 #define LU_MODULE_VERSION 0x00040000
@@ -31,11 +31,11 @@
 
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
-struct lu_string_cache {
+typedef struct lu_string_cache {
 	GHashTable *table;
 	char * (*cache)(struct lu_string_cache *, const char *);
 	void (*free)(struct lu_string_cache *);
-};
+} lu_string_cache_t;
 
 /** Create a new cache.
   * \param case_sensitive Whether or not case should factor into whether
@@ -63,10 +63,10 @@ struct lu_ent {
 };
 
 /* What type of function a module serves. */
-enum lu_module_type {
-	auth = 0x8a1f,
-	info = 0x9c32,
-};
+typedef enum lu_module_type {
+	auth = 0xaa1f,
+	info = 0xcc32,
+} lu_module_type_t;
 
 /* A context structure. */
 struct lu_context {
@@ -89,7 +89,8 @@ struct lu_context {
 					   of module structures. */
 };
 
-struct lu_module {
+/* A module structure. */
+typedef struct lu_module {
 	u_int32_t version;		/* Should be LU_MODULE_VERSION. */
 	GModule *module_handle;
 	struct lu_string_cache *scache;	/* A string cache. */
@@ -130,6 +131,8 @@ struct lu_module {
 			      struct lu_error **error);
 	gboolean (*user_unlock)(struct lu_module *module, struct lu_ent *ent,
 				struct lu_error **error);
+	gboolean (*user_islocked)(struct lu_module *module, struct lu_ent *ent,
+				  struct lu_error **error);
 	gboolean (*user_setpass)(struct lu_module *module, struct lu_ent *ent,
 				 const char *newpass,
 				 struct lu_error **error);
@@ -149,6 +152,8 @@ struct lu_module {
 			       struct lu_error **error);
 	gboolean (*group_unlock)(struct lu_module *module, struct lu_ent *ent,
 				 struct lu_error **error);
+	gboolean (*group_islocked)(struct lu_module *module, struct lu_ent *ent,
+				   struct lu_error **error);
 	gboolean (*group_setpass)(struct lu_module *module, struct lu_ent *ent,
 				  const char *newpass,
 				  struct lu_error **error);
@@ -163,7 +168,7 @@ struct lu_module {
 
 	/* Clean up any data this module has, and unload it. */
 	gboolean (*close)(struct lu_module *module);
-};
+} lu_module_t;
 
 /* The type of the initialization function a module exports for the library
  * to use when initializing it.  Should fit "lu_%s_init", where the string
@@ -172,54 +177,32 @@ struct lu_module {
 typedef struct lu_module * (*lu_module_init_t)(struct lu_context *context,
 					       struct lu_error **error);
 
-/* Read in the libuser configuration data, and store it under the library
- * context.  Also a function to delete it. */
 gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error);
 void lu_cfg_done(struct lu_context *context);
 
-/* Set the modules we'll use for saving information about this user to. */
 void lu_ent_set_source_info(struct lu_ent *ent, const char *source);
 void lu_ent_set_source_auth(struct lu_ent *ent, const char *source);
 
-/* Copy a GList of strings, duplicating the data it contains. */
 GList *lu_g_list_copy(GList *list);
 
-/* Compare strings: case-sensitive and case-insensitive variants. */
 gint lu_str_equal(gconstpointer v1, gconstpointer v2);
 gint lu_str_case_equal(gconstpointer v1, gconstpointer v2);
 
-/* Count the number of items in an array of strings.  Return 0 if NULL. */
 guint lu_strv_len(gchar **v);
 
-/* Generate a hashed password using either standard or MD5 hashing.  If
- * we want to re-use a salt, pass it in through previous.  If previous
- * is NULL, an MD5 hash is generated with a random salt. */
 const char *lu_make_crypted(const char *plain, const char *previous);
 
-/* Generate or free a lock on the passed descriptor. */
 gpointer lu_util_lock_obtain(int fd, struct lu_error **error);
 void lu_util_lock_free(int fd, gpointer lock);
 
-/* Get a line from an open file, where the first colon-separated field
- * matches firstpart. */
 char *lu_util_line_get_matching1(int fd, const char *firstpart,
 				 struct lu_error **error);
-/* Get a line from an open file, where the third colon-separated field
- * matches firstpart. */
 char *lu_util_line_get_matching3(int fd, const char *thirdpart,
 				 struct lu_error **error);
-/* Generic form of the above functions. */
 char *lu_util_line_get_matchingx(int fd, const char *part, int field,
 				 struct lu_error **error);
-
-/* Read the contents of the field'th field on the line in the file,
-   where the first colon-delimited field matches first.  Return NULL
-   on errors. */
 char *lu_util_field_read(int fd, const char *first, unsigned int field,
 			 struct lu_error **error);
-/* Write the contents of the field'th field on the line in the file,
-   where the first colon-delimited field matches first.  Return FALSE
-   on errors. */
 gboolean lu_util_field_write(int fd, const char *first,
 	                     unsigned int field, const char *value,
 			     struct lu_error **error);

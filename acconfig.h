@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT

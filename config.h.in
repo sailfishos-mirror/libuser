@@ -133,6 +133,9 @@
 /* Define if you have the <fcntl.h> header file.  */
 #undef HAVE_FCNTL_H
 
+/* Define if you have the <krb5.h> header file.  */
+#undef HAVE_KRB5_H
+
 /* Define if you have the <ldap.h> header file.  */
 #undef HAVE_LDAP_H
 
@@ -150,9 +153,6 @@
 
 /* Define if you have the <popt.h> header file.  */
 #undef HAVE_POPT_H
-
-/* Define if you have the <profile.h> header file.  */
-#undef HAVE_PROFILE_H
 
 /* Define if you have the <stddef.h> header file.  */
 #undef HAVE_STDDEF_H
@@ -172,8 +172,26 @@
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H
 
+/* Define if you have the com_err library (-lcom_err).  */
+#undef HAVE_LIBCOM_ERR
+
 /* Define if you have the crypt library (-lcrypt).  */
 #undef HAVE_LIBCRYPT
+
+/* Define if you have the crypto library (-lcrypto).  */
+#undef HAVE_LIBCRYPTO
+
+/* Define if you have the kadm5clnt library (-lkadm5clnt).  */
+#undef HAVE_LIBKADM5CLNT
+
+/* Define if you have the krb5 library (-lkrb5).  */
+#undef HAVE_LIBKRB5
+
+/* Define if you have the ldap library (-lldap).  */
+#undef HAVE_LIBLDAP
+
+/* Define if you have the llber library (-lllber).  */
+#undef HAVE_LIBLLBER
 
 /* Define if you have the popt library (-lpopt).  */
 #undef HAVE_LIBPOPT

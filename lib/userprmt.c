@@ -25,22 +25,21 @@
 #include <libintl.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
 #define _(String) gettext(String)
 
 /**
  * lu_prompt_console:
- * @prompts: An array of structures used to pass prompts and answers into and
- * out of the function.
+ * @prompts: An array of structures used to pass prompts and answers into and out of the function.
  * @count: The length of the prompts array.
  * @calldata: Ignored.
  *
- * This function prompts the user for information, including items which have
- * default answers supplied by the caller.
+ * This function prompts the user for information, including items which have default answers supplied by the caller.
  *
  * Returns: TRUE on success, or FALSE on error.
- */
+ **/
 gboolean
 lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		  struct lu_error **error)
@@ -48,6 +47,8 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 	int i;
 	char buf[LINE_MAX];
 	struct termios otermios, ntermios;
+
+	LU_ERROR_CHECK(error);
 
 	if(count > 0) {
 		g_assert(prompts != NULL);
@@ -58,9 +59,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			g_print("%s", prompts[i].prompt);
 		}
 		if(prompts[i].visible && prompts[i].default_value) {
-			g_print(" [");
-			g_print("%s", prompts[i].default_value);
-			g_print("]: ");
+			g_print("[%s]: ", prompts[i].default_value);
 		} else {
 			g_print(": ");
 		}
@@ -70,30 +69,23 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 
 		if(prompts[i].visible == FALSE) {
 			if(tcgetattr(fileno(stdin), &otermios) == -1) {
-				lu_error_set(error, lu_error_terminal,
-					     _("error reading terminal "
-					       "attributes"));
+				lu_error_new(error, lu_error_terminal, _("error reading terminal attributes"));
 				return FALSE;
 			}
 			ntermios = otermios;
 			ntermios.c_lflag &= ~ECHO;
 			if(tcsetattr(fileno(stdin), TCSADRAIN, &ntermios) == -1) {
-				lu_error_set(error, lu_error_terminal,
-					     _("error setting terminal "
-					       "attributes"));
+				lu_error_new(error, lu_error_terminal, _("error setting terminal attributes"));
 				return FALSE;
 			}
 		}
 		if(fgets(buf, sizeof(buf), stdin) == NULL) {
-			lu_error_set(error, lu_error_terminal,
-				     _("error reading from terminal"));
+			lu_error_new(error, lu_error_terminal, _("error reading from terminal"));
 			return FALSE;
 		}
 		if(prompts[i].visible == FALSE) {
 			if(tcsetattr(fileno(stdin), TCSADRAIN, &otermios) == -1) {
-				lu_error_set(error, lu_error_terminal,
-					     _("error setting terminal "
-					       "attributes"));
+				lu_error_new(error, lu_error_terminal, _("error setting terminal attributes"));
 				return FALSE;
 			}
 			g_print("\n");
@@ -119,23 +111,22 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 
 /**
  * lu_prompt_console_quiet:
- * @prompts: An array of structures used to pass prompts and answers into and
- * out of the function.
+ * @prompts: An array of structures used to pass prompts and answers into and out of the function.
  * @count: The length of the prompts array.
  * @calldata: Ignored.
  *
- * This function prompts the user for information.  Items which have default
- * answers supplied by the caller will be returned with their default values
- * set.
+ * This function prompts the user for information.  Items which have default answers supplied by the caller will be returned
+ * with their default values set.
  *
  * Returns: TRUE, or FALSE on error.
- */
+ **/
 gboolean
-lu_prompt_console_quiet(struct lu_prompt *prompts, int count, gpointer calldata,
-			struct lu_error **error)
+lu_prompt_console_quiet(struct lu_prompt *prompts, int count, gpointer calldata, struct lu_error **error)
 {
 	int i;
 	gboolean ret = TRUE;
+
+	LU_ERROR_CHECK(error);
 
 	if(count > 0) {
 		g_return_val_if_fail(prompts != NULL, FALSE);
@@ -146,8 +137,7 @@ lu_prompt_console_quiet(struct lu_prompt *prompts, int count, gpointer calldata,
 			prompts[i].value = g_strdup(prompts[i].default_value);
 			prompts[i].free_value = (void*)g_free;
 		} else {
-			ret = ret && lu_prompt_console(&prompts[i], 1,
-						       calldata, error);
+			ret = ret && lu_prompt_console(&prompts[i], 1, calldata, error);
 		}
 	}
 

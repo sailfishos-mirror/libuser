@@ -18,6 +18,7 @@
 #include <libuser/user.h>
 #include <libintl.h>
 #include <stdarg.h>
+#include <string.h>
 #define _(String) gettext(String)
 
 static const char *
@@ -46,25 +47,40 @@ lu_strerror(enum lu_error_code code)
 	return _("unknown error");
 }
 
+/**
+ * lu_error_new:
+ * error: A pointer to a pointer to a #lu_error_t which will be used to hold information about this error.
+ * code: An #lu_error_code describing the error.
+ * desc: A format string (followed by arguments) giving a more detailed description of the error.  May be #NULL.
+ *
+ * This function sets an #lu_error_t pointer to a value which can be passed up to a calling function.
+ *
+ * Returns: nothing.
+ **/
 void
-lu_error_set(struct lu_error **error, enum lu_error_code code,
-	     const char *desc, ...)
+lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc, ...)
 {
 	struct lu_error *ret;
 	va_list args;
-	g_assert(error != NULL);
-	if(*error == NULL) {
+	if(error) {
+		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
-		ret->string = desc ?
-			      g_strdup_printf(desc, args) :
-			      g_strdup(lu_strerror(code));
+		ret->string = desc ?  g_strdup_printf(desc, args) : g_strdup(lu_strerror(code));
 		va_end(args);
 		*error = ret;
 	}
 }
 
+/**
+ * lu_error_free:
+ * error: A pointer to a pointer to a #lu_error_t which must be cleared.
+ *
+ * This function clears an #lu_error_t pointer.
+ *
+ * Returns: nothing.
+ **/
 void
 lu_error_free(struct lu_error **error)
 {

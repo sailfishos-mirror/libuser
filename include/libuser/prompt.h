@@ -41,35 +41,13 @@ typedef struct lu_prompt {
 	void(*free_value)(char *);
 } lu_prompt_t;
 
-/**
- * The type of the prompter function which should be passed as a callback
- * function to lu_start() or to lu_set_prompter().
- */
 typedef gboolean (lu_prompt_fn)(struct lu_prompt *prompts,
 				int count,
 				gpointer callback_data,
 				struct lu_error **error);
-
-/**
- * A prompter which prompts for every value, including defaults.
- * @param prompts An array of lu_prompt_t structures which contain information
- * about what we want to know.
- * @param callback_data Callback data to be passed to the prompting function.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 gboolean lu_prompt_console(struct lu_prompt *prompts,
 			   int count, gpointer callback_data,
 			   struct lu_error **error);
-
-/**
- * A prompter which accepts defaults, and prompts for the rest.
- * @param prompts An array of lu_prompt_t structures which contain information
- * about what we want to know.
- * @param callback_data Callback data to be passed to the prompting function.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 gboolean lu_prompt_console_quiet(struct lu_prompt *prompts,
 				 int count, gpointer callback_data,
 				 struct lu_error **error);

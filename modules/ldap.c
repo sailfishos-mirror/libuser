@@ -124,21 +124,17 @@ interact(LDAP *ld, unsigned flags, void *defs, void *interact_data)
 		interact[i].len = 0;
 		switch(interact[i].id) {
 			case SASL_CB_USER:
-				interact[i].result =
-					ctx->prompts[LU_LDAP_USER].value ?: "";
+				interact[i].result = ctx->prompts[LU_LDAP_USER].value ?: "";
 				interact[i].len = strlen(interact[i].result);
 #ifdef DEBUG
-				g_print("Sending SASL user '%s'.\n",
-					interact[i].result);
+				g_print("Sending SASL user '%s'.\n", interact[i].result);
 #endif
 				break;
 			case SASL_CB_AUTHNAME:
-				interact[i].result =
-					ctx->prompts[LU_LDAP_AUTHUSER].value;
+				interact[i].result = ctx->prompts[LU_LDAP_AUTHUSER].value;
 				interact[i].len = strlen(interact[i].result);
 #ifdef DEBUG
-				g_print("Sending SASL auth user '%s'.\n",
-					interact[i].result);
+				g_print("Sending SASL auth user '%s'.\n", interact[i].result);
 #endif
 				break;
 			default:
@@ -163,8 +159,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 
 	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if(ldap == NULL) {
-		lu_error_set(error, lu_error_init,
-			     _("error initializing ldap library"));
+		lu_error_new(error, lu_error_init, _("error initializing ldap library"));
 		return NULL;
 	}
 
@@ -176,31 +171,25 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 		user = tmp;
 	}
 	tmp = g_strdup_printf("uid=%s,%s,%s", user,
-			      lu_cfg_read_single(context->global_context,
-						 "ldap/userBranch",
-						 "ou=People"),
+			      lu_cfg_read_single(context->global_context, "ldap/userBranch", "ou=People"),
 			      context->prompts[LU_LDAP_BASEDN].value);
 	generated_binddn = scache->cache(scache, tmp);
 	g_free(tmp);
 
-	if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION,
-			   &version) != LDAP_OPT_SUCCESS) {
-		lu_error_set(error, lu_error_init,
-			     _("could not set protocol to version 3"));
+	if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION, &version) != LDAP_OPT_SUCCESS) {
+		lu_error_new(error, lu_error_init, _("could not set protocol to version 3"));
 		close_server(ldap);
 		return NULL;
 	}
 
 	if(ldap_start_tls_s(ldap, &server, &client) != LDAP_SUCCESS) {
-		lu_error_set(error, lu_error_init,
-			     _("could not negotiate TLS with server"));
+		lu_error_new(error, lu_error_init, _("could not negotiate TLS with server"));
 		close_server(ldap);
 		return NULL;
 	}
 
 	if(ldap_sasl_interactive_bind_s(ldap, NULL, NULL, NULL, NULL,
-					LDAP_SASL_AUTOMATIC |
-					LDAP_SASL_QUIET,
+					LDAP_SASL_AUTOMATIC | LDAP_SASL_QUIET,
 					interact, context) != LDAP_SUCCESS)
 	if(ldap_simple_bind_s(ldap,
 			      context->prompts[LU_LDAP_BINDDN].value,
@@ -208,7 +197,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	if(ldap_simple_bind_s(ldap,
 			      generated_binddn,
 			      context->prompts[LU_LDAP_PASSWORD].value) != LDAP_SUCCESS) {
-		lu_error_set(error, lu_error_init, "could not bind to server");
+		lu_error_new(error, lu_error_init, "could not bind to server");
 		close_server(ldap);
 		return NULL;
 	}
@@ -218,8 +207,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 
 /* Generate the distinguished name which corresponds to the lu_ent structure. */
 static const char *
-lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent,
-		  const char *namingAttr, const char *name,
+lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent, const char *namingAttr, const char *name,
 		  const char *configKey, const char *def)
 {
 	struct lu_ldap_context *context = module->module_context;
@@ -241,9 +229,7 @@ lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent,
 	g_free(tmp);
 
 	if(branch) {
-		tmp = g_strdup_printf("%s=%s,%s,%s",
-				      namingAttr, name, branch,
-				      context->prompts[LU_LDAP_BASEDN].value);
+		tmp = g_strdup_printf("%s=%s,%s,%s", namingAttr, name, branch, context->prompts[LU_LDAP_BASEDN].value);
 		ret = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
 	}
@@ -253,11 +239,8 @@ lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent,
 
 /* This is the lookup workhorse. */
 static gboolean
-lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
-	       const char *name, struct lu_ent *ent,
-	       const char *configKey, const char *def,
-	       const char *filter, char **attributes,
-	       struct lu_error **error)
+lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *name, struct lu_ent *ent,
+	       const char *configKey, const char *def, const char *filter, char **attributes, struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
 	const char *attr;
@@ -283,14 +266,12 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name, configKey, def);
 	if(dn == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
 		return FALSE;
 	}
 
 	if(filter && (strlen(filter) > 0)) {
-		filt = g_strdup_printf("(&%s(%s=%s))", filter,
-				       namingAttr, name);
+		filt = g_strdup_printf("(&%s(%s=%s))", filter, namingAttr, name);
 	} else {
 		filt = g_strdup_printf("(%s=%s)", namingAttr, name);
 	}
@@ -299,23 +280,19 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 	g_print("Looking up '%s' with filter '%s'.\n", dn, filt);
 #endif
 
-	if(ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt, attributes,
-			 FALSE, &messages) == LDAP_SUCCESS) {
+	if(ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt, attributes, FALSE, &messages) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if(entry != NULL) {
 			for(i = 0; attributes[i]; i++) {
 				attr = attributes[i];
-				values = ldap_get_values(ctx->ldap, entry,
-							 attr);
+				values = ldap_get_values(ctx->ldap, entry, attr);
 				if(values) {
 					lu_ent_clear_original(ent, attr);
 					for(j = 0; values[j]; j++) {
 #ifdef DEBUG
-						g_print("Got '%s' = '%s'.\n",
-							attr, values[j]);
+						g_print("Got '%s' = '%s'.\n", attr, values[j]);
 #endif
-						lu_ent_add_original(ent, attr,
-								    values[j]);
+						lu_ent_add_original(ent, attr, values[j]);
 					}
 				}
 			}
@@ -324,8 +301,7 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 #ifdef DEBUG
 			g_print("No entry found in LDAP.\n");
 #endif
-			lu_error_set(error, lu_error_generic,
-				     _("error searching ldap directory"));
+			lu_error_new(error, lu_error_generic, _("error searching ldap directory"));
 			ret = FALSE;
 		}
 	}
@@ -334,58 +310,42 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 }
 
 static gboolean
-lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name,
-			 struct lu_ent *ent, struct lu_error **error)
+lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_lookup(module, LU_USERNAME, name, ent,
-			      "userBranch", "ou=People",
-			      "(objectclass=posixAccount)",
-			      lu_ldap_user_attributes,
-			      error);
+	return lu_ldap_lookup(module, LU_USERNAME, name, ent, "userBranch", "ou=People", "(objectclass=posixAccount)",
+			      lu_ldap_user_attributes, error);
 }
 
 static gboolean
-lu_ldap_user_lookup_id(struct lu_module *module, gconstpointer uid,
-		       struct lu_ent *ent, struct lu_error **error)
+lu_ldap_user_lookup_id(struct lu_module *module, gconstpointer uid, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;
 	gchar *uid_string = NULL;
 
 	uid_string = g_strdup_printf("%d", GPOINTER_TO_INT(uid));
-	ret = lu_ldap_lookup(module, LU_UIDNUMBER, uid_string, ent,
-			     "userBranch", "ou=People",
-			     "(objectclass=posixAccount)",
-			     lu_ldap_user_attributes,
-			     error);
+	ret = lu_ldap_lookup(module, LU_UIDNUMBER, uid_string, ent, "userBranch", "ou=People", "(objectclass=posixAccount)",
+			     lu_ldap_user_attributes, error);
 	g_free(uid_string);
 
 	return ret;
 }
 
 static gboolean
-lu_ldap_group_lookup_name(struct lu_module *module, gconstpointer name,
-			  struct lu_ent *ent, struct lu_error **error)
+lu_ldap_group_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_lookup(module, LU_GROUPNAME, name, ent,
-			      "groupBranch", "ou=Group",
-			      "(objectclass=posixGroup)",
-			      lu_ldap_group_attributes,
-			      error);
+	return lu_ldap_lookup(module, LU_GROUPNAME, name, ent, "groupBranch", "ou=Group", "(objectclass=posixGroup)",
+			      lu_ldap_group_attributes, error);
 }
 
 static gboolean
-lu_ldap_group_lookup_id(struct lu_module *module, gconstpointer gid,
-			struct lu_ent *ent, struct lu_error **error)
+lu_ldap_group_lookup_id(struct lu_module *module, gconstpointer gid, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;
 	gchar *gid_string = NULL;
 
 	gid_string = g_strdup_printf("%d", GPOINTER_TO_INT(gid));
-	ret = lu_ldap_lookup(module, LU_GIDNUMBER, gid_string, ent,
-			     "groupBranch", "ou=Group",
-			     "(objectclass=posixGroup)",
-			     lu_ldap_group_attributes,
-			     error);
+	ret = lu_ldap_lookup(module, LU_GIDNUMBER, gid_string, ent, "groupBranch", "ou=Group", "(objectclass=posixGroup)",
+			     lu_ldap_group_attributes, error);
 	g_free(gid_string);
 
 	return ret;
@@ -424,8 +384,7 @@ get_ent_mods(struct lu_ent *ent)
 		for(i = j = 0; g_list_nth(attrs, i); i++) {
 			GList *original, *current;
 			current = lu_ent_get(ent, g_list_nth(attrs, i)->data);
-			original = lu_ent_get_original(ent,
-						g_list_nth(attrs, i)->data);
+			original = lu_ent_get_original(ent, g_list_nth(attrs, i)->data);
 			if(lists_equal(current, original)) {
 				continue;
 			}
@@ -438,16 +397,13 @@ get_ent_mods(struct lu_ent *ent)
 				continue;
 			}
 			mods[j]->mod_values =
-				g_malloc0((g_list_length(values) + 1) *
-					  sizeof(char*));
+				g_malloc0((g_list_length(values) + 1) * sizeof(char*));
 			for(k = l = 0; g_list_nth(values, k); k++) {
 				gboolean add;
 
-				if(g_strcasecmp(mods[j]->mod_type,
-						LU_USERPASSWORD) == 0) {
+				if(g_strcasecmp(mods[j]->mod_type, LU_USERPASSWORD) == 0) {
 					add = FALSE;
-					if(strncmp(g_list_nth(values, k)->data,
-						   "{crypt}", 7) == 0) {
+					if(strncmp(g_list_nth(values, k)->data, "{crypt}", 7) == 0) {
 						add = TRUE;
 					}
 				} else {
@@ -459,8 +415,7 @@ get_ent_mods(struct lu_ent *ent)
 					  (char*)g_list_nth(attrs, i)->data,
 					  (char*)g_list_nth(values, k)->data);
 #endif
-					mods[j]->mod_values[l++] =
-						g_list_nth(values, k)->data;
+					mods[j]->mod_values[l++] = g_list_nth(values, k)->data;
 				}
 			}
 			j++;
@@ -500,8 +455,7 @@ dump_mods(LDAPMod **mods)
 
 static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
-	    const char *configKey, const char *def, char **attributes,
-	    struct lu_error **error)
+	    const char *configKey, const char *def, char **attributes, struct lu_error **error)
 {
 	LDAPMod **mods = NULL;
 	LDAPControl *server = NULL, *client = NULL;
@@ -530,32 +484,26 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 
 	name = lu_ent_get(ent, namingAttr);
 	if(name == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("user object had no %s attribute"),
-			     namingAttr);
+		lu_error_new(error, lu_error_generic, _("user object had no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	old_name = lu_ent_get_original(ent, namingAttr);
 	if(old_name == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("user object was created with no `%s'"),
-			     namingAttr);
+		lu_error_new(error, lu_error_generic, _("user object was created with no `%s'"), namingAttr);
 		return FALSE;
 	}
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data,
 			       configKey, def);
 	if(dn == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("could not determine expected DN"));
+		lu_error_new(error, lu_error_generic, _("could not determine expected DN"));
 		return FALSE;
 	}
 
 	mods = get_ent_mods(ent);
 	if(mods == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("could not convert internal data to LDAPMods"));
+		lu_error_new(error, lu_error_generic, _("could not convert internal data to LDAPMods"));
 		return FALSE;
 	}
 
@@ -568,9 +516,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(err == LDAP_SUCCESS) {
 		ret = TRUE;
 	} else {
-		lu_error_set(error, lu_error_write,
-			     _("error modifying directory entry: %s"),
-			     ldap_err2string(err));
+		lu_error_new(error, lu_error_write, _("error modifying directory entry: %s"), ldap_err2string(err));
 		free_ent_mods(mods);
 		return FALSE;
 	}
@@ -579,14 +525,12 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 		if(strcmp((char*)name->data, ((char*)old_name->data)) != 0) {
 			ret = FALSE;
 			tmp = g_strdup_printf("%s=%s", namingAttr, (char*)name->data);
-			err = ldap_rename_s(ctx->ldap, dn, tmp, NULL, TRUE,
-					    &server, &client);
+			err = ldap_rename_s(ctx->ldap, dn, tmp, NULL, TRUE, &server, &client);
 			if(err == LDAP_SUCCESS) {
 				ret = TRUE;
 			} else {
-				lu_error_set(error, lu_error_write,
-					     _("error renaming directory entry:"
-					       " %s.\n"), ldap_err2string(err));
+				lu_error_new(error, lu_error_write, _("error renaming directory entry: %s\n"),
+					     ldap_err2string(err));
 				free_ent_mods(mods);
 				return FALSE;
 			}
@@ -626,16 +570,13 @@ lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 
 	name = lu_ent_get(ent, namingAttr);
 	if(name == NULL) {
-		lu_error_set(error, lu_error_generic, 
-			     _("object had no %s attribute"), namingAttr);
+		lu_error_new(error, lu_error_generic, _("object had no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
-	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_set(error, lu_error_generic, 
-			     _("could not map name to DN"));
+		lu_error_new(error, lu_error_generic, _("could not map name to DN"));
 		return FALSE;
 	}
 
@@ -646,9 +587,7 @@ lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(err == LDAP_SUCCESS) {
 		ret = TRUE;
 	} else {
-		lu_error_set(error, lu_error_write,
-			     _("error removing directory entry: %s.\n"),
-			     ldap_err2string(err));
+		lu_error_new(error, lu_error_write, _("error removing directory entry: %s.\n"), ldap_err2string(err));
 		return FALSE;
 	}
 
@@ -656,34 +595,26 @@ lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 }
 
 static gboolean
-lu_ldap_user_add(struct lu_module *module, struct lu_ent *ent,
-		 struct lu_error **error)
+lu_ldap_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_set(module, lu_user, ent, "userBranch", "ou=People",
-			   lu_ldap_user_attributes, error);
+	return lu_ldap_set(module, lu_user, ent, "userBranch", "ou=People", lu_ldap_user_attributes, error);
 }
 
 static gboolean
-lu_ldap_user_mod(struct lu_module *module, struct lu_ent *ent,
-		 struct lu_error **error)
+lu_ldap_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_set(module, lu_user, ent, "userBranch", "ou=People",
-			   lu_ldap_user_attributes, error);
+	return lu_ldap_set(module, lu_user, ent, "userBranch", "ou=People", lu_ldap_user_attributes, error);
 }
 
 static gboolean
-lu_ldap_user_del(struct lu_module *module, struct lu_ent *ent,
-		 struct lu_error **error)
+lu_ldap_user_del(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_del(module, lu_user, ent, "userBranch", "ou=People",
-			   error);
+	return lu_ldap_del(module, lu_user, ent, "userBranch", "ou=People", error);
 }
 
 static gboolean
-lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
-		    const char *namingAttr, gboolean sense,
-		    const char *configKey, const char *def,
-		    struct lu_error **error)
+lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent, const char *namingAttr, gboolean sense,
+		    const char *configKey, const char *def, struct lu_error **error)
 {
 	const char *dn;
 	char *val;
@@ -698,25 +629,19 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	name = lu_ent_get(ent, namingAttr);
 	if(name == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("object has no %s attribute"),
-			     namingAttr);
+		lu_error_new(error, lu_error_generic, _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
-	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
 		return FALSE;
 	}
 
 	password = lu_ent_get(ent, LU_USERPASSWORD);
 	if(password == NULL) {
-		lu_error_set(error, lu_error_generic,
-			     _("object has no %s attribute"),
-			     LU_USERPASSWORD);
+		lu_error_new(error, lu_error_generic, _("object has no %s attribute"), LU_USERPASSWORD);
 		return FALSE;
 	}
 
@@ -749,9 +674,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 		if(err == LDAP_SUCCESS) {
 			ret = TRUE;
 		} else {
-			lu_error_set(error, lu_error_write, 
-				     _("error modifying directory entry: %s"),
-				     ldap_err2string(err));
+			lu_error_new(error, lu_error_write, _("error modifying directory entry: %s"), ldap_err2string(err));
 			g_free(mods);
 			g_free(val);
 			return FALSE;
@@ -765,72 +688,56 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
-lu_ldap_user_lock(struct lu_module *module, struct lu_ent *ent,
-		  struct lu_error **error)
+lu_ldap_user_lock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_handle_lock(module, ent, LU_USERNAME, TRUE,
-				   "userBranch", "ou=People", error);
+	return lu_ldap_handle_lock(module, ent, LU_USERNAME, TRUE, "userBranch", "ou=People", error);
 }
 
 static gboolean
-lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent,
-		    struct lu_error **error)
+lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_handle_lock(module, ent, LU_USERNAME, FALSE,
-				   "userBranch", "ou=People", error);
+	return lu_ldap_handle_lock(module, ent, LU_USERNAME, FALSE, "userBranch", "ou=People", error);
 }
 
 static gboolean
-lu_ldap_user_setpass(struct lu_module *module, struct lu_ent *ent,
-		     const char *password, struct lu_error **error)
+lu_ldap_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
 	/* FIXME */
 	return FALSE;
 }
 
 static gboolean
-lu_ldap_group_add(struct lu_module *module, struct lu_ent *ent,
-		  struct lu_error **error)
+lu_ldap_group_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_set(module, lu_group, ent, "groupBranch", "ou=Group",
-			   lu_ldap_group_attributes, error);
+	return lu_ldap_set(module, lu_group, ent, "groupBranch", "ou=Group", lu_ldap_group_attributes, error);
 }
 
 static gboolean
-lu_ldap_group_mod(struct lu_module *module, struct lu_ent *ent,
-		  struct lu_error **error)
+lu_ldap_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_set(module, lu_group, ent, "groupBranch", "ou=Group",
-			   lu_ldap_group_attributes, error);
+	return lu_ldap_set(module, lu_group, ent, "groupBranch", "ou=Group", lu_ldap_group_attributes, error);
 }
 
 static gboolean
-lu_ldap_group_del(struct lu_module *module, struct lu_ent *ent,
-		  struct lu_error **error)
+lu_ldap_group_del(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_del(module, lu_group, ent, "groupBranch", "ou=Group",
-			   error);
+	return lu_ldap_del(module, lu_group, ent, "groupBranch", "ou=Group", error);
 }
 
 static gboolean
-lu_ldap_group_lock(struct lu_module *module, struct lu_ent *ent,
-		   struct lu_error **error)
+lu_ldap_group_lock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, TRUE,
-				   "groupBranch", "ou=Group", error);
+	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, TRUE, "groupBranch", "ou=Group", error);
 }
 
 static gboolean
-lu_ldap_group_unlock(struct lu_module *module, struct lu_ent *ent,
-		     struct lu_error **error)
+lu_ldap_group_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, FALSE,
-				   "groupBranch", "ou=Group", error);
+	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, FALSE, "groupBranch", "ou=Group", error);
 }
 
 static gboolean
-lu_ldap_group_setpass(struct lu_module *module, struct lu_ent *ent,
-		      const char *password, struct lu_error **error)
+lu_ldap_group_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
 	/* FIXME */
 	return FALSE;
@@ -876,23 +783,19 @@ lu_ldap_enumerate(struct lu_module *module, const char *namingAttr,
 	g_print("Looking up '%s' with filter '%s'.\n", base, filt);
 #endif
 
-	if(ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt, attributes,
-			 FALSE, &messages) == LDAP_SUCCESS) {
+	if(ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt, attributes, FALSE, &messages) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if(entry != NULL) {
 			while(entry != NULL) {
 				for(i = 0; attributes[i]; i++) {
 					attr = attributes[i];
-					values = ldap_get_values(ctx->ldap,
-								 entry, attr);
+					values = ldap_get_values(ctx->ldap, entry, attr);
 					if(values) {
 						for(j = 0; values[j]; j++) {
 #ifdef DEBUG
-							g_print("Got '%s' = '%s'.\n",
-								attr, values[j]);
+							g_print("Got '%s' = '%s'.\n", attr, values[j]);
 #endif
-							ret = g_list_append(ret,
-									    module->scache->cache(module->scache, values[j]));
+							ret = g_list_append(ret, module->scache->cache(module->scache, values[j]));
 						}
 					}
 				}
@@ -902,8 +805,7 @@ lu_ldap_enumerate(struct lu_module *module, const char *namingAttr,
 #ifdef DEBUG
 			g_print("No entry found in LDAP.\n");
 #endif
-			lu_error_set(error, lu_error_generic,
-				     _("error searching ldap directory"));
+			lu_error_new(error, lu_error_generic, _("error searching ldap directory"));
 		}
 	}
 
@@ -914,19 +816,15 @@ lu_ldap_enumerate(struct lu_module *module, const char *namingAttr,
 }
 
 static GList *
-lu_ldap_users_enumerate(struct lu_module *module, const char *pattern,
-			struct lu_error **error)
+lu_ldap_users_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
 {
-	return lu_ldap_enumerate(module, LU_USERNAME,
-				 "userBranch", "ou=People", pattern, error);
+	return lu_ldap_enumerate(module, LU_USERNAME, "userBranch", "ou=People", pattern, error);
 }
 
 static GList *
-lu_ldap_groups_enumerate(struct lu_module *module, const char *pattern,
-			 struct lu_error **error)
+lu_ldap_groups_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
 {
-	return lu_ldap_enumerate(module, LU_GROUPNAME,
-				 "groupBranch", "ou=Group", pattern, error);
+	return lu_ldap_enumerate(module, LU_GROUPNAME, "groupBranch", "ou=Group", pattern, error);
 }
 
 static gboolean
@@ -962,26 +860,16 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ctx->global_context = context;
 
 	ctx->prompts[LU_LDAP_SERVER].prompt = _("LDAP Server Name");
-	ctx->prompts[LU_LDAP_SERVER].default_value =
-					lu_cfg_read_single(context,
-							   "ldap/server",
-							   "ldap");
+	ctx->prompts[LU_LDAP_SERVER].default_value = lu_cfg_read_single(context, "ldap/server", "ldap");
 	ctx->prompts[LU_LDAP_SERVER].visible = TRUE;
 
 	ctx->prompts[LU_LDAP_BASEDN].prompt = _("LDAP Base DN");
-	ctx->prompts[LU_LDAP_BASEDN].default_value =
-					lu_cfg_read_single(context,
-							   "ldap/basedn",
-							   "dc=example,dc=com");
+	ctx->prompts[LU_LDAP_BASEDN].default_value = lu_cfg_read_single(context, "ldap/basedn", "dc=example,dc=com");
 	ctx->prompts[LU_LDAP_BASEDN].visible = TRUE;
 
 	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP Bind DN");
 	ctx->prompts[LU_LDAP_BINDDN].visible = TRUE;
-	ctx->prompts[LU_LDAP_BINDDN].default_value =
-					lu_cfg_read_single(context,
-							   "ldap/binddn",
-							   "cn=manager,"
-							   "dc=example,dc=com");
+	ctx->prompts[LU_LDAP_BINDDN].default_value = lu_cfg_read_single(context, "ldap/binddn", "cn=manager," "dc=example,dc=com");
 
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
@@ -990,26 +878,18 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 
 	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP SASL User");
 	ctx->prompts[LU_LDAP_USER].visible = TRUE;
-	ctx->prompts[LU_LDAP_USER].default_value =
-					lu_cfg_read_single(context,
-							   "ldap/user",
-							   user);
+	ctx->prompts[LU_LDAP_USER].default_value = lu_cfg_read_single(context, "ldap/user", user);
 
 	ctx->prompts[LU_LDAP_AUTHUSER].prompt = _("LDAP SASL Authorization User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
-	ctx->prompts[LU_LDAP_AUTHUSER].default_value =
-					lu_cfg_read_single(context,
-							   "ldap/authuser",
-							   user);
+	ctx->prompts[LU_LDAP_AUTHUSER].default_value = lu_cfg_read_single(context, "ldap/authuser", user);
 
 	if(user) {
 		free(user);
 		user = NULL;
 	}
 
-	if(context->prompter(ctx->prompts,
-			     sizeof(ctx->prompts) / sizeof(ctx->prompts[0]),
-			     context->prompter_data, error) == FALSE) {
+	if(context->prompter(ctx->prompts, sizeof(ctx->prompts) / sizeof(ctx->prompts[0]), context->prompter_data, error) == FALSE) {
 		g_free(ctx);
 		return NULL;
 	}
@@ -1037,6 +917,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->user_del = lu_ldap_user_del;
 	ret->user_lock = lu_ldap_user_lock;
 	ret->user_unlock = lu_ldap_user_unlock;
+	ret->user_islocked = lu_ldap_user_islocked;
 	ret->user_setpass = lu_ldap_user_setpass;
 	ret->users_enumerate = lu_ldap_users_enumerate;
 
@@ -1048,6 +929,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->group_del = lu_ldap_group_del;
 	ret->group_lock = lu_ldap_group_lock;
 	ret->group_unlock = lu_ldap_group_unlock;
+	ret->group_islocked = lu_ldap_group_islocked;
 	ret->group_setpass = lu_ldap_group_setpass;
 	ret->groups_enumerate = lu_ldap_groups_enumerate;
 

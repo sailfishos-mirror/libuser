@@ -18,42 +18,17 @@
 #ifndef libuser_config_h
 #define libuser_config_h
 
-/** @file config.h */
-
 #include <sys/types.h>
 #include <glib.h>
 
 struct lu_context;
 
-/**
- * Read the value of a potentially multi-valued key in the configuration file.
- * @param context A valid library context.
- * @param key The path to the value in the configuration file.
- * @param default_value The value to return if the key is not found in the file.
- * @return A list of values on success.
- * @return The default value on failure.
- **/
 GList *lu_cfg_read(struct lu_context *context,
 		   const char *key, const char *default_value);
 
-/**
- * Read the value of a single-valued key in the configuration file.
- * @param context A valid library context.
- * @param key The path to the value in the configuration file.
- * @param default_value The value to return if the key is not found in the file.
- * @return A single value on success.
- * @return The default value on failure.
- */
 const char *lu_cfg_read_single(struct lu_context *context,
 			       const char *key, const char *default_value);
 
-/**
- * Read the list of keys in a section of the file.
- * @param context A valid library context.
- * @param parent_key A path beneath which keys should be searched for.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
 GList *lu_cfg_read_keys(struct lu_context *context, const char *parent_key);
 
 #endif

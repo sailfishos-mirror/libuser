@@ -75,11 +75,10 @@ quota_get_specials(const char *flag)
 /**
  * quota_get_specials_user:
  *
- * Queries the list of mounted filesystems and returns an array of strings
- * containing the names of the devices which can enforce user quotas.
+ * Queries the list of mounted filesystems and returns an array of strings containing the names of the devices which can
+ * enforce user quotas.
  *
- * Returns: a list of values which should be freed by calling
- * quota_free_specials().
+ * Returns: a list of values which should be freed by calling quota_free_specials().
  */
 char **
 quota_get_specials_user()
@@ -90,11 +89,10 @@ quota_get_specials_user()
 /**
  * quota_get_specials_group:
  *
- * Queries the list of mounted filesystems and returns an array of strings
- * containing the names of the devices which can enforce group quotas.
+ * Queries the list of mounted filesystems and returns an array of strings containing the names of the devices which can
+ * enforce group quotas.
  *
- * Returns: a list of values which should be freed by calling
- * quota_free_specials().
+ * Returns: a list of values which should be freed by calling quota_free_specials().
  */
 char **
 quota_get_specials_group()
@@ -106,10 +104,10 @@ quota_get_specials_group()
  * quota_free_specials:
  * @specials: A list of specials which must be destroyed.
  *
- * This function frees an array of strings returned by a previous call to
- * quota_get_specials_user() or quota_get_specials_group().
+ * This function frees an array of strings returned by a previous call to quota_get_specials_user() or
+ * quota_get_specials_group().
  *
- * Returns: void
+ * Returns: nothing.
  */
 void
 quota_free_specials(char **specials)
@@ -229,7 +227,7 @@ quota_get(int type, qid_t id, const char *special,
 	int ret = 0;
 
 	memset(&dqblk, 0, sizeof(dqblk));
-	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, &dqblk);
+	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, (caddr_t) &dqblk);
 	if(ret == 0) {
 		if(inode_usage)
 			*inode_usage = dqblk.dqb_curinodes;
@@ -260,7 +258,7 @@ quota_set(int type, qid_t id, const char *special,
 	int ret = 0;
 
 	memset(&dqblk, 0, sizeof(dqblk));
-	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, &dqblk);
+	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, (caddr_t) &dqblk);
 	if(ret == 0) {
 		if(inode_soft != -1)
 			dqblk.dqb_isoftlimit = inode_soft;
@@ -274,7 +272,7 @@ quota_set(int type, qid_t id, const char *special,
 			dqblk.dqb_bhardlimit = block_hard;
 		if(block_grace != -1)
 			dqblk.dqb_btime = block_grace;
-		ret = quotactl(QCMD(Q_SETQUOTA, type), special, id, &dqblk);
+		ret = quotactl(QCMD(Q_SETQUOTA, type), special, id, (caddr_t) &dqblk);
 	}
 	return ret;
 }
@@ -286,13 +284,11 @@ quota_set(int type, qid_t id, const char *special,
  * @inode_soft: Will contain the user's inode quota.
  * @inode_hard: Will contain the user's inode limit.
  * @inode_usage: Will contain the user's current inode usage.
- * @inode_grace: Will contain the amount of time the user can use more than his
- * quota and still be able to use more inodes.
+ * @inode_grace: Will contain the amount of time the user can use more than his quota and still be able to use more inodes.
  * @block_soft: Will contain the user's block quota.
  * @block_hard: Will contain the user's block limit.
  * @block_usage: Will contain the user's current block usage.
- * @block_grace: Will contain the amount of time the user can use more than his
- * quota and still be able to use more blocks.
+ * @block_grace: Will contain the amount of time the user can use more than his quota and still be able to use more blocks.
  *
  * Queries quotas for the given user on a given filesystem.
  *
@@ -327,13 +323,11 @@ quota_set_user(uid_t uid, const char *special,
  * @inode_soft: Will contain the group's inode quota.
  * @inode_hard: Will contain the group's inode limit.
  * @inode_usage: Will contain the group's current inode usage.
- * @inode_grace: Will contain the amount of time the group can use more than his
- * quota and still be able to use more inodes.
+ * @inode_grace: Will contain the amount of time the group can use more than his quota and still be able to use more inodes.
  * @block_soft: Will contain the group's block quota.
  * @block_hard: Will contain the group's block limit.
  * @block_usage: Will contain the group's current block usage.
- * @block_grace: Will contain the amount of time the group can use more than his
- * quota and still be able to use more blocks.
+ * @block_grace: Will contain the amount of time the group can use more than his quota and still be able to use more blocks.
  *
  * Queries quotas for the given group on a given filesystem.
  *

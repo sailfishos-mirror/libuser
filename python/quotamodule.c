@@ -22,48 +22,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <libuser/quota.h>
-#include "Python.h"
-
-#define FIXME	fprintf(stderr, "Function %s not implemented.\n", \
-			__FUNCTION__); \
-		DEBUG_EXIT; \
-		return NULL;
-
-#undef  DEBUG_BINDING
-#ifdef  DEBUG
-#define DEBUG_BINDING
-#endif
-
-#ifdef DEBUG_BINDING
-#include <glib.h>
-static int indent = 0;
-static char *getindent()
-{
-	static char buf[LINE_MAX];
-	g_return_val_if_fail(indent < sizeof(buf), "");
-	memset(buf, 0, sizeof(buf));
-	memset(buf, ' ', indent);
-	return buf;
-}
-#define DEBUG_ENTRY {\
-	fprintf(stderr, "%sEntering `%s' at line %d.\n", \
-		getindent(), __FUNCTION__, __LINE__); \
-	indent++; \
-	}
-#define DEBUG_CALL {\
-      	fprintf(stderr, "%sIn `%s' at line %d.\n", \
-		getindent(), __FUNCTION__, __LINE__); \
-	}
-#define DEBUG_EXIT {\
-	indent--; \
-	fprintf(stderr, "%sLeaving `%s' at line %d.\n", \
-		getindent(), __FUNCTION__, __LINE__); \
-	}
-#else
-#define DEBUG_ENTRY
-#define DEBUG_CALL
-#define DEBUG_EXIT
-#endif
+#include <Python.h>
+#include "debug.h"
 
 void initquota(void);
 
@@ -133,7 +93,7 @@ quota_struct_copy(struct quota_struct *self, PyObject *args)
 }
 
 PyMethodDef quota_struct_methods[] = {
-	{"copy", quota_struct_copy, 0, NULL},
+	{"copy", (PyCFunction) quota_struct_copy, 0, NULL},
 	{NULL, NULL, 0, NULL},
 };
 
@@ -308,7 +268,7 @@ quota_struct_print(struct quota_struct *self, FILE *output, int flag)
 static PyTypeObject quota_object_type = {
 	PyObject_HEAD_INIT(&PyType_Type)
 	0,
-	"quota_struct",
+	"Quota",
 	sizeof(struct quota_struct),
 	0,
 

@@ -1,5 +1,7 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.13)
+AM_INIT_AUTOMAKE(libuser,0.14)
+
+CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
 AC_PROG_CC
 AC_ISC_POSIX
@@ -34,43 +36,69 @@ if test x$popt != xno ; then
 	AC_CHECK_LIB(popt,poptGetContext)
 fi
 
-krb5=/usr/kerberos
+MODULES="$MODULES ${PACKAGE}_files.so"
+MODULES="$MODULES ${PACKAGE}_shadow.so"
+
 AC_ARG_WITH(krb5,
-[  --without-krb5=DIR       Use Kerberos 5 headers and libraries under DIR],
+[  --with-krb5=DIR       Use Kerberos 5 headers and libraries under DIR],
 [
-if test x$withval != x -a x$withval != xyes ; then
-  krb5=$withval
+if test x$withval != x -a x$withval != xno ; then
+	krb5=$withval
+else
+	krb5=no
 fi
-])
+],krb5=no)
 if test x$krb5 != xno ; then
-	if test x$krb5 != x -a x$krb5 != x/usr ; then
-		KRB5_CFLAGS="$CFLAGS -I$krb5/include"
+	if test x$krb5 != xyes -a x$krb5 != x/usr ; then
+		CFLAGS="$CFLAGS -I$krb5/include"
 		CPPFLAGS="$CPPFLAGS -I$krb5/include"
-		KRB5_LIBS="$LIBS -L$krb5/lib"
+		LIBS="$LIBS -L$krb5/lib"
 	fi
-	AC_CHECK_HEADERS(profile.h)
-	AC_CHECK_LIB(k5crypto,krb5_des_string_to_key,KRB5_LIBS="-lk5crypto $KRB5_LIBS",,$KRB5_LIBS $LIBS)
-	AC_CHECK_LIB(krb5,profile_init,KRB5_LIBS="-lkrb5 $KRB5_LIBS",,$KRB5_LIBS $LIBS)
-	AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal,KRB5_LIBS="-lkadm5clnt $KRB5_LIBS",,$KRB5_LIBS $LIBS)
+	AC_CHECK_HEADERS(krb5.h)
+	AC_CHECK_FUNC(error_message,,
+		AC_CHECK_LIB(com_err,error_message))
+	AC_CHECK_FUNC(mit_des_key_sched,,
+		AC_CHECK_LIB(crypto,mit_des_key_sched,,
+			AC_CHECK_LIB(k5crypto,mit_des_key_sched)))
+	AC_CHECK_FUNC(krb5_init_context,,
+		AC_CHECK_LIB(krb5,krb5_init_context))
+	AC_CHECK_FUNC(kadm5_chpass_principal,,
+		AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal))
+	AC_CHECK_FUNC(kadm5_create_principal,
+		AC_CHECK_FUNC(kadm5_delete_principal,
+			AC_CHECK_FUNC(kadm5_modify_principal,
+				AC_CHECK_FUNC(kadm5_rename_principal,
+					MODULES="$MODULES ${PACKAGE}_krb5.so"))))
 fi
 
-ldap=/usr/ldap
 AC_ARG_WITH(ldap,
-[  --without-ldap=DIR       Use OpenLDAP 2.x headers and libraries under DIR],
+[  --with-ldap=DIR       Use OpenLDAP 2.x headers and libraries under DIR],
 [
-if test x$withval != x -a x$withval != xyes ; then
-  ldap=$withval
+if test x$withval != x -a x$withval != xno ; then
+	ldap=$withval
+else
+	ldap=no
 fi
-])
+],ldap=no)
 if test x$ldap != xno ; then
-	if test x$ldap != x -a x$ldap != x/usr ; then
-		LDAP_CFLAGS="$CFLAGS -I$ldap/include"
+	if test x$ldap != xyes -a x$ldap != x/usr ; then
+		CFLAGS="$CFLAGS -I$ldap/include"
 		CPPFLAGS="$CPPFLAGS -I$ldap/include"
-		LDAP_LIBS="$LIBS -L$ldap/lib"
+		LIBS="$LIBS -L$ldap/lib"
 	fi
 	AC_CHECK_HEADERS(ldap.h)
-	AC_CHECK_LIB(lber,ber_alloc,LDAP_LIBS="-llber $LDAP_LIBS",,$LDAP_LIBS $LIBS)
-	AC_CHECK_LIB(ldap,ldap_sasl_bind_s,LDAP_LIBS="-lldap $LDAP_LIBS",,$LDAP_LIBS $LIBS)
+	AC_CHECK_FUNC(ber_alloc,,
+		AC_CHECK_LIB(llber,ber_alloc))
+	AC_CHECK_FUNC(ldap_sasl_bind_s,,
+		AC_CHECK_LIB(ldap,ldap_sasl_bind_s))
+	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,
+		AC_CHECK_FUNC(ldap_set_option,
+			AC_CHECK_FUNC(ldap_start_tls_s,
+				AC_CHECK_FUNC(ldap_search_s,
+					AC_CHECK_FUNC(ldap_get_values,
+						AC_CHECK_FUNC(ldap_modify_ext_s,
+							AC_CHECK_FUNC(ldap_delete_ext_s,
+								MODULES="$MODULES ${PACKAGE}_ldap.so")))))))
 fi
 
 AC_HEADER_STDC
@@ -84,12 +112,7 @@ AC_TYPE_SIZE_T
 
 AC_CHECK_FUNCS(strstr strtol)
 
-AC_SUBST(KRB5_CFLAGS)
-AC_SUBST(KRB5_LIBS)
-AC_SUBST(LDAP_CFLAGS)
-AC_SUBST(LDAP_LIBS)
-AC_SUBST(NIS_CFLAGS)
-AC_SUBST(NIS_LIBS)
+AC_SUBST(MODULES)
 
 AM_CONFIG_HEADER(config.h)
 

@@ -29,7 +29,7 @@
 int main(int argc, char **argv)
 {
 	struct lu_context *lu;
-	gboolean success = FALSE, group = FALSE;
+	gboolean group = FALSE;
 	int c;
 	const char *module = NULL;
 	GList *entities, *l;

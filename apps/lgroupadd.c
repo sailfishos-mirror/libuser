@@ -38,7 +38,6 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GList *values;
 	int interactive = FALSE;
 	int system_account = FALSE;
 	int c;
