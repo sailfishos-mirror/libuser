@@ -835,9 +835,6 @@ msgstr "LDAP SASL-auktoriseringsanvändare"
 msgid "error initializing module"
 msgstr "fel vid initiering av modul"
 
-msgid "Error initializing module"
-msgstr "Fel vid initiering av modul"
-
 #: modules/sasldb.c:128
 #, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
@@ -923,6 +920,9 @@ msgstr "Hämtar standardattribut för användare:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopierar användarstruktur:\n"
+
+#~ msgid "Error initializing module"
+#~ msgstr "Fel vid initiering av modul"
 
 #~ msgid "Refusing to create account with uid 0.\n"
 #~ msgstr "Vägrar att skapa konto med uid 0.\n"
