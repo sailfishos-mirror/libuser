@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-12-20 01:12+0100\n"
+"PO-Revision-Date: 2005-01-09 04:33+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -988,11 +988,11 @@ msgstr "No s'ha trobat el registre.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Les sol·licituds s'han completat amb èxit.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Les sol·licituds han falla.\n"
 
 #: samples/testuser.c:78
 msgid "Default user object classes:\n"
