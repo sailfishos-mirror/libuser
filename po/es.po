@@ -1,13 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
+# Copyright (C) 2001 Free Software Foundation, Inc.
 # Núria Soriano <nsoriano@redhat.es>, 2001.
+# Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2001-07-30 12:50-0400\n"
-"PO-Revision-Date: 2001-07-26 11:05-0400\n"
-"Last-Translator: Núria Soriano <nsoriano@redhat.es>\n"
+"PO-Revision-Date: 2001-08-07 23:05+0100\n"
+"Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -30,17 +31,16 @@ msgstr "Error al eliminar %s: %s"
 
 #: apps/apputil.c:324
 msgid "Internal error.\n"
-msgstr ""
+msgstr "Error interno.\n"
 
 #: apps/apputil.c:332
-#, fuzzy
 msgid "Error initializing PAM.\n"
-msgstr "Error al inicializar lu.\n"
+msgstr "Error inicializando PAM.\n"
 
 #: apps/apputil.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Creación de la cuenta fallida: %s.\n"
+msgstr "Autentificación fallida para %s.\n"
 
 #: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 msgid "[OPTION...] user"
@@ -48,21 +48,21 @@ msgstr "[OPCIÓN...] usuario"
 
 #: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 msgid "No user name specified.\n"
-msgstr "No se ha especificado ningún nombre de usuario.\n"
+msgstr "No se ha especificado nombre de usuario.\n"
 
 #: apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 #: apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
 #: apps/lusermod.c:82
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "Error al inicializar lu.\n"
+msgstr "Error inicializando %s: %s.\n"
 
 #: apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 #: apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
 #: apps/lusermod.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s.\n"
-msgstr "Error al inicializar lu.\n"
+msgstr "Error inicializando %s.\n"
 
 #: apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
 #, c-format
@@ -109,7 +109,7 @@ msgstr "Último cambio:\t%s\n"
 #: apps/lchage.c:156
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Caducidad de la contraseña:\t%s\n"
+msgstr "Contraseña caducada:\t%s\n"
 
 #: apps/lchage.c:165
 #, c-format
@@ -119,7 +119,7 @@ msgstr "Contraseña inactiva:\t%s\n"
 #: apps/lchage.c:172
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Caducidad de la contraseña:\t%s\n"
+msgstr "Cuenta caducada:\t%s\n"
 
 #: apps/lchage.c:201
 #, c-format
@@ -200,12 +200,12 @@ msgstr "No existe un directorio principal para %s.\n"
 #: apps/luseradd.c:194
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "Error en la creación de %s.\n"
+msgstr "Error creando %s: %s.\n"
 
 #: apps/luserdel.c:87
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "No se ha podido eliminar el usuario %s.\n"
+msgstr "No se ha podido eliminar el usuario %s: %s.\n"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -215,17 +215,17 @@ msgstr "%s no tenía un número gid.\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "Group #%d does not exist.\n"
-msgstr "El grupo %s no existe.\n"
+msgstr "El grupo #%d no existe.\n"
 
 #: apps/luserdel.c:105
 #, c-format
 msgid "Group #%d did not have a group name.\n"
-msgstr "El grupo #%s no tenía un nombre de grupo.\n"
+msgstr "El grupo #%d no tenía un nombre de grupo.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "No se ha podido eliminar el grupo: %s.\n"
+msgstr "No se ha podido eliminar el grupo %s: %s.\n"
 
 #: apps/luserdel.c:122
 #, c-format
@@ -295,7 +295,7 @@ msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
 #: lib/userent.c:44
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
-msgstr "vacío de estructura lu_ent en %p:\n"
+msgstr "dump de estructura lu_ent en %p:\n"
 
 #: lib/userent.c:45
 #, c-format
@@ -366,26 +366,24 @@ msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 #: modules/files.c:776
-#, fuzzy, c-format
+#, c-format
 msgid "entity object has no `%s' attribute"
-msgstr "el objeto de entidad no tiene ningún atributo %s"
+msgstr "el objeto de entidad no tiene ningún atributo `%s'"
 
 #: modules/files.c:1676 modules/files.c:1732
-#, fuzzy
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 #: modules/files.c:1744
-#, fuzzy
 msgid "no shadow file present -- disabling"
-msgstr "Ningún archivo shadow presente -- deshabilitación."
+msgstr "Ningún archivo shadow presente -- deshabilitando."
 
 #: modules/krb5.c:104
-#, fuzzy, c-format
+#, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"error al conectarse al servidor kadm5 para el servicio %s en el entorno %s: %"
-"s"
+"error al conectarse al servidor kadm5 para el servicio `%s' en el entorno "
+"`%s': %s"
 
 #: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
 #: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
@@ -434,46 +432,41 @@ msgstr "Entorno de Kerberos"
 
 #: modules/krb5.c:667
 msgid "Kerberos Admin Principal"
-msgstr "Principal administrador de Kerberos"
+msgstr "Administrador principal de Kerberos"
 
 #: modules/krb5.c:682
 msgid "Kerberos Password for Admin Principal"
-msgstr "Contraseña Kerberos para el principal administrador"
+msgstr "Contraseña Kerberos para el administrador principal"
 
 #: modules/ldap.c:178
 msgid "error initializing ldap library"
 msgstr "error al inicializar la librería ldap"
 
 #: modules/ldap.c:196
-#, fuzzy, c-format
+#, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "no se ha podido establecer un protocolo para la versión 3"
+msgstr "no se ha podido establecer un protocolo LDAP para la versión %d"
 
 #: modules/ldap.c:202
-#, fuzzy
 msgid "could not negotiate TLS with LDAP server"
-msgstr "no se ha podido negociar TLS con el servidor"
+msgstr "no se ha podido negociar TLS con el servidor LDAP"
 
 #: modules/ldap.c:216
-#, fuzzy
 msgid "could not bind to LDAP server"
-msgstr "no se ha podido negociar TLS con el servidor"
+msgstr "no se ha podido vincular al servidor LDAP"
 
 #: modules/ldap.c:316 modules/ldap.c:566 modules/ldap.c:646 modules/ldap.c:709
 #: modules/ldap.c:796 modules/ldap.c:873
-#, fuzzy
 msgid "error mapping name to LDAP distinguished name"
-msgstr "error en la proyección del nombre para DN"
+msgstr "error en la proyección del nombre para el DN LDAP"
 
 #: modules/ldap.c:321
-#, fuzzy
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "error en la proyección del nombre para DN"
+msgstr "error en la proyección del nombre para el DN base LDAP"
 
 #: modules/ldap.c:365
-#, fuzzy
 msgid "error searching LDAP directory"
-msgstr "error en la búsqueda del directorio ldap"
+msgstr "error en la búsqueda del directorio LDAP"
 
 #: modules/ldap.c:554
 #, c-format
@@ -487,17 +480,17 @@ msgstr "el objeto de usuario ha sido creado sin `%s'"
 
 #: modules/ldap.c:572
 msgid "could not convert internal data to LDAPMods"
-msgstr "no se han podido convertir los datos internos a  LDAPMods"
+msgstr "no se han podido convertir los datos internos a LDAPMods"
 
 #: modules/ldap.c:585 modules/ldap.c:748
-#, fuzzy, c-format
+#, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "error al modificar la entrada del directorio: %s"
+msgstr "error al modificar la entrada del directorio LDAP: %s"
 
 #: modules/ldap.c:598
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr "error al renombrar la entrada del directorio: %s\n"
+msgstr "error al renombrar la entrada del directorio LDAP: %s\n"
 
 #: modules/ldap.c:640
 #, c-format
@@ -505,9 +498,9 @@ msgid "object had no %s attribute"
 msgstr "el objeto no tiene ningún atributo %s"
 
 #: modules/ldap.c:657
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "error al eliminar la entrada del directorio: %s.\n"
+msgstr "error al eliminar la entrada del directorio LDAP: %s.\n"
 
 #: modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
 #, c-format
@@ -516,22 +509,22 @@ msgstr "el objeto no tiene atributos %s"
 
 #: modules/ldap.c:808
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "Objeto no encontrado en el directorio LDAP"
 
 #: modules/ldap.c:825
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
-msgstr ""
+msgstr "Ningún atributo `%s' usando esquema `%s' encontrado"
 
 #: modules/ldap.c:832
-#, fuzzy, c-format
+#, c-format
 msgid "no `%s' attribute found"
-msgstr "la entidad no tiene atributos %s"
+msgstr "Atributo `%s' no encontrado"
 
 #: modules/ldap.c:928
-#, fuzzy, c-format
+#, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "Error en la lectura del directorio principal antiguo para %s: %s.\n"
+msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
 #: modules/ldap.c:1191
 msgid "LDAP Server Name"
@@ -539,7 +532,7 @@ msgstr "Nombre del servidor LDAP"
 
 #: modules/ldap.c:1196
 msgid "LDAP Base DN"
-msgstr "DN de base LDAP"
+msgstr "DN base LDAP"
 
 #: modules/ldap.c:1201
 msgid "LDAP Bind DN"
@@ -555,7 +548,7 @@ msgstr "Usuario SASL LDAP"
 
 #: modules/ldap.c:1217
 msgid "LDAP SASL Authorization User"
-msgstr "Usuario de autorización  SASL LDAP"
+msgstr "Usuario de autorización SASL LDAP"
 
 #: samples/lookup.c:60 samples/testuser.c:55
 msgid "Error initializing lu.\n"
@@ -583,7 +576,7 @@ msgstr "Búsqueda del usuario llamado %s.\n"
 
 #: samples/lookup.c:107
 msgid "Entry not found.\n"
-msgstr "No se ha encotrado la entrada.\n"
+msgstr "No se ha encontrado la entrada.\n"
 
 #: samples/testuser.c:59
 msgid "Default user object classes:\n"
@@ -608,7 +601,7 @@ msgstr "Copia de la estructura de usuario:\n"
 #~ msgstr "no ha podido proyectar el nombre a DN"
 
 #~ msgid "Feature not implemented: "
-#~ msgstr "No se ha implementado la característica:"
+#~ msgstr "No se ha implementado la característica: "
 
 #~ msgid "NOT creating home directory '%s'.\n"
 #~ msgstr "NO está creando el directorio de inicio '%s'.\n"
@@ -617,7 +610,8 @@ msgstr "Copia de la estructura de usuario:\n"
 #~ msgstr "NO traslada %s a %s.\n"
 
 #~ msgid "NOT removing %s.\n"
-#~ msgstr "NO elimina  %s.\n"
+#~ msgstr "NO elimina %s.\n"
 
 #~ msgid "Kerberos password for %s"
 #~ msgstr "Contraseña de Kerberos para %s"
+
