@@ -1821,7 +1821,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 {
 	GValueArray *name = NULL;
 	GValue *val;
-	char *filename = NULL, *key = NULL, *value, *namestring;
+	char *filename = NULL, *key = NULL, *value, *namestring = NULL;
 	const char *dir;
 	int fd = -1;
 	gpointer lock;
