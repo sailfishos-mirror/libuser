@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-15 21:28+0800\n"
+"PO-Revision-Date: 2004-07-23 15:48+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,42 +17,35 @@ msgstr ""
 
 #: apps/apputil.c:71
 #, c-format
-#, fuzzy
 msgid "Error reading `%s': %s"
-msgstr "Ralat s"
+msgstr "Ralat membaca `%s': %s"
 
 #: apps/apputil.c:79
 #, c-format
-#, fuzzy
 msgid "Error creating `%s': %s"
-msgstr "Ralat s"
+msgstr "Ralat mencipta `%s': %s"
 
 #: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
 #, c-format
-#, fuzzy
 msgid "Error removing `%s': %s"
-msgstr "Ralat s"
+msgstr "Ralat membuang `%s': %s"
 
 #: apps/apputil.c:421 apps/apputil.c:425
-#, fuzzy
 msgid "Failed to drop privileges.\n"
-msgstr "Gagal"
+msgstr "Gagal untuk mengurangkan kepentingan.\n"
 
 #: apps/apputil.c:434
-#, fuzzy
 msgid "Internal error.\n"
-msgstr "ralat"
+msgstr "Ralat dalaman.\n"
 
 #: apps/apputil.c:447
-#, fuzzy
 msgid "Error initializing PAM.\n"
-msgstr "Ralat"
+msgstr "Ralat memulakan PAM.\n"
 
 #: apps/apputil.c:455 apps/apputil.c:479
 #, c-format
-#, fuzzy
 msgid "Authentication failed for %s.\n"
-msgstr "Pengesahan for s"
+msgstr "Pengesahan gagal untuk %s.\n"
 
 #: apps/apputil.c:464
 #, c-format
@@ -145,7 +138,6 @@ msgid "Inactive:\t%d\n"
 msgstr ""
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
-#, fuzzy
 msgid "Never"
 msgstr "Tidak sekali"
 
@@ -216,7 +208,6 @@ msgid "Given Name"
 msgstr ""
 
 #: apps/lchfn.c:214
-#, fuzzy
 msgid "Office"
 msgstr "Pejabat"
 
@@ -241,8 +232,9 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "ralat"
 
 #: apps/lchfn.c:370
+#, fuzzy
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Finger"
 
 #: apps/lchfn.c:373
 #, c-format
@@ -904,8 +896,9 @@ msgid "user object was created with no `%s'"
 msgstr "pengguna tidak s"
 
 #: modules/ldap.c:1247
+#, fuzzy
 msgid "could not convert internal data to LDAPMods"
-msgstr ""
+msgstr "kepada"
 
 #: modules/ldap.c:1271 modules/ldap.c:1483
 #, c-format
