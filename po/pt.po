@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-11-15 09:57+0000\n"
+"PO-Revision-Date: 2005-03-07 09:50+0000\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,15 +26,15 @@ msgstr "Erro ao criar `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Erro ao criar grupo `%s': %s\n"
+msgstr "Erro ao mudar o dono de `%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Erro ao criar `%s': %s"
+msgstr "Erro ao escrever `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -704,9 +704,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "ficheiro de salvaguarda `%s' existe e não é um ficheiro normal"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "versões não compatíveis de biblioteca/módulo"
+msgstr "diferença no tamanho do ficheiro de salvaguarda"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
