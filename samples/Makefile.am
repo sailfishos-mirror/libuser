@@ -1,4 +1,4 @@
-noinst_PROGRAMS = enum field lookup prompt quotaq testuser
+noinst_PROGRAMS = enum field homedir lookup prompt quotaq testuser
 
 include $(top_srcdir)/Makefile.extra
 
@@ -11,6 +11,11 @@ field_SOURCES = \
 	field.c
 
 field_LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
+
+homedir_SOURCES = \
+	homedir.c
+
+homedir_LDADD = ../apps/apputil.o ../lib/libuser.la
 
 lookup_SOURCES = \
 	lookup.c

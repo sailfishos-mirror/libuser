@@ -20,8 +20,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
 #include <string.h>
+#include "../include/libuser/user_private.h"
 
 /* Cache a string.  We do this so that we only have to keep track of one
    pointer to it, and we have a well-defined time when it will be freed.

@@ -1,7 +1,7 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.15)
+AM_INIT_AUTOMAKE(libuser,0.16)
 
-CFLAGS="$CFLAGS -D_GNU_SOURCE"
+#CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
 AC_PROG_CC
 AC_ISC_POSIX
@@ -49,26 +49,39 @@ else
 fi
 ],krb5=no)
 if test x$krb5 != xno ; then
+	LIBSAVE="$LIBS"
 	if test x$krb5 != xyes -a x$krb5 != x/usr ; then
 		CFLAGS="$CFLAGS -I$krb5/include"
 		CPPFLAGS="$CPPFLAGS -I$krb5/include"
+		LDFLAGS="$LDFLAGS -L$krb5/lib"
 		LIBS="$LIBS -L$krb5/lib"
 	fi
 	AC_CHECK_HEADERS(krb5.h)
 	AC_CHECK_FUNC(error_message,,
-		AC_CHECK_LIB(com_err,error_message))
+		AC_CHECK_LIB(com_err,error_message,
+			     KRB5_LIBS="-lcom_err $KRB5_LIBS"
+			     LIBS="-lcom_err $LIBS",,$LDFLAGS $LIBS))
 	AC_CHECK_FUNC(mit_des_key_sched,,
-		AC_CHECK_LIB(crypto,mit_des_key_sched,,
-			AC_CHECK_LIB(k5crypto,mit_des_key_sched)))
+		AC_CHECK_LIB(crypto,mit_des_key_sched,
+			     KRB5_LIBS="-lcrypto $KRB5_LIBS"
+			     LIBS="-lcrypto $LIBS"
+			,AC_CHECK_LIB(k5crypto,mit_des_key_sched,
+				      KRB5_LIBS="-lk5crypto $KRB5_LIBS"
+				      LIBS="-lk5crypto $LIBS",,$LDFLAGS $LIBS)))
 	AC_CHECK_FUNC(krb5_init_context,,
-		AC_CHECK_LIB(krb5,krb5_init_context))
+		AC_CHECK_LIB(krb5,krb5_init_context,
+			     KRB5_LIBS="-lkrb5 $KRB5_LIBS"
+			     LIBS="-lkrb5 $LIBS",,$LDFLAGS $LIBS))
 	AC_CHECK_FUNC(kadm5_chpass_principal,,
-		AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal))
+		AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal,
+			     KRB5_LIBS="-lkadm5clnt $KRB5_LIBS"
+			     LIBS="-lkadm5clnt $LIBS",,$LDFLAGS $LIBS))
 	AC_CHECK_FUNC(kadm5_create_principal,
 		AC_CHECK_FUNC(kadm5_delete_principal,
 			AC_CHECK_FUNC(kadm5_modify_principal,
 				AC_CHECK_FUNC(kadm5_rename_principal,
 					MODULES="$MODULES ${PACKAGE}_krb5.so"))))
+	LIBS="$LIBSAVE"
 fi
 
 AC_ARG_WITH(ldap,
@@ -81,16 +94,21 @@ else
 fi
 ],ldap=no)
 if test x$ldap != xno ; then
+	LIBSAVE="$LIBS"
 	if test x$ldap != xyes -a x$ldap != x/usr ; then
 		CFLAGS="$CFLAGS -I$ldap/include"
 		CPPFLAGS="$CPPFLAGS -I$ldap/include"
-		LIBS="$LIBS -L$ldap/lib"
+		LDFLAGS="$LDFLAGS -L$ldap/lib"
 	fi
 	AC_CHECK_HEADERS(ldap.h)
 	AC_CHECK_FUNC(ber_alloc,,
-		AC_CHECK_LIB(llber,ber_alloc))
+		AC_CHECK_LIB(lber,ber_alloc,
+			     LDAP_LIBS="-llber $LDAP_LIBS"
+			     LIBS="-llber $LIBS",,$LDFLAGS $LIBS))
 	AC_CHECK_FUNC(ldap_sasl_bind_s,,
-		AC_CHECK_LIB(ldap,ldap_sasl_bind_s))
+		AC_CHECK_LIB(ldap,ldap_sasl_bind_s,
+			     LDAP_LIBS="-lldap $LDAP_LIBS"
+			     LIBS="-lldap $LIBS",,$LDFLAGS $LIBS))
 	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,
 		AC_CHECK_FUNC(ldap_set_option,
 			AC_CHECK_FUNC(ldap_start_tls_s,
@@ -99,6 +117,7 @@ if test x$ldap != xno ; then
 						AC_CHECK_FUNC(ldap_modify_ext_s,
 							AC_CHECK_FUNC(ldap_delete_ext_s,
 								MODULES="$MODULES ${PACKAGE}_ldap.so")))))))
+	LIBS="$LIBSAVE"
 fi
 
 AC_HEADER_STDC
@@ -113,6 +132,8 @@ AC_TYPE_SIZE_T
 AC_CHECK_FUNCS(strstr strtol)
 
 AC_SUBST(MODULES)
+AC_SUBST(KRB5_LIBS)
+AC_SUBST(LDAP_LIBS)
 
 AM_CONFIG_HEADER(config.h)
 

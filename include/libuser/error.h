@@ -55,6 +55,7 @@ enum lu_error_code {
 
 typedef struct lu_error {
 	enum lu_error_code code;
+	char **stack;
 	char *string;
 } lu_error_t;
 
@@ -63,7 +64,7 @@ do { \
 	struct lu_error **__err = (err_p_p); \
 	if ((__err != NULL) && (*__err != NULL)) { \
 		fprintf(stderr, \
-			"libuser fatal error: %s called with non-NULL *" \
+			"libuser fatal error: %s() called with non-NULL *" \
 			#err_p_p "\n", __FUNCTION__); \
 		abort(); \
 	} \

@@ -15,15 +15,21 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ident "$Id$"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <pwd.h>
 #include <grp.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <glib.h>
-#include <libuser/user.h>
-#include <libuser/user_private.h>
 #include <Python.h>
 #include "common.h"
+#include "../include/libuser/user.h"
+#include "../include/libuser/user_private.h"
+#include "../apps/apputil.h"
 
 static PyMethodDef libuser_admin_user_methods[];
 static PyMethodDef libuser_admin_group_methods[];
@@ -34,23 +40,38 @@ static PyTypeObject AdminType;
 static struct libuser_admin *libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs);
 
 static void
-libuser_admin_destroy(struct libuser_admin *self)
+libuser_admin_destroy(PyObject *self)
 {
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	int i;
 	DEBUG_ENTRY;
-	Py_DECREF((PyObject*)self->ctx->prompter_data);
-	lu_end(self->ctx);
+	if(me->ctx != NULL) {
+		lu_end(me->ctx);
+	}
+	for(i = 0; i < sizeof(me->prompt_data) / sizeof(me->prompt_data[0]); i++) {
+		if(me->prompt_data[i]) {
+			Py_DECREF(me->prompt_data[i]);
+		}
+		me->prompt_data[i] = NULL;
+	}
 	PyMem_DEL(self);
 	DEBUG_EXIT;
 }
 
 static PyObject *
-libuser_admin_getattr(struct libuser_admin *self, char *name)
+libuser_admin_getattr(PyObject *self, char *name)
 {
+	struct libuser_admin *me = (struct libuser_admin *)self;
 	DEBUG_ENTRY;
 	if(strcmp(name, "prompt") == 0) {
-		Py_INCREF((PyObject*)self->ctx->prompter_data);
+		Py_INCREF(me->prompt_data[0]);
 		DEBUG_EXIT;
-		return self->ctx->prompter_data;
+		return me->prompt_data[0];
+	}
+	if(strcmp(name, "prompt_args") == 0) {
+		Py_INCREF(me->prompt_data[1]);
+		DEBUG_EXIT;
+		return me->prompt_data[1];
 	}
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Searching for attribute `%s'\n", name);
@@ -60,30 +81,38 @@ libuser_admin_getattr(struct libuser_admin *self, char *name)
 }
 
 static int
-libuser_admin_setattr(struct libuser_admin *self, const char *attr,
-		      PyObject *args)
+libuser_admin_setattr(PyObject *self, const char *attr, PyObject *args)
 {
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
 	DEBUG_ENTRY;
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "%sSetting attribute `%s'\n", getindent(), attr);
 #endif
 	if(strcmp(attr, "prompt") == 0) {
-		if(!PyCFunction_Check(args)) {
-			PyErr_SetString(PyExc_TypeError,
-					"expecting callable function");
-			DEBUG_EXIT;
-			return -1;
+		if(PyCFunction_Check(args)) {
+			Py_DECREF(me->prompt_data[0]);
+			Py_DECREF(me->prompt_data[1]);
+			me->prompt_data[0] = args;
+			me->prompt_data[1] = Py_BuildValue("");
 		}
-		if(self->ctx->prompter_data != NULL) {
-			Py_DECREF((PyObject*)self->ctx->prompter_data);
+		if(PyTuple_Check(args)) {
+			Py_DECREF(me->prompt_data[0]);
+			Py_DECREF(me->prompt_data[1]);
+
+			me->prompt_data[0] = PyTuple_GetItem(args, 0);
+			Py_INCREF(me->prompt_data[0]);
+
+			me->prompt_data[1] = PyTuple_GetSlice(args, 1, PyTuple_Size(args));
+			Py_INCREF(me->prompt_data[1]);
 		}
-		Py_INCREF(args);
-#ifdef DEBUG_BINDING
-		fprintf(stderr, "Setting prompter to object at <%p>.\n", args);
-#endif
-		lu_set_prompter(self->ctx, libuser_admin_python_prompter, args);
 		DEBUG_EXIT;
 		return 0;
+	}
+	if(strcmp(attr, "prompt_args") == 0) {
+			Py_DECREF(me->prompt_data[1]);
+			me->prompt_data[1] = args;
+			Py_INCREF(me->prompt_data[1]);
 	}
 	PyErr_SetString(PyExc_AttributeError, "no such writable attribute");
 	DEBUG_EXIT;
@@ -91,18 +120,21 @@ libuser_admin_setattr(struct libuser_admin *self, const char *attr,
 }
 
 static PyObject *
-libuser_admin_lookup_user_name(struct libuser_admin *self, PyObject *args)
+libuser_admin_lookup_user_name(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"name", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "s", &arg)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(lu_user_lookup_name(self->ctx, arg, ent, &error)) {
+	if(lu_user_lookup_name(me->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -113,18 +145,21 @@ libuser_admin_lookup_user_name(struct libuser_admin *self, PyObject *args)
 }
 
 static PyObject *
-libuser_admin_lookup_user_id(struct libuser_admin *self, PyObject *args)
+libuser_admin_lookup_user_id(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	int arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"id", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "i", &arg)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(lu_user_lookup_id(self->ctx, arg, ent, &error)) {
+	if(lu_user_lookup_id(me->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -135,18 +170,21 @@ libuser_admin_lookup_user_id(struct libuser_admin *self, PyObject *args)
 }
 
 static PyObject *
-libuser_admin_lookup_group_name(struct libuser_admin *self, PyObject *args)
+libuser_admin_lookup_group_name(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"name", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "s", &arg)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(lu_group_lookup_name(self->ctx, arg, ent, &error)) {
+	if(lu_group_lookup_name(me->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -157,18 +195,21 @@ libuser_admin_lookup_group_name(struct libuser_admin *self, PyObject *args)
 }
 
 static PyObject *
-libuser_admin_lookup_group_id(struct libuser_admin *self, PyObject *args)
+libuser_admin_lookup_group_id(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	int arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"id", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "i", &arg)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(lu_group_lookup_id(self->ctx, arg, ent, &error)) {
+	if(lu_group_lookup_id(me->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -179,13 +220,16 @@ libuser_admin_lookup_group_id(struct libuser_admin *self, PyObject *args)
 }
 
 static PyObject *
-libuser_admin_init_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_init_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *arg;
 	int is_system = 0;
 	struct lu_ent *ent;
+	char *keywords[] = {"name", "id", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "s|i", &arg, &is_system)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i", keywords, &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -195,19 +239,22 @@ libuser_admin_init_user(struct libuser_admin *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_user_default(self->ctx, arg, is_system, ent);
+	lu_user_default(me->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
 
 static PyObject *
-libuser_admin_init_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_init_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *arg;
 	int is_system = 0;
 	struct lu_ent *ent;
+	char *keywords[] = {"name", "id", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "s|i", &arg, &is_system)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i", keywords, &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -217,24 +264,27 @@ libuser_admin_init_group(struct libuser_admin *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_group_default(self->ctx, arg, is_system, ent);
+	lu_group_default(me->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
 
 static PyObject *
-libuser_admin_generic(struct libuser_admin *self, PyObject *args,
+libuser_admin_generic(PyObject *self, PyObject *args, PyObject *kwargs,
 		      gboolean (*fn)(struct lu_context *, struct lu_ent *,
 			             struct lu_error **error))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"entity", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "O!", &EntityType, &ent)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords, &EntityType, &ent)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(fn(self->ctx, ent->ent, &error)) {
+	if(fn(me->ctx, ent->ent, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
@@ -246,17 +296,19 @@ libuser_admin_generic(struct libuser_admin *self, PyObject *args,
 }
 
 static PyObject *
-libuser_admin_wrap(struct libuser_admin *self, PyObject *args,
-		   gboolean (*fn)(struct lu_context *, struct lu_ent *,
-			          struct lu_error **error))
+libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
+		   gboolean (*fn)(struct lu_context *, struct lu_ent *, struct lu_error **error))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"entity", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "O!", &EntityType, &ent)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords, &EntityType, &ent)) {
 		DEBUG_EXIT;
 	}
-	if(fn(self->ctx, ent->ent, &error)) {
+	if(fn(me->ctx, ent->ent, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("%d", 1);
 	} else {
@@ -266,19 +318,21 @@ libuser_admin_wrap(struct libuser_admin *self, PyObject *args,
 }
 
 static PyObject *
-libuser_admin_setpass(struct libuser_admin *self, PyObject *args,
-		      gboolean (*fn)(struct lu_context *, struct lu_ent *,
-				     const char *, struct lu_error **))
+libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
+		      gboolean (*fn)(struct lu_context *, struct lu_ent *, const char *, struct lu_error **))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
 	const char *password;
+	char *keywords[] = {"entity", "password", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "O!z", &EntityType, &ent, &password)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!z", keywords, &EntityType, &ent, &password)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(fn(self->ctx, ent->ent, password, &error)) {
+	if(fn(me->ctx, ent->ent, password, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
@@ -290,117 +344,262 @@ libuser_admin_setpass(struct libuser_admin *self, PyObject *args,
 }
 
 static PyObject *
-libuser_admin_add_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_create_home(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_user_add);
+	struct libuser_entity *ent = NULL;
+	char *dir = "/var/tmp/libuser-newhome", *skeleton = "/etc/skel";
+	GList *values;
+	char *keywords[] = {"home", "skeleton", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	long uidNumber = 0, gidNumber = 0;
+	struct lu_error *error = NULL;
+	gboolean ret;
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|s", keywords, &EntityType, &ent, &skeleton)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
+	if((values == NULL) || (values->data == NULL)) {
+		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		return NULL;
+	}
+	dir = (char*) values->data;
+
+	values = lu_ent_get(ent->ent, LU_UIDNUMBER);
+	if((values == NULL) || (values->data == NULL)) {
+		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_UIDNUMBER "' attribute");
+		return NULL;
+	}
+	uidNumber = atol((char*)values->data);
+
+	values = lu_ent_get(ent->ent, LU_GIDNUMBER);
+	if((values == NULL) || (values->data == NULL)) {
+		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_GIDNUMBER "' attribute");
+		return NULL;
+	}
+	gidNumber = atol((char*)values->data);
+
+	if(lu_homedir_populate(skeleton, dir, uidNumber, gidNumber, 0700, &error)) {
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	} else {
+		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error creating home directory for user");
+		lu_error_free(&error);
+		DEBUG_EXIT;
+		return NULL;
+	}
 }
 
 static PyObject *
-libuser_admin_add_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_group_add);
+	struct libuser_entity *ent = NULL;
+	char *dir = "/var/tmp/libuser-newhome";
+	GList *values;
+	char *keywords[] = {"home", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	long uidNumber = 0, gidNumber = 0;
+	struct lu_error *error = NULL;
+	gboolean ret;
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords, &EntityType, &ent)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
+	if((values == NULL) || (values->data == NULL)) {
+		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		return NULL;
+	}
+
+	if(lu_homedir_remove(dir, &error)) {
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	} else {
+		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error removing home directory for user");
+		lu_error_free(&error);
+		DEBUG_EXIT;
+		return NULL;
+	}
 }
 
 static PyObject *
-libuser_admin_modify_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_user_modify);
+	struct libuser_entity *ent = NULL;
+	char *olddir = "/var/tmp/libuser-newhome", *newdir = "/etc/skel";
+	GList *values;
+	char *keywords[] = {"entity", "newhome", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+	long uidNumber = 0, gidNumber = 0;
+	struct lu_error *error = NULL;
+	gboolean ret;
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!s", keywords, &EntityType, &ent, &newdir)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
+	if((values == NULL) || (values->data == NULL)) {
+		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		return NULL;
+	}
+	olddir = (char*) values->data;
+
+	if(lu_homedir_move(olddir, newdir, &error)) {
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	} else {
+		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error moving home directory for user");
+		lu_error_free(&error);
+		DEBUG_EXIT;
+		return NULL;
+	}
 }
 
 static PyObject *
-libuser_admin_modify_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_group_modify);
+	PyObject *ret = NULL;
+	PyObject *mkhomedir = self;
+	char *keywords[] = {"entity", "mkhomedir", NULL};
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &ret, &mkhomedir)) {
+		return NULL;
+	}
+
+	ret = libuser_admin_generic(self, args, kwargs, lu_user_add);
+	if(ret != NULL) {
+		if((mkhomedir != self) && (PyObject_IsTrue(mkhomedir))) {
+			Py_DECREF(ret);
+			ret = libuser_admin_create_home(self, args, kwargs);
+		}
+	}
+
+	DEBUG_EXIT;
+
+	return ret;
 }
 
 static PyObject *
-libuser_admin_delete_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_add_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_user_delete);
+	return libuser_admin_generic(self, args, kwargs, lu_group_add);
 }
 
 static PyObject *
-libuser_admin_delete_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_modify_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_group_delete);
+	return libuser_admin_generic(self, args, kwargs, lu_user_modify);
 }
 
 static PyObject *
-libuser_admin_lock_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_modify_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_user_lock);
+	return libuser_admin_generic(self, args, kwargs, lu_group_modify);
 }
 
 static PyObject *
-libuser_admin_lock_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_delete_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_group_lock);
+	return libuser_admin_generic(self, args, kwargs, lu_user_delete);
 }
 
 static PyObject *
-libuser_admin_unlock_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_delete_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_user_unlock);
+	return libuser_admin_generic(self, args, kwargs, lu_group_delete);
 }
 
 static PyObject *
-libuser_admin_unlock_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_lock_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_generic(self, args, lu_group_unlock);
+	return libuser_admin_generic(self, args, kwargs, lu_user_lock);
 }
 
 static PyObject *
-libuser_admin_user_islocked(struct libuser_admin *self, PyObject *args)
+libuser_admin_lock_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_wrap(self, args, lu_user_islocked);
+	return libuser_admin_generic(self, args, kwargs, lu_group_lock);
 }
 
 static PyObject *
-libuser_admin_group_islocked(struct libuser_admin *self, PyObject *args)
+libuser_admin_unlock_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_wrap(self, args, lu_group_islocked);
+	return libuser_admin_generic(self, args, kwargs, lu_user_unlock);
 }
 
 static PyObject *
-libuser_admin_setpass_user(struct libuser_admin *self, PyObject *args)
+libuser_admin_unlock_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_setpass(self, args, lu_user_setpass);
+	return libuser_admin_generic(self, args, kwargs, lu_group_unlock);
 }
 
 static PyObject *
-libuser_admin_setpass_group(struct libuser_admin *self, PyObject *args)
+libuser_admin_user_islocked(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_setpass(self, args, lu_group_setpass);
+	return libuser_admin_wrap(self, args, kwargs, lu_user_islocked);
 }
 
 static PyObject *
-libuser_admin_enumerate_users(struct libuser_admin *self, PyObject *args)
+libuser_admin_group_islocked(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	DEBUG_CALL;
+	return libuser_admin_wrap(self, args, kwargs, lu_group_islocked);
+}
+
+static PyObject *
+libuser_admin_setpass_user(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	DEBUG_CALL;
+	return libuser_admin_setpass(self, args, kwargs, lu_user_setpass);
+}
+
+static PyObject *
+libuser_admin_setpass_group(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	DEBUG_CALL;
+	return libuser_admin_setpass(self, args, kwargs, lu_group_setpass);
+}
+
+static PyObject *
+libuser_admin_enumerate_users(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	GList *results;
 	char *module = NULL, *pattern = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"pattern", "module", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
 
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "|ss", keywords, &pattern, &module)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	results = lu_users_enumerate(self->ctx, pattern, module, &error);
+	results = lu_users_enumerate(me->ctx, pattern, module, &error);
 	ret = convert_glist_pystringlist(results);
 	g_list_free(results);
 	DEBUG_EXIT;
@@ -408,90 +607,94 @@ libuser_admin_enumerate_users(struct libuser_admin *self, PyObject *args)
 }
 
 static PyObject *
-libuser_admin_enumerate_groups(struct libuser_admin *self, PyObject *args)
+libuser_admin_enumerate_groups(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	GList *results;
 	char *module = NULL, *pattern = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
+	char *keywords[] = {"pattern", "module", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
 
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "|ss", keywords, &pattern, &module)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	results = lu_groups_enumerate(self->ctx, pattern, module, &error);
+	results = lu_groups_enumerate(me->ctx, pattern, module, &error);
 	ret = convert_glist_pystringlist(results);
 	g_list_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
 
-static PyMethodDef
-libuser_admin_methods[] = {
-	{"lookupUserByName", (PyCFunction)libuser_admin_lookup_user_name,
-	 METH_VARARGS, "search for a user with the given name"},
-	{"lookupUserById", (PyCFunction)libuser_admin_lookup_user_id,
-	 METH_VARARGS, "search for a user with the given uid"},
-	{"lookupGroupByName", (PyCFunction)libuser_admin_lookup_group_name,
-	 METH_VARARGS, "search for a group with the given name"},
-	{"lookupGroupById", (PyCFunction)libuser_admin_lookup_group_id,
-	 METH_VARARGS, "search for a group with the given gid"},
+static struct PyMethodDef libuser_admin_methods[] = {
+	{"lookupUserByName", (PyCFunction)libuser_admin_lookup_user_name, METH_VARARGS | METH_KEYWORDS,
+	 "search for a user with the given name"},
+	{"lookupUserById", (PyCFunction)libuser_admin_lookup_user_id, METH_VARARGS | METH_KEYWORDS,
+	 "search for a user with the given uid"},
+	{"lookupGroupByName", (PyCFunction)libuser_admin_lookup_group_name, METH_VARARGS | METH_KEYWORDS,
+	 "search for a group with the given name"},
+	{"lookupGroupById", (PyCFunction)libuser_admin_lookup_group_id, METH_VARARGS | METH_KEYWORDS,
+	 "search for a group with the given gid"},
 
-	{"initUser", (PyCFunction)libuser_admin_init_user, METH_VARARGS,
+	{"initUser", (PyCFunction)libuser_admin_init_user, METH_VARARGS | METH_KEYWORDS,
 	 "create an object with defaults set for creating a new user"},
-	{"initGroup", (PyCFunction)libuser_admin_init_group, METH_VARARGS,
+	{"initGroup", (PyCFunction)libuser_admin_init_group, METH_VARARGS | METH_KEYWORDS,
 	 "create an object with defaults set for creating a new group"},
 
-	{"addUser", (PyCFunction)libuser_admin_add_user, METH_VARARGS,
+	{"addUser", (PyCFunction)libuser_admin_add_user, METH_VARARGS | METH_KEYWORDS,
 	 "add the user object to the system user database"},
-	{"addGroup", (PyCFunction)libuser_admin_add_group, METH_VARARGS,
+	{"addGroup", (PyCFunction)libuser_admin_add_group, METH_VARARGS | METH_KEYWORDS,
 	 "add the group object to the system group database"},
 
-	{"modifyUser", (PyCFunction)libuser_admin_modify_user, METH_VARARGS,
+	{"modifyUser", (PyCFunction)libuser_admin_modify_user, METH_VARARGS | METH_KEYWORDS,
 	 "modify an entry in the system user database to match the object"},
-	{"modifyGroup", (PyCFunction)libuser_admin_modify_group, METH_VARARGS,
+	{"modifyGroup", (PyCFunction)libuser_admin_modify_group, METH_VARARGS | METH_KEYWORDS,
 	 "modify an entry in the system group database to match the object"},
 
-	{"deleteUser", (PyCFunction)libuser_admin_delete_user, METH_VARARGS,
-	 "remove the entry from the system user database which matches the "
-	 "object"},
-	{"deleteGroup", (PyCFunction)libuser_admin_delete_group, METH_VARARGS,
-	 "remove the entry from the system group database which matches the "
-	 "object"},
+	{"deleteUser", (PyCFunction)libuser_admin_delete_user, METH_VARARGS | METH_KEYWORDS,
+	 "remove the entry from the system user database which matches the object"},
+	{"deleteGroup", (PyCFunction)libuser_admin_delete_group, METH_VARARGS | METH_KEYWORDS,
+	 "remove the entry from the system group database which matches the object"},
 
-	{"lockUser", (PyCFunction)libuser_admin_lock_user, METH_VARARGS,
+	{"lockUser", (PyCFunction)libuser_admin_lock_user, METH_VARARGS | METH_KEYWORDS,
 	 "lock the user account associated with the object"},
-	{"lockGroup", (PyCFunction)libuser_admin_lock_group, METH_VARARGS,
+	{"lockGroup", (PyCFunction)libuser_admin_lock_group, METH_VARARGS | METH_KEYWORDS,
 	 "lock the group account associated with the object"},
-	{"unlockUser", (PyCFunction)libuser_admin_unlock_user, METH_VARARGS,
+	{"unlockUser", (PyCFunction)libuser_admin_unlock_user, METH_VARARGS | METH_KEYWORDS,
 	 "unlock the user account associated with the object"},
-	{"unlockGroup", (PyCFunction)libuser_admin_unlock_group, METH_VARARGS,
+	{"unlockGroup", (PyCFunction)libuser_admin_unlock_group, METH_VARARGS | METH_KEYWORDS,
 	 "unlock the group account associated with the object"},
-	{"userIsLocked", (PyCFunction)libuser_admin_user_islocked, METH_VARARGS,
+	{"userIsLocked", (PyCFunction)libuser_admin_user_islocked, METH_VARARGS | METH_KEYWORDS,
 	 "check if the user account associated with the object is locked"},
-	{"groupIsLocked", (PyCFunction)libuser_admin_group_islocked, METH_VARARGS,
+	{"groupIsLocked", (PyCFunction)libuser_admin_group_islocked, METH_VARARGS | METH_KEYWORDS,
 	 "check if the group account associated with the object is locked"},
 
-	{"setpassUser", (PyCFunction)libuser_admin_setpass_user, METH_VARARGS,
+	{"setpassUser", (PyCFunction)libuser_admin_setpass_user, METH_VARARGS | METH_KEYWORDS,
 	 "set the password for the user account associated with the object"},
-	{"setpassGroup", (PyCFunction)libuser_admin_setpass_group, METH_VARARGS,
+	{"setpassGroup", (PyCFunction)libuser_admin_setpass_group, METH_VARARGS | METH_KEYWORDS,
 	 "set the password for the group account associated with the object"},
 
-	{"enumerateUsers", (PyCFunction)libuser_admin_enumerate_users,
-	 METH_VARARGS,
+	{"enumerateUsers", (PyCFunction)libuser_admin_enumerate_users, METH_VARARGS | METH_KEYWORDS,
 	 "get a list of users matching a pattern, in listed databases"},
-	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups,
-	 METH_VARARGS,
+	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups, METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups matching a pattern, in listed databases"},
 
-	{"promptConsole", (PyCFunction)libuser_admin_prompt_console,
-	 METH_VARARGS},
-	{"promptConsoleQuiet", (PyCFunction)libuser_admin_prompt_console_quiet,
-	 METH_VARARGS},
+	{"promptConsole", (PyCFunction)libuser_admin_prompt_console, METH_VARARGS | METH_KEYWORDS,
+	 "prompt the user for information using the console, and confirming defaults"},
+	{"promptConsoleQuiet", (PyCFunction)libuser_admin_prompt_console_quiet, METH_VARARGS | METH_KEYWORDS,
+	 "prompt the user for information using the console, silently accepting defaults"},
 
-	{"getUserShells", (PyCFunction)libuser_get_user_shells, 0,
-	 "return a list of valid shells"},
+	{"createHome", (PyCFunction)libuser_admin_create_home, METH_VARARGS | METH_KEYWORDS,
+	 "create a home directory for a user"},
+	{"moveHome", (PyCFunction)libuser_admin_move_home, METH_VARARGS | METH_KEYWORDS,
+	 "move a user's home directory"},
+	{"removeHome", (PyCFunction)libuser_admin_remove_home, METH_VARARGS | METH_KEYWORDS,
+	 "remove a user's home directory"},
+
+	{"getUserShells", (PyCFunction)libuser_get_user_shells, 0, "return a list of valid shells"},
+
 	{NULL, NULL, 0},
 };
 
@@ -520,8 +723,9 @@ static PyTypeObject AdminType = {
 static struct libuser_admin *
 libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	char *name = getlogin(), *info = NULL, *auth = NULL;
-	char *keywords[] = {"name", "type", "info", "auth", NULL};
+	char *name = getlogin(), *info = NULL, *auth = NULL, *p, *q;
+	PyObject *prompt = NULL, *prompt_data = NULL;
+	char *keywords[] = {"name", "type", "info", "auth", "prompt", "prompt_data", NULL};
 	int type = lu_user;
 	lu_context_t *context;
 	struct lu_error *error = NULL;
@@ -534,38 +738,47 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 		return NULL;
 	}
 	self = (PyObject*) ret;
+	p = ((char*)ret) + sizeof(PyObject);
+	q = ((char*)ret) + sizeof(struct libuser_admin);
+	memset(p, '\0', q - p);
 
-	ret->prompter = Py_FindMethod(libuser_admin_methods, self,
-				      "promptConsole");
+	ret->ctx = NULL;
 
-	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "|siss", keywords,
-					&name, &type, &info, &auth)) {
-		Py_DECREF(ret->prompter);
-		Py_DECREF(self);
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "|sissOO", keywords, &name, &type, &info, &auth, &prompt, &prompt_data)) {
+		Py_DECREF(ret);
 		return NULL;
 	}
 
 	if((type != lu_user) && (type != lu_group)) {
 		PyErr_SetString(PyExc_ValueError, "invalid type");
-		Py_DECREF(ret->prompter);
-		Py_DECREF(self);
+		Py_DECREF(ret);
 		return NULL;
 	}
 
+	if(PyCallable_Check(prompt)) {
+		ret->prompt_data[0] = prompt;
+		Py_INCREF(ret->prompt_data[0]);
+	} else {
+		ret->prompt_data[0] = Py_FindMethod(libuser_admin_methods, self, "promptConsole");
+	}
+
+	if(prompt_data != NULL) {
+		ret->prompt_data[1] = prompt_data;
+		Py_INCREF(ret->prompt_data[1]);
+	} else {
+		ret->prompt_data[1] = Py_BuildValue("");
+	}
+
 #ifdef DEBUG_BINDING
-	fprintf(stderr, "%sprompter at <%p>, self = <%p>, "
-		"info = <%p>, auth = <%p>\n",
-		getindent(), ret->prompter, self, info, auth);
+	fprintf(stderr, "%sprompt at <%p>, self = <%p>, info = <%p>, auth = <%p>\n",
+		getindent(), prompt, ret, info, auth);
 #endif
-	context = lu_start(name, type, info, auth,
-			   libuser_admin_python_prompter, ret->prompter,
-			   &error);
+	context = lu_start(name, type, info, auth, libuser_admin_python_prompter, ret->prompt_data, &error);
 
 	if(context == NULL) {
 		PyErr_SetString(PyExc_SystemError, error->string);
 		lu_error_free(&error);
-		Py_DECREF(ret->prompter);
-		Py_DECREF(self);
+		Py_DECREF(ret);
 		return NULL;
 	}
 

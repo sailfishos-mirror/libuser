@@ -20,15 +20,15 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
-#include <limits.h>
+#define _(String) gettext(String)
 #include <libintl.h>
-#include <string.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <termios.h>
 #include <unistd.h>
-#define _(String) gettext(String)
+#include "../include/libuser/user.h"
 
 /**
  * lu_prompt_console:

@@ -20,12 +20,11 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
-#include <libuser/user_private.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "../include/libuser/user_private.h"
 
 int main(int argc, char **argv)
 {

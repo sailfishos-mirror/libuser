@@ -20,11 +20,11 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
 #include <grp.h>
 #include <pwd.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+#include "../include/libuser/user_private.h"
 
 #define DEFAULT_ID 100
 
@@ -427,6 +427,23 @@ get_hash_keys(gpointer key, gpointer value, gpointer data)
 {
 	GList **list = data;
 	*list = g_list_append(*list, key);
+}
+
+/**
+ * lu_ent_has:
+ * @ent: An entity structure which will be queried.
+ * @attribute: The attribute which we are checking the entity for values for.
+ *
+ * This function returns a boolean indicating whether or not the entity has values for a particular attribute.
+ *
+ * Returns: TRUE if there is a value, FALSE if there is not.
+ **/
+gboolean
+lu_ent_has(struct lu_ent *ent, const char *attribute)
+{
+	gpointer orig_key = NULL, value = NULL;
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
+	return g_hash_table_lookup_extended(ent->attributes, attribute, &orig_key, &value);
 }
 
 /**

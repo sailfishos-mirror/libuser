@@ -1,4 +1,4 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/* Copyright (C) 2001 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -22,54 +22,47 @@
 #endif
 #include <libintl.h>
 #include <locale.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../include/libuser/user.h"
+#include "../apps/apputil.h"
 
 int main(int argc, char **argv)
 {
-	struct lu_context *lu;
-	gboolean group = FALSE;
-	int c;
-	const char *module = NULL;
-	GList *entities, *l;
+	struct lu_error *error = NULL;
+	int add = 0, mod = 0, rem = 0, c = -1;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	while((c = getopt(argc, argv, "gm:")) != -1) {
+	while((c = getopt(argc, argv, "arm")) != -1) {
 		switch(c) {
-			case 'g': group = TRUE;
-				  break;
-			case 'm': module = optarg;
-				  break;
+			case 'a':
+				add = 1;
+				break;
+			case 'r':
+				rem = 1;
+				break;
+			case 'm':
+				mod = 1;
 			default:
-				  break;
+				break;
 		}
 	}
 
-	lu = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, NULL);
-
-	if(lu == NULL) {
-		g_print(gettext("Error initializing lu.\n"));
+	if(add && !lu_homedir_populate("/etc/skel", argv[optind], 500, 500, 0700, &error)) {
+		fprintf(stderr, "populate_homedir(%s) failed: %s\n", argv[optind], error->string);
 		return 1;
 	}
-
-	if(group == FALSE) {
-		entities = lu_users_enumerate(lu, argv[optind], module, NULL);
-	} else {
-		entities = lu_groups_enumerate(lu, argv[optind], module, NULL);
+	if(mod && !lu_homedir_move(argv[optind], argv[optind + 1], &error)) {
+		fprintf(stderr, "move_homedir(%s, %s) failed: %s\n", argv[optind], argv[optind + 1], error->string);
+		return 1;
 	}
-
-	for(l = entities; l != NULL; l = g_list_next(l)) {
-		g_print(" Found %s named `%s'.\n",
-			group ? "group" : "user",
-			(char*) l->data);
+	if(rem && !lu_homedir_remove(argv[optind], &error)) {
+		fprintf(stderr, "remove_homedir(%s) failed: %s\n", argv[optind], error->string);
+		return 1;
 	}
-	g_list_free(entities);
-
-	lu_end(lu);
 
 	return 0;
 }

@@ -17,7 +17,6 @@
 
 #ident "$Id$"
 
-#include <libuser/user.h>
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -30,6 +29,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include "../include/libuser/user.h"
 #include "apputil.h"
 
 static gint

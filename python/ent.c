@@ -15,6 +15,11 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ident "$Id$"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <pwd.h>
 #include <grp.h>
 #include <stdlib.h>
@@ -151,13 +156,26 @@ static PyObject *
 libuser_entity_get(struct libuser_entity *self, PyObject *args)
 {
 	char *arg;
+	PyObject *default_value = NULL;
+
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTuple(args, "s", &arg)) {
+	if(!PyArg_ParseTuple(args, "s|O", &arg, &default_value)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	DEBUG_EXIT;
-	return convert_glist_pystringlist(lu_ent_get(self->ent, arg));
+	if(lu_ent_has(self->ent, arg)) {
+		DEBUG_EXIT;
+		return convert_glist_pystringlist(lu_ent_get(self->ent, arg));
+	} else {
+		if(default_value != NULL) {
+			Py_INCREF(default_value);
+			DEBUG_EXIT;
+			return default_value;
+		} else {
+			DEBUG_EXIT;
+			return Py_BuildValue("");
+		}
+	}
 }
 
 static PyObject *
@@ -246,18 +264,42 @@ static PyObject*
 libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 {
 	char *attr;
+	PyObject *default_value = NULL;
+
 	DEBUG_ENTRY;
+
 	if(!PyString_Check(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(!(attr = PyString_AsString(item))) {
+	attr = PyString_AsString(item);
+
+	if(!lu_ent_has(self->ent, attr)) {
+		PyErr_SetString(PyExc_KeyError, "no such attribute defined for this entity");
 		DEBUG_EXIT;
 		return NULL;
 	}
+
 	DEBUG_EXIT;
 	return convert_glist_pystringlist(lu_ent_get(self->ent, attr));
+}
+
+static PyObject*
+libuser_entity_has_key(struct libuser_entity *self, PyObject *item)
+{
+	char *attr;
+
+	DEBUG_ENTRY;
+
+	if(!PyString_Check(item)) {
+		PyErr_SetString(PyExc_TypeError, "expected a string");
+		DEBUG_EXIT;
+		return NULL;
+	}
+	attr = PyString_AsString(item);
+
+	return Py_BuildValue("i", lu_ent_has(self->ent, attr) ? 1 : 0);
 }
 
 static int
@@ -325,6 +367,8 @@ static PyMethodDef
 libuser_entity_methods[] = {
 	{"getattrlist", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS,
 	 "get a list of the attributes this entity has"},
+	{"has_key", (PyCFunction)libuser_entity_has_key, METH_VARARGS,
+	 "check if the entity has a given attribute"},
 	{"get", (PyCFunction)libuser_entity_get, METH_VARARGS,
 	 "get a list of the values for a given attribute"},
 	{"set", (PyCFunction)libuser_entity_set, METH_VARARGS,

@@ -20,13 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "../include/libuser/user_private.h"
 
 struct config_config {
 	struct lu_string_cache *cache;

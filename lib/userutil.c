@@ -20,7 +20,6 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
 #include <sys/stat.h>
 #include <crypt.h>
 #include <ctype.h>
@@ -32,6 +31,7 @@
 #include <string.h>
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
+#include "../include/libuser/user_private.h"
 
 gint
 lu_str_case_equal(gconstpointer v1, gconstpointer v2)

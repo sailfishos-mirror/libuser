@@ -17,6 +17,9 @@
 
 #ident "$Id$"
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -28,7 +31,7 @@
 #include <krb5.h>
 #include <krb5/kdb.h>
 #include <kadm5/admin.h>
-#include <libuser/user_private.h>
+#include "../include/libuser/user_private.h"
 
 #define LU_KRB5_REALM 0
 #define LU_KRB5_PRINC 1

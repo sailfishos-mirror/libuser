@@ -17,7 +17,9 @@
 
 #ident "$Id$"
 
-#include <libuser/user_private.h>
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -30,6 +32,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "../include/libuser/user_private.h"
 
 #undef  DEBUG
 

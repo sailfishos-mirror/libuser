@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <libuser/quota.h>
+#include "../include/libuser/quota.h"
 
 static int
 do_quota_stuff(const char *ent, const char *special,

@@ -65,23 +65,25 @@ libuser:
 						A true/false value indicating whether this is a system account or not (optional).
 					Returns: A libuser.Entity object containing information about the user or group.
 
-				- addUser:
-				- addGroup: Add a new user or group to the system:
+				- addUser: Add a new user to the system:
 					Arguments:
 						A libuser.Entity object with the new user or group's information (required).
-					Returns: a true/false value indicating success or failure.
+						A true/false object indicating whether or not the home directory for the user
+						should be created (optional, defaults to true).
+
+				- addGroup: Add a new group to the system:
+					Arguments:
+						A libuser.Entity object with the new user or group's information (required).
 
 				- modifyUser:
 				- modifyGroup: Modify information about a user or group on the system.
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).
-					Returns: a true/false value indicating success or failure.
 
 				- deleteUser:
 				- deleteGroup: Remove a user or group from the system.
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).
-					Returns: a true/false value indicating success or failure.
 
 				- lockUser:
 				- lockGroup:
@@ -89,18 +91,15 @@ libuser:
 				- unlockGroup: Lock or unlock a user or group account.
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).
-					Returns: a true/false value indicating success or failure.
 
 				- setpassUser:
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).
 						A string containing the new password in unencrypted form (required).
-					Returns: a true/false value indicating success or failure.
 				- setpassGroup:
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).
 						A string containing the new password in unencrypted form (required).
-					Returns: a true/false value indicating success or failure.
 
 				- enumerateUsers:
 				- enumerateGroups: Get a list of users or groups known to the library and its modules.
@@ -124,12 +123,17 @@ libuser:
 				- prompt(function): A method which can be used to process lists of libuser.Prompt objects.
 						    Can be set to the object's promptConsole or promptConsoleQuiet methods, or a
 						    user-supplied function.
+				- prompt_args: Additional arguments which should be passed to prompt().
 		- Entity - An entity.
 			Methods:
 				- getattrlist: Return a list of attributes this entity posesses.
 					Arguments:
 						None.
 					Returns: a list of attribute names.
+				- has_key: Check if this entity possesses a given attribute.
+					Arguments:
+						An attribute name (required).
+					Returns: a true/false value.
 				- get: Return a list of the values for one attribute this entity possesses.
 					Arguments:
 						An attribute name (required).

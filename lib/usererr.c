@@ -15,11 +15,18 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <libuser/user.h>
+#ident "$Id$"
+
+#define _(String) gettext(String)
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include <execinfo.h>
 #include <libintl.h>
 #include <stdarg.h>
 #include <string.h>
-#define _(String) gettext(String)
+#include "../include/libuser/user.h"
 
 static const char *
 lu_strerror(enum lu_error_code code)
@@ -62,12 +69,17 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 {
 	struct lu_error *ret;
 	va_list args;
-	if(error) {
+	void *stack[128];
+	int depth;
+
+	if(error != NULL) {
 		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
 		ret->string = desc ?  g_strdup_printf(desc, args) : g_strdup(lu_strerror(code));
+		depth = backtrace(stack, sizeof(stack) / sizeof(stack[0]));
+		ret->stack = backtrace_symbols(stack, depth);
 		va_end(args);
 		*error = ret;
 	}

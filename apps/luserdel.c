@@ -20,13 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include "../include/libuser/user.h"
 #include "apputil.h"
 
 int
@@ -35,18 +35,18 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
+	GList *values = NULL;
 	const char *user = NULL;
 	int interactive = FALSE;
+	int remove_home = 0;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
-#ifdef FIXMEFIXMEFIXME
-		{"removehome", 'r', POPT_ARG_NONE, NULL, 0,
+		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0,
 		 "remove the user's home directory", NULL},
-#endif
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
 	};
 
@@ -65,9 +65,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, &error);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
@@ -78,26 +76,22 @@ main(int argc, const char **argv)
 	}
 
 	if(lu_user_delete(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("User %s could not be deleted.\n"), user);
+		fprintf(stderr, _("User %s could not be deleted: %s.\n"), user, error->string);
 		return 3;
 	}
 
-#ifdef FIXMEFIXMEFIXME
 	if(remove_home) {
 		values = lu_ent_get(ent, "homeDirectory");
 		if(!(values && values->data)) {
-			fprintf(stderr, _("%s did not have a home "
-					  "directory.\n"), user);
+			fprintf(stderr, _("%s did not have a home directory.\n"), user);
 			return 4;
 		} else {
-			if(remove_homedir(values->data) == FALSE) {
-				fprintf(stderr, _("Error removing %s.\n"),
-					(char*)values->data);
+			if(lu_homedir_remove(values->data, &error) == FALSE) {
+				fprintf(stderr, _("Error removing %s: %s.\n"), (char*)values->data, error->string);
 				return 5;
 			}
 		}
 	}
-#endif
 
 	lu_ent_free(ent);
 

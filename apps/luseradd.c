@@ -20,14 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
-#include <libuser/user_private.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include "../include/libuser/user_private.h"
 #include "apputil.h"
 
 int
@@ -57,20 +56,16 @@ main(int argc, const char **argv)
 		 "GECOS information for new user", "STRING"},
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
 		 "home directory for new user", "STRING"},
-#ifdef FIXMEFIXMEFIXME
 		{"skeleton", 'k', POPT_ARG_STRING, &skeleton, 0,
 		 "directory with files for the new user", "STRING"},
-#endif
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "shell for new user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
 		 "uid for new user", "NUM"},
 		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
 		 "gid for new user", "NUM"},
-#ifdef FIXMEFIXMEFIXME
 		{"nocreatehome", 'M', POPT_ARG_NONE, &dont_create_home, 0,
 		 "don't create home directory for user"},
-#endif
 		{"nocreategroup", 'n', POPT_ARG_NONE, &dont_create_group, 0,
 		 "don't create group with same name as user"},
 		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,
@@ -96,9 +91,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, &error);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(skeleton == NULL) {
@@ -121,9 +114,12 @@ main(int argc, const char **argv)
 			g_free(tmp);
 		}
 		if(lu_group_add(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Error creating group for %s.\n"),
-				name);
+			fprintf(stderr, _("Error creating group for %s: %s.\n"), name, error->string);
 			return 2;
+		}
+		values = lu_ent_get(ent, LU_GIDNUMBER);
+		if(values && values->data) {
+			gidNumber = atol(values->data);
 		}
 		lu_ent_free(ent);
 	}
@@ -149,11 +145,9 @@ main(int argc, const char **argv)
 	if(userPassword) {
 		values = lu_ent_get(ent, LU_USERPASSWORD);
 		if(values && values->data) {
-			cryptedUserPassword = lu_make_crypted(userPassword,
-							   values->data);
+			cryptedUserPassword = lu_make_crypted(userPassword, values->data);
 		} else {
-			cryptedUserPassword = lu_make_crypted(userPassword,
-							      "$1$");
+			cryptedUserPassword = lu_make_crypted(userPassword, "$1$");
 		}
 	}
 	if(cryptedUserPassword) {
@@ -167,7 +161,7 @@ main(int argc, const char **argv)
 	}
 
 	if(lu_user_add(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Account creation failed.\n"));
+		fprintf(stderr, _("Account creation failed: %s.\n"), error->string);
 		return 3;
 	}
 
@@ -177,15 +171,13 @@ main(int argc, const char **argv)
 		if(uidNumber != -2) {
 			values = lu_ent_get(ent, LU_USERNAME);
 			if(values) {
-				uidNumber = strtol((char*)values->data,
-						   &uid_string, 10);
+				uidNumber = strtol((char*)values->data, &uid_string, 10);
 			}
 		}
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if(gidNumber != -2) {
 			if(values) {
-				gidNumber = strtol((char*)values->data,
-						   &gid_string, 10);
+				gidNumber = strtol((char*)values->data, &gid_string, 10);
 			}
 		}
 
@@ -207,14 +199,10 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("No home directory for %s.\n"), name);
 			return 6;
 		}
-#ifdef FIXMEFIXMEFIXME
-		if(populate_homedir(skeleton, homeDirectory,
-				    uid, gid, 0700) == FALSE) {
-			fprintf(stderr, _("Error creating %s.\n"),
-				homeDirectory);
+		if(lu_homedir_populate(skeleton, homeDirectory, uidNumber, gidNumber, 0700, &error) == FALSE) {
+			fprintf(stderr, _("Error creating %s: %s.\n"), homeDirectory, error->string);
 			return 7;
 		}
-#endif
 	}
 
 	lu_ent_free(ent);

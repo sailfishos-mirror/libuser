@@ -20,11 +20,10 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
-#include <libuser/user_private.h>
-#include <stdlib.h>
 #include <libintl.h>
 #include <locale.h>
+#include <stdlib.h>
+#include "../include/libuser/user_private.h"
 
 static void
 dump_attribute(gpointer key, gpointer value, gpointer data)

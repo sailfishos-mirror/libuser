@@ -9,4 +9,5 @@ automake -a
 autoheader
 autoconf
 test -d intl || gettextize -f -c
-./configure --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc $@
+rm -f config.cache
+./configure --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc --with-ldap --with-krb5=/usr/kerberos $@

@@ -17,16 +17,19 @@
 
 #ident "$Id$"
 
-#include <libuser/user_private.h>
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <fnmatch.h>
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <fcntl.h>
+#include "../include/libuser/user_private.h"
 
 /* Global symbols. */
 struct lu_module *
@@ -127,7 +130,7 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	}
 
 	backupname = g_strconcat(filename, "-", NULL);
-	ofd = open(backupname, O_WRONLY | O_CREAT | O_NOFOLLOW, ist.st_mode);
+	ofd = open(backupname, O_WRONLY | O_CREAT, ist.st_mode);
 	if(ofd == -1) {
 		lu_error_new(error, lu_error_open, _("error creating `%s'"), backupname);
 		g_free(backupname);
@@ -137,6 +140,15 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	}
 
 	if((fstat(ofd, &ost) == -1) || !S_ISREG(ost.st_mode)) {
+		struct stat st;
+		if((stat(backupname, &st) == -1) || !S_ISREG(st.st_mode) || (st.st_dev != ost.st_dev) || (st.st_ino != ost.st_ino)) {
+			lu_error_new(error, lu_error_open, _("backup file `%s' was a symlink"), backupname);
+			g_free(backupname);
+			lu_util_lock_free(ifd, ilock);
+			close(ifd);
+			close(ofd);
+			return FALSE;
+		}
 		lu_error_new(error, lu_error_stat, NULL);
 		g_free(backupname);
 		lu_util_lock_free(ifd, ilock);
@@ -668,6 +680,7 @@ static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = generic_add(module, "shadow", lu_shadow_format_user, ent, error);
+	lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
 	return ret;
 }
 
@@ -682,6 +695,7 @@ static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = generic_add(module, "gshadow", lu_shadow_format_group, ent, error);
+	lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
 	return ret;
 }
 
@@ -798,7 +812,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		if(ent->type == lu_user) {
 			name = lu_ent_get(ent, LU_USERNAME);
 			if(name == NULL) {
-				lu_error_new(error, lu_error_generic, _("entity object has no %s " "attribute"), LU_USERNAME);
+				lu_error_new(error, lu_error_generic, _("entity object has no %s attribute"), LU_USERNAME);
 				lu_util_lock_free(fd, lock);
 				close(fd);
 				g_free(filename);
@@ -808,7 +822,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		if(ent->type == lu_group) {
 			name = lu_ent_get(ent, LU_GROUPNAME);
 			if(name == NULL) {
-				lu_error_new(error, lu_error_generic, _("entity object has no %s " "attribute"), LU_GROUPNAME);
+				lu_error_new(error, lu_error_generic, _("entity object has no %s attribute"), LU_GROUPNAME);
 				lu_util_lock_free(fd, lock);
 				close(fd);
 				g_free(filename);
@@ -839,21 +853,13 @@ lu_files_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error
 static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret = generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
-	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "x");
-	}
-	return ret;
+	return generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
 }
 
 static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret = generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
-	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "x");
-	}
-	return ret;
+	return generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
 }
 
 static gboolean
@@ -980,7 +986,7 @@ lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent, struct lu_error
 {
 	gboolean ret = generic_del(module, "shadow", ent, error);
 	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "x");
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
 	}
 	return ret;
 }
@@ -990,7 +996,7 @@ lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent, struct lu_erro
 {
 	gboolean ret = generic_del(module, "gshadow", ent, error);
 	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "x");
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
 	}
 	return ret;
 }
@@ -1300,19 +1306,29 @@ lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *
 static gboolean
 lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
-	return generic_setpass(module, "shadow", 2, ent, password, error);
+	return generic_setpass(module, "group", 2, ent, password, error);
 }
 
 static gboolean
 lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
-	return generic_setpass(module, "shadow", 2, ent, password, error);
+	gboolean ret;
+	ret = generic_setpass(module, "shadow", 2, ent, password, error);
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
+	return ret;
 }
 
 static gboolean
 lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
-	return generic_setpass(module, "gshadow", 2, ent, password, error);
+	gboolean ret;
+	ret = generic_setpass(module, "gshadow", 2, ent, password, error);
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
+	return ret;
 }
 
 static GList *

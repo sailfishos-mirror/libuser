@@ -20,14 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
-#include <libuser/user_private.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include "../include/libuser/user_private.h"
 #include "apputil.h"
 
 int
@@ -53,10 +52,8 @@ main(int argc, const char **argv)
 		 "GECOS information", "STRING"},
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
 		 "home directory", "STRING"},
-#ifdef FIXME
 		{"movedirectory", 'm', POPT_ARG_NONE, &move_home, 0,
 		 "move home directory contents"},
-#endif
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "set shell for user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
@@ -66,9 +63,9 @@ main(int argc, const char **argv)
 		{"login", 'l', POPT_ARG_STRING, &uid, 0,
 		 "change login name for user", "STRING"},
 		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,
-		 "plaintext password for use with group", "STRING"},
+		 "plaintext password for the user", "STRING"},
 		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
-		 "pre-hashed password for use with group", "STRING"},
+		 "pre-hashed password for the user", "STRING"},
 		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock account"},
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0, "unlock account"},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
@@ -89,9 +86,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(lock && unlock) {
@@ -131,8 +126,7 @@ main(int argc, const char **argv)
 		if(values) {
 			oldHomeDirectory = values->data;
 		} else {
-			fprintf(stderr, _("Error reading old home "
-				"directory for %s.\n"), user);
+			fprintf(stderr, _("Error reading old home directory for %s: %s.\n"), user, error->string);
 			return 4;
 		}
 		lu_ent_set(ent, LU_HOMEDIRECTORY, homeDirectory);
@@ -140,8 +134,7 @@ main(int argc, const char **argv)
 
 	if(userPassword) {
 		if(lu_user_setpass(ctx, ent, userPassword, &error) == FALSE) {
-			fprintf(stderr, _("Failed to set password for user "
-					  "%s.\n"), user);
+			fprintf(stderr, _("Failed to set password for user %s: %s.\n"), user, error->string);
 			return 5;
 		}
 	}
@@ -150,8 +143,7 @@ main(int argc, const char **argv)
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
 		if(lu_user_setpass(ctx, ent, tmp, &error) == FALSE) {
-			fprintf(stderr, _("Failed to set password for user "
-					  "%s.\n"), user);
+			fprintf(stderr, _("Failed to set password for user %s: %s.\n"), user, error->string);
 			return 6;
 		}
 		g_free(tmp);
@@ -159,39 +151,34 @@ main(int argc, const char **argv)
 
 	if(lock) {
 		if(lu_user_lock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("User %s could not be locked.\n"),
-				user);
+			fprintf(stderr, _("User %s could not be locked: %s.\n"), user, error->string);
 			return 7;
 		}
 	}
 
 	if(unlock) {
 		if(lu_user_unlock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("User %s could not be unlocked.\n"),
-				user);
+			fprintf(stderr, _("User %s could not be unlocked: %s.\n"), user, error->string);
 			return 8;
 		}
 	}
 
 	if(change && (lu_user_modify(ctx, ent, &error) == FALSE)) {
-		fprintf(stderr, _("User %s could not be modified.\n"), user);
+		fprintf(stderr, _("User %s could not be modified: %s.\n"), user, error->string);
 		return 9;
 	}
 
 	if(change && move_home) {
 		if(oldHomeDirectory == NULL) {
-			fprintf(stderr, _("No old home directory for %s.\n"),
-				user);
+			fprintf(stderr, _("No old home directory for %s.\n"), user);
 			return 10;
 		}
 		if(homeDirectory == NULL) {
-			fprintf(stderr, _("No new home directory for %s.\n"),
-				user);
+			fprintf(stderr, _("No new home directory for %s.\n"), user);
 			return 11;
 		}
-		if(move_homedir(oldHomeDirectory, homeDirectory) == FALSE) {
-			fprintf(stderr, _("Error moving %s to %s.\n"),
-				oldHomeDirectory, homeDirectory);
+		if(lu_homedir_move(oldHomeDirectory, homeDirectory, &error) == FALSE) {
+			fprintf(stderr, _("Error moving %s to %s: %s.\n"), oldHomeDirectory, homeDirectory, error->string);
 			return 12;
 		}
 	}

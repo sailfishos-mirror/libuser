@@ -15,6 +15,11 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ident "$Id$"
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <pwd.h>
 #include <grp.h>
 #include <stdlib.h>
@@ -29,8 +34,34 @@
 #include "ent.c"
 #include "misc.c"
 
+static PyObject*
+libuser_get_user_shells(PyObject *ignored)
+{
+	GList *results = NULL;
+	PyObject *ret = NULL;
+	const char *shell;
+
+	DEBUG_ENTRY;
+
+	setusershell();
+	while((shell = getusershell()) != NULL) {
+		results = g_list_append(results, g_strdup(shell));
+	}
+	endusershell();
+
+	ret = convert_glist_pystringlist(results);
+	g_list_foreach(results, (GFunc)g_free, NULL);
+	g_list_free(results);
+
+	DEBUG_EXIT;
+	return ret;
+}
+
 static PyMethodDef
 libuser_methods[] = {
+	{"admin", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS, "create a new administration context"},
+	{"prompt", (PyCFunction)libuser_prompt_new, 0, "create and return a new prompt record"},
+	{"get_user_shells", (PyCFunction)libuser_get_user_shells, 0, "return a list of valid shells"},
 	{"ADMIN", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS, "create a new administration context"},
 	{"PROMPT", (PyCFunction)libuser_prompt_new, 0, "create and return a new prompt record"},
 	{"getUserShells", (PyCFunction)libuser_get_user_shells, 0, "return a list of valid shells"},

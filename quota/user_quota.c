@@ -17,8 +17,9 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "config.h"
 #endif
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
@@ -30,8 +31,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <libuser/quota.h>
 #include <unistd.h>
+#include "../include/libuser/quota.h"
 
 static const char *quota_flags[] = {"usrquota", "grpquota",};
 static const char *quota_suffixes[] = INITQFNAMES;

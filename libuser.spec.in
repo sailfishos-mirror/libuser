@@ -53,7 +53,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so.*.*
 %{_libdir}/libuser_quota.so.*.*
 %{_libdir}/%{name}/*.so
-%{_sbindir}/*
+#%{_sbindir}/*
 
 %files devel
 %defattr(-,root,root)
@@ -67,6 +67,34 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com>
+- finish home directory population
+- implement home directory moving
+- change entity get semantics in the python bindings to allow default values for .get()
+- add lu_ent_has(), and a python has_key() method to Entity types
+- don't include tools in the binary package
+
+* Thu Jul 19 2001 Nalin Dahyabhai <nalin@redhat.com>
+- lib/user.c: catch and ignore errors when running stacks
+- lusermod: fix slightly bogus help messages
+- luseradd: when adding a user and group, use the gid of the group
+  instead of the user's uid as the primary group
+- properly set the password field in user accounts created using
+  auth-only auth modules (shadow needs "x" instead of "!!")
+- implement home directory removal, start on population
+
+* Wed Jul 18 2001 Nalin Dahyabhai <nalin@redhat.com>
+- fix group password setting in the files module
+- setpass affects both auth and info, so run both stacks
+
+* Tue Jul 17 2001 Nalin Dahyabhai <nalin@redhat.com>
+- make the testbed apps noinst
+
+* Mon Jul 16 2001 Nalin Dahyabhai <nalin@redhat.com>
+- fix errors due to uninitialized fields in the python bindings
+- add kwargs support to all python wrappers
+- add a mechanism for passing arguments to python callbacks
+
 * Wed Jul 11 2001 Nalin Dahyabhai <nalin@redhat.com>
 - stub out the krb5 and ldap modules so that they'll at least compile again
  

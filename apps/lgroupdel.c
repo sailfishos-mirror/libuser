@@ -20,13 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include "../include/libuser/user.h"
 #include "apputil.h"
 
 int

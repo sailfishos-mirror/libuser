@@ -20,11 +20,11 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../include/libuser/user_private.h"
 
 #define SEPARATOR "\t ,"
 
@@ -81,6 +81,8 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 	const gchar *module_dir = NULL, *module_file = NULL;
 	lu_module_init_t module_init = NULL;
 	struct lu_module *module = NULL;
+
+	LU_ERROR_CHECK(error);
 
 	g_assert(ctx != NULL);
 	g_assert(list != NULL);
@@ -300,12 +302,16 @@ lu_end(struct lu_context *context)
 {
 	g_assert(context != NULL);
 
-	g_hash_table_foreach(context->modules, lu_module_unload, NULL);
-	g_hash_table_destroy(context->modules);
+	if(context->modules != NULL) {
+		g_hash_table_foreach(context->modules, lu_module_unload, NULL);
+		g_hash_table_destroy(context->modules);
+	}
 
 	lu_cfg_done(context);
 
-	context->scache->free(context->scache);
+	if(context->scache != NULL) {
+		context->scache->free(context->scache);
+	}
 
 	memset(context, 0, sizeof(struct lu_context));
 
@@ -320,6 +326,9 @@ run_single(struct lu_context *context, struct lu_module *module, enum lu_module_
 	g_assert(context != NULL);
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
+
+	LU_ERROR_CHECK(error);
+
 	switch(id) {
 		case user_lookup_name:
 #ifdef DEBUG
@@ -461,6 +470,8 @@ run_list(struct lu_context *context, GList *modules, enum lu_module_type type,
 	gboolean success;
 	int i;
 
+	LU_ERROR_CHECK(error);
+
 	g_assert(context != NULL);
 	g_assert(modules != NULL);
 	g_assert(ent != NULL);
@@ -485,6 +496,12 @@ run_list(struct lu_context *context, GList *modules, enum lu_module_type type,
 				lu_ent_set_source_info(ent, module->name);
 			}
 			break;
+		} else {
+			if(g_list_nth(modules, i + 1) != NULL) {
+				if(*error != NULL) {
+					lu_error_free(error);
+				}
+			}
 		}
 	}
 
@@ -498,6 +515,8 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 	struct lu_module *auth_module, *info_module;
 	gboolean success = FALSE;
 
+	LU_ERROR_CHECK(error);
+
 	g_assert(context != NULL);
 	g_assert(ent != NULL);
 
@@ -507,8 +526,7 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 	switch(id) {
 		case user_lookup_id:
 		case group_lookup_id:
-			if(run_list(context, context->info_module_names,
-				    info, id, tmp, data, error)) {
+			if(run_list(context, context->info_module_names, info, id, tmp, data, error)) {
 				/* Got a match on that ID, convert it to a
 				 * name and look it up by name. */
 				GList *value = NULL;
@@ -558,6 +576,8 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 		case user_del:
 		case group_mod:
 		case group_del:
+		case user_setpass:
+		case group_setpass:
 			auth_module = g_hash_table_lookup(context->modules, tmp->source_auth);
 			info_module = g_hash_table_lookup(context->modules, tmp->source_info);
 			g_assert(auth_module != NULL);
@@ -569,11 +589,9 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 			break;
 		case user_lock:
 		case user_unlock:
-		case user_setpass:
 		case user_islocked:
 		case group_lock:
 		case group_unlock:
-		case group_setpass:
 		case group_islocked:
 			auth_module = g_hash_table_lookup(context->modules, tmp->source_auth);
 			g_assert(auth_module != NULL);
@@ -934,6 +952,8 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 	struct enumerate_data data;
 	struct lu_module *mod;
 	char *module_rw;
+
+	LU_ERROR_CHECK(error);
 
 	g_assert((type == lu_user) || (type == lu_group));
 
