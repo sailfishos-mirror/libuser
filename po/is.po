@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
-"POT-Creation-Date: 2002-01-15 15:50-0500\n"
+"POT-Creation-Date: 2002-01-15 17:48-0500\n"
 "PO-Revision-Date: 2001-08-16 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
@@ -68,7 +68,7 @@ msgstr "Ekkert notandanafn tiltekið.\n"
 
 #: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:112 samples/testuser.c:65
+#: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Villa við að frumstilla %s: %s.\n"
@@ -407,63 +407,63 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "villa við að læsa skrá: %s"
 
-#: modules/files.c:105 modules/files.c:391 modules/files.c:713
-#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
-#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
-#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
-#: modules/files.c:1955
+#: modules/files.c:106 modules/files.c:392 modules/files.c:714
+#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
+#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
+#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
+#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
+#: modules/files.c:1980
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "gat ekki opnað `%s': %s"
 
-#: modules/files.c:120 modules/files.c:152 modules/files.c:184
-#: modules/files.c:727 modules/files.c:1156
+#: modules/files.c:121 modules/files.c:153 modules/files.c:185
+#: modules/files.c:728 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "gat ekki fundið `%s': %s"
 
-#: modules/files.c:129
+#: modules/files.c:130
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "villa við að búa til `%s': %s"
 
-#: modules/files.c:143
+#: modules/files.c:144
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "afritið `%s' var tákntengi (symlink)"
 
-#: modules/files.c:744 modules/files.c:1167
+#: modules/files.c:745 modules/files.c:1191
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "gat ekki lesið úr `%s': %s"
 
-#: modules/files.c:756 modules/files.c:768
+#: modules/files.c:757 modules/files.c:769
 msgid "entry already present in file"
 msgstr "færslan er þegar til staðar í skránni"
 
-#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
-#: modules/files.c:1212
+#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
+#: modules/files.c:1236
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "gat ekki ritað í `%s': %s"
 
-#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
-#: modules/files.c:1048
+#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
+#: modules/files.c:1071
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "hluturinn er ekki með %s eiginleika"
 
-#: modules/files.c:971
+#: modules/files.c:994
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "hluturinn er ekki með `%s' eiginleika"
 
-#: modules/files.c:2144 modules/files.c:2210
+#: modules/files.c:2169 modules/files.c:2235
 msgid "not executing with superuser privileges"
 msgstr "er ekki keyrandi með rótarheimildum"
 
-#: modules/files.c:2223
+#: modules/files.c:2248
 msgid "no shadow file present -- disabling"
 msgstr "engin shadow skrá til staðar -- afvirki"
 
@@ -668,19 +668,19 @@ msgstr "Leita að notanda sem heitir %s.\n"
 msgid "Entry not found.\n"
 msgstr "Færslan fannst ekki.\n"
 
-#: samples/testuser.c:70
+#: samples/testuser.c:75
 msgid "Default user object classes:\n"
 msgstr "Sjálfgefnar notendahlutahópar:\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:81
 msgid "Default user attribute names:\n"
 msgstr "Sjálfgefin heiti notandaeiginleika:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:87
 msgid "Getting default user attributes:\n"
 msgstr "Sæki sjálfgefna notandaeiginleika:\n"
 
-#: samples/testuser.c:89
+#: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "Afrita notendastrúktúr:\n"
 

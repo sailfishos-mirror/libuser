@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-15 15:50-0500\n"
+"POT-Creation-Date: 2002-01-15 17:48-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -95,7 +95,7 @@ msgstr "No se ha especificado nombre de usuario.\n"
 # apps/lusermod.c:82
 #: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:112 samples/testuser.c:65
+#: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Error inicializando %s: %s.\n"
@@ -561,12 +561,12 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
-#: modules/files.c:105 modules/files.c:391 modules/files.c:713
-#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
-#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
-#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
-#: modules/files.c:1955
+#: modules/files.c:106 modules/files.c:392 modules/files.c:714
+#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
+#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
+#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
+#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
+#: modules/files.c:1980
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -574,44 +574,44 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
-#: modules/files.c:120 modules/files.c:152 modules/files.c:184
-#: modules/files.c:727 modules/files.c:1156
+#: modules/files.c:121 modules/files.c:153 modules/files.c:185
+#: modules/files.c:728 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se ha podido empezar `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#: modules/files.c:129
+#: modules/files.c:130
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "error al crear `%s': %s"
 
 # modules/files.c:145
 # modules/files.c:140
-#: modules/files.c:143
+#: modules/files.c:144
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "el archivo de copia de seguridad `%s' era un symlink"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:744 modules/files.c:1167
+#: modules/files.c:745 modules/files.c:1191
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
-#: modules/files.c:756 modules/files.c:768
+#: modules/files.c:757 modules/files.c:769
 msgid "entry already present in file"
 msgstr "la entrada ya se ha hecho presente en el archivo"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
-#: modules/files.c:1212
+#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
+#: modules/files.c:1236
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -620,28 +620,28 @@ msgstr "no se ha podido escribir en `%s': %s"
 # modules/files.c:833
 # modules/files.c:727 modules/files.c:734 modules/files.c:821
 # modules/files.c:831
-#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
-#: modules/files.c:1048
+#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
+#: modules/files.c:1071
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/files.c:776
 # modules/files.c:773
-#: modules/files.c:971
+#: modules/files.c:994
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "el objeto de entidad no tiene ningún atributo `%s'"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2144 modules/files.c:2210
+#: modules/files.c:2169 modules/files.c:2235
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2223
+#: modules/files.c:2248
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 
@@ -945,25 +945,25 @@ msgstr "No se ha encontrado la entrada.\n"
 
 # samples/testuser.c:59
 # samples/testuser.c:59
-#: samples/testuser.c:70
+#: samples/testuser.c:75
 msgid "Default user object classes:\n"
 msgstr "Tipos de objetos de usuario predeterminados:\n"
 
 # samples/testuser.c:65
 # samples/testuser.c:65
-#: samples/testuser.c:76
+#: samples/testuser.c:81
 msgid "Default user attribute names:\n"
 msgstr "Nombres de atributos de usuario predeterminados:\n"
 
 # samples/testuser.c:71
 # samples/testuser.c:71
-#: samples/testuser.c:82
+#: samples/testuser.c:87
 msgid "Getting default user attributes:\n"
 msgstr "Obtención de los atributos de usuario predeterminados:\n"
 
 # samples/testuser.c:79
 # samples/testuser.c:79
-#: samples/testuser.c:89
+#: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-15 15:50-0500\n"
+"POT-Creation-Date: 2002-01-15 17:48-0500\n"
 "PO-Revision-Date: 2001-08-08 19:04EET\n"
 "Last-Translator: Leon Kanter <leon@blackcatlinux.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -69,7 +69,7 @@ msgstr "Имя пользователя не указано.\n"
 
 #: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:112 samples/testuser.c:65
+#: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Ошибка инициализации %s: %s.\n"
@@ -408,63 +408,63 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "ошибка блокировки файла: %s"
 
-#: modules/files.c:105 modules/files.c:391 modules/files.c:713
-#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
-#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
-#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
-#: modules/files.c:1955
+#: modules/files.c:106 modules/files.c:392 modules/files.c:714
+#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
+#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
+#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
+#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
+#: modules/files.c:1980
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "невозможно открыть `%s': %s"
 
-#: modules/files.c:120 modules/files.c:152 modules/files.c:184
-#: modules/files.c:727 modules/files.c:1156
+#: modules/files.c:121 modules/files.c:153 modules/files.c:185
+#: modules/files.c:728 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "невозможно получить сведения о `%s': %s"
 
-#: modules/files.c:129
+#: modules/files.c:130
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "ошибка создания `%s': %s"
 
-#: modules/files.c:143
+#: modules/files.c:144
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "резервный файл `%s' был символической ссылкой"
 
-#: modules/files.c:744 modules/files.c:1167
+#: modules/files.c:745 modules/files.c:1191
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "невозможно прочитать из `%s': %s"
 
-#: modules/files.c:756 modules/files.c:768
+#: modules/files.c:757 modules/files.c:769
 msgid "entry already present in file"
 msgstr "запись уже существует в файле"
 
-#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
-#: modules/files.c:1212
+#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
+#: modules/files.c:1236
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "невозможно записать в `%s': %s"
 
-#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
-#: modules/files.c:1048
+#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
+#: modules/files.c:1071
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "объект не имеет аттрибута %s"
 
-#: modules/files.c:971
+#: modules/files.c:994
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "объект не имеет аттрибута `%s'"
 
-#: modules/files.c:2144 modules/files.c:2210
+#: modules/files.c:2169 modules/files.c:2235
 msgid "not executing with superuser privileges"
 msgstr "выполняется без привелегий суперпользователя"
 
-#: modules/files.c:2223
+#: modules/files.c:2248
 msgid "no shadow file present -- disabling"
 msgstr "нет файла shadow -- запрещено"
 
@@ -669,19 +669,19 @@ msgstr "Поиск пользователя с номером %s.\n"
 msgid "Entry not found.\n"
 msgstr "Запись не найдена\n"
 
-#: samples/testuser.c:70
+#: samples/testuser.c:75
 msgid "Default user object classes:\n"
 msgstr "Стандартные классы объекта пользователя:\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:81
 msgid "Default user attribute names:\n"
 msgstr "Имена стандартных аттрибутов пользователя:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:87
 msgid "Getting default user attributes:\n"
 msgstr "Получение стандартных аттрибутов пользователя:\n"
 
-#: samples/testuser.c:89
+#: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "Копирование структуры пользователя:\n"
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2002-01-15 15:50-0500\n"
+"POT-Creation-Date: 2002-01-15 17:48-0500\n"
 "PO-Revision-Date: 2001-11-21 11:52+1000\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
@@ -68,7 +68,7 @@ msgstr "사용자 이름이 지정되지 않았습니다.\n"
 
 #: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:112 samples/testuser.c:65
+#: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%s (을)를 초기화하는 도중 오류 발생: %s.\n"
@@ -407,63 +407,63 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
 
-#: modules/files.c:105 modules/files.c:391 modules/files.c:713
-#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
-#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
-#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
-#: modules/files.c:1955
+#: modules/files.c:106 modules/files.c:392 modules/files.c:714
+#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
+#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
+#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
+#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
+#: modules/files.c:1980
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' (을)를 열 수 없음: %s"
 
-#: modules/files.c:120 modules/files.c:152 modules/files.c:184
-#: modules/files.c:727 modules/files.c:1156
+#: modules/files.c:121 modules/files.c:153 modules/files.c:185
+#: modules/files.c:728 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "couldn't stat `%s': %s"
 
-#: modules/files.c:129
+#: modules/files.c:130
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' (을)를 생성하는 도중 오류 발생: %s"
 
-#: modules/files.c:143
+#: modules/files.c:144
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "백업 화일 `%s' (은)는 심볼릭링크 파일입니다"
 
-#: modules/files.c:744 modules/files.c:1167
+#: modules/files.c:745 modules/files.c:1191
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' (을)를 읽을 수 없음: %s"
 
-#: modules/files.c:756 modules/files.c:768
+#: modules/files.c:757 modules/files.c:769
 msgid "entry already present in file"
 msgstr "파일 안에 목록(entry)이 이미 존재합니다"
 
-#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
-#: modules/files.c:1212
+#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
+#: modules/files.c:1236
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' 에 작성할 수 없음: %s"
 
-#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
-#: modules/files.c:1048
+#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
+#: modules/files.c:1071
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:971
+#: modules/files.c:994
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "entity 개체에 `%s' 속성이 없습니다"
 
-#: modules/files.c:2144 modules/files.c:2210
+#: modules/files.c:2169 modules/files.c:2235
 msgid "not executing with superuser privileges"
 msgstr "수퍼유저 권한으로 실행할 수 없습니다"
 
-#: modules/files.c:2223
+#: modules/files.c:2248
 msgid "no shadow file present -- disabling"
 msgstr "현재 섀도우 파일이 없음 -- 불가능"
 
@@ -669,19 +669,19 @@ msgstr "%s 사용자를 검색하고 있습니다.\n"
 msgid "Entry not found.\n"
 msgstr "목록(Entry)을 찾을 수 없습니다.\n"
 
-#: samples/testuser.c:70
+#: samples/testuser.c:75
 msgid "Default user object classes:\n"
 msgstr "기본 사용자 개체 클래스:\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:81
 msgid "Default user attribute names:\n"
 msgstr "기본 사용자 속성 이름들:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:87
 msgid "Getting default user attributes:\n"
 msgstr "기본 사용자 속성을 읽음:\n"
 
-#: samples/testuser.c:89
+#: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
 
