@@ -21,5 +21,5 @@ tag:
 	rm -fr $(PACKAGE)-$(VERSION)
 	mv /tmp/$(PACKAGE)-export-tmp $(PACKAGE)-$(VERSION)
 	cd $(PACKAGE)-$(VERSION); ./autogen
-	tar cvzf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
+	tar czf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
 	rm -fr $(PACKAGE)-$(VERSION)
