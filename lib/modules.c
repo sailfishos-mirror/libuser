@@ -76,7 +76,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	module_dir = lu_cfg_read_single(ctx, "defaults/moduledir", MODULEDIR);
 
 	/* Load the modules. */
-	for(i = 0; i < (*names)->n_values; i++) {
+	for (i = 0; i < (*names)->n_values; i++) {
 		ctmp = g_value_get_string(g_value_array_get_nth(*names, i));
 		tmp = ctx->scache->cache(ctx->scache, ctmp);
 		/* Only load the module if it's not already loaded. */

@@ -27,10 +27,10 @@ static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 {
 	char *ret = NULL;
-	if(string == NULL) {
+	if (string == NULL) {
 		return NULL;
 	}
-	if((ret = g_tree_lookup(cache->tree, (char*)string)) == NULL) {
+	if ((ret = g_tree_lookup(cache->tree, (char*)string)) == NULL) {
 		ret = g_strdup(string);
 		g_tree_insert(cache->tree, ret, ret);
 	}
@@ -41,7 +41,7 @@ static int
 get_keys(gpointer key, gpointer value, gpointer data)
 {
 	GList **list = data;
-	if(key) {
+	if (key) {
 		*list = g_list_append(*list, key);
 	}
 	return 0;
@@ -57,8 +57,8 @@ lu_string_cache_free(struct lu_string_cache *cache)
 	g_tree_traverse(cache->tree, get_keys, G_IN_ORDER, &list);
 	g_tree_destroy(cache->tree);
 
-	for(i = list; i; i = g_list_next(i)) {
-		if((tmp = i->data) != NULL) {
+	for (i = list; i; i = g_list_next(i)) {
+		if ((tmp = i->data) != NULL) {
 			memset(tmp, '\0', strlen(tmp));
 			g_free(tmp);
 		}
@@ -75,7 +75,7 @@ lu_string_cache_new(gboolean case_sensitive)
 {
 	struct lu_string_cache *cache;
 	cache = g_malloc0(sizeof(struct lu_string_cache));
-	if(case_sensitive) {
+	if (case_sensitive) {
 		cache->tree = g_tree_new(lu_strcmp);
 	} else {
 		cache->tree = g_tree_new(lu_strcasecmp);

@@ -489,7 +489,7 @@ run_list(struct lu_context *context,
 		scratch = NULL;
 		tsuccess = run_single(context, module, id,
 				      sdata, ldata, entity, &scratch, error);
-		if (scratch != NULL) switch(id) {
+		if (scratch != NULL) switch (id) {
 			case users_enumerate:
 			case users_enumerate_by_group:
 			case groups_enumerate:
@@ -517,7 +517,7 @@ run_list(struct lu_context *context,
 			case groups_enumerate_by_user_full:
 				tmp_ptr_array = scratch;
 				ptr_array = *ret;
-				if(ptr_array == NULL) {
+				if (ptr_array == NULL) {
 					ptr_array = g_ptr_array_new();
 				}
 				if (tmp_ptr_array != NULL) {
@@ -549,7 +549,7 @@ run_list(struct lu_context *context,
 				g_assert_not_reached();	/* never reached */
 				break;
 		}
-		if(i == 0) {
+		if (i == 0) {
 			success = tsuccess;
 		} else {
 			success = logic_function(success, tsuccess);
@@ -592,7 +592,7 @@ lu_dispatch(struct lu_context *context,
 		sdata = NULL;
 		g_assert(ldata != INVALID);
 		/* Run the list. */
-		if(run_list(context, context->module_names,
+		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			/* Got a match on that ID, convert it to a
@@ -607,7 +607,7 @@ lu_dispatch(struct lu_context *context,
 				id = group_lookup_name;
 			}
 			values = lu_ent_get_current(tmp, attr);
-			if((values != NULL) && (values->n_values > 0)) {
+			if ((values != NULL) && (values->n_values > 0)) {
 				value = g_value_array_get_nth(values, 0);
 				attr = g_value_get_string(value);
 				sdata = tmp->cache->cache(tmp->cache, attr);
@@ -626,7 +626,7 @@ lu_dispatch(struct lu_context *context,
 		g_assert(sdata != NULL);
 		ldata = INVALID;
 		/* Run the list. */
-		if(run_list(context, context->module_names,
+		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
@@ -644,7 +644,7 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Run the checks and preps. */
-		if(run_list(context, context->create_module_names,
+		if (run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
@@ -661,7 +661,7 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Add the account. */
-		if(run_list(context, context->create_module_names,
+		if (run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
@@ -687,7 +687,7 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Make the changes. */
 		g_assert(entity != NULL);
-		if(run_list(context, entity->modules,
+		if (run_list(context, entity->modules,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
@@ -703,7 +703,7 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Run the checks. */
 		g_assert(entity != NULL);
-		if(run_list(context, entity->modules,
+		if (run_list(context, entity->modules,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
@@ -727,7 +727,7 @@ lu_dispatch(struct lu_context *context,
 	case users_enumerate:
 	case groups_enumerate:
 		/* Get the lists. */
-		if(run_list(context, context->module_names,
+		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, (gpointer*)&values, error)) {
 			*ret = values;
@@ -751,7 +751,7 @@ lu_dispatch(struct lu_context *context,
 	case users_enumerate_full:
 	case groups_enumerate_full:
 		/* Get the lists. */
-		if(run_list(context, context->module_names,
+		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, (gpointer*)&ptrs, error)) {
 			*ret = ptrs;
@@ -759,7 +759,7 @@ lu_dispatch(struct lu_context *context,
 		}
 		break;
 	case uses_elevated_privileges:
-		if(run_list(context, context->module_names,
+		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			success = TRUE;

@@ -52,14 +52,14 @@ lu_ent_free(struct lu_ent *ent)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	ent->cache->free(ent->cache);
-	for(i = 0; i < ent->current->len; i++) {
+	for (i = 0; i < ent->current->len; i++) {
 		attr = &g_array_index(ent->current, struct lu_attribute, i);
 		g_value_array_free(attr->values);
 		attr->name = 0;
 		attr->values = NULL;
 	}
 	g_array_free(ent->current, FALSE);
-	for(i = 0; i < ent->pending->len; i++) {
+	for (i = 0; i < ent->pending->len; i++) {
 		attr = &g_array_index(ent->pending, struct lu_attribute, i);
 		g_value_array_free(attr->values);
 		attr->name = 0;
@@ -80,7 +80,7 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	fprintf(fp, "dump of struct lu_ent at %p:\n", ent);
 	fprintf(fp, " magic = %08x\n", ent->magic);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	switch(ent->type) {
+	switch (ent->type) {
 		case lu_user:
 			fprintf(fp, " type = user\n");
 			break;
@@ -92,11 +92,11 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 					 (ent->type == lu_group));
 			break;
 	}
-	for(i = 0; i < ent->current->len; i++) {
+	for (i = 0; i < ent->current->len; i++) {
 		attribute = &g_array_index(ent->current,
 					   struct lu_attribute,
 					   i);
-		for(j = 0; j < attribute->values->n_values; j++) {
+		for (j = 0; j < attribute->values->n_values; j++) {
 			GValue *value;
 			value = g_value_array_get_nth(attribute->values, j);
 			fprintf(fp, " %s = `%s'\n",
@@ -199,7 +199,7 @@ clear_attribute_list(GArray *dest)
 {
 	int i;
 	struct lu_attribute *attr;
-	for(i = dest->len - 1; i >= 0; i--) {
+	for (i = dest->len - 1; i >= 0; i--) {
 		attr = &g_array_index(dest, struct lu_attribute, i);
 		g_value_array_free(attr->values);
 		attr->values = NULL;
@@ -215,7 +215,7 @@ copy_attributes(GArray *source, GArray *dest)
 	/* First, clear the list of attributes. */
 	clear_attribute_list(dest);
 	/* Now copy all of the attributes and their values. */
-	for(i = 0; i < source->len; i++) {
+	for (i = 0; i < source->len; i++) {
 		attr = &g_array_index(source, struct lu_attribute, i);
 		/* Copy the attribute name, then its values, into the holding
 		 * area. */
@@ -265,7 +265,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 		lattr[i] = g_ascii_tolower(lattr[i]);
 	}
 	aquark = g_quark_from_string(lattr);
-	for(i = 0; i < list->len; i++) {
+	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
 			if (attr->name == aquark) {
@@ -292,7 +292,7 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	int i;
 	char *lattr;
 	dest = lu_ent_get_int(list, attr);
-	if(dest == NULL) {
+	if (dest == NULL) {
 		lattr = g_strdup(attr);
 		for (i = 0; lattr[i] != '\0'; i++) {
 			lattr[i] = g_ascii_tolower(lattr[i]);
@@ -322,7 +322,7 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	int i;
 	char *lattr;
 	dest = lu_ent_get_int(list, lattr);
-	if(dest == NULL) {
+	if (dest == NULL) {
 		lattr = g_strdup(attr);
 		for (i = 0; lattr[i] != '\0'; i++) {
 			lattr[i] = g_ascii_tolower(lattr[i]);
@@ -375,19 +375,19 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 	char *svalue, *tmp;
 	int i;
 	dest = lu_ent_get_int(list, attr);
-	if(dest != NULL) {
+	if (dest != NULL) {
 		svalue = g_strdup_value_contents(value);
-		for(i = 0; i < dest->n_values; i++) {
+		for (i = 0; i < dest->n_values; i++) {
 			tvalue = g_value_array_get_nth(dest, i);
 			tmp = g_strdup_value_contents(tvalue);
-			if(strcmp(tmp, svalue) == 0) {
+			if (strcmp(tmp, svalue) == 0) {
 				g_free(tmp);
 				break;
 			}
 			g_free(tmp);
 		}
 		g_free(svalue);
-		if(i < dest->n_values) {
+		if (i < dest->n_values) {
 			g_value_array_remove(dest, i);
 		}
 	}
@@ -399,7 +399,7 @@ lu_ent_get_attributes_int(GArray *list)
 	struct lu_attribute *attr;
 	int i;
 	GList *ret = NULL;
-	for(i = 0; i < list->len; i++) {
+	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		ret = g_list_prepend(ret, (char*)g_quark_to_string(attr->name));
 	}
@@ -642,8 +642,8 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = g_strdup(val);
 
 		/* Perform substitutions. */
-		for(i = 0; i < G_N_ELEMENTS(subst); i++) {
-			while(strstr(val, subst[i].format) != NULL) {
+		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
+			while (strstr(val, subst[i].format) != NULL) {
 				char *pre, *post, *tmp2;
 				val = strstr(tmp, subst[i].format);
 				pre = g_strndup(val, tmp - val);
