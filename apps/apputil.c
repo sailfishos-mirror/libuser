@@ -36,6 +36,7 @@
 #include <locale.h>
 #include <pwd.h>
 #include <security/pam_appl.h>
+#include <security/pam_misc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -388,8 +389,7 @@ lu_converse(int num_msg, const struct pam_message **msg,
 /* Authenticate the user if the invoking user is not privileged.  If
  * authentication fails, exit immediately. */
 void
-lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
-			     const char *appname)
+lu_authenticate_unprivileged(const char *user, const char *appname)
 {
 	pam_handle_t *pamh;
 	struct pam_conv conv;
@@ -397,6 +397,7 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 	const char *puser = user;
 	int ret;
 
+#if 0
 	/* Don't bother if none of the modules makes use of elevated
 	 * privileges. */
 	if (lu_uses_elevated_privileges(ctx) == FALSE) {
@@ -421,6 +422,10 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 
 	conv.conv = lu_converse;
 	conv.appdata_ptr = &data;
+
+#endif
+	conv.conv = misc_conv;
+	conv.appdata_ptr = NULL;
 
 	/* Start up PAM. */
 	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {

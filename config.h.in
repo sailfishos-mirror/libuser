@@ -81,6 +81,9 @@
 /* Define if you have the `pam' library (-lpam). */
 #undef HAVE_LIBPAM
 
+/* Define if you have the `pam_misc' library (-lpam_misc). */
+#undef HAVE_LIBPAM_MISC
+
 /* Define if you have the `popt' library (-lpopt). */
 #undef HAVE_LIBPOPT
 

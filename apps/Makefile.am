@@ -14,7 +14,7 @@ sbin_PROGRAMS = \
 	lusermod
 
 CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@
-LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
 
 lchsh_SOURCES = \
 	apputil.c \

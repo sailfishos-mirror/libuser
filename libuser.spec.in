@@ -83,6 +83,9 @@ popd
 %attr(0644,root,root) %{_libdir}/pkgconfig/*
 
 %changelog
+* Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.92-1
+- lchfn,lchsh,lpasswd - reorder PAM authentication calls
+
 * Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.91-1
 - ldap: finish port to new API
 - sasl: finish port to new API (needs test)

@@ -95,6 +95,9 @@ main(int argc, const char **argv)
 		}
 	}
 
+	/* Authenticate the user to the "chfn" service. */
+	lu_authenticate_unprivileged(user, "chfn");
+
 	/* Give the user some idea of what's going on. */
 	g_print(_("Changing finger information for %s.\n"), user);
 
@@ -112,9 +115,6 @@ main(int argc, const char **argv)
 		}
 		return 1;
 	}
-
-	/* Authenticate the user to the "chfn" service. */
-	lu_authenticate_unprivileged(ctx, user, "chfn");
 
 	/* Look up the user's information. */
 	ent = lu_ent_new();
