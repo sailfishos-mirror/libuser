@@ -42,17 +42,22 @@ main(int argc, const char **argv)
 	const char *user = NULL;
 	int c;
 	int plain_fd = -1, crypted_fd = -1;
-	int interactive = 0, group = 0;
+	int interactive = 0, groupflag = 0;
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
-		{"group", 'g', POPT_ARG_NONE, &group, 0, "set group password instead of user password", NULL},
-		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0, "new plain password", NULL},
-		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0, "new crypted password", NULL},
-		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0, "read new plain password from given descriptor", NULL},
-		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0, "read new crypted password from given descriptor", NULL},
-		POPT_AUTOHELP
-	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
+		{"group", 'g', POPT_ARG_NONE, &groupflag, 0,
+		 "set group password instead of user password", NULL},
+		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0,
+		 "new plain password", NULL},
+		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0,
+		 "new crypted password", NULL},
+		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0,
+		 "read new plain password from given descriptor", NULL},
+		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0,
+		 "read new crypted password from given descriptor", NULL},
+		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -62,18 +67,20 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lpasswd", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
-	if(c != -1) {
-		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+	if (c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"),
+			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
 		exit(1);
 	}
 	user = poptGetArg(popt);
 
-	if((user == NULL) || (geteuid() != getuid())) {
+	if ((user == NULL) || (geteuid() != getuid())) {
 		struct passwd *pwd;
 		pwd = getpwuid(getuid());
-		if(pwd != NULL) {
-			fprintf(stderr, _("Changing password for %s.\n"), user = strdup(pwd->pw_name));
+		if (pwd != NULL) {
+			fprintf(stderr, _("Changing password for %s.\n"),
+				user = strdup(pwd->pw_name));
 		} else {
 			fprintf(stderr, _("No user name specified.\n"));
 			poptPrintUsage(popt, stderr, 0);
@@ -81,20 +88,24 @@ main(int argc, const char **argv)
 		}
 	}
 
-	ctx = lu_start(user, group ? lu_group : lu_user, NULL, NULL, interactive ? lu_prompt_console : lu_prompt_console_quiet,
-		       NULL, &error);
-	if(ctx == NULL) {
-		if(error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+	ctx = lu_start(user, groupflag ? lu_group : lu_user, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
+	if (ctx == NULL) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"),
+				PACKAGE, error->string);
 		} else {
-			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+			fprintf(stderr, _("Error initializing %s.\n"),
+				PACKAGE);
 		}
 		return 1;
 	}
 
 	lu_authenticate_unprivileged(ctx, user, "passwd");
 
-	if((password == NULL) && (cryptedPassword == NULL) && (plain_fd == -1) && (crypted_fd == -1)) {
+	if ((password == NULL) && (cryptedPassword == NULL) &&
+	    (plain_fd == -1) && (crypted_fd == -1)) {
 		struct lu_prompt prompts[2];
 		do {
 			memset(&prompts, 0, sizeof(prompts));
@@ -102,74 +113,84 @@ main(int argc, const char **argv)
 			prompts[0].prompt = _("New password");
 			prompts[1].key = "lpasswd/password2";
 			prompts[1].prompt = _("New password (confirm)");
-			if(lu_prompt_console(prompts, sizeof(prompts) / sizeof(prompts[0]), NULL, &error)) {
-				if(prompts[0].value && strlen(prompts[0].value) && prompts[1].value && strlen(prompts[1].value)) {
-					if(strcmp(prompts[0].value, prompts[1].value) == 0) {
-						password = strdup(prompts[0].value);
+			if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
+					      NULL, &error)) {
+				if (prompts[0].value &&
+				    strlen(prompts[0].value) &&
+				    prompts[1].value &&
+				    strlen(prompts[1].value)) {
+					if (strcmp(prompts[0].value,
+						   prompts[1].value) == 0) {
+						password = g_strdup(prompts[0].value);
 						prompts[0].free_value(prompts[0].value);
 						prompts[1].free_value(prompts[1].value);
 					} else {
-						fprintf(stderr, _("Passwords do not match, try again.\n"));
+						fprintf(stderr, _("Passwords "
+							"do not match, try "
+							"again.\n"));
 					}
 				} else {
-					fprintf(stderr, _("Password change canceled.\n"));
+					fprintf(stderr, _("Password change "
+						"canceled.\n"));
 					return 1;
 				}
 			}
-			if(error) {
+			if (error) {
 				lu_error_free(&error);
 			}
-		} while(password == NULL);
+		} while (password == NULL);
 	}
 
 	ent = lu_ent_new();
 
-	if(!group) {
-		if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
+	if (!groupflag) {
+		if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 			fprintf(stderr, _("User %s does not exist.\n"), user);
 			return 2;
 		}
 	} else {
-		if(lu_group_lookup_name(ctx, user, ent, &error) == FALSE) {
+		if (lu_group_lookup_name(ctx, user, ent, &error) == FALSE) {
 			fprintf(stderr, _("Group %s does not exist.\n"), user);
 			return 2;
 		}
 	}
 
-	if(plain_fd != -1) {
+	if (plain_fd != -1) {
 		char buf[LINE_MAX];
 		int i;
 		memset(buf, '\0', sizeof(buf));
 		i = read(plain_fd, buf, sizeof(buf));
-		while((i > 0) && ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
+		while ((i > 0) &&
+		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
 			buf[--i] = '\0';
 		}
 		password = buf;
-	} else
-	if(crypted_fd != -1) {
+	} else if (crypted_fd != -1) {
 		char buf[LINE_MAX];
 		int i;
 		memset(buf, '\0', sizeof(buf));
 		i = read(crypted_fd, buf, sizeof(buf));
-		while((i > 0) && ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
+		while ((i > 0) &&
+		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
 			buf[--i] = '\0';
 		}
 		password = g_strconcat("{crypt}", buf, NULL);
-	} else
-	if(cryptedPassword != NULL) {
+	} else if (cryptedPassword != NULL) {
 		password = g_strconcat("{crypt}", cryptedPassword, NULL);
 	} else {
 		/* the password variable is already set */
 	}
 
-	if(!group) {
-		if(lu_user_setpass(ctx, ent, password, &error) == FALSE) {
-			fprintf(stderr, _("Error setting password for user %s: %s.\n"), user, error->string);
+	if (!groupflag) {
+		if (lu_user_setpass(ctx, ent, password, &error) == FALSE) {
+			fprintf(stderr, _("Error setting password for user "
+				"%s: %s.\n"), user, error->string);
 			return 3;
 		}
 	} else {
-		if(lu_group_setpass(ctx, ent, password, &error) == FALSE) {
-			fprintf(stderr, _("Error setting password for group %s: %s.\n"), user, error->string);
+		if (lu_group_setpass(ctx, ent, password, &error) == FALSE) {
+			fprintf(stderr, _("Error setting password for group "
+				"%s: %s.\n"), user, error->string);
 			return 3;
 		}
 	}

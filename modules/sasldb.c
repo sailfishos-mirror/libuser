@@ -28,42 +28,52 @@
 #include "../modules/modules.h"
 
 static gboolean
-lu_sasldb_user_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_lookup_name(struct lu_module *module, gconstpointer name,
+			   struct lu_ent *ent, struct lu_error **error)
 {
 	int i = SASL_NOUSER;
 	const char *err;
 
 #ifdef HAVE_SASL_USER_EXISTS
 	i = sasl_user_exists(NULL, NULL, name);
-	g_assert((i == SASL_OK) || (i == SASL_DISABLED) || (i == SASL_NOUSER) || (i == SASL_NOMECH));
+	g_assert((i == SASL_OK) || (i == SASL_DISABLED)
+		 || (i == SASL_NOUSER) || (i == SASL_NOMECH));
 #else
-	i = sasl_checkpass((sasl_conn_t*) module->module_context, name, strlen(name), "", 0, &err);
-	g_assert((i == SASL_OK) || (i == SASL_NOUSER) || (i == SASL_NOMECH));
+	i = sasl_checkpass((sasl_conn_t *) module->module_context, name,
+			   strlen(name), "", 0, &err);
+	g_assert((i == SASL_OK) || (i == SASL_NOUSER)
+		 || (i == SASL_NOMECH));
 #endif
 
-	return (i == SASL_OK) || (i == SASL_DISABLED) || (i == SASL_NOMECH);
+	return (i == SASL_OK) || (i == SASL_DISABLED)
+	    || (i == SASL_NOMECH);
 }
 
 static gboolean
-lu_sasldb_user_lookup_id(struct lu_module *module, gconstpointer uid, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_lookup_id(struct lu_module *module, gconstpointer uid,
+			 struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_lookup_name(struct lu_module *module, gconstpointer name,
+			    struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_lookup_id(struct lu_module *module, gconstpointer gid, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_lookup_id(struct lu_module *module, gconstpointer gid,
+			  struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, const char *password, struct lu_error **error)
+lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
+		     int flags, const char *password,
+		     struct lu_error **error)
 {
 	int i;
 	sasl_conn_t *connection = NULL;
@@ -76,29 +86,35 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, co
 	connection = module->module_context;
 
 	values = lu_ent_get(ent, LU_USERNAME);
-	if(values && values->data) {
-		i = sasl_setpass(connection, (char*)values->data, password,
-				 0, flags, &err);
-		g_assert((i == SASL_OK) || (i == SASL_NOCHANGE) ||
-			 (i == SASL_NOMECH) || (i == SASL_DISABLED) ||
-			 (i == SASL_PWLOCK) || (i == SASL_FAIL) ||
-			 (i == SASL_BADPARAM));
-				 
-		if(i == SASL_OK) {
+	if (values && values->data) {
+		i = sasl_setpass(connection, (char *) values->data,
+				 password, 0, flags, &err);
+		g_assert((i == SASL_OK) || (i == SASL_NOCHANGE)
+			 || (i == SASL_NOMECH) || (i == SASL_DISABLED)
+			 || (i == SASL_PWLOCK) || (i == SASL_FAIL)
+			 || (i == SASL_BADPARAM));
+
+		if (i == SASL_OK) {
 			return TRUE;
 		} else {
-			if(password) {
+			if (password) {
 				lu_error_new(error, lu_error_generic,
 					     err ?
-					     _("Cyrus SASL error creating user: %s: %s") :
-					     _("Cyrus SASL error creating user: %s"),
+					     _
+					     ("Cyrus SASL error creating user: %s: %s")
+					     :
+					     _
+					     ("Cyrus SASL error creating user: %s"),
 					     sasl_errstring(i, NULL, NULL),
 					     err);
 			} else {
 				lu_error_new(error, lu_error_generic,
 					     err ?
-					     _("Cyrus SASL error removing user: %s: %s") :
-					     _("Cyrus SASL error removing user: %s"),
+					     _
+					     ("Cyrus SASL error removing user: %s: %s")
+					     :
+					     _
+					     ("Cyrus SASL error removing user: %s"),
 					     sasl_errstring(i, NULL, NULL),
 					     err);
 			}
@@ -106,17 +122,20 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, co
 		}
 	}
 
-	fprintf(stderr, "Error reading user name in %s at %d.\n", __FILE__, __LINE__);
+	fprintf(stderr, "Error reading user name in %s at %d.\n", __FILE__,
+		__LINE__);
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_add(struct lu_module *module, struct lu_ent *ent,
+		   struct lu_error **error)
 {
-	if(lu_sasldb_user_munge(module, ent, SASL_SET_CREATE, PACKAGE, error)) {
+	if (lu_sasldb_user_munge
+	    (module, ent, SASL_SET_CREATE, PACKAGE, error)) {
 		/* account created */
-		if(lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE,
-					PACKAGE, error) == TRUE) {
+		if (lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE,
+					 PACKAGE, error) == TRUE) {
 			/* account created and locked */
 		} else {
 			/* account created and couldn't be locked -- delete it */
@@ -131,34 +150,40 @@ lu_sasldb_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error
 }
 
 static gboolean
-lu_sasldb_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_mod(struct lu_module *module, struct lu_ent *ent,
+		   struct lu_error **error)
 {
 	/* Nod our heads and smile. */
 	return TRUE;
 }
 
 static gboolean
-lu_sasldb_user_del(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_del(struct lu_module *module, struct lu_ent *ent,
+		   struct lu_error **error)
 {
 	/* setting a NULL password removes the user */
 	return lu_sasldb_user_munge(module, ent, 0, NULL, error);
 }
 
 static gboolean
-lu_sasldb_user_lock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_lock(struct lu_module *module, struct lu_ent *ent,
+		    struct lu_error **error)
 {
 	/* setting the disable flag locks the account, and setting a password unlocks it */
-	return lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE, "", error);
+	return lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE, "",
+				    error);
 }
 
 static gboolean
-lu_sasldb_user_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_unlock(struct lu_module *module, struct lu_ent *ent,
+		      struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_user_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_user_islocked(struct lu_module *module, struct lu_ent *ent,
+			struct lu_error **error)
 {
 	int i = SASL_NOUSER;
 	GList *values;
@@ -166,89 +191,105 @@ lu_sasldb_user_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_
 	const char *err = NULL;
 
 	values = lu_ent_get(ent, LU_USERNAME);
-	if(values && values->data) {
+	if (values && values->data) {
 		name = values->data;
 	}
-
 #ifdef HAVE_SASL_USER_EXISTS
 	i = sasl_user_exists(NULL, NULL, name);
-	g_assert((i == SASL_OK) || (i == SASL_DISABLED) || (i == SASL_NOUSER) || (i == SASL_NOMECH));
+	g_assert((i == SASL_OK) || (i == SASL_DISABLED)
+		 || (i == SASL_NOUSER) || (i == SASL_NOMECH));
 #else
-	i = sasl_checkpass((sasl_conn_t*) module->module_context, name, strlen(name), "", 0, &err);
-	g_assert((i == SASL_OK) || (i == SASL_NOUSER) || (i == SASL_NOMECH));
+	i = sasl_checkpass((sasl_conn_t *) module->module_context, name,
+			   strlen(name), "", 0, &err);
+	g_assert((i == SASL_OK) || (i == SASL_NOUSER)
+		 || (i == SASL_NOMECH));
 #endif
 
 	return (i == SASL_DISABLED);
 }
 
 static gboolean
-lu_sasldb_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
+lu_sasldb_user_setpass(struct lu_module *module, struct lu_ent *ent,
+		       const char *password, struct lu_error **error)
 {
 	return lu_sasldb_user_munge(module, ent, 0, password, error);
 }
 
 static gboolean
-lu_sasldb_group_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_add(struct lu_module *module, struct lu_ent *ent,
+		    struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_mod(struct lu_module *module, struct lu_ent *ent,
+		    struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_del(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_del(struct lu_module *module, struct lu_ent *ent,
+		    struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_lock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_lock(struct lu_module *module, struct lu_ent *ent,
+		     struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_unlock(struct lu_module *module, struct lu_ent *ent,
+		       struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+lu_sasldb_group_islocked(struct lu_module *module, struct lu_ent *ent,
+			 struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_sasldb_group_setpass(struct lu_module *module, struct lu_ent *ent, const char* password, struct lu_error **error)
+lu_sasldb_group_setpass(struct lu_module *module, struct lu_ent *ent,
+			const char *password, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static GList *
-lu_sasldb_users_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
+lu_sasldb_users_enumerate(struct lu_module *module, const char *pattern,
+			  struct lu_error **error)
 {
 	return NULL;
 }
 
 static GList *
-lu_sasldb_groups_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
+lu_sasldb_groups_enumerate(struct lu_module *module, const char *pattern,
+			   struct lu_error **error)
 {
 	return NULL;
 }
 
 static GList *
-lu_sasldb_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
+lu_sasldb_users_enumerate_by_group(struct lu_module *module,
+				   const char *group, gid_t gid,
+				   struct lu_error **error)
 {
 	return NULL;
 }
 
 static GList *
-lu_sasldb_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
+lu_sasldb_groups_enumerate_by_user(struct lu_module *module,
+				   const char *user,
+				   struct lu_error **error)
 {
 	return NULL;
 }
@@ -256,7 +297,7 @@ lu_sasldb_groups_enumerate_by_user(struct lu_module *module, const char *user, s
 static gboolean
 lu_sasldb_close_module(struct lu_module *module)
 {
-	sasl_dispose((sasl_conn_t**) &module->module_context);
+	sasl_dispose((sasl_conn_t **) & module->module_context);
 	sasl_done();
 	g_free(module);
 	return TRUE;
@@ -285,14 +326,18 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 
 	/* Initialize SASL. */
 	i = sasl_server_init(&cb, appname);
-	if(i != SASL_OK) {
-		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
+	if (i != SASL_OK) {
+		lu_error_new(error, lu_error_generic,
+			     _("error initializing Cyrus SASL: %s"),
+			     sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
-	i = sasl_server_new(PACKAGE, NULL, domain, &cb, SASL_SEC_NOANONYMOUS,
-			    &connection);
-	if(i != SASL_OK) {
-		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
+	i = sasl_server_new(PACKAGE, NULL, domain, &cb,
+			    SASL_SEC_NOANONYMOUS, &connection);
+	if (i != SASL_OK) {
+		lu_error_new(error, lu_error_generic,
+			     _("error initializing Cyrus SASL: %s"),
+			     sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
 
@@ -305,7 +350,7 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 
 	/* Set the method pointers. */
 	ret->user_lookup_name = lu_sasldb_user_lookup_name;
-        ret->user_lookup_id = lu_sasldb_user_lookup_id;
+	ret->user_lookup_id = lu_sasldb_user_lookup_id;
 
 	ret->user_add = lu_sasldb_user_add;
 	ret->user_mod = lu_sasldb_user_mod;
@@ -317,8 +362,8 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->users_enumerate = lu_sasldb_users_enumerate;
 	ret->users_enumerate_by_group = lu_sasldb_users_enumerate_by_group;
 
-        ret->group_lookup_name = lu_sasldb_group_lookup_name;
-        ret->group_lookup_id = lu_sasldb_group_lookup_id;
+	ret->group_lookup_name = lu_sasldb_group_lookup_name;
+	ret->group_lookup_id = lu_sasldb_group_lookup_id;
 
 	ret->group_add = lu_sasldb_group_add;
 	ret->group_mod = lu_sasldb_group_mod;

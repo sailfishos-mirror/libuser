@@ -26,12 +26,16 @@
 #include <unistd.h>
 #include "../include/libuser/user_private.h"
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	struct lu_prompt prompts[] = {
-		{"main/name", "Name", TRUE, g_strdup("anonymous"), NULL, NULL},
-		{"main/password1", "Password1", TRUE, g_strdup("anonymous"), NULL, NULL},
-		{"main/password2", "Password2", FALSE, g_strdup("anonymous"), NULL, NULL},
+		{"main/name", "Name", PACKAGE, TRUE,
+		 g_strdup("anonymous"), NULL, NULL},
+		{"main/password1", "Password1", PACKAGE, TRUE,
+		 g_strdup("anonymous"), NULL, NULL},
+		{"main/password2", "Password2", PACKAGE, FALSE,
+		 g_strdup("anonymous"), NULL, NULL},
 	};
 	struct lu_error *error = NULL;
 	int i;
@@ -40,13 +44,12 @@ int main(int argc, char **argv)
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	if(lu_prompt_console(prompts,
-			     sizeof(prompts) / sizeof(prompts[0]),
-			     NULL,
-			     &error)) {
+	if (lu_prompt_console(prompts,
+			      sizeof(prompts) / sizeof(prompts[0]),
+			      NULL, &error)) {
 		g_print(gettext("Prompts succeeded.\n"));
-		for(i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
-			if(prompts[i].value) {
+		for (i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
+			if (prompts[i].value) {
 				g_print("`%s'\n", prompts[i].value);
 				prompts[i].free_value(prompts[i].value);
 			} else {

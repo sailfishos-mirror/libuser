@@ -27,7 +27,8 @@
 #include <unistd.h>
 #include "../apps/apputil.h"
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	struct lu_error *error = NULL;
 	int add = 0, mod = 0, rem = 0, c = -1;
@@ -36,31 +37,37 @@ int main(int argc, char **argv)
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	while((c = getopt(argc, argv, "arm")) != -1) {
-		switch(c) {
-			case 'a':
-				add = 1;
-				break;
-			case 'r':
-				rem = 1;
-				break;
-			case 'm':
-				mod = 1;
-			default:
-				break;
+	while ((c = getopt(argc, argv, "arm")) != -1) {
+		switch (c) {
+		case 'a':
+			add = 1;
+			break;
+		case 'r':
+			rem = 1;
+			break;
+		case 'm':
+			mod = 1;
+		default:
+			break;
 		}
 	}
 
-	if(add && !lu_homedir_populate("/etc/skel", argv[optind], 500, 500, 0700, &error)) {
-		fprintf(stderr, "populate_homedir(%s) failed: %s\n", argv[optind], error->string);
+	if (add
+	    && !lu_homedir_populate("/etc/skel", argv[optind], 500, 500,
+				    0700, &error)) {
+		fprintf(stderr, "populate_homedir(%s) failed: %s\n",
+			argv[optind], error->string);
 		return 1;
 	}
-	if(mod && !lu_homedir_move(argv[optind], argv[optind + 1], &error)) {
-		fprintf(stderr, "move_homedir(%s, %s) failed: %s\n", argv[optind], argv[optind + 1], error->string);
+	if (mod
+	    && !lu_homedir_move(argv[optind], argv[optind + 1], &error)) {
+		fprintf(stderr, "move_homedir(%s, %s) failed: %s\n",
+			argv[optind], argv[optind + 1], error->string);
 		return 1;
 	}
-	if(rem && !lu_homedir_remove(argv[optind], &error)) {
-		fprintf(stderr, "remove_homedir(%s) failed: %s\n", argv[optind], error->string);
+	if (rem && !lu_homedir_remove(argv[optind], &error)) {
+		fprintf(stderr, "remove_homedir(%s) failed: %s\n",
+			argv[optind], error->string);
 		return 1;
 	}
 

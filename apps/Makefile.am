@@ -1,10 +1,20 @@
-bin_PROGRAMS = lchfn lchsh
-sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd lnewusers
+bin_PROGRAMS = \
+	lchfn \
+	lchsh
+sbin_PROGRAMS = \
+	lchage \
+	lid \
+	lgroupadd \
+	lgroupdel \
+	lgroupmod \
+	lnewusers \
+	lpasswd \
+	luseradd \
+	luserdel \
+	lusermod
 
-include $(top_srcdir)/Makefile.extra
-
-LDADD = ../lib/libuser.la @GLIB_LIBS@ @PAM_LIBS@ @POPT_LIBS@ @INTLLIBS@
-lid_LDADD = ../lib/libuser.la @GLIB_LIBS@ @POPT_LIBS@ @INTLLIBS@
+CFLAGS = -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@
+LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_LIBS@ @POPT_LIBS@ @INTLLIBS@
 
 lchsh_SOURCES = \
 	apputil.c \

@@ -36,18 +36,23 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GList *values = NULL;
-	const char *user = NULL;
+	GValueArray *values = NULL;
+	GValue *value, val;
+	const char *user = NULL, *tmp = NULL;
+	gid_t gid;
 	int interactive = FALSE;
 	int remove_home = 0, dont_remove_group = 0;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
 		{"dontremovegroup", 'G', POPT_ARG_NONE, &dont_remove_group, 0,
-		 "don't remove the user's private group, if the user has one", NULL},
-		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0, "remove the user's home directory", NULL},
+		 "don't remove the user's private group, if the user has one",
+		 NULL},
+		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0,
+		 "remove the user's home directory", NULL},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
 	};
 
@@ -58,79 +63,95 @@ main(int argc, const char **argv)
 	popt = poptGetContext("luserdel", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
-	if(c != -1) {
-		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+	if (c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"),
+			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
 		exit(1);
 	}
 	user = poptGetArg(popt);
 
-	if(user == NULL) {
+	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
-	if(ctx == NULL) {
-		if(error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+	ctx = lu_start(NULL, 0, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
+	if (ctx == NULL) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"),
+				PACKAGE, error->string);
 		} else {
-			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+			fprintf(stderr, _("Error initializing %s.\n"),
+				PACKAGE);
 		}
 		return 1;
 	}
 
 	ent = lu_ent_new();
 
-	if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
+	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 2;
 	}
 
-	if(lu_user_delete(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("User %s could not be deleted: %s.\n"), user, error->string);
+	if (lu_user_delete(ctx, ent, &error) == FALSE) {
+		fprintf(stderr, _("User %s could not be deleted: %s.\n"),
+			user, error->string);
 		return 3;
 	}
+
 	lu_hup_nscd();
 
-	if(!dont_remove_group) {
+	if (!dont_remove_group) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if(!(values && values->data)) {
-			fprintf(stderr, _("%s did not have a gid number.\n"), user);
+		if ((values == NULL) || (values->n_values == 0)) {
+			fprintf(stderr, _("%s did not have a gid number.\n"),
+				user);
 			return 4;
 		} else {
-			gid_t gid = atol(values->data);
-			if(lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
-				fprintf(stderr, _("No group with GID %ld exists, not removing.\n"), (long)gid);
+			value = g_value_array_get_nth(values, 0);
+			gid = g_value_get_long(value);
+			if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE){
+				fprintf(stderr, _("No group with GID %ld "
+					"exists, not removing.\n"), (long) gid);
 				return 5;
 			}
-			if(lu_ent_get(ent, LU_MEMBERUID) == NULL) {
-				values = lu_ent_get(ent, LU_GROUPNAME);
-				if(!(values && values->data)) {
-					fprintf(stderr, _("Group with GID %ld did not have a group name.\n"), (long)gid);
-					return 6;
-				} else {
-					if(strcmp(values->data, user) == 0) {
-						if(lu_group_delete(ctx, ent, &error) == FALSE) {
-							fprintf(stderr, _("Group %s could not be deleted: %s.\n"), (char*)values->data, error->string);
+			values = lu_ent_get(ent, LU_GROUPNAME);
+			if ((values == NULL) || (values->n_values == 0)) {
+				fprintf(stderr, _("Group with GID %ld did not "
+					"have a group name.\n"), (long) gid);
+				return 6;
+			}
+			value = g_value_array_get_nth(values, 0);
+			tmp = g_value_get_string(value);
+			if (strcmp(tmp, user) == 0) {
+				if (lu_group_delete(ctx, ent, &error) == FALSE){
+					fprintf(stderr, _("Group %s could not "
+						"be deleted: %s.\n"), tmp);
 							return 7;
-						}
-						lu_hup_nscd();
-					}
 				}
 			}
 		}
 	}
 
-	if(remove_home) {
+	lu_hup_nscd();
+
+	if (remove_home) {
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		if(!(values && values->data)) {
-			fprintf(stderr, _("%s did not have a home directory.\n"), user);
+		if ((values == NULL) || (values->n_values == 0)) {
+			fprintf(stderr, _("%s did not have a home "
+				"directory.\n"), user);
 			return 8;
 		} else {
-			if(lu_homedir_remove(values->data, &error) == FALSE) {
-				fprintf(stderr, _("Error removing %s: %s.\n"), (char*)values->data, error->string);
+			value = g_value_array_get_nth(values, 0);
+			tmp = g_value_get_string(value);
+			if (lu_homedir_remove(tmp, &error) == FALSE) {
+				fprintf(stderr, _("Error removing %s: %s.\n"),
+					tmp, error->string);
 				return 9;
 			}
 		}

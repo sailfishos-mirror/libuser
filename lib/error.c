@@ -17,11 +17,12 @@
 
 #ident "$Id$"
 
-#define _(String) gettext(String)
+#define _(String) dgettext(PACKAGE, String)
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <sys/types.h>
 #include <errno.h>
 #include <execinfo.h>
 #include <libintl.h>
@@ -30,12 +31,10 @@
 #include <string.h>
 #include "../include/libuser/user.h"
 
-/** @file usererr.c */
-
 static const char *
 lu_strerror(enum lu_status code)
 {
-	switch(code) {
+	switch (code) {
 		case lu_success:
 			return _("success");
 		case lu_warning_config_disabled:
@@ -82,26 +81,74 @@ lu_strerror(enum lu_status code)
 	return _("unknown error");
 }
 
+gboolean
+lu_error_is_success(enum lu_status code)
+{
+	switch (code) {
+		case lu_success:
+			return TRUE;
+		default:
+			return FALSE;
+	}
+	return FALSE;
+}
+
+gboolean
+lu_error_is_warning(enum lu_status code)
+{
+	switch (code) {
+		case lu_warning_config_disabled:
+			return TRUE;
+		default:
+			return FALSE;
+	}
+	return FALSE;
+}
+
+gboolean
+lu_error_is_error(enum lu_status code)
+{
+	switch (code) {
+		case lu_error_generic:
+		case lu_error_privilege:
+		case lu_error_access_denied:
+		case lu_error_name_bad:
+		case lu_error_id_bad:
+		case lu_error_name_used:
+		case lu_error_id_used:
+		case lu_error_terminal:
+		case lu_error_open:
+		case lu_error_lock:
+		case lu_error_stat:
+		case lu_error_read:
+		case lu_error_write:
+		case lu_error_search:
+		case lu_error_init:
+		case lu_error_module_load:
+		case lu_error_module_sym:
+		case lu_error_module_version:
+			return TRUE;
+		default:
+			return FALSE;
+	}
+	return FALSE;
+}
+
 void
 lu_error_new(struct lu_error **error, enum lu_status code,
 	     const char *desc, ...)
 {
 	struct lu_error *ret;
 	va_list args;
-	void *stack[128];
-	int depth;
 
-	if(error != NULL) {
+	if (error != NULL) {
 		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
 		ret->string = desc ?
-			      g_strdup_vprintf(desc, args) :
-			      g_strdup_printf(lu_strerror(code),
-					      strerror(errno));
-		depth = backtrace(stack, sizeof(stack) / sizeof(stack[0]));
-		ret->stack = backtrace_symbols(stack, depth);
+			g_strdup_vprintf(desc, args) :
+			g_strdup_printf(lu_strerror(code), strerror(errno));
 		va_end(args);
 		*error = ret;
 	}
@@ -110,11 +157,10 @@ lu_error_new(struct lu_error **error, enum lu_status code,
 void
 lu_error_free(struct lu_error **error)
 {
-	if(error != NULL) {
-		if((*error)->string != NULL) {
+	if (error != NULL) {
+		if ((*error)->string != NULL) {
 			g_free((*error)->string);
 		}
-		free((*error)->stack);
 		memset(*error, 0, sizeof(**error));
 		g_free(*error);
 		*error = NULL;

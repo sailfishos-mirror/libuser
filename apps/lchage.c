@@ -29,6 +29,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include <glib.h>
 #include "../include/libuser/user.h"
 #include "apputil.h"
 
@@ -37,12 +38,14 @@
  * empty, or invalid somehow, return the default of -1.
  */
 static gint
-read_ndays(const char *days)
+read_ndays(GValueArray *array)
 {
 	char *p;
+	GValue *value;
 	gint n_days;
-	n_days = strtol(days, &p, 10);
-	if((strlen(days) == 0) || (n_days == -1) || (p == NULL) || *p) {
+	value = g_value_array_get_nth(array, 0);
+	n_days = strtol(g_value_get_string(value), &p, 10);
+	if ((p == NULL) || (*p != '\0')) {
 		n_days = -1;
 	}
 	return n_days;
@@ -56,7 +59,7 @@ date_to_string(gint n_days, char *buf, size_t len)
 {
 	GDate *date;
 
-	if((n_days >= 0) && (n_days < 99999)) {
+	if ((n_days >= 0) && (n_days < 99999)) {
 		date = g_date_new_dmy(1, G_DATE_JANUARY, 1970);
 		g_date_add_days(date, n_days);
 		g_date_strftime(buf, len, "%x", date);
@@ -69,29 +72,39 @@ main(int argc, const char **argv)
 {
 	char buf[LINE_MAX];
 	long shadowMin = -2, shadowMax = -2, shadowLastChange = -2,
-             shadowInactive = -2, shadowExpire = -2, shadowWarning = -2;
-	const char  *user = NULL;
+	    shadowInactive = -2, shadowExpire = -2, shadowWarning = -2;
+	const char *user = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GList *values, *values2, *values3;
+	GValueArray *values, *values2, *values3;
+	GValue value;
 	int interactive = FALSE;
 	int list_only = FALSE;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
-		{"list", 'l', POPT_ARG_NONE, &list_only, 0, "list aging parameters for the user", NULL},
-		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0, "minimum days between password changes", "NUM"},
-		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0, "maximum days between password changes", "NUM"},
-		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0, "date of last password change, relative to days since "
-		 "1/1/70", "NUM"}, {"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
-		 "number of days after expiration date when account " "is considered inactive", "NUM"},
-		{"expire", 'E', POPT_ARG_LONG, &shadowInactive, 0, "password expiration date", "NUM"},
-		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0, "days before expiration to begin warning user", "NUM"},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
+		{"list", 'l', POPT_ARG_NONE, &list_only, 0,
+		 "list aging parameters for the user", NULL},
+		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0,
+		 "minimum days between password changes", "NUM"},
+		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0,
+		 "maximum days between password changes", "NUM"},
+		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0,
+		 "date of last password change, relative to days since "
+		 "1/1/70", "NUM"},
+		{"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
+		 "number of days after expiration date when account "
+		 "is considered inactive", "NUM"},
+		{"expire", 'E', POPT_ARG_LONG, &shadowInactive, 0,
+		 "password expiration date", "NUM"},
+		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0,
+		 "days before expiration to begin warning user", "NUM"},
 		POPT_AUTOHELP
-	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -101,110 +114,142 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lchage", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
-	if(c != -1) {
-		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+	if (c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"),
+			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
 		exit(1);
 	}
 	user = poptGetArg(popt);
 
-	if(user == NULL) {
+	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
-	ctx = lu_start(user, lu_user, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
-	if(ctx == NULL) {
-		if(error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+	ctx = lu_start(user, lu_user, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
+	if (ctx == NULL) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"),
+				PACKAGE, error->string);
 		} else {
-			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+			fprintf(stderr, _("Error initializing %s.\n"),
+				PACKAGE);
 		}
 		return 1;
 	}
 
 	ent = lu_ent_new();
 
-	if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
+	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 2;
 	}
 
-	if(list_only) {
-		if(lu_user_islocked(ctx, ent, &error)) {
+	if (list_only) {
+		if (lu_user_islocked(ctx, ent, &error)) {
 			printf(_("Account is locked.\n"));
 		} else {
 			printf(_("Account is not locked.\n"));
 		}
 		values = lu_ent_get(ent, LU_SHADOWMIN);
-		if(values && values->data) {
-			printf(_("Minimum:\t%d\n"), read_ndays(values->data));
+		if (values && (values->n_values > 0)) {
+			printf(_("Minimum:\t%d\n"),
+			       read_ndays(values));
 		}
 		values = lu_ent_get(ent, LU_SHADOWMAX);
-		if(values && values->data) {
-			printf(_("Maximum:\t%d\n"), read_ndays(values->data));
+		if (values && (values->n_values > 0)) {
+			printf(_("Maximum:\t%d\n"),
+			       read_ndays(values));
 		}
 		values = lu_ent_get(ent, LU_SHADOWWARNING);
-		if(values && values->data) {
-			printf(_("Warning:\t%d\n"), read_ndays(values->data));
+		if (values && (values->n_values > 0)) {
+			printf(_("Warning:\t%d\n"),
+			       read_ndays(values));
 		}
 		values = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if(values && values->data) {
-			printf(_("Inactive:\t%d\n"), read_ndays(values->data));
+		if (values && (values->n_values > 0)) {
+			printf(_("Inactive:\t%d\n"),
+			       read_ndays(values));
 		}
 		values = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
-		if(values && values->data) {
+		if (values && (values->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data),
+			date_to_string(read_ndays(values),
 				       buf, sizeof(buf));
 			printf(_("Last Change:\t%s\n"), buf);
 		}
 
 		values2 = lu_ent_get(ent, LU_SHADOWMAX);
-		if(values && values->data && values2 && values2->data) {
+		if (values && (values->n_values > 0) &&
+		    values2 && (values2->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data) + read_ndays(values2->data), buf, sizeof(buf));
+			date_to_string(read_ndays(values) +
+				       read_ndays(values2), buf,
+				       sizeof(buf));
 			printf(_("Password Expires:\t%s\n"), buf);
 		}
 
 		values3 = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if(values && values->data && values2 &&
-		   values2->data && values3 && values3->data) {
+		if (values && (values->n_values > 0) &&
+		    values2 && (values2->n_values > 0) &&
+		    values3 && (values3->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data) + read_ndays(values2->data) + read_ndays(values3->data),
-				       buf, sizeof(buf));
+			date_to_string(read_ndays(values) +
+				       read_ndays(values2) +
+				       read_ndays(values3), buf,
+				       sizeof(buf));
 			printf(_("Password Inactive:\t%s\n"), buf);
 		}
 
 		values = lu_ent_get(ent, LU_SHADOWEXPIRE);
-		if(values && values->data) {
+		if (values && (values->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data), buf, sizeof(buf));
+			date_to_string(read_ndays(values), buf,
+				       sizeof(buf));
 			printf(_("Account Expires:\t%s\n"), buf);
 		}
 	} else {
-		if(shadowLastChange != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWLASTCHANGE, shadowLastChange);
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_LONG);
+		if (shadowLastChange != -2) {
+			g_value_set_long(&value, shadowLastChange);
+			lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
+			lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 		}
-		if(shadowMin != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWMIN, shadowMin);
+		if (shadowMin != -2) {
+			g_value_set_long(&value, shadowMin);
+			lu_ent_clear(ent, LU_SHADOWMIN);
+			lu_ent_add(ent, LU_SHADOWMIN, &value);
 		}
-		if(shadowMax != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWMAX, shadowMax);
+		if (shadowMax != -2) {
+			g_value_set_long(&value, shadowMax);
+			lu_ent_clear(ent, LU_SHADOWMAX);
+			lu_ent_add(ent, LU_SHADOWMAX, &value);
 		}
-		if(shadowWarning != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWWARNING, shadowWarning);
+		if (shadowWarning != -2) {
+			g_value_set_long(&value, shadowWarning);
+			lu_ent_clear(ent, LU_SHADOWWARNING);
+			lu_ent_add(ent, LU_SHADOWWARNING, &value);
 		}
-		if(shadowInactive != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWINACTIVE, shadowInactive);
+		if (shadowInactive != -2) {
+			g_value_set_long(&value, shadowInactive);
+			lu_ent_clear(ent, LU_SHADOWINACTIVE);
+			lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
 		}
-		if(shadowExpire != -2) {
-			lu_ent_set_numeric(ent, LU_SHADOWEXPIRE, shadowExpire);
+		if (shadowExpire != -2) {
+			g_value_set_long(&value, shadowExpire);
+			lu_ent_clear(ent, LU_SHADOWEXPIRE);
+			lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
 		}
 
-		if(lu_user_modify(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Failed to modify aging information for %s.\n"), user);
+		if (lu_user_modify(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("Failed to modify aging information for %s.\n"),
+				user);
 			return 3;
 		}
 

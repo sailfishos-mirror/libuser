@@ -1,16 +1,4 @@
-/* config.h.in.  Generated from configure.in by autoheader.  */
-/* #define _GNU_SOURCE */
-#undef MODULE_FILES
-#undef MODULE_SHADOW
-#undef MODULE_KRB5
-#undef MODULE_LDAP
-#undef MODULE_SASLDB
-#undef ENABLE_NLS
-#undef HAVE_CATGETS
-#undef HAVE_GETTEXT
-#undef HAVE_STPCPY
-#undef HAVE___SECURE_GETENV
-#undef HAVE_LC_MESSAGES
+/* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
@@ -75,9 +63,6 @@
 /* Define if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define if you have the <krb5.h> header file. */
-#undef HAVE_KRB5_H
-
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
@@ -126,13 +111,13 @@
 /* Define if you have the `putenv' function. */
 #undef HAVE_PUTENV
 
-/* Define if you have the `sasl_checkpass' function. */
+/* if sasl_checkpass() is defined */
 #undef HAVE_SASL_CHECKPASS
 
 /* Define if you have the <sasl.h> header file. */
 #undef HAVE_SASL_H
 
-/* Define if you have the `sasl_user_exists' function. */
+/* if sasl_user_exists() is defined */
 #undef HAVE_SASL_USER_EXISTS
 
 /* Define if you have the <security/pam_appl.h> header file. */
@@ -204,6 +189,12 @@
 /* Define as const if the declaration of iconv() needs const. */
 #undef ICONV_CONST
 
+/* location where locale files will be installed */
+#undef LOCALEDIR
+
+/* location where modules will be installed */
+#undef MODULEDIR
+
 /* Name of package */
 #undef PACKAGE
 
@@ -217,6 +208,9 @@
 
 /* Define if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* location where config files will be installed */
+#undef SYSCONFDIR
 
 /* Version number of package */
 #undef VERSION

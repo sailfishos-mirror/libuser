@@ -27,40 +27,46 @@
 
 #include <glib.h>
 #include <gmodule.h>
-#include "user.h"
-
-#define LU_ENT_MAGIC 0x7f32975e
-#define LU_MODULE_VERSION 0x00060000
-
 #include <libintl.h>
 #include <locale.h>
+#include "user.h"
+
+G_BEGIN_DECLS
+
+#define LU_ENT_MAGIC 0x00000005
+#define LU_MODULE_VERSION 0x00070000
 #define _(String) gettext(String)
 
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
 struct lu_string_cache {
 	GTree *tree;
-	char * (*cache)(struct lu_string_cache *, const char *);
-	void (*free)(struct lu_string_cache *);
+	char *(*cache) (struct lu_string_cache *, const char *);
+	void (*free) (struct lu_string_cache *);
 };
 
 /* A function to create a new cache. */
 struct lu_string_cache *lu_string_cache_new(gboolean case_sensitive);
 
+struct lu_attribute {
+	const char *name;
+	GValueArray *values;
+};
+
 /* An entity structure. */
 struct lu_ent {
 	u_int32_t magic;
 	enum lu_entity_type type;	/* User or group? */
-	struct lu_string_cache *acache;	/* String cache for attribute names. */
-	struct lu_string_cache *vcache;	/* String cache for attribute values. */
-	GTree *original_attributes;	/* GLists of the original values
-					   associated with attribute names. */
-	GTree *attributes;		/* GLists of values associated with
-					   attribute names. */
-	const char *source_info;	/* Name of the info module this user was
-					   looked up in. */
-	const char *source_auth;	/* Name of the auth module this user was
-					   looked up in. */
+	struct lu_string_cache *acache;	/* String cache for attribute names,
+					   typically case-insensitive. */
+	struct lu_string_cache *vcache;	/* String cache for attribute values,
+					   typically case-sensitive. */
+
+	GArray *current, *pending;	/* Current and pending attribute names
+					   and values, stored as a GArray of
+					   lu_attribute structures. */
+	GValueArray *modules;		/* Names of modules this user's info
+					   was looked up in. */
 };
 
 /* A context structure. */
@@ -76,125 +82,148 @@ struct lu_context {
 	lu_prompt_fn *prompter;		/* Pointer to the prompter function. */
 	gpointer prompter_data;		/* Application-specific data to be
 					   passed to the prompter function. */
-	GList *auth_module_names;	/* A list of loaded auth modules
-					   names. */
-	GList *info_module_names;	/* A list of loaded information module
-					   names. */
+	GValueArray *module_names;		/* Names of loaded modules. */
+	GValueArray *create_module_names;	/* Names of modules to use to
+						   create accounts -- usually
+						   a subset of all modules. */
 	GTree *modules;			/* A tree, keyed by module name,
 					   of module structures. */
 };
 
-/* What type of function a module serves. */
-enum lu_module_type {
-	auth = 0xca20,
-	info = 0xec33,
-};
-
 /* A module structure. */
-typedef struct lu_module {
+struct lu_module {
 	u_int32_t version;		/* Should be LU_MODULE_VERSION. */
-	GModule *module_handle;
+	GModule *module_handle;		/* Pointer to the module data kept by
+					   GModule. */
 	struct lu_string_cache *scache;	/* A string cache. */
 	const char *name;		/* Name of the module. */
 	struct lu_context *lu_context;	/* Context the module was opened in. */
 	void *module_context;		/* Module-private data. */
 
+	/* A function for telling if the module makes use of elevated
+	 * privileges (i.e., modifying files which normal users can't. */
+	gboolean(*uses_elevated_privileges) (struct lu_module * module);
+
 	/* Functions for looking up users and groups by name or ID. */
-	gboolean (*user_lookup_name)(struct lu_module *module,
-				     gconstpointer name, struct lu_ent *ent,
-				     struct lu_error **error);
-	gboolean (*group_lookup_name)(struct lu_module *module,
-				      gconstpointer name, struct lu_ent *ent,
-				      struct lu_error **error);
-	gboolean (*user_lookup_id)(struct lu_module *module, gconstpointer uid,
-				   struct lu_ent *ent, struct lu_error **error);
-	gboolean (*group_lookup_id)(struct lu_module *module, gconstpointer gid,
-				    struct lu_ent *ent,
-				    struct lu_error **error);
+	gboolean(*user_lookup_name) (struct lu_module * module,
+				     gconstpointer name,
+				     struct lu_ent * ent,
+				     struct lu_error ** error);
+	gboolean(*group_lookup_name) (struct lu_module * module,
+				      gconstpointer name,
+				      struct lu_ent * ent,
+				      struct lu_error ** error);
+	gboolean(*user_lookup_id) (struct lu_module * module,
+				   long uid,
+				   struct lu_ent * ent,
+				   struct lu_error ** error);
+	gboolean(*group_lookup_id) (struct lu_module * module,
+				    long gid,
+				    struct lu_ent * ent,
+				    struct lu_error ** error);
 
 	/* Apply attributes in the ent structure to the user named by the
 	 * structure's LU_USERNAME attribute. */
-	gboolean (*user_add)(struct lu_module *module, struct lu_ent *ent,
-			     struct lu_error **error);
-	gboolean (*user_mod)(struct lu_module *module, struct lu_ent *ent,
-			     struct lu_error **error);
-	gboolean (*user_del)(struct lu_module *module, struct lu_ent *ent,
-			     struct lu_error **error);
+	gboolean(*user_add_prep) (struct lu_module * module,
+				  struct lu_ent * ent,
+				  struct lu_error ** error);
+	gboolean(*user_add) (struct lu_module * module,
+			     struct lu_ent * ent,
+			     struct lu_error ** error);
+	gboolean(*user_mod) (struct lu_module * module,
+			     struct lu_ent * ent,
+			     struct lu_error ** error);
+	gboolean(*user_del) (struct lu_module * module,
+			     struct lu_ent * ent,
+			     struct lu_error ** error);
 
 	/* Lock, unlock, or set the password on the account of the user named
 	 * by the structure's LU_USERNAME attribute. */
-	gboolean (*user_lock)(struct lu_module *module, struct lu_ent *ent,
-			      struct lu_error **error);
-	gboolean (*user_unlock)(struct lu_module *module, struct lu_ent *ent,
-				struct lu_error **error);
-	gboolean (*user_islocked)(struct lu_module *module, struct lu_ent *ent,
-				  struct lu_error **error);
-	gboolean (*user_setpass)(struct lu_module *module, struct lu_ent *ent,
-				 const char *newpass, struct lu_error **error);
+	gboolean(*user_lock) (struct lu_module * module,
+			      struct lu_ent * ent,
+			      struct lu_error ** error);
+	gboolean(*user_unlock) (struct lu_module * module,
+				struct lu_ent * ent,
+				struct lu_error ** error);
+	gboolean(*user_is_locked) (struct lu_module * module,
+				   struct lu_ent * ent,
+				   struct lu_error ** error);
+	gboolean(*user_setpass) (struct lu_module * module,
+				 struct lu_ent * ent,
+				 const char *newpass,
+				 struct lu_error ** error);
 
 	/* Apply attributes in the ent structure to the group named by the
 	 * structure's LU_GROUPNAME attribute. */
-	gboolean (*group_add)(struct lu_module *module, struct lu_ent *ent,
-			      struct lu_error **error);
-	gboolean (*group_mod)(struct lu_module *module, struct lu_ent *ent,
-			      struct lu_error **error);
-	gboolean (*group_del)(struct lu_module *module, struct lu_ent *ent,
-			      struct lu_error **error);
+	gboolean(*group_add_prep) (struct lu_module * module,
+				   struct lu_ent * ent,
+				   struct lu_error ** error);
+	gboolean(*group_add) (struct lu_module * module,
+			      struct lu_ent * ent,
+			      struct lu_error ** error);
+	gboolean(*group_mod) (struct lu_module * module,
+			      struct lu_ent * ent,
+			      struct lu_error ** error);
+	gboolean(*group_del) (struct lu_module * module,
+			      struct lu_ent * ent,
+			      struct lu_error ** error);
 
 	/* Lock, unlock, or set the password on the record for the group named
 	 * by the structure's LU_GROUPNAME attribute. */
-	gboolean (*group_lock)(struct lu_module *module, struct lu_ent *ent,
-			       struct lu_error **error);
-	gboolean (*group_unlock)(struct lu_module *module, struct lu_ent *ent,
-				 struct lu_error **error);
-	gboolean (*group_islocked)(struct lu_module *module, struct lu_ent *ent,
-				   struct lu_error **error);
-	gboolean (*group_setpass)(struct lu_module *module, struct lu_ent *ent,
-				  const char *newpass, struct lu_error **error);
+	gboolean(*group_lock) (struct lu_module * module,
+			       struct lu_ent * ent,
+			       struct lu_error ** error);
+	gboolean(*group_unlock) (struct lu_module * module,
+				 struct lu_ent * ent,
+				 struct lu_error ** error);
+	gboolean(*group_is_locked) (struct lu_module * module,
+				    struct lu_ent * ent,
+				    struct lu_error ** error);
+	gboolean(*group_setpass) (struct lu_module * module,
+				  struct lu_ent * ent,
+				  const char *newpass,
+				  struct lu_error ** error);
 
 	/* Search for users or groups. */
-	GList *(*users_enumerate)(struct lu_module *module, const char *pattern,
-				  struct lu_error **error);
-	GList *(*groups_enumerate)(struct lu_module *module,
-				   const char *pattern,
-				   struct lu_error **error);
-	GList *(*users_enumerate_by_group)(struct lu_module *module,
-					   const char *group, gid_t gid,
-					   struct lu_error **error);
-	GList *(*groups_enumerate_by_user)(struct lu_module *module,
-					   const char *user,
-					   struct lu_error **error);
+	GValueArray* (*users_enumerate) (struct lu_module * module,
+					 const char *pattern,
+					 struct lu_error ** error);
+	GValueArray* (*users_enumerate_by_group) (struct lu_module * module,
+						  const char *group,
+						  gid_t gid,
+						  struct lu_error ** error);
+	GArray* (*users_enumerate_full) (struct lu_module * module,
+					 const char *pattern,
+					 struct lu_error ** error);
+	GValueArray* (*groups_enumerate) (struct lu_module * module,
+					  const char *pattern,
+					  struct lu_error ** error);
+	GValueArray* (*groups_enumerate_by_user) (struct lu_module * module,
+						  const char *user,
+						  uid_t uid,
+						  struct lu_error ** error);
+	GArray* (*groups_enumerate_full) (struct lu_module * module,
+					  const char *pattern,
+					  struct lu_error ** error);
 
 	/* Clean up any data this module has, and unload it. */
-	gboolean (*close)(struct lu_module *module);
-} lu_module_t;
+	gboolean(*close) (struct lu_module * module);
+};
 
 /* The type of the initialization function a module exports for the library
  * to use when initializing it.  Should fit "lu_%s_init", where the string
  * is the name of the module being loaded (and this should match the "name"
- * attribute of the module structure. */
-typedef struct lu_module * (*lu_module_init_t)(struct lu_context *context,
-					       struct lu_error **error);
+ * attribute of the module structure). */
+typedef struct lu_module *(*lu_module_init_t) (struct lu_context * context,
+					       struct lu_error ** error);
 
 /* Configuration initialization and shutdown. */
 gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error);
 void lu_cfg_done(struct lu_context *context);
 
-/* Set the source of record for a given entity structure. */
-void lu_ent_set_source_info(struct lu_ent *ent, const char *source);
-void lu_ent_set_source_auth(struct lu_ent *ent, const char *source);
-
-/* Copy a list of strings. */
-GList *lu_g_list_copy(GList *list);
-
-/* Compare strings. */
-gint lu_str_equal(gconstpointer v1, gconstpointer v2);
-gint lu_str_case_equal(gconstpointer v1, gconstpointer v2);
-gint lu_strcmp(gconstpointer v1, gconstpointer v2);
-gint lu_strcasecmp(gconstpointer v1, gconstpointer v2);
-
-/* Count the length of a string list. */
-guint lu_strv_len(gchar **v);
+/* Set the sources of record for a given entity structure. */
+void lu_ent_add_module(struct lu_ent *ent, const char *source);
+void lu_ent_clear_modules(struct lu_ent *ent);
 
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
@@ -215,5 +244,7 @@ char *lu_util_field_read(int fd, const char *first, unsigned int field,
 gboolean lu_util_field_write(int fd, const char *first, unsigned int field,
 			     const char *value, struct lu_error **error);
 char *lu_util_shadow_current_date(struct lu_string_cache *cache);
+
+G_END_DECLS
 
 #endif

@@ -1,9 +1,17 @@
-include $(top_srcdir)/Makefile.extra
+CFLAGS = -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
+LDADD = ../lib/libuser.la
 
-EXTRA_PROGRAMS = libuser_files.so libuser_shadow.so libuser_krb5.so libuser_ldap.so libuser_sasldb.so
+EXTRA_PROGRAMS = \
+	libuser_files.so \
+	libuser_shadow.so \
+	libuser_krb5.so \
+	libuser_ldap.so \
+	libuser_sasldb.so
+
 pkglib_PROGRAMS = $(MODULES)
 
-LDADD = ../lib/libuser.la
+LDFLAGS = -shared
+
 libuser_files_so_SOURCES = files.c modules.h
 libuser_shadow_so_SOURCES = files.c modules.h
 libuser_krb5_so_SOURCES = krb5.c modules.h
@@ -12,5 +20,3 @@ libuser_ldap_so_SOURCES = ldap.c modules.h
 libuser_ldap_so_LDADD = @LDAP_LDADD@ @LDAP_LIBS@ ../lib/libuser.la
 libuser_sasldb_so_SOURCES = sasldb.c modules.h
 libuser_sasldb_so_LDADD = @SASL_LDADD@ @SASL_LIBS@ ../lib/libuser.la
-
-LDFLAGS = @GLIB_LIBS@ -shared -module -export-dynamic --avoid-version

@@ -41,7 +41,8 @@ main(int argc, const char **argv)
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
@@ -52,40 +53,47 @@ main(int argc, const char **argv)
 	popt = poptGetContext("lgroupdel", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] group"));
 	c = poptGetNextOpt(popt);
-	if(c != -1) {
-		fprintf(stderr, _("Error parsing arguments: %s.\n"), poptStrerror(c));
+	if (c != -1) {
+		fprintf(stderr, _("Error parsing arguments: %s.\n"),
+			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
 		exit(1);
 	}
 	group = poptGetArg(popt);
 
-	if(group == NULL) {
+	if (group == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
-	if(ctx == NULL) {
-		if(error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+	ctx = lu_start(NULL, 0, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
+	if (ctx == NULL) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"),
+				PACKAGE, error->string);
 		} else {
-			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+			fprintf(stderr, _("Error initializing %s.\n"),
+				PACKAGE);
 		}
 		return 1;
 	}
 
 	ent = lu_ent_new();
 
-	if(lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
+	if (lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
 		return 2;
 	}
 
-	if(lu_group_delete(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Group %s could not be deleted.\n"), group);
+	if (lu_group_delete(ctx, ent, &error) == FALSE) {
+		fprintf(stderr, _("Group %s could not be deleted.\n"),
+			group);
 		return 3;
 	}
+
 	lu_hup_nscd();
 
 	lu_ent_free(ent);

@@ -2,28 +2,26 @@
 # all of the configuration-reading code to use alchemist, but for now this
 # will have to do.
 
-# Do not modify the default module lists if you care about unattended calls
+# Do not modify the default module list if you care about unattended calls
 # to programs (i.e., scripts) working!
+
 [defaults]
 moduledir = @pkglibdir@
 skeleton = @scdir@/skel
-auth_modules = shadow files
-info_modules = files
-network_modules = ldap krb5
+modules = files shadow
+create_modules = files shadow
+# modules = files shadow ldap krb5
+# create_modules = ldap krb5
 
 [userdefaults]
-objectclass = account
-objectclass = posixAccount
-cn = %n
+uid = %n
 uidNumber = 500
 gidNumber = %u
 userPassword = {crypt}!!
 homeDirectory = /home/%n
 loginShell = /bin/bash
-description = The user named %n with uid %u.
 gecos = %n
 
-objectclass = shadowAccount
 shadowLastChange = %d
 shadowMin = 0
 shadowMax = 99999
@@ -32,11 +30,7 @@ shadowInactive = -1
 shadowExpire = -1
 shadowFlag = -1
 
-objectclass = organizationalPerson
-sn = %n
-
 [groupdefaults]
-objectclass = posixGroup
 cn = %n
 gidNumber = 500
 userPassword = !!

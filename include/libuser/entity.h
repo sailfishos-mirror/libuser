@@ -20,35 +20,38 @@
 #define libuser_entity_h
 
 #include <sys/types.h>
+#include <stdio.h>
 #include <glib.h>
+#include <glib-object.h>
 
-/* Attributes carried by all entity structures. */
-#define LU_OBJECTCLASS		"objectClass"
+G_BEGIN_DECLS
 
 /* Attributes carried by all user structures. */
-#define LU_USERNAME		"uid"
-#define LU_UID			"uid"
-#define LU_USERPASSWORD		"userPassword"
-#define LU_UIDNUMBER		"uidNumber"
-#define LU_GIDNUMBER		"gidNumber"
-#define LU_GECOS		"gecos"
-#define LU_HOMEDIRECTORY	"homeDirectory"
-#define LU_LOGINSHELL		"loginShell"
+#define LU_USERNAME		"pw_name"
+#define LU_USERPASSWORD		"pw_passwd"
+#define LU_UIDNUMBER		"pw_uid"
+#define LU_GIDNUMBER		"pw_gid"
+#define LU_GECOS		"pw_gecos"
+#define LU_HOMEDIRECTORY	"pw_dir"
+#define LU_LOGINSHELL		"pw_shell"
 
 /* Attributes carried by group structures. */
-#define LU_GROUPNAME		"cn"
-#define LU_GID			"gid"
-#define LU_MEMBERUID		"memberUid"
-#define LU_ADMINISTRATORUID	"administratorUid"
+#define LU_GROUPNAME		"gr_name"
+#define LU_GROUPPASSWORD	"gr_passwd"
+#define LU_GID			"gr_gid"
+#define LU_MEMBERUID		"gr_mem"
+#define LU_ADMINISTRATORUID	"gr_adm"
 
-/* Attributes carried by shadow structures. */
-#define LU_SHADOWLASTCHANGE	"shadowLastChange"
-#define LU_SHADOWMIN		"shadowMin"
-#define LU_SHADOWMAX		"shadowMax"
-#define LU_SHADOWWARNING	"shadowWarning"
-#define LU_SHADOWINACTIVE	"shadowInactive"
-#define LU_SHADOWEXPIRE		"shadowExpire"
-#define LU_SHADOWFLAG		"shadowFlag"
+/* Attributes carried by shadow user structures. */
+#define LU_SHADOWNAME		LU_USERNAME
+#define LU_SHADOWPASSWORD	"sp_pwdp"
+#define LU_SHADOWLASTCHANGE	"sp_lstchg"
+#define LU_SHADOWMIN		"sp_min"
+#define LU_SHADOWMAX		"sp_max"
+#define LU_SHADOWWARNING	"sp_warn"
+#define LU_SHADOWINACTIVE	"sp_inact"
+#define LU_SHADOWEXPIRE		"sp_expire"
+#define LU_SHADOWFLAG		"sp_flag"
 
 /* Additional fields carried by some structures.  If they have them,
  * it's safe to change them. */
@@ -58,9 +61,6 @@
 #define LU_ROOMNUMBER		"roomNumber"
 #define LU_TELEPHONENUMBER	"telephoneNumber"
 #define LU_HOMEPHONE		"homePhone"
-
-/* A memory structure which holds the attributes of a user or group. */
-typedef struct lu_ent lu_ent_t;
 
 /* Function to allocate a new entity structure, or destroy one. */
 struct lu_ent *lu_ent_new(void);
@@ -73,25 +73,35 @@ void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
  * us the ability to roll back changes. */
 void lu_ent_revert(struct lu_ent *ent);
 
-/* These functions are used to set and query "original" data attributes, the
+/* These functions are used to set and query "current" data attributes, the
  * values the library itself usually sets. */
-GList *lu_ent_get_original(struct lu_ent *ent, const char *attribute);
-void lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val);
-void lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr,
-				 long val);
-void lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val);
-void lu_ent_clear_original(struct lu_ent *ent, const char *attr);
+GValueArray *lu_ent_get_current(struct lu_ent *ent, const char *attribute);
+gboolean lu_ent_has_current(struct lu_ent *ent, const char *attribute);
+void lu_ent_set_current(struct lu_ent *ent, const char *attr,
+			const GValueArray *values);
+void lu_ent_add_current(struct lu_ent *ent, const char *attr,
+			const GValue *value);
+void lu_ent_clear_current(struct lu_ent *ent, const char *attr);
+void lu_ent_clear_all_current(struct lu_ent *ent);
+void lu_ent_del_current(struct lu_ent *ent, const char *attr,
+			const GValue *value);
+GList *lu_ent_get_attributes_current(struct lu_ent *ent);
 
-/* These functions are used to set and query "working" data attributes, or
- * recorded-as-pending changes. */
-GList *lu_ent_get(struct lu_ent *ent, const char *attribute);
+/* These functions are used to set and query "pending" data attributes, which
+ * will take effect when we write this entry back out. */
+GValueArray *lu_ent_get(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has(struct lu_ent *ent, const char *attribute);
-void lu_ent_set(struct lu_ent *ent, const char *attr, const char *val);
-void lu_ent_set_numeric(struct lu_ent *ent, const char *attr, long val);
-void lu_ent_add(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_set(struct lu_ent *ent, const char *attr,
+		const GValueArray *values);
+void lu_ent_add(struct lu_ent *ent, const char *attr,
+		const GValue *value);
 void lu_ent_clear(struct lu_ent *ent, const char *attr);
 void lu_ent_clear_all(struct lu_ent *ent);
-void lu_ent_del(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_del(struct lu_ent *ent, const char *attr, const GValue *value);
 GList *lu_ent_get_attributes(struct lu_ent *ent);
+
+void lu_ent_dump(struct lu_ent *ent, FILE *fp);
+
+G_END_DECLS
 
 #endif

@@ -22,32 +22,40 @@
 #include <sys/types.h>
 #include <glib.h>
 
+G_BEGIN_DECLS
+
 /* The type of data passed to a prompter function.  The library uses these
  * when it needs to prompt the user for information. */
 struct lu_prompt {
- 	/* An invariant string of the form "module/name", which describes the
+	/* An invariant string of the form "module/name", which describes the
 	 * information being prompted for.  The calling application may use
 	 * this value as an index into a hash table used to cache answers to
 	 * particular queries. */
 	const char *key;
- 	/* The text of a prompt to display.  This *may* be translated for the
+	/* The text of a prompt to display.  This *may* be translated for the
 	 * current locale by a module. */
 	const char *prompt;
- 	/* Whether or not the user's response should be echoed to the screen
-	 *  or visible in an entry field.*/
+	/* The text domain which contains this prompt's translations.  This
+	 * may be the default libuser domain, or a module-specific domain
+	 * the module which provides this prompt bound when it was loaded. */
+	const char *domain;
+	/* Whether or not the user's response should be echoed to the screen
+	 * (in a console app) or visible in an entry field (in a GUI app).*/
 	gboolean visible;
- 	/* A default value, given as a string. */
+	/* A default value, given as a string.  This will only contain a
+	 * value if the string is visible, but the reverse won't necessarily
+	 * be true (default_value -> visible). */
 	const char *default_value;
- 	/* The user's response. */
+	/* The user's response. */
 	char *value;
- 	/* A function which can free the user's response. */
-	void(*free_value)(char *);
+	/* A function which can free the user's response. */
+	void (*free_value) (char *);
 };
 
-typedef gboolean (lu_prompt_fn)(struct lu_prompt *prompts,
+typedef gboolean (lu_prompt_fn)(struct lu_prompt * prompts,
 				int count,
 				gpointer callback_data,
-				struct lu_error **error);
+				struct lu_error ** error);
 gboolean lu_prompt_console(struct lu_prompt *prompts,
 			   int count,
 			   gpointer callback_data,
@@ -56,5 +64,7 @@ gboolean lu_prompt_console_quiet(struct lu_prompt *prompts,
 				 int count,
 				 gpointer callback_data,
 				 struct lu_error **error);
+
+G_END_DECLS
 
 #endif

@@ -25,17 +25,25 @@
 #include <stdlib.h>
 #include "../include/libuser/user_private.h"
 
-static int
-dump_attribute(gpointer key, gpointer value, gpointer data)
+static void
+dump_attribute(const char *attribute, struct lu_ent *ent)
 {
-	GList *list;
-	g_print("%s\n", (char*) key);
-	for(list = (GList*) value; list; list = g_list_next(list))
-		g_print(" %s = %s\n", (char*) key, (char*) list->data);
-	return 0;
+	GValueArray *array;
+	GValue *value;
+	int i;
+	g_print("%s\n", attribute);
+	array = lu_ent_get(ent, attribute);
+	if (array != NULL) {
+		for (i = 0; i < array->n_values; i++) {
+			value = g_value_array_get_nth(array, i);
+			g_print(" %s = %s\n", attribute,
+				g_value_get_string(value));
+		}
+	}
 }
 
-int main(int argc, char **argv)
+int
+main(int argc, char **argv)
 {
 	struct lu_context *ctx;
 	struct lu_ent *ent, *tmp, *temp;
@@ -50,39 +58,40 @@ int main(int argc, char **argv)
 
 	control = g_malloc0(65536);
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, &error);
+	ctx =
+	    lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, &error);
 
-	if(ctx == NULL) {
-		g_print(gettext("Error initializing %s: %s.\n"), PACKAGE, error->string);
+	if (ctx == NULL) {
+		g_print(gettext("Error initializing %s: %s.\n"), PACKAGE,
+			error->string);
 		exit(1);
 	}
 
 	g_print(gettext("Default user object classes:\n"));
 	ret = lu_cfg_read(ctx, "userdefaults/objectclass", "bar");
-	for(i = 0; i < g_list_length(ret); i++) {
-		g_print(" %s\n", (char*) g_list_nth(ret, i)->data);
+	for (i = 0; i < g_list_length(ret); i++) {
+		g_print(" %s\n", (char *) g_list_nth(ret, i)->data);
 	}
 
 	g_print(gettext("Default user attribute names:\n"));
 	ret = lu_cfg_read_keys(ctx, "userdefaults");
-	for(i = 0; i < g_list_length(ret); i++) {
-		g_print(" %s\n", (char*) g_list_nth(ret, i)->data);
+	for (i = 0; i < g_list_length(ret); i++) {
+		g_print(" %s\n", (char *) g_list_nth(ret, i)->data);
 	}
 
 	g_print(gettext("Getting default user attributes:\n"));
 	ent = lu_ent_new();
 	lu_user_default(ctx, "newuser", FALSE, ent);
-	g_tree_traverse(ent->attributes, dump_attribute, G_IN_ORDER, NULL);
+	lu_ent_dump(ent, stdout);
 
-	ret = lu_ent_get(ent, "UIDNUMBER");
-	dump_attribute("UIDNUMBER", ret, NULL);
+	dump_attribute(LU_UIDNUMBER, ent);
 
 	g_print(gettext("Copying user structure:\n"));
 	tmp = lu_ent_new();
 	lu_ent_copy(ent, tmp);
 	temp = lu_ent_new();
 	lu_ent_copy(tmp, temp);
-	g_tree_traverse(temp->attributes, dump_attribute, G_IN_ORDER, NULL);
+	lu_ent_dump(temp, stdout);
 
 	lu_ent_free(ent);
 	lu_ent_free(tmp);

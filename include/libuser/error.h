@@ -19,11 +19,11 @@
 #ifndef libuser_error_h
 #define libuser_error_h
 
-/** @file error.h */
-
 #include <sys/types.h>
 #include <errno.h>
 #include <glib.h>
+
+G_BEGIN_DECLS
 
 enum lu_status {
 	/* Non-fatal. */
@@ -61,7 +61,6 @@ enum lu_status {
 
 struct lu_error {
 	enum lu_status code;
-	char **stack;
 	char *string;
 };
 
@@ -71,15 +70,11 @@ struct lu_error {
 do { \
 	struct lu_error **__err = (err_p_p); \
 	if ((__err == NULL) || (*__err != NULL)) { \
-		int i; \
 		if(__err == NULL) { \
 			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
 		} else \
 		if(*__err != NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\nstack:\n", __FUNCTION__); \
-			for(i = 0; (*__err)->stack && (*__err)->stack[i]; i++) { \
-				fprintf(stderr, "\t%s\n", (*__err)->stack[i]); \
-			} \
+			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p, __FUNCTION__); \
 		} \
 		abort(); \
 	} \
@@ -88,6 +83,11 @@ do { \
 /* Functions for allocating and freeing error objects. */
 void lu_error_new(struct lu_error **error, enum lu_status code,
 		  const char *fmt, ...);
+gboolean lu_error_is_success(enum lu_status status);
+gboolean lu_error_is_warning(enum lu_status status);
+gboolean lu_error_is_error(enum lu_status status);
 void lu_error_free(struct lu_error **error);
+
+G_END_DECLS
 
 #endif

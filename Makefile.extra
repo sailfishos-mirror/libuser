@@ -1,7 +1,0 @@
-AM_CFLAGS = @GLIB_CFLAGS@ \
-	-I$(top_srcdir)/include \
-	-I$(top_srcdir)/intl \
-	-I$(PYTHON_PATH) \
-	-DLOCALEDIR=\"`eval echo $(datadir)/locale`\" \
-	-DMODULEDIR=\"`eval echo $(pkglibdir)`\" \
-	-DSYSCONFDIR=\"`eval echo $(sysconfdir)`\" 

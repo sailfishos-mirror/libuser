@@ -1,5 +1,6 @@
 EXTRA_DIST = admin.c ent.c misc.c
-include $(top_srcdir)/Makefile.extra
+
+CFLAGS = -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
 
 pythondir = $(libdir)/python@PYTHON_VERSION@/site-packages/
 

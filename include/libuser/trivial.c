@@ -1,4 +1,5 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/*
+ * Copyright (C) 2000,2001 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -15,15 +16,16 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef modules_h
-#define modules_h
-#include "../include/libuser/user.h"
+#include "config.h"
+#include "entity.h"
+#include "error.h"
+#include "prompt.h"
+#include "quota.h"
+#include "user.h"
+#include "user_private.h"
 
-#define LU_KRBNAME "krbName"
-
-struct lu_module *lu_files_init(struct lu_context *context, struct lu_error **error);
-struct lu_module *lu_shadow_init(struct lu_context *context, struct lu_error **error);
-struct lu_module *lu_krb5_init(struct lu_context *context, struct lu_error **error);
-struct lu_module *lu_ldap_init(struct lu_context *context, struct lu_error **error);
-struct lu_module *lu_sasldb_init(struct lu_context *context, struct lu_error **error);
-#endif
+int
+main(int argc, char **argv)
+{
+	return 0;
+}

@@ -1,7 +1,7 @@
-AC_INIT(configure.in)
+AC_INIT(configure.ac)
 AM_INIT_AUTOMAKE(libuser,0.39.90)
 
-CFLAGS="$CFLAGS -D_GNU_SOURCE"
+CFLAGS="$CFLAGS -D_GNU_SOURCE -DG_DISABLE_DEPRECATED"
 
 AC_PROG_CC
 AC_ISC_POSIX
@@ -12,7 +12,8 @@ AC_PROG_AWK
 
 AM_PROG_LIBTOOL
 
-AM_PATH_GLIB(1.2.9,,,gmodule)
+PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
+PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 
 ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv"
 AM_GNU_GETTEXT
@@ -27,6 +28,7 @@ PAM_LIBS="$LIBS"
 LIBS="$LIBSAVE"
 
 LIBSAVE="$LIBS"
+
 popt=/usr
 AC_ARG_WITH(popt,
 [  --without-popt=DIR       Use popt headers and libraries under DIR],
@@ -35,6 +37,7 @@ if test x$withval != x -a x$withval != xyes ; then
 	popt=$withval
 fi
 ])
+
 if test x$popt != xno ; then
 	if test x$popt != x -a x$popt != x/usr ; then
 		CFLAGS="$CFLAGS -I$popt/include"
@@ -50,54 +53,6 @@ LIBS="$LIBSAVE"
 MODULES="$MODULES ${PACKAGE}_files.so"
 MODULES="$MODULES ${PACKAGE}_shadow.so"
 
-AC_ARG_WITH(krb5,
-[  --with-krb5=DIR       Use Kerberos 5 headers and libraries under DIR],
-[
-if test x$withval != x -a x$withval != xno ; then
-	krb5=$withval
-else
-	krb5=no
-fi
-],krb5=no)
-if test x$krb5 != xno ; then
-	LIBSAVE="$LIBS"
-	if test x$krb5 != xyes -a x$krb5 != x/usr ; then
-		CFLAGS="$CFLAGS -I$krb5/include"
-		CPPFLAGS="$CPPFLAGS -I$krb5/include"
-		LDFLAGS="$LDFLAGS -L$krb5/lib"
-		if test x$krb5 != x/usr ; then
-			KRB5_LDADD=-L$krb5/lib
-		fi
-		LIBS="$LIBS $KRB5_LDADD"
-	fi
-	AC_CHECK_HEADERS(krb5.h)
-	AC_CHECK_FUNC(error_message,,
-		AC_CHECK_LIB(com_err,error_message,
-			     [KRB5_LIBS="-lcom_err $KRB5_LIBS"
-			      LIBS="-lcom_err $LIBS"],,[$LDFLAGS $LIBS]))
-	AC_CHECK_FUNC(mit_des_key_sched,,[
-		AC_CHECK_LIB(crypto,mit_des_key_sched,
-			     [KRB5_LIBS="-lcrypto $KRB5_LIBS"
-			      LIBS="-lcrypto $LIBS"]
-			,[AC_CHECK_LIB(k5crypto,mit_des_key_sched,
-				      [KRB5_LIBS="-lk5crypto $KRB5_LIBS"
-				       LIBS="-lk5crypto $LIBS"],,[$LDFLAGS $LIBS])])])
-	AC_CHECK_FUNC(krb5_init_context,,[
-		AC_CHECK_LIB(krb5,krb5_init_context,
-			     [KRB5_LIBS="-lkrb5 $KRB5_LIBS"
-			      LIBS="-lkrb5 $LIBS"],,[$LDFLAGS $LIBS])])
-	AC_CHECK_FUNC(kadm5_chpass_principal,,[
-		AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal,
-			     [KRB5_LIBS="-lkadm5clnt $KRB5_LIBS"
-			      LIBS="-lkadm5clnt $LIBS"],,[$LDFLAGS $LIBS])])
-	AC_CHECK_FUNC(kadm5_create_principal,[
-		AC_CHECK_FUNC(kadm5_delete_principal,[
-			AC_CHECK_FUNC(kadm5_modify_principal,[
-				AC_CHECK_FUNC(kadm5_rename_principal,[
-					MODULES="$MODULES ${PACKAGE}_krb5.so"])])])])
-	LIBS="$LIBSAVE"
-fi
-
 AC_ARG_WITH(ldap,
 [  --with-ldap=DIR       Use OpenLDAP 2.x headers and libraries under DIR],
 [
@@ -107,6 +62,7 @@ else
 	ldap=no
 fi
 ],ldap=no)
+
 if test x$ldap != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$ldap != xyes -a x$ldap != x/usr ; then
@@ -128,13 +84,13 @@ if test x$ldap != xno ; then
 			     LDAP_LIBS="-lldap $LDAP_LIBS"
 			     LIBS="-lldap $LIBS"],,[$LDFLAGS $LIBS])])
 	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,[
-		AC_CHECK_FUNC(ldap_set_option,[
-			AC_CHECK_FUNC(ldap_start_tls_s,[
-				AC_CHECK_FUNC(ldap_search_s,[
-					AC_CHECK_FUNC(ldap_get_values,[
-						AC_CHECK_FUNC(ldap_modify_ext_s,[
-							AC_CHECK_FUNC(ldap_delete_ext_s,[
-								MODULES="$MODULES ${PACKAGE}_ldap.so"])])])])])])])
+	AC_CHECK_FUNC(ldap_set_option,[
+	AC_CHECK_FUNC(ldap_start_tls_s,[
+	AC_CHECK_FUNC(ldap_search_s,[
+	AC_CHECK_FUNC(ldap_get_values,[
+	AC_CHECK_FUNC(ldap_modify_ext_s,[
+	AC_CHECK_FUNC(ldap_delete_ext_s,[
+	MODULES="$MODULES ${PACKAGE}_ldap.so"])])])])])])])
 	LIBS="$LIBSAVE"
 fi
 
@@ -147,6 +103,7 @@ else
 	sasl=no
 fi
 ],sasl=no)
+
 if test x$sasl != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$sasl != xyes -a x$sasl != x/usr ; then
@@ -166,9 +123,11 @@ if test x$sasl != xno ; then
 			     MODULES="$MODULES ${PACKAGE}_sasldb.so"]
 			     ,,[$LDFLAGS $LIBS])])
 	AC_CHECK_FUNCS(sasl_checkpass,,[
-		AC_CHECK_LIB(sasl,sasl_checkpass,[AC_DEFINE(HAVE_SASL_CHECKPASS)])])
+	AC_CHECK_LIB(sasl,sasl_checkpass,[
+	AC_DEFINE(HAVE_SASL_CHECKPASS,,[if sasl_checkpass() is defined])])])
 	AC_CHECK_FUNCS(sasl_user_exists,,[
-		AC_CHECK_LIB(sasl,sasl_user_exists,[AC_DEFINE(HAVE_SASL_USER_EXISTS)])])
+	AC_CHECK_LIB(sasl,sasl_user_exists,[
+	AC_DEFINE(HAVE_SASL_USER_EXISTS,,[if sasl_user_exists() is defined])])])
 	LIBS="$LIBSAVE"
 fi
 
@@ -177,13 +136,12 @@ AC_ARG_WITH(python-version,
 [  --with-python-version=2.2 Version of Python to build modules for],
 [PYTHON_VERSION=$withval])
 
-PYTHON_PATH=/usr/include/python${PYTHON_VERSION}
+PYTHON_INC=/usr/include/python${PYTHON_VERSION}
 AC_ARG_WITH(python-path,
 [  --with-python-path=DIR Directory headers for your version of Python are in],
-[PYTHON_PATH=$withval])
+[PYTHON_INC=$withval])
 
 AC_HEADER_STDC
-AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
 
 AC_C_CONST
 AC_TYPE_UID_T
@@ -191,7 +149,18 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
+AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
 AC_CHECK_FUNC([__secure_getenv strstr strtol])
+
+test "x$prefix" = xNONE && prefix=$ac_default_prefix
+test "x$exec_prefix" = xNONE && exec_prefix=${prefix}
+
+AC_DEFINE_UNQUOTED(LOCALEDIR,"$datadir/locale",
+		   [location where locale files will be installed])
+AC_DEFINE_UNQUOTED(MODULEDIR,"$libdir/$PACKAGE",
+		   [location where modules will be installed])
+AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
+		   [location where config files will be installed])
 
 AC_SUBST(MODULES)
 AC_SUBST(KRB5_LDADD)
@@ -203,7 +172,7 @@ AC_SUBST(POPT_LIBS)
 AC_SUBST(SASL_LDADD)
 AC_SUBST(SASL_LIBS)
 AC_SUBST(PYTHON_VERSION)
-AC_SUBST(PYTHON_PATH)
+AC_SUBST(PYTHON_INC)
 
 if test `eval echo x$libdir` != xNONE/lib
 then

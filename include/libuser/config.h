@@ -22,14 +22,23 @@
 #include <sys/types.h>
 #include <glib.h>
 
+G_BEGIN_DECLS
+
 struct lu_context;
 
+/* Read a list of values (usually just one) for a given key. */
 GList *lu_cfg_read(struct lu_context *context,
 		   const char *key, const char *default_value);
 
+/* Read a single value for a given key.  Additional values will be discarded. */
 const char *lu_cfg_read_single(struct lu_context *context,
 			       const char *key, const char *default_value);
 
-GList *lu_cfg_read_keys(struct lu_context *context, const char *parent_key);
+/* Read the list of keys below a given key which has children.  This is
+ * primarily used for iterating over a part of the configuration tree. */
+GList *lu_cfg_read_keys(struct lu_context *context,
+			const char *parent_key);
+
+G_END_DECLS
 
 #endif
