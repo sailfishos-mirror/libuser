@@ -28,3 +28,5 @@ archive:
 pkgconfig_DATA = $(PACKAGE).pc
 
 ACLOCAL_AMFLAGS = -I m4
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc \
+	--with-python-version=$(PYTHON_VERSION)

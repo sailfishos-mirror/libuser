@@ -14,4 +14,4 @@ autoconf -Wall
 autoheader -Wall
 automake -Wall --add-missing
 rm -f config.cache
-./configure --prefix=/usr --sysconfdir=/etc --enable-maintainer-mode --with-ldap --with-sasl $@
+./configure --prefix=/usr --sysconfdir=/etc --enable-maintainer-mode --with-ldap --with-sasl --enable-gtk-doc $@

@@ -42,7 +42,7 @@ files useful for developing applications with libuser.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS -fPIC" ; export CFLAGS
-%configure \
+%configure --enable-gtk-doc \
 	--with-ldap \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python} \
