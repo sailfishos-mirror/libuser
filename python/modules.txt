@@ -81,6 +81,10 @@ libuser:
 						A libuser.Entity object with the user or group's information (required).
 
 				- deleteUser:
+					Arguments:
+						A libuser.Entity object with the user or group's information (required).
+						A true/false value indicating whether or not this user's home directory should
+						be removed (optional, defaults to false).
 				- deleteGroup: Remove a user or group from the system.
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).

@@ -264,7 +264,6 @@ static PyObject*
 libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 {
 	char *attr;
-	PyObject *default_value = NULL;
 
 	DEBUG_ENTRY;
 

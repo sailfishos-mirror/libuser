@@ -235,7 +235,7 @@ libuser_admin_init_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	}
 	ent = lu_ent_new();
 	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
+		PyErr_SetString(PyExc_SystemError, PACKAGE " error");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -260,7 +260,7 @@ libuser_admin_init_group(PyObject *self, PyObject *args, PyObject *kwargs)
 	}
 	ent = lu_ent_new();
 	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
+		PyErr_SetString(PyExc_SystemError, PACKAGE " error");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -336,7 +336,7 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_SystemError, error->string);
+		PyErr_SetString(PyExc_SystemError, error ? error->string : PACKAGE " error");
 		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
@@ -350,10 +350,8 @@ libuser_admin_create_home(PyObject *self, PyObject *args, PyObject *kwargs)
 	char *dir = "/var/tmp/libuser-newhome", *skeleton = "/etc/skel";
 	GList *values;
 	char *keywords[] = {"home", "skeleton", NULL};
-	struct libuser_admin *me = (struct libuser_admin *)self;
 	long uidNumber = 0, gidNumber = 0;
 	struct lu_error *error = NULL;
-	gboolean ret;
 
 	DEBUG_ENTRY;
 
@@ -401,10 +399,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 	char *dir = "/var/tmp/libuser-newhome";
 	GList *values;
 	char *keywords[] = {"home", NULL};
-	struct libuser_admin *me = (struct libuser_admin *)self;
-	long uidNumber = 0, gidNumber = 0;
 	struct lu_error *error = NULL;
-	gboolean ret;
 
 	DEBUG_ENTRY;
 
@@ -437,10 +432,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 	char *olddir = "/var/tmp/libuser-newhome", *newdir = "/etc/skel";
 	GList *values;
 	char *keywords[] = {"entity", "newhome", NULL};
-	struct libuser_admin *me = (struct libuser_admin *)self;
-	long uidNumber = 0, gidNumber = 0;
 	struct lu_error *error = NULL;
-	gboolean ret;
 
 	DEBUG_ENTRY;
 
@@ -470,21 +462,26 @@ libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 static PyObject *
 libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
+	PyObject *ent = NULL;
 	PyObject *ret = NULL;
 	PyObject *mkhomedir = self;
+	PyObject *subargs, *subkwargs;
 	char *keywords[] = {"entity", "mkhomedir", NULL};
 
 	DEBUG_ENTRY;
 
-	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "OO", keywords, &ret, &mkhomedir)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O|O", keywords, &ent, &mkhomedir)) {
 		return NULL;
 	}
 
 	ret = libuser_admin_generic(self, args, kwargs, lu_user_add);
 	if(ret != NULL) {
-		if((mkhomedir != self) && (PyObject_IsTrue(mkhomedir))) {
+		if((mkhomedir != NULL) && (PyObject_IsTrue(mkhomedir))) {
 			Py_DECREF(ret);
-			ret = libuser_admin_create_home(self, args, kwargs);
+			subargs = PyTuple_New(1);
+			PyTuple_SetItem(subargs, 0, ent);
+			subkwargs = PyDict_New();
+			ret = libuser_admin_create_home(self, subargs, subkwargs);
 		}
 	}
 
@@ -517,8 +514,32 @@ libuser_admin_modify_group(PyObject *self, PyObject *args, PyObject *kwargs)
 static PyObject *
 libuser_admin_delete_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, kwargs, lu_user_delete);
+	PyObject *ent = NULL;
+	PyObject *ret = NULL;
+	PyObject *rmhomedir = NULL;
+	PyObject *subargs, *subkwargs;
+	char *keywords[] = {"entity", "rmhomedir", NULL};
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O|O", keywords, &ent, &rmhomedir)) {
+		return NULL;
+	}
+
+	ret = libuser_admin_generic(self, args, kwargs, lu_user_delete);
+	if(ret != NULL) {
+		if((rmhomedir != NULL) && (PyObject_IsTrue(rmhomedir))) {
+			Py_DECREF(ret);
+			subargs = PyTuple_New(1);
+			PyTuple_SetItem(subargs, 0, ent);
+			subkwargs = PyDict_New();
+			ret = libuser_admin_remove_home(self, subargs, subkwargs);
+		}
+	}
+
+	DEBUG_EXIT;
+
+	return ret;
 }
 
 static PyObject *
@@ -776,7 +797,7 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	context = lu_start(name, type, info, auth, libuser_admin_python_prompter, ret->prompt_data, &error);
 
 	if(context == NULL) {
-		PyErr_SetString(PyExc_SystemError, error->string);
+		PyErr_SetString(PyExc_SystemError, error ? error->string : "error initializing " PACKAGE);
 		lu_error_free(&error);
 		Py_DECREF(ret);
 		return NULL;

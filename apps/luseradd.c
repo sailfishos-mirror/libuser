@@ -168,17 +168,13 @@ main(int argc, const char **argv)
 	if(!dont_create_home) {
 		char *uid_string = NULL, *gid_string = NULL;
 
-		if(uidNumber != -2) {
-			values = lu_ent_get(ent, LU_USERNAME);
-			if(values) {
-				uidNumber = strtol((char*)values->data, &uid_string, 10);
-			}
+		values = lu_ent_get(ent, LU_UIDNUMBER);
+		if(values) {
+			uidNumber = strtol((char*)values->data, &uid_string, 10);
 		}
 		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if(gidNumber != -2) {
-			if(values) {
-				gidNumber = strtol((char*)values->data, &gid_string, 10);
-			}
+		if(values) {
+			gidNumber = strtol((char*)values->data, &gid_string, 10);
 		}
 
 		if(uid_string && (*uid_string != '\0')) {

@@ -4,7 +4,7 @@ import libuser
 import os
 
 print "--------- Initializing."
-admin = libuser.Admin()
+admin = libuser.admin()
 
 print "--------- Listing."
 list = admin.enumerateUsers("l*")
@@ -42,7 +42,7 @@ print "--------- Looking up the wheel group."
 wheel = admin.lookupGroupByName("wheel")
 
 print "--------- Reading attribute (memberUid)."
-print wheel[libuser.LU_MEMBERUID]
+print wheel[libuser.MEMBERUID]
 
 print "--------- Creating a new user (jimbo)."
 jimbo = admin.initUser("jimbo")
@@ -50,9 +50,20 @@ for attr in jimbo.keys():
 	print " " + attr + ":", jimbo.get(attr)
 
 print "--------- Adding the user."
-admin.addUser(jimbo)
+try:
+	admin.addUser(jimbo)
+except:
+	pass
+
 print "--------- Grepping for the user."
 os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")
+
+try:
+	dir = jimbo.get(libuser.HOMEDIRECTORY)
+	print "--------- Looking at user's directory."
+	os.system("ls " + dir[0])
+except:
+	pass
 
 print "--------- Removing the user."
 admin.deleteUser(jimbo)

@@ -278,7 +278,7 @@ lu_start(const char *auth_name, enum lu_type auth_type, const char *info_modules
 	}
 
 	if(auth_modules == NULL) {
-		auth_modules = lu_cfg_read_single(ctx, "defaults/auth_modules", "files shadow");
+		auth_modules = lu_cfg_read_single(ctx, "defaults/auth_modules", "shadow files");
 	}
 	if(!lu_module_load(ctx, auth_modules, &ctx->auth_module_names, error)) {
 		/* lu_module_load sets errors */

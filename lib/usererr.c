@@ -77,7 +77,7 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
-		ret->string = desc ?  g_strdup_printf(desc, args) : g_strdup(lu_strerror(code));
+		ret->string = desc ?  g_strdup_vprintf(desc, args) : g_strdup(lu_strerror(code));
 		depth = backtrace(stack, sizeof(stack) / sizeof(stack[0]));
 		ret->stack = backtrace_symbols(stack, depth);
 		va_end(args);

@@ -68,6 +68,10 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Mon Jul 23 2001 Nalin Dahyabhai <nalin@redhat.com>
+- actually make the new optional arguments optional
+- fix lu_error_new() to actually report errors right
+
 * Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish home directory population
 - implement home directory moving
