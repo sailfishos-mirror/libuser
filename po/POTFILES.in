@@ -1,8 +1,13 @@
 apps/apputil.c
 apps/lchage.c
+apps/lchfn.c
+apps/lchsh.c
 apps/lgroupadd.c
 apps/lgroupdel.c
 apps/lgroupmod.c
+apps/lid.c
+apps/lnewusers.c
+apps/lpasswd.c
 apps/luseradd.c
 apps/luserdel.c
 apps/lusermod.c
@@ -28,6 +33,8 @@ lib/util.h
 modules/files.c
 modules/krb5.c
 modules/ldap.c
+modules/sasldb.c
+python/admin.c
 python/libusermodule.c
 samples/lookup.c
 samples/testuser.c
