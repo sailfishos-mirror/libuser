@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-03 10:28+0530\n"
+"PO-Revision-Date: 2004-11-22 14:50+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <Indlinux-hindi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -252,7 +252,7 @@ msgstr "कोई समूह नाम विशेष नहीं किय�
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "अमान्य समूह ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -326,16 +326,16 @@ msgstr "`%s' के लिए लेखा बनाने में त्र�
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "अमान्य उपयोक्ता ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 से लेखा बनाने के लिए इंकार कर रहा है\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "`%s' GID से %ld के लिए समूह बनाने में त्रुटि: %s\n"
+msgstr "`%s' के लिए GID %jd से समूह बनाने में त्रुटि: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -396,9 +396,9 @@ msgid "Password changed.\n"
 msgstr "शब्दकूट बदला गया.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "%s समूह उपस्थित नहीं है.\n"
+msgstr "%jd समूह उपस्थित नहीं है.\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -431,19 +431,19 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s के gid अंक नहीं है.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %ld का कोई जीवंत समूह नहीं है,नहीं हटा रहे हैं.\n"
+msgstr "GID %jd के साथ कोई जीवंत समूह मौजूद है, नहीं हटा रहे हैं.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %ld समूह का कोई समूह नाम नहीं है.\n"
+msgstr "GID %jd समूह का कोई समूह नाम नहीं है.\n"
 
 #: apps/luserdel.c:134
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "समूह %s को विलोपित नहीं कर सका: %s।\n"
+msgstr "समूह %s को विलोपित नहीं कर सका: %s.\n"
 
 #: apps/luserdel.c:148
 #, c-format
@@ -592,7 +592,7 @@ msgstr "क्रमादेश-संग्रह/मॉड्यूल सं
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "अनलॉक करना शब्दकूट क्षेत्र को खाली रखेगा."
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -944,12 +944,12 @@ msgstr "%s प्रारंभिकीकरण दोष: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "अमान्य ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "ID %d समूह की खोज हो रही है.\n"
+msgstr "ID %jd से समूह की खोज हो रही है.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -957,9 +957,9 @@ msgid "Searching for group named %s.\n"
 msgstr "%s नामित समूह के लिए खोज हो रही है.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "ID %d उपयोक्ता के लिए खोज हो रही है.\n"
+msgstr "ID %jd से उपयोक्ता के लिए खोज हो रही है.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -994,5 +994,3 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
 
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "`%s' में मूलभूत सुरक्षा संदर्भ पुनर्व्यवस्थित नहीं कर सका: %s"
