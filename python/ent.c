@@ -17,6 +17,7 @@
 
 #ident "$Id$"
 
+#include <Python.h>
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
@@ -27,7 +28,6 @@
 #include <glib.h>
 #include "../lib/user.h"
 #include "../lib/user_private.h"
-#include <Python.h>
 #include "common.h"
 
 static PyMappingMethods libuser_entity_mapping_methods;

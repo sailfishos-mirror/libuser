@@ -17,6 +17,7 @@
 
 #ident "$Id$"
 
+#include <Python.h>
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
@@ -25,7 +26,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <glib.h>
-#include <Python.h>
 #include "common.h"
 #include "../lib/user.h"
 #include "../lib/user_private.h"
