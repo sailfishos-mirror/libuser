@@ -182,7 +182,9 @@ AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
 AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
-AC_CHECK_FUNC([__secure_getenv strstr strtol])
+AC_CHECK_FUNC(__secure_getenv)
+AC_CHECK_FUNC(strstr)
+AC_CHECK_FUNC(strtol)
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix=${prefix}
