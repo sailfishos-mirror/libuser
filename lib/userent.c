@@ -70,13 +70,19 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 	ent = lu_ent_new();
 	if(type == lu_user) {
 		struct passwd pwd, *err;
-		while((id != 0) && (lu_user_lookup_id(ctx, id, ent) || (getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0)))
+		struct lu_error *error = NULL;
+		while((id != 0) && (lu_user_lookup_id(ctx, id, ent, &error) || (getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0)))
 			id++;
+		if(error)
+			lu_error_free(&error);
 	} else
 	if(type == lu_group) {
 		struct group grp, *err;
-		while((id != 0) && (lu_group_lookup_id(ctx, id, ent) || (getgrgid_r(id, &grp, buf, sizeof(buf), &err) == 0)))
+		struct lu_error *error = NULL;
+		while((id != 0) && (lu_group_lookup_id(ctx, id, ent, &error) || (getgrgid_r(id, &grp, buf, sizeof(buf), &err) == 0)))
 			id++;
+		if(error)
+			lu_error_free(&error);
 	}
 	lu_ent_free(ent);
 	return id;
@@ -240,8 +246,8 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 }
 
 static gboolean
-lu_ent_default(struct lu_context *context, const char *name,
-	       enum lu_type type, gboolean system, struct lu_ent *ent)
+lu_default(struct lu_context *context, const char *name,
+	   enum lu_type type, gboolean system, struct lu_ent *ent)
 {
 	GList *keys, *vals, *p, *q;
 	char *top, *key, *idkey, *idval, *tmp;
@@ -342,7 +348,7 @@ lu_ent_default(struct lu_context *context, const char *name,
 }
 
 /**
- * lu_ent_user_default:
+ * lu_user_default:
  * @context: A library context.
  * @name: A name for the new user.
  * @system: Specifies whether or not this will be a "system" account.
@@ -356,16 +362,16 @@ lu_ent_default(struct lu_context *context, const char *name,
  * Returns: TRUE on success, FALSE on failure.
  */
 void
-lu_ent_user_default(struct lu_context *context, const char *name,
-		    gboolean system, struct lu_ent *ent)
+lu_user_default(struct lu_context *context, const char *name,
+		gboolean system, struct lu_ent *ent)
 {
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	lu_ent_default(context, name, lu_user, system, ent);
+	lu_default(context, name, lu_user, system, ent);
 }
 
 /**
- * lu_ent_group_default:
+ * lu_group_default:
  * @context: A library context.
  * @name: A name for the new group.
  * @system: Specifies whether or not this will be a "system" account.
@@ -379,12 +385,12 @@ lu_ent_user_default(struct lu_context *context, const char *name,
  * Returns: TRUE on success, FALSE on failure.
  */
 void
-lu_ent_group_default(struct lu_context *context, const char *name,
-		     gboolean system, struct lu_ent *ent)
+lu_group_default(struct lu_context *context, const char *name,
+		 gboolean system, struct lu_ent *ent)
 {
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	lu_ent_default(context, name, lu_group, system, ent);
+	lu_default(context, name, lu_group, system, ent);
 }
 
 /**
@@ -411,14 +417,13 @@ lu_ent_free(struct lu_ent *ent)
 	g_free(ent);
 }
 
-gboolean
+void
 lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
 {
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 	lu_ent_clear_original(ent, attr);
 	lu_ent_add_original(ent, attr, val);
-	return TRUE;
 }
 
 /**
@@ -432,14 +437,13 @@ lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
  *
  * Returns: TRUE on success, FALSE on failure.
  */
-gboolean
+void
 lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
 {
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 	lu_ent_clear(ent, attr);
 	lu_ent_add(ent, attr, val);
-	return TRUE;
 }
 
 static void
@@ -497,16 +501,16 @@ lu_ent_get_original(struct lu_ent *ent, const char *attr)
 
 typedef GList* (get_fn)(struct lu_ent *, const char *);
 
-static gboolean
+static void
 lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
 	    const char *attr, const char *val)
 {
 	GList *list = NULL, *tmp = NULL;
 
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	g_return_val_if_fail(get != NULL, FALSE);
-	g_return_val_if_fail(val != NULL, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
+	g_assert(get != NULL);
+	g_assert(val != NULL);
 
 	attr = ent->acache->cache(ent->acache, attr);
 
@@ -514,7 +518,7 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
 
 	for(tmp = list; tmp; tmp = g_list_next(tmp)) {
 		if(lu_str_case_equal(tmp->data, val)) {
-			return TRUE;
+			return;
 		}
 	}
 
@@ -522,8 +526,6 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
 	list = g_list_append(list, (char*)val);
 
 	g_hash_table_insert(hash, (char*)attr, list);
-
-	return TRUE;
 }
 
 /**
@@ -538,18 +540,17 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
  *
  * Returns: TRUE on success, FALSE on failure.
  */
-gboolean
+void
 lu_ent_add(struct lu_ent *ent, const char *attr, const char *val)
 {
-	return lu_ent_addx(ent, lu_ent_get, ent->attributes,
-			   attr, val);
+	lu_ent_addx(ent, lu_ent_get, ent->attributes, attr, val);
 }
 
-gboolean
+void
 lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val)
 {
-	return lu_ent_addx(ent, lu_ent_get_original, ent->original_attributes,
-			   attr, val);
+	lu_ent_addx(ent, lu_ent_get_original, ent->original_attributes,
+		    attr, val);
 }
 
 /**
@@ -564,15 +565,15 @@ lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val)
  *
  * Returns: TRUE on success, FALSE on failure.
  */
-gboolean
+void
 lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 {
 	GList *list = NULL;
 
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	g_return_val_if_fail(attr != NULL, FALSE);
-	g_return_val_if_fail(val != NULL, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
+	g_assert(attr != NULL);
+	g_assert(val != NULL);
 
 	attr = ent->acache->cache(ent->acache, attr);
 
@@ -582,8 +583,6 @@ lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 	list = g_list_remove(list, (char*)val);
 
 	g_hash_table_insert(ent->attributes, (char*)attr, list);
-
-	return TRUE;
 }
 
 /**
@@ -596,14 +595,14 @@ lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
  *
  * Returns: TRUE on success, FALSE on failure.
  */
-gboolean
+void
 lu_ent_clear(struct lu_ent *ent, const char *attr)
 {
 	GList *tmp;
 
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	g_return_val_if_fail(attr != NULL, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
+	g_assert(attr != NULL);
 
 	attr = ent->acache->cache(ent->acache, attr);
 
@@ -612,18 +611,16 @@ lu_ent_clear(struct lu_ent *ent, const char *attr)
 	g_hash_table_remove(ent->attributes, attr);
 
 	g_list_free(tmp);
-
-	return TRUE;
 }
 
-gboolean
+void
 lu_ent_clear_original(struct lu_ent *ent, const char *attr)
 {
 	GList *tmp;
 
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
-	g_return_val_if_fail(attr != NULL, FALSE);
+	g_assert(ent != NULL);
+	g_assert(ent->magic == LU_ENT_MAGIC);
+	g_assert(attr != NULL);
 
 	attr = ent->acache->cache(ent->acache, attr);
 
@@ -632,6 +629,4 @@ lu_ent_clear_original(struct lu_ent *ent, const char *attr)
 	g_hash_table_remove(ent->original_attributes, attr);
 
 	g_list_free(tmp);
-
-	return TRUE;
 }

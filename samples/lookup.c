@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	lu = lu_start(NULL, 0, auth_modules, info_modules, lu_prompt_console, NULL);
+	lu = lu_start(NULL, 0, auth_modules, info_modules, lu_prompt_console, NULL, NULL);
 
 	if(lu == NULL) {
 		g_print(gettext("Error initializing lu.\n"));
@@ -68,20 +68,20 @@ int main(int argc, char **argv)
 	if(group) {
 		if(byid) {
 			g_print(gettext("Searching for group with ID %d.\n"), c);
-			success = lu_group_lookup_id(lu, c, tmp);
+			success = lu_group_lookup_id(lu, c, tmp, NULL);
 		} else {
 			g_print(gettext("Searching for group named %s.\n"),
 				argv[optind]);
-			success = lu_group_lookup_name(lu, argv[optind], tmp);
+			success = lu_group_lookup_name(lu, argv[optind], tmp, NULL);
 		}
 	} else {
 		if(byid) {
 			g_print(gettext("Searching for user with ID %d.\n"), c);
-			success = lu_user_lookup_id(lu, c, tmp);
+			success = lu_user_lookup_id(lu, c, tmp, NULL);
 		} else {
 			g_print(gettext("Searching for user named %s.\n"),
 				argv[optind]);
-			success = lu_user_lookup_name(lu, argv[optind], tmp);
+			success = lu_user_lookup_name(lu, argv[optind], tmp, NULL);
 		}
 	}
 

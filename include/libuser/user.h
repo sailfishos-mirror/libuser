@@ -26,36 +26,10 @@ extern "C" {
 
 #include <sys/types.h>
 #include <glib.h>
-
-/** Attributes carried by all entity structures. */
-#define LU_OBJECTCLASS "objectClass"	/**< An object class.  Used primarily by the LDAP back-end. */
-#define LU_CN "cn"			/**< The name of entity, regardless of whether it is a user or a group. */
-#define LU_USERNAME "uid"		/**< The attribute which normally holds the login ID associated with a user account. */
-#define LU_GROUPNAME "cn"		/**< The attribute which normally holds
-the group name for a group entity. */
-
-/** Attributes carried by user structures. */
-#define LU_UID "uid"			/**< The login name of this user. */
-#define LU_USERPASSWORD "userPassword"	/**< The user or group's password. */
-#define LU_UIDNUMBER "uidNumber"	/**< The UID of this user. */
-#define LU_GIDNUMBER "gidNumber"	/**< The primary GID of this user, or the GID of this group. */
-#define LU_GECOS "gecos"		/**< Extra information about the user. */
-#define LU_HOMEDIRECTORY "homeDirectory"/**< The location of the user's home directory. */
-#define LU_LOGINSHELL "loginShell"	/**< The shell which the user uses. */
-
-/** Attributes carried by group structures. */
-#define LU_GID "gid"			/**< The name of this group. */
-#define LU_MEMBERUID "memberUid"	/**< The name of a member of this group. */
-#define LU_ADMINISTRATORUID "administratorUid"	/**< The name of a user who is allowed to administer (add users to and remove users from) this group. */
-
-/** Attributes carried by shadow structures. */
-#define LU_SHADOWLASTCHANGE "shadowLastChange"	/**< Date of last password change. */
-#define LU_SHADOWMIN "shadowMin"		/**< Minimum number of days which must pass before the user can change her password again. */
-#define LU_SHADOWMAX "shadowMax"		/**< Maximum number of days after a password change which are allowed to pass before the user must change her password again. */
-#define LU_SHADOWWARNING "shadowWarning"	/**< The number of days before the maximum when the user is given a warning that a password change will soon be needed. */
-#define LU_SHADOWINACTIVE "shadowInactive"	/**< The number of days after which the account is considered inactive. */
-#define LU_SHADOWEXPIRE "shadowExpire"		/**< The date when the account expires. */
-#define LU_SHADOWFLAG "shadowFlag"		/**< Reserved. */
+#include "config.h"
+#include "entity.h"
+#include "error.h"
+#include "prompt.h"
 
 /**
  * An lu_context_t holds configuration information for this instance of
@@ -64,68 +38,10 @@ the group name for a group entity. */
 typedef struct lu_context lu_context_t;
 
 /**
- * A user or group structure, conceptualized as a dictionary of lists,
- * keyed by attribute names.
- */
-typedef struct lu_ent lu_ent_t;
-
-/**
- * The type of data passed to a prompter function.  The library uses these
- * when it needs to prompt the user for information.
- */
-typedef struct lu_prompt {
- 	/** The text of a prompt to display. */
-	const char *prompt;
- 	/** Whether or not the user's response should be echoed to the screen.*/
-	gboolean visible;
- 	/** A default value, given as a string. */
-	const char *default_value;
- 	/** The value of the user's response. */
-	char *value;
- 	/** A function which can free the value. */
-	void(*free_value)(char *);
-} lu_prompt_t;
-
-/**
- * The type of function which should be passed as a callback function to
- * lu_start().
- */
-typedef gboolean (lu_prompt_fn)(struct lu_context *context,
-				struct lu_prompt *prompts,
-				int count,
-				gpointer callback_data);
-
-/**
- * A prompter which prompts for every value, including defaults.
- * @param context A library context.
- * @param prompts An array of lu_prompt_t structures which contain information
- * about what we want to know.
- * @param callback_data Callback data to be passed to the prompting function.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_prompt_console(struct lu_context *context,
-			   struct lu_prompt *prompts,
-			   int count, gpointer callback_data);
-
-/**
- * A prompter which accepts defaults, and prompts for the rest.
- * @param context A library context.
- * @param prompts An array of lu_prompt_t structures which contain information
- * about what we want to know.
- * @param callback_data Callback data to be passed to the prompting function.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_prompt_console_quiet(struct lu_context *context,
-				 struct lu_prompt *prompts,
-				 int count, gpointer callback_data);
-
-/**
  * An enumeration which decides whether we want to modify information about
  * users or groups.  We don't yet support both simultaneously.
  */
-typedef enum lu_type {lu_user = 0x1234, lu_group = 0x1235} lu_type_t;
+typedef enum lu_type {lu_user = 0x2345, lu_group = 0x2346} lu_type_t;
 
 /**
  * Initializes the library, loads modules, and authenticates to servers.
@@ -140,12 +56,15 @@ typedef enum lu_type {lu_user = 0x1234, lu_group = 0x1235} lu_type_t;
  * @param prompter The address of a prompter function.
  * @param callback_data The address of data to be passed to the prompter
  * whenever it is called.
+ * @param error An address where a pointer to an error information structure
+ * will be stored in case of failure.
  * @return A valid context on successful initialization.
  * @return NULL on failure.
  */
 struct lu_context *lu_start(const char *authname, enum lu_type auth_type,
 			    const char *info_modules, const char *auth_modules,
-			    lu_prompt_fn *prompter, gpointer callback_data);
+			    lu_prompt_fn *prompter, gpointer callback_data,
+			    struct lu_error **error);
 
 /**
  * Modifies the list of info modules to be consulted when looking up users
@@ -164,9 +83,11 @@ void lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter,
  * and groups.
  * @param context A library context.
  * @param list A comma-separated list of information modules to use.
- * @return Nothing.
+ * @return TRUE on success, FALSE on failure.
  */
-void lu_set_info_modules(struct lu_context *context, const char *list);
+gboolean lu_set_info_modules(struct lu_context *context, const char *list,
+			     struct lu_error **error);
+const char *lu_get_info_modules(struct lu_context *context);
 
 /**
  * Modifies the list of auth modules to be consulted when looking up users
@@ -176,7 +97,9 @@ void lu_set_info_modules(struct lu_context *context, const char *list);
  * @param list A comma-separated list of authentication modules to use.
  * @return Nothing.
  */
-void lu_set_auth_modules(struct lu_context *context, const char *list);
+gboolean lu_set_auth_modules(struct lu_context *context, const char *list,
+			     struct lu_error **error);
+const char *lu_get_auth_modules(struct lu_context *context);
 
 /**
  * Shuts down the library, releasing memory and closing connections.
@@ -184,37 +107,6 @@ void lu_set_auth_modules(struct lu_context *context, const char *list);
  * @return Nothing.
  */
 void lu_end(struct lu_context *context);
-
-/**
- * Creates a new entity structure.  Entity structures are used to hold
- * the attributes of an entry in the data store.
- * @return A valid structure on success.
- * @return NULL on failure.
- */
-struct lu_ent *lu_ent_new(void);
-
-/**
- * Copies on entity structure to another.
- * @param source The structure being duplicated.
- * @param dest The structure which will receive the data.
- * @return Nothing.
- */
-void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
-
-/**
- * Revert any changes which have been made to the structure since it was
- * returned by a lookup request.
- * @param ent The structure which will have its data reverted.
- * @return Nothing.
- */
-void lu_ent_revert(struct lu_ent *ent);
-
-/**
- * Free an entity structure.
- * @param ent The structure which is to be freed.
- * @return Nothing.
- */
-void lu_ent_free(struct lu_ent *ent);
 
 /**
  * Fill an entity structure with information suitable for creating an account
@@ -226,8 +118,8 @@ void lu_ent_free(struct lu_ent *ent);
  * @param ent The entity structure to fill the defaults into.
  * @return Nothing.
  */
-void lu_ent_user_default(struct lu_context *ctx, const char *name,
-			 gboolean system, struct lu_ent *ent);
+void lu_user_default(struct lu_context *ctx, const char *name,
+		     gboolean system, struct lu_ent *ent);
 
 /**
  * Fill an entity structure with information suitable for creating a group with
@@ -238,115 +130,8 @@ void lu_ent_user_default(struct lu_context *ctx, const char *name,
  * @param ent The entity structure to fill the defaults into.
  * @return Nothing.
  */
-void lu_ent_group_default(struct lu_context *ctx, const char *name,
-			  gboolean system, struct lu_ent *ent);
-
-/**
- * Returns a list of strings containing the attributes a particular entry
- * contains.
- * @param ent A valid entity structure.
- * @return A GList* containing names of attributes.
- * @return NULL on failure.
- */
-GList *lu_ent_get_attributes(struct lu_ent *ent);
-
-/**
- * Returns a list of strings containing the values for a particular attribute
- * of an entry.
- * @param ent A valid entity structure.
- * @param attribute The name of an attribute.
- * @return A GList* containing strings if the entity contains the specified attribute.
- * @return NULL on failure.
- */
-GList *lu_ent_get(struct lu_ent *ent, const char *attribute);
-
-/**
- * Returns a list of strings containing the original values for a particular
- * attribute of an entry.  These are the values which lu_ent_revert() will use.
- * @param ent A valid entity structure.
- * @param attribute The name of an attribute.
- * @return A GList* containing the values this structure originally contained
- * when it was first looked up.
- * @return NULL on failure.
- */
-GList *lu_ent_get_original(struct lu_ent *ent, const char *attribute);
-
-/**
- * Set a single value for a named attribute.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should take.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_set(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Set a single value for a named attribute in an entity structure's "original"
- * set of data.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should have.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_set_original(struct lu_ent *ent, const char *attr,
-			     const char *val);
-
-/**
- * Add a new element to the list of values for the given attribute in the
- * given entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr The value the attribute should take, in addition to any it
- * already has.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_add(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Add a new element to the list of original values for the given attribute
- * in the given entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr A value the attribute should take, in addition to those it
- * already held when it was looked up.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_add_original(struct lu_ent *ent, const char *attr,
-			     const char *val);
-/**
- * Remove a value for an attribute from the list of values in the entity
- * structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @param attr A value for the attribute which should be removed.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_del(struct lu_ent *ent, const char *attr, const char *val);
-
-/**
- * Remove all values for an attribute from the list of values in the entity
- * structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_clear(struct lu_ent *ent, const char *attr);
-
-/**
- * Remove all original values for an attribute from the list of values in
- * the entity structure.
- * @param ent A valid entity structure.
- * @param attr The name of an attribute.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-gboolean lu_ent_clear_original(struct lu_ent *ent, const char *attr);
+void lu_group_default(struct lu_context *ctx, const char *name,
+		      gboolean system, struct lu_ent *ent);
 
 /**
  * Look up a user by name.
@@ -357,7 +142,7 @@ gboolean lu_ent_clear_original(struct lu_ent *ent, const char *attr);
  * @return FALSE on failure.
  */
 gboolean lu_user_lookup_name(struct lu_context *context, const char *name,
-			     struct lu_ent *ent);
+			     struct lu_ent *ent, struct lu_error **error);
 
 /**
  * Look up a group by name.
@@ -368,7 +153,7 @@ gboolean lu_user_lookup_name(struct lu_context *context, const char *name,
  * @return FALSE on failure.
  */
 gboolean lu_group_lookup_name(struct lu_context *context, const char *name,
-			      struct lu_ent *ent);
+			      struct lu_ent *ent, struct lu_error **error);
 /**
  * Look up a user by ID.
  * @param context A valid library context.
@@ -378,7 +163,7 @@ gboolean lu_group_lookup_name(struct lu_context *context, const char *name,
  * @return FALSE on failure.
  */
 gboolean lu_user_lookup_id(struct lu_context *context, uid_t uid,
-			   struct lu_ent *ent);
+			   struct lu_ent *ent, struct lu_error **error);
 /**
  * Look up a group by ID.
  * @param context A valid library context.
@@ -388,7 +173,7 @@ gboolean lu_user_lookup_id(struct lu_context *context, uid_t uid,
  * @return FALSE on failure.
  */
 gboolean lu_group_lookup_id(struct lu_context *context, gid_t gid,
-			    struct lu_ent *ent);
+			    struct lu_ent *ent, struct lu_error **error);
 /**
  * Add a new user to the system.
  * @param context A valid library context.
@@ -396,7 +181,8 @@ gboolean lu_group_lookup_id(struct lu_context *context, gid_t gid,
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_user_add(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_user_add(struct lu_context *context, struct lu_ent *ent,
+		     struct lu_error **error);
 
 /**
  * Add a new group to the system.
@@ -405,7 +191,8 @@ gboolean lu_user_add(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_group_add(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_group_add(struct lu_context *context, struct lu_ent *ent,
+		      struct lu_error **error);
 
 /**
  * Modify the specified user, so that the stored data matches the structure
@@ -415,7 +202,8 @@ gboolean lu_group_add(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_user_modify(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_user_modify(struct lu_context *context, struct lu_ent *ent,
+		        struct lu_error **error);
 
 /**
  * Modify the specified group, so that the stored data matches the structure
@@ -425,7 +213,8 @@ gboolean lu_user_modify(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_group_modify(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_group_modify(struct lu_context *context, struct lu_ent *ent,
+		         struct lu_error **error);
 
 /**
  * Delete the specified user from the system database.
@@ -435,7 +224,8 @@ gboolean lu_group_modify(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_user_delete(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_user_delete(struct lu_context *context, struct lu_ent *ent,
+		        struct lu_error **error);
 
 /**
  * Delete the specified group from the system database.
@@ -445,7 +235,8 @@ gboolean lu_user_delete(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_group_delete(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_group_delete(struct lu_context *context, struct lu_ent *ent,
+		         struct lu_error **error);
 
 /**
  * Lock the specified user account.
@@ -455,7 +246,8 @@ gboolean lu_group_delete(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_user_lock(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_user_lock(struct lu_context *context, struct lu_ent *ent,
+		      struct lu_error **error);
 
 /**
  * Lock the specified group.
@@ -465,7 +257,8 @@ gboolean lu_user_lock(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_group_lock(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_group_lock(struct lu_context *context, struct lu_ent *ent,
+		       struct lu_error **error);
 
 /**
  * Unlock the specified user's account.
@@ -475,7 +268,8 @@ gboolean lu_group_lock(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_user_unlock(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_user_unlock(struct lu_context *context, struct lu_ent *ent,
+		        struct lu_error **error);
 
 /**
  * Unlock the specified group.
@@ -485,7 +279,8 @@ gboolean lu_user_unlock(struct lu_context *context, struct lu_ent *ent);
  * @return TRUE on success.
  * @return FALSE on failure.
  */
-gboolean lu_group_unlock(struct lu_context *context, struct lu_ent *ent);
+gboolean lu_group_unlock(struct lu_context *context, struct lu_ent *ent,
+		         struct lu_error **error);
 
 /**
  * Set the password on the specified user's account.
@@ -497,7 +292,7 @@ gboolean lu_group_unlock(struct lu_context *context, struct lu_ent *ent);
  * @return FALSE on failure.
  */
 gboolean lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
-			 const char *newpass);
+			 const char *newpass, struct lu_error **error);
 
 /**
  * Set the password on the specified group's account.
@@ -509,7 +304,7 @@ gboolean lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
  * @return FALSE on failure.
  */
 gboolean lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
-			  const char *newpass);
+			  const char *newpass, struct lu_error **error);
 
 /**
  * Get a list of all of the users matching the given patterm from the
@@ -522,7 +317,7 @@ gboolean lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
  * results is returned to the application.
  */
 GList *lu_users_enumerate(struct lu_context *context, const char *pattern,
-			  const char *module);
+			  const char *module, struct lu_error **error);
 
 /**
  * Get a list of all of the groups matching the given patterm from the
@@ -535,39 +330,8 @@ GList *lu_users_enumerate(struct lu_context *context, const char *pattern,
  * results is returned to the application.
  */
 GList *lu_groups_enumerate(struct lu_context *context, const char *pattern,
-			   const char *module);
+			   const char *module, struct lu_error **error);
 
-
-/**
- * Read the value of a potentially multi-valued key in the configuration file.
- * @param context A valid library context.
- * @param key The path to the value in the configuration file.
- * @param default_value The value to return if the key is not found in the file.
- * @return A list of values on success.
- * @return The default value on failure.
- **/
-GList *lu_cfg_read(struct lu_context *context,
-		   const char *key, const char *default_value);
-
-/**
- * Read the value of a single-valued key in the configuration file.
- * @param context A valid library context.
- * @param key The path to the value in the configuration file.
- * @param default_value The value to return if the key is not found in the file.
- * @return A single value on success.
- * @return The default value on failure.
- */
-const char *lu_cfg_read_single(struct lu_context *context,
-			       const char *key, const char *default_value);
-
-/**
- * Read the list of keys in a section of the file.
- * @param context A valid library context.
- * @param parent_key A path beneath which keys should be searched for.
- * @return TRUE on success.
- * @return FALSE on failure.
- */
-GList *lu_cfg_read_keys(struct lu_context *context, const char *parent_key);
 
 #ifdef __cplusplus
 };

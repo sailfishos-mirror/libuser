@@ -37,7 +37,7 @@
 #define LU_KRBPASSWORD "{crypt}*K*"
 
 struct lu_module *
-lu_krb5_init(struct lu_context *context);
+lu_krb5_init(struct lu_context *context, struct lu_error **error);
 
 struct lu_krb5_context {
 	struct lu_prompt prompts[3];
@@ -51,7 +51,7 @@ get_default_realm(struct lu_context *context)
 	const char *ret = "";
 	char *realm;
 
-	g_return_val_if_fail(context != NULL, NULL);
+	g_assert(context != NULL);
 
 	if(krb5_init_context(&kcontext) == 0) {
 		if(krb5_get_default_realm(kcontext, &realm) == 0) {
@@ -67,14 +67,14 @@ get_default_realm(struct lu_context *context)
 }
 
 static void *
-create_server_handle(struct lu_krb5_context *context)
+create_server_handle(struct lu_krb5_context *context, struct lu_error **error)
 {
 	kadm5_config_params params;
 	void *handle = NULL;
 	int ret;
 	char *service = NULL;
 
-	g_return_val_if_fail(context != NULL, NULL);
+	g_assert(context != NULL);
 
 	memset(&params, 0, sizeof(params));
 	params.mask = KADM5_CONFIG_REALM;
@@ -94,9 +94,10 @@ create_server_handle(struct lu_krb5_context *context)
 	if(ret == KADM5_OK) {
 		return handle;
 	} else {
-		g_warning(_("Error connecting to the kadm5 server for service "
-			    "%s in realm %s: %s."), service, params.realm,
-			  error_message(ret));
+		lu_error_set(error, lu_error_generic,
+			     _("error connecting to the kadm5 server for "
+			       "service %s in realm %s: %s"), service,
+			     params.realm, error_message(ret));
 		return NULL;
 	}
 }
@@ -111,7 +112,7 @@ free_server_handle(void *handle)
 
 static gboolean
 lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name,
-			 struct lu_ent *ent)
+			 struct lu_ent *ent, struct lu_error **error)
 {
 	krb5_context context = NULL;
 	krb5_principal principal = NULL;
@@ -119,20 +120,22 @@ lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name,
 	struct lu_krb5_context *ctx = NULL;
 	gboolean ret = FALSE;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(name != NULL, FALSE);
-	g_return_val_if_fail(strlen((char*)name) > 0, FALSE);
+	g_assert(module != NULL);
+	g_assert(name != NULL);
+	g_assert(strlen((char*)name) > 0);
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		lu_error_set(error, lu_error_init,
+			     _("error initializing kerberos library"));
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, (const char*)name, &principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*)name);
+		lu_error_set(error, lu_error_init,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*)name);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -150,27 +153,28 @@ lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name,
 
 static gboolean
 lu_krb5_user_lookup_id(struct lu_module *module, gconstpointer uid,
-		       struct lu_ent *ent)
+		       struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
 lu_krb5_group_lookup_name(struct lu_module *module, gconstpointer name,
-			  struct lu_ent *ent)
+			  struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
 lu_krb5_group_lookup_id(struct lu_module *module, gconstpointer gid,
-			struct lu_ent *ent)
+			struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent,
+		 struct lu_error **error)
 {
 	krb5_context context = NULL;
 	kadm5_principal_ent_rec principal;
@@ -180,15 +184,16 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 	gboolean ret = FALSE;
 	struct lu_krb5_context *ctx;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(name != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+	g_assert(module != NULL);
+	g_assert(name != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		lu_error_set(error, lu_error_init,
+			     _("error initializing kerberos library"));
 		return FALSE;
 	}
 
@@ -197,15 +202,17 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity structure has no %s or %s attributes."),
-			  LU_KRBNAME, LU_USERNAME);
+		lu_error_set(error, lu_error_generic,
+			     _("entity structure has no %s or %s attributes"),
+			     LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, name->data, &principal.principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) name->data);
+		lu_error_set(error, lu_error_init,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -235,7 +242,8 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
-lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent,
+		 struct lu_error **error)
 {
 	krb5_context context = NULL;
 	krb5_principal principal = NULL, old_principal = NULL;
@@ -243,14 +251,15 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 	gboolean ret = TRUE;
 	struct lu_krb5_context *ctx;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		lu_error_set(error, lu_error_init,
+			     _("error initializing kerberos library"));
 		return FALSE;
 	}
 
@@ -259,8 +268,9 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity has no %s or %s attributes."),
-			  LU_KRBNAME, LU_USERNAME);
+		lu_error_set(error, lu_error_generic,
+			     _("entity has no %s or %s attributes"),
+			     LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -270,21 +280,24 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		old_name = lu_ent_get_original(ent, LU_USERNAME);
 	}
 	if(old_name == NULL) {
-		g_warning(_("Entity was created with no %s or %s attributes."),
-			  LU_KRBNAME, LU_USERNAME);
+		lu_error_set(error, lu_error_generic,
+			     _("entity was created with no %s or %s "
+			       "attributes"), LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, name->data, &principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) name->data);
+		lu_error_set(error, lu_error_generic,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
 	if(krb5_parse_name(context, old_name->data, &old_principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) old_name->data);
+		lu_error_set(error, lu_error_generic,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*) old_name->data);
 		krb5_free_principal(context, principal);
 		krb5_free_context(context);
 		return FALSE;
@@ -312,7 +325,8 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
-lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent,
+		 struct lu_error **error)
 {
 	krb5_context context = NULL;
 	krb5_principal principal;
@@ -320,14 +334,15 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent)
 	gboolean ret = FALSE;
 	struct lu_krb5_context *ctx;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		lu_error_set(error, lu_error_init,
+			     _("error initializing kerberos library"));
 		return FALSE;
 	}
 
@@ -336,15 +351,17 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent)
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity structure has no %s or %s attributes."),
-			  LU_KRBNAME, LU_USERNAME);
+		lu_error_set(error, lu_error_generic,
+			     _("entity structure has no %s or %s attributes"),
+			     LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, name->data, &principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) name->data);
+		lu_error_set(error, lu_error_generic,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -358,7 +375,8 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
-lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
+lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck,
+		     struct lu_error **error)
 {
 	krb5_context context = NULL;
 	kadm5_principal_ent_rec principal;
@@ -366,14 +384,15 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 	gboolean ret = FALSE;
 	struct lu_krb5_context *ctx;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		g_error_set(error, lu_error_init,
+			    _("error initializing kerberos library"));
 		return FALSE;
 	}
 
@@ -382,15 +401,17 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity structure has no %s or %s attributes."),
-			  LU_KRBNAME, LU_USERNAME);
+		g_error_set(error, lu_error_generic,
+			    _("entity structure has no %s or %s attributes"),
+			    LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, name->data, &principal.principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) name->data);
+		g_error_set(error, lu_error_generic,
+			    _("error parsing user name `%s' for kerberos"),
+			    (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -398,8 +419,12 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 	ret = (kadm5_get_principal(ctx->handle, principal.principal, &principal,
 			KADM5_PRINCIPAL | KADM5_ATTRIBUTES) == KADM5_OK);
 	if(ret == FALSE) {
-		g_warning(_("Error reading information for '%s' from "
-			    "Kerberos."), (const char *) name->data);
+		g_error_set(error, lu_error_generic,
+			    _("error reading information for `%s' from "
+			      "kerberos"), (const char *) name->data);
+		krb5_free_principal(context, principal.principal);
+		krb5_free_context(context);
+		return FALSE;
 	} else {
 		if(lck) {
 			principal.attributes |=
@@ -419,20 +444,22 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 }
 
 static gboolean
-lu_krb5_user_lock(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_user_lock(struct lu_module *module, struct lu_ent *ent,
+		  struct lu_error **error)
 {
-	return lu_krb5_user_do_lock(module, ent, TRUE);
+	return lu_krb5_user_do_lock(module, ent, TRUE, error);
 }
 
 static gboolean
-lu_krb5_user_unlock(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_user_unlock(struct lu_module *module, struct lu_ent *ent,
+		    struct lu_error **error)
 {
-	return lu_krb5_user_do_lock(module, ent, FALSE);
+	return lu_krb5_user_do_lock(module, ent, FALSE, error);
 }
 
 static gboolean
 lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
-		     const char *password)
+		     const char *password, struct lu_error **error)
 {
 	krb5_context context = NULL;
 	krb5_principal principal = NULL;
@@ -440,14 +467,15 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 	gboolean ret = TRUE;
 	struct lu_krb5_context *ctx;
 
-	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
 	if(krb5_init_context(&context) != 0) {
-		g_warning(_("Error initializing Kerberos."));
+		lu_error_set(error, lu_error_init,
+			     _("error initializing kerberos library"));
 		return FALSE;
 	}
 
@@ -455,15 +483,16 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity has no %s attribute."),
-			  LU_USERNAME);
+		lu_error_set(error, lu_error_generic,
+			     _("entity has no %s attribute"), LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
 	}
 
 	if(krb5_parse_name(context, name->data, &principal) != 0) {
-		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  (const char*) name->data);
+		lu_error_set(error, lu_error_generic,
+			     _("error parsing user name `%s' for kerberos"),
+			     (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -477,7 +506,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 			name->data);
 #endif
 		if(kadm5_chpass_principal(ctx->handle, principal,
-					  password) == KADM5_OK) {
+					  (char*)password) == KADM5_OK) {
 #ifdef DEBUG
 			g_print("...succeeded.\n");
 #endif
@@ -487,10 +516,13 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 			 * user is Kerberized. */
 			lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
 			ret = TRUE;
-#ifdef DEBUG
 		} else {
+#ifdef DEBUG
 			g_print("...failed.\n");
 #endif
+			lu_error_set(error, lu_error_generic,
+				     _("error setting password for `%s'"),
+				     (const char*) name->data);
 		}
 	}
 
@@ -501,50 +533,57 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
-lu_krb5_group_add(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_group_add(struct lu_module *module, struct lu_ent *ent,
+		  struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_krb5_group_mod(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_group_mod(struct lu_module *module, struct lu_ent *ent,
+		  struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_krb5_group_del(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_group_del(struct lu_module *module, struct lu_ent *ent,
+		  struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_krb5_group_lock(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_group_lock(struct lu_module *module, struct lu_ent *ent,
+		   struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
-lu_krb5_group_unlock(struct lu_module *module, struct lu_ent *ent)
+lu_krb5_group_unlock(struct lu_module *module, struct lu_ent *ent,
+		     struct lu_error **error)
 {
 	return FALSE;
 }
 
 static gboolean
 lu_krb5_group_setpass(struct lu_module *module, struct lu_ent *ent,
-		      const char* password)
+		      const char* password, struct lu_error **error)
 {
 	return FALSE;
 }
 
 static GList *
-lu_krb5_users_enumerate(struct lu_module *module, const char *pattern)
+lu_krb5_users_enumerate(struct lu_module *module, const char *pattern,
+			struct lu_error **error)
 {
 	return NULL;
 }
 
 static GList *
-lu_krb5_groups_enumerate(struct lu_module *module, const char *pattern)
+lu_krb5_groups_enumerate(struct lu_module *module, const char *pattern,
+			 struct lu_error **error)
 {
 	return NULL;
 }
@@ -554,7 +593,7 @@ lu_krb5_close_module(struct lu_module *module)
 {
 	struct lu_krb5_context *ctx = NULL;
 
-	g_return_val_if_fail(module != NULL, FALSE);
+	g_assert(module != NULL);
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 	free_server_handle(ctx->handle);
@@ -569,21 +608,19 @@ lu_krb5_close_module(struct lu_module *module)
 }
 
 struct lu_module *
-lu_krb5_init(struct lu_context *context)
+lu_krb5_init(struct lu_context *context, struct lu_error **error)
 {
 	struct lu_module *ret = NULL;
 	struct lu_krb5_context *ctx = NULL;
 	void *handle = NULL;
 	char *tmp;
 
-	g_return_val_if_fail(context != NULL, NULL);
+	g_assert(context != NULL);
 	initialize_krb5_error_table();
 	initialize_kadm_error_table();
 
 	/* Verify that we can connect to the kadmind server. */
-	if(context->prompter == NULL) {
-		return NULL;
-	}
+	g_assert(context->prompter != NULL);
 
 	ctx = g_malloc0(sizeof(struct lu_krb5_context));
 
@@ -606,8 +643,8 @@ lu_krb5_init(struct lu_context *context)
 	}
 
 	if((context->prompter == NULL) ||
-	   (context->prompter(context, ctx->prompts, 2,
-			      context->prompter_data) == FALSE)) {
+	   (context->prompter(ctx->prompts, 2,
+			      context->prompter_data, error) == FALSE)) {
 		g_free(ctx);
 		return NULL;
 	}
@@ -619,14 +656,15 @@ lu_krb5_init(struct lu_context *context)
 	ctx->prompts[LU_KRB5_PASSWORD].visible = FALSE;
 	g_free(tmp);
 
-	if(context->prompter(context, ctx->prompts + 2, 1,
-			     context->prompter_data) == FALSE) {
+	if(context->prompter(ctx->prompts + 2, 1,
+			     context->prompter_data, error) == FALSE) {
 		g_free(ctx);
 		return NULL;
 	}
 
-	handle = create_server_handle(ctx);
+	handle = create_server_handle(ctx, error);
 	if(handle == NULL) {
+		g_free(ctx);
 		return NULL;
 	}
 	ctx->handle = handle;

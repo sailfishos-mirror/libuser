@@ -1,1 +1,1 @@
-pkginclude_HEADERS = user.h user_private.h quota.h
+pkginclude_HEADERS = config.h entity.h prompt.h quota.h user.h user_private.h

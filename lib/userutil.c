@@ -143,12 +143,12 @@ lu_make_crypted(const char *plain, const char *previous)
  * Returns: an opaque lock pointer if locking succeeds, NULL on failure.
  */
 gpointer
-lu_util_lock_obtain(int fd)
+lu_util_lock_obtain(int fd, struct lu_error **error)
 {
 	struct flock *lck = NULL;
 	int i;
 
-	g_return_val_if_fail(fd != -1, NULL);
+	g_assert(fd != -1);
 
 	lck = g_malloc0(sizeof(struct flock));
 	lck->l_type = F_WRLCK;
@@ -159,7 +159,8 @@ lu_util_lock_obtain(int fd)
 
 	if(i == -1) {
 		g_free(lck);
-		lck = NULL;
+		lu_error_set(error, lu_error_lock, NULL);
+		return NULL;
 	}
 
 	return lck;
@@ -186,7 +187,8 @@ lu_util_lock_free(int fd, gpointer lock)
 }
 
 char *
-lu_util_line_get_matchingx(int fd, const char *part, int field)
+lu_util_line_get_matchingx(int fd, const char *part, int field,
+			   struct lu_error **error)
 {
 	char *contents;
 	char buf[LINE_MAX];
@@ -195,13 +197,14 @@ lu_util_line_get_matchingx(int fd, const char *part, int field)
 	char *ret = NULL, *p, *q, *colon;
 	int i;
 
-	g_return_val_if_fail(fd != -1, NULL);
-	g_return_val_if_fail(part != NULL, NULL);
-	g_return_val_if_fail(field > 0, NULL);
+	g_assert(fd != -1);
+	g_assert(part != NULL);
+	g_assert(field > 0);
 
 	offset = lseek(fd, 0, SEEK_CUR);
 
 	if(fstat(fd, &st) == -1) {
+		lu_error_set(error, lu_error_stat, NULL);
 		return NULL;
 	}
 
@@ -250,15 +253,15 @@ lu_util_line_get_matchingx(int fd, const char *part, int field)
 }
 
 char *
-lu_util_line_get_matching1(int fd, const char *part)
+lu_util_line_get_matching1(int fd, const char *part, struct lu_error **error)
 {
-	return lu_util_line_get_matchingx(fd, part, 1);
+	return lu_util_line_get_matchingx(fd, part, 1, error);
 }
 
 char *
-lu_util_line_get_matching3(int fd, const char *part)
+lu_util_line_get_matching3(int fd, const char *part, struct lu_error **error)
 {
-	return lu_util_line_get_matchingx(fd, part, 3);
+	return lu_util_line_get_matchingx(fd, part, 3, error);
 }
 
 /**
@@ -290,7 +293,8 @@ lu_strv_len(gchar **v)
  * Returns: An allocated string which must be freed with g_free().
  */
 char *
-lu_util_field_read(int fd, const char *first, unsigned int field)
+lu_util_field_read(int fd, const char *first, unsigned int field,
+		   struct lu_error **error)
 {
 	struct stat st;
 	unsigned char *buf = NULL;
@@ -298,31 +302,29 @@ lu_util_field_read(int fd, const char *first, unsigned int field)
 	char *line = NULL, *start = NULL, *end = NULL;
 	char *ret;
 
-	g_return_val_if_fail(fd != -1, NULL);
-	g_return_val_if_fail(first != NULL, NULL);
-	g_return_val_if_fail(strlen(first) != 0, NULL);
-	g_return_val_if_fail(field >= 1, NULL);
+	g_assert(fd != -1);
+	g_assert(first != NULL);
+	g_assert(strlen(first) != 0);
+	g_assert(field >= 1);
 
 	if(fstat(fd, &st) == -1) {
+		lu_error_set(error, lu_error_stat, NULL);
 		return NULL;
 	}
 
 	if(lseek(fd, 0, SEEK_SET) == -1) {
-		return NULL;
-	}
-
-	pattern = g_strdup_printf("\n%s:", first);
-	if(pattern == NULL) {
+		lu_error_set(error, lu_error_read, NULL);
 		return NULL;
 	}
 
 	buf = g_malloc0(st.st_size + 1);
 	if(read(fd, buf, st.st_size) != st.st_size) {
-		g_free(pattern);
+		lu_error_set(error, lu_error_read, NULL);
 		g_free(buf);
 		return NULL;
 	}
 
+	pattern = g_strdup_printf("\n%s:", first);
 	if(strncmp(buf, pattern + 1, strlen(pattern) - 1) == 0) {
 		/* found it on the first line */
 		line = buf;
@@ -385,7 +387,8 @@ lu_util_field_read(int fd, const char *first, unsigned int field)
  */
 gboolean
 lu_util_field_write(int fd, const char *first,
-		    unsigned int field, const char *value)
+		    unsigned int field, const char *value,
+		    struct lu_error **error)
 {
 	struct stat st;
 	char *buf;
@@ -394,32 +397,29 @@ lu_util_field_write(int fd, const char *first,
 	gboolean ret = FALSE;
 	int fi = 1;
 
-	g_return_val_if_fail(fd != -1, FALSE);
-	g_return_val_if_fail(first != NULL, FALSE);
-	g_return_val_if_fail(strlen(first) != 0, FALSE);
-	g_return_val_if_fail(field >= 1, FALSE);
-	g_return_val_if_fail(value != NULL, FALSE);
+	g_assert(fd != -1);
+	g_assert(first != NULL);
+	g_assert(strlen(first) != 0);
+	g_assert(field >= 1);
+	g_assert(value != NULL);
 
 	if(fstat(fd, &st) == -1) {
+		lu_error_set(error, lu_error_stat, NULL);
 		return FALSE;
 	}
 
 	if(lseek(fd, 0, SEEK_SET) == -1) {
-		return FALSE;
-	}
-
-	pattern = g_strdup_printf("\n%s:", first);
-	if(pattern == NULL) {
+		lu_error_set(error, lu_error_read, NULL);
 		return FALSE;
 	}
 
 	buf = g_malloc0(st.st_size + 1 + strlen(value) + field);
 	if(read(fd, buf, st.st_size) != st.st_size) {
-		g_free(pattern);
-		g_free(buf);
+		lu_error_set(error, lu_error_read, NULL);
 		return FALSE;
 	}
 
+	pattern = g_strdup_printf("\n%s:", first);
 	if(strncmp(buf, pattern + 1, strlen(pattern) - 1) == 0) {
 		/* found it on the first line */
 		line = buf;
@@ -456,6 +456,9 @@ lu_util_field_write(int fd, const char *first,
 		while((*end != '\0') && (*end != '\n') && (*end != ':')) {
 			end++;
 		}
+	} else {
+		lu_error_set(error, lu_error_search, NULL);
+		return FALSE;
 	}
 
 	if((start != NULL) && (end != NULL)) {
@@ -485,15 +488,21 @@ lu_util_field_write(int fd, const char *first,
 	if(ret == TRUE) {
 		size_t len;
 		if(lseek(fd, 0, SEEK_SET) == -1) {
-			ret = FALSE;
+			lu_error_set(error, lu_error_write, NULL);
+			return FALSE;
 		}
 		len = strlen(buf);
 		if(write(fd, buf, len) == -1) {
-			ret = FALSE;
+			lu_error_set(error, lu_error_write, NULL);
+			return FALSE;
 		}
 		if(ftruncate(fd, len) == -1) {
-			ret = FALSE;
+			lu_error_set(error, lu_error_write, NULL);
+			return FALSE;
 		}
+	} else {
+		lu_error_set(error, lu_error_search, NULL);
+		return FALSE;
 	}
 
 	g_free(pattern);

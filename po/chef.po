@@ -1,5 +1,5 @@
 msgid ""
-msgstr "POT-Creation-Date: 2001-06-15 05:02-0400\n"
+msgstr "POT-Creation-Date: 2001-06-15 17:32-0400\n"
 
 #: apps/apputil.c:36 apps/apputil.c:44 apps/apputil.c:52
 msgid "Feature not implemented: "
@@ -285,12 +285,12 @@ msgstr ""
 msgid "freeing lu_ent at %p.\n"
 msgstr "freeeeng loo_int et %p.\n"
 
-#: modules/files.c:116 modules/files.c:1148
+#: modules/files.c:116 modules/files.c:1180
 #, fuzzy, c-format
 msgid "Couldn't open '%s'.\n"
 msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 
-#: modules/files.c:122 modules/files.c:159 modules/files.c:1155
+#: modules/files.c:122 modules/files.c:159 modules/files.c:1187
 #, c-format
 msgid "Couldn't lock '%s'.\n"
 msgstr ""
@@ -310,12 +310,12 @@ msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 msgid "Couldn't stat or invalid permissions on '%s'.\n"
 msgstr ""
 
-#: modules/files.c:1163
+#: modules/files.c:1195
 #, fuzzy, c-format
 msgid "Couldn't open '%s' for reading.\n"
 msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 
-#: modules/files.c:1230 modules/files.c:1280
+#: modules/files.c:1262 modules/files.c:1312
 msgid "Not executing with superuser privileges."
 msgstr ""
 

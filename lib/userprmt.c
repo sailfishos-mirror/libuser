@@ -20,16 +20,17 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <libuser/user_private.h>
+#include <libuser/user.h>
 #include <limits.h>
+#include <libintl.h>
 #include <string.h>
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+#define _(String) gettext(String)
 
 /**
  * lu_prompt_console:
- * @context: A library context.
  * @prompts: An array of structures used to pass prompts and answers into and
  * out of the function.
  * @count: The length of the prompts array.
@@ -38,20 +39,18 @@
  * This function prompts the user for information, including items which have
  * default answers supplied by the caller.
  *
- * Returns: TRUE, or FALSE on error.
+ * Returns: TRUE on success, or FALSE on error.
  */
 gboolean
-lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
-		  int count, gpointer calldata)
+lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
+		  struct lu_error **error)
 {
 	int i;
 	char buf[LINE_MAX];
-	gboolean ret = TRUE;
 	struct termios otermios, ntermios;
 
-	g_return_val_if_fail(context != NULL, FALSE);
 	if(count > 0) {
-		g_return_val_if_fail(prompts != NULL, FALSE);
+		g_assert(prompts != NULL);
 	}
 
 	for(i = 0; i < count; i++) {
@@ -71,24 +70,31 @@ lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
 
 		if(prompts[i].visible == FALSE) {
 			if(tcgetattr(fileno(stdin), &otermios) == -1) {
-				ret = FALSE;
-				break;
+				lu_error_set(error, lu_error_terminal,
+					     _("error reading terminal "
+					       "attributes"));
+				return FALSE;
 			}
 			ntermios = otermios;
 			ntermios.c_lflag &= ~ECHO;
 			if(tcsetattr(fileno(stdin), TCSADRAIN, &ntermios) == -1) {
-				ret = FALSE;
-				break;
+				lu_error_set(error, lu_error_terminal,
+					     _("error setting terminal "
+					       "attributes"));
+				return FALSE;
 			}
 		}
 		if(fgets(buf, sizeof(buf), stdin) == NULL) {
-			ret = FALSE;
-			break;
+			lu_error_set(error, lu_error_terminal,
+				     _("error reading from terminal"));
+			return FALSE;
 		}
 		if(prompts[i].visible == FALSE) {
 			if(tcsetattr(fileno(stdin), TCSADRAIN, &otermios) == -1) {
-				ret = FALSE;
-				break;
+				lu_error_set(error, lu_error_terminal,
+					     _("error setting terminal "
+					       "attributes"));
+				return FALSE;
 			}
 			g_print("\n");
 		}
@@ -108,12 +114,11 @@ lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
 				    g_strdup(""));
 		prompts[i].free_value = (void*)g_free;
 	}
-	return ret;
+	return TRUE;
 }
 
 /**
  * lu_prompt_console_quiet:
- * @context: A library context.
  * @prompts: An array of structures used to pass prompts and answers into and
  * out of the function.
  * @count: The length of the prompts array.
@@ -126,13 +131,12 @@ lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
  * Returns: TRUE, or FALSE on error.
  */
 gboolean
-lu_prompt_console_quiet(struct lu_context *context, struct lu_prompt *prompts,
-			int count, gpointer calldata)
+lu_prompt_console_quiet(struct lu_prompt *prompts, int count, gpointer calldata,
+			struct lu_error **error)
 {
 	int i;
 	gboolean ret = TRUE;
 
-	g_return_val_if_fail(context != NULL, FALSE);
 	if(count > 0) {
 		g_return_val_if_fail(prompts != NULL, FALSE);
 	}
@@ -142,8 +146,8 @@ lu_prompt_console_quiet(struct lu_context *context, struct lu_prompt *prompts,
 			prompts[i].value = g_strdup(prompts[i].default_value);
 			prompts[i].free_value = (void*)g_free;
 		} else {
-			ret = ret && lu_prompt_console(context, &prompts[i], 1,
-						       calldata);
+			ret = ret && lu_prompt_console(&prompts[i], 1,
+						       calldata, error);
 		}
 	}
 

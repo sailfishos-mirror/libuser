@@ -66,6 +66,7 @@ main(int argc, const char **argv)
 	const char  *user = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
+	struct lu_error *error = NULL;
 	GList *values, *values2, *values3;
 	int interactive = FALSE;
 	int list_only = FALSE;
@@ -112,12 +113,12 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(user, lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
 
-	if(lu_user_lookup_name(ctx, user, ent) == FALSE) {
+	if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 2;
 	}
@@ -200,7 +201,7 @@ main(int argc, const char **argv)
 			lu_ent_set(ent, LU_SHADOWEXPIRE, buf);
 		}
 
-		if(lu_user_modify(ctx, ent) == FALSE) {
+		if(lu_user_modify(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("Failed to modify aging information "
 					  "for %s.\n"), user);
 			return 3;

@@ -38,6 +38,7 @@ main(int argc, const char **argv)
 		   *skeleton = NULL, *name = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
+	struct lu_error *error = NULL;
 	long uidNumber = -2, gidNumber = -2;
 	GList *values;
 	int dont_create_group = FALSE,
@@ -95,7 +96,7 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(skeleton == NULL) {
@@ -111,13 +112,13 @@ main(int argc, const char **argv)
 
 	if(!dont_create_group) {
 		ent = lu_ent_new();
-		lu_ent_group_default(ctx, name, system_account, ent);
+		lu_group_default(ctx, name, system_account, ent);
 		if(gidNumber != -2) {
 			char *tmp = g_strdup_printf("%ld", gidNumber);
 			lu_ent_set(ent, LU_GIDNUMBER, tmp);
 			g_free(tmp);
 		}
-		if(lu_group_add(ctx, ent) == FALSE) {
+		if(lu_group_add(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("Error creating group for %s.\n"),
 				name);
 			return 2;
@@ -126,7 +127,7 @@ main(int argc, const char **argv)
 	}
 
 	ent = lu_ent_new();
-	lu_ent_user_default(ctx, name, system_account, ent);
+	lu_user_default(ctx, name, system_account, ent);
 	if(gecos)
 		lu_ent_set(ent, LU_GECOS, gecos);
 	if(uidNumber != -2) {
@@ -163,7 +164,7 @@ main(int argc, const char **argv)
 		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
 	}
 
-	if(lu_user_add(ctx, ent) == FALSE) {
+	if(lu_user_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Account creation failed.\n"));
 		return 3;
 	}

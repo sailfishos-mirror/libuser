@@ -34,28 +34,30 @@ struct config_config {
 };
 
 gboolean
-lu_cfg_init(struct lu_context *context)
+lu_cfg_init(struct lu_context *context, struct lu_error **error)
 {
 	int fd;
 	struct stat st;
 	const char *filename = SYSCONFDIR "/libuser.conf";
 	struct config_config *config = NULL;
 
-	g_return_val_if_fail(context != NULL, FALSE);
+	g_assert(context != NULL);
 
 	config = g_malloc0(sizeof(struct config_config));
 	config->cache = lu_string_cache_new(TRUE);
 
 	if(getuid() == geteuid()) {
-		if(getenv("LIBUSER_CONF")) {
-			filename = getenv("LIBUSER_CONF");
+		if(__secure_getenv("LIBUSER_CONF")) {
+			filename = __secure_getenv("LIBUSER_CONF");
 		}
 	}
 
 	fd = open(filename, O_RDONLY);
 	if(fd == -1) {
-		g_warning(_("Could not open configuration file '%s'."),
-			  filename);
+		lu_error_set(error, lu_error_generic,
+			     _("could not open configuration file `%s': %s"),
+			     filename, strerror(errno));
+		return FALSE;
 	} else {
 		if(fstat(fd, &st) != -1) {
 			config->data = g_malloc0(st.st_size + 1);
@@ -69,23 +71,19 @@ lu_cfg_init(struct lu_context *context)
 	return TRUE;
 }
 
-gboolean
+void
 lu_cfg_done(struct lu_context *context)
 {
 	struct config_config *config = NULL;
 
-	g_return_val_if_fail(context != NULL, FALSE);
+	g_assert(context != NULL);
+	g_assert(context->config != NULL);
 
-	if(context->config) {
-		config = (struct config_config*) context->config;
-		config->cache->free(config->cache);
-		g_free(config->data);
-		g_free(config);
-		context->config = NULL;
-		return TRUE;
-	}
-
-	return FALSE;
+	config = (struct config_config*) context->config;
+	config->cache->free(config->cache);
+	g_free(config->data);
+	g_free(config);
+	context->config = NULL;
 }
 
 static void
@@ -158,15 +156,15 @@ lu_cfg_read(struct lu_context *context, const char *key,
 	char *section = NULL, *k = NULL, *value = NULL, *tmp;
 	GList *ret = NULL;
 
-	g_return_val_if_fail(context != NULL, NULL);
-	g_return_val_if_fail(context->config != NULL, NULL);
-	g_return_val_if_fail(key != NULL, NULL);
-	g_return_val_if_fail(strlen(key) > 0, NULL);
+	g_assert(context != NULL);
+	g_assert(context->config != NULL);
+	g_assert(key != NULL);
+	g_assert(strlen(key) > 0);
 
 	config = (struct config_config*) context->config;
 
 	if(config->data == NULL) {
-		if(default_value) {
+		if(default_value != NULL) {
 			return g_list_append(NULL, (char*)default_value);
 		} else {
 			return NULL;
@@ -189,7 +187,7 @@ lu_cfg_read(struct lu_context *context, const char *key,
 			}
 		}
 		if(ret == NULL) {
-			if(default_value) {
+			if(default_value != NULL) {
 				ret = g_list_append(ret, (char*)default_value);
 			}
 		}
@@ -206,10 +204,10 @@ lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
 	char *section = NULL, *key = NULL, *value = NULL;
 	GList *ret = NULL;
 
-	g_return_val_if_fail(context != NULL, NULL);
-	g_return_val_if_fail(context->config != NULL, NULL);
-	g_return_val_if_fail(parent_key != NULL, NULL);
-	g_return_val_if_fail(strlen(parent_key) > 0, NULL);
+	g_assert(context != NULL);
+	g_assert(context->config != NULL);
+	g_assert(parent_key != NULL);
+	g_assert(strlen(parent_key) > 0);
 
 	config = (struct config_config*) context->config;
 
@@ -239,6 +237,9 @@ lu_cfg_read_single(struct lu_context *context,
 {
 	GList *answers = NULL;
 	const char *ret = NULL;
+
+	g_assert(context != NULL);
+	g_assert(context->config != NULL);
 
 	ret = context->scache->cache(context->scache, default_value);
 

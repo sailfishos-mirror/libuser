@@ -300,14 +300,8 @@ libuser_entity_clear(struct libuser_entity *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(lu_ent_clear(self->ent, arg)) {
-		DEBUG_EXIT;
-		return Py_BuildValue("");
-	} else {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
-		DEBUG_EXIT;
-		return NULL;
-	}
+	lu_ent_clear(self->ent, arg);
+	return Py_BuildValue("");
 }
 
 static PyObject *
@@ -361,7 +355,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	if(!PyString_Check(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
 		DEBUG_EXIT;
-		return NULL;
+		return -1;
 	}
 	attr = PyString_AsString(item);
 	#ifdef DEBUG_BINDING
@@ -506,9 +500,8 @@ libuser_admin_getattr(struct libuser_admin *self, char *name)
 }
 
 static gboolean
-libuser_admin_python_prompter(struct lu_context *ctx,
-			      struct lu_prompt *prompts, int count,
-			      gpointer callback_data);
+libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
+			      gpointer callback_data, struct lu_error **error);
 
 static int
 libuser_admin_setattr(struct libuser_admin *self, const char *attr,
@@ -546,18 +539,14 @@ libuser_admin_lookup_user_name(struct libuser_admin *self, PyObject *args)
 {
 	char *arg;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "s", &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
-		DEBUG_EXIT;
-		return NULL;
-	}
-	if(lu_user_lookup_name(self->ctx, arg, ent)) {
+	if(lu_user_lookup_name(self->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -572,17 +561,14 @@ libuser_admin_lookup_user_id(struct libuser_admin *self, PyObject *args)
 {
 	int arg;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "i", &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(ent == NULL) {
-		DEBUG_EXIT;
-		return NULL;
-	}
-	if(lu_user_lookup_id(self->ctx, arg, ent)) {
+	if(lu_user_lookup_id(self->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -597,18 +583,14 @@ libuser_admin_lookup_group_name(struct libuser_admin *self, PyObject *args)
 {
 	char *arg;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "s", &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
-		DEBUG_EXIT;
-		return NULL;
-	}
-	if(lu_group_lookup_name(self->ctx, arg, ent)) {
+	if(lu_group_lookup_name(self->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -623,18 +605,14 @@ libuser_admin_lookup_group_id(struct libuser_admin *self, PyObject *args)
 {
 	int arg;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "i", &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
-	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
-		DEBUG_EXIT;
-		return NULL;
-	}
-	if(lu_group_lookup_id(self->ctx, arg, ent)) {
+	if(lu_group_lookup_id(self->ctx, arg, ent, &error)) {
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
@@ -690,19 +668,22 @@ libuser_admin_init_group(struct libuser_admin *self, PyObject *args)
 
 static PyObject *
 libuser_admin_generic(struct libuser_admin *self, PyObject *args,
-		      gboolean (*fn)(struct lu_context *, struct lu_ent *))
+		      gboolean (*fn)(struct lu_context *, struct lu_ent *,
+			             struct lu_error **error))
 {
 	struct libuser_entity *ent;
+	struct lu_error *error = NULL;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "O!", &EntityType, &ent)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(fn(self->ctx, ent->ent)) {
+	if(fn(self->ctx, ent->ent, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
+		PyErr_SetString(PyExc_RuntimeError, error->string);
+		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -711,20 +692,22 @@ libuser_admin_generic(struct libuser_admin *self, PyObject *args,
 static PyObject *
 libuser_admin_setpass(struct libuser_admin *self, PyObject *args,
 		      gboolean (*fn)(struct lu_context *, struct lu_ent *,
-				     const char *))
+				     const char *, struct lu_error **))
 {
 	struct libuser_entity *ent;
+	struct lu_error *error = NULL;
 	const char *password;
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "O!z", &EntityType, &ent, &password)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	if(fn(self->ctx, ent->ent, password)) {
+	if(fn(self->ctx, ent->ent, password, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
+		PyErr_SetString(PyExc_SystemError, error->string);
+		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -918,13 +901,14 @@ libuser_admin_enumerate_users(struct libuser_admin *self, PyObject *args)
 	GList *results;
 	char *module = NULL, *pattern = NULL;
 	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
 
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	results = lu_users_enumerate(self->ctx, pattern, module);
+	results = lu_users_enumerate(self->ctx, pattern, module, &error);
 	ret = convert_glist_pystringlist(results);
 	g_list_free(results);
 	DEBUG_EXIT;
@@ -937,13 +921,14 @@ libuser_admin_enumerate_groups(struct libuser_admin *self, PyObject *args)
 	GList *results;
 	char *module = NULL, *pattern = NULL;
 	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
 
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	results = lu_groups_enumerate(self->ctx, pattern, module);
+	results = lu_groups_enumerate(self->ctx, pattern, module, &error);
 	ret = convert_glist_pystringlist(results);
 	g_list_free(results);
 	DEBUG_EXIT;
@@ -955,9 +940,8 @@ static PyObject *libuser_admin_prompt_console(struct libuser_admin *self,
 					      PyObject *args);
 
 static gboolean
-libuser_admin_python_prompter(struct lu_context *ctx,
-			      struct lu_prompt *prompts, int count,
-			      gpointer callback_data)
+libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
+			      gpointer callback_data, struct lu_error **error)
 {
 	PyObject *list = NULL, *tuple = NULL;
 	PyObject *prompter = (PyObject*) callback_data;
@@ -966,6 +950,7 @@ libuser_admin_python_prompter(struct lu_context *ctx,
 	DEBUG_ENTRY;
 	if(count > 0) {
 		if(!PyCallable_Check(prompter)) {
+			lu_error_set(error, lu_error_generic, NULL);
 			PyErr_SetString(PyExc_RuntimeError,
 					"prompter is not callable");
 			DEBUG_EXIT;
@@ -1006,6 +991,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 	PyObject *list = NULL;
 	PyObject *item = NULL;
 	struct lu_prompt *prompts = NULL;
+	struct lu_error *error = NULL;
 	gboolean success = FALSE;
 
 	g_return_val_if_fail(self != NULL, NULL);
@@ -1042,9 +1028,8 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 	fprintf(stderr, "Prompter function promptConsoleQuiet is at <%p>.\n",
 		lu_prompt_console_quiet);
 	fprintf(stderr, "Calling prompter function at <%p>.\n", prompter);
-	fprintf(stderr, "self->ctx is <%p>\n", self->ctx);
 #endif
-	success = prompter(self->ctx, prompts, count, self->prompter);
+	success = prompter(prompts, count, self->prompter, &error);
 	if(success) {
 		for(i = 0; i < count; i++) {
 			struct libuser_prompt *obj;
@@ -1268,6 +1253,7 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	char *keywords[] = {"name", "type", "info", "auth", NULL};
 	int type = lu_user;
 	lu_context_t *context;
+	struct lu_error *error = NULL;
 	struct libuser_admin *ret;
 
 	DEBUG_ENTRY;
@@ -1301,10 +1287,12 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 		getindent(), ret->prompter, self, info, auth);
 #endif
 	context = lu_start(name, type, info, auth,
-			   libuser_admin_python_prompter, ret->prompter);
+			   libuser_admin_python_prompter, ret->prompter,
+			   &error);
 
 	if(context == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser init failed");
+		PyErr_SetString(PyExc_SystemError, error->string);
+		lu_error_free(&error);
 		Py_DECREF(ret->prompter);
 		Py_DECREF(self);
 		return NULL;
@@ -1473,12 +1461,37 @@ static PyTypeObject PromptType = {
 	(reprfunc) NULL,
 };
 
+static PyObject*
+libuser_get_user_shells(PyObject *self, PyObject *args)
+{
+	GList *results = NULL;
+	PyObject *ret = NULL;
+	const char *shell;
+
+	DEBUG_ENTRY;
+
+	setusershell();
+	while((shell = getusershell()) != NULL) {
+		results = g_list_append(results, g_strdup(shell));
+	}
+	endusershell();
+
+	ret = convert_glist_pystringlist(results);
+	g_list_foreach(results, (GFunc)g_free, NULL);
+	g_list_free(results);
+
+	DEBUG_EXIT;
+	return ret;
+}
+
 static PyMethodDef
 libuser_methods[] = {
-	{"Admin", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
+	{"admin", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
 	 "create and return a new administration context"},
 	{"prompt", (PyCFunction)libuser_prompt_new, 0,
 	 "create and return a new prompt record"},
+	{"getUserShells", (PyCFunction)libuser_get_user_shells, 0,
+	 "return a list of valid shells"},
 	{NULL, NULL, 0},
 };
 

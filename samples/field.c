@@ -49,7 +49,7 @@ main(int argc, char **argv)
 		exit(2);
 	}
 
-	lock = lu_util_lock_obtain(fd);
+	lock = lu_util_lock_obtain(fd, NULL);
 	if(lock == NULL) {
 		fprintf(stderr, "failed to lock `%s': %s\n", argv[1],
 			strerror(errno));
@@ -58,13 +58,13 @@ main(int argc, char **argv)
 	}
 
 	if(argc > 4) {
-		if(!lu_util_field_write(fd, argv[2], atoi(argv[3]), argv[4])) {
+		if(!lu_util_field_write(fd, argv[2], atoi(argv[3]), argv[4], NULL)) {
 			fprintf(stderr, "failed to modify `%s': %s\n", argv[1],
 				strerror(errno));
 		}
 	} else {
 		char *ret;
-		ret = lu_util_field_read(fd, argv[2], atoi(argv[3]));
+		ret = lu_util_field_read(fd, argv[2], atoi(argv[3]), NULL);
 		if(ret == NULL) {
 			fprintf(stderr, "failed to read `%s': %s\n", argv[1],
 				strerror(errno));

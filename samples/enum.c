@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	lu = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
+	lu = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, NULL);
 
 	if(lu == NULL) {
 		g_print(gettext("Error initializing lu.\n"));
@@ -57,9 +57,9 @@ int main(int argc, char **argv)
 	}
 
 	if(group == FALSE) {
-		entities = lu_users_enumerate(lu, argv[optind], module);
+		entities = lu_users_enumerate(lu, argv[optind], module, NULL);
 	} else {
-		entities = lu_groups_enumerate(lu, argv[optind], module);
+		entities = lu_groups_enumerate(lu, argv[optind], module, NULL);
 	}
 
 	for(l = entities; l != NULL; l = g_list_next(l)) {

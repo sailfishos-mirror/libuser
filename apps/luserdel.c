@@ -34,6 +34,7 @@ main(int argc, const char **argv)
 {
 	struct lu_context *ctx;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	int remove_home = FALSE;
 	const char *user = NULL;
 	GList *values;
@@ -68,17 +69,17 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
 
-	if(lu_user_lookup_name(ctx, user, ent) == FALSE) {
+	if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 2;
 	}
 
-	if(lu_user_delete(ctx, ent) == FALSE) {
+	if(lu_user_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s could not be deleted.\n"), user);
 		return 3;
 	}

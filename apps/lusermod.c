@@ -39,6 +39,7 @@ main(int argc, const char **argv)
 	long uidNumber = -2, gidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
+	struct lu_error *error = NULL;
 	GList *values;
 	int change = FALSE, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
@@ -52,7 +53,7 @@ main(int argc, const char **argv)
 		 "GECOS information", "STRING"},
 		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
 		 "home directory", "STRING"},
-#ifdef FIXMEFIXMEFIXME
+#ifdef FIXME
 		{"movedirectory", 'm', POPT_ARG_NONE, &move_home, 0,
 		 "move home directory contents"},
 #endif
@@ -90,7 +91,7 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(lock && unlock) {
@@ -100,7 +101,7 @@ main(int argc, const char **argv)
 
 	ent = lu_ent_new();
 
-	if(lu_user_lookup_name(ctx, user, ent) == FALSE) {
+	if(lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 3;
 	}
@@ -138,7 +139,7 @@ main(int argc, const char **argv)
 	}
 
 	if(userPassword) {
-		if(lu_user_setpass(ctx, ent, userPassword) == NULL) {
+		if(lu_user_setpass(ctx, ent, userPassword, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for user "
 					  "%s.\n"), user);
 			return 5;
@@ -148,7 +149,7 @@ main(int argc, const char **argv)
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		if(lu_user_setpass(ctx, ent, tmp) == NULL) {
+		if(lu_user_setpass(ctx, ent, tmp, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for user "
 					  "%s.\n"), user);
 			return 6;
@@ -157,7 +158,7 @@ main(int argc, const char **argv)
 	}
 
 	if(lock) {
-		if(lu_user_lock(ctx, ent) == FALSE) {
+		if(lu_user_lock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("User %s could not be locked.\n"),
 				user);
 			return 7;
@@ -165,14 +166,14 @@ main(int argc, const char **argv)
 	}
 
 	if(unlock) {
-		if(lu_user_unlock(ctx, ent) == FALSE) {
+		if(lu_user_unlock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("User %s could not be unlocked.\n"),
 				user);
 			return 8;
 		}
 	}
 
-	if(change && (lu_user_modify(ctx, ent) == FALSE)) {
+	if(change && (lu_user_modify(ctx, ent, &error) == FALSE)) {
 		fprintf(stderr, _("User %s could not be modified.\n"), user);
 		return 9;
 	}

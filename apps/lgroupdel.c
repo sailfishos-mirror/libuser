@@ -34,6 +34,7 @@ main(int argc, const char **argv)
 {
 	struct lu_context *ctx;
 	struct lu_ent *ent;
+	struct lu_error *error = NULL;
 	const char *group;
 	int interactive = FALSE;
 	int c;
@@ -62,17 +63,17 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
 
-	if(lu_group_lookup_name(ctx, group, ent) == FALSE) {
+	if(lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
 		return 2;
 	}
 
-	if(lu_group_delete(ctx, ent) == FALSE) {
+	if(lu_group_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be deleted.\n"), group);
 		return 3;
 	}

@@ -37,6 +37,7 @@ main(int argc, const char **argv)
 	long gidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
+	struct lu_error *error = NULL;
 	GList *values;
 	int interactive = FALSE;
 	int system_account = FALSE;
@@ -71,11 +72,11 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
-	lu_ent_group_default(ctx, name, system_account, ent);
+	lu_group_default(ctx, name, system_account, ent);
 
 	if(gidNumber != -2) {
 		char *tmp = g_strdup_printf("%ld", gidNumber);
@@ -83,7 +84,7 @@ main(int argc, const char **argv)
 		g_free(tmp);
 	}
 
-	if(lu_group_add(ctx, ent) == FALSE) {
+	if(lu_group_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group creation failed.\n"));
 		return 2;
 	}

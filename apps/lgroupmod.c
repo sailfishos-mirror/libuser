@@ -40,6 +40,7 @@ main(int argc, const char **argv)
 	long gidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
+	struct lu_error *error = NULL;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -86,7 +87,7 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL);
+		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(lock && unlock) {
@@ -96,7 +97,7 @@ main(int argc, const char **argv)
 
 	ent = lu_ent_new();
 
-	if(lu_group_lookup_name(ctx, group, ent) == FALSE) {
+	if(lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
 		return 3;
 	}
@@ -156,7 +157,7 @@ main(int argc, const char **argv)
 	}
 
 	if(userPassword) {
-		if(lu_group_setpass(ctx, ent, userPassword) == FALSE) {
+		if(lu_group_setpass(ctx, ent, userPassword, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s.\n"), group);
 			return 4;
@@ -166,7 +167,7 @@ main(int argc, const char **argv)
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		if(lu_group_setpass(ctx, ent, tmp) == FALSE) {
+		if(lu_group_setpass(ctx, ent, tmp, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s.\n"), group);
 			return 5;
@@ -175,7 +176,7 @@ main(int argc, const char **argv)
 	}
 
 	if(lock) {
-		if(lu_group_lock(ctx, ent) == FALSE) {
+		if(lu_group_lock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("Group %s could not be locked.\n"),
 				group);
 			return 6;
@@ -183,14 +184,14 @@ main(int argc, const char **argv)
 	}
 
 	if(unlock) {
-		if(lu_group_unlock(ctx, ent) == FALSE) {
+		if(lu_group_unlock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("Group %s could not be unlocked.\n"),
 				group);
 			return 7;
 		}
 	}
 
-	if(change && lu_group_modify(ctx, ent) == FALSE) {
+	if(change && lu_group_modify(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be modified.\n"), group);
 		return 8;
 	}

@@ -28,7 +28,6 @@
 
 int main(int argc, char **argv)
 {
-	struct lu_context *lu = NULL;
 	struct lu_prompt prompts[] = {
 		{"Name", TRUE, g_strdup("anonymous"), NULL, NULL},
 		{"Password1", TRUE, g_strdup("anonymous"), NULL, NULL},
@@ -40,15 +39,9 @@ int main(int argc, char **argv)
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	lu = lu_start(NULL, 0, "", "", lu_prompt_console, NULL);
-	if(lu == NULL) {
-		g_print(gettext("Error initializing lu.\n"));
-		return 1;
-	}
-
-	if(lu_prompt_console(lu,
-			     prompts,
+	if(lu_prompt_console(prompts,
 			     sizeof(prompts) / sizeof(prompts[0]),
+			     NULL,
 			     NULL)) {
 		g_print(gettext("Prompts succeeded.\n"));
 		for(i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
@@ -62,10 +55,6 @@ int main(int argc, char **argv)
 	} else {
 		g_print(gettext("Prompts failed.\n"));
 	}
-
-#if 0
-	lu_end(lu);
-#endif
 
 	return 0;
 }

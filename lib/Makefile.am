@@ -7,6 +7,7 @@ libuser_la_SOURCES = \
 	user.c \
 	usercfg.c \
 	userent.c \
+	usererr.c \
 	userprmt.c \
 	usersc.c \
 	userutil.c

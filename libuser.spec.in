@@ -10,8 +10,8 @@ Summary: A user account administration library.
 
 %description
 The libuser library implements a standardized interface for manipulating
-and administering user accounts.  The library uses pluggable back-ends to
-interface to its data sources.
+and administering user and group accounts.  The library uses pluggable
+back-ends to interface to its data sources.
 
 Sample applications modeled after those included with the shadow password
 suite are included.
@@ -19,7 +19,7 @@ suite are included.
 %package devel
 Group: Development/Libraries
 Summary: Files needed for developing applications which use libuser.
-Requires: %{name}-devel = %{version}-%{release}
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 The libuser-devel package contains header files, static libraries, and other
@@ -67,6 +67,14 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Thu Jun 21 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add error reporting facilities
+- split public header into pieces by function
+- backend cleanups
+
+* Mon Jun 18 2001 Nalin Dahyabhai <nalin@redhat.com>
+- make %%{name}-devel require %%{name} and not %%{name}-devel
+
 * Fri Jun 15 2001 Nalin Dahyabhai <nalin@redhat.com>
 - clean up quota bindings some more
 - finish most of the ldap bindings
