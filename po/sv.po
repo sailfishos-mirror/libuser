@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-07-19 16:41+0200\n"
+"PO-Revision-Date: 2002-12-12 02:12+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -405,28 +405,28 @@ msgstr "fel vid läsning från terminal"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "namnet är inte angivet"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "namnet är för kort"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "namnet innehåller tecken som inte är ASCII"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "namnet innehåller kontrolltecken"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "namnet innehåller blanksteg"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "namnet innehåller ogiltiga tecknet \"%c\""
 
 #: lib/util.c:200
 #, c-format
