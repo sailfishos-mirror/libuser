@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-28 22:52+0200\n"
+"POT-Creation-Date: 2004-10-10 23:37+0200\n"
 "PO-Revision-Date: 2004-03-11 11:21+0800\n"
 "Last-Translator: hutuworm <hutuworm@hutuworm.org>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
@@ -91,8 +91,8 @@ msgstr "初始化 %s 出错：%s。\n"
 #: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
 #: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
 #: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:278
-#: apps/luseradd.c:321 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:279
+#: apps/luseradd.c:322 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
@@ -384,22 +384,22 @@ msgstr "为组群“%s”设置口令时出错：%s\n"
 msgid "Password changed.\n"
 msgstr "口令被改变。\n"
 
-#: apps/luseradd.c:198 apps/luseradd.c:210
+#: apps/luseradd.c:199 apps/luseradd.c:211
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "创建组群“%s”出错。\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:278
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "创建帐号失败：%s。\n"
 
-#: apps/luseradd.c:319
+#: apps/luseradd.c:320
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "创建 %s 失败：%s。\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:328
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "创建邮件池出错。\n"
@@ -617,18 +617,18 @@ msgid "error locking file: %s"
 msgstr "锁文件时出错：%s"
 
 #: modules/files.c:172 modules/files.c:515 modules/files.c:887
-#: modules/files.c:1159 modules/files.c:1360 modules/files.c:1571
-#: modules/files.c:1661 modules/files.c:1865 modules/files.c:2055
-#: modules/files.c:2072 modules/files.c:2162 modules/files.c:2181
-#: modules/files.c:2249 modules/files.c:2270 modules/files.c:2367
-#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
-#: modules/files.c:2565 modules/files.c:2582
+#: modules/files.c:1160 modules/files.c:1361 modules/files.c:1572
+#: modules/files.c:1662 modules/files.c:1866 modules/files.c:2056
+#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
+#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2368
+#: modules/files.c:2387 modules/files.c:2446 modules/files.c:2465
+#: modules/files.c:2566 modules/files.c:2581
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "无法打开“%s”：%s"
 
 #: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:899 modules/files.c:1372
+#: modules/files.c:899 modules/files.c:1373
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "无法 stat “%s”：%s"
@@ -643,7 +643,7 @@ msgstr "创建“%s”时出错：%s"
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "备份文件“%s”已存在，且不是常规文件"
 
-#: modules/files.c:929 modules/files.c:1381
+#: modules/files.c:929 modules/files.c:1382
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "无法从“%s”中读取：%s"
@@ -652,14 +652,14 @@ msgstr "无法从“%s”中读取：%s"
 msgid "entry already present in file"
 msgstr "项目已在文件中出现"
 
-#: modules/files.c:952 modules/files.c:967 modules/files.c:1431
-#: modules/files.c:1439
+#: modules/files.c:952 modules/files.c:967 modules/files.c:1432
+#: modules/files.c:1440
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "无法写入“%s”：%s"
 
-#: modules/files.c:1126 modules/files.c:1134 modules/files.c:1236
-#: modules/files.c:1244
+#: modules/files.c:1127 modules/files.c:1135 modules/files.c:1237
+#: modules/files.c:1245
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "实体对象没有任何 %s 属性"
@@ -743,102 +743,102 @@ msgstr "无法将 LDAP 协议设为版本 %d"
 msgid "could not negotiate TLS with LDAP server"
 msgstr "无法与 LDAP 服务器商讨 TLS"
 
-#: modules/ldap.c:381
+#: modules/ldap.c:380
 msgid "could not bind to LDAP server"
 msgstr "无法关联到 LDAP 服务器"
 
-#: modules/ldap.c:393
+#: modules/ldap.c:392
 msgid "could not search LDAP server"
 msgstr "无法搜索 LDAP 服务器"
 
-#: modules/ldap.c:402
+#: modules/ldap.c:401
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP 服务器似乎没有根 DSE"
 
-#: modules/ldap.c:626 modules/ldap.c:1372 modules/ldap.c:1511
-#: modules/ldap.c:1572 modules/ldap.c:1688 modules/ldap.c:1784
+#: modules/ldap.c:625 modules/ldap.c:1371 modules/ldap.c:1510
+#: modules/ldap.c:1571 modules/ldap.c:1687 modules/ldap.c:1783
 msgid "error mapping name to LDAP distinguished name"
 msgstr "将名称映射为 LDAP 识别名时出错。"
 
-#: modules/ldap.c:636
+#: modules/ldap.c:635
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "将名称映射为 LDAP 基点识别名时出错。"
 
-#: modules/ldap.c:1349
+#: modules/ldap.c:1348
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "用户对象没有任何 %s 属性"
 
-#: modules/ldap.c:1358
+#: modules/ldap.c:1357
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "用户对象创建时没有包括“%s”"
 
-#: modules/ldap.c:1383
+#: modules/ldap.c:1382
 msgid "could not convert internal data to LDAPMods"
 msgstr "无法将内部数据转换成 LDAPMods"
 
-#: modules/ldap.c:1423 modules/ldap.c:1644
+#: modules/ldap.c:1422 modules/ldap.c:1643
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目录项目时出错：%s"
 
-#: modules/ldap.c:1450
+#: modules/ldap.c:1449
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "将 LDAP 目录项目更名时出错：%s\n"
 
-#: modules/ldap.c:1499
+#: modules/ldap.c:1498
 #, c-format
 msgid "object had no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1522
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "删除 LDAP 目录项目时出错：%s。\n"
 
-#: modules/ldap.c:1560 modules/ldap.c:1582 modules/ldap.c:1675
-#: modules/ldap.c:1773
+#: modules/ldap.c:1559 modules/ldap.c:1581 modules/ldap.c:1674
+#: modules/ldap.c:1772
 #, c-format
 msgid "object has no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1708
+#: modules/ldap.c:1707
 msgid "no such object in LDAP directory"
 msgstr "在 LDAP 目录中没有此类对象"
 
-#: modules/ldap.c:1720
+#: modules/ldap.c:1719
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "没有发现任何“%s”属性"
 
-#: modules/ldap.c:1883
+#: modules/ldap.c:1882
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目录中为 %s 设置口令时出错：%s"
 
-#: modules/ldap.c:2443
+#: modules/ldap.c:2442
 msgid "LDAP Server Name"
 msgstr "LDAP 服务器名"
 
-#: modules/ldap.c:2449
+#: modules/ldap.c:2448
 msgid "LDAP Search Base DN"
 msgstr "LDAP 搜索基点 DN"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2454
 msgid "LDAP Bind DN"
 msgstr "LDAP 关联 DN"
 
-#: modules/ldap.c:2462
+#: modules/ldap.c:2461
 msgid "LDAP Bind Password"
 msgstr "LDAP 关联口令"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2467
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 用户"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 授权用户"
 

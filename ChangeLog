@@ -1,5 +1,9 @@
 2004-10-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.52.4.
+
+	* NEWS: Update.
+
 	* python/misc.c (libuser_prompt_destroy): Fix memory leak.
 	(libuser_admin_python_prompter): Properly copy struct libuser_prompt
 	to avoid double free().

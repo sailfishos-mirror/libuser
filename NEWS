@@ -1,3 +1,6 @@
+0.52.4
+* Memory leak fixes
+
 0.52.3
 * Fix compilation without libuser headers already installed (#134085)
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-28 22:52+0200\n"
+"POT-Creation-Date: 2004-10-10 23:37+0200\n"
 "PO-Revision-Date: 2004-09-06 18:05+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -93,8 +93,8 @@ msgstr "%s আরম্ভ সমস্যা হয়েছে: %s।\n"
 #: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
 #: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
 #: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:278
-#: apps/luseradd.c:321 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:279
+#: apps/luseradd.c:322 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
@@ -390,22 +390,22 @@ msgstr "%s দলের জন্য পাসওয়ার্ড নির্ধ
 msgid "Password changed.\n"
 msgstr "পাসওয়ার্ড পরিবর্তন করা হয়েছে।\n"
 
-#: apps/luseradd.c:198 apps/luseradd.c:210
+#: apps/luseradd.c:199 apps/luseradd.c:211
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "`%s' দল তৈরি করতে সমস্যা হয়েছে।\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:278
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "অ্যাকাউন্ট তৈরি করবার প্রক্রিয়া ব্যর্থ হয়েছে: %s।\n"
 
-#: apps/luseradd.c:319
+#: apps/luseradd.c:320
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s তৈরি করতে সমস্যা হয়েছে: %s।\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:328
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "মেইল স্পুল তৈরি করতে সমস্যা হয়েছে।\n"
@@ -623,18 +623,18 @@ msgid "error locking file: %s"
 msgstr "ফাইল লক করতে সমস্যা হয়েছে: %s"
 
 #: modules/files.c:172 modules/files.c:515 modules/files.c:887
-#: modules/files.c:1159 modules/files.c:1360 modules/files.c:1571
-#: modules/files.c:1661 modules/files.c:1865 modules/files.c:2055
-#: modules/files.c:2072 modules/files.c:2162 modules/files.c:2181
-#: modules/files.c:2249 modules/files.c:2270 modules/files.c:2367
-#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
-#: modules/files.c:2565 modules/files.c:2582
+#: modules/files.c:1160 modules/files.c:1361 modules/files.c:1572
+#: modules/files.c:1662 modules/files.c:1866 modules/files.c:2056
+#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
+#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2368
+#: modules/files.c:2387 modules/files.c:2446 modules/files.c:2465
+#: modules/files.c:2566 modules/files.c:2581
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' খোলা সম্ভব হয় নি: %s"
 
 #: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:899 modules/files.c:1372
+#: modules/files.c:899 modules/files.c:1373
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' সংক্রান্ত তথ্য পাওয়া (Stat) যায় নি: %s"
@@ -649,7 +649,7 @@ msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "ব্যাক-আপ ফাইল `%s' বর্তমানে উপস্থিত আছে এবং এটি কোনো সাধারণ ফাইল নয়"
 
-#: modules/files.c:929 modules/files.c:1381
+#: modules/files.c:929 modules/files.c:1382
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' থেকে পড়া সম্ভব হয় নি: %s"
@@ -658,14 +658,14 @@ msgstr "`%s' থেকে পড়া সম্ভব হয় নি: %s"
 msgid "entry already present in file"
 msgstr "ফাইল এন্ট্রি বর্তমানে উপস্থিত আছে"
 
-#: modules/files.c:952 modules/files.c:967 modules/files.c:1431
-#: modules/files.c:1439
+#: modules/files.c:952 modules/files.c:967 modules/files.c:1432
+#: modules/files.c:1440
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
 
-#: modules/files.c:1126 modules/files.c:1134 modules/files.c:1236
-#: modules/files.c:1244
+#: modules/files.c:1127 modules/files.c:1135 modules/files.c:1237
+#: modules/files.c:1245
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "সত্ত্বার বস্তুতে কোন %s বৈশিষ্ট্য নেই"
@@ -751,103 +751,103 @@ msgstr "LDAP প্রোটোকলকে %d ভার্সানের স�
 msgid "could not negotiate TLS with LDAP server"
 msgstr "LDAP সার্ভারের সাথে TLS-এর মীমাংসা করা সম্ভব হয় নি"
 
-#: modules/ldap.c:381
+#: modules/ldap.c:380
 msgid "could not bind to LDAP server"
 msgstr "LDAP সার্ভার bind করা সম্ভব হয় নি"
 
-#: modules/ldap.c:393
+#: modules/ldap.c:392
 msgid "could not search LDAP server"
 msgstr "LDAP সার্ভারের অনুসন্ধান করা সম্ভব হয় নি"
 
-#: modules/ldap.c:402
+#: modules/ldap.c:401
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP সার্ভারে কোন root DSE সম্ভবত উপস্থিত নেই"
 
-#: modules/ldap.c:626 modules/ldap.c:1372 modules/ldap.c:1511
-#: modules/ldap.c:1572 modules/ldap.c:1688 modules/ldap.c:1784
+#: modules/ldap.c:625 modules/ldap.c:1371 modules/ldap.c:1510
+#: modules/ldap.c:1571 modules/ldap.c:1687 modules/ldap.c:1783
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP-র বৈশিষ্ট্যপূর্ণ নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
-#: modules/ldap.c:636
+#: modules/ldap.c:635
 msgid "error mapping name to LDAP base distinguished name"
 msgstr ""
 "LDAP-র বৈশিষ্ট্যপূর্ণ মৌলিক (base) নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
-#: modules/ldap.c:1349
+#: modules/ldap.c:1348
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "ব্যবহারকারীর অবজেক্টে কোনো `%s' বৈশিষ্ট্য ছিল না"
 
-#: modules/ldap.c:1358
+#: modules/ldap.c:1357
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "ব্যবহারকারীর অবজেক্ট কোন `%s' ছাড়া তৈরি করা হয়েছে"
 
-#: modules/ldap.c:1383
+#: modules/ldap.c:1382
 msgid "could not convert internal data to LDAPMods"
 msgstr "অভ্যন্তরীণ ডাটাকে LDAPMods-এ পরিবর্তন করা সম্ভব হয় নি"
 
-#: modules/ldap.c:1423 modules/ldap.c:1644
+#: modules/ldap.c:1422 modules/ldap.c:1643
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি পরিবর্তন করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:1450
+#: modules/ldap.c:1449
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "LDAP ডিরেক্টরির এন্ট্রির নাম পরিবর্তন করতে সমস্যা হয়েছে: %s।\n"
 
-#: modules/ldap.c:1499
+#: modules/ldap.c:1498
 #, c-format
 msgid "object had no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1522
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি মুছে ফেলতে সমস্যা হয়েছে: %s।\n"
 
-#: modules/ldap.c:1560 modules/ldap.c:1582 modules/ldap.c:1675
-#: modules/ldap.c:1773
+#: modules/ldap.c:1559 modules/ldap.c:1581 modules/ldap.c:1674
+#: modules/ldap.c:1772
 #, c-format
 msgid "object has no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1708
+#: modules/ldap.c:1707
 msgid "no such object in LDAP directory"
 msgstr "LDAP ডিরেক্টরিতে এ রকম কোনো বস্তু উপস্থিত নেই"
 
-#: modules/ldap.c:1720
+#: modules/ldap.c:1719
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায় নি"
 
-#: modules/ldap.c:1883
+#: modules/ldap.c:1882
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s-র জন্য LDAP ডিরেক্টরিতে পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:2443
+#: modules/ldap.c:2442
 msgid "LDAP Server Name"
 msgstr "LDAP সার্ভারের নাম"
 
-#: modules/ldap.c:2449
+#: modules/ldap.c:2448
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2454
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2462
+#: modules/ldap.c:2461
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind পাসওয়ার্ড"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2467
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ব্যবহারকারী"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-র অনুমোদন ব্যবহারকারী"
 
