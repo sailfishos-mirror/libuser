@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-07-07 02:24-0400\n"
+"POT-Creation-Date: 2001-07-10 21:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,21 +302,21 @@ msgstr ""
 msgid "error creating `%s'"
 msgstr ""
 
-#: modules/files.c:599 modules/files.c:609
+#: modules/files.c:602 modules/files.c:612
 msgid "entry already present in file"
 msgstr ""
 
-#: modules/files.c:709 modules/files.c:716 modules/files.c:799
-#: modules/files.c:809
+#: modules/files.c:712 modules/files.c:719 modules/files.c:801
+#: modules/files.c:811
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1423 modules/files.c:1479
+#: modules/files.c:1425 modules/files.c:1481
 msgid "Not executing with superuser privileges."
 msgstr ""
 
-#: modules/files.c:1491
+#: modules/files.c:1493
 msgid "No shadow file present -- disabling."
 msgstr ""
 

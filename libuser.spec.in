@@ -67,6 +67,10 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Tue Jul 10 2001 Nalin Dahyabhai <nalin@redhat.com>
+- don't bail when writing empty fields to colon-delimited files
+- use permissions of the original file when making backup files instead of 0600
+
 * Fri Jul  6 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish implementing is_locked methods in files/shadow module
 - finish cleanup of the python bindings

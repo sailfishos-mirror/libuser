@@ -401,10 +401,10 @@ lu_util_field_write(int fd, const char *first, unsigned int field, const char *v
 	LU_ERROR_CHECK(error);
 
 	g_assert(fd != -1);
-	g_assert(first != NULL);
-	g_assert(strlen(first) != 0);
 	g_assert(field >= 1);
-	g_assert(value != NULL);
+
+	first = first ?: "";
+	value = value ?: "";
 
 	if(fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat, NULL);

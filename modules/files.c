@@ -155,6 +155,9 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 		return FALSE;
 	}
 
+	fchown(ofd, ist.st_uid, ist.st_gid);
+	fchmod(ofd, ist.st_mode);
+
 	do {
 		len = read(ifd, buf, sizeof(buf));
 		if(len >= 0) {
@@ -749,6 +752,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 			continue;
 		}
 		values = lu_ent_get(ent, formats[i].attribute);
+		new_value = NULL;
 		if(!formats[i].multiple) {
 			p = (char*)values->data ?: "";
 			/* if there's a prefix, strip it */
@@ -760,9 +764,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 			/* make a copy of the data */
 			new_value = g_strdup(p);
 		} else {
-			for(l = values, new_value = NULL;
-			    l && l->data;
-			    l = g_list_next(l)) {
+			for(l = values; l && l->data; l = g_list_next(l)) {
 				p = l->data;
 				/* if there's a prefix, strip it */
 				if(formats[i].prefix) {
