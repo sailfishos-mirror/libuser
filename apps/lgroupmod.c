@@ -34,15 +34,15 @@ int
 main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
-	    *gid = NULL, *addAdmins = NULL, *remAdmins = NULL,
-	    *addMembers = NULL, *remMembers = NULL, *group = NULL;
+		   *gid = NULL, *addAdmins = NULL, *remAdmins = NULL,
+		   *addMembers = NULL, *remMembers = NULL, *group = NULL;
 	char **admins = NULL, **members = NULL;
-	long gidNumber = -2;
-	char *oldGidNumber = NULL;
+	long gidNumber = -2, oldGidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GList *values = NULL, *i;
+	GValueArray *values = NULL;
+	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -93,10 +93,9 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx =
-	    lu_start(NULL, 0, NULL, NULL,
-		     interactive ? lu_prompt_console :
-		     lu_prompt_console_quiet, NULL, &error);
+	ctx = lu_start(NULL, 0, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
 		if (error != NULL) {
 			fprintf(stderr, _("Error initializing %s: %s.\n"),
@@ -120,31 +119,42 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	change = gid || addAdmins || remAdmins || cryptedUserPassword
-	    || addMembers || remMembers || (gidNumber != -2);
+	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
+		 addMembers || remMembers || (gidNumber != -2);
 
-	if (gid) {
+	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
-		lu_ent_set(ent, LU_GROUPNAME, gid);
+		lu_ent_clear(ent, LU_GROUPNAME);
 		if (values) {
-			gid = g_strdup(values->data);
+			memset(&val, 0, sizeof(val));
+			g_value_init(&val, G_TYPE_STRING);
+			g_value_set_string(&val, gid);
+			lu_ent_add(ent, LU_GROUPNAME, &val);
 		}
 	}
 	if (gidNumber != -2) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if (values) {
-			oldGidNumber = g_strdup(values->data);
+			value = g_value_array_get_nth(values, 0);
+			oldGidNumber = g_value_get_long(value);
 		}
 
-		lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_LONG);
+		g_value_set_long(&val, gidNumber);
+
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &val);
 	}
 
 	if (addAdmins) {
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
 		admins = g_strsplit(addAdmins, ",", 0);
 		if (admins) {
 			for (c = 0; admins && admins[c]; c++) {
-				lu_ent_add(ent, LU_ADMINISTRATORUID,
-					   admins[c]);
+				g_value_set_string(&val, admins[c]);
+				lu_ent_add(ent, LU_ADMINISTRATORUID, &val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
@@ -152,11 +162,13 @@ main(int argc, const char **argv)
 		}
 	}
 	if (remAdmins) {
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
 		admins = g_strsplit(remAdmins, ",", 0);
 		if (admins) {
 			for (c = 0; admins && admins[c]; c++) {
-				lu_ent_del(ent, LU_ADMINISTRATORUID,
-					   admins[c]);
+				g_value_set_string(&val, admins[c]);
+				lu_ent_del(ent, LU_ADMINISTRATORUID, &val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
@@ -165,10 +177,13 @@ main(int argc, const char **argv)
 	}
 
 	if (addMembers) {
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
 		members = g_strsplit(addMembers, ",", 0);
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
-				lu_ent_add(ent, LU_MEMBERUID, members[c]);
+				g_value_set_string(&val, admins[c]);
+				lu_ent_add(ent, LU_MEMBERUID, &val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
@@ -176,10 +191,13 @@ main(int argc, const char **argv)
 		}
 	}
 	if (remMembers) {
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
 		members = g_strsplit(remMembers, ",", 0);
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
-				lu_ent_del(ent, LU_MEMBERUID, members[c]);
+				g_value_set_string(&val, admins[c]);
+				lu_ent_del(ent, LU_MEMBERUID, &val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
@@ -188,11 +206,9 @@ main(int argc, const char **argv)
 	}
 
 	if (userPassword) {
-		if (lu_group_setpass(ctx, ent, userPassword, &error) ==
-		    FALSE) {
-			fprintf(stderr,
-				_("Failed to set password for group "
-				  "%s.\n"), group);
+		if (lu_group_setpass(ctx, ent, userPassword, &error) == FALSE) {
+			fprintf(stderr, _("Failed to set password for group "
+				"%s.\n"), group);
 			return 4;
 		}
 	}
@@ -201,9 +217,8 @@ main(int argc, const char **argv)
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
 		if (lu_group_setpass(ctx, ent, tmp, &error) == FALSE) {
-			fprintf(stderr,
-				_("Failed to set password for group "
-				  "%s.\n"), group);
+			fprintf(stderr, _("Failed to set password for group "
+				"%s.\n"), group);
 			return 5;
 		}
 		g_free(tmp);
@@ -211,8 +226,7 @@ main(int argc, const char **argv)
 
 	if (lock) {
 		if (lu_group_lock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("Group %s could not be locked.\n"),
+			fprintf(stderr, _("Group %s could not be locked.\n"),
 				group);
 			return 6;
 		}
@@ -220,25 +234,22 @@ main(int argc, const char **argv)
 
 	if (unlock) {
 		if (lu_group_unlock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("Group %s could not be unlocked.\n"),
+			fprintf(stderr, _("Group %s could not be unlocked.\n"),
 				group);
 			return 7;
 		}
 	}
 
 	if (change && lu_group_modify(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Group %s could not be modified.\n"),
-			group);
+		fprintf(stderr, _("Group %s could not be modified.\n"), group);
 		return 8;
 	}
 	lu_hup_nscd();
 
 	lu_ent_free(ent);
 
-	if ((oldGidNumber != NULL) && (gidNumber != -2)) {
-		values =
-		    lu_users_enumerate_by_group(ctx, gid, NULL, &error);
+	if ((oldGidNumber != -2) && (gidNumber != -2)) {
+		values = lu_users_enumerate_by_group(ctx, gid, &error);
 		if (error != NULL) {
 			lu_error_free(&error);
 		}
