@@ -1,5 +1,5 @@
 msgid ""
-msgstr "POT-Creation-Date: 2001-06-01 18:53-0400\n"
+msgstr "POT-Creation-Date: 2001-06-01 18:59-0400\n"
 
 #: apps/apputil.c:36 apps/apputil.c:44 apps/apputil.c:52
 msgid "Feature not implemented: "
