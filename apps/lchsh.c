@@ -25,6 +25,8 @@
 #include <locale.h>
 #include <popt.h>
 #include <pwd.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include "../include/libuser/user.h"
 #include "apputil.h"
@@ -36,7 +38,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent = NULL;
-	GList *values, *l, *i;
+	GList *i = NULL;
 	int interactive = FALSE;
 	int c;
 	struct lu_prompt prompt;

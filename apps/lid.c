@@ -39,13 +39,15 @@ main(int argc, const char **argv)
 	struct lu_ent *ent = NULL;
 	GList *values, *l, *i;
 	int interactive = FALSE;
-	int group = FALSE;
+	int group = FALSE, nameonly = FALSE;
 	int c;
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
 		{"group", 'g', POPT_ARG_NONE, &group, 0, "list members of a named group instead of the group memberships for "
 		 "the named user", NULL},
+		{"onlynames", 'n', POPT_ARG_NONE, &nameonly, 0, "only list membership information by name, and not UID/GID",
+		 NULL},
 		POPT_AUTOHELP
 	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
@@ -96,7 +98,7 @@ main(int argc, const char **argv)
 		if(values) {
 			for(l = values; l && l->data; l = g_list_next(l)) {
 				ent = lu_ent_new();
-				if(lu_user_lookup_name(ctx, (char*)l->data, ent, &error)) {
+				if(!nameonly && lu_user_lookup_name(ctx, (char*)l->data, ent, &error)) {
 					i = lu_ent_get(ent, LU_UIDNUMBER);
 					if(i) {
 						g_print(" %s(uid=%s)\n", (char*)l->data, (char*)i->data);
@@ -118,7 +120,7 @@ main(int argc, const char **argv)
 		if(values) {
 			for(l = values; l && l->data; l = g_list_next(l)) {
 				ent = lu_ent_new();
-				if(lu_group_lookup_name(ctx, (char*)l->data, ent, &error)) {
+				if(!nameonly && lu_group_lookup_name(ctx, (char*)l->data, ent, &error)) {
 					i = lu_ent_get(ent, LU_GIDNUMBER);
 					if(i) {
 						g_print(" %s(gid=%s)\n", (char*)l->data, (char*)i->data);
