@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "POT-Creation-Date: 2002-01-15 15:50-0500\n"
-"PO-Revision-Date: 2001-08-08 12:48+0200\n"
+"PO-Revision-Date: 2002-01-16 01:25+0100\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,13 +42,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Autentisering feilet for %s.\n"
 
 #: apps/apputil.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Intern feil.\n"
+msgstr "Intern PAM-feil «%s».\n"
 
 #: apps/apputil.c:440
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Feil med bruker\n"
 
 #: apps/lchage.c:128 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
 msgid "[OPTION...] user"
@@ -57,9 +57,9 @@ msgstr "[ALTERNATIV...] bruker"
 #: apps/lchage.c:131 apps/lgroupadd.c:67 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Feil under fjerning av %s: %s.\n"
+msgstr "Feil under lesing av argumenter: %s.\n"
 
 #: apps/lchage.c:140 apps/luseradd.c:103 apps/luserdel.c:75
 #: apps/lusermod.c:101
@@ -190,9 +190,9 @@ msgstr "Gruppe %s kunne ikke endres.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:194
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Feil under oppretting av gruppe for %s: %s.\n"
+msgstr "Feil under oppretting av gruppe «%s».\n"
 
 #: apps/luseradd.c:254
 #, c-format
@@ -217,12 +217,12 @@ msgstr "%s hadde ikke gid-nummer.\n"
 #: apps/luserdel.c:119
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Det finnes ingen gruppe med GID %ld, fjernes ikke.\n"
 
 #: apps/luserdel.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Gruppe #%d hadde ikke et gruppenavn.\n"
+msgstr "Gruppe med GID %ld hadde ikke et gruppenavn.\n"
 
 #: apps/luserdel.c:133
 #, c-format
@@ -260,9 +260,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Bruker %s kunne ikke endres: %s.\n"
 
 #: apps/lusermod.c:290
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Gruppe %s kunne ikke endres.\n"
+msgstr "Gruppe %s kunne ikke endres: %s.\n"
 
 #: apps/lusermod.c:301
 #, c-format
@@ -286,98 +286,87 @@ msgstr "kunne ikke åpne konfigurasjonsfil `%s': %s"
 
 #: lib/error.c:37
 msgid "success"
-msgstr ""
+msgstr "suksess"
 
 #: lib/error.c:39
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "modul deaktivert av konfigurasjon"
 
 #: lib/error.c:41
-#, fuzzy
 msgid "generic error"
-msgstr "Intern feil.\n"
+msgstr "vanlig feil"
 
 #: lib/error.c:43
-#, fuzzy
 msgid "not enough privileges"
-msgstr "kjører ikke med superbruker-privilegier"
+msgstr "ikke tilstrekkelige privilegier"
 
 #: lib/error.c:45
 msgid "access denied"
-msgstr ""
+msgstr "tilgang nektet"
 
 #: lib/error.c:47
 msgid "bad user/group name"
-msgstr ""
+msgstr "ugyldig bruker-/gruppenavn"
 
 #: lib/error.c:49
 msgid "bad user/group id"
-msgstr ""
+msgstr "ugyldig bruke-/gruppe-ID"
 
 #: lib/error.c:51
 msgid "user/group name in use"
-msgstr ""
+msgstr "bruker-/gruppenavn i bruk"
 
 #: lib/error.c:53
 msgid "user/group id in use"
-msgstr ""
+msgstr "bruker-/gruppe-ID i bruk"
 
 #: lib/error.c:55
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "feil ved manipulering av terminalattributter"
 
 #: lib/error.c:57
-#, fuzzy
 msgid "error opening file"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under åpning av fil"
 
 #: lib/error.c:59
-#, fuzzy
 msgid "error locking file"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under låsing av fil"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error statting file"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under kjøring av stat() på fil"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error reading file"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under lesing av fil"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error writing to file"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under skriving til fil"
 
 #: lib/error.c:67
 msgid "data not found in file"
-msgstr ""
+msgstr "data ikke funnet i fil"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "internal initialization error"
-msgstr "feil under initiering av kerberos-biblioteket"
+msgstr "intern feil under initiering"
 
 #: lib/error.c:71
-#, fuzzy
 msgid "error loading module"
-msgstr "feil under låsing av fil: %s"
+msgstr "feil under lasting av modul"
 
 #: lib/error.c:73
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "feil under søk etter symbol i modul"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "feil modulversjon i `%s'"
+msgstr "feil med bibliotek-/modulversjon"
 
 #: lib/error.c:77 lib/error.c:79
-#, fuzzy
 msgid "unknown error"
-msgstr "ukjent"
+msgstr "ukjent feil"
 
 #: lib/modules.c:112
 #, c-format
@@ -391,16 +380,15 @@ msgstr "feil modulversjon i `%s'"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "feil under lesing av terminalattributter"
 
 #: lib/prompt.c:75 lib/prompt.c:89
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Henter standard brukerattributter:\n"
+msgstr "feil under setting av terminalattributter"
 
 #: lib/prompt.c:81
 msgid "error reading from terminal"
-msgstr ""
+msgstr "feil ved lesing fra terminal"
 
 #: lib/util.c:184
 #, c-format
@@ -640,7 +628,7 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisasjonsbruker"
 
 #: samples/lookup.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
 msgstr "Feil under initiering av %s: %s.\n"
 
@@ -684,17 +672,14 @@ msgstr "Henter standard brukerattributter:\n"
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
 
-#, fuzzy
 #~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Ingen gruppenavn spesifisert.\n"
+#~ msgstr "Det finnes ingen gruppe med navn «%s».\n"
 
-#, fuzzy
 #~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Feil under oppretting av gruppe for %s: %s.\n"
+#~ msgstr "Feil under oppretting av gruppe «%s» med GID %ld.\n"
 
-#, fuzzy
 #~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Søker etter gruppe med ID %d.\n"
+#~ msgstr "Det finnes ingen gruppe med GID %ld.\n"
 
 #~ msgid "Bad UID for %s.\n"
 #~ msgstr "Ugyldig UID for %s.\n"
