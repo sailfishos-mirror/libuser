@@ -31,11 +31,11 @@ msgstr "`%s' মুছে ফেলতে সমস্যা হয়েছে: %s
 
 #: apps/apputil.c:421 apps/apputil.c:425
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "অগ্রাধিকার হ্রাস করার প্রচেষ্টা ব্যর্থ হয়েছে।\n"
 
 #: apps/apputil.c:434
 msgid "Internal error.\n"
-msgstr "আভ্যন্তরীণ সমস্যা।\n"
+msgstr "অভ্যন্তরীণ সমস্যা।\n"
 
 #: apps/apputil.c:447
 msgid "Error initializing PAM.\n"
@@ -155,7 +155,7 @@ msgstr "অ্যাকাউন্টের সময়সীমা:\t%s\n"
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr ""
+msgstr "%s সংক্রান্ত পুরনো তথ্য পরিবর্তনের প্রচেষ্টা ব্যর্থ হয়েছে।\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -170,7 +170,7 @@ msgstr "কোনো ব্যবহারকারীর নাম নির্
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr ""
+msgstr "%s সংক্রান্ত Finger তথ্য পরিবর্তন করা হচ্ছে।\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
@@ -207,16 +207,16 @@ msgstr "ই-মেইল ঠিকানা"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন করা যায় নি:  ইনপুট ত্রুটি।\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন করা হয়েছে।\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন করা হয় নি: %s।\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
@@ -522,7 +522,7 @@ msgstr "ফাইল লক করতে সমস্যা হয়েছে"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr ""
+msgstr "ফাইল সংক্রান্ত তথ্য আহরণে (Stat) সমস্যা"
 
 #: lib/error.c:68
 msgid "error reading file"
@@ -546,7 +546,7 @@ msgstr "মডিউল লোড করতে সমস্যা হয়েছ�
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "মডিউলের সিম্বল (Symbol) সমাধান করতে সমস্যা হয়েছে"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
@@ -592,7 +592,7 @@ msgstr "নামের মধ্য নিয়ন্ত্রক (control) অ�
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr "নামের মধ্যে ফঁাকা জায়গা রয়েছে"
+msgstr "নামের মধ্যে ফাঁকা জায়গা রয়েছে"
 
 #: lib/user.c:221
 #, c-format
@@ -619,7 +619,7 @@ msgstr "`%s' খোলা সম্ভব হয়নি: %s"
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "'%s' সংক্রান্ত তথ্য পাওয়া (Stat) যায় নি: %s"
 
 #: modules/files.c:137
 #, c-format
@@ -902,7 +902,7 @@ msgstr "%s নামক ব্যবহারকারীর সন্ধান 
 
 #: samples/lookup.c:103
 msgid "Entry not found.\n"
-msgstr "এন্ট্রি খঁুজে পাওয়া যায়নি।\n"
+msgstr "এন্ট্রি খুঁজে পাওয়া যায়নি।\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
