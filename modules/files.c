@@ -901,9 +901,9 @@ generic_mod(struct lu_module *module, const char *base_name,
 	int fd = -1;
 	int i, j;
 	const char *dir = NULL;
-	char *p, *q, *r, *new_value;
+	char *p, *q, *new_value;
 	GValueArray *names = NULL, *values = NULL;
-	GValue value;
+	GValue *value;
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
@@ -922,7 +922,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 				     LU_USERNAME);
 			return FALSE;
 		}
-	}
+	} else
 	if (ent->type == lu_group) {
 		names = lu_ent_get_current(ent, LU_GROUPNAME);
 		if (names == NULL) {
@@ -931,9 +931,9 @@ generic_mod(struct lu_module *module, const char *base_name,
 				     LU_GROUPNAME);
 			return FALSE;
 		}
+	} else {
+		g_assert_not_reached();
 	}
-	g_assert(names != NULL);
-	g_assert(names->n_values > 0);
 
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
@@ -960,91 +960,64 @@ generic_mod(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
-
 	for (i = 0; i < format_count; i++) {
 		if (formats[i].suppress) {
 			continue;
 		}
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
-		if (!formats[i].multiple) {
-			if (values == NULL) {
-				lu_error_new(error, lu_error_generic,
-					     _
-					     ("entity object has no `%s' attribute"),
-					     formats[i].attribute);
-				close(fd);
-				return FALSE;
+		j = 0;
+		do {
+			value = g_value_array_get_nth(values, j);
+			if (G_VALUE_HOLDS_STRING(value)) {
+				p = g_value_dup_string(value);
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				p = g_strdup_printf("%ld",
+						    g_value_get_long(value));
+			} else {
+				g_assert_not_reached();
 			}
-			g_value_copy(g_value_array_get_nth(values, 0), &value);
-			p = q = g_value_dup_string(&value);
-			/* if there's a prefix, strip it */
-			if (formats[i].prefix) {
-				if (strncmp (p, formats[i].prefix,
-					     strlen(formats[i].prefix)) == 0) {
-					p += strlen(formats[i].prefix);
-				}
+			q = g_strconcat(new_value ?: "",
+					(j > 0) ? "," : "",
+					p,
+					NULL);
+			if (new_value != NULL) {
+				g_free(new_value);
 			}
-			/* make a copy of the data */
-			new_value = g_strdup(p);
-			g_free(q);
-		} else {
-			if (values != NULL)
-			for (j = 0; j < values->n_values; j++) {
-				g_value_copy(g_value_array_get_nth(values, j),
-					     &value);
-				p = r = g_value_dup_string(&value);
-				/* if there's a prefix, strip it */
-				if (formats[i].prefix) {
-					if (strncmp(p, formats[i].prefix,
-						    strlen(formats[i].prefix)) == 0) {
-						p += strlen(formats[i].prefix);
-					}
-				}
-				if (new_value) {
-					q = g_strconcat(new_value, ",", p,
-							NULL);
-				} else {
-					q = g_strdup(p);
-				}
-				g_free(r);
-				if (new_value) {
-					g_free(new_value);
-				}
-				new_value = q;
-			}
-		}
+			new_value = q;
+			g_free(p);
+			j++;
+		} while (formats[i].multiple);
 
-		g_value_copy(g_value_array_get_nth(names, 0), &value);
-
-		ret = lu_util_field_write(fd, g_value_get_string(&value),
+		ret = lu_util_field_write(fd, g_value_get_string(value),
 					  formats[i].position, new_value,
 					  error);
+
 		g_free(new_value);
+
 		if (ret == FALSE) {
 			lu_util_lock_free(fd);
 			close(fd);
 			g_free(filename);
 			return FALSE;
 		}
-		/* we may have just renamed the account (we're safe assuming
+
+		/* We may have just renamed the account (we're safe assuming
 		 * the new name is correct here because if we renamed, we did
-		 * it first), so switch to using the account's name */
+		 * it first), so switch to using the account's new name. */
 		if (ent->type == lu_user) {
 			names = lu_ent_get(ent, LU_USERNAME);
 			if (names == NULL) {
 				lu_error_new(error, lu_error_generic,
-					     _
-					     ("entity object has no %s attribute"),
+					     _("entity object has no %s attribute"),
 					     LU_USERNAME);
 				lu_util_lock_free(fd);
 				close(fd);
 				g_free(filename);
 				return FALSE;
 			}
-		}
+		} else
 		if (ent->type == lu_group) {
 			names = lu_ent_get(ent, LU_GROUPNAME);
 			if (names == NULL) {
@@ -1057,9 +1030,10 @@ generic_mod(struct lu_module *module, const char *base_name,
 				g_free(filename);
 				return FALSE;
 			}
+		} else {
+			g_assert_not_reached();
 		}
 	}
-	g_value_unset(&value);
 
 	lu_util_lock_free(fd);
 	close(fd);
@@ -1115,16 +1089,20 @@ generic_del(struct lu_module *module, const char *base_name,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	GValueArray *name = NULL;
-	GValue value;
+	GValue *value;
 	char *contents = NULL, *filename = NULL, *line, *key = NULL, *tmp;
 	const char *dir;
 	struct stat st;
 	int fd = -1;
 
-	if (ent->type == lu_user)
+	if (ent->type == lu_user) {
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	if (ent->type == lu_group)
+	} else
+	if (ent->type == lu_group) {
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
+	} else {
+		g_assert_not_reached();
+	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1179,10 +1157,8 @@ generic_del(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
-	g_value_copy(g_value_array_get_nth(name, 0), &value);
-	tmp = g_strdup_printf("%s:", g_value_get_string(&value));
+	value = g_value_array_get_nth(name, 0);
+	tmp = g_strdup_printf("%s:", g_value_get_string(value));
 	line = module->scache->cache(module->scache, tmp);
 	g_free(tmp);
 
@@ -1191,7 +1167,7 @@ generic_del(struct lu_module *module, const char *base_name,
 		strcpy(contents, p ? (p + 1) : "");
 	} else {
 		char *p;
-		tmp = g_strdup_printf("\n%s:", g_value_get_string(&value));
+		tmp = g_strdup_printf("\n%s:", g_value_get_string(value));
 		line = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
 		if ((p = strstr(contents, line)) != NULL) {
@@ -1199,8 +1175,6 @@ generic_del(struct lu_module *module, const char *base_name,
 			strcpy(p + 1, q ? (q + 1) : "");
 		}
 	}
-
-	g_value_unset(&value);
 
 	if (lseek(fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write,
@@ -1269,7 +1243,8 @@ lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
-/** Return the "locked" or "unlocked" version of the cryptedPassword string, depending on whether or not lock is true. */
+/* Return the "locked" or "unlocked" version of the cryptedPassword string,
+ * depending on whether or not lock is true. */
 static char *
 lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
 {
