@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2003-01-30 21:26+0100\n"
-"Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
+"PO-Revision-Date: 2003-02-19 11:35+0100\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,20 +160,19 @@ msgid "Failed to modify aging information for %s.\n"
 msgstr "Chyba při změně údajů pro %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
-#, fuzzy
 msgid "[OPTION...] [user]"
-msgstr "[VOLBY...] uživatel"
+msgstr "[VOLBY...] [uživatel]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Nebylo zadáno jméno uživatele.\n"
+msgstr "Nebylo zadáno jméno uživatele, chybí jméno pro uid %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Chyba při změně údajů pro %s.\n"
+msgstr "Měním údaje finger pro %s.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
@@ -182,58 +181,58 @@ msgstr "Chyba při inicializaci %s.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
-msgstr ""
+msgstr "Plné jméno"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "Příjmení"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "Křestní jméno"
 
 #: apps/lchfn.c:214
 msgid "Office"
-msgstr ""
+msgstr "Kancelář"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr ""
+msgstr "Telefon do kanceláře"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr ""
+msgstr "Telefon domů"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr ""
+msgstr "E-mailová adresa"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Údaje finger nezměněny: chyba vstupu.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Údaje finger změněny.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Údaje finger nezměněny: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "Měním shell pro %s.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr ""
+msgstr "Nový shell"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "Shell změněn.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -241,7 +240,7 @@ msgstr "[VOLBY...] skupina"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "Neurčena žádná skupina.\n"
+msgstr "Nebylo zadáno jméno skupiny.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
@@ -282,99 +281,98 @@ msgid "Group %s could not be modified.\n"
 msgstr "Skupina %s nemůže být změněna.\n"
 
 #: apps/lid.c:81
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Neurčena žádná skupina.\n"
+msgstr "Nebylo zadáno jméno skupiny, používám %s.\n"
 
 #: apps/lid.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Neurčena žádná skupina.\n"
+msgstr "Nebylo zadáno jméno skupiny, chybí jméno pro gid %d.\n"
 
 #: apps/lid.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Nebylo zadáno jméno uživatele.\n"
+msgstr "Nebylo zadáno jméno uživatele, používám %s.\n"
 
 #: apps/lnewusers.c:74
-#, fuzzy
 msgid "[OPTION...]"
-msgstr "[VOLBY...] uživatel"
+msgstr "[VOLBY...]"
 
 #: apps/lnewusers.c:98
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Chyba při čtení '%s': %s"
+msgstr "Chyba při otevírání '%s': %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "Chyba při vytváření účtu pro '%s': nesprávně formátovaný řádek.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "Odmítám vytvořit účet s UID 0.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "Chyba při vytváření skupiny `%s'.\n"
+msgstr "Chyba při vytváření skupiny pro `%s' s GID %ld.\n"
 
 #: apps/lnewusers.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "chyba při nastavování hesla pro '%s'"
+msgstr "chyba při nastavování hesla pro %s: %s\n"
 
 #: apps/lnewusers.c:310
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Nový domácí adresář pro %s nebyl vytvořen.\n"
+msgstr "Chyba při vytváření domácího adresáře pro %s: %s\n"
 
 #: apps/lnewusers.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "Chyba při vytváření poštovního spoolu.\n"
+msgstr "Chyba při vytváření poštovního spoolu pro %s.\n"
 
 #: apps/lnewusers.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Chyba při vytváření %s: %s.\n"
+msgstr "Chyba při vytváření uživatelského účtu pro %s: %s\n"
 
 #: apps/lpasswd.c:86
-#, fuzzy, c-format
+#, c-format
 msgid "Changing password for %s.\n"
-msgstr "chyba při nastavování hesla pro '%s'"
+msgstr "Měním heslo pro %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "Nové heslo"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "Nové heslo (potvrďte)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "Hesla nesouhlasí, zkuste to znovu.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "Změna hesla zrušena.\n"
 
 #: apps/lpasswd.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Chyba při nastavování hesla pro uživatele %s: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "chyba při nastavování hesla pro '%s'"
+msgstr "Chyba při nastavování hesla pro skupinu %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr ""
+msgstr "Heslo změněno.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -835,49 +833,45 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL uživatel pro autentizaci"
 
 #: modules/sasldb.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "chyba při vytváření `%s': %s"
+msgstr "Chyba Cyrus SASL při vytváření uživatele: %s: %s"
 
 #: modules/sasldb.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "chyba při vytváření `%s': %s"
+msgstr "Chyba Cyrus SASL při vytváření uživatele: %s"
 
 #: modules/sasldb.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Chyba při odstraňování `%s': %s"
+msgstr "Chyba Cyrus SASL při odstraňování uživatele: %s: %s"
 
 #: modules/sasldb.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Chyba při odstraňování `%s': %s"
+msgstr "Chyba Cyrus SASL při odstraňování uživatele: %s"
 
 #: modules/sasldb.c:428 modules/sasldb.c:436
-#, fuzzy, c-format
+#, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "Chyba při inicializaci %s: %s\n"
+msgstr "chyba při inicializaci Cyrus SASL: %s"
 
 #: python/admin.c:494
-#, fuzzy
 msgid "error creating home directory for user"
-msgstr "Nový domácí adresář pro %s nebyl vytvořen.\n"
+msgstr "chyba při vytváření domácího adresáře pro uživatele"
 
 #: python/admin.c:546
-#, fuzzy
 msgid "error removing home directory for user"
-msgstr "chyba při odstraňování LDAP položky: %s.\n"
+msgstr "chyba při odstraňování domácího adresáře pro uživatele"
 
 #: python/admin.c:623
-#, fuzzy
 msgid "error moving home directory for user"
-msgstr "Domácí adresář pro %s neexistuje.\n"
+msgstr "chyba při přesouvání domácího adresáře pro uživatele"
 
 #: python/admin.c:656
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "Chyba při vytváření poštovního spoolu.\n"
+msgstr "chyba při vytváření poštovního spoolu pro uživatele"
 
 #: samples/lookup.c:64
 #, c-format
