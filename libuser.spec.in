@@ -73,6 +73,7 @@ rm -fr $RPM_BUILD_ROOT
 - use GTrees instead of GHashTables for most internal tables
 - files: complain properly about unset attributes
 - files: group passwords are single-valued, not multiple-valued
+- add lpasswd app, make sure all apps start up popt with the right names
 
 * Mon Jul 23 2001 Nalin Dahyabhai <nalin@redhat.com>
 - actually make the new optional arguments optional

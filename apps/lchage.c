@@ -100,7 +100,7 @@ main(int argc, const char **argv)
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	popt = poptGetContext("chage", argc, argv, options, 0);
+	popt = poptGetContext("lchage", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
 	g_return_val_if_fail(c == -1, 0);

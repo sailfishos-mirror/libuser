@@ -1,4 +1,4 @@
-sbin_PROGRAMS = lchage luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel
+sbin_PROGRAMS = lchage luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd
 
 include $(top_srcdir)/Makefile.extra
 
@@ -36,3 +36,6 @@ lgroupdel_SOURCES = \
 	apputil.c \
 	apputil.h \
 	lgroupdel.c
+
+lpasswd_SOURCES = \
+	lpasswd.c
