@@ -64,6 +64,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser_quota.a
 %{_libdir}/libuser_quota.la
 %{_libdir}/libuser_quota.so
+%{_mandir}/man3/*
 
 %changelog
 * Tue Jun 12 2001 Nalin Dahyabhai <nalin@redhat.com> 0.11
