@@ -188,20 +188,20 @@ lu_ent_default(struct lu_context *context, const char *name,
 	ent->type = type;
 
 	if(ent->type == lu_user) {
-		lu_ent_set(ent, "cn", name);
-		lu_ent_set(ent, "uid", name);
+		lu_ent_set_original(ent, LU_USERNAME, name);
+		lu_ent_set(ent, LU_USERNAME, name);
 	} else
 	if(ent->type == lu_group) {
-		lu_ent_set(ent, "cn", name);
-		lu_ent_set(ent, "gid", name);
+		lu_ent_set_original(ent, LU_GROUPNAME, name);
+		lu_ent_set(ent, LU_GROUPNAME, name);
 	}
 
 	if(type == lu_user) {
 		top = ent->acache->cache(ent->acache, "userdefaults");
-		idkey = ent->acache->cache(ent->acache, "uidNumber");
+		idkey = ent->acache->cache(ent->acache, LU_UIDNUMBER);
 	} else {
 		top = ent->acache->cache(ent->acache, "groupdefaults");
-		idkey = ent->acache->cache(ent->acache, "gidNumber");
+		idkey = ent->acache->cache(ent->acache, LU_GIDNUMBER);
 	}
 
 	if(system) { 
@@ -216,6 +216,7 @@ lu_ent_default(struct lu_context *context, const char *name,
 				id = DEFAULT_ID;
 			}
 			idval = g_strdup_printf("%ld", id);
+			lu_ent_set_original(ent, idkey, idval);
 			lu_ent_set(ent, idkey, idval);
 			g_free(idval);
 		}
@@ -229,6 +230,7 @@ lu_ent_default(struct lu_context *context, const char *name,
 	tmp = g_strdup_printf("%ld", id);
 	idval = ent->vcache->cache(ent->vcache, tmp);
 	g_free(tmp);
+	lu_ent_set_original(ent, idkey, idval);
 	lu_ent_set(ent, idkey, idval);
 
 	keys = lu_cfg_read_keys(context, top);

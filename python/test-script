@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import libuser
+import os
 
 print "--------- Initializing."
 admin = libuser.Admin()
@@ -42,3 +43,18 @@ wheel = admin.lookupGroupByName("wheel")
 
 print "--------- Reading attribute (memberUid)."
 print wheel[libuser.LU_MEMBERUID]
+
+print "--------- Creating a new user (jimbo)."
+jimbo = admin.initUser("jimbo")
+for attr in jimbo.keys():
+	print " " + attr + ":", jimbo.get(attr)
+
+print "--------- Adding the user."
+admin.addUser(jimbo)
+print "--------- Grepping for the user."
+os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")
+
+print "--------- Removing the user."
+admin.deleteUser(jimbo)
+print "--------- Grepping for the user."
+os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")

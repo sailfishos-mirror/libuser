@@ -458,6 +458,14 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 			   run_list(context, context->info_module_names, info, id, tmp, data)) {
 				success = TRUE;
 			}
+			if(success) {
+				g_return_val_if_fail(tmp->source_info != NULL,
+						     FALSE);
+				g_return_val_if_fail(tmp->source_auth != NULL,
+						     FALSE);
+				lu_ent_set_source_info(ent, tmp->source_info);
+				lu_ent_set_source_auth(ent, tmp->source_auth);
+			}
 			break;
 		case user_mod:
 		case user_del:

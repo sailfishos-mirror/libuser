@@ -644,7 +644,15 @@ generic_add(struct lu_module *module, const char *base_name,
 static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_add(module, "passwd", lu_files_format_user, ent);
+	gboolean ret = generic_add(module, "passwd", lu_files_format_user, ent);
+	if(ret) {
+		/* Mark where this user lives. */
+		if(ent->source_info == NULL)
+			lu_ent_set_source_info(ent, "files");
+		if(ent->source_auth == NULL)
+			lu_ent_set_source_auth(ent, "files");
+	}
+	return ret;
 }
 
 static gboolean
@@ -656,6 +664,8 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent)
 		/* Set the password in this structure so that a subsequent
 		 * information module add will note that it's shadowed. */
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
+		/* Mark where this user lives. */
+		lu_ent_set_source_auth(ent, "shadow");
 	}
 	return ret;
 }
@@ -663,7 +673,15 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent)
 static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_add(module, "group", lu_files_format_group, ent);
+	gboolean ret = generic_add(module, "group", lu_files_format_group, ent);
+	if(ret) {
+		/* Mark where this group lives. */
+		if(ent->source_info == NULL)
+			lu_ent_set_source_info(ent, "files");
+		if(ent->source_auth == NULL)
+			lu_ent_set_source_auth(ent, "files");
+	}
+	return ret;
 }
 
 static gboolean
@@ -675,6 +693,8 @@ lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent)
 		/* Set the password in this structure so that a subsequent
 		 * information module add will note that it's shadowed. */
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
+		/* Mark where this group lives. */
+		lu_ent_set_source_auth(ent, "shadow");
 	}
 	return ret;
 }
