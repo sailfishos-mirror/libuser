@@ -1032,10 +1032,25 @@ lu_dispatch(struct lu_context *context,
 		}
 		break;
 	case user_mod:
+	case group_mod:
+		/* Make sure we have both name and ID here. */
+		sdata = sdata ?: extract_name(tmp);
+		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Make the changes. */
+		g_assert(entity != NULL);
+		if (run_list(context, entity->modules,
+			    logic_and, id,
+			    sdata, ldata, tmp, &scratch, error)) {
+			lu_ent_commit(tmp);
+			lu_ent_copy(tmp, entity);
+			success = TRUE;
+		}
+		break;
 	case user_del:
 	case user_lock:
 	case user_unlock:
-	case group_mod:
 	case group_del:
 	case group_lock:
 	case group_unlock:
