@@ -5,7 +5,7 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPrereq: pam-devel, popt, python-devel, sgml-tools, cyrus-sasl-devel
+BuildPrereq: pam-devel, popt, python-devel, sgml-tools, cyrus-sasl-devel, doxygen
 Summary: A user account administration library.
 
 %description
@@ -32,6 +32,7 @@ files useful for developing applications with libuser.
 %configure
 make
 make -C docs/sgml
+make doc
 make -C generated_docs/latex refman.ps
 rm -f generated_docs/latex/refman.ps.bz2
 bzip2 generated_docs/latex/refman.ps
