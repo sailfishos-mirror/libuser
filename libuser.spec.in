@@ -39,12 +39,13 @@ rm -fr $RPM_BUILD_ROOT
 %install
 rm -fr $RPM_BUILD_ROOT
 %makeinstall
+%find_lang %{name}
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html python/modules.txt
 %config(noreplace) %{_sysconfdir}/libuser.conf
@@ -73,6 +74,7 @@ rm -fr $RPM_BUILD_ROOT
 - change entity get semantics in the python bindings to allow default values for .get()
 - add lu_ent_has(), and a python has_key() method to Entity types
 - don't include tools in the binary package
+- add translated strings
 
 * Thu Jul 19 2001 Nalin Dahyabhai <nalin@redhat.com>
 - lib/user.c: catch and ignore errors when running stacks
