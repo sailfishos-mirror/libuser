@@ -528,7 +528,7 @@ msgstr "'%s'속성을 찾을 수 없습니다."
 #: modules/ldap.c:928
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "%s의 LDAP 디렉토리안에 패스워드 설정 중 오류 발생: %s\n"
+msgstr "%s의 LDAP 디렉토리안에 패스워드 설정 중 오류 발생: %s"
 
 #: modules/ldap.c:1191
 msgid "LDAP Server Name"
