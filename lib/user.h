@@ -101,6 +101,12 @@ gboolean lu_user_setpass(struct lu_context *context,
 gboolean lu_group_setpass(struct lu_context *context,
 			  struct lu_ent *ent, const char *newpass,
 			  struct lu_error **error);
+gboolean lu_user_removepass(struct lu_context *context,
+			    struct lu_ent *ent,
+			    struct lu_error **error);
+gboolean lu_group_removepass(struct lu_context *context,
+			     struct lu_ent *ent,
+			     struct lu_error **error);
 
 GValueArray *lu_users_enumerate(struct lu_context *context,
 				const char *pattern,

@@ -48,6 +48,7 @@ enum lu_dispatch_id {
 	user_unlock,
 	user_is_locked,
 	user_setpass,
+	user_removepass,
 	users_enumerate,
 	users_enumerate_by_group,
 	users_enumerate_full,
@@ -63,6 +64,7 @@ enum lu_dispatch_id {
 	group_unlock,
 	group_is_locked,
 	group_setpass,
+	group_removepass,
 	groups_enumerate,
 	groups_enumerate_full,
 	groups_enumerate_by_user,
@@ -314,6 +316,9 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(entity != NULL, FALSE);
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		return module->user_setpass(module, entity, sdata, error);
+	case user_removepass:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		return module->user_removepass(module, entity, error);
 	case users_enumerate:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate(module, sdata, error);
@@ -409,8 +414,10 @@ run_single(struct lu_context *context,
 	case group_setpass:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		return module->group_setpass(module, entity,
-					     sdata, error);
+		return module->group_setpass(module, entity, sdata, error);
+	case group_removepass:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		return module->user_removepass(module, entity, error);
 	case groups_enumerate:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate(module, sdata, error);
@@ -893,10 +900,8 @@ lu_dispatch(struct lu_context *context,
 	case user_del:
 	case user_lock:
 	case user_unlock:
-	case user_setpass:
 	case group_mod:
 	case group_del:
-	case group_setpass:
 	case group_lock:
 	case group_unlock:
 		/* Make sure we have both name and ID here. */
@@ -904,6 +909,23 @@ lu_dispatch(struct lu_context *context,
 		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(ldata != INVALID, FALSE);
+		/* Make the changes. */
+		g_assert(entity != NULL);
+		if (run_list(context, entity->modules,
+			    logic_and, id,
+			    sdata, ldata, tmp, &scratch, error)) {
+			lu_ent_revert(tmp);
+			lu_ent_copy(tmp, entity);
+			success = TRUE;
+		}
+		break;
+	case user_setpass:
+	case group_setpass:
+		/* Make sure we have a valid password. */
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		/* fall through */
+	case user_removepass:
+	case group_removepass:
 		/* Make the changes. */
 		g_assert(entity != NULL);
 		if (run_list(context, entity->modules,
@@ -1181,6 +1203,27 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 }
 
 gboolean
+lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
+		   struct lu_error ** error)
+{
+	gboolean ret;
+	LU_ERROR_CHECK(error);
+	ret = lu_dispatch(context, user_removepass, NULL, INVALID,
+			  ent, NULL, error);
+	if (ret) {
+		GValue value;
+		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value,
+				   lu_util_shadow_current_date(ent->cache));
+		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
+		g_value_unset(&value);
+	}
+	return ret;
+}
+
+gboolean
 lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	      struct lu_error ** error)
 {
@@ -1214,6 +1257,27 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	gboolean ret;
 	LU_ERROR_CHECK(error);
 	ret = lu_dispatch(context, group_setpass, password, INVALID,
+			  ent, NULL, error);
+	if (ret) {
+		GValue value;
+		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value,
+				   lu_util_shadow_current_date(ent->cache));
+		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
+		g_value_unset(&value);
+	}
+	return ret;
+}
+
+gboolean
+lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
+		    struct lu_error ** error)
+{
+	gboolean ret;
+	LU_ERROR_CHECK(error);
+	ret = lu_dispatch(context, group_removepass, NULL, INVALID,
 			  ent, NULL, error);
 	if (ret) {
 		GValue value;

@@ -158,6 +158,17 @@ modifications of the system information store.
 @Returns: 
 
 
+<!-- ##### FUNCTION lu_user_removepass ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lu_user_lock ##### -->
 <para>
 
@@ -301,6 +312,17 @@ modifications of the system information store.
 @context: 
 @ent: 
 @newpass: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_removepass ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
 @error: 
 @Returns: 
 

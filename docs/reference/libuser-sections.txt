@@ -105,6 +105,7 @@ lu_user_add
 lu_user_modify
 lu_user_delete
 lu_user_setpass
+lu_user_removepass
 lu_user_lock
 lu_user_unlock
 lu_user_islocked
@@ -119,6 +120,7 @@ lu_group_add
 lu_group_modify
 lu_group_delete
 lu_group_setpass
+lu_group_removepass
 lu_group_lock
 lu_group_unlock
 lu_group_islocked

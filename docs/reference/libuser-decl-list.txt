@@ -101,6 +101,8 @@ lu_user_islocked
 lu_group_islocked
 lu_user_setpass
 lu_group_setpass
+lu_user_removepass
+lu_group_removepass
 lu_users_enumerate
 lu_groups_enumerate
 lu_users_enumerate_by_group

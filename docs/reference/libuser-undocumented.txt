@@ -1,6 +1,6 @@
 10% function docs coverage.
 10 functions documented.
-90 not documented.
+92 not documented.
 
 
 LU_ADMINISTRATORUID
@@ -63,6 +63,7 @@ lu_group_lock
 lu_group_lookup_id
 lu_group_lookup_name
 lu_group_modify
+lu_group_removepass
 lu_group_setpass
 lu_group_unlock
 lu_groups_enumerate
@@ -78,6 +79,7 @@ lu_user_lock
 lu_user_lookup_id
 lu_user_lookup_name
 lu_user_modify
+lu_user_removepass
 lu_user_setpass
 lu_user_unlock
 lu_users_enumerate

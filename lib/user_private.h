@@ -34,7 +34,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC 0x00000005
-#define LU_MODULE_VERSION 0x00080000
+#define LU_MODULE_VERSION 0x00090000
 #define _(String) gettext(String)
 
 /* A string cache structure.  Useful for side-stepping most issues with
@@ -151,6 +151,9 @@ struct lu_module {
 				 struct lu_ent * ent,
 				 const char *newpass,
 				 struct lu_error ** error);
+	gboolean(*user_removepass) (struct lu_module * module,
+				    struct lu_ent * ent,
+				    struct lu_error ** error);
 
 	/* Search for users, returning the names of all users, just the names
 	 * of users in a given group, or all users with their data. */
@@ -216,6 +219,9 @@ struct lu_module {
 				  struct lu_ent * ent,
 				  const char *newpass,
 				  struct lu_error ** error);
+	gboolean(*group_removepass) (struct lu_module * module,
+				     struct lu_ent * ent,
+				     struct lu_error ** error);
 
 	/* Look up all group names, just the groups a particular user is in,
 	 * or all groups, with full information. */

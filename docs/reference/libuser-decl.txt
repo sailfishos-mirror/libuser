@@ -408,6 +408,16 @@ struct lu_context *context,struct lu_ent *ent, const char *newpass,struct lu_err
 struct lu_context *context,struct lu_ent *ent, const char *newpass,struct lu_error **error
 </FUNCTION>
 <FUNCTION>
+<NAME>lu_user_removepass</NAME>
+<RETURNS>gboolean  </RETURNS>
+struct lu_context *context,struct lu_ent *ent,struct lu_error **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_removepass</NAME>
+<RETURNS>gboolean  </RETURNS>
+struct lu_context *context,struct lu_ent *ent,struct lu_error **error
+</FUNCTION>
+<FUNCTION>
 <NAME>lu_users_enumerate</NAME>
 <RETURNS>GValueArray  *</RETURNS>
 struct lu_context *context,const char *pattern,struct lu_error **error

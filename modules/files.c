@@ -32,11 +32,10 @@
 #include <string.h>
 #include <unistd.h>
 #include "../lib/user_private.h"
+#include "default.-c"
 
-#define CHUNK_SIZE (LINE_MAX * 4)
-#define DEFAULT_PASSWORD	"!!"
-#define DEFAULT_SHADOW_PASSWORD	"x"
-#define DEFAULT_SHELL		"/bin/bash"
+#define CHUNK_SIZE	(LINE_MAX * 4)
+#define SCHEME		"{crypt}"
 
 LU_MODULE_INIT(libuser_files_init)
 LU_MODULE_INIT(libuser_shadow_init)
@@ -49,7 +48,7 @@ struct format_specifier {
 	const char *attribute;
 	GType type;
 	const char *def;
-	gboolean multiple, suppress;
+	gboolean multiple, suppress_if_def;
 };
 
 static const struct format_specifier format_passwd[] = {
@@ -73,12 +72,12 @@ static const struct format_specifier format_shadow[] = {
 	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
 	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{4, LU_SHADOWMIN, G_TYPE_LONG, GINT_TO_POINTER(0), FALSE, FALSE},
-	{5, LU_SHADOWMAX, G_TYPE_LONG, GINT_TO_POINTER(99999), FALSE, FALSE},
-	{6, LU_SHADOWWARNING, G_TYPE_LONG, GINT_TO_POINTER(7), FALSE, FALSE},
-	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
-	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
-	{9, LU_SHADOWFLAG, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
+	{4, LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE},
+	{5, LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE},
+	{6, LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE},
+	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE},
+	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE},
+	{9, LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE},
 };
 
 static const struct format_specifier format_gshadow[] = {
@@ -261,10 +260,6 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 	/* Now parse out the fields. */
 	memset(&value, 0, sizeof(value));
 	for (i = 0; i < format_count; i++) {
-		/* Some things we NEVER read. */
-		if (formats[i].suppress) {
-			continue;
-		}
 		/* Clear out old values. */
 		lu_ent_clear_current(ent, formats[i].attribute);
 		if (formats[i].multiple) {
@@ -297,15 +292,31 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 			/* Initialize the value to the right type. */
 			g_value_init(&value, formats[i].type);
 			/* Set the value to the right type. */
-			if (G_VALUE_HOLDS_STRING(&value)) {
-				g_value_set_string(&value,
-						   v[formats[i].position - 1]);
-			} else
-			if (G_VALUE_HOLDS_LONG(&value)) {
-				g_value_set_long(&value,
-						 atol(v[formats[i].position - 1]));
+			if ((formats[i].def != NULL) &&
+			    (strcmp("", v[formats[i].position - 1]) == 0)) {
+				/* Convert the default. */
+				if (G_VALUE_HOLDS_STRING(&value)) {
+					g_value_set_string(&value,
+							   formats[i].def);
+				} else
+				if (G_VALUE_HOLDS_LONG(&value)) {
+					g_value_set_long(&value,
+							 atol(formats[i].def));
+				} else {
+					g_assert_not_reached();
+				}
 			} else {
-				g_assert_not_reached();
+				/* Use the value. */
+				if (G_VALUE_HOLDS_STRING(&value)) {
+					g_value_set_string(&value,
+							   v[formats[i].position - 1]);
+				} else
+				if (G_VALUE_HOLDS_LONG(&value)) {
+					g_value_set_long(&value,
+							 atol(v[formats[i].position - 1]));
+				} else {
+					g_assert_not_reached();
+				}
 			}
 			/* Add it to the current values list. */
 			lu_ent_add_current(ent, formats[i].attribute, &value);
@@ -602,11 +613,19 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 					g_assert_not_reached();
 				}
 				/* Add it to the end, prepending a comma if we
-				 * need to separate it from another value. */
-				tmp = g_strconcat(ret ?: "",
-						  (j > 0) ? "," : "",
-						  p,
-						  NULL);
+				 * need to separate it from another value,
+				 * unless this is the default value for the
+				 * field and we need to suppress it. */
+				if ((formats[i].def != NULL) &&
+				    (formats[i].multiple == FALSE) &&
+				    (strcmp(formats[i].def, p) == 0)) {
+					tmp = g_strdup(ret);
+				} else {
+					tmp = g_strconcat(ret ?: "",
+							  (j > 0) ? "," : "",
+							  p,
+							  NULL);
+				}
 				g_free(p);
 				if (ret != NULL) {
 					g_free(ret);
@@ -615,19 +634,13 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				j++;
 			} while (formats[i].multiple && (j < values->n_values));
 		} else {
-			/* Check for a default value. */
-			if (formats[i].def != NULL) {
+			/* No values, so check for a non-suppressed
+			 * default value. */
+			if ((formats[i].def != NULL) &&
+			    (formats[i].suppress_if_def == FALSE)) {
 				/* Use the default listed in the format
 				 * specifier. */
-				p = NULL;
-				if (formats[i].type == G_TYPE_LONG) {
-					p = g_strdup_printf("%d", GPOINTER_TO_INT(formats[i].def));
-				} else
-				if (formats[i].type == G_TYPE_STRING) {
-					p = g_strdup(formats[i].def);
-				} else {
-					g_assert_not_reached();
-				}
+				p = g_strdup(formats[i].def);
 				tmp = g_strconcat(ret ?: "", p, NULL);
 				g_free(p);
 				if (ret != NULL) {
@@ -979,9 +992,6 @@ generic_mod(struct lu_module *module, const char *base_name,
 	}
 
 	for (i = 0; i < format_count; i++) {
-		if (formats[i].suppress) {
-			continue;
-		}
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
 		j = 0;
@@ -1009,9 +1019,17 @@ generic_mod(struct lu_module *module, const char *base_name,
 		} while (formats[i].multiple);
 
 		value = g_value_array_get_nth(names, 0);
-		ret = lu_util_field_write(fd, g_value_get_string(value),
-					  formats[i].position, new_value,
-					  error);
+		if ((formats[i].suppress_if_def == TRUE) &&
+		    (formats[i].def != NULL) &&
+		    (strcmp(formats[i].def, new_value) == 0)) {
+			ret = lu_util_field_write(fd, g_value_get_string(value),
+						  formats[i].position,
+						  "", error);
+		} else {
+			ret = lu_util_field_write(fd, g_value_get_string(value),
+						  formats[i].position,
+						  new_value, error);
+		}
 
 		g_free(new_value);
 
@@ -1583,7 +1601,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	}
 
 	/* The crypt prefix indicates that the password is already hashed. */
-	if (strncmp(password, "{crypt}", 7) == 0) {
+	if (g_ascii_strncasecmp(password, SCHEME, 7) == 0) {
 		password = password + 7;
 	} else {
 		password = lu_make_crypted(password, NULL);
@@ -1623,6 +1641,24 @@ lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+static gboolean
+lu_files_user_removepass(struct lu_module *module, struct lu_ent *ent,
+		         struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_setpass(module, "passwd", 2, ent, SCHEME, error);
+	return ret;
+}
+
+static gboolean
+lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
+		          struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_setpass(module, "group", 2, ent, SCHEME, error);
+	return ret;
+}
+
 static void
 set_shadow_last_change(struct lu_module *module, struct lu_ent *ent)
 {
@@ -1654,6 +1690,30 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 {
 	gboolean ret;
 	ret = generic_setpass(module, "gshadow", 2, ent, password, error);
+	if (ret) {
+		set_shadow_last_change(module, ent);
+	}
+	return ret;
+}
+
+static gboolean
+lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
+		          struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_setpass(module, "shadow", 2, ent, SCHEME, error);
+	if (ret) {
+		set_shadow_last_change(module, ent);
+	}
+	return ret;
+}
+
+static gboolean
+lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
+			   struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_setpass(module, "gshadow", 2, ent, SCHEME, error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
@@ -2239,138 +2299,6 @@ lu_shadow_uses_elevated_privileges(struct lu_module *module)
 	return ret;
 }
 
-/* Populate the fields of a user structure with non-name, non-ID data. */
-static gboolean
-lu_files_user_default(struct lu_module *module,
-		      const char *name, gboolean is_system,
-		      struct lu_ent *ent,
-		      struct lu_error **error)
-{
-	GValue value;
-	char *tmp;
-	g_return_val_if_fail(name != NULL, FALSE);
-	memset(&value, 0, sizeof(value));
-	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_USERPASSWORD, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_GECOS) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, name);
-		lu_ent_add(ent, LU_GECOS, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		tmp = g_strdup_printf("/home/%s", name);
-		g_value_set_string(&value, tmp);
-		g_free(tmp);
-		lu_ent_add(ent, LU_HOMEDIRECTORY, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_SHELL);
-		lu_ent_add(ent, LU_LOGINSHELL, &value);
-		g_value_unset(&value);
-	}
-	return TRUE;
-}
-
-/* Populate the fields of a group structure with non-name, non-ID data. */
-static gboolean
-lu_files_group_default(struct lu_module *module,
-		       const char *name, gboolean is_system,
-		       struct lu_ent *ent,
-		       struct lu_error **error)
-{
-	GValue value;
-	g_return_val_if_fail(name != NULL, FALSE);
-	memset(&value, 0, sizeof(value));
-	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
-		g_value_unset(&value);
-	}
-	return TRUE;
-}
-
-/* Populate the fields of a user structure with non-name, non-ID data. */
-static gboolean
-lu_shadow_user_default(struct lu_module *module,
-		       const char *name, gboolean is_system,
-		       struct lu_ent *ent,
-		       struct lu_error **error)
-{
-	GValue value;
-	const char *today;
-	g_return_val_if_fail(name != NULL, FALSE);
-	today = lu_util_shadow_current_date(ent->cache);
-	memset(&value, 0, sizeof(value));
-	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, today);
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 0);
-		lu_ent_add(ent, LU_SHADOWMIN, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWMAX) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 99999);
-		lu_ent_add(ent, LU_SHADOWMAX, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWWARNING) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 7);
-		lu_ent_add(ent, LU_SHADOWWARNING, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWINACTIVE) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWEXPIRE) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWFLAG) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWFLAG, &value);
-		g_value_unset(&value);
-	}
-	return TRUE;
-}
-
-static gboolean
-lu_shadow_group_default(struct lu_module *module,
-		        const char *name, gboolean is_system,
-		        struct lu_ent *ent,
-		        struct lu_error **error)
-{
-	g_return_val_if_fail(name != NULL, FALSE);
-	return lu_files_group_default(module, name, is_system, ent, error);
-}
-
 static gboolean
 close_module(struct lu_module *module)
 {
@@ -2409,7 +2337,7 @@ libuser_files_init(struct lu_context *context,
 	ret->user_lookup_name = lu_files_user_lookup_name;
 	ret->user_lookup_id = lu_files_user_lookup_id;
 
-	ret->user_default = lu_files_user_default;
+	ret->user_default = lu_common_user_default;
 	ret->user_add_prep = lu_files_user_add_prep;
 	ret->user_add = lu_files_user_add;
 	ret->user_mod = lu_files_user_mod;
@@ -2418,6 +2346,7 @@ libuser_files_init(struct lu_context *context,
 	ret->user_unlock = lu_files_user_unlock;
 	ret->user_is_locked = lu_files_user_is_locked;
 	ret->user_setpass = lu_files_user_setpass;
+	ret->user_removepass = lu_files_user_removepass;
 	ret->users_enumerate = lu_files_users_enumerate;
 	ret->users_enumerate_by_group = lu_files_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_files_users_enumerate_full;
@@ -2426,7 +2355,7 @@ libuser_files_init(struct lu_context *context,
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
 
-	ret->group_default = lu_files_group_default;
+	ret->group_default = lu_common_group_default;
 	ret->group_add_prep = lu_files_group_add_prep;
 	ret->group_add = lu_files_group_add;
 	ret->group_mod = lu_files_group_mod;
@@ -2435,6 +2364,7 @@ libuser_files_init(struct lu_context *context,
 	ret->group_unlock = lu_files_group_unlock;
 	ret->group_is_locked = lu_files_group_is_locked;
 	ret->group_setpass = lu_files_group_setpass;
+	ret->group_removepass = lu_files_group_removepass;
 	ret->groups_enumerate = lu_files_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_files_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_files_groups_enumerate_full;
@@ -2492,7 +2422,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->user_lookup_name = lu_shadow_user_lookup_name;
 	ret->user_lookup_id = lu_shadow_user_lookup_id;
 
-	ret->user_default = lu_shadow_user_default;
+	ret->user_default = lu_common_suser_default;
 	ret->user_add_prep = lu_shadow_user_add_prep;
 	ret->user_add = lu_shadow_user_add;
 	ret->user_mod = lu_shadow_user_mod;
@@ -2501,6 +2431,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->user_unlock = lu_shadow_user_unlock;
 	ret->user_is_locked = lu_shadow_user_is_locked;
 	ret->user_setpass = lu_shadow_user_setpass;
+	ret->user_removepass = lu_shadow_user_removepass;
 	ret->users_enumerate = lu_shadow_users_enumerate;
 	ret->users_enumerate_by_group = lu_shadow_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_shadow_users_enumerate_full;
@@ -2509,7 +2440,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
 
-	ret->group_default = lu_shadow_group_default;
+	ret->group_default = lu_common_sgroup_default;
 	ret->group_add_prep = lu_shadow_group_add_prep;
 	ret->group_add = lu_shadow_group_add;
 	ret->group_mod = lu_shadow_group_mod;
@@ -2518,6 +2449,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->group_unlock = lu_shadow_group_unlock;
 	ret->group_is_locked = lu_shadow_group_is_locked;
 	ret->group_setpass = lu_shadow_group_setpass;
+	ret->group_removepass = lu_shadow_group_removepass;
 	ret->groups_enumerate = lu_shadow_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_shadow_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_shadow_groups_enumerate_full;

@@ -175,6 +175,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 			g_return_val_if_fail(module->user_setpass != NULL,
 					     FALSE);
+			g_return_val_if_fail(module->user_removepass != NULL,
+					     FALSE);
 			g_return_val_if_fail(module->users_enumerate != NULL,
 					     FALSE);
 			g_return_val_if_fail(module->users_enumerate_by_group != NULL,
@@ -199,6 +201,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 			g_return_val_if_fail(module->group_is_locked != NULL,
 					     FALSE);
 			g_return_val_if_fail(module->group_setpass != NULL,
+					     FALSE);
+			g_return_val_if_fail(module->group_removepass != NULL,
 					     FALSE);
 			g_return_val_if_fail(module->groups_enumerate != NULL,
 					     FALSE);

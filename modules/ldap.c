@@ -36,6 +36,8 @@
 #include <sasl.h>
 #include "../lib/user_private.h"
 
+#include "default.-c"
+
 #undef  DEBUG
 #define SCHEME "{crypt}"
 #define LOCKCHAR '!'
@@ -1633,6 +1635,20 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	return TRUE;
 }
 
+static gboolean
+lu_ldap_user_removepass(struct lu_module *module, struct lu_ent *ent,
+		        struct lu_error **error)
+{
+	return FALSE;
+}
+
+static gboolean
+lu_ldap_group_removepass(struct lu_module *module, struct lu_ent *ent,
+		         struct lu_error **error)
+{
+	return FALSE;
+}
+
 static GValueArray *
 lu_ldap_enumerate(struct lu_module *module,
 		  const char *searchAttr, const char *pattern,
@@ -1884,7 +1900,8 @@ lu_ldap_user_default(struct lu_module *module,
 		     const char *user, gboolean is_system,
 		     struct lu_ent *ent, struct lu_error **error)
 {
-	return TRUE; /* FIXME: do more. */
+	return lu_common_user_default(module, user, is_system, ent, error) &&
+	       lu_common_suser_default(module, user, is_system, ent, error);
 }
 
 static gboolean
@@ -1892,7 +1909,8 @@ lu_ldap_group_default(struct lu_module *module,
 		      const char *group, gboolean is_system,
 		      struct lu_ent *ent, struct lu_error **error)
 {
-	return TRUE; /* FIXME: do more. */
+	return lu_common_group_default(module, group, is_system, ent, error) &&
+	       lu_common_sgroup_default(module, group, is_system, ent, error);
 }
 
 /* Get a listing of all user names. */
@@ -2368,6 +2386,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->user_unlock = lu_ldap_user_unlock;
 	ret->user_is_locked = lu_ldap_user_is_locked;
 	ret->user_setpass = lu_ldap_user_setpass;
+	ret->user_removepass = lu_ldap_user_removepass;
 	ret->users_enumerate = lu_ldap_users_enumerate;
 	ret->users_enumerate_by_group = lu_ldap_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_ldap_users_enumerate_full;
@@ -2384,6 +2403,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->group_unlock = lu_ldap_group_unlock;
 	ret->group_is_locked = lu_ldap_group_is_locked;
 	ret->group_setpass = lu_ldap_group_setpass;
+	ret->group_removepass = lu_ldap_group_removepass;
 	ret->groups_enumerate = lu_ldap_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_ldap_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_ldap_groups_enumerate_full;
