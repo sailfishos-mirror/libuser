@@ -1,6 +1,6 @@
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -78,6 +78,7 @@ rm -fr $RPM_BUILD_ROOT
 - speed up user creation by reordering some checks for IDs being in use
 - update the shadowLastChanged attribute when we set a password
 - adjust usage of getXXXXX_r where needed
+- fix bug in python binding which breaks prompting
 
 * Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
 - install sv translation

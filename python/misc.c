@@ -206,7 +206,7 @@ libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
 	if((strcmp(attr, "default_value") == 0) ||
 	   (strcmp(attr, "defaultValue") == 0)) {
 		DEBUG_EXIT;
-		return self->prompt.default_value ?  Py_BuildValue("") : PyString_FromString(self->prompt.default_value);
+		return self->prompt.default_value ? PyString_FromString(self->prompt.default_value) : Py_BuildValue("");
 	}
 	if(strcmp(attr, "value") == 0) {
 		DEBUG_EXIT;

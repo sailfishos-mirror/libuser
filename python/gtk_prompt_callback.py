@@ -3,7 +3,7 @@
 import gtk
 import gnome.ui
 
-def libuser_gtk_prompt_callback(prompts, title):
+def libuser_gtk_prompt_callback(prompts):
 	dialog = gnome.ui.GnomeDialog(b1 = gnome.ui.STOCK_BUTTON_OK)
 
 	table = gtk.GtkTable(rows = len(prompts), cols = 2)
@@ -34,7 +34,7 @@ def libuser_gtk_prompt_callback(prompts, title):
 	for (prompt, entry) in ret_list:
 		prompt.value = entry.get_text()
 
-regcall(libuser_gtk_prompt_callback, "give me some info")
+#regcall(libuser_gtk_prompt_callback, "give me some info")
 
 class fake_prompt:
 	def __init__(self, prompt, visible, default_value, value):
