@@ -6,7 +6,7 @@ EXTRA_DIST = userquota.3
 
 lib_LTLIBRARIES = libuser.la @QUOTALIB@
 EXTRA_LTLIBRARIES = libuserquota.la
-man3_MANS = userquota.3
+EXTRA_MANS = userquota.3
 
 pkginclude_HEADERS = \
 	config.h \

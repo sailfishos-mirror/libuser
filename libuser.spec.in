@@ -91,6 +91,7 @@ popd
 * Wed Dec 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.2-1
 - degrade gracefully
 - build with --with-pic
+- remove unpackaged man page
 
 * Tue Aug 27 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.1-2
 - translation updates
