@@ -195,6 +195,10 @@ struct lu_module {
 	GArray* (*users_enumerate_full) (struct lu_module * module,
 					 const char *pattern,
 					 struct lu_error ** error);
+	GArray* (*users_enumerate_by_group_full) (struct lu_module * module,
+						  const char *group,
+						  gid_t gid,
+						  struct lu_error ** error);
 	GValueArray* (*groups_enumerate) (struct lu_module * module,
 					  const char *pattern,
 					  struct lu_error ** error);
@@ -205,6 +209,10 @@ struct lu_module {
 	GArray* (*groups_enumerate_full) (struct lu_module * module,
 					  const char *pattern,
 					  struct lu_error ** error);
+	GArray* (*groups_enumerate_by_user_full) (struct lu_module * module,
+						  const char *user,
+						  uid_t uid,
+						  struct lu_error ** error);
 
 	/* Clean up any data this module has, and unload it. */
 	gboolean(*close) (struct lu_module * module);

@@ -226,6 +226,9 @@
 #define _(String) gettext(String)
 
 
+/* Use all available glibc features. */
+#undef _GNU_SOURCE
+
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const
 

@@ -205,7 +205,8 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate_by_group(module,
-							sdata, ldata,
+							sdata,
+							ldata,
 							error);
 		return TRUE;
 	case users_enumerate_full:
@@ -219,7 +220,8 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate_by_group_full(module,
-							     sdata, ldata,
+							     sdata,
+							     ldata,
 							     error);
 		return TRUE;
 	case group_lookup_name:
@@ -267,7 +269,8 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate_by_user(module,
-							sdata, ldata,
+							sdata,
+							ldata,
 							error);
 		return TRUE;
 	case groups_enumerate_full:
@@ -280,7 +283,10 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
-		*ret = module->groups_enumerate_by_user_full(module, sdata, error);
+		*ret = module->groups_enumerate_by_user_full(module,
+							     sdata,
+							     ldata,
+							     error);
 		return TRUE;
 	case uses_elevated_privileges:
 		return module->uses_elevated_privileges(module);
