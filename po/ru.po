@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2002-01-24 16:02-0500\n"
-"PO-Revision-Date: 2001-08-08 19:04EET\n"
+"PO-Revision-Date: 2002-02-03 00:31EET\n"
 "Last-Translator: Leon Kanter <leon@blackcatlinux.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-R\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.4\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: apps/apputil.c:69
 #, c-format
@@ -31,7 +31,7 @@ msgstr "Ошибка удаления `%s': %s"
 
 #: apps/apputil.c:405 apps/apputil.c:409
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Ошибка сброса привелегий.\n"
 
 #: apps/apputil.c:418
 msgid "Internal error.\n"
@@ -47,13 +47,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Ошибка аутентификации для %s.\n"
 
 #: apps/apputil.c:444
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Внутренняя ошибка.\n"
+msgstr "Внутренняя ошибка PAM `%s'.\n"
 
 #: apps/apputil.c:450
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Пользователь не совпадает.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -62,9 +62,9 @@ msgstr "[ОПЦИЯ...] пользователь"
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Ошибка удаления %s: %s.\n"
+msgstr "Ошибка разбора аргументов: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
@@ -195,9 +195,9 @@ msgstr "Группа %s не может быть именена.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Ошибка создания группы для %s: %s.\n"
+msgstr "Ошибка создания группы `%s'.\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -222,12 +222,12 @@ msgstr "%s не имеет уровня gid.\n"
 #: apps/luserdel.c:127
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Группа с GID %ld существует, не удаляется.\n"
 
 #: apps/luserdel.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Группа #%d не имеет имени.\n"
+msgstr "Группа c GID %ld не имела имени.\n"
 
 #: apps/luserdel.c:141
 #, c-format
@@ -265,9 +265,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Пользователь %s не может быть изменен: %s.\n"
 
 #: apps/lusermod.c:291
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Группа %s не может быть именена.\n"
+msgstr "Группа %s не может быть именена: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
@@ -291,98 +291,87 @@ msgstr "невозможно открыть файл конфигурации `%s': %s"
 
 #: lib/error.c:37
 msgid "success"
-msgstr ""
+msgstr "выполнено"
 
 #: lib/error.c:39
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "модуль запрещен в настройках"
 
 #: lib/error.c:41
-#, fuzzy
 msgid "generic error"
-msgstr "Внутренняя ошибка.\n"
+msgstr "общая ошибка"
 
 #: lib/error.c:43
-#, fuzzy
 msgid "not enough privileges"
-msgstr "выполняется без привелегий суперпользователя"
+msgstr "недостаточно привелегий"
 
 #: lib/error.c:45
 msgid "access denied"
-msgstr ""
+msgstr "доступ запрещен"
 
 #: lib/error.c:47
 msgid "bad user/group name"
-msgstr ""
+msgstr "неверное имя пользователя/группы"
 
 #: lib/error.c:49
 msgid "bad user/group id"
-msgstr ""
+msgstr "неверный ID пользователя/группы"
 
 #: lib/error.c:51
 msgid "user/group name in use"
-msgstr ""
+msgstr "имя пользователя/группы используется"
 
 #: lib/error.c:53
 msgid "user/group id in use"
-msgstr ""
+msgstr "ID пользователя/группы используется"
 
 #: lib/error.c:55
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "ошибка изменения аттрибутов терминала"
 
 #: lib/error.c:57
-#, fuzzy
 msgid "error opening file"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка открытия файла"
 
 #: lib/error.c:59
-#, fuzzy
 msgid "error locking file"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка блокировки файла"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error statting file"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка получения параметров файла"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error reading file"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка чтения файла"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error writing to file"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка записи в файл"
 
 #: lib/error.c:67
 msgid "data not found in file"
-msgstr ""
+msgstr "данные не найдены в файле"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "internal initialization error"
-msgstr "ошибка инициализации библиотеки kerberos"
+msgstr "внутренняя ошибка инициализации"
 
 #: lib/error.c:71
-#, fuzzy
 msgid "error loading module"
-msgstr "ошибка блокировки файла: %s"
+msgstr "ошибка загрузки модуля"
 
 #: lib/error.c:73
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "ошибка определения символа в модуле"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "несоответствие версии модуля в `%s'"
+msgstr "несоответствие версии модуля и библиотеки"
 
 #: lib/error.c:77 lib/error.c:79
-#, fuzzy
 msgid "unknown error"
-msgstr "неизвестно"
+msgstr "неизвестная ошибка"
 
 #: lib/modules.c:112
 #, c-format
@@ -396,16 +385,15 @@ msgstr "несоответствие версии модуля в `%s'"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "ошибка чтения аттрибутов терминала"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Получение стандартных аттрибутов пользователя:\n"
+msgstr "ошибка установки аттрибутов терминала"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "ошибка чтения с терминала"
 
 #: lib/util.c:185
 #, c-format
@@ -470,8 +458,7 @@ msgstr "нет файла shadow -- запрещено"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -544,13 +531,12 @@ msgid "could not bind to LDAP server"
 msgstr "невозможно подключиться к серверу LDAP"
 
 #: modules/ldap.c:419 modules/ldap.c:2264
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "невозможно подключиться к серверу LDAP"
+msgstr "невозможно искать сервер LDAP"
 
 #: modules/ldap.c:428 modules/ldap.c:2274
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "Похоже, что сервер LDAP не имеет корневого DSE"
 
 #: modules/ldap.c:626 modules/ldap.c:1167 modules/ldap.c:1283
 #: modules/ldap.c:1346 modules/ldap.c:1459 modules/ldap.c:1553
@@ -620,30 +606,29 @@ msgid "LDAP Server Name"
 msgstr "Имя сервера LDAP"
 
 #: modules/ldap.c:2162
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "Имя сервера LDAP"
+msgstr "LDAP Search Base DN"
 
 #: modules/ldap.c:2168
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2175
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "LDAP Bind Password"
 
 #: modules/ldap.c:2181
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "Пользователь LDAP SASL"
 
 #: modules/ldap.c:2188
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "Авторизованный пользователь LDAP SASL"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Ошибка инициализации %s: %s.\n"
+msgstr "Ошибка при инициализации %s: %s.\n"
 
 #: samples/lookup.c:75
 #, c-format
@@ -685,70 +670,3 @@ msgstr "Получение стандартных аттрибутов пользователя:\n"
 msgid "Copying user structure:\n"
 msgstr "Копирование структуры пользователя:\n"
 
-#~ msgid "error searching LDAP directory"
-#~ msgstr "ошибка поиска каталога LDAP"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "объект не имеет аттрибута `%s'"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Не указано имя группы.\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Ошибка создания группы для %s: %s.\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Поиск группы с номером %d.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "Неверный UID для %s.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "Неверный GID для %s.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "Нет домашнего каталога для %s.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "Ошибка чтения старого домашнего каталога для %s: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "dump of struct lu_ent at %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " magic = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " type = %s\n"
-
-#~ msgid "user"
-#~ msgstr "пользователь"
-
-#~ msgid "group"
-#~ msgstr "группа"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Перед копированием:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "После копирования:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "freeing lu_ent at %p.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "Группа #%d не существует.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "Ошибка инициализации lu.\n"
