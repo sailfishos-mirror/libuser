@@ -2,13 +2,13 @@
 #
 # Czech translation for libuser
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Milan Kerslager <kerslage@linux.cz>, 2001
+# Milan Kerslager <kerslage@linux.cz>, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2001-08-17 16:12+0100\n"
+"PO-Revision-Date: 2002-06-04 10:34+0100\n"
 "Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,66 +18,66 @@ msgstr ""
 #: apps/apputil.c:71
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "Chyba pøi ètení '%s': %s"
 
 #: apps/apputil.c:79
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr ""
+msgstr "Chyba pøi vytváøení `%s': %s"
 
 #: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "Chyba pøi odstraòování `%s': %s"
 
 #: apps/apputil.c:411 apps/apputil.c:415
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Chyba pøi zahazování práv.\n"
 
 #: apps/apputil.c:424
 msgid "Internal error.\n"
-msgstr ""
+msgstr "Interní chyba.\n"
 
 #: apps/apputil.c:437
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "Chyba pøi inicializaci PAM.\n"
 
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "Chyba pøi autentizaci %s.\n"
 
 #: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "Interní chyba PAM `%s'.\n"
 
 #: apps/apputil.c:460
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "U¾ivatel se neshoduje.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[VOLBY...] u¾ivatel"
 
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "Chyba pøi parsování argumentù: `%s'.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "Nebylo zadáno u¾ivatelské jméno.\n"
 
 #: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "Chyba pøi inicializaci %s: %s\n"
 
 #: apps/lchage.c:156 apps/lgroupadd.c:90 apps/lgroupdel.c:81
 #: apps/lgroupmod.c:104 apps/luseradd.c:116 apps/luseradd.c:277
@@ -87,326 +87,326 @@ msgstr ""
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
 #: apps/lusermod.c:315 lib/error.c:85
 msgid "unknown error"
-msgstr ""
+msgstr "neznámá chyba"
 
 #: apps/lchage.c:164 apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "U¾ivatel %s neexistuje.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "Úèet je zablokován.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "Úèet není zablokován.\n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "Minimum:\t%d\n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "Maximum:\t%d\n"
 
 #: apps/lchage.c:189
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "Varování:\t%d\n"
 
 #: apps/lchage.c:194
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "Neaktivní:\t%d\n"
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "Poslední zmìna:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "Heslo vypr¹í:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "Heslo neaktivní:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "Úèet vypr¹í:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr ""
+msgstr "Chyba pøi zmìnì údajù pro %s.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[VOLBY...] skupina"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "Neurèena ¾ádná skupina.\n"
 
 #: apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr ""
+msgstr "Chyba pøi inicializaci %s.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
-msgstr ""
+msgstr "Chyba pøi vytváøení skupiny.\n"
 
 #: apps/lgroupdel.c:88 apps/lgroupmod.c:116
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "Skupina %s neexistuje.\n"
 
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být smazána.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "Pou¾ito zároveò -L a -U.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr ""
+msgstr "Nastavení hesla pro skupinu %s selhalo.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být uzamèena.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být odemèena.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být zmìnìna.\n"
 
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr ""
+msgstr "Chyba pøi vytváøení skupiny `%s'.\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "Vytváøení úètu selhalo: %s.\n"
 
 #: apps/luseradd.c:318
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "Chyba pøi vytváøení %s: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "Chyba pøi vytváøení po¹tovního spoolu.\n"
 
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "U¾ivatel %s nemù¾e být smazán: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s nemá GID èíslo.\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Skupina s GID %ld neexistuje, nelze odstranit.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr ""
+msgstr "Skupina s GID %ld nemá jméno skupiny.\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být smazána: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s nemá domácí adresáø.\n"
 
 #: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "Chyba pøi odstraòování %s: %s.\n"
 
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "Chyba pøi nastavování hesla pro u¾ivatele %s: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "U¾ivatel %s nemù¾e být uzamèen: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "U¾ivatel %s nemù¾e být odemèen: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "U¾ivatel %s nemù¾e být zmìnìn: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Skupina %s nemù¾e být zmìnìna: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "Domácí adresáø pro %s neexistuje.\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "Nový domácí adresáø pro %s nebyl vytvoøen.\n"
 
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "Chyba pøi pøesunu %s do %s: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "nemohu otevøít konfiguraèní soubor `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "úspìch"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "modul zakázán v konfiguraci"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr ""
+msgstr "v¹eobecná chyba"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "nedostateèné oprávnìní"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr ""
+msgstr "pøístup odepøen"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "chybné jméno u¾ivatele/skupiny"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "chybné ID u¾ivatele/skupiny"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "jméno u¾ivatele/skupiny je ji¾ pou¾íváno"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "ID u¾ivatele/skupiny je ji¾ pou¾íváno"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "chyba pøi manipulaci s atributy terminálu"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "chyba pøi otevírání souboru"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "chyba pøi zamykání souboru"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr ""
+msgstr "chyba pøi zji¹»ování údajù o souboru"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "chyba pøi ètení souboru"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "chyba pøi zápisu do souboru"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "data nebyla v souboru nalezena"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "interní chyba pøi inicializaci"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "chyba pø zavádìní modulu"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "chyba pøi zpracování symbolù v modulu"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "nesouhlasí verze knihovny a modulu"
 
 #: lib/modules.c:112
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "chybí inicializaèní funkce %s v '%s'"
 
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "nesouhlasí verze modulu v '%s'"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "chyba pøi ètení atributù terminálu"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "chyba pøi nastavování atributù terminálu"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr ""
+msgstr "chyba pøi ètení z terminálu"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "chyba pøi zamykání souboru: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -417,264 +417,264 @@ msgstr ""
 #: modules/files.c:2545 modules/files.c:2562
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "nemohu otevøít `%s': %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "nemohu zjistit informace o `%s': %s"
 
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "chyba pøi vytváøení `%s': %s"
 
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
+msgstr "záloha souboru '%s' existuje a není to normální soubor"
 
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "nemohu èíst z `%s': %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
-msgstr ""
+msgstr "polo¾ka je ji¾ v souboru obsa¾ena"
 
 #: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "nemohu zapsat do `%s': %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "objekt nemá atribut %s"
 
 #: modules/files.c:2794 modules/files.c:2864
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "nespu¹tìno s právy administrátora (root)"
 
 #: modules/files.c:2877
 msgid "no shadow file present -- disabling"
-msgstr ""
+msgstr "chybí shadow soubor -- zakázáno"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
+msgstr "chyba pøi spojování s kadm5 serverem pro slu¾bu '%s' v realm '%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "chyba pøi inicializaci kerberos knihoven"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "chyba pøi parsování jména '%s' pro kerberos"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "struktura entity nemá %s nebo %s atributy"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr ""
+msgstr "entita nemá %s nebo %s atributy"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "entita vytvoøena bez %s nebo %s atributù"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr ""
+msgstr "chyba pøi ètení informací pro '%s' z kerberosu"
 
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr ""
+msgstr "entita nemá atribut %s"
 
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr ""
+msgstr "chyba pøi nasavování hesla pro '%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "Realm Kerberosu"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
-msgstr ""
+msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "Heslo pro Kerberos Admin Principal"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
-msgstr ""
+msgstr "chyba pøi inicializaci LDAP knihovny"
 
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr ""
+msgstr "LDAP protokol nelze nastavit na verzi %d"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
+msgstr "nelze domluvit TLS s LDAP serverem"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
-msgstr ""
+msgstr "nelze se pøipojit k LDAP serveru"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr ""
+msgstr "nelze najít LDAP server"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "LDAP server asi nemá koøenový DSE"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1530 modules/ldap.c:1624
 msgid "error mapping name to LDAP distinguished name"
-msgstr ""
+msgstr "chyba pøi mapování jména na jméno v LDAP"
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
+msgstr "chyba pøi mapování jména za základní LDAP jméno"
 
 #: modules/ldap.c:1212
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "objekt u¾ivatele nemá atribut %s"
 
 #: modules/ldap.c:1221
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "u¾ivatelský objekt byl vytvoøen bez '%s'"
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
-msgstr ""
+msgstr "nelze konvertovat interní data na LDAPMods"
 
 #: modules/ldap.c:1271 modules/ldap.c:1482
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr ""
+msgstr "chyba pøi modifiaci LDAP polo¾ky: %s"
 
 #: modules/ldap.c:1291
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr ""
+msgstr "chyba pøi pøejmenovávání LDAP polo¾ky: %s\n"
 
 #: modules/ldap.c:1339
 #, c-format
 msgid "object had no %s attribute"
-msgstr ""
+msgstr "objekt nemá atribut %s"
 
 #: modules/ldap.c:1366
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr ""
+msgstr "chyba pøi odstraòování LDAP polo¾ky: %s.\n"
 
 #: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1515
 #: modules/ldap.c:1609
 #, c-format
 msgid "object has no %s attribute"
-msgstr ""
+msgstr "objekt nemá atribut %s"
 
 #: modules/ldap.c:1545
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "není objekt v LDAP adresáøi"
 
 #: modules/ldap.c:1558
 #, c-format
 msgid "no `%s' attribute found"
-msgstr ""
+msgstr "atribut '%s' nenalezen"
 
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
+msgstr "chyba pøi nastavování hesla v LDAP adresáøi pro %s: %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "Jméno LDAP serveru"
 
 #: modules/ldap.c:2247
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "LDAP Search Base DN"
 
 #: modules/ldap.c:2253
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2260
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "LDAP Bind heslo"
 
 #: modules/ldap.c:2266
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL u¾ivatel"
 
 #: modules/ldap.c:2273
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL u¾ivatel pro autentizaci"
 
 #: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr ""
+msgstr "Chyba pøi inicializaci %s: %s\n"
 
 #: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr ""
+msgstr "Vyhledávání skupiny s ID %d.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "Vyhledávání skupiny pojmenované %s.\n"
 
 #: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr ""
+msgstr "Vyhledávání u¾ivatele s ID %d.\n"
 
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "Vyhledávání u¾ivatele sejménem %s.\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "Polo¾ka nenalezena.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "Implicitní tøídy u¾ivatelských objektù:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "Implicitní jména u¾ivatelských atributù:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "Naètení implicitních u¾ivatelských atributù:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr ""
+msgstr "Kopírování u¾ivatelské struktury:\n"
