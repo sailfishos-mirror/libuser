@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-19 10:56+0100\n"
+"PO-Revision-Date: 2003-02-25 15:32+0100\n"
 "Last-Translator: Audrey Simons <asimons@redhat.com>\n"
 "Language-Team: french <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -306,8 +306,7 @@ msgstr "Erreur lors de la lecture de `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
+msgstr "Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
@@ -363,14 +362,12 @@ msgstr "Changement de mot de passe annulé.\n"
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s: %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s: %s.\n"
 
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour le groupe %s: %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
@@ -434,8 +431,7 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -840,9 +836,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "Utilisateur autorisation SASL LDAP "
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "erreur lors du chargement du module"
+msgstr "erreur lors de l'initialisation du module"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -875,8 +870,7 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:546
 msgid "error removing home directory for user"
-msgstr ""
-"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:623
 msgid "error moving home directory for user"
@@ -930,3 +924,4 @@ msgstr "Obtention attributs utilisateur par défaut :\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
+
