@@ -161,7 +161,7 @@ libuser_entity_getattr(struct libuser_entity *self, char *name)
 	return Py_FindMethod(libuser_entity_methods, (PyObject*)self, name);
 }
 
-static PyObject *
+static int
 libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 {
 	PyObject *list;
@@ -191,19 +191,19 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 					   PyString_AsString(PyList_GetItem(list, i)));
 			}
 			DEBUG_EXIT;
-			return Py_BuildValue("");
+			return 0;
 		} else
 		if(PyString_Check(list)) {
 			lu_ent_set(self->ent, name, PyString_AsString(list));
 			DEBUG_EXIT;
-			return Py_BuildValue("");
+			return 0;
 		}
 	}
 
 	PyErr_SetString(PyExc_SystemError,
 			"expected string or list of strings");
 	DEBUG_EXIT;
-	return NULL;
+	return -1;
 }
 
 static PyObject *

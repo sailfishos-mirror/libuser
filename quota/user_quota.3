@@ -1,0 +1,73 @@
+.TH QUOTA 3  "12 June, 2001" "Linux" "Red Hat Linux"
+.SH NAME
+quota_get_specials_user quota_get_specials_group quota_free_specials quota_get_user quota_set_user quota_get_group quota_set_group - quota manipulation functions
+.SH SYNOPSIS
+.nf
+.B #include <sys/types.h>
+.B #include <errno.h>
+.B #include <libuser/quota.h>
+.sp
+.BI "char **quota_get_specials_user(void);"
+.BI "char **quota_get_specials_group(void);"
+.BI "void quota_free_specials(char **specials);"
+.sp
+.BI "int quota_get_user(uid_t uid, const char *special,"
+.BI "                   int32_t *inode_soft, int32_t *inode_hard,"
+.BI "                   int32_t *inode_usage, int32_t *inode_grace,"
+.BI "                   int32_t *block_soft, int32_t *block_hard,"
+.BI "                   int32_t *block_usage, int32_t *block_grace);"
+.BI "int quota_set_user(uid_t uid, const char *special,"
+.BI "                   int32_t inode_soft, int32_t inode_hard,"
+.BI "                   int32_t inode_grace, int32_t block_soft,"
+.BI "                   int32_t block_hard, int32_t block_grace);"
+.sp
+.BI "int quota_get_group(gid_t gid, const char *special,"
+.BI "                   int32_t *inode_soft, int32_t *inode_hard,"
+.BI "                   int32_t *inode_usage, int32_t *inode_grace,"
+.BI "                   int32_t *block_soft, int32_t *block_hard,"
+.BI "                   int32_t *block_usage, int32_t *block_grace);"
+.BI "int quota_set_group(gid_t gid, const char *special,"
+.BI "                   int32_t inode_soft, int32_t inode_hard,"
+.BI "                   int32_t inode_grace, int32_t block_soft,"
+.BI "                   int32_t block_hard, int32_t block_grace);"
+.fi
+.SH DESCRIPTION
+Quota support under Linux can be enabled for users and groups on a per-
+filesystem basis.  For each user or group for which a quota is set, the
+Linux kernel will keep track of the number of inodes (files) and disk
+blocks (kilobytes) used by each user or group on each filesystem.
+.sp
+A quota is defined for a user or a group using a soft limit (also known as
+the quota), a hard limit (also known simply as the limit), and a grace
+period.  The kernel will not allow a user's usage to grow beyond the hard
+limit, and will periodically warn the user (or members of the group) when
+usage has exceeded the soft limit for longer than the grace period.
+.sp
+The \fBquota_get_specials_user\fP and \fBquota_get_specials_group\fP
+functions can be used to obtain a list of mounted devices which have
+user or group quotas enabled.
+.sp
+The \fBquota_get_user\fP and \fBquota_get_group\fP functions can be
+used to obtain disk and inode usage and quotas for users and groups,
+respectively.
+.sp
+The \fBquota_set_user\fP and \fBquota_set_group\fP functions can be
+used to set disk and inode quotas for users and groups, respectively.
+Setting any parameter to \fB-1\fP will cause it to be ignored, and the
+corresponding limit to not be changed.  To disable a quota, set the
+soft limit, hard limit, and grace time to \fB0\fP.
+.SH "RETURN VALUE"
+The \fBquota_get_specials_user\fP and \fBquota_get_specials_group\fP
+functions return a NULL-terminated array of strings on success, or NULL
+on failure.  The returned list must be freed by calling
+\fBquota_free_specials\fP.
+.sp
+The \fBquota_get_user\fP, \fBquota_set_user\fP, and \fBquota_get_group\fP,
+\fBquota_set_group\fP functions all return 0 on success, and non-zero
+values on failure, with the specific error code stored in the global
+variable \fBerrno\fP.  The values of these error codes include the standard
+system error codes as well as those defined for the \fBquotactl\fP system call.
+.SH "SEE ALSO"
+.BR quotactl(2),
+.BR fstab(5),
+.BR mount(8)

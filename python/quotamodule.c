@@ -29,7 +29,7 @@
 		DEBUG_EXIT; \
 		return NULL;
 
-#define DEBUG_BINDING
+#undef  DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING
 #endif
@@ -123,6 +123,22 @@ quota_struct_new(const char *user, const char *group, const char *special,
 }
 
 static PyObject*
+quota_struct_copy(struct quota_struct *self, PyObject *args)
+{
+	return (PyObject*)quota_struct_new(self->user, self->group,
+					   self->special,
+					   self->inode_usage, self->inode_soft,
+					   self->inode_hard, self->inode_grace,
+					   self->block_usage, self->block_soft,
+					   self->block_hard, self->block_grace);
+}
+
+PyMethodDef quota_struct_methods[] = {
+	{"copy", quota_struct_copy, 0, NULL},
+	{NULL, NULL, 0, NULL},
+};
+
+static PyObject*
 quota_struct_getattr(struct quota_struct *self, char *attr)
 {
 	DEBUG_ENTRY;
@@ -163,78 +179,71 @@ quota_struct_getattr(struct quota_struct *self, char *attr)
 	} else
 	if(strcmp(attr, "inode_usage") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->inode_usage);
+		return PyInt_FromLong(self->inode_usage);
 	}
 	else
 	if(strcmp(attr, "inode_soft") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->inode_soft);
+		return PyInt_FromLong(self->inode_soft);
 	}
 	else
 	if(strcmp(attr, "inode_hard") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->inode_hard);
+		return PyInt_FromLong(self->inode_hard);
 	}
 	else
 	if(strcmp(attr, "inode_grace") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->inode_grace);
+		return PyInt_FromLong(self->inode_grace);
 	}
 	else
 	if(strcmp(attr, "block_usage") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->block_usage);
+		return PyInt_FromLong(self->block_usage);
 	}
 	else
 	if(strcmp(attr, "block_soft") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->block_soft);
+		return PyInt_FromLong(self->block_soft);
 	}
 	else
 	if(strcmp(attr, "block_hard") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->block_hard);
+		return PyInt_FromLong(self->block_hard);
 	}
 	else
 	if(strcmp(attr, "block_grace") == 0) {
 		DEBUG_EXIT;
-		return PyLong_FromLong(self->block_grace);
+		return PyInt_FromLong(self->block_grace);
 	} else {
-		PyErr_SetString(PyExc_RuntimeError, "invalid attribute");
-		DEBUG_EXIT;
-		return NULL;
+		return Py_FindMethod(quota_struct_methods,
+				     (PyObject*)self, attr);
 	}
 	DEBUG_EXIT;
 	return Py_BuildValue("");
 }
 
-static PyObject*
+static int
 quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 {
 	DEBUG_ENTRY;
 	if((self->user == NULL) && (self->group == NULL)) {
 		PyErr_SetString(PyExc_RuntimeError, "invalid quota object");
 		DEBUG_EXIT;
-		return NULL;
+		return -1;
 	}
 	if(strcmp(attr, "user") == 0) {
 		if(self->user == NULL) {
 			PyErr_SetString(PyExc_RuntimeError, "not a user quota");
 			DEBUG_EXIT;
-			return NULL;
-		} else {
-			DEBUG_EXIT;
-			return PyString_FromString(self->user);
+			return -1;
 		}
 	}
 	if(strcmp(attr, "group") == 0) {
 		if(self->group == NULL) {
 			PyErr_SetString(PyExc_RuntimeError, "not a group quota");
 			DEBUG_EXIT;
-			return NULL;
-		} else {
-			DEBUG_EXIT;
-			return PyString_FromString(self->group);
+			return -1;
 		}
 	}
 
@@ -243,109 +252,123 @@ quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 			PyErr_SetString(PyExc_RuntimeError,
 					"user must be a string");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
 		free(self->user);
 		self->group = NULL;
 		self->user = strdup(PyString_AsString(args));
-	}
+	} else
 	if(strcmp(attr, "group") == 0) {
 		if(!PyString_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"group must be a string");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
 		self->user = NULL;
 		free(self->group);
 		self->group = strdup(PyString_AsString(args));
-	}
+	} else
 	if(strcmp(attr, "special") == 0) {
 		if(!PyString_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"special must be a string");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
 		free(self->special);
 		self->special = strdup(PyString_AsString(args));
-	}
+	} else
 	if(strcmp(attr, "inode_soft") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"inode_soft must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->inode_soft = PyLong_AsLong(args);
-	}
-	else
+		self->inode_soft = PyInt_AsLong(args);
+	} else
 	if(strcmp(attr, "inode_hard") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"inode_hard must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->inode_hard = PyLong_AsLong(args);
-	}
-	else
+		self->inode_hard = PyInt_AsLong(args);
+	} else
 	if(strcmp(attr, "inode_grace") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"inode_grace must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->inode_grace = PyLong_AsLong(args);
-	}
-	else
+		self->inode_grace = PyInt_AsLong(args);
+	} else
 	if(strcmp(attr, "block_soft") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"block_soft must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->block_soft = PyLong_AsLong(args);
-	}
-	else
+		self->block_soft = PyInt_AsLong(args);
+	} else
 	if(strcmp(attr, "block_hard") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"block_hard must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->block_hard = PyLong_AsLong(args);
-	}
-	else
+		self->block_hard = PyInt_AsLong(args);
+	} else
 	if(strcmp(attr, "block_grace") == 0) {
-		if(!PyLong_Check(args)) {
+		if(!PyInt_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"block_grace must be a number");
 			DEBUG_EXIT;
-			return NULL;
+			return -1;
 		}
-		self->block_grace = PyLong_AsLong(args);
+		self->block_grace = PyInt_AsLong(args);
 	} else {
 		PyErr_SetString(PyExc_RuntimeError, "invalid attribute");
 		DEBUG_EXIT;
-		return NULL;
+		return -1;
 	}
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	return 0;
+}
+
+static int
+quota_struct_print(struct quota_struct *self, FILE *output, int flag)
+{
+	DEBUG_ENTRY;
+	fprintf(output, "(user = '%s', group = '%s', special = '%s', "
+		"inode_usage = %d, inode_soft = %d, inode_hard = %d, "
+		"inode_grace = %d, block_usage = %d, block_soft = %d, "
+		"block_hard = %d, block_grace = %d)",
+		self->user ?: "(null)",
+		self->group ?: "(null)",
+		self->special ?: "(null)",
+		self->inode_usage, self->inode_soft,
+		self->inode_hard, self->inode_grace,
+		self->block_usage, self->block_soft,
+		self->block_hard, self->block_grace);
+	DEBUG_EXIT;
+	return 0;
 }
 
 static PyTypeObject quota_object_type = {
 	PyObject_HEAD_INIT(&PyType_Type)
 	0,
-	"quota",
+	"quota_struct",
 	sizeof(struct quota_struct),
 	0,
 
 	(destructor) quota_struct_dealloc,
-	(printfunc) NULL,
+	(printfunc) quota_struct_print,
 	(getattrfunc) quota_struct_getattr,
 	(setattrfunc) quota_struct_setattr,
 	(cmpfunc) NULL,
@@ -374,6 +397,9 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 	DEBUG_ENTRY;
 	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "is|s", kwlist,
 				        &type, &name, &special)) {
+		if(!PyErr_Occurred())
+			PyErr_SetString(PyExc_RuntimeError, "expected int, "
+					"string, optional string");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -469,16 +495,25 @@ quotamodule_set(PyObject *self, PyObject *args)
 
 	if(PyList_Check(args)) {
 		int i;
-		for(i = 0; i < PyList_Size(args); i++)
+		for(i = 0; i < PyList_Size(args); i++) {
 			if(quotamodule_set(self, PyList_GetItem(args, i)) == NULL){
 				DEBUG_EXIT;
 				return NULL;
 			}
+		}
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
 
 	if(!PyArg_ParseTuple(args, "O!", &quota_object_type, &obj)) {
+		if(!PyErr_Occurred())
+			PyErr_SetString(PyExc_RuntimeError,
+					"expected quota_struct object");
+		DEBUG_EXIT;
+		return NULL;
+	}
+	if((obj->user == NULL) && (obj->group == NULL)) {
+		PyErr_SetString(PyExc_RuntimeError, "invalid quota object");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -566,8 +601,8 @@ initquota(void)
 	DEBUG_ENTRY;
 	module = Py_InitModule("quota", quota_methods);
 	dict = PyModule_GetDict(module);
-        PyDict_SetItemString(dict, "USER", PyLong_FromLong(USRQUOTA));
-        PyDict_SetItemString(dict, "GROUP", PyLong_FromLong(GRPQUOTA));
+        PyDict_SetItemString(dict, "USER", PyInt_FromLong(USRQUOTA));
+        PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(GRPQUOTA));
 	DEBUG_EXIT;
 	return;
 }

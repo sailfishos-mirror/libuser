@@ -66,6 +66,15 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser_quota.so
 
 %changelog
+* Tue Jun 12 2001 Nalin Dahyabhai <nalin@redhat.com> 0.11
+- finish up python bindings for quota support
+
+* Sun Jun 10 2001 Nalin Dahyabhai <nalin@redhat.com>
+- finish up quota support libs
+
+* Fri Jun  8 2001 Nalin Dahyabhai <nalin@redhat.com>
+- start quota support library to get some type safety
+
 * Thu Jun  7 2001 Nalin Dahyabhai <nalin@redhat.com>
 - start looking at quota manipulation
 
