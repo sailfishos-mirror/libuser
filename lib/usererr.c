@@ -25,6 +25,7 @@
 #include <execinfo.h>
 #include <libintl.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 #include "../include/libuser/user.h"
 
@@ -100,6 +101,7 @@ lu_error_free(struct lu_error **error)
 		if((*error)->string != NULL) {
 			g_free((*error)->string);
 		}
+		free((*error)->stack);
 		memset(*error, 0, sizeof(**error));
 		g_free(*error);
 		*error = NULL;

@@ -1,4 +1,4 @@
-sbin_PROGRAMS = lchage luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd
+sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd
 
 include $(top_srcdir)/Makefile.extra
 
@@ -6,6 +6,9 @@ LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
 
 lchage_SOURCES = \
 	lchage.c
+
+lid_SOURCES = \
+	lid.c
 
 luseradd_SOURCES = \
 	apputil.c \

@@ -119,6 +119,20 @@ libuser:
 						all loaded modules.
 					Returns: a list of user or group names.
 
+				- enumerateUsersByGroup: Get a list of users who belong to a group.
+					Arguments:
+						A group's name (required).
+						The name of a single module to query (optional).  The default is to iterate over
+						all loaded modules.
+					Returns: a list of user names.
+
+				- enumerateGroupsByUser: Get a list of groups to which a user belongs.
+					Arguments:
+						A user's name (required).
+						The name of a single module to query (optional).  The default is to iterate over
+						all loaded modules.
+					Returns: a list of group names.
+
 				- promptConsole: Prompt the user for information, including for information for which there
 						 is a supplied default.
 					Arguments:

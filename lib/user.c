@@ -926,16 +926,33 @@ lu_group_setpass(struct lu_context *context, struct lu_ent *ent, const char *pas
 struct enumerate_data {
 	GList *list;
 	const char *pattern;
+	uid_t uid;
+	gid_t gid;
 	struct lu_error **error;
 };
+
+static GList *
+clean_string_list(struct lu_context *context, GList *list)
+{
+	GList *ret = NULL, *i;
+	char *string = NULL;
+	for(i = list; i && i->data; i = g_list_next(i)) {
+		string = context->scache->cache(context->scache, (char*)i->data);
+		if(g_list_index(ret, string) < 0) {
+			ret = g_list_append(ret, string);
+		}
+	}
+	return ret;
+}
 
 static int
 lu_enumerate_users(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *mod = (struct lu_module *)value;
 	struct enumerate_data *en = (struct enumerate_data*) data;
-	if((en->error == NULL) || (*(en->error) == NULL))
+	if((en->error == NULL) || (*(en->error) == NULL)) {
 		en->list = g_list_concat(en->list, mod->users_enumerate(mod, en->pattern, en->error));
+	}
 	return 0;
 }
 
@@ -944,8 +961,9 @@ lu_enumerate_groups(gpointer key, gpointer value, gpointer data)
 {
 	struct lu_module *mod = (struct lu_module *)value;
 	struct enumerate_data *en = (struct enumerate_data*) data;
-	if((en->error == NULL) || (*(en->error) == NULL))
+	if((en->error == NULL) || (*(en->error) == NULL)) {
 		en->list = g_list_concat(en->list, mod->groups_enumerate(mod, en->pattern, en->error));
+	}
 	return 0;
 }
 
@@ -955,8 +973,10 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 	struct enumerate_data data;
 	struct lu_module *mod;
 	char *module_rw;
+	GList *ret;
 
 	LU_ERROR_CHECK(error);
+	memset(&data, 0, sizeof(data));
 
 	g_assert((type == lu_user) || (type == lu_group));
 
@@ -982,7 +1002,10 @@ lu_enumerate(struct lu_context *context, enum lu_type type, const char *pattern,
 			g_tree_traverse(context->modules, lu_enumerate_groups, G_IN_ORDER, &data);
 		}
 	}
-	return data.list;
+
+	ret = clean_string_list(context, data.list);
+	g_list_free(data.list);
+	return ret;
 }
 
 /**
@@ -1021,4 +1044,154 @@ lu_groups_enumerate(struct lu_context *context, const char *pattern, const char 
 {
 	LU_ERROR_CHECK(error);
 	return lu_enumerate(context, lu_group, pattern, module, error);
+}
+
+static void
+lu_enumerate_users_by_group(const char *module, struct lu_module *mod, struct enumerate_data *data)
+{
+	if(mod->users_enumerate_by_group) {
+		data->list = g_list_concat(data->list, mod->users_enumerate_by_group(mod, data->pattern, data->gid, data->error));
+	}
+}
+
+/**
+ * lu_users_enumerate_by_group:
+ * @context: A library context.
+ * @group: The name or GID (in string form) of the group we need a list of members from.
+ * @module: The name of a module which will be queried specifically.
+ * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * The lu_users_enumerate_by_group() function will query loaded modules for a list of users in the named group, either because
+ * it is a user's primary group, or through supplemental membership.
+ *
+ * Returns: A #GList which must be freed by calling g_list_free().
+ */
+GList *
+lu_users_enumerate_by_group(struct lu_context *context, const char *group, const char *module, struct lu_error **error)
+{
+	struct enumerate_data data;
+	struct lu_module *mod = NULL;
+	struct lu_ent *ent = NULL;
+	GList *ret;
+
+	LU_ERROR_CHECK(error);
+
+	memset(&data, 0, sizeof(data));
+	data.list = NULL;
+	data.pattern = group;
+	data.error = error;
+
+	ent = lu_ent_new();
+	if(lu_group_lookup_name(context, group, ent, error) == FALSE) {
+		lu_ent_free(ent);
+		return NULL;
+	}
+
+	ret = lu_ent_get(ent, LU_GIDNUMBER);
+	if((ret == NULL) || (ret->data == NULL)) {
+		lu_error_new(error, lu_error_generic, "group `%s' has no %s", group, LU_GIDNUMBER);
+		return NULL;
+	}
+	data.gid = atol((char*)ret->data);
+	lu_ent_free(ent);
+
+	if(module) {
+		mod = g_tree_lookup(context->modules, context->scache->cache(context->scache, module));
+		if(mod != NULL) {
+			lu_enumerate_users_by_group(module, mod, &data);
+		}
+	} else {
+		g_tree_traverse(context->modules, lu_enumerate_users_by_group, G_IN_ORDER, &data);
+	}
+
+	ret = clean_string_list(context, data.list);
+	g_list_free(data.list);
+	return ret;
+}
+
+static void
+lu_enumerate_groups_by_user(const char *module, struct lu_module *mod, struct enumerate_data *data)
+{
+	if(mod->groups_enumerate_by_user) {
+		data->list = g_list_concat(data->list, mod->groups_enumerate_by_user(mod, data->pattern, data->error));
+	}
+}
+
+/**
+ * lu_groups_enumerate_by_user:
+ * @context: A library context.
+ * @group: The name or UID (in string form) of the user we need a list of groups for.
+ * @module: The name of a module which will be queried specifically.
+ * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * The lu_groups_enumerate_by_user() function will query loaded modules for a list of groups a user is in, either because
+ * it is the user's primary group, or through supplemental memberships.
+ *
+ * Returns: A #GList which must be freed by calling g_list_free().  The primary group will be listed first.
+ */
+GList *
+lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const char *module, struct lu_error **error)
+{
+	struct lu_ent *ent = NULL, *gent = NULL;
+	struct lu_module *mod = NULL;
+	GList *name = NULL, *group = NULL, *ret = NULL;
+	char *group_name;
+	struct enumerate_data data;
+
+	LU_ERROR_CHECK(error);
+
+	memset(&data, 0, sizeof(data));
+	data.list = NULL;
+	data.pattern = user;
+	data.error = error;
+
+	/* First, find the user's primary group ID. */
+	ent = lu_ent_new();
+	if(lu_user_lookup_name(context, user, ent, error) == FALSE) {
+		return NULL;
+	}
+	group = lu_ent_get(ent, LU_GIDNUMBER);
+	if((group == NULL) || (group->data == NULL)) {
+		lu_error_new(error, lu_error_generic, "user `%s' has no primary group", user);
+		return NULL;
+	}
+
+	/* Convert the ID to a group entry. */
+	gent = lu_ent_new();
+	if(lu_group_lookup_id(context, atol((char*)group->data), gent, error) == FALSE) {
+		lu_ent_free(ent);
+		return NULL;
+	}
+
+	/* Pull out the group's name. */
+	name = lu_ent_get(gent, LU_GROUPNAME);
+	if((name == NULL) || (name->data == NULL)) {
+		lu_ent_free(ent);
+		lu_ent_free(gent);
+		lu_error_new(error, lu_error_generic, "group `%d' has no name", atol((char*)group->data));
+		return NULL;
+	}
+
+	/* Add the name of this group to the cache and the list. */
+	group_name = context->scache->cache(context->scache, (char*)name->data);
+	data.gid = atol((char*)group->data);
+	data.list = g_list_append(NULL, group_name);
+
+	/* We don't need the entries any more. */
+	lu_ent_free(ent);
+	lu_ent_free(gent);
+
+	/* Get the list of groups this user is in. */
+	if(module) {
+		mod = g_tree_lookup(context->modules, context->scache->cache(context->scache, module));
+		if(mod != NULL) {
+			lu_enumerate_groups_by_user(module, mod, &data);
+		}
+	} else {
+		g_tree_traverse(context->modules, lu_enumerate_groups_by_user, G_IN_ORDER, &data);
+	}
+
+	ret = clean_string_list(context, data.list);
+	g_list_free(data.list);
+	return ret;
 }

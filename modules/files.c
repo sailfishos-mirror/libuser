@@ -104,7 +104,7 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	char *backupname;
 	struct stat ist, ost;
 	gpointer ilock, olock;
-	char buf[2048];
+	char buf[LINE_MAX];
 	size_t len;
 
 	g_assert(filename != NULL);
@@ -1345,7 +1345,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 	int fd;
 	gpointer lock;
 	GList *ret = NULL;
-	char buf[2048];
+	char buf[LINE_MAX];
 	char *key = NULL, *filename = NULL, *p;
 	const char *dir = NULL;
 	FILE *fp;
@@ -1414,6 +1414,220 @@ lu_files_groups_enumerate(struct lu_module *module, const char *pattern, struct 
 }
 
 static GList *
+lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
+{
+	int fd;
+	gpointer lock;
+	GList *ret = NULL;
+	char buf[LINE_MAX];
+	char grp[LINE_MAX];
+	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
+	const char *dir = NULL;
+	FILE *fp;
+
+	g_assert(module != NULL);
+	g_assert(group != NULL);
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	pwdfilename = g_strconcat(dir, "/passwd", NULL);
+	grpfilename = g_strconcat(dir, "/group", NULL);
+	g_free(key);
+
+	fd = open(pwdfilename, O_RDWR);
+	if(fd == -1) {
+		lu_error_new(error, lu_error_open, NULL);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+	
+	lock = lu_util_lock_obtain(fd, error);
+	if(lock == NULL) {
+		close(fd);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	fp = fdopen(fd, "r");
+	if(fp == NULL) {
+		lu_error_new(error, lu_error_open, NULL);
+		lu_util_lock_free(fd, lock);
+		close(fd);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	snprintf(grp, sizeof(grp), "%d", gid);
+	while(fgets(buf, sizeof(buf), fp) != NULL) {
+		p = strchr(buf, ':');
+		q = NULL;
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			q = p;
+			p = strchr(p, ':');
+		}
+		if(q != NULL) {
+			if(p != NULL) {
+				*p = '\0';
+			}
+			if(strcmp(q, grp) == 0) {
+				ret = g_list_append(ret, module->scache->cache(module->scache, buf));
+			}
+		}
+	}
+
+	fd = open(grpfilename, O_RDWR);
+	if(fd == -1) {
+		lu_error_new(error, lu_error_open, NULL);
+		g_list_free(ret);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	lock = lu_util_lock_obtain(fd, error);
+	if(lock == NULL) {
+		close(fd);
+		g_list_free(ret);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	fp = fdopen(fd, "r");
+	if(fp == NULL) {
+		lu_error_new(error, lu_error_open, NULL);
+		lu_util_lock_free(fd, lock);
+		close(fd);
+		g_list_free(ret);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	while(fgets(buf, sizeof(buf), fp) != NULL) {
+		p = strchr(buf, ':');
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		if(strcmp(buf, group) == 0) {
+			if(p != NULL) {
+				*p = '\0';
+				p++;
+				p = strchr(p, ':');
+			}
+			if(p != NULL) {
+				*p = '\0';
+				p++;
+				while((q = strsep(&p, ",\n")) != NULL) {
+					if(strlen(q) > 0) {
+						ret = g_list_append(ret, module->scache->cache(module->scache, q));
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	lu_util_lock_free(fd, lock);
+	fclose(fp);
+
+	g_free(pwdfilename);
+	g_free(grpfilename);
+
+	return ret;
+}
+
+static GList *
+lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
+{
+	int fd;
+	gpointer lock;
+	GList *ret = NULL;
+	char buf[LINE_MAX];
+	char *key = NULL, *filename = NULL, *p, *q;
+	const char *dir = NULL;
+	FILE *fp;
+
+	g_assert(module != NULL);
+	g_assert(user != NULL);
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/group", NULL);
+	g_free(key);
+
+	fd = open(filename, O_RDWR);
+	if(fd == -1) {
+		lu_error_new(error, lu_error_open, NULL);
+		g_free(filename);
+		return NULL;
+	}
+	
+	lock = lu_util_lock_obtain(fd, error);
+	if(lock == NULL) {
+		close(fd);
+		g_free(filename);
+		return NULL;
+	}
+
+	fp = fdopen(fd, "r");
+	if(fp == NULL) {
+		lu_error_new(error, lu_error_open, NULL);
+		lu_util_lock_free(fd, lock);
+		close(fd);
+		g_free(filename);
+		return NULL;
+	}
+
+	while(fgets(buf, sizeof(buf), fp) != NULL) {
+		p = strchr(buf, ':');
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		if(p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		if(p != NULL) {
+			p++;
+			while((q = strsep(&p, ",\n")) != NULL) {
+				if(strlen(q) > 0) {
+					if(strcmp(q, user) == 0) {
+						ret = g_list_append(ret, module->scache->cache(module->scache, buf));
+					}
+				}
+			}
+		}
+	}
+
+	lu_util_lock_free(fd, lock);
+	fclose(fp);
+	g_free(filename);
+
+	return ret;
+}
+
+static GList *
 lu_shadow_users_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
 {
 	return NULL;
@@ -1421,6 +1635,18 @@ lu_shadow_users_enumerate(struct lu_module *module, const char *pattern, struct 
 
 static GList *
 lu_shadow_groups_enumerate(struct lu_module *module, const char *pattern, struct lu_error **error)
+{
+	return NULL;
+}
+
+static GList *
+lu_shadow_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
+{
+	return NULL;
+}
+
+static GList *
+lu_shadow_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
 {
 	return NULL;
 }
@@ -1469,6 +1695,7 @@ lu_files_init(struct lu_context *context, struct lu_error **error)
 	ret->user_islocked = lu_files_user_islocked;
 	ret->user_setpass = lu_files_user_setpass;
 	ret->users_enumerate = lu_files_users_enumerate;
+	ret->users_enumerate_by_group = lu_files_users_enumerate_by_group;
 
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
@@ -1481,6 +1708,7 @@ lu_files_init(struct lu_context *context, struct lu_error **error)
 	ret->group_islocked = lu_files_group_islocked;
 	ret->group_setpass = lu_files_group_setpass;
 	ret->groups_enumerate = lu_files_groups_enumerate;
+	ret->groups_enumerate_by_user = lu_files_groups_enumerate_by_user;
 
 	ret->close = close_module;
 
@@ -1538,6 +1766,7 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	ret->user_islocked = lu_shadow_user_islocked;
 	ret->user_setpass = lu_shadow_user_setpass;
 	ret->users_enumerate = lu_shadow_users_enumerate;
+	ret->users_enumerate_by_group = lu_shadow_users_enumerate_by_group;
 
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
@@ -1550,6 +1779,7 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	ret->group_islocked = lu_shadow_group_islocked;
 	ret->group_setpass = lu_shadow_group_setpass;
 	ret->groups_enumerate = lu_shadow_groups_enumerate;
+	ret->groups_enumerate_by_user = lu_shadow_groups_enumerate_by_user;
 
 	ret->close = close_module;
 

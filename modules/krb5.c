@@ -610,6 +610,18 @@ lu_krb5_groups_enumerate(struct lu_module *module, const char *pattern, struct l
 	return NULL;
 }
 
+static GList *
+lu_krb5_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
+{
+	return NULL;
+}
+
+static GList *
+lu_krb5_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
+{
+	return NULL;
+}
+
 static gboolean
 lu_krb5_close_module(struct lu_module *module)
 {
@@ -701,6 +713,7 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 	ret->user_islocked = lu_krb5_user_islocked;
 	ret->user_setpass = lu_krb5_user_setpass;
 	ret->users_enumerate = lu_krb5_users_enumerate;
+	ret->users_enumerate_by_group = lu_krb5_users_enumerate_by_group;
 
         ret->group_lookup_name = lu_krb5_group_lookup_name;
         ret->group_lookup_id = lu_krb5_group_lookup_id;
@@ -713,6 +726,7 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 	ret->group_islocked = lu_krb5_group_islocked;
 	ret->group_setpass = lu_krb5_group_setpass;
 	ret->groups_enumerate = lu_krb5_groups_enumerate;
+	ret->groups_enumerate_by_user = lu_krb5_groups_enumerate_by_user;
 
 	ret->close = lu_krb5_close_module;
 

@@ -69,7 +69,8 @@ rm -fr $RPM_BUILD_ROOT
 
 %changelog
 * Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com>
-- add a sasl module which manipulates a sasldb used by Cyrus SASL
+- finish adding a sasldb module which manipulates a sasldb file
+- add users_enumerate_by_group and groups_enumerate_by_users
 
 * Wed Jul 25 2001 Nalin Dahyabhai <nalin@redhat.com>
 - luserdel: remove the user's primary group if it has the same name as

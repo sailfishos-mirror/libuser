@@ -843,6 +843,20 @@ lu_ldap_groups_enumerate(struct lu_module *module, const char *pattern, struct l
 	return lu_ldap_enumerate(module, LU_GROUPNAME, "groupBranch", "ou=Group", pattern, error);
 }
 
+static GList *
+lu_ldap_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
+static GList *
+lu_ldap_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
 static gboolean
 lu_ldap_close_module(struct lu_module *module)
 {
@@ -942,6 +956,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->user_islocked = lu_ldap_user_islocked;
 	ret->user_setpass = lu_ldap_user_setpass;
 	ret->users_enumerate = lu_ldap_users_enumerate;
+	ret->users_enumerate_by_group = lu_ldap_users_enumerate_by_group;
 
         ret->group_lookup_name = lu_ldap_group_lookup_name;
         ret->group_lookup_id = lu_ldap_group_lookup_id;
@@ -954,6 +969,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->group_islocked = lu_ldap_group_islocked;
 	ret->group_setpass = lu_ldap_group_setpass;
 	ret->groups_enumerate = lu_ldap_groups_enumerate;
+	ret->groups_enumerate_by_user = lu_ldap_groups_enumerate_by_user;
 
 	ret->close = lu_ldap_close_module;
 

@@ -63,9 +63,12 @@ typedef struct lu_error {
 do { \
 	struct lu_error **__err = (err_p_p); \
 	if ((__err != NULL) && (*__err != NULL)) { \
-		fprintf(stderr, \
-			"libuser fatal error: %s() called with non-NULL *" \
-			#err_p_p "\n", __FUNCTION__); \
+		int i; \
+		fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" \
+			#err_p_p "\nstack:\n", __FUNCTION__); \
+		for(i = 0; (*__err)->stack && (*__err)->stack[i]; i++) { \
+			fprintf(stderr, "\t%s\n", (*__err)->stack[i]); \
+		} \
 		abort(); \
 	} \
 } while(0)

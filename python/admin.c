@@ -692,6 +692,50 @@ libuser_admin_enumerate_groups(PyObject *self, PyObject *args, PyObject *kwargs)
 	return ret;
 }
 
+static PyObject *
+libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	GList *results;
+	char *module = NULL, *group = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = {"group", "module", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s|s", keywords, &group, &module)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	results = lu_users_enumerate_by_group(me->ctx, group, module, &error);
+	ret = convert_glist_pystringlist(results);
+	g_list_free(results);
+	DEBUG_EXIT;
+	return ret;
+}
+
+static PyObject *
+libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	GList *results;
+	char *module = NULL, *user = NULL;
+	PyObject *ret = NULL;
+	struct lu_error *error = NULL;
+	char *keywords[] = {"user", "module", NULL};
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "s|s", keywords, &user, &module)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	results = lu_groups_enumerate_by_user(me->ctx, user, module, &error);
+	ret = convert_glist_pystringlist(results);
+	g_list_free(results);
+	DEBUG_EXIT;
+	return ret;
+}
+
 static struct PyMethodDef libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction)libuser_admin_lookup_user_name, METH_VARARGS | METH_KEYWORDS,
 	 "search for a user with the given name"},
@@ -744,6 +788,10 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 "get a list of users matching a pattern, in listed databases"},
 	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups, METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups matching a pattern, in listed databases"},
+	{"enumerateUsersByGroup", (PyCFunction)libuser_admin_enumerate_users_by_group, METH_VARARGS | METH_KEYWORDS,
+	 "get a list of users in a group"},
+	{"enumerateGroupsByUser", (PyCFunction)libuser_admin_enumerate_groups_by_user, METH_VARARGS | METH_KEYWORDS,
+	 "get a list of groups to which a user belongs"},
 
 	{"promptConsole", (PyCFunction)libuser_admin_prompt_console, METH_VARARGS | METH_KEYWORDS,
 	 "prompt the user for information using the console, and confirming defaults"},
