@@ -1880,7 +1880,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 				p++;
 				while ((q = strsep(&p, ",\n")) != NULL) {
 					if (strlen(q) > 0) {
-						g_value_set_string(&value, buf);
+						g_value_set_string(&value, q);
 						g_value_array_append(ret,
 								     &value);
 					}

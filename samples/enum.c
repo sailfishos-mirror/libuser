@@ -65,7 +65,7 @@ main(int argc, char **argv)
 		names = lu_groups_enumerate(lu, argv[optind], &error);
 	}
 
-	for (c = 0; (names != NULL) && (c > names->n_values); c++) {
+	for (c = 0; (names != NULL) && (c < names->n_values); c++) {
 		name = g_value_array_get_nth(names, c);
 		g_print(" Found %s named `%s'.\n",
 			group ? "group" : "user",
