@@ -6,16 +6,17 @@
 # translation of it.po to
 # translation of it.po to
 # translation of it.po to
+# translation of it.po to
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
-# Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004.
+# Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-11-15 22:15+0100\n"
+"PO-Revision-Date: 2005-03-06 16:01+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -36,15 +37,15 @@ msgstr "Errore nella creazione di `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Errore nella creazione del gruppo %s: %s\n"
+msgstr "Errore nel cambiamento del proprietario di '%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Errore nella creazione di `%s': %s"
+msgstr "Errore nella scrittura di `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -64,8 +65,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:588
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
-"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:590
 msgid "Unknown user context"
@@ -676,8 +676,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:112
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:118
 #, c-format
@@ -717,9 +716,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "il file di backup `%s' esiste e non ï¿½un file standard"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "mancata corrispondenza nella versione di modulo/libreria"
+msgstr "mancata corrispondenza con le dimensioni del file di backup."
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -853,8 +851,7 @@ msgstr ""
 
 #: modules/ldap.c:638
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1363
 #, c-format
@@ -913,8 +910,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1912
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2484
 msgid "LDAP Server Name"
@@ -1028,3 +1024,4 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
