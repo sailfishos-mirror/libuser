@@ -77,9 +77,12 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, co
 
 	values = lu_ent_get(ent, LU_USERNAME);
 	if(values && values->data) {
-		i = sasl_setpass(connection, (char*)values->data, password, 0, flags, &err);
-		g_assert((i == SASL_OK) || (i == SASL_NOCHANGE) || (i == SASL_NOMECH) || (i == SASL_DISABLED) ||
-			 (i == SASL_PWLOCK) || (i == SASL_FAIL) || (i == SASL_BADPARAM));
+		i = sasl_setpass(connection, (char*)values->data, password,
+				 0, flags, &err);
+		g_assert((i == SASL_OK) || (i == SASL_NOCHANGE) ||
+			 (i == SASL_NOMECH) || (i == SASL_DISABLED) ||
+			 (i == SASL_PWLOCK) || (i == SASL_FAIL) ||
+			 (i == SASL_BADPARAM));
 				 
 		if(i == SASL_OK) {
 			return TRUE;
@@ -103,6 +106,7 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, co
 		}
 	}
 
+	fprintf(stderr, "Error reading user name in %s at %d.\n", __FILE__, __LINE__);
 	return FALSE;
 }
 
@@ -111,7 +115,8 @@ lu_sasldb_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error
 {
 	if(lu_sasldb_user_munge(module, ent, SASL_SET_CREATE, PACKAGE, error)) {
 		/* account created */
-		if(lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE, PACKAGE, error) == TRUE) {
+		if(lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE,
+					PACKAGE, error) == TRUE) {
 			/* account created and locked */
 		} else {
 			/* account created and couldn't be locked -- delete it */
@@ -270,8 +275,8 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 	LU_ERROR_CHECK(error);
 
 	/* Read in configuration variables. */
-	appname = lu_cfg_read_single(context, "sasl/appname", NULL);
-	domain = lu_cfg_read_single(context, "sasl/domain", NULL);
+	appname = lu_cfg_read_single(context, "sasl/appname", "");
+	domain = lu_cfg_read_single(context, "sasl/domain", "");
 
 	/* Initialize SASL. */
 	i = sasl_server_init(NULL, appname);
