@@ -29,7 +29,6 @@
 #include <krb5/kdb.h>
 #include <kadm5/admin.h>
 #include <libuser/user_private.h>
-#include "util.h"
 
 #define LU_KRB5_REALM 0
 #define LU_KRB5_PRINC 1

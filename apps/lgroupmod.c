@@ -105,8 +105,9 @@ main(int argc, const char **argv)
 	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
 		 addMembers || remMembers || (gidNumber != -2);
 
-	if(gid)
+	if(gid) {
 		lu_ent_set(ent, LU_GROUPNAME, gid);
+	}
 	if(gidNumber != -2) {
 		char *tmp = g_strdup_printf("%ld", gidNumber);
 		lu_ent_set(ent, LU_GIDNUMBER, tmp);
@@ -156,30 +157,29 @@ main(int argc, const char **argv)
 	}
 
 	if(userPassword) {
-		values = lu_ent_get(ent, LU_USERPASSWORD);
-		if(values && values->data) {
-			cryptedUserPassword = lu_make_crypted(userPassword,
-							      values->data);
-		} else {
-			cryptedUserPassword = lu_make_crypted(userPassword, "");
+		if(lu_group_setpass(ctx, ent, userPassword) == FALSE) {
+			fprintf(stderr, _("Failed to set password for group "
+				"%s.\n"), group);
+			return 4;
 		}
 	}
 
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_set(ent, LU_USERPASSWORD, tmp);
+		if(lu_group_setpass(ctx, ent, tmp) == FALSE) {
+			fprintf(stderr, _("Failed to set password for group "
+				"%s.\n"), group);
+			return 5;
+		}
 		g_free(tmp);
-	}
-	if(userPassword) {
-		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
 	}
 
 	if(lock) {
 		if(lu_group_lock(ctx, ent) == FALSE) {
 			fprintf(stderr, _("Group %s could not be locked.\n"),
 				group);
-			return 4;
+			return 6;
 		}
 	}
 
@@ -187,13 +187,13 @@ main(int argc, const char **argv)
 		if(lu_group_unlock(ctx, ent) == FALSE) {
 			fprintf(stderr, _("Group %s could not be unlocked.\n"),
 				group);
-			return 5;
+			return 7;
 		}
 	}
 
 	if(change && lu_group_modify(ctx, ent) == FALSE) {
 		fprintf(stderr, _("Group %s could not be modified.\n"), group);
-		return 6;
+		return 8;
 	}
 
 	lu_ent_free(ent);

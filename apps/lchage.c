@@ -201,8 +201,8 @@ main(int argc, const char **argv)
 		}
 
 		if(lu_user_modify(ctx, ent) == FALSE) {
-			fprintf(stderr, _("Aging information for %s could not "
-					  "be modified.\n"), user);
+			fprintf(stderr, _("Failed to modify aging information "
+					  "for %s.\n"), user);
 			return 3;
 		}
 	}

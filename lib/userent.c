@@ -36,12 +36,14 @@ dump_attribute(gpointer key, gpointer value, gpointer data)
 		g_print(" %s = %s\n", (char*) key, (char*) list->data);
 }
 
-static void
+void
 lu_ent_dump(struct lu_ent *ent)
 {
 	g_return_if_fail(ent != NULL);
 	g_print(_("dump of struct lu_ent at %p:\n"), ent);
 	g_print(_(" magic = %08x\n"), ent->magic);
+	g_print(_(" type = %s\n"), ent->type == lu_user ? _("user") :
+		(ent->type == lu_group ? _("group") : _("unknown")));
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_hash_table_foreach(ent->attributes, dump_attribute, NULL);
 }

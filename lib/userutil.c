@@ -21,12 +21,16 @@
 #include "config.h"
 #endif
 #include <libuser/user_private.h>
+#include <sys/stat.h>
 #include <crypt.h>
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
+#include <stdio.h>
+#include <string.h>
 #include <string.h>
 #include <unistd.h>
-
 #define LU_DEFAULT_SALT_TYPE "$1$"
 
 gint
@@ -116,4 +120,344 @@ lu_make_crypted(const char *plain, const char *previous)
 	fill_urandom(salt + stlen, sizeof(salt) - stlen - 1);
 
 	return crypt(plain, salt);
+}
+
+
+gpointer
+lu_util_lock_obtain(int fd)
+{
+	struct flock *lck = NULL;
+	int i;
+
+	g_return_val_if_fail(fd != -1, NULL);
+
+	lck = g_malloc0(sizeof(struct flock));
+	lck->l_type = F_WRLCK;
+
+	do {
+		i = fcntl(fd, F_SETLKW, lck);
+	} while((i == -1) && (errno == EINTR));
+
+	return lck;
+}
+
+void
+lu_util_lock_free(int fd, gpointer lock)
+{
+	struct flock *lck = (struct flock *) lock;
+	g_return_if_fail(fd != -1);
+	g_return_if_fail(lock != NULL);
+	lck->l_type = F_UNLCK;
+	fcntl(fd, F_SETLKW, lck);
+	g_free(lck);
+}
+
+char *
+lu_util_line_get_matchingx(int fd, const char *part, int field)
+{
+	char *contents;
+	char buf[LINE_MAX];
+	struct stat st;
+	off_t offset;
+	char *ret = NULL, *p, *q, *colon;
+	int i;
+
+	g_return_val_if_fail(fd != -1, NULL);
+	g_return_val_if_fail(part != NULL, NULL);
+	g_return_val_if_fail(field > 0, NULL);
+
+	offset = lseek(fd, 0, SEEK_CUR);
+
+	if(fstat(fd, &st) == -1) {
+		return NULL;
+	}
+
+	contents = g_malloc0(st.st_size + 1);
+	lseek(fd, 0, SEEK_SET);
+
+	if(read(fd, contents, st.st_size) == st.st_size) {
+		p = contents;
+		do {
+			q = strchr(p, '\n');
+			if(q != NULL) {
+				strncpy(buf, p, MIN(q - p, sizeof(buf) - 1));
+				buf[MIN(q - p, sizeof(buf) - 1)] = '\0';
+			} else {
+				strncpy(buf, p, sizeof(buf) - 1);
+				buf[sizeof(buf) - 1] = '\0';
+			}
+
+			colon = buf;
+			for(i = 1; i < field; i++) {
+				if(colon) {
+					colon = strchr(colon, ':');
+				}
+				if(colon) {
+					colon++;
+				}
+			}
+
+			if(colon) {
+				if(strncmp(colon, part, strlen(part)) == 0) {
+					if((colon[strlen(part)] == ':') ||
+					   (colon[strlen(part)] == '\n')) {
+						ret = g_strdup(buf);
+						break;
+					}
+				}
+			}
+
+			p = q ? q + 1 : NULL;
+		} while((p != NULL) && (ret == NULL));
+	}
+
+	g_free(contents);
+	lseek(fd, offset, SEEK_SET);
+	return ret;
+}
+
+char *
+lu_util_line_get_matching1(int fd, const char *part)
+{
+	return lu_util_line_get_matchingx(fd, part, 1);
+}
+
+char *
+lu_util_line_get_matching3(int fd, const char *part)
+{
+	return lu_util_line_get_matchingx(fd, part, 3);
+}
+
+/** Count the length of an array of strings.
+ * \param v an array of strings
+ * \returns the number of elements in the array, or 0 if v is NULL
+ */
+guint
+lu_strv_len(gchar **v)
+{
+	int ret = 0;
+	while(v && v[ret])
+		ret++;
+	return ret;
+}
+
+/** Read the nth colon-separated field on the line which has 
+  * first as its first field.
+  * \param fd Descriptor of open, locked file.
+  * \param first Contents of the first field to match the right line with.
+  * \param field The number of the field.  Minimum is 1.
+  * \returns An allocated string which must be freed with g_free().
+  */
+char *
+lu_util_field_read(int fd, const char *first, unsigned int field)
+{
+	struct stat st;
+	unsigned char *buf = NULL;
+	char *pattern = NULL;
+	char *line = NULL, *start = NULL, *end = NULL;
+	char *ret;
+
+	g_return_val_if_fail(fd != -1, NULL);
+	g_return_val_if_fail(first != NULL, NULL);
+	g_return_val_if_fail(strlen(first) != 0, NULL);
+	g_return_val_if_fail(field >= 1, NULL);
+
+	if(fstat(fd, &st) == -1) {
+		return NULL;
+	}
+
+	if(lseek(fd, 0, SEEK_SET) == -1) {
+		return NULL;
+	}
+
+	pattern = g_strdup_printf("\n%s:", first);
+	if(pattern == NULL) {
+		return NULL;
+	}
+
+	buf = g_malloc0(st.st_size + 1);
+	if(read(fd, buf, st.st_size) != st.st_size) {
+		g_free(pattern);
+		g_free(buf);
+		return NULL;
+	}
+
+	if(strncmp(buf, pattern + 1, strlen(pattern) - 1) == 0) {
+		/* found it on the first line */
+		line = buf;
+	} else
+	if((line = strstr(buf, pattern)) != NULL) {
+		/* found it somewhere in the middle */
+		line++;
+	}
+
+	if(line != NULL) {
+		int i = 1;
+		char *p;
+		start = end = NULL;
+
+		/* find the start of the field */
+		if(i == field) {
+			start = line;
+		} else
+		for(p = line;
+		    (i < field) && (*p != '\n') && (*p != '\0');
+		    p++) {
+			if(*p == ':') {
+				i++;
+			}
+			if(i >= field) {
+				start = p + 1;
+				break;
+			}
+		}
+	}
+
+	/* find the end of the field */
+	if(start != NULL) {
+		end = start;
+		while((*end != '\0') && (*end != '\n') && (*end != ':')) {
+			end++;
+		}
+		g_assert((*end == '\0') || (*end == '\n') || (*end == ':'));
+	}
+
+	if((start != NULL) && (end != NULL)) {
+		ret = g_strndup(start, end - start);
+	} else {
+		ret = g_strdup("");
+	}
+
+	g_free(pattern);
+	g_free(buf);
+
+	return ret;
+}
+
+/** Modify the nth colon-separated field on the line which has 
+ * first as its first field.
+ * \param fd Descriptor of open, locked file.
+ * \param first Contents of the first field to match the right line with.
+ * \param field The number of the field.  Minimum is 1.
+ * \param value The new value for the field.
+ * \returns A boolean indicating success or failure.
+ */
+gboolean
+lu_util_field_write(int fd, const char *first,
+		    unsigned int field, const char *value)
+{
+	struct stat st;
+	char *buf;
+	char *pattern = NULL;
+	char *line = NULL, *start = NULL, *end = NULL;
+	gboolean ret = FALSE;
+	int fi = 1;
+
+	g_return_val_if_fail(fd != -1, FALSE);
+	g_return_val_if_fail(first != NULL, FALSE);
+	g_return_val_if_fail(strlen(first) != 0, FALSE);
+	g_return_val_if_fail(field >= 1, FALSE);
+	g_return_val_if_fail(value != NULL, FALSE);
+	g_return_val_if_fail(strlen(value) != 0, FALSE);
+
+	if(fstat(fd, &st) == -1) {
+		return FALSE;
+	}
+
+	if(lseek(fd, 0, SEEK_SET) == -1) {
+		return FALSE;
+	}
+
+	pattern = g_strdup_printf("\n%s:", first);
+	if(pattern == NULL) {
+		return FALSE;
+	}
+
+	buf = g_malloc0(st.st_size + 1 + strlen(value) + field);
+	if(read(fd, buf, st.st_size) != st.st_size) {
+		g_free(pattern);
+		g_free(buf);
+		return FALSE;
+	}
+
+	if(strncmp(buf, pattern + 1, strlen(pattern) - 1) == 0) {
+		/* found it on the first line */
+		line = buf;
+	} else
+	if((line = strstr(buf, pattern)) != NULL) {
+		/* found it somewhere in the middle */
+		line++;
+	}
+
+	if(line != NULL) {
+		char *p;
+		start = end = NULL;
+
+		/* find the start of the field */
+		if(fi == field) {
+			start = line;
+		} else
+		for(p = line;
+		    (fi < field) && (*p != '\n') && (*p != '\0');
+		    p++) {
+			if(*p == ':') {
+				fi++;
+			}
+			if(fi >= field) {
+				start = p + 1;
+				break;
+			}
+		}
+	}
+
+	/* find the end of the field */
+	if(start != NULL) {
+		end = start;
+		while((*end != '\0') && (*end != '\n') && (*end != ':')) {
+			end++;
+		}
+	}
+
+	if((start != NULL) && (end != NULL)) {
+		/* insert the text here, after moving the data around */
+		memmove(start + strlen(value), end,
+			st.st_size - (end - buf) + 1);
+		memcpy(start, value, strlen(value));
+		ret = TRUE;
+	} else {
+		if(line) {
+			/* fi contains the number of fields, so the difference
+			 * between field and fi is the number of colons we need
+			 * to add to the end of the line to create the field */
+			end = line;
+			while((*end != '\0') && (*end != '\n')) {
+				end++;
+			}
+			start = end;
+			memmove(start + strlen(value) + (field - fi), end,
+				st.st_size - (end - buf) + 1);
+			memset(start, ':', field - fi);
+			memcpy(start + (field - fi), value, strlen(value));
+			ret = TRUE;
+		}
+	}
+
+	if(ret == TRUE) {
+		size_t len;
+		if(lseek(fd, 0, SEEK_SET) == -1) {
+			ret = FALSE;
+		}
+		len = strlen(buf);
+		if(write(fd, buf, len) == -1) {
+			ret = FALSE;
+		}
+		if(ftruncate(fd, len) == -1) {
+			ret = FALSE;
+		}
+	}
+
+	g_free(pattern);
+	g_free(buf);
+
+	return ret;
 }

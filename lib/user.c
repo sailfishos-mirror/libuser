@@ -27,6 +27,25 @@
 
 #define WHITESPACE "\t "
 
+enum lu_dispatch_id {
+	user_lookup_name,
+	group_lookup_name,
+	user_lookup_id,
+	group_lookup_id,
+	user_add,
+	user_mod,
+	user_del,
+	user_lock,
+	user_unlock,
+	user_setpass,
+	group_add,
+	group_mod,
+	group_del,
+	group_lock,
+	group_unlock,
+	group_setpass,
+};
+
 static void
 lu_module_unload(gpointer key, gpointer value, gpointer data)
 {
@@ -460,6 +479,21 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 			break;
 	}
 	lu_ent_free(tmp);
+
+	if(success) {
+		switch(id) {
+			case user_lookup_id:
+			case user_lookup_name:
+				ent->type = lu_user;
+				break;
+			case group_lookup_name:
+			case group_lookup_id:
+				ent->type = lu_group;
+				break;
+			default:
+		}
+	}
+
 	return success;
 }
 

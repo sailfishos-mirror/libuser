@@ -7,14 +7,10 @@ include $(top_srcdir)/Makefile.extra
 LDFLAGS = @GLIB_LIBS@ -shared -module -export-dynamic --avoid-version
 
 libuser_files_so_SOURCES = \
-	files.c \
-	util.c \
-	util.h
+	files.c
 
 libuser_shadow_so_SOURCES = \
-	files.c \
-	util.c \
-	util.h
+	files.c
 
 libuser_krb5_so_SOURCES = \
 	krb5.c

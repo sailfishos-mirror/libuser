@@ -33,8 +33,7 @@
 int
 main(int argc, const char **argv)
 {
-	const char *name = NULL, *userPassword = NULL,
-		   *cryptedUserPassword = NULL;
+	const char *name = NULL;
 	long gidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
@@ -51,10 +50,6 @@ main(int argc, const char **argv)
 		 "gid to force for new group", "NUM"},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
 		 "make this a system group"},
-		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,
-		 "plaintext password for use with group", "STRING"},
-		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
-		 "pre-hashed password for use with group", "STRING"},
 		POPT_AUTOHELP
 	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
@@ -81,29 +76,11 @@ main(int argc, const char **argv)
 
 	ent = lu_ent_new();
 	lu_ent_group_default(ctx, name, system_account, ent);
+
 	if(gidNumber != -2) {
 		char *tmp = g_strdup_printf("%ld", gidNumber);
 		lu_ent_set(ent, LU_GIDNUMBER, tmp);
 		g_free(tmp);
-	}
-	if(userPassword) {
-		values = lu_ent_get(ent, LU_USERPASSWORD);
-		if(values && values->data) {
-			cryptedUserPassword = lu_make_crypted(userPassword,
-							      values->data);
-		} else {
-			cryptedUserPassword = lu_make_crypted(userPassword,
-							      "$1$");
-		}
-	}
-	if(cryptedUserPassword) {
-		char *tmp = NULL;
-		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_set(ent, LU_USERPASSWORD, tmp);
-		g_free(tmp);
-	}
-	if(userPassword) {
-		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
 	}
 
 	if(lu_group_add(ctx, ent) == FALSE) {

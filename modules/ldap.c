@@ -29,7 +29,6 @@
 #include <pwd.h>
 #include <ldap.h>
 #include <sasl.h>
-#include "util.h"
 
 #define LU_LDAP_SERVER		0
 #define LU_LDAP_BASEDN		1

@@ -190,11 +190,11 @@ main(int argc, const char **argv)
 
 		if(uid_string && (*uid_string != '\0')) {
 			fprintf(stderr, _("Bad UID for %s.\n"), name);
-			return 7;
+			return 4;
 		}
 		if(gid_string && (*gid_string != '\0')) {
 			fprintf(stderr, _("Bad GID for %s.\n"), name);
-			return 7;
+			return 5;
 		}
 
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
@@ -204,14 +204,14 @@ main(int argc, const char **argv)
 
 		if(homeDirectory == NULL) {
 			fprintf(stderr, _("No home directory for %s.\n"), name);
-			return 7;
+			return 6;
 		}
 #ifdef FIXMEFIXMEFIXME
 		if(populate_homedir(skeleton, homeDirectory,
 				    uid, gid, 0700) == FALSE) {
 			fprintf(stderr, _("Error creating %s.\n"),
 				homeDirectory);
-			return 8;
+			return 7;
 		}
 #endif
 	}

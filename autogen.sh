@@ -1,9 +1,9 @@
 #!/bin/sh
 WARNINGS="-Wall -Wimplicit -Wcast-align -Wpointer-arith -Wpointer-arith -Wmissing-prototypes"
 set -x
-CFLAGS="-g3 $WARNINGS" ; export CFLAGS
-aclocal
+CFLAGS="-g3 $WARNINGS $CFLAGS" ; export CFLAGS
 libtoolize --force
+aclocal
 automake -a
 autoheader
 autoconf

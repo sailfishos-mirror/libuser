@@ -138,27 +138,29 @@ main(int argc, const char **argv)
 	}
 
 	if(userPassword) {
-		cryptedUserPassword = lu_make_crypted(userPassword,
-						      values->data);
-	} else {
-		cryptedUserPassword = lu_make_crypted(userPassword, "");
+		if(lu_user_setpass(ctx, ent, userPassword) == NULL) {
+			fprintf(stderr, _("Failed to set password for user "
+					  "%s.\n"), user);
+			return 5;
+		}
 	}
 
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_set(ent, LU_USERPASSWORD, tmp);
+		if(lu_user_setpass(ctx, ent, tmp) == NULL) {
+			fprintf(stderr, _("Failed to set password for user "
+					  "%s.\n"), user);
+			return 6;
+		}
 		g_free(tmp);
-	}
-	if(userPassword) {
-		lu_user_setpass(ctx, ent, userPassword);
 	}
 
 	if(lock) {
 		if(lu_user_lock(ctx, ent) == FALSE) {
 			fprintf(stderr, _("User %s could not be locked.\n"),
 				user);
-			return 5;
+			return 7;
 		}
 	}
 
@@ -166,30 +168,30 @@ main(int argc, const char **argv)
 		if(lu_user_unlock(ctx, ent) == FALSE) {
 			fprintf(stderr, _("User %s could not be unlocked.\n"),
 				user);
-			return 6;
+			return 8;
 		}
 	}
 
 	if(change && (lu_user_modify(ctx, ent) == FALSE)) {
 		fprintf(stderr, _("User %s could not be modified.\n"), user);
-		return 7;
+		return 9;
 	}
 
 	if(change && move_home) {
 		if(oldHomeDirectory == NULL) {
 			fprintf(stderr, _("No old home directory for %s.\n"),
 				user);
-			return 8;
+			return 10;
 		}
 		if(homeDirectory == NULL) {
 			fprintf(stderr, _("No new home directory for %s.\n"),
 				user);
-			return 9;
+			return 11;
 		}
 		if(move_homedir(oldHomeDirectory, homeDirectory) == FALSE) {
 			fprintf(stderr, _("Error moving %s to %s.\n"),
 				oldHomeDirectory, homeDirectory);
-			return 10;
+			return 12;
 		}
 	}
 

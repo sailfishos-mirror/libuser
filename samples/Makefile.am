@@ -1,4 +1,4 @@
-noinst_PROGRAMS = lookup testuser prompt
+noinst_PROGRAMS = lookup testuser prompt field
 
 include $(top_srcdir)/Makefile.extra
 
@@ -12,3 +12,6 @@ testuser_SOURCES = \
 
 prompt_SOURCES = \
 	prompt.c
+
+field_SOURCES = \
+	field.c

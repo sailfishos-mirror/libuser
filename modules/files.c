@@ -25,16 +25,76 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include "util.h"
 
 /* We define __USE_GNU to get a definition for O_NOFOLLOW. */
 #define __USE_GNU
 #include <fcntl.h>
 
+/* Global symbols. */
 struct lu_module *
 lu_files_init(struct lu_context *context);
+
 struct lu_module *
 lu_shadow_init(struct lu_context *context);
+
+/* Guides for parsing and formatting entries in the files we're looking at.
+ * For formatting purposes, these are all arranged in order of ascending
+ * positions. */
+struct format_specifier {
+	int position;
+	const char *attribute;
+	const char *prefix;
+	const char *def;
+	gboolean multiple, suppress;
+};
+
+static const struct format_specifier
+format_passwd[] = {
+	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
+	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{3, LU_UIDNUMBER, NULL, NULL, FALSE, FALSE},
+	{4, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
+	{5, LU_GECOS, NULL, NULL, FALSE, FALSE},
+	{6, LU_HOMEDIRECTORY, NULL, NULL, FALSE, FALSE},
+	{7, LU_LOGINSHELL, NULL, NULL, FALSE, FALSE},
+};
+static const size_t
+format_passwd_elts = sizeof(format_passwd) / sizeof(format_passwd[0]);
+
+static const struct format_specifier
+format_group[] = {
+	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
+	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{3, LU_GIDNUMBER, NULL, NULL, TRUE, FALSE},
+	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
+};
+static const size_t
+format_group_elts = sizeof(format_group) / sizeof(format_group[0]);
+
+static const struct format_specifier
+format_shadow[] = {
+	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
+	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{3, LU_SHADOWLASTCHANGE, NULL, NULL, FALSE, FALSE},
+	{4, LU_SHADOWMIN, NULL, NULL, FALSE, FALSE},
+	{5, LU_SHADOWMAX, NULL, NULL, FALSE, FALSE},
+	{6, LU_SHADOWWARNING, NULL, NULL, FALSE, FALSE},
+	{7, LU_SHADOWINACTIVE, NULL, NULL, FALSE, FALSE},
+	{8, LU_SHADOWEXPIRE, NULL, NULL, FALSE, FALSE},
+	{9, LU_SHADOWFLAG, NULL, NULL, FALSE, FALSE},
+};
+static const size_t
+format_shadow_elts = sizeof(format_shadow) / sizeof(format_shadow[0]);
+
+static const struct format_specifier
+format_gshadow[] = {
+	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
+	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{3, LU_ADMINISTRATORUID, NULL, NULL, TRUE, FALSE},
+	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
+};
+static const size_t
+format_gshadow_elts = sizeof(format_gshadow) / sizeof(format_gshadow[0]);
 
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
@@ -43,7 +103,7 @@ lu_files_create_backup(const char *filename)
 	int ifd, ofd;
 	char *backupname;
 	struct stat ist, ost;
-	gpointer lock;
+	gpointer ilock, olock;
 	char buf[2048];
 	size_t len;
 
@@ -55,18 +115,30 @@ lu_files_create_backup(const char *filename)
 		g_warning(_("Couldn't open '%s'.\n"), filename);
 		return FALSE;
 	}
+	
+	ilock = lu_util_lock_obtain(ifd);
+	if(ilock == NULL) {
+		g_warning(_("Couldn't lock '%s'.\n"), filename);
+		g_free(backupname);
+		close(ifd);
+		return FALSE;
+	}
+
 	if(fstat(ifd, &ist) == -1) {
 		close(ifd);
 		g_warning(_("Couldn't stat '%s'.\n"), filename);
+		lu_util_lock_free(ifd, ilock);
+		close(ifd);
 		return FALSE;
 	}
 
 	backupname = g_strconcat(filename, "-", NULL);
-	ofd = open(backupname, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW,
+	ofd = open(backupname, O_WRONLY | O_CREAT | O_NOFOLLOW,
 		   ist.st_mode);
 	if(ofd == -1) {
 		g_warning(_("Couldn't create '%s'.\n"), backupname);
 		g_free(backupname);
+		lu_util_lock_free(ifd, ilock);
 		close(ifd);
 		return FALSE;
 	}
@@ -75,14 +147,19 @@ lu_files_create_backup(const char *filename)
 		g_warning(_("Couldn't stat or invalid permissions on '%s'.\n"),
 			  backupname);
 		g_free(backupname);
+		lu_util_lock_free(ifd, ilock);
+		close(ifd);
 		close(ofd);
 		return FALSE;
 	}
 
-	lock = lock_obtain(ofd);
-	if(lock == NULL) {
+	olock = lu_util_lock_obtain(ofd);
+	if(olock == NULL) {
 		g_warning(_("Couldn't lock '%s'.\n"), backupname);
 		g_free(backupname);
+		lu_util_lock_free(ifd, ilock);
+		close(ifd);
+		lu_util_lock_free(ofd, olock);
 		close(ofd);
 		return FALSE;
 	}
@@ -99,9 +176,16 @@ lu_files_create_backup(const char *filename)
 	if(fstat(ofd, &ost) == -1) {
 		g_warning(_("Couldn't stat '%s'.\n"), backupname);
 		g_free(backupname);
+		lu_util_lock_free(ifd, ilock);
+		close(ifd);
+		lu_util_lock_free(ofd, olock);
 		close(ofd);
 		return FALSE;
 	}
+
+	lu_util_lock_free(ifd, ilock);
+	close(ifd);
+	lu_util_lock_free(ofd, olock);
 	close(ofd);
 
 	if(ist.st_size != ost.st_size) {
@@ -113,38 +197,87 @@ lu_files_create_backup(const char *filename)
 	return TRUE;
 }
 
+/** Parse a string into an ent structure using the elements in the
+  * format specifier array. */
+static gboolean
+parse_generic(const gchar *line, const struct format_specifier *formats,
+	      size_t format_count, struct lu_ent *ent)
+{
+	int i;
+	int minimum = 1;
+	gchar **v = NULL;
+
+	/* Make sure the line is properly formatted, meaning that it has
+	 * enough fields in it for us to parse. */
+	for(i = 0; i < format_count; i++) {
+		minimum = MAX(minimum, formats[i].position);
+	}
+	v = g_strsplit(line, ":", format_count);
+	if(lu_strv_len(v) < minimum - 1) {
+		g_warning("entry is incorrectly formatted");
+		return FALSE;
+	}
+
+	/* Now parse out the fields. */
+	for(i = 0; i < format_count; i++) {
+		/* Some things we NEVER read. */
+		if(formats[i].suppress) {
+			continue;
+		}
+		if(formats[i].multiple) {
+			/* Multiple comma-separated values. */
+			gchar **w;
+			int j;
+			lu_ent_clear(ent, formats[i].attribute);
+			w = g_strsplit(v[formats[i].position - 1], ",", 0);
+			lu_ent_clear(ent, formats[i].attribute);
+			lu_ent_clear_original(ent, formats[i].attribute);
+			for(j = 0; (w != NULL) && (w[j] != NULL); j++) {
+				if(formats[i].prefix) {
+					char *p;
+					p = g_strconcat(formats[i].prefix,
+							w[j],
+							NULL);
+					lu_ent_add(ent,
+						   formats[i].attribute, p);
+					lu_ent_add_original(ent,
+							    formats[i].attribute, p);
+					g_free(p);
+				} else {
+					lu_ent_add(ent,
+						   formats[i].attribute, w[j]);
+					lu_ent_add_original(ent,
+							    formats[i].attribute, w[j]);
+				}
+			}
+			g_strfreev(w);
+		} else {
+			/* This is a single-value field. */
+			if(formats[i].prefix) {
+				char *p;
+				p = g_strconcat(formats[i].prefix,
+						v[formats[i].position - 1],
+						NULL);
+				lu_ent_set_original(ent, formats[i].attribute, p);
+				lu_ent_set(ent, formats[i].attribute, p);
+				g_free(p);
+			} else {
+				lu_ent_set_original(ent, formats[i].attribute,
+						    v[formats[i].position - 1] ?: "");
+				lu_ent_set(ent, formats[i].attribute,
+					   v[formats[i].position - 1] ?: "");
+			}
+		}
+	}
+	return TRUE;
+}
+
 /* Parse an entry from /etc/passwd into an ent structure, using the
  * attribute names we know. */
 static gboolean
 lu_files_parse_user_entry(const gchar *line, struct lu_ent *ent)
 {
-	gchar **v = NULL;
-	gchar *crypted = NULL, *tmp = NULL;
-
-	g_return_val_if_fail(line != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	v = g_strsplit(line, ":", 6);
-
-	if(lu_strv_len(v) < 6) {
-		g_warning("Passwd entry is incorrectly formatted.");
-		return FALSE;
-	}
-
-	lu_ent_set_original(ent, LU_USERNAME, v[0]);
-	tmp = g_strconcat("{crypt}", v[1], NULL);
-	crypted = ent->vcache->cache(ent->vcache, tmp);
-	g_free(tmp);
-	lu_ent_set_original(ent, LU_USERPASSWORD, crypted);
-	lu_ent_set_original(ent, LU_UIDNUMBER, v[2]);
-	lu_ent_set_original(ent, LU_GIDNUMBER, v[3]);
-	lu_ent_set_original(ent, LU_GECOS, v[4]);
-	lu_ent_set_original(ent, LU_HOMEDIRECTORY, v[5]);
-	lu_ent_set_original(ent, LU_LOGINSHELL, v[6] ? v[6] : "");
-
-	g_strfreev(v);
-
-	return TRUE;
+	return parse_generic(line, format_passwd, format_passwd_elts, ent);
 }
 
 /* Parse an entry from /etc/group into an ent structure, using the
@@ -152,38 +285,7 @@ lu_files_parse_user_entry(const gchar *line, struct lu_ent *ent)
 static gboolean
 lu_files_parse_group_entry(const gchar *line, struct lu_ent *ent)
 {
-	gchar **v = NULL;
-	gchar *p = NULL, *q = NULL;
-	gchar *crypted, *tmp;
-
-	g_return_val_if_fail(line != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	v = g_strsplit(line, ":", 3);
-
-	if(lu_strv_len(v) < 3) {
-		g_warning("Group entry is incorrectly formatted.");
-		return FALSE;
-	}
-
-	lu_ent_set_original(ent, LU_GROUPNAME, v[0]);
-	tmp = g_strconcat("{crypt}", v[1], NULL);
-	crypted = ent->vcache->cache(ent->vcache, tmp);
-	g_free(tmp);
-	lu_ent_set_original(ent, LU_USERPASSWORD, crypted);
-	lu_ent_set_original(ent, LU_GIDNUMBER, v[2] ? v[2] : "");
-
-	if(v[3] != NULL) {
-		for(p = strtok_r(v[3], ",", &q);
-		    p && *p;
-		    p = strtok_r(NULL, ",", &q)) {
-			lu_ent_add_original(ent, LU_MEMBERUID, p);
-		}
-	}
-
-	g_strfreev(v);
-
-	return TRUE;
+	return parse_generic(line, format_group, format_group_elts, ent);
 }
 
 /* Parse an entry from /etc/shadow into an ent structure, using the
@@ -191,35 +293,7 @@ lu_files_parse_group_entry(const gchar *line, struct lu_ent *ent)
 static gboolean
 lu_shadow_parse_user_entry(const gchar *line, struct lu_ent *ent)
 {
-	gchar **v = NULL;
-	gchar *crypted, *tmp;
-
-	g_return_val_if_fail(line != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	v = g_strsplit(line, ":", 8);
-
-	if(lu_strv_len(v) < 8) {
-		g_warning("User shadow entry is incorrectly formatted.");
-		return FALSE;
-	}
-
-	lu_ent_set_original(ent, LU_USERNAME, v[0]);
-	tmp = g_strconcat("{crypt}", v[1], NULL);
-	crypted = ent->vcache->cache(ent->vcache, tmp);
-	g_free(tmp);
-	lu_ent_set_original(ent, LU_USERPASSWORD, crypted);
-	lu_ent_set_original(ent, LU_SHADOWLASTCHANGE, v[2]);
-	lu_ent_set_original(ent, LU_SHADOWMIN, v[3]);
-	lu_ent_set_original(ent, LU_SHADOWMAX, v[4]);
-	lu_ent_set_original(ent, LU_SHADOWWARNING, v[5]);
-	lu_ent_set_original(ent, LU_SHADOWINACTIVE, v[6]);
-	lu_ent_set_original(ent, LU_SHADOWEXPIRE, v[7]);
-	lu_ent_set_original(ent, LU_SHADOWFLAG, v[8] ? v[8] : "");
-
-	g_strfreev(v);
-
-	return TRUE;
+	return parse_generic(line, format_shadow, format_shadow_elts, ent);
 }
 
 /* Parse an entry from /etc/shadow into an ent structure, using the
@@ -227,51 +301,13 @@ lu_shadow_parse_user_entry(const gchar *line, struct lu_ent *ent)
 static gboolean
 lu_shadow_parse_group_entry(const gchar *line, struct lu_ent *ent)
 {
-	gchar **v = NULL;
-	gchar *p, *q;
-	gchar *crypted, *tmp;
-
-	g_return_val_if_fail(line != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	v = g_strsplit(line, ":", 3);
-
-	if(lu_strv_len(v) < 3) {
-		g_warning("Group shadow entry is incorrectly formatted.");
-		return FALSE;
-	}
-
-	lu_ent_set_original(ent, LU_GROUPNAME, v[0]);
-	tmp = g_strconcat("{crypt}", v[1], NULL);
-	crypted = ent->vcache->cache(ent->vcache, tmp);
-	g_free(tmp);
-	lu_ent_set_original(ent, LU_USERPASSWORD, crypted);
-
-	if(v[2]) {
-		for(p = strtok_r(v[2], ",", &q);
-		    p && *p;
-		    p = strtok_r(NULL, ",", &q)) {
-			lu_ent_add_original(ent, LU_ADMINISTRATORUID, p);
-		}
-	}
-
-	if(v[3]) {
-		for(p = strtok_r(v[3], ",", &q);
-		    p && *p;
-		    p = strtok_r(NULL, ",", &q)) {
-			lu_ent_add_original(ent, LU_MEMBERUID, p);
-		}
-	}
-
-	g_strfreev(v);
-
-	return TRUE;
+	return parse_generic(line, format_gshadow, format_gshadow_elts, ent);
 }
 
 typedef gboolean (*parse_fn)(const gchar *line, struct lu_ent *ent);
 
 static gboolean
-generic_lookup(struct lu_module *module, const char *module_name,
+generic_lookup(struct lu_module *module,
 	       const char *base_name, gconstpointer name,
 	       parse_fn parser, int field, struct lu_ent *ent)
 {
@@ -282,8 +318,6 @@ generic_lookup(struct lu_module *module, const char *module_name,
 	char *line, *filename, *key;
 
 	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(module_name != NULL, FALSE);
-	g_return_val_if_fail(strlen(module_name) > 0, FALSE);
 	g_return_val_if_fail(base_name != NULL, FALSE);
 	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
 	g_return_val_if_fail(name != NULL, FALSE);
@@ -291,20 +325,20 @@ generic_lookup(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(field > 0, FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
 
-	key = g_strconcat(module_name, "/directory", NULL);
+	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
 	fd = open(filename, O_RDONLY);
 	if(fd != -1) {
-		lock = lock_obtain(fd);
-		line = get_matching_linex(fd, (char*) name, field);
+		lock = lu_util_lock_obtain(fd);
+		line = lu_util_line_get_matchingx(fd, (char*) name, field);
 		if(line != NULL) {
 			ret = parser(line, ent);
 			g_free(line);
 		}
-		lock_free(fd, lock);
+		lu_util_lock_free(fd, lock);
 		close(fd);
 	}
 
@@ -317,7 +351,7 @@ static gboolean
 lu_files_user_lookup_name(struct lu_module *module,
 		          gconstpointer name, struct lu_ent *ent)
 {
-	return generic_lookup(module, "files", "passwd", name,
+	return generic_lookup(module, "passwd", name,
 			      lu_files_parse_user_entry, 1, ent);
 }
 
@@ -328,7 +362,7 @@ lu_files_user_lookup_id(struct lu_module *module,
 	char *key;
 	gboolean ret = FALSE;
 	key = g_strdup_printf("%d", GPOINTER_TO_INT(id));
-	ret = generic_lookup(module, "files", "passwd", key,
+	ret = generic_lookup(module, "passwd", key,
 			     lu_files_parse_user_entry, 3, ent);
 	g_free(key);
 	return ret;
@@ -338,7 +372,7 @@ static gboolean
 lu_shadow_user_lookup_name(struct lu_module *module,
 		           gconstpointer name, struct lu_ent *ent)
 {
-	return generic_lookup(module, "shadow", "shadow", name,
+	return generic_lookup(module, "shadow", name,
 			      lu_shadow_parse_user_entry, 1, ent);
 }
 
@@ -354,7 +388,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 	if(ret) {
 		values = lu_ent_get(ent, LU_USERNAME);
 		if(values && values->data) {
-			ret = generic_lookup(module, "shadow", "shadow",
+			ret = generic_lookup(module, "shadow",
 					     values->data,
 					     lu_shadow_parse_user_entry,
 					     1, ent);
@@ -368,7 +402,7 @@ static gboolean
 lu_files_group_lookup_name(struct lu_module *module,
 			   gconstpointer name, struct lu_ent *ent)
 {
-	return generic_lookup(module, "files", "group", name,
+	return generic_lookup(module, "group", name,
 			      lu_files_parse_group_entry, 1, ent);
 }
 
@@ -379,7 +413,7 @@ lu_files_group_lookup_id(struct lu_module *module,
 	char *key;
 	gboolean ret = FALSE;
 	key = g_strdup_printf("%d", GPOINTER_TO_INT(id));
-	ret = generic_lookup(module, "files", "group", key,
+	ret = generic_lookup(module, "group", key,
 			     lu_files_parse_group_entry, 3, ent);
 	g_free(key);
 	return ret;
@@ -389,7 +423,7 @@ static gboolean
 lu_shadow_group_lookup_name(struct lu_module *module,
 			    gconstpointer name, struct lu_ent *ent)
 {
-	return generic_lookup(module, "shadow", "gshadow", name,
+	return generic_lookup(module, "gshadow", name,
 			      lu_shadow_parse_group_entry, 1, ent);
 }
 
@@ -405,7 +439,7 @@ lu_shadow_group_lookup_id(struct lu_module *module,
 	if(ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
 		if(values && values->data) {
-			ret = generic_lookup(module, "shadow", "gshadow",
+			ret = generic_lookup(module, "gshadow",
 					     values->data,
 					     lu_shadow_parse_group_entry,
 					     1, ent);
@@ -415,238 +449,144 @@ lu_shadow_group_lookup_id(struct lu_module *module,
 	return ret;
 }
 
+/* Format a line for the user/group, using the information in ent, using
+ * formats to guide the formatting. */
+static char *
+format_generic(struct lu_ent *ent, const struct format_specifier *formats,
+	       size_t format_count)
+{
+	GList *l;
+	char *ret = NULL, *p;
+	int i, j;
+
+	g_return_val_if_fail(ent != NULL, NULL);
+
+	for(i = 0; i < format_count; i++) {
+		/* Add a separator if we need to. */
+		if(i > 0) {
+			j = formats[i].position - formats[i - 1].position;
+			while(j-- > 0) {
+				p = g_strconcat(":", ret, NULL);
+				if(ret) {
+					g_free(ret);
+				}
+				ret = p;
+			}
+		}
+		/* Get the attribute data. */
+		l = lu_ent_get(ent, formats[i].attribute);
+		if(l == NULL) {
+			/* Check for a default value. */
+			if(formats[i].def != NULL) {
+				/* Use the default listed in the format
+				 * specifier. */
+				l = g_list_append(g_list_alloc(),
+						  formats[i].def);
+			} else {
+				/* Wrong, wrong, wrong.  This combination
+				 * (no value and no default value) should
+				 * never happen. */
+				g_warning("No data set for a `%s' attribute!",
+					  formats[i].attribute);
+				if(ret) {
+					g_free(ret);
+				}
+				g_return_val_if_fail(l != NULL, NULL);
+			}
+		}
+		if(!formats[i].multiple) {
+			/* It's a single-item entry, add it. */
+			if(l != NULL) {
+				p = (char*)l->data;
+				if(p == NULL) {
+					p = "";
+				}
+				/* If there's a prefix, strip it. */
+				if(formats[i].prefix) {
+					if(strncmp(p, formats[i].prefix,
+						   strlen(formats[i].prefix)) == 0) {
+						p += strlen(formats[i].prefix);
+					}
+				}
+				/* Tack the data onto the end. */
+				p = g_strconcat(ret, p, NULL);
+				if(ret) {
+					g_free(ret);
+				}
+				ret = p;
+			}
+		} else {
+			/* Separate data with a comma after the first datum. */
+			gboolean postfirst = FALSE;
+			while(l != NULL) {
+				p = (char*)l->data;
+				if(p == NULL) {
+					p = "";
+				}
+				/* If there's a prefix, strip it. */
+				if(formats[i].prefix) {
+					if(strncmp(p, formats[i].prefix,
+						   strlen(formats[i].prefix)) == 0) {
+						p += strlen(formats[i].prefix);
+					}
+				}
+				/* Tack the data onto the end. */
+				p = g_strconcat(ret,
+						postfirst ? "," : "",
+						p, NULL);
+				if(ret) {
+					g_free(ret);
+				}
+				ret = p;
+
+				/* Go on to the next data item. */
+				l = g_list_next(l);
+				postfirst = TRUE;
+			}
+		}
+	}
+	p = g_strconcat(ret, "\n", NULL);
+	if(ret) {
+		g_free(ret);
+	}
+	ret = p;
+
+	return ret;
+}
+
 /* Create a line for /etc/passwd using data in the lu_ent structure. */
 static char *
 lu_files_format_user(struct lu_ent *ent)
 {
-	GList *uid = NULL, *userPassword = NULL, *uidNumber = NULL,
-	      *gidNumber = NULL, *gecos = NULL, *loginShell = NULL,
-	      *homeDirectory = NULL, *i = NULL;
-	char *line = NULL, *userPasswordString = NULL, *tmp = NULL;
-
-	g_return_val_if_fail(ent != NULL, NULL);
-
-	uid = lu_ent_get(ent, LU_USERNAME);
-	g_return_val_if_fail(uid != NULL, NULL);
-	userPassword = lu_ent_get(ent, LU_USERPASSWORD);
-	g_return_val_if_fail(userPassword != NULL, NULL);
-	uidNumber = lu_ent_get(ent, LU_UIDNUMBER);
-	g_return_val_if_fail(uidNumber != NULL, NULL);
-	gidNumber = lu_ent_get(ent, LU_GIDNUMBER);
-	g_return_val_if_fail(gidNumber != NULL, NULL);
-	gecos = lu_ent_get(ent, LU_GECOS);
-	g_return_val_if_fail(gecos != NULL, NULL);
-	homeDirectory = lu_ent_get(ent, LU_HOMEDIRECTORY);
-	g_return_val_if_fail(homeDirectory != NULL, NULL);
-	loginShell = lu_ent_get(ent, LU_LOGINSHELL);
-	g_return_val_if_fail(loginShell != NULL, NULL);
-
-	userPasswordString = userPassword->data;
-	for(i = userPassword; i; i = g_list_next(i)) {
-		if(strncmp(i->data, "{crypt}", 7) == 0) {
-			userPasswordString = ((char*)i->data) + 7;
-		}
-	}
-
-	if((uid != NULL) && (uid->data != NULL) &&
-	   (userPasswordString != NULL) &&
-	   (uidNumber != NULL) && (uidNumber->data != NULL) &&
-	   (gidNumber != NULL) && (gidNumber->data != NULL) &&
-	   (gecos != NULL) && (gecos->data != NULL) &&
-	   (homeDirectory != NULL) && (homeDirectory->data != NULL)) {
-		tmp = g_strdup_printf("%s:%s:%s:%s:%s:%s:%s\n",
-				      (char*) uid->data,
-				      (char*) userPasswordString,
-				      (char*) uidNumber->data,
-				      (char*) gidNumber->data,
-				      (char*) gecos->data,
-				      (char*) homeDirectory->data,
-				      (char*) loginShell->data);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-	}
-
-	return line;
+	return format_generic(ent, format_passwd, format_passwd_elts);
 }
 
 /* Create a line for /etc/group using data in the lu_ent structure. */
 static char *
 lu_files_format_group(struct lu_ent *ent)
 {
-	GList *gid = NULL, *userPassword = NULL,
-	      *gidNumber = NULL, *memberUid = NULL, *l = NULL;
-	char *line = NULL, *tmp = NULL, *userPasswordString = NULL;
-	int i;
-
-	g_return_val_if_fail(ent != NULL, NULL);
-
-	gid = lu_ent_get(ent, LU_GROUPNAME);
-	userPassword = lu_ent_get(ent, LU_USERPASSWORD);
-	g_return_val_if_fail(userPassword != NULL, NULL);
-	gidNumber = lu_ent_get(ent, LU_GIDNUMBER);
-	g_return_val_if_fail(gidNumber != NULL, NULL);
-	memberUid = lu_ent_get(ent, LU_MEMBERUID);
-
-	userPasswordString = userPassword->data;
-	for(l = userPassword; l; l = g_list_next(l)) {
-		if(strncmp(l->data, "{crypt}", 7) == 0) {
-			userPasswordString = ((char*)l->data) + 7;
-		}
-	}
-
-	if((gid != NULL) && (gid->data != NULL) &&
-	   (userPasswordString != NULL) &&
-	   (gidNumber != NULL) && (gidNumber->data != NULL)) {
-		tmp = g_strdup_printf("%s:%s:%s:",
-				      (char*) gid->data,
-				      (char*) userPasswordString,
-				      (char*) gidNumber->data);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-
-		for(i = 0; memberUid && g_list_nth(memberUid, i); i++) {
-			l = g_list_nth(memberUid, i);
-			tmp = g_strconcat(line, i ? "," : "", l->data, NULL);
-			line = ent->vcache->cache(ent->vcache, tmp);
-			g_free(tmp);
-		}
-
-		tmp = g_strconcat(line, "\n", NULL);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-	}
-
-	return line;
+	return format_generic(ent, format_group, format_group_elts);
 }
 
 /* Create a line for /etc/shadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_user(struct lu_ent *ent)
 {
-	GList *uid = NULL, *userPassword = NULL, *shadowLastChange = NULL,
-	      *shadowMin = NULL, *shadowMax = NULL, *shadowWarning = NULL,
-	      *shadowInactive = NULL, *shadowExpire = NULL, *shadowFlag = NULL,
-	      *i = NULL;
-	char *userPasswordString = NULL, *line = NULL, *tmp = NULL;
-
-	g_return_val_if_fail(ent != NULL, NULL);
-
-	uid = lu_ent_get(ent, LU_USERNAME);
-	g_return_val_if_fail(uid != NULL, NULL);
-	userPassword = lu_ent_get(ent, LU_USERPASSWORD);
-	g_return_val_if_fail(userPassword != NULL, NULL);
-	shadowLastChange = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
-	g_return_val_if_fail(shadowLastChange != NULL, NULL);
-	shadowMin = lu_ent_get(ent, LU_SHADOWMIN);
-	g_return_val_if_fail(shadowMin != NULL, NULL);
-	shadowMax = lu_ent_get(ent, LU_SHADOWMAX);
-	g_return_val_if_fail(shadowMax != NULL, NULL);
-	shadowWarning = lu_ent_get(ent, LU_SHADOWWARNING);
-	g_return_val_if_fail(shadowWarning != NULL, NULL);
-	shadowInactive = lu_ent_get(ent, LU_SHADOWINACTIVE);
-	g_return_val_if_fail(shadowInactive != NULL, NULL);
-	shadowExpire = lu_ent_get(ent, LU_SHADOWEXPIRE);
-	g_return_val_if_fail(shadowExpire != NULL, NULL);
-	shadowFlag = lu_ent_get(ent, LU_SHADOWFLAG);
-	g_return_val_if_fail(shadowFlag != NULL, NULL);
-
-	userPasswordString = userPassword->data;
-	for(i = userPassword; i; i = g_list_next(i)) {
-		if(strncmp(i->data, "{crypt}", 7) == 0) {
-			userPasswordString = ((char*)i->data) + 7;
-		}
-	}
-
-	if((uid != NULL) && (uid->data != NULL) &&
-	   (userPasswordString != NULL) &&
-	   (shadowLastChange != NULL) && (shadowLastChange->data != NULL) &&
-	   (shadowMin != NULL) && (shadowMin->data != NULL) &&
-	   (shadowMax != NULL) && (shadowMax->data != NULL) &&
-	   (shadowWarning != NULL) && (shadowWarning->data != NULL) &&
-	   (shadowInactive != NULL) && (shadowInactive->data != NULL) &&
-	   (shadowExpire != NULL) && (shadowExpire->data != NULL)) {
-		tmp = g_strdup_printf("%s:%s:%s:%s:%s:%s:%s:%s:%s\n",
-				      (char*) uid->data,
-				      (char*) userPasswordString,
-				      (char*) shadowLastChange->data,
-				      (char*) shadowMin->data,
-				      (char*) shadowMax->data,
-				      (char*) shadowWarning->data,
-				      (char*) shadowInactive->data,
-				      (char*) shadowExpire->data,
-				      (char*) shadowFlag->data);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-	}
-
-	return line;
+	return format_generic(ent, format_shadow, format_shadow_elts);
 }
 
 /* Create a line for /etc/gshadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_group(struct lu_ent *ent)
 {
-	GList *gid = NULL, *userPassword = NULL, *administratorUid = NULL,
-	      *memberUid = NULL, *l = NULL;
-	char *line = NULL, *userPasswordString = NULL, *tmp = NULL;
-	int i;
-
-	g_return_val_if_fail(ent != NULL, NULL);
-
-	gid = lu_ent_get(ent, LU_GROUPNAME);
-	g_return_val_if_fail(gid != NULL, NULL);
-	userPassword = lu_ent_get(ent, LU_USERPASSWORD);
-	g_return_val_if_fail(userPassword != NULL, NULL);
-	administratorUid = lu_ent_get(ent, LU_ADMINISTRATORUID);
-	memberUid = lu_ent_get(ent, LU_MEMBERUID);
-
-	userPasswordString = userPassword->data;
-	for(l = userPassword; l; l = g_list_next(l)) {
-		if(strncmp(l->data, "{crypt}", 7) == 0) {
-			userPasswordString = ((char*)l->data) + 7;
-		}
-	}
-
-	if((gid != NULL) && (gid->data != NULL) &&
-	   (userPasswordString != NULL)) {
-		line = g_strdup_printf("%s:%s:",
-				       (char*) gid->data,
-				       (char*) userPasswordString);
-
-		for(i = 0;
-		    administratorUid && g_list_nth(administratorUid, i);
-		    i++) {
-			l = g_list_nth(administratorUid, i);
-			tmp = g_strconcat(line, i ? "," : "", l->data, NULL);
-			line = ent->vcache->cache(ent->vcache, tmp);
-			g_free(tmp);
-		}
-
-		tmp = g_strconcat(line, ":", NULL);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-
-		for(i = 0;
-		    memberUid && g_list_nth(memberUid, i);
-		    i++) {
-			l = g_list_nth(memberUid, i);
-			tmp = g_strconcat(line, i ? "," : "", l->data, NULL);
-			line = ent->vcache->cache(ent->vcache, tmp);
-			g_free(tmp);
-		}
-
-		tmp = g_strconcat(line, "\n", NULL);
-		line = ent->vcache->cache(ent->vcache, tmp);
-		g_free(tmp);
-	}
-	return line;
+	return format_generic(ent, format_gshadow, format_gshadow_elts);
 }
 
 typedef char * (*format_fn)(struct lu_ent *ent);
 
 static gboolean
-generic_add(struct lu_module *module, const char *module_name,
-	    const char *base_name, format_fn formatter, struct lu_ent *ent)
+generic_add(struct lu_module *module, const char *base_name,
+	    format_fn formatter, struct lu_ent *ent)
 {
 	const char *dir;
 	char *key, *line, *filename, *contents;
@@ -657,14 +597,12 @@ generic_add(struct lu_module *module, const char *module_name,
 	gboolean ret = FALSE;
 
 	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(module_name != NULL, FALSE);
-	g_return_val_if_fail(strlen(module_name) > 0, FALSE);
 	g_return_val_if_fail(base_name != NULL, FALSE);
 	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
 	g_return_val_if_fail(formatter != NULL, FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
 
-	key = g_strconcat(module_name, "/directory", NULL);
+	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
@@ -673,7 +611,7 @@ generic_add(struct lu_module *module, const char *module_name,
 
 	fd = open(filename, O_RDWR);
 	if(fd != -1) {
-		lock = lock_obtain(fd);
+		lock = lu_util_lock_obtain(fd);
 		if(fstat(fd, &st) != -1) {
 			line = formatter(ent);
 			contents = g_malloc0(st.st_size + 1 + strlen(line) + 1);
@@ -702,7 +640,7 @@ generic_add(struct lu_module *module, const char *module_name,
 			}
 			g_free(contents);
 		}
-		lock_free(fd, lock);
+		lu_util_lock_free(fd, lock);
 		close(fd);
 	}
 	g_free(filename);
@@ -713,14 +651,13 @@ generic_add(struct lu_module *module, const char *module_name,
 static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_add(module, "files", "passwd",
-			   lu_files_format_user, ent);
+	return generic_add(module, "passwd", lu_files_format_user, ent);
 }
 
 static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_add(module, "shadow", "shadow",
+	gboolean ret = generic_add(module, "shadow",
 				   lu_shadow_format_user, ent);
 	if(ret) {
 		/* Set the password in this structure so that a subsequent
@@ -733,14 +670,13 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent)
 static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_add(module, "files", "group",
-			   lu_files_format_group, ent);
+	return generic_add(module, "group", lu_files_format_group, ent);
 }
 
 static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_add(module, "shadow", "gshadow",
+	gboolean ret = generic_add(module, "gshadow",
 				   lu_shadow_format_group, ent);
 	if(ret) {
 		/* Set the password in this structure so that a subsequent
@@ -751,33 +687,46 @@ lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
-generic_mod(struct lu_module *module, const char *module_name,
-	    const char *base_name, format_fn formatter, struct lu_ent *ent)
+generic_mod(struct lu_module *module, const char *base_name,
+	    const struct format_specifier *formats, size_t format_count,
+	    struct lu_ent *ent)
 {
-	char *filename = NULL, *line = NULL, *contents = NULL, *key = NULL;
-	struct stat st;
+	char *filename = NULL, *key = NULL;
 	int fd = -1;
+	int i;
 	const char *dir = NULL;
-	GList *name = NULL;
+	char *p, *q, *new_value;
+	GList *name = NULL, *values = NULL, *l;
 	gboolean ret = FALSE;
 	gpointer lock = NULL;
 
 	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(module_name != NULL, FALSE);
-	g_return_val_if_fail(strlen(module_name) > 0, FALSE);
 	g_return_val_if_fail(base_name != NULL, FALSE);
 	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
-	g_return_val_if_fail(formatter != NULL, FALSE);
+	g_return_val_if_fail(formats != NULL, FALSE);
+	g_return_val_if_fail(format_count > 0, FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
+			     FALSE);
 
-	if(ent->type == lu_user)
+	if(ent->type == lu_user) {
 		name = lu_ent_get_original(ent, LU_USERNAME);
-	if(ent->type == lu_group)
+		if(name == NULL) {
+			g_warning("entity object has no %s attribute",
+				  LU_USERNAME);
+		}
+	}
+	if(ent->type == lu_group) {
 		name = lu_ent_get_original(ent, LU_GROUPNAME);
+		if(name == NULL) {
+			g_warning("entity object has no %s attribute",
+				  LU_GROUPNAME);
+		}
+	}
 	g_return_val_if_fail(name != NULL, FALSE);
 	g_return_val_if_fail(name->data != NULL, FALSE);
 
-	key = g_strconcat(module_name, "/directory", NULL);
+	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
@@ -786,55 +735,60 @@ generic_mod(struct lu_module *module, const char *module_name,
 
 	fd = open(filename, O_RDWR);
 	if(fd != -1) {
-		lock = lock_obtain(fd);
-		if(fstat(fd, &st) != -1) {
-			line = formatter(ent);
-			contents = g_malloc0(st.st_size + 1 + strlen(line) + 1);
-			if(line && strchr(line, ':')) {
-				char *namestr, *fragment1, *fragment2;
-				namestr = name->data;
-				fragment1 = g_strconcat(namestr, ":", NULL);
-				fragment2 = g_strconcat("\n", fragment1, NULL);
-				if(read(fd, contents, st.st_size) == st.st_size) {
-					lseek(fd, 0, SEEK_SET);
-					if(strncmp(contents, fragment1, strlen(fragment1)) == 0) {
-						/* At the very beginning. */
-						if(strchr(contents, '\n')) {
-							char *p = strchr(contents, '\n') + 1;
-							/* Replace the first line. */
-							memmove(contents + strlen(line), p, strlen(contents) + 1);
-							memcpy(contents, line, strlen(line));
-						} else {
-							/* Replace the only line. */
-							strcpy(contents, line);
-						}
-					} else
-					if(strstr(contents, fragment2)) {
-						/* On a subsequent line. */
-						char *p = strstr(contents, fragment2) + 1;
-						char *q = strchr(p, '\n');
-						if(q) {
-							/* Replace the nth line. */
-							q++;
-							memmove(p + strlen(line), q, strlen(contents) + 1 - (q - contents));
-							memcpy(p, line, strlen(line));
-
-						} else {
-							/* Replace the last line. */
-							strcpy(p, line);
-						}
-					}
-					if(write(fd, contents, strlen(contents)) == strlen(contents)) {
-						ftruncate(fd, strlen(contents));
-						ret = TRUE;
+		lock = lu_util_lock_obtain(fd);
+		for(i = 0; i < format_count; i++) {
+			if(formats[i].suppress) {
+				continue;
+			}
+			values = lu_ent_get(ent, formats[i].attribute);
+			if(!formats[i].multiple) {
+				p = (char*)values->data;
+				if(p == NULL) {
+					p = "";
+				}
+				/* If there's a prefix, strip it. */
+				if(formats[i].prefix) {
+					if(strncmp(p, formats[i].prefix,
+						   strlen(formats[i].prefix)) == 0) {
+						p += strlen(formats[i].prefix);
 					}
 				}
-				g_free(fragment1);
-				g_free(fragment2);
+				/* Make a copy of the data. */
+				new_value = g_strdup(p);
+			} else {
+				for(l = values, new_value = NULL;
+				    l && l->data;
+				    l = g_list_next(l)) {
+					p = l->data;
+					/* If there's a prefix, strip it. */
+					if(formats[i].prefix) {
+						if(strncmp(p, formats[i].prefix,
+							   strlen(formats[i].prefix)) == 0) {
+							p += strlen(formats[i].prefix);
+						}
+					}
+					if(new_value) {
+						q = g_strconcat(new_value, ",",
+								NULL);
+					} else {
+						q = "";
+					}
+					q = g_strconcat(q, p, NULL);
+					if(new_value) {
+						g_free(new_value);
+					}
+					new_value = q;
+				}
 			}
-			g_free(contents);
+			ret = lu_util_field_write(fd, (const char*)name->data,
+						  formats[i].position,
+						  new_value);
+			g_free(new_value);
+			if(ret != TRUE) {
+				break;
+			}
 		}
-		lock_free(fd, lock);
+		lu_util_lock_free(fd, lock);
 		close(fd);
 	}
 
@@ -846,20 +800,22 @@ generic_mod(struct lu_module *module, const char *module_name,
 static gboolean
 lu_files_user_mod(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_mod(module, "files", "passwd", lu_files_format_user, ent);
+	return generic_mod(module, "passwd",
+			   format_passwd, format_passwd_elts, ent);
 }
 
 static gboolean
 lu_files_group_mod(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_mod(module, "files", "group", lu_files_format_group, ent);
+	return generic_mod(module, "group",
+			   format_group, format_group_elts, ent);
 }
 
 static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_mod(module, "shadow", "shadow",
-				   lu_shadow_format_user, ent);
+	gboolean ret = generic_mod(module, "shadow",
+				   format_shadow, format_shadow_elts, ent);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
@@ -869,8 +825,8 @@ lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent)
 static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_mod(module, "shadow", "gshadow",
-				   lu_shadow_format_group, ent);
+	gboolean ret = generic_mod(module, "gshadow",
+				   format_gshadow, format_gshadow_elts, ent);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
@@ -878,8 +834,7 @@ lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
-generic_del(struct lu_module *module, const char *module_name,
-	    const char *base_name, struct lu_ent *ent)
+generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent)
 {
 	GList *name = NULL;
 	char *contents = NULL, *filename = NULL, *line, *key = NULL, *tmp;
@@ -896,13 +851,11 @@ generic_del(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(name != NULL, FALSE);
 
 	g_return_val_if_fail(module != NULL, FALSE);
-	g_return_val_if_fail(module_name != NULL, FALSE);
-	g_return_val_if_fail(strlen(module_name) > 0, FALSE);
 	g_return_val_if_fail(base_name != NULL, FALSE);
 	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
 
-	key = g_strconcat(module_name, "/directory", NULL);
+	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
@@ -911,7 +864,7 @@ generic_del(struct lu_module *module, const char *module_name,
 
 	fd = open(filename, O_RDWR);
 	if(fd != -1) {
-		lock = lock_obtain(fd);
+		lock = lu_util_lock_obtain(fd);
 		if(fstat(fd, &st) != -1) {
 			contents = g_malloc0(st.st_size + 1);
 			if(read(fd, contents, st.st_size) == st.st_size) {
@@ -940,7 +893,7 @@ generic_del(struct lu_module *module, const char *module_name,
 			}
 			g_free(contents);
 		}
-		lock_free(fd, lock);
+		lu_util_lock_free(fd, lock);
 		close(fd);
 	}
 	g_free(filename);
@@ -951,19 +904,19 @@ generic_del(struct lu_module *module, const char *module_name,
 static gboolean
 lu_files_user_del(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_del(module, "files", "passwd", ent);
+	return generic_del(module, "passwd", ent);
 }
 
 static gboolean
 lu_files_group_del(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_del(module, "files", "group", ent);
+	return generic_del(module, "group", ent);
 }
 
 static gboolean
 lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_del(module, "shadow", "shadow", ent);
+	gboolean ret = generic_del(module, "shadow", ent);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
@@ -973,84 +926,84 @@ lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent)
 static gboolean
 lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent)
 {
-	gboolean ret = generic_del(module, "shadow", "gshadow", ent);
+	gboolean ret = generic_del(module, "gshadow", ent);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
 	return ret;
 }
 
+/** Return the "locked" or "unlocked" version of the cryptedPassword string,
+  * depending on whether or not lock is true. */
 static char *
-lock_process(const char *cryptedPassword, gboolean lock, struct lu_ent *ent)
+lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
 {
 	char *ret = NULL;
-	if(strncmp(cryptedPassword, "{crypt}", 7) == 0) {
-		if(lock) {
-			if(cryptedPassword[7] != '!') {
-				cryptedPassword = g_strconcat("{crypt}!",
-							      cryptedPassword + 7,
-							      NULL);
-				ret = ent->vcache->cache(ent->vcache, cryptedPassword);
-				g_free((char*)cryptedPassword);
-			}
+	if(lock) {
+		if(cryptedPassword[0] != '!') {
+			cryptedPassword = g_strconcat("!", cryptedPassword,
+						      NULL);
+			ret = ent->vcache->cache(ent->vcache, cryptedPassword);
+			g_free((char*)cryptedPassword);
 		} else {
-			if(cryptedPassword[7] == '!') {
-				cryptedPassword = g_strconcat("{crypt}",
-							      cryptedPassword +
-							      8,
-							      NULL);
-				ret = ent->vcache->cache(ent->vcache,
-							 cryptedPassword);
-				g_free((char*)cryptedPassword);
-			}
+			ret = cryptedPassword;
 		}
-	} 
+	} else {
+		if(cryptedPassword[0] == '!') {
+			ret = ent->vcache->cache(ent->vcache,
+						 cryptedPassword + 1);
+		} else {
+			ret = cryptedPassword;
+		}
+	}
 	return ret;
 }
 
 static gboolean
-generic_lock(struct lu_module *module, const char *module_name,
-	     const char *base_name, struct lu_ent *ent,
-	     format_fn formatter, gboolean lock)
+generic_lock(struct lu_module *module, const char *base_name, int field,
+	     struct lu_ent *ent, gboolean lock_or_not)
 {
+	GList *name = NULL;
+	char *filename = NULL, *key = NULL;
+	const char *dir;
+	int fd = -1;
+	gpointer lock = NULL;
 	gboolean ret = FALSE;
-	struct lu_ent *tmp = NULL;
-	GList *i = NULL, *add_list = NULL, *remove_list = NULL;
-	char *cryptedPassword = NULL;
 
-	tmp = lu_ent_new();
-	lu_ent_copy(ent, tmp);
+	if(ent->type == lu_user)
+		name = lu_ent_get_original(ent, LU_USERNAME);
+	if(ent->type == lu_group)
+		name = lu_ent_get_original(ent, LU_GROUPNAME);
+	g_return_val_if_fail(name != NULL, FALSE);
 
-	for(i = lu_ent_get(tmp, LU_USERPASSWORD); i; i = g_list_next(i)) {
-		if(i->data) {
-			if(strncmp(i->data, "{crypt}", 7) == 0) {
-				cryptedPassword = lock_process((char*)i->data,
-							       lock, ent);
-				if(cryptedPassword) {
-					remove_list = g_list_append(remove_list,
-								    i->data);
-					add_list = g_list_append(add_list,
-								 cryptedPassword);
-				}
-			}
+	g_return_val_if_fail(module != NULL, FALSE);
+	g_return_val_if_fail(base_name != NULL, FALSE);
+	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
+	g_free(key);
+
+	g_return_val_if_fail(lu_files_create_backup(filename), FALSE);
+
+	fd = open(filename, O_RDWR);
+	if(fd != -1) {
+		lock = lu_util_lock_obtain(fd);
+		if(lock != NULL) {
+			char *value, *new_value;
+			value = lu_util_field_read(fd, (const char*)name->data,
+						   field);
+			new_value = lock_process(value, lock_or_not, ent);
+			ret = lu_util_field_write(fd, (const char*)name->data,
+						  field, new_value);
 		}
 	}
-	for(i = remove_list; i; i = g_list_next(i)) {
-		lu_ent_del(tmp, LU_USERPASSWORD, i->data);
-	}
-	for(i = add_list; i; i = g_list_next(i)) {
-		lu_ent_add_original(tmp, LU_USERPASSWORD, i->data);
-	}
 
-	if(g_list_length(add_list) > 0) {
-		ret = generic_mod(module, module_name, base_name,
-				  formatter, tmp);
-	}
+	close(fd);
 
-	g_list_free(add_list);
-	g_list_free(remove_list);
-
-	lu_ent_free(tmp);
+	g_free(filename);
 
 	return ret;
 }
@@ -1058,89 +1011,128 @@ generic_lock(struct lu_module *module, const char *module_name,
 static gboolean
 lu_files_user_lock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "files", "passwd", ent,
-			    lu_files_format_user, TRUE);
-}
-
-static gboolean
-lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
-		      const char *password)
-{
-	/* FIXME */
-	return FALSE;
+	return generic_lock(module, "passwd", 2, ent, TRUE);
 }
 
 static gboolean
 lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "files", "passwd", ent,
-			    lu_files_format_user, FALSE);
+	return generic_lock(module, "passwd", 2, ent, FALSE);
 }
 
 static gboolean
 lu_files_group_lock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "files", "group", ent,
-			    lu_files_format_group, TRUE);
+	return generic_lock(module, "group", 2, ent, TRUE);
 }
 
 static gboolean
 lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "files", "group", ent,
-			    lu_files_format_group, FALSE);
-}
-
-static gboolean
-lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
-		       const char *password)
-{
-	/* FIXME */
-	return FALSE;
+	return generic_lock(module, "group", 2, ent, FALSE);
 }
 
 static gboolean
 lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "shadow", "shadow", ent,
-			    lu_shadow_format_user, TRUE);
+	return generic_lock(module, "shadow", 2, ent, TRUE);
 }
 
 static gboolean
 lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent)
 {
-	return generic_lock(module, "shadow", "shadow", ent,
-			    lu_shadow_format_user, FALSE);
+	return generic_lock(module, "shadow", 2, ent, FALSE);
+}
+
+static gboolean
+lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent)
+{
+	return generic_lock(module, "gshadow", 2, ent, TRUE);
+}
+
+static gboolean
+lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent)
+{
+	return generic_lock(module, "gshadow", 2, ent, FALSE);
+}
+
+static gboolean
+generic_setpass(struct lu_module *module,
+		const char *base_name, int field,
+		struct lu_ent *ent, const char *password)
+{
+	GList *name = NULL;
+	char *filename = NULL, *key = NULL;
+	const char *dir;
+	int fd = -1;
+	gpointer lock = NULL;
+	gboolean ret = FALSE;
+
+	if(ent->type == lu_user)
+		name = lu_ent_get_original(ent, LU_USERNAME);
+	if(ent->type == lu_group)
+		name = lu_ent_get_original(ent, LU_GROUPNAME);
+	g_return_val_if_fail(name != NULL, FALSE);
+
+	g_return_val_if_fail(module != NULL, FALSE);
+	g_return_val_if_fail(base_name != NULL, FALSE);
+	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
+	g_free(key);
+
+	g_return_val_if_fail(lu_files_create_backup(filename), FALSE);
+
+	fd = open(filename, O_RDWR);
+	if(fd != -1) {
+		lock = lu_util_lock_obtain(fd);
+		if(lock != NULL) {
+			if(strncmp(password, "{crypt}", 7) == 0) {
+				password = password + 7;
+			} else {
+				password = lu_make_crypted(password, NULL);
+			}
+			ret = lu_util_field_write(fd, (const char*)name->data,
+						  field, password);
+		}
+	}
+
+	close(fd);
+
+	g_free(filename);
+
+	return ret;
+}
+
+static gboolean
+lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
+		       const char *password)
+{
+	return generic_setpass(module, "passwd", 2, ent, password);
+}
+
+static gboolean
+lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
+			const char *password)
+{
+	return generic_setpass(module, "shadow", 2, ent, password);
 }
 
 static gboolean
 lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password)
 {
-	/* FIXME */
-	return FALSE;
-}
-
-static gboolean
-lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent)
-{
-	return generic_lock(module, "shadow", "gshadow", ent,
-			    lu_shadow_format_group, TRUE);
-}
-
-static gboolean
-lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent)
-{
-	return generic_lock(module, "shadow", "gshadow", ent,
-			    lu_shadow_format_group, FALSE);
+	return generic_setpass(module, "shadow", 2, ent, password);
 }
 
 static gboolean
 lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 			const char *password)
 {
-	/* FIXME */
-	return FALSE;
+	return generic_setpass(module, "gshadow", 2, ent, password);
 }
 
 static gboolean
