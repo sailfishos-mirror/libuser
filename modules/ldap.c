@@ -307,7 +307,6 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	g_free(key);
 	g_free(tmp);
 
-	/* FIXME: doesn't try simple if SASL fails. */
 	/* Try to bind to the server using SASL. */
 	binddn = context->prompts[LU_LDAP_BINDDN].value;
 	if (nonempty(context->prompts[LU_LDAP_AUTHUSER].value)) {
