@@ -21,6 +21,8 @@
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
 #include <linux/quota.h>
 #include <limits.h>
 #include <mntent.h>
@@ -65,7 +67,6 @@ quota_get_specials(const char *flag)
 	}
 
 	endmntent(fp);
-	fclose(fp);
 
 	return ret;
 }
@@ -95,45 +96,67 @@ quota_free_specials(char **specials)
 }
 
 static int
-quota_toggle(int command)
+quota_toggle_ext(struct mntent *ent, const char *option, int command, int flag)
 {
-	struct stat st;
-	int ret = 0, i, j, k;
 	char buf[PATH_MAX];
-	char **specials;
+	struct stat st;
+	int ret, fd;
 
-	for(i = 0; i < (sizeof(quota_flags) / sizeof(quota_flags[0])); i++) {
-		specials = quota_get_specials_user();
-		for(j = 0; (specials != NULL) && (specials[j] != NULL); j++) {
-			for(k = 0; k < MAXQUOTAS; k++) {
-				snprintf(buf, sizeof(buf), "%s/%s.%s",
-					 specials[j],
-					 QUOTAFILENAME, quota_suffixes[k]);
-				if(stat(buf, &st) == 0) {
-					ret = quotactl(QCMD(command, k),
-						       specials[j], 0, buf);
-					if(ret == -1) {
-						if(ret == EBUSY) {
-							ret = 0;
+	if(hasmntopt(ent, option) || hasmntopt(ent, "quota")) {
+		snprintf(buf, sizeof(buf), "%s/%s.%s", ent->mnt_dir,
+			 QUOTAFILENAME, quota_suffixes[GRPQUOTA]);
+		if(stat(buf, &st) == 0) {
+			if(st.st_mode != 0600) {
+				fd = open(buf, O_RDWR);
+				if(fd != -1) {
+					struct stat ist;
+					if(fstat(fd, &ist) == 0) {
+						if((ist.st_dev == st.st_dev) &&
+						   (ist.st_ino == st.st_ino)) {
+							fchmod(fd, 0600);
 						}
-						break;
-					}
-					if(ret != 0) {
-						break;
 					}
 				}
 			}
-			if(ret != 0) {
-				break;
+			ret = quotactl(QCMD(command, GRPQUOTA),
+				       ent->mnt_fsname, 0, buf);
+			if(ret == -1) {
+				if(errno == EBUSY) {
+					ret = 0;
+				}
 			}
 		}
-		if(specials != NULL) {
-			quota_free_specials(specials);
+	}
+	return ret;
+}
+
+static int
+quota_toggle(int command)
+{
+	int ret = 0;
+	struct mntent *ent;
+	FILE *fp;
+
+	fp = fopen(_PATH_MOUNTED, "r");
+	if(fp == NULL) {
+		return -1;
+	}
+
+	while((ent = getmntent(fp)) != NULL) {
+		ret = quota_toggle_ext(ent, quota_flags[USRQUOTA],
+				       command, USRQUOTA);
+		if(ret != 0) {
+			break;
 		}
+		ret = quota_toggle_ext(ent, quota_flags[GRPQUOTA],
+				       command, GRPQUOTA);
 		if(ret != 0) {
 			break;
 		}
 	}
+
+	endmntent(fp);
+
 	return ret;
 }
 

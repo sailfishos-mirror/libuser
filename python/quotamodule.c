@@ -29,12 +29,13 @@
 		DEBUG_EXIT; \
 		return NULL;
 
-#undef  DEBUG_BINDING
+#define DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING
 #endif
 
 #ifdef DEBUG_BINDING
+#include <glib.h>
 static int indent = 0;
 static char *getindent()
 {
@@ -198,6 +199,10 @@ quota_struct_getattr(struct quota_struct *self, char *attr)
 	if(strcmp(attr, "block_grace") == 0) {
 		DEBUG_EXIT;
 		return PyLong_FromLong(self->block_grace);
+	} else {
+		PyErr_SetString(PyExc_RuntimeError, "invalid attribute");
+		DEBUG_EXIT;
+		return NULL;
 	}
 	DEBUG_EXIT;
 	return Py_BuildValue("");
@@ -232,6 +237,7 @@ quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 			return PyString_FromString(self->group);
 		}
 	}
+
 	if(strcmp(attr, "user") == 0) {
 		if(!PyString_Check(args)) {
 			PyErr_SetString(PyExc_RuntimeError,
@@ -321,7 +327,11 @@ quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 			DEBUG_EXIT;
 			return NULL;
 		}
-		self->inode_grace = PyLong_AsLong(args);
+		self->block_grace = PyLong_AsLong(args);
+	} else {
+		PyErr_SetString(PyExc_RuntimeError, "invalid attribute");
+		DEBUG_EXIT;
+		return NULL;
 	}
 	DEBUG_EXIT;
 	return Py_BuildValue("");
@@ -352,7 +362,7 @@ static PyTypeObject quota_object_type = {
 static PyObject*
 quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	PyObject *list = NULL;
+	PyObject *dict = NULL;
 	int type = USRQUOTA, i;
 	char *name = NULL, *special = NULL;
 	char **specials = NULL;
@@ -396,7 +406,7 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 		id = grp.gr_gid;
 	}
 
-	list = PyList_New(0);
+	dict = PyDict_New();
 	if(special == NULL) {
 		specials = (type == USRQUOTA) ?
 			quota_get_specials_user() :
@@ -418,7 +428,7 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 				DEBUG_EXIT;
 				return NULL;
 			}
-			PyList_Append(list, 
+			PyDict_SetItemString(dict, specials[i],
 			      (type == USRQUOTA ?
 			       quota_struct_new(name, NULL, specials[i],
 						inode_usage, inode_soft,
@@ -433,7 +443,7 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 		}
 		quota_free_specials(specials);
 	} else {
-		PyList_Append(list, 
+		PyDict_SetItemString(dict, special,
 		      (type == USRQUOTA ?
 		       quota_struct_new(name, NULL, special,
 					inode_usage, inode_soft,
@@ -448,7 +458,7 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 	}
 
 	DEBUG_EXIT;
-	return list;
+	return dict;
 }
 
 static PyObject*
@@ -531,7 +541,8 @@ quotamodule_off(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_ENTRY;
 	if(quota_off() != 0) {
-		PyErr_SetString(PyExc_RuntimeError, "error disabling quotas");
+		PyErr_SetString(PyExc_RuntimeError,
+				"error disabling quotas");
 		DEBUG_EXIT;
 		return NULL;
 	}

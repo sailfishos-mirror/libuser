@@ -10,5 +10,5 @@ libusermodule_so_LDFLAGS = -module -shared $(GLIB_LIBS)
 libusermodule_so_LDADD = ../lib/libuser.la
 
 quotamodule_so_SOURCES = quotamodule.c
-quotamodule_so_LDFLAGS = -module -shared
+quotamodule_so_LDFLAGS = -module -shared $(GLIB_LIBS)
 quotamodule_so_LDADD = ../quota/libuser_quota.la
