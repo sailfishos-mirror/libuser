@@ -44,6 +44,12 @@ rm -fr $RPM_BUILD_ROOT
 %install
 rm -fr $RPM_BUILD_ROOT
 %makeinstall pkglibdir=$RPM_BUILD_ROOT%{_libdir}/%{name}
+
+pushd %{_libdir}/python1.5/site-packages/
+python -c "import libuser"
+python -c "import quota"
+popd
+
 %find_lang %{name}
 
 %post -p /sbin/ldconfig
@@ -79,6 +85,10 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Wed Aug 29 2001 Nalin Dahyabhai <nalin@redhat.com> 0.32-1
+- link the python module against libpam
+- attempt to import the python modules at build-time to verify dependencies
+
 * Tue Aug 28 2001 Nalin Dahyabhai <nalin@redhat.com> 0.31-1
 - fix a file-parsing bug that popped up in 0.29's mmap modifications
 
