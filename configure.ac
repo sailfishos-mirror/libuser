@@ -25,6 +25,15 @@ AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv tr"
 AM_GNU_GETTEXT
 
+AM_MAINTAINER_MODE
+if test x$GCC = xyes; then
+    if test x$MAINTAINER_MODE = xyes; then
+	CFLAGS="$CFLAGS -Wall -Wimplicit -Wcast-align -Wpointer-arith -Wimplicit-prototypes -Wmissing-prototypes"
+    else
+        CFLAGS="$CFLAGS -Wall"
+    fi
+fi
+
 LIBSAVE="$LIBS"
 AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
 CRYPT_LIBS="$LIBS"
@@ -155,16 +164,16 @@ AC_ARG_ENABLE(quota,
 [  --enable-quota    Provided support for configuring quotas],
 [quota=$withval],[quota=no])
 if test x$quota != xno ; then
-	AC_DEFINE(QUOTALIB,libuserquota.la)
-	AC_DEFINE(QUOTAMODULE,libuserquotamodule.so)
-	AC_DEFINE(QUOTASAMPLE,quotaq)
+	AC_DEFINE(QUOTALIB,libuserquota.la,[quota library])
+	AC_DEFINE(QUOTAMODULE,libuserquotamodule.so,[quota python module])
+	AC_DEFINE(QUOTASAMPLE,quotaq,[quota sample app])
 	AC_SUBST(QUOTALIB)
 	AC_SUBST(QUOTAMODULE)
 	AC_SUBST(QUOTASAMPLE)
 else
-	AC_DEFINE(QUOTALIB,[])
-	AC_DEFINE(QUOTAMODULE,[])
-	AC_DEFINE(QUOTASAMPLE,[])
+	AC_DEFINE(QUOTALIB,[],[quota library])
+	AC_DEFINE(QUOTAMODULE,[],[quota python module])
+	AC_DEFINE(QUOTASAMPLE,[],[quota sample app])
 	AC_SUBST(QUOTALIB)
 	AC_SUBST(QUOTAMODULE)
 	AC_SUBST(QUOTASAMPLE)

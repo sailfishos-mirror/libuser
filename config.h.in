@@ -205,6 +205,15 @@
 /* Name of package */
 #undef PACKAGE
 
+/* quota library */
+#undef QUOTALIB
+
+/* quota python module */
+#undef QUOTAMODULE
+
+/* quota sample app */
+#undef QUOTASAMPLE
+
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
    automatically deduced at run-time.
