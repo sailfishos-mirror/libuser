@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-07-01 08:59+1000\n"
+"PO-Revision-Date: 2002-08-22 12:01+1000\n"
 "Last-Translator: Ben Wu <hpwu@redhat.com>\n"
-"Language-Team: Chinese (traditional) <i18n-list@redhat.com>\n"
+"Language-Team: Chinese (Traditional) <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,29 +32,29 @@ msgstr "移除 `%s' 錯誤: %s"
 
 #: apps/apputil.c:411 apps/apputil.c:415
 msgid "Failed to drop privileges.\n"
-msgstr "終止權限失敗.\n"
+msgstr "終止權限失敗。\n"
 
 #: apps/apputil.c:424
 msgid "Internal error.\n"
-msgstr "內部錯誤.\n"
+msgstr "內部錯誤。\n"
 
 #: apps/apputil.c:437
 msgid "Error initializing PAM.\n"
-msgstr "初始化 PAM 錯誤.\n"
+msgstr "初始化 PAM 錯誤。\n"
 
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "為 %s 認證失敗.\n"
+msgstr "為 %s 認證失敗。\n"
 
 #: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "內部 PAM 錯誤 `%s'.\n"
+msgstr "內部 PAM 錯誤 `%s'。\n"
 
 #: apps/apputil.c:460
 msgid "User mismatch.\n"
-msgstr "使用者不符.\n"
+msgstr "使用者不符。\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
@@ -65,19 +65,19 @@ msgstr "[OPTION...] 使用者"
 #: apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "語法上分析引數錯誤: %s.\n"
+msgstr "語法上分析引數錯誤: %s。\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr "沒有指定使用者名稱.\n"
+msgstr "沒有指定使用者名稱。\n"
 
 #: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "初始化 %s 錯誤: %s.\n"
+msgstr "初始化 %s 錯誤: %s。\n"
 
 #: apps/lchage.c:156 apps/lgroupadd.c:90 apps/lgroupdel.c:81
 #: apps/lgroupmod.c:104 apps/luseradd.c:116 apps/luseradd.c:277
@@ -92,15 +92,15 @@ msgstr "未知的錯誤"
 #: apps/lchage.c:164 apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "使用者 %s 不存在.\n"
+msgstr "使用者 %s 不存在。\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr "帳號已鎖住.\n"
+msgstr "帳號已鎖住。\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr "帳號沒有鎖住.\n"
+msgstr "帳號沒有鎖住。\n"
 
 #: apps/lchage.c:179
 #, c-format
@@ -149,7 +149,7 @@ msgstr "帳號過期:\t%s\n"
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "修改  %s 的老舊資訊失敗.\n"
+msgstr "修改  %s 的老舊資訊失敗。\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -157,65 +157,65 @@ msgstr "[OPTION...] 群組"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "沒有指定群組名稱.\n"
+msgstr "沒有指定群組名稱。\n"
 
 #: apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr "初始化 %s 錯誤.\n"
+msgstr "初始化 %s 錯誤。\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
-msgstr "建立群組失敗.\n"
+msgstr "建立群組失敗。\n"
 
 #: apps/lgroupdel.c:88 apps/lgroupmod.c:116
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr "%s 群組不存在.\n"
+msgstr "%s 群組不存在。\n"
 
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr "無法刪除 %s 群組.\n"
+msgstr "無法刪除 %s 群組。\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr "-L 與 -U 都指定了.\n"
+msgstr "-L 與 -U 都指定了。\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "設定 %s 群組的密碼失敗.\n"
+msgstr "設定 %s 群組的密碼失敗。\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr "無法鎖定 %s 群組.\n"
+msgstr "無法鎖定 %s 群組。\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "%s 群組無法開啟.\n"
+msgstr "%s 群組無法開啟。\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "%s 群組無法修改.\n"
+msgstr "%s 群組無法修改。\n"
 
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "建立 %s 群組發生錯誤.\n"
+msgstr "建立 %s 群組發生錯誤。\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "帳號建立失敗: %s.\n"
+msgstr "帳號建立失敗: %s。\n"
 
 #: apps/luseradd.c:318
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "建立 %s 發生錯誤: %s.\n"
+msgstr "建立 %s 發生錯誤: %s。\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
@@ -224,77 +224,77 @@ msgstr "建立郵件 spool 時發生錯誤。\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "無法刪除 %s 使用者: %s.\n"
+msgstr "無法刪除 %s 使用者: %s。\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s 沒有群組 ID (gid) 號碼.\n"
+msgstr "%s 沒有群組 ID (gid) 號碼。\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr "群組 ID %ld 的群組不存在, 無法移除.\n"
+msgstr "群組 ID %ld 的群組不存在，無法移除。\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "群組 ID %ld 的群組沒有群組名稱.\n"
+msgstr "群組 ID %ld 的群組沒有群組名稱。\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "無法刪除 %s 群組: %s.\n"
+msgstr "無法刪除 %s 群組: %s。\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s 沒有家目錄.\n"
+msgstr "%s 沒有家目錄。\n"
 
 #: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "移除 %s 錯誤: %s.\n"
+msgstr "移除 %s 錯誤: %s。\n"
 
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "為 %s 使用者設定密碼失敗: %s.\n"
+msgstr "為 %s 使用者設定密碼失敗: %s。\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s 使用者無法被鎖定: %s.\n"
+msgstr "%s 使用者無法被鎖定: %s。\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s 使用者無法被開啟: %s.\n"
+msgstr "%s 使用者無法被開啟: %s。\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s 使用者無法被修改: %s.\n"
+msgstr "%s 使用者無法被修改: %s。\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s 群組無法被修改: %s.\n"
+msgstr "%s 群組無法被修改: %s。\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "沒有 %s 舊的家目錄.\n"
+msgstr "沒有 %s 舊的家目錄。\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "沒有 %s 新的家目錄.\n"
+msgstr "沒有 %s 新的家目錄。\n"
 
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "移動 %s 至 %s 錯誤: %s.\n"
+msgstr "移動 %s 至 %s 錯誤: %s。\n"
 
 #: lib/config.c:70
 #, c-format
@@ -588,7 +588,7 @@ msgstr "物件沒有 %s 屬性"
 #: modules/ldap.c:1366
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "移除 LDAP 目錄登錄發生錯誤: %s.\n"
+msgstr "移除 LDAP 目錄登錄發生錯誤: %s。\n"
 
 #: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1515
 #: modules/ldap.c:1609
@@ -642,26 +642,26 @@ msgstr "初始化 %s 錯誤: %s\n"
 #: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "搜尋是 %d ID 的群組.\n"
+msgstr "搜尋是 %d ID 的群組。\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "搜尋是 %s 名稱的群組.\n"
+msgstr "搜尋是 %s 名稱的群組。\n"
 
 #: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "搜尋是 %d ID 的使用者.\n"
+msgstr "搜尋是 %d ID 的使用者。\n"
 
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "搜尋是 %s 名稱的使用者.\n"
+msgstr "搜尋是 %s 名稱的使用者。\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
-msgstr "找不到登錄.\n"
+msgstr "找不到登錄。\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
