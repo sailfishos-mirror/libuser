@@ -2,7 +2,7 @@
 #define common_h
 
 #include <Python.h>
-#include <libuser/user.h>
+#include "../lib/user.h"
 #include "debug.h"
 
 struct libuser_admin {
