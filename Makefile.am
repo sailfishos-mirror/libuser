@@ -1,4 +1,4 @@
-SUBDIRS = intl include lib quota samples modules apps python po docs
+SUBDIRS = intl include lib quota modules apps samples python po docs
 EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt libuser.g
 sysconf_DATA = libuser.conf
 
