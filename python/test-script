@@ -2,6 +2,7 @@
 
 import libuser
 import os
+import time
 
 print "--------- Initializing."
 admin = libuser.admin()
@@ -71,6 +72,8 @@ except:
 
 print "--------- Removing the user."
 admin.deleteUser(jimbo)
+admin.removeHome(jimbo)
+admin.removeMail(jimbo)
 print "--------- Grepping for the user."
 os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")
 

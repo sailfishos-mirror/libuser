@@ -496,8 +496,8 @@ lu_hup_nscd()
 
 /* Create a mail spool for the user. */
 gboolean
-lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
-			    gboolean action)
+lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
+			   gboolean action)
 {
 	GValueArray *array;
 	GValue *value;
@@ -599,6 +599,10 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 		}
 	}
 	g_return_val_if_fail(username != NULL, FALSE);
+
+	/* Get the location of the spool directory. */
+	spooldir = lu_cfg_read_single(ctx, "defaults/mailspooldir",
+				      "/var/mail");
 
 	/* That wasn't that hard.  Now we just need to create the file. */
 	p = g_strdup_printf("%s/%s", spooldir, username);

@@ -42,7 +42,7 @@ char *lu_strconcat(char *existing, const char *appendee);
 void lu_hup_nscd(void);
 void lu_signal_nscd(int signal);
 
-gboolean lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
-				     gboolean action);
+gboolean lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
+				    gboolean action);
 
 #endif

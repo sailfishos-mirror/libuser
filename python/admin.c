@@ -282,8 +282,8 @@ libuser_admin_init_user(PyObject *self, PyObject *args,
 	DEBUG_ENTRY;
 	/* We expect a string and an optional flag indicating that the
 	 * user will be a system user. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i",
-					 keywords, &arg, &is_system)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i", keywords,
+					 &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -308,8 +308,8 @@ libuser_admin_init_group(PyObject *self, PyObject *args,
 	DEBUG_ENTRY;
 	/* Expect a string and a flag indicating that the group is to be a
 	 * system group. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i",
-					 keywords, &arg, &is_system)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i", keywords,
+					 &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -342,9 +342,9 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 	}
 	/* Try running the function. */
 	if (fn(me->ctx, ent->ent, &error)) {
-		/* It succeeded!  Return None. */
+		/* It succeeded!  Return truth. */
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return Py_BuildValue("i", 1);
 	} else {
 		/* It failed.  Build an exception and return an error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -404,9 +404,9 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 	}
 	/* Call the appropriate setpass function for this entity. */
 	if (fn(me->ctx, ent->ent, password, &error)) {
-		/* The change succeeded.  Return an empty tuple. */
+		/* The change succeeded.  Return a truth. */
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return Py_BuildValue("i", 1);
 	} else {
 		/* The change failed.  Return an error. */
 		PyErr_SetString(PyExc_SystemError,
@@ -531,7 +531,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	if (lu_homedir_remove(dir, &error)) {
 		/* Successfully removed. */
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return Py_BuildValue("i", 1);
 	} else {
 		/* Removal failed.  You'll have to come back for repeated
 		 * treatments. */
@@ -562,7 +562,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	DEBUG_ENTRY;
 
 	/* We expect an object and an optional string. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O|s", keywords,
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|s", keywords,
 					 &EntityType, &ent, &newdir)) {
 		DEBUG_EXIT;
 		return NULL;
@@ -609,7 +609,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	if (lu_homedir_move(olddir, newdir, &error)) {
 		/* Success! */
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return Py_BuildValue("i", 1);
 	} else {
 		/* Failure.  Set an error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -626,8 +626,8 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 
 /* Create a user's mail spool. */
 static PyObject *
-libuser_admin_create_destroy_mail(PyObject *self, PyObject *args,
-				  PyObject *kwargs, gboolean action)
+libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
+				 PyObject *kwargs, gboolean action)
 {
 	struct libuser_entity *ent = NULL;
 
@@ -637,29 +637,29 @@ libuser_admin_create_destroy_mail(PyObject *self, PyObject *args,
 	DEBUG_ENTRY;
 
 	/* We expect an Entity object. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O", keywords,
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords,
 					 &EntityType, &ent)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 
 	/* Now just pass it to the internal function. */
-	return (lu_mailspool_create_destroy(me->ctx, ent->ent, action)) ?
-		Py_BuildValue("") : NULL;
+	return (lu_mailspool_create_remove(me->ctx, ent->ent, action)) ?
+		Py_BuildValue("i", 1) : NULL;
 }
 
 /* Create a user's mail spool. */
 static PyObject *
 libuser_admin_create_mail(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	return libuser_admin_create_destroy_mail(self, args, kwargs, TRUE);
+	return libuser_admin_create_remove_mail(self, args, kwargs, TRUE);
 }
 
 /* Destroy a user's mail spool. */
 static PyObject *
-libuser_admin_destroy_mail(PyObject *self, PyObject *args, PyObject *kwargs)
+libuser_admin_remove_mail(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	return libuser_admin_create_destroy_mail(self, args, kwargs, FALSE);
+	return libuser_admin_create_remove_mail(self, args, kwargs, FALSE);
 }
 
 /* Add a user. */
@@ -712,8 +712,8 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			if (ret != NULL) {
 				Py_DECREF(ret);
 			}
-			ret = lu_mailspool_create_destroy(context, ent->ent, TRUE) ?
-			      Py_BuildValue("") :
+			ret = lu_mailspool_create_remove(context, ent->ent, TRUE) ?
+			      Py_BuildValue("i", 1) :
 			      NULL;
 		}
 	}
@@ -744,8 +744,8 @@ libuser_admin_modify_user(PyObject *self, PyObject *args,
 
 	DEBUG_ENTRY;
 
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "O|O", keywords, &ent, &mvhomedir)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &EntityType, &ent, &mvhomedir)) {
 		return NULL;
 	}
 
@@ -811,8 +811,8 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 			Py_DECREF(ret);
 			struct libuser_entity *entity;
 			entity = (struct libuser_entity *)ent;
-			ret = lu_mailspool_create_destroy(context, entity->ent, TRUE) ?
-			      Py_BuildValue("") :
+			ret = lu_mailspool_create_remove(context, entity->ent, TRUE) ?
+			      Py_BuildValue("i", 1) :
 			      NULL;
 		}
 	}
@@ -1266,9 +1266,9 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"createMail", (PyCFunction) libuser_admin_create_mail,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "create a mail spool for a user"},
-	{"destroyMail", (PyCFunction) libuser_admin_destroy_mail,
+	{"removeMail", (PyCFunction) libuser_admin_remove_mail,
 	 METH_VARARGS | METH_KEYWORDS,
-	 "destroy a mail spool for a user"},
+	 "remove a mail spool for a user"},
 
 	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
 	 "return a list of valid shells"},
@@ -1330,9 +1330,9 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	ret->ctx = NULL;
 
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "|sissOO", keywords, &name, &type, &info, &auth,
-	     &prompt, &prompt_data)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|sissOO", keywords,
+					 &name, &type, &info, &auth,
+					 &prompt, &prompt_data)) {
 		Py_DECREF(ret);
 		return NULL;
 	}

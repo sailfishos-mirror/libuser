@@ -8,6 +8,7 @@
 [defaults]
 moduledir = @pkglibdir@
 skeleton = @scdir@/skel
+mailspooldir = /var/mail
 modules = files shadow
 create_modules = files shadow
 # modules = files shadow ldap krb5
