@@ -1,4 +1,5 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/*
+ * Copyright (C) 2000,2001 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -13,6 +14,12 @@
  * You should have received a copy of the GNU Library General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/*
+ * The interfaces defined in this file are in even more flux than the others,
+ * because this is where the module interface is defined.  If you include it
+ * in your code, bad things can happen.
  */
 
 #ifndef libuser_user_private_h

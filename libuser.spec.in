@@ -67,6 +67,9 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Wed Jul 11 2001 Nalin Dahyabhai <nalin@redhat.com>
+- stub out the krb5 and ldap modules so that they'll at least compile again
+ 
 * Tue Jul 10 2001 Nalin Dahyabhai <nalin@redhat.com>
 - don't bail when writing empty fields to colon-delimited files
 - use permissions of the original file when making backup files instead of 0600

@@ -409,6 +409,55 @@ lu_krb5_user_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_erro
 }
 
 static gboolean
+lu_krb5_user_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+{
+	krb5_context context = NULL;
+	kadm5_principal_ent_rec principal;
+	GList *name;
+	gboolean ret = FALSE;
+	struct lu_krb5_context *ctx;
+
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(ent->magic = LU_ENT_MAGIC);
+
+	ctx = (struct lu_krb5_context*) module->module_context;
+
+	if(krb5_init_context(&context) != 0) {
+		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
+		return FALSE;
+	}
+
+	name = lu_ent_get(ent, LU_KRBNAME);
+	if(name == NULL) {
+		name = lu_ent_get(ent, LU_USERNAME);
+	}
+	if(name == NULL) {
+		lu_error_new(error, lu_error_generic, _("entity structure has no %s or %s attributes"), LU_KRBNAME, LU_USERNAME);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
+	if(krb5_parse_name(context, name->data, &principal.principal) != 0) {
+		lu_error_new(error, lu_error_generic, _("error parsing user name `%s' for kerberos"), (const char*) name->data);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
+	ret = (kadm5_get_principal(ctx->handle, principal.principal, &principal, KADM5_PRINCIPAL | KADM5_ATTRIBUTES) == KADM5_OK);
+	if(ret == FALSE) {
+		lu_error_new(error, lu_error_generic, _("error reading information for `%s' from kerberos"), (const char *) name->data);
+		krb5_free_principal(context, principal.principal);
+		krb5_free_context(context);
+		return FALSE;
+	} else {
+		ret = (principal.attributes & KRB5_KDB_DISALLOW_ALL_TIX) == KRB5_KDB_DISALLOW_ALL_TIX;
+	}
+
+	return ret;
+}
+
+static gboolean
 lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
 	krb5_context context = NULL;
@@ -499,6 +548,12 @@ lu_krb5_group_lock(struct lu_module *module, struct lu_ent *ent, struct lu_error
 
 static gboolean
 lu_krb5_group_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+{
+	return FALSE;
+}
+
+static gboolean
+lu_krb5_group_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	return FALSE;
 }

@@ -1,3 +1,3 @@
 This package is still under development, heavier than intended.  Only the
 files and shadow modules are expected to work at this point, as the changes
-for using a separate function to change passwords is rippling out.
+being made to the module interface ripple out.

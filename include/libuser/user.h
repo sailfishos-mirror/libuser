@@ -1,4 +1,5 @@
-/* Copyright (C) 2000,2001 Red Hat, Inc.
+/*
+ * Copyright (C) 2000,2001 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -32,14 +33,13 @@ extern "C" {
 #include "prompt.h"
 
 /**
- * An lu_context_t holds configuration information for this instance of
- * the library.
+ * An lu_context_t holds configuration information for this instance of the library.
  */
 typedef struct lu_context lu_context_t;
 
 /**
- * An enumeration which decides whether we want to modify information about
- * users or groups.  We don't yet support both simultaneously.
+ * An enumeration which decides whether we want to modify information about users or groups.  We don't support both
+ * simultaneously.
  */
 typedef enum lu_type {lu_user = 0x2345, lu_group = 0x2346} lu_type_t;
 

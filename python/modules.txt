@@ -1,3 +1,6 @@
+This is an attempt to document the Python API.  Anyone know a better way to
+format this stuff?
+
 libuser:
 	Fields:
         	- OBJECTCLASS

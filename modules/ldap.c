@@ -700,6 +700,13 @@ lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_erro
 }
 
 static gboolean
+lu_ldap_user_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
+{
+	/* FIXME */
+	return FALSE;
+}
+
+static gboolean
 lu_ldap_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
 	/* FIXME */
@@ -738,6 +745,13 @@ lu_ldap_group_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_err
 
 static gboolean
 lu_ldap_group_setpass(struct lu_module *module, struct lu_ent *ent, const char *password, struct lu_error **error)
+{
+	/* FIXME */
+	return FALSE;
+}
+
+static gboolean
+lu_ldap_group_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	/* FIXME */
 	return FALSE;
