@@ -403,28 +403,28 @@ msgstr "erro ao ler do terminal"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "o nome não foi indicado"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "o nome é demasiado curto"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "o nome contém caracteres não-ASCII"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "o nome contém caracteres de controlo"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "o nome contém espaços em branco"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "o nome contém o caracter inválido `%c'"
 
 #: lib/util.c:200
 #, c-format
