@@ -18,7 +18,7 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -38,10 +38,8 @@
 #define LU_MAX_LOCK_ATTEMPTS 30
 #include "../include/libuser/user_private.h"
 
-/** @file userutil.c */
-
-/** A function which returns non-zero if the strings are equal, and
-  * zero if they are unequal.  Case-insensitive version. */
+/* A function which returns non-zero if the strings are equal, and
+ * zero if they are unequal.  Case-insensitive version. */
 gint
 lu_str_case_equal(gconstpointer v1, gconstpointer v2)
 {
@@ -50,8 +48,8 @@ lu_str_case_equal(gconstpointer v1, gconstpointer v2)
 	return g_strcasecmp((char*)v1, (char*)v2) == 0;
 }
 
-/** A function which returns non-zero if the strings are equal, and
-  * zero if they are unequal.  Case-sensitive version. */
+/* A function which returns non-zero if the strings are equal, and
+ * zero if they are unequal.  Case-sensitive version. */
 gint
 lu_str_equal(gconstpointer v1, gconstpointer v2)
 {
@@ -60,7 +58,7 @@ lu_str_equal(gconstpointer v1, gconstpointer v2)
 	return strcmp((char*)v1, (char*)v2) == 0;
 }
 
-/** A wrapper for strcasecmp(). */
+/* A wrapper for strcasecmp(). */
 gint
 lu_strcasecmp(gconstpointer v1, gconstpointer v2)
 {
@@ -69,7 +67,7 @@ lu_strcasecmp(gconstpointer v1, gconstpointer v2)
 	return g_strcasecmp((char*)v1, (char*)v2);
 }
 
-/** A wrapper for strcmp(). */
+/* A wrapper for strcmp(). */
 gint
 lu_strcmp(gconstpointer v1, gconstpointer v2)
 {
@@ -78,10 +76,7 @@ lu_strcmp(gconstpointer v1, gconstpointer v2)
 	return strcmp((char*)v1, (char*)v2);
 }
 
-/** A list of disallowed salt characters, if we're violating SUSv2 by allowing
-  * more characters to be salt characters. */
-#define UNACCEPTABLE "!*:$,"
-/** A list of allowed salt characters, according to SUSv2. */
+/* A list of allowed salt characters, according to SUSv2. */
 #define ACCEPTABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
 		   "abcdefghijklmnopqrstuvwxyz" \
 		   "./0123456789"
@@ -92,11 +87,7 @@ is_acceptable(const char c)
 	if(c == 0) {
 		return FALSE;
 	}
-#ifdef VIOLATE_SUSV2
-	return (strchr(UNACCEPTABLE, c) == NULL);
-#else
 	return (strchr(ACCEPTABLE, c) != NULL);
-#endif
 }
 
 static void
@@ -112,7 +103,9 @@ fill_urandom(char *output, size_t length)
 
 	while(got < length) {
 		read(fd, output + got, length - got);
-		while(isprint(output[got]) && !isspace(output[got]) && is_acceptable(output[got])) {
+		while(isprint(output[got]) &&
+		      !isspace(output[got]) &&
+		      is_acceptable(output[got])) {
 			got++;
 		}
 	}
@@ -120,62 +113,47 @@ fill_urandom(char *output, size_t length)
 	close(fd);
 }
 
-/**
- * lu_make_crypted:
- * @param plain A password.
- * @param previous An optional salt to use, which also indicates the crypt() variation to be used.
- *
- * Generates a hashed version of @a plain by calling the crypt() function, using the hashing method specified in @previous.
- *
- * @return a static global string which must not be freed.
- */
+static struct {
+	const char *initial;
+	size_t salt_length;
+	const char *separator;
+} salt_type_info[] = {
+	{"$1$", 8, "$"},
+	{"$2a$", 8, "$"},
+	{"", 2, ""},
+};
+
 const char *
 lu_make_crypted(const char *plain, const char *previous)
 {
 	char salt[2048];
 	char *p;
-	size_t salt_type_len = 0, salt_len = sizeof(salt);
+	int i;
+	size_t len;
 
-	memset(salt, '\0', sizeof(salt));
-
-	if((previous != NULL) && (previous[0] == '$')) {
-		/* If we got a previous salt, and it's got a dollar sign,
-		 * figure out the length of the salt type. */
-		p = strchr(previous + 1, '$');
-		if(p) {
-			p++;
-			salt_type_len = p - previous;
-			if(salt_type_len > 2048) {
-				salt_type_len = 2048;
-			}
-		}
-		strncpy(salt, previous, salt_type_len);
-		salt_len = strlen(previous);
-	} else if((previous != NULL) && (previous[0] != '$')) {
-		/* Otherwise, it's a standard descrypt(). */
-		salt_type_len = 0;
-		salt_len = 2;
-	} else if(previous == NULL) {
-		/* Fill in the default crypt length. */
-		strncpy(salt, LU_DEFAULT_SALT_TYPE, sizeof(salt) - 1);
-		salt_type_len = strlen(salt);
-		salt_len = MIN(sizeof(salt) - salt_type_len, LU_DEFAULT_SALT_LEN);
+	if(previous == NULL) {
+		previous = "";
 	}
 
-	fill_urandom(salt + salt_type_len, salt_len);
+	for(i = 0; i < sizeof(salt_info) / sizeof(salt_info[0]); i++) {
+		len = strlen(salt_info[i].initial);
+		if(strncmp(previous, salt_info[i].initial, len) == 0) {
+			break;
+		}
+	}
+
+	g_assert(i < sizeof(salt_info) / sizeof(salt_info[0]));
+
+	memset(salt, '\0', sizeof(salt));
+	strncpy(salt, salt_info[i].initial, len);
+
+	fill_urandom(salt + len, salt_info[i].salt_length);
+	strcat(salt, salt_info[i].separator);
 
 	return crypt(plain, salt);
 }
 
-/**
- * lu_util_lock_obtain:
- * @param fd An open file descriptor.
- *
- * Locks the passed-in descriptor for writing, and returns an opaque lock pointer if the lock succeeds.
- * 
- * @return an opaque lock pointer if locking succeeds, NULL on failure.
- */
-gpointer
+gboolean
 lu_util_lock_obtain(int fd, struct lu_error **error)
 {
 	struct flock *lck = NULL;

@@ -33,12 +33,12 @@
 /** @file usererr.c */
 
 static const char *
-lu_strerror(enum lu_error_code code)
+lu_strerror(enum lu_status code)
 {
 	switch(code) {
-		case lu_error_success:
+		case lu_success:
 			return _("success");
-		case lu_error_config_disabled:
+		case lu_warning_config_disabled:
 			return _("module disabled by configuration");
 		case lu_error_generic:
 			return _("generic error");
@@ -74,7 +74,7 @@ lu_strerror(enum lu_error_code code)
 			return _("error loading module");
 		case lu_error_module_sym:
 			return _("error resolving symbol in module");
-		case lu_error_version:
+		case lu_error_module_version:
 			return _("library/module version mismatch");
 		default:
 			return _("unknown error");
@@ -82,18 +82,9 @@ lu_strerror(enum lu_error_code code)
 	return _("unknown error");
 }
 
-/**
- * lu_error_new:
- * @param error A pointer to a pointer to a #lu_error_t which will be used to hold information about this error.
- * @param code An #lu_error_code describing the error.
- * @param desc A format string (followed by arguments) giving a more detailed description of the error.  May be #NULL.
- *
- * This function sets an #lu_error_t pointer to a value which can be passed up to a calling function.
- *
- * @return nothing.
- **/
 void
-lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc, ...)
+lu_error_new(struct lu_error **error, enum lu_status code,
+	     const char *desc, ...)
 {
 	struct lu_error *ret;
 	va_list args;
@@ -105,7 +96,10 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
-		ret->string = desc ?  g_strdup_vprintf(desc, args) : g_strdup_printf(lu_strerror(code), strerror(errno));
+		ret->string = desc ?
+			      g_strdup_vprintf(desc, args) :
+			      g_strdup_printf(lu_strerror(code),
+					      strerror(errno));
 		depth = backtrace(stack, sizeof(stack) / sizeof(stack[0]));
 		ret->stack = backtrace_symbols(stack, depth);
 		va_end(args);
@@ -113,14 +107,6 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 	}
 }
 
-/**
- * lu_error_free:
- * @param error A pointer to a pointer to a #lu_error_t which must be cleared.
- *
- * This function clears an #lu_error_t pointer.
- *
- * @return nothing.
- **/
 void
 lu_error_free(struct lu_error **error)
 {

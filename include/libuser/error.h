@@ -25,43 +25,48 @@
 #include <errno.h>
 #include <glib.h>
 
-/** An error type. */
-enum lu_error_code {
-	lu_error_success = 0,		/** No error. */
-	lu_error_config_disabled,	/** Disabled in configuration -- non-fatal. */
+enum lu_status {
+	/* Non-fatal. */
+	lu_success = 0,
+	lu_warning_config_disabled,
 
-	lu_error_generic,		/** Generic error. */
-	lu_error_privilege,		/** We know we don't have enough privileges. */
-	lu_error_access_denied,		/** Denied access. */
+	/* Fatal. */
+	lu_error_generic,
+	lu_error_privilege,
+	lu_error_access_denied,
 
-	lu_error_name_bad,		/** Name bad. */
-	lu_error_id_bad,		/** ID bad. */
-	lu_error_name_used,		/** Name is in use. */
-	lu_error_id_used,		/** ID is in use. */
+	/* Data validation errors. */
+	lu_error_name_bad,
+	lu_error_id_bad,
+	lu_error_name_used,
+	lu_error_id_used,
 
-	lu_error_terminal,		/** Error manipulating terminal attributes. */
+	/* Terminal manipulation errors. */
+	lu_error_terminal,
 
-	lu_error_open,			/** Error opening file. */
-	lu_error_lock,			/** Error locking file. */
-	lu_error_stat,			/** Error getting information about file. */
-	lu_error_read,			/** Error reading from file. */
-	lu_error_write,			/** Error writing to file. */
-	lu_error_search,		/** Data not found in file. */
+	/* File I/O errors. */
+	lu_error_open,
+	lu_error_lock,
+	lu_error_stat,
+	lu_error_read,
+	lu_error_write,
+	lu_error_search,
 
-	lu_error_init,			/** Internal initialization error. */
-	lu_error_module_load,		/** Error loading module. */
-	lu_error_module_sym,		/** Error finding address of symbol in module. */
-	lu_error_version,		/** Library/module version mismatch. */
+	/* Initialization or module-loading errors. */
+	lu_error_init,
+	lu_error_module_load,
+	lu_error_module_sym,
+	lu_error_module_version,
 };
 
-typedef struct lu_error {
-	enum lu_error_code code;
+struct lu_error {
+	enum lu_status code;
 	char **stack;
 	char *string;
-} lu_error_t;
+};
 
-/** Checks that a passed-in error pointer is not already populated, and calls
-  * abort() if it is. */
+/* Checks that a passed-in error pointer is not already populated, and calls
+   abort() if it is. */
 #define LU_ERROR_CHECK(err_p_p) \
 do { \
 	struct lu_error **__err = (err_p_p); \
@@ -80,7 +85,8 @@ do { \
 	} \
 } while(0)
 
-void lu_error_new(struct lu_error **error, enum lu_error_code code,
+/* Functions for allocating and freeing error objects. */
+void lu_error_new(struct lu_error **error, enum lu_status code,
 		  const char *fmt, ...);
 void lu_error_free(struct lu_error **error);
 

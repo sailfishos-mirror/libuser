@@ -1,6 +1,6 @@
 noinst_PROGRAMS = enum field homedir lookup prompt quotaq testuser
 EXTRA_DIST = genusers
-
+LDFLAGS = -no-install
 include $(top_srcdir)/Makefile.extra
 
 enum_SOURCES = \

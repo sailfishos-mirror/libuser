@@ -145,10 +145,10 @@ getuser()
 }
 
 static int
-interact(LDAP *ld, unsigned flags, void *defs, void *interact_data)
+interact(LDAP *ld, unsigned flags, void *context, void *interact_data)
 {
 	sasl_interact_t *interact;
-	struct lu_ldap_context *ctx = (struct lu_ldap_context*) defs;
+	struct lu_ldap_context *ctx = (struct lu_ldap_context*) context;
 	int i, retval = LDAP_SUCCESS;
 
 	for(i = 0, retval = LDAP_SUCCESS, interact = interact_data;
@@ -158,17 +158,21 @@ interact(LDAP *ld, unsigned flags, void *defs, void *interact_data)
 		interact[i].len = 0;
 		switch(interact[i].id) {
 			case SASL_CB_USER:
-				interact[i].result = ctx->prompts[LU_LDAP_USER].value ?: "";
+				interact[i].result =
+					ctx->prompts[LU_LDAP_USER].value ?: "";
 				interact[i].len = strlen(interact[i].result);
 #ifdef DEBUG
-				g_print("Sending SASL user `%s'.\n", (char*)interact[i].result);
+				g_print("Sending SASL user `%s'.\n",
+					(char*)interact[i].result);
 #endif
 				break;
 			case SASL_CB_AUTHNAME:
-				interact[i].result = ctx->prompts[LU_LDAP_AUTHUSER].value;
+				interact[i].result =
+					ctx->prompts[LU_LDAP_AUTHUSER].value;
 				interact[i].len = strlen(interact[i].result);
 #ifdef DEBUG
-				g_print("Sending SASL auth user `%s'.\n", (char*)interact[i].result);
+				g_print("Sending SASL auth user `%s'.\n",
+					(char*)interact[i].result);
 #endif
 				break;
 			default:
@@ -194,7 +198,8 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 
 	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if(ldap == NULL) {
-		lu_error_new(error, lu_error_init, _("error initializing ldap library"));
+		lu_error_new(error, lu_error_init,
+			     _("error initializing ldap library"));
 		return NULL;
 	}
 
@@ -206,19 +211,25 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 		user = tmp;
 	}
 	tmp = g_strdup_printf("uid=%s,%s,%s", user,
-			      lu_cfg_read_single(context->global_context, "ldap/userBranch", USERBRANCH),
+			      lu_cfg_read_single(context->global_context,
+				     		 "ldap/userBranch", USERBRANCH),
 			      context->prompts[LU_LDAP_BASEDN].value);
 	generated_binddn = scache->cache(scache, tmp);
 	g_free(tmp);
 
-	if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION, &version) != LDAP_OPT_SUCCESS) {
-		lu_error_new(error, lu_error_init, _("could not set LDAP protocol to version %d"), version);
+	if(ldap_set_option(ldap,
+			   LDAP_OPT_PROTOCOL_VERSION,
+			   &version) != LDAP_OPT_SUCCESS) {
+		lu_error_new(error, lu_error_init,
+			     _("could not set LDAP protocol to version %d"),
+			     version);
 		close_server(ldap);
 		return NULL;
 	}
 
 	if(ldap_start_tls_s(ldap, &server, &client) != LDAP_SUCCESS) {
-		lu_error_new(error, lu_error_init, _("could not negotiate TLS with LDAP server"));
+		lu_error_new(error, lu_error_init,
+			     _("could not negotiate TLS with LDAP server"));
 		close_server(ldap);
 		return NULL;
 	}
@@ -232,7 +243,8 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	if(ldap_simple_bind_s(ldap,
 			      generated_binddn,
 			      context->prompts[LU_LDAP_PASSWORD].value) != LDAP_SUCCESS) {
-		lu_error_new(error, lu_error_init, _("could not bind to LDAP server"));
+		lu_error_new(error, lu_error_init,
+			     _("could not bind to LDAP server"));
 		close_server(ldap);
 		return NULL;
 	}
@@ -242,7 +254,8 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 
 /* Generate the distinguished name which corresponds to the lu_ent structure. */
 static const char *
-lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent, const char *namingAttr, const char *name,
+lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent,
+		  const char *namingAttr, const char *name,
 		  const char *configKey, const char *def)
 {
 	struct lu_ldap_context *context = module->module_context;
@@ -264,7 +277,8 @@ lu_ldap_ent_to_dn(struct lu_module *module, struct lu_ent *ent, const char *nami
 	g_free(tmp);
 
 	if(branch) {
-		tmp = g_strdup_printf("%s=%s,%s,%s", namingAttr, name, branch, context->prompts[LU_LDAP_BASEDN].value);
+		tmp = g_strdup_printf("%s=%s,%s,%s", namingAttr, name, branch,
+				      context->prompts[LU_LDAP_BASEDN].value);
 		ret = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
 	}
@@ -289,7 +303,8 @@ lu_ldap_base(struct lu_module *module, const char *configKey, const char *def)
 	g_free(tmp);
 
 	if(branch) {
-		tmp = g_strdup_printf("%s,%s", branch, context->prompts[LU_LDAP_BASEDN].value);
+		tmp = g_strdup_printf("%s,%s", branch,
+				      context->prompts[LU_LDAP_BASEDN].value);
 	} else {
 		tmp = g_strdup(context->prompts[LU_LDAP_BASEDN].value);
 	}
@@ -303,8 +318,9 @@ lu_ldap_base(struct lu_module *module, const char *configKey, const char *def)
 
 /* This is the lookup workhorse. */
 static gboolean
-lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *name, struct lu_ent *ent,
-	       const char *configKey, const char *def, const char *filter, char **attributes, struct lu_error **error)
+lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *name,
+	       struct lu_ent *ent, const char *configKey, const char *def,
+	       const char *filter, char **attributes, struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
 	const char *attr;
@@ -332,12 +348,14 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
+		lu_error_new(error, lu_error_generic,
+			     _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 	base = lu_ldap_base(module, configKey, def);
 	if(base == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP base distinguished name"));
+		lu_error_new(error, lu_error_generic,
+			     _("error mapping name to LDAP base distinguished name"));
 		return FALSE;
 	}
 
@@ -351,14 +369,16 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 	g_print("Looking up `%s' with filter `%s'.\n", dn, filt);
 #endif
 
-	if(ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt, attributes, FALSE, &messages) == LDAP_SUCCESS) {
+	if(ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt,
+			 attributes, FALSE, &messages) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 	}
 	if(entry == NULL) {
 #ifdef DEBUG
 		g_print("Looking under `%s' with filter `%s'.\n", base, filt);
 #endif
-		if(ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt, attributes, FALSE, &messages) == LDAP_SUCCESS) {
+		if(ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt,
+				 attributes, FALSE, &messages) == LDAP_SUCCESS) {
 			entry = ldap_first_entry(ctx->ldap, messages);
 		}
 	}
@@ -371,7 +391,8 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 				lu_ent_clear_original(ent, attr);
 				for(j = 0; values[j]; j++) {
 #ifdef DEBUG
-					g_print("Got `%s' = `%s'.\n", attr, values[j]);
+					g_print("Got `%s' = `%s'.\n",
+						attr, values[j]);
 #endif
 					lu_ent_add_original(ent, attr, values[j]);
 				}
@@ -383,7 +404,8 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 #ifdef DEBUG
 		g_print("No such entry found in directory.\n");
 #endif
-		lu_error_new(error, lu_error_generic, _("error searching LDAP directory"));
+		lu_error_new(error, lu_error_generic,
+			     _("error searching LDAP directory"));
 		ret = FALSE;
 	}
 	if(messages) {
@@ -394,10 +416,12 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 }
 
 static gboolean
-lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)
+lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name,
+			 struct lu_ent *ent, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_lookup(module, LU_USERNAME, name, ent, "userBranch", USERBRANCH, "(objectclass=posixAccount)",
+	return lu_ldap_lookup(module, LU_USERNAME, name, ent, "userBranch",
+			      USERBRANCH, "(objectclass=posixAccount)",
 			      lu_ldap_user_attributes, error);
 }
 

@@ -269,6 +269,11 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 	const char *appname = NULL;
 	const char *domain = NULL;
 	sasl_conn_t *connection;
+	struct sasl_callback cb = {
+		SASL_CB_LIST_END,
+		NULL,
+		NULL,
+	};
 	int i;
 
 	g_assert(context != NULL);
@@ -279,12 +284,13 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 	domain = lu_cfg_read_single(context, "sasl/domain", "");
 
 	/* Initialize SASL. */
-	i = sasl_server_init(NULL, appname);
+	i = sasl_server_init(&cb, appname);
 	if(i != SASL_OK) {
 		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
-	i = sasl_server_new(PACKAGE, NULL, domain, NULL, 0, &connection);
+	i = sasl_server_new(PACKAGE, NULL, domain, &cb, SASL_SEC_NOANONYMOUS,
+			    &connection);
 	if(i != SASL_OK) {
 		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
 		return NULL;

@@ -18,15 +18,11 @@
 #ident "$Id$"
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "../config.h"
 #endif
 #include <string.h>
 #include "../include/libuser/user_private.h"
 
-/** @file usersc.c */
-/* Cache a string.  We do this so that we only have to keep track of one
-   pointer to it, and we have a well-defined time when it will be freed.
-   This may all be replaced by GQuark-based stuff when glib-2.0 is released. */
 static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 {
@@ -41,7 +37,6 @@ lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 	return ret;
 }
 
-/* Add each key to the list passed in through data. */
 static int
 get_keys(gpointer key, gpointer value, gpointer data)
 {
@@ -52,7 +47,6 @@ get_keys(gpointer key, gpointer value, gpointer data)
 	return 0;
 }
 
-/* Free all of the keys in the cache.  All of the items are keys. */
 static void
 lu_string_cache_free(struct lu_string_cache *cache)
 {
@@ -76,13 +70,6 @@ lu_string_cache_free(struct lu_string_cache *cache)
 	g_free(cache);
 }
 
-/**
- * lu_string_cache_new:
- * @param case_sensitive A #boolean indicating whether or not the new cache should be sensitive to case.
- *
- * Creates and returns a new string cache, which may or may not be case-sensitive.
- * @return A new string cache.
- **/
 struct lu_string_cache *
 lu_string_cache_new(gboolean case_sensitive)
 {

@@ -8,4 +8,5 @@
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT
 #undef HAVE_STPCPY
+#undef HAVE___SECURE_GETENV
 #undef HAVE_LC_MESSAGES

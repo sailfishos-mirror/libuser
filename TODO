@@ -1,6 +1,7 @@
 Easy:
 * Make krb5 module return a suitable error when it's only passed crypted
   passwords ("this password is already hashed -- it is of no use to me").
+* Generate mail spool files when adding users.  Procmail isn't setuid any more.
 
 Medium:
 * Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod (bad idea?)

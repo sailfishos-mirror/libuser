@@ -17,12 +17,12 @@ AM_PATH_GLIB(1.2.9,,,gmodule)
 ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv"
 AM_GNU_GETTEXT
 
-AC_CHECK_FUNC(crypt,,AC_CHECK_LIB(crypt,crypt))
+AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
 
 LIBSAVE="$LIBS"
 AC_CHECK_HEADERS(security/pam_appl.h)
-AC_CHECK_FUNC(pam_start,,AC_CHECK_LIB(pam, pam_start))
-AC_CHECK_FUNC(pam_authenticate,,AC_CHECK_LIB(pam, pam_authenticate))
+AC_CHECK_FUNC(pam_start,,[AC_CHECK_LIB(pam, pam_start)])
+AC_CHECK_FUNC(pam_authenticate,,[AC_CHECK_LIB(pam, pam_authenticate)])
 PAM_LIBS="$LIBS"
 LIBS="$LIBSAVE"
 
@@ -42,7 +42,7 @@ if test x$popt != xno ; then
 		LIBS="$LIBS -L$popt/lib"
 	fi
 	AC_CHECK_HEADERS(popt.h)
-	AC_CHECK_FUNC(poptGetContext,,AC_CHECK_LIB(popt,poptGetContext))
+	AC_CHECK_FUNC(poptGetContext,,[AC_CHECK_LIB(popt,poptGetContext)])
 fi
 POPT_LIBS="$LIBS"
 LIBS="$LIBSAVE"
@@ -70,28 +70,28 @@ if test x$krb5 != xno ; then
 	AC_CHECK_HEADERS(krb5.h)
 	AC_CHECK_FUNC(error_message,,
 		AC_CHECK_LIB(com_err,error_message,
-			     KRB5_LIBS="-lcom_err $KRB5_LIBS"
-			     LIBS="-lcom_err $LIBS",,$LDFLAGS $LIBS))
-	AC_CHECK_FUNC(mit_des_key_sched,,
+			     [KRB5_LIBS="-lcom_err $KRB5_LIBS"
+			      LIBS="-lcom_err $LIBS"],,[$LDFLAGS $LIBS]))
+	AC_CHECK_FUNC(mit_des_key_sched,,[
 		AC_CHECK_LIB(crypto,mit_des_key_sched,
-			     KRB5_LIBS="-lcrypto $KRB5_LIBS"
-			     LIBS="-lcrypto $LIBS"
-			,AC_CHECK_LIB(k5crypto,mit_des_key_sched,
-				      KRB5_LIBS="-lk5crypto $KRB5_LIBS"
-				      LIBS="-lk5crypto $LIBS",,$LDFLAGS $LIBS)))
-	AC_CHECK_FUNC(krb5_init_context,,
+			     [KRB5_LIBS="-lcrypto $KRB5_LIBS"
+			      LIBS="-lcrypto $LIBS"]
+			,[AC_CHECK_LIB(k5crypto,mit_des_key_sched,
+				      [KRB5_LIBS="-lk5crypto $KRB5_LIBS"
+				       LIBS="-lk5crypto $LIBS"],,[$LDFLAGS $LIBS])])])
+	AC_CHECK_FUNC(krb5_init_context,,[
 		AC_CHECK_LIB(krb5,krb5_init_context,
-			     KRB5_LIBS="-lkrb5 $KRB5_LIBS"
-			     LIBS="-lkrb5 $LIBS",,$LDFLAGS $LIBS))
-	AC_CHECK_FUNC(kadm5_chpass_principal,,
+			     [KRB5_LIBS="-lkrb5 $KRB5_LIBS"
+			      LIBS="-lkrb5 $LIBS"],,[$LDFLAGS $LIBS])])
+	AC_CHECK_FUNC(kadm5_chpass_principal,,[
 		AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal,
-			     KRB5_LIBS="-lkadm5clnt $KRB5_LIBS"
-			     LIBS="-lkadm5clnt $LIBS",,$LDFLAGS $LIBS))
-	AC_CHECK_FUNC(kadm5_create_principal,
-		AC_CHECK_FUNC(kadm5_delete_principal,
-			AC_CHECK_FUNC(kadm5_modify_principal,
-				AC_CHECK_FUNC(kadm5_rename_principal,
-					MODULES="$MODULES ${PACKAGE}_krb5.so"))))
+			     [KRB5_LIBS="-lkadm5clnt $KRB5_LIBS"
+			      LIBS="-lkadm5clnt $LIBS"],,[$LDFLAGS $LIBS])])
+	AC_CHECK_FUNC(kadm5_create_principal,[
+		AC_CHECK_FUNC(kadm5_delete_principal,[
+			AC_CHECK_FUNC(kadm5_modify_principal,[
+				AC_CHECK_FUNC(kadm5_rename_principal,[
+					MODULES="$MODULES ${PACKAGE}_krb5.so"])])])])
 	LIBS="$LIBSAVE"
 fi
 
@@ -112,22 +112,22 @@ if test x$ldap != xno ; then
 		LDFLAGS="$LDFLAGS -L$ldap/lib"
 	fi
 	AC_CHECK_HEADERS(ldap.h)
-	AC_CHECK_FUNC(ber_alloc,,
-		AC_CHECK_LIB(lber,ber_alloc,
+	AC_CHECK_FUNC(ber_alloc,,[
+		AC_CHECK_LIB(lber,ber_alloc,[
 			     LDAP_LIBS="-llber $LDAP_LIBS"
-			     LIBS="-llber $LIBS",,$LDFLAGS $LIBS))
-	AC_CHECK_FUNC(ldap_sasl_bind_s,,
-		AC_CHECK_LIB(ldap,ldap_sasl_bind_s,
+			     LIBS="-llber $LIBS"],,[$LDFLAGS $LIBS])])
+	AC_CHECK_FUNC(ldap_sasl_bind_s,,[
+		AC_CHECK_LIB(ldap,ldap_sasl_bind_s,[
 			     LDAP_LIBS="-lldap $LDAP_LIBS"
-			     LIBS="-lldap $LIBS",,$LDFLAGS $LIBS))
-	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,
-		AC_CHECK_FUNC(ldap_set_option,
-			AC_CHECK_FUNC(ldap_start_tls_s,
-				AC_CHECK_FUNC(ldap_search_s,
-					AC_CHECK_FUNC(ldap_get_values,
-						AC_CHECK_FUNC(ldap_modify_ext_s,
-							AC_CHECK_FUNC(ldap_delete_ext_s,
-								MODULES="$MODULES ${PACKAGE}_ldap.so")))))))
+			     LIBS="-lldap $LIBS"],,[$LDFLAGS $LIBS])])
+	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,[
+		AC_CHECK_FUNC(ldap_set_option,[
+			AC_CHECK_FUNC(ldap_start_tls_s,[
+				AC_CHECK_FUNC(ldap_search_s,[
+					AC_CHECK_FUNC(ldap_get_values,[
+						AC_CHECK_FUNC(ldap_modify_ext_s,[
+							AC_CHECK_FUNC(ldap_delete_ext_s,[
+								MODULES="$MODULES ${PACKAGE}_ldap.so"])])])])])])])
 	LIBS="$LIBSAVE"
 fi
 
@@ -149,19 +149,21 @@ if test x$sasl != xno ; then
 		LIBS="$LIBS -L$sasl/lib"
 	fi
 	AC_CHECK_HEADERS(sasl.h)
-	AC_CHECK_FUNC(sasl_setpass,,
-		AC_CHECK_LIB(sasl,sasl_setpass,
+	AC_CHECK_FUNC(sasl_setpass,,[
+		AC_CHECK_LIB(sasl,sasl_setpass,[
 			     SASL_LIBS="-lsasl $SASL_LIBS"
 			     LIBS="-lsasl $LIBS"
-			     MODULES="$MODULES ${PACKAGE}_sasldb.so"
-			     ,,$LDFLAGS $LIBS))
-	AC_CHECK_FUNCS(sasl_user_exists,,
-		AC_CHECK_LIB(sasl,sasl_user_exists,AC_DEFINE(HAVE_SASL_USER_EXISTS)))
+			     MODULES="$MODULES ${PACKAGE}_sasldb.so"]
+			     ,,[$LDFLAGS $LIBS])])
+	AC_CHECK_FUNCS(sasl_checkpass,,[
+		AC_CHECK_LIB(sasl,sasl_checkpass,[AC_DEFINE(HAVE_SASL_CHECKPASS)])])
+	AC_CHECK_FUNCS(sasl_user_exists,,[
+		AC_CHECK_LIB(sasl,sasl_user_exists,[AC_DEFINE(HAVE_SASL_USER_EXISTS)])])
 	LIBS="$LIBSAVE"
 fi
 
 AC_HEADER_STDC
-AC_CHECK_HEADERS(fcntl.h limits.h sys/time.h unistd.h)
+AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
 
 AC_C_CONST
 AC_TYPE_UID_T
@@ -169,7 +171,7 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
-AC_CHECK_FUNCS(strstr strtol)
+AC_CHECK_FUNCS([strstr strtol])
 
 AC_SUBST(MODULES)
 AC_SUBST(KRB5_LIBS)
@@ -196,7 +198,7 @@ AC_SUBST(scdir)
 
 AM_CONFIG_HEADER(config.h)
 
-AC_OUTPUT(
+AC_OUTPUT([
 Makefile
 intl/Makefile
 po/Makefile.in
@@ -212,6 +214,6 @@ docs/Makefile
 docs/sgml/Makefile
 libuser.spec
 libuser.conf
-)
+])
 
 $MAKE -C po -f Makefile.in Makefile

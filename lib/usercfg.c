@@ -55,7 +55,8 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 
 	fd = open(filename, O_RDONLY);
 	if(fd == -1) {
-		lu_error_new(error, lu_error_generic, _("could not open configuration file `%s': %s"),
+		lu_error_new(error, lu_error_generic,
+			     _("could not open configuration file `%s': %s"),
 			     filename, strerror(errno));
 		g_free(config);
 		return FALSE;
@@ -89,7 +90,8 @@ lu_cfg_done(struct lu_context *context)
 }
 
 static void
-process_line(char *line, struct lu_string_cache *cache, char **section, char **key, char **value)
+process_line(char *line, struct lu_string_cache *cache,
+	     char **section, char **key, char **value)
 {
 	char *p, *tmp;
 
@@ -152,14 +154,17 @@ process_line(char *line, struct lu_string_cache *cache, char **section, char **k
  * lu_cfg_read:
  * @param context A valid library context.
  * @param key A hierarchical name for the setting being queried.
- * @param default_value A default value which will be returned in the @key is not found.  It may be #NULL.
+ * @param default_value A default value which will be returned in the @key is
+ * not found.  It may be #NULL.
  *
- * Reads the values of a configuration setting from libuser's configuration settings (wherever they may be).
+ * Reads the values of a configuration setting from libuser's configuration
+ * settings (wherever they may be).
  *
  * @return A #GList of strings.
  **/
 GList *
-lu_cfg_read(struct lu_context *context, const char *key, const char *default_value)
+lu_cfg_read(struct lu_context *context, const char *key,
+	    const char *default_value)
 {
 	struct config_config *config;
 	char *data = NULL, *line, *xstrtok_ptr;
@@ -181,9 +186,12 @@ lu_cfg_read(struct lu_context *context, const char *key, const char *default_val
 		}
 	} else {
 		data = g_strdup(config->data);
-		for(line = strtok_r(data, "\n", &xstrtok_ptr); line; line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
+		for(line = strtok_r(data, "\n", &xstrtok_ptr);
+		    line != NULL;
+		    line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
 			process_line(line, config->cache, &section, &k, &value);
-			if(section && key && value && strlen(section) && strlen(key) && strlen(value)) {
+			if(section && key && value &&
+			   strlen(section) && strlen(key) && strlen(value)) {
 				tmp = g_strconcat(section, "/", k, NULL);
 				if(g_strcasecmp(tmp, key) == 0) {
 					if(g_list_index(ret, value) == -1) {
@@ -207,9 +215,11 @@ lu_cfg_read(struct lu_context *context, const char *key, const char *default_val
 /**
  * lu_cfg_read_keys:
  * @param context A valid library context.
- * @param parent_key A hierarchical name for the setting whose children are being queried.
+ * @param parent_key A hierarchical name for the setting whose children are
+ * being queried.
  *
- * Reads the values of a configuration setting on the level of the configuration hierarchy immediately below the @a parent_key.
+ * Reads the values of a configuration setting on the level of the configuration
+ * hierarchy immediately below the @a parent_key.
  *
  * @return A #GList of strings.
  **/
@@ -230,8 +240,11 @@ lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
 
 	if(config->data) {
 		data = g_strdup(config->data);
-		for(line = strtok_r(data, "\n", &xstrtok_ptr); line; line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
-			process_line(line, config->cache, &section, &key, &value);
+		for(line = strtok_r(data, "\n", &xstrtok_ptr);
+		    line != NULL;
+		    line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
+			process_line(line, config->cache, &section,
+				     &key, &value);
 			if(section && key && strlen(section) && strlen(key)) {
 				if(g_strcasecmp(section, parent_key) == 0) {
 					if(g_list_index(ret, key) == -1) {
@@ -249,14 +262,17 @@ lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
  * lu_cfg_read_single:
  * @param context A valid library context.
  * @param key A hierarchical name for the setting being queried.
- * @param default_value A default value which will be returned in the @key is not found.  It may be #NULL.
+ * @param default_value A default value which will be returned in the @key is
+ * not found.  It may be #NULL.
  *
  * Reads the values of a named configuration setting.
  *
- * @return A single string containing any of the values the @key contains, or the @default_value if none are found.
+ * @return A single string containing any of the values the @key contains, or
+ * the @default_value if none are found.
  **/
 const char *
-lu_cfg_read_single(struct lu_context *context, const char *key, const char *default_value)
+lu_cfg_read_single(struct lu_context *context, const char *key,
+		   const char *default_value)
 {
 	GList *answers = NULL;
 	const char *ret = NULL;
