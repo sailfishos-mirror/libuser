@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-08-08 12:48+0200\n"
+"PO-Revision-Date: 2002-03-06 22:35+0100\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Feil under fjerning av `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Feil under frislipp av privilegier.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -421,9 +421,9 @@ msgid "error creating `%s': %s"
 msgstr "feil under oppretting av `%s': %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "sikkerhetskopien `%s' var en symbolsk lenke"
+msgstr "sikkerhetskopien «%s» eksisterer og er ikke en vanlig fil"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -531,13 +531,12 @@ msgid "could not bind to LDAP server"
 msgstr "kunne ikke binde til LDAP-tjener"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "kunne ikke binde til LDAP-tjener"
+msgstr "kunne ikke søke på LDAP-tjener"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "LDAP-tjener ser ikke ut til å ha en rot-DSE"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -607,9 +606,8 @@ msgid "LDAP Server Name"
 msgstr "Navn på LDAP-tjener"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP basis DN"
+msgstr "LDAP Search Base DN"
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
