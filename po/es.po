@@ -7,11 +7,10 @@
 # Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: es\n"
+msgstr "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-12-10 11:15-0200\n"
+"PO-Revision-Date: 2005-03-11 19:33-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +24,7 @@ msgstr ""
 #: modules/files.c:238
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Error en la lectura `%s': %s "
+msgstr "Error en la lectura `%s': %s"
 
 # apps/apputil.c:63
 # apps/apputil.c:63
@@ -38,17 +37,15 @@ msgstr "Error al crear `%s': %s"
 # apps/luseradd.c:112
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Error en la creación del grupo `%s': %s\n"
+msgstr "Error cambiando dueño de `%s': %s"
 
 # apps/apputil.c:63
 # apps/apputil.c:63
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
 msgid "Error writing `%s': %s"
-msgstr "Error al crear `%s': %s"
+msgstr "Error al escribir `%s': %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
@@ -431,9 +428,7 @@ msgstr "Error en la lectura `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Error creando cuenta para `%s': la línea no está formateada de la forma "
-"correcta.\n"
+msgstr "Error creando cuenta para `%s': la línea no está formateada de la forma correcta.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
@@ -563,7 +558,7 @@ msgstr "Error al crear un spool de correo.\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "No se ha podido eliminar el usuario %s: %s.\n"
+msgstr "No se pudo eliminar el usuario %s: %s.\n"
 
 # apps/luserdel.c:94
 # apps/luserdel.c:94
@@ -589,7 +584,7 @@ msgstr "El grupo de GID %jd no tenía un nombre de grupo.\n"
 #: apps/luserdel.c:134
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "No se ha podido eliminar el grupo %s: %s.\n"
+msgstr "No se pudo eliminar el grupo %s: %s.\n"
 
 # apps/luserdel.c:122
 # apps/luserdel.c:122
@@ -617,28 +612,28 @@ msgstr "Intento fallido de configurar la contraseña para el usuario %s: %s.\n"
 #: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "No se ha podido bloquear el usuario %s: %s.\n"
+msgstr "No se pudo bloquear el usuario %s: %s.\n"
 
 # apps/lusermod.c:157
 # apps/lusermod.c:157
 #: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "No se ha podido desbloquear el ususario %s: %s.\n"
+msgstr "No se pudo desbloquear el ususario %s: %s.\n"
 
 # apps/lusermod.c:163
 # apps/lusermod.c:163
 #: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "No se ha podido modificar el usuario %s: %s.\n"
+msgstr "No se pudo modificar el usuario %s: %s.\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
 #: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "El grupo %s no se ha podido modificar:%s\n"
+msgstr "El grupo %s no se pudo modificar:%s\n"
 
 # apps/lusermod.c:169
 # apps/lusermod.c:169
@@ -666,7 +661,7 @@ msgstr "Error al trasladar %s a %s: %s.\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "no se ha podido abrir el archivo de configuración `%s': %s"
+msgstr "no se pudo abrir el archivo de configuración `%s': %s"
 
 # lib/usercfg.c:56
 # lib/usercfg.c:56
@@ -680,7 +675,7 @@ msgstr "no se pudo hacer stat del archivo de configuración `%s': %s"
 #: lib/config.c:87
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "no se ha podido leer el archivo de configuración `%s': %s"
+msgstr "no se pudo leer el archivo de configuración `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -782,7 +777,7 @@ msgstr "error al determinar el símbolo en el módulo"
 # lib/user.c:186
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "versión de librería/módulo discordante"
+msgstr "versión de biblioteca/módulo discordante"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
@@ -868,7 +863,7 @@ msgstr "no se pudo obtener el contexto de seguridad `%s': %s"
 #: modules/files.c:118
 #, c-format
 msgid "couldn't set default security context: %s"
-msgstr "no se ha podido configurar el contexto de seguridad predeterminado: %s"
+msgstr "no se pudo configurar el contexto de seguridad predeterminado: %s"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
@@ -876,8 +871,7 @@ msgstr "no se ha podido configurar el contexto de seguridad predeterminado: %s"
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
+msgstr "no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:109 modules/files.c:316 modules/files.c:573
@@ -895,7 +889,7 @@ msgstr ""
 #: modules/files.c:2616 modules/files.c:2631
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "no se ha podido abrir `%s': %s"
+msgstr "no se pudo abrir `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
@@ -918,22 +912,20 @@ msgstr "error al crear `%s': %s"
 #: modules/files.c:205
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
-"Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
+msgstr "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
 # lib/user.c:144
 # lib/user.c:186
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "versión de librería/módulo discordante"
+msgstr "tamaño de archivo de copia de seguridad discordante"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "no se ha podido leer desde `%s': %s"
+msgstr "no se pudo leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
@@ -948,7 +940,7 @@ msgstr "la entrada ya se ha hecho presente en el archivo"
 #: modules/files.c:1431 modules/files.c:1439 modules/files.c:1447
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "no se ha podido escribir en `%s': %s"
+msgstr "no se pudo escribir en `%s': %s"
 
 # modules/files.c:730 modules/files.c:737 modules/files.c:823
 # modules/files.c:833
@@ -983,9 +975,7 @@ msgstr "Ningún archivo shadow presente -- deshabilitando."
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error al conectarse al servidor kadm5 para el servicio `%s' en el entorno `%"
-"s': %s"
+msgstr "error al conectarse al servidor kadm5 para el servicio `%s' en el entorno `%s': %s"
 
 # modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
 # modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
@@ -994,7 +984,7 @@ msgstr ""
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "error al inicializar la librería kerberos"
+msgstr "error al inicializar la biblioteca kerberos"
 
 # modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
 # modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
@@ -1070,40 +1060,39 @@ msgstr "Contraseña Kerberos para el administrador principal"
 # modules/ldap.c:175
 #: modules/ldap.c:202
 msgid "error initializing ldap library"
-msgstr "error al inicializar la librería ldap"
+msgstr "error al inicializar la biblioteca ldap"
 
 # modules/ldap.c:196
 # modules/ldap.c:193
 #: modules/ldap.c:213
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "no se ha podido establecer un protocolo LDAP para la versión %d"
+msgstr "no se pudo establecer un protocolo LDAP para la versión %d"
 
 # modules/ldap.c:202
 # modules/ldap.c:199
 #: modules/ldap.c:225
 msgid "could not negotiate TLS with LDAP server"
-msgstr "no se ha podido negociar TLS con el servidor LDAP"
+msgstr "no se pudo negociar TLS con el servidor LDAP"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
 #: modules/ldap.c:408
 msgid "could not bind to LDAP server"
-msgstr "no se ha podido vincular al servidor LDAP"
+msgstr "no se pudo vincular al servidor LDAP"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"no se ha podido vincular al servidor LDAP, primer intento como `%s': %s"
+msgstr "no se pudo vincular al servidor LDAP, primer intento como `%s': %s"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
-msgstr "no ha podido buscar el servidor LDAP"
+msgstr "no pudo buscar el servidor LDAP"
 
 #: modules/ldap.c:434
 msgid "LDAP server appears to have no root DSE"
