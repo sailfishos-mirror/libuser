@@ -154,191 +154,195 @@ msgstr "Bæði -L og -U tiltekið.\n"
 #: apps/lgroupmod.c:155 apps/lgroupmod.c:165
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr ""
+msgstr "Gat ekki sett lykilorð á hópinn %s.\n"
 
 #: apps/lgroupmod.c:174
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Ekki var hægt að læsa hópnum %s.\n"
 
 #: apps/lgroupmod.c:182
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Ekki var hægt að aflæsa hópnum %s.\n"
 
 #: apps/lgroupmod.c:189
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Ekki var hægt að breyta hópnum %s.\n"
 
 #: apps/luseradd.c:112
 #, c-format
 msgid "Error creating group for %s: %s.\n"
-msgstr ""
+msgstr "Gat ekki búið til hóp fyrir %s.\n"
 
 #: apps/luseradd.c:159
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "Gat ekki búið til notanda: %s.\n"
 
 #: apps/luseradd.c:176
 #, c-format
 msgid "Bad UID for %s.\n"
-msgstr ""
+msgstr "Ógilt UID fyrir %s.\n"
 
 #: apps/luseradd.c:180
 #, c-format
 msgid "Bad GID for %s.\n"
-msgstr ""
+msgstr "Ógilt GID fyrir %s.\n"
 
 #: apps/luseradd.c:190
 #, c-format
 msgid "No home directory for %s.\n"
-msgstr ""
+msgstr "Ekkert heimasvæði til fyrir %s.\n"
 
 #: apps/luseradd.c:194
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "Villa við að búa %s til: %s.\n"
 
 #: apps/luserdel.c:87
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Ekki var hægt að eyða notandanum %s: %s.\n"
 
 #: apps/luserdel.c:94
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s var ekki með gid tölu.\n"
 
 #: apps/luserdel.c:99
 #, c-format
 msgid "Group #%d does not exist.\n"
-msgstr ""
+msgstr "Hópur #%d er ekki til.\n"
 
 #: apps/luserdel.c:105
 #, c-format
 msgid "Group #%d did not have a group name.\n"
-msgstr ""
+msgstr "Hópur #%d er ekki með hópheiti.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Ekki var hægt að eyða hóp %s: %s.\n"
 
 #: apps/luserdel.c:122
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s var ekki með heimasvæði.\n"
 
 #: apps/luserdel.c:126
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "Villa við að eyða %s: %s.\n"
 
 #: apps/lusermod.c:125
 #, c-format
 msgid "Error reading old home directory for %s: %s.\n"
-msgstr ""
+msgstr "Villa við lestur gamals heimasvæðis notanda %s: %s.\n"
 
 #: apps/lusermod.c:133 apps/lusermod.c:142
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "Gat ekki sett lykilorð notanda %s: %s.\n"
 
 #: apps/lusermod.c:150
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "Ekki var hægt að læsa notandanum %s: %s.\n"
 
 #: apps/lusermod.c:157
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "Ekki var hægt að aflæsa notandanum %s: %s.\n"
 
 #: apps/lusermod.c:163
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Ekki var hægt að breyta notandanum %s: %s.\n"
 
 #: apps/lusermod.c:169
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "Ekkert gamalt heimasvæði til fyrir notandann %s.\n"
 
 #: apps/lusermod.c:173
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "Ekkert nýtt heimasvæði til fyrir notandann %s.\n"
 
 #: apps/lusermod.c:177
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "Villa við að færa %s í %s: %s.\n"
 
 #: lib/user.c:161
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "ekkert frumstillingastef %s í `%s'"
 
 #: lib/user.c:186
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "útgáfumismunur eininga í `%s'"
 
 #: lib/usercfg.c:56
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "gat ekki opnað stillingaskrána `%s': %s"
 
 #: lib/userent.c:45
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
-msgstr ""
+msgstr "útskrift af struct lu_ent á %p:\n"
 
 #: lib/userent.c:46
 #, c-format
 msgid " magic = %08x\n"
-msgstr ""
+msgstr " magic = %08x\n"
 
 #: lib/userent.c:47
 #, c-format
 msgid " type = %s\n"
-msgstr ""
+msgstr " tegund = %s\n"
 
 #: lib/userent.c:47
 msgid "user"
-msgstr ""
+msgstr "notandi"
 
 #: lib/userent.c:47
 msgid "group"
-msgstr ""
+msgstr "hópur"
 
 #: lib/userent.c:47
 msgid "unknown"
-msgstr ""
+msgstr "óþekkt"
 
 #: lib/userent.c:263
 msgid ""
 "\n"
 "Before copy:\n"
 msgstr ""
+"\n"
+"Fyrir afritun:\n"
 
 #: lib/userent.c:277
 msgid ""
 "\n"
 "After copy:\n"
 msgstr ""
+"\n"
+"Eftir afritun:\n"
 
 #: lib/userent.c:442
 #, c-format
 msgid "freeing lu_ent at %p.\n"
-msgstr ""
+msgstr "losa lu_ent á %p.\n"
 
 #: lib/userutil.c:177
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "villa við að læsa skrá: %s"
 
 #: modules/files.c:109 modules/files.c:316 modules/files.c:573
 #: modules/files.c:753 modules/files.c:904 modules/files.c:1068
@@ -348,38 +352,38 @@ msgstr ""
 #: modules/files.c:1593
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "gat ekki opnað `%s': %s"
 
 #: modules/files.c:123 modules/files.c:147 modules/files.c:178
 #: modules/files.c:586 modules/files.c:917
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "gat ekki fundið `%s': %s"
 
 #: modules/files.c:130
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "villa við að búa til `%s': %s"
 
 #: modules/files.c:140
 #, c-format
 msgid "backup file `%s' was a symlink"
-msgstr ""
+msgstr "afritið `%s' var tákntengi (symlink)"
 
 #: modules/files.c:601 modules/files.c:926
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "gat ekki lesið úr `%s': %s"
 
 #: modules/files.c:611 modules/files.c:621
 msgid "entry already present in file"
-msgstr ""
+msgstr "færslan er þegar til staðar í skránni"
 
 #: modules/files.c:633 modules/files.c:644 modules/files.c:952
 #: modules/files.c:961
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "gat ekki ritað í `%s': %s"
 
 #: modules/files.c:727 modules/files.c:734 modules/files.c:821
 #: modules/files.c:831
