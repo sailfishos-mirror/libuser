@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-24 17:42+0200\n"
 "PO-Revision-Date: 2003-06-17 12:36+1000\n"
 "Last-Translator: \n"
 "Language-Team:  <de@li.org>\n"
@@ -26,34 +27,38 @@ msgstr "Fehler beim Lesen von `%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "Fehler beim Erzeugen von `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Fehler beim Entfernen von `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Privilegien können nicht aufgehoben werden.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Interner Fehler.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Fehler beim Initialisieren von PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentifizierung fehlgeschlagen: %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Interner PAM-Fehler `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Benutzer stimmt nicht überein.\n"
 
@@ -71,6 +76,7 @@ msgstr "Fehler beim Parsen von Argumenten: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Es wurde kein Benutzername angegeben.\n"
 
@@ -103,10 +109,12 @@ msgid "User %s does not exist.\n"
 msgstr "Benutzer %s existiert nicht.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Account ist gesperrt.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Account ist nicht gesperrt.\n"
 
@@ -168,7 +176,6 @@ msgstr "[OPTION...] [user]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Kein Benutzername angegeben, kein Name für uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -220,7 +227,6 @@ msgstr "Finger-Informationen geändert.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Finger-Informationen nicht geändert: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -239,10 +245,12 @@ msgid "[OPTION...] group"
 msgstr "[OPTION...] Gruppe"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Es wurde kein Gruppenname angegeben.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "Die Erzeugung der Gruppe ist fehlgeschlagen.\n"
 
@@ -257,6 +265,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Gruppe %s konnte nicht gelöscht werden.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Sowohl -L als auch -U angegeben.\n"
 
@@ -307,13 +316,13 @@ msgstr "Fehler beim Öffnen von `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Fehler beim Erstellen des Accounts für `%s': Zeile inkorrekt formatiert.\n"
+msgstr ""
+"Fehler beim Erstellen des Accounts für `%s': Zeile inkorrekt formatiert.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Erstellen des Accounts mit UID 0 verweigert.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -353,10 +362,12 @@ msgid "New password (confirm)"
 msgstr "Neues Passwort (Bestätigen)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Passwörter stimmen nicht überein. Nocheinmal eingeben.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Passwortänderung abgebrochen.\n"
 
@@ -371,10 +382,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "Fehler beim Erstellen des Passworts für Gruppe %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Passwort geändert.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -391,6 +402,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Fehler bei der Erzeugung von %s: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fehler beim Erstellen des Mail Spools.\n"
 
@@ -665,7 +677,8 @@ msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
+msgstr ""
+"Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -921,4 +934,3 @@ msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
-

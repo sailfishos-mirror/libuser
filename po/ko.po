@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-24 17:42+0200\n"
 "PO-Revision-Date: 2003-02-25 16:41+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -24,34 +25,38 @@ msgstr "`%s'(을)를 읽는 도중 오류 발생: %s"
 msgid "Error creating `%s': %s"
 msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s'(을)를 삭제하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "슈퍼유저 권한을 없애는데 실패했습니다.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "내부 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM을 초기화 하는 도중 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s의 인증에 실패했습니다.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "내부 PAM 오류 `%s'(이)가 발생했습니다.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "사용자가 일치하지 않습니다.\n"
 
@@ -69,6 +74,7 @@ msgstr "인수를 처리(parsing)하는 도중 오류 발생: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "사용자 이름이 지정되지 않았습니다.\n"
 
@@ -101,10 +107,12 @@ msgid "User %s does not exist.\n"
 msgstr "%s 사용자가 존재하지 않습니다.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "계정이 정지되었습니다.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "계정이 정지되지 않았습니다.\n"
 
@@ -166,7 +174,6 @@ msgstr "[OPTION...] [사용자]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "사용자 이름과 uid %d에 대한 이름이 지정되지 않았습니다.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -218,7 +225,6 @@ msgstr "finger 정보가 변경되었습니다.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "finger 정보가 변경되지 않았습니다: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -237,10 +243,12 @@ msgid "[OPTION...] group"
 msgstr "[옵션...] 그룹"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "그룹 이름이 지정되지 않았습니다.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "그룹 생성에 실패했습니다.\n"
 
@@ -255,6 +263,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "%s 그룹은 삭제할 수 없습니다.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "-L 와 -U 이 함께 지정되었습니다.\n"
 
@@ -313,7 +322,6 @@ msgstr ""
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -353,10 +361,12 @@ msgid "New password (confirm)"
 msgstr "새 암호 (확인)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "암호 변경이 취소되었습니다.\n"
 
@@ -371,10 +381,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "`%s' 그룹의 암호를 설정하는 도중 오류 발생: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "암호가 변경되었습니다.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -391,6 +401,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
 
@@ -923,4 +934,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-

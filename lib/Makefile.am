@@ -1,6 +1,6 @@
-CFLAGS = @CFLAGS@ @GLIB_CFLAGS@
+AM_CFLAGS = @GLIB_CFLAGS@
 LIBADD = @GOBJECT_LIBS@ @CRYPT_LIBS@
-LDFLAGS = -version-info 2:1:1
+AM_LDFLAGS = -version-info 2:1:1
 
 EXTRA_DIST = userquota.3
 

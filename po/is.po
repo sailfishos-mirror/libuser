@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-24 17:42+0200\n"
 "PO-Revision-Date: 2002-06-19 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
@@ -23,34 +24,38 @@ msgstr "Villa við lestur `%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "Villa við að búa til `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Villa við að fjarlægja `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Gat ekki minnkað heimildir.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Innvær villa.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Villa við frumstillingu PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Auðkenning mistókst hjá %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Innvær PAM villai `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Misræmi í notanda.\n"
 
@@ -68,6 +73,7 @@ msgstr "Villa við að þátta viðföng: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Ekkert notandanafn tiltekið.\n"
 
@@ -100,10 +106,12 @@ msgid "User %s does not exist.\n"
 msgstr "Notandinn %s er ekki til.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Notandinn er læstur.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Notandinn er ekki læstur.\n"
 
@@ -165,7 +173,6 @@ msgstr "[ROFI...] [notandi]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Ekkert notandanafn tiltekið, ekkert heiti fyrir notandanúmer %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -217,7 +224,6 @@ msgstr "Upplýsingum notandans breytt.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Upplýsingum notandans ekki breytt: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -236,10 +242,12 @@ msgid "[OPTION...] group"
 msgstr "[ROFI...] hópur"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Enginn hópur tiltekinn.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "Ekki tókst að búa til hópinn,\n"
 
@@ -254,6 +262,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Ekki tókst að eyða hópnum %s.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Bæði -L og -U tiltekið.\n"
 
@@ -311,7 +320,6 @@ msgstr ""
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Ég neita að búa til notandaaðgang með UID 0.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -351,10 +359,12 @@ msgid "New password (confirm)"
 msgstr "Nýtt lykilorð (staðfesta)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Lykilorðin eru ekki eins. Reyndu aftur.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Hætt við að breyta lykilorði.\n"
 
@@ -369,10 +379,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "Villa við að setja lykilorð fyrir hópinn %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Lykilorði breytt.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -389,6 +399,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Villa við að búa %s til: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Villa við að búa til pósthólf.\n"
 

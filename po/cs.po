@@ -9,7 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-24 17:42+0200\n"
 "PO-Revision-Date: 2004-07-25 17:10+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -27,34 +28,38 @@ msgstr "Chyba při čtení '%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "Chyba při vytváření `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Chyba při odstraňování `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Chyba při zahazování práv.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Interní chyba.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Chyba při inicializaci PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Chyba při autentizaci %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Interní chyba PAM `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Uživatel se neshoduje.\n"
 
@@ -72,6 +77,7 @@ msgstr "Chyba při parsování argumentů: `%s'.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Nebylo zadáno jméno uživatele.\n"
 
@@ -104,10 +110,12 @@ msgid "User %s does not exist.\n"
 msgstr "Uživatel %s neexistuje.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Účet je zablokován.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Účet není zablokován.\n"
 
@@ -169,7 +177,6 @@ msgstr "[VOLBY...] [uživatel]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Nebylo zadáno jméno uživatele, chybí jméno pro uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -221,7 +228,6 @@ msgstr "Údaje finger změněny.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Údaje finger nezměněny: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -240,10 +246,12 @@ msgid "[OPTION...] group"
 msgstr "[VOLBY...] skupina"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Nebylo zadáno jméno skupiny.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "Chyba při vytváření skupiny.\n"
 
@@ -258,6 +266,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Skupina %s nemůže být smazána.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Použito zároveň -L a -U.\n"
 
@@ -314,7 +323,6 @@ msgstr "Chyba při vytváření účtu pro '%s': nesprávně formátovaný řád
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Odmítám vytvořit účet s UID 0.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -354,10 +362,12 @@ msgid "New password (confirm)"
 msgstr "Nové heslo (potvrďte)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Hesla nesouhlasí, zkuste to znovu.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Změna hesla zrušena.\n"
 
@@ -372,10 +382,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "Chyba při nastavování hesla pro skupinu %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Heslo změněno.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -392,6 +402,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Chyba při vytváření %s: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Chyba při vytváření poštovního spoolu.\n"
 

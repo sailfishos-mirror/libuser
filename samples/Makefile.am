@@ -1,5 +1,5 @@
-CFLAGS = @CFLAGS@ @GOBJECT_CFLAGS@
-LDFLAGS = -no-install
+AM_CFLAGS = @GOBJECT_CFLAGS@
+AM_LDFLAGS = -no-install
 
 noinst_PROGRAMS = enum field homedir lookup prompt @QUOTASAMPLE@ testuser
 EXTRA_PROGRAMS = quotaq

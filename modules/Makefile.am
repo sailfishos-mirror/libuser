@@ -1,4 +1,4 @@
-CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE
+AM_CFLAGS = -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE
 LDADD = @GOBJECT_LIBS@ ../lib/libuser.la
 
 EXTRA_PROGRAMS = \
@@ -11,7 +11,7 @@ EXTRA_PROGRAMS = \
 pkginclude_HEADERS = default.-c
 pkglib_PROGRAMS = $(MODULES)
 
-LDFLAGS = -shared
+AM_LDFLAGS = -shared
 
 libuser_files_so_SOURCES = files.c
 libuser_shadow_so_SOURCES = files.c

@@ -13,7 +13,7 @@ sbin_PROGRAMS = \
 	luserdel \
 	lusermod
 
-CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@
+AM_CFLAGS = -I@PYTHON_INC@ @GOBJECT_CFLAGS@
 LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@
 
 lchsh_SOURCES = \

@@ -1,235 +1,47 @@
 <FUNCTION>
-<NAME>lu_cfg_read</NAME>
-<RETURNS>GList  *</RETURNS>
-struct lu_context *context,const char *key, const char *default_value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_cfg_read_single</NAME>
-<RETURNS>const char  *</RETURNS>
-struct lu_context *context,const char *key, const char *default_value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_cfg_read_keys</NAME>
-<RETURNS>GList  *</RETURNS>
-struct lu_context *context,const char *parent_key
-</FUNCTION>
-<MACRO>
-<NAME>LU_USERNAME</NAME>
-#define LU_USERNAME		"pw_name"
-</MACRO>
-<MACRO>
-<NAME>LU_USERPASSWORD</NAME>
-#define LU_USERPASSWORD		"pw_passwd"
-</MACRO>
-<MACRO>
-<NAME>LU_UIDNUMBER</NAME>
-#define LU_UIDNUMBER		"pw_uid"
-</MACRO>
-<MACRO>
-<NAME>LU_GIDNUMBER</NAME>
-#define LU_GIDNUMBER		"pw_gid"
-</MACRO>
-<MACRO>
-<NAME>LU_GECOS</NAME>
-#define LU_GECOS		"pw_gecos"
-</MACRO>
-<MACRO>
-<NAME>LU_HOMEDIRECTORY</NAME>
-#define LU_HOMEDIRECTORY	"pw_dir"
-</MACRO>
-<MACRO>
-<NAME>LU_LOGINSHELL</NAME>
-#define LU_LOGINSHELL		"pw_shell"
-</MACRO>
-<MACRO>
-<NAME>LU_GROUPNAME</NAME>
-#define LU_GROUPNAME		"gr_name"
-</MACRO>
-<MACRO>
-<NAME>LU_GROUPPASSWORD</NAME>
-#define LU_GROUPPASSWORD	"gr_passwd"
-</MACRO>
-<MACRO>
-<NAME>LU_MEMBERNAME</NAME>
-#define LU_MEMBERNAME		"gr_mem"
-</MACRO>
-<MACRO>
-<NAME>LU_ADMINISTRATORNAME</NAME>
-#define LU_ADMINISTRATORNAME	"gr_adm"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWNAME</NAME>
-#define LU_SHADOWNAME		LU_USERNAME
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWPASSWORD</NAME>
-#define LU_SHADOWPASSWORD	"sp_pwdp"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWLASTCHANGE</NAME>
-#define LU_SHADOWLASTCHANGE	"sp_lstchg"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWMIN</NAME>
-#define LU_SHADOWMIN		"sp_min"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWMAX</NAME>
-#define LU_SHADOWMAX		"sp_max"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWWARNING</NAME>
-#define LU_SHADOWWARNING	"sp_warn"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWINACTIVE</NAME>
-#define LU_SHADOWINACTIVE	"sp_inact"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWEXPIRE</NAME>
-#define LU_SHADOWEXPIRE		"sp_expire"
-</MACRO>
-<MACRO>
-<NAME>LU_SHADOWFLAG</NAME>
-#define LU_SHADOWFLAG		"sp_flag"
-</MACRO>
-<MACRO>
-<NAME>LU_COMMONNAME</NAME>
-#define LU_COMMONNAME		"cn"
-</MACRO>
-<MACRO>
-<NAME>LU_GIVENNAME</NAME>
-#define LU_GIVENNAME		"givenName"
-</MACRO>
-<MACRO>
-<NAME>LU_SN</NAME>
-#define LU_SN			"sn"
-</MACRO>
-<MACRO>
-<NAME>LU_ROOMNUMBER</NAME>
-#define LU_ROOMNUMBER		"roomNumber"
-</MACRO>
-<MACRO>
-<NAME>LU_TELEPHONENUMBER</NAME>
-#define LU_TELEPHONENUMBER	"telephoneNumber"
-</MACRO>
-<MACRO>
-<NAME>LU_HOMEPHONE</NAME>
-#define LU_HOMEPHONE		"homePhone"
-</MACRO>
-<MACRO>
-<NAME>LU_EMAIL</NAME>
-#define LU_EMAIL		"mail"
-</MACRO>
-<FUNCTION>
-<NAME>lu_ent_new</NAME>
-<RETURNS>lu_ent_t  *</RETURNS>
+<NAME>quota_on</NAME>
+<RETURNS>int  </RETURNS>
 void
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_ent_free</NAME>
+<NAME>quota_off</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_user</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_group</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_free_specials</NAME>
 <RETURNS>void  </RETURNS>
-lu_ent_t *ent
+char **specials
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_ent_copy</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *source, lu_ent_t *dest
+<NAME>quota_get_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_ent_revert</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent
+<NAME>quota_set_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_ent_commit</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent
+<NAME>quota_get_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_ent_get_current</NAME>
-<RETURNS>GValueArray  *</RETURNS>
-lu_ent_t *ent, const char *attribute
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_has_current</NAME>
-<RETURNS>gboolean  </RETURNS>
-lu_ent_t *ent, const char *attribute
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_set_current</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr,const GValueArray *values
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_add_current</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr,const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_clear_current</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_clear_all_current</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_del_current</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr,const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_get_attributes_current</NAME>
-<RETURNS>GList  *</RETURNS>
-lu_ent_t *ent
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_get</NAME>
-<RETURNS>GValueArray  *</RETURNS>
-lu_ent_t *ent, const char *attribute
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_has</NAME>
-<RETURNS>gboolean  </RETURNS>
-lu_ent_t *ent, const char *attribute
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_set</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr,const GValueArray *values
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_add</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr,const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_clear</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_clear_all</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_del</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, const char *attr, const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_get_attributes</NAME>
-<RETURNS>GList  *</RETURNS>
-lu_ent_t *ent
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_ent_dump</NAME>
-<RETURNS>void  </RETURNS>
-lu_ent_t *ent, FILE *fp
+<NAME>quota_set_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
 </FUNCTION>
 <ENUM>
 <NAME>lu_status_t</NAME>
@@ -503,47 +315,235 @@ lu_context_t *context,const char *pattern,lu_error_t **error
 lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_on</NAME>
-<RETURNS>int  </RETURNS>
+<NAME>lu_cfg_read</NAME>
+<RETURNS>GList  *</RETURNS>
+struct lu_context *context,const char *key, const char *default_value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_cfg_read_single</NAME>
+<RETURNS>const char  *</RETURNS>
+struct lu_context *context,const char *key, const char *default_value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_cfg_read_keys</NAME>
+<RETURNS>GList  *</RETURNS>
+struct lu_context *context,const char *parent_key
+</FUNCTION>
+<MACRO>
+<NAME>LU_USERNAME</NAME>
+#define LU_USERNAME		"pw_name"
+</MACRO>
+<MACRO>
+<NAME>LU_USERPASSWORD</NAME>
+#define LU_USERPASSWORD		"pw_passwd"
+</MACRO>
+<MACRO>
+<NAME>LU_UIDNUMBER</NAME>
+#define LU_UIDNUMBER		"pw_uid"
+</MACRO>
+<MACRO>
+<NAME>LU_GIDNUMBER</NAME>
+#define LU_GIDNUMBER		"pw_gid"
+</MACRO>
+<MACRO>
+<NAME>LU_GECOS</NAME>
+#define LU_GECOS		"pw_gecos"
+</MACRO>
+<MACRO>
+<NAME>LU_HOMEDIRECTORY</NAME>
+#define LU_HOMEDIRECTORY	"pw_dir"
+</MACRO>
+<MACRO>
+<NAME>LU_LOGINSHELL</NAME>
+#define LU_LOGINSHELL		"pw_shell"
+</MACRO>
+<MACRO>
+<NAME>LU_GROUPNAME</NAME>
+#define LU_GROUPNAME		"gr_name"
+</MACRO>
+<MACRO>
+<NAME>LU_GROUPPASSWORD</NAME>
+#define LU_GROUPPASSWORD	"gr_passwd"
+</MACRO>
+<MACRO>
+<NAME>LU_MEMBERNAME</NAME>
+#define LU_MEMBERNAME		"gr_mem"
+</MACRO>
+<MACRO>
+<NAME>LU_ADMINISTRATORNAME</NAME>
+#define LU_ADMINISTRATORNAME	"gr_adm"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWNAME</NAME>
+#define LU_SHADOWNAME		LU_USERNAME
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWPASSWORD</NAME>
+#define LU_SHADOWPASSWORD	"sp_pwdp"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWLASTCHANGE</NAME>
+#define LU_SHADOWLASTCHANGE	"sp_lstchg"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWMIN</NAME>
+#define LU_SHADOWMIN		"sp_min"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWMAX</NAME>
+#define LU_SHADOWMAX		"sp_max"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWWARNING</NAME>
+#define LU_SHADOWWARNING	"sp_warn"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWINACTIVE</NAME>
+#define LU_SHADOWINACTIVE	"sp_inact"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWEXPIRE</NAME>
+#define LU_SHADOWEXPIRE		"sp_expire"
+</MACRO>
+<MACRO>
+<NAME>LU_SHADOWFLAG</NAME>
+#define LU_SHADOWFLAG		"sp_flag"
+</MACRO>
+<MACRO>
+<NAME>LU_COMMONNAME</NAME>
+#define LU_COMMONNAME		"cn"
+</MACRO>
+<MACRO>
+<NAME>LU_GIVENNAME</NAME>
+#define LU_GIVENNAME		"givenName"
+</MACRO>
+<MACRO>
+<NAME>LU_SN</NAME>
+#define LU_SN			"sn"
+</MACRO>
+<MACRO>
+<NAME>LU_ROOMNUMBER</NAME>
+#define LU_ROOMNUMBER		"roomNumber"
+</MACRO>
+<MACRO>
+<NAME>LU_TELEPHONENUMBER</NAME>
+#define LU_TELEPHONENUMBER	"telephoneNumber"
+</MACRO>
+<MACRO>
+<NAME>LU_HOMEPHONE</NAME>
+#define LU_HOMEPHONE		"homePhone"
+</MACRO>
+<MACRO>
+<NAME>LU_EMAIL</NAME>
+#define LU_EMAIL		"mail"
+</MACRO>
+<FUNCTION>
+<NAME>lu_ent_new</NAME>
+<RETURNS>lu_ent_t  *</RETURNS>
 void
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_off</NAME>
-<RETURNS>int  </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_user</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_group</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_free_specials</NAME>
+<NAME>lu_ent_free</NAME>
 <RETURNS>void  </RETURNS>
-char **specials
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_get_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+<NAME>lu_ent_copy</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *source, lu_ent_t *dest
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_set_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
+<NAME>lu_ent_revert</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_get_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+<NAME>lu_ent_commit</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_set_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
+<NAME>lu_ent_get_current</NAME>
+<RETURNS>GValueArray  *</RETURNS>
+lu_ent_t *ent, const char *attribute
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_has_current</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_ent_t *ent, const char *attribute
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_set_current</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr,const GValueArray *values
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_add_current</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr,const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_clear_current</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_clear_all_current</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_del_current</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr,const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_get_attributes_current</NAME>
+<RETURNS>GList  *</RETURNS>
+lu_ent_t *ent
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_get</NAME>
+<RETURNS>GValueArray  *</RETURNS>
+lu_ent_t *ent, const char *attribute
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_has</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_ent_t *ent, const char *attribute
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_set</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr,const GValueArray *values
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_add</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr,const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_clear</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_clear_all</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_del</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, const char *attr, const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_get_attributes</NAME>
+<RETURNS>GList  *</RETURNS>
+lu_ent_t *ent
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_ent_dump</NAME>
+<RETURNS>void  </RETURNS>
+lu_ent_t *ent, FILE *fp
 </FUNCTION>

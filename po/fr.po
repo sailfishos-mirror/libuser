@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-24 17:42+0200\n"
 "PO-Revision-Date: 2003-03-24 16:27+0100\n"
 "Last-Translator: Audrey Simons <asimons@redhat.com>\n"
 "Language-Team: french <fr@li.org>\n"
@@ -25,34 +26,38 @@ msgstr "Erreur lors de la lecture de `%s' : %s"
 msgid "Error creating `%s': %s"
 msgstr "Erreur lors de la création de `%s' : %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Erreur lors de la suppression de `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Impossible de supprimer les privilèges.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Erreur interne.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Erreur lors de l'initialisation de PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentification échouée pour %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Erreur PAM interne %s.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Non correspondance de l'utilisateur.\n"
 
@@ -70,6 +75,7 @@ msgstr "Erreur lors de l'analyse des arguments : %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Aucun nom d'utilisateur spécifié.\n"
 
@@ -102,10 +108,12 @@ msgid "User %s does not exist.\n"
 msgstr "L'utilisateur %s n'existe pas.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Le compte est verrouillé.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Le compte n'est pas verrouillé.\n"
 
@@ -167,7 +175,6 @@ msgstr "[OPTION...] [utilisateur]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Aucun nom d'utilisateur spécifié, aucun nom pour uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -219,7 +226,6 @@ msgstr "Informations finger modifiées.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Informations finger non modifiées : %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -238,10 +244,12 @@ msgid "[OPTION...] group"
 msgstr "[OPTION...] groupe"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Aucun nom de groupe spécifié.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "La création du groupe a échoué.\n"
 
@@ -256,6 +264,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Le groupe %s ne peux pas être supprimé.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Aussi bien -L que -U spécifiés.\n"
 
@@ -306,13 +315,13 @@ msgstr "Erreur lors de la lecture de `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
+msgstr ""
+"Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Création du compte avec l'UID 0 refusée.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -352,28 +361,32 @@ msgid "New password (confirm)"
 msgstr "Nouveau mot de passe (confirmation)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Les mots de passe ne sont pas les mêmes, essayez de nouveau.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Changement de mot de passe annulé.\n"
 
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Mot de passe changé.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -390,6 +403,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Erreur lors de la création de %s : %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Erreur lors de la création du spool de mail.\n"
 
@@ -431,7 +445,8 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -870,7 +885,8 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:546
 msgid "error removing home directory for user"
-msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr ""
+"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:623
 msgid "error moving home directory for user"
@@ -924,4 +940,3 @@ msgstr "Obtention d'attributs d'utilisateur par défaut :\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
-

@@ -7,10 +7,10 @@ fi
 set -x -e
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
 libtoolize --force
-glib-gettextize -f -c
-aclocal # -I ./m4
-automake -a
-autoheader
-autoconf
-test -f config.cache && rm -f config.cache || true
+autopoint
+aclocal -I m4
+autoconf -Wall
+autoheader -Wall
+automake -Wall --add-missing
+rm -f config.cache
 ./configure --prefix=/usr --sysconfdir=/etc --enable-maintainer-mode --with-ldap --with-sasl $@
