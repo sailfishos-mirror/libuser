@@ -10,8 +10,8 @@ libtoolize --force
 cp ChangeLog ChangeLog.old
 gettextize -f -c --intl
 cat ChangeLog.old > ChangeLog
-automake -a
 aclocal -I ./m4
+automake -a
 autoheader
 autoconf
 test -f config.cache && rm -f config.cache || true
