@@ -1563,10 +1563,10 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	/* Generate a string representation of the name. */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(value)) {
+	if (G_VALUE_HOLDS_STRING(val)) {
 		namestring = g_value_dup_string(val);
 	} else
-	if (G_VALUE_HOLDS_LONG(value)) {
+	if (G_VALUE_HOLDS_LONG(val)) {
 		namestring = g_strdup_printf("%ld", g_value_get_long(val));
 	} else {
 		g_assert_not_reached();
