@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2002-02-13 08:59+0100\n"
+"PO-Revision-Date: 2002-02-25 02:46+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -422,9 +422,9 @@ msgid "error creating `%s': %s"
 msgstr "fel vid skapande av \"%s\": %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "säkerhetskopian \"%s\" var en symbolisk länk"
+msgstr "säkerhetskopian \"%s\" finns och är inte en vanlig fil"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
