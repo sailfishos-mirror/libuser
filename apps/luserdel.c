@@ -114,14 +114,21 @@ main(int argc, const char **argv)
 			return 4;
 		} else {
 			value = g_value_array_get_nth(values, 0);
-			gid = g_value_get_long(value);
+			if (G_VALUE_HOLDS_LONG(value)) {
+				gid = g_value_get_long(value);
+			} else
+			if (G_VALUE_HOLDS_STRING(value)) {
+				gid = atol(g_value_get_string(value));
+			} else {
+				g_assert_not_reached();
+			}
 			if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE){
 				fprintf(stderr, _("No group with GID %ld "
 					"exists, not removing.\n"), (long) gid);
 				return 5;
 			}
 			values = lu_ent_get(ent, LU_GROUPNAME);
-			if ((values == NULL) || (values->n_values == 0)) {
+			if (values == NULL) {
 				fprintf(stderr, _("Group with GID %ld did not "
 					"have a group name.\n"), (long) gid);
 				return 6;

@@ -119,7 +119,16 @@ main(int argc, const char **argv)
 		prompts[0].prompt = N_("New Shell");
 		prompts[0].domain = PACKAGE;
 		prompts[0].visible = TRUE;
-		prompts[0].default_value = g_value_get_string(value);
+		if (G_VALUE_HOLDS_STRING(value)) {
+			prompts[0].default_value = g_value_get_string(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			prompts[0].default_value = g_strdup_printf("%ld",
+								   g_value_get_long(value));
+			/* leak */
+		} else {
+			g_assert_not_reached();
+		}
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 				      NULL, &error)) {

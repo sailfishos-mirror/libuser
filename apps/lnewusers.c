@@ -153,7 +153,7 @@ main(int argc, const char **argv)
 		/* Try to convert the field to a number. */
 		p = NULL;
 		gid_tmp = strtol(gidstring, &p, 10);
-		gid = -2;
+		gid = INVALID;
 		if ((p == NULL) || (*p != '\0')) {
 			/* It's not a number, so it's a group name --
 			 * see if it's being used. */
@@ -163,7 +163,14 @@ main(int argc, const char **argv)
 				if (values != NULL) {
 					value = g_value_array_get_nth(values,
 								      0);
-					gid = g_value_get_long(value);
+					if (G_VALUE_HOLDS_LONG(value)) {
+						gid = g_value_get_long(value);
+					} else
+					if (G_VALUE_HOLDS_STRING(value)) {
+						gid = atol(g_value_get_string(value));
+					} else {
+						g_assert_not_reached();
+					}
 				}
 				creategroup = FALSE;
 			} else {
@@ -180,7 +187,14 @@ main(int argc, const char **argv)
 				if (values != NULL) {
 					value = g_value_array_get_nth(values,
 								      0);
-					gid = g_value_get_long(value);
+					if (G_VALUE_HOLDS_LONG(value)) {
+						gid = g_value_get_long(value);
+					} else
+					if (G_VALUE_HOLDS_STRING(value)) {
+						gid = atol(g_value_get_string(value));
+					} else {
+						g_assert_not_reached();
+					}
 				}
 				creategroup = FALSE;
 			} else {
@@ -194,7 +208,7 @@ main(int argc, const char **argv)
 		if (creategroup) {
 			/* If we got a GID, then we need to use the user's name,
 			 * otherwise we need to use the default group name. */
-			if (gid != -2) {
+			if (gid != INVALID) {
 				lu_group_default(ctx, fields[0], FALSE, ent);
 				memset(&val, 0, sizeof(val));
 				g_value_init(&val, G_TYPE_LONG);
@@ -210,7 +224,14 @@ main(int argc, const char **argv)
 			if (lu_group_add(ctx, ent, &error)) {
 				values = lu_ent_get(ent, LU_GIDNUMBER);
 				value = g_value_array_get_nth(values, 0);
-				gid = g_value_get_long(value);
+				if (G_VALUE_HOLDS_LONG(value)) {
+					gid = g_value_get_long(value);
+				} else
+				if (G_VALUE_HOLDS_STRING(value)) {
+					gid = atol(g_value_get_string(value));
+				} else {
+					g_assert_not_reached();
+				}
 			} else {
 				/* Aargh!  Abandon all hope. */
 				g_print(_("Error creating group for `%s' with "

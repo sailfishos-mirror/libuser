@@ -57,7 +57,7 @@ static const struct format_specifier format_passwd[] = {
 	{4, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE},
 	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{7, LU_LOGINSHELL, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{7, LU_LOGINSHELL, G_TYPE_STRING, "/bin/sh", FALSE, FALSE},
 };
 
 static const struct format_specifier format_group[] = {
@@ -81,7 +81,7 @@ static const struct format_specifier format_shadow[] = {
 
 static const struct format_specifier format_gshadow[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
 	{3, LU_ADMINISTRATORUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
@@ -307,8 +307,8 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 			}
 			/* Add it to the current values list. */
 			lu_ent_add_current(ent, formats[i].attribute, &value);
+			g_value_unset(&value);
 		}
-		g_value_unset(&value);
 	}
 	g_strfreev(v);
 	return TRUE;
@@ -569,7 +569,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 		if (i > 0) {
 			j = formats[i].position - formats[i - 1].position;
 			while (j-- > 0) {
-				tmp = g_strconcat(ret, ":", NULL);
+				tmp = g_strconcat(ret ?: "", ":", NULL);
 				if (ret) {
 					g_free(ret);
 				}
@@ -584,15 +584,25 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 			do {
 				/* Get a string representation of this value. */
 				val = g_value_array_get_nth(values, j);
-				p = g_value_dup_string(val);
+				if (G_VALUE_HOLDS_STRING(val)) {
+					p = g_value_dup_string(val);
+				} else
+				if (G_VALUE_HOLDS_LONG(val)) {
+					p = g_strdup_printf("%ld",
+							    g_value_get_long(val));
+				} else {
+					g_assert_not_reached();
+				}
 				/* Add it to the end, prepending a comma if we
 				 * need to separate it from another value. */
-				tmp = g_strconcat(ret,
+				tmp = g_strconcat(ret ?: "",
 						  (j > 0) ? "," : "",
 						  p,
 						  NULL);
 				g_free(p);
-				g_free(ret);
+				if (ret != NULL) {
+					g_free(ret);
+				}
 				ret = tmp;
 				j++;
 			} while (formats[i].multiple && (j < values->n_values));
@@ -610,14 +620,16 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				} else {
 					g_assert_not_reached();
 				}
-				tmp = g_strconcat(ret, p, NULL);
+				tmp = g_strconcat(ret ?: "", p, NULL);
 				g_free(p);
-				g_free(ret);
+				if (ret != NULL) {
+					g_free(ret);
+				}
 				ret = tmp;
 			}
 		}
 	}
-	p = g_strconcat(ret, "\n", NULL);
+	p = g_strconcat(ret ?: "", "\n", NULL);
 	if (ret) {
 		g_free(ret);
 	}
@@ -854,14 +866,12 @@ lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 {
 	GValue svalue;
 
+	/* Make sure the regular password says "shadow!" */
 	memset(&svalue, 0, sizeof(svalue));
 	g_value_init(&svalue, G_TYPE_STRING);
-
-	/* Make sure the regular password says "shadow!" */
 	g_value_set_string(&svalue, "x");
 	lu_ent_clear(ent, LU_GROUPPASSWORD);
 	lu_ent_add(ent, LU_GROUPPASSWORD, &svalue);
-
 	g_value_unset(&svalue);
 
 	return TRUE;
@@ -990,6 +1000,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 			j++;
 		} while (formats[i].multiple);
 
+		value = g_value_array_get_nth(names, 0);
 		ret = lu_util_field_write(fd, g_value_get_string(value),
 					  formats[i].position, new_value,
 					  error);
@@ -1608,6 +1619,7 @@ static void
 set_shadow_last_change(struct lu_module *module, struct lu_ent *ent)
 {
 	GValue value;
+
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
 	g_value_set_string(&value, lu_util_shadow_current_date(module->scache));

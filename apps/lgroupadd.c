@@ -34,7 +34,7 @@ int
 main(int argc, const char **argv)
 {
 	const char *name = NULL;
-	long gidNumber = -2;
+	long gidNumber = INVALID;
 	GValue value;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
@@ -100,7 +100,7 @@ main(int argc, const char **argv)
 
 	/* If the user specified a particular GID number, override the
 	 * default. */
-	if (gidNumber != -2) {
+	if (gidNumber != INVALID) {
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);
 		g_value_set_long(&value, gidNumber);

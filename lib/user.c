@@ -835,8 +835,13 @@ lu_dispatch(struct lu_context *context,
 gboolean
 lu_uses_elevated_privileges (struct lu_context *context)
 {
-	return lu_dispatch(context, uses_elevated_privileges, NULL, 0,
-			   NULL, NULL, NULL);
+	struct lu_error *error = NULL;
+	gboolean ret = lu_dispatch(context, uses_elevated_privileges, NULL, 0,
+				   NULL, NULL, &error);
+	if (error != NULL) {
+		lu_error_free(&error);
+	}
+	return ret;
 }
 
 gboolean

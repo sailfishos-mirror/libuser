@@ -33,7 +33,8 @@
 int
 main(int argc, const char **argv)
 {
-	const char *name = NULL, *tmp;
+	const char *name = NULL;
+	char *tmp = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent = NULL;
@@ -131,9 +132,17 @@ main(int argc, const char **argv)
 					if (attrs != NULL) {
 						value = g_value_array_get_nth(attrs,
 									      0);
-						tmp = g_value_get_string(value);
+						if (G_VALUE_HOLDS_STRING(value)) {
+							tmp = g_value_dup_string(value);
+						} else
+						if (G_VALUE_HOLDS_LONG(value)) {
+							tmp = g_strdup_printf("%ld", g_value_get_long(value));
+						} else {
+							g_assert_not_reached();
+						}
 						g_print(" %s(uid=%s)\n",
 							name, tmp);
+						g_free(tmp);
 					} else {
 						g_print(" %s\n", name);
 					}
@@ -164,10 +173,18 @@ main(int argc, const char **argv)
 					if (attrs != NULL) {
 						value = g_value_array_get_nth(attrs,
 									      0);
-						tmp = g_value_get_string(value);
+						if (G_VALUE_HOLDS_STRING(value)) {
+							tmp = g_value_dup_string(value);
+						} else
+						if (G_VALUE_HOLDS_LONG(value)) {
+							tmp = g_strdup_printf("%ld", g_value_get_long(value));
+						} else {
+							g_assert_not_reached();
+						}
 						g_print(" %s(gid=%s)\n",
 							name,
 						        tmp);
+						g_free(tmp);
 					} else {
 						g_print(" %s\n", name);
 					}

@@ -23,6 +23,7 @@
 #include <sys/types.h>
 #include "../include/libuser/user.h"
 
+#define INVALID (-0x80000000)
 #define _(String) gettext(String)
 #define N_(String) (String)
 

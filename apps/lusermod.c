@@ -38,7 +38,7 @@ main(int argc, const char **argv)
 		   *oldHomeDirectory, *homeDirectory = NULL, *loginShell = NULL;
 	char *tmp = NULL;
 	const char *username, *groupname;
-	long uidNumber = -2, gidNumber = -2;
+	long uidNumber = INVALID, gidNumber = INVALID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL, *group = NULL;
 	struct lu_error *error = NULL;
@@ -134,18 +134,18 @@ main(int argc, const char **argv)
 	/* Determine if we actually need to change anything. */
 	change = userPassword || cryptedUserPassword || uid || gecos ||
 		 oldHomeDirectory || homeDirectory || loginShell ||
-		 (uidNumber != -2) || (gidNumber != -2);
+		 (uidNumber != INVALID) || (gidNumber != INVALID);
 
 	/* Change the user's UID and GID. */
 	memset(&val, 0, sizeof(val));
 	g_value_init(&val, G_TYPE_LONG);
 
-	if (uidNumber != -2) {
+	if (uidNumber != INVALID) {
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
 	}
-	if (gidNumber != -2) {
+	if (gidNumber != INVALID) {
 		g_value_set_long(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);

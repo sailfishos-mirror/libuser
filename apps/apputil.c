@@ -219,19 +219,19 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 				if (lu_homedir_remove(path, error) == FALSE) {
 					closedir(dir);
 					return FALSE;
-				} else {
-					/* ... and unlink everything else. */
-					if (unlink(path) == -1) {
-						lu_error_new(error,
-							     lu_error_generic,
-							     _("Error removing "
-							     "`%s': %s"),
-							     path,
-							     strerror
-							     (errno));
-						closedir(dir);
-						return FALSE;
-					}
+				}
+			} else {
+				/* ... and unlink everything else. */
+				if (unlink(path) == -1) {
+					lu_error_new(error,
+						     lu_error_generic,
+						     _("Error removing "
+						     "`%s': %s"),
+						     path,
+						     strerror
+						     (errno));
+					closedir(dir);
+					return FALSE;
 				}
 			}
 		}

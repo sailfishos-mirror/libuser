@@ -125,7 +125,15 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_GECOS);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		gecos = g_value_get_string(value);
+		if (G_VALUE_HOLDS_STRING(value)) {
+			gecos = g_value_get_string(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			gecos = g_strdup_printf("%ld", g_value_get_long(value));
+			/* leak */
+		} else {
+			g_assert_not_reached();
+		}
 	} else {
 		gecos = "";
 	}
@@ -156,9 +164,17 @@ main(int argc, const char **argv)
 
 	/* If we have it, prompt for the user's surname. */
 	values = lu_ent_get(ent, LU_SN);
-	if ((values != NULL) && (values->n_values > 0)) {
+	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		sn = g_value_get_string(value);
+		if (G_VALUE_HOLDS_STRING(value)) {
+			sn = g_value_get_string(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			sn = g_strdup_printf("%ld", g_value_get_long(value));
+			/* leak */
+		} else {
+			g_assert_not_reached();
+		}
 		prompts[pcount].key = SURNAME_KEY;
 		prompts[pcount].prompt = N_("Surname");
 		prompts[pcount].domain = PACKAGE;
@@ -169,9 +185,17 @@ main(int argc, const char **argv)
 
 	/* If we have it, prompt for the user's givenname. */
 	values = lu_ent_get(ent, LU_GIVENNAME);
-	if ((values != NULL) && (values->n_values > 0)) {
+	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		gn = g_value_get_string(value);
+		if (G_VALUE_HOLDS_STRING(value)) {
+			gn = g_value_get_string(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			gn = g_strdup_printf("%ld", g_value_get_long(value));
+			/* leak */
+		} else {
+			g_assert_not_reached();
+		}
 		prompts[pcount].key = GIVENNAME_KEY;
 		prompts[pcount].prompt = N_("Given Name");
 		prompts[pcount].domain = PACKAGE;
@@ -209,9 +233,17 @@ main(int argc, const char **argv)
 
 	/* If we have it, prompt for the user's email. */
 	values = lu_ent_get(ent, LU_EMAIL);
-	if ((values != NULL) && (values->n_values > 0)) {
+	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		email = g_value_get_string(value);
+		if (G_VALUE_HOLDS_STRING(value)) {
+			email = g_value_get_string(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			email = g_strdup_printf("%ld", g_value_get_long(value));
+			/* leak */
+		} else {
+			g_assert_not_reached();
+		}
 		prompts[pcount].key = EMAIL_KEY;
 		prompts[pcount].prompt = N_("E-Mail Address");
 		prompts[pcount].domain = PACKAGE;
@@ -235,7 +267,7 @@ main(int argc, const char **argv)
 
 	/* Now iterate over the answers and figure things out. */
 	for (i = 0; i < pcount; i++) {
-		g_value_set_string(&val, prompts[i].value);
+		g_value_set_string(&val, prompts[i].value ?: "");
 
 		if (strcmp(prompts[i].key, NAME_KEY) == 0) {
 			name = prompts[i].value;
@@ -278,13 +310,6 @@ main(int argc, const char **argv)
 			lu_ent_clear(ent, LU_EMAIL);
 			lu_ent_add(ent, LU_EMAIL, &val);
 		}
-
-		if (prompts[i].value != NULL) {
-			if (prompts[i].free_value != NULL) {
-				prompts[i].free_value(prompts[i].value);
-				prompts[i].value = NULL;
-			}
-		}
 	}
 
 	g_value_reset(&val);
@@ -296,6 +321,16 @@ main(int argc, const char **argv)
 			  officephone ?: "",
 			  homephone ?: "",
 			  NULL);
+
+	/* Now we can free the answers. */
+	for (i = 0; i < pcount; i++) {
+		if (prompts[i].value != NULL) {
+			if (prompts[i].free_value != NULL) {
+				prompts[i].free_value(prompts[i].value);
+				prompts[i].value = NULL;
+			}
+		}
+	}
 
 	/* Set the GECOS attribute. */
 	g_value_set_string(&val, gecos);

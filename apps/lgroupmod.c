@@ -38,7 +38,7 @@ main(int argc, const char **argv)
 		   *addMembers = NULL, *remMembers = NULL, *group = NULL,
 		   *tmp = NULL;
 	char **admins = NULL, **members = NULL;
-	long gidNumber = -2, oldGidNumber = -2;
+	long gidNumber = INVALID, oldGidNumber = INVALID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
@@ -121,7 +121,7 @@ main(int argc, const char **argv)
 	}
 
 	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
-		 addMembers || remMembers || (gidNumber != -2);
+		 addMembers || remMembers || (gidNumber != INVALID);
 
 	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
@@ -134,11 +134,18 @@ main(int argc, const char **argv)
 			g_value_unset(&val);
 		}
 	}
-	if (gidNumber != -2) {
+	if (gidNumber != INVALID) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if (values) {
 			value = g_value_array_get_nth(values, 0);
-			oldGidNumber = g_value_get_long(value);
+			if (G_VALUE_HOLDS_LONG(value)) {
+				oldGidNumber = g_value_get_long(value);
+			} else
+			if (G_VALUE_HOLDS_STRING(value)) {
+				oldGidNumber = atol(g_value_get_string(value));
+			} else {
+				g_assert_not_reached();
+			}
 		}
 
 		memset(&val, 0, sizeof(val));
@@ -260,7 +267,7 @@ main(int argc, const char **argv)
 
 	lu_ent_free(ent);
 
-	if ((oldGidNumber != -2) && (gidNumber != -2)) {
+	if ((oldGidNumber != INVALID) && (gidNumber != INVALID)) {
 		values = lu_users_enumerate_by_group(ctx, gid, &error);
 		if (error != NULL) {
 			lu_error_free(&error);
