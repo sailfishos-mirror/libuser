@@ -1,0 +1,9 @@
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: libuser
+Description: A user and group account administration library.
+Version: @VERSION@
+Libs: -L${libdir} -luser
+Requires: glib-2.0
+Cflags: -I${includedir}

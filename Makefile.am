@@ -1,6 +1,7 @@
 SUBDIRS = intl include lib quota modules apps samples python po docs
 EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt libuser.g
 sysconf_DATA = libuser.conf
+pkgconfigdir = $(libdir)/pkgconfig
 
 dist-hook:
 	make -f Makefile.in -C po Makefile
@@ -24,3 +25,5 @@ tag:
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.gz\".
+
+pkgconfig_DATA = $(PACKAGE).pc

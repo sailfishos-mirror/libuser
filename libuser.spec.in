@@ -9,7 +9,7 @@ Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 BuildPrereq: pam-devel, popt, python-devel
 BuildPrereq: doxygen, jade, linuxdoc-tools
-Summary: A user account administration library.
+Summary: A user and group account administration library.
 
 %description
 The libuser library implements a standardized interface for manipulating
@@ -90,6 +90,7 @@ popd
 
 %attr(0644,root,root) %{_libdir}/libuser.la
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
+%attr(0644,root,root) %{_libdir}/pkgconfig/*
 
 %changelog
 * Mon Jan 07 2002 Florian La Roche <Florian.LaRoche@redhat.de>

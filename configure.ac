@@ -219,6 +219,7 @@ docs/Makefile
 docs/sgml/Makefile
 libuser.spec
 libuser.conf
+libuser.pc
 ])
 
 $MAKE -C po -f Makefile.in Makefile
