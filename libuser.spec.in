@@ -73,6 +73,11 @@ rm -fr $RPM_BUILD_ROOT
 #%attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Aug  7 2001 Nalin Dahyabhai <nalin@redhat.com>
+- rename the quota source files to match the library, which clears up a
+  file conflict with older quota packages
+- add ja translation files
+
 * Thu Aug  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - close up some memory leaks
 - add the ability to include resident versions of modules in the library

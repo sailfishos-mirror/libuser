@@ -3,7 +3,7 @@ include $(top_srcdir)/Makefile.extra
 lib_LTLIBRARIES = libuser_quota.la
 
 libuser_quota_la_SOURCES = \
-	quota.c
+	user_quota.c
 
-man_MANS = quota.3
-EXTRA_DIST = quota.3
+man_MANS = user_quota.3
+EXTRA_DIST = user_quota.3
