@@ -1,6 +1,6 @@
 # Libuser.po ko.po
 # Copyright (C) 2001 Red Hat, Inc.
-# Jin-Hee Shin <djoo@redhat.com>, 2001.
+# Michelle Kim <mkim@redhat.com>, 2001.
 #
 msgid ""
 msgstr ""
