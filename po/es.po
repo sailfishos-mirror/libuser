@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-15 17:48-0500\n"
+"POT-Creation-Date: 2002-01-16 00:46-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "error al crear `%s': %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#: apps/apputil.c:196 apps/apputil.c:227 apps/apputil.c:245
+#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Error al eliminar %s: %s"
@@ -67,13 +67,13 @@ msgstr ""
 
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
-#: apps/lchage.c:128 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
+#: apps/lchage.c:131 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[OPCIÓN...] usuario"
 
 # apps/luserdel.c:126
 # apps/luserdel.c:126
-#: apps/lchage.c:131 apps/lgroupadd.c:67 apps/lgroupdel.c:59
+#: apps/lchage.c:134 apps/lgroupadd.c:67 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
 #, fuzzy, c-format
@@ -82,7 +82,7 @@ msgstr "Error al eliminar %s: %s.\n"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
-#: apps/lchage.c:140 apps/luseradd.c:103 apps/luserdel.c:75
+#: apps/lchage.c:143 apps/luseradd.c:103 apps/luserdel.c:75
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
 msgstr "No se ha especificado nombre de usuario.\n"
@@ -93,7 +93,7 @@ msgstr "No se ha especificado nombre de usuario.\n"
 # apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 # apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
 # apps/lusermod.c:82
-#: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
+#: apps/lchage.c:154 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
@@ -106,7 +106,7 @@ msgstr "Error inicializando %s: %s.\n"
 # apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 # apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
 # apps/lusermod.c:84
-#: apps/lchage.c:154 apps/lgroupadd.c:90 apps/lgroupdel.c:82
+#: apps/lchage.c:157 apps/lgroupadd.c:90 apps/lgroupdel.c:82
 #: apps/lgroupmod.c:105 apps/luseradd.c:117 apps/luserdel.c:88
 #: apps/lusermod.c:115
 #, c-format
@@ -115,88 +115,88 @@ msgstr "Error inicializando %s.\n"
 
 # apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
 # apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
-#: apps/lchage.c:164 apps/luserdel.c:97 apps/lusermod.c:130
+#: apps/lchage.c:167 apps/luserdel.c:97 apps/lusermod.c:130
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "El usuario %s no existe.\n"
 
 # apps/lchage.c:124
 # apps/lchage.c:124
-#: apps/lchage.c:172
+#: apps/lchage.c:175
 msgid "Account is locked.\n"
 msgstr "La cuenta está bloqueada.\n"
 
 # apps/lchage.c:126
 # apps/lchage.c:126
-#: apps/lchage.c:174
+#: apps/lchage.c:177
 msgid "Account is not locked.\n"
 msgstr "La cuenta no está bloqueada.\n"
 
 # apps/lchage.c:130
 # apps/lchage.c:130
-#: apps/lchage.c:179
+#: apps/lchage.c:182
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Mínimo:\t%d\n"
 
 # apps/lchage.c:134
 # apps/lchage.c:134
-#: apps/lchage.c:184
+#: apps/lchage.c:187
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Máximo:\t%d\n"
 
 # apps/lchage.c:138
 # apps/lchage.c:138
-#: apps/lchage.c:189
+#: apps/lchage.c:192
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Aviso:\t%d\n"
 
 # apps/lchage.c:142
 # apps/lchage.c:142
-#: apps/lchage.c:194
+#: apps/lchage.c:197
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Inactivo:\t%d\n"
 
 # apps/lchage.c:146 apps/lchage.c:154 apps/lchage.c:162 apps/lchage.c:170
 # apps/lchage.c:146 apps/lchage.c:154 apps/lchage.c:162 apps/lchage.c:170
-#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#: apps/lchage.c:202 apps/lchage.c:210 apps/lchage.c:221 apps/lchage.c:231
 msgid "Never"
 msgstr "Nunca"
 
 # apps/lchage.c:149
 # apps/lchage.c:149
-#: apps/lchage.c:201
+#: apps/lchage.c:204
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Último cambio:\t%s\n"
 
 # apps/lchage.c:156
 # apps/lchage.c:156
-#: apps/lchage.c:211
+#: apps/lchage.c:214
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Contraseña caducada:\t%s\n"
 
 # apps/lchage.c:165
 # apps/lchage.c:165
-#: apps/lchage.c:223
+#: apps/lchage.c:226
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Contraseña inactiva:\t%s\n"
 
 # apps/lchage.c:172
 # apps/lchage.c:172
-#: apps/lchage.c:230
+#: apps/lchage.c:233
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Cuenta caducada:\t%s\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
-#: apps/lchage.c:277
+#: apps/lchage.c:280
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "No se pudo modificar la información de paso del tiempo para %s.\n"
@@ -241,28 +241,28 @@ msgstr "Especificación de -L y -U\n"
 
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
-#: apps/lgroupmod.c:222 apps/lgroupmod.c:232
+#: apps/lgroupmod.c:229 apps/lgroupmod.c:239
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Intento fallido de configuración de la contraseña para el grupo %s.\n"
 
 # apps/lgroupmod.c:174
 # apps/lgroupmod.c:174
-#: apps/lgroupmod.c:241
+#: apps/lgroupmod.c:248
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "No se ha podido bloquear el grupo %s.\n"
 
 # apps/lgroupmod.c:182
 # apps/lgroupmod.c:182
-#: apps/lgroupmod.c:249
+#: apps/lgroupmod.c:256
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "No se ha podido desbloquear el grupo %s.\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:263
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "El grupo %s no ha podido ser modificado.\n"
@@ -270,21 +270,21 @@ msgstr "El grupo %s no ha podido ser modificado.\n"
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #. Aargh!  Abandon all hope.
-#: apps/luseradd.c:194
+#: apps/luseradd.c:200 apps/luseradd.c:212
 #, fuzzy, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "Error en la creación de un grupo para %s: %s.\n"
 
 # apps/luseradd.c:159
 # apps/luseradd.c:159
-#: apps/luseradd.c:254
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Creación de la cuenta fallida: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/luseradd.c:282
+#: apps/luseradd.c:321
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creando %s: %s.\n"
@@ -303,35 +303,35 @@ msgstr "No se ha podido eliminar el usuario %s: %s.\n"
 msgid "%s did not have a gid number.\n"
 msgstr "%s no tenía un número gid.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:126
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr ""
 
 # apps/luserdel.c:105
 # apps/luserdel.c:105
-#: apps/luserdel.c:125
+#: apps/luserdel.c:132
 #, fuzzy, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "El grupo #%d no tenía un nombre de grupo.\n"
 
 # apps/luserdel.c:110
 # apps/luserdel.c:110
-#: apps/luserdel.c:133
+#: apps/luserdel.c:140
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "No se ha podido eliminar el grupo %s: %s.\n"
 
 # apps/luserdel.c:122
 # apps/luserdel.c:122
-#: apps/luserdel.c:147
+#: apps/luserdel.c:154
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s no tenía un directorio principal.\n"
 
 # apps/luserdel.c:126
 # apps/luserdel.c:126
-#: apps/luserdel.c:154
+#: apps/luserdel.c:161
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Error al eliminar %s: %s.\n"
@@ -561,12 +561,12 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
-#: modules/files.c:106 modules/files.c:392 modules/files.c:714
-#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
-#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
-#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
-#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
-#: modules/files.c:1980
+#: modules/files.c:106 modules/files.c:394 modules/files.c:710
+#: modules/files.c:961 modules/files.c:1137 modules/files.c:1319
+#: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
+#: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
+#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
+#: modules/files.c:1949
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -575,7 +575,7 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
 #: modules/files.c:121 modules/files.c:153 modules/files.c:185
-#: modules/files.c:728 modules/files.c:1180
+#: modules/files.c:724 modules/files.c:1151
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se ha podido empezar `%s': %s"
@@ -596,22 +596,22 @@ msgstr "el archivo de copia de seguridad `%s' era un symlink"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:745 modules/files.c:1191
+#: modules/files.c:741 modules/files.c:1162
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
-#: modules/files.c:757 modules/files.c:769
+#: modules/files.c:753 modules/files.c:765
 msgid "entry already present in file"
 msgstr "la entrada ya se ha hecho presente en el archivo"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
-#: modules/files.c:1236
+#: modules/files.c:779 modules/files.c:794 modules/files.c:1192
+#: modules/files.c:1203
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -620,28 +620,21 @@ msgstr "no se ha podido escribir en `%s': %s"
 # modules/files.c:833
 # modules/files.c:727 modules/files.c:734 modules/files.c:821
 # modules/files.c:831
-#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
-#: modules/files.c:1071
+#: modules/files.c:931 modules/files.c:940 modules/files.c:1024
+#: modules/files.c:1037
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
-# modules/files.c:776
-# modules/files.c:773
-#: modules/files.c:994
-#, c-format
-msgid "entity object has no `%s' attribute"
-msgstr "el objeto de entidad no tiene ningún atributo `%s'"
-
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2169 modules/files.c:2235
+#: modules/files.c:2138 modules/files.c:2204
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2248
+#: modules/files.c:2217
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 
@@ -966,6 +959,11 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
+# modules/files.c:776
+# modules/files.c:773
+#~ msgid "entity object has no `%s' attribute"
+#~ msgstr "el objeto de entidad no tiene ningún atributo `%s'"
 
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74

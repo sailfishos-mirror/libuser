@@ -633,15 +633,19 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	PyObject *mkhomedir = self;
 	PyObject *mkmailspool = self;
 	PyObject *subargs, *subkwargs;
+	struct lu_context *context = NULL;
 	char *keywords[] = { "entity", "mkhomedir", "mkmailspool", NULL };
 
 	DEBUG_ENTRY;
+
+	context = ((struct libuser_admin *)self)->ctx;
 
 	/* Expect an entity and a flag to tell us if we need to create the
 	 * user's home directory. */
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|OO", keywords,
 					 &EntityType, &ent,
 					 &mkhomedir, &mkmailspool)) {
+		DEBUG_EXIT;
 		return NULL;
 	}
 
@@ -651,7 +655,9 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 		/* If we got a non-NULL response, then it was okay. */
 		if ((mkhomedir != NULL) && (PyObject_IsTrue(mkhomedir))) {
 			/* Free the result we got. */
-			Py_DECREF(ret);
+			if (ret != NULL) {
+				Py_DECREF(ret);
+			}
 			/* Create the user's home directory we need to pass
 			 * the entity structure in a tuple, so create a tuple
 			 * and add just that object to it. */
@@ -667,9 +673,12 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 		if ((mkmailspool != NULL) && (PyObject_IsTrue(mkmailspool))) {
 			struct libuser_entity *entity;
 			entity = (struct libuser_entity*) ent;
-			Py_DECREF(ret);
-			ret = lu_mailspool_create(entity->ent) ?
-			      Py_BuildValue("") : NULL;
+			if (ret != NULL) {
+				Py_DECREF(ret);
+			}
+			ret = lu_mailspool_create_destroy(context, entity->ent, TRUE) ?
+			      Py_BuildValue("") :
+			      NULL;
 		}
 	}
 
@@ -735,14 +744,18 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 {
 	PyObject *ent = NULL;
 	PyObject *ret = NULL;
-	PyObject *rmhomedir = NULL;
+	PyObject *rmhomedir = NULL, *rmmailspool = NULL;
 	PyObject *subargs, *subkwargs;
-	char *keywords[] = { "entity", "rmhomedir", NULL };
+	struct lu_context *context;
+	char *keywords[] = { "entity", "rmhomedir", "rmmailspool", NULL };
 
 	DEBUG_ENTRY;
 
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "O|O", keywords, &ent, &rmhomedir)) {
+	context = ((struct libuser_admin *)self)->ctx;
+
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|OO", keywords,
+					 &EntityType, &ent,
+					 &rmhomedir, &rmmailspool)) {
 		return NULL;
 	}
 
@@ -753,9 +766,18 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 			subargs = PyTuple_New(1);
 			PyTuple_SetItem(subargs, 0, ent);
 			subkwargs = PyDict_New();
-			ret =
-			    libuser_admin_remove_home(self, subargs,
-						      subkwargs);
+			ret = libuser_admin_remove_home(self, subargs,
+						        subkwargs);
+		}
+	}
+	if (ret != NULL) {
+		if ((rmmailspool!= NULL) && (PyObject_IsTrue(rmmailspool))) {
+			Py_DECREF(ret);
+			struct libuser_entity *entity;
+			entity = (struct libuser_entity *)ent;
+			ret = lu_mailspool_create_destroy(context, entity->ent, TRUE) ?
+			      Py_BuildValue("") :
+			      NULL;
 		}
 	}
 

@@ -29,9 +29,11 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <glib.h>
+#include <grp.h>
 #include <libintl.h>
 #include <limits.h>
 #include <locale.h>
+#include <pwd.h>
 #include <security/pam_appl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -487,9 +489,131 @@ lu_hup_nscd()
 
 /* Create a mail spool for the user. */
 gboolean
-lu_mailspool_create(struct lu_ent *ent)
+lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
+			    gboolean action)
 {
-	/* FIXME */
-	g_warning("mail spool creation is not yet implemented");
+	GValueArray *array;
+	GValue *value;
+	const char *spooldir;
+	long uid, gid;
+	char *p, *username;
+	struct group grp, *err;
+	struct lu_ent *groupEnt;
+	struct lu_error *error = NULL;
+	char buf[LINE_MAX * 4];
+	int fd;
+
+	/* Get the name of the directory to create the spool in. */
+	spooldir = lu_cfg_read_single(ctx, "defaults/maildir", "/var/mail");
+
+	/* Find the GID of the owner of the file. */
+	gid = INVALID;
+	groupEnt = lu_ent_new();
+	if (lu_group_lookup_name(ctx, "mail", groupEnt, &error)) {
+		array = lu_ent_get(groupEnt, LU_GIDNUMBER);
+		if (array != NULL) {
+			value = g_value_array_get_nth(array, 0);
+			if (G_VALUE_HOLDS_LONG(value)) {
+				gid = g_value_get_long(value);
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				gid = strtol(g_value_get_string(value), &p, 0);
+				if (*p != '\0') {
+					gid = INVALID;
+				}
+			} else {
+				g_assert_not_reached();
+			}
+		}
+	}
+	lu_ent_free(groupEnt);
+
+	/* Er, okay.  Check with libc. */
+	if (gid == INVALID) {
+		if ((getgrnam_r("mail", &grp, buf, sizeof(buf), &err) == 0) &&
+		    (err == &grp)) {
+			gid = grp.gr_gid;
+		}
+	}
+
+	/* Aiieee.  Use the user's group. */
+	if (gid == INVALID) {
+		array = lu_ent_get(ent, LU_GIDNUMBER);
+		if (array != NULL) {
+			value = g_value_array_get_nth(array, 0);
+			if (G_VALUE_HOLDS_LONG(value)) {
+				gid = g_value_get_long(value);
+			} else
+			if (G_VALUE_HOLDS_STRING(value)) {
+				gid = strtol(g_value_get_string(value), &p, 0);
+				if (*p == '\0') {
+					gid = INVALID;
+				}
+			} else {
+				g_assert_not_reached();
+			}
+		}
+	}
+	g_return_val_if_fail(gid != INVALID, FALSE);
+
+	/* Now get the user's UID. */
+	array = lu_ent_get(ent, LU_UIDNUMBER);
+	if (array != NULL) {
+		value = g_value_array_get_nth(array, 0);
+		if (G_VALUE_HOLDS_LONG(value)) {
+			uid = g_value_get_long(value);
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			uid = strtol(g_value_get_string(value), &p, 0);
+			if (*p != '\0') {
+				uid = INVALID;
+			}
+		} else {
+			g_assert_not_reached();
+		}
+	}
+	g_return_val_if_fail(uid != INVALID, FALSE);
+
+	/* Now get the user's login. */
+	username = NULL;
+	array = lu_ent_get(ent, LU_USERNAME);
+	if (array != NULL) {
+		value = g_value_array_get_nth(array, 0);
+		if (G_VALUE_HOLDS_LONG(value)) {
+			username = g_strdup_printf("%ld",
+						   g_value_get_long(value));
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			username = g_value_dup_string(value);
+		} else {
+			g_assert_not_reached();
+		}
+	}
+	g_return_val_if_fail(username != NULL, FALSE);
+
+	/* That wasn't that hard.  Now we just need to create the file. */
+	p = g_strdup_printf("%s/%s", spooldir, username);
+	g_free(username);
+	if (action) {
+		fd = open(p, O_WRONLY | O_CREAT, 0);
+		if (fd != -1) {
+			fchown(fd, uid, gid);
+			fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+			close(fd);
+			g_free(p);
+			return TRUE;
+		}
+	} else {
+		if (unlink(p) == 0) {
+			g_free(p);
+			return TRUE;
+		}
+		if (errno == ENOENT) {
+			g_free(p);
+			return TRUE;
+		}
+	}
+	g_free(p);
+
 	return FALSE;
 }

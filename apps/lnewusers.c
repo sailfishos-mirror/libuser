@@ -154,7 +154,7 @@ main(int argc, const char **argv)
 		p = NULL;
 		gid_tmp = strtol(gidstring, &p, 10);
 		gid = INVALID;
-		if ((p == NULL) || (*p != '\0')) {
+		if (*p != '\0') {
 			/* It's not a number, so it's a group name --
 			 * see if it's being used. */
 			if (lu_group_lookup_name(ctx, gidstring, ent, &error)) {

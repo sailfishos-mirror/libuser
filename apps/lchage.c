@@ -51,7 +51,7 @@ read_ndays(GValueArray *array)
 			if (G_VALUE_HOLDS_STRING(value)) {
 				s = g_value_get_string(value);
 				n_days = strtol(s, &p, 10);
-				if ((p == NULL) || (*p != '\0')) {
+				if (*p != '\0') {
 					n_days = -1;
 				}
 			} else

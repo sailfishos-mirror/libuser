@@ -60,7 +60,7 @@ convert_value_array_pylist(GValueArray *array)
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "adding %d to list\n", l);
 #endif
-		}
+		} else
 		/* If the item is a G_TYPE_STRING, add it as a PyString. */
 		if (G_VALUE_HOLDS_STRING(value)) {
 			s = g_value_get_string(value);
@@ -146,6 +146,14 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 	if (PyString_Check(item)) {
 		g_value_init(value, G_TYPE_STRING);
 		g_value_set_string(value, PyString_AsString(item));
+#ifdef DEBUG_BINDING
+		fprintf(stderr, "%sAdding (`%s') to list.\n",
+			getindent(), PyString_AsString(item));
+#endif
+	} else
+	if (PyNumber_Check(item)) {
+		g_value_init(value, G_TYPE_LONG);
+		g_value_set_long(value, PyLong_AsLong(PyNumber_Long(item)));
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
 			getindent(), PyString_AsString(item));

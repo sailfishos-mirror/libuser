@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2002-01-15 17:48-0500\n"
+"POT-Creation-Date: 2002-01-16 00:46-0500\n"
 "PO-Revision-Date: 2001-11-21 11:52+1000\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
@@ -23,7 +23,7 @@ msgstr "`%s' (을)를 읽는 도중 오류 발생: %s"
 msgid "Error creating `%s': %s"
 msgstr "`%s' (을)를 생성하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:196 apps/apputil.c:227 apps/apputil.c:245
+#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' (을)를 삭제하는 도중 오류 발생: %s"
@@ -50,94 +50,94 @@ msgstr "내부 오류가 발생했습니다.\n"
 msgid "User mismatch.\n"
 msgstr ""
 
-#: apps/lchage.c:128 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
+#: apps/lchage.c:131 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[옵션...] 사용자"
 
-#: apps/lchage.c:131 apps/lgroupadd.c:67 apps/lgroupdel.c:59
+#: apps/lchage.c:134 apps/lgroupadd.c:67 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "인수를 처리(parsing)하는 도중 오류 발생: %s.\n"
 
-#: apps/lchage.c:140 apps/luseradd.c:103 apps/luserdel.c:75
+#: apps/lchage.c:143 apps/luseradd.c:103 apps/luserdel.c:75
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
 msgstr "사용자 이름이 지정되지 않았습니다.\n"
 
-#: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
+#: apps/lchage.c:154 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:112 samples/testuser.c:70
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%s (을)를 초기화하는 도중 오류 발생: %s.\n"
 
-#: apps/lchage.c:154 apps/lgroupadd.c:90 apps/lgroupdel.c:82
+#: apps/lchage.c:157 apps/lgroupadd.c:90 apps/lgroupdel.c:82
 #: apps/lgroupmod.c:105 apps/luseradd.c:117 apps/luserdel.c:88
 #: apps/lusermod.c:115
 #, c-format
 msgid "Error initializing %s.\n"
 msgstr "%s (을)를 초기화하는 도중 오류가 발생했습니다.\n"
 
-#: apps/lchage.c:164 apps/luserdel.c:97 apps/lusermod.c:130
+#: apps/lchage.c:167 apps/luserdel.c:97 apps/lusermod.c:130
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "%s 사용자가 존재하지 않습니다.\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:175
 msgid "Account is locked.\n"
 msgstr "계정이 정지되었습니다.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:177
 msgid "Account is not locked.\n"
 msgstr "계정이 정지되지 않았습니다.\n"
 
-#: apps/lchage.c:179
+#: apps/lchage.c:182
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "최소값:\t%d\n"
 
-#: apps/lchage.c:184
+#: apps/lchage.c:187
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "최대값:\t%d\n"
 
-#: apps/lchage.c:189
+#: apps/lchage.c:192
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "경고:\t%d\n"
 
-#: apps/lchage.c:194
+#: apps/lchage.c:197
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "불활성:\t%d\n"
 
-#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#: apps/lchage.c:202 apps/lchage.c:210 apps/lchage.c:221 apps/lchage.c:231
 msgid "Never"
 msgstr "절대"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:204
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "최종 변경:\t%s\n"
 
-#: apps/lchage.c:211
+#: apps/lchage.c:214
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "패스워드 만기일:\t%s\n"
 
-#: apps/lchage.c:223
+#: apps/lchage.c:226
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "패스워드 불활성:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:233
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "계정 만기일:\t%s\n"
 
-#: apps/lchage.c:277
+#: apps/lchage.c:280
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "%s 의 이전 정보를 편집하는데 실패했습니다.\n"
@@ -168,38 +168,38 @@ msgstr "%s 그룹은 삭제할 수 없습니다.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "-L 와 -U 둘다 지정되었습니다.\n"
 
-#: apps/lgroupmod.c:222 apps/lgroupmod.c:232
+#: apps/lgroupmod.c:229 apps/lgroupmod.c:239
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "%s 그룹의 패스워드를 설정하는데 실패했습니다.\n"
 
-#: apps/lgroupmod.c:241
+#: apps/lgroupmod.c:248
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "%s 그룹을 정지시킬 수 없습니다.\n"
 
-#: apps/lgroupmod.c:249
+#: apps/lgroupmod.c:256
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "%s 그룹의 정지를 해제할 수 없습니다.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:263
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "%s 그룹을 편집할 수 없습니다.\n"
 
 #. Aargh!  Abandon all hope.
-#: apps/luseradd.c:194
+#: apps/luseradd.c:200 apps/luseradd.c:212
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "`%s' 그룹을 생성하는 도중 오류 발생.\n"
 
-#: apps/luseradd.c:254
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "계정 생성에 실패함: %s.\n"
 
-#: apps/luseradd.c:282
+#: apps/luseradd.c:321
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s (을)를 생성하는 도중 오류 발생: %s.\n"
@@ -214,27 +214,27 @@ msgstr "%s 사용자를 삭제할 수 없습니다: %s.\n"
 msgid "%s did not have a gid number.\n"
 msgstr "%s (은)는 gid number를 갖고 있지 않습니다.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:126
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr "GID %ld 라는 그룹이 존재하지 않으므로, 삭제할 수 없습니다.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:132
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "GID %ld 라는 그룹에는 이름이 지정되어 있지 않습니다.\n"
 
-#: apps/luserdel.c:133
+#: apps/luserdel.c:140
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "%s 그룹은 삭제할 수 없습니다: %s.\n"
 
-#: apps/luserdel.c:147
+#: apps/luserdel.c:154
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s 의 홈 디렉토리가 없습니다.\n"
 
-#: apps/luserdel.c:154
+#: apps/luserdel.c:161
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "%s (을)를 삭제하는 도중 오류 발생: %s.\n"
@@ -407,18 +407,18 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
 
-#: modules/files.c:106 modules/files.c:392 modules/files.c:714
-#: modules/files.c:969 modules/files.c:1166 modules/files.c:1351
-#: modules/files.c:1427 modules/files.c:1597 modules/files.c:1711
-#: modules/files.c:1726 modules/files.c:1801 modules/files.c:1818
-#: modules/files.c:1869 modules/files.c:1888 modules/files.c:1965
-#: modules/files.c:1980
+#: modules/files.c:106 modules/files.c:394 modules/files.c:710
+#: modules/files.c:961 modules/files.c:1137 modules/files.c:1319
+#: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
+#: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
+#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
+#: modules/files.c:1949
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' (을)를 열 수 없음: %s"
 
 #: modules/files.c:121 modules/files.c:153 modules/files.c:185
-#: modules/files.c:728 modules/files.c:1180
+#: modules/files.c:724 modules/files.c:1151
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "couldn't stat `%s': %s"
@@ -433,37 +433,32 @@ msgstr "`%s' (을)를 생성하는 도중 오류 발생: %s"
 msgid "backup file `%s' was a symlink"
 msgstr "백업 화일 `%s' (은)는 심볼릭링크 파일입니다"
 
-#: modules/files.c:745 modules/files.c:1191
+#: modules/files.c:741 modules/files.c:1162
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' (을)를 읽을 수 없음: %s"
 
-#: modules/files.c:757 modules/files.c:769
+#: modules/files.c:753 modules/files.c:765
 msgid "entry already present in file"
 msgstr "파일 안에 목록(entry)이 이미 존재합니다"
 
-#: modules/files.c:783 modules/files.c:798 modules/files.c:1225
-#: modules/files.c:1236
+#: modules/files.c:779 modules/files.c:794 modules/files.c:1192
+#: modules/files.c:1203
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' 에 작성할 수 없음: %s"
 
-#: modules/files.c:938 modules/files.c:948 modules/files.c:1058
-#: modules/files.c:1071
+#: modules/files.c:931 modules/files.c:940 modules/files.c:1024
+#: modules/files.c:1037
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:994
-#, c-format
-msgid "entity object has no `%s' attribute"
-msgstr "entity 개체에 `%s' 속성이 없습니다"
-
-#: modules/files.c:2169 modules/files.c:2235
+#: modules/files.c:2138 modules/files.c:2204
 msgid "not executing with superuser privileges"
 msgstr "수퍼유저 권한으로 실행할 수 없습니다"
 
-#: modules/files.c:2248
+#: modules/files.c:2217
 msgid "no shadow file present -- disabling"
 msgstr "현재 섀도우 파일이 없음 -- 불가능"
 
@@ -684,6 +679,9 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
+#~ msgid "entity object has no `%s' attribute"
+#~ msgstr "entity 개체에 `%s' 속성이 없습니다"
 
 #~ msgid "No group named `%s' exists.\n"
 #~ msgstr "`%s' 라는 그룹이 존재하지 않습니다.\n"

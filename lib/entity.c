@@ -591,9 +591,11 @@ lu_default_int(struct lu_context *context, const char *name,
 {
 	GList *keys, *p;
 	GValue value;
-	char *top, *idkey, *cfgkey, *tmp, *idstring;
+	char *top, *idkey, *idkeystring, *cfgkey, *tmp, *end;
+	char buf[LINE_MAX * 4];
 	const char *val, *key;
 	gulong id = DEFAULT_ID;
+	struct group grp, *err;
 	int i;
 
 	g_return_val_if_fail(context != NULL, FALSE);
@@ -615,6 +617,17 @@ lu_default_int(struct lu_context *context, const char *name,
 	if (ent->type == lu_user) {
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &value);
+		/* Additionally, pick a default default group. */
+		g_value_unset(&value);
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, -1);
+		/* FIXME: handle arbitrarily long lines. */
+		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
+		    (err == &grp)) {
+			g_value_set_long(&value, grp.gr_gid);
+		}
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &value);
 	} else if (ent->type == lu_group) {
 		lu_ent_clear(ent, LU_GROUPNAME);
 		lu_ent_add(ent, LU_GROUPNAME, &value);
@@ -626,9 +639,11 @@ lu_default_int(struct lu_context *context, const char *name,
 	if (type == lu_user) {
 		top = "userdefaults";
 		idkey = LU_UIDNUMBER;
+		idkeystring = G_STRINGIFY_ARG(LU_UIDNUMBER);
 	} else {
 		top = "groupdefaults";
 		idkey = LU_GIDNUMBER;
+		idkeystring = G_STRINGIFY_ARG(LU_GIDNUMBER);
 	}
 
 	/* The system flag determines where we will start searching for
@@ -639,6 +654,11 @@ lu_default_int(struct lu_context *context, const char *name,
 		cfgkey = g_strdup_printf("%s/%s", top, idkey);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
 		g_free(cfgkey);
+		if (val == NULL) {
+			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
+			val = lu_cfg_read_single(context, cfgkey, NULL);
+			g_free(cfgkey);
+		}
 		if (val != NULL) {
 			id = strtol((char *) val, &tmp, 10);
 			if (*tmp != '\0') {
@@ -697,11 +717,14 @@ lu_default_int(struct lu_context *context, const char *name,
 			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
 		};
 		struct {
-			const char *format, *value;
+			const char *format;
+			GType type;
+			const char *value;
 		} subst[] = {
-			{"%n", name},
-			{"%d", lu_util_shadow_current_date(context->scache)},
-			{"%u", idstring},
+			{"%n", G_TYPE_STRING, name},
+			{"%d", G_TYPE_STRING,
+			 lu_util_shadow_current_date(context->scache)},
+			{"%u", G_TYPE_LONG, GINT_TO_POINTER(id)},
 		};
 
 		/* Possibly map the key to an internal name. */
@@ -723,6 +746,11 @@ lu_default_int(struct lu_context *context, const char *name,
 		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
 		g_free(cfgkey);
+		if (val == NULL) {
+			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
+			val = lu_cfg_read_single(context, cfgkey, NULL);
+			g_free(cfgkey);
+		}
 
 		/* Create a copy of the value to mess with. */
 		g_assert(val != NULL);
@@ -731,15 +759,25 @@ lu_default_int(struct lu_context *context, const char *name,
 		/* Perform substitutions. */
 		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
 			while (strstr(tmp, subst[i].format) != NULL) {
-				char *pre, *post, *tmp2, *where;
+				char *pre, *post, *tmp2, *substval, *where;
+				if (subst[i].type == G_TYPE_STRING) {
+					substval = g_strdup(subst[i].value);
+				} else
+				if (subst[i].type == G_TYPE_LONG) {
+					substval = g_strdup_printf("%d",
+								   GPOINTER_TO_INT(subst[i].value));
+				} else {
+					g_assert_not_reached();
+				}
 				where = strstr(tmp, subst[i].format);
 				pre = g_strndup(tmp, where - tmp);
 				post = g_strdup(where +
 						strlen(subst[i].format));
 				tmp2 = g_strconcat(pre,
-						   subst[i].value,
+						   substval,
 						   post,
 						   NULL);
+				g_free(substval);
 				g_free(pre);
 				g_free(post);
 				g_free(tmp);
@@ -747,10 +785,18 @@ lu_default_int(struct lu_context *context, const char *name,
 			}
 		}
 
-		/* Add the transformed value. */
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, tmp);
+		/* Check if we can represent this value as a number. */
+		strtol(tmp, &end, 0);
+		if (*end != '\0') {
+			g_value_init(&value, G_TYPE_STRING);
+			g_value_set_string(&value, tmp);
+		} else {
+			g_value_init(&value, G_TYPE_LONG);
+			g_value_set_long(&value, strtol(tmp, &end, 0));
+		}
 		g_free(tmp);
+
+		/* Add the transformed value. */
 		lu_ent_clear(ent, key);
 		lu_ent_add(ent, key, &value);
 		g_value_unset(&value);

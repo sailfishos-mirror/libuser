@@ -53,10 +53,9 @@ for attr in jimbo.keys():
 	print " " + attr + ":", jimbo.get(attr)
 
 print "--------- Adding the user."
-try:
-	admin.addUser(jimbo)
-except:
-	pass
+jimbo[libuser.HOMEDIRECTORY] = '/var/jimbo-home'
+print "Set home directory to " + jimbo[libuser.HOMEDIRECTORY][0]
+admin.addUser(jimbo)
 
 print "--------- Grepping for the user."
 os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")

@@ -141,7 +141,7 @@ main(int argc, const char **argv)
 		char *p;
 		groupEnt = lu_ent_new();
 		gidNumber = strtol(gid, &p, 10);
-		if ((p == NULL) || (*p != '\0')) {
+		if (*p != '\0') {
 			/* It's not a number, so it's a group name. */
 			gidNumber = INVALID;
 		}

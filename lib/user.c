@@ -186,7 +186,7 @@ extract_id(struct lu_ent *ent)
 	if (G_VALUE_HOLDS_STRING(value)) {
 		idstring = g_value_get_string(value);
 		ret = strtol(idstring, &p, 0);
-		if ((p == NULL) || (*p != '\0')) {
+		if (*p != '\0') {
 			ret = INVALID;
 		}
 	}
@@ -662,8 +662,8 @@ lu_dispatch(struct lu_context *context,
 			    logic_or, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
+				lu_ent_revert(tmp);
 				lu_ent_copy(tmp, entity);
-				lu_ent_revert(entity);
 			}
 			success = TRUE;
 		}
@@ -693,12 +693,12 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Add the account. */
+		lu_ent_commit(tmp);
 		if (run_list(context, context->create_module_names,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
 				lu_ent_copy(tmp, entity);
-				lu_ent_commit(entity);
 			}
 			success = TRUE;
 		}
@@ -720,18 +720,11 @@ lu_dispatch(struct lu_context *context,
 		g_return_val_if_fail(ldata != INVALID, FALSE);
 		/* Make the changes. */
 		g_assert(entity != NULL);
+		lu_ent_commit(tmp);
 		if (run_list(context, entity->modules,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
-			switch (id) {
-				case user_mod:
-				case group_mod:
-					lu_ent_commit(entity);
-					break;
-				default:
-					break;
-			}
 			success = TRUE;
 		}
 		break;
