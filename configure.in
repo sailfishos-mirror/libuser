@@ -10,7 +10,7 @@ AC_PROG_MAKE_SET
 AC_PROG_AWK
 
 AC_CHECK_LIB(crypt,crypt)
-AM_PATH_GLIB(1.2.0,,,gmodule)
+AM_PATH_GLIB(1.2.10,,,gmodule)
 
 popt=/usr
 AC_ARG_WITH(popt,

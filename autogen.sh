@@ -7,5 +7,5 @@ libtoolize --force
 automake -a
 autoheader
 autoconf
-test -d intl || gettextize -f
+test -d intl || gettextize -f -c
 ./configure --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc $@

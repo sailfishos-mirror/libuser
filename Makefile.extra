@@ -1,1 +1,1 @@
-AM_CFLAGS = @GLIB_CFLAGS@ -I$(top_srcdir)/include -DLOCALEDIR=\"`eval echo $(datadir)/locale`\" -DMODULEDIR=\"`eval echo $(pkglibdir)`\" -DSYSCONFDIR=\"`eval echo $(sysconfdir)`\" 
+AM_CFLAGS = @GLIB_CFLAGS@ -I$(top_srcdir)/include -I$(includedir)/python1.5 -DLOCALEDIR=\"`eval echo $(datadir)/locale`\" -DMODULEDIR=\"`eval echo $(pkglibdir)`\" -DSYSCONFDIR=\"`eval echo $(sysconfdir)`\" 
