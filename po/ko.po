@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2002-02-21 17:55-0500\n"
+"POT-Creation-Date: 2002-02-22 15:25-0500\n"
 "PO-Revision-Date: 2002-01-24 16:43+0900\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"

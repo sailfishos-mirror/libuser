@@ -23,7 +23,7 @@ PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
 ALL_LINGUAS="cs da de es fr is it ja ko no pt ru sl sv tr"
-AM_GNU_GETTEXT()
+AM_GNU_GETTEXT
 
 AM_MAINTAINER_MODE
 if test x$GCC = xyes; then
@@ -284,7 +284,7 @@ AC_SUBST(scdir)
 
 AM_CONFIG_HEADER(config.h)
 
-AC_OUTPUT([
+AC_OUTPUT([ intl/Makefile 
 m4/Makefile
 intl/Makefile 
 Makefile

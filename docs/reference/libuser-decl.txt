@@ -50,12 +50,12 @@ struct lu_context *context,const char *parent_key
 #define LU_GROUPPASSWORD	"gr_passwd"
 </MACRO>
 <MACRO>
-<NAME>LU_MEMBERUID</NAME>
-#define LU_MEMBERUID		"gr_mem"
+<NAME>LU_MEMBERNAME</NAME>
+#define LU_MEMBERNAME		"gr_mem"
 </MACRO>
 <MACRO>
-<NAME>LU_ADMINISTRATORUID</NAME>
-#define LU_ADMINISTRATORUID	"gr_adm"
+<NAME>LU_ADMINISTRATORNAME</NAME>
+#define LU_ADMINISTRATORNAME	"gr_adm"
 </MACRO>
 <MACRO>
 <NAME>LU_SHADOWNAME</NAME>
