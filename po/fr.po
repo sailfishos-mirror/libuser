@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-04-16 12:05GMT\n"
+"PO-Revision-Date: 2002-04-16 12:15GMT\n"
 "Last-Translator: Bettina De Monti <bettina@redhat.it>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr "Erreur lors de la création de %s : %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr "Erreur lors de la création du spoule de mail.\n"
+msgstr "Erreur lors de la création du spool de mail.\n"
 
 #: apps/luserdel.c:99
 #, c-format

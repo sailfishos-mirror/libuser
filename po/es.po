@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-02-26 15:59GMT\n"
+"PO-Revision-Date: 2002-04-16 11:51GMT\n"
 "Last-Translator: Nuria Soriano <nuria@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -306,9 +306,8 @@ msgstr "Error creando %s: %s.\n"
 # apps/luseradd.c:194
 # apps/luseradd.c:194
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "Error creando %s: %s.\n"
+msgstr "Error al crear un spool de correo.\n"
 
 # apps/luserdel.c:87
 # apps/luserdel.c:87
@@ -596,8 +595,7 @@ msgstr "error al crear `%s': %s"
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
-"Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
+msgstr "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
@@ -649,8 +647,8 @@ msgstr "Ningún archivo shadow presente -- deshabilitando."
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"error al conectarse al servidor kadm5 para el servicio `%s' en el entorno `%"
-"s': %s"
+"error al conectarse al servidor kadm5 para el servicio `%s' en el entorno "
+"`%s': %s"
 
 # modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
 # modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
@@ -961,3 +959,4 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
