@@ -8,7 +8,7 @@ ACLOCAL_AMFLAGS = -I m4
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap \
 	--with-python-version=$(PYTHON_VERSION)
 
-CVSTAG = "libuser-$$(echo '$$(VERSION)' | tr '.' '_')"
+CVSTAG = "libuser-$$(echo '$(VERSION)' | tr '.' '_')"
 
 AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 

@@ -2,6 +2,8 @@
 
 	* configure.in: Version 0.52.
 
+	* Makefile.am (CVSTAG): Fix definition.
+
 	* Makefile.am (archive): Ship with formatted documentation.
 
 	* configure.in: Define AC_CONFIG_AUX_DIR.
