@@ -126,7 +126,7 @@ typedef enum lu_type {lu_user, lu_group} lu_type_t;
 /**
  * Initializes the library, loads modules, and authenticates to servers.
  * @param authname The default name to use when authenticating to servers.
- * @param auth_type The type of entity which authname is -- a user or a group.
+ * @param auth_type The type of records we intend to modify -- user or group.
  * @param info_modules An optional comma-separated list of information modules
  * to load.  Information modules are used to modify user information such as
  * Uids, home directories, shells, and so on.
