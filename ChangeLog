@@ -1,5 +1,15 @@
 2004-09-27  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Remove various unneeded parts.
+
+	* configure.in, Makefile.am: Use automake conditionals instead of
+	MODULES.
+	* Makefile.am (TESTS): Define only if LDAP.
+
+	* Makefile.am: Use AM_CPPFLAGS to eliminate the most redundant lines.
+
+	* Makefile.am (uninstall-local): Fix typo.
+
 	* Makefile.am: Link exactly with needed libraries.
 
 	* docs/sgml/Makefile.am: Merge with docs/Makefile.am.

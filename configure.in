@@ -6,10 +6,6 @@ AM_INIT_AUTOMAKE([subdir-objects -Wall])
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_ISC_POSIX
-AC_PROG_LN_S
-AC_PATH_PROG(MAKE,make)
-AC_PROG_MAKE_SET
-AC_PROG_AWK
 
 AM_PROG_LIBTOOL
 
@@ -61,9 +57,6 @@ fi
 POPT_LIBS="$LIBS"
 LIBS="$LIBSAVE"
 
-MODULES="$MODULES modules/${PACKAGE}_files.la"
-MODULES="$MODULES modules/${PACKAGE}_shadow.la"
-
 AC_ARG_WITH([ldap],
 	    AS_HELP_STRING([--with-ldap=DIR],
 			   [use OpenLDAP 2.x headers and libraries under DIR]),
@@ -74,6 +67,7 @@ else
 fi
 ],ldap=no)
 
+build_ldap=no
 if test x$ldap != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$ldap != xyes -a x$ldap != x/usr ; then
@@ -101,9 +95,10 @@ if test x$ldap != xno ; then
 	AC_CHECK_FUNC(ldap_get_values,[
 	AC_CHECK_FUNC(ldap_modify_ext_s,[
 	AC_CHECK_FUNC(ldap_delete_ext_s,[
-	MODULES="$MODULES modules/${PACKAGE}_ldap.la"])])])])])])])
+	build_ldap=yes])])])])])])])
 	LIBS="$LIBSAVE"
 fi
+AM_CONDITIONAL([LDAP], [test $build_ldap = yes])
 
 AC_ARG_WITH([sasl],
 	    AS_HELP_STRING([--with-sasl=DIR],
@@ -115,6 +110,7 @@ else
 fi
 ],sasl=no)
 
+build_sasl=no
 if test x$sasl != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$sasl != xyes -a x$sasl != x/usr ; then
@@ -131,7 +127,7 @@ if test x$sasl != xno ; then
 		AC_CHECK_LIB(sasl,sasl_setpass,[
 			     SASL_LIBS="-lsasl $SASL_LIBS"
 			     LIBS="-lsasl $LIBS"
-			     MODULES="$MODULES modules/${PACKAGE}_sasldb.la"]
+			     build_sasl=yes]
 			     ,,[$LDFLAGS $LIBS])])
 	AC_CHECK_FUNCS(sasl_checkpass,,[
 	AC_CHECK_LIB(sasl,sasl_checkpass,[
@@ -141,6 +137,7 @@ if test x$sasl != xno ; then
 	AC_DEFINE(HAVE_SASL_USER_EXISTS,,[if sasl_user_exists() is defined])])])
 	LIBS="$LIBSAVE"
 fi
+AM_CONDITIONAL([SASL], [test $build_sasl = yes])
 
 PYTHON_VERSION=2.2
 AC_ARG_WITH([python-version],
@@ -227,7 +224,8 @@ AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
 
 GTK_DOC_CHECK
 
-AC_SUBST(MODULES)
+dnl Does not even compile
+AM_CONDITIONAL([KRB5], [false])
 AC_SUBST(CRYPT_LIBS)
 AC_SUBST(KRB5_LDADD)
 AC_SUBST(KRB5_LIBS)
@@ -241,20 +239,7 @@ AC_SUBST(SASL_LIBS)
 AC_SUBST(PYTHON_VERSION)
 AC_SUBST(PYTHON_INC)
 
-if test `eval echo x$libdir` != xNONE/lib
-then
-	pkglibdir=`eval echo ${libdir}/${PACKAGE}`
-elif test `eval echo x$exec_prefix` != xNONE
-then
-	pkglibdir=`eval echo ${exec_prefix}/lib/${PACKAGE}`
-elif test `eval echo x$prefix` != xNONE
-then
-	pkglibdir=`eval echo ${prefix}/lib/${PACKAGE}`
-else
-	pkglibdir=`eval echo /usr/local/lib/${PACKAGE}`
-fi
 scdir=`eval echo $sysconfdir`
-AC_SUBST(pkglibdir)
 AC_SUBST(scdir)
 
 AC_CONFIG_FILES([Makefile po/Makefile.in docs/Makefile docs/reference/Makefile

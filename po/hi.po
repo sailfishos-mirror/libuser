@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-24 18:09+0200\n"
+"POT-Creation-Date: 2004-09-27 06:41+0200\n"
 "PO-Revision-Date: 2003-09-18 13:12+0530\n"
 "Last-Translator: Jatin Nansi <jnansi@redhat.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
@@ -585,27 +585,27 @@ msgstr "अंतक गुण जमावट में दोष"
 msgid "error reading from terminal"
 msgstr "अंतक से पढ़ने में दोष"
 
-#: lib/user.c:190
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "नाम नहीं जमा है"
 
-#: lib/user.c:194
+#: lib/user.c:197
 msgid "name is too short"
 msgstr "नाम बहुत छोटा है"
 
-#: lib/user.c:200
+#: lib/user.c:203
 msgid "name contains non-ASCII characters"
 msgstr "नाम में non-ASCII अक्षर समाहित हैं"
 
-#: lib/user.c:207
+#: lib/user.c:210
 msgid "name contains control characters"
 msgstr "नाम में नियंञण अक्षर समाहित हैं"
 
-#: lib/user.c:214
+#: lib/user.c:217
 msgid "name contains whitespace"
 msgstr "नाम में रिक्तस्थान समाहित हैं"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "नाम में अनुचित अक्षर `%c' समाहित हैं"
@@ -754,90 +754,90 @@ msgstr "LDAP परिसेवक में खोज नहीं कर स�
 msgid "LDAP server appears to have no root DSE"
 msgstr "ऐसा लगता है कि LDAP परिसेवक का root DSE नहीं है"
 
-#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
-#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
+#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP विशिष्ट नाम को नाम प्रतिचिञण करने में दोष "
 
-#: modules/ldap.c:670
+#: modules/ldap.c:651
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "LDAP आधार विशिष्ट नाम को नाम प्रतिचिञण करने में दोष "
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1364
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "उपयोगकर्ता अभिलक्ष्य का %s गुण नहीं था"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "उपयोगकर्ता अभिलक्ष्य को `%s' के बिना बनाया गया था"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1398
 msgid "could not convert internal data to LDAPMods"
 msgstr "आंतरिक आंकडा को LDAPMods में बदल नहीं सका "
 
-#: modules/ldap.c:1447 modules/ldap.c:1676
+#: modules/ldap.c:1435 modules/ldap.c:1656
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "%s LDAP निर्देशिका परिवर्तन दोष "
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1462
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "%s LDAP निर्देशिका पुन:नामित दोष \n"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1511
 #, c-format
 msgid "object had no %s attribute"
 msgstr "अभिलक्ष्य में %s गुण नहीं था"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1535
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "%s LDAP निर्देशिका हटाने में दोष।\n"
 
-#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
-#: modules/ldap.c:1809
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
+#: modules/ldap.c:1785
 #, c-format
 msgid "object has no %s attribute"
 msgstr "अभिलक्ष्य में %s गुण नहीं है"
 
-#: modules/ldap.c:1741
+#: modules/ldap.c:1720
 msgid "no such object in LDAP directory"
 msgstr "LDAP निर्देशिका में ऐसे कुछ अभिलक्ष्य नहीं है"
 
-#: modules/ldap.c:1755
+#: modules/ldap.c:1732
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "कोई `%s' गुण नहीं मिला"
 
-#: modules/ldap.c:1910
+#: modules/ldap.c:1895
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s के लिए LDAP निर्देशिका में शब्दकूट जमावट दोष: %s "
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2455
 msgid "LDAP Server Name"
 msgstr "LDAP परिसेवक नाम "
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2461
 msgid "LDAP Search Base DN"
 msgstr "LDAP खोज आधार DN"
 
-#: modules/ldap.c:2486
+#: modules/ldap.c:2467
 msgid "LDAP Bind DN"
 msgstr "LDAP बंधन DN"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2474
 msgid "LDAP Bind Password"
 msgstr "LDAP बंधन शब्दकूट"
 
-#: modules/ldap.c:2499
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL उपयोगकर्ता"
 
-#: modules/ldap.c:2506
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL प्राधिकरण उपयोगकर्ता"
 

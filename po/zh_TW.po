@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-24 18:09+0200\n"
+"POT-Creation-Date: 2004-09-27 06:41+0200\n"
 "PO-Revision-Date: 2003-02-25 16:46+1000\n"
 "Last-Translator: Ben Wu <hpwu@redhat.com>\n"
 "Language-Team: Chinese (Traditional) <i18n-list@redhat.com>\n"
@@ -586,27 +586,27 @@ msgstr "終端機屬性設定錯誤"
 msgid "error reading from terminal"
 msgstr "終端機讀取錯誤"
 
-#: lib/user.c:190
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "名稱尚未設定"
 
-#: lib/user.c:194
+#: lib/user.c:197
 msgid "name is too short"
 msgstr "名稱太短"
 
-#: lib/user.c:200
+#: lib/user.c:203
 msgid "name contains non-ASCII characters"
 msgstr "名稱包含非 ASCII 的字元"
 
-#: lib/user.c:207
+#: lib/user.c:210
 msgid "name contains control characters"
 msgstr "名稱包含控制字元"
 
-#: lib/user.c:214
+#: lib/user.c:217
 msgid "name contains whitespace"
 msgstr "名稱包含空白"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "名稱包含非法字元 `%c'"
@@ -755,90 +755,90 @@ msgstr "無法搜尋 LDAP 伺服器"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP 伺服器似乎沒有 root DSE"
 
-#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
-#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
+#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
 msgid "error mapping name to LDAP distinguished name"
 msgstr "映射名稱至 LDAP 著名的名稱發生錯誤"
 
-#: modules/ldap.c:670
+#: modules/ldap.c:651
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "映射名稱至 LDAP base 著名的名稱發生錯誤"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1364
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "使用者物件沒有 %s 屬性"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "使用者物件建立當時就沒有 %s"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1398
 msgid "could not convert internal data to LDAPMods"
 msgstr "無法轉換內部資料至 LDAPMods"
 
-#: modules/ldap.c:1447 modules/ldap.c:1676
+#: modules/ldap.c:1435 modules/ldap.c:1656
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目錄登錄發生錯誤: %s"
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1462
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "重新命名 LDAP 目錄登錄發生錯誤: %s\n"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1511
 #, c-format
 msgid "object had no %s attribute"
 msgstr "物件沒有 %s 屬性"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1535
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "移除 LDAP 目錄登錄發生錯誤: %s。\n"
 
-#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
-#: modules/ldap.c:1809
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
+#: modules/ldap.c:1785
 #, c-format
 msgid "object has no %s attribute"
 msgstr "物件沒有 %s 屬性"
 
-#: modules/ldap.c:1741
+#: modules/ldap.c:1720
 msgid "no such object in LDAP directory"
 msgstr "在 LDAP 目錄中沒有物件"
 
-#: modules/ldap.c:1755
+#: modules/ldap.c:1732
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "找不到 `%s' 屬性"
 
-#: modules/ldap.c:1910
+#: modules/ldap.c:1895
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤： %s"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2455
 msgid "LDAP Server Name"
 msgstr "LDAP 伺服器名稱"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2461
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2486
+#: modules/ldap.c:2467
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2474
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 密碼"
 
-#: modules/ldap.c:2499
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 使用者"
 
-#: modules/ldap.c:2506
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 認證使用者"
 

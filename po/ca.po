@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-24 18:09+0200\n"
+"POT-Creation-Date: 2004-09-27 06:41+0200\n"
 "PO-Revision-Date: 2004-03-07 04:27+0100\n"
 "Last-Translator: isabel cama <c.gomez.febrel@terra.es>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -591,27 +591,27 @@ msgstr "s'ha produït un error en configurar els atributs del terminal"
 msgid "error reading from terminal"
 msgstr "s'ha produït un error en llegir del terminal"
 
-#: lib/user.c:190
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "no s'ha definit el nom"
 
-#: lib/user.c:194
+#: lib/user.c:197
 msgid "name is too short"
 msgstr "el nom és massa curt"
 
-#: lib/user.c:200
+#: lib/user.c:203
 msgid "name contains non-ASCII characters"
 msgstr "el nom conté caràcters que no són ASCII "
 
-#: lib/user.c:207
+#: lib/user.c:210
 msgid "name contains control characters"
 msgstr "el nom conté caràcters de control"
 
-#: lib/user.c:214
+#: lib/user.c:217
 msgid "name contains whitespace"
 msgstr "el nom conté espais en blanc"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "el nom conté el caràcter invàlid '%c'"
@@ -762,97 +762,97 @@ msgstr "no s'ha pogut cercar el servidor del LDAP"
 msgid "LDAP server appears to have no root DSE"
 msgstr "sembla que el servidor del LDAP no té arrel DSE"
 
-#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
-#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
+#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
 msgid "error mapping name to LDAP distinguished name"
 msgstr "s'ha produït un error en mapar el nom amb el nom distingit del LDAP"
 
-#: modules/ldap.c:670
+#: modules/ldap.c:651
 msgid "error mapping name to LDAP base distinguished name"
 msgstr ""
 "s'ha produït un error en mapar el nom amb el nom de base distingit del LDAP"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1364
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "l'objecte de l'usuari no tenia atribut %s"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "s'ha creat l'objecte de l'usuari sense '%s'"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1398
 msgid "could not convert internal data to LDAPMods"
 msgstr "no s'han pogut convertir les dades internes a LDAPMods"
 
-#: modules/ldap.c:1447 modules/ldap.c:1676
+#: modules/ldap.c:1435 modules/ldap.c:1656
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
 "s'ha produït un error en modificar el registre del directori del LDAP: %s"
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1462
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr ""
 "s'ha produït un error en canviar el nom de l'entrada del directori del LDAP: "
 "%s\n"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1511
 #, c-format
 msgid "object had no %s attribute"
 msgstr "l'objecte no tenia cap atribut %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1535
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr ""
 "s'ha produït un error en eliminar el registre del directori LDAP: %s.\n"
 
-#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
-#: modules/ldap.c:1809
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
+#: modules/ldap.c:1785
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objecte no té cap atribut %s"
 
-#: modules/ldap.c:1741
+#: modules/ldap.c:1720
 msgid "no such object in LDAP directory"
 msgstr "aquest objecte no existeix en el directori del LDAP"
 
-#: modules/ldap.c:1755
+#: modules/ldap.c:1732
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "no s'ha trobat cap atribut `%s'"
 
-#: modules/ldap.c:1910
+#: modules/ldap.c:1895
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori del LDAP "
 "per a %s: %s"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2455
 msgid "LDAP Server Name"
 msgstr "Nom del servidor del LDAP"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2461
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca del LDAP"
 
-#: modules/ldap.c:2486
+#: modules/ldap.c:2467
 msgid "LDAP Bind DN"
 msgstr "DN del vincle del LDAP"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2474
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle del LDAP"
 
-#: modules/ldap.c:2499
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2506
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 

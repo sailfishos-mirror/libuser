@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-24 18:09+0200\n"
+"POT-Creation-Date: 2004-09-27 06:41+0200\n"
 "PO-Revision-Date: 2004-09-06 18:05+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -592,27 +592,27 @@ msgstr "টার্মিনালের বৈশিষ্ট্য নির�
 msgid "error reading from terminal"
 msgstr "টার্মিনাল থেকে পড়তে সমস্যা হয়েছে"
 
-#: lib/user.c:190
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "নাম নির্ধারণ করা হয় নি"
 
-#: lib/user.c:194
+#: lib/user.c:197
 msgid "name is too short"
 msgstr "নাম অতিরিক্ত ছোট"
 
-#: lib/user.c:200
+#: lib/user.c:203
 msgid "name contains non-ASCII characters"
 msgstr "নামের মধ্য non-ASCII অক্ষর লেখা হয়েছে"
 
-#: lib/user.c:207
+#: lib/user.c:210
 msgid "name contains control characters"
 msgstr "নামের মধ্য নিয়ন্ত্রক (control) অক্ষর লেখা হয়েছে"
 
-#: lib/user.c:214
+#: lib/user.c:217
 msgid "name contains whitespace"
 msgstr "নামের মধ্যে ফাঁকা জায়গা রয়েছে"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "নামের মধ্য অবৈধ অক্ষর `%c' লেখা হয়েছে"
@@ -763,91 +763,91 @@ msgstr "LDAP সার্ভারের অনুসন্ধান করা �
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP সার্ভারে কোন root DSE সম্ভবত উপস্থিত নেই"
 
-#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
-#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
+#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP-র বৈশিষ্ট্যপূর্ণ নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
-#: modules/ldap.c:670
+#: modules/ldap.c:651
 msgid "error mapping name to LDAP base distinguished name"
 msgstr ""
 "LDAP-র বৈশিষ্ট্যপূর্ণ মৌলিক (base) নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1364
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "ব্যবহারকারীর অবজেক্টে কোনো `%s' বৈশিষ্ট্য ছিল না"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "ব্যবহারকারীর অবজেক্ট কোন `%s' ছাড়া তৈরি করা হয়েছে"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1398
 msgid "could not convert internal data to LDAPMods"
 msgstr "অভ্যন্তরীণ ডাটাকে LDAPMods-এ পরিবর্তন করা সম্ভব হয় নি"
 
-#: modules/ldap.c:1447 modules/ldap.c:1676
+#: modules/ldap.c:1435 modules/ldap.c:1656
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি পরিবর্তন করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1462
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "LDAP ডিরেক্টরির এন্ট্রির নাম পরিবর্তন করতে সমস্যা হয়েছে: %s।\n"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1511
 #, c-format
 msgid "object had no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1535
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি মুছে ফেলতে সমস্যা হয়েছে: %s।\n"
 
-#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
-#: modules/ldap.c:1809
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
+#: modules/ldap.c:1785
 #, c-format
 msgid "object has no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1741
+#: modules/ldap.c:1720
 msgid "no such object in LDAP directory"
 msgstr "LDAP ডিরেক্টরিতে এ রকম কোনো বস্তু উপস্থিত নেই"
 
-#: modules/ldap.c:1755
+#: modules/ldap.c:1732
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায় নি"
 
-#: modules/ldap.c:1910
+#: modules/ldap.c:1895
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s-র জন্য LDAP ডিরেক্টরিতে পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2455
 msgid "LDAP Server Name"
 msgstr "LDAP সার্ভারের নাম"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2461
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2486
+#: modules/ldap.c:2467
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2474
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind পাসওয়ার্ড"
 
-#: modules/ldap.c:2499
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ব্যবহারকারী"
 
-#: modules/ldap.c:2506
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-র অনুমোদন ব্যবহারকারী"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-09-24 18:09+0200\n"
+"POT-Creation-Date: 2004-09-27 06:41+0200\n"
 "PO-Revision-Date: 2004-09-13 12:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -608,32 +608,32 @@ msgstr "ralat"
 msgid "error reading from terminal"
 msgstr "ralat"
 
-#: lib/user.c:190
+#: lib/user.c:193
 #, fuzzy
 msgid "name is not set"
 msgstr "unama"
 
-#: lib/user.c:194
+#: lib/user.c:197
 #, fuzzy
 msgid "name is too short"
 msgstr "unama"
 
-#: lib/user.c:200
+#: lib/user.c:203
 #, fuzzy
 msgid "name contains non-ASCII characters"
 msgstr "unama"
 
-#: lib/user.c:207
+#: lib/user.c:210
 #, fuzzy
 msgid "name contains control characters"
 msgstr "unama"
 
-#: lib/user.c:214
+#: lib/user.c:217
 #, fuzzy
 msgid "name contains whitespace"
 msgstr "unama"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, fuzzy, c-format
 msgid "name contains invalid char `%c'"
 msgstr "unama"
@@ -793,99 +793,99 @@ msgstr "LDAP"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP tidak"
 
-#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
-#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
+#: modules/ldap.c:641 modules/ldap.c:1387 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1700 modules/ldap.c:1796
 #, fuzzy
 msgid "error mapping name to LDAP distinguished name"
 msgstr "ralat unama LDAP"
 
-#: modules/ldap.c:670
+#: modules/ldap.c:651
 #, fuzzy
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "ralat unama LDAP"
 
-#: modules/ldap.c:1373
+#: modules/ldap.c:1364
 #, fuzzy, c-format
 msgid "user object had no %s attribute"
 msgstr "pengguna tidak s"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1373
 #, fuzzy, c-format
 msgid "user object was created with no `%s'"
 msgstr "pengguna tidak s"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1398
 #, fuzzy
 msgid "could not convert internal data to LDAPMods"
 msgstr "kepada"
 
-#: modules/ldap.c:1447 modules/ldap.c:1676
+#: modules/ldap.c:1435 modules/ldap.c:1656
 #, fuzzy, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ralat LDAP direktori"
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1462
 #, fuzzy, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "ralat LDAP direktori s"
 
-#: modules/ldap.c:1523
+#: modules/ldap.c:1511
 #, fuzzy, c-format
 msgid "object had no %s attribute"
 msgstr "tidak s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1535
 #, fuzzy, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "ralat LDAP direktori s"
 
-#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
-#: modules/ldap.c:1809
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1687
+#: modules/ldap.c:1785
 #, fuzzy, c-format
 msgid "object has no %s attribute"
 msgstr "tidak s"
 
-#: modules/ldap.c:1741
+#: modules/ldap.c:1720
 #, fuzzy
 msgid "no such object in LDAP directory"
 msgstr "tidak dalam LDAP"
 
-#: modules/ldap.c:1755
+#: modules/ldap.c:1732
 #, fuzzy, c-format
 msgid "no `%s' attribute found"
 msgstr "tidak s"
 
-#: modules/ldap.c:1910
+#: modules/ldap.c:1895
 #, fuzzy, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "ralat dalam LDAP direktori for s"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2455
 #, fuzzy
 msgid "LDAP Server Name"
 msgstr "LDAP Pelayan"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2461
 #, fuzzy
 msgid "LDAP Search Base DN"
 msgstr "LDAP Cari Asas"
 
-#: modules/ldap.c:2486
+#: modules/ldap.c:2467
 #, fuzzy
 msgid "LDAP Bind DN"
 msgstr "LDAP"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2474
 #, fuzzy
 msgid "LDAP Bind Password"
 msgstr "LDAP"
 
-#: modules/ldap.c:2499
+#: modules/ldap.c:2480
 #, fuzzy
 msgid "LDAP SASL User"
 msgstr "LDAP"
 
-#: modules/ldap.c:2506
+#: modules/ldap.c:2487
 #, fuzzy
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP"

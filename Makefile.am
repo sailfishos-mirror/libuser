@@ -10,10 +10,14 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap \
 
 CVSTAG = "libuser-$$(echo '$$(VERSION)' | tr '.' '_')"
 
+AM_CPPFLAGS = $(GOBJECT_CFLAGS)
+
 
 ## Targets
 SUBDIRS = po docs
+if LDAP
 TESTS = tests/ldap_test
+endif
 
 EXTRA_DIST = \
 	$(EXTRA_MANS) \
@@ -37,10 +41,16 @@ lib_LTLIBRARIES = lib/libuser.la
 if QUOTA
 lib_LTLIBRARIES += lib/libuserquota.la
 endif
-EXTRA_LTLIBRARIES = modules/libuser_files.la modules/libuser_shadow.la \
-	modules/libuser_krb5.la modules/libuser_ldap.la \
-	modules/libuser_sasldb.la
-pkglib_LTLIBRARIES = $(MODULES)
+pkglib_LTLIBRARIES = modules/libuser_files.la modules/libuser_shadow.la
+if KRB5
+pkglib_LTLIBRARIES += modules/libuser_krb5.la
+endif
+if LDAP
+pkglib_LTLIBRARIES += modules/libuser_ldap.la
+endif
+if SASL
+pkglib_LTLIBRARIES += modules/libuser_sasldb.la
+endif
 pythonexec_LTLIBRARIES = python/libusermodule.la
 if QUOTA
 pythonexec_LTLIBRARIES += python/libuserquotamodule.la
@@ -82,59 +92,46 @@ install-exec-hook:
 # This assumes there are no external libuser plugins
 uninstall-local:
 	rm -f $(DESTDIR)$(pythonexecdir)/libuser*module.so
-	rm -f $(DESTDIR)$(pkglibdir)libuser_*.so
+	rm -f $(DESTDIR)$(pkglibdir)/libuser_*.so
 
 
 ## Dependency data
 apps_libapputil_la_SOURCES = apps/apputil.c apps/apputil.h
-apps_libapputil_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_libapputil_la_LDFLAGS = $(GOBJECT_LIBS) $(PAM_MISC_LIBS) $(SELINUX_LIBS)
 
-apps_lchage_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lchage_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lchage_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lchfn_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lchfn_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lchfn_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lchsh_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lchsh_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lchsh_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lgroupadd_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lgroupadd_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lgroupadd_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lgroupdel_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lgroupdel_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lgroupdel_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lgroupmod_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lgroupmod_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lgroupmod_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lid_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lid_LDADD = lib/libuser.la $(LTLIBINTL)
 apps_lid_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lnewusers_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lnewusers_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lnewusers_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lpasswd_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lpasswd_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lpasswd_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_luseradd_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_luseradd_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_luseradd_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_luserdel_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_luserdel_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_luserdel_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
-apps_lusermod_CPPFLAGS = $(GOBJECT_CFLAGS)
 apps_lusermod_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lusermod_LDFLAGS = $(GMODULE_LIBS) $(POPT_LIBS)
 
@@ -152,33 +149,28 @@ lib_libuserquota_la_CPPFLAGS = $(GLIB_CFLAGS) -Ilib
 lib_libuserquota_la_LDFLAGS = -version-info 2:1:1
 
 modules_libuser_files_la_SOURCES = modules/files.c
-modules_libuser_files_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 modules_libuser_files_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	-rpath '$(pkglibdir)' $(GOBJECT_LIBS) $(SELINUX_LIBS)
+	$(GOBJECT_LIBS) $(SELINUX_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
 modules_libuser_shadow_la_SOURCES = modules/files.c
-modules_libuser_shadow_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	-rpath '$(pkglibdir)' $(GOBJECT_LIBS) $(SELINUX_LIBS)
+	$(GOBJECT_LIBS) $(SELINUX_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
 
 modules_libuser_krb5_la_SOURCES = modules/krb5.c
-modules_libuser_krb5_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 modules_libuser_krb5_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	-rpath '$(pkglibdir)' $(GOBJECT_LIBS) $(KRB5_LDADD) $(KRB5_LIBS)
+	$(GOBJECT_LIBS) $(KRB5_LDADD) $(KRB5_LIBS)
 modules_libuser_krb5_la_LIBADD = lib/libuser.la
 
 modules_libuser_ldap_la_SOURCES = modules/ldap.c
-modules_libuser_ldap_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 modules_libuser_ldap_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	-rpath '$(pkglibdir)' $(GOBJECT_LIBS) $(LDAP_LDADD) $(LDAP_LIBS)
+	$(GOBJECT_LIBS) $(LDAP_LDADD) $(LDAP_LIBS)
 modules_libuser_ldap_la_LIBADD = lib/libuser.la
 
 modules_libuser_sasldb_la_SOURCES = modules/sasldb.c
-modules_libuser_sasldb_la_CPPFLAGS = $(GOBJECT_CFLAGS)
 modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	-rpath '$(pkglibdir)' $(GOBJECT_LIBS) $(SASL_LDADD) $(SASL_LIBS)
+	$(GOBJECT_LIBS) $(SASL_LDADD) $(SASL_LIBS)
 modules_libuser_sasldb_la_LIBADD = lib/libuser.la
 
 python_libusermodule_la_SOURCES = python/libusermodule.c python/common.h \
@@ -193,30 +185,23 @@ python_libuserquotamodule_la_CPPFLAGS = -I$(PYTHON_INC) $(GLIB_CFLAGS)
 python_libuserquotamodule_la_LDFLAGS = -module -avoid-version -export-dynamic
 python_libuserquotamodule_la_LIBADD = lib/libuserquota.la
 
-samples_enum_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_enum_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_enum_LDFLAGS = -no-install
 
-samples_field_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_field_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_field_LDFLAGS = -no-install
 
-samples_homedir_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_homedir_LDADD = apps/libapputil.la lib/libuser.la $(GMODULE_LIBS)
 samples_homedir_LDFLAGS = -no-install
 
-samples_lookup_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_lookup_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_lookup_LDFLAGS = -no-install
 
-samples_quotaq_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_quotaq_LDADD = lib/libuserquota.la $(GMODULE_LIBS)
 samples_quotaq_LDFLAGS = -no-install
 
-samples_prompt_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_prompt_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_prompt_LDFLAGS = -no-install
 
-samples_testuser_CPPFLAGS = $(GOBJECT_CFLAGS)
 samples_testuser_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_testuser_LDFLAGS = -no-install
