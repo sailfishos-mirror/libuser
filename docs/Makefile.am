@@ -1,1 +1,1 @@
-SUBDIRS = sgml
+SUBDIRS = reference sgml

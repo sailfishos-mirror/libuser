@@ -1,4 +1,4 @@
-SUBDIRS = intl include lib quota apps samples python modules po docs
+SUBDIRS = intl po docs lib apps samples python modules
 EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt libuser.g depcomp
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig

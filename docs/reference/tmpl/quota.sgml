@@ -1,0 +1,124 @@
+<!-- ##### SECTION Title ##### -->
+quota
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION quota_on ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_off ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_get_specials_user ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_get_specials_group ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_free_specials ##### -->
+<para>
+
+</para>
+
+@specials: 
+
+
+<!-- ##### FUNCTION quota_get_user ##### -->
+<para>
+
+</para>
+
+@uid: 
+@special: 
+@inode_usage: 
+@inode_soft: 
+@inode_hard: 
+@inode_grace: 
+@block_usage: 
+@block_soft: 
+@block_hard: 
+@block_grace: 
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_set_user ##### -->
+<para>
+
+</para>
+
+@uid: 
+@special: 
+@inode_soft: 
+@inode_hard: 
+@inode_grace: 
+@block_soft: 
+@block_hard: 
+@block_grace: 
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_get_group ##### -->
+<para>
+
+</para>
+
+@gid: 
+@special: 
+@inode_usage: 
+@inode_soft: 
+@inode_hard: 
+@inode_grace: 
+@block_usage: 
+@block_soft: 
+@block_hard: 
+@block_grace: 
+@Returns: 
+
+
+<!-- ##### FUNCTION quota_set_group ##### -->
+<para>
+
+</para>
+
+@gid: 
+@special: 
+@inode_soft: 
+@inode_hard: 
+@inode_grace: 
+@block_soft: 
+@block_hard: 
+@block_grace: 
+@Returns: 
+
+

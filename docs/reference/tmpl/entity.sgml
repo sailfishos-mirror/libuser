@@ -1,0 +1,399 @@
+<!-- ##### SECTION Title ##### -->
+entity
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO LU_USERNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_USERPASSWORD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_UIDNUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_GIDNUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_GECOS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_HOMEDIRECTORY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_LOGINSHELL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_GROUPNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_GROUPPASSWORD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_MEMBERUID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_ADMINISTRATORUID ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWPASSWORD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWLASTCHANGE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWMIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWMAX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWWARNING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWINACTIVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWEXPIRE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SHADOWFLAG ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_COMMONNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_GIVENNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_SN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_ROOMNUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_TELEPHONENUMBER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_HOMEPHONE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_EMAIL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION lu_ent_free ##### -->
+<para>
+
+</para>
+
+@ent: 
+
+
+<!-- ##### FUNCTION lu_ent_copy ##### -->
+<para>
+
+</para>
+
+@source: 
+@dest: 
+
+
+<!-- ##### FUNCTION lu_ent_commit ##### -->
+<para>
+
+</para>
+
+@ent: 
+
+
+<!-- ##### FUNCTION lu_ent_revert ##### -->
+<para>
+
+</para>
+
+@ent: 
+
+
+<!-- ##### FUNCTION lu_ent_add ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@value: 
+
+
+<!-- ##### FUNCTION lu_ent_add_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@value: 
+
+
+<!-- ##### FUNCTION lu_ent_clear ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+
+
+<!-- ##### FUNCTION lu_ent_clear_all ##### -->
+<para>
+
+</para>
+
+@ent: 
+
+
+<!-- ##### FUNCTION lu_ent_clear_all_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+
+
+<!-- ##### FUNCTION lu_ent_clear_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+
+
+<!-- ##### FUNCTION lu_ent_del ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@value: 
+
+
+<!-- ##### FUNCTION lu_ent_del_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@value: 
+
+
+<!-- ##### FUNCTION lu_ent_dump ##### -->
+<para>
+
+</para>
+
+@ent: 
+@fp: 
+
+
+<!-- ##### FUNCTION lu_ent_get ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attribute: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_get_attributes ##### -->
+<para>
+
+</para>
+
+@ent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_get_attributes_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_get_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attribute: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_has ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attribute: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_has_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attribute: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_ent_set ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@values: 
+
+
+<!-- ##### FUNCTION lu_ent_set_current ##### -->
+<para>
+
+</para>
+
+@ent: 
+@attr: 
+@values: 
+
+

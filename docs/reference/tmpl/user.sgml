@@ -1,0 +1,367 @@
+<!-- ##### SECTION Title ##### -->
+user
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION lu_end ##### -->
+<para>
+
+</para>
+
+@context: 
+
+
+<!-- ##### FUNCTION lu_set_prompter ##### -->
+<para>
+
+</para>
+
+@context: 
+@prompter: 
+@callback_data: 
+
+
+<!-- ##### FUNCTION lu_get_prompter ##### -->
+<para>
+
+</para>
+
+@context: 
+@prompter: 
+@callback_data: 
+
+
+<!-- ##### FUNCTION lu_set_modules ##### -->
+<para>
+
+</para>
+
+@context: 
+@list: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_get_modules ##### -->
+<para>
+
+</para>
+
+@context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_uses_elevated_privileges ##### -->
+<para>
+
+</para>
+
+@context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_lookup_name ##### -->
+<para>
+
+</para>
+
+@context: 
+@name: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_lookup_id ##### -->
+<para>
+
+</para>
+
+@context: 
+@uid: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_default ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@name: 
+@system: 
+@ent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_add ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_modify ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_delete ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_setpass ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@newpass: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_lock ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_unlock ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_user_islocked ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_users_enumerate ##### -->
+<para>
+
+</para>
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_users_enumerate_by_group ##### -->
+<para>
+
+</para>
+
+@context: 
+@group: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_users_enumerate_full ##### -->
+<para>
+
+</para>
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_lookup_name ##### -->
+<para>
+
+</para>
+
+@context: 
+@name: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_lookup_id ##### -->
+<para>
+
+</para>
+
+@context: 
+@gid: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_default ##### -->
+<para>
+
+</para>
+
+@ctx: 
+@name: 
+@system: 
+@ent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_add ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_modify ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_delete ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_setpass ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@newpass: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_lock ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_unlock ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_group_islocked ##### -->
+<para>
+
+</para>
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_groups_enumerate ##### -->
+<para>
+
+</para>
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_groups_enumerate_by_user ##### -->
+<para>
+
+</para>
+
+@context: 
+@user: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_groups_enumerate_full ##### -->
+<para>
+
+</para>
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
+
+

@@ -17,6 +17,8 @@
 
 #ident "$Id$"
 
+/* gtkdoc: private_header */
+
 #ifndef modules_h
 #define modules_h
 

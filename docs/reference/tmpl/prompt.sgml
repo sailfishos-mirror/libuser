@@ -1,0 +1,40 @@
+<!-- ##### SECTION Title ##### -->
+prompt
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION lu_prompt_console ##### -->
+<para>
+
+</para>
+
+@prompts: 
+@count: 
+@callback_data: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_prompt_console_quiet ##### -->
+<para>
+
+</para>
+
+@prompts: 
+@count: 
+@callback_data: 
+@error: 
+@Returns: 
+
+

@@ -1,0 +1,64 @@
+<!-- ##### SECTION Title ##### -->
+error
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO LU_ERROR_CHECK ##### -->
+<para>
+
+</para>
+
+@err_p_p: 
+
+
+<!-- ##### FUNCTION lu_error_new ##### -->
+<para>
+
+</para>
+
+@error: 
+
+
+<!-- ##### FUNCTION lu_error_free ##### -->
+<para>
+
+</para>
+
+@error: 
+
+
+<!-- ##### FUNCTION lu_error_is_success ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_error_is_warning ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION lu_error_is_error ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
