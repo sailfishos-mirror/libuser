@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-17 23:08-0500\n"
+"POT-Creation-Date: 2002-01-18 16:03-0500\n"
 "PO-Revision-Date: 2001-09-06 23:33+300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -408,58 +408,58 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "dosya kilitlenirken hata: %s"
 
-#: modules/files.c:106 modules/files.c:402 modules/files.c:716
-#: modules/files.c:967 modules/files.c:1143 modules/files.c:1325
-#: modules/files.c:1401 modules/files.c:1571 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
-#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
-#: modules/files.c:1955 modules/files.c:2030 modules/files.c:2045
+#: modules/files.c:109 modules/files.c:405 modules/files.c:719
+#: modules/files.c:970 modules/files.c:1146 modules/files.c:1328
+#: modules/files.c:1404 modules/files.c:1574 modules/files.c:1689
+#: modules/files.c:1704 modules/files.c:1779 modules/files.c:1796
+#: modules/files.c:1847 modules/files.c:1866 modules/files.c:1943
+#: modules/files.c:1958 modules/files.c:2033 modules/files.c:2048
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' açýlamadý: %s"
 
-#: modules/files.c:121 modules/files.c:153 modules/files.c:185
-#: modules/files.c:730 modules/files.c:1157
+#: modules/files.c:124 modules/files.c:156 modules/files.c:188
+#: modules/files.c:733 modules/files.c:1160
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' durum bilgisi alýnamadý: %s"
 
-#: modules/files.c:130
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' oluþturulurken hata: %s"
 
-#: modules/files.c:144
+#: modules/files.c:147
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "yedek dosyasý `%s' bir sembolik bað"
 
-#: modules/files.c:747 modules/files.c:1168
+#: modules/files.c:750 modules/files.c:1171
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'den okunamadý: %s"
 
-#: modules/files.c:759 modules/files.c:771
+#: modules/files.c:762 modules/files.c:774
 msgid "entry already present in file"
 msgstr "girdi zaten dosyada var"
 
-#: modules/files.c:785 modules/files.c:800 modules/files.c:1198
-#: modules/files.c:1209
+#: modules/files.c:788 modules/files.c:803 modules/files.c:1201
+#: modules/files.c:1212
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'e yazýlamadý: %s"
 
-#: modules/files.c:937 modules/files.c:946 modules/files.c:1030
-#: modules/files.c:1043
+#: modules/files.c:940 modules/files.c:949 modules/files.c:1033
+#: modules/files.c:1046
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "öðe nesnesi %s özelliðine sahip deðil"
 
-#: modules/files.c:2262 modules/files.c:2328
+#: modules/files.c:2397 modules/files.c:2465
 msgid "not executing with superuser privileges"
 msgstr "root yetkileriyle çalýþtýrýlmýyor"
 
-#: modules/files.c:2341
+#: modules/files.c:2478
 msgid "no shadow file present -- disabling"
 msgstr "shadow dosyasý yok -- iptal ediliyor"
 
@@ -521,116 +521,116 @@ msgstr "Kerberos Baþ Yöneticisi"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Baþ Yönetici için Kerberos Parolasý"
 
-#: modules/ldap.c:198
+#: modules/ldap.c:232
 msgid "error initializing ldap library"
 msgstr "ldap kitaplýðý baþlatýlýrken hata"
 
-#: modules/ldap.c:222
+#: modules/ldap.c:256
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP protokolü %d sürümüne ayarlanamadý"
 
-#: modules/ldap.c:231
+#: modules/ldap.c:265
 msgid "could not negotiate TLS with LDAP server"
 msgstr "LDAP sunucusu ile TLS pazarlýðý yapýlamadý"
 
-#: modules/ldap.c:250
+#: modules/ldap.c:284
 msgid "could not bind to LDAP server"
 msgstr "LDAP sunucusuna baðlanýlamadý"
 
-#: modules/ldap.c:363 modules/ldap.c:775 modules/ldap.c:883 modules/ldap.c:960
-#: modules/ldap.c:1063 modules/ldap.c:1164
+#: modules/ldap.c:397 modules/ldap.c:809 modules/ldap.c:917 modules/ldap.c:994
+#: modules/ldap.c:1097 modules/ldap.c:1198
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP seçkin ismine isim eþlenirken hata"
 
-#: modules/ldap.c:370
+#: modules/ldap.c:404
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "LDAP taban seçkin ismine isim eþlenirken hata"
 
-#: modules/ldap.c:425
+#: modules/ldap.c:459
 msgid "error searching LDAP directory"
 msgstr "LDAP dizini aranýrken hata"
 
-#: modules/ldap.c:757
+#: modules/ldap.c:791
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "kullanýcý nesnesi %s özelliðini içermiyor"
 
-#: modules/ldap.c:765
+#: modules/ldap.c:799
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "kullanýcý nesnesi `%s' olmaksýzýn oluþturuldu"
 
-#: modules/ldap.c:783
+#: modules/ldap.c:817
 msgid "could not convert internal data to LDAPMods"
 msgstr "iç veri LDAPMods'a dönüþtürülemedi"
 
-#: modules/ldap.c:807 modules/ldap.c:1004
+#: modules/ldap.c:841 modules/ldap.c:1038
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi deðiþtirilirken hata: %s"
 
-#: modules/ldap.c:829
+#: modules/ldap.c:863
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "LDAP dizin girdisi isimlendirilirken hata: %s\n"
 
-#: modules/ldap.c:874
+#: modules/ldap.c:908
 #, c-format
 msgid "object had no %s attribute"
 msgstr "nesne %s özelliðini içermiyor"
 
-#: modules/ldap.c:895
+#: modules/ldap.c:929
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAP dizin girdisi silinirken hata: %s.\n"
 
-#: modules/ldap.c:951 modules/ldap.c:967 modules/ldap.c:1054
-#: modules/ldap.c:1155
+#: modules/ldap.c:985 modules/ldap.c:1001 modules/ldap.c:1088
+#: modules/ldap.c:1189
 #, c-format
 msgid "object has no %s attribute"
 msgstr "nesne %s özelliðini içermiyor"
 
-#: modules/ldap.c:1077
+#: modules/ldap.c:1111
 msgid "no such object in LDAP directory"
 msgstr "LDAP dizininde böyle bir nesne yok"
 
-#: modules/ldap.c:1100
+#: modules/ldap.c:1134
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "`%s' özelliðini kullanan bir `%s' þemasý yok"
 
-#: modules/ldap.c:1111
+#: modules/ldap.c:1145
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' özelliði bulunmuyor"
 
-#: modules/ldap.c:1242
+#: modules/ldap.c:1276
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP dizininde %s için parola belirlenirken hata: %s"
 
-#: modules/ldap.c:1578
+#: modules/ldap.c:1612
 msgid "LDAP Server Name"
 msgstr "LDAP Sunucu Ýsmi"
 
-#: modules/ldap.c:1584
+#: modules/ldap.c:1618
 msgid "LDAP Base DN"
 msgstr "LDAP Temel DN"
 
-#: modules/ldap.c:1591
+#: modules/ldap.c:1625
 msgid "LDAP Bind DN"
 msgstr "LDAP Baðlantý DN"
 
-#: modules/ldap.c:1598
+#: modules/ldap.c:1632
 msgid "LDAP Bind Password"
 msgstr "LDAP Baðlantý Parolasý"
 
-#: modules/ldap.c:1604
+#: modules/ldap.c:1638
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Kullanýcýsý"
 
-#: modules/ldap.c:1611
+#: modules/ldap.c:1645
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Yetkilendirme Kullanýcýsý"
 

@@ -110,11 +110,13 @@ lu_start(const char *auth_name, enum lu_entity_type auth_type,
 	/* Read the list of default modules, if the application didn't specify
 	 * any that we should be using. */
 	if (modules == NULL) {
-		modules = lu_cfg_read_single(ctx, "defaults/modules",
+		modules = lu_cfg_read_single(ctx,
+					     "defaults/modules",
 					     "files shadow");
 	}
 	if (create_modules == NULL) {
-		create_modules = lu_cfg_read_single(ctx, "defaults/modules",
+		create_modules = lu_cfg_read_single(ctx,
+						    "defaults/create_modules",
 						    "files shadow");
 	}
 
