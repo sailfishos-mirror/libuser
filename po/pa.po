@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-08-24 18:40+0200\n"
 "PO-Revision-Date: 2004-08-23 14:08+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -30,34 +31,38 @@ msgstr " `%s' ਪੜਨ ਵਿੱਚ ਗਲਤੀ: %s"
 msgid "Error creating `%s': %s"
 msgstr " `%s' ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr " `%s' ਹਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "ਅਧਿਕਾਰ ਛੱਡਣ ਵਿੱਚ ਅਸਫਲ|\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ|\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ|\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s  ਲਈ ਪ੍ਰਮਾਣਕਿਤਾ ਅਸਫਲ|\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "ਅੰਦਰੂਨੀ PAM ਗਲਤੀ `%s'|\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "ਉਪਭੋਗਤਾ ਵਖਰੇਵਾਂ|\n"
 
@@ -75,6 +80,7 @@ msgstr "ਆਰਗੂਮਿੰਟ ਪਾਰਸ ਕਰਨ ਵਿੱਚ ਗਲਤ�
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "ਕੋਈ ਉਪਭੋਗਤਾ ਨਾਂ ਨਹੀ ਦਰਸਾਇਆ|\n"
 
@@ -107,10 +113,12 @@ msgid "User %s does not exist.\n"
 msgstr "ਉਪਭੋਗਤਾ %s ਮੌਜੂਦ ਨਹੀ|\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "ਖਾਤਾ ਲਾਕ ਹੈ|\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "ਖਾਤਾ ਲਾਕ ਨਹੀ ਹੈ|\n"
 
@@ -172,7 +180,6 @@ msgstr "[ਚੋਣ...] [ਉਪਭੋਗਤਾ]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "ਕੋਈ ਉਪਭੋਗਤਾ ਨਾਂ ਨਹੀ ਦਰਸਾਇਆ, uid %d ਲਈ ਕੋਈ ਨਾਂ ਨਹੀ|\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -224,7 +231,6 @@ msgstr "ਮੁੱਖ ਜਾਣਕਾਰੀ ਤਬਦੀਲ ਹੋ ਗਈ ਹੈ|
 msgid "Finger information not changed: %s.\n"
 msgstr "ਮੁੱਖ ਜਾਣਕਾਰੀ ਤਬਦੀਲ ਨਹੀ ਹੋਈ: %s|\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -243,10 +249,12 @@ msgid "[OPTION...] group"
 msgstr "[ਚੋਣ...] ਸਮੂਹ"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "ਕੋਈ ਸਮੂਹ ਨਾਂ ਨਹੀ ਦਰਸਾਇਆ|\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ|\n"
 
@@ -261,6 +269,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "ਸਮੂਹ %s ਨੂੰ ਮਿਟਾਇਆ ਨਹੀ ਜਾ ਸਕਦਾ|\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "ਦੋਨੋ -L ਅਤੇ -U ਨਿਰਧਾਰਿਤ ਹਨ|\n"
 
@@ -317,7 +326,6 @@ msgstr "`%s' ਲਈ ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: ਲ�
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 ਨਾਲ ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਇਨਕਾਰ ਕਰ ਰਿਹਾ ਹੈ|\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -357,10 +365,12 @@ msgid "New password (confirm)"
 msgstr "ਨਵਾਂ ਗੁਪਤ-ਕੋਡ (ਯਕੀਨਨ ਬਣਾਓ)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਨੇ ਮੇਲ ਨਹੀ ਕੀਤਾ, ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ|\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲੀ ਰੱਦ ਹੋਈ|\n"
 
@@ -375,10 +385,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲ ਹੋਇਆ|\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -395,6 +405,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "%s ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ|\n"
 
@@ -925,4 +936,3 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
-

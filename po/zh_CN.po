@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-08-24 18:40+0200\n"
 "PO-Revision-Date: 2004-03-11 11:21+0800\n"
 "Last-Translator: hutuworm <hutuworm@hutuworm.org>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
@@ -25,144 +26,94 @@ msgstr "读取“%s”时出错：%s"
 msgid "Error creating `%s': %s"
 msgstr "创建“%s”时出错：%s"
 
-#: apps/apputil.c:205
-#: apps/apputil.c:215
-#: apps/apputil.c:247
-#: apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "删除“%s”时出错：%s"
 
-#: apps/apputil.c:421
-#: apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "放弃特权失败。\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "内部错误。\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "初始化 PAM 出错。\n"
 
-#: apps/apputil.c:455
-#: apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s 验证失败。\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "内部 PAM 错误“%s”。\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "用户错配。\n"
 
-#: apps/lchage.c:132
-#: apps/lid.c:67
-#: apps/lpasswd.c:70
-#: apps/luseradd.c:86
-#: apps/luserdel.c:65
-#: apps/lusermod.c:87
+#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[OPTION...] 用户"
 
-#: apps/lchage.c:135
-#: apps/lchfn.c:77
-#: apps/lchsh.c:64
-#: apps/lgroupadd.c:68
-#: apps/lgroupdel.c:60
-#: apps/lgroupmod.c:85
-#: apps/lid.c:70
-#: apps/lnewusers.c:77
-#: apps/lpasswd.c:73
-#: apps/luseradd.c:89
-#: apps/luserdel.c:68
-#: apps/lusermod.c:90
+#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "解析参数时出错：%s。\n"
 
-#: apps/lchage.c:144
-#: apps/lpasswd.c:89
-#: apps/luseradd.c:104
-#: apps/luserdel.c:76
+#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "没有指定的用户名。\n"
 
-#: apps/lchage.c:154
-#: apps/lchfn.c:110
-#: apps/lchsh.c:98
-#: apps/lgroupadd.c:88
-#: apps/lgroupdel.c:79
-#: apps/lgroupmod.c:102
-#: apps/lid.c:110
-#: apps/lnewusers.c:88
-#: apps/lpasswd.c:99
-#: apps/luseradd.c:114
-#: apps/luserdel.c:85
-#: apps/lusermod.c:111
-#: samples/testuser.c:71
+#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "初始化 %s 出错：%s。\n"
 
-#: apps/lchage.c:156
-#: apps/lchfn.c:112
-#: apps/lchfn.c:374
-#: apps/lchsh.c:100
-#: apps/lgroupadd.c:90
-#: apps/lgroupdel.c:81
-#: apps/lgroupmod.c:104
-#: apps/lid.c:112
-#: apps/lnewusers.c:90
-#: apps/lnewusers.c:293
-#: apps/lnewusers.c:315
-#: apps/lnewusers.c:332
-#: apps/lpasswd.c:101
-#: apps/lpasswd.c:192
-#: apps/lpasswd.c:199
-#: apps/luseradd.c:116
-#: apps/luseradd.c:277
-#: apps/luseradd.c:320
-#: apps/luserdel.c:87
-#: apps/luserdel.c:101
-#: apps/luserdel.c:143
-#: apps/luserdel.c:166
-#: apps/lusermod.c:113
-#: apps/lusermod.c:195
-#: apps/lusermod.c:208
-#: apps/lusermod.c:219
-#: apps/lusermod.c:228
-#: apps/lusermod.c:237
-#: apps/lusermod.c:293
-#: apps/lusermod.c:315
-#: lib/error.c:85
-#: python/admin.c:352
-#: python/admin.c:419
+#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
+#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
+#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
+#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
+#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
+#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
 #: samples/lookup.c:65
 msgid "unknown error"
 msgstr "未知错误"
 
-#: apps/lchage.c:164
-#: apps/lchfn.c:123
-#: apps/lchsh.c:111
-#: apps/lpasswd.c:148
-#: apps/luserdel.c:94
-#: apps/lusermod.c:126
+#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "用户 %s 不存在。\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "帐号被锁。\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "帐号没被锁。\n"
 
@@ -186,10 +137,7 @@ msgstr "警告：\t%d\n"
 msgid "Inactive:\t%d\n"
 msgstr "不活跃：\t%d\n"
 
-#: apps/lchage.c:199
-#: apps/lchage.c:207
-#: apps/lchage.c:218
-#: apps/lchage.c:228
+#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
 msgstr "从不"
 
@@ -218,27 +166,21 @@ msgstr "帐号过期：\t%s\n"
 msgid "Failed to modify aging information for %s.\n"
 msgstr "为 %s 修改老化信息失败。\n"
 
-#: apps/lchfn.c:74
-#: apps/lchsh.c:61
+#: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [用户]"
 
-#: apps/lchfn.c:91
-#: apps/lchsh.c:79
-#: apps/lid.c:97
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "没有指定用户名，uid %d 没有姓名。\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "改变 %s 的 finger 信息。\n"
 
-#: apps/lchfn.c:114
-#: apps/lchsh.c:102
-#: apps/lgroupadd.c:92
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
 msgstr "初始化 %s 出错。\n"
@@ -284,7 +226,6 @@ msgstr "Finger 信息被改变。\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Finger 信息没有被改变：%s。\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -298,25 +239,21 @@ msgstr "新建 Shell"
 msgid "Shell changed.\n"
 msgstr "Shell 被改变。\n"
 
-#: apps/lgroupadd.c:65
-#: apps/lgroupdel.c:57
-#: apps/lgroupmod.c:82
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
 msgstr "[OPTION...] 组群"
 
-#: apps/lgroupadd.c:77
-#: apps/lgroupdel.c:69
-#: apps/lgroupmod.c:93
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "没有指定的组群名。\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "创建组群失败。\n"
 
-#: apps/lgroupdel.c:88
-#: apps/lgroupmod.c:116
-#: apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "组群 %s 不存在。\n"
@@ -326,13 +263,12 @@ msgstr "组群 %s 不存在。\n"
 msgid "Group %s could not be deleted.\n"
 msgstr "组群 %s 无法被删除。\n"
 
-#: apps/lgroupmod.c:109
-#: apps/lusermod.c:119
+#: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr " -L 和 -U 两者皆被指定。\n"
 
-#: apps/lgroupmod.c:226
-#: apps/lgroupmod.c:234
+#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "为组群 %s 设置口令失败。\n"
@@ -385,7 +321,6 @@ msgstr "为“%s”创建账号时出错：行格式不正确。\n"
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒绝使用 UID 0 来创建账号。\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -425,10 +360,12 @@ msgid "New password (confirm)"
 msgstr "新口令(确认)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "口令不匹配，请重试。\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "口令改变被取消。\n"
 
@@ -443,12 +380,11 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "为组群“%s”设置口令时出错：%s\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "口令被改变。\n"
 
-#. Aargh!  Abandon all hope.
-#: apps/luseradd.c:197
-#: apps/luseradd.c:209
+#: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "创建组群“%s”出错。\n"
@@ -464,6 +400,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "创建 %s 失败：%s。\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "创建邮件池出错。\n"
 
@@ -502,8 +439,7 @@ msgstr "%s 没有主目录。\n"
 msgid "Error removing %s: %s.\n"
 msgstr "删除 %s 时出错：%s。\n"
 
-#: apps/lusermod.c:193
-#: apps/lusermod.c:206
+#: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "为用户 %s 设置口令失败：%s。\n"
@@ -642,8 +578,7 @@ msgstr "在“%s”中模块版本错配"
 msgid "error reading terminal attributes"
 msgstr "读取终端属性时出错"
 
-#: lib/prompt.c:73
-#: lib/prompt.c:85
+#: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
 msgstr "设置终端属性时出错"
 
@@ -681,35 +616,19 @@ msgstr "名称中包含无效字符“%c”"
 msgid "error locking file: %s"
 msgstr "锁文件时出错：%s"
 
-#: modules/files.c:109
-#: modules/files.c:453
-#: modules/files.c:823
-#: modules/files.c:1116
-#: modules/files.c:1322
-#: modules/files.c:1551
-#: modules/files.c:1659
-#: modules/files.c:1861
-#: modules/files.c:2060
-#: modules/files.c:2077
-#: modules/files.c:2167
-#: modules/files.c:2186
-#: modules/files.c:2254
-#: modules/files.c:2275
-#: modules/files.c:2371
-#: modules/files.c:2390
-#: modules/files.c:2449
-#: modules/files.c:2468
-#: modules/files.c:2569
-#: modules/files.c:2586
+#: modules/files.c:109 modules/files.c:453 modules/files.c:823
+#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
+#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
+#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
+#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
+#: modules/files.c:2569 modules/files.c:2586
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "无法打开“%s”：%s"
 
-#: modules/files.c:126
-#: modules/files.c:162
-#: modules/files.c:200
-#: modules/files.c:839
-#: modules/files.c:1338
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "无法 stat “%s”：%s"
@@ -724,35 +643,28 @@ msgstr "创建“%s”时出错：%s"
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "备份文件“%s”已存在，且不是常规文件"
 
-#: modules/files.c:872
-#: modules/files.c:1350
+#: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "无法从“%s”中读取：%s"
 
-#: modules/files.c:887
-#: modules/files.c:900
+#: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
 msgstr "项目已在文件中出现"
 
-#: modules/files.c:913
-#: modules/files.c:934
-#: modules/files.c:1409
+#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "无法写入“%s”：%s"
 
-#: modules/files.c:1083
-#: modules/files.c:1092
-#: modules/files.c:1197
+#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "实体对象没有任何 %s 属性"
 
-#: modules/files.c:2822
-#: modules/files.c:2892
+#: modules/files.c:2822 modules/files.c:2892
 msgid "not executing with superuser privileges"
 msgstr "没有使用超级用户的特权在执行"
 
@@ -765,32 +677,18 @@ msgstr "没有屏蔽文件 -- 将禁用"
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr "为“%s”服务在领域“%s”中连接 kadm5 服务器时出错：%s"
 
-#: modules/krb5.c:137
-#: modules/krb5.c:203
-#: modules/krb5.c:301
-#: modules/krb5.c:389
-#: modules/krb5.c:441
-#: modules/krb5.c:529
-#: modules/krb5.c:595
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "初始化 kerberos 库时出错"
 
-#: modules/krb5.c:144
-#: modules/krb5.c:224
-#: modules/krb5.c:333
-#: modules/krb5.c:341
-#: modules/krb5.c:409
-#: modules/krb5.c:462
-#: modules/krb5.c:550
-#: modules/krb5.c:612
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "为 kerberos 解析用户名“%s”时出错"
 
-#: modules/krb5.c:214
-#: modules/krb5.c:400
-#: modules/krb5.c:452
-#: modules/krb5.c:540
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "实体结构没有任何 %s 或 %s 属性"
@@ -805,8 +703,7 @@ msgstr "实体没有任何 %s 或 %s 属性"
 msgid "entity was created with no %s or %s attributes"
 msgstr "实体创建时没有包括任何 %s 或 %s 属性"
 
-#: modules/krb5.c:475
-#: modules/krb5.c:563
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "从 kerberos 中为“%s”读取信息时出错。"
@@ -833,13 +730,11 @@ msgstr "Kerberos 主管理员"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos 主管理员口令"
 
-#: modules/ldap.c:216
-#: modules/ldap.c:249
+#: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
 msgstr "初始化 ldap 库时出错"
 
-#: modules/ldap.c:227
-#: modules/ldap.c:260
+#: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "无法将 LDAP 协议设为版本 %d"
@@ -860,12 +755,8 @@ msgstr "无法搜索 LDAP 服务器"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP 服务器似乎没有根 DSE"
 
-#: modules/ldap.c:673
-#: modules/ldap.c:1238
-#: modules/ldap.c:1354
-#: modules/ldap.c:1417
-#: modules/ldap.c:1531
-#: modules/ldap.c:1625
+#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
+#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
 msgid "error mapping name to LDAP distinguished name"
 msgstr "将名称映射为 LDAP 识别名时出错。"
 
@@ -887,8 +778,7 @@ msgstr "用户对象创建时没有包括“%s”"
 msgid "could not convert internal data to LDAPMods"
 msgstr "无法将内部数据转换成 LDAPMods"
 
-#: modules/ldap.c:1271
-#: modules/ldap.c:1483
+#: modules/ldap.c:1271 modules/ldap.c:1483
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目录项目时出错：%s"
@@ -908,9 +798,7 @@ msgstr "对象没有任何 %s 属性"
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "删除 LDAP 目录项目时出错：%s。\n"
 
-#: modules/ldap.c:1403
-#: modules/ldap.c:1425
-#: modules/ldap.c:1516
+#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
 #: modules/ldap.c:1610
 #, c-format
 msgid "object has no %s attribute"
@@ -978,8 +866,7 @@ msgstr "删除用户 %s 时出现 Cyrus SASL 错误：%s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "删除用户时出现 Cyrus SASL错误：%s"
 
-#: modules/sasldb.c:428
-#: modules/sasldb.c:436
+#: modules/sasldb.c:428 modules/sasldb.c:436
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "初始化 Cyrus SASL 时出错：%s"
@@ -1044,4 +931,3 @@ msgstr "正在获取默认的用户属性：\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "正在复制用户结构：\n"
-

@@ -9,7 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-08-24 18:40+0200\n"
 "PO-Revision-Date: 2004-08-01 22:11+0200\n"
 "Last-Translator: Tomislav Markovski <herrera@users.sourceforge.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -28,34 +29,38 @@ msgstr "Грешка при читање на `%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "Грешка при креирање на `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Грешка при отстранување на `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Не успеав да ги симнам привилегиите.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Внатрешна грешка.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Грешка при иницијализација на PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Автентикацијата е неуспешна за %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Внатрешна грешка во PAM `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Погрешен корисник.\n"
 
@@ -73,6 +78,7 @@ msgstr "Грешка при парсирање на аргументите: %s.\
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Не е одредено корисничко име.\n"
 
@@ -105,10 +111,12 @@ msgid "User %s does not exist.\n"
 msgstr "Корисникот %s не постои.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Сметката е заклучена.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Сметката не е заклучена.\n"
 
@@ -170,7 +178,6 @@ msgstr "[ОПЦИЈА...] [корисник]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Нема одредено корисничко име. Нема име за uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -222,7 +229,6 @@ msgstr "Информацијата од finger е променета.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Информацијата за finger не е променета: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -241,10 +247,12 @@ msgid "[OPTION...] group"
 msgstr "[ОПЦИЈА...] група"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Нема одредено име за групата.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "Креирањето на групата е неуспешно.\n"
 
@@ -259,6 +267,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Групата %s не може да биде избришана.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "И -L и -U се одредени.\n"
 
@@ -309,13 +318,13 @@ msgstr "Грешка при отворање на `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Грешка при креирање на сметка за `%s': линијата е форматирана погрешно.\n"
+msgstr ""
+"Грешка при креирање на сметка за `%s': линијата е форматирана погрешно.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Одбивам да креирам сметка со UID 0.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -355,10 +364,12 @@ msgid "New password (confirm)"
 msgstr "Нов лозинка (потврда)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Лозинките не се совпаѓаат, пробајте повторно.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Промената на лозинката е откажана.\n"
 
@@ -373,10 +384,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "Грешка при поставување на лозинка за групата %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Лозинката е променета.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -393,6 +404,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Грешка при креирање на %s: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Грешка при креирање на mail spool.\n"
 
@@ -667,7 +679,8 @@ msgstr "нема присутна сенка датотека -- оневозм�
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "грешка при врзување со kadm5 серверот за сервисот `%s' во realm `%s': %s"
+msgstr ""
+"грешка при врзување со kadm5 серверот за сервисот `%s' во realm `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -923,4 +936,3 @@ msgstr "Ги земам стандардните кориснички атриб
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Ја копирам корисничката структура:\n"
-

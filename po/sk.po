@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-08-24 18:40+0200\n"
 "PO-Revision-Date: 2003-07-31 21:59+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -25,34 +26,38 @@ msgstr "Chyba pri čítaní `%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "Chyba pri vytváraní `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Chyba pri odstraňovaní `%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Zlyhalo zahodenie práv.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "Interná chyba.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Chyba inicializácie PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Overenie totožnosti zlyhalo pre %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Interná chyba PAM `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "Používateľ sa nezhoduje.\n"
 
@@ -70,6 +75,7 @@ msgstr "Chyba pri analýze parametrov: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "Nebolo zadané meno používateľa.\n"
 
@@ -102,10 +108,12 @@ msgid "User %s does not exist.\n"
 msgstr "Používateľ %s neexistuje.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "Konto je zamknuté.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "Konto nie je zamknuté.\n"
 
@@ -167,7 +175,6 @@ msgstr "[VOĽBA...] [používateľ]"
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Nebolo zadané meno používateľa, nie je meno pre uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -219,7 +226,6 @@ msgstr "Finger informácie boli zmenené.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Finger informácie neboli zmenené: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -238,10 +244,12 @@ msgid "[OPTION...] group"
 msgstr "[VOĽBA...] skupina"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "Nebolo zadané meno skupiny.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "Vytvorenie skupiny zlyhalo.\n"
 
@@ -256,6 +264,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "Skupina %s nemohla byť vymazaná.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Boli zadané obidve -L a -U.\n"
 
@@ -306,13 +315,13 @@ msgstr "Chyba pri otváraní `%s': %s.\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Chyba pri vytváraní konta pre `%s': riadok je nesprávne naformátovaný.\n"
+msgstr ""
+"Chyba pri vytváraní konta pre `%s': riadok je nesprávne naformátovaný.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Zamietam vytvorenie konta s UID 0.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -352,10 +361,12 @@ msgid "New password (confirm)"
 msgstr "Nové helso (potvrdiť)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Heslá sa nezhodujú, skúste znova.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "Zmena hesla zrušená.\n"
 
@@ -370,10 +381,10 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "Chyby pri nastavovaní hesla pre skupinu %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "Heslo zmenené.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -390,6 +401,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "Chyba pri vytváraní %s: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"
 
@@ -664,7 +676,8 @@ msgstr "tieňový súbor nie je prítomný -- deaktivujem"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "chyba pri pripájaní ku kadm5 serveru pre službu `%s' v oblasti `%s': %s"
+msgstr ""
+"chyba pri pripájaní ku kadm5 serveru pre službu `%s' v oblasti `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595

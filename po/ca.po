@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-08-24 18:40+0200\n"
 "PO-Revision-Date: 2004-03-07 04:27+0100\n"
 "Last-Translator: isabel cama <c.gomez.febrel@terra.es>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -24,34 +25,38 @@ msgstr "S'ha produït un error en llegir '%s': %s"
 msgid "Error creating `%s': %s"
 msgstr "S'ha produït un error en crear '%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "S'ha produït un error en eliminar '%s': %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:411 apps/apputil.c:415
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "No s'han pogut eliminar els privilegis.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:424
+#, c-format
 msgid "Internal error.\n"
 msgstr "S'ha produït un error intern.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:437
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "S'ha produït un error en iniciar PAM.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Ha fallat l'autenticació per a %s.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "S'ha produït un error intern '%s' del PAM.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:460
+#, c-format
 msgid "User mismatch.\n"
 msgstr "L'usuari és discordant.\n"
 
@@ -69,6 +74,7 @@ msgstr "S'ha produït un error en analitzar els arguments: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "No s'ha especificat cap nom d'usuari.\n"
 
@@ -101,10 +107,12 @@ msgid "User %s does not exist.\n"
 msgstr "L'usuari %s no existeix.\n"
 
 #: apps/lchage.c:172
+#, c-format
 msgid "Account is locked.\n"
 msgstr "El compte està bloquejat.\n"
 
 #: apps/lchage.c:174
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "El compte no està bloquejat.\n"
 
@@ -167,7 +175,6 @@ msgid "No user name specified, no name for uid %d.\n"
 msgstr ""
 "No s'ha especificat cap nom d'usuari, no hi ha cap nom per a l'uid %d.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -219,7 +226,6 @@ msgstr "La informació del finger ha canviat.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "La informació del finger no ha canviat: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -238,10 +244,12 @@ msgid "[OPTION...] group"
 msgstr "[opció...] grup"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, c-format
 msgid "No group name specified.\n"
 msgstr "No s'ha especificat cap nom de grup.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "No s'ha pogut crear el grup.\n"
 
@@ -256,6 +264,7 @@ msgid "Group %s could not be deleted.\n"
 msgstr "No s'ha pogut suprimir el grup %s.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "S'han especificat -L i -U.\n"
 
@@ -314,7 +323,6 @@ msgstr ""
 msgid "Refusing to create account with UID 0.\n"
 msgstr "No es pot crear un compte amb l'UID 0.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -355,10 +363,12 @@ msgid "New password (confirm)"
 msgstr "Nova contrasenya (confirmació)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Les contrasenyes són diferents, intenteu-ho de nou.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 
@@ -375,10 +385,10 @@ msgstr ""
 "S'ha produït un error en configurar la contrasenya per al grup %s: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "S'ha canviat la contrasenya.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
@@ -395,6 +405,7 @@ msgid "Error creating %s: %s.\n"
 msgstr "S'ha produït un error en crear %s: %s.\n"
 
 #: apps/luseradd.c:326
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "S'ha produït un error en crear la gestió de cues de correu.\n"
 
