@@ -50,6 +50,7 @@ rm -fr $RPM_BUILD_ROOT
 %doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html python/modules.txt
 %config(noreplace) %{_sysconfdir}/libuser.conf
 %dir %{_libdir}/libuser
+%{_bindir}/*
 %{_libdir}/python1.5/site-packages/*
 %{_libdir}/libuser.so.*.*
 %{_libdir}/libuser_quota.so.*.*
