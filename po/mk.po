@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-08-24 18:40+0200\n"
+"POT-Creation-Date: 2004-09-24 18:09+0200\n"
 "PO-Revision-Date: 2004-08-01 22:11+0200\n"
 "Last-Translator: Tomislav Markovski <herrera@users.sourceforge.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -19,152 +19,152 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: apps/apputil.c:71
+#: apps/apputil.c:129
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Грешка при читање на `%s': %s"
 
-#: apps/apputil.c:79
+#: apps/apputil.c:137
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Грешка при креирање на `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
+#: apps/apputil.c:265 apps/apputil.c:297 apps/apputil.c:314
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Грешка при отстранување на `%s': %s"
 
-#: apps/apputil.c:411 apps/apputil.c:415
+#: apps/apputil.c:473 apps/apputil.c:477
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Не успеав да ги симнам привилегиите.\n"
 
-#: apps/apputil.c:424
+#: apps/apputil.c:486
 #, c-format
 msgid "Internal error.\n"
 msgstr "Внатрешна грешка.\n"
 
-#: apps/apputil.c:437
+#: apps/apputil.c:526
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Грешка при иницијализација на PAM.\n"
 
-#: apps/apputil.c:445 apps/apputil.c:469
+#: apps/apputil.c:534 apps/apputil.c:558
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Автентикацијата е неуспешна за %s.\n"
 
-#: apps/apputil.c:454
+#: apps/apputil.c:543
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Внатрешна грешка во PAM `%s'.\n"
 
-#: apps/apputil.c:460
+#: apps/apputil.c:549
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Погрешен корисник.\n"
 
-#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[ОПЦИЈА...] корисник"
 
-#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
-#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:90 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Грешка при парсирање на аргументите: %s.\n"
 
-#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lchage.c:146 apps/lpasswd.c:89 apps/luseradd.c:105 apps/luserdel.c:76
 #: apps/lusermod.c:101
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Не е одредено корисничко име.\n"
 
-#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
-#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:71
+#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Грешка при иницијализирање на %s: %s.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
 #: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
 #: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
-#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:278
+#: apps/luseradd.c:321 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
 #: samples/lookup.c:65
 msgid "unknown error"
 msgstr "непозната грешка"
 
-#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Корисникот %s не постои.\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:174
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Сметката е заклучена.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:176
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Сметката не е заклучена.\n"
 
-#: apps/lchage.c:179
+#: apps/lchage.c:181
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Минимум:\t%d\n"
 
-#: apps/lchage.c:184
+#: apps/lchage.c:186
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Максимум:\t%d\n"
 
-#: apps/lchage.c:189
+#: apps/lchage.c:191
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Предупредување:\t%d\n"
 
-#: apps/lchage.c:194
+#: apps/lchage.c:196
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Неактивно:\t%d\n"
 
-#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
 msgid "Never"
 msgstr "Никогаш"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:203
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Последна промена:\t%s\n"
 
-#: apps/lchage.c:211
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Лозинката истекува:\t%s\n"
 
-#: apps/lchage.c:223
+#: apps/lchage.c:225
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Лозинката е неактивна:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:232
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Сметката истекува:\t%s\n"
 
-#: apps/lchage.c:277
+#: apps/lchage.c:279
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Не можев да ги променам информциите за стареење за %s.\n"
@@ -173,7 +173,7 @@ msgstr "Не можев да ги променам информциите за �
 msgid "[OPTION...] [user]"
 msgstr "[ОПЦИЈА...] [корисник]"
 
-#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Нема одредено корисничко име. Нема име за uid %d.\n"
@@ -242,11 +242,11 @@ msgstr "Нова школка"
 msgid "Shell changed.\n"
 msgstr "Школката е сменета.\n"
 
-#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
 msgstr "[ОПЦИЈА...] група"
 
-#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Нема одредено име за групата.\n"
@@ -256,7 +256,7 @@ msgstr "Нема одредено име за групата.\n"
 msgid "Group creation failed.\n"
 msgstr "Креирањето на групата е неуспешно.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Групата %s не постои.\n"
@@ -266,42 +266,42 @@ msgstr "Групата %s не постои.\n"
 msgid "Group %s could not be deleted.\n"
 msgstr "Групата %s не може да биде избришана.\n"
 
-#: apps/lgroupmod.c:109 apps/lusermod.c:119
+#: apps/lgroupmod.c:111 apps/lusermod.c:119
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "И -L и -U се одредени.\n"
 
-#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Не успеав да поставам лозинка за групата %s.\n"
 
-#: apps/lgroupmod.c:242
+#: apps/lgroupmod.c:244
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Групата %s не може да биде заклучена.\n"
 
-#: apps/lgroupmod.c:250
+#: apps/lgroupmod.c:252
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Групата %s не може да биде отклучена.\n"
 
-#: apps/lgroupmod.c:257
+#: apps/lgroupmod.c:259
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Групата %s не може да биде изменета.\n"
 
-#: apps/lid.c:81
+#: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Нема одредено име за групата, користам %s.\n"
 
-#: apps/lid.c:85
+#: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Нема одредено име за групата. Нема име за gid %d.\n"
 
-#: apps/lid.c:93
+#: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Нема одредено корисничко име, користам %s.\n"
@@ -388,22 +388,22 @@ msgstr "Грешка при поставување на лозинка за гр
 msgid "Password changed.\n"
 msgstr "Лозинката е променета.\n"
 
-#: apps/luseradd.c:197 apps/luseradd.c:209
+#: apps/luseradd.c:198 apps/luseradd.c:210
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "Грешка при креирање на групата `%s'.\n"
 
-#: apps/luseradd.c:276
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Креирањето на сметката не успеа: %s.\n"
 
-#: apps/luseradd.c:318
+#: apps/luseradd.c:319
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Грешка при креирање на %s: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:327
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Грешка при креирање на mail spool.\n"
@@ -568,25 +568,25 @@ msgstr "грешка при пронаоѓање на симбол во моду
 msgid "library/module version mismatch"
 msgstr "библиотека/погрешна верзија на модул"
 
-#: lib/modules.c:97
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "нема функција за иницијализација %s во `%s'"
 
-#: lib/modules.c:128
+#: lib/modules.c:129
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "погрешна верзија на модул во `%s'"
 
-#: lib/prompt.c:66
+#: lib/prompt.c:67
 msgid "error reading terminal attributes"
 msgstr "грешка при читање на атрибутите во терминалот"
 
-#: lib/prompt.c:73 lib/prompt.c:85
+#: lib/prompt.c:74 lib/prompt.c:86
 msgid "error setting terminal attributes"
 msgstr "грешка при подесување на атрибути за терминалот"
 
-#: lib/prompt.c:79
+#: lib/prompt.c:80
 msgid "error reading from terminal"
 msgstr "грешка при читање од терминалот"
 
@@ -615,64 +615,64 @@ msgstr "името содржи бели места"
 msgid "name contains invalid char `%c'"
 msgstr "името содржи валиден char `%c'"
 
-#: lib/util.c:200
+#: lib/util.c:212
 #, c-format
 msgid "error locking file: %s"
 msgstr "грешка при заклучувањето на датотеката: %s"
 
-#: modules/files.c:109 modules/files.c:453 modules/files.c:823
-#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
-#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
-#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
-#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
-#: modules/files.c:2569 modules/files.c:2586
+#: modules/files.c:171 modules/files.c:514 modules/files.c:886
+#: modules/files.c:1158 modules/files.c:1359 modules/files.c:1570
+#: modules/files.c:1660 modules/files.c:1864 modules/files.c:2054
+#: modules/files.c:2071 modules/files.c:2161 modules/files.c:2180
+#: modules/files.c:2248 modules/files.c:2269 modules/files.c:2366
+#: modules/files.c:2385 modules/files.c:2444 modules/files.c:2463
+#: modules/files.c:2564 modules/files.c:2581
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "не можам да отворам `%s': %s"
 
-#: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:839 modules/files.c:1338
+#: modules/files.c:187 modules/files.c:223 modules/files.c:261
+#: modules/files.c:898 modules/files.c:1371
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "не можам да одредам `%s': %s"
 
-#: modules/files.c:137
+#: modules/files.c:198
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "грешка при креирање на `%s': %s"
 
-#: modules/files.c:153
+#: modules/files.c:214
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервната датотека `%s' постои и не е регуларна датотека"
 
-#: modules/files.c:872 modules/files.c:1350
+#: modules/files.c:928 modules/files.c:1380
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "не можам да прочитам од `%s': %s"
 
-#: modules/files.c:887 modules/files.c:900
+#: modules/files.c:937 modules/files.c:944
 msgid "entry already present in file"
 msgstr "записот веќе постои во датотеката"
 
-#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:951 modules/files.c:966 modules/files.c:1430
+#: modules/files.c:1438
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "не можам да запишам во `%s': %s"
 
-#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
-#: modules/files.c:1209
+#: modules/files.c:1125 modules/files.c:1133 modules/files.c:1235
+#: modules/files.c:1243
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "објектот нема %s атрибут"
 
-#: modules/files.c:2822 modules/files.c:2892
+#: modules/files.c:2847 modules/files.c:2917
 msgid "not executing with superuser privileges"
 msgstr "не извршувам со суперкориснички привилегии"
 
-#: modules/files.c:2905
+#: modules/files.c:2930
 msgid "no shadow file present -- disabling"
 msgstr "нема присутна сенка датотека -- оневозможувам"
 
@@ -735,160 +735,156 @@ msgstr "Принцип на админ за керберос"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Лозинка за принцип на админ за керберос"
 
-#: modules/ldap.c:216 modules/ldap.c:249
+#: modules/ldap.c:192 modules/ldap.c:225
 msgid "error initializing ldap library"
 msgstr "грешка при иницијализирање на ldap библиотеката"
 
-#: modules/ldap.c:227 modules/ldap.c:260
+#: modules/ldap.c:203 modules/ldap.c:236
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "не можам да го поставам LDAP протоколот на верзијата %d"
 
-#: modules/ldap.c:237
+#: modules/ldap.c:213
 msgid "could not negotiate TLS with LDAP server"
 msgstr "не можам да договорам TLS со LDAP серверот"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:396
 msgid "could not bind to LDAP server"
 msgstr "не можам да се врзам за LDAP серверот"
 
-#: modules/ldap.c:424
+#: modules/ldap.c:408
 msgid "could not search LDAP server"
 msgstr "не можам да го пребарувам LDAP серверот"
 
-#: modules/ldap.c:433
+#: modules/ldap.c:417
 msgid "LDAP server appears to have no root DSE"
 msgstr "изгледа дека LDAP серверот нема root DSE"
 
-#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
-#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
+#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
 msgid "error mapping name to LDAP distinguished name"
 msgstr "грешка при мапирање на името за името на LDAP"
 
-#: modules/ldap.c:683
+#: modules/ldap.c:670
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "грешка при мапирање на името за основното име на LDAP"
 
-#: modules/ldap.c:1212
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "корисничкиот објект нема %s атрибут"
 
-#: modules/ldap.c:1221
+#: modules/ldap.c:1382
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "корисничкиот објект беше креиран без `%s'"
 
-#: modules/ldap.c:1247
+#: modules/ldap.c:1410
 msgid "could not convert internal data to LDAPMods"
 msgstr "не можам да ги конвертирам внатрешните податоци со LDAPMods"
 
-#: modules/ldap.c:1271 modules/ldap.c:1483
+#: modules/ldap.c:1447 modules/ldap.c:1676
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "грешка при менување на записот водиректориумот на LDAP: %s"
 
-#: modules/ldap.c:1291
+#: modules/ldap.c:1474
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "грешка при преименувањето на записот во директориумот на LDAP: %s\n"
 
-#: modules/ldap.c:1339
+#: modules/ldap.c:1523
 #, c-format
 msgid "object had no %s attribute"
 msgstr "објектот нема %s атрибути"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1550
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "грешка при отстранување на записот во директориумот на LDAP: %s.\n"
 
-#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
-#: modules/ldap.c:1610
+#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
+#: modules/ldap.c:1809
 #, c-format
 msgid "object has no %s attribute"
 msgstr "објектот нема %s атрибут"
 
-#: modules/ldap.c:1546
+#: modules/ldap.c:1741
 msgid "no such object in LDAP directory"
 msgstr "нема таков објект во директориумот на LDAP"
 
-#: modules/ldap.c:1559
+#: modules/ldap.c:1755
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "не пронајдов атрибут`%s'"
 
-#: modules/ldap.c:1701
+#: modules/ldap.c:1910
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "грешка при поставување на лозинка во директориумот на LDAP за %s: %s"
 
-#: modules/ldap.c:2243
+#: modules/ldap.c:2474
 msgid "LDAP Server Name"
 msgstr "Име на LDAP сервер"
 
-#: modules/ldap.c:2249
+#: modules/ldap.c:2480
 msgid "LDAP Search Base DN"
 msgstr "База за пребарување на LDAP "
 
-#: modules/ldap.c:2255
+#: modules/ldap.c:2486
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2262
+#: modules/ldap.c:2493
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind лозинка"
 
-#: modules/ldap.c:2268
+#: modules/ldap.c:2499
 msgid "LDAP SASL User"
 msgstr "LDAP SASL корисник"
 
-#: modules/ldap.c:2275
+#: modules/ldap.c:2506
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL авторизација за корисник"
 
-#: modules/ldap.c:2315
-msgid "error initializing module"
-msgstr "грешка при иницијализирање на модул"
-
-#: modules/sasldb.c:128
+#: modules/sasldb.c:145
 #, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
 msgstr "Cyrus SASL грешка при креирање на корисник: %s: %s"
 
-#: modules/sasldb.c:130
+#: modules/sasldb.c:147
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL грешка при креирање на корисник: %s"
 
-#: modules/sasldb.c:136
+#: modules/sasldb.c:153
 #, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
 msgstr "Cyrus SASL грешка при отстранување на корисник: %s: %s"
 
-#: modules/sasldb.c:138
+#: modules/sasldb.c:155
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL грешка при отстранување на корисник: %s"
 
-#: modules/sasldb.c:428 modules/sasldb.c:436
+#: modules/sasldb.c:520 modules/sasldb.c:528
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "грешка при иницијализација на Cyrus SASL: %s"
 
-#: python/admin.c:494
+#: python/admin.c:507
 msgid "error creating home directory for user"
 msgstr "грешка при креирање на домашен директориум за корисникот"
 
-#: python/admin.c:546
+#: python/admin.c:560
 msgid "error removing home directory for user"
 msgstr "грешка при отстранување на домашниот директориум за корисникот"
 
-#: python/admin.c:623
+#: python/admin.c:638
 msgid "error moving home directory for user"
 msgstr "грешка при преместувањето на домашниот директориум за корисникот"
 
-#: python/admin.c:656
+#: python/admin.c:671
 msgid "error creating mail spool for user"
 msgstr "грешка при креирање на mail spool за корисникот"
 
@@ -921,18 +917,21 @@ msgstr "Барам корисник под името %s.\n"
 msgid "Entry not found.\n"
 msgstr "Записот не е пронајден.\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:77
 msgid "Default user object classes:\n"
 msgstr "Стандардни кориснички објектни класи:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:83
 msgid "Default user attribute names:\n"
 msgstr "Стандардни кориснички имиња на атрибути:\n"
 
-#: samples/testuser.c:88
+#: samples/testuser.c:89
 msgid "Getting default user attributes:\n"
 msgstr "Ги земам стандардните кориснички атрибути:\n"
 
-#: samples/testuser.c:95
+#: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Ја копирам корисничката структура:\n"
+
+#~ msgid "error initializing module"
+#~ msgstr "грешка при иницијализирање на модул"

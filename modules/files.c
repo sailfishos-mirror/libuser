@@ -513,8 +513,10 @@ generic_lookup(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
+		g_free(filename);
 		return FALSE;
 	}
+	g_free(filename);
 
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
@@ -534,8 +536,6 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	g_free(line);
 	lu_util_lock_free(lock);
 	close(fd);
-
-	g_free(filename);
 
 	return ret;
 }

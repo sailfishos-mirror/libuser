@@ -1,3 +1,34 @@
+2004-09-24  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.51.12.
+
+	* Makefile.am: Remove the spec file and "release" tagging from CVS,
+	rework the spec file a bit.
+
+	* configure.in: Don't create libuser.spec.
+	* NEWS: Move data from libuser.spec.in.
+	* libuser.spec.in: Remove.
+	
+	* tests/ldap.conf.in, tests/ldaprc, tests/ldap_skel.ldif,
+	tests/ldap_test.py, tests/slapd.conf.in: New files
+	* Makefile.am (TESTS, EXTRA_DIST): Use and distribute tests.
+
+	* python/ent.c (libuser_entity_set): Don't both return success and
+	indicate error at the same time.
+
+	* python/ent.c (libuser_entity_set_item): Don't clear the entity
+	if the new value has invalid type.
+
+	* modules/files.c (generic_lookup): Fix memory leak.
+	* python/ent.c (libuser_convert_to_value): Fix memory leak.
+
+ 	* modules/ldap.c (get_ent_mods, lu_ldap_set): Special-case entry
+	renaming.
+	(lu_ldap_set): Fix desired RDN computation in rename.
+
+	* modules/ldap.c (lu_ldap_set): Use the original name when
+	looking up the DN of an entry that is being renamed.
+
 2004-09-23  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.51.11.

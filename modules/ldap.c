@@ -1120,13 +1120,16 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 /* Build a list of LDAPMod structures based on the differences between the
  * pending and current values in the entity object. */
 static LDAPMod **
-get_ent_mods(struct lu_ent *ent)
+get_ent_mods(struct lu_module *module, struct lu_ent *ent,
+	     const char *namingAttr)
 {
 	LDAPMod **mods = NULL;
 	GList *attrs = NULL;
 
 	g_assert(ent != NULL);
 	g_assert(ent->magic == LU_ENT_MAGIC);
+	g_assert(namingAttr != NULL);
+	g_assert(namingAttr[0] != 0);
 
 	/* If there are no attributes, then this is EASY. */
 	attrs = lu_ent_get_attributes(ent);
@@ -1151,9 +1154,9 @@ get_ent_mods(struct lu_ent *ent)
 			/* Get the name of the attribute, and its current and
 			 * pending values. */
 			attribute = a->data;
-			if (strcasecmp(attribute, DISTINGUISHED_NAME) == 0) {
+			if (strcasecmp(attribute, DISTINGUISHED_NAME) == 0
+			    || strcasecmp(attribute, namingAttr) == 0)
 				continue;
-			}
 			current = lu_ent_get_current(ent, attribute) ?: empty;
 			pending = lu_ent_get(ent, attribute) ?: empty;
 			additions = g_value_array_new(0);
@@ -1329,6 +1332,7 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 	ldap_msgfree(res);
 }
 
+/* FIXME: remove attributes */
 /* Apply the changes to a given entity structure, or add a new entitty. */
 static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
@@ -1381,7 +1385,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	}
 
 	/* Get the object's current object name. */
-	value = g_value_array_get_nth(name, 0);
+	value = g_value_array_get_nth(add ? name : old_name, 0);
 	name_string = value_as_string(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
 			       ent->type == lu_user ?
@@ -1400,7 +1404,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	if (add)
 		mods = get_ent_adds(dn, ent);
 	else
-		mods = get_ent_mods(ent);
+		mods = get_ent_mods(module, ent, namingAttr);
 	if (mods == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("could not convert internal data to LDAPMods"));
@@ -1449,15 +1453,20 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 
 		/* If the name has changed, process a rename (modrdn). */
 		if (arrays_equal(name, old_name) == FALSE) {
-			char *tmp;
+			char *tmp1, *tmp2;
 
 			ret = FALSE;
 			/* Format the name to rename it to. */
 			value = g_value_array_get_nth(name, 0);
-			tmp = value_as_string(value);
+			tmp1 = value_as_string(value);
+			tmp2 = g_strconcat(map_to_ldap(module->scache,
+						       namingAttr), "=",
+					   tmp1, NULL);
+			g_free (tmp1);
 			/* Attempt the rename. */
-			err = ldap_rename_s(ctx->ldap, dn, tmp, NULL, TRUE,
+			err = ldap_rename_s(ctx->ldap, dn, tmp2, NULL, TRUE,
 					    &server, &client);
+			g_free(tmp2);
 			if (err == LDAP_SUCCESS)
 				ret = TRUE;
 			else {
@@ -1467,7 +1476,6 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 					     ldap_err2string(err));
 				goto err_mods;
 			}
-			g_free(tmp);
 		}
 	}
 	

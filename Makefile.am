@@ -1,15 +1,26 @@
-SUBDIRS = po docs lib apps samples python modules
-EXTRA_DIST = libuser.spec
-sysconf_DATA = libuser.conf
+## Process this file with automake to produce Makefile.in
+
+## Settings
 pkgconfigdir = $(libdir)/pkgconfig
 
-VERSION=$(shell awk '/Version:/ { print $$2 }' libuser.spec)
-RELEASE=$(shell awk '/Release:/ { print $$2 }' libuser.spec)
-CVSTAG=libuser-$(subst .,-,$(VERSION))-$(subst .,-,$(RELEASE))
+ACLOCAL_AMFLAGS = -I m4
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap \
+	--with-python-version=$(PYTHON_VERSION)
 
-scan:
-	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)
+CVSTAG = libuser-$(subst .,_,$(VERSION))
 
+## Targets
+SUBDIRS = po docs lib apps samples python modules
+TESTS = tests/ldap_test
+
+EXTRA_DIST = \
+	$(TESTS) tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif \
+	tests/ldap_test.py tests/slapd.conf.in
+
+pkgconfig_DATA = $(PACKAGE).pc
+sysconf_DATA = libuser.conf
+
+## Rules
 force-tag:
 	cd $(top_srcdir); cvs tag -cFR $(CVSTAG) .
 
@@ -19,13 +30,7 @@ tag:
 archive:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat $(top_srcdir)/CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
-	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl --without-ldap; make dist
+	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl; make dist
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.gz\".
-
-pkgconfig_DATA = $(PACKAGE).pc
-
-ACLOCAL_AMFLAGS = -I m4
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc \
-	--with-python-version=$(PYTHON_VERSION)

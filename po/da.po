@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-08-24 18:40+0200\n"
+"POT-Creation-Date: 2004-09-24 18:09+0200\n"
 "PO-Revision-Date: 2003-02-25 12:48+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -13,152 +13,152 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:71
+#: apps/apputil.c:129
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Fejl ved læsning af `%s': %s"
 
-#: apps/apputil.c:79
+#: apps/apputil.c:137
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Fejl ved oprettelse af `%s': %s"
 
-#: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
+#: apps/apputil.c:265 apps/apputil.c:297 apps/apputil.c:314
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Fejl ved fjernelse af `%s': %s"
 
-#: apps/apputil.c:411 apps/apputil.c:415
+#: apps/apputil.c:473 apps/apputil.c:477
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Kunne ikke fjerne rettigheder.\n"
 
-#: apps/apputil.c:424
+#: apps/apputil.c:486
 #, c-format
 msgid "Internal error.\n"
 msgstr "Intern fejl.\n"
 
-#: apps/apputil.c:437
+#: apps/apputil.c:526
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Fejl ved initiering af PAM.\n"
 
-#: apps/apputil.c:445 apps/apputil.c:469
+#: apps/apputil.c:534 apps/apputil.c:558
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificering mislykkedes for %s.\n"
 
-#: apps/apputil.c:454
+#: apps/apputil.c:543
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Intern PAM-fejl '%s'.\n"
 
-#: apps/apputil.c:460
+#: apps/apputil.c:549
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Manglende bruger-overensstemmelse.\n"
 
-#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[ALTERNATIV...] bruger"
 
-#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
-#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:90 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Fejl ved tolkning af argumenter: %s.\n"
 
-#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lchage.c:146 apps/lpasswd.c:89 apps/luseradd.c:105 apps/luserdel.c:76
 #: apps/lusermod.c:101
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Brugernavn ikke specificeret.\n"
 
-#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
-#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:71
+#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Fejl ved initiering af %s: %s.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
 #: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
 #: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
-#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:278
+#: apps/luseradd.c:321 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
 #: samples/lookup.c:65
 msgid "unknown error"
 msgstr "ukendt fejl fejl"
 
-#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Bruger %s eksisterer ikke.\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:174
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Konto er låst.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:176
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Konto er ikke låst.\n"
 
-#: apps/lchage.c:179
+#: apps/lchage.c:181
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Minimum:\t%d\n"
 
-#: apps/lchage.c:184
+#: apps/lchage.c:186
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Maksimum:\t%d\n"
 
-#: apps/lchage.c:189
+#: apps/lchage.c:191
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Advarsel:\t%d\n"
 
-#: apps/lchage.c:194
+#: apps/lchage.c:196
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Inaktiv:\t%d\n"
 
-#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
 msgid "Never"
 msgstr "Aldrig"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:203
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Sidste ændring:\t%s\n"
 
-#: apps/lchage.c:211
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Adgangskode udløber:\t%s\n"
 
-#: apps/lchage.c:223
+#: apps/lchage.c:225
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Adgangskode inaktivt:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:232
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Konto udløber:\t%s\n"
 
-#: apps/lchage.c:277
+#: apps/lchage.c:279
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Fejl ved ændring af aldringsinformation for %s.\n"
@@ -167,7 +167,7 @@ msgstr "Fejl ved ændring af aldringsinformation for %s.\n"
 msgid "[OPTION...] [user]"
 msgstr "[ALTERNATIV...] [bruger]"
 
-#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Intet brugernavn specificeret, intet navn for uid %d.\n"
@@ -236,11 +236,11 @@ msgstr "Ny skál"
 msgid "Shell changed.\n"
 msgstr "Skál ændret.\n"
 
-#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
 msgstr "[ALTERNATIV...] gruppe"
 
-#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Intet gruppenavn specificeret.\n"
@@ -250,7 +250,7 @@ msgstr "Intet gruppenavn specificeret.\n"
 msgid "Group creation failed.\n"
 msgstr "Oprettelse af gruppe mislykkedes.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Gruppe %s eksisterer ikke.\n"
@@ -260,42 +260,42 @@ msgstr "Gruppe %s eksisterer ikke.\n"
 msgid "Group %s could not be deleted.\n"
 msgstr "Gruppe %s kunne ikke slettes.\n"
 
-#: apps/lgroupmod.c:109 apps/lusermod.c:119
+#: apps/lgroupmod.c:111 apps/lusermod.c:119
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Både -L og -U specificeret.\n"
 
-#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Fejl ved sætning af adgangskode for gruppe %s.\n"
 
-#: apps/lgroupmod.c:242
+#: apps/lgroupmod.c:244
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Gruppe %s kunne ikke låses.\n"
 
-#: apps/lgroupmod.c:250
+#: apps/lgroupmod.c:252
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Gruppe %s kunne ikke låses op.\n"
 
-#: apps/lgroupmod.c:257
+#: apps/lgroupmod.c:259
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Gruppe %s kunne ikke ændres.\n"
 
-#: apps/lid.c:81
+#: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Intet gruppenavn specificeret, bruger %s.\n"
 
-#: apps/lid.c:85
+#: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Intet gruppenavn specificeret, intet navn for gid %d.\n"
 
-#: apps/lid.c:93
+#: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Brugernavn ikke specificeret, bruger %s.\n"
@@ -382,22 +382,22 @@ msgstr "fejl ved sætning af adgangskode for gruppe %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Adgangskode ændret.\n"
 
-#: apps/luseradd.c:197 apps/luseradd.c:209
+#: apps/luseradd.c:198 apps/luseradd.c:210
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "Fejl ved oprettelse af gruppe '%s'.\n"
 
-#: apps/luseradd.c:276
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Fejl ved oprettelse af konto: %s.\n"
 
-#: apps/luseradd.c:318
+#: apps/luseradd.c:319
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fejl ved oprettelse af %s: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:327
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fejl ved oprettelse af postkø.\n"
@@ -562,25 +562,25 @@ msgstr "Fejl ved løsning af symbol i modul"
 msgid "library/module version mismatch"
 msgstr "uoverensstemmelse med version i bibliotek eller modul"
 
-#: lib/modules.c:97
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ingen initieringsfunktion %s i `%s'"
 
-#: lib/modules.c:128
+#: lib/modules.c:129
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "gal modulversion i `%s'"
 
-#: lib/prompt.c:66
+#: lib/prompt.c:67
 msgid "error reading terminal attributes"
 msgstr "fejl ved læsning af terminal-egenskaber"
 
-#: lib/prompt.c:73 lib/prompt.c:85
+#: lib/prompt.c:74 lib/prompt.c:86
 msgid "error setting terminal attributes"
 msgstr "fejl ved sætning af terminal-egenskaber"
 
-#: lib/prompt.c:79
+#: lib/prompt.c:80
 msgid "error reading from terminal"
 msgstr "fejl ved læsning fra terminal"
 
@@ -609,64 +609,64 @@ msgstr "Navn indeholder blanktegn"
 msgid "name contains invalid char `%c'"
 msgstr "navn indeholder ugyldigt tegn '%c'"
 
-#: lib/util.c:200
+#: lib/util.c:212
 #, c-format
 msgid "error locking file: %s"
 msgstr "fejl ved låsning af fil: %s"
 
-#: modules/files.c:109 modules/files.c:453 modules/files.c:823
-#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
-#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
-#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
-#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
-#: modules/files.c:2569 modules/files.c:2586
+#: modules/files.c:171 modules/files.c:514 modules/files.c:886
+#: modules/files.c:1158 modules/files.c:1359 modules/files.c:1570
+#: modules/files.c:1660 modules/files.c:1864 modules/files.c:2054
+#: modules/files.c:2071 modules/files.c:2161 modules/files.c:2180
+#: modules/files.c:2248 modules/files.c:2269 modules/files.c:2366
+#: modules/files.c:2385 modules/files.c:2444 modules/files.c:2463
+#: modules/files.c:2564 modules/files.c:2581
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "kunne ikke åbne `%s': %s"
 
-#: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:839 modules/files.c:1338
+#: modules/files.c:187 modules/files.c:223 modules/files.c:261
+#: modules/files.c:898 modules/files.c:1371
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "kunne ikke køre stat på `%s': %s"
 
-#: modules/files.c:137
+#: modules/files.c:198
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "fejl ved oprettelse af `%s': %s"
 
-#: modules/files.c:153
+#: modules/files.c:214
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "sikkerhedskopifilen '%s' eksisterer og er ikke en almindelig fil"
 
-#: modules/files.c:872 modules/files.c:1350
+#: modules/files.c:928 modules/files.c:1380
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "kunne ikke læse fra `%s': %s"
 
-#: modules/files.c:887 modules/files.c:900
+#: modules/files.c:937 modules/files.c:944
 msgid "entry already present in file"
 msgstr "opføringen er allerede i filen"
 
-#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:951 modules/files.c:966 modules/files.c:1430
+#: modules/files.c:1438
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "kunne ikke skrive til `%s': %s"
 
-#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
-#: modules/files.c:1209
+#: modules/files.c:1125 modules/files.c:1133 modules/files.c:1235
+#: modules/files.c:1243
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetsobjekt har ingen %s-attribut"
 
-#: modules/files.c:2822 modules/files.c:2892
+#: modules/files.c:2847 modules/files.c:2917
 msgid "not executing with superuser privileges"
 msgstr "kører ikke med superbruger-privilegier"
 
-#: modules/files.c:2905
+#: modules/files.c:2930
 msgid "no shadow file present -- disabling"
 msgstr "ingen skyggefil findes -- deaktiverer"
 
@@ -729,160 +729,156 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos-adgangskode for Admin Principal"
 
-#: modules/ldap.c:216 modules/ldap.c:249
+#: modules/ldap.c:192 modules/ldap.c:225
 msgid "error initializing ldap library"
 msgstr "fejl ved initiering af ldap-bibliotek"
 
-#: modules/ldap.c:227 modules/ldap.c:260
+#: modules/ldap.c:203 modules/ldap.c:236
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "kunne ikke sætte LDAP-protokol til version %d"
 
-#: modules/ldap.c:237
+#: modules/ldap.c:213
 msgid "could not negotiate TLS with LDAP server"
 msgstr "kunne ikke forhandle TLS med LDAP-tjener"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:396
 msgid "could not bind to LDAP server"
 msgstr "kunne ikke binde til LDAP-tjener"
 
-#: modules/ldap.c:424
+#: modules/ldap.c:408
 msgid "could not search LDAP server"
 msgstr "kunne ikke søge i LDAP-tjener"
 
-#: modules/ldap.c:433
+#: modules/ldap.c:417
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP-server ser ud til ikke at have nogen rod-BSE"
 
-#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
-#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+#: modules/ldap.c:660 modules/ldap.c:1399 modules/ldap.c:1538
+#: modules/ldap.c:1601 modules/ldap.c:1725 modules/ldap.c:1824
 msgid "error mapping name to LDAP distinguished name"
 msgstr "fejl ved kobling af navn til LDAP distinguished name"
 
-#: modules/ldap.c:683
+#: modules/ldap.c:670
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "fejl ved kobling af navn til LDAP base distinguished name"
 
-#: modules/ldap.c:1212
+#: modules/ldap.c:1373
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "bruger-objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1221
+#: modules/ldap.c:1382
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "brugerobjektet blev oprettet uden `%s'"
 
-#: modules/ldap.c:1247
+#: modules/ldap.c:1410
 msgid "could not convert internal data to LDAPMods"
 msgstr "kunne ikke konvertere interne data til LDAPMods"
 
-#: modules/ldap.c:1271 modules/ldap.c:1483
+#: modules/ldap.c:1447 modules/ldap.c:1676
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "fejl ved ændring af LDAP-katalogopføring: %s"
 
-#: modules/ldap.c:1291
+#: modules/ldap.c:1474
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "fejl ved ændring af navn på LDAP-katalogopføring: %s\n"
 
-#: modules/ldap.c:1339
+#: modules/ldap.c:1523
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1550
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "fejl ved fjernelse af LDAP-katalogopføring: %s.\n"
 
-#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
-#: modules/ldap.c:1610
+#: modules/ldap.c:1587 modules/ldap.c:1609 modules/ldap.c:1710
+#: modules/ldap.c:1809
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektet har ikke attribut %s"
 
-#: modules/ldap.c:1546
+#: modules/ldap.c:1741
 msgid "no such object in LDAP directory"
 msgstr "ingen sådanne objekter i LDAP-kataloget"
 
-#: modules/ldap.c:1559
+#: modules/ldap.c:1755
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ingen `%s'-attribut fundet"
 
-#: modules/ldap.c:1701
+#: modules/ldap.c:1910
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Fejl ved sætning af adgangskode i LDAP-katalog for %s: %s"
 
-#: modules/ldap.c:2243
+#: modules/ldap.c:2474
 msgid "LDAP Server Name"
 msgstr "Navn på LDAP-tjener"
 
-#: modules/ldap.c:2249
+#: modules/ldap.c:2480
 msgid "LDAP Search Base DN"
 msgstr "LDAP søge-basis DN"
 
-#: modules/ldap.c:2255
+#: modules/ldap.c:2486
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2262
+#: modules/ldap.c:2493
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-adgangskode"
 
-#: modules/ldap.c:2268
+#: modules/ldap.c:2499
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruger"
 
-#: modules/ldap.c:2275
+#: modules/ldap.c:2506
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisationsbruger"
 
-#: modules/ldap.c:2315
-msgid "error initializing module"
-msgstr "Fejl ved initiering af modul"
-
-#: modules/sasldb.c:128
+#: modules/sasldb.c:145
 #, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
 msgstr "Cyrus SASL fejl ved oprettelse af bruger: %s: %s"
 
-#: modules/sasldb.c:130
+#: modules/sasldb.c:147
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL fejl ved oprettelse af bruger: %s"
 
-#: modules/sasldb.c:136
+#: modules/sasldb.c:153
 #, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
 msgstr "Cyrus SASL fejl ved fjernelse af bruger: %s: %s"
 
-#: modules/sasldb.c:138
+#: modules/sasldb.c:155
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL fejl ved fjernelse af bruger: %s"
 
-#: modules/sasldb.c:428 modules/sasldb.c:436
+#: modules/sasldb.c:520 modules/sasldb.c:528
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "fejl ved initiering af Cyrus SASL: %s"
 
-#: python/admin.c:494
+#: python/admin.c:507
 msgid "error creating home directory for user"
 msgstr "Fejl ved oprettelse af hjemmekatalog for bruger"
 
-#: python/admin.c:546
+#: python/admin.c:560
 msgid "error removing home directory for user"
 msgstr "Fejl ved fjernelse af hjemmekatalog for bruger"
 
-#: python/admin.c:623
+#: python/admin.c:638
 msgid "error moving home directory for user"
 msgstr "Fejl ved flytning af hjemmekatalog for bruger"
 
-#: python/admin.c:656
+#: python/admin.c:671
 msgid "error creating mail spool for user"
 msgstr "Fejl ved oprettelse af postkø for bruger"
 
@@ -915,21 +911,24 @@ msgstr "Søger efter bruger ved navn %s.\n"
 msgid "Entry not found.\n"
 msgstr "Opføring ikke fundet.\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:77
 msgid "Default user object classes:\n"
 msgstr "Standardklasser for brugerobjekter:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:83
 msgid "Default user attribute names:\n"
 msgstr "Standardnavn for brugerattributter:\n"
 
-#: samples/testuser.c:88
+#: samples/testuser.c:89
 msgid "Getting default user attributes:\n"
 msgstr "Henter standard brugerattributter:\n"
 
-#: samples/testuser.c:95
+#: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Kopierer brugerstruktur:\n"
+
+#~ msgid "error initializing module"
+#~ msgstr "Fejl ved initiering af modul"
 
 #~ msgid "error searching LDAP directory"
 #~ msgstr "fejl ved søgning i LDAP-katalog"

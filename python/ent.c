@@ -153,8 +153,12 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 	} else
 #ifdef Py_USING_UNICODE
 	if (PyUnicode_Check(item)) {
+		PyObject *tmp;
+		
 		g_value_init(value, G_TYPE_STRING);
-		g_value_set_string(value, PyString_AsString(PyUnicode_AsUTF8String(item)));
+		tmp = PyUnicode_AsUTF8String(item);
+		g_value_set_string(value, PyString_AsString(tmp));
+		Py_DECREF(tmp);
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding unicode (`%s') to list.\n",
 			getindent(), PyUnicode_AsUTF8String(item));
@@ -162,8 +166,12 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 	} else
 #endif
 	if (PyNumber_Check(item)) {
+		PyObject *tmp;
+
 		g_value_init(value, G_TYPE_LONG);
-		g_value_set_long(value, PyLong_AsLong(PyNumber_Long(item)));
+		tmp = PyNumber_Long(item);
+		g_value_set_long(value, PyLong_AsLong(tmp));
+		Py_DECREF(tmp);
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
 			getindent(), PyString_AsString(item));
@@ -376,6 +384,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
+	PyErr_Clear (); /* PyArg_ParseTuple() above has raised an exception */
 
 	/* It's an object of some kind. */
 	if (PyArg_ParseTuple(args, "sO", &attr, &val)) {
@@ -511,9 +520,6 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 #endif
 
-	/* Remove any existing values. */
-	lu_ent_clear(self->ent, attr);
-
 	/* If the new value is a list, convert each and add in turn. */
 	if (PyList_Check(args)) {
 		size = PyList_Size(args);
@@ -536,7 +542,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		DEBUG_EXIT;
 		return 0;
 	} else
-	/* If the new value is a list, convert each and add in turn. */
+	/* If the new value is a tuple, convert each and add in turn. */
 	if (PyTuple_Check(args)) {
 		size = PyTuple_Size(args);
 #ifdef DEBUG_BINDING
@@ -562,6 +568,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	if (PyString_Check(args) ||
 	    PyNumber_Check(args) ||
 	    PyLong_Check(args)) {
+		lu_ent_clear(self->ent, attr);
 		memset(&value, 0, sizeof(value));
 		libuser_convert_to_value(args, &value);
 #ifdef DEBUG_BINDING

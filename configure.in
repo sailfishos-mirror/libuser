@@ -1,6 +1,6 @@
 AC_INIT(configure.in)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE(libuser,0.51.11)
+AM_INIT_AUTOMAKE([libuser], [0.51.12])
 
 AC_PROG_CC
 AC_ISC_POSIX
@@ -265,7 +265,6 @@ apps/Makefile
 docs/Makefile
 docs/sgml/Makefile
 docs/reference/Makefile
-libuser.spec
 libuser.conf
 libuser.pc
 ])
