@@ -639,7 +639,7 @@ libuser_admin_init_user(struct libuser_admin *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_ent_user_default(self->ctx, arg, is_system, ent);
+	lu_user_default(self->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
@@ -661,7 +661,7 @@ libuser_admin_init_group(struct libuser_admin *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_ent_group_default(self->ctx, arg, is_system, ent);
+	lu_group_default(self->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
@@ -1127,6 +1127,29 @@ libuser_admin_group_getattr(struct libuser_admin_domain *self, char *name)
 	return Py_FindMethod(libuser_admin_group_methods, (PyObject*)self, name);
 }
 
+static PyObject*
+libuser_get_user_shells(PyObject *ignored, PyObject *args)
+{
+	GList *results = NULL;
+	PyObject *ret = NULL;
+	const char *shell;
+
+	DEBUG_ENTRY;
+
+	setusershell();
+	while((shell = getusershell()) != NULL) {
+		results = g_list_append(results, g_strdup(shell));
+	}
+	endusershell();
+
+	ret = convert_glist_pystringlist(results);
+	g_list_foreach(results, (GFunc)g_free, NULL);
+	g_list_free(results);
+
+	DEBUG_EXIT;
+	return ret;
+}
+
 static PyMethodDef
 libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction)libuser_admin_lookup_user_name,
@@ -1177,6 +1200,8 @@ libuser_admin_methods[] = {
 	 METH_VARARGS},
 	{"promptConsoleQuiet", (PyCFunction)libuser_admin_prompt_console_quiet,
 	 METH_VARARGS},
+	{"getUserShells", (PyCFunction)libuser_get_user_shells, 0,
+	 "return a list of valid shells"},
 	{NULL, NULL, 0},
 };
 
@@ -1460,29 +1485,6 @@ static PyTypeObject PromptType = {
 	(ternaryfunc) NULL,
 	(reprfunc) NULL,
 };
-
-static PyObject*
-libuser_get_user_shells(PyObject *self, PyObject *args)
-{
-	GList *results = NULL;
-	PyObject *ret = NULL;
-	const char *shell;
-
-	DEBUG_ENTRY;
-
-	setusershell();
-	while((shell = getusershell()) != NULL) {
-		results = g_list_append(results, g_strdup(shell));
-	}
-	endusershell();
-
-	ret = convert_glist_pystringlist(results);
-	g_list_foreach(results, (GFunc)g_free, NULL);
-	g_list_free(results);
-
-	DEBUG_EXIT;
-	return ret;
-}
 
 static PyMethodDef
 libuser_methods[] = {
