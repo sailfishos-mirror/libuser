@@ -998,6 +998,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 			new_value = lock_process(value, lock_or_not, ent);
 			ret = lu_util_field_write(fd, (const char*)name->data,
 						  field, new_value);
+			g_free(value);
 		}
 	}
 

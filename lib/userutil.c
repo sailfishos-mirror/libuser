@@ -358,7 +358,6 @@ lu_util_field_write(int fd, const char *first,
 	g_return_val_if_fail(strlen(first) != 0, FALSE);
 	g_return_val_if_fail(field >= 1, FALSE);
 	g_return_val_if_fail(value != NULL, FALSE);
-	g_return_val_if_fail(strlen(value) != 0, FALSE);
 
 	if(fstat(fd, &st) == -1) {
 		return FALSE;
