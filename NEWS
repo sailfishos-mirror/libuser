@@ -1,3 +1,9 @@
+0.52.6
+* Mark more strings for translation
+* Make error reporting more consistent and more verbose, output error messages
+  on stderr.
+* Port sasldb backend to Cyrus SASL v2, make it at least minimally usable
+
 0.52.5
 * Fix home directory renaming in ADMIN.modifyUser (#135280)
 * Further Python reference counting fixes

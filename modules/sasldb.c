@@ -21,7 +21,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <sasl.h>
+#include <sasl/sasl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,27 +40,17 @@ lu_sasldb_user_lookup_name(struct lu_module *module, const char *name,
 			   struct lu_ent *ent, struct lu_error **error)
 {
 	int i = SASL_NOUSER;
-	const char *err;
 
 	(void)ent;
 	(void)error;
 #ifdef HAVE_SASL_USER_EXISTS
-	i = sasl_user_exists(NULL, NULL, name);
-	g_assert((i == SASL_OK) ||
-		 (i == SASL_DISABLED) ||
-		 (i == SASL_NOUSER) ||
-		 (i == SASL_NOMECH));
+	i = sasl_user_exists(module->module_context, NULL, NULL, name);
 #else
 	i = sasl_checkpass((sasl_conn_t *) module->module_context, name,
-			   strlen(name), "", 0, &err);
-	g_assert((i == SASL_OK) ||
-		 (i == SASL_NOUSER) ||
-		 (i == SASL_NOMECH));
+			   strlen(name), "", 0);
 #endif
 
-	return (i == SASL_OK) ||
-	       (i == SASL_DISABLED) ||
-	       (i == SASL_NOMECH);
+	return i != SASL_NOUSER;
 }
 
 static gboolean
@@ -107,7 +97,6 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
 	GValueArray *values = NULL;
 	GValue *value;
 	char *tmp;
-	const char *err = NULL;
 
 	g_assert(module != NULL);
 	LU_ERROR_CHECK(error);
@@ -126,36 +115,25 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
 			g_assert_not_reached();
 			tmp = NULL;
 		}
-		ret = sasl_setpass(connection, tmp, password, 0, flags, &err);
+		ret = sasl_setpass(connection, tmp, password,
+				   password != NULL ? strlen (password) : 0,
+				   NULL, 0, flags);
 		g_free(tmp);
-		g_assert((ret == SASL_OK) ||
-			 (ret == SASL_NOCHANGE) ||
-			 (ret == SASL_NOMECH) ||
-			 (ret == SASL_DISABLED) ||
-			 (ret == SASL_PWLOCK) ||
-			 (ret == SASL_FAIL) ||
-			 (ret == SASL_BADPARAM));
 
 		if (ret == SASL_OK) {
 			return TRUE;
 		} else {
-			if (password) {
+			const char *err;
+
+			err = sasl_errdetail(connection);
+			if (password)
 				lu_error_new(error, lu_error_generic,
-					     err ?
-					     _("Cyrus SASL error creating user: %s: %s")
-					     :
-					     _("Cyrus SASL error creating user: %s"),
-					     sasl_errstring(ret, NULL, NULL),
-					     err);
-			} else {
+					     _("Cyrus SASL error creating "
+					       "user: %s"), err);
+			else
 				lu_error_new(error, lu_error_generic,
-					     err ?
-					     _("Cyrus SASL error removing user: %s: %s")
-					     :
-					     _("Cyrus SASL error removing user: %s"),
-					     sasl_errstring(ret, NULL, NULL),
-					     err);
-			}
+					     _("Cyrus SASL error removing "
+					       "user: %s"), err);
 			return FALSE;
 		}
 	}
@@ -198,6 +176,7 @@ lu_sasldb_user_add(struct lu_module *module, struct lu_ent *ent,
 		if (lu_sasldb_user_munge(module, ent, SASL_SET_DISABLE,
 					 PACKAGE, error) == TRUE) {
 			/* account created and locked */
+			return TRUE;
 		} else {
 			/* account created and couldn't be locked -- delete it */
 			lu_sasldb_user_munge(module, ent, 0, NULL, error);
@@ -259,7 +238,6 @@ lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 	GValueArray *values;
 	GValue *value;
 	char *name = NULL;
-	const char *err = NULL;
 
 	(void)error;
 	values = lu_ent_get(ent, LU_USERNAME);
@@ -273,16 +251,10 @@ lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 		g_assert_not_reached();
 	}
 #ifdef HAVE_SASL_USER_EXISTS
-	i = sasl_user_exists(NULL, NULL, name);
-	g_assert((i == SASL_OK) ||
-		 (i == SASL_DISABLED) ||
-		 (i == SASL_NOUSER) ||
-		 (i == SASL_NOMECH));
+	i = sasl_user_exists(module->module_context, NULL, NULL, name);
 #else
 	i = sasl_checkpass((sasl_conn_t *) module->module_context, name,
-			   strlen(name), "", 0, &err);
-	g_assert((i == SASL_OK) || (i == SASL_NOUSER)
-		 || (i == SASL_NOMECH));
+			   strlen(name), "", 0);
 #endif
 
 	g_free(name);
@@ -295,6 +267,17 @@ lu_sasldb_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
 	return lu_sasldb_user_munge(module, ent, 0, password, error);
+}
+
+static gboolean
+lu_sasldb_user_removepass(struct lu_module *module, struct lu_ent *ent,
+			  struct lu_error **error)
+{
+	/* SASL doesn't allow empty passwords */
+	(void)module;
+	(void)ent;
+	(void)error;
+	return FALSE;
 }
 
 static gboolean
@@ -391,6 +374,17 @@ lu_sasldb_group_setpass(struct lu_module *module, struct lu_ent *ent,
 	(void)error;
 	return FALSE;
 }
+
+static gboolean
+lu_sasldb_group_removepass(struct lu_module *module, struct lu_ent *ent,
+			   struct lu_error **error)
+{
+	(void)module;
+	(void)ent;
+	(void)error;
+	return FALSE;
+}
+
 
 static GValueArray *
 lu_sasldb_users_enumerate(struct lu_module *module, const char *pattern,
@@ -499,7 +493,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	const char *appname = NULL;
 	const char *domain = NULL;
 	sasl_conn_t *connection;
-	struct sasl_callback cb = {
+	static const struct sasl_callback cb = {
 		SASL_CB_LIST_END,
 		NULL,
 		NULL,
@@ -521,7 +515,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 			     sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
-	i = sasl_server_new(PACKAGE, NULL, domain, &cb,
+	i = sasl_server_new(PACKAGE, NULL, domain, NULL, NULL, &cb,
 			    SASL_SEC_NOANONYMOUS, &connection);
 	if (i != SASL_OK) {
 		lu_error_new(error, lu_error_generic,
@@ -534,7 +528,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret = g_malloc0(sizeof(struct lu_module));
 	ret->version = LU_MODULE_VERSION;
 	ret->scache = lu_string_cache_new(TRUE);
-	ret->name = ret->scache->cache(ret->scache, "sasl");
+	ret->name = ret->scache->cache(ret->scache, "sasldb");
 	ret->module_context = connection;
 
 	/* Set the method pointers. */
@@ -552,6 +546,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->user_unlock = lu_sasldb_user_unlock;
 	ret->user_is_locked = lu_sasldb_user_is_locked;
 	ret->user_setpass = lu_sasldb_user_setpass;
+	ret->user_removepass = lu_sasldb_user_removepass;
 	ret->users_enumerate = lu_sasldb_users_enumerate;
 	ret->users_enumerate_by_group = lu_sasldb_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_sasldb_users_enumerate_full;
@@ -569,6 +564,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->group_unlock = lu_sasldb_group_unlock;
 	ret->group_is_locked = lu_sasldb_group_is_locked;
 	ret->group_setpass = lu_sasldb_group_setpass;
+	ret->group_removepass = lu_sasldb_group_removepass;
 	ret->groups_enumerate = lu_sasldb_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_sasldb_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_sasldb_groups_enumerate_full;

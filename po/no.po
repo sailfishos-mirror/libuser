@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-08-12 01:55+0200\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -579,12 +579,12 @@ msgstr "feil med bibliotek-/modulversjon"
 msgid "unknown error"
 msgstr "ukjent feil"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ingen initieringsfunksjon %s i `%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "feil modulversjon i `%s'"
@@ -893,27 +893,17 @@ msgstr "LDAP SASL-bruker"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisasjonsbruker"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Feil i Cyrus SASL under oppretting av bruker: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Feil i Cyrus SASL under oppretting av bruker: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Feil i Cyrus SASL ved fjerning av bruker %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Feil i Cyrus SASL ved fjerning av bruker: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "feil ved initiering av Cyrus SASL: %s."
@@ -986,6 +976,12 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Feil i Cyrus SASL under oppretting av bruker: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Feil i Cyrus SASL ved fjerning av bruker %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Feil under initiering av %s.\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-02-25 16:53GMT+10:00\n"
 "Last-Translator: James Hashida <khashida@redhat.com>\n"
 "Language-Team: Japanese <i18n-list@redhat.com>\n"
@@ -581,12 +581,12 @@ msgstr "ライブラリ/モジュールバージョンの不一致"
 msgid "unknown error"
 msgstr "不明なエラー"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "`%s'の関数%sで初期化できません"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s'のモジュールバージョンの不一致"
@@ -894,27 +894,17 @@ msgstr "LDAP SASLユーザ"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL認証ユーザ"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "ユーザーの作成中にCyrus SASLエラー: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "ユーザーの作成中にCyrus SASLエラー: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "ユーザーの削除でCyrus SASLエラー: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "ユーザーの削除でCyrus SASLエラー: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASLの初期化でエラー: %s"
@@ -987,6 +977,12 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "ユーザーの作成中にCyrus SASLエラー: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "ユーザーの削除でCyrus SASLエラー: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "%sの初期化でエラー。\n"

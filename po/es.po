@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-06-11 15:45+1000\n"
 "Last-Translator: Yelitza Louze <ylouze@redhat.com>\n"
 "Language-Team:  <es@li.org>\n"
@@ -759,14 +759,14 @@ msgstr "error desconocido"
 
 # lib/user.c:123
 # lib/user.c:161
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ninguna función de inicialización de %s en `%s'"
 
 # lib/user.c:144
 # lib/user.c:186
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "versión de módulo discordante en `%s'"
@@ -1208,28 +1208,14 @@ msgstr "Usuario de autorización SASL LDAP"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Error Cyrus SASL al crear usuario `%s': %s"
-
-# apps/apputil.c:63
-# modules/files.c:130
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Error Cyrus SASL al crear usuario: %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Error Cyrus SASL al eliminar usuario: %s: %s"
-
-# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Error Cyrus SASL al eliminar usuario: %s"
@@ -1240,7 +1226,7 @@ msgstr "Error Cyrus SASL al eliminar usuario: %s"
 # apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 # apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
 # apps/lusermod.c:82
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "error al inicializar Cyrus SASL: %s"
@@ -1345,6 +1331,16 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
+# apps/apputil.c:63
+# modules/files.c:130
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Error Cyrus SASL al crear usuario `%s': %s"
+
+# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
+# apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Error Cyrus SASL al eliminar usuario: %s: %s"
 
 # apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 # apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74

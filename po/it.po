@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-11-01 21:26+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
@@ -43,8 +43,7 @@ msgid "Internal error.\n"
 msgstr "Errore interno.\n"
 
 #: apps/apputil.c:506
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s non è autorizzato alla modifica delle informazioni finger di %s\n"
 
@@ -583,12 +582,12 @@ msgstr "mancata corrispondenza nella versione di modulo/libreria"
 msgid "unknown error"
 msgstr "errore sconosciuto"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "nessuna funzione di inizializzazione %s in `%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "mancata corrispondenza della versione del modulo in `%s'"
@@ -638,7 +637,8 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:109
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr ""
+"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:115
 #, c-format
@@ -653,7 +653,8 @@ msgstr "impossibile impostare l'ambiente di sicurezza predefinito a %s: %s"
 #: modules/files.c:142
 #, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
+msgstr ""
+"impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -814,7 +815,8 @@ msgstr ""
 
 #: modules/ldap.c:665
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr ""
+"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1378
 #, c-format
@@ -873,7 +875,8 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1909
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr ""
+"errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2469
 msgid "LDAP Server Name"
@@ -899,27 +902,17 @@ msgstr "Utente LDAP SASL"
 msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "erroreCyrus SASL nella creazione dell'utente:`%s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "errore Cyrus SASL nella creazione dell'utente: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Errore nell'inizializzazione di Cyrus SASL: %s"
@@ -995,3 +988,8 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
 
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "erroreCyrus SASL nella creazione dell'utente:`%s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s: %s"

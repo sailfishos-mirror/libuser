@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-09-13 12:20+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -599,12 +599,12 @@ msgstr "versi"
 msgid "unknown error"
 msgstr "ralat tidak diketahui"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, fuzzy, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "tidak s dalam s"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, fuzzy, c-format
 msgid "module version mismatch in `%s'"
 msgstr "versi dalam s"
@@ -941,27 +941,17 @@ msgstr "LDAP"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP"
 
-#: modules/sasldb.c:145
-#, fuzzy, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "ralat pengguna s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, fuzzy, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "ralat pengguna"
 
-#: modules/sasldb.c:153
-#, fuzzy, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "ralat pengguna s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, fuzzy, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "ralat pengguna"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, fuzzy, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "ralat"
@@ -1038,6 +1028,14 @@ msgstr "Mendapatkan ciri-ciri pengguna default:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Menyalin struktur pengguna:\n"
+
+#, fuzzy
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "ralat pengguna s"
+
+#, fuzzy
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "ralat pengguna s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Ralat memulakan %s.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-03-10 16:04+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -579,12 +579,12 @@ msgstr "biblioteks-/modulversion stämmer inte överens"
 msgid "unknown error"
 msgstr "okänt fel"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ingen initieringsfunktion %s i \"%s\""
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "modulversion stämmer inte överens i \"%s\""
@@ -893,27 +893,17 @@ msgstr "LDAP SASL-användare"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-auktoriseringsanvändare"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Cyrus SASL-fel vid skapande av användare: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL-fel vid skapande av användare: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Cyrus SASL-fel vid borttagning av användare: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL-fel vid borttagning av användare: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "fel vid initiering av Cyrus SASL: %s"
@@ -986,6 +976,12 @@ msgstr "Hämtar standardattribut för användare:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Kopierar användarstruktur:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Cyrus SASL-fel vid skapande av användare: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Cyrus SASL-fel vid borttagning av användare: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Fel vid initiering av %s.\n"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-11-01 17:38-0800\n"
 "Last-Translator: Николай Сърмаджиев <nikolayd@sarmadzhiev.tk>\n"
 "Language-Team: Български <bg@li.org>\n"
@@ -584,12 +584,12 @@ msgstr "грешна версия на библиотека/модул"
 msgid "unknown error"
 msgstr "неизвестна грешка"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "няма инициализираща функция %s в `%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "грешна версия на модул в `%s'"
@@ -719,7 +719,8 @@ msgstr "няма наличен сенчест файл -- деактивира�
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
+msgstr ""
+"грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -896,27 +897,17 @@ msgstr "LDAP SASL потребител"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL упълномощаващ потребител"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Грешка на Cyrus SASL при създаване на потребител: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Грешка на Cyrus SASL при създаване на потребител: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Грешка на Cyrus SASL при премахване на потребител: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Грешка на Cyrus SASL при премахване на потребител: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "грешка при инициализация на Cyrus SASL: %s"
@@ -990,3 +981,8 @@ msgstr "Извличане на стандартни потребителски 
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
 
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Грешка на Cyrus SASL при създаване на потребител: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Грешка на Cyrus SASL при премахване на потребител: %s: %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-10-06 18:55+0530\n"
 "Last-Translator: Jayaradha N <jaya@pune.redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -582,12 +582,12 @@ msgstr "நூலகம் / கூறு பதிப்பு பொறுத�
 msgid "unknown error"
 msgstr "தெரியாத பிழை"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "%s யில் `%s' செயல்கூறு துவங்கபடவில்லை  "
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "கூறுகளின் பதிப்பு பொருந்தவில்லை `%s'"
@@ -895,27 +895,17 @@ msgstr "LDAP SASL பயனர்"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Cyrus SASL பயனர் உருவாக்குவதில் பிழை: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL பயனர் உருவாக்குவதில் பிழை: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Cyrus SASL பயனரை நீக்குவதில்  பிழை: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL பயனரை நீக்குவதில்  பிழை: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL துவக்குவதில் பிழை: %s"
@@ -990,6 +980,12 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Cyrus SASL பயனர் உருவாக்குவதில் பிழை: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Cyrus SASL பயனரை நீக்குவதில்  பிழை: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "துவங்குவதில் பிழை%s.\n"

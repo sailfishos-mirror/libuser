@@ -78,7 +78,6 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 				/* If the open failed, we return an error. */
 				lu_error_new(error, lu_error_module_load,
 					     "%s", g_module_error());
-				g_module_close(handle);
 				g_free(modlist);
 				return FALSE;
 			}

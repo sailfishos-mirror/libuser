@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-02-25 16:41+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -581,12 +581,12 @@ msgstr "라이브러리/모듈 버젼이 일치하지 않음"
 msgid "unknown error"
 msgstr "알 수 없는 오류"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "`%s'에 초기화 기능 %s(이)가 없습니다"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s'의 모듈 버젼이 일치하지 않습니다"
@@ -896,27 +896,17 @@ msgstr "LDAP SASL 사용자"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 인증 사용자"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL를 초기화하는 중 오류 발생: %s"
@@ -989,6 +979,12 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "%s(을)를 초기화하는 도중 오류가 발생했습니다.\n"

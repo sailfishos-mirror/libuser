@@ -1,4 +1,30 @@
+2004-11-02  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.52.6.
+
+	* NEWS: Update.
+
 2004-11-01  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/sasldb.c (lu_sasldb_user_lookup_name, lu_sasldb_user_munge)
+	(lu_sasldb_user_is_locked): Remove assertions on possible error codes,
+	undocumented codes happen too.
+
+	* modules/sasldb.c (libuser_sasldb_init): Fix self-describing module
+	name.
+
+	* modules/sasldb.c (lu_sasldb_user_removepass) 
+	(lu_sasldb_group_removepass): New functions
+	(libuser_sasldb_init): Set the user_removepass and group_removepass
+	handlers.
+
+	* lib/modules.c (lu_modules_load): Don't close a NULL handle.
+
+	* modules/sasldb.c (lu_sasldb_user_add): Return TRUE on success.
+
+	* configure.in
+	* modules/sasldb.c (lu_sasldb_user_lookup_name, lu_sasldb_user_munge)
+	(libuser_sasldb_init): Use Cyrus SASL v2.
 
 	* modules/ldap.c (bind_server): Don't attempt to bind using NULL bind
 	DN.

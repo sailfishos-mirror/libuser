@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.52.5])
+AC_INIT([libuser], [0.52.6])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_SRCDIR([lib/user.c])
 AC_CONFIG_AUX_DIR([admin])
@@ -123,18 +123,18 @@ if test x$sasl != xno ; then
 		fi
 		LIBS="$LIBS $SASL_LDADD"
 	fi
-	AC_CHECK_HEADERS(sasl.h)
+	AC_CHECK_HEADERS([sasl/sasl.h])
 	AC_CHECK_FUNC(sasl_setpass,,[
-		AC_CHECK_LIB(sasl,sasl_setpass,[
-			     SASL_LIBS="-lsasl $SASL_LIBS"
-			     LIBS="-lsasl $LIBS"
+		AC_CHECK_LIB([sasl2],[sasl_setpass],[
+			     SASL_LIBS="-lsasl2 $SASL_LIBS"
+			     LIBS="-lsasl2 $LIBS"
 			     build_sasl=yes]
 			     ,,[$LDFLAGS $LIBS])])
 	AC_CHECK_FUNCS(sasl_checkpass,,[
-	AC_CHECK_LIB(sasl,sasl_checkpass,[
+	AC_CHECK_LIB(sasl2,sasl_checkpass,[
 	AC_DEFINE(HAVE_SASL_CHECKPASS,,[if sasl_checkpass() is defined])])])
 	AC_CHECK_FUNCS(sasl_user_exists,,[
-	AC_CHECK_LIB(sasl,sasl_user_exists,[
+	AC_CHECK_LIB(sasl2,sasl_user_exists,[
 	AC_DEFINE(HAVE_SASL_USER_EXISTS,,[if sasl_user_exists() is defined])])])
 	LIBS="$LIBSAVE"
 fi

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-03-07 04:27+0100\n"
 "Last-Translator: isabel cama <c.gomez.febrel@terra.es>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -585,12 +585,12 @@ msgstr "la versió del mòdul o de la biblioteca no coincideix"
 msgid "unknown error"
 msgstr "error desconegut"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "no s'ha trobat cap funció d'inicialització %s a '%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "la versió del mòdul no coincideix a '%s'"
@@ -909,27 +909,17 @@ msgstr "Usuari del SASL del LDAP"
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "s'ha produït un error del SASL en crear un usuari del Cyrus: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "s'ha produït un error del SASL en crear un usuari del Cyrus: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "s'ha produït un error del SASL en eliminar un usuari del Cyrus: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "s'ha produït un error del SASL en eliminar un usuari del Cyrus: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "s'ha produït un error en inicialitzar el SASL del Cyrus: %s"
@@ -1003,6 +993,13 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "s'ha produït un error del SASL en crear un usuari del Cyrus: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr ""
+#~ "s'ha produït un error del SASL en eliminar un usuari del Cyrus: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "S'ha produït un error en inicialitzar %s.\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-11-01 18:11+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -582,12 +582,12 @@ msgstr "verzia knižnice/modulu nezodpovedá"
 msgid "unknown error"
 msgstr "neznáma chyba"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "bez inicializačnej funkcie %s v `%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "verzia modulu nezodpovedá v `%s'"
@@ -895,27 +895,17 @@ msgstr "LDAP SASL používateľ"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL udelenie oprávnenia používateľa"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "chyba pri inicializácii Cyrus SASL: %s"
@@ -988,3 +978,9 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s: %s"

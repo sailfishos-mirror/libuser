@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2004-09-06 18:05+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -586,12 +586,12 @@ msgstr "লাইব্রেরি/মডিউলের ভার্সান 
 msgid "unknown error"
 msgstr "অজানা সমস্যা"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "%s প্রারম্ভিক কার্য `%s' এ উপস্থিত নেই"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s' এ মডিউল ভার্সানের গরমিল ঘটেছে"
@@ -902,27 +902,17 @@ msgstr "LDAP SASL ব্যবহারকারী"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-র অনুমোদন ব্যবহারকারী"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "ব্যবহারকারী তৈরি করতে Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "ব্যবহারকারী তৈরি করতে Cyrus SASL-র সমস্যা হয়েছে: %s"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "ব্যবহারকারী মুছে ফেলার সময় Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "ব্যবহারকারী মুছে ফেলার সময় Cyrus SASL-র সমস্যা হয়েছে: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL আরম্ভ করতে সমস্যা হয়েছে: %s"
@@ -995,6 +985,12 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর গঠন কপি করা হচ্ছে:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "ব্যবহারকারী তৈরি করতে Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "ব্যবহারকারী মুছে ফেলার সময় Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "%s আরম্ভ করতে সমস্যা হয়েছে।\n"

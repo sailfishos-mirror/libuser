@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-01 11:20+0100\n"
+"POT-Creation-Date: 2004-11-02 00:14+0100\n"
 "PO-Revision-Date: 2003-09-18 13:12+0530\n"
 "Last-Translator: Jatin Nansi <jnansi@redhat.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
@@ -579,12 +579,12 @@ msgstr "क्रमादेश-संग्रह/मॉड्यूल सं
 msgid "unknown error"
 msgstr "अनजान दोष"
 
-#: lib/modules.c:98
+#: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "%s फलन प्रारंभिकीकरण, '%s' में नहीं है"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s' में मॉड्यूल संस्करण बेमेल "
@@ -892,27 +892,17 @@ msgstr "LDAP SASL उपयोगकर्ता"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL प्राधिकरण उपयोगकर्ता"
 
-#: modules/sasldb.c:145
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "%s उपयोगकर्ता बनाने में सायरस SASL दोष: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "%s उपयोगकर्ता बनाने में सायरस SASL दोष"
 
-#: modules/sasldb.c:153
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "%s उपयोगकर्ता हटाने में सायरस SASL दोष: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "%s उपयोगकर्ता हटाने में सायरस SASL दोष"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "%s सायरस SASL प्रारंभिकीकरण दोष"
@@ -985,6 +975,12 @@ msgstr "निर्धारित उपयोगकर्ता गुण ल
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "उपयोगकर्ता संरचना प्रतिलिपि कर रहा है:\n"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "%s उपयोगकर्ता बनाने में सायरस SASL दोष: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "%s उपयोगकर्ता हटाने में सायरस SASL दोष: %s"
 
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "%s प्रारंभिकीकरण दोष।\n"
