@@ -68,6 +68,15 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Fri Jul 27 2001 Nalin Dahyabhai <nalin@redhat.com>
+- print uids and gids of users and names in lid app
+- fix tree traversal in users_enumerate_by_group and groups_enumerate_by_users
+- implement enumerate_by_group and enumerate_by_user in ldap module
+- fix id-based lookups in the ldap module
+- implement islocked() method in ldap module
+- implement setpass() method in ldap module
+- add lchfn and lchsh apps
+
 * Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish adding a sasldb module which manipulates a sasldb file
 - add users_enumerate_by_group and groups_enumerate_by_users

@@ -529,7 +529,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *p
 	/* Now try to change the password. */
 	if(password != NULL) {
 #ifdef DEBUG
-		g_print("Working password for %s is '%s'.\n", name->data, password);
+		g_print("Working password for %s is `%s'.\n", name->data, password);
 		g_print("Changing password for %s.\n", name->data);
 #endif
 		if(kadm5_chpass_principal(ctx->handle, principal, (char*)password) == KADM5_OK) {

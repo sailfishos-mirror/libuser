@@ -1,8 +1,15 @@
+bin_PROGRAMS = lchfn lchsh
 sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd
 
 include $(top_srcdir)/Makefile.extra
 
 LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
+
+lchsh_SOURCES = \
+	lchsh.c
+
+lchfn_SOURCES = \
+	lchfn.c
 
 lchage_SOURCES = \
 	lchage.c

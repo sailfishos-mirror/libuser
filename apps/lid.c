@@ -36,14 +36,15 @@ main(int argc, const char **argv)
 	const char *user = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
-	GList *values, *l;
+	struct lu_ent *ent = NULL;
+	GList *values, *l, *i;
 	int interactive = FALSE;
 	int group = FALSE;
 	int c;
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
-		{"group", 'g', POPT_ARG_NONE, &group, 0, "list members of the named group instead of the group memberships for "
+		{"group", 'g', POPT_ARG_NONE, &group, 0, "list members of a named group instead of the group memberships for "
 		 "the named user", NULL},
 		POPT_AUTOHELP
 	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
@@ -84,17 +85,56 @@ main(int argc, const char **argv)
 	}
 
 	ctx = lu_start(user, group ? lu_user : lu_group, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
+		       interactive ? lu_prompt_console : lu_prompt_console_quiet, NULL, &error);
+	if(error) {
+		fprintf(stderr, "error: %s\n", error->string);
+	}
 	g_return_val_if_fail(ctx != NULL, 1);
 
-	values = group ?
-		 lu_users_enumerate_by_group(ctx, user, NULL, &error) :
-		 lu_groups_enumerate_by_user(ctx, user, NULL, &error);
-	if(values) {
-		for(l = values; l && l->data; l = g_list_next(l)) {
-			g_print(" %s\n", (char*)l->data);
+	if(group) {
+		values = lu_users_enumerate_by_group(ctx, user, NULL, &error);
+		if(values) {
+			for(l = values; l && l->data; l = g_list_next(l)) {
+				ent = lu_ent_new();
+				if(lu_user_lookup_name(ctx, (char*)l->data, ent, &error)) {
+					i = lu_ent_get(ent, LU_UIDNUMBER);
+					if(i) {
+						g_print(" %s(uid=%s)\n", (char*)l->data, (char*)i->data);
+					} else {
+						g_print(" %s\n", (char*)l->data);
+					}
+				} else {
+					if(error) {
+						lu_error_free(&error);
+					}
+					g_print(" %s\n", (char*)l->data);
+				}
+				lu_ent_free(ent);
+			}
+			g_list_free(values);
 		}
-		g_list_free(values);
+	} else {
+		values = lu_groups_enumerate_by_user(ctx, user, NULL, &error);
+		if(values) {
+			for(l = values; l && l->data; l = g_list_next(l)) {
+				ent = lu_ent_new();
+				if(lu_group_lookup_name(ctx, (char*)l->data, ent, &error)) {
+					i = lu_ent_get(ent, LU_GIDNUMBER);
+					if(i) {
+						g_print(" %s(gid=%s)\n", (char*)l->data, (char*)i->data);
+					} else {
+						g_print(" %s\n", (char*)l->data);
+					}
+				} else {
+					if(error) {
+						lu_error_free(&error);
+					}
+					g_print(" %s\n", (char*)l->data);
+				}
+				lu_ent_free(ent);
+			}
+			g_list_free(values);
+		}
 	}
 
 	lu_end(ctx);

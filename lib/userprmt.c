@@ -59,7 +59,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			g_print("%s", prompts[i].prompt);
 		}
 		if(prompts[i].visible && prompts[i].default_value) {
-			g_print("[%s]: ", prompts[i].default_value);
+			g_print(" [%s]: ", prompts[i].default_value);
 		} else {
 			g_print(": ");
 		}

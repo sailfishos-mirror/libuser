@@ -54,6 +54,13 @@ the group name for a group entity. */
 #define LU_SHADOWEXPIRE		"shadowExpire"		/**< The date when the account expires. */
 #define LU_SHADOWFLAG		"shadowFlag"		/**< Reserved. */
 
+/** Additional fields carried by some structures.  If they have them, it's safe to change them. */
+#define LU_GIVENNAME		"givenName"
+#define LU_SN			"sn"
+#define LU_ROOMNUMBER		"roomNumber"
+#define LU_TELEPHONENUMBER	"telephoneNumber"
+#define LU_HOMEPHONE		"homePhone"
+
 typedef struct lu_ent lu_ent_t;
 
 struct lu_ent *lu_ent_new(void);

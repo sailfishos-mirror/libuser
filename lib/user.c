@@ -131,7 +131,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 
 			if(module == NULL) {
 				/* module initializer sets the error */
-				if((*error)->code == lu_error_config_disabled) {
+				if((error != NULL) && ((*error)->code == lu_error_config_disabled)) {
 					lu_error_free(error);
 				} else {
 					g_module_close(handle);
@@ -1046,12 +1046,13 @@ lu_groups_enumerate(struct lu_context *context, const char *pattern, const char 
 	return lu_enumerate(context, lu_group, pattern, module, error);
 }
 
-static void
+static int
 lu_enumerate_users_by_group(const char *module, struct lu_module *mod, struct enumerate_data *data)
 {
 	if(mod->users_enumerate_by_group) {
 		data->list = g_list_concat(data->list, mod->users_enumerate_by_group(mod, data->pattern, data->gid, data->error));
 	}
+	return 0;
 }
 
 /**
@@ -1109,12 +1110,13 @@ lu_users_enumerate_by_group(struct lu_context *context, const char *group, const
 	return ret;
 }
 
-static void
+static int
 lu_enumerate_groups_by_user(const char *module, struct lu_module *mod, struct enumerate_data *data)
 {
 	if(mod->groups_enumerate_by_user) {
 		data->list = g_list_concat(data->list, mod->groups_enumerate_by_user(mod, data->pattern, data->error));
 	}
+	return 0;
 }
 
 /**

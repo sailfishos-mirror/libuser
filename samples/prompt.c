@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 		g_print(gettext("Prompts succeeded.\n"));
 		for(i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
 			if(prompts[i].value) {
-				g_print("'%s'\n", prompts[i].value);
+				g_print("`%s'\n", prompts[i].value);
 				prompts[i].free_value(prompts[i].value);
 			} else {
 				g_print("(null)\n");
