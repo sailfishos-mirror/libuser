@@ -17,8 +17,8 @@ print ldap.keys()
 
 print "--------- Setting attribute."
 ldap.set("loginShell", ["/bin/true"])
-#ldap["loginShell"] = "/bin/true"
-#ldap["loginShell"] = ["/bin/true"]
+ldap["loginShell"] = "/bin/true"
+ldap["loginShell"] = ["/bin/true"]
 
 print "--------- Reading attribute (get)."
 print ldap.get("loginShell")

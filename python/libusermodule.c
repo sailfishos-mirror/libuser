@@ -146,41 +146,44 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 {
 	PyObject *list;
 	int size, i;
-	char *val = NULL;
 
 	DEBUG_ENTRY;
 
-	if(PyArg_ParseTuple(args, "O!", &PyList_Type, &list)) {
+	if(PyArg_ParseTuple(args, "O", &list)) {
 		lu_ent_clear(self->ent, name);
 
-		size = PyList_Size(list);
-		#ifdef DEBUG_BINDING
-		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
-		#endif
-
-		for(i = 0; i < size; i++) {
+		if(PyList_Check(list)) {
+			size = PyList_Size(list);
 			#ifdef DEBUG_BINDING
-			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
-				getindent(),
-				PyString_AsString(PyList_GetItem(list, i)),
-				name);
+			fprintf(stderr, "%sList has %d items.\n", getindent(),
+				size);
 			#endif
-			lu_ent_add(self->ent, name,
-				   PyString_AsString(PyList_GetItem(list, i)));
+
+			for(i = 0; i < size; i++) {
+				#ifdef DEBUG_BINDING
+				fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
+					getindent(),
+					PyString_AsString(PyList_GetItem(list,
+									 i)),
+					name);
+				#endif
+				lu_ent_add(self->ent, name,
+					   PyString_AsString(PyList_GetItem(list, i)));
+			}
+			DEBUG_EXIT;
+			return Py_BuildValue("");
+		} else
+		if(PyString_Check(list)) {
+			lu_ent_set(self->ent, name, PyString_AsString(list));
+			DEBUG_EXIT;
+			return Py_BuildValue("");
 		}
-		DEBUG_EXIT;
-		return Py_BuildValue("");
 	}
 
-	if(PyArg_ParseTuple(args, "s!", &name, &val)) {
-		lu_ent_set(self->ent, name, val);
-		DEBUG_EXIT;
-		return Py_BuildValue("");
-	}
-
-	PyErr_SetString(PyExc_SystemError, "expected string or list of strings");
+	PyErr_SetString(PyExc_SystemError,
+			"expected string or list of strings");
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	return NULL;
 }
 
 static PyObject *
@@ -248,7 +251,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		return Py_BuildValue("");
 	}
 
-	if(PyArg_ParseTuple(args, "ss!", &attr, &val)) {
+	if(PyArg_ParseTuple(args, "ss", &attr, &val)) {
 		lu_ent_set(self->ent, attr, val);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -323,8 +326,15 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 {
 	char *attr = NULL;
 	int i, size;
+	PyObject *arg;
 
 	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTuple(args, "O", &arg)) {
+		PyErr_SetString(PyExc_TypeError, "expected a string or list");
+		DEBUG_EXIT;
+		return NULL;
+	}
 
 	if(!PyString_Check(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
@@ -336,7 +346,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 	#endif
 
-	if(PyString_Check(args)) {
+	if(PyString_Check(arg)) {
 		#ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n",
 			getindent(),
@@ -348,14 +358,14 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		return Py_BuildValue("");
 	}
 
-	if(PyList_Check(args)) {
-		size = PyList_Size(args);
+	if(PyList_Check(arg)) {
+		size = PyList_Size(arg);
 		#ifdef DEBUG_BINDING
 		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
 		#endif
 		lu_ent_clear(self->ent, attr);
 		for(i = 0; i < size; i++) {
-			if(!PyString_Check(PyList_GetItem(args, i))) {
+			if(!PyString_Check(PyList_GetItem(arg, i))) {
 				PyErr_SetString(PyExc_TypeError,
 						"expected strings in list");
 				continue;
@@ -363,11 +373,11 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			#ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
-				PyString_AsString(PyList_GetItem(args, i)),
+				PyString_AsString(PyList_GetItem(arg, i)),
 				attr);
 			#endif
 			lu_ent_add(self->ent, attr,
-				   PyString_AsString(PyList_GetItem(args, i)));
+				   PyString_AsString(PyList_GetItem(arg, i)));
 		}
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -407,7 +417,7 @@ static PyTypeObject EntityType = {
 	(destructor) libuser_entity_destroy,
 	(printfunc) NULL,
 	(getattrfunc) libuser_entity_getattr,
-	(setattrfunc) NULL,
+	(setattrfunc) libuser_entity_setattr,
 	(cmpfunc) NULL,
 	(reprfunc) NULL,
 
