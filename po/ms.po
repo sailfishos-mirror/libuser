@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-08-24 18:40+0200\n"
-"PO-Revision-Date: 2004-08-23 10:33+0800\n"
+"PO-Revision-Date: 2004-09-08 20:45+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -120,12 +120,12 @@ msgstr "Akaun tidak dikunci.\n"
 #: apps/lchage.c:179
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "Minimum:\t%d\n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "Maksimum:\t%d\n"
 
 #: apps/lchage.c:189
 #, c-format
@@ -135,7 +135,7 @@ msgstr "Amaran:\t%d\n"
 #: apps/lchage.c:194
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "Tidak aktif:\t%d\n"
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
@@ -176,14 +176,14 @@ msgid "No user name specified, no name for uid %d.\n"
 msgstr "Tiada pengguna dinyatakan, tiada nama untuk uid %d.\n"
 
 #: apps/lchfn.c:102
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "for s"
+msgstr "Menukar maklumat finger untuk %s.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s.\n"
-msgstr "Ralat s"
+msgstr "Ralat memulakan %s.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
@@ -191,30 +191,27 @@ msgstr "Nama Penuh"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "Nama keluarga"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "Nama Diberi"
 
 #: apps/lchfn.c:214
 msgid "Office"
 msgstr "Pejabat"
 
 #: apps/lchfn.c:223
-#, fuzzy
 msgid "Office Phone"
-msgstr "Pejabat"
+msgstr "Telefon Pejabat"
 
 #: apps/lchfn.c:232
-#, fuzzy
 msgid "Home Phone"
-msgstr "Asal"
+msgstr "Telefon Rumah"
 
 #: apps/lchfn.c:253
-#, fuzzy
 msgid "E-Mail Address"
-msgstr "Mel"
+msgstr "Alamat E-Mel"
 
 #: apps/lchfn.c:265
 #, fuzzy
@@ -992,3 +989,4 @@ msgstr "Mendapatkan ciri-ciri pengguna default:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Menyalin struktur pengguna:\n"
+
