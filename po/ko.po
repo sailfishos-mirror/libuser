@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2001-11-13 19:54-0500\n"
-"PO-Revision-Date: 2001-08-07 11:52+1000\n"
+"PO-Revision-Date: 2001-11-21 11:52+1000\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
 "MIME-Version: 1.0\n"
@@ -48,9 +48,9 @@ msgstr "[옵션...] 사용자"
 #: apps/lchage.c:105 apps/lgroupadd.c:61 apps/lgroupdel.c:56
 #: apps/lgroupmod.c:74 apps/luseradd.c:75 apps/luserdel.c:62
 #: apps/lusermod.c:73
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "%s (을)를 삭제하는 도중 오류 발생: %s.\n"
+msgstr "인수를 처리(parsing)하는 도중 오류 발생: %s.\n"
 
 #: apps/lchage.c:112 apps/luseradd.c:82 apps/luserdel.c:69 apps/lusermod.c:80
 msgid "No user name specified.\n"
@@ -180,27 +180,27 @@ msgstr "%s 그룹을 편집할 수 없습니다.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "%s 의 그룹을 생성하는 도중 오류 발생: %s.\n"
+msgstr "`%s' 그룹을 생성하는 도중 오류 발생.\n"
 
 #. Can't get there from here.
 #: apps/luseradd.c:151
-#, fuzzy, c-format
+#, c-format
 msgid "No group named `%s' exists.\n"
-msgstr "그룹 이름이 지정되지 않았습니다.\n"
+msgstr "`%s' 라는 그룹이 존재하지 않습니다.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s' with GID %ld.\n"
-msgstr "%s 의 그룹을 생성하는 도중 오류 발생: %s.\n"
+msgstr "GID %ld 의 `%s' 그룹을 생성하는 도중 오류 발생.\n"
 
 #. Can't get there from here.
 #: apps/luseradd.c:178
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %ld exists.\n"
-msgstr "ID %d 의 그룹을 검색하고 있습니다.\n"
+msgstr "GID %ld 라는 그룹이 존재하지 않습니다.\n"
 
 #: apps/luseradd.c:220
 #, c-format
@@ -240,12 +240,12 @@ msgstr "%s (은)는 gid number를 갖고 있지 않습니다.\n"
 #: apps/luserdel.c:105
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "GID %ld 라는 그룹이 존재하지 않으므로, 삭제할 수 없습니다.\n"
 
 #: apps/luserdel.c:111
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "#%d 그룹의 그룹 이름이 없습니다.\n"
+msgstr "GID %ld 라는 그룹에는 이름이 지정되어 있지 않습니다.\n"
 
 #: apps/luserdel.c:116
 #, c-format
@@ -603,9 +603,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 인증 사용자"
 
 #: samples/lookup.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "%s (을)를 초기화하는 도중 오류 발생: %s.\n"
+msgstr "%s (을)를 초기화하는 도중 오류 발생: %s\n"
 
 #: samples/lookup.c:70
 #, c-format
@@ -646,9 +646,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:80
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "#%d 그룹이 존재하지 않습니다.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "lu를 초기화 하는 도중 오류가 발생했습니다.\n"
