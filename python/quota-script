@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import quota
+import libuserquota
 import os
 
 user = "nalin"

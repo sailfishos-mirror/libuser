@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-15 15:28-0500\n"
+"POT-Creation-Date: 2002-01-15 15:50-0500\n"
 "PO-Revision-Date: 2001-08-21 22:20+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -138,7 +138,7 @@ msgstr "Lösenordet inaktivt:\t%s\n"
 msgid "Account Expires:\t%s\n"
 msgstr "Kontot går ut:\t%s\n"
 
-#: apps/lchage.c:276
+#: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
@@ -169,22 +169,22 @@ msgstr "Gruppen %s kunde inte tas bort.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Både -L och -U är angivna.\n"
 
-#: apps/lgroupmod.c:218 apps/lgroupmod.c:228
+#: apps/lgroupmod.c:222 apps/lgroupmod.c:232
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Misslyckades med att ställa in grupp för %s.\n"
 
-#: apps/lgroupmod.c:237
+#: apps/lgroupmod.c:241
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Gruppen %s kunde inte låsas.\n"
 
-#: apps/lgroupmod.c:245
+#: apps/lgroupmod.c:249
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Gruppen %s kunde inte låsas upp.\n"
 
-#: apps/lgroupmod.c:252
+#: apps/lgroupmod.c:256
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Gruppen %s kunde inte ändras.\n"
@@ -195,12 +195,12 @@ msgstr "Gruppen %s kunde inte ändras.\n"
 msgid "Error creating group `%s'.\n"
 msgstr "Fel vid skapande av grupp för %s: %s.\n"
 
-#: apps/luseradd.c:253
+#: apps/luseradd.c:254
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Skapande av konto misslyckades: %s.\n"
 
-#: apps/luseradd.c:281
+#: apps/luseradd.c:282
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fel vid skapande av %s: %s.\n"
@@ -240,42 +240,42 @@ msgstr "%s hade ingen hemkatalog.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Fel vid borttagning av %s: %s.\n"
 
-#: apps/lusermod.c:203 apps/lusermod.c:216
+#: apps/lusermod.c:197 apps/lusermod.c:210
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Misslyckades med att ställa in lösenordet för användaren %s: %s.\n"
 
-#: apps/lusermod.c:227
+#: apps/lusermod.c:221
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Användaren %s kunde inte låsas: %s.\n"
 
-#: apps/lusermod.c:235
+#: apps/lusermod.c:229
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Användaren %s kunde inte låsas upp: %s.\n"
 
-#: apps/lusermod.c:243
+#: apps/lusermod.c:237
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Användaren %s kunde inte ändras: %s.\n"
 
-#: apps/lusermod.c:296
+#: apps/lusermod.c:290
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Gruppen %s kunde inte ändras.\n"
 
-#: apps/lusermod.c:307
+#: apps/lusermod.c:301
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ingen gammal hemkatalog för %s.\n"
 
-#: apps/lusermod.c:312
+#: apps/lusermod.c:306
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ingen ny hemkatalog för %s.\n"
 
-#: apps/lusermod.c:318
+#: apps/lusermod.c:312
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Fel vid flytt av %s till %s: %s.\n"
@@ -411,9 +411,9 @@ msgstr "fel vid låsning av fil: %s"
 #: modules/files.c:105 modules/files.c:391 modules/files.c:713
 #: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
 #: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
-#: modules/files.c:1701 modules/files.c:1775 modules/files.c:1792
-#: modules/files.c:1842 modules/files.c:1861 modules/files.c:1936
-#: modules/files.c:1951
+#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
+#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
+#: modules/files.c:1955
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "kunde inte öppna \"%s\": %s"
@@ -460,11 +460,11 @@ msgstr "enhetsobjektet har inget %s-attribut"
 msgid "entity object has no `%s' attribute"
 msgstr "enhetsobjektet har inget \"%s\"-attribut"
 
-#: modules/files.c:2139 modules/files.c:2205
+#: modules/files.c:2144 modules/files.c:2210
 msgid "not executing with superuser privileges"
 msgstr "kör inte med superanvändarrättigheter"
 
-#: modules/files.c:2218
+#: modules/files.c:2223
 msgid "no shadow file present -- disabling"
 msgstr "ingen shadow-fil finns tillgänglig -- deaktiverar"
 

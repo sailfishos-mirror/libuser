@@ -279,8 +279,10 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 		return NULL;
 	}
 	/* Convert the item to a value. */
+	memset(&value, 0, sizeof(value));
 	libuser_convert_to_value(val, &value);
 	lu_ent_add(self->ent, attr, &value);
+	g_value_unset(&value);
 	DEBUG_EXIT;
 	return Py_BuildValue("");
 }
@@ -308,10 +310,12 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		lu_ent_clear(self->ent, attr);
 
 		/* Add each of the list items in turn. */
+		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyList_GetItem(list, i);
 			libuser_convert_to_value(item, &value);
 			lu_ent_add(self->ent, attr, &value);
+			g_value_unset(&value);
 		}
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -319,6 +323,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 
 	/* It's an object of some kind. */
 	if (PyArg_ParseTuple(args, "sO", &attr, &val)) {
+		memset(&value, 0, sizeof(value));
 		libuser_convert_to_value(val, &value);
 
 		/* Remove all current values. */
@@ -438,8 +443,6 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 
 	DEBUG_ENTRY;
 
-	memset(&value, 0, sizeof(value));
-
 	/* The item should be a string. */
 	if (!PyString_Check(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
@@ -461,6 +464,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
 #endif
 		lu_ent_clear(self->ent, attr);
+		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyList_GetItem(args, i);
 			libuser_convert_to_value(item, &value);
@@ -478,6 +482,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 
 	/* If the new value is a value, convert it and add it. */
 	if (item != NULL) {
+		memset(&value, 0, sizeof(value));
 		libuser_convert_to_value(args, &value);
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n", getindent(),
