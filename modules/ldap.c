@@ -35,7 +35,7 @@
 #include <sasl.h>
 #include "../lib/user_private.h"
 
-#define DEBUG
+#undef  DEBUG
 #define SCHEME "{crypt}"
 #define LOCKCHAR '!'
 #define LOCKSTRING "!"
