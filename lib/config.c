@@ -107,6 +107,8 @@ lu_cfg_done(struct lu_context *context)
 	context->config = NULL;
 }
 
+/* Process a line, and assuming it contains a value, return the key and value
+ * it provides us.  If we encounter a section start, change the section. */
 static void
 process_line(char *line, struct lu_string_cache *cache,
 	     char **section, char **key, char **value)
@@ -119,12 +121,22 @@ process_line(char *line, struct lu_string_cache *cache,
 	g_return_if_fail(key != NULL);
 	g_return_if_fail(value != NULL);
 
+	/* By default, return that we found nothing. */
+	*key = NULL;
+	*value = NULL;
+
+	/* Skip initial whitespace. */
 	while (isspace(*line) && (*line != '\0')) {
 		line++;
 	}
+
+	/* If it's a comment, bail. */
 	if (*line == '#') {
 		return;
 	}
+
+	/* If it's the beginning of a section, process it and clear the key
+	 * and value values. */
 	if (*line == '[') {
 		line++;
 		p = strchr(line, ']');
@@ -137,43 +149,52 @@ process_line(char *line, struct lu_string_cache *cache,
 		}
 		return;
 	}
+
+	/* If the line contains a value, split the key and the value, trim off
+	 * any additional whitespace, and return them. */
 	if (strchr(line, '=')) {
 		p = strchr(line, '=');
 
+		/* Trim any trailing whitespace off the key name. */
 		p--;
 		while (isspace(*p) && (p > line)) {
 			p--;
 		}
 
+		/* Save the key. */
 		tmp = g_strndup(line, p - line + 1);
 		*key = cache->cache(cache, tmp);
 		g_free(tmp);
 
+		/* Skip over any whitespace after the equal sign. */
 		line = strchr(line, '=');
 		line++;
 		while (isspace(*line) && (*line != '\0')) {
 			line++;
 		}
 
+		/* Trim off any trailing whitespace. */
 		p = line + strlen(line);
-
 		p--;
 		while (isspace(*p) && (p > line)) {
 			p--;
 		}
 
+		/* Save the value. */
 		tmp = g_strndup(line, p - line + 1);
 		*value = cache->cache(cache, tmp);
 		g_free(tmp);
 	}
 }
 
+/* Read a specific key from the stored configuration, and return a list of
+ * the values.  The list must be freed. */
 GList *
 lu_cfg_read(struct lu_context *context, const char *key,
 	    const char *default_value)
 {
 	struct config_config *config;
-	char *data = NULL, *line, *xstrtok_ptr;
+	char *data = NULL, *line, *xstrtok_ptr, *def;
 	char *section = NULL, *k = NULL, *value = NULL, *tmp;
 	GList *ret = NULL;
 
@@ -184,45 +205,61 @@ lu_cfg_read(struct lu_context *context, const char *key,
 
 	config = (struct config_config *) context->config;
 
+	/* If we have no configuration, just return the default value
+	 * in a list of its own. */
 	if (config->data == NULL) {
 		if (default_value != NULL) {
-			return g_list_append(NULL, (char *) default_value);
+			def = context->scache->cache(context->scache,
+						     default_value);
+			return g_list_append(NULL, def);
 		} else {
 			return NULL;
 		}
-	} else {
-		data = g_strdup(config->data);
-		for (line = strtok_r(data, "\n", &xstrtok_ptr);
-		     line != NULL;
-		     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
-			process_line(line, config->cache, &section, &k,
-				     &value);
-			if (section && key && value && strlen(section)
-			    && strlen(key) && strlen(value)) {
-				tmp = g_strconcat(section, "/", k, NULL);
-				if (g_ascii_strcasecmp(tmp, key) == 0) {
-					if (g_list_index(ret, value) == -1) {
-						ret =
-						    g_list_append(ret,
-								  value);
-					}
+	}
+
+	/* Create a copy of the stored configuration with which we can mess. */
+	data = g_strdup(config->data);
+
+	/* Break the pool up line by line to process it. */
+	for (line = strtok_r(data, "\n", &xstrtok_ptr);
+	     line != NULL;
+	     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
+		/* See what this line contains. */
+		process_line(line, config->cache, &section, &k, &value);
+
+		/* If we have a valid line, */
+		if (section && key && value &&
+		    strlen(section) && strlen(key) && strlen(value)) {
+			/* format the section and key as a path and if the
+			 * result matches the requested key, */
+			tmp = g_strconcat(section, "/", k, NULL);
+			if (g_ascii_strcasecmp(tmp, key) == 0) {
+				/* add the value to the list if it's not
+				 * already in the list. */
+				if (g_list_index(ret, value) == -1) {
+					ret = g_list_append(ret, value);
 				}
-				g_free(tmp);
 			}
+			g_free(tmp);
 		}
-		g_free(data);
-		if (ret == NULL) {
-			if (default_value != NULL) {
-				ret =
-				    g_list_append(ret,
-						  (char *) default_value);
-			}
+	}
+
+	/* Free the working copy. */
+	g_free(data);
+
+	/* If we still don't have data, return the default answer. */
+	if (ret == NULL) {
+		if (default_value != NULL) {
+			def = context->scache->cache(context->scache,
+						     default_value);
+			ret = g_list_append(ret, def);
 		}
 	}
 
 	return ret;
 }
 
+/* Read the list of keys in a particular section of the file. */
 GList *
 lu_cfg_read_keys(struct lu_context * context, const char *parent_key)
 {
@@ -239,28 +276,35 @@ lu_cfg_read_keys(struct lu_context * context, const char *parent_key)
 	config = (struct config_config *) context->config;
 
 	if (config->data) {
+		/* Create a working copy of the memory pool which we can
+		 * modify safely. */
 		data = g_strdup(config->data);
 		for (line = strtok_r(data, "\n", &xstrtok_ptr);
 		     line != NULL;
 		     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
-			process_line(line, config->cache, &section,
-				     &key, &value);
-			if (section && key && strlen(section)
-			    && strlen(key)) {
+			/* Process this line. */
+			process_line(line, config->cache,
+				     &section, &key, &value);
+			/* If we have a section and a key, */
+			if (section && key && strlen(section) && strlen(key)) {
+				/* and the parent key matches the one which the
+				 * application asked us to list, */
 				if (g_ascii_strcasecmp(section, parent_key) == 0) {
+					/* and it's not already in the list, */
 					if (g_list_index(ret, key) == -1) {
-						ret =
-						    g_list_append(ret,
-								  key);
+						/* add it to the list. */
+						ret = g_list_append(ret, key);
 					}
 				}
 			}
 		}
+		/* Free the pool. */
 		g_free(data);
 	}
 	return ret;
 }
 
+/* Read a configuration entry, and return no more than one value. */
 const char *
 lu_cfg_read_single(struct lu_context *context, const char *key,
 		   const char *default_value)
@@ -273,10 +317,11 @@ lu_cfg_read_single(struct lu_context *context, const char *key,
 
 	ret = context->scache->cache(context->scache, default_value);
 
+	/* Read the whole list. */
 	answers = lu_cfg_read(context, key, NULL);
 	if (answers && answers->data) {
-		ret =
-		    context->scache->cache(context->scache, answers->data);
+		/* Save the first value, and free the list. */
+		ret = context->scache->cache(context->scache, answers->data);
 		g_list_free(answers);
 	}
 
