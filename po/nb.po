@@ -1,13 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2001 Red Hat, Inc.
 # Trond Eivind Glomsrød <teg@redhat.com>, 2001.
-#
+# Kjartan Maraas  <kmaraas@gnu.org>, 2001.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
-"POT-Creation-Date: 2001-07-30 12:50-0400\n"
-"PO-Revision-Date: 2001-07-31 09:37+0200\n"
-"Last-Translator: Trond Eivind Glomsrød <teg@redhat.com>\n"
+"POT-Creation-Date: 2001-08-07 12:05-0400\n"
+"PO-Revision-Date: 2001-08-08 12:48+0200\n"
+"Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -276,12 +277,12 @@ msgstr "Ingen ny hjemmekatalog for %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Feil under flytting av %s til %s: %s.\n"
 
-#: lib/user.c:123
+#: lib/user.c:161
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ingen initieringsfunksjon %s i `%s'"
 
-#: lib/user.c:144
+#: lib/user.c:186
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "feil modulversjon i `%s'"
@@ -291,34 +292,34 @@ msgstr "feil modulversjon i `%s'"
 msgid "could not open configuration file `%s': %s"
 msgstr "kunne ikke åpne konfigurasjonsfil `%s': %s"
 
-#: lib/userent.c:44
+#: lib/userent.c:45
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
 msgstr "dump av struct lu_ent ved %p:\n"
 
-#: lib/userent.c:45
+#: lib/userent.c:46
 #, c-format
 msgid " magic = %08x\n"
 msgstr " magi = %08x\n"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 #, c-format
 msgid " type = %s\n"
 msgstr " type = %s\n"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "user"
 msgstr "bruker"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "group"
 msgstr "gruppe"
 
-#: lib/userent.c:46
+#: lib/userent.c:47
 msgid "unknown"
 msgstr "ukjent"
 
-#: lib/userent.c:216
+#: lib/userent.c:263
 msgid ""
 "\n"
 "Before copy:\n"
@@ -326,7 +327,7 @@ msgstr ""
 "\n"
 "Før kopiering:\n"
 
-#: lib/userent.c:230
+#: lib/userent.c:277
 msgid ""
 "\n"
 "After copy:\n"
@@ -334,216 +335,244 @@ msgstr ""
 "\n"
 "Etter kopiering:\n"
 
-#: lib/userent.c:395
+#: lib/userent.c:442
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr "frigir lu_ent ved %p.\n"
 
-#: modules/files.c:115
+#: lib/userutil.c:177
 #, c-format
-msgid "couldn't open `%s'"
-msgstr "kunne ikke åpne `%s'"
+msgid "error locking file: %s"
+msgstr "feil under låsing av fil: %s"
 
-#: modules/files.c:135
+#: modules/files.c:109 modules/files.c:316 modules/files.c:573
+#: modules/files.c:753 modules/files.c:904 modules/files.c:1068
+#: modules/files.c:1141 modules/files.c:1273 modules/files.c:1365
+#: modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
+#: modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
+#: modules/files.c:1593
 #, c-format
-msgid "error creating `%s'"
-msgstr "feil under oppretting av `%s'"
+msgid "couldn't open `%s': %s"
+msgstr "kunne ikke åpne `%s': %s"
 
-#: modules/files.c:145
+#: modules/files.c:123 modules/files.c:147 modules/files.c:178
+#: modules/files.c:586 modules/files.c:917
+#, c-format
+msgid "couldn't stat `%s': %s"
+msgstr "kunne ikke kjøre stat på `%s': %s"
+
+#: modules/files.c:130
+#, c-format
+msgid "error creating `%s': %s"
+msgstr "feil under oppretting av `%s': %s"
+
+#: modules/files.c:140
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "sikkerhetskopien `%s' var en symbolsk lenke"
 
-#: modules/files.c:614 modules/files.c:624
+#: modules/files.c:601 modules/files.c:926
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "kunne ikke lese fra `%s': %s"
+
+#: modules/files.c:611 modules/files.c:621
 msgid "entry already present in file"
 msgstr "oppføringen er allerede i filen"
 
-#: modules/files.c:730 modules/files.c:737 modules/files.c:823
-#: modules/files.c:833
+#: modules/files.c:633 modules/files.c:644 modules/files.c:952
+#: modules/files.c:961
+#, c-format
+msgid "couldn't write to `%s': %s"
+msgstr "kunne ikke skrive til `%s': %s"
+
+#: modules/files.c:727 modules/files.c:734 modules/files.c:821
+#: modules/files.c:831
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetsobjekt har ingen %s-attributt"
 
-#: modules/files.c:776
+#: modules/files.c:773
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "entitetsobjekt har ingen `%s'-attributt"
 
-#: modules/files.c:1676 modules/files.c:1732
+#: modules/files.c:1675 modules/files.c:1731
 msgid "not executing with superuser privileges"
 msgstr "kjører ikke med superbruker-privilegier"
 
-#: modules/files.c:1744
+#: modules/files.c:1743
 msgid "no shadow file present -- disabling"
 msgstr "ingen skyggefil finnes -- deaktiverer"
 
-#: modules/krb5.c:104
+#: modules/krb5.c:102
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "feil under tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr ""
+"feil under tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
-#: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
-#: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
+#: modules/krb5.c:132 modules/krb5.c:189 modules/krb5.c:272 modules/krb5.c:346
+#: modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
 msgid "error initializing kerberos library"
 msgstr "feil under initiering av kerberos-biblioteket"
 
-#: modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
-#: modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
+#: modules/krb5.c:137 modules/krb5.c:204 modules/krb5.c:297 modules/krb5.c:302
+#: modules/krb5.c:361 modules/krb5.c:406 modules/krb5.c:474 modules/krb5.c:522
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "feil under lesing av brukernavn `%s' for kerberos"
 
-#: modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
+#: modules/krb5.c:198 modules/krb5.c:355 modules/krb5.c:400 modules/krb5.c:468
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "entitetsstruktur har ingen %s eller %s-attributter"
 
-#: modules/krb5.c:283
+#: modules/krb5.c:281
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "entitet har ingen %s eller %s-attributter"
 
-#: modules/krb5.c:293
+#: modules/krb5.c:291
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "entiteten ble opprettet uten %s- eller %s-attributter"
 
-#: modules/krb5.c:415 modules/krb5.c:483
+#: modules/krb5.c:413 modules/krb5.c:481
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "feil under lesing av informasjon for `%s' fra kerberos"
 
-#: modules/krb5.c:518
+#: modules/krb5.c:516
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "entiteten har ingen %s-attributt"
 
-#: modules/krb5.c:549
+#: modules/krb5.c:547
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "feil under setting av passord for `%s'"
 
-#: modules/krb5.c:662
+#: modules/krb5.c:660
 msgid "Kerberos Realm"
 msgstr "Kerberos-område"
 
-#: modules/krb5.c:667
+#: modules/krb5.c:665
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos Admin Principal"
 
-#: modules/krb5.c:682
+#: modules/krb5.c:680
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos-passord for Admin Principal"
 
-#: modules/ldap.c:178
+#: modules/ldap.c:175
 msgid "error initializing ldap library"
 msgstr "feil under initiering av ldap-bibliotek"
 
-#: modules/ldap.c:196
+#: modules/ldap.c:193
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "kunne ikke sette LDAP-protokoll til versjon %d"
 
-#: modules/ldap.c:202
+#: modules/ldap.c:199
 msgid "could not negotiate TLS with LDAP server"
 msgstr "kunne ikke forhandle TLS med LDAP-tjener"
 
-#: modules/ldap.c:216
+#: modules/ldap.c:213
 msgid "could not bind to LDAP server"
 msgstr "kunne ikke binde til LDAP-tjener"
 
-#: modules/ldap.c:316 modules/ldap.c:566 modules/ldap.c:646 modules/ldap.c:709
-#: modules/ldap.c:796 modules/ldap.c:873
+#: modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
+#: modules/ldap.c:799 modules/ldap.c:880
 msgid "error mapping name to LDAP distinguished name"
 msgstr "feil under kobling av navn til LDAP distinguished name"
 
-#: modules/ldap.c:321
+#: modules/ldap.c:318
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "feil under kobling av navn til LDAP base distinguished name"
 
-#: modules/ldap.c:365
+#: modules/ldap.c:364
 msgid "error searching LDAP directory"
 msgstr "feil under søk i LDAP-katalog"
 
-#: modules/ldap.c:554
+#: modules/ldap.c:556
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "bruker-objektet hadde ingen %s-attributt"
 
-#: modules/ldap.c:560
+#: modules/ldap.c:562
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "brukerobjektet ble opprettet uten `%s'"
 
-#: modules/ldap.c:572
+#: modules/ldap.c:574
 msgid "could not convert internal data to LDAPMods"
 msgstr "kunne ikke konvertere interne data til LDAPMods"
 
-#: modules/ldap.c:585 modules/ldap.c:748
+#: modules/ldap.c:587 modules/ldap.c:751
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "feil under endring av LDAP-katalogoppføring: %s"
 
-#: modules/ldap.c:598
+#: modules/ldap.c:600
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "feil under endring av navn på LDAP-katalogoppføring: %s\n"
 
-#: modules/ldap.c:640
+#: modules/ldap.c:643
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektet hadde ingen %s-attributt"
 
-#: modules/ldap.c:657
+#: modules/ldap.c:660
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "feil under fjerning av LDAP-katalogoppføring: %s.\n"
 
-#: modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
+#: modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektet har ikke attributt %s"
 
-#: modules/ldap.c:808
+#: modules/ldap.c:811
 msgid "no such object in LDAP directory"
 msgstr "ingen slike objekter i LDAP-katalogen"
 
-#: modules/ldap.c:825
+#: modules/ldap.c:828
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "ingen `%s'-attributt som bruker schema `%s' funnet"
 
-#: modules/ldap.c:832
+#: modules/ldap.c:836
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ingen `%s'-attributt funnet"
 
-#: modules/ldap.c:928
+#: modules/ldap.c:939
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Feil under setting av passord i LDAP-katalog for %s: %s"
 
-#: modules/ldap.c:1191
+#: modules/ldap.c:1213
 msgid "LDAP Server Name"
 msgstr "Navn på LDAP-tjener"
 
-#: modules/ldap.c:1196
+#: modules/ldap.c:1218
 msgid "LDAP Base DN"
 msgstr "LDAP basis DN"
 
-#: modules/ldap.c:1201
+#: modules/ldap.c:1223
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:1206
+#: modules/ldap.c:1228
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-passord"
 
-#: modules/ldap.c:1212
+#: modules/ldap.c:1234
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruker"
 
-#: modules/ldap.c:1217
+#: modules/ldap.c:1239
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisasjonsbruker"
 
