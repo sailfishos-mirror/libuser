@@ -1,8 +1,8 @@
 2004-09-27  Miloslav Trmac  <mitr@redhat.com>
 
-	* autogen.sh: Create the `admin' subdirectory if needed.
-
 	* configure.in: Version 0.52.
+
+	* autogen.sh: Create the `admin' subdirectory if needed.
 
 	* Makefile.am (CVSTAG): Fix definition.
 
