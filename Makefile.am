@@ -18,6 +18,7 @@ scan:
 tag:
 	cvs tag -FR $(CVSTAG) .
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
+	rm -fr $(PACKAGE)-$(VERSION)
 	mv /tmp/$(PACKAGE)-export-tmp $(PACKAGE)-$(VERSION)
 	tar cvzf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
 	rm -fr $(PACKAGE)-$(VERSION)
