@@ -37,7 +37,8 @@ files useful for developing applications with libuser.
 	--with-ldap \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python} \
-	--with-html-dir=%{_datadir}/gtk-doc/html
+	--with-html-dir=%{_datadir}/gtk-doc/html \
+	--with-pic
 make
 
 %clean
@@ -89,6 +90,7 @@ popd
 %changelog
 * Wed Dec 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.2-1
 - degrade gracefully
+- build with --with-pic
 
 * Tue Aug 27 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.1-2
 - translation updates
