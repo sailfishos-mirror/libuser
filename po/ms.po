@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-08-06 16:23+0800\n"
+"PO-Revision-Date: 2004-08-23 10:33+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -121,9 +121,8 @@ msgstr ""
 
 #: apps/lchage.c:189
 #, c-format
-#, fuzzy
 msgid "Warning:\t%d\n"
-msgstr "Amaran"
+msgstr "Amaran:\t%d\n"
 
 #: apps/lchage.c:194
 #, c-format
@@ -136,44 +135,37 @@ msgstr "Tidak sekali"
 
 #: apps/lchage.c:201
 #, c-format
-#, fuzzy
 msgid "Last Change:\t%s\n"
-msgstr "Ubah s"
+msgstr "Perubahan Terakhir:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
-#, fuzzy
 msgid "Password Expires:\t%s\n"
-msgstr "Katalaluan s"
+msgstr "Katalaluan Luput:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
-#, fuzzy
 msgid "Password Inactive:\t%s\n"
-msgstr "Katalaluan s"
+msgstr "Katalaluan Tidak Aktif:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
-#, fuzzy
 msgid "Account Expires:\t%s\n"
-msgstr "s"
+msgstr "Akaun Luput:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
-#, fuzzy
 msgid "Failed to modify aging information for %s.\n"
-msgstr "Gagal for s"
+msgstr "Gagal menukar maklumat usia untuk %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
-#, fuzzy
 msgid "[OPTION...] [user]"
-msgstr "pengguna"
+msgstr "[PILIHAN...] [pengguna]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
 #, c-format
-#, fuzzy
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Tidak pengguna unama tidak unama for"
+msgstr "Tiada pengguna dinyatakan, tiada nama untuk uid %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
@@ -1071,12 +1063,10 @@ msgid "Default user attribute names:\n"
 msgstr "Default pengguna"
 
 #: samples/testuser.c:88
-#, fuzzy
 msgid "Getting default user attributes:\n"
-msgstr "default pengguna"
+msgstr "Mendapatkan ciri-ciri pengguna default:\n"
 
 #: samples/testuser.c:95
-#, fuzzy
 msgid "Copying user structure:\n"
-msgstr "pengguna"
+msgstr "Menyalin struktur pengguna:\n"
 
