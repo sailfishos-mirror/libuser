@@ -151,9 +151,10 @@ quota_off()
 
 static int
 quota_get(int type, qid_t id, const char *special,
-	  int32_t *inode_soft, int32_t *inode_hard, 
-	  int32_t *inode_grace, int32_t *block_soft, 
-	  int32_t *block_hard, int32_t *block_grace)
+	  int32_t *inode_soft, int32_t *inode_hard,
+	  int32_t *inode_usage, int32_t *inode_grace,
+	  int32_t *block_soft, int32_t *block_hard,
+	  int32_t *block_usage, int32_t *block_grace)
 {
 	struct mem_dqblk dqblk;
 	int ret = 0;
@@ -161,12 +162,22 @@ quota_get(int type, qid_t id, const char *special,
 	memset(&dqblk, 0, sizeof(dqblk));
 	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, &dqblk);
 	if(ret == 0) {
-		*inode_soft = dqblk.dqb_isoftlimit;
-		*inode_hard = dqblk.dqb_ihardlimit;
-		*inode_grace = dqblk.dqb_itime;
-		*block_soft = dqblk.dqb_bsoftlimit;
-		*block_hard = dqblk.dqb_bhardlimit;
-		*block_grace = dqblk.dqb_btime;
+		if(inode_soft)
+			*inode_soft = dqblk.dqb_isoftlimit;
+		if(inode_hard)
+			*inode_hard = dqblk.dqb_ihardlimit;
+		if(inode_grace)
+			*inode_grace = dqblk.dqb_itime;
+		if(inode_usage)
+			*inode_usage = dqblk.dqb_curinodes;
+		if(block_soft)
+			*block_soft = dqblk.dqb_bsoftlimit;
+		if(block_hard)
+			*block_hard = dqblk.dqb_bhardlimit;
+		if(block_grace)
+			*block_grace = dqblk.dqb_btime;
+		if(block_usage)
+			*block_usage = (dqblk.dqb_curspace + 1023) / 1024;
 	}
 	return ret;
 }
@@ -202,11 +213,13 @@ quota_set(int type, qid_t id, const char *special,
 int
 quota_get_user(uid_t uid, const char *special,
 	       int32_t *inode_soft, int32_t *inode_hard, 
-	       int32_t *inode_grace, int32_t *block_soft, 
-	       int32_t *block_hard, int32_t *block_grace)
+	       int32_t *inode_usage, int32_t *inode_grace,
+	       int32_t *block_soft, int32_t *block_hard,
+	       int32_t *block_usage, int32_t *block_grace)
 {
-	return quota_get(USRQUOTA, uid, special, inode_soft, inode_hard,
-			 inode_grace, block_soft, block_hard, block_grace);
+	return quota_get(USRQUOTA, uid, special,
+			 inode_soft, inode_hard, inode_usage, inode_grace,
+			 block_soft, block_hard, block_usage, block_grace);
 }
 
 int
@@ -221,12 +234,14 @@ quota_set_user(uid_t uid, const char *special,
 
 int
 quota_get_group(gid_t gid, const char *special,
-		int32_t *inode_soft, int32_t *inode_hard, 
-		int32_t *inode_grace, int32_t *block_soft, 
-		int32_t *block_hard, int32_t *block_grace)
+	        int32_t *inode_soft, int32_t *inode_hard, 
+	        int32_t *inode_usage, int32_t *inode_grace,
+	        int32_t *block_soft, int32_t *block_hard,
+	        int32_t *block_usage, int32_t *block_grace)
 {
-	return quota_get(GRPQUOTA, gid, special, inode_soft, inode_hard,
-			 inode_grace, block_soft, block_hard, block_grace);
+	return quota_get(GRPQUOTA, gid, special,
+			 inode_soft, inode_hard, inode_usage, inode_grace,
+			 block_soft, block_hard, block_usage, block_grace);
 }
 
 int

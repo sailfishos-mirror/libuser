@@ -37,8 +37,8 @@ do_quota_stuff(const char *ent, const char *special,
 	int i;
 	struct passwd *pwd;
 	struct group *grp;
-	int32_t inode_soft, inode_hard, inode_grace,
-		block_soft, block_hard, block_grace;
+	int32_t inode_soft, inode_hard, inode_usage, inode_grace,
+		block_soft, block_hard, block_usage, block_grace;
 
 	if(is_group) {
 		grp = getgrnam(ent);
@@ -47,8 +47,10 @@ do_quota_stuff(const char *ent, const char *special,
 			return 2;
 		}
 		if(quota_get_group(grp->gr_gid, special,
-				   &inode_soft, &inode_hard, &inode_grace,
-				   &block_soft, &block_hard, &block_grace)) {
+				   &inode_soft, &inode_hard,
+				   &inode_usage, &inode_grace,
+				   &block_soft, &block_hard,
+				   &block_usage, &block_grace)) {
 			fprintf(stderr, "error querying group quota for %s: "
 				"%s\n", special, strerror(errno));
 			return 3;
@@ -71,10 +73,12 @@ do_quota_stuff(const char *ent, const char *special,
 			}
 		} else {
 			printf("%s:\n"
-			       "\tinode (soft, hard, grace) = (%d, %d, %d)\n"
-			       "\tblock (soft, hard, grace) = (%d, %d, %d)\n",
-			       special, inode_soft, inode_hard, inode_grace,
-			       block_soft, block_hard, block_grace);
+			       "\tinode (used, soft, hard, grace) = "
+			       "(%d, %d, %d, %d)\n"
+			       "\tblock (used, soft, hard, grace) = "
+			       "(%d, %d, %d, %d)\n", special,
+			       inode_usage, inode_soft, inode_hard, inode_grace,
+			       block_usage, block_soft, block_hard, block_grace);
 		}
 	} else {
 		pwd = getpwnam(ent);
@@ -83,8 +87,10 @@ do_quota_stuff(const char *ent, const char *special,
 			return 2;
 		}
 		if(quota_get_user(pwd->pw_uid, special,
-				  &inode_soft, &inode_hard, &inode_grace,
-				  &block_soft, &block_hard, &block_grace)) {
+				  &inode_soft, &inode_hard,
+				  &inode_usage, &inode_grace,
+				  &block_soft, &block_hard,
+				  &block_usage, &block_grace)) {
 			fprintf(stderr, "error querying user quota for %s: "
 				"%s\n", special, strerror(errno));
 			return 3;
@@ -107,10 +113,12 @@ do_quota_stuff(const char *ent, const char *special,
 			}
 		} else {
 			printf("%s:\n"
-			       "\tinode (soft, hard, grace) = (%d, %d, %d)\n"
-			       "\tblock (soft, hard, grace) = (%d, %d, %d)\n",
-			       special, inode_soft, inode_hard, inode_grace,
-			       block_soft, block_hard, block_grace);
+			       "\tinode (used, soft, hard, grace) = "
+			       "(%d, %d, %d, %d)\n"
+			       "\tblock (used, soft, hard, grace) = "
+			       "(%d, %d, %d, %d)\n", special,
+			       inode_usage, inode_soft, inode_hard, inode_grace,
+			       block_usage, block_soft, block_hard, block_grace);
 		}
 	}
 	return 0;

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-06 21:21-0400\n"
+"POT-Creation-Date: 2001-06-11 12:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,11 +95,11 @@ msgstr ""
 msgid "Failed to modify aging information for %s.\n"
 msgstr ""
 
-#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:78
+#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:77
 msgid "[OPTION...] group"
 msgstr ""
 
-#: apps/lgroupadd.c:68 apps/lgroupdel.c:59 apps/lgroupmod.c:84
+#: apps/lgroupadd.c:68 apps/lgroupdel.c:59 apps/lgroupmod.c:83
 msgid "No group name specified.\n"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Group creation failed.\n"
 msgstr ""
 
-#: apps/lgroupdel.c:71 apps/lgroupmod.c:101
+#: apps/lgroupdel.c:71 apps/lgroupmod.c:100
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr ""
@@ -117,26 +117,26 @@ msgstr ""
 msgid "Group %s could not be deleted.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:94 apps/lusermod.c:97
+#: apps/lgroupmod.c:93 apps/lusermod.c:97
 msgid "Both -L and -U specified.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:161 apps/lgroupmod.c:171
+#: apps/lgroupmod.c:160 apps/lgroupmod.c:170
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:180
+#: apps/lgroupmod.c:179
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:188
+#: apps/lgroupmod.c:187
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:195
+#: apps/lgroupmod.c:194
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr ""
