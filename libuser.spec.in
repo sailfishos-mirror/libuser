@@ -87,6 +87,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Thu Mar 14 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.102-1
+- ldap: cache an entity's dn in the entity structure to try to speed things up
+
 * Mon Mar 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.101-3
 - rebuild in new environment
 
