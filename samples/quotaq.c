@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include "../lib/userquota.h"
 
@@ -210,6 +211,7 @@ main(int argc, char **argv)
 		} else {
 			specials = quota_get_specials_group();
 		}
+		ret = 0;
 		for (i = 0; specials && specials[i]; i++) {
 			ret = do_quota_stuff(ent, specials[i], is_group,
 					     &argv[optind + 1]);

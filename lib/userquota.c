@@ -25,6 +25,7 @@
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <linux/quota.h>
+#include <linux/unistd.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>

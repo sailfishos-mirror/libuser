@@ -17,6 +17,7 @@
 
 #ident "$Id$"
 
+#include <Python.h>
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
@@ -27,7 +28,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "../lib/userquota.h"
-#include <Python.h>
 #include "debug.h"
 
 void initlibuserquota(void);

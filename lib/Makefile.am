@@ -4,8 +4,10 @@ AM_LDFLAGS = -version-info 2:1:1
 
 EXTRA_DIST = userquota.3
 
-lib_LTLIBRARIES = libuser.la @QUOTALIB@
-EXTRA_LTLIBRARIES = libuserquota.la
+lib_LTLIBRARIES = libuser.la
+if QUOTA
+lib_LTLIBRARIES += libuserquota.la
+endif
 EXTRA_MANS = userquota.3
 
 pkginclude_HEADERS = \
