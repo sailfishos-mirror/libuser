@@ -1,5 +1,5 @@
 # Swedish messages for libuser.
-# Copyright (C) 2001, 2002 Christian Rose <menthos@menthos.com>.
+# Copyright (C) 2001, 2002, 2003 Christian Rose <menthos@menthos.com>.
 #
 # $Id$
 #
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2002-12-12 02:12+0100\n"
+"PO-Revision-Date: 2003-02-19 10:44+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -158,20 +158,19 @@ msgid "Failed to modify aging information for %s.\n"
 msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
-#, fuzzy
 msgid "[OPTION...] [user]"
-msgstr "[FLAGGA...] användare"
+msgstr "[FLAGGA...] [användare]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Inget användarnamn angivet.\n"
+msgstr "Inget användarnamn angivet, inget namn för uid %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
+msgstr "Ändrar fingerinformation för %s.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
@@ -180,58 +179,58 @@ msgstr "Fel vid initiering av %s.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
-msgstr ""
+msgstr "Fullständigt namn"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "Efternamn"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "Förnamn"
 
 #: apps/lchfn.c:214
 msgid "Office"
-msgstr ""
+msgstr "Kontor"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr ""
+msgstr "Kontorstelefon"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr ""
+msgstr "Hemtelefon"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr ""
+msgstr "E-postadress"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Fingerinformationen ändrades inte: inmatningsfel.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Fingerinformationen ändrades.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Fingerinformationen ändrades inte: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "Byter skal för %s.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr ""
+msgstr "Nytt skal"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "Skalet ändrat.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -239,7 +238,7 @@ msgstr "[FLAGGA...] grupp"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "Inget gruppnamn är angivet.\n"
+msgstr "Inget gruppnamn angivet.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
@@ -280,99 +279,104 @@ msgid "Group %s could not be modified.\n"
 msgstr "Gruppen %s kunde inte ändras.\n"
 
 #: apps/lid.c:81
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Inget gruppnamn är angivet.\n"
+msgstr "Inget gruppnamn angivet, använder %s.\n"
 
 #: apps/lid.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Inget gruppnamn är angivet.\n"
+msgstr "Inget gruppnamn angivet, inget namn för gid %d.\n"
 
 #: apps/lid.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Inget användarnamn angivet.\n"
+msgstr "Inget användarnamn angivet. använder %s.\n"
 
 #: apps/lnewusers.c:74
-#, fuzzy
 msgid "[OPTION...]"
-msgstr "[FLAGGA...] användare"
+msgstr "[FLAGGA...]"
 
 #: apps/lnewusers.c:98
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Fel vid läsning av \"%s\": %s"
+msgstr "Fel vid öppnande av \"%s\": %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "Fel vid skapande av konto för \"%s\": raden är felaktigt formaterad.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "Vägrar att skapa konto med UID 0.\n"
+
+msgid "Refusing to create account with uid 0.\n"
+msgstr "Vägrar att skapa konto med uid 0.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "Fel vid skapande av gruppen \"%s\".\n"
+msgstr "Fel vid skapande av grupp för \"%s\" med GID %ld.\n"
+
+msgid "Error creating group for `%s' with gid %ld.\n"
+msgstr "Fel vid skapande av grupp för \"%s\" med gid %ld.\n"
 
 #: apps/lnewusers.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "fel vid inställning av lösenord för \"%s\""
+msgstr "fel vid inställning av initialt lösenord för %s: %s\n"
 
 #: apps/lnewusers.c:310
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Fel vid läsning av gamla hemkatalogen för %s: %s.\n"
+msgstr "Fel vid skapande av hemkatalog för %s: %s\n"
 
 #: apps/lnewusers.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "Fel vid skapande av e-postspool.\n"
+msgstr "Fel vid skapande av e-postspool för %s.\n"
 
 #: apps/lnewusers.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Fel vid skapande av %s: %s.\n"
+msgstr "Fel vid skapande av användarkonto för %s: %s\n"
 
 #: apps/lpasswd.c:86
-#, fuzzy, c-format
+#, c-format
 msgid "Changing password for %s.\n"
-msgstr "fel vid inställning av lösenord för \"%s\""
+msgstr "Byter lösenord för %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "Nytt lösenord"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "Nytt lösenord (bekräfta)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "Lösenorden stämmer inte överens, försök igen.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "Bytet av lösenord avbröts.\n"
 
 #: apps/lpasswd.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Misslyckades med att ställa in lösenordet för användaren %s: %s.\n"
+msgstr "Fel vid inställning av lösenord för användaren %s: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "fel vid inställning av lösenord för \"%s\""
+msgstr "Fel vid inställning av lösenord för gruppen %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr ""
+msgstr "Lösenordet ändrat.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -834,49 +838,60 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-auktoriseringsanvändare"
 
 #: modules/sasldb.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "fel vid skapande av \"%s\": %s"
+msgstr "Cyrus SASL-fel vid skapande av användare: %s: %s"
 
 #: modules/sasldb.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "fel vid skapande av \"%s\": %s"
+msgstr "Cyrus SASL-fel vid skapande av användare: %s"
 
 #: modules/sasldb.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Fel vid borttagning av \"%s\": %s"
+msgstr "Cyrus SASL-fel vid borttagning av användare: %s: %s"
 
 #: modules/sasldb.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Fel vid borttagning av \"%s\": %s"
+msgstr "Cyrus SASL-fel vid borttagning av användare: %s"
 
 #: modules/sasldb.c:428 modules/sasldb.c:436
-#, fuzzy, c-format
+#, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "Fel vid initiering av %s: %s\n"
+msgstr "fel vid initiering av Cyrus SASL: %s"
+
+msgid "Error initializing Cyrus SASL: %s"
+msgstr "Fel vid initiering av Cyrus SASL: %s"
 
 #: python/admin.c:494
-#, fuzzy
 msgid "error creating home directory for user"
-msgstr "Fel vid läsning av gamla hemkatalogen för %s: %s.\n"
+msgstr "fel vid skapande av hemkatalog för användare"
+
+msgid "Error creating home directory for user"
+msgstr "Fel vid skapande av hemkatalog för användare"
 
 #: python/admin.c:546
-#, fuzzy
 msgid "error removing home directory for user"
-msgstr "Fel vid läsning av gamla hemkatalogen för %s: %s.\n"
+msgstr "fel vid borttagning av hemkatalog för användare"
+
+msgid "Error removing home directory for user"
+msgstr "Fel vid borttagning av hemkatalog för användare"
 
 #: python/admin.c:623
-#, fuzzy
 msgid "error moving home directory for user"
-msgstr "Ingen gammal hemkatalog för %s.\n"
+msgstr "fel vid flytt av hemkatalog för användare"
+
+msgid "Error moving home directory for user"
+msgstr "Fel vid flytt av hemkatalog för användare"
 
 #: python/admin.c:656
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "Fel vid skapande av e-postspool.\n"
+msgstr "fel vid skapande av e-postspool för användare"
+
+msgid "Error creating mail spool for user"
+msgstr "Fel vid skapande av e-postspool för användare"
 
 #: samples/lookup.c:64
 #, c-format
