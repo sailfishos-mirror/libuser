@@ -103,7 +103,7 @@ msgstr "절대"
 #: apps/lchage.c:149
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "마지막 변환:\t%s\n"
+msgstr "최종 변경:\t%s\n"
 
 #: apps/lchage.c:156
 #, c-format
