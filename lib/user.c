@@ -1346,3 +1346,41 @@ lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const 
 	g_list_free(data.list);
 	return ret;
 }
+
+/**
+ * lu_users_enumerate_all:
+ * @context: A library context.
+ * @pattern: A glob-style pattern which the library will match user names against before returning them.
+ * @module: The name of a module which will be queried specifically.
+ * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * The lu_users_enumerate_all() function will query loaded modules for a list of users who match the given @pattern and return
+ * the answers as a #GList of #lu_ent structures.
+ *
+ * Returns: A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
+ */
+GList *
+lu_users_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
+{
+	LU_ERROR_CHECK(error);
+	return NULL;
+}
+
+/**
+ * lu_groups_enumerate_all:
+ * @context: A library context.
+ * @pattern: A glob-style pattern which the library will match group names against before returning them.
+ * @module: The name of a module which will be queried specifically.
+ * @error: A pointer to a pointer to an #lu_error_t structure to hold information about any errors which might occur.
+ *
+ * The lu_groups_enumerate_all() function will query loaded modules for a list of groups who match the given @pattern and return
+ * the answers as a #GList of #lu_ent structures.
+ *
+ * Returns: A #GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
+ */
+GList *
+lu_groups_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
+{
+	LU_ERROR_CHECK(error);
+	return NULL;
+}

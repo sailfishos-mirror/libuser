@@ -39,6 +39,7 @@ int main(int argc, char **argv)
 {
 	struct lu_context *ctx;
 	struct lu_ent *ent, *tmp, *temp;
+	struct lu_error *error = NULL;
 	GList *ret = NULL;
 	int i;
 	void *control = NULL;
@@ -49,10 +50,10 @@ int main(int argc, char **argv)
 
 	control = g_malloc0(65536);
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, &error);
 
 	if(ctx == NULL) {
-		g_print(gettext("Error initializing lu.\n"));
+		g_print(gettext("Error initializing %s: %s.\n"), PACKAGE, error->string);
 		exit(1);
 	}
 

@@ -22,6 +22,7 @@
 #endif
 #include <grp.h>
 #include <pwd.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../include/libuser/user_private.h"
@@ -292,6 +293,8 @@ lu_default(struct lu_context *context, const char *name,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
 
+	lu_ent_clear_all(ent);
+
 	ent->type = type;
 
 	if(ent->type == lu_user) {
@@ -451,6 +454,16 @@ lu_ent_free(struct lu_ent *ent)
 	g_free(ent);
 }
 
+/**
+ * lu_ent_set_original:
+ * @ent: An entity structure which will be modified.
+ * @attr: The attribute of the entity structure which will have its original value replaced.
+ * @val: A new value for the attribute.
+ *
+ * This function modifies original copy of the given attribute of a structure so that it is equal to @val.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ **/
 void
 lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
 {
@@ -458,6 +471,24 @@ lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
 	g_assert(ent->magic == LU_ENT_MAGIC);
 	lu_ent_clear_original(ent, attr);
 	lu_ent_add_original(ent, attr, val);
+}
+
+/**
+ * lu_ent_set_numeric_original:
+ * @ent: An entity structure which will be modified.
+ * @attr: The attribute of the entity structure whose original value will be replaced.
+ * @val: A new value for the attribute.
+ *
+ * This function modifies the original value of the given attribute of a structure so that it is equal to @val.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ **/
+void
+lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr, long val)
+{
+	char buf[LINE_MAX];
+	snprintf(buf, sizeof(buf), "%ld", val);
+	lu_ent_set_original(ent, attr, buf);
 }
 
 /**
@@ -477,6 +508,24 @@ lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
 	g_assert(ent->magic == LU_ENT_MAGIC);
 	lu_ent_clear(ent, attr);
 	lu_ent_add(ent, attr, val);
+}
+
+/**
+ * lu_ent_set_numeric:
+ * @ent: An entity structure which will be modified.
+ * @attr: The attribute of the entity structure which will be replaced.
+ * @val: A new value for the attribute.
+ *
+ * This function modifies the given attribute of a structure so that it is equal to @val.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ **/
+void
+lu_ent_set_numeric(struct lu_ent *ent, const char *attr, long val)
+{
+	char buf[LINE_MAX];
+	snprintf(buf, sizeof(buf), "%ld", val);
+	lu_ent_set(ent, attr, buf);
 }
 
 static int
@@ -509,7 +558,7 @@ lu_ent_has(struct lu_ent *ent, const char *attribute)
  *
  * This function returns a list of the attributes for which the entity structure has values defined.
  *
- * Returns: A #GList which should not be freed.
+ * Returns: A #GList which should be freed with g_list_free().
  **/
 GList *
 lu_ent_get_attributes(struct lu_ent *ent)
@@ -518,6 +567,26 @@ lu_ent_get_attributes(struct lu_ent *ent)
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
 	g_tree_traverse(ent->attributes, get_hash_keys, G_IN_ORDER, &ret);
 	return ret;
+}
+
+/**
+ * lu_ent_clear_all:
+ * @ent: An entity structure which will be reset to a blank state, as it was when it was first allocated.
+ *
+ * This function clears all values for all attributes this entity structure has.
+ *
+ * Returns: nothing.
+ */
+void
+lu_ent_clear_all(struct lu_ent *ent)
+{
+	GList *attributes, *i;
+	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	attributes = lu_ent_get_attributes(ent);
+	for(i = attributes; i != NULL; i = g_list_next(i)) {
+		lu_ent_clear(ent, (char*)i->data);
+	}
+	g_list_free(attributes);
 }
 
 /**

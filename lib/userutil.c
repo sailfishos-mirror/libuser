@@ -33,6 +33,7 @@
 #include <time.h>
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
+#define LU_MAX_LOCK_ATTEMPTS 30
 #include "../include/libuser/user_private.h"
 
 gint
@@ -160,6 +161,8 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 {
 	struct flock *lck = NULL;
 	int i;
+	int maxtries = LU_MAX_LOCK_ATTEMPTS;
+	struct timeval tv;
 
 	LU_ERROR_CHECK(error);
 
@@ -170,6 +173,13 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 
 	do {
 		i = fcntl(fd, F_SETLKW, lck);
+		if((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
+			if(maxtries-- <= 0) {
+				break;
+			}
+			memset(&tv, 0, sizeof(tv));
+			select(0, NULL, NULL, NULL, &tv);
+		}
 	} while((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
 
 	if(i == -1) {

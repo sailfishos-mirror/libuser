@@ -32,6 +32,10 @@
 #include "../include/libuser/user.h"
 #include "apputil.h"
 
+/**
+ * Parse a string for a count of days, and return the value.  If the string is
+ * empty, or invalid somehow, return the default of -1.
+ */
 static gint
 read_ndays(const char *days)
 {
@@ -44,6 +48,9 @@ read_ndays(const char *days)
 	return n_days;
 }
 
+/**
+ * Format a count of days into a string that's intelligible to a user.
+ */
 static void
 date_to_string(gint n_days, char *buf, size_t len)
 {
@@ -173,28 +180,22 @@ main(int argc, const char **argv)
 		}
 	} else {
 		if(shadowLastChange != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowLastChange);
-			lu_ent_set(ent, LU_SHADOWLASTCHANGE, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWLASTCHANGE, shadowLastChange);
 		}
 		if(shadowMin != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowMin);
-			lu_ent_set(ent, LU_SHADOWMIN, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWMIN, shadowMin);
 		}
 		if(shadowMax != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowMax);
-			lu_ent_set(ent, LU_SHADOWMAX, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWMAX, shadowMax);
 		}
 		if(shadowWarning != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowWarning);
-			lu_ent_set(ent, LU_SHADOWWARNING, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWWARNING, shadowWarning);
 		}
 		if(shadowInactive != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowInactive);
-			lu_ent_set(ent, LU_SHADOWINACTIVE, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWINACTIVE, shadowInactive);
 		}
 		if(shadowExpire != -2) {
-			snprintf(buf, sizeof(buf), "%ld", shadowExpire);
-			lu_ent_set(ent, LU_SHADOWEXPIRE, buf);
+			lu_ent_set_numeric(ent, LU_SHADOWEXPIRE, shadowExpire);
 		}
 
 		if(lu_user_modify(ctx, ent, &error) == FALSE) {

@@ -26,6 +26,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include <string.h>
 #include "../include/libuser/user_private.h"
 #include "apputil.h"
 
@@ -33,13 +34,13 @@ int
 main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
-		   *uid = NULL, *user = NULL, *gecos = NULL, *oldHomeDirectory,
+		   *uid = NULL, *old_uid = NULL, *user = NULL, *gecos = NULL, *oldHomeDirectory,
 		   *homeDirectory = NULL, *loginShell = NULL;
 	long uidNumber = -2, gidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GList *values;
+	GList *values, *i;
 	int change = FALSE, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -104,17 +105,18 @@ main(int argc, const char **argv)
 	if(loginShell)
 		lu_ent_set(ent, LU_LOGINSHELL, loginShell);
 	if(uidNumber != -2) {
-		char *tmp = g_strdup_printf("%ld", uidNumber);
-		lu_ent_set(ent, LU_UIDNUMBER, tmp);
-		g_free(tmp);
+		lu_ent_set_numeric(ent, LU_UIDNUMBER, uidNumber);
 	}
 	if(gidNumber != -2) {
-		char *tmp = g_strdup_printf("%ld", gidNumber);
-		lu_ent_set(ent, LU_GIDNUMBER, tmp);
-		g_free(tmp);
+		lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
 	}
-	if(uid)
+	if(uid) {
+		values = lu_ent_get(ent, LU_USERNAME);
+		if(values) {
+			old_uid = (char*)values->data;
+		}
 		lu_ent_set(ent, LU_USERNAME, uid);
+	}
 	if(gecos)
 		lu_ent_set(ent, LU_GECOS, gecos);
 	if(homeDirectory) {
@@ -163,6 +165,39 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("User %s could not be modified: %s.\n"), user, error->string);
 		return 9;
 	}
+
+	if(change && old_uid && uid) {
+		struct lu_ent *group = NULL;
+		values = lu_groups_enumerate_by_user(ctx, old_uid, NULL, &error);
+		if(error) {
+			lu_error_free(&error);
+		}
+		group = lu_ent_new();
+		for(i = values; i != NULL; i = g_list_next(values)) {
+			if(lu_group_lookup_name(ctx, values->data, ent, &error)) {
+				GList *gid;
+				char *tmp;
+				tmp = g_strdup_printf("%ld", gidNumber);
+				gid = lu_ent_get(ent, LU_GIDNUMBER);
+				if(strcmp(tmp, (char*)gid->data) != 0) {
+					lu_ent_del(ent, LU_MEMBERUID, old_uid);
+					lu_ent_add(ent, LU_MEMBERUID, uid);
+					if(!lu_group_modify(ctx, ent, &error)) {
+						if(error) {
+							lu_error_free(&error);
+						}
+					}
+				}
+				g_free(tmp);
+			} else {
+				if(error) {
+					lu_error_free(&error);
+				}
+			}
+		}
+		g_list_free(values);
+	}
+
 
 	if(change && move_home) {
 		if(oldHomeDirectory == NULL) {

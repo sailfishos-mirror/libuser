@@ -79,9 +79,7 @@ main(int argc, const char **argv)
 	lu_group_default(ctx, name, system_account, ent);
 
 	if(gidNumber != -2) {
-		char *tmp = g_strdup_printf("%ld", gidNumber);
-		lu_ent_set(ent, LU_GIDNUMBER, tmp);
-		g_free(tmp);
+		lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
 	}
 
 	if(lu_group_add(ctx, ent, &error) == FALSE) {

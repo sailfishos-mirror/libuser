@@ -86,7 +86,6 @@ GList *lu_groups_enumerate(struct lu_context *context, const char *pattern, cons
 GList *lu_users_enumerate_by_group(struct lu_context *context, const char *group, const char *module, struct lu_error **error);
 GList *lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const char *module, struct lu_error **error);
 
-
 #ifdef __cplusplus
 };
 #endif

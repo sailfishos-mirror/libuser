@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 	gboolean success = FALSE, group = FALSE, byid = FALSE;
 	int c;
 	struct lu_ent *ent, *tmp;
+	struct lu_error *error = NULL;
 	const char *auth_modules = NULL, *info_modules = NULL;
 	GList *attributes;
 
@@ -54,10 +55,10 @@ int main(int argc, char **argv)
 		}
 	}
 
-	lu = lu_start(NULL, 0, auth_modules, info_modules, lu_prompt_console, NULL, NULL);
+	lu = lu_start(NULL, 0, auth_modules, info_modules, lu_prompt_console, NULL, &error);
 
 	if(lu == NULL) {
-		g_print(gettext("Error initializing lu.\n"));
+		g_print(gettext("Error initializing %s: %s\n"), PACKAGE, error->string);
 		return 1;
 	}
 
@@ -67,20 +68,20 @@ int main(int argc, char **argv)
 	if(group) {
 		if(byid) {
 			g_print(gettext("Searching for group with ID %d.\n"), c);
-			success = lu_group_lookup_id(lu, c, tmp, NULL);
+			success = lu_group_lookup_id(lu, c, tmp, &error);
 		} else {
 			g_print(gettext("Searching for group named %s.\n"),
 				argv[optind]);
-			success = lu_group_lookup_name(lu, argv[optind], tmp, NULL);
+			success = lu_group_lookup_name(lu, argv[optind], tmp, &error);
 		}
 	} else {
 		if(byid) {
 			g_print(gettext("Searching for user with ID %d.\n"), c);
-			success = lu_user_lookup_id(lu, c, tmp, NULL);
+			success = lu_user_lookup_id(lu, c, tmp, &error);
 		} else {
 			g_print(gettext("Searching for user named %s.\n"),
 				argv[optind]);
-			success = lu_user_lookup_name(lu, argv[optind], tmp, NULL);
+			success = lu_user_lookup_name(lu, argv[optind], tmp, &error);
 		}
 	}
 
@@ -93,12 +94,8 @@ int main(int argc, char **argv)
 		for(a = attributes; a && a->data; a = g_list_next(a)) {
 			if(lu_ent_get(ent, (char*) a->data) != NULL) {
 				GList *l = NULL;
-				for(l = lu_ent_get(ent, (char*) a->data);
-				    l;
-				    l = g_list_next(l)) {
-					g_print(" %s = \"%s\"\n",
-						(char*) a->data,
-						(char*) l->data);
+				for(l = lu_ent_get(ent, (char*) a->data); l; l = g_list_next(l)) {
+					g_print(" %s = \"%s\"\n", (char*) a->data, (char*) l->data);
 				}
 			}
 		}

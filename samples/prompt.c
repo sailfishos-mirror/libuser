@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 		{"main/password1", "Password1", TRUE, g_strdup("anonymous"), NULL, NULL},
 		{"main/password2", "Password2", FALSE, g_strdup("anonymous"), NULL, NULL},
 	};
+	struct lu_error *error = NULL;
 	int i;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
 	if(lu_prompt_console(prompts,
 			     sizeof(prompts) / sizeof(prompts[0]),
 			     NULL,
-			     NULL)) {
+			     &error)) {
 		g_print(gettext("Prompts succeeded.\n"));
 		for(i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
 			if(prompts[i].value) {

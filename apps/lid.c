@@ -100,8 +100,8 @@ main(int argc, const char **argv)
 	if(group) {
 		values = lu_users_enumerate_by_group(ctx, user, NULL, &error);
 		if(values) {
+			ent = lu_ent_new();
 			for(l = values; l && l->data; l = g_list_next(l)) {
-				ent = lu_ent_new();
 				if(!nameonly && lu_user_lookup_name(ctx, (char*)l->data, ent, &error)) {
 					i = lu_ent_get(ent, LU_UIDNUMBER);
 					if(i) {
@@ -115,15 +115,16 @@ main(int argc, const char **argv)
 					}
 					g_print(" %s\n", (char*)l->data);
 				}
-				lu_ent_free(ent);
+				lu_ent_clear_all(ent);
 			}
+			lu_ent_free(ent);
 			g_list_free(values);
 		}
 	} else {
 		values = lu_groups_enumerate_by_user(ctx, user, NULL, &error);
 		if(values) {
+			ent = lu_ent_new();
 			for(l = values; l && l->data; l = g_list_next(l)) {
-				ent = lu_ent_new();
 				if(!nameonly && lu_group_lookup_name(ctx, (char*)l->data, ent, &error)) {
 					i = lu_ent_get(ent, LU_GIDNUMBER);
 					if(i) {
@@ -137,8 +138,9 @@ main(int argc, const char **argv)
 					}
 					g_print(" %s\n", (char*)l->data);
 				}
-				lu_ent_free(ent);
+				lu_ent_clear_all(ent);
 			}
+			lu_ent_free(ent);
 			g_list_free(values);
 		}
 	}

@@ -104,9 +104,7 @@ main(int argc, const char **argv)
 		ent = lu_ent_new();
 		lu_group_default(ctx, name, system_account, ent);
 		if(gidNumber != -2) {
-			char *tmp = g_strdup_printf("%ld", gidNumber);
-			lu_ent_set(ent, LU_GIDNUMBER, tmp);
-			g_free(tmp);
+			lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
 		}
 		if(lu_group_add(ctx, ent, &error) == FALSE) {
 			fprintf(stderr, _("Error creating group for %s: %s.\n"), name, error->string);
@@ -124,14 +122,10 @@ main(int argc, const char **argv)
 	if(gecos)
 		lu_ent_set(ent, LU_GECOS, gecos);
 	if(uidNumber != -2) {
-		char *tmp = g_strdup_printf("%ld", uidNumber);
-		lu_ent_set(ent, LU_UIDNUMBER, tmp);
-		g_free(tmp);
+		lu_ent_set_numeric(ent, LU_UIDNUMBER, uidNumber);
 	}
 	if(gidNumber != -2) {
-		char *tmp = g_strdup_printf("%ld", gidNumber);
-		lu_ent_set(ent, LU_GIDNUMBER, tmp);
-		g_free(tmp);
+		lu_ent_set_numeric(ent, LU_GIDNUMBER, gidNumber);
 	}
 	if(homeDirectory)
 		lu_ent_set(ent, LU_HOMEDIRECTORY, homeDirectory);

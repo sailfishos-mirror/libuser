@@ -73,26 +73,34 @@ rm -fr $RPM_BUILD_ROOT
 #%attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
-* Tue Aug  7 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Thu Aug  9 2001 Nalin Dahyabhai <nalin@redhat.com> 0.26-1
+- lusermod: change user name in groups the user is a member of during renames
+- lgroupmod: change primary GID for users who are in the group during renumbers
+- ldap.c: handle new attributes more gracefully if possible
+
+* Tue Aug  7 2001 Nalin Dahyabhai <nalin@redhat.com> 0.25.1-1
 - rename the quota source files to match the library, which clears up a
   file conflict with older quota packages
 - add ja translation files
 
 * Thu Aug  2 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add lu_ent_clear_all() function
+
+* Thu Aug  2 2001 Nalin Dahyabhai <nalin@redhat.com> 0.25-1
 - close up some memory leaks
 - add the ability to include resident versions of modules in the library
 
-* Wed Aug  1 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Wed Aug  1 2001 Nalin Dahyabhai <nalin@redhat.com> 0.24-4
 - fix incorrect Py_BuildValue invocation in python module
 
-* Tue Jul 31 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Tue Jul 31 2001 Nalin Dahyabhai <nalin@redhat.com> 0.24-3
 - stop leaking descriptors in the files module
 - speed up user creation by reordering some checks for IDs being in use
 - update the shadowLastChanged attribute when we set a password
 - adjust usage of getXXXXX_r where needed
 - fix assorted bugs in python binding which break prompting
 
-* Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com> 0.23-1
 - install sv translation
 - make lpasswd prompt for passwords when none are given on the command line
 - make sure all user-visible strings are marked for translation
@@ -109,24 +117,24 @@ rm -fr $RPM_BUILD_ROOT
 - add lchfn and lchsh apps
 - add %%d substitution to libuser.conf
 
-* Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com> 0.21-1
 - finish adding a sasldb module which manipulates a sasldb file
 - add users_enumerate_by_group and groups_enumerate_by_users
 
-* Wed Jul 25 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Wed Jul 25 2001 Nalin Dahyabhai <nalin@redhat.com> 
 - luserdel: remove the user's primary group if it has the same name as
   the user and has no members configured (-G disables)
 - fixup some configure stuff to make libuser.conf get generated correctly
   even when execprefix isn't specified
 
-* Tue Jul 24 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Tue Jul 24 2001 Nalin Dahyabhai <nalin@redhat.com> 0.20-1
 - only call the auth module when setting passwords (oops)
 - use GTrees instead of GHashTables for most internal tables
 - files: complain properly about unset attributes
 - files: group passwords are single-valued, not multiple-valued
 - add lpasswd app, make sure all apps start up popt with the right names
 
-* Mon Jul 23 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Mon Jul 23 2001 Nalin Dahyabhai <nalin@redhat.com> 0.18-1
 - actually make the new optional arguments optional
 - fix lu_error_new() to actually report errors right
 - fix part of the python bindings
@@ -136,7 +144,7 @@ rm -fr $RPM_BUILD_ROOT
   cache these things
 - add an optional "mvhomedir" argument to userModify (python)
 
-* Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com> 0.16.1-1
 - finish home directory population
 - implement home directory moving
 - change entity get semantics in the python bindings to allow default values for .get()

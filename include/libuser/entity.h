@@ -70,14 +70,17 @@ void lu_ent_free(struct lu_ent *ent);
 
 GList *lu_ent_get_original(struct lu_ent *ent, const char *attribute);
 void lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr, long val);
 void lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val);
 void lu_ent_clear_original(struct lu_ent *ent, const char *attr);
 
 GList *lu_ent_get(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has(struct lu_ent *ent, const char *attribute);
 void lu_ent_set(struct lu_ent *ent, const char *attr, const char *val);
+void lu_ent_set_numeric(struct lu_ent *ent, const char *attr, long val);
 void lu_ent_add(struct lu_ent *ent, const char *attr, const char *val);
 void lu_ent_clear(struct lu_ent *ent, const char *attr);
+void lu_ent_clear_all(struct lu_ent *ent);
 void lu_ent_del(struct lu_ent *ent, const char *attr, const char *val);
 GList *lu_ent_get_attributes(struct lu_ent *ent);
 

@@ -52,6 +52,28 @@ enum interact_indices {
 	LU_LDAP_MAX,
 };
 
+static struct {
+	char *attribute;
+	char *objectclass;
+} attribute_map[] = {
+	{LU_SHADOWLASTCHANGE, "shadowAccount"},
+	{LU_SHADOWMIN, "shadowAccount"},
+	{LU_SHADOWMAX, "shadowAccount"},
+	{LU_SHADOWWARNING, "shadowAccount"},
+	{LU_SHADOWINACTIVE, "shadowAccount"},
+	{LU_SHADOWEXPIRE, "shadowAccount"},
+	{LU_SHADOWFLAG, "shadowAccount"},
+
+	{LU_CN, "inetOrgPerson"},
+	{LU_GIVENNAME, "inetOrgPerson"},
+	{LU_SN, "inetOrgPerson"},
+	{LU_ROOMNUMBER, "inetOrgPerson"},
+	{LU_TELEPHONENUMBER, "inetOrgPerson"},
+	{LU_HOMEPHONE, "inetOrgPerson"},
+
+	{LU_KRBNAME, "kerberosSecurityObject"},
+};
+
 static char *
 lu_ldap_user_attributes[] = {
 	LU_OBJECTCLASS,
@@ -521,6 +543,70 @@ dump_mods(LDAPMod **mods)
 	}
 }
 
+static void
+lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx, const char *dn, struct lu_ent *ent)
+{
+	char *attrs[] = {
+		LU_OBJECTCLASS,
+		NULL,
+	};
+	char **old_values, **new_values;
+	int i, j;
+	LDAPMod mod;
+	LDAPMod *mods[] = {&mod, NULL};
+	GList *attributes, *a;
+	LDAPMessage *res = NULL;
+
+	if(ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, NULL, attrs, FALSE, &res) == LDAP_SUCCESS) {
+		LDAPMessage *entry;
+		entry = ldap_first_entry(ctx->ldap, res);
+		if(entry != NULL) {
+
+			memset(&mod, 0, sizeof(mod));
+
+			old_values = ldap_get_values(ctx->ldap, entry, LU_OBJECTCLASS);
+
+			new_values = g_malloc0(sizeof(char*) * 2);
+			mod.mod_op = LDAP_MOD_ADD;
+			mod.mod_type = LU_OBJECTCLASS;
+			mod.mod_vals.modv_strvals = new_values;
+
+			attributes = lu_ent_get_attributes(ent);
+			for(a = attributes; a != NULL; a = g_list_next(a)) {
+#ifdef DEBUG
+				g_print("User `%s' has attribute `%s'.\n", dn, (char*)a->data);
+#endif
+				for(i = 0; i < sizeof(attribute_map) / sizeof(attribute_map[0]); i++) {
+					if(lu_strcmp(a->data, attribute_map[i].attribute) == 0) {
+#ifdef DEBUG
+						g_print("User `%s' needs to be a `%s'.\n", dn, attribute_map[i].objectclass);
+#endif
+						for(j = 0; (old_values != NULL) && (j < ldap_count_values(old_values)); j++) {
+							if(lu_strcmp(attribute_map[i].objectclass, old_values[j]) == 0) {
+#ifdef DEBUG
+								g_print("User `%s' is a `%s'.\n", dn, old_values[j]);
+#endif
+								break;
+							}
+						}
+						if(j == ldap_count_values(old_values)) {
+							new_values[0] = attribute_map[i].objectclass;
+#ifdef DEBUG
+							g_print("Adding user `%s' to class `%s'.\n", dn, new_values[0]);
+#endif
+							ldap_modify_s(ctx->ldap, dn, mods);
+						}
+					}
+				}
+			}
+
+			g_free(new_values);
+			ldap_value_free(old_values);
+		}
+		ldap_msgfree(res);
+	}
+}
+
 static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	    const char *configKey, const char *def, char **attributes, struct lu_error **error)
@@ -584,9 +670,18 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(err == LDAP_SUCCESS) {
 		ret = TRUE;
 	} else {
-		lu_error_new(error, lu_error_write, _("error modifying LDAP directory entry: %s"), ldap_err2string(err));
-		free_ent_mods(mods);
-		return FALSE;
+		if(err == LDAP_OBJECT_CLASS_VIOLATION) {
+			/* AAAARGH!  The application decided it wanted to add some new attributes!  Damage control.... */
+			lu_ldap_fudge_objectclasses(ctx, dn, ent);
+			err = ldap_modify_ext_s(ctx->ldap, dn, mods, &server, &client);
+		}
+		if(err == LDAP_SUCCESS) {
+			ret = TRUE;
+		} else {
+			lu_error_new(error, lu_error_write, _("error modifying LDAP directory entry: %s"), ldap_err2string(err));
+			free_ent_mods(mods);
+			return FALSE;
+		}
 	}
 
 	if(name && name->data && old_name && old_name->data) {

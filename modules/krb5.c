@@ -37,7 +37,6 @@
 #define LU_KRB5_REALM 0
 #define LU_KRB5_PRINC 1
 #define LU_KRB5_PASSWORD 2
-#define LU_KRBNAME "krbName"
 #define LU_KRBPASSWORD "{crypt}*K*"
 
 #ifndef KRB5_SUCCESS

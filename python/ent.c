@@ -46,9 +46,6 @@ convert_glist_pystringlist(GList *strings)
 
 	ret = PyList_New(0);
 	for(i = strings; i != NULL; i = g_list_next(i)) {
-		if(ret == NULL) {
-			ret = PyList_New(0);
-		}
 		PyList_Append(ret, PyString_FromString((char*)i->data));
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "adding `%s' to string list\n", (char*)i->data);
@@ -56,7 +53,7 @@ convert_glist_pystringlist(GList *strings)
 	}
 
 	DEBUG_EXIT;
-	return ret ?: Py_BuildValue("");
+	return ret;
 }
 
 static PyObject *
@@ -173,7 +170,7 @@ libuser_entity_get(struct libuser_entity *self, PyObject *args)
 			return default_value;
 		} else {
 			DEBUG_EXIT;
-			return Py_BuildValue("");
+			return PyList_New(0);
 		}
 	}
 }
@@ -241,6 +238,18 @@ libuser_entity_clear(struct libuser_entity *self, PyObject *args)
 		return NULL;
 	}
 	lu_ent_clear(self->ent, arg);
+	return Py_BuildValue("");
+}
+
+static PyObject *
+libuser_entity_clear_all(struct libuser_entity *self, PyObject *args)
+{
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTuple(args, "")) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	lu_ent_clear_all(self->ent);
 	return Py_BuildValue("");
 }
 
@@ -368,16 +377,18 @@ libuser_entity_methods[] = {
 	 "check if the entity has a given attribute"},
 	{"get", (PyCFunction)libuser_entity_get, METH_VARARGS,
 	 "get a list of the values for a given attribute"},
+	{"keys", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS},
+	{"clear", (PyCFunction)libuser_entity_clear, METH_VARARGS,
+	 "clear the list of values for a given attribute"},
 	{"set", (PyCFunction)libuser_entity_set, METH_VARARGS,
 	 "set the list of values for a given attribute"},
 	{"add", (PyCFunction)libuser_entity_add, METH_VARARGS,
 	 "add a value to the current list of values for a given attribute"},
-	{"clear", (PyCFunction)libuser_entity_clear, METH_VARARGS,
-	 "clear the list of values for a given attribute"},
+	{"clear_all", (PyCFunction)libuser_entity_clear_all, METH_VARARGS,
+	 "clear all values for all attributes"},
 	{"revert", (PyCFunction)libuser_entity_revert, METH_VARARGS,
 	 "revert the list of values for a given attribute to the values which "
 	 "were set when the entity was looked up"},
-	{"keys", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS},
 	{NULL, NULL, 0},
 };
 

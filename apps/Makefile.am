@@ -1,5 +1,5 @@
 bin_PROGRAMS = lchfn lchsh
-sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd
+sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel lpasswd lnewusers
 
 include $(top_srcdir)/Makefile.extra
 
@@ -55,3 +55,8 @@ lpasswd_SOURCES = \
 	apputil.c \
 	apputil.h \
 	lpasswd.c
+
+lnewusers_SOURCES = \
+	apputil.c \
+	apputil.h \
+	lnewusers.c

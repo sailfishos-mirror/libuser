@@ -18,6 +18,9 @@
 #ifndef modules_h
 #define modules_h
 #include "../include/libuser/user.h"
+
+#define LU_KRBNAME "krbName"
+
 struct lu_module *lu_files_init(struct lu_context *context, struct lu_error **error);
 struct lu_module *lu_shadow_init(struct lu_context *context, struct lu_error **error);
 struct lu_module *lu_krb5_init(struct lu_context *context, struct lu_error **error);

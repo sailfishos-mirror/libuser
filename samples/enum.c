@@ -29,6 +29,7 @@
 int main(int argc, char **argv)
 {
 	struct lu_context *lu;
+	struct lu_error *error = NULL;
 	gboolean group = FALSE;
 	int c;
 	const char *module = NULL;
@@ -49,17 +50,17 @@ int main(int argc, char **argv)
 		}
 	}
 
-	lu = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, NULL);
+	lu = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, &error);
 
 	if(lu == NULL) {
-		g_print(gettext("Error initializing lu.\n"));
+		g_print(gettext("Error initializing %s: %s.\n"), PACKAGE, error ? error->string : gettext("unknown error"));
 		return 1;
 	}
 
 	if(group == FALSE) {
-		entities = lu_users_enumerate(lu, argv[optind], module, NULL);
+		entities = lu_users_enumerate(lu, argv[optind], module, &error);
 	} else {
-		entities = lu_groups_enumerate(lu, argv[optind], module, NULL);
+		entities = lu_groups_enumerate(lu, argv[optind], module, &error);
 	}
 
 	for(l = entities; l != NULL; l = g_list_next(l)) {

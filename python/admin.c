@@ -271,8 +271,7 @@ libuser_admin_init_group(PyObject *self, PyObject *args, PyObject *kwargs)
 
 static PyObject *
 libuser_admin_generic(PyObject *self, PyObject *args, PyObject *kwargs,
-		      gboolean (*fn)(struct lu_context *, struct lu_ent *,
-			             struct lu_error **error))
+		      gboolean (*fn)(struct lu_context *, struct lu_ent *, struct lu_error **error))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
