@@ -150,7 +150,7 @@ msgstr "Пароль неактивний:\t%s\n"
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "обліковий рахунок дійсний до:\t%s\n"
+msgstr "Обліковий рахунок дійсний до:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
@@ -226,11 +226,11 @@ msgstr "Зміна оболонки для %s.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr "нова оболонка"
+msgstr "Нова оболонка"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr "оболонку змінено.\n"
+msgstr "Оболонку змінено.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -252,7 +252,7 @@ msgstr "Група %s не існує.\n"
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr "Групу %s неможливо видалити.\n"
+msgstr "Групу %s не вдається видалити.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
@@ -266,17 +266,17 @@ msgstr "Помилка встановлення пароля для групи %
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr "Групу %s неможливо заблокувати.\n"
+msgstr "Групу %s не вдається заблокувати.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "Групу %s неможливо розблокувати.\n"
+msgstr "Групу %s не вдається розблокувати.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "Групу %s неможливо змінити.\n"
+msgstr "Групу %s не вдається змінити.\n"
 
 #: apps/lid.c:81
 #, c-format
@@ -306,7 +306,7 @@ msgstr "Помилка відкривання `%s': %s.\n"
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"помилка створення облікового рахунку для `%s':неправильний формат рядка.\n"
+"Помилка створення облікового рахунку для `%s':неправильний формат рядка.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
@@ -396,7 +396,7 @@ msgstr "Помилка створення поштової черги.\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "Користувача %s неможливо видалити: %s.\n"
+msgstr "Користувача %s не вдається видалити: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
@@ -416,7 +416,7 @@ msgstr "Група с GID %ld не мала назви.\n"
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "Групу %s видалити неможливо: %s.\n"
+msgstr "Групу %s видалити не вдається: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
@@ -436,22 +436,22 @@ msgstr "Помилка встановлення пароля користува�
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Користувача %s неможливо заблокувати: %s.\n"
+msgstr "Користувача %s не вдається заблокувати: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Користувача %s неможливо розблокувати: %s.\n"
+msgstr "Користувача %s не вдається розблокувати: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Користувача %s неможливо змінити: %s.\n"
+msgstr "Користувача %s не вдається змінити: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Групу %s неможливо змінити: %s.\n"
+msgstr "Групу %s не вдається змінити: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
@@ -466,12 +466,12 @@ msgstr "Немає нового домашнього каталогу для %s.
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "Помилка перемішення %s у %s: %s.\n"
+msgstr "Помилка переміщення %s у %s: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "неможливо відкрити конфігураційний файл `%s': %s"
+msgstr "не вдається відкрити конфігураційний файл `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -479,7 +479,7 @@ msgstr "виконано"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr "модуль заборонений в налаштуваннях"
+msgstr "модуль заборонений в конфігурації"
 
 #: lib/error.c:46
 msgid "generic error"
@@ -614,13 +614,13 @@ msgstr "помилка блокування файлу: %s"
 #: modules/files.c:2569 modules/files.c:2586
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "неможливо відкрити `%s': %s"
+msgstr "не вдається відкрити `%s': %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "неможливо отримати відомості про `%s': %s"
+msgstr "не вдається отримати відомості про `%s': %s"
 
 #: modules/files.c:137
 #, c-format
@@ -635,7 +635,7 @@ msgstr "резервний файл `%s' існує та не є звичайн�
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "неможливо прочитати з `%s': %s"
+msgstr "не вдається прочитати з `%s': %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
@@ -645,7 +645,7 @@ msgstr "запис вже існує у файлі"
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "неможливо записати `%s': %s"
+msgstr "не вдається записати `%s': %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
@@ -659,7 +659,7 @@ msgstr "виконується без привілей суперкористу�
 
 #: modules/files.c:2905
 msgid "no shadow file present -- disabling"
-msgstr "немає файла shadow -- заборонено"
+msgstr "немає файлу shadow -- заборонено"
 
 #: modules/krb5.c:105
 #, c-format
@@ -685,12 +685,12 @@ msgstr "структура не має атрибутів %s або %s "
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "сутність не має атрибутів %s або %s"
+msgstr "предикат не має атрибутів %s або %s"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "сутність було створено без атрибутів %s або %s"
+msgstr "предикат було створено без атрибутів %s або %s"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
@@ -700,7 +700,7 @@ msgstr "помилка читання інформації для `%s' з kerber
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "сутність не має атрибута %s"
+msgstr "предикат не має атрибута %s"
 
 #: modules/krb5.c:642
 #, c-format
@@ -726,19 +726,19 @@ msgstr "помилка ініціалізації бібліотеки ldap"
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "неможливо встановити LDAP протокол для версії %d"
+msgstr "не вдається встановити LDAP протокол для версії %d"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr "неможливо узгодити TLS с сервером LDAP"
+msgstr "не вдається узгодити TLS с сервером LDAP"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
-msgstr "неможливо під'єднатись до сервера LDAP"
+msgstr "не вдається під'єднатись до сервера LDAP"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr "неможливо виконати пошук на LDAP сервері"
+msgstr "не вдається виконати пошук на LDAP сервері"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
@@ -765,7 +765,7 @@ msgstr "об'єкт користувача створений без `%s'"
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
-msgstr "неможливо перетворити внутрішні дані у LDAPMods"
+msgstr "не вдається перетворити внутрішні дані у LDAPMods"
 
 #: modules/ldap.c:1271 modules/ldap.c:1483
 #, c-format
@@ -809,7 +809,7 @@ msgstr "помилка встановлення паролю в каталозі
 
 #: modules/ldap.c:2243
 msgid "LDAP Server Name"
-msgstr "Ім'я сервера LDAP"
+msgstr "Назва сервера LDAP"
 
 #: modules/ldap.c:2249
 msgid "LDAP Search Base DN"
@@ -821,7 +821,7 @@ msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2262
 msgid "LDAP Bind Password"
-msgstr "LDAP Bind Password"
+msgstr "LDAP Bind пароль"
 
 #: modules/ldap.c:2268
 msgid "LDAP SASL User"
@@ -915,7 +915,7 @@ msgstr "Імена стандартних атрибутів користува�
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "отримання стандартних атрибутів користувача:\n"
+msgstr "Отримання стандартних атрибутів користувача:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
