@@ -2,7 +2,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -87,6 +87,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Mon Mar 11 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.101-3
+- rebuild in new environment
+
 * Thu Mar  7 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.101-2
 - add missing buildreqs on cyrus-sasl-devel and openldap-devel (#59456)
 - translation refresh
