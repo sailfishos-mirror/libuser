@@ -6,7 +6,7 @@ License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 BuildPrereq: pam-devel, popt, python-devel, cyrus-sasl-devel
-BuildPrereq: doxygen, sgml-tools
+BuildPrereq: doxygen, jade, sgml-tools
 Summary: A user account administration library.
 
 %description
@@ -79,7 +79,10 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
-* Mon Aug 20 2001 Nalin Dahyabhai <nalin@redhat.com> 0.29-1
+* Tue Aug 21 2001 Nalin Dahyabhai <nalin@redhat.com> 0.29-1
+- add an explicit build dependency on jade (for the docs)
+
+* Mon Aug 20 2001 Nalin Dahyabhai <nalin@redhat.com>
 - HUP nscd on modifications
 - userutil.c: mmap files we're reading for probable speed gain
 - userutil.c: be conservative with the amount of random data we read
