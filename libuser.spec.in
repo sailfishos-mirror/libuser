@@ -97,7 +97,7 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Fri Sep 05 Dan Walsh <dwalsh@redhat.com> 0.51.7-4.sel
+* Fri Sep 05 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-4.sel
 - Turn on SELinux 
 
 * Wed Aug 06 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-3
