@@ -78,7 +78,7 @@ rm -fr $RPM_BUILD_ROOT
 - speed up user creation by reordering some checks for IDs being in use
 - update the shadowLastChanged attribute when we set a password
 - adjust usage of getXXXXX_r where needed
-- fix bug in python binding which breaks prompting
+- fix assorted bugs in python binding which break prompting
 
 * Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
 - install sv translation

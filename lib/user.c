@@ -131,7 +131,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 
 			if(module == NULL) {
 				/* module initializer sets the error */
-				if((error != NULL) && ((*error)->code == lu_error_config_disabled)) {
+				if((error != NULL) && (*error != NULL) && ((*error)->code == lu_error_config_disabled)) {
 					lu_error_free(error);
 				} else {
 					g_module_close(handle);

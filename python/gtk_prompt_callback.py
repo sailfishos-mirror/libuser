@@ -29,7 +29,7 @@ def libuser_gtk_prompt_callback(prompts):
 		
 	table.show_all()
 
-	dialog.run_and_close()
+	print dialog.run_and_close()
 
 	for (prompt, entry) in ret_list:
 		prompt.value = entry.get_text()

@@ -289,8 +289,10 @@ libuser_admin_generic(PyObject *self, PyObject *args, PyObject *kwargs,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_RuntimeError, error->string);
-		lu_error_free(&error);
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : _("unknown error"));
+		if(error) {
+			lu_error_free(&error);
+		}
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -337,8 +339,10 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_SystemError, error ? error->string : PACKAGE " error");
-		lu_error_free(&error);
+		PyErr_SetString(PyExc_SystemError, error ? error->string : _("unknown error"));
+		if(error) {
+			lu_error_free(&error);
+		}
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -386,8 +390,10 @@ libuser_admin_create_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error creating home directory for user");
-		lu_error_free(&error);
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : _("error creating home directory for user"));
+		if(error) {
+			lu_error_free(&error);
+		}
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -421,8 +427,10 @@ libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error removing home directory for user");
-		lu_error_free(&error);
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : _("error removing home directory for user"));
+		if(error) {
+			lu_error_free(&error);
+		}
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -471,8 +479,10 @@ libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error moving home directory for user");
-		lu_error_free(&error);
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : _("error moving home directory for user"));
+		if(error) {
+			lu_error_free(&error);
+		}
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -889,7 +899,9 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	if(context == NULL) {
 		PyErr_SetString(PyExc_SystemError, error ? error->string : "error initializing " PACKAGE);
-		lu_error_free(&error);
+		if(error) {
+			lu_error_free(&error);
+		}
 		Py_DECREF(ret);
 		return NULL;
 	}

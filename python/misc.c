@@ -38,7 +38,7 @@ static struct libuser_prompt *libuser_prompt_new(void);
 static gboolean
 libuser_admin_python_prompter(struct lu_prompt *prompts, int count, gpointer callback_data, struct lu_error **error)
 {
-	PyObject *list = NULL, *tuple = NULL;
+	PyObject *list = NULL, *tuple = NULL, *ret;
 	PyObject **prompt_data = (PyObject**) callback_data;
 	int i;
 
@@ -64,11 +64,18 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count, gpointer cal
 				PyTuple_SetItem(tuple, i + 1, PyTuple_GetItem(prompt_data[1], i));
 			}
 		}
-		PyObject_CallObject(prompt_data[0], tuple);
+		ret = PyObject_CallObject(prompt_data[0], tuple);
 		if(PyErr_Occurred()) {
 			PyErr_Print();
 			Py_DECREF(list);
 			DEBUG_EXIT;
+			lu_error_new(error, lu_error_generic, _("error while prompting for necessary information"));
+			return FALSE;
+		}
+		if(!PyObject_IsTrue(ret)) {
+			Py_DECREF(ret);
+			Py_DECREF(list);
+			lu_error_new(error, lu_error_generic, _("error while prompting for necessary information"));
 			return FALSE;
 		}
 		for(i = 0; i < count; i++) {
@@ -76,6 +83,7 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count, gpointer cal
 			prompt = (struct libuser_prompt*) PyList_GetItem(list, i);
 			prompts[i] = prompt->prompt;
 		}
+		Py_DECREF(ret);
 		Py_DECREF(list);
 	}
 
