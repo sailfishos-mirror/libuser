@@ -1,18 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of de.po to Deutsch
 # Copyright (C) 2001 Red Hat, Inc.
 # Claudia Krug <fhonig@redhat.it>, 2001.
+# Bernd Groh <bgroh@redhat.com>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: de\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-04-13 16:05+0200\n"
-"Last-Translator: Harald Hoyer <harald@redhat.de>\n"
-"Language-Team:  <de@li.org>\n"
+"PO-Revision-Date: 2002-12-12 15:15+0100\n"
+"Last-Translator: Bernd Groh <bgroh@redhat.com>\n"
+"Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0beta2\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -405,28 +406,28 @@ msgstr "Fehler beim Lesen vom Terminal"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "Name ist nicht gesetzt"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "Name ist zu kurz"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "Name enthält nicht-ASCII Zeichen"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "Name enthält Kontrollzeichen"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "Name enthält Whitespace-Zeichen"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "Name enthält ungültiges Zeichen `%c'"
 
 #: lib/util.c:200
 #, c-format
@@ -492,8 +493,7 @@ msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
+msgstr "Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -704,3 +704,4 @@ msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
+
