@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2004-11-02 15:45+1000\n"
+"PO-Revision-Date: 2004-11-03 10:43+1000\n"
 "Last-Translator: Michelle J Kim <mkim@redhat.com>\n"
 "Language-Team:  <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -236,9 +236,9 @@ msgid "Shell changed.\n"
 msgstr "쉘이 변경되었습니다.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "쉘이 변경되었습니다.\n"
+msgstr "쉘이 변경되지 않았습니다: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -250,9 +250,9 @@ msgid "No group name specified.\n"
 msgstr "그룹 이름이 지정되지 않았습니다.\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "그룹 생성에 실패했습니다.\n"
+msgstr "그룹 생성에 실패했습니다: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -260,9 +260,9 @@ msgid "Group %s does not exist.\n"
 msgstr "%s 그룹이 존재하지 않습니다.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "%s 그룹은 삭제할 수 없습니다: %s.\n"
+msgstr "%s 그룹을 삭제할 수 없습니다: %s\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -270,24 +270,24 @@ msgid "Both -L and -U specified.\n"
 msgstr "-L 와 -U 이 함께 지정되었습니다.\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s 그룹의 암호를 설정하는데 실패했습니다.\n"
+msgstr "%s 그룹의 암호를 설정하는데 실패했습니다: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "%s 그룹을 정지시킬 수 없습니다.\n"
+msgstr "%s 그룹을 잠글 수 없습니다: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "%s 그룹의 정지를 해제할 수 없습니다.\n"
+msgstr "%s 그룹 잠금을 해제할 수 없습니다: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "%s 그룹을 편집할 수 없습니다: %s.\n"
+msgstr "%s 그룹을 편집할 수 없습니다: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -325,9 +325,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "`%s'에 GID %ld를 사용하여 그룹을 생성하는데 오류 발생.\n"
+msgstr "`%s'에 GID %ld를 사용하여 그룹을 생성하는데 오류 발생: : %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -388,9 +388,9 @@ msgid "Password changed.\n"
 msgstr "암호가 변경되었습니다.\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "`%s' 그룹을 생성하는 도중 오류 발생.\n"
+msgstr "`%s' 그룹을 생성하는 도중 오류 발생: %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -488,14 +488,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
+msgstr "설정 파일 `%s'에 stat 명령 실행하는데 실패했습니다: %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
+msgstr "설정 파일 `%s'(을)를 읽을 수 없습니다: %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -634,24 +634,24 @@ msgid "error locking file: %s"
 msgstr "`' 파일을 잠그는 도중 오류 발생: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "`%s'에 작성할 수 없음: %s"
+msgstr "`%s'의 보안 문맥을 읽어오는데 실패했습니다: %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "`%s'(을)를 표시(stat)할 수 없음: %s"
+msgstr "기본 보안 문맥을 설정하지 못했습니다: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "`%s'에 작성할 수 없음: %s"
+msgstr "기본 보안 문맥을 `%s'으로 설정할 수 없습니다: %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "`%s'에 작성할 수 없음: %s"
+msgstr "기본 보안 문맥을 `%s'으로 재설정할 수 없습니다: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -702,9 +702,8 @@ msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "`%s'의 암호를 설정하는 도중 오류가 발생했습니다"
+msgstr "암호를 암호화하는 도중 오류 발생"
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -792,9 +791,9 @@ msgid "could not bind to LDAP server"
 msgstr "LDAP 서버와 연결할 수 없습니다"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP 서버와 연결할 수 없습니다"
+msgstr "LDAP 서버와 연결할 수 없습니다, `%s'로 첫번째 시도: %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
@@ -828,9 +827,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "내부 데이타를 LDAPMods로 변환할 수 없습니다"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "LDAP 디렉토리 목록(entry)의 이름을 변경하는 도중 오류 발생: %s\n"
+msgstr "LDAP 디렉토리 항목을 생성하는 도중 오류 발생: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -838,9 +837,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 목록(entry)을 편집하는 도중 오류 발생: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "LDAP 디렉토리 목록(entry)의 이름을 변경하는 도중 오류 발생: %s\n"
+msgstr "LDAP 디렉토리 항목의 이름을 변경하는 도중 오류 발생: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -848,9 +847,9 @@ msgid "object had no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "LDAP 디렉토리 목록(entry)을 삭제하는 도중 오류 발생: %s.\n"
+msgstr "LDAP 디렉토리 항목을 삭제하는 도중 오류 발생: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -958,15 +957,15 @@ msgstr "목록(Entry)을 찾을 수 없습니다.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "프롬프트 성공.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "프롬프트 실패.\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
-msgstr "기본 사용자 개체 클래스:\n"
+msgstr "기본 사용자 객체 클래스:\n"
 
 #: samples/testuser.c:83
 msgid "Default user attribute names:\n"
