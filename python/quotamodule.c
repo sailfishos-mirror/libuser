@@ -171,7 +171,7 @@ quota_struct_getattr(struct quota_struct *self, char *attr)
 	}
 
 	DEBUG_EXIT;
-	return Py_FindMethod(quota_struct_methods, self, attr);
+	return Py_FindMethod(quota_struct_methods, (PyObject*)self, attr);
 }
 
 static int
@@ -182,44 +182,43 @@ quota_struct_setattr(struct quota_struct *self, char *attr,
 		const char *name;
 		char **value;
 	} named_string_attributes[] = {
-		{
-		"user", &self->user}, {
-		"group", &self->group}, {
-	"special", &self->special},};
+		{"user", &self->user},
+		{"group", &self->group},
+		{"special", &self->special},
+	};
 	struct {
 		const char *name;
 		int32_t *value;
 	} named_int_attributes[] = {
-		{
-		"inode_usage", &self->inode_usage}, {
-		"inode_soft", &self->inode_soft}, {
-		"inode_hard", &self->inode_hard}, {
-		"inode_grace", &self->inode_grace}, {
-		"block_usage", &self->block_usage}, {
-		"block_soft", &self->block_soft}, {
-		"block_hard", &self->block_hard}, {
-		"block_grace", &self->block_grace}, {
-		"inodeUsage", &self->inode_usage}, {
-		"inodeSoft", &self->inode_soft}, {
-		"inodeHard", &self->inode_hard}, {
-		"inodeGrace", &self->inode_grace}, {
-		"blockUsage", &self->block_usage}, {
-		"blockSoft", &self->block_soft}, {
-		"blockHard", &self->block_hard}, {
-	"blockGrace", &self->block_grace},};
+		{"inode_usage", &self->inode_usage},
+		{"inode_soft", &self->inode_soft},
+		{"inode_hard", &self->inode_hard},
+		{"inode_grace", &self->inode_grace},
+		{"block_usage", &self->block_usage},
+		{"block_soft", &self->block_soft},
+		{"block_hard", &self->block_hard},
+		{"block_grace", &self->block_grace},
+		{"inodeUsage", &self->inode_usage},
+		{"inodeSoft", &self->inode_soft},
+		{"inodeHard", &self->inode_hard},
+		{"inodeGrace", &self->inode_grace},
+		{"blockUsage", &self->block_usage},
+		{"blockSoft", &self->block_soft},
+		{"blockHard", &self->block_hard},
+		{"blockGrace", &self->block_grace},
+	};
 	int i;
 
 	DEBUG_ENTRY;
 	if ((self->user == NULL) && (self->group == NULL)) {
-		PyErr_SetString(PyExc_RuntimeError,
-				"invalid quota object");
+		PyErr_SetString(PyExc_RuntimeError, "invalid quota object");
 		DEBUG_EXIT;
 		return -1;
 	}
 
 	for (i = 0;
-	     i < sizeof(named_string_attributes) /
-	     sizeof(named_string_attributes[0]); i++) {
+	     i < G_N_ELEMENTS(named_string_attributes);
+	     i++) {
 		if (strcmp(attr, named_string_attributes[i].name) == 0) {
 			if (!PyString_Check(args)) {
 				PyErr_SetString(PyExc_TypeError,
@@ -227,18 +226,19 @@ quota_struct_setattr(struct quota_struct *self, char *attr,
 				DEBUG_EXIT;
 				return -1;
 			}
-			if (*named_string_attributes[i].value)
+			if (*named_string_attributes[i].value) {
 				free(*named_string_attributes[i].value);
+			}
 			*(named_string_attributes[i].value) =
-			    strdup(PyString_AsString(args));
+				strdup(PyString_AsString(args));
 			DEBUG_EXIT;
 			return 0;
 		}
 	}
 
 	for (i = 0;
-	     i < sizeof(named_int_attributes) /
-	     sizeof(named_int_attributes[0]); i++) {
+	     i < G_N_ELEMENTS(named_int_attributes);
+	     i++) {
 		if (strcmp(attr, named_int_attributes[i].name) == 0) {
 			if (!PyInt_Check(args)) {
 				PyErr_SetString(PyExc_TypeError,
@@ -247,7 +247,7 @@ quota_struct_setattr(struct quota_struct *self, char *attr,
 				return -1;
 			}
 			*(named_int_attributes[i].value) =
-			    PyInt_AsLong(args);
+				PyInt_AsLong(args);
 			DEBUG_EXIT;
 			return 0;
 		}
@@ -356,8 +356,7 @@ quotamodule_get(PyObject * self, PyObject * args, PyObject * kwargs)
 	if (special == NULL) {
 		specials = (type == USRQUOTA) ?
 		    quota_get_specials_user() : quota_get_specials_group();
-		for (i = 0; (specials != NULL) && (specials[i] != NULL);
-		     i++) {
+		for (i = 0; (specials != NULL) && (specials[i] != NULL); i++) {
 			if ((type ==
 			     USRQUOTA ? quota_get_user(id, specials[i],
 						       &inode_usage,
@@ -380,6 +379,7 @@ quotamodule_get(PyObject * self, PyObject * args, PyObject * kwargs)
 			}
 			PyDict_SetItemString(dict, specials[i],
 					     (type == USRQUOTA ?
+					      (PyObject*)
 					      quota_struct_new(name, NULL,
 							       specials[i],
 							       inode_usage,
@@ -389,8 +389,9 @@ quotamodule_get(PyObject * self, PyObject * args, PyObject * kwargs)
 							       block_usage,
 							       block_soft,
 							       block_hard,
-							       block_grace)
-					      : quota_struct_new(NULL,
+							       block_grace) :
+					      (PyObject*)
+					      quota_struct_new(NULL,
 								 name,
 								 specials
 								 [i],
@@ -407,6 +408,7 @@ quotamodule_get(PyObject * self, PyObject * args, PyObject * kwargs)
 	} else {
 		PyDict_SetItemString(dict, special,
 				     (type == USRQUOTA ?
+				      (PyObject*)
 				      quota_struct_new(name, NULL, special,
 						       inode_usage,
 						       inode_soft,
@@ -416,6 +418,7 @@ quotamodule_get(PyObject * self, PyObject * args, PyObject * kwargs)
 						       block_soft,
 						       block_hard,
 						       block_grace) :
+				      (PyObject*)
 				      quota_struct_new(NULL, name, special,
 						       inode_usage,
 						       inode_soft,
