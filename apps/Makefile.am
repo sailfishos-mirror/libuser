@@ -2,7 +2,7 @@ sbin_PROGRAMS = lchage luseradd lusermod luserdel lgroupadd lgroupmod lgroupdel
 
 include $(top_srcdir)/Makefile.extra
 
-LDADD = ../lib/libuser.la @GLIB_LIBS@
+LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
 
 lchage_SOURCES = \
 	lchage.c

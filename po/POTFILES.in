@@ -11,5 +11,10 @@ lib/usercfg.c
 lib/userent.c
 lib/usersc.c
 lib/userutil.c
+modules/files.c
+modules/krb5.c
+modules/ldap.c
+modules/util.c
+python/libusermodule.c
 samples/lookup.c
 samples/testuser.c

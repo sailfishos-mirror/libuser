@@ -32,6 +32,7 @@ files useful for developing applications with libuser.
 %configure
 make
 make -C docs/sgml
+make doc
 
 %clean
 rm -fr $RPM_BUILD_ROOT

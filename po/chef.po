@@ -1,276 +1,267 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-05-03 00:58-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8-bit\n"
+msgstr "POT-Creation-Date: 2001-05-03 00:58-0400\n"
 
 #: apps/apputil.c:100 apps/apputil.c:108 apps/apputil.c:116
 msgid "Feature not implemented: "
-msgstr ""
+msgstr "Feetoore-a nut implemented: "
 
 #: apps/apputil.c:101
 #, c-format
 msgid "NOT creating home directory '%s'.\n"
-msgstr ""
+msgstr "NOT creeteeng hume-a durectury '%s'.\n"
 
 #: apps/apputil.c:109
 #, c-format
 msgid "NOT moving %s to %s.\n"
-msgstr ""
+msgstr "NOT mufeeng %s tu %s.\n"
 
 #: apps/apputil.c:117
 #, c-format
 msgid "NOT removing %s.\n"
-msgstr ""
+msgstr "NOT remufeeng %s.\n"
 
 #: apps/lchage.c:103 apps/luseradd.c:85 apps/luserdel.c:59 apps/lusermod.c:80
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[OoPTION...] user"
 
 #: apps/lchage.c:109 apps/luseradd.c:91 apps/luserdel.c:65 apps/lusermod.c:86
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "Nu user neme-a speceeffied.\n"
 
 #: apps/lchage.c:121 apps/luserdel.c:77 apps/lusermod.c:103
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "User %s dues nut ixeest.\n"
 
 #: apps/lchage.c:128
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "Meenimoom:\t%d\n"
 
 #: apps/lchage.c:132
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "Mexeemoom:\t%d\n"
 
 #: apps/lchage.c:136
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "Verneeng:\t%d\n"
 
 #: apps/lchage.c:140
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "Inecteefe-a:\t%d\n"
 
 #: apps/lchage.c:144 apps/lchage.c:152 apps/lchage.c:162 apps/lchage.c:172
 msgid "Never"
-msgstr ""
+msgstr "Nefer"
 
 #: apps/lchage.c:147
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "Lest Chunge-a:\t%s\n"
 
 #: apps/lchage.c:156
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "Pessvurd Ixpures:\t%s\n"
 
 #: apps/lchage.c:167
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "Pessvurd Inecteefe-a:\t%s\n"
 
 #: apps/lchage.c:175
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "Eccuoont Ixpures:\t%s\n"
 
 #: apps/lchage.c:204
 #, c-format
 msgid "Aging information for %s could not be modified.\n"
-msgstr ""
+msgstr "Egeeng inffurmeshun fur %s cuoold nut be-a mudeeffied.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:53 apps/lgroupmod.c:77
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[OoPTION...] gruoop"
 
 #: apps/lgroupadd.c:72 apps/lgroupdel.c:59 apps/lgroupmod.c:83
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "Nu gruoop neme-a speceeffied.\n"
 
 #: apps/lgroupadd.c:108
 msgid "Group creation failed.\n"
-msgstr ""
+msgstr "Gruoop creeshun feeeled.\n"
 
 #: apps/lgroupdel.c:71 apps/lgroupmod.c:100
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "Gruoop %s dues nut ixeest.\n"
 
 #: apps/lgroupdel.c:76
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr ""
+msgstr "Gruoop %s cuoold nut be-a deleted.\n"
 
 #: apps/lgroupmod.c:93 apps/lusermod.c:96
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "But -L und -U speceeffied.\n"
 
 #: apps/lgroupmod.c:180
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Gruoop %s cuoold nut be-a lucked.\n"
 
 #: apps/lgroupmod.c:188
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Gruoop %s cuoold nut be-a unlucked.\n"
 
 #: apps/lgroupmod.c:195
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Gruoop %s cuoold nut be-a mudeeffied.\n"
 
 #: apps/luseradd.c:120
 #, c-format
 msgid "Error creating group for %s.\n"
-msgstr ""
+msgstr "Irrur creeteeng gruoop fur %s.\n"
 
 #: apps/luseradd.c:165
 msgid "Account creation failed.\n"
-msgstr ""
+msgstr "Eccuoont creeshun feeeled.\n"
 
 #: apps/luseradd.c:190
 #, c-format
 msgid "Bad UID for %s.\n"
-msgstr ""
+msgstr "Bed UID fur %s.\n"
 
 #: apps/luseradd.c:194
 #, c-format
 msgid "Bad GID for %s.\n"
-msgstr ""
+msgstr "Bed GID fur %s.\n"
 
 #: apps/luseradd.c:204
 #, c-format
 msgid "No home directory for %s.\n"
-msgstr ""
+msgstr "Nu hume-a durectury fur %s.\n"
 
 #: apps/luseradd.c:210
 #, c-format
 msgid "Error creating %s.\n"
-msgstr ""
+msgstr "Irrur creeteeng %s.\n"
 
 #: apps/luserdel.c:82
 #, c-format
 msgid "User %s could not be deleted.\n"
-msgstr ""
+msgstr "User %s cuoold nut be-a deleted.\n"
 
 #: apps/luserdel.c:90
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s deed nut hefe-a a hume-a durectury.\n"
 
 #: apps/luserdel.c:95
 #, c-format
 msgid "Error removing %s.\n"
-msgstr ""
+msgstr "Irrur remufeeng %s.\n"
 
 #: apps/lusermod.c:132
 #, c-format
 msgid "Error reading old home directory for %s.\n"
-msgstr ""
+msgstr "Irrur reedeeng oold hume-a durectury fur %s.\n"
 
 #: apps/lusermod.c:162
 #, c-format
 msgid "User %s could not be locked.\n"
-msgstr ""
+msgstr "User %s cuoold nut be-a lucked.\n"
 
 #: apps/lusermod.c:170
 #, c-format
 msgid "User %s could not be unlocked.\n"
-msgstr ""
+msgstr "User %s cuoold nut be-a unlucked.\n"
 
 #: apps/lusermod.c:177
 #, c-format
 msgid "User %s could not be modified.\n"
-msgstr ""
+msgstr "User %s cuoold nut be-a mudeeffied.\n"
 
 #: apps/lusermod.c:183
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "Nu oold hume-a durectury fur %s.\n"
 
 #: apps/lusermod.c:188
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "Nu noo hume-a durectury fur %s.\n"
 
 #: apps/lusermod.c:193
 #, c-format
 msgid "Error moving %s to %s.\n"
-msgstr ""
+msgstr "Irrur mufeeng %s tu %s.\n"
 
 #: lib/user.c:77
 #, c-format
 msgid "error loading libuser module '%s': %s."
-msgstr ""
+msgstr "irrur luedeeng leebooser mudoole-a '%s': %s."
 
 #: lib/user.c:90
 #, c-format
 msgid "no initialization function %s in '%s'."
-msgstr ""
+msgstr "nu ineetielizeshun fooncshun %s in '%s'."
 
 #: lib/user.c:97
 #, c-format
 msgid "error initializing '%s'."
-msgstr ""
+msgstr "irrur ineetielizing '%s'."
 
 #: lib/user.c:108
 #, c-format
 msgid "module version mismatch in %s"
-msgstr ""
+msgstr "mudoole-a ferseeun meesmetch in %s"
 
 #: lib/usercfg.c:57
 #, c-format
 msgid "Could not open configuration file '%s'."
-msgstr ""
+msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 
 #: lib/userent.c:43
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
-msgstr ""
+msgstr "doomp ooff strooct loo_int et %p:\n"
 
 #: lib/userent.c:44
 #, c-format
 msgid " magic = %08x\n"
-msgstr ""
+msgstr " megeec = %08x\n"
 
 #: lib/userent.c:146
 msgid ""
 "\n"
 "Before copy:\n"
 msgstr ""
+"\n"
+"Beffure-a cupy:\n"
 
 #: lib/userent.c:161
 msgid ""
 "\n"
 "After copy:\n"
 msgstr ""
+"\n"
+"Effter cupy:\n"
 
 #: lib/userent.c:293
 #, c-format
 msgid "freeing lu_ent at %p.\n"
-msgstr ""
+msgstr "freeeeng loo_int et %p.\n"
 
 #: modules/files.c:55
-#, c-format
+#, fuzzy, c-format
 msgid "Couldn't open '%s'.\n"
-msgstr ""
+msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 
 #: modules/files.c:60 modules/files.c:100
 #, c-format
@@ -278,9 +269,9 @@ msgid "Couldn't stat '%s'.\n"
 msgstr ""
 
 #: modules/files.c:68
-#, c-format
+#, fuzzy, c-format
 msgid "Couldn't create '%s'.\n"
-msgstr ""
+msgstr "Cuoold nut oopee cunffeegooreshun feele-a '%s'."
 
 #: modules/files.c:75
 #, c-format
@@ -303,14 +294,15 @@ msgstr ""
 
 #: modules/krb5.c:129 modules/krb5.c:192 modules/krb5.c:255 modules/krb5.c:366
 #: modules/krb5.c:412
+#, fuzzy
 msgid "Error initializing Kerberos."
-msgstr ""
+msgstr "Irrur ineetielizing loo.\n"
 
 #: modules/krb5.c:134 modules/krb5.c:208 modules/krb5.c:282 modules/krb5.c:288
 #: modules/krb5.c:382 modules/krb5.c:428
-#, c-format
+#, fuzzy, c-format
 msgid "Error parsing user name '%s' for Kerberos."
-msgstr ""
+msgstr "irrur luedeeng leebooser mudoole-a '%s': %s."
 
 #: modules/krb5.c:201 modules/krb5.c:375 modules/krb5.c:421
 #, c-format
@@ -379,14 +371,14 @@ msgid "Could not convert internals to LDAPMod data.\n"
 msgstr ""
 
 #: modules/ldap.c:514
-#, c-format
+#, fuzzy, c-format
 msgid "Error modifying directory entry: %s.\n"
-msgstr ""
+msgstr "Irrur reedeeng oold hume-a durectury fur %s.\n"
 
 #: modules/ldap.c:527
-#, c-format
+#, fuzzy, c-format
 msgid "Error renaming directory entry: %s.\n"
-msgstr ""
+msgstr "Irrur reedeeng oold hume-a durectury fur %s.\n"
 
 #: modules/ldap.c:566
 #, c-format
@@ -394,9 +386,9 @@ msgid "Account object had no '%s'.\n"
 msgstr ""
 
 #: modules/ldap.c:581
-#, c-format
+#, fuzzy, c-format
 msgid "Error removing directory entry: %s.\n"
-msgstr ""
+msgstr "Irrur reedeeng oold hume-a durectury fur %s.\n"
 
 #: modules/ldap.c:682
 msgid "LDAP Server Name"
@@ -428,43 +420,43 @@ msgstr ""
 
 #: samples/lookup.c:61 samples/testuser.c:54
 msgid "Error initializing lu.\n"
-msgstr ""
+msgstr "Irrur ineetielizing loo.\n"
 
 #: samples/lookup.c:70
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr ""
+msgstr "Seercheeng fur gruoop veet ID %d.\n"
 
 #: samples/lookup.c:73
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "Seercheeng fur gruoop nemed %s.\n"
 
 #: samples/lookup.c:79
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr ""
+msgstr "Seercheeng fur user veet ID %d.\n"
 
 #: samples/lookup.c:82
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "Seercheeng fur user nemed %s.\n"
 
 #: samples/lookup.c:108
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "Intry nut fuoond.\n"
 
 #: samples/testuser.c:58
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "Deffoolt user oobject clesses:\n"
 
 #: samples/testuser.c:64
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "Deffoolt user ettreeboote-a nemes:\n"
 
 #: samples/testuser.c:70
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "Getteeng deffoolt user ettreebootes:\n"
 
 #: samples/testuser.c:75
 msgid "Copying user structure:\n"

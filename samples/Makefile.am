@@ -2,7 +2,7 @@ noinst_PROGRAMS = lookup testuser prompt
 
 include $(top_srcdir)/Makefile.extra
 
-LDADD = ../lib/libuser.la @GLIB_LIBS@
+LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
 
 lookup_SOURCES = \
 	lookup.c

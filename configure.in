@@ -1,16 +1,18 @@
 AC_INIT(configure.in)
 AM_INIT_AUTOMAKE(libuser,0.9)
 
-ALL_LINGUAS=
-
 AC_PROG_LN_S
-AM_PROG_LIBTOOL
-AM_GNU_GETTEXT
+AC_PATH_PROG(MAKE,make)
 AC_PROG_MAKE_SET
 AC_PROG_AWK
 
+AM_PROG_LIBTOOL
+
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.10,,,gmodule)
+
+ALL_LINGUAS="chef"
+AM_GNU_GETTEXT
 
 popt=/usr
 AC_ARG_WITH(popt,
@@ -109,3 +111,5 @@ sed \
 	-e "s%@pkglibdir@%${libdir}/${PACKAGE}%" \
 	-e "s%@sysconfdir@%${sysconfdir}%" \
 	< ${srcdir}/libuser.conf.in > libuser.conf
+
+$MAKE -C po -f Makefile.in Makefile
