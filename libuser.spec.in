@@ -36,7 +36,7 @@ files useful for developing applications with libuser.
 	--with-ldap \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python} \
-	--with-html-dir=%{_defaultdocdir}/gtk-doc/html
+	--with-html-dir=%{_datadir}/gtk-doc/html
 make
 
 %clean

@@ -885,6 +885,26 @@ libuser_admin_group_islocked(PyObject *self, PyObject *args,
 					  lu_group_islocked);
 }
 
+/* Remove a user's password.  Trivial wrapper to make sure the right function
+ * gets called. */
+static PyObject *
+libuser_admin_removepass_user(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	DEBUG_CALL;
+	return libuser_admin_wrap_boolean(self, args, kwargs,
+					  lu_user_removepass);
+}
+
+/* Remove a group's password.  Trivial wrapper to make sure the right function
+ * gets called. */
+static PyObject *
+libuser_admin_removepass_group(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	DEBUG_CALL;
+	return libuser_admin_wrap_boolean(self, args, kwargs,
+					  lu_group_removepass);
+}
+
 /* Set a user's password.  Trivial wrapper to make sure the right setpass
  * function gets called. */
 static PyObject *
@@ -1212,6 +1232,13 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"setpassGroup", (PyCFunction) libuser_admin_setpass_group,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "set the password for the group account associated with the object"},
+
+	{"removepassUser", (PyCFunction) libuser_admin_removepass_user,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "remove the password for the user account associated with the object"},
+	{"removepassGroup", (PyCFunction) libuser_admin_removepass_group,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "remove the password for the group account associated with the object"},
 
 	{"enumerateUsers", (PyCFunction) libuser_admin_enumerate_users,
 	 METH_VARARGS | METH_KEYWORDS,
