@@ -11,9 +11,9 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-03 09:52+1000\n"
-"Last-Translator: Yelitza Louze <ylouze@redhat.com>\n"
-"Language-Team:  <es@li.org>\n"
+"PO-Revision-Date: 2004-12-10 10:54-0200\n"
+"Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
+"Language-Team:  <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgstr "Error en la lectura `%s': %s "
 #: apps/apputil.c:137
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "error al crear `%s': %s"
+msgstr "Error al crear `%s': %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
@@ -66,7 +66,7 @@ msgstr "Contexto de usuario desconocido"
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr "No se pudo establecer el contexto predeterminado para  /etc/passwd\n"
+msgstr "No se pudo establecer el contexto predeterminado para s/etc/passwd\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
@@ -432,9 +432,9 @@ msgstr "Rechazando la creación de cuenta con UID 0.\n"
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Error en la creación de un grupo para  `%s' con GID  %ld: %s\n"
+msgstr "Error en la creación de un grupo para  `%s' con GID  %jd: %s\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
@@ -511,9 +511,9 @@ msgstr "Contraseña modificada.\n"
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "El grupo %s no existe.\n"
+msgstr "El grupo %jd no existe.\n"
 
 # apps/luseradd.c:112
 # apps/luseradd.c:112
@@ -558,16 +558,16 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s no tenía un número gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "No existe ningún grupo con %ld de GID, no se eliminará.\n"
+msgstr "No existe ningún grupo con %jd de GID, no se eliminará.\n"
 
 # apps/luserdel.c:105
 # apps/luserdel.c:105
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "El grupo %ld de GID non tenía un nombre de grupo.\n"
+msgstr "El grupo de GID %jd no tenía un nombre de grupo.\n"
 
 # apps/luserdel.c:110
 # apps/luserdel.c:110
@@ -1289,9 +1289,9 @@ msgstr ""
 # samples/lookup.c:69
 # samples/lookup.c:69
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Búsqueda del grupo con ID %d.\n"
+msgstr "Buscando grupo con ID %jd.\n"
 
 # samples/lookup.c:72
 # samples/lookup.c:72
