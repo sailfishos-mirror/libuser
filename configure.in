@@ -15,7 +15,7 @@ AM_PROG_LIBTOOL
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.9,,,gmodule)
 
-ALL_LINGUAS="chef"
+ALL_LINGUAS="chef no"
 AM_GNU_GETTEXT
 
 popt=/usr
