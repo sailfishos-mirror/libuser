@@ -1,0 +1,623 @@
+# SLOVENIAN TRANSLATION OF LIBUSER.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Roman Maurer <roman.maurer@amis.net>, 2001.
+# $Id$
+# $Source$
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser 7.2\n"
+"POT-Creation-Date: 2001-08-07 12:05-0400\n"
+"PO-Revision-Date: 2001-08-21 23:32+0200\n"
+"Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
+"Language-Team: Slovenian <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.8\n"
+
+#: apps/apputil.c:58
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "Napaka pri branju ,%s`: %s"
+
+#: apps/apputil.c:63
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "Napaka pri ustvarjanju ,%s`: %s"
+
+#: apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "Napaka pri odstranjevanju ,%s`: %s"
+
+#: apps/apputil.c:324
+msgid "Internal error.\n"
+msgstr "Notranja napaka.\n"
+
+#: apps/apputil.c:332
+msgid "Error initializing PAM.\n"
+msgstr "Napaka pri inicializaciji PAM.\n"
+
+#: apps/apputil.c:339
+#, c-format
+msgid "Authentication failed for %s.\n"
+msgstr "Avtentifikacija za %s ni uspela.\n"
+
+#: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
+msgid "[OPTION...] user"
+msgstr "[IZBIRA...] uporabnik"
+
+#: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
+msgid "No user name specified.\n"
+msgstr "Uporabni¹ko ime ni bilo doloèeno.\n"
+
+#: apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
+#: apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
+#: apps/lusermod.c:82
+#, c-format
+msgid "Error initializing %s: %s.\n"
+msgstr "Napaka pri inicializaciji %s: %s.\n"
+
+#: apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
+#: apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
+#: apps/lusermod.c:84
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "Napaka pri inicializaciji %s.\n"
+
+#: apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "Uporabnik %s ne obstaja.\n"
+
+#: apps/lchage.c:124
+msgid "Account is locked.\n"
+msgstr "Raèun je zaklenjen.\n"
+
+#: apps/lchage.c:126
+msgid "Account is not locked.\n"
+msgstr "Raèun ni zaklenjen.\n"
+
+#: apps/lchage.c:130
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "Minimum:\t%d\n"
+
+#: apps/lchage.c:134
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "Maksimum:\t%d\n"
+
+#: apps/lchage.c:138
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "Opozorilo:\t%d\n"
+
+#: apps/lchage.c:142
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "Nedejaven:\t%d\n"
+
+#: apps/lchage.c:146 apps/lchage.c:154 apps/lchage.c:162 apps/lchage.c:170
+msgid "Never"
+msgstr "Nikoli"
+
+#: apps/lchage.c:149
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "Zadnja sprememba:\t%s\n"
+
+#: apps/lchage.c:156
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "Geslo poteèe:\t%s\n"
+
+#: apps/lchage.c:165
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "Geslo nedejavno:\t%s\n"
+
+#: apps/lchage.c:172
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "Raèun poteèe:\t%s\n"
+
+#: apps/lchage.c:201
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Podatkov o staranju za %s ni bilo moè spremeniti.\n"
+
+#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
+msgid "[OPTION...] group"
+msgstr "[IZBIRA...] skupina"
+
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
+msgid "No group name specified.\n"
+msgstr "Ime skupine ni bilo doloèeno.\n"
+
+#: apps/lgroupadd.c:88
+msgid "Group creation failed.\n"
+msgstr "Izdelava skupine ni uspela.\n"
+
+#: apps/lgroupdel.c:76 apps/lgroupmod.c:96
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "Skupina %s ne obstaja.\n"
+
+#: apps/lgroupdel.c:81
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "Skupine %s ni moè izbrisati.\n"
+
+#: apps/lgroupmod.c:89 apps/lusermod.c:90
+msgid "Both -L and -U specified.\n"
+msgstr "Doloèeni sta bili -L in -U hkrati.\n"
+
+#: apps/lgroupmod.c:155 apps/lgroupmod.c:165
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "Gesla za skupino %s ni bilo moè nastaviti.\n"
+
+#: apps/lgroupmod.c:174
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "Skupina %s ne more biti zaklenjena.\n"
+
+#: apps/lgroupmod.c:182
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "Skupina %s ne more biti odklenjena.\n"
+
+#: apps/lgroupmod.c:189
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "Skupine %s ni moè spremeniti.\n"
+
+#: apps/luseradd.c:112
+#, c-format
+msgid "Error creating group for %s: %s.\n"
+msgstr "Napaka pri ustvarjanju skupine za %s: %s.\n"
+
+#: apps/luseradd.c:159
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "Izdelava raèuna ni uspela: %s.\n"
+
+#: apps/luseradd.c:176
+#, c-format
+msgid "Bad UID for %s.\n"
+msgstr "Slaba UID za %s.\n"
+
+#: apps/luseradd.c:180
+#, c-format
+msgid "Bad GID for %s.\n"
+msgstr "Slaba GID za %s.\n"
+
+#: apps/luseradd.c:190
+#, c-format
+msgid "No home directory for %s.\n"
+msgstr "Ni domaèega imenika za %s.\n"
+
+#: apps/luseradd.c:194
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "Napaka pri ustvarjanju %s: %s.\n"
+
+#: apps/luserdel.c:87
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Uporabnika %s ni moè izbrisati: %s.\n"
+
+#: apps/luserdel.c:94
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s ni imel ¹tevila gid.\n"
+
+#: apps/luserdel.c:99
+#, c-format
+msgid "Group #%d does not exist.\n"
+msgstr "Skupina #%d ne obstaja.\n"
+
+#: apps/luserdel.c:105
+#, c-format
+msgid "Group #%d did not have a group name.\n"
+msgstr "Skupina #%d ni imela imena skupine.\n"
+
+#: apps/luserdel.c:110
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Skupine %s ni moè izbrisati: %s.\n"
+
+#: apps/luserdel.c:122
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s ni imel(a) domaèega imenika.\n"
+
+#: apps/luserdel.c:126
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "Napaka pri odstranjevanju %s: %s.\n"
+
+#: apps/lusermod.c:125
+#, c-format
+msgid "Error reading old home directory for %s: %s.\n"
+msgstr "Napaka pri branju starega domaèega imenika za %s: %s.\n"
+
+#: apps/lusermod.c:133 apps/lusermod.c:142
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Neuspe¹no nastavljanje gesla za uporabnika %s: %s.\n"
+
+#: apps/lusermod.c:150
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "Uporabnika %s ni moè zakleniti: %s.\n"
+
+#: apps/lusermod.c:157
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Uporabnika %s ni moè odkleniti: %s.\n"
+
+#: apps/lusermod.c:163
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "Uporabnika %s ni moè spremeniti: %s.\n"
+
+#: apps/lusermod.c:169
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "Ni starega domaèega imenika za %s.\n"
+
+#: apps/lusermod.c:173
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "Ni novega domaèega imenika za %s.\n"
+
+#: apps/lusermod.c:177
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Napaka pri premikanju %s v %s: %s.\n"
+
+#: lib/user.c:161
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "ni inicializacijske funkcije %s v ,%s`"
+
+#: lib/user.c:186
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "neujemanje razlièice modula v ,%s`"
+
+#: lib/usercfg.c:56
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "ni moè odpreti nastavitvene datoteke ,%s`: %s"
+
+#: lib/userent.c:45
+#, c-format
+msgid "dump of struct lu_ent at %p:\n"
+msgstr "izmet struct lu_ent pri %p:\n"
+
+#: lib/userent.c:46
+#, c-format
+msgid " magic = %08x\n"
+msgstr " magic = %08x\n"
+
+#: lib/userent.c:47
+#, c-format
+msgid " type = %s\n"
+msgstr " tip = %s\n"
+
+#: lib/userent.c:47
+msgid "user"
+msgstr "uporabnik"
+
+#: lib/userent.c:47
+msgid "group"
+msgstr "skupina"
+
+#: lib/userent.c:47
+msgid "unknown"
+msgstr "neznano"
+
+#: lib/userent.c:263
+msgid ""
+"\n"
+"Before copy:\n"
+msgstr ""
+"\n"
+"Pred prepisovanjem:\n"
+
+#: lib/userent.c:277
+msgid ""
+"\n"
+"After copy:\n"
+msgstr ""
+"\n"
+"Po prepisovanju:\n"
+
+#: lib/userent.c:442
+#, c-format
+msgid "freeing lu_ent at %p.\n"
+msgstr "spro¹èanje lu_ent pri %p.\n"
+
+#: lib/userutil.c:177
+#, c-format
+msgid "error locking file: %s"
+msgstr "napaka pri zaklepanju datoteke: %s"
+
+#: modules/files.c:109 modules/files.c:316 modules/files.c:573
+#: modules/files.c:753 modules/files.c:904 modules/files.c:1068
+#: modules/files.c:1141 modules/files.c:1273 modules/files.c:1365
+#: modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
+#: modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
+#: modules/files.c:1593
+#, c-format
+msgid "couldn't open `%s': %s"
+msgstr "ni moè odpreti ,%s`: %s"
+
+#: modules/files.c:123 modules/files.c:147 modules/files.c:178
+#: modules/files.c:586 modules/files.c:917
+#, c-format
+msgid "couldn't stat `%s': %s"
+msgstr "ni moè ugotoviti stanja ,%s`: %s"
+
+#: modules/files.c:130
+#, c-format
+msgid "error creating `%s': %s"
+msgstr "napaka pri ustvarjanju ,%s`: %s"
+
+#: modules/files.c:140
+#, c-format
+msgid "backup file `%s' was a symlink"
+msgstr "rezervna datoteka ,%s` je bila simbolna povezava"
+
+#: modules/files.c:601 modules/files.c:926
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "ni moè brati iz ,%s`: %s"
+
+#: modules/files.c:611 modules/files.c:621
+msgid "entry already present in file"
+msgstr "vnos je ¾e v datoteki"
+
+#: modules/files.c:633 modules/files.c:644 modules/files.c:952
+#: modules/files.c:961
+#, c-format
+msgid "couldn't write to `%s': %s"
+msgstr "ni moè pisati v ,%s`: %s"
+
+#: modules/files.c:727 modules/files.c:734 modules/files.c:821
+#: modules/files.c:831
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "entitetni objekt nima atributa %s"
+
+#: modules/files.c:773
+#, c-format
+msgid "entity object has no `%s' attribute"
+msgstr "entitetni objekt nima atributa ,%s`"
+
+#: modules/files.c:1675 modules/files.c:1731
+msgid "not executing with superuser privileges"
+msgstr "ne izvaja se z dovolilnicami skrbnika"
+
+#: modules/files.c:1743
+msgid "no shadow file present -- disabling"
+msgstr "ni datoteke z zastrtimi gesli -- onemogoèam"
+
+#: modules/krb5.c:102
+#, c-format
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "napaka pri prijavljanju v stre¾nik kadm5 za storitev ,%s` v realmu ,%s`: %s"
+
+#: modules/krb5.c:132 modules/krb5.c:189 modules/krb5.c:272 modules/krb5.c:346
+#: modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
+msgid "error initializing kerberos library"
+msgstr "napaka pri inicializaciji knji¾nice kerberos"
+
+#: modules/krb5.c:137 modules/krb5.c:204 modules/krb5.c:297 modules/krb5.c:302
+#: modules/krb5.c:361 modules/krb5.c:406 modules/krb5.c:474 modules/krb5.c:522
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "napaka pri razèlenjevanju uporabni¹kega imena ,%s` za kerberos"
+
+#: modules/krb5.c:198 modules/krb5.c:355 modules/krb5.c:400 modules/krb5.c:468
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "entitetna struktura nima atributov %s ali %s"
+
+#: modules/krb5.c:281
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "entiteta nima atributov %s ali %s"
+
+#: modules/krb5.c:291
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "entiteta je bila narejena brez atributov %s ali %s"
+
+#: modules/krb5.c:413 modules/krb5.c:481
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "napaka pri branju podatkov za ,%s` prek kerberos"
+
+#: modules/krb5.c:516
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "entitena nima atributa %s"
+
+#: modules/krb5.c:547
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "napaka pri nastavljanju gesla za ,%s`"
+
+#: modules/krb5.c:660
+msgid "Kerberos Realm"
+msgstr "Kerberos Realm"
+
+#: modules/krb5.c:665
+msgid "Kerberos Admin Principal"
+msgstr "Glavni skrbnik za Kerberos"
+
+#: modules/krb5.c:680
+msgid "Kerberos Password for Admin Principal"
+msgstr "Geslo Kerberos za glavnega skrbnika"
+
+#: modules/ldap.c:175
+msgid "error initializing ldap library"
+msgstr "napaka pri inicializaciji knji¾nice ldap"
+
+#: modules/ldap.c:193
+#, c-format
+msgid "could not set LDAP protocol to version %d"
+msgstr "protokola LDAP ni bilo moè nastaviti na razlièico %d"
+
+#: modules/ldap.c:199
+msgid "could not negotiate TLS with LDAP server"
+msgstr "ni se bilo moè pogoditi za TLS s stre¾nikom LDAP"
+
+#: modules/ldap.c:213
+msgid "could not bind to LDAP server"
+msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
+
+#: modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
+#: modules/ldap.c:799 modules/ldap.c:880
+msgid "error mapping name to LDAP distinguished name"
+msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje LDAP"
+
+#: modules/ldap.c:318
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje osnova LDAP"
+
+#: modules/ldap.c:364
+msgid "error searching LDAP directory"
+msgstr "napaka pri preiskovanju imenika LDAP"
+
+#: modules/ldap.c:556
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "uporabni¹ki predmet nima atributa %s"
+
+#: modules/ldap.c:562
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "uporabni¹ki predmet je bil ustvarjen brez ,%s`"
+
+#: modules/ldap.c:574
+msgid "could not convert internal data to LDAPMods"
+msgstr "notranjih podatkov ni moè pretvoriti v LDAPMods"
+
+#: modules/ldap.c:587 modules/ldap.c:751
+#, c-format
+msgid "error modifying LDAP directory entry: %s"
+msgstr "napaka pri spreminjanju imeni¹kega vnosa LDAP: %s"
+
+#: modules/ldap.c:600
+#, c-format
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "napaka pri preimenovanju imeni¹kega vnosa LDAP: %s\n"
+
+#: modules/ldap.c:643
+#, c-format
+msgid "object had no %s attribute"
+msgstr "predmet nima atributa %s"
+
+#: modules/ldap.c:660
+#, c-format
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "napaka pri odstranjevanju imeni¹kega vnosa LDAP: %s\n"
+
+#: modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
+#, c-format
+msgid "object has no %s attribute"
+msgstr "predmet nima atributa %s"
+
+#: modules/ldap.c:811
+msgid "no such object in LDAP directory"
+msgstr "takega predmeta ni v imeniku LDAP"
+
+#: modules/ldap.c:828
+#, c-format
+msgid "no `%s' attribute using `%s' scheme found"
+msgstr "ni najti atribut ,%s`, ki bi uporabljal shemo ,%s`"
+
+#: modules/ldap.c:836
+#, c-format
+msgid "no `%s' attribute found"
+msgstr "ni moè najti atributa ,%s`"
+
+#: modules/ldap.c:939
+#, c-format
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "napaka pri nastavljanju gesla v imeniku LDAP za %s: %s"
+
+#: modules/ldap.c:1213
+msgid "LDAP Server Name"
+msgstr "Ime stre¾nika LDAP"
+
+#: modules/ldap.c:1218
+msgid "LDAP Base DN"
+msgstr "LDAP Osnova DN"
+
+#: modules/ldap.c:1223
+msgid "LDAP Bind DN"
+msgstr "LDAP Povezava DN"
+
+#: modules/ldap.c:1228
+msgid "LDAP Bind Password"
+msgstr "Geslo za povezavo z LDAP"
+
+#: modules/ldap.c:1234
+msgid "LDAP SASL User"
+msgstr "Uporabnik SASL v LDAP"
+
+#: modules/ldap.c:1239
+msgid "LDAP SASL Authorization User"
+msgstr "Uporabnik z odobritvijo SASL v LDAP"
+
+#: samples/lookup.c:60 samples/testuser.c:55
+msgid "Error initializing lu.\n"
+msgstr "Napaka pri inicializaciji lu.\n"
+
+#: samples/lookup.c:69
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "I¹èem skupino z ID %d.\n"
+
+#: samples/lookup.c:72
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "I¹èem skupino, imenovano %s.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "I¹èem uporabnika z ID %d.\n"
+
+#: samples/lookup.c:81
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "I¹èem uporabnika, imenovanega %s.\n"
+
+#: samples/lookup.c:107
+msgid "Entry not found.\n"
+msgstr "Vnos ni bil najden.\n"
+
+#: samples/testuser.c:59
+msgid "Default user object classes:\n"
+msgstr "Privzeti predmetni razredi uporabnika:\n"
+
+#: samples/testuser.c:65
+msgid "Default user attribute names:\n"
+msgstr "Privzeta imena atributov uporabnika:\n"
+
+#: samples/testuser.c:71
+msgid "Getting default user attributes:\n"
+msgstr "Dobivamo privete atribute uporabnika:\n"
+
+#: samples/testuser.c:79
+msgid "Copying user structure:\n"
+msgstr "Prepisovanje uporabni¹ke strukture:\n"
+
