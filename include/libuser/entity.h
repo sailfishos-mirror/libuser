@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 /* Attributes carried by group structures. */
 #define LU_GROUPNAME		"gr_name"
 #define LU_GROUPPASSWORD	"gr_passwd"
-#define LU_GID			"gr_gid"
+/* #define LU_GIDNUMBER		"gr_gid" */
 #define LU_MEMBERUID		"gr_mem"
 #define LU_ADMINISTRATORUID	"gr_adm"
 

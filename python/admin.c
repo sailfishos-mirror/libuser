@@ -20,8 +20,8 @@
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
-#include <pwd.h>
 #include <grp.h>
+#include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <glib.h>
@@ -31,6 +31,7 @@
 #include "../include/libuser/user_private.h"
 #include "../apps/apputil.h"
 
+/* Boilerplate for the admin object, which wraps a libuser context. */
 static PyMethodDef libuser_admin_user_methods[];
 static PyMethodDef libuser_admin_group_methods[];
 static PyMethodDef libuser_admin_methods[];
@@ -41,15 +42,19 @@ static struct libuser_admin *libuser_admin_new(PyObject * self,
 					       PyObject * args,
 					       PyObject * kwargs);
 
+/* Destroy the object. */
 static void
 libuser_admin_destroy(PyObject * self)
 {
 	struct libuser_admin *me = (struct libuser_admin *) self;
 	int i;
 	DEBUG_ENTRY;
+	/* Free the context. */
 	if (me->ctx != NULL) {
 		lu_end(me->ctx);
+		me->ctx = NULL;
 	}
+	/* Free the prompt data. */
 	for (i = 0;
 	     i < sizeof(me->prompt_data) / sizeof(me->prompt_data[0]);
 	     i++) {
@@ -58,33 +63,38 @@ libuser_admin_destroy(PyObject * self)
 		}
 		me->prompt_data[i] = NULL;
 	}
+	/* Delete the python object. */
 	PyMem_DEL(self);
 	DEBUG_EXIT;
 }
 
+/* Get an attribute of the admin object. */
 static PyObject *
 libuser_admin_getattr(PyObject * self, char *name)
 {
 	struct libuser_admin *me = (struct libuser_admin *) self;
 	DEBUG_ENTRY;
+	/* The prompting function. */
 	if (strcmp(name, "prompt") == 0) {
 		Py_INCREF(me->prompt_data[0]);
 		DEBUG_EXIT;
 		return me->prompt_data[0];
 	}
+	/* The prompting function's arguments. */
 	if (strcmp(name, "prompt_args") == 0) {
 		Py_INCREF(me->prompt_data[1]);
 		DEBUG_EXIT;
 		return me->prompt_data[1];
 	}
+	/* Random other methods or members. */
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Searching for attribute `%s'\n", name);
 #endif
 	DEBUG_EXIT;
-	return Py_FindMethod(libuser_admin_methods, (PyObject *) self,
-			     name);
+	return Py_FindMethod(libuser_admin_methods, (PyObject *) self, name);
 }
 
+/* Set an attribute in the admin object. */
 static int
 libuser_admin_setattr(PyObject * self, const char *attr, PyObject * args)
 {
@@ -94,13 +104,18 @@ libuser_admin_setattr(PyObject * self, const char *attr, PyObject * args)
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "%sSetting attribute `%s'\n", getindent(), attr);
 #endif
+	/* The prompting function. */
 	if (strcmp(attr, "prompt") == 0) {
+		/* If it's a wrapped up function, set the first prompt data
+		 * to the function, and the second to an empty tuple. */
 		if (PyCFunction_Check(args)) {
 			Py_DECREF(me->prompt_data[0]);
 			Py_DECREF(me->prompt_data[1]);
 			me->prompt_data[0] = args;
 			me->prompt_data[1] = Py_BuildValue("");
 		}
+		/* If it's a tuple, the first item is the function, and the
+		 * rest are arguments to pass to it. */
 		if (PyTuple_Check(args)) {
 			Py_DECREF(me->prompt_data[0]);
 			Py_DECREF(me->prompt_data[1]);
@@ -108,17 +123,21 @@ libuser_admin_setattr(PyObject * self, const char *attr, PyObject * args)
 			me->prompt_data[0] = PyTuple_GetItem(args, 0);
 			Py_INCREF(me->prompt_data[0]);
 
-			me->prompt_data[1] =
-			    PyTuple_GetSlice(args, 1, PyTuple_Size(args));
+			me->prompt_data[1] = PyTuple_GetSlice(args, 1,
+							      PyTuple_Size(args));
 			Py_INCREF(me->prompt_data[1]);
 		}
 		DEBUG_EXIT;
 		return 0;
 	}
+	/* If it's just prompting arguments, save them as the second chunk of
+	 * prompting data. */
 	if (strcmp(attr, "prompt_args") == 0) {
 		Py_DECREF(me->prompt_data[1]);
 		me->prompt_data[1] = args;
 		Py_INCREF(me->prompt_data[1]);
+		DEBUG_EXIT;
+		return 0;
 	}
 	PyErr_SetString(PyExc_AttributeError,
 			"no such writable attribute");
@@ -126,6 +145,7 @@ libuser_admin_setattr(PyObject * self, const char *attr, PyObject * args)
 	return -1;
 }
 
+/* Look up a user by name. */
 static PyObject *
 libuser_admin_lookup_user_name(PyObject * self, PyObject * args,
 			       PyObject * kwargs)
@@ -137,22 +157,26 @@ libuser_admin_lookup_user_name(PyObject * self, PyObject * args,
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "s", keywords, &arg)) {
+	/* We expect a single string (no mapping shenanigans here). */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Create the entity to return, and look it up. */
 	ent = lu_ent_new();
 	if (lu_user_lookup_name(me->ctx, arg, ent, &error)) {
+		/* Wrap it up, and return it. */
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
+		/* No such user.  Clean up and bug out. */
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
 }
 
+/* Look up a user give the UID. */
 static PyObject *
 libuser_admin_lookup_user_id(PyObject * self, PyObject * args,
 			     PyObject * kwargs)
@@ -164,22 +188,25 @@ libuser_admin_lookup_user_id(PyObject * self, PyObject * args,
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "i", keywords, &arg)) {
+	/* We expect a single string (no mapping shenanigans here). */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	ent = lu_ent_new();
 	if (lu_user_lookup_id(me->ctx, arg, ent, &error)) {
+		/* Wrap it up, and return it. */
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
+		/* No such user.  Clean up and bug out. */
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
 }
 
+/* Look up a group by name. */
 static PyObject *
 libuser_admin_lookup_group_name(PyObject * self, PyObject * args,
 				PyObject * kwargs)
@@ -191,22 +218,26 @@ libuser_admin_lookup_group_name(PyObject * self, PyObject * args,
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "s", keywords, &arg)) {
+	/* Expect a string. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Try to look up this user. */
 	ent = lu_ent_new();
 	if (lu_group_lookup_name(me->ctx, arg, ent, &error)) {
+		/* Got you!  Wrap and return. */
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
+		/* We've got nothing.  Return nothing. */
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
 }
 
+/* Look up a group by ID. */
 static PyObject *
 libuser_admin_lookup_group_id(PyObject * self, PyObject * args,
 			      PyObject * kwargs)
@@ -218,22 +249,26 @@ libuser_admin_lookup_group_id(PyObject * self, PyObject * args,
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "i", keywords, &arg)) {
+	/* Expect a number. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Try to look up the group. */
 	ent = lu_ent_new();
 	if (lu_group_lookup_id(me->ctx, arg, ent, &error)) {
+		/* Wrap the answer up. */
 		DEBUG_EXIT;
 		return libuser_wrap_ent(ent);
 	} else {
+		/* Clean up and exit, we have nothing to return. */
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	}
 }
 
+/* Create a template user object. */
 static PyObject *
 libuser_admin_init_user(PyObject * self, PyObject * args,
 			PyObject * kwargs)
@@ -241,26 +276,25 @@ libuser_admin_init_user(PyObject * self, PyObject * args,
 	char *arg;
 	int is_system = 0;
 	struct lu_ent *ent;
-	char *keywords[] = { "name", "id", NULL };
+	char *keywords[] = { "name", "is_system", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "s|i", keywords, &arg, &is_system)) {
+	/* We expect a string and an optional flag indicating that the
+	 * user will be a system user. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i",
+					 keywords, &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Create a new user object for the user name, and return it. */
 	ent = lu_ent_new();
-	if (ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, PACKAGE " error");
-		DEBUG_EXIT;
-		return NULL;
-	}
 	lu_user_default(me->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
 
+/* Create a group object. */
 static PyObject *
 libuser_admin_init_group(PyObject * self, PyObject * args,
 			 PyObject * kwargs)
@@ -268,30 +302,30 @@ libuser_admin_init_group(PyObject * self, PyObject * args,
 	char *arg;
 	int is_system = 0;
 	struct lu_ent *ent;
-	char *keywords[] = { "name", "id", NULL };
+	char *keywords[] = { "name", "is_system", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "s|i", keywords, &arg, &is_system)) {
+	/* Expect a string and a flag indicating that the group is to be a
+	 * system group. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|i",
+					 keywords, &arg, &is_system)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Create a defaulted group by this name, and wrap it up. */
 	ent = lu_ent_new();
-	if (ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, PACKAGE " error");
-		DEBUG_EXIT;
-		return NULL;
-	}
 	lu_group_default(me->ctx, arg, is_system, ent);
 	DEBUG_EXIT;
 	return libuser_wrap_ent(ent);
 }
 
+/* Run the given function, using a Python entity passed in as the first
+ * argument to the function.  If the function fails, cause an error. */
 static PyObject *
-libuser_admin_generic(PyObject * self, PyObject * args, PyObject * kwargs,
-		      gboolean(*fn) (struct lu_context *, struct lu_ent *,
-				     struct lu_error ** error))
+libuser_admin_wrap(PyObject * self, PyObject * args, PyObject * kwargs,
+		   gboolean(*fn) (struct lu_context *, struct lu_ent *,
+				  struct lu_error ** error))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
@@ -300,16 +334,20 @@ libuser_admin_generic(PyObject * self, PyObject * args, PyObject * kwargs,
 	PyObject *garbage = NULL;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "O!|O", keywords, &EntityType, &ent,
-	     &garbage)) {
+	/* Expect a Python Entity object and maybe some other stuff we
+	 * don't really care about. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &EntityType, &ent, &garbage)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	/* Try running the function. */
 	if (fn(me->ctx, ent->ent, &error)) {
+		/* It succeeded!  Return None. */
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
+		/* It failed.  Build an exception and return an error. */
 		PyErr_SetString(PyExc_RuntimeError,
 				error ? error->
 				string : _("unknown error"));
@@ -321,30 +359,33 @@ libuser_admin_generic(PyObject * self, PyObject * args, PyObject * kwargs,
 	}
 }
 
+/* Run the given function, using a Python entity passed in as the first
+ * argument to the function.  Return a 1 or 0 depending on the boolean
+ * returned by the function. */
 static PyObject *
-libuser_admin_wrap(PyObject * self, PyObject * args, PyObject * kwargs,
-		   gboolean(*fn) (struct lu_context *, struct lu_ent *,
-				  struct lu_error ** error))
+libuser_admin_wrap_boolean(PyObject * self, PyObject * args, PyObject * kwargs,
+			   gboolean(*fn) (struct lu_context *, struct lu_ent *,
+				  	  struct lu_error ** error))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
+	PyObject *garbage = NULL;
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "O!", keywords, &EntityType, &ent)) {
+	/* Expect a Python Entity object and maybe some other stuff we
+	 * don't really care about. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &EntityType, &ent, &garbage)) {
 		DEBUG_EXIT;
 	}
-	if (fn(me->ctx, ent->ent, &error)) {
-		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
-	} else {
-		DEBUG_EXIT;
-		return Py_BuildValue("i", 0);
-	}
+	/* Run the function. */
+	DEBUG_EXIT;
+	return Py_BuildValue("i", (fn(me->ctx, ent->ent, &error)) ? 1 : 0);
 }
 
+/* Wrap the 
 static PyObject *
 libuser_admin_setpass(PyObject * self, PyObject * args, PyObject * kwargs,
 		      gboolean(*fn) (struct lu_context *, struct lu_ent *,

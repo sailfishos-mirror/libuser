@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <glib.h>
-#include <libuser/user.h>
-#include <libuser/user_private.h>
+#include "../include/libuser/user.h"
+#include "../include/libuser/user_private.h"
 #include <Python.h>
 #include "common.h"
 

@@ -26,7 +26,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <libuser/quota.h>
+#include "../include/libuser/quota.h"
 #include <Python.h>
 #include "debug.h"
 
@@ -101,10 +101,8 @@ quota_struct_copy(struct quota_struct *self, PyObject * args)
 }
 
 PyMethodDef quota_struct_methods[] = {
-	{"copy", (PyCFunction) quota_struct_copy, 0, NULL}
-	,
-	{NULL, NULL, 0, NULL}
-	,
+	{"copy", (PyCFunction) quota_struct_copy, 0, NULL},
+	{NULL, NULL, 0, NULL},
 };
 
 static PyObject *
@@ -114,35 +112,36 @@ quota_struct_getattr(struct quota_struct *self, char *attr)
 		const char *name;
 		const char *value;
 	} named_string_attributes[] = {
-		{
-		"user", self->user}, {
-		"group", self->group}, {
-	"special", self->special},};
+		{"user", self->user},
+		{"group", self->group},
+		{"special", self->special},
+	};
 	struct {
 		const char *name;
 		int32_t value;
 	} named_int_attributes[] = {
-		{
-		"inode_usage", self->inode_usage}, {
-		"inode_soft", self->inode_soft}, {
-		"inode_hard", self->inode_hard}, {
-		"inode_grace", self->inode_grace}, {
-		"block_usage", self->block_usage}, {
-		"block_soft", self->block_soft}, {
-		"block_hard", self->block_hard}, {
-		"block_grace", self->block_grace}, {
-		"inodeUsage", self->inode_usage}, {
-		"inodeSoft", self->inode_soft}, {
-		"inodeHard", self->inode_hard}, {
-		"inodeGrace", self->inode_grace}, {
-		"blockUsage", self->block_usage}, {
-		"blockSoft", self->block_soft}, {
-		"blockHard", self->block_hard}, {
-	"blockGrace", self->block_grace},};
+		{"inode_usage", self->inode_usage},
+		{"inode_soft", self->inode_soft},
+		{"inode_hard", self->inode_hard},
+		{"inode_grace", self->inode_grace},
+		{"block_usage", self->block_usage},
+		{"block_soft", self->block_soft},
+		{"block_hard", self->block_hard},
+		{"block_grace", self->block_grace},
+		{"inodeUsage", self->inode_usage},
+		{"inodeSoft", self->inode_soft},
+		{"inodeHard", self->inode_hard},
+		{"inodeGrace", self->inode_grace},
+		{"blockUsage", self->block_usage},
+		{"blockSoft", self->block_soft},
+		{"blockHard", self->block_hard},
+		{"blockGrace", self->block_grace},
+	};
 	int i;
 
 	DEBUG_ENTRY;
-	if ((self->user == NULL) && (self->group == NULL)) {
+	if ((self->user == NULL) && (self->group == NULL))
+	{
 		PyErr_SetString(PyExc_RuntimeError,
 				"invalid quota object");
 		DEBUG_EXIT;
