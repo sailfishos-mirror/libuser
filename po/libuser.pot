@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-01-09 13:05-0500\n"
+"POT-Creation-Date: 2001-01-12 14:31-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: ENCODING\n"
 
-#: apps/apputil.c:86 apps/apputil.c:94 apps/apputil.c:102
+#: apps/apputil.c:100 apps/apputil.c:108 apps/apputil.c:116
 msgid "Feature not implemented: "
 msgstr ""
 
-#: apps/apputil.c:87
+#: apps/apputil.c:101
 #, c-format
 msgid "NOT creating home directory '%s'.\n"
 msgstr ""
 
-#: apps/apputil.c:95
+#: apps/apputil.c:109
 #, c-format
 msgid "NOT moving %s to %s.\n"
 msgstr ""
 
-#: apps/apputil.c:103
+#: apps/apputil.c:117
 #, c-format
 msgid "NOT removing %s.\n"
 msgstr ""

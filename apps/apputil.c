@@ -32,15 +32,15 @@
 #define UNACCEPTABLE "!*:$,"
 #define ACCEPTABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
 		   "abcdefghijklmnopqrstuvwxyz" \
-		   "0123456789/."
+		   "./0123456789"
 
 static gboolean
 is_acceptable(const char c)
 {
 #ifdef VIOLATE_SUSV2
-	return (strchr(UNACCEPTABLE, output[got]) == NULL);
+	return (strchr(UNACCEPTABLE, c) == NULL);
 #else
-	return (strchr(ACCEPTABLE, output[got]) != NULL);
+	return (strchr(ACCEPTABLE, c) != NULL);
 #endif
 }
 
