@@ -1,4 +1,5 @@
 # 
+#
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Allan Sims <allsi@eau.ee>, 2004.
@@ -7,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-06 16:28+0200\n"
+"PO-Revision-Date: 2004-03-07 13:10+0200\n"
 "Last-Translator: Allan Sims <allsi@eau.ee>\n"
 "Language-Team: Estonian <Eesti>\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +33,7 @@ msgstr "Viga `%s' eemaldamisel:%s"
 
 #: apps/apputil.c:421 apps/apputil.c:425
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Õiguste eemaldamine ebaõnnestus.\n"
 
 #: apps/apputil.c:434
 msgid "Internal error.\n"
@@ -40,17 +41,17 @@ msgstr "Sisemine viga.\n"
 
 #: apps/apputil.c:447
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "Viga PAM lähtestamisel.\n"
 
 #: apps/apputil.c:455 apps/apputil.c:479
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "%s tuvastamine ebaõnnestus.\n"
 
 #: apps/apputil.c:464
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "Sisemine PAM viga `%s'.\n"
 
 #: apps/apputil.c:470
 msgid "User mismatch.\n"
@@ -66,7 +67,7 @@ msgstr "[VALIK...] kasutaja"
 #: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "Viga analüüsides argumente: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
@@ -79,7 +80,7 @@ msgstr "Kasutaja nimi täpsustamata.\n"
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "Viga %s lähtestamisel: %s.\n"
 
 #: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
 #: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
@@ -93,65 +94,65 @@ msgstr ""
 #: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
 #: samples/lookup.c:65
 msgid "unknown error"
-msgstr ""
+msgstr "tundmatu viga"
 
 #: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "Kasutajat %s ei ole olemas.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "Konto on lukustatud.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "Konto ei ole lukustatud.\n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "Miinimum:\t%d\n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "Maksimum:\t%d\n"
 
 #: apps/lchage.c:189
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "Hoiatus:\t%d\n"
 
 #: apps/lchage.c:194
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "Tegevusetu:\t%d\n"
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
-msgstr ""
+msgstr "Mitte kunagi"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "Viimati muudetud:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "Parool aegub:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "Parool on kehtetu:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "Konto aegub:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
@@ -160,7 +161,7 @@ msgstr ""
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[VALIK...] [kasutaja]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
 #, c-format
@@ -176,157 +177,157 @@ msgstr ""
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr ""
+msgstr "Viga %s lähtestamisel.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
-msgstr ""
+msgstr "Täisnimi"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "Perenimi"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "Eesnimi"
 
 #: apps/lchfn.c:214
 msgid "Office"
-msgstr ""
+msgstr "Kontor"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr ""
+msgstr "Kontori telefon"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr ""
+msgstr "Kodune telefon"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr ""
+msgstr "E-Posti aadress"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Osutus infot ei ole muudetud: sisendi viga.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Osutus info on muudetud.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Osutus infot ei ole muudetud: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "Kesta muutmine %s jaoks.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr ""
+msgstr "Uus kesk"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "Kest muudetud.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[VALIK...] grupp"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "Grupi nimi määramata.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
-msgstr ""
+msgstr "Grupi loomine ebaõnnestus.\n"
 
 #: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "Gruppi %s ei ole olemas.\n"
 
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa kustutada.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "Mõlemad -L ja -U on täpsustamata.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr ""
+msgstr "Grupi %s parooli seadmine ebaõnnestus.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa lukustada.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa lukust lahti.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa muuta.\n"
 
 #: apps/lid.c:81
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "Grupi nimi täpsustamata, kasutatakse %s.\n"
 
 #: apps/lid.c:85
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "Grupi nimi täpsustamata, puudub gid %d jaoks nimi.\n"
 
 #: apps/lid.c:93
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "Kasutaja nimi täpsustamata, kasutatakse %s.\n"
 
 #: apps/lnewusers.c:74
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[VALIK...]"
 
 #: apps/lnewusers.c:98
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "Viga `%s' avamisel: %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "Viga konto loomisel `%s' jaoks: rida ebasobivalt vormindatud.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "Segadus konto loomisel kui UID on 0.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr ""
+msgstr "Viga grupi `%s' loomisel kui GID on %ld.\n"
 
 #: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "Viga %s esialgse parooli seadmisel: %s\n"
 
 #: apps/lnewusers.c:310
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "Viga %s kodukataloogi loomisel: %s\n"
 
 #: apps/lnewusers.c:325
 #, c-format
@@ -336,58 +337,58 @@ msgstr ""
 #: apps/lnewusers.c:330
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "Viga kasutajale %s konto loomisel: %s\n"
 
 #: apps/lpasswd.c:86
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s parooli muutmine.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "Uus parool"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "Uus parool (kinnitus)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "Paroolid ei ühti, proovi uuesti.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "Parooli muutmisest loobutud.\n"
 
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "Viga kasutaja %s parooli seadmisel: %s.\n"
 
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "Viga grupi %s parooli seadmisel: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr ""
+msgstr "Parool muudetud.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr ""
+msgstr "Viga grupi `%s' loomisel.\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "Konto loomine ebaõnnestus: %s.\n"
 
 #: apps/luseradd.c:318
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "Viga %s loomisel: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
@@ -396,12 +397,12 @@ msgstr ""
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Kasutajat %s ei saa kustutada: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s ei ole gid numbrit.\n"
 
 #: apps/luserdel.c:125
 #, c-format
