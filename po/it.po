@@ -756,7 +756,8 @@ msgstr ""
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr ""
+"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1212
 #, c-format
@@ -810,7 +811,8 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1701
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr ""
+"errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2243
 msgid "LDAP Server Name"
@@ -925,4 +927,3 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
-
