@@ -75,7 +75,7 @@ rm -fr $RPM_BUILD_ROOT
 %changelog
 * Tue Aug 14 2001 Nalin Dahyabhai <nalin@redhat.com> 0.27-1
 - add ko translation files
-- files.c: fix a heap corruption bug in lock/unlock
+- files.c: fix a heap corruption bug in lock/unlock (#51750)
 - files.c: close a memory leak in reading of files
 
 * Mon Aug 13 2001 Nalin Dahyabhai <nalin@redhat.com>
