@@ -1,13 +1,10 @@
 SUBDIRS = intl po docs lib apps samples python modules
-EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt libuser.g depcomp
+EXTRA_DIST = libuser.spec libuser.conf.in docs/attributes.txt docs/rfc2307.txt docs/sgml/Makefile docs/sgml/libuser.sgml po/Makefile python/ldap-script python/test-script python/quota-script python/modules.txt depcomp docs/reference/libuser.args docs/reference/libuser.hierarchy docs/reference/libuser.signals docs/reference/libuser.types
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig
 
 dist-hook:
 	make -f Makefile.in -C po Makefile
-
-doc:
-	doxygen libuser.g 2> doxygen.out
 
 VERSION=$(shell awk '/Version:/ { print $$2 }' libuser.spec)
 RELEASE=$(shell awk '/Release:/ { print $$2 }' libuser.spec)

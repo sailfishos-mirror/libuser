@@ -10,7 +10,6 @@ lib/config.c
 lib/entity.c
 lib/error.c
 lib/misc.c
-lib/misc.h
 lib/modules.c
 lib/modules.h
 lib/prompt.c

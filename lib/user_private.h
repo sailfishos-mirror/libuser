@@ -243,6 +243,8 @@ struct lu_module {
  * to use when initializing it.  Should fit "lu_%s_init", where the string
  * is the name of the module being loaded (and this should match the "name"
  * attribute of the module structure). */
+#define LU_MODULE_INIT(_fn) extern struct lu_module *\
+_fn (struct lu_context * context, struct lu_error ** error);
 typedef struct lu_module *(*lu_module_init_t) (struct lu_context * context,
 					       struct lu_error ** error);
 

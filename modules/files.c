@@ -37,10 +37,8 @@
 #define DEFAULT_SHADOW_PASSWORD	"x"
 #define DEFAULT_SHELL		"/bin/bash"
 
-struct lu_module *
-libuser_files_init(struct lu_context *context, struct lu_error **error);
-struct lu_module *
-libuser_shadow_init(struct lu_context *context, struct lu_error **error);
+LU_MODULE_INIT(libuser_files_init)
+LU_MODULE_INIT(libuser_shadow_init)
 
 /* Guides for parsing and formatting entries in the files we're looking at.
  * For formatting purposes, these are all arranged in order of ascending

@@ -8,7 +8,7 @@ License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 BuildPrereq: pam-devel, popt, python-devel
-BuildPrereq: doxygen, gtk-doc, jade, linuxdoc-tools
+BuildPrereq: gtk-doc, jade, linuxdoc-tools
 Summary: A user and group account administration library.
 
 %description
@@ -33,14 +33,10 @@ files useful for developing applications with libuser.
 
 %build
 %configure \
+	--with-ldap \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python}
 make
-make -C docs/sgml
-make doc
-make -C generated_docs/latex refman.ps
-rm -f generated_docs/latex/refman.ps.bz2
-bzip2 generated_docs/latex/refman.ps
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -55,7 +51,6 @@ export LD_LIBRARY_PATH
 # Verify that the python modules load.
 pushd $RPM_BUILD_ROOT/%{_libdir}/python%{python}/site-packages/
 python -c "import libuser"
-python -c "import libuserquota"
 popd
 
 %find_lang %{name}
@@ -67,30 +62,24 @@ popd
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING NEWS README TODO docs/*.txt python/modules.txt
-
 %config(noreplace) %{_sysconfdir}/libuser.conf
 
 %attr(0755,root,root) %{_bindir}/*
 %attr(0755,root,root) %{_libdir}/python%{python}/site-packages/*
-%attr(0755,root,root) %{_libdir}/libuser.so.*.*
-%attr(0755,root,root) %{_libdir}/libuser_quota.so.*.*
+%attr(0755,root,root) %{_libdir}/*.so.*.*
 %dir %attr(0755,root,root) %{_libdir}/%{name}
 %attr(0755,root,root) %{_libdir}/%{name}/*.so
 %attr(0755,root,root) %{_sbindir}/*
 
 %files devel
 %defattr(-,root,root)
-%doc generated_docs/html generated_docs/latex/refman.ps.bz2
 %attr(0755,root,root) %dir %{_includedir}/libuser
 %attr(0644,root,root) %{_includedir}/libuser/*
-%attr(0644,root,root) %{_libdir}/libuser.a
-%attr(0755,root,root) %{_libdir}/libuser.so
-%attr(0644,root,root) %{_libdir}/libuser_quota.a
-%attr(0755,root,root) %{_libdir}/libuser_quota.so
+%attr(0644,root,root) %{_libdir}/*.a
+%attr(0644,root,root) %{_libdir}/*.la
+%attr(0755,root,root) %{_libdir}/*.so
 %attr(0644,root,root) %{_mandir}/man3/*
 
-%attr(0644,root,root) %{_libdir}/libuser.la
-%attr(0644,root,root) %{_libdir}/libuser_quota.la
 %attr(0644,root,root) %{_libdir}/pkgconfig/*
 
 %changelog

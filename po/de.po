@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-18 16:05-0500\n"
+"POT-Creation-Date: 2002-01-21 17:31-0500\n"
 "PO-Revision-Date: 2001-08-09 14:20+01:00\n"
 "Last-Translator: Claudia Krug <fhonig@redhat.it>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -525,116 +525,125 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos-Passwort für Admin Principal"
 
-#: modules/ldap.c:232
+#: modules/ldap.c:235
 msgid "error initializing ldap library"
 msgstr "Fehler bei der Initialisierung der ldap-Bibliothek"
 
-#: modules/ldap.c:256
+#: modules/ldap.c:262
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP-Protokoll konnte für Version %d nicht eingestellt werden"
 
-#: modules/ldap.c:265
+#: modules/ldap.c:271
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS-Serververbindung konnte nicht ausgehandelt werden"
 
-#: modules/ldap.c:284
+#: modules/ldap.c:299
 msgid "could not bind to LDAP server"
 msgstr "Konnte nicht zum LDAP Server verbinden"
 
-#: modules/ldap.c:397 modules/ldap.c:809 modules/ldap.c:917 modules/ldap.c:994
-#: modules/ldap.c:1097 modules/ldap.c:1198
+#: modules/ldap.c:312
+#, fuzzy
+msgid "could not search LDAP server"
+msgstr "Konnte nicht zum LDAP Server verbinden"
+
+#: modules/ldap.c:321
+msgid "LDAP server appears to have no root DSE"
+msgstr ""
+
+#: modules/ldap.c:454 modules/ldap.c:868 modules/ldap.c:976
+#: modules/ldap.c:1053 modules/ldap.c:1156 modules/ldap.c:1257
 msgid "error mapping name to LDAP distinguished name"
 msgstr "Fehler von LDAP-DN bei Ermittlung des Namen auf "
 
-#: modules/ldap.c:404
+#: modules/ldap.c:463
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "Fehler von LDAP-Basis-DN bei Ermittlung des Namen"
 
-#: modules/ldap.c:459
+#: modules/ldap.c:518
 msgid "error searching LDAP directory"
 msgstr "Fehler bei der LDAP-Verzeichnis Suche"
 
-#: modules/ldap.c:791
+#: modules/ldap.c:850
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "Benutzerobjekt hatte kein Attribut %s"
 
-#: modules/ldap.c:799
+#: modules/ldap.c:858
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "Benutzerobjekt wurde ohne `%s' erzeugt"
 
-#: modules/ldap.c:817
+#: modules/ldap.c:876
 msgid "could not convert internal data to LDAPMods"
 msgstr "interne Daten konnten nicht in LDAPMods konvertiert werden"
 
-#: modules/ldap.c:841 modules/ldap.c:1038
+#: modules/ldap.c:900 modules/ldap.c:1097
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "Fehler bei der Änderung des LDAP-Verzeichniseintrags: %s"
 
-#: modules/ldap.c:863
+#: modules/ldap.c:922
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "Fehler beim Umbenennen des Verzeichniseintrags: %s\n"
 
-#: modules/ldap.c:908
+#: modules/ldap.c:967
 #, c-format
 msgid "object had no %s attribute"
 msgstr "Objekt hatte kein Attribut %s"
 
-#: modules/ldap.c:929
+#: modules/ldap.c:988
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "Fehler beim Entfernen des LDAP-Verzeichniseintrags: %s.\n"
 
-#: modules/ldap.c:985 modules/ldap.c:1001 modules/ldap.c:1088
-#: modules/ldap.c:1189
+#: modules/ldap.c:1044 modules/ldap.c:1060 modules/ldap.c:1147
+#: modules/ldap.c:1248
 #, c-format
 msgid "object has no %s attribute"
 msgstr "Objekt besitzt kein Attribut %s"
 
-#: modules/ldap.c:1111
+#: modules/ldap.c:1170
 msgid "no such object in LDAP directory"
 msgstr "Kein entsprechendes Objekt in LDAP-Verzeichnis vorhanden"
 
-#: modules/ldap.c:1134
+#: modules/ldap.c:1193
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "kein `%s' Attribut mit `%s' Schema gefunden"
 
-#: modules/ldap.c:1145
+#: modules/ldap.c:1204
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "kein `%s' Attribut gefunden"
 
-#: modules/ldap.c:1276
+#: modules/ldap.c:1335
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Fehler beim Einrichten des Passworts im LDAP-Verzeichnis für %s: %s."
 
-#: modules/ldap.c:1612
+#: modules/ldap.c:1671
 msgid "LDAP Server Name"
 msgstr "LDAP Servername"
 
-#: modules/ldap.c:1618
+#: modules/ldap.c:1677
 msgid "LDAP Base DN"
 msgstr "LDAP Base DN"
 
-#: modules/ldap.c:1625
+#: modules/ldap.c:1684
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:1632
+#: modules/ldap.c:1691
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind Passwort"
 
-#: modules/ldap.c:1638
+#: modules/ldap.c:1697
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Benutzer"
 
-#: modules/ldap.c:1645
+#: modules/ldap.c:1704
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Benutzerauthorisierung"
 

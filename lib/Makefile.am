@@ -2,24 +2,31 @@ CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GLIB_CFLAGS@
 LIBADD = @GOBJECT_LIBS@ @CRYPT_LIBS@
 LDFLAGS = -version-info 1:0:0
 
+EXTRA_DIST = userquota.3
+
 lib_LTLIBRARIES = libuser.la @QUOTALIB@
 EXTRA_LTLIBRARIES = libuserquota.la
 man3_MANS = userquota.3
 
 libuser_la_SOURCES = \
 	config.c \
+	config.h \
 	entity.c \
+	entity.h \
 	error.c \
+	error.h \
 	misc.c \
-	misc.h \
 	modules.c \
 	modules.h \
 	prompt.c \
+	prompt.h \
 	scache.c \
 	user.c \
+	user.h \
+	user_private.h \
 	util.c \
 	util.h
 
 libuserquota_la_SOURCES = \
-	quota.h \
+	userquota.h \
 	userquota.c

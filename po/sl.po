@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 7.2\n"
-"POT-Creation-Date: 2002-01-18 16:05-0500\n"
+"POT-Creation-Date: 2002-01-21 17:31-0500\n"
 "PO-Revision-Date: 2001-09-05 22:30+0200\n"
 "Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -528,116 +528,125 @@ msgstr "Glavni skrbnik za Kerberos"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Geslo Kerberos za glavnega skrbnika"
 
-#: modules/ldap.c:232
+#: modules/ldap.c:235
 msgid "error initializing ldap library"
 msgstr "napaka pri inicializaciji knji¾nice ldap"
 
-#: modules/ldap.c:256
+#: modules/ldap.c:262
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "protokola LDAP ni bilo moè nastaviti na razlièico %d"
 
-#: modules/ldap.c:265
+#: modules/ldap.c:271
 msgid "could not negotiate TLS with LDAP server"
 msgstr "ni se bilo moè pogoditi za TLS s stre¾nikom LDAP"
 
-#: modules/ldap.c:284
+#: modules/ldap.c:299
 msgid "could not bind to LDAP server"
 msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
 
-#: modules/ldap.c:397 modules/ldap.c:809 modules/ldap.c:917 modules/ldap.c:994
-#: modules/ldap.c:1097 modules/ldap.c:1198
+#: modules/ldap.c:312
+#, fuzzy
+msgid "could not search LDAP server"
+msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
+
+#: modules/ldap.c:321
+msgid "LDAP server appears to have no root DSE"
+msgstr ""
+
+#: modules/ldap.c:454 modules/ldap.c:868 modules/ldap.c:976
+#: modules/ldap.c:1053 modules/ldap.c:1156 modules/ldap.c:1257
 msgid "error mapping name to LDAP distinguished name"
 msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje LDAP"
 
-#: modules/ldap.c:404
+#: modules/ldap.c:463
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje osnova LDAP"
 
-#: modules/ldap.c:459
+#: modules/ldap.c:518
 msgid "error searching LDAP directory"
 msgstr "napaka pri preiskovanju imenika LDAP"
 
-#: modules/ldap.c:791
+#: modules/ldap.c:850
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "uporabni¹ki predmet nima atributa %s"
 
-#: modules/ldap.c:799
+#: modules/ldap.c:858
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "uporabni¹ki predmet je bil ustvarjen brez ,%s`"
 
-#: modules/ldap.c:817
+#: modules/ldap.c:876
 msgid "could not convert internal data to LDAPMods"
 msgstr "notranjih podatkov ni moè pretvoriti v LDAPMods"
 
-#: modules/ldap.c:841 modules/ldap.c:1038
+#: modules/ldap.c:900 modules/ldap.c:1097
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "napaka pri spreminjanju imeni¹kega vnosa LDAP: %s"
 
-#: modules/ldap.c:863
+#: modules/ldap.c:922
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "napaka pri preimenovanju imeni¹kega vnosa LDAP: %s\n"
 
-#: modules/ldap.c:908
+#: modules/ldap.c:967
 #, c-format
 msgid "object had no %s attribute"
 msgstr "predmet nima atributa %s"
 
-#: modules/ldap.c:929
+#: modules/ldap.c:988
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "napaka pri odstranjevanju imeni¹kega vnosa LDAP: %s\n"
 
-#: modules/ldap.c:985 modules/ldap.c:1001 modules/ldap.c:1088
-#: modules/ldap.c:1189
+#: modules/ldap.c:1044 modules/ldap.c:1060 modules/ldap.c:1147
+#: modules/ldap.c:1248
 #, c-format
 msgid "object has no %s attribute"
 msgstr "predmet nima atributa %s"
 
-#: modules/ldap.c:1111
+#: modules/ldap.c:1170
 msgid "no such object in LDAP directory"
 msgstr "takega predmeta ni v imeniku LDAP"
 
-#: modules/ldap.c:1134
+#: modules/ldap.c:1193
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "ni najti atribut ,%s`, ki bi uporabljal shemo ,%s`"
 
-#: modules/ldap.c:1145
+#: modules/ldap.c:1204
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ni moè najti atributa ,%s`"
 
-#: modules/ldap.c:1276
+#: modules/ldap.c:1335
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "napaka pri nastavljanju gesla v imeniku LDAP za %s: %s"
 
-#: modules/ldap.c:1612
+#: modules/ldap.c:1671
 msgid "LDAP Server Name"
 msgstr "Ime stre¾nika LDAP"
 
-#: modules/ldap.c:1618
+#: modules/ldap.c:1677
 msgid "LDAP Base DN"
 msgstr "LDAP Osnova DN"
 
-#: modules/ldap.c:1625
+#: modules/ldap.c:1684
 msgid "LDAP Bind DN"
 msgstr "LDAP Povezava DN"
 
-#: modules/ldap.c:1632
+#: modules/ldap.c:1691
 msgid "LDAP Bind Password"
 msgstr "Geslo za povezavo z LDAP"
 
-#: modules/ldap.c:1638
+#: modules/ldap.c:1697
 msgid "LDAP SASL User"
 msgstr "Uporabnik SASL v LDAP"
 
-#: modules/ldap.c:1645
+#: modules/ldap.c:1704
 msgid "LDAP SASL Authorization User"
 msgstr "Uporabnik z odobritvijo SASL v LDAP"
 
