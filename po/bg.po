@@ -1,3 +1,4 @@
+# translation of bg.po to Български
 # translation of bg.po to Bulgarian
 # translation of bg.po to bulgarian
 # translation of libuser.po to bulgarian
@@ -5,15 +6,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Boril Gourinov <boril@bitex.com>, 2004.
 # Doncho N. Gunchev <mr700@globalnet.bg>, 2004.
+# Николай Сърмаджиев <nikolayd@sarmadzhiev.tk>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-01 11:20+0100\n"
-"PO-Revision-Date: 2004-08-03 01:59+0300\n"
-"Last-Translator: Doncho N. Gunchev <mr700@globalnet.bg>\n"
-"Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
+"PO-Revision-Date: 2004-11-01 17:38-0800\n"
+"Last-Translator: Николай Сърмаджиев <nikolayd@sarmadzhiev.tk>\n"
+"Language-Team: Български <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,17 +49,16 @@ msgstr "Вътрешна грешка.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s не е оторизиран да променя информацията на %s\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "неизвестна грешка"
+msgstr "Неизвестен потребителски контекст"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Не може да установи контекста за /etc/passwd\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -166,9 +167,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Акаунта изтича на:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Неуспех при промяна на информацията за валидност на %s.\n"
+msgstr "Неуспех при промяна на aging информацията за %s: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -240,9 +241,9 @@ msgid "Shell changed.\n"
 msgstr "Обвивката променена.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Обвивката променена.\n"
+msgstr "Обвивката не е променена: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -254,9 +255,9 @@ msgid "No group name specified.\n"
 msgstr "Няма посочено име на група.\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Неуспех при създаване на група.\n"
+msgstr "Неуспех при създаване на група: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -264,9 +265,9 @@ msgid "Group %s does not exist.\n"
 msgstr "Група %s не съществува.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Група %s не може да бъде изтрита: %s.\n"
+msgstr "Група %s не може да бъде премахната: %s\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -274,24 +275,24 @@ msgid "Both -L and -U specified.\n"
 msgstr "И -L и -U указани едновременно.\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Неуспешно задаване на парола за група %s.\n"
+msgstr "Неуспешно задаване на парола за група %s: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Група %s не може да бъде заключена.\n"
+msgstr "Група %s не може да бъде заключена: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Група %s не може да бъде отключена.\n"
+msgstr "Група %s не може да бъде отключена: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Група %s не може да бъде изменена: %s.\n"
+msgstr "Група %s не може да бъде модифицирана: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -327,9 +328,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "Отказано създаването на потребител с UID 0.\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "Грешка при създаване на група за `%s' с GID %ld.\n"
+msgstr "Грешка при създаване на група за `%s' с GID %ld: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -390,9 +391,9 @@ msgid "Password changed.\n"
 msgstr "Паролата променена.\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Грешка при създаване на група `%s'.\n"
+msgstr "Грешка при създаване на група `%s': %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -490,14 +491,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "не може да бъде отворен конфигурационен файл `%s': %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "не може да бъде отворен конфигурационен файл `%s': %s"
+msgstr "не може да stat конфигурационния файл `%s': %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "не може да бъде отворен конфигурационен файл `%s': %s"
+msgstr "не може да бъде прочетен конфигурационния файл `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -565,7 +566,7 @@ msgstr "данните не са намерени в файла"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr "вътрешна инициализационна грешка"
+msgstr "вътрешна грешка при инициализацията"
 
 #: lib/error.c:76
 msgid "error loading module"
@@ -586,7 +587,7 @@ msgstr "неизвестна грешка"
 #: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "няма инициализационна функция %s в `%s'"
+msgstr "няма инициализираща функция %s в `%s'"
 
 #: lib/modules.c:129
 #, c-format
@@ -636,24 +637,24 @@ msgid "error locking file: %s"
 msgstr "грешка при заключване на файл: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "не може да се пише в `%s': %s"
+msgstr "не може да получи защитния контекст на `%s': %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "грешка при получаване състоянието на `%s': %s"
+msgstr "грешка при получаване защитния контекст: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "не може да се пише в `%s': %s"
+msgstr "не може да се установи защитния контекст в `%s': %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "не може да се пише в `%s': %s"
+msgstr "не може да се анулира защитния контекст в `%s': %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -704,9 +705,8 @@ msgid "entity object has no %s attribute"
 msgstr "обекта от записа няма атрибут %s"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "грешка при задаване парола за `%s'"
+msgstr "грешка при криптиране на паролата"
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -714,12 +714,12 @@ msgstr "няма да бъде изпълнено с администратор�
 
 #: modules/files.c:2927
 msgid "no shadow file present -- disabling"
-msgstr "няма наличен shadow файл -- деактивиране"
+msgstr "няма наличен сенчест файл -- деактивиране"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в realm `%s': %s"
+msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -764,11 +764,11 @@ msgstr "грешка при задаване парола за `%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr "Kerberos Realm"
+msgstr "Kerberos област"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
-msgstr "Kerberos Admin Principal"
+msgstr "Kerberos принципи на администриране"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
@@ -792,9 +792,9 @@ msgid "could not bind to LDAP server"
 msgstr "грешка при свързване с LDAP сървъра"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "грешка при свързване с LDAP сървъра"
+msgstr "грешка при свързване с LDAP сървъра, първи опит като `%s': %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
@@ -828,9 +828,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "неуспешно преобразуване на вътрешни данни към LDAPMods"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "грешка при преименуване на LDAP директориен запис: %s\n"
+msgstr "грешка при създаване на запис в LDAP директорията: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -838,9 +838,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "грешка при промяна на LDAP директориен запис: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "грешка при преименуване на LDAP директориен запис: %s\n"
+msgstr "грешка при преименуване на запис в LDAP директорията: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -848,9 +848,9 @@ msgid "object had no %s attribute"
 msgstr "обекта нямаше атрибут %s"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "грешка при премахване на LDAP директориен запис: %s.\n"
+msgstr "грешка при премахване на запис в LDAP директорията: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -968,11 +968,11 @@ msgstr "Запис не е намерен.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Промптовете успяха.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Промптовете се провалиха.\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
@@ -990,14 +990,3 @@ msgstr "Извличане на стандартни потребителски 
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
 
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Грешка при инициализиране на %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Група %s не може да бъде изтрита.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Група %s не може да бъде изменена.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "грешка при инициализация на модул"
