@@ -50,17 +50,16 @@ msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ।\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s %s ਦੀ finger ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਪ੍ਰਮਾਣਿਤ ਨਹੀਂ ਹੈ\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "ਅਣਪਛਾਤੀ ਗਲਤੀ"
+msgstr "ਅਣਪਛਾਤੀ ਉਪਭੋਗਤਾ ਪ੍ਰਸੰਗ"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd ਲਈ ਮੂਲ ਪ੍ਰਸੰਗ ਨਹੀਂ ਲੱਭਿਆ ਹੈ\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -169,9 +168,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "ਖਾਤੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "%s ਲਈ ਉਮਰ ਜਾਣਕਾਰੀ ਤਬਦੀਲ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।\n"
+msgstr "%s ਲਈ ਉਮਰ ਜਾਣਕਾਰੀ ਤਬਦੀਲ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -243,9 +242,9 @@ msgid "Shell changed.\n"
 msgstr "ਸ਼ੈਲ ਤਬਦੀਲ ਹੋ ਗਈ ਹੈ।\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "ਸ਼ੈਲ ਤਬਦੀਲ ਹੋ ਗਈ ਹੈ।\n"
+msgstr "ਸ਼ੈਲ ਤਬਦੀਲ ਨਹੀਂ: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -257,9 +256,9 @@ msgid "No group name specified.\n"
 msgstr "ਕੋਈ ਸਮੂਹ ਨਾਂ ਨਹੀ ਦਰਸਾਇਆ।\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ।\n"
+msgstr "ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -267,9 +266,9 @@ msgid "Group %s does not exist.\n"
 msgstr "ਸਮੂਹ %s ਮੌਜੂਦ ਨਹੀ।\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "ਸਮੂਹ %s ਮਿਟਾਇਆ ਨਹੀ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਸਮੂਹ %s ਹਟਾਇਆ ਨਹੀ ਜਾ ਸਕਿਆ: %s।\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -277,24 +276,24 @@ msgid "Both -L and -U specified.\n"
 msgstr "ਦੋਨੋ -L ਅਤੇ -U ਨਿਰਧਾਰਿਤ ਹਨ।\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।\n"
+msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "%s ਸਮੂਹ ਨੂੰ ਲਾਕ ਨਹੀ ਕਰ ਸਕਿਆ।\n"
+msgstr "%s ਸਮੂਹ ਨੂੰ ਲਾਕ ਨਹੀ ਕਰ ਸਕਿਆ: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "%s ਸਮੂਹ ਨੂੰ ਅਨ-ਲਾਕ ਨਹੀ ਕਰ ਸਕਿਆ।\n"
+msgstr "%s ਸਮੂਹ ਨੂੰ ਅਨ-ਲਾਕ ਨਹੀ ਕਰ ਸਕਿਆ: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "ਸਮੂਹ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਸਮੂਹ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -330,9 +329,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 ਨਾਲ ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਇਨਕਾਰ ਕਰ ਰਿਹਾ ਹੈ।\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "`%s' ਲਈ ਸਮੂਹ ਸ਼ੰਨ-ਨੰ %ld ਨਾਲ ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ।\n"
+msgstr "`%s' ਲਈ ਸਮੂਹ ਸ਼ੰਨ-ਨੰ %ld ਨਾਲ ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -393,9 +392,9 @@ msgid "Password changed.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲ ਹੋਇਆ।\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr " ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ'%s'।\n"
+msgstr "'%s' ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -493,12 +492,12 @@ msgid "could not open configuration file `%s': %s"
 msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਨੂੰ ਖੋਲ ਨਹੀ ਸਕਿਆ: %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਨੂੰ ਖੋਲ ਨਹੀ ਸਕਿਆ: %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਨੂੰ ਖੋਲ ਨਹੀ ਸਕਿਆ: %s"
 
@@ -639,24 +638,24 @@ msgid "error locking file: %s"
 msgstr "ਫਾਇਲ ਲਾਕ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' ਵਿੱਚ ਲਿਖ ਨਹੀ ਸਕਿਆ: %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "`%s' ਨੂੰ ਦਰਜਾ ਨਹੀ ਦੇ ਸਕਿਆ: %s"
+msgstr "ਮੂਲ ਸੁਰੱਖਿਆ ਦਰਜਾ ਨਹੀ ਦਿੱਤਾ ਜਾ ਸਕਿਆ: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' ਵਿੱਚ ਲਿਖ ਨਹੀ ਸਕਿਆ: %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "`%s' ਵਿੱਚ ਲਿਖ ਨਹੀ ਸਕਿਆ: %s"
+msgstr "`%s' ਵਿੱਚ ਮੂਲ ਸੁਰੱਖਿਆ ਪ੍ਰਸੰਗ ਲਿਖ ਨਹੀ ਸਕਿਆ: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -707,9 +706,8 @@ msgid "entity object has no %s attribute"
 msgstr "ਇੰਦਰਾਜ ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀ ਹੈ"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "`%s' ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+msgstr "ਗੁਪਤ-ਕੋਡ ਇਕ੍ਰਿਪਸ਼ਨ ਗਲਤੀ"
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -795,9 +793,9 @@ msgid "could not bind to LDAP server"
 msgstr "LDAP ਸਰਵਰ ਨਾਲ ਜੁੜ ਨਹੀ ਸਕਿਆ"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP ਸਰਵਰ ਨਾਲ ਜੁੜ ਨਹੀ ਸਕਿਆ"
+msgstr "LDAP ਸਰਵਰ ਨਾਲ ਪਹਿਲੀਂ ਕੋਸ਼ਿਸ ਵਿੱਚ `%s' ਵਾਂਗ ਜੁੜਿਆ ਨਹੀ ਜਾ ਸਕਿਆ: %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
@@ -831,9 +829,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "ਅੰਦਰੂਨੀ ਡਾਟੇ ਨੂੰ LDAPMods ਵਿੱਚ ਤਬਦੀਲ ਨਹੀ ਕਰ ਸਕਿਆ"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -841,9 +839,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਤਬਦੀਲ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -851,9 +849,9 @@ msgid "object had no %s attribute"
 msgstr "ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀ ਸੀ"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਹਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s|\n"
+msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਹਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -961,11 +959,11 @@ msgstr "ਇੰਦਰਾਜ ਨਹੀ ਲੱਭਾ।\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "ਸਫਲਤਾਪੂਰਕ ਮੁਕੰਮਲ।\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "ਅਸਫਲ ਹੈ।\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
@@ -983,17 +981,3 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
 
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "ਉਪਭੋਗਤਾ ਬਣਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "ਉਪਭੋਗਤਾ ਹਟਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "%s ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ।\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "ਸਮੂਹ %s ਨੂੰ ਮਿਟਾਇਆ ਨਹੀ ਜਾ ਸਕਦਾ।\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "%s ਸਮੂਹ ਤਬਦੀਲ ਨਹੀ ਹੋ ਸਕਿਆ।\n"
