@@ -1,6 +1,7 @@
 # 
 #
 #
+#
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Allan Sims <allsi@eau.ee>, 2004.
@@ -9,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-17 19:32+0200\n"
+"PO-Revision-Date: 2004-03-25 18:56+0200\n"
 "Last-Translator: Allan Sims <allsi@eau.ee>\n"
 "Language-Team: Estonian <Eesti>\n"
 "MIME-Version: 1.0\n"
@@ -579,28 +580,28 @@ msgstr ""
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "nime ei ole seatud"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "nimi on liiga lühike"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "nimi sisaldab mitte ASCII märke"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "nimi sisaldab kontrolli märke"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "nimi sisaldab tühikuid"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "nimi sisaldab vigaseid märke `%c'"
 
 #: lib/util.c:200
 #, c-format
@@ -616,7 +617,7 @@ msgstr ""
 #: modules/files.c:2569 modules/files.c:2586
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "ei saa `%s' avada: %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
@@ -627,7 +628,7 @@ msgstr ""
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "viga `%s' loomisel: %s"
 
 #: modules/files.c:153
 #, c-format
