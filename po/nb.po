@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2002-04-16 11:55-0400\n"
+"PO-Revision-Date: 2003-01-03 01:43+0100\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -404,28 +404,28 @@ msgstr "feil ved lesing fra terminal"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "navnet er ikke satt"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "navnet er for kort"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "navnet inneholder ikke-ASCII tegn"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "navnet inneholder kontrolltegn"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "navnet inneholder tomrom"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "navnet inneholder ugyldig tegn «%c»"
 
 #: lib/util.c:200
 #, c-format
@@ -703,92 +703,3 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
-
-#~ msgid "error searching LDAP directory"
-#~ msgstr "feil under søk i LDAP-katalog"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "ingen `%s'-attributt som bruker schema `%s' funnet"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "entitetsobjekt har ingen `%s'-attributt"
-
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Det finnes ingen gruppe med navn «%s».\n"
-
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Feil under oppretting av gruppe «%s» med GID %ld.\n"
-
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Det finnes ingen gruppe med GID %ld.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "Ugyldig UID for %s.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "Ugyldig GID for %s.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "Ingen hjemmekatalog for %s.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "Feil under lesing av gammel hjemmekatalog for %s: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "dump av struct lu_ent ved %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " magi = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " type = %s\n"
-
-#~ msgid "user"
-#~ msgstr "bruker"
-
-#~ msgid "group"
-#~ msgstr "gruppe"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Før kopiering:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Etter kopiering:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "frigir lu_ent ved %p.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "Gruppe #%d eksisterer ikke.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "Feil under initiering av lu.\n"
-
-#~ msgid "could not determine expected DN"
-#~ msgstr "kunne ikke bestemme forventet DN"
-
-#~ msgid "could not map name to DN"
-#~ msgstr "kunne ikke koble navn til DN"
-
-#~ msgid "Feature not implemented: "
-#~ msgstr "Funksjonalitet ikke implementert: "
-
-#~ msgid "NOT creating home directory '%s'.\n"
-#~ msgstr "Oppretter IKKE hjemmekatalog '%s'.\n"
-
-#~ msgid "NOT moving %s to %s.\n"
-#~ msgstr "Flytter IKKE %s til %s.\n"
-
-#~ msgid "NOT removing %s.\n"
-#~ msgstr "Fjerner IKKE %s.\n"
-
-#~ msgid "Kerberos password for %s"
-#~ msgstr "Kerberos-passord for %s"
