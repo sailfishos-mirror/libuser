@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -82,6 +82,7 @@ static const struct {
 	{LU_GECOS, "gecos", POSIXACCOUNT, LU_LDAP_USER},
 	{LU_HOMEDIRECTORY, "homeDirectory", POSIXACCOUNT, LU_LDAP_USER},
 	{LU_LOGINSHELL, "loginShell", POSIXACCOUNT, LU_LDAP_USER},
+	{LU_COMMONNAME, "cn", POSIXACCOUNT, LU_LDAP_USER},
 
 	{LU_GROUPNAME, "cn", POSIXGROUP, LU_LDAP_GROUP},
 	{LU_GROUPPASSWORD, "userPassword", POSIXGROUP, LU_LDAP_GROUP},
@@ -97,7 +98,6 @@ static const struct {
 	{LU_SHADOWEXPIRE, "shadowExpire", SHADOWACCOUNT, LU_LDAP_SHADOW},
 	{LU_SHADOWFLAG, "shadowFlag", SHADOWACCOUNT, LU_LDAP_SHADOW},
 
-	{LU_COMMONNAME, "cn", INETORGPERSON, LU_LDAP_USER},
 	{LU_GIVENNAME, "givenName", INETORGPERSON, LU_LDAP_USER},
 	{LU_SN, "sn", INETORGPERSON, LU_LDAP_USER},
 	{LU_ROOMNUMBER, "roomNumber", INETORGPERSON, LU_LDAP_USER},
@@ -995,6 +995,8 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 	 * INETORGPERSON is not used, we add ACCOUNT. */
 	if (ent->type == lu_user
 	    && !objectclass_present(dn, INETORGPERSON, old_values, old_count,
+				    new_values, new_count)
+	    && !objectclass_present(dn, ACCOUNT, old_values, old_count,
 				    new_values, new_count))
 		new_values[new_count++] = ACCOUNT;
 	if (new_count != 0)
@@ -1304,6 +1306,7 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 
 	new_values = lu_ldap_needed_objectclasses(dn, ent, old_values);
 	if (new_values != NULL) {
+		int err;
 		LDAPMod mod;
 		LDAPMod *mods[] = { &mod, NULL };
 #ifdef DEBUG
@@ -1316,7 +1319,13 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 		mod.mod_values = new_values;
 
 		/* Give it the old try. */
-		ldap_modify_s(ctx->ldap, dn, mods);
+#ifdef DEBUG
+		dump_mods(mods);
+#endif
+		err = ldap_modify_s(ctx->ldap, dn, mods);
+#ifdef DEBUG
+		g_message("Fudged: `%s'.\n", ldap_err2string(err));
+#endif
 		g_free (new_values);
 	}
 	ldap_value_free(old_values);

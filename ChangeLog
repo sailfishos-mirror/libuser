@@ -1,3 +1,10 @@
+2005-04-06  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (ldap_attribute_map): Fix "cn" objectclass.
+	(lu_ldap_needed_objectclasses): Don't add "account" objectclass if it
+	is already present.
+	(lu_ldap_fudge_objectclasses): Add debugging output.
+
 2005-03-05  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.3.
