@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2002-02-22 14:37GMT\n"
-"Last-Translator: Frigga <frigga@redhat.it>\n"
-"Language-Team: german <C@li.org>\n"
+"PO-Revision-Date: 2002-04-13 16:05+0200\n"
+"Last-Translator: Harald Hoyer <harald@redhat.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: apps/apputil.c:70
 #, c-format
@@ -31,7 +31,7 @@ msgstr "Fehler beim Entfernen von `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr "Privilegien können nicht aufgehoben werden. \n"
+msgstr "Privilegien können nicht aufgehoben werden.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -44,7 +44,7 @@ msgstr "Fehler beim Initialisieren von PAM.\n"
 #: apps/apputil.c:440 apps/apputil.c:464
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Autentifizierung fehlgeschlagen: %s\n"
+msgstr "Authentifizierung fehlgeschlagen: %s.\n"
 
 #: apps/apputil.c:449
 #, c-format
@@ -53,7 +53,7 @@ msgstr "Interner PAM-Fehler `%s'.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr "Nenutzer stimmt nicht überein.\n"
+msgstr "Benutzer stimmt nicht überein.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -145,7 +145,7 @@ msgstr "Account-Ablauf:\t%s\n"
 #: apps/lchage.c:281
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "AblaufßEinstellungen für %s konnten nicht geändert werden.\n"
+msgstr "Ablauf-Einstellungen für %s konnten nicht geändert werden.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -186,7 +186,7 @@ msgstr "Gruppe %s konnte nicht gesperrt werden.\n"
 #: apps/lgroupmod.c:254
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "Gruppe %s konnte nicht gesperrt werden.\n"
+msgstr "Gruppe %s konnte nicht freigegeben werden.\n"
 
 #: apps/lgroupmod.c:261
 #, c-format
@@ -201,7 +201,7 @@ msgstr "Fehler beim Erstellen der Gruppe `%s'.\n"
 #: apps/luseradd.c:280
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Die Erzeugung des Accounts ist fehlgeschlagen: %s\n"
+msgstr "Die Erzeugung des Accounts ist fehlgeschlagen: %s.\n"
 
 #: apps/luseradd.c:322
 #, c-format
@@ -221,7 +221,7 @@ msgstr "%s hatte keine GID-Nummer.\n"
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr "Gruppe mit GID %ld existiert nicht, nicht entfernen.\n"
+msgstr "Gruppe mit GID %ld existiert nicht, entferne sie nicht.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -290,11 +290,11 @@ msgstr "Konfigurationsdatei `%s' konnte nicht geöffnet werden: %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr "Erfolgreich"
+msgstr "Erfolg"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr "Module durch die Konfiguration deaktiviert"
+msgstr "Modul durch die Konfiguration deaktiviert"
 
 #: lib/error.c:45
 msgid "generic error"
@@ -302,7 +302,7 @@ msgstr "Generischer Fehler"
 
 #: lib/error.c:47
 msgid "not enough privileges"
-msgstr "Keine ausreichenden Privilegien"
+msgstr "Keine ausreichenden Berechtigungen"
 
 #: lib/error.c:49
 msgid "access denied"
@@ -326,7 +326,7 @@ msgstr "Benutzer/Gruppen ID wird bereits verwendet"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr "Fehler beim Bearbeiten von Terminalattributen"
+msgstr "Fehler beim Bearbeiten der Terminalattributen"
 
 #: lib/error.c:61
 msgid "error opening file"
@@ -439,7 +439,7 @@ msgstr "Eintrag bereits in der Datei vorhanden"
 #: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "in `%s' konnte nicht geschrieben werden: %s"
+msgstr "nach `%s' konnte nicht geschrieben werden: %s"
 
 #: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
 #: modules/files.c:1208
@@ -453,13 +453,12 @@ msgstr "Keine Ausführung mit Superuser-Rechten."
 
 #: modules/files.c:2874
 msgid "no shadow file present -- disabling"
-msgstr "Keine Shadow-Datei vorhanden -- Deaktivierung."
+msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
+msgstr "Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -516,12 +515,12 @@ msgstr "Kerberos-Passwort für Admin Principal"
 
 #: modules/ldap.c:215 modules/ldap.c:248
 msgid "error initializing ldap library"
-msgstr "Fehler bei der Initialisierung der ldap-Bibliothek"
+msgstr "Fehler bei der Initialisierung der LDAP-Bibliothek"
 
 #: modules/ldap.c:226 modules/ldap.c:259
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "LDAP-Protokoll konnte für Version %d nicht eingestellt werden"
+msgstr "LDAP-Protokoll konnte nicht auf Version %d eingestellt werden"
 
 #: modules/ldap.c:236
 msgid "could not negotiate TLS with LDAP server"
@@ -537,16 +536,16 @@ msgstr "Konnte LDAP-Server nicht suchen"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP-Server "
+msgstr "LDAP-Server scheint kein Basis-DSE zu haben"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
 msgid "error mapping name to LDAP distinguished name"
-msgstr "Fehler von LDAP-DN bei Ermittlung des Namen auf "
+msgstr "Fehler bei Verknüpfung des Namens zum LDAP-DN "
 
 #: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "Fehler von LDAP-Basis-DN bei Ermittlung des Namen"
+msgstr "Fehler bei Verknüpfung des Namens zum LDAP-Base-DN"
 
 #: modules/ldap.c:1142
 #, c-format
@@ -608,7 +607,7 @@ msgstr "LDAP Servername"
 
 #: modules/ldap.c:2177
 msgid "LDAP Search Base DN"
-msgstr "LDAP sucht Basis DN"
+msgstr "LDAP DN Suchbasis"
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
@@ -624,7 +623,7 @@ msgstr "LDAP SASL Benutzer"
 
 #: modules/ldap.c:2203
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL Benutzerauthorisierung"
+msgstr "LDAP SASL Authorisierungsbenutzer"
 
 #: samples/lookup.c:64
 #, c-format
@@ -670,3 +669,4 @@ msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
+
