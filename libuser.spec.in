@@ -19,6 +19,7 @@ suite are included.
 %package devel
 Group: Development/Libraries
 Summary: Files needed for developing applications which use libuser.
+Requires: %{name}-devel = %{version}
 
 %description devel
 The libuser-devel package contains header files, static libraries, and .la
@@ -60,7 +61,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
-* Thu Jan  4 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com>
 - add openldap-devel as a buildprereq
 - krb5: use a continuous connection
 - krb5: add "realm" config directive
@@ -78,6 +79,7 @@ rm -fr $RPM_BUILD_ROOT
 - lusermod: pass plaintext passwords along
 - lgroupadd: pass plaintext passwords along
 - lgroupmod: pass plaintext passwords along
+- add libuser as a dependency of libuser-devel
 
 * Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - initial packaging
