@@ -5,7 +5,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 6
+Release: 7
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -97,6 +97,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Mon Jan 26 2004 Dan Walsh <dwalsh@redhat.com> 0.51.7-7
+- fix is_selinux_enabled call
+
 * Sun Dec 14 2003 Jeremy Katz <katzj@redhat.com> 0.51.7-6
 - rebuild against python 2.3
 - enable SELinux

@@ -38,7 +38,7 @@
 +}
 +
 +int setupDefaultContext(char *orig_file) {
-+  if (is_selinux_enabled()) {
++  if (is_selinux_enabled()>0) {
 +    security_context_t scontext;
 +    
 +    if (getfilecon(orig_file,&scontext)<0) {
@@ -65,7 +65,7 @@
  	conv.appdata_ptr = NULL;
  
 +#ifdef WITH_SELINUX
-+    if (is_selinux_enabled()) {
++    if (is_selinux_enabled()>0) {
 +      if(getuid() == 0) {
 +	if (checkAccess(user,(int) PASSWD__CHFN)!=0) {
 +	  security_context_t user_context;
@@ -96,7 +96,7 @@
 -CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@
 -LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@
 +CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -DWITH_SELINUX
-+LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
++LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@ -lselinux 
  
  lchsh_SOURCES = \
  	apputil.c \
@@ -112,7 +112,7 @@
 +static gboolean setDefaultContext(char *filename,		  
 +				  struct lu_error **error)
 +{
-+  if (is_selinux_enabled()) {
++  if (is_selinux_enabled()>0) {
 +    security_context_t scontext=NULL;
 +    if (getfilecon(filename, &scontext) < 0) {
 +      lu_error_new(error, lu_error_stat,
@@ -621,7 +621,7 @@
 -CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE
 -LDADD = @GOBJECT_LIBS@ ../lib/libuser.la
 +CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE -DWITH_SELINUX
-+LDADD = @GOBJECT_LIBS@ ../lib/libuser.la -lselinux -lattr
++LDADD = @GOBJECT_LIBS@ ../lib/libuser.la -lselinux 
  
  EXTRA_PROGRAMS = \
  	libuser_files.so \
@@ -632,7 +632,7 @@
  
  libusermodule_so_SOURCES = libusermodule.c common.h debug.h
 -libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
-+libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
++libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux 
  libusermodule_so_LDADD = ../apps/apputil.o ../lib/libuser.la
  
  libuserquotamodule_so_SOURCES = quotamodule.c debug.h
@@ -643,7 +643,7 @@
  homedir_SOURCES = homedir.c
  
 -homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
-+homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
++homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux 
  
  lookup_SOURCES = lookup.c
  
