@@ -40,7 +40,6 @@ main(int argc, const char **argv)
 	struct lu_ent *ent = NULL;
 	GValueArray *values = NULL;
 	GValue *value, val;
-	int i;
 	int interactive = FALSE;
 	int c;
 	struct lu_prompt prompts[1];
@@ -139,6 +138,7 @@ main(int argc, const char **argv)
 				g_print(_("Shell changed.\n"));
 				lu_hup_nscd();
 			}
+			g_value_unset(&val);
 		}
 	}
 

@@ -259,7 +259,12 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	struct lu_attribute *attr;
 	GQuark aquark;
 	int i;
-	aquark = g_quark_from_string(attribute);
+	char *lattr;
+	lattr = g_strdup(attribute);
+	for (i = 0; lattr[i] != '\0'; i++) {
+		lattr[i] = g_ascii_tolower(lattr[i]);
+	}
+	aquark = g_quark_from_string(lattr);
 	for(i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
@@ -285,13 +290,19 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	GValueArray *dest, *copy;
 	struct lu_attribute newattr;
 	int i;
+	char *lattr;
 	dest = lu_ent_get_int(list, attr);
 	if(dest == NULL) {
+		lattr = g_strdup(attr);
+		for (i = 0; lattr[i] != '\0'; i++) {
+			lattr[i] = g_ascii_tolower(lattr[i]);
+		}
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = g_quark_from_string(attr);
+		newattr.name = g_quark_from_string(lattr);
 		newattr.values = g_value_array_new(0);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
+		g_free(lattr);
 	}
 	while (dest->n_values > 0) {
 		g_value_array_remove(dest, 0);
@@ -308,13 +319,20 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
 	struct lu_attribute newattr;
-	dest = lu_ent_get_int(list, attr);
+	int i;
+	char *lattr;
+	dest = lu_ent_get_int(list, lattr);
 	if(dest == NULL) {
+		lattr = g_strdup(attr);
+		for (i = 0; lattr[i] != '\0'; i++) {
+			lattr[i] = g_ascii_tolower(lattr[i]);
+		}
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = g_quark_from_string(attr);
+		newattr.name = g_quark_from_string(lattr);
 		newattr.values = g_value_array_new(1);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
+		g_free(lattr);
 	}
 	g_value_array_append(dest, value);
 }
@@ -324,17 +342,23 @@ lu_ent_clear_int(GArray *list, const char *attribute)
 {
 	int i;
 	struct lu_attribute *attr;
-	for(i = list->len - 1; i >= 0; i--) {
+	char *lattr;
+	lattr = g_strdup(attribute);
+	for (i = 0; lattr[i] != '\0'; i++) {
+		lattr[i] = g_ascii_tolower(lattr[i]);
+	}
+	for (i = list->len - 1; i >= 0; i--) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		if(strcasecmp(g_quark_to_string(attr->name), attribute) == 0) {
+		if (g_quark_from_string(lattr) == attr->name) {
 			break;
 		}
 	}
-	if(i >= 0) {
+	if (i >= 0) {
 		g_value_array_free(attr->values);
 		attr->values = NULL;
 		g_array_remove_index(list, i);
 	}
+	g_free(lattr);
 }
 
 static void
@@ -390,6 +414,7 @@ lu_ent_get(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(attribute != NULL, NULL);
 	return lu_ent_get_int(ent->pending, attribute);
 }
+
 GValueArray *
 lu_ent_get_current(struct lu_ent *ent, const char *attribute)
 {
@@ -509,6 +534,7 @@ lu_ent_get_attributes(struct lu_ent *ent)
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
 	return lu_ent_get_attributes_int(ent->pending);
 }
+
 GList *
 lu_ent_get_attributes_current(struct lu_ent *ent)
 {
@@ -587,6 +613,7 @@ lu_default_int(struct lu_context *context, const char *name,
 	idstring = g_strdup_value_contents(&value);
 	lu_ent_add_current(ent, idkey, &value);
 	lu_ent_add(ent, idkey, &value);
+	g_value_unset(&value);
 
 	/* Now iterate to find the rest. */
 	keys = lu_cfg_read_keys(context, top);

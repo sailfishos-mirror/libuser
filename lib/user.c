@@ -170,13 +170,27 @@ extract_id(struct lu_ent *ent)
 {
 	GValueArray *array;
 	GValue *value;
+	const char *idstring;
+	char *p;
+	long ret;
 	g_return_val_if_fail(ent != NULL, INVALID);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
 	g_return_val_if_fail(array != NULL, INVALID);
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, INVALID);
-	return g_value_get_long(value);
+	ret = INVALID;
+	if (G_VALUE_HOLDS_LONG(value)) {
+		ret = g_value_get_long(value);
+	} else
+	if (G_VALUE_HOLDS_STRING(value)) {
+		idstring = g_value_get_string(value);
+		ret = strtol(idstring, &p, 0);
+		if ((p == NULL) || (*p != '\0')) {
+			ret = INVALID;
+		}
+	}
+	return ret;
 }
 
 static long

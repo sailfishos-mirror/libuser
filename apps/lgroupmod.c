@@ -42,8 +42,8 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL, *gidvalues = NULL;
-	GValue *value, *gidvalue, val;
+	GValueArray *values = NULL;
+	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c, i;
@@ -131,6 +131,7 @@ main(int argc, const char **argv)
 			g_value_init(&val, G_TYPE_STRING);
 			g_value_set_string(&val, gid);
 			lu_ent_add(ent, LU_GROUPNAME, &val);
+			g_value_unset(&val);
 		}
 	}
 	if (gidNumber != -2) {
@@ -146,6 +147,8 @@ main(int argc, const char **argv)
 
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+
+		g_value_unset(&val);
 	}
 
 	if (addAdmins) {
@@ -156,6 +159,7 @@ main(int argc, const char **argv)
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_add(ent, LU_ADMINISTRATORUID, &val);
+				g_value_unset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
@@ -170,6 +174,7 @@ main(int argc, const char **argv)
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_del(ent, LU_ADMINISTRATORUID, &val);
+				g_value_unset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
@@ -185,6 +190,7 @@ main(int argc, const char **argv)
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_add(ent, LU_MEMBERUID, &val);
+				g_value_unset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
@@ -199,6 +205,7 @@ main(int argc, const char **argv)
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_del(ent, LU_MEMBERUID, &val);
+				g_value_unset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
@@ -276,6 +283,7 @@ main(int argc, const char **argv)
 				}
 			}
 
+			g_value_unset(&val);
 			lu_ent_free(ent);
 		}
 	}

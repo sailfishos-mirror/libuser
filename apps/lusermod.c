@@ -144,11 +144,13 @@ main(int argc, const char **argv)
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
+		g_value_unset(&val);
 	}
 	if (gidNumber != -2) {
 		g_value_set_long(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+		g_value_unset(&val);
 	}
 
 	/* Change the user's shell and GECOS information. */
@@ -159,11 +161,13 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, loginShell);
 		lu_ent_clear(ent, LU_LOGINSHELL);
 		lu_ent_add(ent, LU_LOGINSHELL, &val);
+		g_value_unset(&val);
 	}
 	if (gecos != NULL) {
 		g_value_set_string(&val, gecos);
 		lu_ent_clear(ent, LU_GECOS);
 		lu_ent_add(ent, LU_GECOS, &val);
+		g_value_unset(&val);
 	}
 
 	/* If the user changed names or home directories, we need to keep track
@@ -179,6 +183,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, uid);
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &val);
+		g_value_unset(&val);
 	}
 	oldHomeDirectory = NULL;
 	if (homeDirectory != NULL) {
@@ -188,6 +193,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, homeDirectory);
 		lu_ent_clear(ent, LU_HOMEDIRECTORY);
 		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+		g_value_unset(&val);
 	}
 
 	/* If the user's password needs to be changed, try to change it. */

@@ -26,6 +26,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include <string.h>
 #include "../include/libuser/user_private.h"
 #include "apputil.h"
 
@@ -39,7 +40,6 @@ main(int argc, const char **argv)
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	long uidNumber = -2, gidNumber = -2;
-	GList *list;
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
@@ -183,6 +183,7 @@ main(int argc, const char **argv)
 			g_value_set_long(&val, gidNumber);
 			lu_ent_clear(ent, LU_GIDNUMBER);
 			lu_ent_add(ent, LU_GIDNUMBER, &val);
+			g_value_unset(&val);
 		}
 
 		/* Try to add the group. */
@@ -210,6 +211,7 @@ main(int argc, const char **argv)
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
+		g_value_unset(&val);
 	}
 
 	/* Modify the default GID if we had one passed in. */
@@ -217,6 +219,7 @@ main(int argc, const char **argv)
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+		g_value_unset(&val);
 	}
 
 	/* Modify the default GECOS if we had one passed in. */
@@ -226,6 +229,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, gecos);
 		lu_ent_clear(ent, LU_GECOS);
 		lu_ent_add(ent, LU_GECOS, &val);
+		g_value_unset(&val);
 	}
 
 	/* Modify the default GID if we had one passed in. */
@@ -233,6 +237,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, homeDirectory);
 		lu_ent_clear(ent, LU_HOMEDIRECTORY);
 		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+		g_value_unset(&val);
 	}
 
 	/* Modify the default login shell if we had one passed in. */
@@ -240,6 +245,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, loginShell);
 		lu_ent_clear(ent, LU_LOGINSHELL);
 		lu_ent_add(ent, LU_LOGINSHELL, &val);
+		g_value_unset(&val);
 	}
 
 	/* Moment-of-truth time. */

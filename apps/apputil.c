@@ -285,6 +285,7 @@ lu_strconcat(char *existing, const char *appendee)
 		g_free(existing);
 		existing = tmp;
 	}
+	return existing;
 }
 
 struct conv_data {
@@ -482,4 +483,13 @@ void
 lu_hup_nscd()
 {
 	lu_signal_nscd(SIGHUP);
+}
+
+/* Create a mail spool for the user. */
+gboolean
+lu_mailspool_create(struct lu_ent *ent)
+{
+	/* FIXME */
+	g_warning("mail spool creation is not yet implemented");
+	return FALSE;
 }

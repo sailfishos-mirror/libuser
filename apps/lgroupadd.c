@@ -26,6 +26,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
+#include <string.h>
 #include "../include/libuser/user_private.h"
 #include "apputil.h"
 
@@ -105,6 +106,7 @@ main(int argc, const char **argv)
 		g_value_set_long(&value, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &value);
+		g_value_unset(&value);
 	}
 
 	/* Try to create the group. */

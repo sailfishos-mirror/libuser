@@ -37,7 +37,7 @@ main(int argc, const char **argv)
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	GValueArray *values = NULL;
-	GValue *value, val;
+	GValue *value;
 	const char *user = NULL, *tmp = NULL;
 	gid_t gid;
 	int interactive = FALSE;
@@ -131,8 +131,9 @@ main(int argc, const char **argv)
 			if (strcmp(tmp, user) == 0) {
 				if (lu_group_delete(ctx, ent, &error) == FALSE){
 					fprintf(stderr, _("Group %s could not "
-						"be deleted: %s.\n"), tmp);
-							return 7;
+						"be deleted: %s.\n"), tmp,
+						error->string);
+					return 7;
 				}
 			}
 		}

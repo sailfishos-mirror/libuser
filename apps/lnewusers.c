@@ -201,6 +201,7 @@ main(int argc, const char **argv)
 				g_value_set_long(&val, gid);
 				lu_ent_clear(ent, LU_GIDNUMBER);
 				lu_ent_add(ent, LU_GIDNUMBER, &val);
+				g_value_unset(&val);
 			} else {
 				lu_group_default(ctx, "users", FALSE, ent);
 			}
@@ -226,6 +227,7 @@ main(int argc, const char **argv)
 		g_value_set_long(&val, gid);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+		g_value_unset(&val);
 
 		/* Set other fields if we've got them. */
 		memset(&val, 0, sizeof(val));
@@ -234,12 +236,14 @@ main(int argc, const char **argv)
 			g_value_set_string(&val, fields[4]);
 			lu_ent_clear(ent, LU_GECOS);
 			lu_ent_add(ent, LU_GECOS, &val);
+			g_value_unset(&val);
 		}
 		if (strlen(fields[5]) > 0) {
 			homedir = g_strdup(fields[5]);
 			g_value_set_string(&val, homedir);
 			lu_ent_clear(ent, LU_HOMEDIRECTORY);
 			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+			g_value_unset(&val);
 		} else {
 			if (values != NULL) {
 				value = g_value_array_get_nth(values,
@@ -254,6 +258,7 @@ main(int argc, const char **argv)
 			g_value_set_string(&val, fields[6]);
 			lu_ent_clear(ent, LU_LOGINSHELL);
 			lu_ent_add(ent, LU_LOGINSHELL, &val);
+			g_value_unset(&val);
 		}
 
 		/* Now try to add the user's account. */

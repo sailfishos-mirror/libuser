@@ -331,7 +331,6 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	PyObject *garbage = NULL;
 
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
@@ -371,7 +370,6 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	PyObject *garbage = NULL;
 
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
@@ -430,7 +428,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	struct libuser_entity *ent = NULL;
 	const char *dir = NULL, *skeleton = "/etc/skel";
 	GValueArray *values;
-	GValue *value, val;
+	GValue *value;
 	char *keywords[] = { "home", "skeleton", NULL };
 	long uidNumber = 0, gidNumber = 0;
 	struct lu_error *error = NULL;
@@ -557,7 +555,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	struct libuser_entity *ent = NULL;
 	const char *olddir = NULL, *newdir = NULL;
 	GValueArray *values;
-	GValue *value, val;
+	GValue *value;
 	char *keywords[] = { "entity", "newhome", NULL };
 	struct lu_error *error = NULL;
 
@@ -633,15 +631,17 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	PyObject *ent = NULL;
 	PyObject *ret = NULL;
 	PyObject *mkhomedir = self;
+	PyObject *mkmailspool = self;
 	PyObject *subargs, *subkwargs;
-	char *keywords[] = { "entity", "mkhomedir", NULL };
+	char *keywords[] = { "entity", "mkhomedir", "mkmailspool", NULL };
 
 	DEBUG_ENTRY;
 
 	/* Expect an entity and a flag to tell us if we need to create the
 	 * user's home directory. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
-					 &EntityType, &ent, &mkhomedir)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|OO", keywords,
+					 &EntityType, &ent,
+					 &mkhomedir, &mkmailspool)) {
 		return NULL;
 	}
 
@@ -662,6 +662,14 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			/* We'll return the result of the creation call. */
 			ret = libuser_admin_create_home(self, subargs,
 							subkwargs);
+		}
+		/* If we got a non-NULL response, then it was okay. */
+		if ((mkmailspool != NULL) && (PyObject_IsTrue(mkmailspool))) {
+			struct libuser_entity *entity;
+			entity = (struct libuser_entity*) ent;
+			Py_DECREF(ret);
+			ret = lu_mailspool_create(entity->ent) ?
+			      Py_BuildValue("") : NULL;
 		}
 	}
 
@@ -901,7 +909,7 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 				       PyObject *kwargs)
 {
 	GValueArray *results;
-	char *module = NULL, *group = NULL;
+	char *group = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "group", NULL };
@@ -927,7 +935,7 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 				       PyObject *kwargs)
 {
 	GValueArray *results;
-	char *module = NULL, *user = NULL;
+	char *user = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };
@@ -1021,11 +1029,9 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 					    PyObject *kwargs)
 {
 	GPtrArray *results;
-	char *module = NULL, *group = NULL;
+	char *group = NULL;
 	PyObject *ret = NULL;
-	struct lu_error *error = NULL;
 	char *keywords[] = { "group", NULL };
-	struct libuser_admin *me = (struct libuser_admin *) self;
 	int i;
 
 	DEBUG_ENTRY;
@@ -1052,7 +1058,7 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 					    PyObject *kwargs)
 {
 	GPtrArray *results;
-	char *module = NULL, *user = NULL;
+	char *user = NULL;
 	PyObject *ret = NULL;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };

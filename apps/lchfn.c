@@ -42,7 +42,7 @@
 int
 main(int argc, const char **argv)
 {
-	const char *user = NULL, *gecos = NULL, *sn, *cn, *gn, *email;
+	const char *user = NULL, *gecos = NULL, *sn, *gn, *email;
 	char *name, *office, *officephone, *homephone;
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
@@ -285,6 +285,8 @@ main(int argc, const char **argv)
 				prompts[i].value = NULL;
 			}
 		}
+
+		g_value_unset(&val);
 	}
 
 	/* Build a new gecos string. */
@@ -299,6 +301,7 @@ main(int argc, const char **argv)
 	g_value_set_string(&val, gecos);
 	lu_ent_clear(ent, LU_GECOS);
 	lu_ent_add(ent, LU_GECOS, &val);
+	g_value_unset(&val);
 
 	/* Try to save our changes. */
 	if (lu_user_modify(ctx, ent, &error)) {

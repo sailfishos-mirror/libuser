@@ -26,13 +26,21 @@
 #define _(String) gettext(String)
 #define N_(String) (String)
 
-gboolean lu_homedir_populate(const char *skel, const char *directory, uid_t owner, gid_t group, mode_t mode,
+gboolean lu_homedir_populate(const char *skel, const char *directory,
+			     uid_t owner, gid_t group, mode_t mode,
 			     struct lu_error **error);
-gboolean lu_homedir_move(const char *oldhome, const char *directory, struct lu_error **error);
+gboolean lu_homedir_move(const char *oldhome, const char *directory,
+			 struct lu_error **error);
 gboolean lu_homedir_remove(const char *directory, struct lu_error **error);
-void lu_authenticate_unprivileged(struct lu_context *ctx, const char *user, const char *appname);
+
+void lu_authenticate_unprivileged(struct lu_context *ctx,
+				  const char *user, const char *appname);
+
 char *lu_strconcat(char *existing, const char *appendee);
+
 void lu_hup_nscd(void);
 void lu_signal_nscd(int signal);
+
+gboolean lu_mailspool_create(struct lu_ent *ent);
 
 #endif
