@@ -29,7 +29,7 @@ msgstr "Erro ao remover `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr "Não consegui abandonar previlégios.\n"
+msgstr "Não consegui abandonar privilégios.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -437,7 +437,7 @@ msgstr "entrada já está presente no ficheiro"
 #: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "nõa consegui escrever para `%s': %s"
+msgstr "não consegui escrever para `%s': %s"
 
 #: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
 #: modules/files.c:1208
@@ -534,7 +534,7 @@ msgstr "não consegui procurar no servidor LDAP"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr "servidor LDAP parece não ter um DSE de raíz"
+msgstr "servidor LDAP parece não ter um DSE de raiz"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -577,7 +577,7 @@ msgstr "o objecto não o atributo %s"
 #: modules/ldap.c:1296
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "erro ao apagar entrade de directoria LDAP: %s\n"
+msgstr "erro ao apagar entrada de directoria LDAP: %s\n"
 
 #: modules/ldap.c:1333 modules/ldap.c:1355 modules/ldap.c:1445
 #: modules/ldap.c:1539
