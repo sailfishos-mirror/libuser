@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
-"POT-Creation-Date: 2003-01-31 18:50+0100\n"
-"PO-Revision-Date: 2003-01-31 18:57+0100\n"
+"POT-Creation-Date: 2003-02-18 19:41+0100\n"
+"PO-Revision-Date: 2003-02-18 19:42+0100\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,81 +156,6 @@ msgstr "Konto utgår:\t%s\n"
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Feil under endring av aldringsinformasjon for %s.\n"
 
-#: apps/lchfn.c:74 apps/lchsh.c:61
-msgid "[OPTION...] [user]"
-msgstr "[ALTERNATIV...] [bruker]"
-
-#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
-#, c-format
-msgid "No user name specified, no name for uid %d.\n"
-msgstr "Brukernavn ikke spesifisert. Fant ikke navn for uid %d.\n"
-
-#. Give the user some idea of what's going on.
-#: apps/lchfn.c:102
-#, c-format
-msgid "Changing finger information for %s.\n"
-msgstr "Endrer finger-informasjon for %s.\n"
-
-#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
-#, c-format
-msgid "Error initializing %s.\n"
-msgstr "Feil under initiering av %s.\n"
-
-#: apps/lchfn.c:161
-msgid "Full Name"
-msgstr "Fullt navn"
-
-#: apps/lchfn.c:182
-msgid "Surname"
-msgstr "Etternavn"
-
-#: apps/lchfn.c:204
-msgid "Given Name"
-msgstr ""
-
-#: apps/lchfn.c:214
-msgid "Office"
-msgstr "Kontor"
-
-#: apps/lchfn.c:223
-msgid "Office Phone"
-msgstr "Telefon, arbeid"
-
-#: apps/lchfn.c:232
-msgid "Home Phone"
-msgstr "Telefon, hjemme"
-
-#: apps/lchfn.c:253
-msgid "E-Mail Address"
-msgstr "E-postadresse"
-
-#: apps/lchfn.c:265
-msgid "Finger information not changed:  input error.\n"
-msgstr ""
-
-#: apps/lchfn.c:370
-msgid "Finger information changed.\n"
-msgstr ""
-
-#: apps/lchfn.c:373
-#, c-format
-msgid "Finger information not changed: %s.\n"
-msgstr ""
-
-#. Give the user some idea of what's going on.
-#: apps/lchsh.c:90
-#, c-format
-msgid "Changing shell for %s.\n"
-msgstr ""
-
-#: apps/lchsh.c:122
-msgid "New Shell"
-msgstr "Nytt skall"
-
-#: apps/lchsh.c:150
-msgid "Shell changed.\n"
-msgstr "Skall endret.\n"
-
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
 msgstr "[ALTERNATIV...] gruppe"
@@ -238,6 +163,11 @@ msgstr "[ALTERNATIV...] gruppe"
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
 msgstr "Ingen gruppenavn spesifisert.\n"
+
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "Feil under initiering av %s.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
@@ -276,100 +206,6 @@ msgstr "Grupe %s kunne ikke låses opp.\n"
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Gruppe %s kunne ikke endres.\n"
-
-#: apps/lid.c:81
-#, c-format
-msgid "No group name specified, using %s.\n"
-msgstr "Ingen gruppenavn spesifisert, bruker %s.\n"
-
-#: apps/lid.c:85
-#, c-format
-msgid "No group name specified, no name for gid %d.\n"
-msgstr "Ingen gruppenavn spesifisert. Fant ikke navn for gid %d.\n"
-
-#: apps/lid.c:93
-#, c-format
-msgid "No user name specified, using %s.\n"
-msgstr "Brukernavn ikke spesifisert, bruker %s.\n"
-
-#: apps/lnewusers.c:74
-msgid "[OPTION...]"
-msgstr "[ALTERNATIV...]"
-
-#: apps/lnewusers.c:98
-#, c-format
-msgid "Error opening `%s': %s.\n"
-msgstr "Feil under åpning av «%s»: %s\n"
-
-#: apps/lnewusers.c:131
-#, c-format
-msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-
-#: apps/lnewusers.c:138
-msgid "Refusing to create account with UID 0.\n"
-msgstr ""
-
-#. Aargh!  Abandon all hope.
-#: apps/lnewusers.c:237
-#, c-format
-msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "Feil under oppretting av gruppe «%s» med GID %ld.\n"
-
-#: apps/lnewusers.c:288
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "Feil under setting av passord for %s: %s\n"
-
-#: apps/lnewusers.c:310
-#, c-format
-msgid "Error creating home directory for %s: %s\n"
-msgstr "Feil under oppretting av hjemmekatalog for %s: %s\n"
-
-#: apps/lnewusers.c:325
-#, c-format
-msgid "Error creating mail spool for %s.\n"
-msgstr "Feil under oppretting av e-postkatalog for %s.\n"
-
-#: apps/lnewusers.c:330
-#, c-format
-msgid "Error creating user account for %s: %s\n"
-msgstr "Feil under oppretting av brukerkonto for %s: %s.\n"
-
-#: apps/lpasswd.c:86
-#, c-format
-msgid "Changing password for %s.\n"
-msgstr "Endrer passord for %s.\n"
-
-#: apps/lpasswd.c:111
-msgid "New password"
-msgstr "Nytt passord"
-
-#: apps/lpasswd.c:114
-msgid "New password (confirm)"
-msgstr "Nytt passord (bekreft)"
-
-#: apps/lpasswd.c:128
-msgid "Passwords do not match, try again.\n"
-msgstr "Passordene er ikke like. Prøv igjen.\n"
-
-#: apps/lpasswd.c:133
-msgid "Password change canceled.\n"
-msgstr "Endring av passord avbrutt.\n"
-
-#: apps/lpasswd.c:190
-#, c-format
-msgid "Error setting password for user %s: %s.\n"
-msgstr "Feil under setting av passord for bruker %s: %s.\n"
-
-#: apps/lpasswd.c:197
-#, c-format
-msgid "Error setting password for group %s: %s.\n"
-msgstr "Feil under setting av passord for gruppe %s: %s.\n"
-
-#: apps/lpasswd.c:208
-msgid "Password changed.\n"
-msgstr "Passord endret.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -830,47 +666,6 @@ msgstr "LDAP SASL-bruker"
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisasjonsbruker"
 
-#: modules/sasldb.c:128
-#, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Feil i Cyrus SASL under oppretting av bruker: %s: %s"
-
-#: modules/sasldb.c:130
-#, c-format
-msgid "Cyrus SASL error creating user: %s"
-msgstr "Feil i Cyrus SASL under oppretting av bruker: %s"
-
-#: modules/sasldb.c:136
-#, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Feil i Cyrus SASL ved fjerning av bruker %s: %s"
-
-#: modules/sasldb.c:138
-#, c-format
-msgid "Cyrus SASL error removing user: %s"
-msgstr "Feil i Cyrus SASL ved fjerning av bruker: %s"
-
-#: modules/sasldb.c:428 modules/sasldb.c:436
-#, c-format
-msgid "error initializing Cyrus SASL: %s"
-msgstr "feil ved initiering av Cyrus SASL: %s."
-
-#: python/admin.c:494
-msgid "error creating home directory for user"
-msgstr "feil under oppretting av hjemmekatalog for bruker"
-
-#: python/admin.c:546
-msgid "error removing home directory for user"
-msgstr "feil under fjerning av hjemmekatalog for bruker"
-
-#: python/admin.c:623
-msgid "error moving home directory for user"
-msgstr "feil under flytting av hjemmekatalog for bruker"
-
-#: python/admin.c:656
-msgid "error creating mail spool for user"
-msgstr "feil under oppretting av e-postkatalog for bruker"
-
 #: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
@@ -915,3 +710,208 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
+
+#: apps/lchfn.c:74 apps/lchsh.c:61
+msgid "[OPTION...] [user]"
+msgstr "[ALTERNATIV...] [bruker]"
+
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#, c-format
+msgid "No user name specified, no name for uid %d.\n"
+msgstr "Brukernavn ikke spesifisert. Fant ikke navn for uid %d.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchfn.c:102
+#, c-format
+msgid "Changing finger information for %s.\n"
+msgstr "Endrer finger-informasjon for %s.\n"
+
+#: apps/lchfn.c:161
+msgid "Full Name"
+msgstr "Fullt navn"
+
+#: apps/lchfn.c:182
+msgid "Surname"
+msgstr "Etternavn"
+
+#: apps/lchfn.c:204
+msgid "Given Name"
+msgstr "Gitt navn"
+
+#: apps/lchfn.c:214
+msgid "Office"
+msgstr "Kontor"
+
+#: apps/lchfn.c:223
+msgid "Office Phone"
+msgstr "Telefon, arbeid"
+
+#: apps/lchfn.c:232
+msgid "Home Phone"
+msgstr "Telefon, hjemme"
+
+#: apps/lchfn.c:253
+msgid "E-Mail Address"
+msgstr "E-postadresse"
+
+#: apps/lchfn.c:265
+msgid "Finger information not changed:  input error.\n"
+msgstr "finger-informasjon ikke endret: feil i inndata.\n"
+
+#: apps/lchfn.c:370
+msgid "Finger information changed.\n"
+msgstr "finger-informasjon endret.\n"
+
+#: apps/lchfn.c:373
+#, c-format
+msgid "Finger information not changed: %s.\n"
+msgstr "finger-informasjon ikke endret: %s.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchsh.c:90
+#, c-format
+msgid "Changing shell for %s.\n"
+msgstr "Endrer skall for %s.\n"
+
+#: apps/lchsh.c:122
+msgid "New Shell"
+msgstr "Nytt skall"
+
+#: apps/lchsh.c:150
+msgid "Shell changed.\n"
+msgstr "Skall endret.\n"
+
+#: apps/lid.c:81
+#, c-format
+msgid "No group name specified, using %s.\n"
+msgstr "Ingen gruppenavn spesifisert, bruker %s.\n"
+
+#: apps/lid.c:85
+#, c-format
+msgid "No group name specified, no name for gid %d.\n"
+msgstr "Ingen gruppenavn spesifisert. Fant ikke navn for gid %d.\n"
+
+#: apps/lid.c:93
+#, c-format
+msgid "No user name specified, using %s.\n"
+msgstr "Brukernavn ikke spesifisert, bruker %s.\n"
+
+#: apps/lnewusers.c:74
+msgid "[OPTION...]"
+msgstr "[ALTERNATIV...]"
+
+#: apps/lnewusers.c:98
+#, c-format
+msgid "Error opening `%s': %s.\n"
+msgstr "Feil under åpning av «%s»: %s\n"
+
+#: apps/lnewusers.c:131
+#, c-format
+msgid "Error creating account for `%s': line improperly formatted.\n"
+msgstr "Feil under oppretting av konto for «%s»: linjen er ikke riktig formattert.\n"
+
+#: apps/lnewusers.c:138
+msgid "Refusing to create account with UID 0.\n"
+msgstr "Nekter oppretting av konto med UID 0.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/lnewusers.c:237
+#, c-format
+msgid "Error creating group for `%s' with GID %ld.\n"
+msgstr "Feil under oppretting av gruppe «%s» med GID %ld.\n"
+
+#: apps/lnewusers.c:288
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Feil under setting av passord for %s: %s\n"
+
+#: apps/lnewusers.c:310
+#, c-format
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Feil under oppretting av hjemmekatalog for %s: %s\n"
+
+#: apps/lnewusers.c:325
+#, c-format
+msgid "Error creating mail spool for %s.\n"
+msgstr "Feil under oppretting av e-postkatalog for %s.\n"
+
+#: apps/lnewusers.c:330
+#, c-format
+msgid "Error creating user account for %s: %s\n"
+msgstr "Feil under oppretting av brukerkonto for %s: %s.\n"
+
+#: apps/lpasswd.c:86
+#, c-format
+msgid "Changing password for %s.\n"
+msgstr "Endrer passord for %s.\n"
+
+#: apps/lpasswd.c:111
+msgid "New password"
+msgstr "Nytt passord"
+
+#: apps/lpasswd.c:114
+msgid "New password (confirm)"
+msgstr "Nytt passord (bekreft)"
+
+#: apps/lpasswd.c:128
+msgid "Passwords do not match, try again.\n"
+msgstr "Passordene er ikke like. Prøv igjen.\n"
+
+#: apps/lpasswd.c:133
+msgid "Password change canceled.\n"
+msgstr "Endring av passord avbrutt.\n"
+
+#: apps/lpasswd.c:190
+#, c-format
+msgid "Error setting password for user %s: %s.\n"
+msgstr "Feil under setting av passord for bruker %s: %s.\n"
+
+#: apps/lpasswd.c:197
+#, c-format
+msgid "Error setting password for group %s: %s.\n"
+msgstr "Feil under setting av passord for gruppe %s: %s.\n"
+
+#: apps/lpasswd.c:208
+msgid "Password changed.\n"
+msgstr "Passord endret.\n"
+
+#: modules/sasldb.c:128
+#, c-format
+msgid "Cyrus SASL error creating user: %s: %s"
+msgstr "Feil i Cyrus SASL under oppretting av bruker: %s: %s"
+
+#: modules/sasldb.c:130
+#, c-format
+msgid "Cyrus SASL error creating user: %s"
+msgstr "Feil i Cyrus SASL under oppretting av bruker: %s"
+
+#: modules/sasldb.c:136
+#, c-format
+msgid "Cyrus SASL error removing user: %s: %s"
+msgstr "Feil i Cyrus SASL ved fjerning av bruker %s: %s"
+
+#: modules/sasldb.c:138
+#, c-format
+msgid "Cyrus SASL error removing user: %s"
+msgstr "Feil i Cyrus SASL ved fjerning av bruker: %s"
+
+#: modules/sasldb.c:428 modules/sasldb.c:436
+#, c-format
+msgid "error initializing Cyrus SASL: %s"
+msgstr "feil ved initiering av Cyrus SASL: %s."
+
+#: python/admin.c:494
+msgid "error creating home directory for user"
+msgstr "feil under oppretting av hjemmekatalog for bruker"
+
+#: python/admin.c:546
+msgid "error removing home directory for user"
+msgstr "feil under fjerning av hjemmekatalog for bruker"
+
+#: python/admin.c:623
+msgid "error moving home directory for user"
+msgstr "feil under flytting av hjemmekatalog for bruker"
+
+#: python/admin.c:656
+msgid "error creating mail spool for user"
+msgstr "feil under oppretting av e-postkatalog for bruker"
