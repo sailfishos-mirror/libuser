@@ -61,6 +61,13 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
+* Sat Jan 20 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add a "quiet" prompter
+- add --interactive flag to sample apps and default to using quiet prompter
+- ldap: attempt a "self" bind if other attempts fail
+- krb5: connect to the password-changing service if the user principal has
+  the NULL instance
+
 * Wed Jan 10 2001 Nalin Dahyabhai <nalin@redhat.com>
 - the great adding-of-the-copyright-statements
 - take more care when creating backup files in the files module
