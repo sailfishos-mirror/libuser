@@ -3,14 +3,14 @@
 # Copyright (C) 2002 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
 # Ben Wu <hpwu@redhat.com>, 2002.
-# Chester Cheng <ccheng@redhat.com>, 2004.
+# Chester Cheng <ccheng@redhat.com>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-11-15 08:56+1000\n"
+"PO-Revision-Date: 2005-03-25 16:50+1000\n"
 "Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
 "Language-Team: Chinese Traditional <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,15 +31,15 @@ msgstr "建立 `%s' 錯誤: %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "建立 `%s' 群組發生錯誤：%s\n"
+msgstr "改變 `%s' 的所有人時發生錯誤：%s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "建立 `%s' 錯誤: %s"
+msgstr "寫入 `%s' 錯誤：%s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -708,9 +708,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "備份檔`%s' 存在而它不是一個正常的檔案"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "函式庫/模組 版本不符"
+msgstr "備份檔案的大小不符"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -1013,3 +1012,4 @@ msgstr "取得預設使用者屬性:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
+
