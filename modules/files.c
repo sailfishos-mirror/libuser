@@ -532,7 +532,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key, *p;
+	char *key, *p = NULL;
 	GValueArray *values;
 	GValue *value;
 	gboolean ret = FALSE;
@@ -621,7 +621,7 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 	if (ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
 		if ((values != NULL) && (values->n_values > 0)) {
-			char *p;
+			char *p = NULL;
 			value = g_value_array_get_nth(values, 0);
 			if (G_VALUE_HOLDS_STRING(value)) {
 				/* Generate a copy of the group's name. */
@@ -1279,7 +1279,7 @@ generic_del(struct lu_module *module, const char *base_name,
 	GValueArray *name = NULL;
 	GValue *value;
 	char *contents = NULL, *filename = NULL, *key = NULL;
-	char *fragment1, *fragment2, *tmp;
+	char *fragment1 = NULL, *fragment2, *tmp;
 	const char *dir;
 	struct stat st;
 	size_t len;
@@ -1512,7 +1512,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	GValue *val;
 	char *filename = NULL, *key = NULL;
 	const char *dir;
-	char *value, *new_value, *namestring;
+	char *value, *new_value, *namestring = NULL;
 	int fd = -1;
 	gpointer lock;
 	gboolean ret = FALSE;
@@ -1625,7 +1625,7 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename = NULL, *key = NULL;
-	const char *dir, *namestring;
+	const char *dir, *namestring = NULL;
 	char *value;
 	int fd = -1;
 	gpointer lock;
