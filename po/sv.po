@@ -1,5 +1,5 @@
 # Swedish messages for libuser.
-# Copyright (C) 2001, 2002, 2003 Christian Rose <menthos@menthos.com>.
+# Copyright (C) 2001, 2002, 2003, 2004 Christian Rose <menthos@menthos.com>.
 #
 # $Id$
 #
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2003-03-10 16:04+0100\n"
+"PO-Revision-Date: 2004-11-06 18:58+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,17 +43,22 @@ msgstr "Internt fel.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s är inte auktoriserad att ändra fingerinformationen för %s\n"
+
+msgid "%s is not authorized to change the finger information of %s\n"
+msgstr "%s är inte auktoriserad att ändra fingerinformationen för %s\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "okänt fel"
+msgstr "Okänt användarsammanhang"
+
+msgid "Unknown user"
+msgstr "Okänd användare"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Kan inte ställa in standardsammanhanget för /etc/password\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -162,9 +167,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Kontot går ut:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
+msgstr "Misslyckades med att ändra åldringsinformation för %s: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -236,9 +241,9 @@ msgid "Shell changed.\n"
 msgstr "Skalet ändrat.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Skalet ändrat.\n"
+msgstr "Skalet inte ändrat: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -250,9 +255,9 @@ msgid "No group name specified.\n"
 msgstr "Inget gruppnamn angivet.\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Skapande av grupp misslyckades.\n"
+msgstr "Skapande av grupp misslyckades: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -260,9 +265,9 @@ msgid "Group %s does not exist.\n"
 msgstr "Gruppen %s finns inte.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Gruppen %s kunde inte tas bort: %s.\n"
+msgstr "Gruppen %s kunde inte tas bort: %s\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -270,24 +275,24 @@ msgid "Both -L and -U specified.\n"
 msgstr "Både -L och -U är angivna.\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Misslyckades med att ställa in grupp för %s.\n"
+msgstr "Misslyckades med att ställa in lösenord för gruppen %s: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Gruppen %s kunde inte låsas.\n"
+msgstr "Gruppen %s kunde inte låsas: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Gruppen %s kunde inte låsas upp.\n"
+msgstr "Gruppen %s kunde inte låsas upp: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Gruppen %s kunde inte ändras: %s.\n"
+msgstr "Gruppen %s kunde inte ändras: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -323,9 +328,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "Vägrar att skapa konto med UID 0.\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "Fel vid skapande av grupp för \"%s\" med GID %ld.\n"
+msgstr "Fel vid skapande av grupp för \"%s\" med GID %ld: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -386,9 +391,9 @@ msgid "Password changed.\n"
 msgstr "Lösenordet ändrat.\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Fel vid skapande av gruppen \"%s\".\n"
+msgstr "Fel vid skapande av gruppen \"%s\": %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -486,14 +491,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "kunde inte öppna konfigurationsfilen \"%s\": %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "kunde inte öppna konfigurationsfilen \"%s\": %s"
+msgstr "kunde inte ta status på konfigurationsfilen \"%s\": %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "kunde inte öppna konfigurationsfilen \"%s\": %s"
+msgstr "kunde inte läsa konfigurationsfilen \"%s\": %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -632,24 +637,24 @@ msgid "error locking file: %s"
 msgstr "fel vid låsning av fil: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "kunde inte skriva till \"%s\": %s"
+msgstr "kunde inte få tag i säkerhetssammanhanget för \"%s\": %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "kunde inte ta status på \"%s\": %s"
+msgstr "kunde inte ställa in säkerhetssammanhanget: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "kunde inte skriva till \"%s\": %s"
+msgstr "kunde inte ställa in standardsäkerhetssammanhanget till \"%s\": %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "kunde inte skriva till \"%s\": %s"
+msgstr "kunde inte återställa standardsäkerhetssammanhanget till \"%s\": %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -700,9 +705,8 @@ msgid "entity object has no %s attribute"
 msgstr "enhetsobjektet har inget %s-attribut"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "fel vid inställning av lösenord för \"%s\""
+msgstr "fel vid kryptering av lösenord"
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -789,9 +793,9 @@ msgid "could not bind to LDAP server"
 msgstr "kunde inte binda till LDAP-servern"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "kunde inte binda till LDAP-servern"
+msgstr "kunde inte binda till LDAP-servern, första försök som \"%s\": %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
@@ -825,9 +829,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "kunde inte konvertera intern data till LDAPMods"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "fel vid byte av namn på LDAP-katalogpost: %s\n"
+msgstr "fel vid skapande av LDAP-katalogpost: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -835,9 +839,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "fel vid ändring av LDAP-katalogpost: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "fel vid byte av namn på LDAP-katalogpost: %s\n"
+msgstr "fel vid byte av namn på LDAP-katalogpost: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -845,9 +849,9 @@ msgid "object had no %s attribute"
 msgstr "objektet hade inget %s-attribut"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "fel vid borttagning av LDAP-katalogpost: %s.\n"
+msgstr "fel vid borttagning av LDAP-katalogpost: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -955,11 +959,17 @@ msgstr "Posten hittades inte.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Prompter lyckades.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Prompter misslyckades.\n"
+
+msgid "Prompts succeeded."
+msgstr "Prompter lyckades."
+
+msgid "Prompts failed."
+msgstr "Prompter misslyckades."
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
