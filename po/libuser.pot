@@ -1,0 +1,307 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2001-01-02 14:40-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: apps/apputil.c:59 apps/apputil.c:67 apps/apputil.c:75
+msgid "Feature not implemented: "
+msgstr ""
+
+#: apps/apputil.c:60
+#, c-format
+msgid "NOT creating home directory '%s'.\n"
+msgstr ""
+
+#: apps/apputil.c:68
+#, c-format
+msgid "NOT moving %s to %s.\n"
+msgstr ""
+
+#: apps/apputil.c:76
+#, c-format
+msgid "NOT removing %s.\n"
+msgstr ""
+
+#: apps/lchage.c:81 apps/luseradd.c:63 apps/luserdel.c:37 apps/lusermod.c:58
+msgid "[OPTION...] user"
+msgstr ""
+
+#: apps/lchage.c:90 apps/luseradd.c:83 apps/luserdel.c:46 apps/lusermod.c:67
+msgid "No user name specified.\n"
+msgstr ""
+
+#: apps/lchage.c:97 apps/luserdel.c:53 apps/lusermod.c:79
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr ""
+
+#: apps/lchage.c:104
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:108
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:112
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:116
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:120 apps/lchage.c:128 apps/lchage.c:138 apps/lchage.c:148
+msgid "Never"
+msgstr ""
+
+#: apps/lchage.c:123
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr ""
+
+#: apps/lchage.c:132
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr ""
+
+#: apps/lchage.c:143
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr ""
+
+#: apps/lchage.c:151
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr ""
+
+#: apps/lchage.c:180
+#, c-format
+msgid "Aging information for %s could not be modified.\n"
+msgstr ""
+
+#: apps/lgroupadd.c:44 apps/lgroupdel.c:31 apps/lgroupmod.c:55
+msgid "[OPTION...] group"
+msgstr ""
+
+#: apps/lgroupadd.c:53 apps/lgroupdel.c:40 apps/lgroupmod.c:64
+msgid "No group name specified.\n"
+msgstr ""
+
+#: apps/lgroupadd.c:81
+msgid "Group creation failed.\n"
+msgstr ""
+
+#: apps/lgroupdel.c:47 apps/lgroupmod.c:76
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr ""
+
+#: apps/lgroupdel.c:52
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr ""
+
+#: apps/lgroupmod.c:69 apps/lusermod.c:72
+msgid "Both -L and -U specified.\n"
+msgstr ""
+
+#: apps/lgroupmod.c:153
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr ""
+
+#: apps/lgroupmod.c:161
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr ""
+
+#: apps/lgroupmod.c:168
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr ""
+
+#: apps/luseradd.c:96
+#, c-format
+msgid "Error creating group for %s.\n"
+msgstr ""
+
+#: apps/luseradd.c:138
+msgid "Account creation failed.\n"
+msgstr ""
+
+#: apps/luseradd.c:163
+#, c-format
+msgid "Bad UID for %s.\n"
+msgstr ""
+
+#: apps/luseradd.c:167
+#, c-format
+msgid "Bad GID for %s.\n"
+msgstr ""
+
+#: apps/luseradd.c:177
+#, c-format
+msgid "No home directory for %s.\n"
+msgstr ""
+
+#: apps/luseradd.c:183
+#, c-format
+msgid "Error creating %s.\n"
+msgstr ""
+
+#: apps/luserdel.c:58
+#, c-format
+msgid "User %s could not be deleted.\n"
+msgstr ""
+
+#: apps/luserdel.c:66
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr ""
+
+#: apps/luserdel.c:71
+#, c-format
+msgid "Error removing %s.\n"
+msgstr ""
+
+#: apps/lusermod.c:108
+#, c-format
+msgid "Error reading old home directory for %s.\n"
+msgstr ""
+
+#: apps/lusermod.c:135
+#, c-format
+msgid "User %s could not be locked.\n"
+msgstr ""
+
+#: apps/lusermod.c:143
+#, c-format
+msgid "User %s could not be unlocked.\n"
+msgstr ""
+
+#: apps/lusermod.c:150
+#, c-format
+msgid "User %s could not be modified.\n"
+msgstr ""
+
+#: apps/lusermod.c:156
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr ""
+
+#: apps/lusermod.c:161
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr ""
+
+#: apps/lusermod.c:166
+#, c-format
+msgid "Error moving %s to %s.\n"
+msgstr ""
+
+#: lib/user.c:68
+#, c-format
+msgid "error loading libuser module '%s': %s."
+msgstr ""
+
+#: lib/user.c:81
+#, c-format
+msgid "no initialization function %s in '%s'."
+msgstr ""
+
+#: lib/user.c:88
+#, c-format
+msgid "error initializing '%s'."
+msgstr ""
+
+#: lib/user.c:99
+#, c-format
+msgid "module version mismatch in %s"
+msgstr ""
+
+#: lib/userent.c:24
+#, c-format
+msgid "dump of struct lu_ent at %p:\n"
+msgstr ""
+
+#: lib/userent.c:25
+#, c-format
+msgid " magic = %08x\n"
+msgstr ""
+
+#: lib/userent.c:127
+msgid ""
+"\n"
+"Before copy:\n"
+msgstr ""
+
+#: lib/userent.c:142
+msgid ""
+"\n"
+"After copy:\n"
+msgstr ""
+
+#: lib/userent.c:274
+#, c-format
+msgid "freeing lu_ent at %p.\n"
+msgstr ""
+
+#: samples/lookup.c:41 samples/testuser.c:34
+msgid "Error initializing lu.\n"
+msgstr ""
+
+#: samples/lookup.c:50
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr ""
+
+#: samples/lookup.c:53
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr ""
+
+#: samples/lookup.c:59
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr ""
+
+#: samples/lookup.c:62
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr ""
+
+#: samples/lookup.c:86
+msgid "Entry not found.\n"
+msgstr ""
+
+#: samples/testuser.c:38
+msgid "Default user object classes:\n"
+msgstr ""
+
+#: samples/testuser.c:44
+msgid "Default user attribute names:\n"
+msgstr ""
+
+#: samples/testuser.c:50
+msgid "Getting default user attributes:\n"
+msgstr ""
+
+#: samples/testuser.c:55
+msgid "Copying user structure:\n"
+msgstr ""

@@ -1,0 +1,23 @@
+0.5
+* Implemented the krb5 back-end (user add, modify, delete only).
+* Lookups in the files module use O_RDONLY instead of O_RDWR.
+
+0.4
+* Modify lu_start prototype and add semantics for non-superuser use (we'll
+  need this later).
+
+0.3
+* Remove recursive account locking from the files/shadow module.
+* Fixup popt help text.
+* Remove dependency on krb5 profile sublibrary for reading config files.
+
+0.2
+* Implemented prompting.
+* Added macros for LU_USERNAME and LU_GROUPNAME, found a bug in the files module
+  while converting to use them.
+* Switched from getopt() to popt for argument parsing to get autohelp in the
+  various test/demo programs.
+
+0.1
+* Finished up most of the internals and the files back-end.
+* Simple shadow-like programs.

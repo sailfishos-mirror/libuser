@@ -1,0 +1,40 @@
+[defaults]
+# Do not modify the default module lists if you care about unattended calls
+# to programs (scripts) working!
+moduledir = @pkglibdir@
+skeleton = @sysconfdir@/skel
+auth_modules = shadow files
+info_modules = files
+
+[userdefaults]
+objectclass = account
+objectclass = posixAccount
+cn = %n
+uidNumber = 500
+gidNumber = %u
+userPassword = !!
+homeDirectory = /home/%n
+loginShell = /bin/bash
+description = The user named %n with uid %u.
+gecos = %n
+
+objectclass = shadowAccount
+shadowLastChange = 11273
+shadowMin = 0
+shadowMax = 99999
+shadowWarning = 7
+shadowInactive = -1
+shadowExpire = -1
+shadowFlag = -1
+
+[groupdefaults]
+objectclass = posixGroup
+cn = %n
+gidNumber = 500
+userPassword = !!
+
+[files]
+directory = @sysconfdir@
+
+[shadow]
+directory = @sysconfdir@

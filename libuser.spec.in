@@ -1,0 +1,62 @@
+Name: @PACKAGE@
+Version: @VERSION@
+Release: 1
+Group: System Environment/Base
+License: LGPL
+Source: libuser-%{version}.tar.gz
+BuildRoot: %{_tmppath}/%{name}-root
+Summary: A user account administration library.
+
+%description
+The libuser library implements a standardized interface for manipulating
+and administering user accounts.  The library uses pluggable back-ends to
+interface to its data sources.
+
+Sample applications modeled after those included with the shadow password
+suite are included.
+
+%package devel
+Group: Development/Libraries
+Summary: Files needed for developing applications which use libuser.
+
+%description devel
+The libuser-devel package contains header files, static libraries, and .la
+files useful for developing applications with libuser.
+
+%prep
+%setup -q
+
+%build
+%configure
+make
+
+%clean
+rm -fr $RPM_BUILD_ROOT
+
+%install
+rm -fr $RPM_BUILD_ROOT
+%makeinstall
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%files
+%defattr(-,root,root)
+%doc AUTHORS COPYING NEWS README TODO docs/*
+%config %{_sysconfdir}/libuser.conf
+%dir %{_libdir}/libuser
+%{_libdir}/libuser.so.*.*
+%{_libdir}/libuser/*.so*
+%{_sbindir}/*
+
+%files devel
+%defattr(-,root,root)
+%{_includedir}/libuser
+%{_libdir}/libuser.a
+%{_libdir}/libuser.la
+%{_libdir}/libuser.so
+#%{_libdir}/libuser/*.a
+#%{_libdir}/libuser/*.la
+
+%changelog

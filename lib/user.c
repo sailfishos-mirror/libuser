@@ -1,0 +1,510 @@
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include <libuser/user_private.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define WHITESPACE "\t "
+
+static void
+lu_module_unload(gpointer key, gpointer value, gpointer data)
+{
+	struct lu_module *module;
+	GModule *handle = NULL;
+	if(value != NULL) {
+		module = (struct lu_module*) value;
+		handle = module->module_handle;
+		module->close(module);
+	}
+	if(handle != NULL) {
+		g_module_close(handle);
+	}
+}
+
+static void
+lu_module_load(struct lu_context *ctx, const gchar *list, GList **names)
+{
+	char *p, *q, *tmp, *wlist, *sym;
+	GModule *handle = NULL;
+	gchar *module_dir = NULL, *module_file = NULL;
+	lu_module_init_t module_init = NULL;
+	struct lu_module *module = NULL;
+	GList *vals;
+
+	g_return_if_fail(ctx != NULL);
+	g_return_if_fail(list != NULL);
+
+	if(names) {
+		g_list_free(*names);
+		*names = NULL;
+	}
+
+	vals = lu_cfg_read(ctx, "defaults/moduledir", NULL);
+	if(vals) {
+		module_dir = ctx->scache->cache(ctx->scache,
+						(char*)vals->data);
+		g_list_free(vals);
+	}
+
+	if(module_dir == NULL) {
+		module_dir = ctx->scache->cache(ctx->scache, MODULEDIR);
+	}
+
+	wlist = g_strdup(ctx->scache->cache(ctx->scache, list));
+
+	for(p = strtok_r(wlist, WHITESPACE, &q);
+	    p != NULL;
+	    p = strtok_r(NULL, WHITESPACE, &q)) {
+		if(g_hash_table_lookup(ctx->modules, p) == NULL) {
+			tmp = g_strconcat(module_dir, "/libuser_", p,
+					  ".so", NULL);
+			module_file = ctx->scache->cache(ctx->scache, tmp);
+			g_free(tmp);
+
+			handle = g_module_open(module_file, 0);
+			if(handle == NULL) {
+				g_warning(_("error loading libuser module "
+					    "'%s': %s."), module_file,
+					  g_module_error());
+				exit(1);
+			} else {
+				tmp = g_strconcat("lu_", p, "_init", NULL);
+				sym = ctx->scache->cache(ctx->scache, tmp);
+				g_free(tmp);
+
+				g_module_symbol(handle, sym,
+						(gpointer*) &module_init);
+			}
+			if(module_init == NULL) {
+				g_warning(_("no initialization function %s "
+					    "in '%s'."), sym, module_file);
+				exit(1);
+			} else {
+				module = module_init(ctx);
+			}
+			if(module == NULL) {
+				g_warning(_("error initializing '%s'."),
+					  module_file);
+				exit(1);
+			} else {
+				char *key = ctx->scache->cache(ctx->scache, p);
+				module->lu_context = ctx;
+				module->module_handle = handle;
+				g_hash_table_insert(ctx->modules, key, module);
+				*names = g_list_append(*names, key);
+			}
+			if(module->version != LU_MODULE_VERSION) {
+				g_warning(_("module version mismatch in %s"),
+					  module_file);
+				exit(1);
+			}
+		} else {
+			char *key = ctx->scache->cache(ctx->scache, p);
+			*names = g_list_append(*names, key);
+		}
+	}
+
+	g_free(wlist);
+}
+
+void
+lu_set_info_modules(struct lu_context *context, const char *list)
+{
+	g_return_if_fail(list != NULL);
+	lu_module_load(context, list, &context->info_module_names);
+}
+
+void
+lu_set_auth_modules(struct lu_context *context, const char *list)
+{
+	g_return_if_fail(list != NULL);
+	lu_module_load(context, list, &context->auth_module_names);
+}
+
+struct lu_context *
+lu_start(const char *auth_name, enum lu_type auth_type,
+	 const char *info_modules, const char *auth_modules,
+	 lu_prompt_fn *prompter, gpointer prompter_data)
+{
+	struct lu_context *ctx = NULL;
+	GList *modules;
+
+	ctx = g_malloc0(sizeof(struct lu_context));
+
+	if(lu_cfg_init(ctx) == FALSE) {
+		g_free(ctx);
+		return NULL;
+	}
+
+	ctx->scache = lu_string_cache_new(TRUE);
+
+	ctx->prompter = prompter;
+	ctx->prompter_data = prompter_data;
+	ctx->auth_name = ctx->scache->cache(ctx->scache, auth_name);
+	ctx->auth_type = auth_type;
+
+	ctx->modules = g_hash_table_new(g_str_hash, lu_str_case_equal);
+
+	if(auth_modules == NULL) {
+		modules = lu_cfg_read(ctx, "defaults/auth_modules", "");
+		if(modules) {
+			auth_modules = modules->data;
+			g_list_free(modules);
+		}
+	}
+	lu_module_load(ctx, auth_modules, &ctx->auth_module_names);
+
+	if(info_modules == NULL) {
+		modules = lu_cfg_read(ctx, "defaults/info_modules", "");
+		if(modules) {
+			info_modules = modules->data;
+			g_list_free(modules);
+		}
+	}
+	lu_module_load(ctx, info_modules, &ctx->info_module_names);
+
+	return ctx;
+}
+
+void
+lu_end(struct lu_context *context)
+{
+	g_return_if_fail(context != NULL);
+
+	g_hash_table_foreach(context->modules, lu_module_unload, NULL);
+	g_hash_table_destroy(context->modules);
+
+	lu_cfg_done(context);
+
+	context->scache->free(context->scache);
+
+	memset(context, 0, sizeof(struct lu_context));
+
+	g_free(context);
+}
+
+static gboolean
+run_single(struct lu_context *context, struct lu_module *module,
+	   enum lu_module_type type, enum lu_dispatch_id id,
+	   struct lu_ent *ent, gpointer data)
+{
+	gboolean success = FALSE;
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(module != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	switch(id) {
+		case user_lookup_name:
+			success = module->user_lookup_name(module,
+							   data,
+							   ent);
+			break;
+		case user_lookup_id:
+			success = module->user_lookup_id(module,
+							 data,
+							 ent);
+			break;
+		case group_lookup_name:
+			success = module->group_lookup_name(module,
+							    data,
+							    ent);
+			break;
+		case group_lookup_id:
+			success = module->group_lookup_id(module,
+							  data,
+							  ent);
+			break;
+		case user_add:
+			success = module->user_add(module, ent);
+			break;
+		case group_add:
+			success = module->group_add(module, ent);
+			break;
+		case user_mod:
+			success = module->user_mod(module, ent);
+			break;
+		case group_mod:
+			success = module->group_mod(module, ent);
+			break;
+		case user_del:
+			success = module->user_del(module, ent);
+			break;
+		case group_del:
+			success = module->group_del(module, ent);
+			break;
+		case user_lock:
+			success = module->user_lock(module, ent);
+			break;
+		case group_lock:
+			success = module->group_lock(module, ent);
+			break;
+		case user_unlock:
+			success = module->user_unlock(module, ent);
+			break;
+		case group_unlock:
+			success = module->group_unlock(module, ent);
+			break;
+	}
+	if(success) {
+		if(type == auth) {
+			lu_ent_set_source_auth(ent, module->name);
+		}
+		if(type == info) {
+			lu_ent_set_source_info(ent, module->name);
+		}
+	}
+	return success;
+}
+
+static gboolean
+run_list(struct lu_context *context, GList *modules, enum lu_module_type type,
+	 enum lu_dispatch_id id, struct lu_ent *ent, gpointer data)
+{
+	struct lu_module *module;
+	GList *c;
+	gboolean success;
+	int i;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(modules != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	for(i = 0, success = FALSE;
+	    (c = g_list_nth(modules, i)) != NULL;
+	    i++) {
+		module = g_hash_table_lookup(context->modules, (char*)c->data);
+		g_assert(module != NULL);
+		success = run_single(context, module, type, id, ent, data);
+		if(success) {
+			break;
+		}
+	}
+
+	return success;
+}
+
+static gboolean
+lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
+	    gpointer data, struct lu_ent *ent)
+{
+	struct lu_ent *tmp;
+	struct lu_module *auth_module, *info_module;
+	gboolean success = FALSE;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	tmp = lu_ent_new();
+	lu_ent_copy(ent, tmp);
+
+	switch(id) {
+		case user_lookup_name:
+		case user_lookup_id:
+		case group_lookup_name:
+		case group_lookup_id:
+			if(run_list(context, context->info_module_names, info, id, tmp, data) &&
+			   run_list(context, context->auth_module_names, auth, id, tmp, data)) {
+				lu_ent_copy(tmp, ent);
+				lu_ent_revert(ent);
+				success = TRUE;
+			}
+			break;
+		case user_add:
+		case group_add:
+			if(run_list(context, context->auth_module_names, auth, id, tmp, data) &&
+			   run_list(context, context->info_module_names, info, id, tmp, data)) {
+				success = TRUE;
+			}
+			break;
+		case user_mod:
+		case user_del:
+		case group_mod:
+		case group_del:
+			auth_module = g_hash_table_lookup(context->modules,
+							  tmp->source_auth);
+			info_module = g_hash_table_lookup(context->modules,
+							  tmp->source_info);
+			g_assert(auth_module != NULL);
+			g_assert(info_module != NULL);
+			if(run_single(context, auth_module, auth, id, tmp, data) &&
+			   run_single(context, info_module, info, id, tmp, data)) {
+				success = TRUE;
+			}
+			break;
+		case user_lock:
+		case user_unlock:
+		case group_lock:
+		case group_unlock:
+			auth_module = g_hash_table_lookup(context->modules,
+							  tmp->source_auth);
+			g_assert(auth_module != NULL);
+			success = run_single(context, auth_module, auth,
+					     id, tmp, data);
+			break;
+	}
+	lu_ent_free(tmp);
+	return success;
+}
+
+gboolean
+lu_user_lookup_name(struct lu_context *context, const char *name,
+		    struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_lookup_name,
+			   (gpointer)name,
+			   ent);
+}
+
+gboolean
+lu_group_lookup_name(struct lu_context *context, const char *name,
+		     struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_lookup_name,
+			   (gpointer)name,
+			   ent);
+}
+
+gboolean
+lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent)
+{
+	struct lu_ent *tmp = NULL;
+	gboolean success;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	tmp = lu_ent_new();
+	success = lu_dispatch(context,
+			      user_lookup_id,
+			      GINT_TO_POINTER(uid),
+			      tmp);
+	if(success && lu_ent_get(tmp, "cn")) {
+		GList *list = lu_ent_get(tmp, "cn");
+		success = lu_dispatch(context,
+				      user_lookup_name,
+				      list->data,
+				      tmp);
+		lu_ent_copy(tmp, ent);
+	}
+	lu_ent_free(tmp);
+	return success;
+}
+
+gboolean
+lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent)
+{
+	struct lu_ent *tmp = NULL;
+	gboolean success;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+
+	tmp = lu_ent_new();
+	success = lu_dispatch(context,
+			      group_lookup_id,
+			      GINT_TO_POINTER(gid),
+			      tmp);
+	if(success && lu_ent_get(tmp, "cn")) {
+		GList *list = lu_ent_get(tmp, "cn");
+		success = lu_dispatch(context,
+				      group_lookup_name,
+				      list->data,
+				      tmp);
+		lu_ent_copy(tmp, ent);
+	}
+	lu_ent_free(tmp);
+	return success;
+}
+
+gboolean
+lu_user_add(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_add,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_add(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_add,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_user_modify(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_mod,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_modify(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_mod,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_user_delete(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_del,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_delete(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_del,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_user_lock(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_lock,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_user_unlock(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   user_unlock,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_lock(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_lock,
+			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_unlock(struct lu_context *context, struct lu_ent *ent)
+{
+	return lu_dispatch(context,
+			   group_unlock,
+			   NULL,
+			   ent);
+}

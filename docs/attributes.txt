@@ -1,0 +1,33 @@
+Users:
+	objectclass = posixAccount (files)
+	uid
+	userPassword
+	uidNumber
+	gidNumber
+	gecos
+	homeDirectory
+	loginShell
+
+	objectclass = shadowAccount (shadow)
+	uid
+	userPassword
+	shadowLastChange
+	shadowMin
+	shadowMax
+	shadowWarning
+	shadowInactive
+	shadowExpire
+	shadowFlag
+
+Groups:
+	objectclass = posixGroup (files)
+	cn
+	gidNumber
+	userPassword
+	memberUid
+
+	objectclass = shadowGroup (shadow)
+	cn
+	userPassword
+	administratorUid
+	memberUid

@@ -1,0 +1,15 @@
+apps/apputil.c
+apps/lchage.c
+apps/lgroupadd.c
+apps/lgroupdel.c
+apps/lgroupmod.c
+apps/luseradd.c
+apps/luserdel.c
+apps/lusermod.c
+lib/user.c
+lib/usercfg.c
+lib/userent.c
+lib/usersc.c
+lib/userutil.c
+samples/lookup.c
+samples/testuser.c
