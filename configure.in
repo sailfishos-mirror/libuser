@@ -9,7 +9,7 @@ AC_PROG_AWK
 AM_PROG_LIBTOOL
 
 AC_CHECK_LIB(crypt,crypt)
-AM_PATH_GLIB(1.2.10,,,gmodule)
+AM_PATH_GLIB(1.2.8,,,gmodule)
 
 ALL_LINGUAS="chef"
 AM_GNU_GETTEXT
