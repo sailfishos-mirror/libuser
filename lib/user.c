@@ -129,8 +129,7 @@ lu_end(struct lu_context *context)
 	g_assert(context != NULL);
 
 	if (context->modules != NULL) {
-		g_tree_traverse(context->modules, lu_module_unload,
-				G_IN_ORDER, NULL);
+		g_tree_foreach(context->modules, lu_module_unload, NULL);
 		g_tree_destroy(context->modules);
 	}
 
