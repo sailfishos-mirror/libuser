@@ -35,17 +35,18 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gid = NULL, *addAdmins = NULL, *remAdmins = NULL,
-		   *addMembers = NULL, *remMembers = NULL, *group = NULL;
+		   *addMembers = NULL, *remMembers = NULL, *group = NULL,
+		   *tmp = NULL;
 	char **admins = NULL, **members = NULL;
 	long gidNumber = -2, oldGidNumber = -2;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL;
-	GValue *value, val;
+	GValueArray *values = NULL, *gidvalues = NULL;
+	GValue *value, *gidvalue, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
-	int c;
+	int c, i;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -254,37 +255,24 @@ main(int argc, const char **argv)
 			lu_error_free(&error);
 		}
 		if (values) {
-			GList *gid;
-
 			ent = lu_ent_new();
 
-			for (i = values; i != NULL; i = g_list_next(i)) {
-				if (lu_user_lookup_name
-				    (ctx, values->data, ent, &error)) {
-					gid =
-					    lu_ent_get(ent, LU_GIDNUMBER);
-					if (gid != NULL) {
-						if (strcmp
-						    (gid->data,
-						     oldGidNumber) == 0) {
-							lu_ent_set_numeric
-							    (ent,
-							     LU_GIDNUMBER,
-							     gidNumber);
-							lu_user_modify(ctx,
-								       ent,
-								       &error);
-							if (error != NULL) {
-								lu_error_free
-								    (&error);
-							}
-							lu_hup_nscd();
-						}
+			memset(&val, 0, sizeof(val));
+			g_value_init(&val, G_TYPE_LONG);
+			g_value_set_long(&val, gidNumber);
+
+			for (i = 0; i < values->n_values; i++) {
+				value = g_value_array_get_nth(values, i);
+				tmp = g_value_get_string(value);
+				if (lu_user_lookup_name (ctx, tmp, ent,
+							 &error)) {
+					lu_ent_clear(ent, LU_GIDNUMBER);
+					lu_ent_add(ent, LU_GIDNUMBER, &val);
+					lu_user_modify(ctx, ent, &error);
+					if (error != NULL) {
+						lu_error_free(&error);
 					}
-					lu_ent_clear_all(ent);
-				}
-				if (error != NULL) {
-					lu_error_free(&error);
+					lu_hup_nscd();
 				}
 			}
 

@@ -33,27 +33,38 @@
 #include "../include/libuser/user.h"
 #include "apputil.h"
 
-/**
- * Parse a string for a count of days, and return the value.  If the string is
- * empty, or invalid somehow, return the default of -1.
- */
+/* Parse the first element of a value array for a count of days, and return
+ * the value.  If the array is empty, or invalid somehow, return the default
+ * of -1.  */
 static gint
 read_ndays(GValueArray *array)
 {
+	const char *s;
 	char *p;
 	GValue *value;
-	gint n_days;
-	value = g_value_array_get_nth(array, 0);
-	n_days = strtol(g_value_get_string(value), &p, 10);
-	if ((p == NULL) || (*p != '\0')) {
-		n_days = -1;
+	gint n_days = -1;
+	/* If we have a non-empty array, check its first element. */
+	if ((array != NULL) && (array->n_values > 0)) {
+		value = g_value_array_get_nth(array, 0);
+		if (value != NULL) {
+			/* If it's a string, use strtol to read it. */
+			if (G_VALUE_HOLDS_STRING(value)) {
+				s = g_value_get_string(value);
+				n_days = strtol(s, &p, 10);
+				if ((p == NULL) || (*p != '\0')) {
+					n_days = -1;
+				}
+			}
+			/* If it's a long, read it directly. */
+			if (G_VALUE_HOLDS_LONG(value)) {
+				n_days = g_value_get_long(value);
+			}
+		}
 	}
 	return n_days;
 }
 
-/**
- * Format a count of days into a string that's intelligible to a user.
- */
+/* Format a count of days into a string that's intelligible to a user. */
 static void
 date_to_string(gint n_days, char *buf, size_t len)
 {
@@ -72,7 +83,7 @@ main(int argc, const char **argv)
 {
 	char buf[LINE_MAX];
 	long shadowMin = -2, shadowMax = -2, shadowLastChange = -2,
-	    shadowInactive = -2, shadowExpire = -2, shadowWarning = -2;
+	     shadowInactive = -2, shadowExpire = -2, shadowWarning = -2;
 	const char *user = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
@@ -107,10 +118,12 @@ main(int argc, const char **argv)
 		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
+	/* Set up i18n. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
+	/* Parse arguments. */
 	popt = poptGetContext("lchage", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] user"));
 	c = poptGetNextOpt(popt);
@@ -122,12 +135,14 @@ main(int argc, const char **argv)
 	}
 	user = poptGetArg(popt);
 
+	/* We need exactly one argument, and that's the user's name. */
 	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
+	/* Start up the library. */
 	ctx = lu_start(user, lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -144,42 +159,45 @@ main(int argc, const char **argv)
 
 	ent = lu_ent_new();
 
+	/* Look up information about the user. */
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
 		return 2;
 	}
 
 	if (list_only) {
+		/* Just print out what we can find out, in a format similar
+		 * to the chage(1) utility from the shadow suite. */
 		if (lu_user_islocked(ctx, ent, &error)) {
 			printf(_("Account is locked.\n"));
 		} else {
 			printf(_("Account is not locked.\n"));
 		}
+
 		values = lu_ent_get(ent, LU_SHADOWMIN);
 		if (values && (values->n_values > 0)) {
-			printf(_("Minimum:\t%d\n"),
-			       read_ndays(values));
+			printf(_("Minimum:\t%d\n"), read_ndays(values));
 		}
+
 		values = lu_ent_get(ent, LU_SHADOWMAX);
 		if (values && (values->n_values > 0)) {
-			printf(_("Maximum:\t%d\n"),
-			       read_ndays(values));
+			printf(_("Maximum:\t%d\n"), read_ndays(values));
 		}
+
 		values = lu_ent_get(ent, LU_SHADOWWARNING);
 		if (values && (values->n_values > 0)) {
-			printf(_("Warning:\t%d\n"),
-			       read_ndays(values));
+			printf(_("Warning:\t%d\n"), read_ndays(values));
 		}
+
 		values = lu_ent_get(ent, LU_SHADOWINACTIVE);
 		if (values && (values->n_values > 0)) {
-			printf(_("Inactive:\t%d\n"),
-			       read_ndays(values));
+			printf(_("Inactive:\t%d\n"), read_ndays(values));
 		}
+
 		values = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
 		if (values && (values->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values),
-				       buf, sizeof(buf));
+			date_to_string(read_ndays(values), buf, sizeof(buf));
 			printf(_("Last Change:\t%s\n"), buf);
 		}
 
@@ -188,8 +206,8 @@ main(int argc, const char **argv)
 		    values2 && (values2->n_values > 0)) {
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values) +
-				       read_ndays(values2), buf,
-				       sizeof(buf));
+				       read_ndays(values2),
+				       buf, sizeof(buf));
 			printf(_("Password Expires:\t%s\n"), buf);
 		}
 
@@ -200,19 +218,19 @@ main(int argc, const char **argv)
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values) +
 				       read_ndays(values2) +
-				       read_ndays(values3), buf,
-				       sizeof(buf));
+				       read_ndays(values3),
+				       buf, sizeof(buf));
 			printf(_("Password Inactive:\t%s\n"), buf);
 		}
 
 		values = lu_ent_get(ent, LU_SHADOWEXPIRE);
 		if (values && (values->n_values > 0)) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values), buf,
-				       sizeof(buf));
+			date_to_string(read_ndays(values), buf, sizeof(buf));
 			printf(_("Account Expires:\t%s\n"), buf);
 		}
 	} else {
+		/* Set values using parameters given on the command-line. */
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);
 		if (shadowLastChange != -2) {
@@ -246,10 +264,11 @@ main(int argc, const char **argv)
 			lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
 		}
 
+		/* Now actually modify the user's data in the system
+		 * information store. */
 		if (lu_user_modify(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("Failed to modify aging information for %s.\n"),
-				user);
+			fprintf(stderr, _("Failed to modify aging information "
+				"for %s.\n"), user);
 			return 3;
 		}
 

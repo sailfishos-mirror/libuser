@@ -39,7 +39,13 @@ main(int argc, const char **argv)
 	int c;
 	char *file = NULL, **fields;
 	FILE *fp = stdin;
-	GList *values = NULL;
+	uid_t uid;
+	gid_t gid;
+	char *homedir, *gidstring;
+	long gid_tmp;
+	char *p;
+	GValueArray *values = NULL;
+	GValue *value, val;
 	char buf[LINE_MAX];
 	poptContext popt;
 	struct poptOption options[] = {
@@ -49,13 +55,16 @@ main(int argc, const char **argv)
 		 "file with user information records", "STDIN"},
 		{"nocreatehome", 'M', POPT_ARG_NONE, &nocreatehome, 0,
 		 "don't create home directories", NULL},
-		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
+		POPT_AUTOHELP
+		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
+	/* Initialize i18n support. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
+	/* Parse arguments. */
 	popt = poptGetContext("lnewusers", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...]"));
 	c = poptGetNextOpt(popt);
@@ -66,10 +75,10 @@ main(int argc, const char **argv)
 		exit(1);
 	}
 
-	ctx =
-	    lu_start(NULL, lu_user, NULL, NULL,
-		     interactive ? lu_prompt_console :
-		     lu_prompt_console_quiet, NULL, &error);
+	/* Start up the library. */
+	ctx = lu_start(NULL, lu_user, NULL, NULL,
+		       interactive ? lu_prompt_console :
+		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
 		if (error != NULL) {
 			fprintf(stderr, _("Error initializing %s: %s.\n"),
@@ -81,6 +90,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	/* Open the file we're going to look at. */
 	if (file != NULL) {
 		fp = fopen(file, "r");
 		if (fp == NULL) {
@@ -88,12 +98,15 @@ main(int argc, const char **argv)
 				file, strerror(errno));
 			return 2;
 		}
+	} else {
+		fp = stdin;
 	}
 
 	ent = lu_ent_new();
 	groupEnt = lu_ent_new();
 
 	while (fgets(buf, sizeof(buf), fp)) {
+		/* Strip off the end-of-line terminators. */
 		if (strchr(buf, '\r')) {
 			char *p = strchr(buf, '\r');
 			*p = '\0';
@@ -102,44 +115,54 @@ main(int argc, const char **argv)
 			char *p = strchr(buf, '\n');
 			*p = '\0';
 		}
+
+		/* Make sure the line splits into *exactly* seven fields. */
 		fields = g_strsplit(buf, ":", 7);
-		if (fields && fields[0] && fields[1] && fields[2]
-		    && fields[3] && fields[4] && fields[5] && fields[6]) {
-			char *homedir, *gidstring;
-			uid_t uid;
-			gid_t gid;
-			long gid_tmp;
-			char *p;
+		if ((fields == NULL) ||
+		    (fields[0] == NULL) ||
+		    (fields[1] == NULL) ||
+		    (fields[2] == NULL) ||
+		    (fields[3] == NULL) ||
+		    (fields[4] == NULL) ||
+		    (fields[5] == NULL) ||
+		    (fields[6] == NULL) ||
+		    (fields[7] != NULL)) {
+			g_print(_("Error creating account for `%s': line "
+				"improperly formatted.\n"), buf);
+		}
 
-			/* Sorry, but we're bastards here. */
-			uid = atol(fields[2]);
-			if (uid == 0) {
-				g_print(_
-					("Refusing to create account with UID 0.\n"));
-				g_strfreev(fields);
-				continue;
-			}
+		/* Sorry, but we're bastards here.  No root accounts. */
+		uid = atol(fields[2]);
+		if (uid == 0) {
+			g_print(_("Refusing to create account with UID 0.\n"));
+			g_strfreev(fields);
+			continue;
+		}
 
-			/* Try to figure out if the field is the name of a group, or a gid. */
-			if (strlen(fields[3]) > 0) {
-				gidstring = fields[3];
-			} else {
-				gidstring = fields[0];
-			}
+		/* Try to figure out if the field is the name of a group, or
+		 * a gid.  If it's just empty, make it the same as the user's
+		 * name.  FIXME: provide some way to set a default other than
+		 * the user's own name, like "users" or something. */
+		if (strlen(fields[3]) > 0) {
+			gidstring = fields[3];
+		} else {
+			gidstring = fields[0];
+		}
 
-			/* Try to convert the field to a number. */
-			p = NULL;
-			gid_tmp = strtol(gidstring, &p, 10);
-			if ((p == NULL) || (*p != '\0')) {
-				/* It's not a number, so it's a group name -- see if it's being used. */
-				if (lu_group_lookup_name
-				    (ctx, gidstring, ent, &error)) {
-					/* Retrieve the group's GID. */
-					values =
-					    lu_ent_get(ent, LU_GIDNUMBER);
-					gid =
-					    strtol((char *) values->data,
-						   &p, 10);
+		/* Try to convert the field to a number. */
+		p = NULL;
+		gid_tmp = strtol(gidstring, &p, 10);
+		if ((p == NULL) || (*p != '\0')) {
+			/* It's not a number, so it's a group name --
+			 * see if it's being used. */
+			if (lu_group_lookup_name(ctx, gidstring, ent,
+						 &error)) {
+				/* Retrieve the group's GID. */
+				values = lu_ent_get(ent, LU_GIDNUMBER);
+				if (values != NULL) {
+					}
+					value = 
+					gid = g_value_get_long(value);
 				} else {
 					/* No such group -- create it. */
 					if (error) {
@@ -223,16 +246,14 @@ main(int argc, const char **argv)
 				lu_ent_set(ent, LU_HOMEDIRECTORY,
 					   fields[5]);
 			} else {
-				GList *values =
-				    lu_ent_get(ent, LU_HOMEDIRECTORY);
-				if (values) {
-					homedir =
-					    g_strdup((char *) values->
-						     data);
+				if (values != NULL) {
+					value = g_value_array_get_nth(values,
+								      0);
+					homedir = g_value_get_string(value);
+					homedir = g_strdup(homedir);
 				} else {
-					homedir =
-					    g_strdup_printf("/home/%s",
-							    fields[0]);
+					homedir = g_strdup_printf("/home/%s",
+								  fields[0]);
 				}
 			}
 			if (strlen(fields[6])) {
@@ -282,10 +303,6 @@ main(int argc, const char **argv)
 			}
 
 			g_free(homedir);
-		} else {
-			g_print(_
-				("Error creating account for `%s': line improperly formatted.\n"),
-				buf);
 		}
 		if (fields) {
 			g_strfreev(fields);

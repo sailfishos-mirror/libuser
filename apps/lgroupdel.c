@@ -46,10 +46,12 @@ main(int argc, const char **argv)
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
+	/* Set up for i18n. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
+	/* Parse arguments. */
 	popt = poptGetContext("lgroupdel", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] group"));
 	c = poptGetNextOpt(popt);
@@ -61,12 +63,14 @@ main(int argc, const char **argv)
 	}
 	group = poptGetArg(popt);
 
+	/* The caller has to specify a group name. */
 	if (group == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
+	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -81,13 +85,14 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	/* Look up the group structure. */
 	ent = lu_ent_new();
-
 	if (lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
 		return 2;
 	}
 
+	/* Delete the group. */
 	if (lu_group_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be deleted.\n"),
 			group);

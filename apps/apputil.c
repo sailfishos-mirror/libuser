@@ -42,6 +42,9 @@
 #include "../include/libuser/error.h"
 #include "apputil.h"
 
+/* Populate a user's home directory, copying data from a named skeleton
+ * directory, setting all ownerships as given, and setting the mode of
+ * the top-level directory as given. */
 gboolean
 lu_homedir_populate(const char *skeleton, const char *directory,
 		    uid_t owner, gid_t group, mode_t mode,
@@ -56,6 +59,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 
 	LU_ERROR_CHECK(error);
 
+	/* If the destination directory exists, return. */
 	dir = opendir(skeleton);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
@@ -64,6 +68,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 		return FALSE;
 	}
 
+	/* Create the top-level directory. */
 	if ((mkdir(directory, mode) == -1) && (errno != EEXIST)) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error creating `%s': %s"), directory,
@@ -71,84 +76,109 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 		closedir(dir);
 		return FALSE;
 	}
+
+	/* Set the ownership on the top-level directory. */
 	chown(directory, owner, group);
 
-	do {
-		ent = readdir(dir);
-		if (ent != NULL) {
-			if (strcmp(ent->d_name, ".") == 0)
-				continue;
-			if (strcmp(ent->d_name, "..") == 0)
-				continue;
-			snprintf(skelpath, sizeof(skelpath), "%s/%s",
-				 skeleton, ent->d_name);
-			snprintf(path, sizeof(path), "%s/%s", directory,
-				 ent->d_name);
-			if (lstat(skelpath, &st) != -1) {
-				timebuf.actime = st.st_atime;
-				timebuf.modtime = st.st_mtime;
-				if (S_ISDIR(st.st_mode)) {
-					if (lu_homedir_populate
-					    (skelpath, path, owner,
-					     st.st_gid ? : group,
-					     st.st_mode, error) == FALSE) {
-						closedir(dir);
-						return FALSE;
-					}
-					utime(path, &timebuf);
-				}
-				if (S_ISLNK(st.st_mode)) {
-					memset(buf, '\0', sizeof(buf));
-					if (readlink
-					    (skelpath, buf,
-					     sizeof(buf) - 1) != -1) {
-						buf[sizeof(buf) - 1] =
-						    '\0';
-						symlink(buf, path);
-					}
-					lchown(path, owner,
-					       st.st_gid ? : group);
-					utime(path, &timebuf);
-				}
-				if (S_ISREG(st.st_mode)) {
-					ifd = open(skelpath, O_RDONLY);
-					if (ifd != -1) {
-						ofd =
-						    open(path,
-							 O_EXCL | O_CREAT |
-							 O_WRONLY,
-							 st.st_mode);
-						if (ofd != -1) {
-							do {
-								i = read
-								    (ifd,
-								     &buf,
-								     sizeof
-								     (buf));
-								if (i > 0) {
-									write
-									    (ofd,
-									     buf,
-									     i);
-								}
-							} while (i > 0);
-							close(ofd);
-						}
-						close(ifd);
-					}
-					chown(path, owner,
-					      st.st_gid ? : group);
-					utime(path, &timebuf);
-				}
-			}
+	while ((ent = readdir(dir)) != NULL) {
+		/* Iterate through each item in the directory. */
+		/* Skip over self and parent hard links. */
+		if (strcmp(ent->d_name, ".") == 0) {
+			continue;
 		}
-	} while (ent != NULL);
+		if (strcmp(ent->d_name, "..") == 0) {
+			continue;
+		}
+
+		/* Build the path of the skeleton file or directory and
+		 * its corresponding member in the new tree. */
+		snprintf(skelpath, sizeof(skelpath), "%s/%s",
+			 skeleton, ent->d_name);
+		snprintf(path, sizeof(path), "%s/%s", directory,
+			 ent->d_name);
+
+		/* What we do next depends on the type of entry we're
+		 * looking at. */
+		if (lstat(skelpath, &st) != -1) {
+			/* We always want to preserve atime/mtime. */
+			timebuf.actime = st.st_atime;
+			timebuf.modtime = st.st_mtime;
+
+			/* If it's a directory, descend into it. */
+			if (S_ISDIR(st.st_mode)) {
+				if (!lu_homedir_populate(skelpath,
+							 path,
+							 owner,
+							 st.st_gid ?: group,
+							 st.st_mode,
+							 error)) {
+					/* Aargh!  Fail up. */
+					closedir(dir);
+					return FALSE;
+				}
+				/* Set the date on the directory. */
+				utime(path, &timebuf);
+				continue;
+			}
+
+			/* If it's a symlink, duplicate it. */
+			if (S_ISLNK(st.st_mode)) {
+				if (readlink(skelpath, buf,
+					     sizeof(buf) - 1) != -1) {
+					buf[sizeof(buf) - 1] = '\0';
+					symlink(buf, path);
+					lchown(path, owner, st.st_gid ?: group);
+					utime(path, &timebuf);
+				}
+				continue;
+			}
+
+			/* If it's a regular file, copy it. */
+			if (S_ISREG(st.st_mode)) {
+				/* Open both the input and output
+				 * files.  If we fail to do either,
+				 * we have to give up. */
+				ifd = open(skelpath, O_RDONLY);
+				if (ifd != -1) {
+					ofd = open(path,
+						   O_EXCL | O_CREAT | O_WRONLY,
+						   st.st_mode);
+				}
+				if ((ifd == -1) || (ofd == -1)) {
+					/* Sorry, no can do. */
+					close (ifd);
+					close (ofd);
+					continue;
+				}
+
+				/* Now just copy the data. */
+				do {
+					i = read(ifd, &buf, sizeof(buf));
+					if (i > 0) {
+						write(ofd, buf, i);
+					}
+				} while (i > 0);
+
+				/* Close the files. */
+				close (ifd);
+				close (ofd);
+
+				/* Set the ownership and timestamp on
+				 * the new file. */
+				chown(path, owner, st.st_gid ?: group);
+				utime(path, &timebuf);
+				continue;
+			}
+			/* Note that we don't copy device specials. */
+		}
+	}
 
 	closedir(dir);
 
 	return TRUE;
 }
 
+/* Recursively remove a user's home (or really, any) directory. */
 gboolean
 lu_homedir_remove(const char *directory, struct lu_error ** error)
 {
@@ -159,6 +189,7 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 
 	LU_ERROR_CHECK(error);
 
+	/* Open the directory.  This catches the case that it's already gone. */
 	dir = opendir(directory);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
@@ -167,28 +198,34 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 		return FALSE;
 	}
 
-	do {
-		ent = readdir(dir);
-		if (ent != NULL) {
-			if (strcmp(ent->d_name, ".") == 0)
-				continue;
-			if (strcmp(ent->d_name, "..") == 0)
-				continue;
-			snprintf(path, sizeof(path), "%s/%s", directory,
-				 ent->d_name);
-			if (lstat(path, &st) != -1) {
-				if (S_ISDIR(st.st_mode)) {
-					if (lu_homedir_remove(path, error)
-					    == FALSE) {
-						closedir(dir);
-						return FALSE;
-					}
+	/* Iterate over all of its contents. */
+	while ((ent = readdir(dir)) != NULL) {
+		/* Skip over the self and parent hard links. */
+		if (strcmp(ent->d_name, ".") == 0) {
+			continue;
+		}
+		if (strcmp(ent->d_name, "..") == 0) {
+			continue;
+		}
+
+		/* Generate the full path of the next victim. */
+		snprintf(path, sizeof(path), "%s/%s", directory, ent->d_name);
+
+		/* What we do next depends on whether or not the next item to
+		 * remove is a directory. */
+		if (lstat(path, &st) != -1) {
+			if (S_ISDIR(st.st_mode)) {
+				/* We decend into subdirectories... */
+				if (lu_homedir_remove(path, error) == FALSE) {
+					closedir(dir);
+					return FALSE;
 				} else {
+					/* ... and unlink everything else. */
 					if (unlink(path) == -1) {
 						lu_error_new(error,
 							     lu_error_generic,
-							     _
-							     ("Error removing `%s': %s"),
+							     _("Error removing "
+							     "`%s': %s"),
 							     path,
 							     strerror
 							     (errno));
@@ -198,10 +235,11 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 				}
 			}
 		}
-	} while (ent != NULL);
+	}
 
 	closedir(dir);
 
+	/* As a final step, remove the directory itself. */
 	if (rmdir(directory) == -1) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error removing `%s': %s"), directory,
@@ -212,22 +250,41 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 	return TRUE;
 }
 
+/* Move a directory from one place to another. */
 gboolean
-lu_homedir_move(const char *oldhome, const char *directory,
+lu_homedir_move(const char *oldhome, const char *newhome,
 		struct lu_error ** error)
 {
 	struct stat st;
 
 	LU_ERROR_CHECK(error);
 
+	/* If the directory exists... */
 	if (stat(oldhome, &st) != -1) {
-		if (lu_homedir_populate
-		    (oldhome, directory, st.st_uid, st.st_gid, st.st_mode,
-		     error)) {
+		/* ... and we can copy it ... */
+		if (lu_homedir_populate(oldhome, newhome,
+					st.st_uid, st.st_gid, st.st_mode,
+					error)) {
+			/* ... remove the old one. */
 			return lu_homedir_remove(oldhome, error);
 		}
 	}
+
 	return FALSE;
+}
+
+/* Concatenate a string onto another string on the heap. */
+char *
+lu_strconcat(char *existing, const char *appendee)
+{
+	char *tmp;
+	if (existing == NULL) {
+		existing = g_strdup(appendee);
+	} else {
+		tmp = g_strconcat(existing, appendee, NULL);
+		g_free(existing);
+		existing = tmp;
+	}
 }
 
 struct conv_data {
@@ -235,6 +292,7 @@ struct conv_data {
 	gpointer callback_data;
 };
 
+/* PAM callback information. */
 static int
 lu_converse(int num_msg, const struct pam_message **msg,
 	    struct pam_response **resp, void *appdata_ptr)
@@ -243,77 +301,76 @@ lu_converse(int num_msg, const struct pam_message **msg,
 	struct lu_prompt prompts[num_msg];
 	struct lu_error *error = NULL;
 	struct pam_response *responses;
+	char *pending = NULL, *p;
 	int i;
 
 	memset(&prompts, 0, sizeof(prompts));
 
+	/* Convert the PAM prompts to our own prompter type. */
 	for (i = 0; i < num_msg; i++) {
-		char *pending = NULL;
 		switch ((*msg)[i].msg_style) {
-		case PAM_PROMPT_ECHO_ON:
-			if (pending) {
-				prompts[i].prompt =
-				    g_strconcat(pending, (*msg)[i].msg,
-						NULL);
-				g_free(pending);
+			case PAM_PROMPT_ECHO_ON:
+				/* Append this text to any pending output text
+				 * we already have. */
+				prompts[i].prompt = lu_strconcat(pending,
+								 (*msg)[i].msg);
+				p = strrchr(prompts[i].prompt, ':');
+				if (p != NULL) {
+					*p = '\0';
+				}
+				prompts[i].visible = TRUE;
 				pending = NULL;
-			} else {
-				prompts[i].prompt =
-				    g_strdup((*msg)[i].msg);
-			}
-			prompts[i].visible = TRUE;
-			break;
-		case PAM_PROMPT_ECHO_OFF:
-			if (pending) {
-				prompts[i].prompt =
-				    g_strconcat(pending, (*msg)[i].msg,
-						NULL);
-				g_free(pending);
+				break;
+			case PAM_PROMPT_ECHO_OFF:
+				/* Append this text to any pending output text
+				 * we already have. */
+				prompts[i].prompt = lu_strconcat(pending,
+								 (*msg)[i].msg);
+				p = strrchr(prompts[i].prompt, ':');
+				if (p != NULL) {
+					*p = '\0';
+				}
+				prompts[i].visible = FALSE;
 				pending = NULL;
-			} else {
-				prompts[i].prompt =
-				    g_strdup((*msg)[i].msg);
-			}
-			prompts[i].visible = FALSE;
-			break;
-		default:
-			if (pending) {
-				char *tmp =
-				    g_strconcat(pending, (*msg)[i].msg,
-						NULL);
-				g_free(pending);
-				pending = tmp;
-			} else {
-				pending = g_strdup((*msg)[i].msg);
-			}
+				break;
+			default:
+				/* Make this pending output text. */
+				pending = lu_strconcat(pending, (*msg)[i].msg);
+				p = strrchr(pending, ':');
+				if (p != NULL) {
+					*p = '\0';
+				}
+				break;
 		}
-		if ((prompts[i].prompt != NULL)
-		    && (strrchr(prompts[i].prompt, ':'))) {
-			char *p = strrchr(prompts[i].prompt, ':');
-			*p = '\0';
-		}
-		if (pending) {
+		if (pending != NULL) {
 			g_free(pending);
 		}
 	}
 
+	/* Prompt the user. */
 	if (data->prompt(prompts, num_msg, data->callback_data, &error)) {
+		/* Allocate room for responses.  This memory will be
+		 * freed by the calling application, so use malloc() instead
+		 * of g_malloc() and friends. */
 		responses = malloc(sizeof(struct pam_response) * i);
 		if (responses == NULL) {
 			return PAM_BUF_ERR;
 		}
 		memset(responses, 0, sizeof(struct pam_response) * i);
+		/* Transcribe the responses into the PAM structure. */
 		for (i = 0; i < num_msg; i++) {
+			/* Set the response code and text (if we have text),
+			 * and free the prompt text. */
 			responses[i].resp_retcode = PAM_SUCCESS;
+			if (prompts[i].value != NULL) {
+				responses[i].resp = strdup(prompts[i].value);
+				prompts[i].free_value(prompts[i].value);
+			}
 			if (prompts[i].prompt != NULL) {
 				g_free((gpointer) prompts[i].prompt);
 			}
-			if (prompts[i].value != NULL) {
-				responses[i].resp =
-				    strdup(prompts[i].value);
-				prompts[i].free_value(prompts[i].value);
-			}
 		}
+		/* Set the return pointer. */
 		*resp = responses;
 	}
 
@@ -324,6 +381,8 @@ lu_converse(int num_msg, const struct pam_message **msg,
 	return PAM_CONV_ERR;
 }
 
+/* Authenticate the user if the invoking user is not privileged.  If
+ * authentication fails, exit immediately. */
 void
 lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 			     const char *appname)
@@ -331,11 +390,18 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 	pam_handle_t *pamh;
 	struct pam_conv conv;
 	struct conv_data data;
+	const char *puser = user;
+	int ret;
 
+	/* Don't bother if none of the modules makes use of elevated
+	 * privileges. */
 	if (lu_uses_elevated_privileges(ctx) == FALSE) {
+		/* Great!  We can drop privileges. */
+		seteuid(getuid());
 		return;
 	}
 
+	/* Get the address of the glue conversation function. */
 	lu_get_prompter(ctx, &data.prompt, &data.callback_data);
 	if (data.prompt == NULL) {
 		fprintf(stderr, _("Internal error.\n"));
@@ -345,12 +411,38 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 	conv.conv = lu_converse;
 	conv.appdata_ptr = &data;
 
+	/* Start up PAM. */
 	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
 		fprintf(stderr, _("Error initializing PAM.\n"));
 		exit(1);
 	}
 
-	if (pam_authenticate(pamh, 0) != PAM_SUCCESS) {
+	/* Use PAM to authenticate the user. */
+	ret = pam_authenticate(pamh, 0);
+	if (ret != PAM_SUCCESS) {
+		pam_get_item(pamh, PAM_USER, (const void **) &puser);
+		fprintf(stderr, _("Authentication failed for %s.\n"),
+			puser);
+		pam_end(pamh, 0);
+		exit(1);
+	}
+
+	/* Make sure we authenticated the user we wanted to authenticate. */
+	ret = pam_get_item(pamh, PAM_USER, (const void **) &puser);
+	if (ret != PAM_SUCCESS) {
+		fprintf(stderr, _("Internal PAM error `%s'.\n"),
+			pam_strerror(pamh, ret));
+		pam_end(pamh, 0);
+		exit(1);
+	}
+	if (strcmp(puser, user) != 0) {
+		fprintf(stderr, _("User mismatch.\n"));
+		pam_end(pamh, 0);
+		exit(1);
+	}
+
+	/* Check if the user is allowed to run this program. */
+	if (pam_acct_mgmt(pamh, 0) != PAM_SUCCESS) {
 		const char *puser = user;
 		pam_get_item(pamh, PAM_USER, (const void **) &puser);
 		fprintf(stderr, _("Authentication failed for %s.\n"),
@@ -358,22 +450,36 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 		pam_end(pamh, 0);
 		exit(1);
 	}
+
+	/* Clean up -- we're done. */
+	pam_end(pamh, 0);
 }
 
+/* Send nscd an arbitrary signal. */
 void
-lu_hup_nscd(void)
+lu_signal_nscd(int signum)
 {
 	FILE *fp;
 	char buf[LINE_MAX];
+	/* If it's running, then its PID is in this file.  Open it. */
 	if ((fp = fopen("/var/run/nscd.pid", "r")) != NULL) {
+		/* Read the PID. */
 		memset(buf, 0, sizeof(buf));
 		fgets(buf, sizeof(buf), fp);
+		/* If the PID is sane, send it a signal. */
 		if (strlen(buf) > 0) {
 			pid_t pid = atol(buf);
 			if (pid != 0) {
-				kill(pid, SIGHUP);
+				kill(pid, signum);
 			}
 		}
 		fclose(fp);
 	}
+}
+
+/* Send nscd a SIGHUP. */
+void
+lu_hup_nscd()
+{
+	lu_signal_nscd(SIGHUP);
 }

@@ -61,6 +61,7 @@ G_BEGIN_DECLS
 #define LU_ROOMNUMBER		"roomNumber"
 #define LU_TELEPHONENUMBER	"telephoneNumber"
 #define LU_HOMEPHONE		"homePhone"
+#define LU_EMAIL		"mail"
 
 /* Function to allocate a new entity structure, or destroy one. */
 struct lu_ent *lu_ent_new(void);

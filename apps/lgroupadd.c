@@ -53,10 +53,12 @@ main(int argc, const char **argv)
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
+	/* Set up i18n. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
+	/* Parse arguments. */
 	popt = poptGetContext("lgroupadd", argc, argv, options, 0);
 	poptSetOtherOptionHelp(popt, _("[OPTION...] group"));
 	c = poptGetNextOpt(popt);
@@ -68,12 +70,14 @@ main(int argc, const char **argv)
 	}
 	name = poptGetArg(popt);
 
+	/* We require a group name to be specified. */
 	if (name == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
 
+	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -88,9 +92,13 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	/* Create a group entity object holding sensible defaults for a
+	 * new group. */
 	ent = lu_ent_new();
 	lu_group_default(ctx, name, system_account, ent);
 
+	/* If the user specified a particular GID number, override the
+	 * default. */
 	if (gidNumber != -2) {
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);
@@ -99,10 +107,12 @@ main(int argc, const char **argv)
 		lu_ent_add(ent, LU_GIDNUMBER, &value);
 	}
 
+	/* Try to create the group. */
 	if (lu_group_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group creation failed.\n"));
 		return 2;
 	}
+
 	lu_hup_nscd();
 
 	lu_ent_free(ent);

@@ -1,5 +1,5 @@
 #!/bin/sh
-WARNINGS="-Wall -Wimplicit -Wcast-align -Wpointer-arith -Wpointer-arith -Wmissing-prototypes"
+WARNINGS="-Wall -Wimplicit -Wcast-align -Wpointer-arith -Wimplicit-prototypes -Wmissing-prototypes"
 #DEFINES="-D_GNU_SOURCE"
 set -x
 CFLAGS="-g3 $WARNINGS $DEFINES $CFLAGS" ; export CFLAGS

@@ -110,9 +110,11 @@ main(int argc, const char **argv)
 		do {
 			memset(&prompts, 0, sizeof(prompts));
 			prompts[0].key = "lpasswd/password1";
-			prompts[0].prompt = _("New password");
+			prompts[0].prompt = N_("New password");
+			prompts[0].domain = PACKAGE;
 			prompts[1].key = "lpasswd/password2";
-			prompts[1].prompt = _("New password (confirm)");
+			prompts[1].prompt = N_("New password (confirm)");
+			prompts[1].domain = PACKAGE;
 			if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 					      NULL, &error)) {
 				if (prompts[0].value &&

@@ -15,7 +15,7 @@ AM_PROG_LIBTOOL
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 
-ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv"
+ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv tr"
 AM_GNU_GETTEXT
 
 AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
