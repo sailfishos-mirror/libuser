@@ -49,7 +49,7 @@ rm -fr $RPM_BUILD_ROOT
 %config %{_sysconfdir}/libuser.conf
 %dir %{_libdir}/libuser
 %{_libdir}/libuser.so.*.*
-%{_libdir}/libuser/*.so*
+%{_libdir}/libuser/*.so
 %{_sbindir}/*
 
 %files devel
@@ -67,6 +67,7 @@ rm -fr $RPM_BUILD_ROOT
 - refine the search-by-id,convert-to-name,search-by-name logic
 - fix handling of defaults when the config file is read in but contains no value
 - implement an LDAP information store
+- try to clean up module naming with libtool
 
 * Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - initial packaging

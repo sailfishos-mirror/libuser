@@ -10,8 +10,6 @@
 #include <ldap.h>
 #include "util.h"
 
-#define DEBUG
-
 #define LU_LDAP_SERVER		0
 #define LU_LDAP_BASEDN		1
 #define LU_LDAP_BINDDN		2
@@ -314,7 +312,8 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	LDAP *ldap = NULL;
 	LDAPMod **mods = NULL;
 	LDAPControl *server = NULL, *client = NULL;
-	GList *name = NULL;
+	GList *name = NULL, *old_name = NULL;
+	char *tmp;
 	const char *dn = NULL, *namingAttr = NULL;
 	int err;
 	gboolean ret = FALSE;
@@ -328,6 +327,13 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	name = lu_ent_get(ent, namingAttr);
 	if(name == NULL) {
 		g_warning(_("User object had no '%s'.\n"), namingAttr);
+		return FALSE;
+	}
+
+	old_name = lu_ent_get_original(ent, namingAttr);
+	if(old_name == NULL) {
+		g_warning(_("User object was created with no '%s'.\n"),
+			  namingAttr);
 		return FALSE;
 	}
 
@@ -362,6 +368,21 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	} else {
 		g_warning(_("Error modifying directory entry: %s.\n"),
 			  ldap_err2string(err));
+	}
+
+	if(name && name->data && old_name && old_name->data) {
+		if(strcmp((char*)name->data, ((char*)old_name->data)) != 0) {
+			ret = FALSE;
+			tmp = g_strdup_printf("%s=%s", namingAttr, name);
+			err = ldap_rename_s(ldap, dn, tmp, NULL, TRUE,
+					    &server, &client);
+			if(err == LDAP_SUCCESS) {
+				ret = TRUE;
+			} else {
+				g_warning(_("Error renaming directory entry: "
+					  "%s.\n"), ldap_err2string(err));
+			}
+		}
 	}
 
 	free_ent_mods(mods);
@@ -528,8 +549,9 @@ lu_ldap_init(struct lu_context *context)
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
-        if(context->prompter(context, ctx->prompts, 4,
-			     context->prompter_data) == FALSE) {
+	if((context->prompter == NULL) ||
+           (context->prompter(context, ctx->prompts, 4,
+			     context->prompter_data) == FALSE)) {
 		g_free(ctx);
 		return NULL;
 	}

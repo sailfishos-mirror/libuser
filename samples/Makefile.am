@@ -1,4 +1,4 @@
-EXTRA_PROGRAMS = lookup testuser prompt
+noinst_PROGRAMS = lookup testuser prompt
 
 include $(top_srcdir)/Makefile.extra
 

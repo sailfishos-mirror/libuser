@@ -58,8 +58,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names)
 	    p != NULL;
 	    p = strtok_r(NULL, WHITESPACE, &q)) {
 		if(g_hash_table_lookup(ctx->modules, p) == NULL) {
-			tmp = g_strconcat(module_dir, "/libuser_", p,
-					  ".so", NULL);
+			tmp = g_strconcat(module_dir, "/", p, ".so", NULL);
 			module_file = ctx->scache->cache(ctx->scache, tmp);
 			g_free(tmp);
 

@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	control = g_malloc0(65536);
 
-	ctx = lu_start(NULL, 0, "", "", NULL, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
 
 	if(ctx == NULL) {
 		g_print(gettext("Error initializing lu.\n"));

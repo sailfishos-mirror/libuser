@@ -1,4 +1,3 @@
-#include <libuser/user_private.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -9,6 +8,7 @@
 #include <unistd.h>
 #include <krb5.h>
 #include <kadm5/admin.h>
+#include <libuser/user_private.h>
 #include "util.h"
 
 #define LU_KRB5_REALM 0
@@ -189,8 +189,8 @@ static gboolean
 lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 {
 	krb5_context context = NULL;
-	krb5_principal principal;
-	GList *name, *pass, *i;
+	krb5_principal principal = NULL, old_principal = NULL;
+	GList *name, *old_name, *pass, *i;
 	void *handle;
 	char *password;
 	gboolean ret = TRUE;
@@ -205,7 +205,18 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
 	if(name == NULL) {
-		g_warning(_("Entity structure has no %s or %s attributes."),
+		g_warning(_("Entity has no %s or %s attributes."),
+			  LU_KRBNAME, LU_USERNAME);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
+	old_name = lu_ent_get_original(ent, LU_KRBNAME);
+	if(old_name == NULL) {
+		old_name = lu_ent_get(ent, LU_USERNAME);
+	}
+	if(old_name == NULL) {
+		g_warning(_("Entity was created with no %s or %s attributes."),
 			  LU_KRBNAME, LU_USERNAME);
 		krb5_free_context(context);
 		return FALSE;
@@ -217,6 +228,14 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		krb5_free_context(context);
 		return FALSE;
 	}
+	if(krb5_parse_name(context, old_name->data, &old_principal) != 0) {
+		g_warning(_("Error parsing user name '%s' for Kerberos."),
+			  old_name);
+		krb5_free_principal(context, principal);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
 
 	/* All we know how to change is the LU_USERPASSWORD. */
 	pass = lu_ent_get(ent, LU_USERPASSWORD);
@@ -224,6 +243,15 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 	handle = get_server_handle(module->module_context);
 
 	if(handle) {
+		if(krb5_principal_compare(context, principal,
+					  old_principal) == FALSE) {
+			ret = FALSE;
+			if(kadm5_rename_principal(handle,
+						  old_principal,
+						  principal) == KADM5_OK) {
+				ret = TRUE;
+			}
+		}
 		for(i = pass; i; i = g_list_next(i)) {
 			password = i->data;
 			if(password != NULL) {
@@ -243,6 +271,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 	}
 
 	krb5_free_principal(context, principal);
+	krb5_free_principal(context, old_principal);
 	krb5_free_context(context);
 
 	return ret;
@@ -380,8 +409,9 @@ lu_krb5_init(struct lu_context *context)
 	ctx->prompts[2].prompt = _("Password");
 	ctx->prompts[2].visible = FALSE;
 
-	if(context->prompter(context, ctx->prompts, 3,
-			     context->prompter_data) == FALSE) {
+	if((context->prompter == NULL) ||
+	   (context->prompter(context, ctx->prompts, 3,
+			      context->prompter_data) == FALSE)) {
 		g_free(ctx);
 		return NULL;
 	}

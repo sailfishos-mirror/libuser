@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-01-02 21:39-0500\n"
+"POT-Creation-Date: 2001-01-03 00:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,22 +215,22 @@ msgstr ""
 msgid "Error moving %s to %s.\n"
 msgstr ""
 
-#: lib/user.c:68
+#: lib/user.c:67
 #, c-format
 msgid "error loading libuser module '%s': %s."
 msgstr ""
 
-#: lib/user.c:81
+#: lib/user.c:80
 #, c-format
 msgid "no initialization function %s in '%s'."
 msgstr ""
 
-#: lib/user.c:88
+#: lib/user.c:87
 #, c-format
 msgid "error initializing '%s'."
 msgstr ""
 
-#: lib/user.c:99
+#: lib/user.c:98
 #, c-format
 msgid "module version mismatch in %s"
 msgstr ""
