@@ -1,0 +1,673 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2002 Red Hat, Inc.
+# This file is distributed under the same license as the libuser package.
+# Ben Wu <hpwu@redhat.com>, 2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser\n"
+"POT-Creation-Date: 2002-02-22 16:35-0500\n"
+"PO-Revision-Date: 2002-03-21 16:51GMT+10:00\n"
+"Last-Translator: Ben Wu <hpwu@redhat.com>\n"
+"Language-Team: Traditional Chinese <zh@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=BIG5\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
+
+#: apps/apputil.c:70
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "讀取 `%s' 錯誤: %s"
+
+#: apps/apputil.c:78
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "建立 `%s' 錯誤: %s"
+
+#: apps/apputil.c:200 apps/apputil.c:232 apps/apputil.c:249
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "移除 `%s' 錯誤: %s"
+
+#: apps/apputil.c:406 apps/apputil.c:410
+msgid "Failed to drop privileges.\n"
+msgstr "終止權限失敗.\n"
+
+#: apps/apputil.c:419
+msgid "Internal error.\n"
+msgstr "內部錯誤.\n"
+
+#: apps/apputil.c:432
+msgid "Error initializing PAM.\n"
+msgstr "初始化 PAM 錯誤.\n"
+
+#: apps/apputil.c:440 apps/apputil.c:464
+#, c-format
+msgid "Authentication failed for %s.\n"
+msgstr "為 %s 認證失敗.\n"
+
+#: apps/apputil.c:449
+#, c-format
+msgid "Internal PAM error `%s'.\n"
+msgstr "內部 PAM 錯誤 `%s'.\n"
+
+#: apps/apputil.c:455
+msgid "User mismatch.\n"
+msgstr "使用者不符.\n"
+
+#: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
+msgid "[OPTION...] user"
+msgstr "[OPTION...] 使用者"
+
+#: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
+#: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
+#: apps/lusermod.c:91
+#, c-format
+msgid "Error parsing arguments: %s.\n"
+msgstr "語法上分析引數錯誤: %s.\n"
+
+#: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lusermod.c:102
+msgid "No user name specified.\n"
+msgstr "沒有指定使用者名稱.\n"
+
+#: apps/lchage.c:155 apps/lgroupadd.c:88 apps/lgroupdel.c:80
+#: apps/lgroupmod.c:103 apps/luseradd.c:115 apps/luserdel.c:86
+#: apps/lusermod.c:113 samples/testuser.c:71
+#, c-format
+msgid "Error initializing %s: %s.\n"
+msgstr "初始化 %s 錯誤: %s.\n"
+
+#: apps/lchage.c:158 apps/lgroupadd.c:91 apps/lgroupdel.c:83
+#: apps/lgroupmod.c:106 apps/luseradd.c:118 apps/luserdel.c:89
+#: apps/lusermod.c:116
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "初始化 %s 錯誤.\n"
+
+#: apps/lchage.c:168 apps/luserdel.c:98 apps/lusermod.c:131
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "使用者 %s 不存在.\n"
+
+#: apps/lchage.c:176
+msgid "Account is locked.\n"
+msgstr "帳號已鎖住.\n"
+
+#: apps/lchage.c:178
+msgid "Account is not locked.\n"
+msgstr "帳號沒有鎖住.\n"
+
+#: apps/lchage.c:183
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "最小值:\t%d\n"
+
+#: apps/lchage.c:188
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "最大值:\t%d\n"
+
+#: apps/lchage.c:193
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "警告:\t%d\n"
+
+#: apps/lchage.c:198
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "失效的:\t%d\n"
+
+#: apps/lchage.c:203 apps/lchage.c:211 apps/lchage.c:222 apps/lchage.c:232
+msgid "Never"
+msgstr "從不"
+
+#: apps/lchage.c:205
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "上一次更改:\t%s\n"
+
+#: apps/lchage.c:215
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "密碼過期:\t%s\n"
+
+#: apps/lchage.c:227
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "密碼失效:\t%s\n"
+
+#: apps/lchage.c:234
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "帳號過期:\t%s\n"
+
+#: apps/lchage.c:281
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "修改  %s 的老舊資訊失敗.\n"
+
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+msgid "[OPTION...] group"
+msgstr "[OPTION...] 群組"
+
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+msgid "No group name specified.\n"
+msgstr "沒有指定群組名稱.\n"
+
+#: apps/lgroupadd.c:115
+msgid "Group creation failed.\n"
+msgstr "建立群組失敗.\n"
+
+#: apps/lgroupdel.c:92 apps/lgroupmod.c:120
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "%s 群組不存在.\n"
+
+#: apps/lgroupdel.c:98
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "無法刪除 %s 群組.\n"
+
+#: apps/lgroupmod.c:113 apps/lusermod.c:124
+msgid "Both -L and -U specified.\n"
+msgstr "-L 與 -U 都指定了.\n"
+
+#: apps/lgroupmod.c:230 apps/lgroupmod.c:238
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "設定 %s 群組的密碼失敗.\n"
+
+#: apps/lgroupmod.c:246
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "無法鎖定 %s 群組.\n"
+
+#: apps/lgroupmod.c:254
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "%s 群組無法開啟.\n"
+
+#: apps/lgroupmod.c:261
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "%s 群組無法修改.\n"
+
+#: apps/luseradd.c:201 apps/luseradd.c:213
+#, c-format
+msgid "Error creating group `%s'.\n"
+msgstr "建立 %s 群組發生錯誤.\n"
+
+#: apps/luseradd.c:280
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "帳號建立失敗: %s.\n"
+
+#: apps/luseradd.c:322
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "建立 %s 發生錯誤: %s.\n"
+
+#: apps/luserdel.c:103
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "無法刪除 %s 使用者: %s.\n"
+
+#: apps/luserdel.c:113
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s 沒有群組 ID (gid) 號碼.\n"
+
+#: apps/luserdel.c:128
+#, c-format
+msgid "No group with GID %ld exists, not removing.\n"
+msgstr "群組 ID %ld 的群組不存在, 無法移除.\n"
+
+#: apps/luserdel.c:134
+#, c-format
+msgid "Group with GID %ld did not have a group name.\n"
+msgstr "群組 ID %ld 的群組沒有群組名稱.\n"
+
+#: apps/luserdel.c:142
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "無法刪除 %s 群組: %s.\n"
+
+#: apps/luserdel.c:156
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s 沒有家目錄.\n"
+
+#: apps/luserdel.c:163
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "移除 %s 錯誤: %s.\n"
+
+#: apps/lusermod.c:198 apps/lusermod.c:210
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "為 %s 使用者設定密碼失敗: %s.\n"
+
+#: apps/lusermod.c:220
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "%s 使用者無法被鎖定: %s.\n"
+
+#: apps/lusermod.c:228
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "%s 使用者無法被開啟: %s.\n"
+
+#: apps/lusermod.c:236
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "%s 使用者無法被修改: %s.\n"
+
+#: apps/lusermod.c:289
+#, c-format
+msgid "Group %s could not be modified: %s.\n"
+msgstr "%s 群組無法被修改: %s.\n"
+
+#: apps/lusermod.c:300
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "沒有 %s 舊的家目錄.\n"
+
+#: apps/lusermod.c:305
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "沒有 %s 新的家目錄.\n"
+
+#: apps/lusermod.c:311
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "移動 %s 至 %s 錯誤: %s.\n"
+
+#: lib/config.c:70
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "無法開啟組態設定檔`%s': %s"
+
+#: lib/error.c:41
+msgid "success"
+msgstr "成功"
+
+#: lib/error.c:43
+msgid "module disabled by configuration"
+msgstr "模組被組態設定成停用"
+
+#: lib/error.c:45
+msgid "generic error"
+msgstr "一般錯誤"
+
+#: lib/error.c:47
+msgid "not enough privileges"
+msgstr "權限不足"
+
+#: lib/error.c:49
+msgid "access denied"
+msgstr "拒絕存取"
+
+#: lib/error.c:51
+msgid "bad user/group name"
+msgstr "不當的 使用者/群組 名稱"
+
+#: lib/error.c:53
+msgid "bad user/group id"
+msgstr "不當的 使用者/群組 ID"
+
+#: lib/error.c:55
+msgid "user/group name in use"
+msgstr "使用者/群組 名稱已被使用"
+
+#: lib/error.c:57
+msgid "user/group id in use"
+msgstr "使用者/群組 ID 已被使用"
+
+#: lib/error.c:59
+msgid "error manipulating terminal attributes"
+msgstr "處理終端機屬性發生錯誤"
+
+#: lib/error.c:61
+msgid "error opening file"
+msgstr "開啟檔案錯誤"
+
+#: lib/error.c:63
+msgid "error locking file"
+msgstr "鎖定檔案錯誤"
+
+#: lib/error.c:65
+msgid "error statting file"
+msgstr "statting 檔案錯誤"
+
+#: lib/error.c:67
+msgid "error reading file"
+msgstr "讀取檔案錯誤"
+
+#: lib/error.c:69
+msgid "error writing to file"
+msgstr "寫入檔案錯誤"
+
+#: lib/error.c:71
+msgid "data not found in file"
+msgstr "檔案裡找不到資料"
+
+#: lib/error.c:73
+msgid "internal initialization error"
+msgstr "內部初始化錯誤"
+
+#: lib/error.c:75
+msgid "error loading module"
+msgstr "載入模組錯誤"
+
+#: lib/error.c:77
+msgid "error resolving symbol in module"
+msgstr "解析模組裡的符號錯誤"
+
+#: lib/error.c:79
+msgid "library/module version mismatch"
+msgstr "函式庫/模組 版本不符"
+
+#: lib/error.c:84
+msgid "unknown error"
+msgstr "未知的錯誤"
+
+#: lib/modules.c:112
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "no initialization function %s in `%s'"
+
+#: lib/modules.c:138
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "%s 的模組版本不符"
+
+#: lib/prompt.c:65
+msgid "error reading terminal attributes"
+msgstr "終端機屬性讀取錯誤"
+
+#: lib/prompt.c:72 lib/prompt.c:84
+msgid "error setting terminal attributes"
+msgstr "終端機屬性設定錯誤"
+
+#: lib/prompt.c:78
+msgid "error reading from terminal"
+msgstr "終端機讀取錯誤"
+
+#: lib/util.c:200
+#, c-format
+msgid "error locking file: %s"
+msgstr "鎖定檔案錯誤： %s"
+
+#: modules/files.c:109 modules/files.c:453 modules/files.c:822
+#: modules/files.c:1115 modules/files.c:1321 modules/files.c:1550
+#: modules/files.c:1658 modules/files.c:1857 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2158 modules/files.c:2177
+#: modules/files.c:2241 modules/files.c:2262 modules/files.c:2354
+#: modules/files.c:2373 modules/files.c:2428 modules/files.c:2447
+#: modules/files.c:2544 modules/files.c:2561
+#, c-format
+msgid "couldn't open `%s': %s"
+msgstr "無法開啟`%s': %s"
+
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:838 modules/files.c:1337
+#, c-format
+msgid "couldn't stat `%s': %s"
+msgstr "無法 stat `%s': %s"
+
+#: modules/files.c:137
+#, c-format
+msgid "error creating `%s': %s"
+msgstr "建立`%s' 發生錯誤: %s"
+
+#: modules/files.c:153
+#, c-format
+msgid "backup file `%s' exists and is not a regular file"
+msgstr "備份檔`%s' 存在而它不是一個正常的檔案"
+
+#: modules/files.c:871 modules/files.c:1349
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "無法從`%s' 讀取: %s"
+
+#: modules/files.c:886 modules/files.c:899
+msgid "entry already present in file"
+msgstr "檔案已存在此登錄(entry)"
+
+#: modules/files.c:912 modules/files.c:933 modules/files.c:1408
+#: modules/files.c:1420
+#, c-format
+msgid "couldn't write to `%s': %s"
+msgstr "無法寫入`%s': %s"
+
+#: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
+#: modules/files.c:1208
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "實體物件沒有 %s 屬性"
+
+#: modules/files.c:2791 modules/files.c:2861
+msgid "not executing with superuser privileges"
+msgstr "非以超級使用者(superuser)的權限執行"
+
+#: modules/files.c:2874
+msgid "no shadow file present -- disabling"
+msgstr "找不到 shadow 檔案 -- 停用中"
+
+#: modules/krb5.c:105
+#, c-format
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "連線至提供`%s' 服務的 %s realm 伺服器發生錯誤: %s"
+
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
+msgid "error initializing kerberos library"
+msgstr "初始化 kerberos 函式庫錯誤"
+
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "語法分解使用者名稱 `%s' 給 kerberos 發生錯誤"
+
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "實體結構沒有 %s 或 %s 的屬性"
+
+#: modules/krb5.c:311
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "實體沒有 %s 或 %s 的屬性"
+
+#: modules/krb5.c:324
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "被建立的實體沒有 %s 或 %s 的屬性"
+
+#: modules/krb5.c:475 modules/krb5.c:563
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "從 kerberos 讀取`%s' 的資訊錯誤"
+
+#: modules/krb5.c:604
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "實體沒有 %s 屬性"
+
+#: modules/krb5.c:642
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "設定密碼給 `%s' 錯誤"
+
+#: modules/krb5.c:768
+msgid "Kerberos Realm"
+msgstr "Kerberos Realm"
+
+#: modules/krb5.c:775
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Admin Principal"
+
+#: modules/krb5.c:797
+msgid "Kerberos Password for Admin Principal"
+msgstr "Admin Principal 的 Kerberos 密碼"
+
+#: modules/ldap.c:215 modules/ldap.c:248
+msgid "error initializing ldap library"
+msgstr "初始化 ldap 函式庫錯誤"
+
+#: modules/ldap.c:226 modules/ldap.c:259
+#, c-format
+msgid "could not set LDAP protocol to version %d"
+msgstr "無法設定 LDAP 通訊協定版本為 %d"
+
+#: modules/ldap.c:236
+msgid "could not negotiate TLS with LDAP server"
+msgstr "無法妥協 TLS 與 LDAP 伺服器"
+
+#: modules/ldap.c:407
+msgid "could not bind to LDAP server"
+msgstr "無法連接(bind) 至 LDAP 伺服器"
+
+#: modules/ldap.c:420
+msgid "could not search LDAP server"
+msgstr "無法搜尋 LDAP 伺服器"
+
+#: modules/ldap.c:429
+msgid "LDAP server appears to have no root DSE"
+msgstr "LDAP 伺服器似乎沒有 root DSE"
+
+#: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
+#: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
+msgid "error mapping name to LDAP distinguished name"
+msgstr "映射名稱至 LDAP 著名的名稱發生錯誤"
+
+#: modules/ldap.c:636
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "映射名稱至 LDAP base 著名的名稱發生錯誤"
+
+#: modules/ldap.c:1142
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "使用者物件沒有 %s 屬性"
+
+#: modules/ldap.c:1151
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "使用者物件建立當時就沒有 %s"
+
+#: modules/ldap.c:1177
+msgid "could not convert internal data to LDAPMods"
+msgstr "無法轉換內部資料至 LDAPMods"
+
+#: modules/ldap.c:1201 modules/ldap.c:1412
+#, c-format
+msgid "error modifying LDAP directory entry: %s"
+msgstr "修改 LDAP 目錄登錄發生錯誤: %s"
+
+#: modules/ldap.c:1221
+#, c-format
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "重新命名 LDAP 目錄登錄發生錯誤: %s\n"
+
+#: modules/ldap.c:1269
+#, c-format
+msgid "object had no %s attribute"
+msgstr "物件沒有 %s 屬性"
+
+#: modules/ldap.c:1296
+#, c-format
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "移除 LDAP 目錄登錄發生錯誤: %s.\n"
+
+#: modules/ldap.c:1333 modules/ldap.c:1355 modules/ldap.c:1445
+#: modules/ldap.c:1539
+#, c-format
+msgid "object has no %s attribute"
+msgstr "物件沒有 %s 屬性"
+
+#: modules/ldap.c:1475
+msgid "no such object in LDAP directory"
+msgstr "在 LDAP 目錄中沒有物件"
+
+#: modules/ldap.c:1488
+#, c-format
+msgid "no `%s' attribute found"
+msgstr "找不到 `%s' 屬性"
+
+#: modules/ldap.c:1629
+#, c-format
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤： %s"
+
+#: modules/ldap.c:2171
+msgid "LDAP Server Name"
+msgstr "LDAP 伺服器名稱"
+
+#: modules/ldap.c:2177
+msgid "LDAP Search Base DN"
+msgstr "LDAP Search Base DN"
+
+#: modules/ldap.c:2183
+msgid "LDAP Bind DN"
+msgstr "LDAP Bind DN"
+
+#: modules/ldap.c:2190
+msgid "LDAP Bind Password"
+msgstr "LDAP Bind 密碼"
+
+#: modules/ldap.c:2196
+msgid "LDAP SASL User"
+msgstr "LDAP SASL 使用者"
+
+#: modules/ldap.c:2203
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP SASL 認證使用者"
+
+#: samples/lookup.c:64
+#, c-format
+msgid "Error initializing %s: %s\n"
+msgstr "初始化 %s 錯誤: %s\n"
+
+#: samples/lookup.c:75
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "搜尋是 %d ID 的群組.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "搜尋是 %s 名稱的群組.\n"
+
+#: samples/lookup.c:87
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "搜尋是 %d ID 的使用者.\n"
+
+#: samples/lookup.c:90
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "搜尋是 %s 名稱的使用者.\n"
+
+#: samples/lookup.c:104
+msgid "Entry not found.\n"
+msgstr "找不到登錄.\n"
+
+#: samples/testuser.c:76
+msgid "Default user object classes:\n"
+msgstr "預設使用者物件類別:\n"
+
+#: samples/testuser.c:82
+msgid "Default user attribute names:\n"
+msgstr "預設使用者屬性名稱:\n"
+
+#: samples/testuser.c:88
+msgid "Getting default user attributes:\n"
+msgstr "取得預設使用者屬性:\n"
+
+#: samples/testuser.c:95
+msgid "Copying user structure:\n"
+msgstr "複製使用者結構:\n"
+
