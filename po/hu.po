@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-12-11 16:43-0500\n"
-"PO-Revision-Date: 2003-03-17 11:11+0100\n"
+"PO-Revision-Date: 2003-03-18 11:11+0100\n"
 "Last-Translator: Tamas Szanto <tszanto@mol.hu>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgstr "A jelszó lejár:\t%s\n"
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr ""
+msgstr "Nem sikerült módosítani a lejárási információt ennél: %s.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -175,42 +175,42 @@ msgstr "Nem létezik %s nevű csoport.\n"
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr ""
+msgstr "Nem sikerült törölni a(z) %s csoportot.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "A -L és -U opció is meg van adva.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr ""
+msgstr "Nem sikerült beállítani a jelszót a(z) %s csoporthoz.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Nem sikerült zárolni a(z) %s csoportot.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Nem sikerült feloldani a(z) %s csoport zárolását.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Nem sikerült módosítani a(z) %s csoportot.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr ""
+msgstr "Nem sikerült létrehozni a(z) '%s' csoportot.\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "Az azonosító létrehozása nem sikerült: %s.\n"
 
 #: apps/luseradd.c:318
 #, c-format
@@ -224,7 +224,7 @@ msgstr "A levelezési sor létrehozása nem sikerült.\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Nem sikerült törölni a(z) %s felhasználót: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
@@ -234,22 +234,22 @@ msgstr "%s nem rendelkezett csoportazonosítóval.\n"
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Nem létezik %ld azonosítójú csoport, ezért nem lehet eltávolítani.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr ""
+msgstr "A(z) %ld azonosítójú csoportnak nem volt neve.\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "A(z) %s csoportot nem sikerült törölni: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "A(z) %s felhasználónak nem volt saját könyvtára.\n"
 
 #: apps/luserdel.c:162
 #, c-format
@@ -259,27 +259,27 @@ msgstr "%s eltávolítása nem sikerült: %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "Nem sikerült beállítani a jelszót a(z) %s felhasználónál: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "A(z) %s felhasználót nem sikerült zárolni: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "A(z) %s felhasználó zárolását nem sikerült feloldani: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Nem sikerült módosítani a(z) %s felhasználónevet: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Nem sikerült módosítani a(z) %s csoportot: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
@@ -294,12 +294,12 @@ msgstr "Nincs új saját könyvtár ehhez: %s.\n"
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "Nem sikerült átmozgatni ezt: %s ide: %s - %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "nem sikerült megnyitni a(z) '%s' konfigurációs fájlt: %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -323,7 +323,7 @@ msgstr "a hozzáférés megtagadva"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "hibás felhasználó- vagy csoportnév"
 
 #: lib/error.c:54
 msgid "bad user/group id"
@@ -331,7 +331,7 @@ msgstr "hibás felhasználó/csoportazonosító"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "a felhasználó- vagy csoportnév foglalt"
 
 #: lib/error.c:58
 msgid "user/group id in use"
@@ -339,7 +339,7 @@ msgstr "a felhasználó/csoportazonosító foglalt"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "hiba történt a terminálattribútumok kezelése közben"
 
 #: lib/error.c:62
 msgid "error opening file"
@@ -367,71 +367,71 @@ msgstr "az adat nem található a fájlban"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "belső inicializálási hiba"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "modulbetöltési hiba"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "nem sikerült feloldani egy szimbólumot a modulban"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "verzióeltérés a programkönyvtárban vagy modulban"
 
 #: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "hiányzik a(z) %s inicializálási függvény innen: '%s'"
 
 #: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "modulverzió-hiba ebben: '%s'"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "hiba történt a terminálattribútumok beolvasásakor"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "nem sikerült beállítani a terminál jellemzőit"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr ""
+msgstr "nem sikerült olvasni a terminálról"
 
 #: lib/user.c:190
 msgid "name is not set"
-msgstr ""
+msgstr "a név nincs beállítva"
 
 #: lib/user.c:194
 msgid "name is too short"
-msgstr ""
+msgstr "a név túl rövid"
 
 #: lib/user.c:200
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "a név nem csak ASCII-karaktereket tartalmaz"
 
 #: lib/user.c:207
 msgid "name contains control characters"
-msgstr ""
+msgstr "a név vezérlőkaraktert tartalmaz"
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr ""
+msgstr "a név üres karaktert tartalmaz"
 
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "a név érvénytelen karaktert tartalmaz: '%c'"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "fájlzárolási hiba: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -458,16 +458,16 @@ msgstr "'%s' létrehozása nem sikerült: %s"
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
+msgstr "már létezik '%s' nevű biztonsági mentési fájl, de nem normál fájl"
 
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "nem sikerült olvasni innen: '%s' - %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
-msgstr ""
+msgstr "az entitás már benne van a fájlban"
 
 #: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
@@ -479,11 +479,11 @@ msgstr "nem sikerült írni (ebbe: '%s'): %s"
 #: modules/files.c:1209
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "az entitásobjektumnak nincs %s attribútuma"
 
 #: modules/files.c:2818 modules/files.c:2888
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "nem lehet végrehajtani rendszergazdai jogosultsággal"
 
 #: modules/files.c:2901
 msgid "no shadow file present -- disabling"
@@ -492,33 +492,33 @@ msgstr "nincs árnyékfájl - letiltva"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
+msgstr "nem sikerült csatlakozni a kadm5 kiszolgáló '%s' szolgáltatásához a(z) '%s' realm-ben: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "a Kerberos-programkönyvtár inicializálása nem sikerült"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "nem sikerült a(z) '%s' felhasználónevet feldolgozni a Kerberosban"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "az entitásstruktúra nem tartalmaz sem %s, sem %s attribútumot"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr ""
+msgstr "az entitásnak nincs sem %s, sem %s attribútuma"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "az entitás %s és %s attribútum nélkül lett létrehozva"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
@@ -549,37 +549,37 @@ msgstr "Az Admin Principal Kerberos-jelszava"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
-msgstr ""
+msgstr "hiba történt az LDAP-prograkönyvtár inicializálásakor"
 
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr ""
+msgstr "nem sikerült beállítani az LDAP protokollt %d verzióra"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
+msgstr "nem sikerült TLS-kapcsolatot létrehozni az LDAP-kiszolgálóval"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
-msgstr ""
+msgstr "nem sikerült kapcsolódni az LDAP-kiszolgálóhoz"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr ""
+msgstr "nem sikerült keresni az LDAP-kiszolgálón"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "az LDAP-kiszolgálónak valószínűleg nincs gyökér-DSE-je"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1530 modules/ldap.c:1624
 msgid "error mapping name to LDAP distinguished name"
-msgstr ""
+msgstr "nem sikerült leképezni a nevet egy LDAP-os DN-re (distinguished name)"
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
+msgstr "nem sikerült leképezni a nevet egy LDAP-os alap DN-re (distinguished name)"
 
 #: modules/ldap.c:1212
 #, c-format
@@ -593,7 +593,7 @@ msgstr "a felhasználói objektum '%s' attribútum nélkül lett létrehozva"
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
-msgstr ""
+msgstr "nem sikerült a belső adatokat LDAPMods-ra alakítani"
 
 #: modules/ldap.c:1271 modules/ldap.c:1482
 #, c-format
@@ -623,7 +623,7 @@ msgstr "az objektumnak nincs %s attribútuma"
 
 #: modules/ldap.c:1545
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "nincs ilyen objektum az LDAP-címtárban"
 
 #: modules/ldap.c:1558
 #, c-format
@@ -633,7 +633,7 @@ msgstr "nem található '%s' attribútum"
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
+msgstr "nem sikerült beállítani a jelszót az LDAP-címtárban erre: %s - %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
