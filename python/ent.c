@@ -145,15 +145,6 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 			getindent(), PyLong_AsLong(item));
 #endif
 	} else
-	/* If it's a PyNumber, convert it. */
-	if (PyNumber_Check(item)) {
-		g_value_init(value, G_TYPE_LONG);
-		g_value_set_long(value, PyNumber_AsLong(item));
-#ifdef DEBUG_BINDING
-		fprintf(stderr, "%sAdding (%d) to list.\n",
-			getindent(), PyNumber_AsLong(item));
-#endif
-	} else
 	/* If it's a PyString, convert it. */
 	if (PyString_Check(item)) {
 		g_value_init(value, G_TYPE_STRING);
