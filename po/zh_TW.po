@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-03-21 16:51GMT+10:00\n"
+"PO-Revision-Date: 2002-04-16 09:04GMT+10:00\n"
 "Last-Translator: Ben Wu <hpwu@redhat.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=BIG5\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -218,9 +218,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "建立 %s 發生錯誤: %s.\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "建立 %s 發生錯誤: %s.\n"
+msgstr "建立郵件 spool 時發生錯誤。\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -679,3 +678,4 @@ msgstr "取得預設使用者屬性:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
+
