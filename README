@@ -3,5 +3,7 @@ appears to have settled to the point where it's reasonable
 to write applications with it.
 
 This source tree is available via anonymous CVS:
-root ":pserver:anoncvs@sources.redhat.com:/cvs/rhl"
-password "anoncvs", module "libuser"
+  cvs -d :pserver:anoncvs@elvis.redhat.com:/usr/local/CVS login
+  cvs -d :pserver:anoncvs@elvis.redhat.com:/usr/local/CVS co libuser
+
+The password is "anoncvs".
