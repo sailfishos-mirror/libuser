@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-07 17:27+0300\n"
+"PO-Revision-Date: 2004-11-16 21:58+0300\n"
 "Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -252,7 +252,7 @@ msgstr "Не указано имя группы.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Неверен ID группы %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -326,16 +326,16 @@ msgstr "Ошибка создания учетной записи для `%s': �
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Неверен ID пользователя %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Отказ в создании учетной записи с UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Ошибка создания группы для `%s' с GID %ld: %s\n"
+msgstr "Ошибка создания группы для `%s' с GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -396,9 +396,9 @@ msgid "Password changed.\n"
 msgstr "Пароль изменен.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Группа %s не существует.\n"
+msgstr "Группа %jd не существует\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -431,14 +431,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s не имеет уровня gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Группа с GID %ld существует, не удаляется.\n"
+msgstr "Не существует группы с GID %jd, не удаляется.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Группа c GID %ld не имела имени.\n"
+msgstr "Группа c GID %jd не имела имени.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -592,7 +592,7 @@ msgstr "несоответствие версии модуля и библиот
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "при разблокировании поле пароля будет очищено"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -663,8 +663,7 @@ msgstr "невозможно задать контекст безопаснос�
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"невозможно задать значение контекста безопасности по умолчанию `%s': %s"
+msgstr "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -729,8 +728,7 @@ msgstr "нет файла shadow -- запрещено"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -946,12 +944,12 @@ msgstr "Ошибка при инициализации %s: %s.\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "Неверен идентификатор %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Поиск группы с номером %d.\n"
+msgstr "Поиск группы с номером %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -959,9 +957,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Поиск группы с именем %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Поиск пользователя с номером %d.\n"
+msgstr "Поиск пользователя с номером %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1017,3 +1015,4 @@ msgstr "Копирование структуры пользователя:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "ошибка инициализации модуля"
+
