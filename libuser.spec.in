@@ -78,7 +78,7 @@ popd
 %config(noreplace) %{_sysconfdir}/libuser.conf
 
 %attr(0755,root,root) %{_bindir}/*
-%attr(0755,root,root) %{_libdir}/python%{python}/site-packages/*
+%attr(0755,root,root) %{_libdir}/python%{python}/site-packages/*.so
 %attr(0755,root,root) %{_libdir}/*.so.*.*
 %dir %attr(0755,root,root) %{_libdir}/%{name}
 %attr(0755,root,root) %{_libdir}/%{name}/*.so
@@ -98,6 +98,11 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Tue Aug 31 2004 Miloslav Trmac <mitr@volny.cz> - 0.51.9-1
+- Fix various typos
+- Document library interfaces
+- Build all shared libraries with -fPIC (#72536)
+
 * Wed Aug 25 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.8-1
 - Update to build with latest autotools and gtk-doc
 - Update ALL_LINGUAS and POTFILES.in

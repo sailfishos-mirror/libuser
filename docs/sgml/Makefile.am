@@ -1,3 +1,5 @@
+EXTRA_DIST = libuser.sgml
+
 all: libuser.txt libuser.html
 
 libuser.txt: libuser.sgml

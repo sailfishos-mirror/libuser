@@ -1,6 +1,6 @@
 AC_INIT(configure.in)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE(libuser,0.51.8)
+AM_INIT_AUTOMAKE(libuser,0.51.9)
 
 AC_PROG_CC
 AC_ISC_POSIX
