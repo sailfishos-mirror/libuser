@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2003-02-19 15:37+1000\n"
+"PO-Revision-Date: 2003-02-21 16:21+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -816,7 +816,7 @@ msgstr "LDAP 서버 이름"
 
 #: modules/ldap.c:2247
 msgid "LDAP Search Base DN"
-msgstr "LDAP Search Base DN"
+msgstr "LDAP 검색 기반 DN"
 
 #: modules/ldap.c:2253
 msgid "LDAP Bind DN"
