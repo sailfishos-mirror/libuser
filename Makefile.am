@@ -16,6 +16,8 @@ force-tag:
 tag:
 	./autogen.sh
 	cvs tag -cR $(CVSTAG) .
+
+archive:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl --without-ldap; make dist
