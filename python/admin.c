@@ -813,8 +813,8 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 	}
 	if (ret != NULL) {
 		if ((rmmailspool!= NULL) && (PyObject_IsTrue(rmmailspool))) {
-			Py_DECREF(ret);
 			struct libuser_entity *entity;
+			Py_DECREF(ret);
 			entity = (struct libuser_entity *)ent;
 			ret = lu_mailspool_create_remove(context, entity->ent, TRUE) ?
 			      Py_BuildValue("i", 1) :
