@@ -1,5 +1,7 @@
-libdir=/usr/lib
-includedir=/usr/include
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
 
 Name: libuser
 Description: A user and group account administration library.
