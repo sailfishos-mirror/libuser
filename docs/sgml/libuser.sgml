@@ -37,8 +37,8 @@ to run applications.
 
 <p>However, there are certain functions supplied by traditional isolated
 systems which such a networked workstation can't provide.  Users have no
-method for modifying their information (<bf>chfn</bf> is broken), and the
-system administrator who previously had total power over the user and
+method for modifying their non-essential information (<bf>chfn</bf> is broken),
+and the system administrator who previously had total power over the user and
 group databases must now perform all administration at the server using
 tools which are designed for general modification of the information
 store (hand-editing zone files for hesiod databases, <bf>ldapmodify</bf>,
@@ -53,7 +53,7 @@ store (hand-editing zone files for hesiod databases, <bf>ldapmodify</bf>,
 which make it unsuitable for this purpose.  Like the standard files-based
 mechanisms, pwdb assumes that the superuser wields full power over the
 databases it interfaces with.  The current version of pwdb provides no
-facilities for managing groups.  The current version of pwdb can not be
+facilities for managing groups(?).  The current version of pwdb can not be
 extended easily by third parties due to its reliance on static linking.
 
 </sect1>

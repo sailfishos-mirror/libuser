@@ -1344,7 +1344,7 @@ lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const 
  *
  * @return A @a GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
  */
-GList *
+GTree *
 lu_users_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
@@ -1363,7 +1363,7 @@ lu_users_enumerate_all(struct lu_context *context, const char *pattern, const ch
  *
  * @return A @a GList whose items must be freed by calling lu_ent_free(), and which must be freed by calling g_list_free().
  */
-GList *
+GTree *
 lu_groups_enumerate_all(struct lu_context *context, const char *pattern, const char *module, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);

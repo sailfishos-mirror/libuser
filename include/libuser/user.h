@@ -115,9 +115,9 @@ GList *lu_users_enumerate_by_group(struct lu_context *context,
 GList *lu_groups_enumerate_by_user(struct lu_context *context, const char *user,
 				   const char *module, struct lu_error **error);
 
-GList *lu_users_enumerate_all(struct lu_context *context, const char *pattern,
+GTree *lu_users_enumerate_all(struct lu_context *context, const char *pattern,
 			      const char *module, struct lu_error **error);
-GList *lu_groups_enumerate_all(struct lu_context *context, const char *pattern,
+GTree *lu_groups_enumerate_all(struct lu_context *context, const char *pattern,
 			       const char *module, struct lu_error **error);
 
 #ifdef __cplusplus
