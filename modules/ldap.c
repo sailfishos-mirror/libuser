@@ -49,6 +49,7 @@
 #define SHADOWACCOUNT "posixAccount"
 #define SHADOWGROUP   "posixGroup"
 #define INETORGPERSON "inetOrgPerson"
+#define DISTINGUISHED_NAME "dn"
 
 LU_MODULE_INIT(libuser_ldap_init)
 #define LU_LDAP_USER	(1 << 0)
@@ -363,6 +364,9 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 #ifdef DEBUG
 	g_print("Attempting SASL bind to `%s'.\n", binddn);
 #endif
+	if ((binddn != NULL) && (strlen(binddn) == 0)) {
+		binddn = NULL;
+	}
 	ret = ldap_sasl_interactive_bind_s(ldap, binddn, NULL,
 					   &server, &client,
 					   LDAP_SASL_INTERACTIVE |
@@ -551,7 +555,7 @@ lu_ldap_base(struct lu_module *module, const char *configKey,
 	return ret;
 }
 
-/* Discover the distinguished name which corresponds to the lu_ent structure. */
+/* Discover the distinguished name which corresponds to an account. */
 static const char *
 lu_ldap_ent_to_dn(struct lu_module *module,
 		  const char *namingAttr, const char *name, int applicability,
@@ -615,7 +619,8 @@ lu_ldap_lookup(struct lu_module *module,
 	       struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
-	GValue value;
+	GValueArray *array;
+	GValue value, *val;
 	const char *attr;
 	char *filt = NULL, **values = NULL, *p;
 	const char *dn = NULL;
@@ -641,12 +646,28 @@ lu_ldap_lookup(struct lu_module *module,
 	ctx = module->module_context;
 
 	if (ent != NULL) {
-		/* Map the user or group name to a distinguished name. */
-		dn = lu_ldap_ent_to_dn(module, namingAttr, name,
-				       ent->type == lu_user ?
-				       LU_LDAP_USER | LU_LDAP_SHADOW :
-				       LU_LDAP_GROUP,
-				       configKey, def);
+		/* Try to use the dn the object already knows about. */
+		dn = NULL;
+
+		if (dn == NULL) {
+			array = lu_ent_get(ent, DISTINGUISHED_NAME);
+			if ((array != NULL) && (array->n_values > 0)) {
+				val = g_value_array_get_nth(array, 0);
+				if (G_VALUE_HOLDS_STRING(val)) {
+					dn = g_value_get_string(val);
+				}
+			}
+		}
+
+		if (dn == NULL) {
+			/* Map the user or group name to an LDAP object name. */
+			dn = lu_ldap_ent_to_dn(module, namingAttr, name,
+					       ent->type == lu_user ?
+					       LU_LDAP_USER | LU_LDAP_SHADOW :
+					       LU_LDAP_GROUP,
+					       configKey, def);
+		}
+
 		if (dn == NULL) {
 			lu_error_new(error, lu_error_generic,
 				     _("error mapping name to LDAP distinguished name"));
@@ -710,7 +731,6 @@ lu_ldap_lookup(struct lu_module *module,
 	while (entry != NULL) {
 		/* Mark that the search succeeded. */
 		ret = TRUE;
-		memset(&value, 0, sizeof(value));
 		/* If we need to add the data to the array, then create a new
 		 * data item to hold the data. */
 		if (ent_array != NULL) {
@@ -723,6 +743,16 @@ lu_ldap_lookup(struct lu_module *module,
 				g_assert_not_reached();
 			}
 		}
+		/* Set the distinguished name. */
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);
+		p = ldap_get_dn(ctx->ldap, entry);
+		g_value_set_string(&value, p);
+		ldap_memfree(p);
+		lu_ent_clear_current(ent, DISTINGUISHED_NAME);
+		lu_ent_add_current(ent, DISTINGUISHED_NAME, &value);
+		g_value_unset(&value);
+
 		/* Read each of the attributes we asked for. */
 		for (i = 0; attributes[i]; i++) {
 			/* Get the values which correspond to this attribute. */
@@ -913,6 +943,9 @@ get_ent_mods(struct lu_ent *ent)
 			/* Get the name of the attribute, and its current and
 			 * pending values. */
 			attribute = (char *) g_list_nth(attrs, i)->data;
+			if (strcasecmp(attribute, DISTINGUISHED_NAME) == 0) {
+				continue;
+			}
 			current = lu_ent_get_current(ent, attribute) ?: empty;
 			pending = lu_ent_get(ent, attribute) ?: empty;
 			adding = deleting = -1;

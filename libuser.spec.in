@@ -2,7 +2,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 3
+Release: 1
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
