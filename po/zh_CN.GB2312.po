@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-04-02 16:58GMT+10:00\n"
+"PO-Revision-Date: 2002-04-16 08:55GMT+10:00\n"
 "Last-Translator: Sarah Smith <sarahs@redhat.com>\n"
 "Language-Team: Simplified Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -218,9 +218,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "创建 %s 失败：%s\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "创建 %s 失败：%s\n"
+msgstr "创建邮件假脱机出错。\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -679,3 +678,4 @@ msgstr "正在获取默认的用户属性：\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "正在拷贝用户结构：\n"
+
