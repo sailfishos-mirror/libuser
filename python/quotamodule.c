@@ -323,7 +323,8 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 	if(type == USRQUOTA) {
 		struct passwd pwd, *res;
 		char buf[LINE_MAX];
-		if(getpwnam_r(name, &pwd, buf, sizeof(buf), &res) != 0) {
+		getpwnam_r(name, &pwd, buf, sizeof(buf), &res);
+		if(res != &pwd) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"invalid user name");
 			DEBUG_EXIT;
@@ -333,7 +334,8 @@ quotamodule_get(PyObject *self, PyObject *args, PyObject *kwargs)
 	} else {
 		struct group grp, *res;
 		char buf[LINE_MAX];
-		if(getgrnam_r(name, &grp, buf, sizeof(buf), &res) != 0) {
+		getgrnam_r(name, &grp, buf, sizeof(buf), &res);
+		if(res != &grp) {
 			PyErr_SetString(PyExc_RuntimeError,
 					"invalid group name");
 			DEBUG_EXIT;
@@ -430,7 +432,8 @@ quotamodule_set(PyObject *self, PyObject *args)
 	if(obj->user) {
 		struct passwd pwd, *res;
 		char buf[LINE_MAX];
-		if(getpwnam_r(obj->user, &pwd, buf, sizeof(buf), &res) != 0) {
+		getpwnam_r(obj->user, &pwd, buf, sizeof(buf), &res);
+		if(res != &pwd) {
 			PyErr_SetString(PyExc_RuntimeError, "invalid user");
 			DEBUG_EXIT;
 			return NULL;
@@ -448,7 +451,8 @@ quotamodule_set(PyObject *self, PyObject *args)
 	} else {
 		struct group grp, *res;
 		char buf[LINE_MAX];
-		if(getgrnam_r(obj->user, &grp, buf, sizeof(buf), &res) != 0) {
+		getgrnam_r(obj->user, &grp, buf, sizeof(buf), &res);
+		if(res != &grp) {
 			PyErr_SetString(PyExc_RuntimeError, "invalid group");
 			DEBUG_EXIT;
 			return NULL;

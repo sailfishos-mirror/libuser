@@ -27,6 +27,7 @@
 #include "../include/libuser/user_private.h"
 
 #define DEFAULT_ID 100
+#undef  DEBUG
 
 static int
 dump_attribute(gpointer key, gpointer value, gpointer data)
@@ -71,13 +72,25 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 		struct passwd pwd, *err;
 		struct lu_error *error = NULL;
 		while(id != 0) {
+#ifdef DEBUG
+			g_print("Checking for UID %ld.\n", id);
+#endif
 			/* There may be read-only sources of user information on the system, and we want to avoid allocating an
 			 * ID that's already in use by a service we can't write to, so check with NSS first. */
-			if(getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0) {
+			getpwuid_r(id, &pwd, buf, sizeof(buf), &err);
+			if(err == &pwd) {
+#ifdef DEBUG
+				g_print("ID belongs to `%s'.\n", pwd.pw_name);
+#endif
 				id++;
 				continue;
 			}
 			if(lu_user_lookup_id(ctx, id, ent, &error)) {
+#ifdef DEBUG
+				lu_ent_dump(ent);
+#endif
+				lu_ent_free(ent);
+				ent = lu_ent_new();
 				id++;
 				continue;
 			}
@@ -90,13 +103,25 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 		struct group grp, *err;
 		struct lu_error *error = NULL;
 		while(id != 0) {
+#ifdef DEBUG
+			g_print("Checking for GID %ld.\n", id);
+#endif
 			/* There may be read-only sources of user information on the system, and we want to avoid allocating an
 			 * ID that's already in use by a service we can't write to, so check with NSS first. */
-			if(getgrgid_r(id, &grp, buf, sizeof(buf), &err) == 0) {
+			getgrgid_r(id, &grp, buf, sizeof(buf), &err);
+			if(err == &grp) {
+#ifdef DEBUG
+				g_print("ID belongs to `%s'.\n", grp.gr_name);
+#endif
 				id++;
 				continue;
 			}
 			if(lu_group_lookup_id(ctx, id, ent, &error)) {
+#ifdef DEBUG
+				lu_ent_dump(ent);
+#endif
+				lu_ent_free(ent);
+				ent = lu_ent_new();
 				id++;
 				continue;
 			}

@@ -121,8 +121,8 @@ getuser()
 	char buf[LINE_MAX];
 	struct passwd pwd, *err;
 	int ret;
-	ret = getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
-	return (ret == 0) ? strdup(pwd.pw_name) : NULL;
+	getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
+	return (err == &pwd) ? strdup(pwd.pw_name) : NULL;
 }
 
 static int

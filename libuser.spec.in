@@ -1,6 +1,6 @@
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -77,6 +77,7 @@ rm -fr $RPM_BUILD_ROOT
 - stop leaking descriptors in the files module
 - speed up user creation by reordering some checks for IDs being in use
 - update the shadowLastChanged attribute when we set a password
+- adjust usage of getXXXXX_r where needed
 
 * Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
 - install sv translation
