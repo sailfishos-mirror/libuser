@@ -20,5 +20,5 @@ tag:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh; make dist
-	mv $(PACKAGE)-$(VERSION)-tmp/$(PACKAGE)-$(VERSION).tar.gz .
+	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
