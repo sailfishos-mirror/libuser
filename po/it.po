@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2002-12-19 16:27+1000\n"
-"Last-Translator: Olympia Ammendola <olympia@brisbane.redhat.com>\n"
-"Language-Team: Italian <it@li.org>\n"
+"PO-Revision-Date: 2003-02-25 09:56+1000\n"
+"Last-Translator: Francesco Valente <fvalen@redhat.com>\n"
+"Language-Team: Italian <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -158,20 +158,19 @@ msgid "Failed to modify aging information for %s.\n"
 msgstr "Impossibile modificare le informazioni sulla scadenza di %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
-#, fuzzy
 msgid "[OPTION...] [user]"
-msgstr "[OPZIONE...] utente"
+msgstr "[OPZIONE...] [utente]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Nessun nome utente specificato.\n"
+msgstr "Nessun nome utente specificato, nessun nome per uid %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Impossibile modificare le informazioni sulla scadenza di %s.\n"
+msgstr "Modificare le informazioni sulla scadenza di %s.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
@@ -180,58 +179,58 @@ msgstr "Errore nell'inizializzazione di %s.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
-msgstr ""
+msgstr "Nome completo"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "Cognome"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "Nome"
 
 #: apps/lchfn.c:214
 msgid "Office"
-msgstr ""
+msgstr "Ufficio"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr ""
+msgstr "Numero telefonico dell'ufficio"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr ""
+msgstr "Numero telefonico di casa"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr ""
+msgstr "Indirizzo e-mail"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Informazioni personali non cambiate: input error.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Informazioni personali cambiate.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Informazioni personali non cambiate: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "Cambiare shell per %s.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr ""
+msgstr "Nuova shell"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "La shell é cambiata.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -280,99 +279,98 @@ msgid "Group %s could not be modified.\n"
 msgstr "Impossibile modificare il gruppo %s.\n"
 
 #: apps/lid.c:81
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Nessun nome gruppo specificato.\n"
+msgstr "Nessun nome del gruppo specificato, usando %s.\n"
 
 #: apps/lid.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Nessun nome gruppo specificato.\n"
+msgstr "Nessun nome del gruppo specificato, nessun nome per gid %d.\n"
 
 #: apps/lid.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Nessun nome utente specificato.\n"
+msgstr "Nessun nome utente specificato, usando %s.\n"
 
 #: apps/lnewusers.c:74
-#, fuzzy
 msgid "[OPTION...]"
-msgstr "[OPZIONE...] utente"
+msgstr "[OPZIONE...]"
 
 #: apps/lnewusers.c:98
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Errore nella lettura di `%s': %s"
+msgstr "Errore nell'apertura`%s': %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "Errore nella creazione dell'account per `%s': riga impropriamente formattata.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "Rifiuto di creare un account con UID 0.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "Errore nella creazione del gruppo %s.\n"
+msgstr "Errore nella creazione del gruppo %s' con GID %ld.\n"
 
 #: apps/lnewusers.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "errore nella configurazione della password per `%s'"
+msgstr "errore nella configurazione della password per %s: %s\n"
 
 #: apps/lnewusers.c:310
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Nessuna nuova directory home per %s.\n"
+msgstr "Errore nella creazione della home directory per %s: %s\n"
 
 #: apps/lnewusers.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "Errore durante la creazione della casella di posta.\n"
+msgstr "Errore durante la creazione della casella di posta spool per %s.\n"
 
 #: apps/lnewusers.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Errore durante la creazione di %s: %s.\n"
+msgstr "Errore durante la creazione dell'account utente %s: %s.\n"
 
 #: apps/lpasswd.c:86
-#, fuzzy, c-format
+#, c-format
 msgid "Changing password for %s.\n"
-msgstr "errore nella configurazione della password per `%s'"
+msgstr "Cambiare password per %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "Nuova password"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "Nuova password (confermare)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "Le password non corrispondono, si prega di riprovare ancora.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "Annullamento cambio della password.\n"
 
 #: apps/lpasswd.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Configurazione password per l'utente %s fallita: %s.\n"
+msgstr "Errore nell'impostazione della password per l'utente %s: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "errore nella configurazione della password per `%s'"
+msgstr "errore nella configurazione della password per il gruppo`%s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr ""
+msgstr "Password cambiata.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -756,8 +754,7 @@ msgstr ""
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1212
 #, c-format
@@ -811,8 +808,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
@@ -839,49 +835,45 @@ msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 
 #: modules/sasldb.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "errore nella creazione di `%s': %s"
+msgstr "erroreCyrus SASL nella creazione dell'utente:`%s: %s"
 
 #: modules/sasldb.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "errore nella creazione di `%s': %s"
+msgstr "errore Cyrus SASL nella creazione dell'utente: %s"
 
 #: modules/sasldb.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Errore nella rimozione di `%s': %s"
+msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s: %s"
 
 #: modules/sasldb.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Errore nella rimozione di `%s': %s"
+msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s"
 
 #: modules/sasldb.c:428 modules/sasldb.c:436
-#, fuzzy, c-format
+#, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "Errore nell'inizializzazione di %s: %s.\n"
+msgstr "Errore nell'inizializzazione di Cyrus SASL: %s"
 
 #: python/admin.c:494
-#, fuzzy
 msgid "error creating home directory for user"
-msgstr "Nessuna nuova directory home per %s.\n"
+msgstr "Errore nella creazione della home directory per l'utente"
 
 #: python/admin.c:546
-#, fuzzy
 msgid "error removing home directory for user"
-msgstr "errore nella rimozione della voce di directory LDAP: %s.\n"
+msgstr "errore nella rimozione della home directory per l'utente"
 
 #: python/admin.c:623
-#, fuzzy
 msgid "error moving home directory for user"
-msgstr "Nessuna directory home precedente per %s.\n"
+msgstr "Errore nello spostamento della home directory per l'utente"
 
 #: python/admin.c:656
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "Errore durante la creazione della casella di posta.\n"
+msgstr "Errore durante la creazione della casella di posta spool per l'utente"
 
 #: samples/lookup.c:64
 #, c-format
@@ -927,3 +919,4 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
