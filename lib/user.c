@@ -314,6 +314,7 @@ run_list(struct lu_context *context,
 	GPtrArray *ptr_array = NULL, *tmp_ptr_array = NULL;
 	GValueArray *value_array = NULL, *tmp_value_array = NULL;
 	GValue *value;
+	gpointer scratch;
 	struct lu_ent *tmp_ent;
 	char *name;
 	gboolean success, tsuccess;
@@ -362,15 +363,16 @@ run_list(struct lu_context *context,
 		module = g_tree_lookup(context->modules, name);
 		g_free(name);
 		g_assert(module != NULL);
-		*ret = NULL;
+		scratch = NULL;
 		tsuccess = run_single(context, module, id,
-				      sdata, ldata, entity, ret, error);
-		if (*ret != NULL) switch(id) {
+				      sdata, ldata, entity, &scratch, error);
+		if (scratch != NULL) switch(id) {
 			case users_enumerate:
 			case users_enumerate_by_group:
 			case groups_enumerate:
 			case groups_enumerate_by_user:
-				tmp_value_array = *ret;
+				tmp_value_array = scratch;
+				value_array = *ret;
 				if (value_array == NULL) {
 					value_array = g_value_array_new(0);
 				}
@@ -389,7 +391,8 @@ run_list(struct lu_context *context,
 			case users_enumerate_by_group_full:
 			case groups_enumerate_full:
 			case groups_enumerate_by_user_full:
-				tmp_ptr_array = *ret;
+				tmp_ptr_array = scratch;
+				ptr_array = *ret;
 				if(ptr_array == NULL) {
 					ptr_array = g_ptr_array_new();
 				}
@@ -418,7 +421,7 @@ run_list(struct lu_context *context,
 			case uses_elevated_privileges:
 				break;
 			default:
-				g_assert(0);	/* never reached */
+				g_assert_not_reached();	/* never reached */
 				break;
 		}
 		if(i == 0) {

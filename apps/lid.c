@@ -78,7 +78,7 @@ main(int argc, const char **argv)
 			if (grp != NULL) {
 				fprintf(stderr, _("No group name specified, "
 						  "using %s.\n"), grp->gr_name);
-				name = grp->gr_name;
+				name = g_strdup(grp->gr_name);
 			} else {
 				fprintf(stderr, _("No group name specified, "
 					"no name for gid %d.\n"), getgid());
@@ -90,7 +90,7 @@ main(int argc, const char **argv)
 			if (pwd != NULL) {
 				fprintf(stderr, _("No user name specified, "
 					"using %s.\n"), pwd->pw_name);
-				name = pwd->pw_name;
+				name = g_strdup(pwd->pw_name);
 			} else {
 				fprintf(stderr, _("No user name specified, "
 					"no name for uid %d.\n"),
