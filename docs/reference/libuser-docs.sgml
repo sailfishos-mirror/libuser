@@ -1,10 +1,10 @@
 <!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
-<!ENTITY libuser-config SYSTEM "sgml/config.sgml">
-<!ENTITY libuser-entity SYSTEM "sgml/entity.sgml">
-<!ENTITY libuser-error SYSTEM "sgml/error.sgml">
-<!ENTITY libuser-prompt SYSTEM "sgml/prompt.sgml">
-<!ENTITY libuser-quota SYSTEM "sgml/quota.sgml">
-<!ENTITY libuser-user SYSTEM "sgml/user.sgml">
+<!ENTITY libuser-config SYSTEM "xml/config.xml">
+<!ENTITY libuser-entity SYSTEM "xml/entity.xml">
+<!ENTITY libuser-error SYSTEM "xml/error.xml">
+<!ENTITY libuser-prompt SYSTEM "xml/prompt.xml">
+<!ENTITY libuser-quota SYSTEM "xml/quota.xml">
+<!ENTITY libuser-user SYSTEM "xml/user.xml">
 ]>
 <book id="index">
   <bookinfo>
