@@ -3,7 +3,6 @@
 
 #include <sys/types.h>
 
-#define DEFAULT_SALT "$1$"
 #define _(String) gettext(String)
 
 const char *make_crypted(const char *plain, const char *previous);

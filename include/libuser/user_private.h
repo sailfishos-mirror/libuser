@@ -23,7 +23,7 @@
 #include <libuser/user.h>
 
 #define LU_ENT_MAGIC 0x19d238c2
-#define LU_MODULE_VERSION 0x00010000
+#define LU_MODULE_VERSION 0x00020000
 
 #include <libintl.h>
 #include <locale.h>
@@ -57,11 +57,13 @@ enum lu_dispatch_id {
 	user_del,
 	user_lock,
 	user_unlock,
+	user_setpass,
 	group_add,
 	group_mod,
 	group_del,
 	group_lock,
 	group_unlock,
+	group_setpass,
 };
 
 enum lu_module_type {
@@ -106,12 +108,16 @@ struct lu_module {
 	gboolean (*user_del)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*user_lock)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*user_unlock)(struct lu_module *module, struct lu_ent *ent);
+	gboolean (*user_setpass)(struct lu_module *module, struct lu_ent *ent,
+				 const char *newpass);
 
 	gboolean (*group_add)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*group_mod)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*group_del)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*group_lock)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*group_unlock)(struct lu_module *module, struct lu_ent *ent);
+	gboolean (*group_setpass)(struct lu_module *module, struct lu_ent *ent,
+				  const char *newpass);
 
 	gboolean (*close)(struct lu_module *module);
 };
@@ -127,5 +133,6 @@ void lu_g_list_free(GList *list);
 GList *lu_g_list_copy(GList *list);
 gint lu_str_equal(gconstpointer v1, gconstpointer v2);
 gint lu_str_case_equal(gconstpointer v1, gconstpointer v2);
+const char *lu_make_crypted(const char *plain, const char *previous);
 
 #endif

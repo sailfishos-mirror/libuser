@@ -72,8 +72,8 @@ lu_ent_new()
 	struct lu_ent *ent = NULL;
 	ent = g_malloc0(sizeof(struct lu_ent));
 	ent->magic = LU_ENT_MAGIC;
-	ent->acache = lu_string_cache_new(TRUE);
-	ent->vcache = lu_string_cache_new(FALSE);
+	ent->acache = lu_string_cache_new(FALSE);
+	ent->vcache = lu_string_cache_new(TRUE);
 	ent->original_attributes = g_hash_table_new(g_str_hash,
 						    lu_str_case_equal);
 	ent->attributes = g_hash_table_new(g_str_hash,

@@ -1063,6 +1063,14 @@ lu_files_user_lock(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
+lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
+		      const char *password)
+{
+	/* FIXME */
+	return FALSE;
+}
+
+static gboolean
 lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent)
 {
 	return generic_lock(module, "files", "passwd", ent,
@@ -1084,6 +1092,14 @@ lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
+lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
+		       const char *password)
+{
+	/* FIXME */
+	return FALSE;
+}
+
+static gboolean
 lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent)
 {
 	return generic_lock(module, "shadow", "shadow", ent,
@@ -1098,6 +1114,14 @@ lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
+lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
+		       const char *password)
+{
+	/* FIXME */
+	return FALSE;
+}
+
+static gboolean
 lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent)
 {
 	return generic_lock(module, "shadow", "gshadow", ent,
@@ -1109,6 +1133,14 @@ lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent)
 {
 	return generic_lock(module, "shadow", "gshadow", ent,
 			    lu_shadow_format_group, FALSE);
+}
+
+static gboolean
+lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
+			const char *password)
+{
+	/* FIXME */
+	return FALSE;
 }
 
 static gboolean
@@ -1152,6 +1184,7 @@ lu_files_init(struct lu_context *context)
 	ret->user_del = lu_files_user_del;
 	ret->user_lock = lu_files_user_lock;
 	ret->user_unlock = lu_files_user_unlock;
+	ret->user_setpass = lu_files_user_setpass;
 
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
@@ -1161,6 +1194,7 @@ lu_files_init(struct lu_context *context)
 	ret->group_del = lu_files_group_del;
 	ret->group_lock = lu_files_group_lock;
 	ret->group_unlock = lu_files_group_unlock;
+	ret->group_setpass = lu_files_group_setpass;
 
 	ret->close = close_module;
 
@@ -1198,6 +1232,7 @@ lu_shadow_init(struct lu_context *context)
 	ret->user_del = lu_shadow_user_del;
 	ret->user_lock = lu_shadow_user_lock;
 	ret->user_unlock = lu_shadow_user_unlock;
+	ret->user_setpass = lu_shadow_user_setpass;
 
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
@@ -1207,6 +1242,7 @@ lu_shadow_init(struct lu_context *context)
 	ret->group_del = lu_shadow_group_del;
 	ret->group_lock = lu_shadow_group_lock;
 	ret->group_unlock = lu_shadow_group_unlock;
+	ret->group_setpass = lu_shadow_group_setpass;
 
 	ret->close = close_module;
 

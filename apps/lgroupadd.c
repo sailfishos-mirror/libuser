@@ -21,6 +21,7 @@
 #include "config.h"
 #endif
 #include <libuser/user.h>
+#include <libuser/user_private.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -88,10 +89,11 @@ main(int argc, const char **argv)
 	if(userPassword) {
 		values = lu_ent_get(ent, LU_USERPASSWORD);
 		if(values && values->data) {
-			cryptedUserPassword = make_crypted(userPassword,
-							   values->data);
+			cryptedUserPassword = lu_make_crypted(userPassword,
+							      values->data);
 		} else {
-			cryptedUserPassword = make_crypted(userPassword, "$1$");
+			cryptedUserPassword = lu_make_crypted(userPassword,
+							      "$1$");
 		}
 	}
 	if(cryptedUserPassword) {

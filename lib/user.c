@@ -293,6 +293,36 @@ run_single(struct lu_context *context, struct lu_module *module,
 #endif
 			success = module->group_unlock(module, ent);
 			break;
+		case user_setpass:
+			if(module->user_setpass) {
+#ifdef DEBUG
+				g_print("Setting password for user in %s.\n",
+					module->name);
+#endif
+				success = module->user_setpass(module, ent,
+							       data);
+			} else {
+#ifdef DEBUG
+				g_print("Unable to set password for user in "
+					"%s.\n", module->name);
+#endif
+			}
+			break;
+		case group_setpass:
+			if(module->group_setpass) {
+#ifdef DEBUG
+				g_print("Setting password for group in %s.\n",
+					module->name);
+#endif
+				success = module->group_setpass(module, ent,
+								data);
+			} else {
+#ifdef DEBUG
+				g_print("Unable to set password for group in "
+					"%s.\n", module->name);
+#endif
+			}
+			break;
 	}
 	if(success) {
 		if(type == auth) {
@@ -418,8 +448,10 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 			break;
 		case user_lock:
 		case user_unlock:
+		case user_setpass:
 		case group_lock:
 		case group_unlock:
+		case group_setpass:
 			auth_module = g_hash_table_lookup(context->modules,
 							  tmp->source_auth);
 			g_assert(auth_module != NULL);
@@ -542,6 +574,16 @@ lu_user_unlock(struct lu_context *context, struct lu_ent *ent)
 }
 
 gboolean
+lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
+		const char *password)
+{
+	return lu_dispatch(context,
+			   user_setpass,
+			   password,
+			   ent);
+}
+
+gboolean
 lu_group_lock(struct lu_context *context, struct lu_ent *ent)
 {
 	return lu_dispatch(context,
@@ -556,5 +598,15 @@ lu_group_unlock(struct lu_context *context, struct lu_ent *ent)
 	return lu_dispatch(context,
 			   group_unlock,
 			   NULL,
+			   ent);
+}
+
+gboolean
+lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
+		 const char *password)
+{
+	return lu_dispatch(context,
+			   group_setpass,
+			   password,
 			   ent);
 }

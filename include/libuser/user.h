@@ -36,7 +36,7 @@ the group name for a group entity. */
 
 /** Attributes carried by user structures. */
 #define LU_UID "uid"			/**< The login name of this user. */
-#define LU_USERPASSWORD "userPassword"	/**< The crypt()ed password of this user. */
+#define LU_USERPASSWORD "userPassword"	/**< The user or group's password. */
 #define LU_UIDNUMBER "uidNumber"	/**< The UID of this user. */
 #define LU_GIDNUMBER "gidNumber"	/**< The primary GID of this user, or the GID of this group. */
 #define LU_GECOS "gecos"		/**< Extra information about the user. */
@@ -471,6 +471,30 @@ gboolean lu_user_unlock(struct lu_context *context, struct lu_ent *ent);
  * @return FALSE on failure.
  */
 gboolean lu_group_unlock(struct lu_context *context, struct lu_ent *ent);
+
+/**
+ * Set the password on the specified user's account.
+ * @param context A valid library context.
+ * @param ent An entity structure containing information about the user whose
+ * password should be changed.
+ * @param newpass The new password for the user.
+ * @return TRUE on success.
+ * @return FALSE on failure.
+ */
+gboolean lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
+			 const char *newpass);
+
+/**
+ * Set the password on the specified group's account.
+ * @param context A valid library context.
+ * @param ent An entity structure containing information about the group whose
+ * password should be changed.
+ * @param newpass The new password for the group.
+ * @return TRUE on success.
+ * @return FALSE on failure.
+ */
+gboolean lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
+			  const char *newpass);
 
 /**
  * Read the value of a potentially multi-valued key in the configuration file.

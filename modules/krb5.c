@@ -467,6 +467,76 @@ lu_krb5_user_unlock(struct lu_module *module, struct lu_ent *ent)
 }
 
 static gboolean
+lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
+		     const char *password)
+{
+	krb5_context context = NULL;
+	krb5_principal principal = NULL;
+	GList *name;
+	gboolean ret = TRUE;
+	struct lu_krb5_context *ctx;
+
+	g_return_val_if_fail(module != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->magic = LU_ENT_MAGIC, FALSE);
+
+	ctx = (struct lu_krb5_context *) module->module_context;
+
+	if(krb5_init_context(&context) != 0) {
+		g_warning(_("Error initializing Kerberos."));
+		return FALSE;
+	}
+
+	if(name == NULL) {
+		name = lu_ent_get(ent, LU_USERNAME);
+	}
+	if(name == NULL) {
+		g_warning(_("Entity has no %s attribute."),
+			  LU_USERNAME);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
+	if(krb5_parse_name(context, name->data, &principal) != 0) {
+		g_warning(_("Error parsing user name '%s' for Kerberos."),
+			  (const char*) name->data);
+		krb5_free_context(context);
+		return FALSE;
+	}
+
+	/* Now try to change the password. */
+	if(password != NULL) {
+#ifdef DEBUG
+		g_print("Working password for %s is '%s'.\n",
+			name->data, password);
+		g_print("Changing password for %s.\n",
+			name->data);
+#endif
+		if(kadm5_chpass_principal(ctx->handle, principal,
+					  password) == KADM5_OK) {
+#ifdef DEBUG
+			g_print("...succeeded.\n");
+#endif
+			/* Change the password field so
+			 * that a subsequent information
+			 * modify will note that the
+			 * user is Kerberized. */
+			lu_ent_set(ent, LU_USERPASSWORD, "*K*");
+			ret = TRUE;
+#ifdef DEBUG
+		} else {
+			g_print("...failed.\n");
+#endif
+		}
+	}
+
+	krb5_free_principal(context, principal);
+	krb5_free_context(context);
+
+	return ret;
+}
+
+static gboolean
 lu_krb5_group_add(struct lu_module *module, struct lu_ent *ent)
 {
 	return FALSE;
@@ -492,6 +562,13 @@ lu_krb5_group_lock(struct lu_module *module, struct lu_ent *ent)
 
 static gboolean
 lu_krb5_group_unlock(struct lu_module *module, struct lu_ent *ent)
+{
+	return FALSE;
+}
+
+static gboolean
+lu_krb5_group_setpass(struct lu_module *module, struct lu_ent *ent,
+		      const char* password)
 {
 	return FALSE;
 }
@@ -594,6 +671,7 @@ lu_krb5_init(struct lu_context *context)
 	ret->user_del = lu_krb5_user_del;
 	ret->user_lock = lu_krb5_user_lock;
 	ret->user_unlock = lu_krb5_user_unlock;
+	ret->user_setpass = lu_krb5_user_setpass;
 
         ret->group_lookup_name = lu_krb5_group_lookup_name;
         ret->group_lookup_id = lu_krb5_group_lookup_id;
@@ -603,6 +681,7 @@ lu_krb5_init(struct lu_context *context)
 	ret->group_del = lu_krb5_group_del;
 	ret->group_lock = lu_krb5_group_lock;
 	ret->group_unlock = lu_krb5_group_unlock;
+	ret->group_setpass = lu_krb5_group_setpass;
 
 	ret->close = lu_krb5_close_module;
 
