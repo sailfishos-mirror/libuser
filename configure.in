@@ -10,14 +10,6 @@ AC_PROG_AWK
 
 AM_PROG_LIBTOOL
 
-AH_VERBATIM([_],[
-#define _(String) gettext(String)
-],[Common gettext macro.])
-AH_VERBATIM([N_],[
-#define N_(String) (String)
-],[Common gettext macro.])
-AC_DEFINE(_GNU_SOURCE,,[Use all available glibc features.])
-
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])

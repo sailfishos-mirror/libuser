@@ -36,6 +36,7 @@ G_BEGIN_DECLS
 #define LU_ENT_MAGIC		0x00000006
 #define LU_MODULE_VERSION	0x000a0000
 #define _(String)		gettext(String)
+#define N_(String)		String
 /* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
  * character, and we assume that all crypt algorithms generate stringa at
  * least this long. */
