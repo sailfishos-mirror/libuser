@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "POT-Creation-Date: 2005-01-17 02:06+0100\n"
-"PO-Revision-Date: 2005-02-17 09:45+0530\n"
+"PO-Revision-Date: 2005-02-21 09:05+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -257,7 +257,7 @@ msgstr "કોઈ જૂથ નામ સ્પષ્ટ કરેલ નથી.
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "અયોગ્ય જૂથ ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -331,7 +331,7 @@ msgstr "`%s' માટે ખાતુ બનાવવામાં ભૂલ: �
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "અયોગ્ય વપરાશકર્તા ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
@@ -597,7 +597,7 @@ msgstr "લાઈબ્રેરી/મોડ્યુલની આવૃત્�
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "તાળું ખોલવાનું પાસવર્ડ ક્ષેત્રને ખાલી બનાવે છે"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -949,7 +949,7 @@ msgstr "%s નો પ્રારંભ કરવામાં ભૂલ: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "અયોગ્ય ID %s\n"
 
 #: samples/lookup.c:92
 #, c-format
