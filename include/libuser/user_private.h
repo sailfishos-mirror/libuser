@@ -57,11 +57,8 @@ struct lu_attribute {
 struct lu_ent {
 	u_int32_t magic;
 	enum lu_entity_type type;	/* User or group? */
-	struct lu_string_cache *acache;	/* String cache for attribute names,
-					   typically case-insensitive. */
-	struct lu_string_cache *vcache;	/* String cache for attribute values,
+	struct lu_string_cache *cache;	/* String cache for attribute values,
 					   typically case-sensitive. */
-
 	GArray *current, *pending;	/* Current and pending attribute names
 					   and values, stored as a GArray of
 					   lu_attribute structures. */

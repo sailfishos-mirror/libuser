@@ -16,21 +16,21 @@ print "--------- Lookup."
 ldap = admin.lookupUserByName("ldap")
 
 print "--------- Reading attribute (get)."
-print ldap.get("loginShell")
+print ldap.get(libuser.LOGINSHELL)
 print "--------- Reading attribute (map)."
-print ldap["loginShell"]
+print ldap[libuser.LOGINSHELL]
 print "--------- Reading keys."
 print ldap.keys()
 
 print "--------- Setting attribute."
-ldap.set("loginShell", ["/bin/true"])
-ldap["loginShell"] = "/bin/true"
-ldap["loginShell"] = ["/bin/true"]
+ldap.set(libuser.LOGINSHELL, ["/bin/true"])
+ldap[libuser.LOGINSHELL] = "/bin/true"
+ldap[libuser.LOGINSHELL] = ["/bin/true"]
 
 print "--------- Reading attribute (get)."
-print ldap.get("loginShell")
+print ldap.get(libuser.LOGINSHELL)
 print "--------- Reading attribute (map)."
-print ldap["loginShell"]
+print ldap[libuser.LOGINSHELL]
 
 print "--------- Getting directory list."
 dir(ldap)

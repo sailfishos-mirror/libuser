@@ -478,7 +478,7 @@ lu_dispatch(struct lu_context *context,
 			if((values != NULL) && (values->n_values > 0)) {
 				value = g_value_array_get_nth(values, 0);
 				attr = g_value_get_string(value);
-				sdata = tmp->vcache->cache(tmp->vcache, attr);
+				sdata = tmp->cache->cache(tmp->cache, attr);
 			} else {
 				/* No values for the right attribute. */
 				break;
@@ -734,7 +734,7 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_STRING);
 		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->vcache));
+				   lu_util_shadow_current_date(ent->cache));
 		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 		g_value_unset(&value);
 	}
@@ -779,7 +779,7 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_STRING);
 		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->vcache));
+				   lu_util_shadow_current_date(ent->cache));
 		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 		g_value_unset(&value);
 	}

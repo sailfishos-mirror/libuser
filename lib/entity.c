@@ -37,8 +37,7 @@ lu_ent_new()
 	struct lu_ent *ent = NULL;
 	ent = g_malloc0(sizeof(struct lu_ent));
 	ent->magic = LU_ENT_MAGIC;
-	ent->acache = lu_string_cache_new(FALSE);
-	ent->vcache = lu_string_cache_new(TRUE);
+	ent->cache = lu_string_cache_new(TRUE);
 	ent->current = g_array_new(FALSE, TRUE, sizeof(struct lu_attribute));
 	ent->pending = g_array_new(FALSE, TRUE, sizeof(struct lu_attribute));
 	ent->modules = g_value_array_new(1);
@@ -52,8 +51,7 @@ lu_ent_free(struct lu_ent *ent)
 	struct lu_attribute *attr;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
-	ent->acache->free(ent->acache);
-	ent->vcache->free(ent->vcache);
+	ent->cache->free(ent->cache);
 	for(i = 0; i < ent->current->len; i++) {
 		attr = &g_array_index(ent->current, struct lu_attribute, i);
 		g_value_array_free(attr->values);
@@ -208,11 +206,12 @@ clear_attribute_list(GArray *dest)
 }
 
 static void
-copy_attributes(GArray *source, GArray *dest, struct lu_string_cache *acache)
+copy_attributes(GArray *source, GArray *dest)
 {
 	int i, j;
 	struct lu_attribute *attr, newattr;
 	GValue *value;
+	GQuark aquark;
 	/* First, clear the list of attributes. */
 	clear_attribute_list(dest);
 	/* Now copy all of the attributes and their values. */
@@ -221,7 +220,8 @@ copy_attributes(GArray *source, GArray *dest, struct lu_string_cache *acache)
 		/* Copy the attribute name, then its values, into the holding
 		 * area. */
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = acache->cache(acache, attr->name);
+		aquark = g_quark_from_string(attr->name);
+		newattr.name = g_quark_to_string(aquark);
 		newattr.values = g_value_array_new(attr->values->n_values);
 		for(j = 0; j < attr->values->n_values; j++) {
 			value = g_value_array_get_nth(attr->values, j);
@@ -235,7 +235,7 @@ copy_attributes(GArray *source, GArray *dest, struct lu_string_cache *acache)
 void
 lu_ent_revert(struct lu_ent *entity)
 {
-	copy_attributes(entity->current, entity->pending, entity->acache);
+	copy_attributes(entity->current, entity->pending);
 }
 
 void
@@ -246,8 +246,8 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 	g_return_if_fail(source->magic == LU_ENT_MAGIC);
 	g_return_if_fail(dest->magic == LU_ENT_MAGIC);
 	dest->type = source->type;
-	copy_attributes(source->current, dest->current, dest->acache);
-	copy_attributes(source->pending, dest->pending, dest->acache);
+	copy_attributes(source->current, dest->current);
+	copy_attributes(source->pending, dest->pending);
 	g_value_array_free(dest->modules);
 	dest->modules = g_value_array_copy(source->modules);
 }
@@ -275,16 +275,17 @@ lu_ent_has_int(GArray *list, const char *attribute)
 }
 
 static void
-lu_ent_set_int(GArray *list, struct lu_string_cache *acache,
-	       const char *attr, const GValueArray *values)
+lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
+	GQuark aquark;
 	struct lu_attribute newattr;
 	int i;
 	dest = lu_ent_get_int(list, attr);
 	if(dest == NULL) {
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = acache->cache(acache, attr);
+		aquark = g_quark_from_string(attr);
+		newattr.name = g_quark_to_string(aquark);
 		newattr.values = g_value_array_new(values->n_values);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
@@ -298,15 +299,16 @@ lu_ent_set_int(GArray *list, struct lu_string_cache *acache,
 }
 
 static void
-lu_ent_add_int(GArray *list, struct lu_string_cache *acache,
-	       const char *attr, const GValue *value)
+lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
+	GQuark aquark;
 	struct lu_attribute newattr;
 	dest = lu_ent_get_int(list, attr);
 	if(dest == NULL) {
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = acache->cache(acache, attr);
+		aquark = g_quark_from_string(attr);
+		newattr.name = g_quark_to_string(aquark);
 		newattr.values = g_value_array_new(1);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
@@ -417,7 +419,7 @@ lu_ent_set(struct lu_ent *ent, const char *attribute, const GValueArray *values)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
-	lu_ent_set_int(ent->pending, ent->acache, attribute, values);
+	lu_ent_set_int(ent->pending, attribute, values);
 }
 void
 lu_ent_set_current(struct lu_ent *ent, const char *attribute,
@@ -426,7 +428,7 @@ lu_ent_set_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
-	lu_ent_set_int(ent->current, ent->acache, attribute, values);
+	lu_ent_set_int(ent->current, attribute, values);
 }
 
 void
@@ -435,7 +437,7 @@ lu_ent_add(struct lu_ent *ent, const char *attribute, const GValue *value)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
-	lu_ent_add_int(ent->pending, ent->acache, attribute, value);
+	lu_ent_add_int(ent->pending, attribute, value);
 }
 void
 lu_ent_add_current(struct lu_ent *ent, const char *attribute,
@@ -444,7 +446,7 @@ lu_ent_add_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
-	lu_ent_add_int(ent->current, ent->acache, attribute, value);
+	lu_ent_add_int(ent->current, attribute, value);
 }
 
 void
@@ -549,11 +551,11 @@ lu_default_int(struct lu_context *context, const char *name,
 	/* Figure out which part of the configuration we need to iterate over
 	 * to initialize the structure. */
 	if (type == lu_user) {
-		top = ent->acache->cache(ent->acache, "userdefaults");
-		idkey = ent->acache->cache(ent->acache, LU_UIDNUMBER);
+		top = "userdefaults";
+		idkey = LU_UIDNUMBER;
 	} else {
-		top = ent->acache->cache(ent->acache, "groupdefaults");
-		idkey = ent->acache->cache(ent->acache, LU_GIDNUMBER);
+		top = "groupdefaults";
+		idkey = LU_GIDNUMBER;
 	}
 
 	/* The system flag determines where we will start searching for

@@ -1267,15 +1267,15 @@ lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
 		if (cryptedPassword[0] != '!') {
 			cryptedPassword = g_strconcat("!", cryptedPassword,
 						      NULL);
-			ret = ent->vcache->cache(ent->vcache, cryptedPassword);
+			ret = ent->cache->cache(ent->cache, cryptedPassword);
 			g_free((char *) cryptedPassword);
 		} else {
 			ret = cryptedPassword;
 		}
 	} else {
 		if (cryptedPassword[0] == '!') {
-			ret = ent->vcache->cache(ent->vcache,
-						 cryptedPassword + 1);
+			ret = ent->cache->cache(ent->cache,
+						cryptedPassword + 1);
 		} else {
 			ret = cryptedPassword;
 		}

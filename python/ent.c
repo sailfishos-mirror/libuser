@@ -131,11 +131,10 @@ libuser_entity_getattr(struct libuser_entity *self, char *name)
 static void
 libuser_convert_to_value(PyObject *item, GValue *value)
 {
+	DEBUG_ENTRY;
 	/* Reset the value. */
-	if (G_VALUE_TYPE(value) != 0) {
-		g_value_unset(value);
-		memset(value, 0, sizeof(*value));
-	}
+	memset(value, 0, sizeof(*value));
+
 	/* If it's a PyLong, convert it. */
 	if (PyLong_Check(item)) {
 		g_value_init(value, G_TYPE_LONG);
@@ -154,6 +153,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 			getindent(), PyString_AsString(item));
 #endif
 	}
+	DEBUG_EXIT;
 }
 
 /* The setattr function.  Sets an attribute to have the value of the given
@@ -184,6 +184,11 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			for (i = 0; i < size; i++) {
 				item = PyList_GetItem(list, i);
 				libuser_convert_to_value(item, &value);
+#ifdef DEBUG_BINDING
+				fprintf(stderr, "%sAdding list item %s.\n",
+					getindent(),
+					g_value_get_string(&value));
+#endif
 				lu_ent_add(self->ent, name, &value);
 				g_value_unset(&value);
 			}
@@ -194,6 +199,10 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			   PyNumber_Check(list)) {
 			/* It's a single item, so just add it. */
 			libuser_convert_to_value(list, &value);
+#ifdef DEBUG_BINDING
+			fprintf(stderr, "%sAdding single item %s.\n",
+				getindent(), g_value_get_string(&value));
+#endif
 			lu_ent_add(self->ent, name, &value);
 			DEBUG_EXIT;
 			return 0;
@@ -287,17 +296,16 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 
 	DEBUG_ENTRY;
 
-	/* Remove all current values. */
-	lu_ent_clear(self->ent, attr);
-
 	/* We expect a string and some kind of object. */
-	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
+	if (PyArg_ParseTuple(args, "sO!", &attr, &list, &PyList_Type)) {
 		/* It's a list. */
 		size = PyList_Size(list);
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sList has %d items.\n", getindent(),
-			size);
+		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
 #endif
+
+		/* Remove all current values. */
+		lu_ent_clear(self->ent, attr);
 
 		/* Add each of the list items in turn. */
 		for (i = 0; i < size; i++) {
@@ -312,6 +320,11 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 	/* It's an object of some kind. */
 	if (PyArg_ParseTuple(args, "sO", &attr, &val)) {
 		libuser_convert_to_value(val, &value);
+
+		/* Remove all current values. */
+		lu_ent_clear(self->ent, attr);
+
+		/* Add this one value. */
 		lu_ent_add(self->ent, attr, &value);
 		g_value_unset(&value);
 		DEBUG_EXIT;
