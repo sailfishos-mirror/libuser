@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 7.2\n"
-"POT-Creation-Date: 2002-01-15 14:43-0500\n"
+"POT-Creation-Date: 2002-01-15 15:28-0500\n"
 "PO-Revision-Date: 2001-09-05 22:30+0200\n"
 "Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -410,63 +410,63 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: modules/files.c:100 modules/files.c:386 modules/files.c:708
-#: modules/files.c:941 modules/files.c:1137 modules/files.c:1322
-#: modules/files.c:1398 modules/files.c:1568 modules/files.c:1681
-#: modules/files.c:1696 modules/files.c:1771 modules/files.c:1788
-#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1932
-#: modules/files.c:1947
+#: modules/files.c:105 modules/files.c:391 modules/files.c:713
+#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
+#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
+#: modules/files.c:1701 modules/files.c:1775 modules/files.c:1792
+#: modules/files.c:1842 modules/files.c:1861 modules/files.c:1936
+#: modules/files.c:1951
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "ni moè odpreti ,%s`: %s"
 
-#: modules/files.c:115 modules/files.c:147 modules/files.c:179
-#: modules/files.c:722 modules/files.c:1151
+#: modules/files.c:120 modules/files.c:152 modules/files.c:184
+#: modules/files.c:727 modules/files.c:1156
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "ni moè ugotoviti stanja ,%s`: %s"
 
-#: modules/files.c:124
+#: modules/files.c:129
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "napaka pri ustvarjanju ,%s`: %s"
 
-#: modules/files.c:138
+#: modules/files.c:143
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "rezervna datoteka ,%s` je bila simbolna povezava"
 
-#: modules/files.c:739 modules/files.c:1162
+#: modules/files.c:744 modules/files.c:1167
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "ni moè brati iz ,%s`: %s"
 
-#: modules/files.c:751 modules/files.c:763
+#: modules/files.c:756 modules/files.c:768
 msgid "entry already present in file"
 msgstr "vnos je ¾e v datoteki"
 
-#: modules/files.c:777 modules/files.c:792 modules/files.c:1196
-#: modules/files.c:1207
+#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
+#: modules/files.c:1212
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "ni moè pisati v ,%s`: %s"
 
-#: modules/files.c:910 modules/files.c:920 modules/files.c:1030
-#: modules/files.c:1043
+#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
+#: modules/files.c:1048
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetni objekt nima atributa %s"
 
-#: modules/files.c:966
+#: modules/files.c:971
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "entitetni objekt nima atributa ,%s`"
 
-#: modules/files.c:2135 modules/files.c:2201
+#: modules/files.c:2139 modules/files.c:2205
 msgid "not executing with superuser privileges"
 msgstr "ne izvaja se z dovolilnicami skrbnika"
 
-#: modules/files.c:2214
+#: modules/files.c:2218
 msgid "no shadow file present -- disabling"
 msgstr "ni datoteke z zastrtimi gesli -- onemogoèam"
 

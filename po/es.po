@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-15 14:43-0500\n"
+"POT-Creation-Date: 2002-01-15 15:28-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -561,12 +561,12 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
-#: modules/files.c:100 modules/files.c:386 modules/files.c:708
-#: modules/files.c:941 modules/files.c:1137 modules/files.c:1322
-#: modules/files.c:1398 modules/files.c:1568 modules/files.c:1681
-#: modules/files.c:1696 modules/files.c:1771 modules/files.c:1788
-#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1932
-#: modules/files.c:1947
+#: modules/files.c:105 modules/files.c:391 modules/files.c:713
+#: modules/files.c:946 modules/files.c:1142 modules/files.c:1327
+#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1686
+#: modules/files.c:1701 modules/files.c:1775 modules/files.c:1792
+#: modules/files.c:1842 modules/files.c:1861 modules/files.c:1936
+#: modules/files.c:1951
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -574,44 +574,44 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
-#: modules/files.c:115 modules/files.c:147 modules/files.c:179
-#: modules/files.c:722 modules/files.c:1151
+#: modules/files.c:120 modules/files.c:152 modules/files.c:184
+#: modules/files.c:727 modules/files.c:1156
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se ha podido empezar `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#: modules/files.c:124
+#: modules/files.c:129
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "error al crear `%s': %s"
 
 # modules/files.c:145
 # modules/files.c:140
-#: modules/files.c:138
+#: modules/files.c:143
 #, c-format
 msgid "backup file `%s' was a symlink"
 msgstr "el archivo de copia de seguridad `%s' era un symlink"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:739 modules/files.c:1162
+#: modules/files.c:744 modules/files.c:1167
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
-#: modules/files.c:751 modules/files.c:763
+#: modules/files.c:756 modules/files.c:768
 msgid "entry already present in file"
 msgstr "la entrada ya se ha hecho presente en el archivo"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:777 modules/files.c:792 modules/files.c:1196
-#: modules/files.c:1207
+#: modules/files.c:782 modules/files.c:797 modules/files.c:1201
+#: modules/files.c:1212
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -620,28 +620,28 @@ msgstr "no se ha podido escribir en `%s': %s"
 # modules/files.c:833
 # modules/files.c:727 modules/files.c:734 modules/files.c:821
 # modules/files.c:831
-#: modules/files.c:910 modules/files.c:920 modules/files.c:1030
-#: modules/files.c:1043
+#: modules/files.c:915 modules/files.c:925 modules/files.c:1035
+#: modules/files.c:1048
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/files.c:776
 # modules/files.c:773
-#: modules/files.c:966
+#: modules/files.c:971
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "el objeto de entidad no tiene ningún atributo `%s'"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2135 modules/files.c:2201
+#: modules/files.c:2139 modules/files.c:2205
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2214
+#: modules/files.c:2218
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 

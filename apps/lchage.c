@@ -237,38 +237,39 @@ main(int argc, const char **argv)
 			g_value_set_long(&value, shadowLastChange);
 			lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
 			lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
 		if (shadowMin != -2) {
 			g_value_set_long(&value, shadowMin);
 			lu_ent_clear(ent, LU_SHADOWMIN);
 			lu_ent_add(ent, LU_SHADOWMIN, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
 		if (shadowMax != -2) {
 			g_value_set_long(&value, shadowMax);
 			lu_ent_clear(ent, LU_SHADOWMAX);
 			lu_ent_add(ent, LU_SHADOWMAX, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
 		if (shadowWarning != -2) {
 			g_value_set_long(&value, shadowWarning);
 			lu_ent_clear(ent, LU_SHADOWWARNING);
 			lu_ent_add(ent, LU_SHADOWWARNING, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
 		if (shadowInactive != -2) {
 			g_value_set_long(&value, shadowInactive);
 			lu_ent_clear(ent, LU_SHADOWINACTIVE);
 			lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
 		if (shadowExpire != -2) {
 			g_value_set_long(&value, shadowExpire);
 			lu_ent_clear(ent, LU_SHADOWEXPIRE);
 			lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
-			g_value_unset(&value);
+			g_value_reset(&value);
 		}
+		g_value_unset(&value);
 
 		/* Now actually modify the user's data in the system
 		 * information store. */

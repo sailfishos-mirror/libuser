@@ -165,9 +165,11 @@ AC_CHECK_FUNC([__secure_getenv strstr strtol])
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 test "x$exec_prefix" = xNONE && exec_prefix=${prefix}
 
-AC_DEFINE_UNQUOTED(LOCALEDIR,"$datadir/locale",
+LOCALEDIR=`eval echo $datadir/locale`
+AC_DEFINE_UNQUOTED(LOCALEDIR,"$LOCALEDIR",
 		   [location where locale files will be installed])
-AC_DEFINE_UNQUOTED(MODULEDIR,"$libdir/$PACKAGE",
+MODULEDIR=`eval echo $libdir/$PACKAGE`
+AC_DEFINE_UNQUOTED(MODULEDIR,"$MODULEDIR",
 		   [location where modules will be installed])
 AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
 		   [location where config files will be installed])

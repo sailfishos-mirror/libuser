@@ -132,8 +132,6 @@ static void
 libuser_convert_to_value(PyObject *item, GValue *value)
 {
 	DEBUG_ENTRY;
-	/* Reset the value. */
-	memset(value, 0, sizeof(*value));
 
 	/* If it's a PyLong, convert it. */
 	if (PyLong_Check(item)) {
@@ -181,6 +179,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 #endif
 
 			/* Add each item in turn. */
+			memset(&value, 0, sizeof(value));
 			for (i = 0; i < size; i++) {
 				item = PyList_GetItem(list, i);
 				libuser_convert_to_value(item, &value);
@@ -438,6 +437,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	GValue value;
 
 	DEBUG_ENTRY;
+
+	memset(&value, 0, sizeof(value));
 
 	/* The item should be a string. */
 	if (!PyString_Check(item)) {

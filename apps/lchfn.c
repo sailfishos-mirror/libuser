@@ -285,9 +285,9 @@ main(int argc, const char **argv)
 				prompts[i].value = NULL;
 			}
 		}
-
-		g_value_unset(&val);
 	}
+
+	g_value_reset(&val);
 
 	/* Build a new gecos string. */
 	gecos = g_strjoin(",",
@@ -301,7 +301,7 @@ main(int argc, const char **argv)
 	g_value_set_string(&val, gecos);
 	lu_ent_clear(ent, LU_GECOS);
 	lu_ent_add(ent, LU_GECOS, &val);
-	g_value_unset(&val);
+	g_value_reset(&val);
 
 	/* Try to save our changes. */
 	if (lu_user_modify(ctx, ent, &error)) {
@@ -316,6 +316,8 @@ main(int argc, const char **argv)
 				"error.\n"));
 		}
 	}
+
+	g_value_unset(&val);
 
 	g_strfreev(fields);
 

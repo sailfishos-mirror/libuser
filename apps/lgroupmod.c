@@ -159,12 +159,13 @@ main(int argc, const char **argv)
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_add(ent, LU_ADMINISTRATORUID, &val);
-				g_value_unset(&val);
+				g_value_reset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
 			admins = NULL;
 		}
+		g_value_unset(&val);
 	}
 	if (remAdmins) {
 		memset(&val, 0, sizeof(val));
@@ -174,12 +175,13 @@ main(int argc, const char **argv)
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_del(ent, LU_ADMINISTRATORUID, &val);
-				g_value_unset(&val);
+				g_value_reset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
 			admins = NULL;
 		}
+		g_value_unset(&val);
 	}
 
 	if (addMembers) {
@@ -190,12 +192,13 @@ main(int argc, const char **argv)
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_add(ent, LU_MEMBERUID, &val);
-				g_value_unset(&val);
+				g_value_reset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
 			members = NULL;
 		}
+		g_value_unset(&val);
 	}
 	if (remMembers) {
 		memset(&val, 0, sizeof(val));
@@ -205,12 +208,13 @@ main(int argc, const char **argv)
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, admins[c]);
 				lu_ent_del(ent, LU_MEMBERUID, &val);
-				g_value_unset(&val);
+				g_value_reset(&val);
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
 			members = NULL;
 		}
+		g_value_unset(&val);
 	}
 
 	if (userPassword) {

@@ -206,12 +206,13 @@ main(int argc, const char **argv)
 
 	/* Modify the default UID if we had one passed in. */
 	memset(&val, 0, sizeof(val));
+
 	g_value_init(&val, G_TYPE_LONG);
+
 	if (uidNumber != -2) {
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
-		g_value_unset(&val);
 	}
 
 	/* Modify the default GID if we had one passed in. */
@@ -219,17 +220,17 @@ main(int argc, const char **argv)
 		g_value_set_long(&val, uidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
-		g_value_unset(&val);
 	}
 
+	g_value_unset(&val);
+
 	/* Modify the default GECOS if we had one passed in. */
-	memset(&val, 0, sizeof(val));
 	g_value_init(&val, G_TYPE_STRING);
+
 	if (gecos != NULL) {
 		g_value_set_string(&val, gecos);
 		lu_ent_clear(ent, LU_GECOS);
 		lu_ent_add(ent, LU_GECOS, &val);
-		g_value_unset(&val);
 	}
 
 	/* Modify the default GID if we had one passed in. */
@@ -237,7 +238,6 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, homeDirectory);
 		lu_ent_clear(ent, LU_HOMEDIRECTORY);
 		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
-		g_value_unset(&val);
 	}
 
 	/* Modify the default login shell if we had one passed in. */
@@ -245,8 +245,9 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, loginShell);
 		lu_ent_clear(ent, LU_LOGINSHELL);
 		lu_ent_add(ent, LU_LOGINSHELL, &val);
-		g_value_unset(&val);
 	}
+
+	g_value_unset(&val);
 
 	/* Moment-of-truth time. */
 	if (lu_user_add(ctx, ent, &error) == FALSE) {

@@ -1716,11 +1716,12 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 			if (fnmatch(pattern, buf, 0) == 0) {
 				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
-				g_value_unset(&value);
+				g_value_reset(&value);
 			}
 		}
 		g_free(buf);
 	}
+	g_value_unset(&value);
 
 	lu_util_lock_free(fd);
 	fclose(fp);
@@ -1828,11 +1829,12 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 			if (strcmp(q, grp) == 0) {
 				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
-				g_value_unset(&value);
+				g_value_reset(&value);
 			}
 		}
 		g_free(buf);
 	}
+	g_value_unset(&value);
 	lu_util_lock_free(fd);
 	fclose(fp);
 
@@ -1886,6 +1888,8 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 				p++;
 				while ((q = strsep(&p, ",\n")) != NULL) {
 					if (strlen(q) > 0) {
+						g_value_init(&value,
+							     G_TYPE_STRING);
 						g_value_set_string(&value, q);
 						g_value_array_append(ret,
 								     &value);
@@ -1979,13 +1983,14 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 						g_value_set_string(&value, buf);
 						g_value_array_append(ret,
 								     &value);
-						g_value_unset(&value);
+						g_value_reset(&value);
 					}
 				}
 			}
 		}
 		g_free(buf);
 	}
+	g_value_unset(&value);
 
 	lu_util_lock_free(fd);
 	fclose(fp);
