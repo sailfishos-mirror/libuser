@@ -1,3 +1,7 @@
+# This is a first-generation configuration file.  Eventually I'll rewrite
+# all of the configuration-reading code to use alchemist, but for now this
+# will have to do.
+
 # Do not modify the default module lists if you care about unattended calls
 # to programs (i.e., scripts) working!
 [defaults]
