@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-02-13 17:32+0000\n"
+"PO-Revision-Date: 2002-04-16 11:17+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -215,9 +215,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "Erro ao criar %s: %s.\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "Erro ao criar %s: %s.\n"
+msgstr "Erro ao criar ficheiro de e-mail.\n"
 
 #: apps/luserdel.c:99
 #, c-format
