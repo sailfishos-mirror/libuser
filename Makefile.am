@@ -8,5 +8,12 @@ dist-hook:
 doc:
 	doxygen libuser.g
 
+VERSION=$(shell awk '/Version:/ { print $$2 }' libuser.spec)
+RELEASE=$(shell awk '/Release:/ { print $$2 }' libuser.spec)
+CVSTAG=libuser-$(subst .,-,$(VERSION))-$(subst .,-,$(RELEASE))
+
 scan:
 	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)
+
+tag:
+	cvs tag -cFR $(CVSTAG) .
