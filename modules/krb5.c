@@ -36,6 +36,9 @@
 #define LU_KRB5_PASSWORD 2
 #define LU_KRBNAME "krbName"
 
+struct lu_module *
+lu_krb5_init(struct lu_context *context);
+
 struct lu_krb5_context {
 	struct lu_prompt prompts[3];
 	void *handle;
@@ -127,9 +130,9 @@ lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name,
 		return FALSE;
 	}
 
-	if(krb5_parse_name(context, name, &principal) != 0) {
+	if(krb5_parse_name(context, (const char*)name, &principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  name);
+			  (const char*)name);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -203,7 +206,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 
 	if(krb5_parse_name(context, name->data, &principal.principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  name);
+			  (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -277,13 +280,13 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 
 	if(krb5_parse_name(context, name->data, &principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  name->data);
+			  (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
 	if(krb5_parse_name(context, old_name->data, &old_principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  old_name->data);
+			  (const char*) old_name->data);
 		krb5_free_principal(context, principal);
 		krb5_free_context(context);
 		return FALSE;
@@ -377,7 +380,7 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent)
 
 	if(krb5_parse_name(context, name->data, &principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  name);
+			  (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -423,7 +426,7 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 
 	if(krb5_parse_name(context, name->data, &principal.principal) != 0) {
 		g_warning(_("Error parsing user name '%s' for Kerberos."),
-			  name);
+			  (const char*) name->data);
 		krb5_free_context(context);
 		return FALSE;
 	}
@@ -432,7 +435,7 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck)
 			KADM5_PRINCIPAL | KADM5_ATTRIBUTES) == KADM5_OK);
 	if(ret == FALSE) {
 		g_warning(_("Error reading information for '%s' from "
-			    "Kerberos."), name);
+			    "Kerberos."), (const char *) name->data);
 	} else {
 		if(lck) {
 			principal.attributes |=

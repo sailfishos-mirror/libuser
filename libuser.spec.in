@@ -61,6 +61,15 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
+* Wed May  2 2001 Nalin Dahyabhai <nalin@redhat.com> 0.9
+- get a start on some Python bindings
+
+* Tue May  1 2001 Nalin Dahyabhai <nalin@redhat.com> 0.8.2
+- make binary-incompatible change in headers
+
+* Mon Apr 30 2001 Nalin Dahyabhai <nalin@redhat.com> 0.8.1
+- add doxygen docs and a "doc" target for them
+
 * Sat Jan 20 2001 Nalin Dahyabhai <nalin@redhat.com> 0.8
 - add a "quiet" prompter
 - add --interactive flag to sample apps and default to using quiet prompter

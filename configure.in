@@ -1,7 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.8.1)
-
-AM_MAINTAINER_MODE
+AM_INIT_AUTOMAKE(libuser,0.9)
 
 ALL_LINGUAS=
 
@@ -99,6 +97,7 @@ include/Makefile
 include/libuser/Makefile
 lib/Makefile
 modules/Makefile
+python/Makefile
 samples/Makefile
 apps/Makefile
 docs/Makefile

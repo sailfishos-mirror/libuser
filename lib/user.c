@@ -47,10 +47,9 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names)
 {
 	char *p, *q, *tmp, *wlist, *sym;
 	GModule *handle = NULL;
-	gchar *module_dir = NULL, *module_file = NULL;
+	const gchar *module_dir = NULL, *module_file = NULL;
 	lu_module_init_t module_init = NULL;
 	struct lu_module *module = NULL;
-	GList *vals;
 
 	g_return_if_fail(ctx != NULL);
 	g_return_if_fail(list != NULL);
@@ -139,7 +138,6 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 	 lu_prompt_fn *prompter, gpointer prompter_data)
 {
 	struct lu_context *ctx = NULL;
-	GList *modules;
 
 	ctx = g_malloc0(sizeof(struct lu_context));
 

@@ -26,7 +26,8 @@
 #include <libintl.h>
 #include <locale.h>
 
-void dump_attribute(gpointer key, gpointer value, gpointer data)
+static void
+dump_attribute(gpointer key, gpointer value, gpointer data)
 {
 	GList *list;
 	for(list = (GList*) value; list; list = g_list_next(list))

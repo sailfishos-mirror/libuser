@@ -121,7 +121,7 @@ gboolean lu_prompt_console_quiet(struct lu_context *context,
  * An enumeration which decides whether we want to modify information about
  * users or groups.  We don't yet support both simultaneously.
  */
-typedef enum lu_type {lu_user, lu_group} lu_type_t;
+typedef enum lu_type {lu_user = 0x1234, lu_group = 0x1235} lu_type_t;
 
 /**
  * Initializes the library, loads modules, and authenticates to servers.

@@ -103,7 +103,6 @@ lu_prompt_console_quiet(struct lu_context *context, struct lu_prompt *prompts,
 			int count, gpointer calldata)
 {
 	int i;
-	char buf[LINE_MAX];
 	gboolean ret = TRUE;
 
 	g_return_val_if_fail(context != NULL, FALSE);

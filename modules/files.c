@@ -31,6 +31,11 @@
 #define __USE_GNU
 #include <fcntl.h>
 
+struct lu_module *
+lu_files_init(struct lu_context *context);
+struct lu_module *
+lu_shadow_init(struct lu_context *context);
+
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
 lu_files_create_backup(const char *filename)

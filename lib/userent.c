@@ -36,7 +36,7 @@ dump_attribute(gpointer key, gpointer value, gpointer data)
 		g_print(" %s = %s\n", (char*) key, (char*) list->data);
 }
 
-void
+static void
 lu_ent_dump(struct lu_ent *ent)
 {
 	g_return_if_fail(ent != NULL);

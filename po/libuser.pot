@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-05-01 00:49-0400\n"
+"POT-Creation-Date: 2001-05-03 00:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: apps/apputil.c:100 apps/apputil.c:108 apps/apputil.c:116
 msgid "Feature not implemented: "
@@ -215,22 +215,22 @@ msgstr ""
 msgid "Error moving %s to %s.\n"
 msgstr ""
 
-#: lib/user.c:78
+#: lib/user.c:77
 #, c-format
 msgid "error loading libuser module '%s': %s."
 msgstr ""
 
-#: lib/user.c:91
+#: lib/user.c:90
 #, c-format
 msgid "no initialization function %s in '%s'."
 msgstr ""
 
-#: lib/user.c:98
+#: lib/user.c:97
 #, c-format
 msgid "error initializing '%s'."
 msgstr ""
 
-#: lib/user.c:109
+#: lib/user.c:108
 #, c-format
 msgid "module version mismatch in %s"
 msgstr ""
@@ -267,7 +267,7 @@ msgstr ""
 msgid "freeing lu_ent at %p.\n"
 msgstr ""
 
-#: samples/lookup.c:61 samples/testuser.c:53
+#: samples/lookup.c:61 samples/testuser.c:54
 msgid "Error initializing lu.\n"
 msgstr ""
 
@@ -295,18 +295,18 @@ msgstr ""
 msgid "Entry not found.\n"
 msgstr ""
 
-#: samples/testuser.c:57
+#: samples/testuser.c:58
 msgid "Default user object classes:\n"
 msgstr ""
 
-#: samples/testuser.c:63
+#: samples/testuser.c:64
 msgid "Default user attribute names:\n"
 msgstr ""
 
-#: samples/testuser.c:69
+#: samples/testuser.c:70
 msgid "Getting default user attributes:\n"
 msgstr ""
 
-#: samples/testuser.c:74
+#: samples/testuser.c:75
 msgid "Copying user structure:\n"
 msgstr ""

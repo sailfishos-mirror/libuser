@@ -38,6 +38,9 @@
 #define LU_LDAP_AUTHUSER	4
 #define LU_LDAP_PASSWORD	5
 
+struct lu_module *
+lu_ldap_init(struct lu_context *context);
+
 static const char *
 lu_ldap_user_attributes[] = {
 	LU_OBJECTCLASS,
@@ -240,11 +243,9 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 	       const char *configKey, const char *def,
 	       const char *filter, const char **attributes)
 {
-	struct lu_ldap_context *context = module->module_context;
-	LDAP *ldap = NULL;
 	LDAPMessage *messages = NULL, *entry = NULL;
 	const char *attr;
-	char *tmp = NULL, *filt = NULL, **values = NULL;
+	char *filt = NULL, **values = NULL;
 	const char *dn = NULL;
 	int i, j;
 	gboolean ret = FALSE;
@@ -330,7 +331,7 @@ lu_ldap_user_lookup_id(struct lu_module *module, gconstpointer uid,
 	gboolean ret = FALSE;
 	gchar *uid_string = NULL;
 
-	uid_string = g_strdup_printf("%ld", GPOINTER_TO_INT(uid));
+	uid_string = g_strdup_printf("%d", GPOINTER_TO_INT(uid));
 	ret = lu_ldap_lookup(module, LU_UIDNUMBER, uid_string, ent,
 			     "userBranch", "ou=People",
 			     "(objectclass=posixAccount)",
@@ -357,7 +358,7 @@ lu_ldap_group_lookup_id(struct lu_module *module, gconstpointer gid,
 	gboolean ret = FALSE;
 	gchar *gid_string = NULL;
 
-	gid_string = g_strdup_printf("%ld", GPOINTER_TO_INT(gid));
+	gid_string = g_strdup_printf("%d", GPOINTER_TO_INT(gid));
 	ret = lu_ldap_lookup(module, LU_GIDNUMBER, gid_string, ent,
 			     "groupBranch", "ou=Group",
 			     "(objectclass=posixGroup)",
@@ -451,7 +452,6 @@ static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	    const char *configKey, const char *def, const char **attributes)
 {
-	LDAP *ldap = NULL;
 	LDAPMod **mods = NULL;
 	LDAPControl *server = NULL, *client = NULL;
 	GList *name = NULL, *old_name = NULL;
@@ -518,7 +518,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(name && name->data && old_name && old_name->data) {
 		if(strcmp((char*)name->data, ((char*)old_name->data)) != 0) {
 			ret = FALSE;
-			tmp = g_strdup_printf("%s=%s", namingAttr, name);
+			tmp = g_strdup_printf("%s=%s", namingAttr, (char*)name->data);
 			err = ldap_rename_s(ctx->ldap, dn, tmp, NULL, TRUE,
 					    &server, &client);
 			if(err == LDAP_SUCCESS) {
@@ -539,7 +539,6 @@ static gboolean
 lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	    const char *configKey, const char *def)
 {
-	LDAP *ldap = NULL;
 	LDAPControl *server = NULL, *client = NULL;
 	GList *name = NULL;
 	const char *dn = NULL, *namingAttr = NULL;
