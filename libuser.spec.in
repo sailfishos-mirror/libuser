@@ -79,8 +79,9 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
-* Mon Aug 27 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Mon Aug 27 2001 Nalin Dahyabhai <nalin@redhat.com> 0.30-1
 - quotaq: fix argument order when reading quota information
+- user_quota: set quota grace periods correctly
 - luseradd: never create home directories for system accounts
 
 * Tue Aug 21 2001 Nalin Dahyabhai <nalin@redhat.com>

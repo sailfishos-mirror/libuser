@@ -16,7 +16,7 @@ field_LDADD =  ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
 homedir_SOURCES = \
 	homedir.c
 
-homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
+homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GLIB_LIBS@ @PAM_LIBS@ @INTLLIBS@
 
 lookup_SOURCES = \
 	lookup.c

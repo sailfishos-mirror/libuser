@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.29)
+AM_INIT_AUTOMAKE(libuser,0.30)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
@@ -15,19 +15,23 @@ AM_PROG_LIBTOOL
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.9,,,gmodule)
 
-ALL_LINGUAS="cs da de es fr is it ja ko no ru sv"
+ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv"
 AM_GNU_GETTEXT
 
+LIBSAVE="$LIBS"
 AC_CHECK_HEADERS(security/pam_appl.h)
 AC_CHECK_FUNC(pam_start,,AC_CHECK_LIB(pam, pam_start))
 AC_CHECK_FUNC(pam_authenticate,,AC_CHECK_LIB(pam, pam_authenticate))
+PAM_LIBS="$LIBS"
+LIBS="$LIBSAVE"
 
+LIBSAVE="$LIBS"
 popt=/usr
 AC_ARG_WITH(popt,
 [  --without-popt=DIR       Use popt headers and libraries under DIR],
 [
 if test x$withval != x -a x$withval != xyes ; then
-  popt=$withval
+	popt=$withval
 fi
 ])
 if test x$popt != xno ; then
@@ -39,6 +43,8 @@ if test x$popt != xno ; then
 	AC_CHECK_HEADERS(popt.h)
 	AC_CHECK_FUNC(poptGetContext,,AC_CHECK_LIB(popt,poptGetContext))
 fi
+POPT_LIBS="$LIBS"
+LIBS="$LIBSAVE"
 
 MODULES="$MODULES ${PACKAGE}_files.so"
 MODULES="$MODULES ${PACKAGE}_shadow.so"
@@ -167,6 +173,8 @@ AC_CHECK_FUNCS(strstr strtol)
 AC_SUBST(MODULES)
 AC_SUBST(KRB5_LIBS)
 AC_SUBST(LDAP_LIBS)
+AC_SUBST(PAM_LIBS)
+AC_SUBST(POPT_LIBS)
 AC_SUBST(SASL_LIBS)
 
 if test `eval echo x$libdir` != xNONE/lib

@@ -22,9 +22,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <linux/quota.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <linux/quota.h>
 #include <limits.h>
 #include <mntent.h>
 #include <paths.h>
@@ -35,6 +35,19 @@
 #include "../include/libuser/quota.h"
 
 /** @file user_quota.c */
+
+#ifdef MIN
+#undef MIN
+#endif
+#define MIN(A,B) (((A)<(B))?(A):(B))
+
+#ifndef MAX_IQ_TIME
+#define MAX_IQ_TIME (7 * 24 * 60 * 60)
+#endif
+
+#ifndef MAX_DQ_TIME
+#define MAX_DQ_TIME (7 * 24 * 60 * 60)
+#endif
 
 static const char *quota_flags[] = {"usrquota", "grpquota",};
 static const char *quota_suffixes[] = INITQFNAMES;
@@ -133,7 +146,8 @@ quota_toggle_ext(struct mntent *ent, const char *option, int command, int flag)
 	struct stat st;
 	int ret = 0, fd;
 
-	if(hasmntopt(ent, option) || hasmntopt(ent, "quota")) {
+	if(hasmntopt(ent, option) ||
+	   ((strcmp(option, "usrquota") == 0) && hasmntopt(ent, "quota"))) {
 		snprintf(buf, sizeof(buf), "%s/%s.%s", ent->mnt_dir,
 			 QUOTAFILENAME, quota_suffixes[GRPQUOTA]);
 		if(stat(buf, &st) == 0) {
@@ -222,17 +236,23 @@ quota_off()
 }
 
 static int
-quota_get(int type, qid_t id, const char *special,
+quota_get(int type, int id, const char *special,
 	  int32_t *inode_usage, int32_t *inode_soft,
 	  int32_t *inode_hard, int32_t *inode_grace,
 	  int32_t *block_usage, int32_t *block_soft,
 	  int32_t *block_hard, int32_t *block_grace)
 {
 	struct mem_dqblk dqblk;
+	struct mem_dqinfo dqinfo;
 	int ret = 0;
 
 	memset(&dqblk, 0, sizeof(dqblk));
+	memset(&dqinfo, 0, sizeof(dqinfo));
+
 	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, (caddr_t) &dqblk);
+	if(ret == 0)
+	ret = quotactl(QCMD(Q_GETINFO, type), special, id, (caddr_t) &dqinfo);
+
 	if(ret == 0) {
 		if(inode_usage)
 			*inode_usage = dqblk.dqb_curinodes;
@@ -241,43 +261,57 @@ quota_get(int type, qid_t id, const char *special,
 		if(inode_hard)
 			*inode_hard = dqblk.dqb_ihardlimit;
 		if(inode_grace)
-			*inode_grace = dqblk.dqb_itime;
-		if(block_grace)
-			*block_grace = dqblk.dqb_btime;
+			*inode_grace = dqinfo.dqi_igrace;
+
+		if(block_usage)
+			*block_usage = (dqblk.dqb_curspace + QUOTABLOCK_SIZE - 1) / QUOTABLOCK_SIZE;
 		if(block_soft)
 			*block_soft = dqblk.dqb_bsoftlimit;
 		if(block_hard)
 			*block_hard = dqblk.dqb_bhardlimit;
-		if(block_usage)
-			*block_usage = (dqblk.dqb_curspace + 1023) / 1024;
+		if(block_grace)
+			*block_grace = dqinfo.dqi_bgrace;
 	}
 	return ret;
 }
 
 static int
-quota_set(int type, qid_t id, const char *special,
+quota_set(int type, int id, const char *special,
 	  int32_t inode_soft, int32_t inode_hard, int32_t inode_grace,
 	  int32_t block_soft, int32_t block_hard, int32_t block_grace)
 {
 	struct mem_dqblk dqblk;
+	struct mem_dqinfo dqinfo;
 	int ret = 0;
 
 	memset(&dqblk, 0, sizeof(dqblk));
+	memset(&dqinfo, 0, sizeof(dqinfo));
+
 	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, (caddr_t) &dqblk);
+	if(ret == 0)
+	ret = quotactl(QCMD(Q_GETINFO, type), special, id, (caddr_t) &dqinfo);
+
 	if(ret == 0) {
 		if(inode_soft != -1)
 			dqblk.dqb_isoftlimit = inode_soft;
 		if(inode_hard != -1)
 			dqblk.dqb_ihardlimit = inode_hard;
 		if(inode_grace != -1)
-			dqblk.dqb_itime = inode_grace;
+			dqinfo.dqi_igrace = MIN(inode_grace, MAX_IQ_TIME);
 		if(block_soft != -1)
 			dqblk.dqb_bsoftlimit = block_soft;
 		if(block_hard != -1)
 			dqblk.dqb_bhardlimit = block_hard;
 		if(block_grace != -1)
-			dqblk.dqb_btime = block_grace;
-		ret = quotactl(QCMD(Q_SETQUOTA, type), special, id, (caddr_t) &dqblk);
+			dqinfo.dqi_bgrace = MIN(inode_grace, MAX_IQ_TIME);
+	}
+	if(ret == 0) {
+		ret = quotactl(QCMD(Q_SETQLIM, type), special, id,
+			       (caddr_t) &dqblk);
+	}
+	if(ret == 0) {
+		ret = quotactl(QCMD(Q_SETGRACE, type), special, id,
+			       (caddr_t) &dqinfo);
 	}
 	return ret;
 }

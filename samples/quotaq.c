@@ -48,15 +48,6 @@ do_quota_stuff(const char *ent, const char *special,
 			fprintf(stderr, "no group named `%s' found\n", ent);
 			return 2;
 		}
-		if(quota_get_group(grp->gr_gid, special,
-				   &inode_usage, &inode_soft,
-				   &inode_hard, &inode_grace,
-				   &block_usage, &block_soft,
-				   &block_hard, &block_grace)) {
-			fprintf(stderr, "error querying group quota for %s: "
-				"%s\n", special, strerror(errno));
-			return 3;
-		}
 		if(args[0] && args[1] && args[2] &&
 		   args[3] && args[4] && args[5]) {
 			inode_soft = atoi(args[0]);
@@ -74,6 +65,15 @@ do_quota_stuff(const char *ent, const char *special,
 				return i;
 			}
 		} else {
+			if(quota_get_group(grp->gr_gid, special,
+					   &inode_usage, &inode_soft,
+					   &inode_hard, &inode_grace,
+					   &block_usage, &block_soft,
+					   &block_hard, &block_grace)) {
+				fprintf(stderr, "error querying group quota for"
+					" %s: %s\n", special, strerror(errno));
+				return 3;
+			}
 			printf("%s:\n"
 			       "\tinode (used, soft, hard, grace) = "
 			       "(%d, %d, %d, %d)\n"
@@ -87,15 +87,6 @@ do_quota_stuff(const char *ent, const char *special,
 		if(pwd == NULL) {
 			fprintf(stderr, "no user named `%s' found\n", ent);
 			return 2;
-		}
-		if(quota_get_user(pwd->pw_uid, special,
-				  &inode_usage, &inode_soft,
-				  &inode_hard, &inode_grace,
-				  &block_usage, &block_soft,
-				  &block_hard, &block_grace)) {
-			fprintf(stderr, "error querying user quota for %s: "
-				"%s\n", special, strerror(errno));
-			return 3;
 		}
 		if(args[0] && args[1] && args[2] &&
 		   args[3] && args[4] && args[5]) {
@@ -114,6 +105,15 @@ do_quota_stuff(const char *ent, const char *special,
 				return i;
 			}
 		} else {
+			if(quota_get_user(pwd->pw_uid, special,
+					  &inode_usage, &inode_soft,
+					  &inode_hard, &inode_grace,
+					  &block_usage, &block_soft,
+					  &block_hard, &block_grace)) {
+				fprintf(stderr, "error querying user quota for"
+					"%s: %s\n", special, strerror(errno));
+				return 3;
+			}
 			printf("%s:\n"
 			       "\tinode (used, soft, hard, grace) = "
 			       "(%d, %d, %d, %d)\n"
@@ -134,23 +134,16 @@ directory_to_special(const char *directory)
 	const char *ret = NULL;
 
 	fp = setmntent(_PATH_MOUNTED, "r");
-	while((mnt = getmntent(fp)) != NULL) {
-		if(ret == NULL) {
-			if(strcmp(mnt->mnt_dir, directory) == 0) {
-				ret = strdup(mnt->mnt_fsname);
+	if(fp) {
+		while((mnt = getmntent(fp)) != NULL) {
+			if(ret == NULL) {
+				if(strcmp(mnt->mnt_dir, directory) == 0) {
+					ret = strdup(mnt->mnt_fsname);
+				}
 			}
 		}
+		endmntent(fp);
 	}
-	endmntent(fp);
-	fp = setmntent(_PATH_MNTTAB, "r");
-	while((mnt = getmntent(fp)) != NULL) {
-		if(ret == NULL) {
-			if(strcmp(mnt->mnt_dir, directory) == 0) {
-				ret = strdup(mnt->mnt_fsname);
-			}
-		}
-	}
-	endmntent(fp);
 	return ret;
 }
 

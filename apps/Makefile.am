@@ -3,7 +3,8 @@ sbin_PROGRAMS = lchage lid luseradd lusermod luserdel lgroupadd lgroupmod lgroup
 
 include $(top_srcdir)/Makefile.extra
 
-LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
+LDADD = ../lib/libuser.la @GLIB_LIBS@ @PAM_LIBS@ @POPT_LIBS@ @INTLLIBS@
+lid_LDADD = ../lib/libuser.la @GLIB_LIBS@ @POPT_LIBS@ @INTLLIBS@
 
 lchsh_SOURCES = \
 	apputil.c \
