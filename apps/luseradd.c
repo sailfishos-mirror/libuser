@@ -89,7 +89,7 @@ main(int argc, const char **argv)
 		lu_ent_group_default(ctx, name, system_account, ent);
 		if(gidNumber != -2) {
 			char *tmp = g_strdup_printf("%ld", gidNumber);
-			lu_ent_set(ent, "gidNumber", tmp);
+			lu_ent_set(ent, LU_GIDNUMBER, tmp);
 			g_free(tmp);
 		}
 		if(lu_group_add(ctx, ent) == FALSE) {
@@ -103,23 +103,23 @@ main(int argc, const char **argv)
 	ent = lu_ent_new();
 	lu_ent_user_default(ctx, name, system_account, ent);
 	if(gecos)
-		lu_ent_set(ent, "gecos", gecos);
+		lu_ent_set(ent, LU_GECOS, gecos);
 	if(uidNumber != -2) {
 		char *tmp = g_strdup_printf("%ld", uidNumber);
-		lu_ent_set(ent, "uidNumber", tmp);
+		lu_ent_set(ent, LU_UIDNUMBER, tmp);
 		g_free(tmp);
 	}
 	if(gidNumber != -2) {
 		char *tmp = g_strdup_printf("%ld", gidNumber);
-		lu_ent_set(ent, "gidNumber", tmp);
+		lu_ent_set(ent, LU_GIDNUMBER, tmp);
 		g_free(tmp);
 	}
 	if(homeDirectory)
-		lu_ent_set(ent, "homeDirectory", homeDirectory);
+		lu_ent_set(ent, LU_HOMEDIRECTORY, homeDirectory);
 	if(loginShell)
-		lu_ent_set(ent, "loginShell", loginShell);
+		lu_ent_set(ent, LU_LOGINSHELL, loginShell);
 	if(userPassword) {
-		values = lu_ent_get(ent, "userPassword");
+		values = lu_ent_get(ent, LU_USERPASSWORD);
 		if(values && values->data) {
 			cryptedUserPassword = make_crypted(userPassword,
 							   values->data);
@@ -130,8 +130,11 @@ main(int argc, const char **argv)
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_add(ent, "userPassword", tmp);
+		lu_ent_set(ent, LU_USERPASSWORD, tmp);
 		g_free(tmp);
+	}
+	if(userPassword) {
+		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
 	}
 
 	if(lu_user_add(ctx, ent) == FALSE) {

@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include "util.h"
 
+/* Create a backup copy of "filename" named "filename-". */
 static gboolean
 lu_files_create_backup(const char *filename)
 {
@@ -83,6 +84,8 @@ lu_files_create_backup(const char *filename)
 	return TRUE;
 }
 
+/* Parse an entry from /etc/passwd into an ent structure, using the
+ * attribute names we know. */
 static gboolean
 lu_files_parse_user_entry(const gchar *line, struct lu_ent *ent)
 {
@@ -99,7 +102,6 @@ lu_files_parse_user_entry(const gchar *line, struct lu_ent *ent)
 		return FALSE;
 	}
 
-	lu_ent_add_original(ent, LU_OBJECTCLASS, "posixAccount");
 	lu_ent_set_original(ent, LU_USERNAME, v[0]);
 	tmp = g_strconcat("{crypt}", v[1], NULL);
 	crypted = ent->vcache->cache(ent->vcache, tmp);
@@ -116,6 +118,8 @@ lu_files_parse_user_entry(const gchar *line, struct lu_ent *ent)
 	return TRUE;
 }
 
+/* Parse an entry from /etc/group into an ent structure, using the
+ * attribute names we know. */
 static gboolean
 lu_files_parse_group_entry(const gchar *line, struct lu_ent *ent)
 {
@@ -133,7 +137,6 @@ lu_files_parse_group_entry(const gchar *line, struct lu_ent *ent)
 		return FALSE;
 	}
 
-	lu_ent_add_original(ent, LU_OBJECTCLASS, "posixGroup");
 	lu_ent_set_original(ent, LU_GROUPNAME, v[0]);
 	tmp = g_strconcat("{crypt}", v[1], NULL);
 	crypted = ent->vcache->cache(ent->vcache, tmp);
@@ -154,6 +157,8 @@ lu_files_parse_group_entry(const gchar *line, struct lu_ent *ent)
 	return TRUE;
 }
 
+/* Parse an entry from /etc/shadow into an ent structure, using the
+ * attribute names we know. */
 static gboolean
 lu_shadow_parse_user_entry(const gchar *line, struct lu_ent *ent)
 {
@@ -170,7 +175,6 @@ lu_shadow_parse_user_entry(const gchar *line, struct lu_ent *ent)
 		return FALSE;
 	}
 
-	lu_ent_add_original(ent, LU_OBJECTCLASS, "shadowAccount");
 	lu_ent_set_original(ent, LU_USERNAME, v[0]);
 	tmp = g_strconcat("{crypt}", v[1], NULL);
 	crypted = ent->vcache->cache(ent->vcache, tmp);
@@ -189,6 +193,8 @@ lu_shadow_parse_user_entry(const gchar *line, struct lu_ent *ent)
 	return TRUE;
 }
 
+/* Parse an entry from /etc/shadow into an ent structure, using the
+ * attribute names we know. */
 static gboolean
 lu_shadow_parse_group_entry(const gchar *line, struct lu_ent *ent)
 {
@@ -206,7 +212,6 @@ lu_shadow_parse_group_entry(const gchar *line, struct lu_ent *ent)
 		return FALSE;
 	}
 
-	lu_ent_add_original(ent, LU_OBJECTCLASS, "shadowAccount");
 	lu_ent_set_original(ent, LU_GROUPNAME, v[0]);
 	tmp = g_strconcat("{crypt}", v[1], NULL);
 	crypted = ent->vcache->cache(ent->vcache, tmp);
@@ -243,7 +248,7 @@ generic_lookup(struct lu_module *module, const char *module_name,
 {
 	gboolean ret = FALSE;
 	gpointer lock;
-	GList *dir;
+	const char *dir;
 	int fd = -1;
 	char *line, *filename, *key;
 
@@ -258,10 +263,9 @@ generic_lookup(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(ent != NULL, FALSE);
 
 	key = g_strconcat(module_name, "/directory", NULL);
-	dir = lu_cfg_read(module->lu_context, key, "/etc");
-	filename = g_strconcat((char*)dir->data, "/", base_name, NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
-	g_list_free(dir);
 
 	fd = open(filename, O_RDONLY);
 	if(fd != -1) {
@@ -382,6 +386,7 @@ lu_shadow_group_lookup_id(struct lu_module *module,
 	return ret;
 }
 
+/* Create a line for /etc/passwd using data in the lu_ent structure. */
 static char *
 lu_files_format_user(struct lu_ent *ent)
 {
@@ -435,6 +440,7 @@ lu_files_format_user(struct lu_ent *ent)
 	return line;
 }
 
+/* Create a line for /etc/group using data in the lu_ent structure. */
 static char *
 lu_files_format_group(struct lu_ent *ent)
 {
@@ -484,6 +490,7 @@ lu_files_format_group(struct lu_ent *ent)
 	return line;
 }
 
+/* Create a line for /etc/shadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_user(struct lu_ent *ent)
 {
@@ -546,6 +553,7 @@ lu_shadow_format_user(struct lu_ent *ent)
 	return line;
 }
 
+/* Create a line for /etc/gshadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_group(struct lu_ent *ent)
 {
@@ -611,7 +619,7 @@ static gboolean
 generic_add(struct lu_module *module, const char *module_name,
 	    const char *base_name, format_fn formatter, struct lu_ent *ent)
 {
-	GList *dir;
+	const char *dir;
 	char *key, *line, *filename, *contents;
 	int fd;
 	struct stat st;
@@ -628,10 +636,9 @@ generic_add(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(ent != NULL, FALSE);
 
 	key = g_strconcat(module_name, "/directory", NULL);
-	dir = lu_cfg_read(module->lu_context, key, "/etc");
-	filename = g_strconcat((char*)dir->data, "/", base_name, NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
-	g_list_free(dir);
 
 	g_return_val_if_fail(lu_files_create_backup(filename), FALSE);
 
@@ -687,6 +694,8 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent)
 	gboolean ret = generic_add(module, "shadow", "shadow",
 				   lu_shadow_format_user, ent);
 	if(ret) {
+		/* Set the password in this structure so that a subsequent
+		 * information module add will note that it's shadowed. */
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
 	return ret;
@@ -705,6 +714,8 @@ lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent)
 	gboolean ret = generic_add(module, "shadow", "gshadow",
 				   lu_shadow_format_group, ent);
 	if(ret) {
+		/* Set the password in this structure so that a subsequent
+		 * information module add will note that it's shadowed. */
 		lu_ent_set(ent, LU_USERPASSWORD, "x");
 	}
 	return ret;
@@ -717,7 +728,8 @@ generic_mod(struct lu_module *module, const char *module_name,
 	char *filename = NULL, *line = NULL, *contents = NULL, *key = NULL;
 	struct stat st;
 	int fd = -1;
-	GList *dir = NULL, *name = NULL;
+	const char *dir = NULL;
+	GList *name = NULL;
 	gboolean ret = FALSE;
 	gpointer lock = NULL;
 
@@ -737,10 +749,9 @@ generic_mod(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(name->data != NULL, FALSE);
 
 	key = g_strconcat(module_name, "/directory", NULL);
-	dir = lu_cfg_read(module->lu_context, key, "/etc");
-	filename = g_strconcat((char*)dir->data, "/", base_name, NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
-	g_list_free(dir);
 
 	g_return_val_if_fail(lu_files_create_backup(filename), FALSE);
 
@@ -841,8 +852,9 @@ static gboolean
 generic_del(struct lu_module *module, const char *module_name,
 	    const char *base_name, struct lu_ent *ent)
 {
-	GList *name = NULL, *dir = NULL;
+	GList *name = NULL;
 	char *contents = NULL, *filename = NULL, *line, *key = NULL, *tmp;
+	const char *dir;
 	struct stat st;
 	int fd = -1;
 	gpointer lock = NULL;
@@ -862,10 +874,9 @@ generic_del(struct lu_module *module, const char *module_name,
 	g_return_val_if_fail(ent != NULL, FALSE);
 
 	key = g_strconcat(module_name, "/directory", NULL);
-	dir = lu_cfg_read(module->lu_context, key, "/etc");
-	filename = g_strconcat((char*)dir->data, "/", base_name, NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
-	g_list_free(dir);
 
 	g_return_val_if_fail(lu_files_create_backup(filename), FALSE);
 

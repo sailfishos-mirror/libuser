@@ -108,6 +108,8 @@ gboolean lu_group_unlock(struct lu_context *context, struct lu_ent *ent);
  * are handled by making them different entries in the GList. */
 GList *lu_cfg_read(struct lu_context *context,
 		   const char *key, const char *default_value);
+const char *lu_cfg_read_single(struct lu_context *context,
+			       const char *key, const char *default_value);
 /* Read the list of keys in a section of the file. */
 GList *lu_cfg_read_keys(struct lu_context *context, const char *parent_key);
 

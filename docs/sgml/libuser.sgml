@@ -85,8 +85,25 @@ directives within these sections are of the form <bf>key = value</bf>.
 
 <p>The <bf>defaults</bf>, <bf>userdefaults</bf>, and <bf>groupdefaults</bf>
 sections are used by the library itself.  The <bf>defaults</bf> section
-specifies the directory where modules can be found and lists the modules
-to be consulted when looking up user information.
+specifies the directory where modules can be found (<bf>moduledir</bf>) and
+lists the modules to be consulted when looking up user information.
+
+<p>There are two lists of modules because <bf>libuser</bf> separates an
+account's authentication information from other information.  This is done
+to allow different information stores to be used for these functions, and
+because some information stores can only hold authentication data (for
+example, shadow and krb5).
+
+<p>For the <bf>info_modules</bf> and <bf>auth_modules</bf> lists, order
+is only important for account creation -- the library will attempt to
+create a data entry for the user in each of the modules until one of them
+succeeds (so if you prefer new accounts to be created in your LDAP
+directory, then you'd make sure &quot;ldap&quot; was listed <it>before</it>
+&quot;files&quot;).  For looking up account information, the order determines
+precedence because the library stops searching after a module returns success
+(so again, you'd want &quot;ldap&quot; listed before &quot;files&quot;).
+Account modifications and deletions go straight to the information store which
+is known to hold the user's information.
 
 </sect1>
 
@@ -128,6 +145,7 @@ to store configuration data.  It presently recognizes these flags:
 <item>directory - the directory the <bf>shadow</bf> and <bf>gshadow</bf>
 files are to be stored in.
 </itemize>
+
 </sect2>
 
 <sect2>krb5
@@ -136,6 +154,15 @@ files are to be stored in.
 a connection to the Kerberos realm's administrative server and the kadmin
 protocols.
 
+<p>This module uses the <bf>krb5</bf> section of the configuration file
+to store configuration data.  It presently recognizes these flags:
+
+<itemize>
+<item>realm - the default realm to administer accounts in.  If not specified,
+the value is taken from <bf>krb5.conf</bf> by the Kerberos libraries the
+module links with.
+</itemize>
+
 </sect2>
 
 <sect2>ldap
@@ -143,8 +170,21 @@ protocols.
 <p>The ldap module implements both information and authentication data stores
 using an LDAP directory and a schema which (should) conform to RFC2307.  The
 module expects the client and server to support access using LDAPv3 with TLS.
-Currently only simple binds are implemented.  (SASL binding will be supported
-later on.)
+
+<p>This module uses the <bf>ldap</bf> section of the configuration file
+to store configuration data.  It presently recognizes these flags:
+
+<itemize>
+<item>server - the hostname of the LDAP server
+<item>basedn - the distinguished name which is the root of your tree
+<item>user - the user name with which to perform SASL binds
+<item>authuser - the authorization user name with which to perform SASL binds
+<item>binddn - the distinguished name to connect as for administrative access
+<item>userBranch - the distinguished name (relative to the basedn) under which
+user account data is kept
+<item>groupBranch - the distinguished name (relative to the basedn) under which
+group account data is kept
+</itemize>
 
 </sect2>
 
@@ -157,7 +197,7 @@ of the shadow password suite are included in the libuser distribution.
 To allow them to be used alongside existing utilities, their names have
 been prefixed with the letter 'l'.
 
-<p>As of this writing (version 0.4), this list of tools includes
+<p>As of this writing (version 0.7), this list of tools includes
 workalikes for <bf>useradd</bf>, <bf>usermod</bf>, <bf>userdel</bf>,
 <bf>groupadd</bf>, <bf>groupmod</bf>, <bf>groupdel</bf>, and <bf>chage</bf>.
 It should be noted that none of these tools provide a means for modifying
@@ -376,6 +416,13 @@ and modules to access configuration data.
 returns a <bf>GList</bf> of the results.  The key is of the form
 &quot;<bf>section</bf>/<bf>key</bf>&quot;.  An example key is &quot;defaults/moduledir&quot;.  If no matches are found, a list containing <bf>default_value</bf>
 will be returned.
+
+<item>const char *lu_cfg_read_single(struct lu_context *context, const char *key, const char *default_value)
+
+<p>Reads the contents of a particular key in the configuration file, and
+returns a single item from the list of results.  This is a simple wrapper
+around <bf>lu_cfg_read</bf> meant for use when only one value is expected
+to be returned.
 
 <item>GList *lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
 

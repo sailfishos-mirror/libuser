@@ -123,7 +123,7 @@ lu_ent_revert(struct lu_ent *source)
 void
 lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 {
-#ifdef DEBUG
+#ifdef DEBUG_USERENT
 	g_print(_("\nBefore copy:\n"));
 	lu_ent_dump(source);
 	lu_ent_dump(dest);
@@ -138,7 +138,7 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 	g_hash_table_foreach(source->original_attributes,
 			     copy_original_list, dest);
 	g_hash_table_foreach(source->attributes, copy_list, dest);
-#ifdef DEBUG
+#ifdef DEBUG_USERENT
 	g_print(_("\nAfter copy:\n"));
 	lu_ent_dump(source);
 	lu_ent_dump(dest);
@@ -270,7 +270,7 @@ lu_ent_group_default(struct lu_context *context, const char *name,
 void
 lu_ent_free(struct lu_ent *ent)
 {
-#ifdef DEBUG
+#ifdef DEBUG_USERENT
 	g_print(_("freeing lu_ent at %p.\n"), ent);
 #endif
 	g_return_if_fail(ent != NULL);

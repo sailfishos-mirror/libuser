@@ -54,25 +54,26 @@ const struct _msg_ent _msg_tbl[] = {
   {"no initialization function %s in '%s'.", 45},
   {"error initializing '%s'.", 46},
   {"module version mismatch in %s", 47},
-  {"dump of struct lu_ent at %p:\n", 48},
-  {" magic = %08x\n", 49},
+  {"Could not open configuration file '%s'.", 48},
+  {"dump of struct lu_ent at %p:\n", 49},
+  {" magic = %08x\n", 50},
   {"\
 \n\
-Before copy:\n", 50},
+Before copy:\n", 51},
   {"\
 \n\
-After copy:\n", 51},
-  {"freeing lu_ent at %p.\n", 52},
-  {"Error initializing lu.\n", 53},
-  {"Searching for group with ID %d.\n", 54},
-  {"Searching for group named %s.\n", 55},
-  {"Searching for user with ID %d.\n", 56},
-  {"Searching for user named %s.\n", 57},
-  {"Entry not found.\n", 58},
-  {"Default user object classes:\n", 59},
-  {"Default user attribute names:\n", 60},
-  {"Getting default user attributes:\n", 61},
-  {"Copying user structure:\n", 62},
+After copy:\n", 52},
+  {"freeing lu_ent at %p.\n", 53},
+  {"Error initializing lu.\n", 54},
+  {"Searching for group with ID %d.\n", 55},
+  {"Searching for group named %s.\n", 56},
+  {"Searching for user with ID %d.\n", 57},
+  {"Searching for user named %s.\n", 58},
+  {"Entry not found.\n", 59},
+  {"Default user object classes:\n", 60},
+  {"Default user attribute names:\n", 61},
+  {"Getting default user attributes:\n", 62},
+  {"Copying user structure:\n", 63},
 };
 
-int _msg_tbl_length = 62;
+int _msg_tbl_length = 63;

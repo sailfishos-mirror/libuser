@@ -41,16 +41,7 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names)
 		*names = NULL;
 	}
 
-	vals = lu_cfg_read(ctx, "defaults/moduledir", NULL);
-	if(vals) {
-		module_dir = ctx->scache->cache(ctx->scache,
-						(char*)vals->data);
-		g_list_free(vals);
-	}
-
-	if(module_dir == NULL) {
-		module_dir = ctx->scache->cache(ctx->scache, MODULEDIR);
-	}
+	module_dir = lu_cfg_read_single(ctx, "defaults/moduledir", MODULEDIR);
 
 	wlist = g_strdup(ctx->scache->cache(ctx->scache, list));
 
@@ -147,20 +138,14 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 	ctx->modules = g_hash_table_new(g_str_hash, lu_str_case_equal);
 
 	if(info_modules == NULL) {
-		modules = lu_cfg_read(ctx, "defaults/info_modules", "");
-		if(modules) {
-			info_modules = modules->data;
-			g_list_free(modules);
-		}
+		info_modules = lu_cfg_read_single(ctx, "defaults/info_modules",
+						  "");
 	}
 	lu_module_load(ctx, info_modules, &ctx->info_module_names);
 
 	if(auth_modules == NULL) {
-		modules = lu_cfg_read(ctx, "defaults/auth_modules", "");
-		if(modules) {
-			auth_modules = modules->data;
-			g_list_free(modules);
-		}
+		auth_modules = lu_cfg_read_single(ctx, "defaults/auth_modules",
+						  "");
 	}
 	lu_module_load(ctx, auth_modules, &ctx->auth_module_names);
 
@@ -195,53 +180,99 @@ run_single(struct lu_context *context, struct lu_module *module,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	switch(id) {
 		case user_lookup_name:
+#ifdef DEBUG
+			g_print("Looking up user %s using %s.\n",
+				data, module->name);
+#endif
 			success = module->user_lookup_name(module,
 							   data,
 							   ent);
 			break;
 		case user_lookup_id:
+#ifdef DEBUG
+			g_print("Looking up uid %d using %s.\n",
+				GPOINTER_TO_INT(data), module->name);
+#endif
 			success = module->user_lookup_id(module,
 							 data,
 							 ent);
 			break;
 		case group_lookup_name:
+#ifdef DEBUG
+			g_print("Looking up group %s using %s.\n",
+				data, module->name);
+#endif
 			success = module->group_lookup_name(module,
 							    data,
 							    ent);
 			break;
 		case group_lookup_id:
+#ifdef DEBUG
+			g_print("Looking up gid %d using %s.\n",
+				GPOINTER_TO_INT(data), module->name);
+#endif
 			success = module->group_lookup_id(module,
 							  data,
 							  ent);
 			break;
 		case user_add:
+#ifdef DEBUG
+			g_print("Adding user to %s.\n", module->name);
+#endif
 			success = module->user_add(module, ent);
 			break;
 		case group_add:
+#ifdef DEBUG
+			g_print("Adding group to %s.\n", module->name);
+#endif
 			success = module->group_add(module, ent);
 			break;
 		case user_mod:
+#ifdef DEBUG
+			g_print("Modifying user in %s.\n", module->name);
+#endif
 			success = module->user_mod(module, ent);
 			break;
 		case group_mod:
+#ifdef DEBUG
+			g_print("Modifying group in %s.\n", module->name);
+#endif
 			success = module->group_mod(module, ent);
 			break;
 		case user_del:
+#ifdef DEBUG
+			g_print("Removing user from %s.\n", module->name);
+#endif
 			success = module->user_del(module, ent);
 			break;
 		case group_del:
+#ifdef DEBUG
+			g_print("Removing group from %s.\n", module->name);
+#endif
 			success = module->group_del(module, ent);
 			break;
 		case user_lock:
+#ifdef DEBUG
+			g_print("Locking user in %s.\n", module->name);
+#endif
 			success = module->user_lock(module, ent);
 			break;
 		case group_lock:
+#ifdef DEBUG
+			g_print("Locking group in %s.\n", module->name);
+#endif
 			success = module->group_lock(module, ent);
 			break;
 		case user_unlock:
+#ifdef DEBUG
+			g_print("Unlocking user in %s.\n", module->name);
+#endif
 			success = module->user_unlock(module, ent);
 			break;
 		case group_unlock:
+#ifdef DEBUG
+			g_print("Unlocking group in %s.\n", module->name);
+#endif
 			success = module->group_unlock(module, ent);
 			break;
 	}
@@ -252,6 +283,13 @@ run_single(struct lu_context *context, struct lu_module *module,
 		if(type == info) {
 			lu_ent_set_source_info(ent, module->name);
 		}
+#ifdef DEBUG
+		g_print("...%s succeeded for %s.\n", module->name,
+			type == auth ? "auth" : "info");
+	} else {
+		g_print("...%s failed for %s.\n", module->name,
+			type == auth ? "auth" : "info");
+#endif
 	}
 	return success;
 }
@@ -355,8 +393,8 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 							  tmp->source_info);
 			g_assert(auth_module != NULL);
 			g_assert(info_module != NULL);
-			if(run_single(context, auth_module, info, id, tmp, data) &&
-			   run_single(context, info_module, auth, id, tmp, data)) {
+			if(run_single(context, auth_module, auth, id, tmp, data) &&
+			   run_single(context, info_module, info, id, tmp, data)) {
 				success = TRUE;
 			}
 			break;

@@ -40,5 +40,13 @@ directory = @sysconfdir@
 directory = @sysconfdir@
 
 [ldap]
+server = ldap
+user = Manager
+authuser = Manager
+basedn = dc=example,dc=com
+binddn = cn=Manager,dc=example,dc=com
 userBranch = ou=People
-groupBranch = ou=Groups
+groupBranch = ou=Group
+
+[krb5]
+realm = EXAMPLE.COM

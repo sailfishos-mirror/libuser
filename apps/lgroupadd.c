@@ -73,8 +73,11 @@ main(int argc, const char **argv)
 	if(cryptedUserPassword) {
 		char *tmp = NULL;
 		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		lu_ent_add(ent, LU_USERPASSWORD, tmp);
+		lu_ent_set(ent, LU_USERPASSWORD, tmp);
 		g_free(tmp);
+	}
+	if(userPassword) {
+		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
 	}
 
 	if(lu_group_add(ctx, ent) == FALSE) {

@@ -15,19 +15,22 @@ fill_urandom(char *output, size_t length)
 {
 	int fd;
 	size_t got = 0;
+	const char *unacceptable = "!*:$";
+
 	fd = open("/dev/urandom", O_RDONLY);
 	g_return_if_fail(fd != -1);
+
 	memset(output, '\0', length);
+
 	while(got < length) {
 		read(fd, output + got, 1);
 		if(isprint(output[got]) &&
 		   !isspace(output[got]) &&
-		   (output[got] != '!') &&
-		   (output[got] != '*') &&
-		   (output[got] != ':')) {
+		   !strchr(unacceptable, output[got])) {
 			got++;
 		}
 	}
+
 	close(fd);
 }
 
@@ -37,6 +40,9 @@ make_crypted(const char *plain, const char *previous)
 	char salt[2048];
 	char *p;
 	size_t stlen = 0;
+
+	memset(salt, '\0', sizeof(salt));
+
 	if((previous != NULL) && (previous[0] == '$')) {
 		p = strchr(previous + 1, '$');
 		if(p) {
@@ -48,7 +54,9 @@ make_crypted(const char *plain, const char *previous)
 		}
 		strncpy(salt, previous, stlen);
 	}
+
 	fill_urandom(salt + stlen, sizeof(salt) - stlen - 1);
+
 	return crypt(plain, salt);
 }
 

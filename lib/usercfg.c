@@ -27,14 +27,17 @@ lu_cfg_init(struct lu_context *context)
 	config = g_malloc0(sizeof(struct config_config));
 	config->cache = lu_string_cache_new(TRUE);
 
-#ifdef DEBUG
-	if(getenv("LIBUSER_CONF")) {
-		filename = getenv("LIBUSER_CONF");
+	if(getuid() == geteuid()) {
+		if(getenv("LIBUSER_CONF")) {
+			filename = getenv("LIBUSER_CONF");
+		}
 	}
-#endif
 
 	fd = open(filename, O_RDONLY);
-	if(fd != -1) {
+	if(fd == -1) {
+		g_warning(_("Could not open configuration file '%s'."),
+			  filename);
+	} else {
 		if(fstat(fd, &st) != -1) {
 			config->data = g_malloc0(st.st_size + 1);
 			read(fd, config->data, st.st_size);
@@ -208,5 +211,23 @@ lu_cfg_read_keys(struct lu_context *context, const char *parent_key)
 		}
 		g_free(data);
 	}
+	return ret;
+}
+
+const char *
+lu_cfg_read_single(struct lu_context *context,
+		   const char *key, const char *default_value)
+{
+	GList *answers = NULL;
+	const char *ret = NULL;
+
+	ret = context->scache->cache(context->scache, default_value);
+
+	answers = lu_cfg_read(context, key, NULL);
+	if(answers && answers->data) {
+		ret = context->scache->cache(context->scache, answers->data);
+		g_list_free(answers);
+	}
+
 	return ret;
 }

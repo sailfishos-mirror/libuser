@@ -129,6 +129,9 @@ main(int argc, const char **argv)
 		lu_ent_set(ent, LU_USERPASSWORD, tmp);
 		g_free(tmp);
 	}
+	if(userPassword) {
+		lu_ent_add(ent, LU_USERPASSWORD, userPassword);
+	}
 
 	if(lock) {
 		if(lu_user_lock(ctx, ent) == FALSE) {

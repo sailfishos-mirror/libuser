@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-01-03 03:42-0500\n"
+"POT-Creation-Date: 2001-01-03 16:04-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,21 +14,21 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: ENCODING\n"
 
-#: apps/apputil.c:59 apps/apputil.c:67 apps/apputil.c:75
+#: apps/apputil.c:67 apps/apputil.c:75 apps/apputil.c:83
 msgid "Feature not implemented: "
-msgstr ""
-
-#: apps/apputil.c:60
-#, c-format
-msgid "NOT creating home directory '%s'.\n"
 msgstr ""
 
 #: apps/apputil.c:68
 #, c-format
-msgid "NOT moving %s to %s.\n"
+msgid "NOT creating home directory '%s'.\n"
 msgstr ""
 
 #: apps/apputil.c:76
+#, c-format
+msgid "NOT moving %s to %s.\n"
+msgstr ""
+
+#: apps/apputil.c:84
 #, c-format
 msgid "NOT removing %s.\n"
 msgstr ""
@@ -103,7 +103,7 @@ msgstr ""
 msgid "No group name specified.\n"
 msgstr ""
 
-#: apps/lgroupadd.c:81
+#: apps/lgroupadd.c:84
 msgid "Group creation failed.\n"
 msgstr ""
 
@@ -121,17 +121,17 @@ msgstr ""
 msgid "Both -L and -U specified.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:153
+#: apps/lgroupmod.c:156
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:161
+#: apps/lgroupmod.c:164
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:168
+#: apps/lgroupmod.c:171
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr ""
@@ -141,26 +141,26 @@ msgstr ""
 msgid "Error creating group for %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:138
+#: apps/luseradd.c:141
 msgid "Account creation failed.\n"
 msgstr ""
 
-#: apps/luseradd.c:163
+#: apps/luseradd.c:166
 #, c-format
 msgid "Bad UID for %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:167
+#: apps/luseradd.c:170
 #, c-format
 msgid "Bad GID for %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:177
+#: apps/luseradd.c:180
 #, c-format
 msgid "No home directory for %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:183
+#: apps/luseradd.c:186
 #, c-format
 msgid "Error creating %s.\n"
 msgstr ""
@@ -185,54 +185,59 @@ msgstr ""
 msgid "Error reading old home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:135
+#: apps/lusermod.c:138
 #, c-format
 msgid "User %s could not be locked.\n"
 msgstr ""
 
-#: apps/lusermod.c:143
+#: apps/lusermod.c:146
 #, c-format
 msgid "User %s could not be unlocked.\n"
 msgstr ""
 
-#: apps/lusermod.c:150
+#: apps/lusermod.c:153
 #, c-format
 msgid "User %s could not be modified.\n"
 msgstr ""
 
-#: apps/lusermod.c:156
+#: apps/lusermod.c:159
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:161
+#: apps/lusermod.c:164
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:166
+#: apps/lusermod.c:169
 #, c-format
 msgid "Error moving %s to %s.\n"
 msgstr ""
 
-#: lib/user.c:67
+#: lib/user.c:58
 #, c-format
 msgid "error loading libuser module '%s': %s."
 msgstr ""
 
-#: lib/user.c:80
+#: lib/user.c:71
 #, c-format
 msgid "no initialization function %s in '%s'."
 msgstr ""
 
-#: lib/user.c:87
+#: lib/user.c:78
 #, c-format
 msgid "error initializing '%s'."
 msgstr ""
 
-#: lib/user.c:98
+#: lib/user.c:89
 #, c-format
 msgid "module version mismatch in %s"
+msgstr ""
+
+#: lib/usercfg.c:38
+#, c-format
+msgid "Could not open configuration file '%s'."
 msgstr ""
 
 #: lib/userent.c:24

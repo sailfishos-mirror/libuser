@@ -5,7 +5,7 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPrereq: krb5-devel, popt, sgml-tools
+BuildPrereq: krb5-devel, openldap-devel, popt, sgml-tools
 Summary: A user account administration library.
 
 %description
@@ -58,16 +58,26 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.a
 %{_libdir}/libuser.la
 %{_libdir}/libuser.so
-#%{_libdir}/libuser/*.a
-#%{_libdir}/libuser/*.la
 
 %changelog
-* Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Thu Jan  4 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add openldap-devel as a buildprereq
+- krb5: use a continuous connection
+- krb5: add "realm" config directive
+- ldap: use a continuous connection
+- ldap: add "server", "basedn", "binddn", "user", "authuser" config directives
+- ldap: actually finish the account deletion function
+- ldap: don't send cleartext passwords to the directory
 - fix naming attribute for users (should be uid, not gid)
 - refine the search-by-id,convert-to-name,search-by-name logic
 - fix handling of defaults when the config file is read in but contains no value
 - implement an LDAP information store
 - try to clean up module naming with libtool
+- luseradd: pass plaintext passwords along
+- luseradd: use symbolic attribute names instead of hard-coded
+- lusermod: pass plaintext passwords along
+- lgroupadd: pass plaintext passwords along
+- lgroupmod: pass plaintext passwords along
 
 * Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - initial packaging
