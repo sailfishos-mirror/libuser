@@ -99,9 +99,16 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 		for (j = 0; j < attribute->values->n_values; j++) {
 			GValue *value;
 			value = g_value_array_get_nth(attribute->values, j);
-			fprintf(fp, " %s = `%s'\n",
-				g_quark_to_string(attribute->name),
-				g_value_get_string(value));
+			if (G_VALUE_HOLDS_STRING(value)) {
+				fprintf(fp, " %s = `%s'\n",
+					g_quark_to_string(attribute->name),
+					g_value_get_string(value));
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				fprintf(fp, " %s = %ld\n",
+					g_quark_to_string(attribute->name),
+					g_value_get_long(value));
+			}
 		}
 	}
 }
@@ -260,6 +267,9 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	GQuark aquark;
 	int i;
 	char *lattr;
+	g_return_val_if_fail(list != NULL, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	lattr = g_strdup(attribute);
 	for (i = 0; lattr[i] != '\0'; i++) {
 		lattr[i] = g_ascii_tolower(lattr[i]);
@@ -281,6 +291,9 @@ lu_ent_get_int(GArray *list, const char *attribute)
 static gboolean
 lu_ent_has_int(GArray *list, const char *attribute)
 {
+	g_return_val_if_fail(list != NULL, FALSE);
+	g_return_val_if_fail(attribute != NULL, FALSE);
+	g_return_val_if_fail(strlen(attribute) > 0, FALSE);
 	return (lu_ent_get_int(list, attribute) != NULL) ? TRUE : FALSE;
 }
 
@@ -291,6 +304,9 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	struct lu_attribute newattr;
 	int i;
 	char *lattr;
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
 		lattr = g_strdup(attr);
@@ -321,7 +337,11 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	struct lu_attribute newattr;
 	int i;
 	char *lattr;
-	dest = lu_ent_get_int(list, lattr);
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(value != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
+	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
 		lattr = g_strdup(attr);
 		for (i = 0; lattr[i] != '\0'; i++) {
@@ -343,6 +363,9 @@ lu_ent_clear_int(GArray *list, const char *attribute)
 	int i;
 	struct lu_attribute *attr;
 	char *lattr;
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lattr = g_strdup(attribute);
 	for (i = 0; lattr[i] != '\0'; i++) {
 		lattr[i] = g_ascii_tolower(lattr[i]);
@@ -374,6 +397,10 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 	GValue *tvalue;
 	char *svalue, *tmp;
 	int i;
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(value != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest != NULL) {
 		svalue = g_strdup_value_contents(value);
@@ -399,6 +426,7 @@ lu_ent_get_attributes_int(GArray *list)
 	struct lu_attribute *attr;
 	int i;
 	GList *ret = NULL;
+	g_return_val_if_fail(list != NULL, NULL);
 	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		ret = g_list_prepend(ret, (char*)g_quark_to_string(attr->name));
@@ -412,6 +440,7 @@ lu_ent_get(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(ent != NULL, NULL);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
 	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_int(ent->pending, attribute);
 }
 
@@ -421,6 +450,7 @@ lu_ent_get_current(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(ent != NULL, NULL);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
 	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_int(ent->current, attribute);
 }
 
@@ -430,6 +460,7 @@ lu_ent_has(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
 	g_return_val_if_fail(attribute != NULL, FALSE);
+	g_return_val_if_fail(strlen(attribute) > 0, FALSE);
 	return lu_ent_has_int(ent->pending, attribute);
 }
 gboolean
@@ -438,6 +469,7 @@ lu_ent_has_current(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
 	g_return_val_if_fail(attribute != NULL, FALSE);
+	g_return_val_if_fail(strlen(attribute) > 0, FALSE);
 	return lu_ent_has_int(ent->current, attribute);
 }
 
@@ -447,6 +479,7 @@ lu_ent_set(struct lu_ent *ent, const char *attribute, const GValueArray *values)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_set_int(ent->pending, attribute, values);
 }
 void
@@ -456,6 +489,7 @@ lu_ent_set_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_set_int(ent->current, attribute, values);
 }
 
@@ -465,6 +499,7 @@ lu_ent_add(struct lu_ent *ent, const char *attribute, const GValue *value)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_add_int(ent->pending, attribute, value);
 }
 void
@@ -474,6 +509,7 @@ lu_ent_add_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_add_int(ent->current, attribute, value);
 }
 
@@ -483,6 +519,7 @@ lu_ent_clear(struct lu_ent *ent, const char *attribute)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_clear_int(ent->pending, attribute);
 }
 void
@@ -491,6 +528,7 @@ lu_ent_clear_current(struct lu_ent *ent, const char *attribute)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_clear_int(ent->current, attribute);
 }
 
@@ -515,6 +553,8 @@ lu_ent_del(struct lu_ent *ent, const char *attribute, const GValue *value)
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	g_return_if_fail(value != NULL);
 	lu_ent_del_int(ent->pending, attribute, value);
 }
 void
@@ -524,6 +564,8 @@ lu_ent_del_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	g_return_if_fail(value != NULL);
 	lu_ent_del_int(ent->current, attribute, value);
 }
 
@@ -549,13 +591,15 @@ lu_default_int(struct lu_context *context, const char *name,
 {
 	GList *keys, *p;
 	GValue value;
-	char *top, *key, *idkey, *tmp, *idstring;
-	const char *val;
+	char *top, *idkey, *cfgkey, *tmp, *idstring;
+	const char *val, *key;
 	gulong id = DEFAULT_ID;
 	int i;
 
 	g_return_val_if_fail(context != NULL, FALSE);
 	g_return_val_if_fail(name != NULL, FALSE);
+	g_return_val_if_fail(strlen(name) > 0, FALSE);
+	g_return_val_if_fail((type == lu_user) || (type == lu_group), FALSE);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
 
@@ -569,11 +613,11 @@ lu_default_int(struct lu_context *context, const char *name,
 	g_value_init(&value, G_TYPE_STRING);
 	g_value_set_string(&value, name);
 	if (ent->type == lu_user) {
+		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &value);
-		lu_ent_add_current(ent, LU_USERNAME, &value);
 	} else if (ent->type == lu_group) {
+		lu_ent_clear(ent, LU_GROUPNAME);
 		lu_ent_add(ent, LU_GROUPNAME, &value);
-		lu_ent_add_current(ent, LU_GROUPNAME, &value);
 	}
 	g_value_unset(&value);
 
@@ -592,9 +636,9 @@ lu_default_int(struct lu_context *context, const char *name,
 	if (system) {
 		id = 1;
 	} else {
-		key = g_strdup_printf("%s/%s", top, idkey);
-		val = lu_cfg_read_single(context, key, NULL);
-		g_free(key);
+		cfgkey = g_strdup_printf("%s/%s", top, idkey);
+		val = lu_cfg_read_single(context, cfgkey, NULL);
+		g_free(cfgkey);
 		if (val != NULL) {
 			id = strtol((char *) val, &tmp, 10);
 			if (*tmp != '\0') {
@@ -607,17 +651,51 @@ lu_default_int(struct lu_context *context, const char *name,
 	id = lu_get_first_unused_id(context, type, id);
 
 	/* Add this ID to the entity. */
-	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_LONG);
 	g_value_set_long(&value, id);
-	idstring = g_strdup_value_contents(&value);
-	lu_ent_add_current(ent, idkey, &value);
 	lu_ent_add(ent, idkey, &value);
 	g_value_unset(&value);
 
 	/* Now iterate to find the rest. */
 	keys = lu_cfg_read_keys(context, top);
 	for (p = keys; p && p->data; p = g_list_next(p)) {
+		struct {
+			const char *realkey, *configkey;
+		} keymap[] = {
+			{LU_USERNAME, G_STRINGIFY_ARG(LU_USERNAME)},
+			{LU_USERPASSWORD, G_STRINGIFY_ARG(LU_USERPASSWORD)},
+			{LU_UIDNUMBER, G_STRINGIFY_ARG(LU_UIDNUMBER)},
+			{LU_GIDNUMBER, G_STRINGIFY_ARG(LU_GIDNUMBER)},
+			{LU_GECOS, G_STRINGIFY_ARG(LU_GECOS)},
+			{LU_HOMEDIRECTORY, G_STRINGIFY_ARG(LU_HOMEDIRECTORY)},
+			{LU_LOGINSHELL, G_STRINGIFY_ARG(LU_LOGINSHELL)},
+
+			{LU_GROUPNAME, G_STRINGIFY_ARG(LU_GROUPNAME)},
+			{LU_GROUPPASSWORD, G_STRINGIFY_ARG(LU_GROUPPASSWORD)},
+			{LU_MEMBERUID, G_STRINGIFY_ARG(LU_MEMBERUID)},
+			{LU_ADMINISTRATORUID,
+				G_STRINGIFY_ARG(LU_ADMINISTRATORUID)},
+
+			{LU_SHADOWNAME, G_STRINGIFY_ARG(LU_SHADOWNAME)},
+			{LU_SHADOWPASSWORD, G_STRINGIFY_ARG(LU_SHADOWPASSWORD)},
+			{LU_SHADOWLASTCHANGE,
+				G_STRINGIFY_ARG(LU_SHADOWLASTCHANGE)},
+			{LU_SHADOWMIN, G_STRINGIFY_ARG(LU_SHADOWMIN)},
+			{LU_SHADOWMAX, G_STRINGIFY_ARG(LU_SHADOWMAX)},
+			{LU_SHADOWWARNING, G_STRINGIFY_ARG(LU_SHADOWWARNING)},
+			{LU_SHADOWINACTIVE, G_STRINGIFY_ARG(LU_SHADOWINACTIVE)},
+			{LU_SHADOWEXPIRE, G_STRINGIFY_ARG(LU_SHADOWEXPIRE)},
+			{LU_SHADOWFLAG, G_STRINGIFY_ARG(LU_SHADOWFLAG)},
+
+			{LU_COMMONNAME, G_STRINGIFY_ARG(LU_COMMONNAME)},
+			{LU_GIVENNAME, G_STRINGIFY_ARG(LU_GIVENNAME)},
+			{LU_SN, G_STRINGIFY_ARG(LU_SN)},
+			{LU_ROOMNUMBER, G_STRINGIFY_ARG(LU_ROOMNUMBER)},
+			{LU_TELEPHONENUMBER,
+				G_STRINGIFY_ARG(LU_TELEPHONENUMBER)},
+			{LU_HOMEPHONE, G_STRINGIFY_ARG(LU_HOMEPHONE)},
+			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
+		};
 		struct {
 			const char *format, *value;
 		} subst[] = {
@@ -626,16 +704,25 @@ lu_default_int(struct lu_context *context, const char *name,
 			{"%u", idstring},
 		};
 
+		/* Possibly map the key to an internal name. */
+		key = (const char *) p->data;
+		for (i = 0; i < G_N_ELEMENTS(keymap); i++) {
+			if (strcmp(key, keymap[i].configkey) == 0) {
+				key = keymap[i].realkey;
+				break;
+			}
+		}
+
 		/* Skip over the key which represents the user/group ID,
 		 * because we only used it as a starting point. */
-		if (lu_str_case_equal(idkey, p->data)) {
+		if (lu_str_case_equal(idkey, key)) {
 			continue;
 		}
 
 		/* Generate the key and read the value for the item. */
-		key = g_strdup_printf("%s/%s", top, (char *) p->data);
-		val = lu_cfg_read_single(context, key, NULL);
-		g_free(key);
+		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
+		val = lu_cfg_read_single(context, cfgkey, NULL);
+		g_free(cfgkey);
 
 		/* Create a copy of the value to mess with. */
 		g_assert(val != NULL);
@@ -643,31 +730,37 @@ lu_default_int(struct lu_context *context, const char *name,
 
 		/* Perform substitutions. */
 		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
-			while (strstr(val, subst[i].format) != NULL) {
-				char *pre, *post, *tmp2;
-				val = strstr(tmp, subst[i].format);
-				pre = g_strndup(val, tmp - val);
-				post = g_strdup(tmp + strlen(subst[i].format));
+			while (strstr(tmp, subst[i].format) != NULL) {
+				char *pre, *post, *tmp2, *where;
+				where = strstr(tmp, subst[i].format);
+				pre = g_strndup(tmp, where - tmp);
+				post = g_strdup(where +
+						strlen(subst[i].format));
 				tmp2 = g_strconcat(pre,
 						   subst[i].value,
 						   post,
 						   NULL);
+				g_free(pre);
+				g_free(post);
 				g_free(tmp);
 				tmp = tmp2;
 			}
 		}
 
 		/* Add the transformed value. */
-		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_STRING);
 		g_value_set_string(&value, tmp);
 		g_free(tmp);
-		lu_ent_add(ent, (char *) p->data, &value);
+		lu_ent_clear(ent, key);
+		lu_ent_add(ent, key, &value);
 		g_value_unset(&value);
 	}
 	if (keys != NULL) {
 		g_list_free(keys);
 	}
+
+	/* Make the pending set be the same as the current set. */
+	lu_ent_commit(ent);
 
 	return TRUE;
 }

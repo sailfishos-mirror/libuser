@@ -27,6 +27,7 @@
 #include <fnmatch.h>
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "../include/libuser/user_private.h"
@@ -51,7 +52,7 @@ struct format_specifier {
 
 static const struct format_specifier format_passwd[] = {
 	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
 	{3, LU_UIDNUMBER, NULL, NULL, FALSE, FALSE},
 	{4, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
 	{5, LU_GECOS, NULL, NULL, FALSE, FALSE},
@@ -61,14 +62,14 @@ static const struct format_specifier format_passwd[] = {
 
 static const struct format_specifier format_group[] = {
 	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
 	{3, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
 	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
 	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
 	{3, LU_SHADOWLASTCHANGE, NULL, NULL, FALSE, FALSE},
 	{4, LU_SHADOWMIN, NULL, NULL, FALSE, FALSE},
 	{5, LU_SHADOWMAX, NULL, NULL, FALSE, FALSE},
@@ -80,7 +81,7 @@ static const struct format_specifier format_shadow[] = {
 
 static const struct format_specifier format_gshadow[] = {
 	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, "{crypt}", "*", FALSE, TRUE},
+	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
 	{3, LU_ADMINISTRATORUID, NULL, NULL, TRUE, FALSE},
 	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
 };
@@ -841,6 +842,16 @@ static gboolean
 lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
+	GValue svalue;
+
+	/* Make sure the regular password says "shadow!" */
+	memset(&svalue, 0, sizeof(svalue));
+	g_value_init(&svalue, G_TYPE_STRING);
+	g_value_set_string(&svalue, "x");
+	lu_ent_clear(ent, LU_USERPASSWORD);
+	lu_ent_add(ent, LU_USERPASSWORD, &svalue);
+	g_value_unset(&svalue);
+
 	return TRUE;
 }
 
@@ -857,6 +868,18 @@ static gboolean
 lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
+	GValue svalue;
+
+	memset(&svalue, 0, sizeof(svalue));
+	g_value_init(&svalue, G_TYPE_STRING);
+
+	/* Make sure the regular password says "shadow!" */
+	g_value_set_string(&svalue, "x");
+	lu_ent_clear(ent, LU_GROUPPASSWORD);
+	lu_ent_add(ent, LU_GROUPPASSWORD, &svalue);
+
+	g_value_unset(&svalue);
+
 	return TRUE;
 }
 
@@ -1090,6 +1113,7 @@ lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent,
 	gboolean ret;
 	ret = generic_mod(module, "shadow", format_shadow,
 			  G_N_ELEMENTS(format_shadow), ent, error);
+
 	return ret;
 }
 
@@ -1582,6 +1606,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
+	/* The crypt prefix indicates that the password is already hashed. */
 	if (strncmp(password, "{crypt}", 7) == 0) {
 		password = password + 7;
 	} else {

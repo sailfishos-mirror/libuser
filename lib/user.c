@@ -254,16 +254,32 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_lookup_name(module, sdata, entity, error);
+		if (module->user_lookup_name(module, sdata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case user_lookup_id:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_lookup_id(module, ldata, entity, error);
+		if (module->user_lookup_id(module, ldata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case user_add:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_add(module, entity, error);
+		if (module->user_add(module, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case user_add_prep:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_add_prep(module, entity, error);
+		if (module->user_add_prep(module, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case user_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->user_mod(module, entity, error);
@@ -313,16 +329,32 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_lookup_name(module, sdata, entity, error);
+		if (module->group_lookup_name(module, sdata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case group_lookup_id:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_lookup_id(module, ldata, entity, error);
+		if (module->group_lookup_id(module, ldata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case group_add:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_add(module, entity, error);
+		if (module->group_add(module, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case group_add_prep:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_add_prep(module, entity, error);
+		if (module->group_add_prep(module, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case group_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->group_mod(module, entity, error);

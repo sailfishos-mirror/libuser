@@ -14,26 +14,30 @@ create_modules = files shadow
 # create_modules = ldap krb5
 
 [userdefaults]
-uid = %n
-uidNumber = 500
-gidNumber = %u
-userPassword = {crypt}!!
-homeDirectory = /home/%n
-loginShell = /bin/bash
-gecos = %n
+LU_USERNAME = %n
+LU_USERPASSWORD = !!
+LU_UIDNUMBER = 500
+LU_GIDNUMBER = %u
+LU_GECOS = %n
+LU_HOMEDIRECTORY = /home/%n
+LU_LOGINSHELL = /bin/bash
 
-shadowLastChange = %d
-shadowMin = 0
-shadowMax = 99999
-shadowWarning = 7
-shadowInactive = -1
-shadowExpire = -1
-shadowFlag = -1
+LU_SHADOWNAME = %n
+LU_SHADOWPASSWORD = !!
+LU_SHADOWLASTCHANGE = %d
+LU_SHADOWMIN = 0
+LU_SHADOWMAX = 99999
+LU_SHADOWWARNING = 7
+LU_SHADOWINACTIVE = -1
+LU_SHADOWEXPIRE = -1
+LU_SHADOWFLAG = -1
 
 [groupdefaults]
-cn = %n
-gidNumber = 500
-userPassword = !!
+LU_GROUPNAME = %n
+LU_GROUPPASSWORD = !!
+LU_GIDNUMBER = 500
+# LU_MEMBERUID =
+# LU_ADMINISTRATORUID =
 
 [files]
 # This is useful for the case where some master files are used to

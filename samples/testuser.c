@@ -31,13 +31,18 @@ dump_attribute(const char *attribute, struct lu_ent *ent)
 	GValueArray *array;
 	GValue *value;
 	int i;
-	g_print("%s\n", attribute);
 	array = lu_ent_get(ent, attribute);
 	if (array != NULL) {
 		for (i = 0; i < array->n_values; i++) {
 			value = g_value_array_get_nth(array, i);
-			g_print(" %s = %s\n", attribute,
-				g_value_get_string(value));
+			if (G_VALUE_HOLDS_STRING(value)) {
+				g_print("attribute %s = `%s'\n", attribute,
+					g_value_get_string(value));
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				g_print("attribute %s = %ld\n", attribute,
+					g_value_get_long(value));
+			}
 		}
 	}
 }
