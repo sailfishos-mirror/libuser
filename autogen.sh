@@ -8,7 +8,7 @@ set -x
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
 libtoolize --force
 automake -a
-test -d intl || gettextize -c
+test -d intl || gettextize -c -f
 aclocal -I ./m4
 autoheader
 autoconf

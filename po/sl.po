@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 7.2\n"
-"POT-Creation-Date: 2002-01-24 16:02-0500\n"
+"POT-Creation-Date: 2002-02-20 18:17-0500\n"
 "PO-Revision-Date: 2001-09-05 22:30+0200\n"
 "Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,44 +16,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-#: apps/apputil.c:69
+#: apps/apputil.c:70
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Napaka pri branju ,%s`: %s"
 
-#: apps/apputil.c:77
+#: apps/apputil.c:78
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Napaka pri ustvarjanju ,%s`: %s"
 
-#: apps/apputil.c:199 apps/apputil.c:231 apps/apputil.c:248
+#: apps/apputil.c:200 apps/apputil.c:232 apps/apputil.c:249
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Napaka pri odstranjevanju ,%s`: %s"
 
-#: apps/apputil.c:405 apps/apputil.c:409
+#: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
 msgstr ""
 
-#: apps/apputil.c:418
+#: apps/apputil.c:419
 msgid "Internal error.\n"
 msgstr "Notranja napaka.\n"
 
-#: apps/apputil.c:427
+#: apps/apputil.c:432
 msgid "Error initializing PAM.\n"
 msgstr "Napaka pri inicializaciji PAM.\n"
 
-#: apps/apputil.c:435 apps/apputil.c:459
+#: apps/apputil.c:440 apps/apputil.c:464
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Avtentikacija za %s ni uspela.\n"
 
-#: apps/apputil.c:444
+#: apps/apputil.c:449
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Notranja napaka.\n"
 
-#: apps/apputil.c:450
+#: apps/apputil.c:455
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -175,27 +175,26 @@ msgstr "Skupine %s ni moè izbrisati.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Doloèeni sta bili -L in -U hkrati.\n"
 
-#: apps/lgroupmod.c:230 apps/lgroupmod.c:240
+#: apps/lgroupmod.c:230 apps/lgroupmod.c:238
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Gesla za skupino %s ni bilo moè nastaviti.\n"
 
-#: apps/lgroupmod.c:249
+#: apps/lgroupmod.c:246
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Skupina %s ne more biti zaklenjena.\n"
 
-#: apps/lgroupmod.c:257
+#: apps/lgroupmod.c:254
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Skupina %s ne more biti odklenjena.\n"
 
-#: apps/lgroupmod.c:264
+#: apps/lgroupmod.c:261
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Skupine %s ni moè spremeniti.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/luseradd.c:201 apps/luseradd.c:213
 #, fuzzy, c-format
 msgid "Error creating group `%s'.\n"
@@ -221,67 +220,67 @@ msgstr "Uporabnika %s ni moè izbrisati: %s.\n"
 msgid "%s did not have a gid number.\n"
 msgstr "%s ni imel ¹tevila gid.\n"
 
-#: apps/luserdel.c:127
+#: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr ""
 
-#: apps/luserdel.c:133
+#: apps/luserdel.c:134
 #, fuzzy, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "Skupina #%d ni imela imena skupine.\n"
 
-#: apps/luserdel.c:141
+#: apps/luserdel.c:142
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Skupine %s ni moè izbrisati: %s.\n"
 
-#: apps/luserdel.c:155
+#: apps/luserdel.c:156
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s ni imel(a) domaèega imenika.\n"
 
-#: apps/luserdel.c:162
+#: apps/luserdel.c:163
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Napaka pri odstranjevanju %s: %s.\n"
 
-#: apps/lusermod.c:198 apps/lusermod.c:211
+#: apps/lusermod.c:198 apps/lusermod.c:210
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Neuspe¹no nastavljanje gesla za uporabnika %s: %s.\n"
 
-#: apps/lusermod.c:222
+#: apps/lusermod.c:220
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Uporabnika %s ni moè zakleniti: %s.\n"
 
-#: apps/lusermod.c:230
+#: apps/lusermod.c:228
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Uporabnika %s ni moè odkleniti: %s.\n"
 
-#: apps/lusermod.c:238
+#: apps/lusermod.c:236
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Uporabnika %s ni moè spremeniti: %s.\n"
 
-#: apps/lusermod.c:291
+#: apps/lusermod.c:289
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Skupine %s ni moè spremeniti.\n"
 
-#: apps/lusermod.c:302
+#: apps/lusermod.c:300
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ni starega domaèega imenika za %s.\n"
 
-#: apps/lusermod.c:307
+#: apps/lusermod.c:305
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ni novega domaèega imenika za %s.\n"
 
-#: apps/lusermod.c:313
+#: apps/lusermod.c:311
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Napaka pri premikanju %s v %s: %s.\n"
@@ -291,97 +290,97 @@ msgstr "Napaka pri premikanju %s v %s: %s.\n"
 msgid "could not open configuration file `%s': %s"
 msgstr "ni moè odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/error.c:37
+#: lib/error.c:41
 msgid "success"
 msgstr ""
 
-#: lib/error.c:39
+#: lib/error.c:43
 msgid "module disabled by configuration"
 msgstr ""
 
-#: lib/error.c:41
+#: lib/error.c:45
 #, fuzzy
 msgid "generic error"
 msgstr "Notranja napaka.\n"
 
-#: lib/error.c:43
+#: lib/error.c:47
 #, fuzzy
 msgid "not enough privileges"
 msgstr "ne izvaja se z dovolilnicami skrbnika"
 
-#: lib/error.c:45
+#: lib/error.c:49
 msgid "access denied"
 msgstr ""
 
-#: lib/error.c:47
+#: lib/error.c:51
 msgid "bad user/group name"
 msgstr ""
 
-#: lib/error.c:49
+#: lib/error.c:53
 msgid "bad user/group id"
 msgstr ""
 
-#: lib/error.c:51
+#: lib/error.c:55
 msgid "user/group name in use"
 msgstr ""
 
-#: lib/error.c:53
+#: lib/error.c:57
 msgid "user/group id in use"
 msgstr ""
 
-#: lib/error.c:55
+#: lib/error.c:59
 msgid "error manipulating terminal attributes"
 msgstr ""
 
-#: lib/error.c:57
+#: lib/error.c:61
 #, fuzzy
 msgid "error opening file"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:59
+#: lib/error.c:63
 #, fuzzy
 msgid "error locking file"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:61
+#: lib/error.c:65
 #, fuzzy
 msgid "error statting file"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:63
+#: lib/error.c:67
 #, fuzzy
 msgid "error reading file"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:65
+#: lib/error.c:69
 #, fuzzy
 msgid "error writing to file"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:67
+#: lib/error.c:71
 msgid "data not found in file"
 msgstr ""
 
-#: lib/error.c:69
+#: lib/error.c:73
 #, fuzzy
 msgid "internal initialization error"
 msgstr "napaka pri inicializaciji knji¾nice kerberos"
 
-#: lib/error.c:71
+#: lib/error.c:75
 #, fuzzy
 msgid "error loading module"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: lib/error.c:73
+#: lib/error.c:77
 msgid "error resolving symbol in module"
 msgstr ""
 
-#: lib/error.c:75
+#: lib/error.c:79
 #, fuzzy
 msgid "library/module version mismatch"
 msgstr "neujemanje razlièice modula v ,%s`"
 
-#: lib/error.c:77 lib/error.c:79
+#: lib/error.c:84
 #, fuzzy
 msgid "unknown error"
 msgstr "neznano"
@@ -409,63 +408,64 @@ msgstr "Dobivamo privete atribute uporabnika:\n"
 msgid "error reading from terminal"
 msgstr ""
 
-#: lib/util.c:185
+#: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
 msgstr "napaka pri zaklepanju datoteke: %s"
 
-#: modules/files.c:108 modules/files.c:404 modules/files.c:718
-#: modules/files.c:969 modules/files.c:1145 modules/files.c:1327
-#: modules/files.c:1403 modules/files.c:1573 modules/files.c:1688
-#: modules/files.c:1703 modules/files.c:1778 modules/files.c:1795
-#: modules/files.c:1846 modules/files.c:1865 modules/files.c:1942
-#: modules/files.c:1957 modules/files.c:2032 modules/files.c:2047
+#: modules/files.c:109 modules/files.c:453 modules/files.c:822
+#: modules/files.c:1115 modules/files.c:1322 modules/files.c:1551
+#: modules/files.c:1659 modules/files.c:1858 modules/files.c:2056
+#: modules/files.c:2073 modules/files.c:2159 modules/files.c:2178
+#: modules/files.c:2242 modules/files.c:2263 modules/files.c:2355
+#: modules/files.c:2374 modules/files.c:2429 modules/files.c:2448
+#: modules/files.c:2545 modules/files.c:2562
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "ni moè odpreti ,%s`: %s"
 
-#: modules/files.c:123 modules/files.c:155 modules/files.c:187
-#: modules/files.c:732 modules/files.c:1159
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:838 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "ni moè ugotoviti stanja ,%s`: %s"
 
-#: modules/files.c:132
+#: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "napaka pri ustvarjanju ,%s`: %s"
 
-#: modules/files.c:146
-#, c-format
-msgid "backup file `%s' was a symlink"
+#: modules/files.c:153
+#, fuzzy, c-format
+msgid "backup file `%s' exists and is not a regular file"
 msgstr "rezervna datoteka ,%s` je bila simbolna povezava"
 
-#: modules/files.c:749 modules/files.c:1170
+#: modules/files.c:871 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "ni moè brati iz ,%s`: %s"
 
-#: modules/files.c:761 modules/files.c:773
+#: modules/files.c:886 modules/files.c:899
 msgid "entry already present in file"
 msgstr "vnos je ¾e v datoteki"
 
-#: modules/files.c:787 modules/files.c:802 modules/files.c:1200
-#: modules/files.c:1211
+#: modules/files.c:912 modules/files.c:933 modules/files.c:1409
+#: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "ni moè pisati v ,%s`: %s"
 
-#: modules/files.c:939 modules/files.c:948 modules/files.c:1032
-#: modules/files.c:1045
+#: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
+#: modules/files.c:1208
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetni objekt nima atributa %s"
 
-#: modules/files.c:2396 modules/files.c:2464
+#: modules/files.c:2792 modules/files.c:2862
 msgid "not executing with superuser privileges"
 msgstr "ne izvaja se z dovolilnicami skrbnika"
 
-#: modules/files.c:2477
+#: modules/files.c:2875
 msgid "no shadow file present -- disabling"
 msgstr "ni datoteke z zastrtimi gesli -- onemogoèam"
 
@@ -528,117 +528,117 @@ msgstr "Glavni skrbnik za Kerberos"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Geslo Kerberos za glavnega skrbnika"
 
-#: modules/ldap.c:214 modules/ldap.c:247 modules/ldap.c:2226
+#: modules/ldap.c:215 modules/ldap.c:248
 msgid "error initializing ldap library"
 msgstr "napaka pri inicializaciji knji¾nice ldap"
 
-#: modules/ldap.c:225 modules/ldap.c:258 modules/ldap.c:2238
+#: modules/ldap.c:226 modules/ldap.c:259
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "protokola LDAP ni bilo moè nastaviti na razlièico %d"
 
-#: modules/ldap.c:235 modules/ldap.c:2250
+#: modules/ldap.c:236
 msgid "could not negotiate TLS with LDAP server"
 msgstr "ni se bilo moè pogoditi za TLS s stre¾nikom LDAP"
 
-#: modules/ldap.c:406
+#: modules/ldap.c:407
 msgid "could not bind to LDAP server"
 msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
 
-#: modules/ldap.c:419 modules/ldap.c:2264
+#: modules/ldap.c:420
 #, fuzzy
 msgid "could not search LDAP server"
 msgstr "ni se bilo moè povezati s stre¾nikom LDAP"
 
-#: modules/ldap.c:428 modules/ldap.c:2274
+#: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
 msgstr ""
 
-#: modules/ldap.c:626 modules/ldap.c:1167 modules/ldap.c:1283
-#: modules/ldap.c:1346 modules/ldap.c:1459 modules/ldap.c:1553
+#: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
+#: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
 msgid "error mapping name to LDAP distinguished name"
 msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje LDAP"
 
-#: modules/ldap.c:635
+#: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "napaka pri preslikavi imena v ime, ki ga razlikuje osnova LDAP"
 
-#: modules/ldap.c:1141
+#: modules/ldap.c:1142
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "uporabni¹ki predmet nima atributa %s"
 
-#: modules/ldap.c:1150
+#: modules/ldap.c:1151
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "uporabni¹ki predmet je bil ustvarjen brez ,%s`"
 
-#: modules/ldap.c:1176
+#: modules/ldap.c:1177
 msgid "could not convert internal data to LDAPMods"
 msgstr "notranjih podatkov ni moè pretvoriti v LDAPMods"
 
-#: modules/ldap.c:1200 modules/ldap.c:1411
+#: modules/ldap.c:1201 modules/ldap.c:1412
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "napaka pri spreminjanju imeni¹kega vnosa LDAP: %s"
 
-#: modules/ldap.c:1220
+#: modules/ldap.c:1221
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "napaka pri preimenovanju imeni¹kega vnosa LDAP: %s\n"
 
-#: modules/ldap.c:1268
+#: modules/ldap.c:1269
 #, c-format
 msgid "object had no %s attribute"
 msgstr "predmet nima atributa %s"
 
-#: modules/ldap.c:1295
+#: modules/ldap.c:1296
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "napaka pri odstranjevanju imeni¹kega vnosa LDAP: %s\n"
 
-#: modules/ldap.c:1332 modules/ldap.c:1354 modules/ldap.c:1444
-#: modules/ldap.c:1538
+#: modules/ldap.c:1333 modules/ldap.c:1355 modules/ldap.c:1445
+#: modules/ldap.c:1539
 #, c-format
 msgid "object has no %s attribute"
 msgstr "predmet nima atributa %s"
 
-#: modules/ldap.c:1474
+#: modules/ldap.c:1475
 msgid "no such object in LDAP directory"
 msgstr "takega predmeta ni v imeniku LDAP"
 
-#: modules/ldap.c:1487
+#: modules/ldap.c:1488
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ni moè najti atributa ,%s`"
 
-#: modules/ldap.c:1628
+#: modules/ldap.c:1629
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "napaka pri nastavljanju gesla v imeniku LDAP za %s: %s"
 
-#: modules/ldap.c:2156
+#: modules/ldap.c:2171
 msgid "LDAP Server Name"
 msgstr "Ime stre¾nika LDAP"
 
-#: modules/ldap.c:2162
+#: modules/ldap.c:2177
 #, fuzzy
 msgid "LDAP Search Base DN"
 msgstr "LDAP Osnova DN"
 
-#: modules/ldap.c:2168
+#: modules/ldap.c:2183
 msgid "LDAP Bind DN"
 msgstr "LDAP Povezava DN"
 
-#: modules/ldap.c:2175
+#: modules/ldap.c:2190
 msgid "LDAP Bind Password"
 msgstr "Geslo za povezavo z LDAP"
 
-#: modules/ldap.c:2181
+#: modules/ldap.c:2196
 msgid "LDAP SASL User"
 msgstr "Uporabnik SASL v LDAP"
 
-#: modules/ldap.c:2188
+#: modules/ldap.c:2203
 msgid "LDAP SASL Authorization User"
 msgstr "Uporabnik z odobritvijo SASL v LDAP"
 
