@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-01 19:11-0400\n"
+"POT-Creation-Date: 2001-06-01 19:15-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Couldn't stat or invalid permissions on '%s'.\n"
 msgstr ""
 
-#: modules/files.c:1150 modules/files.c:1198
+#: modules/files.c:1151 modules/files.c:1199
 msgid "Not executing with superuser privileges."
 msgstr ""
 
