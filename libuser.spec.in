@@ -62,6 +62,9 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
+* Wed Jun  6 2001 Nalin Dahyabhai <nalin@redhat.com>
+- lusermod.c: -s should specify the shell, not the home directory
+
 * Fri Jun  1 2001 Nalin Dahyabhai <nalin@redhat.com> 0.10
 - finish the python bindings and verify that the file backend works again
 

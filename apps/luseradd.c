@@ -58,7 +58,7 @@ main(int argc, const char **argv)
 		 "home directory for new user", "STRING"},
 		{"skeleton", 'k', POPT_ARG_STRING, &skeleton, 0,
 		 "directory with files for the new user", "STRING"},
-		{"shell", 's', POPT_ARG_STRING, &homeDirectory, 0,
+		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "shell for new user", "STRING"},
 		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
 		 "uid for new user", "NUM"},
