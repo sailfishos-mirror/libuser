@@ -33,8 +33,7 @@ static PyObject *libuser_admin_prompt_console(struct libuser_admin *self,
 					      PyObject *args);
 
 static gboolean
-libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
-			      gpointer callback_data, struct lu_error **error)
+libuser_admin_python_prompter(struct lu_prompt *prompts, int count, gpointer callback_data, struct lu_error **error)
 {
 	PyObject *list = NULL, *tuple = NULL;
 	PyObject *prompter = (PyObject*) callback_data;
