@@ -492,6 +492,15 @@ lu_dispatch(struct lu_context *context,
 			success = TRUE;
 		}
 		break;
+	case user_add_prep:
+	case group_add_prep:
+		if(run_list(context, context->create_module_names,
+			    logic_and, id,
+			    sdata, ldata, tmp, NULL, error)) {
+			lu_ent_copy(tmp, entity);
+			success = TRUE;
+		}
+		break;
 	case user_add:
 	case group_add:
 		if(run_list(context, context->create_module_names,

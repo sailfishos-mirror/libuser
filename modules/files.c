@@ -82,7 +82,8 @@ static const struct format_specifier format_gshadow[] = {
 
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
-lu_files_create_backup(const char *filename, struct lu_error **error)
+lu_files_create_backup(const char *filename,
+		       struct lu_error **error)
 {
 	int ifd, ofd;
 	char *backupname;
@@ -308,7 +309,8 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 /* Parse an entry from /etc/passwd into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_files_parse_user_entry(const gchar * line, struct lu_ent *ent)
+lu_files_parse_user_entry(const gchar * line,
+			  struct lu_ent *ent)
 {
 	gboolean ret;
 	ret = parse_generic(line, format_passwd, G_N_ELEMENTS(format_passwd),
@@ -319,7 +321,8 @@ lu_files_parse_user_entry(const gchar * line, struct lu_ent *ent)
 /* Parse an entry from /etc/group into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_files_parse_group_entry(const gchar * line, struct lu_ent *ent)
+lu_files_parse_group_entry(const gchar * line,
+			   struct lu_ent *ent)
 {
 	gboolean ret;
 	ret = parse_generic(line, format_group, G_N_ELEMENTS(format_group),
@@ -330,7 +333,8 @@ lu_files_parse_group_entry(const gchar * line, struct lu_ent *ent)
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_shadow_parse_user_entry(const gchar * line, struct lu_ent *ent)
+lu_shadow_parse_user_entry(const gchar * line,
+			   struct lu_ent *ent)
 {
 	gboolean ret;
 	ret = parse_generic(line, format_shadow, G_N_ELEMENTS(format_shadow),
@@ -341,7 +345,8 @@ lu_shadow_parse_user_entry(const gchar * line, struct lu_ent *ent)
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_shadow_parse_group_entry(const gchar * line, struct lu_ent *ent)
+lu_shadow_parse_group_entry(const gchar * line,
+			    struct lu_ent *ent)
 {
 	gboolean ret;
 	ret = parse_generic(line, format_gshadow, G_N_ELEMENTS(format_gshadow),
@@ -349,7 +354,8 @@ lu_shadow_parse_group_entry(const gchar * line, struct lu_ent *ent)
 	return ret;
 }
 
-typedef gboolean(*parse_fn) (const gchar * line, struct lu_ent * ent);
+typedef gboolean(*parse_fn) (const gchar * line,
+			     struct lu_ent * ent);
 
 static gboolean
 generic_lookup(struct lu_module *module, const char *base_name,
@@ -406,8 +412,10 @@ generic_lookup(struct lu_module *module, const char *base_name,
 }
 
 static gboolean
-lu_files_user_lookup_name(struct lu_module *module, gconstpointer name,
-			  struct lu_ent *ent, struct lu_error **error)
+lu_files_user_lookup_name(struct lu_module *module,
+			  gconstpointer name,
+			  struct lu_ent *ent,
+			  struct lu_error **error)
 {
 	gboolean ret;
 	ret =
@@ -417,8 +425,10 @@ lu_files_user_lookup_name(struct lu_module *module, gconstpointer name,
 }
 
 static gboolean
-lu_files_user_lookup_id(struct lu_module *module, long uid,
-			struct lu_ent *ent, struct lu_error **error)
+lu_files_user_lookup_id(struct lu_module *module,
+			long uid,
+			struct lu_ent *ent,
+			struct lu_error **error)
 {
 	char *key;
 	gboolean ret = FALSE;
@@ -431,8 +441,10 @@ lu_files_user_lookup_id(struct lu_module *module, long uid,
 }
 
 static gboolean
-lu_shadow_user_lookup_name(struct lu_module *module, gconstpointer name,
-			   struct lu_ent *ent, struct lu_error **error)
+lu_shadow_user_lookup_name(struct lu_module *module,
+			   gconstpointer name,
+			   struct lu_ent *ent,
+			   struct lu_error **error)
 {
 	gboolean ret;
 	ret =
@@ -442,8 +454,10 @@ lu_shadow_user_lookup_name(struct lu_module *module, gconstpointer name,
 }
 
 static gboolean
-lu_shadow_user_lookup_id(struct lu_module *module, long uid,
-			 struct lu_ent *ent, struct lu_error **error)
+lu_shadow_user_lookup_id(struct lu_module *module,
+			 long uid,
+			 struct lu_ent *ent,
+			 struct lu_error **error)
 {
 	char *key;
 	GValueArray *values;
@@ -467,8 +481,10 @@ lu_shadow_user_lookup_id(struct lu_module *module, long uid,
 }
 
 static gboolean
-lu_files_group_lookup_name(struct lu_module *module, gconstpointer name,
-			   struct lu_ent *ent, struct lu_error **error)
+lu_files_group_lookup_name(struct lu_module *module,
+			   gconstpointer name,
+			   struct lu_ent *ent,
+			   struct lu_error **error)
 {
 	gboolean ret;
 	ret = generic_lookup(module, "group", name,
@@ -477,8 +493,10 @@ lu_files_group_lookup_name(struct lu_module *module, gconstpointer name,
 }
 
 static gboolean
-lu_files_group_lookup_id(struct lu_module *module, long gid,
-			 struct lu_ent *ent, struct lu_error **error)
+lu_files_group_lookup_id(struct lu_module *module,
+			 long gid,
+			 struct lu_ent *ent,
+			 struct lu_error **error)
 {
 	char *key;
 	gboolean ret;
@@ -799,12 +817,26 @@ generic_add(struct lu_module *module, const char *base_name,
 }
 
 static gboolean
+lu_files_user_add_prep(struct lu_module *module, struct lu_ent *ent,
+		       struct lu_error **error)
+{
+	return TRUE;
+}
+
+static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
 	gboolean ret;
 	ret = generic_add(module, "passwd", lu_files_format_user, ent, error);
 	return ret;
+}
+
+static gboolean
+lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
+		        struct lu_error **error)
+{
+	return TRUE;
 }
 
 static gboolean
@@ -817,12 +849,26 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
+lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
+		        struct lu_error **error)
+{
+	return TRUE;
+}
+
+static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
 	gboolean ret;
 	ret = generic_add(module, "group", lu_files_format_group, ent, error);
 	return ret;
+}
+
+static gboolean
+lu_shadow_group_add_prep(struct lu_module *module, struct lu_ent *ent,
+		         struct lu_error **error)
+{
+	return TRUE;
 }
 
 static gboolean
@@ -1940,15 +1986,55 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	return ret;
 }
 
+static GPtrArray *
+lu_files_users_enumerate_full(struct lu_module *module,
+			      const char *user,
+			      struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
+static GPtrArray *
+lu_files_groups_enumerate_full(struct lu_module *module,
+			       const char *user,
+			       struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
+static GPtrArray *
+lu_files_users_enumerate_by_group_full(struct lu_module *module,
+				       const char *user,
+				       uid_t uid,
+				       struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
+static GPtrArray *
+lu_files_groups_enumerate_by_user_full(struct lu_module *module,
+				       const char *user,
+				       uid_t uid,
+				       struct lu_error **error)
+{
+	/* FIXME */
+	return NULL;
+}
+
 static GValueArray *
-lu_shadow_users_enumerate(struct lu_module *module, const char *pattern,
+lu_shadow_users_enumerate(struct lu_module *module,
+			  const char *pattern,
 			  struct lu_error **error)
 {
 	return NULL;
 }
 
 static GValueArray *
-lu_shadow_groups_enumerate(struct lu_module *module, const char *pattern,
+lu_shadow_groups_enumerate(struct lu_module *module,
+			   const char *pattern,
 			   struct lu_error **error)
 {
 	return NULL;
@@ -1956,7 +2042,8 @@ lu_shadow_groups_enumerate(struct lu_module *module, const char *pattern,
 
 static GValueArray *
 lu_shadow_users_enumerate_by_group(struct lu_module *module,
-				   const char *group, gid_t gid,
+				   const char *group,
+				   gid_t gid,
 				   struct lu_error **error)
 {
 	return NULL;
@@ -1967,6 +2054,40 @@ lu_shadow_groups_enumerate_by_user(struct lu_module *module,
 				   const char *user,
 				   uid_t uid,
 				   struct lu_error **error)
+{
+	return NULL;
+}
+
+static GPtrArray *
+lu_shadow_users_enumerate_full(struct lu_module *module,
+			       const char *pattern,
+			       struct lu_error **error)
+{
+	return NULL;
+}
+
+static GPtrArray *
+lu_shadow_groups_enumerate_full(struct lu_module *module,
+				const char *pattern,
+				struct lu_error **error)
+{
+	return NULL;
+}
+
+static GPtrArray *
+lu_shadow_users_enumerate_by_group_full(struct lu_module *module,
+					const char *group,
+					gid_t gid,
+					struct lu_error **error)
+{
+	return NULL;
+}
+
+static GPtrArray *
+lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
+					const char *user,
+					uid_t uid,
+					struct lu_error **error)
 {
 	return NULL;
 }
@@ -1983,7 +2104,8 @@ close_module(struct lu_module *module)
 }
 
 struct lu_module *
-libuser_files_init(struct lu_context *context, struct lu_error **error)
+libuser_files_init(struct lu_context *context,
+		   struct lu_error **error)
 {
 	struct lu_module *ret = NULL;
 
@@ -2006,6 +2128,7 @@ libuser_files_init(struct lu_context *context, struct lu_error **error)
 	ret->user_lookup_name = lu_files_user_lookup_name;
 	ret->user_lookup_id = lu_files_user_lookup_id;
 
+	ret->user_add_prep = lu_files_user_add_prep;
 	ret->user_add = lu_files_user_add;
 	ret->user_mod = lu_files_user_mod;
 	ret->user_del = lu_files_user_del;
@@ -2013,12 +2136,13 @@ libuser_files_init(struct lu_context *context, struct lu_error **error)
 	ret->user_unlock = lu_files_user_unlock;
 	ret->user_is_locked = lu_files_user_is_locked;
 	ret->user_setpass = lu_files_user_setpass;
-	ret->users_enumerate = lu_files_users_enumerate;
-	ret->users_enumerate_by_group = lu_files_users_enumerate_by_group;
+	ret->users_enumerate_full = lu_files_users_enumerate_full;
+	ret->users_enumerate_by_group_full = lu_files_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
 
+	ret->group_add_prep = lu_files_group_add_prep;
 	ret->group_add = lu_files_group_add;
 	ret->group_mod = lu_files_group_mod;
 	ret->group_del = lu_files_group_del;
@@ -2028,6 +2152,8 @@ libuser_files_init(struct lu_context *context, struct lu_error **error)
 	ret->group_setpass = lu_files_group_setpass;
 	ret->groups_enumerate = lu_files_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_files_groups_enumerate_by_user;
+	ret->groups_enumerate_full = lu_files_groups_enumerate_full;
+	ret->groups_enumerate_by_user_full = lu_files_groups_enumerate_by_user_full;
 
 	ret->close = close_module;
 
@@ -2036,7 +2162,8 @@ libuser_files_init(struct lu_context *context, struct lu_error **error)
 }
 
 struct lu_module *
-lu_shadow_init(struct lu_context *context, struct lu_error **error)
+lu_shadow_init(struct lu_context *context,
+	       struct lu_error **error)
 {
 	struct lu_module *ret = NULL;
 	struct stat st;
@@ -2078,6 +2205,7 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	ret->user_lookup_name = lu_shadow_user_lookup_name;
 	ret->user_lookup_id = lu_shadow_user_lookup_id;
 
+	ret->user_add_prep = lu_shadow_user_add_prep;
 	ret->user_add = lu_shadow_user_add;
 	ret->user_mod = lu_shadow_user_mod;
 	ret->user_del = lu_shadow_user_del;
@@ -2087,10 +2215,13 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	ret->user_setpass = lu_shadow_user_setpass;
 	ret->users_enumerate = lu_shadow_users_enumerate;
 	ret->users_enumerate_by_group = lu_shadow_users_enumerate_by_group;
+	ret->users_enumerate_full = lu_shadow_users_enumerate_full;
+	ret->users_enumerate_by_group_full = lu_shadow_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
 
+	ret->group_add_prep = lu_shadow_group_add_prep;
 	ret->group_add = lu_shadow_group_add;
 	ret->group_mod = lu_shadow_group_mod;
 	ret->group_del = lu_shadow_group_del;
@@ -2100,6 +2231,8 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	ret->group_setpass = lu_shadow_group_setpass;
 	ret->groups_enumerate = lu_shadow_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_shadow_groups_enumerate_by_user;
+	ret->groups_enumerate_full = lu_shadow_groups_enumerate_full;
+	ret->groups_enumerate_by_user_full = lu_shadow_groups_enumerate_by_user_full;
 
 	ret->close = close_module;
 
