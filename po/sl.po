@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 7.2\n"
 "POT-Creation-Date: 2001-08-07 12:05-0400\n"
-"PO-Revision-Date: 2001-08-21 23:32+0200\n"
+"PO-Revision-Date: 2001-09-05 22:30+0200\n"
 "Last-Translator: Roman Maurer <roman.maurer@amis.net>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Napaka pri inicializaciji PAM.\n"
 #: apps/apputil.c:339
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Avtentifikacija za %s ni uspela.\n"
+msgstr "Avtentikacija za %s ni uspela.\n"
 
 #: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 msgid "[OPTION...] user"
