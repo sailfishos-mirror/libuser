@@ -39,7 +39,7 @@ msgstr "Błąd podczas usuwania `%s': %s"
 #: apps/apputil.c:473 apps/apputil.c:477
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "Próba odebrania uprawnień zakończona niepowodzeniem \n"
+msgstr "Próba odebrania uprawnień zakończona niepowodzeniem.\n"
 
 #: apps/apputil.c:486
 #, c-format
@@ -623,7 +623,7 @@ msgstr "błąd podczas odczytu atrybutów terminala"
 
 #: lib/prompt.c:74 lib/prompt.c:86
 msgid "error setting terminal attributes"
-msgstr "błąd podczas ustalania atrybutów terminala "
+msgstr "błąd podczas ustalania atrybutów terminala"
 
 #: lib/prompt.c:80
 msgid "error reading from terminal"
@@ -768,7 +768,7 @@ msgstr "obiekt został utworzony bez atrybutów %s lub %s"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "błąd podczas odczytu informacji dla `%s' z Kerberosa"
+msgstr "błąd podczas odczytu informacji dla `%s' z kerberosa"
 
 #: modules/krb5.c:604
 #, c-format
