@@ -19,7 +19,7 @@ tag:
 	cvs tag -FR $(CVSTAG) .
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
 	rm -fr $(PACKAGE)-$(VERSION)
-	mv /tmp/$(PACKAGE)-export-tmp $(PACKAGE)-$(VERSION)
-	cd $(PACKAGE)-$(VERSION); ./autogen
-	tar czf $(PACKAGE)-$(VERSION).tar.gz $(PACKAGE)-$(VERSION)
-	rm -fr $(PACKAGE)-$(VERSION)
+	mv /tmp/$(PACKAGE)-export-tmp $(PACKAGE)-$(VERSION)-tmp
+	cd $(PACKAGE)-$(VERSION); ./autogen.sh; make distcheck
+	mv $(PACKAGE)-$(VERSION)-tmp/$(PACKAGE)-$(VERSION).tar.gz
+	rm -fr $(PACKAGE)-$(VERSION)-tmp

@@ -10,4 +10,4 @@ autoheader
 autoconf
 test -d intl || gettextize -f -c
 rm -f config.cache
-test -d CVS && ./configure --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc --with-ldap --with-krb5=/usr/kerberos $@
+./configure --prefix=/usr --exec-prefix=/usr --sysconfdir=/etc --with-ldap --with-krb5=/usr/kerberos $@
