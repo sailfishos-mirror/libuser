@@ -161,10 +161,11 @@ static char *lu_ldap_group_attributes[] = {
 };
 
 struct lu_ldap_context {
-	struct lu_context *global_context;
-	struct lu_module *module;
-	struct lu_prompt prompts[LU_LDAP_MAX];
-	LDAP *ldap;
+	struct lu_context *global_context;	/* The library context. */
+	struct lu_module *module;		/* The module's structure. */
+	struct lu_prompt prompts[LU_LDAP_MAX];	/* Questions and answers. */
+	gboolean bind_simple, bind_sasl;	/* What kind of bind to use. */
+	LDAP *ldap;				/* The connection. */
 };
 
 static void
@@ -1991,6 +1992,9 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	struct lu_module *ret = NULL;
 	struct lu_ldap_context *ctx = NULL;
 	char *user;
+	const char *bind_type;
+	char **bind_types, **values;
+	int i;
 	LDAP *ldap = NULL;
 
 	g_assert(context != NULL);
@@ -1998,28 +2002,27 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	LU_ERROR_CHECK(error);
 
 	ctx = g_malloc0(sizeof(struct lu_ldap_context));
-
 	ctx->global_context = context;
 
+	/* Initialize the prompts structure. */
 	ctx->prompts[LU_LDAP_SERVER].key = "ldap/server";
 	ctx->prompts[LU_LDAP_SERVER].prompt = _("LDAP Server Name");
 	ctx->prompts[LU_LDAP_SERVER].default_value =
-	    lu_cfg_read_single(context, "ldap/server", "ldap");
+		lu_cfg_read_single(context, "ldap/server", "ldap");
 	ctx->prompts[LU_LDAP_SERVER].visible = TRUE;
 
 	ctx->prompts[LU_LDAP_BASEDN].key = "ldap/basedn";
-	ctx->prompts[LU_LDAP_BASEDN].prompt = _("LDAP Base DN");
+	ctx->prompts[LU_LDAP_BASEDN].prompt = _("LDAP Search Base DN");
 	ctx->prompts[LU_LDAP_BASEDN].default_value =
-	    lu_cfg_read_single(context, "ldap/basedn",
-			       "dc=example,dc=com");
+		lu_cfg_read_single(context, "ldap/basedn", "dc=example,dc=com");
 	ctx->prompts[LU_LDAP_BASEDN].visible = TRUE;
 
 	ctx->prompts[LU_LDAP_BINDDN].key = "ldap/binddn";
 	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP Bind DN");
 	ctx->prompts[LU_LDAP_BINDDN].visible = TRUE;
 	ctx->prompts[LU_LDAP_BINDDN].default_value =
-	    lu_cfg_read_single(context, "ldap/binddn",
-			       "cn=manager,dc=example,dc=com");
+		lu_cfg_read_single(context, "ldap/binddn",
+				   "cn=manager,dc=example,dc=com");
 
 	ctx->prompts[LU_LDAP_PASSWORD].key = "ldap/password";
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
@@ -2031,23 +2034,107 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP SASL User");
 	ctx->prompts[LU_LDAP_USER].visible = TRUE;
 	ctx->prompts[LU_LDAP_USER].default_value =
-	    lu_cfg_read_single(context, "ldap/user", user);
+		lu_cfg_read_single(context, "ldap/user", user);
 
 	ctx->prompts[LU_LDAP_AUTHUSER].key = "ldap/authuser";
 	ctx->prompts[LU_LDAP_AUTHUSER].prompt =
-	    _("LDAP SASL Authorization User");
+		_("LDAP SASL Authorization User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHUSER].default_value =
-	    lu_cfg_read_single(context, "ldap/authuser", user);
+		lu_cfg_read_single(context, "ldap/authuser", user);
 
 	if (user) {
 		free(user);
 		user = NULL;
 	}
 
-	if (context->
-	    prompter(ctx->prompts,
-		     sizeof(ctx->prompts) / sizeof(ctx->prompts[0]),
+	/* Get the information we're sure we'll need. */
+
+	/* Try to be somewhat smart and allow the user to specify which bind
+	 * type to use, which should prevent us from asking for useless
+	 * information. */
+	bind_type = lu_cfg_read_single(context, "ldap/bindtype", "simple,sasl");
+	bind_types = g_strsplit(bind_type, ",", 0);
+	for (i = 0; (bind_types != NULL) && (bind_types[i] != NULL); i++) {
+		if (g_ascii_strcasecmp(bind_types[i], "simple") == 0) {
+			ctx->bind_simple = TRUE;
+		} else
+		if (g_ascii_strcasecmp(bind_types[i], "sasl") == 0) {
+			/* Do some sanity checking here. */
+			ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value,
+					 LDAP_PORT);
+			if (ldap == NULL) {
+				lu_error_new(error, lu_error_init,
+					     _("error initializing ldap library"));
+				g_free(ctx);
+				return NULL;
+			}
+
+			/* Switch to LDAPv3, which gives us some more features
+			 * we need. */
+			if (ldap_set_option(ldap,
+					    LDAP_OPT_PROTOCOL_VERSION,
+					    &version) != LDAP_OPT_SUCCESS) {
+				lu_error_new(error, lu_error_init,
+					     _("could not set LDAP protocol to version %d"),
+					     version);
+				close_server(ldap);
+				g_free(ctx);
+				return NULL;
+			}
+
+			/* Try to start TLS. */
+			if (ldap_start_tls_s(ldap,
+					     &server,
+					     &client) != LDAP_SUCCESS) {
+				lu_error_new(error, lu_error_init,
+					     _("could not negotiate TLS with LDAP server"));
+				close_server(ldap);
+				g_free(ctx);
+				return NULL;
+			}
+
+			/* Check if there are any supported SASL mechanisms. */
+			if (ldap_search_ext_s(ldap,
+					      LDAP_ROOT_DSE, LDAP_SCOPE_BASE,
+					      NULL, saslmechs, FALSE,
+					      &server, &client,
+					      NULL, 0,
+					      &results) != LDAP_SUCCESS) {
+				lu_error_new(error, lu_error_init,
+					     _("could not search LDAP server"));
+				close_server(ldap);
+				g_free(ctx);
+				return NULL;
+			}
+
+			/* Get the DSE entry. */
+			entry = ldap_first_entry(ldap, results);
+			if (entry == NULL) {
+				lu_error_new(error, lu_error_init,
+					     _("LDAP server appears to have no root DSE"));
+				ldap_msgfree(results);
+				close_server(ldap);
+				g_free(ctx);
+				return NULL;
+			}
+
+			/* Read the list of supported mechanisms. */
+			values = ldap_get_values(ldap, entry,
+						 "supportedSASLmechanisms");
+			if ((values == NULL)||(ldap_count_values(values) == 0)){
+				ctx->bind_sasl = FALSE;
+			} else {
+				ctx->bind_sasl = TRUE;
+			}
+			ldap_msgfree(results);
+			close_server(ldap);
+			ldap = NULL;
+		}
+	}
+
+	if (context->prompter(ctx->prompts,
+			      sizeof(ctx->prompts) / sizeof(ctx->prompts[0]),
 		     context->prompter_data, error) == FALSE) {
 		g_free(ctx);
 		return NULL;

@@ -10,4 +10,4 @@ autoheader
 autoconf
 test -d intl || gettextize -f -c
 rm -f config.cache
-./configure --prefix=/usr --sysconfdir=/etc $@
+./configure --prefix=/usr --sysconfdir=/etc --with-ldap $@
