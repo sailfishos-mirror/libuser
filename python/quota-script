@@ -18,6 +18,9 @@ for key in quotas.keys():
 	print item.block_hard, item.block_grace
 	save = item.copy()
 
+item.inode_soft = 102400
+item.inode_hard = 204800
+item.inode_grace = 300
 item.block_soft = 102400
 item.block_hard = 204800
 item.block_grace = 300

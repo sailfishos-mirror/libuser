@@ -137,6 +137,19 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names)
 	g_free(wlist);
 }
 
+/**
+ * lu_set_info_modules:
+ * @context: A valid library context, initialized by calling lu_start().
+ * @list: A string containing a comma-separated or whitespace-separated list of
+ * modules to search in.
+ *
+ * Sets the list of modules which will be queried when looking up information
+ * about users and groups.  The first module in the list which admits to having
+ * some idea of who the user or group is will be deemed authoritative for
+ * general information for that user or group.
+ *
+ * Returns: void
+ */
 void
 lu_set_info_modules(struct lu_context *context, const char *list)
 {
@@ -144,6 +157,19 @@ lu_set_info_modules(struct lu_context *context, const char *list)
 	lu_module_load(context, list, &context->info_module_names);
 }
 
+/**
+ * lu_set_auth_modules:
+ * @context: A valid library context, initialized by calling lu_start().
+ * @list: A string containing a comma-separated or whitespace-separated list of
+ * modules to search in.
+ *
+ * Sets the list of modules which will be queried when looking up authentication
+ * information about users and groups.  The first module in the list which
+ * admits to having some idea of who the user or group is will be deemed
+ * authoritative for authentication information for that user or group.
+ *
+ * Returns: void
+ */
 void
 lu_set_auth_modules(struct lu_context *context, const char *list)
 {
@@ -151,6 +177,22 @@ lu_set_auth_modules(struct lu_context *context, const char *list)
 	lu_module_load(context, list, &context->auth_module_names);
 }
 
+/**
+ * lu_set_prompter:
+ * @context: A valid library context, initialized by calling lu_start().
+ * @prompter: The address of a function with the same prototype as
+ * lu_prompt_console().
+ * @prompter_data: Data which will be passed to &prompter;() as its
+ * &callback_data; parameter.
+ *
+ * Sets the function modules loaded by libuser will use to ask the application's
+ * user for information.  This typically includes login and password information
+ * when the module needs access to network services.  The default prompter is
+ * lu_prompt_console(), but an application can (and if it's a graphical
+ * application, definitely should) replace it with its own version.
+ *
+ * Returns: void
+ */
 void
 lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter,
 		gpointer prompter_data)
@@ -160,6 +202,26 @@ lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter,
 	context->prompter_data = prompter_data;
 }
 
+/**
+ * lu_start:
+ * @auth_name: A suggested name to use when initializing modules.
+ * @auth_type: Whether &auth_name; is a user or group.
+ * @info_modules: An initial list of modules to use.  If the application
+ * intends to cause modules to be added or removed during the course of its
+ * operation, it should pass an initial string here, and pass in &NULL;
+ * otherwise.
+ * @info_modules: An initial list of modules to use.  If the application
+ * intends to cause modules to be added or removed during the course of its
+ * operation, it should pass an initial string here, and pass in &NULL;
+ * otherwise.
+ * @prompter: A function which modules will be able to call to interact with
+ * the application's user.
+ * @prompter_data: Data to be passed to &prompter; when it is called.
+ *
+ * Initializes the library.
+ *
+ * Returns: A library context.
+ */
 struct lu_context *
 lu_start(const char *auth_name, enum lu_type auth_type,
 	 const char *info_modules, const char *auth_modules,
@@ -176,6 +238,9 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 
 	ctx->scache = lu_string_cache_new(TRUE);
 
+#ifdef DEBUG
+	g_message("prompter = <%p>, data = <%p>\n", prompter, prompter_data);
+#endif
 	ctx->prompter = prompter;
 	ctx->prompter_data = prompter_data;
 	ctx->auth_name = ctx->scache->cache(ctx->scache, auth_name);
@@ -198,6 +263,14 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 	return ctx;
 }
 
+/**
+ * lu_end:
+ * @context: A library context.
+ *
+ * Shuts down the library.
+ *
+ * Returns: void
+ */
 void
 lu_end(struct lu_context *context)
 {
@@ -509,6 +582,29 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 	return success;
 }
 
+/**
+ * lu_user_lookup_name:
+ * @context: A library context.
+ * @name: A user name.
+ * @ent: An entity structure.
+ *
+ * The
+ * lu_user_lookup_name
+ * function can be used to look up information about a
+ * user
+ * given only the
+ * user's
+ * name.
+ * All loaded modules are queried, first for information about how the
+ * user
+ * is authenticated, and then for general information about the
+ * user (UID, home directory, and so on).
+ * If a match is found, information about the
+ * user
+ * is stored in &ent;.
+ *
+ * Returns: TRUE if the user is found, FALSE if the user is not found.
+ */
 gboolean
 lu_user_lookup_name(struct lu_context *context, const char *name,
 		    struct lu_ent *ent)
@@ -519,6 +615,29 @@ lu_user_lookup_name(struct lu_context *context, const char *name,
 			   ent);
 }
 
+/**
+ * lu_group_lookup_name:
+ * @context: A library context.
+ * @name: A group name.
+ * @ent: An entity structure.
+ *
+ * The
+ * lu_group_lookup_name
+ * function can be used to look up information about a
+ * group
+ * given only the
+ * group's
+ * name.
+ * All loaded modules are queried, first for information about how the
+ * group
+ * is authenticated, and then for general information about the
+ * group (GID, members, and so on).
+ * If a match is found, information about the
+ * group
+ * is stored in &ent;.
+ *
+ * Returns: TRUE if the user is found, FALSE if the user is not found.
+ */
 gboolean
 lu_group_lookup_name(struct lu_context *context, const char *name,
 		     struct lu_ent *ent)
@@ -529,6 +648,29 @@ lu_group_lookup_name(struct lu_context *context, const char *name,
 			   ent);
 }
 
+/**
+ * lu_user_lookup_id:
+ * @context: A library context.
+ * @name: A numeric user ID.
+ * @ent: An entity structure.
+ *
+ * The
+ * lu_user_lookup_id
+ * function can be used to look up information about a
+ * user
+ * given only the
+ * user's
+ * UID.
+ * All loaded modules are queried, first for information about how the
+ * user
+ * is authenticated, and then for general information about the
+ * user (UID, home directory, and so on).
+ * If a match is found, information about the
+ * user
+ * is stored in &ent;.
+ *
+ * Returns: TRUE if the user is found, FALSE if the user is not found.
+ */
 gboolean
 lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent)
 {
@@ -538,6 +680,29 @@ lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_lookup_id:
+ * @context: A library context.
+ * @name: A numeric group ID.
+ * @ent: An entity structure.
+ *
+ * The
+ * lu_group_lookup_name
+ * function can be used to look up information about a
+ * group
+ * given only the
+ * group's
+ * GID.
+ * All loaded modules are queried, first for information about how the
+ * group
+ * is authenticated, and then for general information about the
+ * group (GID, members, and so on).
+ * If a match is found, information about the
+ * group
+ * is stored in &ent;.
+ *
+ * Returns: TRUE if the user is found, FALSE if the user is not found.
+ */
 gboolean
 lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent)
 {
@@ -547,6 +712,25 @@ lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_add:
+ * @context: A library context.
+ * @ent: Information about the
+ * user
+ * about
+ * whom
+ * information should be stored in the
+ * uesr
+ * information databases.
+ *
+ * The
+ * lu_user_add()
+ * function adds information about the
+ * user
+ * given in the &ent; structure to the system databases.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_add(struct lu_context *context, struct lu_ent *ent)
 {
@@ -556,6 +740,25 @@ lu_user_add(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_add:
+ * @context: A library context.
+ * @ent: Information about the
+ * group
+ * about
+ * which
+ * information should be stored in the
+ * group
+ * information databases.
+ *
+ * The
+ * lu_group_add()
+ * function adds information about the
+ * group
+ * given in the &ent; structure to the system databases.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_add(struct lu_context *context, struct lu_ent *ent)
 {
@@ -565,6 +768,26 @@ lu_group_add(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_modify:
+ * @context: A library context.
+ * @ent: Information about the
+ * user
+ * about
+ * whom
+ * information should be modified in the
+ * user
+ * information databases.
+ *
+ * The
+ * lu_user_modify()
+ * function modifies information about the
+ * user
+ * given in the &ent; structure in the system databases so that they match
+ * the data stored in the structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_modify(struct lu_context *context, struct lu_ent *ent)
 {
@@ -574,6 +797,26 @@ lu_user_modify(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_modify:
+ * @context: A library context.
+ * @ent: Information about the
+ * group
+ * about
+ * which
+ * information should be modified in the
+ * group
+ * information databases.
+ *
+ * The
+ * lu_group_modify()
+ * function modifies information about the
+ * group
+ * given in the &ent; structure in the system databases so that they match
+ * the data stored in the structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_modify(struct lu_context *context, struct lu_ent *ent)
 {
@@ -583,6 +826,25 @@ lu_group_modify(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_delete:
+ * @context: A library context.
+ * @ent: Information about the
+ * user
+ * about
+ * which
+ * information should be removed from the
+ * user
+ * information databases.
+ *
+ * The
+ * lu_user_delete()
+ * function removes information about the
+ * user
+ * given in the &ent; structure from the system databases.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_delete(struct lu_context *context, struct lu_ent *ent)
 {
@@ -592,6 +854,25 @@ lu_user_delete(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_delete:
+ * @context: A library context.
+ * @ent: Information about the
+ * group
+ * about
+ * which
+ * information should be removed from the
+ * group
+ * information databases.
+ *
+ * The
+ * lu_group_delete()
+ * function removes information about the
+ * group
+ * given in the &ent; structure from the system databases.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_delete(struct lu_context *context, struct lu_ent *ent)
 {
@@ -601,6 +882,21 @@ lu_group_delete(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_lock:
+ * @context: A library context.
+ * @ent: A structure containing information describing the
+ * user
+ * whose account should be
+ * locked.
+ *
+ * The
+ * lu_user_lock()
+ * function disables access to the given account without removing it from
+ * the system database.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_lock(struct lu_context *context, struct lu_ent *ent)
 {
@@ -610,6 +906,21 @@ lu_user_lock(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_unlock:
+ * @context: A library context.
+ * @ent: A structure describing the
+ * user
+ * account which should be unlocked.
+ *
+ * The
+ * lu_user_unlock()
+ * function can be used to undo the effects of the
+ * lu_user_lock()
+ * function.  Access to the account will be made again possible.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_unlock(struct lu_context *context, struct lu_ent *ent)
 {
@@ -619,6 +930,23 @@ lu_user_unlock(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_user_setpass:
+ * @context: A library context.
+ * @ent: A structure describing the
+ * user
+ * account which should have its password changed.
+ *
+ * The
+ * lu_user_setpass()
+ * function can be used to set or reset the password on a
+ * user
+ * account.  It may use the default prompter, or a prompter function which the
+ * calling application has specified when calling lu_start() or
+ * lu_set_prompter().
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
 		const char *password)
@@ -629,6 +957,20 @@ lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
 			   ent);
 }
 
+/**
+ * lu_group_lock:
+ * @context: A library context.
+ * @ent: A structure containing information describing the
+ * group
+ * account which should be locked.
+ *
+ * The
+ * lu_group_lock()
+ * function disables access to the given group account without removing it from
+ * the system database.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_lock(struct lu_context *context, struct lu_ent *ent)
 {
@@ -638,6 +980,21 @@ lu_group_lock(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_unlock:
+ * @context: A library context.
+ * @ent: A structure describing the
+ * group
+ * account which should be unlocked.
+ *
+ * The
+ * lu_group_unlock()
+ * function can be used to undo the effects of the
+ * lu_group_lock()
+ * function.  Access to the account will be made again possible.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_unlock(struct lu_context *context, struct lu_ent *ent)
 {
@@ -647,6 +1004,25 @@ lu_group_unlock(struct lu_context *context, struct lu_ent *ent)
 			   ent);
 }
 
+/**
+ * lu_group_setpass:
+ * @context: A library context.
+ * @ent: A structure describing the
+ * group
+ * account which should have its password changed.
+ *
+ * The
+ * lu_group_setpass()
+ * function can be used to set or reset the password on a
+ * group
+ * account.  It may use the default prompter, or a prompter function which the
+ * calling application has specified when calling lu_start() or
+ * lu_set_prompter().
+ * Note that whether or not group passwords are supported at all depends
+ * entirely on which authentication modules are being used.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
 		 const char *password)
@@ -720,6 +1096,19 @@ lu_enumerate(struct lu_context *context, enum lu_type type,
 	return data.list;
 }
 
+/**
+ * lu_users_enumerate:
+ * @context: A library context.
+ * @pattern: A glob-style pattern which the library will match
+ * user
+ * names against before returning them.
+ * @module: The name of a module which will be queried specifically.
+ *
+ * The lu_users_enumerate() function will query loaded modules for a list
+ * of users who match the given &pattern; and return the answers as a &GList;.
+ *
+ * Returns: A &GList; which must be freed by calling g_list_free().
+ */
 GList *
 lu_users_enumerate(struct lu_context *context, const char *pattern,
 		   const char *module)
@@ -727,6 +1116,19 @@ lu_users_enumerate(struct lu_context *context, const char *pattern,
 	return lu_enumerate(context, lu_user, pattern, module);
 }
 
+/**
+ * lu_groups_enumerate:
+ * @context: A library context.
+ * @pattern: A glob-style pattern which the library will match
+ * group
+ * names against before returning them.
+ * @module: The name of a module which will be queried specifically.
+ *
+ * The lu_groups_enumerate() function will query loaded modules for a list
+ * of groups who match the given &pattern; and return the answers as a &GList;.
+ *
+ * Returns: A &GList; which must be freed by calling g_list_free().
+ */
 GList *
 lu_groups_enumerate(struct lu_context *context, const char *pattern,
 		    const char *module)

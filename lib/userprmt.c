@@ -27,6 +27,19 @@
 #include <termios.h>
 #include <unistd.h>
 
+/**
+ * lu_prompt_console:
+ * @context: A library context.
+ * @prompts: An array of structures used to pass prompts and answers into and
+ * out of the function.
+ * @count: The length of the prompts array.
+ * @calldata: Ignored.
+ *
+ * This function prompts the user for information, including items which have
+ * default answers supplied by the caller.
+ *
+ * Returns: TRUE, or FALSE on error.
+ */
 gboolean
 lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
 		  int count, gpointer calldata)
@@ -98,6 +111,20 @@ lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
 	return ret;
 }
 
+/**
+ * lu_prompt_console_quiet:
+ * @context: A library context.
+ * @prompts: An array of structures used to pass prompts and answers into and
+ * out of the function.
+ * @count: The length of the prompts array.
+ * @calldata: Ignored.
+ *
+ * This function prompts the user for information.  Items which have default
+ * answers supplied by the caller will be returned with their default values
+ * set.
+ *
+ * Returns: TRUE, or FALSE on error.
+ */
 gboolean
 lu_prompt_console_quiet(struct lu_context *context, struct lu_prompt *prompts,
 			int count, gpointer calldata)

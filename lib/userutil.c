@@ -87,6 +87,17 @@ fill_urandom(char *output, size_t length)
 	close(fd);
 }
 
+/**
+ * lu_make_crypted:
+ * @plain: A password.
+ * @previous: An optional salt to use, which also indicates the crypt()
+ * variation to be used.
+ *
+ * Generates a hashed version of &plain; by calling the crypt() function,
+ * using the hashing method specified in &previous;.
+ *
+ * Returns: a static global string which must not be freed.
+ */
 const char *
 lu_make_crypted(const char *plain, const char *previous)
 {
@@ -122,7 +133,15 @@ lu_make_crypted(const char *plain, const char *previous)
 	return crypt(plain, salt);
 }
 
-
+/**
+ * lu_util_lock_obtain:
+ * @fd: An open file descriptor.
+ *
+ * Locks the passed-in descriptor for writing, and returns an opaque lock
+ * pointer if the lock succeeds.
+ * 
+ * Returns: an opaque lock pointer if locking succeeds, NULL on failure.
+ */
 gpointer
 lu_util_lock_obtain(int fd)
 {
@@ -136,11 +155,25 @@ lu_util_lock_obtain(int fd)
 
 	do {
 		i = fcntl(fd, F_SETLKW, lck);
-	} while((i == -1) && (errno == EINTR));
+	} while((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
+
+	if(i == -1) {
+		g_free(lck);
+		lck = NULL;
+	}
 
 	return lck;
 }
 
+/**
+ * lu_util_lock_free:
+ * @fd: An open file descriptor.
+ * @lock: A lock returned by a previous call to lu_util_lock_obtain().
+ *
+ * Unlocks a file.
+ * 
+ * Returns: void
+ */
 void
 lu_util_lock_free(int fd, gpointer lock)
 {
@@ -228,9 +261,13 @@ lu_util_line_get_matching3(int fd, const char *part)
 	return lu_util_line_get_matchingx(fd, part, 3);
 }
 
-/** Count the length of an array of strings.
- * \param v an array of strings
- * \returns the number of elements in the array, or 0 if v is NULL
+/**
+ * lu_strv_len:
+ * @v: an array of strings
+ *
+ * Count the length of an array of strings.
+ * 
+ * Returns: the number of elements in the array, or 0 if &v; is NULL.
  */
 guint
 lu_strv_len(gchar **v)
@@ -241,13 +278,17 @@ lu_strv_len(gchar **v)
 	return ret;
 }
 
-/** Read the nth colon-separated field on the line which has 
-  * first as its first field.
-  * \param fd Descriptor of open, locked file.
-  * \param first Contents of the first field to match the right line with.
-  * \param field The number of the field.  Minimum is 1.
-  * \returns An allocated string which must be freed with g_free().
-  */
+/**
+ * lu_util_field_read:
+ * @fd: Descriptor of open, locked file.
+ * @first: Contents of the first field to match the right line with.
+ * @field: The number of the field.  Minimum is 1.
+ *
+ * Read the nth colon-separated field on the line which has first as
+ * its first field.
+ *
+ * Returns: An allocated string which must be freed with g_free().
+ */
 char *
 lu_util_field_read(int fd, const char *first, unsigned int field)
 {

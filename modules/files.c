@@ -111,7 +111,7 @@ lu_files_create_backup(const char *filename)
 	g_return_val_if_fail(filename != NULL, FALSE);
 	g_return_val_if_fail(strlen(filename) > 0, FALSE);
 
-	ifd = open(filename, O_RDONLY);
+	ifd = open(filename, O_RDWR);
 	if(ifd == -1) {
 		g_warning(_("Couldn't open '%s'.\n"), filename);
 		return FALSE;
@@ -332,7 +332,7 @@ generic_lookup(struct lu_module *module,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDWR);
 	if(fd != -1) {
 		lock = lu_util_lock_obtain(fd);
 		line = lu_util_line_get_matchingx(fd, (char*) name, field);
@@ -1143,7 +1143,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDWR);
 	if(fd == -1) {
 		g_warning(_("Couldn't open '%s'.\n"), filename);
 		g_free(filename);

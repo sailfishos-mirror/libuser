@@ -67,13 +67,17 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
-* Thu Jun 13 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Fri Jun 15 2001 Nalin Dahyabhai <nalin@redhat.com>
+- clean up quota bindings some more
+- finish most of the ldap bindings
+
+* Thu Jun 14 2001 Nalin Dahyabhai <nalin@redhat.com>
 - get bindings for prompts to work correctly
 - clean up some of the add/remove semantics (set source on add)
 - ldap: implement enumeration
 - samples/enum: fix the argument order
 
-* Wed Jun 12 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Wed Jun 13 2001 Nalin Dahyabhai <nalin@redhat.com>
 - clean up python bindings for quota
 
 * Tue Jun 12 2001 Nalin Dahyabhai <nalin@redhat.com> 0.11

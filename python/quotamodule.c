@@ -87,7 +87,7 @@ quota_struct_dealloc(struct quota_struct *q)
 		free(q->group);
 	if(q->special)
 		free(q->special);
-	Py_MemDel(q);
+	PyMem_DEL(q);
 	DEBUG_EXIT;
 }
 
@@ -198,8 +198,6 @@ quota_struct_getattr(struct quota_struct *self, char *attr)
 		}
 	}
 
-	PyErr_SetString(PyExc_AttributeError, "invalid attribute");
-
 	DEBUG_EXIT;
 	return Py_FindMethod(quota_struct_methods, self, attr);
 }
@@ -256,8 +254,10 @@ quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 				DEBUG_EXIT;
 				return -1;
 			}
+			if(*named_string_attributes[i].value)
+				free(*named_string_attributes[i].value);
 			*(named_string_attributes[i].value) =
-				PyString_AsString(args);
+				strdup(PyString_AsString(args));
 			DEBUG_EXIT;
 			return 0;
 		}

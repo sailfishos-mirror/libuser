@@ -75,6 +75,7 @@ libuser_admin {
 	PyObject_HEAD
 	lu_context_t *ctx;
 	struct libuser_admin_domain *user, *group;
+	PyObject *prompter;
 };
 
 struct
@@ -525,7 +526,7 @@ libuser_admin_setattr(struct libuser_admin *self, const char *attr,
 	fprintf(stderr, "%sSetting attribute `%s'\n", getindent(), attr);
 #endif
 	if(strcmp(attr, "prompt") == 0) {
-		if(!PyCallable_Check(args)) {
+		if(!PyCFunction_Check(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"expecting callable function");
 			DEBUG_EXIT;
@@ -957,35 +958,42 @@ libuser_admin_enumerate_groups(struct libuser_admin *self, PyObject *args)
 }
 
 static struct libuser_prompt *libuser_prompt_new(void);
+static PyObject *libuser_admin_prompt_console(struct libuser_admin *self,
+					      PyObject *args);
 
 static gboolean
 libuser_admin_python_prompter(struct lu_context *ctx,
 			      struct lu_prompt *prompts, int count,
 			      gpointer callback_data)
 {
-	PyObject *list = NULL;
-	gboolean ret = FALSE;
+	PyObject *list = NULL, *tuple = NULL;
+	PyObject *prompter = (PyObject*) callback_data;
 	int i;
 
 	DEBUG_ENTRY;
 	if(count > 0) {
-		PyObject *val;
+		if(!PyCallable_Check(prompter)) {
+			PyErr_SetString(PyExc_RuntimeError,
+					"prompter is not callable");
+			DEBUG_EXIT;
+			return FALSE;
+		}
+		list = PyList_New(0);
 		for(i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
-			list = PyList_New(0);
 			prompt = libuser_prompt_new();
 			prompt->prompt = prompts[i];
 			PyList_Append(list, (PyObject*) prompt);
 		}
-		DEBUG_CALL;
-		val = PyObject_CallObject(callback_data, list);
-		DEBUG_CALL;
-		if(val != Py_None) {
+		tuple = Py_BuildValue("(N)", list);
+		PyObject_CallObject(prompter, tuple);
+		if(PyErr_Occurred()) {
+			PyErr_Print();
 			Py_DECREF(list);
 			DEBUG_EXIT;
 			return FALSE;
 		}
-		for(i = 0; i < PyList_Size(list); i++) {
+		for(i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
 			prompt = (struct libuser_prompt*) PyList_GetItem(list, i);
 			prompts[i] = prompt->prompt;
@@ -994,7 +1002,7 @@ libuser_admin_python_prompter(struct lu_context *ctx,
 	}
 
 	DEBUG_EXIT;
-	return ret;
+	return TRUE;
 }
 
 static PyObject *
@@ -1014,7 +1022,6 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 		DEBUG_EXIT;
 		return NULL;
 	}
-
 	count = PyList_Size(list);
 	for(i = 0; i < count; i++) {
 		item = PyList_GetItem(list, i);
@@ -1025,8 +1032,6 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 			return NULL;
 		}
 	}
-
-	DEBUG_CALL;
 	count = PyList_Size(list);
 	prompts = g_malloc0(count * sizeof(struct lu_prompt));
 
@@ -1035,7 +1040,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 		obj = (struct libuser_prompt*) PyList_GetItem(list, i);
 		Py_INCREF(obj);
 		prompts[i].prompt = g_strdup(obj->prompt.prompt ?: "");
-		prompts[i].default_value = g_strdup(obj->prompt.default_value ?: NULL);
+		prompts[i].default_value = obj->prompt.default_value ? g_strdup(obj->prompt.default_value) : NULL;
 		prompts[i].visible = obj->prompt.visible;
 	}
 #ifdef DEBUG_BINDING
@@ -1044,8 +1049,9 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 	fprintf(stderr, "Prompter function promptConsoleQuiet is at <%p>.\n",
 		lu_prompt_console_quiet);
 	fprintf(stderr, "Calling prompter function at <%p>.\n", prompter);
+	fprintf(stderr, "self->ctx is <%p>\n", self->ctx);
 #endif
-	success = prompter(self->ctx, prompts, count, NULL);
+	success = prompter(self->ctx, prompts, count, self->prompter);
 	if(success) {
 		for(i = 0; i < count; i++) {
 			struct libuser_prompt *obj;
@@ -1054,12 +1060,19 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
 			obj->prompt.free_value = (typeof(obj->prompt.free_value)) g_free;
 			if(prompts[i].value && prompts[i].free_value) {
 				prompts[i].free_value(prompts[i].value);
+				prompts[i].value = NULL;
+				prompts[i].free_value = NULL;
 			}
 			Py_DECREF(obj);
 		}
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	} else {
+		PyErr_SetString(PyExc_RuntimeError, 
+				"error prompting the user for information");
+		DEBUG_EXIT;
+		return NULL;
 	}
-	DEBUG_EXIT;
-	return Py_BuildValue("");
 }
 
 static PyObject *
@@ -1258,7 +1271,7 @@ static PyTypeObject AdminGroupType = {
 static PyObject*
 libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	char *name = getlogin(), *info = "files", *auth = "shadow files";
+	char *name = getlogin(), *info = NULL, *auth = NULL;
 	char *keywords[] = {"name", "type", "info", "auth", NULL};
 	int type = lu_user;
 	lu_context_t *context;
@@ -1267,39 +1280,52 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	DEBUG_ENTRY;
 
+	ret = PyObject_NEW(struct libuser_admin, &AdminType);
+	if(ret == NULL) {
+		return NULL;
+	}
+	self = (PyObject*) ret;
+
+	ret->prompter = Py_FindMethod(libuser_admin_methods, self,
+				      "promptConsole");
+
 	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "|siss", keywords,
 					&name, &type, &info, &auth)) {
+		Py_DECREF(ret->prompter);
+		Py_DECREF(self);
 		return NULL;
 	}
 
 	if((type != lu_user) && (type != lu_group)) {
 		PyErr_SetString(PyExc_ValueError, "invalid type");
+		Py_DECREF(ret->prompter);
+		Py_DECREF(self);
 		return NULL;
 	}
 
-	context = lu_start(name, type, info, auth, NULL, NULL);
+#ifdef DEBUG_BINDING
+	fprintf(stderr, "%sprompter at <%p>, self = <%p>, "
+		"info = <%p>, auth = <%p>\n",
+		getindent(), ret->prompter, self, info, auth);
+#endif
+	context = lu_start(name, type, info, auth,
+			   libuser_admin_python_prompter, ret->prompter);
+
 	if(context == NULL) {
 		PyErr_SetString(PyExc_SystemError, "libuser init failed");
+		Py_DECREF(ret->prompter);
+		Py_DECREF(self);
 		return NULL;
 	}
 
-	ret = PyObject_NEW(struct libuser_admin, &AdminType);
-	if(ret == NULL) {
-		lu_end(context);
-		return NULL;
-	}
 	ret->ctx = context;
 	ret->user = PyObject_NEW(struct libuser_admin_domain, &AdminUserType);
 	ret->user->main = ret;
 	ret->group = PyObject_NEW(struct libuser_admin_domain, &AdminGroupType);
 	ret->group->main = ret;
 
-	prompter = Py_FindMethod(libuser_admin_methods, (PyObject*) ret,
-				 "promptConsole");
-	libuser_admin_setattr(ret, "prompt", prompter);
-
 	DEBUG_EXIT;
-	return (PyObject*) ret;
+	return self;
 }
 
 /**
@@ -1395,8 +1421,8 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if(self->prompt.value)
-			g_free(self->prompt.value);
+		if(self->prompt.value && self->prompt.free_value)
+			self->prompt.free_value(self->prompt.value);
 		self->prompt.value = g_strdup(PyString_AsString(args));
 		self->prompt.free_value = (typeof(self->prompt.free_value))g_free;
 		DEBUG_EXIT;
@@ -1428,7 +1454,6 @@ libuser_prompt_new(void)
 	ret = PyObject_NEW(struct libuser_prompt, &PromptType);
 	if(ret != NULL) {
 		memset(&ret->prompt, 0, sizeof(ret->prompt));
-		ret->prompt.free_value = (typeof(ret->prompt.free_value)) free;
 	}
 	DEBUG_EXIT;
 	return ret;

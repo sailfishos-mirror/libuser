@@ -36,7 +36,7 @@ dump_attribute(gpointer key, gpointer value, gpointer data)
 		g_print(" %s = %s\n", (char*) key, (char*) list->data);
 }
 
-void
+static void
 lu_ent_dump(struct lu_ent *ent)
 {
 	g_return_if_fail(ent != NULL);
@@ -48,6 +48,17 @@ lu_ent_dump(struct lu_ent *ent)
 	g_hash_table_foreach(ent->attributes, dump_attribute, NULL);
 }
 
+/**
+ * lu_get_free_id:
+ * @ctx: A library context.
+ * @type: An indicator of whether the application needs an unused UID or GID.
+ * @id: An initial guess at what the returned ID might be.
+ *
+ * The lu_get_free_id() function returns an unused UID or GID, using &id; as
+ * a first guess at what a free ID might be.
+ *
+ * Returns: a UID or GID if one is found, 0 on failure.
+ */
 static glong
 lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 {
@@ -71,6 +82,14 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 	return id;
 }
 
+/**
+ * lu_ent_new:
+ *
+ * The lu_ent_new() function creates and returns a new entity structure,
+ * suitable for passing into other functions provided by the library.
+ *
+ * Returns: a new entity structure.
+ */
 struct lu_ent *
 lu_ent_new()
 {
@@ -86,6 +105,20 @@ lu_ent_new()
 	return ent;
 }
 
+/**
+ * lu_ent_set_source_auth:
+ * @ent: An entity structure.
+ * @source: The name of a module which should be taken as authoritative for
+ * authentication information pertaining to the user or group described by
+ * the entity structure.
+ *
+ * The lu_ent_set_source_auth() function can be used to override the
+ * data store where authentication information for a user or group will
+ * subsequently be recorded.  This function should only be used with great
+ * care, for careless use will disrupt the integrity of data stores.
+ *
+ * Returns: void
+ */
 void
 lu_ent_set_source_auth(struct lu_ent *ent, const char *source)
 {
@@ -98,6 +131,20 @@ lu_ent_set_source_auth(struct lu_ent *ent, const char *source)
 	}
 }
 
+/**
+ * lu_ent_set_source_info:
+ * @ent: An entity structure.
+ * @source: The name of a module which should be taken as authoritative for
+ * information pertaining to the user or group described by the entity
+ * structure.
+ *
+ * The lu_ent_set_source_info() function can be used to override the
+ * data store where information for a user or group will subsequently be
+ * recorded.  This function should only be used with great care, for careless
+ * use will disrupt the integrity of data stores.
+ *
+ * Returns: void
+ */
 void
 lu_ent_set_source_info(struct lu_ent *ent, const char *source)
 {
@@ -138,12 +185,35 @@ copy_list(gpointer key, gpointer value, gpointer data)
 	}
 }
 
+/**
+ * lu_ent_revert:
+ * @source: An entity whose attribute values should be reset to those returned
+ * by the last lookup performed with the structure or when the structure was
+ * first created.
+ *
+ * The lu_ent_revert() function can be used to undo changes to the in-memory
+ * structure which is used for storing information about users and groups.
+ *
+ * Returns: void
+ */
 void
 lu_ent_revert(struct lu_ent *source)
 {
 	g_hash_table_foreach(source->original_attributes, copy_list, source);
 }
 
+/**
+ * lu_ent_copy:
+ * @source: An entity object, the contents of which should be copied to @dest;.
+ * @dest: An entity object which will be modified to resemble the @source;
+ * object.
+ *
+ * The lu_ent_copy() function can be used to create a temporary copy of an
+ * entity structure which can be manipulated without changes being made the
+ * an original.
+ *
+ * Returns: void
+ */
 void
 lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 {
@@ -169,11 +239,7 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 #endif
 }
 
-/* This function seeds "uid" with the passed-in name, and "uidNumber" or
- * "gidNumber" with the first available uid or gid, depending on whether
- * this is a user or a group.  The rest is all taken from the configuration
- * file's "userdefaults" or "groupdefaults" section. */
-gboolean
+static gboolean
 lu_ent_default(struct lu_context *context, const char *name,
 	       enum lu_type type, gboolean system, struct lu_ent *ent)
 {
@@ -275,6 +341,20 @@ lu_ent_default(struct lu_context *context, const char *name,
 	return TRUE;
 }
 
+/**
+ * lu_ent_user_default:
+ * @context: A library context.
+ * @name: A name for the new user.
+ * @system: Specifies whether or not this will be a "system" account.
+ * @ent: An entity structure which will contain information suitable for
+ * passing to lu_user_add().
+ *
+ * This function seeds an entity structure with the given name, allocates an
+ * unused UID using lu_get_free_id(), and sets defaults necessary to create a
+ * well-formed user account.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 void
 lu_ent_user_default(struct lu_context *context, const char *name,
 		    gboolean system, struct lu_ent *ent)
@@ -284,6 +364,20 @@ lu_ent_user_default(struct lu_context *context, const char *name,
 	lu_ent_default(context, name, lu_user, system, ent);
 }
 
+/**
+ * lu_ent_group_default:
+ * @context: A library context.
+ * @name: A name for the new group.
+ * @system: Specifies whether or not this will be a "system" account.
+ * @ent: An entity structure which will contain information suitable for
+ * passing to lu_group_add().
+ *
+ * This function seeds an entity structure with the given name, allocates an
+ * unused GID using lu_get_free_id(), and sets defaults necessary to create a
+ * well-formed group account.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 void
 lu_ent_group_default(struct lu_context *context, const char *name,
 		     gboolean system, struct lu_ent *ent)
@@ -293,6 +387,14 @@ lu_ent_group_default(struct lu_context *context, const char *name,
 	lu_ent_default(context, name, lu_group, system, ent);
 }
 
+/**
+ * lu_ent_free:
+ * @ent: An entity structure which will be destroyed.
+ *
+ * This function destroys an entity structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 void
 lu_ent_free(struct lu_ent *ent)
 {
@@ -319,6 +421,17 @@ lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
 	return TRUE;
 }
 
+/**
+ * lu_ent_set:
+ * @ent: An entity structure which will be modified.
+ * @attr: The attribute of the entity structure which will be replaced.
+ * @val: A new value for the attribute.
+ *
+ * This function modifies the given attribute of a structure so that it
+ * is equal to &val;.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_ent_set(struct lu_ent *ent, const char *attr, const char *val)
 {
@@ -336,6 +449,15 @@ get_hash_keys(gpointer key, gpointer value, gpointer data)
 	*list = g_list_append(*list, key);
 }
 
+/**
+ * lu_ent_get_attributes:
+ * @ent: An entity structure which will be queried.
+ *
+ * This function returns a list of the attributes for which the entity
+ * structure has values defined.
+ *
+ * Returns: A &GList; which should not be freed.
+ */
 GList *
 lu_ent_get_attributes(struct lu_ent *ent)
 {
@@ -345,6 +467,16 @@ lu_ent_get_attributes(struct lu_ent *ent)
 	return ret;
 }
 
+/**
+ * lu_ent_get:
+ * @ent: An entity structure which will be queried.
+ * @attr: The attribute of the structure which will be queried.
+ *
+ * This function returns a list of the values for the named attribute of
+ * the entity structure.
+ *
+ * Returns: A &GList; which must be freed by calling g_list_free().
+ */
 GList *
 lu_ent_get(struct lu_ent *ent, const char *attr)
 {
@@ -394,6 +526,18 @@ lu_ent_addx(struct lu_ent *ent, get_fn *get, GHashTable *hash,
 	return TRUE;
 }
 
+/**
+ * lu_ent_add:
+ * @ent: An entity structure which will be queried.
+ * @attr: The attribute of the structure which will be modified.
+ * @val: The value which will be added to the structure's list of values
+ * for the named attribute.
+ *
+ * This function adds a single value to the list of the values of the named
+ * attribute contained in the entity structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_ent_add(struct lu_ent *ent, const char *attr, const char *val)
 {
@@ -408,6 +552,18 @@ lu_ent_add_original(struct lu_ent *ent, const char *attr, const char *val)
 			   attr, val);
 }
 
+/**
+ * lu_ent_del:
+ * @ent: An entity structure which will be queried.
+ * @attr: The attribute of the structure which will be modified.
+ * @val: The value which will be removed from the structure's list of values
+ * for the named attribute.
+ *
+ * This function removes a single value from the list of the values of the named
+ * attribute contained in the entity structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 {
@@ -430,6 +586,16 @@ lu_ent_del(struct lu_ent *ent, const char *attr, const char *val)
 	return TRUE;
 }
 
+/**
+ * lu_ent_clear:
+ * @ent: An entity structure which will be queried.
+ * @attr: The attribute of the structure which will be removed.
+ *
+ * This function removes all values of the named attribute contained in
+ * the entity structure.
+ *
+ * Returns: TRUE on success, FALSE on failure.
+ */
 gboolean
 lu_ent_clear(struct lu_ent *ent, const char *attr)
 {

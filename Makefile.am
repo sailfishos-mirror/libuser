@@ -7,3 +7,6 @@ dist-hook:
 
 doc:
 	doxygen libuser.g
+
+scan:
+	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)

@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import libuser
+import os
+
+print "--------- Initializing."
+admin = libuser.Admin()
+
+print "--------- Listing."
+list = admin.enumerateUsers("na*")
+list.sort()
+for item in list:
+	print "Found a user named \"" + item + "\"."
+
+print "--------- Lookup."
+user = admin.lookupUserByName("nalin")
+if(not user):
+	os.exit(0)
+
+print "--------- Reading attribute (get)."
+print user.get(libuser.LU_LOGINSHELL)
+print "--------- Reading attribute (map)."
+print user[libuser.LU_LOGINSHELL]
+print "--------- Reading keys."
+print user.keys()
+
+print "--------- Setting attribute."
+user.set(libuser.LU_LOGINSHELL, ["/bin/false"])
+user[libuser.LU_LOGINSHELL] = "/bin/false"
+user[libuser.LU_LOGINSHELL] = ["/bin/false"]
+
+print "--------- Reading attribute (get)."
+print user.get(libuser.LU_LOGINSHELL)
+print "--------- Reading attribute (map)."
+print user[libuser.LU_LOGINSHELL]
+
+print "--------- Modifying user."
+admin.modifyUser(user)

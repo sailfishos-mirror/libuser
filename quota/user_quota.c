@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <libuser/quota.h>
+#include <unistd.h>
 
 static const char *quota_flags[] = {"usrquota", "grpquota",};
 static const char *quota_suffixes[] = INITQFNAMES;
@@ -71,18 +72,45 @@ quota_get_specials(const char *flag)
 	return ret;
 }
 
+/**
+ * quota_get_specials_user:
+ *
+ * Queries the list of mounted filesystems and returns an array of strings
+ * containing the names of the devices which can enforce user quotas.
+ *
+ * Returns: a list of values which should be freed by calling
+ * quota_free_specials().
+ */
 char **
 quota_get_specials_user()
 {
 	return quota_get_specials(quota_flags[USRQUOTA]);
 }
 
+/**
+ * quota_get_specials_group:
+ *
+ * Queries the list of mounted filesystems and returns an array of strings
+ * containing the names of the devices which can enforce group quotas.
+ *
+ * Returns: a list of values which should be freed by calling
+ * quota_free_specials().
+ */
 char **
 quota_get_specials_group()
 {
 	return quota_get_specials(quota_flags[GRPQUOTA]);
 }
 
+/**
+ * quota_free_specials:
+ * @specials: A list of specials which must be destroyed.
+ *
+ * This function frees an array of strings returned by a previous call to
+ * quota_get_specials_user() or quota_get_specials_group().
+ *
+ * Returns: void
+ */
 void
 quota_free_specials(char **specials)
 {
@@ -164,12 +192,26 @@ quota_toggle(int command)
 	return ret;
 }
 
+/**
+ * quota_on:
+ *
+ * Enables quotas on all currently-mounted filesystems which support them.
+ *
+ * Returns: 0 on success, assorted other values on failure.
+ */
 int
 quota_on()
 {
 	return quota_toggle(Q_QUOTAON);
 }
 
+/**
+ * quota_off:
+ *
+ * Disables quotas on all currently-mounted filesystems which support them.
+ *
+ * Returns: 0 on success, assorted other values on failure.
+ */
 int
 quota_off()
 {
@@ -178,10 +220,10 @@ quota_off()
 
 static int
 quota_get(int type, qid_t id, const char *special,
-	  int32_t *inode_soft, int32_t *inode_hard,
-	  int32_t *inode_usage, int32_t *inode_grace,
-	  int32_t *block_soft, int32_t *block_hard,
-	  int32_t *block_usage, int32_t *block_grace)
+	  int32_t *inode_usage, int32_t *inode_soft,
+	  int32_t *inode_hard, int32_t *inode_grace,
+	  int32_t *block_usage, int32_t *block_soft,
+	  int32_t *block_hard, int32_t *block_grace)
 {
 	struct mem_dqblk dqblk;
 	int ret = 0;
@@ -189,20 +231,20 @@ quota_get(int type, qid_t id, const char *special,
 	memset(&dqblk, 0, sizeof(dqblk));
 	ret = quotactl(QCMD(Q_GETQUOTA, type), special, id, &dqblk);
 	if(ret == 0) {
+		if(inode_usage)
+			*inode_usage = dqblk.dqb_curinodes;
 		if(inode_soft)
 			*inode_soft = dqblk.dqb_isoftlimit;
 		if(inode_hard)
 			*inode_hard = dqblk.dqb_ihardlimit;
 		if(inode_grace)
 			*inode_grace = dqblk.dqb_itime;
-		if(inode_usage)
-			*inode_usage = dqblk.dqb_curinodes;
+		if(block_grace)
+			*block_grace = dqblk.dqb_btime;
 		if(block_soft)
 			*block_soft = dqblk.dqb_bsoftlimit;
 		if(block_hard)
 			*block_hard = dqblk.dqb_bhardlimit;
-		if(block_grace)
-			*block_grace = dqblk.dqb_btime;
 		if(block_usage)
 			*block_usage = (dqblk.dqb_curspace + 1023) / 1024;
 	}
@@ -237,16 +279,35 @@ quota_set(int type, qid_t id, const char *special,
 	return ret;
 }
 
+/**
+ * quota_get_user:
+ * @uid: The UID of the user whose quotas should be queried.
+ * @special: The device node of the filesystem on which quotas are to be read.
+ * @inode_soft: Will contain the user's inode quota.
+ * @inode_hard: Will contain the user's inode limit.
+ * @inode_usage: Will contain the user's current inode usage.
+ * @inode_grace: Will contain the amount of time the user can use more than his
+ * quota and still be able to use more inodes.
+ * @block_soft: Will contain the user's block quota.
+ * @block_hard: Will contain the user's block limit.
+ * @block_usage: Will contain the user's current block usage.
+ * @block_grace: Will contain the amount of time the user can use more than his
+ * quota and still be able to use more blocks.
+ *
+ * Queries quotas for the given user on a given filesystem.
+ *
+ * Returns: 0 on success, assorted other values on failure.
+ */
 int
 quota_get_user(uid_t uid, const char *special,
-	       int32_t *inode_soft, int32_t *inode_hard, 
-	       int32_t *inode_usage, int32_t *inode_grace,
-	       int32_t *block_soft, int32_t *block_hard,
-	       int32_t *block_usage, int32_t *block_grace)
+	       int32_t *inode_usage, int32_t *inode_soft, 
+	       int32_t *inode_hard, int32_t *inode_grace,
+	       int32_t *block_usage, int32_t *block_soft, 
+	       int32_t *block_hard, int32_t *block_grace)
 {
 	return quota_get(USRQUOTA, uid, special,
-			 inode_soft, inode_hard, inode_usage, inode_grace,
-			 block_soft, block_hard, block_usage, block_grace);
+			 inode_usage, inode_soft, inode_hard, inode_grace,
+			 block_usage, block_soft, block_hard, block_grace);
 }
 
 int
@@ -259,16 +320,35 @@ quota_set_user(uid_t uid, const char *special,
 			 inode_grace, block_soft, block_hard, block_grace);
 }
 
+/**
+ * quota_get_group:
+ * @uid: The GID of the group for which quotas should be queried.
+ * @special: The device node of the filesystem on which quotas are to be read.
+ * @inode_soft: Will contain the group's inode quota.
+ * @inode_hard: Will contain the group's inode limit.
+ * @inode_usage: Will contain the group's current inode usage.
+ * @inode_grace: Will contain the amount of time the group can use more than his
+ * quota and still be able to use more inodes.
+ * @block_soft: Will contain the group's block quota.
+ * @block_hard: Will contain the group's block limit.
+ * @block_usage: Will contain the group's current block usage.
+ * @block_grace: Will contain the amount of time the group can use more than his
+ * quota and still be able to use more blocks.
+ *
+ * Queries quotas for the given group on a given filesystem.
+ *
+ * Returns: 0 on success, assorted other values on failure.
+ */
 int
 quota_get_group(gid_t gid, const char *special,
-	        int32_t *inode_soft, int32_t *inode_hard, 
-	        int32_t *inode_usage, int32_t *inode_grace,
-	        int32_t *block_soft, int32_t *block_hard,
-	        int32_t *block_usage, int32_t *block_grace)
+	       int32_t *inode_usage, int32_t *inode_soft, 
+	       int32_t *inode_hard, int32_t *inode_grace,
+	       int32_t *block_usage, int32_t *block_soft, 
+	       int32_t *block_hard, int32_t *block_grace)
 {
 	return quota_get(GRPQUOTA, gid, special,
-			 inode_soft, inode_hard, inode_usage, inode_grace,
-			 block_soft, block_hard, block_usage, block_grace);
+			 inode_usage, inode_soft, inode_hard, inode_grace,
+			 block_usage, block_soft, block_hard, block_grace);
 }
 
 int
