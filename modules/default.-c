@@ -26,7 +26,11 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <string.h>
+#ifdef _LIBUSER_MODULE
+#include "../lib/user_private.h"
+#else
 #include <libuser/user_private.h>
+#endif
 
 #define DEFAULT_PASSWORD	"!!"
 #define DEFAULT_SHADOW_PASSWORD	"x"
