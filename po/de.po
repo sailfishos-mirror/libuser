@@ -1,0 +1,471 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001 Red Hat, Inc.
+# Claudia Krug <fhonig@redhat.it>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser\n"
+"POT-Creation-Date: 2001-07-25 18:45-0400\n"
+"PO-Revision-Date: 2001-07-26 14:20+01:00\n"
+"Last-Translator: Claudia Krug <fhonig@redhat.it>\n"
+"Language-Team: German <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/apputil.c:56
+msgid "Error reading `%s': %s"
+msgstr "Fehler beim Lesen von `%s': %s"
+
+#: apps/apputil.c:61
+msgid "Error creating `%s': %s"
+msgstr "Fehler beim Erzeugen von `%s': %s"
+
+#: apps/apputil.c:134 apps/apputil.c:154 apps/apputil.c:166
+msgid "Error removing `%s': %s"
+msgstr "Fehler beim Entfernen von `%s': %s"
+
+#: apps/lchage.c:104 apps/luseradd.c:84 apps/luserdel.c:61 apps/lusermod.c:79
+msgid "[OPTION...] user"
+msgstr "[OPTION...] Benutzer"
+
+#: apps/lchage.c:110 apps/luseradd.c:90 apps/luserdel.c:67 apps/lusermod.c:85
+msgid "No user name specified.\n"
+msgstr "Es wurde kein Benutzername angegeben.\n"
+
+#: apps/lchage.c:122 apps/luserdel.c:77 apps/lusermod.c:100
+msgid "User %s does not exist.\n"
+msgstr "Benutzer %s existiert nicht.\n"
+
+#: apps/lchage.c:128
+msgid "Account is locked.\n"
+msgstr "Account ist gesperrt.\n"
+
+#: apps/lchage.c:130
+msgid "Account is not locked.\n"
+msgstr "Account ist nicht gesperrt.\n"
+
+#: apps/lchage.c:134
+msgid "Minimum:\t%d\n"
+msgstr "Minimum:\t%d\n"
+
+#: apps/lchage.c:138
+msgid "Maximum:\t%d\n"
+msgstr "Maximum:\t%d\n"
+
+#: apps/lchage.c:142
+msgid "Warning:\t%d\n"
+msgstr "Warnung:\t%d\n"
+
+#: apps/lchage.c:146
+msgid "Inactive:\t%d\n"
+msgstr "Nicht aktiv:\t%d\n"
+
+#: apps/lchage.c:150 apps/lchage.c:158 apps/lchage.c:168 apps/lchage.c:178
+msgid "Never"
+msgstr "Nie"
+
+#: apps/lchage.c:153
+msgid "Last Change:\t%s\n"
+msgstr "Letzte Änderung:\t%s\n"
+
+#: apps/lchage.c:162
+msgid "Password Expires:\t%s\n"
+msgstr "Passwort-Fälligkeit:\t%s\n"
+
+#: apps/lchage.c:173
+msgid "Password Inactive:\t%s\n"
+msgstr "Passwort nicht aktiv:\t%s\n"
+
+#: apps/lchage.c:181
+msgid "Account Expires:\t%s\n"
+msgstr "Account-Fälligkeit:\t%s\n"
+
+#: apps/lchage.c:210
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Fälligkeitsinformationen für %s konnten nicht geändert werden.\n"
+
+#: apps/lgroupadd.c:61 apps/lgroupdel.c:54 apps/lgroupmod.c:77
+msgid "[OPTION...] group"
+msgstr "[OPTION...] Gruppe"
+
+#: apps/lgroupadd.c:67 apps/lgroupdel.c:60 apps/lgroupmod.c:83
+msgid "No group name specified.\n"
+msgstr "Es wurde kein Gruppenname angegeben.\n"
+
+#: apps/lgroupadd.c:86
+msgid "Group creation failed.\n"
+msgstr "Die Erzeugung der Gruppe ist fehlgeschlagen.\n"
+
+#: apps/lgroupdel.c:72 apps/lgroupmod.c:100
+msgid "Group %s does not exist.\n"
+msgstr "Gruppe %s existiert nicht.\n"
+
+#: apps/lgroupdel.c:77
+msgid "Group %s could not be deleted.\n"
+msgstr "Gruppe %s konnte nicht gelöscht werden.\n"
+
+#: apps/lgroupmod.c:93 apps/lusermod.c:93
+msgid "Both -L and -U specified.\n"
+msgstr "Sowohl -L als auch -U angegeben.\n"
+
+#: apps/lgroupmod.c:160 apps/lgroupmod.c:170
+msgid "Failed to set password for group %s.\n"
+msgstr "Passwort konnte für Gruppe %s nicht eingestellt werden.\n"
+
+#: apps/lgroupmod.c:179
+msgid "Group %s could not be locked.\n"
+msgstr "Gruppe %s konnte nicht gesperrt werden.\n"
+
+#: apps/lgroupmod.c:187
+msgid "Group %s could not be unlocked.\n"
+msgstr "Gruppe %s konnte nicht gesperrt werden.\n"
+
+#: apps/lgroupmod.c:194
+msgid "Group %s could not be modified.\n"
+msgstr "Gruppe %s konnte nicht geändert werden.\n"
+
+#: apps/luseradd.c:117
+msgid "Error creating group for %s: %s.\n"
+msgstr "Fehler bei der Erzeugung einer Gruppe für %s: %s.\n"
+
+#: apps/luseradd.c:164
+msgid "Account creation failed: %s.\n"
+msgstr "Die Erzeugung des Accounts ist fehlgeschlagen: %s\n"
+
+#: apps/luseradd.c:181
+msgid "Bad UID for %s.\n"
+msgstr "Ungültige UID für %s.\n"
+
+#: apps/luseradd.c:185
+msgid "Bad GID for %s.\n"
+msgstr "Ungültige GID für %s.\n"
+
+#: apps/luseradd.c:195
+msgid "No home directory for %s.\n"
+msgstr "Kein Heimverzeichnis für %s.\n"
+
+#: apps/luseradd.c:199
+msgid "Error creating %s: %s.\n"
+msgstr "Fehler bei der Erzeugung von %s: %s.\n"
+
+#: apps/luserdel.c:82
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Benutzer % konnte nicht gelöscht werden: %s.\n"
+
+#: apps/luserdel.c:89
+msgid "%s did not have a gid number.\n"
+msgstr "%s hatte keine GID-Nummer.\n"
+
+#: apps/luserdel.c:94
+msgid "Group #%d does not exist.\n"
+msgstr "Gruppe #%d existiert nicht.\n"
+
+#: apps/luserdel.c:100
+msgid "Group #%d did not have a group name.\n"
+msgstr "Gruppe #%d hatte keinen Gruppennamen.\n"
+
+#: apps/luserdel.c:105
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Gruppe %s konnte nicht gelöscht werden: %s.\n"
+
+#: apps/luserdel.c:117
+msgid "%s did not have a home directory.\n"
+msgstr "%s hatte kein Heimverzeichnis.\n"
+
+#: apps/luserdel.c:121
+msgid "Error removing %s: %s.\n"
+msgstr "Fehler beim Entfernen von %s: %s.\n"
+
+#: apps/lusermod.c:129
+msgid "Error reading old home directory for %s: %s.\n"
+msgstr "Fehler beim Lesen des alten Heimverzeichnisses für %s: %s.\n"
+
+#: apps/lusermod.c:137 apps/lusermod.c:146
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Passwort konnte für Benutzer %s nicht eingestellt werden: %s.\n"
+
+#: apps/lusermod.c:154
+msgid "User %s could not be locked: %s.\n"
+msgstr "Benutzer %s konnte nicht gesperrt werden: %s.\n"
+
+#: apps/lusermod.c:161
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Benutzer %s konnte nicht freigegeben werden: %s.\n"
+
+#: apps/lusermod.c:167
+msgid "User %s could not be modified: %s.\n"
+msgstr "Benutzer %s konnte nicht geändert werden: %s.\n"
+
+#: apps/lusermod.c:173
+msgid "No old home directory for %s.\n"
+msgstr "Kein altes Heimverzeichnis für %s.\n"
+
+#: apps/lusermod.c:177
+msgid "No new home directory for %s.\n"
+msgstr "Kein neues Heimverzeichnis für %s.\n"
+
+#: apps/lusermod.c:181
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Fehler bei Bewegen von %s zu %s: %s.\n"
+
+#: lib/user.c:123
+msgid "no initialization function %s in `%s'"
+msgstr "keine Initialisierungsfunktion %s in `%s'"
+
+#: lib/user.c:144
+msgid "module version mismatch in `%s'"
+msgstr "Fehlende Übereinstimmung von Modulversionen in `%s'"
+
+#: lib/usercfg.c:56
+msgid "could not open configuration file `%s': %s"
+msgstr "Konfigurationsdatei `%s' konnte nicht geöffnet werden: %s"
+
+#: lib/userent.c:44
+msgid "dump of struct lu_ent at %p:\n"
+msgstr "Sicherungskopie von struct lu_ent at %p:\n"
+
+#: lib/userent.c:45
+msgid " magic = %08x\n"
+msgstr " magic = %08x\n"
+
+#: lib/userent.c:46
+msgid " type = %s\n"
+msgstr " Typ = %s\n"
+
+#: lib/userent.c:46
+msgid "user"
+msgstr "Benutzer"
+
+#: lib/userent.c:46
+msgid "group"
+msgstr "Gruppe"
+
+#: lib/userent.c:46
+msgid "unknown"
+msgstr "unbekannt"
+
+#: lib/userent.c:216
+msgid ""
+"\n"
+"Before copy:\n"
+msgstr ""
+"\n"
+"Kopieren nach:\n"
+
+#: lib/userent.c:230
+msgid ""
+"\n"
+"After copy:\n"
+msgstr ""
+"\n"
+"Kopieren nach:\n"
+
+#: lib/userent.c:388
+msgid "freeing lu_ent at %p.\n"
+msgstr "lu_ent wird bei %p freigegeben.\n"
+
+#: modules/files.c:115
+msgid "couldn't open `%s'"
+msgstr "`%s' konnte nicht geöffnet werden"
+
+#: modules/files.c:135
+msgid "error creating `%s'"
+msgstr "Fehler beim Erzeugen von `%s'"
+
+#: modules/files.c:145
+msgid "backup file `%s' was a symlink"
+msgstr "Backup-Datei `%s' war ein symlink"
+
+#: modules/files.c:614 modules/files.c:624
+msgid "entry already present in file"
+msgstr "Eintrag bereits in Datei vorhanden"
+
+#: modules/files.c:730 modules/files.c:737 modules/files.c:823
+#: modules/files.c:833
+msgid "entity object has no %s attribute"
+msgstr "Einheitsobjekt besitzt kein %s Attribut"
+
+#: modules/files.c:1457 modules/files.c:1513
+msgid "Not executing with superuser privileges."
+msgstr "Keine Ausführung mit Superuse-Rechten."
+
+#: modules/files.c:1525
+msgid "No shadow file present -- disabling."
+msgstr "Keine Shadow-Datei vorhanden -- es wird entaktiviert."
+
+#: modules/krb5.c:100
+msgid "error connecting to the kadm5 server for service %s in realm %s: %s"
+msgstr "Fehler bei der Verbindung zum kadm5 Server für Dienst %s in "
+"Realm %s: %s"
+
+#: modules/krb5.c:130 modules/krb5.c:187 modules/krb5.c:245 modules/krb5.c:319
+#: modules/krb5.c:364 modules/krb5.c:432 modules/krb5.c:481
+msgid "error initializing kerberos library"
+msgstr "Fehler bei der Initialisierung der Kerberos-Bibliothek"
+
+#: modules/krb5.c:135 modules/krb5.c:202 modules/krb5.c:270 modules/krb5.c:275
+#: modules/krb5.c:334 modules/krb5.c:379 modules/krb5.c:447 modules/krb5.c:495
+msgid "error parsing user name `%s' for kerberos"
+msgstr "Fehler beim Parsen des Benutzernamens `%s' für Kerberos"
+
+#: modules/krb5.c:196 modules/krb5.c:328 modules/krb5.c:373 modules/krb5.c:441
+msgid "entity structure has no %s or %s attributes"
+msgstr "Einheitsstruktur besitzt kein Attribut %s oder %s"
+
+#: modules/krb5.c:254
+msgid "entity has no %s or %s attributes"
+msgstr "Einheit besitzt kein Attribut %s oder %s"
+
+#: modules/krb5.c:264
+msgid "entity was created with no %s or %s attributes"
+msgstr "Einheit wurde ohne Attribut %s oder %s erzeugt"
+
+#: modules/krb5.c:386 modules/krb5.c:454
+msgid "error reading information for `%s' from kerberos"
+msgstr "Fehler beim Lesen der Informationen für `%s' von Kerberos"
+
+#: modules/krb5.c:489
+msgid "entity has no %s attribute"
+msgstr "Einheit besitzt kein Attribut %s"
+
+#: modules/krb5.c:520
+msgid "error setting password for `%s'"
+msgstr "Fehler beim Einstellen des Passworts für `%s'"
+
+#: modules/krb5.c:621
+msgid "Kerberos Realm"
+msgstr "Kerberos Realm"
+
+#: modules/krb5.c:626
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Admin Principal"
+
+#: modules/krb5.c:641
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos-Passwort für Admin Principal"
+
+#: modules/ldap.c:165
+msgid "error initializing ldap library"
+msgstr "Fehler bei der Initialisierung der ldap-Bibliothek"
+
+#: modules/ldap.c:183
+msgid "could not set protocol to version 3"
+msgstr "Protokoll konnte für Version 3 nicht eingestellt werden"
+
+#: modules/ldap.c:189
+msgid "could not negotiate TLS with server"
+msgstr "TLS konnte mit Server nicht verhandelt werden"
+
+#: modules/ldap.c:272 modules/ldap.c:640
+msgid "error mapping name to DN"
+msgstr "Fehler von DN bei Ermittlung des Namen"
+
+#: modules/ldap.c:307 modules/ldap.c:824
+msgid "error searching ldap directory"
+msgstr "Fehler bei der Suche der ldap-Bibliothek"
+
+#: modules/ldap.c:489
+msgid "user object had no %s attribute"
+msgstr "Benutzerobjekt hatte kein Attribut %s"
+
+#: modules/ldap.c:495
+msgid "user object was created with no `%s'"
+msgstr "Benutzerobjekt wurde ohne `%s' erzeugt"
+
+#: modules/ldap.c:502
+msgid "could not determine expected DN"
+msgstr "erwarteter DN konnte nicht bestimmt werden"
+
+#: modules/ldap.c:508
+msgid "could not convert internal data to LDAPMods"
+msgstr "interne Daten konnten nicht in LDAPMods konvertiert werden"
+
+#: modules/ldap.c:521 modules/ldap.c:679
+msgid "error modifying directory entry: %s"
+msgstr "Fehler während der Änderung des Verzeichniseintrags: %s"
+
+#: modules/ldap.c:534
+msgid "error renaming directory entry: %s\n"
+msgstr "Fehler beim Umbenennen des Verzeichniseintrags: %s\n"
+
+#: modules/ldap.c:575
+msgid "object had no %s attribute"
+msgstr "Objekt hatte kein Attribut %s"
+
+#: modules/ldap.c:581
+msgid "could not map name to DN"
+msgstr "es konnte kein Name für DN ermittelt werden"
+
+#: modules/ldap.c:592
+msgid "error removing directory entry: %s.\n"
+msgstr "Fehler beim Entfernen des Verzeichniseintrags: %s.\n"
+
+#: modules/ldap.c:634 modules/ldap.c:646
+msgid "object has no %s attribute"
+msgstr "Objekt besitzt kein Attribut %s"
+
+#: modules/ldap.c:879
+msgid "LDAP Server Name"
+msgstr "LDAP Servername"
+
+#: modules/ldap.c:884
+msgid "LDAP Base DN"
+msgstr "LDAP Base DN"
+
+#: modules/ldap.c:889
+msgid "LDAP Bind DN"
+msgstr "LDAP Bind DN"
+
+#: modules/ldap.c:894
+msgid "LDAP Bind Password"
+msgstr "LDAP Bind Passwort"
+
+#: modules/ldap.c:900
+msgid "LDAP SASL User"
+msgstr "LDAP SASL Benutzer"
+
+#: modules/ldap.c:905
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP SASL Benutzerauthorisierung"
+
+#: samples/lookup.c:60 samples/testuser.c:55
+msgid "Error initializing lu.\n"
+msgstr "Fehler beim Initialisieren von lu.\n"
+
+#: samples/lookup.c:69
+msgid "Searching for group with ID %d.\n"
+msgstr "Suche nach Gruppe mit ID %d.\n"
+
+#: samples/lookup.c:72
+msgid "Searching for group named %s.\n"
+msgstr "Suche nach Gruppe mit Namen %s.\n"
+
+#: samples/lookup.c:78
+msgid "Searching for user with ID %d.\n"
+msgstr "Suche nach Benutzer mit ID %d.\n"
+
+#: samples/lookup.c:81
+msgid "Searching for user named %s.\n"
+msgstr "Suche nach Benutzer mit Namen %s.\n"
+
+#: samples/lookup.c:107
+msgid "Entry not found.\n"
+msgstr "Eintrag wurde nicht gefunden.\n"
+
+#: samples/testuser.c:59
+msgid "Default user object classes:\n"
+msgstr "Standardmäßige Benutzerobjekt-Klassen:\n"
+
+#: samples/testuser.c:65
+msgid "Default user attribute names:\n"
+msgstr "Standardmäßige Benutzerattribut-Namen:\n"
+
+#: samples/testuser.c:71
+msgid "Getting default user attributes:\n"
+msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
+
+#: samples/testuser.c:79
+msgid "Copying user structure:\n"
+msgstr "Benutzerstrukturen kopieren:\n"
+
