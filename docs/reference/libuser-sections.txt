@@ -6,6 +6,14 @@ lu_cfg_read_keys
 </SECTION>
 
 <SECTION>
+<FILE>value</FILE>
+LU_VALUE_INVALID_ID
+lu_value_strdup
+lu_value_init_set_id
+lu_value_get_id
+</SECTION>
+
+<SECTION>
 <FILE>entity</FILE>
 LU_USERNAME
 LU_USERPASSWORD
@@ -34,6 +42,7 @@ LU_ROOMNUMBER
 LU_TELEPHONENUMBER
 LU_HOMEPHONE
 LU_EMAIL
+
 lu_ent_new
 lu_ent_free
 lu_ent_copy
@@ -93,6 +102,7 @@ quota_set_group
 	
 lu_start
 lu_end
+
 lu_set_prompter
 lu_get_prompter
 lu_set_modules

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under 
  * the terms of the GNU Library General Public License as published by
@@ -122,14 +122,15 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 		if (i > 0) {
 			fprintf(fp, ", ");
 		}
-		if (G_VALUE_HOLDS_STRING(value)) {
+		if (G_VALUE_HOLDS_STRING(value))
 			fprintf(fp, "`%s'", g_value_get_string(value));
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
+		else if (G_VALUE_HOLDS_LONG(value))
 			fprintf(fp, "%ld", g_value_get_long(value));
-		} else {
+		else if (G_VALUE_HOLDS_INT64(value))
+			fprintf(fp, "%lld",
+				(long long)g_value_get_int64(value));
+		else
 			fprintf(fp, "?");
-		}
 	}
 	fprintf(fp, ")\n");
 	/* Print the current data values. */
@@ -139,16 +140,20 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 					   i);
 		for (j = 0; j < attribute->values->n_values; j++) {
 			value = g_value_array_get_nth(attribute->values, j);
-			if (G_VALUE_HOLDS_STRING(value)) {
+			if (G_VALUE_HOLDS_STRING(value))
 				fprintf(fp, " %s = `%s'\n",
 					g_quark_to_string(attribute->name),
 					g_value_get_string(value));
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
+			else if (G_VALUE_HOLDS_LONG(value))
 				fprintf(fp, " %s = %ld\n",
 					g_quark_to_string(attribute->name),
 					g_value_get_long(value));
-			}
+			
+			else if (G_VALUE_HOLDS_INT64(value))
+				fprintf(fp, " %s = %lld\n",
+					g_quark_to_string(attribute->name),
+					(long long)g_value_get_int64(value));
+			
 		}
 	}
 	fprintf(fp, "\n");
@@ -158,16 +163,18 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 					   i);
 		for (j = 0; j < attribute->values->n_values; j++) {
 			value = g_value_array_get_nth(attribute->values, j);
-			if (G_VALUE_HOLDS_STRING(value)) {
+			if (G_VALUE_HOLDS_STRING(value))
 				fprintf(fp, " %s = `%s'\n",
 					g_quark_to_string(attribute->name),
 					g_value_get_string(value));
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
+			else if (G_VALUE_HOLDS_LONG(value))
 				fprintf(fp, " %s = %ld\n",
 					g_quark_to_string(attribute->name),
 					g_value_get_long(value));
-			}
+			else if (G_VALUE_HOLDS_INT64(value))
+				fprintf(fp, " %s = %lld\n",
+					g_quark_to_string(attribute->name),
+					(long long)g_value_get_int64(value));
 		}
 	}
 }
@@ -377,23 +384,9 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	}
 	for (i = 0; i < dest->n_values; i++) {
 		current = g_value_array_get_nth(dest, i);
-		if (G_VALUE_TYPE(value) != G_VALUE_TYPE(current)) {
-			continue;
-		}
-		if (G_VALUE_HOLDS_LONG(value)) {
-			if (g_value_get_long(value) ==
-			    g_value_get_long(current)) {
-				break;
-			}
-		} else
-		if (G_VALUE_HOLDS_STRING(value)) {
-			if (g_quark_from_string(g_value_get_string(value)) ==
-			    g_quark_from_string(g_value_get_string(current))) {
-				break;
-			}
-		} else {
-			g_assert_not_reached();
-		}
+		if (G_VALUE_TYPE(value) == G_VALUE_TYPE(current)
+		    && lu_values_equal(value, current))
+			break;
 	}
 	if (i >= dest->n_values) {
 		g_value_array_append(dest, value);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -611,29 +611,19 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	int fd;
 
 	/* Find the GID of the owner of the file. */
-	gid = INVALID;
+	gid = LU_VALUE_INVALID_ID;
 	groupEnt = lu_ent_new();
 	if (lu_group_lookup_name(ctx, "mail", groupEnt, &error)) {
 		array = lu_ent_get(groupEnt, LU_GIDNUMBER);
 		if (array != NULL) {
 			value = g_value_array_get_nth(array, 0);
-			if (G_VALUE_HOLDS_LONG(value)) {
-				gid = g_value_get_long(value);
-			} else
-			if (G_VALUE_HOLDS_STRING(value)) {
-				gid = strtol(g_value_get_string(value), &p, 0);
-				if (*p != '\0') {
-					gid = INVALID;
-				}
-			} else {
-				g_assert_not_reached();
-			}
+			gid = lu_value_get_id(value);
 		}
 	}
 	lu_ent_free(groupEnt);
 
 	/* Er, okay.  Check with libc. */
-	if (gid == INVALID) {
+	if (gid == LU_VALUE_INVALID_ID) {
 		if ((getgrnam_r("mail", &grp, buf, sizeof(buf), &err) == 0) &&
 		    (err == &grp)) {
 			gid = grp.gr_gid;
@@ -641,61 +631,30 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	}
 
 	/* Aiieee.  Use the user's group. */
-	if (gid == INVALID) {
+	if (gid == LU_VALUE_INVALID_ID) {
 		array = lu_ent_get(ent, LU_GIDNUMBER);
 		if (array != NULL) {
 			value = g_value_array_get_nth(array, 0);
-			if (G_VALUE_HOLDS_LONG(value)) {
-				gid = g_value_get_long(value);
-			} else
-			if (G_VALUE_HOLDS_STRING(value)) {
-				gid = strtol(g_value_get_string(value), &p, 0);
-				if (*p == '\0') {
-					gid = INVALID;
-				}
-			} else {
-				g_warning("Unable to determine user's GID.");
-				g_assert_not_reached();
-			}
+			gid = lu_value_get_id(value);
 		}
 	}
-	g_return_val_if_fail(gid != INVALID, FALSE);
+	g_return_val_if_fail(gid != LU_VALUE_INVALID_ID, FALSE);
 
 	/* Now get the user's UID. */
-	uid = INVALID;
+	uid = LU_VALUE_INVALID_ID;
 	array = lu_ent_get(ent, LU_UIDNUMBER);
 	if (array != NULL) {
 		value = g_value_array_get_nth(array, 0);
-		if (G_VALUE_HOLDS_LONG(value)) {
-			uid = g_value_get_long(value);
-		} else
-		if (G_VALUE_HOLDS_STRING(value)) {
-			uid = strtol(g_value_get_string(value), &p, 0);
-			if (*p != '\0') {
-				uid = INVALID;
-			}
-		} else {
-			g_warning("Unable to determine user's UID.");
-			g_assert_not_reached();
-		}
+		uid = lu_value_get_id(value);
 	}
-	g_return_val_if_fail(uid != INVALID, FALSE);
+	g_return_val_if_fail(uid != LU_VALUE_INVALID_ID, FALSE);
 
 	/* Now get the user's login. */
 	username = NULL;
 	array = lu_ent_get(ent, LU_USERNAME);
 	if (array != NULL) {
 		value = g_value_array_get_nth(array, 0);
-		if (G_VALUE_HOLDS_LONG(value)) {
-			username = g_strdup_printf("%ld",
-						   g_value_get_long(value));
-		} else
-		if (G_VALUE_HOLDS_STRING(value)) {
-			username = g_value_dup_string(value);
-		} else {
-			g_warning("Unable to determine user's name.");
-			g_assert_not_reached();
-		}
+		username = lu_value_strdup(value);
 	}
 	g_return_val_if_fail(username != NULL, FALSE);
 

@@ -7,6 +7,7 @@
 <!ENTITY libuser-prompt SYSTEM "xml/prompt.xml">
 <!ENTITY libuser-quota SYSTEM "xml/quota.xml">
 <!ENTITY libuser-user SYSTEM "xml/user.xml">
+<!ENTITY libuser-value SYSTEM "xml/value.xml">
 ]>
 <book id="index">
   <bookinfo>
@@ -16,6 +17,7 @@
   <chapter>
     <title>libuser</title>
     &libuser-config;
+    &libuser-value;
     &libuser-entity;
     &libuser-error;
     &libuser-prompt;

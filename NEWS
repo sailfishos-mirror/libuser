@@ -1,3 +1,8 @@
+0.53
+* Support UID and GID values larger than LONG_MAX (#124967)
+* FIXME lusermod group renaming fix
+* Miscellaneous bug and memory leak fixes
+
 0.52.6
 * Mark more strings for translation
 * Make error reporting more consistent and more verbose, output error messages

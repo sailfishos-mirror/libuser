@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001,2002 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <libintl.h>
 #include <limits.h>
 #include <locale.h>
@@ -45,7 +47,6 @@ main(int argc, const char **argv)
 	gid_t gid;
 	char *homedir, *gidstring;
 	const char *skeleton;
-	long gid_tmp;
 	char *p;
 	GValueArray *values = NULL;
 	GValue *value, val;
@@ -106,6 +107,8 @@ main(int argc, const char **argv)
 	groupEnt = lu_ent_new();
 
 	while (fgets(buf, sizeof(buf), fp)) {
+		intmax_t imax;
+
 		/* Strip off the end-of-line terminators. */
 		if (strchr(buf, '\r')) {
 			p = strchr(buf, '\r');
@@ -134,8 +137,16 @@ main(int argc, const char **argv)
 			continue;
 		}
 
+		errno = 0;
+		imax = strtoimax(fields[2], &p, 10);
+		if (errno != 0 || *p != 0 || p == fields[2]
+		    || (uid_t)imax != imax) {
+			g_print(_("Invalid user ID %s\n"), fields[2]);
+			g_strfreev(fields);
+			continue;
+		}
 		/* Sorry, but we're bastards here.  No root accounts. */
-		uid = atol(fields[2]);
+		uid = imax;
 		if (uid == 0) {
 			g_print(_("Refusing to create account with UID 0.\n"));
 			g_strfreev(fields);
@@ -154,9 +165,11 @@ main(int argc, const char **argv)
 
 		/* Try to convert the field to a number. */
 		p = NULL;
-		gid_tmp = strtol(gidstring, &p, 10);
-		gid = INVALID;
-		if (*p != '\0') {
+		errno = 0;
+		imax = strtoimax(gidstring, &p, 10);
+		gid = LU_VALUE_INVALID_ID;
+		if (errno != 0 || *p != '\0' || p == gidstring
+		    || (gid_t)imax != imax) {
 			/* It's not a number, so it's a group name --
 			 * see if it's being used. */
 			if (lu_group_lookup_name(ctx, gidstring, ent, &error)) {
@@ -165,14 +178,8 @@ main(int argc, const char **argv)
 				if (values != NULL) {
 					value = g_value_array_get_nth(values,
 								      0);
-					if (G_VALUE_HOLDS_LONG(value)) {
-						gid = g_value_get_long(value);
-					} else
-					if (G_VALUE_HOLDS_STRING(value)) {
-						gid = atol(g_value_get_string(value));
-					} else {
-						g_assert_not_reached();
-					}
+					gid = lu_value_get_id(value);
+					g_assert(gid != LU_VALUE_INVALID_ID);
 				}
 				creategroup = FALSE;
 			} else {
@@ -182,21 +189,15 @@ main(int argc, const char **argv)
 			}
 		} else {
 			/* It's a group number -- see if it's being used. */
-			gid = gid_tmp;
-			if (lu_group_lookup_id(ctx, gid_tmp, ent, &error)) {
+			gid = imax;
+			if (lu_group_lookup_id(ctx, gid, ent, &error)) {
 				/* Retrieve the group's GID. */
 				values = lu_ent_get(ent, LU_GIDNUMBER);
 				if (values != NULL) {
 					value = g_value_array_get_nth(values,
 								      0);
-					if (G_VALUE_HOLDS_LONG(value)) {
-						gid = g_value_get_long(value);
-					} else
-					if (G_VALUE_HOLDS_STRING(value)) {
-						gid = atol(g_value_get_string(value));
-					} else {
-						g_assert_not_reached();
-					}
+					gid = lu_value_get_id(value);
+					g_assert(gid != LU_VALUE_INVALID_ID);
 				}
 				creategroup = FALSE;
 			} else {
@@ -210,11 +211,10 @@ main(int argc, const char **argv)
 		if (creategroup) {
 			/* If we got a GID, then we need to use the user's name,
 			 * otherwise we need to use the default group name. */
-			if (gid != INVALID) {
+			if (gid != LU_VALUE_INVALID_ID) {
 				lu_group_default(ctx, fields[0], FALSE, ent);
 				memset(&val, 0, sizeof(val));
-				g_value_init(&val, G_TYPE_LONG);
-				g_value_set_long(&val, gid);
+				lu_value_init_set_id(&val, gid);
 				lu_ent_clear(ent, LU_GIDNUMBER);
 				lu_ent_add(ent, LU_GIDNUMBER, &val);
 				g_value_unset(&val);
@@ -226,19 +226,13 @@ main(int argc, const char **argv)
 			if (lu_group_add(ctx, ent, &error)) {
 				values = lu_ent_get(ent, LU_GIDNUMBER);
 				value = g_value_array_get_nth(values, 0);
-				if (G_VALUE_HOLDS_LONG(value)) {
-					gid = g_value_get_long(value);
-				} else
-				if (G_VALUE_HOLDS_STRING(value)) {
-					gid = atol(g_value_get_string(value));
-				} else {
-					g_assert_not_reached();
-				}
+				gid = lu_value_get_id(value);
+				g_assert(gid != LU_VALUE_INVALID_ID);
 			} else {
 				/* Aargh!  Abandon all hope. */
 				fprintf(stderr,
 					_("Error creating group for `%s' with "
-					  "GID %ld: %s\n"), fields[0], gid_tmp,
+					  "GID %jd: %s\n"), fields[0], imax,
 					lu_strerror(error));
 				g_strfreev(fields);
 				continue;
@@ -248,8 +242,7 @@ main(int argc, const char **argv)
 		/* Create a new user record, and set the user's primary GID. */
 		lu_user_default(ctx, fields[0], FALSE, ent);
 		memset(&val, 0, sizeof(val));
-		g_value_init(&val, G_TYPE_LONG);
-		g_value_set_long(&val, gid);
+		lu_value_init_set_id(&val, gid);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
 		g_value_unset(&val);
@@ -268,6 +261,7 @@ main(int argc, const char **argv)
 			lu_ent_clear(ent, LU_HOMEDIRECTORY);
 			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
 		} else {
+			/* FIXME: values contains LU_GIDNUMBER */
 			if (values != NULL) {
 				value = g_value_array_get_nth(values,
 							      0);

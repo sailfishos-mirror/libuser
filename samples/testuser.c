@@ -37,14 +37,15 @@ dump_attribute(const char *attribute, struct lu_ent *ent)
 	if (array != NULL) {
 		for (i = 0; i < array->n_values; i++) {
 			value = g_value_array_get_nth(array, i);
-			if (G_VALUE_HOLDS_STRING(value)) {
+			if (G_VALUE_HOLDS_STRING(value))
 				g_print("attribute %s = `%s'\n", attribute,
 					g_value_get_string(value));
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
+			else if (G_VALUE_HOLDS_LONG(value))
 				g_print("attribute %s = %ld\n", attribute,
 					g_value_get_long(value));
-			}
+			else if (G_VALUE_HOLDS_INT64(value))
+				g_print("attribute %s = %lld\n", attribute,
+					(long long)g_value_get_int64(value));
 		}
 	}
 }

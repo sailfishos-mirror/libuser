@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,9 +38,12 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *uid = NULL, *old_uid = NULL, *user = NULL, *gecos = NULL,
-		   *oldHomeDirectory, *homeDirectory = NULL, *loginShell = NULL;
+		   *oldHomeDirectory, *homeDirectory = NULL,
+		   *loginShell = NULL, *gid_number_str = NULL,
+		   *uid_number_str = NULL;
 	const char *username, *groupname;
-	long uidNumber = INVALID, gidNumber = INVALID;
+	uid_t uidNumber = LU_VALUE_INVALID_ID;
+	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL, *group = NULL;
 	struct lu_error *error = NULL;
@@ -61,9 +66,9 @@ main(int argc, const char **argv)
 		 "move home directory contents", NULL},
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "set shell for user", "STRING"},
-		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
+		{"uid", 'u', POPT_ARG_STRING, &uid_number_str, 0,
 		 "set UID for user", "NUM"},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
+		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
 		 "set primary GID for user", "NUM"},
 		{"login", 'l', POPT_ARG_STRING, &uid, 0,
 		 "change login name for user", "STRING"},
@@ -102,6 +107,37 @@ main(int argc, const char **argv)
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
+	if (gid_number_str != NULL) {
+		intmax_t val;
+		char *p;
+
+		errno = 0;
+		val = strtoimax(gid_number_str, &p, 10);
+		if (errno != 0 || *p != 0 || p == gid_number_str
+		    || (gid_t)val != val) {
+			fprintf(stderr, _("Invalid group ID %s\n"),
+				gid_number_str);
+			poptPrintUsage(popt, stderr, 0);
+			return 1;
+		}
+		gidNumber = val;
+	}
+	if (uid_number_str != NULL) {
+		intmax_t val;
+		char *p;
+
+		errno = 0;
+		val = strtoimax(uid_number_str, &p, 10);
+		if (errno != 0 || *p != 0 || p == uid_number_str
+		    || (uid_t)val != val) {
+			fprintf(stderr, _("Invalid user ID %s\n"),
+				uid_number_str);
+			poptPrintUsage(popt, stderr, 0);
+			return 1;
+		}
+		uidNumber = val;
+	}
+	
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -129,24 +165,24 @@ main(int argc, const char **argv)
 	/* Determine if we actually need to change anything. */
 	change = userPassword || cryptedUserPassword || uid || gecos ||
 		 homeDirectory || loginShell ||
-		 ((uid_t)uidNumber != INVALID) || ((gid_t)gidNumber != INVALID);
+		 uidNumber != LU_VALUE_INVALID_ID ||
+		 gidNumber != LU_VALUE_INVALID_ID;
 
 	/* Change the user's UID and GID. */
 	memset(&val, 0, sizeof(val));
-	g_value_init(&val, G_TYPE_LONG);
 
-	if ((uid_t)uidNumber != INVALID) {
-		g_value_set_long(&val, uidNumber);
+	if (uidNumber != LU_VALUE_INVALID_ID) {
+		lu_value_init_set_id(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
+		g_value_unset(&val);
 	}
-	if ((gid_t)gidNumber != INVALID) {
-		g_value_set_long(&val, gidNumber);
+	if (gidNumber != LU_VALUE_INVALID_ID) {
+		lu_value_init_set_id(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+		g_value_unset(&val);
 	}
-
-	g_value_unset(&val);
 
 	/* Change the user's shell and GECOS information. */
 	g_value_init(&val, G_TYPE_STRING);
@@ -258,11 +294,12 @@ main(int argc, const char **argv)
 			for (j = 0;
 			     (members != NULL) && (j < members->n_values);
 			     j++) {
-				value = g_value_array_get_nth(values, j);
+				value = g_value_array_get_nth(members, j);
 				username = g_value_get_string(value);
 				/* If it holds the user's old name, then
 				 * set its value to the new name. */
 				if (strcmp(old_uid, username) == 0) {
+					/* Modifies the entity in-place. */
 					g_value_set_string(value, uid);
 					break;
 				}
@@ -271,11 +308,12 @@ main(int argc, const char **argv)
 			for (j = 0;
 			     (admins != NULL) && (j < admins->n_values);
 			     j++) {
-				value = g_value_array_get_nth(values, j);
+				value = g_value_array_get_nth(admins, j);
 				username = g_value_get_string(value);
 				/* If it holds the user's old name, then
 				 * set its value to the new name. */
 				if (strcmp(old_uid, username) == 0) {
+					/* Modifies the entity in-place. */
 					g_value_set_string(value, uid);
 					break;
 				}

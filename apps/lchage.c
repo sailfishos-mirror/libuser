@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -22,6 +22,7 @@
 #include "config.h"
 #endif
 #include <sys/time.h>
+#include <errno.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,14 +54,19 @@ read_ndays(GValueArray *array)
 			/* If it's a string, use strtol to read it. */
 			if (G_VALUE_HOLDS_STRING(value)) {
 				s = g_value_get_string(value);
+				errno = 0;
 				n_days = strtol(s, &p, 10);
-				if (*p != '\0') {
+				if (errno != 0 || *p != '\0' || p == s)
 					n_days = -1;
-				}
 			} else
 			/* If it's a long, read it directly. */
-			if (G_VALUE_HOLDS_LONG(value)) {
+			if (G_VALUE_HOLDS_LONG(value))
 				n_days = g_value_get_long(value);
+			else if (G_VALUE_HOLDS_INT64(value)) {
+				gint64 v;
+
+				v = g_value_get_int64(value);
+				n_days = (gint)v == v ? v : -1;
 			} else {
 				g_assert_not_reached();
 			}

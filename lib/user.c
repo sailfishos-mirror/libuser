@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,7 +21,9 @@
 #include "../config.h"
 #endif
 #include <sys/types.h>
+#include <errno.h>
 #include <grp.h>
+#include <inttypes.h>
 #include <pwd.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -31,7 +33,6 @@
 #include "modules.h"
 #include "util.h"
 
-#define INVALID ((id_t)(-0x80000000)) /* FIXME: this is a valid id_t value */
 #define DEFAULT_ID 500
 #define INVALID_NAME_CHARS ":,."
 
@@ -234,48 +235,33 @@ extract_id(struct lu_ent *ent)
 {
 	GValueArray *array;
 	GValue *value;
-	const char *idstring;
-	char *p;
-	id_t ret;
-	g_return_val_if_fail(ent != NULL, INVALID);
-	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), INVALID);
+
+	g_return_val_if_fail(ent != NULL, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
+			     LU_VALUE_INVALID_ID);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
 	if (array == NULL) {
 		array = lu_ent_get_current(ent,
 					   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
 	}
-	g_return_val_if_fail(array != NULL, INVALID);
+	g_return_val_if_fail(array != NULL, LU_VALUE_INVALID_ID);
 	value = g_value_array_get_nth(array, 0);
-	g_return_val_if_fail(value != NULL, INVALID);
-	ret = INVALID;
-	if (G_VALUE_HOLDS_LONG(value)) {
-		ret = g_value_get_long(value);
-	} else
-	if (G_VALUE_HOLDS_STRING(value)) {
-		idstring = g_value_get_string(value);
-		ret = strtol(idstring, &p, 0); /* FIXME: strtoul? */
-		if (*p != '\0') {
-			ret = INVALID;
-		}
-	}
-	return ret;
+	g_return_val_if_fail(value != NULL, LU_VALUE_INVALID_ID);
+	return lu_value_get_id(value);
 }
 
-/* FIXME: uid_t */
-static long
+static uid_t
 convert_user_name_to_id(struct lu_context *context, const char *sdata)
 {
 	struct lu_ent *ent;
-	long ret = INVALID;
+	uid_t ret = LU_VALUE_INVALID_ID;
 	char buf[LINE_MAX * 4];
 	struct passwd *err, passwd;
 	struct lu_error *error = NULL;
 	if ((getpwnam_r(sdata, &passwd, buf, sizeof(buf), &err) == 0) &&
-	    (err == &passwd)) {
-		ret = passwd.pw_uid;
-		return ret;
-	}
+	    (err == &passwd))
+		return passwd.pw_uid;
 	ent = lu_ent_new();
 	if (lu_user_lookup_name(context, sdata, ent, &error) == TRUE) {
 		ret = extract_id(ent);
@@ -284,20 +270,17 @@ convert_user_name_to_id(struct lu_context *context, const char *sdata)
 	return ret;
 }
 
-/* FIXME: gid_t */
-static long
+static gid_t
 convert_group_name_to_id(struct lu_context *context, const char *sdata)
 {
 	struct lu_ent *ent;
-	long ret = INVALID;
+	gid_t ret = LU_VALUE_INVALID_ID;
 	char buf[LINE_MAX * 4];
 	struct group *err, group;
 	struct lu_error *error = NULL;
 	if ((getgrnam_r(sdata, &group, buf, sizeof(buf), &err) == 0) &&
-	    (err == &group)) {
-		ret = group.gr_gid;
-		return ret;
-	}
+	    (err == &group))
+		return group.gr_gid;
 	ent = lu_ent_new();
 	if (lu_group_lookup_name(context, sdata, ent, &error) == TRUE) {
 		ret = extract_id(ent);
@@ -330,7 +313,7 @@ static gboolean
 run_single(struct lu_context *context,
 	   struct lu_module *module,
 	   enum lu_dispatch_id id,
-	   const char *sdata, long ldata,
+	   const char *sdata, id_t ldata,
 	   struct lu_ent *entity,
 	   gpointer *ret,
 	   struct lu_error **error)
@@ -571,79 +554,60 @@ remove_duplicate_values(GValueArray *array)
 {
 	size_t i, j;
 	GValue *ivalue, *jvalue;
-	gboolean same;
+
 	for (i = 0; i < array->n_values; i++) {
 		ivalue = g_value_array_get_nth(array, i);
 		for (j = i + 1; j < array->n_values; j++) {
 			jvalue = g_value_array_get_nth(array, j);
-			if (G_VALUE_TYPE(ivalue) == G_VALUE_TYPE(jvalue)) {
-				same = FALSE;
-				switch (G_VALUE_TYPE(ivalue)) {
-				case G_TYPE_LONG:
-					same =
-						g_value_get_long(ivalue) ==
-						g_value_get_long(jvalue);
-					break;
-				case G_TYPE_STRING:
-					same =
-						g_quark_from_string(g_value_get_string(ivalue)) ==
-						g_quark_from_string(g_value_get_string(jvalue));
-					break;
-				}
-				if (same) {
-					g_value_array_remove(array, j);
-					j--;
-					continue;
-				}
+			if (G_VALUE_TYPE(ivalue) == G_VALUE_TYPE(jvalue)
+			    && lu_values_equal(ivalue, jvalue)) {
+				g_value_array_remove(array, j);
+				j--;
 			}
 		}
 	}
 }
 
 static int
-compare_ints(gconstpointer a, gconstpointer b)
+compare_strings(gconstpointer a, gconstpointer b, gpointer data)
 {
-	return GPOINTER_TO_INT(a) - GPOINTER_TO_INT(b);
+	(void)data;
+	return strcmp(a, b);
 }
 
 static GPtrArray *
 merge_ent_array_duplicates(GPtrArray *array)
 {
 	GPtrArray *ret = NULL;
-	GTree *tree;
 	size_t i, j;
 	const char *attr;
 	struct lu_ent *current, *saved;
-	GQuark key;
 	GValueArray *values;
 	GValue *value;
 	GList *attributes, *list;
-	struct {
-		GTree *name, *id;
-	} users, groups, *which;
+	GTree *users, *groups, *tree;
 	g_return_val_if_fail(array != NULL, NULL);
 	/* We need four trees to hold the known entities. */
-	users.name = g_tree_new(compare_ints);
-	groups.name = g_tree_new(compare_ints);
-	users.id = g_tree_new(compare_ints);
-	groups.id = g_tree_new(compare_ints);
+	users = g_tree_new_full(compare_strings, NULL, g_free, NULL);
+	groups = g_tree_new_full(compare_strings, NULL, g_free, NULL);
 	/* A structure to hold the new list. */
 	ret = g_ptr_array_new();
 	/* Iterate over every entity in the incoming list. */
 	for (i = 0; i < array->len; i++) {
+		char *key;
+
 		current = g_ptr_array_index(array, i);
-		key = 0;
-		which = NULL;
+		key = NULL;
 		values = NULL;
 		tree = NULL;
 		/* Get the name of the user or group. */
 		if (current->type == lu_user) {
 			values = lu_ent_get(current, LU_USERNAME);
-			which = &users;
+			tree = users;
 		} else
 		if (current->type == lu_group) {
 			values = lu_ent_get(current, LU_GROUPNAME);
-			which = &groups;
+			tree = groups;
 		} else {
 			g_warning("Unknown entity(%zu) type: %d.\n",
 				  i, current->type);
@@ -651,24 +615,15 @@ merge_ent_array_duplicates(GPtrArray *array)
 		}
 		value = g_value_array_get_nth(values, 0);
 		/* Convert that name or number to a quark. */
-		if (G_VALUE_HOLDS_STRING(value)) {
-			key = g_quark_from_string(g_value_get_string(value));
-			tree = which->name;
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			key = g_value_get_long(value);
-			tree = which->id;
-		} else {
-			g_assert_not_reached();
-		}
-		/* Now we have a quark, and a tree.  Check if there's already
-		 * an entity with that quark in that tree. */
-		saved = g_tree_lookup(tree, GINT_TO_POINTER(key));
+		key = lu_value_strdup(value);
+		/* Check if there's already an entity with that name. */
+		saved = g_tree_lookup(tree, key);
 		/* If it's not in there, add this one. */
 		if (saved == NULL) {
-			g_tree_insert(tree, GINT_TO_POINTER(key), current);
+			g_tree_insert(tree, key, current);
 			g_ptr_array_add(ret, current);
 		} else {
+			g_free (key);
 			/* Merge all of its data into the existing one; first,
 			 * the current data. */
 			attributes = lu_ent_get_attributes_current(current);
@@ -707,10 +662,8 @@ merge_ent_array_duplicates(GPtrArray *array)
 			lu_ent_free(current);
 		}
 	}
-	g_tree_destroy(users.name);
-	g_tree_destroy(groups.name);
-	g_tree_destroy(users.id);
-	g_tree_destroy(groups.id);
+	g_tree_destroy(users);
+	g_tree_destroy(groups);
 	g_ptr_array_free(array, TRUE);
 	return ret;
 }
@@ -720,7 +673,7 @@ run_list(struct lu_context *context,
 	 GValueArray *list,
 	 gboolean (*logic_function)(gboolean a, gboolean b),
 	 enum lu_dispatch_id id,
-	 const char *sdata, long ldata,
+	 const char *sdata, id_t ldata,
 	 struct lu_ent *entity,
 	 gpointer ret,
 	 struct lu_error **firsterror)
@@ -884,7 +837,7 @@ lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
 {
 	enum lu_dispatch_id id = 0;
 	const char *sdata;
-	long ldata;
+	id_t ldata;
 	gpointer scratch = NULL;
 	g_return_val_if_fail((entity->type == lu_user) ||
 			     (entity->type == lu_group),
@@ -939,7 +892,7 @@ lu_dispatch(struct lu_context *context,
 	case group_lookup_id:
 		/* Make sure data items are right for this call. */
 		sdata = NULL;
-		g_assert(ldata != INVALID);
+		g_assert(ldata != LU_VALUE_INVALID_ID);
 		/* Run the list. */
 		if (run_list(context, context->module_names,
 			    logic_or, id,
@@ -973,7 +926,7 @@ lu_dispatch(struct lu_context *context,
 	case group_lookup_name:
 		/* Make sure data items are right for this call. */
 		g_assert(sdata != NULL);
-		ldata = INVALID;
+		ldata = LU_VALUE_INVALID_ID;
 		/* Run the list. */
 		if (run_list(context, context->module_names,
 			    logic_or, id,
@@ -1003,9 +956,10 @@ lu_dispatch(struct lu_context *context,
 	case group_add_prep:
 		/* Make sure we have both name and ID here. */
 		sdata = sdata ?: extract_name(tmp);
-		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		if (ldata == LU_VALUE_INVALID_ID)
+			ldata = extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* Run the checks and preps. */
 		if (run_list(context, context->create_module_names,
 			    logic_and, id,
@@ -1020,9 +974,10 @@ lu_dispatch(struct lu_context *context,
 	case group_add:
 		/* Make sure we have both name and ID here. */
 		sdata = sdata ?: extract_name(tmp);
-		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		if (ldata == LU_VALUE_INVALID_ID)
+			ldata = extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* Add the account. */
 		if (run_list(context, context->create_module_names,
 			    logic_and, id,
@@ -1039,9 +994,10 @@ lu_dispatch(struct lu_context *context,
 		/* FIXME: sdata, ldata contain new values (and are not even
 		   used). */
 		sdata = sdata ?: extract_name(tmp);
-		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		if (ldata == LU_VALUE_INVALID_ID)
+			ldata = extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* Make the changes. */
 		g_assert(entity != NULL);
 		if (run_list(context, entity->modules,
@@ -1060,9 +1016,10 @@ lu_dispatch(struct lu_context *context,
 	case group_unlock:
 		/* Make sure we have both name and ID here. */
 		sdata = sdata ?: extract_name(tmp);
-		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		if (ldata == LU_VALUE_INVALID_ID)
+			ldata = extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* Make the changes. */
 		g_assert(entity != NULL);
 		if (run_list(context, entity->modules,
@@ -1094,9 +1051,10 @@ lu_dispatch(struct lu_context *context,
 	case group_is_locked:
 		/* Make sure we have both name and ID here. */
 		sdata = sdata ?: extract_name(tmp);
-		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
+		if (ldata == LU_VALUE_INVALID_ID)
+			ldata = extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* Run the checks. */
 		g_assert(entity != NULL);
 		if (run_list(context, entity->modules,
@@ -1118,7 +1076,7 @@ lu_dispatch(struct lu_context *context,
 		} else {
 			g_assert_not_reached();
 		}
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* fall through */
 	case users_enumerate:
 	case groups_enumerate:
@@ -1142,7 +1100,7 @@ lu_dispatch(struct lu_context *context,
 		} else {
 			g_assert_not_reached();
 		}
-		g_return_val_if_fail(ldata != INVALID, FALSE);
+		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
 		/* fall through */
 	case users_enumerate_full:
 	case groups_enumerate_full:
@@ -1263,9 +1221,9 @@ lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
 
-	if (lu_dispatch(context, user_add_prep, NULL, INVALID,
+	if (lu_dispatch(context, user_add_prep, NULL, LU_VALUE_INVALID_ID,
 			ent, NULL, error)) {
-		ret = lu_dispatch(context, user_add, NULL, INVALID,
+		ret = lu_dispatch(context, user_add, NULL, LU_VALUE_INVALID_ID,
 				  ent, NULL, error) &&
 		      lu_refresh_user(context, ent, error);
 	}
@@ -1282,10 +1240,10 @@ lu_group_add(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
-	if (lu_dispatch(context, group_add_prep, NULL, INVALID,
+	if (lu_dispatch(context, group_add_prep, NULL, LU_VALUE_INVALID_ID,
 			ent, NULL, error)) {
-		ret = lu_dispatch(context, group_add, NULL, INVALID,
-				  ent, NULL, error) &&
+		ret = lu_dispatch(context, group_add, NULL,
+				  LU_VALUE_INVALID_ID, ent, NULL, error) &&
 		      lu_refresh_group(context, ent, error);
 	}
 	return ret;
@@ -1298,7 +1256,8 @@ lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-	return lu_dispatch(context, user_mod, NULL, INVALID, ent, NULL, error) &&
+	return lu_dispatch(context, user_mod, NULL, LU_VALUE_INVALID_ID, ent,
+			   NULL, error) &&
 	       lu_refresh_user(context, ent, error);
 }
 
@@ -1309,7 +1268,8 @@ lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
-	return lu_dispatch(context, group_mod, NULL, INVALID, ent, NULL, error) &&
+	return lu_dispatch(context, group_mod, NULL, LU_VALUE_INVALID_ID, ent,
+			   NULL, error) &&
 	       lu_refresh_group(context, ent, error);
 }
 
@@ -1320,7 +1280,8 @@ lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-	return lu_dispatch(context, user_del, NULL, INVALID, ent, NULL, error);
+	return lu_dispatch(context, user_del, NULL, LU_VALUE_INVALID_ID, ent,
+			   NULL, error);
 }
 
 gboolean
@@ -1330,7 +1291,8 @@ lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
-	return lu_dispatch(context, group_del, NULL, INVALID, ent, NULL, error);
+	return lu_dispatch(context, group_del, NULL, LU_VALUE_INVALID_ID, ent,
+			   NULL, error);
 }
 
 gboolean
@@ -1340,7 +1302,8 @@ lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-	return lu_dispatch(context, user_lock, NULL, INVALID, ent, NULL, error) &&
+	return lu_dispatch(context, user_lock, NULL, LU_VALUE_INVALID_ID, ent,
+			   NULL, error) &&
 	       lu_refresh_user(context, ent, error);
 }
 
@@ -1351,7 +1314,7 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-	return lu_dispatch(context, user_unlock, NULL, INVALID,
+	return lu_dispatch(context, user_unlock, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error) &&
 	       lu_refresh_user(context, ent, error);
 }
@@ -1365,7 +1328,7 @@ lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
 
-	return lu_dispatch(context, user_is_locked, NULL, INVALID,
+	return lu_dispatch(context, user_is_locked, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error);
 }
 
@@ -1386,7 +1349,7 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 	} else {
 		tmp = g_strdup(password);
 	}
-	ret = lu_dispatch(context, user_setpass, tmp, INVALID,
+	ret = lu_dispatch(context, user_setpass, tmp, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	g_free(tmp);
 	if (ret) {
@@ -1415,7 +1378,7 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
 
-	ret = lu_dispatch(context, user_removepass, NULL, INVALID,
+	ret = lu_dispatch(context, user_removepass, NULL, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	if (ret) {
 		ret = lu_refresh_user(context, ent, error);
@@ -1442,7 +1405,7 @@ lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
-	return lu_dispatch(context, group_lock, NULL, INVALID,
+	return lu_dispatch(context, group_lock, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error) &&
 	       lu_refresh_group(context, ent, error);
 }
@@ -1456,7 +1419,7 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
-	return lu_dispatch(context, group_unlock, NULL, INVALID,
+	return lu_dispatch(context, group_unlock, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error) &&
 	       lu_refresh_group(context, ent, error);
 }
@@ -1470,7 +1433,7 @@ lu_group_islocked(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
-	return lu_dispatch(context, group_is_locked, NULL, INVALID,
+	return lu_dispatch(context, group_is_locked, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error);
 }
 
@@ -1491,7 +1454,7 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	} else {
 		tmp = g_strdup(password);
 	}
-	ret = lu_dispatch(context, group_setpass, tmp, INVALID,
+	ret = lu_dispatch(context, group_setpass, tmp, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	g_free(tmp);
 	if (ret) {
@@ -1520,7 +1483,7 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
-	ret = lu_dispatch(context, group_removepass, NULL, INVALID,
+	ret = lu_dispatch(context, group_removepass, NULL, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	if (ret) {
 		ret = lu_refresh_group(context, ent, error);
@@ -1544,7 +1507,7 @@ lu_users_enumerate(struct lu_context * context, const char *pattern,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate, pattern, INVALID,
+	lu_dispatch(context, users_enumerate, pattern, LU_VALUE_INVALID_ID,
 		    NULL, &ret, error);
 	return ret;
 }
@@ -1555,7 +1518,7 @@ lu_groups_enumerate(struct lu_context * context, const char *pattern,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate, pattern, INVALID,
+	lu_dispatch(context, groups_enumerate, pattern, LU_VALUE_INVALID_ID,
 		    NULL, &ret, error);
 	return ret;
 }
@@ -1566,8 +1529,8 @@ lu_users_enumerate_by_group(struct lu_context * context, const char *group,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group, group, INVALID,
-		    NULL, &ret, error);
+	lu_dispatch(context, users_enumerate_by_group, group,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
 
@@ -1577,8 +1540,8 @@ lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 {
 	GValueArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user, user, INVALID,
-		    NULL, &ret, error);
+	lu_dispatch(context, groups_enumerate_by_user, user,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
 
@@ -1588,8 +1551,8 @@ lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_full, pattern, INVALID,
-		    NULL, &ret, error);
+	lu_dispatch(context, users_enumerate_full, pattern,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
 
@@ -1599,8 +1562,8 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_full, pattern, INVALID,
-		    NULL, &ret, error);
+	lu_dispatch(context, groups_enumerate_full, pattern,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
 
@@ -1612,8 +1575,8 @@ lu_users_enumerate_by_group_full(struct lu_context * context,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group_full, pattern, INVALID,
-		    NULL, (gpointer*) &ret, error);
+	lu_dispatch(context, users_enumerate_by_group_full, pattern,
+		    LU_VALUE_INVALID_ID, NULL, (gpointer*) &ret, error);
 	return ret;
 }
 
@@ -1624,21 +1587,21 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user_full, pattern, INVALID,
-		    NULL, (gpointer*) &ret, error);
+	lu_dispatch(context, groups_enumerate_by_user_full, pattern,
+		    LU_VALUE_INVALID_ID, NULL, (gpointer*) &ret, error);
 	return ret;
 }
 #endif
 
-glong
+id_t
 lu_get_first_unused_id(struct lu_context *ctx,
 		       enum lu_entity_type type,
-		       glong id)
+		       id_t id)
 {
 	struct lu_ent *ent;
 	char buf[LINE_MAX * 4];
 
-	g_return_val_if_fail(ctx != NULL, -1);
+	g_return_val_if_fail(ctx != NULL, (id_t)-1);
 
 	ent = lu_ent_new();
 	if (type == lu_user) {
@@ -1665,7 +1628,7 @@ lu_get_first_unused_id(struct lu_context *ctx,
 				lu_error_free(&error);
 			}
 			break;
-		} while (id != 0); /* FIXME: not (id_t)-1 */
+		} while (id != (id_t)-1);
 	} else if (type == lu_group) {
 		struct group grp, *err;
 		struct lu_error *error = NULL;
@@ -1689,8 +1652,10 @@ lu_get_first_unused_id(struct lu_context *ctx,
 				lu_error_free(&error);
 			}
 			break;
-		} while (id != 0);
+		} while (id != (id_t)-1);
 	}
+	if (id == (id_t)-1)
+		id = 0;
 	lu_ent_free(ent);
 	return id;
 }
@@ -1704,7 +1669,7 @@ lu_default_int(struct lu_context *context, const char *name,
 	char *cfgkey, *tmp, *end;
 	char buf[LINE_MAX * 4];
 	const char *top, *idkey, *idkeystring, *val, *key;
-	gulong id = DEFAULT_ID;
+	id_t id = DEFAULT_ID;
 	struct group grp, *err;
 	struct lu_error *error = NULL;
 	gpointer macguffin = NULL;
@@ -1731,12 +1696,13 @@ lu_default_int(struct lu_context *context, const char *name,
 		lu_ent_add(ent, LU_USERNAME, &value);
 		/* Additionally, pick a default default group. */
 		g_value_unset(&value);
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
 		/* FIXME: handle arbitrarily long lines. */
 		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
-		    (err == &grp)) {
-			g_value_set_long(&value, grp.gr_gid);
+		    (err == &grp))
+			lu_value_init_set_id(&value, grp.gr_gid);
+		else {
+			g_value_init(&value, G_TYPE_LONG);
+			g_value_set_long(&value, -1);
 		}
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &value);
@@ -1772,10 +1738,15 @@ lu_default_int(struct lu_context *context, const char *name,
 			g_free(cfgkey);
 		}
 		if (val != NULL) {
-			id = strtol((char *) val, &tmp, 10);
-			if (*tmp != '\0') {
+			intmax_t imax;
+			
+			errno = 0;
+			imax = strtoimax(val, &tmp, 10);
+			if (errno == 0 && *tmp == 0 && tmp != val
+			    && (id_t)imax == imax)
+				id = imax;
+			else
 				id = DEFAULT_ID;
-			}
 		}
 	}
 
@@ -1783,14 +1754,15 @@ lu_default_int(struct lu_context *context, const char *name,
 	id = lu_get_first_unused_id(context, type, id);
 
 	/* Add this ID to the entity. */
-	g_value_init(&value, G_TYPE_LONG);
-	g_value_set_long(&value, id);
+	lu_value_init_set_id(&value, id);
 	lu_ent_add(ent, idkey, &value);
 	g_value_unset(&value);
 
 	/* Now iterate to find the rest. */
 	keys = lu_cfg_read_keys(context, top);
 	for (p = keys; p && p->data; p = g_list_next(p)) {
+		intmax_t imax;
+
 		struct {
 			const char *realkey, *configkey;
 		} keymap[] = {
@@ -1830,13 +1802,12 @@ lu_default_int(struct lu_context *context, const char *name,
 		};
 		struct {
 			const char *format;
-			GType type;
 			const char *value;
 		} subst[] = {
-			{"%n", G_TYPE_STRING, name},
-			{"%d", G_TYPE_STRING,
-			 lu_util_shadow_current_date(context->scache)},
-			{"%u", G_TYPE_LONG, GINT_TO_POINTER(id)},
+			{"%n", name},
+			{"%d", lu_util_shadow_current_date(context->scache)},
+			/* Must be index 2, see below! */
+			{"%u", NULL} /* value set later */
 		};
 
 		/* Possibly map the key to an internal name. */
@@ -1858,54 +1829,46 @@ lu_default_int(struct lu_context *context, const char *name,
 		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
 		g_free(cfgkey);
-		if (val == NULL) {
-			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
-			val = lu_cfg_read_single(context, cfgkey, NULL);
-			g_free(cfgkey);
-		}
 
 		/* Create a copy of the value to mess with. */
 		g_assert(val != NULL);
 		tmp = g_strdup(val);
 
+		subst[2].value = g_strdup_printf("%jd", (intmax_t)id);
 		/* Perform substitutions. */
 		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
 			while (strstr(tmp, subst[i].format) != NULL) {
-				char *pre, *post, *tmp2, *substval, *where;
-				substval = NULL;
-				if (subst[i].type == G_TYPE_STRING) {
-					substval = g_strdup(subst[i].value);
-				} else
-				if (subst[i].type == G_TYPE_LONG) {
-					substval = g_strdup_printf("%d",
-								   GPOINTER_TO_INT(subst[i].value));
-				} else {
-					g_assert_not_reached();
-				}
+				char *pre, *post, *tmp2, *where;
+
 				where = strstr(tmp, subst[i].format);
 				pre = g_strndup(tmp, where - tmp);
 				post = g_strdup(where +
 						strlen(subst[i].format));
 				tmp2 = g_strconcat(pre,
-						   substval,
+						   subst[i].value,
 						   post,
 						   NULL);
-				g_free(substval);
 				g_free(pre);
 				g_free(post);
 				g_free(tmp);
 				tmp = tmp2;
 			}
 		}
+		g_free((char *)subst[2].value);
 
 		/* Check if we can represent this value as a number. */
-		strtol(tmp, &end, 0);
-		if (*end != '\0') {
+		errno = 0;
+		imax = strtoimax(tmp, &end, 10);
+		if (errno == 0 && *end == 0 && end != tmp
+		    && (long)imax == imax) {
+			g_value_init(&value, G_TYPE_LONG);
+			g_value_set_long(&value, imax);
+		} else if (errno == 0 && *end == 0 && end != tmp
+			   && (id_t)imax == imax)
+			lu_value_init_set_id(&value, imax);
+		else {
 			g_value_init(&value, G_TYPE_STRING);
 			g_value_set_string(&value, tmp);
-		} else {
-			g_value_init(&value, G_TYPE_LONG);
-			g_value_set_long(&value, strtol(tmp, &end, 0));
 		}
 		g_free(tmp);
 

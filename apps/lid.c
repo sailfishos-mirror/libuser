@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001,2002 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -129,14 +129,7 @@ main(int argc, const char **argv)
 					if (attrs != NULL) {
 						value = g_value_array_get_nth(attrs,
 									      0);
-						if (G_VALUE_HOLDS_STRING(value)) {
-							tmp = g_value_dup_string(value);
-						} else
-						if (G_VALUE_HOLDS_LONG(value)) {
-							tmp = g_strdup_printf("%ld", g_value_get_long(value));
-						} else {
-							g_assert_not_reached();
-						}
+						tmp = lu_value_strdup(value);
 						g_print(" %s(uid=%s)\n",
 							name, tmp);
 						g_free(tmp);
@@ -170,14 +163,7 @@ main(int argc, const char **argv)
 					if (attrs != NULL) {
 						value = g_value_array_get_nth(attrs,
 									      0);
-						if (G_VALUE_HOLDS_STRING(value)) {
-							tmp = g_value_dup_string(value);
-						} else
-						if (G_VALUE_HOLDS_LONG(value)) {
-							tmp = g_strdup_printf("%ld", g_value_get_long(value));
-						} else {
-							g_assert_not_reached();
-						}
+						tmp = lu_value_strdup(value);
 						g_print(" %s(gid=%s)\n",
 							name,
 						        tmp);

@@ -24,7 +24,6 @@
 #include <sys/types.h>
 #include "../lib/user.h"
 
-#define INVALID ((id_t)(-0x80000000)) /* FIXME: might be a valid id_t value */
 #ifndef _
 #define _(String) gettext(String)
 #endif

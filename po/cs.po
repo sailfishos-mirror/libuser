@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-13 23:15+0100\n"
+"POT-Creation-Date: 2004-11-14 00:53+0100\n"
 "PO-Revision-Date: 2004-11-13 23:19+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -78,33 +78,33 @@ msgid "User mismatch.\n"
 msgstr "Uživatel se neshoduje.\n"
 
 #: apps/lchage.c:140 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
-#: apps/luserdel.c:66 apps/lusermod.c:91
+#: apps/luserdel.c:66 apps/lusermod.c:92
 msgid "[OPTION...] user"
 msgstr "[VOLBY...] uživatel"
 
 #: apps/lchage.c:143 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:89 apps/lid.c:71 apps/lnewusers.c:78
-#: apps/lpasswd.c:73 apps/luseradd.c:93 apps/luserdel.c:69 apps/lusermod.c:94
+#: apps/lpasswd.c:73 apps/luseradd.c:93 apps/luserdel.c:69 apps/lusermod.c:95
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Chyba při zpracovávání argumentů: `%s'.\n"
 
 #: apps/lchage.c:152 apps/lpasswd.c:89 apps/luseradd.c:108 apps/luserdel.c:77
-#: apps/lusermod.c:105
+#: apps/lusermod.c:106
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Nebylo zadáno jméno uživatele.\n"
 
 #: apps/lchage.c:162 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:122 apps/lid.c:111 apps/lnewusers.c:89
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:121 apps/lid.c:111 apps/lnewusers.c:89
 #: apps/lpasswd.c:99 apps/luseradd.c:133 apps/luserdel.c:86
-#: apps/lusermod.c:146 samples/enum.c:64 samples/testuser.c:73
+#: apps/lusermod.c:147 samples/enum.c:64 samples/testuser.c:73
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Chyba při inicializaci %s: %s\n"
 
 #: apps/lchage.c:171 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
-#: apps/luserdel.c:94 apps/lusermod.c:160
+#: apps/luserdel.c:94 apps/lusermod.c:161
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Uživatel %s neexistuje.\n"
@@ -251,7 +251,7 @@ msgstr "[VOLBY...] skupina"
 msgid "No group name specified.\n"
 msgstr "Nebylo zadáno jméno skupiny.\n"
 
-#: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:117
+#: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Neplatné ID skupiny %s\n"
@@ -261,7 +261,7 @@ msgstr "Neplatné ID skupiny %s\n"
 msgid "Group creation failed: %s\n"
 msgstr "Chyba při vytváření skupiny: %s\n"
 
-#: apps/lgroupdel.c:87 apps/lgroupmod.c:135 apps/lpasswd.c:152
+#: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Skupina %s neexistuje.\n"
@@ -271,27 +271,27 @@ msgstr "Skupina %s neexistuje.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Skupinu %s nelze odstranit: %s\n"
 
-#: apps/lgroupmod.c:128 apps/lusermod.c:153
+#: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Použito zároveň -L a -U.\n"
 
-#: apps/lgroupmod.c:239 apps/lgroupmod.c:248
+#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Nemohu nastavit heslo skupinu %s: %s\n"
 
-#: apps/lgroupmod.c:257
+#: apps/lgroupmod.c:256
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Skupinu %s nelze uzamknout: %s\n"
 
-#: apps/lgroupmod.c:266
+#: apps/lgroupmod.c:265
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Skupinu %s nelze odemknout: %s\n"
 
-#: apps/lgroupmod.c:273
+#: apps/lgroupmod.c:272
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Skupinu %s nelze změnit: %s\n"
@@ -325,7 +325,7 @@ msgstr "Chyba při otevírání '%s': %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Chyba při vytváření účtu pro '%s': nesprávně formátovaný řádek.\n"
 
-#: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:132
+#: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Neplatné ID uživatele %s\n"
@@ -452,42 +452,42 @@ msgstr "%s nemá domácí adresář.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Chyba při odstraňování %s: %s.\n"
 
-#: apps/lusermod.c:228 apps/lusermod.c:241
+#: apps/lusermod.c:229 apps/lusermod.c:242
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Chyba při nastavování hesla pro uživatele %s: %s.\n"
 
-#: apps/lusermod.c:251
+#: apps/lusermod.c:252
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Uživatele %s nelze uzamknout: %s.\n"
 
-#: apps/lusermod.c:259
+#: apps/lusermod.c:260
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Uživatele %s nelze odemknout: %s.\n"
 
-#: apps/lusermod.c:267
+#: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Uživatele %s nelze změnit: %s.\n"
 
-#: apps/lusermod.c:322
+#: apps/lusermod.c:323
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Skupinu %s nelze změnit: %s.\n"
 
-#: apps/lusermod.c:332
+#: apps/lusermod.c:333
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Domácí adresář pro %s neexistuje.\n"
 
-#: apps/lusermod.c:337
+#: apps/lusermod.c:338
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nový domácí adresář pro %s nebyl vytvořen.\n"
 
-#: apps/lusermod.c:343
+#: apps/lusermod.c:344
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Chyba při přesunu %s do %s: %s.\n"
@@ -711,7 +711,7 @@ msgstr "nemohu zapsat do `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "objekt entita nemá atribut %s"
 
-#: modules/files.c:1863 modules/ldap.c:1607 modules/ldap.c:1861
+#: modules/files.c:1863 modules/ldap.c:1608 modules/ldap.c:1862
 msgid "error encrypting password"
 msgstr "chyba při šifrování hesla"
 
@@ -811,8 +811,8 @@ msgstr "nemohu prohledávat LDAP server"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP server asi nemá kořenový DSE"
 
-#: modules/ldap.c:626 modules/ldap.c:1384 modules/ldap.c:1522
-#: modules/ldap.c:1583 modules/ldap.c:1698 modules/ldap.c:1794
+#: modules/ldap.c:626 modules/ldap.c:1385 modules/ldap.c:1523
+#: modules/ldap.c:1584 modules/ldap.c:1699 modules/ldap.c:1795
 msgid "error mapping name to LDAP distinguished name"
 msgstr "chyba při mapování jména na jméno v LDAP"
 
@@ -820,86 +820,86 @@ msgstr "chyba při mapování jména na jméno v LDAP"
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "chyba při mapování jména za základní LDAP jméno"
 
-#: modules/ldap.c:1361
+#: modules/ldap.c:1362
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "objekt uživatel nemá atribut %s"
 
-#: modules/ldap.c:1370
+#: modules/ldap.c:1371
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "objekt uživatel byl vytvořen bez '%s'"
 
-#: modules/ldap.c:1395
+#: modules/ldap.c:1396
 msgid "could not convert internal data to LDAPMods"
 msgstr "nemohu převést interní data na LDAPMods"
 
-#: modules/ldap.c:1408
+#: modules/ldap.c:1409
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "chyba při tvorbě LDAP položky: %s"
 
-#: modules/ldap.c:1434 modules/ldap.c:1654
+#: modules/ldap.c:1435 modules/ldap.c:1655
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "chyba při modifikaci LDAP položky: %s"
 
-#: modules/ldap.c:1461
+#: modules/ldap.c:1462
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "chyba při přejmenovávání LDAP položky: %s"
 
-#: modules/ldap.c:1510
+#: modules/ldap.c:1511
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objekt nemá atribut %s"
 
-#: modules/ldap.c:1534
+#: modules/ldap.c:1535
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "chyba při odstraňování LDAP položky: %s"
 
-#: modules/ldap.c:1571 modules/ldap.c:1593 modules/ldap.c:1685
-#: modules/ldap.c:1783
+#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1686
+#: modules/ldap.c:1784
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objekt nemá atribut %s"
 
-#: modules/ldap.c:1718
+#: modules/ldap.c:1719
 msgid "no such object in LDAP directory"
 msgstr "není objekt v LDAP adresáři"
 
-#: modules/ldap.c:1730
+#: modules/ldap.c:1731
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "atribut '%s' nenalezen"
 
-#: modules/ldap.c:1892
+#: modules/ldap.c:1893
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "chyba při nastavování hesla v LDAP adresáři pro %s: %s"
 
-#: modules/ldap.c:2444
+#: modules/ldap.c:2445
 msgid "LDAP Server Name"
 msgstr "Jméno LDAP serveru"
 
-#: modules/ldap.c:2450
+#: modules/ldap.c:2451
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2456
+#: modules/ldap.c:2457
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2463
+#: modules/ldap.c:2464
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind heslo"
 
-#: modules/ldap.c:2469
+#: modules/ldap.c:2470
 msgid "LDAP SASL User"
 msgstr "LDAP SASL uživatel"
 
-#: modules/ldap.c:2476
+#: modules/ldap.c:2477
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL uživatel pro autentizaci"
 

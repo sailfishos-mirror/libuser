@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -23,6 +23,7 @@
 #endif
 #include <libintl.h>
 #include <locale.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <popt.h>
@@ -110,24 +111,19 @@ main(int argc, const char **argv)
 			return 4;
 		} else {
 			value = g_value_array_get_nth(values, 0);
-			gid = -1;
-			if (G_VALUE_HOLDS_LONG(value)) {
-				gid = g_value_get_long(value);
-			} else
-			if (G_VALUE_HOLDS_STRING(value)) {
-				gid = atol(g_value_get_string(value));
-			} else {
-				g_assert_not_reached();
-			}
+			gid = lu_value_get_id(value);
+			g_assert(gid != LU_VALUE_INVALID_ID);
 			if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE){
-				fprintf(stderr, _("No group with GID %ld "
-					"exists, not removing.\n"), (long) gid);
+				fprintf(stderr, _("No group with GID %jd "
+					"exists, not removing.\n"),
+					(intmax_t)gid);
 				return 5;
 			}
 			values = lu_ent_get(ent, LU_GROUPNAME);
 			if (values == NULL) {
-				fprintf(stderr, _("Group with GID %ld did not "
-					"have a group name.\n"), (long) gid);
+				fprintf(stderr, _("Group with GID %jd did not "
+					"have a group name.\n"),
+					(intmax_t)gid);
 				return 6;
 			}
 			value = g_value_array_get_nth(values, 0);

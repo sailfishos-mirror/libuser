@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <inttypes.h>
 #include <limits.h>
 #include <pwd.h>
 #include <stdio.h>
@@ -215,7 +216,7 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 
 	/* Try to start TLS. */
 	ret = ldap_start_tls_s(ldap, &server, &client);
-	/* Note that TLS not required for ldap:// URLs (unlike simple server
+	/* Note that TLS is not required for ldap:// URLs (unlike simple server
 	   names). */
 	if (ret != LDAP_SUCCESS && start_tls) {
 		lu_error_new(error, lu_error_init,
@@ -455,36 +456,6 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 
 	return ldap;
 #endif
-}
-
-/* Create a string representation of the given value, which must be freed. */
-char *
-value_as_string(GValue *value)
-{
-	if (G_VALUE_HOLDS_STRING(value)) {
-		return g_value_dup_string(value);
-	} else
-	if (G_VALUE_HOLDS_LONG(value)) {
-		return  g_strdup_printf("%ld", g_value_get_long(value));
-	} else {
-		g_assert_not_reached();
-	}
-	return NULL;
-}
-
-/* Compare two values, which had better be of the same type. */
-int
-value_compare(GValue *aval, GValue *bval)
-{
-	if (G_VALUE_HOLDS_LONG(aval) && G_VALUE_HOLDS_LONG(bval)) {
-		return g_value_get_long(aval) - g_value_get_long(bval);
-	} else if (G_VALUE_HOLDS_STRING(aval) && G_VALUE_HOLDS_STRING(bval)) {
-		return strcmp(g_value_get_string(aval),
-			      g_value_get_string(bval));
-	} else {
-		return -1;
-	}
-	return 0;
 }
 
 /* Map an attribute name from an internal name to an LDAP atribute name. */
@@ -754,18 +725,28 @@ lu_ldap_lookup(struct lu_module *module,
 			if (values) {
 				lu_ent_clear_current(ent, attr);
 				for (j = 0; values[j]; j++) {
+					intmax_t imax;
+
 #ifdef DEBUG
 					g_print("Got `%s' = `%s'.\n",
 						attr, values[j]);
 #endif
 					/* Check if the value is numeric. */
-					strtol(values[j], &p, 0);
-					if (*p == '\0') {
+					errno = 0;
+					imax = strtoimax(values[j], &p, 10);
+					if (errno == 0 && *p == '\0'
+					    && p != values[j]
+					    && (long)imax == imax) {
 						/* If it's a number, use a
 						 * long. */
 						g_value_init(&value, G_TYPE_LONG);
-						g_value_set_long(&value, atol(values[j]));
-					} else {
+						g_value_set_long(&value, imax);
+					} else if (errno == 0 && *p == '\0'
+						   && p != values[j]
+						   && (id_t)imax == imax)
+						lu_value_init_set_id(&value,
+								     imax);
+					else {
 						/* Otherwise it's a string. */
 						g_value_init(&value, G_TYPE_STRING);
 						g_value_set_string(&value, values[j]);
@@ -820,7 +801,7 @@ lu_ldap_user_lookup_id(struct lu_module *module, uid_t uid,
 	gchar *uid_string = NULL;
 
 	LU_ERROR_CHECK(error);
-	uid_string = g_strdup_printf("%ld", (long)uid);
+	uid_string = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = lu_ldap_lookup(module, map_to_ldap(ent->cache, LU_UIDNUMBER),
 			     uid_string, ent, NULL, "userBranch", USERBRANCH,
 			     "("OBJECTCLASS"="POSIXACCOUNT")",
@@ -853,7 +834,8 @@ lu_ldap_group_lookup_id(struct lu_module *module, gid_t gid,
 	gchar *gid_string = NULL;
 
 	LU_ERROR_CHECK(error);
-	gid_string = g_strdup_printf("%ld", (long)gid);
+
+	gid_string = g_strdup_printf("%jd", (intmax_t)gid);
 	ret = lu_ldap_lookup(module, map_to_ldap(ent->cache, LU_GIDNUMBER),
 			     gid_string, ent, NULL,
 			     "groupBranch", GROUPBRANCH,
@@ -882,9 +864,9 @@ arrays_equal(GValueArray *a, GValueArray *b)
 		aval = g_value_array_get_nth(a, i);
 		for (j = 0; j < b->n_values; j++) {
 			bval = g_value_array_get_nth(b, j);
-			if (value_compare(aval, bval) == 0) {
+			if (G_VALUE_TYPE(aval) == G_VALUE_TYPE(bval)
+			    && lu_values_equal(aval, bval))
 				break;
-			}
 		}
 		if (j >= b->n_values) {
 			return FALSE;
@@ -894,9 +876,9 @@ arrays_equal(GValueArray *a, GValueArray *b)
 		bval = g_value_array_get_nth(b, j);
 		for (i = 0; i < a->n_values; i++) {
 			aval = g_value_array_get_nth(a, i);
-			if (value_compare(aval, bval) == 0) {
+			if (G_VALUE_TYPE(aval) == G_VALUE_TYPE(bval)
+			    && lu_values_equal(aval, bval))
 				break;
-			}
 		}
 		if (i >= a->n_values) {
 			return FALSE;
@@ -1069,7 +1051,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 					    * sizeof(*mod->mod_values));
 			for (i = 0; i < vals->n_values; i++) {
 				value = g_value_array_get_nth(vals, i);
-				mod->mod_values[i] = value_as_string(value);
+				mod->mod_values[i] = lu_value_strdup(value);
 			}
 			mods[mod_count++] = mod;
 		}
@@ -1100,7 +1082,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 				char *p;
 
 				value = g_value_array_get_nth(vals, 0);
-				cn = value_as_string(value);
+				cn = lu_value_strdup(value);
 				p = strchr(cn, ',');
 				if (p != NULL)
 					*p = 0;
@@ -1109,7 +1091,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 				/* Guaranteed by lu_ldap_set() */
 				g_assert (vals != NULL);
 				value = g_value_array_get_nth(vals, 0);
-				cn = value_as_string(value);
+				cn = lu_value_strdup(value);
 			}
 			mod = g_malloc0(sizeof(*mod));
 			mod->mod_op = LDAP_MOD_ADD;
@@ -1181,9 +1163,10 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 				for (k = 0; k < pending->n_values; k++) {
 					pvalue = g_value_array_get_nth(pending,
 								       k);
-					if (value_compare(cvalue, pvalue) == 0){
+					if (G_VALUE_TYPE(cvalue)
+					    == G_VALUE_TYPE(pvalue)
+					    && lu_values_equal(cvalue, pvalue))
 						break;
-					}
 				}
 				/* If not found, it's a mod. */
 				if (k >= pending->n_values)
@@ -1202,7 +1185,7 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 				for (j = 0; j < deletions->n_values; j++) {
 					value = g_value_array_get_nth(deletions, j);
 					mod->mod_values[j]
-						= value_as_string(value);
+						= lu_value_strdup(value);
 				}
 				mods[mod_count++] = mod;
 			}
@@ -1214,9 +1197,10 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 				for (k = 0; k < current->n_values; k++) {
 					cvalue = g_value_array_get_nth(current,
 								       k);
-					if (value_compare(cvalue, pvalue) == 0){
+					if (G_VALUE_TYPE(cvalue)
+					    == G_VALUE_TYPE(pvalue)
+					    && lu_values_equal(cvalue, pvalue))
 						break;
-					}
 				}
 				/* If not found, it's a mod. */
 				if (k >= current->n_values)
@@ -1235,7 +1219,7 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 				for (j = 0; j < additions->n_values; j++) {
 					value = g_value_array_get_nth(additions, j);
 					mod->mod_values[j]
-						= value_as_string(value);
+						= lu_value_strdup(value);
 				}
 				mods[mod_count++] = mod;
 			}
@@ -1391,7 +1375,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 
 	/* Get the object's current object name. */
 	value = g_value_array_get_nth(add ? name : old_name, 0);
-	name_string = value_as_string(value);
+	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
 			       def);
 	g_free(name_string);
@@ -1462,7 +1446,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			ret = FALSE;
 			/* Format the name to rename it to. */
 			value = g_value_array_get_nth(name, 0);
-			tmp1 = value_as_string(value);
+			tmp1 = lu_value_strdup(value);
 			tmp2 = g_strconcat(map_to_ldap(module->scache,
 						       namingAttr), "=",
 					   tmp1, NULL);
@@ -1530,7 +1514,7 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
-	name_string = value_as_string(value);
+	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
 			       def);
 	g_free(name_string);
@@ -1591,7 +1575,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
-	name_string = value_as_string(value);
+	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
 			       def);
 	g_free(name_string);
@@ -1612,7 +1596,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 		return FALSE;
 	}
 	value = g_value_array_get_nth(password, 0);
-	oldpassword = value_as_string(value);
+	oldpassword = lu_value_strdup(value);
 
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
@@ -1705,7 +1689,7 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
-	name_string = value_as_string(value);
+	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
 			       def);
 	g_free(name_string);
@@ -1803,7 +1787,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
-	name_string = value_as_string(value);
+	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
 			       def);
 	if (dn == NULL) {
@@ -2273,7 +2257,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 	size_t i;
 
 	LU_ERROR_CHECK(error);
-	grp = g_strdup_printf("%ld", (long)gid);
+	grp = g_strdup_printf("%jd", (intmax_t)gid);
 
 	primaries = lu_ldap_enumerate(module,
 				      map_to_ldap(module->scache, LU_GIDNUMBER),
@@ -2329,8 +2313,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	GValueArray *primaries = NULL, *secondaries = NULL, *values, *gids;
 	GValue *value;
 	size_t i, j;
-	long gid;
-	char *p;
+	gid_t gid;
 	struct lu_ent *ent = NULL;
 
 	(void)uid;
@@ -2348,15 +2331,8 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	/* For each GID, look up the group.  Which has this GID. */
 	for (i = 0; (gids != NULL) && (i < gids->n_values); i++) {
 		value = g_value_array_get_nth(gids, i);
-		gid = -1;
-		if (G_VALUE_HOLDS_STRING(value)) {
-			gid = strtol(g_value_get_string(value), &p, 0);
-			if (*p != 0)
-				continue;
-		} else if (G_VALUE_HOLDS_LONG(value))
-			gid = g_value_get_long(value);
-		else
-			g_assert_not_reached();
+		gid = lu_value_get_id(value);
+		g_assert (gid != LU_VALUE_INVALID_ID);
 		ent = lu_ent_new();
 		if (lu_group_lookup_id(module->lu_context, gid,
 				       ent, error)) {

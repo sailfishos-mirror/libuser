@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,10 +39,10 @@ main(int argc, const char **argv)
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gid = NULL, *addAdmins = NULL, *remAdmins = NULL,
 		   *addMembers = NULL, *remMembers = NULL, *group = NULL,
-		   *tmp = NULL;
+		   *tmp = NULL, *gid_number_str = NULL;
 	char **admins = NULL, **members = NULL;
-	long gidNumber = INVALID;
-	gid_t oldGidNumber = INVALID;
+	gid_t gidNumber = LU_VALUE_INVALID_ID;
+	gid_t oldGidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
@@ -55,7 +57,7 @@ main(int argc, const char **argv)
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
+		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
 		 "gid to change group to", "NUM"},
 		{"name", 'n', POPT_ARG_STRING, &gid, 0,
 		 "change group to have given name", "NAME"},
@@ -96,7 +98,22 @@ main(int argc, const char **argv)
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
+	if (gid_number_str != NULL) {
+		intmax_t val;
+		char *p;
 
+		errno = 0;
+		val = strtoimax(gid_number_str, &p, 10);
+		if (errno != 0 || *p != 0 || p == gid_number_str
+		    || (gid_t)val != val) {
+			fprintf(stderr, _("Invalid group ID %s\n"),
+				gid_number_str);
+			poptPrintUsage(popt, stderr, 0);
+			return 1;
+		}
+		gidNumber = val;
+	}
+	
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -119,7 +136,7 @@ main(int argc, const char **argv)
 	}
 
 	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
-		 addMembers || remMembers || ((gid_t)gidNumber != INVALID);
+		 addMembers || remMembers || gidNumber != LU_VALUE_INVALID_ID;
 
 	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
@@ -132,23 +149,16 @@ main(int argc, const char **argv)
 			g_value_unset(&val);
 		}
 	}
-	if ((gid_t)gidNumber != INVALID) {
+	if (gidNumber != LU_VALUE_INVALID_ID) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if (values) {
 			value = g_value_array_get_nth(values, 0);
-			if (G_VALUE_HOLDS_LONG(value)) {
-				oldGidNumber = g_value_get_long(value);
-			} else
-			if (G_VALUE_HOLDS_STRING(value)) {
-				oldGidNumber = atol(g_value_get_string(value));
-			} else {
-				g_assert_not_reached();
-			}
+			oldGidNumber = lu_value_get_id(value);
+			g_assert(oldGidNumber != LU_VALUE_INVALID_ID);
 		}
 
 		memset(&val, 0, sizeof(val));
-		g_value_init(&val, G_TYPE_LONG);
-		g_value_set_long(&val, gidNumber);
+		lu_value_init_set_id(&val, gidNumber);
 
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
@@ -267,7 +277,8 @@ main(int argc, const char **argv)
 
 	lu_ent_free(ent);
 
-	if ((oldGidNumber != INVALID) && ((gid_t)gidNumber != INVALID)) {
+	if (oldGidNumber != LU_VALUE_INVALID_ID &&
+	    gidNumber != LU_VALUE_INVALID_ID) {
 		values = lu_users_enumerate_by_group(ctx, gid, &error);
 		if (error != NULL) {
 			lu_error_free(&error);
@@ -276,8 +287,7 @@ main(int argc, const char **argv)
 			ent = lu_ent_new();
 
 			memset(&val, 0, sizeof(val));
-			g_value_init(&val, G_TYPE_LONG);
-			g_value_set_long(&val, gidNumber);
+			lu_value_init_set_id(&val, gidNumber);
 
 			for (i = 0; i < values->n_values; i++) {
 				value = g_value_array_get_nth(values, i);

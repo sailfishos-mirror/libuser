@@ -1,3 +1,228 @@
+2004-11-14  Miloslav Trmac  <mitr@redhat.com>
+
+	* NEWS: Update.
+
+2004-11-13  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/files.c (struct format specifier): New member def_if_empty.
+	(format_passwd, format_group, format_shadow, format_gshadow): Update.
+	(parse_generic): Check for def_if_empty.
+
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lchage.c (read_ndays)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main)
+	* lib/misc.c (lu_value_get_id)
+	* lib/user.c (lu_default_int)
+	* modules/files.c (parse_field)
+	* modules/ldap.c (lu_ldap_lookup)
+	* samples/lookup.c (main): Check strto* () for error yet more properly.
+
+	* tests/files.conf.in, tests/files_test, tests/files_test.py: New
+	files.
+
+	* Makefile.am: Add tests/files_test.
+	(EXTRA_DIST): Don't change values depending on whether LDAP is used.
+
+	* modules/files.c (libuser_files_init, libuser_shadow_init): Allow
+	using the modules as non-root if explicitly requested.
+
+2004-11-09  Miloslav Trmac  <mitr@redhat.com>
+
+	* tests/ldap_test.py (Tests.testUserLookupId)
+	(Tests.testGroupLookupId): Test large ID values.
+	(Tests.testUserAdd4, Tests.testUserMod3, Tests.testGroupAdd3)
+	(Tests.testGroupMod3): New tests.
+
+	* apps/lusermod.c (main): Fix user renaming in groups where the
+	user is a member or administrator.
+
+	* python/ent.c (libuser_convert_to_value): Handle whole id_t
+	range.
+	
+	* python/ent.c (libuser_convert_to_value): Report Python exception
+	instead of aborting.  Return success/failure status.
+	(libuser_entity_setattr, libuser_entity_add, libuser_entity_set)
+	(libuser_entity_set_item): Handle errors reported by
+	libuser_convert_to_value().
+
+	* python/ent.c (convert_value_array_pylist): Handle G_TYPE_INT64.
+
+	* python/admin.c (lubser_admin_lookup_user_id)
+	(libuser_admin_lookup_group_id, libuser_admin_create_home) 
+	(libuser_admin_get_first_unused_id_type): Handle whole uid_t/gid_t
+	range.
+
+2004-11-08  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/user.c (lu_default_int): Use id_t.
+
+	* lib/user.c (lu_get_first_unused_id): Change the interface to use
+	id_t.  Don't allow (id_t)-1.
+	* lib/user_private.h: Update prototype.
+
+	* modules/files.c (format_passwd, format_group): Use
+	G_TYPE_INVALID for id_t.
+	(parse_field): Handle G_TYPE_INVALID.
+
+	* modules/files.c (parse_field): New function, split from
+	parse_generic ().  Don't interpret input as octal or hexadecimal
+	numbers.
+	(parse_generic): Use parse_field ().
+
+	* modules/ldap.c (lu_ldap_lookup): Convert id_t values to numbers,
+	not strings.  Don't interpret input as octal or hexadecimal
+	numbers.
+
+	* samples/lookup.c (main): Handle whole id_t range.
+
+	* lib/user.c (lu_default_int): Convert id_t values to numbers, not
+	strings.  Don't interpret input as octal or hexadecimal numbers.
+
+	* lub/user.c (lu_default_int): Handle whole range of uid_t/gid_t in
+	'%u' substitution.
+
+	* lib/user.c (lu_default_int): Remove copy-and-pasted usage of
+	idkeystring as a generic fallback.
+
+	* lib/user.c (lu_default_int): Handle whole ID range.
+
+	* lib/user.c (compare_strings): Replace compare_ints ().
+	(merge_ent_array_duplicates): Use lu_value_strdup () instead of
+	poking in GValues.
+
+	* modules/ldap.c (value_compare): Removed function.
+	
+	* lib/entity.c (lu_ent_add_int)
+	* lib/user.c (remove_duplicate_values)
+	* modules/ldap.c (arrays_equal, get_ent_mods): Use lu_values_equal ().
+
+	* lib/misc.c (lu_values_equal): New function.
+	* lib/user.h: Add declaration.
+
+	* apps/lgroupmod.c (main)
+	* apps/lgroupadd.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main): Handle whole gid_t/uid_t range for
+	'--gid' and '--uid', respectively.
+
+2004-11-07  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/apputil.h (INVALID): Removed definition.
+
+	* apps/apputil.c (lu_mailspool_create_remove)
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main): Use LU_VALUE_INVALID_ID to indicate unknown
+	value.
+
+	* lib/user.c (INVALID): Removed definition.
+	(extract_id, convert_user_name_to_id, convert_group_name_to_id):
+	Return LU_VALUE_INVALID_ID on failure.  All callers changed.
+	(lu_dispatch): Use LU_VALUE_INVALID_ID to indicate unknown value.
+	All callers changed.
+
+	* samples/testuser.c (dump_attribute): Handle G_TYPE_INT64.
+
+	* modules/ldap.c (lu_ldap_user_lookup_id): Handle whole uid_t range.
+	(lu_ldap_group_lookup_id, lu_ldap_users_enumerate_by_group): Handle
+	whole gid_t range.
+
+	* modules/files.c (lu_files_user_lookup_id)
+	(lu_shadow_user_lookup_id): Handle whole uid_t range.
+	(lu_files_group_lookup_id, lu_shadow_group_lookup_id)
+	(lu_files_users_enumerate_by_group): Handle whole gid_t range.
+
+	* lib/user.c (run_single, run_list): Use id_t for ldata.  All callers
+	changed.
+	(convert_user_name_to_id): Return uid_t.
+	(convert_group_name_to_id): Return gid_t.
+
+	* lib/entity.c (lu_ent_dump): Handle G_TYPE_INT64.
+
+	* apps/luserdel.c (main): Handle whole gid_t range.
+
+	* apps/luseradd.c (main): Handle whole gid_t range.
+
+	* apps/lnewusers.c (main): Handle whole uid_t/gid_t range, don't ignore
+	invalid values.
+
+	* apps/lchage.c (read_ndays): Handle G_TYPE_INT64.
+
+	* apps/apputil.c (lu_mailspool_create_remove)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main)
+	* modules/ldap.c (lu_ldap_groups_enumerate_by_user): Use
+	lu_value_get_id ().
+
+	* docs/reference/tmpl/value.sgml: New file.
+
+	* lib/misc.c (lu_value_get_id): New function.
+	* lib/user.h: Add declaration.
+	(LU_VALUE_INVALID_ID): New macro.
+
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main)
+	* lib/user.c (lu_default_int): Use lu_value_init_set_id ().
+	
+	* lib/misc.c (lu_value_init_set_id): New function.
+	* lib/user.h: Add declaration.
+	* lib/misc.c (lu_value_strdup): Handle G_TYPE_INT64.
+
+	* lib/misc.c (lu_strdup_value): Rename to lu_value_strdup (). All
+	callers changed.
+	* lib/user.h: Rename declaration.
+
+	* apps/lchage.c (read_ndays)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* lib/user.c (lu_default_int)
+	* modules/files.c (parse_generic)
+	* modules/ldap.c (lu_ldap_lookup) 
+	(lu_ldap_groups_enumerate_by_user): Properly check strtol () for error.
+
+2004-11-05  Miloslav Trmac  <mitr@redhat.com>
+
+
+	* modules/files.c (generic_lock, generic_is_locked, generic_setpass)
+	* apps/lchfn.c (main): Use lu_strdup_value ().
+
+	* modules/files.c (generic_is_locked): Fix memory leak.
+
+2004-11-04  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (get_ent_adds, get_ent_mods, lu_ldap_set) 
+	(lu_ldap_del, lu_ldap_handle_lock, lu_ldap_is_locked) 
+	(lu_ldap_setpass): Use lu_strdup_value () instead of
+	value_as_string ().
+	(value_as_string): Removed function.
+
+	* modules/sasldb.c (lu_sasldb_user_munge, lu_sasldb_user_is_locked): 
+	Use lu_strdup_value ().
+
+2004-11-03  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/apputil.c (lu_mailspool_create_remove)
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lid.c (main)
+	* modules/files.c (lu_shadow_user_lookup_id, lu_shadow_group_lookup_id)
+	(format_generic, generic_mod, generic_del): Use lu_strdup_value ().
+
+	* lib/misc.c (lu_strdup_value): New function.
+	* lib/user.h: Add declaration.
+	* docs/reference/tmpl/entity.sgml
+	* docs/reference/libuser-sections.txt: Document lu_strdup_value ().
+
 2004-11-02  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.6.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001,2002 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -122,15 +122,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_GECOS);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		if (G_VALUE_HOLDS_STRING(value)) {
-			gecos = g_value_get_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			gecos = g_strdup_printf("%ld", g_value_get_long(value));
-			/* leak */
-		} else {
-			g_assert_not_reached();
-		}
+		gecos = lu_value_strdup(value);
 	} else {
 		gecos = "";
 	}
@@ -163,16 +155,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_SN);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		sn = NULL;
-		if (G_VALUE_HOLDS_STRING(value)) {
-			sn = g_value_get_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			sn = g_strdup_printf("%ld", g_value_get_long(value));
-			/* leak */
-		} else {
-			g_assert_not_reached();
-		}
+		sn = lu_value_strdup(value);
 		prompts[pcount].key = SURNAME_KEY;
 		prompts[pcount].prompt = N_("Surname");
 		prompts[pcount].domain = PACKAGE;
@@ -184,17 +167,8 @@ main(int argc, const char **argv)
 	/* If we have it, prompt for the user's givenname. */
 	values = lu_ent_get(ent, LU_GIVENNAME);
 	if (values != NULL) {
-		gn = NULL;
 		value = g_value_array_get_nth(values, 0);
-		if (G_VALUE_HOLDS_STRING(value)) {
-			gn = g_value_get_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			gn = g_strdup_printf("%ld", g_value_get_long(value));
-			/* leak */
-		} else {
-			g_assert_not_reached();
-		}
+		gn = lu_value_strdup(value);
 		prompts[pcount].key = GIVENNAME_KEY;
 		prompts[pcount].prompt = N_("Given Name");
 		prompts[pcount].domain = PACKAGE;
@@ -234,16 +208,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_EMAIL);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
-		email = NULL;
-		if (G_VALUE_HOLDS_STRING(value)) {
-			email = g_value_get_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			email = g_strdup_printf("%ld", g_value_get_long(value));
-			/* leak */
-		} else {
-			g_assert_not_reached();
-		}
+		email = lu_value_strdup(value);
 		prompts[pcount].key = EMAIL_KEY;
 		prompts[pcount].prompt = N_("E-Mail Address");
 		prompts[pcount].domain = PACKAGE;

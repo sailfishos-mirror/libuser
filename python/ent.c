@@ -1,4 +1,4 @@
-/* Copyright (C) 2001,2002 Red Hat, Inc.
+/* Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -64,7 +64,18 @@ convert_value_array_pylist(GValueArray *array)
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "adding %ld to list\n", l);
 #endif
-		} else
+		} else if (G_VALUE_HOLDS_INT64(value)) {
+			PyObject *val;
+			long long ll;
+
+			ll = g_value_get_int64(value);
+			val = PyLong_FromLongLong(ll);
+			PyList_Append(ret, val);
+			Py_DECREF(val);
+#ifdef DEBUG_BINDING
+			fprintf(stderr, "adding %lld to list\n", ll);
+#endif
+		}
 		/* If the item is a G_TYPE_STRING, add it as a PyString. */
 		if (G_VALUE_HOLDS_STRING(value)) {
 			PyObject *val;
@@ -136,18 +147,34 @@ libuser_entity_getattr(struct libuser_entity *self, char *name)
 }
 
 /* A helper function to convert a PyObject to a GValue. */
-static void
+static gboolean
 libuser_convert_to_value(PyObject *item, GValue *value)
 {
 	DEBUG_ENTRY;
 
 	/* If it's a PyLong, convert it. */
 	if (PyLong_Check(item)) {
-		g_value_init(value, G_TYPE_LONG);
-		g_value_set_long(value, PyLong_AsLong(item));
+		PY_LONG_LONG ll;
+
+		ll = PyLong_AsLongLong(item);
+		if (PyErr_Occurred()) {
+			DEBUG_EXIT;
+			return FALSE;
+		}
+		if ((long)ll == ll) {
+			g_value_init(value, G_TYPE_LONG);
+			g_value_set_long(value, ll);
+		} else if ((id_t)ll == ll)
+			lu_value_init_set_id(value, ll);
+		else {
+			PyErr_SetString(PyExc_OverflowError,
+					"Value out of range");
+			DEBUG_EXIT;
+			return FALSE;
+		}
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sAdding (%d) to list.\n",
-			getindent(), PyLong_AsLong(item));
+		fprintf(stderr, "%sAdding (%lld) to list.\n", getindent(),
+			(long long)l);
 #endif
 	} else
 	/* If it's a PyString, convert it. */
@@ -175,19 +202,39 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 #endif
 	if (PyNumber_Check(item)) {
 		PyObject *tmp;
+		PY_LONG_LONG ll;
 
-		g_value_init(value, G_TYPE_LONG);
 		tmp = PyNumber_Long(item);
-		g_value_set_long(value, PyLong_AsLong(tmp));
+		ll = PyLong_AsLongLong(item);
+		if (PyErr_Occurred()) {
+			Py_DECREF(tmp);
+			DEBUG_EXIT;
+			return FALSE;
+		}
 		Py_DECREF(tmp);
+		if ((long)ll == ll) {
+			g_value_init(value, G_TYPE_LONG);
+			g_value_set_long(value, ll);
+		} else if ((id_t)ll == ll)
+			lu_value_init_set_id(value, ll);
+		else {
+			PyErr_SetString(PyExc_OverflowError,
+					"Value out of range");
+			DEBUG_EXIT;
+			return FALSE;
+		}
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
 			getindent(), PyString_AsString(item));
 #endif
 	} else {
-		g_assert_not_reached();
+		PyErr_SetString(PyExc_TypeError,
+				"expected a string or a number");
+		DEBUG_EXIT;
+		return FALSE;
 	}
 	DEBUG_EXIT;
+	return TRUE;
 }
 
 /* The setattr function.  Sets an attribute to have the value of the given
@@ -197,10 +244,13 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 {
 	PyObject *list, *item;
 	GValue value;
-	int size, i;
+	int size, i, ret;
+	struct lu_ent *copy;
 
 	DEBUG_ENTRY;
 
+	copy = lu_ent_new();
+	lu_ent_copy(self->ent, copy);
 	/* Parse out the arguments.  We expect a single object. */
 	if (PyArg_ParseTuple(args, "O", &list)) {
 		lu_ent_clear(self->ent, name);
@@ -217,7 +267,9 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			memset(&value, 0, sizeof(value));
 			for (i = 0; i < size; i++) {
 				item = PyTuple_GetItem(list, i);
-				libuser_convert_to_value(item, &value);
+				if (libuser_convert_to_value(item, &value)
+				    == FALSE)
+					goto err;
 #ifdef DEBUG_BINDING
 				fprintf(stderr, "%sAdding tuple item %s.\n",
 					getindent(),
@@ -226,8 +278,8 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 				lu_ent_add(self->ent, name, &value);
 				g_value_unset(&value);
 			}
-			DEBUG_EXIT;
-			return 0;
+			ret = 0;
+			goto end;
 		} else
 		/* If the object is a list, add it as a set of values. */
 		if (PyList_Check(list)) {
@@ -242,7 +294,9 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			memset(&value, 0, sizeof(value));
 			for (i = 0; i < size; i++) {
 				item = PyList_GetItem(list, i);
-				libuser_convert_to_value(item, &value);
+				if (libuser_convert_to_value(item, &value)
+				    == FALSE)
+					goto err;
 #ifdef DEBUG_BINDING
 				fprintf(stderr, "%sAdding list item %s.\n",
 					getindent(),
@@ -251,30 +305,37 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 				lu_ent_add(self->ent, name, &value);
 				g_value_unset(&value);
 			}
-			DEBUG_EXIT;
-			return 0;
+			ret = 0;
+			goto end;
 		} else
 		if (PyString_Check(list) ||
 		    PyLong_Check(list) ||
 		    PyNumber_Check(list)) {
 			/* It's a single item, so just add it. */
-			libuser_convert_to_value(list, &value);
+			if (libuser_convert_to_value(list, &value) == FALSE)
+				goto err;
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding single item %s.\n",
 				getindent(), g_value_get_string(&value));
 #endif
 			lu_ent_add(self->ent, name, &value);
 			g_value_unset(&value);
-			DEBUG_EXIT;
-			return 0;
+			ret = 0;
+			goto end;
 		}
 	}
 
 	PyErr_SetString(PyExc_SystemError,
 			"expected Number, Long, String, Tuple, or List");
 
+ err:
+	lu_ent_copy(copy, self->ent);
+	ret = -1;
+
+ end:
+	lu_ent_free(copy);
 	DEBUG_EXIT;
-	return -1;
+	return ret;
 }
 
 /* Get the list of attributes, returning them as a PyList of PyStrings. */
@@ -356,7 +417,10 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 	}
 	/* Convert the item to a value. */
 	memset(&value, 0, sizeof(value));
-	libuser_convert_to_value(val, &value);
+	if (libuser_convert_to_value(val, &value) == FALSE) {
+		DEBUG_EXIT;
+		return NULL;
+	}
 	lu_ent_add(self->ent, attr, &value);
 	g_value_unset(&value);
 	DEBUG_EXIT;
@@ -368,12 +432,15 @@ static PyObject *
 libuser_entity_set(struct libuser_entity *self, PyObject *args)
 {
 	char *attr = NULL;
-	PyObject *list = NULL, *item = NULL, *val = NULL;
+	PyObject *list = NULL, *item = NULL, *val = NULL, *ret;
 	GValue value;
+	struct lu_ent *copy;
 	int i, size;
 
 	DEBUG_ENTRY;
 
+	copy = lu_ent_new();
+	lu_ent_copy(self->ent, copy);
 	/* We expect a string and some kind of object. */
 	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
 		/* It's a list. */
@@ -389,19 +456,21 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyList_GetItem(list, i);
-			libuser_convert_to_value(item, &value);
+			if (libuser_convert_to_value(item, &value) == FALSE)
+				goto err;
 			lu_ent_add(self->ent, attr, &value);
 			g_value_unset(&value);
 		}
-		DEBUG_EXIT;
-		return Py_BuildValue("");
+		ret = Py_BuildValue("");
+		goto end;
 	}
 	PyErr_Clear (); /* PyArg_ParseTuple() above has raised an exception */
 
 	/* It's an object of some kind. */
 	if (PyArg_ParseTuple(args, "sO", &attr, &val)) {
 		memset(&value, 0, sizeof(value));
-		libuser_convert_to_value(val, &value);
+		if (libuser_convert_to_value(val, &value) == FALSE)
+			goto err;
 
 		/* Remove all current values. */
 		lu_ent_clear(self->ent, attr);
@@ -409,14 +478,19 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		/* Add this one value. */
 		lu_ent_add(self->ent, attr, &value);
 		g_value_unset(&value);
-		DEBUG_EXIT;
-		return Py_BuildValue("");
+		ret = Py_BuildValue("");
+		goto end;
 	}
 
 	PyErr_SetString(PyExc_SystemError,
 			"expected value or list of values");
+ err:
+	lu_ent_copy(copy, self->ent);
+	ret = NULL;
+ end:
+	lu_ent_free(copy);
 	DEBUG_EXIT;
-	return NULL;
+	return ret;
 }
 
 /* Clear out all values for an attribute. */
@@ -516,8 +590,9 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			PyObject *args)
 {
 	char *attr = NULL;
-	int i, size;
+	int i, size, ret;
 	GValue value;
+	struct lu_ent *copy;
 
 	DEBUG_ENTRY;
 
@@ -532,6 +607,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 #endif
 
+	copy = lu_ent_new();
+	lu_ent_copy(self->ent, copy);
 	/* If the new value is a list, convert each and add in turn. */
 	if (PyList_Check(args)) {
 		size = PyList_Size(args);
@@ -542,7 +619,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyList_GetItem(args, i);
-			libuser_convert_to_value(item, &value);
+			if (libuser_convert_to_value(item, &value) == FALSE)
+				goto err;
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
@@ -551,8 +629,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			lu_ent_add(self->ent, attr, &value);
 			g_value_unset(&value);
 		}
-		DEBUG_EXIT;
-		return 0;
+		ret = 0;
+		goto end;
 	} else
 	/* If the new value is a tuple, convert each and add in turn. */
 	if (PyTuple_Check(args)) {
@@ -564,7 +642,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyTuple_GetItem(args, i);
-			libuser_convert_to_value(item, &value);
+			if (libuser_convert_to_value(item, &value) == FALSE)
+				goto err;
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
@@ -573,8 +652,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			lu_ent_add(self->ent, attr, &value);
 			g_value_unset(&value);
 		}
-		DEBUG_EXIT;
-		return 0;
+		ret = 0;
+		goto end;
 	} else
 	/* If the new value is a value, convert it and add it. */
 	if (PyString_Check(args) ||
@@ -582,21 +661,28 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	    PyLong_Check(args)) {
 		lu_ent_clear(self->ent, attr);
 		memset(&value, 0, sizeof(value));
-		libuser_convert_to_value(args, &value);
+		if (libuser_convert_to_value(args, &value) == FALSE)
+			goto err;
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n", getindent(),
 			attr, g_value_get_string(value));
 #endif
 		lu_ent_add(self->ent, attr, &value);
 		g_value_unset(&value);
-		DEBUG_EXIT;
-		return 0;
+		ret = 0;
+		goto end;
 	}
 
 	PyErr_SetString(PyExc_TypeError,
 			"expected values or list of values");
+ err:
+	lu_ent_copy(copy, self->ent);
+	ret = -1;
+
+ end:
+	lu_ent_free(copy);
 	DEBUG_EXIT;
-	return -1;
+	return ret;
 }
 
 static PyMappingMethods libuser_entity_mapping_methods = {

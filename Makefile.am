@@ -15,15 +15,17 @@ AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 
 ## Targets
 SUBDIRS = po docs
+TESTS = tests/files_test
 if LDAP
-TESTS = tests/ldap_test
+TESTS += tests/ldap_test
 endif
 
 EXTRA_DIST = \
 	$(EXTRA_MANS) \
 	python/modules.txt \
 	samples/genusers \
-	$(TESTS) tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif \
+	tests/files.conf.in tests/files_test tests/files_test.py \
+	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
 	tests/ldap_test.py tests/slapd.conf.in
 
 bin_PROGRAMS = apps/lchfn apps/lchsh

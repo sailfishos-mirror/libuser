@@ -181,7 +181,7 @@ static PyObject *
 libuser_admin_lookup_user_id(PyObject *self, PyObject *args,
 			     PyObject *kwargs)
 {
-	int arg;
+	PY_LONG_LONG arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "id", NULL };
@@ -189,7 +189,12 @@ libuser_admin_lookup_user_id(PyObject *self, PyObject *args,
 
 	DEBUG_ENTRY;
 	/* We expect a single string (no mapping shenanigans here). */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "L", keywords, &arg)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	if ((uid_t)arg != arg) {
+		PyErr_SetString(PyExc_OverflowError, "UID out of range");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -242,7 +247,7 @@ static PyObject *
 libuser_admin_lookup_group_id(PyObject *self, PyObject *args,
 			      PyObject *kwargs)
 {
-	int arg;
+	PY_LONG_LONG arg;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "id", NULL };
@@ -250,7 +255,12 @@ libuser_admin_lookup_group_id(PyObject *self, PyObject *args,
 
 	DEBUG_ENTRY;
 	/* Expect a number. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i", keywords, &arg)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "L", keywords, &arg)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	if ((gid_t)arg != arg) {
+		PyErr_SetString(PyExc_OverflowError, "GID out of range");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -444,7 +454,8 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	GValueArray *values;
 	GValue *value;
 	char *keywords[] = { "home", "skeleton", NULL };
-	long uidNumber = 0, gidNumber = 0;
+	uid_t uidNumber = 0;
+	gid_t gidNumber = 0;
 	struct lu_error *error = NULL;
 
 	(void)self;
@@ -477,7 +488,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 		return NULL;
 	}
 	value = g_value_array_get_nth(values, 0);
-	uidNumber = g_value_get_long(value);
+	uidNumber = lu_value_get_id(value);
 
 	/* Get the user's GID. */
 	values = lu_ent_get(ent->ent, LU_GIDNUMBER);
@@ -488,7 +499,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 		return NULL;
 	}
 	value = g_value_array_get_nth(values, 0);
-	gidNumber = g_value_get_long(value);
+	gidNumber = lu_value_get_id(value);
 
 	/* Attempt to populate the directory. */
 	if (lu_homedir_populate(skeleton, dir, uidNumber, gidNumber,
@@ -1227,20 +1238,25 @@ libuser_admin_get_first_unused_id_type(struct libuser_admin *self,
 	char *keywords[] = { "start", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
-	glong start = 500;
+	PY_LONG_LONG start = 500;
 
 	g_return_val_if_fail(self != NULL, NULL);
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|l", keywords,
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|L", keywords,
 					 &start)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
+	if ((id_t)start != start) {
+		PyErr_SetString(PyExc_OverflowError, "ID out of range");
+		DEBUG_EXIT;
+		return NULL;
+	}
 
-	return Py_BuildValue("l", lu_get_first_unused_id(me->ctx,
-							 enttype,
-							 start));
+	return Py_BuildValue("L", (PY_LONG_LONG)lu_get_first_unused_id(me->ctx,
+								       enttype,
+								       start));
 }
 
 static PyObject *

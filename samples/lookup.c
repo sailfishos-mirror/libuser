@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <libintl.h>
 #include <locale.h>
 #include <stdlib.h>
@@ -33,6 +35,7 @@ main(int argc, char **argv)
 	struct lu_context *lu;
 	gboolean success = FALSE, group = FALSE, byid = FALSE;
 	int c;
+	id_t id;
 	struct lu_ent *ent, *tmp;
 	struct lu_error *error = NULL;
 	const char *modules = NULL;
@@ -66,14 +69,29 @@ main(int argc, char **argv)
 		return 1;
 	}
 
-	c = optind < argc ? atol(argv[optind]) : 0;
+	if (optind < argc) {
+		intmax_t imax;
+		char *end;
+
+		errno = 0;
+		imax = strtoimax(argv[optind], &end, 10);
+		if (errno != 0 || *end != 0 || end == argv[optind]
+		    || (id_t)imax != imax) {
+			fprintf(stderr, gettext("Invalid ID %s\n"),
+				argv[optind]);
+			return 1;
+		}
+		id = imax;
+	}
+	else
+		id = 0;
 
 	tmp = lu_ent_new();
 	if (group) {
 		if (byid) {
-			g_print(gettext("Searching for group with ID %d.\n"),
-				c);
-			success = lu_group_lookup_id(lu, c, tmp, &error);
+			g_print(gettext("Searching for group with ID %jd.\n"),
+				(intmax_t)id);
+			success = lu_group_lookup_id(lu, id, tmp, &error);
 		} else {
 			g_print(gettext("Searching for group named %s.\n"),
 				argv[optind]);
@@ -82,9 +100,9 @@ main(int argc, char **argv)
 		}
 	} else {
 		if (byid) {
-			g_print(gettext
-				("Searching for user with ID %d.\n"), c);
-			success = lu_user_lookup_id(lu, c, tmp, &error);
+			g_print(gettext ("Searching for user with ID %jd.\n"),
+				(intmax_t)id);
+			success = lu_user_lookup_id(lu, id, tmp, &error);
 		} else {
 			g_print(gettext("Searching for user named %s.\n"),
 				argv[optind]);

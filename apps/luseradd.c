@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,12 +38,13 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gecos = NULL, *homeDirectory = NULL, *loginShell = NULL,
-		   *skeleton = NULL, *name = NULL, *gid = NULL;
+		   *skeleton = NULL, *name = NULL, *gid = NULL,
+		    *uid_number_str = NULL;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL, *groupEnt = NULL;
 	struct lu_error *error = NULL;
-	long uidNumber = INVALID;
-	gid_t gidNumber = INVALID;
+	uid_t uidNumber = LU_VALUE_INVALID_ID;
+	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
@@ -62,7 +65,7 @@ main(int argc, const char **argv)
 		 "directory with files for the new user", "STRING"},
 		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
 		 "shell for new user", "STRING"},
-		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
+		{"uid", 'u', POPT_ARG_STRING, &uid_number_str, 0,
 		 "uid for new user", "NUM"},
 		{"gid", 'g', POPT_ARG_STRING, &gid, 0,
 		 "gid for new user", NULL},
@@ -106,6 +109,21 @@ main(int argc, const char **argv)
 		poptPrintUsage(popt, stderr, 0);
 		return 1;
 	}
+	if (uid_number_str != NULL) {
+		intmax_t val;
+		char *p;
+
+		errno = 0;
+		val = strtoimax(uid_number_str, &p, 10);
+		if (errno != 0 || *p != 0 || p == uid_number_str
+		    || (uid_t)val != val) {
+			fprintf(stderr, _("Invalid user ID %s\n"),
+				uid_number_str);
+			poptPrintUsage(popt, stderr, 0);
+			return 1;
+		}
+		uidNumber = val;
+	}
 
 	/* Initialize the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -135,29 +153,27 @@ main(int argc, const char **argv)
 
 	/* Try to convert the given GID to a number. */
 	if (gid != NULL) {
+		intmax_t imax;
 		char *p;
+
 		groupEnt = lu_ent_new();
-		gidNumber = strtol(gid, &p, 10);
-		if (*p != '\0') {
+		errno = 0;
+		imax = strtoimax(gid, &p, 10);
+		if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
+			gidNumber = imax;
+		else
 			/* It's not a number, so it's a group name. */
-			gidNumber = INVALID;
-		}
+			gidNumber = LU_VALUE_INVALID_ID;
 	}
 
 	/* Check if the group exists. */
-	if (gidNumber == INVALID) {
+	if (gidNumber == LU_VALUE_INVALID_ID) {
 		if (lu_group_lookup_name(ctx, gid, groupEnt, &error)) {
 			/* Retrieve the group's GID. */
 			values = lu_ent_get(groupEnt, LU_GIDNUMBER);
 			value = g_value_array_get_nth(values, 0);
-			if (G_VALUE_HOLDS_LONG(value)) {
-				gidNumber = g_value_get_long(value);
-			} else
-			if (G_VALUE_HOLDS_STRING(value)) {
-				gidNumber = atol(g_value_get_string(value));
-			} else {
-				g_assert_not_reached();
-			}
+			gidNumber = lu_value_get_id(value);
+			g_assert(gidNumber != LU_VALUE_INVALID_ID);
 			create_group = FALSE;
 		} else {
 			/* No such group, we need to create one. */
@@ -181,10 +197,9 @@ main(int argc, const char **argv)
 		lu_group_default(ctx, gid, FALSE, groupEnt);
 
 		/* Replace the GID with the forced one, if we need to. */
-		if (gidNumber != INVALID) {
+		if (gidNumber != LU_VALUE_INVALID_ID) {
 			memset(&val, 0, sizeof(val));
-			g_value_init(&val, G_TYPE_LONG);
-			g_value_set_long(&val, gidNumber);
+			lu_value_init_set_id(&val, gidNumber);
 			lu_ent_clear(groupEnt, LU_GIDNUMBER);
 			lu_ent_add(groupEnt, LU_GIDNUMBER, &val);
 			g_value_unset(&val);
@@ -216,14 +231,8 @@ main(int argc, const char **argv)
 		lu_end(ctx);
 	}
 	value = g_value_array_get_nth(values, 0);
-	if (G_VALUE_HOLDS_LONG(value)) {
-		gidNumber = g_value_get_long(value);
-	} else
-	if (G_VALUE_HOLDS_STRING(value)) {
-		gidNumber = atol(g_value_get_string(value));
-	} else {
-		g_assert_not_reached();
-	}
+	gidNumber = lu_value_get_id(value);
+	g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
 	/* Create the user record. */
 	ent = lu_ent_new();
@@ -232,22 +241,20 @@ main(int argc, const char **argv)
 	/* Modify the default UID if we had one passed in. */
 	memset(&val, 0, sizeof(val));
 
-	g_value_init(&val, G_TYPE_LONG);
-
-	if ((uid_t)uidNumber != INVALID) {
-		g_value_set_long(&val, uidNumber);
+	if (uidNumber != LU_VALUE_INVALID_ID) {
+		lu_value_init_set_id(&val, uidNumber);
 		lu_ent_clear(ent, LU_UIDNUMBER);
 		lu_ent_add(ent, LU_UIDNUMBER, &val);
+		g_value_unset(&val);
 	}
 
 	/* Use the GID we've created, or the one which was passed in. */
-	if (gidNumber != INVALID) {
-		g_value_set_long(&val, gidNumber);
+	if (gidNumber != LU_VALUE_INVALID_ID) {
+		lu_value_init_set_id(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
+		g_value_unset(&val);
 	}
-
-	g_value_unset(&val);
 
 	/* Modify the default GECOS if we had one passed in. */
 	g_value_init(&val, G_TYPE_STRING);
@@ -289,26 +296,14 @@ main(int argc, const char **argv)
 		/* Read the user's UID. */
 		values = lu_ent_get(ent, LU_UIDNUMBER);
 		value = g_value_array_get_nth(values, 0);
-		if (G_VALUE_HOLDS_LONG(value)) {
-			uidNumber = g_value_get_long(value);
-		} else
-		if (G_VALUE_HOLDS_STRING(value)) {
-			uidNumber = atol(g_value_get_string(value));
-		} else {
-			g_assert_not_reached();
-		}
+		uidNumber = lu_value_get_id(value);
+		g_assert(uidNumber != LU_VALUE_INVALID_ID);
 
 		/* Read the user's GID. */
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		value = g_value_array_get_nth(values, 0);
-		if (G_VALUE_HOLDS_LONG(value)) {
-			gidNumber = g_value_get_long(value);
-		} else
-		if (G_VALUE_HOLDS_STRING(value)) {
-			gidNumber = atol(g_value_get_string(value));
-		} else {
-			g_assert_not_reached();
-		}
+		gidNumber = lu_value_get_id(value);
+		g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
 		/* Read the user's home directory. */
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);

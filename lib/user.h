@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -28,12 +28,21 @@
 
 G_BEGIN_DECLS
 
+/* (id_t)-1 is used by setreuid() to indicate "not a valid ID", so it should be
+   safe to use for error indication. */
+#define LU_VALUE_INVALID_ID ((id_t)-1)
+
 /* An opaque structure manipulated by the library. */
 typedef struct lu_context lu_context_t;
 
 /* An enumeration which decides whether we want to modify information about
  * users or groups.  We don't support both simultaneously.  */
 typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
+
+char *lu_value_strdup(const GValue *value);
+int lu_values_equal(const GValue *a, const GValue *b);
+void lu_value_init_set_id(GValue *value, id_t id);
+id_t lu_value_get_id(const GValue *value);
 
 lu_context_t *lu_start(const char *authname,
 		       lu_entity_type_t auth_type,

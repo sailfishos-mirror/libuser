@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -25,6 +25,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <fcntl.h>
 #include <fnmatch.h>
 #include <limits.h>
@@ -51,45 +52,45 @@ LU_MODULE_INIT(libuser_shadow_init)
 struct format_specifier {
 	int position;
 	const char *attribute;
-	GType type;
+	GType type;		/* G_TYPE_INVALID for "id_t" */
 	const char *def;
-	gboolean multiple, suppress_if_def;
+	gboolean multiple, suppress_if_def, def_if_empty;
 };
 
 static const struct format_specifier format_passwd[] = {
-	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
-	{3, LU_UIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{4, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{7, LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE},
+	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{2, LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
+	{3, LU_UIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
+	{4, LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
+	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{7, LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE, TRUE},
 };
 
 static const struct format_specifier format_group[] = {
-	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
-	{3, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{2, LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
+	{3, LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
+	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
-	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
-	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{4, LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE},
-	{5, LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE},
-	{6, LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE},
-	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE},
-	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE},
-	{9, LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE},
+	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
+	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE, FALSE},
+	{4, LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE, TRUE},
+	{5, LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE, TRUE},
+	{6, LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE, TRUE},
+	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
+	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
+	{9, LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
 };
 
 static const struct format_specifier format_gshadow[] = {
-	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
-	{3, LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
-	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
+	{3, LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
+	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
 };
 
 static gboolean
@@ -312,6 +313,54 @@ line_read(FILE * fp)
 	}
 }
 
+/* Parse a single field value. */
+static gboolean
+parse_field(const struct format_specifier *format, GValue *value,
+	    const char *string)
+{
+	switch (format->type) {
+	case G_TYPE_STRING:
+		g_value_init(value, G_TYPE_STRING);
+		g_value_set_string(value, string);
+		break;
+		
+	case G_TYPE_LONG: {
+		long l;
+		char *p;
+
+		errno = 0;
+		l = strtol(string, &p, 10);
+		if (errno != 0 || *p != 0 || p == string) {
+			g_warning("invalid number '%s'", string);
+			return FALSE;
+		}
+		g_value_init(value, G_TYPE_LONG);
+		g_value_set_long(value, l);
+		break;
+	}
+
+	case G_TYPE_INVALID: {
+		intmax_t imax;
+		char *p;
+
+		errno = 0;
+		imax = strtoimax(string, &p, 10);
+		if (errno != 0 || *p != 0 || p == string
+		    || (id_t)imax != imax) {
+			g_warning("invalid ID '%s'", string);
+			return FALSE;
+		}
+		lu_value_init_set_id(value, imax);
+		break;
+	}
+
+	default:
+		g_assert_not_reached();
+		return FALSE;
+	}
+	return TRUE;
+}
+
 /* Parse a string into an ent structure using the elements in the format
  * specifier array. */
 static gboolean
@@ -350,20 +399,12 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
 				/* Skip over empty strings. */
-				if (strlen(w[j]) == 0) {
+				if (strlen(w[j]) == 0)
 					continue;
-				}
-				/* Initialize the value to the right type. */
-				g_value_init(&value, formats[i].type);
-				/* Set the value. */
-				if (G_VALUE_HOLDS_STRING(&value)) {
-					g_value_set_string(&value, w[j]);
-				} else
-				if (G_VALUE_HOLDS_LONG(&value)) {
-					g_value_set_long(&value, atol(w[j]));
-				} else {
-					g_assert_not_reached();
-				}
+				/* Always succeeds assuming
+				   formats[i].type == G_TYPE_STRING, which is
+				   currently true. */
+				parse_field(formats + i, &value, w[j]);
 				/* Add it to the current values list. */
 				lu_ent_add_current(ent, formats[i].attribute,
 						   &value);
@@ -371,47 +412,24 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			}
 			g_strfreev(w);
 		} else {
-			/* Initialize the value to the right type. */
-			g_value_init(&value, formats[i].type);
 			/* Check if we need to supply the default value. */
-			if ((formats[i].def != NULL) &&
+			if (formats[i].def_if_empty &&
+			    (formats[i].def != NULL) &&
 			    (strlen(v[field]) == 0)) {
-				/* Convert the default to the right type. */
-				if (G_VALUE_HOLDS_STRING(&value)) {
-					g_value_set_string(&value,
-							   formats[i].def);
-				} else
-				if (G_VALUE_HOLDS_LONG(&value)) {
-					/* Make sure we're not doing something
-					 * potentially-dangerous here. */
+				gboolean ret;
+
+				/* Make sure we're not doing something
+				 * potentially-dangerous here. */
+				if (formats[i].type != G_TYPE_STRING)
 					g_assert(strlen(formats[i].def) > 0);
-					g_value_set_long(&value,
-							 atol(formats[i].def));
-				} else {
-					g_assert_not_reached();
-				}
+				/* Convert the default to the right type. */
+				ret = parse_field(formats + i, &value,
+						  formats[i].def);
+				g_assert (ret != FALSE);
 			} else {
-				/* Use the value itself. */
-				if (G_VALUE_HOLDS_STRING(&value)) {
-					g_value_set_string(&value, v[field]);
-				} else
-				if (G_VALUE_HOLDS_LONG(&value)) {
-					/* Make sure the field contains an
-					 * actual (I'd say "real", but that's
-					 * a loaded word) number. */
-					char *p;
-					long l;
-					l = strtol(v[field], &p, 0);
-					g_assert(p != NULL);
-					if (*p != '\0') {
-						g_warning("entry is incorrectly formatted");
-						g_value_unset(&value);
-						continue;
-					}
-					g_value_set_long(&value, l);
-				} else {
-					g_assert_not_reached();
-				}
+				if (parse_field (formats + i, &value, v[field])
+				    == FALSE)
+					continue;
 			}
 			/* If we recovered a value, add it to the current
 			 * values list for the entity. */
@@ -560,7 +578,8 @@ lu_files_user_lookup_id(struct lu_module *module,
 {
 	char *key;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%ld", (long)uid);
+
+	key = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = generic_lookup(module, "passwd", key, 3,
 			     lu_files_parse_user_entry, ent, error);
 	g_free(key);
@@ -589,30 +608,19 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key, *p = NULL;
+	char *key, *p;
 	GValueArray *values;
 	GValue *value;
 	gboolean ret = FALSE;
 	/* First look the user up by ID. */
-	key = g_strdup_printf("%ld", (long)uid);
+	key = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
 		/* Now use the user's name to search the shadow file. */
 		values = lu_ent_get(ent, LU_USERNAME);
 		if ((values != NULL) && (values->n_values > 0)) {
 			value = g_value_array_get_nth(values, 0);
-			if (G_VALUE_HOLDS_STRING(value)) {
-				/* Generate a temporary string containing the
-				 * user's name. */
-				p = g_value_dup_string(value);
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
-				/* So very, very wrong. */
-				p = g_strdup_printf("%ld",
-						    g_value_get_long(value));
-			} else {
-				g_assert_not_reached();
-			}
+			p = lu_value_strdup(value);
 			ret = generic_lookup(module, "shadow", p, 1,
 					     lu_shadow_parse_user_entry,
 					     ent, error);
@@ -645,7 +653,8 @@ lu_files_group_lookup_id(struct lu_module *module,
 {
 	char *key;
 	gboolean ret;
-	key = g_strdup_printf("%ld", (long)gid);
+
+	key = g_strdup_printf("%jd", (intmax_t)gid);
 	ret = generic_lookup(module, "group", key, 3,
 			     lu_files_parse_group_entry, ent, error);
 	g_free(key);
@@ -673,24 +682,15 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 	GValueArray *values;
 	GValue *value;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%ld", (long)gid);
+
+	key = g_strdup_printf("%jd", (intmax_t)gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
 		if ((values != NULL) && (values->n_values > 0)) {
-			char *p = NULL;
+			char *p;
 			value = g_value_array_get_nth(values, 0);
-			if (G_VALUE_HOLDS_STRING(value)) {
-				/* Generate a copy of the group's name. */
-				p = g_value_dup_string(value);
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
-				/* So very, very wrong.... */
-				p = g_strdup_printf("%ld",
-					            g_value_get_long(value));
-			} else {
-				g_assert_not_reached();
-			}
+			p = lu_value_strdup(value);
 			ret = generic_lookup(module, "gshadow", p, 1,
 					     lu_shadow_parse_group_entry,
 					     ent, error);
@@ -741,16 +741,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 			do {
 				/* Get a string representation of this value. */
 				val = g_value_array_get_nth(values, j);
-				p = NULL;
-				if (G_VALUE_HOLDS_STRING(val)) {
-					p = g_value_dup_string(val);
-				} else
-				if (G_VALUE_HOLDS_LONG(val)) {
-					p = g_strdup_printf("%ld",
-							    g_value_get_long(val));
-				} else {
-					g_assert_not_reached();
-				}
+				p = lu_value_strdup(val);
 				/* Add it to the end, prepending a comma if we
 				 * need to separate it from another value,
 				 * unless this is the default value for the
@@ -1172,18 +1163,9 @@ generic_mod(struct lu_module *module, const char *base_name,
 		new_value = NULL;
 		j = 0;
 		if (values != NULL) do {
-			p = NULL;
 			/* Convert a single value to a string. */
 			value = g_value_array_get_nth(values, j);
-			if (G_VALUE_HOLDS_STRING(value)) {
-				p = g_value_dup_string(value);
-			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
-				p = g_strdup_printf("%ld",
-						    g_value_get_long(value));
-			} else {
-				g_assert_not_reached();
-			}
+			p = lu_value_strdup(value);
 			/* Add this new value to the existing string, prepending
 			 * a comma if we've already seen any other values. */
 			q = g_strconcat(new_value ?: "",
@@ -1384,13 +1366,8 @@ generic_del(struct lu_module *module, const char *base_name,
 	/* Generate string versions of what the beginning of a line might
 	 * look like. */
 	value = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(value))
-		fragment1 = g_strdup_printf("%s:", g_value_get_string(value));
-	else if (G_VALUE_HOLDS_LONG(value))
-		fragment1 = g_strdup_printf("%ld:", g_value_get_long(value));
-	else
-		g_assert_not_reached();
-	fragment2 = g_strdup_printf("\n%s", fragment1);
+	fragment1 = lu_value_strdup(value);
+	fragment2 = g_strdup_printf("\n%s:", fragment1);
 
 	/* Remove all occurrences of this entry from the file. */
 	len = strlen(fragment1);
@@ -1398,7 +1375,8 @@ generic_del(struct lu_module *module, const char *base_name,
 		found = FALSE;
 		/* If the data is on the first line of the file, we remove the
 		 * first line. */
-		if (strncmp(contents, fragment1, len) == 0) {
+		if (strncmp(contents, fragment1, len) == 0
+			&& contents[len] == ':') {
 			char *p = strchr(contents, '\n');
 			strcpy(contents, p ? (p + 1) : "");
 			found = TRUE;
@@ -1577,12 +1555,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	/* Generate a string representation of the name. */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(val))
-		namestring = g_value_dup_string(val);
-	else if (G_VALUE_HOLDS_LONG(val))
-		namestring = g_strdup_printf("%ld", g_value_get_long(val));
-	else
-		g_assert_not_reached();
+	namestring = lu_value_strdup(val);
 
 	/* Read the old value from the file. */
 	value = lu_util_field_read(fd, namestring, field, error);
@@ -1625,8 +1598,8 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename = NULL, *key = NULL;
-	const char *dir, *namestring = NULL;
-	char *value;
+	const char *dir;
+	char *value, *namestring;
 	int fd = -1;
 	gpointer lock;
 	gboolean ret = FALSE;
@@ -1671,17 +1644,11 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 
 	/* Construct the actual name of the account holder(s). */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(val)) {
-		namestring = g_value_dup_string(val);
-	} else
-	if (G_VALUE_HOLDS_LONG(val)) {
-		namestring = g_strdup_printf("%ld", g_value_get_long(val));
-	} else {
-		g_assert_not_reached();
-	}
+	namestring = lu_value_strdup(val);
 
 	/* Read the value. */
 	value = lu_util_field_read(fd, namestring, field, error);
+	g_free (namestring);
 	if (value == NULL) {
 		lu_util_lock_free(lock);
 		close(fd);
@@ -1871,12 +1838,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 
 	/* Get the name of the account. */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(val))
-		namestring = g_value_dup_string(val);
-	else if (G_VALUE_HOLDS_LONG(val))
-		namestring = g_strdup_printf("%ld", g_value_get_long(val));
-	else
-		g_assert_not_reached();
+	namestring = lu_value_strdup(val);
 
 	/* Read the current contents of the field. */
 	value = lu_util_field_read(fd, namestring, field, error);
@@ -2188,7 +2150,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	ret = g_value_array_new(0);
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
-	snprintf(grp, sizeof(grp), "%d", gid);
+	snprintf(grp, sizeof(grp), "%jd", (intmax_t)gid);
 
 	/* Iterate over each line. */
 	while ((buf = line_read(fp)) != NULL) {
@@ -2840,9 +2802,16 @@ libuser_files_init(struct lu_context *context,
 
 	/* Handle authenticating to the data source. */
 	if (geteuid() != 0) {
-		lu_error_new(error, lu_error_privilege,
-			     _("not executing with superuser privileges"));
-		return NULL;
+		const char *val;
+		
+		/* Needed for the test suite, handy for debugging. */
+		val = lu_cfg_read_single(context, "files/nonroot", NULL);
+		if (val == NULL || strcmp (val, "yes") != 0) {
+			lu_error_new(error, lu_error_privilege,
+				     _("not executing with superuser "
+				       "privileges"));
+			return NULL;
+		}
 	}
 
 	/* Allocate the method structure. */
@@ -2910,9 +2879,16 @@ libuser_shadow_init(struct lu_context *context,
 
 	/* Handle authenticating to the data source. */
 	if (geteuid() != 0) {
-		lu_error_new(error, lu_error_privilege,
-			     _("not executing with superuser privileges"));
-		return NULL;
+		const char *val;
+		
+		/* Needed for the test suite, handy for debugging. */
+		val = lu_cfg_read_single(context, "shadow/nonroot", NULL);
+		if (val == NULL || strcmp (val, "yes") != 0) {
+			lu_error_new(error, lu_error_privilege,
+				     _("not executing with superuser "
+				       "privileges"));
+			return NULL;
+		}
 	}
 
 	/* Get the name of the shadow file. */

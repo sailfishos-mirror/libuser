@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -34,9 +36,8 @@
 int
 main(int argc, const char **argv)
 {
-	const char *name = NULL;
-	long gidNumber = INVALID;
-	GValue value;
+	const char *name = NULL, *gid_number_str = NULL;
+	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
@@ -48,7 +49,7 @@ main(int argc, const char **argv)
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
+		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
 		 "gid to force for new group", "NUM"},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
 		 "make this a system group", NULL},
@@ -79,6 +80,22 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	if (gid_number_str != NULL) {
+		intmax_t val;
+		char *p;
+
+		errno = 0;
+		val = strtoimax(gid_number_str, &p, 10);
+		if (errno != 0 || *p != 0 || p == gid_number_str
+		    || (gid_t)val != val) {
+			fprintf(stderr, _("Invalid group ID %s\n"),
+				gid_number_str);
+			poptPrintUsage(popt, stderr, 0);
+			return 1;
+		}
+		gidNumber = val;
+	}
+		
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
@@ -96,10 +113,11 @@ main(int argc, const char **argv)
 
 	/* If the user specified a particular GID number, override the
 	 * default. */
-	if ((gid_t)gidNumber != INVALID) {
+	if (gidNumber != LU_VALUE_INVALID_ID) {
+		GValue value;
+
 		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, gidNumber);
+		lu_value_init_set_id(&value, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &value);
 		g_value_unset(&value);

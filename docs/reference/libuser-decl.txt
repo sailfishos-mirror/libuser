@@ -1,144 +1,46 @@
 <FUNCTION>
-<NAME>quota_on</NAME>
-<RETURNS>int  </RETURNS>
-void
+<NAME>lu_cfg_read</NAME>
+<RETURNS>GList  *</RETURNS>
+struct lu_context *context,const char *key, const char *default_value
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_off</NAME>
-<RETURNS>int  </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_user</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_group</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_free_specials</NAME>
-<RETURNS>void  </RETURNS>
-char **specials
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_set_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_set_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
-</FUNCTION>
-<ENUM>
-<NAME>lu_status_t</NAME>
-typedef enum lu_status {
-	/* Non-fatal. */
-	lu_success = 0,
-	lu_warning_config_disabled,
-
-	/* Fatal. */
-	lu_error_generic,
-	lu_error_privilege,
-	lu_error_access_denied,
-
-	/* Data validation errors. */
-	lu_error_name_bad,
-	lu_error_id_bad,
-	lu_error_name_used,
-	lu_error_id_used,
-
-	/* Terminal manipulation errors. */
-	lu_error_terminal,
-
-	/* File I/O errors. */
-	lu_error_open,
-	lu_error_lock,
-	lu_error_stat,
-	lu_error_read,
-	lu_error_write,
-	lu_error_search,
-
-	/* Initialization or module-loading errors. */
-	lu_error_init,
-	lu_error_module_load,
-	lu_error_module_sym,
-	lu_error_module_version,
-} lu_status_t;
-</ENUM>
-<MACRO>
-<NAME>LU_ERROR_CHECK</NAME>
-#define LU_ERROR_CHECK(err_p_p) \
-do { \
-	struct lu_error **__err = (err_p_p); \
-	if ((__err == NULL) || (*__err != NULL)) { \
-		if(__err == NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
-		} else \
-		if(*__err != NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\n", __FUNCTION__); \
-		} \
-		abort(); \
-	} \
-} while(0)
-</MACRO>
-<FUNCTION>
-<NAME>lu_error_new</NAME>
-<RETURNS>void  </RETURNS>
-lu_error_t **error, lu_status_t code,const char *fmt, ...
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_strerror</NAME>
+<NAME>lu_cfg_read_single</NAME>
 <RETURNS>const char  *</RETURNS>
-lu_error_t *error
+struct lu_context *context,const char *key, const char *default_value
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_error_is_success</NAME>
-<RETURNS>gboolean  </RETURNS>
-lu_status_t status
+<NAME>lu_cfg_read_keys</NAME>
+<RETURNS>GList  *</RETURNS>
+struct lu_context *context,const char *parent_key
 </FUNCTION>
-<FUNCTION>
-<NAME>lu_error_is_warning</NAME>
-<RETURNS>gboolean  </RETURNS>
-lu_status_t status
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_error_is_error</NAME>
-<RETURNS>gboolean  </RETURNS>
-lu_status_t status
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_error_free</NAME>
-<RETURNS>void  </RETURNS>
-lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_prompt_console</NAME>
-<RETURNS>gboolean  </RETURNS>
-struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_prompt_console_quiet</NAME>
-<RETURNS>gboolean  </RETURNS>
-struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
-</FUNCTION>
+<MACRO>
+<NAME>LU_VALUE_INVALID_ID</NAME>
+#define LU_VALUE_INVALID_ID ((id_t)-1)
+</MACRO>
 <ENUM>
 <NAME>lu_entity_type_t</NAME>
 typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
 </ENUM>
+<FUNCTION>
+<NAME>lu_value_strdup</NAME>
+<RETURNS>char  *</RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_values_equal</NAME>
+<RETURNS>int  </RETURNS>
+const GValue *a, const GValue *b
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_init_set_id</NAME>
+<RETURNS>void  </RETURNS>
+GValue *value, id_t id
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_get_id</NAME>
+<RETURNS>id_t  </RETURNS>
+const GValue *value
+</FUNCTION>
 <FUNCTION>
 <NAME>lu_start</NAME>
 <RETURNS>lu_context_t  *</RETURNS>
@@ -314,20 +216,142 @@ lu_context_t *context,const char *pattern,lu_error_t **error
 <RETURNS>GPtrArray  *</RETURNS>
 lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
+<ENUM>
+<NAME>lu_status_t</NAME>
+typedef enum lu_status {
+	/* Non-fatal. */
+	lu_success = 0,
+	lu_warning_config_disabled,
+
+	/* Fatal. */
+	lu_error_generic,
+	lu_error_privilege,
+	lu_error_access_denied,
+
+	/* Data validation errors. */
+	lu_error_name_bad,
+	lu_error_id_bad,
+	lu_error_name_used,
+	lu_error_id_used,
+
+	/* Terminal manipulation errors. */
+	lu_error_terminal,
+
+	/* File I/O errors. */
+	lu_error_open,
+	lu_error_lock,
+	lu_error_stat,
+	lu_error_read,
+	lu_error_write,
+	lu_error_search,
+
+	/* Initialization or module-loading errors. */
+	lu_error_init,
+	lu_error_module_load,
+	lu_error_module_sym,
+	lu_error_module_version,
+} lu_status_t;
+</ENUM>
+<MACRO>
+<NAME>LU_ERROR_CHECK</NAME>
+#define LU_ERROR_CHECK(err_p_p) \
+do { \
+	struct lu_error **__err = (err_p_p); \
+	if ((__err == NULL) || (*__err != NULL)) { \
+		if(__err == NULL) { \
+			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
+		} else \
+		if(*__err != NULL) { \
+			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\n", __FUNCTION__); \
+		} \
+		abort(); \
+	} \
+} while(0)
+</MACRO>
 <FUNCTION>
-<NAME>lu_cfg_read</NAME>
-<RETURNS>GList  *</RETURNS>
-struct lu_context *context,const char *key, const char *default_value
+<NAME>lu_error_new</NAME>
+<RETURNS>void  </RETURNS>
+lu_error_t **error, lu_status_t code,const char *fmt, ...
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_cfg_read_single</NAME>
+<NAME>lu_strerror</NAME>
 <RETURNS>const char  *</RETURNS>
-struct lu_context *context,const char *key, const char *default_value
+lu_error_t *error
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_cfg_read_keys</NAME>
-<RETURNS>GList  *</RETURNS>
-struct lu_context *context,const char *parent_key
+<NAME>lu_error_is_success</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_status_t status
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_error_is_warning</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_status_t status
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_error_is_error</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_status_t status
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_error_free</NAME>
+<RETURNS>void  </RETURNS>
+lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_on</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_off</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_user</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_group</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_free_specials</NAME>
+<RETURNS>void  </RETURNS>
+char **specials
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_set_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_set_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_prompt_console</NAME>
+<RETURNS>gboolean  </RETURNS>
+struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_prompt_console_quiet</NAME>
+<RETURNS>gboolean  </RETURNS>
+struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
 </FUNCTION>
 <MACRO>
 <NAME>LU_USERNAME</NAME>

@@ -25,6 +25,7 @@
 #ifndef libuser_user_private_h
 #define libuser_user_private_h
 
+#include <sys/types.h>
 #include <glib.h>
 #include <gmodule.h>
 #include <libintl.h>
@@ -299,9 +300,8 @@ gboolean lu_util_field_write(int fd, const char *first, unsigned int field,
 char *lu_util_shadow_current_date(struct lu_string_cache *cache);
 
 /* Find the first unused ID of the given type, searching starting at "id". */
-glong lu_get_first_unused_id(struct lu_context *ctx,
-			     enum lu_entity_type type,
-			     glong id);
+id_t lu_get_first_unused_id(struct lu_context *ctx, enum lu_entity_type type,
+			    id_t id);
 
 G_END_DECLS
 

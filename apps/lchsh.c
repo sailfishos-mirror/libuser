@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001,2002 Red Hat, Inc.
+ * Copyright (C) 2001,2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -116,16 +116,7 @@ main(int argc, const char **argv)
 		prompts[0].prompt = N_("New Shell");
 		prompts[0].domain = PACKAGE;
 		prompts[0].visible = TRUE;
-		if (G_VALUE_HOLDS_STRING(value)) {
-			prompts[0].default_value = g_value_get_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			prompts[0].default_value = g_strdup_printf("%ld",
-								   g_value_get_long(value));
-			/* leak */
-		} else {
-			g_assert_not_reached();
-		}
+		prompts[0].default_value = lu_value_strdup(value);
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 				      NULL, &error)) {

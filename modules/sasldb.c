@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -106,15 +106,7 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
 	values = lu_ent_get(ent, LU_USERNAME);
 	for (i = 0; (values != NULL) && (i < values->n_values); i++) {
 		value = g_value_array_get_nth(values, i);
-		if (G_VALUE_HOLDS_STRING(value)) {
-			tmp = g_value_dup_string(value);
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
-			tmp = g_strdup_printf("%ld", g_value_get_long(value));
-		} else {
-			g_assert_not_reached();
-			tmp = NULL;
-		}
+		tmp = lu_value_strdup(value);
 		ret = sasl_setpass(connection, tmp, password,
 				   password != NULL ? strlen (password) : 0,
 				   NULL, 0, flags);
@@ -242,14 +234,7 @@ lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 	(void)error;
 	values = lu_ent_get(ent, LU_USERNAME);
 	value = g_value_array_get_nth(values, 0);
-	if (G_VALUE_HOLDS_STRING(value)) {
-		name = g_value_dup_string(value);
-	} else
-	if (G_VALUE_HOLDS_LONG(value)) {
-		name = g_strdup_printf("%ld", g_value_get_long(value));
-	} else {
-		g_assert_not_reached();
-	}
+	name = lu_value_strdup(value);
 #ifdef HAVE_SASL_USER_EXISTS
 	i = sasl_user_exists(module->module_context, NULL, NULL, name);
 #else
