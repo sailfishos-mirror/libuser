@@ -1,5 +1,7 @@
 # translation of it.po to 
 # translation of it.po to
+# translation of it.po to
+# translation of it.po to
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004.
@@ -8,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2004-11-01 21:26+0100\n"
+"POT-Creation-Date: 2004-11-01 00:14+0100\n"
+"PO-Revision-Date: 2004-11-02 23:11+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -43,9 +45,10 @@ msgid "Internal error.\n"
 msgstr "Errore interno.\n"
 
 #: apps/apputil.c:506
-#, fuzzy, c-format
+#, c-format
+#, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s non è autorizzato alla modifica delle informazioni finger di %s\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:508
 msgid "Unknown user context"
@@ -234,12 +237,12 @@ msgstr "Nuova shell"
 
 #: apps/lchsh.c:144
 msgid "Shell changed.\n"
-msgstr "La shell é cambiata.\n"
+msgstr "La shell ï¿½cambiata.\n"
 
 #: apps/lchsh.c:147
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr "La shell non é cambiata: %s\n"
+msgstr "La shell non ï¿½cambiata: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -263,7 +266,7 @@ msgstr "Il gruppo %s non esiste.\n"
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Il gruppo %s non può essere eliminato: %s.\n"
+msgstr "Il gruppo %s non puï¿½essere eliminato: %s.\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -278,17 +281,17 @@ msgstr "Configurazione password per il gruppo %s fallita: %s\n"
 #: apps/lgroupmod.c:246
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Il gruppo %s non può essere bloccato: %s\n"
+msgstr "Il gruppo %s non puï¿½essere bloccato: %s\n"
 
 #: apps/lgroupmod.c:255
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Il gruppo %s non può essere sbloccato: %s\n"
+msgstr "Il gruppo %s non puï¿½essere sbloccato: %s\n"
 
 #: apps/lgroupmod.c:262
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Il gruppo %s non può essere modificato: %s.\n"
+msgstr "Il gruppo %s non puï¿½essere modificato: %s.\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -610,7 +613,7 @@ msgstr "nome non e' impostato"
 
 #: lib/user.c:197
 msgid "name is too short"
-msgstr "nome è troppo corto"
+msgstr "nome ï¿½troppo corto"
 
 #: lib/user.c:203
 msgid "name contains non-ASCII characters"
@@ -637,8 +640,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:109
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:115
 #, c-format
@@ -653,8 +655,7 @@ msgstr "impossibile impostare l'ambiente di sicurezza predefinito a %s: %s"
 #: modules/files.c:142
 #, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr ""
-"impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
+msgstr "impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -681,7 +682,7 @@ msgstr "errore nella creazione di `%s': %s"
 #: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "il file di backup `%s' esiste e non è un file standard"
+msgstr "il file di backup `%s' esiste e non ï¿½un file standard"
 
 #: modules/files.c:926 modules/files.c:1379
 #, c-format
@@ -690,7 +691,7 @@ msgstr "impossibile leggere da `%s': %s"
 
 #: modules/files.c:935 modules/files.c:942
 msgid "entry already present in file"
-msgstr "voce già presente nel file"
+msgstr "voce giï¿½presente nel file"
 
 #: modules/files.c:949 modules/files.c:964 modules/files.c:1429
 #: modules/files.c:1437
@@ -702,7 +703,7 @@ msgstr "impossibile scrivere su `%s': %s"
 #: modules/files.c:1242
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "nessun attributo %s per l'oggetto entità"
+msgstr "nessun attributo %s per l'oggetto entitï¿½"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
 msgid "error encrypting password"
@@ -737,17 +738,17 @@ msgstr "errore nell'analisi del nome utente `%s' per kerberos"
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "nessun %s o attributo %s per la struttura dell'entità"
+msgstr "nessun %s o attributo %s per la struttura dell'entitï¿½"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "nessun %s o attributo %s per l'entità"
+msgstr "nessun %s o attributo %s per l'entitï¿½"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "l'entità è stata creata senza attributi %s o %s"
+msgstr "l'entitï¿½ï¿½stata creata senza attributi %s o %s"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
@@ -757,7 +758,7 @@ msgstr "errore nella lettura delle informazioni per `%s' da kerberos"
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "nessun attributo %s per l'entità"
+msgstr "nessun attributo %s per l'entitï¿½"
 
 #: modules/krb5.c:642
 #, c-format
@@ -815,8 +816,7 @@ msgstr ""
 
 #: modules/ldap.c:665
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1378
 #, c-format
@@ -826,7 +826,7 @@ msgstr "nessun attributo %s per l'oggetto utente"
 #: modules/ldap.c:1387
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "l'oggetto utente è stato creato senza `%s'"
+msgstr "l'oggetto utente ï¿½stato creato senza `%s'"
 
 #: modules/ldap.c:1412
 msgid "could not convert internal data to LDAPMods"
@@ -875,8 +875,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1909
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2469
 msgid "LDAP Server Name"
@@ -963,14 +962,12 @@ msgid "Entry not found.\n"
 msgstr "Voce non trovata.\n"
 
 #: samples/prompt.c:51
-#, fuzzy
 msgid "Prompts succeeded.\n"
-msgstr "Invio avvenuto con successo.\n"
+msgstr "Prompt eseguiti con successo\n"
 
 #: samples/prompt.c:61
-#, fuzzy
 msgid "Prompts failed.\n"
-msgstr "Invio fallito.\n"
+msgstr "Prompt falliti.\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
@@ -988,8 +985,3 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
 
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "erroreCyrus SASL nella creazione dell'utente:`%s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Errore Cyrus SASL nella rimozione dell'utente:`%s: %s"
