@@ -61,7 +61,7 @@ msgstr "Minimum:\t%d\n"
 #: apps/lchage.c:138
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "Maximum:\t%d\n"
+msgstr "Maksimum:\t%d\n"
 
 #: apps/lchage.c:142
 #, c-format
@@ -90,355 +90,359 @@ msgstr "Passord Utløper:\t%s\n"
 #: apps/lchage.c:173
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "Passord inaktivt:\t%s\n"
 
 #: apps/lchage.c:181
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "Konto utgår:\t%s\n"
 
 #: apps/lchage.c:210
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr ""
+msgstr "Feil under endring av aldringsinformasjon for %s.\n"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:54 apps/lgroupmod.c:78
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[ALTERNATIV...] gruppe"
 
 #: apps/lgroupadd.c:68 apps/lgroupdel.c:60 apps/lgroupmod.c:84
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "Ingen gruppenavn spesifisert.\n"
 
 #: apps/lgroupadd.c:87
 msgid "Group creation failed.\n"
-msgstr ""
+msgstr "Oppretting av gruppe feilet.\n"
 
 #: apps/lgroupdel.c:72 apps/lgroupmod.c:101
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "Gruppe %s eksisterer ikke.\n"
 
 #: apps/lgroupdel.c:77
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr ""
+msgstr "Gruppe %s kunne ikke slettes.\n"
 
 #: apps/lgroupmod.c:94 apps/lusermod.c:98
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "Både -L og -U spesifisert.\n"
 
 #: apps/lgroupmod.c:161 apps/lgroupmod.c:171
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr ""
+msgstr "Feil under setting av passord for gruppe %s.\n"
 
 #: apps/lgroupmod.c:180
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr ""
+msgstr "Gruppe %s kunne ikke låses.\n"
 
 #: apps/lgroupmod.c:188
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr ""
+msgstr "Grupe %s kunne ikke låses opp.\n"
 
 #: apps/lgroupmod.c:195
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr ""
+msgstr "Gruppe %s kunne ikke endres.\n"
 
 #: apps/luseradd.c:124
 #, c-format
 msgid "Error creating group for %s.\n"
-msgstr ""
+msgstr "Feil under oppretting av gruppe for %s.\n"
 
 #: apps/luseradd.c:170
 msgid "Account creation failed.\n"
-msgstr ""
+msgstr "Feil under oppretting av konto.\n"
 
 #: apps/luseradd.c:193
 #, c-format
 msgid "Bad UID for %s.\n"
-msgstr ""
+msgstr "Ugyldig UID for %s.\n"
 
 #: apps/luseradd.c:197
 #, c-format
 msgid "Bad GID for %s.\n"
-msgstr ""
+msgstr "Ugyldig GID for %s.\n"
 
 #: apps/luseradd.c:207
 #, c-format
 msgid "No home directory for %s.\n"
-msgstr ""
+msgstr "Ingen hjemmekatalog for %s.\n"
 
 #: apps/luseradd.c:213
 #, c-format
 msgid "Error creating %s.\n"
-msgstr ""
+msgstr "Feil under oppretting av %s.\n"
 
 #: apps/luserdel.c:81
 #, c-format
 msgid "User %s could not be deleted.\n"
-msgstr ""
+msgstr "Bruker %s kunne ikke slettes.\n"
 
 #: apps/luserdel.c:89
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s hadde ingen hjemmekatalog.\n"
 
 #: apps/luserdel.c:94
 #, c-format
 msgid "Error removing %s.\n"
-msgstr ""
+msgstr "Feil under fjerning av %s.\n"
 
 #: apps/lusermod.c:134
 #, c-format
 msgid "Error reading old home directory for %s.\n"
-msgstr ""
+msgstr "Feil under lesing av gammel hjemmekatalog for %s.\n"
 
 #: apps/lusermod.c:143 apps/lusermod.c:153
 #, c-format
 msgid "Failed to set password for user %s.\n"
-msgstr ""
+msgstr "Feil under setting av passord for bruker %s.\n"
 
 #: apps/lusermod.c:162
 #, c-format
 msgid "User %s could not be locked.\n"
-msgstr ""
+msgstr "Bruker %s kunne ikke låses.\n"
 
 #: apps/lusermod.c:170
 #, c-format
 msgid "User %s could not be unlocked.\n"
-msgstr ""
+msgstr "Bruker %s kunne ikke låses opp.\n"
 
 #: apps/lusermod.c:177
 #, c-format
 msgid "User %s could not be modified.\n"
-msgstr ""
+msgstr "Bruker %s kunne ikke endres.\n"
 
 #: apps/lusermod.c:183
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "Ingen gammel hjemmekatalog for %s.\n"
 
 #: apps/lusermod.c:188
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "Ingen ny hjemmekatalog for %s.\n"
 
 #: apps/lusermod.c:193
 #, c-format
 msgid "Error moving %s to %s.\n"
-msgstr ""
+msgstr "Feil under flytting av %s til %s.\n"
 
 #: lib/user.c:120
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "ingen initieringsfunksjon %s i `%s'"
 
 #: lib/user.c:141
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "feil modulversjon i `%s'"
 
 #: lib/usercfg.c:56
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "kunne ikke åpne konfigurasjonsfil `%s': %s"
 
 #: lib/userent.c:43
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
-msgstr ""
+msgstr "dump av struct lu_ent ved %p:\n"
 
 #: lib/userent.c:44
 #, c-format
 msgid " magic = %08x\n"
-msgstr ""
+msgstr " magi = %08x\n"
 
 #: lib/userent.c:45
 #, c-format
 msgid " type = %s\n"
-msgstr ""
+msgstr " type = %s\n"
 
 #: lib/userent.c:45
 msgid "user"
-msgstr ""
+msgstr "bruker"
 
 #: lib/userent.c:45
 msgid "group"
-msgstr ""
+msgstr "gruppe"
 
 #: lib/userent.c:45
 msgid "unknown"
-msgstr ""
+msgstr "ukjent"
 
 #: lib/userent.c:213
 msgid ""
 "\n"
 "Before copy:\n"
 msgstr ""
+"\n"
+"Før kopiering:\n"
 
 #: lib/userent.c:227
 msgid ""
 "\n"
 "After copy:\n"
 msgstr ""
+"\n"
+"Etter kopiering:\n"
 
 #: lib/userent.c:385
 #, c-format
 msgid "freeing lu_ent at %p.\n"
-msgstr ""
+msgstr "frigir lu_ent ved %p.\n"
 
 #: modules/files.c:112
 #, c-format
 msgid "couldn't open `%s'"
-msgstr ""
+msgstr "kunne ikke åpne `%s'"
 
 #: modules/files.c:132
 #, c-format
 msgid "error creating `%s'"
-msgstr ""
+msgstr "feil under oppretting av `%s'"
 
 #: modules/files.c:602 modules/files.c:612
 msgid "entry already present in file"
-msgstr ""
+msgstr "oppføringen er allerede i filen"
 
 #: modules/files.c:712 modules/files.c:719 modules/files.c:801
 #: modules/files.c:811
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "entitetsobjekt har ingen %s-attributt"
 
 #: modules/files.c:1425 modules/files.c:1481
 msgid "Not executing with superuser privileges."
-msgstr ""
+msgstr "Kjører ikke med superbruker-privilegier."
 
 #: modules/files.c:1493
 msgid "No shadow file present -- disabling."
-msgstr ""
+msgstr "Ingen skyggefil finnes -- deaktiverer."
 
 #: modules/krb5.c:97
 #, c-format
 msgid "error connecting to the kadm5 server for service %s in realm %s: %s"
-msgstr ""
+msgstr "feil under tilkobling til kadm5-tjeneren for tjeneste %s i område %s: %s"
 
 #: modules/krb5.c:127 modules/krb5.c:184 modules/krb5.c:242 modules/krb5.c:314
 #: modules/krb5.c:359 modules/krb5.c:427
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "feil under initiering av kerberos-biblioteket"
 
 #: modules/krb5.c:132 modules/krb5.c:199 modules/krb5.c:267 modules/krb5.c:272
 #: modules/krb5.c:329 modules/krb5.c:374 modules/krb5.c:441
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "feil under lesing av brukernavn `%s' for kerberos"
 
 #: modules/krb5.c:193 modules/krb5.c:323 modules/krb5.c:368
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "entitetsstruktur har ingen %s eller %s-attributter"
 
 #: modules/krb5.c:251
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr ""
+msgstr "entitet har ingen %s eller %s-attributter"
 
 #: modules/krb5.c:261
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "entiteten ble opprettet uten %s- eller %s-attributter"
 
 #: modules/krb5.c:381
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr ""
+msgstr "feil under lesing av informasjon for `%s' fra kerberos"
 
 #: modules/krb5.c:435
 #, c-format
 msgid "entity has no %s attribute"
-msgstr ""
+msgstr "entiteten har ingen %s-attributt"
 
 #: modules/krb5.c:466
 #, c-format
 msgid "error setting password for `%s'"
-msgstr ""
+msgstr "feil under setting av passord for `%s'"
 
 #: modules/krb5.c:560
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "Kerberos-område"
 
 #: modules/krb5.c:564
 msgid "Kerberos Admin Principal"
-msgstr ""
+msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:581
 #, c-format
 msgid "Kerberos password for %s"
-msgstr ""
+msgstr "Kerberos-passord for %s"
 
 #: modules/ldap.c:162
 msgid "error initializing ldap library"
-msgstr ""
+msgstr "feil under initiering av ldap-bibliotek"
 
 #: modules/ldap.c:180
 msgid "could not set protocol to version 3"
-msgstr ""
+msgstr "kunne ikke sette protokoll til versjon 3"
 
 #: modules/ldap.c:186
 msgid "could not negotiate TLS with server"
-msgstr ""
+msgstr "kunne ikke forhandle TLS med tjener"
 
 #: modules/ldap.c:269 modules/ldap.c:638
 msgid "error mapping name to DN"
-msgstr ""
+msgstr "feil under kobling av navn til DN"
 
 #: modules/ldap.c:304 modules/ldap.c:808
 msgid "error searching ldap directory"
-msgstr ""
+msgstr "feil under søk i ldap-katalogen"
 
 #: modules/ldap.c:487
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "bruker-objektet hadde ingen %s-attributt"
 
 #: modules/ldap.c:493
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "brukerobjektet ble opprettet uten `%s'"
 
 #: modules/ldap.c:500
 msgid "could not determine expected DN"
-msgstr ""
+msgstr "kunne ikke bestemme forventet DN"
 
 #: modules/ldap.c:506
 msgid "could not convert internal data to LDAPMods"
-msgstr ""
+msgstr "kunne ikke konvertere interne data til LDAPMods"
 
 #: modules/ldap.c:519 modules/ldap.c:677
 #, c-format
 msgid "error modifying directory entry: %s"
-msgstr ""
+msgstr "feil under endring av katalogoppføring: %s"
 
 #: modules/ldap.c:532
 #, c-format
 msgid "error renaming directory entry: %s\n"
-msgstr ""
+msgstr "feil under endring av navn på katalogoppføring: %s\n"
 
 #: modules/ldap.c:573
 #, c-format
 msgid "object had no %s attribute"
-msgstr ""
+msgstr "objektet hadde ingen %s-attributt"
 
 #: modules/ldap.c:579
 msgid "could not map name to DN"
-msgstr ""
+msgstr "kunne ikke koble navn til DN"
 
 #: modules/ldap.c:590
 #, c-format
 msgid "error removing directory entry: %s.\n"
-msgstr ""
+msgstr "feil under fjerning av katalogoppføring: %s.\n"
 
 #: modules/ldap.c:632 modules/ldap.c:644
 #, c-format
@@ -455,11 +459,11 @@ msgstr "LDAP basis DN"
 
 #: modules/ldap.c:870
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:874
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "LDAP Bind-passord"
 
 #: modules/ldap.c:879
 msgid "LDAP SASL User"
@@ -467,48 +471,48 @@ msgstr "LDAP SASL-bruker"
 
 #: modules/ldap.c:883
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL-autorisasjonsbruker"
 
 #: samples/lookup.c:61 samples/testuser.c:54
 msgid "Error initializing lu.\n"
-msgstr ""
+msgstr "Feil under initiering av lu.\n"
 
 #: samples/lookup.c:70
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr ""
+msgstr "Søker etter gruppe med ID %d.\n"
 
 #: samples/lookup.c:73
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "Søker etter gruppe med navn %s.\n"
 
 #: samples/lookup.c:79
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr ""
+msgstr "Søker etter bruker med ID %d.\n"
 
 #: samples/lookup.c:82
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Leter for bruker ved navn %s.\n"
+msgstr "Søker etter bruker ved navn %s.\n"
 
 #: samples/lookup.c:108
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "Oppføring ikke funnet.\n"
 
 #: samples/testuser.c:58
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "Standardklasser for brukerobjekter:\n"
 
 #: samples/testuser.c:64
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "Standardnavn for brukerattributter:\n"
 
 #: samples/testuser.c:70
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "Henter standard brukerattributter:\n"
 
 #: samples/testuser.c:75
 msgid "Copying user structure:\n"
-msgstr ""
+msgstr "Kopierer brukerstruktur:\n"
