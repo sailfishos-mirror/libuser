@@ -388,7 +388,7 @@ msgstr "UID 0 से लेखा बनाने के लिए इंका�
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "`%s' समूह बनाने में दोष (GID %ld)\n"
+msgstr "`%s': GID %ld से समूह बनाने में दोष\n"
 
 #: apps/lnewusers.c:288
 #, c-format
