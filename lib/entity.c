@@ -71,7 +71,7 @@ lu_ent_free(struct lu_ent *ent)
 		attr->name = 0;
 		attr->values = NULL;
 	}
-	g_array_free(ent->current, FALSE);
+	g_array_free(ent->current, TRUE);
 	/* Free each pending attribute. */
 	for (i = 0; i < ent->pending->len; i++) {
 		attr = &g_array_index(ent->pending, struct lu_attribute, i);
@@ -81,7 +81,7 @@ lu_ent_free(struct lu_ent *ent)
 		attr->name = 0;
 		attr->values = NULL;
 	}
-	g_array_free(ent->pending, FALSE);
+	g_array_free(ent->pending, TRUE);
 	/* Free the module list. */
 	g_value_array_free(ent->modules);
 	memset(ent, 0, sizeof(struct lu_ent));

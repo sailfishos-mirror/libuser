@@ -55,16 +55,24 @@ convert_value_array_pylist(GValueArray *array)
 		value = g_value_array_get_nth(array, i);
 		/* If the item is a G_TYPE_LONG, add it as a PyLong. */
 		if (G_VALUE_HOLDS_LONG(value)) {
+			PyObject *val;
+
 			l = g_value_get_long(value);
-			PyList_Append(ret, PyLong_FromLong(l));
+			val = PyLong_FromLong(l);
+			PyList_Append(ret, val);
+			Py_DECREF(val);
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "adding %ld to list\n", l);
 #endif
 		} else
 		/* If the item is a G_TYPE_STRING, add it as a PyString. */
 		if (G_VALUE_HOLDS_STRING(value)) {
+			PyObject *val;
+
 			s = g_value_get_string(value);
-			PyList_Append(ret, PyString_FromString(s));
+			val = PyString_FromString(s);
+			PyList_Append(ret, val);
+			Py_DECREF(val);
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "adding `%s' to list\n", s);
 #endif
@@ -282,7 +290,11 @@ libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
 	for (i = lu_ent_get_attributes(self->ent);
 	     i != NULL;
 	     i = g_list_next(i)) {
-		PyList_Append(ret, PyString_FromString((char*)i->data));
+		PyObject *str;
+
+		str = PyString_FromString((char*)i->data);
+		PyList_Append(ret, str);
+		Py_DECREF(str);
 	}
 	DEBUG_EXIT;
 	return ret;

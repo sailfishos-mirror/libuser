@@ -976,7 +976,7 @@ libuser_admin_enumerate_users(PyObject *self, PyObject *args,
 	results = lu_users_enumerate(me->ctx, pattern, &error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
-	/* FIXME: free the array? */
+	g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1004,7 +1004,7 @@ libuser_admin_enumerate_groups(PyObject *self, PyObject *args,
 	results = lu_groups_enumerate(me->ctx, pattern, &error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
-	/* FIXME: free the array? */
+	g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1030,7 +1030,7 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 	/* Get a list of the users in this group. */
 	results = lu_users_enumerate_by_group(me->ctx, group, &error);
 	ret = convert_value_array_pylist(results);
-	/* FIXME: free the array? */
+	g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1056,7 +1056,7 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 	/* Get the list. */
 	results = lu_groups_enumerate_by_user(me->ctx, user, &error);
 	ret = convert_value_array_pylist(results);
-	/* FIXME: free the array? */
+	g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1086,10 +1086,12 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 	/* Convert the list to a PyList. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
-		PyList_Append(ret,
-			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+		PyObject *ent;
+
+		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
+		PyList_Append(ret, ent);
+		Py_DECREF(ent);
 	}
-	/* FIXME: free the array? */
 	g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
@@ -1120,10 +1122,12 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	/* Convert the list to a PyList. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
-		PyList_Append(ret,
-			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+		PyObject *ent;
+
+		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
+		PyList_Append(ret, ent);
+		Py_DECREF(ent);
 	}
-	/* FIXME: free the array? */
 	g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
@@ -1150,10 +1154,12 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 	/* Get a list of the users in this group. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
-		PyList_Append(ret,
-			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+		PyObject *ent;
+
+		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
+		PyList_Append(ret, ent);
+		Py_DECREF(ent);
 	}
-	/* FIXME: free the array? */
 	g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
@@ -1181,10 +1187,12 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	/* Get the list. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
-		PyList_Append(ret,
-			      libuser_wrap_ent(g_ptr_array_index(results, i)));
+		PyObject *ent;
+
+		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
+		PyList_Append(ret, ent);
+		Py_DECREF(ent);
 	}
-	/* FIXME: free the array? */
 	g_ptr_array_free(results, TRUE);
 	results = lu_groups_enumerate_by_user_full(me->ctx, user, &error);
 	DEBUG_EXIT;

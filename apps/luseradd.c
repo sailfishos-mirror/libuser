@@ -170,6 +170,7 @@ main(int argc, const char **argv)
 		} else {
 			/* No such group, we need to create one. */
 			create_group = TRUE;
+			/* FIXME: we have group NUMBER, not name */
 		}
 	}
 

@@ -632,7 +632,6 @@ merge_ent_array_duplicates(GPtrArray *array)
 	/* Iterate over every entity in the incoming list. */
 	for (i = 0; i < array->len; i++) {
 		current = g_ptr_array_index(array, i);
-		fflush(stdout);
 		key = 0;
 		which = NULL;
 		values = NULL;
@@ -671,7 +670,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 			g_ptr_array_add(ret, current);
 		} else {
 			/* Merge all of its data into the existing one; first,
-			 * the pending data. */
+			 * the current data. */
 			attributes = lu_ent_get_attributes_current(current);
 			list = attributes;
 			while (attributes != NULL) {
@@ -685,7 +684,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 				attributes = g_list_next(attributes);
 			}
 			g_list_free(list);
-			/* Merge the current data. */
+			/* Merge the pending data. */
 			attributes = lu_ent_get_attributes(current);
 			while (attributes != NULL) {
 				attr = (const char *)attributes->data;

@@ -1,3 +1,30 @@
+2004-10-10  Miloslav Trmac  <mitr@redhat.com>
+
+	* python/admin.c (libuser_admin_enumerate_users) 
+	(libuser_admin_enumerate_groups) 
+	(libuser_admin_enumerate_users_by_group) 
+	(libuser_admin_enumerate_groups_by_user): Fix memory leaks.
+
+	* python/admin.c (libuser_admin_enumerate_users_full)
+	(libuser_admin_enumerate_groups_full) 
+	(libuser_admin_enumerate_users_by_group_full) 
+	(libuser_admin_enumerate_groups_by_user_full)
+	* python/ent.c (convert_value_array_pylist) 
+	(libuser_entity_getattrlist): 
+	* python/libusermodule.c (libuser_get_user_shells): 
+	* python/misc.c (libuser_admin_python_prompter): Fix memory leaks.
+
+2004-10-09  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/entity.c (lu_ent_free): Fix memory leak.
+
+	* modules/files.c (generic_add): Fix memory leak.
+
+	* lib/user.c (merge_ent_array_duplicates): Remove fflush (from
+	debugging?).
+
+	* modules/files.c (lu_files_enumerate_full): Fix memory leak.
+
 2004-09-29  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.3.

@@ -59,7 +59,7 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			prompt = libuser_prompt_new();
 			prompt->prompt = prompts[i];
 			PyList_Append(list, (PyObject *) prompt);
-			/* FIXME: Py_Decref(prompt)? */
+			Py_DECREF(prompt);
 		}
 		tuple = PyTuple_New(PyTuple_Check(prompt_data[1]) ?
 			            PyTuple_Size(prompt_data[1]) + 1 : 1);

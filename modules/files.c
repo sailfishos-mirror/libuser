@@ -903,7 +903,7 @@ generic_add(struct lu_module *module, const char *base_name,
 
 	/* Generate a new line with the right data in it, and allocate space
 	 * for the contents of the file. */
-	line = formatter(ent); /* FIXME: free? */
+	line = formatter(ent);
 	contents = g_malloc0(st.st_size + 1);
 
 	/* We sanity-check here to make sure that the entity isn't already
@@ -980,6 +980,7 @@ generic_add(struct lu_module *module, const char *base_name,
 	g_free(fragment2);
 	g_free(fragment1);
 	g_free(contents);
+	g_free(line);
  err_lock:
 	lu_util_lock_free(lock);
  err_fd:
@@ -2564,15 +2565,13 @@ lu_files_enumerate_full(struct lu_module *module,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return NULL;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
-		g_free(filename);
-		return NULL;
+		goto err_filename;
 	}
 
 	/* Wrap the file up in stdio. */
@@ -2583,8 +2582,7 @@ lu_files_enumerate_full(struct lu_module *module,
 			     strerror(errno));
 		lu_util_lock_free(lock);
 		close(fd);
-		g_free(filename);
-		return NULL;
+		goto err_filename;
 	}
 
 	/* Allocate an array to hold results. */
@@ -2620,6 +2618,8 @@ lu_files_enumerate_full(struct lu_module *module,
 	lu_util_lock_free(lock);
 	fclose(fp);
 
+ err_filename:
+	g_free(filename);
 	return ret;
 }
 

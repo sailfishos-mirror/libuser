@@ -48,7 +48,11 @@ libuser_get_user_shells(PyObject * ignored)
 	ret = PyList_New(0);
 	setusershell();
 	while ((shell = getusershell()) != NULL) {
-		PyList_Append(ret, PyString_FromString(shell));
+		PyObject *str;
+
+		str = PyString_FromString(shell);
+		PyList_Append(ret, str);
+		Py_DECREF(str);
 	}
 	endusershell();
 
