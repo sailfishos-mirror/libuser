@@ -1,20 +1,23 @@
+# translation of zh_CN.po to Simplified Chinese
 # translation of libuser.po to Simplified Chinese
 # Simplified Chinese Version of libuser.po file.
 # Copyright (C) 2002 Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# Sarah Wang <sarahs@redhat.com>, 2003,2004
+# Sarah Wang <sarahs@redhat.com>, 2003,2004.
+# Tony Fu <tfu@redhat.com>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-03-11 11:21+0800\n"
-"Last-Translator: hutuworm <hutuworm@hutuworm.org>\n"
+"PO-Revision-Date: 2004-11-16 16:33+1000\n"
+"Last-Translator: Tony Fu <tfu@redhat.com>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: apps/apputil.c:129
 #, c-format
@@ -44,17 +47,16 @@ msgstr "内部错误。\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s 没有被授权改变 %s 的 finger 信息\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "未知错误"
+msgstr "未知的用户上下文"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "不能为 /etc/passwd 设定默认的上下文\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -163,9 +165,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "帐号过期：\t%s\n"
 
 #: apps/lchage.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "为 %s 修改老化信息失败。\n"
+msgstr "为 %s: %s 修改老化信息失败。\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -237,9 +239,9 @@ msgid "Shell changed.\n"
 msgstr "Shell 被改变。\n"
 
 #: apps/lchsh.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Shell 被改变。\n"
+msgstr "Shell 没有改变：%s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 msgid "[OPTION...] group"
@@ -253,12 +255,12 @@ msgstr "没有指定的组群名。\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "无效的组群 ID %s\n"
 
 #: apps/lgroupadd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "创建组群失败。\n"
+msgstr "创建组群失败：%s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, c-format
@@ -266,9 +268,9 @@ msgid "Group %s does not exist.\n"
 msgstr "组群 %s 不存在。\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "组群 %s 无法被删除：%s。\n"
+msgstr "组群 %s 无法被删除：%s\n"
 
 #: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, c-format
@@ -276,24 +278,24 @@ msgid "Both -L and -U specified.\n"
 msgstr " -L 和 -U 两者皆被指定。\n"
 
 #: apps/lgroupmod.c:238 apps/lgroupmod.c:247
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "为组群 %s 设置口令失败。\n"
+msgstr "为组群 %s: %s 设置口令失败。\n"
 
 #: apps/lgroupmod.c:256
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "组群 %s 无法被锁。\n"
+msgstr "组群 %s 无法被锁：%s\n"
 
 #: apps/lgroupmod.c:265
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "组群 %s 无法被开锁。\n"
+msgstr "组群 %s 无法被开锁：%s\n"
 
 #: apps/lgroupmod.c:272
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "组群 %s 无法被修改：%s。\n"
+msgstr "组群 %s 无法被修改：%s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -327,16 +329,16 @@ msgstr "为“%s”创建账号时出错：行格式不正确。\n"
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "无效的用户 ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒绝使用 UID 0 来创建账号。\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "创建组群“%s”时出错，使用 GID %ld。\n"
+msgstr "创建组群“%s”时出错，使用 GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -397,14 +399,14 @@ msgid "Password changed.\n"
 msgstr "口令被改变。\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "组群 %s 不存在。\n"
+msgstr "组群 %jd 不存在\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "创建组群“%s”出错。\n"
+msgstr "创建组群'%s': %s出错。\n"
 
 #: apps/luseradd.c:286
 #, c-format
@@ -432,14 +434,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s 没有 gid 号码。\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID 号码为 %ld 的组群已存在，不删除。\n"
+msgstr "GID 号码为 %jd 的组群不存在，无法删除。\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID 号码为 %ld 的组群没有组群名。\n"
+msgstr "GID 号码为 %jd 的组群没有组群名。\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -502,14 +504,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "无法打开配置文件“%s”：%s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "无法打开配置文件“%s”：%s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "无法打开配置文件“%s”：%s"
+msgstr "无法读取配置文件“%s”：%s"
 
 #: lib/error.c:42
 msgid "success"
@@ -593,7 +595,7 @@ msgstr "库或模块版本错配"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "解锁将使口令域为空"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -652,19 +654,19 @@ msgid "error locking file: %s"
 msgstr "锁文件时出错：%s"
 
 #: modules/files.c:112
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "无法写入“%s”：%s"
+msgstr "无法得到“%s”：%s 的安全上下文"
 
 #: modules/files.c:118
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "无法 stat “%s”：%s"
+msgstr "无法设置默认的安全上下文：%s"
 
 #: modules/files.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "无法写入“%s”：%s"
+msgstr "无法为“%s”：%s 设置默认的上下文"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -715,9 +717,8 @@ msgid "entity object has no %s attribute"
 msgstr "实体对象没有任何 %s 属性"
 
 #: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
-#, fuzzy
 msgid "error encrypting password"
-msgstr "为“%s”设置口令时出错"
+msgstr "错误的加密口令"
 
 #: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
@@ -803,9 +804,9 @@ msgid "could not bind to LDAP server"
 msgstr "无法关联到 LDAP 服务器"
 
 #: modules/ldap.c:411
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "无法关联到 LDAP 服务器"
+msgstr "无法关联到 LDAP 服务器，第一此作为 `%s': %s 尝试"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -839,9 +840,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "无法将内部数据转换成 LDAPMods"
 
 #: modules/ldap.c:1410
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "将 LDAP 目录项目更名时出错：%s\n"
+msgstr "建立 LDAP 目录项目时出错：%s"
 
 #: modules/ldap.c:1436 modules/ldap.c:1674
 #, c-format
@@ -849,9 +850,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目录项目时出错：%s"
 
 #: modules/ldap.c:1463
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "将 LDAP 目录项目更名时出错：%s\n"
+msgstr "将 LDAP 目录项目更名时出错：%s"
 
 #: modules/ldap.c:1512
 #, c-format
@@ -859,9 +860,9 @@ msgid "object had no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
 #: modules/ldap.c:1536
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "删除 LDAP 目录项目时出错：%s。\n"
+msgstr "删除 LDAP 目录项目时出错：%s。"
 
 #: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
 #: modules/ldap.c:1803
@@ -946,12 +947,12 @@ msgstr "初始化 %s 时出错：%s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "无效的 ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "正在搜索 ID 为 %d 的组群。\n"
+msgstr "正在搜索 ID %jd 组群。\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -959,9 +960,9 @@ msgid "Searching for group named %s.\n"
 msgstr "正在搜索名称为 %s 的组群。\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "正在搜索 ID 为 %d 的用户。\n"
+msgstr "正在搜索 ID %jd 用户。\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -974,11 +975,11 @@ msgstr "没有发现项目。\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "提示成功。\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "提示失败。\n"
 
 #: samples/testuser.c:78
 msgid "Default user object classes:\n"
@@ -1017,3 +1018,4 @@ msgstr "正在复制用户结构：\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "初始化模块时出错"
+
