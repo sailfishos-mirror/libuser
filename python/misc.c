@@ -60,15 +60,14 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			prompt->prompt = prompts[i];
 			PyList_Append(list, (PyObject *) prompt);
 		}
-		tuple =
-		    PyTuple_New(PyTuple_Check(prompt_data[1]) ?
-				PyTuple_Size(prompt_data[1]) + 1 : 1);
+		tuple = PyTuple_New(PyTuple_Check(prompt_data[1]) ?
+			            PyTuple_Size(prompt_data[1]) + 1 : 1);
 		PyTuple_SetItem(tuple, 0, list);
 		if (PyTuple_Check(prompt_data[1])) {
 			for (i = 0; i < PyTuple_Size(prompt_data[1]); i++) {
 				PyTuple_SetItem(tuple, i + 1,
-						PyTuple_GetItem(prompt_data
-								[1], i));
+						PyTuple_GetItem(prompt_data[1],
+								i));
 			}
 		}
 		ret = PyObject_CallObject(prompt_data[0], tuple);
@@ -89,7 +88,6 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			prompts[i] = prompt->prompt;
 		}
 		Py_DECREF(ret);
-		Py_DECREF(list);
 	}
 
 	DEBUG_EXIT;

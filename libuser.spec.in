@@ -87,8 +87,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Tue Apr 16 2002 Nalin Dahyabhai <nalin@redhat.com> 0.50.1-1
+* Tue Apr 16 2002 Nalin Dahyabhai <nalin@redhat.com> 0.50.2-1
 - refresh translations
+- fix a heap-corruption bug in the python bindings
 
 * Mon Apr 15 2002 Nalin Dahyabhai <nalin@redhat.com> 0.50-1
 - bump version
