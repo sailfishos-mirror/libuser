@@ -1,20 +1,22 @@
+# translation of da.po to Danish
 # Danish translation of libuser
 # Copyright (C) 2001 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
-# Keld Simonsen <keld@dkuug.dk>, 2001.
+# Keld Simonsen <keld@dkuug.dk>, 2001, 2005.
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser 0.15\n"
+"Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-17 02:06+0100\n"
-"PO-Revision-Date: 2004-10-26 16:20+0200\n"
-"Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
-"Language-Team: Danish <dansk@klid.dk>\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"PO-Revision-Date: 2005-01-17 01:56+0100\n"
+"Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
+"Language-Team: Danish <<dansk@klid.dk>>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: apps/apputil.c:129
 #, c-format
@@ -44,17 +46,16 @@ msgstr "Intern fejl.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s er ikke godkendt til at ændre finger-info for %s\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "ukendt fejl fejl"
+msgstr "ukendte bruger-omgivelser"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Kin ikke sætte standard-omgivelser for /etc/passwd\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -163,9 +164,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Konto udløber:\t%s\n"
 
 #: apps/lchage.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Fejl ved ændring af aldringsinformation for %s.\n"
+msgstr "Fejl ved ændring af aldringsinformation for %s: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -237,9 +238,9 @@ msgid "Shell changed.\n"
 msgstr "Skál ændret.\n"
 
 #: apps/lchsh.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Skál ændret.\n"
+msgstr "Skál ikke ændret: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 msgid "[OPTION...] group"
@@ -253,12 +254,12 @@ msgstr "Intet gruppenavn specificeret.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Ugyldig gruppe-ID %s\n"
 
 #: apps/lgroupadd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Oprettelse af gruppe mislykkedes.\n"
+msgstr "Oprettelse af gruppe mislykkedes: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, c-format
@@ -266,34 +267,34 @@ msgid "Group %s does not exist.\n"
 msgstr "Gruppe %s eksisterer ikke.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Gruppe %s kunne ikke slettes: %s.\n"
+msgstr "Gruppe %s kunne ikke slettes: %s\n"
 
 #: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Både -L og -U specificeret.\n"
 
-#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
-#, fuzzy, c-format
+#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Fejl ved sætning af adgangskode for gruppe %s.\n"
+msgstr "Fejl ved sætning af adgangskode for gruppe %s: %s\n"
 
-#: apps/lgroupmod.c:159
-#, fuzzy, c-format
+#: apps/lgroupmod.c:256
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Gruppe %s kunne ikke låses.\n"
+msgstr "Gruppe %s kunne ikke låses: %s\n"
 
-#: apps/lgroupmod.c:168
-#, fuzzy, c-format
+#: apps/lgroupmod.c:265
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Gruppe %s kunne ikke låses op.\n"
+msgstr "Gruppe %s kunne ikke låses op: %s\n"
 
-#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
-#, fuzzy, c-format
+#: apps/lgroupmod.c:272
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Gruppe %s kunne ikke ændres: %s.\n"
+msgstr "Gruppe %s kunne ikke ændres: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -322,39 +323,38 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Ugyldig bruger-ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Nægter oprettelse af konto med UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Fejl ved oprettelse af gruppe for %s med GID %ld.\n"
+msgstr "Fejl ved oprettelse af gruppe for %s med GID %jd: %s\n"
 
-#: apps/lnewusers.c:292
+#: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Fejl ved sætning af første adgangskode for %s: %s\n"
 
-#: apps/lnewusers.c:312
+#: apps/lnewusers.c:308
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Fejl ved oprettelse af hjemmekatalog for %s: %s\n"
 
-#: apps/lnewusers.c:326
+#: apps/lnewusers.c:322
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Fejl ved oprettelse af postkø for %s.\n"
 
-#: apps/lnewusers.c:332
+#: apps/lnewusers.c:328
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Fejl ved oprettelse af brugerkonto for %s: %s\n"
@@ -382,7 +382,7 @@ msgstr "Adgangskoder er ikke ens, prøv igen.\n"
 msgid "Password change canceled.\n"
 msgstr "Ændring af adgangskode annulleret.\n"
 
-#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fejl ved sætning af adgangskode for bruger %s: %s.\n"
@@ -398,26 +398,26 @@ msgid "Password changed.\n"
 msgstr "Adgangskode ændret.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Gruppe #%d eksisterer ikke.\n"
+msgstr "Gruppe %jd eksisterer ikke\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Fejl ved oprettelse af gruppe '%s'.\n"
+msgstr "Fejl ved oprettelse af gruppe '%s': %s\n"
 
 #: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Fejl ved oprettelse af konto: %s.\n"
 
-#: apps/luseradd.c:337
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fejl ved oprettelse af %s: %s.\n"
 
-#: apps/luseradd.c:344
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fejl ved oprettelse af postkø.\n"
@@ -433,14 +433,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s havde ikke gid-nummer.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Ingen gruppe med GID %ld eksisterer, fjerner ikke.\n"
+msgstr "Ingen gruppe med GID %jd eksisterer, fjerner ikke.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Gruppe med GID %ld havde ikke et gruppenavn.\n"
+msgstr "Gruppe med GID %jd havde ikke et gruppenavn.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -457,42 +457,42 @@ msgstr "%s havde intet hjemmekatalog.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Fejl ved fjernelse af %s: %s.\n"
 
-#: apps/lusermod.c:170 apps/lusermod.c:183
+#: apps/lusermod.c:232 apps/lusermod.c:245
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Fejl ved sætning af adgangskode for bruger %s: %s.\n"
 
-#: apps/lusermod.c:193
+#: apps/lusermod.c:255
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Bruger %s kunne ikke låses: %s.\n"
 
-#: apps/lusermod.c:201
+#: apps/lusermod.c:263
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Bruger %s kunne ikke låses op: %s.\n"
 
-#: apps/lusermod.c:270
+#: apps/lusermod.c:271
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Bruger %s kunne ikke ændres: %s.\n"
 
-#: apps/lusermod.c:324
+#: apps/lusermod.c:325
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Gruppe %s kunne ikke ændres: %s.\n"
 
-#: apps/lusermod.c:335
+#: apps/lusermod.c:336
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Intet gammelt hjemmekatalog for %s.\n"
 
-#: apps/lusermod.c:340
+#: apps/lusermod.c:341
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Intet nyt hjemmekatalog for %s.\n"
 
-#: apps/lusermod.c:346
+#: apps/lusermod.c:347
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Fejl ved flytning af %s til %s: %s.\n"
@@ -503,14 +503,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "kunne ikke åbne konfigurationsfil `%s': %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "kunne ikke åbne konfigurationsfil `%s': %s"
+msgstr "kunne ikke få stat()-oplysninger på konfigurationsfil `%s': %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "kunne ikke åbne konfigurationsfil `%s': %s"
+msgstr "kunne ikke læse konfigurationsfil `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -594,11 +594,11 @@ msgstr "uoverensstemmelse med version i bibliotek eller modul"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "oplåsning ville gøre adgangskodefeltet tomt"
 
 #: lib/error.c:88
 msgid "unknown error"
-msgstr "ukendt fejl fejl"
+msgstr "ukendt fejl"
 
 #: lib/modules.c:97
 #, c-format
@@ -653,19 +653,19 @@ msgid "error locking file: %s"
 msgstr "fejl ved låsning af fil: %s"
 
 #: modules/files.c:112
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "kunne ikke skrive til `%s': %s"
+msgstr "kunne ikke få fat på sikkerheds-omgivelser til `%s': %s"
 
 #: modules/files.c:118
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "kunne ikke køre stat på `%s': %s"
+msgstr "kunne ikke sætte standard sikkerheds-omgivelser: %s"
 
 #: modules/files.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "kunne ikke skrive til `%s': %s"
+msgstr "kunne ikke sætte standard sikkerhedsomgivelser til `%s': %s"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -716,9 +716,8 @@ msgid "entity object has no %s attribute"
 msgstr "entitetsobjekt har ingen %s-attribut"
 
 #: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
-#, fuzzy
 msgid "error encrypting password"
-msgstr "fejl ved sætning af adgangskode for `%s'"
+msgstr "fejl ved kryptering af adgangskode"
 
 #: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
@@ -731,8 +730,7 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -805,9 +803,9 @@ msgid "could not bind to LDAP server"
 msgstr "kunne ikke binde til LDAP-tjener"
 
 #: modules/ldap.c:411
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "kunne ikke binde til LDAP-tjener"
+msgstr "kunne ikke binde til LDAP-tjener, første forsøg som '%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -841,9 +839,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "kunne ikke konvertere interne data til LDAPMods"
 
 #: modules/ldap.c:1410
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "fejl ved ændring af navn på LDAP-katalogopføring: %s\n"
+msgstr "fejl ved oprettelse af LDAP-katalogindgang: %s"
 
 #: modules/ldap.c:1436 modules/ldap.c:1674
 #, c-format
@@ -851,9 +849,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "fejl ved ændring af LDAP-katalogopføring: %s"
 
 #: modules/ldap.c:1463
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "fejl ved ændring af navn på LDAP-katalogopføring: %s\n"
+msgstr "fejl ved ændring af navn på LDAP-katalogindgang %s"
 
 #: modules/ldap.c:1512
 #, c-format
@@ -861,9 +859,9 @@ msgid "object had no %s attribute"
 msgstr "objektet havde ingen %s-attribut"
 
 #: modules/ldap.c:1536
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "fejl ved fjernelse af LDAP-katalogopføring: %s.\n"
+msgstr "fejl ved fjernelse af LDAP-katalogopføring: %s"
 
 #: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
 #: modules/ldap.c:1803
@@ -946,14 +944,14 @@ msgid "Error initializing %s: %s\n"
 msgstr "Fejl ved initiering af %s: %s\n"
 
 #: samples/lookup.c:80
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid ID %s\n"
-msgstr "Ugyldig GID for %s.\n"
+msgstr "Ugyldig ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Søger efter gruppe med ID %d.\n"
+msgstr "Søger efter gruppe med ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -961,9 +959,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Søger efter gruppe med navn %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Søger efter bruger med ID %d.\n"
+msgstr "Søger efter bruger med ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -976,11 +974,11 @@ msgstr "Opføring ikke fundet.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Forespørgsler lykkedes.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Forespørgsler mislykkedes.\n"
 
 #: samples/testuser.c:78
 msgid "Default user object classes:\n"
@@ -1072,3 +1070,4 @@ msgstr "Kopierer brugerstruktur:\n"
 
 #~ msgid "freeing lu_ent at %p.\n"
 #~ msgstr "frigiver lu_ent ved %p.\n"
+
