@@ -1,6 +1,6 @@
-diff -urN libuser/apps/apputil.c libuser-0.51.7/apps/apputil.c
---- libuser/apps/apputil.c	2003-02-26 22:27:26.000000000 +0100
-+++ libuser-0.51.7/apps/apputil.c	2004-08-25 01:22:45.628396256 +0200
+diff -urN libuser/apps/apputil.c libuser-0.51.9/apps/apputil.c
+--- libuser/apps/apputil.c	2004-08-30 22:21:00.000000000 +0200
++++ libuser-0.51.9/apps/apputil.c	2004-08-31 17:32:50.944059120 +0200
 @@ -46,6 +46,59 @@
  #include "../lib/error.h"
  #include "apputil.h"
@@ -61,7 +61,7 @@ diff -urN libuser/apps/apputil.c libuser-0.51.7/apps/apputil.c
  /* Populate a user's home directory, copying data from a named skeleton
   * directory, setting all ownerships as given, and setting the mode of
   * the top-level directory as given. */
-@@ -432,6 +485,26 @@
+@@ -433,6 +486,26 @@
  	conv.conv = misc_conv;
  	conv.appdata_ptr = NULL;
  
@@ -88,9 +88,9 @@ diff -urN libuser/apps/apputil.c libuser-0.51.7/apps/apputil.c
  	/* Start up PAM. */
  	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
  		fprintf(stderr, _("Error initializing PAM.\n"));
-diff -urN libuser/apps/Makefile.am libuser-0.51.7/apps/Makefile.am
---- libuser/apps/Makefile.am	2004-08-24 12:52:44.000000000 +0200
-+++ libuser-0.51.7/apps/Makefile.am	2004-08-25 01:23:13.928094048 +0200
+diff -urN libuser/apps/Makefile.am libuser-0.51.9/apps/Makefile.am
+--- libuser/apps/Makefile.am	2004-08-24 18:01:04.000000000 +0200
++++ libuser-0.51.9/apps/Makefile.am	2004-08-31 17:32:50.951058056 +0200
 @@ -13,8 +13,8 @@
  	luserdel \
  	lusermod
@@ -102,9 +102,9 @@ diff -urN libuser/apps/Makefile.am libuser-0.51.7/apps/Makefile.am
  
  lchsh_SOURCES = \
  	apputil.c \
-diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
---- libuser/modules/files.c	2003-02-19 04:35:21.000000000 +0100
-+++ libuser-0.51.7/modules/files.c	2004-08-25 01:22:45.655392152 +0200
+diff -urN libuser/modules/files.c libuser-0.51.9/modules/files.c
+--- libuser/modules/files.c	2004-08-30 23:03:13.000000000 +0200
++++ libuser-0.51.9/modules/files.c	2004-08-31 17:32:51.027046504 +0200
 @@ -35,6 +35,51 @@
  #include "../lib/user_private.h"
  #include "default.-c"
@@ -157,7 +157,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  #define CHUNK_SIZE	(LINE_MAX * 4)
  
  LU_MODULE_INIT(libuser_files_init)
-@@ -810,10 +855,16 @@
+@@ -809,10 +854,16 @@
  	filename = g_strconcat(dir, "/", base_name, NULL);
  	g_free(key);
  
@@ -175,7 +175,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Open the file. */
-@@ -823,14 +874,14 @@
+@@ -822,14 +873,14 @@
  			     _("couldn't open `%s': %s"), filename,
  			     strerror(errno));
  		g_free(filename);
@@ -192,7 +192,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Read the file's size. */
-@@ -841,7 +892,7 @@
+@@ -840,7 +891,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -201,7 +201,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Generate a new line with the right data in it, and allocate space
-@@ -877,7 +928,7 @@
+@@ -876,7 +927,7 @@
  		g_free(fragment2);
  		g_free(contents);
  		g_free(filename);
@@ -210,7 +210,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Check if the beginning of the file is the same as the beginning
-@@ -891,7 +942,7 @@
+@@ -890,7 +941,7 @@
  		g_free(fragment2);
  		g_free(contents);
  		g_free(filename);
@@ -219,7 +219,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	} else
  	/* If not, search for a newline followed by the beginning of
  	 * the entry. */
-@@ -904,7 +955,7 @@
+@@ -903,7 +954,7 @@
  		g_free(fragment2);
  		g_free(contents);
  		g_free(filename);
@@ -228,7 +228,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  	/* Hooray, we can add this entry at the end of the file. */
  	offset = lseek(fd, 0, SEEK_END);
-@@ -918,7 +969,7 @@
+@@ -917,7 +968,7 @@
  		g_free(fragment2);
  		g_free(contents);
  		g_free(filename);
@@ -237,7 +237,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  	/* If the last byte in the file isn't a newline, add one, and silently
  	 * curse people who use text editors (which shall remain unnamed) which
-@@ -943,7 +994,7 @@
+@@ -942,7 +993,7 @@
  		g_free(fragment2);
  		g_free(contents);
  		g_free(filename);
@@ -246,7 +246,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	} else {
  		/* Hey, it succeeded. */
  		ret = TRUE;
-@@ -954,7 +1005,13 @@
+@@ -953,7 +1004,13 @@
  	lu_util_lock_free(lock);
  	close(fd);
  	g_free(filename);
@@ -261,7 +261,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	return ret;
  }
  
-@@ -1065,7 +1122,7 @@
+@@ -1074,7 +1131,7 @@
  	char *p, *q, *new_value;
  	GValueArray *names = NULL, *values = NULL;
  	GValue *value;
@@ -270,7 +270,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  
  	g_assert(module != NULL);
  	g_assert(base_name != NULL);
-@@ -1103,10 +1160,16 @@
+@@ -1112,10 +1169,16 @@
  	filename = g_strconcat(dir, "/", base_name, NULL);
  	g_free(key);
  
@@ -288,7 +288,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Open the file to be modified. */
-@@ -1116,14 +1179,14 @@
+@@ -1125,14 +1188,14 @@
  			     _("couldn't open `%s': %s"), filename,
  			     strerror(errno));
  		g_free(filename);
@@ -305,7 +305,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* We iterate over all of the fields individually. */
-@@ -1183,7 +1246,7 @@
+@@ -1192,7 +1255,7 @@
  			lu_util_lock_free(lock);
  			close(fd);
  			g_free(filename);
@@ -314,7 +314,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  		}
  
  		/* We may have just renamed the account (we're safe assuming
-@@ -1199,7 +1262,7 @@
+@@ -1208,7 +1271,7 @@
  				lu_util_lock_free(lock);
  				close(fd);
  				g_free(filename);
@@ -323,7 +323,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  			}
  		} else
  		if (ent->type == lu_group) {
-@@ -1211,7 +1274,7 @@
+@@ -1220,7 +1283,7 @@
  				lu_util_lock_free(lock);
  				close(fd);
  				g_free(filename);
@@ -332,7 +332,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  			}
  		} else {
  			g_assert_not_reached();
-@@ -1222,8 +1285,14 @@
+@@ -1231,8 +1294,14 @@
  	lu_util_lock_free(lock);
  	close(fd);
  	g_free(filename);
@@ -349,7 +349,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  }
  
  /* Modify an entry in the passwd file. */
-@@ -1276,6 +1345,7 @@
+@@ -1285,6 +1354,7 @@
  generic_del(struct lu_module *module, const char *base_name,
  	    struct lu_ent *ent, struct lu_error **error)
  {
@@ -357,7 +357,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	GValueArray *name = NULL;
  	GValue *value;
  	char *contents = NULL, *filename = NULL, *key = NULL;
-@@ -1309,10 +1379,16 @@
+@@ -1318,10 +1388,16 @@
  	filename = g_strconcat(dir, "/", base_name, NULL);
  	g_free(key);
  
@@ -375,7 +375,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Open the file to be modified. */
-@@ -1322,14 +1398,14 @@
+@@ -1331,14 +1407,14 @@
  			     _("couldn't open `%s': %s"), filename,
  			     strerror(errno));
  		g_free(filename);
@@ -392,7 +392,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Determine the file's size. */
-@@ -1340,7 +1416,7 @@
+@@ -1349,7 +1425,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -401,7 +401,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Allocate space to hold the file and read it all in. */
-@@ -1353,7 +1429,7 @@
+@@ -1362,7 +1438,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -410,7 +410,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Generate string versions of what the beginning of a line might
-@@ -1399,7 +1475,7 @@
+@@ -1408,7 +1484,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -419,7 +419,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Otherwise we need to write the new data to the file.  Jump back to
-@@ -1412,7 +1488,7 @@
+@@ -1421,7 +1497,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -428,7 +428,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Write the new contents out. */
-@@ -1424,7 +1500,7 @@
+@@ -1433,7 +1509,7 @@
  		lu_util_lock_free(lock);
  		close(fd);
  		g_free(filename);
@@ -437,7 +437,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Truncate the file to the new (certainly shorter) length. */
-@@ -1435,8 +1511,14 @@
+@@ -1444,8 +1520,14 @@
  	lu_util_lock_free(lock);
  	close(fd);
  	g_free(filename);
@@ -454,7 +454,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  }
  
  /* Remove a user from the passwd file. */
-@@ -1538,10 +1620,16 @@
+@@ -1547,10 +1629,16 @@
  	filename = g_strconcat(dir, "/", base_name, NULL);
  	g_free(key);
  
@@ -472,7 +472,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Open the file. */
-@@ -1551,14 +1639,14 @@
+@@ -1560,14 +1648,14 @@
  			     _("couldn't open `%s': %s"), filename,
  			     strerror(errno));
  		g_free(filename);
@@ -489,7 +489,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Generate a string representation of the name. */
-@@ -1579,7 +1667,7 @@
+@@ -1588,7 +1676,7 @@
  		close(fd);
  		g_free(namestring);
  		g_free(filename);
@@ -498,7 +498,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Check that we actually care about this.  If there's a non-empty,
-@@ -1591,7 +1679,8 @@
+@@ -1600,7 +1688,8 @@
  		g_free(value);
  		g_free(namestring);
  		g_free(filename);
@@ -508,7 +508,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Generate a new value for the file. */
-@@ -1605,7 +1694,7 @@
+@@ -1614,7 +1703,7 @@
  		close(fd);
  		g_free(namestring);
  		g_free(filename);
@@ -517,7 +517,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Clean up. */
-@@ -1614,7 +1703,14 @@
+@@ -1623,7 +1712,14 @@
  	g_free(namestring);
  	g_free(filename);
  
@@ -533,7 +533,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  }
  
  /* Check if an account [password] is locked. */
-@@ -1825,7 +1921,7 @@
+@@ -1834,7 +1930,7 @@
  	const char *dir;
  	int fd = -1;
  	gpointer lock;
@@ -542,7 +542,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  
  	/* Get the name of this account. */
  	g_assert((ent->type == lu_user) || (ent->type == lu_group));
-@@ -1848,10 +1944,16 @@
+@@ -1857,10 +1953,16 @@
  	filename = g_strconcat(dir, "/", base_name, NULL);
  	g_free(key);
  
@@ -560,7 +560,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Open the file. */
-@@ -1861,14 +1963,14 @@
+@@ -1870,14 +1972,14 @@
  			     _("couldn't open `%s': %s"), filename,
  			     strerror(errno));
  		g_free(filename);
@@ -577,7 +577,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* Get the name of the account. */
-@@ -1889,7 +1991,7 @@
+@@ -1898,7 +2000,7 @@
  		close(fd);
  		g_free(namestring);
  		g_free(filename);
@@ -586,7 +586,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* If we don't really care, nod our heads and smile. */
-@@ -1898,7 +2000,7 @@
+@@ -1907,7 +2009,7 @@
  		close(fd);
  		g_free(namestring);
  		g_free(filename);
@@ -595,7 +595,7 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	}
  
  	/* The crypt prefix indicates that the password is already hashed.  If
-@@ -1917,14 +2019,20 @@
+@@ -1926,14 +2028,20 @@
  		close(fd);
  		g_free(namestring);
  		g_free(filename);
@@ -618,32 +618,40 @@ diff -urN libuser/modules/files.c libuser-0.51.7/modules/files.c
  	return ret;
  }
  
-diff -urN libuser/modules/Makefile.am libuser-0.51.7/modules/Makefile.am
---- libuser/modules/Makefile.am	2004-08-24 12:53:24.000000000 +0200
-+++ libuser-0.51.7/modules/Makefile.am	2004-08-25 01:23:46.947074400 +0200
-@@ -1,5 +1,5 @@
+diff -urN libuser/modules/Makefile.am libuser-0.51.9/modules/Makefile.am
+--- libuser/modules/Makefile.am	2004-08-31 17:06:52.000000000 +0200
++++ libuser-0.51.9/modules/Makefile.am	2004-08-31 17:35:40.584269888 +0200
+@@ -1,4 +1,4 @@
 -AM_CFLAGS = -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE
--LDADD = @GOBJECT_LIBS@ ../lib/libuser.la
 +AM_CFLAGS = -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE -DWITH_SELINUX
-+LDADD = @GOBJECT_LIBS@ ../lib/libuser.la -lselinux
  
- EXTRA_PROGRAMS = \
- 	libuser_files.so \
-diff -urN libuser/python/Makefile.am libuser-0.51.7/python/Makefile.am
---- libuser/python/Makefile.am	2004-08-24 12:53:45.000000000 +0200
-+++ libuser-0.51.7/python/Makefile.am	2004-08-25 01:22:45.664390784 +0200
-@@ -9,7 +9,7 @@
- noinst_SCRIPTS = $(srcdir)/test-script $(srcdir)/quota-script
+ EXTRA_LTLIBRARIES = \
+ 	libuser_files.la \
+@@ -11,7 +11,7 @@
+ pkglib_LTLIBRARIES = $(MODULES:.so=.la)
  
- libusermodule_so_SOURCES = libusermodule.c common.h debug.h
--libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
-+libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux 
- libusermodule_so_LDADD = ../apps/apputil.o ../lib/libuser.la
+ AM_LDFLAGS = -module -avoid-version -export-dynamic -rpath '$(pkglibdir)' \
+-	@GOBJECT_LIBS@ ../lib/libuser.la
++	@GOBJECT_LIBS@ ../lib/libuser.la -lselinux
  
- libuserquotamodule_so_SOURCES = quotamodule.c debug.h
-diff -urN libuser/samples/Makefile.am libuser-0.51.7/samples/Makefile.am
---- libuser/samples/Makefile.am	2004-08-24 12:54:17.000000000 +0200
-+++ libuser-0.51.7/samples/Makefile.am	2004-08-25 01:22:45.665390632 +0200
+ libuser_files_la_SOURCES = files.c
+ libuser_shadow_la_SOURCES = files.c
+diff -urN libuser/python/Makefile.am libuser-0.51.9/python/Makefile.am
+--- libuser/python/Makefile.am	2004-08-31 17:06:52.000000000 +0200
++++ libuser-0.51.9/python/Makefile.am	2004-08-31 17:38:03.957473848 +0200
+@@ -11,7 +11,8 @@
+ 
+ libusermodule_la_SOURCES = libusermodule.c common.h debug.h ../apps/apputil.c
+ libusermodule_la_LDFLAGS = -module -avoid-version -export-dynamic \
+-	-rpath '$(pythonexecdir)' @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
++	-rpath '$(pythonexecdir)' @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ \
++	-lselinux
+ libusermodule_la_LIBADD = ../lib/libuser.la
+ 
+ libuserquotamodule_la_SOURCES = quotamodule.c debug.h
+diff -urN libuser/samples/Makefile.am libuser-0.51.9/samples/Makefile.am
+--- libuser/samples/Makefile.am	2004-08-24 18:01:05.000000000 +0200
++++ libuser-0.51.9/samples/Makefile.am	2004-08-31 17:32:51.043044072 +0200
 @@ -15,7 +15,7 @@
  
  homedir_SOURCES = homedir.c
