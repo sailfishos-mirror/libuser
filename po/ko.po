@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2002-12-12 10:20+1000\n"
+"PO-Revision-Date: 2003-02-19 15:37+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -158,20 +158,19 @@ msgid "Failed to modify aging information for %s.\n"
 msgstr "%s의 이전 정보를 편집하는데 실패했습니다.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
-#, fuzzy
 msgid "[OPTION...] [user]"
-msgstr "[옵션...] 사용자"
+msgstr "[OPTION...] [사용자]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "사용자 이름이 지정되지 않았습니다.\n"
+msgstr "사용자 이름과 uid %d에 대한 이름이 지정되지 않았습니다.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "%s의 이전 정보를 편집하는데 실패했습니다.\n"
+msgstr "%s의 finger (핑거) 정보를 변경합니다.\n"
 
 #: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
 #, c-format
@@ -180,58 +179,58 @@ msgstr "%s(을)를 초기화하는 도중 오류가 발생했습니다.\n"
 
 #: apps/lchfn.c:161
 msgid "Full Name"
-msgstr ""
+msgstr "성명"
 
 #: apps/lchfn.c:182
 msgid "Surname"
-msgstr ""
+msgstr "성"
 
 #: apps/lchfn.c:204
 msgid "Given Name"
-msgstr ""
+msgstr "이름"
 
 #: apps/lchfn.c:214
 msgid "Office"
-msgstr ""
+msgstr "직장"
 
 #: apps/lchfn.c:223
 msgid "Office Phone"
-msgstr ""
+msgstr "직장 전화 번호"
 
 #: apps/lchfn.c:232
 msgid "Home Phone"
-msgstr ""
+msgstr "집 전화 번호"
 
 #: apps/lchfn.c:253
 msgid "E-Mail Address"
-msgstr ""
+msgstr "이메일 주소"
 
 #: apps/lchfn.c:265
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "finger 정보가 변경되지 않았습니다:  입력 오류.\n"
 
 #: apps/lchfn.c:370
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "finger 정보가 변경되었습니다.\n"
 
 #: apps/lchfn.c:373
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "finger 정보가 변경되지 않았습니다: %s.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s 용 쉘을 변경합니다.\n"
 
 #: apps/lchsh.c:122
 msgid "New Shell"
-msgstr ""
+msgstr "새로운 쉘"
 
 #: apps/lchsh.c:150
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "쉘이 변경되었습니다.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -280,99 +279,100 @@ msgid "Group %s could not be modified.\n"
 msgstr "%s 그룹을 편집할 수 없습니다.\n"
 
 #: apps/lid.c:81
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "그룹 이름이 지정되지 않았습니다.\n"
+msgstr "%s를 사용하여 그룹 이름이 지정되지 않았습니다.\n"
 
 #: apps/lid.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "그룹 이름이 지정되지 않았습니다.\n"
+msgstr "그룹 이름과 gid %d에 대한 이름이 지정되지 않았습니다.\n"
 
 #: apps/lid.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "사용자 이름이 지정되지 않았습니다.\n"
+msgstr "%s를 사용하여 사용자 이름이 지정되지 않았습니다.\n"
 
 #: apps/lnewusers.c:74
-#, fuzzy
 msgid "[OPTION...]"
-msgstr "[옵션...] 사용자"
+msgstr "[OPTION...]"
 
 #: apps/lnewusers.c:98
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "`%s'(을)를 읽는 도중 오류 발생: %s"
+msgstr "`%s'(을)를 여는 도중 오류 발생: %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
+"`%s'의 계정을 생성하는데 오류가 발생했습니다: 라인이 "
+"부적절하게 포맷되었습니다.\n"
 
 #: apps/lnewusers.c:138
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
-msgstr "`%s' 그룹을 생성하는 도중 오류 발생.\n"
+msgstr "`%s'에 GID %ld를 사용하여 그룹을 생성하는데 오류 발생.\n"
 
 #: apps/lnewusers.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "`%s'의 패스워드를 설정하는 도중 오류가 발생했습니다"
+msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
 
 #: apps/lnewusers.c:310
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
+msgstr "%s의 홈 디렉토리를 생성하는 도중 오류가 발생했습니다: %s\n"
 
 #: apps/lnewusers.c:325
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
+msgstr "%s의 메일 스풀을 생성하는 도중 오류 발생.\n"
 
 #: apps/lnewusers.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
+msgstr "%s의 사용자 계정을 생성하는 도중 오류 발생: %s.\n"
 
 #: apps/lpasswd.c:86
-#, fuzzy, c-format
+#, c-format
 msgid "Changing password for %s.\n"
-msgstr "`%s'의 패스워드를 설정하는 도중 오류가 발생했습니다"
+msgstr "`%s'의 암호를 변경합니다.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "새 암호"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "새 암호 (확인)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "암호 변경이 취소되었습니다.\n"
 
 #: apps/lpasswd.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "%s 사용자의 패스워드를 설정하는데 실패함: %s.\n"
+msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "`%s'의 패스워드를 설정하는 도중 오류가 발생했습니다"
+msgstr "`%s' 그룹의 암호를 설정하는 도중 오류 발생: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr ""
+msgstr "암호가 변경되었습니다.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -835,49 +835,45 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 인증 사용자"
 
 #: modules/sasldb.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
+msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s: %s"
 
 #: modules/sasldb.c:130
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
+msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s"
 
 #: modules/sasldb.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "`%s'(을)를 삭제하는 도중 오류 발생: %s"
+msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s: %s"
 
 #: modules/sasldb.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "`%s'(을)를 삭제하는 도중 오류 발생: %s"
+msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s"
 
 #: modules/sasldb.c:428 modules/sasldb.c:436
-#, fuzzy, c-format
+#, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "%s(을)를 초기화하는 도중 오류 발생: %s\n"
+msgstr "Cyrus SASL를 초기화하는 중 오류 발생: %s"
 
 #: python/admin.c:494
-#, fuzzy
 msgid "error creating home directory for user"
-msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
+msgstr "사용자의 홈 디렉토리를 생성하는 중 오류 발생"
 
 #: python/admin.c:546
-#, fuzzy
 msgid "error removing home directory for user"
-msgstr "LDAP 디렉토리 목록(entry)을 삭제하는 도중 오류 발생: %s.\n"
+msgstr "사용자의 홈 디렉토리를 삭제하는 중 오류 발생"
 
 #: python/admin.c:623
-#, fuzzy
 msgid "error moving home directory for user"
-msgstr "%s의 이전 홈 디렉토리가 없습니다.\n"
+msgstr "사용자의 홈 디렉토리를 이동하는 중 오류 발생"
 
 #: python/admin.c:656
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
+msgstr "사용자의 메일 스풀을 생성하는 도중 오류 발생"
 
 #: samples/lookup.c:64
 #, c-format
@@ -923,3 +919,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
