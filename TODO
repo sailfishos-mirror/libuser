@@ -1,9 +1,3 @@
-Easy:
-* Add non-administrator startup support to the LDAP and Kerberos modules.
-  The LDAP module should try to bind to the user or group's object using
-  context->auth_name, and Kerberos should connect to the password-changing
-  service instead.
-
 Medium:
 * Implement account locking in LDAP.
 * Rework LDAP module lu_ent to LDAPMod mapping to just include additions and
@@ -12,9 +6,9 @@ Medium:
 * Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod.
 * Create variants of the apps that are hard-coded to use files only, for
   use in batch environments like post-package-install.
-* Write an NIS back-end using yp_update functionality in glibc, maybe
-  using the routines declared in /usr/include/rpcsvc/libnis.h
-* Write man pages.
+* Write an NIS back-end using yppasswd.x in glibc, or maybe using the routines
+  declared in /usr/include/rpcsvc/libnis.h
+* Write man pages for all of this stuff.
 
 Hard:
 * Write a RADIUS back-end.

@@ -38,11 +38,14 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	GList *values;
+	int interactive = FALSE;
 	int system_account = FALSE;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
 		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
 		 "gid to force for new group", "NUM"},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
@@ -70,7 +73,9 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL,
+		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
+		       NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();

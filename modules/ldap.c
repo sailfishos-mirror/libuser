@@ -81,6 +81,7 @@ lu_ldap_group_attributes[] = {
 };
 
 struct lu_ldap_context {
+	struct lu_context *global_context;
         struct lu_prompt prompts[6];
 	LDAP *ldap;
 };
@@ -144,11 +145,21 @@ bind_server(struct lu_ldap_context *context)
 	LDAP *ldap = NULL;
 	LDAPControl *server = NULL, *client = NULL;
 	int version = LDAP_VERSION3;
+	char *generated_binddn = "", *tmp;
+	struct lu_string_cache *scache = NULL;
 
 	g_return_val_if_fail(context != NULL, NULL);
 
 	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if(ldap) {
+		scache = context->global_context->scache;
+		tmp = g_strdup_printf("uid=%s,%s,%s", getuser(),
+				      lu_cfg_read_single(context->global_context,
+							 "ldap/userBranch",
+							 "ou=People"),
+				      context->prompts[LU_LDAP_BASEDN].value);
+		generated_binddn = scache->cache(scache, tmp);
+		g_free(tmp);
 		if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION,
 				   &version) != LDAP_OPT_SUCCESS) {
 			g_warning(_("Could not force protocol version 3 with "
@@ -170,6 +181,10 @@ bind_server(struct lu_ldap_context *context)
 			!= LDAP_SUCCESS)
 		if(ldap_simple_bind_s(ldap,
 				      context->prompts[LU_LDAP_BINDDN].value,
+				      context->prompts[LU_LDAP_PASSWORD].value)
+			!= LDAP_SUCCESS)
+		if(ldap_simple_bind_s(ldap,
+				      generated_binddn,
 				      context->prompts[LU_LDAP_PASSWORD].value)
 			!= LDAP_SUCCESS) {
 			g_warning(_("Could not perform simple bind to "
@@ -663,6 +678,8 @@ lu_ldap_init(struct lu_context *context)
 
 	ctx = g_malloc0(sizeof(struct lu_ldap_context));
 
+	ctx->global_context = context;
+
 	ctx->prompts[LU_LDAP_SERVER].prompt = _("LDAP Server Name");
 	ctx->prompts[LU_LDAP_SERVER].default_value =
 					lu_cfg_read_single(context,
@@ -677,7 +694,7 @@ lu_ldap_init(struct lu_context *context)
 							   "dc=example,dc=com");
 	ctx->prompts[LU_LDAP_BASEDN].visible = TRUE;
 
-	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP Bind DN");
+	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP DN");
 	ctx->prompts[LU_LDAP_BINDDN].visible = TRUE;
 	ctx->prompts[LU_LDAP_BINDDN].default_value =
 					lu_cfg_read_single(context,
@@ -699,7 +716,7 @@ lu_ldap_init(struct lu_context *context)
 							   "ldap/authuser",
 							   getuser());
 
-	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
+	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
 	if((context->prompter == NULL) ||

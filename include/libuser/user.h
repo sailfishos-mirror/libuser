@@ -70,6 +70,9 @@ typedef gboolean (lu_prompt_fn) (struct lu_context *context,
 gboolean lu_prompt_console(struct lu_context *context,
 			   struct lu_prompt *prompts,
 			   int count, gpointer callback_data);
+gboolean lu_prompt_console_quiet(struct lu_context *context,
+				 struct lu_prompt *prompts,
+				 int count, gpointer callback_data);
 
 enum lu_type {lu_user, lu_group};
 

@@ -37,10 +37,13 @@ main(int argc, const char **argv)
 	int remove_home = FALSE;
 	const char *user = NULL;
 	GList *values;
+	int interactive = FALSE;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
 #ifdef FIXMEFIXMEFIXME
 		{"removehome", 'r', POPT_ARG_NONE, NULL, 0,
 		 "remove the user's home directory", NULL},
@@ -63,7 +66,9 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
+	ctx = lu_start(NULL, 0, NULL, NULL,
+		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
+		       NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();

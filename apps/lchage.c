@@ -67,13 +67,16 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	GList *values, *values2, *values3;
+	int interactive = FALSE;
 	int list_only = FALSE;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
+		 "prompt for all information", NULL},
 		{"list", 'l', POPT_ARG_NONE, &list_only, 0,
-		 "list aging parameters for the user"},
+		 "list aging parameters for the user", NULL},
 		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0,
 		 "minimum days between password changes", "NUM"},
 		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0,
@@ -107,7 +110,9 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(user, lu_user, NULL, NULL, lu_prompt_console, NULL);
+	ctx = lu_start(user, lu_user, NULL, NULL,
+		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
+		       NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();

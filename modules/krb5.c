@@ -69,15 +69,21 @@ get_server_handle(struct lu_krb5_context *context)
 	kadm5_config_params params;
 	void *handle = NULL;
 	int ret;
+	char *service = NULL;
 
 	g_return_val_if_fail(context != NULL, NULL);
 
 	memset(&params, 0, sizeof(params));
 	params.mask = KADM5_CONFIG_REALM;
 	params.realm = context->prompts[LU_KRB5_REALM].value;
+	if(strstr(context->prompts[LU_KRB5_PRINC].value, "/")) {
+		service = KADM5_ADMIN_SERVICE;
+	} else {
+		service = KADM5_CHANGEPW_SERVICE;
+	}
 	ret = kadm5_init(context->prompts[LU_KRB5_PRINC].value,
 			 context->prompts[LU_KRB5_PASSWORD].value,
-			 KADM5_ADMIN_SERVICE,
+			 service,
 			 &params,
 			 KADM5_STRUCT_VERSION,
 			 KADM5_API_VERSION_2,
@@ -85,8 +91,9 @@ get_server_handle(struct lu_krb5_context *context)
 	if(ret == KADM5_OK) {
 		return handle;
 	} else {
-		g_warning(_("Error connecting to the kadm5 server for %s: %s."),
-			  params.realm, error_message(ret));
+		g_warning(_("Error connecting to the kadm5 server for service "
+			    "%s in realm %s: %s."), service, params.realm,
+			  error_message(ret));
 		return NULL;
 	}
 }
@@ -511,6 +518,7 @@ lu_krb5_init(struct lu_context *context)
 	struct lu_module *ret = NULL;
 	struct lu_krb5_context *ctx = NULL;
 	void *handle = NULL;
+	char *tmp;
 
 	g_return_val_if_fail(context != NULL, NULL);
 	initialize_krb5_error_table();
@@ -523,27 +531,40 @@ lu_krb5_init(struct lu_context *context)
 
 	ctx = g_malloc0(sizeof(struct lu_krb5_context));
 
-	ctx->prompts[0].prompt = _("Kerberos Realm");
-	ctx->prompts[0].visible = TRUE;
-	ctx->prompts[0].default_value = get_default_realm(context);
+	ctx->prompts[LU_KRB5_REALM].prompt = _("Kerberos Realm");
+	ctx->prompts[LU_KRB5_REALM].visible = TRUE;
+	ctx->prompts[LU_KRB5_REALM].default_value = get_default_realm(context);
 
-	ctx->prompts[1].prompt = _("Kerberos Admin Principal");
-	ctx->prompts[1].visible = TRUE;
+	ctx->prompts[LU_KRB5_PRINC].prompt = _("Kerberos Admin Principal");
+	ctx->prompts[LU_KRB5_PRINC].visible = TRUE;
 	if(context->auth_name) {
-		ctx->prompts[1].default_value = context->auth_name;
+		tmp = g_strconcat(context->auth_name, "/admin", NULL);
+		ctx->prompts[LU_KRB5_PRINC].default_value =
+			context->scache->cache(context->scache, tmp);
+		g_free(tmp);
 	} else {
-		char *tmp = g_strconcat(getlogin(), "/admin", NULL);
-		ctx->prompts[1].default_value =
+		tmp = g_strconcat(getlogin(), "/admin", NULL);
+		ctx->prompts[LU_KRB5_PRINC].default_value =
 			context->scache->cache(context->scache, tmp);
 		g_free(tmp);
 	}
 
-	ctx->prompts[2].prompt = _("Password");
-	ctx->prompts[2].visible = FALSE;
-
 	if((context->prompter == NULL) ||
-	   (context->prompter(context, ctx->prompts, 3,
+	   (context->prompter(context, ctx->prompts, 2,
 			      context->prompter_data) == FALSE)) {
+		g_free(ctx);
+		return NULL;
+	}
+
+	tmp = g_strdup_printf(_("Kerberos password for %s"),
+			      ctx->prompts[LU_KRB5_PRINC].value);
+	ctx->prompts[LU_KRB5_PASSWORD].prompt =
+		context->scache->cache(context->scache, tmp);
+	ctx->prompts[LU_KRB5_PASSWORD].visible = FALSE;
+	g_free(tmp);
+
+	if(context->prompter(context, ctx->prompts + 2, 1,
+			     context->prompter_data) == FALSE) {
 		g_free(ctx);
 		return NULL;
 	}

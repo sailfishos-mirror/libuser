@@ -97,3 +97,29 @@ lu_prompt_console(struct lu_context *context, struct lu_prompt *prompts,
 	}
 	return ret;
 }
+
+gboolean
+lu_prompt_console_quiet(struct lu_context *context, struct lu_prompt *prompts,
+			int count, gpointer calldata)
+{
+	int i;
+	char buf[LINE_MAX];
+	gboolean ret = TRUE;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	if(count > 0) {
+		g_return_val_if_fail(prompts != NULL, FALSE);
+	}
+
+	for(i = 0; (i < count) && ret; i++) {
+		if(prompts[i].default_value) {
+			prompts[i].value = g_strdup(prompts[i].default_value);
+			prompts[i].free_value = (void*)g_free;
+		} else {
+			ret = ret && lu_prompt_console(context, &prompts[i], 1,
+						       calldata);
+		}
+	}
+
+	return ret;
+}
