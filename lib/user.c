@@ -216,7 +216,7 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 		}
 	}
 	for (i = 0; sdata[i] != '\0'; i++) {
-		if (strchr(sdata[i], INVALID_NAME_CHARS)) {
+		if (strchr(INVALID_NAME_CHARS, sdata[i])) {
 			lu_error_new(error, lu_error_name_bad,
 				     _("name contains invalid char `%c'"),
 				     sdata[i]);
