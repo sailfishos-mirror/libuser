@@ -42,7 +42,7 @@ msgstr "Fejl ved initiering af PAM.\n"
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Autenticering mislykkedes for %s.\n"
+msgstr "Autentificering mislykkedes for %s.\n"
 
 #: apps/apputil.c:454
 #, c-format
