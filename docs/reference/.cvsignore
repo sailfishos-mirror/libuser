@@ -1,1 +1,8 @@
 Makefile.in
+html
+html.stamp
+libuser.interfaces
+libuser.prerequisites
+libuser-unused.txt
+sgml.stamp
+tmpl.stamp

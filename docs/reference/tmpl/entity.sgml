@@ -12,6 +12,12 @@ by libuser, its modules, and applications to hold data about a particular
 user or group account.
 </para>
 
+<para>
+Each struct lu_ent contains two sets of attributes: pending and current.
+The pending attributes are modified by default, the current attributes
+are modified by functions ending with _current.
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
@@ -74,6 +80,20 @@ user or group account.
 
 
 <!-- ##### MACRO LU_GROUPPASSWORD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_MEMBERNAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LU_ADMINISTRATORNAME ##### -->
 <para>
 
 </para>
@@ -194,203 +214,214 @@ user or group account.
 
 <!-- ##### FUNCTION lu_ent_new ##### -->
 <para>
-
+Creates a new, empty struct #lu_ent.
 </para>
 
-@Returns: 
+@Returns: the created entity, which should be deallocated by lu_ent_free()
 
 
 <!-- ##### FUNCTION lu_ent_free ##### -->
 <para>
-
+Frees an struct #lu_ent, including all strings it owns.
 </para>
 
-@ent: 
+@ent: the entity to free
 
 
 <!-- ##### FUNCTION lu_ent_copy ##### -->
 <para>
-
+Copies one struct #lu_ent over another.
 </para>
 
-@source: 
-@dest: 
+@source: the entity to copy
+@dest: the destination space, must be already allocated by lu_ent_new()
 
 
 <!-- ##### FUNCTION lu_ent_commit ##### -->
 <para>
-
+Sets pending attribute changes as current values of the entity.
 </para>
 
-@ent: 
+@ent: an entity
 
 
 <!-- ##### FUNCTION lu_ent_revert ##### -->
 <para>
-
+Replaces all attributes with changes pending by their current values,
+forgetting the pending changes.
 </para>
 
-@ent: 
+@ent: an entity
 
 
 <!-- ##### FUNCTION lu_ent_add ##### -->
 <para>
-
+Appends @value to pending attribute @attr in a struct #lu_ent if @value
+is not yet in the list of @attr values.
 </para>
 
-@ent: 
-@attr: 
-@value: 
+@ent: an entity
+@attr: attribute name
+@value: new attribute value
 
 
 <!-- ##### FUNCTION lu_ent_add_current ##### -->
 <para>
-
+Appends @value to current attribute @attr in a struct #lu_ent if @value
+is not yet in the list of @attr values.
 </para>
 
-@ent: 
-@attr: 
-@value: 
+@ent: an entity
+@attr: attribute name
+@value: new attribute value
 
 
 <!-- ##### FUNCTION lu_ent_clear ##### -->
 <para>
-
+Removes all values of pending attribute @attribute from a struct #lu_ent.
 </para>
 
-@ent: 
-@attr: 
+@ent: an entity
+@attr: attribute name
 
 
 <!-- ##### FUNCTION lu_ent_clear_all ##### -->
 <para>
-
+Removes all pending attributes from a struct #lu_ent.
 </para>
 
-@ent: 
+@ent: an entity
 
 
 <!-- ##### FUNCTION lu_ent_clear_all_current ##### -->
 <para>
-
+Removes all current attributes from a struct #lu_ent.
 </para>
 
-@ent: 
+@ent: an entity
 
 
 <!-- ##### FUNCTION lu_ent_clear_current ##### -->
 <para>
-
+Removes all values of current attribute @attribute from a struct #lu_ent.
 </para>
 
-@ent: 
-@attr: 
+@ent: an entity
+@attr: attribute name
 
 
 <!-- ##### FUNCTION lu_ent_del ##### -->
 <para>
-
+Removes a pending attribute @attr value @value from a struct #lu_ent, if
+present.
 </para>
 
-@ent: 
-@attr: 
-@value: 
+@ent: an entity
+@attr: attribute name
+@value: attribute value
 
 
 <!-- ##### FUNCTION lu_ent_del_current ##### -->
 <para>
-
+Removes a current attribute @attr value @value from a struct #lu_ent, if
+present.
 </para>
 
-@ent: 
-@attr: 
-@value: 
+@ent: an entity
+@attr: attribute name
+@value: attribute value
 
 
 <!-- ##### FUNCTION lu_ent_dump ##### -->
 <para>
-
+Dumps an struct #lu_ent to a file in text form, for debugging.
 </para>
 
-@ent: 
-@fp: 
+@ent: the entity to dump
+@fp: destination file
 
 
 <!-- ##### FUNCTION lu_ent_get ##### -->
 <para>
-
+Returns values associated with a pending attribute in a struct #lu_ent.
 </para>
 
-@ent: 
-@attribute: 
-@Returns: 
+@ent: an entity
+@attribute: attribute name
+@Returns: a list of values, valid at least until they are modified or deleted.
+The list should not be freed by the caller.  Returns %NULL if the attribute is
+not present at all or on error.
 
 
 <!-- ##### FUNCTION lu_ent_get_attributes ##### -->
 <para>
-
+Returns a list of all pending attributes in a struct #lu_ent.
 </para>
 
-@ent: 
-@Returns: 
+@ent: an entity
+@Returns: a #GList of attribute names.  The list (but not the strings
+in the list) should be freed by the caller.
 
 
 <!-- ##### FUNCTION lu_ent_get_attributes_current ##### -->
 <para>
-
+Returns a list of all current attributes in a struct #lu_ent.
 </para>
 
-@ent: 
-@Returns: 
+@ent: an entity
+@Returns: a #GList of attribute names.  The list (but not the strings
+in the list) should be freed by the caller.
 
 
 <!-- ##### FUNCTION lu_ent_get_current ##### -->
 <para>
-
+Returns values associated with a current attribute in a struct #lu_ent.
 </para>
 
-@ent: 
-@attribute: 
-@Returns: 
+@ent: an entity
+@attribute: attribute name
+@Returns: a list of values, valid at least until they are modified or deleted.
+The list should not be freed by the caller.  Returns %NULL if the attribute is
+not present at all or on error.
 
 
 <!-- ##### FUNCTION lu_ent_has ##### -->
 <para>
-
+Checks if a struct #lu_ent has at least one pending attribute @attribute.
 </para>
 
-@ent: 
-@attribute: 
-@Returns: 
+@ent: an entity
+@attribute: attribute name
+@Returns: %TRUE if @attribute has a value in @ent.
 
 
 <!-- ##### FUNCTION lu_ent_has_current ##### -->
 <para>
-
+Checks if a struct #lu_ent has at least one current attribute @attribute.
 </para>
 
-@ent: 
-@attribute: 
-@Returns: 
+@ent: an entity
+@attribute: attribute name
+@Returns: %TRUE if @attribute has a value in @ent.
 
 
 <!-- ##### FUNCTION lu_ent_set ##### -->
 <para>
-
+Replaces all pending attributes @attr in a struct #lu_ent by a copy of
+@values.
 </para>
 
-@ent: 
-@attr: 
-@values: 
+@ent: an entity
+@attr: attribute name
+@values: an array of values
 
 
 <!-- ##### FUNCTION lu_ent_set_current ##### -->
 <para>
-
+Replaces all current attributes @attr in a struct #lu_ent by a copy of
+@values.
 </para>
 
-@ent: 
-@attr: 
-@values: 
-
-
+@ent: an entity
+@attr: attribute name
+@values: an array of values
