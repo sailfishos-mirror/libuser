@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-01-03 00:38-0500\n"
+"POT-Creation-Date: 2001-01-03 03:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,31 +262,31 @@ msgstr ""
 msgid "freeing lu_ent at %p.\n"
 msgstr ""
 
-#: samples/lookup.c:41 samples/testuser.c:34
+#: samples/lookup.c:42 samples/testuser.c:34
 msgid "Error initializing lu.\n"
 msgstr ""
 
-#: samples/lookup.c:50
+#: samples/lookup.c:51
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr ""
 
-#: samples/lookup.c:53
+#: samples/lookup.c:54
 #, c-format
 msgid "Searching for group named %s.\n"
 msgstr ""
 
-#: samples/lookup.c:59
+#: samples/lookup.c:60
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr ""
 
-#: samples/lookup.c:62
+#: samples/lookup.c:63
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr ""
 
-#: samples/lookup.c:86
+#: samples/lookup.c:89
 msgid "Entry not found.\n"
 msgstr ""
 

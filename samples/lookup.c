@@ -2,6 +2,7 @@
 #include "config.h"
 #endif
 #include <libuser/user.h>
+#include <libuser/user_private.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
@@ -68,6 +69,8 @@ int main(int argc, char **argv)
 	ent = tmp;
 	if(success) {
 		GList *a;
+		g_print("info data source = '%s'\n", ent->source_info);
+		g_print("auth data source = '%s'\n", ent->source_auth);
 		attributes = lu_ent_get_attributes(ent);
 		for(a = attributes; a && a->data; a = g_list_next(a)) {
 			if(lu_ent_get(ent, (char*) a->data) != NULL) {

@@ -349,14 +349,14 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 		case user_del:
 		case group_mod:
 		case group_del:
-			info_module = g_hash_table_lookup(context->modules,
-							  tmp->source_info);
 			auth_module = g_hash_table_lookup(context->modules,
 							  tmp->source_auth);
-			g_assert(info_module != NULL);
+			info_module = g_hash_table_lookup(context->modules,
+							  tmp->source_info);
 			g_assert(auth_module != NULL);
-			if(run_single(context, info_module, auth, id, tmp, data) &&
-			   run_single(context, auth_module, info, id, tmp, data)) {
+			g_assert(info_module != NULL);
+			if(run_single(context, auth_module, info, id, tmp, data) &&
+			   run_single(context, info_module, auth, id, tmp, data)) {
 				success = TRUE;
 			}
 			break;

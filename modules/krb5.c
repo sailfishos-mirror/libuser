@@ -166,7 +166,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 	pass = lu_ent_get(ent, LU_USERPASSWORD);
 	for(i = pass; i; i = g_list_next(i)) {
 		password = i->data;
-		if(password && strncmp(password, "{crypt}", 7)) {
+		if(password && (strncmp(password, "{crypt}", 7) != 0)) {
 			handle = get_server_handle(module->module_context);
 			if(handle) {
 				err = kadm5_create_principal(handle,
@@ -175,6 +175,8 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 							     password);
 				free_server_handle(handle);
 				if(err == KADM5_OK) {
+					lu_ent_set(ent, LU_USERPASSWORD,
+						   "{crypt}*K*");
 					ret = TRUE;
 					break;
 				}
@@ -255,13 +257,15 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		for(i = pass; i; i = g_list_next(i)) {
 			password = i->data;
 			if(password != NULL) {
-				if(strncmp(password, "{crypt}", 7)) {
+				if(strncmp(password, "{crypt}", 7) != 0) {
 					/* A change was requested. */
 					ret = FALSE;
 					if(kadm5_chpass_principal(handle,
 						  	principal,
 						  	password) == KADM5_OK) {
 						/* That change succeeded. */
+						lu_ent_set(ent, LU_USERPASSWORD,
+							   "{crypt}*K*");
 						ret = TRUE;
 					}
 				}
