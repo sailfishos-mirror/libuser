@@ -6,6 +6,7 @@ if test -x /bin/rpm ; then
 fi
 set -x -e
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
+gtkdocize --docdir docs/reference
 libtoolize --force
 autopoint
 aclocal -I m4
