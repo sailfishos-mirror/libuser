@@ -1,15 +1,15 @@
 # Catalan translations of libuser package by Softcatalà.
-# Copyright (C) 2004 Free Software Foundation
+# Copyright (C) 2004, 2005 Free Software Foundation
 # This file is distributed under the same license as the libuser package.
 # Isabel Cama <c.gomez.febrel@terra.es>, 2004.
-# Xavier Conde Rueda <xaviconde@eresmas.com>, 2004
+# Xavier Conde Rueda <xaviconde@eresmas.com>, 2004, 2005
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2005-01-09 04:33+0100\n"
+"PO-Revision-Date: 2005-03-12 00:45+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,15 +29,15 @@ msgstr "S'ha produït un error en crear '%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "S'ha produït un error en crear el grup '%s': %s.\n"
+msgstr "S'ha produït un error en canviar el propietari de '%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "S'ha produït un error en crear '%s': %s"
+msgstr "S'ha produït un error en escriure '%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -713,9 +713,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "la còpia de seguretat '%s' existeix i no és un fitxer per a dades"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "la versió del mòdul o de la biblioteca no coincideix"
+msgstr "la mida del fitxer de còpia de seguretat no coincideix"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
