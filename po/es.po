@@ -7,9 +7,10 @@
 # Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
 #
 msgid ""
-msgstr "Project-Id-Version: es\n"
+msgstr ""
+"Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-03-05 00:15+0100\n"
+"POT-Creation-Date: 2005-04-06 00:09+0200\n"
 "PO-Revision-Date: 2005-03-11 19:33-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
@@ -37,6 +38,7 @@ msgstr "Error al crear `%s': %s"
 # apps/luseradd.c:112
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
+#, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Error cambiando dueño de `%s': %s"
 
@@ -44,6 +46,7 @@ msgstr "Error cambiando dueño de `%s': %s"
 # apps/apputil.c:63
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
+#, c-format
 msgid "Error writing `%s': %s"
 msgstr "Error al escribir `%s': %s"
 
@@ -428,7 +431,9 @@ msgstr "Error en la lectura `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Error creando cuenta para `%s': la línea no está formateada de la forma correcta.\n"
+msgstr ""
+"Error creando cuenta para `%s': la línea no está formateada de la forma "
+"correcta.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
@@ -871,7 +876,8 @@ msgstr "no se pudo configurar el contexto de seguridad predeterminado: %s"
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
+msgstr ""
+"no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
 
 # modules/files.c:115
 # modules/files.c:109 modules/files.c:316 modules/files.c:573
@@ -912,7 +918,8 @@ msgstr "error al crear `%s': %s"
 #: modules/files.c:205
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
+msgstr ""
+"Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
 # lib/user.c:144
 # lib/user.c:186
@@ -954,7 +961,7 @@ msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 msgid "error encrypting password"
 msgstr "error al encriptar la contraseña"
 
@@ -975,7 +982,9 @@ msgstr "Ningún archivo shadow presente -- deshabilitando."
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "error al conectarse al servidor kadm5 para el servicio `%s' en el entorno `%s': %s"
+msgstr ""
+"error al conectarse al servidor kadm5 para el servicio `%s' en el entorno `%"
+"s': %s"
 
 # modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
 # modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
@@ -1102,8 +1111,8 @@ msgstr "El servidor LDAP parece non tener DSE de root"
 # modules/ldap.c:796 modules/ldap.c:873
 # modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
 # modules/ldap.c:799 modules/ldap.c:880
-#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
+#: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
+#: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
 msgstr "error en la proyección del nombre para el DN LDAP"
 
@@ -1115,120 +1124,120 @@ msgstr "error en la proyección del nombre para el DN base LDAP"
 
 # modules/ldap.c:554
 # modules/ldap.c:556
-#: modules/ldap.c:1363
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "el objeto de usuario no tiene ningún atributo %s"
 
 # modules/ldap.c:560
 # modules/ldap.c:562
-#: modules/ldap.c:1372
+#: modules/ldap.c:1381
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "el objeto de usuario ha sido creado sin `%s'"
 
 # modules/ldap.c:572
 # modules/ldap.c:574
-#: modules/ldap.c:1397
+#: modules/ldap.c:1406
 msgid "could not convert internal data to LDAPMods"
 msgstr "no se han podido convertir los datos internos a LDAPMods"
 
 # modules/ldap.c:598
 # modules/ldap.c:600
-#: modules/ldap.c:1410
+#: modules/ldap.c:1419
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "error al crear una entrada al directorio LDAP: %s"
 
 # modules/ldap.c:585 modules/ldap.c:748
 # modules/ldap.c:587 modules/ldap.c:751
-#: modules/ldap.c:1436 modules/ldap.c:1674
+#: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "error al modificar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:598
 # modules/ldap.c:600
-#: modules/ldap.c:1463
+#: modules/ldap.c:1472
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "error al renombrar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:640
 # modules/ldap.c:643
-#: modules/ldap.c:1512
+#: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
 msgstr "el objeto no tiene ningún atributo %s"
 
 # modules/ldap.c:657
 # modules/ldap.c:660
-#: modules/ldap.c:1536
+#: modules/ldap.c:1545
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "error al eliminar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
 # modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
-#: modules/ldap.c:1803
+#: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
+#: modules/ldap.c:1812
 #, c-format
 msgid "object has no %s attribute"
 msgstr "el objeto no tiene atributos %s"
 
 # modules/ldap.c:808
 # modules/ldap.c:811
-#: modules/ldap.c:1738
+#: modules/ldap.c:1747
 msgid "no such object in LDAP directory"
 msgstr "Objeto no encontrado en el directorio LDAP"
 
 # modules/ldap.c:832
 # modules/ldap.c:836
-#: modules/ldap.c:1750
+#: modules/ldap.c:1759
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "Atributo `%s' no encontrado"
 
 # modules/ldap.c:928
 # modules/ldap.c:939
-#: modules/ldap.c:1912
+#: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
 # modules/ldap.c:1191
 # modules/ldap.c:1213
-#: modules/ldap.c:2484
+#: modules/ldap.c:2493
 msgid "LDAP Server Name"
 msgstr "Nombre del servidor LDAP"
 
 # modules/ldap.c:1196
 # modules/ldap.c:1218
-#: modules/ldap.c:2490
+#: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
 msgstr "DN base de búsqueda de LDAP"
 
 # modules/ldap.c:1201
 # modules/ldap.c:1223
-#: modules/ldap.c:2496
+#: modules/ldap.c:2505
 msgid "LDAP Bind DN"
 msgstr "DN Bind LDAP"
 
 # modules/ldap.c:1206
 # modules/ldap.c:1228
-#: modules/ldap.c:2503
+#: modules/ldap.c:2512
 msgid "LDAP Bind Password"
 msgstr "Contraseña Bind LDAP"
 
 # modules/ldap.c:1212
 # modules/ldap.c:1234
-#: modules/ldap.c:2509
+#: modules/ldap.c:2518
 msgid "LDAP SASL User"
 msgstr "Usuario SASL LDAP"
 
 # modules/ldap.c:1217
 # modules/ldap.c:1239
-#: modules/ldap.c:2516
+#: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
 msgstr "Usuario de autorización SASL LDAP"
 

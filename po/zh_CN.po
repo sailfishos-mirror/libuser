@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-03-05 00:15+0100\n"
+"POT-Creation-Date: 2005-04-06 00:09+0200\n"
 "PO-Revision-Date: 2004-11-16 16:33+1000\n"
 "Last-Translator: Tony Fu <tfu@redhat.com>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
@@ -734,7 +734,7 @@ msgstr "无法写入“%s”：%s"
 msgid "entity object has no %s attribute"
 msgstr "实体对象没有任何 %s 属性"
 
-#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 msgid "error encrypting password"
 msgstr "错误的加密口令"
 
@@ -834,8 +834,8 @@ msgstr "无法搜索 LDAP 服务器"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP 服务器似乎没有根 DSE"
 
-#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
+#: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
+#: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
 msgstr "将名称映射为 LDAP 识别名时出错。"
 
@@ -843,86 +843,86 @@ msgstr "将名称映射为 LDAP 识别名时出错。"
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "将名称映射为 LDAP 基点识别名时出错。"
 
-#: modules/ldap.c:1363
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "用户对象没有任何 %s 属性"
 
-#: modules/ldap.c:1372
+#: modules/ldap.c:1381
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "用户对象创建时没有包括“%s”"
 
-#: modules/ldap.c:1397
+#: modules/ldap.c:1406
 msgid "could not convert internal data to LDAPMods"
 msgstr "无法将内部数据转换成 LDAPMods"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1419
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "建立 LDAP 目录项目时出错：%s"
 
-#: modules/ldap.c:1436 modules/ldap.c:1674
+#: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目录项目时出错：%s"
 
-#: modules/ldap.c:1463
+#: modules/ldap.c:1472
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "将 LDAP 目录项目更名时出错：%s"
 
-#: modules/ldap.c:1512
+#: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1536
+#: modules/ldap.c:1545
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "删除 LDAP 目录项目时出错：%s。"
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
-#: modules/ldap.c:1803
+#: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
+#: modules/ldap.c:1812
 #, c-format
 msgid "object has no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1738
+#: modules/ldap.c:1747
 msgid "no such object in LDAP directory"
 msgstr "在 LDAP 目录中没有此类对象"
 
-#: modules/ldap.c:1750
+#: modules/ldap.c:1759
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "没有发现任何“%s”属性"
 
-#: modules/ldap.c:1912
+#: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目录中为 %s 设置口令时出错：%s"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2493
 msgid "LDAP Server Name"
 msgstr "LDAP 服务器名"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
 msgstr "LDAP 搜索基点 DN"
 
-#: modules/ldap.c:2496
+#: modules/ldap.c:2505
 msgid "LDAP Bind DN"
 msgstr "LDAP 关联 DN"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2512
 msgid "LDAP Bind Password"
 msgstr "LDAP 关联口令"
 
-#: modules/ldap.c:2509
+#: modules/ldap.c:2518
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 用户"
 
-#: modules/ldap.c:2516
+#: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 授权用户"
 

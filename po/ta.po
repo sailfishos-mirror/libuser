@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-03-05 00:15+0100\n"
+"POT-Creation-Date: 2005-04-06 00:09+0200\n"
 "PO-Revision-Date: 2005-03-22 12:42+0530\n"
 "Last-Translator: Jayaradha <njaya@redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -734,7 +734,7 @@ msgstr "எழுத முடியவில்லை`%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "உருபொருளிடம் %s குணங்கள் இல்லை"
 
-#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 msgid "error encrypting password"
 msgstr "கடவுச்சொல்லை குறிமுறையாக்குவதில் பிழை"
 
@@ -834,8 +834,8 @@ msgstr "LDAP வழங்கனுடன் தேட முடியவில�
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP வழங்கனில் DSE வேர் இல்லை"
 
-#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
+#: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
+#: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
 msgstr "மாறுபடுத்தபட்ட பெயர் LDAP இல் படமிடல் பெயரில் பிழை "
 
@@ -843,86 +843,86 @@ msgstr "மாறுபடுத்தபட்ட பெயர் LDAP இல�
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "மாறுபடுத்தபட்ட பெயர் LDAP தளத்தில் படமிடல் பெயரில் பிழை "
 
-#: modules/ldap.c:1363
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "பயனர் பொருளில் %s பண்புகள் இல்லை"
 
-#: modules/ldap.c:1372
+#: modules/ldap.c:1381
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "பயனர் பொருள் உருவாக்கத்தில் `%s' இல்லை"
 
-#: modules/ldap.c:1397
+#: modules/ldap.c:1406
 msgid "could not convert internal data to LDAPMods"
 msgstr "உள் தகவலை LDAP பாங்காக மாற்ற இயலவில்லை"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1419
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை உருவாக்குவதில் பிழை: %s"
 
-#: modules/ldap.c:1436 modules/ldap.c:1674
+#: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr " LDAP கோப்பு உள்ளீடுகளை மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1463
+#: modules/ldap.c:1472
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை பெயர் மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1512
+#: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
 msgstr "பொருளில் %s பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1536
+#: modules/ldap.c:1545
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை நீக்குவதில் பிழை: %s"
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
-#: modules/ldap.c:1803
+#: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
+#: modules/ldap.c:1812
 #, c-format
 msgid "object has no %s attribute"
 msgstr "பொருளுக்கு %s  பண்புக்கூறு இல்லை"
 
-#: modules/ldap.c:1738
+#: modules/ldap.c:1747
 msgid "no such object in LDAP directory"
 msgstr "அப்படிபட்ட பொருள் எதுவும் LDAP  கோப்புறையில் இல்லை"
 
-#: modules/ldap.c:1750
+#: modules/ldap.c:1759
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'  பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1912
+#: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP கோப்புறையில் %s: %s கடவுச்சொல் அமைப்பதில் பிழை"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2493
 msgid "LDAP Server Name"
 msgstr "LDAP வழங்கன் பெயர்"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடுதல் தளம் DN"
 
-#: modules/ldap.c:2496
+#: modules/ldap.c:2505
 msgid "LDAP Bind DN"
 msgstr "LDAP பைண்ட் DN"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2512
 msgid "LDAP Bind Password"
 msgstr "LDAP பைண்ட் கடவுச்சொல்"
 
-#: modules/ldap.c:2509
+#: modules/ldap.c:2518
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2516
+#: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 
@@ -1016,4 +1016,3 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
-

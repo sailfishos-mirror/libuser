@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-03-05 00:15+0100\n"
+"POT-Creation-Date: 2005-04-06 00:09+0200\n"
 "PO-Revision-Date: 2004-02-24 12:28+0000\n"
 "Last-Translator: Owain Green <owaing@oceanfree.net>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -733,7 +733,7 @@ msgstr "methwyd ysgrifennu i `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "nid oes gan y gwrthrych endid briodoledd %s"
 
-#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 #, fuzzy
 msgid "error encrypting password"
 msgstr "gwall wrth osod cyfrinair ar gyfer `%s'"
@@ -836,8 +836,8 @@ msgstr "methwyd chwilio'r gweinydd LDAP"
 msgid "LDAP server appears to have no root DSE"
 msgstr "ymddengys nad oes gwraidd DSE gan y gweinydd LDAP"
 
-#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
+#: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
+#: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
 msgstr "gwall wrth fapio'r enw yn enw gwahaniaethol LDAP"
 
@@ -845,86 +845,86 @@ msgstr "gwall wrth fapio'r enw yn enw gwahaniaethol LDAP"
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "gwall wrth fapio'r enw yn enw sail gwahaniaethol LDAP"
 
-#: modules/ldap.c:1363
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "nid oedd priodoledd %s gan y gwrthrych defnyddiwr"
 
-#: modules/ldap.c:1372
+#: modules/ldap.c:1381
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "crëwyd y gwrthrych defnyddiwr heb `%s'"
 
-#: modules/ldap.c:1397
+#: modules/ldap.c:1406
 msgid "could not convert internal data to LDAPMods"
 msgstr "methwyd trosi data mewnol yn LDAPModau"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1419
 #, fuzzy, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "gwall wrth ail-enwi cofnod cyfeiriadur LDAP: %s\n"
 
-#: modules/ldap.c:1436 modules/ldap.c:1674
+#: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "gwall wrth addasu cofnod cyfeiriadur LDAP: %s"
 
-#: modules/ldap.c:1463
+#: modules/ldap.c:1472
 #, fuzzy, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "gwall wrth ail-enwi cofnod cyfeiriadur LDAP: %s\n"
 
-#: modules/ldap.c:1512
+#: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
 msgstr "nid oedd gan y gwrthrych briodoledd %s"
 
-#: modules/ldap.c:1536
+#: modules/ldap.c:1545
 #, fuzzy, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "gwall wrth waredu'r gofnod cyfeiriadur LDAP: %s.\n"
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
-#: modules/ldap.c:1803
+#: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
+#: modules/ldap.c:1812
 #, c-format
 msgid "object has no %s attribute"
 msgstr "nid oes gan y gwrthrych briodoledd %s"
 
-#: modules/ldap.c:1738
+#: modules/ldap.c:1747
 msgid "no such object in LDAP directory"
 msgstr "nid oes y fath wrthrych yn y cyfeiriadur LDAP"
 
-#: modules/ldap.c:1750
+#: modules/ldap.c:1759
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ni ganfuwyd briodoledd `%s'"
 
-#: modules/ldap.c:1912
+#: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "gwall wrth osod cyfrinair yn y cyfeiriadur LDAP ar gyfer %s: %s"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2493
 msgid "LDAP Server Name"
 msgstr "Enw Gweinydd LDAP"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
 msgstr "EP Sail Chwilio LDAP"
 
-#: modules/ldap.c:2496
+#: modules/ldap.c:2505
 msgid "LDAP Bind DN"
 msgstr "EP Rhwymo LDAP"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2512
 msgid "LDAP Bind Password"
 msgstr "Cyfrinair Rhwymo LDAP"
 
-#: modules/ldap.c:2509
+#: modules/ldap.c:2518
 msgid "LDAP SASL User"
 msgstr "Defnyddiwr SASL LDAP"
 
-#: modules/ldap.c:2516
+#: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
 msgstr "Defnyddiwr Awdurdodi SASL LDAP"
 

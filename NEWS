@@ -1,3 +1,6 @@
+0.53.4
+* Fix adding of objectclasses to LDAP user accounts.
+
 0.53.3
 * Handle more I/O failures.
 

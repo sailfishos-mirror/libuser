@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-03-05 00:15+0100\n"
+"POT-Creation-Date: 2005-04-06 00:09+0200\n"
 "PO-Revision-Date: 2005-03-14 01:55+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <<dansk@klid.dk>>\n"
@@ -336,7 +336,8 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr ""
+"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
@@ -732,7 +733,7 @@ msgstr "kunne ikke skrive til `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "entitetsobjekt har ingen %s-attribut"
 
-#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 msgid "error encrypting password"
 msgstr "fejl ved kryptering af adgangskode"
 
@@ -747,7 +748,8 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr ""
+"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -832,8 +834,8 @@ msgstr "kunne ikke søge i LDAP-tjener"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP-server ser ud til ikke at have nogen rod-BSE"
 
-#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
+#: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
+#: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
 msgstr "fejl ved kobling af navn til LDAP distinguished name"
 
@@ -841,86 +843,86 @@ msgstr "fejl ved kobling af navn til LDAP distinguished name"
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "fejl ved kobling af navn til LDAP base distinguished name"
 
-#: modules/ldap.c:1363
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "bruger-objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1372
+#: modules/ldap.c:1381
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "brugerobjektet blev oprettet uden `%s'"
 
-#: modules/ldap.c:1397
+#: modules/ldap.c:1406
 msgid "could not convert internal data to LDAPMods"
 msgstr "kunne ikke konvertere interne data til LDAPMods"
 
-#: modules/ldap.c:1410
+#: modules/ldap.c:1419
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "fejl ved oprettelse af LDAP-katalogindgang: %s"
 
-#: modules/ldap.c:1436 modules/ldap.c:1674
+#: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "fejl ved ændring af LDAP-katalogopføring: %s"
 
-#: modules/ldap.c:1463
+#: modules/ldap.c:1472
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "fejl ved ændring af navn på LDAP-katalogindgang %s"
 
-#: modules/ldap.c:1512
+#: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1536
+#: modules/ldap.c:1545
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "fejl ved fjernelse af LDAP-katalogopføring: %s"
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
-#: modules/ldap.c:1803
+#: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
+#: modules/ldap.c:1812
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektet har ikke attribut %s"
 
-#: modules/ldap.c:1738
+#: modules/ldap.c:1747
 msgid "no such object in LDAP directory"
 msgstr "ingen sådanne objekter i LDAP-kataloget"
 
-#: modules/ldap.c:1750
+#: modules/ldap.c:1759
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ingen `%s'-attribut fundet"
 
-#: modules/ldap.c:1912
+#: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Fejl ved sætning af adgangskode i LDAP-katalog for %s: %s"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2493
 msgid "LDAP Server Name"
 msgstr "Navn på LDAP-tjener"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
 msgstr "LDAP søge-basis DN"
 
-#: modules/ldap.c:2496
+#: modules/ldap.c:2505
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2512
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-adgangskode"
 
-#: modules/ldap.c:2509
+#: modules/ldap.c:2518
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruger"
 
-#: modules/ldap.c:2516
+#: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisationsbruger"
 
@@ -1087,4 +1089,3 @@ msgstr "Kopierer brugerstruktur:\n"
 
 #~ msgid "freeing lu_ent at %p.\n"
 #~ msgstr "frigiver lu_ent ved %p.\n"
-
