@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-02 15:47+1000\n"
+"PO-Revision-Date: 2004-11-15 11:15+1000\n"
 "Last-Translator: David Barzilay <barzilay@redhat.com>\n"
 "Language-Team: Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -255,7 +255,7 @@ msgstr "Nenhum nome de grupo especificado.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ID %s de grupo inválido\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -329,16 +329,16 @@ msgstr "Erro ao criar conta para `%s': linha formatada inadequadamente.\n"
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ID %s de usuário inválido\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Recusando criar conta com UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Erro ao criar grupo para `%s' com GID %ld: %s\n"
+msgstr "Erro ao criar grupo para `%s' com GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -399,9 +399,9 @@ msgid "Password changed.\n"
 msgstr "Senha alterada.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "O grupo %s não existe.\n"
+msgstr "O grupo %jd não existe.\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -434,14 +434,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s não tem um número gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Não existe um grupo com o GID %ld; não será removido.\n"
+msgstr "Não existe um grupo com o GID %jd; não será removido.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "O grupo com o GID %ld não tinha um nome.\n"
+msgstr "O grupo com o GID %jd não tinha um nome.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -506,8 +506,7 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:79
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:87
 #, c-format
@@ -596,7 +595,7 @@ msgstr "versões não compatíveis de biblioteca/módulo"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "desbloquear deixará o campo da senha vazio"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -667,8 +666,7 @@ msgstr "não foi possível determinar o contexto de segurança default: %s"
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"não foi possível determinar o contexto de segurança default de `%s': %s"
+msgstr "não foi possível determinar o contexto de segurança default de `%s': %s"
 
 #: modules/files.c:169 modules/files.c:529 modules/files.c:874
 #: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
@@ -733,8 +731,7 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
+msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -809,8 +806,7 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -951,12 +947,12 @@ msgstr "Erro ao inicializar %s: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "ID %s inválido\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Procurando por grupo com ID %d.\n"
+msgstr "Procurando por grupo com ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -964,9 +960,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Procurando por grupo de nome %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Procurando por usuário com ID %d.\n"
+msgstr "Procurando por usuário com ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1022,3 +1018,4 @@ msgstr "Copiando estrutura do usuário:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "erro ao inicializar módulo"
+
