@@ -2,6 +2,8 @@
 #
 #
 #
+#
+#
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Allan Sims <allsi@eau.ee>, 2004.
@@ -10,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-25 18:56+0200\n"
+"PO-Revision-Date: 2004-04-03 00:08+0300\n"
 "Last-Translator: Allan Sims <allsi@eau.ee>\n"
 "Language-Team: Estonian <Eesti>\n"
 "MIME-Version: 1.0\n"
@@ -559,24 +561,24 @@ msgstr "teegi/mooduli versioon ei sobi"
 #: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "puudub lähtestus funktsioon %s `%s'-s"
 
 #: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "mooduli versiooni mitteühtivus `%s'-s"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "viga terminali atribuutide lugemisel"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "viga terminali atribuutide seadmisel"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr ""
+msgstr "viga terminalist lugemisel"
 
 #: lib/user.c:190
 msgid "name is not set"
@@ -606,7 +608,7 @@ msgstr "nimi sisaldab vigaseid märke `%c'"
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "viga faili lukustamisel: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -638,17 +640,17 @@ msgstr ""
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "ei saa `%s'-st lugeda: %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
-msgstr ""
+msgstr "failis on kirje juba olemas"
 
 #: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "ei saa `%s'-i kirjutada: %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
@@ -712,7 +714,7 @@ msgstr ""
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "Kerberos Realm"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
