@@ -60,7 +60,7 @@ lu_ent_dump(struct lu_ent *ent)
  * @param type An indicator of whether the application needs an unused UID or GID.
  * @param id An initial guess at what the returned ID might be.
  *
- * The lu_get_free_id() function returns an unused UID or GID, using @id as a first guess at what a free ID might be.
+ * The lu_get_free_id() function returns an unused UID or GID, using @a id as a first guess at what a free ID might be.
  *
  * @return a UID or GID if one is found, 0 on failure.
  **/
@@ -464,7 +464,7 @@ lu_ent_free(struct lu_ent *ent)
  * @param attr The attribute of the entity structure which will have its original value replaced.
  * @param val A new value for the attribute.
  *
- * This function modifies original copy of the given attribute of a structure so that it is equal to @val.
+ * This function modifies original copy of the given attribute of a structure so that it is equal to @a val.
  *
  * @return TRUE on success, FALSE on failure.
  **/
@@ -483,7 +483,7 @@ lu_ent_set_original(struct lu_ent *ent, const char *attr, const char *val)
  * @param attr The attribute of the entity structure whose original value will be replaced.
  * @param val A new value for the attribute.
  *
- * This function modifies the original value of the given attribute of a structure so that it is equal to @val.
+ * This function modifies the original value of the given attribute of a structure so that it is equal to @a val.
  *
  * @return TRUE on success, FALSE on failure.
  **/
@@ -501,7 +501,7 @@ lu_ent_set_numeric_original(struct lu_ent *ent, const char *attr, long val)
  * @param attr The attribute of the entity structure which will be replaced.
  * @param val A new value for the attribute.
  *
- * This function modifies the given attribute of a structure so that it is equal to @val.
+ * This function modifies the given attribute of a structure so that it is equal to @a val.
  *
  * @return TRUE on success, FALSE on failure.
  **/

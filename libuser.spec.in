@@ -51,7 +51,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html python/modules.txt
+%doc AUTHORS COPYING NEWS README TODO docs/*.txt python/modules.txt
 
 %config(noreplace) %{_sysconfdir}/libuser.conf
 

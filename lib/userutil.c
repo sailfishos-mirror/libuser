@@ -125,7 +125,7 @@ fill_urandom(char *output, size_t length)
  * @param plain A password.
  * @param previous An optional salt to use, which also indicates the crypt() variation to be used.
  *
- * Generates a hashed version of @plain by calling the crypt() function, using the hashing method specified in @previous.
+ * Generates a hashed version of @a plain by calling the crypt() function, using the hashing method specified in @previous.
  *
  * @return a static global string which must not be freed.
  */

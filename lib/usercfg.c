@@ -209,7 +209,7 @@ lu_cfg_read(struct lu_context *context, const char *key, const char *default_val
  * @param context A valid library context.
  * @param parent_key A hierarchical name for the setting whose children are being queried.
  *
- * Reads the values of a configuration setting on the level of the configuration hierarchy immediately below the @parent_key.
+ * Reads the values of a configuration setting on the level of the configuration hierarchy immediately below the @a parent_key.
  *
  * @return A #GList of strings.
  **/
