@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-02-26 00:34+0100\n"
+"PO-Revision-Date: 2004-03-07 04:27+0100\n"
 "Last-Translator: isabel cama <c.gomez.febrel@terra.es>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -356,7 +356,7 @@ msgstr "Nova contrasenya (confirmació)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr "Les contrasenyes són diferents, torneu-les a escriure.\n"
+msgstr "Les contrasenyes són diferents, intenteu-ho de nou.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
@@ -484,7 +484,7 @@ msgstr "èxit"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr "mòdul deshabilitat per configuració"
+msgstr "mòdul deshabilitat per la configuració"
 
 #: lib/error.c:46
 msgid "generic error"
@@ -791,7 +791,7 @@ msgstr ""
 #: modules/ldap.c:1339
 #, c-format
 msgid "object had no %s attribute"
-msgstr "l'objecte no tenia atribut %s"
+msgstr "l'objecte no tenia cap atribut %s"
 
 #: modules/ldap.c:1366
 #, c-format
@@ -803,7 +803,7 @@ msgstr ""
 #: modules/ldap.c:1610
 #, c-format
 msgid "object has no %s attribute"
-msgstr "l'objecte no té atribut %s"
+msgstr "l'objecte no té cap atribut %s"
 
 #: modules/ldap.c:1546
 msgid "no such object in LDAP directory"
