@@ -34,7 +34,7 @@
 #include <unistd.h>
 #include <glib.h>
 #include <ldap.h>
-#include <sasl.h>
+#include <sasl/sasl.h>
 #include "../lib/user_private.h"
 
 #include "default.-c"

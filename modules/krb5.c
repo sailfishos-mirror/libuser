@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -194,7 +194,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent,
 	g_assert(module != NULL);
 	g_assert(name != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
@@ -292,7 +292,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent,
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
@@ -380,7 +380,7 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent,
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
@@ -432,7 +432,7 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent,
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
@@ -520,7 +520,7 @@ lu_krb5_user_islocked(struct lu_module *module, struct lu_ent *ent,
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
@@ -586,7 +586,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
-	g_assert(ent->magic = LU_ENT_MAGIC);
+	g_assert(ent->magic == LU_ENT_MAGIC);
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 

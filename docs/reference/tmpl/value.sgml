@@ -69,3 +69,13 @@ is returned.
 @Returns: ID value or %LU_VALUE_INVALID_ID
 
 
+<!-- ##### FUNCTION lu_values_equal ##### -->
+<para>
+Check whether @a and @b have the same type and value.
+</para>
+
+@a: #GValue
+@b: #GValue
+@Returns: #TRUE if @a and @b have the same type and value
+
+

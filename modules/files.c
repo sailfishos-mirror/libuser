@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -157,7 +157,7 @@ lu_files_create_backup(const char *filename,
 	char *backupname;
 	struct stat ist, ost;
 	char buf[CHUNK_SIZE];
-	ssize_t len;
+	gboolean res = FALSE;
 
 	g_assert(filename != NULL);
 	g_assert(strlen(filename) > 0);
@@ -168,23 +168,19 @@ lu_files_create_backup(const char *filename,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		return FALSE;
+		goto err;
 	}
 
 	/* Lock the input file. */
-	if ((ilock = lu_util_lock_obtain(ifd, error)) == NULL) {
-		close(ifd);
-		return FALSE;
-	}
+	if ((ilock = lu_util_lock_obtain(ifd, error)) == NULL)
+		goto err_ifd;
 
 	/* Read the input file's size. */
 	if (fstat(ifd, &ist) == -1) {
-		lu_util_lock_free(ilock);
-		close(ifd);
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
-		return FALSE;
+		goto err_ilock;
 	}
 
 	/* Generate the backup file's name and open it, creating it if it
@@ -195,10 +191,7 @@ lu_files_create_backup(const char *filename,
 		lu_error_new(error, lu_error_open,
 			     _("error creating `%s': %s"), backupname,
 			     strerror(errno));
-		g_free(backupname);
-		lu_util_lock_free(ilock);
-		close(ifd);
-		return FALSE;
+		goto err_backupname;
 	}
 
 	/* If we can't read its size, or it's not a normal file, bail. */
@@ -211,73 +204,99 @@ lu_files_create_backup(const char *filename,
 			lu_error_new(error, lu_error_open,
 				     _("backup file `%s' exists and is not a regular file"),
 				     backupname);
-			g_free(backupname);
-			lu_util_lock_free(ilock);
-			close(ifd);
-			close(ofd);
-			return FALSE;
+			goto err_ofd;
 		}
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), backupname,
 			     strerror(errno));
-		g_free(backupname);
-		lu_util_lock_free(ilock);
-		close(ifd);
-		close(ofd);
-		return FALSE;
+		goto err_ofd;
 	}
 
 	/* Now lock the output file. */
-	if ((olock = lu_util_lock_obtain(ofd, error)) == NULL) {
-		g_free(backupname);
-		lu_util_lock_free(ilock);
-		close(ifd);
-		close(ofd);
-		return FALSE;
-	}
+	if ((olock = lu_util_lock_obtain(ofd, error)) == NULL)
+		goto err_ofd;
 
 	/* Set the permissions on the new file to match the old one. */
-	fchown(ofd, ist.st_uid, ist.st_gid);
+	if (fchown(ofd, ist.st_uid, ist.st_gid) == -1 && errno != EPERM) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing owner of `%s': %s"), backupname,
+			     strerror(errno));
+		goto err_olock;
+	}
 	fchmod(ofd, ist.st_mode);
 
 	/* Copy the data, block by block. */
-	do {
-		len = read(ifd, buf, sizeof(buf));
-		if (len >= 0) {
-			write(ofd, buf, len);
+	for (;;) {
+		ssize_t left;
+		char *p;
+
+		left = read(ifd, &buf, sizeof(buf));
+		if (left == -1) {
+			if (errno == EINTR)
+				continue;
+			lu_error_new(error, lu_error_read,
+				     _("Error reading `%s': %s"), filename,
+				     strerror(errno));
+			goto err_olock;
 		}
-	} while (len == sizeof(buf));
+		if (left == 0)
+			break;
+		p = buf;
+		while (left > 0) {
+			ssize_t out;
+			
+			out = write(ofd, p, left);
+			if (out == -1) {
+				if (errno == EINTR)
+					continue;
+				lu_error_new(error, lu_error_write,
+					     _("Error writing `%s': %s"),
+					     backupname, strerror(errno));
+				goto err_olock;
+			}
+			p += out;
+			left -= out;
+		}
+	}
 
 	/* Flush data to disk, and truncate at the current offset.  This is
 	 * necessary if the file existed before we opened it. */
 	fsync(ofd);
-	ftruncate(ofd, lseek(ofd, 0, SEEK_CUR));
+	if (ftruncate(ofd, lseek(ofd, 0, SEEK_CUR)) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error writing `%s': %s"), backupname,
+			     strerror(errno));
+		goto err_olock;
+	}
 
 	/* Re-read data about the output file. */
 	if (fstat(ofd, &ost) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), backupname,
 			     strerror(errno));
-		g_free(backupname);
-		lu_util_lock_free(ilock);
-		close(ifd);
-		lu_util_lock_free(olock);
-		close(ofd);
-		return FALSE;
+		goto err_olock;
 	}
 
-	/* We can close the files now. */
-	lu_util_lock_free(ilock);
-	close(ifd);
-	lu_util_lock_free(olock);
-	close(ofd);
-
 	/* Complain if the files are somehow not the same. */
-	g_return_val_if_fail(ist.st_size == ost.st_size, FALSE);
+	if (ist.st_size != ost.st_size) {
+		lu_error_new(error, lu_error_generic,
+			     _("backup file size mismatch"));
+		goto err_olock;
+	}
+	res = TRUE;
 
+ err_olock:
+	lu_util_lock_free(olock);
+ err_ofd:
+	close(ofd);
+ err_backupname:
 	g_free(backupname);
-
-	return TRUE;
+ err_ilock:
+	lu_util_lock_free(ilock);
+ err_ifd:
+	close(ifd);
+ err:
+	return res;
 }
 
 /* Read a line from the file, no matter how long it is, and return it as a
@@ -944,7 +963,13 @@ generic_add(struct lu_module *module, const char *base_name,
 	 * curse people who use text editors (which shall remain unnamed) which
 	 * allow saving of the file without a final line terminator. */
 	if ((st.st_size > 0) && (contents[st.st_size - 1] != '\n')) {
-		write(fd, "\n", 1);
+		if (write(fd, "\n", 1) != 1) {
+			lu_error_new(error, lu_error_write,
+				     _("couldn't write to `%s': %s"),
+				     filename,
+				     strerror(errno));
+			goto err_fragment2;
+		}
 	}
 	/* Attempt to write the entire line to the end. */
 	r = write(fd, line, strlen(line));
@@ -956,7 +981,7 @@ generic_add(struct lu_module *module, const char *base_name,
 			     strerror(errno));
 		/* Truncate off whatever we actually managed to write and
 		 * give up. */
-		ftruncate(fd, offset);
+		(void)ftruncate(fd, offset);
 		goto err_fragment2;
 	}
 	/* Hey, it succeeded. */
@@ -1417,7 +1442,12 @@ generic_del(struct lu_module *module, const char *base_name,
 	}
 
 	/* Truncate the file to the new (certainly shorter) length. */
-	ftruncate(fd, len);
+	if (ftruncate(fd, len) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("couldn't write to `%s': %s"), filename,
+			     strerror(errno));
+		goto err_contents;
+	}
 	ret = TRUE;
 	/* Fall through */
 	

@@ -9,87 +9,104 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2005-01-17 02:06+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2005-03-05 00:15+0100\n"
 "PO-Revision-Date: 2004-12-10 11:15-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "X-Generator: XLFEdit 5.0.1\n"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
-#: apps/apputil.c:129
+#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:232 apps/apputil.c:261
+#: modules/files.c:238
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Error en la lectura `%s': %s "
 
 # apps/apputil.c:63
 # apps/apputil.c:63
-#: apps/apputil.c:137
+#: apps/apputil.c:138 apps/apputil.c:208
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Error al crear `%s': %s"
 
+# apps/luseradd.c:112
+# apps/luseradd.c:112
+#: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
+#: modules/files.c:222
+#, fuzzy, c-format
+msgid "Error changing owner of `%s': %s"
+msgstr "Error en la creación del grupo `%s': %s\n"
+
+# apps/apputil.c:63
+# apps/apputil.c:63
+#: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
+#: modules/files.c:253 modules/files.c:267
+#, fuzzy, c-format
+msgid "Error writing `%s': %s"
+msgstr "Error al crear `%s': %s"
+
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#: apps/apputil.c:265 apps/apputil.c:297 apps/apputil.c:314
+#: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Error al eliminar %s: %s"
 
-#: apps/apputil.c:473 apps/apputil.c:477
+#: apps/apputil.c:555 apps/apputil.c:559
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Imposible disminuir privilegios.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:486
+#: apps/apputil.c:568
 #, c-format
 msgid "Internal error.\n"
 msgstr "Error interno.\n"
 
-#: apps/apputil.c:506
+#: apps/apputil.c:588
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s no está autorizado para cambiar la información de finger de %s\n"
 
 # lib/userent.c:46
 # lib/userent.c:47
-#: apps/apputil.c:508
+#: apps/apputil.c:590
 msgid "Unknown user context"
 msgstr "Contexto de usuario desconocido"
 
-#: apps/apputil.c:516
+#: apps/apputil.c:598
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "No se pudo establecer el contexto predeterminado para /etc/passwd\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
-#: apps/apputil.c:525
+#: apps/apputil.c:607
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Error inicializando PAM.\n"
 
 # apps/apputil.c:339
 # apps/apputil.c:339
-#: apps/apputil.c:533 apps/apputil.c:557
+#: apps/apputil.c:615 apps/apputil.c:639
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificación fallida para %s.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:542
+#: apps/apputil.c:624
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Error interno `%s' de PAM.\n"
 
-#: apps/apputil.c:548
+#: apps/apputil.c:630
 #, c-format
 msgid "User mismatch.\n"
 msgstr "No corresponde el usuario.\n"
@@ -869,13 +886,13 @@ msgstr ""
 # modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
-#: modules/files.c:169 modules/files.c:529 modules/files.c:874
-#: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
-#: modules/files.c:1648 modules/files.c:1885 modules/files.c:2076
-#: modules/files.c:2093 modules/files.c:2183 modules/files.c:2202
-#: modules/files.c:2270 modules/files.c:2291 modules/files.c:2388
-#: modules/files.c:2407 modules/files.c:2466 modules/files.c:2485
-#: modules/files.c:2586 modules/files.c:2601
+#: modules/files.c:169 modules/files.c:548 modules/files.c:893
+#: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
+#: modules/files.c:1678 modules/files.c:1915 modules/files.c:2106
+#: modules/files.c:2123 modules/files.c:2213 modules/files.c:2232
+#: modules/files.c:2300 modules/files.c:2321 modules/files.c:2418
+#: modules/files.c:2437 modules/files.c:2496 modules/files.c:2515
+#: modules/files.c:2616 modules/files.c:2631
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -883,45 +900,52 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
-#: modules/files.c:185 modules/files.c:221 modules/files.c:259
-#: modules/files.c:886 modules/files.c:1351
+#: modules/files.c:181 modules/files.c:210 modules/files.c:275
+#: modules/files.c:905 modules/files.c:1376
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se pudo efectuar el stat `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#: modules/files.c:196
+#: modules/files.c:192
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "error al crear `%s': %s"
 
 # modules/files.c:145
 # modules/files.c:140
-#: modules/files.c:212
+#: modules/files.c:205
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr ""
 "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
+# lib/user.c:144
+# lib/user.c:186
+#: modules/files.c:283
+#, fuzzy
+msgid "backup file size mismatch"
+msgstr "versión de librería/módulo discordante"
+
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:916 modules/files.c:1360
+#: modules/files.c:935 modules/files.c:1385
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
-#: modules/files.c:925 modules/files.c:932
+#: modules/files.c:944 modules/files.c:951
 msgid "entry already present in file"
 msgstr "la entrada ya se ha hecho presente en el archivo"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:939 modules/files.c:954 modules/files.c:1406
-#: modules/files.c:1414
+#: modules/files.c:958 modules/files.c:968 modules/files.c:979
+#: modules/files.c:1431 modules/files.c:1439 modules/files.c:1447
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -930,27 +954,27 @@ msgstr "no se ha podido escribir en `%s': %s"
 # modules/files.c:833
 # modules/files.c:727 modules/files.c:734 modules/files.c:821
 # modules/files.c:831
-#: modules/files.c:1114 modules/files.c:1122 modules/files.c:1215
-#: modules/files.c:1223
+#: modules/files.c:1139 modules/files.c:1147 modules/files.c:1240
+#: modules/files.c:1248
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
+#: modules/files.c:1949 modules/ldap.c:1609 modules/ldap.c:1881
 msgid "error encrypting password"
 msgstr "error al encriptar la contraseña"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2873 modules/files.c:2952
+#: modules/files.c:2903 modules/files.c:2982
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2967
+#: modules/files.c:2997
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 

@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.53.2])
+AC_INIT([libuser], [0.53.3])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_SRCDIR([lib/user.c])
 AC_CONFIG_AUX_DIR([admin])

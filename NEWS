@@ -1,4 +1,7 @@
-* 0.53.2
+0.53.3
+* Handle more I/O failures.
+
+0.53.2
 * Important bug fixes in lchage, lgroupmod, lnewusers and lusermod; minor bug
   fixes in lpasswd and luseradd.
 * Add man pages for the utilities.

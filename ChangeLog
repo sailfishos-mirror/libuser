@@ -1,3 +1,25 @@
+2005-03-05  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.3.
+
+	* NEWS: Update.
+
+2005-03-04  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/apputil.c (lu_homedir_populate, lu_signal_nscd)
+	(lu_mailspool_create_remove)
+	* modules/files.c (lu_files_create_backup, generic_add, generic_del):
+	Add more error checking.
+
+	* modules/ldap.c: Include Cyrus SASL v2 header file.
+
+	* modules/krb5.c (lu_krb5_user_add, lu_krb5_user_mod) 
+	(lu_krb5_user_del, lu_krb5_user_do_lock, lu_krb5_user_islocked) 
+	(lu_krb5_user_setpass): Fix checking of lu_ent magic.
+
+	* docs/reference/libuser-sections.txt: Add lu_values_equal.
+	* docs/reference/tmpl/value.sgml: Document lu_values_equal ().
+
 2005-01-17  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.2.

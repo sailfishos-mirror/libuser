@@ -11,6 +11,7 @@ LU_VALUE_INVALID_ID
 lu_value_strdup
 lu_value_init_set_id
 lu_value_get_id
+lu_values_equal
 </SECTION>
 
 <SECTION>

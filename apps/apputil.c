@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -118,8 +118,9 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 	struct stat st;
 	char skelpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
 	struct utimbuf timebuf;
-	int ifd = -1, ofd = -1, i;
+	int ifd = -1, ofd = -1;
 	off_t offset;
+	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
 
@@ -128,7 +129,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 		lu_error_new(error, lu_error_generic,
 			     _("Error reading `%s': %s"), skeleton,
 			     strerror(errno));
-		return FALSE;
+		goto err;
 	}
 
 	/* Create the top-level directory. */
@@ -136,12 +137,16 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 		lu_error_new(error, lu_error_generic,
 			     _("Error creating `%s': %s"), directory,
 			     strerror(errno));
-		closedir(dir);
-		return FALSE;
+		goto err_dir;
 	}
 
 	/* Set the ownership on the top-level directory. */
-	chown(directory, owner, group);
+	if (chown(directory, owner, group) == -1 && errno != EPERM) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing owner of `%s': %s"), directory,
+			     strerror(errno));
+		goto err_dir;
+	}
 
 	while ((ent = readdir(dir)) != NULL) {
 		/* Iterate through each item in the directory. */
@@ -176,8 +181,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 							 st.st_mode,
 							 error)) {
 					/* Aargh!  Fail up. */
-					closedir(dir);
-					return FALSE;
+					goto err_dir;
 				}
 				/* Set the date on the directory. */
 				utime(path, &timebuf);
@@ -187,14 +191,33 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 			/* If it's a symlink, duplicate it. */
 			if (S_ISLNK(st.st_mode)) {
 				ssize_t len;
-				
-				if ((len = readlink(skelpath, buf,
-						    sizeof(buf) - 1)) != -1) {
-					buf[len] = '\0';
-					symlink(buf, path);
-					lchown(path, owner, st.st_gid ?: group);
-					utime(path, &timebuf);
+
+				len = readlink(skelpath, buf, sizeof(buf) - 1);
+				if (len == -1) {
+					lu_error_new(error, lu_error_generic,
+						     _("Error reading `%s': %s"),
+						     skelpath,
+						     strerror(errno));
+					goto err_dir;
 				}
+				buf[len] = '\0';
+				if (symlink(buf, path) == -1) {
+					if (errno == EEXIST)
+						continue;
+					lu_error_new(error, lu_error_generic,
+						     _("Error creating `%s': %s"),
+						     path, strerror(errno));
+					goto err_dir;
+				}
+				if (lchown(path, owner, st.st_gid ?: group) == -1
+				    && errno != EPERM && errno != EOPNOTSUPP) {
+					lu_error_new(error, lu_error_generic,
+						     _("Error changing owner of `%s': %s"),
+						     directory,
+						     strerror(errno));
+					goto err_dir;
+				}
+				utime(path, &timebuf);
 				continue;
 			}
 
@@ -204,47 +227,106 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 				 * files.  If we fail to do either,
 				 * we have to give up. */
 				ifd = open(skelpath, O_RDONLY);
-				if (ifd != -1) {
-					ofd = open(path,
-						   O_EXCL | O_CREAT | O_WRONLY,
-						   st.st_mode);
+				if (ifd == -1) {
+					lu_error_new(error, lu_error_open,
+						     _("Error reading `%s': %s"),
+						     skelpath,
+						     strerror(errno));
+					goto err_dir;
 				}
-				if ((ifd == -1) || (ofd == -1)) {
-					/* Sorry, no can do. */
-					close (ifd);
-					close (ofd);
-					continue;
+				ofd = open(path, O_EXCL | O_CREAT | O_WRONLY,
+					   st.st_mode);
+				if (ofd == -1) {
+					if (errno == EEXIST) {
+						close(ofd);
+						continue;
+					}
+					lu_error_new(error, lu_error_open,
+						     _("Error writing `%s': %s"),
+						     path, strerror(errno));
+					goto err_ifd;
 				}
 
 				/* Now just copy the data. */
-				do {
-					i = read(ifd, &buf, sizeof(buf));
-					if (i > 0) {
-						write(ofd, buf, i);
+				for (;;) {
+					ssize_t left;
+					char *p;
+
+					left = read(ifd, &buf, sizeof(buf));
+					if (left == -1) {
+						if (errno == EINTR)
+							continue;
+						lu_error_new(error,
+							     lu_error_read,
+							     _("Error reading `%s': %s"),
+							     skelpath,
+							     strerror(errno));
+						goto err_ofd;
 					}
-				} while (i > 0);
+					if (left == 0)
+						break;
+					p = buf;
+					while (left > 0) {
+						ssize_t out;
+
+						out = write(ofd, p, left);
+						if (out == -1) {
+							if (errno == EINTR)
+								continue;
+							lu_error_new(error,
+								     lu_error_write,
+								     _("Error writing `%s': %s"),
+								     path,
+								     strerror(errno));
+							goto err_ofd;
+						}
+						p += out;
+						left -= out;
+					}
+				}
 
 				/* Close the files. */
 				offset = lseek(ofd, 0, SEEK_CUR);
 				if (offset != ((off_t) -1)) {
-					ftruncate(ofd, offset);
+					if (ftruncate(ofd, offset) == -1) {
+						lu_error_new(error,
+							     lu_error_generic,
+							     _("Error writing `%s': %s"),
+							     path,
+							     strerror(errno));
+						goto err_ofd;
+					}
 				}
 				close (ifd);
 				close (ofd);
 
 				/* Set the ownership and timestamp on
 				 * the new file. */
-				chown(path, owner, st.st_gid ?: group);
+				if (chown(path, owner, st.st_gid ?: group) == -1
+				    && errno != EPERM) {
+					lu_error_new(error, lu_error_generic,
+						     _("Error changing owner of `%s': %s"),
+						     directory,
+						     strerror(errno));
+					goto err_dir;
+				}
 				utime(path, &timebuf);
 				continue;
 			}
 			/* Note that we don't copy device specials. */
 		}
 	}
+	ret = TRUE;
+	goto err_dir;
 
+ err_ifd:
+	close(ifd);
+ err_ofd:
+	close(ofd);
+ err_dir:
 	closedir(dir);
-
-	return TRUE;
+ err:
+	return ret;
 }
 
 /* Recursively remove a user's home (or really, any) directory. */
@@ -574,9 +656,8 @@ lu_signal_nscd(int signum)
 	if ((fp = fopen("/var/run/nscd.pid", "r")) != NULL) {
 		/* Read the PID. */
 		memset(buf, 0, sizeof(buf));
-		fgets(buf, sizeof(buf), fp);
 		/* If the PID is sane, send it a signal. */
-		if (strlen(buf) > 0) {
+		if (fgets(buf, sizeof(buf), fp) != NULL && strlen(buf) > 0) {
 			pid_t pid = atol(buf);
 			if (pid != 0) {
 				kill(pid, signum);
@@ -668,11 +749,16 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	if (action) {
 		fd = open(p, O_WRONLY | O_CREAT, 0);
 		if (fd != -1) {
-			fchown(fd, uid, gid);
-			fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+			gboolean res = TRUE;
+
+			if (fchown(fd, uid, gid) == -1)
+				res = FALSE;
+			if (fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP)
+			    == -1)
+				res = FALSE;
 			close(fd);
 			g_free(p);
-			return TRUE;
+			return res;
 		}
 	} else {
 		if (unlink(p) == 0) {
