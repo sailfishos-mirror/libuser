@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2002-01-16 00:46-0500\n"
+"POT-Creation-Date: 2002-01-16 02:34-0500\n"
 "PO-Revision-Date: 2001-11-21 11:52+1000\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
@@ -13,40 +13,40 @@ msgstr ""
 "Content-Type: text/plain; charset=EUC-KR\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:66
+#: apps/apputil.c:68
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' (을)를 읽는 도중 오류 발생: %s"
 
-#: apps/apputil.c:74
+#: apps/apputil.c:76
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' (을)를 생성하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
+#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' (을)를 삭제하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:408
+#: apps/apputil.c:410
 msgid "Internal error.\n"
 msgstr "내부 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:417
+#: apps/apputil.c:419
 msgid "Error initializing PAM.\n"
 msgstr "PAM을 초기화 하는 도중 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:425 apps/apputil.c:449
+#: apps/apputil.c:427 apps/apputil.c:451
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s 의 인증에 실패했습니다.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:436
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "내부 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:440
+#: apps/apputil.c:442
 msgid "User mismatch.\n"
 msgstr ""
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-16 00:46-0500\n"
+"POT-Creation-Date: 2002-01-16 02:34-0500\n"
 "PO-Revision-Date: 2001-08-08 19:04EET\n"
 "Last-Translator: Leon Kanter <leon@blackcatlinux.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -14,40 +14,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.4\n"
 
-#: apps/apputil.c:66
+#: apps/apputil.c:68
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Ошибка чтения `%s': %s"
 
-#: apps/apputil.c:74
+#: apps/apputil.c:76
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Ошибка создания `%s': %s"
 
-#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
+#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Ошибка удаления `%s': %s"
 
-#: apps/apputil.c:408
+#: apps/apputil.c:410
 msgid "Internal error.\n"
 msgstr "Внутренняя ошибка.\n"
 
-#: apps/apputil.c:417
+#: apps/apputil.c:419
 msgid "Error initializing PAM.\n"
 msgstr "Ошибка инициализации PAM.\n"
 
-#: apps/apputil.c:425 apps/apputil.c:449
+#: apps/apputil.c:427 apps/apputil.c:451
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Ошибка аутентификации для %s.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:436
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Внутренняя ошибка.\n"
 
-#: apps/apputil.c:440
+#: apps/apputil.c:442
 msgid "User mismatch.\n"
 msgstr ""
 

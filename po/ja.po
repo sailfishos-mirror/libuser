@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
-"POT-Creation-Date: 2002-01-16 00:46-0500\n"
+"POT-Creation-Date: 2002-01-16 02:34-0500\n"
 "PO-Revision-Date: 2002-01-06 17:17-0400\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -13,40 +13,40 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:66
+#: apps/apputil.c:68
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s'の読み込みでエラー: %s"
 
-#: apps/apputil.c:74
+#: apps/apputil.c:76
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s'の作成でエラー: %s"
 
-#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
+#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s'の削除でエラー: %s"
 
-#: apps/apputil.c:408
+#: apps/apputil.c:410
 msgid "Internal error.\n"
 msgstr "内部エラー。\n"
 
-#: apps/apputil.c:417
+#: apps/apputil.c:419
 msgid "Error initializing PAM.\n"
 msgstr "PAMの初期化でエラー。\n"
 
-#: apps/apputil.c:425 apps/apputil.c:449
+#: apps/apputil.c:427 apps/apputil.c:451
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%sの認証に失敗しました。\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:436
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "内部PAMエラー `%s'。\n"
 
-#: apps/apputil.c:440
+#: apps/apputil.c:442
 msgid "User mismatch.\n"
 msgstr "ユーザの不一致。\n"
 

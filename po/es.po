@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-16 00:46-0500\n"
+"POT-Creation-Date: 2002-01-16 02:34-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -16,52 +16,52 @@ msgstr ""
 
 # apps/apputil.c:58
 # apps/apputil.c:58
-#: apps/apputil.c:66
+#: apps/apputil.c:68
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Error en la lectura `%s': %s"
 
 # apps/apputil.c:63
 # apps/apputil.c:63
-#: apps/apputil.c:74
+#: apps/apputil.c:76
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "error al crear `%s': %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
+#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Error al eliminar %s: %s"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:408
+#: apps/apputil.c:410
 msgid "Internal error.\n"
 msgstr "Error interno.\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
-#: apps/apputil.c:417
+#: apps/apputil.c:419
 msgid "Error initializing PAM.\n"
 msgstr "Error inicializando PAM.\n"
 
 # apps/apputil.c:339
 # apps/apputil.c:339
-#: apps/apputil.c:425 apps/apputil.c:449
+#: apps/apputil.c:427 apps/apputil.c:451
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificación fallida para %s.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:434
+#: apps/apputil.c:436
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Error interno.\n"
 
-#: apps/apputil.c:440
+#: apps/apputil.c:442
 msgid "User mismatch.\n"
 msgstr ""
 

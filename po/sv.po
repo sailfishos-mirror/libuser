@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-16 00:46-0500\n"
+"POT-Creation-Date: 2002-01-16 02:34-0500\n"
 "PO-Revision-Date: 2001-08-21 22:20+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -14,40 +14,40 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:66
+#: apps/apputil.c:68
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Fel vid läsning av \"%s\": %s"
 
-#: apps/apputil.c:74
+#: apps/apputil.c:76
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Fel vid skapande av \"%s\": %s"
 
-#: apps/apputil.c:196 apps/apputil.c:228 apps/apputil.c:245
+#: apps/apputil.c:198 apps/apputil.c:230 apps/apputil.c:247
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Fel vid borttagning av \"%s\": %s"
 
-#: apps/apputil.c:408
+#: apps/apputil.c:410
 msgid "Internal error.\n"
 msgstr "Internt fel.\n"
 
-#: apps/apputil.c:417
+#: apps/apputil.c:419
 msgid "Error initializing PAM.\n"
 msgstr "Fel vid initiering av PAM.\n"
 
-#: apps/apputil.c:425 apps/apputil.c:449
+#: apps/apputil.c:427 apps/apputil.c:451
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentisering misslyckades för %s.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:436
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Internt fel.\n"
 
-#: apps/apputil.c:440
+#: apps/apputil.c:442
 msgid "User mismatch.\n"
 msgstr ""
 
