@@ -2,7 +2,7 @@ EXTRA_DIST = modules.txt
 
 AM_CFLAGS = -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
 
-pythonexecdir = $(libdir)/python@PYTHON_VERSION@/site-packages/
+pythonexecdir = $(libdir)/python@PYTHON_VERSION@/site-packages
 
 pythonexec_LTLIBRARIES = libusermodule.la
 if QUOTA
@@ -22,4 +22,7 @@ libuserquotamodule_la_LDFLAGS = -module -avoid-version -export-dynamic \
 libuserquotamodule_la_LIBADD = ../lib/libuserquota.la
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(pythonexecdir)/*.{a,la}
+	rm -f $(DESTDIR)$(pythonexecdir)/libuser*module.{a,la}
+# libtool uninstall doesn't work without the .la files
+uninstall-local:
+	rm -f $(DESTDIR)$(pythonexecdir)/libuser*module.so

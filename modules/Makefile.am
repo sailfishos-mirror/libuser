@@ -26,4 +26,11 @@ libuser_sasldb_la_LIBADD = ../lib/libuser.la
 libuser_sasldb_la_LDFLAGS = @SASL_LDADD@ @SASL_LIBS@ @GOBJECT_LIBS@
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(pkglibdir)/*.{a,la}
+	for i in $(MODULES); do \
+		rm -f $(DESTDIR)$(pkglibdir)/$${i%.so}.{a,la} ; \
+	done
+# libtool uninstall doesn't work without the .la files
+uninstall-local:
+	for i in $(MODULES); do \
+		rm -f $(DESTDIR)$(pkglibdir)/$$i ; \
+	done
