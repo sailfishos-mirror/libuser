@@ -83,13 +83,13 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	user = poptGetArg(popt);
 
-	ctx = lu_start(user, lu_user, NULL, NULL, lu_prompt_console, NULL);
-	g_return_val_if_fail(ctx != NULL, 1);
-
 	if(user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		return 1;
 	}
+
+	ctx = lu_start(user, lu_user, NULL, NULL, lu_prompt_console, NULL);
+	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
 

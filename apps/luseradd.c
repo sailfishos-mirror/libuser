@@ -65,6 +65,11 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	name = poptGetArg(popt);
 
+	if(name == NULL) {
+		fprintf(stderr, _("No user name specified.\n"));
+		return 1;
+	}
+
 	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
 	g_return_val_if_fail(ctx != NULL, 1);
 
@@ -77,11 +82,6 @@ main(int argc, const char **argv)
 	}
 	if(skeleton == NULL) {
 		skeleton = "/etc/skel";
-	}
-
-	if(name == NULL) {
-		fprintf(stderr, _("No user name specified.\n"));
-		return 1;
 	}
 
 	if(!dont_create_group) {

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-01-03 16:04-0500\n"
+"POT-Creation-Date: 2001-01-03 16:26-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "[OPTION...] user"
 msgstr ""
 
-#: apps/lchage.c:90 apps/luseradd.c:83 apps/luserdel.c:46 apps/lusermod.c:67
+#: apps/lchage.c:87 apps/luseradd.c:69 apps/luserdel.c:43 apps/lusermod.c:64
 msgid "No user name specified.\n"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "[OPTION...] group"
 msgstr ""
 
-#: apps/lgroupadd.c:53 apps/lgroupdel.c:40 apps/lgroupmod.c:64
+#: apps/lgroupadd.c:50 apps/lgroupdel.c:37 apps/lgroupmod.c:61
 msgid "No group name specified.\n"
 msgstr ""
 

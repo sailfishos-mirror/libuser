@@ -33,13 +33,13 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	group = poptGetArg(popt);
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
-	g_return_val_if_fail(ctx != NULL, 1);
-
 	if(group == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		return 1;
 	}
+
+	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
+	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
 

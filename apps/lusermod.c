@@ -60,13 +60,13 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	user = poptGetArg(popt);
 
-	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
-	g_return_val_if_fail(ctx != NULL, 1);
-
 	if(user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		return 1;
 	}
+
+	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL);
+	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(lock && unlock) {
 		fprintf(stderr, _("Both -L and -U specified.\n"));
