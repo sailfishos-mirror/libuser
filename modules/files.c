@@ -466,7 +466,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 		if(i > 0) {
 			j = formats[i].position - formats[i - 1].position;
 			while(j-- > 0) {
-				p = g_strconcat(":", ret, NULL);
+				p = g_strconcat(ret, ":", NULL);
 				if(ret) {
 					g_free(ret);
 				}
@@ -482,22 +482,12 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				 * specifier. */
 				l = g_list_append(g_list_alloc(),
 						  formats[i].def);
-			} else {
-				/* Wrong, wrong, wrong.  This combination
-				 * (no value and no default value) should
-				 * never happen. */
-				g_warning("No data set for a `%s' attribute!",
-					  formats[i].attribute);
-				if(ret) {
-					g_free(ret);
-				}
-				g_return_val_if_fail(l != NULL, NULL);
 			}
 		}
 		if(!formats[i].multiple) {
 			/* It's a single-item entry, add it. */
 			if(l != NULL) {
-				p = (char*)l->data;
+				p = l ? (char*)l->data : NULL;
 				if(p == NULL) {
 					p = "";
 				}
@@ -509,7 +499,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 					}
 				}
 				/* Tack the data onto the end. */
-				p = g_strconcat(ret, p, NULL);
+				p = g_strconcat(ret ?: "", p, NULL);
 				if(ret) {
 					g_free(ret);
 				}
@@ -531,7 +521,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 					}
 				}
 				/* Tack the data onto the end. */
-				p = g_strconcat(ret,
+				p = g_strconcat(ret ?: "",
 						postfirst ? "," : "",
 						p, NULL);
 				if(ret) {
