@@ -364,21 +364,21 @@ libuser_admin_create_home(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
 	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
 		return NULL;
 	}
 	dir = (char*) values->data;
 
 	values = lu_ent_get(ent->ent, LU_UIDNUMBER);
 	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_UIDNUMBER "' attribute");
+		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_UIDNUMBER "' attribute");
 		return NULL;
 	}
 	uidNumber = atol((char*)values->data);
 
 	values = lu_ent_get(ent->ent, LU_GIDNUMBER);
 	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_GIDNUMBER "' attribute");
+		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_GIDNUMBER "' attribute");
 		return NULL;
 	}
 	gidNumber = atol((char*)values->data);
@@ -387,7 +387,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error creating home directory for user");
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error creating home directory for user");
 		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
@@ -415,7 +415,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
 	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
 		return NULL;
 	}
 
@@ -423,7 +423,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error removing home directory for user");
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error removing home directory for user");
 		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
@@ -451,7 +451,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
 	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetErrorString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
 		return NULL;
 	}
 	olddir = (char*) values->data;
@@ -460,7 +460,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
-		PyErr_SetErrorString(PyExc_RuntimeError, error ? error->string : "error moving home directory for user");
+		PyErr_SetString(PyExc_RuntimeError, error ? error->string : "error moving home directory for user");
 		lu_error_free(&error);
 		DEBUG_EXIT;
 		return NULL;
