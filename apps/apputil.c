@@ -59,7 +59,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 	struct stat st;
 	char skelpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
 	struct utimbuf timebuf;
-	int ifd, ofd, i;
+	int ifd = -1, ofd = -1, i;
 
 	LU_ERROR_CHECK(error);
 
@@ -398,6 +398,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	int ret;
 
 #if 0
+	struct conv_data data;
 	/* Don't bother if none of the modules makes use of elevated
 	 * privileges. */
 	if (lu_uses_elevated_privileges(ctx) == FALSE) {
@@ -573,6 +574,7 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	array = lu_ent_get(ent, LU_UIDNUMBER);
 	if (array != NULL) {
 		value = g_value_array_get_nth(array, 0);
+		uid = INVALID;
 		if (G_VALUE_HOLDS_LONG(value)) {
 			uid = g_value_get_long(value);
 		} else

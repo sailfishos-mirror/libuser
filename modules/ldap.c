@@ -2054,6 +2054,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	/* For each GID, look up the group.  Which has this GID. */
 	for (i = 0; (gids != NULL) && (i < gids->n_values); i++) {
 		value = g_value_array_get_nth(gids, i);
+		gid = -1;
 		if (G_VALUE_HOLDS_STRING(value)) {
 			gid = strtol(g_value_get_string(value), &p, 0);
 			if (p != 0) {

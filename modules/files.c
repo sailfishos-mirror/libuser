@@ -603,6 +603,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 			do {
 				/* Get a string representation of this value. */
 				val = g_value_array_get_nth(values, j);
+				p = NULL;
 				if (G_VALUE_HOLDS_STRING(val)) {
 					p = g_value_dup_string(val);
 				} else
@@ -996,6 +997,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 		new_value = NULL;
 		j = 0;
 		do {
+			p = NULL;
 			value = g_value_array_get_nth(values, j);
 			if (G_VALUE_HOLDS_STRING(value)) {
 				p = g_value_dup_string(value);

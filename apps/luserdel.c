@@ -115,6 +115,7 @@ main(int argc, const char **argv)
 			return 4;
 		} else {
 			value = g_value_array_get_nth(values, 0);
+			gid = -1;
 			if (G_VALUE_HOLDS_LONG(value)) {
 				gid = g_value_get_long(value);
 			} else

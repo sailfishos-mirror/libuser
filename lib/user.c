@@ -1626,6 +1626,7 @@ lu_default_int(struct lu_context *context, const char *name,
 		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
 			while (strstr(tmp, subst[i].format) != NULL) {
 				char *pre, *post, *tmp2, *substval, *where;
+				substval = NULL;
 				if (subst[i].type == G_TYPE_STRING) {
 					substval = g_strdup(subst[i].value);
 				} else

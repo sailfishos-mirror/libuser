@@ -134,7 +134,7 @@ main(int argc, const char **argv)
 
 	/* Determine if we actually need to change anything. */
 	change = userPassword || cryptedUserPassword || uid || gecos ||
-		 oldHomeDirectory || homeDirectory || loginShell ||
+		 homeDirectory || loginShell ||
 		 (uidNumber != INVALID) || (gidNumber != INVALID);
 
 	/* Change the user's UID and GID. */

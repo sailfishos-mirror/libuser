@@ -167,6 +167,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_SN);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
+		sn = NULL;
 		if (G_VALUE_HOLDS_STRING(value)) {
 			sn = g_value_get_string(value);
 		} else
@@ -187,6 +188,7 @@ main(int argc, const char **argv)
 	/* If we have it, prompt for the user's givenname. */
 	values = lu_ent_get(ent, LU_GIVENNAME);
 	if (values != NULL) {
+		gn = NULL;
 		value = g_value_array_get_nth(values, 0);
 		if (G_VALUE_HOLDS_STRING(value)) {
 			gn = g_value_get_string(value);
@@ -236,6 +238,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_EMAIL);
 	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
+		email = NULL;
 		if (G_VALUE_HOLDS_STRING(value)) {
 			email = g_value_get_string(value);
 		} else
