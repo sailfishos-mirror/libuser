@@ -6,7 +6,7 @@ pythonexecdir = $(libdir)/python@PYTHON_VERSION@/site-packages/
 
 pythonexec_LTLIBRARIES = libusermodule.la $(QUOTAMODULE:.so=.la)
 EXTRA_LTLIBRARIES = libuserquotamodule.la
-noinst_SCRIPTS = ldap-script test-script quota-script
+dist_noinst_SCRIPTS = ldap-script test-script quota-script
 noinst_HEADERS = admin.c ent.c misc.c
 
 libusermodule_la_SOURCES = libusermodule.c common.h debug.h ../apps/apputil.c
