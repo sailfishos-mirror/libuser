@@ -1,3 +1,5 @@
+%define python 2.2
+
 Name: @PACKAGE@
 Version: @VERSION@
 Release: 1
@@ -30,7 +32,9 @@ files useful for developing applications with libuser.
 %setup -q
 
 %build
-%configure
+%configure --with-krb5=/usr/kerberos --with-ldap --with-sasl \
+	--with-python-version=%{python} \
+	--with-python-path=%{_includedir}/python%{python}
 make
 make -C docs/sgml
 make doc
@@ -45,7 +49,10 @@ rm -fr $RPM_BUILD_ROOT
 rm -fr $RPM_BUILD_ROOT
 %makeinstall pkglibdir=$RPM_BUILD_ROOT%{_libdir}/%{name}
 
-pushd $RPM_BUILD_ROOT/%{_libdir}/python1.5/site-packages/
+LD_LIBRARY_PATH=$RPM_BUILD_ROOT/%{_libdir}:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH
+
+pushd $RPM_BUILD_ROOT/%{_libdir}/python%{python}/site-packages/
 python -c "import libuser"
 python -c "import quota"
 popd
@@ -63,7 +70,7 @@ popd
 %config(noreplace) %{_sysconfdir}/libuser.conf
 
 %attr(0755,root,root) %{_bindir}/*
-%attr(0755,root,root) %{_libdir}/python1.5/site-packages/*
+%attr(0755,root,root) %{_libdir}/python%{python}/site-packages/*
 %attr(0755,root,root) %{_libdir}/libuser.so.*.*
 %attr(0755,root,root) %{_libdir}/libuser_quota.so.*.*
 %dir %attr(0755,root,root) %{_libdir}/%{name}
@@ -85,6 +92,9 @@ popd
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Nov 13 2001 Nalin Dahyabhai <nalin@redhat.com>
+- fixup build files to allow building for arbitrary versions of python
+
 * Wed Aug 29 2001 Nalin Dahyabhai <nalin@redhat.com> 0.32-1
 - link the python module against libpam
 - attempt to import the python modules at build-time to verify dependencies

@@ -78,7 +78,7 @@ initlibuser(void)
 	PyDict_SetItemString(dict, "USER", PyInt_FromLong(lu_user));
 	PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(lu_group));
 	PyDict_SetItemString(dict, "ADMINISTRATORUID", PyString_FromString(LU_ADMINISTRATORUID));
-	PyDict_SetItemString(dict, "CN", PyString_FromString(LU_CN));
+	PyDict_SetItemString(dict, "COMMONNAME", PyString_FromString(LU_COMMONNAME));
 	PyDict_SetItemString(dict, "GECOS", PyString_FromString(LU_GECOS));
 	PyDict_SetItemString(dict, "GID", PyString_FromString(LU_GID));
 	PyDict_SetItemString(dict, "GIDNUMBER", PyString_FromString(LU_GIDNUMBER));

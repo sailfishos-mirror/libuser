@@ -28,7 +28,9 @@
 #include <fcntl.h>
 #include "../include/libuser/user_private.h"
 
-/** @file usercfg.c */
+#ifdef HAVE___SECURE_GETENV
+#define getenv(string) __secure_getenv(string)
+#endif
 
 struct config_config {
 	struct lu_string_cache *cache;
@@ -45,11 +47,10 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 
 	g_assert(context != NULL);
 
-	config = g_malloc0(sizeof(struct config_config));
-
 	if((getuid() == geteuid()) && (getgid() == getegid())) {
-		if(__secure_getenv("LIBUSER_CONF")) {
-			filename = __secure_getenv("LIBUSER_CONF");
+		const char *t = getenv("LIBUSER_CONF");
+		if(t != NULL) {
+			filename = t;
 		}
 	}
 
@@ -58,15 +59,15 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		lu_error_new(error, lu_error_generic,
 			     _("could not open configuration file `%s': %s"),
 			     filename, strerror(errno));
-		g_free(config);
 		return FALSE;
-	} else {
-		if(fstat(fd, &st) != -1) {
-			config->data = g_malloc0(st.st_size + 1);
-			read(fd, config->data, st.st_size);
-		}
-		close(fd);
 	}
+
+	config = g_malloc0(sizeof(struct config_config));
+	if(fstat(fd, &st) != -1) {
+		config->data = g_malloc0(st.st_size + 1);
+		read(fd, config->data, st.st_size);
+	}
+	close(fd);
 
 	config->cache = lu_string_cache_new(FALSE);
 	context->config = config;

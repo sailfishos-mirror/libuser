@@ -119,7 +119,7 @@ static struct {
 	const char *separator;
 } salt_type_info[] = {
 	{"$1$", 8, "$"},
-	{"$2a$", 8, "$"},
+	{"$2a$", 8, "$"}, /* FIXME: is this 8 or 16? */
 	{"", 2, ""},
 };
 
@@ -127,7 +127,6 @@ const char *
 lu_make_crypted(const char *plain, const char *previous)
 {
 	char salt[2048];
-	char *p;
 	int i;
 	size_t len;
 
@@ -135,20 +134,20 @@ lu_make_crypted(const char *plain, const char *previous)
 		previous = "";
 	}
 
-	for(i = 0; i < sizeof(salt_info) / sizeof(salt_info[0]); i++) {
-		len = strlen(salt_info[i].initial);
-		if(strncmp(previous, salt_info[i].initial, len) == 0) {
+	for(i = 0; i < sizeof(salt_type_info) / sizeof(salt_type_info[0]); i++){
+		len = strlen(salt_type_info[i].initial);
+		if(strncmp(previous, salt_type_info[i].initial, len) == 0) {
 			break;
 		}
 	}
 
-	g_assert(i < sizeof(salt_info) / sizeof(salt_info[0]));
+	g_assert(i < sizeof(salt_type_info) / sizeof(salt_type_info[0]));
 
 	memset(salt, '\0', sizeof(salt));
-	strncpy(salt, salt_info[i].initial, len);
+	strncpy(salt, salt_type_info[i].initial, len);
 
-	fill_urandom(salt + len, salt_info[i].salt_length);
-	strcat(salt, salt_info[i].separator);
+	fill_urandom(salt + len, salt_type_info[i].salt_length);
+	strcat(salt, salt_type_info[i].separator);
 
 	return crypt(plain, salt);
 }
@@ -156,7 +155,6 @@ lu_make_crypted(const char *plain, const char *previous)
 gboolean
 lu_util_lock_obtain(int fd, struct lu_error **error)
 {
-	struct flock *lck = NULL;
 	int i;
 	int maxtries = LU_MAX_LOCK_ATTEMPTS;
 	struct timeval tv;
@@ -165,11 +163,8 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 
 	g_assert(fd != -1);
 
-	lck = g_malloc0(sizeof(struct flock));
-	lck->l_type = F_WRLCK;
-
 	do {
-		i = fcntl(fd, F_SETLKW, lck);
+		i = lockf(fd, F_LOCK, 0);
 		if((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
 			if(maxtries-- <= 0) {
 				break;
@@ -180,12 +175,11 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 	} while((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
 
 	if(i == -1) {
-		g_free(lck);
 		lu_error_new(error, lu_error_lock, _("error locking file: %s"), strerror(errno));
-		return NULL;
+		return FALSE;
 	}
 
-	return lck;
+	return TRUE;
 }
 
 /**
@@ -198,14 +192,9 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
  * @return void
  */
 void
-lu_util_lock_free(int fd, gpointer lock)
+lu_util_lock_free(int fd)
 {
-	struct flock *lck = (struct flock *) lock;
-	g_return_if_fail(fd != -1);
-	g_return_if_fail(lock != NULL);
-	lck->l_type = F_UNLCK;
-	fcntl(fd, F_SETLKW, lck);
-	g_free(lck);
+	lockf(fd, F_ULOCK, 0);
 }
 
 char *

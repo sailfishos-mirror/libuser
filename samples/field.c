@@ -32,7 +32,6 @@ int
 main(int argc, char **argv)
 {
 	int fd;
-	gpointer lock;
 	struct lu_error *error = NULL;
 
 	if(argc < 4) {
@@ -49,8 +48,7 @@ main(int argc, char **argv)
 		exit(2);
 	}
 
-	lock = lu_util_lock_obtain(fd, &error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, &error) != TRUE) {
 		fprintf(stderr, "failed to lock `%s': %s\n", argv[1],
 			error ? error->string : strerror(errno));
 		close(fd);
@@ -72,7 +70,7 @@ main(int argc, char **argv)
 		printf("`%s'\n", ret);
 		g_free(ret);
 	}
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	return 0;
 }

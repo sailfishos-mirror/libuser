@@ -133,8 +133,8 @@ main(int argc, const char **argv)
 
 			if(lu_prompt_console(prompts, sizeof(prompts) / sizeof(prompts[0]), NULL, &error)) {
 				if(prompts[0].value && strlen(prompts[0].value)) {
-					if(lu_ent_get(ent, LU_CN)) {
-						lu_ent_set(ent, LU_CN, prompts[0].value);
+					if(lu_ent_get(ent, LU_COMMONNAME)) {
+						lu_ent_set(ent, LU_COMMONNAME, prompts[0].value);
 					}
 				}
 				if(prompts[1].value && strlen(prompts[1].value)) {

@@ -65,7 +65,7 @@ lu_ent_dump(struct lu_ent *ent)
  * @return a UID or GID if one is found, 0 on failure.
  **/
 static glong
-lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
+lu_get_free_id(struct lu_context *ctx, enum lu_entity_type type, glong id)
 {
 	struct lu_ent *ent;
 	char buf[LINE_MAX];
@@ -287,7 +287,7 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 
 static gboolean
 lu_default(struct lu_context *context, const char *name,
-	   enum lu_type type, gboolean system, struct lu_ent *ent)
+	   enum lu_entity_type type, gboolean system, struct lu_ent *ent)
 {
 	GList *keys, *vals, *p, *q;
 	char *top, *key, *idkey, *idval, *tmp;

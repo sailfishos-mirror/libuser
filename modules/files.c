@@ -99,7 +99,6 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	int ifd, ofd;
 	char *backupname;
 	struct stat ist, ost;
-	gpointer ilock, olock;
 	char buf[CHUNK_SIZE];
 	size_t len;
 
@@ -112,15 +111,14 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 		return FALSE;
 	}
 	
-	ilock = lu_util_lock_obtain(ifd, error);
-	if(ilock == NULL) {
+	if(lu_util_lock_obtain(ifd, error) != TRUE) {
 		close(ifd);
 		return FALSE;
 	}
 
 	if(fstat(ifd, &ist) == -1) {
 		close(ifd);
-		lu_util_lock_free(ifd, ilock);
+		lu_util_lock_free(ifd);
 		close(ifd);
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"), filename, strerror(errno));
 		return FALSE;
@@ -131,7 +129,7 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	if(ofd == -1) {
 		lu_error_new(error, lu_error_open, _("error creating `%s': %s"), backupname, strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd, ilock);
+		lu_util_lock_free(ifd);
 		close(ifd);
 		return FALSE;
 	}
@@ -141,25 +139,24 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 		if((stat(backupname, &st) == -1) || !S_ISREG(st.st_mode) || (st.st_dev != ost.st_dev) || (st.st_ino != ost.st_ino)) {
 			lu_error_new(error, lu_error_open, _("backup file `%s' was a symlink"), backupname);
 			g_free(backupname);
-			lu_util_lock_free(ifd, ilock);
+			lu_util_lock_free(ifd);
 			close(ifd);
 			close(ofd);
 			return FALSE;
 		}
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"), backupname, strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd, ilock);
+		lu_util_lock_free(ifd);
 		close(ifd);
 		close(ofd);
 		return FALSE;
 	}
 
-	olock = lu_util_lock_obtain(ofd, error);
-	if(olock == NULL) {
+	if(lu_util_lock_obtain(ofd, error) != TRUE) {
 		g_free(backupname);
-		lu_util_lock_free(ifd, ilock);
+		lu_util_lock_free(ifd);
 		close(ifd);
-		lu_util_lock_free(ofd, olock);
+		lu_util_lock_free(ofd);
 		close(ofd);
 		return FALSE;
 	}
@@ -179,16 +176,16 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	if(fstat(ofd, &ost) == -1) {
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"), backupname, strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd, ilock);
+		lu_util_lock_free(ifd);
 		close(ifd);
-		lu_util_lock_free(ofd, olock);
+		lu_util_lock_free(ofd);
 		close(ofd);
 		return FALSE;
 	}
 
-	lu_util_lock_free(ifd, ilock);
+	lu_util_lock_free(ifd);
 	close(ifd);
-	lu_util_lock_free(ofd, olock);
+	lu_util_lock_free(ofd);
 	close(ofd);
 
 	g_assert(ist.st_size == ost.st_size);
@@ -334,7 +331,6 @@ generic_lookup(struct lu_module *module, const char *base_name, gconstpointer na
 	       parse_fn parser, int field, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;
-	gpointer lock;
 	const char *dir;
 	int fd = -1;
 	char *line, *filename, *key;
@@ -358,8 +354,7 @@ generic_lookup(struct lu_module *module, const char *base_name, gconstpointer na
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		return FALSE;
 	}
@@ -374,7 +369,7 @@ generic_lookup(struct lu_module *module, const char *base_name, gconstpointer na
 		ret = parser(line, ent);
 		g_free(line);
 	}
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 
 	g_free(filename);
@@ -606,7 +601,6 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 	int fd;
 	struct stat st;
 	off_t offset;
-	gpointer lock;
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
@@ -632,8 +626,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -641,7 +634,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 
 	if(fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"), filename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -656,7 +649,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 		fragment2 = g_strconcat("\n", fragment1, NULL);
 		if(read(fd, contents, st.st_size) != st.st_size) {
 			lu_error_new(error, lu_error_read, _("couldn't read from `%s': %s"), filename, strerror(errno));
-			lu_util_lock_free(fd, lock);
+			lu_util_lock_free(fd);
 			close(fd);
 			g_free(fragment1);
 			g_free(fragment2);
@@ -666,7 +659,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 		}
 		if(strncmp(contents, fragment1, strlen(fragment1)) == 0) {
 			lu_error_new(error, lu_error_generic, _("entry already present in file"));
-			lu_util_lock_free(fd, lock);
+			lu_util_lock_free(fd);
 			close(fd);
 			g_free(fragment1);
 			g_free(fragment2);
@@ -676,7 +669,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 		} else {
 			if(strstr(contents, fragment2) != NULL) {
 				lu_error_new(error, lu_error_generic, _("entry already present in file"));
-				lu_util_lock_free(fd, lock);
+				lu_util_lock_free(fd);
 				close(fd);
 				g_free(fragment1);
 				g_free(fragment2);
@@ -688,7 +681,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 				offset = lseek(fd, 0, SEEK_END);
 				if(offset == -1) {
 					lu_error_new(error, lu_error_write, _("couldn't write to `%s': %s"), filename, strerror(errno));
-					lu_util_lock_free(fd, lock);
+					lu_util_lock_free(fd);
 					close(fd);
 					g_free(fragment1);
 					g_free(fragment2);
@@ -700,7 +693,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 				if(r != strlen(line)) {
 					lu_error_new(error, lu_error_write, _("couldn't write to `%s': %s"), filename, strerror(errno));
 					ftruncate(fd, offset);
-					lu_util_lock_free(fd, lock);
+					lu_util_lock_free(fd);
 					close(fd);
 					g_free(fragment1);
 					g_free(fragment2);
@@ -716,7 +709,7 @@ generic_add(struct lu_module *module, const char *base_name, format_fn formatter
 		g_free(fragment2);
 	}
 	g_free(contents);
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	g_free(filename);
 
@@ -772,7 +765,6 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 	char *p, *q, *new_value;
 	GList *name = NULL, *values = NULL, *l;
 	gboolean ret = FALSE;
-	gpointer lock = NULL;
 
 	g_assert(module != NULL);
 	g_assert(base_name != NULL);
@@ -816,8 +808,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -868,7 +859,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		ret = lu_util_field_write(fd, (const char*)name->data, formats[i].position, new_value, error);
 		g_free(new_value);
 		if(ret == FALSE) {
-			lu_util_lock_free(fd, lock);
+			lu_util_lock_free(fd);
 			close(fd);
 			g_free(filename);
 			return FALSE;
@@ -880,7 +871,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 			name = lu_ent_get(ent, LU_USERNAME);
 			if(name == NULL) {
 				lu_error_new(error, lu_error_generic, _("entity object has no %s attribute"), LU_USERNAME);
-				lu_util_lock_free(fd, lock);
+				lu_util_lock_free(fd);
 				close(fd);
 				g_free(filename);
 				return FALSE;
@@ -890,7 +881,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 			name = lu_ent_get(ent, LU_GROUPNAME);
 			if(name == NULL) {
 				lu_error_new(error, lu_error_generic, _("entity object has no %s attribute"), LU_GROUPNAME);
-				lu_util_lock_free(fd, lock);
+				lu_util_lock_free(fd);
 				close(fd);
 				g_free(filename);
 				return FALSE;
@@ -898,7 +889,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		}
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	g_free(filename);
 
@@ -945,7 +936,6 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 	const char *dir;
 	struct stat st;
 	int fd = -1;
-	gpointer lock = NULL;
 
 	if(ent->type == lu_user)
 		name = lu_ent_get_original(ent, LU_USERNAME);
@@ -975,8 +965,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -984,7 +973,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 
 	if(fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"), filename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -994,7 +983,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 	if(read(fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read, _("couldn't read from `%s': %s"), filename, strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1020,7 +1009,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 	if(lseek(fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write, _("couldn't write to `%s': %s"), filename, strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1029,7 +1018,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 	if(write(fd, contents, strlen(contents)) != strlen(contents)) {
 		lu_error_new(error, lu_error_write, _("couldn't write to `%s': %s"), filename, strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1037,7 +1026,7 @@ generic_del(struct lu_module *module, const char *base_name, struct lu_ent *ent,
 
 	ftruncate(fd, strlen(contents));
 	g_free(contents);
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	g_free(filename);
 
@@ -1114,7 +1103,6 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	const char *dir;
 	char *value, *new_value;
 	int fd = -1;
-	gpointer lock = NULL;
 	gboolean ret = FALSE;
 
 	if(ent->type == lu_user)
@@ -1145,8 +1133,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1154,7 +1141,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	value = lu_util_field_read(fd, (const char*)name->data, field, error);
 	if(value == NULL) {
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1165,13 +1152,13 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	ret = lu_util_field_write(fd, (const char*)name->data, field, new_value, error);
 	if(ret == FALSE) {
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	g_free(filename);
 
@@ -1187,7 +1174,6 @@ generic_islocked(struct lu_module *module, const char *base_name, int field,
 	const char *dir;
 	char *value;
 	int fd = -1;
-	gpointer lock = NULL;
 	gboolean ret = FALSE;
 
 	if(ent->type == lu_user)
@@ -1218,8 +1204,7 @@ generic_islocked(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1227,7 +1212,7 @@ generic_islocked(struct lu_module *module, const char *base_name, int field,
 
 	value = lu_util_field_read(fd, (const char*)name->data, field, error);
 	if(value == NULL) {
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1343,7 +1328,6 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	char *filename = NULL, *key = NULL;
 	const char *dir;
 	int fd = -1;
-	gpointer lock = NULL;
 	gboolean ret = FALSE;
 
 	if(ent->type == lu_user)
@@ -1374,8 +1358,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
@@ -1389,13 +1372,13 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 
 	ret = lu_util_field_write(fd, (const char*)name->data, field, password, error);
 	if(ret == FALSE) {
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	close(fd);
 	g_free(filename);
 
@@ -1446,7 +1429,6 @@ static GList *
 lu_files_enumerate(struct lu_module *module, const char *base_name, const char *pattern, struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GList *ret = NULL;
 	char *buf;
 	char *key = NULL, *filename = NULL, *p;
@@ -1470,8 +1452,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 		return NULL;
 	}
 	
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return NULL;
@@ -1480,7 +1461,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 	fp = fdopen(fd, "r");
 	if(fp == NULL) {
 		lu_error_new(error, lu_error_open, _("couldn't open `%s': %s"), filename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return NULL;
@@ -1498,7 +1479,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 		g_free(buf);
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	fclose(fp);
 	g_free(filename);
 
@@ -1525,7 +1506,6 @@ static GList *
 lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, gid_t gid, struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GList *ret = NULL;
 	char *buf, grp[CHUNK_SIZE];
 	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
@@ -1549,8 +1529,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 		return NULL;
 	}
 	
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
@@ -1560,7 +1539,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 	fp = fdopen(fd, "r");
 	if(fp == NULL) {
 		lu_error_new(error, lu_error_open, _("couldn't open `%s': %s"), pwdfilename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
@@ -1597,7 +1576,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 		}
 		g_free(buf);
 	}
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	fclose(fp);
 
 	fd = open(grpfilename, O_RDWR);
@@ -1609,8 +1588,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 		return NULL;
 	}
 
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_list_free(ret);
 		g_free(pwdfilename);
@@ -1621,7 +1599,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 	fp = fdopen(fd, "r");
 	if(fp == NULL) {
 		lu_error_new(error, lu_error_open, _("couldn't open `%s': %s"), grpfilename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_list_free(ret);
 		g_free(pwdfilename);
@@ -1657,7 +1635,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 		g_free(buf);
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	fclose(fp);
 
 	g_free(pwdfilename);
@@ -1670,7 +1648,6 @@ static GList *
 lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GList *ret = NULL;
 	char *buf;
 	char *key = NULL, *filename = NULL, *p, *q;
@@ -1692,8 +1669,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 		return NULL;
 	}
 	
-	lock = lu_util_lock_obtain(fd, error);
-	if(lock == NULL) {
+	if(lu_util_lock_obtain(fd, error) != TRUE) {
 		close(fd);
 		g_free(filename);
 		return NULL;
@@ -1702,7 +1678,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 	fp = fdopen(fd, "r");
 	if(fp == NULL) {
 		lu_error_new(error, lu_error_open, _("couldn't open `%s': %s"), filename, strerror(errno));
-		lu_util_lock_free(fd, lock);
+		lu_util_lock_free(fd);
 		close(fd);
 		g_free(filename);
 		return NULL;
@@ -1733,7 +1709,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 		g_free(buf);
 	}
 
-	lu_util_lock_free(fd, lock);
+	lu_util_lock_free(fd);
 	fclose(fp);
 	g_free(filename);
 
@@ -1852,7 +1828,7 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 
 	/* Make sure we're actually using shadow passwords on this system. */
 	if((stat(shadow_file, &st) == -1) && (errno == ENOENT)) {
-		lu_error_new(error, lu_error_config_disabled, _("no shadow file present -- disabling"));
+		lu_error_new(error, lu_warning_config_disabled, _("no shadow file present -- disabling"));
 		g_free(shadow_file);
 		return NULL;
 	}

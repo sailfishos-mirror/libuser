@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.32)
+AM_INIT_AUTOMAKE(libuser,0.39.90)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
@@ -65,7 +65,10 @@ if test x$krb5 != xno ; then
 		CFLAGS="$CFLAGS -I$krb5/include"
 		CPPFLAGS="$CPPFLAGS -I$krb5/include"
 		LDFLAGS="$LDFLAGS -L$krb5/lib"
-		LIBS="$LIBS -L$krb5/lib"
+		if test x$krb5 != x/usr ; then
+			KRB5_LDADD=-L$krb5/lib
+		fi
+		LIBS="$LIBS $KRB5_LDADD"
 	fi
 	AC_CHECK_HEADERS(krb5.h)
 	AC_CHECK_FUNC(error_message,,
@@ -110,6 +113,10 @@ if test x$ldap != xno ; then
 		CFLAGS="$CFLAGS -I$ldap/include"
 		CPPFLAGS="$CPPFLAGS -I$ldap/include"
 		LDFLAGS="$LDFLAGS -L$ldap/lib"
+		if test x$ldap != x/usr ; then
+			LDAP_LDADD=-L$ldap/lib
+		fi
+		LIBS="$LIBS $LDAP_LDADD"
 	fi
 	AC_CHECK_HEADERS(ldap.h)
 	AC_CHECK_FUNC(ber_alloc,,[
@@ -146,7 +153,10 @@ if test x$sasl != xno ; then
 		CFLAGS="$CFLAGS -I$sasl/include"
 		CPPFLAGS="$CPPFLAGS -I$sasl/include"
 		LDFLAGS="$LDFLAGS -L$sasl/lib"
-		LIBS="$LIBS -L$sasl/lib"
+		if test x$sasl != x/usr ; then
+			SASL_LDADD=-L$sasl/lib
+		fi
+		LIBS="$LIBS $SASL_LDADD"
 	fi
 	AC_CHECK_HEADERS(sasl.h)
 	AC_CHECK_FUNC(sasl_setpass,,[
@@ -162,6 +172,16 @@ if test x$sasl != xno ; then
 	LIBS="$LIBSAVE"
 fi
 
+PYTHON_VERSION=2.2
+AC_ARG_WITH(python-version,
+[  --with-python-version=2.2 Version of Python to build modules for],
+[PYTHON_VERSION=$withval])
+
+PYTHON_PATH=/usr/include/python${PYTHON_VERSION}
+AC_ARG_WITH(python-path,
+[  --with-python-path=DIR Directory headers for your version of Python are in],
+[PYTHON_PATH=$withval])
+
 AC_HEADER_STDC
 AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
 
@@ -171,14 +191,19 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
-AC_CHECK_FUNCS([strstr strtol])
+AC_CHECK_FUNC([__secure_getenv strstr strtol])
 
 AC_SUBST(MODULES)
+AC_SUBST(KRB5_LDADD)
 AC_SUBST(KRB5_LIBS)
+AC_SUBST(LDAP_LDADD)
 AC_SUBST(LDAP_LIBS)
 AC_SUBST(PAM_LIBS)
 AC_SUBST(POPT_LIBS)
+AC_SUBST(SASL_LDADD)
 AC_SUBST(SASL_LIBS)
+AC_SUBST(PYTHON_VERSION)
+AC_SUBST(PYTHON_PATH)
 
 if test `eval echo x$libdir` != xNONE/lib
 then

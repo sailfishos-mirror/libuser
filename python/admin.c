@@ -848,7 +848,7 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	PyObject *prompt = NULL, *prompt_data = NULL;
 	char *keywords[] = {"name", "type", "info", "auth", "prompt", "prompt_data", NULL};
 	int type = lu_user;
-	lu_context_t *context;
+	struct lu_context *context;
 	struct lu_error *error = NULL;
 	struct libuser_admin *ret;
 

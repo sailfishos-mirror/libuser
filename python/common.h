@@ -7,18 +7,18 @@
 
 struct libuser_admin {
 	PyObject_HEAD
-	lu_context_t *ctx;
+	struct lu_context *ctx;
 	PyObject *prompt_data[2];
 };
 
 struct libuser_entity {
 	PyObject_HEAD
-	lu_ent_t *ent;
+	struct lu_ent *ent;
 };
 
 struct libuser_prompt {
 	PyObject_HEAD
-	lu_prompt_t prompt;
+	struct lu_prompt prompt;
 };
 				
 static PyTypeObject EntityType;

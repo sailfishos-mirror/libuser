@@ -52,6 +52,7 @@
 
 /* Additional fields carried by some structures.  If they have them,
  * it's safe to change them. */
+#define LU_COMMONNAME		"cn"
 #define LU_GIVENNAME		"givenName"
 #define LU_SN			"sn"
 #define LU_ROOMNUMBER		"roomNumber"

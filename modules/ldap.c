@@ -64,7 +64,7 @@ static struct {
 	{LU_SHADOWEXPIRE, "shadowAccount"},
 	{LU_SHADOWFLAG, "shadowAccount"},
 
-	{LU_CN, "inetOrgPerson"},
+	{LU_COMMONNAME, "inetOrgPerson"},
 	{LU_GIVENNAME, "inetOrgPerson"},
 	{LU_SN, "inetOrgPerson"},
 	{LU_ROOMNUMBER, "inetOrgPerson"},
@@ -93,7 +93,7 @@ lu_ldap_user_attributes[] = {
 	LU_SHADOWEXPIRE,
 	LU_SHADOWFLAG,
 
-	LU_CN,
+	LU_COMMONNAME,
 	LU_GIVENNAME,
 	LU_SN,
 	LU_ROOMNUMBER,
@@ -632,7 +632,7 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx, const char *dn, struct 
 }
 
 static gboolean
-lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
+lu_ldap_set(struct lu_module *module, enum lu_entity_type type, struct lu_ent *ent,
 	    const char *configKey, const char *def, char **attributes, struct lu_error **error)
 {
 	LDAPMod **mods = NULL;
@@ -731,7 +731,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 }
 
 static gboolean
-lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
+lu_ldap_del(struct lu_module *module, enum lu_entity_type type, struct lu_ent *ent,
 	    const char *configKey, const char *def, struct lu_error **error)
 {
 	LDAPControl *server = NULL, *client = NULL;
@@ -895,7 +895,7 @@ lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent, struct lu_erro
 }
 
 static gboolean
-lu_ldap_islocked(struct lu_module *module, enum lu_type type, struct lu_ent *ent, const char *namingAttr, const char *configKey,
+lu_ldap_islocked(struct lu_module *module, enum lu_entity_type type, struct lu_ent *ent, const char *namingAttr, const char *configKey,
 		 const char *def, struct lu_error **error)
 {
 	const char *dn;

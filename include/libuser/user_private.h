@@ -50,7 +50,7 @@ struct lu_string_cache *lu_string_cache_new(gboolean case_sensitive);
 /* An entity structure. */
 struct lu_ent {
 	u_int32_t magic;
-	enum lu_type type;		/* User or group? */
+	enum lu_entity_type type;	/* User or group? */
 	struct lu_string_cache *acache;	/* String cache for attribute names. */
 	struct lu_string_cache *vcache;	/* String cache for attribute values. */
 	GTree *original_attributes;	/* GLists of the original values
@@ -69,7 +69,7 @@ struct lu_context {
 	char *auth_name;		/* Suggested client name to use when
 					   connecting to servers, for
 					   convenience purposes only. */
-	enum lu_type auth_type;		/* Whether auth_name is a user or
+	enum lu_entity_type auth_type;	/* Whether auth_name is a user or
 					   group. */
 	void *config;			/* Opaque config structure used by
 					   the lu_cfg family of functions. */
@@ -201,7 +201,7 @@ const char *lu_make_crypted(const char *plain, const char *previous);
 
 /* Lock a file. */
 gboolean lu_util_lock_obtain(int fd, struct lu_error **error);
-void lu_util_lock_free(int fd, gpointer lock);
+void lu_util_lock_free(int fd);
 
 /* Manipulate a colon-delimited flat text file. */
 char *lu_util_line_get_matching1(int fd, const char *firstpart,

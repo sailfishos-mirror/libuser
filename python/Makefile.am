@@ -1,7 +1,7 @@
 EXTRA_DIST = admin.c ent.c misc.c
 include $(top_srcdir)/Makefile.extra
 
-pythondir = $(libdir)/python1.5/site-packages/
+pythondir = $(libdir)/python@PYTHON_VERSION@/site-packages/
 
 python_PROGRAMS = libusermodule.so quotamodule.so
 noinst_SCRIPTS = $(srcdir)/test-script $(srcdir)/quota-script

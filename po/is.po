@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
-"POT-Creation-Date: 2001-08-07 12:05-0400\n"
+"POT-Creation-Date: 2001-11-13 19:54-0500\n"
 "PO-Revision-Date: 2001-08-16 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"
@@ -13,312 +13,338 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: apps/apputil.c:58
+#: apps/apputil.c:59
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Villa við lestur `%s': %s"
 
-#: apps/apputil.c:63
+#: apps/apputil.c:64
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Villa við að búa til `%s': %s"
 
-#: apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
+#: apps/apputil.c:137 apps/apputil.c:157 apps/apputil.c:169
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Villa við að fjarlægja `%s': %s"
 
-#: apps/apputil.c:324
+#: apps/apputil.c:331
 msgid "Internal error.\n"
 msgstr "Innvær villa.\n"
 
-#: apps/apputil.c:332
+#: apps/apputil.c:339
 msgid "Error initializing PAM.\n"
 msgstr "Villa við frumstillingu PAM.\n"
 
-#: apps/apputil.c:339
+#: apps/apputil.c:346
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Auðkenning mistókst hjá %s.\n"
 
-#: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
+#: apps/lchage.c:102 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:70
 msgid "[OPTION...] user"
 msgstr "[ROFI...] notandi"
 
-#: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
+#: apps/lchage.c:105 apps/lgroupadd.c:61 apps/lgroupdel.c:56
+#: apps/lgroupmod.c:74 apps/luseradd.c:75 apps/luserdel.c:62
+#: apps/lusermod.c:73
+#, fuzzy, c-format
+msgid "Error parsing arguments: %s.\n"
+msgstr "Villa við að eyða %s: %s.\n"
+
+#: apps/lchage.c:112 apps/luseradd.c:82 apps/luserdel.c:69 apps/lusermod.c:80
 msgid "No user name specified.\n"
 msgstr "Ekkert notandanafn tiltekið.\n"
 
-#: apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
-#: apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
-#: apps/lusermod.c:82
+#: apps/lchage.c:120 apps/lgroupadd.c:76 apps/lgroupdel.c:71
+#: apps/lgroupmod.c:89 apps/luseradd.c:90 apps/luserdel.c:77
+#: apps/lusermod.c:88 samples/testuser.c:56
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Villa við að frumstilla %s: %s.\n"
 
-#: apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
-#: apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
-#: apps/lusermod.c:84
+#: apps/lchage.c:122 apps/lgroupadd.c:78 apps/lgroupdel.c:73
+#: apps/lgroupmod.c:91 apps/luseradd.c:92 apps/luserdel.c:79
+#: apps/lusermod.c:90
 #, c-format
 msgid "Error initializing %s.\n"
 msgstr "Villa við að frumstilla %s.\n"
 
-#: apps/lchage.c:118 apps/luserdel.c:82 apps/lusermod.c:97
+#: apps/lchage.c:130 apps/luserdel.c:87 apps/lusermod.c:103
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Notandinn %s er ekki til.\n"
 
-#: apps/lchage.c:124
+#: apps/lchage.c:136
 msgid "Account is locked.\n"
 msgstr "Notandinn er læstur.\n"
 
-#: apps/lchage.c:126
+#: apps/lchage.c:138
 msgid "Account is not locked.\n"
 msgstr "Notandinn er ekki læstur.\n"
 
-#: apps/lchage.c:130
+#: apps/lchage.c:142
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Minnst:\t%d\n"
 
-#: apps/lchage.c:134
+#: apps/lchage.c:146
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Mest:\t%d\n"
 
-#: apps/lchage.c:138
+#: apps/lchage.c:150
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Aðvörun:\t%d\n"
 
-#: apps/lchage.c:142
+#: apps/lchage.c:154
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Óvirkur:\t%d\n"
 
-#: apps/lchage.c:146 apps/lchage.c:154 apps/lchage.c:162 apps/lchage.c:170
+#: apps/lchage.c:158 apps/lchage.c:166 apps/lchage.c:174 apps/lchage.c:182
 msgid "Never"
 msgstr "Aldrei"
 
-#: apps/lchage.c:149
+#: apps/lchage.c:161
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Síðast breytt:\t%s\n"
 
-#: apps/lchage.c:156
+#: apps/lchage.c:168
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Lykilorðið rennur út:\t%s\n"
 
-#: apps/lchage.c:165
+#: apps/lchage.c:177
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Lykilorðið ógilt:\t%s\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:184
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Aðgangurinn rennur út:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:207
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Gat ekki breytt úreldingarupplýsingum notandans %s.\n"
 
-#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
+#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:71
 msgid "[OPTION...] group"
 msgstr "[ROFI...] hópur"
 
-#: apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
+#: apps/lgroupadd.c:68 apps/lgroupdel.c:63 apps/lgroupmod.c:81
 msgid "No group name specified.\n"
 msgstr "Enginn hópur tiltekinn.\n"
 
-#: apps/lgroupadd.c:88
+#: apps/lgroupadd.c:91
 msgid "Group creation failed.\n"
 msgstr "Ekki tókst að búa til hópinn,\n"
 
-#: apps/lgroupdel.c:76 apps/lgroupmod.c:96
+#: apps/lgroupdel.c:81 apps/lgroupmod.c:104
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Hópurinn %s er ekki til.\n"
 
-#: apps/lgroupdel.c:81
+#: apps/lgroupdel.c:86
 #, c-format
 msgid "Group %s could not be deleted.\n"
 msgstr "Ekki tókst að eyða hópnum %s.\n"
 
-#: apps/lgroupmod.c:89 apps/lusermod.c:90
+#: apps/lgroupmod.c:97 apps/lusermod.c:96
 msgid "Both -L and -U specified.\n"
 msgstr "Bæði -L og -U tiltekið.\n"
 
-#: apps/lgroupmod.c:155 apps/lgroupmod.c:165
+#: apps/lgroupmod.c:174 apps/lgroupmod.c:184
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Gat ekki sett lykilorð á hópinn %s.\n"
 
-#: apps/lgroupmod.c:174
+#: apps/lgroupmod.c:193
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Ekki var hægt að læsa hópnum %s.\n"
 
-#: apps/lgroupmod.c:182
+#: apps/lgroupmod.c:201
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Ekki var hægt að aflæsa hópnum %s.\n"
 
-#: apps/lgroupmod.c:189
+#: apps/lgroupmod.c:208
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Ekki var hægt að breyta hópnum %s.\n"
 
-#: apps/luseradd.c:112
-#, c-format
-msgid "Error creating group for %s: %s.\n"
+#. Aargh!  Abandon all hope.
+#: apps/luseradd.c:142
+#, fuzzy, c-format
+msgid "Error creating group `%s'.\n"
 msgstr "Gat ekki búið til hóp fyrir %s.\n"
 
-#: apps/luseradd.c:159
+#. Can't get there from here.
+#: apps/luseradd.c:151
+#, fuzzy, c-format
+msgid "No group named `%s' exists.\n"
+msgstr "Enginn hópur tiltekinn.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/luseradd.c:168
+#, fuzzy, c-format
+msgid "Error creating group `%s' with GID %ld.\n"
+msgstr "Gat ekki búið til hóp fyrir %s.\n"
+
+#. Can't get there from here.
+#: apps/luseradd.c:178
+#, fuzzy, c-format
+msgid "No group with GID %ld exists.\n"
+msgstr "Leita að hóp númer %d.\n"
+
+#: apps/luseradd.c:220
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Gat ekki búið til notanda: %s.\n"
 
-#: apps/luseradd.c:176
+#: apps/luseradd.c:238
 #, c-format
 msgid "Bad UID for %s.\n"
 msgstr "Ógilt UID fyrir %s.\n"
 
-#: apps/luseradd.c:180
+#: apps/luseradd.c:242
 #, c-format
 msgid "Bad GID for %s.\n"
 msgstr "Ógilt GID fyrir %s.\n"
 
-#: apps/luseradd.c:190
+#: apps/luseradd.c:252
 #, c-format
 msgid "No home directory for %s.\n"
 msgstr "Ekkert heimasvæði til fyrir %s.\n"
 
-#: apps/luseradd.c:194
+#: apps/luseradd.c:256
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Villa við að búa %s til: %s.\n"
 
-#: apps/luserdel.c:87
+#: apps/luserdel.c:92
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Ekki var hægt að eyða notandanum %s: %s.\n"
 
-#: apps/luserdel.c:94
+#: apps/luserdel.c:100
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s var ekki með gid tölu.\n"
 
-#: apps/luserdel.c:99
-#, c-format
-msgid "Group #%d does not exist.\n"
-msgstr "Hópur #%d er ekki til.\n"
-
 #: apps/luserdel.c:105
 #, c-format
-msgid "Group #%d did not have a group name.\n"
+msgid "No group with GID %ld exists, not removing.\n"
+msgstr ""
+
+#: apps/luserdel.c:111
+#, fuzzy, c-format
+msgid "Group with GID %ld did not have a group name.\n"
 msgstr "Hópur #%d er ekki með hópheiti.\n"
 
-#: apps/luserdel.c:110
+#: apps/luserdel.c:116
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Ekki var hægt að eyða hóp %s: %s.\n"
 
-#: apps/luserdel.c:122
+#: apps/luserdel.c:129
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s var ekki með heimasvæði.\n"
 
-#: apps/luserdel.c:126
+#: apps/luserdel.c:133
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Villa við að eyða %s: %s.\n"
 
-#: apps/lusermod.c:125
+#: apps/lusermod.c:132
 #, c-format
 msgid "Error reading old home directory for %s: %s.\n"
 msgstr "Villa við lestur gamals heimasvæðis notanda %s: %s.\n"
 
-#: apps/lusermod.c:133 apps/lusermod.c:142
+#: apps/lusermod.c:140 apps/lusermod.c:149
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Gat ekki sett lykilorð notanda %s: %s.\n"
 
-#: apps/lusermod.c:150
+#: apps/lusermod.c:157
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Ekki var hægt að læsa notandanum %s: %s.\n"
 
-#: apps/lusermod.c:157
+#: apps/lusermod.c:164
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Ekki var hægt að aflæsa notandanum %s: %s.\n"
 
-#: apps/lusermod.c:163
+#: apps/lusermod.c:170
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Ekki var hægt að breyta notandanum %s: %s.\n"
 
-#: apps/lusermod.c:169
+#: apps/lusermod.c:211
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ekkert gamalt heimasvæði til fyrir notandann %s.\n"
 
-#: apps/lusermod.c:173
+#: apps/lusermod.c:215
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ekkert nýtt heimasvæði til fyrir notandann %s.\n"
 
-#: apps/lusermod.c:177
+#: apps/lusermod.c:219
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Villa við að færa %s í %s: %s.\n"
 
-#: lib/user.c:161
+#: lib/user.c:126
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "ekkert frumstillingastef %s í `%s'"
 
-#: lib/user.c:186
+#: lib/user.c:151
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "útgáfumismunur eininga í `%s'"
 
-#: lib/usercfg.c:56
+#: lib/usercfg.c:60
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "gat ekki opnað stillingaskrána `%s': %s"
 
-#: lib/userent.c:45
+#: lib/userent.c:50
 #, c-format
 msgid "dump of struct lu_ent at %p:\n"
 msgstr "útskrift af struct lu_ent á %p:\n"
 
-#: lib/userent.c:46
+#: lib/userent.c:51
 #, c-format
 msgid " magic = %08x\n"
 msgstr " magic = %08x\n"
 
-#: lib/userent.c:47
+#: lib/userent.c:52
 #, c-format
 msgid " type = %s\n"
 msgstr " tegund = %s\n"
 
-#: lib/userent.c:47
+#: lib/userent.c:52
 msgid "user"
 msgstr "notandi"
 
-#: lib/userent.c:47
+#: lib/userent.c:52
 msgid "group"
 msgstr "hópur"
 
-#: lib/userent.c:47
+#: lib/userent.c:52
 msgid "unknown"
 msgstr "óþekkt"
 
-#: lib/userent.c:263
+#: lib/userent.c:268
 msgid ""
 "\n"
 "Before copy:\n"
@@ -326,7 +352,7 @@ msgstr ""
 "\n"
 "Fyrir afritun:\n"
 
-#: lib/userent.c:277
+#: lib/userent.c:282
 msgid ""
 "\n"
 "After copy:\n"
@@ -334,28 +360,28 @@ msgstr ""
 "\n"
 "Eftir afritun:\n"
 
-#: lib/userent.c:442
+#: lib/userent.c:449
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr "losa lu_ent á %p.\n"
 
-#: lib/userutil.c:177
+#: lib/userutil.c:178
 #, c-format
 msgid "error locking file: %s"
 msgstr "villa við að læsa skrá: %s"
 
-#: modules/files.c:109 modules/files.c:316 modules/files.c:573
-#: modules/files.c:753 modules/files.c:904 modules/files.c:1068
-#: modules/files.c:1141 modules/files.c:1273 modules/files.c:1365
-#: modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
-#: modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
-#: modules/files.c:1593
+#: modules/files.c:110 modules/files.c:353 modules/files.c:624
+#: modules/files.c:806 modules/files.c:963 modules/files.c:1131
+#: modules/files.c:1202 modules/files.c:1356 modules/files.c:1450
+#: modules/files.c:1463 modules/files.c:1526 modules/files.c:1541
+#: modules/files.c:1584 modules/files.c:1601 modules/files.c:1667
+#: modules/files.c:1680
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "gat ekki opnað `%s': %s"
 
-#: modules/files.c:123 modules/files.c:147 modules/files.c:178
-#: modules/files.c:586 modules/files.c:917
+#: modules/files.c:123 modules/files.c:147 modules/files.c:177
+#: modules/files.c:636 modules/files.c:975
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "gat ekki fundið `%s': %s"
@@ -370,250 +396,258 @@ msgstr "villa við að búa til `%s': %s"
 msgid "backup file `%s' was a symlink"
 msgstr "afritið `%s' var tákntengi (symlink)"
 
-#: modules/files.c:601 modules/files.c:926
+#: modules/files.c:651 modules/files.c:984
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "gat ekki lesið úr `%s': %s"
 
-#: modules/files.c:611 modules/files.c:621
+#: modules/files.c:661 modules/files.c:671
 msgid "entry already present in file"
 msgstr "færslan er þegar til staðar í skránni"
 
-#: modules/files.c:633 modules/files.c:644 modules/files.c:952
-#: modules/files.c:961
+#: modules/files.c:683 modules/files.c:694 modules/files.c:1010
+#: modules/files.c:1019
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "gat ekki ritað í `%s': %s"
 
-#: modules/files.c:727 modules/files.c:734 modules/files.c:821
-#: modules/files.c:831
+#: modules/files.c:780 modules/files.c:787 modules/files.c:873
+#: modules/files.c:883
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "hluturinn er ekki með %s eiginleika"
 
-#: modules/files.c:773
+#: modules/files.c:825
 #, c-format
 msgid "entity object has no `%s' attribute"
 msgstr "hluturinn er ekki með `%s' eiginleika"
 
-#: modules/files.c:1675 modules/files.c:1731
+#: modules/files.c:1763 modules/files.c:1819
 msgid "not executing with superuser privileges"
 msgstr "er ekki keyrandi með rótarheimildum"
 
-#: modules/files.c:1743
+#: modules/files.c:1831
 msgid "no shadow file present -- disabling"
 msgstr "engin shadow skrá til staðar -- afvirki"
 
-#: modules/krb5.c:102
+#: modules/krb5.c:101
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "villa við að tengjast kadm5 þjóni fyrir þjónustuna `%s' í svæði `%s': %s"
+msgstr ""
+"villa við að tengjast kadm5 þjóni fyrir þjónustuna `%s' í svæði `%s': %s"
 
-#: modules/krb5.c:132 modules/krb5.c:189 modules/krb5.c:272 modules/krb5.c:346
-#: modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
+#: modules/krb5.c:131 modules/krb5.c:188 modules/krb5.c:271 modules/krb5.c:345
+#: modules/krb5.c:390 modules/krb5.c:458 modules/krb5.c:507
 msgid "error initializing kerberos library"
 msgstr "villa við að frumstilla kerberos aðgerðasafnið"
 
-#: modules/krb5.c:137 modules/krb5.c:204 modules/krb5.c:297 modules/krb5.c:302
-#: modules/krb5.c:361 modules/krb5.c:406 modules/krb5.c:474 modules/krb5.c:522
+#: modules/krb5.c:136 modules/krb5.c:203 modules/krb5.c:296 modules/krb5.c:301
+#: modules/krb5.c:360 modules/krb5.c:405 modules/krb5.c:473 modules/krb5.c:521
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "villa við að þátta notandaheitið `%s' fyrir kerberos"
 
-#: modules/krb5.c:198 modules/krb5.c:355 modules/krb5.c:400 modules/krb5.c:468
+#: modules/krb5.c:197 modules/krb5.c:354 modules/krb5.c:399 modules/krb5.c:467
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "hlutstrúkúrinn hefur engann %s eða %s eiginleika"
 
-#: modules/krb5.c:281
+#: modules/krb5.c:280
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "hluturinn hefur engann %s eða %s eiginleika"
 
-#: modules/krb5.c:291
+#: modules/krb5.c:290
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "hluturinn var búinn til án %s eða %s eiginleika"
 
-#: modules/krb5.c:413 modules/krb5.c:481
+#: modules/krb5.c:412 modules/krb5.c:480
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "villa við að lesa upplýsingar um `%s úr kerberos"
 
-#: modules/krb5.c:516
+#: modules/krb5.c:515
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "hluturinn hafði engann %s eiginleika"
 
-#: modules/krb5.c:547
+#: modules/krb5.c:546
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "villa við að setja lykilorð fyrir `%s'"
 
-#: modules/krb5.c:660
+#: modules/krb5.c:659
 msgid "Kerberos Realm"
 msgstr "Kerberos svæði"
 
-#: modules/krb5.c:665
+#: modules/krb5.c:664
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos Admin Principal"
 
-#: modules/krb5.c:680
+#: modules/krb5.c:679
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos lykilorð fyrir Admin Principal"
 
-#: modules/ldap.c:175
+#: modules/ldap.c:202
 msgid "error initializing ldap library"
 msgstr "villa við að frumstilla ldap aðgerðasafnið"
 
-#: modules/ldap.c:193
+#: modules/ldap.c:224
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "gat ekki sett LDAP prótókollsútgáfuna á %d"
 
-#: modules/ldap.c:199
+#: modules/ldap.c:232
 msgid "could not negotiate TLS with LDAP server"
 msgstr "gat ekki samið um TLS við LDAP þjóninn"
 
-#: modules/ldap.c:213
+#: modules/ldap.c:247
 msgid "could not bind to LDAP server"
 msgstr "gat ekki tengst LDAP þjóni"
 
-#: modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
-#: modules/ldap.c:799 modules/ldap.c:880
+#: modules/ldap.c:352 modules/ldap.c:678 modules/ldap.c:768 modules/ldap.c:831
+#: modules/ldap.c:918 modules/ldap.c:999
 msgid "error mapping name to LDAP distinguished name"
 msgstr "villa við að tengja nafn við LDAP grunnnafn"
 
-#: modules/ldap.c:318
+#: modules/ldap.c:358
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "villa við að tengja nafn við LDAP grunnnafn"
 
-#: modules/ldap.c:364
+#: modules/ldap.c:408
 msgid "error searching LDAP directory"
 msgstr "villa við leit í LDAP möppu"
 
-#: modules/ldap.c:556
+#: modules/ldap.c:666
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "notandahluturinn hafði engann %s eiginleika"
 
-#: modules/ldap.c:562
+#: modules/ldap.c:672
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "notandahluturinn var búinn til án `%s'"
 
-#: modules/ldap.c:574
+#: modules/ldap.c:684
 msgid "could not convert internal data to LDAPMods"
 msgstr "gat ekki breytt innværum gögnum í LDAPMods"
 
-#: modules/ldap.c:587 modules/ldap.c:751
+#: modules/ldap.c:705 modules/ldap.c:870
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "villa við að breyta LDAP færslu: %s"
 
-#: modules/ldap.c:600
+#: modules/ldap.c:719
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "villa við aðendurnefna LDAP færslu: %s\n"
 
-#: modules/ldap.c:643
+#: modules/ldap.c:762
 #, c-format
 msgid "object had no %s attribute"
 msgstr "hluturinn hefur engann %s eiginleika"
 
-#: modules/ldap.c:660
+#: modules/ldap.c:779
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "villa við að fjarlægja færslu úr LDAP: %s.\n"
 
-#: modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
+#: modules/ldap.c:825 modules/ldap.c:837 modules/ldap.c:912 modules/ldap.c:993
 #, c-format
 msgid "object has no %s attribute"
 msgstr "hluturinn hefur engann %s eiginleika"
 
-#: modules/ldap.c:811
+#: modules/ldap.c:930
 msgid "no such object in LDAP directory"
 msgstr "enginn slíkur hlutur í LDAP skránum"
 
-#: modules/ldap.c:828
+#: modules/ldap.c:947
 #, c-format
 msgid "no `%s' attribute using `%s' scheme found"
 msgstr "enginn `%s' eiginleiki með `%s' skemu fannst"
 
-#: modules/ldap.c:836
+#: modules/ldap.c:955
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "enginn `%s' eiginleiki fannst"
 
-#: modules/ldap.c:939
+#: modules/ldap.c:1058
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "villa við að setja lykilorð í LDAP skrá fyrir %s: %s"
 
-#: modules/ldap.c:1213
+#: modules/ldap.c:1332
 msgid "LDAP Server Name"
 msgstr "LDAP þjónn"
 
-#: modules/ldap.c:1218
+#: modules/ldap.c:1337
 msgid "LDAP Base DN"
 msgstr "LDAP Base DN"
 
-#: modules/ldap.c:1223
+#: modules/ldap.c:1342
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:1228
+#: modules/ldap.c:1347
 msgid "LDAP Bind Password"
 msgstr "LDAP lykilorð"
 
-#: modules/ldap.c:1234
+#: modules/ldap.c:1353
 msgid "LDAP SASL User"
 msgstr "LDAP SASL notandi"
 
-#: modules/ldap.c:1239
+#: modules/ldap.c:1358
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Auðkennir"
 
-#: samples/lookup.c:60 samples/testuser.c:55
-msgid "Error initializing lu.\n"
-msgstr "Villa við frumstillingu lu.\n"
+#: samples/lookup.c:61
+#, fuzzy, c-format
+msgid "Error initializing %s: %s\n"
+msgstr "Villa við að frumstilla %s: %s.\n"
 
-#: samples/lookup.c:69
+#: samples/lookup.c:70
 #, c-format
 msgid "Searching for group with ID %d.\n"
 msgstr "Leita að hóp númer %d.\n"
 
-#: samples/lookup.c:72
+#: samples/lookup.c:73
 #, c-format
 msgid "Searching for group named %s.\n"
 msgstr "Leita að hóp sem heitir %s.\n"
 
-#: samples/lookup.c:78
+#: samples/lookup.c:79
 #, c-format
 msgid "Searching for user with ID %d.\n"
 msgstr "Leita að notanda númer %d.\n"
 
-#: samples/lookup.c:81
+#: samples/lookup.c:82
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr "Leita að notanda sem heitir %s.\n"
 
-#: samples/lookup.c:107
+#: samples/lookup.c:104
 msgid "Entry not found.\n"
 msgstr "Færslan fannst ekki.\n"
 
-#: samples/testuser.c:59
+#: samples/testuser.c:60
 msgid "Default user object classes:\n"
 msgstr "Sjálfgefnar notendahlutahópar:\n"
 
-#: samples/testuser.c:65
+#: samples/testuser.c:66
 msgid "Default user attribute names:\n"
 msgstr "Sjálfgefin heiti notandaeiginleika:\n"
 
-#: samples/testuser.c:71
+#: samples/testuser.c:72
 msgid "Getting default user attributes:\n"
 msgstr "Sæki sjálfgefna notandaeiginleika:\n"
 
-#: samples/testuser.c:79
+#: samples/testuser.c:80
 msgid "Copying user structure:\n"
 msgstr "Afrita notendastrúktúr:\n"
+
+#~ msgid "Group #%d does not exist.\n"
+#~ msgstr "Hópur #%d er ekki til.\n"
+
+#~ msgid "Error initializing lu.\n"
+#~ msgstr "Villa við frumstillingu lu.\n"

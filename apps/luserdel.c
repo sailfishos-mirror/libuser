@@ -102,13 +102,13 @@ main(int argc, const char **argv)
 		} else {
 			gid_t gid = atol(values->data);
 			if(lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
-				fprintf(stderr, _("No group with GID %ld exists, not removing.\n"), gid);
+				fprintf(stderr, _("No group with GID %ld exists, not removing.\n"), (long)gid);
 				return 5;
 			}
 			if(lu_ent_get(ent, LU_MEMBERUID) == NULL) {
 				values = lu_ent_get(ent, LU_GROUPNAME);
 				if(!(values && values->data)) {
-					fprintf(stderr, _("Group with GID %ld did not have a group name.\n"), gid);
+					fprintf(stderr, _("Group with GID %ld did not have a group name.\n"), (long)gid);
 					return 6;
 				} else {
 					if(strcmp(values->data, user) == 0) {
