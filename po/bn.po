@@ -592,7 +592,7 @@ msgstr "নামের মধ্য নিয়ন্ত্রক (control) অ�
 
 #: lib/user.c:214
 msgid "name contains whitespace"
-msgstr "নামের মধ্যে ফাঁকা জায়গা রয়েছে"
+msgstr "নামের মধ্যে ফঁাকা জায়গা রয়েছে"
 
 #: lib/user.c:221
 #, c-format
@@ -746,11 +746,11 @@ msgstr "LDAP সার্ভারে কোন root DSE সম্ভবত উ�
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
 msgid "error mapping name to LDAP distinguished name"
-msgstr ""
+msgstr "LDAP distinguished নাম এর সাথে ম্যাপ করতে সমস্যা হয়েছে"
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
+msgstr "LDAP base distinguished নাম এর সাথে ম্যাপ করতে সমস্যা হয়েছে"
 
 #: modules/ldap.c:1212
 #, c-format
@@ -828,7 +828,7 @@ msgstr "LDAP SASL ব্যবহারকারী"
 
 #: modules/ldap.c:2275
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL Authorization ব্যবহারকারী"
 
 #: modules/ldap.c:2315
 msgid "error initializing module"
@@ -902,7 +902,7 @@ msgstr "%s নামক ব্যবহারকারীর সন্ধান 
 
 #: samples/lookup.c:103
 msgid "Entry not found.\n"
-msgstr "এন্ট্রি খুঁজে পাওয়া যায়নি।\n"
+msgstr "এন্ট্রি খঁুজে পাওয়া যায়নি।\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
@@ -918,5 +918,4 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr ""
-#msgstr "ব্যবহারকারীর গঠন কপি করা হচ্ছে:\n"
+msgstr "ব্যবহারকারীর গঠন কপি করা হচ্ছে:\n"
