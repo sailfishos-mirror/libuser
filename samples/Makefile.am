@@ -1,5 +1,5 @@
 noinst_PROGRAMS = enum field homedir lookup prompt quotaq testuser
-noinst_SCRIPTS = genusers
+extra_DIST = genusers
 
 include $(top_srcdir)/Makefile.extra
 
