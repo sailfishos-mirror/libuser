@@ -547,6 +547,7 @@ run_list(struct lu_context *context,
 			case users_enumerate_by_group_full:
 			case groups_enumerate_full:
 			case groups_enumerate_by_user_full:
+				/* FIXME: do some kind of merging here. */
 				tmp_ptr_array = scratch;
 				ptr_array = *ret;
 				if (ptr_array == NULL) {
@@ -1095,6 +1096,7 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 	return ret;
 }
 
+#if 0
 GPtrArray *
 lu_users_enumerate_by_group_full(struct lu_context * context,
 				 const char *pattern,
@@ -1118,3 +1120,4 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 		    NULL, (gpointer*) &ret, error);
 	return ret;
 }
+#endif

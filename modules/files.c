@@ -1994,21 +1994,87 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 }
 
 static GPtrArray *
+lu_files_enumerate_full(struct lu_module *module,
+			const char *base_name,
+			parse_fn parser,
+		        const char *pattern,
+		        struct lu_error **error)
+{
+	int fd;
+	GPtrArray *ret = NULL;
+	char *buf;
+	char *key = NULL, *filename = NULL;
+	const char *dir = NULL;
+	FILE *fp;
+	struct lu_ent *ent;
+
+	g_assert(module != NULL);
+	g_assert(base_name != NULL);
+	g_assert(strlen(base_name) > 0);
+	pattern = pattern ?: "*";
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
+	g_free(key);
+
+	fd = open(filename, O_RDWR);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open,
+			     _("couldn't open `%s': %s"), filename,
+			     strerror(errno));
+		g_free(filename);
+		return NULL;
+	}
+
+	if (lu_util_lock_obtain(fd, error) != TRUE) {
+		close(fd);
+		g_free(filename);
+		return NULL;
+	}
+
+	fp = fdopen(fd, "r");
+	if (fp == NULL) {
+		lu_error_new(error, lu_error_open,
+			     _("couldn't open `%s': %s"), filename,
+			     strerror(errno));
+		lu_util_lock_free(fd);
+		close(fd);
+		g_free(filename);
+		return NULL;
+	}
+
+	ret = g_ptr_array_new();
+	while ((buf = line_read(fp)) != NULL) {
+		ent = lu_ent_new();
+		parser(buf, ent);
+		g_ptr_array_add(ret, ent);
+		g_free(buf);
+	}
+
+	fclose(fp);
+
+	return ret;
+}
+
+static GPtrArray *
 lu_files_users_enumerate_full(struct lu_module *module,
 			      const char *user,
 			      struct lu_error **error)
 {
-	/* FIXME */
-	return NULL;
+	return lu_files_enumerate_full(module, "passwd",
+				       lu_files_parse_user_entry,
+				       user, error);
 }
 
 static GPtrArray *
 lu_files_groups_enumerate_full(struct lu_module *module,
-			       const char *user,
+			       const char *group,
 			       struct lu_error **error)
 {
-	/* FIXME */
-	return NULL;
+	return lu_files_enumerate_full(module, "group",
+				       lu_files_parse_group_entry,
+				       group, error);
 }
 
 static GPtrArray *
@@ -2017,7 +2083,7 @@ lu_files_users_enumerate_by_group_full(struct lu_module *module,
 				       uid_t uid,
 				       struct lu_error **error)
 {
-	/* FIXME */
+	/* Implement the placeholder. */
 	return NULL;
 }
 
@@ -2027,7 +2093,7 @@ lu_files_groups_enumerate_by_user_full(struct lu_module *module,
 				       uid_t uid,
 				       struct lu_error **error)
 {
-	/* FIXME */
+	/* Implement the placeholder. */
 	return NULL;
 }
 
@@ -2070,7 +2136,9 @@ lu_shadow_users_enumerate_full(struct lu_module *module,
 			       const char *pattern,
 			       struct lu_error **error)
 {
-	return NULL;
+	return lu_files_enumerate_full(module, "shadow",
+				       lu_shadow_parse_user_entry,
+				       pattern, error);
 }
 
 static GPtrArray *
@@ -2078,7 +2146,9 @@ lu_shadow_groups_enumerate_full(struct lu_module *module,
 				const char *pattern,
 				struct lu_error **error)
 {
-	return NULL;
+	return lu_files_enumerate_full(module, "gshadow",
+				       lu_shadow_parse_group_entry,
+				       pattern, error);
 }
 
 static GPtrArray *
@@ -2087,6 +2157,7 @@ lu_shadow_users_enumerate_by_group_full(struct lu_module *module,
 					gid_t gid,
 					struct lu_error **error)
 {
+	/* Implement the placeholder. */
 	return NULL;
 }
 
@@ -2096,21 +2167,64 @@ lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
 					uid_t uid,
 					struct lu_error **error)
 {
+	/* Implement the placeholder. */
 	return NULL;
 }
 
+/* Check if we use/need elevated privileges to manipulate our files. */
 static gboolean
 lu_files_uses_elevated_privileges(struct lu_module *module)
 {
-	/* FIXME: actually check file permissions. */
-	return TRUE;
+	const char *directory;
+	char *path, *key;
+	gboolean ret = FALSE;
+	/* Get the directory the files are in. */
+	key = g_strconcat(module->name, "/directory", NULL);
+	directory = lu_cfg_read_single(module->lu_context, key, SYSCONFDIR);
+	g_free(key);
+	/* If we can't access the passwd file as a normal user, then the
+	 * answer is "yes". */
+	path = g_strconcat("%s/%s", directory, "/passwd", NULL);
+	if (access(path, R_OK | W_OK) != 0) {
+		ret = TRUE;
+	}
+	g_free(path);
+	/* If we can't access the group file as a normal user, then the
+	 * answer is "yes". */
+	path = g_strconcat("%s/%s", directory, "/group", NULL);
+	if (access(path, R_OK | W_OK) != 0) {
+		ret = TRUE;
+	}
+	g_free(path);
+	return ret;
 }
 
+/* Check if we use/need elevated privileges to manipulate our files. */
 static gboolean
 lu_shadow_uses_elevated_privileges(struct lu_module *module)
 {
-	/* FIXME: actually check file permissions. */
-	return TRUE;
+	const char *directory;
+	char *path, *key;
+	gboolean ret = FALSE;
+	/* Get the directory the files are in. */
+	key = g_strconcat(module->name, "/directory", NULL);
+	directory = lu_cfg_read_single(module->lu_context, key, SYSCONFDIR);
+	g_free(key);
+	/* If we can't access the shadow file as a normal user, then the
+	 * answer is "yes". */
+	path = g_strconcat("%s/%s", directory, "/shadow", NULL);
+	if (access(path, R_OK | W_OK) != 0) {
+		ret = TRUE;
+	}
+	g_free(path);
+	/* If we can't access the gshadow file as a normal user, then the
+	 * answer is "yes". */
+	path = g_strconcat("%s/%s", directory, "/gshadow", NULL);
+	if (access(path, R_OK | W_OK) != 0) {
+		ret = TRUE;
+	}
+	g_free(path);
+	return ret;
 }
 
 static gboolean

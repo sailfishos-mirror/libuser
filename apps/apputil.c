@@ -400,7 +400,14 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 	 * privileges. */
 	if (lu_uses_elevated_privileges(ctx) == FALSE) {
 		/* Great!  We can drop privileges. */
-		seteuid(getuid());
+		if (setegid(getgid()) == -1) {
+			fprintf(stderr, _("Failed to drop privileges.\n"));
+			exit(1);
+		}
+		if (seteuid(getuid()) == -1) {
+			fprintf(stderr, _("Failed to drop privileges.\n"));
+			exit(1);
+		}
 		return;
 	}
 

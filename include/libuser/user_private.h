@@ -192,6 +192,7 @@ struct lu_module {
 	GPtrArray* (*users_enumerate_full) (struct lu_module * module,
 					    const char *pattern,
 					    struct lu_error ** error);
+	/* Placeholder.  Can't come up with a reason to have it. */
 	GPtrArray* (*users_enumerate_by_group_full) (struct lu_module * module,
 						     const char *group,
 						     gid_t gid,
@@ -206,6 +207,7 @@ struct lu_module {
 	GPtrArray* (*groups_enumerate_full) (struct lu_module * module,
 					     const char *pattern,
 					     struct lu_error ** error);
+	/* Placeholder.  Can't come up with a reason to have it. */
 	GPtrArray* (*groups_enumerate_by_user_full) (struct lu_module * module,
 						     const char *user,
 						     uid_t uid,

@@ -624,6 +624,44 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	}
 }
 
+/* Create a user's mail spool. */
+static PyObject *
+libuser_admin_create_destroy_mail(PyObject *self, PyObject *args,
+				  PyObject *kwargs, gboolean action)
+{
+	struct libuser_entity *ent = NULL;
+
+	char *keywords[] = { "entity", NULL };
+	struct libuser_admin *me = (struct libuser_admin *) self;
+
+	DEBUG_ENTRY;
+
+	/* We expect an Entity object. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O", keywords,
+					 &EntityType, &ent)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	/* Now just pass it to the internal function. */
+	return (lu_mailspool_create_destroy(me->ctx, ent->ent, action)) ?
+		Py_BuildValue("") : NULL;
+}
+
+/* Create a user's mail spool. */
+static PyObject *
+libuser_admin_create_mail(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	return libuser_admin_create_destroy_mail(self, args, kwargs, TRUE);
+}
+
+/* Destroy a user's mail spool. */
+static PyObject *
+libuser_admin_destroy_mail(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+	return libuser_admin_create_destroy_mail(self, args, kwargs, FALSE);
+}
+
 /* Add a user. */
 static PyObject *
 libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
@@ -1045,6 +1083,7 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	return ret;
 }
 
+#ifdef PLACEHOLDERS
 /* Get the list of users who belong to a group. */
 static PyObject *
 libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
@@ -1105,6 +1144,7 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	DEBUG_EXIT;
 	return ret;
 }
+#endif
 
 static struct PyMethodDef libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction) libuser_admin_lookup_user_name,
@@ -1196,6 +1236,7 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"enumerateGroupsFull", (PyCFunction) libuser_admin_enumerate_groups_full,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups matching a pattern, in listed databases"},
+#ifdef PLACEHOLDERS
 	{"enumerateUsersByGroupFull",
 	 (PyCFunction) libuser_admin_enumerate_users_by_group_full,
 	 METH_VARARGS | METH_KEYWORDS,
@@ -1204,6 +1245,7 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 (PyCFunction) libuser_admin_enumerate_groups_by_user_full,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups to which a user belongs"},
+#endif
 
 	{"promptConsole", (PyCFunction) libuser_admin_prompt_console,
 	 METH_VARARGS | METH_KEYWORDS,
@@ -1222,6 +1264,13 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"removeHome", (PyCFunction) libuser_admin_remove_home,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "remove a user's home directory"},
+
+	{"createMail", (PyCFunction) libuser_admin_create_mail,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "create a mail spool for a user"},
+	{"destroyMail", (PyCFunction) libuser_admin_destroy_mail,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "destroy a mail spool for a user"},
 
 	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
 	 "return a list of valid shells"},

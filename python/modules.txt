@@ -17,6 +17,8 @@ libuser:
         	- ADMINISTRATORUID
         	- MEMBERUID
 
+		- SHADOWNAME
+		- SHADOWPASSWORD
         	- SHADOWEXPIRE
         	- SHADOWFLAG
         	- SHADOWINACTIVE
