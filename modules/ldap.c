@@ -22,13 +22,14 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <ldap.h>
 #include <limits.h>
+#include <pwd.h>
+#include <sasl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <pwd.h>
-#include <ldap.h>
-#include <sasl.h>
 
 #define LU_LDAP_SERVER		0
 #define LU_LDAP_BASEDN		1
@@ -97,9 +98,11 @@ close_server(LDAP *ldap)
 static const char *
 getuser()
 {
-	struct passwd *pwd = NULL;
-	pwd = getpwuid(getuid());
-	return pwd ? pwd->pw_name : NULL;
+	char buf[LINE_MAX];
+	struct passwd pwd;
+	int ret, err;
+	ret = getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
+	return (ret == 0) ? strdup(pwd.pw_name) : NULL;
 }
 
 static int
@@ -154,8 +157,15 @@ bind_server(struct lu_ldap_context *context)
 
 	ldap = ldap_init(context->prompts[LU_LDAP_SERVER].value, LDAP_PORT);
 	if(ldap) {
+		char *user;
 		scache = context->global_context->scache;
-		tmp = g_strdup_printf("uid=%s,%s,%s", getuser(),
+		user = getuser();
+		if(user) {
+			char *tmp = scache->cache(scache, user);
+			free(user);
+			user = tmp;
+		}
+		tmp = g_strdup_printf("uid=%s,%s,%s", user,
 				      lu_cfg_read_single(context->global_context,
 							 "ldap/userBranch",
 							 "ou=People"),
@@ -704,6 +714,7 @@ lu_ldap_init(struct lu_context *context)
 {
 	struct lu_module *ret = NULL;
 	struct lu_ldap_context *ctx = NULL;
+	char *user;
 	LDAP *ldap = NULL;
 
 	g_return_val_if_fail(context != NULL, NULL);
@@ -734,19 +745,25 @@ lu_ldap_init(struct lu_context *context)
 							   "cn=manager,"
 							   "dc=example,dc=com");
 
+	user = getuser();
+
 	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP User");
 	ctx->prompts[LU_LDAP_USER].visible = TRUE;
 	ctx->prompts[LU_LDAP_USER].default_value =
 					lu_cfg_read_single(context,
 							   "ldap/user",
-							   getuser());
+							   user);
 
 	ctx->prompts[LU_LDAP_AUTHUSER].prompt = _("LDAP Authorization User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHUSER].default_value =
 					lu_cfg_read_single(context,
 							   "ldap/authuser",
-							   getuser());
+							   user);
+
+	if(user) {
+		free(user);
+	}
 
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;

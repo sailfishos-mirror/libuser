@@ -180,7 +180,7 @@ void lu_end(struct lu_context *context);
  * @return A valid structure on success.
  * @return NULL on failure.
  */
-struct lu_ent *lu_ent_new();
+struct lu_ent *lu_ent_new(void);
 
 /**
  * Copies on entity structure to another.

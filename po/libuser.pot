@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-11 12:00-0400\n"
+"POT-Creation-Date: 2001-06-11 17:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 
 #: apps/apputil.c:36 apps/apputil.c:44 apps/apputil.c:52
 msgid "Feature not implemented: "
@@ -277,19 +277,19 @@ msgstr ""
 msgid "unknown"
 msgstr ""
 
-#: lib/userent.c:148
+#: lib/userent.c:153
 msgid ""
 "\n"
 "Before copy:\n"
 msgstr ""
 
-#: lib/userent.c:163
+#: lib/userent.c:168
 msgid ""
 "\n"
 "After copy:\n"
 msgstr ""
 
-#: lib/userent.c:295
+#: lib/userent.c:300
 #, c-format
 msgid "freeing lu_ent at %p.\n"
 msgstr ""
@@ -382,84 +382,84 @@ msgstr ""
 msgid "Kerberos password for %s"
 msgstr ""
 
-#: modules/ldap.c:167
+#: modules/ldap.c:177
 #, c-format
 msgid "Could not force protocol version 3 with LDAP server %s.\n"
 msgstr ""
 
-#: modules/ldap.c:174
+#: modules/ldap.c:184
 #, c-format
 msgid "Could not negotiate TLS with LDAP server %s.\n"
 msgstr ""
 
-#: modules/ldap.c:192
+#: modules/ldap.c:202
 #, c-format
 msgid "Could not perform simple bind to LDAP server %s.\n"
 msgstr ""
 
-#: modules/ldap.c:269 modules/ldap.c:495 modules/ldap.c:572
+#: modules/ldap.c:279 modules/ldap.c:505 modules/ldap.c:582
 msgid "Could not determine expected DN.\n"
 msgstr ""
 
-#: modules/ldap.c:481
+#: modules/ldap.c:491
 #, c-format
 msgid "User object had no '%s'.\n"
 msgstr ""
 
-#: modules/ldap.c:487
+#: modules/ldap.c:497
 #, c-format
 msgid "User object was created with no '%s'.\n"
 msgstr ""
 
-#: modules/ldap.c:501
+#: modules/ldap.c:511
 msgid "Could not convert internals to LDAPMod data.\n"
 msgstr ""
 
-#: modules/ldap.c:513
+#: modules/ldap.c:523
 #, c-format
 msgid "Error modifying directory entry: %s.\n"
 msgstr ""
 
-#: modules/ldap.c:526
+#: modules/ldap.c:536
 #, c-format
 msgid "Error renaming directory entry: %s.\n"
 msgstr ""
 
-#: modules/ldap.c:565
+#: modules/ldap.c:575
 #, c-format
 msgid "Account object had no '%s'.\n"
 msgstr ""
 
-#: modules/ldap.c:580
+#: modules/ldap.c:590
 #, c-format
 msgid "Error removing directory entry: %s.\n"
 msgstr ""
 
-#: modules/ldap.c:715
+#: modules/ldap.c:726
 msgid "LDAP Server Name"
 msgstr ""
 
-#: modules/ldap.c:722
+#: modules/ldap.c:733
 msgid "LDAP Base DN"
 msgstr ""
 
-#: modules/ldap.c:729
+#: modules/ldap.c:740
 msgid "LDAP DN"
 msgstr ""
 
-#: modules/ldap.c:737
+#: modules/ldap.c:750
 msgid "LDAP User"
 msgstr ""
 
-#: modules/ldap.c:744
+#: modules/ldap.c:757
 msgid "LDAP Authorization User"
 msgstr ""
 
-#: modules/ldap.c:751
+#: modules/ldap.c:768
 msgid "LDAP Password"
 msgstr ""
 
-#: modules/ldap.c:765
+#: modules/ldap.c:782
 msgid "Could not bind to LDAP server.\n"
 msgstr ""
 
