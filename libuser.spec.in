@@ -79,6 +79,9 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Aug 28 2001 Nalin Dahyabhai <nalin@redhat.com> 0.31-1
+- fix a file-parsing bug that popped up in 0.29's mmap modifications
+
 * Mon Aug 27 2001 Nalin Dahyabhai <nalin@redhat.com> 0.30-1
 - quotaq: fix argument order when reading quota information
 - user_quota: set quota grace periods correctly

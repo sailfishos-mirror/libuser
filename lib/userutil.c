@@ -288,7 +288,13 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		if(colon) {
 			if(strncmp(colon, part, strlen(part)) == 0) {
 				if((colon[strlen(part)] == ':') || (colon[strlen(part)] == '\n')) {
-					ret = g_strdup(buf);
+					size_t maxl;
+					maxl = st.st_size - (buf - contents);
+					if(q) {
+						ret = g_strndup(buf, q - buf);
+					} else {
+						ret = g_strndup(buf, maxl);
+					}
 					break;
 				}
 			}
