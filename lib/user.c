@@ -28,7 +28,7 @@
 #define WHITESPACE "\t "
 
 enum lu_dispatch_id {
-	user_lookup_name,
+	user_lookup_name = 0x4782,
 	group_lookup_name,
 	user_lookup_id,
 	group_lookup_id,
@@ -352,21 +352,11 @@ run_single(struct lu_context *context, struct lu_module *module,
 			}
 			break;
 	}
-	if(success) {
-		if(type == auth) {
-			lu_ent_set_source_auth(ent, module->name);
-		}
-		if(type == info) {
-			lu_ent_set_source_info(ent, module->name);
-		}
 #ifdef DEBUG
-		g_print("...%s succeeded for %s.\n", module->name,
-			type == auth ? "auth" : "info");
-	} else {
-		g_print("...%s failed for %s.\n", module->name,
-			type == auth ? "auth" : "info");
+	g_print("...%s %s for %s.\n", module->name,
+		success ? "succeeded" : "failed",
+		type == auth ? "auth" : "info");
 #endif
-	}
 	return success;
 }
 
@@ -390,6 +380,12 @@ run_list(struct lu_context *context, GList *modules, enum lu_module_type type,
 		g_assert(module != NULL);
 		success = run_single(context, module, type, id, ent, data);
 		if(success) {
+			if(type == auth) {
+				lu_ent_set_source_auth(ent, module->name);
+			}
+			if(type == info) {
+				lu_ent_set_source_info(ent, module->name);
+			}
 			break;
 		}
 	}
@@ -463,8 +459,7 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 						     FALSE);
 				g_return_val_if_fail(tmp->source_auth != NULL,
 						     FALSE);
-				lu_ent_set_source_info(ent, tmp->source_info);
-				lu_ent_set_source_auth(ent, tmp->source_auth);
+				lu_ent_copy(tmp, ent);
 			}
 			break;
 		case user_mod:

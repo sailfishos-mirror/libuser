@@ -31,12 +31,17 @@
 #include <string.h>
 #include <unistd.h>
 
-#define LU_LDAP_SERVER		0
-#define LU_LDAP_BASEDN		1
-#define LU_LDAP_BINDDN		2
-#define LU_LDAP_USER		3
-#define LU_LDAP_AUTHUSER	4
-#define LU_LDAP_PASSWORD	5
+#undef  DEBUG
+
+enum interact_indices {
+	LU_LDAP_SERVER,
+	LU_LDAP_BASEDN,
+	LU_LDAP_BINDDN,
+	LU_LDAP_PASSWORD,
+	LU_LDAP_USER,
+	LU_LDAP_AUTHUSER,
+	LU_LDAP_MAX,
+};
 
 struct lu_module *
 lu_ldap_init(struct lu_context *context);
@@ -85,7 +90,7 @@ lu_ldap_group_attributes[] = {
 
 struct lu_ldap_context {
 	struct lu_context *global_context;
-        struct lu_prompt prompts[6];
+        struct lu_prompt prompts[LU_LDAP_MAX];
 	LDAP *ldap;
 };
 
@@ -188,7 +193,8 @@ bind_server(struct lu_ldap_context *context)
 			return NULL;
 		}
 		if(ldap_sasl_interactive_bind_s(ldap, NULL, NULL, NULL, NULL,
-						LDAP_SASL_AUTOMATIC | LDAP_SASL_QUIET,
+						LDAP_SASL_AUTOMATIC |
+						LDAP_SASL_QUIET,
 						interact, context)
 			!= LDAP_SUCCESS)
 		if(ldap_simple_bind_s(ldap,
@@ -679,17 +685,91 @@ lu_ldap_group_setpass(struct lu_module *module, struct lu_ent *ent,
 }
 
 static GList *
+lu_ldap_enumerate(struct lu_module *module, const char *namingAttr,
+	          const char *configKey, const char *def, const char *pattern)
+{
+	LDAPMessage *messages = NULL, *entry = NULL;
+	const char *attr;
+	char **values = NULL;
+	char *base = NULL, *filt = NULL;
+	const char *branch;
+	int i, j;
+	GList *ret = NULL;
+	struct lu_ldap_context *ctx;
+	const char *attributes[] = {namingAttr, NULL};
+	char *tmp;
+
+	g_return_val_if_fail(module != NULL, FALSE);
+	g_return_val_if_fail(namingAttr != NULL, FALSE);
+	g_return_val_if_fail(strlen(namingAttr) > 0, FALSE);
+	g_return_val_if_fail(configKey != NULL, FALSE);
+	g_return_val_if_fail(strlen(configKey) > 0, FALSE);
+	g_return_val_if_fail(attributes != NULL, FALSE);
+	g_return_val_if_fail(attributes[0] != NULL, FALSE);
+
+	ctx = module->module_context;
+
+	tmp = g_strdup_printf("ldap/%s", configKey);
+	branch = lu_cfg_read_single(module->lu_context, tmp, def);
+	g_free(tmp);
+
+	base = g_strdup_printf("%s,%s", branch,
+			       ctx->prompts[LU_LDAP_BASEDN].value &&
+			       strlen(ctx->prompts[LU_LDAP_BASEDN].value) ?
+			       ctx->prompts[LU_LDAP_BASEDN].value : "*");
+	filt = g_strdup_printf("(%s=%s)", namingAttr, pattern);
+
+#ifdef DEBUG
+	g_print("Looking up '%s' with filter '%s'.\n", base, filt);
+#endif
+
+	if(ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt, attributes,
+			 FALSE, &messages) == LDAP_SUCCESS) {
+		entry = ldap_first_entry(ctx->ldap, messages);
+		if(entry != NULL) {
+			while(entry != NULL) {
+				for(i = 0; attributes[i]; i++) {
+					attr = attributes[i];
+					values = ldap_get_values(ctx->ldap,
+								 entry, attr);
+					if(values) {
+						for(j = 0; values[j]; j++) {
+#ifdef DEBUG
+							g_print("Got '%s' = '%s'.\n",
+								attr, values[j]);
+#endif
+							ret = g_list_append(ret,
+									    module->scache->cache(module->scache, values[j]));
+						}
+					}
+				}
+				entry = ldap_next_entry(ctx->ldap, entry);
+			}
+		} else {
+#ifdef DEBUG
+			g_print("No entry found in LDAP.\n");
+#endif
+		}
+	}
+
+	g_free(base);
+	g_free(filt);
+
+	return ret;
+}
+
+static GList *
 lu_ldap_users_enumerate(struct lu_module *module, const char *pattern)
 {
-	/* FIXME */
-	return NULL;
+	return lu_ldap_enumerate(module, LU_USERNAME,
+				 "userBranch", "ou=People", pattern);
 }
 
 static GList *
 lu_ldap_groups_enumerate(struct lu_module *module, const char *pattern)
 {
-	/* FIXME */
-	return NULL;
+	return lu_ldap_enumerate(module, LU_GROUPNAME,
+				 "groupBranch", "ou=Groups", pattern);
 }
 
 static gboolean
@@ -737,7 +817,7 @@ lu_ldap_init(struct lu_context *context)
 							   "dc=example,dc=com");
 	ctx->prompts[LU_LDAP_BASEDN].visible = TRUE;
 
-	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP DN");
+	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP Bind DN");
 	ctx->prompts[LU_LDAP_BINDDN].visible = TRUE;
 	ctx->prompts[LU_LDAP_BINDDN].default_value =
 					lu_cfg_read_single(context,
@@ -745,16 +825,19 @@ lu_ldap_init(struct lu_context *context)
 							   "cn=manager,"
 							   "dc=example,dc=com");
 
+	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
+	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
+
 	user = getuser();
 
-	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP User");
+	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP SASL User");
 	ctx->prompts[LU_LDAP_USER].visible = TRUE;
 	ctx->prompts[LU_LDAP_USER].default_value =
 					lu_cfg_read_single(context,
 							   "ldap/user",
 							   user);
 
-	ctx->prompts[LU_LDAP_AUTHUSER].prompt = _("LDAP Authorization User");
+	ctx->prompts[LU_LDAP_AUTHUSER].prompt = _("LDAP SASL Authorization User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHUSER].default_value =
 					lu_cfg_read_single(context,
@@ -763,10 +846,8 @@ lu_ldap_init(struct lu_context *context)
 
 	if(user) {
 		free(user);
+		user = NULL;
 	}
-
-	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Password");
-	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
 	if((context->prompter == NULL) ||
            (context->prompter(context,

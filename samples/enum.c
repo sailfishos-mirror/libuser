@@ -57,9 +57,9 @@ int main(int argc, char **argv)
 	}
 
 	if(group == FALSE) {
-		entities = lu_users_enumerate(lu, module, argv[optind]);
+		entities = lu_users_enumerate(lu, argv[optind], module);
 	} else {
-		entities = lu_groups_enumerate(lu, module, argv[optind]);
+		entities = lu_groups_enumerate(lu, argv[optind], module);
 	}
 
 	for(l = entities; l != NULL; l = g_list_next(l)) {
