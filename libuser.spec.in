@@ -89,6 +89,7 @@ popd
 %changelog
 * Thu Mar  7 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.101-2
 - add missing buildreqs on cyrus-sasl-devel and openldap-devel (#59456)
+- translation refresh
 
 * Fri Mar  1 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.101-1
 - fix python bindings of enumerateFull functions
