@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-25 11:49+0100\n"
+"PO-Revision-Date: 2003-03-10 16:04+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -320,7 +320,7 @@ msgstr "Fel vid skapande av grupp för \"%s\" med GID %ld.\n"
 #: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "fel vid inställning av initialt lösenord för %s: %s\n"
+msgstr "Fel vid inställning av initialt lösenord för %s: %s\n"
 
 #: apps/lnewusers.c:310
 #, c-format
@@ -597,7 +597,7 @@ msgstr "namnet innehåller blanksteg"
 #: lib/user.c:221
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "namnet innehåller ogiltiga tecknet \"%c\""
+msgstr "namnet innehåller det ogiltiga tecknet \"%c\""
 
 #: lib/util.c:200
 #, c-format
