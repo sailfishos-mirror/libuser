@@ -1,5 +1,6 @@
 # 
 #
+#
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Allan Sims <allsi@eau.ee>, 2004.
@@ -8,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-07 13:10+0200\n"
+"PO-Revision-Date: 2004-03-17 19:32+0200\n"
 "Last-Translator: Allan Sims <allsi@eau.ee>\n"
 "Language-Team: Estonian <Eesti>\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +56,7 @@ msgstr "Sisemine PAM viga `%s'.\n"
 
 #: apps/apputil.c:470
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Kasutaja ei sobi.\n"
 
 #: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
 #: apps/luserdel.c:65 apps/lusermod.c:87
@@ -166,7 +167,7 @@ msgstr "[VALIK...] [kasutaja]"
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "Kasutaja nimi määramata, puudub nimi uid %d.\n"
 
 #. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
@@ -332,7 +333,7 @@ msgstr "Viga %s kodukataloogi loomisel: %s\n"
 #: apps/lnewusers.c:325
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "Viga posti rulli loomisel %s jaoks.\n"
 
 #: apps/lnewusers.c:330
 #, c-format
@@ -392,7 +393,7 @@ msgstr "Viga %s loomisel: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "Viga posti rulli loomisel.\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -407,120 +408,120 @@ msgstr "%s ei ole gid numbrit.\n"
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Ei ole gruppi GID-ga %ld, ei eemaldata.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr ""
+msgstr "Grupil GID-ga %ld ei ole nime.\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa kustutada: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s-il ei ole kodukataloogi.\n"
 
 #: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "Viga %s eemaldamisel: %s.\n"
 
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "Kasutaja %s parooli seadmine ebaõnnestus: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "Kasutajat %s ei saa lukustada: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "Kasutajat %s ei saa lukust lahti: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Kasutajat %s ei saa muuta: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "Gruppi %s ei saa muuta: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "%s-il ei ole vana kodukataloogi.\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "%s-il ei ole uut kodukataloogi.\n"
 
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "Viga %s liigutamisel %s: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "ei saa avada seadete faili `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "edu"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "moodul on seadistustes keelatud"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr ""
+msgstr "üldine viga"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "ebapiisavad õigused"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr ""
+msgstr "ligipääs keelatud"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "halb kasutaja/grupi nimi"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "halb kasutaja/grupi id"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "kasutaja/grupi nimi on kasutusel"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "kasutaja/grupi id on kasutusel"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "viga terminali atribuutide käsitlemisel"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "faili avamise viga"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "faili lukustamise viga"
 
 #: lib/error.c:66
 msgid "error statting file"
@@ -528,31 +529,31 @@ msgstr ""
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "faili lugemise viga"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "viga kirjutamisel faili"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "failis puuduvad andmed"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "sisemine lähtestamise viga"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "mooduli laadimise viga"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "sümbolite lahendamise viga moodulis"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "teegi/mooduli versioon ei sobi"
 
 #: lib/modules.c:97
 #, c-format
