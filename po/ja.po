@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-20 10:30GMT+10:00\n"
+"PO-Revision-Date: 2003-02-25 16:53GMT+10:00\n"
 "Last-Translator: James Hashida <khashida@redhat.com>\n"
-"Language-Team: Japanese <i18-list@redhat.com>\n"
+"Language-Team: Japanese <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -833,9 +833,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL認証ユーザ"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "モジュールのロードでエラー"
+msgstr "モジュールの初期化でエラー"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -922,3 +921,4 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
+
