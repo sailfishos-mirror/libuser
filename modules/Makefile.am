@@ -8,6 +8,7 @@ EXTRA_PROGRAMS = \
 	libuser_ldap.so \
 	libuser_sasldb.so
 
+pkginclude_HEADERS = default.-c
 pkglib_PROGRAMS = $(MODULES)
 
 LDFLAGS = -shared

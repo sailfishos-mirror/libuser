@@ -16,22 +16,17 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/* This file contains functions suitable for inclusion in modules, for
+   initializing user and group records. */
+
 #ident "$Id"
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <fnmatch.h>
-#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <glib.h>
+#include <glib-object.h>
 #include <string.h>
-#include <unistd.h>
-#include "../lib/user_private.h"
+#include <libuser/user_private.h>
 
 #define DEFAULT_PASSWORD	"!!"
 #define DEFAULT_SHADOW_PASSWORD	"x"
