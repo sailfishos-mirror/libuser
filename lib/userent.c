@@ -59,12 +59,12 @@ lu_get_free_id(struct lu_context *ctx, enum lu_type type, glong id)
 	ent = lu_ent_new();
 	if(type == lu_user) {
 		struct passwd pwd, *err;
-		while((id != 0) && (lu_user_lookup_id(ctx, id, ent) || getpwuid_r(id, &pwd, buf, sizeof(buf), &err)))
+		while((id != 0) && (lu_user_lookup_id(ctx, id, ent) || (getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0)))
 			id++;
 	} else
 	if(type == lu_group) {
 		struct group grp, *err;
-		while((id != 0) && (lu_group_lookup_id(ctx, id, ent) || getgrgid_r(id, &grp, buf, sizeof(buf), &err)))
+		while((id != 0) && (lu_group_lookup_id(ctx, id, ent) || (getgrgid_r(id, &grp, buf, sizeof(buf), &err) == 0)))
 			id++;
 	}
 	lu_ent_free(ent);
