@@ -1,0 +1,541 @@
+# Swedish messages for libuser.
+# Copyright (C) 2001 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001.
+#
+# $Id$
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser\n"
+"POT-Creation-Date: 2001-07-26 19:04-0400\n"
+"PO-Revision-Date: 2001-07-30 08:00+0200\n"
+"Last-Translator: Christian Rose <menthos@menthos.com>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/apputil.c:56
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "Fel vid läsning av \"%s\": %s"
+
+#: apps/apputil.c:61
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "Fel vid skapande av \"%s\": %s"
+
+#: apps/apputil.c:134 apps/apputil.c:154 apps/apputil.c:166
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "Fel vid borttagning av \"%s\": %s"
+
+#: apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
+msgid "[OPTION...] user"
+msgstr "[FLAGGA...] användare"
+
+#: apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
+msgid "No user name specified.\n"
+msgstr "Inget användarnamn angivet.\n"
+
+#: apps/lchage.c:111 apps/luserdel.c:75 apps/lusermod.c:90
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "Användaren %s finns inte.\n"
+
+#: apps/lchage.c:117
+msgid "Account is locked.\n"
+msgstr "Kontot är låst.\n"
+
+#: apps/lchage.c:119
+msgid "Account is not locked.\n"
+msgstr "Kontot är inte låst.\n"
+
+#: apps/lchage.c:123
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "Minsta:\t%d\n"
+
+#: apps/lchage.c:127
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "Största:\t%d\n"
+
+#: apps/lchage.c:131
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "Varning:\t%d\n"
+
+#: apps/lchage.c:135
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "Inaktiv:\t%d\n"
+
+#: apps/lchage.c:139 apps/lchage.c:147 apps/lchage.c:155 apps/lchage.c:163
+msgid "Never"
+msgstr "Aldrig"
+
+#: apps/lchage.c:142
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "Senaste ändring:\t%s\n"
+
+#: apps/lchage.c:149
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "Lösenordet går ut:\t%s\n"
+
+#: apps/lchage.c:158
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "Lösenordet inaktivt:\t%s\n"
+
+#: apps/lchage.c:165
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "Kontot går ut:\t%s\n"
+
+#: apps/lchage.c:194
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
+
+#: apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
+msgid "[OPTION...] group"
+msgstr "[FLAGGA...] grupp"
+
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
+msgid "No group name specified.\n"
+msgstr "Inget gruppnamn är angivet.\n"
+
+#: apps/lgroupadd.c:81
+msgid "Group creation failed.\n"
+msgstr "Skapande av grupp misslyckades.\n"
+
+#: apps/lgroupdel.c:69 apps/lgroupmod.c:89
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "Gruppen %s finns inte.\n"
+
+#: apps/lgroupdel.c:74
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "Gruppen %s kunde inte tas bort.\n"
+
+#: apps/lgroupmod.c:82 apps/lusermod.c:83
+msgid "Both -L and -U specified.\n"
+msgstr "Både -L och -U är angivna.\n"
+
+#: apps/lgroupmod.c:148 apps/lgroupmod.c:158
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "Misslyckades med att ställa in grupp för %s.\n"
+
+#: apps/lgroupmod.c:167
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "Gruppen %s kunde inte låsas.\n"
+
+#: apps/lgroupmod.c:175
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "Gruppen %s kunde inte låsas upp.\n"
+
+#: apps/lgroupmod.c:182
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "Gruppen %s kunde inte ändras.\n"
+
+#: apps/luseradd.c:105
+#, c-format
+msgid "Error creating group for %s: %s.\n"
+msgstr "Fel vid skapande av grupp för %s: %s.\n"
+
+#: apps/luseradd.c:152
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "Skapande av konto misslyckades: %s.\n"
+
+#: apps/luseradd.c:169
+#, c-format
+msgid "Bad UID for %s.\n"
+msgstr "Felaktigt UID för %s.\n"
+
+#: apps/luseradd.c:173
+#, c-format
+msgid "Bad GID for %s.\n"
+msgstr "Felaktigt GID för %s.\n"
+
+#: apps/luseradd.c:183
+#, c-format
+msgid "No home directory for %s.\n"
+msgstr "Ingen hemkatalog för %s.\n"
+
+#: apps/luseradd.c:187
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "Fel vid skapande av %s: %s.\n"
+
+#: apps/luserdel.c:80
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Användaren %s kunde inte tas bort: %s.\n"
+
+#: apps/luserdel.c:87
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s hade inget gid-nummer.\n"
+
+#: apps/luserdel.c:92
+#, c-format
+msgid "Group #%d does not exist.\n"
+msgstr "Grupp nummer %d finns inte.\n"
+
+#: apps/luserdel.c:98
+#, c-format
+msgid "Group #%d did not have a group name.\n"
+msgstr "Grupp nummer %d hade inget gruppnamn.\n"
+
+#: apps/luserdel.c:103
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Gruppen %s kunde inte tas bort: %s.\n"
+
+#: apps/luserdel.c:115
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s hade ingen hemkatalog.\n"
+
+#: apps/luserdel.c:119
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "Fel vid borttagning av %s: %s.\n"
+
+#: apps/lusermod.c:118
+#, c-format
+msgid "Error reading old home directory for %s: %s.\n"
+msgstr "Fel vid läsning av gamla hemkatalogen för %s: %s.\n"
+
+#: apps/lusermod.c:126 apps/lusermod.c:135
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Misslyckades med att ställa in lösenordet för användaren %s: %s.\n"
+
+#: apps/lusermod.c:143
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "Användaren %s kunde inte låsas: %s.\n"
+
+#: apps/lusermod.c:150
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Användaren %s kunde inte låsas upp: %s.\n"
+
+#: apps/lusermod.c:156
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "Användaren %s kunde inte ändras: %s.\n"
+
+#: apps/lusermod.c:162
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "Ingen gammal hemkatalog för %s.\n"
+
+#: apps/lusermod.c:166
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "Ingen ny hemkatalog för %s.\n"
+
+#: apps/lusermod.c:170
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Fel vid flytt av %s till %s: %s.\n"
+
+#: lib/user.c:123
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "ingen initieringsfunktion %s i \"%s\""
+
+#: lib/user.c:144
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "modulversion stämmer inte överens i \"%s\""
+
+#: lib/usercfg.c:56
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "kunde inte öppna konfigurationsfilen \"%s\": %s"
+
+#: lib/userent.c:44
+#, c-format
+msgid "dump of struct lu_ent at %p:\n"
+msgstr "dump av struct lu_ent vid %p:\n"
+
+#: lib/userent.c:45
+#, c-format
+msgid " magic = %08x\n"
+msgstr " magic = %08x\n"
+
+#: lib/userent.c:46
+#, c-format
+msgid " type = %s\n"
+msgstr " type = %s\n"
+
+#: lib/userent.c:46
+msgid "user"
+msgstr "användare"
+
+#: lib/userent.c:46
+msgid "group"
+msgstr "grupp"
+
+#: lib/userent.c:46
+msgid "unknown"
+msgstr "okänd"
+
+#: lib/userent.c:216
+msgid ""
+"\n"
+"Before copy:\n"
+msgstr ""
+"\n"
+"Innan kopiering:\n"
+
+#: lib/userent.c:230
+msgid ""
+"\n"
+"After copy:\n"
+msgstr ""
+"\n"
+"Efter kopiering:\n"
+
+#: lib/userent.c:388
+#, c-format
+msgid "freeing lu_ent at %p.\n"
+msgstr "frigör lu_ent vid %p.\n"
+
+#: modules/files.c:115
+#, c-format
+msgid "couldn't open `%s'"
+msgstr "kunde inte öppna \"%s\""
+
+#: modules/files.c:135
+#, c-format
+msgid "error creating `%s'"
+msgstr "fel vid skapande av \"%s\""
+
+#: modules/files.c:145
+#, c-format
+msgid "backup file `%s' was a symlink"
+msgstr "säkerhetskopian \"%s\" var en symbolisk länk"
+
+#: modules/files.c:614 modules/files.c:624
+msgid "entry already present in file"
+msgstr "posten finns redan i filen"
+
+#: modules/files.c:730 modules/files.c:737 modules/files.c:823
+#: modules/files.c:833
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "enhetsobjektet har inget %s-attribut"
+
+#: modules/files.c:1675 modules/files.c:1733
+msgid "Not executing with superuser privileges."
+msgstr "Kör inte med superanvändarrättigheter."
+
+#: modules/files.c:1745
+msgid "No shadow file present -- disabling."
+msgstr "Ingen shadow-fil finns tillgänglig -- deaktiverar."
+
+#: modules/krb5.c:104
+#, c-format
+msgid "error connecting to the kadm5 server for service %s in realm %s: %s"
+msgstr "fel vid anslutning till kadm5-servern för tjänsten %s i realm %s: %s"
+
+#: modules/krb5.c:134 modules/krb5.c:191 modules/krb5.c:274 modules/krb5.c:348
+#: modules/krb5.c:393 modules/krb5.c:461 modules/krb5.c:510
+msgid "error initializing kerberos library"
+msgstr "fel vid initiering av kerberos-biblioteket"
+
+#: modules/krb5.c:139 modules/krb5.c:206 modules/krb5.c:299 modules/krb5.c:304
+#: modules/krb5.c:363 modules/krb5.c:408 modules/krb5.c:476 modules/krb5.c:524
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "fel vid tolkning av användarnamnet \"%s\" för kerberos"
+
+#: modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "enhetsstrukturen har inga %s- eller %s-attribut"
+
+#: modules/krb5.c:283
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "enheten har inga %s- eller %s-attribut"
+
+#: modules/krb5.c:293
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "enheten skapades utan %s- eller %s-attribut"
+
+#: modules/krb5.c:415 modules/krb5.c:483
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "fel vid läsning av information för \"%s\" från kerberos"
+
+#: modules/krb5.c:518
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "enheten har inget %s-attribut"
+
+#: modules/krb5.c:549
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "fel vid inställning av lösenord för \"%s\""
+
+#: modules/krb5.c:662
+msgid "Kerberos Realm"
+msgstr "Kerberos-realm"
+
+#: modules/krb5.c:667
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Admin Principal"
+
+#: modules/krb5.c:682
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos-lösenord för Admin Principal"
+
+#: modules/ldap.c:165
+msgid "error initializing ldap library"
+msgstr "fel vid initiering av ldap-biblioteket"
+
+#: modules/ldap.c:183
+msgid "could not set protocol to version 3"
+msgstr "kunde inte ställa protokoll till version 3"
+
+#: modules/ldap.c:189
+msgid "could not negotiate TLS with server"
+msgstr "kunde inte förhandla om TLS med servern"
+
+#: modules/ldap.c:272 modules/ldap.c:640
+msgid "error mapping name to DN"
+msgstr "fel vid mappande av namn till DN"
+
+#: modules/ldap.c:307 modules/ldap.c:824
+msgid "error searching ldap directory"
+msgstr "fel vid sökning av ldap-katalog"
+
+#: modules/ldap.c:489
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "användarobjektet hade inget %s-attribut"
+
+#: modules/ldap.c:495
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "användarobjektet skapades utan \"%s\""
+
+#: modules/ldap.c:502
+msgid "could not determine expected DN"
+msgstr "kunde inte avgöra förväntad DN"
+
+#: modules/ldap.c:508
+msgid "could not convert internal data to LDAPMods"
+msgstr "kunde inte konvertera intern data till LDAPMods"
+
+#: modules/ldap.c:521 modules/ldap.c:679
+#, c-format
+msgid "error modifying directory entry: %s"
+msgstr "fel vid ändring av katalogpost: %s"
+
+#: modules/ldap.c:534
+#, c-format
+msgid "error renaming directory entry: %s\n"
+msgstr "fel vid byte av namn på katalogpost: %s\n"
+
+#: modules/ldap.c:575
+#, c-format
+msgid "object had no %s attribute"
+msgstr "objektet hade inget %s-attribut"
+
+#: modules/ldap.c:581
+msgid "could not map name to DN"
+msgstr "kunde inte mappa namn till DN"
+
+#: modules/ldap.c:592
+#, c-format
+msgid "error removing directory entry: %s.\n"
+msgstr "fel vid borttagning av katalogposten: %s.\n"
+
+#: modules/ldap.c:634 modules/ldap.c:646
+#, c-format
+msgid "object has no %s attribute"
+msgstr "objektet har inget %s-attribut"
+
+#: modules/ldap.c:893
+msgid "LDAP Server Name"
+msgstr "Namn på LDAP-server"
+
+#: modules/ldap.c:898
+msgid "LDAP Base DN"
+msgstr "LDAP-bas-DN"
+
+#: modules/ldap.c:903
+msgid "LDAP Bind DN"
+msgstr "LDAP-Bind-DN"
+
+#: modules/ldap.c:908
+msgid "LDAP Bind Password"
+msgstr "LDAP-Bind-lösenord"
+
+#: modules/ldap.c:914
+msgid "LDAP SASL User"
+msgstr "LDAP-SASL-användare"
+
+#: modules/ldap.c:919
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP-SASL-auktoriseringsanvändare"
+
+#: samples/lookup.c:60 samples/testuser.c:55
+msgid "Error initializing lu.\n"
+msgstr "Fel vid initiering av lu.\n"
+
+#: samples/lookup.c:69
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "Söker efter grupp med ID %d.\n"
+
+#: samples/lookup.c:72
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "Söker efter grupp med namnet %s.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "Söker efter användare med ID %d.\n"
+
+#: samples/lookup.c:81
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "Söker efter användare med namnet %s.\n"
+
+#: samples/lookup.c:107
+msgid "Entry not found.\n"
+msgstr "Posten hittades inte.\n"
+
+#: samples/testuser.c:59
+msgid "Default user object classes:\n"
+msgstr "Standardklasser för användarobjekt:\n"
+
+#: samples/testuser.c:65
+msgid "Default user attribute names:\n"
+msgstr "Standardnamn för användarattribut:\n"
+
+#: samples/testuser.c:71
+msgid "Getting default user attributes:\n"
+msgstr "Hämtar standardattribut för användare:\n"
+
+#: samples/testuser.c:79
+msgid "Copying user structure:\n"
+msgstr "Kopierar användarstruktur:\n"
