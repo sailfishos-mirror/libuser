@@ -1,15 +1,11 @@
 Medium:
-* Implement account locking in LDAP.
-* Rework LDAP module lu_ent to LDAPMod mapping to just include additions and
-  deletions instead of wholesale modifies, which may run afoul of server
-  access controls.
+* Finish the mostly-there LDAP module.
 * Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod (bad idea?)
 * Create variants of the apps that are hard-coded to use files only, for
   use in batch environments like post-package-install.
-* Write an NIS back-end using yppasswd.x in glibc, or maybe using the routines
-  declared in /usr/include/rpcsvc/libnis.h
 
 Hard:
 * Write a RADIUS back-end.
-* Implement an lgpasswd command for local group administration (probably
-  would have to be setuid, ugh).
+* Write an NIS back-end using yppasswd.x in glibc, or maybe using the routines
+  declared in /usr/include/rpcsvc/libnis.h
+* Implement an lgpasswd command for local group administration.
