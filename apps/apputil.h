@@ -25,8 +25,12 @@
 #include "../lib/user.h"
 
 #define INVALID (-0x80000000)
+#ifndef _
 #define _(String) gettext(String)
+#endif
+#ifndef N_
 #define N_(String) (String)
+#endif
 
 gboolean lu_homedir_populate(const char *skel, const char *directory,
 			     uid_t owner, gid_t group, mode_t mode,

@@ -2084,7 +2084,11 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	g_value_init(&value, G_TYPE_STRING);
 	/* Read each line, */
 	while ((buf = line_read(fp)) != NULL) {
-		/* require that each line have actual data on it, */
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
+		/* require that each non-empty line has meaningful data in it */
 		p = strchr(buf, ':');
 		if (p != NULL) {
 			/* snip off the parts we don't care about, */
@@ -2192,6 +2196,10 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 
 	/* Iterate over each line. */
 	while ((buf = line_read(fp)) != NULL) {
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
 		/* Find the end of the first field. */
 		p = strchr(buf, ':');
 		q = NULL;
@@ -2272,6 +2280,10 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 
 	/* Iterate over all of these lines as well. */
 	while ((buf = line_read(fp)) != NULL) {
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
 		/* Terminate at the end of the first field, and find the end of
 		 * the second field. */
 		p = strchr(buf, ':');
@@ -2388,6 +2400,10 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	/* Iterate through all of the lines in the file. */
 	key = NULL;
 	while ((buf = line_read(fp)) != NULL) {
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
 		/* Find the end of the first field. */
 		p = strchr(buf, ':');
 		/* Find the end of the second field. */
@@ -2456,6 +2472,10 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 
 	/* Iterate through all of the lines in the file. */
 	while ((buf = line_read(fp)) != NULL) {
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
 		/* Find the end of the first field. */
 		p = strchr(buf, ':');
 		/* Find the end of the second field. */
@@ -2570,6 +2590,10 @@ lu_files_enumerate_full(struct lu_module *module,
 	/* Allocate an array to hold results. */
 	ret = g_ptr_array_new();
 	while ((buf = line_read(fp)) != NULL) {
+		if (strlen(buf) == 1) {
+			g_free(buf);
+			continue;
+		}
 		ent = lu_ent_new();
 		/* Snip the line off at the right place. */
 		key = strchr(buf, '\n');

@@ -176,6 +176,47 @@ extract_name(struct lu_ent *ent)
 	return ent->cache->cache(ent->cache, g_value_get_string(value));
 }
 
+static gboolean
+lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
+{
+	const char *sdata;
+	int i;
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
+			     FALSE);
+	sdata = extract_name(ent);
+	if (sdata == NULL) {
+		lu_error_new(error, lu_error_name_bad, _("name is not set"));
+		return FALSE;
+	}
+	if (strlen(sdata) == 0) {
+		lu_error_new(error, lu_error_name_bad, _("name is too short"));
+		return FALSE;
+	}
+	for (i = 0; sdata[i] != '\0'; i++) {
+		if ((sdata[i] & 0x80) != 0) {
+			lu_error_new(error, lu_error_name_bad,
+				     _("name contains non-ASCII characters"));
+			return FALSE;
+		}
+	}
+	for (i = 0; sdata[i] != '\0'; i++) {
+		if ((sdata[i] == 0x7f) || (sdata[i] < 0x20)) {
+			lu_error_new(error, lu_error_name_bad,
+				     _("name contains control characters"));
+			return FALSE;
+		}
+	}
+	for (i = 0; sdata[i] != '\0'; i++) {
+		if (g_ascii_isspace(sdata[i])) {
+			lu_error_new(error, lu_error_name_bad,
+				     _("name contains whitespace"));
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
 static long
 extract_id(struct lu_ent *ent)
 {
@@ -321,7 +362,9 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case user_add_prep:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		if (module->user_add_prep(module, entity, error)) {
+		if (lu_name_allowed(entity, error) == FALSE) {
+			return FALSE;
+		} else if (module->user_add_prep(module, entity, error)) {
 			lu_ent_add_module(entity, module->name);
 			return TRUE;
 		}
@@ -420,7 +463,9 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case group_add_prep:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		if (module->group_add_prep(module, entity, error)) {
+		if (lu_name_allowed(entity, error) == FALSE) {
+			return FALSE;
+		} else if (module->group_add_prep(module, entity, error)) {
 			lu_ent_add_module(entity, module->name);
 			return TRUE;
 		}
