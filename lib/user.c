@@ -1231,7 +1231,7 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 	LU_ERROR_CHECK(error);
 
 	g_return_val_if_fail(ent != NULL, FALSE);
-	g_return_val_if_fail(ent->type == lu_group, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
 
 	if (is_crypted) {
 		tmp = g_strconcat(LU_CRYPTED, password, NULL);
