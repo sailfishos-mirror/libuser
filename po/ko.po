@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2002-01-22 20:27-0500\n"
-"PO-Revision-Date: 2002-01-20 21:14+0900\n"
+"PO-Revision-Date: 2002-01-24 16:43+0900\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
 "MIME-Version: 1.0\n"
@@ -532,13 +532,12 @@ msgid "could not bind to LDAP server"
 msgstr "LDAP 서버와 연결할 수 없습니다"
 
 #: modules/ldap.c:325
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "LDAP 서버와 연결할 수 없습니다"
+msgstr "LDAP 서버를 찾을 수 없습니다"
 
 #: modules/ldap.c:334
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "root DSE(DSA-specific Entry)가 없는 LDAP 서버인 것 같습니다"
 
 #: modules/ldap.c:495 modules/ldap.c:1028 modules/ldap.c:1157
 #: modules/ldap.c:1224 modules/ldap.c:1341 modules/ldap.c:1439
@@ -675,6 +674,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "`%2$s' (을)를 사용한 '%1$s' 속성을 찾을 수 없습니다"
