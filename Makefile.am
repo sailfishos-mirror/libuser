@@ -11,15 +11,14 @@ scan:
 	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)
 
 force-tag:
-	cvs tag -cFR $(CVSTAG) .
+	cd $(top_srcdir); cvs tag -cFR $(CVSTAG) .
 
 tag:
-	./autogen.sh
-	cvs tag -cR $(CVSTAG) .
+	cd $(top_srcdir); cvs tag -cR $(CVSTAG) .
 
 archive:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
-	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
+	CVSROOT=`cat $(top_srcdir)CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl --without-ldap; make dist
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
