@@ -365,9 +365,9 @@ msgid "Error setting password for user %s: %s.\n"
 msgstr "Gat ekki sett lykilorð notanda %s: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "villa við að setja lykilorð fyrir `%s'"
+msgstr "villa við að setja lykilorð fyrir hópinn %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
@@ -873,9 +873,8 @@ msgid "error moving home directory for user"
 msgstr "Ekkert gamalt heimasvæði til fyrir notandann %s.\n"
 
 #: python/admin.c:656
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "Villa við að búa til pósthólf.\n"
+msgstr "villa við að búa til pósthólf notandans"
 
 #: samples/lookup.c:64
 #, c-format
