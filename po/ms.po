@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-07-23 15:48+0800\n"
+"PO-Revision-Date: 2004-08-06 16:23+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -49,42 +49,37 @@ msgstr "Pengesahan gagal untuk %s.\n"
 
 #: apps/apputil.c:464
 #, c-format
-#, fuzzy
 msgid "Internal PAM error `%s'.\n"
-msgstr "ralat s"
+msgstr "Ralat dalaman PAM `%s'.\n"
 
 #: apps/apputil.c:470
-#, fuzzy
 msgid "User mismatch.\n"
-msgstr "Pengguna"
+msgstr "Pengguna tidak sepadan.\n"
 
 #: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[PILIHAN...] pengguna"
 
 #: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
 #: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
-#, fuzzy
 msgid "Error parsing arguments: %s.\n"
-msgstr "Ralat s"
+msgstr "Ralat hujah penelitian: %s.\n"
 
 #: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
-#, fuzzy
 msgid "No user name specified.\n"
-msgstr "Tidak pengguna unama"
+msgstr "Tiada nama pengguna dinyatakan.\n"
 
 #: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
 #: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
-#, fuzzy
 msgid "Error initializing %s: %s.\n"
-msgstr "Ralat s s"
+msgstr "Ralat memulakan %s: %s.\n"
 
 #: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
 #: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
@@ -97,24 +92,22 @@ msgstr "Ralat s s"
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
 #: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
 #: samples/lookup.c:65
-#, fuzzy
 msgid "unknown error"
-msgstr "tidak diketahui"
+msgstr "ralat tidak diketahui"
 
 #: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
-#, fuzzy
 msgid "User %s does not exist.\n"
-msgstr "Pengguna s"
+msgstr "Pengguna %s tidak wujud.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "Akaun dikunci.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "Akaun tidak dikunci.\n"
 
 #: apps/lchage.c:179
 #, c-format
