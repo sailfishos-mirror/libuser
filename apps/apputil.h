@@ -22,7 +22,7 @@
 #define apputil_h
 
 #include <sys/types.h>
-#include "../include/libuser/user.h"
+#include "../lib/user.h"
 
 #define INVALID (-0x80000000)
 #define _(String) gettext(String)
