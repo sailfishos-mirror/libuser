@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-05-13 01:24+0200\n"
+"PO-Revision-Date: 2002-07-19 16:41+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: apps/apputil.c:71
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Fel vid läsning av \"%s\": %s"
+msgstr "Fel vid lÃ¤sning av \"%s\": %s"
 
 #: apps/apputil.c:79
 #, c-format
@@ -31,7 +31,7 @@ msgstr "Fel vid borttagning av \"%s\": %s"
 
 #: apps/apputil.c:411 apps/apputil.c:415
 msgid "Failed to drop privileges.\n"
-msgstr "Misslyckades med att släppa rättigheter.\n"
+msgstr "Misslyckades med att slÃ¤ppa rÃ¤ttigheter.\n"
 
 #: apps/apputil.c:424
 msgid "Internal error.\n"
@@ -44,7 +44,7 @@ msgstr "Fel vid initiering av PAM.\n"
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Autentisering misslyckades för %s.\n"
+msgstr "Autentisering misslyckades fÃ¶r %s.\n"
 
 #: apps/apputil.c:454
 #, c-format
@@ -53,11 +53,11 @@ msgstr "Internt PAM-fel \"%s\".\n"
 
 #: apps/apputil.c:460
 msgid "User mismatch.\n"
-msgstr "Matchning av användare misslyckades.\n"
+msgstr "Matchning av anvÃ¤ndare misslyckades.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr "[FLAGGA...] användare"
+msgstr "[FLAGGA...] anvÃ¤ndare"
 
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
@@ -69,7 +69,7 @@ msgstr "Fel vid tolkning av argument: %s.\n"
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr "Inget användarnamn angivet.\n"
+msgstr "Inget anvÃ¤ndarnamn angivet.\n"
 
 #: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
@@ -86,20 +86,20 @@ msgstr "Fel vid initiering av %s: %s.\n"
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
 #: apps/lusermod.c:315 lib/error.c:85
 msgid "unknown error"
-msgstr "okänt fel"
+msgstr "okÃ¤nt fel"
 
 #: apps/lchage.c:164 apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "Användaren %s finns inte.\n"
+msgstr "AnvÃ¤ndaren %s finns inte.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr "Kontot är låst.\n"
+msgstr "Kontot Ã¤r lÃ¥st.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr "Kontot är inte låst.\n"
+msgstr "Kontot Ã¤r inte lÃ¥st.\n"
 
 #: apps/lchage.c:179
 #, c-format
@@ -109,7 +109,7 @@ msgstr "Kortaste:\t%d\n"
 #: apps/lchage.c:184
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "Längsta:\t%d\n"
+msgstr "LÃ¤ngsta:\t%d\n"
 
 #: apps/lchage.c:189
 #, c-format
@@ -128,27 +128,27 @@ msgstr "Aldrig"
 #: apps/lchage.c:201
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "Senaste ändring:\t%s\n"
+msgstr "Senaste Ã¤ndring:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Lösenordet går ut:\t%s\n"
+msgstr "LÃ¶senordet gÃ¥r ut:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "Lösenordet inaktivt:\t%s\n"
+msgstr "LÃ¶senordet inaktivt:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Kontot går ut:\t%s\n"
+msgstr "Kontot gÃ¥r ut:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "Misslyckades med att ändra åldringsinformation för %s.\n"
+msgstr "Misslyckades med att Ã¤ndra Ã¥ldringsinformation fÃ¶r %s.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -156,7 +156,7 @@ msgstr "[FLAGGA...] grupp"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "Inget gruppnamn är angivet.\n"
+msgstr "Inget gruppnamn Ã¤r angivet.\n"
 
 #: apps/lgroupadd.c:92
 #, c-format
@@ -179,27 +179,27 @@ msgstr "Gruppen %s kunde inte tas bort.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr "Både -L och -U är angivna.\n"
+msgstr "BÃ¥de -L och -U Ã¤r angivna.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "Misslyckades med att ställa in grupp för %s.\n"
+msgstr "Misslyckades med att stÃ¤lla in grupp fÃ¶r %s.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr "Gruppen %s kunde inte låsas.\n"
+msgstr "Gruppen %s kunde inte lÃ¥sas.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "Gruppen %s kunde inte låsas upp.\n"
+msgstr "Gruppen %s kunde inte lÃ¥sas upp.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "Gruppen %s kunde inte ändras.\n"
+msgstr "Gruppen %s kunde inte Ã¤ndras.\n"
 
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
@@ -223,7 +223,7 @@ msgstr "Fel vid skapande av e-postspool.\n"
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "Användaren %s kunde inte tas bort: %s.\n"
+msgstr "AnvÃ¤ndaren %s kunde inte tas bort: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
@@ -258,37 +258,37 @@ msgstr "Fel vid borttagning av %s: %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Misslyckades med att ställa in lösenordet för användaren %s: %s.\n"
+msgstr "Misslyckades med att stÃ¤lla in lÃ¶senordet fÃ¶r anvÃ¤ndaren %s: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Användaren %s kunde inte låsas: %s.\n"
+msgstr "AnvÃ¤ndaren %s kunde inte lÃ¥sas: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Användaren %s kunde inte låsas upp: %s.\n"
+msgstr "AnvÃ¤ndaren %s kunde inte lÃ¥sas upp: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Användaren %s kunde inte ändras: %s.\n"
+msgstr "AnvÃ¤ndaren %s kunde inte Ã¤ndras: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Gruppen %s kunde inte ändras: %s.\n"
+msgstr "Gruppen %s kunde inte Ã¤ndras: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "Ingen gammal hemkatalog för %s.\n"
+msgstr "Ingen gammal hemkatalog fÃ¶r %s.\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "Ingen ny hemkatalog för %s.\n"
+msgstr "Ingen ny hemkatalog fÃ¶r %s.\n"
 
 #: apps/lusermod.c:313
 #, c-format
@@ -298,7 +298,7 @@ msgstr "Fel vid flytt av %s till %s: %s.\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "kunde inte öppna konfigurationsfilen \"%s\": %s"
+msgstr "kunde inte Ã¶ppna konfigurationsfilen \"%s\": %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -310,31 +310,31 @@ msgstr "modulen inaktiverad i konfiguration"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr "allmänt fel"
+msgstr "allmÃ¤nt fel"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr "inte tillräckligt med rättigheter"
+msgstr "inte tillrÃ¤ckligt med rÃ¤ttigheter"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr "åtkomst nekas"
+msgstr "Ã¥tkomst nekas"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr "felaktigt användar-/gruppnamn"
+msgstr "felaktigt anvÃ¤ndar-/gruppnamn"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr "felaktigt användar-/gruppid"
+msgstr "felaktigt anvÃ¤ndar-/gruppid"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "användar-/gruppnamnet är upptaget"
+msgstr "anvÃ¤ndar-/gruppnamnet Ã¤r upptaget"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "användar-/gruppid är upptaget"
+msgstr "anvÃ¤ndar-/gruppid Ã¤r upptaget"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
@@ -342,19 +342,19 @@ msgstr "fel vid manipulering av terminalattribut"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr "fel vid öppning av fil"
+msgstr "fel vid Ã¶ppning av fil"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr "fel vid låsning av fil"
+msgstr "fel vid lÃ¥sning av fil"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr "fel vid tagning av status på fil"
+msgstr "fel vid tagning av status pÃ¥ fil"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr "fel vid läsning av fil"
+msgstr "fel vid lÃ¤sning av fil"
 
 #: lib/error.c:70
 msgid "error writing to file"
@@ -370,7 +370,7 @@ msgstr "internt initieringsfel"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr "fel vid inläsning av modul"
+msgstr "fel vid inlÃ¤sning av modul"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
@@ -378,7 +378,7 @@ msgstr "fel vid uppslagning av symbol i modul"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "biblioteks-/modulversion stämmer inte överens"
+msgstr "biblioteks-/modulversion stÃ¤mmer inte Ã¶verens"
 
 #: lib/modules.c:112
 #, c-format
@@ -388,24 +388,24 @@ msgstr "ingen initieringsfunktion %s i \"%s\""
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "modulversion stämmer inte överens i \"%s\""
+msgstr "modulversion stÃ¤mmer inte Ã¶verens i \"%s\""
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr "fel vid läsning av terminalattribut"
+msgstr "fel vid lÃ¤sning av terminalattribut"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr "fel vid inställning av terminalattribut"
+msgstr "fel vid instÃ¤llning av terminalattribut"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr "fel vid läsning från terminal"
+msgstr "fel vid lÃ¤sning frÃ¥n terminal"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr "fel vid låsning av fil: %s"
+msgstr "fel vid lÃ¥sning av fil: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -416,13 +416,13 @@ msgstr "fel vid låsning av fil: %s"
 #: modules/files.c:2545 modules/files.c:2562
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "kunde inte öppna \"%s\": %s"
+msgstr "kunde inte Ã¶ppna \"%s\": %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "kunde inte ta status på \"%s\": %s"
+msgstr "kunde inte ta status pÃ¥ \"%s\": %s"
 
 #: modules/files.c:137
 #, c-format
@@ -432,12 +432,12 @@ msgstr "fel vid skapande av \"%s\": %s"
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "säkerhetskopian \"%s\" finns och är inte en vanlig fil"
+msgstr "sÃ¤kerhetskopian \"%s\" finns och Ã¤r inte en vanlig fil"
 
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "kunde inte läsa från \"%s\": %s"
+msgstr "kunde inte lÃ¤sa frÃ¥n \"%s\": %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
@@ -457,17 +457,17 @@ msgstr "enhetsobjektet har inget %s-attribut"
 
 #: modules/files.c:2794 modules/files.c:2864
 msgid "not executing with superuser privileges"
-msgstr "kör inte med superanvändarrättigheter"
+msgstr "kÃ¶r inte med superanvÃ¤ndarrÃ¤ttigheter"
 
 #: modules/files.c:2877
 msgid "no shadow file present -- disabling"
-msgstr "ingen shadow-fil finns tillgänglig -- inaktiverar"
+msgstr "ingen shadow-fil finns tillgÃ¤nglig -- inaktiverar"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"fel vid anslutning till kadm5-servern för tjänsten \"%s\" i realm \"%s\": %s"
+"fel vid anslutning till kadm5-servern fÃ¶r tjÃ¤nsten \"%s\" i realm \"%s\": %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -478,7 +478,7 @@ msgstr "fel vid initiering av kerberos-biblioteket"
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "fel vid tolkning av användarnamnet \"%s\" för kerberos"
+msgstr "fel vid tolkning av anvÃ¤ndarnamnet \"%s\" fÃ¶r kerberos"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
@@ -498,7 +498,7 @@ msgstr "enheten skapades utan %s- eller %s-attribut"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "fel vid läsning av information för \"%s\" från kerberos"
+msgstr "fel vid lÃ¤sning av information fÃ¶r \"%s\" frÃ¥n kerberos"
 
 #: modules/krb5.c:604
 #, c-format
@@ -508,7 +508,7 @@ msgstr "enheten har inget %s-attribut"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "fel vid inställning av lösenord för \"%s\""
+msgstr "fel vid instÃ¤llning av lÃ¶senord fÃ¶r \"%s\""
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -520,7 +520,7 @@ msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberos-lösenord för Admin Principal"
+msgstr "Kerberos-lÃ¶senord fÃ¶r Admin Principal"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
@@ -529,11 +529,11 @@ msgstr "fel vid initiering av ldap-biblioteket"
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "kunde inte ställa LDAP-protokoll till version %d"
+msgstr "kunde inte stÃ¤lla LDAP-protokoll till version %d"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr "kunde inte förhandla om TLS med LDAP-servern"
+msgstr "kunde inte fÃ¶rhandla om TLS med LDAP-servern"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
@@ -541,11 +541,11 @@ msgstr "kunde inte binda till LDAP-servern"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr "kunde inte söka LDAP-servern"
+msgstr "kunde inte sÃ¶ka LDAP-servern"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP-servern verkar inte ha någon rot-DSE"
+msgstr "LDAP-servern verkar inte ha nÃ¥gon rot-DSE"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1530 modules/ldap.c:1624
@@ -559,12 +559,12 @@ msgstr "fel vid mappande av namn till \"base distinguished name\" i LDAP"
 #: modules/ldap.c:1212
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "användarobjektet hade inget %s-attribut"
+msgstr "anvÃ¤ndarobjektet hade inget %s-attribut"
 
 #: modules/ldap.c:1221
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "användarobjektet skapades utan \"%s\""
+msgstr "anvÃ¤ndarobjektet skapades utan \"%s\""
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
@@ -573,12 +573,12 @@ msgstr "kunde inte konvertera intern data till LDAPMods"
 #: modules/ldap.c:1271 modules/ldap.c:1482
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "fel vid ändring av LDAP-katalogpost: %s"
+msgstr "fel vid Ã¤ndring av LDAP-katalogpost: %s"
 
 #: modules/ldap.c:1291
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr "fel vid byte av namn på LDAP-katalogpost: %s\n"
+msgstr "fel vid byte av namn pÃ¥ LDAP-katalogpost: %s\n"
 
 #: modules/ldap.c:1339
 #, c-format
@@ -598,7 +598,7 @@ msgstr "objektet har inget %s-attribut"
 
 #: modules/ldap.c:1545
 msgid "no such object in LDAP directory"
-msgstr "det finns inget sådant objekt i LDAP-katalogen"
+msgstr "det finns inget sÃ¥dant objekt i LDAP-katalogen"
 
 #: modules/ldap.c:1558
 #, c-format
@@ -608,15 +608,15 @@ msgstr "inget \"%s\"-attribut hittades"
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "fel vid inställning av lösenord i LDAP-katalogen för %s: %s"
+msgstr "fel vid instÃ¤llning av lÃ¶senord i LDAP-katalogen fÃ¶r %s: %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
-msgstr "Namn på LDAP-server"
+msgstr "Namn pÃ¥ LDAP-server"
 
 #: modules/ldap.c:2247
 msgid "LDAP Search Base DN"
-msgstr "Bassök-DN för LDAP"
+msgstr "BassÃ¶k-DN fÃ¶r LDAP"
 
 #: modules/ldap.c:2253
 msgid "LDAP Bind DN"
@@ -624,15 +624,15 @@ msgstr "LDAP Bind-DN"
 
 #: modules/ldap.c:2260
 msgid "LDAP Bind Password"
-msgstr "LDAP Bind-lösenord"
+msgstr "LDAP Bind-lÃ¶senord"
 
 #: modules/ldap.c:2266
 msgid "LDAP SASL User"
-msgstr "LDAP SASL-användare"
+msgstr "LDAP SASL-anvÃ¤ndare"
 
 #: modules/ldap.c:2273
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL-auktoriseringsanvändare"
+msgstr "LDAP SASL-auktoriseringsanvÃ¤ndare"
 
 #: samples/lookup.c:64
 #, c-format
@@ -642,22 +642,22 @@ msgstr "Fel vid initiering av %s: %s\n"
 #: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "Söker efter grupp med ID %d.\n"
+msgstr "SÃ¶ker efter grupp med ID %d.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Söker efter grupp med namnet %s.\n"
+msgstr "SÃ¶ker efter grupp med namnet %s.\n"
 
 #: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "Söker efter användare med ID %d.\n"
+msgstr "SÃ¶ker efter anvÃ¤ndare med ID %d.\n"
 
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Söker efter användare med namnet %s.\n"
+msgstr "SÃ¶ker efter anvÃ¤ndare med namnet %s.\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
@@ -665,40 +665,40 @@ msgstr "Posten hittades inte.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr "Standardklasser för användarobjekt:\n"
+msgstr "Standardklasser fÃ¶r anvÃ¤ndarobjekt:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "Standardnamn för användarattribut:\n"
+msgstr "Standardnamn fÃ¶r anvÃ¤ndarattribut:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "Hämtar standardattribut för användare:\n"
+msgstr "HÃ¤mtar standardattribut fÃ¶r anvÃ¤ndare:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr "Kopierar användarstruktur:\n"
+msgstr "Kopierar anvÃ¤ndarstruktur:\n"
 
 #~ msgid "error searching LDAP directory"
-#~ msgstr "fel vid sökning i LDAP-katalog"
+#~ msgstr "fel vid sÃ¶kning i LDAP-katalog"
 
 #~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "inget \"%s\"-attribut som använder \"%s\"-schemat hittades"
+#~ msgstr "inget \"%s\"-attribut som anvÃ¤nder \"%s\"-schemat hittades"
 
 #~ msgid "entity object has no `%s' attribute"
 #~ msgstr "enhetsobjektet har inget \"%s\"-attribut"
 
 #~ msgid "Bad UID for %s.\n"
-#~ msgstr "Felaktigt UID för %s.\n"
+#~ msgstr "Felaktigt UID fÃ¶r %s.\n"
 
 #~ msgid "Bad GID for %s.\n"
-#~ msgstr "Felaktigt GID för %s.\n"
+#~ msgstr "Felaktigt GID fÃ¶r %s.\n"
 
 #~ msgid "No home directory for %s.\n"
-#~ msgstr "Ingen hemkatalog för %s.\n"
+#~ msgstr "Ingen hemkatalog fÃ¶r %s.\n"
 
 #~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "Fel vid läsning av gamla hemkatalogen för %s: %s.\n"
+#~ msgstr "Fel vid lÃ¤sning av gamla hemkatalogen fÃ¶r %s: %s.\n"
 
 #~ msgid "dump of struct lu_ent at %p:\n"
 #~ msgstr "dump av struct lu_ent vid %p:\n"
@@ -710,7 +710,7 @@ msgstr "Kopierar användarstruktur:\n"
 #~ msgstr " type = %s\n"
 
 #~ msgid "user"
-#~ msgstr "användare"
+#~ msgstr "anvÃ¤ndare"
 
 #~ msgid "group"
 #~ msgstr "grupp"
@@ -730,7 +730,7 @@ msgstr "Kopierar användarstruktur:\n"
 #~ "Efter kopiering:\n"
 
 #~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "frigör lu_ent vid %p.\n"
+#~ msgstr "frigÃ¶r lu_ent vid %p.\n"
 
 #~ msgid "Group #%d does not exist.\n"
 #~ msgstr "Grupp nummer %d finns inte.\n"
@@ -739,7 +739,7 @@ msgstr "Kopierar användarstruktur:\n"
 #~ msgstr "Fel vid initiering av lu.\n"
 
 #~ msgid "could not determine expected DN"
-#~ msgstr "kunde inte avgöra förväntad DN"
+#~ msgstr "kunde inte avgÃ¶ra fÃ¶rvÃ¤ntad DN"
 
 #~ msgid "could not map name to DN"
 #~ msgstr "kunde inte mappa namn till DN"
