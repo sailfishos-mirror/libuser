@@ -10,9 +10,12 @@ CVSTAG=libuser-$(subst .,-,$(VERSION))-$(subst .,-,$(RELEASE))
 scan:
 	find $(top_srcdir)/include $(top_srcdir)/lib $(top_srcdir)/modules $(top_srcdir)/python $(top_srcdir)/quota -name "*.c" -o -name "*.h" | xargs gtkdoc-scan --module=$(PACKAGE)
 
+force-tag:
+	cvs tag -cFR $(CVSTAG) .
+
 tag:
 	./autogen.sh
-	cvs tag -cFR $(CVSTAG) .
+	cvs tag -cR $(CVSTAG) .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat CVS/Root`; cd /tmp; cvs -d $$CVSROOT export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl --without-ldap; make dist
