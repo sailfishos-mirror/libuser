@@ -45,7 +45,7 @@ CFLAGS="$RPM_OPT_FLAGS -fPIC" ; export CFLAGS
 	--with-ldap \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python} \
-	--with-html-dir=%{_datadir}/gtk-doc/html \
+	--with-html-dir=%{_datadir}/gtk-doc/html
 make
 
 %clean
@@ -65,9 +65,11 @@ popd
 
 %find_lang %{name}
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun
+/sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -95,9 +97,13 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Tue Sep  7 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.11-1
+* Thu Sep 23 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.11-1
 - Allow documented optional arguments in Python
-  ADMIN.{addUser,modifyUser,deleteUser}
+  ADMIN.{addUser,modifyUser,deleteUser} (#119812)
+- Add man pages for lchfn and lchsh
+- LDAP fixes, first round
+- Avoid file conflict on multilib systems
+- Call ldconfig correctly
 
 * Fri Sep  3 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.10-1
 - Don't attempt to lookup using original entity name after entity
