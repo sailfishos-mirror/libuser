@@ -82,9 +82,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -97,8 +96,7 @@ main(int argc, const char **argv)
 
 	if (lu_user_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s could not be deleted: %s.\n"),
-			user,
-			error ? error->string : _("unknown error"));
+			user, lu_strerror(error));
 		return 3;
 	}
 
@@ -135,12 +133,11 @@ main(int argc, const char **argv)
 			value = g_value_array_get_nth(values, 0);
 			tmp = g_value_get_string(value);
 			if (strcmp(tmp, user) == 0) {
-				if (lu_group_delete(ctx, ent, &error) == FALSE){
+				if (lu_group_delete(ctx, ent, &error)
+				    == FALSE){
 					fprintf(stderr, _("Group %s could not "
-						"be deleted: %s.\n"), tmp,
-						error ?
-						error->string :
-						_("unknown error"));
+							  "be deleted: %s.\n"),
+						tmp, lu_strerror(error));
 					return 7;
 				}
 			}
@@ -160,10 +157,7 @@ main(int argc, const char **argv)
 			tmp = g_value_get_string(value);
 			if (lu_homedir_remove(tmp, &error) == FALSE) {
 				fprintf(stderr, _("Error removing %s: %s.\n"),
-					tmp,
-					error ?
-					error->string :
-					_("unknown error"));
+					tmp, lu_strerror(error));
 				return 9;
 			}
 		}

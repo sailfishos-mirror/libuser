@@ -261,6 +261,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		contents = g_malloc(st.st_size);
 		if (lseek(fd, 0, SEEK_SET) == -1) {
 			lu_error_new(error, lu_error_read, NULL);
+			g_free(contents);
 			return NULL;
 		}
 		if (read(fd, contents, st.st_size) != st.st_size) {

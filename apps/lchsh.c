@@ -94,21 +94,15 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE,
-				error ? error->string : _("unknown error"));
-		} else {
-			fprintf(stderr, _("Error initializing %s.\n"),
-				PACKAGE);
-		}
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
 	/* Look up this user's record. */
 	ent = lu_ent_new();
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
-		g_print(_("User %s does not exist.\n"), user);
+		fprintf(stderr, _("User %s does not exist.\n"), user);
 		exit(1);
 	}
 
@@ -149,7 +143,9 @@ main(int argc, const char **argv)
 			if (lu_user_modify(ctx, ent, &error)) {
 				g_print(_("Shell changed.\n"));
 				lu_hup_nscd();
-			}
+			} else
+				fprintf(stderr, _("Shell not changed: %s\n"),
+					lu_strerror(error));
 			g_value_unset(&val);
 		}
 	}

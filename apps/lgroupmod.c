@@ -101,9 +101,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -224,39 +223,44 @@ main(int argc, const char **argv)
 	}
 
 	if (userPassword) {
-		if (lu_group_setpass(ctx, ent, userPassword, FALSE, &error) == FALSE) {
+		if (lu_group_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
-				"%s.\n"), group);
+				"%s: %s\n"), group, lu_strerror(error));
 			return 4;
 		}
 	}
 
 	if (cryptedUserPassword) {
-		if (lu_group_setpass(ctx, ent, cryptedUserPassword, TRUE, &error) == FALSE) {
+		if (lu_group_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				     &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
-				"%s.\n"), group);
+				"%s: %s\n"), group, lu_strerror(error));
 			return 5;
 		}
 	}
 
 	if (lock) {
 		if (lu_group_lock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Group %s could not be locked.\n"),
-				group);
+			fprintf(stderr,
+				_("Group %s could not be locked: %s\n"), group,
+				lu_strerror(error));
 			return 6;
 		}
 	}
 
 	if (unlock) {
 		if (lu_group_unlock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Group %s could not be unlocked.\n"),
-				group);
+			fprintf(stderr,
+				_("Group %s could not be unlocked: %s\n"),
+				group, lu_strerror(error));
 			return 7;
 		}
 	}
 
 	if (change && lu_group_modify(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Group %s could not be modified.\n"), group);
+		fprintf(stderr, _("Group %s could not be modified: %s\n"),
+			group, lu_strerror(error));
 		return 8;
 	}
 	lu_hup_nscd();

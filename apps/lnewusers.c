@@ -85,9 +85,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -128,8 +127,11 @@ main(int argc, const char **argv)
 		    (fields[5] == NULL) ||
 		    (fields[6] == NULL) ||
 		    (fields[7] != NULL)) {
-			g_print(_("Error creating account for `%s': line "
-				"improperly formatted.\n"), buf);
+			fprintf(stderr,
+				_("Error creating account for `%s': line "
+				  "improperly formatted.\n"), buf);
+			g_strfreev(fields);
+			continue;
 		}
 
 		/* Sorry, but we're bastards here.  No root accounts. */
@@ -234,8 +236,10 @@ main(int argc, const char **argv)
 				}
 			} else {
 				/* Aargh!  Abandon all hope. */
-				g_print(_("Error creating group for `%s' with "
-					"GID %ld.\n"), fields[0], gid_tmp);
+				fprintf(stderr,
+					_("Error creating group for `%s' with "
+					  "GID %ld: %s\n"), fields[0], gid_tmp,
+					lu_strerror(error));
 				g_strfreev(fields);
 				continue;
 			}
@@ -284,13 +288,12 @@ main(int argc, const char **argv)
 		/* Now try to add the user's account. */
 		if (lu_user_add(ctx, ent, &error)) {
 			lu_hup_nscd();
-			if (!lu_user_setpass(ctx, ent, fields[1], FALSE, &error)) {
-				g_print(_("Error setting initial password for "
-					"%s: %s\n"),
-					fields[0],
-					error ?
-					error->string :
-					_("unknown error"));
+			if (!lu_user_setpass(ctx, ent, fields[1], FALSE,
+					     &error)) {
+				fprintf(stderr,
+					_("Error setting initial password for "
+					  "%s: %s\n"), fields[0],
+					lu_strerror(error));
 				if (error) {
 					lu_error_free(&error);
 				}
@@ -307,12 +310,10 @@ main(int argc, const char **argv)
 							gid,
 							0700,
 							&error) == FALSE) {
-					g_print(_("Error creating home "
-						"directory for %s: %s\n"),
-						fields[0],
-						error ?
-						error->string :
-						_("unknown error"));
+					fprintf(stderr,
+						_("Error creating home "
+						  "directory for %s: %s\n"),
+						fields[0], lu_strerror(error));
 					if (error) {
 						lu_error_free(&error);
 					}
@@ -321,15 +322,17 @@ main(int argc, const char **argv)
 			/* Unless the nocreatemail flag was given, give the
 			 * user a mail spool. */
 			if (!nocreatemail) {
-				if (!lu_mailspool_create_remove(ctx, ent, TRUE)) {
-					g_print(_("Error creating mail spool for %s.\n"), fields[0]);
-				}
+				if (!lu_mailspool_create_remove(ctx, ent,
+								TRUE))
+					fprintf(stderr,
+						_("Error creating mail spool "
+						  "for %s.\n"), fields[0]);
 
 			}
 		} else {
-			g_print(_("Error creating user account for %s: "
-				"%s\n"), fields[0],
-				error ? error->string : _("unknown error"));
+			fprintf(stderr,
+				_("Error creating user account for %s: %s\n"),
+				fields[0], lu_strerror(error));
 			if (error) {
 				lu_error_free(&error);
 			}

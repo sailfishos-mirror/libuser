@@ -108,9 +108,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -188,11 +187,11 @@ main(int argc, const char **argv)
 
 	/* If the user's password needs to be changed, try to change it. */
 	if (userPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error) == FALSE) {
+		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
-				user,
-				error ? error->string : _("unknown error"));
+				user, lu_strerror(error));
 			return 5;
 		}
 	}
@@ -201,11 +200,11 @@ main(int argc, const char **argv)
 	 * though it might fail if an underlying mechanism doesn't support
 	 * using them. */
 	if (cryptedUserPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE, &error) == FALSE) {
+		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				    &error) == FALSE) {
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
-				user,
-				error ? error->string : _("unknown error"));
+				user, lu_strerror(error));
 			return 6;
 		}
 	}
@@ -215,8 +214,7 @@ main(int argc, const char **argv)
 		if (lu_user_lock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr,
 				_("User %s could not be locked: %s.\n"),
-				user,
-				error ? error->string : _("unknown error"));
+				user, lu_strerror(error));
 			return 7;
 		}
 	}
@@ -224,8 +222,7 @@ main(int argc, const char **argv)
 		if (lu_user_unlock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr,
 				_("User %s could not be unlocked: %s.\n"),
-				user,
-				error ? error->string : _("unknown error"));
+				user, lu_strerror(error));
 			return 8;
 		}
 	}
@@ -233,8 +230,7 @@ main(int argc, const char **argv)
 	/* If we need to change anything about the user, do it. */
 	if (change && (lu_user_modify(ctx, ent, &error) == FALSE)) {
 		fprintf(stderr, _("User %s could not be modified: %s.\n"),
-			user,
-			error ? error->string : _("unknown error"));
+			user, lu_strerror(error));
 		return 9;
 	}
 	lu_hup_nscd();
@@ -285,13 +281,10 @@ main(int argc, const char **argv)
 				}
 			}
 			/* Save the changes to the group. */
-			if (lu_group_modify(ctx, ent, &error) == FALSE) {
+			if (lu_group_modify(ctx, ent, &error) == FALSE)
 				fprintf(stderr, _("Group %s could not be "
-					"modified: %s.\n"), groupname,
-					error ?
-					error->string :
-					_("unknown error"));
-			}
+						  "modified: %s.\n"),
+					groupname, lu_strerror(error));
 		}
 		lu_hup_nscd();
 	}
@@ -312,7 +305,7 @@ main(int argc, const char **argv)
 				    &error) == FALSE) {
 			fprintf(stderr, _("Error moving %s to %s: %s.\n"),
 				oldHomeDirectory, homeDirectory,
-				error ? error->string : _("unknown error"));
+				lu_strerror(error));
 			return 12;
 		}
 	}

@@ -337,8 +337,7 @@ libuser_admin_do_wrap(PyObject *self, struct libuser_entity *ent,
 		return Py_BuildValue("i", 1);
 	} else {
 		/* It failed.  Build an exception and return an error. */
-		PyErr_SetString(PyExc_RuntimeError,
-				error ? error->string : _("unknown error"));
+		PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
 		if (error)
 			lu_error_free(&error);
 		DEBUG_EXIT;
@@ -426,9 +425,7 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 		return Py_BuildValue("i", 1);
 	} else {
 		/* The change failed.  Return an error. */
-		PyErr_SetString(PyExc_SystemError,
-				error ? error->
-				string : _("unknown error"));
+		PyErr_SetString(PyExc_SystemError, lu_strerror(error));
 		if (error) {
 			lu_error_free(&error);
 		}

@@ -57,18 +57,18 @@ main(int argc, char **argv)
 	    && !lu_homedir_populate("/etc/skel", argv[optind], 500, 500,
 				    0700, &error)) {
 		fprintf(stderr, "populate_homedir(%s) failed: %s\n",
-			argv[optind], error->string);
+			argv[optind], lu_strerror(error));
 		return 1;
 	}
 	if (mod
 	    && !lu_homedir_move(argv[optind], argv[optind + 1], &error)) {
 		fprintf(stderr, "move_homedir(%s, %s) failed: %s\n",
-			argv[optind], argv[optind + 1], error->string);
+			argv[optind], argv[optind + 1], lu_strerror(error));
 		return 1;
 	}
 	if (rem && !lu_homedir_remove(argv[optind], &error)) {
 		fprintf(stderr, "remove_homedir(%s) failed: %s\n",
-			argv[optind], error->string);
+			argv[optind], lu_strerror(error));
 		return 1;
 	}
 

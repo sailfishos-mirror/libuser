@@ -1,3 +1,64 @@
+2004-11-01  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (bind_server): Don't attempt to bind using NULL bind
+	DN.
+
+	* modules/ldap.c (bind_server): Report at least the first encountered
+	bind error.
+
+2004-10-30  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lnewusers.c (main)
+	* samples/enum.c (main)
+	* samples/testuser.c (main): Output error messages on stderr.
+	
+	* apps/lchfn.c (main): Exit if specified user does not exist.
+
+	* apps/lnewusers.c (main): Don't attempt to act on improperly formatted
+	lines.
+
+	* po/POTFILES.in: Add missing files.
+
+	* modules/ldap.c (lu_ldap_set, lu_ldap_del): Remove superfluous '\n'
+	and '.\n' at message ends.
+
+	* apps/lgroupadd.c (main)
+	* apps/lgroupdel.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lchage.c (main)
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lid.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main)
+	* apps/lusermod.c (main)
+	* python/admin.c (libuser_admin_do_wrap, libuser_admin_setpass):
+	* samples/enum.c (main): 
+	* samples/homedir.c (main): 
+	* samples/lookup.c (main): 
+	* samples/testuser.c (main): Use lu_strerror () instead of
+	(error ? error->string : _("unknown error")).  Report error cause in
+	more error messages.
+
+	* apps/lchsh.c (main): Report error if shell was not changed.
+
+	* modules/ldap.c (lu_ldap_set, lu_ldap_handle_lock) 
+	(lu_ldap_setpass)
+	* modules/files.c (set_default_context, reset_default_context) 
+	(generic_setpass)
+	* lib/config.c (lu_cfg_init)
+	* apps/apputil.c (lu_authenticate_unprivileged): Mark strings for
+	translation.
+
+	* lib/util.c (lu_util_line_get_matchingx): Fix memory leak.
+
+2004-10-14  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/error.h (LU_ERROR_CHECK): Add missing '\n'.
+
 2004-10-11  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.5.

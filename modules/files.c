@@ -105,25 +105,23 @@ set_default_context(const char *filename, security_context_t *prev_context,
 		security_context_t scontext;
 
 		if (getfilecon(filename, &scontext) < 0) {
-			/* FIXME: STRING_FREEZE */
-			lu_error_new(error, lu_error_stat, "couldn't get "
-				     "security context of `%s': %s", filename,
-				     strerror(errno));
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't get security context of "
+				       "`%s': %s"), filename, strerror(errno));
 			return FALSE;
 		}
 		if (getfscreatecon(prev_context) < 0) {
-			/* FIXME: STRING_FREEZE */
-			lu_error_new(error, lu_error_stat, "couldn't set "
-				     "default security context: %s",
-				     strerror(errno));
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't set default security "
+				       "context: %s"), strerror(errno));
 			freecon(scontext);
 			return FALSE;
 		}
 		if (setfscreatecon(scontext) < 0) {
-			/* FIXME: STRING_FREEZE */
-			lu_error_new(error, lu_error_stat, "couldn't set "
-				     "default security context to `%s': %s",
-				     scontext, strerror(errno));
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't set default security context "
+				       "to `%s': %s"), scontext,
+				     strerror(errno));
 			freecon(scontext);
 			return FALSE;
 		}
@@ -140,10 +138,9 @@ reset_default_context(security_context_t prev_context, struct lu_error **error)
 	(void)error;
 #ifdef WITH_SELINUX
 	if (setfscreatecon(prev_context) < 0)
-		/* FIXME: STRING_FREEZE */
 		lu_error_new(error, lu_error_stat,
-			     "couldn't reset default security context to "
-			     "`%s': %s", prev_context, strerror(errno));
+			     _("couldn't reset default security context to "
+			       "`%s': %s"), prev_context, strerror(errno));
 	if (prev_context) {
 		freecon(prev_context);
 	}
@@ -1900,9 +1897,8 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		password = lu_make_crypted(password,
 					   lu_common_default_salt_specifier(module));
 		if (password == NULL) {
-			/* FIXME: STRING_FREEZE */
 			lu_error_new(error, lu_error_generic,
-				     "error encrypting password");
+				     _("error encrypting password"));
 			goto err_value;
 		}
 	}

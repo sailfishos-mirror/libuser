@@ -84,14 +84,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE,
-				error ? error->string : _("unknown error"));
-		} else {
-			fprintf(stderr, _("Error initializing %s.\n"),
-				PACKAGE);
-		}
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -113,7 +107,8 @@ main(int argc, const char **argv)
 
 	/* Try to create the group. */
 	if (lu_group_add(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Group creation failed.\n"));
+		fprintf(stderr, _("Group creation failed: %s\n"),
+			lu_strerror(error));
 		return 2;
 	}
 

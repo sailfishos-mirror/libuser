@@ -502,20 +502,19 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 			if (getprevcon(&user_context) < 0)
 				user_context = NULL;
 			/* FIXME: "change the finger info?" */
-			/* FIXME: STRING_FREEZE */
-			fprintf(stderr, "%s is not authorized to change the "
-				"finger info of %s\n",
-				user_context ? user_context
-				: "Unknown user context", user);
+			fprintf(stderr,
+				_("%s is not authorized to change the finger "
+				  "info of %s\n"), user_context ? user_context
+				: _("Unknown user context"), user);
 			if (user_context != NULL)
 				freecon(user_context);
 			exit(1);
 		}
 		/* FIXME: is this right for lpasswd? */
 		if (setup_default_context("/etc/passwd") != 0) {
-			/* FIXME: STRING_FREEZE */
 			fprintf(stderr,
-				"Can't set default context for /etc/passwd\n");
+				_("Can't set default context for "
+				  "/etc/passwd\n"));
 			exit(1);
 		}
 	}

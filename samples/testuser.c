@@ -69,8 +69,8 @@ main(void)
 	    lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL, &error);
 
 	if (ctx == NULL) {
-		g_print(gettext("Error initializing %s: %s.\n"), PACKAGE,
-			error->string);
+		fprintf(stderr, gettext("Error initializing %s: %s.\n"),
+			PACKAGE, lu_strerror(error));
 		exit(1);
 	}
 

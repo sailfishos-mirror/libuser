@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-10-10 23:37+0200\n"
+"POT-Creation-Date: 2004-11-01 11:20+0100\n"
 "PO-Revision-Date: 2004-05-01 04:14+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -42,22 +42,37 @@ msgstr "فشل في اسقاط الصلاحيات.\n"
 msgid "Internal error.\n"
 msgstr "خطأ داخلي.\n"
 
-#: apps/apputil.c:526
+#: apps/apputil.c:506
+#, c-format
+msgid "%s is not authorized to change the finger info of %s\n"
+msgstr ""
+
+#: apps/apputil.c:508
+#, fuzzy
+msgid "Unknown user context"
+msgstr "خطأ مجهول"
+
+#: apps/apputil.c:516
+#, c-format
+msgid "Can't set default context for /etc/passwd\n"
+msgstr ""
+
+#: apps/apputil.c:525
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "خطأ في ابتداء PAM. \n"
 
-#: apps/apputil.c:534 apps/apputil.c:558
+#: apps/apputil.c:533 apps/apputil.c:557
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "فشل في توثيق %s. \n"
 
-#: apps/apputil.c:543
+#: apps/apputil.c:542
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "خطأ داخلي في PAM ´%s´. \n"
 
-#: apps/apputil.c:549
+#: apps/apputil.c:548
 #, c-format
 msgid "User mismatch.\n"
 msgstr "عدم تطابق المستخدم.\n"
@@ -80,91 +95,77 @@ msgstr "خطأ في إعراب المُعطيات: %s. \n"
 msgid "No user name specified.\n"
 msgstr "لم يتم إدخال اسم للمستخدم.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lchage.c:156 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:87
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
 #: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:72
+#: apps/lusermod.c:111 samples/enum.c:64 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "خطأ في ابتداء ´%s´. %s. \n"
 
-#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
-#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
-#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:279
-#: apps/luseradd.c:322 apps/luserdel.c:87 apps/luserdel.c:101
-#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
-#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
-#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
-#: samples/lookup.c:65
-msgid "unknown error"
-msgstr "خطأ مجهول"
-
-#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
-#: apps/luserdel.c:94 apps/lusermod.c:126
+#: apps/lchage.c:165 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
+#: apps/luserdel.c:93 apps/lusermod.c:125
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "لا وجود للمستخدم %s. \n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:173
 #, c-format
 msgid "Account is locked.\n"
 msgstr "الحساب مقفل.\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:175
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "الحساب غير مقفل.\n"
 
-#: apps/lchage.c:181
+#: apps/lchage.c:180
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "الحد الأدنى: \t%d \n"
 
-#: apps/lchage.c:186
+#: apps/lchage.c:185
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "الحد الأقصى: \t%d\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:190
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "تحذير: \t%d\n"
 
-#: apps/lchage.c:196
+#: apps/lchage.c:195
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "غير فعّال:\t%d \n"
 
-#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
+#: apps/lchage.c:200 apps/lchage.c:208 apps/lchage.c:219 apps/lchage.c:229
 msgid "Never"
 msgstr "أبداً"
 
-#: apps/lchage.c:203
+#: apps/lchage.c:202
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "آخر تغيير: \t%s \n"
 
-#: apps/lchage.c:213
+#: apps/lchage.c:212
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "تنتهي صلاحية كلمة السر في: \t%s\n"
 
-#: apps/lchage.c:225
+#: apps/lchage.c:224
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "كلمة السر غير فعالة: \t%s\n"
 
-#: apps/lchage.c:232
+#: apps/lchage.c:231
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "تنتهي صلاحية الحساب في: \t%s\n"
 
 #: apps/lchage.c:279
-#, c-format
-msgid "Failed to modify aging information for %s.\n"
+#, fuzzy, c-format
+msgid "Failed to modify aging information for %s: %s\n"
 msgstr "فشل في تعديل البيانات لـ %s. \n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
@@ -181,48 +182,44 @@ msgstr "لم يتم تحديد اسم مستخدم، لا يوجد اسم لرق
 msgid "Changing finger information for %s.\n"
 msgstr "جاري تغيير معلومات finger للمستخدم %s.\n"
 
-#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
-#, c-format
-msgid "Error initializing %s.\n"
-msgstr "خطأ في ابتداء %s.\n"
-
-#: apps/lchfn.c:161
+#: apps/lchfn.c:156
 msgid "Full Name"
 msgstr "الاسم الكامل"
 
-#: apps/lchfn.c:182
+#: apps/lchfn.c:177
 msgid "Surname"
 msgstr "اسم الأب"
 
-#: apps/lchfn.c:204
+#: apps/lchfn.c:199
 msgid "Given Name"
 msgstr "الاسم المُعطى"
 
-#: apps/lchfn.c:214
+#: apps/lchfn.c:209
 msgid "Office"
 msgstr "المكتب"
 
-#: apps/lchfn.c:223
+#: apps/lchfn.c:218
 msgid "Office Phone"
 msgstr "هاتف المكتب"
 
-#: apps/lchfn.c:232
+#: apps/lchfn.c:227
 msgid "Home Phone"
 msgstr "هاتف المنزل"
 
-#: apps/lchfn.c:253
+#: apps/lchfn.c:248
 msgid "E-Mail Address"
 msgstr "عنوان البريد الإلكتروني"
 
-#: apps/lchfn.c:265
+#: apps/lchfn.c:261
+#, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "لم يتمّ تغيير معلومات finger:  خطأ إدخال.\n"
 
-#: apps/lchfn.c:370
+#: apps/lchfn.c:366
 msgid "Finger information changed.\n"
 msgstr "تمّ تغيير معلومات finger.\n"
 
-#: apps/lchfn.c:373
+#: apps/lchfn.c:369
 #, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "معلومات finger لم تتغيّر: %s\n"
@@ -232,12 +229,17 @@ msgstr "معلومات finger لم تتغيّر: %s\n"
 msgid "Changing shell for %s.\n"
 msgstr "جاري تغيير الصّدفة للمستخدم %s.\n"
 
-#: apps/lchsh.c:122
+#: apps/lchsh.c:116
 msgid "New Shell"
 msgstr "صَدَفة جديدة"
 
-#: apps/lchsh.c:150
+#: apps/lchsh.c:144
 msgid "Shell changed.\n"
+msgstr "تم تغيير الصَّدَفة. \n"
+
+#: apps/lchsh.c:147
+#, fuzzy, c-format
+msgid "Shell not changed: %s\n"
 msgstr "تم تغيير الصَّدَفة. \n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
@@ -249,45 +251,45 @@ msgstr "[OPTION...] group"
 msgid "No group name specified.\n"
 msgstr "لم يتم تحديد اسم للمجموعة.\n"
 
-#: apps/lgroupadd.c:116
-#, c-format
-msgid "Group creation failed.\n"
+#: apps/lgroupadd.c:110
+#, fuzzy, c-format
+msgid "Group creation failed: %s\n"
 msgstr "فشل في إنشاء المجموعة.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
+#: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "المجموعة %s غير موجودة.\n"
 
-#: apps/lgroupdel.c:94
-#, c-format
-msgid "Group %s could not be deleted.\n"
-msgstr "لم يمكن حذف المجموعة %s.\n"
+#: apps/lgroupdel.c:93
+#, fuzzy, c-format
+msgid "Group %s could not be deleted: %s\n"
+msgstr "لم يمكن حذف المجموعة %s: %s.\n"
 
-#: apps/lgroupmod.c:111 apps/lusermod.c:119
+#: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "تم تحديد كل من -L و -B \n"
 
-#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
-#, c-format
-msgid "Failed to set password for group %s.\n"
+#: apps/lgroupmod.c:228 apps/lgroupmod.c:237
+#, fuzzy, c-format
+msgid "Failed to set password for group %s: %s\n"
 msgstr "فشل في وضع كلمة السر للمجموعة %s.\n"
 
-#: apps/lgroupmod.c:244
-#, c-format
-msgid "Group %s could not be locked.\n"
+#: apps/lgroupmod.c:246
+#, fuzzy, c-format
+msgid "Group %s could not be locked: %s\n"
 msgstr "لم يمكن قَفْل المجموعة %s.\n"
 
-#: apps/lgroupmod.c:252
-#, c-format
-msgid "Group %s could not be unlocked.\n"
+#: apps/lgroupmod.c:255
+#, fuzzy, c-format
+msgid "Group %s could not be unlocked: %s\n"
 msgstr "لا يمكن إلغاء قفل المجموعة %s.\n"
 
-#: apps/lgroupmod.c:259
-#, c-format
-msgid "Group %s could not be modified.\n"
-msgstr "لم يمكن تعديل المجموعة %s.\n"
+#: apps/lgroupmod.c:262
+#, fuzzy, c-format
+msgid "Group %s could not be modified: %s\n"
+msgstr "لم يمكن تعديل المجموعة %s: %s.\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -308,7 +310,7 @@ msgstr "لم يتم تحديد اسم المستخدم، جاري استخدام
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
 
-#: apps/lnewusers.c:98
+#: apps/lnewusers.c:97
 #, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "خطأ في فتح ´%s´، %s.\n"
@@ -318,31 +320,31 @@ msgstr "خطأ في فتح ´%s´، %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "خطأ في إنشاء حساب للمستخدم %s، السطر منسّق بشكل خاطئ.\n"
 
-#: apps/lnewusers.c:138
+#: apps/lnewusers.c:140
 msgid "Refusing to create account with UID 0.\n"
 msgstr "رَفْض إنشاء حساب برقم هويّة مستخدم 0.\n"
 
-#: apps/lnewusers.c:237
-#, c-format
-msgid "Error creating group for `%s' with GID %ld.\n"
+#: apps/lnewusers.c:240
+#, fuzzy, c-format
+msgid "Error creating group for `%s' with GID %ld: %s\n"
 msgstr "خطأ في إنشاء مجموعة لـ´%s´ برقم هويّة مجموعة%ld .\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:294
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "خطأ في وضع كلمة السّر الابتدئيّة لـ%s. %s\n"
 
-#: apps/lnewusers.c:310
+#: apps/lnewusers.c:314
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "خطأ في إنشاء الدّليل الموطن لـ%s. %s\n"
 
-#: apps/lnewusers.c:325
+#: apps/lnewusers.c:328
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "خطأ في إنشاء مخزن بريد لـ%s.\n"
 
-#: apps/lnewusers.c:330
+#: apps/lnewusers.c:334
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "خطأ في إنشاء حساب مستخدم لـ%s. %s\n"
@@ -352,20 +354,20 @@ msgstr "خطأ في إنشاء حساب مستخدم لـ%s. %s\n"
 msgid "Changing password for %s.\n"
 msgstr "جاري تغيير كلمة المرور لـ%s. \n"
 
-#: apps/lpasswd.c:111
+#: apps/lpasswd.c:110
 msgid "New password"
 msgstr "كلمة المرور الجديدة"
 
-#: apps/lpasswd.c:114
+#: apps/lpasswd.c:113
 msgid "New password (confirm)"
 msgstr "كلمة المرور الجديدة (تأكيد)"
 
-#: apps/lpasswd.c:128
+#: apps/lpasswd.c:127
 #, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "كلمات المرور غير متطابقة، حاول مُجدّداً. \n"
 
-#: apps/lpasswd.c:133
+#: apps/lpasswd.c:132
 #, c-format
 msgid "Password change canceled.\n"
 msgstr "تم التراجع عن تغيير كلمة المرور.\n"
@@ -375,27 +377,27 @@ msgstr "تم التراجع عن تغيير كلمة المرور.\n"
 msgid "Error setting password for user %s: %s.\n"
 msgstr "خطأ في وضع كلمة المرور للمستخدم %s. %s.\n"
 
-#: apps/lpasswd.c:197
+#: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "خطأ في وضع كلمة المرور للمجموعة %s. %s\n"
 
-#: apps/lpasswd.c:208
+#: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
 msgstr "تم تغيير كلمة المرور.\n"
 
-#: apps/luseradd.c:199 apps/luseradd.c:211
-#, c-format
-msgid "Error creating group `%s'.\n"
+#: apps/luseradd.c:198 apps/luseradd.c:211
+#, fuzzy, c-format
+msgid "Error creating group `%s': %s\n"
 msgstr "خطأ في انشاء المجموعة %s. \n"
 
-#: apps/luseradd.c:278
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "فشل في انشاء الحساب: %s.\n"
 
-#: apps/luseradd.c:320
+#: apps/luseradd.c:321
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "خطأ في إنشاء %s: %s. \n"
@@ -405,37 +407,37 @@ msgstr "خطأ في إنشاء %s: %s. \n"
 msgid "Error creating mail spool.\n"
 msgstr "خطأ في إنشاء مخزن البريد.\n"
 
-#: apps/luserdel.c:99
+#: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "لم يمكن حذف المستخدم %s: %s\n"
 
-#: apps/luserdel.c:110
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%sلم يكن له رقم هويّة مجموعة.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:123
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr "لا توجد مجموعة برقم هويّة %ld، لن يتم الحذف.\n"
 
-#: apps/luserdel.c:131
+#: apps/luserdel.c:129
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "المجموعة التي تملك رقمّ الهويّة %ld لم تحمل اسم للمجموعة.\n"
 
-#: apps/luserdel.c:139
+#: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "لم يمكن حذف المجموعة %s: %s.\n"
 
-#: apps/luserdel.c:155
+#: apps/luserdel.c:152
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "لم يملك %s دليلاً موطناً.\n"
 
-#: apps/luserdel.c:162
+#: apps/luserdel.c:159
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "خطأ في إزالة %s. %s.\n"
@@ -445,37 +447,37 @@ msgstr "خطأ في إزالة %s. %s.\n"
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "فشل في وضع كلمة المرور للمستخدم %s؛ %s.\n"
 
-#: apps/lusermod.c:217
+#: apps/lusermod.c:216
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "لم يمكن قفل حساب المستخدم %s: %s.\n"
 
-#: apps/lusermod.c:226
+#: apps/lusermod.c:224
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "لم يتمكن من إلغاء قفل حساب المستخدم %s: %s.\n"
 
-#: apps/lusermod.c:235
+#: apps/lusermod.c:232
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "لم يمكن تعديل المستخدم %s: %s.\n"
 
-#: apps/lusermod.c:289
+#: apps/lusermod.c:285
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "لم يمكن تعديل المجموعة %s: %s.\n"
 
-#: apps/lusermod.c:302
+#: apps/lusermod.c:295
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "لا يوجد دليل موطن سابق لـ%s.\n"
 
-#: apps/lusermod.c:307
+#: apps/lusermod.c:300
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "لا دليل موطن جديد لـ%s.\n"
 
-#: apps/lusermod.c:313
+#: apps/lusermod.c:306
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "خطأ في نقل %s إلى %s: %s.\n"
@@ -483,6 +485,16 @@ msgstr "خطأ في نقل %s إلى %s: %s.\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
+msgstr "لم يمكن فتح ملف التّهيئة ´%s': %s"
+
+#: lib/config.c:79
+#, fuzzy, c-format
+msgid "could not stat configuration file `%s': %s"
+msgstr "لم يمكن فتح ملف التّهيئة ´%s': %s"
+
+#: lib/config.c:87
+#, fuzzy, c-format
+msgid "could not read configuration file `%s': %s"
 msgstr "لم يمكن فتح ملف التّهيئة ´%s': %s"
 
 #: lib/error.c:42
@@ -565,6 +577,10 @@ msgstr "خطأ في فك الترميز في الوحدة"
 msgid "library/module version mismatch"
 msgstr "عدم التوافق في نسخة المكتبة/الوحدة"
 
+#: lib/error.c:85
+msgid "unknown error"
+msgstr "خطأ مجهول"
+
 #: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
@@ -617,59 +633,84 @@ msgstr "الاسم يحتوي على حرف غير صالح ´%c'"
 msgid "error locking file: %s"
 msgstr "خطأ في قفل الملف: %s"
 
-#: modules/files.c:172 modules/files.c:515 modules/files.c:887
-#: modules/files.c:1160 modules/files.c:1361 modules/files.c:1572
-#: modules/files.c:1662 modules/files.c:1866 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
-#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2368
-#: modules/files.c:2387 modules/files.c:2446 modules/files.c:2465
-#: modules/files.c:2566 modules/files.c:2581
+#: modules/files.c:109
+#, fuzzy, c-format
+msgid "couldn't get security context of `%s': %s"
+msgstr "لم يمكن الكتابة إلى ´%s': %s"
+
+#: modules/files.c:115
+#, fuzzy, c-format
+msgid "couldn't set default security context: %s"
+msgstr "لم يمكن استعلام وضع `%s': %s"
+
+#: modules/files.c:122
+#, fuzzy, c-format
+msgid "couldn't set default security context to `%s': %s"
+msgstr "لم يمكن الكتابة إلى ´%s': %s"
+
+#: modules/files.c:142
+#, fuzzy, c-format
+msgid "couldn't reset default security context to `%s': %s"
+msgstr "لم يمكن الكتابة إلى ´%s': %s"
+
+#: modules/files.c:169 modules/files.c:512 modules/files.c:884
+#: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
+#: modules/files.c:1659 modules/files.c:1863 modules/files.c:2052
+#: modules/files.c:2069 modules/files.c:2159 modules/files.c:2178
+#: modules/files.c:2246 modules/files.c:2267 modules/files.c:2364
+#: modules/files.c:2383 modules/files.c:2442 modules/files.c:2461
+#: modules/files.c:2562 modules/files.c:2577
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "لم يمكن فتح ´%s': %s"
 
-#: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:899 modules/files.c:1373
+#: modules/files.c:185 modules/files.c:221 modules/files.c:259
+#: modules/files.c:896 modules/files.c:1370
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "لم يمكن استعلام وضع `%s': %s"
 
-#: modules/files.c:199
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "خطأ في إنشاء ´%s': %s"
 
-#: modules/files.c:215
+#: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "الملف الاحتياطي ´%s' موجود مسبقاً وغير اعتيادي"
 
-#: modules/files.c:929 modules/files.c:1382
+#: modules/files.c:926 modules/files.c:1379
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "لم يمكن القراءة من ´%s': %s"
 
-#: modules/files.c:938 modules/files.c:945
+#: modules/files.c:935 modules/files.c:942
 msgid "entry already present in file"
 msgstr "المُدخل موجود مسبقاً في الملف"
 
-#: modules/files.c:952 modules/files.c:967 modules/files.c:1432
-#: modules/files.c:1440
+#: modules/files.c:949 modules/files.c:964 modules/files.c:1429
+#: modules/files.c:1437
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "لم يمكن الكتابة إلى ´%s': %s"
 
-#: modules/files.c:1127 modules/files.c:1135 modules/files.c:1237
-#: modules/files.c:1245
+#: modules/files.c:1124 modules/files.c:1132 modules/files.c:1234
+#: modules/files.c:1242
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "كائن الكينونة ليس له خاصّيّة %s"
 
-#: modules/files.c:2848 modules/files.c:2918
+#: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
+#, fuzzy
+msgid "error encrypting password"
+msgstr "خطأ في وضع كلمة المرور لـ´%s'"
+
+#: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
 msgstr "لم يتمّ التّنفيذ بصلاحيات المستخدم الخارق"
 
-#: modules/files.c:2931
+#: modules/files.c:2927
 msgid "no shadow file present -- disabling"
 msgstr "لا يوجد ملف shadow --  جاري التعطيل"
 
@@ -744,102 +785,112 @@ msgstr "لم يمكن وضع بروتوكول LDAP للنسخة %d"
 msgid "could not negotiate TLS with LDAP server"
 msgstr "لم يمكن مفاوضة TLS مع خادم LDAP"
 
-#: modules/ldap.c:380
+#: modules/ldap.c:405
 msgid "could not bind to LDAP server"
 msgstr "لم يُمكن الرّبط بخادم LDAP"
 
-#: modules/ldap.c:392
+#: modules/ldap.c:408
+#, fuzzy, c-format
+msgid "could not bind to LDAP server, first attempt as `%s': %s"
+msgstr "لم يُمكن الرّبط بخادم LDAP"
+
+#: modules/ldap.c:422
 msgid "could not search LDAP server"
 msgstr "لم يمكن البحث في خادم LDAP"
 
-#: modules/ldap.c:401
+#: modules/ldap.c:431
 msgid "LDAP server appears to have no root DSE"
 msgstr "يبدو أنّ خادم LDAP ليس له DSE جذريّة"
 
-#: modules/ldap.c:625 modules/ldap.c:1371 modules/ldap.c:1510
-#: modules/ldap.c:1571 modules/ldap.c:1687 modules/ldap.c:1783
+#: modules/ldap.c:655 modules/ldap.c:1401 modules/ldap.c:1539
+#: modules/ldap.c:1600 modules/ldap.c:1715 modules/ldap.c:1811
 msgid "error mapping name to LDAP distinguished name"
 msgstr "خطأ في تعيين الاسم إلى اسم مُميِّز من LDAP"
 
-#: modules/ldap.c:635
+#: modules/ldap.c:665
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "خطأ في تعيين الاسم إلى اسم مُميِّز أساسي من LDAP"
 
-#: modules/ldap.c:1348
+#: modules/ldap.c:1378
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "لم يحتوي كائن المستخدم على خاصّيّة %s"
 
-#: modules/ldap.c:1357
+#: modules/ldap.c:1387
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "كائن المستخدم تمّ إنشاءه دون `%s'"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1412
 msgid "could not convert internal data to LDAPMods"
 msgstr "لم يمكن تحويل البيانات الدّاخليّة إلى LDAPMods"
 
-#: modules/ldap.c:1422 modules/ldap.c:1643
+#: modules/ldap.c:1425
+#, fuzzy, c-format
+msgid "error creating a LDAP directory entry: %s"
+msgstr "خطأ في إعادة تسمية المُدخل لدليل LDAP: %s\n"
+
+#: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "خطأ في تعديل المُدخل لدليل LDAP: %s"
 
-#: modules/ldap.c:1449
-#, c-format
-msgid "error renaming LDAP directory entry: %s\n"
+#: modules/ldap.c:1478
+#, fuzzy, c-format
+msgid "error renaming LDAP directory entry: %s"
 msgstr "خطأ في إعادة تسمية المُدخل لدليل LDAP: %s\n"
 
-#: modules/ldap.c:1498
+#: modules/ldap.c:1527
 #, c-format
 msgid "object had no %s attribute"
 msgstr "لم يحتوي الكائن على خاصّيّة %s"
 
-#: modules/ldap.c:1522
-#, c-format
-msgid "error removing LDAP directory entry: %s.\n"
+#: modules/ldap.c:1551
+#, fuzzy, c-format
+msgid "error removing LDAP directory entry: %s"
 msgstr "خطأ في حذف المُدخل لدليل LDAP: %s. \n"
 
-#: modules/ldap.c:1559 modules/ldap.c:1581 modules/ldap.c:1674
-#: modules/ldap.c:1772
+#: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
+#: modules/ldap.c:1800
 #, c-format
 msgid "object has no %s attribute"
 msgstr "لا يحتوي الكائن على خاصّيّة %s"
 
-#: modules/ldap.c:1707
+#: modules/ldap.c:1735
 msgid "no such object in LDAP directory"
 msgstr "لا وجود لهذا الكائن في دليل LDAP"
 
-#: modules/ldap.c:1719
+#: modules/ldap.c:1747
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "لم يعثر على الخاصّيّة ´%s´"
 
-#: modules/ldap.c:1882
+#: modules/ldap.c:1909
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "خطأ في وضع كلمة مرور في دليل LDAP لـ%s: %s"
 
-#: modules/ldap.c:2442
+#: modules/ldap.c:2469
 msgid "LDAP Server Name"
 msgstr "اسم خادم LDAP"
 
-#: modules/ldap.c:2448
+#: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
 msgstr "الاسم المُميِّز (DN) الأساسي لبحث LDAP"
 
-#: modules/ldap.c:2454
+#: modules/ldap.c:2481
 msgid "LDAP Bind DN"
 msgstr "الاسم المُميِّز (DN) لـLDAP Bind"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2488
 msgid "LDAP Bind Password"
 msgstr "كلمة مرور LDAP Bind"
 
-#: modules/ldap.c:2467
+#: modules/ldap.c:2494
 msgid "LDAP SASL User"
 msgstr "مستخدم LDAP SASL"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
 msgstr "مستخدم توثيق LDAP SASL"
 
@@ -868,19 +919,19 @@ msgstr "خطأ Cyrus SASL أثناء إزالة المستخدم: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "خطأ في ابتداء Cyrus SASL: %s"
 
-#: python/admin.c:507
+#: python/admin.c:504
 msgid "error creating home directory for user"
 msgstr "خطأ في انشاء مجلد رئيسي للمستخدم"
 
-#: python/admin.c:560
+#: python/admin.c:557
 msgid "error removing home directory for user"
 msgstr "خطأ في ازالة المجلد الرئيسي للمستخدم"
 
-#: python/admin.c:638
+#: python/admin.c:635
 msgid "error moving home directory for user"
 msgstr "خطأ في نقل المجلد الرئيسي للمستخدم"
 
-#: python/admin.c:671
+#: python/admin.c:668
 msgid "error creating mail spool for user"
 msgstr "خطأ في إنشاء مخزن البريد للمستخد"
 
@@ -913,6 +964,14 @@ msgstr "جاري البحث عن مستخدم مُسمّى %s.\n"
 msgid "Entry not found.\n"
 msgstr "لم يتم العثور على المُدخل.\n"
 
+#: samples/prompt.c:51
+msgid "Prompts succeeded.\n"
+msgstr ""
+
+#: samples/prompt.c:61
+msgid "Prompts failed.\n"
+msgstr ""
+
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
 msgstr "أصناف كائنات المستخدم الافتراضيّة:\n"
@@ -928,6 +987,15 @@ msgstr "جاري الاستعلام عن خصائص المستخدم الافت�
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "جاري نسخ بناء موطن المستخدم:\n"
+
+#~ msgid "Error initializing %s.\n"
+#~ msgstr "خطأ في ابتداء %s.\n"
+
+#~ msgid "Group %s could not be deleted.\n"
+#~ msgstr "لم يمكن حذف المجموعة %s.\n"
+
+#~ msgid "Group %s could not be modified.\n"
+#~ msgstr "لم يمكن تعديل المجموعة %s.\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "خطأ في ابتداء الوحدة"

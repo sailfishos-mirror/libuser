@@ -108,9 +108,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 

@@ -112,9 +112,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -196,7 +195,8 @@ main(int argc, const char **argv)
 			lu_hup_nscd();
 		} else {
 			/* Aargh!  Abandon all hope. */
-			g_print(_("Error creating group `%s'.\n"), gid);
+			fprintf(stderr, _("Error creating group `%s': %s\n"),
+				gid, lu_strerror(error));
 			if (error) {
 				lu_error_free(&error);
 			}
@@ -208,7 +208,8 @@ main(int argc, const char **argv)
 	/* Retrieve the group ID. */
 	values = lu_ent_get(groupEnt, LU_GIDNUMBER);
 	if (values == NULL) {
-		g_print(_("Error creating group `%s'.\n"), gid);
+		fprintf(stderr, _("Error creating group `%s': %s\n"), gid,
+			lu_strerror(error));
 		if (error) {
 			lu_error_free(&error);
 		}
@@ -276,7 +277,7 @@ main(int argc, const char **argv)
 	/* Moment-of-truth time. */
 	if (lu_user_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Account creation failed: %s.\n"),
-			error ? error->string : _("unknown error"));
+			lu_strerror(error));
 		return 3;
 	}
 
@@ -318,8 +319,7 @@ main(int argc, const char **argv)
 					uidNumber, gidNumber, 0700,
 					&error) == FALSE) {
 			fprintf(stderr, _("Error creating %s: %s.\n"),
-				homeDirectory,
-				error ? error->string : _("unknown error"));
+				homeDirectory, lu_strerror(error));
 			return 7;
 		}
 

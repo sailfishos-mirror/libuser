@@ -61,8 +61,8 @@ main(int argc, char **argv)
 		      lu_prompt_console, NULL, &error);
 
 	if (lu == NULL) {
-		g_print(gettext("Error initializing %s: %s\n"), PACKAGE,
-			error ? error->string : gettext("unknown error"));
+		fprintf(stderr, gettext("Error initializing %s: %s\n"),
+			PACKAGE, lu_strerror(error));
 		return 1;
 	}
 

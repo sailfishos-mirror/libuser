@@ -89,7 +89,7 @@ do { \
 			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
 		} else \
 		if(*__err != NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p, __FUNCTION__); \
+			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\n", __FUNCTION__); \
 		} \
 		abort(); \
 	} \

@@ -23,5 +23,7 @@ modules/krb5.c
 modules/ldap.c
 modules/sasldb.c
 python/admin.c
+samples/enum.c
 samples/lookup.c
+samples/prompt.c
 samples/testuser.c

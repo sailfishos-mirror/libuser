@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-10-10 23:37+0200\n"
+"POT-Creation-Date: 2004-11-01 11:20+0100\n"
 "PO-Revision-Date: 2004-07-17 13:02+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -42,22 +42,37 @@ msgstr "Nem sikerült csökkenteni a jogosultsági szintet.\n"
 msgid "Internal error.\n"
 msgstr "Belső hiba.\n"
 
-#: apps/apputil.c:526
+#: apps/apputil.c:506
+#, c-format
+msgid "%s is not authorized to change the finger info of %s\n"
+msgstr ""
+
+#: apps/apputil.c:508
+#, fuzzy
+msgid "Unknown user context"
+msgstr "ismeretlen hiba"
+
+#: apps/apputil.c:516
+#, c-format
+msgid "Can't set default context for /etc/passwd\n"
+msgstr ""
+
+#: apps/apputil.c:525
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Hiba történt a PAM inicializálásakor.\n"
 
-#: apps/apputil.c:534 apps/apputil.c:558
+#: apps/apputil.c:533 apps/apputil.c:557
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "A felhasználóazonosítás nem sikerült (%s).\n"
 
-#: apps/apputil.c:543
+#: apps/apputil.c:542
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Belső PAM-hiba ('%s').\n"
 
-#: apps/apputil.c:549
+#: apps/apputil.c:548
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Nem megfelelő felhasználó.\n"
@@ -80,91 +95,77 @@ msgstr "Hiba történt az argumentumok feldolgozásakor: %s.\n"
 msgid "No user name specified.\n"
 msgstr "Nincs megadva felhasználónév.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lchage.c:156 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:87
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
 #: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:72
+#: apps/lusermod.c:111 samples/enum.c:64 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Hiba történt %s inicializálásakor: %s.\n"
 
-#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
-#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
-#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:279
-#: apps/luseradd.c:322 apps/luserdel.c:87 apps/luserdel.c:101
-#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
-#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
-#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
-#: samples/lookup.c:65
-msgid "unknown error"
-msgstr "ismeretlen hiba"
-
-#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
-#: apps/luserdel.c:94 apps/lusermod.c:126
+#: apps/lchage.c:165 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
+#: apps/luserdel.c:93 apps/lusermod.c:125
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "%s nevű felhasználó nem létezik.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:173
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Az azonosító zárolva van.\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:175
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Az azonosító nincs zárolva.\n"
 
-#: apps/lchage.c:181
+#: apps/lchage.c:180
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Minimum:\t%d\n"
 
-#: apps/lchage.c:186
+#: apps/lchage.c:185
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Maximum:\t%d\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:190
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "Figyelmeztetés:\t%d\n"
 
-#: apps/lchage.c:196
+#: apps/lchage.c:195
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Inaktív:\t%d\n"
 
-#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
+#: apps/lchage.c:200 apps/lchage.c:208 apps/lchage.c:219 apps/lchage.c:229
 msgid "Never"
 msgstr "Soha"
 
-#: apps/lchage.c:203
+#: apps/lchage.c:202
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Utolsó módosítás:\t%s\n"
 
-#: apps/lchage.c:213
+#: apps/lchage.c:212
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "A jelszó lejár:\t%s\n"
 
-#: apps/lchage.c:225
+#: apps/lchage.c:224
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Inaktív jelszó:\t%s\n"
 
-#: apps/lchage.c:232
+#: apps/lchage.c:231
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "A jelszó lejár:\t%s\n"
 
 #: apps/lchage.c:279
-#, c-format
-msgid "Failed to modify aging information for %s.\n"
+#, fuzzy, c-format
+msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Nem sikerült módosítani a lejárási információt ennél: %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
@@ -182,48 +183,44 @@ msgstr ""
 msgid "Changing finger information for %s.\n"
 msgstr "%s Finger-jellemzőinek megváltoztatása.\n"
 
-#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
-#, c-format
-msgid "Error initializing %s.\n"
-msgstr "%s inicializálása nem sikerült.\n"
-
-#: apps/lchfn.c:161
+#: apps/lchfn.c:156
 msgid "Full Name"
 msgstr "Teljes név"
 
-#: apps/lchfn.c:182
+#: apps/lchfn.c:177
 msgid "Surname"
 msgstr "Vezetéknév"
 
-#: apps/lchfn.c:204
+#: apps/lchfn.c:199
 msgid "Given Name"
 msgstr "Keresztnév"
 
-#: apps/lchfn.c:214
+#: apps/lchfn.c:209
 msgid "Office"
 msgstr "Munkahely"
 
-#: apps/lchfn.c:223
+#: apps/lchfn.c:218
 msgid "Office Phone"
 msgstr "Munkahelyi telefonszám"
 
-#: apps/lchfn.c:232
+#: apps/lchfn.c:227
 msgid "Home Phone"
 msgstr "Otthoni telefonszám"
 
-#: apps/lchfn.c:253
+#: apps/lchfn.c:248
 msgid "E-Mail Address"
 msgstr "E-mail cím"
 
-#: apps/lchfn.c:265
+#: apps/lchfn.c:261
+#, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "A Finger-jellemzők nem változtak: bemeneti hiba történt.\n"
 
-#: apps/lchfn.c:370
+#: apps/lchfn.c:366
 msgid "Finger information changed.\n"
 msgstr "A Finger-jellemzők megváltoztak.\n"
 
-#: apps/lchfn.c:373
+#: apps/lchfn.c:369
 #, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "A Finger-jellemzők nem változtak: %s.\n"
@@ -233,12 +230,17 @@ msgstr "A Finger-jellemzők nem változtak: %s.\n"
 msgid "Changing shell for %s.\n"
 msgstr "%s parancsértelmezőjének megváltoztatása.\n"
 
-#: apps/lchsh.c:122
+#: apps/lchsh.c:116
 msgid "New Shell"
 msgstr "Új parancsértelmező"
 
-#: apps/lchsh.c:150
+#: apps/lchsh.c:144
 msgid "Shell changed.\n"
+msgstr "A parancsértelmező megváltozott.\n"
+
+#: apps/lchsh.c:147
+#, fuzzy, c-format
+msgid "Shell not changed: %s\n"
 msgstr "A parancsértelmező megváltozott.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
@@ -250,45 +252,45 @@ msgstr "[OPCIÓ...] csoport"
 msgid "No group name specified.\n"
 msgstr "Nincs megadva csoportnév.\n"
 
-#: apps/lgroupadd.c:116
-#, c-format
-msgid "Group creation failed.\n"
+#: apps/lgroupadd.c:110
+#, fuzzy, c-format
+msgid "Group creation failed: %s\n"
 msgstr "A csoport létrehozása nem sikerült.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
+#: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Nem létezik %s nevű csoport.\n"
 
-#: apps/lgroupdel.c:94
-#, c-format
-msgid "Group %s could not be deleted.\n"
-msgstr "Nem sikerült törölni a(z) %s csoportot.\n"
+#: apps/lgroupdel.c:93
+#, fuzzy, c-format
+msgid "Group %s could not be deleted: %s\n"
+msgstr "A(z) %s csoportot nem sikerült törölni: %s.\n"
 
-#: apps/lgroupmod.c:111 apps/lusermod.c:119
+#: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "A -L és -U opció is meg van adva.\n"
 
-#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
-#, c-format
-msgid "Failed to set password for group %s.\n"
+#: apps/lgroupmod.c:228 apps/lgroupmod.c:237
+#, fuzzy, c-format
+msgid "Failed to set password for group %s: %s\n"
 msgstr "Nem sikerült beállítani a jelszót a(z) %s csoporthoz.\n"
 
-#: apps/lgroupmod.c:244
-#, c-format
-msgid "Group %s could not be locked.\n"
+#: apps/lgroupmod.c:246
+#, fuzzy, c-format
+msgid "Group %s could not be locked: %s\n"
 msgstr "Nem sikerült zárolni a(z) %s csoportot.\n"
 
-#: apps/lgroupmod.c:252
-#, c-format
-msgid "Group %s could not be unlocked.\n"
+#: apps/lgroupmod.c:255
+#, fuzzy, c-format
+msgid "Group %s could not be unlocked: %s\n"
 msgstr "Nem sikerült feloldani a(z) %s csoport zárolását.\n"
 
-#: apps/lgroupmod.c:259
-#, c-format
-msgid "Group %s could not be modified.\n"
-msgstr "Nem sikerült módosítani a(z) %s csoportot.\n"
+#: apps/lgroupmod.c:262
+#, fuzzy, c-format
+msgid "Group %s could not be modified: %s\n"
+msgstr "Nem sikerült módosítani a(z) %s csoportot: %s.\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -310,7 +312,7 @@ msgstr "Nincs megadva felhasználónév, ezt a nevet használom: %s.\n"
 msgid "[OPTION...]"
 msgstr "[OPCIÓ...]"
 
-#: apps/lnewusers.c:98
+#: apps/lnewusers.c:97
 #, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "Hiba történt '%s' megnyitásakor: %s.\n"
@@ -321,31 +323,31 @@ msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
 "Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
 
-#: apps/lnewusers.c:138
+#: apps/lnewusers.c:140
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Nem lehet 0 értékű azonosítót létrehozni.\n"
 
-#: apps/lnewusers.c:237
-#, c-format
-msgid "Error creating group for `%s' with GID %ld.\n"
+#: apps/lnewusers.c:240
+#, fuzzy, c-format
+msgid "Error creating group for `%s' with GID %ld: %s\n"
 msgstr "Nem sikerült létrehozni a(z) '%s' csoportot (azonosító: %ld).\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:294
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Nem sikerült beállítani %s kezdeti jelszavát: %s\n"
 
-#: apps/lnewusers.c:310
+#: apps/lnewusers.c:314
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s saját könyvtárát nem sikerült létrehozni: %s\n"
 
-#: apps/lnewusers.c:325
+#: apps/lnewusers.c:328
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s levelezési sorának létrehozása nem sikerült.\n"
 
-#: apps/lnewusers.c:330
+#: apps/lnewusers.c:334
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Nem sikerült felhasználói azonosítót létrehozni ehhez: %s (%s)\n"
@@ -355,20 +357,20 @@ msgstr "Nem sikerült felhasználói azonosítót létrehozni ehhez: %s (%s)\n"
 msgid "Changing password for %s.\n"
 msgstr "%s jelszavának megváltoztatása.\n"
 
-#: apps/lpasswd.c:111
+#: apps/lpasswd.c:110
 msgid "New password"
 msgstr "Új jelszó"
 
-#: apps/lpasswd.c:114
+#: apps/lpasswd.c:113
 msgid "New password (confirm)"
 msgstr "Még egyszer"
 
-#: apps/lpasswd.c:128
+#: apps/lpasswd.c:127
 #, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "A jelszavak nem egyeznek meg, próbálkozzon újra.\n"
 
-#: apps/lpasswd.c:133
+#: apps/lpasswd.c:132
 #, c-format
 msgid "Password change canceled.\n"
 msgstr "A jelszóváltoztatás meg lett szakítva.\n"
@@ -378,27 +380,27 @@ msgstr "A jelszóváltoztatás meg lett szakítva.\n"
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Nem sikerült beállítani %s jelszavát: %s.\n"
 
-#: apps/lpasswd.c:197
+#: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Nem sikerült beállítani a(z) %s csoport jelszavát: %s.\n"
 
-#: apps/lpasswd.c:208
+#: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
 msgstr "A jelszó megváltozott.\n"
 
-#: apps/luseradd.c:199 apps/luseradd.c:211
-#, c-format
-msgid "Error creating group `%s'.\n"
+#: apps/luseradd.c:198 apps/luseradd.c:211
+#, fuzzy, c-format
+msgid "Error creating group `%s': %s\n"
 msgstr "Nem sikerült létrehozni a(z) '%s' csoportot.\n"
 
-#: apps/luseradd.c:278
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Az azonosító létrehozása nem sikerült: %s.\n"
 
-#: apps/luseradd.c:320
+#: apps/luseradd.c:321
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s létrehozása nem sikerült: %s.\n"
@@ -408,37 +410,37 @@ msgstr "%s létrehozása nem sikerült: %s.\n"
 msgid "Error creating mail spool.\n"
 msgstr "A levelezési sor létrehozása nem sikerült.\n"
 
-#: apps/luserdel.c:99
+#: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Nem sikerült törölni a(z) %s felhasználót: %s.\n"
 
-#: apps/luserdel.c:110
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s nem rendelkezett csoportazonosítóval.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:123
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
 msgstr "Nem létezik %ld azonosítójú csoport, ezért nem lehet eltávolítani.\n"
 
-#: apps/luserdel.c:131
+#: apps/luserdel.c:129
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
 msgstr "A(z) %ld azonosítójú csoportnak nem volt neve.\n"
 
-#: apps/luserdel.c:139
+#: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "A(z) %s csoportot nem sikerült törölni: %s.\n"
 
-#: apps/luserdel.c:155
+#: apps/luserdel.c:152
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "A(z) %s felhasználónak nem volt saját könyvtára.\n"
 
-#: apps/luserdel.c:162
+#: apps/luserdel.c:159
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "%s eltávolítása nem sikerült: %s.\n"
@@ -448,37 +450,37 @@ msgstr "%s eltávolítása nem sikerült: %s.\n"
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Nem sikerült beállítani a jelszót a(z) %s felhasználónál: %s.\n"
 
-#: apps/lusermod.c:217
+#: apps/lusermod.c:216
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "A(z) %s felhasználót nem sikerült zárolni: %s.\n"
 
-#: apps/lusermod.c:226
+#: apps/lusermod.c:224
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "A(z) %s felhasználó zárolását nem sikerült feloldani: %s.\n"
 
-#: apps/lusermod.c:235
+#: apps/lusermod.c:232
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Nem sikerült módosítani a(z) %s felhasználónevet: %s.\n"
 
-#: apps/lusermod.c:289
+#: apps/lusermod.c:285
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Nem sikerült módosítani a(z) %s csoportot: %s.\n"
 
-#: apps/lusermod.c:302
+#: apps/lusermod.c:295
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Nincs régi saját könyvtár ehhez: %s.\n"
 
-#: apps/lusermod.c:307
+#: apps/lusermod.c:300
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nincs új saját könyvtár ehhez: %s.\n"
 
-#: apps/lusermod.c:313
+#: apps/lusermod.c:306
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Nem sikerült átmozgatni ezt: %s ide: %s - %s.\n"
@@ -486,6 +488,16 @@ msgstr "Nem sikerült átmozgatni ezt: %s ide: %s - %s.\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
+msgstr "nem sikerült megnyitni a(z) '%s' konfigurációs fájlt: %s"
+
+#: lib/config.c:79
+#, fuzzy, c-format
+msgid "could not stat configuration file `%s': %s"
+msgstr "nem sikerült megnyitni a(z) '%s' konfigurációs fájlt: %s"
+
+#: lib/config.c:87
+#, fuzzy, c-format
+msgid "could not read configuration file `%s': %s"
 msgstr "nem sikerült megnyitni a(z) '%s' konfigurációs fájlt: %s"
 
 #: lib/error.c:42
@@ -568,6 +580,10 @@ msgstr "nem sikerült feloldani egy szimbólumot a modulban"
 msgid "library/module version mismatch"
 msgstr "verzióeltérés a programkönyvtárban vagy modulban"
 
+#: lib/error.c:85
+msgid "unknown error"
+msgstr "ismeretlen hiba"
+
 #: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
@@ -620,59 +636,84 @@ msgstr "a név érvénytelen karaktert tartalmaz: '%c'"
 msgid "error locking file: %s"
 msgstr "fájlzárolási hiba: %s"
 
-#: modules/files.c:172 modules/files.c:515 modules/files.c:887
-#: modules/files.c:1160 modules/files.c:1361 modules/files.c:1572
-#: modules/files.c:1662 modules/files.c:1866 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
-#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2368
-#: modules/files.c:2387 modules/files.c:2446 modules/files.c:2465
-#: modules/files.c:2566 modules/files.c:2581
+#: modules/files.c:109
+#, fuzzy, c-format
+msgid "couldn't get security context of `%s': %s"
+msgstr "nem sikerült írni (ebbe: '%s'): %s"
+
+#: modules/files.c:115
+#, fuzzy, c-format
+msgid "couldn't set default security context: %s"
+msgstr "egy stat művelet nem sikerült (erre: '%s'): %s"
+
+#: modules/files.c:122
+#, fuzzy, c-format
+msgid "couldn't set default security context to `%s': %s"
+msgstr "nem sikerült írni (ebbe: '%s'): %s"
+
+#: modules/files.c:142
+#, fuzzy, c-format
+msgid "couldn't reset default security context to `%s': %s"
+msgstr "nem sikerült írni (ebbe: '%s'): %s"
+
+#: modules/files.c:169 modules/files.c:512 modules/files.c:884
+#: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
+#: modules/files.c:1659 modules/files.c:1863 modules/files.c:2052
+#: modules/files.c:2069 modules/files.c:2159 modules/files.c:2178
+#: modules/files.c:2246 modules/files.c:2267 modules/files.c:2364
+#: modules/files.c:2383 modules/files.c:2442 modules/files.c:2461
+#: modules/files.c:2562 modules/files.c:2577
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "'%s' megnyitása nem sikerült: %s"
 
-#: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:899 modules/files.c:1373
+#: modules/files.c:185 modules/files.c:221 modules/files.c:259
+#: modules/files.c:896 modules/files.c:1370
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "egy stat művelet nem sikerült (erre: '%s'): %s"
 
-#: modules/files.c:199
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "'%s' létrehozása nem sikerült: %s"
 
-#: modules/files.c:215
+#: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "már létezik '%s' nevű biztonsági mentési fájl, de nem normál fájl"
 
-#: modules/files.c:929 modules/files.c:1382
+#: modules/files.c:926 modules/files.c:1379
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "nem sikerült olvasni innen: '%s' - %s"
 
-#: modules/files.c:938 modules/files.c:945
+#: modules/files.c:935 modules/files.c:942
 msgid "entry already present in file"
 msgstr "az entitás már benne van a fájlban"
 
-#: modules/files.c:952 modules/files.c:967 modules/files.c:1432
-#: modules/files.c:1440
+#: modules/files.c:949 modules/files.c:964 modules/files.c:1429
+#: modules/files.c:1437
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "nem sikerült írni (ebbe: '%s'): %s"
 
-#: modules/files.c:1127 modules/files.c:1135 modules/files.c:1237
-#: modules/files.c:1245
+#: modules/files.c:1124 modules/files.c:1132 modules/files.c:1234
+#: modules/files.c:1242
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "az entitásobjektumnak nincs %s attribútuma"
 
-#: modules/files.c:2848 modules/files.c:2918
+#: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
+#, fuzzy
+msgid "error encrypting password"
+msgstr "nem sikerült beállítani a jelszót ennél: '%s'"
+
+#: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
 msgstr "nem lehet végrehajtani rendszergazdai jogosultsággal"
 
-#: modules/files.c:2931
+#: modules/files.c:2927
 msgid "no shadow file present -- disabling"
 msgstr "nincs árnyékfájl - letiltva"
 
@@ -749,103 +790,113 @@ msgstr "nem sikerült beállítani az LDAP protokollt %d verzióra"
 msgid "could not negotiate TLS with LDAP server"
 msgstr "nem sikerült TLS-kapcsolatot létrehozni az LDAP-kiszolgálóval"
 
-#: modules/ldap.c:380
+#: modules/ldap.c:405
 msgid "could not bind to LDAP server"
 msgstr "nem sikerült kapcsolódni az LDAP-kiszolgálóhoz"
 
-#: modules/ldap.c:392
+#: modules/ldap.c:408
+#, fuzzy, c-format
+msgid "could not bind to LDAP server, first attempt as `%s': %s"
+msgstr "nem sikerült kapcsolódni az LDAP-kiszolgálóhoz"
+
+#: modules/ldap.c:422
 msgid "could not search LDAP server"
 msgstr "nem sikerült keresni az LDAP-kiszolgálón"
 
-#: modules/ldap.c:401
+#: modules/ldap.c:431
 msgid "LDAP server appears to have no root DSE"
 msgstr "az LDAP-kiszolgálónak valószínűleg nincs gyökér-DSE-je"
 
-#: modules/ldap.c:625 modules/ldap.c:1371 modules/ldap.c:1510
-#: modules/ldap.c:1571 modules/ldap.c:1687 modules/ldap.c:1783
+#: modules/ldap.c:655 modules/ldap.c:1401 modules/ldap.c:1539
+#: modules/ldap.c:1600 modules/ldap.c:1715 modules/ldap.c:1811
 msgid "error mapping name to LDAP distinguished name"
 msgstr "nem sikerült leképezni a nevet egy LDAP-os DN-re (distinguished name)"
 
-#: modules/ldap.c:635
+#: modules/ldap.c:665
 msgid "error mapping name to LDAP base distinguished name"
 msgstr ""
 "nem sikerült leképezni a nevet egy LDAP-os alap DN-re (distinguished name)"
 
-#: modules/ldap.c:1348
+#: modules/ldap.c:1378
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "a felhasználói objektumnak nincs %s attribútuma"
 
-#: modules/ldap.c:1357
+#: modules/ldap.c:1387
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "a felhasználói objektum '%s' attribútum nélkül lett létrehozva"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1412
 msgid "could not convert internal data to LDAPMods"
 msgstr "nem sikerült a belső adatokat LDAPMods-ra alakítani"
 
-#: modules/ldap.c:1422 modules/ldap.c:1643
+#: modules/ldap.c:1425
+#, fuzzy, c-format
+msgid "error creating a LDAP directory entry: %s"
+msgstr "hiba történt az LDAP-bejegyzés átnevezésekor: %s\n"
+
+#: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "hiba történt az LDAP-bejegyzés módosításakor: %s"
 
-#: modules/ldap.c:1449
-#, c-format
-msgid "error renaming LDAP directory entry: %s\n"
+#: modules/ldap.c:1478
+#, fuzzy, c-format
+msgid "error renaming LDAP directory entry: %s"
 msgstr "hiba történt az LDAP-bejegyzés átnevezésekor: %s\n"
 
-#: modules/ldap.c:1498
+#: modules/ldap.c:1527
 #, c-format
 msgid "object had no %s attribute"
 msgstr "az objektumnak nem volt %s attribútuma"
 
-#: modules/ldap.c:1522
-#, c-format
-msgid "error removing LDAP directory entry: %s.\n"
+#: modules/ldap.c:1551
+#, fuzzy, c-format
+msgid "error removing LDAP directory entry: %s"
 msgstr "nem sikerült eltávolítani ezt az LDAP-bejegyzést: %s.\n"
 
-#: modules/ldap.c:1559 modules/ldap.c:1581 modules/ldap.c:1674
-#: modules/ldap.c:1772
+#: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
+#: modules/ldap.c:1800
 #, c-format
 msgid "object has no %s attribute"
 msgstr "az objektumnak nincs %s attribútuma"
 
-#: modules/ldap.c:1707
+#: modules/ldap.c:1735
 msgid "no such object in LDAP directory"
 msgstr "nincs ilyen objektum az LDAP-címtárban"
 
-#: modules/ldap.c:1719
+#: modules/ldap.c:1747
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nem található '%s' attribútum"
 
-#: modules/ldap.c:1882
+#: modules/ldap.c:1909
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "nem sikerült beállítani a jelszót az LDAP-címtárban erre: %s - %s"
 
-#: modules/ldap.c:2442
+#: modules/ldap.c:2469
 msgid "LDAP Server Name"
 msgstr "LDAP kiszolgálónév"
 
-#: modules/ldap.c:2448
+#: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
 msgstr "LDAP keresési alapnév"
 
-#: modules/ldap.c:2454
+#: modules/ldap.c:2481
 msgid "LDAP Bind DN"
 msgstr "LDAP csatlakozás"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2488
 msgid "LDAP Bind Password"
 msgstr "LDAP csatlakozási jelszó"
 
-#: modules/ldap.c:2467
+#: modules/ldap.c:2494
 msgid "LDAP SASL User"
 msgstr "LDAP SASL felhasználónév"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL azonosítási felhasználónév"
 
@@ -874,19 +925,19 @@ msgstr "Cyrus SASL-felhasználóeltávolítási hiba: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "a Cyrus SASL inicializálásakor hiba történt: %s"
 
-#: python/admin.c:507
+#: python/admin.c:504
 msgid "error creating home directory for user"
 msgstr "nem sikerült létrehozni a felhasználó saját könyvtárát"
 
-#: python/admin.c:560
+#: python/admin.c:557
 msgid "error removing home directory for user"
 msgstr "nem sikerült eltávolítani a felhasználó saját könyvtárát"
 
-#: python/admin.c:638
+#: python/admin.c:635
 msgid "error moving home directory for user"
 msgstr "nem sikerült elmozgatni a felhasználó saját könyvtárát"
 
-#: python/admin.c:671
+#: python/admin.c:668
 msgid "error creating mail spool for user"
 msgstr "nem sikerült levelezési sort létrehozni a felhasználónak"
 
@@ -919,6 +970,14 @@ msgstr "A(z) %s felhasználónév keresése.\n"
 msgid "Entry not found.\n"
 msgstr "Nem található bejegyzés.\n"
 
+#: samples/prompt.c:51
+msgid "Prompts succeeded.\n"
+msgstr ""
+
+#: samples/prompt.c:61
+msgid "Prompts failed.\n"
+msgstr ""
+
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
 msgstr "Az alapértelmezett felhasználói objektumosztályok:\n"
@@ -934,6 +993,15 @@ msgstr "Az alapértelmezett felhasználójellemzők lekérdezése:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Felhasználói struktúra másolása:\n"
+
+#~ msgid "Error initializing %s.\n"
+#~ msgstr "%s inicializálása nem sikerült.\n"
+
+#~ msgid "Group %s could not be deleted.\n"
+#~ msgstr "Nem sikerült törölni a(z) %s csoportot.\n"
+
+#~ msgid "Group %s could not be modified.\n"
+#~ msgstr "Nem sikerült módosítani a(z) %s csoportot.\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "modulinicializálási hiba"

@@ -270,8 +270,8 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 {
 	LDAP *ldap = NULL;
 	LDAPControl *server = NULL, *client = NULL;
-	int ret;
-	const char *generated_binddn = "";
+	int ret, first_failure;
+	const char *generated_binddn = "", *first_binddn;
 	char *binddn, *tmp, *key;
 	char *user;
 	char *password;
@@ -324,21 +324,29 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	}
 
 	ret = LDAP_SUCCESS + 1; /* Not LDAP_SUCCESS */
+	first_failure = LDAP_SUCCESS; /* No failure known yet */
+	first_binddn = NULL;
 
 	if ((binddn != NULL) && (strlen(binddn) == 0)) {
 		binddn = NULL;
 	}
 	if (context->bind_sasl) {
 		/* Try to bind using SASL, and if that fails... */
+		if (binddn != NULL) {
 #ifdef DEBUG
-		g_print("Attempting SASL bind to `%s'.\n", binddn);
+			g_print("Attempting SASL bind to `%s'.\n", binddn);
 #endif
-		ret = ldap_sasl_interactive_bind_s(ldap, binddn, NULL,
-						   &server, &client,
-						   LDAP_SASL_INTERACTIVE |
-						   LDAP_SASL_QUIET,
-						   interact,
-						   context);
+			ret = ldap_sasl_interactive_bind_s(ldap, binddn, NULL,
+							   &server, &client,
+							   LDAP_SASL_INTERACTIVE |
+							   LDAP_SASL_QUIET,
+							   interact,
+							   context);
+			if (ret != LDAP_SUCCESS) {
+				first_failure = ret;
+				first_binddn = binddn;
+			}
+		}
 		if (ret != LDAP_SUCCESS) {
 #ifdef DEBUG
 			g_print("Attempting SASL bind to `%s'.\n",
@@ -351,33 +359,55 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 							   LDAP_SASL_INTERACTIVE |
 							   LDAP_SASL_QUIET,
 							   interact, context);
+			if (ret != LDAP_SUCCESS
+			    && first_failure == LDAP_SUCCESS) {
+				first_failure = ret;
+				first_binddn = generated_binddn;
+			}
 		}
 	}
 	if (ret != LDAP_SUCCESS && context->bind_simple) {
 		/* try to bind using a password, and if that fails... */
 		if ((password != NULL) && (strlen(password) > 0)) {
-			if (nonempty(context->prompts[LU_LDAP_BINDDN].value)) {
+			if (binddn != NULL) {
 #ifdef DEBUG
 				g_print("Attempting simple bind to `%s'.\n",
 					binddn);
 #endif
 				ret = ldap_simple_bind_s(ldap, binddn,
 							 password);
+				if (ret != LDAP_SUCCESS
+				    && first_failure == LDAP_SUCCESS) {
+					first_failure = ret;
+					first_binddn = binddn;
+				}
 			}
 			if (ret != LDAP_SUCCESS) {
 #ifdef DEBUG
 				g_print("Attempting simple bind to `%s'.\n",
 					generated_binddn);
 #endif
-				ret = ldap_simple_bind_s(ldap, generated_binddn,
+				ret = ldap_simple_bind_s(ldap,
+							 generated_binddn,
 							 password);
+				if (ret != LDAP_SUCCESS
+				    && first_failure == LDAP_SUCCESS) {
+					first_failure = ret;
+					first_binddn = generated_binddn;
+				}
 			}
 		}
 	}
 	if (ret != LDAP_SUCCESS) {
 		/* give up. */
-		lu_error_new(error, lu_error_init,
-			     _("could not bind to LDAP server"));
+		if (first_failure == LDAP_SUCCESS)
+			lu_error_new(error, lu_error_init,
+				     _("could not bind to LDAP server"));
+		else
+			lu_error_new(error, lu_error_init,
+				     _("could not bind to LDAP server, first "
+				       "attempt as `%s': %s"), first_binddn,
+				     ldap_err2string(first_failure));
 		close_server(ldap);
 		return NULL;
 	}
@@ -1391,10 +1421,9 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 		if (err == LDAP_SUCCESS)
 			ret = TRUE;
 		else {
-			/* FIXME: STRING_FREEZE */
-			lu_error_new(error, lu_error_write, "error creating "
-				     "a LDAP directory entry: %s",
-				     ldap_err2string(err));
+			lu_error_new(error, lu_error_write,
+				     _("error creating a LDAP directory "
+				       "entry: %s"), ldap_err2string(err));
 			goto err_mods;
 		}
 	} else {
@@ -1447,7 +1476,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			else {
 				lu_error_new(error, lu_error_write,
 					     _("error renaming LDAP directory "
-					       "entry: %s\n"),
+					       "entry: %s"),
 					     ldap_err2string(err));
 				goto err_mods;
 			}
@@ -1519,7 +1548,7 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 		ret = TRUE;
 	} else {
 		lu_error_new(error, lu_error_write,
-			     _("error removing LDAP directory entry: %s.\n"),
+			     _("error removing LDAP directory entry: %s"),
 			     ldap_err2string(err));
 		return FALSE;
 	}
@@ -1591,9 +1620,8 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 		tmp = lu_make_crypted(oldpassword,
 				      lu_common_default_salt_specifier(module));
 		if (tmp == NULL) {
-			/* FIXME: STRING_FREEZE */
 			lu_error_new(error, lu_error_generic,
-				     "error encrypting password");
+				     _("error encrypting password"));
 			g_free(oldpassword);
 			return FALSE;
 		}
@@ -1846,9 +1874,8 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 				    ? (previous + strlen(LU_CRYPTED)) :
 				    lu_common_default_salt_specifier(module));
 		if (crypted == NULL) {
-			/* FIXME: STRING_FREEZE */
 			lu_error_new(error, lu_error_generic,
-				     "error encrypting password");
+				     _("error encrypting password"));
 			g_free(previous);
 			return FALSE;
 		}

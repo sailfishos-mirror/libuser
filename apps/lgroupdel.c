@@ -76,9 +76,8 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		fprintf(stderr, _("Error initializing %s: %s.\n"),
-			PACKAGE,
-			error ? error->string : _("unknown error"));
+		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
+			lu_strerror(error));
 		return 1;
 	}
 
@@ -91,8 +90,8 @@ main(int argc, const char **argv)
 
 	/* Delete the group. */
 	if (lu_group_delete(ctx, ent, &error) == FALSE) {
-		fprintf(stderr, _("Group %s could not be deleted.\n"),
-			group);
+		fprintf(stderr, _("Group %s could not be deleted: %s\n"),
+			group, lu_strerror(error));
 		return 3;
 	}
 

@@ -75,18 +75,16 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	/* Create a new structure to save the data. */
 	config = g_malloc0(sizeof(struct config_config));
 	if (fstat(fd, &st) == -1) {
-		/* FIXME: STRING_FREEZE */
 		lu_error_new(error, lu_error_stat,
-			     "could not stat configuration file `%s': %s",
+			     _("could not stat configuration file `%s': %s"),
 			     filename, strerror(errno));
 		goto err_config;
 	} 
 	/* Read the file's contents in. */
 	config->data = g_malloc0(st.st_size + 1);
 	if (read(fd, config->data, st.st_size) != st.st_size) {
-		/* FIXME: STRING_FREEZE */
 		lu_error_new(error, lu_error_read,
-			     "could not read configuration file `%s': %s",
+			     _("could not read configuration file `%s': %s"),
 			     filename, strerror(errno));
 		goto err_data;
 	}
