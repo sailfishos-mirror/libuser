@@ -6,6 +6,7 @@ if test -x /bin/rpm ; then
 fi
 set -x
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
+gettextize -f
 libtoolize --force
 aclocal
 automake -a
