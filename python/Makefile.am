@@ -1,6 +1,6 @@
 EXTRA_DIST = admin.c ent.c misc.c
 
-CFLAGS = -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
+CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
 
 pythondir = $(libdir)/python@PYTHON_VERSION@/site-packages/
 
