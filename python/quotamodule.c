@@ -30,7 +30,7 @@
 #include <Python.h>
 #include "debug.h"
 
-void initquota(void);
+void initlibuserquota(void);
 
 static PyTypeObject quota_object_type;
 struct quota_struct {
@@ -550,11 +550,11 @@ static PyMethodDef quota_methods[] = {
 };
 
 void
-initquota(void)
+initlibuserquota(void)
 {
 	PyObject *module, *dict;
 	DEBUG_ENTRY;
-	module = Py_InitModule("quota", quota_methods);
+	module = Py_InitModule("libuserquota", quota_methods);
 	dict = PyModule_GetDict(module);
 	PyDict_SetItemString(dict, "USER", PyInt_FromLong(USRQUOTA));
 	PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(GRPQUOTA));
