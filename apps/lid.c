@@ -146,8 +146,8 @@ main(int argc, const char **argv)
 				lu_ent_clear_all(ent);
 			}
 			lu_ent_free(ent);
+			g_value_array_free(values);
 		}
-		g_value_array_free(values);
 	} else {
 		values = lu_groups_enumerate_by_user(ctx, name, &error);
 		if (values != NULL) {
@@ -155,11 +155,11 @@ main(int argc, const char **argv)
 			for (i = 0; i < values->n_values; i++) {
 				value = g_value_array_get_nth(values, i);
 				name = g_value_get_string(value);
-				if (!nameonly
-				    && lu_group_lookup_name(ctx,
-					   		    name,
-							    ent,
-							    &error)) {
+				if (!nameonly &&
+				    lu_group_lookup_name(ctx,
+					   		 name,
+							 ent,
+							 &error)) {
 					attrs = lu_ent_get(ent, LU_GIDNUMBER);
 					if (attrs != NULL) {
 						value = g_value_array_get_nth(attrs,
@@ -180,8 +180,8 @@ main(int argc, const char **argv)
 				lu_ent_clear_all(ent);
 			}
 			lu_ent_free(ent);
+			g_value_array_free(values);
 		}
-		g_value_array_free(values);
 	}
 
 	lu_end(ctx);

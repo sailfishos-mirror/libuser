@@ -40,7 +40,7 @@ static PyTypeObject EntityType;
 static PyObject *
 convert_value_array_pylist(GValueArray *array)
 {
-	PyObject *ret = NULL;;
+	PyObject *ret = NULL;
 	GValue *value;
 	int i;
 	long l;
