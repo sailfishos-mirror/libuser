@@ -1,0 +1,1096 @@
+# libuser Bahasa Melayu (Malay) (ms).
+# This file is distributed under the same license as the libuser package.
+# Copyright (C) 2004 Red Hat Inc.
+# Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>, 2004
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser\n"
+"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"PO-Revision-Date: 2004-03-15 21:28+0800\n"
+"Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
+"Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0\n"
+
+#: apps/apputil.c:71
+#, c-format
+#, fuzzy
+msgid "Error reading `%s': %s"
+msgstr "Ralat s"
+
+#: apps/apputil.c:79
+#, c-format
+#, fuzzy
+msgid "Error creating `%s': %s"
+msgstr "Ralat s"
+
+#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#, c-format
+#, fuzzy
+msgid "Error removing `%s': %s"
+msgstr "Ralat s"
+
+#: apps/apputil.c:421 apps/apputil.c:425
+#, fuzzy
+msgid "Failed to drop privileges.\n"
+msgstr "Gagal"
+
+#: apps/apputil.c:434
+#, fuzzy
+msgid "Internal error.\n"
+msgstr "ralat"
+
+#: apps/apputil.c:447
+#, fuzzy
+msgid "Error initializing PAM.\n"
+msgstr "Ralat"
+
+#: apps/apputil.c:455 apps/apputil.c:479
+#, c-format
+#, fuzzy
+msgid "Authentication failed for %s.\n"
+msgstr "Pengesahan for s"
+
+#: apps/apputil.c:464
+#, c-format
+#, fuzzy
+msgid "Internal PAM error `%s'.\n"
+msgstr "ralat s"
+
+#: apps/apputil.c:470
+#, fuzzy
+msgid "User mismatch.\n"
+msgstr "Pengguna"
+
+#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/luserdel.c:65 apps/lusermod.c:87
+msgid "[OPTION...] user"
+msgstr ""
+
+#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#, c-format
+#, fuzzy
+msgid "Error parsing arguments: %s.\n"
+msgstr "Ralat s"
+
+#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lusermod.c:101
+#, fuzzy
+msgid "No user name specified.\n"
+msgstr "Tidak pengguna unama"
+
+#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:71
+#, c-format
+#, fuzzy
+msgid "Error initializing %s: %s.\n"
+msgstr "Ralat s s"
+
+#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
+#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
+#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
+#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
+#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
+#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: samples/lookup.c:65
+#, fuzzy
+msgid "unknown error"
+msgstr "tidak diketahui"
+
+#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/luserdel.c:94 apps/lusermod.c:126
+#, c-format
+#, fuzzy
+msgid "User %s does not exist.\n"
+msgstr "Pengguna s"
+
+#: apps/lchage.c:172
+msgid "Account is locked.\n"
+msgstr ""
+
+#: apps/lchage.c:174
+msgid "Account is not locked.\n"
+msgstr ""
+
+#: apps/lchage.c:179
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:184
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:189
+#, c-format
+#, fuzzy
+msgid "Warning:\t%d\n"
+msgstr "Amaran"
+
+#: apps/lchage.c:194
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr ""
+
+#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#, fuzzy
+msgid "Never"
+msgstr "Tidak sekali"
+
+#: apps/lchage.c:201
+#, c-format
+#, fuzzy
+msgid "Last Change:\t%s\n"
+msgstr "Ubah s"
+
+#: apps/lchage.c:211
+#, c-format
+#, fuzzy
+msgid "Password Expires:\t%s\n"
+msgstr "Katalaluan s"
+
+#: apps/lchage.c:223
+#, c-format
+#, fuzzy
+msgid "Password Inactive:\t%s\n"
+msgstr "Katalaluan s"
+
+#: apps/lchage.c:230
+#, c-format
+#, fuzzy
+msgid "Account Expires:\t%s\n"
+msgstr "s"
+
+#: apps/lchage.c:277
+#, c-format
+#, fuzzy
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Gagal for s"
+
+#: apps/lchfn.c:74 apps/lchsh.c:61
+#, fuzzy
+msgid "[OPTION...] [user]"
+msgstr "pengguna"
+
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#, c-format
+#, fuzzy
+msgid "No user name specified, no name for uid %d.\n"
+msgstr "Tidak pengguna unama tidak unama for"
+
+#. Give the user some idea of what's going on.
+#: apps/lchfn.c:102
+#, c-format
+#, fuzzy
+msgid "Changing finger information for %s.\n"
+msgstr "for s"
+
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
+#, c-format
+#, fuzzy
+msgid "Error initializing %s.\n"
+msgstr "Ralat s"
+
+#: apps/lchfn.c:161
+msgid "Full Name"
+msgstr "Nama Penuh"
+
+#: apps/lchfn.c:182
+msgid "Surname"
+msgstr ""
+
+#: apps/lchfn.c:204
+msgid "Given Name"
+msgstr ""
+
+#: apps/lchfn.c:214
+#, fuzzy
+msgid "Office"
+msgstr "Pejabat"
+
+#: apps/lchfn.c:223
+#, fuzzy
+msgid "Office Phone"
+msgstr "Pejabat"
+
+#: apps/lchfn.c:232
+#, fuzzy
+msgid "Home Phone"
+msgstr "Asal"
+
+#: apps/lchfn.c:253
+#, fuzzy
+msgid "E-Mail Address"
+msgstr "Mel"
+
+#: apps/lchfn.c:265
+#, fuzzy
+msgid "Finger information not changed:  input error.\n"
+msgstr "ralat"
+
+#: apps/lchfn.c:370
+msgid "Finger information changed.\n"
+msgstr ""
+
+#: apps/lchfn.c:373
+#, c-format
+#, fuzzy
+msgid "Finger information not changed: %s.\n"
+msgstr "s"
+
+#. Give the user some idea of what's going on.
+#: apps/lchsh.c:90
+#, c-format
+#, fuzzy
+msgid "Changing shell for %s.\n"
+msgstr "for s"
+
+#: apps/lchsh.c:122
+#, fuzzy
+msgid "New Shell"
+msgstr "Baru"
+
+#: apps/lchsh.c:150
+#, fuzzy
+msgid "Shell changed.\n"
+msgstr "Cengkerang"
+
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+msgid "[OPTION...] group"
+msgstr ""
+
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#, fuzzy
+msgid "No group name specified.\n"
+msgstr "Tidak kumpulan unama"
+
+#: apps/lgroupadd.c:116
+#, fuzzy
+msgid "Group creation failed.\n"
+msgstr "Kumpulan"
+
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#, c-format
+#, fuzzy
+msgid "Group %s does not exist.\n"
+msgstr "Kumpulan s"
+
+#: apps/lgroupdel.c:94
+#, c-format
+#, fuzzy
+msgid "Group %s could not be deleted.\n"
+msgstr "Kumpulan s"
+
+#: apps/lgroupmod.c:109 apps/lusermod.c:119
+#, fuzzy
+msgid "Both -L and -U specified.\n"
+msgstr "dan"
+
+#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#, c-format
+#, fuzzy
+msgid "Failed to set password for group %s.\n"
+msgstr "Gagal for kumpulan s"
+
+#: apps/lgroupmod.c:242
+#, c-format
+#, fuzzy
+msgid "Group %s could not be locked.\n"
+msgstr "Kumpulan s"
+
+#: apps/lgroupmod.c:250
+#, c-format
+#, fuzzy
+msgid "Group %s could not be unlocked.\n"
+msgstr "Kumpulan s"
+
+#: apps/lgroupmod.c:257
+#, c-format
+#, fuzzy
+msgid "Group %s could not be modified.\n"
+msgstr "Kumpulan s telah diubah"
+
+#: apps/lid.c:81
+#, c-format
+#, fuzzy
+msgid "No group name specified, using %s.\n"
+msgstr "Tidak kumpulan unama s"
+
+#: apps/lid.c:85
+#, c-format
+#, fuzzy
+msgid "No group name specified, no name for gid %d.\n"
+msgstr "Tidak kumpulan unama tidak unama for"
+
+#: apps/lid.c:93
+#, c-format
+#, fuzzy
+msgid "No user name specified, using %s.\n"
+msgstr "Tidak pengguna unama s"
+
+#: apps/lnewusers.c:74
+msgid "[OPTION...]"
+msgstr ""
+
+#: apps/lnewusers.c:98
+#, c-format
+#, fuzzy
+msgid "Error opening `%s': %s.\n"
+msgstr "Ralat s s"
+
+#: apps/lnewusers.c:131
+#, c-format
+#, fuzzy
+msgid "Error creating account for `%s': line improperly formatted.\n"
+msgstr "Ralat for s"
+
+#: apps/lnewusers.c:138
+#, fuzzy
+msgid "Refusing to create account with UID 0.\n"
+msgstr "UID"
+
+#. Aargh!  Abandon all hope.
+#: apps/lnewusers.c:237
+#, c-format
+#, fuzzy
+msgid "Error creating group for `%s' with GID %ld.\n"
+msgstr "Ralat kumpulan for s"
+
+#: apps/lnewusers.c:288
+#, c-format
+#, fuzzy
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Ralat for s s"
+
+#: apps/lnewusers.c:310
+#, c-format
+#, fuzzy
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Ralat direktori for s s"
+
+#: apps/lnewusers.c:325
+#, c-format
+#, fuzzy
+msgid "Error creating mail spool for %s.\n"
+msgstr "Ralat for s"
+
+#: apps/lnewusers.c:330
+#, c-format
+#, fuzzy
+msgid "Error creating user account for %s: %s\n"
+msgstr "Ralat pengguna for s s"
+
+#: apps/lpasswd.c:86
+#, c-format
+#, fuzzy
+msgid "Changing password for %s.\n"
+msgstr "for s"
+
+#: apps/lpasswd.c:111
+#, fuzzy
+msgid "New password"
+msgstr "Baru"
+
+#: apps/lpasswd.c:114
+#, fuzzy
+msgid "New password (confirm)"
+msgstr "Baru"
+
+#: apps/lpasswd.c:128
+#, fuzzy
+msgid "Passwords do not match, try again.\n"
+msgstr "Katalaluan"
+
+#: apps/lpasswd.c:133
+#, fuzzy
+msgid "Password change canceled.\n"
+msgstr "Katalaluan"
+
+#: apps/lpasswd.c:190
+#, c-format
+#, fuzzy
+msgid "Error setting password for user %s: %s.\n"
+msgstr "Ralat for pengguna s s"
+
+#: apps/lpasswd.c:197
+#, c-format
+#, fuzzy
+msgid "Error setting password for group %s: %s.\n"
+msgstr "Ralat for kumpulan s s"
+
+#: apps/lpasswd.c:208
+#, fuzzy
+msgid "Password changed.\n"
+msgstr "Katalaluan"
+
+#. Aargh!  Abandon all hope.
+#: apps/luseradd.c:197 apps/luseradd.c:209
+#, c-format
+#, fuzzy
+msgid "Error creating group `%s'.\n"
+msgstr "Ralat kumpulan s"
+
+#: apps/luseradd.c:276
+#, c-format
+#, fuzzy
+msgid "Account creation failed: %s.\n"
+msgstr "s"
+
+#: apps/luseradd.c:318
+#, c-format
+#, fuzzy
+msgid "Error creating %s: %s.\n"
+msgstr "Ralat s s"
+
+#: apps/luseradd.c:326
+#, fuzzy
+msgid "Error creating mail spool.\n"
+msgstr "Ralat"
+
+#: apps/luserdel.c:99
+#, c-format
+#, fuzzy
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Pengguna s s"
+
+#: apps/luserdel.c:110
+#, c-format
+#, fuzzy
+msgid "%s did not have a gid number.\n"
+msgstr "s"
+
+#: apps/luserdel.c:125
+#, c-format
+#, fuzzy
+msgid "No group with GID %ld exists, not removing.\n"
+msgstr "Tidak kumpulan"
+
+#: apps/luserdel.c:131
+#, c-format
+#, fuzzy
+msgid "Group with GID %ld did not have a group name.\n"
+msgstr "Kumpulan kumpulan unama"
+
+#: apps/luserdel.c:139
+#, c-format
+#, fuzzy
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Kumpulan s s"
+
+#: apps/luserdel.c:155
+#, c-format
+#, fuzzy
+msgid "%s did not have a home directory.\n"
+msgstr "s direktori"
+
+#: apps/luserdel.c:162
+#, c-format
+#, fuzzy
+msgid "Error removing %s: %s.\n"
+msgstr "Ralat s s"
+
+#: apps/lusermod.c:193 apps/lusermod.c:206
+#, c-format
+#, fuzzy
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Gagal for pengguna s s"
+
+#: apps/lusermod.c:217
+#, c-format
+#, fuzzy
+msgid "User %s could not be locked: %s.\n"
+msgstr "Pengguna s s"
+
+#: apps/lusermod.c:226
+#, c-format
+#, fuzzy
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Pengguna s s"
+
+#: apps/lusermod.c:235
+#, c-format
+#, fuzzy
+msgid "User %s could not be modified: %s.\n"
+msgstr "Pengguna s telah diubah s"
+
+#: apps/lusermod.c:289
+#, c-format
+#, fuzzy
+msgid "Group %s could not be modified: %s.\n"
+msgstr "Kumpulan s telah diubah s"
+
+#: apps/lusermod.c:302
+#, c-format
+#, fuzzy
+msgid "No old home directory for %s.\n"
+msgstr "Tidak direktori for s"
+
+#: apps/lusermod.c:307
+#, c-format
+#, fuzzy
+msgid "No new home directory for %s.\n"
+msgstr "Tidak direktori for s"
+
+#: apps/lusermod.c:313
+#, c-format
+#, fuzzy
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Ralat s s s"
+
+#: lib/config.c:70
+#, c-format
+#, fuzzy
+msgid "could not open configuration file `%s': %s"
+msgstr "fail s"
+
+#: lib/error.c:42
+msgid "success"
+msgstr ""
+
+#: lib/error.c:44
+#, fuzzy
+msgid "module disabled by configuration"
+msgstr "dimatikan"
+
+#: lib/error.c:46
+msgid "generic error"
+msgstr ""
+
+#: lib/error.c:48
+msgid "not enough privileges"
+msgstr ""
+
+#: lib/error.c:50
+msgid "access denied"
+msgstr ""
+
+#: lib/error.c:52
+#, fuzzy
+msgid "bad user/group name"
+msgstr "pengguna kumpulan"
+
+#: lib/error.c:54
+#, fuzzy
+msgid "bad user/group id"
+msgstr "pengguna kumpulan"
+
+#: lib/error.c:56
+#, fuzzy
+msgid "user/group name in use"
+msgstr "pengguna kumpulan unama dalam"
+
+#: lib/error.c:58
+#, fuzzy
+msgid "user/group id in use"
+msgstr "pengguna kumpulan dalam"
+
+#: lib/error.c:60
+#, fuzzy
+msgid "error manipulating terminal attributes"
+msgstr "ralat"
+
+#: lib/error.c:62
+#, fuzzy
+msgid "error opening file"
+msgstr "ralat"
+
+#: lib/error.c:64
+#, fuzzy
+msgid "error locking file"
+msgstr "ralat"
+
+#: lib/error.c:66
+#, fuzzy
+msgid "error statting file"
+msgstr "ralat"
+
+#: lib/error.c:68
+#, fuzzy
+msgid "error reading file"
+msgstr "ralat"
+
+#: lib/error.c:70
+#, fuzzy
+msgid "error writing to file"
+msgstr "ralat"
+
+#: lib/error.c:72
+#, fuzzy
+msgid "data not found in file"
+msgstr "dalam"
+
+#: lib/error.c:74
+msgid "internal initialization error"
+msgstr ""
+
+#: lib/error.c:76
+#, fuzzy
+msgid "error loading module"
+msgstr "ralat"
+
+#: lib/error.c:78
+#, fuzzy
+msgid "error resolving symbol in module"
+msgstr "ralat dalam"
+
+#: lib/error.c:80
+#, fuzzy
+msgid "library/module version mismatch"
+msgstr "versi"
+
+#: lib/modules.c:97
+#, c-format
+#, fuzzy
+msgid "no initialization function %s in `%s'"
+msgstr "tidak s dalam s"
+
+#: lib/modules.c:128
+#, c-format
+#, fuzzy
+msgid "module version mismatch in `%s'"
+msgstr "versi dalam s"
+
+#: lib/prompt.c:66
+#, fuzzy
+msgid "error reading terminal attributes"
+msgstr "ralat"
+
+#: lib/prompt.c:73 lib/prompt.c:85
+#, fuzzy
+msgid "error setting terminal attributes"
+msgstr "ralat"
+
+#: lib/prompt.c:79
+#, fuzzy
+msgid "error reading from terminal"
+msgstr "ralat"
+
+#: lib/user.c:190
+#, fuzzy
+msgid "name is not set"
+msgstr "unama"
+
+#: lib/user.c:194
+#, fuzzy
+msgid "name is too short"
+msgstr "unama"
+
+#: lib/user.c:200
+#, fuzzy
+msgid "name contains non-ASCII characters"
+msgstr "unama"
+
+#: lib/user.c:207
+#, fuzzy
+msgid "name contains control characters"
+msgstr "unama"
+
+#: lib/user.c:214
+#, fuzzy
+msgid "name contains whitespace"
+msgstr "unama"
+
+#: lib/user.c:221
+#, c-format
+#, fuzzy
+msgid "name contains invalid char `%c'"
+msgstr "unama"
+
+#: lib/util.c:200
+#, c-format
+#, fuzzy
+msgid "error locking file: %s"
+msgstr "ralat fail"
+
+#: modules/files.c:109 modules/files.c:453 modules/files.c:823
+#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
+#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
+#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
+#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
+#: modules/files.c:2569 modules/files.c:2586
+#, c-format
+#, fuzzy
+msgid "couldn't open `%s': %s"
+msgstr "s"
+
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:839 modules/files.c:1338
+#, c-format
+#, fuzzy
+msgid "couldn't stat `%s': %s"
+msgstr "s"
+
+#: modules/files.c:137
+#, c-format
+#, fuzzy
+msgid "error creating `%s': %s"
+msgstr "ralat s"
+
+#: modules/files.c:153
+#, c-format
+#, fuzzy
+msgid "backup file `%s' exists and is not a regular file"
+msgstr "fail s dan"
+
+#: modules/files.c:872 modules/files.c:1350
+#, c-format
+#, fuzzy
+msgid "couldn't read from `%s': %s"
+msgstr "s"
+
+#: modules/files.c:887 modules/files.c:900
+#, fuzzy
+msgid "entry already present in file"
+msgstr "dalam"
+
+#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
+#: modules/files.c:1421
+#, c-format
+#, fuzzy
+msgid "couldn't write to `%s': %s"
+msgstr "s"
+
+#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
+#: modules/files.c:1209
+#, c-format
+#, fuzzy
+msgid "entity object has no %s attribute"
+msgstr "tidak s"
+
+#: modules/files.c:2822 modules/files.c:2892
+msgid "not executing with superuser privileges"
+msgstr ""
+
+#: modules/files.c:2905
+#, fuzzy
+msgid "no shadow file present -- disabling"
+msgstr "tidak fail"
+
+#: modules/krb5.c:105
+#, c-format
+#, fuzzy
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "ralat for s dalam s"
+
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
+#, fuzzy
+msgid "error initializing kerberos library"
+msgstr "ralat"
+
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
+#, c-format
+#, fuzzy
+msgid "error parsing user name `%s' for kerberos"
+msgstr "ralat pengguna unama s for"
+
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
+#, c-format
+#, fuzzy
+msgid "entity structure has no %s or %s attributes"
+msgstr "tidak s atau s"
+
+#: modules/krb5.c:311
+#, c-format
+#, fuzzy
+msgid "entity has no %s or %s attributes"
+msgstr "tidak s atau s"
+
+#: modules/krb5.c:324
+#, c-format
+#, fuzzy
+msgid "entity was created with no %s or %s attributes"
+msgstr "tidak s atau s"
+
+#: modules/krb5.c:475 modules/krb5.c:563
+#, c-format
+#, fuzzy
+msgid "error reading information for `%s' from kerberos"
+msgstr "ralat for s"
+
+#: modules/krb5.c:604
+#, c-format
+#, fuzzy
+msgid "entity has no %s attribute"
+msgstr "tidak s"
+
+#: modules/krb5.c:642
+#, c-format
+#, fuzzy
+msgid "error setting password for `%s'"
+msgstr "ralat for s"
+
+#: modules/krb5.c:768
+#, fuzzy
+msgid "Kerberos Realm"
+msgstr "Kerberos"
+
+#: modules/krb5.c:775
+#, fuzzy
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Pentadbir"
+
+#: modules/krb5.c:797
+#, fuzzy
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos Katalaluan for Pentadbir"
+
+#: modules/ldap.c:216 modules/ldap.c:249
+#, fuzzy
+msgid "error initializing ldap library"
+msgstr "ralat"
+
+#: modules/ldap.c:227 modules/ldap.c:260
+#, c-format
+#, fuzzy
+msgid "could not set LDAP protocol to version %d"
+msgstr "LDAP versi"
+
+#: modules/ldap.c:237
+#, fuzzy
+msgid "could not negotiate TLS with LDAP server"
+msgstr "LDAP"
+
+#: modules/ldap.c:411
+#, fuzzy
+msgid "could not bind to LDAP server"
+msgstr "LDAP"
+
+#: modules/ldap.c:424
+#, fuzzy
+msgid "could not search LDAP server"
+msgstr "LDAP"
+
+#: modules/ldap.c:433
+#, fuzzy
+msgid "LDAP server appears to have no root DSE"
+msgstr "LDAP tidak"
+
+#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
+#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+#, fuzzy
+msgid "error mapping name to LDAP distinguished name"
+msgstr "ralat unama LDAP"
+
+#: modules/ldap.c:683
+#, fuzzy
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "ralat unama LDAP"
+
+#: modules/ldap.c:1212
+#, c-format
+#, fuzzy
+msgid "user object had no %s attribute"
+msgstr "pengguna tidak s"
+
+#: modules/ldap.c:1221
+#, c-format
+#, fuzzy
+msgid "user object was created with no `%s'"
+msgstr "pengguna tidak s"
+
+#: modules/ldap.c:1247
+msgid "could not convert internal data to LDAPMods"
+msgstr ""
+
+#: modules/ldap.c:1271 modules/ldap.c:1483
+#, c-format
+#, fuzzy
+msgid "error modifying LDAP directory entry: %s"
+msgstr "ralat LDAP direktori"
+
+#: modules/ldap.c:1291
+#, c-format
+#, fuzzy
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "ralat LDAP direktori s"
+
+#: modules/ldap.c:1339
+#, c-format
+#, fuzzy
+msgid "object had no %s attribute"
+msgstr "tidak s"
+
+#: modules/ldap.c:1366
+#, c-format
+#, fuzzy
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "ralat LDAP direktori s"
+
+#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
+#: modules/ldap.c:1610
+#, c-format
+#, fuzzy
+msgid "object has no %s attribute"
+msgstr "tidak s"
+
+#: modules/ldap.c:1546
+#, fuzzy
+msgid "no such object in LDAP directory"
+msgstr "tidak dalam LDAP"
+
+#: modules/ldap.c:1559
+#, c-format
+#, fuzzy
+msgid "no `%s' attribute found"
+msgstr "tidak s"
+
+#: modules/ldap.c:1701
+#, c-format
+#, fuzzy
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "ralat dalam LDAP direktori for s"
+
+#: modules/ldap.c:2243
+#, fuzzy
+msgid "LDAP Server Name"
+msgstr "LDAP Pelayan"
+
+#: modules/ldap.c:2249
+#, fuzzy
+msgid "LDAP Search Base DN"
+msgstr "LDAP Cari Asas"
+
+#: modules/ldap.c:2255
+#, fuzzy
+msgid "LDAP Bind DN"
+msgstr "LDAP"
+
+#: modules/ldap.c:2262
+#, fuzzy
+msgid "LDAP Bind Password"
+msgstr "LDAP"
+
+#: modules/ldap.c:2268
+#, fuzzy
+msgid "LDAP SASL User"
+msgstr "LDAP"
+
+#: modules/ldap.c:2275
+#, fuzzy
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP"
+
+#: modules/ldap.c:2315
+#, fuzzy
+msgid "error initializing module"
+msgstr "ralat"
+
+#: modules/sasldb.c:128
+#, c-format
+#, fuzzy
+msgid "Cyrus SASL error creating user: %s: %s"
+msgstr "ralat pengguna s"
+
+#: modules/sasldb.c:130
+#, c-format
+#, fuzzy
+msgid "Cyrus SASL error creating user: %s"
+msgstr "ralat pengguna"
+
+#: modules/sasldb.c:136
+#, c-format
+#, fuzzy
+msgid "Cyrus SASL error removing user: %s: %s"
+msgstr "ralat pengguna s"
+
+#: modules/sasldb.c:138
+#, c-format
+#, fuzzy
+msgid "Cyrus SASL error removing user: %s"
+msgstr "ralat pengguna"
+
+#: modules/sasldb.c:428 modules/sasldb.c:436
+#, c-format
+#, fuzzy
+msgid "error initializing Cyrus SASL: %s"
+msgstr "ralat"
+
+#: python/admin.c:494
+#, fuzzy
+msgid "error creating home directory for user"
+msgstr "ralat direktori for"
+
+#: python/admin.c:546
+#, fuzzy
+msgid "error removing home directory for user"
+msgstr "ralat direktori for"
+
+#: python/admin.c:623
+#, fuzzy
+msgid "error moving home directory for user"
+msgstr "ralat direktori for"
+
+#: python/admin.c:656
+#, fuzzy
+msgid "error creating mail spool for user"
+msgstr "ralat for"
+
+#: samples/lookup.c:64
+#, c-format
+#, fuzzy
+msgid "Error initializing %s: %s\n"
+msgstr "Ralat s s"
+
+#: samples/lookup.c:74
+#, c-format
+#, fuzzy
+msgid "Searching for group with ID %d.\n"
+msgstr "Mencari for kumpulan ID"
+
+#: samples/lookup.c:78
+#, c-format
+#, fuzzy
+msgid "Searching for group named %s.\n"
+msgstr "Mencari for kumpulan s"
+
+#: samples/lookup.c:86
+#, c-format
+#, fuzzy
+msgid "Searching for user with ID %d.\n"
+msgstr "Mencari for pengguna ID"
+
+#: samples/lookup.c:89
+#, c-format
+#, fuzzy
+msgid "Searching for user named %s.\n"
+msgstr "Mencari for pengguna s"
+
+#: samples/lookup.c:103
+msgid "Entry not found.\n"
+msgstr ""
+
+#: samples/testuser.c:76
+#, fuzzy
+msgid "Default user object classes:\n"
+msgstr "Default pengguna"
+
+#: samples/testuser.c:82
+#, fuzzy
+msgid "Default user attribute names:\n"
+msgstr "Default pengguna"
+
+#: samples/testuser.c:88
+#, fuzzy
+msgid "Getting default user attributes:\n"
+msgstr "default pengguna"
+
+#: samples/testuser.c:95
+#, fuzzy
+msgid "Copying user structure:\n"
+msgstr "pengguna"
+
