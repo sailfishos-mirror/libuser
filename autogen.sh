@@ -8,9 +8,9 @@ set -x
 CFLAGS="$DEFINES $RPM_OPT_FLAGS -O0 -g3 $CFLAGS" ; export CFLAGS
 libtoolize --force
 automake -a
+test -d intl || gettextize -f -c
 aclocal -I ./m4
 autoheader
 autoconf
-test -d intl || gettextize -f -c
 test -f config.cache && rm -f config.cache || true
 ./configure --prefix=/usr --sysconfdir=/etc --enable-maintainer-mode --with-ldap --with-sasl $@
