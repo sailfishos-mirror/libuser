@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-02-25 02:46+0100\n"
+"PO-Revision-Date: 2002-04-16 10:06+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -217,9 +217,8 @@ msgid "Error creating %s: %s.\n"
 msgstr "Fel vid skapande av %s: %s.\n"
 
 #: apps/luseradd.c:326
-#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr "Fel vid skapande av %s: %s.\n"
+msgstr "Fel vid skapande av e-postspool.\n"
 
 #: apps/luserdel.c:99
 #, c-format
