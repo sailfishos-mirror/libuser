@@ -1,1 +1,1 @@
-pkginclude_HEADERS = user.h user_private.h
+pkginclude_HEADERS = user.h user_private.h quota.h
