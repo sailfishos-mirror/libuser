@@ -118,8 +118,8 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 	g_return_val_if_fail(self != NULL, NULL);
 
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTupleAndKeywords
-	    (args, kwargs, "O!|O", keywords, &PyList_Type, &list,
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &PyList_Type, &list,
 	     &moreargs)) {
 		DEBUG_EXIT;
 		return NULL;
@@ -149,10 +149,10 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		obj = (struct libuser_prompt *) PyList_GetItem(list, i);
 		Py_INCREF(obj);
 		prompts[i].key = g_strdup(obj->prompt.key ? : "");
+		prompts[i].domain = g_strdup(obj->prompt.domain ? : "");
 		prompts[i].prompt = g_strdup(obj->prompt.prompt ? : "");
 		prompts[i].default_value =
-		    obj->prompt.default_value ? g_strdup(obj->prompt.
-							 default_value) :
+		    obj->prompt.default_value ? g_strdup(obj->prompt.default_value) :
 		    NULL;
 		prompts[i].visible = obj->prompt.visible;
 	}
@@ -168,13 +168,9 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 	if (success) {
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *obj;
-			obj =
-			    (struct libuser_prompt *) PyList_GetItem(list,
-								     i);
-			obj->prompt.value =
-			    g_strdup(prompts[i].value ? : "");
-			obj->prompt.free_value =
-			    (typeof(obj->prompt.free_value)) g_free;
+			obj = (struct libuser_prompt *) PyList_GetItem(list, i);
+			obj->prompt.value = g_strdup(prompts[i].value ? : "");
+			obj->prompt.free_value = (typeof(obj->prompt.free_value)) g_free;
 			if (prompts[i].value && prompts[i].free_value) {
 				prompts[i].free_value(prompts[i].value);
 				prompts[i].value = NULL;
@@ -239,6 +235,10 @@ libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
 		DEBUG_EXIT;
 		return PyString_FromString(self->prompt.prompt);
 	}
+	if (strcmp(attr, "domain") == 0) {
+		DEBUG_EXIT;
+		return PyString_FromString(self->prompt.domain ?: "");
+	}
 	if (strcmp(attr, "visible") == 0) {
 		DEBUG_EXIT;
 		return PyInt_FromLong(self->prompt.visible);
@@ -280,6 +280,19 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 		DEBUG_EXIT;
 		return 0;
 	}
+	if (strcmp(attr, "domain") == 0) {
+		if (!PyString_Check(args)) {
+			PyErr_SetString(PyExc_TypeError,
+					"domain must be a string");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if (self->prompt.domain)
+			g_free((char *) self->prompt.domain);
+		self->prompt.domain = g_strdup(PyString_AsString(args));
+		DEBUG_EXIT;
+		return 0;
+	}
 	if (strcmp(attr, "key") == 0) {
 		if (!PyString_Check(args)) {
 			PyErr_SetString(PyExc_TypeError,
@@ -309,8 +322,9 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 		if (self->prompt.default_value)
 			g_free((char *) self->prompt.default_value);
 		self->prompt.default_value =
-		    (args ==
-		     Py_None) ? NULL : g_strdup(PyString_AsString(args));
+		    (args == Py_None) ?
+		    NULL :
+		    g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -338,8 +352,10 @@ static int
 libuser_prompt_print(struct libuser_prompt *self, FILE * fp, int flags)
 {
 	fprintf(fp,
-		"(key = \"%s\", prompt = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
-		self->prompt.key ? : "", self->prompt.prompt ? : "",
+		"(key = \"%s\", prompt = \"%s\", domain = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
+		self->prompt.key ? : "",
+		self->prompt.prompt ? : "",
+		self->prompt.domain ? : "",
 		self->prompt.visible ? "true" : "false",
 		self->prompt.default_value ? : "",
 		self->prompt.value ? : "");

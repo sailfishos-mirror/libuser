@@ -28,12 +28,13 @@ libuser:
         	- SHADOWWARNING
 
 	Methods:
-		- getUserShells: Returns a list of valid shells for users on the system.
+		- getUserShells: Returns a list of valid shells for users on
+			the system.
 			Arguments:
 				None.
 			Returns: a list of strings.
 
-		- ADMIN: Creates and returns a new libuser.Admin object.
+		- admin: Creates and returns a new libuser.Admin object.
 			Keyword Arguments:
 				name=	
 				type=	
@@ -51,145 +52,226 @@ libuser:
 				- lookupUserByName:
 				- lookupUserById:
 				- lookupGroupByName:
-				- lookupGroupById: Look up information about a user or group using the user or group's name
-						   or UID/GID.
+				- lookupGroupById: Look up information about a
+					user or group using the
+					user or group's name or
+					UID/GID.
 					Arguments:
-						A name as a string or a numeric ID.
-					Returns: A libuser.Entity object containing information about the user or group, or
-						 None if there is no matching user or group.
+						A name as a string or a
+						numeric ID.
+					Returns: A libuser.Entity object
+						containing information about the
+						user or group, or None if there
+						is no matching user or group.
 
 				- initUser:
-				- initGroup: Create a new libuser.Entity object, initialized with information suitable for
-					     creating a new user or group.
+				- initGroup: Create a new libuser.Entity object,
+					initialized with information suitable
+					for creating a new user or group.
 					Arguments:
-						The new user or group's name as a string (required).
-						A true/false value indicating whether this is a system account or not (optional).
-					Returns: A libuser.Entity object containing information about the user or group.
+						The new user or group's name as
+						a string (required).
+						A true/false value indicating
+						whether this is a system account
+						or not (optional, default no).
+					Returns: A libuser.Entity object
+						containing information for
+						the user or group to be
+						created.
 
 				- addUser: Add a new user to the system:
 					Arguments:
-						A libuser.Entity object with the new user or group's information (required).
-						A true/false object indicating whether or not the home directory for the user
-						should be created (optional, defaults to true).
+						A libuser.Entity object with the
+						new user or group's information
+						(required).
+						A true/false object indicating
+						whether or not the home
+						directory for the user
+						should be created (optional,
+						defaults yes).
 
 				- addGroup: Add a new group to the system:
 					Arguments:
-						A libuser.Entity object with the new user or group's information (required).
+						A libuser.Entity object with the
+						new group's information
+						(required).
 
-				- modifyUser:
+				- modifyUser: Modify information about a user
+					on the system.
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
-						A true/false object indicating whether or not the home directory for the user
-						should be moved from its original location to the location stored in the
-						entity's libuser.HOMEDIRECTORY attribute (optional, defaults to true).
+						A libuser.Entity object with the
+						user or group's information
+						(required).
+						A true/false object indicating
+						whether or not the home
+						directory for the user should be
+						moved from its original location
+						to the location stored in the
+						entity's libuser.HOMEDIRECTORY
+						attribute (optional, default
+						yes).
 
-				- modifyGroup: Modify information about a user or group on the system.
+				- modifyGroup: Modify information about a group
+					on the system.
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
+						A libuser.Entity object with the
+						group's information (required).
 
-				- deleteUser:
+				- deleteUser: Remove a user account.
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
-						A true/false value indicating whether or not this user's home directory should
-						be removed (optional, defaults to false).
-				- deleteGroup: Remove a user or group from the system.
+						A libuser.Entity object with the
+						user's information (required).
+						A true/false value indicating
+						whether or not this user's home
+						directory should be removed
+						(optional, default no).
+						A true/false value indicating
+						whether or not this user's mail
+						spool should be removed
+						(optional, default no).
+				- deleteGroup: Remove a group from the system.
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
+						A libuser.Entity object with the
+						group's information (required).
 
 				- lockUser:
 				- lockGroup:
 				- unlockUser:
 				- unlockGroup: Lock or unlock a user or group account.
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
+						A libuser.Entity object with the
+						user or group's information
+						(required).
 
 				- setpassUser:
-					Arguments:
-						A libuser.Entity object with the user or group's information (required).
-						A string containing the new password in unencrypted form (required).
 				- setpassGroup:
 					Arguments:
-						A libuser.Entity object with the user or group's information (required).
-						A string containing the new password in unencrypted form (required).
+						A libuser.Entity object with the
+						user or group's information
+						(required).
+						A string containing the new
+						password (required).  This is
+						preferably in plaintext, but
+						can be crypted and prefixed
+						with "{crypt}", though some
+						modules will reject this.
 
 				- enumerateUsers:
-				- enumerateGroups: Get a list of users or groups known to the library and its modules.
+				- enumerateGroups: Get a list of users or groups
+					known to the library and its modules.
 					Arguments:
-						A pattern (wildcard-style) which returned user or group names should match (optional).
-						The name of a single module to query (optional).  The default is to iterate over
-						all loaded modules.
+						A pattern (wildcard-style) which
+						returned user or group names
+						should match (optional, default
+						is all ("*")).
 					Returns: a list of user or group names.
 
-				- enumerateUsersByGroup: Get a list of users who belong to a group.
+				- enumerateUsersByGroup: Get a list of users who
+					belong to a particular group.
 					Arguments:
 						A group's name (required).
-						The name of a single module to query (optional).  The default is to iterate over
-						all loaded modules.
 					Returns: a list of user names.
 
-				- enumerateGroupsByUser: Get a list of groups to which a user belongs.
+				- enumerateGroupsByUser: Get a list of groups to
+					which a user belongs.
 					Arguments:
 						A user's name (required).
-						The name of a single module to query (optional).  The default is to iterate over
-						all loaded modules.
 					Returns: a list of group names.
 
-				- promptConsole: Prompt the user for information, including for information for which there
-						 is a supplied default.
+				- enumerateUsersFull:
+				- enumerateGroupsFull: Get a list of users or
+					groups known to the library and its
+					modules, along with any data which can
+					be looked up about them.
+
+				- promptConsole: Prompt the user for
+					information, including for information
+					for which there is a supplied default.
 					Arguments:
-						A list of libuser.Prompt objects.
-					Returns: a true/false value indicating success or failure.
-				- promptConsoleQuiet: Prompt the user for information, except for information for which there
-						 is a supplied default.
+						A list of libuser.Prompt
+						objects.
+					Returns: a true/false value indicating
+						success or failure.
+				- promptConsoleQuiet: Prompt the user for
+					information, except for information for
+					which there is a supplied default.
 					Arguments:
-						A list of libuser.Prompt objects.
-					Returns: a true/false value indicating success or failure.
+						A list of libuser.Prompt
+						objects.
+					Returns: a true/false value indicating
+						success or failure.
 			Fields:
-				- prompt(function): A method which can be used to process lists of libuser.Prompt objects.
-						    Can be set to the object's promptConsole or promptConsoleQuiet methods, or a
-						    user-supplied function.
-				- prompt_args: Additional arguments which should be passed to prompt().
+				- prompt(function): A method which can be used
+					to process lists of libuser.Prompt
+					objects.  Can be set to the object's
+					promptConsole or promptConsoleQuiet
+					methods, or a user-supplied function.
+				- prompt_args: Additional arguments which should
+					be passed to prompt().
 		- Entity - An entity.
 			Methods:
-				- getattrlist: Return a list of attributes this entity posesses.
+				- getattrlist: Return a list of attributes this
+					entity possesses.
 					Arguments:
 						None.
 					Returns: a list of attribute names.
-				- has_key: Check if this entity possesses a given attribute.
+				- modules: Return a list of the modules which
+					assisted in the creation or lookup of
+					this libuser.Entity object.
+					Arguments:
+						None.
+					Returns: a list of module names.
+				- has_key: Check if this entity possesses a
+					given attribute.
 					Arguments:
 						An attribute name (required).
 					Returns: a true/false value.
-				- get: Return a list of the values for one attribute this entity possesses.
+				- get: Return a list of the values for one
+					attribute this entity possesses.
 					Arguments:
 						An attribute name (required).
 					Returns: a list of values.
-				- set: Set a list of the values for one attribute this entity possesses.
+				- set: Set a list of the values for one
+					attribute this entity possesses.
 					Arguments:
 						An attribute name (required).
-						Values for that attribute (required).
+						A value or a list of values for
+						that attribute (required).
 					Returns: nothing.
-				- add: Add a single value to the list of the values for one attribute this entity possesses.
+				- add: Add a single value to the list of the
+					values for one attribute this entity
+					possesses.
 					Arguments:
 						An attribute name (required).
-						A value for that attribute (required).
+						A value for that attribute
+						(required).
 					Returns: nothing.
-				- clear: Remove all values for one attribute this entity possesses.
+				- clear: Remove all values for one attribute
+					this entity possesses.
 					Arguments:
 						An attribute name (required).
 					Returns: nothing.
-				- revert: Reset all values for one attribute this entity possesses to the values which it had
-					  when it was created.
+				- revert: Reset all values for one attribute
+					this entity possesses to the values
+					which it had when it was created.
 					Arguments:
 						None.
 					Returns: nothing.
 			Fields:
-				All get()able and set()able attributes are also implemented using mapping conventions.
+				All get()table and set()table attributes are
+				also implemented using mapping conventions.
 		- Prompt - A prompt record.
 			Methods:
 				None.
 			Fields:
-				- prompt(string): The text of the request which is given to the user.
-				- visible(true/false): Whether or not the user should be able to see a response while typing it.
+				- prompt(string): The text of the request
+					which is given to the user.
+				- domain(string): A gettext domain which may
+					be able to provide translations of the
+					prompt.
+				- visible(true/false): Whether or not the user
+					should be able to see a response while
+					typing it.
 				- default_value(string): A default answer.
 				- value(string): The user's answer.
 
@@ -202,22 +284,29 @@ quota:
 			Keyword Arguments:
 			type=		USER or GROUP, as above.
 			name=		A user or group name.
-			special=	The device node to read quota information from.
+			special=	The device node to read quota
+					information from.
 			Returns: a quota.Quota object.
 		- set - set quotas for a user or group
 			Arguments:
 			A quota.Quota object.
 	Types:
-		- Quota - Quota settings for a user or group on a special device.
+		- Quota - Quota settings for a user or group on a special
+			device.
 			Fields:
-				user (USER quota only) - the user whose quota this object represents.
-				group (GROUP quota only) - the group whose quota this object represents.
-				special - the special device on which this quota is set.
-				inodeUsage - the user or group's current inode use count.
+				user (USER quota only) - the user whose quota
+					this object represents.
+				group (GROUP quota only) - the group whose quota
+					this object represents.
+				special - the special device on which this
+					quota is set.
+				inodeUsage - the user or group's current inode
+					use count.
 				inodeSoft - the soft limit.
 				inodeHard - the hard limit.
 				inodeGrace - the grace period.
-				blockUsage - the user or group's current block use count, in kilobytes.
+				blockUsage - the user or group's current block
+					use count, in kilobytes.
 				blockSoft - the soft limit.
 				blockHard - the hard limit.
 				blockGrace - the grace period.

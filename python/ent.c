@@ -241,6 +241,14 @@ libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
 	return ret;
 }
 
+/* Get the names of the modules which had something to do with this object. */
+static PyObject *
+libuser_entity_modules(struct libuser_entity *self, PyObject * args)
+{
+	DEBUG_CALL;
+	return convert_value_array_pylist(self->ent->modules);
+}
+
 /* Get the values for a particular attribute, or somesuch. */
 static PyObject *
 libuser_entity_get(struct libuser_entity *self, PyObject * args)
@@ -534,6 +542,8 @@ static PyMethodDef libuser_entity_methods[] = {
 	{"revert", (PyCFunction) libuser_entity_revert, METH_VARARGS,
 	 "revert the list of values for a given attribute to the values which "
 	 "were set when the entity was looked up"},
+	{"modules", (PyCFunction) libuser_entity_modules, 0,
+	 "get a list of the modules which generated or looked up this object"},
 	{NULL, NULL, 0},
 };
 
