@@ -24,6 +24,7 @@
 #include <limits.h>
 #include <locale.h>
 #include <popt.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -64,19 +65,57 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	user = poptGetArg(popt);
 
-	if(user == NULL) {
-		fprintf(stderr, _("No user name specified.\n"));
-		return 1;
-	}
-
-	if((password == NULL) && (cryptedPassword == NULL) && (plain_fd == -1) && (crypted_fd == -1)) {
-		fprintf(stderr, _("None of -P, -p, -F, -f specified.\n"));
-		return 1;
+	if((user == NULL) || (geteuid() != getuid())) {
+		struct passwd *pwd;
+		pwd = getpwuid(getuid());
+		if(pwd != NULL) {
+			fprintf(stderr, _("Changing password for %s.\n"), user = strdup(pwd->pw_name));
+		} else {
+			fprintf(stderr, _("No user name specified.\n"));
+			return 1;
+		}
 	}
 
 	ctx = lu_start(user, group ? lu_group : lu_user, NULL, NULL, interactive ? lu_prompt_console : lu_prompt_console_quiet,
 		       NULL, &error);
-	g_return_val_if_fail(ctx != NULL, 1);
+	if(ctx == NULL) {
+		if(error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+		} else {
+			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+		}
+		return 1;
+	}
+
+	lu_authenticate_unprivileged(ctx, user, "passwd");
+
+	if((password == NULL) && (cryptedPassword == NULL) && (plain_fd == -1) && (crypted_fd == -1)) {
+		struct lu_prompt prompts[2];
+		do {
+			memset(&prompts, 0, sizeof(prompts));
+			prompts[0].key = "lpasswd/password1";
+			prompts[0].prompt = _("New password");
+			prompts[1].key = "lpasswd/password2";
+			prompts[1].prompt = _("New password (confirm)");
+			if(lu_prompt_console(prompts, sizeof(prompts) / sizeof(prompts[0]), NULL, &error)) {
+				if(prompts[0].value && strlen(prompts[0].value) && prompts[1].value && strlen(prompts[1].value)) {
+					if(strcmp(prompts[0].value, prompts[1].value) == 0) {
+						password = strdup(prompts[0].value);
+						prompts[0].free_value(prompts[0].value);
+						prompts[1].free_value(prompts[1].value);
+					} else {
+						fprintf(stderr, _("Passwords do not match, try again.\n"));
+					}
+				} else {
+					fprintf(stderr, _("Password change canceled.\n"));
+					return 1;
+				}
+			}
+			if(error) {
+				lu_error_free(&error);
+			}
+		} while(password == NULL);
+	}
 
 	ent = lu_ent_new();
 
@@ -133,6 +172,8 @@ main(int argc, const char **argv)
 	lu_ent_free(ent);
 
 	lu_end(ctx);
+
+	fprintf(stderr, _("Password changed.\n"));
 
 	return 0;
 }

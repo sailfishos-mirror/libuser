@@ -193,13 +193,13 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	g_free(tmp);
 
 	if(ldap_set_option(ldap, LDAP_OPT_PROTOCOL_VERSION, &version) != LDAP_OPT_SUCCESS) {
-		lu_error_new(error, lu_error_init, _("could not set protocol to version %d"), version);
+		lu_error_new(error, lu_error_init, _("could not set LDAP protocol to version %d"), version);
 		close_server(ldap);
 		return NULL;
 	}
 
 	if(ldap_start_tls_s(ldap, &server, &client) != LDAP_SUCCESS) {
-		lu_error_new(error, lu_error_init, _("could not negotiate TLS with server"));
+		lu_error_new(error, lu_error_init, _("could not negotiate TLS with LDAP server"));
 		close_server(ldap);
 		return NULL;
 	}
@@ -213,7 +213,7 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 	if(ldap_simple_bind_s(ldap,
 			      generated_binddn,
 			      context->prompts[LU_LDAP_PASSWORD].value) != LDAP_SUCCESS) {
-		lu_error_new(error, lu_error_init, "could not bind to server");
+		lu_error_new(error, lu_error_init, _("could not bind to LDAP server"));
 		close_server(ldap);
 		return NULL;
 	}
@@ -313,12 +313,12 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 	base = lu_ldap_base(module, configKey, def);
 	if(base == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to base DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP base distinguished name"));
 		return FALSE;
 	}
 
@@ -362,7 +362,7 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 #ifdef DEBUG
 		g_print("No such entry found in directory.\n");
 #endif
-		lu_error_new(error, lu_error_generic, _("error searching ldap directory"));
+		lu_error_new(error, lu_error_generic, _("error searching LDAP directory"));
 		ret = FALSE;
 	}
 
@@ -561,10 +561,9 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 		return FALSE;
 	}
 
-	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("could not determine expected DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
@@ -583,7 +582,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(err == LDAP_SUCCESS) {
 		ret = TRUE;
 	} else {
-		lu_error_new(error, lu_error_write, _("error modifying directory entry: %s"), ldap_err2string(err));
+		lu_error_new(error, lu_error_write, _("error modifying LDAP directory entry: %s"), ldap_err2string(err));
 		free_ent_mods(mods);
 		return FALSE;
 	}
@@ -596,7 +595,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 			if(err == LDAP_SUCCESS) {
 				ret = TRUE;
 			} else {
-				lu_error_new(error, lu_error_write, _("error renaming directory entry: %s\n"),
+				lu_error_new(error, lu_error_write, _("error renaming LDAP directory entry: %s\n"),
 					     ldap_err2string(err));
 				free_ent_mods(mods);
 				return FALSE;
@@ -644,7 +643,7 @@ lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("could not map name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
@@ -655,7 +654,7 @@ lu_ldap_del(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 	if(err == LDAP_SUCCESS) {
 		ret = TRUE;
 	} else {
-		lu_error_new(error, lu_error_write, _("error removing directory entry: %s.\n"), ldap_err2string(err));
+		lu_error_new(error, lu_error_write, _("error removing LDAP directory entry: %s.\n"), ldap_err2string(err));
 		return FALSE;
 	}
 
@@ -707,7 +706,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent, const char *na
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
@@ -746,7 +745,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent, const char *na
 		if(err == LDAP_SUCCESS) {
 			ret = TRUE;
 		} else {
-			lu_error_new(error, lu_error_write, _("error modifying directory entry: %s"), ldap_err2string(err));
+			lu_error_new(error, lu_error_write, _("error modifying LDAP directory entry: %s"), ldap_err2string(err));
 			g_free(mods);
 			g_free(val);
 			return FALSE;
@@ -794,7 +793,7 @@ lu_ldap_islocked(struct lu_module *module, enum lu_type type, struct lu_ent *ent
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
@@ -806,7 +805,7 @@ lu_ldap_islocked(struct lu_module *module, enum lu_type type, struct lu_ent *ent
 		entry = ldap_first_entry(ctx->ldap, messages);
 	}
 	if(entry == NULL) {
-		lu_error_new(error, lu_error_generic, _("no such object in directory"));
+		lu_error_new(error, lu_error_generic, _("no such object in LDAP directory"));
 		return FALSE;
 	}
 
@@ -828,7 +827,7 @@ lu_ldap_islocked(struct lu_module *module, enum lu_type type, struct lu_ent *ent
 		}
 	} else {
 #ifdef DEBUG
-		g_print(_("No `%s' attribute found for entry."), LU_USERPASSWORD);
+		g_print("No `%s' attribute found for entry.", LU_USERPASSWORD);
 #endif
 		lu_error_new(error, lu_error_generic, _("no `%s' attribute found"), LU_USERPASSWORD);
 		return FALSE;
@@ -871,7 +870,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 
 	dn = lu_ldap_ent_to_dn(module, ent, namingAttr, name->data, configKey, def);
 	if(dn == NULL) {
-		lu_error_new(error, lu_error_generic, _("error mapping name to DN"));
+		lu_error_new(error, lu_error_generic, _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
@@ -879,7 +878,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 	g_print("Setting password for `%s'.\n", dn);
 #endif
 
-	snprintf(filter, sizeof(filter), "(%s=%s)", namingAttr, name->data);
+	snprintf(filter, sizeof(filter), "(%s=%s)", namingAttr, (char*)name->data);
 	if((i = ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filter, attributes, FALSE, &messages)) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if(entry != NULL) {
@@ -901,7 +900,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 		}
 	} else {
 #ifdef DEBUG
-		g_print("Error searching for `%s': %s.\n", dn, ldap_err2string(i));
+		g_print("Error searching LDAP directory for `%s': %s.\n", dn, ldap_err2string(i));
 #endif
 	}
 
@@ -926,7 +925,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 	rmmod.mod_values = rmvalues;
 
 	if((i = ldap_modify_ext_s(ctx->ldap, dn, mods, &server, &client)) != LDAP_SUCCESS) {
-		lu_error_new(error, lu_error_generic, _("error setting password for %s: %s"), dn, ldap_err2string(i));
+		lu_error_new(error, lu_error_generic, _("error setting password in LDAP directory for %s: %s"), dn, ldap_err2string(i));
 		return FALSE;
 	}
 
@@ -997,11 +996,10 @@ lu_ldap_enumerate(struct lu_module *module,
 		  struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
-	const char *attr;
 	char **values = NULL;
 	char *base = NULL, *filt = NULL;
 	const char *branch;
-	int i, j;
+	int j;
 	GList *ret = NULL;
 	struct lu_ldap_context *ctx;
 	char *attributes[] = {(char*)returnAttr, NULL};

@@ -31,11 +31,13 @@
 #include <libintl.h>
 #include <limits.h>
 #include <locale.h>
+#include <security/pam_appl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <utime.h>
+#include "../include/libuser/user.h"
 #include "../include/libuser/error.h"
 #include "apputil.h"
 
@@ -183,4 +185,159 @@ lu_homedir_move(const char *oldhome, const char *directory, struct lu_error **er
 		}
 	}
 	return FALSE;
+}
+
+struct conv_data {
+	lu_prompt_fn *prompt;
+	gpointer callback_data;
+};
+
+static int
+lu_converse(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr)
+{
+	struct conv_data *data = appdata_ptr;
+	struct lu_prompt prompts[num_msg];
+	struct lu_error *error = NULL;
+	struct pam_response *responses;
+	int i;
+
+	memset(&prompts, 0, sizeof(prompts));
+
+	for(i = 0; i < num_msg; i++) {
+		char *pending = NULL;
+		switch((*msg)[i].msg_style) {
+			case PAM_PROMPT_ECHO_ON:
+				if(pending) {
+					prompts[i].prompt = g_strconcat(pending, (*msg)[i].msg, NULL);
+					g_free(pending);
+					pending = NULL;
+				} else {
+					prompts[i].prompt = g_strdup((*msg)[i].msg);
+				}
+				prompts[i].visible = TRUE;
+				break;
+			case PAM_PROMPT_ECHO_OFF:
+				if(pending) {
+					prompts[i].prompt = g_strconcat(pending, (*msg)[i].msg, NULL);
+					g_free(pending);
+					pending = NULL;
+				} else {
+					prompts[i].prompt = g_strdup((*msg)[i].msg);
+				}
+				prompts[i].visible = FALSE;
+				break;
+			default:
+				if(pending) {
+					char *tmp = g_strconcat(pending, (*msg)[i].msg, NULL);
+					g_free(pending);
+					pending = tmp;
+				} else {
+					pending = g_strdup((*msg)[i].msg);
+				}
+		}
+		if((prompts[i].prompt != NULL) && (strrchr(prompts[i].prompt, ':'))) {
+			char *p = strrchr(prompts[i].prompt, ':');
+			*p = '\0';
+		}
+		if(pending) {
+			g_free(pending);
+		}
+	}
+
+	if(data->prompt(prompts, num_msg, data->callback_data, &error)) {
+		responses = malloc(sizeof(struct pam_response) * i);
+		if(responses == NULL) {
+			return PAM_BUF_ERR;
+		}
+		memset(responses, 0, sizeof(struct pam_response) * i);
+		for(i = 0; i < num_msg; i++) {
+			responses[i].resp_retcode = PAM_SUCCESS;
+			if(prompts[i].prompt != NULL) {
+				g_free((gpointer)prompts[i].prompt);
+			}
+			if(prompts[i].value != NULL) {
+				responses[i].resp = strdup(prompts[i].value);
+				prompts[i].free_value(prompts[i].value);
+			}
+		}
+		*resp = responses;
+	}
+
+	if(error != NULL) {
+		lu_error_free(&error);
+	}
+
+	return PAM_CONV_ERR;
+}
+
+void
+lu_authenticate_unprivileged(struct lu_context *ctx, const char *user, const char *appname)
+{
+	pam_handle_t *pamh;
+	struct pam_conv conv;
+	struct conv_data data;
+	const char *info, *auth, *net;
+
+	info = lu_get_info_modules(ctx);
+	auth = lu_get_auth_modules(ctx);
+	net = lu_cfg_read_single(ctx, "defaults/network_modules", NULL);
+	if(net) {
+		int bypass = 1, i, j;
+		char **authlist, **infolist, **netlist;
+
+		authlist = g_strsplit(auth, " ", 0);
+		infolist = g_strsplit(info, " ", 0);
+		netlist = g_strsplit(net, " ", 0);
+
+		for(i = 0; authlist[i] != NULL; i++) {
+			for(j = 0; netlist[j] != NULL; j++) {
+				if(strcmp(authlist[i], netlist[j]) == 0) {
+					break;
+				}
+			}
+			if(netlist[j] == NULL) {
+				bypass = 0;
+			}
+		}
+		for(i = 0; infolist[i] != NULL; i++) {
+			for(j = 0; netlist[j] != NULL; j++) {
+				if(strcmp(infolist[i], netlist[j]) == 0) {
+					break;
+				}
+			}
+			if(netlist[j] == NULL) {
+				bypass = 0;
+			}
+		}
+
+		g_strfreev(authlist);
+		g_strfreev(infolist);
+		g_strfreev(netlist);
+
+		if(bypass || (geteuid() == 0) || (getuid() == 0)) {
+			return;
+		}
+	}
+
+	lu_get_prompter(ctx, &data.prompt, &data.callback_data);
+	if(data.prompt == NULL) {
+		fprintf(stderr, _("Internal error.\n"));
+		exit(1);
+	}
+
+	conv.conv = lu_converse;
+	conv.appdata_ptr = &data;
+
+	if(pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
+		fprintf(stderr, _("Error initializing PAM.\n"));
+		exit(1);
+	}
+
+	if(pam_authenticate(pamh, 0) != PAM_SUCCESS) {
+		const char *puser = user;
+		pam_get_item(pamh, PAM_USER, (const void**) &puser);
+		fprintf(stderr, _("Authentication failed for %s.\n"), puser);
+		pam_end(pamh, 0);
+		exit(1);
+	}
 }

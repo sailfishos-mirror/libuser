@@ -6,9 +6,13 @@ include $(top_srcdir)/Makefile.extra
 LDADD = ../lib/libuser.la @GLIB_LIBS@ @INTLLIBS@
 
 lchsh_SOURCES = \
+	apputil.c \
+	apputil.h \
 	lchsh.c
 
 lchfn_SOURCES = \
+	apputil.c \
+	apputil.h \
 	lchfn.c
 
 lchage_SOURCES = \
@@ -48,4 +52,6 @@ lgroupdel_SOURCES = \
 	lgroupdel.c
 
 lpasswd_SOURCES = \
+	apputil.c \
+	apputil.h \
 	lpasswd.c

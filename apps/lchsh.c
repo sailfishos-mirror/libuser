@@ -59,11 +59,11 @@ main(int argc, const char **argv)
 	g_return_val_if_fail(c == -1, 0);
 	user = poptGetArg(popt);
 
-	if(user == NULL) {
+	if((user == NULL) || (geteuid() != getuid())) {
 		struct passwd *pwd = NULL;
 		pwd = getpwuid(getuid());
 		if(pwd != NULL) {
-			user = pwd->pw_name;
+			user = strdup(pwd->pw_name);
 		} else {
 			fprintf(stderr, _("No user name specified, no name for uid %d.\n"), getuid());
 			exit(1);
@@ -72,10 +72,16 @@ main(int argc, const char **argv)
 	g_print(_("Changing shell for %s.\n"), user);
 
 	ctx = lu_start(user, lu_user, NULL, NULL, interactive ? lu_prompt_console : lu_prompt_console_quiet, NULL, &error);
-	if(error) {
-		fprintf(stderr, _("error: %s\n"), error->string);
+	if(ctx == NULL) {
+		if(error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+		} else {
+			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+		}
+		return 1;
 	}
-	g_return_val_if_fail(ctx != NULL, 1);
+
+	lu_authenticate_unprivileged(ctx, user, "chsh");
 
 	ent = lu_ent_new();
 	if(lu_user_lookup_name(ctx, user, ent, &error)) {
@@ -93,6 +99,8 @@ main(int argc, const char **argv)
 				}
 			}
 		}
+	} else {
+		g_print(_("User %s does not exist.\n"), user);
 	}
 	lu_ent_free(ent);
 

@@ -86,11 +86,21 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent, int flags, co
 		if(i == SASL_OK) {
 			return TRUE;
 		} else {
-			lu_error_new(error, lu_error_generic,
-				     (err ? "SASL error %s user: %s: %s" : "SASL error %s user: %s"),
-				     (password ? "creating" : "removing"),
-				     sasl_errstring(i, NULL, NULL),
-				     err);
+			if(password) {
+				lu_error_new(error, lu_error_generic,
+					     err ?
+					     _("Cyrus SASL error creating user: %s: %s") :
+					     _("Cyrus SASL error creating user: %s"),
+					     sasl_errstring(i, NULL, NULL),
+					     err);
+			} else {
+				lu_error_new(error, lu_error_generic,
+					     err ?
+					     _("Cyrus SASL error removing user: %s: %s") :
+					     _("Cyrus SASL error removing user: %s"),
+					     sasl_errstring(i, NULL, NULL),
+					     err);
+			}
 			return FALSE;
 		}
 	}
@@ -268,12 +278,12 @@ lu_sasldb_init(struct lu_context *context, struct lu_error **error)
 	/* Initialize SASL. */
 	i = sasl_server_init(NULL, appname);
 	if(i != SASL_OK) {
-		lu_error_new(error, lu_error_generic, "error initializing Cyrus SASL: %s", sasl_errstring(i, NULL, NULL));
+		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
 	i = sasl_server_new(PACKAGE, NULL, domain, NULL, 0, &connection);
 	if(i != SASL_OK) {
-		lu_error_new(error, lu_error_generic, "error initializing Cyrus SASL: %s", sasl_errstring(i, NULL, NULL));
+		lu_error_new(error, lu_error_generic, _("error initializing Cyrus SASL: %s"), sasl_errstring(i, NULL, NULL));
 		return NULL;
 	}
 

@@ -48,6 +48,7 @@ struct lu_context *lu_start(const char *authname, enum lu_type auth_type, const 
 void lu_end(struct lu_context *context);
 
 void lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter, gpointer callback_data);
+void lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter, gpointer *callback_data);
 
 gboolean lu_set_info_modules(struct lu_context *context, const char *list, struct lu_error **error);
 const char *lu_get_info_modules(struct lu_context *context);

@@ -227,6 +227,93 @@ lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter, gpointer pro
 }
 
 /**
+ * lu_get_prompter:
+ * @context: A valid library context, initialized by calling lu_start().
+ * @prompter: The address of a pointer to a function with the same prototype as lu_prompt_console().
+ * @prompter_data: The address of a pointer which will hold data which should be passed to @prompter as its @callback_data parameter.
+ *
+ * This is a companion function to lu_set_prompter().
+ *
+ * Returns: void
+ **/
+void
+lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter, gpointer *prompter_data)
+{
+	if(prompter != NULL) {
+		*prompter = context->prompter;
+	}
+	if(prompter_data != NULL) {
+		*prompter_data = context->prompter_data;
+	}
+}
+
+/**
+ * lu_get_auth_modules:
+ * @context: A valid library context, initialized by calling lu_start().
+ *
+ * This function returns the list of currently-loaded auth modules as a string.
+ *
+ * Returns: a string which must not be freed.
+ **/
+const char *
+lu_get_auth_modules(struct lu_context *context)
+{
+	char *tmp = NULL, *ret = NULL;
+	GList *i;
+
+	for(i = context->auth_module_names; i != NULL; i = g_list_next(i)) {
+		if(tmp) {
+			char *p;
+			p = g_strconcat(tmp, " ", (char*)i->data, NULL);
+			g_free(tmp);
+			tmp = p;
+		} else {
+			tmp = g_strdup((char*)i->data);
+		}
+	}
+
+	if(tmp) {
+		ret = context->scache->cache(context->scache, tmp);
+		g_free(tmp);
+	}
+
+	return ret;
+}
+
+/**
+ * lu_get_info_modules:
+ * @context: A valid library context, initialized by calling lu_start().
+ *
+ * This function returns the list of currently-loaded info modules as a string.
+ *
+ * Returns: a string which must not be freed.
+ **/
+const char *
+lu_get_info_modules(struct lu_context *context)
+{
+	char *tmp = NULL, *ret = NULL;
+	GList *i;
+
+	for(i = context->info_module_names; i != NULL; i = g_list_next(i)) {
+		if(tmp) {
+			char *p;
+			p = g_strconcat(tmp, " ", (char*)i->data, NULL);
+			g_free(tmp);
+			tmp = p;
+		} else {
+			tmp = g_strdup((char*)i->data);
+		}
+	}
+
+	if(tmp) {
+		ret = context->scache->cache(context->scache, tmp);
+		g_free(tmp);
+	}
+
+	return ret;
+}
+
+/**
  * lu_start:
  * @auth_name: A suggested name to use when initializing modules.
  * @auth_type: Whether &auth_name; is a user or group.
@@ -1047,8 +1134,11 @@ lu_groups_enumerate(struct lu_context *context, const char *pattern, const char 
 }
 
 static int
-lu_enumerate_users_by_group(const char *module, struct lu_module *mod, struct enumerate_data *data)
+lu_enumerate_users_by_group(gpointer key, gpointer value, gpointer cbdata)
 {
+	const char *module = key;
+	struct lu_module *mod = value;
+	struct enumerate_data *data = cbdata;
 	if(mod->users_enumerate_by_group) {
 		data->list = g_list_concat(data->list, mod->users_enumerate_by_group(mod, data->pattern, data->gid, data->error));
 	}
@@ -1099,7 +1189,7 @@ lu_users_enumerate_by_group(struct lu_context *context, const char *group, const
 	if(module) {
 		mod = g_tree_lookup(context->modules, context->scache->cache(context->scache, module));
 		if(mod != NULL) {
-			lu_enumerate_users_by_group(module, mod, &data);
+			lu_enumerate_users_by_group((gpointer)module, (gpointer)mod, (gpointer)&data);
 		}
 	} else {
 		g_tree_traverse(context->modules, lu_enumerate_users_by_group, G_IN_ORDER, &data);

@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.22)
+AM_INIT_AUTOMAKE(libuser,0.23)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
@@ -15,8 +15,12 @@ AM_PROG_LIBTOOL
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.9,,,gmodule)
 
-ALL_LINGUAS="de es fr it no"
+ALL_LINGUAS="de es fr it no sv"
 AM_GNU_GETTEXT
+
+AC_CHECK_HEADERS(security/pam_appl.h)
+AC_CHECK_FUNC(pam_start,,AC_CHECK_LIB(pam, pam_start))
+AC_CHECK_FUNC(pam_authenticate,,AC_CHECK_LIB(pam, pam_authenticate))
 
 popt=/usr
 AC_ARG_WITH(popt,
@@ -33,7 +37,7 @@ if test x$popt != xno ; then
 		LIBS="$LIBS -L$popt/lib"
 	fi
 	AC_CHECK_HEADERS(popt.h)
-	AC_CHECK_LIB(popt,poptGetContext)
+	AC_CHECK_FUNC(poptGetContext,,AC_CHECK_LIB(popt,poptGetContext))
 fi
 
 MODULES="$MODULES ${PACKAGE}_files.so"

@@ -160,6 +160,9 @@
 /* Define if you have the <sasl.h> header file.  */
 #undef HAVE_SASL_H
 
+/* Define if you have the <security/pam_appl.h> header file.  */
+#undef HAVE_SECURITY_PAM_APPL_H
+
 /* Define if you have the <stddef.h> header file.  */
 #undef HAVE_STDDEF_H
 
@@ -186,6 +189,9 @@
 
 /* Define if you have the crypt library (-lcrypt).  */
 #undef HAVE_LIBCRYPT
+
+/* Define if you have the pam library (-lpam).  */
+#undef HAVE_LIBPAM
 
 /* Define if you have the popt library (-lpopt).  */
 #undef HAVE_LIBPOPT

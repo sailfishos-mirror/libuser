@@ -77,7 +77,14 @@ main(int argc, const char **argv)
 	}
 
 	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, NULL);
-	g_return_val_if_fail(ctx != NULL, 1);
+	if(ctx == NULL) {
+		if(error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+		} else {
+			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+		}
+		return 1;
+	}
 
 	if(lock && unlock) {
 		fprintf(stderr, _("Both -L and -U specified.\n"));

@@ -773,7 +773,7 @@ generic_mod(struct lu_module *module, const char *base_name, const struct format
 		new_value = NULL;
 		if(!formats[i].multiple) {
 			if(values == NULL) {
-				lu_error_new(error, lu_error_generic, "entity has no `%s' attribute", formats[i].attribute);
+				lu_error_new(error, lu_error_generic, _("entity object has no `%s' attribute"), formats[i].attribute);
 				return FALSE;
 			}
 			p = (char*)values->data ?: "";
@@ -1324,6 +1324,7 @@ lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent, const char 
 	ret = generic_setpass(module, "shadow", 2, ent, password, error);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+		lu_ent_set(ent, LU_SHADOWLASTCHANGE, lu_util_shadow_current_date(module->scache));
 	}
 	return ret;
 }
@@ -1335,6 +1336,7 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent, const char
 	ret = generic_setpass(module, "gshadow", 2, ent, password, error);
 	if(ret) {
 		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+		lu_ent_set(ent, LU_SHADOWLASTCHANGE, lu_util_shadow_current_date(module->scache));
 	}
 	return ret;
 }
@@ -1670,12 +1672,10 @@ lu_files_init(struct lu_context *context, struct lu_error **error)
 	g_return_val_if_fail(context != NULL, FALSE);
 
 	/* Handle authenticating to the data source. */
-#ifndef DEBUG
 	if(geteuid() != 0) {
-		lu_error_new(error, lu_error_privilege, _("Not executing with superuser privileges."));
+		lu_error_new(error, lu_error_privilege, _("not executing with superuser privileges"));
 		return NULL;
 	}
-#endif
 
 	/* Allocate the method structure. */
 	ret = g_malloc0(sizeof(struct lu_module));
@@ -1728,12 +1728,11 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 	g_return_val_if_fail(context != NULL, NULL);
 
 	/* Handle authenticating to the data source. */
-#ifndef DEBUG
 	if(geteuid() != 0) {
-		lu_error_new(error, lu_error_privilege, _("Not executing with superuser privileges."));
+		lu_error_new(error, lu_error_privilege, _("not executing with superuser privileges"));
 		return NULL;
 	}
-#endif
+
 	/* Get the name of the shadow file. */
 	key = g_strconcat("shadow", "/directory", NULL);
 	dir = lu_cfg_read_single(context, key, "/etc");
@@ -1742,7 +1741,7 @@ lu_shadow_init(struct lu_context *context, struct lu_error **error)
 
 	/* Make sure we're actually using shadow passwords on this system. */
 	if((stat(shadow_file, &st) == -1) && (errno == ENOENT)) {
-		lu_error_new(error, lu_error_config_disabled, _("No shadow file present -- disabling."));
+		lu_error_new(error, lu_error_config_disabled, _("no shadow file present -- disabling"));
 		g_free(shadow_file);
 		return NULL;
 	}

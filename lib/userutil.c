@@ -21,6 +21,7 @@
 #include "config.h"
 #endif
 #include <sys/stat.h>
+#include <sys/time.h>
 #include <crypt.h>
 #include <ctype.h>
 #include <errno.h>
@@ -29,6 +30,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
 #include "../include/libuser/user_private.h"
@@ -526,4 +528,27 @@ lu_util_field_write(int fd, const char *first, unsigned int field, const char *v
 	g_free(buf);
 
 	return ret;
+}
+
+char *
+lu_util_shadow_current_date(struct lu_string_cache *cache)
+{
+	struct tm gmt;
+	time_t now;
+	char buf[LINE_MAX];
+	GDate *today, *epoch;
+	long days;
+
+	time(&now);
+	gmt = *(gmtime(&now));
+
+	today = g_date_new_dmy(gmt.tm_mday, gmt.tm_mon + 1, gmt.tm_year + 1900);
+	epoch = g_date_new_dmy(1, 1, 1970);
+	days = g_date_julian(today) - g_date_julian(epoch);
+	g_date_free(today);
+	g_date_free(epoch);
+
+	snprintf(buf, sizeof(buf), "%ld", days);
+
+	return cache->cache(cache, buf);
 }

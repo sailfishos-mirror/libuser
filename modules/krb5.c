@@ -101,7 +101,7 @@ create_server_handle(struct lu_krb5_context *context, struct lu_error **error)
 	if(ret == KADM5_OK) {
 		return handle;
 	} else {
-		lu_error_new(error, lu_error_generic, _("error connecting to the kadm5 server for service %s in realm %s: %s"),
+		lu_error_new(error, lu_error_generic, _("error connecting to the kadm5 server for service `%s' in realm `%s': %s"),
 			     service, params.realm, error_message(ret));
 		return NULL;
 	}

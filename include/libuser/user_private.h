@@ -174,5 +174,6 @@ char *lu_util_line_get_matching3(int fd, const char *thirdpart, struct lu_error 
 char *lu_util_line_get_matchingx(int fd, const char *part, int field, struct lu_error **error);
 char *lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_error **error);
 gboolean lu_util_field_write(int fd, const char *first, unsigned int field, const char *value, struct lu_error **error);
+char *lu_util_shadow_current_date(struct lu_string_cache *cache);
 
 #endif

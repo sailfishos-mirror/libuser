@@ -88,10 +88,14 @@ main(int argc, const char **argv)
 
 	ctx = lu_start(user, group ? lu_user : lu_group, NULL, NULL,
 		       interactive ? lu_prompt_console : lu_prompt_console_quiet, NULL, &error);
-	if(error) {
-		fprintf(stderr, "error: %s\n", error->string);
+	if(ctx == NULL) {
+		if(error != NULL) {
+			fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE, error->string);
+		} else {
+			fprintf(stderr, _("Error initializing %s.\n"), PACKAGE);
+		}
+		return 1;
 	}
-	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(group) {
 		values = lu_users_enumerate_by_group(ctx, user, NULL, &error);

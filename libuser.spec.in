@@ -5,7 +5,7 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPrereq: popt, python-devel, sgml-tools, krb5-devel, openldap-devel, cyrus-sasl-devel
+BuildPrereq: pam-devel, popt, python-devel, sgml-tools, cyrus-sasl-devel
 Summary: A user account administration library.
 
 %description
@@ -68,6 +68,13 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
+- install sv translation
+- make lpasswd prompt for passwords when none are given on the command line
+- make sure all user-visible strings are marked for translation
+- clean up some user-visible strings
+- require PAM authentication in lchsh, lchfn, and lpasswd for non-networked modules
+
 * Fri Jul 27 2001 Nalin Dahyabhai <nalin@redhat.com>
 - print uids and gids of users and names in lid app
 - fix tree traversal in users_enumerate_by_group and groups_enumerate_by_users
