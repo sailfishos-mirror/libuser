@@ -62,8 +62,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		if (prompts[i].visible == FALSE) {
 			if (tcgetattr(fileno(stdin), &otermios) == -1) {
 				lu_error_new(error, lu_error_terminal,
-					     _
-					     ("error reading terminal attributes"));
+					     _("error reading terminal attributes"));
 				return FALSE;
 			}
 			ntermios = otermios;
@@ -71,8 +70,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			if (tcsetattr(fileno(stdin), TCSADRAIN, &ntermios)
 			    == -1) {
 				lu_error_new(error, lu_error_terminal,
-					     _
-					     ("error setting terminal attributes"));
+					     _("error setting terminal attributes"));
 				return FALSE;
 			}
 		}
@@ -85,8 +83,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			if (tcsetattr(fileno(stdin), TCSADRAIN, &otermios)
 			    == -1) {
 				lu_error_new(error, lu_error_terminal,
-					     _
-					     ("error setting terminal attributes"));
+					     _("error setting terminal attributes"));
 				return FALSE;
 			}
 			g_print("\n");
@@ -101,9 +98,11 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			*p = '\0';
 		}
 
-		prompts[i].value = (strlen(buf) > 0) ? g_strdup(buf) :
-		    (prompts[i].default_value ?
-		     g_strdup(prompts[i].default_value) : g_strdup(""));
+		prompts[i].value = (strlen(buf) > 0) ?
+			g_strdup(buf) :
+			(prompts[i].default_value ?
+			 g_strdup(prompts[i].default_value) :
+			 g_strdup(""));
 		prompts[i].free_value = (void *) g_free;
 	}
 	return TRUE;
