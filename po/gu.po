@@ -2,21 +2,21 @@
 # translation of libuser.po to Gujarati
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Ankit Patel <ankit@redhat.com>, 2004.
+# Ankit Patel <ankit@redhat.com>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "POT-Creation-Date: 2005-01-17 02:06+0100\n"
-"PO-Revision-Date: 2004-11-03 09:59+0530\n"
+"PO-Revision-Date: 2005-02-17 09:45+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
-"Language-Team: Gujarati\n"
+"Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -338,9 +338,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "UID ૦ સાથે ખાતું બનાવવાનું નકારી રહ્યા છીએ.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "`%s' માટે GID %ld સાથે જૂથ બનાવવામાં ભૂલ: %s\n"
+msgstr "`%s' માટે GID %jd સાથે જૂથ બનાવવામાં ભૂલ: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
@@ -401,9 +401,9 @@ msgid "Password changed.\n"
 msgstr "પાસવર્ડ બદલાઈ ગયેલ છે.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "જૂથ %s અસ્તિત્વમાં નથી.\n"
+msgstr "જૂથ %jd અસ્તિત્વમાં નથી\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -436,14 +436,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s એ gid સંખ્યા આપતું નથી.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %ld વાળું કોઈ જૂથ અસ્તિત્વમાં નથી, દૂર કરી રહ્યા નથી.\n"
+msgstr "GID %jd વાળું કોઈ જૂથ અસ્તિત્વમાં નથી, દૂર કરતા નથી.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %ld વાળા જૂથ પાસે કોઈ કોઈ જૂથ નામ નથી.\n"
+msgstr "GID %jd વાળા જૂથ પાસે કોઈ કોઈ જૂથ નામ નથી.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -952,9 +952,9 @@ msgid "Invalid ID %s\n"
 msgstr ""
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "જૂથ માટે ID %d સાથે શોધ કરી રહ્યા છીએ.\n"
+msgstr "ID %jd વાળા જૂથ માટે શોધ કરી રહ્યા છીએ.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -962,9 +962,9 @@ msgid "Searching for group named %s.\n"
 msgstr "%s નામવાળા જૂથ માટે શોધ કરી રહ્યા છીએ.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "ID %d વાળા વપરાશકર્તા માટે શોધ કરી રહ્યા છીએ.\n"
+msgstr "ID %jd વાળા વપરાશકર્તા માટે શોધ કરી રહ્યા છીએ.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -999,5 +999,3 @@ msgstr "મૂળભુત વપરાશકર્તા લક્ષણો મ
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
 
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "`%s' નો મૂળભુત સુરક્ષા સંદર્ભ ફરી સુયોજિત કરી શક્યા નહિં: %s"
