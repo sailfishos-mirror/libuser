@@ -45,7 +45,7 @@ rm -fr $RPM_BUILD_ROOT
 rm -fr $RPM_BUILD_ROOT
 %makeinstall pkglibdir=$RPM_BUILD_ROOT%{_libdir}/%{name}
 
-pushd %{_libdir}/python1.5/site-packages/
+pushd $RPM_BUILD_ROOT/%{_libdir}/python1.5/site-packages/
 python -c "import libuser"
 python -c "import quota"
 popd
