@@ -368,7 +368,7 @@ lu_ent_get_attributes_int(GArray *list)
 	GList *ret = NULL;
 	for(i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		ret = g_list_prepend(ret, g_quark_to_string(attr->name));
+		ret = g_list_prepend(ret, (char*)g_quark_to_string(attr->name));
 	}
 	return g_list_reverse(ret);
 }
