@@ -832,9 +832,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Auðkennir"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "villa við að lesa einingu"
+msgstr "villa við að ræsa einingu"
 
 #: modules/sasldb.c:128
 #, c-format
