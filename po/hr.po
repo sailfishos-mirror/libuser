@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2003-12-15 00:17+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -380,17 +380,17 @@ msgstr "Lozinke se ne podudaraju, pokušajte ponovo.\n"
 msgid "Password change canceled.\n"
 msgstr "Otkazana promjena lozinke.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Greška kod postavljanja lozinke za korisnika %s: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Greška kod postavljanja lozinke za grupu %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Lozinka je promjenjena.\n"
@@ -405,17 +405,17 @@ msgstr "Grupa %s ne postoji.\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Greška kod stvaranja grupe `%s'.\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Greška kod stvaranja računa: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Greška kod stvaranja %s: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Greška kod stvaranja niza čekanja e-pošte.\n"

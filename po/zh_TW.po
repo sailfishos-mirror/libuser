@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-15 08:56+1000\n"
 "Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
 "Language-Team: Chinese Traditional <zh_TW@li.org>\n"
@@ -382,17 +382,17 @@ msgstr "密碼不符，請再試一次。\n"
 msgid "Password change canceled.\n"
 msgstr "取消密碼變更。\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "為 %s 使用者設定密碼發生錯誤: %s。\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "設定密碼給 %s 群組發生錯誤: %s。\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "密碼已變更。\n"
@@ -407,17 +407,17 @@ msgstr "%jd 群組不存在\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "建立 `%s' 群組發生錯誤：%s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "帳號建立失敗: %s。\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "建立 %s 發生錯誤: %s。\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "建立郵件 spool 時發生錯誤。\n"

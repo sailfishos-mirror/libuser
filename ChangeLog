@@ -1,3 +1,22 @@
+2005-01-15  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/lchage.1
+	* apps/lgroupadd.1
+	* apps/lgroupdel.1
+	* apps/lgroupmod.1
+	* apps/lid.1
+	* apps/lnewusers.1
+	* apps/lpasswd.1
+	* apps/luseradd.1
+	* apps/luserdel.1
+	* apps/lusermod.1: New files.
+	* Makefile.am: Add new man pages.
+
+	* apps/lchage.c (main): Fix cut-and-paste error in -E and -W.
+	* apps/lpasswd.c (main): Make sure the password is always
+	'\0'-terminated.
+	* apps/luseradd.c (main): Exit if a new group can't be created.
+
 2004-12-13  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.1.

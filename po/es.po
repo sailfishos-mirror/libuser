@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-12-10 11:15-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
@@ -489,19 +489,19 @@ msgstr "Cancelado el cambio de contraseñas.\n"
 
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Error al configurar la contraseña para el usuario  %s: %s.\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Error en la configuración de la contraseña para el grupo %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Contraseña modificada.\n"
@@ -522,21 +522,21 @@ msgstr "Error en la creación del grupo `%s': %s\n"
 
 # apps/luseradd.c:159
 # apps/luseradd.c:159
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Creación de la cuenta fallida: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creando %s: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Error al crear un spool de correo.\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-16 21:52+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -383,17 +383,17 @@ msgstr "Heslá sa nezhodujú, skúste znova.\n"
 msgid "Password change canceled.\n"
 msgstr "Zmena hesla zrušená.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Chyba pri nastavovaní hesla pre používateľa %s: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Chyby pri nastavovaní hesla pre skupinu %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Heslo zmenené.\n"
@@ -408,17 +408,17 @@ msgstr "Skupina %jd neexistuje\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Chyba pri vytváraní skupiny `%s': %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Vytváranie konta zlyhalo: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Chyba pri vytváraní %s: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"

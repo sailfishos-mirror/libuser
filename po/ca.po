@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2005-01-09 04:33+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -384,19 +384,19 @@ msgstr "Les contrasenyes són diferents, intenteu-ho de nou.\n"
 msgid "Password change canceled.\n"
 msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
 "S'ha produït un error en configurar la contrasenya per a l'usuari %s: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr ""
 "S'ha produït un error en configurar la contrasenya per al grup %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "S'ha canviat la contrasenya.\n"
@@ -411,17 +411,17 @@ msgstr "El grup %jd no existeix\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "S'ha produït un error en crear el grup '%s': %s.\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "No s'ha pogut crear el compte: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "S'ha produït un error en crear %s: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "S'ha produït un error en crear la gestió de cues de correu.\n"

@@ -58,7 +58,9 @@ if QUOTA
 pythonexec_LTLIBRARIES += python/libuserquotamodule.la
 endif
 
-dist_man_MANS = apps/lchfn.1 apps/lchsh.1
+dist_man_MANS = apps/lgroupadd.1 apps/lgroupdel.1 apps/lgroupmod.1 \
+	apps/lchage.1 apps/lchfn.1 apps/lchsh.1 apps/lid.1 apps/lnewusers.1 \
+	apps/lpasswd.1 apps/luseradd.1 apps/luserdel.1 apps/lusermod.1
 EXTRA_MANS = lib/userquota.3
 
 pkgconfig_DATA = $(PACKAGE).pc

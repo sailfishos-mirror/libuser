@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-23 15:57+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -413,18 +413,18 @@ msgstr "পাসওয়ার্ড দুটি মেলেনি, পুন�
 msgid "Password change canceled.\n"
 msgstr "পাসওয়ার্ড পরিবর্তনের প্রক্রিয়া বাতিল করা হয়েছে।\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s ব্যবহারকারীর জন্য পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে: %s।\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "%s দলের জন্য পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে: %s।\n"
 
 # modified for RHEL
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "পাসওয়ার্ড পরিবর্তিত হয়েছে।\n"
@@ -442,19 +442,19 @@ msgid "Error creating group `%s': %s\n"
 msgstr "`%s' দল তৈরি করতে সমস্যা হয়েছে: %s\n"
 
 # modified for RHEL
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "অ্যাকাউন্ট তৈরি করতে ব্যর্থ: %s।\n"
 
 # modified for RHEL
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s তৈরি করতে সমস্যা: %s।\n"
 
 # modified for RHEL
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "মেইল স্পুল তৈরি করতে সমস্যা।\n"

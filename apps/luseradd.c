@@ -229,6 +229,7 @@ main(int argc, const char **argv)
 			lu_error_free(&error);
 		}
 		lu_end(ctx);
+		return 1;
 	}
 	value = g_value_array_get_nth(values, 0);
 	gidNumber = lu_value_get_id(value);

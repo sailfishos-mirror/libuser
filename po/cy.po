@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-02-24 12:28+0000\n"
 "Last-Translator: Owain Green <owaing@oceanfree.net>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -382,17 +382,17 @@ msgstr "Nid yw'r cyfrineiriau'n cydweddu, ceisiwch eto.\n"
 msgid "Password change canceled.\n"
 msgstr "Diddymwyd newid y cyfrinair.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Gwall wrth osod cyfrinair ar gyfer defnyddiwr %s: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Gwall wrth osod cyfrinair ar gyfer grŵp %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Newidiwyd y cyfrinair.\n"
@@ -407,17 +407,17 @@ msgstr "Nid yw'r grŵp %s yn bodoli.\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Gwall wrth greu grŵp `%s'.\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Methodd creu'r gyfrif: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Gwall wrth greu %s: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Gwall wrth greu sbŵl post.\n"

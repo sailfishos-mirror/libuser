@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-04 14:59+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -383,17 +383,17 @@ msgstr "Katalaluan"
 msgid "Password change canceled.\n"
 msgstr "Katalaluan"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, fuzzy, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ralat for pengguna s s"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, fuzzy, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Ralat for kumpulan s s"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, fuzzy, c-format
 msgid "Password changed.\n"
 msgstr "Katalaluan"
@@ -408,17 +408,17 @@ msgstr "Kumpulan %s tidak wujud.\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Ralat kumpulan s"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, fuzzy, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "s"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, fuzzy, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Ralat s s"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, fuzzy, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Ralat"

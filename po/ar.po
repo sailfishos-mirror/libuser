@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-12-01 19:34+0300\n"
 "Last-Translator: Munzir Taha <munzirtaha@newhorizons.com.sa>\n"
 "Language-Team: Arabic <fedora-trans-ar@redhat.com>\n"
@@ -383,17 +383,17 @@ msgstr "كلمات المرور غير متطابقة، حاول مُجدّدا�
 msgid "Password change canceled.\n"
 msgstr "تم التراجع عن تغيير كلمة المرور.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "خطأ في وضع كلمة المرور للمستخدم %s. %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "خطأ في وضع كلمة المرور للمجموعة %s. %s\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "تم تغيير كلمة المرور.\n"
@@ -408,17 +408,17 @@ msgstr "المجموعة %jd غير موجودة\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "خطأ في انشاء المجموعة `%s': %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "فشل في انشاء الحساب: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "خطأ في إنشاء %s: %s. \n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "خطأ في إنشاء مخزن البريد.\n"

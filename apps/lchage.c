@@ -122,9 +122,9 @@ main(int argc, const char **argv)
 		{"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
 		 "number of days after expiration date when account "
 		 "is considered inactive", "NUM"},
-		{"expire", 'E', POPT_ARG_LONG, &shadowInactive, 0,
+		{"expire", 'E', POPT_ARG_LONG, &shadowExpire, 0,
 		 "password expiration date", "NUM"},
-		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0,
+		{"warndays", 'W', POPT_ARG_LONG, &shadowWarning, 0,
 		 "days before expiration to begin warning user", "NUM"},
 		POPT_AUTOHELP
 		POPT_TABLEEND

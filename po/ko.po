@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-15 10:36+1000\n"
 "Last-Translator: Michelle J Kim <mkim@redhat.com>\n"
 "Language-Team:  <ko@li.org>\n"
@@ -382,17 +382,17 @@ msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
 msgid "Password change canceled.\n"
 msgstr "암호 변경이 취소되었습니다.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "`%s' 그룹의 암호를 설정하는 도중 오류 발생: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "암호가 변경되었습니다.\n"
@@ -407,17 +407,17 @@ msgstr "%jd 그룹이 존재하지 않습니다\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "`%s' 그룹을 생성하는 도중 오류 발생: %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "계정 생성에 실패함: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"

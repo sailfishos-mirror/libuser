@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-12-30 13:19-0800\n"
 "Last-Translator: Nikolay Sarmadzhiev <nikolay@localhost.localdomain>\n"
 "Language-Team:  <bg@li.org>\n"
@@ -342,7 +342,8 @@ msgstr "Отказано създаването на потребител с UID
 #: apps/lnewusers.c:234
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
+msgstr ""
+"Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -387,17 +388,17 @@ msgstr "Паролите не съвпадат, опитайте отново.\n
 msgid "Password change canceled.\n"
 msgstr "Смяната на паролата прекъсната.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Грешка при задаване паролата за потребител %s: %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Грешка при задаване паролата за група %s: %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Паролата променена.\n"
@@ -412,17 +413,17 @@ msgstr "Група %jd не съществува\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Грешка при създаване на група `%s': %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Неуспех при създаването на акаунт: %s.\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Грешка при създаване на %s: %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Грешка при създаване на файл за поща.\n"
@@ -735,7 +736,8 @@ msgstr "няма наличен сенчест файл -- деактивира�
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
+msgstr ""
+"грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1000,4 +1002,3 @@ msgstr "Извличане на стандартни потребителски 
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
-

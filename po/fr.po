@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-15 14:45+1000\n"
 "Last-Translator: Audrey Simons <asimons@redhat.com>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -382,19 +382,19 @@ msgstr "Les mots de passe ne sont pas les mêmes, essayez de nouveau.\n"
 msgid "Password change canceled.\n"
 msgstr "Changement de mot de passe annulé.\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
 "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr ""
 "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "Mot de passe changé.\n"
@@ -409,17 +409,17 @@ msgstr "Le groupe %jd n'existe pas\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Erreur lors de la création du groupe `%s' : %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "La création du compte a échoué : %s\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Erreur lors de la création de %s : %s.\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Erreur lors de la création du spool de mail.\n"

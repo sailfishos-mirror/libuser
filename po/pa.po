@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 23:22+0100\n"
+"POT-Creation-Date: 2005-01-15 15:13+0100\n"
 "PO-Revision-Date: 2004-11-16 17:10+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Panjabi <fedora-trans-pa@redhat.com>\n"
@@ -387,17 +387,17 @@ msgstr "ਗੁਪਤ-ਕੋਡ ਨੇ ਮੇਲ ਨਹੀ ਕੀਤਾ, ਮੁ�
 msgid "Password change canceled.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲੀ ਰੱਦ ਹੋਈ।\n"
 
-#: apps/lpasswd.c:190
+#: apps/lpasswd.c:189
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s ਉਪਭੋਗਤਾ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
-#: apps/lpasswd.c:198
+#: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
-#: apps/lpasswd.c:209
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
 msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲ ਹੋਇਆ।\n"
@@ -412,17 +412,17 @@ msgstr "ਸਮੂਹ %jd ਮੌਜੂਦ ਨਹੀ।\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "'%s' ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
-#: apps/luseradd.c:286
+#: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ: %s|\n"
 
-#: apps/luseradd.c:316
+#: apps/luseradd.c:317
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
-#: apps/luseradd.c:323
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ।\n"

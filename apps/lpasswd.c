@@ -155,25 +155,24 @@ main(int argc, const char **argv)
 	}
 
 	if (plain_fd != -1) {
-		char buf[LINE_MAX];
+		char buf[LINE_MAX + 1];
 		int i;
-		memset(buf, '\0', sizeof(buf));
-		i = read(plain_fd, buf, sizeof(buf));
+
+		i = read(plain_fd, buf, sizeof(buf) - 1);
 		while ((i > 0) &&
-		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
-			buf[--i] = '\0';
-		}
+		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
+			i--;
+		buf[i] = '\0';
 		password = g_strdup(buf);
 		is_crypted = FALSE;
 	} else if (crypted_fd != -1) {
-		char buf[LINE_MAX];
+		char buf[LINE_MAX + 1];
 		int i;
-		memset(buf, '\0', sizeof(buf));
-		i = read(crypted_fd, buf, sizeof(buf));
+		i = read(crypted_fd, buf, sizeof(buf) - 1);
 		while ((i > 0) &&
-		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
-			buf[--i] = '\0';
-		}
+		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
+			i--;
+		buf[i] = '\0';
 		password = g_strdup(buf);
 		is_crypted = TRUE;
 	} else if (cryptedPassword != NULL) {

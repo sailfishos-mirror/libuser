@@ -1,0 +1,72 @@
+.\" A man page for lchage
+.\" Copyright (C) 2005 Red Hat, Inc.
+.\"
+.\" This is free software; you can redistribute it and/or modify it under
+.\" the terms of the GNU Library General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful, but
+.\" WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+.\" General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU Library General Public
+.\" License along with this program; if not, write to the Free Software
+.\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+.\"
+.\" Author: Miloslav Trmac <mitr@redhat.com>
+.TH lchage 1 "Jan 12 2005" libuser
+
+.SH NAME
+lchage \- Display or change user password policy
+
+.SH SYNOPSIS
+lchage [\fIOPTION\fR]... \fIuser\fR
+
+.SH DESCRIPTION
+Displays or allows changing password policy of \fIuser\fR.
+
+.SH OPTIONS
+.TP
+\fB\-d\fR, \fB\-\-date\fR=\fIdays\fR
+Set the date of last password change to \fIdays\fR after Jan 1 1970.
+
+.TP
+\fB\-E\fR, \fB\-\-expire\fR=\fIdays\fR
+Set the account expiration date to \fIdays\fR after Jan 1 1970.
+Set \fIdays\fR to -1 to disable account expiration.
+
+.TP
+\fB\-i\fR, \fB\-\-interactive\fR 
+Ask all questions when connecting to the user database,
+even if default answers are set up in
+.B libuser
+configuration.
+
+.TP
+\fB\-I\fR, \fB\-\-inactive\fR=\fIdays\fR
+Disable the account after \fIdays\fR after password expires (after
+the user user is required to change the password).
+
+.TP
+\fB\-l\fR, \fB\-\-list\fR
+Only list current \fIuser\fR's policy and make no changes.
+
+.TP
+\fB\-m\fR, \fB\-\-mindays\fR=\fIdays\fR
+Require at least \fIdays\fR days between password changes.
+Set \fIdays\fR to 0 to disable this checking.
+
+.TP
+\fB\-M\fR, \fB\-\-maxdays\fR=\fIdays\fR
+Require changing the password after \fIdays\fR since last password change.
+Set \fIdays\fR to 99999 to disable this checking.
+
+.TP
+\fB\-W\fR, \fB\-\-warndays\fR=\fIdays\fR
+Start warning the user \fIdays\fR before password expires (before
+the user is required to change the password).
+
+.SH EXIT STATUS
+The exit status is 0 on success, nonzero on error.
