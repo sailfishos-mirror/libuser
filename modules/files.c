@@ -1289,20 +1289,15 @@ lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
 {
 	char *ret = NULL;
 	if (lock) {
-		if (cryptedPassword[0] != '!') {
-			cryptedPassword = g_strconcat("!", cryptedPassword,
-						      NULL);
-			ret = ent->cache->cache(ent->cache, cryptedPassword);
-			g_free((char *) cryptedPassword);
-		} else {
-			ret = cryptedPassword;
-		}
+		cryptedPassword = g_strconcat("!", cryptedPassword, NULL);
+		ret = ent->cache->cache(ent->cache, cryptedPassword);
+		g_free((char *) cryptedPassword);
 	} else {
 		if (cryptedPassword[0] == '!') {
 			ret = ent->cache->cache(ent->cache,
 						cryptedPassword + 1);
 		} else {
-			ret = cryptedPassword;
+			ret = ent->cache->cache(ent->cache, cryptedPassword);
 		}
 	}
 	return ret;
