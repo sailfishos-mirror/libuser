@@ -2,7 +2,7 @@
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -89,6 +89,9 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Thu Feb  6 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.5-2
+- rebuild
+
 * Wed Feb  5 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.5-1
 - expose lu_get_first_unused_id() as a package-private function
 - provide libuser.ADMIN.getFirstUnusedUid and libuser.ADMIN.getFirstUnusedGid
