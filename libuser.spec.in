@@ -46,7 +46,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html
+%doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html python/modules.txt
 %config %{_sysconfdir}/libuser.conf
 %dir %{_libdir}/libuser
 %{_libdir}/python1.5/site-packages/*
