@@ -1333,13 +1333,13 @@ static PyTypeObject AdminType = {
 static struct libuser_admin *
 libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	char *name = getlogin(), *info = NULL, *auth = NULL, *p, *q;
+	char *name = getlogin(), *modules = NULL, *create = NULL, *p, *q;
 	PyObject *prompt = NULL, *prompt_data = NULL;
 	char *keywords[] = {
 		"name",
 		"type",
-		"info",
-		"auth",
+		"modules",
+		"create_modules",
 		"prompt",
 		"prompt_data",
 		NULL,
@@ -1363,7 +1363,7 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	ret->ctx = NULL;
 
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|sissOO", keywords,
-					 &name, &type, &info, &auth,
+					 &name, &type, &modules, &create,
 					 &prompt, &prompt_data)) {
 		Py_DECREF(ret);
 		return NULL;
@@ -1393,11 +1393,11 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 
 #ifdef DEBUG_BINDING
 	fprintf(stderr,
-		"%sprompt at <%p>, self = <%p>, info = <%p>, auth = <%p>\n",
-		getindent(), prompt, ret, info, auth);
+		"%sprompt at <%p>, self = <%p>, modules = <%p>, create = <%p>\n",
+		getindent(), prompt, ret, modules, create);
 #endif
 	context =
-	    lu_start(name, type, info, auth, libuser_admin_python_prompter,
+	    lu_start(name, type, modules, create, libuser_admin_python_prompter,
 		     ret->prompt_data, &error);
 
 	if (context == NULL) {
