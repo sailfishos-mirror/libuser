@@ -150,26 +150,31 @@ lib_libuserquota_la_SOURCES = lib/userquota.c
 lib_libuserquota_la_CPPFLAGS = $(GLIB_CFLAGS) -Ilib
 lib_libuserquota_la_LDFLAGS = -version-info 2:1:1
 
+modules_libuser_files_la_CPPFLAGS = $(GOBJECT_CFLAGS) -D_LIBUSER_MODULE
 modules_libuser_files_la_SOURCES = modules/files.c
 modules_libuser_files_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(SELINUX_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
+modules_libuser_shadow_la_CPPFLAGS = $(GOBJECT_CFLAGS) -D_LIBUSER_MODULE
 modules_libuser_shadow_la_SOURCES = modules/files.c
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(SELINUX_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
 
+modules_libuser_krb5_la_CPPFLAGS = $(GOBJECT_CFLAGS) -D_LIBUSER_MODULE
 modules_libuser_krb5_la_SOURCES = modules/krb5.c
 modules_libuser_krb5_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(KRB5_LDADD) $(KRB5_LIBS)
 modules_libuser_krb5_la_LIBADD = lib/libuser.la
 
+modules_libuser_ldap_la_CPPFLAGS = $(GOBJECT_CFLAGS) -D_LIBUSER_MODULE
 modules_libuser_ldap_la_SOURCES = modules/ldap.c
 modules_libuser_ldap_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(LDAP_LDADD) $(LDAP_LIBS)
 modules_libuser_ldap_la_LIBADD = lib/libuser.la
 
+modules_libuser_sasldb_la_CPPFLAGS = $(GOBJECT_CFLAGS) -D_LIBUSER_MODULE
 modules_libuser_sasldb_la_SOURCES = modules/sasldb.c
 modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(SASL_LDADD) $(SASL_LIBS)

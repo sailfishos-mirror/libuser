@@ -1,3 +1,11 @@
+2004-09-29  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.52.3.
+
+	* NEWS: Update.
+
+	* Makefile.am: Readd -D_LIBUSER_MODULE for modules.
+
 2004-09-28  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.2.

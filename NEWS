@@ -1,3 +1,6 @@
+0.52.3
+* Fix compilation without libuser headers already installed (#134085)
+
 0.52.2
 * Allow LDAP connection using ldaps, custom ports or without TLS (original
   patch from Pawel Salek).
