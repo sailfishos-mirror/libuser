@@ -3,6 +3,8 @@
 * Fix updating of groups after user renaming in lusermod
 * Allow setting a shadow password even if the current shadow password is
   invalid (#131180)
+* Add lu_{user,group}_unlock_nonempty (#86414); module interface ABI has 
+  changed
 * Miscellaneous bug and memory leak fixes
 
 0.52.6

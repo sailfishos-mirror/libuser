@@ -157,6 +157,16 @@ lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
+<NAME>lu_user_unlock_nonempty</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_context_t *context, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_unlock_nonempty</NAME>
+<RETURNS>gboolean  </RETURNS>
+lu_context_t *context, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
 <NAME>lu_user_islocked</NAME>
 <RETURNS>gboolean  </RETURNS>
 lu_context_t *context,struct lu_ent *ent, lu_error_t **error
@@ -250,6 +260,9 @@ typedef enum lu_status {
 	lu_error_module_load,
 	lu_error_module_sym,
 	lu_error_module_version,
+
+	/* Since 0.53 */
+	lu_error_unlock_empty,
 } lu_status_t;
 </ENUM>
 <MACRO>

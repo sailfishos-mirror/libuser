@@ -36,6 +36,8 @@ lu_user_lock
 lu_group_lock
 lu_user_unlock
 lu_group_unlock
+lu_user_unlock_nonempty
+lu_group_unlock_nonempty
 lu_user_islocked
 lu_group_islocked
 lu_user_setpass

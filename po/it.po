@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 22:04+0100\n"
+"POT-Creation-Date: 2004-11-14 23:22+0100\n"
 "PO-Revision-Date: 2004-11-14 10:01+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
@@ -675,69 +675,63 @@ msgstr "impossibile impostare l'ambiente predefinito per la sicurezza: %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "impossibile impostare l'ambiente di sicurezza predefinito a %s: %s"
 
-#: modules/files.c:145
-#, c-format
-msgid "couldn't reset default security context to `%s': %s"
-msgstr ""
-"impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
-
-#: modules/files.c:172 modules/files.c:532 modules/files.c:877
-#: modules/files.c:1150 modules/files.c:1342 modules/files.c:1564
-#: modules/files.c:1651 modules/files.c:1888 modules/files.c:2079
-#: modules/files.c:2096 modules/files.c:2186 modules/files.c:2205
-#: modules/files.c:2273 modules/files.c:2294 modules/files.c:2391
-#: modules/files.c:2410 modules/files.c:2469 modules/files.c:2488
-#: modules/files.c:2589 modules/files.c:2604
+#: modules/files.c:169 modules/files.c:529 modules/files.c:874
+#: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
+#: modules/files.c:1648 modules/files.c:1885 modules/files.c:2076
+#: modules/files.c:2093 modules/files.c:2183 modules/files.c:2202
+#: modules/files.c:2270 modules/files.c:2291 modules/files.c:2388
+#: modules/files.c:2407 modules/files.c:2466 modules/files.c:2485
+#: modules/files.c:2586 modules/files.c:2601
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "impossibile aprire `%s': %s"
 
-#: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:889 modules/files.c:1354
+#: modules/files.c:185 modules/files.c:221 modules/files.c:259
+#: modules/files.c:886 modules/files.c:1351
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "impossibile eseguire lo stat su `%s': %s"
 
-#: modules/files.c:199
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "errore nella creazione di `%s': %s"
 
-#: modules/files.c:215
+#: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "il file di backup `%s' esiste e non �un file standard"
 
-#: modules/files.c:919 modules/files.c:1363
+#: modules/files.c:916 modules/files.c:1360
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "impossibile leggere da `%s': %s"
 
-#: modules/files.c:928 modules/files.c:935
+#: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
 msgstr "voce gi�presente nel file"
 
-#: modules/files.c:942 modules/files.c:957 modules/files.c:1409
-#: modules/files.c:1417
+#: modules/files.c:939 modules/files.c:954 modules/files.c:1406
+#: modules/files.c:1414
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "impossibile scrivere su `%s': %s"
 
-#: modules/files.c:1117 modules/files.c:1125 modules/files.c:1218
-#: modules/files.c:1226
+#: modules/files.c:1114 modules/files.c:1122 modules/files.c:1215
+#: modules/files.c:1223
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "nessun attributo %s per l'oggetto entit�"
 
-#: modules/files.c:1922 modules/ldap.c:1609 modules/ldap.c:1882
+#: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
 msgid "error encrypting password"
 msgstr "errore nel criptaggio della password"
 
-#: modules/files.c:2876 modules/files.c:2955
+#: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
 msgstr "esecuzione senza privilegi di superutente"
 
-#: modules/files.c:2970
+#: modules/files.c:2967
 msgid "no shadow file present -- disabling"
 msgstr "nessun file shadow presente -- disattivazione"
 
@@ -832,7 +826,7 @@ msgid "LDAP server appears to have no root DSE"
 msgstr "il server LDAP non ha DSE di root"
 
 #: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1719 modules/ldap.c:1815
+#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
 msgid "error mapping name to LDAP distinguished name"
 msgstr ""
 "errore nella configurazione del nome sull'identificatore unico dell'utente "
@@ -862,7 +856,7 @@ msgstr "impossibile convertire i dati interni in LDAPMods"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "errore nella creazione della voce di directory LDAP: %s"
 
-#: modules/ldap.c:1436 modules/ldap.c:1675
+#: modules/ldap.c:1436 modules/ldap.c:1674
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "errore nella modifica della voce di directory LDAP: %s"
@@ -882,48 +876,48 @@ msgstr "nessun attributo %s per l'oggetto"
 msgid "error removing LDAP directory entry: %s"
 msgstr "errore nella rimozione della voce di directory LDAP: %s."
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1706
-#: modules/ldap.c:1804
+#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
+#: modules/ldap.c:1803
 #, c-format
 msgid "object has no %s attribute"
 msgstr "nessun attributo %s per l'oggetto"
 
-#: modules/ldap.c:1739
+#: modules/ldap.c:1738
 msgid "no such object in LDAP directory"
 msgstr "nessun oggetto nella directory LDAP"
 
-#: modules/ldap.c:1751
+#: modules/ldap.c:1750
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nessun attributo `%s' trovato"
 
-#: modules/ldap.c:1913
+#: modules/ldap.c:1912
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "errore nella configurazione della password nella directory LDAP per %s: %s"
 
-#: modules/ldap.c:2485
+#: modules/ldap.c:2484
 msgid "LDAP Server Name"
 msgstr "Nome del server LDAP"
 
-#: modules/ldap.c:2491
+#: modules/ldap.c:2490
 msgid "LDAP Search Base DN"
 msgstr "DN inizio ricerca LDAP "
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2496
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN "
 
-#: modules/ldap.c:2504
+#: modules/ldap.c:2503
 msgid "LDAP Bind Password"
 msgstr "Password LDAP Bind"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2509
 msgid "LDAP SASL User"
 msgstr "Utente LDAP SASL"
 
-#: modules/ldap.c:2517
+#: modules/ldap.c:2516
 msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 
@@ -1015,3 +1009,7 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
+#~ msgid "couldn't reset default security context to `%s': %s"
+#~ msgstr ""
+#~ "impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"

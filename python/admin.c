@@ -908,22 +908,52 @@ libuser_admin_lock_group(PyObject *self, PyObject *args, PyObject *kwargs)
 	return libuser_admin_wrap(self, args, kwargs, lu_group_lock);
 }
 
-/* Unlock a user account.  Trivial wrapper. */
+/* Unlock a user account. */
 static PyObject *
 libuser_admin_unlock_user(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_wrap(self, args, kwargs, lu_user_unlock);
+	PyObject *ent, *nonempty = NULL;
+	char *keywords[] = { "entity", "nonempty", NULL };
+	gboolean (*fn) (struct lu_context *, struct lu_ent *,
+			struct lu_error **);
+	PyObject *ret;
+
+	DEBUG_ENTRY;
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &EntityType, &ent, &nonempty)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	fn = (nonempty != NULL && PyObject_IsTrue (nonempty)
+	      ? lu_user_unlock_nonempty : lu_user_unlock);
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent, fn);
+	DEBUG_EXIT;
+	return ret;
 }
 
-/* Unlock a group account.  Trivial wrapper. */
+/* Unlock a group account. */
 static PyObject *
 libuser_admin_unlock_group(PyObject *self, PyObject *args,
 			   PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_wrap(self, args, kwargs, lu_group_unlock);
+	PyObject *ent, *nonempty = NULL;
+	char *keywords[] = { "entity", "nonempty", NULL };
+	gboolean (*fn) (struct lu_context *, struct lu_ent *,
+			struct lu_error **);
+	PyObject *ret;
+
+	DEBUG_ENTRY;
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
+					 &EntityType, &ent, &nonempty)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	fn = (nonempty != NULL && PyObject_IsTrue (nonempty)
+	      ? lu_group_unlock_nonempty : lu_group_unlock);
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent, fn);
+	DEBUG_EXIT;
+	return ret;
 }
 
 /* Check if a user account is locked.  Trivial wrapper. */

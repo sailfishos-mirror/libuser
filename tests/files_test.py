@@ -310,6 +310,44 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
 
+    def testUserUnlockNonempty1(self):
+        e = self.a.initUser('user32_1')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user32_1')
+        self.a.setpassUser(e, '!!00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!00as1wm0AZG56'])
+        self.a.unlockUser(e, True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
+
+    def testUserUnlockNonempty2(self):
+        e = self.a.initUser('user32_2')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user32_2')
+        self.a.setpassUser(e, '00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
+        self.a.unlockUser(e, True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
+
+    def testUserUnlockNonempty3(self):
+        e = self.a.initUser('user32_3')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user32_3')
+        self.a.setpassUser(e, '!!', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!'])
+        self.assertRaises(RuntimeError, self.a.unlockUser, e, True)
+        del e
+        e = self.a.lookupUserByName('user32_3')
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!'])
+
     def testUserIslocked1(self):
         e = self.a.initUser('user11_1')
         self.a.addUser(e, False, False)
@@ -631,6 +669,44 @@ class Tests(unittest.TestCase):
         self.a.unlockGroup(e)
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
+
+    def testGroupUnlockNonempty1(self):
+        e = self.a.initGroup('group33_1')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group33_1')
+        self.a.setpassGroup(e, '!!04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!04cmES7HM6wtg'])
+        self.a.unlockGroup(e, True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
+
+    def testGroupUnlockNonempty2(self):
+        e = self.a.initGroup('group33_2')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group33_2')
+        self.a.setpassGroup(e, '04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
+        self.a.unlockGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
+
+    def testGroupUnlockNonempty3(self):
+        e = self.a.initGroup('group33_3')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group33_3')
+        self.a.setpassGroup(e, '!!', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!'])
+        self.assertRaises(RuntimeError, self.a.unlockGroup, e, True)
+        del e
+        e = self.a.lookupGroupByName('group33_3')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!'])
 
     def testGroupIsLocked1(self):
         e = self.a.initGroup('group26_1')

@@ -220,6 +220,20 @@ information
 @Returns: %TRUE on success
 
 
+<!-- ##### FUNCTION lu_user_unlock_nonempty ##### -->
+<para>
+Unlocks an user account.  If unlocking the account would result in an empty
+password field, it fails with %lu_error_unlock_empty.  Note that the
+password can still be empty.
+</para>
+
+@context: a context
+@ent: an entity describing the user, on success updated with current
+information
+@error: filled with a #lu_error if an error occurs
+@Returns: %TRUE on success
+
+
 <!-- ##### FUNCTION lu_user_islocked ##### -->
 <para>
 Checks if an user account is locked.
@@ -379,6 +393,20 @@ information
 <!-- ##### FUNCTION lu_group_unlock ##### -->
 <para>
 Unlocks a group account.
+</para>
+
+@context: a context
+@ent: an entity describing the group, on success updated with current
+information
+@error: filled with a #lu_error if an error occurs
+@Returns: %TRUE on success
+
+
+<!-- ##### FUNCTION lu_group_unlock_nonempty ##### -->
+<para>
+Unlocks a group account.  If unlocking the account would result in an empty
+password field, it fails with %lu_error_unlock_empty.  Note that the
+password can still be empty.
 </para>
 
 @context: a context

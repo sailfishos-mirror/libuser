@@ -140,10 +140,7 @@ reset_default_context(security_context_t prev_context, struct lu_error **error)
 	(void)prev_context;
 	(void)error;
 #ifdef WITH_SELINUX
-	if (setfscreatecon(prev_context) < 0)
-		lu_error_new(error, lu_error_stat,
-			     _("couldn't reset default security context to "
-			       "`%s': %s"), prev_context, strerror(errno));
+	setfscreatecon(prev_context);
 	if (prev_context) {
 		freecon(prev_context);
 	}

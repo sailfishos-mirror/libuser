@@ -1,5 +1,31 @@
 2004-11-14  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.53.
+
+	* NEWS: Update.
+
+	* docs/reference/libuser-sections.txt
+	* docs/reference/tmpl/user.sgml: Document lu_user_unlock_nonempty ()
+	and lu_group_unlock_nonempty ().
+
+	* tests/files_test.py (Tests.testUserUnlockNonempty1) 
+	(Tests.testUserUnlockNonempty2, Tests.testUserUnlockNonempty3) 
+	(Tests.testGroupUnlockNonempty1, Tests.testGroupUnlockNonempty2) 
+	(Tests.testGroupUnlockNonempty3)
+	* tests/ldap_test.py (Tests.testUserUnlockNonempty1) 
+	(Tests.testUserUnlockNonempty2, Tests.testUserUnlockNonempty3) 
+	(Tests.testGroupUnlockNonempty1, Tests.testGroupUnlockNonempty2) 
+	(Tests.testGroupUnlockNonempty3): Add tests for 
+	lu_user_unlock_nonempty ()
+
+	* modules/files.c (reset_default_context): Don't report error in
+	restoring default context, there is no way to handle them anyway.
+
+	* python/admin.c (libuser_admin_unlock_user) 
+	(libuser_admin_unlock_group): Allow calling lu_user_unlock_nonempty ()
+	and lu_group_unlock_nonempty ().
+	* python/modules.txt: Document unlockUser nad unlockGroup changes.
+
 	* tests/files_test.py (Tests.testUserUnlock3) 
 	(Tests.testGroupUnlock3)
 	* tests/ldap_test.py (Tests.testUserUnlock3) 

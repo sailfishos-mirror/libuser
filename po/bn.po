@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 22:04+0100\n"
+"POT-Creation-Date: 2004-11-14 23:22+0100\n"
 "PO-Revision-Date: 2004-11-03 14:52+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -690,71 +690,65 @@ msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্�
 msgid "couldn't set default security context to `%s': %s"
 msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণকে`%s' হিসাবে নির্ধারণ করা যায়নি: %s"
 
-# modified for RHEL
-#: modules/files.c:145
-#, c-format
-msgid "couldn't reset default security context to `%s': %s"
-msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণ `%s' হিসাবে নির্ধারণ করা যায়নি: %s"
-
-#: modules/files.c:172 modules/files.c:532 modules/files.c:877
-#: modules/files.c:1150 modules/files.c:1342 modules/files.c:1564
-#: modules/files.c:1651 modules/files.c:1888 modules/files.c:2079
-#: modules/files.c:2096 modules/files.c:2186 modules/files.c:2205
-#: modules/files.c:2273 modules/files.c:2294 modules/files.c:2391
-#: modules/files.c:2410 modules/files.c:2469 modules/files.c:2488
-#: modules/files.c:2589 modules/files.c:2604
+#: modules/files.c:169 modules/files.c:529 modules/files.c:874
+#: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
+#: modules/files.c:1648 modules/files.c:1885 modules/files.c:2076
+#: modules/files.c:2093 modules/files.c:2183 modules/files.c:2202
+#: modules/files.c:2270 modules/files.c:2291 modules/files.c:2388
+#: modules/files.c:2407 modules/files.c:2466 modules/files.c:2485
+#: modules/files.c:2586 modules/files.c:2601
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' খোলা সম্ভব হয়নি: %s"
 
-#: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:889 modules/files.c:1354
+#: modules/files.c:185 modules/files.c:221 modules/files.c:259
+#: modules/files.c:886 modules/files.c:1351
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' stat করা যায়নি: %s"
 
-#: modules/files.c:199
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 
-#: modules/files.c:215
+#: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "ব্যাক-আপ ফাইল `%s' বর্তমানে উপস্থিত আছে এবং এটি কোনো সাধারণ ফাইল নয়"
 
-#: modules/files.c:919 modules/files.c:1363
+#: modules/files.c:916 modules/files.c:1360
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' থেকে পড়া সম্ভব হয়নি: %s"
 
-#: modules/files.c:928 modules/files.c:935
+#: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
 msgstr "ফাইল এন্ট্রি বর্তমানে উপস্থিত আছে"
 
-#: modules/files.c:942 modules/files.c:957 modules/files.c:1409
-#: modules/files.c:1417
+#: modules/files.c:939 modules/files.c:954 modules/files.c:1406
+#: modules/files.c:1414
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'-এ লেখা সম্ভব হয়নি: %s"
 
-#: modules/files.c:1117 modules/files.c:1125 modules/files.c:1218
-#: modules/files.c:1226
+#: modules/files.c:1114 modules/files.c:1122 modules/files.c:1215
+#: modules/files.c:1223
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "সত্ত্বার বস্তুতে কোনো %s বৈশিষ্ট্য নেই"
 
 # modified for RHEL
-#: modules/files.c:1922 modules/ldap.c:1609 modules/ldap.c:1882
+#: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
 msgid "error encrypting password"
 msgstr "পাসওয়ার্ড এনক্রিপ্ট করতে সমস্যা"
 
 # modified for RHEL
-#: modules/files.c:2876 modules/files.c:2955
+#: modules/files.c:2873 modules/files.c:2952
 msgid "not executing with superuser privileges"
 msgstr "সুপাসইউজারের অধিকারসহ নির্বাহিত হচ্ছে না"
 
-#: modules/files.c:2970
+#: modules/files.c:2967
 msgid "no shadow file present -- disabling"
 msgstr "কোনো শেডো ফাইল উপস্থিত নেই -- নিষ্ক্রিয় করা হচ্ছে"
 
@@ -851,7 +845,7 @@ msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP সার্ভারে কোনো root DSE সম্ভবত উপস্থিত নেই"
 
 #: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
-#: modules/ldap.c:1585 modules/ldap.c:1719 modules/ldap.c:1815
+#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
 msgid "error mapping name to LDAP distinguished name"
 msgstr "LDAP-র বৈশিষ্ট্যপূর্ণ নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
@@ -880,7 +874,7 @@ msgstr "অভ্যন্তরীণ ডাটাকে LDAPMods-এ পরি
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি তৈরি করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:1436 modules/ldap.c:1675
+#: modules/ldap.c:1436 modules/ldap.c:1674
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি পরিবর্তন করতে সমস্যা হয়েছে: %s"
@@ -902,47 +896,47 @@ msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উ
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি মুছে ফেলতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1706
-#: modules/ldap.c:1804
+#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
+#: modules/ldap.c:1803
 #, c-format
 msgid "object has no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1739
+#: modules/ldap.c:1738
 msgid "no such object in LDAP directory"
 msgstr "LDAP ডিরেক্টরিতে এ রকম কোনো বস্তু উপস্থিত নেই"
 
-#: modules/ldap.c:1751
+#: modules/ldap.c:1750
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায়নি"
 
-#: modules/ldap.c:1913
+#: modules/ldap.c:1912
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s-র জন্য LDAP ডিরেক্টরিতে পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে: %s"
 
-#: modules/ldap.c:2485
+#: modules/ldap.c:2484
 msgid "LDAP Server Name"
 msgstr "LDAP সার্ভারের নাম"
 
-#: modules/ldap.c:2491
+#: modules/ldap.c:2490
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2496
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2504
+#: modules/ldap.c:2503
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind পাসওয়ার্ড"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2509
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ব্যবহারকারী"
 
-#: modules/ldap.c:2517
+#: modules/ldap.c:2516
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-র অনুমোদন ব্যবহারকারী"
 
@@ -1037,3 +1031,7 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
+
+# modified for RHEL
+#~ msgid "couldn't reset default security context to `%s': %s"
+#~ msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণ `%s' হিসাবে নির্ধারণ করা যায়নি: %s"

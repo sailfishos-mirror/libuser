@@ -135,13 +135,24 @@ libuser:
 						group's information (required).
 
 				- lockUser:
-				- lockGroup:
-				- unlockUser:
-				- unlockGroup: Lock or unlock a user or group account.
+				- lockGroup:    Lock a user or group account.
 					Arguments:
 						A libuser.Entity object with the
 						user or group's information
 						(required).
+						A true/false object indicating
+						whether unlocking 
+
+				- unlockUser:
+				- unlockGroup:  Unlock a user or group account.
+					Arguments:
+						A libuser.Entity object with the
+						user or group's information
+						(required).
+						A true/false object indicating
+						whether unlocking that would
+						empty the password field should
+						fail (optional, default no).
 
 				- setpassUser:
 				- setpassGroup:
