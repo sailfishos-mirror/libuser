@@ -60,10 +60,9 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	     module_name != NULL;
 	     module_name = strtok_r(NULL, SEPARATORS, &q)) {
 		GValue value;
-
-		tmp = ctx->scache->cache(ctx->scache, module_name);
+		module_name = ctx->scache->cache(ctx->scache, module_name);
 		/* Only load the module if it's not already loaded. */
-		if (g_tree_lookup(ctx->modules, tmp) == NULL) {
+		if (g_tree_lookup(ctx->modules, module_name) == NULL) {
 			/* Generate the file name. */
 			tmp = g_strconcat(PACKAGE "_", module_name, NULL);
 			module_file = g_module_build_path(module_dir, tmp);
@@ -138,7 +137,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 				 * tree. */
 				module->lu_context = ctx;
 				module->module_handle = handle;
-				g_tree_insert(ctx->modules, tmp, module);
+				g_tree_insert(ctx->modules,
+					      module_name, module);
 			}
 
 			/* For safety's sake, make sure that all functions
@@ -204,14 +204,14 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 
 			g_return_val_if_fail(module->close != NULL, FALSE);
-
-			/* Record that we loaded the module. */
-			memset(&value, 0, sizeof(value));
-			g_value_init(&value, G_TYPE_STRING);	
-			g_value_set_string(&value, tmp);	
-			g_value_array_append(*names, &value);
-			g_value_unset(&value);
 		}
+
+		/* Record that we loaded the module. */
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);	
+		g_value_set_string(&value, module_name);	
+		g_value_array_append(*names, &value);
+		g_value_unset(&value);
 	}
 	g_free(modlist);
 	return TRUE;
