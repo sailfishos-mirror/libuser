@@ -45,45 +45,45 @@ libuser_shadow_init(struct lu_context *context, struct lu_error **error);
 struct format_specifier {
 	int position;
 	const char *attribute;
-	const char *prefix;
+	GType type;
 	const char *def;
 	gboolean multiple, suppress;
 };
 
 static const struct format_specifier format_passwd[] = {
-	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
-	{3, LU_UIDNUMBER, NULL, NULL, FALSE, FALSE},
-	{4, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
-	{5, LU_GECOS, NULL, NULL, FALSE, FALSE},
-	{6, LU_HOMEDIRECTORY, NULL, NULL, FALSE, FALSE},
-	{7, LU_LOGINSHELL, NULL, NULL, FALSE, FALSE},
+	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{2, LU_USERPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{3, LU_UIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
+	{4, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
+	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{7, LU_LOGINSHELL, G_TYPE_STRING, NULL, FALSE, FALSE},
 };
 
 static const struct format_specifier format_group[] = {
-	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
-	{3, LU_GIDNUMBER, NULL, NULL, FALSE, FALSE},
-	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
+	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{3, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
+	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
-	{1, LU_USERNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
-	{3, LU_SHADOWLASTCHANGE, NULL, NULL, FALSE, FALSE},
-	{4, LU_SHADOWMIN, NULL, NULL, FALSE, FALSE},
-	{5, LU_SHADOWMAX, NULL, NULL, FALSE, FALSE},
-	{6, LU_SHADOWWARNING, NULL, NULL, FALSE, FALSE},
-	{7, LU_SHADOWINACTIVE, NULL, NULL, FALSE, FALSE},
-	{8, LU_SHADOWEXPIRE, NULL, NULL, FALSE, FALSE},
-	{9, LU_SHADOWFLAG, NULL, NULL, FALSE, FALSE},
+	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE},
+	{4, LU_SHADOWMIN, G_TYPE_LONG, GINT_TO_POINTER(0), FALSE, FALSE},
+	{5, LU_SHADOWMAX, G_TYPE_LONG, GINT_TO_POINTER(99999), FALSE, FALSE},
+	{6, LU_SHADOWWARNING, G_TYPE_LONG, GINT_TO_POINTER(7), FALSE, FALSE},
+	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
+	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
+	{9, LU_SHADOWFLAG, G_TYPE_LONG, GINT_TO_POINTER(-1), FALSE, FALSE},
 };
 
 static const struct format_specifier format_gshadow[] = {
-	{1, LU_GROUPNAME, NULL, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, NULL, "*", FALSE, TRUE},
-	{3, LU_ADMINISTRATORUID, NULL, NULL, TRUE, FALSE},
-	{4, LU_MEMBERUID, NULL, NULL, TRUE, FALSE},
+	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
+	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{3, LU_ADMINISTRATORUID, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 /* Create a backup copy of "filename" named "filename-". */
@@ -243,6 +243,7 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 	int i;
 	int minimum = 1;
 	gchar **v = NULL;
+	GValue value;
 
 	/* Make sure the line is properly formatted, meaning that it has enough
 	 * fields in it for us to parse. */
@@ -256,54 +257,55 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 	}
 
 	/* Now parse out the fields. */
+	memset(&value, 0, sizeof(value));
 	for (i = 0; i < format_count; i++) {
-		GValue value;
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
 		/* Some things we NEVER read. */
 		if (formats[i].suppress) {
 			continue;
 		}
+		/* Clear out old values. */
+		lu_ent_clear_current(ent, formats[i].attribute);
 		if (formats[i].multiple) {
 			/* Multiple comma-separated values. */
 			gchar **w;
 			int j;
-			lu_ent_clear(ent, formats[i].attribute);
-			w = g_strsplit(v[formats[i].position - 1] ? : "",
+			/* Split up the field. */
+			w = g_strsplit(v[formats[i].position - 1] ?: "",
 				       ",", 0);
-			lu_ent_clear(ent, formats[i].attribute);
-			lu_ent_clear_current(ent, formats[i].attribute);
+			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
-				if (formats[i].prefix) {
-					char *p;
-					p = g_strconcat(formats[i].prefix,
-							w[j], NULL);
-					g_value_set_string(&value, p);
-					g_free(p);
-				} else {
+				/* Initialize the value to the right type. */
+				g_value_init(&value, formats[i].type);
+				/* Set the value. */
+				if (G_VALUE_HOLDS_STRING(&value)) {
 					g_value_set_string(&value, w[j]);
+				} else
+				if (G_VALUE_HOLDS_LONG(&value)) {
+					g_value_set_long(&value, atol(w[j]));
+				} else {
+					g_assert_not_reached();
 				}
-				lu_ent_add(ent, formats[i].attribute, &value);
+				/* Add it to the current values list. */
 				lu_ent_add_current(ent, formats[i].attribute,
 						   &value);
+				g_value_unset(&value);
 			}
 			g_strfreev(w);
 		} else {
-			/* This is a single-value field. */
-			if (formats[i].prefix) {
-				char *p;
-				p = g_strconcat(formats[i].prefix,
-						v[formats[i].position - 1],
-						NULL);
-				g_value_set_string(&value, p);
-				g_free(p);
-			} else {
+			/* Initialize the value to the right type. */
+			g_value_init(&value, formats[i].type);
+			/* Set the value to the right type. */
+			if (G_VALUE_HOLDS_STRING(&value)) {
 				g_value_set_string(&value,
 						   v[formats[i].position - 1]);
+			} else
+			if (G_VALUE_HOLDS_LONG(&value)) {
+				g_value_set_long(&value,
+						 atol(v[formats[i].position - 1]));
+			} else {
+				g_assert_not_reached();
 			}
-			lu_ent_clear(ent, formats[i].attribute);
-			lu_ent_clear_current(ent, formats[i].attribute);
-			lu_ent_add(ent, formats[i].attribute, &value);
+			/* Add it to the current values list. */
 			lu_ent_add_current(ent, formats[i].attribute, &value);
 		}
 		g_value_unset(&value);
@@ -555,81 +557,63 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	       size_t format_count)
 {
 	GValueArray *values;
-	GValue value;
-	char *ret = NULL, *p, *q;
+	GValue value, *val;
+	char *ret = NULL, *p, *tmp;
 	int i, j;
 
 	g_return_val_if_fail(ent != NULL, NULL);
 	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
 
 	for (i = 0; i < format_count; i++) {
 		/* Add a separator if we need to. */
 		if (i > 0) {
 			j = formats[i].position - formats[i - 1].position;
 			while (j-- > 0) {
-				p = g_strconcat(ret, ":", NULL);
+				tmp = g_strconcat(ret, ":", NULL);
 				if (ret) {
 					g_free(ret);
 				}
-				ret = p;
+				ret = tmp;
 			}
 		}
-		/* Get the attribute data and store it in a GValue. */
+		j = 0;
 		values = lu_ent_get(ent, formats[i].attribute);
 		if ((values != NULL) && (values->n_values > 0)) {
-			g_value_copy(g_value_array_get_nth(values, 0),
-				     &value);
+			j = 0;
+			/* Iterate over all of the data items we can. */
+			do {
+				/* Get a string representation of this value. */
+				val = g_value_array_get_nth(values, j);
+				p = g_value_dup_string(val);
+				/* Add it to the end, prepending a comma if we
+				 * need to separate it from another value. */
+				tmp = g_strconcat(ret,
+						  (j > 0) ? "," : "",
+						  p,
+						  NULL);
+				g_free(p);
+				g_free(ret);
+				ret = tmp;
+				j++;
+			} while (formats[i].multiple && (j < values->n_values));
 		} else {
 			/* Check for a default value. */
 			if (formats[i].def != NULL) {
 				/* Use the default listed in the format
 				 * specifier. */
-				g_value_set_string(&value, formats[i].def);
-			}
-		}
-		/* We now have all the values, and the first or the default. */
-		if (!formats[i].multiple) {
-			/* It's a single-item entry, use it. */
-			p = q = g_value_dup_string(&value);
-			/* If there's a prefix, strip it. */
-			if (formats[i].prefix) {
-				if (strncmp (p, formats[i].prefix,
-					     strlen(formats[i].prefix)) == 0) {
-					p += strlen(formats[i].prefix);
+				p = NULL;
+				if (formats[i].type == G_TYPE_LONG) {
+					p = g_strdup_printf("%d", GPOINTER_TO_INT(formats[i].def));
+				} else
+				if (formats[i].type == G_TYPE_STRING) {
+					p = g_strdup(formats[i].def);
+				} else {
+					g_assert_not_reached();
 				}
-				/* Tack the data onto the end. */
-				p = g_strconcat(ret ? : "", p, NULL);
-				if (ret) {
-					g_free(ret);
-				}
-				ret = p;
-			}
-			g_free(q);
-		} else {
-			/* Separate data with a comma after the first datum. */
-			if (values != NULL)
-			for (j = 0; j < values->n_values; j++) {
-				g_value_copy(g_value_array_get_nth(values, j),
-					     &value);
-				p = q = g_value_dup_string(&value);
-				/* If there's a prefix, strip it. */
-				if (formats[i].prefix) {
-					if (strncmp(p, formats[i].prefix,
-						    strlen(formats[i].prefix)) == 0) {
-						p += strlen(formats[i].
-							    prefix);
-					}
-				}
-				/* Tack the data onto the end. */
-				p = g_strconcat(ret ? : "",
-						(j > 0) ? "," : "", p,
-						NULL);
-				if (ret) {
-					g_free(ret);
-				}
-				ret = p;
-				g_free(q);
+				tmp = g_strconcat(ret, p, NULL);
+				g_free(p);
+				g_free(ret);
+				ret = tmp;
 			}
 		}
 	}
@@ -934,8 +918,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 		names = lu_ent_get_current(ent, LU_USERNAME);
 		if (names == NULL) {
 			lu_error_new(error, lu_error_generic,
-				     _
-				     ("entity object has no %s attribute"),
+				     _("entity object has no %s attribute"),
 				     LU_USERNAME);
 			return FALSE;
 		}
@@ -944,8 +927,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 		names = lu_ent_get_current(ent, LU_GROUPNAME);
 		if (names == NULL) {
 			lu_error_new(error, lu_error_generic,
-				     _
-				     ("entity object has no %s attribute"),
+				     _("entity object has no %s attribute"),
 				     LU_GROUPNAME);
 			return FALSE;
 		}
