@@ -45,9 +45,9 @@ main(int argc, const char **argv)
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL, *group = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GValueArray *values, *members, *admins;
+	GValueArray *values, *members, *admins, *groups = NULL;
 	GValue *value, val;
 	size_t i, j;
 	int change = FALSE, move_home = FALSE, lock = FALSE, unlock = FALSE;
@@ -204,16 +204,19 @@ main(int argc, const char **argv)
 	if (uid != NULL) {
 		values = lu_ent_get(ent, LU_USERNAME);
 		value = g_value_array_get_nth(values, 0);
-		old_uid = g_value_get_string(value);
+		old_uid = lu_value_strdup(value);
 		g_value_set_string(&val, uid);
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &val);
+		groups = lu_groups_enumerate_by_user(ctx, old_uid, &error);
+		if (error)
+			lu_error_free(&error);
 	}
 	oldHomeDirectory = NULL;
 	if (homeDirectory != NULL) {
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
 		value = g_value_array_get_nth(values, 0);
-		oldHomeDirectory = g_value_get_string(value);
+		oldHomeDirectory = lu_value_strdup(value);
 		g_value_set_string(&val, homeDirectory);
 		lu_ent_clear(ent, LU_HOMEDIRECTORY);
 		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
@@ -274,21 +277,20 @@ main(int argc, const char **argv)
 	/* If the user's name changed, we need to update supplemental
 	 * group membership information. */
 	if (change && (old_uid != NULL)) {
-		values = lu_groups_enumerate_by_user(ctx, old_uid, &error);
-		if (error) {
-			lu_error_free(&error);
-		}
-		group = lu_ent_new();
-		for (i = 0; (values != NULL) && (i < values->n_values); i++) {
+		for (i = 0; (groups != NULL) && (i < groups->n_values); i++) {
+			struct lu_ent *group;
+
 			/* Get the name of this group. */
-			value = g_value_array_get_nth(values, i);
+			value = g_value_array_get_nth(groups, i);
 			groupname = g_value_get_string(value);
 			/* Look up the group. */
 			members = admins = NULL;
-			if (lu_group_lookup_name(ctx, groupname, ent, &error)) {
+			group = lu_ent_new();
+			if (lu_group_lookup_name(ctx, groupname, group,
+						 &error)) {
 				/* Get a list of the group's members. */
-				members = lu_ent_get(ent, LU_MEMBERNAME);
-				admins = lu_ent_get(ent, LU_ADMINISTRATORNAME);
+				members = lu_ent_get(group, LU_MEMBERNAME);
+				admins = lu_ent_get(group, LU_ADMINISTRATORNAME);
 			}
 			/* Search for this user in the member list. */
 			for (j = 0;
@@ -319,10 +321,11 @@ main(int argc, const char **argv)
 				}
 			}
 			/* Save the changes to the group. */
-			if (lu_group_modify(ctx, ent, &error) == FALSE)
+			if (lu_group_modify(ctx, group, &error) == FALSE)
 				fprintf(stderr, _("Group %s could not be "
 						  "modified: %s.\n"),
 					groupname, lu_strerror(error));
+			lu_ent_free(group);
 		}
 		lu_hup_nscd();
 	}

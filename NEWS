@@ -1,6 +1,8 @@
 0.53
 * Support UID and GID values larger than LONG_MAX (#124967)
-* FIXME lusermod group renaming fix
+* Fix updating of groups after user renaming in lusermod
+* Allow setting a shadow password even if the current shadow password is
+  invalid (#131180)
 * Miscellaneous bug and memory leak fixes
 
 0.52.6

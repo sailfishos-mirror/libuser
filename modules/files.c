@@ -1783,7 +1783,7 @@ lu_shadow_group_is_locked(struct lu_module *module, struct lu_ent *ent,
  * to a given value.  Got that? */
 static gboolean
 generic_setpass(struct lu_module *module, const char *base_name, int field,
-		struct lu_ent *ent, const char *password,
+		struct lu_ent *ent, const char *password, gboolean is_shadow,
 		struct lu_error **error)
 {
 	security_context_t prev_context;
@@ -1845,8 +1845,9 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	if (value == NULL)
 		goto err_namestring;
 	
-	/* If we don't really care, nod our heads and smile. */
-	if (LU_CRYPT_INVALID(value)) {
+	/* If we don't really care, nod our heads and smile.  Still allow
+	   "rescuing" accounts with invalid shadow password entries. */
+	if (!is_shadow && LU_CRYPT_INVALID(value)) {
 		ret = TRUE;
 		goto err_value;
 	}
@@ -1888,7 +1889,8 @@ lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		      const char *password, struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "passwd", 2, ent, password, error);
+	ret = generic_setpass(module, "passwd", 2, ent, password, FALSE,
+			      error);
 	return ret;
 }
 
@@ -1897,7 +1899,7 @@ lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "group", 2, ent, password, error);
+	ret = generic_setpass(module, "group", 2, ent, password, FALSE, error);
 	return ret;
 }
 
@@ -1906,7 +1908,8 @@ lu_files_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, error);
+	ret = generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, FALSE,
+			      error);
 	return ret;
 }
 
@@ -1915,7 +1918,8 @@ lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "group", 2, ent, LU_CRYPTED, error);
+	ret = generic_setpass(module, "group", 2, ent, LU_CRYPTED, FALSE,
+			      error);
 	return ret;
 }
 
@@ -1938,7 +1942,7 @@ lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "shadow", 2, ent, password, error);
+	ret = generic_setpass(module, "shadow", 2, ent, password, TRUE, error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
@@ -1950,7 +1954,8 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 			const char *password, struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "gshadow", 2, ent, password, error);
+	ret = generic_setpass(module, "gshadow", 2, ent, password, TRUE,
+			      error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
@@ -1962,7 +1967,8 @@ lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "shadow", 2, ent, LU_CRYPTED, error);
+	ret = generic_setpass(module, "shadow", 2, ent, LU_CRYPTED, TRUE,
+			      error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
@@ -1974,7 +1980,8 @@ lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 			   struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "gshadow", 2, ent, LU_CRYPTED, error);
+	ret = generic_setpass(module, "gshadow", 2, ent, LU_CRYPTED, TRUE,
+			      error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}

@@ -183,9 +183,9 @@ main(int argc, const char **argv)
 		if (lu_group_lookup_id(ctx, gidNumber, groupEnt, &error)) {
 			create_group = FALSE;
 		} else {
-			/* No such group, we need to create one. */
-			create_group = TRUE;
-			/* FIXME: we have group NUMBER, not name */
+			fprintf(stderr, _("Group %jd does not exist\n"),
+				(intmax_t)gidNumber);
+			return 1;
 		}
 	}
 

@@ -256,8 +256,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user9_1')
         self.a.setpassUser(e, '00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
         self.a.lockUser(e)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!00as1wm0AZG56'])
 
     def testUserLock2(self):
@@ -266,8 +268,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user9_2')
         self.a.setpassUser(e, '!!00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!00as1wm0AZG56'])
         self.a.lockUser(e)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!00as1wm0AZG56'])
 
     def testUserUnlock1(self):
@@ -276,8 +280,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user10_1')
         self.a.setpassUser(e, '!!00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!00as1wm0AZG56'])
         self.a.unlockUser(e)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
 
     def testUserUnlock2(self):
@@ -286,8 +292,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user10_2')
         self.a.setpassUser(e, '00as1wm0AZG56', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
         self.a.unlockUser(e)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['00as1wm0AZG56'])
 
     def testUserIslocked1(self):
@@ -296,6 +304,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user11_1')
         self.a.setpassUser(e, '!!01aK1FxKE9YVU', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!01aK1FxKE9YVU'])
         self.assertEqual(self.a.userIsLocked(e), 1)
 
@@ -305,6 +314,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user11_2')
         self.a.setpassUser(e, '01aK1FxKE9YVU', True)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['01aK1FxKE9YVU'])
         self.assertEqual(self.a.userIsLocked(e), 0)
 
@@ -314,8 +324,10 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user12_1')
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['02oawyZdjhhpg'])
         self.a.setpassUser(e, 'password', False)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
@@ -325,8 +337,10 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user13_1')
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['03dgZm5nZvqOc'])
         self.a.removepassUser(e)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
 
     def testUsersEnumerate(self):
@@ -552,8 +566,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group24_1')
         self.a.setpassGroup(e, '04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
         self.a.lockGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!04cmES7HM6wtg'])
 
     def testGroupLock2(self):
@@ -562,8 +578,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group24_2')
         self.a.setpassGroup(e, '!!04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!04cmES7HM6wtg'])
         self.a.lockGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!04cmES7HM6wtg'])
 
     def testGroupUnlock1(self):
@@ -572,8 +590,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group25_1')
         self.a.setpassGroup(e, '!!04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!04cmES7HM6wtg'])
         self.a.unlockGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
 
     def testGroupUnlock2(self):
@@ -582,8 +602,10 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group25_2')
         self.a.setpassGroup(e, '04cmES7HM6wtg', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
         self.a.unlockGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['04cmES7HM6wtg'])
 
     def testGroupIsLocked1(self):
@@ -592,6 +614,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group26_1')
         self.a.setpassGroup(e, '!!05/lfLEyErrp2', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!05/lfLEyErrp2'])
         self.assertEqual(self.a.groupIsLocked(e), 1)
         
@@ -601,6 +624,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group26_2')
         self.a.setpassGroup(e, '05/lfLEyErrp2', True)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['05/lfLEyErrp2'])
         self.assertEqual(self.a.groupIsLocked(e), 0)
         
@@ -610,8 +634,10 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group27_1')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['06aZrb3pzuu/6'])
         self.a.setpassGroup(e, 'password', False)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
@@ -621,8 +647,10 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group28_1')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['07Js7N.eEhbgs'])
         self.a.removepassGroup(e)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
 
     def testGroupsEnumerate(self):

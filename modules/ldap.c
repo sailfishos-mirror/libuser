@@ -859,7 +859,6 @@ arrays_equal(GValueArray *a, GValueArray *b)
 	if ((a == NULL) && (b != NULL)) {
 		return FALSE;
 	}
-	/* FIXME: Can be done in O(N log N) */
 	for (i = 0; i < a->n_values; i++) {
 		aval = g_value_array_get_nth(a, i);
 		for (j = 0; j < b->n_values; j++) {

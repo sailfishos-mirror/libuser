@@ -2,6 +2,30 @@
 
 	* NEWS: Update.
 
+	* tests/files_test.py (Tests.testUserLock1, Tests.testUserLock2) 
+	(Tests.testUserUnlock1, Tests.testUserUnlock2) 
+	(Tests.testUserIslocked1, Tests.testUserIslocked2) 
+	(Tests.testUserSetpass, Tests.testUserRemovepass) 
+	(Tests.testGroupLock1, Tests.testGroupLock2) 
+	(Tests.testGroupUnlock1, Tests.testGroupUnlock2) 
+	(Tests.testGroupIsLocked1, Tests.testGroupIsLocked2) 
+	(Tests.testGroupSetpass, Tests.testGroupRemovepass): Test the functions
+	don't change the non-shadow password fields.
+
+	* modules/files.c (generic_setpass): Allow setting a shadow password
+	even if the current shadow password is invalid.  All callers updated.
+
+	* apps/luseradd.c (main): Don't attempt to create a user group
+	if --gid specifies a numerical ID of a non-existing group.
+
+	* apps/lnewusers.c (main): Fix handling of empty home directory field.
+
+	* apps/lusermod.c (main): Make copies of entity values that get
+	destroyed by lu_user_modify ().  Get a list of groups an user is in
+	before renaming the user.  Don't reuse 'ent' for group entitites.
+
+	* NEWS: Update.
+
 2004-11-13  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/files.c (struct format specifier): New member def_if_empty.

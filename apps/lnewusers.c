@@ -261,7 +261,7 @@ main(int argc, const char **argv)
 			lu_ent_clear(ent, LU_HOMEDIRECTORY);
 			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
 		} else {
-			/* FIXME: values contains LU_GIDNUMBER */
+			values = lu_ent_get(ent, LU_HOMEDIRECTORY);
 			if (values != NULL) {
 				value = g_value_array_get_nth(values,
 							      0);
