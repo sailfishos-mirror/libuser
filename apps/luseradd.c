@@ -111,13 +111,9 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE, error->string);
-		} else {
-			fprintf(stderr, _("Error initializing %s.\n"),
-				PACKAGE);
-		}
+		fprintf(stderr, _("Error initializing %s: %s.\n"),
+			PACKAGE,
+			error ? error->string : _("unknown error"));
 		return 1;
 	}
 
@@ -278,7 +274,7 @@ main(int argc, const char **argv)
 	/* Moment-of-truth time. */
 	if (lu_user_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Account creation failed: %s.\n"),
-			error->string);
+			error ? error->string : _("unknown error"));
 		return 3;
 	}
 
@@ -320,8 +316,15 @@ main(int argc, const char **argv)
 					uidNumber, gidNumber, 0700,
 					&error) == FALSE) {
 			fprintf(stderr, _("Error creating %s: %s.\n"),
-				homeDirectory, error->string);
+				homeDirectory,
+				error ? error->string : _("unknown error"));
 			return 7;
+		}
+
+		/* Create a mail spool for the user. */
+		if (lu_mailspool_create_remove(ctx, ent, TRUE) != TRUE) {
+			fprintf(stderr, _("Error creating mail spool.\n"));
+			return 8;
 		}
 	}
 

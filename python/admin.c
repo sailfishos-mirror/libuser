@@ -649,8 +649,13 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 	}
 
 	/* Now just pass it to the internal function. */
-	return (lu_mailspool_create_remove(me->ctx, ent->ent, action)) ?
-		Py_BuildValue("i", 1) : NULL;
+	if (lu_mailspool_create_remove(me->ctx, ent->ent, action)) {
+		return Py_BuildValue("i", 1);
+	} else {
+		PyErr_SetString(PyExc_RuntimeError,
+				_("error creating mail spool for user"));
+		return NULL;
+	}
 }
 
 /* Create a user's mail spool. */
@@ -717,9 +722,12 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			if (ret != NULL) {
 				Py_DECREF(ret);
 			}
-			ret = lu_mailspool_create_remove(context, ent->ent, TRUE) ?
-			      Py_BuildValue("i", 1) :
-			      NULL;
+			if (lu_mailspool_create_remove(context, ent->ent, TRUE) ) {
+				ret = Py_BuildValue("i", 1);
+			} else {
+				/* An exception has been thrown. */
+				ret = NULL;
+			}
 		}
 	}
 

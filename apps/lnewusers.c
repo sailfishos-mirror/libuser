@@ -36,7 +36,8 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent = NULL, *groupEnt = NULL;
-	int interactive = FALSE, nocreatehome = FALSE, creategroup = FALSE;
+	int interactive = FALSE, nocreatehome = FALSE, creategroup = FALSE,
+	    nocreatemail = FALSE;
 	int c;
 	char *file = NULL, **fields;
 	FILE *fp = stdin;
@@ -57,6 +58,8 @@ main(int argc, const char **argv)
 		 "file with user information records", "STDIN"},
 		{"nocreatehome", 'M', POPT_ARG_NONE, &nocreatehome, 0,
 		 "don't create home directories", NULL},
+		{"nocreatemail", 'n', POPT_ARG_NONE, &nocreatemail, 0,
+		 "don't create mail spools", NULL},
 		POPT_AUTOHELP
 		{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
@@ -82,13 +85,9 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE, error->string);
-		} else {
-			fprintf(stderr, _("Error initializing %s.\n"),
-				PACKAGE);
-		}
+		fprintf(stderr, _("Error initializing %s: %s.\n"),
+			PACKAGE,
+			error ? error->string : _("unknown error"));
 		return 1;
 	}
 
@@ -319,12 +318,18 @@ main(int argc, const char **argv)
 					}
 				}
 			}
+			/* Unless the nocreatemail flag was given, give the
+			 * user a mail spool. */
+			if (!nocreatemail) {
+				if (!lu_mailspool_create_remove(ctx, ent, TRUE)) {
+					g_print(_("Error creating mail spool for %s.\n"), fields[0]);
+				}
+
+			}
 		} else {
 			g_print(_("Error creating user account for %s: "
 				"%s\n"), fields[0],
-				error ?
-				error->string :
-				_("unknown error"));
+				error ? error->string : _("unknown error"));
 			if (error) {
 				lu_error_free(&error);
 			}

@@ -96,13 +96,9 @@ main(int argc, const char **argv)
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
 	if (ctx == NULL) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE, error->string);
-		} else {
-			fprintf(stderr, _("Error initializing %s.\n"),
-				PACKAGE);
-		}
+		fprintf(stderr, _("Error initializing %s: %s.\n"),
+			PACKAGE,
+			error ? error->string : _("unknown error"));
 		return 1;
 	}
 
@@ -192,13 +188,15 @@ main(int argc, const char **argv)
 	if (!groupflag) {
 		if (lu_user_setpass(ctx, ent, password, is_crypted, &error) == FALSE) {
 			fprintf(stderr, _("Error setting password for user "
-				"%s: %s.\n"), user, error->string);
+				"%s: %s.\n"), user,
+				error ? error->string : _("unknown error"));
 			return 3;
 		}
 	} else {
 		if (lu_group_setpass(ctx, ent, password, is_crypted, &error) == FALSE) {
 			fprintf(stderr, _("Error setting password for group "
-				"%s: %s.\n"), user, error->string);
+				"%s: %s.\n"), user,
+				error ? error->string : _("unknown error"));
 			return 3;
 		}
 	}

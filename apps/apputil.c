@@ -60,6 +60,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 	char skelpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
 	struct utimbuf timebuf;
 	int ifd = -1, ofd = -1, i;
+	off_t offset;
 
 	LU_ERROR_CHECK(error);
 
@@ -164,6 +165,10 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 				} while (i > 0);
 
 				/* Close the files. */
+				offset = lseek(ofd, 0, SEEK_CUR);
+				if (offset != ((off_t) -1)) {
+					ftruncate(ofd, offset);
+				}
 				close (ifd);
 				close (ofd);
 

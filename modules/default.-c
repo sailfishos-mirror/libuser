@@ -55,6 +55,12 @@ lu_common_user_default(struct lu_module *module,
 		lu_ent_add(ent, LU_USERPASSWORD, &value);
 		g_value_unset(&value);
 	}
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, DEFAULT_PASSWORD);
+		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
+		g_value_unset(&value);
+	}
 	if (lu_ent_get(ent, LU_GECOS) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
 		g_value_set_string(&value, name);

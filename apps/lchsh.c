@@ -96,7 +96,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		if (error != NULL) {
 			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE, error->string);
+				PACKAGE,
+				error ? error->string : _("unknown error"));
 		} else {
 			fprintf(stderr, _("Error initializing %s.\n"),
 				PACKAGE);

@@ -551,14 +551,18 @@ lu_ldap_base(struct lu_module *module, const char *configKey,
 	return ret;
 }
 
-/* Generate the distinguished name which corresponds to the lu_ent structure. */
+/* Discover the distinguished name which corresponds to the lu_ent structure. */
 static const char *
 lu_ldap_ent_to_dn(struct lu_module *module,
 		  const char *namingAttr, const char *name, int applicability,
 		  const char *configKey, const char *def)
 {
 	const char *branch = NULL;
-	char *tmp = NULL, *ret = NULL;
+	char *tmp = NULL, *ret = NULL, *filter;
+	char *noattrs[] = {NULL};
+	const char *base = NULL;
+	struct lu_ldap_context *ctx = NULL;
+	LDAPMessage *messages = NULL, *entry = NULL;
 
 	g_assert(module != NULL);
 	g_assert(namingAttr != NULL);
@@ -568,14 +572,34 @@ lu_ldap_ent_to_dn(struct lu_module *module,
 	g_assert(configKey != NULL);
 	g_assert(strlen(configKey) > 0);
 
-	/* If we know where to set the object, we can generate the DN. */
+	/* Search for the right object using the entity's current name. */
 	branch = lu_ldap_base(module, configKey, def);
-	if (branch) {
-		tmp = g_strdup_printf("%s=%s,%s",
-				      map_to_ldap(module->scache, namingAttr),
-				      name, branch);
-		ret = module->scache->cache(module->scache, tmp);
-		g_free(tmp);
+	ctx = module->module_context;
+	base = ctx->prompts[LU_LDAP_BASEDN].value;
+
+	tmp = map_to_ldap(module->scache, namingAttr),
+	filter = g_strdup_printf("(%s=%s)", tmp, name);
+	if (ldap_search_s(ctx->ldap, branch, LDAP_SCOPE_SUBTREE, filter,
+			  noattrs, FALSE, &messages) == LDAP_SUCCESS) {
+		entry = ldap_first_entry(ctx->ldap, messages);
+		if (entry != NULL) {
+			tmp = ldap_get_dn(ctx->ldap, entry);
+			ret = module->scache->cache(module->scache, tmp);
+		}
+		ldap_msgfree(messages);
+	}
+	g_free(filter);
+
+	if (ret == NULL) {
+		/* Guess at the DN using the branch and the base. */
+		if (branch) {
+			tmp = g_strdup_printf("%s=%s,%s",
+					      map_to_ldap(module->scache,
+						          namingAttr),
+					      name, branch);
+			ret = module->scache->cache(module->scache, tmp);
+			g_free(tmp);
+		}
 	}
 
 	return ret;

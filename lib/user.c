@@ -843,6 +843,7 @@ lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
 	ldata = extract_id(entity);
 	if (run_list(context, entity->modules, logic_and, id,
 		     sdata, ldata, entity, &scratch, error)) {
+		lu_ent_revert(entity);
 		return TRUE;
 	}
 	return FALSE;
@@ -969,7 +970,6 @@ lu_dispatch(struct lu_context *context,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
-				lu_ent_revert(tmp);
 				lu_ent_copy(tmp, entity);
 			}
 			success = TRUE;

@@ -108,7 +108,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		if (error != NULL) {
 			fprintf(stderr, _("Error initializing %s: %s.\n"),
-				PACKAGE, error->string);
+				PACKAGE,
+				error ? error->string : _("unknown error"));
 		} else {
 			fprintf(stderr, _("Error initializing %s.\n"),
 				PACKAGE);
@@ -369,13 +370,8 @@ main(int argc, const char **argv)
 		g_print(_("Finger information changed.\n"));
 		lu_hup_nscd();
 	} else {
-		if (error && error->string) {
-			g_print(_("Finger information not changed: %s.\n"),
-				error->string);
-		} else {
-			g_print(_("Finger information not changed: unknown "
-				"error.\n"));
-		}
+		g_print(_("Finger information not changed: %s.\n"),
+			error ? error->string : _("unknown error"));
 	}
 
 	g_value_unset(&val);

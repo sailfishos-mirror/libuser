@@ -1,4 +1,5 @@
-/* Copyright (C) 2000-2002 Red Hat, Inc.
+/*
+ * Copyright (C) 2000-2002 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under 
  * the terms of the GNU Library General Public License as published by
@@ -394,7 +395,7 @@ static void
 lu_ent_clear_int(GArray *list, const char *attribute)
 {
 	int i;
-	struct lu_attribute *attr;
+	struct lu_attribute *attr = NULL;
 	char *lattr;
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attribute != NULL);

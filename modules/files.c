@@ -700,7 +700,8 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				 * field and we need to suppress it. */
 				if ((formats[i].def != NULL) &&
 				    (formats[i].multiple == FALSE) &&
-				    (strcmp(formats[i].def, p) == 0)) {
+				    (strcmp(formats[i].def, p) == 0) &&
+				    (formats[i].suppress_if_def == TRUE)) {
 					tmp = g_strdup(ret);
 				} else {
 					tmp = g_strconcat(ret ?: "",
@@ -1382,7 +1383,7 @@ generic_del(struct lu_module *module, const char *base_name,
 		/* If the data occurs elsewhere, cover it up. */
 		if ((tmp = strstr(contents, fragment2)) != NULL) {
 			char *p = strchr(tmp + 1, '\n');
-			strcpy(tmp, p ? (p + 1) : "");
+			strcpy(tmp + 1, p ? (p + 1) : "");
 			found = TRUE;
 		}
 	} while(found);
