@@ -1,12 +1,13 @@
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-09-06 23:33+300\n"
-"Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
+"PO-Revision-Date: 2002-04-04 05:44+0300\n"
+"Last-Translator: NilgÃ¼n Belma BugÃ¼ner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-9\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
@@ -18,7 +19,7 @@ msgstr "`%s' okunurken hata: %s"
 #: apps/apputil.c:78
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "`%s' oluşturulurken hata: %s"
+msgstr "`%s' oluÅŸturulurken hata: %s"
 
 #: apps/apputil.c:200 apps/apputil.c:232 apps/apputil.c:249
 #, c-format
@@ -27,64 +28,64 @@ msgstr "`%s' silinirken hata: %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Ä°zinler bÄ±rakÄ±lamadÄ±.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
-msgstr "İç hata.\n"
+msgstr "Ä°Ã§ hata.\n"
 
 #: apps/apputil.c:432
 msgid "Error initializing PAM.\n"
-msgstr "PAM başlatılırken hata.\n"
+msgstr "PAM baÅŸlatÄ±lÄ±rken hata.\n"
 
 #: apps/apputil.c:440 apps/apputil.c:464
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "%s için kimlik sınaması başarısız.\n"
+msgstr "%s iÃ§in kimlik sÄ±namasÄ± baÅŸarÄ±sÄ±z.\n"
 
 #: apps/apputil.c:449
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "İç hata.\n"
+msgstr "Ä°Ã§ PAM hatasÄ± `%s'.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "KullanÄ±cÄ± aynÄ± deÄŸil.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
-msgstr "[SEÇENEK...] kullanıcı"
+msgstr "[SEÃ‡ENEK...] kullanÄ±cÄ±"
 
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "%s oluşturulurken hata: %s.\n"
+msgstr "argÃ¼manlar okunurken hata: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
 msgid "No user name specified.\n"
-msgstr "Kullanıcı ismi belirtilmedi.\n"
+msgstr "KullanÄ±cÄ± ismi belirtilmedi.\n"
 
 #: apps/lchage.c:155 apps/lgroupadd.c:88 apps/lgroupdel.c:80
 #: apps/lgroupmod.c:103 apps/luseradd.c:115 apps/luserdel.c:86
 #: apps/lusermod.c:113 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "%s başlatılırken hata: %s.\n"
+msgstr "%s baÅŸlatÄ±lÄ±rken hata: %s.\n"
 
 #: apps/lchage.c:158 apps/lgroupadd.c:91 apps/lgroupdel.c:83
 #: apps/lgroupmod.c:106 apps/luseradd.c:118 apps/luserdel.c:89
 #: apps/lusermod.c:116
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr "%s başlatılırken hata.\n"
+msgstr "%s baÅŸlatÄ±lÄ±rken hata.\n"
 
 #: apps/lchage.c:168 apps/luserdel.c:98 apps/lusermod.c:131
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "Kullanıcı %s yok.\n"
+msgstr "KullanÄ±cÄ± %s yok.\n"
 
 #: apps/lchage.c:176
 msgid "Account is locked.\n"
@@ -92,7 +93,7 @@ msgstr "Hesap kilitli.\n"
 
 #: apps/lchage.c:178
 msgid "Account is not locked.\n"
-msgstr "Hesap kilitli değil.\n"
+msgstr "Hesap kilitli deÄŸil.\n"
 
 #: apps/lchage.c:183
 #, c-format
@@ -102,12 +103,12 @@ msgstr "En az:\t%d\n"
 #: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "En çok:\t%d\n"
+msgstr "En Ã§ok:\t%d\n"
 
 #: apps/lchage.c:193
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr "Uyarı:\t%d\n"
+msgstr "UyarÄ±:\t%d\n"
 
 #: apps/lchage.c:198
 #, c-format
@@ -121,31 +122,31 @@ msgstr "Asla"
 #: apps/lchage.c:205
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "Son değişiklik:\t%s\n"
+msgstr "Son DeÄŸiÅŸiklik:\t%s\n"
 
 #: apps/lchage.c:215
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Parola zaman aşımı:\t%s\n"
+msgstr "Parola zaman aÅŸÄ±mÄ±:\t%s\n"
 
 #: apps/lchage.c:227
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "Parola etkisizlik:\t%s\n"
+msgstr "Parola etkisiz:\t%s\n"
 
 #: apps/lchage.c:234
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Hesap Zaman aşımı:\t%s\n"
+msgstr "Hesap Zaman aÅŸÄ±mÄ±:\t%s\n"
 
 #: apps/lchage.c:281
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "%s için dönemsellik bilgisi değişikliği başarısız.\n"
+msgstr "%s iÃ§in dÃ¶nemsellik bilgisi deÄŸiÅŸikliÄŸi baÅŸarÄ±sÄ±z.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr "[SEÇENEK...] grup"
+msgstr "[SEÃ‡ENEK...] grup"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
@@ -153,7 +154,7 @@ msgstr "Grup ismi belirtilmedi.\n"
 
 #: apps/lgroupadd.c:115
 msgid "Group creation failed.\n"
-msgstr "Grup oluşturulamadı.\n"
+msgstr "Grup oluÅŸturulamadÄ±.\n"
 
 #: apps/lgroupdel.c:92 apps/lgroupmod.c:120
 #, c-format
@@ -167,12 +168,12 @@ msgstr "Grup %s silinemedi.\n"
 
 #: apps/lgroupmod.c:113 apps/lusermod.c:124
 msgid "Both -L and -U specified.\n"
-msgstr "-L ve -U birlikte kullanılamaz.\n"
+msgstr "-L ve -U birlikte kullanÄ±lamaz.\n"
 
 #: apps/lgroupmod.c:230 apps/lgroupmod.c:238
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "%s grubu için parola belirlenemedi.\n"
+msgstr "%s grubu iÃ§in parola belirlenemedi.\n"
 
 #: apps/lgroupmod.c:246
 #, c-format
@@ -182,47 +183,47 @@ msgstr "%s grubu kilitlenemedi.\n"
 #: apps/lgroupmod.c:254
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "%s grubunun kilidi kaldırılamadı.\n"
+msgstr "%s grubunun kilidi kaldÄ±rÄ±lamadÄ±.\n"
 
 #: apps/lgroupmod.c:261
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "%s grubu değiştirilemedi.\n"
+msgstr "%s grubu deÄŸiÅŸtirilemedi.\n"
 
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "%s için grup oluşturulurken hata: %s.\n"
+msgstr "%s iÃ§in grup oluÅŸturulurken hata.\n"
 
 #: apps/luseradd.c:280
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Hesap oluşturulamadı: %s.\n"
+msgstr "Hesap oluÅŸturulamadÄ±: %s.\n"
 
 #: apps/luseradd.c:322
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "%s oluşturulurken hata: %s.\n"
+msgstr "%s oluÅŸturulurken hata: %s.\n"
 
 #: apps/luserdel.c:103
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "%s kullanıcısı silinemedi: %s.\n"
+msgstr "%s kullanÄ±cÄ±sÄ± silinemedi: %s.\n"
 
 #: apps/luserdel.c:113
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s bir grup kimliği numarası alamadı.\n"
+msgstr "%s iÃ§in bir grup kimliÄŸi yok.\n"
 
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "%ld kimlikli bir grup yok, siliniyor.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "#%d grubuna bir grup ismi verilmedi.\n"
+msgstr "%ld grubuna bir grup ismi verilmedi.\n"
 
 #: apps/luserdel.c:142
 #, c-format
@@ -232,7 +233,7 @@ msgstr "%s grubu silinemedi: %s.\n"
 #: apps/luserdel.c:156
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s bir ev dizinine sahip değil.\n"
+msgstr "%s bir ev dizinine sahip deÄŸil.\n"
 
 #: apps/luserdel.c:163
 #, c-format
@@ -242,165 +243,153 @@ msgstr "%s silinirken hata: %s.\n"
 #: apps/lusermod.c:198 apps/lusermod.c:210
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "%s kullanıcısı için parola belirlenemedi: %s\n"
+msgstr "%s kullanÄ±cÄ±sÄ± iÃ§in parola belirlenemedi: %s\n"
 
 #: apps/lusermod.c:220
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Kullanıcı %s kilitlenemedi: %s.\n"
+msgstr "KullanÄ±cÄ± %s kilitlenemedi: %s.\n"
 
 #: apps/lusermod.c:228
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Kullanıcı %s için kilit kaldırılamadı: %s.\n"
+msgstr "KullanÄ±cÄ± %s iÃ§in kilit kaldÄ±rÄ±lamadÄ±: %s.\n"
 
 #: apps/lusermod.c:236
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Kullanıcı %s değiştirilemedi: %s.\n"
+msgstr "KullanÄ±cÄ± %s deÄŸiÅŸtirilemedi: %s.\n"
 
 #: apps/lusermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s grubu değiştirilemedi.\n"
+msgstr "%s grubu deÄŸiÅŸtirilemedi: %s\n"
 
 #: apps/lusermod.c:300
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "%s için eski ev dizini yok.\n"
+msgstr "%s iÃ§in eski ev dizini yok.\n"
 
 #: apps/lusermod.c:305
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "%s için yeni ev dizini yok.\n"
+msgstr "%s iÃ§in yeni ev dizini yok.\n"
 
 #: apps/lusermod.c:311
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "%s %s'e taşınırken hata: %s.\n"
+msgstr "%s %s'e taÅŸÄ±nÄ±rken hata: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "`%s' yapılandırma dosyası açılamadı: %s"
+msgstr "`%s' yapÄ±landÄ±rma dosyasÄ± aÃ§Ä±lamadÄ±: %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr ""
+msgstr "baÅŸarÄ±lÄ±"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "modÃ¼l yapÄ±landÄ±rmada iptal edildi"
 
 #: lib/error.c:45
-#, fuzzy
 msgid "generic error"
-msgstr "İç hata.\n"
+msgstr "genel hata"
 
 #: lib/error.c:47
-#, fuzzy
 msgid "not enough privileges"
-msgstr "root yetkileriyle çalıştırılmıyor"
+msgstr "izinler yetersiz"
 
 #: lib/error.c:49
 msgid "access denied"
-msgstr ""
+msgstr "eriÅŸim engellendi"
 
 #: lib/error.c:51
 msgid "bad user/group name"
-msgstr ""
+msgstr "kullanÄ±cÄ±/grup ismi hatalÄ±"
 
 #: lib/error.c:53
 msgid "bad user/group id"
-msgstr ""
+msgstr "kullanÄ±cÄ±/grup kimlikleri hatalÄ±"
 
 #: lib/error.c:55
 msgid "user/group name in use"
-msgstr ""
+msgstr "kullanÄ±cÄ±/grup ismi kullanÄ±mda"
 
 #: lib/error.c:57
 msgid "user/group id in use"
-msgstr ""
+msgstr "kullanÄ±cÄ±/grup kimlikleri kullanÄ±mda"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "uÃ§birim Ã¶zellikleri deÄŸiÅŸtirilirken hata"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error opening file"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "dosya aÃ§Ä±lÄ±rken hata"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error locking file"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "dosya kilitlenirken hata"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error statting file"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "dosya durumlanÄ±rken hata"
 
 #: lib/error.c:67
-#, fuzzy
 msgid "error reading file"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "dosya okunurken hata"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "error writing to file"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "dosyaya yazÄ±lÄ±rken hata"
 
 #: lib/error.c:71
 msgid "data not found in file"
-msgstr ""
+msgstr "dosyada veri yok"
 
 #: lib/error.c:73
-#, fuzzy
 msgid "internal initialization error"
-msgstr "kerberos kitaplığı başlatılırken hata"
+msgstr "kerberos kitaplÄ±ÄŸÄ± baÅŸlatÄ±lÄ±rken hata"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "error loading module"
-msgstr "dosya kilitlenirken hata: %s"
+msgstr "modÃ¼l yÃ¼klenirken hata"
 
 #: lib/error.c:77
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "modÃ¼l iÃ§indeki sembol Ã§Ã¶zÃ¼mlenirken hata"
 
 #: lib/error.c:79
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "`%s' de modül sürümü uyumsuzluğu"
+msgstr "modÃ¼l/kitaplÄ±k sÃ¼rÃ¼mÃ¼ uyumsuzluÄŸu"
 
 #: lib/error.c:84
-#, fuzzy
 msgid "unknown error"
 msgstr "bilinmeyen"
 
 #: lib/modules.c:112
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "İlklendirme işlevi %s `%s' içinde yok"
+msgstr "Ä°lklendirme iÅŸlevi %s `%s' iÃ§inde yok"
 
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "`%s' de modül sürümü uyumsuzluğu"
+msgstr "`%s' de modÃ¼l sÃ¼rÃ¼mÃ¼ uyumsuzluÄŸu"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "uÃ§birim Ã¶zellikleri okunurken hata"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Öntanımlı kullanıcı öznitelikleri alınıyor:\n"
+msgstr "uÃ§birim Ã¶zellikleri ayarlanÄ±rken hata"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "uÃ§birimden okumada hata"
 
 #: lib/util.c:200
 #, c-format
@@ -416,28 +405,28 @@ msgstr "dosya kilitlenirken hata: %s"
 #: modules/files.c:2544 modules/files.c:2561
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "`%s' açılamadı: %s"
+msgstr "`%s' aÃ§Ä±lamadÄ±: %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:838 modules/files.c:1337
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "`%s' durum bilgisi alınamadı: %s"
+msgstr "`%s' durum bilgisi alÄ±namadÄ±: %s"
 
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "`%s' oluşturulurken hata: %s"
+msgstr "`%s' oluÅŸturulurken hata: %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "yedek dosyası `%s' bir sembolik bağ"
+msgstr "yedek dosyasÄ± `%s' var ama normal bir dosya deÄŸil"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "`%s'den okunamadı: %s"
+msgstr "`%s'den okunamadÄ±: %s"
 
 #: modules/files.c:886 modules/files.c:899
 msgid "entry already present in file"
@@ -447,67 +436,67 @@ msgstr "girdi zaten dosyada var"
 #: modules/files.c:1420
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "`%s'e yazılamadı: %s"
+msgstr "`%s'e yazÄ±lamadÄ±: %s"
 
 #: modules/files.c:1082 modules/files.c:1091 modules/files.c:1196
 #: modules/files.c:1208
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "öğe nesnesi %s özelliğine sahip değil"
+msgstr "Ã¶ÄŸe nesnesi %s Ã¶zelliÄŸine sahip deÄŸil"
 
 #: modules/files.c:2791 modules/files.c:2861
 msgid "not executing with superuser privileges"
-msgstr "root yetkileriyle çalıştırılmıyor"
+msgstr "root yetkileriyle Ã§alÄ±ÅŸtÄ±rÄ±lmÄ±yor"
 
 #: modules/files.c:2874
 msgid "no shadow file present -- disabling"
-msgstr "shadow dosyası yok -- iptal ediliyor"
+msgstr "shadow dosyasÄ± yok -- iptal ediliyor"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' hizmeti için `%s' alanındaki kadm5 suncusuna bağlanırken hata: %s"
+msgstr "`%s' hizmeti iÃ§in `%s' alanÄ±ndaki kadm5 suncusuna baÄŸlanÄ±rken hata: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "kerberos kitaplığı başlatılırken hata"
+msgstr "kerberos kitaplÄ±ÄŸÄ± baÅŸlatÄ±lÄ±rken hata"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "kullanıcı ismi `%s' kerberos için ayrıştırılırken hata"
+msgstr "kullanÄ±cÄ± ismi `%s' kerberos iÃ§in ayrÄ±ÅŸtÄ±rÄ±lÄ±rken hata oluÅŸtu"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "öğe yapısı ne %s ne de %s özelliğine sahip"
+msgstr "Ã¶ÄŸe yapÄ±sÄ± ne %s ne de %s Ã¶zelliÄŸine sahip"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "öğe ne %s ne de %s özelliğine sahip"
+msgstr "Ã¶ÄŸe ne %s ne de %s Ã¶zelliÄŸine sahip"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "öğe ne %s ne de %s özelliğiyle oluşturuldu"
+msgstr "Ã¶ÄŸe ne %s ne de %s Ã¶zelliÄŸiyle oluÅŸturuldu"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "kerberostaki %s için bilgiler okunurken hata"
+msgstr "kerberostaki %s iÃ§in bilgiler okunurken hata"
 
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "öğe %s özelliğini içermiyor"
+msgstr "Ã¶ÄŸe %s Ã¶zelliÄŸini iÃ§ermiyor"
 
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "`%s' için parola belirlenirken hata"
+msgstr "`%s' iÃ§in parola belirlenirken hata"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -515,65 +504,64 @@ msgstr "Kerberos Realm"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
-msgstr "Kerberos Baş Yöneticisi"
+msgstr "Kerberos BaÅŸ YÃ¶neticisi"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "Baş Yönetici için Kerberos Parolası"
+msgstr "BaÅŸ YÃ¶netici iÃ§in Kerberos ParolasÄ±"
 
 #: modules/ldap.c:215 modules/ldap.c:248
 msgid "error initializing ldap library"
-msgstr "ldap kitaplığı başlatılırken hata"
+msgstr "ldap kitaplÄ±ÄŸÄ± baÅŸlatÄ±lÄ±rken hata"
 
 #: modules/ldap.c:226 modules/ldap.c:259
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "LDAP protokolü %d sürümüne ayarlanamadı"
+msgstr "LDAP protokolÃ¼ %d sÃ¼rÃ¼mÃ¼ne ayarlanamadÄ±"
 
 #: modules/ldap.c:236
 msgid "could not negotiate TLS with LDAP server"
-msgstr "LDAP sunucusu ile TLS pazarlığı yapılamadı"
+msgstr "LDAP sunucusu ile TLS uzlaÅŸmasÄ± yapÄ±lamadÄ±"
 
 #: modules/ldap.c:407
 msgid "could not bind to LDAP server"
-msgstr "LDAP sunucusuna bağlanılamadı"
+msgstr "LDAP sunucusuna baÄŸlanÄ±lamadÄ±"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "LDAP sunucusuna bağlanılamadı"
+msgstr "LDAP sunucusuna aranamadÄ±"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "LDAP sunucusu bir kÃ¶k DSE'ye sahip gÃ¶rÃ¼nmÃ¼yor"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
 msgid "error mapping name to LDAP distinguished name"
-msgstr "LDAP seçkin ismine isim eşlenirken hata"
+msgstr "LDAP seÃ§kin ismine isim eÅŸlenirken hata"
 
 #: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "LDAP taban seçkin ismine isim eşlenirken hata"
+msgstr "LDAP taban seÃ§kin ismine isim eÅŸlenirken hata"
 
 #: modules/ldap.c:1142
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "kullanıcı nesnesi %s özelliğini içermiyor"
+msgstr "kullanÄ±cÄ± nesnesi %s Ã¶zelliÄŸini iÃ§ermiyor"
 
 #: modules/ldap.c:1151
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "kullanıcı nesnesi `%s' olmaksızın oluşturuldu"
+msgstr "kullanÄ±cÄ± nesnesi `%s' olmaksÄ±zÄ±n oluÅŸturuldu"
 
 #: modules/ldap.c:1177
 msgid "could not convert internal data to LDAPMods"
-msgstr "iç veri LDAPMods'a dönüştürülemedi"
+msgstr "iÃ§ veri LDAPMods'a dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lemedi"
 
 #: modules/ldap.c:1201 modules/ldap.c:1412
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "LDAP dizin girdisi değiştirilirken hata: %s"
+msgstr "LDAP dizin girdisi deÄŸiÅŸtirilirken hata: %s"
 
 #: modules/ldap.c:1221
 #, c-format
@@ -583,7 +571,7 @@ msgstr "LDAP dizin girdisi isimlendirilirken hata: %s\n"
 #: modules/ldap.c:1269
 #, c-format
 msgid "object had no %s attribute"
-msgstr "nesne %s özelliğini içermiyor"
+msgstr "nesne %s Ã¶zelliÄŸini iÃ§ermiyor"
 
 #: modules/ldap.c:1296
 #, c-format
@@ -594,71 +582,70 @@ msgstr "LDAP dizin girdisi silinirken hata: %s.\n"
 #: modules/ldap.c:1539
 #, c-format
 msgid "object has no %s attribute"
-msgstr "nesne %s özelliğini içermiyor"
+msgstr "nesne %s Ã¶zelliÄŸini iÃ§ermiyor"
 
 #: modules/ldap.c:1475
 msgid "no such object in LDAP directory"
-msgstr "LDAP dizininde böyle bir nesne yok"
+msgstr "LDAP dizininde bÃ¶yle bir nesne yok"
 
 #: modules/ldap.c:1488
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "`%s' özelliği bulunmuyor"
+msgstr "`%s' Ã¶zelliÄŸi bulunmuyor"
 
 #: modules/ldap.c:1629
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "LDAP dizininde %s için parola belirlenirken hata: %s"
+msgstr "LDAP dizininde %s iÃ§in parola belirlenirken hata: %s"
 
 #: modules/ldap.c:2171
 msgid "LDAP Server Name"
-msgstr "LDAP Sunucu İsmi"
+msgstr "LDAP Sunucu Ä°smi"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP Temel DN"
+msgstr "LDAP Arama TabanÄ± DN"
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
-msgstr "LDAP Bağlantı DN"
+msgstr "LDAP BaÄŸlantÄ± DN"
 
 #: modules/ldap.c:2190
 msgid "LDAP Bind Password"
-msgstr "LDAP Bağlantı Parolası"
+msgstr "LDAP BaÄŸlantÄ± ParolasÄ±"
 
 #: modules/ldap.c:2196
 msgid "LDAP SASL User"
-msgstr "LDAP SASL Kullanıcısı"
+msgstr "LDAP SASL KullanÄ±cÄ±sÄ±"
 
 #: modules/ldap.c:2203
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL Yetkilendirme Kullanıcısı"
+msgstr "LDAP SASL Yetkilendirme KullanÄ±cÄ±sÄ±"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "%s başlatılırken hata: %s.\n"
+msgstr "%s baÅŸlatÄ±lÄ±rken hata: %s.\n"
 
 #: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "%d kimlikli grup için arama yapılıyor.\n"
+msgstr "%d kimlikli grup iÃ§in arama yapÄ±lÄ±yor.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "%s isimli grup için arama yapılıyor.\n"
+msgstr "%s isimli grup iÃ§in arama yapÄ±lÄ±yor.\n"
 
 #: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "%d kimlikli kullanıcı için arama yapılıyor.\n"
+msgstr "%d kimlikli kullanÄ±cÄ± iÃ§in arama yapÄ±lÄ±yor.\n"
 
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "%s isimli kullanıcı için arama yapılıyor.\n"
+msgstr "%s isimli kullanÄ±cÄ± iÃ§in arama yapÄ±lÄ±yor.\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
@@ -666,75 +653,17 @@ msgstr "Girdi yok.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr "Öntanımlı kullanıcı nesnesi sınıfları:\n"
+msgstr "Ã–ntanÄ±mlÄ± kullanÄ±cÄ± nesnesi sÄ±nÄ±flarÄ±:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "Öntanımlı kullanıcı öznitelik isimleri:\n"
+msgstr "Ã–ntanÄ±mlÄ± kullanÄ±cÄ± Ã¶znitelik isimleri:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "Öntanımlı kullanıcı öznitelikleri alınıyor:\n"
+msgstr "Ã–ntanÄ±mlÄ± kullanÄ±cÄ± Ã¶znitelikleri alÄ±nÄ±yor:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr "Kullanıcı yapısı kopyalanıyor:\n"
+msgstr "KullanÄ±cÄ± yapÄ±sÄ± kopyalanÄ±yor:\n"
 
-#~ msgid "error searching LDAP directory"
-#~ msgstr "LDAP dizini aranırken hata"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "`%s' özelliğini kullanan bir `%s' şeması yok"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "öğe nesnesi `%s' özelliğine sahip değil"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "%s için kullanıcı kimliği hatalı.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "%s için grup kimliği hatalı.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "%s için ev dizini yok.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "#%d grubu yok.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "%s için eski ev dizini okunurken hata: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "%p'de lu_ent yapısı dökümü:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " sihirli = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " türü = %s\n"
-
-#~ msgid "user"
-#~ msgstr "kullanıcı"
-
-#~ msgid "group"
-#~ msgstr "grup"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Kopyalamadan önce:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Kopyaladıktan sonra:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "%p'de lu_ent serbest bırakılıyor\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "lu başlatılırken hata.\n"
