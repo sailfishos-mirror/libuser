@@ -33,6 +33,7 @@
 
 #define INVALID (-0x80000000)
 #define DEFAULT_ID 500
+#define INVALID_NAME_CHARS ":,."
 
 enum lu_dispatch_id {
 	uses_elevated_privileges = 0x0003,
@@ -211,6 +212,14 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 		if (g_ascii_isspace(sdata[i])) {
 			lu_error_new(error, lu_error_name_bad,
 				     _("name contains whitespace"));
+			return FALSE;
+		}
+	}
+	for (i = 0; sdata[i] != '\0'; i++) {
+		if (strchr(sdata[i], INVALID_NAME_CHARS)) {
+			lu_error_new(error, lu_error_name_bad,
+				     _("name contains invalid char `%c'"),
+				     sdata[i]);
 			return FALSE;
 		}
 	}

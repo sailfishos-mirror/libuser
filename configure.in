@@ -16,7 +16,9 @@ AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
 ALL_LINGUAS="cs da de es fr is it ja ko no pt ru sl sv tr zh_CN.GB2312 zh_TW.Big5 zh_TW"
 
-AM_GNU_GETTEXT
+AM_GLIB_GNU_GETTEXT
+GETTEXT_PACKAGE=libuser
+AC_SUBST(GETTEXT_PACKAGE)
 
 AM_MAINTAINER_MODE
 if test x$GCC = xyes; then

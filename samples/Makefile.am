@@ -7,28 +7,28 @@ EXTRA_DIST = genusers
 
 enum_SOURCES = enum.c
 
-enum_LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+enum_LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@
 
 field_SOURCES = field.c
 
-field_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+field_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@
 
 homedir_SOURCES = homedir.c
 
-homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
 
 lookup_SOURCES = lookup.c
 
-lookup_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+lookup_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@
 
 quotaq_SOURCES = quotaq.c
 
-quotaq_LDADD =  ../lib/libuserquota.la @CRYPT_LIBS@ @LTLIBINTL@
+quotaq_LDADD =  ../lib/libuserquota.la @CRYPT_LIBS@
 
 prompt_SOURCES = prompt.c
 
-prompt_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+prompt_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@
 
 testuser_SOURCES = testuser.c
 
-testuser_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
+testuser_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@
