@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-05-05 13:10+0200\n"
+"PO-Revision-Date: 2002-05-13 01:24+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -330,11 +330,11 @@ msgstr "felaktigt användar-/gruppid"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "användar-/gruppnamnet används"
+msgstr "användar-/gruppnamnet är upptaget"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "användar-/gruppid används"
+msgstr "användar-/gruppid är upptaget"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
