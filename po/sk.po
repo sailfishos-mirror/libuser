@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-14 21:29+0100\n"
+"PO-Revision-Date: 2004-11-16 21:52+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -399,9 +399,9 @@ msgid "Password changed.\n"
 msgstr "Heslo zmenené.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Skupina %s neexistuje.\n"
+msgstr "Skupina %jd neexistuje\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -595,7 +595,7 @@ msgstr "verzia knižnice/modulu nezodpovedá"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "odomknutie by vyprázdnilo pole pre heslo"
 
 #: lib/error.c:88
 msgid "unknown error"
