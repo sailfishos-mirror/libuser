@@ -77,4 +77,4 @@ os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")
 print "--------- Getting a list of all users."
 users = admin.enumerateUsersFull()
 for user in users:
-	print "  User `" + user[libuser.USERNAME] + "' has uid " + user[libuser.UIDNUMBER]
+	print "  User `" + user[libuser.USERNAME][0] + "' has uid ", user[libuser.UIDNUMBER][0]

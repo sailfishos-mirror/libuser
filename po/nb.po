@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
-"POT-Creation-Date: 2002-01-17 16:12-0500\n"
+"POT-Creation-Date: 2002-01-17 20:46-0500\n"
 "PO-Revision-Date: 2001-08-08 12:48+0200\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -399,18 +399,18 @@ msgstr "feil ved lesing fra terminal"
 msgid "error locking file: %s"
 msgstr "feil under låsing av fil: %s"
 
-#: modules/files.c:106 modules/files.c:394 modules/files.c:710
-#: modules/files.c:961 modules/files.c:1137 modules/files.c:1319
-#: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
-#: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
-#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
-#: modules/files.c:1949 modules/files.c:2024 modules/files.c:2039
+#: modules/files.c:106 modules/files.c:402 modules/files.c:716
+#: modules/files.c:967 modules/files.c:1143 modules/files.c:1325
+#: modules/files.c:1401 modules/files.c:1571 modules/files.c:1686
+#: modules/files.c:1701 modules/files.c:1776 modules/files.c:1793
+#: modules/files.c:1844 modules/files.c:1863 modules/files.c:1940
+#: modules/files.c:1955 modules/files.c:2030 modules/files.c:2045
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "kunne ikke åpne `%s': %s"
 
 #: modules/files.c:121 modules/files.c:153 modules/files.c:185
-#: modules/files.c:724 modules/files.c:1151
+#: modules/files.c:730 modules/files.c:1157
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "kunne ikke kjøre stat på `%s': %s"
@@ -425,32 +425,32 @@ msgstr "feil under oppretting av `%s': %s"
 msgid "backup file `%s' was a symlink"
 msgstr "sikkerhetskopien `%s' var en symbolsk lenke"
 
-#: modules/files.c:741 modules/files.c:1162
+#: modules/files.c:747 modules/files.c:1168
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "kunne ikke lese fra `%s': %s"
 
-#: modules/files.c:753 modules/files.c:765
+#: modules/files.c:759 modules/files.c:771
 msgid "entry already present in file"
 msgstr "oppføringen er allerede i filen"
 
-#: modules/files.c:779 modules/files.c:794 modules/files.c:1192
-#: modules/files.c:1203
+#: modules/files.c:785 modules/files.c:800 modules/files.c:1198
+#: modules/files.c:1209
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "kunne ikke skrive til `%s': %s"
 
-#: modules/files.c:931 modules/files.c:940 modules/files.c:1024
-#: modules/files.c:1037
+#: modules/files.c:937 modules/files.c:946 modules/files.c:1030
+#: modules/files.c:1043
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetsobjekt har ingen %s-attributt"
 
-#: modules/files.c:2252 modules/files.c:2318
+#: modules/files.c:2262 modules/files.c:2328
 msgid "not executing with superuser privileges"
 msgstr "kjører ikke med superbruker-privilegier"
 
-#: modules/files.c:2331
+#: modules/files.c:2341
 msgid "no shadow file present -- disabling"
 msgstr "ingen skyggefil finnes -- deaktiverer"
 
