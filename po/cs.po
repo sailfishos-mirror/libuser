@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-06-04 10:34+0100\n"
-"Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
+"PO-Revision-Date: 2002-09-06 00:41+0200\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
@@ -508,7 +508,7 @@ msgstr "entita nemá atribut %s"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "chyba pøi nasavování hesla pro '%s'"
+msgstr "chyba pøi nastavování hesla pro '%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -573,7 +573,7 @@ msgstr "nelze konvertovat interní data na LDAPMods"
 #: modules/ldap.c:1271 modules/ldap.c:1482
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "chyba pøi modifiaci LDAP polo¾ky: %s"
+msgstr "chyba pøi modifikaci LDAP polo¾ky: %s"
 
 #: modules/ldap.c:1291
 #, c-format
@@ -657,7 +657,7 @@ msgstr "Vyhledávání u¾ivatele s ID %d.\n"
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Vyhledávání u¾ivatele sejménem %s.\n"
+msgstr "Vyhledávání u¾ivatele se jménem %s.\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
