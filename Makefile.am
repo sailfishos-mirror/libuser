@@ -3,9 +3,6 @@ EXTRA_DIST = config.rpath  libuser.spec libuser.conf.in docs/attributes.txt docs
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig
 
-dist-hook:
-	make -f Makefile.in -C po Makefile
-
 VERSION=$(shell awk '/Version:/ { print $$2 }' libuser.spec)
 RELEASE=$(shell awk '/Release:/ { print $$2 }' libuser.spec)
 CVSTAG=libuser-$(subst .,-,$(VERSION))-$(subst .,-,$(RELEASE))
