@@ -29,54 +29,56 @@
 #include <string.h>
 #include "user.h"
 
-static const char *
-lu_strerror(enum lu_status code)
+const char *
+lu_strerror(struct lu_error *error)
 {
-	switch (code) {
-		case lu_success:
-			return _("success");
-		case lu_warning_config_disabled:
-			return _("module disabled by configuration");
-		case lu_error_generic:
-			return _("generic error");
-		case lu_error_privilege:
-			return _("not enough privileges");
-		case lu_error_access_denied:
-			return _("access denied");
-		case lu_error_name_bad:
-			return _("bad user/group name");
-		case lu_error_id_bad:
-			return _("bad user/group id");
-		case lu_error_name_used:
-			return _("user/group name in use");
-		case lu_error_id_used:
-			return _("user/group id in use");
-		case lu_error_terminal:
-			return _("error manipulating terminal attributes");
-		case lu_error_open:
-			return _("error opening file");
-		case lu_error_lock:
-			return _("error locking file");
-		case lu_error_stat:
-			return _("error statting file");
-		case lu_error_read:
-			return _("error reading file");
-		case lu_error_write:
-			return _("error writing to file");
-		case lu_error_search:
-			return _("data not found in file");
-		case lu_error_init:
-			return _("internal initialization error");
-		case lu_error_module_load:
-			return _("error loading module");
-		case lu_error_module_sym:
-			return _("error resolving symbol in module");
-		case lu_error_module_version:
-			return _("library/module version mismatch");
-		default:
-			return _("unknown error");
-	};
-	return _("unknown error");
+	if (error != NULL) {
+		switch (error->code) {
+			case lu_success:
+				return N_("success");
+			case lu_warning_config_disabled:
+				return N_("module disabled by configuration");
+			case lu_error_generic:
+				return N_("generic error");
+			case lu_error_privilege:
+				return N_("not enough privileges");
+			case lu_error_access_denied:
+				return N_("access denied");
+			case lu_error_name_bad:
+				return N_("bad user/group name");
+			case lu_error_id_bad:
+				return N_("bad user/group id");
+			case lu_error_name_used:
+				return N_("user/group name in use");
+			case lu_error_id_used:
+				return N_("user/group id in use");
+			case lu_error_terminal:
+				return N_("error manipulating terminal attributes");
+			case lu_error_open:
+				return N_("error opening file");
+			case lu_error_lock:
+				return N_("error locking file");
+			case lu_error_stat:
+				return N_("error statting file");
+			case lu_error_read:
+				return N_("error reading file");
+			case lu_error_write:
+				return N_("error writing to file");
+			case lu_error_search:
+				return N_("data not found in file");
+			case lu_error_init:
+				return N_("internal initialization error");
+			case lu_error_module_load:
+				return N_("error loading module");
+			case lu_error_module_sym:
+				return N_("error resolving symbol in module");
+			case lu_error_module_version:
+				return N_("library/module version mismatch");
+			default:
+				break;
+		}
+	}
+	return N_("unknown error");
 }
 
 gboolean
@@ -146,7 +148,7 @@ lu_error_new(struct lu_error **error, enum lu_status code,
 		va_start(args, desc);
 		ret->string = desc ?
 			g_strdup_vprintf(desc, args) :
-			g_strdup_printf(lu_strerror(code), strerror(errno));
+			g_strdup_printf(lu_strerror(ret), strerror(errno));
 		va_end(args);
 		*error = ret;
 	}

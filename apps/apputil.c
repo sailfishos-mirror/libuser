@@ -393,7 +393,6 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 {
 	pam_handle_t *pamh;
 	struct pam_conv conv;
-	struct conv_data data;
 	const char *puser = user;
 	int ret;
 

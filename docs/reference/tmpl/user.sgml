@@ -20,6 +20,21 @@ modifications of the system information store.
 
 </para>
 
+<!-- ##### FUNCTION lu_start ##### -->
+<para>
+
+</para>
+
+@authname: 
+@auth_type: 
+@modules: 
+@create_modules: 
+@prompter: 
+@callback_data: 
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION lu_end ##### -->
 <para>
 

@@ -1,6 +1,6 @@
 10% function docs coverage.
 10 functions documented.
-92 not documented.
+95 not documented.
 
 
 LU_ADMINISTRATORUID
@@ -49,6 +49,7 @@ lu_ent_get_attributes_current
 lu_ent_get_current
 lu_ent_has
 lu_ent_has_current
+lu_ent_new
 lu_ent_revert
 lu_ent_set
 lu_ent_set_current
@@ -71,6 +72,8 @@ lu_groups_enumerate_by_user
 lu_groups_enumerate_full
 lu_set_modules
 lu_set_prompter
+lu_start
+lu_strerror
 lu_user_add
 lu_user_default
 lu_user_delete

@@ -122,110 +122,151 @@ struct lu_context *context,const char *parent_key
 #define LU_EMAIL		"mail"
 </MACRO>
 <FUNCTION>
+<NAME>lu_ent_new</NAME>
+<RETURNS>lu_ent_t  *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
 <NAME>lu_ent_free</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_copy</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *source, struct lu_ent *dest
+lu_ent_t *source, lu_ent_t *dest
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_revert</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_commit</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_get_current</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_ent *ent, const char *attribute
+lu_ent_t *ent, const char *attribute
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_has_current</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_ent *ent, const char *attribute
+lu_ent_t *ent, const char *attribute
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_set_current</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr,const GValueArray *values
+lu_ent_t *ent, const char *attr,const GValueArray *values
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_add_current</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr,const GValue *value
+lu_ent_t *ent, const char *attr,const GValue *value
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_clear_current</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr
+lu_ent_t *ent, const char *attr
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_clear_all_current</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_del_current</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr,const GValue *value
+lu_ent_t *ent, const char *attr,const GValue *value
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_get_attributes_current</NAME>
 <RETURNS>GList  *</RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_get</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_ent *ent, const char *attribute
+lu_ent_t *ent, const char *attribute
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_has</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_ent *ent, const char *attribute
+lu_ent_t *ent, const char *attribute
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_set</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr,const GValueArray *values
+lu_ent_t *ent, const char *attr,const GValueArray *values
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_add</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr,const GValue *value
+lu_ent_t *ent, const char *attr,const GValue *value
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_clear</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr
+lu_ent_t *ent, const char *attr
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_clear_all</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_del</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, const char *attr, const GValue *value
+lu_ent_t *ent, const char *attr, const GValue *value
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_get_attributes</NAME>
 <RETURNS>GList  *</RETURNS>
-struct lu_ent *ent
+lu_ent_t *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_ent_dump</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_ent *ent, FILE *fp
+lu_ent_t *ent, FILE *fp
 </FUNCTION>
+<ENUM>
+<NAME>lu_status_t</NAME>
+typedef enum lu_status {
+	/* Non-fatal. */
+	lu_success = 0,
+	lu_warning_config_disabled,
+
+	/* Fatal. */
+	lu_error_generic,
+	lu_error_privilege,
+	lu_error_access_denied,
+
+	/* Data validation errors. */
+	lu_error_name_bad,
+	lu_error_id_bad,
+	lu_error_name_used,
+	lu_error_id_used,
+
+	/* Terminal manipulation errors. */
+	lu_error_terminal,
+
+	/* File I/O errors. */
+	lu_error_open,
+	lu_error_lock,
+	lu_error_stat,
+	lu_error_read,
+	lu_error_write,
+	lu_error_search,
+
+	/* Initialization or module-loading errors. */
+	lu_error_init,
+	lu_error_module_load,
+	lu_error_module_sym,
+	lu_error_module_version,
+} lu_status_t;
+</ENUM>
 <MACRO>
 <NAME>LU_ERROR_CHECK</NAME>
 #define LU_ERROR_CHECK(err_p_p) \
@@ -245,27 +286,32 @@ do { \
 <FUNCTION>
 <NAME>lu_error_new</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_error **error, enum lu_status code,const char *fmt, ...
+lu_error_t **error, lu_status_t code,const char *fmt, ...
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_strerror</NAME>
+<RETURNS>const char  *</RETURNS>
+lu_error_t *error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_error_is_success</NAME>
 <RETURNS>gboolean  </RETURNS>
-enum lu_status status
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_error_is_warning</NAME>
 <RETURNS>gboolean  </RETURNS>
-enum lu_status status
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_error_is_error</NAME>
 <RETURNS>gboolean  </RETURNS>
-enum lu_status status
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_error_free</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_error **error
+lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_prompt_console</NAME>
@@ -277,175 +323,184 @@ struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **err
 <RETURNS>gboolean  </RETURNS>
 struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
 </FUNCTION>
+<ENUM>
+<NAME>lu_entity_type_t</NAME>
+typedef enum lu_entity_type { lu_user, lu_group } lu_entity_type_t;
+</ENUM>
+<FUNCTION>
+<NAME>lu_start</NAME>
+<RETURNS>lu_context_t  *</RETURNS>
+const char *authname,lu_entity_type_t auth_type,const char *modules, const char *create_modules,lu_prompt_fn *prompter,gpointer callback_data,lu_error_t **error
+</FUNCTION>
 <FUNCTION>
 <NAME>lu_end</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_context *context
+lu_context_t *context
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_set_prompter</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_context *context,lu_prompt_fn *prompter, gpointer callback_data
+lu_context_t *context,lu_prompt_fn *prompter, gpointer callback_data
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_get_prompter</NAME>
 <RETURNS>void  </RETURNS>
-struct lu_context *context,lu_prompt_fn ** prompter, gpointer *callback_data
+lu_context_t *context,lu_prompt_fn ** prompter, gpointer *callback_data
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_set_modules</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,const char *list, struct lu_error **error
+lu_context_t *context,const char *list, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_get_modules</NAME>
 <RETURNS>const char  *</RETURNS>
-struct lu_context *context
+lu_context_t *context
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_uses_elevated_privileges</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context
+lu_context_t *context
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_default</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *ctx, const char *name,gboolean system, struct lu_ent *ent
+lu_context_t *ctx, const char *name,gboolean system, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_default</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *ctx, const char *name,gboolean system, struct lu_ent *ent
+lu_context_t *ctx, const char *name,gboolean system, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_lookup_name</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,const char *name, struct lu_ent *ent,struct lu_error **error
+lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_lookup_name</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,const char *name, struct lu_ent *ent,struct lu_error **error
+lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_lookup_id</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context, uid_t uid,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context, uid_t uid,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_lookup_id</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context, gid_t gid,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context, gid_t gid,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_add</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_add</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_modify</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_modify</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_delete</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_delete</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_lock</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_lock</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_unlock</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_unlock</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_islocked</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_islocked</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_setpass</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, const char *newpass,struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, const char *newpass,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_setpass</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent, const char *newpass,struct lu_error **error
+lu_context_t *context,struct lu_ent *ent, const char *newpass,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_removepass</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent,struct lu_error **error
+lu_context_t *context,struct lu_ent *ent,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_removepass</NAME>
 <RETURNS>gboolean  </RETURNS>
-struct lu_context *context,struct lu_ent *ent,struct lu_error **error
+lu_context_t *context,struct lu_ent *ent,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_users_enumerate</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_context *context,const char *pattern,struct lu_error **error
+lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_groups_enumerate</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_context *context,const char *pattern,struct lu_error **error
+lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_users_enumerate_by_group</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_context *context,const char *group,struct lu_error **error
+lu_context_t *context,const char *group,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_groups_enumerate_by_user</NAME>
 <RETURNS>GValueArray  *</RETURNS>
-struct lu_context *context,const char *user,struct lu_error **error
+lu_context_t *context,const char *user,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_users_enumerate_full</NAME>
 <RETURNS>GPtrArray  *</RETURNS>
-struct lu_context *context,const char *pattern,struct lu_error **error
+lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_groups_enumerate_full</NAME>
 <RETURNS>GPtrArray  *</RETURNS>
-struct lu_context *context,const char *pattern,struct lu_error **error
+lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>quota_on</NAME>

@@ -34,6 +34,7 @@ LU_ROOMNUMBER
 LU_TELEPHONENUMBER
 LU_HOMEPHONE
 LU_EMAIL
+lu_ent_new
 lu_ent_free
 lu_ent_copy
 lu_ent_revert
@@ -59,8 +60,10 @@ lu_ent_dump
 
 <SECTION>
 <FILE>error</FILE>
+lu_status_t
 LU_ERROR_CHECK
 lu_error_new
+lu_strerror
 lu_error_is_success
 lu_error_is_warning
 lu_error_is_error
@@ -75,6 +78,8 @@ lu_prompt_console_quiet
 
 <SECTION>
 <FILE>user</FILE>
+lu_entity_type_t
+lu_start
 lu_end
 lu_set_prompter
 lu_get_prompter

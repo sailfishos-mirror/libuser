@@ -66,6 +66,7 @@ lu_error_free
 lu_error_is_success
 lu_error_is_warning
 lu_error_is_error
+lu_strerror
 </SECTION>
 
 <SECTION>

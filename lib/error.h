@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-enum lu_status {
+typedef enum lu_status {
 	/* Non-fatal. */
 	lu_success = 0,
 	lu_warning_config_disabled,
@@ -57,12 +57,12 @@ enum lu_status {
 	lu_error_module_load,
 	lu_error_module_sym,
 	lu_error_module_version,
-};
+} lu_status_t;
 
-struct lu_error {
+typedef struct lu_error {
 	enum lu_status code;
 	char *string;
-};
+} lu_error_t;
 
 /* Checks that a passed-in error pointer is not already populated, and calls
    abort() if it is. */
@@ -81,12 +81,13 @@ do { \
 } while(0)
 
 /* Functions for allocating and freeing error objects. */
-void lu_error_new(struct lu_error **error, enum lu_status code,
+void lu_error_new(lu_error_t **error, lu_status_t code,
 		  const char *fmt, ...);
-gboolean lu_error_is_success(enum lu_status status);
-gboolean lu_error_is_warning(enum lu_status status);
-gboolean lu_error_is_error(enum lu_status status);
-void lu_error_free(struct lu_error **error);
+const char *lu_strerror(lu_error_t *error);
+gboolean lu_error_is_success(lu_status_t status);
+gboolean lu_error_is_warning(lu_status_t status);
+gboolean lu_error_is_error(lu_status_t status);
+void lu_error_free(lu_error_t **error);
 
 G_END_DECLS
 

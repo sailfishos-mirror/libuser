@@ -206,6 +206,14 @@ user or group account.
 
 
 
+<!-- ##### FUNCTION lu_ent_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION lu_ent_free ##### -->
 <para>
 
