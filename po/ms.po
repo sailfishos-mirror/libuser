@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2005-03-30 23:04+0800\n"
+"PO-Revision-Date: 2005-03-31 22:18+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -347,9 +347,9 @@ msgstr "Kedua-dua L dan U dinyatakan.\n"
 
 #: apps/lgroupmod.c:141
 #: apps/lgroupmod.c:150
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Gagal for kumpulan s"
+msgstr "Gagal untuk menetapkan katalaluan bagi kumpulan %s: %s\n"
 
 #: apps/lgroupmod.c:159
 #, fuzzy, c-format
@@ -392,9 +392,9 @@ msgid "Error opening `%s': %s.\n"
 msgstr "Ralat bila membuka %s\n"
 
 #: apps/lnewusers.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Ralat for s"
+msgstr "Ralat mencipta akaun untuk `%s': baris tidak diformat dengan betul.\n"
 
 #: apps/lnewusers.c:144
 #: apps/luseradd.c:120
@@ -404,19 +404,18 @@ msgid "Invalid user ID %s\n"
 msgstr "ID pengguna tidak sah: %s"
 
 #: apps/lnewusers.c:151
-#, fuzzy
 msgid "Refusing to create account with UID 0.\n"
-msgstr "UID"
+msgstr "Enggan mencipta akaun dengan UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Ralat kumpulan for s"
+msgstr "Ralat mencipta kumpulan untuk `%s' dengan GID %jd: %s\n"
 
 #: apps/lnewusers.c:292
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "Ralat for s s"
+msgstr "Ralat menetapkan katalaluan permulaan untuk %s: %s\n"
 
 #: apps/lnewusers.c:312
 #, fuzzy, c-format
