@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-19 11:35+0100\n"
+"PO-Revision-Date: 2003-02-25 21:01+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -544,7 +544,7 @@ msgstr "interní chyba při inicializaci"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr "chyba př zavádění modulu"
+msgstr "chyba při zavádění modulu"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
@@ -833,9 +833,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL uživatel pro autentizaci"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "chyba př zavádění modulu"
+msgstr "chyba při inicializaci modulu"
 
 #: modules/sasldb.c:128
 #, c-format
