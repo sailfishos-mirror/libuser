@@ -7,77 +7,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-04-15 17:49-0400\n"
-"PO-Revision-Date: 2002-04-16 09:04GMT+10:00\n"
+"PO-Revision-Date: 2002-07-01 08:59+1000\n"
 "Last-Translator: Ben Wu <hpwu@redhat.com>\n"
-"Language-Team: Traditional Chinese <zh@li.org>\n"
+"Language-Team: Chinese (traditional) <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=BIG5\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0beta1\n"
 
 #: apps/apputil.c:71
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Åª¨ú `%s' ¿ù»~: %s"
+msgstr "è®€å– `%s' éŒ¯èª¤: %s"
 
 #: apps/apputil.c:79
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "«Ø¥ß `%s' ¿ù»~: %s"
+msgstr "å»ºç«‹ `%s' éŒ¯èª¤: %s"
 
 #: apps/apputil.c:205 apps/apputil.c:237 apps/apputil.c:254
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "²¾°£ `%s' ¿ù»~: %s"
+msgstr "ç§»é™¤ `%s' éŒ¯èª¤: %s"
 
 #: apps/apputil.c:411 apps/apputil.c:415
 msgid "Failed to drop privileges.\n"
-msgstr "²×¤îÅv­­¥¢±Ñ.\n"
+msgstr "çµ‚æ­¢æ¬Šé™å¤±æ•—.\n"
 
 #: apps/apputil.c:424
 msgid "Internal error.\n"
-msgstr "¤º³¡¿ù»~.\n"
+msgstr "å…§éƒ¨éŒ¯èª¤.\n"
 
 #: apps/apputil.c:437
 msgid "Error initializing PAM.\n"
-msgstr "ªì©l¤Æ PAM ¿ù»~.\n"
+msgstr "åˆå§‹åŒ– PAM éŒ¯èª¤.\n"
 
 #: apps/apputil.c:445 apps/apputil.c:469
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "¬° %s »{ÃÒ¥¢±Ñ.\n"
+msgstr "ç‚º %s èªè­‰å¤±æ•—.\n"
 
 #: apps/apputil.c:454
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "¤º³¡ PAM ¿ù»~ `%s'.\n"
+msgstr "å…§éƒ¨ PAM éŒ¯èª¤ `%s'.\n"
 
 #: apps/apputil.c:460
 msgid "User mismatch.\n"
-msgstr "¨Ï¥ÎªÌ¤£²Å.\n"
+msgstr "ä½¿ç”¨è€…ä¸ç¬¦.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr "[OPTION...] ¨Ï¥ÎªÌ"
+msgstr "[OPTION...] ä½¿ç”¨è€…"
 
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "»yªk¤W¤ÀªR¤Ş¼Æ¿ù»~: %s.\n"
+msgstr "èªæ³•ä¸Šåˆ†æå¼•æ•¸éŒ¯èª¤: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr "¨S¦³«ü©w¨Ï¥ÎªÌ¦WºÙ.\n"
+msgstr "æ²’æœ‰æŒ‡å®šä½¿ç”¨è€…åç¨±.\n"
 
 #: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:111 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "ªì©l¤Æ %s ¿ù»~: %s.\n"
+msgstr "åˆå§‹åŒ– %s éŒ¯èª¤: %s.\n"
 
 #: apps/lchage.c:156 apps/lgroupadd.c:90 apps/lgroupdel.c:81
 #: apps/lgroupmod.c:104 apps/luseradd.c:116 apps/luseradd.c:277
@@ -87,299 +87,299 @@ msgstr "ªì©l¤Æ %s ¿ù»~: %s.\n"
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
 #: apps/lusermod.c:315 lib/error.c:85
 msgid "unknown error"
-msgstr "¥¼ª¾ªº¿ù»~"
+msgstr "æœªçŸ¥çš„éŒ¯èª¤"
 
 #: apps/lchage.c:164 apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "¨Ï¥ÎªÌ %s ¤£¦s¦b.\n"
+msgstr "ä½¿ç”¨è€… %s ä¸å­˜åœ¨.\n"
 
 #: apps/lchage.c:172
 msgid "Account is locked.\n"
-msgstr "±b¸¹¤wÂê¦í.\n"
+msgstr "å¸³è™Ÿå·²é–ä½.\n"
 
 #: apps/lchage.c:174
 msgid "Account is not locked.\n"
-msgstr "±b¸¹¨S¦³Âê¦í.\n"
+msgstr "å¸³è™Ÿæ²’æœ‰é–ä½.\n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr "³Ì¤p­È:\t%d\n"
+msgstr "æœ€å°å€¼:\t%d\n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "³Ì¤j­È:\t%d\n"
+msgstr "æœ€å¤§å€¼:\t%d\n"
 
 #: apps/lchage.c:189
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr "Äµ§i:\t%d\n"
+msgstr "è­¦å‘Š:\t%d\n"
 
 #: apps/lchage.c:194
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr "¥¢®Äªº:\t%d\n"
+msgstr "å¤±æ•ˆçš„:\t%d\n"
 
 #: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
 msgid "Never"
-msgstr "±q¤£"
+msgstr "å¾ä¸"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "¤W¤@¦¸§ó§ï:\t%s\n"
+msgstr "ä¸Šä¸€æ¬¡æ›´æ”¹:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "±K½X¹L´Á:\t%s\n"
+msgstr "å¯†ç¢¼éæœŸ:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "±K½X¥¢®Ä:\t%s\n"
+msgstr "å¯†ç¢¼å¤±æ•ˆ:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "±b¸¹¹L´Á:\t%s\n"
+msgstr "å¸³è™ŸéæœŸ:\t%s\n"
 
 #: apps/lchage.c:277
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "­×§ï  %s ªº¦ÑÂÂ¸ê°T¥¢±Ñ.\n"
+msgstr "ä¿®æ”¹  %s çš„è€èˆŠè³‡è¨Šå¤±æ•—.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr "[OPTION...] ¸s²Õ"
+msgstr "[OPTION...] ç¾¤çµ„"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "¨S¦³«ü©w¸s²Õ¦WºÙ.\n"
+msgstr "æ²’æœ‰æŒ‡å®šç¾¤çµ„åç¨±.\n"
 
 #: apps/lgroupadd.c:92
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr "ªì©l¤Æ %s ¿ù»~.\n"
+msgstr "åˆå§‹åŒ– %s éŒ¯èª¤.\n"
 
 #: apps/lgroupadd.c:116
 msgid "Group creation failed.\n"
-msgstr "«Ø¥ß¸s²Õ¥¢±Ñ.\n"
+msgstr "å»ºç«‹ç¾¤çµ„å¤±æ•—.\n"
 
 #: apps/lgroupdel.c:88 apps/lgroupmod.c:116
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr "%s ¸s²Õ¤£¦s¦b.\n"
+msgstr "%s ç¾¤çµ„ä¸å­˜åœ¨.\n"
 
 #: apps/lgroupdel.c:94
 #, c-format
 msgid "Group %s could not be deleted.\n"
-msgstr "µLªk§R°£ %s ¸s²Õ.\n"
+msgstr "ç„¡æ³•åˆªé™¤ %s ç¾¤çµ„.\n"
 
 #: apps/lgroupmod.c:109 apps/lusermod.c:119
 msgid "Both -L and -U specified.\n"
-msgstr "-L »P -U ³£«ü©w¤F.\n"
+msgstr "-L èˆ‡ -U éƒ½æŒ‡å®šäº†.\n"
 
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "³]©w %s ¸s²Õªº±K½X¥¢±Ñ.\n"
+msgstr "è¨­å®š %s ç¾¤çµ„çš„å¯†ç¢¼å¤±æ•—.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
 msgid "Group %s could not be locked.\n"
-msgstr "µLªkÂê©w %s ¸s²Õ.\n"
+msgstr "ç„¡æ³•é–å®š %s ç¾¤çµ„.\n"
 
 #: apps/lgroupmod.c:250
 #, c-format
 msgid "Group %s could not be unlocked.\n"
-msgstr "%s ¸s²ÕµLªk¶}±Ò.\n"
+msgstr "%s ç¾¤çµ„ç„¡æ³•é–‹å•Ÿ.\n"
 
 #: apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified.\n"
-msgstr "%s ¸s²ÕµLªk­×§ï.\n"
+msgstr "%s ç¾¤çµ„ç„¡æ³•ä¿®æ”¹.\n"
 
 #: apps/luseradd.c:197 apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "«Ø¥ß %s ¸s²Õµo¥Í¿ù»~.\n"
+msgstr "å»ºç«‹ %s ç¾¤çµ„ç™¼ç”ŸéŒ¯èª¤.\n"
 
 #: apps/luseradd.c:276
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "±b¸¹«Ø¥ß¥¢±Ñ: %s.\n"
+msgstr "å¸³è™Ÿå»ºç«‹å¤±æ•—: %s.\n"
 
 #: apps/luseradd.c:318
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "«Ø¥ß %s µo¥Í¿ù»~: %s.\n"
+msgstr "å»ºç«‹ %s ç™¼ç”ŸéŒ¯èª¤: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr "«Ø¥ß¶l¥ó spool ®Éµo¥Í¿ù»~¡C\n"
+msgstr "å»ºç«‹éƒµä»¶ spool æ™‚ç™¼ç”ŸéŒ¯èª¤ã€‚\n"
 
 #: apps/luserdel.c:99
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "µLªk§R°£ %s ¨Ï¥ÎªÌ: %s.\n"
+msgstr "ç„¡æ³•åˆªé™¤ %s ä½¿ç”¨è€…: %s.\n"
 
 #: apps/luserdel.c:110
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s ¨S¦³¸s²Õ ID (gid) ¸¹½X.\n"
+msgstr "%s æ²’æœ‰ç¾¤çµ„ ID (gid) è™Ÿç¢¼.\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr "¸s²Õ ID %ld ªº¸s²Õ¤£¦s¦b, µLªk²¾°£.\n"
+msgstr "ç¾¤çµ„ ID %ld çš„ç¾¤çµ„ä¸å­˜åœ¨, ç„¡æ³•ç§»é™¤.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "¸s²Õ ID %ld ªº¸s²Õ¨S¦³¸s²Õ¦WºÙ.\n"
+msgstr "ç¾¤çµ„ ID %ld çš„ç¾¤çµ„æ²’æœ‰ç¾¤çµ„åç¨±.\n"
 
 #: apps/luserdel.c:139
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "µLªk§R°£ %s ¸s²Õ: %s.\n"
+msgstr "ç„¡æ³•åˆªé™¤ %s ç¾¤çµ„: %s.\n"
 
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s ¨S¦³®a¥Ø¿ı.\n"
+msgstr "%s æ²’æœ‰å®¶ç›®éŒ„.\n"
 
 #: apps/luserdel.c:162
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "²¾°£ %s ¿ù»~: %s.\n"
+msgstr "ç§»é™¤ %s éŒ¯èª¤: %s.\n"
 
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "¬° %s ¨Ï¥ÎªÌ³]©w±K½X¥¢±Ñ: %s.\n"
+msgstr "ç‚º %s ä½¿ç”¨è€…è¨­å®šå¯†ç¢¼å¤±æ•—: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s ¨Ï¥ÎªÌµLªk³QÂê©w: %s.\n"
+msgstr "%s ä½¿ç”¨è€…ç„¡æ³•è¢«é–å®š: %s.\n"
 
 #: apps/lusermod.c:226
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s ¨Ï¥ÎªÌµLªk³Q¶}±Ò: %s.\n"
+msgstr "%s ä½¿ç”¨è€…ç„¡æ³•è¢«é–‹å•Ÿ: %s.\n"
 
 #: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s ¨Ï¥ÎªÌµLªk³Q­×§ï: %s.\n"
+msgstr "%s ä½¿ç”¨è€…ç„¡æ³•è¢«ä¿®æ”¹: %s.\n"
 
 #: apps/lusermod.c:289
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s ¸s²ÕµLªk³Q­×§ï: %s.\n"
+msgstr "%s ç¾¤çµ„ç„¡æ³•è¢«ä¿®æ”¹: %s.\n"
 
 #: apps/lusermod.c:302
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "¨S¦³ %s ÂÂªº®a¥Ø¿ı.\n"
+msgstr "æ²’æœ‰ %s èˆŠçš„å®¶ç›®éŒ„.\n"
 
 #: apps/lusermod.c:307
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "¨S¦³ %s ·sªº®a¥Ø¿ı.\n"
+msgstr "æ²’æœ‰ %s æ–°çš„å®¶ç›®éŒ„.\n"
 
 #: apps/lusermod.c:313
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "²¾°Ê %s ¦Ü %s ¿ù»~: %s.\n"
+msgstr "ç§»å‹• %s è‡³ %s éŒ¯èª¤: %s.\n"
 
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "µLªk¶}±Ò²ÕºA³]©wÀÉ`%s': %s"
+msgstr "ç„¡æ³•é–‹å•Ÿçµ„æ…‹è¨­å®šæª”`%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr "¦¨¥\"
+msgstr "æˆåŠŸ"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr "¼Ò²Õ³Q²ÕºA³]©w¦¨°±¥Î"
+msgstr "æ¨¡çµ„è¢«çµ„æ…‹è¨­å®šæˆåœç”¨"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr "¤@¯ë¿ù»~"
+msgstr "ä¸€èˆ¬éŒ¯èª¤"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr "Åv­­¤£¨¬"
+msgstr "æ¬Šé™ä¸è¶³"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr "©Úµ´¦s¨ú"
+msgstr "æ‹’çµ•å­˜å–"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr "¤£·íªº ¨Ï¥ÎªÌ/¸s²Õ ¦WºÙ"
+msgstr "ä¸ç•¶çš„ ä½¿ç”¨è€…/ç¾¤çµ„ åç¨±"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr "¤£·íªº ¨Ï¥ÎªÌ/¸s²Õ ID"
+msgstr "ä¸ç•¶çš„ ä½¿ç”¨è€…/ç¾¤çµ„ ID"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "¨Ï¥ÎªÌ/¸s²Õ ¦WºÙ¤w³Q¨Ï¥Î"
+msgstr "ä½¿ç”¨è€…/ç¾¤çµ„ åç¨±å·²è¢«ä½¿ç”¨"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "¨Ï¥ÎªÌ/¸s²Õ ID ¤w³Q¨Ï¥Î"
+msgstr "ä½¿ç”¨è€…/ç¾¤çµ„ ID å·²è¢«ä½¿ç”¨"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr "³B²z²×ºİ¾÷Äİ©Êµo¥Í¿ù»~"
+msgstr "è™•ç†çµ‚ç«¯æ©Ÿå±¬æ€§ç™¼ç”ŸéŒ¯èª¤"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr "¶}±ÒÀÉ®×¿ù»~"
+msgstr "é–‹å•Ÿæª”æ¡ˆéŒ¯èª¤"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr "Âê©wÀÉ®×¿ù»~"
+msgstr "é–å®šæª”æ¡ˆéŒ¯èª¤"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr "statting ÀÉ®×¿ù»~"
+msgstr "statting æª”æ¡ˆéŒ¯èª¤"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr "Åª¨úÀÉ®×¿ù»~"
+msgstr "è®€å–æª”æ¡ˆéŒ¯èª¤"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr "¼g¤JÀÉ®×¿ù»~"
+msgstr "å¯«å…¥æª”æ¡ˆéŒ¯èª¤"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr "ÀÉ®×¸Ì§ä¤£¨ì¸ê®Æ"
+msgstr "æª”æ¡ˆè£¡æ‰¾ä¸åˆ°è³‡æ–™"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr "¤º³¡ªì©l¤Æ¿ù»~"
+msgstr "å…§éƒ¨åˆå§‹åŒ–éŒ¯èª¤"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr "¸ü¤J¼Ò²Õ¿ù»~"
+msgstr "è¼‰å…¥æ¨¡çµ„éŒ¯èª¤"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "¸ÑªR¼Ò²Õ¸Ìªº²Å¸¹¿ù»~"
+msgstr "è§£ææ¨¡çµ„è£¡çš„ç¬¦è™ŸéŒ¯èª¤"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "¨ç¦¡®w/¼Ò²Õ ª©¥»¤£²Å"
+msgstr "å‡½å¼åº«/æ¨¡çµ„ ç‰ˆæœ¬ä¸ç¬¦"
 
 #: lib/modules.c:112
 #, c-format
@@ -389,24 +389,24 @@ msgstr "no initialization function %s in `%s'"
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "%s ªº¼Ò²Õª©¥»¤£²Å"
+msgstr "%s çš„æ¨¡çµ„ç‰ˆæœ¬ä¸ç¬¦"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr "²×ºİ¾÷Äİ©ÊÅª¨ú¿ù»~"
+msgstr "çµ‚ç«¯æ©Ÿå±¬æ€§è®€å–éŒ¯èª¤"
 
 #: lib/prompt.c:73 lib/prompt.c:85
 msgid "error setting terminal attributes"
-msgstr "²×ºİ¾÷Äİ©Ê³]©w¿ù»~"
+msgstr "çµ‚ç«¯æ©Ÿå±¬æ€§è¨­å®šéŒ¯èª¤"
 
 #: lib/prompt.c:79
 msgid "error reading from terminal"
-msgstr "²×ºİ¾÷Åª¨ú¿ù»~"
+msgstr "çµ‚ç«¯æ©Ÿè®€å–éŒ¯èª¤"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr "Âê©wÀÉ®×¿ù»~¡G %s"
+msgstr "é–å®šæª”æ¡ˆéŒ¯èª¤ï¼š %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:823
 #: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
@@ -417,98 +417,98 @@ msgstr "Âê©wÀÉ®×¿ù»~¡G %s"
 #: modules/files.c:2545 modules/files.c:2562
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "µLªk¶}±Ò`%s': %s"
+msgstr "ç„¡æ³•é–‹å•Ÿ`%s': %s"
 
 #: modules/files.c:126 modules/files.c:162 modules/files.c:200
 #: modules/files.c:839 modules/files.c:1338
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "µLªk stat `%s': %s"
+msgstr "ç„¡æ³• stat `%s': %s"
 
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "«Ø¥ß`%s' µo¥Í¿ù»~: %s"
+msgstr "å»ºç«‹`%s' ç™¼ç”ŸéŒ¯èª¤: %s"
 
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "³Æ¥÷ÀÉ`%s' ¦s¦b¦Ó¥¦¤£¬O¤@­Ó¥¿±`ªºÀÉ®×"
+msgstr "å‚™ä»½æª”`%s' å­˜åœ¨è€Œå®ƒä¸æ˜¯ä¸€å€‹æ­£å¸¸çš„æª”æ¡ˆ"
 
 #: modules/files.c:872 modules/files.c:1350
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "µLªk±q`%s' Åª¨ú: %s"
+msgstr "ç„¡æ³•å¾`%s' è®€å–: %s"
 
 #: modules/files.c:887 modules/files.c:900
 msgid "entry already present in file"
-msgstr "ÀÉ®×¤w¦s¦b¦¹µn¿ı(entry)"
+msgstr "æª”æ¡ˆå·²å­˜åœ¨æ­¤ç™»éŒ„(entry)"
 
 #: modules/files.c:913 modules/files.c:934 modules/files.c:1409
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "µLªk¼g¤J`%s': %s"
+msgstr "ç„¡æ³•å¯«å…¥`%s': %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "¹êÅéª«¥ó¨S¦³ %s Äİ©Ê"
+msgstr "å¯¦é«”ç‰©ä»¶æ²’æœ‰ %s å±¬æ€§"
 
 #: modules/files.c:2794 modules/files.c:2864
 msgid "not executing with superuser privileges"
-msgstr "«D¥H¶W¯Å¨Ï¥ÎªÌ(superuser)ªºÅv­­°õ¦æ"
+msgstr "éä»¥è¶…ç´šä½¿ç”¨è€…(superuser)çš„æ¬Šé™åŸ·è¡Œ"
 
 #: modules/files.c:2877
 msgid "no shadow file present -- disabling"
-msgstr "§ä¤£¨ì shadow ÀÉ®× -- °±¥Î¤¤"
+msgstr "æ‰¾ä¸åˆ° shadow æª”æ¡ˆ -- åœç”¨ä¸­"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "³s½u¦Ü´£¨Ñ`%s' ªA°Èªº %s realm ¦øªA¾¹µo¥Í¿ù»~: %s"
+msgstr "é€£ç·šè‡³æä¾›`%s' æœå‹™çš„ %s realm ä¼ºæœå™¨ç™¼ç”ŸéŒ¯èª¤: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "ªì©l¤Æ kerberos ¨ç¦¡®w¿ù»~"
+msgstr "åˆå§‹åŒ– kerberos å‡½å¼åº«éŒ¯èª¤"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "»yªk¤À¸Ñ¨Ï¥ÎªÌ¦WºÙ `%s' µ¹ kerberos µo¥Í¿ù»~"
+msgstr "èªæ³•åˆ†è§£ä½¿ç”¨è€…åç¨± `%s' çµ¦ kerberos ç™¼ç”ŸéŒ¯èª¤"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "¹êÅéµ²ºc¨S¦³ %s ©Î %s ªºÄİ©Ê"
+msgstr "å¯¦é«”çµæ§‹æ²’æœ‰ %s æˆ– %s çš„å±¬æ€§"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "¹êÅé¨S¦³ %s ©Î %s ªºÄİ©Ê"
+msgstr "å¯¦é«”æ²’æœ‰ %s æˆ– %s çš„å±¬æ€§"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "³Q«Ø¥ßªº¹êÅé¨S¦³ %s ©Î %s ªºÄİ©Ê"
+msgstr "è¢«å»ºç«‹çš„å¯¦é«”æ²’æœ‰ %s æˆ– %s çš„å±¬æ€§"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "±q kerberos Åª¨ú`%s' ªº¸ê°T¿ù»~"
+msgstr "å¾ kerberos è®€å–`%s' çš„è³‡è¨ŠéŒ¯èª¤"
 
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "¹êÅé¨S¦³ %s Äİ©Ê"
+msgstr "å¯¦é«”æ²’æœ‰ %s å±¬æ€§"
 
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "³]©w±K½Xµ¹ `%s' ¿ù»~"
+msgstr "è¨­å®šå¯†ç¢¼çµ¦ `%s' éŒ¯èª¤"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -520,99 +520,99 @@ msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "Admin Principal ªº Kerberos ±K½X"
+msgstr "Admin Principal çš„ Kerberos å¯†ç¢¼"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
-msgstr "ªì©l¤Æ ldap ¨ç¦¡®w¿ù»~"
+msgstr "åˆå§‹åŒ– ldap å‡½å¼åº«éŒ¯èª¤"
 
 #: modules/ldap.c:227 modules/ldap.c:260
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "µLªk³]©w LDAP ³q°T¨ó©wª©¥»¬° %d"
+msgstr "ç„¡æ³•è¨­å®š LDAP é€šè¨Šå”å®šç‰ˆæœ¬ç‚º %d"
 
 #: modules/ldap.c:237
 msgid "could not negotiate TLS with LDAP server"
-msgstr "µLªk§´¨ó TLS »P LDAP ¦øªA¾¹"
+msgstr "ç„¡æ³•å¦¥å” TLS èˆ‡ LDAP ä¼ºæœå™¨"
 
 #: modules/ldap.c:411
 msgid "could not bind to LDAP server"
-msgstr "µLªk³s±µ(bind) ¦Ü LDAP ¦øªA¾¹"
+msgstr "ç„¡æ³•é€£æ¥(bind) è‡³ LDAP ä¼ºæœå™¨"
 
 #: modules/ldap.c:424
 msgid "could not search LDAP server"
-msgstr "µLªk·j´M LDAP ¦øªA¾¹"
+msgstr "ç„¡æ³•æœå°‹ LDAP ä¼ºæœå™¨"
 
 #: modules/ldap.c:433
 msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP ¦øªA¾¹¦ü¥G¨S¦³ root DSE"
+msgstr "LDAP ä¼ºæœå™¨ä¼¼ä¹æ²’æœ‰ root DSE"
 
 #: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
 #: modules/ldap.c:1417 modules/ldap.c:1530 modules/ldap.c:1624
 msgid "error mapping name to LDAP distinguished name"
-msgstr "¬M®g¦WºÙ¦Ü LDAP µÛ¦Wªº¦WºÙµo¥Í¿ù»~"
+msgstr "æ˜ å°„åç¨±è‡³ LDAP è‘—åçš„åç¨±ç™¼ç”ŸéŒ¯èª¤"
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "¬M®g¦WºÙ¦Ü LDAP base µÛ¦Wªº¦WºÙµo¥Í¿ù»~"
+msgstr "æ˜ å°„åç¨±è‡³ LDAP base è‘—åçš„åç¨±ç™¼ç”ŸéŒ¯èª¤"
 
 #: modules/ldap.c:1212
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "¨Ï¥ÎªÌª«¥ó¨S¦³ %s Äİ©Ê"
+msgstr "ä½¿ç”¨è€…ç‰©ä»¶æ²’æœ‰ %s å±¬æ€§"
 
 #: modules/ldap.c:1221
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "¨Ï¥ÎªÌª«¥ó«Ø¥ß·í®É´N¨S¦³ %s"
+msgstr "ä½¿ç”¨è€…ç‰©ä»¶å»ºç«‹ç•¶æ™‚å°±æ²’æœ‰ %s"
 
 #: modules/ldap.c:1247
 msgid "could not convert internal data to LDAPMods"
-msgstr "µLªkÂà´«¤º³¡¸ê®Æ¦Ü LDAPMods"
+msgstr "ç„¡æ³•è½‰æ›å…§éƒ¨è³‡æ–™è‡³ LDAPMods"
 
 #: modules/ldap.c:1271 modules/ldap.c:1482
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "­×§ï LDAP ¥Ø¿ıµn¿ıµo¥Í¿ù»~: %s"
+msgstr "ä¿®æ”¹ LDAP ç›®éŒ„ç™»éŒ„ç™¼ç”ŸéŒ¯èª¤: %s"
 
 #: modules/ldap.c:1291
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr "­«·s©R¦W LDAP ¥Ø¿ıµn¿ıµo¥Í¿ù»~: %s\n"
+msgstr "é‡æ–°å‘½å LDAP ç›®éŒ„ç™»éŒ„ç™¼ç”ŸéŒ¯èª¤: %s\n"
 
 #: modules/ldap.c:1339
 #, c-format
 msgid "object had no %s attribute"
-msgstr "ª«¥ó¨S¦³ %s Äİ©Ê"
+msgstr "ç‰©ä»¶æ²’æœ‰ %s å±¬æ€§"
 
 #: modules/ldap.c:1366
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "²¾°£ LDAP ¥Ø¿ıµn¿ıµo¥Í¿ù»~: %s.\n"
+msgstr "ç§»é™¤ LDAP ç›®éŒ„ç™»éŒ„ç™¼ç”ŸéŒ¯èª¤: %s.\n"
 
 #: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1515
 #: modules/ldap.c:1609
 #, c-format
 msgid "object has no %s attribute"
-msgstr "ª«¥ó¨S¦³ %s Äİ©Ê"
+msgstr "ç‰©ä»¶æ²’æœ‰ %s å±¬æ€§"
 
 #: modules/ldap.c:1545
 msgid "no such object in LDAP directory"
-msgstr "¦b LDAP ¥Ø¿ı¤¤¨S¦³ª«¥ó"
+msgstr "åœ¨ LDAP ç›®éŒ„ä¸­æ²’æœ‰ç‰©ä»¶"
 
 #: modules/ldap.c:1558
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "§ä¤£¨ì `%s' Äİ©Ê"
+msgstr "æ‰¾ä¸åˆ° `%s' å±¬æ€§"
 
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "¦b LDAP ¥Ø¿ı³]©w  %s ªº±K½Xµo¥Í¿ù»~¡G %s"
+msgstr "åœ¨ LDAP ç›®éŒ„è¨­å®š  %s çš„å¯†ç¢¼ç™¼ç”ŸéŒ¯èª¤ï¼š %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
-msgstr "LDAP ¦øªA¾¹¦WºÙ"
+msgstr "LDAP ä¼ºæœå™¨åç¨±"
 
 #: modules/ldap.c:2247
 msgid "LDAP Search Base DN"
@@ -624,58 +624,58 @@ msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2260
 msgid "LDAP Bind Password"
-msgstr "LDAP Bind ±K½X"
+msgstr "LDAP Bind å¯†ç¢¼"
 
 #: modules/ldap.c:2266
 msgid "LDAP SASL User"
-msgstr "LDAP SASL ¨Ï¥ÎªÌ"
+msgstr "LDAP SASL ä½¿ç”¨è€…"
 
 #: modules/ldap.c:2273
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL »{ÃÒ¨Ï¥ÎªÌ"
+msgstr "LDAP SASL èªè­‰ä½¿ç”¨è€…"
 
 #: samples/lookup.c:64
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "ªì©l¤Æ %s ¿ù»~: %s\n"
+msgstr "åˆå§‹åŒ– %s éŒ¯èª¤: %s\n"
 
 #: samples/lookup.c:75
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "·j´M¬O %d ID ªº¸s²Õ.\n"
+msgstr "æœå°‹æ˜¯ %d ID çš„ç¾¤çµ„.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "·j´M¬O %s ¦WºÙªº¸s²Õ.\n"
+msgstr "æœå°‹æ˜¯ %s åç¨±çš„ç¾¤çµ„.\n"
 
 #: samples/lookup.c:87
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "·j´M¬O %d ID ªº¨Ï¥ÎªÌ.\n"
+msgstr "æœå°‹æ˜¯ %d ID çš„ä½¿ç”¨è€….\n"
 
 #: samples/lookup.c:90
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "·j´M¬O %s ¦WºÙªº¨Ï¥ÎªÌ.\n"
+msgstr "æœå°‹æ˜¯ %s åç¨±çš„ä½¿ç”¨è€….\n"
 
 #: samples/lookup.c:104
 msgid "Entry not found.\n"
-msgstr "§ä¤£¨ìµn¿ı.\n"
+msgstr "æ‰¾ä¸åˆ°ç™»éŒ„.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr "¹w³]¨Ï¥ÎªÌª«¥óÃş§O:\n"
+msgstr "é è¨­ä½¿ç”¨è€…ç‰©ä»¶é¡åˆ¥:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "¹w³]¨Ï¥ÎªÌÄİ©Ê¦WºÙ:\n"
+msgstr "é è¨­ä½¿ç”¨è€…å±¬æ€§åç¨±:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "¨ú±o¹w³]¨Ï¥ÎªÌÄİ©Ê:\n"
+msgstr "å–å¾—é è¨­ä½¿ç”¨è€…å±¬æ€§:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr "½Æ»s¨Ï¥ÎªÌµ²ºc:\n"
+msgstr "è¤‡è£½ä½¿ç”¨è€…çµæ§‹:\n"
 
