@@ -65,12 +65,12 @@ msgstr "ਅੰਦਰੂਨੀ PAM ਗਲਤੀ `%s'।\n"
 #: apps/apputil.c:549
 #, c-format
 msgid "User mismatch.\n"
-msgstr "ਉਪਭੋਗਤਾ ਵਖਰੇਵਾਂ।\n"
+msgstr "ਉਪਭੋਗਤਾ ਵੱਖਰਾ ਹੈ।\n"
 
 #: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr "[ਚੋਣ...] ਉਪਭੋਗਤਾ "
+msgstr "[ਚੋਣ...] user"
 
 #: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
@@ -174,7 +174,7 @@ msgstr "%s ਲਈ ਉਮਰ ਜਾਣਕਾਰੀ ਤਬਦੀਲ ਕਰਨ ਵ�
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
-msgstr "[ਚੋਣ...] [ਉਪਭੋਗਤਾ]"
+msgstr "[ਚੋਣ...] [user]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
@@ -247,7 +247,7 @@ msgstr "ਸ਼ੈਲ ਤਬਦੀਲ ਹੋ ਗਈ ਹੈ।\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
-msgstr "[ਚੋਣ...] ਸਮੂਹ"
+msgstr "[ਚੋਣ...] group"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
 #, c-format
@@ -568,7 +568,7 @@ msgstr "ਮੈਡਿਊਲ ਵਿੱਚ ਚਿੰਨ ਨਿਸਚਿਤ ਕਰ�
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "ਲਾਇਬਰੇਰੀ/ਮੈਡਿਊਲ ਵਰਜ਼ਨ ਭਿੰਨਤਾ"
+msgstr "ਲਾਇਬਰੇਰੀ/ਮੈਡਿਊਲ ਵਰਜਨ ਭਿੰਨਤਾ"
 
 #: lib/modules.c:98
 #, c-format
@@ -578,7 +578,7 @@ msgstr "ਕੋਈ ਸ਼ੁਰੂਆਤੀ ਫੰਕਸ਼ਨ %s ਨਹੀ `%s' ਵਿ
 #: lib/modules.c:129
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "`%s' ਵਿੱਚ ਮੈਡਿਊਲ ਵਰਜ਼ਨ ਭਿੰਨਤਾ"
+msgstr "`%s' ਵਿੱਚ ਮੈਡਿਊਲ ਵਰਜਨ ਭਿੰਨਤਾ"
 
 #: lib/prompt.c:67
 msgid "error reading terminal attributes"
@@ -668,7 +668,7 @@ msgstr "`%s' ਵਿੱਚ ਲਿਖ ਨਹੀ ਸਕਿਆ: %s"
 #: modules/files.c:1245
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "ਇੰਦਰਾਜ ਆਬਜੈਕਟ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀ ਹੈ"
+msgstr "ਇੰਦਰਾਜ ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀ ਹੈ"
 
 #: modules/files.c:2848 modules/files.c:2918
 msgid "not executing with superuser privileges"
@@ -686,7 +686,7 @@ msgstr "`%s' ਸੇਵਾ ਲਈ `%s' ਖੇਤਰ ਵਿੱਚ kadm5 ਸਰਵ�
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "kerberos ਲਾਇਬਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+msgstr "kerberos ਲਾਇਬ੍ਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
@@ -738,12 +738,12 @@ msgstr "ਪ੍ਰਬੰਧਨ ਪ੍ਰਿੰਸੀਪਲ ਲਈ ਕੀਰਬੀ
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
-msgstr "ldap ਲਾਇਬਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+msgstr "ldap ਲਾਇਬ੍ਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
 
 #: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "ਵਰਜ਼ਨ %d ਲਈ LDAP ਪਰੋਟੋਕਾਲ ਨਿਰਧਾਰਿਤ ਨਹੀ ਕਰ ਸਕਿਆ"
+msgstr "ਵਰਜਨ %d ਲਈ LDAP ਪ੍ਰੋਟੋਕੋਲ ਨਿਰਧਾਰਿਤ ਨਹੀ ਕਰ ਸਕਿਆ"
 
 #: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
@@ -778,7 +778,7 @@ msgstr "ਉਪਭੋਗਤਾ ਇਕਾਈ ਕੋਲ ਕੋਈ %s ਵਿਸ਼ੇ�
 #: modules/ldap.c:1357
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "ਉਪਭੋਗਤਾ ਇਕਾਈ ਬਿਨਾ ਕਿਸੇ `%s' ਤੋਂ ਬਣਾਈ ਗਈ ਹੈ"
+msgstr "ਉਪਭੋਗਤਾ ਇਕਾਈ ਬਿਨਾਂ ਕਿਸੇ `%s' ਤੋਂ ਬਣਾਈ ਗਈ ਹੈ"
 
 #: modules/ldap.c:1382
 msgid "could not convert internal data to LDAPMods"
@@ -933,3 +933,4 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
+
