@@ -12,6 +12,8 @@ sbin_PROGRAMS = \
 	luseradd \
 	luserdel \
 	lusermod
+dist_man_MANS = lchfn.1 lchsh.1
+
 
 AM_CFLAGS = -I@PYTHON_INC@ @GOBJECT_CFLAGS@
 LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ \

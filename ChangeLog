@@ -1,0 +1,4 @@
+2004-09-20  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/lchfn.1, apps/lchsh.1: New files.
+	* apps/Makefile.am (dist_man_MANS): Distribute new man pages.
