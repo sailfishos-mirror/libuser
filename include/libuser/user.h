@@ -9,7 +9,7 @@ extern "C" {
 #include <glib.h>
 
 #define LU_OBJECTCLASS "objectClass"
-#define LU_USERNAME "gid"
+#define LU_USERNAME "uid"
 #define LU_GROUPNAME "cn"
 
 #define LU_CN "cn"
