@@ -6,12 +6,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2002-01-18 16:05-0500\n"
-"PO-Revision-Date: 2001-11-21 11:52+1000\n"
+"PO-Revision-Date: 2002-01-20 21:14+0900\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=EUC-KR\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: apps/apputil.c:68
 #, c-format
@@ -30,7 +30,7 @@ msgstr "`%s' (을)를 삭제하는 도중 오류 발생: %s"
 
 #: apps/apputil.c:404 apps/apputil.c:408
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "슈퍼유저 권한을 획득하는데 실패했습니다.\n"
 
 #: apps/apputil.c:417
 msgid "Internal error.\n"
@@ -46,13 +46,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "%s 의 인증에 실패했습니다.\n"
 
 #: apps/apputil.c:443
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "내부 오류가 발생했습니다.\n"
+msgstr "내부 PAM 오류 `%s'(이)가 발생했습니다.\n"
 
 #: apps/apputil.c:449
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "사용자가 일치하지 않습니다.\n"
 
 #: apps/lchage.c:131 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
 msgid "[OPTION...] user"
@@ -264,9 +264,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "%s 사용자를 편집할 수 없습니다: %s.\n"
 
 #: apps/lusermod.c:290
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s 그룹을 편집할 수 없습니다.\n"
+msgstr "%s 그룹을 편집할 수 없습니다: %s.\n"
 
 #: apps/lusermod.c:301
 #, c-format
@@ -290,98 +290,87 @@ msgstr "설정 파일 `%s' (을)를 열 수 없습니다: %s"
 
 #: lib/error.c:37
 msgid "success"
-msgstr ""
+msgstr "성공"
 
 #: lib/error.c:39
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "설정에 의해 모듈을 사용할 수 없음"
 
 #: lib/error.c:41
-#, fuzzy
 msgid "generic error"
-msgstr "내부 오류가 발생했습니다.\n"
+msgstr "일반적인 오류"
 
 #: lib/error.c:43
-#, fuzzy
 msgid "not enough privileges"
-msgstr "수퍼유저 권한으로 실행할 수 없습니다"
+msgstr "수퍼유저 권한이 충분치 않음"
 
 #: lib/error.c:45
 msgid "access denied"
-msgstr ""
+msgstr "접근이 거부됨"
 
 #: lib/error.c:47
 msgid "bad user/group name"
-msgstr ""
+msgstr "사용자/그룹의 이름이 잘못됨"
 
 #: lib/error.c:49
 msgid "bad user/group id"
-msgstr ""
+msgstr "사용자/그룹의 id가 잘못됨"
 
 #: lib/error.c:51
 msgid "user/group name in use"
-msgstr ""
+msgstr "사용자/그룹의 이름이 이미 사용되고 있음"
 
 #: lib/error.c:53
 msgid "user/group id in use"
-msgstr ""
+msgstr "사용자/그룹의 id가 이미 사용되고 있음"
 
 #: lib/error.c:55
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "터미널 속성을 설정하는 도중 오류 발생"
 
 #: lib/error.c:57
-#, fuzzy
 msgid "error opening file"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일을 여는 도중 오류 발생"
 
 #: lib/error.c:59
-#, fuzzy
 msgid "error locking file"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일을 잠그는 도중 오류 발생"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error statting file"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일의 상태를 확인하는 도중 오류 발생"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error reading file"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일을 읽는 도중 오류 발생"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error writing to file"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일에 기록하는 도중 오류 발생"
 
 #: lib/error.c:67
 msgid "data not found in file"
-msgstr ""
+msgstr "파일에서 자료(data)를 찾을 수 없음"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "internal initialization error"
-msgstr "kerberos 라이브러리를 초기화하는 도중 오류가 발생했습니다"
+msgstr "내부 초기화 오류"
 
 #: lib/error.c:71
-#, fuzzy
 msgid "error loading module"
-msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "모듈을 적재하는 도중 오류 발생"
 
 #: lib/error.c:73
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "모듈에서 심볼을 처리하는 도중 오류 발생"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "`%s' 의 모듈 버젼이 일치하지 않습니다"
+msgstr "라이브러리/모듈 버젼이 일치하지 않음"
 
 #: lib/error.c:77 lib/error.c:79
-#, fuzzy
 msgid "unknown error"
-msgstr "알 수 없음"
+msgstr "알 수 없는 오류"
 
 #: lib/modules.c:112
 #, c-format
@@ -395,16 +384,15 @@ msgstr "`%s' 의 모듈 버젼이 일치하지 않습니다"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "터미널 속성을 읽는 도중 오류 발생"
 
 #: lib/prompt.c:75 lib/prompt.c:89
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "기본 사용자 속성을 읽음:\n"
+msgstr "터미널 속성을 설정하는 도중 오류 발생"
 
 #: lib/prompt.c:81
 msgid "error reading from terminal"
-msgstr ""
+msgstr "터미널로 부터 읽는 도중 오류 발생"
 
 #: lib/util.c:184
 #, c-format
@@ -683,59 +671,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:94
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "entity 개체에 `%s' 속성이 없습니다"
-
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "`%s' 라는 그룹이 존재하지 않습니다.\n"
-
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "GID %ld 의 `%s' 그룹을 생성하는 도중 오류 발생.\n"
-
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "GID %ld 라는 그룹이 존재하지 않습니다.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "%s 의 부적절한 UID 입니다.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "%s 의 부적절한 GID 입니다.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "%s 의 홈 디렉토리가 없습니다.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "%s 의 이전 홈 디렉토리를 읽는 도중 오류 발생: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "dump of struct lu_ent at %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr "magic = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " type = %s\n"
-
-#~ msgid "user"
-#~ msgstr "사용자"
-
-#~ msgid "group"
-#~ msgstr "그룹"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "복사 전:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "복사 후:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "freeing lu_ent at %p.\n"
