@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "POT-Creation-Date: 2003-02-14 19:36-0500\n"
-"PO-Revision-Date: 2003-02-21 16:21+1000\n"
+"PO-Revision-Date: 2003-02-21 16:31+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,12 +140,12 @@ msgstr "최종 변경:\t%s\n"
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "패스워드 만기일:\t%s\n"
+msgstr "암호 만기일:\t%s\n"
 
 #: apps/lchage.c:223
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "패스워드 불활성:\t%s\n"
+msgstr "암호 불활성:\t%s\n"
 
 #: apps/lchage.c:230
 #, c-format
@@ -261,7 +261,7 @@ msgstr "-L 와 -U 이 함께 지정되었습니다.\n"
 #: apps/lgroupmod.c:226 apps/lgroupmod.c:234
 #, c-format
 msgid "Failed to set password for group %s.\n"
-msgstr "%s 그룹의 패스워드를 설정하는데 실패했습니다.\n"
+msgstr "%s 그룹의 암호를 설정하는데 실패했습니다.\n"
 
 #: apps/lgroupmod.c:242
 #, c-format
@@ -432,7 +432,7 @@ msgstr "%s(을)를 삭제하는 도중 오류 발생: %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "%s 사용자의 패스워드를 설정하는데 실패함: %s.\n"
+msgstr "%s 사용자의 암호를 설정하는데 실패함: %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -708,7 +708,7 @@ msgstr "entity에 %s 속성이 없습니다"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "`%s'의 패스워드를 설정하는 도중 오류가 발생했습니다"
+msgstr "`%s'의 암호를 설정하는 도중 오류가 발생했습니다"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -720,7 +720,7 @@ msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "Admin Principal의 Kerberos 패스워드"
+msgstr "Admin Principal의 Kerberos 암호"
 
 #: modules/ldap.c:216 modules/ldap.c:249
 msgid "error initializing ldap library"
@@ -808,7 +808,7 @@ msgstr "`%s' 속성을 찾을 수 없습니다"
 #: modules/ldap.c:1699
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "%s의 LDAP 디렉토리 안에 패스워드를 설정하는 도중 오류 발생: %s"
+msgstr "%s의 LDAP 디렉토리 안에 암호를 설정하는 도중 오류 발생: %s"
 
 #: modules/ldap.c:2241
 msgid "LDAP Server Name"
@@ -824,7 +824,7 @@ msgstr "LDAP Bind DN "
 
 #: modules/ldap.c:2260
 msgid "LDAP Bind Password"
-msgstr "LDAP Bind 패스워드"
+msgstr "LDAP Bind 암호"
 
 #: modules/ldap.c:2266
 msgid "LDAP SASL User"
