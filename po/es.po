@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-12-10 10:54-0200\n"
+"PO-Revision-Date: 2004-12-10 11:15-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: XLFEdit 5.0.1\n"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
@@ -66,7 +66,7 @@ msgstr "Contexto de usuario desconocido"
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr "No se pudo establecer el contexto predeterminado para s/etc/passwd\n"
+msgstr "No se pudo establecer el contexto predeterminado para /etc/passwd\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
@@ -87,7 +87,7 @@ msgstr "Autentificación fallida para %s.\n"
 #: apps/apputil.c:542
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "`%s' de error interno de PAM.\n"
+msgstr "Error interno `%s' de PAM.\n"
 
 #: apps/apputil.c:548
 #, c-format
@@ -116,7 +116,7 @@ msgstr "Error al analizar argumentos %s.\n"
 #: apps/lusermod.c:106
 #, c-format
 msgid "No user name specified.\n"
-msgstr "No se ha especificado nombre de usuario.\n"
+msgstr "No se especificó nombre de usuario.\n"
 
 # apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 # apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
@@ -200,7 +200,7 @@ msgstr "Último cambio:\t%s\n"
 #: apps/lchage.c:218
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Contraseña caducada:\t%s\n"
+msgstr "Contraseña caduca:\t%s\n"
 
 # apps/lchage.c:165
 # apps/lchage.c:165
@@ -214,7 +214,7 @@ msgstr "Contraseña inactiva:\t%s\n"
 #: apps/lchage.c:237
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Cuenta caducada:\t%s\n"
+msgstr "Cuenta caduca:\t%s\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
@@ -235,7 +235,7 @@ msgstr "[OPCIÓN...] [usuario]"
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr ""
-"No se ha especificado nombre de usuario, no hay un nombre para el uid %d.\n"
+"No se especificó nombre de usuario, no hay un nombre para el uid %d.\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
@@ -266,7 +266,7 @@ msgstr "Teléfono de oficina"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr "Teléfono de habitación"
+msgstr "Teléfono particular"
 
 #: apps/lchfn.c:213
 msgid "E-Mail Address"
@@ -315,12 +315,12 @@ msgstr "[OPCIÓN...] grupo"
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:97
 #, c-format
 msgid "No group name specified.\n"
-msgstr "No se ha especificado ningún nombre de grupo.\n"
+msgstr "No se especificó ningún nombre de grupo.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ID de grupo %s no válida\n"
 
 # apps/lgroupadd.c:88
 # apps/lgroupadd.c:88
@@ -341,7 +341,7 @@ msgstr "El grupo %s no existe.\n"
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "No se ha podido eliminar el grupo %s: %s\n"
+msgstr "No se pudo eliminar el grupo %s: %s\n"
 
 # apps/lgroupmod.c:89 apps/lusermod.c:90
 # apps/lgroupmod.c:89 apps/lusermod.c:90
@@ -355,7 +355,7 @@ msgstr "Especificación de -L y -U\n"
 #: apps/lgroupmod.c:238 apps/lgroupmod.c:247
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Falló al tratar de establecer la contraseña para el grupo %s: %s\n"
+msgstr "Falló al establecer la contraseña para el grupo %s: %s\n"
 
 # apps/lgroupmod.c:174
 # apps/lgroupmod.c:174
@@ -369,21 +369,21 @@ msgstr "No se pudo bloquear el grupo %s: %s\n"
 #: apps/lgroupmod.c:265
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "No se ha podido desbloquear el grupo %s: %s\n"
+msgstr "No se pudo desbloquear el grupo %s: %s\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
 #: apps/lgroupmod.c:272
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "El grupo %s no se ha podido modificar:%s\n"
+msgstr "El grupo %s no se pudo modificar:%s\n"
 
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 #: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "No se ha especificado ningún nombre de grupo, usando %s .\n"
+msgstr "No se especificó ningún nombre de grupo, usando %s .\n"
 
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
@@ -391,14 +391,14 @@ msgstr "No se ha especificado ningún nombre de grupo, usando %s .\n"
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr ""
-"No se ha especificado ningún nombre de grupo, no hay nombre para gid %d.\n"
+"No se especificó ningún nombre de grupo, no hay nombre para gid %d.\n"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 #: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "No se ha especificado nombre de usuario, usando %s.\n"
+msgstr "No se especificó nombre de usuario, usando %s.\n"
 
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
@@ -423,7 +423,7 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ID de usuario %s no válida\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
@@ -771,7 +771,7 @@ msgstr "versión de librería/módulo discordante"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "desbloquear dejaría el campo contraseña vacío"
 
 # lib/userent.c:46
 # lib/userent.c:47
@@ -1284,7 +1284,7 @@ msgstr "Error al iniciar %s: %s.\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "ID %s no válida\n"
 
 # samples/lookup.c:69
 # samples/lookup.c:69
@@ -1298,21 +1298,21 @@ msgstr "Buscando grupo con ID %jd.\n"
 #: samples/lookup.c:96
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Búsqueda del grupo llamado %s.\n"
+msgstr "Buscando grupo llamado %s.\n"
 
 # samples/lookup.c:78
 # samples/lookup.c:78
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Búsqueda del usuario con ID %d.\n"
+msgstr "Buscando usuario con ID %jd.\n"
 
 # samples/lookup.c:81
 # samples/lookup.c:81
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Búsqueda del usuario llamado %s.\n"
+msgstr "Buscando usuario llamado %s.\n"
 
 # samples/lookup.c:107
 # samples/lookup.c:107
@@ -1355,18 +1355,12 @@ msgstr "Copia de la estructura de usuario:\n"
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "no se pudo reestablecer el contexto de seguridad a `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Error Cyrus SASL al crear usuario `%s': %s"
 
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
 # apps/apputil.c:136 apps/apputil.c:156 apps/apputil.c:168
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Error Cyrus SASL al eliminar usuario: %s: %s"
 
 # apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 # apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
@@ -1374,20 +1368,12 @@ msgstr "Copia de la estructura de usuario:\n"
 # apps/lchage.c:110 apps/lgroupadd.c:73 apps/lgroupdel.c:68
 # apps/lgroupmod.c:83 apps/luseradd.c:87 apps/luserdel.c:74
 # apps/lusermod.c:84
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Error inicializando %s.\n"
 
 # apps/lgroupdel.c:81
 # apps/lgroupdel.c:81
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "No se pudo eliminar el grupo %s.\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "El grupo %s no ha podido ser modificado.\n"
 
 # modules/files.c:135
 # lib/userutil.c:177
-#~ msgid "error initializing module"
-#~ msgstr "error inicializando el módulo"
