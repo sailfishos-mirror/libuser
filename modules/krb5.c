@@ -32,6 +32,7 @@
 #include <krb5/kdb.h>
 #include <kadm5/admin.h>
 #include "../include/libuser/user_private.h"
+#include "../modules/modules.h"
 
 #define LU_KRB5_REALM 0
 #define LU_KRB5_PRINC 1
@@ -42,9 +43,6 @@
 #ifndef KRB5_SUCCESS
 #define KRB5_SUCCESS 0
 #endif
-
-struct lu_module *
-lu_krb5_init(struct lu_context *context, struct lu_error **error);
 
 struct lu_krb5_context {
 	struct lu_prompt prompts[3];

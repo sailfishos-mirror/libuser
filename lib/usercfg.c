@@ -191,6 +191,7 @@ lu_cfg_read(struct lu_context *context, const char *key, const char *default_val
 				g_free(tmp);
 			}
 		}
+		g_free(data);
 		if(ret == NULL) {
 			if(default_value != NULL) {
 				ret = g_list_append(ret, (char*)default_value);

@@ -30,13 +30,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../include/libuser/user_private.h"
-
-/* Global symbols. */
-struct lu_module *
-lu_files_init(struct lu_context *context, struct lu_error **error);
-
-struct lu_module *
-lu_shadow_init(struct lu_context *context, struct lu_error **error);
+#include "../modules/modules.h"
 
 /* Guides for parsing and formatting entries in the files we're looking at.  For formatting purposes, these are all arranged
  * in order of ascending positions. */

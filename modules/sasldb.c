@@ -25,9 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/libuser/user_private.h"
-
-struct lu_module *
-lu_sasldb_init(struct lu_context *context, struct lu_error **error);
+#include "../modules/modules.h"
 
 static gboolean
 lu_sasldb_user_lookup_name(struct lu_module *module, gconstpointer name, struct lu_ent *ent, struct lu_error **error)

@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/libuser/user_private.h"
+#include "../modules/modules.h"
 
 #define SEPARATOR "\t ,"
 
@@ -74,6 +75,39 @@ lu_module_unload(gpointer key, gpointer value, gpointer data)
 	return 0;
 }
 
+static struct {
+	char *name;
+	lu_module_init_t fn;
+} internal_modules[] = {
+#ifdef MODULE_FILES
+	{"files", lu_files_init},
+#endif
+#ifdef MODULE_SHADOW
+	{"shadow", lu_shadow_init},
+#endif
+#ifdef MODULE_KRB5
+	{"krb5", lu_krb5_init},
+#endif
+#ifdef MODULE_LDAP
+	{"ldap", lu_ldap_init},
+#endif
+#ifdef MODULE_SASLDB
+	{"sasldb", lu_sasldb_init},
+#endif
+};
+
+static lu_module_init_t
+lu_module_find_internal(struct lu_context *ctx, const char *name)
+{
+	int i;
+	for(i = 0; i < sizeof(internal_modules) / sizeof(internal_modules[0]); i++) {
+		if(strcmp(name, internal_modules[i].name) == 0) {
+			return internal_modules[i].fn;
+		}
+	}
+	return NULL;
+}
+
 static gboolean
 lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct lu_error **error)
 {
@@ -108,9 +142,13 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 			handle = g_module_open(module_file, 0);
 
 			if(handle == NULL) {
-				lu_error_new(error, lu_error_module_load, "%s", g_module_error());
-				g_free(wlist);
-				return FALSE;
+				if(lu_module_find_internal(ctx, p)) {
+					module_init = lu_module_find_internal(ctx, p);
+				} else {
+					lu_error_new(error, lu_error_module_load, "%s", g_module_error());
+					g_free(wlist);
+					return FALSE;
+				}
 			} else {
 				tmp = g_strconcat("lu_", p, "_init", NULL);
 				sym = ctx->scache->cache(ctx->scache, tmp);
@@ -122,7 +160,9 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 			if(module_init == NULL) {
 				lu_error_new(error, lu_error_module_sym, _("no initialization function %s in `%s'"),
 					     sym, module_file);
-				g_module_close(handle);
+				if(handle != NULL) {
+					g_module_close(handle);
+				}
 				g_free(wlist);
 				return FALSE;
 			} else {
@@ -134,7 +174,9 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 				if((error != NULL) && (*error != NULL) && ((*error)->code == lu_error_config_disabled)) {
 					lu_error_free(error);
 				} else {
-					g_module_close(handle);
+					if(handle != NULL) {
+						g_module_close(handle);
+					}
 					g_free(wlist);
 					return FALSE;
 				}
@@ -143,7 +185,9 @@ lu_module_load(struct lu_context *ctx, const gchar *list, GList **names, struct 
 				if(module->version != LU_MODULE_VERSION) {
 					lu_error_new(error, lu_error_version, _("module version mismatch in `%s'"),
 						     module_file);
-					g_module_close(handle);
+					if(handle != NULL) {
+						g_module_close(handle);
+					}
 					g_free(wlist);
 					return FALSE;
 				}

@@ -33,6 +33,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../include/libuser/user_private.h"
+#include "../modules/modules.h"
 
 #undef  DEBUG
 #define SCHEME "{crypt}"
@@ -50,9 +51,6 @@ enum interact_indices {
 	LU_LDAP_AUTHUSER,
 	LU_LDAP_MAX,
 };
-
-struct lu_module *
-lu_ldap_init(struct lu_context *context, struct lu_error **error);
 
 static char *
 lu_ldap_user_attributes[] = {
@@ -120,7 +118,6 @@ getuser()
 {
 	char buf[LINE_MAX];
 	struct passwd pwd, *err;
-	int ret;
 	getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
 	return (err == &pwd) ? strdup(pwd.pw_name) : NULL;
 }
@@ -343,6 +340,7 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 			entry = ldap_first_entry(ctx->ldap, messages);
 		}
 	}
+	g_free(filt);
 	if(entry != NULL) {
 		for(i = 0; attributes[i]; i++) {
 			attr = attributes[i];
@@ -355,6 +353,7 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 #endif
 					lu_ent_add_original(ent, attr, values[j]);
 				}
+				ldap_value_free(values);
 			}
 		}
 		ret = TRUE;
@@ -364,6 +363,9 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr, const char *nam
 #endif
 		lu_error_new(error, lu_error_generic, _("error searching LDAP directory"));
 		ret = FALSE;
+	}
+	if(messages) {
+		ldap_msgfree(messages);
 	}
 
 	return ret;
@@ -600,6 +602,7 @@ lu_ldap_set(struct lu_module *module, enum lu_type type, struct lu_ent *ent,
 				free_ent_mods(mods);
 				return FALSE;
 			}
+			g_free(tmp);
 		}
 	}
 
@@ -825,12 +828,16 @@ lu_ldap_islocked(struct lu_module *module, enum lu_type type, struct lu_ent *ent
 			lu_error_new(error, lu_error_generic, _("no `%s' attribute using `%s' scheme found"), LU_USERPASSWORD, SCHEME);
 			return FALSE;
 		}
+		ldap_value_free(values);
 	} else {
 #ifdef DEBUG
 		g_print("No `%s' attribute found for entry.", LU_USERPASSWORD);
 #endif
 		lu_error_new(error, lu_error_generic, _("no `%s' attribute found"), LU_USERPASSWORD);
 		return FALSE;
+	}
+	if(messages != NULL) {
+		ldap_msgfree(messages);
 	}
 
 	return locked;
@@ -896,12 +903,16 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr, struct lu_ent 
 						break;
 					}
 				}
+				ldap_value_free(values);
 			}
 		}
 	} else {
 #ifdef DEBUG
 		g_print("Error searching LDAP directory for `%s': %s.\n", dn, ldap_err2string(i));
 #endif
+	}
+	if(messages != NULL) {
+		ldap_msgfree(messages);
 	}
 
 	if(strncmp(password, SCHEME, strlen(SCHEME)) == 0) {
@@ -1044,6 +1055,7 @@ lu_ldap_enumerate(struct lu_module *module,
 #endif
 						ret = g_list_append(ret, module->scache->cache(module->scache, values[j]));
 					}
+					ldap_value_free(values);
 				}
 				entry = ldap_next_entry(ctx->ldap, entry);
 			}
@@ -1052,6 +1064,9 @@ lu_ldap_enumerate(struct lu_module *module,
 			g_print("No such entry found in LDAP, continuing.\n");
 #endif
 		}
+	}
+	if(messages != NULL) {
+		ldap_msgfree(messages);
 	}
 
 	g_free(base);
@@ -1158,6 +1173,7 @@ static gboolean
 lu_ldap_close_module(struct lu_module *module)
 {
 	struct lu_ldap_context *ctx;
+	int i;
 
 	g_assert(module != NULL);
 
@@ -1165,6 +1181,12 @@ lu_ldap_close_module(struct lu_module *module)
 	ldap_unbind_s(ctx->ldap);
 
 	module->scache->free(module->scache);
+	for(i = 0; i < sizeof(ctx->prompts) / sizeof(ctx->prompts[0]); i++) {
+		if(ctx->prompts[i].value && ctx->prompts[i].free_value) {
+			ctx->prompts[i].free_value(ctx->prompts[i].value);
+		}
+	}
+	g_free(ctx);
 	memset(module, 0, sizeof(struct lu_module));
 	g_free(module);
 
