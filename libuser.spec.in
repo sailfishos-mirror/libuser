@@ -68,11 +68,14 @@ rm -fr $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Thu Jul 26 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add a sasl module which manipulates a sasldb used by Cyrus SASL
+
 * Wed Jul 25 2001 Nalin Dahyabhai <nalin@redhat.com>
 - luserdel: remove the user's primary group if it has the same name as
   the user and has no members configured (-G disables)
 - fixup some configure stuff to make libuser.conf get generated correctly
-  more often
+  even when execprefix isn't specified
 
 * Tue Jul 24 2001 Nalin Dahyabhai <nalin@redhat.com>
 - only call the auth module when setting passwords (oops)

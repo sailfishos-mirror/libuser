@@ -41,8 +41,7 @@ main(int argc, const char **argv)
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
 
@@ -61,9 +60,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, &error);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();

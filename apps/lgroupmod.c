@@ -46,24 +46,15 @@ main(int argc, const char **argv)
 
         poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
-		 "gid to change group to", "NUM"},
-		{"name", 'n', POPT_ARG_STRING, &gid, 0,
-		 "change group to have given name", "NAME"},
-		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,
-		 "plaintext password for use with group", "STRING"},
-		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
-		 "pre-hashed password for use with group", "STRING"},
-		{"admin-add", 'A', POPT_ARG_STRING, &addAdmins, 0,
-		 "list of administrators to add", "STRING"},
-		{"admin-remove", 'a', POPT_ARG_STRING, &remAdmins, 0,
-		 "list of administrators to remove", "STRING"},
-		{"member-add", 'M', POPT_ARG_STRING, &addMembers, 0,
-		 "list of group members to add", "STRING"},
-		{"member-remove", 'm', POPT_ARG_STRING, &remMembers, 0,
-		 "list of group members to remove", "STRING"},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0, "gid to change group to", "NUM"},
+		{"name", 'n', POPT_ARG_STRING, &gid, 0, "change group to have given name", "NAME"},
+		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0, "plaintext password for use with group", "STRING"},
+		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0, "pre-hashed password for use with group", "STRING"},
+		{"admin-add", 'A', POPT_ARG_STRING, &addAdmins, 0, "list of administrators to add", "STRING"},
+		{"admin-remove", 'a', POPT_ARG_STRING, &remAdmins, 0, "list of administrators to remove", "STRING"},
+		{"member-add", 'M', POPT_ARG_STRING, &addMembers, 0, "list of group members to add", "STRING"},
+		{"member-remove", 'm', POPT_ARG_STRING, &remMembers, 0, "list of group members to remove", "STRING"},
 		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock group"},
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0, "unlock group"},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
@@ -84,9 +75,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(NULL, 0, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, &error);
+	ctx = lu_start(NULL, 0, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	if(lock && unlock) {
@@ -101,8 +90,7 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
-		 addMembers || remMembers || (gidNumber != -2);
+	change = gid || addAdmins || remAdmins || cryptedUserPassword || addMembers || remMembers || (gidNumber != -2);
 
 	if(gid) {
 		lu_ent_set(ent, LU_GROUPNAME, gid);

@@ -861,21 +861,13 @@ lu_files_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error
 static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret = generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
-	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
-	}
-	return ret;
+	return generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
 }
 
 static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret = generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
-	if(ret) {
-		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
-	}
-	return ret;
+	return generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
 }
 
 static gboolean

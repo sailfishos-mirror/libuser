@@ -74,24 +74,15 @@ main(int argc, const char **argv)
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
-		{"list", 'l', POPT_ARG_NONE, &list_only, 0,
-		 "list aging parameters for the user", NULL},
-		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0,
-		 "minimum days between password changes", "NUM"},
-		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0,
-		 "maximum days between password changes", "NUM"},
-		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0,
-		 "date of last password change, relative to days since "
-		 "1/1/70", "NUM"},
-		{"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
-		 "number of days after expiration date when account "
-		 "is considered inactive", "NUM"},
-		{"expire", 'E', POPT_ARG_LONG, &shadowInactive, 0,
-		 "password expiration date", "NUM"},
-		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0,
-		 "days before expiration to begin warning user", "NUM"},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"list", 'l', POPT_ARG_NONE, &list_only, 0, "list aging parameters for the user", NULL},
+		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0, "minimum days between password changes", "NUM"},
+		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0, "maximum days between password changes", "NUM"},
+		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0, "date of last password change, relative to days since "
+		 "1/1/70", "NUM"}, {"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
+		 "number of days after expiration date when account " "is considered inactive", "NUM"},
+		{"expire", 'E', POPT_ARG_LONG, &shadowInactive, 0, "password expiration date", "NUM"},
+		{"warndays", 'W', POPT_ARG_LONG, &shadowInactive, 0, "days before expiration to begin warning user", "NUM"},
 		POPT_AUTOHELP
 	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
@@ -111,9 +102,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(user, lu_user, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
-		       NULL, &error);
+	ctx = lu_start(user, lu_user, NULL, NULL, interactive ? lu_prompt_console:lu_prompt_console_quiet, NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 
 	ent = lu_ent_new();
@@ -156,9 +145,7 @@ main(int argc, const char **argv)
 		values2 = lu_ent_get(ent, LU_SHADOWMAX);
 		if(values && values->data && values2 && values2->data) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data) +
-				       read_ndays(values2->data),
-				       buf, sizeof(buf));
+			date_to_string(read_ndays(values->data) + read_ndays(values2->data), buf, sizeof(buf));
 			printf(_("Password Expires:\t%s\n"), buf);
 		}
 
@@ -166,9 +153,7 @@ main(int argc, const char **argv)
 		if(values && values->data && values2 &&
 		   values2->data && values3 && values3->data) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data) +
-				       read_ndays(values2->data) +
-				       read_ndays(values3->data),
+			date_to_string(read_ndays(values->data) + read_ndays(values2->data) + read_ndays(values3->data),
 				       buf, sizeof(buf));
 			printf(_("Password Inactive:\t%s\n"), buf);
 		}
@@ -176,8 +161,7 @@ main(int argc, const char **argv)
 		values = lu_ent_get(ent, LU_SHADOWEXPIRE);
 		if(values && values->data) {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values->data),
-				       buf, sizeof(buf));
+			date_to_string(read_ndays(values->data), buf, sizeof(buf));
 			printf(_("Account Expires:\t%s\n"), buf);
 		}
 	} else {
@@ -207,8 +191,7 @@ main(int argc, const char **argv)
 		}
 
 		if(lu_user_modify(ctx, ent, &error) == FALSE) {
-			fprintf(stderr, _("Failed to modify aging information "
-					  "for %s.\n"), user);
+			fprintf(stderr, _("Failed to modify aging information for %s.\n"), user);
 			return 3;
 		}
 	}

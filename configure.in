@@ -120,6 +120,34 @@ if test x$ldap != xno ; then
 	LIBS="$LIBSAVE"
 fi
 
+AC_ARG_WITH(sasl,
+[  --with-sasl=DIR       Use Cyrus SASL headers and libraries under DIR],
+[
+if test x$withval != x -a x$withval != xno ; then
+	sasl=$withval
+else
+	sasl=no
+fi
+],sasl=no)
+if test x$sasl != xno ; then
+	LIBSAVE="$LIBS"
+	if test x$sasl != xyes -a x$sasl != x/usr ; then
+		CFLAGS="$CFLAGS -I$sasl/include"
+		CPPFLAGS="$CPPFLAGS -I$sasl/include"
+		LDFLAGS="$LDFLAGS -L$sasl/lib"
+		LIBS="$LIBS -L$sasl/lib"
+	fi
+	AC_CHECK_HEADERS(sasl.h)
+	AC_CHECK_FUNC(sasl_setpass,,
+		AC_CHECK_LIB(sasl,sasl_setpass,
+			     SASL_LIBS="-lsasl $SASL_LIBS"
+			     LIBS="-lsasl $LIBS"
+			     MODULES="$MODULES ${PACKAGE}_sasldb.so"
+			     ,,$LDFLAGS $LIBS))
+	AC_CHECK_FUNCS(sasl_user_exists)
+	LIBS="$LIBSAVE"
+fi
+
 AC_HEADER_STDC
 AC_CHECK_HEADERS(fcntl.h limits.h sys/time.h unistd.h)
 
@@ -134,15 +162,23 @@ AC_CHECK_FUNCS(strstr strtol)
 AC_SUBST(MODULES)
 AC_SUBST(KRB5_LIBS)
 AC_SUBST(LDAP_LIBS)
+AC_SUBST(SASL_LIBS)
 
-if [ x$libdir != xNONE/lib ] ; then
+if test `eval echo x$libdir` != xNONE/lib
+then
 	pkglibdir=`eval echo ${libdir}/${PACKAGE}`
-elif [ x$execprefix != xNONE ] ; then
-	pkglibdir=`eval echo ${execprefix}/lib/${PACKAGE}`
-else
+elif test `eval echo x$exec_prefix` != xNONE
+then
+	pkglibdir=`eval echo ${exec_prefix}/lib/${PACKAGE}`
+elif test `eval echo x$prefix` != xNONE
+then
 	pkglibdir=`eval echo ${prefix}/lib/${PACKAGE}`
+else
+	pkglibdir=`eval echo /usr/local/lib/${PACKAGE}`
 fi
+scdir=`eval echo $sysconfdir`
 AC_SUBST(pkglibdir)
+AC_SUBST(scdir)
 
 AM_CONFIG_HEADER(config.h)
 

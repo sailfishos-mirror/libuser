@@ -46,26 +46,16 @@ main(int argc, const char **argv)
 
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
-		{"gecos", 'c', POPT_ARG_STRING, &gecos, 0,
-		 "GECOS information", "STRING"},
-		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0,
-		 "home directory", "STRING"},
-		{"movedirectory", 'm', POPT_ARG_NONE, &move_home, 0,
-		 "move home directory contents"},
-		{"shell", 's', POPT_ARG_STRING, &loginShell, 0,
-		 "set shell for user", "STRING"},
-		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0,
-		 "set UID for user", "NUM"},
-		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0,
-		 "set primary GID for user", "NUM"},
-		{"login", 'l', POPT_ARG_STRING, &uid, 0,
-		 "change login name for user", "STRING"},
-		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,
-		 "plaintext password for the user", "STRING"},
-		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
-		 "pre-hashed password for the user", "STRING"},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"gecos", 'c', POPT_ARG_STRING, &gecos, 0, "GECOS information", "STRING"},
+		{"directory", 'd', POPT_ARG_STRING, &homeDirectory, 0, "home directory", "STRING"},
+		{"movedirectory", 'm', POPT_ARG_NONE, &move_home, 0, "move home directory contents"},
+		{"shell", 's', POPT_ARG_STRING, &loginShell, 0, "set shell for user", "STRING"},
+		{"uid", 'u', POPT_ARG_LONG, &uidNumber, 0, "set UID for user", "NUM"},
+		{"gid", 'g', POPT_ARG_LONG, &gidNumber, 0, "set primary GID for user", "NUM"},
+		{"login", 'l', POPT_ARG_STRING, &uid, 0, "change login name for user", "STRING"},
+		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0, "plaintext password for the user", "STRING"},
+		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0, "pre-hashed password for the user", "STRING"},
 		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock account"},
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0, "unlock account"},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
@@ -101,8 +91,7 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	change = userPassword || cryptedUserPassword || uid ||
-		 gecos || oldHomeDirectory || homeDirectory || loginShell ||
+	change = userPassword || cryptedUserPassword || uid || gecos || oldHomeDirectory || homeDirectory || loginShell ||
 		 (uidNumber != -2) || (gidNumber != -2);
 
 	if(loginShell)

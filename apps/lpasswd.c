@@ -44,18 +44,12 @@ main(int argc, const char **argv)
 	int interactive = 0, group = 0;
 	poptContext popt;
 	struct poptOption options[] = {
-		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
-		{"group", 'g', POPT_ARG_NONE, &group, 0,
-		 "set group password instead of user password", NULL},
-		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0,
-		 "new plain password", NULL},
-		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0,
-		 "new crypted password", NULL},
-		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0,
-		 "read new plain password from given descriptor", NULL},
-		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0,
-		 "read new crypted password from given descriptor", NULL},
+		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0, "prompt for all information", NULL},
+		{"group", 'g', POPT_ARG_NONE, &group, 0, "set group password instead of user password", NULL},
+		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0, "new plain password", NULL},
+		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0, "new crypted password", NULL},
+		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0, "read new plain password from given descriptor", NULL},
+		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0, "read new crypted password from given descriptor", NULL},
 		POPT_AUTOHELP
 	       	{NULL, '\0', POPT_ARG_NONE, NULL, 0, NULL},
 	};
@@ -80,8 +74,7 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	ctx = lu_start(user, group ? lu_group : lu_user, NULL, NULL,
-		       interactive ? lu_prompt_console:lu_prompt_console_quiet,
+	ctx = lu_start(user, group ? lu_group : lu_user, NULL, NULL, interactive ? lu_prompt_console : lu_prompt_console_quiet,
 		       NULL, &error);
 	g_return_val_if_fail(ctx != NULL, 1);
 

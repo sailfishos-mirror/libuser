@@ -588,9 +588,6 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id, gconstpointer da
 			break;
 		case user_setpass:
 		case group_setpass:
-			auth_module = g_tree_lookup(context->modules, context->scache->cache(context->scache, tmp->source_auth));
-			success = run_single(context, auth_module, auth, id, tmp, data, error);
-			break;
 		case user_lock:
 		case user_unlock:
 		case user_islocked:

@@ -39,6 +39,10 @@
 #define LU_KRBNAME "krbName"
 #define LU_KRBPASSWORD "{crypt}*K*"
 
+#ifndef KRB5_SUCCESS
+#define KRB5_SUCCESS 0
+#endif
+
 struct lu_module *
 lu_krb5_init(struct lu_context *context, struct lu_error **error);
 
@@ -56,7 +60,7 @@ get_default_realm(struct lu_context *context)
 
 	g_assert(context != NULL);
 
-	if(krb5_init_context(&kcontext) == 0) {
+	if(krb5_init_secure_context(&kcontext) == 0) {
 		if(krb5_get_default_realm(kcontext, &realm) == 0) {
 			ret = context->scache->cache(context->scache, realm);
 			krb5_free_default_realm(kcontext, realm);
@@ -126,7 +130,7 @@ lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name, struct lu
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -183,7 +187,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error *
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -204,22 +208,47 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error *
 		return FALSE;
 	}
 
+	/* screen out pre-hashed passwords */
 	pass = lu_ent_get(ent, LU_USERPASSWORD);
 	for(i = pass; i; i = g_list_next(i)) {
 		password = i->data;
 		if(password && (strncmp(password, "{crypt}", 7) != 0)) {
-			/* Note that we tried to create the account. */
-			ret = FALSE;
-			err = kadm5_create_principal(ctx->handle, &principal, KADM5_PRINCIPAL, password);
-			if(err == KADM5_OK) {
-				/* Change the password field so that a subsequent information add will note that
-				 * the user is Kerberized.
-				 * Potential FIXME: should we set the "{KERBEROS}user@REALM" userPassword here, too? */
-				lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
-				/* Hey, it worked! */
-				ret = TRUE;
+			/* we can use this one */
+			break;
+		}
+		password = NULL;
+	}
+	/* screen out non-plain passwords (this catches all sorts of stuff, including {md5} and {sha1} */
+	if(password == NULL) {
+		pass = lu_ent_get(ent, LU_USERPASSWORD);
+		for(i = pass; i; i = g_list_next(i)) {
+			password = i->data;
+			if(password && (strncmp(password, "{", 1) != 0)) {
+				/* we can use this one */
 				break;
 			}
+			password = NULL;
+		}
+	}
+
+	/* Note that we tried to create the account. */
+	ret = FALSE;
+	if(password != NULL) {
+		err = kadm5_create_principal(ctx->handle, &principal, KADM5_PRINCIPAL, password);
+		if(err == KADM5_OK) {
+			char *unparsed = NULL;
+			/* Change the password field so that a subsequent information add will note that
+			 * the user is Kerberized. */
+			lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
+			if(krb5_unparse_name(context, principal.principal, &unparsed) == KRB5_SUCCESS) {
+				char *tmp;
+				tmp = g_strconcat("{KERBEROS}", unparsed, NULL);
+				lu_ent_add(ent, LU_USERPASSWORD, tmp);
+				g_free(tmp);
+				krb5_free_unparsed_name(context, unparsed);
+			}
+			/* Hey, it worked! */
+			ret = TRUE;
 		}
 	}
 
@@ -241,7 +270,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error *
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -315,7 +344,7 @@ lu_krb5_user_del(struct lu_module *module, struct lu_ent *ent,
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -360,7 +389,7 @@ lu_krb5_user_do_lock(struct lu_module *module, struct lu_ent *ent, gboolean lck,
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -428,7 +457,7 @@ lu_krb5_user_islocked(struct lu_module *module, struct lu_ent *ent, struct lu_er
 
 	ctx = (struct lu_krb5_context*) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
@@ -477,7 +506,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent, const char *p
 
 	ctx = (struct lu_krb5_context *) module->module_context;
 
-	if(krb5_init_context(&context) != 0) {
+	if(krb5_init_secure_context(&context) != 0) {
 		lu_error_new(error, lu_error_init, _("error initializing kerberos library"));
 		return FALSE;
 	}
