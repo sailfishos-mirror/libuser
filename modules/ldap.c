@@ -601,7 +601,7 @@ lu_ldap_lookup(struct lu_module *module, const char *namingAttr,
 
 /* Look up a user by name. */
 static gboolean
-lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name,
+lu_ldap_user_lookup_name(struct lu_module *module, const char *name,
 			 struct lu_ent *ent, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
@@ -612,7 +612,7 @@ lu_ldap_user_lookup_name(struct lu_module *module, gconstpointer name,
 
 /* Look up a user by ID. */
 static gboolean
-lu_ldap_user_lookup_id(struct lu_module *module, long uid,
+lu_ldap_user_lookup_id(struct lu_module *module, uid_t uid,
 		       struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;
@@ -631,7 +631,7 @@ lu_ldap_user_lookup_id(struct lu_module *module, long uid,
 
 /* Look up a group by name. */
 static gboolean
-lu_ldap_group_lookup_name(struct lu_module *module, gconstpointer name,
+lu_ldap_group_lookup_name(struct lu_module *module, const char *name,
 			  struct lu_ent *ent, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
@@ -643,7 +643,7 @@ lu_ldap_group_lookup_name(struct lu_module *module, gconstpointer name,
 
 /* Look up a group by ID. */
 static gboolean
-lu_ldap_group_lookup_id(struct lu_module *module, long gid,
+lu_ldap_group_lookup_id(struct lu_module *module, gid_t gid,
 			struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;

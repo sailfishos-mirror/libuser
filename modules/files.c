@@ -430,7 +430,7 @@ generic_lookup(struct lu_module *module, const char *base_name,
 
 static gboolean
 lu_files_user_lookup_name(struct lu_module *module,
-			  gconstpointer name,
+			  const char *name,
 			  struct lu_ent *ent,
 			  struct lu_error **error)
 {
@@ -442,13 +442,13 @@ lu_files_user_lookup_name(struct lu_module *module,
 
 static gboolean
 lu_files_user_lookup_id(struct lu_module *module,
-			long uid,
+			uid_t uid,
 			struct lu_ent *ent,
 			struct lu_error **error)
 {
 	char *key;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%ld", uid);
+	key = g_strdup_printf("%ld", (long)uid);
 	ret = generic_lookup(module, "passwd", key,
 			     lu_files_parse_user_entry, 3, ent, error);
 	g_free(key);
@@ -457,7 +457,7 @@ lu_files_user_lookup_id(struct lu_module *module,
 
 static gboolean
 lu_shadow_user_lookup_name(struct lu_module *module,
-			   gconstpointer name,
+			   const char *name,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
@@ -470,14 +470,14 @@ lu_shadow_user_lookup_name(struct lu_module *module,
 
 static gboolean
 lu_shadow_user_lookup_id(struct lu_module *module,
-			 long uid,
+			 uid_t uid,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
 	char *key;
 	GValueArray *values;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%ld", uid);
+	key = g_strdup_printf("%ld", (long)uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_USERNAME);
@@ -497,7 +497,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 
 static gboolean
 lu_files_group_lookup_name(struct lu_module *module,
-			   gconstpointer name,
+			   const char *name,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
@@ -509,13 +509,13 @@ lu_files_group_lookup_name(struct lu_module *module,
 
 static gboolean
 lu_files_group_lookup_id(struct lu_module *module,
-			 long gid,
+			 gid_t gid,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
 	char *key;
 	gboolean ret;
-	key = g_strdup_printf("%ld", gid);
+	key = g_strdup_printf("%ld", (long)gid);
 	ret = generic_lookup(module, "group", key,
 			     lu_files_parse_group_entry, 3, ent, error);
 	g_free(key);
@@ -523,7 +523,7 @@ lu_files_group_lookup_id(struct lu_module *module,
 }
 
 static gboolean
-lu_shadow_group_lookup_name(struct lu_module *module, gconstpointer name,
+lu_shadow_group_lookup_name(struct lu_module *module, const char *name,
 			    struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret;
@@ -533,13 +533,13 @@ lu_shadow_group_lookup_name(struct lu_module *module, gconstpointer name,
 }
 
 static gboolean
-lu_shadow_group_lookup_id(struct lu_module *module, long gid,
+lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 			  struct lu_ent *ent, struct lu_error **error)
 {
 	char *key;
 	GValueArray *values;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%ld", gid);
+	key = g_strdup_printf("%ld", (long)gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);

@@ -103,11 +103,11 @@ struct lu_module {
 
 	/* Functions for looking up users by name or ID. */
 	gboolean(*user_lookup_name) (struct lu_module * module,
-				     gconstpointer name,
+				     const char *name,
 				     struct lu_ent * ent,
 				     struct lu_error ** error);
 	gboolean(*user_lookup_id) (struct lu_module * module,
-				   long uid,
+				   uid_t uid,
 				   struct lu_ent * ent,
 				   struct lu_error ** error);
 
@@ -172,11 +172,11 @@ struct lu_module {
 						     struct lu_error ** error);
 	/* Search for a group by name or ID. */
 	gboolean(*group_lookup_name) (struct lu_module * module,
-				      gconstpointer name,
+				      const char *name,
 				      struct lu_ent * ent,
 				      struct lu_error ** error);
 	gboolean(*group_lookup_id) (struct lu_module * module,
-				    long gid,
+				    gid_t gid,
 				    struct lu_ent * ent,
 				    struct lu_error ** error);
 	/* Populate a group with sensible defaults. */
