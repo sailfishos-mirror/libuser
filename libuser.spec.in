@@ -1,3 +1,6 @@
+%if %{?WITH_SELINUX:0}%{!?WITH_SELINUX:1}
+%define WITH_SELINUX 0
+%endif
 %define python 2.2
 
 Name: @PACKAGE@
@@ -6,6 +9,7 @@ Release: 1
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
+Patch0: libuser-selinux.patch
 BuildRoot: %{_tmppath}/%{name}-root
 BuildPrereq: pam-devel, popt, python-devel
 BuildPrereq: gtk-doc, linuxdoc-tools
@@ -31,6 +35,10 @@ files useful for developing applications with libuser.
 
 %prep
 %setup -q
+%if %{WITH_SELINUX}
+#SELinux
+%patch0 -p1 -b .selinux
+%endif
 
 %build
 CFLAGS="$RPM_OPT_FLAGS -fPIC" ; export CFLAGS
