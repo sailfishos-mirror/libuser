@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2001-07-26 15:03-0400\n"
+"POT-Creation-Date: 2001-07-26 19:04-0400\n"
 "PO-Revision-Date: 2001-07-26 10:50+ZONE\n"
 "Last-Translator: Valentina Besi <valentina@redhat.it>\n"
 "Language-Team: Italiano <LL@li.org>\n"
@@ -337,11 +337,11 @@ msgstr "voce già presente nel file"
 msgid "entity object has no %s attribute"
 msgstr "nessun attributo %s per l'oggetto entità"
 
-#: modules/files.c:1449 modules/files.c:1505
+#: modules/files.c:1675 modules/files.c:1733
 msgid "Not executing with superuser privileges."
 msgstr "Esecuzione con privilegi di superutente non in corso."
 
-#: modules/files.c:1517
+#: modules/files.c:1745
 msgid "No shadow file present -- disabling."
 msgstr "Nessun file shadow rpesente -- disabilitazione."
 
@@ -393,15 +393,15 @@ msgstr "nessun attributo %s per l'entità"
 msgid "error setting password for `%s'"
 msgstr "errore durante la configurazione della password per `%s'"
 
-#: modules/krb5.c:650
+#: modules/krb5.c:662
 msgid "Kerberos Realm"
 msgstr "Realm di kerberos"
 
-#: modules/krb5.c:655
+#: modules/krb5.c:667
 msgid "Kerberos Admin Principal"
 msgstr "Admin principal di kerberos"
 
-#: modules/krb5.c:670
+#: modules/krb5.c:682
 msgid "Kerberos Password for Admin Principal"
 msgstr "Password per Admin Principal di kerberos"
 
@@ -472,27 +472,27 @@ msgstr "errore durante la rimozione della voce di directory: %s.\n"
 msgid "object has no %s attribute"
 msgstr "nessun attributo %s per "
 
-#: modules/ldap.c:879
+#: modules/ldap.c:893
 msgid "LDAP Server Name"
 msgstr "Nome del server LDAP"
 
-#: modules/ldap.c:884
+#: modules/ldap.c:898
 msgid "LDAP Base DN"
 msgstr "LDAP Base DN "
 
-#: modules/ldap.c:889
+#: modules/ldap.c:903
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN "
 
-#: modules/ldap.c:894
+#: modules/ldap.c:908
 msgid "LDAP Bind Password"
 msgstr "Password LDAP Bind"
 
-#: modules/ldap.c:900
+#: modules/ldap.c:914
 msgid "LDAP SASL User"
 msgstr "Utente LDAP SASL"
 
-#: modules/ldap.c:905
+#: modules/ldap.c:919
 msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 

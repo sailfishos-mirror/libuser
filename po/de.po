@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2001-07-26 15:03-0400\n"
+"POT-Creation-Date: 2001-07-26 19:04-0400\n"
 "PO-Revision-Date: 2001-07-26 14:20+01:00\n"
 "Last-Translator: Claudia Krug <fhonig@redhat.it>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -337,11 +337,11 @@ msgstr "Eintrag bereits in Datei vorhanden"
 msgid "entity object has no %s attribute"
 msgstr "Einheitsobjekt besitzt kein %s Attribut"
 
-#: modules/files.c:1449 modules/files.c:1505
+#: modules/files.c:1675 modules/files.c:1733
 msgid "Not executing with superuser privileges."
 msgstr "Keine Ausführung mit Superuse-Rechten."
 
-#: modules/files.c:1517
+#: modules/files.c:1745
 msgid "No shadow file present -- disabling."
 msgstr "Keine Shadow-Datei vorhanden -- es wird entaktiviert."
 
@@ -392,15 +392,15 @@ msgstr "Einheit besitzt kein Attribut %s"
 msgid "error setting password for `%s'"
 msgstr "Fehler beim Einstellen des Passworts für `%s'"
 
-#: modules/krb5.c:650
+#: modules/krb5.c:662
 msgid "Kerberos Realm"
 msgstr "Kerberos Realm"
 
-#: modules/krb5.c:655
+#: modules/krb5.c:667
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos Admin Principal"
 
-#: modules/krb5.c:670
+#: modules/krb5.c:682
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos-Passwort für Admin Principal"
 
@@ -471,27 +471,27 @@ msgstr "Fehler beim Entfernen des Verzeichniseintrags: %s.\n"
 msgid "object has no %s attribute"
 msgstr "Objekt besitzt kein Attribut %s"
 
-#: modules/ldap.c:879
+#: modules/ldap.c:893
 msgid "LDAP Server Name"
 msgstr "LDAP Servername"
 
-#: modules/ldap.c:884
+#: modules/ldap.c:898
 msgid "LDAP Base DN"
 msgstr "LDAP Base DN"
 
-#: modules/ldap.c:889
+#: modules/ldap.c:903
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:894
+#: modules/ldap.c:908
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind Passwort"
 
-#: modules/ldap.c:900
+#: modules/ldap.c:914
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Benutzer"
 
-#: modules/ldap.c:905
+#: modules/ldap.c:919
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Benutzerauthorisierung"
 
