@@ -5,7 +5,8 @@ Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
-BuildPrereq: pam-devel, popt, python-devel, sgml-tools, cyrus-sasl-devel, doxygen
+BuildPrereq: pam-devel, popt, python-devel, cyrus-sasl-devel
+BuildPrereq: doxygen, sgml-tools
 Summary: A user account administration library.
 
 %description
