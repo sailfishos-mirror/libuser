@@ -6,5 +6,5 @@ libuser.txt: libuser.sgml
 libuser.html: libuser.sgml
 	sgml2html $(srcdir)/libuser.sgml
 
-clean:
+distclean clean:
 	$(RM) *.html *.txt
