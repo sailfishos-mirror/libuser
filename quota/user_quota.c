@@ -303,7 +303,7 @@ quota_set(int type, int id, const char *special,
 		if(block_hard != -1)
 			dqblk.dqb_bhardlimit = block_hard;
 		if(block_grace != -1)
-			dqinfo.dqi_bgrace = MIN(inode_grace, MAX_IQ_TIME);
+			dqinfo.dqi_bgrace = MIN(block_grace, MAX_IQ_TIME);
 	}
 	if(ret == 0) {
 		ret = quotactl(QCMD(Q_SETQLIM, type), special, id,
