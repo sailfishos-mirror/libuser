@@ -680,7 +680,9 @@ static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = generic_add(module, "shadow", lu_shadow_format_user, ent, error);
-	lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
 	return ret;
 }
 
@@ -695,7 +697,9 @@ static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = generic_add(module, "gshadow", lu_shadow_format_group, ent, error);
-	lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
 	return ret;
 }
 
@@ -853,13 +857,21 @@ lu_files_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error
 static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
+	gboolean ret = generic_mod(module, "shadow", format_shadow, format_shadow_elts, ent, error);
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
+	return ret;
 }
 
 static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error **error)
 {
-	return generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
+	gboolean ret = generic_mod(module, "gshadow", format_gshadow, format_gshadow_elts, ent, error);
+	if(ret) {
+		lu_ent_set(ent, LU_USERPASSWORD, "{crypt}x");
+	}
+	return ret;
 }
 
 static gboolean

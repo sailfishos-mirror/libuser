@@ -1,6 +1,6 @@
 [defaults]
 # Do not modify the default module lists if you care about unattended calls
-# to programs (scripts) working!
+# to programs (i.e., scripts) working!
 moduledir = @pkglibdir@
 skeleton = @sysconfdir@/skel
 auth_modules = shadow files
@@ -34,19 +34,20 @@ gidNumber = 500
 userPassword = !!
 
 [files]
-directory = @sysconfdir@
+# directory = @sysconfdir@
 
 [shadow]
-directory = @sysconfdir@
+# directory = @sysconfdir@
 
 [ldap]
-server = ldap
-user = Manager
-authuser = Manager
-basedn = dc=example,dc=com
-binddn = cn=Manager,dc=example,dc=com
-userBranch = ou=People
-groupBranch = ou=Group
+# server = ldap
+# user = Manager
+# authuser = Manager
+# basedn = dc=example,dc=com
+# binddn = cn=Manager,dc=example,dc=com
+# userBranch = ou=People
+# groupBranch = ou=Group
 
 [krb5]
-realm = EXAMPLE.COM
+# realm = EXAMPLE.COM
+# principal = example/admin@EXAMPLE.COM

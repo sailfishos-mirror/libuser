@@ -29,7 +29,10 @@
  * when it needs to prompt the user for information.
  */
 typedef struct lu_prompt {
- 	/** The text of a prompt to display. */
+ 	/** An invariant string of the form "module/name", which describes the information being prompted for.  The calling
+	 *  application may use this value as an index into a hash table used to cache answers to particular queries. */
+	const char *key;
+ 	/** The text of a prompt to display.  This *may* be translated for the current locale by a module. */
 	const char *prompt;
  	/** Whether or not the user's response should be echoed to the screen
 	 *  or visible in an entry field.*/

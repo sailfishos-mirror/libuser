@@ -3,7 +3,7 @@ Medium:
 * Rework LDAP module lu_ent to LDAPMod mapping to just include additions and
   deletions instead of wholesale modifies, which may run afoul of server
   access controls.
-* Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod.
+* Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod(?)
 * Create variants of the apps that are hard-coded to use files only, for
   use in batch environments like post-package-install.
 * Write an NIS back-end using yppasswd.x in glibc, or maybe using the routines

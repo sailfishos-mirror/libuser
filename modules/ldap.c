@@ -399,8 +399,7 @@ get_ent_mods(struct lu_ent *ent)
 			if(values == NULL) {
 				continue;
 			}
-			mods[j]->mod_values =
-				g_malloc0((g_list_length(values) + 1) * sizeof(char*));
+			mods[j]->mod_values = g_malloc0((g_list_length(values) + 1) * sizeof(char*));
 			for(k = l = 0; g_list_nth(values, k); k++) {
 				gboolean add;
 
@@ -876,27 +875,33 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 
 	ctx->global_context = context;
 
+	ctx->prompts[LU_LDAP_SERVER].key = "ldap/server";
 	ctx->prompts[LU_LDAP_SERVER].prompt = _("LDAP Server Name");
 	ctx->prompts[LU_LDAP_SERVER].default_value = lu_cfg_read_single(context, "ldap/server", "ldap");
 	ctx->prompts[LU_LDAP_SERVER].visible = TRUE;
 
+	ctx->prompts[LU_LDAP_BASEDN].key = "ldap/basedn";
 	ctx->prompts[LU_LDAP_BASEDN].prompt = _("LDAP Base DN");
 	ctx->prompts[LU_LDAP_BASEDN].default_value = lu_cfg_read_single(context, "ldap/basedn", "dc=example,dc=com");
 	ctx->prompts[LU_LDAP_BASEDN].visible = TRUE;
 
+	ctx->prompts[LU_LDAP_BINDDN].key = "ldap/binddn";
 	ctx->prompts[LU_LDAP_BINDDN].prompt = _("LDAP Bind DN");
 	ctx->prompts[LU_LDAP_BINDDN].visible = TRUE;
-	ctx->prompts[LU_LDAP_BINDDN].default_value = lu_cfg_read_single(context, "ldap/binddn", "cn=manager," "dc=example,dc=com");
+	ctx->prompts[LU_LDAP_BINDDN].default_value = lu_cfg_read_single(context, "ldap/binddn", "cn=manager,dc=example,dc=com");
 
+	ctx->prompts[LU_LDAP_PASSWORD].key = "ldap/password";
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = _("LDAP Bind Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
 	user = getuser();
 
+	ctx->prompts[LU_LDAP_USER].key = "ldap/user";
 	ctx->prompts[LU_LDAP_USER].prompt = _("LDAP SASL User");
 	ctx->prompts[LU_LDAP_USER].visible = TRUE;
 	ctx->prompts[LU_LDAP_USER].default_value = lu_cfg_read_single(context, "ldap/user", user);
 
+	ctx->prompts[LU_LDAP_AUTHUSER].key = "ldap/authuser";
 	ctx->prompts[LU_LDAP_AUTHUSER].prompt = _("LDAP SASL Authorization User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHUSER].default_value = lu_cfg_read_single(context, "ldap/authuser", user);

@@ -123,6 +123,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject *args, PyObject *kwarg
 		struct libuser_prompt *obj;
 		obj = (struct libuser_prompt*) PyList_GetItem(list, i);
 		Py_INCREF(obj);
+		prompts[i].key = g_strdup(obj->prompt.key ?: "");
 		prompts[i].prompt = g_strdup(obj->prompt.prompt ?: "");
 		prompts[i].default_value = obj->prompt.default_value ? g_strdup(obj->prompt.default_value) : NULL;
 		prompts[i].visible = obj->prompt.visible;
@@ -175,6 +176,8 @@ libuser_prompt_destroy(struct libuser_prompt *self)
 	DEBUG_ENTRY;
 	if(self->prompt.value && self->prompt.free_value)
 		self->prompt.free_value(self->prompt.value);
+	if(self->prompt.key)
+		g_free((char*)self->prompt.key);
 	if(self->prompt.prompt)
 		g_free((char*)self->prompt.prompt);
 	if(self->prompt.default_value)
@@ -188,6 +191,10 @@ static PyObject *
 libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
 {
 	DEBUG_ENTRY;
+	if(strcmp(attr, "key") == 0) {
+		DEBUG_EXIT;
+		return PyString_FromString(self->prompt.key);
+	}
 	if(strcmp(attr, "prompt") == 0) {
 		DEBUG_EXIT;
 		return PyString_FromString(self->prompt.prompt);
@@ -222,6 +229,18 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr, PyObject *
 		if(self->prompt.prompt)
 			g_free((char*)self->prompt.prompt);
 		self->prompt.prompt = g_strdup(PyString_AsString(args));
+		DEBUG_EXIT;
+		return 0;
+	}
+	if(strcmp(attr, "key") == 0) {
+		if(!PyString_Check(args)) {
+			PyErr_SetString(PyExc_TypeError, "key must be a string");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if(self->prompt.key)
+			g_free((char*)self->prompt.key);
+		self->prompt.key = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -264,7 +283,8 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr, PyObject *
 static int
 libuser_prompt_print(struct libuser_prompt *self, FILE *fp, int flags)
 {
-	fprintf(fp, "(prompt = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
+	fprintf(fp, "(key = \"%s\", prompt = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
+		self->prompt.key ?: "",
 		self->prompt.prompt ?: "",
 		self->prompt.visible ? "true" : "false",
 		self->prompt.default_value ?: "",

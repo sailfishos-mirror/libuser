@@ -212,9 +212,9 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent, struct lu_error *
 			ret = FALSE;
 			err = kadm5_create_principal(ctx->handle, &principal, KADM5_PRINCIPAL, password);
 			if(err == KADM5_OK) {
-				/* Change the password field so that a
-				 * subsequent information add will note that
-				 * the user is Kerberized. */
+				/* Change the password field so that a subsequent information add will note that
+				 * the user is Kerberized.
+				 * Potential FIXME: should we set the "{KERBEROS}user@REALM" userPassword here, too? */
 				lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
 				/* Hey, it worked! */
 				ret = TRUE;
@@ -285,6 +285,8 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent, struct lu_error *
 			ret = TRUE;
 		}
 	} else {
+		/* Note that the user uses Kerberos. */
+		lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
 		/* We don't know how to do anything else, so just nod our
 		 * heads and smile. */
 		ret = TRUE;
@@ -615,10 +617,12 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 
 	ctx = g_malloc0(sizeof(struct lu_krb5_context));
 
+	ctx->prompts[LU_KRB5_REALM].key = "krb5/realm";
 	ctx->prompts[LU_KRB5_REALM].prompt = _("Kerberos Realm");
 	ctx->prompts[LU_KRB5_REALM].visible = TRUE;
-	ctx->prompts[LU_KRB5_REALM].default_value = get_default_realm(context);
+	ctx->prompts[LU_KRB5_REALM].default_value = lu_cfg_read_single(context, "krb5/realm", get_default_realm(context));
 
+	ctx->prompts[LU_KRB5_PRINC].key = "krb5/principal";
 	ctx->prompts[LU_KRB5_PRINC].prompt = _("Kerberos Admin Principal");
 	ctx->prompts[LU_KRB5_PRINC].visible = TRUE;
 	if(context->auth_name) {
@@ -626,22 +630,18 @@ lu_krb5_init(struct lu_context *context, struct lu_error **error)
 		ctx->prompts[LU_KRB5_PRINC].default_value = context->scache->cache(context->scache, tmp);
 		g_free(tmp);
 	} else {
-		tmp = g_strconcat(getlogin(), "/admin", NULL);
+		tmp = g_strconcat(getlogin(), "/admin@", ctx->prompts[LU_KRB5_REALM].default_value, NULL);
 		ctx->prompts[LU_KRB5_PRINC].default_value = context->scache->cache(context->scache, tmp);
 		g_free(tmp);
 	}
+	ctx->prompts[LU_KRB5_PRINC].default_value = lu_cfg_read_single(context, "krb5/principal",
+								       ctx->prompts[LU_KRB5_PRINC].default_value);
 
-	if((context->prompter == NULL) || (context->prompter(ctx->prompts, 2, context->prompter_data, error) == FALSE)) {
-		g_free(ctx);
-		return NULL;
-	}
-
-	tmp = g_strdup_printf(_("Kerberos password for %s"), ctx->prompts[LU_KRB5_PRINC].value);
-	ctx->prompts[LU_KRB5_PASSWORD].prompt = context->scache->cache(context->scache, tmp);
+	ctx->prompts[LU_KRB5_PASSWORD].key = "krb5/password";
+	ctx->prompts[LU_KRB5_PASSWORD].prompt = _("Kerberos Password for Admin Principal");
 	ctx->prompts[LU_KRB5_PASSWORD].visible = FALSE;
-	g_free(tmp);
 
-	if(context->prompter(ctx->prompts + 2, 1, context->prompter_data, error) == FALSE) {
+	if((context->prompter == NULL) || (context->prompter(ctx->prompts, 3, context->prompter_data, error) == FALSE)) {
 		g_free(ctx);
 		return NULL;
 	}

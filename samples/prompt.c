@@ -29,9 +29,9 @@
 int main(int argc, char **argv)
 {
 	struct lu_prompt prompts[] = {
-		{"Name", TRUE, g_strdup("anonymous"), NULL, NULL},
-		{"Password1", TRUE, g_strdup("anonymous"), NULL, NULL},
-		{"Password2", FALSE, g_strdup("anonymous"), NULL, NULL},
+		{"main/name", "Name", TRUE, g_strdup("anonymous"), NULL, NULL},
+		{"main/password1", "Password1", TRUE, g_strdup("anonymous"), NULL, NULL},
+		{"main/password2", "Password2", FALSE, g_strdup("anonymous"), NULL, NULL},
 	};
 	int i;
 

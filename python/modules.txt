@@ -76,6 +76,12 @@ libuser:
 						A libuser.Entity object with the new user or group's information (required).
 
 				- modifyUser:
+					Arguments:
+						A libuser.Entity object with the user or group's information (required).
+						A true/false object indicating whether or not the home directory for the user
+						should be moved from its original location to the location stored in the
+						entity's libuser.HOMEDIRECTORY attribute (optional, defaults to true).
+
 				- modifyGroup: Modify information about a user or group on the system.
 					Arguments:
 						A libuser.Entity object with the user or group's information (required).

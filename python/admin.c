@@ -397,7 +397,7 @@ static PyObject *
 libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	char *dir = "/var/tmp/libuser-newhome";
+	char *dir = "/var/tmp/libuser-oldhome";
 	GList *values;
 	char *keywords[] = {"home", NULL};
 	struct lu_error *error = NULL;
@@ -415,6 +415,8 @@ libuser_admin_remove_home(PyObject *self, PyObject *args, PyObject *kwargs)
 		return NULL;
 	}
 
+	dir = (char*) values->data;
+
 	if(lu_homedir_remove(dir, &error)) {
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -430,24 +432,40 @@ static PyObject *
 libuser_admin_move_home(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	char *olddir = "/var/tmp/libuser-newhome", *newdir = "/etc/skel";
+	char *olddir = NULL, *newdir = NULL;
 	GList *values;
 	char *keywords[] = {"entity", "newhome", NULL};
 	struct lu_error *error = NULL;
 
 	DEBUG_ENTRY;
 
-	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!s", keywords, &EntityType, &ent, &newdir)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O|s", keywords, &EntityType, &ent, &newdir)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 
-	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
-	if((values == NULL) || (values->data == NULL)) {
-		PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
-		return NULL;
+	if(newdir != NULL) {
+		values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
+		if((values == NULL) || (values->data == NULL)) {
+			PyErr_SetString(PyExc_KeyError, "user does not have a current `" LU_HOMEDIRECTORY "' attribute");
+			return NULL;
+		}
+		olddir = (char*) values->data;
+	} else {
+		values = lu_ent_get_original(ent->ent, LU_HOMEDIRECTORY);
+		if((values == NULL) || (values->data == NULL)) {
+			PyErr_SetString(PyExc_KeyError, "user does not have an original `" LU_HOMEDIRECTORY "' attribute");
+			return NULL;
+		}
+		olddir = (char*) values->data;
+
+		values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
+		if((values == NULL) || (values->data == NULL)) {
+			PyErr_SetString(PyExc_KeyError, "user does not have a `" LU_HOMEDIRECTORY "' attribute");
+			return NULL;
+		}
+		newdir = (char*) values->data;
 	}
-	olddir = (char*) values->data;
 
 	if(lu_homedir_move(olddir, newdir, &error)) {
 		DEBUG_EXIT;
@@ -501,8 +519,32 @@ libuser_admin_add_group(PyObject *self, PyObject *args, PyObject *kwargs)
 static PyObject *
 libuser_admin_modify_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	DEBUG_CALL;
-	return libuser_admin_generic(self, args, kwargs, lu_user_modify);
+	PyObject *ent = NULL;
+	PyObject *ret = NULL;
+	PyObject *mvhomedir = NULL;
+	PyObject *subargs, *subkwargs;
+	char *keywords[] = {"entity", "mvhomedir", NULL};
+
+	DEBUG_ENTRY;
+
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O|O", keywords, &ent, &mvhomedir)) {
+		return NULL;
+	}
+
+	ret = libuser_admin_generic(self, args, kwargs, lu_user_modify);
+	if(ret != NULL) {
+		if((mvhomedir != NULL) && (PyObject_IsTrue(mvhomedir))) {
+			Py_DECREF(ret);
+			subargs = PyTuple_New(1);
+			PyTuple_SetItem(subargs, 0, ent);
+			subkwargs = PyDict_New();
+			ret = libuser_admin_move_home(self, subargs, subkwargs);
+		}
+	}
+
+	DEBUG_EXIT;
+
+	return ret;
 }
 
 static PyObject *

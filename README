@@ -1,9 +1,7 @@
-This package is still under development, heavier than
-intended.  Only the files and shadow modules are expected
-to work at this point, as the changes being made to the
-module interface ripple out.
+This package is still under development, heavier than I'd expected (though
+not so bad that it's unusable).  Only the files and shadow modules are
+expected to work at this point, but the rest may work.
 
-The source tree is also available via anonymous CVS:
+This source tree is available via anonymous CVS:
 root ":pserver:anoncvs@sources.redhat.com:/cvs/rhl"
-password "anoncvs"
-module "libuser"
+password "anoncvs", module "libuser"

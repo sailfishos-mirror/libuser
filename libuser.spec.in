@@ -73,6 +73,10 @@ rm -fr $RPM_BUILD_ROOT
 - fix lu_error_new() to actually report errors right
 - fix part of the python bindings
 - include tools in the binary package again
+- fixup modules so that password-changing works right again
+- add a "key" field to prompt structures for use by apps which like to
+  cache these things
+- add an optional "mvhomedir" argument to userModify (python)
 
 * Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish home directory population

@@ -71,8 +71,8 @@ struct lu_ent {
 
 /* What type of function a module serves. */
 typedef enum lu_module_type {
-	auth = 0xaa1f,
-	info = 0xcc32,
+	auth = 0xba1f,
+	info = 0xdc32,
 } lu_module_type_t;
 
 /* A context structure. */
