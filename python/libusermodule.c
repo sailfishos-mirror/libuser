@@ -101,10 +101,10 @@ initlibuser(void)
 			     PyString_FromString(LU_GROUPNAME));
 	PyDict_SetItemString(dict, "GROUPPASSWORD",
 			     PyString_FromString(LU_GROUPNAME));
-	PyDict_SetItemString(dict, "ADMINISTRATORUID",
-			     PyString_FromString(LU_ADMINISTRATORUID));
-	PyDict_SetItemString(dict, "MEMBERUID",
-			     PyString_FromString(LU_MEMBERUID));
+	PyDict_SetItemString(dict, "ADMINISTRATORNAME",
+			     PyString_FromString(LU_ADMINISTRATORNAME));
+	PyDict_SetItemString(dict, "MEMBERNAME",
+			     PyString_FromString(LU_MEMBERNAME));
 
 	/* Shadow attributes. */
 	PyDict_SetItemString(dict, "SHADOWNAME",

@@ -166,7 +166,7 @@ main(int argc, const char **argv)
 		if (admins) {
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
-				lu_ent_add(ent, LU_ADMINISTRATORUID, &val);
+				lu_ent_add(ent, LU_ADMINISTRATORNAME, &val);
 				g_value_reset(&val);
 			}
 			lu_hup_nscd();
@@ -182,7 +182,7 @@ main(int argc, const char **argv)
 		if (admins) {
 			for (c = 0; admins && admins[c]; c++) {
 				g_value_set_string(&val, admins[c]);
-				lu_ent_del(ent, LU_ADMINISTRATORUID, &val);
+				lu_ent_del(ent, LU_ADMINISTRATORNAME, &val);
 				g_value_reset(&val);
 			}
 			lu_hup_nscd();
@@ -199,7 +199,7 @@ main(int argc, const char **argv)
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, members[c]);
-				lu_ent_add(ent, LU_MEMBERUID, &val);
+				lu_ent_add(ent, LU_MEMBERNAME, &val);
 				g_value_reset(&val);
 			}
 			lu_hup_nscd();
@@ -215,7 +215,7 @@ main(int argc, const char **argv)
 		if (members) {
 			for (c = 0; members && members[c]; c++) {
 				g_value_set_string(&val, members[c]);
-				lu_ent_del(ent, LU_MEMBERUID, &val);
+				lu_ent_del(ent, LU_MEMBERNAME, &val);
 				g_value_reset(&val);
 			}
 			lu_hup_nscd();

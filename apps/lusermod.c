@@ -255,8 +255,8 @@ main(int argc, const char **argv)
 			members = admins = NULL;
 			if (lu_group_lookup_name(ctx, groupname, ent, &error)) {
 				/* Get a list of the group's members. */
-				members = lu_ent_get(ent, LU_MEMBERUID);
-				admins = lu_ent_get(ent, LU_ADMINISTRATORUID);
+				members = lu_ent_get(ent, LU_MEMBERNAME);
+				admins = lu_ent_get(ent, LU_ADMINISTRATORNAME);
 			}
 			/* Search for this user in the member list. */
 			for (j = 0;

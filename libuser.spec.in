@@ -91,6 +91,7 @@ popd
   lock, and unlock operations
 - remove debug spewage when creating and removing mail spools
 - files: fix saving of multi-valued attributes
+- rename MEMBERUID attribute for groups to MEMBERNAME
 
 * Wed Feb 20 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.97-1
 - files: fix bug in removals

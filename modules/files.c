@@ -65,7 +65,7 @@ static const struct format_specifier format_group[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
 	{2, LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
-	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
@@ -83,8 +83,8 @@ static const struct format_specifier format_shadow[] = {
 static const struct format_specifier format_gshadow[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
 	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
-	{3, LU_ADMINISTRATORUID, G_TYPE_STRING, NULL, TRUE, FALSE},
-	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{3, LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
+	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 /* Create a backup copy of "filename" named "filename-". */
@@ -1265,9 +1265,8 @@ lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
 	gboolean ret;
-	ret =
-	    generic_mod(module, "gshadow", format_gshadow,
-			G_N_ELEMENTS(format_gshadow), ent, error);
+	ret = generic_mod(module, "gshadow", format_gshadow,
+			  G_N_ELEMENTS(format_gshadow), ent, error);
 	return ret;
 }
 

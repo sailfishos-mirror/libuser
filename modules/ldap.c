@@ -93,9 +93,9 @@ static struct {
 	 "userPassword", POSIXGROUP, LU_LDAP_GROUP},
 	{LU_GIDNUMBER, G_STRINGIFY_ARG(LU_GIDNUMBER),
 	 "gidNumber", POSIXGROUP, LU_LDAP_GROUP},
-	{LU_MEMBERUID, G_STRINGIFY_ARG(LU_MEMBERUID),
+	{LU_MEMBERNAME, G_STRINGIFY_ARG(LU_MEMBERNAME),
 	 "memberUid", POSIXGROUP, LU_LDAP_GROUP},
-	{LU_ADMINISTRATORUID, G_STRINGIFY_ARG(LU_ADMINISTRATORUID),
+	{LU_ADMINISTRATORNAME, G_STRINGIFY_ARG(LU_ADMINISTRATORNAME),
 	 "administratorUid", SHADOWGROUP, LU_LDAP_GROUP},
 
 	{LU_SHADOWPASSWORD, G_STRINGIFY_ARG(LU_SHADOWPASSWORD),
@@ -161,8 +161,8 @@ static char *lu_ldap_group_attributes[] = {
 	LU_GROUPNAME,
 	LU_GROUPPASSWORD,
 	LU_GIDNUMBER,
-	LU_MEMBERUID,
-	LU_ADMINISTRATORUID,
+	LU_MEMBERNAME,
+	LU_ADMINISTRATORNAME,
 	NULL,
 };
 
@@ -1995,7 +1995,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 		secondaries = lu_ldap_enumerate(module,
 						map_to_ldap(module->scache, LU_GROUPNAME),
 						group,
-						map_to_ldap(module->scache, LU_MEMBERUID),
+						map_to_ldap(module->scache, LU_MEMBERNAME),
 						"groupBranch", GROUPBRANCH,
 						error);
 		for (i = 0; i < secondaries->n_values; i++) {
@@ -2084,7 +2084,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	 * a member. */
 	if ((error == NULL) || (*error == NULL)) {
 		secondaries = lu_ldap_enumerate(module,
-						map_to_ldap(module->scache, LU_MEMBERUID),
+						map_to_ldap(module->scache, LU_MEMBERNAME),
 						user,
 						map_to_ldap(module->scache, LU_GROUPNAME),
 						"groupBranch", GROUPBRANCH,

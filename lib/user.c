@@ -173,7 +173,7 @@ extract_name(struct lu_ent *ent)
 	g_return_val_if_fail(array != NULL, NULL);
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, NULL);
-	return g_value_get_string(value);
+	return ent->cache->cache(ent->cache, g_value_get_string(value));
 }
 
 static long
@@ -252,23 +252,23 @@ convert_group_name_to_id(struct lu_context *context, const char *sdata)
 }
 
 static gboolean lu_refresh_int(struct lu_context *context,
-			       struct lu_module *module,
-			       struct lu_ent *entity);
+			       struct lu_ent *entity,
+			       struct lu_error **error);
 
 static gboolean
-lu_refresh_user(struct lu_context *context, struct lu_module *module,
-		struct lu_ent *entity)
+lu_refresh_user(struct lu_context *context, struct lu_ent *entity,
+		struct lu_error **error)
 {
 	g_return_val_if_fail(entity->type == lu_user, FALSE);
-	return lu_refresh_int(context, module, entity);
+	return lu_refresh_int(context, entity, error);
 }
 
 static gboolean
-lu_refresh_group(struct lu_context *context, struct lu_module *module,
-		 struct lu_ent *entity)
+lu_refresh_group(struct lu_context *context, struct lu_ent *entity,
+		 struct lu_error **error)
 {
 	g_return_val_if_fail(entity->type == lu_group, FALSE);
-	return lu_refresh_int(context, module, entity);
+	return lu_refresh_int(context, entity, error);
 }
 
 static gboolean
@@ -316,7 +316,6 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(entity != NULL, FALSE);
 		if (module->user_add(module, entity, error)) {
 			lu_ent_add_module(entity, module->name);
-			lu_refresh_user(context, module, entity);
 			return TRUE;
 		}
 		return FALSE;
@@ -329,31 +328,26 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case user_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_mod(module, entity, error) &&
-		       lu_refresh_user(context, module, entity);
+		return module->user_mod(module, entity, error);
 	case user_del:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->user_del(module, entity, error);
 	case user_lock:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_lock(module, entity, error) &&
-		       lu_refresh_user(context, module, entity);
+		return module->user_lock(module, entity, error);
 	case user_unlock:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_unlock(module, entity, error) &&
-		       lu_refresh_user(context, module, entity);
+		return module->user_unlock(module, entity, error);
 	case user_is_locked:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->user_is_locked(module, entity, error);
 	case user_setpass:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		return module->user_setpass(module, entity, sdata, error) &&
-		       lu_refresh_user(context, module, entity);
+		return module->user_setpass(module, entity, sdata, error);
 	case user_removepass:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_removepass(module, entity, error) &&
-		       lu_refresh_user(context, module, entity);
+		return module->user_removepass(module, entity, error);
 	case users_enumerate:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate(module, sdata, error);
@@ -421,7 +415,6 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(entity != NULL, FALSE);
 		if (module->group_add(module, entity, error)) {
 			lu_ent_add_module(entity, module->name);
-			lu_refresh_group(context, module, entity);
 			return TRUE;
 		}
 		return FALSE;
@@ -434,31 +427,26 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case group_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_mod(module, entity, error) &&
-		       lu_refresh_group(context, module, entity);
+		return module->group_mod(module, entity, error);
 	case group_del:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->group_del(module, entity, error);
 	case group_lock:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_lock(module, entity, error) &&
-		       lu_refresh_group(context, module, entity);
+		return module->group_lock(module, entity, error);
 	case group_unlock:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->group_unlock(module, entity, error) &&
-		       lu_refresh_group(context, module, entity);
+		return module->group_unlock(module, entity, error);
 	case group_is_locked:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->group_is_locked(module, entity, error);
 	case group_setpass:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		return module->group_setpass(module, entity, sdata, error) &&
-		       lu_refresh_group(context, module, entity);
+		return module->group_setpass(module, entity, sdata, error);
 	case group_removepass:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_removepass(module, entity, error) &&
-		       lu_refresh_group(context, module, entity);
+		return module->user_removepass(module, entity, error);
 	case groups_enumerate:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate(module, sdata, error);
@@ -504,36 +492,6 @@ run_single(struct lu_context *context,
 	default:
 		g_assert_not_reached();	/* not reached */
 	}
-	return FALSE;
-}
-
-static gboolean
-lu_refresh_int(struct lu_context *context, struct lu_module *module,
-	       struct lu_ent *entity)
-{
-	enum lu_dispatch_id id = 0;
-	const char *sdata;
-	long ldata;
-	gpointer scratch = NULL;
-	struct lu_error *error = NULL;
-	g_return_val_if_fail((entity->type == lu_user) ||
-			     (entity->type == lu_group),
-			     FALSE);
-	if (entity->type == lu_user) {
-		id = user_lookup_name;
-	} else
-	if (entity->type == lu_group) {
-		id = group_lookup_name;
-	} else {
-		g_assert_not_reached();
-	}
-	sdata = extract_name(entity);
-	ldata = extract_id(entity);
-	if (run_single(context, module, id,
-		       sdata, ldata, entity, &scratch, &error)) {
-		return TRUE;
-	}
-	lu_error_free(&error);
 	return FALSE;
 }
 
@@ -707,7 +665,7 @@ run_list(struct lu_context *context,
 	 const char *sdata, long ldata,
 	 struct lu_ent *entity,
 	 gpointer *ret,
-	 struct lu_error **error)
+	 struct lu_error **firsterror)
 {
 	struct lu_module *module;
 	GPtrArray *ptr_array = NULL, *tmp_ptr_array = NULL;
@@ -717,9 +675,10 @@ run_list(struct lu_context *context,
 	struct lu_ent *tmp_ent;
 	char *name;
 	gboolean success, tsuccess;
+	struct lu_error *lasterror = NULL;
 	int i, j;
 
-	LU_ERROR_CHECK(error);
+	LU_ERROR_CHECK(firsterror);
 
 	g_assert(context != NULL);
 	g_assert(context->module_names != NULL);
@@ -769,7 +728,8 @@ run_list(struct lu_context *context,
 		g_assert(module != NULL);
 		scratch = NULL;
 		tsuccess = run_single(context, module, id,
-				      sdata, ldata, entity, &scratch, error);
+				      sdata, ldata, entity, &scratch,
+				      &lasterror);
 		if (scratch != NULL) switch (id) {
 			case users_enumerate:
 			case users_enumerate_by_group:
@@ -838,9 +798,54 @@ run_list(struct lu_context *context,
 		} else {
 			success = logic_function(success, tsuccess);
 		}
+		if (firsterror != NULL) {
+			if (*firsterror == NULL) {
+				/* Make this the error we report. */
+				*firsterror = lasterror;
+				lasterror = NULL;
+			} else {
+				/* Already have an error, discard. */
+				if (lasterror != NULL) {
+					lu_error_free(&lasterror);
+				}
+			}
+		} else {
+			/* Can't report this error. */
+			if (lasterror != NULL) {
+				lu_error_free(&lasterror);
+			}
+		}
 	}
 
 	return success;
+}
+
+static gboolean
+lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
+	       struct lu_error **error)
+{
+	enum lu_dispatch_id id = 0;
+	const char *sdata;
+	long ldata;
+	gpointer scratch = NULL;
+	g_return_val_if_fail((entity->type == lu_user) ||
+			     (entity->type == lu_group),
+			     FALSE);
+	if (entity->type == lu_user) {
+		id = user_lookup_name;
+	} else
+	if (entity->type == lu_group) {
+		id = group_lookup_name;
+	} else {
+		g_assert_not_reached();
+	}
+	sdata = extract_name(entity);
+	ldata = extract_id(entity);
+	if (run_list(context, entity->modules, logic_and, id,
+		     sdata, ldata, entity, &scratch, error)) {
+		return TRUE;
+	}
+	return FALSE;
 }
 
 static gboolean
@@ -1113,6 +1118,9 @@ lu_dispatch(struct lu_context *context,
 			default:
 				break;
 		}
+		if ((error != NULL) && (*error != NULL)) {
+			lu_error_free(error);
+		}
 	}
 
 	return success;
@@ -1181,7 +1189,8 @@ lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	if (lu_dispatch(context, user_add_prep, NULL, INVALID,
 			ent, NULL, error)) {
 		ret = lu_dispatch(context, user_add, NULL, INVALID,
-				  ent, NULL, error);
+				  ent, NULL, error) &&
+		      lu_refresh_user(context, ent, error);
 	}
 	return ret;
 }
@@ -1199,7 +1208,8 @@ lu_group_add(struct lu_context * context, struct lu_ent * ent,
 	if (lu_dispatch(context, group_add_prep, NULL, INVALID,
 			ent, NULL, error)) {
 		ret = lu_dispatch(context, group_add, NULL, INVALID,
-				  ent, NULL, error);
+				  ent, NULL, error) &&
+		      lu_refresh_group(context, ent, error);
 	}
 	return ret;
 }
@@ -1209,11 +1219,10 @@ lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-
-	return lu_dispatch(context, user_mod, NULL, INVALID, ent, NULL, error);
+	return lu_dispatch(context, user_mod, NULL, INVALID, ent, NULL, error) &&
+	       lu_refresh_user(context, ent, error);
 }
 
 gboolean
@@ -1221,11 +1230,10 @@ lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
-
-	return lu_dispatch(context, group_mod, NULL, INVALID, ent, NULL, error);
+	return lu_dispatch(context, group_mod, NULL, INVALID, ent, NULL, error) &&
+	       lu_refresh_group(context, ent, error);
 }
 
 gboolean
@@ -1233,10 +1241,8 @@ lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-
 	return lu_dispatch(context, user_del, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1245,10 +1251,8 @@ lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
-
 	return lu_dispatch(context, group_del, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1257,11 +1261,10 @@ lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	     struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-
-	return lu_dispatch(context, user_lock, NULL, INVALID, ent, NULL, error);
+	return lu_dispatch(context, user_lock, NULL, INVALID, ent, NULL, error) &&
+	       lu_refresh_user(context, ent, error);
 }
 
 gboolean
@@ -1269,12 +1272,11 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
-
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-
 	return lu_dispatch(context, user_unlock, NULL, INVALID,
-			   ent, NULL, error);
+			   ent, NULL, error) &&
+	       lu_refresh_user(context, ent, error);
 }
 
 gboolean
@@ -1311,6 +1313,9 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 			  ent, NULL, error);
 	g_free(tmp);
 	if (ret) {
+		ret = lu_refresh_user(context, ent, error);
+	}
+	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
 		memset(&value, 0, sizeof(value));
@@ -1336,6 +1341,9 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 	ret = lu_dispatch(context, user_removepass, NULL, INVALID,
 			  ent, NULL, error);
 	if (ret) {
+		ret = lu_refresh_user(context, ent, error);
+	}
+	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
 		memset(&value, 0, sizeof(value));
@@ -1358,7 +1366,8 @@ lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
 	return lu_dispatch(context, group_lock, NULL, INVALID,
-			   ent, NULL, error);
+			   ent, NULL, error) &&
+	       lu_refresh_group(context, ent, error);
 }
 
 gboolean
@@ -1371,7 +1380,8 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 	g_return_val_if_fail(ent->type == lu_group, FALSE);
 
 	return lu_dispatch(context, group_unlock, NULL, INVALID,
-			   ent, NULL, error);
+			   ent, NULL, error) &&
+	       lu_refresh_group(context, ent, error);
 }
 
 gboolean
@@ -1408,6 +1418,9 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 			  ent, NULL, error);
 	g_free(tmp);
 	if (ret) {
+		ret = lu_refresh_group(context, ent, error);
+	}
+	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
 		memset(&value, 0, sizeof(value));
@@ -1432,6 +1445,9 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 
 	ret = lu_dispatch(context, group_removepass, NULL, INVALID,
 			  ent, NULL, error);
+	if (ret) {
+		ret = lu_refresh_group(context, ent, error);
+	}
 	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
@@ -1711,9 +1727,9 @@ lu_default_int(struct lu_context *context, const char *name,
 
 			{LU_GROUPNAME, G_STRINGIFY_ARG(LU_GROUPNAME)},
 			{LU_GROUPPASSWORD, G_STRINGIFY_ARG(LU_GROUPPASSWORD)},
-			{LU_MEMBERUID, G_STRINGIFY_ARG(LU_MEMBERUID)},
-			{LU_ADMINISTRATORUID,
-				G_STRINGIFY_ARG(LU_ADMINISTRATORUID)},
+			{LU_MEMBERNAME, G_STRINGIFY_ARG(LU_MEMBERNAME)},
+			{LU_ADMINISTRATORNAME,
+				G_STRINGIFY_ARG(LU_ADMINISTRATORNAME)},
 
 			{LU_SHADOWNAME, G_STRINGIFY_ARG(LU_SHADOWNAME)},
 			{LU_SHADOWPASSWORD, G_STRINGIFY_ARG(LU_SHADOWPASSWORD)},

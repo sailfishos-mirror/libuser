@@ -142,6 +142,26 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 			}
 		}
 	}
+	fprintf(fp, "\n");
+	for (i = 0; i < ent->pending->len; i++) {
+		attribute = &g_array_index(ent->pending,
+					   struct lu_attribute,
+					   i);
+		for (j = 0; j < attribute->values->n_values; j++) {
+			GValue *value;
+			value = g_value_array_get_nth(attribute->values, j);
+			if (G_VALUE_HOLDS_STRING(value)) {
+				fprintf(fp, " %s = `%s'\n",
+					g_quark_to_string(attribute->name),
+					g_value_get_string(value));
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				fprintf(fp, " %s = %ld\n",
+					g_quark_to_string(attribute->name),
+					g_value_get_long(value));
+			}
+		}
+	}
 }
 
 /* Add a module to the list of modules kept for this entity. */

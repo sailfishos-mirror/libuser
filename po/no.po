@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
-"POT-Creation-Date: 2002-02-20 18:22-0500\n"
+"POT-Creation-Date: 2002-02-21 12:11-0500\n"
 "PO-Revision-Date: 2001-08-08 12:48+0200\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"

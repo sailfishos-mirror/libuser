@@ -58,7 +58,7 @@ convert_value_array_pylist(GValueArray *array)
 			l = g_value_get_long(value);
 			PyList_Append(ret, PyLong_FromLong(l));
 #ifdef DEBUG_BINDING
-			fprintf(stderr, "adding %d to list\n", l);
+			fprintf(stderr, "adding %ld to list\n", l);
 #endif
 		} else
 		/* If the item is a G_TYPE_STRING, add it as a PyString. */
@@ -151,6 +151,16 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 			getindent(), PyString_AsString(item));
 #endif
 	} else
+#ifdef Py_USING_UNICODE
+	if (PyUnicode_Check(item)) {
+		g_value_init(value, G_TYPE_STRING);
+		g_value_set_string(value, PyString_AsString(PyUnicode_AsUTF8String(item)));
+#ifdef DEBUG_BINDING
+		fprintf(stderr, "%sAdding unicode (`%s') to list.\n",
+			getindent(), PyUnicode_AsUTF8String(item));
+#endif
+	} else
+#endif
 	if (PyNumber_Check(item)) {
 		g_value_init(value, G_TYPE_LONG);
 		g_value_set_long(value, PyLong_AsLong(PyNumber_Long(item)));
@@ -158,6 +168,8 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
 			getindent(), PyString_AsString(item));
 #endif
+	} else {
+		g_assert_not_reached();
 	}
 	DEBUG_EXIT;
 }
@@ -177,6 +189,30 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 	if (PyArg_ParseTuple(args, "O", &list)) {
 		lu_ent_clear(self->ent, name);
 
+		/* If the item is a tuple, scan it. */
+		if (PyTuple_Check(list)) {
+			/* We need the length of the tuple. */
+			size = PyTuple_Size(list);
+#ifdef DEBUG_BINDING
+			fprintf(stderr, "%sTuple has %d items.\n",
+				getindent(), size);
+#endif
+			/* Add each item in turn. */
+			memset(&value, 0, sizeof(value));
+			for (i = 0; i < size; i++) {
+				item = PyTuple_GetItem(list, i);
+				libuser_convert_to_value(item, &value);
+#ifdef DEBUG_BINDING
+				fprintf(stderr, "%sAdding tuple item %s.\n",
+					getindent(),
+					g_value_get_string(&value));
+#endif
+				lu_ent_add(self->ent, name, &value);
+				g_value_unset(&value);
+			}
+			DEBUG_EXIT;
+			return 0;
+		} else
 		/* If the object is a list, add it as a set of values. */
 		if (PyList_Check(list)) {
 			/* We need the length of the list. */
@@ -201,9 +237,10 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			}
 			DEBUG_EXIT;
 			return 0;
-		} else if (PyString_Check(list) ||
-			   PyLong_Check(list) ||
-			   PyNumber_Check(list)) {
+		} else
+		if (PyString_Check(list) ||
+		    PyLong_Check(list) ||
+		    PyNumber_Check(list)) {
 			/* It's a single item, so just add it. */
 			libuser_convert_to_value(list, &value);
 #ifdef DEBUG_BINDING
@@ -218,7 +255,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 	}
 
 	PyErr_SetString(PyExc_SystemError,
-			"expected Number, Long, String, or list");
+			"expected Number, Long, String, Tuple, or List");
 
 	DEBUG_EXIT;
 	return -1;
@@ -494,15 +531,38 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		}
 		DEBUG_EXIT;
 		return 0;
-	}
-
+	} else
+	/* If the new value is a list, convert each and add in turn. */
+	if (PyTuple_Check(args)) {
+		size = PyTuple_Size(args);
+#ifdef DEBUG_BINDING
+		fprintf(stderr, "%sTuple has %d items.\n", getindent(), size);
+#endif
+		lu_ent_clear(self->ent, attr);
+		memset(&value, 0, sizeof(value));
+		for (i = 0; i < size; i++) {
+			item = PyTuple_GetItem(args, i);
+			libuser_convert_to_value(item, &value);
+#ifdef DEBUG_BINDING
+			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
+				getindent(),
+				g_value_get_string(&value));
+#endif
+			lu_ent_add(self->ent, attr, &value);
+			g_value_unset(&value);
+		}
+		DEBUG_EXIT;
+		return 0;
+	} else
 	/* If the new value is a value, convert it and add it. */
-	if (item != NULL) {
+	if (PyString_Check(args) ||
+	    PyNumber_Check(args) ||
+	    PyLong_Check(args)) {
 		memset(&value, 0, sizeof(value));
 		libuser_convert_to_value(args, &value);
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n", getindent(),
-			attr, &value);
+			attr, g_value_get_string(value));
 #endif
 		lu_ent_add(self->ent, attr, &value);
 		g_value_unset(&value);

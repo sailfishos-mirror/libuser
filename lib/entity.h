@@ -42,8 +42,8 @@ typedef struct lu_ent lu_ent_t;
 #define LU_GROUPNAME		"gr_name"
 #define LU_GROUPPASSWORD	"gr_passwd"
 /* #define LU_GIDNUMBER		"gr_gid" */
-#define LU_MEMBERUID		"gr_mem"
-#define LU_ADMINISTRATORUID	"gr_adm"
+#define LU_MEMBERNAME		"gr_mem"
+#define LU_ADMINISTRATORNAME	"gr_adm"
 
 /* Attributes carried by shadow user structures. */
 #define LU_SHADOWNAME		LU_USERNAME
