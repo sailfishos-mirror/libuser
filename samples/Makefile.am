@@ -1,4 +1,4 @@
-noinst_PROGRAMS = lookup testuser prompt field
+noinst_PROGRAMS = lookup testuser prompt field enum
 
 include $(top_srcdir)/Makefile.extra
 
@@ -15,3 +15,6 @@ prompt_SOURCES = \
 
 field_SOURCES = \
 	field.c
+
+enum_SOURCES = \
+	enum.c

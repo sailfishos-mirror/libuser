@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <fnmatch.h>
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
@@ -482,7 +483,8 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				/* Use the default listed in the format
 				 * specifier. */
 				l = g_list_append(g_list_alloc(),
-						  formats[i].def);
+						  ent->vcache->cache(ent->vcache,
+							  	     formats[i].def));
 			}
 		}
 		if(!formats[i].multiple) {
@@ -1127,6 +1129,91 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 	return generic_setpass(module, "gshadow", 2, ent, password);
 }
 
+static GList *
+lu_files_enumerate(struct lu_module *module, const char *base_name,
+		   const char *pattern)
+{
+	int fd;
+	gpointer lock;
+	GList *ret = NULL;
+	char buf[2048];
+	char *key = NULL, *filename = NULL, *p;
+	const char *dir = NULL;
+	FILE *fp;
+
+	g_assert(module != NULL);
+	g_return_val_if_fail(base_name != NULL, FALSE);
+	g_return_val_if_fail(strlen(base_name) > 0, FALSE);
+	g_assert(pattern != NULL);
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	filename = g_strconcat(dir, "/", base_name, NULL);
+	g_free(key);
+
+	fd = open(filename, O_RDONLY);
+	if(fd == -1) {
+		g_warning(_("Couldn't open '%s'.\n"), filename);
+		g_free(filename);
+		return NULL;
+	}
+	
+	lock = lu_util_lock_obtain(fd);
+	if(lock == NULL) {
+		g_warning(_("Couldn't lock '%s'.\n"), filename);
+		g_free(filename);
+		close(fd);
+		return NULL;
+	}
+
+	fp = fdopen(fd, "r");
+	if(fp == NULL) {
+		g_warning(_("Couldn't open '%s' for reading.\n"), filename);
+		g_free(filename);
+		close(fd);
+		return NULL;
+	}
+
+	while(fgets(buf, sizeof(buf), fp) != NULL) {
+		p = strchr(buf, ':');
+		if(p != NULL) {
+			*p = '\0';
+			p = module->scache->cache(module->scache, buf);
+			if(fnmatch(pattern, p, 0) == 0) {
+				ret = g_list_append(ret, p);
+			}
+		}
+	}
+
+	fclose(fp);
+	g_free(filename);
+	return ret;
+}
+
+static GList *
+lu_files_users_enumerate(struct lu_module *module, const char *pattern)
+{
+	return lu_files_enumerate(module, "passwd", pattern);
+}
+
+static GList *
+lu_files_groups_enumerate(struct lu_module *module, const char *pattern)
+{
+	return lu_files_enumerate(module, "group", pattern);
+}
+
+static GList *
+lu_shadow_users_enumerate(struct lu_module *module, const char *pattern)
+{
+	return NULL;
+}
+
+static GList *
+lu_shadow_groups_enumerate(struct lu_module *module, const char *pattern)
+{
+	return NULL;
+}
+
 static gboolean
 close_module(struct lu_module *module)
 {
@@ -1169,6 +1256,7 @@ lu_files_init(struct lu_context *context)
 	ret->user_lock = lu_files_user_lock;
 	ret->user_unlock = lu_files_user_unlock;
 	ret->user_setpass = lu_files_user_setpass;
+	ret->users_enumerate = lu_files_users_enumerate;
 
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
@@ -1179,6 +1267,7 @@ lu_files_init(struct lu_context *context)
 	ret->group_lock = lu_files_group_lock;
 	ret->group_unlock = lu_files_group_unlock;
 	ret->group_setpass = lu_files_group_setpass;
+	ret->groups_enumerate = lu_files_groups_enumerate;
 
 	ret->close = close_module;
 
@@ -1217,6 +1306,7 @@ lu_shadow_init(struct lu_context *context)
 	ret->user_lock = lu_shadow_user_lock;
 	ret->user_unlock = lu_shadow_user_unlock;
 	ret->user_setpass = lu_shadow_user_setpass;
+	ret->users_enumerate = lu_shadow_users_enumerate;
 
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
@@ -1227,6 +1317,7 @@ lu_shadow_init(struct lu_context *context)
 	ret->group_lock = lu_shadow_group_lock;
 	ret->group_unlock = lu_shadow_group_unlock;
 	ret->group_setpass = lu_shadow_group_setpass;
+	ret->groups_enumerate = lu_shadow_groups_enumerate;
 
 	ret->close = close_module;
 

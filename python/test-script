@@ -5,6 +5,12 @@ import libuser
 print "--------- Initializing."
 admin = libuser.Admin()
 
+print "--------- Listing."
+list = admin.enumerateUsers("l*")
+list.sort()
+for item in list:
+	print "Found a user named \"" + item + "\"."
+
 print "--------- Lookup."
 ldap = admin.lookupUserByName("ldap")
 

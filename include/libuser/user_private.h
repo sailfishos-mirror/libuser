@@ -23,7 +23,7 @@
 #include <libuser/user.h>
 
 #define LU_ENT_MAGIC 0x19d238c2
-#define LU_MODULE_VERSION 0x00020000
+#define LU_MODULE_VERSION 0x00030000
 
 #include <libintl.h>
 #include <locale.h>
@@ -135,6 +135,12 @@ struct lu_module {
 	gboolean (*group_unlock)(struct lu_module *module, struct lu_ent *ent);
 	gboolean (*group_setpass)(struct lu_module *module, struct lu_ent *ent,
 				  const char *newpass);
+
+	/* Search for users or groups. */
+	GList *(*users_enumerate)(struct lu_module *module,
+				  const char *pattern);
+	GList *(*groups_enumerate)(struct lu_module *module,
+				   const char *pattern);
 
 	/* Clean up any data this module has, and unload it. */
 	gboolean (*close)(struct lu_module *module);

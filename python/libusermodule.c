@@ -842,6 +842,44 @@ libuser_admin_group_setpass(struct libuser_admin *self, PyObject *args)
 	return libuser_admin_setpass_group(self, args);
 }
 
+static PyObject *
+libuser_admin_enumerate_users(struct libuser_admin *self, PyObject *args)
+{
+	GList *results;
+	char *module = NULL, *pattern = NULL;
+	PyObject *ret = NULL;
+
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	results = lu_users_enumerate(self->ctx, pattern, module);
+	ret = convert_glist_pystringlist(results);
+	g_list_free(results);
+	DEBUG_EXIT;
+	return ret;
+}
+
+static PyObject *
+libuser_admin_enumerate_groups(struct libuser_admin *self, PyObject *args)
+{
+	GList *results;
+	char *module = NULL, *pattern = NULL;
+	PyObject *ret = NULL;
+
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTuple(args, "|ss", &pattern, &module)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+	results = lu_groups_enumerate(self->ctx, pattern, module);
+	ret = convert_glist_pystringlist(results);
+	g_list_free(results);
+	DEBUG_EXIT;
+	return ret;
+}
+
 static PyMethodDef libuser_admin_user_methods[] =
 {
 	{"init", (PyCFunction) libuser_admin_user_init, METH_VARARGS},
@@ -911,6 +949,8 @@ libuser_admin_methods[] = {
 	{"unlockGroup", (PyCFunction)libuser_admin_unlock_group, METH_VARARGS},
 	{"setpassUser", (PyCFunction)libuser_admin_setpass_user, METH_VARARGS},
 	{"setpassGroup", (PyCFunction)libuser_admin_setpass_group, METH_VARARGS},
+	{"enumerateUsers", (PyCFunction)libuser_admin_enumerate_users, METH_VARARGS},
+	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups, METH_VARARGS},
 	{NULL, NULL, 0},
 };
 
@@ -1035,8 +1075,46 @@ initlibuser(void)
 	DEBUG_ENTRY;
 	module = Py_InitModule("libuser", libuser_methods);
 	dict = PyModule_GetDict(module);
-	PyDict_SetItemString(dict, "USER", PyInt_FromLong(lu_user));
-	PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(lu_group));
+	PyDict_SetItemString(dict, "LU_USER", PyInt_FromLong(lu_user));
+	PyDict_SetItemString(dict, "LU_GROUP", PyInt_FromLong(lu_group));
+	PyDict_SetItemString(dict, "LU_ADMINISTRATORUID",
+			     PyString_FromString(LU_ADMINISTRATORUID));
+	PyDict_SetItemString(dict, "LU_CN", PyString_FromString(LU_CN));
+	PyDict_SetItemString(dict, "LU_GECOS", PyString_FromString(LU_GECOS));
+	PyDict_SetItemString(dict, "LU_GID", PyString_FromString(LU_GID));
+	PyDict_SetItemString(dict, "LU_GIDNUMBER",
+			     PyString_FromString(LU_GIDNUMBER));
+	PyDict_SetItemString(dict, "LU_GROUPNAME",
+			     PyString_FromString(LU_GROUPNAME));
+	PyDict_SetItemString(dict, "LU_HOMEDIRECTORY",
+			     PyString_FromString(LU_HOMEDIRECTORY));
+	PyDict_SetItemString(dict, "LU_LOGINSHELL",
+			     PyString_FromString(LU_LOGINSHELL));
+	PyDict_SetItemString(dict, "LU_MEMBERUID",
+			     PyString_FromString(LU_MEMBERUID));
+	PyDict_SetItemString(dict, "LU_OBJECTCLASS",
+			     PyString_FromString(LU_OBJECTCLASS));
+	PyDict_SetItemString(dict, "LU_SHADOWEXPIRE",
+			     PyString_FromString(LU_SHADOWEXPIRE));
+	PyDict_SetItemString(dict, "LU_SHADOWFLAG",
+			     PyString_FromString(LU_SHADOWFLAG));
+	PyDict_SetItemString(dict, "LU_SHADOWINACTIVE",
+			     PyString_FromString(LU_SHADOWINACTIVE));
+	PyDict_SetItemString(dict, "LU_SHADOWLASTCHANGE",
+			     PyString_FromString(LU_SHADOWLASTCHANGE));
+	PyDict_SetItemString(dict, "LU_SHADOWMAX",
+			     PyString_FromString(LU_SHADOWMAX));
+	PyDict_SetItemString(dict, "LU_SHADOWMIN",
+			     PyString_FromString(LU_SHADOWMIN));
+	PyDict_SetItemString(dict, "LU_SHADOWWARNING",
+			     PyString_FromString(LU_SHADOWWARNING));
+	PyDict_SetItemString(dict, "LU_UID", PyString_FromString(LU_UID));
+	PyDict_SetItemString(dict, "LU_UIDNUMBER",
+			     PyString_FromString(LU_UIDNUMBER));
+	PyDict_SetItemString(dict, "LU_USERNAME",
+			     PyString_FromString(LU_USERNAME));
+	PyDict_SetItemString(dict, "LU_USERPASSWORD",
+			     PyString_FromString(LU_USERPASSWORD));
 	DEBUG_EXIT;
 	return;
 }

@@ -100,6 +100,7 @@ po/Makefile.in
 include/Makefile
 include/libuser/Makefile
 lib/Makefile
+quota/Makefile
 modules/Makefile
 python/Makefile
 samples/Makefile

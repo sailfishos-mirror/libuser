@@ -644,3 +644,80 @@ lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
 			   password,
 			   ent);
 }
+
+struct enumerate_data {
+	GList *list;
+	const char *pattern;
+};
+
+static void
+lu_enumerate_users(gpointer key, gpointer value, gpointer data)
+{
+	struct lu_module *mod = (struct lu_module *)value;
+	struct enumerate_data *en = (struct enumerate_data*) data;
+	en->list = g_list_concat(en->list,
+				 mod->users_enumerate(mod,
+						      en->pattern));
+}
+
+static void
+lu_enumerate_groups(gpointer key, gpointer value, gpointer data)
+{
+	struct lu_module *mod = (struct lu_module *)value;
+	struct enumerate_data *en = (struct enumerate_data*) data;
+	en->list = g_list_concat(en->list,
+				 mod->groups_enumerate(mod,
+						       en->pattern));
+}
+
+static GList *
+lu_enumerate(struct lu_context *context, enum lu_type type,
+	     const char *pattern, const char *module)
+{
+	struct enumerate_data data;
+	struct lu_module *mod;
+	char *module_rw;
+
+	g_assert((type == lu_user) || (type == lu_group));
+
+	data.list = NULL;
+	data.pattern = pattern ?: "*";
+
+	if(module) {
+		module_rw = g_strdup(module);
+		mod = g_hash_table_lookup(context->modules, module);
+		if(mod != NULL) {
+			if(type == lu_user) {
+				lu_enumerate_users(module_rw, mod, &data);
+			} else {
+				lu_enumerate_groups(module_rw, mod, &data);
+			}
+		}
+		g_free(module_rw);
+	} else {
+		if(type == lu_user) {
+			g_hash_table_foreach(context->modules,
+					     lu_enumerate_users,
+					     &data);
+		} else {
+			g_hash_table_foreach(context->modules,
+					     lu_enumerate_groups,
+					     &data);
+		}
+	}
+	return data.list;
+}
+
+GList *
+lu_users_enumerate(struct lu_context *context, const char *pattern,
+		   const char *module)
+{
+	return lu_enumerate(context, lu_user, pattern, module);
+}
+
+GList *
+lu_groups_enumerate(struct lu_context *context, const char *pattern,
+		    const char *module)
+{
+	return lu_enumerate(context, lu_group, pattern, module);
+}

@@ -86,6 +86,10 @@ typedef struct lu_prompt {
 	void(*free_value)(char *);
 } lu_prompt_t;
 
+/**
+ * The type of function which should be passed as a callback function to
+ * lu_start().
+ */
 typedef gboolean (lu_prompt_fn)(struct lu_context *context,
 				struct lu_prompt *prompts,
 				int count,
@@ -495,6 +499,33 @@ gboolean lu_user_setpass(struct lu_context *context, struct lu_ent *ent,
  */
 gboolean lu_group_setpass(struct lu_context *context, struct lu_ent *ent,
 			  const char *newpass);
+
+/**
+ * Get a list of all of the users matching the given patterm from the
+ * given module.
+ * @param context A valid library context.
+ * @param pattern A pattern to match users against.
+ * @param module The name of a module to search in.
+ * @return If the named monule is not loaded, then an empty list is returned.  
+ * If the name is NULL, all loaded modules are queried and the union of their
+ * results is returned to the application.
+ */
+GList *lu_users_enumerate(struct lu_context *context, const char *pattern,
+			  const char *module);
+
+/**
+ * Get a list of all of the groups matching the given patterm from the
+ * given module.
+ * @param context A valid library context.
+ * @param pattern A pattern to match users against.
+ * @param module The name of a module to search in.
+ * @return If the named monule is not loaded, then an empty list is returned.  
+ * If the name is NULL, all loaded modules are queried and the union of their
+ * results is returned to the application.
+ */
+GList *lu_groups_enumerate(struct lu_context *context, const char *pattern,
+			   const char *module);
+
 
 /**
  * Read the value of a potentially multi-valued key in the configuration file.

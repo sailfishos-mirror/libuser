@@ -51,6 +51,7 @@ rm -fr $RPM_BUILD_ROOT
 %dir %{_libdir}/libuser
 %{_libdir}/python1.5/site-packages/*
 %{_libdir}/libuser.so.*.*
+%{_libdir}/libuser_quota.so.*.*
 %{_libdir}/libuser/*.so
 %{_sbindir}/*
 
@@ -60,9 +61,16 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.a
 %{_libdir}/libuser.la
 %{_libdir}/libuser.so
+%{_libdir}/libuser_quota.a
+%{_libdir}/libuser_quota.la
+%{_libdir}/libuser_quota.so
 
 %changelog
+* Thu Jun  7 2001 Nalin Dahyabhai <nalin@redhat.com>
+- start looking at quota manipulation
+
 * Wed Jun  6 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add functions for enumerating users and groups, optionally per-module
 - lusermod.c: -s should specify the shell, not the home directory
 
 * Fri Jun  1 2001 Nalin Dahyabhai <nalin@redhat.com> 0.10

@@ -668,6 +668,20 @@ lu_ldap_group_setpass(struct lu_module *module, struct lu_ent *ent,
 	return FALSE;
 }
 
+static GList *
+lu_ldap_users_enumerate(struct lu_module *module, const char *pattern)
+{
+	/* FIXME */
+	return NULL;
+}
+
+static GList *
+lu_ldap_groups_enumerate(struct lu_module *module, const char *pattern)
+{
+	/* FIXME */
+	return NULL;
+}
+
 static gboolean
 lu_ldap_close_module(struct lu_module *module)
 {
@@ -770,6 +784,7 @@ lu_ldap_init(struct lu_context *context)
 	ret->user_lock = lu_ldap_user_lock;
 	ret->user_unlock = lu_ldap_user_unlock;
 	ret->user_setpass = lu_ldap_user_setpass;
+	ret->users_enumerate = lu_ldap_users_enumerate;
 
         ret->group_lookup_name = lu_ldap_group_lookup_name;
         ret->group_lookup_id = lu_ldap_group_lookup_id;
@@ -780,6 +795,7 @@ lu_ldap_init(struct lu_context *context)
 	ret->group_lock = lu_ldap_group_lock;
 	ret->group_unlock = lu_ldap_group_unlock;
 	ret->group_setpass = lu_ldap_group_setpass;
+	ret->groups_enumerate = lu_ldap_groups_enumerate;
 
 	ret->close = lu_ldap_close_module;
 
