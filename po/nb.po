@@ -1,15 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# Norwegian bokmål translation of libuser.
 # Copyright (C) 2001 Red Hat, Inc.
 # Trond Eivind Glomsrød <teg@redhat.com>, 2001.
-# Kjartan Maraas  <kmaraas@gnu.org>, 2001.
+# Kjartan Maraas  <kmaraas@gnu.org>, 2001-2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-01-17 02:06+0100\n"
-"PO-Revision-Date: 2004-11-11 10:53+0100\n"
-"Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
-"Language-Team: Norwegian <no@li.org>\n"
+"PO-Revision-Date: 2005-02-21 16:04+0100\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
+"Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -250,7 +250,7 @@ msgstr "Ingen gruppenavn spesifisert.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Ugyldig gruppe-ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -325,16 +325,16 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Ugyldig bruker-ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Nekter oppretting av konto med UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Feil under oppretting av gruppe «%s» med GID %ld: %s\n"
+msgstr "Feil under oppretting av gruppe for «%s» med GID %jd: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
@@ -395,9 +395,9 @@ msgid "Password changed.\n"
 msgstr "Passord endret.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Gruppe %s eksisterer ikke.\n"
+msgstr "Gruppe %jd eksisterer ikke\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -430,14 +430,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s hadde ikke gid-nummer.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Det finnes ingen gruppe med GID %ld, fjernes ikke.\n"
+msgstr "Det finnes ingen gruppe med GID %jd, fjernes ikke.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Gruppe med GID %ld hadde ikke et gruppenavn.\n"
+msgstr "Gruppe med GID %jd hadde ikke et gruppenavn.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -591,7 +591,7 @@ msgstr "feil med bibliotek-/modulversjon"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "hvis du låser opp vil passord-feltet stå tomt"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -944,12 +944,12 @@ msgstr "Feil under initiering av %s: %s.\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "Ugylig ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Søker etter gruppe med ID %d.\n"
+msgstr "Søker etter gruppe med ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -957,9 +957,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Søker etter gruppe med navn %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Søker etter bruker med ID %d.\n"
+msgstr "Søker etter bruker med ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -993,24 +993,3 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
-
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "kunne ikke tilbakestille forvalgt sikkerhetskontekst til «%s»: %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Feil i Cyrus SASL under oppretting av bruker: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Feil i Cyrus SASL ved fjerning av bruker %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Feil under initiering av %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Gruppe %s kunne ikke slettes.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Gruppe %s kunne ikke endres.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "feil under initiering av modul"
