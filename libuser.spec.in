@@ -1,11 +1,11 @@
 %if %{?WITH_SELINUX:0}%{!?WITH_SELINUX:1}
-%define WITH_SELINUX 0
+%define WITH_SELINUX 1
 %endif
-%define python 2.2
+%define python 2.3
 
 Name: @PACKAGE@
 Version: @VERSION@
-Release: 5
+Release: 6
 Group: System Environment/Base
 License: LGPL
 Source: libuser-%{version}.tar.gz
@@ -97,6 +97,10 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Sun Dec 14 2003 Jeremy Katz <katzj@redhat.com> 0.51.7-6
+- rebuild against python 2.3
+- enable SELinux
+
 * Mon Sep 08 2003 Dan Walsh <dwalsh@redhat.com> 0.51.7-5
 - Turn off SELinux 
 
