@@ -5,6 +5,7 @@
 # translation of it.po to
 # translation of it.po to
 # translation of it.po to
+# translation of it.po to
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004.
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-14 10:01+0100\n"
+"PO-Revision-Date: 2004-11-15 22:15+0100\n"
 "Last-Translator: Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>\n"
 "Language-Team:  <fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -50,8 +51,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
-"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:508
 msgid "Unknown user context"
@@ -405,9 +405,9 @@ msgid "Password changed.\n"
 msgstr "Password cambiata.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Il gruppo %s non esiste.\n"
+msgstr "Il gruppo %jd non esiste.\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -601,7 +601,7 @@ msgstr "mancata corrispondenza nella versione di modulo/libreria"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "L'operazione unlock renderà il campo della password vuoto."
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -662,8 +662,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:112
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:118
 #, c-format
@@ -834,8 +833,7 @@ msgstr ""
 
 #: modules/ldap.c:638
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1363
 #, c-format
@@ -894,8 +892,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1912
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2484
 msgid "LDAP Server Name"
@@ -1010,6 +1007,3 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
 
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr ""
-#~ "impossibile reimpostare l'ambiente predefinito della sicurezza a %s: %s"
