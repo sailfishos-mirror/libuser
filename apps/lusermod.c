@@ -170,6 +170,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("User %s could not be modified: %s.\n"), user, error->string);
 		return 9;
 	}
+	lu_hup_nscd();
 
 	if(change && old_uid && uid) {
 		struct lu_ent *group = NULL;
@@ -192,6 +193,7 @@ main(int argc, const char **argv)
 							lu_error_free(&error);
 						}
 					}
+					lu_hup_nscd();
 				}
 				g_free(tmp);
 			} else {

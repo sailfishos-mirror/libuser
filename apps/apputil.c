@@ -20,6 +20,7 @@
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
+#include <sys/signal.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
@@ -345,5 +346,23 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user, const cha
 		fprintf(stderr, _("Authentication failed for %s.\n"), puser);
 		pam_end(pamh, 0);
 		exit(1);
+	}
+}
+
+void
+lu_hup_nscd(void)
+{
+	FILE *fp;
+	char buf[LINE_MAX];
+	if((fp = fopen("/var/run/nscd.pid", "r")) != NULL) {
+		memset(buf, 0, sizeof(buf));
+		fgets(buf, sizeof(buf), fp);
+		if(strlen(buf) > 0) {
+			pid_t pid = atol(buf);
+			if(pid != 0) {
+				kill(pid, SIGHUP);
+			}
+		}
+		fclose(fp);
 	}
 }

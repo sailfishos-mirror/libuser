@@ -135,6 +135,7 @@ main(int argc, const char **argv)
 						/* Save the GID. */
 						values = lu_ent_get(ent, LU_GIDNUMBER);
 						gid = strtol((char*)values->data, &p, 10);
+						lu_hup_nscd();
 					} else {
 						/* Aargh!  Abandon all hope. */
 						g_print(_("Error creating group `%s'.\n"), gidstring);
@@ -161,6 +162,7 @@ main(int argc, const char **argv)
 					if(lu_group_add(ctx, ent, &error)) {
 						/* Save the GID. */
 						gid = gid_tmp;
+						lu_hup_nscd();
 					} else {
 						/* Aargh!  Abandon all hope. */
 						g_print(_("Error creating group `%s' with GID %ld.\n"), fields[0], gid_tmp);
@@ -197,6 +199,7 @@ main(int argc, const char **argv)
 			}
 
 			if(lu_user_add(ctx, ent, &error)) {
+				lu_hup_nscd();
 				if(!lu_user_setpass(ctx, ent, fields[1], &error)) {
 					g_print(_("Error setting initial password for %s: %s\n"), fields[0],
 						error ? error->string : _("unknown error"));

@@ -207,6 +207,8 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Failed to modify aging information for %s.\n"), user);
 			return 3;
 		}
+
+		lu_hup_nscd();
 	}
 
 	lu_ent_free(ent);

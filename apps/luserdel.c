@@ -92,6 +92,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("User %s could not be deleted: %s.\n"), user, error->string);
 		return 3;
 	}
+	lu_hup_nscd();
 
 	if(!dont_remove_group) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
@@ -115,6 +116,7 @@ main(int argc, const char **argv)
 							fprintf(stderr, _("Group %s could not be deleted: %s.\n"), (char*)values->data, error->string);
 							return 7;
 						}
+						lu_hup_nscd();
 					}
 				}
 			}

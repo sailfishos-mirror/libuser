@@ -129,6 +129,7 @@ main(int argc, const char **argv)
 			for(c = 0; admins && admins[c]; c++) {
 				lu_ent_add(ent, LU_ADMINISTRATORUID, admins[c]);
 			}
+			lu_hup_nscd();
 			g_strfreev(admins);
 			admins = NULL;
 		}
@@ -139,6 +140,7 @@ main(int argc, const char **argv)
 			for(c = 0; admins && admins[c]; c++) {
 				lu_ent_del(ent, LU_ADMINISTRATORUID, admins[c]);
 			}
+			lu_hup_nscd();
 			g_strfreev(admins);
 			admins = NULL;
 		}
@@ -150,6 +152,7 @@ main(int argc, const char **argv)
 			for(c = 0; members && members[c]; c++) {
 				lu_ent_add(ent, LU_MEMBERUID, members[c]);
 			}
+			lu_hup_nscd();
 			g_strfreev(members);
 			members = NULL;
 		}
@@ -160,6 +163,7 @@ main(int argc, const char **argv)
 			for(c = 0; members && members[c]; c++) {
 				lu_ent_del(ent, LU_MEMBERUID, members[c]);
 			}
+			lu_hup_nscd();
 			g_strfreev(members);
 			members = NULL;
 		}
@@ -204,6 +208,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Group %s could not be modified.\n"), group);
 		return 8;
 	}
+	lu_hup_nscd();
 
 	lu_ent_free(ent);
 
@@ -227,6 +232,7 @@ main(int argc, const char **argv)
 							if(error != NULL) {
 																						lu_error_free(&error);
 							}
+							lu_hup_nscd();
 						}
 					}
 					lu_ent_clear_all(ent);

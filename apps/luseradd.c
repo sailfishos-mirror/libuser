@@ -136,6 +136,7 @@ main(int argc, const char **argv)
 						/* Save the GID. */
 						values = lu_ent_get(ent, LU_GIDNUMBER);
 						gidNumber = strtol((char*)values->data, &p, 10);
+						lu_hup_nscd();
 					} else {
 						/* Aargh!  Abandon all hope. */
 						g_print(_("Error creating group `%s'.\n"), gid);
@@ -171,6 +172,7 @@ main(int argc, const char **argv)
 						lu_end(ctx);
 						return 1;
 					}
+					lu_hup_nscd();
 				} else {
 					/* Can't get there from here. */
 					g_print(_("No group with GID %ld exists.\n"), gidNumber);
@@ -218,6 +220,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Account creation failed: %s.\n"), error->string);
 		return 3;
 	}
+	lu_hup_nscd();
 
 	if(!dont_create_home) {
 		char *uid_string = NULL, *gid_string = NULL;

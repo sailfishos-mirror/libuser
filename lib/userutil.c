@@ -20,6 +20,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <crypt.h>
@@ -33,6 +34,7 @@
 #include <time.h>
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
+#define LU_DEFAULT_SALT_LEN  8
 #define LU_MAX_LOCK_ATTEMPTS 30
 #include "../include/libuser/user_private.h"
 
@@ -76,6 +78,9 @@ lu_strcmp(gconstpointer v1, gconstpointer v2)
 static gboolean
 is_acceptable(const char c)
 {
+	if(c == 0) {
+		return FALSE;
+	}
 #ifdef VIOLATE_SUSV2
 	return (strchr(UNACCEPTABLE, c) == NULL);
 #else
@@ -95,8 +100,8 @@ fill_urandom(char *output, size_t length)
 	memset(output, '\0', length);
 
 	while(got < length) {
-		read(fd, output + got, 1);
-		if(isprint(output[got]) && !isspace(output[got]) && is_acceptable(output[got])) {
+		read(fd, output + got, length - got);
+		while(isprint(output[got]) && !isspace(output[got]) && is_acceptable(output[got])) {
 			got++;
 		}
 	}
@@ -118,7 +123,7 @@ lu_make_crypted(const char *plain, const char *previous)
 {
 	char salt[2048];
 	char *p;
-	size_t stlen = 0;
+	size_t salt_type_len = 0, salt_len = sizeof(salt);
 
 	memset(salt, '\0', sizeof(salt));
 
@@ -128,22 +133,25 @@ lu_make_crypted(const char *plain, const char *previous)
 		p = strchr(previous + 1, '$');
 		if(p) {
 			p++;
-			stlen = p - previous;
-			if(stlen > 2048) {
-				stlen = 2048;
+			salt_type_len = p - previous;
+			if(salt_type_len > 2048) {
+				salt_type_len = 2048;
 			}
 		}
-		strncpy(salt, previous, stlen);
+		strncpy(salt, previous, salt_type_len);
+		salt_len = strlen(previous);
 	} else if((previous != NULL) && (previous[0] != '$')) {
 		/* Otherwise, it's a standard descrypt(). */
-		stlen = 0;
+		salt_type_len = 0;
+		salt_len = 2;
 	} else if(previous == NULL) {
 		/* Fill in the default crypt length. */
 		strncpy(salt, LU_DEFAULT_SALT_TYPE, sizeof(salt) - 1);
-		stlen = strlen(salt);
+		salt_type_len = strlen(salt);
+		salt_len = MIN(sizeof(salt) - salt_type_len, LU_DEFAULT_SALT_LEN);
 	}
 
-	fill_urandom(salt + stlen, sizeof(salt) - stlen - 1);
+	fill_urandom(salt + salt_type_len, salt_len);
 
 	return crypt(plain, salt);
 }
@@ -216,11 +224,12 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			   struct lu_error **error)
 {
 	char *contents;
-	char buf[LINE_MAX];
+	char *buf;
 	struct stat st;
 	off_t offset;
 	char *ret = NULL, *p, *q, *colon;
 	int i;
+	gboolean mapped = FALSE;
 
 	LU_ERROR_CHECK(error);
 
@@ -235,45 +244,54 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		return NULL;
 	}
 
-	contents = g_malloc0(st.st_size + 1);
-	lseek(fd, 0, SEEK_SET);
-
-	if(read(fd, contents, st.st_size) == st.st_size) {
-		p = contents;
-		do {
-			q = strchr(p, '\n');
-			if(q != NULL) {
-				strncpy(buf, p, MIN(q - p, sizeof(buf) - 1));
-				buf[MIN(q - p, sizeof(buf) - 1)] = '\0';
-			} else {
-				strncpy(buf, p, sizeof(buf) - 1);
-				buf[sizeof(buf) - 1] = '\0';
-			}
-
-			colon = buf;
-			for(i = 1; i < field; i++) {
-				if(colon) {
-					colon = strchr(colon, ':');
-				}
-				if(colon) {
-					colon++;
-				}
-			}
-
-			if(colon) {
-				if(strncmp(colon, part, strlen(part)) == 0) {
-					if((colon[strlen(part)] == ':') || (colon[strlen(part)] == '\n')) {
-						ret = g_strdup(buf);
-						break;
-					}
-				}
-			}
-
-			p = q ? q + 1 : NULL;
-		} while((p != NULL) && (ret == NULL));
+	contents = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
+	if(contents == MAP_FAILED) {
+		contents = g_malloc(st.st_size);
+		if(lseek(fd, 0, SEEK_SET) == -1) {
+			lu_error_new(error, lu_error_read, NULL);
+			return NULL;
+		}
+		if(read(fd, contents, st.st_size) != st.st_size) {
+			lu_error_new(error, lu_error_read, NULL);
+			g_free(contents);
+			return NULL;
+		}
+	} else {
+		mapped = TRUE;
 	}
 
-	g_free(contents);
+	p = contents;
+	do {
+		q = memchr(p, '\n', st.st_size - (p - contents));
+
+		colon = buf = p;
+		for(i = 1; (i < field) && (colon != NULL); i++) {
+			if(colon) {
+				colon = memchr(colon, ':', st.st_size - (colon - contents));
+			}
+			if(colon) {
+				colon++;
+			}
+		}
+
+		if(colon) {
+			if(strncmp(colon, part, strlen(part)) == 0) {
+				if((colon[strlen(part)] == ':') || (colon[strlen(part)] == '\n')) {
+					ret = g_strdup(buf);
+					break;
+				}
+			}
+		}
+
+		p = q ? q + 1 : NULL;
+	} while((p != NULL) && (ret == NULL));
+
+	if(mapped) {
+		munmap(contents, st.st_size);
+	} else {
+		g_free(contents);
+	}
+
 	lseek(fd, offset, SEEK_SET);
 	return ret;
 }
@@ -323,10 +341,12 @@ char *
 lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_error **error)
 {
 	struct stat st;
-	unsigned char *buf = NULL;
+	char *buf = NULL;
 	char *pattern = NULL;
 	char *line = NULL, *start = NULL, *end = NULL;
 	char *ret;
+	size_t len;
+	gboolean mapped = FALSE;
 
 	LU_ERROR_CHECK(error);
 
@@ -340,26 +360,36 @@ lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_erro
 		return NULL;
 	}
 
-	if(lseek(fd, 0, SEEK_SET) == -1) {
-		lu_error_new(error, lu_error_read, NULL);
-		return NULL;
+	buf = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
+	if(buf == MAP_FAILED) {
+		buf = g_malloc(st.st_size);
+		if(lseek(fd, 0, SEEK_SET) == -1) {
+			lu_error_new(error, lu_error_read, NULL);
+			return NULL;
+		}
+		if(read(fd, buf, st.st_size) != st.st_size) {
+			lu_error_new(error, lu_error_read, NULL);
+			g_free(buf);
+			return NULL;
+		}
+	} else {
+		mapped = TRUE;
 	}
 
-	buf = g_malloc0(st.st_size + 1);
-	if(read(fd, buf, st.st_size) != st.st_size) {
-		lu_error_new(error, lu_error_read, NULL);
-		g_free(buf);
-		return NULL;
-	}
-
-	pattern = g_strdup_printf("\n%s:", first);
-	if(strncmp(buf, pattern + 1, strlen(pattern) - 1) == 0) {
+	pattern = g_strdup_printf("%s:", first);
+	len = strlen(pattern);
+	line = buf;
+	if((st.st_size >= len) && (memcmp(buf, pattern, len) == 0)) {
 		/* found it on the first line */
-		line = buf;
 	} else
-	if((line = strstr(buf, pattern)) != NULL) {
-		/* found it somewhere in the middle */
+	while((line = memchr(line, '\n', st.st_size - (line - buf))) != NULL) {
 		line++;
+		if(line < buf + st.st_size - len) {
+			if(memcmp(line, pattern, len) == 0) {
+				/* found it somewhere in the middle */
+				break;
+			}
+		}
 	}
 
 	if(line != NULL) {
@@ -400,7 +430,11 @@ lu_util_field_read(int fd, const char *first, unsigned int field, struct lu_erro
 	}
 
 	g_free(pattern);
-	g_free(buf);
+	if(mapped) {
+		munmap(buf, st.st_size);
+	} else {
+		g_free(buf);
+	}
 
 	return ret;
 }

@@ -73,6 +73,11 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Mon Aug 20 2001 Nalin Dahyabhai <nalin@redhat.com> 0.29-1
+- HUP nscd on modifications
+- userutil.c: mmap files we're reading for probable speed gain
+- userutil.c: be conservative with the amount of random data we read
+
 * Wed Aug 15 2001 Nalin Dahyabhai <nalin@redhat.com> 0.28-1
 - apps: print usage on errors
 - lnewusers.c: initialize groups as groups, not users

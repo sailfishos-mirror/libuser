@@ -101,6 +101,7 @@ main(int argc, const char **argv)
 				lu_ent_set(ent, LU_LOGINSHELL, prompt.value);
 				if(lu_user_modify(ctx, ent, &error)) {
 					g_print(_("Shell changed.\n"));
+					lu_hup_nscd();
 				}
 			}
 		}

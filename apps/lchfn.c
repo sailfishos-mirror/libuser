@@ -172,6 +172,7 @@ main(int argc, const char **argv)
 
 				if(lu_user_modify(ctx, ent, &error)) {
 					g_print(_("Finger information changed.\n"));
+					lu_hup_nscd();
 				} else {
 					if(error && error->string) {
 						g_print(_("Finger information not changed: %s.\n"), error->string);

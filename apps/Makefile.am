@@ -16,6 +16,8 @@ lchfn_SOURCES = \
 	lchfn.c
 
 lchage_SOURCES = \
+	apputil.c \
+	apputil.h \
 	lchage.c
 
 lid_SOURCES = \

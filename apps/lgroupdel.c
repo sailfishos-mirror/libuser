@@ -86,6 +86,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Group %s could not be deleted.\n"), group);
 		return 3;
 	}
+	lu_hup_nscd();
 
 	lu_ent_free(ent);
 

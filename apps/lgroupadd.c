@@ -91,6 +91,7 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Group creation failed.\n"));
 		return 2;
 	}
+	lu_hup_nscd();
 
 	lu_ent_free(ent);
 
