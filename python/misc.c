@@ -59,21 +59,24 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			prompt = libuser_prompt_new();
 			prompt->prompt = prompts[i];
 			PyList_Append(list, (PyObject *) prompt);
+			/* FIXME: Py_Decref(prompt)? */
 		}
 		tuple = PyTuple_New(PyTuple_Check(prompt_data[1]) ?
 			            PyTuple_Size(prompt_data[1]) + 1 : 1);
 		PyTuple_SetItem(tuple, 0, list);
 		if (PyTuple_Check(prompt_data[1])) {
 			for (i = 0; i < PyTuple_Size(prompt_data[1]); i++) {
-				PyTuple_SetItem(tuple, i + 1,
-						PyTuple_GetItem(prompt_data[1],
-								i));
+				PyObject *obj;
+
+				obj = PyTuple_GetItem(prompt_data[1], i);
+				Py_INCREF(obj);
+				PyTuple_SetItem(tuple, i + 1, obj);
 			}
 		}
 		ret = PyObject_CallObject(prompt_data[0], tuple);
 		if (PyErr_Occurred()) {
 			PyErr_Print();
-			Py_DECREF(list);
+			Py_DECREF(tuple);
 			DEBUG_EXIT;
 			lu_error_new(error, lu_error_generic,
 				     _
@@ -87,6 +90,7 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 								     i);
 			prompts[i] = prompt->prompt;
 		}
+		Py_DECREF(tuple);
 		Py_DECREF(ret);
 	}
 
@@ -171,6 +175,12 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
+		for (i = 0; i < count; i++) {
+			PyObject *obj;
+
+			obj = PyList_GetItem(list, i);
+			Py_DECREF(obj);
+		}
 		PyErr_SetString(PyExc_RuntimeError,
 				"error prompting the user for information");
 		DEBUG_EXIT;

@@ -127,5 +127,19 @@ initlibuser(void)
 	PyDict_SetItemString(dict, "SHADOWFLAG",
 			     PyString_FromString(LU_SHADOWFLAG));
 
+	/* Additional fields. */
+	PyDict_SetItemString(dict, "COMMONNAME",
+			     PyString_FromString(LU_COMMONNAME));
+	PyDict_SetItemString(dict, "GIVENNAME",
+			     PyString_FromString(LU_GIVENNAME));
+	PyDict_SetItemString(dict, "SN", PyString_FromString(LU_SN));
+	PyDict_SetItemString(dict, "ROOMNUMBER",
+			     PyString_FromString(LU_ROOMNUMBER));
+	PyDict_SetItemString(dict, "TELEPHONENUMBER",
+			     PyString_FromString(LU_TELEPHONENUMBER));
+	PyDict_SetItemString(dict, "HOMEPHONE",
+			     PyString_FromString(LU_HOMEPHONE));
+	PyDict_SetItemString(dict, "EMAIL", PyString_FromString(LU_EMAIL));
+
 	DEBUG_EXIT;
 }

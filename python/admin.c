@@ -112,6 +112,7 @@ libuser_admin_setattr(PyObject *self, const char *attr, PyObject *args)
 			Py_DECREF(me->prompt_data[0]);
 			Py_DECREF(me->prompt_data[1]);
 			me->prompt_data[0] = args;
+			Py_INCREF(me->prompt_data[0]);
 			me->prompt_data[1] = Py_BuildValue("");
 		}
 		/* If it's a tuple, the first item is the function, and the
@@ -125,7 +126,6 @@ libuser_admin_setattr(PyObject *self, const char *attr, PyObject *args)
 
 			me->prompt_data[1] = PyTuple_GetSlice(args, 1,
 							      PyTuple_Size(args));
-			Py_INCREF(me->prompt_data[1]);
 		}
 		DEBUG_EXIT;
 		return 0;

@@ -1,3 +1,49 @@
+2004-09-21  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (lu_ldap_set): New parameter `add'.  All callers
+	changed.
+
+	* modules/ldap.c (get_ent_mods): Simplify somewhat.
+
+	* modules/ldap.c (objectclass_present, lu_ldap_needed_objectclasses)
+	(get_ent_adds): Split and customize/fix from
+	lu_ldap_fudge_objectclasses ().
+	(lu_ldap_fudge_objectclasses): Use lu_ldap_needed_objectclasses ().
+
+	* modules/ldap.c (ACCOUNT): New macro.
+	(SHADOWACCOUNT): Define as "shadowAccount" again.
+
+	* modules/ldap.c (ldap_attribute_map): Remove unused member
+	`ldap_attribute_key'.
+
+	* modules/ldap.c (lu_ldap_user_lookup_name, lu_ldap_user_lookup_id):
+	Add LU_LDAP_SHADOW to `applicability' argument.
+
+	* python/libusermodule.c (initlibuser): Add missing attribute names.
+
+2004-09-19  Miloslav Trmac  <mitr@redhat.com>
+
+	* python/admin.c (libuser_admin_setattr): Fix reference counting.
+
+2004-09-18  Miloslav Trmac  <mitr@redhat.com>
+
+	* python/misc.c (libuser_admin_python_prompter, libuser_admin_prompt):
+	Fix reference counting.
+
+	* modules/ldap.c (libuser_ldap_init): Don't set error when it was
+	already set.
+
+2004-09-17  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (value_compare): Make sense of comparison same for 
+	longs and strings.
+
+	* modules/ldap.c (lu_ldap_ent_to_dn, libuser_ldap_init):
+	Fix memory leaks.
+
+	* modules/ldap.c (libuser_ldap_init, bind_server): Respect bind_simple
+	and bind_sasl.
+
 2004-09-20  Miloslav Trmac  <mitr@redhat.com>
 
 	* apps/lchfn.1, apps/lchsh.1: New files.
