@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-23 01:11+1000\n"
+"PO-Revision-Date: 2003-02-25 16:46+1000\n"
 "Last-Translator: Ben Wu <hpwu@redhat.com>\n"
 "Language-Team: Chinese (Traditional) <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -832,9 +832,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 認證使用者"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "載入模組錯誤"
+msgstr "初始化模組發生錯誤"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -921,3 +920,4 @@ msgstr "取得預設使用者屬性:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
+
