@@ -1,0 +1,921 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2002 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# pclouds <pclouds@gmx.net>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libuser VERSION\n"
+"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"PO-Revision-Date: 2003-07-27 13:46+0700\n"
+"Last-Translator: pclouds <pclouds@gmx.net>\n"
+"Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/apputil.c:71
+#, c-format
+msgid "Error reading `%s': %s"
+msgstr "Lỗi đọc `%s': %s"
+
+#: apps/apputil.c:79
+#, c-format
+msgid "Error creating `%s': %s"
+msgstr "Lỗi tạo `%s': %s"
+
+#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#, c-format
+msgid "Error removing `%s': %s"
+msgstr "Lỗi loại bỏ `%s': %s"
+
+#: apps/apputil.c:421 apps/apputil.c:425
+msgid "Failed to drop privileges.\n"
+msgstr "Lỗi bỏ quyền.\n"
+
+#: apps/apputil.c:434
+msgid "Internal error.\n"
+msgstr "Lỗi nội tại.\n"
+
+#: apps/apputil.c:447
+msgid "Error initializing PAM.\n"
+msgstr "Lỗi khởi động PAM.\n"
+
+#: apps/apputil.c:455 apps/apputil.c:479
+#, c-format
+msgid "Authentication failed for %s.\n"
+msgstr "Lỗi xác thực cho %s.\n"
+
+#: apps/apputil.c:464
+#, c-format
+msgid "Internal PAM error `%s'.\n"
+msgstr "Lỗi nội tại của PAM `%s'.\n"
+
+#: apps/apputil.c:470
+msgid "User mismatch.\n"
+msgstr "Không khớp người dùng.\n"
+
+#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/luserdel.c:65 apps/lusermod.c:87
+msgid "[OPTION...] user"
+msgstr "[TÙY CHỌN...] người_dùng"
+
+#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#, c-format
+msgid "Error parsing arguments: %s.\n"
+msgstr "Lỗi phân tích đối số: %s.\n"
+
+#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lusermod.c:101
+msgid "No user name specified.\n"
+msgstr "Chưa xác định tên người dùng.\n"
+
+#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:71
+#, c-format
+msgid "Error initializing %s: %s.\n"
+msgstr "Lỗi khởi động %s: %s.\n"
+
+#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
+#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
+#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
+#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
+#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
+#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: samples/lookup.c:65
+msgid "unknown error"
+msgstr "lỗi lạ"
+
+#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/luserdel.c:94 apps/lusermod.c:126
+#, c-format
+msgid "User %s does not exist.\n"
+msgstr "Người dùng %s không tồn tại.\n"
+
+#: apps/lchage.c:172
+msgid "Account is locked.\n"
+msgstr "Tài khoản bị khóa.\n"
+
+#: apps/lchage.c:174
+msgid "Account is not locked.\n"
+msgstr "Tài khoản không bị khóa.\n"
+
+#: apps/lchage.c:179
+#, c-format
+msgid "Minimum:\t%d\n"
+msgstr "Tối thiểu:\t%d\n"
+
+#: apps/lchage.c:184
+#, c-format
+msgid "Maximum:\t%d\n"
+msgstr "Tối đa:\t%d\n"
+
+#: apps/lchage.c:189
+#, c-format
+msgid "Warning:\t%d\n"
+msgstr "Cảnh báo:\t%d\n"
+
+#: apps/lchage.c:194
+#, c-format
+msgid "Inactive:\t%d\n"
+msgstr "Không hoạt động:\t%d\n"
+
+#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+msgid "Never"
+msgstr "Không bao giờ"
+
+#: apps/lchage.c:201
+#, c-format
+msgid "Last Change:\t%s\n"
+msgstr "Lần thay đổi cuối cùng:\t%s\n"
+
+#: apps/lchage.c:211
+#, c-format
+msgid "Password Expires:\t%s\n"
+msgstr "Mật khẩu hết hiệu lực:\t%s\n"
+
+#: apps/lchage.c:223
+#, c-format
+msgid "Password Inactive:\t%s\n"
+msgstr "Mật khẩu không hoạt động:\t%s\n"
+
+#: apps/lchage.c:230
+#, c-format
+msgid "Account Expires:\t%s\n"
+msgstr "Tài khoản hết hiệu lực:\t%s\n"
+
+#: apps/lchage.c:277
+#, c-format
+msgid "Failed to modify aging information for %s.\n"
+msgstr "Lỗi thay đổi thông tin ngày tháng của %s.\n"
+
+#: apps/lchfn.c:74 apps/lchsh.c:61
+msgid "[OPTION...] [user]"
+msgstr "[TÙY_CHỌN...] [người_dùng]"
+
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#, c-format
+msgid "No user name specified, no name for uid %d.\n"
+msgstr "Chưa xác định tên người dùng, không có tên cho uid %d.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchfn.c:102
+#, c-format
+msgid "Changing finger information for %s.\n"
+msgstr "Đổi thông tin finger cho %s.\n"
+
+#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
+#, c-format
+msgid "Error initializing %s.\n"
+msgstr "Lỗi khởi tạo %s.\n"
+
+#: apps/lchfn.c:161
+msgid "Full Name"
+msgstr "Họ và tên"
+
+#: apps/lchfn.c:182
+msgid "Surname"
+msgstr "Họ"
+
+#: apps/lchfn.c:204
+msgid "Given Name"
+msgstr "Tên"
+
+#: apps/lchfn.c:214
+msgid "Office"
+msgstr "Văn phòng"
+
+#: apps/lchfn.c:223
+msgid "Office Phone"
+msgstr "Điện thoại Văn phòng"
+
+#: apps/lchfn.c:232
+msgid "Home Phone"
+msgstr "Điện thoại Nhà"
+
+#: apps/lchfn.c:253
+msgid "E-Mail Address"
+msgstr "Địa chỉ E-Mail"
+
+#: apps/lchfn.c:265
+msgid "Finger information not changed:  input error.\n"
+msgstr "Thông tin finger không đổi: lỗi input.\n"
+
+#: apps/lchfn.c:370
+msgid "Finger information changed.\n"
+msgstr "Đã thay đổi thông tin finger.\n"
+
+#: apps/lchfn.c:373
+#, c-format
+msgid "Finger information not changed: %s.\n"
+msgstr "Thông tin finger không đổi: %s.\n"
+
+#. Give the user some idea of what's going on.
+#: apps/lchsh.c:90
+#, c-format
+msgid "Changing shell for %s.\n"
+msgstr "Đổi Shell của %s.\n"
+
+#: apps/lchsh.c:122
+msgid "New Shell"
+msgstr "Shell mới"
+
+#: apps/lchsh.c:150
+msgid "Shell changed.\n"
+msgstr "Đã đổi Shell.\n"
+
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+msgid "[OPTION...] group"
+msgstr "[TÙY_CHỌN...] nhóm"
+
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+msgid "No group name specified.\n"
+msgstr "Chưa xác định tên nhóm.\n"
+
+#: apps/lgroupadd.c:116
+msgid "Group creation failed.\n"
+msgstr "Thất bại tạo nhóm.\n"
+
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#, c-format
+msgid "Group %s does not exist.\n"
+msgstr "Nhóm %s không tồn tại.\n"
+
+#: apps/lgroupdel.c:94
+#, c-format
+msgid "Group %s could not be deleted.\n"
+msgstr "Nhóm %s không thể bị xóa.\n"
+
+#: apps/lgroupmod.c:109 apps/lusermod.c:119
+msgid "Both -L and -U specified.\n"
+msgstr "Chưa xác định cả -L và -U.\n"
+
+#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#, c-format
+msgid "Failed to set password for group %s.\n"
+msgstr "Lỗi đặt mật khẩu cho nhóm %s.\n"
+
+#: apps/lgroupmod.c:242
+#, c-format
+msgid "Group %s could not be locked.\n"
+msgstr "Nhóm %s không thể bị khóa.\n"
+
+#: apps/lgroupmod.c:250
+#, c-format
+msgid "Group %s could not be unlocked.\n"
+msgstr "Nhóm %s không thể bị mở khóa.\n"
+
+#: apps/lgroupmod.c:257
+#, c-format
+msgid "Group %s could not be modified.\n"
+msgstr "Nhóm %s không thể bị hiệu chỉnh.\n"
+
+#: apps/lid.c:81
+#, c-format
+msgid "No group name specified, using %s.\n"
+msgstr "Chưa xác định tên nhóm, dùng %s.\n"
+
+#: apps/lid.c:85
+#, c-format
+msgid "No group name specified, no name for gid %d.\n"
+msgstr "Chưa xác định tên nhóm, không có tên cho gid %d.\n"
+
+#: apps/lid.c:93
+#, c-format
+msgid "No user name specified, using %s.\n"
+msgstr "Chưa xác định tên người dùng, dùng %s.\n"
+
+#: apps/lnewusers.c:74
+msgid "[OPTION...]"
+msgstr "[TÙY_CHỌN...]"
+
+#: apps/lnewusers.c:98
+#, c-format
+msgid "Error opening `%s': %s.\n"
+msgstr "Lỗi mở `%s': %s.\n"
+
+#: apps/lnewusers.c:131
+#, c-format
+msgid "Error creating account for `%s': line improperly formatted.\n"
+msgstr "Lỗi tạo tài khoản cho `%s':định dạng dòng không đúng.\n"
+
+#: apps/lnewusers.c:138
+msgid "Refusing to create account with UID 0.\n"
+msgstr "Từ chối tạo tài khoản cho UID 0.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/lnewusers.c:237
+#, c-format
+msgid "Error creating group for `%s' with GID %ld.\n"
+msgstr "Lỗi tạo nhóm cho `%s' với GID %ld.\n"
+
+#: apps/lnewusers.c:288
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Lỗi đặt mật khẩu ban đầu cho %s: %s\n"
+
+#: apps/lnewusers.c:310
+#, c-format
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Lỗi tạo thư mục home cho %s: %s\n"
+
+#: apps/lnewusers.c:325
+#, c-format
+msgid "Error creating mail spool for %s.\n"
+msgstr "Lỗi tạo mail spool cho %s.\n"
+
+#: apps/lnewusers.c:330
+#, c-format
+msgid "Error creating user account for %s: %s\n"
+msgstr "Lỗi tạo tài khoản người dùng cho %s: %s\n"
+
+#: apps/lpasswd.c:86
+#, c-format
+msgid "Changing password for %s.\n"
+msgstr "Thay đổi mật khẩu của %s.\n"
+
+#: apps/lpasswd.c:111
+msgid "New password"
+msgstr "Mật khẩu mới"
+
+#: apps/lpasswd.c:114
+msgid "New password (confirm)"
+msgstr "Xác nhận mật khẩu mới"
+
+#: apps/lpasswd.c:128
+msgid "Passwords do not match, try again.\n"
+msgstr "Mật khẩu không khớp, vui lòng thử lại.\n"
+
+#: apps/lpasswd.c:133
+msgid "Password change canceled.\n"
+msgstr "Hủy bỏ thay đổi mật khẩu.\n"
+
+#: apps/lpasswd.c:190
+#, c-format
+msgid "Error setting password for user %s: %s.\n"
+msgstr "Lỗi thiết lập mật khẩu cho người dùng %s: %s.\n"
+
+#: apps/lpasswd.c:197
+#, c-format
+msgid "Error setting password for group %s: %s.\n"
+msgstr "Lỗi thiết lập mật khẩu cho nhóm %s: %s.\n"
+
+#: apps/lpasswd.c:208
+msgid "Password changed.\n"
+msgstr "Đã thay đổi mật khẩu.\n"
+
+#. Aargh!  Abandon all hope.
+#: apps/luseradd.c:197 apps/luseradd.c:209
+#, c-format
+msgid "Error creating group `%s'.\n"
+msgstr "Lỗi tạo nhóm `%s'.\n"
+
+#: apps/luseradd.c:276
+#, c-format
+msgid "Account creation failed: %s.\n"
+msgstr "Thất bại tạo tài khoản: %s.\n"
+
+#: apps/luseradd.c:318
+#, c-format
+msgid "Error creating %s: %s.\n"
+msgstr "Lỗi tạo %s: %s.\n"
+
+#: apps/luseradd.c:326
+msgid "Error creating mail spool.\n"
+msgstr "Lỗi tạo mail spool.\n"
+
+#: apps/luserdel.c:99
+#, c-format
+msgid "User %s could not be deleted: %s.\n"
+msgstr "Người dùng %s không thể bị xóa: %s.\n"
+
+#: apps/luserdel.c:110
+#, c-format
+msgid "%s did not have a gid number.\n"
+msgstr "%s không phải là số GID.\n"
+
+#: apps/luserdel.c:125
+#, c-format
+msgid "No group with GID %ld exists, not removing.\n"
+msgstr "Không có nhóm nào có GID %ld, không loại bỏ.\n"
+
+#: apps/luserdel.c:131
+#, c-format
+msgid "Group with GID %ld did not have a group name.\n"
+msgstr "Nhóm có GID %ld không có tên nhóm.\n"
+
+#: apps/luserdel.c:139
+#, c-format
+msgid "Group %s could not be deleted: %s.\n"
+msgstr "Nhóm %s không thể bị xóa: %s.\n"
+
+#: apps/luserdel.c:155
+#, c-format
+msgid "%s did not have a home directory.\n"
+msgstr "%s không có thư mục home.\n"
+
+#: apps/luserdel.c:162
+#, c-format
+msgid "Error removing %s: %s.\n"
+msgstr "Lỗi loại bỏ %s: %s.\n"
+
+#: apps/lusermod.c:193 apps/lusermod.c:206
+#, c-format
+msgid "Failed to set password for user %s: %s.\n"
+msgstr "Lỗi đặt mật khẩu cho người dùng %s: %s.\n"
+
+#: apps/lusermod.c:217
+#, c-format
+msgid "User %s could not be locked: %s.\n"
+msgstr "Người dùng %s không thể bị khóa: %s.\n"
+
+#: apps/lusermod.c:226
+#, c-format
+msgid "User %s could not be unlocked: %s.\n"
+msgstr "Người dùng %s không thể bị mở khóa: %s.\n"
+
+#: apps/lusermod.c:235
+#, c-format
+msgid "User %s could not be modified: %s.\n"
+msgstr "Người dùng %s không thể bị thay đổi: %s.\n"
+
+#: apps/lusermod.c:289
+#, c-format
+msgid "Group %s could not be modified: %s.\n"
+msgstr "Nhóm %s không thể bị thay đổi: %s.\n"
+
+#: apps/lusermod.c:302
+#, c-format
+msgid "No old home directory for %s.\n"
+msgstr "%s không có thư mục home cũ.\n"
+
+#: apps/lusermod.c:307
+#, c-format
+msgid "No new home directory for %s.\n"
+msgstr "%s không có thư mục home mới.\n"
+
+#: apps/lusermod.c:313
+#, c-format
+msgid "Error moving %s to %s: %s.\n"
+msgstr "Lỗi chuyển %s thành %s: %s.\n"
+
+#: lib/config.c:70
+#, c-format
+msgid "could not open configuration file `%s': %s"
+msgstr "không thể mở tập tin cấu hình `%s': %s"
+
+#: lib/error.c:42
+msgid "success"
+msgstr "thành công"
+
+#: lib/error.c:44
+msgid "module disabled by configuration"
+msgstr "module bị tắt bởi cấu hình"
+
+#: lib/error.c:46
+msgid "generic error"
+msgstr "lỗi thường"
+
+#: lib/error.c:48
+msgid "not enough privileges"
+msgstr "không đủ quyền truy cập"
+
+#: lib/error.c:50
+msgid "access denied"
+msgstr "truy cập bi từ chối"
+
+#: lib/error.c:52
+msgid "bad user/group name"
+msgstr "tên người dùng/nhóm sai"
+
+#: lib/error.c:54
+msgid "bad user/group id"
+msgstr "ID người dùng/nhóm sai"
+
+#: lib/error.c:56
+msgid "user/group name in use"
+msgstr "tên người dùng/nhóm đang được dùng"
+
+#: lib/error.c:58
+msgid "user/group id in use"
+msgstr "ID người dùng/nhóm đang được dùng"
+
+#: lib/error.c:60
+msgid "error manipulating terminal attributes"
+msgstr "lỗi thao tác thuộc tính terminal"
+
+#: lib/error.c:62
+msgid "error opening file"
+msgstr "lỗi mở tập tin"
+
+#: lib/error.c:64
+msgid "error locking file"
+msgstr "lỗi khóa tập tin"
+
+#: lib/error.c:66
+msgid "error statting file"
+msgstr "lỗi stat() tập tin"
+
+#: lib/error.c:68
+msgid "error reading file"
+msgstr "lỗi đọc tập tin"
+
+#: lib/error.c:70
+msgid "error writing to file"
+msgstr "lỗi ghi tập tin"
+
+#: lib/error.c:72
+msgid "data not found in file"
+msgstr "không tìm thấy dữ liệu trong tập tin"
+
+#: lib/error.c:74
+msgid "internal initialization error"
+msgstr "lỗi khởi tạo nội tại"
+
+#: lib/error.c:76
+msgid "error loading module"
+msgstr "lỗi nạp module"
+
+#: lib/error.c:78
+msgid "error resolving symbol in module"
+msgstr "lỗi phân giải ký hiệu trong module"
+
+#: lib/error.c:80
+msgid "library/module version mismatch"
+msgstr "không khớp phiên bản thư viện/module"
+
+#: lib/modules.c:97
+#, c-format
+msgid "no initialization function %s in `%s'"
+msgstr "không có hàm khởi tạo %s trong `%s'"
+
+#: lib/modules.c:128
+#, c-format
+msgid "module version mismatch in `%s'"
+msgstr "không khớp phiên bản module trong `%s'"
+
+#: lib/prompt.c:66
+msgid "error reading terminal attributes"
+msgstr "lỗi đọc thuộc tính terminal"
+
+#: lib/prompt.c:73 lib/prompt.c:85
+msgid "error setting terminal attributes"
+msgstr "lỗi đặt thuộc tính terminal"
+
+#: lib/prompt.c:79
+msgid "error reading from terminal"
+msgstr "lỗi đọc từ terminal"
+
+#: lib/user.c:190
+msgid "name is not set"
+msgstr "chưa đặt tên"
+
+#: lib/user.c:194
+msgid "name is too short"
+msgstr "tên quá ngắn"
+
+#: lib/user.c:200
+msgid "name contains non-ASCII characters"
+msgstr "tên chứa ký tự phi ASCII"
+
+#: lib/user.c:207
+msgid "name contains control characters"
+msgstr "tên chứa ký tự điều khiển"
+
+#: lib/user.c:214
+msgid "name contains whitespace"
+msgstr "tên chứa khoảng trắng"
+
+#: lib/user.c:221
+#, c-format
+msgid "name contains invalid char `%c'"
+msgstr "tên chứa ký tự không hợp lệ `%c'"
+
+#: lib/util.c:200
+#, c-format
+msgid "error locking file: %s"
+msgstr "lỗi khóa tập tin: %s"
+
+#: modules/files.c:109 modules/files.c:453 modules/files.c:823
+#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
+#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
+#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
+#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
+#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
+#: modules/files.c:2569 modules/files.c:2586
+#, c-format
+msgid "couldn't open `%s': %s"
+msgstr "không thể mở `%s': %s"
+
+#: modules/files.c:126 modules/files.c:162 modules/files.c:200
+#: modules/files.c:839 modules/files.c:1338
+#, c-format
+msgid "couldn't stat `%s': %s"
+msgstr "không thể stat() `%s': %s"
+
+#: modules/files.c:137
+#, c-format
+msgid "error creating `%s': %s"
+msgstr "không thể tạo `%s': %s"
+
+#: modules/files.c:153
+#, c-format
+msgid "backup file `%s' exists and is not a regular file"
+msgstr "tập tin sao lưu `%s' tồn tại nhưng không phải là tập tin bình thường"
+
+#: modules/files.c:872 modules/files.c:1350
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "không thể đọc từ `%s': %s"
+
+#: modules/files.c:887 modules/files.c:900
+msgid "entry already present in file"
+msgstr "mục nhập đã có trong tập tin"
+
+#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
+#: modules/files.c:1421
+#, c-format
+msgid "couldn't write to `%s': %s"
+msgstr "không thể ghi vào `%s': %s"
+
+#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
+#: modules/files.c:1209
+#, c-format
+msgid "entity object has no %s attribute"
+msgstr "đối tượnc thực thể không có thuộc tính %s"
+
+#: modules/files.c:2822 modules/files.c:2892
+msgid "not executing with superuser privileges"
+msgstr "không thực thi với quyền siêu người dùng"
+
+#: modules/files.c:2905
+msgid "no shadow file present -- disabling"
+msgstr "không có tập tin shadow -- tắt"
+
+#: modules/krb5.c:105
+#, c-format
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "lỗi kết nối kadm5 server cho dịch vụ `%s' trong realm `%s': %s"
+
+#: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
+msgid "error initializing kerberos library"
+msgstr "lỗi khởi tạo thư viện kerberos"
+
+#: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
+#, c-format
+msgid "error parsing user name `%s' for kerberos"
+msgstr "lỗi phân tích tên người dùng `%s' cho kerberos"
+
+#: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
+#, c-format
+msgid "entity structure has no %s or %s attributes"
+msgstr "cấu trúc thực thể không có thuộc tính %s hoặc %s"
+
+#: modules/krb5.c:311
+#, c-format
+msgid "entity has no %s or %s attributes"
+msgstr "thực thể không có thuộc tính %s hoặc %s"
+
+#: modules/krb5.c:324
+#, c-format
+msgid "entity was created with no %s or %s attributes"
+msgstr "thực thể được tạo mà không có thuộc tính %s hoặc %s"
+
+#: modules/krb5.c:475 modules/krb5.c:563
+#, c-format
+msgid "error reading information for `%s' from kerberos"
+msgstr "lỗi đọc thông tin cho `%s' từ kerberos"
+
+#: modules/krb5.c:604
+#, c-format
+msgid "entity has no %s attribute"
+msgstr "thực thể không có thuộc tính %s"
+
+#: modules/krb5.c:642
+#, c-format
+msgid "error setting password for `%s'"
+msgstr "lỗi đặt mật khẩu cho `%s'"
+
+#: modules/krb5.c:768
+msgid "Kerberos Realm"
+msgstr "Kerberos Realm"
+
+#: modules/krb5.c:775
+msgid "Kerberos Admin Principal"
+msgstr "Kerberos Admin Principal"
+
+#: modules/krb5.c:797
+msgid "Kerberos Password for Admin Principal"
+msgstr "Kerberos Password for Admin Principal"
+
+#: modules/ldap.c:216 modules/ldap.c:249
+msgid "error initializing ldap library"
+msgstr "lỗi khởi tạo thư viện ldap"
+
+#: modules/ldap.c:227 modules/ldap.c:260
+#, c-format
+msgid "could not set LDAP protocol to version %d"
+msgstr "không thể đặt giao thức LDAP cho phiên bản %d"
+
+#: modules/ldap.c:237
+msgid "could not negotiate TLS with LDAP server"
+msgstr "không thể thỏa thuận TLS với LDAP server"
+
+#: modules/ldap.c:411
+msgid "could not bind to LDAP server"
+msgstr "không thể gắn vào LDAP server"
+
+#: modules/ldap.c:424
+msgid "could not search LDAP server"
+msgstr "không thể tìm LDAP server"
+
+#: modules/ldap.c:433
+msgid "LDAP server appears to have no root DSE"
+msgstr "LDAP server có vẻ không có DSE gốc"
+
+#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
+#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+msgid "error mapping name to LDAP distinguished name"
+msgstr "lỗi ánh xạ tên sang tên phân biệt LDAP"
+
+#: modules/ldap.c:683
+msgid "error mapping name to LDAP base distinguished name"
+msgstr "lỗi ánh xạ tên sang tên phân biệt cơ sở LDAP"
+
+#: modules/ldap.c:1212
+#, c-format
+msgid "user object had no %s attribute"
+msgstr "đối tượng người dùng không có thuộc tính %s"
+
+#: modules/ldap.c:1221
+#, c-format
+msgid "user object was created with no `%s'"
+msgstr "đối tượng người dùng được tạo mà không có `%s'"
+
+#: modules/ldap.c:1247
+msgid "could not convert internal data to LDAPMods"
+msgstr "không thể chuyển dữ liệu nội tại sang LDAPMods"
+
+#: modules/ldap.c:1271 modules/ldap.c:1483
+#, c-format
+msgid "error modifying LDAP directory entry: %s"
+msgstr "lỗi hiệu chỉnh mục nhập thư mục LDAP: %s"
+
+#: modules/ldap.c:1291
+#, c-format
+msgid "error renaming LDAP directory entry: %s\n"
+msgstr "lỗi đổi tên mục nhập thư mục LDAP: %s.\n"
+
+#: modules/ldap.c:1339
+#, c-format
+msgid "object had no %s attribute"
+msgstr "đối tượng không có thuộc tính %s"
+
+#: modules/ldap.c:1366
+#, c-format
+msgid "error removing LDAP directory entry: %s.\n"
+msgstr "lỗi loại bỏ mục nhập thư mục LDAP: %s.\n"
+
+#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
+#: modules/ldap.c:1610
+#, c-format
+msgid "object has no %s attribute"
+msgstr "đối tượng không có thuộc tính %s"
+
+#: modules/ldap.c:1546
+msgid "no such object in LDAP directory"
+msgstr "không có đối tượng đó trong thư mục LDAP"
+
+#: modules/ldap.c:1559
+#, c-format
+msgid "no `%s' attribute found"
+msgstr "không tìm thấy thuộc tính `%s'"
+
+#: modules/ldap.c:1701
+#, c-format
+msgid "error setting password in LDAP directory for %s: %s"
+msgstr "lỗi đặt mật khẩu trong thư mục LDAP cho %s: %s"
+
+#: modules/ldap.c:2243
+msgid "LDAP Server Name"
+msgstr "Tên Server LDAP"
+
+#: modules/ldap.c:2249
+msgid "LDAP Search Base DN"
+msgstr "LDAP Search Base DN"
+
+#: modules/ldap.c:2255
+msgid "LDAP Bind DN"
+msgstr "LDAP Bind DN"
+
+#: modules/ldap.c:2262
+msgid "LDAP Bind Password"
+msgstr "LDAP Bind Password"
+
+#: modules/ldap.c:2268
+msgid "LDAP SASL User"
+msgstr "Người dùng LDAP SASL"
+
+#: modules/ldap.c:2275
+msgid "LDAP SASL Authorization User"
+msgstr "LDAP SASL Authorization User"
+
+#: modules/ldap.c:2315
+msgid "error initializing module"
+msgstr "lỗi khởi tạo module"
+
+#: modules/sasldb.c:128
+#, c-format
+msgid "Cyrus SASL error creating user: %s: %s"
+msgstr "Lỗi Cyrus SASL tạo người dùng: %s: %s"
+
+#: modules/sasldb.c:130
+#, c-format
+msgid "Cyrus SASL error creating user: %s"
+msgstr "Lỗi Cyrus SASL tạo người dùng: %s"
+
+#: modules/sasldb.c:136
+#, c-format
+msgid "Cyrus SASL error removing user: %s: %s"
+msgstr "Lỗi Cyrus SASL loại bỏ người dùng: %s: %s"
+
+#: modules/sasldb.c:138
+#, c-format
+msgid "Cyrus SASL error removing user: %s"
+msgstr "Lỗi Cyrus SASL loại bỏ người dùng: %s"
+
+#: modules/sasldb.c:428 modules/sasldb.c:436
+#, c-format
+msgid "error initializing Cyrus SASL: %s"
+msgstr "lỗi khởi tạo Cyrus SASL: %s"
+
+#: python/admin.c:494
+msgid "error creating home directory for user"
+msgstr "lỗi tạo thư mục home cho người dùng"
+
+#: python/admin.c:546
+msgid "error removing home directory for user"
+msgstr "lỗi loại bỏ thư mục home cho người dùng"
+
+#: python/admin.c:623
+msgid "error moving home directory for user"
+msgstr "lỗi di chuyển thư mục home cho người dùng"
+
+#: python/admin.c:656
+msgid "error creating mail spool for user"
+msgstr "lỗi tạo mail spool cho người dùng"
+
+#: samples/lookup.c:64
+#, c-format
+msgid "Error initializing %s: %s\n"
+msgstr "Lỗi khởi tạo %s: %s\n"
+
+#: samples/lookup.c:74
+#, c-format
+msgid "Searching for group with ID %d.\n"
+msgstr "Đang tìm nhóm với ID %d.\n"
+
+#: samples/lookup.c:78
+#, c-format
+msgid "Searching for group named %s.\n"
+msgstr "Đang tìm nhóm tên %s.\n"
+
+#: samples/lookup.c:86
+#, c-format
+msgid "Searching for user with ID %d.\n"
+msgstr "Đang tìm người dùng với ID %d.\n"
+
+#: samples/lookup.c:89
+#, c-format
+msgid "Searching for user named %s.\n"
+msgstr "Đang tìm người dùng tên %s.\n"
+
+#: samples/lookup.c:103
+msgid "Entry not found.\n"
+msgstr "Không tìm thấy mục nhập.\n"
+
+#: samples/testuser.c:76
+msgid "Default user object classes:\n"
+msgstr "Lớp đối tượng người dùng mặc định:\n"
+
+#: samples/testuser.c:82
+msgid "Default user attribute names:\n"
+msgstr "Tên thuộc tính người dùng mặc định:\n"
+
+#: samples/testuser.c:88
+msgid "Getting default user attributes:\n"
+msgstr "Lấy thuộc tính người dùng mặc định:\n"
+
+#: samples/testuser.c:95
+msgid "Copying user structure:\n"
+msgstr "Sao chép cấu trúc người dùng:\n"
