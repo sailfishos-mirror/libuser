@@ -147,6 +147,9 @@ lu_end(struct lu_context *context)
 		g_tree_destroy(context->modules);
 	}
 
+	g_value_array_free(context->create_module_names);
+	g_value_array_free(context->module_names);
+
 	lu_cfg_done(context);
 
 	if (context->scache != NULL) {
@@ -502,7 +505,7 @@ run_single(struct lu_context *context,
 		return module->group_setpass(module, entity, sdata, error);
 	case group_removepass:
 		g_return_val_if_fail(entity != NULL, FALSE);
-		return module->user_removepass(module, entity, error);
+		return module->group_removepass(module, entity, error);
 	case groups_enumerate:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate(module, sdata, error);

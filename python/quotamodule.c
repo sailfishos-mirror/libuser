@@ -19,7 +19,7 @@
 
 #include <Python.h>
 #ifdef HAVE_CONFIG_H
-#include "../config.h"
+#include "config.h"
 #endif
 #include <sys/types.h>
 #include <linux/quota.h>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -48,7 +48,6 @@
 #define POSIXACCOUNT  "posixAccount"
 #define POSIXGROUP    "posixGroup"
 #define SHADOWACCOUNT "shadowAccount"
-#define SHADOWGROUP   "posixGroup"
 #define INETORGPERSON "inetOrgPerson"
 #define DISTINGUISHED_NAME "dn"
 
@@ -67,10 +66,10 @@ enum interact_indices {
 	LU_LDAP_MAX,
 };
 
-static struct {
-	char *lu_attribute;
-	char *ldap_attribute;
-	char *objectclass;
+static const struct {
+	const char *lu_attribute;
+	const char *ldap_attribute;
+	const char *objectclass;
 	int applicability;
 } ldap_attribute_map[] = {
 	{LU_USERNAME, "uid", POSIXACCOUNT, LU_LDAP_USER},
@@ -85,10 +84,7 @@ static struct {
 	{LU_GROUPPASSWORD, "userPassword", POSIXGROUP, LU_LDAP_GROUP},
 	{LU_GIDNUMBER, "gidNumber", POSIXGROUP, LU_LDAP_GROUP},
 	{LU_MEMBERNAME, "memberUid", POSIXGROUP, LU_LDAP_GROUP},
-	/* FIXME: shadowGroup "does not exist" */
-	{LU_ADMINISTRATORNAME, "administratorUid", SHADOWGROUP, LU_LDAP_GROUP},
 
-	{LU_SHADOWPASSWORD, "userPassword", SHADOWACCOUNT, LU_LDAP_SHADOW},
 	{LU_SHADOWLASTCHANGE, "shadowLastChange", SHADOWACCOUNT,
 	 LU_LDAP_SHADOW},
 	{LU_SHADOWMIN, "shadowMin", SHADOWACCOUNT, LU_LDAP_SHADOW},
@@ -106,7 +102,7 @@ static struct {
 	{LU_HOMEPHONE, "homePhone", INETORGPERSON, LU_LDAP_USER},
 };
 
-static char *lu_ldap_user_attributes[] = {
+static const char *const lu_ldap_user_attributes[] = {
 	LU_USERNAME,
 	LU_USERPASSWORD,
 	LU_UIDNUMBER,
@@ -115,7 +111,9 @@ static char *lu_ldap_user_attributes[] = {
 	LU_HOMEDIRECTORY,
 	LU_LOGINSHELL,
 
-	LU_SHADOWPASSWORD,
+	/* Not LU_SHADOWPASSWORD: We can't allow modification of
+	 * LU_USERPASSWORD and LU_SHADOWPASSWORD at the same time; LDAP simply
+	 * doesn't implement LU_SHADOWPASSWORD. */
 	LU_SHADOWLASTCHANGE,
 	LU_SHADOWMIN,
 	LU_SHADOWMAX,
@@ -131,16 +129,17 @@ static char *lu_ldap_user_attributes[] = {
 	LU_TELEPHONENUMBER,
 	LU_HOMEPHONE,
 
-	NULL,
+	NULL
 };
 
-static char *lu_ldap_group_attributes[] = {
+static const char *const lu_ldap_group_attributes[] = {
 	LU_GROUPNAME,
 	LU_GROUPPASSWORD,
 	LU_GIDNUMBER,
 	LU_MEMBERNAME,
 	LU_ADMINISTRATORNAME,
-	NULL,
+
+	NULL
 };
 
 struct lu_ldap_context {
@@ -148,6 +147,7 @@ struct lu_ldap_context {
 	struct lu_module *module;		/* The module's structure. */
 	struct lu_prompt prompts[LU_LDAP_MAX];	/* Questions and answers. */
 	gboolean bind_simple, bind_sasl;	/* What kind of bind to use. */
+	char **mapped_user_attributes, **mapped_group_attributes;
 	LDAP *ldap;				/* The connection. */
 };
 
@@ -473,27 +473,14 @@ value_compare(GValue *aval, GValue *bval)
 	return 0;
 }
 
-/* Map an attribute name from an LDAP atribute name to an internal name. */
-static char *
-map_from_ldap(struct lu_string_cache *cache, const char *ldap_attribute,
-	      int applicability)
-{
-	size_t i;
-	for (i = 0; i < G_N_ELEMENTS(ldap_attribute_map); i++) {
-		if (ldap_attribute_map[i].applicability & applicability)
-		if (g_ascii_strcasecmp(ldap_attribute_map[i].ldap_attribute,
-				       ldap_attribute) == 0) {
-			return ldap_attribute_map[i].lu_attribute;
-		}
-	}
-	return cache->cache(cache, ldap_attribute);
-}
-
 /* Map an attribute name from an internal name to an LDAP atribute name. */
-static char *
+static const char *
 map_to_ldap(struct lu_string_cache *cache, const char *libuser_attribute)
 {
 	size_t i;
+
+	/* Luckily the only duplicate is LU_GIDNUMBER, which maps to the
+	   same value in both cases. */
 	for (i = 0; i < G_N_ELEMENTS(ldap_attribute_map); i++) {
 		if (g_ascii_strcasecmp(ldap_attribute_map[i].lu_attribute,
 				       libuser_attribute) == 0) {
@@ -540,9 +527,8 @@ lu_ldap_base(struct lu_module *module, const char *configKey,
 
 /* Discover the distinguished name which corresponds to an account. */
 static const char *
-lu_ldap_ent_to_dn(struct lu_module *module,
-		  const char *namingAttr, const char *name, int applicability,
-		  const char *configKey, const char *def)
+lu_ldap_ent_to_dn(struct lu_module *module, const char *namingAttr,
+		  const char *name, const char *configKey, const char *def)
 {
 	const char *branch = NULL;
 	char *tmp = NULL, *ret = NULL, *filter;
@@ -551,7 +537,6 @@ lu_ldap_ent_to_dn(struct lu_module *module,
 	struct lu_ldap_context *ctx = NULL;
 	LDAPMessage *messages = NULL, *entry = NULL;
 
-	(void)applicability; /* FIXME: remove? */
 	g_assert(module != NULL);
 	g_assert(namingAttr != NULL);
 	g_assert(strlen(namingAttr) > 0);
@@ -602,17 +587,17 @@ lu_ldap_lookup(struct lu_module *module,
 	       const char *namingAttr, const char *name,
 	       struct lu_ent *ent, GPtrArray *ent_array,
 	       const char *configKey, const char *def,
-	       const char *filter, char **attributes, int applicability,
-	       struct lu_error **error)
+	       const char *filter, const char *const *attributes,
+	       int applicability, struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
 	GValueArray *array;
 	GValue value, *val;
 	const char *attr;
-	char *filt = NULL, **values = NULL, *p;
+	char *filt = NULL, **values = NULL, *p, **mapped_attributes;
 	const char *dn = NULL;
 	const char *base = NULL;
-	int i, j;
+	size_t i, j;
 	gboolean ret = FALSE;
 	struct lu_ldap_context *ctx;
 
@@ -646,14 +631,10 @@ lu_ldap_lookup(struct lu_module *module,
 			}
 		}
 
-		if (dn == NULL) {
+		if (dn == NULL)
 			/* Map the user or group name to an LDAP object name. */
 			dn = lu_ldap_ent_to_dn(module, namingAttr, name,
-					       ent->type == lu_user ?
-					       LU_LDAP_USER | LU_LDAP_SHADOW :
-					       LU_LDAP_GROUP,
 					       configKey, def);
-		}
 
 		if (dn == NULL) {
 			lu_error_new(error, lu_error_generic,
@@ -684,11 +665,20 @@ lu_ldap_lookup(struct lu_module *module,
 	g_print("Looking up `%s' with filter `%s'.\n", dn, filt);
 #endif
 
+	if (attributes == lu_ldap_user_attributes)
+		mapped_attributes = ctx->mapped_user_attributes;
+	else if (attributes == lu_ldap_group_attributes)
+		mapped_attributes = ctx->mapped_group_attributes;
+	else {
+		g_assert_not_reached();
+		mapped_attributes = NULL;
+	}
+
 	if (ent != NULL) {
 		/* Perform the search and read the first (hopefully only)
 		 * entry. */
 		if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filt,
-				  attributes, FALSE,
+				  mapped_attributes, FALSE,
 				  &messages) == LDAP_SUCCESS) {
 			entry = ldap_first_entry(ctx->ldap, messages);
 		}
@@ -706,7 +696,7 @@ lu_ldap_lookup(struct lu_module *module,
 			messages = NULL;
 		}
 		if (ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt,
-				  attributes, FALSE, &messages) == LDAP_SUCCESS) {
+				  mapped_attributes, FALSE, &messages) == LDAP_SUCCESS) {
 			entry = ldap_first_entry(ctx->ldap, messages);
 		}
 	}
@@ -743,11 +733,9 @@ lu_ldap_lookup(struct lu_module *module,
 		/* Read each of the attributes we asked for. */
 		for (i = 0; attributes[i]; i++) {
 			/* Get the values which correspond to this attribute. */
-			/* FIXME: attributes[] seem to contain the libuser names??? */
-			attr = map_from_ldap(ent->cache, attributes[i],
-					     applicability);
+			attr = attributes[i];
 			values = ldap_get_values(ctx->ldap, entry,
-						 attributes[i]);
+						 mapped_attributes[i]);
 			/* If we got answers, add them. */
 			if (values) {
 				lu_ent_clear_current(ent, attr);
@@ -943,12 +931,18 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 	char **new_values;
 	size_t old_count, new_count;
 	GList *attributes, *a;
+	int applicability;
 
 	if (old_values)
 		old_count = ldap_count_values(old_values);
 	else
 		old_count = 0;
 	
+	if (ent->type == lu_user)
+		applicability = LU_LDAP_USER | LU_LDAP_SHADOW;
+	else
+		applicability = LU_LDAP_GROUP;
+
 	new_values = g_malloc(sizeof(*new_values) *
 			      (G_N_ELEMENTS(ldap_attribute_map) + 1 + 1));
 	new_count = 0;
@@ -961,17 +955,18 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 
 		attr = a->data;
 #ifdef DEBUG
-		g_print("User `%s' has attribute `%s'.\n", dn, attr);
+		g_print("Entity `%s' has attribute `%s'.\n", dn, attr);
 #endif
 		/* Get the name of the next object class the object needs
 		 * to be a member of. */
 		for (i = 0; i < G_N_ELEMENTS(ldap_attribute_map); i++) {
-			if (strcasecmp(ldap_attribute_map[i].lu_attribute,
-				       attr)
-			    == 0) {
+			if ((ldap_attribute_map[i].applicability
+			     & applicability) != 0
+			    && strcasecmp(ldap_attribute_map[i].lu_attribute,
+					  attr) == 0) {
 #ifdef DEBUG
-				g_print("User `%s' needs to be a `%s'.\n", dn,
-					ldap_attribute_map[i].objectclass);
+				g_print("Entity `%s' needs to be a `%s'.\n",
+					dn, ldap_attribute_map[i].objectclass);
 #endif
 				break;
 			}
@@ -988,10 +983,13 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 			continue;
 
 		/* Add it to the class. */
-		new_values[new_count++] = ldap_attribute_map[i].objectclass;
+		new_values[new_count]
+			= (char *)ldap_attribute_map[i].objectclass;
 #ifdef DEBUG
-		g_print("Adding user `%s' to class `%s'.\n", dn, new_values[0]);
+		g_print("Adding entity `%s' to class `%s'.\n", dn,
+			new_values[new_count]);
 #endif
+		new_count++;
 	}
 	g_list_free(attributes);
 	/* Ugly, but implied by the fact that the basic account schemas are not
@@ -1036,19 +1034,13 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 				 * (g_list_length(attrs) + 2 + 1));
 		mod_count = 0;
 		for (a = attrs; a != NULL; a = a->next) {
-			char *attribute;
+			const char *attribute;
 
 			attribute = a->data;
 			if (strcasecmp(attribute, DISTINGUISHED_NAME) == 0)
 				continue;
-			/* Ugly hack 1:
-			 *
-			 * There is only a single userPassword attribute in
-			 * LDAP, so we must not add the same value twice.
-			 * (strictly speaking we should filter out only
-			 * duplicate values). */
-			if (strcasecmp(attribute, LU_USERPASSWORD) == 0
-			    && lu_ent_get(ent, LU_SHADOWPASSWORD) != NULL)
+			/* We don't have shadow passwords.  Period. */
+			if (strcasecmp(attribute, LU_SHADOWPASSWORD) == 0)
 				continue;
 			vals = lu_ent_get(ent, attribute);
 			if (vals == NULL || vals->n_values == 0)
@@ -1057,7 +1049,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 
 			mod = g_malloc0(sizeof(*mod));
 			mod->mod_op = LDAP_MOD_ADD;
-			mod->mod_type = attribute;
+			mod->mod_type = (char *)attribute;
 			mod->mod_values
 				= g_malloc0((vals->n_values + 1)
 					    * sizeof(*mod->mod_values));
@@ -1082,7 +1074,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			g_free(classes);
 			mods[mod_count++] = mod;
 		}
-		/* Ugly hack 2:
+		/* Ugly hack:
 		 *
 		 * Make sure there is 'cn', posixAccount requires it. */
 		if (ent->type == lu_user
@@ -1107,7 +1099,8 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			}
 			mod = g_malloc0(sizeof(*mod));
 			mod->mod_op = LDAP_MOD_ADD;
-			mod->mod_type = map_to_ldap(ent->cache, LU_COMMONNAME);
+			mod->mod_type = (char *)map_to_ldap(ent->cache,
+							    LU_COMMONNAME);
 			mod->mod_values
 				= g_malloc0(2 * sizeof (*mod->mod_values));
 			mod->mod_values[0] = cn;
@@ -1161,7 +1154,7 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 			pending = lu_ent_get(ent, attribute) ?: empty;
 			additions = g_value_array_new(0);
 			deletions = g_value_array_new(0);
-			attribute = map_to_ldap(ent->cache, attribute);
+			attribute = (char *)map_to_ldap(ent->cache, attribute);
 
 			/* Create a pair of modification request structures,
 			 * using the LDAP name for the attribute, using
@@ -1321,7 +1314,7 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 		memset(&mod, 0, sizeof(mod));
 		mod.mod_op = LDAP_MOD_ADD;
 		mod.mod_type = OBJECTCLASS;
-		mod.mod_vals.modv_strvals = new_values;
+		mod.mod_values = new_values;
 
 		/* Give it the old try. */
 		ldap_modify_s(ctx->ldap, dn, mods);
@@ -1332,12 +1325,11 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 	ldap_msgfree(res);
 }
 
-/* FIXME: remove attributes */
 /* Apply the changes to a given entity structure, or add a new entitty. */
 static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	    struct lu_ent *ent, const char *configKey, const char *def,
-	    char **attributes, struct lu_error **error)
+	    struct lu_error **error)
 {
 	LDAPMod **mods = NULL;
 	LDAPControl *server = NULL, *client = NULL;
@@ -1355,7 +1347,6 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	g_assert(ent->magic == LU_ENT_MAGIC);
 	g_assert(configKey != NULL);
 	g_assert(strlen(configKey) > 0);
-	g_assert(attributes != NULL);
 	LU_ERROR_CHECK(error);
 
 	ctx = module->module_context;
@@ -1387,11 +1378,8 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	/* Get the object's current object name. */
 	value = g_value_array_get_nth(add ? name : old_name, 0);
 	name_string = value_as_string(value);
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
+			       def);
 	g_free(name_string);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
@@ -1527,11 +1515,8 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
 	name_string = value_as_string(value);
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
+			       def);
 	g_free(name_string);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
@@ -1564,12 +1549,12 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 {
 	const char *dn;
 	gboolean ret = FALSE;
-	LDAPMod mod[2], **mods;
+	LDAPMod mod[2], *mods[3];
 	LDAPControl *server = NULL, *client = NULL;
 	GValueArray *name, *password;
 	GValue *value;
-	char *name_string, *oldpassword, *values[2][2];
-	const char *result, *tmp;
+	char *result, *name_string, *oldpassword, *values[2][2];
+	const char *tmp, *attribute;
 	struct lu_ldap_context *ctx = module->module_context;
 	size_t scheme_len = strlen(LU_CRYPTED);
 	int err;
@@ -1591,19 +1576,19 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
 	name_string = value_as_string(value);
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
+			       def);
+	g_free(name_string);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("error mapping name to LDAP distinguished name"));
 		return FALSE;
 	}
 
+	attribute = ent->type == lu_user ? LU_USERPASSWORD : LU_GROUPPASSWORD;
+
 	/* Get the values for the entry's password. */
-	password = lu_ent_get_current(ent, LU_USERPASSWORD);
+	password = lu_ent_get_current(ent, attribute);
 	if (password == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"),
@@ -1632,38 +1617,33 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	/* Generate a new string with the modification applied. */
 	if (sense) {
-		/* FIXME: seems to skip LU_CRYPTED twice! */
-		result = g_strdup_printf("%s%c%s", LU_CRYPTED, LOCKCHAR,
-					 result + scheme_len);
+		if (result[0] != LOCKCHAR)
+			result = g_strdup_printf("%s%c%s", LU_CRYPTED,
+						 LOCKCHAR, result);
+		else
+			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
 	} else {
-		if (result[0] == LOCKCHAR) {
-			result = g_strdup_printf("%s%s", LU_CRYPTED, result + 1);
-		} else {
-			result = g_strdup(result);
-		}
+		if (result[0] == LOCKCHAR)
+			result = g_strdup_printf("%s%s", LU_CRYPTED,
+						 result + 1);
+		else
+			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
 	}
 	/* Set up the LDAP modify operation. */
 	mod[0].mod_op = LDAP_MOD_DELETE;
-	mod[0].mod_type = map_to_ldap(ent->cache,
-				      ent->type == lu_user ?
-				      LU_USERPASSWORD :
-				      LU_GROUPPASSWORD);
+	mod[0].mod_type = (char *)map_to_ldap(ent->cache, attribute);
 	values[0][0] = ent->cache->cache(ent->cache, oldpassword);
 	values[0][1] = NULL;
 	mod[0].mod_values = values[0];
 
 	mod[1].mod_op = LDAP_MOD_ADD;
-	mod[1].mod_type = map_to_ldap(ent->cache,
-				      ent->type == lu_user ?
-				      LU_USERPASSWORD :
-				      LU_GROUPPASSWORD);
+	mod[1].mod_type = mod[0].mod_type;
 	values[1][0] = ent->cache->cache(ent->cache, result);
 	values[1][1] = NULL;
-	mod[1].mod_values = values[0];
+	mod[1].mod_values = values[1];
+	g_free(result);
 
 	/* Set up the array to pass to the modification routines. */
-	/* FIXME: no need to malloc */
-	mods = g_malloc0(sizeof(LDAPMod *) * 3);
 	mods[0] = &mod[0];
 	mods[1] = &mod[1];
 	mods[2] = NULL;
@@ -1679,30 +1659,27 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	}
 
 	g_free(oldpassword);
-	g_free(mods);
 
 	return ret;
 }
 
 /* Check if an account is locked. */
 static gboolean
-lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
-		  struct lu_ent *ent, const char *namingAttr,
-		  const char *configKey, const char *def,
-		  struct lu_error **error)
+lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
+		  const char *namingAttr, const char *configKey,
+		  const char *def, struct lu_error **error)
 {
-	const char *dn;
+	const char *dn, *mapped_password;
 	GValueArray *name;
 	GValue *value;
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
-	char *attributes[] = { LU_USERPASSWORD, NULL };
+	char *attributes[] = { NULL, NULL };
 	char **values = NULL;
 	LDAPMessage *entry = NULL, *messages = NULL;
 	int i;
 	gboolean locked = FALSE;
 
-	(void)type; /* FIXME: remove? */
 	/* Get the name of the user or group. */
 	name = lu_ent_get(ent, namingAttr);
 	if (name == NULL) {
@@ -1714,11 +1691,9 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
 	name_string = value_as_string(value);
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
+			       def);
+	g_free(name_string);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _
@@ -1729,10 +1704,14 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 	g_print("Looking up `%s'.\n", dn);
 #endif
 
+	mapped_password = map_to_ldap(module->scache, ent->type == lu_user
+				      ? LU_USERPASSWORD : LU_GROUPPASSWORD);
+
 	/* Read the entry data. */
-	if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE,
-			  /* FIXME: POSIXACCOUNT for groups? */
-			  "("OBJECTCLASS"="POSIXACCOUNT")", attributes,
+	attributes[0] = (char *)mapped_password;
+	if (ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, ent->type == lu_user
+			  ? "("OBJECTCLASS"="POSIXACCOUNT")"
+			  : "("OBJECTCLASS"="POSIXGROUP")", attributes,
 			  FALSE, &messages) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 	}
@@ -1742,24 +1721,22 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 		return FALSE;
 	}
 
-	/* FIXME: s/LU_USERPASSWORD/LU_GROUPPASSWORD for groups */
 	/* Read the values for the attribute we want to change. */
-	values = ldap_get_values(ctx->ldap, entry,
-				 map_to_ldap(ent->cache, LU_USERPASSWORD));
+	values = ldap_get_values(ctx->ldap, entry, mapped_password);
 	if (values == NULL) {
 		ldap_msgfree(messages);
 #ifdef DEBUG
-		g_print("No `%s' attribute found for entry.", LU_USERPASSWORD);
+		g_print("No `%s' attribute found for entry.", mapped_password);
 #endif
 		lu_error_new(error, lu_error_generic,
-			     _("no `%s' attribute found"), LU_USERPASSWORD);
+			     _("no `%s' attribute found"), mapped_password);
 		return FALSE;
 	}
 	/* Check any of the possibly-multiple passwords. */
 	locked = FALSE;
 	for (i = 0; values[i] != NULL; i++) {
 #ifdef DEBUG
-		g_print("Got `%s' = `%s'.\n", LU_USERPASSWORD, values[i]);
+		g_print("Got `%s' = `%s'.\n", mapped_password, values[i]);
 #endif
 		if (strncmp(values[i], LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
 			locked = (values[i][strlen(LU_CRYPTED)] == LOCKCHAR);
@@ -1781,21 +1758,20 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		struct lu_ent *ent, const char *configKey, const char *def,
 		const char *password, struct lu_error **error)
 {
-	const char *dn;
+	const char *dn, *mapped_password;
 	GValueArray *name;
 	GValue *value;
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
-	/* FIXME: LU_GROUPPASSWORD for groups */
-	char *attributes[] = { LU_USERPASSWORD, NULL };
+	char *attributes[] = { NULL, NULL };
 	char **values, *addvalues[] = { NULL, NULL }, *rmvalues[] = {
 	NULL, NULL};
-	char *tmp = NULL;
-	const char *crypted = NULL, *previous = NULL;
+	char *tmp = NULL, *previous;
 	int i;
+	size_t j;
 	LDAPMessage *entry = NULL, *messages = NULL;
 	LDAPMod addmod, rmmod;
-	LDAPMod *mods[] = { &addmod, &rmmod, NULL };
+	LDAPMod *mods[3];
 	LDAPControl *server = NULL, *client = NULL;
 	char filter[LINE_MAX];
 
@@ -1813,49 +1789,50 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	/* Convert the name to a distinguished name. */
 	value = g_value_array_get_nth(name, 0);
 	name_string = value_as_string(value);
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string,
-			       ent->type == lu_user ?
-			       LU_LDAP_USER | LU_LDAP_SHADOW :
-			       LU_LDAP_GROUP,
-			       configKey, def);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, configKey,
+			       def);
 	if (dn == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _
-			     ("error mapping name to LDAP distinguished name"));
+			     _("error mapping name to LDAP distinguished "
+			       "name"));
+		g_free(name_string);
 		return FALSE;
 	}
 #ifdef DEBUG
 	g_print("Setting password for `%s'.\n", dn);
 #endif
 
-	snprintf(filter, sizeof(filter), "(%s=%s)", namingAttr, name_string);
+	snprintf(filter, sizeof(filter), "(%s=%s)",
+		 map_to_ldap(module->scache, namingAttr), name_string);
+	g_free(name_string);
+	mapped_password = map_to_ldap(module->scache, ent->type == lu_user
+				      ? LU_USERPASSWORD : LU_GROUPPASSWORD);
+	
+	previous = NULL;
+	values = NULL;
+	attributes[0] = (char *)mapped_password;
 	if ((i = ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filter,
 			       attributes, FALSE,
 			       &messages)) == LDAP_SUCCESS) {
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if (entry != NULL) {
-			/* FIXME: map_to_ldap()... */
 			values = ldap_get_values(ctx->ldap, entry,
-						 LU_USERPASSWORD);
+						 mapped_password);
 			if (values) {
-				for (i = 0; values[i] != NULL; i++) {
+				for (j = 0; values[j] != NULL; j++) {
 #ifdef DEBUG
 					g_print("Got `%s' = `%s'.\n",
-						LU_USERPASSWORD,
-						values[i]);
+						mapped_password, values[j]);
 #endif
 					if (strncmp
-					    (values[i], LU_CRYPTED,
+					    (values[j], LU_CRYPTED,
 					     strlen(LU_CRYPTED)) == 0) {
 #ifdef DEBUG
 						g_print
 						    ("Previous entry was `%s'.\n",
-						     values[i]);
+						     values[j]);
 #endif
-						/* FIXME: does previous survive
-						   after
-						   ldap_value_free(values)? */
-						previous = values[i];
+						previous = g_strdup(values[j]);
 						break;
 					}
 				}
@@ -1873,38 +1850,46 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	}
 
 	if (strncmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
-		crypted = password;
+		addvalues[0] = (char *)password;
 	} else {
+		const char *crypted;
+
 		crypted =
-		    lu_make_crypted(password,
-				    previous ? (previous +
-						strlen(LU_CRYPTED)) :
+		    lu_make_crypted(password, previous
+				    ? (previous + strlen(LU_CRYPTED)) :
 				    lu_common_default_salt_specifier(module));
 		if (crypted == NULL) {
 			/* FIXME: STRING_FREEZE */
 			lu_error_new(error, lu_error_generic,
 				     "error encrypting password");
+			g_free(previous);
 			return FALSE;
 		}
 		tmp = g_strconcat(LU_CRYPTED, crypted, NULL);
 		addvalues[0] = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
-		if (previous) {
-			rmvalues[0] = (char *) previous;
-		}
 	}
 
+	j = 0;
+	if (values != NULL) {
+		if (previous)
+			rmvalues[0] = previous;
+		/* else deletes all values */
+		
+		rmmod.mod_op = LDAP_MOD_DELETE;
+		rmmod.mod_type = (char *)mapped_password;
+		rmmod.mod_values = rmvalues;
+		mods[j++] = &rmmod;
+	}
 	addmod.mod_op = LDAP_MOD_ADD;
-	addmod.mod_type = LU_USERPASSWORD; /* FIXME: map_to_ldap () */
+	addmod.mod_type = (char *)mapped_password;
 	addmod.mod_values = addvalues;
+	mods[j++] = &addmod;
+	mods[j] = NULL;
 
-	rmmod.mod_op = LDAP_MOD_DELETE;
-	rmmod.mod_type = LU_USERPASSWORD; /* FIXME: map_to_ldap () */
-	rmmod.mod_values = rmvalues;
-
-	if ((i =
-	     ldap_modify_ext_s(ctx->ldap, dn, mods, &server,
-			       &client)) != LDAP_SUCCESS) {
+	i = ldap_modify_ext_s(ctx->ldap, dn, mods, &server, &client);
+	g_free(previous);
+	if (i != LDAP_SUCCESS) {
 		lu_error_new(error, lu_error_generic,
 			     _
 			     ("error setting password in LDAP directory for %s: %s"),
@@ -1919,20 +1904,18 @@ static gboolean
 lu_ldap_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
-	(void)module;
-	(void)ent;
-	(void)error;
-	return FALSE;
+	LU_ERROR_CHECK(error);
+	return lu_ldap_setpass(module, LU_USERNAME, ent, "userBranch",
+			       USERBRANCH, LU_CRYPTED, error);
 }
 
 static gboolean
 lu_ldap_group_removepass(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
-	(void)module;
-	(void)ent;
-	(void)error;
-	return FALSE;
+	LU_ERROR_CHECK(error);
+	return lu_ldap_setpass(module, LU_GROUPNAME, ent, "groupBranch",
+			       GROUPBRANCH, LU_CRYPTED, error);
 }
 
 static GValueArray *
@@ -2043,7 +2026,7 @@ lu_ldap_user_add(struct lu_module *module, struct lu_ent *ent,
 {
 	LU_ERROR_CHECK(error);
 	return lu_ldap_set(module, lu_user, 1, ent, "userBranch", USERBRANCH,
-			   lu_ldap_user_attributes, error);
+			   error);
 }
 
 /* Modify a user record in the directory. */
@@ -2053,7 +2036,7 @@ lu_ldap_user_mod(struct lu_module *module, struct lu_ent *ent,
 {
 	LU_ERROR_CHECK(error);
 	return lu_ldap_set(module, lu_user, 0, ent, "userBranch", USERBRANCH,
-			   lu_ldap_user_attributes, error);
+			   error);
 }
 
 /* Remove a user from the directory. */
@@ -2092,8 +2075,8 @@ lu_ldap_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_is_locked(module, lu_user, ent, LU_USERNAME,
-				 "userBranch", USERBRANCH, error);
+	return lu_ldap_is_locked(module, ent, LU_USERNAME, "userBranch",
+				 USERBRANCH, error);
 }
 
 /* Set a user's password in the directory. */
@@ -2123,7 +2106,7 @@ lu_ldap_group_add(struct lu_module *module, struct lu_ent *ent,
 {
 	LU_ERROR_CHECK(error);
 	return lu_ldap_set(module, lu_group, 1, ent, "groupBranch",
-			   GROUPBRANCH, lu_ldap_group_attributes, error);
+			   GROUPBRANCH, error);
 }
 
 /* Modify a group entry in the directory. */
@@ -2133,7 +2116,7 @@ lu_ldap_group_mod(struct lu_module *module, struct lu_ent *ent,
 {
 	LU_ERROR_CHECK(error);
 	return lu_ldap_set(module, lu_group, 0, ent, "groupBranch",
-			   GROUPBRANCH, lu_ldap_group_attributes, error);
+			   GROUPBRANCH, error);
 }
 
 /* Remove a group entry from the directory. */
@@ -2172,8 +2155,8 @@ lu_ldap_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_is_locked(module, lu_group, ent, LU_GROUPNAME,
-				 "groupBranch", GROUPBRANCH, error);
+	return lu_ldap_is_locked(module, ent, LU_GROUPNAME, "groupBranch",
+				 GROUPBRANCH, error);
 }
 
 /* Set a group's password in the directory. */
@@ -2354,15 +2337,12 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 		gid = -1;
 		if (G_VALUE_HOLDS_STRING(value)) {
 			gid = strtol(g_value_get_string(value), &p, 0);
-			if (p != 0) {
+			if (*p != 0)
 				continue;
-			}
-		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
+		} else if (G_VALUE_HOLDS_LONG(value))
 			gid = g_value_get_long(value);
-		} else {
+		else
 			g_assert_not_reached();
-		}
 		ent = lu_ent_new();
 		if (lu_group_lookup_id(module->lu_context, gid,
 				       ent, error)) {
@@ -2373,7 +2353,6 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 				value = g_value_array_get_nth(values, j);
 				g_value_array_append(primaries, value);
 			}
-			g_value_array_free(values);
 		}
 		lu_ent_free(ent);
 	}
@@ -2435,6 +2414,8 @@ lu_ldap_close_module(struct lu_module *module)
 			ctx->prompts[i].free_value(ctx->prompts[i].value);
 		}
 	}
+	g_free(ctx->mapped_user_attributes);
+	g_free(ctx->mapped_group_attributes);
 	g_free(ctx);
 	memset(module, 0, sizeof(struct lu_module));
 	g_free(module);
@@ -2574,23 +2555,28 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	}
 	ctx->ldap = ldap;
 
-	/* Initialize the attribute lists with the right names. */
-	/* FIXME: doesn't work if module is loaded more than once (cache is
-	   freed) */
+	ctx->mapped_user_attributes
+		= g_malloc0(sizeof(*ctx->mapped_user_attributes)
+			    * G_N_ELEMENTS(lu_ldap_user_attributes));
 	for (i = 0; i < G_N_ELEMENTS(lu_ldap_user_attributes); i++) {
-		if (lu_ldap_user_attributes[i] != NULL) {
-			lu_ldap_user_attributes[i] =
+		if (lu_ldap_user_attributes[i] != NULL)
+			ctx->mapped_user_attributes[i] = (char *)
 				map_to_ldap(ret->scache,
 					    lu_ldap_user_attributes[i]);
-								 
-		}
+		else
+			ctx->mapped_user_attributes[i] = NULL;
 	}
+			
+	ctx->mapped_group_attributes
+		= g_malloc0(sizeof(*ctx->mapped_group_attributes)
+			    * G_N_ELEMENTS(lu_ldap_group_attributes));
 	for (i = 0; i < G_N_ELEMENTS(lu_ldap_group_attributes); i++) {
-		if (lu_ldap_group_attributes[i] != NULL) {
-			lu_ldap_group_attributes[i] =
+		if (lu_ldap_group_attributes[i] != NULL)
+			ctx->mapped_group_attributes[i] = (char *)
 				map_to_ldap(ret->scache,
 					    lu_ldap_group_attributes[i]);
-		}
+		else
+			ctx->mapped_group_attributes[i] = NULL;
 	}
 
 	/* Set the method pointers. */

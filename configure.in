@@ -1,8 +1,10 @@
-AC_INIT(configure.in)
+AC_INIT([libuser], [0.51.12])
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([libuser], [0.51.12])
+AC_CONFIG_SRCDIR([lib/user.c])
+AM_INIT_AUTOMAKE([subdir-objects -Wall])
 
 AC_PROG_CC
+AM_PROG_CC_C_O
 AC_ISC_POSIX
 AC_PROG_LN_S
 AC_PATH_PROG(MAKE,make)
@@ -12,7 +14,8 @@ AC_PROG_AWK
 AM_PROG_LIBTOOL
 
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
-PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
+PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gobject-2.0])
+PKG_CHECK_MODULES(GMODULE,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
 ALL_LINGUAS="ar bg bn ca cs cy da de es fr hi hr hu is it ja ko mk ms nb nl no pa pl pt pt_BR ru sk sl sv ta tr uk vi zh_CN zh_TW"
@@ -58,8 +61,8 @@ fi
 POPT_LIBS="$LIBS"
 LIBS="$LIBSAVE"
 
-MODULES="$MODULES ${PACKAGE}_files.so"
-MODULES="$MODULES ${PACKAGE}_shadow.so"
+MODULES="$MODULES modules/${PACKAGE}_files.la"
+MODULES="$MODULES modules/${PACKAGE}_shadow.la"
 
 AC_ARG_WITH([ldap],
 	    AS_HELP_STRING([--with-ldap=DIR],
@@ -98,7 +101,7 @@ if test x$ldap != xno ; then
 	AC_CHECK_FUNC(ldap_get_values,[
 	AC_CHECK_FUNC(ldap_modify_ext_s,[
 	AC_CHECK_FUNC(ldap_delete_ext_s,[
-	MODULES="$MODULES ${PACKAGE}_ldap.so"])])])])])])])
+	MODULES="$MODULES modules/${PACKAGE}_ldap.la"])])])])])])])
 	LIBS="$LIBSAVE"
 fi
 
@@ -128,7 +131,7 @@ if test x$sasl != xno ; then
 		AC_CHECK_LIB(sasl,sasl_setpass,[
 			     SASL_LIBS="-lsasl $SASL_LIBS"
 			     LIBS="-lsasl $LIBS"
-			     MODULES="$MODULES ${PACKAGE}_sasldb.so"]
+			     MODULES="$MODULES modules/${PACKAGE}_sasldb.la"]
 			     ,,[$LDFLAGS $LIBS])])
 	AC_CHECK_FUNCS(sasl_checkpass,,[
 	AC_CHECK_LIB(sasl,sasl_checkpass,[
@@ -254,18 +257,6 @@ scdir=`eval echo $sysconfdir`
 AC_SUBST(pkglibdir)
 AC_SUBST(scdir)
 
-AC_CONFIG_FILES([
-Makefile
-po/Makefile.in
-lib/Makefile
-modules/Makefile
-python/Makefile
-samples/Makefile
-apps/Makefile
-docs/Makefile
-docs/sgml/Makefile
-docs/reference/Makefile
-libuser.conf
-libuser.pc
-])
+AC_CONFIG_FILES([Makefile po/Makefile.in docs/Makefile docs/reference/Makefile
+libuser.conf libuser.pc])
 AC_OUTPUT

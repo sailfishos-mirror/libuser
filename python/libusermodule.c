@@ -19,7 +19,7 @@
 
 #include <Python.h>
 #ifdef HAVE_CONFIG_H
-#include "../config.h"
+#include "config.h"
 #endif
 #include <pwd.h>
 #include <grp.h>
@@ -101,7 +101,7 @@ initlibuser(void)
 	PyDict_SetItemString(dict, "GROUPNAME",
 			     PyString_FromString(LU_GROUPNAME));
 	PyDict_SetItemString(dict, "GROUPPASSWORD",
-			     PyString_FromString(LU_GROUPNAME));
+			     PyString_FromString(LU_GROUPPASSWORD));
 	PyDict_SetItemString(dict, "ADMINISTRATORNAME",
 			     PyString_FromString(LU_ADMINISTRATORNAME));
 	PyDict_SetItemString(dict, "MEMBERNAME",

@@ -1,3 +1,12 @@
+0.52
+* Usable LDAP backend
+* Miscellaneous bug fixes
+
+0.51.12
+* Don't claim success and exception at the same time (#133479)
+* LDAP fixes, second round
+* Various other bug fixes
+
 0.51.11
 * Allow documented optional arguments in Python
   ADMIN.{addUser,modifyUser,deleteUser} (#119812)

@@ -19,7 +19,7 @@
 
 #include <Python.h>
 #ifdef HAVE_CONFIG_H
-#include "../config.h"
+#include "config.h"
 #endif
 #include <grp.h>
 #include <pwd.h>
@@ -921,8 +921,7 @@ static PyObject *
 libuser_admin_removepass_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_wrap_boolean(self, args, kwargs,
-					  lu_user_removepass);
+	return libuser_admin_wrap(self, args, kwargs, lu_user_removepass);
 }
 
 /* Remove a group's password.  Trivial wrapper to make sure the right function
@@ -931,8 +930,7 @@ static PyObject *
 libuser_admin_removepass_group(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	DEBUG_CALL;
-	return libuser_admin_wrap_boolean(self, args, kwargs,
-					  lu_group_removepass);
+	return libuser_admin_wrap(self, args, kwargs, lu_group_removepass);
 }
 
 /* Set a user's password.  Trivial wrapper to make sure the right setpass

@@ -1,3 +1,148 @@
+2004-09-27  Miloslav Trmac  <mitr@redhat.com>
+
+	* Makefile.am: Link exactly with needed libraries.
+
+	* docs/sgml/Makefile.am: Merge with docs/Makefile.am.
+
+	* Makefile.am (CVSTAG): Define portably.
+
+	* configure.in: Use new-style AC_INIT and AM_INIT_AUTOMAKE.
+	Set automake options `subdir-objects' and `-Wall'.
+
+	* modules/ldap.c (lu_ldap_lookup): Silence gcc warning.
+
+	* apps/Makefile.am, lib/Makefile.am, modules/Makefile.am,
+	samples/Makefile.am: Merge with top-level Makefile.am.
+	* apps/lchage.c, apps/lchfn.c, apps/lgroupadd.c, apps/lgroupdel.c,
+	apps/lgroupmod.c, apps/lid.c, apps/lnewusers.c, apps/lpasswd.c,
+	apps/luseradd.c, apps/luserdel.c, apps/lusermod.c, samples/enum.c,
+	python/admin.c, python/ent.c, python/misc.c, python/libusermodule.c,
+	python/quotamodule.c, samples/field.c, samples/homedir.c,
+	samples/lookup.c, samples/quotaq.c, samples/prompt.c,
+	samples/testuser.c: Change path of config.h.
+
+	* NEWS: Update.
+
+	* tests/ldap_test.py (Tests.testUserDel, Tests.testUserLock1)
+	(Tests.testUserLock2, Tests.testUserUnlock1)
+	(Tests.testUserUnlock2, Tests.testUserIslocked1)
+	(Tests.testUserIslocked2, Tests.testUserSetpass1)
+	(Tests.testUserSetpass2, Tests.testUserSetpass3)
+	(Tests.testUserRemovepass1, Tests.testUserRemovepass2)
+	(Tests.testUserRemovepass3, Tests.testUsersEnumerate)
+	(Tests.testUsersEnumerateByGroup1)
+	(Tests.testUsersEnumerateByGroup2)
+	(Tests.testUsersEnumerateByGroup3, Tests.testUsersEnumerateFull)
+	(Tests.testGroupLookupName, Tests.testGroupLookupId)
+	(Tests.testGroupAdd1, Tests.testGroupAdd2, Tests.testGroupMod1)
+	(Tests.testGroupMod2, Tests.testGroupDel, Tests.testGroupLock1)
+	(Tests.testGroupLock2, Tests.testGroupUnlock1)
+	(Tests.testGroupUnlock2, Tests.testGroupIsLocked1)
+	(Tests.testGroupIsLocked2, Tests.testGroupSetpass1)
+	(Tests.testGroupSetpass2, Tests.testGroupSetpass3)
+	(Tests.testGroupRemovepass1, Tests.testGroupRemovepass2)
+	(Tests.testGroupRemovepass3, Tests.testGroupsEnumerate)
+	(Tests.testGroupsEnumerateByUser1)
+	(Tests.testGroupsEnumerateByUser2)
+	(Tests.testGroupsEnumerateByUser3, Tests.testGroupsEnumerateFull):
+	New tests.
+
+	* tests/ldap_test.py (Tests.testUserAdd2, Tests.testUserMod2): Update
+	for final password entity model.
+
+	* modules/ldap.c (lu_ldap_is_locked): Remove unneeded parameter `type'.
+	All callers changed.
+
+	* tests/ldap_test: Clean up after running the tests.
+
+	* tests/ldap_test.py: Workaround openssl's inability to handle
+	repeated library loading and unloading.
+
+	* modules/ldap.c (lu_ldap_groups_enumerate_by_user): Don't consider
+	all string representations of numbers invalid.
+	(lu_ldap_groups_enumerate_by_user): Don't free data owned by the
+	entity.
+
+	* lib/user.c (run_single): Don't run user_removepass when
+	group_removepass is wanted.
+
+	* modules/ldap.c (lu_ldap_group_removepass): Implement.
+
+	* modules/ldap.c (lu_ldap_is_locked): Use LU_GROUPPASSWORD and
+	POSIXGROUP for groups.
+
+	* modules/ldap.c (lu_ldap_setpass): Don't attempt to remove the
+	attribute if it does not exist.
+	(lu_ldap_setpass): Use LU_GROUPPASSWORD for groups.
+
+	* modules/ldap.c (lu_ldap_handle_lock): Use LU_GROUPPASSWORD for
+	groups.
+
+	* modules/ldap.c (ldap_attribute_map): Remove LU_SHADOWPASSWORD.
+	(get_ent_adds): Skip LU_SHADOWPASSWORD.  It should be completely
+	ignored now.
+
+	* python/libusermodule.c (initlibuser): Fix libuser.GROUPPASSWORD.
+
+2004-09-26  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/user.c (lu_end): Fix memory leak.
+
+	* modules/ldap.c (lu_ldap_ent_to_dn): Remove parameter `applicability'.
+	All callers changed.
+
+	* modules/ldap.c (lu_ldap_fudge_objectclasses): Use the mod_values
+	macro.
+	(ldap_attribute_map): Make members point to constant strings.
+	Casts added to users where needed.
+	(lu_ldap_user_attributes, lu_ldap_group_attributes): Make it a constant
+	array of constant strings.
+	(libuser_ldap_init): Store converted pointers to data that will be
+	eventually freed as part of the context.
+	(lu_ldap_lookup): Use mapped_user_attributes, mapped_group_attributes.
+	(map_from_ldap): Remove.
+	(lu_ldap_close_module): Free mapped_user_attributes, 
+	mapped_group_attributes.
+
+2004-09-25  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (lu_ldap_needed_objectclasses): s/User/Entity/g
+	(lu_ldap_needed_objectclasses): Fix debugging printout.
+	(lu_ldap_needed_objectclasses): Ignore attributes not applicable to
+	given entity type.
+
+	* modules/ldap.c (ldap_attribute_map): Remove mapping for 
+	LU_ADMINISTRATORNAME.
+	(SHADOWGROUP): Remove.
+
+	* python/admin.c (libuser_admin_removepass_user) 
+	(libuser_admin_removepass_group): Throw exception on error.
+
+	* modules/ldap.c (lu_ldap_user_removepass): Implement.
+
+	* modules/ldap.c (lu_ldap_is_locked): Fix memory leak.
+	(lu_ldap_is_locked): Map libuser attribute names to LDAP names.
+
+	* modules/ldap.c (lu_ldap_setpass): Initialize addvalues[0] and
+	rmvalues[0] even if the original password is already encrypted.
+	(lu_ldap_setpass): Map libuser attribute names to LDAP names.
+	(lu_ldap_setpass): Remove (maybe all) values before adding new values.
+	(lu_ldap_setpass): Fix memory leak.
+
+	* modules/ldap.c (lu_ldap_handle_lock): Don't skip LU_CRYPTED twice.
+	(lu_ldap_handle_lock): Fix memory leaks.
+	(lu_ldap_handle_lock): Don't remove and add the same value.
+	(lu_ldap_handle_lock): Avoid unnecessary g_malloc0()/g_free() pair.
+	(lu_ldap_handle_lock): Don't drop LU_CRYPTED when unlocking unlocked
+	account.
+	(lu_ldap_handle_lock): Don't lock locked accounts again.
+
+	* modules/ldap.c (lu_ldap_user_attributes): Drop LU_SHADOWPASSWORD.
+	(get_ent_adds): Drop LU_SHADOWPASSWORD, not LU_USERPASSWORD.
+
+	* modules/ldap.c (lu_ldap_set): Remove parameter `attributes'.  All
+	callers changed.
+
 2004-09-24  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.51.12.

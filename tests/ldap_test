@@ -23,7 +23,7 @@ srcdir=$srcdir/tests
 
 workdir=$(pwd)/test_ldap
 
-#DEBUG trap 'status=$?; rm -rf "$workdir"; exit $status' 0
+trap 'status=$?; rm -rf "$workdir"; exit $status' 0
 trap '(exit 1); exit 1' 1 2 13 15
 
 rm -rf "$workdir"
@@ -53,6 +53,7 @@ sed "s|@WORKDIR@|$workdir|g" < "$srcdir"/slapd.conf.in > "$workdir"/slapd.conf
     -f "$workdir"/slapd.conf &
 sleep 1 # Time for slapd to initialize
 slapd_pid=$(cat "$workdir"/slapd.pid)
+trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
 ldapadd -h 127.0.0.1 -p 3890 -f "$srcdir/ldap_skel.ldif" -x \
     -D cn=Manager,dc=libuser -w password
 
@@ -70,7 +71,3 @@ export PYTHONPATH
 
 # Note that "$srcdir"/ldaprc is "./ldaprc" when accessing LDAP
 (cd "$srcdir"; python ldap_test.py)
-
-
-#DEBUG trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
-#trap 'status=$?; kill $slapd_pid; exit $status' 0
