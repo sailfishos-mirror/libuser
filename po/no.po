@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2001 Red Hat, Inc.
+# Trond Eivind Glomsrød <teg@redhat.com>, 2001.
 #
 msgid ""
 msgstr ""
@@ -443,15 +443,15 @@ msgstr ""
 #: modules/ldap.c:632 modules/ldap.c:644
 #, c-format
 msgid "object has no %s attribute"
-msgstr ""
+msgstr "objektet har ikke attributt %s"
 
 #: modules/ldap.c:862
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "Navn på LDAP-tjener"
 
 #: modules/ldap.c:866
 msgid "LDAP Base DN"
-msgstr ""
+msgstr "LDAP basis DN"
 
 #: modules/ldap.c:870
 msgid "LDAP Bind DN"
@@ -463,7 +463,7 @@ msgstr ""
 
 #: modules/ldap.c:879
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL-bruker"
 
 #: modules/ldap.c:883
 msgid "LDAP SASL Authorization User"
@@ -491,7 +491,7 @@ msgstr ""
 #: samples/lookup.c:82
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "Leter for bruker ved navn %s.\n"
 
 #: samples/lookup.c:108
 msgid "Entry not found.\n"
