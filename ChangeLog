@@ -1,5 +1,9 @@
 2004-10-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* python/misc.c (libuser_prompt_destroy): Fix memory leak.
+	(libuser_admin_python_prompter): Properly copy struct libuser_prompt
+	to avoid double free().
+
 	* python/admin.c (libuser_admin_enumerate_users) 
 	(libuser_admin_enumerate_groups) 
 	(libuser_admin_enumerate_users_by_group) 

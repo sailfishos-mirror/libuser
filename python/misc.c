@@ -56,8 +56,16 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 		list = PyList_New(0);
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
+
 			prompt = libuser_prompt_new();
-			prompt->prompt = prompts[i];
+			prompt->prompt.key = g_strdup(prompts[i].key);
+			prompt->prompt.prompt = g_strdup(prompts[i].prompt);
+			prompt->prompt.domain = g_strdup(prompts[i].domain);
+			prompt->prompt.visible = prompts[i].visible;
+			prompt->prompt.default_value
+			  = g_strdup(prompts[i].default_value);
+			prompt->prompt.value = g_strdup(prompts[i].value);
+			prompt->prompt.free_value = g_free;
 			PyList_Append(list, (PyObject *) prompt);
 			Py_DECREF(prompt);
 		}
@@ -88,7 +96,8 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			prompt =
 			    (struct libuser_prompt *) PyList_GetItem(list,
 								     i);
-			prompts[i] = prompt->prompt;
+			prompts[i].value = g_strdup(prompt->prompt.value);
+			prompts[i].free_value = g_free;
 		}
 		Py_DECREF(tuple);
 		Py_DECREF(ret);
@@ -149,6 +158,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		    obj->prompt.default_value ? g_strdup(obj->prompt.default_value) :
 		    NULL;
 		prompts[i].visible = obj->prompt.visible;
+		/* FIXME: free the values sometime? */
 	}
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Prompter function promptConsole is at <%p>.\n",
@@ -212,12 +222,10 @@ libuser_prompt_destroy(struct libuser_prompt *self)
 	DEBUG_ENTRY;
 	if (self->prompt.value && self->prompt.free_value)
 		self->prompt.free_value(self->prompt.value);
-	if (self->prompt.key)
-		g_free((char *) self->prompt.key);
-	if (self->prompt.prompt)
-		g_free((char *) self->prompt.prompt);
-	if (self->prompt.default_value)
-		g_free((char *) self->prompt.default_value);
+	g_free((void *)self->prompt.key);
+	g_free((void *)self->prompt.prompt);
+	g_free((void *)self->prompt.domain);
+	g_free((void *)self->prompt.default_value);
 	memset(&self->prompt, 0, sizeof(self->prompt));
 	PyMem_DEL(self);
 	DEBUG_EXIT;
