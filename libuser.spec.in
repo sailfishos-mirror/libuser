@@ -79,6 +79,10 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Mon Aug 27 2001 Nalin Dahyabhai <nalin@redhat.com>
+- quotaq: fix argument order when reading quota information
+- luseradd: never create home directories for system accounts
+
 * Tue Aug 21 2001 Nalin Dahyabhai <nalin@redhat.com>
 - add da translation files
 - update translations

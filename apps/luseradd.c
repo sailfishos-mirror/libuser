@@ -222,7 +222,7 @@ main(int argc, const char **argv)
 	}
 	lu_hup_nscd();
 
-	if(!dont_create_home) {
+	if(!dont_create_home || system_account) {
 		char *uid_string = NULL, *gid_string = NULL;
 
 		values = lu_ent_get(ent, LU_UIDNUMBER);

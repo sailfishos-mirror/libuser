@@ -23,6 +23,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <grp.h>
+#include <mntent.h>
+#include <paths.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +39,8 @@ do_quota_stuff(const char *ent, const char *special,
 	int i;
 	struct passwd *pwd;
 	struct group *grp;
-	int32_t inode_soft, inode_hard, inode_usage, inode_grace,
-		block_soft, block_hard, block_usage, block_grace;
+	int32_t inode_usage, inode_soft, inode_hard, inode_grace,
+		block_usage, block_soft, block_hard, block_grace;
 
 	if(is_group) {
 		grp = getgrnam(ent);
@@ -47,10 +49,10 @@ do_quota_stuff(const char *ent, const char *special,
 			return 2;
 		}
 		if(quota_get_group(grp->gr_gid, special,
-				   &inode_soft, &inode_hard,
-				   &inode_usage, &inode_grace,
-				   &block_soft, &block_hard,
-				   &block_usage, &block_grace)) {
+				   &inode_usage, &inode_soft,
+				   &inode_hard, &inode_grace,
+				   &block_usage, &block_soft,
+				   &block_hard, &block_grace)) {
 			fprintf(stderr, "error querying group quota for %s: "
 				"%s\n", special, strerror(errno));
 			return 3;
@@ -87,10 +89,10 @@ do_quota_stuff(const char *ent, const char *special,
 			return 2;
 		}
 		if(quota_get_user(pwd->pw_uid, special,
-				  &inode_soft, &inode_hard,
-				  &inode_usage, &inode_grace,
-				  &block_soft, &block_hard,
-				  &block_usage, &block_grace)) {
+				  &inode_usage, &inode_soft,
+				  &inode_hard, &inode_grace,
+				  &block_usage, &block_soft,
+				  &block_hard, &block_grace)) {
 			fprintf(stderr, "error querying user quota for %s: "
 				"%s\n", special, strerror(errno));
 			return 3;
@@ -124,6 +126,34 @@ do_quota_stuff(const char *ent, const char *special,
 	return 0;
 }
 
+static const char *
+directory_to_special(const char *directory)
+{
+	FILE *fp;
+	struct mntent *mnt;
+	const char *ret = NULL;
+
+	fp = setmntent(_PATH_MOUNTED, "r");
+	while((mnt = getmntent(fp)) != NULL) {
+		if(ret == NULL) {
+			if(strcmp(mnt->mnt_dir, directory) == 0) {
+				ret = strdup(mnt->mnt_fsname);
+			}
+		}
+	}
+	endmntent(fp);
+	fp = setmntent(_PATH_MNTTAB, "r");
+	while((mnt = getmntent(fp)) != NULL) {
+		if(ret == NULL) {
+			if(strcmp(mnt->mnt_dir, directory) == 0) {
+				ret = strdup(mnt->mnt_fsname);
+			}
+		}
+	}
+	endmntent(fp);
+	return ret;
+}
+
 int
 main(int argc, char **argv)
 {
@@ -133,7 +163,7 @@ main(int argc, char **argv)
 	const char *special, *ent; 
 	char **specials;
 	if(argc < 2) {
-		printf("usage: %s [-g] <user|group> [<special> "
+		printf("usage: %s <user|-g group> [<special> "
 		       "[<inode_soft> <inode_hard> <inode_grace>"
 		       " <block_soft> <block_hard> <block_grace>]]\n",
 		       strchr(argv[0], '/') ?
@@ -155,6 +185,14 @@ main(int argc, char **argv)
 	ent = argv[optind];
 	special = argv[optind + 1];
 
+	if(special != NULL) {
+		struct stat st;
+		if(lstat(special, &st) == 0) {
+			if(S_ISDIR(st.st_mode)) {
+				special = directory_to_special(special);
+			}
+		}
+	}
 	if(special != NULL) {
 		return do_quota_stuff(ent, special, is_group,
 				      &argv[optind + 2]);

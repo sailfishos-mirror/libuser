@@ -78,10 +78,11 @@ quota_get_specials(const char *flag)
 /**
  * quota_get_specials_user:
  *
- * Queries the list of mounted filesystems and returns an array of strings containing the names of the devices which can
- * enforce user quotas.
+ * Queries the list of mounted filesystems and returns an array of strings
+ * containing the names of the devices which can enforce user quotas.
  *
- * @return A list of values which should be freed by calling quota_free_specials().
+ * @return A list of values which should be freed by calling
+ * quota_free_specials().
  */
 char **
 quota_get_specials_user()
@@ -92,10 +93,11 @@ quota_get_specials_user()
 /**
  * quota_get_specials_group:
  *
- * Queries the list of mounted filesystems and returns an array of strings containing the names of the devices which can
- * enforce group quotas.
+ * Queries the list of mounted filesystems and returns an array of strings
+ * containing the names of the devices which can enforce group quotas.
  *
- * @return a list of values which should be freed by calling quota_free_specials().
+ * @return a list of values which should be freed by calling
+ * quota_free_specials().
  */
 char **
 quota_get_specials_group()
@@ -107,8 +109,8 @@ quota_get_specials_group()
  * quota_free_specials:
  * @param specials A list of specials which must be destroyed.
  *
- * This function frees an array of strings returned by a previous call to quota_get_specials_user() or
- * quota_get_specials_group().
+ * This function frees an array of strings returned by a previous call to
+ * quota_get_specials_user() or quota_get_specials_group().
  *
  * @return nothing.
  */
