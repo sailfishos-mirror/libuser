@@ -89,9 +89,6 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Mon Feb 24 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.8-1
-- apputils: refuse to remove a home directory tree if it's a symlink
-
 * Wed Feb 19 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.7-1
 - ldap: set error codes correctly when we encounter failures initializing
 - don't double-close modules which fail initialization

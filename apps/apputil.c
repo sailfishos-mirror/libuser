@@ -198,16 +198,6 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 
 	LU_ERROR_CHECK(error);
 
-	/* If the path itself is a symlink, bail. */
-	if (lstat(directory, &st) != -1) {
-		if (!S_ISDIR(st.st_mode)) {
-			lu_error_new(error, lu_error_generic,
-				     _("Error removing `%s': %s"), directory,
-				     strerror(ENOTDIR));
-			return FALSE;
-		}
-	}
-
 	/* Open the directory.  This catches the case that it's already gone. */
 	dir = opendir(directory);
 	if (dir == NULL) {
