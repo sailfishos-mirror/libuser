@@ -310,9 +310,15 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user, const cha
 			}
 		}
 
-		g_strfreev(authlist);
-		g_strfreev(infolist);
-		g_strfreev(netlist);
+		if(authlist) {
+			g_strfreev(authlist);
+		}
+		if(infolist) {
+			g_strfreev(infolist);
+		}
+		if(netlist) {
+			g_strfreev(netlist);
+		}
 
 		if(bypass || (geteuid() == 0) || (getuid() == 0)) {
 			return;

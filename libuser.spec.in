@@ -69,10 +69,18 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0755,root,root) %{_libdir}/libuser_quota.so
 %attr(0644,root,root) %{_mandir}/man3/*
 
-#%attr(0644,root,root) %{_libdir}/libuser.la
-#%attr(0644,root,root) %{_libdir}/libuser_quota.la
+%attr(0644,root,root) %{_libdir}/libuser.la
+%attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Aug 14 2001 Nalin Dahyabhai <nalin@redhat.com> 0.27-1
+- add ko translation files
+- files.c: fix a heap corruption bug in lock/unlock
+- files.c: close a memory leak in reading of files
+
+* Mon Aug 13 2001 Nalin Dahyabhai <nalin@redhat.com>
+- files.c: remove implementation limits on lengths of lines
+
 * Thu Aug  9 2001 Nalin Dahyabhai <nalin@redhat.com> 0.26-1
 - lusermod: change user name in groups the user is a member of during renames
 - lgroupmod: change primary GID for users who are in the group during renumbers

@@ -32,6 +32,8 @@
 #include "../include/libuser/user_private.h"
 #include "../modules/modules.h"
 
+#define CHUNK_SIZE (LINE_MAX * 4)
+
 /* Guides for parsing and formatting entries in the files we're looking at.  For formatting purposes, these are all arranged
  * in order of ascending positions. */
 struct format_specifier {
@@ -98,7 +100,7 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	char *backupname;
 	struct stat ist, ost;
 	gpointer ilock, olock;
-	char buf[LINE_MAX];
+	char buf[CHUNK_SIZE];
 	size_t len;
 
 	g_assert(filename != NULL);
@@ -196,6 +198,36 @@ lu_files_create_backup(const char *filename, struct lu_error **error)
 	return TRUE;
 }
 
+static char *
+line_read(FILE *fp)
+{
+	char *p, *buf;
+	size_t buf_size = CHUNK_SIZE;
+	p = buf = g_malloc0(buf_size);
+	while(fgets(p, buf_size - (p - buf) - 1, fp) != NULL) {
+		p = buf + strlen(buf);
+		if(p > buf) {
+			p--;
+		}
+		if(*p == '\n') {
+			break;
+		}
+
+		buf_size += CHUNK_SIZE;
+		p = g_malloc0(buf_size);
+		strcpy(p, buf);
+		g_free(buf);
+		buf = p;
+		p += strlen(p);
+	}
+	if(strlen(buf) == 0) {
+		g_free(buf);
+		return NULL;
+	} else {
+		return buf;
+	}
+}
+
 /** Parse a string into an ent structure using the elements in the format specifier array. */
 static gboolean
 parse_generic(const gchar *line, const struct format_specifier *formats, size_t format_count, struct lu_ent *ent)
@@ -255,6 +287,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats, size_t 
 			}
 		}
 	}
+	g_strfreev(v);
 	return TRUE;
 }
 
@@ -1129,8 +1162,8 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	new_value = lock_process(value, lock_or_not, ent);
 	g_free(value);
+
 	ret = lu_util_field_write(fd, (const char*)name->data, field, new_value, error);
-	g_free(new_value);
 	if(ret == FALSE) {
 		lu_util_lock_free(fd, lock);
 		close(fd);
@@ -1415,7 +1448,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 	int fd;
 	gpointer lock;
 	GList *ret = NULL;
-	char buf[LINE_MAX];
+	char *buf;
 	char *key = NULL, *filename = NULL, *p;
 	const char *dir = NULL;
 	FILE *fp;
@@ -1453,7 +1486,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 		return NULL;
 	}
 
-	while(fgets(buf, sizeof(buf), fp) != NULL) {
+	while((buf = line_read(fp)) != NULL) {
 		p = strchr(buf, ':');
 		if(p != NULL) {
 			*p = '\0';
@@ -1462,6 +1495,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name, const char *
 				ret = g_list_append(ret, p);
 			}
 		}
+		g_free(buf);
 	}
 
 	lu_util_lock_free(fd, lock);
@@ -1493,8 +1527,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 	int fd;
 	gpointer lock;
 	GList *ret = NULL;
-	char buf[LINE_MAX];
-	char grp[LINE_MAX];
+	char *buf, grp[CHUNK_SIZE];
 	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
 	const char *dir = NULL;
 	FILE *fp;
@@ -1535,7 +1568,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 	}
 
 	snprintf(grp, sizeof(grp), "%d", gid);
-	while(fgets(buf, sizeof(buf), fp) != NULL) {
+	while((buf = line_read(fp)) != NULL) {
 		p = strchr(buf, ':');
 		q = NULL;
 		if(p != NULL) {
@@ -1562,7 +1595,9 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 				ret = g_list_append(ret, module->scache->cache(module->scache, buf));
 			}
 		}
+		g_free(buf);
 	}
+	lu_util_lock_free(fd, lock);
 	fclose(fp);
 
 	fd = open(grpfilename, O_RDWR);
@@ -1594,7 +1629,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 		return NULL;
 	}
 
-	while(fgets(buf, sizeof(buf), fp) != NULL) {
+	while((buf = line_read(fp)) != NULL) {
 		p = strchr(buf, ':');
 		if(p != NULL) {
 			*p = '\0';
@@ -1616,8 +1651,10 @@ lu_files_users_enumerate_by_group(struct lu_module *module, const char *group, g
 					}
 				}
 			}
+			g_free(buf);
 			break;
 		}
+		g_free(buf);
 	}
 
 	lu_util_lock_free(fd, lock);
@@ -1635,7 +1672,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 	int fd;
 	gpointer lock;
 	GList *ret = NULL;
-	char buf[LINE_MAX];
+	char *buf;
 	char *key = NULL, *filename = NULL, *p, *q;
 	const char *dir = NULL;
 	FILE *fp;
@@ -1671,7 +1708,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 		return NULL;
 	}
 
-	while(fgets(buf, sizeof(buf), fp) != NULL) {
+	while((buf = line_read(fp)) != NULL) {
 		p = strchr(buf, ':');
 		if(p != NULL) {
 			*p = '\0';
@@ -1693,6 +1730,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module, const char *user, st
 				}
 			}
 		}
+		g_free(buf);
 	}
 
 	lu_util_lock_free(fd, lock);

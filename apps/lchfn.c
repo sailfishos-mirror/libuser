@@ -175,6 +175,7 @@ main(int argc, const char **argv)
 					}
 				}
 			}
+			g_strfreev(fields);
 		}
 	} else {
 		g_print(_("User %s does not exist.\n"), user);

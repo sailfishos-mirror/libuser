@@ -717,7 +717,7 @@ lu_ent_clear(struct lu_ent *ent, const char *attr)
 
 	tmp = lu_ent_get(ent, attr);
 
-	g_tree_remove(ent->attributes, ent->acache->cache(ent->acache, attr));
+	g_tree_remove(ent->attributes, (char*)attr);
 
 	g_list_free(tmp);
 }
@@ -735,7 +735,7 @@ lu_ent_clear_original(struct lu_ent *ent, const char *attr)
 
 	tmp = lu_ent_get_original(ent, attr);
 
-	g_tree_remove(ent->original_attributes, ent->acache->cache(ent->acache, attr));
+	g_tree_remove(ent->original_attributes, (char*)attr);
 
 	g_list_free(tmp);
 }

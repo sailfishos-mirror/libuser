@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.26)
+AM_INIT_AUTOMAKE(libuser,0.27)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
@@ -15,7 +15,7 @@ AM_PROG_LIBTOOL
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.9,,,gmodule)
 
-ALL_LINGUAS="de es fr ja it no ru sv"
+ALL_LINGUAS="de es fr ja ko it no ru sv"
 AM_GNU_GETTEXT
 
 AC_CHECK_HEADERS(security/pam_appl.h)
