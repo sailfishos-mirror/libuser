@@ -278,9 +278,10 @@ libuser_admin_generic(PyObject *self, PyObject *args, PyObject *kwargs,
 	struct lu_error *error = NULL;
 	char *keywords[] = {"entity", NULL};
 	struct libuser_admin *me = (struct libuser_admin *)self;
+	PyObject *garbage = NULL;
 	
 	DEBUG_ENTRY;
-	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords, &EntityType, &ent)) {
+	if(!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords, &EntityType, &ent, &garbage)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
