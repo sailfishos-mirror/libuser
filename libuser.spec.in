@@ -79,6 +79,9 @@ rm -fr $RPM_BUILD_ROOT
 %attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Aug 21 2001 Nalin Dahyabhai <nalin@redhat.com>
+- add da translation files
+
 * Tue Aug 21 2001 Nalin Dahyabhai <nalin@redhat.com> 0.29-1
 - add an explicit build dependency on jade (for the docs)
 
