@@ -945,8 +945,15 @@ lu_user_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_error
 gboolean
 lu_user_setpass(struct lu_context *context, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
+	gboolean ret;
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, user_setpass, password, ent, error);
+	ret = lu_dispatch(context, user_setpass, password, ent, error);
+	if(ret) {
+		if(lu_ent_get(ent, LU_SHADOWLASTCHANGE)) {
+			lu_ent_set(ent, LU_SHADOWLASTCHANGE, lu_util_shadow_current_date(context->scache));
+		}
+	}
+	return ret;
 }
 
 /**
@@ -1006,8 +1013,15 @@ lu_group_islocked(struct lu_context *context, struct lu_ent *ent, struct lu_erro
 gboolean
 lu_group_setpass(struct lu_context *context, struct lu_ent *ent, const char *password, struct lu_error **error)
 {
+	gboolean ret;
 	LU_ERROR_CHECK(error);
-	return lu_dispatch(context, group_setpass, password, ent, error);
+	ret = lu_dispatch(context, group_setpass, password, ent, error);
+	if(ret) {
+		if(lu_ent_get(ent, LU_SHADOWLASTCHANGE)) {
+			lu_ent_set(ent, LU_SHADOWLASTCHANGE, lu_util_shadow_current_date(context->scache));
+		}
+	}
+	return ret;
 }
 
 struct enumerate_data {
@@ -1136,7 +1150,6 @@ lu_groups_enumerate(struct lu_context *context, const char *pattern, const char 
 static int
 lu_enumerate_users_by_group(gpointer key, gpointer value, gpointer cbdata)
 {
-	const char *module = key;
 	struct lu_module *mod = value;
 	struct enumerate_data *data = cbdata;
 	if(mod->users_enumerate_by_group) {
@@ -1201,8 +1214,10 @@ lu_users_enumerate_by_group(struct lu_context *context, const char *group, const
 }
 
 static int
-lu_enumerate_groups_by_user(const char *module, struct lu_module *mod, struct enumerate_data *data)
+lu_enumerate_groups_by_user(gpointer key, gpointer value, gpointer cbdata)
 {
+	struct lu_module *mod = value;
+	struct enumerate_data *data = cbdata;
 	if(mod->groups_enumerate_by_user) {
 		data->list = g_list_concat(data->list, mod->groups_enumerate_by_user(mod, data->pattern, data->error));
 	}
@@ -1277,7 +1292,7 @@ lu_groups_enumerate_by_user(struct lu_context *context, const char *user, const 
 	if(module) {
 		mod = g_tree_lookup(context->modules, context->scache->cache(context->scache, module));
 		if(mod != NULL) {
-			lu_enumerate_groups_by_user(module, mod, &data);
+			lu_enumerate_groups_by_user((gpointer)module, mod, &data);
 		}
 	} else {
 		g_tree_traverse(context->modules, lu_enumerate_groups_by_user, G_IN_ORDER, &data);

@@ -174,7 +174,7 @@ lu_util_lock_obtain(int fd, struct lu_error **error)
 
 	if(i == -1) {
 		g_free(lck);
-		lu_error_new(error, lu_error_lock, NULL);
+		lu_error_new(error, lu_error_lock, _("error locking file: %s"), strerror(errno));
 		return NULL;
 	}
 

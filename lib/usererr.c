@@ -22,6 +22,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <errno.h>
 #include <execinfo.h>
 #include <libintl.h>
 #include <stdarg.h>
@@ -35,6 +36,8 @@ lu_strerror(enum lu_error_code code)
 	switch(code) {
 		case lu_error_success:
 			return _("success");
+		case lu_error_config_disabled:
+			return _("module disabled by configuration");
 		case lu_error_generic:
 			return _("generic error");
 		case lu_error_privilege:
@@ -49,6 +52,28 @@ lu_strerror(enum lu_error_code code)
 			return _("user/group name in use");
 		case lu_error_id_used:
 			return _("user/group id in use");
+		case lu_error_terminal:
+			return _("error manipulating terminal attributes");
+		case lu_error_open:
+			return _("error opening file");
+		case lu_error_lock:
+			return _("error locking file");
+		case lu_error_stat:
+			return _("error statting file");
+		case lu_error_read:
+			return _("error reading file");
+		case lu_error_write:
+			return _("error writing to file");
+		case lu_error_search:
+			return _("data not found in file");
+		case lu_error_init:
+			return _("internal initialization error");
+		case lu_error_module_load:
+			return _("error loading module");
+		case lu_error_module_sym:
+			return _("error resolving symbol in module");
+		case lu_error_version:
+			return _("library/module version mismatch");
 		default:
 			return _("unknown error");
 	};
@@ -78,7 +103,7 @@ lu_error_new(struct lu_error **error, enum lu_error_code code, const char *desc,
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
 		va_start(args, desc);
-		ret->string = desc ?  g_strdup_vprintf(desc, args) : g_strdup(lu_strerror(code));
+		ret->string = desc ?  g_strdup_vprintf(desc, args) : g_strdup_printf(lu_strerror(code), strerror(errno));
 		depth = backtrace(stack, sizeof(stack) / sizeof(stack[0]));
 		ret->stack = backtrace_symbols(stack, depth);
 		va_end(args);

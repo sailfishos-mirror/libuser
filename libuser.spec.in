@@ -48,27 +48,36 @@ rm -fr $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS COPYING NEWS README TODO docs/*.txt docs/sgml/*.txt docs/sgml/*.html python/modules.txt
+
 %config(noreplace) %{_sysconfdir}/libuser.conf
-%dir %{_libdir}/libuser
-%{_bindir}/*
-%{_libdir}/python1.5/site-packages/*
-%{_libdir}/libuser.so.*.*
-%{_libdir}/libuser_quota.so.*.*
-%{_libdir}/%{name}/*.so
-%{_sbindir}/*
+
+%attr(0755,root,root) %{_bindir}/*
+%attr(0755,root,root) %{_libdir}/python1.5/site-packages/*
+%attr(0755,root,root) %{_libdir}/libuser.so.*.*
+%attr(0755,root,root) %{_libdir}/libuser_quota.so.*.*
+%dir %attr(0755,root,root) %{_libdir}/%{name}
+%attr(0755,root,root) %{_libdir}/%{name}/*.so
+%attr(0755,root,root) %{_sbindir}/*
 
 %files devel
 %defattr(-,root,root)
-%{_includedir}/libuser
-%{_libdir}/libuser.a
-%{_libdir}/libuser.la
-%{_libdir}/libuser.so
-%{_libdir}/libuser_quota.a
-%{_libdir}/libuser_quota.la
-%{_libdir}/libuser_quota.so
-%{_mandir}/man3/*
+%attr(0755,root,root) %dir %{_includedir}/libuser
+%attr(0644,root,root) %{_includedir}/libuser/*
+%attr(0644,root,root) %{_libdir}/libuser.a
+%attr(0755,root,root) %{_libdir}/libuser.so
+%attr(0644,root,root) %{_libdir}/libuser_quota.a
+%attr(0755,root,root) %{_libdir}/libuser_quota.so
+%attr(0644,root,root) %{_mandir}/man3/*
+
+#%attr(0644,root,root) %{_libdir}/libuser.la
+#%attr(0644,root,root) %{_libdir}/libuser_quota.la
 
 %changelog
+* Tue Jul 31 2001 Nalin Dahyabhai <nalin@redhat.com>
+- stop leaking descriptors in the files module
+- speed up user creation by reordering some checks for IDs being in use
+- update the shadowLastChanged attribute when we set a password
+
 * Mon Jul 30 2001 Nalin Dahyabhai <nalin@redhat.com>
 - install sv translation
 - make lpasswd prompt for passwords when none are given on the command line
