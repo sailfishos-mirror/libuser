@@ -343,6 +343,7 @@ msgid "freeing lu_ent at %p.\n"
 msgstr "libération de lu_ent à %p.\n"
 
 #: lib/userutil.c:177
+#, c-format
 msgid "error locking file: %s"
 msgstr "erreur lors du verrouillage du fichier : %s"
 
@@ -352,15 +353,18 @@ msgstr "erreur lors du verrouillage du fichier : %s"
 #: modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 #: modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 #: modules/files.c:1593
+#, c-format
 msgid "couldn't open `%s': %s"
 msgstr "impossible d'ouvrir `%s' : %s"
 
 #: modules/files.c:123 modules/files.c:147 modules/files.c:178
 #: modules/files.c:586 modules/files.c:917
+#, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "impossible exécuter la fonction stat `%s' : %s"
 
 #: modules/files.c:130
+#, c-format
 msgid "error creating `%s': %s"
 msgstr "erreur lors de la création de `%s' : %s"
 
@@ -370,6 +374,7 @@ msgid "backup file `%s' was a symlink"
 msgstr "le fichier de sauvegarde `%s' était un lien symbolique "
 
 #: modules/files.c:601 modules/files.c:926
+#, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "impossible de lire à partir de `%s' : %s"
 
@@ -379,6 +384,7 @@ msgstr "entrée déjà présente dans le fichier"
 
 #: modules/files.c:633 modules/files.c:644 modules/files.c:952
 #: modules/files.c:961
+#, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "impossible d'écrire sur `%s' : %s"
 
