@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2004-09-06 18:05+0530\n"
+"PO-Revision-Date: 2004-11-03 14:52+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 
 #: apps/apputil.c:129
@@ -36,7 +36,7 @@ msgstr "`%s' সরিয়ে ফেলতে সমস্যা হয়েছে:
 #: apps/apputil.c:473 apps/apputil.c:477
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "অগ্রাধিকার হ্রাস করবার প্রচেষ্টা ব্যর্থ হয়েছে।\n"
+msgstr "অগ্রাধিকার হ্রাস করার প্রচেষ্টা ব্যর্থ হয়েছে।\n"
 
 #: apps/apputil.c:486
 #, c-format
@@ -45,18 +45,20 @@ msgstr "অভ্যন্তরীণ সমস্যা।\n"
 
 #: apps/apputil.c:506
 #, c-format
+# modified for RHEL
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s-র, %s-র finger সংক্রান্ত তথ্য পরিবর্তন করার অধিকার নেই।\n"
 
 #: apps/apputil.c:508
-#, fuzzy
+# modified for RHEL
 msgid "Unknown user context"
-msgstr "অজানা সমস্যা"
+msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
 
 #: apps/apputil.c:516
 #, c-format
+# modified for RHEL
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd-র জন্য ডিফল্ট প্রসঙ্গ নির্ধারণ করা সম্ভব হয়নি\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -94,7 +96,7 @@ msgstr "আর্গুমেন্ট পার্স করতে সমস্
 #: apps/lusermod.c:101
 #, c-format
 msgid "No user name specified.\n"
-msgstr "কোনো ব্যবহারকারীর নাম উল্লেখ করা হয় নি।\n"
+msgstr "কোনো ব্যবহারকারীর নাম উল্লেখ করা হয়নি।\n"
 
 #: apps/lchage.c:156 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:87
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
@@ -165,9 +167,10 @@ msgid "Account Expires:\t%s\n"
 msgstr "অ্যাকাউন্টের মেয়াদ পূর্ণ হচ্ছে:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "%s সংক্রান্ত পুরোনো তথ্য পরিবর্তনের প্রচেষ্টা ব্যর্থ হয়েছে।\n"
+msgstr "%s সংক্রান্ত পুরোনো তথ্য পরিবর্তনের প্রচেষ্টা ব্যর্থ: %s।\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -176,8 +179,7 @@ msgstr "[অপশন...] [ব্যবহারকারী]"
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
-"কোনো ব্যবহারকারীর নাম নির্দিষ্ট হয় নি, %d uid -র জন্য কোনও নাম উল্লেখিত হয় নি।\n"
+msgstr "কোনো ব্যবহারকারীর নাম নির্দিষ্ট হয় নি, %d uid -র জন্য কোনও নাম উল্লেখিত হয়নি।\n"
 
 #: apps/lchfn.c:102
 #, c-format
@@ -224,7 +226,7 @@ msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন
 #: apps/lchfn.c:369
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন করা হয় নি: %s।\n"
+msgstr "Finger সংক্রান্ত তথ্য পরিবর্তন করা হয়নি: %s।\n"
 
 #: apps/lchsh.c:90
 #, c-format
@@ -240,9 +242,10 @@ msgid "Shell changed.\n"
 msgstr "শেল পরিবর্তিত হয়েছে।\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Shell not changed: %s\n"
-msgstr "শেল পরিবর্তিত হয়েছে।\n"
+msgstr "শেল পরিবর্তিত হয়নি: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -251,12 +254,13 @@ msgstr "[অপশন...] দল"
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
 #, c-format
 msgid "No group name specified.\n"
-msgstr "কোনও দলের নাম নির্ধারণ করা হয় নি।\n"
+msgstr "কোনও দলের নাম নির্ধারণ করা হয়নি।\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Group creation failed: %s\n"
-msgstr "দল তৈরি করবার প্রক্রিয়া ব্যর্থ হয়েছে।\n"
+msgstr "দল তৈরি করা যায়নি: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -264,9 +268,10 @@ msgid "Group %s does not exist.\n"
 msgstr "%s দলটি বর্তমানে উপস্থিত নেই।\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Group %s could not be deleted: %s\n"
-msgstr "%s দলটি মুছে ফেলা সম্ভব হয় নি: %s।\n"
+msgstr "%s দলটি মুছে ফেলা সম্ভব হয়নি: %s\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -274,24 +279,28 @@ msgid "Both -L and -U specified.\n"
 msgstr "-L এবং -U দুটিই নির্দিষ্ট করা হয়েছে।\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s দলটির জন্য পাসওয়ার্ড তৈরি করতে ব্যর্থ।\n"
+msgstr "%s দলটির জন্য পাসওয়ার্ড তৈরি করতে ব্যর্থ: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Group %s could not be locked: %s\n"
-msgstr "%s দলটিকে লক করা সম্ভব হয় নি।\n"
+msgstr "%s দলটিকে লক করা যায়নি: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "%s দলটিকে আনলক (unlock) করা সম্ভব হয় নি।\n"
+msgstr "%s দলটিকে আন-লক করা যায়নি: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Group %s could not be modified: %s\n"
-msgstr "%s দলকে পরিবর্তন করা সম্ভব হয় নি: %s।\n"
+msgstr "%s দলকে পরিবর্তন করা যায়নি: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -320,9 +329,7 @@ msgstr "`%s' খুলতে সমস্যা হয়েছে: %s।\n"
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে: লাইনটি সঠিকভাবে ফরম্যাট করা হয় "
-"নি।\n"
+msgstr "`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা হয়েছে: লাইনটি সঠিকভাবে ফরম্যাট করা হয়নি।\n"
 
 #: apps/lnewusers.c:140
 msgid "Refusing to create account with UID 0.\n"
@@ -330,9 +337,10 @@ msgstr "UID 0 ব্যবহার করে অ্যাকাউন্ট ত
 
 #  Aargh!  Abandon all hope.
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "`%s'-র জন্য, GID %ld ব্যবহার করে দল তৈরি করতে সমস্যা হয়েছে।\n"
+msgstr "`%s'-র জন্য, GID %ld ব্যবহার করে দল তৈরি করতে সমস্যা হয়েছে: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -365,7 +373,7 @@ msgstr "নতুন পাসওয়ার্ড"
 
 #: apps/lpasswd.c:113
 msgid "New password (confirm)"
-msgstr "নতুন পাসওয়ার্ড (নিশ্চিতায়ন)"
+msgstr "নতুন পাসওয়ার্ড (নিশ্চায়ন)"
 
 #: apps/lpasswd.c:127
 #, c-format
@@ -393,9 +401,10 @@ msgid "Password changed.\n"
 msgstr "পাসওয়ার্ড পরিবর্তন করা হয়েছে।\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "Error creating group `%s': %s\n"
-msgstr "`%s' দল তৈরি করতে সমস্যা হয়েছে।\n"
+msgstr "`%s' দল তৈরি করতে সমস্যা হয়েছে: %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -415,7 +424,7 @@ msgstr "মেইল স্পুল তৈরি করতে সমস্য�
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "%s ব্যবহারকারীরকে মুছে ফেলা সম্ভব হয় নি: %s।\n"
+msgstr "%s ব্যবহারকারীরকে মুছে ফেলা সম্ভব হয়নি: %s।\n"
 
 #: apps/luserdel.c:108
 #, c-format
@@ -430,12 +439,12 @@ msgstr "%ld GIDসহ কোন দল বর্তমানে উপস্থ�
 #: apps/luserdel.c:129
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "%ld GID-র দলটির কোন নাম উল্লিখিত হয় নি।\n"
+msgstr "%ld GID-র দলটির কোন নাম উল্লিখিত হয়নি।\n"
 
 #: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "%s দলটি মুছে ফেলা সম্ভব হয় নি: %s।\n"
+msgstr "%s দলটি মুছে ফেলা সম্ভব হয়নি: %s।\n"
 
 #: apps/luserdel.c:152
 #, c-format
@@ -450,27 +459,27 @@ msgstr "%s সরিয়ে ফেলার সময় সমস্যা হয়�
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "%s ব্যবহারকারীর জন্য পাসওয়ার্ড নির্ধারণ করা সম্ভব হয় নি: %s।\n"
+msgstr "%s ব্যবহারকারীর জন্য পাসওয়ার্ড নির্ধারণ করা সম্ভব হয়নি: %s।\n"
 
 #: apps/lusermod.c:216
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s ব্যবহারকারীকে লক (lock) করা সম্ভব হয় নি: %s।\n"
+msgstr "%s ব্যবহারকারীকে লক (lock) করা সম্ভব হয়নি: %s।\n"
 
 #: apps/lusermod.c:224
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s ব্যবহারকারীকে আন-লক (unlock) করা সম্ভব হয় নি: %s।\n"
+msgstr "%s ব্যবহারকারীকে আন-লক (unlock) করা সম্ভব হয়নি: %s।\n"
 
 #: apps/lusermod.c:232
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s ব্যবহারকারীকে পরিবর্তন করা সম্ভব হয় নি: %s।\n"
+msgstr "%s ব্যবহারকারীকে পরিবর্তন করা সম্ভব হয়নি: %s।\n"
 
 #: apps/lusermod.c:285
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s দলকে পরিবর্তন করা সম্ভব হয় নি: %s।\n"
+msgstr "%s দলকে পরিবর্তন করা সম্ভব হয়নি: %s।\n"
 
 #: apps/lusermod.c:295
 #, c-format
@@ -490,17 +499,19 @@ msgstr "%s কে %s -এ সরিয়ে নেওয়ার সময় সমস
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "কনফিগারেশন ফাইল `%s' টি খোলা যায় নি: %s"
+msgstr "কনফিগারেশন ফাইল `%s' টি খোলা যায়নি: %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "could not stat configuration file `%s': %s"
-msgstr "কনফিগারেশন ফাইল `%s' টি খোলা যায় নি: %s"
+msgstr "কনফিগারেশন ফাইল `%s' stat করা যায়নি: %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "could not read configuration file `%s': %s"
-msgstr "কনফিগারেশন ফাইল `%s' টি খোলা যায় নি: %s"
+msgstr "কনফিগারেশন ফাইল `%s' পড়া যায়নি: %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -520,7 +531,7 @@ msgstr "অপর্যাপ্ত অধিকার"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr "অনুমোদন করা হয় নি"
+msgstr "অনুমোদন করা হয়নি"
 
 #: lib/error.c:52
 msgid "bad user/group name"
@@ -551,8 +562,9 @@ msgid "error locking file"
 msgstr "ফাইল লক করতে সমস্যা হয়েছে"
 
 #: lib/error.c:66
+# modified for RHEL
 msgid "error statting file"
-msgstr "ফাইল সংক্রান্ত তথ্য আহরণে (Stat) সমস্যা হয়েছে"
+msgstr "ফাইল stat করতে সমস্যা হয়েছে"
 
 #: lib/error.c:68
 msgid "error reading file"
@@ -564,7 +576,7 @@ msgstr "ফাইলে লিখতে সমস্যা হয়েছে"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr "ফাইলে ডাটা পাওয়া যায় নি"
+msgstr "ফাইলে ডাটা পাওয়া যায়নি"
 
 #: lib/error.c:74
 msgid "internal initialization error"
@@ -576,11 +588,11 @@ msgstr "মডিউল লোড করতে সমস্যা হয়েছ�
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "মডিউলের সিম্বল (Symbol) সমাধান করতে সমস্যা হয়েছে"
+msgstr "মডিউলের সিম্বল মীমাংসা করতে সমস্যা হয়েছে"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "লাইব্রেরি/মডিউলের ভার্সান মেলেনি"
+msgstr "লাইব্রেরি/মডিউলের সংস্করণে গরমিল"
 
 #: lib/error.c:85
 msgid "unknown error"
@@ -594,7 +606,7 @@ msgstr "%s প্রারম্ভিক কার্য `%s' এ উপস্�
 #: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "`%s' এ মডিউল ভার্সানের গরমিল ঘটেছে"
+msgstr "`%s' এ মডিউলের সংস্করণে গরমিল"
 
 #: lib/prompt.c:67
 msgid "error reading terminal attributes"
@@ -610,7 +622,7 @@ msgstr "টার্মিনাল থেকে পড়তে সমস্যা
 
 #: lib/user.c:193
 msgid "name is not set"
-msgstr "নাম নির্ধারণ করা হয় নি"
+msgstr "নাম নির্ধারণ করা হয়নি"
 
 #: lib/user.c:197
 msgid "name is too short"
@@ -639,24 +651,27 @@ msgid "error locking file: %s"
 msgstr "ফাইল লক করতে সমস্যা হয়েছে: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
+msgstr "`%s'-র জন্য প্রাসঙ্গিক নিরাপত্তার বিবরণ: %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "couldn't set default security context: %s"
-msgstr "`%s' সংক্রান্ত তথ্য পাওয়া (Stat) যায় নি: %s"
+msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণ নির্ধারণ করা যায়নি: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "couldn't set default security context to `%s': %s"
-msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
+msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণকে`%s' হিসাবে নির্ধারণ করা যায়নি: %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
+msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তার বিবরণ `%s' হিসাবে নির্ধারণ করা যায়নি: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -667,13 +682,13 @@ msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
 #: modules/files.c:2562 modules/files.c:2577
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "`%s' খোলা সম্ভব হয় নি: %s"
+msgstr "`%s' খোলা সম্ভব হয়নি: %s"
 
 #: modules/files.c:185 modules/files.c:221 modules/files.c:259
 #: modules/files.c:896 modules/files.c:1370
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "`%s' সংক্রান্ত তথ্য পাওয়া (Stat) যায় নি: %s"
+msgstr "`%s' stat করা যায়নি: %s"
 
 #: modules/files.c:196
 #, c-format
@@ -688,7 +703,7 @@ msgstr "ব্যাক-আপ ফাইল `%s' বর্তমানে উপ
 #: modules/files.c:926 modules/files.c:1379
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "`%s' থেকে পড়া সম্ভব হয় নি: %s"
+msgstr "`%s' থেকে পড়া সম্ভব হয়নি: %s"
 
 #: modules/files.c:935 modules/files.c:942
 msgid "entry already present in file"
@@ -698,22 +713,23 @@ msgstr "ফাইল এন্ট্রি বর্তমানে উপস্
 #: modules/files.c:1437
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "`%s'-এ লেখা সম্ভব হয় নি: %s"
+msgstr "`%s'-এ লেখা সম্ভব হয়নি: %s"
 
 #: modules/files.c:1124 modules/files.c:1132 modules/files.c:1234
 #: modules/files.c:1242
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "সত্ত্বার বস্তুতে কোন %s বৈশিষ্ট্য নেই"
+msgstr "সত্ত্বার বস্তুতে কোনো %s বৈশিষ্ট্য নেই"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
+# modified for RHEL
 msgid "error encrypting password"
-msgstr "`%s' এর জন্য পাসওয়ার্ড নির্ধারণ করতে সমস্যা হয়েছে"
+msgstr "পাসওয়ার্ড এনক্রিপ্ট করতে সমস্যা"
 
 #: modules/files.c:2844 modules/files.c:2914
+# modified for RHEL
 msgid "not executing with superuser privileges"
-msgstr "সুপারইউসার (superuser)-এর অধিকারসহ চালানো হচ্ছে না"
+msgstr "সুপাসইউজারের অধিকারসহ নির্বাহিত হচ্ছে না"
 
 #: modules/files.c:2927
 msgid "no shadow file present -- disabling"
@@ -786,28 +802,29 @@ msgstr "ldap লাইব্রেরি আরম্ভ করতে সমস�
 #: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "LDAP প্রোটোকলকে %d ভার্সানের সাথে নির্ধারণ করা যায় নি"
+msgstr "LDAP প্রোটোকলকে %d ভার্সানের সাথে নির্ধারণ করা যায়নি"
 
 #: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
-msgstr "LDAP সার্ভারের সাথে TLS-এর মীমাংসা করা সম্ভব হয় নি"
+msgstr "LDAP সার্ভারের সাথে TLS-এর মীমাংসা করা সম্ভব হয়নি"
 
 #: modules/ldap.c:405
 msgid "could not bind to LDAP server"
-msgstr "LDAP সার্ভার bind করা সম্ভব হয় নি"
+msgstr "LDAP সার্ভার bind করা সম্ভব হয়নি"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP সার্ভার bind করা সম্ভব হয় নি"
+msgstr "LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
-msgstr "LDAP সার্ভারের অনুসন্ধান করা সম্ভব হয় নি"
+msgstr "LDAP সার্ভারের অনুসন্ধান করা সম্ভব হয়নি"
 
 #: modules/ldap.c:431
 msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP সার্ভারে কোন root DSE সম্ভবত উপস্থিত নেই"
+msgstr "LDAP সার্ভারে কোনো root DSE সম্ভবত উপস্থিত নেই"
 
 #: modules/ldap.c:655 modules/ldap.c:1401 modules/ldap.c:1539
 #: modules/ldap.c:1600 modules/ldap.c:1715 modules/ldap.c:1811
@@ -816,8 +833,7 @@ msgstr "LDAP-র বৈশিষ্ট্যপূর্ণ নামের স�
 
 #: modules/ldap.c:665
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"LDAP-র বৈশিষ্ট্যপূর্ণ মৌলিক (base) নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
+msgstr "LDAP-র বৈশিষ্ট্যপূর্ণ মৌলিক (base) নামের সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
 #: modules/ldap.c:1378
 #, c-format
@@ -831,12 +847,13 @@ msgstr "ব্যবহারকারীর অবজেক্ট কোন `%s
 
 #: modules/ldap.c:1412
 msgid "could not convert internal data to LDAPMods"
-msgstr "অভ্যন্তরীণ ডাটাকে LDAPMods-এ পরিবর্তন করা সম্ভব হয় নি"
+msgstr "অভ্যন্তরীণ ডাটাকে LDAPMods-এ পরিবর্তন করা সম্ভব হয়নি"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "error creating a LDAP directory entry: %s"
-msgstr "LDAP ডিরেক্টরির এন্ট্রির নাম পরিবর্তন করতে সমস্যা হয়েছে: %s।\n"
+msgstr "LDAP ডিরেক্টরির এন্ট্রি তৈরি করতে সমস্যা হয়েছে: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -844,9 +861,10 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরির এন্ট্রি পরিবর্তন করতে সমস্যা হয়েছে: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "error renaming LDAP directory entry: %s"
-msgstr "LDAP ডিরেক্টরির এন্ট্রির নাম পরিবর্তন করতে সমস্যা হয়েছে: %s।\n"
+msgstr "LDAP ডিরেক্টরির এন্ট্রির নাম পরিবর্তন করতে সমস্যা হয়েছে: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -854,9 +872,10 @@ msgid "object had no %s attribute"
 msgstr "বস্তুটির কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
+# modified for RHEL
 msgid "error removing LDAP directory entry: %s"
-msgstr "LDAP ডিরেক্টরির এন্ট্রি মুছে ফেলতে সমস্যা হয়েছে: %s।\n"
+msgstr "LDAP ডিরেক্টরির এন্ট্রি মুছে ফেলতে সমস্যা হয়েছে: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -871,7 +890,7 @@ msgstr "LDAP ডিরেক্টরিতে এ রকম কোনো বস
 #: modules/ldap.c:1747
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায় নি"
+msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায়নি"
 
 #: modules/ldap.c:1909
 #, c-format
@@ -960,15 +979,17 @@ msgstr "%s নামক ব্যবহারকারীর সন্ধান 
 
 #: samples/lookup.c:103
 msgid "Entry not found.\n"
-msgstr "এন্ট্রি খুঁজে পাওয়া যায় নি।\n"
+msgstr "এন্ট্রি খুঁজে পাওয়া যায়নি।\n"
 
 #: samples/prompt.c:51
+# modified for RHEL
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "সাফল্যের সাথে সম্পন্ন প্রম্পট।\n"
 
 #: samples/prompt.c:61
+# modified for RHEL
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "বিফল প্রম্পট\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
@@ -983,23 +1004,7 @@ msgid "Getting default user attributes:\n"
 msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ্ট্য আহরণ করা হচ্ছে:\n"
 
 #: samples/testuser.c:96
+# modified for RHEL
 msgid "Copying user structure:\n"
-msgstr "ব্যবহারকারীর গঠন কপি করা হচ্ছে:\n"
+msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
 
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "ব্যবহারকারী তৈরি করতে Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "ব্যবহারকারী মুছে ফেলার সময় Cyrus SASL-র সমস্যা হয়েছে: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "%s আরম্ভ করতে সমস্যা হয়েছে।\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "%s দলটি মুছে ফেলা সম্ভব হয় নি।\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "%s দলটির পরিবর্তন করা সম্ভব হয় নি।\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "মডিউল আরম্ভ করতে সমস্যা হয়েছে"
