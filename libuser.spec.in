@@ -95,6 +95,10 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Tue Sep  7 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.11-1
+- Allow documented optional arguments in Python
+  ADMIN.{addUser,modifyUser,deleteUser}
+
 * Fri Sep  3 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.10-1
 - Don't attempt to lookup using original entity name after entity
   modification (rename in particular) (#78376, #121252)

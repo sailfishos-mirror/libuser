@@ -320,6 +320,32 @@ libuser_admin_init_group(PyObject *self, PyObject *args,
 	return libuser_wrap_ent(ent);
 }
 
+/* Run the given function. If the function fails, raise an error. */
+static PyObject *
+libuser_admin_do_wrap(PyObject *self, struct libuser_entity *ent,
+		      gboolean (*fn) (struct lu_context *, struct lu_ent *,
+				      struct lu_error ** error))
+{
+	struct lu_error *error = NULL;
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	DEBUG_ENTRY;
+	/* Try running the function. */
+	if (fn(me->ctx, ent->ent, &error)) {
+		/* It succeeded!  Return truth. */
+		DEBUG_EXIT;
+		return Py_BuildValue("i", 1);
+	} else {
+		/* It failed.  Build an exception and return an error. */
+		PyErr_SetString(PyExc_RuntimeError,
+				error ? error->string : _("unknown error"));
+		if (error)
+			lu_error_free(&error);
+		DEBUG_EXIT;
+		return NULL;
+	}
+}
+
 /* Run the given function, using a Python entity passed in as the first
  * argument to the function.  If the function fails, raise an error. */
 static PyObject *
@@ -327,10 +353,9 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 		   gboolean(*fn) (struct lu_context *, struct lu_ent *,
 				  struct lu_error ** error))
 {
-	struct libuser_entity *ent;
-	struct lu_error *error = NULL;
+	PyObject *ent;
 	char *keywords[] = { "entity", NULL };
-	struct libuser_admin *me = (struct libuser_admin *) self;
+	PyObject *ret;
 
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
@@ -340,22 +365,9 @@ libuser_admin_wrap(PyObject *self, PyObject *args, PyObject *kwargs,
 		DEBUG_EXIT;
 		return NULL;
 	}
-	/* Try running the function. */
-	if (fn(me->ctx, ent->ent, &error)) {
-		/* It succeeded!  Return truth. */
-		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
-	} else {
-		/* It failed.  Build an exception and return an error. */
-		PyErr_SetString(PyExc_RuntimeError,
-				error ? error->
-				string : _("unknown error"));
-		if (error) {
-			lu_error_free(&error);
-		}
-		DEBUG_EXIT;
-		return NULL;
-	}
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent, fn);
+	DEBUG_EXIT;
+	return ret;
 }
 
 /* Run the given function, using a Python entity passed in as the first
@@ -701,7 +713,7 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	}
 
 	/* Pass the entity object to lu_user_add(). */
-	ret = libuser_admin_wrap(self, args, kwargs, lu_user_add);
+	ret = libuser_admin_do_wrap(self, ent, lu_user_add);
 	if (ret != NULL) {
 		/* If we got a non-NULL response, then it was okay. */
 		if ((mkhomedir != NULL) && (PyObject_IsTrue(mkhomedir))) {
@@ -765,7 +777,8 @@ libuser_admin_modify_user(PyObject *self, PyObject *args,
 		return NULL;
 	}
 
-	ret = libuser_admin_wrap(self, args, kwargs, lu_user_modify);
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent,
+				    lu_user_modify);
 	if (ret != NULL) {
 		if ((mvhomedir != NULL) && (PyObject_IsTrue(mvhomedir))) {
 			Py_DECREF(ret);
@@ -811,7 +824,8 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 		return NULL;
 	}
 
-	ret = libuser_admin_wrap(self, args, kwargs, lu_user_delete);
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent,
+				    lu_user_delete);
 	if (ret != NULL) {
 		if ((rmhomedir != NULL) && (PyObject_IsTrue(rmhomedir))) {
 			Py_DECREF(ret);
