@@ -284,7 +284,7 @@ AC_SUBST(scdir)
 
 AM_CONFIG_HEADER(config.h)
 
-AC_OUTPUT([ intl/Makefile 
+AC_OUTPUT([
 m4/Makefile
 intl/Makefile 
 Makefile
