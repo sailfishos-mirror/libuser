@@ -67,7 +67,7 @@ msgstr "Erro ao processar argumentos: %s.\n"
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:101
 msgid "No user name specified.\n"
-msgstr "Nenhum nome de utilizador especificado.\n"
+msgstr "Nenhum nome de utilizador indicado.\n"
 
 #: apps/lchage.c:154 apps/lgroupadd.c:88 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
@@ -154,7 +154,7 @@ msgstr "[OPÇÃO...] grupo"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
-msgstr "Nenhum nome de grupo especificado.\n"
+msgstr "Nenhum nome de grupo indicado.\n"
 
 #: apps/lgroupadd.c:92
 #, c-format
