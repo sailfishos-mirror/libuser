@@ -32,7 +32,7 @@ files useful for developing applications with libuser.
 %setup -q
 
 %build
-%configure --with-krb5=/usr/kerberos --with-ldap --with-sasl \
+%configure \
 	--with-python-version=%{python} \
 	--with-python-path=%{_includedir}/python%{python}
 make
