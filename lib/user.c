@@ -1036,6 +1036,8 @@ lu_dispatch(struct lu_context *context,
 	case user_mod:
 	case group_mod:
 		/* Make sure we have both name and ID here. */
+		/* FIXME: sdata, ldata contain new values (and are not even
+		   used). */
 		sdata = sdata ?: extract_name(tmp);
 		ldata = (ldata != INVALID) ? ldata : extract_id(tmp);
 		g_return_val_if_fail(sdata != NULL, FALSE);

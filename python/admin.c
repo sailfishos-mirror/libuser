@@ -1,4 +1,4 @@
-/* Copyright (C) 2001,2002 Red Hat, Inc.
+/* Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -694,7 +694,6 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	PyObject *ret = NULL;
 	PyObject *mkhomedir = self;
 	PyObject *mkmailspool = self;
-	PyObject *subargs, *subkwargs;
 	struct libuser_entity *ent = NULL;
 	struct lu_context *context = NULL;
 	char *keywords[] = { "entity", "mkhomedir", "mkmailspool", NULL };
@@ -717,6 +716,8 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	if (ret != NULL) {
 		/* If we got a non-NULL response, then it was okay. */
 		if ((mkhomedir != NULL) && (PyObject_IsTrue(mkhomedir))) {
+			PyObject *subargs, *subkwargs;
+
 			/* Free the result we got. */
 			if (ret != NULL) {
 				Py_DECREF(ret);
@@ -725,12 +726,15 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			 * the entity structure in a tuple, so create a tuple
 			 * and add just that object to it. */
 			subargs = PyTuple_New(1);
+			Py_INCREF(ent);
 			PyTuple_SetItem(subargs, 0, (PyObject*) ent);
 			/* Create an empty dictionary for keyword args. */
 			subkwargs = PyDict_New();
 			/* We'll return the result of the creation call. */
 			ret = libuser_admin_create_home(self, subargs,
 							subkwargs);
+			Py_DECREF(subargs);
+			Py_DECREF(subkwargs);
 		}
 		/* If we got a non-NULL response, then it was okay. */
 		if ((mkmailspool != NULL) && (PyObject_IsTrue(mkmailspool))) {
@@ -767,27 +771,41 @@ libuser_admin_modify_user(PyObject *self, PyObject *args,
 	PyObject *ent = NULL;
 	PyObject *ret = NULL;
 	PyObject *mvhomedir = NULL;
-	PyObject *subargs, *subkwargs;
+	struct lu_ent *copy = NULL;
 	char *keywords[] = { "entity", "mvhomedir", NULL };
 
 	DEBUG_ENTRY;
 
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|O", keywords,
-					 &EntityType, &ent, &mvhomedir)) {
+					 &EntityType, &ent, &mvhomedir))
 		return NULL;
-	}
 
-	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent,
-				    lu_user_modify);
-	if (ret != NULL) {
-		if ((mvhomedir != NULL) && (PyObject_IsTrue(mvhomedir))) {
-			Py_DECREF(ret);
-			subargs = PyTuple_New(1);
-			PyTuple_SetItem(subargs, 0, ent);
-			subkwargs = PyDict_New();
-			ret = libuser_admin_move_home(self, subargs, subkwargs);
+	if (mvhomedir != NULL) {
+		if (!PyObject_IsTrue(mvhomedir))
+			/* Cache the PyObject_IsTrue() result */
+			mvhomedir = NULL;
+		else {
+			copy = lu_ent_new();
+			lu_ent_copy(((struct libuser_entity *)ent)->ent, copy);
 		}
 	}
+	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent,
+				    lu_user_modify);
+	if (ret != NULL && mvhomedir != NULL) {
+		PyObject *subargs, *subkwargs, *wrapped;
+
+		Py_DECREF(ret);
+		subargs = PyTuple_New(1);
+		wrapped = libuser_wrap_ent(copy);
+		copy = NULL; /* Will be freed along with `wrapped' */
+		PyTuple_SetItem(subargs, 0, wrapped);
+		subkwargs = PyDict_New();
+		ret = libuser_admin_move_home(self, subargs, subkwargs);
+		Py_DECREF(subargs);
+		Py_DECREF(subkwargs);
+	}
+	if (copy != NULL)
+		lu_ent_free(copy);
 
 	DEBUG_EXIT;
 
@@ -810,7 +828,6 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 	PyObject *ent = NULL;
 	PyObject *ret = NULL;
 	PyObject *rmhomedir = NULL, *rmmailspool = NULL;
-	PyObject *subargs, *subkwargs;
 	struct lu_context *context;
 	char *keywords[] = { "entity", "rmhomedir", "rmmailspool", NULL };
 
@@ -828,12 +845,17 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 				    lu_user_delete);
 	if (ret != NULL) {
 		if ((rmhomedir != NULL) && (PyObject_IsTrue(rmhomedir))) {
+			PyObject *subargs, *subkwargs;
+
 			Py_DECREF(ret);
 			subargs = PyTuple_New(1);
+			Py_INCREF(ent);
 			PyTuple_SetItem(subargs, 0, ent);
 			subkwargs = PyDict_New();
 			ret = libuser_admin_remove_home(self, subargs,
 						        subkwargs);
+			Py_DECREF(subargs);
+			Py_DECREF(subkwargs);
 		}
 	}
 	if (ret != NULL) {

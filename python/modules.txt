@@ -109,7 +109,7 @@ libuser:
 						to the location stored in the
 						entity's libuser.HOMEDIRECTORY
 						attribute (optional, default
-						yes).
+						no).
 
 				- modifyGroup: Modify information about a group
 					on the system.

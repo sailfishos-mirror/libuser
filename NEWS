@@ -1,3 +1,7 @@
+0.52.5
+* Fix home directory renaming in ADMIN.modifyUser (#135280)
+* Further Python reference counting fixes
+
 0.52.4
 * Memory leak fixes
 

@@ -1,3 +1,22 @@
+2004-10-11  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.52.5.
+
+	* NEWS: Update.
+
+	* python/admin.c (libuser_admin_add_user)
+	(libuser_admin_modify_user)
+	(libuser_admin_delete_user): Fix memory leak.
+
+	* python/admin.c (libuser_admin_add_user)
+	(libuser_admin_delete_user): Fix reference counting.
+
+	* python/modules.txt: Fix modifyUser documentation about not creating
+	home directory by default.
+
+	* python/admin.c (libuser_admin_modify_user): Pass original entity
+	to libuser_admin_move_home().
+
 2004-10-10  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.52.4.
