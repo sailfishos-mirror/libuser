@@ -1,3 +1,8 @@
+* 0.53.2
+* Important bug fixes in lchage, lgroupmod, lnewusers and lusermod; minor bug
+  fixes in lpasswd and luseradd.
+* Add man pages for the utilities.
+
 0.53.1
 * Export UT_NAMESIZE from <utmp.h> to Python
 

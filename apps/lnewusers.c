@@ -219,7 +219,7 @@ main(int argc, const char **argv)
 				lu_ent_add(ent, LU_GIDNUMBER, &val);
 				g_value_unset(&val);
 			} else {
-				lu_group_default(ctx, "users", FALSE, ent);
+				lu_group_default(ctx, gidstring, FALSE, ent);
 			}
 			/* Try to create the group, and if it works, get its
 			 * GID, which we need to give to this user. */
@@ -242,6 +242,10 @@ main(int argc, const char **argv)
 		/* Create a new user record, and set the user's primary GID. */
 		lu_user_default(ctx, fields[0], FALSE, ent);
 		memset(&val, 0, sizeof(val));
+		lu_value_init_set_id(&val, uid);
+		lu_ent_clear(ent, LU_UIDNUMBER);
+		lu_ent_add(ent, LU_UIDNUMBER, &val);
+		g_value_unset(&val);
 		lu_value_init_set_id(&val, gid);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);

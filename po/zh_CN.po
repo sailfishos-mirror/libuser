@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-16 16:33+1000\n"
 "Last-Translator: Tony Fu <tfu@redhat.com>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
@@ -277,22 +277,22 @@ msgstr "组群 %s 无法被删除：%s\n"
 msgid "Both -L and -U specified.\n"
 msgstr " -L 和 -U 两者皆被指定。\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "为组群 %s: %s 设置口令失败。\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "组群 %s 无法被锁：%s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "组群 %s 无法被开锁：%s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "组群 %s 无法被修改：%s\n"
@@ -340,22 +340,22 @@ msgstr "拒绝使用 UID 0 来创建账号。\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "创建组群“%s”时出错，使用 GID %jd: %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "为“%s”设置初始口令时出错：%s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "为 %s 创建主目录时出错：%s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "为 %s 创建邮件池时出错。\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "为 %s 创建用户账号失败：%s\n"
@@ -383,7 +383,7 @@ msgstr "口令不匹配，请重试。\n"
 msgid "Password change canceled.\n"
 msgstr "口令改变被取消。\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "为用户 %s 设置口令失败：%s。\n"
@@ -413,12 +413,12 @@ msgstr "创建组群'%s': %s出错。\n"
 msgid "Account creation failed: %s.\n"
 msgstr "创建帐号失败：%s。\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "创建 %s 失败：%s。\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "创建邮件池出错。\n"
@@ -458,42 +458,42 @@ msgstr "%s 没有主目录。\n"
 msgid "Error removing %s: %s.\n"
 msgstr "删除 %s 时出错：%s。\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "为用户 %s 设置口令失败：%s。\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "用户 %s 无法被锁：%s。\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "用户 %s 无法被开锁：%s。\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "用户 %s 无法被修改：%s。\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "组群 %s 无法被修改：%s。\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s 没有旧的主目录。\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s 没有新的主目录。\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "将 %s 移至 %s 时出错：%s。\n"

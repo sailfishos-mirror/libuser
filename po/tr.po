@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-03-15 23:27+0200\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -275,22 +275,22 @@ msgstr "%s grubu silinemedi: %s.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "-L ve -U birlikte kullanılamaz.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "%s grubu için parola belirlenemedi.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "%s grubu kilitlenemedi.\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "%s grubunun kilidi kaldırılamadı.\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "%s grubu değiştirilemedi: %s\n"
@@ -338,22 +338,22 @@ msgstr "0 kullanıcı kimlikli hesap oluşturulması reddediliyor.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "%s için %ld kimlik numarası ile grup oluşturulurken hata.\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "`%s' için parola belirlenirken hata: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s için ev dizini oluşturulurken hata: %s.\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s için posta kuyruğu oluşturulurken hata.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s için kullanıcı hesabı oluşturulurken hata: %s.\n"
@@ -381,7 +381,7 @@ msgstr "Parolalar aynı değil, tekrar deneyin.\n"
 msgid "Password change canceled.\n"
 msgstr "Parola değişimi iptal edildi.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s kullanıcısı için parola belirlenirken hata: %s\n"
@@ -411,12 +411,12 @@ msgstr "%s için grup oluşturulurken hata.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Hesap oluşturulamadı: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s oluşturulurken hata: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "posta kuyruğu oluşturulurken hata.\n"
@@ -456,42 +456,42 @@ msgstr "%s bir ev dizinine sahip değil.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "%s silinirken hata: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "%s kullanıcısı için parola belirlenemedi: %s\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Kullanıcı %s kilitlenemedi: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Kullanıcı %s için kilit kaldırılamadı: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Kullanıcı %s değiştirilemedi: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "%s grubu değiştirilemedi: %s\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s için eski ev dizini yok.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s için yeni ev dizini yok.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s %s'e taşınırken hata: %s.\n"

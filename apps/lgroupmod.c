@@ -46,7 +46,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx = NULL;
 	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL;
+	GValueArray *values = NULL, *users = NULL;
 	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
@@ -135,8 +135,43 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	change = gid || addAdmins || remAdmins || cryptedUserPassword ||
-		 addMembers || remMembers || gidNumber != LU_VALUE_INVALID_ID;
+	if (userPassword) {
+		if (lu_group_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
+			fprintf(stderr, _("Failed to set password for group "
+				"%s: %s\n"), group, lu_strerror(error));
+			return 4;
+		}
+	}
+
+	if (cryptedUserPassword) {
+		if (lu_group_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				     &error) == FALSE) {
+			fprintf(stderr, _("Failed to set password for group "
+				"%s: %s\n"), group, lu_strerror(error));
+			return 5;
+		}
+	}
+
+	if (lock) {
+		if (lu_group_lock(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("Group %s could not be locked: %s\n"), group,
+				lu_strerror(error));
+			return 6;
+		}
+	}
+
+	if (unlock) {
+		if (lu_group_unlock(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("Group %s could not be unlocked: %s\n"),
+				group, lu_strerror(error));
+			return 7;
+		}
+	}
+
+	change = gid || addAdmins || remAdmins || addMembers || remMembers;
 
 	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
@@ -147,25 +182,10 @@ main(int argc, const char **argv)
 			g_value_set_string(&val, gid);
 			lu_ent_add(ent, LU_GROUPNAME, &val);
 			g_value_unset(&val);
-		}
-	}
-	if (gidNumber != LU_VALUE_INVALID_ID) {
-		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if (values) {
-			value = g_value_array_get_nth(values, 0);
-			oldGidNumber = lu_value_get_id(value);
-			g_assert(oldGidNumber != LU_VALUE_INVALID_ID);
-		}
-
-		memset(&val, 0, sizeof(val));
-		lu_value_init_set_id(&val, gidNumber);
-
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &val);
-
-		g_value_unset(&val);
-	}
-
+		} else
+			gid = group;
+	} else
+		gid = group;
 	if (addAdmins) {
 		memset(&val, 0, sizeof(val));
 		g_value_init(&val, G_TYPE_STRING);
@@ -232,81 +252,70 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 	}
 
-	if (userPassword) {
-		if (lu_group_setpass(ctx, ent, userPassword, FALSE, &error)
-		    == FALSE) {
-			fprintf(stderr, _("Failed to set password for group "
-				"%s: %s\n"), group, lu_strerror(error));
-			return 4;
-		}
-	}
-
-	if (cryptedUserPassword) {
-		if (lu_group_setpass(ctx, ent, cryptedUserPassword, TRUE,
-				     &error) == FALSE) {
-			fprintf(stderr, _("Failed to set password for group "
-				"%s: %s\n"), group, lu_strerror(error));
-			return 5;
-		}
-	}
-
-	if (lock) {
-		if (lu_group_lock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("Group %s could not be locked: %s\n"), group,
-				lu_strerror(error));
-			return 6;
-		}
-	}
-
-	if (unlock) {
-		if (lu_group_unlock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("Group %s could not be unlocked: %s\n"),
-				group, lu_strerror(error));
-			return 7;
-		}
-	}
-
 	if (change && lu_group_modify(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be modified: %s\n"),
 			group, lu_strerror(error));
 		return 8;
 	}
+	if (gidNumber != LU_VALUE_INVALID_ID) {
+		users = lu_users_enumerate_by_group(ctx, gid, &error);
+
+		values = lu_ent_get(ent, LU_GIDNUMBER);
+		if (values) {
+			value = g_value_array_get_nth(values, 0);
+			oldGidNumber = lu_value_get_id(value);
+			g_assert(oldGidNumber != LU_VALUE_INVALID_ID);
+		}
+
+		memset(&val, 0, sizeof(val));
+		lu_value_init_set_id(&val, gidNumber);
+
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &val);
+
+		g_value_unset(&val);
+
+		if (error != NULL)
+			lu_error_free(&error);
+		if (lu_group_modify(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("Group %s could not be modified: %s\n"),
+				group, lu_strerror(error));
+			return 8;
+		}
+	}
+
 	lu_hup_nscd();
 
 	lu_ent_free(ent);
 
 	if (oldGidNumber != LU_VALUE_INVALID_ID &&
-	    gidNumber != LU_VALUE_INVALID_ID) {
-		values = lu_users_enumerate_by_group(ctx, gid, &error);
-		if (error != NULL) {
-			lu_error_free(&error);
-		}
-		if (values) {
-			ent = lu_ent_new();
+	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
+		ent = lu_ent_new();
 
-			memset(&val, 0, sizeof(val));
-			lu_value_init_set_id(&val, gidNumber);
+		memset(&val, 0, sizeof(val));
+		lu_value_init_set_id(&val, gidNumber);
 
-			for (i = 0; i < values->n_values; i++) {
-				value = g_value_array_get_nth(values, i);
-				tmp = g_value_get_string(value);
-				if (lu_user_lookup_name (ctx, tmp, ent,
-							 &error)) {
+		for (i = 0; i < users->n_values; i++) {
+			value = g_value_array_get_nth(users, i);
+			tmp = g_value_get_string(value);
+			if (lu_user_lookup_name (ctx, tmp, ent, &error)) {
+				values = lu_ent_get(ent, LU_GIDNUMBER);
+				if (values &&
+				    lu_value_get_id(g_value_array_get_nth(values, 0)) ==
+				    oldGidNumber) {
 					lu_ent_clear(ent, LU_GIDNUMBER);
 					lu_ent_add(ent, LU_GIDNUMBER, &val);
 					lu_user_modify(ctx, ent, &error);
-					if (error != NULL) {
+					if (error != NULL)
 						lu_error_free(&error);
-					}
 					lu_hup_nscd();
 				}
 			}
-
-			g_value_unset(&val);
-			lu_ent_free(ent);
 		}
+
+		g_value_unset(&val);
+		lu_ent_free(ent);
 	}
 
 	lu_end(ctx);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-22 14:50+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <Indlinux-hindi@lists.sourceforge.net>\n"
@@ -274,22 +274,22 @@ msgstr "समूह %s को विलोपित नहीं कर सक�
 msgid "Both -L and -U specified.\n"
 msgstr "-L और -U दोनों निर्दिष्ट है. \n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "%s समूह के लिए शब्दकूट जमावट असफल: %s\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "%s समूह को तालकित नहीं किया जा सकता: %s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "%s समूह को अतालकित नहीं किया जा सकता: %s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "%s समूह को परिवर्तित नहीं किया जा सका: %ss\n"
@@ -337,22 +337,22 @@ msgstr "UID 0 से लेखा बनाने के लिए इंका�
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' के लिए GID %jd से समूह बनाने में त्रुटि: %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s के लिए प्रारंभिक शब्दकूट जमा करने में दोष: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s के लिए home निर्देशिका बनाने में दोष: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s के लिए डाक स्पूल बनाने में दोष\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s के लिए उपयोक्ता लेखा बनाने में दोष: %s\n"
@@ -380,7 +380,7 @@ msgstr "शब्दकूट मिल नहीं रहे,पुन:प्�
 msgid "Password change canceled.\n"
 msgstr "शब्दकूट बदलाव रद्द किया गया.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s उपयोक्ता के लिए शब्दकूट जमावट दोष: %s।\n"
@@ -410,12 +410,12 @@ msgstr "`%s' समूह बनाने में दोष: %s.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "लेखा बनावट असफल: %s।\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s बनाने में दोष: %s।\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "डाक स्पूल बनाने में दोष.\n"
@@ -455,42 +455,42 @@ msgstr "%s की कोई home निर्देशिका नहीं ह
 msgid "Error removing %s: %s.\n"
 msgstr "%s हटाने में दोष: %s।\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "%s उपयोक्ता के लिए शब्दकूट जमावट असफल: %s।\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "%s उपयोक्ता को तालकित नहीं कर सका: %s।\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "%s उपयोक्ता को अतालकित नहीं कर सका: %s।\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "%s उपयोक्ता को परिवर्तित नहीं कर सका: %s।\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "%s समूह को परिवर्तित नहीं कर सका: %s।\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s की कोई पुरानी home निर्देशिका नहीं है.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s की कोई नई home निर्देशिका नहीं है.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s से %s को चलाने में दोष: %s।\n"

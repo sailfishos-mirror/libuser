@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-16 00:22+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
@@ -276,22 +276,22 @@ msgstr "グループ %s は削除できませんでした: %s\n"
 msgid "Both -L and -U specified.\n"
 msgstr "-Lと-Uの両方が指定されています。\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "グループ %s のパスワード設定に失敗しました: %s\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "グループ %s はロックされませんでした: %s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "グループ %s はロック解除できませんでした: %s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "グループ %s は修正できませんでした: %s\n"
@@ -339,22 +339,22 @@ msgstr "UID 0でのアカウント作成を拒否中です。\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' 用に GID %jd でグループ作成中にエラー: %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s用の初期パスワード設定中にエラー: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s用の新規ホームディレクトリ作成でエラー: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s用のメールスプール作成でエラー。\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s用のユーザーアカウント作成でエラー: %s。\n"
@@ -382,7 +382,7 @@ msgstr "パスワードが不一致。やり直して下さい。\n"
 msgid "Password change canceled.\n"
 msgstr "パスワード変更は取り消し。\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "ユーザー%sのパスワード設定でエラー: %s。\n"
@@ -412,12 +412,12 @@ msgstr "グループ `%s' の作成でエラー: %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "アカウントの作成に失敗しました: %s。\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%sの作成でエラー: %s。\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "メールスプールの作成中にエラー。\n"
@@ -457,42 +457,42 @@ msgstr "%sにはホームディレクトリがありません。\n"
 msgid "Error removing %s: %s.\n"
 msgstr "%sの削除でエラー: %s。\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "ユーザのパスワード設定で失敗 %s: %s。\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "ユーザ%sはロックできませんでした: %s。\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "ユーザ%sはロック解除できませんでした: %s。\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "ユーザ%sは編集できませんでした: %s。\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "グループ%sは修正できませんでした:%s。\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%sには古いホームディレクトリがありません。\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%sには新しいホームディレクトリはありません。\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%sを%sに移動する際にエラー: %s。\n"

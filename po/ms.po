@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-04 14:59+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -274,22 +274,22 @@ msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Kedua-dua L dan U dinyatakan.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Gagal for kumpulan s"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Kumpulan s"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Kumpulan s"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Kumpulan s telah diubah s"
@@ -338,22 +338,22 @@ msgstr "UID"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Ralat kumpulan for s"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, fuzzy, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Ralat for s s"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, fuzzy, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Ralat direktori for s s"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, fuzzy, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Ralat for s"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, fuzzy, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Ralat pengguna for s s"
@@ -383,7 +383,7 @@ msgstr "Katalaluan"
 msgid "Password change canceled.\n"
 msgstr "Katalaluan"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, fuzzy, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ralat for pengguna s s"
@@ -413,12 +413,12 @@ msgstr "Ralat kumpulan s"
 msgid "Account creation failed: %s.\n"
 msgstr "s"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, fuzzy, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Ralat s s"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, fuzzy, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Ralat"
@@ -458,42 +458,42 @@ msgstr "s direktori"
 msgid "Error removing %s: %s.\n"
 msgstr "Ralat s s"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, fuzzy, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Gagal for pengguna s s"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, fuzzy, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Pengguna s s"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, fuzzy, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Pengguna s s"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, fuzzy, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Pengguna s telah diubah s"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Kumpulan s telah diubah s"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, fuzzy, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Tidak direktori for s"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, fuzzy, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Tidak direktori for s"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, fuzzy, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Ralat s s s"

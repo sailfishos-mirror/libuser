@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-16 21:58+0300\n"
 "Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
@@ -274,22 +274,22 @@ msgstr "Группа %s не может быть удалена: %s\n"
 msgid "Both -L and -U specified.\n"
 msgstr "-L и -U указаны одновременно.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Ошибка установки пароля для группы %s: %s\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Группа %s не может быть заблокирована: %s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Группа %s не может быть разблокирована: %s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Группа %s не может быть изменена: %s\n"
@@ -337,22 +337,22 @@ msgstr "Отказ в создании учетной записи с UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Ошибка создания группы для `%s' с GID %jd: %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Ошибка установки начального пароля для %s: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Ошибка создания домашнего каталога для %s: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Ошибка создания почтовой очереди для %s.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Ошибка создания учетной записи пользователя %s: %s\n"
@@ -380,7 +380,7 @@ msgstr "Пароли не совпадают, попробуйте еще раз
 msgid "Password change canceled.\n"
 msgstr "Изменение пароля отменено.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ошибка установки пароля для пользователя %s: %s.\n"
@@ -410,12 +410,12 @@ msgstr "Ошибка создания группы `%s': %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Ошибка создания учетной записи: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Ошибка создания %s: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Ошибка создания почтовой очереди.\n"
@@ -455,42 +455,42 @@ msgstr "%s не имеет домашнего каталога.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Ошибка удаления %s: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Ошибка установки пароля для пользователя %s: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Пользователь %s не может быть заблокирован: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Пользователь %s не может быть разблокирован: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Пользователь %s не может быть изменен: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Группа %s не может быть изменена: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Нет старого домашнего каталога для %s.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Нет нового домашнего каталога для %s.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Ошибка перемещения %s в %s: %s.\n"

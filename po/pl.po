@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-18 13:00+0100\n"
 "Last-Translator: Marek Garbaczewski <mrgary@fic.uni.lodz.pl>\n"
 "Language-Team: POLISH <pl@li.org>\n"
@@ -279,22 +279,22 @@ msgstr "Grupa %s nie może zostać usunięta: %s\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Podano jednocześnie opcje -L oraz -U.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Ustawienie hasła dla grupy %s: %s zakończyło się niepowodzeniem\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Grupa %s nie może zostać zablokowana: %s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Grupa %s nie może zostać odblokowana: %s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Grupa %s nie może być zmodyfikowana: %s\n"
@@ -345,22 +345,22 @@ msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr ""
 "Błąd podczas tworzenie grupy dla `%s' z identyfikatorem grupy (GID) %jd: %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Błąd podczas ustawiania wstępnego hasła dla %s: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Błąd podczas tworzenia katalogu domowego dla %s: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Błąd podczas tworzenia katalogu systemowego poczty dla %s.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Błąd podczas tworzenia konta użytkownika dla %s: %s\n"
@@ -388,7 +388,7 @@ msgstr "Hasła nie są jednakowe, spróbuj ponownie.\n"
 msgid "Password change canceled.\n"
 msgstr "Zmiana hasła została anulowana.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Błąd podczas ustawiania hasła użytkownika %s: %s.\n"
@@ -418,12 +418,12 @@ msgstr "Błąd podczas tworzenia grupy `%s': %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Zakładanie konta zakończyło się niepowodzeniem: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Błąd podczas tworzenia %s: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Błąd podczas tworzenia systemowego katalogu poczty.\n"
@@ -464,42 +464,42 @@ msgstr "%s nie miał katalogu domowego.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Błąd podczas usuwania %s: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Ustawienie hasła użytkownika %s: zakończyło się niepowodzeniem %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Użytkownik %s nie może zostać zablokowany: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Użytkownik %s nie może zostać odblokowany: %s\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Użytkownik %s nie może być zmieniony: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Grupa %s nie może być zmieniona:%s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Brak poprzedniego katalogu domowego dla %s.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Brak nowego katalogu domowego dla %s.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Błąd podczas przenoszenia %s do %s: %s.\n"

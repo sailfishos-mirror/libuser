@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-11-15 10:36+1000\n"
 "Last-Translator: Michelle J Kim <mkim@redhat.com>\n"
 "Language-Team:  <ko@li.org>\n"
@@ -274,22 +274,22 @@ msgstr "%s 그룹을 삭제할 수 없습니다: %s\n"
 msgid "Both -L and -U specified.\n"
 msgstr "-L 와 -U 이 함께 지정되었습니다.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "%s 그룹의 암호를 설정하는데 실패했습니다: %s\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "%s 그룹을 잠글 수 없습니다: %s\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "%s 그룹 잠금을 해제할 수 없습니다: %s\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "%s 그룹을 편집할 수 없습니다: %s\n"
@@ -339,22 +339,22 @@ msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s'에 GID %jd를 사용하여 그룹을 생성하는데 오류 발생: : %s\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s의 홈 디렉토리를 생성하는 도중 오류가 발생했습니다: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s의 메일 스풀을 생성하는 도중 오류 발생.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s의 사용자 계정을 생성하는 도중 오류 발생: %s.\n"
@@ -382,7 +382,7 @@ msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
 msgid "Password change canceled.\n"
 msgstr "암호 변경이 취소되었습니다.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
@@ -412,12 +412,12 @@ msgstr "`%s' 그룹을 생성하는 도중 오류 발생: %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "계정 생성에 실패함: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
@@ -457,42 +457,42 @@ msgstr "%s의 홈 디렉토리가 없습니다.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "%s(을)를 삭제하는 도중 오류 발생: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "%s 사용자의 암호를 설정하는데 실패함: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "%s 사용자를 정지시킬 수 없습니다: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "%s 사용자의 정지를 해제할 수 없습니다: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "%s 사용자를 편집할 수 없습니다: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "%s 그룹을 편집할 수 없습니다: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s의 이전 홈 디렉토리가 없습니다.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s에서 %s(으)로 이동하는 도중 오류 발생: %s.\n"

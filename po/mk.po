@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-08-01 22:11+0200\n"
 "Last-Translator: Tomislav Markovski <herrera@users.sourceforge.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -278,22 +278,22 @@ msgstr "Групата %s не може да биде избришана: %s.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "И -L и -U се одредени.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Не успеав да поставам лозинка за групата %s.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Групата %s не може да биде заклучена.\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Групата %s не може да биде отклучена.\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Групата %s не може да биде променета: %s.\n"
@@ -342,22 +342,22 @@ msgstr "Одбивам да креирам сметка со UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Грешка при креирањето на група за `%s' со GID %ld.\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Грешка при поставување на лозинка за %s: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Грешка при креирање на домашен директориум за %s: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Грешка при креирање на mail spool за %s.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Грешка при креирање на корисничка сметка за %s: %s\n"
@@ -385,7 +385,7 @@ msgstr "Лозинките не се совпаѓаат, пробајте пов
 msgid "Password change canceled.\n"
 msgstr "Промената на лозинката е откажана.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Грешка при поставување на лозинка за корисникот %s: %s.\n"
@@ -415,12 +415,12 @@ msgstr "Грешка при креирање на групата `%s'.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Креирањето на сметката не успеа: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Грешка при креирање на %s: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Грешка при креирање на mail spool.\n"
@@ -460,42 +460,42 @@ msgstr "%s нема домашен директориум.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Грешка при отстранување на %s: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Не успеав да поставам лозинка за корисникот %s: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Корисникот %s не може да биде заклучен: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Корисникот %s не може да биде отклучен: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Корисникот %s не може да биде променет: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Групата %s не може да биде променета: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Нема стар домашен директориум за %s.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Нема нов домашен директориум за %s.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Грешка при преместување на %s до %s: %s.\n"

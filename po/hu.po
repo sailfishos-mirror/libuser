@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-07-17 13:02+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -277,22 +277,22 @@ msgstr "A(z) %s csoportot nem sikerült törölni: %s.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "A -L és -U opció is meg van adva.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Nem sikerült beállítani a jelszót a(z) %s csoporthoz.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Nem sikerült zárolni a(z) %s csoportot.\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Nem sikerült feloldani a(z) %s csoport zárolását.\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Nem sikerült módosítani a(z) %s csoportot: %s.\n"
@@ -342,22 +342,22 @@ msgstr "Nem lehet 0 értékű azonosítót létrehozni.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Nem sikerült létrehozni a(z) '%s' csoportot (azonosító: %ld).\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Nem sikerült beállítani %s kezdeti jelszavát: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s saját könyvtárát nem sikerült létrehozni: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s levelezési sorának létrehozása nem sikerült.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Nem sikerült felhasználói azonosítót létrehozni ehhez: %s (%s)\n"
@@ -385,7 +385,7 @@ msgstr "A jelszavak nem egyeznek meg, próbálkozzon újra.\n"
 msgid "Password change canceled.\n"
 msgstr "A jelszóváltoztatás meg lett szakítva.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Nem sikerült beállítani %s jelszavát: %s.\n"
@@ -415,12 +415,12 @@ msgstr "Nem sikerült létrehozni a(z) '%s' csoportot.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Az azonosító létrehozása nem sikerült: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s létrehozása nem sikerült: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "A levelezési sor létrehozása nem sikerült.\n"
@@ -460,42 +460,42 @@ msgstr "A(z) %s felhasználónak nem volt saját könyvtára.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "%s eltávolítása nem sikerült: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Nem sikerült beállítani a jelszót a(z) %s felhasználónál: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "A(z) %s felhasználót nem sikerült zárolni: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "A(z) %s felhasználó zárolását nem sikerült feloldani: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Nem sikerült módosítani a(z) %s felhasználónevet: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Nem sikerült módosítani a(z) %s csoportot: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Nincs régi saját könyvtár ehhez: %s.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nincs új saját könyvtár ehhez: %s.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Nem sikerült átmozgatni ezt: %s ide: %s - %s.\n"

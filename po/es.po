@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2004-12-10 11:15-0200\n"
 "Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
 "Language-Team:  <fedora-trans-es@redhat.com>\n"
@@ -351,28 +351,28 @@ msgstr "Especificación de -L y -U\n"
 
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Falló al establecer la contraseña para el grupo %s: %s\n"
 
 # apps/lgroupmod.c:174
 # apps/lgroupmod.c:174
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "No se pudo bloquear el grupo %s: %s\n"
 
 # apps/lgroupmod.c:182
 # apps/lgroupmod.c:182
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "No se pudo desbloquear el grupo %s: %s\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "El grupo %s no se pudo modificar:%s\n"
@@ -436,28 +436,28 @@ msgstr "Error en la creación de un grupo para  `%s' con GID  %jd: %s\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Error en la configuración de la contraseña para %s: %s\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Error creando directorio principal para %s: %s\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Error al crear un spool de correo para  %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Error creando cuenta de usuario para %s: %s\n"
@@ -489,7 +489,7 @@ msgstr "Cancelado el cambio de contraseñas.\n"
 
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Error al configurar la contraseña para el usuario  %s: %s.\n"
@@ -529,14 +529,14 @@ msgstr "Creación de la cuenta fallida: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creando %s: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Error al crear un spool de correo.\n"
@@ -590,56 +590,56 @@ msgstr "Error al eliminar %s: %s.\n"
 
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Intento fallido de configurar la contraseña para el usuario %s: %s.\n"
 
 # apps/lusermod.c:150
 # apps/lusermod.c:150
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "No se ha podido bloquear el usuario %s: %s.\n"
 
 # apps/lusermod.c:157
 # apps/lusermod.c:157
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "No se ha podido desbloquear el ususario %s: %s.\n"
 
 # apps/lusermod.c:163
 # apps/lusermod.c:163
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "No se ha podido modificar el usuario %s: %s.\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "El grupo %s no se ha podido modificar:%s\n"
 
 # apps/lusermod.c:169
 # apps/lusermod.c:169
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ningún directorio principal antiguo para %s.\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ningún directorio principal para %s.\n"
 
 # apps/lusermod.c:177
 # apps/lusermod.c:177
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Error al trasladar %s a %s: %s.\n"

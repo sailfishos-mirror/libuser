@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2003-12-15 00:17+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -273,22 +273,22 @@ msgstr "Grupa %s se nije mogla obrisati: %s.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Određeni su oba -L i -U.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Greška kod postavljanja lozinke za grupu %s.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Grupa %s ne može biti zaključana.\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Grupa %s ne može biti otključana.\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Grupa %s nije mogla biti mijenjana: %s.\n"
@@ -337,22 +337,22 @@ msgstr "Odbijam stvoriti račun s UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Greška kod stvaranja grupe za `%s' s GID %ld.\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Greška kod postavljanja početne lozinke za %s: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Greška kod stvaranja početne mape za %s: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Greška kod stvaranja niza čekanja e-pošte za %s.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Greška kod stvaranja korisničkog računa za %s: %s\n"
@@ -380,7 +380,7 @@ msgstr "Lozinke se ne podudaraju, pokušajte ponovo.\n"
 msgid "Password change canceled.\n"
 msgstr "Otkazana promjena lozinke.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Greška kod postavljanja lozinke za korisnika %s: %s.\n"
@@ -410,12 +410,12 @@ msgstr "Greška kod stvaranja grupe `%s'.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Greška kod stvaranja računa: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Greška kod stvaranja %s: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Greška kod stvaranja niza čekanja e-pošte.\n"
@@ -455,42 +455,42 @@ msgstr "%s nije imalo početnu mapu.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Greška kod brisanja %s: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Greška kod postavljanja lozinke za korisnika %s: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Korisnik %s nije mogao biti zaključan: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Korisnik %s nije mogao biti otključan: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Korisnik %s nije mogao biti promjenjen: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Grupa %s nije mogla biti mijenjana: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Nema starog imena za mapu %s.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nema novog imena za mapu %s.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Greška kod premještanja %s u %s: %s.\n"

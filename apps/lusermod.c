@@ -162,9 +162,50 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
+	/* If the user's password needs to be changed, try to change it. */
+	if (userPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
+			fprintf(stderr,
+				_("Failed to set password for user %s: %s.\n"),
+				user, lu_strerror(error));
+			return 5;
+		}
+	}
+
+	/* If we need to change a user's crypted password, try to change it,
+	 * though it might fail if an underlying mechanism doesn't support
+	 * using them. */
+	if (cryptedUserPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				    &error) == FALSE) {
+			fprintf(stderr,
+				_("Failed to set password for user %s: %s.\n"),
+				user, lu_strerror(error));
+			return 6;
+		}
+	}
+
+	/* If we need to lock/unlock the user's account, do that. */
+	if (lock) {
+		if (lu_user_lock(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("User %s could not be locked: %s.\n"),
+				user, lu_strerror(error));
+			return 7;
+		}
+	}
+	if (unlock) {
+		if (lu_user_unlock(ctx, ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("User %s could not be unlocked: %s.\n"),
+				user, lu_strerror(error));
+			return 8;
+		}
+	}
+
 	/* Determine if we actually need to change anything. */
-	change = userPassword || cryptedUserPassword || uid || gecos ||
-		 homeDirectory || loginShell ||
+	change = uid || gecos || homeDirectory || loginShell ||
 		 uidNumber != LU_VALUE_INVALID_ID ||
 		 gidNumber != LU_VALUE_INVALID_ID;
 
@@ -223,48 +264,6 @@ main(int argc, const char **argv)
 	}
 
 	g_value_unset(&val);
-
-	/* If the user's password needs to be changed, try to change it. */
-	if (userPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
-		    == FALSE) {
-			fprintf(stderr,
-				_("Failed to set password for user %s: %s.\n"),
-				user, lu_strerror(error));
-			return 5;
-		}
-	}
-
-	/* If we need to change a user's crypted password, try to change it,
-	 * though it might fail if an underlying mechanism doesn't support
-	 * using them. */
-	if (cryptedUserPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
-				    &error) == FALSE) {
-			fprintf(stderr,
-				_("Failed to set password for user %s: %s.\n"),
-				user, lu_strerror(error));
-			return 6;
-		}
-	}
-
-	/* If we need to lock/unlock the user's account, do that. */
-	if (lock) {
-		if (lu_user_lock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("User %s could not be locked: %s.\n"),
-				user, lu_strerror(error));
-			return 7;
-		}
-	}
-	if (unlock) {
-		if (lu_user_unlock(ctx, ent, &error) == FALSE) {
-			fprintf(stderr,
-				_("User %s could not be unlocked: %s.\n"),
-				user, lu_strerror(error));
-			return 8;
-		}
-	}
 
 	/* If we need to change anything about the user, do it. */
 	if (change && (lu_user_modify(ctx, ent, &error) == FALSE)) {

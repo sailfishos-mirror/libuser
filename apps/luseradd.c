@@ -291,6 +291,26 @@ main(int argc, const char **argv)
 
 	lu_hup_nscd();
 
+	if (userPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
+			fprintf(stderr, _("Error setting password for user "
+					  "%s: %s.\n"), name,
+				lu_strerror(error));
+			return 3;
+		}
+	}
+	
+	if (cryptedUserPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				    &error) == FALSE) {
+			fprintf(stderr, _("Error setting password for user "
+					  "%s: %s.\n"), name,
+				lu_strerror(error));
+			return 3;
+		}
+	}
+
 	/* If we don't have the the don't-create-home flag, create the user's
 	 * home directory. */
 	if (!dont_create_home) {

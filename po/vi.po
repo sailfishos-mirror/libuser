@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-01-15 15:13+0100\n"
+"POT-Creation-Date: 2005-01-17 02:06+0100\n"
 "PO-Revision-Date: 2003-07-27 13:46+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -274,22 +274,22 @@ msgstr "Nhóm %s không thể bị xóa: %s.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Chưa xác định cả -L và -U.\n"
 
-#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
+#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, fuzzy, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Lỗi đặt mật khẩu cho nhóm %s.\n"
 
-#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:159
 #, fuzzy, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Nhóm %s không thể bị khóa.\n"
 
-#: apps/lgroupmod.c:265
+#: apps/lgroupmod.c:168
 #, fuzzy, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Nhóm %s không thể bị mở khóa.\n"
 
-#: apps/lgroupmod.c:272
+#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Nhóm %s không thể bị thay đổi: %s.\n"
@@ -337,22 +337,22 @@ msgstr "Từ chối tạo tài khoản cho UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Lỗi tạo nhóm cho `%s' với GID %ld.\n"
 
-#: apps/lnewusers.c:288
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Lỗi đặt mật khẩu ban đầu cho %s: %s\n"
 
-#: apps/lnewusers.c:308
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Lỗi tạo thư mục home cho %s: %s\n"
 
-#: apps/lnewusers.c:322
+#: apps/lnewusers.c:326
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Lỗi tạo mail spool cho %s.\n"
 
-#: apps/lnewusers.c:328
+#: apps/lnewusers.c:332
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Lỗi tạo tài khoản người dùng cho %s: %s\n"
@@ -380,7 +380,7 @@ msgstr "Mật khẩu không khớp, vui lòng thử lại.\n"
 msgid "Password change canceled.\n"
 msgstr "Hủy bỏ thay đổi mật khẩu.\n"
 
-#: apps/lpasswd.c:189
+#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Lỗi thiết lập mật khẩu cho người dùng %s: %s.\n"
@@ -410,12 +410,12 @@ msgstr "Lỗi tạo nhóm `%s'.\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Thất bại tạo tài khoản: %s.\n"
 
-#: apps/luseradd.c:317
+#: apps/luseradd.c:337
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Lỗi tạo %s: %s.\n"
 
-#: apps/luseradd.c:324
+#: apps/luseradd.c:344
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Lỗi tạo mail spool.\n"
@@ -455,42 +455,42 @@ msgstr "%s không có thư mục home.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Lỗi loại bỏ %s: %s.\n"
 
-#: apps/lusermod.c:232 apps/lusermod.c:245
+#: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Lỗi đặt mật khẩu cho người dùng %s: %s.\n"
 
-#: apps/lusermod.c:255
+#: apps/lusermod.c:193
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Người dùng %s không thể bị khóa: %s.\n"
 
-#: apps/lusermod.c:263
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Người dùng %s không thể bị mở khóa: %s.\n"
 
-#: apps/lusermod.c:271
+#: apps/lusermod.c:270
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Người dùng %s không thể bị thay đổi: %s.\n"
 
-#: apps/lusermod.c:325
+#: apps/lusermod.c:324
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Nhóm %s không thể bị thay đổi: %s.\n"
 
-#: apps/lusermod.c:336
+#: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s không có thư mục home cũ.\n"
 
-#: apps/lusermod.c:341
+#: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s không có thư mục home mới.\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:346
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Lỗi chuyển %s thành %s: %s.\n"

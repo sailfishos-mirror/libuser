@@ -1,3 +1,34 @@
+2005-01-17  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.2.
+
+	* NEWS: Update.
+
+	* tests/utils_test
+	* tests/utils.conf.in
+	* tests/utils_group
+	* tests/utils_gshadow
+	* tests/utils_passwd
+	* tests/utils_shadow: New files.
+	* Makefile.am: Add tests/utils_test.
+
+	* apps/lgroupmod.c (main): Fix ignoring of other changes when one
+	of -p, -P, -L, -U is used.  Fix group ID changes (look up group
+	members in the original group, and only after applying other
+	member list modifications; don't change primary group ID for users
+	that have a different primary group).
+
+	* apps/lgroupmod.1: Fix typo.
+
+	* apps/lnewusers.c (main): Don't use "users" if the input
+	specifies a nonexistent group name.  Use the specified user ID.
+	* apps/lnewusers.1: Update.
+
+	* apps/luseradd.c (main): Actually implement -p and -P.
+
+	* apps/lusermod.c (main): Fix ignoring of other changes when one
+	of -p, -P, -L, -U is used.
+
 2005-01-15  Miloslav Trmac  <mitr@redhat.com>
 
 	* apps/lchage.1
