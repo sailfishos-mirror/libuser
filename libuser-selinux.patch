@@ -1,0 +1,649 @@
+--- ./apps/apputil.c.selinux	2003-07-03 16:18:03.000000000 -0400
++++ ./apps/apputil.c	2003-07-03 16:22:54.000000000 -0400
+@@ -46,6 +46,59 @@
+ #include "../lib/error.h"
+ #include "apputil.h"
+ 
++#ifdef WITH_SELINUX
++#include <selinux/selinux.h>
++#include <selinux/av_permissions.h>
++#include <selinux/flask.h>
++#include <selinux/context.h>
++int checkAccess(const char *chuser, int access) {
++  int status=-1;
++  security_context_t user_context;
++  char *user=NULL;
++  if( getprevcon(&user_context)==0 ) {
++    context_t c=context_new(user_context);
++    user=context_user_get(c);
++    if (strcmp(chuser, user) == 0) {
++      status=0;
++    } else {
++      struct av_decision avd;
++      int retval = security_compute_av(user_context,
++				       user_context,
++				       SECCLASS_PASSWD,
++				       access,
++				       &avd);
++	  
++      if ((retval == 0) && 
++	  ((access & avd.allowed) == access)) {
++	status=0;
++      }
++    }
++    context_free(c);
++    freecon(user_context);
++  }
++  return status;
++}
++
++int setupDefaultContext(char *orig_file) {
++  if (is_selinux_enabled()) {
++    security_context_t scontext;
++    
++    if (getfilecon(orig_file,&scontext)<0) {
++      return 1;
++    }
++    
++    if (setfscreatecon(scontext) < 0) 
++      {
++	freecon(scontext);
++	return 1;
++      }
++    freecon(scontext);
++  }
++  return 0;
++}
++#endif
++
++
+ /* Populate a user's home directory, copying data from a named skeleton
+  * directory, setting all ownerships as given, and setting the mode of
+  * the top-level directory as given. */
+@@ -432,6 +485,26 @@ lu_authenticate_unprivileged(const char 
+ 	conv.conv = misc_conv;
+ 	conv.appdata_ptr = NULL;
+ 
++#ifdef WITH_SELINUX
++    if (is_selinux_enabled()) {
++      if(getuid() == 0) {
++	if (checkAccess(user,(int) PASSWD__CHFN)!=0) {
++	  security_context_t user_context;
++	  if (getprevcon(&user_context) < 0)
++	    user_context=(security_context_t) strdup(_("Unknown user context"));
++	  fprintf(stderr, _("%s is not authorized to change the finger info of %s\n"),
++		  user_context, user);
++	  freecon(user_context);
++	  exit(1);
++	}
++      }
++      if (setupDefaultContext("/etc/passwd") != 0) {
++	fprintf(stderr,_("Can't set default context for /etc/passwd"));
++	exit(1);
++      }
++    }
++#endif
++
+ 	/* Start up PAM. */
+ 	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
+ 		fprintf(stderr, _("Error initializing PAM.\n"));
+--- ./apps/Makefile.am.selinux	2003-07-18 16:43:53.553816280 -0400
++++ ./apps/Makefile.am	2003-07-03 16:18:36.000000000 -0400
+@@ -13,8 +13,8 @@ sbin_PROGRAMS = \
+ 	luserdel \
+ 	lusermod
+ 
+-CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@
+-LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@
++CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -DWITH_SELINUX
++LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @POPT_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
+ 
+ lchsh_SOURCES = \
+ 	apputil.c \
+--- ./modules/files.c.selinux	2003-02-18 22:35:21.000000000 -0500
++++ ./modules/files.c	2003-07-03 15:46:30.000000000 -0400
+@@ -35,6 +35,51 @@
+ #include "../lib/user_private.h"
+ #include "default.-c"
+ 
++#ifdef WITH_SELINUX
++#include <selinux/selinux.h>
++static security_context_t prev_context=NULL;
++static gboolean setDefaultContext(char *filename,		  
++				  struct lu_error **error)
++{
++  if (is_selinux_enabled()) {
++    security_context_t scontext=NULL;
++    if (getfilecon(filename, &scontext) < 0) {
++      lu_error_new(error, lu_error_stat,
++		   _("couldn't get security context `%s': %s"), filename,
++		   strerror(errno));
++      return FALSE;
++    }
++    if (getfscreatecon(&prev_context) < 0 ) {
++      freecon(scontext);
++      lu_error_new(error, lu_error_stat,
++		   _("couldn't set default security context: %s"), 
++		   strerror(errno));
++      return FALSE;
++    }
++    if (setfscreatecon(scontext) < 0 ) {
++      freecon(scontext);
++      lu_error_new(error, lu_error_stat,
++		   _("couldn't set default security context to `%s': %s"), scontext,
++		   strerror(errno));
++      return FALSE;
++    }
++    freecon(scontext);
++  }
++  return TRUE;
++}
++static void resetDefaultContext(struct lu_error **error)
++{
++  if (setfscreatecon(prev_context) < 0 ) {
++    lu_error_new(error, lu_error_stat,
++		 _("couldn't reset default security context to `%s': %s"), prev_context,
++		 strerror(errno));
++  }
++  if (prev_context) {
++    freecon(prev_context);
++    prev_context=NULL;
++  }
++}
++#endif
+ #define CHUNK_SIZE	(LINE_MAX * 4)
+ 
+ LU_MODULE_INIT(libuser_files_init)
+@@ -810,10 +855,16 @@ generic_add(struct lu_module *module, co
+ 	filename = g_strconcat(dir, "/", base_name, NULL);
+ 	g_free(key);
+ 
++#ifdef WITH_SELINUX
++	if (! setDefaultContext(filename,error)) {	
++	    g_free(filename);
++	    return FALSE;
++	}
++#endif
+ 	/* Create a backup copy of the file we're about to modify. */
+ 	if (lu_files_create_backup(filename, error) == FALSE) {
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Open the file. */
+@@ -823,14 +874,14 @@ generic_add(struct lu_module *module, co
+ 			     _("couldn't open `%s': %s"), filename,
+ 			     strerror(errno));
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Lock the file. */
+ 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Read the file's size. */
+@@ -841,7 +892,7 @@ generic_add(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Generate a new line with the right data in it, and allocate space
+@@ -877,7 +928,7 @@ generic_add(struct lu_module *module, co
+ 		g_free(fragment2);
+ 		g_free(contents);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Check if the beginning of the file is the same as the beginning
+@@ -891,7 +942,7 @@ generic_add(struct lu_module *module, co
+ 		g_free(fragment2);
+ 		g_free(contents);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	} else
+ 	/* If not, search for a newline followed by the beginning of
+ 	 * the entry. */
+@@ -904,7 +955,7 @@ generic_add(struct lu_module *module, co
+ 		g_free(fragment2);
+ 		g_free(contents);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 	/* Hooray, we can add this entry at the end of the file. */
+ 	offset = lseek(fd, 0, SEEK_END);
+@@ -918,7 +969,7 @@ generic_add(struct lu_module *module, co
+ 		g_free(fragment2);
+ 		g_free(contents);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 	/* If the last byte in the file isn't a newline, add one, and silently
+ 	 * curse people who use text editors (which shall remain unnamed) which
+@@ -943,7 +994,7 @@ generic_add(struct lu_module *module, co
+ 		g_free(fragment2);
+ 		g_free(contents);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	} else {
+ 		/* Hey, it succeeded. */
+ 		ret = TRUE;
+@@ -954,7 +1005,13 @@ generic_add(struct lu_module *module, co
+ 	lu_util_lock_free(lock);
+ 	close(fd);
+ 	g_free(filename);
+-
++	goto done;
++ fail:
++	ret=FALSE;
++ done:
++#ifdef WITH_SELINUX
++	resetDefaultContext(error);
++#endif	
+ 	return ret;
+ }
+ 
+@@ -1065,7 +1122,7 @@ generic_mod(struct lu_module *module, co
+ 	char *p, *q, *new_value;
+ 	GValueArray *names = NULL, *values = NULL;
+ 	GValue *value;
+-	gboolean ret = FALSE;
++	gboolean ret = TRUE;
+ 
+ 	g_assert(module != NULL);
+ 	g_assert(base_name != NULL);
+@@ -1103,10 +1160,16 @@ generic_mod(struct lu_module *module, co
+ 	filename = g_strconcat(dir, "/", base_name, NULL);
+ 	g_free(key);
+ 
++#ifdef WITH_SELINUX
++	if (! setDefaultContext(filename,error)) {	
++	    g_free(filename);
++	    return FALSE;
++	}
++#endif
+ 	/* Create a backup file. */
+ 	if (lu_files_create_backup(filename, error) == FALSE) {
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Open the file to be modified. */
+@@ -1116,14 +1179,14 @@ generic_mod(struct lu_module *module, co
+ 			     _("couldn't open `%s': %s"), filename,
+ 			     strerror(errno));
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Lock the file. */
+ 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* We iterate over all of the fields individually. */
+@@ -1183,7 +1246,7 @@ generic_mod(struct lu_module *module, co
+ 			lu_util_lock_free(lock);
+ 			close(fd);
+ 			g_free(filename);
+-			return FALSE;
++			goto fail;
+ 		}
+ 
+ 		/* We may have just renamed the account (we're safe assuming
+@@ -1199,7 +1262,7 @@ generic_mod(struct lu_module *module, co
+ 				lu_util_lock_free(lock);
+ 				close(fd);
+ 				g_free(filename);
+-				return FALSE;
++				goto fail;
+ 			}
+ 		} else
+ 		if (ent->type == lu_group) {
+@@ -1211,7 +1274,7 @@ generic_mod(struct lu_module *module, co
+ 				lu_util_lock_free(lock);
+ 				close(fd);
+ 				g_free(filename);
+-				return FALSE;
++				goto fail;
+ 			}
+ 		} else {
+ 			g_assert_not_reached();
+@@ -1222,8 +1285,14 @@ generic_mod(struct lu_module *module, co
+ 	lu_util_lock_free(lock);
+ 	close(fd);
+ 	g_free(filename);
+-
+-	return TRUE;
++	goto done;
++ fail:
++	ret=FALSE;
++ done:
++#ifdef WITH_SELINUX
++	resetDefaultContext(error);
++#endif	
++	return ret;
+ }
+ 
+ /* Modify an entry in the passwd file. */
+@@ -1276,6 +1345,7 @@ static gboolean
+ generic_del(struct lu_module *module, const char *base_name,
+ 	    struct lu_ent *ent, struct lu_error **error)
+ {
++        gboolean ret=TRUE;
+ 	GValueArray *name = NULL;
+ 	GValue *value;
+ 	char *contents = NULL, *filename = NULL, *key = NULL;
+@@ -1309,10 +1379,16 @@ generic_del(struct lu_module *module, co
+ 	filename = g_strconcat(dir, "/", base_name, NULL);
+ 	g_free(key);
+ 
++#ifdef WITH_SELINUX
++	if (! setDefaultContext(filename,error)) {	
++	    g_free(filename);
++	    return FALSE;
++	}
++#endif
+ 	/* Create a backup of that file. */
+ 	if (lu_files_create_backup(filename, error) == FALSE) {
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Open the file to be modified. */
+@@ -1322,14 +1398,14 @@ generic_del(struct lu_module *module, co
+ 			     _("couldn't open `%s': %s"), filename,
+ 			     strerror(errno));
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Lock the file. */
+ 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Determine the file's size. */
+@@ -1340,7 +1416,7 @@ generic_del(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Allocate space to hold the file and read it all in. */
+@@ -1353,7 +1429,7 @@ generic_del(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Generate string versions of what the beginning of a line might
+@@ -1399,7 +1475,7 @@ generic_del(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return TRUE;
++		goto done;
+ 	}
+ 
+ 	/* Otherwise we need to write the new data to the file.  Jump back to
+@@ -1412,7 +1488,7 @@ generic_del(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Write the new contents out. */
+@@ -1424,7 +1500,7 @@ generic_del(struct lu_module *module, co
+ 		lu_util_lock_free(lock);
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Truncate the file to the new (certainly shorter) length. */
+@@ -1435,8 +1511,14 @@ generic_del(struct lu_module *module, co
+ 	lu_util_lock_free(lock);
+ 	close(fd);
+ 	g_free(filename);
+-
+-	return TRUE;
++	goto done;
++ fail:
++	ret=FALSE;
++ done:
++#ifdef WITH_SELINUX
++	resetDefaultContext(error);
++#endif	
++	return ret;
+ }
+ 
+ /* Remove a user from the passwd file. */
+@@ -1538,10 +1620,16 @@ generic_lock(struct lu_module *module, c
+ 	filename = g_strconcat(dir, "/", base_name, NULL);
+ 	g_free(key);
+ 
++#ifdef WITH_SELINUX
++	if (! setDefaultContext(filename,error)) {	
++	    g_free(filename);
++	    return FALSE;
++	}
++#endif
+ 	/* Create a backup of the file. */
+ 	if (lu_files_create_backup(filename, error) == FALSE) {
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Open the file. */
+@@ -1551,14 +1639,14 @@ generic_lock(struct lu_module *module, c
+ 			     _("couldn't open `%s': %s"), filename,
+ 			     strerror(errno));
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Lock the file. */
+ 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Generate a string representation of the name. */
+@@ -1579,7 +1667,7 @@ generic_lock(struct lu_module *module, c
+ 		close(fd);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Check that we actually care about this.  If there's a non-empty,
+@@ -1591,7 +1679,8 @@ generic_lock(struct lu_module *module, c
+ 		g_free(value);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return TRUE;
++		ret = TRUE;
++		goto done;
+ 	}
+ 
+ 	/* Generate a new value for the file. */
+@@ -1605,7 +1694,7 @@ generic_lock(struct lu_module *module, c
+ 		close(fd);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Clean up. */
+@@ -1614,7 +1703,14 @@ generic_lock(struct lu_module *module, c
+ 	g_free(namestring);
+ 	g_free(filename);
+ 
+-	return TRUE;
++	goto done;
++ fail:
++	ret=FALSE;
++ done:
++#ifdef WITH_SELINUX
++	resetDefaultContext(error);
++#endif	
++	return ret;
+ }
+ 
+ /* Check if an account [password] is locked. */
+@@ -1825,7 +1921,7 @@ generic_setpass(struct lu_module *module
+ 	const char *dir;
+ 	int fd = -1;
+ 	gpointer lock;
+-	gboolean ret = FALSE;
++	gboolean ret = TRUE;
+ 
+ 	/* Get the name of this account. */
+ 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
+@@ -1848,10 +1944,16 @@ generic_setpass(struct lu_module *module
+ 	filename = g_strconcat(dir, "/", base_name, NULL);
+ 	g_free(key);
+ 
++#ifdef WITH_SELINUX
++	if (! setDefaultContext(filename,error)) {	
++	    g_free(filename);
++	    return FALSE;
++	}
++#endif
+ 	/* Create a backup of the file. */
+ 	if (lu_files_create_backup(filename, error) == FALSE) {
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Open the file. */
+@@ -1861,14 +1963,14 @@ generic_setpass(struct lu_module *module
+ 			     _("couldn't open `%s': %s"), filename,
+ 			     strerror(errno));
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Lock the file. */
+ 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+ 		close(fd);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* Get the name of the account. */
+@@ -1889,7 +1991,7 @@ generic_setpass(struct lu_module *module
+ 		close(fd);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	/* If we don't really care, nod our heads and smile. */
+@@ -1898,7 +2000,7 @@ generic_setpass(struct lu_module *module
+ 		close(fd);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return TRUE;
++		goto done;
+ 	}
+ 
+ 	/* The crypt prefix indicates that the password is already hashed.  If
+@@ -1917,14 +2019,20 @@ generic_setpass(struct lu_module *module
+ 		close(fd);
+ 		g_free(namestring);
+ 		g_free(filename);
+-		return FALSE;
++		goto fail;
+ 	}
+ 
+ 	lu_util_lock_free(lock);
+ 	close(fd);
+ 	g_free(namestring);
+ 	g_free(filename);
+-
++	goto done;
++ fail:
++	ret=FALSE;
++ done:
++#ifdef WITH_SELINUX
++	resetDefaultContext(error);
++#endif	
+ 	return ret;
+ }
+ 
+--- ./modules/Makefile.am.selinux	2002-01-28 21:28:58.000000000 -0500
++++ ./modules/Makefile.am	2003-07-18 16:45:43.016175472 -0400
+@@ -1,5 +1,5 @@
+-CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE
+-LDADD = @GOBJECT_LIBS@ ../lib/libuser.la
++CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@ -D_LIBUSER_MODULE -DWITH_SELINUX
++LDADD = @GOBJECT_LIBS@ ../lib/libuser.la -lselinux -lattr
+ 
+ EXTRA_PROGRAMS = \
+ 	libuser_files.so \
+--- ./python/Makefile.am.selinux	2003-07-03 16:42:59.000000000 -0400
++++ ./python/Makefile.am	2003-07-18 16:48:05.804468352 -0400
+@@ -9,7 +9,7 @@ EXTRA_PROGRAMS = libuserquotamodule.so
+ noinst_SCRIPTS = $(srcdir)/test-script $(srcdir)/quota-script
+ 
+ libusermodule_so_SOURCES = libusermodule.c common.h debug.h
+-libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
++libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
+ libusermodule_so_LDADD = ../apps/apputil.o ../lib/libuser.la
+ 
+ libuserquotamodule_so_SOURCES = quotamodule.c debug.h
+--- ./samples/Makefile.am.selinux	2003-07-03 16:36:18.000000000 -0400
++++ ./samples/Makefile.am	2003-07-03 16:36:40.000000000 -0400
+@@ -15,7 +15,7 @@ field_LDADD =  ../lib/libuser.la @GOBJEC
+ 
+ homedir_SOURCES = homedir.c
+ 
+-homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
++homedir_LDADD =  ../apps/apputil.o ../lib/libuser.la @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ -lselinux -lattr
+ 
+ lookup_SOURCES = lookup.c
+ 
