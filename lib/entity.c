@@ -104,6 +104,7 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	switch (ent->type) {
 		case lu_invalid:
 			fprintf(fp, " type = invalid\n");
+			break;
 		case lu_user:
 			fprintf(fp, " type = user\n");
 			break;

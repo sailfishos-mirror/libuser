@@ -1441,6 +1441,13 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	if (strncmp(oldpassword, LU_CRYPTED, scheme_len) != 0) {
 		tmp = lu_make_crypted(oldpassword,
 				      lu_common_default_salt_specifier(module));
+		if (tmp == NULL) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_generic,
+				     "error encrypting password");
+			g_free(oldpassword);
+			return FALSE;
+		}
 	} else {
 		tmp = ent->cache->cache(ent->cache, oldpassword + scheme_len);
 	}
@@ -1690,6 +1697,12 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 				    previous ? (previous +
 						strlen(LU_CRYPTED)) :
 				    lu_common_default_salt_specifier(module));
+		if (crypted == NULL) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_generic,
+				     "error encrypting password");
+			return FALSE;
+		}
 		tmp = g_strconcat(LU_CRYPTED, crypted, NULL);
 		addvalues[0] = module->scache->cache(module->scache, tmp);
 		g_free(tmp);

@@ -1198,6 +1198,7 @@ lu_dispatch(struct lu_context *context,
 	return success;
 }
 
+/* FIXME: error status, if any, is not reported to the caller */
 gboolean
 lu_uses_elevated_privileges (struct lu_context *context)
 {

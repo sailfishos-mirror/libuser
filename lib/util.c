@@ -98,27 +98,39 @@ is_acceptable(const char c)
 	return (strchr(ACCEPTABLE, c) != NULL);
 }
 
-static void
+static gboolean
 fill_urandom(char *output, size_t length)
 {
 	int fd;
 	size_t got = 0;
 
 	fd = open("/dev/urandom", O_RDONLY);
-	g_return_if_fail(fd != -1);
+	g_return_val_if_fail(fd != -1, FALSE);
 
 	memset(output, '\0', length);
-
+	
 	while (got < length) {
-		read(fd, output + got, length - got);
-		while (isprint(output[got]) &&
-		       !isspace(output[got]) &&
-		       is_acceptable(output[got])) {
+		ssize_t len;
+		
+		len = read(fd, output + got, length - got);
+		if (len == -1) {
+			if (errno == EINTR)
+				continue;
+			else {
+				close(fd);
+				return FALSE;
+			}
+		}
+		while (len != 0 && isprint((unsigned char)output[got])
+		       && !isspace((unsigned char)output[got])
+		       && is_acceptable(output[got])) {
 			got++;
+			len--;
 		}
 	}
-
+	
 	close(fd);
+	return TRUE;
 }
 
 static struct {
@@ -157,7 +169,8 @@ lu_make_crypted(const char *plain, const char *previous)
 		 salt_type_info[i].salt_length +
 		 strlen(salt_type_info[i].separator) <
 		 sizeof(salt));
-	fill_urandom(salt + len, salt_type_info[i].salt_length);
+	if (fill_urandom(salt + len, salt_type_info[i].salt_length) == FALSE)
+		return NULL;
 	strcat(salt, salt_type_info[i].separator);
 
 	return crypt(plain, salt);
@@ -213,7 +226,7 @@ lu_util_lock_free(gpointer lock)
 	ret = (struct lu_lock*) lock;
 	do {
 		ret->lock.l_type = F_UNLCK;
-		i = fcntl(ret->fd, F_SETLK, ret->lock);
+		i = fcntl(ret->fd, F_SETLK, &ret->lock);
 	} while ((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
 	g_free(ret);
 }

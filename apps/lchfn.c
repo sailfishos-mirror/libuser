@@ -152,7 +152,7 @@ main(int argc, const char **argv)
 	}
 
 	/* Fill out the prompt structures. */
-	memset(&prompts, 0, sizeof(prompts));
+	memset(prompts, 0, sizeof(prompts));
 	pcount = 0;
 
 	/* The first prompt is for the full name. */

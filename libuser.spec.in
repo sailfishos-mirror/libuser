@@ -98,7 +98,14 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Tue Aug 31 2004 Miloslav Trmac <mitr@volny.cz> - 0.51.9-1
+* Wed Sep  2 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.10-1
+- Don't attempt to lookup using original entity name after entity
+  modification (rename in particular) (#78376, #121252)
+- Fix copying of symlinks from /etc/skel (#87572, original patch from gLaNDix)
+- Make --enable-quota work, and fix the quota code to at least compile (#89114)
+- Fix several bugs (#120168, original patch from Steve Grubb)
+
+* Tue Aug 31 2004 Miloslav Trmac <mitr@redhat.com> - 0.51.9-1
 - Fix various typos
 - Document library interfaces
 - Build all shared libraries with -fPIC (#72536)

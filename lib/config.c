@@ -69,15 +69,26 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		lu_error_new(error, lu_error_open,
 			     _("could not open configuration file `%s': %s"),
 			     filename, strerror(errno));
-		return FALSE;
+		goto err;
 	}
 
 	/* Create a new structure to save the data. */
 	config = g_malloc0(sizeof(struct config_config));
-	if (fstat(fd, &st) != -1) {
-		/* Read the file's contents in. */
-		config->data = g_malloc0(st.st_size + 1);
-		read(fd, config->data, st.st_size);
+	if (fstat(fd, &st) == -1) {
+		/* FIXME: STRING_FREEZE */
+		lu_error_new(error, lu_error_stat,
+			     "could not stat configuration file `%s': %s",
+			     filename, strerror(errno));
+		goto err_config;
+	} 
+	/* Read the file's contents in. */
+	config->data = g_malloc0(st.st_size + 1);
+	if (read(fd, config->data, st.st_size) != st.st_size) {
+		/* FIXME: STRING_FREEZE */
+		lu_error_new(error, lu_error_read,
+			     "could not read configuration file `%s': %s",
+			     filename, strerror(errno));
+		goto err_data;
 	}
 	close(fd);
 
@@ -86,6 +97,15 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	context->config = config;
 
 	return TRUE;
+
+
+ err_data:
+	g_free(config->data);
+ err_config:
+	g_free(config);
+	close(fd);
+ err:
+	return FALSE;
 }
 
 /* Free a configuration context structure. */

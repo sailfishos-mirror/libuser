@@ -117,7 +117,7 @@ main(int argc, const char **argv)
 	if ((values != NULL) && (values->n_values > 0)) {
 		value = g_value_array_get_nth(values, 0);
 		/* Fill in the prompt structure using the user's shell. */
-		memset(&prompts, 0, sizeof(prompts));
+		memset(prompts, 0, sizeof(prompts));
 		prompts[0].key = "lchfn/shell";
 		prompts[0].prompt = N_("New Shell");
 		prompts[0].domain = PACKAGE;

@@ -468,10 +468,8 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	}
 
 	/* If we found data, parse it and then free the data. */
-	if (line != NULL) {
-		ret = parser(line, ent);
-		g_free(line);
-	}
+	ret = parser(line, ent);
+	g_free(line);
 	lu_util_lock_free(lock);
 	close(fd);
 
@@ -1858,10 +1856,8 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	g_free(key);
 
 	/* Create a backup of the file. */
-	if (lu_files_create_backup(filename, error) == FALSE) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (lu_files_create_backup(filename, error) == FALSE)
+		goto err_filename;
 
 	/* Open the file. */
 	fd = open(filename, O_RDWR);
@@ -1869,16 +1865,12 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* Get the name of the account. */
 	val = g_value_array_get_nth(name, 0);
@@ -1893,21 +1885,13 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 
 	/* Read the current contents of the field. */
 	value = lu_util_field_read(fd, namestring, field, error);
-	if (value == NULL) {
-		/* I'm very confused now. */
-		close(fd);
-		g_free(namestring);
-		g_free(filename);
-		return FALSE;
-	}
-
+	if (value == NULL)
+		goto err_namestring;
+	
 	/* If we don't really care, nod our heads and smile. */
 	if (LU_CRYPT_INVALID(value)) {
-		g_free(value);
-		close(fd);
-		g_free(namestring);
-		g_free(filename);
-		return TRUE;
+		ret = TRUE;
+		goto err_value;
 	}
 
 	/* The crypt prefix indicates that the password is already hashed.  If
@@ -1917,23 +1901,27 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	} else {
 		password = lu_make_crypted(password,
 					   lu_common_default_salt_specifier(module));
+		if (password == NULL) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_generic,
+				     "error encrypting password");
+			goto err_value;
+		}
 	}
 
 	/* Now write our changes to the file. */
 	ret = lu_util_field_write(fd, namestring, field, password, error);
-	if (ret == FALSE) {
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(namestring);
-		g_free(filename);
-		return FALSE;
-	}
+	/* Fall through */
 
-	lu_util_lock_free(lock);
-	close(fd);
+ err_value:
+	g_free(value);
+ err_namestring:
 	g_free(namestring);
+	lu_util_lock_free(lock);
+ err_fd:
+	close(fd);
+ err_filename:
 	g_free(filename);
-
 	return ret;
 }
 
@@ -2086,7 +2074,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
 		lu_util_lock_free(lock);
-		fclose(fp);
+		close(fd);
 		g_free(filename);
 		return NULL;
 	}
@@ -2195,7 +2183,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
 		lu_util_lock_free(lock);
-		fclose(fp);
+		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		return NULL;
@@ -2284,7 +2272,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
 		lu_util_lock_free(lock);
-		fclose(fp);
+		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		g_value_array_free(ret);
@@ -2400,7 +2388,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
 		lu_util_lock_free(lock);
-		fclose(fp);
+		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		return NULL;
@@ -2478,7 +2466,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
 		lu_util_lock_free(lock);
-		fclose(fp);
+		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		return NULL;
