@@ -1906,7 +1906,8 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
 		password = password + strlen(LU_CRYPTED);
 	} else {
-		password = lu_make_crypted(password, NULL);
+		password = lu_make_crypted(password,
+					   lu_common_default_salt_specifier(module));
 	}
 
 	/* Now write our changes to the file. */

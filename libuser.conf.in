@@ -11,6 +11,7 @@ skeleton = @scdir@/skel
 mailspooldir = /var/mail
 modules = files shadow
 create_modules = files shadow
+crypt_style = md5
 # modules = files shadow ldap krb5
 # create_modules = ldap krb5
 

@@ -90,7 +90,8 @@ popd
 
 %changelog
 * Tue Feb 18 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.6-1
-- use md5-style crypt() by default when setting new passwords (#79337)
+- use a crypt salt consistent with the defaults/crypt_style setting when
+  setting new passwords (#79337)
 
 * Thu Feb  6 2003 Nalin Dahyabhai <nalin@redhat.com> 0.51.5-2
 - rebuild

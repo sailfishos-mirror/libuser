@@ -1432,7 +1432,8 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
 	if (strncmp(oldpassword, LU_CRYPTED, scheme_len) != 0) {
-		tmp = lu_make_crypted(oldpassword, "");
+		tmp = lu_make_crypted(oldpassword,
+				      lu_common_default_salt_specifier(module));
 	} else {
 		tmp = ent->cache->cache(ent->cache, oldpassword + scheme_len);
 	}
@@ -1674,7 +1675,8 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		crypted =
 		    lu_make_crypted(password,
 				    previous ? (previous +
-						strlen(LU_CRYPTED)) : "$1$");
+						strlen(LU_CRYPTED)) :
+				    lu_common_default_salt_specifier(module));
 		tmp = g_strconcat(LU_CRYPTED, crypted, NULL);
 		addvalues[0] = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
