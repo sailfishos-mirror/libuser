@@ -86,7 +86,10 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
-* Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.92-1
+* Mon Jan 28 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.92-1
+- add removepass() functions
+
+* Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com>
 - lchfn,lchsh,lpasswd - reorder PAM authentication calls
 - include API docs in the package
 
