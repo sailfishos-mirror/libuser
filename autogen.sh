@@ -12,5 +12,5 @@ automake -a
 autoheader
 autoconf
 test -d intl || gettextize -f -c
-rm -f config.cache
+test -f config.cache && rm -f config.cache || true
 ./configure --prefix=/usr --sysconfdir=/etc --enable-maintainer-mode --with-ldap --with-sasl $@
