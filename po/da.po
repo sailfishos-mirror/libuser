@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2005-01-17 01:56+0100\n"
+"PO-Revision-Date: 2005-03-14 01:55+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <<dansk@klid.dk>>\n"
 "MIME-Version: 1.0\n"
@@ -31,15 +31,15 @@ msgstr "Fejl ved oprettelse af `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Fejl ved oprettelse af gruppe '%s': %s\n"
+msgstr "Fejl ved ændring af ejer for '%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Fejl ved oprettelse af `%s': %s"
+msgstr "Fejl ved skrivning `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -336,8 +336,7 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:134
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
@@ -709,9 +708,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "sikkerhedskopifilen '%s' eksisterer og er ikke en almindelig fil"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "uoverensstemmelse med version i bibliotek eller modul"
+msgstr "uoverensstemmelse med filstørrelse for sikkerhedskopiering"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -749,8 +747,7 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1090,3 +1087,4 @@ msgstr "Kopierer brugerstruktur:\n"
 
 #~ msgid "freeing lu_ent at %p.\n"
 #~ msgstr "frigiver lu_ent ved %p.\n"
+
