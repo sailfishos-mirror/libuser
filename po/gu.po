@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2003-02-24 23:52-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2004-09-28 22:52+0200\n"
 "PO-Revision-Date: 2004-08-27 12:45+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati\n"
@@ -14,147 +15,155 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 
-#: apps/apputil.c:71
+#: apps/apputil.c:129
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' વાંચવામાં ભૂલ: %s"
 
-#: apps/apputil.c:79
+#: apps/apputil.c:137
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' બનાવવામાં ભૂલ: %s"
 
-#: apps/apputil.c:205 apps/apputil.c:215 apps/apputil.c:247 apps/apputil.c:264
+#: apps/apputil.c:265 apps/apputil.c:297 apps/apputil.c:314
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' દૂર કરવામાં ભૂલ: %s"
 
-#: apps/apputil.c:421 apps/apputil.c:425
+#: apps/apputil.c:473 apps/apputil.c:477
+#, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "ખાસ ફાયદાઓ છોડી મૂકવામાં નિષ્ફળ.\n"
 
-#: apps/apputil.c:434
+#: apps/apputil.c:486
+#, c-format
 msgid "Internal error.\n"
 msgstr "આંતરિક ભૂલ.\n"
 
-#: apps/apputil.c:447
+#: apps/apputil.c:526
+#, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM નો પ્રારંભ કરવામાં ભૂલ.\n"
 
-#: apps/apputil.c:455 apps/apputil.c:479
+#: apps/apputil.c:534 apps/apputil.c:558
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s માટેનું સત્તાધિકરણ નિષ્ફળ.\n"
 
-#: apps/apputil.c:464
+#: apps/apputil.c:543
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "આંતરિક PAM ભૂલ `%s'.\n"
 
-#: apps/apputil.c:470
+#: apps/apputil.c:549
+#, c-format
 msgid "User mismatch.\n"
 msgstr "વપરાશકર્તા બંધબેસતો નથી.\n"
 
-#: apps/lchage.c:132 apps/lid.c:67 apps/lpasswd.c:70 apps/luseradd.c:86
+#: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
 msgstr "[OPTION...] વપરાશકર્તા"
 
-#: apps/lchage.c:135 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:85 apps/lid.c:70 apps/lnewusers.c:77
-#: apps/lpasswd.c:73 apps/luseradd.c:89 apps/luserdel.c:68 apps/lusermod.c:90
+#: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
+#: apps/lpasswd.c:73 apps/luseradd.c:90 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "દલીલોનું પદચ્છેદ કરવામાં ભૂલ: %s.\n"
 
-#: apps/lchage.c:144 apps/lpasswd.c:89 apps/luseradd.c:104 apps/luserdel.c:76
+#: apps/lchage.c:146 apps/lpasswd.c:89 apps/luseradd.c:105 apps/luserdel.c:76
 #: apps/lusermod.c:101
+#, c-format
 msgid "No user name specified.\n"
 msgstr "કોઈ વપરાશકર્તા નામ સ્પષ્ટ કરેલ નથી.\n"
 
-#: apps/lchage.c:154 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:102 apps/lid.c:110 apps/lnewusers.c:88
-#: apps/lpasswd.c:99 apps/luseradd.c:114 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:71
+#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
+#: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
+#: apps/lusermod.c:111 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%s નો પ્રારંભ કરવામાં ભૂલ: %s.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:104 apps/lid.c:112
+#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
+#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
 #: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
 #: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:116 apps/luseradd.c:277
-#: apps/luseradd.c:320 apps/luserdel.c:87 apps/luserdel.c:101
+#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:278
+#: apps/luseradd.c:321 apps/luserdel.c:87 apps/luserdel.c:101
 #: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
 #: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
 #: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:352 python/admin.c:419
+#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
 #: samples/lookup.c:65
 msgid "unknown error"
 msgstr "અજ્ઞાત ભૂલ"
 
-#: apps/lchage.c:164 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
+#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
 #: apps/luserdel.c:94 apps/lusermod.c:126
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "વપરાશકર્તા %s અસ્તિત્વમાં નથી.\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:174
+#, c-format
 msgid "Account is locked.\n"
 msgstr "ખાતાને તાળું લગાવાયેલ છે.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:176
+#, c-format
 msgid "Account is not locked.\n"
 msgstr "ખાતાને તાળું લગાવાયેલ નથી.\n"
 
-#: apps/lchage.c:179
+#: apps/lchage.c:181
 #, c-format
 msgid "Minimum:\t%d\n"
 msgstr "ન્યુનતમ:\t%d\n"
 
-#: apps/lchage.c:184
+#: apps/lchage.c:186
 #, c-format
 msgid "Maximum:\t%d\n"
 msgstr "મહત્તમ:\t%d\n"
 
-#: apps/lchage.c:189
+#: apps/lchage.c:191
 #, c-format
 msgid "Warning:\t%d\n"
 msgstr "ચેતવણી:\t%d\n"
 
-#: apps/lchage.c:194
+#: apps/lchage.c:196
 #, c-format
 msgid "Inactive:\t%d\n"
 msgstr "નિષ્ક્રિય:\t%d\n"
 
-#: apps/lchage.c:199 apps/lchage.c:207 apps/lchage.c:218 apps/lchage.c:228
+#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
 msgid "Never"
 msgstr "ક્યારેય નહિં"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:203
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "છેલ્લો ફેરફાર:\t%s\n"
 
-#: apps/lchage.c:211
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "પાસવર્ડની મર્યાદા પૂરી થાય છે:\t%s\n"
 
-#: apps/lchage.c:223
+#: apps/lchage.c:225
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "પાસવર્ડ નિષ્ક્રિય છે:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:232
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "ખાતાની મર્યાદા પૂરી થાય છે:\t%s\n"
 
-#: apps/lchage.c:277
+#: apps/lchage.c:279
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "%s માટેની એજીંગ જાણકારી સુધારવામાં નિષ્ફળ.\n"
@@ -163,12 +172,11 @@ msgstr "%s માટેની એજીંગ જાણકારી સુધા
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [user]"
 
-#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:97
+#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "કોઈ વપરાશકર્તા નામ સ્પષ્ટ કરેલ નથી, uid %d માટે કોઈ નામ નથી.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
@@ -220,7 +228,6 @@ msgstr "ફીંગર જાણકારી બદલાયેલ છે.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "ફીંગર જાણકારી બદલાયેલ નથી: %s.\n"
 
-#. Give the user some idea of what's going on.
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
@@ -234,19 +241,21 @@ msgstr "નવો શેલ"
 msgid "Shell changed.\n"
 msgstr "શેલ બદલાયેલ છે.\n"
 
-#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
+#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
 msgstr "[OPTION...] જૂથ"
 
-#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
+#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
+#, c-format
 msgid "No group name specified.\n"
 msgstr "કોઈ જૂથ નામ સ્પષ્ટ કરેલ નથી.\n"
 
 #: apps/lgroupadd.c:116
+#, c-format
 msgid "Group creation failed.\n"
 msgstr "જૂથ બનાવવામાં નિષ્ફળ.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:116 apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "જૂથ %s અસ્તિત્વમાં નથી.\n"
@@ -256,41 +265,42 @@ msgstr "જૂથ %s અસ્તિત્વમાં નથી.\n"
 msgid "Group %s could not be deleted.\n"
 msgstr "જૂથ %s કાઢી શકાયું નહિં.\n"
 
-#: apps/lgroupmod.c:109 apps/lusermod.c:119
+#: apps/lgroupmod.c:111 apps/lusermod.c:119
+#, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "બંને -L અને -U સ્પષ્ટ કરેલ છે.\n"
 
-#: apps/lgroupmod.c:226 apps/lgroupmod.c:234
+#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "જૂથ %s માટે પાસવર્ડ સુયોજિત કરવામાં નિષ્ફળ.\n"
 
-#: apps/lgroupmod.c:242
+#: apps/lgroupmod.c:244
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "જૂથ %s ને તાળુ મારી શકાયું નહિં.\n"
 
-#: apps/lgroupmod.c:250
+#: apps/lgroupmod.c:252
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "જૂથ %s નું તાળુ ખોલી શકાયું નહિં.\n"
 
-#: apps/lgroupmod.c:257
+#: apps/lgroupmod.c:259
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "જૂથ %s સુધારી શકાયું નહિં.\n"
 
-#: apps/lid.c:81
+#: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "કોઈ જૂથ નામ સ્પષ્ટ કરેલ નથી, %s વાપરી રહ્યા છીએ.\n"
 
-#: apps/lid.c:85
+#: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "કોઈ જૂથ નામ સ્પષ્ટ કરેલ નથી, gid %d માટે કોઈ નામ નથી.\n"
 
-#: apps/lid.c:93
+#: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "કોઈ વપરાશકર્તા નામ સ્પષ્ટ કરેલ નથી, %s વાપરી રહ્યા છીએ.\n"
@@ -313,7 +323,6 @@ msgstr "`%s' માટે ખાતુ બનાવવામાં ભૂલ: �
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID ૦ સાથે ખાતું બનાવવાનું નકારી રહ્યા છીએ.\n"
 
-#. Aargh!  Abandon all hope.
 #: apps/lnewusers.c:237
 #, c-format
 msgid "Error creating group for `%s' with GID %ld.\n"
@@ -353,10 +362,12 @@ msgid "New password (confirm)"
 msgstr "નવો પાસવર્ડ (ખાતરી)"
 
 #: apps/lpasswd.c:128
+#, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "પાસવર્ડો બંધબેસતા નથી, ફરીથી પ્રયત્ન કરો.\n"
 
 #: apps/lpasswd.c:133
+#, c-format
 msgid "Password change canceled.\n"
 msgstr "પાસવર્ડ બદલવાનું નકારાઈ ગયું.\n"
 
@@ -371,26 +382,27 @@ msgid "Error setting password for group %s: %s.\n"
 msgstr "જૂથ %s માટે પાસવર્ડ સુયોજિત કરવામાં ભૂલ: %s.\n"
 
 #: apps/lpasswd.c:208
+#, c-format
 msgid "Password changed.\n"
 msgstr "પાસવર્ડ બદલાઈ ગયેલ છે.\n"
 
-#. Aargh!  Abandon all hope.
-#: apps/luseradd.c:197 apps/luseradd.c:209
+#: apps/luseradd.c:198 apps/luseradd.c:210
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "જૂથ `%s' બનાવવામાં ભૂલ.\n"
 
-#: apps/luseradd.c:276
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "ખાતું બનાવવામાં નિષ્ફળ: %s.\n"
 
-#: apps/luseradd.c:318
+#: apps/luseradd.c:319
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s બનાવવામાં ભૂલ: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:327
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "મેઈલ હરોળ બનાવવામાં ભૂલ.\n"
 
@@ -554,111 +566,111 @@ msgstr "મોડ્યુલમાં સંજ્ઞા ઉકેલવામ�
 msgid "library/module version mismatch"
 msgstr "લાઈબ્રેરી/મોડ્યુલની આવૃત્તિ બંધબેસતી નથી"
 
-#: lib/modules.c:97
+#: lib/modules.c:98
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "કોઈ પ્રારંભ વિધેય %s નથી `%s' માં"
 
-#: lib/modules.c:128
+#: lib/modules.c:129
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s' માં મોડ્યુલની આવૃત્તિ બંધબેસતી નથી"
 
-#: lib/prompt.c:66
+#: lib/prompt.c:67
 msgid "error reading terminal attributes"
 msgstr "ટર્મિનલની લાક્ષણિકતાઓ વાંચવામાં ભૂલ"
 
-#: lib/prompt.c:73 lib/prompt.c:85
+#: lib/prompt.c:74 lib/prompt.c:86
 msgid "error setting terminal attributes"
 msgstr "ટર્મિનલની લાક્ષણિકતાઓ સુયોજિત કરવામાં ભૂલ"
 
-#: lib/prompt.c:79
+#: lib/prompt.c:80
 msgid "error reading from terminal"
 msgstr "ટર્મિનલમાંથી વાંચવામાં ભૂલ"
 
-#: lib/user.c:190
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "નામ સુયોજિત નથી"
 
-#: lib/user.c:194
+#: lib/user.c:197
 msgid "name is too short"
 msgstr "નામ ખૂબ નાનું છે"
 
-#: lib/user.c:200
+#: lib/user.c:203
 msgid "name contains non-ASCII characters"
 msgstr "નામ બિન-ASCII અક્ષરો સમાવે છે"
 
-#: lib/user.c:207
+#: lib/user.c:210
 msgid "name contains control characters"
 msgstr "નામ નિયંત્રક અક્ષરો સમાવે છે"
 
-#: lib/user.c:214
+#: lib/user.c:217
 msgid "name contains whitespace"
 msgstr "નામ ખાલી જગ્યાઓ સમાવે છે"
 
-#: lib/user.c:221
+#: lib/user.c:224
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "નામ અયોગ્ય અક્ષર `%c' સમાવે છે"
 
-#: lib/util.c:200
+#: lib/util.c:212
 #, c-format
 msgid "error locking file: %s"
 msgstr "ફાઈલને તાળુ લગાવવામાં ભૂલ: %s"
 
-#: modules/files.c:109 modules/files.c:453 modules/files.c:823
-#: modules/files.c:1116 modules/files.c:1322 modules/files.c:1551
-#: modules/files.c:1659 modules/files.c:1861 modules/files.c:2060
-#: modules/files.c:2077 modules/files.c:2167 modules/files.c:2186
-#: modules/files.c:2254 modules/files.c:2275 modules/files.c:2371
-#: modules/files.c:2390 modules/files.c:2449 modules/files.c:2468
-#: modules/files.c:2569 modules/files.c:2586
+#: modules/files.c:172 modules/files.c:515 modules/files.c:887
+#: modules/files.c:1159 modules/files.c:1360 modules/files.c:1571
+#: modules/files.c:1661 modules/files.c:1865 modules/files.c:2055
+#: modules/files.c:2072 modules/files.c:2162 modules/files.c:2181
+#: modules/files.c:2249 modules/files.c:2270 modules/files.c:2367
+#: modules/files.c:2386 modules/files.c:2445 modules/files.c:2464
+#: modules/files.c:2565 modules/files.c:2582
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' ખોલી શક્યા નહિં: %s"
 
-#: modules/files.c:126 modules/files.c:162 modules/files.c:200
-#: modules/files.c:839 modules/files.c:1338
+#: modules/files.c:188 modules/files.c:224 modules/files.c:262
+#: modules/files.c:899 modules/files.c:1372
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' ની સ્થિતિ કહી શક્યા નહિં: %s"
 
-#: modules/files.c:137
+#: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' બનાવવામાં ભૂલ: %s"
 
-#: modules/files.c:153
+#: modules/files.c:215
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "બેકઅપ ફાઈલ `%s' અસ્તિત્વમાં છે અને એ નિયમિત ફાઈલ નથી"
 
-#: modules/files.c:872 modules/files.c:1350
+#: modules/files.c:929 modules/files.c:1381
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' માંથી વાંચી શક્યા નહિં: %s"
 
-#: modules/files.c:887 modules/files.c:900
+#: modules/files.c:938 modules/files.c:945
 msgid "entry already present in file"
 msgstr "ફાઈલમાં પ્રવેશ પહેલાથી જ હાજર છે"
 
-#: modules/files.c:913 modules/files.c:934 modules/files.c:1409
-#: modules/files.c:1421
+#: modules/files.c:952 modules/files.c:967 modules/files.c:1431
+#: modules/files.c:1439
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' માં લખી શક્યા નહિં: %s"
 
-#: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
-#: modules/files.c:1209
+#: modules/files.c:1126 modules/files.c:1134 modules/files.c:1236
+#: modules/files.c:1244
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "એન્ટીટી ઓબ્જેક્ટ પાસે કોઈ %s લક્ષણ નથી"
 
-#: modules/files.c:2822 modules/files.c:2892
+#: modules/files.c:2848 modules/files.c:2918
 msgid "not executing with superuser privileges"
 msgstr "શ્રેષ્ઠ વપરાશકર્તાની ફાયદાકારક સ્થિતિ સાથે નથી ચલાવી રહ્યા"
 
-#: modules/files.c:2905
+#: modules/files.c:2931
 msgid "no shadow file present -- disabling"
 msgstr "કોઈ શેડો ફાઈલ હાજર નથી -- નિષ્ક્રિય કરી રહ્યા છીએ"
 
@@ -720,160 +732,156 @@ msgstr "કર્બરોઝનો સંચાલન નિયમ"
 msgid "Kerberos Password for Admin Principal"
 msgstr "સંચાલન નિયમ માટે કર્બરોઝ પાસવર્ડ"
 
-#: modules/ldap.c:216 modules/ldap.c:249
+#: modules/ldap.c:199
 msgid "error initializing ldap library"
 msgstr "ldap લાઈબ્રેરીનો પ્રારંભ કરવામાં ભૂલ"
 
-#: modules/ldap.c:227 modules/ldap.c:260
+#: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP પ્રોટોકોલને આવૃત્તિ %d સાથે સુયોજિત કરી શક્યા નહિં"
 
-#: modules/ldap.c:237
+#: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS ને LDAP સર્વર સાથે અવગણી શક્યા નહિં"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:381
 msgid "could not bind to LDAP server"
 msgstr "LDAP સર્વરમાં જોડાણ કરી શક્યા નહિં"
 
-#: modules/ldap.c:424
+#: modules/ldap.c:393
 msgid "could not search LDAP server"
 msgstr "LDAP સર્વર શોધી શક્યા નહિં"
 
-#: modules/ldap.c:433
+#: modules/ldap.c:402
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP સર્વર પાસે કોઈ રુટ DSE હોય નહિં એવું લાગે છે"
 
-#: modules/ldap.c:673 modules/ldap.c:1238 modules/ldap.c:1354
-#: modules/ldap.c:1417 modules/ldap.c:1531 modules/ldap.c:1625
+#: modules/ldap.c:626 modules/ldap.c:1372 modules/ldap.c:1511
+#: modules/ldap.c:1572 modules/ldap.c:1688 modules/ldap.c:1784
 msgid "error mapping name to LDAP distinguished name"
 msgstr "નામને LDAP વાળા અલગ નામ સાથે સાકળવામાં ભૂલ"
 
-#: modules/ldap.c:683
+#: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "નામને LDAP આધારવાળા અલગ નામ સાથે સાકળવામાં ભૂલ"
 
-#: modules/ldap.c:1212
+#: modules/ldap.c:1349
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "વપરાશકર્તા ઓબ્જેક્ટ પાસે કોઈ %s લક્ષણ નહતું"
 
-#: modules/ldap.c:1221
+#: modules/ldap.c:1358
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "વપરાશકર્તા ઓબ્જેક્ટ કોઈ `%s' સાથે બન્યું નહતું"
 
-#: modules/ldap.c:1247
+#: modules/ldap.c:1383
 msgid "could not convert internal data to LDAPMods"
 msgstr "આંતરિક માહિતીને LDAPMods માં ફેરવી શક્યા નહિં"
 
-#: modules/ldap.c:1271 modules/ldap.c:1483
+#: modules/ldap.c:1423 modules/ldap.c:1644
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ડિરેક્ટરી પ્રવેશ સુધારવામાં ભૂલ: %s"
 
-#: modules/ldap.c:1291
+#: modules/ldap.c:1450
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
 msgstr "LDAP ડિરેક્ટરીનું નામ બદલવામાં ભૂલ: %s\n"
 
-#: modules/ldap.c:1339
+#: modules/ldap.c:1499
 #, c-format
 msgid "object had no %s attribute"
 msgstr "ઓબ્જેક્ટ પાસે કોઈ %s લક્ષણ નહતું"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1523
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
 msgstr "LDAP ડિરેક્ટરી પ્રવેશ દૂર કરવામાં ભૂલ: %s.\n"
 
-#: modules/ldap.c:1403 modules/ldap.c:1425 modules/ldap.c:1516
-#: modules/ldap.c:1610
+#: modules/ldap.c:1560 modules/ldap.c:1582 modules/ldap.c:1675
+#: modules/ldap.c:1773
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ઓબ્જેક્ટ પાસે કોઈ %s લક્ષણ નથી"
 
-#: modules/ldap.c:1546
+#: modules/ldap.c:1708
 msgid "no such object in LDAP directory"
 msgstr "LDAP ડિરેક્ટરીમાં આવો કોઈ ઓબ્જેક્ટ નથી"
 
-#: modules/ldap.c:1559
+#: modules/ldap.c:1720
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "કોઈ `%s' લક્ષણ મળ્યું નથી"
 
-#: modules/ldap.c:1701
+#: modules/ldap.c:1883
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP ડિરેક્ટરીમાં %s માટે પાસવર્ડ સુયોજિત કરવામાં ભૂલ: %s"
 
-#: modules/ldap.c:2243
+#: modules/ldap.c:2443
 msgid "LDAP Server Name"
 msgstr "LDAP સર્વર નામ"
 
-#: modules/ldap.c:2249
+#: modules/ldap.c:2449
 msgid "LDAP Search Base DN"
 msgstr "LDAP શોધનો આધાર DN"
 
-#: modules/ldap.c:2255
+#: modules/ldap.c:2455
 msgid "LDAP Bind DN"
 msgstr "LDAP બાઈન્ડ DN"
 
-#: modules/ldap.c:2262
+#: modules/ldap.c:2462
 msgid "LDAP Bind Password"
 msgstr "LDAP બાઈન્ડ પાસવર્ડ"
 
-#: modules/ldap.c:2268
+#: modules/ldap.c:2468
 msgid "LDAP SASL User"
 msgstr "LDAP SASL વપરાશકર્તા"
 
-#: modules/ldap.c:2275
+#: modules/ldap.c:2475
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL સત્તાધિકરણ વપરાશકર્તા"
 
-#: modules/ldap.c:2315
-msgid "error initializing module"
-msgstr "મોડ્યુલનો પ્રારંભ કરવામાં ભૂલ"
-
-#: modules/sasldb.c:128
+#: modules/sasldb.c:145
 #, c-format
 msgid "Cyrus SASL error creating user: %s: %s"
 msgstr "વપરાશકર્તા બનાવવામાં Cyrus SASL ભૂલ: %s: %s"
 
-#: modules/sasldb.c:130
+#: modules/sasldb.c:147
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "વપરાશકર્તા બનાવવામાં Cyrus SASL ભૂલ: %s"
 
-#: modules/sasldb.c:136
+#: modules/sasldb.c:153
 #, c-format
 msgid "Cyrus SASL error removing user: %s: %s"
 msgstr "વપરાશકર્તા દૂર કરવામાં Cyrus SASL ભૂલ: %s: %s"
 
-#: modules/sasldb.c:138
+#: modules/sasldb.c:155
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "વપરાશકર્તા દૂર કરવામાં Cyrus SASL ભૂલ: %s"
 
-#: modules/sasldb.c:428 modules/sasldb.c:436
+#: modules/sasldb.c:520 modules/sasldb.c:528
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL નો પ્રારંભ કરવામાં ભૂલ: %s"
 
-#: python/admin.c:494
+#: python/admin.c:507
 msgid "error creating home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી બનાવવામાં ભૂલ"
 
-#: python/admin.c:546
+#: python/admin.c:560
 msgid "error removing home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી દૂર કરવામાં ભૂલ"
 
-#: python/admin.c:623
+#: python/admin.c:638
 msgid "error moving home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી ખસેડવામાં ભૂલ"
 
-#: python/admin.c:656
+#: python/admin.c:671
 msgid "error creating mail spool for user"
 msgstr "વપરાશકર્તા માટે મેઈલ હરોળ બનાવવામાં ભૂલ"
 
@@ -906,19 +914,21 @@ msgstr "%s નામવાળા વપરાશકર્તા માટે શ
 msgid "Entry not found.\n"
 msgstr "પ્રવેશ મળ્યો નથી.\n"
 
-#: samples/testuser.c:76
+#: samples/testuser.c:77
 msgid "Default user object classes:\n"
 msgstr "મૂળભુત વપરાશકર્તા ઓબ્જેક્ટ વર્ગો:\n"
 
-#: samples/testuser.c:82
+#: samples/testuser.c:83
 msgid "Default user attribute names:\n"
 msgstr "મૂળભુત વપરાશકર્તા લક્ષણોના નામો:\n"
 
-#: samples/testuser.c:88
+#: samples/testuser.c:89
 msgid "Getting default user attributes:\n"
 msgstr "મૂળભુત વપરાશકર્તા લક્ષણો મેળવી રહ્યા છીએ:\n"
 
-#: samples/testuser.c:95
+#: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
 
+#~ msgid "error initializing module"
+#~ msgstr "મોડ્યુલનો પ્રારંભ કરવામાં ભૂલ"
