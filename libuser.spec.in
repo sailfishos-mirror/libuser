@@ -61,7 +61,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so
 
 %changelog
-* Sat Jan 20 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Sat Jan 20 2001 Nalin Dahyabhai <nalin@redhat.com> 0.8
 - add a "quiet" prompter
 - add --interactive flag to sample apps and default to using quiet prompter
 - ldap: attempt a "self" bind if other attempts fail
@@ -72,7 +72,7 @@ rm -fr $RPM_BUILD_ROOT
 - the great adding-of-the-copyright-statements
 - take more care when creating backup files in the files module
 
-* Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com> 0.7
 - add openldap-devel as a buildprereq
 - krb5: use a continuous connection
 - krb5: add "realm" config directive
@@ -92,5 +92,5 @@ rm -fr $RPM_BUILD_ROOT
 - lgroupmod: pass plaintext passwords along
 - add libuser as a dependency of libuser-devel
 
-* Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
+* Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com> 0.6
 - initial packaging

@@ -24,7 +24,8 @@
 #include <string.h>
 
 /* Cache a string.  We do this so that we only have to keep track of one
-   pointer to it, and we have a well-defined time when it will be freed. */
+   pointer to it, and we have a well-defined time when it will be freed.
+   This may all be replaced by GQuark-based stuff when glib-2.0 is released. */
 static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 {

@@ -101,6 +101,8 @@ lib/Makefile
 modules/Makefile
 samples/Makefile
 apps/Makefile
+docs/Makefile
+docs/sgml/Makefile
 libuser.spec
 )
 
