@@ -35,15 +35,15 @@ msgstr "Błąd podczas tworzenia `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Błąd podczas tworzenia grupy `%s': %s\n"
+msgstr "Błąd podczas zmiany właściciela `%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Błąd podczas tworzenia `%s': %s"
+msgstr "Błąd podczas zapisu `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -715,9 +715,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "plik zapasowy`%s' istnieje i nie jest zwykłym plikiem"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "niezgodność wersji biblioteki/modułu"
+msgstr "niezgodność rozmiaru pliku zapasowego"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
