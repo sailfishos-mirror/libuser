@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-14 19:15+0900\n"
+"PO-Revision-Date: 2004-11-16 00:22+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -398,9 +398,9 @@ msgid "Password changed.\n"
 msgstr "パスワード変更済み。\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "グループ%sは存在しません。\n"
+msgstr "グループ %jd は存在しません\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -594,7 +594,7 @@ msgstr "ライブラリ/モジュールバージョンの不一致"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "ロックを解除するとパスワードのフィールドは空になります"
 
 #: lib/error.c:88
 msgid "unknown error"
