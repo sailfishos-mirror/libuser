@@ -30,7 +30,7 @@ files useful for developing applications with libuser.
 %setup -q
 
 %build
-%configure
+%configure --with-sasl
 make
 make -C docs/sgml
 make doc
