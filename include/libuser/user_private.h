@@ -34,7 +34,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC 0x00000005
-#define LU_MODULE_VERSION 0x00070000
+#define LU_MODULE_VERSION 0x00080000
 #define _(String) gettext(String)
 
 /* A string cache structure.  Useful for side-stepping most issues with
@@ -101,41 +101,43 @@ struct lu_module {
 	 * privileges (i.e., modifying files which normal users can't. */
 	gboolean(*uses_elevated_privileges) (struct lu_module * module);
 
-	/* Functions for looking up users and groups by name or ID. */
+	/* Functions for looking up users by name or ID. */
 	gboolean(*user_lookup_name) (struct lu_module * module,
 				     gconstpointer name,
 				     struct lu_ent * ent,
 				     struct lu_error ** error);
-	gboolean(*group_lookup_name) (struct lu_module * module,
-				      gconstpointer name,
-				      struct lu_ent * ent,
-				      struct lu_error ** error);
 	gboolean(*user_lookup_id) (struct lu_module * module,
 				   long uid,
 				   struct lu_ent * ent,
 				   struct lu_error ** error);
-	gboolean(*group_lookup_id) (struct lu_module * module,
-				    long gid,
-				    struct lu_ent * ent,
-				    struct lu_error ** error);
 
-	/* Apply attributes in the ent structure to the user named by the
-	 * structure's LU_USERNAME attribute. */
+	/* Populate a user entry with default information. */
+	gboolean(*user_default) (struct lu_module * module,
+				 const char *name,
+				 gboolean is_system,
+				 struct lu_ent * ent,
+				 struct lu_error ** error);
+	/* Make last-minute preparations for adding an account (default
+	 * part two, as it might have been called). */
 	gboolean(*user_add_prep) (struct lu_module * module,
 				  struct lu_ent * ent,
 				  struct lu_error ** error);
+	/* Create the account. */
 	gboolean(*user_add) (struct lu_module * module,
 			     struct lu_ent * ent,
 			     struct lu_error ** error);
+	/* Modify the account, making the data store reflect any pending
+	 * data changes. */
 	gboolean(*user_mod) (struct lu_module * module,
 			     struct lu_ent * ent,
 			     struct lu_error ** error);
+	/* Remove the account. */
 	gboolean(*user_del) (struct lu_module * module,
 			     struct lu_ent * ent,
 			     struct lu_error ** error);
 
-	/* Lock, unlock, or set the password on the account of the user named
-	 * by the structure's LU_USERNAME attribute. */
+	/* Lock, unlock, check the status, or set the password on the account
+	 * of the user. */
 	gboolean(*user_lock) (struct lu_module * module,
 			      struct lu_ent * ent,
 			      struct lu_error ** error);
@@ -150,23 +152,57 @@ struct lu_module {
 				 const char *newpass,
 				 struct lu_error ** error);
 
-	/* Apply attributes in the ent structure to the group named by the
-	 * structure's LU_GROUPNAME attribute. */
+	/* Search for users, returning the names of all users, just the names
+	 * of users in a given group, or all users with their data. */
+	GValueArray* (*users_enumerate) (struct lu_module * module,
+					 const char *pattern,
+					 struct lu_error ** error);
+	GValueArray* (*users_enumerate_by_group) (struct lu_module * module,
+						  const char *group,
+						  gid_t gid,
+						  struct lu_error ** error);
+	GPtrArray* (*users_enumerate_full) (struct lu_module * module,
+					    const char *pattern,
+					    struct lu_error ** error);
+	/* Placeholder.  Can't come up with a reason to have it other than
+	 * symmetry.  */
+	GPtrArray* (*users_enumerate_by_group_full) (struct lu_module * module,
+						     const char *group,
+						     gid_t gid,
+						     struct lu_error ** error);
+	/* Search for a group by name or ID. */
+	gboolean(*group_lookup_name) (struct lu_module * module,
+				      gconstpointer name,
+				      struct lu_ent * ent,
+				      struct lu_error ** error);
+	gboolean(*group_lookup_id) (struct lu_module * module,
+				    long gid,
+				    struct lu_ent * ent,
+				    struct lu_error ** error);
+	/* Populate a group with sensible defaults. */
+	gboolean(*group_default) (struct lu_module * module,
+				  const char *name,
+				  gboolean is_system,
+				  struct lu_ent * ent,
+				  struct lu_error ** error);
+	/* Prepare to add a group (default part two, possibly). */
 	gboolean(*group_add_prep) (struct lu_module * module,
 				   struct lu_ent * ent,
 				   struct lu_error ** error);
+	/* Add the group to the data stores. */
 	gboolean(*group_add) (struct lu_module * module,
 			      struct lu_ent * ent,
 			      struct lu_error ** error);
+	/* Modify the group entry, committing any pending changes. */
 	gboolean(*group_mod) (struct lu_module * module,
 			      struct lu_ent * ent,
 			      struct lu_error ** error);
+	/* Delete the group. */
 	gboolean(*group_del) (struct lu_module * module,
 			      struct lu_ent * ent,
 			      struct lu_error ** error);
 
-	/* Lock, unlock, or set the password on the record for the group named
-	 * by the structure's LU_GROUPNAME attribute. */
+	/* Lock, unlock, check if locked, or set the password for a group. */
 	gboolean(*group_lock) (struct lu_module * module,
 			       struct lu_ent * ent,
 			       struct lu_error ** error);
@@ -181,22 +217,8 @@ struct lu_module {
 				  const char *newpass,
 				  struct lu_error ** error);
 
-	/* Search for users or groups. */
-	GValueArray* (*users_enumerate) (struct lu_module * module,
-					 const char *pattern,
-					 struct lu_error ** error);
-	GValueArray* (*users_enumerate_by_group) (struct lu_module * module,
-						  const char *group,
-						  gid_t gid,
-						  struct lu_error ** error);
-	GPtrArray* (*users_enumerate_full) (struct lu_module * module,
-					    const char *pattern,
-					    struct lu_error ** error);
-	/* Placeholder.  Can't come up with a reason to have it. */
-	GPtrArray* (*users_enumerate_by_group_full) (struct lu_module * module,
-						     const char *group,
-						     gid_t gid,
-						     struct lu_error ** error);
+	/* Look up all group names, just the groups a particular user is in,
+	 * or all groups, with full information. */
 	GValueArray* (*groups_enumerate) (struct lu_module * module,
 					  const char *pattern,
 					  struct lu_error ** error);

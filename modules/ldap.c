@@ -24,16 +24,16 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <ldap.h>
 #include <limits.h>
 #include <pwd.h>
-#include <sasl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <glib.h>
+#include <ldap.h>
+#include <sasl.h>
 #include "../include/libuser/user_private.h"
-#include "../modules/modules.h"
 
 #undef  DEBUG
 #define SCHEME "{crypt}"
@@ -53,27 +53,69 @@ enum interact_indices {
 };
 
 static struct {
-	char *attribute;
+	char *lu_attribute;
+	char *ldap_attribute_key;
+	char *ldap_attribute;
 	char *objectclass;
-} attribute_map[] = {
-	{
-	LU_SHADOWLASTCHANGE, "shadowAccount"}, {
-	LU_SHADOWMIN, "shadowAccount"}, {
-	LU_SHADOWMAX, "shadowAccount"}, {
-	LU_SHADOWWARNING, "shadowAccount"}, {
-	LU_SHADOWINACTIVE, "shadowAccount"}, {
-	LU_SHADOWEXPIRE, "shadowAccount"}, {
-	LU_SHADOWFLAG, "shadowAccount"}, {
-	LU_COMMONNAME, "inetOrgPerson"}, {
-	LU_GIVENNAME, "inetOrgPerson"}, {
-	LU_SN, "inetOrgPerson"}, {
-	LU_ROOMNUMBER, "inetOrgPerson"}, {
-	LU_TELEPHONENUMBER, "inetOrgPerson"}, {
-	LU_HOMEPHONE, "inetOrgPerson"}, {
-LU_KRBNAME, "kerberosSecurityObject"},};
+} ldap_attribute_map[] = {
+	{LU_USERNAME, G_STRINGIFY_ARG(LU_USERNAME),
+	 NULL, "posixAccount"},
+	{LU_USERPASSWORD, G_STRINGIFY_ARG(LU_USERPASSWORD),
+	 NULL, "posixAccount"},
+	{LU_UIDNUMBER, G_STRINGIFY_ARG(LU_UIDNUMBER),
+	 NULL, "posixAccount"},
+	{LU_GIDNUMBER, G_STRINGIFY_ARG(LU_GIDNUMBER),
+	 NULL, "posixAccount"},
+	{LU_GECOS, G_STRINGIFY_ARG(LU_GECOS),
+	 NULL, "posixAccount"},
+	{LU_HOMEDIRECTORY, G_STRINGIFY_ARG(LU_HOMEDIRECTORY),
+	 NULL, "posixAccount"},
+	{LU_LOGINSHELL, G_STRINGIFY_ARG(LU_LOGINSHELL),
+	 NULL, "posixAccount"},
+
+	{LU_GROUPNAME, G_STRINGIFY_ARG(LU_GROUPNAME),
+	 NULL, "posixGroup"},
+	{LU_GROUPPASSWORD, G_STRINGIFY_ARG(LU_GROUPPASSWORD),
+	 NULL, "posixGroup"},
+	{LU_GIDNUMBER, G_STRINGIFY_ARG(LU_GIDNUMBER),
+	 NULL, "posixGroup"},
+	{LU_MEMBERUID, G_STRINGIFY_ARG(LU_MEMBERUID),
+	 NULL, "posixGroup"},
+	{LU_ADMINISTRATORUID, G_STRINGIFY_ARG(LU_ADMINISTRATORUID),
+	 NULL, "shadowGroup"},
+
+	{LU_SHADOWPASSWORD, G_STRINGIFY_ARG(LU_SHADOWPASSWORD),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWLASTCHANGE, G_STRINGIFY_ARG(LU_SHADOWLASTCHANGE),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWMIN, G_STRINGIFY_ARG(LU_SHADOWMIN),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWMAX, G_STRINGIFY_ARG(LU_SHADOWMAX),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWWARNING, G_STRINGIFY_ARG(LU_SHADOWWARNING),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWINACTIVE, G_STRINGIFY_ARG(LU_SHADOWINACTIVE),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWEXPIRE, G_STRINGIFY_ARG(LU_SHADOWEXPIRE),
+	 NULL, "shadowAccount"},
+	{LU_SHADOWFLAG, G_STRINGIFY_ARG(LU_SHADOWFLAG),
+	 NULL, "shadowAccount"},
+
+	{LU_COMMONNAME, G_STRINGIFY_ARG(LU_COMMONNAME),
+	 NULL, "inetOrgPerson"},
+	{LU_GIVENNAME, G_STRINGIFY_ARG(LU_GIVENNAME),
+	 NULL, "inetOrgPerson"},
+	{LU_SN, G_STRINGIFY_ARG(LU_SN),
+	 NULL, "inetOrgPerson"},
+	{LU_ROOMNUMBER, G_STRINGIFY_ARG(LU_ROOMNUMBER),
+	 NULL, "inetOrgPerson"},
+	{LU_TELEPHONENUMBER, G_STRINGIFY_ARG(LU_TELEPHONENUMBER),
+	 NULL, "inetOrgPerson"},
+	{LU_HOMEPHONE, G_STRINGIFY_ARG(LU_HOMEPHONE),
+	 NULL, "inetOrgPerson"},
+};
 
 static char *lu_ldap_user_attributes[] = {
-	LU_OBJECTCLASS,
 	LU_USERNAME,
 	LU_USERPASSWORD,
 	LU_UIDNUMBER,
@@ -82,6 +124,7 @@ static char *lu_ldap_user_attributes[] = {
 	LU_HOMEDIRECTORY,
 	LU_LOGINSHELL,
 
+	LU_SHADOWPASSWORD,
 	LU_SHADOWLASTCHANGE,
 	LU_SHADOWMIN,
 	LU_SHADOWMAX,
@@ -101,21 +144,11 @@ static char *lu_ldap_user_attributes[] = {
 };
 
 static char *lu_ldap_group_attributes[] = {
-	LU_OBJECTCLASS,
 	LU_GROUPNAME,
-	LU_USERPASSWORD,
+	LU_GROUPPASSWORD,
 	LU_GIDNUMBER,
 	LU_MEMBERUID,
 	LU_ADMINISTRATORUID,
-
-	LU_SHADOWLASTCHANGE,
-	LU_SHADOWMIN,
-	LU_SHADOWMAX,
-	LU_SHADOWWARNING,
-	LU_SHADOWINACTIVE,
-	LU_SHADOWEXPIRE,
-	LU_SHADOWFLAG,
-
 	NULL,
 };
 
@@ -134,10 +167,11 @@ close_server(LDAP * ldap)
 static char *
 getuser()
 {
-	char buf[LINE_MAX];
+	char buf[LINE_MAX * 4];
 	struct passwd pwd, *err;
-	getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
-	return (err == &pwd) ? strdup(pwd.pw_name) : NULL;
+	int i;
+	i = getpwuid_r(getuid(), &pwd, buf, sizeof(buf), &err);
+	return ((i == 0) && (err == &pwd)) ? g_strdup(pwd.pw_name) : NULL;
 }
 
 static int
@@ -1034,10 +1068,10 @@ lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
-lu_ldap_islocked(struct lu_module *module, enum lu_entity_type type,
-		 struct lu_ent *ent, const char *namingAttr,
-		 const char *configKey, const char *def,
-		 struct lu_error **error)
+lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
+		  struct lu_ent *ent, const char *namingAttr,
+		  const char *configKey, const char *def,
+		  struct lu_error **error)
 {
 	const char *dn;
 	GList *name;
@@ -1120,12 +1154,12 @@ lu_ldap_islocked(struct lu_module *module, enum lu_entity_type type,
 }
 
 static gboolean
-lu_ldap_user_islocked(struct lu_module *module, struct lu_ent *ent,
-		      struct lu_error **error)
+lu_ldap_user_is_locked(struct lu_module *module, struct lu_ent *ent,
+		       struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_islocked(module, lu_user, ent, LU_USERNAME,
-				"userBranch", USERBRANCH, error);
+	return lu_ldap_is_locked(module, lu_user, ent, LU_USERNAME,
+				 "userBranch", USERBRANCH, error);
 }
 
 static gboolean
@@ -1302,12 +1336,12 @@ lu_ldap_group_unlock(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
-lu_ldap_group_islocked(struct lu_module *module, struct lu_ent *ent,
-		       struct lu_error **error)
+lu_ldap_group_is_locked(struct lu_module *module, struct lu_ent *ent,
+		        struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_islocked(module, lu_group, ent, LU_GROUPNAME,
-				"groupBranch", GROUPBRANCH, error);
+	return lu_ldap_is_locked(module, lu_group, ent, LU_GROUPNAME,
+				 "groupBranch", GROUPBRANCH, error);
 }
 
 static gboolean
@@ -1649,7 +1683,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->user_del = lu_ldap_user_del;
 	ret->user_lock = lu_ldap_user_lock;
 	ret->user_unlock = lu_ldap_user_unlock;
-	ret->user_islocked = lu_ldap_user_islocked;
+	ret->user_is_locked = lu_ldap_user_is_locked;
 	ret->user_setpass = lu_ldap_user_setpass;
 	ret->users_enumerate = lu_ldap_users_enumerate;
 	ret->users_enumerate_by_group = lu_ldap_users_enumerate_by_group;
@@ -1662,7 +1696,7 @@ lu_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->group_del = lu_ldap_group_del;
 	ret->group_lock = lu_ldap_group_lock;
 	ret->group_unlock = lu_ldap_group_unlock;
-	ret->group_islocked = lu_ldap_group_islocked;
+	ret->group_is_locked = lu_ldap_group_is_locked;
 	ret->group_setpass = lu_ldap_group_setpass;
 	ret->groups_enumerate = lu_ldap_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_ldap_groups_enumerate_by_user;

@@ -161,6 +161,10 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 			g_return_val_if_fail(module->user_lookup_id != NULL,
 					     FALSE);
+			g_return_val_if_fail(module->user_default != NULL,
+					     FALSE);
+			g_return_val_if_fail(module->user_add_prep != NULL,
+					     FALSE);
 			g_return_val_if_fail(module->user_add != NULL, FALSE);
 			g_return_val_if_fail(module->user_mod != NULL, FALSE);
 			g_return_val_if_fail(module->user_del != NULL, FALSE);
@@ -184,6 +188,8 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					     FALSE);
 			g_return_val_if_fail(module->group_lookup_id != NULL,
 					     FALSE);
+			g_return_val_if_fail(module->group_default != NULL, FALSE);
+			g_return_val_if_fail(module->group_add_prep != NULL, FALSE);
 			g_return_val_if_fail(module->group_add != NULL, FALSE);
 			g_return_val_if_fail(module->group_mod != NULL, FALSE);
 			g_return_val_if_fail(module->group_del != NULL, FALSE);

@@ -33,13 +33,16 @@
 #include "util.h"
 
 #define INVALID (-0x80000000)
+#define DEFAULT_ID 500
+
 
 enum lu_dispatch_id {
 	uses_elevated_privileges = 0x0003,
 	user_lookup_name,
 	user_lookup_id,
-	user_add,
+	user_default,
 	user_add_prep,
+	user_add,
 	user_mod,
 	user_del,
 	user_lock,
@@ -52,8 +55,9 @@ enum lu_dispatch_id {
 	users_enumerate_by_group_full,
 	group_lookup_name,
 	group_lookup_id,
-	group_add,
+	group_default,
 	group_add_prep,
+	group_add,
 	group_mod,
 	group_del,
 	group_lock,
@@ -269,6 +273,13 @@ run_single(struct lu_context *context,
 			return TRUE;
 		}
 		return FALSE;
+	case user_default:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		if (module->user_default(module, sdata, ldata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
 	case user_add:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		if (module->user_add(module, entity, error)) {
@@ -354,6 +365,13 @@ run_single(struct lu_context *context,
 	case group_lookup_id:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		if (module->group_lookup_id(module, ldata, entity, error)) {
+			lu_ent_add_module(entity, module->name);
+			return TRUE;
+		}
+		return FALSE;
+	case group_default:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		if (module->group_default(module, sdata, ldata, entity, error)) {
 			lu_ent_add_module(entity, module->name);
 			return TRUE;
 		}
@@ -631,6 +649,7 @@ run_list(struct lu_context *context,
 	g_assert(logic_function != NULL);
 	g_assert((id == user_lookup_name) ||
 		 (id == user_lookup_id) ||
+		 (id == user_default) ||
 		 (id == user_add_prep) ||
 		 (id == user_add) ||
 		 (id == user_mod) ||
@@ -644,6 +663,7 @@ run_list(struct lu_context *context,
 		 (id == users_enumerate_by_group_full) ||
 		 (id == group_lookup_name) ||
 		 (id == group_lookup_id) ||
+		 (id == group_default) ||
 		 (id == group_add_prep) ||
 		 (id == group_add) ||
 		 (id == group_mod) ||
@@ -713,14 +733,16 @@ run_list(struct lu_context *context,
 				break;
 			case user_lookup_name:
 			case user_lookup_id:
-			case user_add:
+			case user_default:
 			case user_add_prep:
+			case user_add:
 			case user_mod:
 			case user_del:
 			case group_lookup_name:
 			case group_lookup_id:
-			case group_add:
+			case group_default:
 			case group_add_prep:
+			case group_add:
 			case group_mod:
 			case group_del:
 			case uses_elevated_privileges:
@@ -812,6 +834,20 @@ lu_dispatch(struct lu_context *context,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
 				lu_ent_revert(tmp);
+				lu_ent_copy(tmp, entity);
+			}
+			success = TRUE;
+		}
+		break;
+	case user_default:
+	case group_default:
+		/* Make sure we have both name and boolean here. */
+		g_return_val_if_fail(sdata != NULL, FALSE);
+		/* Run the checks and preps. */
+		if (run_list(context, context->create_module_names,
+			    logic_and, id,
+			    sdata, ldata, tmp, &scratch, error)) {
+			if (entity != NULL) {
 				lu_ent_copy(tmp, entity);
 			}
 			success = TRUE;
@@ -1282,3 +1318,317 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 	return ret;
 }
 #endif
+
+static glong
+lu_get_first_unused_id(struct lu_context *ctx,
+		       enum lu_entity_type type,
+		       glong id)
+{
+	struct lu_ent *ent;
+	char buf[LINE_MAX * 4];
+
+	g_return_val_if_fail(ctx != NULL, -1);
+
+	ent = lu_ent_new();
+	if (type == lu_user) {
+		struct passwd pwd, *err;
+		struct lu_error *error = NULL;
+		do {
+			/* There may be read-only sources of user information
+			 * on the system, and we want to avoid allocating an ID
+			 * that's already in use by a service we can't write
+			 * to, so check with NSS first.  FIXME: use growing
+			 * buffers here. */
+			if ((getpwuid_r(id, &pwd, buf, sizeof(buf), &err) == 0) &&
+			    (err == &pwd)) {
+				id++;
+				continue;
+			}
+			if (lu_user_lookup_id(ctx, id, ent, &error)) {
+				lu_ent_free(ent);
+				ent = lu_ent_new();
+				id++;
+				continue;
+			}
+			if (error) {
+				lu_error_free(&error);
+			}
+			break;
+		} while (id != 0);
+	} else if (type == lu_group) {
+		struct group grp, *err;
+		struct lu_error *error = NULL;
+		do {
+			/* There may be read-only sources of user information
+			 * on the system, and we want to avoid allocating an ID
+			 * that's already in use by a service we can't write
+			 * to, so check with NSS first. */
+			getgrgid_r(id, &grp, buf, sizeof(buf), &err);
+			if (err == &grp) {
+				id++;
+				continue;
+			}
+			if (lu_group_lookup_id(ctx, id, ent, &error)) {
+				lu_ent_free(ent);
+				ent = lu_ent_new();
+				id++;
+				continue;
+			}
+			if (error) {
+				lu_error_free(&error);
+			}
+			break;
+		} while (id != 0);
+	}
+	lu_ent_free(ent);
+	return id;
+}
+
+static gboolean
+lu_default_int(struct lu_context *context, const char *name,
+	       enum lu_entity_type type, gboolean is_system, struct lu_ent *ent)
+{
+	GList *keys, *p;
+	GValue value;
+	char *top, *idkey, *idkeystring, *cfgkey, *tmp, *end;
+	char buf[LINE_MAX * 4];
+	const char *val, *key;
+	gulong id = DEFAULT_ID;
+	struct group grp, *err;
+	struct lu_error *error = NULL;
+	gpointer macguffin = NULL;
+	int i;
+
+	g_return_val_if_fail(context != NULL, FALSE);
+	g_return_val_if_fail(name != NULL, FALSE);
+	g_return_val_if_fail(strlen(name) > 0, FALSE);
+	g_return_val_if_fail((type == lu_user) || (type == lu_group), FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, FALSE);
+
+	/* Clear out and initialize the record. */
+	lu_ent_clear_all(ent);
+	lu_ent_clear_modules(ent);
+	ent->type = type;
+
+	/* Set the name of the user/group. */
+	memset(&value, 0, sizeof(value));
+	g_value_init(&value, G_TYPE_STRING);
+	g_value_set_string(&value, name);
+	if (ent->type == lu_user) {
+		lu_ent_clear(ent, LU_USERNAME);
+		lu_ent_add(ent, LU_USERNAME, &value);
+		/* Additionally, pick a default default group. */
+		g_value_unset(&value);
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, -1);
+		/* FIXME: handle arbitrarily long lines. */
+		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
+		    (err == &grp)) {
+			g_value_set_long(&value, grp.gr_gid);
+		}
+		lu_ent_clear(ent, LU_GIDNUMBER);
+		lu_ent_add(ent, LU_GIDNUMBER, &value);
+	} else if (ent->type == lu_group) {
+		lu_ent_clear(ent, LU_GROUPNAME);
+		lu_ent_add(ent, LU_GROUPNAME, &value);
+	}
+	g_value_unset(&value);
+
+	/* Figure out which part of the configuration we need to iterate over
+	 * to initialize the structure. */
+	if (type == lu_user) {
+		top = "userdefaults";
+		idkey = LU_UIDNUMBER;
+		idkeystring = G_STRINGIFY_ARG(LU_UIDNUMBER);
+	} else {
+		top = "groupdefaults";
+		idkey = LU_GIDNUMBER;
+		idkeystring = G_STRINGIFY_ARG(LU_GIDNUMBER);
+	}
+
+	/* The system flag determines where we will start searching for
+	 * unused IDs to assign to this entity. */
+	if (is_system) {
+		id = 1;
+	} else {
+		cfgkey = g_strdup_printf("%s/%s", top, idkey);
+		val = lu_cfg_read_single(context, cfgkey, NULL);
+		g_free(cfgkey);
+		if (val == NULL) {
+			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
+			val = lu_cfg_read_single(context, cfgkey, NULL);
+			g_free(cfgkey);
+		}
+		if (val != NULL) {
+			id = strtol((char *) val, &tmp, 10);
+			if (*tmp != '\0') {
+				id = DEFAULT_ID;
+			}
+		}
+	}
+
+	/* Search for a free ID. */
+	id = lu_get_first_unused_id(context, type, id);
+
+	/* Add this ID to the entity. */
+	g_value_init(&value, G_TYPE_LONG);
+	g_value_set_long(&value, id);
+	lu_ent_add(ent, idkey, &value);
+	g_value_unset(&value);
+
+	/* Now iterate to find the rest. */
+	keys = lu_cfg_read_keys(context, top);
+	for (p = keys; p && p->data; p = g_list_next(p)) {
+		struct {
+			const char *realkey, *configkey;
+		} keymap[] = {
+			{LU_USERNAME, G_STRINGIFY_ARG(LU_USERNAME)},
+			{LU_USERPASSWORD, G_STRINGIFY_ARG(LU_USERPASSWORD)},
+			{LU_UIDNUMBER, G_STRINGIFY_ARG(LU_UIDNUMBER)},
+			{LU_GIDNUMBER, G_STRINGIFY_ARG(LU_GIDNUMBER)},
+			{LU_GECOS, G_STRINGIFY_ARG(LU_GECOS)},
+			{LU_HOMEDIRECTORY, G_STRINGIFY_ARG(LU_HOMEDIRECTORY)},
+			{LU_LOGINSHELL, G_STRINGIFY_ARG(LU_LOGINSHELL)},
+
+			{LU_GROUPNAME, G_STRINGIFY_ARG(LU_GROUPNAME)},
+			{LU_GROUPPASSWORD, G_STRINGIFY_ARG(LU_GROUPPASSWORD)},
+			{LU_MEMBERUID, G_STRINGIFY_ARG(LU_MEMBERUID)},
+			{LU_ADMINISTRATORUID,
+				G_STRINGIFY_ARG(LU_ADMINISTRATORUID)},
+
+			{LU_SHADOWNAME, G_STRINGIFY_ARG(LU_SHADOWNAME)},
+			{LU_SHADOWPASSWORD, G_STRINGIFY_ARG(LU_SHADOWPASSWORD)},
+			{LU_SHADOWLASTCHANGE,
+				G_STRINGIFY_ARG(LU_SHADOWLASTCHANGE)},
+			{LU_SHADOWMIN, G_STRINGIFY_ARG(LU_SHADOWMIN)},
+			{LU_SHADOWMAX, G_STRINGIFY_ARG(LU_SHADOWMAX)},
+			{LU_SHADOWWARNING, G_STRINGIFY_ARG(LU_SHADOWWARNING)},
+			{LU_SHADOWINACTIVE, G_STRINGIFY_ARG(LU_SHADOWINACTIVE)},
+			{LU_SHADOWEXPIRE, G_STRINGIFY_ARG(LU_SHADOWEXPIRE)},
+			{LU_SHADOWFLAG, G_STRINGIFY_ARG(LU_SHADOWFLAG)},
+
+			{LU_COMMONNAME, G_STRINGIFY_ARG(LU_COMMONNAME)},
+			{LU_GIVENNAME, G_STRINGIFY_ARG(LU_GIVENNAME)},
+			{LU_SN, G_STRINGIFY_ARG(LU_SN)},
+			{LU_ROOMNUMBER, G_STRINGIFY_ARG(LU_ROOMNUMBER)},
+			{LU_TELEPHONENUMBER,
+				G_STRINGIFY_ARG(LU_TELEPHONENUMBER)},
+			{LU_HOMEPHONE, G_STRINGIFY_ARG(LU_HOMEPHONE)},
+			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
+		};
+		struct {
+			const char *format;
+			GType type;
+			const char *value;
+		} subst[] = {
+			{"%n", G_TYPE_STRING, name},
+			{"%d", G_TYPE_STRING,
+			 lu_util_shadow_current_date(context->scache)},
+			{"%u", G_TYPE_LONG, GINT_TO_POINTER(id)},
+		};
+
+		/* Possibly map the key to an internal name. */
+		key = (const char *) p->data;
+		for (i = 0; i < G_N_ELEMENTS(keymap); i++) {
+			if (strcmp(key, keymap[i].configkey) == 0) {
+				key = keymap[i].realkey;
+				break;
+			}
+		}
+
+		/* Skip over the key which represents the user/group ID,
+		 * because we only used it as a starting point. */
+		if (lu_str_case_equal(idkey, key)) {
+			continue;
+		}
+
+		/* Generate the key and read the value for the item. */
+		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
+		val = lu_cfg_read_single(context, cfgkey, NULL);
+		g_free(cfgkey);
+		if (val == NULL) {
+			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
+			val = lu_cfg_read_single(context, cfgkey, NULL);
+			g_free(cfgkey);
+		}
+
+		/* Create a copy of the value to mess with. */
+		g_assert(val != NULL);
+		tmp = g_strdup(val);
+
+		/* Perform substitutions. */
+		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
+			while (strstr(tmp, subst[i].format) != NULL) {
+				char *pre, *post, *tmp2, *substval, *where;
+				if (subst[i].type == G_TYPE_STRING) {
+					substval = g_strdup(subst[i].value);
+				} else
+				if (subst[i].type == G_TYPE_LONG) {
+					substval = g_strdup_printf("%d",
+								   GPOINTER_TO_INT(subst[i].value));
+				} else {
+					g_assert_not_reached();
+				}
+				where = strstr(tmp, subst[i].format);
+				pre = g_strndup(tmp, where - tmp);
+				post = g_strdup(where +
+						strlen(subst[i].format));
+				tmp2 = g_strconcat(pre,
+						   substval,
+						   post,
+						   NULL);
+				g_free(substval);
+				g_free(pre);
+				g_free(post);
+				g_free(tmp);
+				tmp = tmp2;
+			}
+		}
+
+		/* Check if we can represent this value as a number. */
+		strtol(tmp, &end, 0);
+		if (*end != '\0') {
+			g_value_init(&value, G_TYPE_STRING);
+			g_value_set_string(&value, tmp);
+		} else {
+			g_value_init(&value, G_TYPE_LONG);
+			g_value_set_long(&value, strtol(tmp, &end, 0));
+		}
+		g_free(tmp);
+
+		/* Add the transformed value. */
+		lu_ent_clear(ent, key);
+		lu_ent_add(ent, key, &value);
+		g_value_unset(&value);
+	}
+	if (keys != NULL) {
+		g_list_free(keys);
+	}
+
+	/* Now let the modules do their thing. */
+	lu_dispatch(context, (type == lu_user) ? user_default : group_default,
+		    name, is_system, ent, &macguffin, &error);
+	if (error != NULL) {
+		lu_error_free(&error);
+	}
+
+	/* Make the pending set be the same as the current set. */
+	lu_ent_commit(ent);
+
+	return TRUE;
+}
+
+gboolean
+lu_user_default(struct lu_context *context, const char *name,
+		gboolean system, struct lu_ent *ent)
+{
+	return lu_default_int(context, name, lu_user, system, ent);
+}
+
+gboolean
+lu_group_default(struct lu_context *context, const char *name,
+		 gboolean system, struct lu_ent *ent)
+{
+	return lu_default_int(context, name, lu_group, system, ent);
+}

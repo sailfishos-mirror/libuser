@@ -33,6 +33,9 @@
 #include "../include/libuser/user_private.h"
 
 #define CHUNK_SIZE (LINE_MAX * 4)
+#define DEFAULT_PASSWORD	"!!"
+#define DEFAULT_SHADOW_PASSWORD	"x"
+#define DEFAULT_SHELL		"/bin/bash"
 
 struct lu_module *
 libuser_files_init(struct lu_context *context, struct lu_error **error);
@@ -52,24 +55,24 @@ struct format_specifier {
 
 static const struct format_specifier format_passwd[] = {
 	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
+	{2, LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_UIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE},
 	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{7, LU_LOGINSHELL, G_TYPE_STRING, "/bin/sh", FALSE, FALSE},
+	{7, LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE},
 };
 
 static const struct format_specifier format_group[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
+	{2, LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
 	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_SHADOWMIN, G_TYPE_LONG, GINT_TO_POINTER(0), FALSE, FALSE},
 	{5, LU_SHADOWMAX, G_TYPE_LONG, GINT_TO_POINTER(99999), FALSE, FALSE},
@@ -81,7 +84,7 @@ static const struct format_specifier format_shadow[] = {
 
 static const struct format_specifier format_gshadow[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE},
 	{3, LU_ADMINISTRATORUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
@@ -2237,6 +2240,138 @@ lu_shadow_uses_elevated_privileges(struct lu_module *module)
 	return ret;
 }
 
+/* Populate the fields of a user structure with non-name, non-ID data. */
+static gboolean
+lu_files_user_default(struct lu_module *module,
+		      const char *name, gboolean is_system,
+		      struct lu_ent *ent,
+		      struct lu_error **error)
+{
+	GValue value;
+	char *tmp;
+	g_return_val_if_fail(name != NULL, FALSE);
+	memset(&value, 0, sizeof(value));
+	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, DEFAULT_PASSWORD);
+		lu_ent_add(ent, LU_USERPASSWORD, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_GECOS) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, name);
+		lu_ent_add(ent, LU_GECOS, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		tmp = g_strdup_printf("/home/%s", name);
+		g_value_set_string(&value, tmp);
+		g_free(tmp);
+		lu_ent_add(ent, LU_HOMEDIRECTORY, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, DEFAULT_SHELL);
+		lu_ent_add(ent, LU_LOGINSHELL, &value);
+		g_value_unset(&value);
+	}
+	return TRUE;
+}
+
+/* Populate the fields of a group structure with non-name, non-ID data. */
+static gboolean
+lu_files_group_default(struct lu_module *module,
+		       const char *name, gboolean is_system,
+		       struct lu_ent *ent,
+		       struct lu_error **error)
+{
+	GValue value;
+	g_return_val_if_fail(name != NULL, FALSE);
+	memset(&value, 0, sizeof(value));
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, DEFAULT_PASSWORD);
+		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
+		g_value_unset(&value);
+	}
+	return TRUE;
+}
+
+/* Populate the fields of a user structure with non-name, non-ID data. */
+static gboolean
+lu_shadow_user_default(struct lu_module *module,
+		       const char *name, gboolean is_system,
+		       struct lu_ent *ent,
+		       struct lu_error **error)
+{
+	GValue value;
+	const char *today;
+	g_return_val_if_fail(name != NULL, FALSE);
+	today = lu_util_shadow_current_date(ent->cache);
+	memset(&value, 0, sizeof(value));
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, DEFAULT_PASSWORD);
+		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL) {
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, today);
+		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, 0);
+		lu_ent_add(ent, LU_SHADOWMIN, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWMAX) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, 99999);
+		lu_ent_add(ent, LU_SHADOWMAX, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWWARNING) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, 7);
+		lu_ent_add(ent, LU_SHADOWWARNING, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWINACTIVE) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, -1);
+		lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWEXPIRE) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, -1);
+		lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
+		g_value_unset(&value);
+	}
+	if (lu_ent_get(ent, LU_SHADOWFLAG) == NULL) {
+		g_value_init(&value, G_TYPE_LONG);
+		g_value_set_long(&value, -1);
+		lu_ent_add(ent, LU_SHADOWFLAG, &value);
+		g_value_unset(&value);
+	}
+	return TRUE;
+}
+
+static gboolean
+lu_shadow_group_default(struct lu_module *module,
+		        const char *name, gboolean is_system,
+		        struct lu_ent *ent,
+		        struct lu_error **error)
+{
+	g_return_val_if_fail(name != NULL, FALSE);
+	return lu_files_group_default(module, name, is_system, ent, error);
+}
+
 static gboolean
 close_module(struct lu_module *module)
 {
@@ -2275,6 +2410,7 @@ libuser_files_init(struct lu_context *context,
 	ret->user_lookup_name = lu_files_user_lookup_name;
 	ret->user_lookup_id = lu_files_user_lookup_id;
 
+	ret->user_default = lu_files_user_default;
 	ret->user_add_prep = lu_files_user_add_prep;
 	ret->user_add = lu_files_user_add;
 	ret->user_mod = lu_files_user_mod;
@@ -2291,6 +2427,7 @@ libuser_files_init(struct lu_context *context,
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
 
+	ret->group_default = lu_files_group_default;
 	ret->group_add_prep = lu_files_group_add_prep;
 	ret->group_add = lu_files_group_add;
 	ret->group_mod = lu_files_group_mod;
@@ -2356,6 +2493,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->user_lookup_name = lu_shadow_user_lookup_name;
 	ret->user_lookup_id = lu_shadow_user_lookup_id;
 
+	ret->user_default = lu_shadow_user_default;
 	ret->user_add_prep = lu_shadow_user_add_prep;
 	ret->user_add = lu_shadow_user_add;
 	ret->user_mod = lu_shadow_user_mod;
@@ -2372,6 +2510,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
 
+	ret->group_default = lu_shadow_group_default;
 	ret->group_add_prep = lu_shadow_group_add_prep;
 	ret->group_add = lu_shadow_group_add;
 	ret->group_mod = lu_shadow_group_mod;
