@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2004-11-02 15:41+1000\n"
+"PO-Revision-Date: 2004-11-02 15:47+1000\n"
 "Last-Translator: David Barzilay <barzilay@redhat.com>\n"
 "Language-Team: Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -489,9 +489,9 @@ msgid "could not open configuration file `%s': %s"
 msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:87
 #, c-format
