@@ -120,7 +120,7 @@ interact(LDAP *ld, unsigned flags, void *defs, void *interact_data)
 		switch(interact[i].id) {
 			case SASL_CB_USER:
 				interact[i].result =
-					ctx->prompts[LU_LDAP_USER].value;
+					ctx->prompts[LU_LDAP_USER].value ?: "";
 				interact[i].len = strlen(interact[i].result);
 #ifdef DEBUG
 				g_print("Sending SASL user '%s'.\n",

@@ -34,6 +34,7 @@
 #define LU_KRB5_PRINC 1
 #define LU_KRB5_PASSWORD 2
 #define LU_KRBNAME "krbName"
+#define LU_KRBPASSWORD "{crypt}*K*"
 
 struct lu_module *
 lu_krb5_init(struct lu_context *context);
@@ -66,7 +67,7 @@ get_default_realm(struct lu_context *context)
 }
 
 static void *
-get_server_handle(struct lu_krb5_context *context)
+create_server_handle(struct lu_krb5_context *context)
 {
 	kadm5_config_params params;
 	void *handle = NULL;
@@ -138,7 +139,6 @@ lu_krb5_user_lookup_name(struct lu_module *module, gconstpointer name,
 
 	if(kadm5_get_principal(ctx->handle, principal,
 			       &principal_rec, 0) == KADM5_OK) {
-		lu_ent_set_original(ent, LU_USERPASSWORD, "{crypt}*K*");
 		ret = TRUE;
 	}
 
@@ -223,7 +223,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent)
 				 * subsequent information add will note that
 				 * the user is Kerberized. */
 				lu_ent_set(ent, LU_USERPASSWORD,
-					   "{crypt}*K*");
+					   LU_KRBPASSWORD);
 				/* Hey, it worked! */
 				ret = TRUE;
 				break;
@@ -239,8 +239,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 {
 	krb5_context context = NULL;
 	krb5_principal principal = NULL, old_principal = NULL;
-	GList *name, *old_name, *pass, *i;
-	char *password;
+	GList *name, *old_name;
 	gboolean ret = TRUE;
 	struct lu_krb5_context *ctx;
 
@@ -268,7 +267,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 
 	old_name = lu_ent_get_original(ent, LU_KRBNAME);
 	if(old_name == NULL) {
-		old_name = lu_ent_get(ent, LU_USERNAME);
+		old_name = lu_ent_get_original(ent, LU_USERNAME);
 	}
 	if(old_name == NULL) {
 		g_warning(_("Entity was created with no %s or %s attributes."),
@@ -291,7 +290,7 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 		return FALSE;
 	}
 
-	/* If we need to rename the principal, do it first. */
+	/* If we need to rename the principal, do it. */
 	if(krb5_principal_compare(context, principal,
 				  old_principal) == FALSE) {
 		ret = FALSE;
@@ -299,44 +298,10 @@ lu_krb5_user_mod(struct lu_module *module, struct lu_ent *ent)
 					  principal) == KADM5_OK) {
 			ret = TRUE;
 		}
-	}
-
-	/* Now try to change the password. */
-	pass = lu_ent_get(ent, LU_USERPASSWORD);
-	for(i = pass; i; i = g_list_next(i)) {
-		password = i->data;
-		if(password != NULL) {
-#ifdef DEBUG
-			g_print("Working password for %s is '%s'.\n",
-				name->data, password);
-#endif
-			if(strncmp(password, "{crypt}", 7) != 0) {
-				/* A change was requested. */
-				ret = FALSE;
-#ifdef DEBUG
-				g_print("Changing password for %s.\n",
-					name->data);
-#endif
-				if(kadm5_chpass_principal(ctx->handle,
-					  	principal,
-					  	password) == KADM5_OK) {
-#ifdef DEBUG
-					g_print("...succeeded.\n");
-#endif
-					/* Change the password field so
-					 * that a subsequent information
-					 * modify will note that the
-					 * user is Kerberized. */
-					lu_ent_set(ent, LU_USERPASSWORD,
-						   "{crypt}*K*");
-					ret = TRUE;
-#ifdef DEBUG
-				} else {
-					g_print("...failed.\n");
-#endif
-				}
-			}
-		}
+	} else {
+		/* We don't know how to do anything else, so just nod our
+		 * heads and smile. */
+		ret = TRUE;
 	}
 
 	krb5_free_principal(context, principal);
@@ -520,7 +485,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 			 * that a subsequent information
 			 * modify will note that the
 			 * user is Kerberized. */
-			lu_ent_set(ent, LU_USERPASSWORD, "*K*");
+			lu_ent_set(ent, LU_USERPASSWORD, LU_KRBPASSWORD);
 			ret = TRUE;
 #ifdef DEBUG
 		} else {
@@ -660,7 +625,7 @@ lu_krb5_init(struct lu_context *context)
 		return NULL;
 	}
 
-	handle = get_server_handle(ctx);
+	handle = create_server_handle(ctx);
 	if(handle == NULL) {
 		return NULL;
 	}

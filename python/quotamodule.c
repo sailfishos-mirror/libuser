@@ -87,8 +87,7 @@ quota_struct_dealloc(struct quota_struct *q)
 		free(q->group);
 	if(q->special)
 		free(q->special);
-	memset(q, 0, sizeof(struct quota_struct));
-	free(q);
+	Py_MemDel(q);
 	DEBUG_EXIT;
 }
 
@@ -141,204 +140,150 @@ PyMethodDef quota_struct_methods[] = {
 static PyObject*
 quota_struct_getattr(struct quota_struct *self, char *attr)
 {
+	struct {
+		const char *name;
+		const char *value;
+	} named_string_attributes[] = {
+		{"user", self->user},
+		{"group", self->group},
+		{"special", self->special},
+	};
+	struct {
+		const char *name;
+		int32_t value;
+	} named_int_attributes[] = {
+		{"inode_usage", self->inode_usage},
+		{"inode_soft", self->inode_soft},
+		{"inode_hard", self->inode_hard},
+		{"inode_grace", self->inode_grace},
+		{"block_usage", self->block_usage},
+		{"block_soft", self->block_soft},
+		{"block_hard", self->block_hard},
+		{"block_grace", self->block_grace},
+		{"inodeUsage", self->inode_usage},
+		{"inodeSoft", self->inode_soft},
+		{"inodeHard", self->inode_hard},
+		{"inodeGrace", self->inode_grace},
+		{"blockUsage", self->block_usage},
+		{"blockSoft", self->block_soft},
+		{"blockHard", self->block_hard},
+		{"blockGrace", self->block_grace},
+	};
+	int i;
+
 	DEBUG_ENTRY;
 	if((self->user == NULL) && (self->group == NULL)) {
 		PyErr_SetString(PyExc_RuntimeError, "invalid quota object");
 		DEBUG_EXIT;
 		return NULL;
-	} else
-	if(strcmp(attr, "user") == 0) {
-		if(self->user == NULL) {
-			PyErr_SetString(PyExc_RuntimeError, "not a user quota");
+	}
+
+	for(i = 0;
+	    i < sizeof(named_string_attributes) /
+	        sizeof(named_string_attributes[0]);
+	    i++) {
+		if(strcmp(attr, named_string_attributes[i].name) == 0) {
 			DEBUG_EXIT;
-			return NULL;
-		} else {
-			DEBUG_EXIT;
-			return PyString_FromString(self->user);
+			return PyString_FromString(named_string_attributes[i].value);
 		}
-	} else
-	if(strcmp(attr, "group") == 0) {
-		if(self->group == NULL) {
-			PyErr_SetString(PyExc_RuntimeError, "not a group quota");
+	}
+
+	for(i = 0;
+	    i < sizeof(named_int_attributes) /
+	        sizeof(named_int_attributes[0]);
+	    i++) {
+		if(strcmp(attr, named_int_attributes[i].name) == 0) {
 			DEBUG_EXIT;
-			return NULL;
-		} else {
-			DEBUG_EXIT;
-			return PyString_FromString(self->group);
+			return PyInt_FromLong(named_int_attributes[i].value);
 		}
-	} else
-	if(strcmp(attr, "special") == 0) {
-		if(self->special == NULL) {
-			PyErr_SetString(PyExc_RuntimeError, "no special device");
-			DEBUG_EXIT;
-			return NULL;
-		} else {
-			DEBUG_EXIT;
-			return PyString_FromString(self->special);
-		}
-	} else
-	if(strcmp(attr, "inode_usage") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->inode_usage);
 	}
-	else
-	if(strcmp(attr, "inode_soft") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->inode_soft);
-	}
-	else
-	if(strcmp(attr, "inode_hard") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->inode_hard);
-	}
-	else
-	if(strcmp(attr, "inode_grace") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->inode_grace);
-	}
-	else
-	if(strcmp(attr, "block_usage") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->block_usage);
-	}
-	else
-	if(strcmp(attr, "block_soft") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->block_soft);
-	}
-	else
-	if(strcmp(attr, "block_hard") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->block_hard);
-	}
-	else
-	if(strcmp(attr, "block_grace") == 0) {
-		DEBUG_EXIT;
-		return PyInt_FromLong(self->block_grace);
-	} else {
-		return Py_FindMethod(quota_struct_methods,
-				     (PyObject*)self, attr);
-	}
+
+	PyErr_SetString(PyExc_AttributeError, "invalid attribute");
+
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	return Py_FindMethod(quota_struct_methods, self, attr);
 }
 
 static int
 quota_struct_setattr(struct quota_struct *self, char *attr, PyObject *args)
 {
+	struct {
+		const char *name;
+		char **value;
+	} named_string_attributes[] = {
+		{"user", &self->user},
+		{"group", &self->group},
+		{"special", &self->special},
+	};
+	struct {
+		const char *name;
+		int32_t *value;
+	} named_int_attributes[] = {
+		{"inode_usage", &self->inode_usage},
+		{"inode_soft", &self->inode_soft},
+		{"inode_hard", &self->inode_hard},
+		{"inode_grace", &self->inode_grace},
+		{"block_usage", &self->block_usage},
+		{"block_soft", &self->block_soft},
+		{"block_hard", &self->block_hard},
+		{"block_grace", &self->block_grace},
+		{"inodeUsage", &self->inode_usage},
+		{"inodeSoft", &self->inode_soft},
+		{"inodeHard", &self->inode_hard},
+		{"inodeGrace", &self->inode_grace},
+		{"blockUsage", &self->block_usage},
+		{"blockSoft", &self->block_soft},
+		{"blockHard", &self->block_hard},
+		{"blockGrace", &self->block_grace},
+	};
+	int i;
+
 	DEBUG_ENTRY;
 	if((self->user == NULL) && (self->group == NULL)) {
 		PyErr_SetString(PyExc_RuntimeError, "invalid quota object");
 		DEBUG_EXIT;
 		return -1;
 	}
-	if(strcmp(attr, "user") == 0) {
-		if(self->user == NULL) {
-			PyErr_SetString(PyExc_RuntimeError, "not a user quota");
+
+	for(i = 0;
+	    i < sizeof(named_string_attributes) /
+	        sizeof(named_string_attributes[0]);
+	    i++) {
+		if(strcmp(attr, named_string_attributes[i].name) == 0) {
+			if(!PyString_Check(args)) {
+				PyErr_SetString(PyExc_TypeError,
+						"attribute is a string");
+				DEBUG_EXIT;
+				return -1;
+			}
+			*(named_string_attributes[i].value) =
+				PyString_AsString(args);
 			DEBUG_EXIT;
-			return -1;
-		}
-	}
-	if(strcmp(attr, "group") == 0) {
-		if(self->group == NULL) {
-			PyErr_SetString(PyExc_RuntimeError, "not a group quota");
-			DEBUG_EXIT;
-			return -1;
+			return 0;
 		}
 	}
 
-	if(strcmp(attr, "user") == 0) {
-		if(!PyString_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"user must be a string");
+	for(i = 0;
+	    i < sizeof(named_int_attributes) /
+	        sizeof(named_int_attributes[0]);
+	    i++) {
+		if(strcmp(attr, named_int_attributes[i].name) == 0) {
+			if(!PyInt_Check(args)) {
+				PyErr_SetString(PyExc_TypeError,
+						"attribute is an integer");
+				DEBUG_EXIT;
+				return -1;
+			}
+			*(named_int_attributes[i].value) =
+				PyInt_AsLong(args);
 			DEBUG_EXIT;
-			return -1;
+			return 0;
 		}
-		free(self->user);
-		self->group = NULL;
-		self->user = strdup(PyString_AsString(args));
-	} else
-	if(strcmp(attr, "group") == 0) {
-		if(!PyString_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"group must be a string");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->user = NULL;
-		free(self->group);
-		self->group = strdup(PyString_AsString(args));
-	} else
-	if(strcmp(attr, "special") == 0) {
-		if(!PyString_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"special must be a string");
-			DEBUG_EXIT;
-			return -1;
-		}
-		free(self->special);
-		self->special = strdup(PyString_AsString(args));
-	} else
-	if(strcmp(attr, "inode_soft") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"inode_soft must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->inode_soft = PyInt_AsLong(args);
-	} else
-	if(strcmp(attr, "inode_hard") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"inode_hard must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->inode_hard = PyInt_AsLong(args);
-	} else
-	if(strcmp(attr, "inode_grace") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"inode_grace must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->inode_grace = PyInt_AsLong(args);
-	} else
-	if(strcmp(attr, "block_soft") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"block_soft must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->block_soft = PyInt_AsLong(args);
-	} else
-	if(strcmp(attr, "block_hard") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"block_hard must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->block_hard = PyInt_AsLong(args);
-	} else
-	if(strcmp(attr, "block_grace") == 0) {
-		if(!PyInt_Check(args)) {
-			PyErr_SetString(PyExc_RuntimeError,
-					"block_grace must be a number");
-			DEBUG_EXIT;
-			return -1;
-		}
-		self->block_grace = PyInt_AsLong(args);
-	} else {
-		PyErr_SetString(PyExc_RuntimeError, "invalid attribute");
-		DEBUG_EXIT;
-		return -1;
 	}
+	PyErr_SetString(PyExc_AttributeError, "no such attribute");
+
 	DEBUG_EXIT;
-	return 0;
+	return -1;
 }
 
 static int
@@ -604,5 +549,4 @@ initquota(void)
         PyDict_SetItemString(dict, "USER", PyInt_FromLong(USRQUOTA));
         PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(GRPQUOTA));
 	DEBUG_EXIT;
-	return;
 }

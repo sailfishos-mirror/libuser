@@ -21,12 +21,13 @@
 #include <unistd.h>
 #include <glib.h>
 #include <libuser/user.h>
+#include <libuser/user_private.h>
 #include "Python.h"
 
 #define FIXME fprintf(stderr, "Function %s not implemented.\n", __FUNCTION__); \
 return NULL;
 
-#undef  DEBUG_BINDING
+#define DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING
 #endif
@@ -82,6 +83,12 @@ libuser_entity {
 	lu_ent_t *ent;
 };
 
+struct
+libuser_prompt {
+	PyObject_HEAD
+	lu_prompt_t prompt;
+};
+
 static PyMethodDef libuser_admin_user_methods[];
 static PyMethodDef libuser_admin_group_methods[];
 static PyMethodDef libuser_admin_methods[];
@@ -90,6 +97,7 @@ static PyMethodDef libuser_entity_methods[];
 static PyMethodDef libuser_methods[];
 static PyTypeObject AdminType;
 static PyTypeObject EntityType;
+static PyTypeObject PromptType;
 #define Admin_Check(__x) ((__x)->ob_type == &AdminType)
 #define Entity_Check(__x) ((__x)->ob_type == &EntityType)
 
@@ -417,12 +425,19 @@ libuser_entity_mapping_methods = {
 
 static PyMethodDef
 libuser_entity_methods[] = {
-	{"getattrlist", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS},
-	{"get", (PyCFunction)libuser_entity_get, METH_VARARGS},
-	{"set", (PyCFunction)libuser_entity_set, METH_VARARGS},
-	{"add", (PyCFunction)libuser_entity_add, METH_VARARGS},
-	{"clear", (PyCFunction)libuser_entity_clear, METH_VARARGS},
-	{"revert", (PyCFunction)libuser_entity_revert, METH_VARARGS},
+	{"getattrlist", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS,
+	 "get a list of the attributes this entity has"},
+	{"get", (PyCFunction)libuser_entity_get, METH_VARARGS,
+	 "get a list of the values for a given attribute"},
+	{"set", (PyCFunction)libuser_entity_set, METH_VARARGS,
+	 "set the list of values for a given attribute"},
+	{"add", (PyCFunction)libuser_entity_add, METH_VARARGS,
+	 "add a value to the current list of values for a given attribute"},
+	{"clear", (PyCFunction)libuser_entity_clear, METH_VARARGS,
+	 "clear the list of values for a given attribute"},
+	{"revert", (PyCFunction)libuser_entity_revert, METH_VARARGS,
+	 "revert the list of values for a given attribute to the values which "
+	 "were set when the entity was looked up"},
 	{"keys", (PyCFunction)libuser_entity_getattrlist, METH_VARARGS},
 	{NULL, NULL, 0},
 };
@@ -456,6 +471,7 @@ static void
 libuser_admin_destroy(struct libuser_admin *self)
 {
 	DEBUG_ENTRY;
+	Py_DECREF((PyObject*)self->ctx->prompter_data);
 	lu_end(self->ctx);
 	PyMem_DEL(self);
 	DEBUG_EXIT;
@@ -474,18 +490,61 @@ libuser_admin_getattr(struct libuser_admin *self, char *name)
 {
 	DEBUG_ENTRY;
 	if(strcmp(name, "user") == 0) {
+		Py_INCREF((PyObject*)self->user);
 		DEBUG_EXIT;
 		return (PyObject*)self->user;
 	}
 	if(strcmp(name, "group") == 0) {
+		Py_INCREF((PyObject*)self->group);
 		DEBUG_EXIT;
 		return (PyObject*)self->group;
+	}
+	if(strcmp(name, "prompt") == 0) {
+		Py_INCREF((PyObject*)self->ctx->prompter_data);
+		DEBUG_EXIT;
+		return self->ctx->prompter_data;
 	}
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Searching for attribute `%s'\n", name);
 #endif
 	DEBUG_EXIT;
 	return Py_FindMethod(libuser_admin_methods, (PyObject*)self, name);
+}
+
+static gboolean
+libuser_admin_python_prompter(struct lu_context *ctx,
+			      struct lu_prompt *prompts, int count,
+			      gpointer callback_data);
+
+static int
+libuser_admin_setattr(struct libuser_admin *self, const char *attr,
+		      PyObject *args)
+{
+	DEBUG_ENTRY;
+#ifdef DEBUG_BINDING
+	fprintf(stderr, "%sSetting attribute `%s'\n", getindent(), attr);
+#endif
+	if(strcmp(attr, "prompt") == 0) {
+		if(!PyCallable_Check(args)) {
+			PyErr_SetString(PyExc_TypeError,
+					"expecting callable function");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if(self->ctx->prompter_data != NULL) {
+			Py_DECREF((PyObject*)self->ctx->prompter_data);
+		}
+		Py_INCREF(args);
+#ifdef DEBUG_BINDING
+		fprintf(stderr, "Setting prompter to object at <%p>.\n", args);
+#endif
+		lu_set_prompter(self->ctx, libuser_admin_python_prompter, args);
+		DEBUG_EXIT;
+		return 0;
+	}
+	PyErr_SetString(PyExc_AttributeError, "no such writable attribute");
+	DEBUG_EXIT;
+	return -1;
 }
 
 static PyObject *
@@ -897,15 +956,143 @@ libuser_admin_enumerate_groups(struct libuser_admin *self, PyObject *args)
 	return ret;
 }
 
+static struct libuser_prompt *libuser_prompt_new(void);
+
+static gboolean
+libuser_admin_python_prompter(struct lu_context *ctx,
+			      struct lu_prompt *prompts, int count,
+			      gpointer callback_data)
+{
+	PyObject *list = NULL;
+	gboolean ret = FALSE;
+	int i;
+
+	DEBUG_ENTRY;
+	if(count > 0) {
+		PyObject *val;
+		for(i = 0; i < count; i++) {
+			struct libuser_prompt *prompt;
+			list = PyList_New(0);
+			prompt = libuser_prompt_new();
+			prompt->prompt = prompts[i];
+			PyList_Append(list, (PyObject*) prompt);
+		}
+		DEBUG_CALL;
+		val = PyObject_CallObject(callback_data, list);
+		DEBUG_CALL;
+		if(val != Py_None) {
+			Py_DECREF(list);
+			DEBUG_EXIT;
+			return FALSE;
+		}
+		for(i = 0; i < PyList_Size(list); i++) {
+			struct libuser_prompt *prompt;
+			prompt = (struct libuser_prompt*) PyList_GetItem(list, i);
+			prompts[i] = prompt->prompt;
+		}
+		Py_DECREF(list);
+	}
+
+	DEBUG_EXIT;
+	return ret;
+}
+
+static PyObject *
+libuser_admin_prompt(struct libuser_admin *self, PyObject *args,
+		     lu_prompt_fn *prompter)
+{
+	int count, i;
+	PyObject *list = NULL;
+	PyObject *item = NULL;
+	struct lu_prompt *prompts = NULL;
+	gboolean success = FALSE;
+
+	g_return_val_if_fail(self != NULL, NULL);
+
+	DEBUG_ENTRY;
+	if(!PyArg_ParseTuple(args, "O!", &PyList_Type, &list)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	count = PyList_Size(list);
+	for(i = 0; i < count; i++) {
+		item = PyList_GetItem(list, i);
+		if(item->ob_type != &PromptType) {
+			PyErr_SetString(PyExc_TypeError,
+					"expected list of Prompt objects");
+			DEBUG_EXIT;
+			return NULL;
+		}
+	}
+
+	DEBUG_CALL;
+	count = PyList_Size(list);
+	prompts = g_malloc0(count * sizeof(struct lu_prompt));
+
+	for(i = 0; i < count; i++) {
+		struct libuser_prompt *obj;
+		obj = (struct libuser_prompt*) PyList_GetItem(list, i);
+		Py_INCREF(obj);
+		prompts[i].prompt = g_strdup(obj->prompt.prompt ?: "");
+		prompts[i].default_value = g_strdup(obj->prompt.default_value ?: NULL);
+		prompts[i].visible = obj->prompt.visible;
+	}
+#ifdef DEBUG_BINDING
+	fprintf(stderr, "Prompter function promptConsole is at <%p>.\n",
+		lu_prompt_console);
+	fprintf(stderr, "Prompter function promptConsoleQuiet is at <%p>.\n",
+		lu_prompt_console_quiet);
+	fprintf(stderr, "Calling prompter function at <%p>.\n", prompter);
+#endif
+	success = prompter(self->ctx, prompts, count, NULL);
+	if(success) {
+		for(i = 0; i < count; i++) {
+			struct libuser_prompt *obj;
+			obj = (struct libuser_prompt*) PyList_GetItem(list, i);
+			obj->prompt.value = g_strdup(prompts[i].value ?: "");
+			obj->prompt.free_value = (typeof(obj->prompt.free_value)) g_free;
+			if(prompts[i].value && prompts[i].free_value) {
+				prompts[i].free_value(prompts[i].value);
+			}
+			Py_DECREF(obj);
+		}
+	}
+	DEBUG_EXIT;
+	return Py_BuildValue("");
+}
+
+static PyObject *
+libuser_admin_prompt_console(struct libuser_admin *self, PyObject *args)
+{
+	DEBUG_CALL;
+	return libuser_admin_prompt(self, args, lu_prompt_console);
+}
+
+static PyObject *
+libuser_admin_prompt_console_quiet(struct libuser_admin *self, PyObject *args)
+{
+	DEBUG_CALL;
+	return libuser_admin_prompt(self, args, lu_prompt_console_quiet);
+}
+
 static PyMethodDef libuser_admin_user_methods[] =
 {
-	{"init", (PyCFunction) libuser_admin_user_init, METH_VARARGS},
-	{"add", (PyCFunction) libuser_admin_user_add, METH_VARARGS},
-	{"modify", (PyCFunction) libuser_admin_user_modify, METH_VARARGS},
-	{"delete", (PyCFunction) libuser_admin_user_delete, METH_VARARGS},
-	{"lock", (PyCFunction) libuser_admin_user_lock, METH_VARARGS},
+	{"init", (PyCFunction) libuser_admin_user_init, METH_VARARGS,
+	 "initialize a user with default settings suitable for creating "
+	 "a new account"},
+	{"add", (PyCFunction) libuser_admin_user_add, METH_VARARGS,
+	 "add a record for this user to the system user database"},
+	{"modify", (PyCFunction) libuser_admin_user_modify, METH_VARARGS,
+	 "modify the user's record in the system user database to match the "
+	 "object's values for attributes"},
+	{"delete", (PyCFunction) libuser_admin_user_delete, METH_VARARGS,
+	 "remove the user's record from the system user database"},
+	{"lock", (PyCFunction) libuser_admin_user_lock, METH_VARARGS,
+	 "lock this user out"},
 	{"unlock", (PyCFunction) libuser_admin_user_unlock, METH_VARARGS},
-	{"setpass", (PyCFunction) libuser_admin_user_setpass, METH_VARARGS},
+	{"setpass", (PyCFunction) libuser_admin_user_setpass, METH_VARARGS,
+	 "set the user's password"},
 	{NULL, NULL, 0},
 };
 
@@ -921,13 +1108,21 @@ libuser_admin_user_getattr(struct libuser_admin_domain *self, char *name)
 
 static PyMethodDef libuser_admin_group_methods[] =
 {
-	{"init", (PyCFunction) libuser_admin_group_init, METH_VARARGS},
-	{"add", (PyCFunction) libuser_admin_group_add, METH_VARARGS},
-	{"modify", (PyCFunction) libuser_admin_group_modify, METH_VARARGS},
-	{"delete", (PyCFunction) libuser_admin_group_delete, METH_VARARGS},
-	{"lock", (PyCFunction) libuser_admin_group_lock, METH_VARARGS},
+	{"init", (PyCFunction) libuser_admin_group_init, METH_VARARGS,
+	 "initialize a group with default settings suitable for creating "
+	 "a new account"},
+	{"add", (PyCFunction) libuser_admin_group_add, METH_VARARGS,
+	 "add a record for this group to the system group database"},
+	{"modify", (PyCFunction) libuser_admin_group_modify, METH_VARARGS,
+	 "modify the user's record in the system user database to match the "
+	 "object's values for attributes"},
+	{"delete", (PyCFunction) libuser_admin_group_delete, METH_VARARGS,
+	 "remove the user's record from the system user database"},
+	{"lock", (PyCFunction) libuser_admin_group_lock, METH_VARARGS,
+	 "lock this group out"},
 	{"unlock", (PyCFunction) libuser_admin_group_unlock, METH_VARARGS},
-	{"setpass", (PyCFunction) libuser_admin_group_setpass, METH_VARARGS},
+	{"setpass", (PyCFunction) libuser_admin_group_setpass, METH_VARARGS,
+	 "set the group's password"},
 	{NULL, NULL, 0},
 };
 
@@ -941,33 +1136,56 @@ libuser_admin_group_getattr(struct libuser_admin_domain *self, char *name)
 	return Py_FindMethod(libuser_admin_group_methods, (PyObject*)self, name);
 }
 
-
 static PyMethodDef
 libuser_admin_methods[] = {
 	{"lookupUserByName", (PyCFunction)libuser_admin_lookup_user_name,
-	 METH_VARARGS},
+	 METH_VARARGS, "search for a user with the given name"},
 	{"lookupUserById", (PyCFunction)libuser_admin_lookup_user_id,
-	 METH_VARARGS},
+	 METH_VARARGS, "search for a user with the given uid"},
 	{"lookupGroupByName", (PyCFunction)libuser_admin_lookup_group_name,
-	 METH_VARARGS},
+	 METH_VARARGS, "search for a group with the given name"},
 	{"lookupGroupById", (PyCFunction)libuser_admin_lookup_group_id,
+	 METH_VARARGS, "search for a group with the given gid"},
+	{"initUser", (PyCFunction)libuser_admin_init_user, METH_VARARGS,
+	 "create an object with defaults set for creating a new user"},
+	{"initGroup", (PyCFunction)libuser_admin_init_group, METH_VARARGS,
+	 "create an object with defaults set for creating a new group"},
+	{"addUser", (PyCFunction)libuser_admin_add_user, METH_VARARGS,
+	 "add the user object to the system user database"},
+	{"addGroup", (PyCFunction)libuser_admin_add_group, METH_VARARGS,
+	 "add the group object to the system group database"},
+	{"modifyUser", (PyCFunction)libuser_admin_modify_user, METH_VARARGS,
+	 "modify an entry in the system user database to match the object"},
+	{"modifyGroup", (PyCFunction)libuser_admin_modify_group, METH_VARARGS,
+	 "modify an entry in the system group database to match the object"},
+	{"deleteUser", (PyCFunction)libuser_admin_delete_user, METH_VARARGS,
+	 "remove the entry from the system user database which matches the "
+	 "object"},
+	{"deleteGroup", (PyCFunction)libuser_admin_delete_group, METH_VARARGS,
+	 "remove the entry from the system group database which matches the "
+	 "object"},
+	{"lockUser", (PyCFunction)libuser_admin_lock_user, METH_VARARGS,
+	 "lock the user account associated with the object"},
+	{"lockGroup", (PyCFunction)libuser_admin_lock_group, METH_VARARGS,
+	 "lock the group account associated with the object"},
+	{"unlockUser", (PyCFunction)libuser_admin_unlock_user, METH_VARARGS,
+	 "unlock the user account associated with the object"},
+	{"unlockGroup", (PyCFunction)libuser_admin_unlock_group, METH_VARARGS,
+	 "unlock the group account associated with the object"},
+	{"setpassUser", (PyCFunction)libuser_admin_setpass_user, METH_VARARGS,
+	 "set the password for the user account associated with the object"},
+	{"setpassGroup", (PyCFunction)libuser_admin_setpass_group, METH_VARARGS,
+	 "set the password for the group account associated with the object"},
+	{"enumerateUsers", (PyCFunction)libuser_admin_enumerate_users,
+	 METH_VARARGS,
+	 "get a list of users matching a pattern, in listed databases"},
+	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups,
+	 METH_VARARGS,
+	 "get a list of groups matching a pattern, in listed databases"},
+	{"promptConsole", (PyCFunction)libuser_admin_prompt_console,
 	 METH_VARARGS},
-	{"initUser", (PyCFunction)libuser_admin_init_user, METH_VARARGS},
-	{"initGroup", (PyCFunction)libuser_admin_init_group, METH_VARARGS},
-	{"addUser", (PyCFunction)libuser_admin_add_user, METH_VARARGS},
-	{"addGroup", (PyCFunction)libuser_admin_add_group, METH_VARARGS},
-	{"modifyUser", (PyCFunction)libuser_admin_modify_user, METH_VARARGS},
-	{"modifyGroup", (PyCFunction)libuser_admin_modify_group, METH_VARARGS},
-	{"deleteUser", (PyCFunction)libuser_admin_delete_user, METH_VARARGS},
-	{"deleteGroup", (PyCFunction)libuser_admin_delete_group, METH_VARARGS},
-	{"lockUser", (PyCFunction)libuser_admin_lock_user, METH_VARARGS},
-	{"lockGroup", (PyCFunction)libuser_admin_lock_group, METH_VARARGS},
-	{"unlockUser", (PyCFunction)libuser_admin_unlock_user, METH_VARARGS},
-	{"unlockGroup", (PyCFunction)libuser_admin_unlock_group, METH_VARARGS},
-	{"setpassUser", (PyCFunction)libuser_admin_setpass_user, METH_VARARGS},
-	{"setpassGroup", (PyCFunction)libuser_admin_setpass_group, METH_VARARGS},
-	{"enumerateUsers", (PyCFunction)libuser_admin_enumerate_users, METH_VARARGS},
-	{"enumerateGroups", (PyCFunction)libuser_admin_enumerate_groups, METH_VARARGS},
+	{"promptConsoleQuiet", (PyCFunction)libuser_admin_prompt_console_quiet,
+	 METH_VARARGS},
 	{NULL, NULL, 0},
 };
 
@@ -981,7 +1199,7 @@ static PyTypeObject AdminType = {
 	(destructor) libuser_admin_destroy,
 	(printfunc) NULL,
 	(getattrfunc) libuser_admin_getattr,
-	(setattrfunc) NULL,
+	(setattrfunc) libuser_admin_setattr,
 	(cmpfunc) NULL,
 	(reprfunc) NULL,
 
@@ -1045,6 +1263,7 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	int type = lu_user;
 	lu_context_t *context;
 	struct libuser_admin *ret;
+	PyObject *prompter;
 
 	DEBUG_ENTRY;
 
@@ -1075,13 +1294,174 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	ret->group = PyObject_NEW(struct libuser_admin_domain, &AdminGroupType);
 	ret->group->main = ret;
 
+	prompter = Py_FindMethod(libuser_admin_methods, (PyObject*) ret,
+				 "promptConsole");
+	libuser_admin_setattr(ret, "prompt", prompter);
+
 	DEBUG_EXIT;
 	return (PyObject*) ret;
 }
 
+/**
+ * Methods for the PromptType
+ */
+static void
+libuser_prompt_destroy(struct libuser_prompt *self)
+{
+	DEBUG_ENTRY;
+	if(self->prompt.value && self->prompt.free_value)
+		self->prompt.free_value(self->prompt.value);
+	if(self->prompt.prompt)
+		g_free((char*)self->prompt.prompt);
+	if(self->prompt.default_value)
+		g_free((char*)self->prompt.default_value);
+	memset(&self->prompt, 0, sizeof(self->prompt));
+	PyMem_DEL(self);
+	DEBUG_EXIT;
+}
+
+static PyObject *
+libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
+{
+	DEBUG_ENTRY;
+	if(strcmp(attr, "prompt") == 0) {
+		DEBUG_EXIT;
+		return PyString_FromString(self->prompt.prompt);
+	}
+	if(strcmp(attr, "visible") == 0) {
+		DEBUG_EXIT;
+		return PyInt_FromLong(self->prompt.visible);
+	}
+	if((strcmp(attr, "default_value") == 0) ||
+	   (strcmp(attr, "defaultValue") == 0)) {
+		DEBUG_EXIT;
+		return self->prompt.default_value ?
+		       Py_BuildValue("") :
+		       PyString_FromString(self->prompt.default_value);
+	}
+	if(strcmp(attr, "value") == 0) {
+		DEBUG_EXIT;
+		return self->prompt.value ?
+		       PyString_FromString(self->prompt.value) :
+		       Py_BuildValue("");
+	}
+	DEBUG_EXIT;
+	return Py_FindMethod(NULL, (PyObject*) self, attr);
+}
+
+static int
+libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
+		       PyObject *args)
+{
+	DEBUG_ENTRY;
+	if(strcmp(attr, "prompt") == 0) {
+		if(!PyString_Check(args)) {
+			PyErr_SetString(PyExc_TypeError,
+					"prompt must be a string");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if(self->prompt.prompt)
+			g_free((char*)self->prompt.prompt);
+		self->prompt.prompt = g_strdup(PyString_AsString(args));
+		DEBUG_EXIT;
+		return 0;
+	}
+	if(strcmp(attr, "visible") == 0) {
+		self->prompt.visible = PyObject_IsTrue(args);
+		DEBUG_EXIT;
+		return 0;
+	}
+	if((strcmp(attr, "default_value") == 0) ||
+	   (strcmp(attr, "defaultValue") == 0)) {
+		if(!PyString_Check(args)) {
+			PyErr_SetString(PyExc_TypeError,
+					"default value must be a string");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if(self->prompt.default_value)
+			g_free((char*)self->prompt.default_value);
+		self->prompt.default_value = (args == Py_None) ?
+					     NULL :
+					     g_strdup(PyString_AsString(args));
+		DEBUG_EXIT;
+		return 0;
+	}
+	if(strcmp(attr, "value") == 0) {
+		if(!PyString_Check(args)) {
+			PyErr_SetString(PyExc_TypeError,
+					"value must be a string");
+			DEBUG_EXIT;
+			return -1;
+		}
+		if(self->prompt.value)
+			g_free(self->prompt.value);
+		self->prompt.value = g_strdup(PyString_AsString(args));
+		self->prompt.free_value = (typeof(self->prompt.free_value))g_free;
+		DEBUG_EXIT;
+		return 0;
+	}
+	DEBUG_EXIT;
+	PyErr_SetString(PyExc_AttributeError, "invalid attribute");
+	return -1;
+}
+
+static int
+libuser_prompt_print(struct libuser_prompt *self, FILE *fp, int flags)
+{
+	fprintf(fp,
+		"{prompt = \"%s\", visible = %s, default_value = \"%s\", "
+		"value = \"%s\"}",
+		self->prompt.prompt ?: "",
+		self->prompt.visible ? "true" : "false",
+		self->prompt.default_value ?: "",
+		self->prompt.value ?: "");
+	return 0;
+}
+
+static struct libuser_prompt *
+libuser_prompt_new(void)
+{
+	struct libuser_prompt *ret = NULL;
+	DEBUG_ENTRY;
+	ret = PyObject_NEW(struct libuser_prompt, &PromptType);
+	if(ret != NULL) {
+		memset(&ret->prompt, 0, sizeof(ret->prompt));
+		ret->prompt.free_value = (typeof(ret->prompt.free_value)) free;
+	}
+	DEBUG_EXIT;
+	return ret;
+}
+
+static PyTypeObject PromptType = {
+	PyObject_HEAD_INIT(&PyType_Type)
+	0,
+	"Prompt",
+	sizeof(struct libuser_prompt),
+	0,
+
+	(destructor) libuser_prompt_destroy,
+	(printfunc) libuser_prompt_print,
+	(getattrfunc) libuser_prompt_getattr,
+	(setattrfunc) libuser_prompt_setattr,
+	(cmpfunc) NULL,
+	(reprfunc) NULL,
+
+	(PyNumberMethods*) NULL,
+	(PySequenceMethods*) NULL,
+	(PyMappingMethods*) NULL,
+	(hashfunc) NULL,
+	(ternaryfunc) NULL,
+	(reprfunc) NULL,
+};
+
 static PyMethodDef
 libuser_methods[] = {
-	{"Admin", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS},
+	{"Admin", (PyCFunction)libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
+	 "create and return a new administration context"},
+	{"prompt", (PyCFunction)libuser_prompt_new, 0,
+	 "create and return a new prompt record"},
 	{NULL, NULL, 0},
 };
 
@@ -1133,5 +1513,4 @@ initlibuser(void)
 	PyDict_SetItemString(dict, "LU_USERPASSWORD",
 			     PyString_FromString(LU_USERPASSWORD));
 	DEBUG_EXIT;
-	return;
 }

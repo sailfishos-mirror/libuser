@@ -100,13 +100,13 @@ quota_toggle_ext(struct mntent *ent, const char *option, int command, int flag)
 {
 	char buf[PATH_MAX];
 	struct stat st;
-	int ret, fd;
+	int ret = 0, fd;
 
 	if(hasmntopt(ent, option) || hasmntopt(ent, "quota")) {
 		snprintf(buf, sizeof(buf), "%s/%s.%s", ent->mnt_dir,
 			 QUOTAFILENAME, quota_suffixes[GRPQUOTA]);
 		if(stat(buf, &st) == 0) {
-			if(st.st_mode != 0600) {
+			if((st.st_mode & 0777) != 0600) {
 				fd = open(buf, O_RDWR);
 				if(fd != -1) {
 					struct stat ist;
@@ -116,6 +116,7 @@ quota_toggle_ext(struct mntent *ent, const char *option, int command, int flag)
 							fchmod(fd, 0600);
 						}
 					}
+					close(fd);
 				}
 			}
 			ret = quotactl(QCMD(command, GRPQUOTA),
@@ -124,6 +125,9 @@ quota_toggle_ext(struct mntent *ent, const char *option, int command, int flag)
 				if(errno == EBUSY) {
 					ret = 0;
 				}
+			}
+			if(ret == -1) {
+				return ret;
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.11)
+AM_INIT_AUTOMAKE(libuser,0.11.9)
 
 AC_PROG_CC
 AC_ISC_POSIX

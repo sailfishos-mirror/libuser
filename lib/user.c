@@ -151,6 +151,15 @@ lu_set_auth_modules(struct lu_context *context, const char *list)
 	lu_module_load(context, list, &context->auth_module_names);
 }
 
+void
+lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter,
+		gpointer prompter_data)
+{
+	g_return_if_fail(prompter != NULL);
+	context->prompter = prompter;
+	context->prompter_data = prompter_data;
+}
+
 struct lu_context *
 lu_start(const char *auth_name, enum lu_type auth_type,
 	 const char *info_modules, const char *auth_modules,

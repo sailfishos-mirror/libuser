@@ -152,6 +152,17 @@ struct lu_context *lu_start(const char *authname, enum lu_type auth_type,
  * and groups, and to be written to when storing information about new users
  * and groups.
  * @param context A library context.
+ * @param prompter The address of a suitable prompting function.
+ * @return Nothing.
+ */
+void lu_set_prompter(struct lu_context *context, lu_prompt_fn *prompter,
+		     gpointer callback_data);
+
+/**
+ * Modifies the list of info modules to be consulted when looking up users
+ * and groups, and to be written to when storing information about new users
+ * and groups.
+ * @param context A library context.
  * @param list A comma-separated list of information modules to use.
  * @return Nothing.
  */

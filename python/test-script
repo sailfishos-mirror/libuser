@@ -36,3 +36,9 @@ dir(ldap)
 
 print "--------- Modifying user."
 admin.modifyUser(ldap)
+
+print "--------- Looking up the wheel group."
+wheel = admin.lookupGroupByName("wheel")
+
+print "--------- Reading attribute (memberUid)."
+print wheel[libuser.LU_MEMBERUID]

@@ -1,0 +1,39 @@
+#!/usr/bin/python
+
+def prompt(prompts):
+	for p in prompts:
+		p.value = "prompt answers, fast"
+
+# main
+import libuser
+
+admin = libuser.Admin()
+
+prompts = [libuser.prompt(), libuser.prompt()]
+prompts[0].prompt = "Enter some stuff"
+prompts[0].visible = 1
+prompts[0].defaultValue = "blah"
+prompts[1].prompt = "Enter some invisible stuff"
+prompts[1].visible = 0
+
+print "Prompting using default prompter."
+admin.prompt(prompts)
+print prompts[0].value
+print prompts[1].value
+
+print "\nPrompting using promptConsole."
+admin.promptConsole(prompts)
+print prompts[0].value
+print prompts[1].value
+
+print "\nPrompting using python function."
+admin.prompt = prompt
+admin.prompt(prompts)
+print prompts[0].value
+print prompts[1].value
+
+print "\nPrompting using method."
+admin.prompt = admin.promptConsole
+admin.prompt(prompts)
+print prompts[0].value
+print prompts[1].value
