@@ -461,7 +461,7 @@ run_single(struct lu_context *context,
 	case uses_elevated_privileges:
 		return module->uses_elevated_privileges(module);
 	default:
-		g_assert(0);	/* not reached */
+		g_assert_not_reached();	/* not reached */
 	}
 	return FALSE;
 }
@@ -665,6 +665,8 @@ run_list(struct lu_context *context,
 		 (id == user_lock) ||
 		 (id == user_unlock) ||
 		 (id == user_is_locked) ||
+		 (id == user_setpass) ||
+		 (id == user_removepass) ||
 		 (id == users_enumerate) ||
 		 (id == users_enumerate_by_group) ||
 		 (id == users_enumerate_full) ||
@@ -679,7 +681,8 @@ run_list(struct lu_context *context,
 		 (id == group_lock) ||
 		 (id == group_unlock) ||
 		 (id == group_is_locked) ||
-		 (id == users_enumerate) ||
+		 (id == group_setpass) ||
+		 (id == group_removepass) ||
 		 (id == groups_enumerate) ||
 		 (id == groups_enumerate_by_user) ||
 		 (id == groups_enumerate_full) ||
