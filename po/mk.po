@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-07-31 19:46+0200\n"
+"PO-Revision-Date: 2004-08-01 22:11+0200\n"
 "Last-Translator: Tomislav Markovski <herrera@users.sourceforge.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
@@ -334,7 +334,7 @@ msgstr "Грешка при креирање на домашен директо�
 #: apps/lnewusers.c:325
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "Грешка при креирање на mail spool за %s.\n"
 
 #: apps/lnewusers.c:330
 #, c-format
@@ -394,7 +394,7 @@ msgstr "Грешка при креирање на %s: %s.\n"
 
 #: apps/luseradd.c:326
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "Грешка при креирање на mail spool.\n"
 
 #: apps/luserdel.c:99
 #, c-format
@@ -877,7 +877,7 @@ msgstr "грешка при преместувањето на домашниот
 
 #: python/admin.c:656
 msgid "error creating mail spool for user"
-msgstr ""
+msgstr "грешка при креирање на mail spool за корисникот"
 
 #: samples/lookup.c:64
 #, c-format
