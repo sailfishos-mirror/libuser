@@ -1,19 +1,22 @@
+# translation of pt_BR.po to Portuguese
+# translation of pt_BR.po to pt_BR
 # Brazilian Portuguese localization of Red Hat Linux
-# David Barzilay <barzilay@redhat.com>, 2003
 # Originated from the Portuguese translation by
 # Pedro Morais <morais@kde.org>
 # José Nuno Pires <jncp@netcabo.pt>
+# David Barzilay <barzilay@redhat.com>, 2003,2004.
+# Tiago Pasqualotto <tiago@automacao.eng.br>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2004-03-23 02:18+0000\n"
-"Last-Translator: Gustavo Luiz Gomes dos Santos <gustavo.luiz@galoforte.com.br>\n"
-"Language-Team: Português <pt_BR@li.org>\n"
+"PO-Revision-Date: 2004-04-08 11:50+1000\n"
+"Last-Translator: David Barzilay <barzilay@redhat.com>\n"
+"Language-Team: Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0\n"
 
 #: apps/apputil.c:71
 #, c-format
@@ -326,7 +329,7 @@ msgstr "Erro ao definir password inicial para %s: %s\n"
 #: apps/lnewusers.c:310
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Erro ao criar directorio 'home' para %s: %s\n"
+msgstr "Erro ao criar diretório 'home' para %s: %s\n"
 
 #: apps/lnewusers.c:325
 #, c-format
@@ -341,23 +344,23 @@ msgstr "Erro ao criar conta de usuário para %s: %s.\n"
 #: apps/lpasswd.c:86
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "Alterando password para %s.\n"
+msgstr "Alterando senha para %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr "Novo password"
+msgstr "Nova senha"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr "Novo password (confirmar)"
+msgstr "Nova senha (confirmar)"
 
 #: apps/lpasswd.c:128
 msgid "Passwords do not match, try again.\n"
-msgstr "Passwords não coincidem, tente novamente.\n"
+msgstr "Senhas não coincidem, tente novamente.\n"
 
 #: apps/lpasswd.c:133
 msgid "Password change canceled.\n"
-msgstr "Alteração de password cancelada.\n"
+msgstr "Alteração de senha cancelada.\n"
 
 #: apps/lpasswd.c:190
 #, c-format
@@ -367,11 +370,11 @@ msgstr "Erro ao definir a senha para o usuário %s: %s\n"
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Erro ao definir password para o grupo %s: %s.\n"
+msgstr "Erro ao definir senha para o grupo %s: %s.\n"
 
 #: apps/lpasswd.c:208
 msgid "Password changed.\n"
-msgstr "Password alterado.\n"
+msgstr "Senha alterada.\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:197 apps/luseradd.c:209
@@ -421,7 +424,7 @@ msgstr "O grupo %s não pôde ser apagado: %s.\n"
 #: apps/luserdel.c:155
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s não tinha uma diretório 'home'.\n"
+msgstr "%s não tinha um diretório 'home'.\n"
 
 #: apps/luserdel.c:162
 #, c-format
@@ -531,7 +534,7 @@ msgstr "erro ao ler arquivo"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr "erro ao escrever no arquivo"
+msgstr "erro ao gravar no arquivo"
 
 #: lib/error.c:72
 msgid "data not found in file"
@@ -645,7 +648,7 @@ msgstr "entrada já presente no arquivo"
 #: modules/files.c:1421
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "não foi possível escrever em `%s': %s"
+msgstr "não foi possível gravar em `%s': %s"
 
 #: modules/files.c:1083 modules/files.c:1092 modules/files.c:1197
 #: modules/files.c:1209
