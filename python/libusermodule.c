@@ -132,13 +132,55 @@ libuser_entity_destroy(struct libuser_entity *self)
 }
 
 static PyObject *
-libuser_entity_getattr(struct libuser_entity  *self, char *name)
+libuser_entity_getattr(struct libuser_entity *self, char *name)
 {
 	DEBUG_CALL;
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Searching for attribute `%s'\n", name);
 #endif
 	return Py_FindMethod(libuser_entity_methods, (PyObject*)self, name);
+}
+
+static PyObject *
+libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
+{
+	PyObject *list;
+	int size, i;
+	char *val = NULL;
+
+	DEBUG_ENTRY;
+
+	if(PyArg_ParseTuple(args, "O!", &PyList_Type, &list)) {
+		lu_ent_clear(self->ent, name);
+
+		size = PyList_Size(list);
+		#ifdef DEBUG_BINDING
+		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
+		#endif
+
+		for(i = 0; i < size; i++) {
+			#ifdef DEBUG_BINDING
+			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
+				getindent(),
+				PyString_AsString(PyList_GetItem(list, i)),
+				name);
+			#endif
+			lu_ent_add(self->ent, name,
+				   PyString_AsString(PyList_GetItem(list, i)));
+		}
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	}
+
+	if(PyArg_ParseTuple(args, "s!", &name, &val)) {
+		lu_ent_set(self->ent, name, val);
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	}
+
+	PyErr_SetString(PyExc_SystemError, "expected string or list of strings");
+	DEBUG_EXIT;
+	return Py_BuildValue("");
 }
 
 static PyObject *
@@ -178,36 +220,43 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 static PyObject *
 libuser_entity_set(struct libuser_entity *self, PyObject *args)
 {
-	char *attr = NULL;
+	char *attr = NULL, *val = NULL;
 	PyObject *list = NULL;
 	int i, size;
 
 	DEBUG_ENTRY;
 
-	if(!PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
-		DEBUG_EXIT;
-		return NULL;
-	}
+	if(PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
+		lu_ent_clear(self->ent, attr);
 
-	lu_ent_clear(self->ent, attr);
-
-	size = PyList_Size(list);
-	#ifdef DEBUG_BINDING
-	fprintf(stderr, "%sList has %d items.\n", getindent(), size);
-	#endif
-
-	for(i = 0; i < size; i++) {
+		size = PyList_Size(list);
 		#ifdef DEBUG_BINDING
-		fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
-			getindent(), PyString_AsString(PyList_GetItem(list, i)),
-			attr);
+		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
 		#endif
-		lu_ent_add(self->ent, attr,
-			   PyString_AsString(PyList_GetItem(list, i)));
+
+		for(i = 0; i < size; i++) {
+			#ifdef DEBUG_BINDING
+			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
+				getindent(),
+				PyString_AsString(PyList_GetItem(list, i)),
+				attr);
+			#endif
+			lu_ent_add(self->ent, attr,
+				   PyString_AsString(PyList_GetItem(list, i)));
+		}
+		DEBUG_EXIT;
+		return Py_BuildValue("");
 	}
 
+	if(PyArg_ParseTuple(args, "ss!", &attr, &val)) {
+		lu_ent_set(self->ent, attr, val);
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	}
+
+	PyErr_SetString(PyExc_SystemError, "expected string or list of strings");
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	return NULL;
 }
 
 static PyObject *
@@ -255,6 +304,11 @@ libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 {
 	char *attr;
 	DEBUG_ENTRY;
+	if(!PyString_Check(item)) {
+		PyErr_SetString(PyExc_TypeError, "expected a string");
+		DEBUG_EXIT;
+		return NULL;
+	}
 	if(!(attr = PyString_AsString(item))) {
 		DEBUG_EXIT;
 		return NULL;
@@ -273,7 +327,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	DEBUG_ENTRY;
 
 	if(!PyString_Check(item)) {
-		PyErr_SetString(PyExc_TypeError, "item must be a string");
+		PyErr_SetString(PyExc_TypeError, "expected a string");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -282,15 +336,18 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 	#endif
 
-	if (PyString_Check(args)) {
+	if(PyString_Check(args)) {
 		#ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n",
 			getindent(),
 			attr,
-			PyString_AsString(PyList_GetItem(args, i)));
+			PyString_AsString(args));
 		#endif
 		lu_ent_set(self->ent, attr, PyString_AsString(args));
-	} else
+		DEBUG_EXIT;
+		return Py_BuildValue("");
+	}
+
 	if(PyList_Check(args)) {
 		size = PyList_Size(args);
 		#ifdef DEBUG_BINDING
@@ -312,14 +369,13 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			lu_ent_add(self->ent, attr,
 				   PyString_AsString(PyList_GetItem(args, i)));
 		}
-	} else {
-		PyErr_SetString(PyExc_TypeError, "expected string or list");
 		DEBUG_EXIT;
-		return NULL;
+		return Py_BuildValue("");
 	}
 
+	PyErr_SetString(PyExc_TypeError, "expected string or list of strings");
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	return NULL;
 }
 
 static PyMappingMethods
@@ -440,7 +496,6 @@ libuser_admin_lookup_user_id(struct libuser_admin *self, PyObject *args)
 	}
 	ent = lu_ent_new();
 	if(ent == NULL) {
-		PyErr_SetString(PyExc_SystemError, "libuser error");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -564,6 +619,7 @@ libuser_admin_generic(struct libuser_admin *self, PyObject *args,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
+		PyErr_SetString(PyExc_SystemError, "libuser error");
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -585,6 +641,7 @@ libuser_admin_setpass(struct libuser_admin *self, PyObject *args,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
+		PyErr_SetString(PyExc_SystemError, "libuser error");
 		DEBUG_EXIT;
 		return NULL;
 	}
