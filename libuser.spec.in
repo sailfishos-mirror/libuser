@@ -60,3 +60,5 @@ rm -fr $RPM_BUILD_ROOT
 #%{_libdir}/libuser/*.la
 
 %changelog
+* Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
+- initial packaging
