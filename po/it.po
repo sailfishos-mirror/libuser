@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-25 09:56+1000\n"
+"PO-Revision-Date: 2003-02-25 16:37+1000\n"
 "Last-Translator: Francesco Valente <fvalen@redhat.com>\n"
 "Language-Team: Italian <i18n-list@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -756,8 +756,7 @@ msgstr ""
 
 #: modules/ldap.c:683
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1212
 #, c-format
@@ -811,8 +810,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1701
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2243
 msgid "LDAP Server Name"
@@ -839,9 +837,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "errore di caricamento del modulo"
+msgstr "errore di inizializzazione del modulo"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -928,3 +925,4 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
