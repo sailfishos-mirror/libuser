@@ -9,10 +9,13 @@ libuser_la_SOURCES = \
 	entity.c \
 	error.c \
 	misc.c \
+	misc.h \
 	modules.c \
+	modules.h \
 	prompt.c \
 	scache.c \
 	user.c \
-	util.c
+	util.c \
+	util.h
 
 libuser_la_LIBADD = @GLIB_LIBS@
