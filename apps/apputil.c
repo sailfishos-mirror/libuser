@@ -127,9 +127,11 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 
 			/* If it's a symlink, duplicate it. */
 			if (S_ISLNK(st.st_mode)) {
-				if (readlink(skelpath, buf,
-					     sizeof(buf) - 1) != -1) {
-					buf[sizeof(buf) - 1] = '\0';
+				ssize_t len;
+				
+				if ((len = readlink(skelpath, buf,
+						    sizeof(buf) - 1)) != -1) {
+					buf[len] = '\0';
 					symlink(buf, path);
 					lchown(path, owner, st.st_gid ?: group);
 					utime(path, &timebuf);
