@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
-"POT-Creation-Date: 2002-01-14 15:39-0500\n"
-"PO-Revision-Date: 2001-08-06 17:17-0400\n"
+"POT-Creation-Date: 2002-01-14 19:58-0500\n"
+"PO-Revision-Date: 2002-01-06 17:17-0400\n"
 "Last-Translator: Yukihiro Nakai <ynakai@redhat.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,13 +42,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "%sの認証に失敗しました。\n"
 
 #: apps/apputil.c:433
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "内部エラー。\n"
+msgstr "内部PAMエラー `%s'。\n"
 
 #: apps/apputil.c:439
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "ユーザの不一致。\n"
 
 #: apps/lchage.c:128 apps/luseradd.c:85 apps/luserdel.c:64 apps/lusermod.c:87
 msgid "[OPTION...] user"
@@ -57,9 +57,9 @@ msgstr "[OPTION...]ユーザ"
 #: apps/lchage.c:131 apps/lgroupadd.c:66 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "%sの削除でエラー: %s。\n"
+msgstr "引数のパースでエラー: %s。\n"
 
 #: apps/lchage.c:140 apps/luseradd.c:103 apps/luserdel.c:75
 #: apps/lusermod.c:101
@@ -190,9 +190,9 @@ msgstr "グループ%sは修正されませんでした。\n"
 
 #. Aargh!  Abandon all hope.
 #: apps/luseradd.c:193
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "グループ%sの作成でエラー: %s。\n"
+msgstr "グループ`%s'の作成でエラー: %s。\n"
 
 #: apps/luseradd.c:247
 #, c-format
@@ -217,12 +217,12 @@ msgstr "%sにはGID番号がありません。\n"
 #: apps/luserdel.c:119
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "GID %ld のグループが存在しません。削除しません。\n"
 
 #: apps/luserdel.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "グループ#%dはグループ名を持っていません。\n"
+msgstr "GID %ld のグループにはグループ名がありません。\n"
 
 #: apps/luserdel.c:133
 #, c-format
@@ -260,9 +260,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "ユーザ%sは編集できませんでした: %s。\n"
 
 #: apps/lusermod.c:290
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "グループ%sは修正されませんでした。\n"
+msgstr "グループ%sは修正できませんでした:%s。\n"
 
 #: apps/lusermod.c:301
 #, c-format
@@ -286,98 +286,87 @@ msgstr "設定ファイル`%s'を開けませんでした: %s"
 
 #: lib/error.c:37
 msgid "success"
-msgstr ""
+msgstr "成功"
 
 #: lib/error.c:39
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "モジュールが設定で無効になっています"
 
 #: lib/error.c:41
-#, fuzzy
 msgid "generic error"
-msgstr "内部エラー。\n"
+msgstr "一般エラー"
 
 #: lib/error.c:43
-#, fuzzy
 msgid "not enough privileges"
-msgstr "スーパーユーザ特権で実行できません"
+msgstr "権限がありません"
 
 #: lib/error.c:45
 msgid "access denied"
-msgstr ""
+msgstr "アクセスが拒否されました"
 
 #: lib/error.c:47
 msgid "bad user/group name"
-msgstr ""
+msgstr "正しくないユーザ/グループ名"
 
 #: lib/error.c:49
 msgid "bad user/group id"
-msgstr ""
+msgstr "正しくないユーザ/グループID"
 
 #: lib/error.c:51
 msgid "user/group name in use"
-msgstr ""
+msgstr "ユーザ/グループ名は使われています"
 
 #: lib/error.c:53
 msgid "user/group id in use"
-msgstr ""
+msgstr "ユーザ/グループIDは使われています"
 
 #: lib/error.c:55
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "ターミナル属性の取得でエラー"
 
 #: lib/error.c:57
-#, fuzzy
 msgid "error opening file"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルを開く際にエラー"
 
 #: lib/error.c:59
-#, fuzzy
 msgid "error locking file"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルのロックでエラー"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error statting file"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルのstat情報取得中にエラー"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error reading file"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルの読み込み中にエラー"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error writing to file"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルの書き込み中にエラー"
 
 #: lib/error.c:67
 msgid "data not found in file"
-msgstr ""
+msgstr "データはファイルに見つかりませんでした"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "internal initialization error"
-msgstr "ケルベロスライブラリの初期化でエラー"
+msgstr "内部の初期化でエラー"
 
 #: lib/error.c:71
-#, fuzzy
 msgid "error loading module"
-msgstr "`%s'の作成でエラー"
+msgstr "モジュールのロードでエラー"
 
 #: lib/error.c:73
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "モジュールのシンボル解決でエラー"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "`%s'のモジュールバージョンの不一致"
+msgstr "ライブラリ/モジュールバージョンの不一致"
 
 #: lib/error.c:77 lib/error.c:79
-#, fuzzy
 msgid "unknown error"
-msgstr "不明"
+msgstr "不明なエラー"
 
 #: lib/modules.c:112
 #, c-format
@@ -391,21 +380,20 @@ msgstr "`%s'のモジュールバージョンの不一致"
 
 #: lib/prompt.c:66
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "ターミナル属性の読み込み中にエラー"
 
 #: lib/prompt.c:75 lib/prompt.c:89
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "デフォルトユーザ属性を取得中:\n"
+msgstr "ターミナル属性の設定中にエラー"
 
 #: lib/prompt.c:81
 msgid "error reading from terminal"
-msgstr ""
+msgstr "ターミナルから読み込み中にエラー"
 
 #: lib/util.c:184
-#, fuzzy, c-format
+#, c-format
 msgid "error locking file: %s"
-msgstr "`%s'の作成でエラー"
+msgstr "ファイルのロック中にエラー: %s"
 
 #: modules/files.c:100 modules/files.c:386 modules/files.c:708
 #: modules/files.c:941 modules/files.c:1137 modules/files.c:1322
@@ -413,20 +401,20 @@ msgstr "`%s'の作成でエラー"
 #: modules/files.c:1696 modules/files.c:1770 modules/files.c:1787
 #: modules/files.c:1836 modules/files.c:1855 modules/files.c:1929
 #: modules/files.c:1944
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't open `%s': %s"
-msgstr "`%s'を開けません"
+msgstr "`%s'を開けません: %s"
 
 #: modules/files.c:115 modules/files.c:147 modules/files.c:179
 #: modules/files.c:722 modules/files.c:1151
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "`%s'を開けません"
+msgstr "`%s'のstat情報を取得できません: %s"
 
 #: modules/files.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "error creating `%s': %s"
-msgstr "`%s'の作成でエラー: %s"
+msgstr "`%s'の作成中にエラー: %s"
 
 #: modules/files.c:138
 #, c-format
@@ -434,9 +422,9 @@ msgid "backup file `%s' was a symlink"
 msgstr "バックアップファイル`%s'はシンボリックリンクでした"
 
 #: modules/files.c:739 modules/files.c:1162
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "`%s'を開けません"
+msgstr "`%s'から読みこめません: %s"
 
 #: modules/files.c:751 modules/files.c:763
 msgid "entry already present in file"
@@ -444,9 +432,9 @@ msgstr "エントリはファイルにすでにあります"
 
 #: modules/files.c:777 modules/files.c:792 modules/files.c:1196
 #: modules/files.c:1207
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "`%s'を開けません"
+msgstr "`%s'に書き込めません: %s"
 
 #: modules/files.c:910 modules/files.c:920 modules/files.c:1030
 #: modules/files.c:1043
@@ -639,9 +627,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL認証ユーザ"
 
 #: samples/lookup.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "%sの初期化でエラー: %s。\n"
+msgstr "%sの初期化でエラー: %s\n"
 
 #: samples/lookup.c:74
 #, c-format
@@ -682,65 +670,3 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 #: samples/testuser.c:89
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "グループ名は指定されていません。\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "グループ%sの作成でエラー: %s。\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "ID %dのグループを検索中。\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "%sのUIDが不正です。\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "%sのGIDが不正です。\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "%sのホームディレクトリがありません。\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "%sの古いホームディレクトリの読み込みでエラー: %s。\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "%pでlu_ent構造体のダンプ:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " マジック = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " タイプ = %s\n"
-
-#~ msgid "user"
-#~ msgstr "ユーザ"
-
-#~ msgid "group"
-#~ msgstr "グループ"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "コピー前:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "コピー後:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "%pのlu_entを解放中。\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "グループ #%dは存在しません。\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "luの初期化でエラー。\n"
