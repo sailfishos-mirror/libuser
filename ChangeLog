@@ -1,5 +1,7 @@
 2004-09-28  Miloslav Trmac  <mitr@volny.cz>
 
+	* NEWS: Update.
+
 	* configure.in: Version 0.52.2.
 
 	* modules/ldap.c (lu_ldap_set): Beautify debug messages.

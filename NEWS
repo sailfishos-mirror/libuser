@@ -1,3 +1,6 @@
+0.52.2
+* Allow LDAP connection using ldaps, custom ports or without TLS.
+
 0.52.1
 * Fix freecon() of uninitialized value in files/shadow module
 
