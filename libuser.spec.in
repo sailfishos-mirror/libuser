@@ -77,6 +77,7 @@ rm -fr $RPM_BUILD_ROOT
 - lusermod: change user name in groups the user is a member of during renames
 - lgroupmod: change primary GID for users who are in the group during renumbers
 - ldap.c: handle new attributes more gracefully if possible
+- add ru translation files
 
 * Tue Aug  7 2001 Nalin Dahyabhai <nalin@redhat.com> 0.25.1-1
 - rename the quota source files to match the library, which clears up a
