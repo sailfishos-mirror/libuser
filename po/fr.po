@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-15 12:20-0500\n"
+"POT-Creation-Date: 2002-01-15 14:43-0500\n"
 "PO-Revision-Date: 2001-08-08 11:24+1\n"
 "Last-Translator: Bettina De Monti <bdemonti@redhat.it>\n"
 "Language-Team: French <LL@li.org>\n"
@@ -29,25 +29,25 @@ msgstr "Erreur lors de la création de `%s' : %s"
 msgid "Error removing `%s': %s"
 msgstr "Erreur lors de la suppression de `%s': %s"
 
-#: apps/apputil.c:407
+#: apps/apputil.c:408
 msgid "Internal error.\n"
 msgstr "Erreur interne.\n"
 
-#: apps/apputil.c:416
+#: apps/apputil.c:417
 msgid "Error initializing PAM.\n"
 msgstr "Erreur lors de l'initialisation de PAM.\n"
 
-#: apps/apputil.c:424 apps/apputil.c:448
+#: apps/apputil.c:425 apps/apputil.c:449
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentification non réussie pour %s.\n"
 
-#: apps/apputil.c:433
+#: apps/apputil.c:434
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Erreur interne.\n"
 
-#: apps/apputil.c:439
+#: apps/apputil.c:440
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "[OPTION...] user"
 msgstr "[OPTION...] utilisateur"
 
-#: apps/lchage.c:131 apps/lgroupadd.c:66 apps/lgroupdel.c:59
+#: apps/lchage.c:131 apps/lgroupadd.c:67 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
 #, fuzzy, c-format
@@ -67,14 +67,14 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 msgid "No user name specified.\n"
 msgstr "Aucun nom d'utilisateur spécifié.\n"
 
-#: apps/lchage.c:151 apps/lgroupadd.c:86 apps/lgroupdel.c:79
+#: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:112 samples/testuser.c:65
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Erreur lors de l'initialisation de %s : %s.\n"
 
-#: apps/lchage.c:154 apps/lgroupadd.c:89 apps/lgroupdel.c:82
+#: apps/lchage.c:154 apps/lgroupadd.c:90 apps/lgroupdel.c:82
 #: apps/lgroupmod.c:105 apps/luseradd.c:117 apps/luserdel.c:88
 #: apps/lusermod.c:115
 #, c-format
@@ -138,20 +138,20 @@ msgstr "Mot de passe inactif :\t%s\n"
 msgid "Account Expires:\t%s\n"
 msgstr "Expiration du compte :\t%s\n"
 
-#: apps/lchage.c:270
+#: apps/lchage.c:276
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr "Erreur lors de la modification de l'expiration de %s.\n"
 
-#: apps/lgroupadd.c:63 apps/lgroupdel.c:56 apps/lgroupmod.c:81
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:56 apps/lgroupmod.c:81
 msgid "[OPTION...] group"
 msgstr "[OPTION...] groupe"
 
-#: apps/lgroupadd.c:75 apps/lgroupdel.c:68 apps/lgroupmod.c:92
+#: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:92
 msgid "No group name specified.\n"
 msgstr "Aucun nom de groupe spécifié.\n"
 
-#: apps/lgroupadd.c:112
+#: apps/lgroupadd.c:114
 msgid "Group creation failed.\n"
 msgstr "La création du groupe a échoué.\n"
 
@@ -169,38 +169,38 @@ msgstr "Le groupe %s ne peux pas &ecirc;tre effacé.\n"
 msgid "Both -L and -U specified.\n"
 msgstr "Aussi bien -L que -U spécifiés.\n"
 
-#: apps/lgroupmod.c:211 apps/lgroupmod.c:221
+#: apps/lgroupmod.c:218 apps/lgroupmod.c:228
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s.\n"
 
-#: apps/lgroupmod.c:230
+#: apps/lgroupmod.c:237
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr "Le groupe %s ne peut pas &ecirc;tre verrouillé.\n"
 
-#: apps/lgroupmod.c:238
+#: apps/lgroupmod.c:245
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr "Le groupe %s ne peut pas &ecirc;tre déverrouillé.\n"
 
-#: apps/lgroupmod.c:245
+#: apps/lgroupmod.c:252
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr "Le groupe %s ne peut pas &ecirc;tre modifié.\n"
 
 #. Aargh!  Abandon all hope.
-#: apps/luseradd.c:193
+#: apps/luseradd.c:194
 #, fuzzy, c-format
 msgid "Error creating group `%s'.\n"
 msgstr "Erreur lors de la création du groupe pour %s : %s.\n"
 
-#: apps/luseradd.c:247
+#: apps/luseradd.c:253
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "La création du compte a échoué : %s\n"
 
-#: apps/luseradd.c:275
+#: apps/luseradd.c:281
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Erreur lors de la création de %s : %s.\n"
@@ -230,53 +230,53 @@ msgstr "Le groupe #%d n'avait pas de nom de groupe.\n"
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Le groupe %s ne peux pas &ecirc;tre effacé : %s.\n"
 
-#: apps/luserdel.c:146
+#: apps/luserdel.c:147
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s n'avait pas de répertoire personnel.\n"
 
-#: apps/luserdel.c:153
+#: apps/luserdel.c:154
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Erreur lors de la suppression de %s : %s.\n"
 
-#: apps/lusermod.c:197 apps/lusermod.c:210
+#: apps/lusermod.c:203 apps/lusermod.c:216
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr ""
 "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:227
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "L'utilisateur %s n'a pas pu &ecirc;tre verrouillé : %s\n"
 
-#: apps/lusermod.c:229
+#: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "L'utilisateur %s n'a pas pu &ecirc;tre déverrouillé : %s.\n"
 
-#: apps/lusermod.c:237
+#: apps/lusermod.c:243
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "L'utilisateur %s n'a pas pu &ecirc;tre modifié : %s.\n"
 
-#: apps/lusermod.c:290
+#: apps/lusermod.c:296
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Le groupe %s ne peut pas &ecirc;tre modifié.\n"
 
-#: apps/lusermod.c:301
+#: apps/lusermod.c:307
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Aucun vieux répertoire personnel pour %s.\n"
 
-#: apps/lusermod.c:306
+#: apps/lusermod.c:312
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Aucun nouveau répertoire personnel pour %s.\n"
 
-#: apps/lusermod.c:312
+#: apps/lusermod.c:318
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Erreur lors du déplacement de %s vers %s : %s.\n"
@@ -412,9 +412,9 @@ msgstr "erreur lors du verrouillage du fichier : %s"
 #: modules/files.c:100 modules/files.c:386 modules/files.c:708
 #: modules/files.c:941 modules/files.c:1137 modules/files.c:1322
 #: modules/files.c:1398 modules/files.c:1568 modules/files.c:1681
-#: modules/files.c:1696 modules/files.c:1770 modules/files.c:1787
-#: modules/files.c:1836 modules/files.c:1855 modules/files.c:1929
-#: modules/files.c:1944
+#: modules/files.c:1696 modules/files.c:1771 modules/files.c:1788
+#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1932
+#: modules/files.c:1947
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "impossible d'ouvrir `%s' : %s"
@@ -461,11 +461,11 @@ msgstr "l'objet n'a pas d'attribut %s"
 msgid "entity object has no `%s' attribute"
 msgstr "l'objet n'a pas d'attribut `%s'"
 
-#: modules/files.c:2131 modules/files.c:2197
+#: modules/files.c:2135 modules/files.c:2201
 msgid "not executing with superuser privileges"
 msgstr "exécution sans les privilèges du superutilisateur"
 
-#: modules/files.c:2210
+#: modules/files.c:2214
 msgid "no shadow file present -- disabling"
 msgstr "pas de fichier shadow présent -- désactivation."
 

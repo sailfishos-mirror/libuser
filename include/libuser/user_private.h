@@ -233,6 +233,9 @@ void lu_ent_clear_modules(struct lu_ent *ent);
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
 
+/* Get the length of an array, such as one returned by g_strsplit(). */
+guint lu_strv_len(char **);
+
 /* Lock a file. */
 gboolean lu_util_lock_obtain(int fd, struct lu_error **error);
 void lu_util_lock_free(int fd);

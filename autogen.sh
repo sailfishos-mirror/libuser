@@ -2,7 +2,7 @@
 WARNINGS="-Wall -Wimplicit -Wcast-align -Wpointer-arith -Wimplicit-prototypes -Wmissing-prototypes"
 #DEFINES="-D_GNU_SOURCE"
 set -x
-CFLAGS="-g3 $WARNINGS $DEFINES $CFLAGS" ; export CFLAGS
+CFLAGS="-g $WARNINGS $DEFINES $CFLAGS" ; export CFLAGS
 libtoolize --force
 aclocal
 automake -a

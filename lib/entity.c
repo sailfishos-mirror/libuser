@@ -305,7 +305,7 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 		g_free(lattr);
 	}
 	while (dest->n_values > 0) {
-		g_value_array_remove(dest, 0);
+		g_value_array_remove(dest, dest->n_values - 1);
 	}
 	copy = g_value_array_copy(values);
 	for (i = 0; i < copy->n_values; i++) {

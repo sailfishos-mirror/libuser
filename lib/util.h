@@ -45,8 +45,6 @@ char *lu_util_line_get_matching1(int fd, const char *part,
 char *lu_util_line_get_matching3(int fd, const char *part,
 				 struct lu_error **error);
 
-guint lu_strv_len(gchar ** v);
-
 char *lu_util_field_read(int fd, const char *first, unsigned int field,
 			 struct lu_error **error);
 

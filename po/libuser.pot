@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-15 12:20-0500\n"
+"POT-Creation-Date: 2002-01-15 14:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,25 +29,25 @@ msgstr ""
 msgid "Error removing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:407
+#: apps/apputil.c:408
 msgid "Internal error.\n"
 msgstr ""
 
-#: apps/apputil.c:416
+#: apps/apputil.c:417
 msgid "Error initializing PAM.\n"
 msgstr ""
 
-#: apps/apputil.c:424 apps/apputil.c:448
+#: apps/apputil.c:425 apps/apputil.c:449
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr ""
 
-#: apps/apputil.c:433
+#: apps/apputil.c:434
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr ""
 
-#: apps/apputil.c:439
+#: apps/apputil.c:440
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgstr ""
 msgid "[OPTION...] user"
 msgstr ""
 
-#: apps/lchage.c:131 apps/lgroupadd.c:66 apps/lgroupdel.c:59
+#: apps/lchage.c:131 apps/lgroupadd.c:67 apps/lgroupdel.c:59
 #: apps/lgroupmod.c:84 apps/luseradd.c:88 apps/luserdel.c:67
 #: apps/lusermod.c:90
 #, c-format
@@ -67,14 +67,14 @@ msgstr ""
 msgid "No user name specified.\n"
 msgstr ""
 
-#: apps/lchage.c:151 apps/lgroupadd.c:86 apps/lgroupdel.c:79
+#: apps/lchage.c:151 apps/lgroupadd.c:87 apps/lgroupdel.c:79
 #: apps/lgroupmod.c:102 apps/luseradd.c:114 apps/luserdel.c:85
 #: apps/lusermod.c:112 samples/testuser.c:65
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr ""
 
-#: apps/lchage.c:154 apps/lgroupadd.c:89 apps/lgroupdel.c:82
+#: apps/lchage.c:154 apps/lgroupadd.c:90 apps/lgroupdel.c:82
 #: apps/lgroupmod.c:105 apps/luseradd.c:117 apps/luserdel.c:88
 #: apps/lusermod.c:115
 #, c-format
@@ -138,20 +138,20 @@ msgstr ""
 msgid "Account Expires:\t%s\n"
 msgstr ""
 
-#: apps/lchage.c:270
+#: apps/lchage.c:276
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
 msgstr ""
 
-#: apps/lgroupadd.c:63 apps/lgroupdel.c:56 apps/lgroupmod.c:81
+#: apps/lgroupadd.c:64 apps/lgroupdel.c:56 apps/lgroupmod.c:81
 msgid "[OPTION...] group"
 msgstr ""
 
-#: apps/lgroupadd.c:75 apps/lgroupdel.c:68 apps/lgroupmod.c:92
+#: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:92
 msgid "No group name specified.\n"
 msgstr ""
 
-#: apps/lgroupadd.c:112
+#: apps/lgroupadd.c:114
 msgid "Group creation failed.\n"
 msgstr ""
 
@@ -169,38 +169,38 @@ msgstr ""
 msgid "Both -L and -U specified.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:211 apps/lgroupmod.c:221
+#: apps/lgroupmod.c:218 apps/lgroupmod.c:228
 #, c-format
 msgid "Failed to set password for group %s.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:230
+#: apps/lgroupmod.c:237
 #, c-format
 msgid "Group %s could not be locked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:238
+#: apps/lgroupmod.c:245
 #, c-format
 msgid "Group %s could not be unlocked.\n"
 msgstr ""
 
-#: apps/lgroupmod.c:245
+#: apps/lgroupmod.c:252
 #, c-format
 msgid "Group %s could not be modified.\n"
 msgstr ""
 
 #. Aargh!  Abandon all hope.
-#: apps/luseradd.c:193
+#: apps/luseradd.c:194
 #, c-format
 msgid "Error creating group `%s'.\n"
 msgstr ""
 
-#: apps/luseradd.c:247
+#: apps/luseradd.c:253
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:275
+#: apps/luseradd.c:281
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr ""
@@ -230,52 +230,52 @@ msgstr ""
 msgid "Group %s could not be deleted: %s.\n"
 msgstr ""
 
-#: apps/luserdel.c:146
+#: apps/luserdel.c:147
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr ""
 
-#: apps/luserdel.c:153
+#: apps/luserdel.c:154
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:197 apps/lusermod.c:210
+#: apps/lusermod.c:203 apps/lusermod.c:216
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:227
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:229
+#: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:237
+#: apps/lusermod.c:243
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:290
+#: apps/lusermod.c:296
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:301
+#: apps/lusermod.c:307
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:306
+#: apps/lusermod.c:312
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:312
+#: apps/lusermod.c:318
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr ""
@@ -399,9 +399,9 @@ msgstr ""
 #: modules/files.c:100 modules/files.c:386 modules/files.c:708
 #: modules/files.c:941 modules/files.c:1137 modules/files.c:1322
 #: modules/files.c:1398 modules/files.c:1568 modules/files.c:1681
-#: modules/files.c:1696 modules/files.c:1770 modules/files.c:1787
-#: modules/files.c:1836 modules/files.c:1855 modules/files.c:1929
-#: modules/files.c:1944
+#: modules/files.c:1696 modules/files.c:1771 modules/files.c:1788
+#: modules/files.c:1838 modules/files.c:1857 modules/files.c:1932
+#: modules/files.c:1947
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr ""
@@ -448,11 +448,11 @@ msgstr ""
 msgid "entity object has no `%s' attribute"
 msgstr ""
 
-#: modules/files.c:2131 modules/files.c:2197
+#: modules/files.c:2135 modules/files.c:2201
 msgid "not executing with superuser privileges"
 msgstr ""
 
-#: modules/files.c:2210
+#: modules/files.c:2214
 msgid "no shadow file present -- disabling"
 msgstr ""
 

@@ -33,6 +33,11 @@
 
 #define CHUNK_SIZE (LINE_MAX * 4)
 
+struct lu_module *
+libuser_files_init(struct lu_context *context, struct lu_error **error);
+struct lu_module *
+libuser_shadow_init(struct lu_context *context, struct lu_error **error);
+
 /* Guides for parsing and formatting entries in the files we're looking at.
  * For formatting purposes, these are all arranged in order of ascending
  * positions. */
@@ -432,7 +437,7 @@ lu_files_user_lookup_id(struct lu_module *module,
 {
 	char *key;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%d", uid);
+	key = g_strdup_printf("%ld", uid);
 	ret =
 	    generic_lookup(module, "passwd", key,
 			   lu_files_parse_user_entry, 3, ent, error);
@@ -462,7 +467,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 	char *key;
 	GValueArray *values;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%d", uid);
+	key = g_strdup_printf("%ld", uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_USERNAME);
@@ -500,7 +505,7 @@ lu_files_group_lookup_id(struct lu_module *module,
 {
 	char *key;
 	gboolean ret;
-	key = g_strdup_printf("%d", gid);
+	key = g_strdup_printf("%ld", gid);
 	ret = generic_lookup(module, "group", key,
 			     lu_files_parse_group_entry, 3, ent, error);
 	g_free(key);
@@ -524,7 +529,7 @@ lu_shadow_group_lookup_id(struct lu_module *module, long gid,
 	char *key;
 	GValueArray *values;
 	gboolean ret = FALSE;
-	key = g_strdup_printf("%d", gid);
+	key = g_strdup_printf("%ld", gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
@@ -890,7 +895,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	int i, j;
 	const char *dir = NULL;
 	char *p, *q, *r, *new_value;
-	GValueArray *names = NULL, *values = NULL, *l;
+	GValueArray *names = NULL, *values = NULL;
 	GValue value;
 	gboolean ret = FALSE;
 
@@ -1708,9 +1713,8 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 		p = strchr(buf, ':');
 		if (p != NULL) {
 			*p = '\0';
-			p = module->scache->cache(module->scache, buf);
-			if (fnmatch(pattern, p, 0) == 0) {
-				g_value_set_string(&value, p);
+			if (fnmatch(pattern, buf, 0) == 0) {
+				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
 				g_value_unset(&value);
 			}

@@ -1,4 +1,4 @@
-CFLAGS = -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@
+CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GOBJECT_CFLAGS@
 LDADD = @GOBJECT_LIBS@ ../lib/libuser.la
 
 EXTRA_PROGRAMS = \
