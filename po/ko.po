@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-21 16:31+1000\n"
+"PO-Revision-Date: 2003-02-25 16:41+1000\n"
 "Last-Translator: Michelle Kim <mkim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -835,9 +835,8 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 인증 사용자"
 
 #: modules/ldap.c:2315
-#, fuzzy
 msgid "error initializing module"
-msgstr "모듈을 적재하는 도중 오류 발생"
+msgstr "모듈을 초기화하는 도중 오류 발생"
 
 #: modules/sasldb.c:128
 #, c-format
@@ -924,3 +923,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
