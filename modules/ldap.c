@@ -57,6 +57,8 @@ LU_MODULE_INIT(libuser_ldap_init)
 #define LU_LDAP_GROUP	(1 << 1)
 #define LU_LDAP_SHADOW	(1 << 2)
 
+enum lock_op { LO_LOCK, LO_UNLOCK, LO_UNLOCK_NONEMPTY };
+
 enum interact_indices {
 	LU_LDAP_SERVER,
 	LU_LDAP_BASEDN,
@@ -1542,7 +1544,7 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 /* Lock an account of some kind. */
 static gboolean
 lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
-		    const char *namingAttr, gboolean sense,
+		    const char *namingAttr, enum lock_op op,
 		    const char *configKey, const char *def,
 		    struct lu_error **error)
 {
@@ -1614,18 +1616,36 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	result = ent->cache->cache(ent->cache, tmp);
 
 	/* Generate a new string with the modification applied. */
-	if (sense) {
+	switch (op) {
+	case LO_LOCK:
 		if (result[0] != LOCKCHAR)
 			result = g_strdup_printf("%s%c%s", LU_CRYPTED,
 						 LOCKCHAR, result);
 		else
 			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
-	} else {
+		break;
+	case LO_UNLOCK:
 		if (result[0] == LOCKCHAR)
 			result = g_strdup_printf("%s%s", LU_CRYPTED,
 						 result + 1);
 		else
 			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
+		break;
+	case LO_UNLOCK_NONEMPTY:
+		if (result[0] == LOCKCHAR) {
+			if (result[1] == '\0') {
+				lu_error_new(error, lu_error_unlock_empty,
+					     NULL);
+				g_free(oldpassword);
+				return FALSE;
+			}
+			result = g_strdup_printf("%s%s", LU_CRYPTED,
+						 result + 1);
+		} else
+			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
+		break;
+	default:
+		g_assert_not_reached();
 	}
 	/* Set up the LDAP modify operation. */
 	mod[0].mod_op = LDAP_MOD_DELETE;
@@ -2052,7 +2072,7 @@ lu_ldap_user_lock(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_handle_lock(module, ent, LU_USERNAME, TRUE,
+	return lu_ldap_handle_lock(module, ent, LU_USERNAME, LO_LOCK,
 				   "userBranch", USERBRANCH, error);
 }
 
@@ -2062,8 +2082,18 @@ lu_ldap_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_handle_lock(module, ent, LU_USERNAME, FALSE,
+	return lu_ldap_handle_lock(module, ent, LU_USERNAME, LO_UNLOCK,
 				   "userBranch", USERBRANCH, error);
+}
+
+static gboolean
+lu_ldap_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			     struct lu_error **error)
+{
+	LU_ERROR_CHECK(error);
+	return lu_ldap_handle_lock(module, ent, LU_USERNAME,
+				   LO_UNLOCK_NONEMPTY, "userBranch",
+				   USERBRANCH, error);
 }
 
 /* Check if a user account in the directory is locked. */
@@ -2132,7 +2162,7 @@ lu_ldap_group_lock(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, TRUE,
+	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, LO_LOCK,
 				   "groupBranch", GROUPBRANCH, error);
 }
 
@@ -2142,8 +2172,18 @@ lu_ldap_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
-	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, FALSE,
+	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME, LO_UNLOCK,
 				   "groupBranch", GROUPBRANCH, error);
+}
+
+static gboolean
+lu_ldap_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			      struct lu_error **error)
+{
+	LU_ERROR_CHECK(error);
+	return lu_ldap_handle_lock(module, ent, LU_GROUPNAME,
+				   LO_UNLOCK_NONEMPTY, "groupBranch",
+				   GROUPBRANCH, error);
 }
 
 /* Check if a group account in the directory is locked. */
@@ -2580,6 +2620,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->user_del = lu_ldap_user_del;
 	ret->user_lock = lu_ldap_user_lock;
 	ret->user_unlock = lu_ldap_user_unlock;
+	ret->user_unlock_nonempty = lu_ldap_user_unlock_nonempty;
 	ret->user_is_locked = lu_ldap_user_is_locked;
 	ret->user_setpass = lu_ldap_user_setpass;
 	ret->user_removepass = lu_ldap_user_removepass;
@@ -2597,6 +2638,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->group_del = lu_ldap_group_del;
 	ret->group_lock = lu_ldap_group_lock;
 	ret->group_unlock = lu_ldap_group_unlock;
+	ret->group_unlock_nonempty = lu_ldap_group_unlock_nonempty;
 	ret->group_is_locked = lu_ldap_group_is_locked;
 	ret->group_setpass = lu_ldap_group_setpass;
 	ret->group_removepass = lu_ldap_group_removepass;

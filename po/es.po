@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-11-14 00:53+0100\n"
+"POT-Creation-Date: 2004-11-14 22:04+0100\n"
 "PO-Revision-Date: 2004-11-03 09:52+1000\n"
 "Last-Translator: Yelitza Louze <ylouze@redhat.com>\n"
 "Language-Team:  <es@li.org>\n"
@@ -508,6 +508,13 @@ msgstr "Error en la configuración de la contraseña para el grupo %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Contraseña modificada.\n"
 
+# apps/lgroupdel.c:76 apps/lgroupmod.c:96
+# apps/lgroupdel.c:76 apps/lgroupmod.c:96
+#: apps/luseradd.c:186
+#, fuzzy, c-format
+msgid "Group %jd does not exist\n"
+msgstr "El grupo %s no existe.\n"
+
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #: apps/luseradd.c:213 apps/luseradd.c:226
@@ -585,56 +592,56 @@ msgstr "Error al eliminar %s: %s.\n"
 
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
-#: apps/lusermod.c:229 apps/lusermod.c:242
+#: apps/lusermod.c:232 apps/lusermod.c:245
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Intento fallido de configurar la contraseña para el usuario %s: %s.\n"
 
 # apps/lusermod.c:150
 # apps/lusermod.c:150
-#: apps/lusermod.c:252
+#: apps/lusermod.c:255
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "No se ha podido bloquear el usuario %s: %s.\n"
 
 # apps/lusermod.c:157
 # apps/lusermod.c:157
-#: apps/lusermod.c:260
+#: apps/lusermod.c:263
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "No se ha podido desbloquear el ususario %s: %s.\n"
 
 # apps/lusermod.c:163
 # apps/lusermod.c:163
-#: apps/lusermod.c:268
+#: apps/lusermod.c:271
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "No se ha podido modificar el usuario %s: %s.\n"
 
 # apps/lgroupmod.c:189
 # apps/lgroupmod.c:189
-#: apps/lusermod.c:323
+#: apps/lusermod.c:325
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "El grupo %s no se ha podido modificar:%s\n"
 
 # apps/lusermod.c:169
 # apps/lusermod.c:169
-#: apps/lusermod.c:333
+#: apps/lusermod.c:336
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ningún directorio principal antiguo para %s.\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
-#: apps/lusermod.c:338
+#: apps/lusermod.c:341
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ningún directorio principal para %s.\n"
 
 # apps/lusermod.c:177
 # apps/lusermod.c:177
-#: apps/lusermod.c:344
+#: apps/lusermod.c:347
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Error al trasladar %s a %s: %s.\n"
@@ -762,9 +769,13 @@ msgstr "error al determinar el símbolo en el módulo"
 msgid "library/module version mismatch"
 msgstr "versión de librería/módulo discordante"
 
+#: lib/error.c:82
+msgid "unlocking would make the password field empty"
+msgstr ""
+
 # lib/userent.c:46
 # lib/userent.c:47
-#: lib/error.c:85
+#: lib/error.c:88
 msgid "unknown error"
 msgstr "error desconocido"
 
@@ -796,27 +807,27 @@ msgstr "error en la configuración de los atributos del terminal"
 msgid "error reading from terminal"
 msgstr "error al leer desde el terminal"
 
-#: lib/user.c:194
+#: lib/user.c:196
 msgid "name is not set"
 msgstr "no se ha establecido un nombre"
 
-#: lib/user.c:198
+#: lib/user.c:200
 msgid "name is too short"
 msgstr "el nombre es muy corto"
 
-#: lib/user.c:204
+#: lib/user.c:206
 msgid "name contains non-ASCII characters"
 msgstr "el nombre contiene caracteres que no son ASCII"
 
-#: lib/user.c:211
+#: lib/user.c:213
 msgid "name contains control characters"
 msgstr "el nombre contiene caracteres de control"
 
-#: lib/user.c:218
+#: lib/user.c:220
 msgid "name contains whitespace"
 msgstr "el nombre contiene espacios en blanco"
 
-#: lib/user.c:225
+#: lib/user.c:227
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "el nombre contiene un caracter inválido: `%c'"
@@ -831,7 +842,7 @@ msgstr "error cerrando fichero: %s"
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:110
+#: modules/files.c:112
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "no se pudo obtener el contexto de seguridad `%s': %s"
@@ -839,7 +850,7 @@ msgstr "no se pudo obtener el contexto de seguridad `%s': %s"
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
-#: modules/files.c:116
+#: modules/files.c:118
 #, c-format
 msgid "couldn't set default security context: %s"
 msgstr "no se ha podido configurar el contexto de seguridad predeterminado: %s"
@@ -847,7 +858,7 @@ msgstr "no se ha podido configurar el contexto de seguridad predeterminado: %s"
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:123
+#: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
@@ -856,7 +867,7 @@ msgstr ""
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:143
+#: modules/files.c:145
 #, c-format
 msgid "couldn't reset default security context to `%s': %s"
 msgstr "no se pudo reestablecer el contexto de seguridad a `%s': %s"
@@ -868,13 +879,13 @@ msgstr "no se pudo reestablecer el contexto de seguridad a `%s': %s"
 # modules/files.c:1379 modules/files.c:1439 modules/files.c:1455
 # modules/files.c:1496 modules/files.c:1514 modules/files.c:1579
 # modules/files.c:1593
-#: modules/files.c:170 modules/files.c:530 modules/files.c:875
-#: modules/files.c:1148 modules/files.c:1340 modules/files.c:1547
-#: modules/files.c:1632 modules/files.c:1830 modules/files.c:2014
-#: modules/files.c:2031 modules/files.c:2121 modules/files.c:2140
-#: modules/files.c:2208 modules/files.c:2229 modules/files.c:2326
-#: modules/files.c:2345 modules/files.c:2404 modules/files.c:2423
-#: modules/files.c:2524 modules/files.c:2539
+#: modules/files.c:172 modules/files.c:532 modules/files.c:877
+#: modules/files.c:1150 modules/files.c:1342 modules/files.c:1564
+#: modules/files.c:1651 modules/files.c:1888 modules/files.c:2079
+#: modules/files.c:2096 modules/files.c:2186 modules/files.c:2205
+#: modules/files.c:2273 modules/files.c:2294 modules/files.c:2391
+#: modules/files.c:2410 modules/files.c:2469 modules/files.c:2488
+#: modules/files.c:2589 modules/files.c:2604
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -882,22 +893,22 @@ msgstr "no se ha podido abrir `%s': %s"
 # modules/files.c:115
 # modules/files.c:123 modules/files.c:147 modules/files.c:178
 # modules/files.c:586 modules/files.c:917
-#: modules/files.c:186 modules/files.c:222 modules/files.c:260
-#: modules/files.c:887 modules/files.c:1352
+#: modules/files.c:188 modules/files.c:224 modules/files.c:262
+#: modules/files.c:889 modules/files.c:1354
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no se pudo efectuar el stat `%s': %s"
 
 # apps/apputil.c:63
 # modules/files.c:130
-#: modules/files.c:197
+#: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "error al crear `%s': %s"
 
 # modules/files.c:145
 # modules/files.c:140
-#: modules/files.c:213
+#: modules/files.c:215
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr ""
@@ -905,22 +916,22 @@ msgstr ""
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
-#: modules/files.c:917 modules/files.c:1361
+#: modules/files.c:919 modules/files.c:1363
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no se ha podido leer desde `%s': %s"
 
 # modules/files.c:614 modules/files.c:624
 # modules/files.c:611 modules/files.c:621
-#: modules/files.c:926 modules/files.c:933
+#: modules/files.c:928 modules/files.c:935
 msgid "entry already present in file"
 msgstr "la entrada ya se ha hecho presente en el archivo"
 
 # modules/files.c:115
 # modules/files.c:633 modules/files.c:644 modules/files.c:952
 # modules/files.c:961
-#: modules/files.c:940 modules/files.c:955 modules/files.c:1407
-#: modules/files.c:1415
+#: modules/files.c:942 modules/files.c:957 modules/files.c:1409
+#: modules/files.c:1417
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no se ha podido escribir en `%s': %s"
@@ -929,27 +940,27 @@ msgstr "no se ha podido escribir en `%s': %s"
 # modules/files.c:833
 # modules/files.c:727 modules/files.c:734 modules/files.c:821
 # modules/files.c:831
-#: modules/files.c:1115 modules/files.c:1123 modules/files.c:1216
-#: modules/files.c:1224
+#: modules/files.c:1117 modules/files.c:1125 modules/files.c:1218
+#: modules/files.c:1226
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: modules/files.c:1863 modules/ldap.c:1608 modules/ldap.c:1862
+#: modules/files.c:1922 modules/ldap.c:1609 modules/ldap.c:1882
 msgid "error encrypting password"
 msgstr "error al encriptar la contraseña"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2811 modules/files.c:2888
+#: modules/files.c:2876 modules/files.c:2955
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2903
+#: modules/files.c:2970
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 
@@ -1043,32 +1054,32 @@ msgstr "Contraseña Kerberos para el administrador principal"
 
 # modules/ldap.c:178
 # modules/ldap.c:175
-#: modules/ldap.c:200
+#: modules/ldap.c:202
 msgid "error initializing ldap library"
 msgstr "error al inicializar la librería ldap"
 
 # modules/ldap.c:196
 # modules/ldap.c:193
-#: modules/ldap.c:211
+#: modules/ldap.c:213
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "no se ha podido establecer un protocolo LDAP para la versión %d"
 
 # modules/ldap.c:202
 # modules/ldap.c:199
-#: modules/ldap.c:223
+#: modules/ldap.c:225
 msgid "could not negotiate TLS with LDAP server"
 msgstr "no se ha podido negociar TLS con el servidor LDAP"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
-#: modules/ldap.c:406
+#: modules/ldap.c:408
 msgid "could not bind to LDAP server"
 msgstr "no se ha podido vincular al servidor LDAP"
 
 # modules/ldap.c:216
 # modules/ldap.c:213
-#: modules/ldap.c:409
+#: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr ""
@@ -1076,11 +1087,11 @@ msgstr ""
 
 # modules/ldap.c:216
 # modules/ldap.c:213
-#: modules/ldap.c:423
+#: modules/ldap.c:425
 msgid "could not search LDAP server"
 msgstr "no ha podido buscar el servidor LDAP"
 
-#: modules/ldap.c:432
+#: modules/ldap.c:434
 msgid "LDAP server appears to have no root DSE"
 msgstr "El servidor LDAP parece non tener DSE de root"
 
@@ -1088,133 +1099,133 @@ msgstr "El servidor LDAP parece non tener DSE de root"
 # modules/ldap.c:796 modules/ldap.c:873
 # modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
 # modules/ldap.c:799 modules/ldap.c:880
-#: modules/ldap.c:626 modules/ldap.c:1385 modules/ldap.c:1523
-#: modules/ldap.c:1584 modules/ldap.c:1699 modules/ldap.c:1795
+#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
+#: modules/ldap.c:1585 modules/ldap.c:1719 modules/ldap.c:1815
 msgid "error mapping name to LDAP distinguished name"
 msgstr "error en la proyección del nombre para el DN LDAP"
 
 # modules/ldap.c:321
 # modules/ldap.c:318
-#: modules/ldap.c:636
+#: modules/ldap.c:638
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "error en la proyección del nombre para el DN base LDAP"
 
 # modules/ldap.c:554
 # modules/ldap.c:556
-#: modules/ldap.c:1362
+#: modules/ldap.c:1363
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "el objeto de usuario no tiene ningún atributo %s"
 
 # modules/ldap.c:560
 # modules/ldap.c:562
-#: modules/ldap.c:1371
+#: modules/ldap.c:1372
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "el objeto de usuario ha sido creado sin `%s'"
 
 # modules/ldap.c:572
 # modules/ldap.c:574
-#: modules/ldap.c:1396
+#: modules/ldap.c:1397
 msgid "could not convert internal data to LDAPMods"
 msgstr "no se han podido convertir los datos internos a LDAPMods"
 
 # modules/ldap.c:598
 # modules/ldap.c:600
-#: modules/ldap.c:1409
+#: modules/ldap.c:1410
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "error al crear una entrada al directorio LDAP: %s"
 
 # modules/ldap.c:585 modules/ldap.c:748
 # modules/ldap.c:587 modules/ldap.c:751
-#: modules/ldap.c:1435 modules/ldap.c:1655
+#: modules/ldap.c:1436 modules/ldap.c:1675
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "error al modificar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:598
 # modules/ldap.c:600
-#: modules/ldap.c:1462
+#: modules/ldap.c:1463
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "error al renombrar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:640
 # modules/ldap.c:643
-#: modules/ldap.c:1511
+#: modules/ldap.c:1512
 #, c-format
 msgid "object had no %s attribute"
 msgstr "el objeto no tiene ningún atributo %s"
 
 # modules/ldap.c:657
 # modules/ldap.c:660
-#: modules/ldap.c:1535
+#: modules/ldap.c:1536
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "error al eliminar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
 # modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
-#: modules/ldap.c:1572 modules/ldap.c:1594 modules/ldap.c:1686
-#: modules/ldap.c:1784
+#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1706
+#: modules/ldap.c:1804
 #, c-format
 msgid "object has no %s attribute"
 msgstr "el objeto no tiene atributos %s"
 
 # modules/ldap.c:808
 # modules/ldap.c:811
-#: modules/ldap.c:1719
+#: modules/ldap.c:1739
 msgid "no such object in LDAP directory"
 msgstr "Objeto no encontrado en el directorio LDAP"
 
 # modules/ldap.c:832
 # modules/ldap.c:836
-#: modules/ldap.c:1731
+#: modules/ldap.c:1751
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "Atributo `%s' no encontrado"
 
 # modules/ldap.c:928
 # modules/ldap.c:939
-#: modules/ldap.c:1893
+#: modules/ldap.c:1913
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
 # modules/ldap.c:1191
 # modules/ldap.c:1213
-#: modules/ldap.c:2445
+#: modules/ldap.c:2485
 msgid "LDAP Server Name"
 msgstr "Nombre del servidor LDAP"
 
 # modules/ldap.c:1196
 # modules/ldap.c:1218
-#: modules/ldap.c:2451
+#: modules/ldap.c:2491
 msgid "LDAP Search Base DN"
 msgstr "DN base de búsqueda de LDAP"
 
 # modules/ldap.c:1201
 # modules/ldap.c:1223
-#: modules/ldap.c:2457
+#: modules/ldap.c:2497
 msgid "LDAP Bind DN"
 msgstr "DN Bind LDAP"
 
 # modules/ldap.c:1206
 # modules/ldap.c:1228
-#: modules/ldap.c:2464
+#: modules/ldap.c:2504
 msgid "LDAP Bind Password"
 msgstr "Contraseña Bind LDAP"
 
 # modules/ldap.c:1212
 # modules/ldap.c:1234
-#: modules/ldap.c:2470
+#: modules/ldap.c:2510
 msgid "LDAP SASL User"
 msgstr "Usuario SASL LDAP"
 
 # modules/ldap.c:1217
 # modules/ldap.c:1239
-#: modules/ldap.c:2477
+#: modules/ldap.c:2517
 msgid "LDAP SASL Authorization User"
 msgstr "Usuario de autorización SASL LDAP"
 
@@ -1238,7 +1249,7 @@ msgstr "Error Cyrus SASL al eliminar usuario: %s"
 # apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 # apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
 # apps/lusermod.c:82
-#: modules/sasldb.c:499 modules/sasldb.c:507
+#: modules/sasldb.c:519 modules/sasldb.c:527
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "error al inicializar Cyrus SASL: %s"

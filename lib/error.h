@@ -57,6 +57,9 @@ typedef enum lu_status {
 	lu_error_module_load,
 	lu_error_module_sym,
 	lu_error_module_version,
+
+	/* Since 0.53 */
+	lu_error_unlock_empty,
 } lu_status_t;
 
 typedef struct lu_error {

@@ -46,6 +46,8 @@ typedef char security_context_t; /* "Something" */
 LU_MODULE_INIT(libuser_files_init)
 LU_MODULE_INIT(libuser_shadow_init)
 
+enum lock_op { LO_LOCK, LO_UNLOCK, LO_UNLOCK_NONEMPTY };
+
 /* Guides for parsing and formatting entries in the files we're looking at.
  * For formatting purposes, these are all arranged in order of ascending
  * positions. */
@@ -1474,24 +1476,40 @@ lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
-/* Return the "locked" or "unlocked" version of the cryptedPassword string,
- * depending on whether or not lock is true. */
+/* Return a modified version of the cryptedPassword string, depending on
+   op, or NULL on error. */
 static char *
-lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
+lock_process(char *cryptedPassword, enum lock_op op, struct lu_ent *ent,
+	     struct lu_error **error)
 {
 	char *ret = NULL;
-	if (lock) {
+
+	switch (op) {
+	case LO_LOCK:
 		ret = ent->cache->cache(ent->cache, cryptedPassword);
 		if (ret[0] != '!') {
 			cryptedPassword = g_strconcat("!!", ret, NULL);
 			ret = ent->cache->cache(ent->cache, cryptedPassword);
 			g_free(cryptedPassword);
 		}
-	} else {
-		ret = ent->cache->cache(ent->cache, cryptedPassword);
-		while(ret[0] == '!') {
-			ret = ent->cache->cache(ent->cache, ret + 1);
+		break;
+	case LO_UNLOCK:
+		for (ret = cryptedPassword; ret[0] == '!'; ret++)
+			;
+		ret = ent->cache->cache(ent->cache, ret);
+		break;
+	case LO_UNLOCK_NONEMPTY:
+		for (ret = cryptedPassword; ret[0] == '!'; ret++)
+			;
+		if (*ret == '\0') {
+			lu_error_new(error, lu_error_unlock_empty, NULL);
+			return NULL;
 		}
+		ret = ent->cache->cache(ent->cache, ret);
+		break;
+
+	default:
+		g_assert_not_reached ();
 	}
 	return ret;
 }
@@ -1500,8 +1518,7 @@ lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
  * stored in the given field number. */
 static gboolean
 generic_lock(struct lu_module *module, const char *base_name, int field,
-	     struct lu_ent *ent, gboolean lock_or_not,
-	     struct lu_error **error)
+	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
 	security_context_t prev_context;
 	GValueArray *name = NULL;
@@ -1572,8 +1589,10 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	}
 
 	/* Generate a new value for the file. */
-	new_value = lock_process(value, lock_or_not, ent);
+	new_value = lock_process(value, op, ent, error);
 	g_free(value);
+	if (new_value == NULL)
+		goto err_namestring;
 
 	/* Make the change. */
 	ret = lu_util_field_write(fd, namestring, field, new_value, error);
@@ -1672,7 +1691,7 @@ lu_files_user_lock(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "passwd", 2, ent, TRUE, error);
+	ret = generic_lock(module, "passwd", 2, ent, LO_LOCK, error);
 	return ret;
 }
 
@@ -1681,7 +1700,17 @@ lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "passwd", 2, ent, FALSE, error);
+	ret = generic_lock(module, "passwd", 2, ent, LO_UNLOCK, error);
+	return ret;
+}
+
+static gboolean
+lu_files_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			      struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_lock(module, "passwd", 2, ent, LO_UNLOCK_NONEMPTY,
+			   error);
 	return ret;
 }
 
@@ -1691,7 +1720,7 @@ lu_files_group_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "group", 2, ent, TRUE, error);
+	ret = generic_lock(module, "group", 2, ent, LO_LOCK, error);
 	return ret;
 }
 
@@ -1700,7 +1729,16 @@ lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "group", 2, ent, FALSE, error);
+	ret = generic_lock(module, "group", 2, ent, LO_UNLOCK, error);
+	return ret;
+}
+
+static gboolean
+lu_files_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			       struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_lock(module, "group", 2, ent, LO_UNLOCK_NONEMPTY, error);
 	return ret;
 }
 
@@ -1710,7 +1748,7 @@ lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "shadow", 2, ent, TRUE, error);
+	ret = generic_lock(module, "shadow", 2, ent, LO_LOCK, error);
 	return ret;
 }
 
@@ -1719,7 +1757,17 @@ lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "shadow", 2, ent, FALSE, error);
+	ret = generic_lock(module, "shadow", 2, ent, LO_UNLOCK, error);
+	return ret;
+}
+
+static gboolean
+lu_shadow_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			       struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_lock(module, "shadow", 2, ent, LO_UNLOCK_NONEMPTY,
+			   error);
 	return ret;
 }
 
@@ -1729,7 +1777,7 @@ lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "gshadow", 2, ent, TRUE, error);
+	ret = generic_lock(module, "gshadow", 2, ent, LO_LOCK, error);
 	return ret;
 }
 
@@ -1738,7 +1786,17 @@ lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lock(module, "gshadow", 2, ent, FALSE, error);
+	ret = generic_lock(module, "gshadow", 2, ent, LO_UNLOCK, error);
+	return ret;
+}
+
+static gboolean
+lu_shadow_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+				struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_lock(module, "gshadow", 2, ent, LO_UNLOCK_NONEMPTY,
+			   error);
 	return ret;
 }
 
@@ -2840,6 +2898,7 @@ libuser_files_init(struct lu_context *context,
 	ret->user_del = lu_files_user_del;
 	ret->user_lock = lu_files_user_lock;
 	ret->user_unlock = lu_files_user_unlock;
+	ret->user_unlock_nonempty = lu_files_user_unlock_nonempty;
 	ret->user_is_locked = lu_files_user_is_locked;
 	ret->user_setpass = lu_files_user_setpass;
 	ret->user_removepass = lu_files_user_removepass;
@@ -2858,6 +2917,7 @@ libuser_files_init(struct lu_context *context,
 	ret->group_del = lu_files_group_del;
 	ret->group_lock = lu_files_group_lock;
 	ret->group_unlock = lu_files_group_unlock;
+	ret->group_unlock_nonempty = lu_files_group_unlock_nonempty;
 	ret->group_is_locked = lu_files_group_is_locked;
 	ret->group_setpass = lu_files_group_setpass;
 	ret->group_removepass = lu_files_group_removepass;
@@ -2932,6 +2992,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->user_del = lu_shadow_user_del;
 	ret->user_lock = lu_shadow_user_lock;
 	ret->user_unlock = lu_shadow_user_unlock;
+	ret->user_unlock_nonempty = lu_shadow_user_unlock_nonempty;
 	ret->user_is_locked = lu_shadow_user_is_locked;
 	ret->user_setpass = lu_shadow_user_setpass;
 	ret->user_removepass = lu_shadow_user_removepass;
@@ -2950,6 +3011,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret->group_del = lu_shadow_group_del;
 	ret->group_lock = lu_shadow_group_lock;
 	ret->group_unlock = lu_shadow_group_unlock;
+	ret->group_unlock_nonempty = lu_shadow_group_unlock_nonempty;
 	ret->group_is_locked = lu_shadow_group_is_locked;
 	ret->group_setpass = lu_shadow_group_setpass;
 	ret->group_removepass = lu_shadow_group_removepass;

@@ -223,6 +223,16 @@ lu_sasldb_user_unlock(struct lu_module *module, struct lu_ent *ent,
 }
 
 static gboolean
+lu_sasldb_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+			       struct lu_error **error)
+{
+	(void)module;
+	(void)ent;
+	(void)error;
+	return FALSE;
+}
+
+static gboolean
 lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			struct lu_error **error)
 {
@@ -332,6 +342,16 @@ lu_sasldb_group_lock(struct lu_module *module, struct lu_ent *ent,
 static gboolean
 lu_sasldb_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
+{
+	(void)module;
+	(void)ent;
+	(void)error;
+	return FALSE;
+}
+
+static gboolean
+lu_sasldb_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
+				struct lu_error **error)
 {
 	(void)module;
 	(void)ent;
@@ -529,6 +549,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->user_del = lu_sasldb_user_del;
 	ret->user_lock = lu_sasldb_user_lock;
 	ret->user_unlock = lu_sasldb_user_unlock;
+	ret->user_unlock_nonempty = lu_sasldb_user_unlock_nonempty;
 	ret->user_is_locked = lu_sasldb_user_is_locked;
 	ret->user_setpass = lu_sasldb_user_setpass;
 	ret->user_removepass = lu_sasldb_user_removepass;
@@ -547,6 +568,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->group_del = lu_sasldb_group_del;
 	ret->group_lock = lu_sasldb_group_lock;
 	ret->group_unlock = lu_sasldb_group_unlock;
+	ret->group_unlock_nonempty = lu_sasldb_group_unlock_nonempty;
 	ret->group_is_locked = lu_sasldb_group_is_locked;
 	ret->group_setpass = lu_sasldb_group_setpass;
 	ret->group_removepass = lu_sasldb_group_removepass;

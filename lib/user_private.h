@@ -35,7 +35,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC		0x00000006
-#define LU_MODULE_VERSION	0x000a0000
+#define LU_MODULE_VERSION	0x000b0000
 /* FIXME: should use dgettext */
 #define _(String)		gettext(String)
 #define N_(String)		String
@@ -157,6 +157,9 @@ struct lu_module {
 	gboolean(*user_unlock) (struct lu_module * module,
 				struct lu_ent * ent,
 				struct lu_error ** error);
+	gboolean(*user_unlock_nonempty) (struct lu_module * module,
+					 struct lu_ent * ent,
+					 struct lu_error ** error);
 	gboolean(*user_is_locked) (struct lu_module * module,
 				   struct lu_ent * ent,
 				   struct lu_error ** error);
@@ -225,6 +228,9 @@ struct lu_module {
 	gboolean(*group_unlock) (struct lu_module * module,
 				 struct lu_ent * ent,
 				 struct lu_error ** error);
+	gboolean(*group_unlock_nonempty) (struct lu_module * module,
+					  struct lu_ent * ent,
+					  struct lu_error ** error);
 	gboolean(*group_is_locked) (struct lu_module * module,
 				    struct lu_ent * ent,
 				    struct lu_error ** error);

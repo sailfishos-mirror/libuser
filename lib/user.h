@@ -98,6 +98,10 @@ gboolean lu_user_unlock(lu_context_t *context,
 			struct lu_ent *ent, lu_error_t **error);
 gboolean lu_group_unlock(lu_context_t *context,
 			 struct lu_ent *ent, lu_error_t **error);
+gboolean lu_user_unlock_nonempty(lu_context_t *context, struct lu_ent *ent,
+				 lu_error_t **error);
+gboolean lu_group_unlock_nonempty(lu_context_t *context, struct lu_ent *ent,
+				  lu_error_t **error);
 
 gboolean lu_user_islocked(lu_context_t *context,
 			  struct lu_ent *ent, lu_error_t **error);

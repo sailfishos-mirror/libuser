@@ -78,6 +78,9 @@ lu_strerror(struct lu_error *error)
 				return _("error resolving symbol in module");
 			case lu_error_module_version:
 				return _("library/module version mismatch");
+			case lu_error_unlock_empty:
+				return _("unlocking would make the password "
+					 "field empty");
 			default:
 				break;
 		}
@@ -131,6 +134,7 @@ lu_error_is_error(enum lu_status code)
 		case lu_error_module_load:
 		case lu_error_module_sym:
 		case lu_error_module_version:
+		case lu_error_unlock_empty:
 			return TRUE;
 		default:
 			return FALSE;

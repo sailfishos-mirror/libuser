@@ -47,6 +47,7 @@ enum lu_dispatch_id {
 	user_del,
 	user_lock,
 	user_unlock,
+	user_unlock_nonempty,
 	user_is_locked,
 	user_setpass,
 	user_removepass,
@@ -63,6 +64,7 @@ enum lu_dispatch_id {
 	group_del,
 	group_lock,
 	group_unlock,
+	group_unlock_nonempty,
 	group_is_locked,
 	group_setpass,
 	group_removepass,
@@ -378,6 +380,9 @@ run_single(struct lu_context *context,
 	case user_unlock:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->user_unlock(module, entity, error);
+	case user_unlock_nonempty:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		return module->user_unlock_nonempty(module, entity, error);
 	case user_is_locked:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->user_is_locked(module, entity, error);
@@ -479,6 +484,9 @@ run_single(struct lu_context *context,
 	case group_unlock:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->group_unlock(module, entity, error);
+	case group_unlock_nonempty:
+		g_return_val_if_fail(entity != NULL, FALSE);
+		return module->group_unlock_nonempty(module, entity, error);
 	case group_is_locked:
 		g_return_val_if_fail(entity != NULL, FALSE);
 		return module->group_is_locked(module, entity, error);
@@ -705,6 +713,7 @@ run_list(struct lu_context *context,
 		 (id == user_del) ||
 		 (id == user_lock) ||
 		 (id == user_unlock) ||
+		 (id == user_unlock_nonempty) ||
 		 (id == user_is_locked) ||
 		 (id == user_setpass) ||
 		 (id == user_removepass) ||
@@ -721,6 +730,7 @@ run_list(struct lu_context *context,
 		 (id == group_del) ||
 		 (id == group_lock) ||
 		 (id == group_unlock) ||
+		 (id == group_unlock_nonempty) ||
 		 (id == group_is_locked) ||
 		 (id == group_setpass) ||
 		 (id == group_removepass) ||
@@ -1011,9 +1021,11 @@ lu_dispatch(struct lu_context *context,
 	case user_del:
 	case user_lock:
 	case user_unlock:
+	case user_unlock_nonempty:
 	case group_del:
 	case group_lock:
 	case group_unlock:
+	case group_unlock_nonempty:
 		/* Make sure we have both name and ID here. */
 		sdata = sdata ?: extract_name(tmp);
 		if (ldata == LU_VALUE_INVALID_ID)
@@ -1320,6 +1332,18 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 }
 
 gboolean
+lu_user_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
+			struct lu_error ** error)
+{
+	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+	return lu_dispatch(context, user_unlock_nonempty, NULL,
+			   LU_VALUE_INVALID_ID, ent, NULL, error) &&
+	       lu_refresh_user(context, ent, error);
+}
+
+gboolean
 lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 		 struct lu_error ** error)
 {
@@ -1421,6 +1445,20 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 
 	return lu_dispatch(context, group_unlock, NULL, LU_VALUE_INVALID_ID,
 			   ent, NULL, error) &&
+	       lu_refresh_group(context, ent, error);
+}
+
+gboolean
+lu_group_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
+			 struct lu_error ** error)
+{
+	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
+	return lu_dispatch(context, group_unlock_nonempty, NULL,
+			   LU_VALUE_INVALID_ID, ent, NULL, error) &&
 	       lu_refresh_group(context, ent, error);
 }
 

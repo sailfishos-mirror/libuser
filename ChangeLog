@@ -1,5 +1,44 @@
 2004-11-14  Miloslav Trmac  <mitr@redhat.com>
 
+	* tests/files_test.py (Tests.testUserUnlock3) 
+	(Tests.testGroupUnlock3)
+	* tests/ldap_test.py (Tests.testUserUnlock3) 
+	(Tests.testGroupUnlock2): Test that empty password fields can be
+	unlocked.
+
+	* modules/ldap.c (enum lock_op): New definition.
+	(lu_ldap_handle_lock): Use enum lock_op.  All callers changed.
+	(lu_ldap_user_unlock_nonempty, lu_ldap_group_unlock_nonempty) 
+	(libuser_ldap_init): Handle user_unlock_nonempty and
+	group_unlock_nonempty.
+
+	* modules/files.c (enum lock_op): New definition.
+	(lock_process): Use enum lock_op, return error status.
+	(generic_lock): Use enum lock_op.  All callers changed.
+	(lu_files_user_unlock_nonempty, lu_files_group_unlock_nonempty) 
+	(lu_shadow_user_unlock_nonempty, lu_shadow_group_unlock_nonempty) 
+	(libuser_files_init, libuser_shadow_init): Handle user_unlock_nonempty
+	and group_unlock_nonempty.
+
+	* modules/sasldb.c (lu_sasldb_user_unlock_nonempty) 
+	(lu_sasldb_group_unlock_nonempty, libuser_sasldb_init): Define
+	user_unlock_nonempty and group_unlock_nonempty stubs.
+
+	* lib/error.h (lu_error_unlock_empty): New definition.
+	* lib/error.c (lu_strerror, lu_error_is_error): Handle 
+	lu_error_unlock_empty.
+
+	* lib/user_private.h (LU_MODULE_VERSION): Bump.
+	(struct lu_module): New members user_unlock_nonempty,
+	group_unlock_nonempty.
+	* lib/modules.c (lu_modules_load): Handle new struct lu_module members.
+	* lib/user.c (lu_user_unlock_nonempty, lu_group_unlock_nonempty): New
+	functions.
+	(lu_dispatch_id): New values user_unlock_nonempty,
+	group_unlock_nonempty.
+	(run_single, run_list, lu_dispatch): Handle new lu_dispatch_id values.
+	* lib/user.h: Add declarations.
+
 	* NEWS: Update.
 
 	* tests/files_test.py (Tests.testUserLock1, Tests.testUserLock2) 
