@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
-"POT-Creation-Date: 2002-02-20 18:17-0500\n"
+"POT-Creation-Date: 2002-02-20 18:22-0500\n"
 "PO-Revision-Date: 2001-08-16 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@hp.is>\n"
 "Language-Team: is <kde-isl@mmedia.is>\n"

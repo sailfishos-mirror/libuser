@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-02-20 18:17-0500\n"
+"POT-Creation-Date: 2002-02-20 18:22-0500\n"
 "PO-Revision-Date: 2002-02-13 08:59+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"

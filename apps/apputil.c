@@ -516,8 +516,6 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	char buf[LINE_MAX * 4];
 	int fd;
 
-	lu_ent_dump(ent, stdout);
-
 	/* Find the GID of the owner of the file. */
 	gid = INVALID;
 	groupEnt = lu_ent_new();

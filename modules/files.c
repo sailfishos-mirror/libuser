@@ -1131,7 +1131,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
 		j = 0;
-		do {
+		if (values != NULL) do {
 			p = NULL;
 			/* Convert a single value to a string. */
 			value = g_value_array_get_nth(values, j);
@@ -1156,7 +1156,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 			new_value = q;
 			g_free(p);
 			j++;
-		} while (formats[i].multiple);
+		} while (formats[i].multiple && (j < values->n_values));
 
 		/* Get the current name for this entity. */
 		value = g_value_array_get_nth(names, 0);
