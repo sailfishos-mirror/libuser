@@ -9,7 +9,7 @@ EXTRA_PROGRAMS = libuserquotamodule.so
 noinst_SCRIPTS = $(srcdir)/test-script $(srcdir)/quota-script
 
 libusermodule_so_SOURCES = libusermodule.c common.h debug.h
-libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_LIBS@ @CRYPT_LIBS@
+libusermodule_so_LDFLAGS = -module -shared @GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
 libusermodule_so_LDADD = ../apps/apputil.o ../lib/libuser.la
 
 libuserquotamodule_so_SOURCES = quotamodule.c debug.h

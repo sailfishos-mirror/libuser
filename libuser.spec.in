@@ -35,7 +35,8 @@ files useful for developing applications with libuser.
 %configure \
 	--with-ldap \
 	--with-python-version=%{python} \
-	--with-python-path=%{_includedir}/python%{python}
+	--with-python-path=%{_includedir}/python%{python} \
+	--with-html-dir=%{_defaultdocdir}/gtk-doc/html
 make
 
 %clean
@@ -82,9 +83,12 @@ popd
 
 %attr(0644,root,root) %{_libdir}/pkgconfig/*
 
+%{_datadir}/gtk-doc/html/*
+
 %changelog
 * Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.92-1
 - lchfn,lchsh,lpasswd - reorder PAM authentication calls
+- include API docs in the package
 
 * Thu Jan 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.91-1
 - ldap: finish port to new API
