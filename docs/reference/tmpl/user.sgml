@@ -169,6 +169,7 @@ modifications of the system information store.
 @context: 
 @ent: 
 @newpass: 
+@crypted: 
 @error: 
 @Returns: 
 
@@ -327,6 +328,7 @@ modifications of the system information store.
 @context: 
 @ent: 
 @newpass: 
+@crypted: 
 @error: 
 @Returns: 
 

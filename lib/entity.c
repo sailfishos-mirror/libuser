@@ -176,6 +176,8 @@ lu_ent_add_module(struct lu_ent *ent, const char *source)
 	g_value_unset(&value);
 }
 
+/* Clear the list of modules which affect this module, by freeing the array
+ * we use to keep track of them and allocating a new one. */
 void
 lu_ent_clear_modules(struct lu_ent *ent)
 {
@@ -185,6 +187,8 @@ lu_ent_clear_modules(struct lu_ent *ent)
 	ent->modules = g_value_array_new(1);
 }
 
+/* Remove all attributes from an object.  This function takes the address
+ * of whichever list we want cleared. */
 static void
 clear_attribute_list(GArray *dest)
 {
@@ -198,12 +202,14 @@ clear_attribute_list(GArray *dest)
 	}
 }
 
+/* Copy all attributes from source to dest, wiping out whatever was already
+ * in the destination array. */
 static void
 copy_attributes(GArray *source, GArray *dest)
 {
 	int i;
 	struct lu_attribute *attr, newattr;
-	/* First, clear the list of attributes. */
+	/* First, clear the destination list of all attributes. */
 	clear_attribute_list(dest);
 	/* Now copy all of the attributes and their values. */
 	for (i = 0; i < source->len; i++) {

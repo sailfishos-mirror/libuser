@@ -285,7 +285,7 @@ main(int argc, const char **argv)
 		/* Now try to add the user's account. */
 		if (lu_user_add(ctx, ent, &error)) {
 			lu_hup_nscd();
-			if (!lu_user_setpass(ctx, ent, fields[1], &error)) {
+			if (!lu_user_setpass(ctx, ent, fields[1], FALSE, &error)) {
 				g_print(_("Error setting initial password for "
 					"%s: %s\n"),
 					fields[0],

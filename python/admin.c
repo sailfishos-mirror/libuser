@@ -387,23 +387,28 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 static PyObject *
 libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 		      gboolean(*fn) (struct lu_context *, struct lu_ent *,
-				     const char *, struct lu_error **))
+				     const char *, gboolean,
+				     struct lu_error **))
 {
 	struct libuser_entity *ent;
 	struct lu_error *error = NULL;
-	const char *password;
-	char *keywords[] = { "entity", "password", NULL };
+	PyObject *is_crypted = NULL;
+	const char *password = NULL;
+	char *keywords[] = { "entity", "password", "is_crypted", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	DEBUG_ENTRY;
 	/* We expect an entity object and a string. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!s", keywords,
-					 &EntityType, &ent, &password)) {
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!sO", keywords,
+					 &EntityType, &ent, &password,
+					 &is_crypted)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
 	/* Call the appropriate setpass function for this entity. */
-	if (fn(me->ctx, ent->ent, password, &error)) {
+	if (fn(me->ctx, ent->ent, password,
+	       ((is_crypted != NULL) && (PyObject_IsTrue(is_crypted))),
+	       &error)) {
 		/* The change succeeded.  Return a truth. */
 		DEBUG_EXIT;
 		return Py_BuildValue("i", 1);

@@ -34,6 +34,7 @@ main(int argc, char **argv)
 {
 	int fd;
 	struct lu_error *error = NULL;
+	gpointer lock;
 
 	if (argc < 4) {
 		printf("usage: %s <file> <initial> <field> [value]\n",
@@ -41,40 +42,37 @@ main(int argc, char **argv)
 		       strrchr(argv[0], '/') + 1 : argv[0]);
 		exit(1);
 	}
-	fd = open(argv[1], O_RDWR);
+	fd = open(argv[1], (argc > 4) ? O_RDWR : O_RDONLY);
 	if (fd == -1) {
 		fprintf(stderr, "error opening `%s': %s\n", argv[1],
 			strerror(errno));
 		exit(2);
 	}
 
-	if (lu_util_lock_obtain(fd, &error) != TRUE) {
+	if ((lock = lu_util_lock_obtain(fd, &error)) == NULL) {
 		fprintf(stderr, "failed to lock `%s': %s\n", argv[1],
-			error ? error->string : strerror(errno));
+			lu_strerror(error));
 		close(fd);
 		exit(3);
 	}
 
 	if (argc > 4) {
-		if (!lu_util_field_write
-		    (fd, argv[2], atoi(argv[3]), argv[4], &error)) {
+		if (!lu_util_field_write(fd, argv[2], atoi(argv[3]),
+					 argv[4], &error)) {
 			fprintf(stderr, "failed to modify `%s': %s\n",
-				argv[1],
-				error ? error->string : strerror(errno));
+				argv[1], lu_strerror(error));
 		}
 	} else {
 		char *ret;
-		ret =
-		    lu_util_field_read(fd, argv[2], atoi(argv[3]), &error);
+		ret = lu_util_field_read(fd, argv[2], atoi(argv[3]), &error);
 		if (ret == NULL) {
 			fprintf(stderr, "failed to read `%s': %s\n",
-				argv[1],
-				error ? error->string : strerror(errno));
+				argv[1], lu_strerror(error));
 		}
 		printf("`%s'\n", ret);
 		g_free(ret);
 	}
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	close(fd);
 	return 0;
 }

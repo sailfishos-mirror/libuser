@@ -151,10 +151,19 @@ libuser:
 						(required).
 						A string containing the new
 						password (required).  This is
-						preferably in plaintext, but
-						can be crypted and prefixed
-						with "{crypt}", though some
-						modules will reject this.
+						preferably in plaintext.
+						An object indicating whether
+						or not the string is a value
+						returned by crypt.crypt():
+						a false value indicates that
+						the string is plaintext.
+
+				- removepassUser:
+				- removepassGroup:
+					Arguments:
+						A libuser.Entity object with the
+						user or group's information
+						(required).
 
 				- enumerateUsers:
 				- enumerateGroups: Get a list of users or groups

@@ -193,7 +193,7 @@ main(int argc, const char **argv)
 
 	/* If the user's password needs to be changed, try to change it. */
 	if (userPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, userPassword, &error) == FALSE) {
+		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error) == FALSE) {
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
 				user, error->string);
@@ -205,14 +205,12 @@ main(int argc, const char **argv)
 	 * though it might fail if an underlying mechanism doesn't support
 	 * using them. */
 	if (cryptedUserPassword != NULL) {
-		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		if (lu_user_setpass(ctx, ent, tmp, &error) == FALSE) {
+		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE, &error) == FALSE) {
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
 				user, error->string);
 			return 6;
 		}
-		g_free(tmp);
 	}
 
 	/* If we need to lock/unlock the user's account, do that. */

@@ -325,7 +325,7 @@ struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **err
 </FUNCTION>
 <ENUM>
 <NAME>lu_entity_type_t</NAME>
-typedef enum lu_entity_type { lu_user, lu_group } lu_entity_type_t;
+typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
 </ENUM>
 <FUNCTION>
 <NAME>lu_start</NAME>
@@ -455,12 +455,12 @@ lu_context_t *context,struct lu_ent *ent, lu_error_t **error
 <FUNCTION>
 <NAME>lu_user_setpass</NAME>
 <RETURNS>gboolean  </RETURNS>
-lu_context_t *context,struct lu_ent *ent, const char *newpass,lu_error_t **error
+lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_group_setpass</NAME>
 <RETURNS>gboolean  </RETURNS>
-lu_context_t *context,struct lu_ent *ent, const char *newpass,lu_error_t **error
+lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_user_removepass</NAME>

@@ -21,11 +21,14 @@
 
 #ident "$Id$"
 
+#include <sys/param.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <string.h>
+
+/* Define _LIBUSER_MODULE if your module is being built alongside libuser. */
 #ifdef _LIBUSER_MODULE
 #include "../lib/user_private.h"
 #else

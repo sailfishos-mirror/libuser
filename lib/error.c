@@ -33,6 +33,9 @@ const char *
 lu_strerror(struct lu_error *error)
 {
 	if (error != NULL) {
+		if (error->string != NULL) {
+			return error->string;
+		}
 		switch (error->code) {
 			case lu_success:
 				return N_("success");

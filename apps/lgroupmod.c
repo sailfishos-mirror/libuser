@@ -226,7 +226,7 @@ main(int argc, const char **argv)
 	}
 
 	if (userPassword) {
-		if (lu_group_setpass(ctx, ent, userPassword, &error) == FALSE) {
+		if (lu_group_setpass(ctx, ent, userPassword, FALSE, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s.\n"), group);
 			return 4;
@@ -234,14 +234,11 @@ main(int argc, const char **argv)
 	}
 
 	if (cryptedUserPassword) {
-		char *tmp = NULL;
-		tmp = g_strconcat("{crypt}", cryptedUserPassword, NULL);
-		if (lu_group_setpass(ctx, ent, tmp, &error) == FALSE) {
+		if (lu_group_setpass(ctx, ent, cryptedUserPassword, TRUE, &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s.\n"), group);
 			return 5;
 		}
-		g_free(tmp);
 	}
 
 	if (lock) {

@@ -97,9 +97,11 @@ gboolean lu_group_islocked(lu_context_t *context,
 
 gboolean lu_user_setpass(lu_context_t *context,
 			 struct lu_ent *ent, const char *newpass,
+			 gboolean crypted,
 			 lu_error_t **error);
 gboolean lu_group_setpass(lu_context_t *context,
 			  struct lu_ent *ent, const char *newpass,
+			  gboolean crypted,
 			  lu_error_t **error);
 gboolean lu_user_removepass(lu_context_t *context,
 			    struct lu_ent *ent,

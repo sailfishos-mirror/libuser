@@ -36,9 +36,15 @@
 #include <unistd.h>
 #define LU_DEFAULT_SALT_TYPE "$1$"
 #define LU_DEFAULT_SALT_LEN  8
-#define LU_MAX_LOCK_ATTEMPTS 30
+#define LU_MAX_LOCK_ATTEMPTS 6
+#define LU_LOCK_TIMEOUT      2
 #include "user_private.h"
 #include "util.h"
+
+struct lu_lock {
+	int fd;
+	struct flock lock;
+};
 
 /* A function which returns non-zero if the strings are equal, and
  * zero if they are unequal.  Case-insensitive version. */
@@ -158,24 +164,33 @@ lu_make_crypted(const char *plain, const char *previous)
 	return crypt(plain, salt);
 }
 
-gboolean
+gpointer
 lu_util_lock_obtain(int fd, struct lu_error ** error)
 {
 	int i;
 	int maxtries = LU_MAX_LOCK_ATTEMPTS;
+	int delay = LU_LOCK_TIMEOUT;
 	struct timeval tv;
+	struct lu_lock *ret;
 
 	LU_ERROR_CHECK(error);
 
 	g_assert(fd != -1);
+	ret = g_malloc0(sizeof(*ret));
 
 	do {
-		i = lockf(fd, F_LOCK, 0);
+		ret->fd = fd;
+		ret->lock.l_type = F_RDLCK;
+		if (write(ret->fd, NULL, 0) == 0) {
+			ret->lock.l_type |= F_WRLCK;
+		}
+		i = fcntl(ret->fd, F_SETLK, &ret->lock);
 		if ((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
 			if (maxtries-- <= 0) {
 				break;
 			}
 			memset(&tv, 0, sizeof(tv));
+			tv.tv_usec = (delay *= 2);
 			select(0, NULL, NULL, NULL, &tv);
 		}
 	} while ((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
@@ -183,16 +198,25 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 	if (i == -1) {
 		lu_error_new(error, lu_error_lock,
 			     _("error locking file: %s"), strerror(errno));
-		return FALSE;
+		g_free(ret);
+		return NULL;
 	}
 
-	return TRUE;
+	return ret;
 }
 
 void
-lu_util_lock_free(int fd)
+lu_util_lock_free(gpointer lock)
 {
-	lockf(fd, F_ULOCK, 0);
+	struct lu_lock *ret;
+	int i;
+	g_return_if_fail(lock != NULL);
+	ret = (struct lu_lock*) lock;
+	do {
+		ret->lock.l_type = F_UNLCK;
+		i = fcntl(ret->fd, F_SETLK, ret->lock);
+	} while ((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
+	g_free(ret);
 }
 
 char *

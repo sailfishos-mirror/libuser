@@ -39,7 +39,6 @@
 #include "default.-c"
 
 #undef  DEBUG
-#define SCHEME "{crypt}"
 #define LOCKCHAR '!'
 #define LOCKSTRING "!"
 #define USERBRANCH "ou=People"
@@ -1318,7 +1317,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	char *name_string, *oldpassword, *values[2][2];
 	const char *result, *tmp;
 	struct lu_ldap_context *ctx = module->module_context;
-	size_t scheme_len = strlen(SCHEME);
+	size_t scheme_len = strlen(LU_CRYPTED);
 	int err;
 
 	g_assert(module != NULL);
@@ -1362,7 +1361,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
-	if (strncmp(oldpassword, SCHEME, scheme_len) != 0) {
+	if (strncmp(oldpassword, LU_CRYPTED, scheme_len) != 0) {
 		tmp = lu_make_crypted(oldpassword, "");
 	} else {
 		tmp = ent->cache->cache(ent->cache, oldpassword + scheme_len);
@@ -1371,11 +1370,11 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	/* Generate a new string with the modification applied. */
 	if (sense) {
-		result = g_strdup_printf("%s%c%s", SCHEME, LOCKCHAR,
+		result = g_strdup_printf("%s%c%s", LU_CRYPTED, LOCKCHAR,
 					 result + scheme_len);
 	} else {
 		if (result[0] == LOCKCHAR) {
-			result = g_strdup_printf("%s%s", SCHEME, result + 1);
+			result = g_strdup_printf("%s%s", LU_CRYPTED, result + 1);
 		} else {
 			result = g_strdup(result);
 		}
@@ -1495,8 +1494,8 @@ lu_ldap_is_locked(struct lu_module *module, enum lu_entity_type type,
 #ifdef DEBUG
 		g_print("Got `%s' = `%s'.\n", LU_USERPASSWORD, values[i]);
 #endif
-		if (strncmp(values[i], SCHEME, strlen(SCHEME)) == 0) {
-			locked = (values[i][strlen(SCHEME)] == LOCKCHAR);
+		if (strncmp(values[i], LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
+			locked = (values[i][strlen(LU_CRYPTED)] == LOCKCHAR);
 			break;
 		}
 	}
@@ -1575,8 +1574,8 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 						values[i]);
 #endif
 					if (strncmp
-					    (values[i], SCHEME,
-					     strlen(SCHEME)) == 0) {
+					    (values[i], LU_CRYPTED,
+					     strlen(LU_CRYPTED)) == 0) {
 #ifdef DEBUG
 						g_print
 						    ("Previous entry was `%s'.\n",
@@ -1599,14 +1598,14 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		ldap_msgfree(messages);
 	}
 
-	if (strncmp(password, SCHEME, strlen(SCHEME)) == 0) {
+	if (strncmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
 		crypted = password;
 	} else {
 		crypted =
 		    lu_make_crypted(password,
 				    previous ? (previous +
-						strlen(SCHEME)) : "$1$");
-		tmp = g_strconcat(SCHEME, crypted, NULL);
+						strlen(LU_CRYPTED)) : "$1$");
+		tmp = g_strconcat(LU_CRYPTED, crypted, NULL);
 		addvalues[0] = module->scache->cache(module->scache, tmp);
 		g_free(tmp);
 		if (previous) {

@@ -164,6 +164,7 @@ extract_name(struct lu_ent *ent)
 	GValueArray *array;
 	GValue *value;
 	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), NULL);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
 	g_return_val_if_fail(array != NULL, NULL);
@@ -181,6 +182,7 @@ extract_id(struct lu_ent *ent)
 	char *p;
 	long ret;
 	g_return_val_if_fail(ent != NULL, INVALID);
+	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), INVALID);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
 	g_return_val_if_fail(array != NULL, INVALID);
@@ -1103,7 +1105,10 @@ lu_user_add(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
-	
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	if (lu_dispatch(context, user_add_prep, NULL, INVALID,
 			ent, NULL, error)) {
 		ret = lu_dispatch(context, user_add, NULL, INVALID,
@@ -1118,6 +1123,10 @@ lu_group_add(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	if (lu_dispatch(context, group_add_prep, NULL, INVALID,
 			ent, NULL, error)) {
 		ret = lu_dispatch(context, group_add, NULL, INVALID,
@@ -1131,6 +1140,10 @@ lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	return lu_dispatch(context, user_mod, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1139,6 +1152,10 @@ lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	return lu_dispatch(context, group_mod, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1147,6 +1164,10 @@ lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	return lu_dispatch(context, user_del, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1155,6 +1176,10 @@ lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	return lu_dispatch(context, group_del, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1163,6 +1188,10 @@ lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	     struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	return lu_dispatch(context, user_lock, NULL, INVALID, ent, NULL, error);
 }
 
@@ -1171,6 +1200,10 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	return lu_dispatch(context, user_unlock, NULL, INVALID,
 			   ent, NULL, error);
 }
@@ -1180,18 +1213,34 @@ lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 		 struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	return lu_dispatch(context, user_is_locked, NULL, INVALID,
 			   ent, NULL, error);
 }
 
 gboolean
 lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
-		const char *password, struct lu_error ** error)
+		const char *password, gboolean is_crypted,
+		struct lu_error ** error)
 {
 	gboolean ret;
+	char *tmp;
 	LU_ERROR_CHECK(error);
-	ret = lu_dispatch(context, user_setpass, password, INVALID,
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
+	if (is_crypted) {
+		tmp = g_strconcat(LU_CRYPTED, password, NULL);
+	} else {
+		tmp = g_strdup(password);
+	}
+	ret = lu_dispatch(context, user_setpass, tmp, INVALID,
 			  ent, NULL, error);
+	g_free(tmp);
 	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
@@ -1211,6 +1260,10 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret;
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	ret = lu_dispatch(context, user_removepass, NULL, INVALID,
 			  ent, NULL, error);
 	if (ret) {
@@ -1231,6 +1284,10 @@ lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	      struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	return lu_dispatch(context, group_lock, NULL, INVALID,
 			   ent, NULL, error);
 }
@@ -1240,6 +1297,10 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	return lu_dispatch(context, group_unlock, NULL, INVALID,
 			   ent, NULL, error);
 }
@@ -1249,18 +1310,34 @@ lu_group_islocked(struct lu_context * context, struct lu_ent * ent,
 		  struct lu_error ** error)
 {
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	return lu_dispatch(context, group_is_locked, NULL, INVALID,
 			   ent, NULL, error);
 }
 
 gboolean
 lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
-		 const char *password, struct lu_error ** error)
+		 const char *password, gboolean is_crypted,
+		 struct lu_error ** error)
 {
 	gboolean ret;
+	char *tmp;
 	LU_ERROR_CHECK(error);
-	ret = lu_dispatch(context, group_setpass, password, INVALID,
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
+	if (is_crypted) {
+		tmp = g_strconcat(LU_CRYPTED, password, NULL);
+	} else {
+		tmp = g_strdup(password);
+	}
+	ret = lu_dispatch(context, group_setpass, tmp, INVALID,
 			  ent, NULL, error);
+	g_free(tmp);
 	if (ret) {
 		GValue value;
 		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
@@ -1280,6 +1357,10 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 {
 	gboolean ret;
 	LU_ERROR_CHECK(error);
+
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_group, FALSE);
+
 	ret = lu_dispatch(context, group_removepass, NULL, INVALID,
 			  ent, NULL, error);
 	if (ret) {

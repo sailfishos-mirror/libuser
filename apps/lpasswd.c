@@ -45,6 +45,7 @@ main(int argc, const char **argv)
 	int plain_fd = -1, crypted_fd = -1;
 	int interactive = 0, groupflag = 0;
 	poptContext popt;
+	gboolean is_crypted = FALSE;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
@@ -167,7 +168,8 @@ main(int argc, const char **argv)
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
 			buf[--i] = '\0';
 		}
-		password = buf;
+		password = g_strdup(buf);
+		is_crypted = FALSE;
 	} else if (crypted_fd != -1) {
 		char buf[LINE_MAX];
 		int i;
@@ -177,21 +179,24 @@ main(int argc, const char **argv)
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n'))) {
 			buf[--i] = '\0';
 		}
-		password = g_strconcat("{crypt}", buf, NULL);
+		password = g_strdup(buf);
+		is_crypted = TRUE;
 	} else if (cryptedPassword != NULL) {
-		password = g_strconcat("{crypt}", cryptedPassword, NULL);
+		password = g_strdup(cryptedPassword);
+		is_crypted = TRUE;
 	} else {
+		is_crypted = FALSE;
 		/* the password variable is already set */
 	}
 
 	if (!groupflag) {
-		if (lu_user_setpass(ctx, ent, password, &error) == FALSE) {
+		if (lu_user_setpass(ctx, ent, password, is_crypted, &error) == FALSE) {
 			fprintf(stderr, _("Error setting password for user "
 				"%s: %s.\n"), user, error->string);
 			return 3;
 		}
 	} else {
-		if (lu_group_setpass(ctx, ent, password, &error) == FALSE) {
+		if (lu_group_setpass(ctx, ent, password, is_crypted, &error) == FALSE) {
 			fprintf(stderr, _("Error setting password for group "
 				"%s: %s.\n"), user, error->string);
 			return 3;

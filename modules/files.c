@@ -21,6 +21,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+#include <sys/param.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -35,7 +36,6 @@
 #include "default.-c"
 
 #define CHUNK_SIZE	(LINE_MAX * 4)
-#define SCHEME		"{crypt}"
 
 LU_MODULE_INIT(libuser_files_init)
 LU_MODULE_INIT(libuser_shadow_init)
@@ -93,6 +93,7 @@ lu_files_create_backup(const char *filename,
 		       struct lu_error **error)
 {
 	int ifd, ofd;
+	gpointer ilock, olock;
 	char *backupname;
 	struct stat ist, ost;
 	char buf[CHUNK_SIZE];
@@ -101,7 +102,8 @@ lu_files_create_backup(const char *filename,
 	g_assert(filename != NULL);
 	g_assert(strlen(filename) > 0);
 
-	ifd = open(filename, O_RDWR);
+	/* Open the original file. */
+	ifd = open(filename, O_RDONLY);
 	if (ifd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
@@ -109,14 +111,16 @@ lu_files_create_backup(const char *filename,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(ifd, error) != TRUE) {
+	/* Lock the input file. */
+	if ((ilock = lu_util_lock_obtain(ifd, error)) == NULL) {
 		close(ifd);
 		return FALSE;
 	}
 
+	/* Read the input file's size. */
 	if (fstat(ifd, &ist) == -1) {
 		close(ifd);
-		lu_util_lock_free(ifd);
+		lu_util_lock_free(ilock);
 		close(ifd);
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
@@ -124,6 +128,8 @@ lu_files_create_backup(const char *filename,
 		return FALSE;
 	}
 
+	/* Generate the backup file's name and open it, creating it if it
+	 * doesn't already exist. */
 	backupname = g_strconcat(filename, "-", NULL);
 	ofd = open(backupname, O_WRONLY | O_CREAT, ist.st_mode);
 	if (ofd == -1) {
@@ -131,21 +137,23 @@ lu_files_create_backup(const char *filename,
 			     _("error creating `%s': %s"), backupname,
 			     strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd);
+		lu_util_lock_free(ilock);
 		close(ifd);
 		return FALSE;
 	}
 
+	/* If we can't read its size, or it's not a normal file, bail. */
 	if ((fstat(ofd, &ost) == -1) || !S_ISREG(ost.st_mode)) {
 		struct stat st;
-		if ((stat(backupname, &st) == -1) || !S_ISREG(st.st_mode)
-		    || (st.st_dev != ost.st_dev)
-		    || (st.st_ino != ost.st_ino)) {
+		if ((stat(backupname, &st) == -1) ||
+		    !S_ISREG(st.st_mode) ||
+		    (st.st_dev != ost.st_dev) ||
+		    (st.st_ino != ost.st_ino)) {
 			lu_error_new(error, lu_error_open,
-				     _("backup file `%s' was a symlink"),
+				     _("backup file `%s' exists and is not a regular file"),
 				     backupname);
 			g_free(backupname);
-			lu_util_lock_free(ifd);
+			lu_util_lock_free(ilock);
 			close(ifd);
 			close(ofd);
 			return FALSE;
@@ -154,57 +162,67 @@ lu_files_create_backup(const char *filename,
 			     _("couldn't stat `%s': %s"), backupname,
 			     strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd);
+		lu_util_lock_free(ilock);
 		close(ifd);
 		close(ofd);
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(ofd, error) != TRUE) {
+	/* Now lock the output file. */
+	if ((olock = lu_util_lock_obtain(ofd, error)) == NULL) {
 		g_free(backupname);
-		lu_util_lock_free(ifd);
+		lu_util_lock_free(ilock);
 		close(ifd);
-		lu_util_lock_free(ofd);
 		close(ofd);
 		return FALSE;
 	}
 
+	/* Set the permissions on the new file to match the old one. */
 	fchown(ofd, ist.st_uid, ist.st_gid);
 	fchmod(ofd, ist.st_mode);
 
+	/* Copy the data, block by block. */
 	do {
 		len = read(ifd, buf, sizeof(buf));
 		if (len >= 0) {
 			write(ofd, buf, len);
 		}
 	} while (len == sizeof(buf));
+
+	/* Flush data to disk, and truncate at the current offset.  This is
+	 * necessary if the file existed before we opened it. */
 	fsync(ofd);
 	ftruncate(ofd, lseek(ofd, 0, SEEK_CUR));
 
+	/* Re-read data about the output file. */
 	if (fstat(ofd, &ost) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), backupname,
 			     strerror(errno));
 		g_free(backupname);
-		lu_util_lock_free(ifd);
+		lu_util_lock_free(ilock);
 		close(ifd);
-		lu_util_lock_free(ofd);
+		lu_util_lock_free(olock);
 		close(ofd);
 		return FALSE;
 	}
 
-	lu_util_lock_free(ifd);
+	/* We can close the files now. */
+	lu_util_lock_free(ilock);
 	close(ifd);
-	lu_util_lock_free(ofd);
+	lu_util_lock_free(olock);
 	close(ofd);
 
-	g_assert(ist.st_size == ost.st_size);
+	/* Complain if the files are somehow not the same. */
+	g_return_val_if_fail(ist.st_size == ost.st_size, FALSE);
 
 	g_free(backupname);
 
 	return TRUE;
 }
 
+/* Read a line from the file, no matter how long it is, and return it as a
+ * newly-allocated string, with the terminator intact. */
 static char *
 line_read(FILE * fp)
 {
@@ -238,16 +256,17 @@ line_read(FILE * fp)
 /* Parse a string into an ent structure using the elements in the format
  * specifier array. */
 static gboolean
-parse_generic(const gchar * line, const struct format_specifier *formats,
+parse_generic(const gchar *line, const struct format_specifier *formats,
 	      size_t format_count, struct lu_ent *ent)
 {
-	int i;
+	int i, field;
 	int minimum = 1;
 	gchar **v = NULL;
 	GValue value;
 
 	/* Make sure the line is properly formatted, meaning that it has enough
-	 * fields in it for us to parse. */
+	 * fields in it for us to parse out all the fields we want, allowing for
+	 * the last one to be empty. */
 	for (i = 0; i < format_count; i++) {
 		minimum = MAX(minimum, formats[i].position);
 	}
@@ -260,17 +279,21 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 	/* Now parse out the fields. */
 	memset(&value, 0, sizeof(value));
 	for (i = 0; i < format_count; i++) {
-		/* Clear out old values. */
+		field = formats[i].position - 1;
+		/* Clear out old values in the destination structure. */
 		lu_ent_clear_current(ent, formats[i].attribute);
 		if (formats[i].multiple) {
-			/* Multiple comma-separated values. */
+			/* Field contains multiple comma-separated values. */
 			gchar **w;
 			int j;
 			/* Split up the field. */
-			w = g_strsplit(v[formats[i].position - 1] ?: "",
-				       ",", 0);
+			w = g_strsplit(v[field] ?: "", ",", 0);
 			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
+				/* Skip over empty strings. */
+				if (strlen(w[j]) == 0) {
+					continue;
+				}
 				/* Initialize the value to the right type. */
 				g_value_init(&value, formats[i].type);
 				/* Set the value. */
@@ -291,34 +314,48 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 		} else {
 			/* Initialize the value to the right type. */
 			g_value_init(&value, formats[i].type);
-			/* Set the value to the right type. */
+			/* Check if we need to supply the default value. */
 			if ((formats[i].def != NULL) &&
-			    (strcmp("", v[formats[i].position - 1]) == 0)) {
-				/* Convert the default. */
+			    (strlen(v[field]) == 0)) {
+				/* Convert the default to the right type. */
 				if (G_VALUE_HOLDS_STRING(&value)) {
 					g_value_set_string(&value,
 							   formats[i].def);
 				} else
 				if (G_VALUE_HOLDS_LONG(&value)) {
+					/* Make sure we're not doing something
+					 * potentially-dangerous here. */
+					g_assert(strlen(formats[i].def) > 0);
 					g_value_set_long(&value,
 							 atol(formats[i].def));
 				} else {
 					g_assert_not_reached();
 				}
 			} else {
-				/* Use the value. */
+				/* Use the value itself. */
 				if (G_VALUE_HOLDS_STRING(&value)) {
-					g_value_set_string(&value,
-							   v[formats[i].position - 1]);
+					g_value_set_string(&value, v[field]);
 				} else
 				if (G_VALUE_HOLDS_LONG(&value)) {
-					g_value_set_long(&value,
-							 atol(v[formats[i].position - 1]));
+					/* Make sure the field contains an
+					 * actual (I'd say "real", but that's
+					 * a loaded word) number. */
+					char *p;
+					long l;
+					l = strtol(v[field], &p, 0);
+					g_assert(p != NULL);
+					if (*p != '\0') {
+						g_warning("entry is incorrectly formatted");
+						g_value_unset(&value);
+						continue;
+					}
+					g_value_set_long(&value, l);
 				} else {
 					g_assert_not_reached();
 				}
 			}
-			/* Add it to the current values list. */
+			/* If we recovered a value, add it to the current
+			 * values list for the entity. */
 			lu_ent_add_current(ent, formats[i].attribute, &value);
 			g_value_unset(&value);
 		}
@@ -330,8 +367,7 @@ parse_generic(const gchar * line, const struct format_specifier *formats,
 /* Parse an entry from /etc/passwd into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_files_parse_user_entry(const gchar * line,
-			  struct lu_ent *ent)
+lu_files_parse_user_entry(const gchar * line, struct lu_ent *ent)
 {
 	gboolean ret;
 	ent->type = lu_user;
@@ -344,8 +380,7 @@ lu_files_parse_user_entry(const gchar * line,
 /* Parse an entry from /etc/group into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_files_parse_group_entry(const gchar * line,
-			   struct lu_ent *ent)
+lu_files_parse_group_entry(const gchar * line, struct lu_ent *ent)
 {
 	gboolean ret;
 	ent->type = lu_group;
@@ -358,8 +393,7 @@ lu_files_parse_group_entry(const gchar * line,
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_shadow_parse_user_entry(const gchar * line,
-			   struct lu_ent *ent)
+lu_shadow_parse_user_entry(const gchar * line, struct lu_ent *ent)
 {
 	gboolean ret;
 	ent->type = lu_user;
@@ -372,8 +406,7 @@ lu_shadow_parse_user_entry(const gchar * line,
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
  * names we know. */
 static gboolean
-lu_shadow_parse_group_entry(const gchar * line,
-			    struct lu_ent *ent)
+lu_shadow_parse_group_entry(const gchar * line, struct lu_ent *ent)
 {
 	gboolean ret;
 	ent->type = lu_group;
@@ -383,17 +416,20 @@ lu_shadow_parse_group_entry(const gchar * line,
 	return ret;
 }
 
-typedef gboolean(*parse_fn) (const gchar * line,
-			     struct lu_ent * ent);
+typedef gboolean(*parse_fn) (const gchar * line, struct lu_ent * ent);
 
+/* Look up an entry in the named file, using the string stored in "name" as
+ * a key, looking for it in the field'th field, using the given parsing
+ * function to load any results we find into the entity structure. */
 static gboolean
 generic_lookup(struct lu_module *module, const char *base_name,
-	       gconstpointer name, parse_fn parser, int field,
+	       const char *name, int field, parse_fn parser,
 	       struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret = FALSE;
 	const char *dir;
 	int fd = -1;
+	gpointer lock;
 	char *line, *filename, *key;
 
 	g_assert(module != NULL);
@@ -404,12 +440,14 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	g_assert(field > 0);
 	g_assert(ent != NULL);
 
+	/* Determine the name of the file we're going to read. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDWR);
+	/* Open the file and lock it. */
+	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
@@ -417,22 +455,25 @@ generic_lookup(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		return FALSE;
 	}
 
-	line = lu_util_line_get_matchingx(fd, (char *) name, field, error);
+	/* Search for the entry in this file. */
+	line = lu_util_line_get_matchingx(fd, name, field, error);
 	if (line == NULL) {
+		lu_util_lock_free(lock);
 		close(fd);
 		return FALSE;
 	}
 
+	/* If we found data, parse it and then free the data. */
 	if (line != NULL) {
 		ret = parser(line, ent);
 		g_free(line);
 	}
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	close(fd);
 
 	g_free(filename);
@@ -440,6 +481,7 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	return ret;
 }
 
+/* Look up a user by name in /etc/passwd. */
 static gboolean
 lu_files_user_lookup_name(struct lu_module *module,
 			  const char *name,
@@ -447,11 +489,12 @@ lu_files_user_lookup_name(struct lu_module *module,
 			  struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lookup(module, "passwd", name,
-			     lu_files_parse_user_entry, 1, ent, error);
+	ret = generic_lookup(module, "passwd", name, 1,
+			     lu_files_parse_user_entry, ent, error);
 	return ret;
 }
 
+/* Look up a user by ID in /etc/passwd. */
 static gboolean
 lu_files_user_lookup_id(struct lu_module *module,
 			uid_t uid,
@@ -461,12 +504,13 @@ lu_files_user_lookup_id(struct lu_module *module,
 	char *key;
 	gboolean ret = FALSE;
 	key = g_strdup_printf("%ld", (long)uid);
-	ret = generic_lookup(module, "passwd", key,
-			     lu_files_parse_user_entry, 3, ent, error);
+	ret = generic_lookup(module, "passwd", key, 3,
+			     lu_files_parse_user_entry, ent, error);
 	g_free(key);
 	return ret;
 }
 
+/* Look up a user by name in /etc/shadow. */
 static gboolean
 lu_shadow_user_lookup_name(struct lu_module *module,
 			   const char *name,
@@ -474,31 +518,46 @@ lu_shadow_user_lookup_name(struct lu_module *module,
 			   struct lu_error **error)
 {
 	gboolean ret;
-	ret =
-	    generic_lookup(module, "shadow", name,
-			   lu_shadow_parse_user_entry, 1, ent, error);
+	ret = generic_lookup(module, "shadow", name, 1,
+			     lu_shadow_parse_user_entry, ent, error);
 	return ret;
 }
 
+/* Look up a user by ID in /etc/shadow.  This becomes a bit tricky because
+ * the shadow file doesn't contain UIDs, so we need to scan the passwd file
+ * to convert the ID to a name first. */
 static gboolean
 lu_shadow_user_lookup_id(struct lu_module *module,
 			 uid_t uid,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key;
+	char *key, *p;
 	GValueArray *values;
+	GValue *value;
 	gboolean ret = FALSE;
+	/* First look the user up by ID. */
 	key = g_strdup_printf("%ld", (long)uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
+		/* Now use the user's name to search the shadow file. */
 		values = lu_ent_get(ent, LU_USERNAME);
 		if ((values != NULL) && (values->n_values > 0)) {
-			char *p;
-			p = g_value_dup_string(g_value_array_get_nth(values,
-								     0));
-			ret = generic_lookup(module, "shadow", p,
-					     lu_shadow_parse_user_entry, 1,
+			value = g_value_array_get_nth(values, 0);
+			if (G_VALUE_HOLDS_STRING(value)) {
+				/* Generate a temporary string containing the
+				 * user's name. */
+				p = g_value_dup_string(value);
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				/* So very, very wrong. */
+				p = g_strdup_printf("%ld",
+						    g_value_get_long(value));
+			} else {
+				g_assert_not_reached();
+			}
+			ret = generic_lookup(module, "shadow", p, 1,
+					     lu_shadow_parse_user_entry,
 					     ent, error);
 			g_free(p);
 		}
@@ -507,6 +566,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 	return ret;
 }
 
+/* Look a group up by name in /etc/group. */
 static gboolean
 lu_files_group_lookup_name(struct lu_module *module,
 			   const char *name,
@@ -514,11 +574,12 @@ lu_files_group_lookup_name(struct lu_module *module,
 			   struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lookup(module, "group", name,
-			     lu_files_parse_group_entry, 1, ent, error);
+	ret = generic_lookup(module, "group", name, 1,
+			     lu_files_parse_group_entry, ent, error);
 	return ret;
 }
 
+/* Look a group up by ID in /etc/group. */
 static gboolean
 lu_files_group_lookup_id(struct lu_module *module,
 			 gid_t gid,
@@ -528,28 +589,32 @@ lu_files_group_lookup_id(struct lu_module *module,
 	char *key;
 	gboolean ret;
 	key = g_strdup_printf("%ld", (long)gid);
-	ret = generic_lookup(module, "group", key,
-			     lu_files_parse_group_entry, 3, ent, error);
+	ret = generic_lookup(module, "group", key, 3,
+			     lu_files_parse_group_entry, ent, error);
 	g_free(key);
 	return ret;
 }
 
+/* Look a group up by name in /etc/gshadow. */
 static gboolean
 lu_shadow_group_lookup_name(struct lu_module *module, const char *name,
 			    struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_lookup(module, "gshadow", name,
-			     lu_shadow_parse_group_entry, 1, ent, error);
+	ret = generic_lookup(module, "gshadow", name, 1,
+			     lu_shadow_parse_group_entry, ent, error);
 	return ret;
 }
 
+/* Look up a group by ID in /etc/gshadow.  This file doesn't contain any
+ * GIDs, so we have to use /etc/group to convert the GID to a name first. */
 static gboolean
 lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 			  struct lu_ent *ent, struct lu_error **error)
 {
 	char *key;
 	GValueArray *values;
+	GValue *value;
 	gboolean ret = FALSE;
 	key = g_strdup_printf("%ld", (long)gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
@@ -557,10 +622,20 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 		values = lu_ent_get(ent, LU_GROUPNAME);
 		if ((values != NULL) && (values->n_values > 0)) {
 			char *p;
-			p = g_value_dup_string(g_value_array_get_nth(values,
-								     0));
-			ret = generic_lookup(module, "gshadow", p,
-					     lu_shadow_parse_group_entry, 1,
+			value = g_value_array_get_nth(values, 0);
+			if (G_VALUE_HOLDS_STRING(value)) {
+				/* Generate a copy of the group's name. */
+				p = g_value_dup_string(value);
+			} else
+			if (G_VALUE_HOLDS_LONG(value)) {
+				/* So very, very wrong.... */
+				p = g_strdup_printf("%ld",
+					            g_value_get_long(value));
+			} else {
+				g_assert_not_reached();
+			}
+			ret = generic_lookup(module, "gshadow", p, 1,
+					     lu_shadow_parse_group_entry,
 					     ent, error);
 			g_free(p);
 		}
@@ -584,8 +659,13 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	memset(&value, 0, sizeof(value));
 
 	for (i = 0; i < format_count; i++) {
-		/* Add a separator if we need to. */
+		/* Add a separator, if we need to, before advancing to
+		 * this field.  This way we ensure that the correct number
+		 * of fields will result, even if they're empty.  Note that
+		 * this implies that position values are always in ascending
+		 * order. */
 		if (i > 0) {
+			g_assert(formats[i].position - formats[i - 1].position >= 0);
 			j = formats[i].position - formats[i - 1].position;
 			while (j-- > 0) {
 				tmp = g_strconcat(ret ?: "", ":", NULL);
@@ -595,11 +675,12 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				ret = tmp;
 			}
 		}
-		j = 0;
+		/* Retrieve the values for this attribute. */
 		values = lu_ent_get(ent, formats[i].attribute);
 		if ((values != NULL) && (values->n_values > 0)) {
+			/* Iterate over all of the data items we can, prepending
+			 * a comma to all but the first. */
 			j = 0;
-			/* Iterate over all of the data items we can. */
 			do {
 				/* Get a string representation of this value. */
 				val = g_value_array_get_nth(values, j);
@@ -635,15 +716,15 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 				j++;
 			} while (formats[i].multiple && (j < values->n_values));
 		} else {
-			/* No values, so check for a non-suppressed
-			 * default value. */
+			/* We have no values, so check for a default value,
+			 * unless we're suppressing it. */
 			if ((formats[i].def != NULL) &&
 			    (formats[i].suppress_if_def == FALSE)) {
 				/* Use the default listed in the format
 				 * specifier. */
-				p = g_strdup(formats[i].def);
-				tmp = g_strconcat(ret ?: "", p, NULL);
-				g_free(p);
+				tmp = g_strconcat(ret ?: "",
+						  formats[i].def,
+						  NULL);
 				if (ret != NULL) {
 					g_free(ret);
 				}
@@ -651,6 +732,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 			}
 		}
 	}
+	/* Add an end-of-line terminator. */
 	p = g_strconcat(ret ?: "", "\n", NULL);
 	if (ret) {
 		g_free(ret);
@@ -660,7 +742,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	return ret;
 }
 
-/* Create a line for /etc/passwd using data in the lu_ent structure. */
+/* Construct a line for /etc/passwd using data in the lu_ent structure. */
 static char *
 lu_files_format_user(struct lu_ent *ent)
 {
@@ -669,7 +751,7 @@ lu_files_format_user(struct lu_ent *ent)
 	return ret;
 }
 
-/* Create a line for /etc/group using data in the lu_ent structure. */
+/* Construct a line for /etc/group using data in the lu_ent structure. */
 static char *
 lu_files_format_group(struct lu_ent *ent)
 {
@@ -678,7 +760,7 @@ lu_files_format_group(struct lu_ent *ent)
 	return ret;
 }
 
-/* Create a line for /etc/shadow using data in the lu_ent structure. */
+/* Construct a line for /etc/shadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_user(struct lu_ent *ent)
 {
@@ -687,7 +769,7 @@ lu_shadow_format_user(struct lu_ent *ent)
 	return ret;
 }
 
-/* Create a line for /etc/gshadow using data in the lu_ent structure. */
+/* Construct a line for /etc/gshadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_group(struct lu_ent *ent)
 {
@@ -698,6 +780,8 @@ lu_shadow_format_group(struct lu_ent *ent)
 
 typedef char *(*format_fn) (struct lu_ent * ent);
 
+/* Add an entity to a given flat file, using a given formatting functin to
+ * construct the proper text data. */
 static gboolean
 generic_add(struct lu_module *module, const char *base_name,
 	    format_fn formatter, struct lu_ent *ent,
@@ -705,7 +789,10 @@ generic_add(struct lu_module *module, const char *base_name,
 {
 	const char *dir;
 	char *key, *line, *filename, *contents;
+	char *fragment1, *fragment2;
 	int fd;
+	int r;
+	gpointer lock;
 	struct stat st;
 	off_t offset;
 	gboolean ret = FALSE;
@@ -716,16 +803,19 @@ generic_add(struct lu_module *module, const char *base_name,
 	g_assert(formatter != NULL);
 	g_assert(ent != NULL);
 
+	/* Generate the name of a file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
+	/* Create a backup copy of the file we're about to modify. */
 	if (lu_files_create_backup(filename, error) == FALSE) {
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Open the file. */
 	fd = open(filename, O_RDWR);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -735,111 +825,139 @@ generic_add(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Read the file's size. */
 	if (fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Generate a new line with the right data in it, and allocate space
+	 * for the contents of the file. */
 	line = formatter(ent);
-	contents = g_malloc0(st.st_size + 1 + strlen(line) + 1);
+	contents = g_malloc0(st.st_size + 1);
 
+	/* We sanity-check here to make sure that the entity isn't already
+	 * listed in the file by name by searching for the initial part of
+	 * the line. */
 	if (line && strchr(line, ':')) {
-		char *fragment1, *fragment2;
 		fragment1 = g_strndup(line, strchr(line, ':') - line + 1);
-		fragment2 = g_strconcat("\n", fragment1, NULL);
-		if (read(fd, contents, st.st_size) != st.st_size) {
-			lu_error_new(error, lu_error_read,
-				     _("couldn't read from `%s': %s"),
-				     filename, strerror(errno));
-			lu_util_lock_free(fd);
-			close(fd);
-			g_free(fragment1);
-			g_free(fragment2);
-			g_free(contents);
-			g_free(filename);
-			return FALSE;
-		}
-		if (strncmp(contents, fragment1, strlen(fragment1)) == 0) {
-			lu_error_new(error, lu_error_generic,
-				     _("entry already present in file"));
-			lu_util_lock_free(fd);
-			close(fd);
-			g_free(fragment1);
-			g_free(fragment2);
-			g_free(contents);
-			g_free(filename);
-			return FALSE;
+	} else {
+		if (line && strchr(line, '\n')) {
+			fragment1 = g_strndup(line,
+					      strchr(line, '\n') - line + 1);
 		} else {
-			if (strstr(contents, fragment2) != NULL) {
-				lu_error_new(error, lu_error_generic,
-					     _
-					     ("entry already present in file"));
-				lu_util_lock_free(fd);
-				close(fd);
-				g_free(fragment1);
-				g_free(fragment2);
-				g_free(contents);
-				g_free(filename);
-				return FALSE;
-			} else {
-				int r;
-				offset = lseek(fd, 0, SEEK_END);
-				if (offset == -1) {
-					lu_error_new(error, lu_error_write,
-						     _
-						     ("couldn't write to `%s': %s"),
-						     filename,
-						     strerror(errno));
-					lu_util_lock_free(fd);
-					close(fd);
-					g_free(fragment1);
-					g_free(fragment2);
-					g_free(contents);
-					g_free(filename);
-					return FALSE;
-				}
-				r = write(fd, line, strlen(line));
-				if (r != strlen(line)) {
-					lu_error_new(error, lu_error_write,
-						     _
-						     ("couldn't write to `%s': %s"),
-						     filename,
-						     strerror(errno));
-					ftruncate(fd, offset);
-					lu_util_lock_free(fd);
-					close(fd);
-					g_free(fragment1);
-					g_free(fragment2);
-					g_free(contents);
-					g_free(filename);
-					return FALSE;
-				} else {
-					ret = TRUE;
-				}
-			}
+			fragment1 = g_strdup(line);
 		}
+	}
+	fragment2 = g_strconcat("\n", fragment1, NULL);
+
+	/* Read the entire file in.  There's some room for improvement here,
+	 * but at least we still have the lock, so it's not going to get
+	 * funky on us. */
+	if (read(fd, contents, st.st_size) != st.st_size) {
+		lu_error_new(error, lu_error_read,
+			     _("couldn't read from `%s': %s"),
+			     filename, strerror(errno));
+		lu_util_lock_free(lock);
+		close(fd);
 		g_free(fragment1);
 		g_free(fragment2);
+		g_free(contents);
+		g_free(filename);
+		return FALSE;
 	}
+
+	/* Check if the beginning of the file is the same as the beginning
+	 * of the entry. */
+	if (strncmp(contents, fragment1, strlen(fragment1)) == 0) {
+		lu_error_new(error, lu_error_generic,
+			     _("entry already present in file"));
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(fragment1);
+		g_free(fragment2);
+		g_free(contents);
+		g_free(filename);
+		return FALSE;
+	} else
+	/* If not, search for a newline followed by the beginning of
+	 * the entry. */
+	if (strstr(contents, fragment2) != NULL) {
+		lu_error_new(error, lu_error_generic,
+			     _("entry already present in file"));
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(fragment1);
+		g_free(fragment2);
+		g_free(contents);
+		g_free(filename);
+		return FALSE;
+	}
+	/* Hooray, we can add this entry at the end of the file. */
+	offset = lseek(fd, 0, SEEK_END);
+	if (offset == -1) {
+		lu_error_new(error, lu_error_write,
+			     _("couldn't write to `%s': %s"),
+			     filename, strerror(errno));
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(fragment1);
+		g_free(fragment2);
+		g_free(contents);
+		g_free(filename);
+		return FALSE;
+	}
+	/* If the last byte in the file isn't a newline, add one, and silently
+	 * curse people who use text editors (which shall remain unnamed) which
+	 * allow saving of the file without a final line terminator. */
+	if ((st.st_size > 0) && (contents[st.st_size - 1] != '\n')) {
+		write(fd, "\n", 1);
+	}
+	/* Attempt to write the entire line to the end. */
+	r = write(fd, line, strlen(line));
+	if (r != strlen(line)) {
+		/* Oh, come on! */
+		lu_error_new(error, lu_error_write,
+			     _("couldn't write to `%s': %s"),
+			     filename,
+			     strerror(errno));
+		/* Truncate off whatever we actually managed to write and
+		 * give up. */
+		ftruncate(fd, offset);
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(fragment1);
+		g_free(fragment2);
+		g_free(contents);
+		g_free(filename);
+		return FALSE;
+	} else {
+		/* Hey, it succeeded. */
+		ret = TRUE;
+	}
+	g_free(fragment1);
+	g_free(fragment2);
 	g_free(contents);
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	close(fd);
 	g_free(filename);
 
 	return ret;
 }
 
+/* Make last-minute changes to the structures before adding them. */
 static gboolean
 lu_files_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
@@ -847,6 +965,7 @@ lu_files_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 	return TRUE;
 }
 
+/* Add the user record to the passwd file. */
 static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
@@ -856,6 +975,7 @@ lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Make last-minute changes to the record before adding it to /etc/shadow. */
 static gboolean
 lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
@@ -873,6 +993,7 @@ lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 	return TRUE;
 }
 
+/* Add the user to the shadow file. */
 static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -882,9 +1003,28 @@ lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Make last-minute changes before adding the group to the group file. */
 static gboolean
 lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
+{
+	return TRUE;
+}
+
+/* Add the group to the group file. */
+static gboolean
+lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
+		   struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_add(module, "group", lu_files_format_group, ent, error);
+	return ret;
+}
+
+/* Make last-minute changes before adding the shadowed group. */
+static gboolean
+lu_shadow_group_add_prep(struct lu_module *module, struct lu_ent *ent,
+		         struct lu_error **error)
 {
 	GValue svalue;
 
@@ -899,22 +1039,7 @@ lu_files_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 	return TRUE;
 }
 
-static gboolean
-lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
-		   struct lu_error **error)
-{
-	gboolean ret;
-	ret = generic_add(module, "group", lu_files_format_group, ent, error);
-	return ret;
-}
-
-static gboolean
-lu_shadow_group_add_prep(struct lu_module *module, struct lu_ent *ent,
-		         struct lu_error **error)
-{
-	return TRUE;
-}
-
+/* Add a shadowed group. */
 static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
@@ -924,6 +1049,8 @@ lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Modify a particular record in the given file, field by field, using the
+ * given format specifiers. */
 static gboolean
 generic_mod(struct lu_module *module, const char *base_name,
 	    const struct format_specifier *formats, size_t format_count,
@@ -931,6 +1058,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 {
 	char *filename = NULL, *key = NULL;
 	int fd = -1;
+	gpointer lock;
 	int i, j;
 	const char *dir = NULL;
 	char *p, *q, *new_value;
@@ -946,6 +1074,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	g_assert(ent != NULL);
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 
+	/* Get the array of names for the entity object. */
 	if (ent->type == lu_user) {
 		names = lu_ent_get_current(ent, LU_USERNAME);
 		if (names == NULL) {
@@ -967,16 +1096,19 @@ generic_mod(struct lu_module *module, const char *base_name,
 		g_assert_not_reached();
 	}
 
+	/* Generate the name of the file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
+	/* Create a backup file. */
 	if (lu_files_create_backup(filename, error) == FALSE) {
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -986,18 +1118,22 @@ generic_mod(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* We iterate over all of the fields individually. */
 	for (i = 0; i < format_count; i++) {
+		/* Read the values, and format them as a field. */
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
 		j = 0;
 		do {
 			p = NULL;
+			/* Convert a single value to a string. */
 			value = g_value_array_get_nth(values, j);
 			if (G_VALUE_HOLDS_STRING(value)) {
 				p = g_value_dup_string(value);
@@ -1008,6 +1144,8 @@ generic_mod(struct lu_module *module, const char *base_name,
 			} else {
 				g_assert_not_reached();
 			}
+			/* Add this new value to the existing string, prepending
+			 * a comma if we've already seen any other values. */
 			q = g_strconcat(new_value ?: "",
 					(j > 0) ? "," : "",
 					p,
@@ -1020,7 +1158,10 @@ generic_mod(struct lu_module *module, const char *base_name,
 			j++;
 		} while (formats[i].multiple);
 
+		/* Get the current name for this entity. */
 		value = g_value_array_get_nth(names, 0);
+		/* If the value we're about to write is the default, just use
+		 * an empty string. */
 		if ((formats[i].suppress_if_def == TRUE) &&
 		    (formats[i].def != NULL) &&
 		    (strcmp(formats[i].def, new_value) == 0)) {
@@ -1028,6 +1169,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 						  formats[i].position,
 						  "", error);
 		} else {
+			/* Otherwise write the new value. */
 			ret = lu_util_field_write(fd, g_value_get_string(value),
 						  formats[i].position,
 						  new_value, error);
@@ -1035,23 +1177,25 @@ generic_mod(struct lu_module *module, const char *base_name,
 
 		g_free(new_value);
 
+		/* If we had a write error, we fail now. */
 		if (ret == FALSE) {
-			lu_util_lock_free(fd);
+			lu_util_lock_free(lock);
 			close(fd);
 			g_free(filename);
 			return FALSE;
 		}
 
 		/* We may have just renamed the account (we're safe assuming
-		 * the new name is correct here because if we renamed, we did
-		 * it first), so switch to using the account's new name. */
+		 * the new name is correct here because if we renamed it, we
+		 * changed the name field first), so switch to using the
+		 * account's new name. */
 		if (ent->type == lu_user) {
 			names = lu_ent_get(ent, LU_USERNAME);
 			if (names == NULL) {
 				lu_error_new(error, lu_error_generic,
 					     _("entity object has no %s attribute"),
 					     LU_USERNAME);
-				lu_util_lock_free(fd);
+				lu_util_lock_free(lock);
 				close(fd);
 				g_free(filename);
 				return FALSE;
@@ -1061,10 +1205,9 @@ generic_mod(struct lu_module *module, const char *base_name,
 			names = lu_ent_get(ent, LU_GROUPNAME);
 			if (names == NULL) {
 				lu_error_new(error, lu_error_generic,
-					     _
-					     ("entity object has no %s attribute"),
+					     _ ("entity object has no %s attribute"),
 					     LU_GROUPNAME);
-				lu_util_lock_free(fd);
+				lu_util_lock_free(lock);
 				close(fd);
 				g_free(filename);
 				return FALSE;
@@ -1074,13 +1217,15 @@ generic_mod(struct lu_module *module, const char *base_name,
 		}
 	}
 
-	lu_util_lock_free(fd);
+	/* Close the data file. */
+	lu_util_lock_free(lock);
 	close(fd);
 	g_free(filename);
 
 	return TRUE;
 }
 
+/* Modify an entry in the passwd file. */
 static gboolean
 lu_files_user_mod(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
@@ -1091,6 +1236,7 @@ lu_files_user_mod(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Modify an entry in the group file. */
 static gboolean
 lu_files_group_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -1101,6 +1247,7 @@ lu_files_group_mod(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Modify an entry in the shadow file. */
 static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -1112,6 +1259,7 @@ lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Modify an entry in the gshadow file. */
 static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
@@ -1123,17 +1271,23 @@ lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Delete an entity from the given file. */
 static gboolean
 generic_del(struct lu_module *module, const char *base_name,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	GValueArray *name = NULL;
 	GValue *value;
-	char *contents = NULL, *filename = NULL, *line, *key = NULL, *tmp;
+	char *contents = NULL, *filename = NULL, *key = NULL;
+	char *fragment1, *fragment2, *tmp;
 	const char *dir;
 	struct stat st;
+	size_t len;
 	int fd = -1;
+	gboolean found;
+	gpointer lock;
 
+	/* Get the entity's current name. */
 	if (ent->type == lu_user) {
 		name = lu_ent_get_current(ent, LU_USERNAME);
 	} else
@@ -1149,16 +1303,19 @@ generic_del(struct lu_module *module, const char *base_name,
 	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
+	/* Generate the name of the file we're going to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
+	/* Create a backup of that file. */
 	if (lu_files_create_backup(filename, error) == FALSE) {
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -1168,84 +1325,121 @@ generic_del(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Determine the file's size. */
 	if (fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Allocate space to hold the file and read it all in. */
 	contents = g_malloc0(st.st_size + 1);
 	if (read(fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"), filename,
 			     strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Generate string versions of what the beginning of a line might
+	 * look like. */
 	value = g_value_array_get_nth(name, 0);
-	tmp = g_strdup_printf("%s:", g_value_get_string(value));
-	line = module->scache->cache(module->scache, tmp);
-	g_free(tmp);
-
-	if (strncmp(contents, line, strlen(line)) == 0) {
-		char *p = strchr(contents, '\n');
-		strcpy(contents, p ? (p + 1) : "");
+	if (G_VALUE_HOLDS_STRING(value)) {
+		fragment1 = g_strdup_printf("%s:", g_value_get_string(value));
+	} else
+	if (G_VALUE_HOLDS_LONG(value)) {
+		fragment1 = g_strdup_printf("%ld:", g_value_get_long(value));
 	} else {
-		char *p;
-		tmp = g_strdup_printf("\n%s:", g_value_get_string(value));
-		line = module->scache->cache(module->scache, tmp);
-		g_free(tmp);
-		if ((p = strstr(contents, line)) != NULL) {
-			char *q = strchr(p + 1, '\n');
-			strcpy(p + 1, q ? (q + 1) : "");
+		g_assert_not_reached();
+	}
+	fragment2 = g_strdup_printf("\n%s", fragment1);
+
+	/* Remove all occurrences of this entry from the file. */
+	len = strlen(fragment1);
+	do {
+		found = FALSE;
+		/* If the data is on the first line of the file, we remove the
+		 * first line. */
+		if (strncmp(contents, fragment1, len) == 0) {
+			char *p = strchr(contents, '\n');
+			strcpy(contents, p ? (p + 1) : "");
+			found = TRUE;
+		} else
+		/* If the data occurs elsewhere, cover it up. */
+		if ((tmp = strstr(contents, fragment2)) != NULL) {
+			char *p = strchr(contents, '\n');
+			strcpy(tmp, p ? (p + 1) : "");
+			found = TRUE;
 		}
+	} while(found);
+
+	g_free(fragment1);
+	g_free(fragment2);
+
+	/* If the resulting memory chunk is the same size as the file, then
+	 * nothing's changed. */
+	len = strlen(contents);
+	if (len == st.st_size) {
+		g_free(contents);
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(filename);
+		return TRUE;
 	}
 
+	/* Otherwise we need to write the new data to the file.  Jump back to
+	 * the beginning of the file. */
 	if (lseek(fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"), filename,
 			     strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	if (write(fd, contents, strlen(contents)) != strlen(contents)) {
+	/* Write the new contents out. */
+	if (write(fd, contents, len) != len) {
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"), filename,
 			     strerror(errno));
 		g_free(contents);
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	ftruncate(fd, strlen(contents));
+	/* Truncate the file to the new (certainly shorter) length. */
+	ftruncate(fd, len);
+
+	/* Clean up. */
 	g_free(contents);
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	close(fd);
 	g_free(filename);
 
 	return TRUE;
 }
 
+/* Remove a user from the passwd file. */
 static gboolean
 lu_files_user_del(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
@@ -1255,6 +1449,7 @@ lu_files_user_del(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Remove a group from the group file. */
 static gboolean
 lu_files_group_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -1264,6 +1459,7 @@ lu_files_group_del(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Remove a user from the shadow file. */
 static gboolean
 lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -1273,6 +1469,7 @@ lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Remove a group from the gshadow file. */
 static gboolean
 lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
@@ -1289,36 +1486,45 @@ lock_process(char *cryptedPassword, gboolean lock, struct lu_ent *ent)
 {
 	char *ret = NULL;
 	if (lock) {
-		cryptedPassword = g_strconcat("!", cryptedPassword, NULL);
 		ret = ent->cache->cache(ent->cache, cryptedPassword);
-		g_free((char *) cryptedPassword);
-	} else {
-		if (cryptedPassword[0] == '!') {
-			ret = ent->cache->cache(ent->cache,
-						cryptedPassword + 1);
-		} else {
+		if (ret[0] != '!') {
+			cryptedPassword = g_strconcat("!!", ret, NULL);
 			ret = ent->cache->cache(ent->cache, cryptedPassword);
+			g_free(cryptedPassword);
+		}
+	} else {
+		ret = ent->cache->cache(ent->cache, cryptedPassword);
+		while(ret[0] == '!') {
+			ret = ent->cache->cache(ent->cache, ret + 1);
 		}
 	}
 	return ret;
 }
 
+/* Lock or unlock an account in the given file, with its encrypted password
+ * stored in the given field number. */
 static gboolean
 generic_lock(struct lu_module *module, const char *base_name, int field,
 	     struct lu_ent *ent, gboolean lock_or_not,
 	     struct lu_error **error)
 {
 	GValueArray *name = NULL;
+	GValue *val;
 	char *filename = NULL, *key = NULL;
-	const char *dir, *namestring;
-	char *value, *new_value;
+	const char *dir;
+	char *value, *new_value, *namestring;
 	int fd = -1;
+	gpointer lock;
 	gboolean ret = FALSE;
 
-	if (ent->type == lu_user)
+	/* Get the name which keys the entries of interest in the file. */
+	g_assert((ent->type == lu_user) || (ent->type == lu_group));
+	if (ent->type == lu_user) {
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	if (ent->type == lu_group)
+	}
+	if (ent->type == lu_group) {
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
+	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1326,16 +1532,19 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
+	/* Generate the name of the file we're going to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
+	/* Create a backup of the file. */
 	if (lu_files_create_backup(filename, error) == FALSE) {
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Open the file. */
 	fd = open(filename, O_RDWR);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -1345,56 +1554,91 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	namestring = g_value_get_string(g_value_array_get_nth(name, 0));
+	/* Generate a string representation of the name. */
+	val = g_value_array_get_nth(name, 0);
+	if (G_VALUE_HOLDS_STRING(value)) {
+		namestring = g_value_dup_string(val);
+	} else
+	if (G_VALUE_HOLDS_LONG(value)) {
+		namestring = g_strdup_printf("%ld", g_value_get_long(val));
+	} else {
+		g_assert_not_reached();
+	}
+
+	/* Read the old value from the file. */
 	value = lu_util_field_read(fd, namestring, field, error);
 	if (value == NULL) {
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
+		g_free(namestring);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Check that we actually care about this.  If there's a non-empty,
+	 * not locked string in there, but it's too short to be a hash, then
+	 * we don't care, so we just nod our heads and smile. */
+	if (LU_CRYPT_INVALID(value)) {
+		lu_util_lock_free(lock);
+		close(fd);
+		g_free(value);
+		g_free(namestring);
+		g_free(filename);
+		return TRUE;
+	}
+
+	/* Generate a new value for the file. */
 	new_value = lock_process(value, lock_or_not, ent);
 	g_free(value);
 
-	ret = lu_util_field_write(fd, namestring, field,
-				  new_value, error);
+	/* Make the change. */
+	ret = lu_util_field_write(fd, namestring, field, new_value, error);
 	if (ret == FALSE) {
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
+		g_free(namestring);
 		g_free(filename);
 		return FALSE;
 	}
 
-	lu_util_lock_free(fd);
+	/* Clean up. */
+	lu_util_lock_free(lock);
 	close(fd);
+	g_free(namestring);
 	g_free(filename);
 
 	return TRUE;
 }
 
+/* Check if an account [password] is locked. */
 static gboolean
 generic_is_locked(struct lu_module *module, const char *base_name,
-		  int field, struct lu_ent *ent, gboolean lock_or_not,
-		  struct lu_error **error)
+		  int field, struct lu_ent *ent, struct lu_error **error)
 {
 	GValueArray *name = NULL;
+	GValue *val;
 	char *filename = NULL, *key = NULL;
 	const char *dir, *namestring;
 	char *value;
 	int fd = -1;
+	gpointer lock;
 	gboolean ret = FALSE;
 
-	if (ent->type == lu_user)
+	/* Get the name of this account. */
+	g_assert((ent->type == lu_user) || (ent->type == lu_group));
+	if (ent->type == lu_user) {
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	if (ent->type == lu_group)
+	}
+	if (ent->type == lu_group) {
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
+	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1402,17 +1646,14 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
+	/* Construct the name of the file to read. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	if (lu_files_create_backup(filename, error) == FALSE) {
-		g_free(filename);
-		return FALSE;
-	}
-
-	fd = open(filename, O_RDWR);
+	/* Open the file. */
+	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
@@ -1421,27 +1662,41 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	namestring = g_value_get_string(g_value_array_get_nth(name, 0));
+	/* Construct the actual name of the account holder(s). */
+	val = g_value_array_get_nth(name, 0);
+	if (G_VALUE_HOLDS_STRING(val)) {
+		namestring = g_value_dup_string(val);
+	} else
+	if (G_VALUE_HOLDS_LONG(val)) {
+		namestring = g_strdup_printf("%ld", g_value_get_long(val));
+	} else {
+		g_assert_not_reached();
+	}
+
+	/* Read the value. */
 	value = lu_util_field_read(fd, namestring, field, error);
 	if (value == NULL) {
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* It all comes down to this. */
 	ret = value[0] == '!';
 	g_free(value);
 
 	return ret;
 }
 
+/* Lock a user from the passwd file. */
 static gboolean
 lu_files_user_lock(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
@@ -1460,6 +1715,7 @@ lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Lock a group from the group file. */
 static gboolean
 lu_files_group_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
@@ -1478,6 +1734,7 @@ lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Lock a user in the shadow file. */
 static gboolean
 lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
@@ -1496,24 +1753,7 @@ lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
-static gboolean
-lu_files_user_is_locked(struct lu_module *module, struct lu_ent *ent,
-		        struct lu_error **error)
-{
-	gboolean ret;
-	ret = generic_is_locked(module, "passwd", 2, ent, FALSE, error);
-	return ret;
-}
-
-static gboolean
-lu_files_group_is_locked(struct lu_module *module, struct lu_ent *ent,
-			 struct lu_error **error)
-{
-	gboolean ret;
-	ret = generic_is_locked(module, "group", 2, ent, FALSE, error);
-	return ret;
-}
-
+/* Lock a group in the gshadow file. */
 static gboolean
 lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
@@ -1532,12 +1772,31 @@ lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent,
 	return ret;
 }
 
+/* Check if the account is locked. */
+static gboolean
+lu_files_user_is_locked(struct lu_module *module, struct lu_ent *ent,
+		        struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_is_locked(module, "passwd", 2, ent, error);
+	return ret;
+}
+
+static gboolean
+lu_files_group_is_locked(struct lu_module *module, struct lu_ent *ent,
+			 struct lu_error **error)
+{
+	gboolean ret;
+	ret = generic_is_locked(module, "group", 2, ent, error);
+	return ret;
+}
+
 static gboolean
 lu_shadow_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_is_locked(module, "shadow", 2, ent, FALSE, error);
+	ret = generic_is_locked(module, "shadow", 2, ent, error);
 	return ret;
 }
 
@@ -1546,25 +1805,33 @@ lu_shadow_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_is_locked(module, "gshadow", 2, ent, FALSE, error);
+	ret = generic_is_locked(module, "gshadow", 2, ent, error);
 	return ret;
 }
 
+/* Change a password, in a given file, in a given field, for a given account,
+ * to a given value.  Got that? */
 static gboolean
 generic_setpass(struct lu_module *module, const char *base_name, int field,
 		struct lu_ent *ent, const char *password,
 		struct lu_error **error)
 {
 	GValueArray *name = NULL;
-	char *filename = NULL, *key = NULL;
-	const char *dir, *namestring;
+	GValue *val;
+	char *filename = NULL, *key = NULL, *value, *namestring;
+	const char *dir;
 	int fd = -1;
+	gpointer lock;
 	gboolean ret = FALSE;
 
-	if (ent->type == lu_user)
+	/* Get the name of this account. */
+	g_assert((ent->type == lu_user) || (ent->type == lu_group));
+	if (ent->type == lu_user) {
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	if (ent->type == lu_group)
+	}
+	if (ent->type == lu_group) {
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
+	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1572,16 +1839,19 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
+	/* Construct the name of the file to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
+	/* Create a backup of the file. */
 	if (lu_files_create_backup(filename, error) == FALSE) {
 		g_free(filename);
 		return FALSE;
 	}
 
+	/* Open the file. */
 	fd = open(filename, O_RDWR);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -1591,35 +1861,70 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		return FALSE;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return FALSE;
 	}
 
-	/* The crypt prefix indicates that the password is already hashed. */
-	if (g_ascii_strncasecmp(password, SCHEME, 7) == 0) {
-		password = password + 7;
+	/* Get the name of the account. */
+	val = g_value_array_get_nth(name, 0);
+	if (G_VALUE_HOLDS_STRING(val)) {
+		namestring = g_value_dup_string(val);
+	} else
+	if (G_VALUE_HOLDS_LONG(val)) {
+		namestring = g_strdup_printf("%ld", g_value_get_long(val));
+	} else {
+		g_assert_not_reached();
+	}
+
+	/* Read the current contents of the field. */
+	value = lu_util_field_read(fd, namestring, field, error);
+	if (value == NULL) {
+		/* I'm very confused now. */
+		close(fd);
+		g_free(namestring);
+		g_free(filename);
+		return FALSE;
+	}
+
+	/* If we don't really care, nod our heads and smile. */
+	if (LU_CRYPT_INVALID(value)) {
+		g_free(value);
+		close(fd);
+		g_free(namestring);
+		g_free(filename);
+		return TRUE;
+	}
+
+	/* The crypt prefix indicates that the password is already hashed.  If
+	 * we don't see it, hash the password. */
+	if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
+		password = password + strlen(LU_CRYPTED);
 	} else {
 		password = lu_make_crypted(password, NULL);
 	}
 
-	namestring = g_value_get_string(g_value_array_get_nth(name, 0));
+	/* Now write our changes to the file. */
 	ret = lu_util_field_write(fd, namestring, field, password, error);
 	if (ret == FALSE) {
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
+		g_free(namestring);
 		g_free(filename);
 		return FALSE;
 	}
 
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	close(fd);
+	g_free(namestring);
 	g_free(filename);
 
 	return ret;
 }
 
+/* Set a user's password in the passwd file. */
 static gboolean
 lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		      const char *password, struct lu_error **error)
@@ -1643,7 +1948,7 @@ lu_files_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "passwd", 2, ent, SCHEME, error);
+	ret = generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, error);
 	return ret;
 }
 
@@ -1652,10 +1957,11 @@ lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "group", 2, ent, SCHEME, error);
+	ret = generic_setpass(module, "group", 2, ent, LU_CRYPTED, error);
 	return ret;
 }
 
+/* Set the shadow last-changed field to today's date. */
 static void
 set_shadow_last_change(struct lu_module *module, struct lu_ent *ent)
 {
@@ -1698,7 +2004,7 @@ lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "shadow", 2, ent, SCHEME, error);
+	ret = generic_setpass(module, "shadow", 2, ent, LU_CRYPTED, error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
@@ -1710,18 +2016,21 @@ lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 			   struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "gshadow", 2, ent, SCHEME, error);
+	ret = generic_setpass(module, "gshadow", 2, ent, LU_CRYPTED, error);
 	if (ret) {
 		set_shadow_last_change(module, ent);
 	}
 	return ret;
 }
 
+/* Get a list of all of the entries in a given file which patch a
+ * particular pattern. */
 static GValueArray *
 lu_files_enumerate(struct lu_module *module, const char *base_name,
 		   const char *pattern, struct lu_error **error)
 {
 	int fd;
+	gpointer lock;
 	GValueArray *ret = NULL;
 	GValue value;
 	char *buf;
@@ -1734,12 +2043,14 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	g_assert(strlen(base_name) > 0);
 	pattern = pattern ?: "*";
 
+	/* Generate the name of the file we'll be reading. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDWR);
+	/* Open the file. */
+	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
@@ -1748,31 +2059,38 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 		return NULL;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return NULL;
 	}
 
+	/* Wrap the file for stdio operations. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
-		close(fd);
+		lu_util_lock_free(lock);
+		fclose(fp);
 		g_free(filename);
 		return NULL;
 	}
 
+	/* Create a new array to hold values. */
 	ret = g_value_array_new(0);
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
+	/* Read each line, */
 	while ((buf = line_read(fp)) != NULL) {
+		/* require that each line have actual data on it, */
 		p = strchr(buf, ':');
 		if (p != NULL) {
+			/* snip off the parts we don't care about, */
 			*p = '\0';
 			if (fnmatch(pattern, buf, 0) == 0) {
+				/* add add it to the list we're returning. */
 				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
 				g_value_reset(&value);
@@ -1780,15 +2098,17 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 		}
 		g_free(buf);
 	}
-	g_value_unset(&value);
 
-	lu_util_lock_free(fd);
+	/* Clean up. */
+	g_value_unset(&value);
+	lu_util_lock_free(lock);
 	fclose(fp);
 	g_free(filename);
 
 	return ret;
 }
 
+/* Get a list of all users or groups. */
 static GValueArray *
 lu_files_users_enumerate(struct lu_module *module, const char *pattern,
 			 struct lu_error **error)
@@ -1807,12 +2127,14 @@ lu_files_groups_enumerate(struct lu_module *module, const char *pattern,
 	return ret;
 }
 
+/* Get a list of all of the users who are in a given group. */
 static GValueArray *
 lu_files_users_enumerate_by_group(struct lu_module *module,
 				  const char *group, gid_t gid,
 				  struct lu_error **error)
 {
 	int fd;
+	gpointer lock;
 	GValueArray *ret = NULL;
 	GValue value;
 	char *buf, grp[CHUNK_SIZE];
@@ -1823,13 +2145,15 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	g_assert(module != NULL);
 	g_assert(group != NULL);
 
+	/* Generate the names of the two files we'll be looking at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	pwdfilename = g_strconcat(dir, "/passwd", NULL);
 	grpfilename = g_strconcat(dir, "/group", NULL);
 	g_free(key);
 
-	fd = open(pwdfilename, O_RDWR);
+	/* Open the passwd file. */
+	fd = open(pwdfilename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), pwdfilename,
@@ -1839,52 +2163,65 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		return NULL;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the passwd file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		return NULL;
 	}
 
+	/* Wrap the descriptor in a stdio FILE. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
-		close(fd);
+		lu_util_lock_free(lock);
+		fclose(fp);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		return NULL;
 	}
 
+	/* Create an array to store values we're going to return. */
 	ret = g_value_array_new(0);
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
 	snprintf(grp, sizeof(grp), "%d", gid);
+
+	/* Iterate over each line. */
 	while ((buf = line_read(fp)) != NULL) {
+		/* Find the end of the first field. */
 		p = strchr(buf, ':');
 		q = NULL;
+		/* If the field has an end, find the end of the second field. */
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			p = strchr(p, ':');
 		}
+		/* If the second field has an end, find the end of the third. */
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			p = strchr(p, ':');
 		}
+		/* If the third has an end, find the fourth. */
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			q = p;
 			p = strchr(p, ':');
 		}
+		/* If we haven't run out of fields by now, we can match. */
 		if (q != NULL) {
+			/* Terminate the fourth field. */
 			if (p != NULL) {
 				*p = '\0';
 			}
+			/* If it matches the gid, add this user's name to the
+			 * list. */
 			if (strcmp(q, grp) == 0) {
 				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
@@ -1893,11 +2230,13 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		}
 		g_free(buf);
 	}
+	/* Close the file. */
 	g_value_unset(&value);
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	fclose(fp);
 
-	fd = open(grpfilename, O_RDWR);
+	/* Open the group file. */
+	fd = open(grpfilename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), grpfilename,
@@ -1908,7 +2247,8 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		return NULL;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the group file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
@@ -1916,36 +2256,46 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		return NULL;
 	}
 
+	/* Wrap the group file in an stdio file. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
-		close(fd);
+		lu_util_lock_free(lock);
+		fclose(fp);
 		g_free(pwdfilename);
 		g_free(grpfilename);
 		g_value_array_free(ret);
 		return NULL;
 	}
 
+	/* Iterate over all of these lines as well. */
 	while ((buf = line_read(fp)) != NULL) {
+		/* Terminate at the end of the first field, and find the end of
+		 * the second field. */
 		p = strchr(buf, ':');
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			p = strchr(p, ':');
 		}
+		/* If the first field matches, continue. */
 		if (strcmp(buf, group) == 0) {
+			/* Find the end of the third field. */
 			if (p != NULL) {
 				*p = '\0';
 				p++;
 				p = strchr(p, ':');
 			}
+			/* Find the beginning of the fourth field. */
 			if (p != NULL) {
 				*p = '\0';
 				p++;
+				/* Iterate through all of the pieces of
+				 * the field. */
 				while ((q = strsep(&p, ",\n")) != NULL) {
+					/* Add this name. */
 					if (strlen(q) > 0) {
 						g_value_init(&value,
 							     G_TYPE_STRING);
@@ -1962,7 +2312,8 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		g_free(buf);
 	}
 
-	lu_util_lock_free(fd);
+	/* Clean up. */
+	lu_util_lock_free(lock);
 	fclose(fp);
 
 	g_free(pwdfilename);
@@ -1971,6 +2322,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	return ret;
 }
 
+/* Get a list of groups to which the user belongs. */
 static GValueArray *
 lu_files_groups_enumerate_by_user(struct lu_module *module,
 				  const char *user,
@@ -1978,64 +2330,162 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 				  struct lu_error **error)
 {
 	int fd;
+	gpointer lock;
 	GValueArray *ret = NULL;
 	GValue value;
 	char *buf;
-	char *key = NULL, *filename = NULL, *p, *q;
+	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
 	const char *dir = NULL;
 	FILE *fp;
 
 	g_assert(module != NULL);
 	g_assert(user != NULL);
 
+	/* Generate the names of files we'll be looking at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/group", NULL);
+	pwdfilename = g_strconcat(dir, "/passwd", NULL);
+	grpfilename = g_strconcat(dir, "/group", NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDWR);
+	/* Open the first file. */
+	fd = open(pwdfilename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
+			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		g_free(filename);
+		g_free(pwdfilename);
+		g_free(grpfilename);
 		return NULL;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock it. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
-		g_free(filename);
+		g_free(pwdfilename);
+		g_free(grpfilename);
 		return NULL;
 	}
 
+	/* Open it so that we can use stdio. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
+			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
-		close(fd);
-		g_free(filename);
+		lu_util_lock_free(lock);
+		fclose(fp);
+		g_free(pwdfilename);
+		g_free(grpfilename);
 		return NULL;
 	}
 
+	/* Initialize the list of values we'll return. */
 	ret = g_value_array_new(0);
 	memset(&value, 0, sizeof(value));
 	g_value_init(&value, G_TYPE_STRING);
+
+	/* Iterate through all of the lines in the file. */
+	key = NULL;
 	while ((buf = line_read(fp)) != NULL) {
+		/* Find the end of the first field. */
 		p = strchr(buf, ':');
+		/* Find the end of the second field. */
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			p = strchr(p, ':');
 		}
+		/* Find the end of the third field. */
 		if (p != NULL) {
 			*p = '\0';
 			p++;
 			p = strchr(p, ':');
 		}
+		/* Find the the fourth field. */
+		if (p != NULL) {
+			*p = '\0';
+			p++;
+			q = strchr(p, ':');
+			/* If it matches, save the gid. */
+			if (strcmp(buf, user) == 0) {
+				if (q) {
+					*q = '\0';
+				}
+				key = g_strdup(p);
+				g_free(buf);
+				break;
+			}
+		}
+		g_free(buf);
+	}
+	lu_util_lock_free(lock);
+	fclose(fp);
+
+	/* Open the groups file. */
+	fd = open(grpfilename, O_RDONLY);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open,
+			     _("couldn't open `%s': %s"), grpfilename,
+			     strerror(errno));
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	/* Lock it. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
+		close(fd);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	/* Open it so that we can use stdio. */
+	fp = fdopen(fd, "r");
+	if (fp == NULL) {
+		lu_error_new(error, lu_error_open,
+			     _("couldn't open `%s': %s"), grpfilename,
+			     strerror(errno));
+		lu_util_lock_free(lock);
+		fclose(fp);
+		g_free(pwdfilename);
+		g_free(grpfilename);
+		return NULL;
+	}
+
+	/* Iterate through all of the lines in the file. */
+	while ((buf = line_read(fp)) != NULL) {
+		/* Find the end of the first field. */
+		p = strchr(buf, ':');
+		/* Find the end of the second field. */
+		if (p != NULL) {
+			*p = '\0';
+			p++;
+			p = strchr(p, ':');
+		}
+		/* Find the end of the third field. */
+		if (p != NULL) {
+			*p = '\0';
+			p++;
+			q = strchr(p, ':');
+			if (q && key) {
+				/* Terminate the third field. */
+				*q = '\0';
+				if (strcmp(p, key) == 0) {
+					/* Add the name of the group because its
+					 * gid is the user's primary. */
+					g_value_set_string(&value, buf);
+					g_value_array_append(ret, &value);
+					g_value_reset(&value);
+				}
+			}
+			p = q;
+		}
+		/* Find the beginning of the third field. */
 		if (p != NULL) {
 			p++;
+			/* Break out each piece of the fourth field. */
 			while ((q = strsep(&p, ",\n")) != NULL) {
 				if (strlen(q) > 0) {
 					if (strcmp(q, user) == 0) {
@@ -2051,13 +2501,16 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	}
 	g_value_unset(&value);
 
-	lu_util_lock_free(fd);
+	lu_util_lock_free(lock);
 	fclose(fp);
-	g_free(filename);
+	g_free(pwdfilename);
+	g_free(grpfilename);
 
 	return ret;
 }
 
+/* Enumerate all of the accounts listed in the given file, using the
+ * given parser to parse matching accounts into an array of entity pointers. */
 static GPtrArray *
 lu_files_enumerate_full(struct lu_module *module,
 			const char *base_name,
@@ -2066,6 +2519,7 @@ lu_files_enumerate_full(struct lu_module *module,
 		        struct lu_error **error)
 {
 	int fd;
+	gpointer lock;
 	GPtrArray *ret = NULL;
 	char *buf;
 	char *key = NULL, *filename = NULL;
@@ -2078,12 +2532,14 @@ lu_files_enumerate_full(struct lu_module *module,
 	g_assert(strlen(base_name) > 0);
 	pattern = pattern ?: "*";
 
+	/* Generate the name of the file to look at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	fd = open(filename, O_RDWR);
+	/* Open the file. */
+	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
@@ -2092,35 +2548,50 @@ lu_files_enumerate_full(struct lu_module *module,
 		return NULL;
 	}
 
-	if (lu_util_lock_obtain(fd, error) != TRUE) {
+	/* Lock the file. */
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
 		g_free(filename);
 		return NULL;
 	}
 
+	/* Wrap the file up in stdio. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(fd);
+		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return NULL;
 	}
 
+	/* Allocate an array to hold results. */
 	ret = g_ptr_array_new();
 	while ((buf = line_read(fp)) != NULL) {
 		ent = lu_ent_new();
+		/* Snip the line off at the right place. */
 		key = strchr(buf, '\n');
 		if (key != NULL) {
 			*key = '\0';
 		}
-		parser(buf, ent);
-		g_ptr_array_add(ret, ent);
+		key = strchr(buf, ':');
+		if (key != NULL) {
+			*key = '\0';
+		}
+		/* If the account name matches the pattern, parse it and add
+		 * it to the list. */
+		if (fnmatch(pattern, buf, 0) == 0) {
+			parser(buf, ent);
+			g_ptr_array_add(ret, ent);
+		} else {
+			lu_ent_free(ent);
+		}
 		g_free(buf);
 	}
 
+	lu_util_lock_free(lock);
 	fclose(fp);
 
 	return ret;

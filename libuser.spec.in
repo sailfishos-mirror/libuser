@@ -87,6 +87,10 @@ popd
 
 %changelog
 * Tue Jan 29 2002 Nalin Dahyabhai <nalin@redhat.com> 0.49.93-1
+- move shadow initialization for groups to the proper callback
+- rework locking in the files module to not require that files be writable
+
+* Tue Jan 29 2002 Nalin Dahyabhai <nalin@redhat.com>
 - expose lu_strerror()
 - add various typedefs for types used by the library
 

@@ -33,9 +33,18 @@
 
 G_BEGIN_DECLS
 
-#define LU_ENT_MAGIC 0x00000006
-#define LU_MODULE_VERSION 0x000a0000
-#define _(String) gettext(String)
+#define LU_ENT_MAGIC		0x00000006
+#define LU_MODULE_VERSION	0x000a0000
+#define _(String)		gettext(String)
+/* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
+ * character, and we assume that all crypt algorithms generate stringa at
+ * least this long. */
+#define LU_CRYPTED		"{CRYPT}"
+#define LU_CRYPT_SIZE		howmany(64,6)
+#define LU_CRYPT_INVALID(String) \
+				((strlen(String) > 0) && \
+				 (String[0] != '!') && \
+				 (strlen(String) < LU_CRYPT_SIZE))
 
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
@@ -270,8 +279,8 @@ const char *lu_make_crypted(const char *plain, const char *previous);
 guint lu_strv_len(char **);
 
 /* Lock a file. */
-gboolean lu_util_lock_obtain(int fd, struct lu_error **error);
-void lu_util_lock_free(int fd);
+gpointer lu_util_lock_obtain(int fd, struct lu_error **error);
+void lu_util_lock_free(gpointer lock);
 
 /* Manipulate a colon-delimited flat text file. */
 char *lu_util_line_get_matching1(int fd, const char *firstpart,
