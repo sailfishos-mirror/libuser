@@ -15,8 +15,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef libuser_private_h
-#define libuser_private_h
+#ifndef libuser_user_private_h
+#define libuser_user_private_h
 
 #include <glib.h>
 #include <gmodule.h>

@@ -15,8 +15,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef libuser_h
-#define libuser_h
+#ifndef libuser_user_h
+#define libuser_user_h
 
 #ifdef __cplusplus
 extern "C" {
