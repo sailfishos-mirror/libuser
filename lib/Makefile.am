@@ -8,6 +8,15 @@ lib_LTLIBRARIES = libuser.la @QUOTALIB@
 EXTRA_LTLIBRARIES = libuserquota.la
 man3_MANS = userquota.3
 
+pkginclude_HEADERS = \
+	config.h \
+	entity.h \
+	error.h \
+	prompt.h \
+	quota.h \
+	user.h \
+	user_private.h
+
 libuser_la_SOURCES = \
 	config.c \
 	config.h \
