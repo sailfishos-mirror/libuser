@@ -1,19 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of hi.po to Hindi
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Rajesh Ranjan <rranjan@redhat.com>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-02 00:14+0100\n"
-"PO-Revision-Date: 2003-09-18 13:12+0530\n"
-"Last-Translator: Jatin Nansi <jnansi@redhat.com>\n"
-"Language-Team: Hindi <hi@li.org>\n"
+"PO-Revision-Date: 2004-11-03 10:28+0530\n"
+"Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
+"Language-Team: Hindi <Indlinux-hindi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
 
 #: apps/apputil.c:129
 #, c-format
@@ -33,65 +34,64 @@ msgstr "`%s' हटाने में दोष: %s"
 #: apps/apputil.c:473 apps/apputil.c:477
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "विशेषाधिकार हटाने में असफल।\n"
+msgstr "विशेषाधिकार हटाने में असफल.\n"
 
 #: apps/apputil.c:486
 #, c-format
 msgid "Internal error.\n"
-msgstr "आंतरिक दोष।\n"
+msgstr "आंतरिक दोष.\n"
 
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s की पहचान को बदलने के लिए %s अधिकृत नहीं है\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "अनजान दोष"
+msgstr "अज्ञात उपयोक्ता संदर्भ"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd के लिए मूलभूत संदर्भ व्यवस्थित नहीं कर सकता\n"
 
 #: apps/apputil.c:525
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr "PAM प्रारंभिकीकरण दोष।\n"
+msgstr "PAM प्रारंभिकीकरण दोष.\n"
 
 #: apps/apputil.c:533 apps/apputil.c:557
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "%s के लिए प्रमाणिकता असफल।\n"
+msgstr "%s के लिए सत्यापन असफल.\n"
 
 #: apps/apputil.c:542
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "आंतरिक PAM दोष`%s'।\n"
+msgstr "आंतरिक PAM त्रुटि`%s'.\n"
 
 #: apps/apputil.c:548
 #, c-format
 msgid "User mismatch.\n"
-msgstr "उपयोगकर्ता बेमेल।\n"
+msgstr "उपयोक्ता बेमेल.\n"
 
 #: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
 #: apps/luserdel.c:65 apps/lusermod.c:87
 msgid "[OPTION...] user"
-msgstr "[विकल्प...] उपयोगकर्ता"
+msgstr "[विकल्प...] उपयोक्ता"
 
 #: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
 #: apps/lpasswd.c:73 apps/luseradd.c:90 apps/luserdel.c:68 apps/lusermod.c:90
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "तर्कों को पदव्याख्या करने में दोष: %s।\n"
+msgstr "तर्कों को विश्लेषण करने में दोष: %s।\n"
 
 #: apps/lchage.c:146 apps/lpasswd.c:89 apps/luseradd.c:105 apps/luserdel.c:76
 #: apps/lusermod.c:101
 #, c-format
 msgid "No user name specified.\n"
-msgstr "कोई उपयोगकर्ता नाम विशेष नहीं किया गया।\n"
+msgstr "कोई उपयोक्ता नाम निर्दिष्ट नहीं किया गया.\n"
 
 #: apps/lchage.c:156 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:87
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
@@ -99,23 +99,23 @@ msgstr "कोई उपयोगकर्ता नाम विशेष न�
 #: apps/lusermod.c:111 samples/enum.c:64 samples/testuser.c:72
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr " %s प्रारंभिकीकरण दोष: %s।\n"
+msgstr " %s के प्रारंभिकीकरण में दोष: %s.\n"
 
 #: apps/lchage.c:165 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
 #: apps/luserdel.c:93 apps/lusermod.c:125
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "%s उपयोगकर्ता जीवंत नहीं है।\n"
+msgstr "%s उपयोक्ता जीवंत नहीं है.\n"
 
 #: apps/lchage.c:173
 #, c-format
 msgid "Account is locked.\n"
-msgstr "लेखा तालकित है।\n"
+msgstr "लेखा तालकित है.\n"
 
 #: apps/lchage.c:175
 #, c-format
 msgid "Account is not locked.\n"
-msgstr "लेखा तालकित नहीं है।\n"
+msgstr "लेखा तालकित नहीं है.\n"
 
 #: apps/lchage.c:180
 #, c-format
@@ -162,23 +162,23 @@ msgid "Account Expires:\t%s\n"
 msgstr "लेखे अंत:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "%s के लिए पुरानी जानकारी परिवर्तित करने में असफल।\n"
+msgstr "%s के लिए पुरानी जानकारी रूपांतरित करने में असफल: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
-msgstr "[विकल्प...] [उपयोगकर्ता]"
+msgstr "[विकल्प...] [उपयोक्ता]"
 
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "कोई उपयोगकर्ता नाम विशेष नहीं किया गया,uid %d के लिए नाम नहीं है।\n"
+msgstr "कोई उपयोक्ता नाम विशेष नहीं किया गया,uid %d के लिए नाम नहीं है.\n"
 
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "%s के लिए फिंगर जानकारी बदली जा रही है।\n"
+msgstr "%s के लिए फिंगर जानकारी बदली जा रही है.\n"
 
 #: apps/lchfn.c:156
 msgid "Full Name"
@@ -211,11 +211,11 @@ msgstr "ई-डाक पता"
 #: apps/lchfn.c:261
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr "फिंगर जानकारी नहीं बदली गई:  निवेश दोष।\n"
+msgstr "फिंगर जानकारी नहीं बदली गई:  निवेश दोष.\n"
 
 #: apps/lchfn.c:366
 msgid "Finger information changed.\n"
-msgstr "फिंगर जानकारी बदली गई।\n"
+msgstr "फिंगर जानकारी बदली गई.\n"
 
 #: apps/lchfn.c:369
 #, c-format
@@ -225,7 +225,7 @@ msgstr "फिंगर जानकारी नहीं बदली गई: 
 #: apps/lchsh.c:90
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr "%s के लिए शैल बदला जा रहा है।\n"
+msgstr "%s के लिए शैल बदला जा रहा है.\n"
 
 #: apps/lchsh.c:116
 msgid "New Shell"
@@ -233,12 +233,12 @@ msgstr "नया शैल"
 
 #: apps/lchsh.c:144
 msgid "Shell changed.\n"
-msgstr "शैल बदला गया।\n"
+msgstr "शैल बदला गया.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "शैल बदला गया।\n"
+msgstr "शैल नहीं बदला गया:%s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -247,62 +247,62 @@ msgstr "[विकल्प...] समूह"
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
 #, c-format
 msgid "No group name specified.\n"
-msgstr "कोई समूह नाम विशेष नहीं किया गया।\n"
+msgstr "कोई समूह नाम विशेष नहीं किया गया.\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "समूह का निर्माण असफल।\n"
+msgstr "समूह निर्माण असफल: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr "%s समूह जीवंत नहीं है।\n"
+msgstr "%s समूह उपस्थित नहीं है.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "समूह %s को विलोपित नहीं कर सका: %s।\n"
+msgstr "समूह %s को विलोपित नहीं कर सका: %s.\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "-L और -U विशिष्ट है।\n"
+msgstr "-L और -U दोनों निर्दिष्ट है. \n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s समूह के लिए शब्दकूट जमावट असफल।\n"
+msgstr "%s समूह के लिए शब्दकूट जमावट असफल: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "%s समूह को तालकित नहीं किया जा सकता।\n"
+msgstr "%s समूह को तालकित नहीं किया जा सकता: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "%s समूह को अतालकित नहीं किया जा सकता।\n"
+msgstr "%s समूह को अतालकित नहीं किया जा सकता: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "%s समूह को परिवर्तित नहीं कर सका: %s।\n"
+msgstr "%s समूह को परिवर्तित नहीं किया जा सका: %ss\n"
 
 #: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "%s के प्रयोग से कोई समूह नाम विशेष नहीं किया गया।\n"
+msgstr "%s के प्रयोग से कोई समूह नाम विशेष नहीं किया गया.\n"
 
 #: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "कोई समूह नाम विशेष नहीं किया गया,gid %d के लिए कोई नाम नहीं है।\n"
+msgstr "कोई समूह नाम निर्दिष्ट नहीं किया गया, gid %d के लिए कोई नाम नहीं है.\n"
 
 #: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "%s के प्रयोग से कोई उपयोगकर्ता नाम विशेष नहीं किया गया।\n"
+msgstr "%s के प्रयोग से कोई उपयोक्ता नाम निर्दिष्ट नहीं किया गया.\n"
 
 #: apps/lnewusers.c:74
 msgid "[OPTION...]"
@@ -311,21 +311,21 @@ msgstr "[विकल्प...]"
 #: apps/lnewusers.c:97
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "`%s' खोलने में दोष: %s।\n"
+msgstr "`%s' खोलने में त्रुटि: %s.\n"
 
 #: apps/lnewusers.c:131
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "`%s' के लिए लेखा बनाने में दोष: लाइन सही तरीके से संरूपित नहीं किया गया।\n"
+msgstr "`%s' के लिए लेखा बनाने में त्रुटि: लाइन सही तरीके से संरूपित नहीं किया गया.\n"
 
 #: apps/lnewusers.c:140
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 से लेखा बनाने के लिए इंकार कर रहा है\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "`%s': GID %ld से समूह बनाने में दोष\n"
+msgstr "`%s' GID से %ld के लिए समूह बनाने में त्रुटि: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -345,12 +345,12 @@ msgstr "%s के लिए डाक स्पूल बनाने में 
 #: apps/lnewusers.c:334
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "%s के लिए उपयोगकर्ता लेखा बनाने में दोष: %s\n"
+msgstr "%s के लिए उपयोक्ता लेखा बनाने में दोष: %s\n"
 
 #: apps/lpasswd.c:86
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "%s के लिए शब्दकूट बदला जा रहा है।\n"
+msgstr "%s के लिए शब्दकूट बदला जा रहा है.\n"
 
 #: apps/lpasswd.c:110
 msgid "New password"
@@ -363,17 +363,17 @@ msgstr "नया शब्दकूट (निश्चित करें)"
 #: apps/lpasswd.c:127
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr "शब्दकूट मिल नहीं रहे,पुन:प्रयास करें।\n"
+msgstr "शब्दकूट मिल नहीं रहे,पुन:प्रयास करें.\n"
 
 #: apps/lpasswd.c:132
 #, c-format
 msgid "Password change canceled.\n"
-msgstr "शब्दकूट बदलाव रद्द किया गया।\n"
+msgstr "शब्दकूट बदलाव रद्द किया गया.\n"
 
 #: apps/lpasswd.c:190
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "%s उपयोगकर्ता के लिए शब्दकूट जमावट दोष: %s।\n"
+msgstr "%s उपयोक्ता के लिए शब्दकूट जमावट दोष: %s।\n"
 
 #: apps/lpasswd.c:198
 #, c-format
@@ -383,12 +383,12 @@ msgstr "%s समूह के लिए शब्दकूट जमावट �
 #: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
-msgstr "शब्दकूट बदला गया।\n"
+msgstr "शब्दकूट बदला गया.\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "`%s' समूह बनाने में दोष।\n"
+msgstr "`%s' समूह बनाने में दोष: %s.\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -403,27 +403,27 @@ msgstr "%s बनाने में दोष: %s।\n"
 #: apps/luseradd.c:328
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr "डाक स्पूल बनाने में दोष।\n"
+msgstr "डाक स्पूल बनाने में दोष.\n"
 
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "उपयोगकर्ता %s को विलोपित नहीं कर सका: %s।\n"
+msgstr "उपयोक्ता %s को विलोपित नहीं कर सका: %s।\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s के gid अंक नहीं है।\n"
+msgstr "%s के gid अंक नहीं है.\n"
 
 #: apps/luserdel.c:123
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr "GID %ld का कोई जीवंत समूह नहीं है,नहीं हटा रहे हैं।\n"
+msgstr "GID %ld का कोई जीवंत समूह नहीं है,नहीं हटा रहे हैं.\n"
 
 #: apps/luserdel.c:129
 #, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "GID %ld समूह का कोई समूह नाम नहीं है।\n"
+msgstr "GID %ld समूह का कोई समूह नाम नहीं है.\n"
 
 #: apps/luserdel.c:138
 #, c-format
@@ -433,7 +433,7 @@ msgstr "समूह %s को विलोपित नहीं कर सक�
 #: apps/luserdel.c:152
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s की कोई home निर्देशिका नहीं है।\n"
+msgstr "%s की कोई home निर्देशिका नहीं है.\n"
 
 #: apps/luserdel.c:159
 #, c-format
@@ -443,22 +443,22 @@ msgstr "%s हटाने में दोष: %s।\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "%s उपयोगकर्ता के लिए शब्दकूट जमावट असफल: %s।\n"
+msgstr "%s उपयोक्ता के लिए शब्दकूट जमावट असफल: %s।\n"
 
 #: apps/lusermod.c:216
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s उपयोगकर्ता को तालकित नहीं कर सका: %s।\n"
+msgstr "%s उपयोक्ता को तालकित नहीं कर सका: %s।\n"
 
 #: apps/lusermod.c:224
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s उपयोगकर्ता को अतालकित नहीं कर सका: %s।\n"
+msgstr "%s उपयोक्ता को अतालकित नहीं कर सका: %s।\n"
 
 #: apps/lusermod.c:232
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s उपयोगकर्ता को परिवर्तित नहीं कर सका: %s।\n"
+msgstr "%s उपयोक्ता को परिवर्तित नहीं कर सका: %s।\n"
 
 #: apps/lusermod.c:285
 #, c-format
@@ -468,12 +468,12 @@ msgstr "%s समूह को परिवर्तित नहीं कर �
 #: apps/lusermod.c:295
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "%s की कोई पुरानी home निर्देशिका नहीं है।\n"
+msgstr "%s की कोई पुरानी home निर्देशिका नहीं है.\n"
 
 #: apps/lusermod.c:300
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "%s की कोई नई home निर्देशिका नहीं है।\n"
+msgstr "%s की कोई नई home निर्देशिका नहीं है.\n"
 
 #: apps/lusermod.c:306
 #, c-format
@@ -483,17 +483,17 @@ msgstr "%s से %s को चलाने में दोष: %s।\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "`%s' विन्यास संचिका खुल नहीं सकी: %s"
+msgstr "`%s' विन्यास फाइल खोल नहीं सका: %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "`%s' विन्यास संचिका खुल नहीं सकी: %s"
+msgstr "`%s' विन्यास फाइल stat नहीं कर सका: %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "`%s' विन्यास संचिका खुल नहीं सकी: %s"
+msgstr "`%s' विन्यास फाइल पढ़ नहीं सका: %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -517,19 +517,19 @@ msgstr "अभिगम निषेध"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr "बुरा उपयोगकर्ता/समूह नाम"
+msgstr "बुरा उपयोक्ता/समूह नाम"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr "बुरा उपयोगकर्ता/समूह id"
+msgstr "बुरा उपयोक्ता/समूह id"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "उपयोगकर्ता/समूह नाम प्रयोग में है"
+msgstr "उपयोक्ता/समूह नाम प्रयोग में है"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "उपयोगकर्ता/समूह id प्रयोग में है"
+msgstr "उपयोक्ता/समूह id प्रयोग में है"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
@@ -537,27 +537,27 @@ msgstr "अंतक गुण हस्तकौशल करने में �
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr "संचिका खुलने में दोष"
+msgstr "फाइल खुलने में दोष"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr "संचिका तालकित करने में दोष"
+msgstr "फाइल तालकित करने में दोष"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr "संचिका स्थाई करने में दोष"
+msgstr "फाइल स्थाई करने में दोष"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr "संचिका पढ़ने में दोष"
+msgstr "फाइल पढ़ने में दोष"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr "संचिका को लिखने में दोष"
+msgstr "फाइल को लिखने में दोष"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr "संचिका में आंकडा नहीं मिला"
+msgstr "फाइल में आंकडा नहीं मिला"
 
 #: lib/error.c:74
 msgid "internal initialization error"
@@ -577,7 +577,7 @@ msgstr "क्रमादेश-संग्रह/मॉड्यूल सं
 
 #: lib/error.c:85
 msgid "unknown error"
-msgstr "अनजान दोष"
+msgstr "अज्ञात दोष"
 
 #: lib/modules.c:97
 #, c-format
@@ -629,27 +629,27 @@ msgstr "नाम में अनुचित अक्षर `%c' समाह
 #: lib/util.c:212
 #, c-format
 msgid "error locking file: %s"
-msgstr "%s संचिका तालकित करने में दोष"
+msgstr "%s फाइल तालकित करने में दोष"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "`%s' को लिख नहीं सका: %s"
+msgstr "`%s' का सुरक्षा संदर्भ पा नहीं सका: %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "`%s' stat नहीं कर सका: %s"
+msgstr "मूलभूत सुरक्षा संदर्भ व्यवस्थित नहीं कर सका: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "`%s' को लिख नहीं सका: %s"
+msgstr "`%s' में मूलभूत सुरक्षा संदर्भ व्यवस्थित नहीं कर सका: %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "`%s' को लिख नहीं सका: %s"
+msgstr "`%s' में मूलभूत सुरक्षा संदर्भ पुनर्व्यवस्थित नहीं कर सका: %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -660,7 +660,7 @@ msgstr "`%s' को लिख नहीं सका: %s"
 #: modules/files.c:2562 modules/files.c:2577
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "`%s' खुल नहीं सका: %s"
+msgstr "`%s' खोल नहीं सका: %s"
 
 #: modules/files.c:185 modules/files.c:221 modules/files.c:259
 #: modules/files.c:896 modules/files.c:1370
@@ -676,7 +676,7 @@ msgstr "`%s' बनाने में दोष: %s"
 #: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "`%s' पूर्तिकर संचिका जीवंत है और एक नियमित संचिका नहीं है"
+msgstr "`%s' पूर्तिकर फाइल जीवंत है और एक नियमित फाइल नहीं है"
 
 #: modules/files.c:926 modules/files.c:1379
 #, c-format
@@ -685,7 +685,7 @@ msgstr "`%s' से पढ़ नहीं सका: %s"
 
 #: modules/files.c:935 modules/files.c:942
 msgid "entry already present in file"
-msgstr "संचिका में प्रविष्टि पहले से है"
+msgstr "फाइल में प्रविष्टि पहले से है"
 
 #: modules/files.c:949 modules/files.c:964 modules/files.c:1429
 #: modules/files.c:1437
@@ -700,9 +700,8 @@ msgid "entity object has no %s attribute"
 msgstr "सत्व अभिलक्ष्य का %s गुण नहीं है "
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "`%s' के लिए शब्दकूट जमावट दोष "
+msgstr "शब्दकूट गोपन में दोष "
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -710,12 +709,12 @@ msgstr "superuser विशेषाधिकार से निष्पाद
 
 #: modules/files.c:2927
 msgid "no shadow file present -- disabling"
-msgstr "कोई शेडो संचिका नहीं है -- असमर्थ कर रहा है"
+msgstr "कोई शेडो फाइल नहीं है -- असमर्थ कर रहा है"
 
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' सेवा के लिए `%s' क्षेञ में kadm5 परिसेवक से संमंधित करने में दोष: %s"
+msgstr "`%s' सेवा के लिए `%s' क्षेञ में kadm5 सर्वर से संमंधित करने में दोष: %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -726,7 +725,7 @@ msgstr "करबरोस क्रमावेश-संग्रह प्र
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "करबरोस के लिए `%s' उपयोगकर्ता नाम पद व्याख्या करने में दोष"
+msgstr "करबरोस के लिए `%s' उपयोक्ता नाम पद व्याख्या करने में दोष"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
@@ -781,24 +780,24 @@ msgstr "%d संस्करण को LDAP संदेशाचार जम�
 
 #: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
-msgstr "LDAP परिसेवक से TLS संंबंधित नहीं कर सका "
+msgstr "LDAP सर्वर से TLS संंबंधित नहीं कर सका "
 
 #: modules/ldap.c:405
 msgid "could not bind to LDAP server"
-msgstr "LDAP परिसेवक से जुड नहीं सका "
+msgstr "LDAP सर्वर से जुड नहीं सका "
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP परिसेवक से जुड नहीं सका "
+msgstr "LDAP सर्वर से जुड नहीं सका, पहले `%s' रूप में प्रयास करें: %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
-msgstr "LDAP परिसेवक में खोज नहीं कर सका "
+msgstr "LDAP सर्वर में खोज नहीं कर सका "
 
 #: modules/ldap.c:431
 msgid "LDAP server appears to have no root DSE"
-msgstr "ऐसा लगता है कि LDAP परिसेवक का root DSE नहीं है"
+msgstr "ऐसा लगता है कि LDAP सर्वर का root DSE नहीं है"
 
 #: modules/ldap.c:655 modules/ldap.c:1401 modules/ldap.c:1539
 #: modules/ldap.c:1600 modules/ldap.c:1715 modules/ldap.c:1811
@@ -812,31 +811,31 @@ msgstr "LDAP आधार विशिष्ट नाम को नाम प�
 #: modules/ldap.c:1378
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "उपयोगकर्ता अभिलक्ष्य का %s गुण नहीं था"
+msgstr "उपयोक्ता अभिलक्ष्य का %s गुण नहीं था"
 
 #: modules/ldap.c:1387
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "उपयोगकर्ता अभिलक्ष्य को `%s' के बिना बनाया गया था"
+msgstr "उपयोक्ता अभिलक्ष्य को `%s' के बिना बनाया गया था"
 
 #: modules/ldap.c:1412
 msgid "could not convert internal data to LDAPMods"
 msgstr "आंतरिक आंकडा को LDAPMods में बदल नहीं सका "
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "%s LDAP निर्देशिका पुन:नामित दोष \n"
+msgstr "LDAP निर्देशिका प्रविष्टि बनाने में त्रुटि: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "%s LDAP निर्देशिका परिवर्तन दोष "
+msgstr "LDAP निर्देशिका प्रविष्टि रूपांतरित करने में त्रुटि: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "%s LDAP निर्देशिका पुन:नामित दोष \n"
+msgstr "LDAP निर्देशिका प्रविष्टि के पुनर्नामकरण में त्रुटि: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -844,9 +843,9 @@ msgid "object had no %s attribute"
 msgstr "अभिलक्ष्य में %s गुण नहीं था"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "%s LDAP निर्देशिका हटाने में दोष।\n"
+msgstr "LDAP निर्देशिका प्रविष्टि को हटाने में त्रुटि: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -870,7 +869,7 @@ msgstr "%s के लिए LDAP निर्देशिका में शब
 
 #: modules/ldap.c:2469
 msgid "LDAP Server Name"
-msgstr "LDAP परिसेवक नाम "
+msgstr "LDAP सर्वर नाम "
 
 #: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
@@ -886,21 +885,21 @@ msgstr "LDAP बंधन शब्दकूट"
 
 #: modules/ldap.c:2494
 msgid "LDAP SASL User"
-msgstr "LDAP SASL उपयोगकर्ता"
+msgstr "LDAP SASL उपयोक्ता"
 
 #: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
-msgstr "LDAP SASL प्राधिकरण उपयोगकर्ता"
+msgstr "LDAP SASL प्राधिकरण उपयोक्ता"
 
 #: modules/sasldb.c:131
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "%s उपयोगकर्ता बनाने में सायरस SASL दोष"
+msgstr "%s उपयोक्ता बनाने में सायरस SASL दोष"
 
 #: modules/sasldb.c:135
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "%s उपयोगकर्ता हटाने में सायरस SASL दोष"
+msgstr "%s उपयोक्ता हटाने में सायरस SASL दोष"
 
 #: modules/sasldb.c:514 modules/sasldb.c:522
 #, c-format
@@ -909,19 +908,19 @@ msgstr "%s सायरस SASL प्रारंभिकीकरण दो�
 
 #: python/admin.c:504
 msgid "error creating home directory for user"
-msgstr "उपयोगकर्ता के लिए home निर्देशिका बनाने में दोष"
+msgstr "उपयोक्ता के लिए home निर्देशिका बनाने में दोष"
 
 #: python/admin.c:557
 msgid "error removing home directory for user"
-msgstr "उपयोगकर्ता के लिए home निर्देशिका हटाने में दोष"
+msgstr "उपयोक्ता के लिए home निर्देशिका हटाने में दोष"
 
 #: python/admin.c:635
 msgid "error moving home directory for user"
-msgstr "उपयोगकर्ता के लिए home निर्देशिका चलाने में दोष"
+msgstr "उपयोक्ता के लिए home निर्देशिका चलाने में दोष"
 
 #: python/admin.c:668
 msgid "error creating mail spool for user"
-msgstr "उपयोगकर्ता के लिए डाक स्पूल बनाने में दोष"
+msgstr "उपयोक्ता के लिए डाक स्पूल बनाने में दोष"
 
 #: samples/lookup.c:64
 #, c-format
@@ -931,65 +930,48 @@ msgstr "%s प्रारंभिकीकरण दोष: %s\n"
 #: samples/lookup.c:74
 #, c-format
 msgid "Searching for group with ID %d.\n"
-msgstr "ID %d समूह की खोज हो रही है।\n"
+msgstr "ID %d समूह की खोज हो रही है.\n"
 
 #: samples/lookup.c:78
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "%s नामित समूह के लिए खोज हो रही है।\n"
+msgstr "%s नामित समूह के लिए खोज हो रही है.\n"
 
 #: samples/lookup.c:86
 #, c-format
 msgid "Searching for user with ID %d.\n"
-msgstr "ID %d उपयोगकर्ता के लिए खोज हो रही है।\n"
+msgstr "ID %d उपयोक्ता के लिए खोज हो रही है.\n"
 
 #: samples/lookup.c:89
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "%s नामित उपयोगकर्ता के लिए खोज हो रही है।\n"
+msgstr "%s नामित उपयोक्ता के लिए खोज हो रही है.\n"
 
 #: samples/lookup.c:103
 msgid "Entry not found.\n"
-msgstr "प्रविष्टि नहीं मिली।\n"
+msgstr "प्रविष्टि नहीं मिली.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "प्रांप्ट सफल हुआ.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "प्रांप्ट विफल हुआ.\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
-msgstr "निर्धारित उपयोगकर्ता अभिलक्ष्य वर्गों:\n"
+msgstr "मूलभूत उपयोक्ता अभिलक्ष्य वर्गों:\n"
 
 #: samples/testuser.c:83
 msgid "Default user attribute names:\n"
-msgstr "निर्धारित उपयोगकर्ता गुण नाम:\n"
+msgstr "मूलभूत उपयोक्ता गुण नाम:\n"
 
 #: samples/testuser.c:89
 msgid "Getting default user attributes:\n"
-msgstr "निर्धारित उपयोगकर्ता गुण ले रहे हैं:\n"
+msgstr "मूलभूत उपयोक्ता गुण ले रहे हैं:\n"
 
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
-msgstr "उपयोगकर्ता संरचना प्रतिलिपि कर रहा है:\n"
+msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
 
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "%s उपयोगकर्ता बनाने में सायरस SASL दोष: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "%s उपयोगकर्ता हटाने में सायरस SASL दोष: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "%s प्रारंभिकीकरण दोष।\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "%s समूह को विलोपित नहीं कर सके।\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "%s समूह को परिवर्तित नहीं किया जा सकता।\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "मॉड्यूल प्रारंभिकीकरण दोष"
