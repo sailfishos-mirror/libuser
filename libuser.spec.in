@@ -54,7 +54,7 @@ rm -fr $RPM_BUILD_ROOT
 %{_libdir}/libuser.so.*.*
 %{_libdir}/libuser_quota.so.*.*
 %{_libdir}/%{name}/*.so
-#%{_sbindir}/*
+%{_sbindir}/*
 
 %files devel
 %defattr(-,root,root)
@@ -72,6 +72,7 @@ rm -fr $RPM_BUILD_ROOT
 - actually make the new optional arguments optional
 - fix lu_error_new() to actually report errors right
 - fix part of the python bindings
+- include tools in the binary package again
 
 * Fri Jul 20 2001 Nalin Dahyabhai <nalin@redhat.com>
 - finish home directory population
