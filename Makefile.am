@@ -1,5 +1,5 @@
 SUBDIRS = po docs lib apps samples python modules
-EXTRA_DIST = libuser.spec libuser-selinux.patch
+EXTRA_DIST = libuser.spec
 sysconf_DATA = libuser.conf
 pkgconfigdir = $(libdir)/pkgconfig
 
