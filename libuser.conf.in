@@ -38,3 +38,7 @@ directory = @sysconfdir@
 
 [shadow]
 directory = @sysconfdir@
+
+[ldap]
+userBranch = ou=People
+groupBranch = ou=Groups

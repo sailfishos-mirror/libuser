@@ -147,15 +147,6 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 
 	ctx->modules = g_hash_table_new(g_str_hash, lu_str_case_equal);
 
-	if(auth_modules == NULL) {
-		modules = lu_cfg_read(ctx, "defaults/auth_modules", "");
-		if(modules) {
-			auth_modules = modules->data;
-			g_list_free(modules);
-		}
-	}
-	lu_module_load(ctx, auth_modules, &ctx->auth_module_names);
-
 	if(info_modules == NULL) {
 		modules = lu_cfg_read(ctx, "defaults/info_modules", "");
 		if(modules) {
@@ -164,6 +155,15 @@ lu_start(const char *auth_name, enum lu_type auth_type,
 		}
 	}
 	lu_module_load(ctx, info_modules, &ctx->info_module_names);
+
+	if(auth_modules == NULL) {
+		modules = lu_cfg_read(ctx, "defaults/auth_modules", "");
+		if(modules) {
+			auth_modules = modules->data;
+			g_list_free(modules);
+		}
+	}
+	lu_module_load(ctx, auth_modules, &ctx->auth_module_names);
 
 	return ctx;
 }
@@ -299,10 +299,39 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 	lu_ent_copy(ent, tmp);
 
 	switch(id) {
-		case user_lookup_name:
 		case user_lookup_id:
-		case group_lookup_name:
 		case group_lookup_id:
+			if(run_list(context, context->info_module_names,
+				    info, id, tmp, data)) {
+				/* Got a match on that ID, convert it to a
+				 * name and look it up by name. */
+				GList *value = NULL;
+				const char *attr = NULL;
+				g_assert((id == user_lookup_id) ||
+					 (id == group_lookup_id));
+				if(id == user_lookup_id) {
+					attr = LU_USERNAME;
+					id = user_lookup_name;
+				}
+				if(id == group_lookup_id) {
+					attr = LU_GROUPNAME;
+					id = group_lookup_name;
+				}
+				value = lu_ent_get_original(tmp, attr);
+				if(value && value->data) {
+					data = ent->vcache->cache(ent->vcache,
+								  value->data);
+				} else {
+					break;
+				}
+			} else {
+				/* No match on that ID. */
+				break;
+			}
+		case user_lookup_name:
+		case group_lookup_name:
+			g_assert((id == user_lookup_name) ||
+				 (id == group_lookup_name));
 			if(run_list(context, context->info_module_names, info, id, tmp, data) &&
 			   run_list(context, context->auth_module_names, auth, id, tmp, data)) {
 				lu_ent_copy(tmp, ent);
@@ -321,14 +350,14 @@ lu_dispatch(struct lu_context *context, enum lu_dispatch_id id,
 		case user_del:
 		case group_mod:
 		case group_del:
-			auth_module = g_hash_table_lookup(context->modules,
-							  tmp->source_auth);
 			info_module = g_hash_table_lookup(context->modules,
 							  tmp->source_info);
-			g_assert(auth_module != NULL);
+			auth_module = g_hash_table_lookup(context->modules,
+							  tmp->source_auth);
 			g_assert(info_module != NULL);
-			if(run_single(context, auth_module, auth, id, tmp, data) &&
-			   run_single(context, info_module, info, id, tmp, data)) {
+			g_assert(auth_module != NULL);
+			if(run_single(context, info_module, auth, id, tmp, data) &&
+			   run_single(context, auth_module, info, id, tmp, data)) {
 				success = TRUE;
 			}
 			break;
@@ -370,53 +399,19 @@ lu_group_lookup_name(struct lu_context *context, const char *name,
 gboolean
 lu_user_lookup_id(struct lu_context *context, uid_t uid, struct lu_ent *ent)
 {
-	struct lu_ent *tmp = NULL;
-	gboolean success;
-
-	g_return_val_if_fail(context != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	tmp = lu_ent_new();
-	success = lu_dispatch(context,
-			      user_lookup_id,
-			      GINT_TO_POINTER(uid),
-			      tmp);
-	if(success && lu_ent_get(tmp, "cn")) {
-		GList *list = lu_ent_get(tmp, "cn");
-		success = lu_dispatch(context,
-				      user_lookup_name,
-				      list->data,
-				      tmp);
-		lu_ent_copy(tmp, ent);
-	}
-	lu_ent_free(tmp);
-	return success;
+	return lu_dispatch(context,
+			   user_lookup_id,
+			   (gpointer)uid,
+			   ent);
 }
 
 gboolean
 lu_group_lookup_id(struct lu_context *context, gid_t gid, struct lu_ent *ent)
 {
-	struct lu_ent *tmp = NULL;
-	gboolean success;
-
-	g_return_val_if_fail(context != NULL, FALSE);
-	g_return_val_if_fail(ent != NULL, FALSE);
-
-	tmp = lu_ent_new();
-	success = lu_dispatch(context,
-			      group_lookup_id,
-			      GINT_TO_POINTER(gid),
-			      tmp);
-	if(success && lu_ent_get(tmp, "cn")) {
-		GList *list = lu_ent_get(tmp, "cn");
-		success = lu_dispatch(context,
-				      group_lookup_name,
-				      list->data,
-				      tmp);
-		lu_ent_copy(tmp, ent);
-	}
-	lu_ent_free(tmp);
-	return success;
+	return lu_dispatch(context,
+			   group_lookup_id,
+			   (gpointer)gid,
+			   ent);
 }
 
 gboolean

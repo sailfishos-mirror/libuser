@@ -133,7 +133,18 @@ files are to be stored in.
 <sect2>krb5
 
 <p>The krb5 module implements only an authentication data store using
-a connection to the Kerberos realm's administrative server.
+a connection to the Kerberos realm's administrative server and the kadmin
+protocols.
+
+</sect2>
+
+<sect2>ldap
+
+<p>The ldap module implements both information and authentication data stores
+using an LDAP directory and a schema which (should) conform to RFC2307.  The
+module expects the client and server to support access using LDAPv3 with TLS.
+Currently only simple binds are implemented.  (SASL binding will be supported
+later on.)
 
 </sect2>
 

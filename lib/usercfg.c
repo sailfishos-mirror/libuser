@@ -166,6 +166,11 @@ lu_cfg_read(struct lu_context *context, const char *key,
 				g_free(tmp);
 			}
 		}
+		if(ret == NULL) {
+			if(default_value) {
+				ret = g_list_append(ret, (char*)default_value);
+			}
+		}
 	}
 
 	return ret;

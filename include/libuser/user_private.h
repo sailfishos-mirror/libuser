@@ -52,12 +52,24 @@ enum lu_module_type {
 	info,
 };
 
+struct lu_context {
+	struct lu_string_cache *scache;
+	char *auth_name;
+	enum lu_type auth_type;
+	void *config;
+	lu_prompt_fn *prompter;
+	gpointer prompter_data;
+	GList *auth_module_names;
+	GList *info_module_names;
+	GHashTable *modules;
+};
+
 struct lu_module {
 	u_int32_t version;
 	GModule *module_handle;
 	struct lu_string_cache *scache;
 	const char *name;
-	void *lu_context;
+	struct lu_context *lu_context;
 	void *module_context;
 	gboolean (*user_lookup_name)(struct lu_module *module,
 				     gconstpointer name,
@@ -85,18 +97,6 @@ struct lu_module {
 	gboolean (*group_unlock)(struct lu_module *module, struct lu_ent *ent);
 
 	gboolean (*close)(struct lu_module *module);
-};
-
-struct lu_context {
-	struct lu_string_cache *scache;
-	char *auth_name;
-	enum lu_type auth_type;
-	void *config;
-	lu_prompt_fn *prompter;
-	gpointer prompter_data;
-	GList *auth_module_names;
-	GList *info_module_names;
-	GHashTable *modules;
 };
 
 typedef struct lu_module * (*lu_module_init_t)(struct lu_context *context);

@@ -1,0 +1,14 @@
+Easy:
+* Get SASL binds working with LDAP.
+
+Medium:
+* Implement account locking in LDAP and Kerberos 5.
+* Add the -o option to luseradd/lusermod/lgroupadd/lgroupmod.
+* Write an NIS back-end to interface with yppasswdd.
+
+Hard:
+* Add the -m (move home directory) flag to usermod.
+* Add the -r option to luserdel.
+* Add creation and population of home directories to lusermod.
+* Implement an lgpasswd command for local group administration (probably
+  would have to be setuid, ugh).

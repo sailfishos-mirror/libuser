@@ -30,9 +30,7 @@ files useful for developing applications with libuser.
 %build
 %configure
 make
-pushd docs/sgml
-make
-popd
+make -C docs/sgml
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -64,7 +62,11 @@ rm -fr $RPM_BUILD_ROOT
 #%{_libdir}/libuser/*.la
 
 %changelog
+* Wed Jan  3 2001 Nalin Dahyabhai <nalin@redhat.com>
+- fix naming attribute for users (should be uid, not gid)
+- refine the search-by-id,convert-to-name,search-by-name logic
+- fix handling of defaults when the config file is read in but contains no value
+- implement an LDAP information store
+
 * Tue Jan  2 2001 Nalin Dahyabhai <nalin@redhat.com>
 - initial packaging
-- implement LDAP back-end
-- fix naming attribute for users (should be uid, not gid)
