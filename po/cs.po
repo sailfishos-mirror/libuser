@@ -2,14 +2,15 @@
 #
 # Czech translation for libuser
 # Copyright (C) 2001 Free Software Foundation, Inc.
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
 # Milan Kerslager <kerslage@linux.cz>, 2002
-# Miloslav Trmac <mitr@volny.cz>, 2002, 2003.
+# Miloslav Trmac <mitr@volny.cz>, 2002, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.0\n"
 "POT-Creation-Date: 2003-02-24 23:52-0500\n"
-"PO-Revision-Date: 2003-02-25 21:01+0100\n"
+"PO-Revision-Date: 2004-07-25 17:10+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -670,7 +671,7 @@ msgstr "chyba při spojování s kadm5 serverem pro službu '%s' v realm '%s': %
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "chyba při inicializaci kerberos knihoven"
+msgstr "chyba při inicializaci knihovny kerberos"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
