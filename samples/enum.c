@@ -71,7 +71,9 @@ main(int argc, char **argv)
 			group ? "group" : "user",
 			g_value_get_string(name));
 	}
-	g_value_array_free(names);
+	if (names != NULL) {
+		g_value_array_free(names);
+	}
 
 	lu_end(lu);
 

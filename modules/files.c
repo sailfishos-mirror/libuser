@@ -1668,7 +1668,7 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	g_assert(module != NULL);
 	g_assert(base_name != NULL);
 	g_assert(strlen(base_name) > 0);
-	g_assert(pattern != NULL);
+	pattern = pattern ?: "*";
 
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
@@ -2093,6 +2093,20 @@ lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
 }
 
 static gboolean
+lu_files_uses_elevated_privileges(struct lu_module *module)
+{
+	/* FIXME: actually check file permissions. */
+	return TRUE;
+}
+
+static gboolean
+lu_shadow_uses_elevated_privileges(struct lu_module *module)
+{
+	/* FIXME: actually check file permissions. */
+	return TRUE;
+}
+
+static gboolean
 close_module(struct lu_module *module)
 {
 	g_return_val_if_fail(module != NULL, FALSE);
@@ -2125,6 +2139,8 @@ libuser_files_init(struct lu_context *context,
 	ret->name = ret->scache->cache(ret->scache, "files");
 
 	/* Set the method pointers. */
+	ret->uses_elevated_privileges = lu_files_uses_elevated_privileges;
+
 	ret->user_lookup_name = lu_files_user_lookup_name;
 	ret->user_lookup_id = lu_files_user_lookup_id;
 
@@ -2136,6 +2152,8 @@ libuser_files_init(struct lu_context *context,
 	ret->user_unlock = lu_files_user_unlock;
 	ret->user_is_locked = lu_files_user_is_locked;
 	ret->user_setpass = lu_files_user_setpass;
+	ret->users_enumerate = lu_files_users_enumerate;
+	ret->users_enumerate_by_group = lu_files_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_files_users_enumerate_full;
 	ret->users_enumerate_by_group_full = lu_files_users_enumerate_by_group_full;
 
@@ -2162,8 +2180,8 @@ libuser_files_init(struct lu_context *context,
 }
 
 struct lu_module *
-lu_shadow_init(struct lu_context *context,
-	       struct lu_error **error)
+libuser_shadow_init(struct lu_context *context,
+	            struct lu_error **error)
 {
 	struct lu_module *ret = NULL;
 	struct stat st;
@@ -2202,6 +2220,8 @@ lu_shadow_init(struct lu_context *context,
 	ret->name = ret->scache->cache(ret->scache, "shadow");
 
 	/* Set the method pointers. */
+	ret->uses_elevated_privileges = lu_shadow_uses_elevated_privileges;
+
 	ret->user_lookup_name = lu_shadow_user_lookup_name;
 	ret->user_lookup_id = lu_shadow_user_lookup_id;
 

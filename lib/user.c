@@ -195,8 +195,6 @@ run_single(struct lu_context *context,
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		return module->user_setpass(module, entity, sdata, error);
 	case users_enumerate:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate(module, sdata, error);
 		return TRUE;
@@ -210,8 +208,6 @@ run_single(struct lu_context *context,
 							error);
 		return TRUE;
 	case users_enumerate_full:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate_full(module, sdata, error);
 		return TRUE;
@@ -259,8 +255,6 @@ run_single(struct lu_context *context,
 		return module->group_setpass(module, entity,
 					     sdata, error);
 	case groups_enumerate:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate(module, sdata, error);
 		return TRUE;
@@ -274,8 +268,6 @@ run_single(struct lu_context *context,
 							error);
 		return TRUE;
 	case groups_enumerate_full:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate_full(module, sdata, error);
 		return TRUE;
@@ -336,20 +328,27 @@ run_list(struct lu_context *context,
 	g_assert(logic_function != NULL);
 	g_assert((id == user_lookup_name) ||
 		 (id == user_lookup_id) ||
-		 (id == user_add) ||
 		 (id == user_add_prep) ||
+		 (id == user_add) ||
 		 (id == user_mod) ||
 		 (id == user_del) ||
+		 (id == user_lock) ||
+		 (id == user_unlock) ||
+		 (id == user_is_locked) ||
 		 (id == users_enumerate) ||
 		 (id == users_enumerate_by_group) ||
 		 (id == users_enumerate_full) ||
 		 (id == users_enumerate_by_group_full) ||
 		 (id == group_lookup_name) ||
 		 (id == group_lookup_id) ||
-		 (id == group_add) ||
 		 (id == group_add_prep) ||
+		 (id == group_add) ||
 		 (id == group_mod) ||
 		 (id == group_del) ||
+		 (id == group_lock) ||
+		 (id == group_unlock) ||
+		 (id == group_is_locked) ||
+		 (id == users_enumerate) ||
 		 (id == groups_enumerate) ||
 		 (id == groups_enumerate_by_user) ||
 		 (id == groups_enumerate_full) ||
@@ -375,13 +374,15 @@ run_list(struct lu_context *context,
 				if(value_array == NULL) {
 					value_array = g_value_array_new(0);
 				}
-				for(j = 0; j < tmp_value_array->n_values; i++) {
-					value = g_value_array_get_nth(tmp_value_array,
-								      j);
-					g_value_array_append(value_array,
-							     value);
+				if (tmp_value_array != NULL) {
+					for (j = 0; j < tmp_value_array->n_values; j++) {
+						value = g_value_array_get_nth(tmp_value_array,
+									      j);
+						g_value_array_append(value_array,
+								     value);
+					}
+					g_value_array_free(tmp_value_array);
 				}
-				g_value_array_free(tmp_value_array);
 				*ret = value_array;
 				break;
 			case users_enumerate_full:
@@ -392,12 +393,14 @@ run_list(struct lu_context *context,
 				if(ptr_array == NULL) {
 					ptr_array = g_ptr_array_new();
 				}
-				for(j = 0; j < tmp_ptr_array->len; j++) {
-					tmp_ent = g_ptr_array_index(tmp_ptr_array,
-								    j);
-					g_ptr_array_add(ptr_array, tmp_ent);
+				if (tmp_ptr_array != NULL) {
+					for (j = 0; j < tmp_ptr_array->len; j++) {
+						tmp_ent = g_ptr_array_index(tmp_ptr_array,
+									    j);
+						g_ptr_array_add(ptr_array, tmp_ent);
+					}
+					g_ptr_array_free(tmp_ptr_array, TRUE);
 				}
-				g_ptr_array_free(tmp_ptr_array, TRUE);
 				*ret = ptr_array;
 				break;
 			case user_lookup_name:
@@ -441,13 +444,16 @@ lu_dispatch(struct lu_context *context,
 	GValueArray *values = NULL;
 	GPtrArray *ptrs = NULL;
 	GValue *value = NULL;
+	gpointer scratch = NULL;
 
 	LU_ERROR_CHECK(error);
 
 	g_assert(context != NULL);
 
 	tmp = lu_ent_new();
-	lu_ent_copy(entity, tmp);
+	if (entity != NULL) {
+		lu_ent_copy(entity, tmp);
+	}
 
 	success = FALSE;
 
@@ -456,7 +462,7 @@ lu_dispatch(struct lu_context *context,
 	case group_lookup_id:
 		if(run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, NULL, error)) {
+			    sdata, ldata, tmp, &scratch, error)) {
 			/* Got a match on that ID, convert it to a
 			 * name and look it up by name. */
 			const char *attr = NULL;
@@ -486,9 +492,11 @@ lu_dispatch(struct lu_context *context,
 	case group_lookup_name:
 		if(run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, NULL, error)) {
-			lu_ent_copy(tmp, entity);
-			lu_ent_revert(entity);
+			    sdata, ldata, tmp, &scratch, error)) {
+			if (entity != NULL) {
+				lu_ent_copy(tmp, entity);
+				lu_ent_revert(entity);
+			}
 			success = TRUE;
 		}
 		break;
@@ -496,8 +504,10 @@ lu_dispatch(struct lu_context *context,
 	case group_add_prep:
 		if(run_list(context, context->create_module_names,
 			    logic_and, id,
-			    sdata, ldata, tmp, NULL, error)) {
-			lu_ent_copy(tmp, entity);
+			    sdata, ldata, tmp, &scratch, error)) {
+			if (entity != NULL) {
+				lu_ent_copy(tmp, entity);
+			}
 			success = TRUE;
 		}
 		break;
@@ -505,8 +515,10 @@ lu_dispatch(struct lu_context *context,
 	case group_add:
 		if(run_list(context, context->create_module_names,
 			    logic_and, id,
-			    sdata, ldata, tmp, NULL, error)) {
-			lu_ent_copy(tmp, entity);
+			    sdata, ldata, tmp, &scratch, error)) {
+			if (entity != NULL) {
+				lu_ent_copy(tmp, entity);
+			}
 			success = TRUE;
 		}
 		break;
@@ -522,9 +534,10 @@ lu_dispatch(struct lu_context *context,
 	case group_lock:
 	case group_unlock:
 	case group_is_locked:
+		g_assert(entity != NULL);
 		if(run_list(context, entity->modules,
 			    logic_and, id,
-			    sdata, ldata, tmp, NULL, error)) {
+			    sdata, ldata, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
 		}
@@ -554,7 +567,7 @@ lu_dispatch(struct lu_context *context,
 	case uses_elevated_privileges:
 		if(run_list(context, context->module_names,
 			    logic_or, id,
-			    sdata, ldata, tmp, NULL, error)) {
+			    sdata, ldata, tmp, &scratch, error)) {
 			success = TRUE;
 		}
 		break;
@@ -568,10 +581,12 @@ lu_dispatch(struct lu_context *context,
 		switch (id) {
 			case user_lookup_id:
 			case user_lookup_name:
+				g_assert(entity != NULL);
 				entity->type = lu_user;
 				break;
 			case group_lookup_name:
 			case group_lookup_id:
+				g_assert(entity != NULL);
 				entity->type = lu_group;
 				break;
 			default:
