@@ -22,7 +22,7 @@ PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
-ALL_LINGUAS="cs da de es fr is it ja ko no ru sl sv tr"
+ALL_LINGUAS="cs da de es fr is it ja ko no pt ru sl sv tr"
 AM_GNU_GETTEXT
 
 AM_MAINTAINER_MODE
