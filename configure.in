@@ -151,6 +151,18 @@ AC_ARG_WITH([python-path],
 			[directory headers for your version of Python are in]),
 	    [PYTHON_INC=$withval])
 
+
+AC_ARG_WITH([selinux],
+	    AS_HELP_STRING([--with-selinux],
+			   [work with SELinux extensions (default is NO)]),
+	    [selinux=$withval], [selinux=no])
+if test "x$selinux" != xno ; then
+    SELINUX_LIBS=-lselinux
+    AC_DEFINE([WITH_SELINUX], [1], [Define to 1 to use SELinux extensions])
+fi
+AC_SUBST(SELINUX_LIBS)
+   
+
 AC_ARG_ENABLE([quota],
 	      AS_HELP_STRING([--enable-quota],
 			     [provide support for configuring quotas]),

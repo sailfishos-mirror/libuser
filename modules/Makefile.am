@@ -11,7 +11,7 @@ pkginclude_HEADERS = default.-c
 pkglib_LTLIBRARIES = $(MODULES:.so=.la)
 
 AM_LDFLAGS = -module -avoid-version -export-dynamic -rpath '$(pkglibdir)' \
-	@GOBJECT_LIBS@ ../lib/libuser.la
+	@GOBJECT_LIBS@ ../lib/libuser.la @SELINUX_LIBS@
 
 libuser_files_la_SOURCES = files.c
 libuser_shadow_la_SOURCES = files.c

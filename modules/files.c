@@ -32,6 +32,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#else
+typedef char security_context_t; /* "Something" */
+#endif
 #include "../lib/user_private.h"
 #include "default.-c"
 
@@ -86,6 +91,63 @@ static const struct format_specifier format_gshadow[] = {
 	{3, LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
 	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
+
+static gboolean
+set_default_context(const char *filename, security_context_t *prev_context,
+		    struct lu_error **error)
+{
+	(void)filename;
+	(void)prev_context;
+	(void)error;
+#ifdef WITH_SELINUX
+	if (is_selinux_enabled() > 0) {
+		security_context_t scontext;
+
+		if (getfilecon(filename, &scontext) < 0) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_stat, "couldn't get "
+				     "security context of `%s': %s", filename,
+				     strerror(errno));
+			return FALSE;
+		}
+		if (getfscreatecon(prev_context) < 0) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_stat, "couldn't set "
+				     "default security context: %s",
+				     strerror(errno));
+			freecon(scontext);
+			return FALSE;
+		}
+		if (setfscreatecon(scontext) < 0) {
+			/* FIXME: STRING_FREEZE */
+			lu_error_new(error, lu_error_stat, "couldn't set "
+				     "default security context to `%s': %s",
+				     scontext, strerror(errno));
+			freecon(scontext);
+			return FALSE;
+		}
+		freecon(scontext);
+	}
+#endif
+	return TRUE;
+}
+
+static void
+reset_default_context(security_context_t prev_context, struct lu_error **error)
+{
+	(void)prev_context;
+	(void)error;
+#ifdef WITH_SELINUX
+	if (setfscreatecon(prev_context) < 0)
+		/* FIXME: STRING_FREEZE */
+		lu_error_new(error, lu_error_stat,
+			     "couldn't reset default security context to "
+			     "`%s': %s", prev_context, strerror(errno));
+	if (prev_context) {
+		freecon(prev_context);
+	}
+#endif
+}
 
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
@@ -785,6 +847,7 @@ generic_add(struct lu_module *module, const char *base_name,
 	    format_fn formatter, struct lu_ent *ent,
 	    struct lu_error **error)
 {
+	security_context_t prev_context;
 	const char *dir;
 	char *key, *line, *filename, *contents;
 	char *fragment1, *fragment2;
@@ -807,11 +870,14 @@ generic_add(struct lu_module *module, const char *base_name,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	/* Create a backup copy of the file we're about to modify. */
-	if (lu_files_create_backup(filename, error) == FALSE) {
+	if (!set_default_context(filename, &prev_context, error)) {
 		g_free(filename);
 		return FALSE;
 	}
+
+	/* Create a backup copy of the file we're about to modify. */
+	if (lu_files_create_backup(filename, error) == FALSE)
+		goto err_filename;
 
 	/* Open the file. */
 	fd = open(filename, O_RDWR);
@@ -819,31 +885,24 @@ generic_add(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* Read the file's size. */
 	if (fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
+		goto err_lock;
 	}
 
 	/* Generate a new line with the right data in it, and allocate space
 	 * for the contents of the file. */
-	line = formatter(ent);
+	line = formatter(ent); /* FIXME: free? */
 	contents = g_malloc0(st.st_size + 1);
 
 	/* We sanity-check here to make sure that the entity isn't already
@@ -868,13 +927,7 @@ generic_add(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"),
 			     filename, strerror(errno));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(fragment1);
-		g_free(fragment2);
-		g_free(contents);
-		g_free(filename);
-		return FALSE;
+		goto err_fragment2;
 	}
 
 	/* Check if the beginning of the file is the same as the beginning
@@ -882,26 +935,14 @@ generic_add(struct lu_module *module, const char *base_name,
 	if (strncmp(contents, fragment1, strlen(fragment1)) == 0) {
 		lu_error_new(error, lu_error_generic,
 			     _("entry already present in file"));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(fragment1);
-		g_free(fragment2);
-		g_free(contents);
-		g_free(filename);
-		return FALSE;
+		goto err_fragment2;
 	} else
 	/* If not, search for a newline followed by the beginning of
 	 * the entry. */
 	if (strstr(contents, fragment2) != NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("entry already present in file"));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(fragment1);
-		g_free(fragment2);
-		g_free(contents);
-		g_free(filename);
-		return FALSE;
+		goto err_fragment2;
 	}
 	/* Hooray, we can add this entry at the end of the file. */
 	offset = lseek(fd, 0, SEEK_END);
@@ -909,13 +950,7 @@ generic_add(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"),
 			     filename, strerror(errno));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(fragment1);
-		g_free(fragment2);
-		g_free(contents);
-		g_free(filename);
-		return FALSE;
+		goto err_fragment2;
 	}
 	/* If the last byte in the file isn't a newline, add one, and silently
 	 * curse people who use text editors (which shall remain unnamed) which
@@ -934,24 +969,23 @@ generic_add(struct lu_module *module, const char *base_name,
 		/* Truncate off whatever we actually managed to write and
 		 * give up. */
 		ftruncate(fd, offset);
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(fragment1);
-		g_free(fragment2);
-		g_free(contents);
-		g_free(filename);
-		return FALSE;
-	} else {
-		/* Hey, it succeeded. */
-		ret = TRUE;
+		goto err_fragment2;
 	}
-	g_free(fragment1);
-	g_free(fragment2);
-	g_free(contents);
-	lu_util_lock_free(lock);
-	close(fd);
-	g_free(filename);
+	/* Hey, it succeeded. */
+	ret = TRUE;
+	/* Fall through */
 
+ err_fragment2:
+	g_free(fragment2);
+	g_free(fragment1);
+	g_free(contents);
+ err_lock:
+	lu_util_lock_free(lock);
+ err_fd:
+	close(fd);
+ err_filename:
+	g_free(filename);
+	reset_default_context(prev_context, error);
 	return ret;
 }
 
@@ -1064,6 +1098,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	    const struct format_specifier *formats, size_t format_count,
 	    struct lu_ent *ent, struct lu_error **error)
 {
+	security_context_t prev_context;
 	char *filename = NULL, *key = NULL;
 	int fd = -1;
 	gpointer lock;
@@ -1091,8 +1126,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 				     LU_USERNAME);
 			return FALSE;
 		}
-	} else
-	if (ent->type == lu_group) {
+	} else if (ent->type == lu_group) {
 		names = lu_ent_get_current(ent, LU_GROUPNAME);
 		if (names == NULL) {
 			lu_error_new(error, lu_error_generic,
@@ -1100,9 +1134,8 @@ generic_mod(struct lu_module *module, const char *base_name,
 				     LU_GROUPNAME);
 			return FALSE;
 		}
-	} else {
+	} else
 		g_assert_not_reached();
-	}
 
 	/* Generate the name of the file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
@@ -1110,11 +1143,13 @@ generic_mod(struct lu_module *module, const char *base_name,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	/* Create a backup file. */
-	if (lu_files_create_backup(filename, error) == FALSE) {
+	if (!set_default_context(filename, &prev_context, error)) {
 		g_free(filename);
 		return FALSE;
 	}
+	/* Create a backup file. */
+	if (lu_files_create_backup(filename, error) == FALSE)
+		goto err_filename;
 
 	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
@@ -1122,19 +1157,17 @@ generic_mod(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* We iterate over all of the fields individually. */
 	for (i = 0; i < format_count; i++) {
+		gboolean ret2;
+
 		/* Read the values, and format them as a field. */
 		values = lu_ent_get(ent, formats[i].attribute);
 		new_value = NULL;
@@ -1173,25 +1206,23 @@ generic_mod(struct lu_module *module, const char *base_name,
 		if ((formats[i].suppress_if_def == TRUE) &&
 		    (formats[i].def != NULL) &&
 		    (strcmp(formats[i].def, new_value) == 0)) {
-			ret = lu_util_field_write(fd, g_value_get_string(value),
-						  formats[i].position,
-						  "", error);
+			ret2 = lu_util_field_write(fd,
+						   g_value_get_string(value),
+						   formats[i].position,
+						   "", error);
 		} else {
 			/* Otherwise write the new value. */
-			ret = lu_util_field_write(fd, g_value_get_string(value),
-						  formats[i].position,
-						  new_value, error);
+			ret2 = lu_util_field_write(fd,
+						   g_value_get_string(value),
+						   formats[i].position,
+						   new_value, error);
 		}
 
 		g_free(new_value);
 
 		/* If we had a write error, we fail now. */
-		if (ret == FALSE) {
-			lu_util_lock_free(lock);
-			close(fd);
-			g_free(filename);
-			return FALSE;
-		}
+		if (ret2 == FALSE)
+			goto err_lock;
 
 		/* We may have just renamed the account (we're safe assuming
 		 * the new name is correct here because if we renamed it, we
@@ -1203,34 +1234,31 @@ generic_mod(struct lu_module *module, const char *base_name,
 				lu_error_new(error, lu_error_generic,
 					     _("entity object has no %s attribute"),
 					     LU_USERNAME);
-				lu_util_lock_free(lock);
-				close(fd);
-				g_free(filename);
-				return FALSE;
+				goto err_lock;
 			}
-		} else
-		if (ent->type == lu_group) {
+		} else if (ent->type == lu_group) {
 			names = lu_ent_get(ent, LU_GROUPNAME);
 			if (names == NULL) {
 				lu_error_new(error, lu_error_generic,
-					     _ ("entity object has no %s attribute"),
+					     _("entity object has no %s attribute"),
 					     LU_GROUPNAME);
-				lu_util_lock_free(lock);
-				close(fd);
-				g_free(filename);
-				return FALSE;
+				goto err_lock;
 			}
-		} else {
+		} else
 			g_assert_not_reached();
-		}
 	}
 
-	/* Close the data file. */
-	lu_util_lock_free(lock);
-	close(fd);
-	g_free(filename);
+	ret = TRUE;
+	/* Fall through */
 
-	return TRUE;
+ err_lock:
+	lu_util_lock_free(lock);
+ err_fd:
+	close(fd);
+ err_filename:
+	g_free(filename);
+	reset_default_context(prev_context, error);
+	return ret;
 }
 
 /* Modify an entry in the passwd file. */
@@ -1283,6 +1311,7 @@ static gboolean
 generic_del(struct lu_module *module, const char *base_name,
 	    struct lu_ent *ent, struct lu_error **error)
 {
+	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *value;
 	char *contents = NULL, *filename = NULL, *key = NULL;
@@ -1291,18 +1320,17 @@ generic_del(struct lu_module *module, const char *base_name,
 	struct stat st;
 	size_t len;
 	int fd = -1;
+        gboolean ret = FALSE;
 	gboolean found;
 	gpointer lock;
 
 	/* Get the entity's current name. */
-	if (ent->type == lu_user) {
+	if (ent->type == lu_user)
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	} else
-	if (ent->type == lu_group) {
+	else if (ent->type == lu_group)
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	} else {
+	else
 		g_assert_not_reached();
-	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1316,11 +1344,13 @@ generic_del(struct lu_module *module, const char *base_name,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	/* Create a backup of that file. */
-	if (lu_files_create_backup(filename, error) == FALSE) {
+	if (!set_default_context(filename, &prev_context, error)) {
 		g_free(filename);
 		return FALSE;
 	}
+	/* Create a backup of that file. */
+	if (lu_files_create_backup(filename, error) == FALSE)
+		goto err_filename;
 
 	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
@@ -1328,26 +1358,19 @@ generic_del(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* Determine the file's size. */
 	if (fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
 			     _("couldn't stat `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
+		goto err_lock;
 	}
 
 	/* Allocate space to hold the file and read it all in. */
@@ -1356,24 +1379,18 @@ generic_del(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"), filename,
 			     strerror(errno));
-		g_free(contents);
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
+		goto err_contents;
 	}
 
 	/* Generate string versions of what the beginning of a line might
 	 * look like. */
 	value = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(value)) {
+	if (G_VALUE_HOLDS_STRING(value))
 		fragment1 = g_strdup_printf("%s:", g_value_get_string(value));
-	} else
-	if (G_VALUE_HOLDS_LONG(value)) {
+	else if (G_VALUE_HOLDS_LONG(value))
 		fragment1 = g_strdup_printf("%ld:", g_value_get_long(value));
-	} else {
+	else
 		g_assert_not_reached();
-	}
 	fragment2 = g_strdup_printf("\n%s", fragment1);
 
 	/* Remove all occurrences of this entry from the file. */
@@ -1402,11 +1419,8 @@ generic_del(struct lu_module *module, const char *base_name,
 	 * nothing's changed. */
 	len = strlen(contents);
 	if ((off_t)len == st.st_size) {
-		g_free(contents);
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return TRUE;
+		ret = TRUE;
+		goto err_contents;
 	}
 
 	/* Otherwise we need to write the new data to the file.  Jump back to
@@ -1415,11 +1429,7 @@ generic_del(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"), filename,
 			     strerror(errno));
-		g_free(contents);
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
+		goto err_contents;
 	}
 
 	/* Write the new contents out. */
@@ -1427,23 +1437,24 @@ generic_del(struct lu_module *module, const char *base_name,
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"), filename,
 			     strerror(errno));
-		g_free(contents);
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
+		goto err_contents;
 	}
 
 	/* Truncate the file to the new (certainly shorter) length. */
 	ftruncate(fd, len);
-
-	/* Clean up. */
+	ret = TRUE;
+	/* Fall through */
+	
+ err_contents:
 	g_free(contents);
+ err_lock:
 	lu_util_lock_free(lock);
+ err_fd:
 	close(fd);
+ err_filename:
 	g_free(filename);
-
-	return TRUE;
+	reset_default_context(prev_context, error);
+	return ret;
 }
 
 /* Remove a user from the passwd file. */
@@ -1515,6 +1526,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	     struct lu_ent *ent, gboolean lock_or_not,
 	     struct lu_error **error)
 {
+	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename = NULL, *key = NULL;
@@ -1526,12 +1538,10 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	/* Get the name which keys the entries of interest in the file. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
-	if (ent->type == lu_user) {
+	if (ent->type == lu_user)
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	}
-	if (ent->type == lu_group) {
+	if (ent->type == lu_group)
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1545,11 +1555,13 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
 
-	/* Create a backup of the file. */
-	if (lu_files_create_backup(filename, error) == FALSE) {
+	if (!set_default_context(filename, &prev_context, error)) {
 		g_free(filename);
 		return FALSE;
 	}
+	/* Create a backup of the file. */
+	if (lu_files_create_backup(filename, error) == FALSE)
+		goto err_filename;
 
 	/* Open the file. */
 	fd = open(filename, O_RDWR);
@@ -1557,48 +1569,34 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* Generate a string representation of the name. */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(val)) {
+	if (G_VALUE_HOLDS_STRING(val))
 		namestring = g_value_dup_string(val);
-	} else
-	if (G_VALUE_HOLDS_LONG(val)) {
+	else if (G_VALUE_HOLDS_LONG(val))
 		namestring = g_strdup_printf("%ld", g_value_get_long(val));
-	} else {
+	else
 		g_assert_not_reached();
-	}
 
 	/* Read the old value from the file. */
 	value = lu_util_field_read(fd, namestring, field, error);
-	if (value == NULL) {
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(namestring);
-		g_free(filename);
-		return FALSE;
-	}
+	if (value == NULL)
+		goto err_namestring;
 
 	/* Check that we actually care about this.  If there's a non-empty,
 	 * not locked string in there, but it's too short to be a hash, then
 	 * we don't care, so we just nod our heads and smile. */
 	if (LU_CRYPT_INVALID(value)) {
-		lu_util_lock_free(lock);
-		close(fd);
 		g_free(value);
-		g_free(namestring);
-		g_free(filename);
-		return TRUE;
+		ret = TRUE;
+		goto err_namestring;
 	}
 
 	/* Generate a new value for the file. */
@@ -1607,21 +1605,17 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 	/* Make the change. */
 	ret = lu_util_field_write(fd, namestring, field, new_value, error);
-	if (ret == FALSE) {
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(namestring);
-		g_free(filename);
-		return FALSE;
-	}
+	/* Fall through */
 
-	/* Clean up. */
-	lu_util_lock_free(lock);
-	close(fd);
+ err_namestring:
 	g_free(namestring);
+	lu_util_lock_free(lock);
+ err_fd:
+	close(fd);
+ err_filename:
 	g_free(filename);
-
-	return TRUE;
+	reset_default_context(prev_context, error);
+	return ret;
 }
 
 /* Check if an account [password] is locked. */
@@ -1826,6 +1820,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 		struct lu_ent *ent, const char *password,
 		struct lu_error **error)
 {
+	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename = NULL, *key = NULL, *value, *namestring = NULL;
@@ -1836,12 +1831,10 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
-	if (ent->type == lu_user) {
+	if (ent->type == lu_user)
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	}
-	if (ent->type == lu_group) {
+	else if (ent->type == lu_group)
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1854,6 +1847,11 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
 	filename = g_strconcat(dir, "/", base_name, NULL);
 	g_free(key);
+
+	if (!set_default_context(filename, &prev_context, error)) {
+		g_free(filename);
+		return FALSE;
+	}
 
 	/* Create a backup of the file. */
 	if (lu_files_create_backup(filename, error) == FALSE)
@@ -1874,14 +1872,12 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 
 	/* Get the name of the account. */
 	val = g_value_array_get_nth(name, 0);
-	if (G_VALUE_HOLDS_STRING(val)) {
+	if (G_VALUE_HOLDS_STRING(val))
 		namestring = g_value_dup_string(val);
-	} else
-	if (G_VALUE_HOLDS_LONG(val)) {
+	else if (G_VALUE_HOLDS_LONG(val))
 		namestring = g_strdup_printf("%ld", g_value_get_long(val));
-	} else {
+	else
 		g_assert_not_reached();
-	}
 
 	/* Read the current contents of the field. */
 	value = lu_util_field_read(fd, namestring, field, error);
@@ -1921,6 +1917,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
  err_fd:
 	close(fd);
  err_filename:
+	reset_default_context(prev_context, error);
 	g_free(filename);
 	return ret;
 }

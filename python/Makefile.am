@@ -13,7 +13,7 @@ noinst_HEADERS = admin.c ent.c misc.c
 
 libusermodule_la_SOURCES = libusermodule.c common.h debug.h ../apps/apputil.c
 libusermodule_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	@GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@
+	@GOBJECT_LIBS@ @PAM_MISC_LIBS@ @CRYPT_LIBS@ @SELINUX_LIBS@
 libusermodule_la_LIBADD = ../lib/libuser.la
 
 libuserquotamodule_la_SOURCES = quotamodule.c debug.h

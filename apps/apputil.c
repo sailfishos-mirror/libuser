@@ -42,9 +42,68 @@
 #include <string.h>
 #include <unistd.h>
 #include <utime.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#include <selinux/flask.h>
+#include <selinux/context.h>
+#endif
 #include "../lib/user.h"
 #include "../lib/error.h"
 #include "apputil.h"
+
+#ifdef WITH_SELINUX
+static int
+check_access(const char *chuser, access_vector_t access)
+{
+	int status;
+	security_context_t user_context;
+
+	status = -1;
+	if (getprevcon(&user_context) == 0) {
+		context_t c;
+		const char *user;
+
+		c = context_new(user_context);
+		user = context_user_get(c);
+		if (strcmp(chuser, user) == 0)
+			status = 0;
+		else {
+			struct av_decision avd;
+			int retval;
+
+			retval = security_compute_av(user_context,
+						     user_context,
+						     SECCLASS_PASSWD,
+ 						     access, &avd);
+			
+			if (retval == 0 && (avd.allowed & access) == access)
+				status = 0;
+		}
+		context_free(c);
+		freecon(user_context);
+	}
+	return status;
+}
+
+static int
+setup_default_context(const char *orig_file)
+{
+	if (is_selinux_enabled() > 0) {
+		security_context_t scontext;
+    
+		if (getfilecon(orig_file, &scontext) < 0)
+			return -1;
+
+		if (setfscreatecon(scontext) < 0) {
+			freecon(scontext);
+			return -1;
+		}
+		freecon(scontext);
+	}
+	return 0;
+}
+#endif
 
 /* Populate a user's home directory, copying data from a named skeleton
  * directory, setting all ownerships as given, and setting the mode of
@@ -434,6 +493,33 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 #endif
 	conv.conv = misc_conv;
 	conv.appdata_ptr = NULL;
+
+#ifdef WITH_SELINUX
+	if (is_selinux_enabled() > 0) {
+		if (getuid() == 0 && check_access(user, PASSWD__CHFN) != 0) {
+			security_context_t user_context;
+			
+			if (getprevcon(&user_context) < 0)
+				user_context = NULL;
+			/* FIXME: "change the finger info?" */
+			/* FIXME: STRING_FREEZE */
+			fprintf(stderr, "%s is not authorized to change the "
+				"finger info of %s\n",
+				user_context ? user_context
+				: "Unknown user context", user);
+			if (user_context != NULL)
+				freecon(user_context);
+			exit(1);
+		}
+		/* FIXME: is this right for lpasswd? */
+		if (setup_default_context("/etc/passwd") != 0) {
+			/* FIXME: STRING_FREEZE */
+			fprintf(stderr,
+				"Can't set default context for /etc/passwd\n");
+			exit(1);
+		}
+	}
+#endif
 
 	/* Start up PAM. */
 	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
