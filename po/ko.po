@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 23:22+0100\n"
-"PO-Revision-Date: 2004-11-03 10:43+1000\n"
+"PO-Revision-Date: 2004-11-15 10:36+1000\n"
 "Last-Translator: Michelle J Kim <mkim@redhat.com>\n"
 "Language-Team:  <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -252,7 +252,7 @@ msgstr "그룹 이름이 지정되지 않았습니다.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "잘못된 그룹 ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -328,16 +328,16 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "잘못된 사용자 ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "`%s'에 GID %ld를 사용하여 그룹을 생성하는데 오류 발생: : %s\n"
+msgstr "`%s'에 GID %jd를 사용하여 그룹을 생성하는데 오류 발생: : %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -398,9 +398,9 @@ msgid "Password changed.\n"
 msgstr "암호가 변경되었습니다.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "%s 그룹이 존재하지 않습니다.\n"
+msgstr "%jd 그룹이 존재하지 않습니다\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -433,14 +433,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s(은)는 gid number를 갖고 있지 않습니다.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %ld 라는 그룹이 존재하지 않으므로, 삭제할 수 없습니다.\n"
+msgstr "GID %jd라는 그룹이 존재하지 않으므로, 삭제할 수 없습니다.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %ld 라는 그룹에는 이름이 지정되어 있지 않습니다.\n"
+msgstr "GID %jd 라는 그룹에는 이름이 지정되어 있지 않습니다.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -594,7 +594,7 @@ msgstr "라이브러리/모듈 버젼이 일치하지 않음"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "잠금 해제하시면 암호 입력란이 비워집니다"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -948,12 +948,12 @@ msgstr "%s(을)를 초기화하는 도중 오류 발생: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "잘못된 ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "ID %d의 그룹을 검색하고 있습니다.\n"
+msgstr "%jd라는 ID를 가진 그룹을 검색하고 있습니다.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -961,9 +961,9 @@ msgid "Searching for group named %s.\n"
 msgstr "%s 그룹을 검색하고 있습니다.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "ID %d의 사용자를 검색하고 있습니다.\n"
+msgstr "ID가 %jd인 사용자를 검색하고 있습니다.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1018,3 +1018,4 @@ msgstr "사용자 구조를 복사함:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "모듈을 초기화하는 도중 오류 발생"
+
