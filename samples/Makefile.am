@@ -7,11 +7,11 @@ EXTRA_DIST = genusers
 
 enum_SOURCES = enum.c
 
-enum_LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+enum_LDADD = ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
 
 field_SOURCES = field.c
 
-field_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
+field_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @LTLIBINTL@
 
 homedir_SOURCES = homedir.c
 
