@@ -23,7 +23,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <stdlib.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 
 static void
 dump_attribute(const char *attribute, struct lu_ent *ent)

@@ -27,7 +27,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/libuser/user.h"
+#include "user.h"
 
 static const char *
 lu_strerror(enum lu_status code)

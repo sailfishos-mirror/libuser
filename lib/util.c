@@ -36,7 +36,7 @@
 #define LU_DEFAULT_SALT_TYPE "$1$"
 #define LU_DEFAULT_SALT_LEN  8
 #define LU_MAX_LOCK_ATTEMPTS 30
-#include "../include/libuser/user_private.h"
+#include "user_private.h"
 #include "util.h"
 
 /* A function which returns non-zero if the strings are equal, and
@@ -188,15 +188,6 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 	return TRUE;
 }
 
-/**
- * lu_util_lock_free:
- * @param fd An open file descriptor.
- * @param lock A lock returned by a previous call to lu_util_lock_obtain().
- *
- * Unlocks a file.
- * 
- * @return void
- */
 void
 lu_util_lock_free(int fd)
 {
@@ -309,14 +300,6 @@ lu_util_line_get_matching3(int fd, const char *part,
 	return lu_util_line_get_matchingx(fd, part, 3, error);
 }
 
-/**
- * lu_strv_len:
- * @param v an array of strings
- *
- * Count the length of an array of strings.
- * 
- * @return the number of elements in the array, or 0 if @v is NULL.
- */
 guint
 lu_strv_len(gchar ** v)
 {
@@ -326,16 +309,6 @@ lu_strv_len(gchar ** v)
 	return ret;
 }
 
-/**
- * lu_util_field_read:
- * @param fd Descriptor of open, locked file.
- * @param first Contents of the first field to match the right line with.
- * @param field The number of the field.  Minimum is 1.
- *
- * Read the nth colon-separated field on the line which has first as its first field.
- *
- * @return An allocated string which must be freed with g_free().
- */
 char *
 lu_util_field_read(int fd, const char *first, unsigned int field,
 		   struct lu_error **error)
@@ -442,17 +415,6 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	return ret;
 }
 
-/**
- * lu_util_field_write:
- * @param fd Descriptor of open, locked file.
- * @param first Contents of the first field to match the right line with.
- * @param field The number of the field.  Minimum is 1.
- * @param value The new value for the field.
- *
- * Modify the nth colon-separated field on the line which has first as its first field.
- *
- * @return A boolean indicating success or failure.
- */
 gboolean
 lu_util_field_write(int fd, const char *first, unsigned int field,
 		    const char *value, struct lu_error ** error)
@@ -579,13 +541,6 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	return ret;
 }
 
-/**
- * lu_util_shadow_current_date:
- * @param cache A string cache where the returned string will be stored.
- *
- * @return A shadow-style version of today's date (i.e., formatted as the
- * number of days which have passed since 1 January 1970).
- */
 char *
 lu_util_shadow_current_date(struct lu_string_cache *cache)
 {

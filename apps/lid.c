@@ -27,7 +27,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../include/libuser/user.h"
+#include "../lib/user.h"
 #include "apputil.h"
 
 int

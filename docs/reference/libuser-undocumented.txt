@@ -1,12 +1,11 @@
-9% function docs coverage.
-9 functions documented.
-91 not documented.
+10% function docs coverage.
+10 functions documented.
+90 not documented.
 
 
 LU_ADMINISTRATORUID
 LU_COMMONNAME
 LU_EMAIL
-LU_ERROR_CHECK
 LU_GECOS
 LU_GIDNUMBER
 LU_GIVENNAME
@@ -31,9 +30,6 @@ LU_TELEPHONENUMBER
 LU_UIDNUMBER
 LU_USERNAME
 LU_USERPASSWORD
-lu_cfg_read
-lu_cfg_read_keys
-lu_cfg_read_single
 lu_end
 lu_ent_add
 lu_ent_add_current
@@ -56,10 +52,6 @@ lu_ent_has_current
 lu_ent_revert
 lu_ent_set
 lu_ent_set_current
-lu_error_free
-lu_error_is_error
-lu_error_is_success
-lu_error_is_warning
 lu_error_new
 lu_get_modules
 lu_get_prompter
@@ -76,8 +68,6 @@ lu_group_unlock
 lu_groups_enumerate
 lu_groups_enumerate_by_user
 lu_groups_enumerate_full
-lu_prompt_console
-lu_prompt_console_quiet
 lu_set_modules
 lu_set_prompter
 lu_user_add
@@ -94,3 +84,12 @@ lu_users_enumerate
 lu_users_enumerate_by_group
 lu_users_enumerate_full
 lu_uses_elevated_privileges
+quota_free_specials
+quota_get_group
+quota_get_specials_group
+quota_get_specials_user
+quota_get_user
+quota_off
+quota_on
+quota_set_group
+quota_set_user

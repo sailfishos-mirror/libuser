@@ -1,8 +1,9 @@
-CFLAGS = @CFLAGS@ -I../include -I@PYTHON_INC@ @GLIB_CFLAGS@
+CFLAGS = @CFLAGS@ -I@PYTHON_INC@ @GLIB_CFLAGS@
 LIBADD = @GOBJECT_LIBS@ @CRYPT_LIBS@
 LDFLAGS = -version-info 1:0:0
 
-lib_LTLIBRARIES = libuser.la libuserquota.la
+lib_LTLIBRARIES = libuser.la @QUOTALIB@
+EXTRA_LTLIBRARIES = libuserquota.la
 man3_MANS = userquota.3
 
 libuser_la_SOURCES = \

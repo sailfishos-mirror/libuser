@@ -151,6 +151,25 @@ AC_ARG_WITH(python-path,
 [  --with-python-path=DIR Directory headers for your version of Python are in],
 [PYTHON_INC=$withval])
 
+AC_ARG_ENABLE(quota,
+[  --enable-quota    Provided support for configuring quotas],
+[quota=$withval],[quota=no])
+if test x$quota != xno ; then
+	AC_DEFINE(QUOTALIB,libuserquota.la)
+	AC_DEFINE(QUOTAMODULE,libuserquotamodule.so)
+	AC_DEFINE(QUOTASAMPLE,quotaq)
+	AC_SUBST(QUOTALIB)
+	AC_SUBST(QUOTAMODULE)
+	AC_SUBST(QUOTASAMPLE)
+else
+	AC_DEFINE(QUOTALIB,[])
+	AC_DEFINE(QUOTAMODULE,[])
+	AC_DEFINE(QUOTASAMPLE,[])
+	AC_SUBST(QUOTALIB)
+	AC_SUBST(QUOTAMODULE)
+	AC_SUBST(QUOTASAMPLE)
+fi
+
 AC_HEADER_STDC
 
 AC_C_CONST
@@ -173,7 +192,6 @@ AC_DEFINE_UNQUOTED(MODULEDIR,"$MODULEDIR",
 		   [location where modules will be installed])
 AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
 		   [location where config files will be installed])
-
 
 ##################################################
 # Check for gtk-doc.  Inserted verbatim.

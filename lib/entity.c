@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib.h>
-#include "../include/libuser/user_private.h"
+#include "user_private.h"
 #include "util.h"
 
 struct lu_ent *

@@ -21,7 +21,7 @@
 #include "../config.h"
 #endif
 #include <string.h>
-#include "../include/libuser/user_private.h"
+#include "user_private.h"
 
 static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)

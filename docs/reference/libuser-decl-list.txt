@@ -74,19 +74,6 @@ lu_prompt_console_quiet
 </SECTION>
 
 <SECTION>
-<FILE>quota</FILE>
-quota_on
-quota_off
-quota_get_specials_user
-quota_get_specials_group
-quota_free_specials
-quota_get_user
-quota_set_user
-quota_get_group
-quota_set_group
-</SECTION>
-
-<SECTION>
 <FILE>user</FILE>
 lu_end
 lu_set_prompter
@@ -120,5 +107,18 @@ lu_users_enumerate_by_group
 lu_groups_enumerate_by_user
 lu_users_enumerate_full
 lu_groups_enumerate_full
+</SECTION>
+
+<SECTION>
+<FILE>userquota</FILE>
+quota_on
+quota_off
+quota_get_specials_user
+quota_get_specials_group
+quota_free_specials
+quota_get_user
+quota_set_user
+quota_get_group
+quota_set_group
 </SECTION>
 

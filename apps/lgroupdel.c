@@ -26,7 +26,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include <popt.h>
-#include "../include/libuser/user.h"
+#include "../lib/user.h"
 #include "apputil.h"
 
 int

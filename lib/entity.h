@@ -26,6 +26,8 @@
 
 G_BEGIN_DECLS
 
+struct lu_ent;
+
 /* Attributes carried by all user structures. */
 #define LU_USERNAME		"pw_name"
 #define LU_USERPASSWORD		"pw_passwd"

@@ -1,7 +1,8 @@
 CFLAGS = @CFLAGS@ @GOBJECT_CFLAGS@
 LDFLAGS = -no-install
 
-noinst_PROGRAMS = enum field homedir lookup prompt quotaq testuser
+noinst_PROGRAMS = enum field homedir lookup prompt @QUOTASAMPLE@ testuser
+EXTRA_PROGRAMS = quotaq
 EXTRA_DIST = genusers
 
 enum_SOURCES = enum.c
@@ -22,7 +23,7 @@ lookup_LDADD =  ../lib/libuser.la @GOBJECT_LIBS@ @CRYPT_LIBS@ @INTLLIBS@
 
 quotaq_SOURCES = quotaq.c
 
-quotaq_LDADD =  ../quota/libuser_quota.la @CRYPT_LIBS@ @INTLLIBS@
+quotaq_LDADD =  ../lib/libuserquota.la @CRYPT_LIBS@ @INTLLIBS@
 
 prompt_SOURCES = prompt.c
 

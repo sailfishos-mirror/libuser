@@ -23,6 +23,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/syscall.h>
 #include <linux/quota.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -33,9 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "../include/libuser/quota.h"
-
-/** @file user_quota.c */
+#include "userquota.h"
 
 #ifdef MIN
 #undef MIN
@@ -49,6 +48,9 @@
 #ifndef MAX_DQ_TIME
 #define MAX_DQ_TIME (7 * 24 * 60 * 60)
 #endif
+
+long quotactl(int cmd, const char* special, qid_t id, caddr_t addr);
+_syscall4(long,quotactl,int,cmd,const char*,special,qid_t,id,caddr_t,addr);
 
 static const char *quota_flags[] = { "usrquota", "grpquota", };
 static const char *quota_suffixes[] = INITQFNAMES;
@@ -89,45 +91,18 @@ quota_get_specials(const char *flag)
 	return ret;
 }
 
-/**
- * quota_get_specials_user:
- *
- * Queries the list of mounted filesystems and returns an array of strings
- * containing the names of the devices which can enforce user quotas.
- *
- * @return A list of values which should be freed by calling
- * quota_free_specials().
- */
 char **
 quota_get_specials_user()
 {
 	return quota_get_specials(quota_flags[USRQUOTA]);
 }
 
-/**
- * quota_get_specials_group:
- *
- * Queries the list of mounted filesystems and returns an array of strings
- * containing the names of the devices which can enforce group quotas.
- *
- * @return a list of values which should be freed by calling
- * quota_free_specials().
- */
 char **
 quota_get_specials_group()
 {
 	return quota_get_specials(quota_flags[GRPQUOTA]);
 }
 
-/**
- * quota_free_specials:
- * @param specials A list of specials which must be destroyed.
- *
- * This function frees an array of strings returned by a previous call to
- * quota_get_specials_user() or quota_get_specials_group().
- *
- * @return nothing.
- */
 void
 quota_free_specials(char **specials)
 {
@@ -214,26 +189,12 @@ quota_toggle(int command)
 	return ret;
 }
 
-/**
- * quota_on:
- *
- * Enables quotas on all currently-mounted filesystems which support them.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_on()
 {
 	return quota_toggle(Q_QUOTAON);
 }
 
-/**
- * quota_off:
- *
- * Disables quotas on all currently-mounted filesystems which support them.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_off()
 {
@@ -331,23 +292,6 @@ quota_set(int type, int id, const char *special,
 	return ret;
 }
 
-/**
- * quota_get_user:
- * @param uid The UID of the user whose quotas should be queried.
- * @param special The device node of the filesystem on which quotas are to be read.
- * @param inode_soft Will contain the user's inode quota.
- * @param inode_hard Will contain the user's inode limit.
- * @param inode_usage Will contain the user's current inode usage.
- * @param inode_grace Will contain the amount of time the user can use more than his quota and still be able to use more inodes.
- * @param block_soft Will contain the user's block quota.
- * @param block_hard Will contain the user's block limit.
- * @param block_usage Will contain the user's current block usage.
- * @param block_grace Will contain the amount of time the user can use more than his quota and still be able to use more blocks.
- *
- * Queries quotas for the given user on a given filesystem.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_get_user(uid_t uid, const char *special,
 	       int32_t * inode_usage, int32_t * inode_soft,
@@ -360,21 +304,6 @@ quota_get_user(uid_t uid, const char *special,
 			 block_usage, block_soft, block_hard, block_grace);
 }
 
-/**
- * quota_set_user:
- * @param uid The UID of the user for whom quotas should be set.
- * @param special The device node of the filesystem on which quotas are to be set.
- * @param inode_soft Will contain the user's inode quota.
- * @param inode_hard Will contain the user's inode limit.
- * @param inode_grace Will contain the amount of time the user can use more than his quota and still be able to use more inodes.
- * @param block_soft Will contain the user's block quota.
- * @param block_hard Will contain the user's block limit.
- * @param block_grace Will contain the amount of time the user can use more than his quota and still be able to use more blocks.
- *
- * Sets quotas for the given user on a given filesystem.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_set_user(uid_t uid, const char *special,
 	       int32_t inode_soft, int32_t inode_hard,
@@ -385,23 +314,6 @@ quota_set_user(uid_t uid, const char *special,
 			 inode_grace, block_soft, block_hard, block_grace);
 }
 
-/**
- * quota_get_group:
- * @param gid The GID of the group for which quotas should be queried.
- * @param special The device node of the filesystem on which quotas are to be read.
- * @param inode_soft Will contain the group's inode quota.
- * @param inode_hard Will contain the group's inode limit.
- * @param inode_usage Will contain the group's current inode usage.
- * @param inode_grace Will contain the amount of time the group can use more than the quota and still be able to use more inodes.
- * @param block_soft Will contain the group's block quota.
- * @param block_hard Will contain the group's block limit.
- * @param block_usage Will contain the group's current block usage.
- * @param block_grace Will contain the amount of time the group can use more than the quota and still be able to use more blocks.
- *
- * Queries quotas for the given group on a given filesystem.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_get_group(gid_t gid, const char *special,
 		int32_t * inode_usage, int32_t * inode_soft,
@@ -414,21 +326,6 @@ quota_get_group(gid_t gid, const char *special,
 			 block_usage, block_soft, block_hard, block_grace);
 }
 
-/**
- * quota_set_group:
- * @param gid The GID of the group for which quotas should be set.
- * @param special The device node of the filesystem on which quotas are to be set.
- * @param inode_soft Will contain the group's inode quota.
- * @param inode_hard Will contain the group's inode limit.
- * @param inode_grace Will contain the amount of time the group can use more than the quota and still be able to use more inodes.
- * @param block_soft Will contain the group's block quota.
- * @param block_hard Will contain the group's block limit.
- * @param block_grace Will contain the amount of time the group can use more than the quota and still be able to use more blocks.
- *
- * Sets quotas for the given group on a given filesystem.
- *
- * @return 0 on success, assorted other values on failure.
- */
 int
 quota_set_group(gid_t gid, const char *special,
 		int32_t inode_soft, int32_t inode_hard,

@@ -2,11 +2,13 @@
 error
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Functions for allocating and manipulating lu_error structures.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+<filename>error.h</filename> includes declarations for allocating and
+manipulating lu_error structures.  These structures hold error and status
+information passed between libuser, its modules, and applications.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -16,10 +18,12 @@ error
 
 <!-- ##### MACRO LU_ERROR_CHECK ##### -->
 <para>
-
+Checks that the given pointer to a pointer to a struct does not already point
+to a valid lu_error structure.  This macro is used by many internal functions
+to check that an error has not already occurred when they are invoked.
 </para>
 
-@err_p_p: 
+@err_p_p: A pointer to a struct lu_error * which will be checked.  If there
 
 
 <!-- ##### FUNCTION lu_error_new ##### -->
@@ -27,38 +31,40 @@ error
 
 </para>
 
-@error: 
+@error: A pointer to a struct lu_error * which will hold the newly-created
+error structure.
 
 
 <!-- ##### FUNCTION lu_error_free ##### -->
 <para>
-
+Frees an lu_error structure.
 </para>
 
-@error: 
+@error: A pointer to a pointer to the structure to be freed.  The pointer is set
+to NULL after the error is freed.
 
 
 <!-- ##### FUNCTION lu_error_is_success ##### -->
 <para>
-
+Check if the error code held by an error structure is a success code.
 </para>
 
-@Returns: 
+@Returns: a #gboolean indicating whether or not the error is a success code.
 
 
 <!-- ##### FUNCTION lu_error_is_warning ##### -->
 <para>
-
+Check if the error code held by an error structure is a warning code.
 </para>
 
-@Returns: 
+@Returns: a #gboolean indicating whether or not the error is a warning code.
 
 
 <!-- ##### FUNCTION lu_error_is_error ##### -->
 <para>
-
+Check if the error code held by an error structure is an error code.
 </para>
 
-@Returns: 
+@Returns: a #gboolean indicating whether or not the error is an error code.
 
 

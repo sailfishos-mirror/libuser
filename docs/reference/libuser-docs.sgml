@@ -1,0 +1,23 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!ENTITY libuser-config SYSTEM "sgml/config.sgml">
+<!ENTITY libuser-entity SYSTEM "sgml/entity.sgml">
+<!ENTITY libuser-error SYSTEM "sgml/error.sgml">
+<!ENTITY libuser-prompt SYSTEM "sgml/prompt.sgml">
+<!ENTITY libuser-quota SYSTEM "sgml/quota.sgml">
+<!ENTITY libuser-user SYSTEM "sgml/user.sgml">
+]>
+<book id="index">
+  <bookinfo>
+    <title>libuser Reference Manual</title>
+  </bookinfo>
+
+  <chapter>
+    <title>libuser</title>
+    &libuser-config;
+    &libuser-entity;
+    &libuser-error;
+    &libuser-prompt;
+    &libuser-quota;
+    &libuser-user;
+  </chapter>
+</book>

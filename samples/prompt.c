@@ -24,7 +24,7 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 
 int
 main(int argc, char **argv)

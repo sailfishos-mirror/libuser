@@ -278,51 +278,6 @@ struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **err
 struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
 </FUNCTION>
 <FUNCTION>
-<NAME>quota_on</NAME>
-<RETURNS>int  </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_off</NAME>
-<RETURNS>int  </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_user</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_specials_group</NAME>
-<RETURNS>char  **</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_free_specials</NAME>
-<RETURNS>void  </RETURNS>
-char **specials
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_set_user</NAME>
-<RETURNS>int  </RETURNS>
-uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_get_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
-</FUNCTION>
-<FUNCTION>
-<NAME>quota_set_group</NAME>
-<RETURNS>int  </RETURNS>
-gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
-</FUNCTION>
-<FUNCTION>
 <NAME>lu_end</NAME>
 <RETURNS>void  </RETURNS>
 struct lu_context *context
@@ -481,4 +436,49 @@ struct lu_context *context,const char *pattern,struct lu_error **error
 <NAME>lu_groups_enumerate_full</NAME>
 <RETURNS>GPtrArray  *</RETURNS>
 struct lu_context *context,const char *pattern,struct lu_error **error
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_on</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_off</NAME>
+<RETURNS>int  </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_user</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_specials_group</NAME>
+<RETURNS>char  **</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_free_specials</NAME>
+<RETURNS>void  </RETURNS>
+char **specials
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_set_user</NAME>
+<RETURNS>int  </RETURNS>
+uid_t uid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_get_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t * inode_usage, int32_t * inode_soft,int32_t * inode_hard, int32_t * inode_grace,int32_t * block_usage, int32_t * block_soft,int32_t * block_hard, int32_t * block_grace
+</FUNCTION>
+<FUNCTION>
+<NAME>quota_set_group</NAME>
+<RETURNS>int  </RETURNS>
+gid_t gid, const char *special,int32_t inode_soft, int32_t inode_hard,int32_t inode_grace, int32_t block_soft,int32_t block_hard, int32_t block_grace
 </FUNCTION>

@@ -29,7 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "../include/libuser/user.h"
+#include "../lib/user.h"
 #include "apputil.h"
 
 int

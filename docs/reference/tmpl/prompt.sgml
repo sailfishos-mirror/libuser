@@ -3,10 +3,14 @@ prompt
 
 <!-- ##### SECTION Short_Description ##### -->
 
+Sample prompter functions for use with the libuser library.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+prompt.h declares two predefined prompter functions which applications can use
+instead of providing their own.  These should suffice for most command-line
+applications.  Authors of graphical applications are encouraged to supply
+graphical implementations.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -16,25 +20,27 @@ prompt
 
 <!-- ##### FUNCTION lu_prompt_console ##### -->
 <para>
-
+Prompts the user using a text console.
 </para>
 
-@prompts: 
-@count: 
-@callback_data: 
-@error: 
-@Returns: 
+@prompts: An array of #lu_prompt structures.
+@count: The number of elements in the @prompts array.
+@callback_data: Ignored.
+@error: The location to store error information in the event of an error.
+@Returns: A #gboolean indicating success or failure.
 
 
 <!-- ##### FUNCTION lu_prompt_console_quiet ##### -->
 <para>
-
+Prompts the user using a text console.  Unlike lu_prompt_console(), this
+function will not prompt users for a question for which the calling
+application or module supplies a default, and will simply return the default.
 </para>
 
-@prompts: 
-@count: 
-@callback_data: 
-@error: 
-@Returns: 
+@prompts: An array of #lu_prompt structures.
+@count: The number of elements in the @prompts array.
+@callback_data: Ignored.
+@error: The location to store error information in the event of an error.
+@Returns: A #gboolean indicating success or failure.
 
 

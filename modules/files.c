@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 
 #define CHUNK_SIZE (LINE_MAX * 4)
 #define DEFAULT_PASSWORD	"!!"

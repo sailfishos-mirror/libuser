@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "../include/libuser/quota.h"
+#include "../lib/userquota.h"
 
 static int
 do_quota_stuff(const char *ent, const char *special,

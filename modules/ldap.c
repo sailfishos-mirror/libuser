@@ -33,7 +33,7 @@
 #include <glib.h>
 #include <ldap.h>
 #include <sasl.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 
 #undef  DEBUG
 #define SCHEME "{crypt}"

@@ -3,9 +3,15 @@ user
 
 <!-- ##### SECTION Short_Description ##### -->
 
+Functions for initializing the library, looking up information, and making 
+changes to the system information store.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
+
+user.h contains declarations for functions which start up and shut down the
+libuser library, and for functions which perform lookup queries and
+modifications of the system information store.
 
 </para>
 

@@ -40,8 +40,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <utime.h>
-#include "../include/libuser/user.h"
-#include "../include/libuser/error.h"
+#include "../lib/user.h"
+#include "../lib/error.h"
 #include "apputil.h"
 
 /* Populate a user's home directory, copying data from a named skeleton

@@ -89,6 +89,7 @@ quota_set_group
 
 <SECTION>
 <FILE>user</FILE>
+
 lu_start
 lu_end
 lu_set_prompter

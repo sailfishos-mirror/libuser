@@ -26,7 +26,7 @@
 #include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../include/libuser/quota.h"
+#include "../lib/userquota.h"
 #include <Python.h>
 #include "debug.h"
 

@@ -30,7 +30,7 @@
 #include <locale.h>
 #include <popt.h>
 #include <glib.h>
-#include "../include/libuser/user.h"
+#include "../lib/user.h"
 #include "apputil.h"
 
 /* Parse the first element of a value array for a count of days, and return

@@ -31,7 +31,7 @@
 #include <krb5.h>
 #include <krb5/kdb.h>
 #include <kadm5/admin.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 #include "../modules/modules.h"
 
 #define LU_KRB5_REALM 0

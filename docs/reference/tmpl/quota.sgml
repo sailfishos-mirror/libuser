@@ -2,11 +2,13 @@
 quota
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Functions for manipulating disk quotas.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+quota.h declares functions which are useful for querying and manipulating
+user and group disk quotas under Linux.  These routines are not portable
+to other operating systems.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

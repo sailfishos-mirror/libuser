@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/libuser/user_private.h"
+#include "../lib/user_private.h"
 #include "../modules/modules.h"
 
 static gboolean

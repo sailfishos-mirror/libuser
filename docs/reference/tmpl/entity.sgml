@@ -3,10 +3,13 @@ entity
 
 <!-- ##### SECTION Short_Description ##### -->
 
+Functions for manipulating lu_ent structures.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+entity.h declares functions for manipulating lu_ent structures, which are used
+by libuser, its modules, and applications to hold data about a particular
+user or group account.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->

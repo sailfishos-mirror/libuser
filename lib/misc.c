@@ -24,9 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/libuser/user_private.h"
+#include "user_private.h"
 #include "modules.h"
-#include "misc.h"
 
 void
 lu_set_prompter(struct lu_context *context, lu_prompt_fn * prompter,
