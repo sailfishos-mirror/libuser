@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "user.h"
+#include "user_private.h"
 
 const char *
 lu_strerror(struct lu_error *error)

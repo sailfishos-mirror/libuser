@@ -28,6 +28,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include "user.h"
+#include "user_private.h"
 
 gboolean
 lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
