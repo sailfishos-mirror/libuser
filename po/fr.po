@@ -259,7 +259,8 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:193 apps/lusermod.c:206
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:217
 #, c-format
@@ -682,4 +683,3 @@ msgstr "Obtention attributs utilisateur par défaut :\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
-

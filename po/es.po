@@ -595,7 +595,8 @@ msgstr "error al crear `%s': %s"
 #: modules/files.c:153
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
+msgstr ""
+"Existe un fichero de copia de seguridad `%s' y no es un fichero habitual"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
@@ -959,4 +960,3 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
-
