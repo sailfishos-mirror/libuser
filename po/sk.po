@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-14 00:53+0100\n"
-"PO-Revision-Date: 2004-11-01 18:11+0100\n"
+"PO-Revision-Date: 2004-11-14 21:29+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -254,7 +254,7 @@ msgstr "Nebolo zadané meno skupiny.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Neplatné ID skupiny %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -329,16 +329,16 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Neplatné ID používateľa %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Zamietam vytvorenie konta s UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %ld: %s\n"
+msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %jd: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -429,14 +429,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s nemala číslo gid.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Neexistuje skupina s GID %ld, neodstraňujem.\n"
+msgstr "Neexistuje skupina s GID %jd, neodstraňujem.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Skupina s GID %ld nemala meno skupiny.\n"
+msgstr "Skupina s GID %jd nemala meno skupiny.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -944,12 +944,12 @@ msgstr "Chyba pri inicializácii %s: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "Neplatné ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Vyhľadávanie skupiny s ID %d.\n"
+msgstr "Vyhľadávanie skupiny s ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -957,9 +957,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Vyhľadávanie skupiny s menom %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Vyhľadávanie používateľa s ID %d.\n"
+msgstr "Vyhľadávanie používateľa s ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -993,9 +993,3 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Cyrus SASL chyba pri vytváraní používateľa: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Cyrus SASL chyba pri odstraňovaní používateľa: %s: %s"
