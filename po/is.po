@@ -389,12 +389,12 @@ msgstr "gat ekki ritað í `%s': %s"
 #: modules/files.c:831
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "hluturinn er ekki með %s eiginleika"
 
 #: modules/files.c:773
 #, c-format
 msgid "entity object has no `%s' attribute"
-msgstr ""
+msgstr "hluturinn er ekki með `%s' eiginleika"
 
 #: modules/files.c:1675 modules/files.c:1731
 msgid "not executing with superuser privileges"
@@ -407,12 +407,12 @@ msgstr "engin shadow skrá til staðar -- afvirki"
 #: modules/krb5.c:102
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
+msgstr "villa við að tengjast kadm5 þjóni fyrir þjónustuna `%s' í svæði `%s': %s"
 
 #: modules/krb5.c:132 modules/krb5.c:189 modules/krb5.c:272 modules/krb5.c:346
 #: modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "villa við að frumstilla kerberos aðgerðasafnið"
 
 #: modules/krb5.c:137 modules/krb5.c:204 modules/krb5.c:297 modules/krb5.c:302
 #: modules/krb5.c:361 modules/krb5.c:406 modules/krb5.c:474 modules/krb5.c:522
@@ -482,11 +482,11 @@ msgstr "gat ekki tengst LDAP þjóni"
 #: modules/ldap.c:313 modules/ldap.c:568 modules/ldap.c:649 modules/ldap.c:712
 #: modules/ldap.c:799 modules/ldap.c:880
 msgid "error mapping name to LDAP distinguished name"
-msgstr ""
+msgstr "villa við að tengja nafn við LDAP grunnnafn"
 
 #: modules/ldap.c:318
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
+msgstr "villa við að tengja nafn við LDAP grunnnafn"
 
 #: modules/ldap.c:364
 msgid "error searching LDAP directory"
