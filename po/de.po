@@ -6,12 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-08-09 14:20+01:00\n"
-"Last-Translator: Claudia Krug <fhonig@redhat.it>\n"
-"Language-Team: German <LL@li.org>\n"
+"PO-Revision-Date: 2002-02-22 14:37GMT\n"
+"Last-Translator: Frigga <frigga@interna.redhat.it>\n"
+"Language-Team: german <C@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: apps/apputil.c:70
 #, c-format
@@ -30,7 +31,7 @@ msgstr "Fehler beim Entfernen von `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Privilegien können nicht aufgehoben werden. \n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -46,13 +47,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Autentifizierung fehlgeschlagen: %s\n"
 
 #: apps/apputil.c:449
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Interner Fehler.\n"
+msgstr "Interner PAM-Fehler `%s'.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Nenutzer stimmt nicht überein.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -61,9 +62,9 @@ msgstr "[OPTION...] Benutzer"
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Fehler beim Entfernen von %s: %s.\n"
+msgstr "Fehler beim Parsen von Argumenten: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
@@ -193,9 +194,9 @@ msgid "Group %s could not be modified.\n"
 msgstr "Gruppe %s konnte nicht geändert werden.\n"
 
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Fehler bei der Erzeugung einer Gruppe für %s: %s.\n"
+msgstr "Fehler beim Erstellen der Gruppe `%s'.\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -220,12 +221,12 @@ msgstr "%s hatte keine GID-Nummer.\n"
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Gruppe mit GID %ld existiert nicht, nicht entfernen.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Gruppe #%d hatte keinen Gruppennamen.\n"
+msgstr "Gruppe mit GID %ld hat keinen Gruppennamen.\n"
 
 #: apps/luserdel.c:142
 #, c-format
@@ -263,9 +264,9 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Benutzer %s konnte nicht geändert werden: %s.\n"
 
 #: apps/lusermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Gruppe %s konnte nicht geändert werden.\n"
+msgstr "Gruppe %s konnte nicht modifiziert werden: %s.\n"
 
 #: apps/lusermod.c:300
 #, c-format
@@ -289,98 +290,87 @@ msgstr "Konfigurationsdatei `%s' konnte nicht geöffnet werden: %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr ""
+msgstr "Erfolgreich"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "Module durch die Konfiguration deaktiviert"
 
 #: lib/error.c:45
-#, fuzzy
 msgid "generic error"
-msgstr "Interner Fehler.\n"
+msgstr "Generischer Fehler"
 
 #: lib/error.c:47
-#, fuzzy
 msgid "not enough privileges"
-msgstr "Keine Ausführung mit Superuser-Rechten."
+msgstr "Keine ausreichenden Privilegien"
 
 #: lib/error.c:49
 msgid "access denied"
-msgstr ""
+msgstr "Zugriff verweigert"
 
 #: lib/error.c:51
 msgid "bad user/group name"
-msgstr ""
+msgstr "Ungültiger Benutzer/Gruppenname"
 
 #: lib/error.c:53
 msgid "bad user/group id"
-msgstr ""
+msgstr "Ungültige Benutzer/Gruppen ID"
 
 #: lib/error.c:55
 msgid "user/group name in use"
-msgstr ""
+msgstr "Benutzer/Gruppenname wird bereits verwendet"
 
 #: lib/error.c:57
 msgid "user/group id in use"
-msgstr ""
+msgstr "Benutzer/Gruppen ID wird bereits verwendet"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "Fehler beim Bearbeiten von Terminalattributen"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error opening file"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Öffnen der Datei"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error locking file"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Sperren der Datei"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error statting file"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Ermitteln des Dateistatus"
 
 #: lib/error.c:67
-#, fuzzy
 msgid "error reading file"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Lesen der Datei"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "error writing to file"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Schreiben in die Datei"
 
 #: lib/error.c:71
 msgid "data not found in file"
-msgstr ""
+msgstr "Daten wurden in der Datei nicht gefunden"
 
 #: lib/error.c:73
-#, fuzzy
 msgid "internal initialization error"
-msgstr "Fehler bei der Initialisierung der Kerberos-Bibliothek"
+msgstr "Interner Fehler bei der Initialisierung"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "error loading module"
-msgstr "Fehler beim Sperren der Datei: %s"
+msgstr "Fehler beim Laden des Moduls"
 
 #: lib/error.c:77
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "Fehler beim Lösen des Symbols im Modul"
 
 #: lib/error.c:79
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "Fehlende Übereinstimmung von Modulversionen in `%s'"
+msgstr "Bibliothek/Modulversion stimmt nicht überein"
 
 #: lib/error.c:84
-#, fuzzy
 msgid "unknown error"
-msgstr "unbekannt"
+msgstr "Unbekannter Fehler"
 
 #: lib/modules.c:112
 #, c-format
@@ -394,16 +384,15 @@ msgstr "Fehlende Übereinstimmung von Modulversionen in `%s'"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "Fehler beim Lesen der Terminalattribute"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
+msgstr "Fehler beim Einstellen der Terminalattribute"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "Fehler beim Lesen vom Terminal"
 
 #: lib/util.c:200
 #, c-format
@@ -433,9 +422,9 @@ msgid "error creating `%s': %s"
 msgstr "Fehler beim Erzeugen von `%s': %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "Backup-Datei `%s' war ein symlink"
+msgstr "Backup-Datei `%s' ist vorhanden und keine reguläre Datei"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -496,7 +485,7 @@ msgstr "entity besitzt kein Attribut %s oder %s"
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "entity wurde ohne Attribut %s oder %s erzeugt"
+msgstr "entity wurde ohne Attribut %s oder %s erstellt"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
@@ -543,13 +532,12 @@ msgid "could not bind to LDAP server"
 msgstr "Konnte nicht zum LDAP Server verbinden"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "Konnte nicht zum LDAP Server verbinden"
+msgstr "Konnte LDAP-Server nicht suchen"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "LDAP-Server "
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -568,7 +556,7 @@ msgstr "Benutzerobjekt hatte kein Attribut %s"
 #: modules/ldap.c:1151
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "Benutzerobjekt wurde ohne `%s' erzeugt"
+msgstr "Benutzerobjekt wurde ohne `%s' erstellt"
 
 #: modules/ldap.c:1177
 msgid "could not convert internal data to LDAPMods"
@@ -619,9 +607,8 @@ msgid "LDAP Server Name"
 msgstr "LDAP Servername"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP Base DN"
+msgstr "LDAP sucht Basis DN"
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
@@ -640,9 +627,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Benutzerauthorisierung"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Fehler beim Initialisieren von %s: %s.\n"
+msgstr "Fehler beim Initialisieren von %s: %s\n"
 
 #: samples/lookup.c:75
 #, c-format
@@ -683,80 +670,3 @@ msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
-
-#~ msgid "error searching LDAP directory"
-#~ msgstr "Fehler bei der LDAP-Verzeichnis Suche"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "kein `%s' Attribut mit `%s' Schema gefunden"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "entity Objekt besitzt kein `%s' Attribut"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Es wurde kein Gruppenname angegeben.\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Fehler bei der Erzeugung einer Gruppe für %s: %s.\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Suche nach Gruppe mit ID %d.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "Ungültige UID für %s.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "Ungültige GID für %s.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "Kein Heimverzeichnis für %s.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr "Fehler beim Lesen des alten Heimverzeichnisses für %s: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "Sicherungskopie von struct lu_ent at %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr " magic = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " Typ = %s\n"
-
-#~ msgid "user"
-#~ msgstr "Benutzer"
-
-#~ msgid "group"
-#~ msgstr "Gruppe"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Vor dem Kopieren:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Nach dem Kopieren:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "lu_ent wird bei %p freigegeben.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "Gruppe #%d existiert nicht.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "Fehler beim Initialisieren von lu.\n"
-
-#~ msgid "could not determine expected DN"
-#~ msgstr "erwarteter DN konnte nicht bestimmt werden"
-
-#~ msgid "could not map name to DN"
-#~ msgstr "es konnte kein Name für DN ermittelt werden"

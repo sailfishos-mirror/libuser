@@ -1,36 +1,37 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2001 Red Hat, Inc.
-# Valentina Besi <valentina@redhat.it>, 2001.
+# Bettina De Monti <bettina@redhat.it>, 2001.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
 "POT-Creation-Date: 2002-02-22 16:35-0500\n"
-"PO-Revision-Date: 2001-08-17 14:50+ZONE\n"
-"Last-Translator: Valentina Besi <valentina@redhat.it>\n"
-"Language-Team: Italiano <LL@li.org>\n"
+"PO-Revision-Date: 2002-02-27 09:54GMT\n"
+"Last-Translator:  <marisa@interna.redhat.it>\n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: apps/apputil.c:70
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Errore durante la lettura di `%s': %s"
+msgstr "Errore nella lettura di `%s': %s"
 
 #: apps/apputil.c:78
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "Errore durante la creazione di `%s': %s"
+msgstr "Errore nella creazione di `%s': %s"
 
 #: apps/apputil.c:200 apps/apputil.c:232 apps/apputil.c:249
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "Errore durante la rimozione di `%s': %s"
+msgstr "Errore nella rimozione di `%s': %s"
 
 #: apps/apputil.c:406 apps/apputil.c:410
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Impossibile diminuire i privilegi.\n"
 
 #: apps/apputil.c:419
 msgid "Internal error.\n"
@@ -38,7 +39,7 @@ msgstr "Errore interno.\n"
 
 #: apps/apputil.c:432
 msgid "Error initializing PAM.\n"
-msgstr "Errore durante l'inizializzazione di PAM.\n"
+msgstr "Errore nell'inizializzazione di PAM.\n"
 
 #: apps/apputil.c:440 apps/apputil.c:464
 #, c-format
@@ -46,13 +47,13 @@ msgid "Authentication failed for %s.\n"
 msgstr "Autenticazione fallita di %s.\n"
 
 #: apps/apputil.c:449
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Errore interno.\n"
+msgstr "Errore PAM interno %s.\n"
 
 #: apps/apputil.c:455
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "Nessuna corrispondenza utente.\n"
 
 #: apps/lchage.c:132 apps/luseradd.c:86 apps/luserdel.c:65 apps/lusermod.c:88
 msgid "[OPTION...] user"
@@ -61,9 +62,9 @@ msgstr "[OPZIONE...] utente"
 #: apps/lchage.c:135 apps/lgroupadd.c:68 apps/lgroupdel.c:60
 #: apps/lgroupmod.c:85 apps/luseradd.c:89 apps/luserdel.c:68
 #: apps/lusermod.c:91
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Errore durante la rimozione di %s: %s.\n"
+msgstr "Errore nell'analisi degli argomenti: %s.\n"
 
 #: apps/lchage.c:144 apps/luseradd.c:104 apps/luserdel.c:76
 #: apps/lusermod.c:102
@@ -75,14 +76,14 @@ msgstr "Nessun nome utente specificato.\n"
 #: apps/lusermod.c:113 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "Errore durante l'inizializzazione di %s: %s.\n"
+msgstr "Errore nell'inizializzazione di %s: %s.\n"
 
 #: apps/lchage.c:158 apps/lgroupadd.c:91 apps/lgroupdel.c:83
 #: apps/lgroupmod.c:106 apps/luseradd.c:118 apps/luserdel.c:89
 #: apps/lusermod.c:116
 #, c-format
 msgid "Error initializing %s.\n"
-msgstr "Errore durante l'inizializzazione di %s.\n"
+msgstr "Errore nell'inizializzazione di %s.\n"
 
 #: apps/lchage.c:168 apps/luserdel.c:98 apps/lusermod.c:131
 #, c-format
@@ -144,11 +145,11 @@ msgstr "Scadenza account:\t%s\n"
 #: apps/lchage.c:281
 #, c-format
 msgid "Failed to modify aging information for %s.\n"
-msgstr "Modifica delle informazioni relative alla scadenza per %s fallita.\n"
+msgstr "Impossibile modificare le informazioni sulla scadenza di %s.\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr "[OPZIONE...]gruppo"
+msgstr "[OPZIONE...] gruppo"
 
 #: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:93
 msgid "No group name specified.\n"
@@ -170,7 +171,7 @@ msgstr "Impossibile eliminare il gruppo %s.\n"
 
 #: apps/lgroupmod.c:113 apps/lusermod.c:124
 msgid "Both -L and -U specified.\n"
-msgstr "Né -L né -U sono stati specificati.\n"
+msgstr "-L e -U specificati.\n"
 
 #: apps/lgroupmod.c:230 apps/lgroupmod.c:238
 #, c-format
@@ -193,9 +194,9 @@ msgid "Group %s could not be modified.\n"
 msgstr "Impossibile modificare il gruppo %s.\n"
 
 #: apps/luseradd.c:201 apps/luseradd.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s'.\n"
-msgstr "Errore durante la creazione del gruppo per %s: %s.\n"
+msgstr "Errore nella creazione del gruppo %s.\n"
 
 #: apps/luseradd.c:280
 #, c-format
@@ -220,12 +221,12 @@ msgstr "%s privo di un numero gid.\n"
 #: apps/luserdel.c:128
 #, c-format
 msgid "No group with GID %ld exists, not removing.\n"
-msgstr ""
+msgstr "Non esiste nessun gruppo con GID %ld. Rimozione impossibile.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %ld did not have a group name.\n"
-msgstr "Gruppo #%d  privo di nome gruppo.\n"
+msgstr "Gruppo con GID %ld privo di nome gruppo.\n"
 
 #: apps/luserdel.c:142
 #, c-format
@@ -240,7 +241,7 @@ msgstr "%s privo di directory home.\n"
 #: apps/luserdel.c:163
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "Errore durante la rimozione di %s: %s.\n"
+msgstr "Errore nella rimozione di %s: %s.\n"
 
 #: apps/lusermod.c:198 apps/lusermod.c:210
 #, c-format
@@ -263,14 +264,14 @@ msgid "User %s could not be modified: %s.\n"
 msgstr "Impossibile modificare l'utente %s: %s.\n"
 
 #: apps/lusermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Impossibile modificare il gruppo %s.\n"
+msgstr "Impossibile modificare il gruppo %s: %s.\n"
 
 #: apps/lusermod.c:300
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "Nessuna vecchia directory home per %s.\n"
+msgstr "Nessuna directory home precedente per %s.\n"
 
 #: apps/lusermod.c:305
 #, c-format
@@ -285,102 +286,91 @@ msgstr "Errore durante lo spostamento di %s in %s: %s.\n"
 #: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "impossibile aprire file di configurazione `%s': %s"
+msgstr "impossibile aprire il file di configurazione `%s': %s"
 
 #: lib/error.c:41
 msgid "success"
-msgstr ""
+msgstr "eseguito"
 
 #: lib/error.c:43
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "modulo disattivato dalla configurazione"
 
 #: lib/error.c:45
-#, fuzzy
 msgid "generic error"
-msgstr "Errore interno.\n"
+msgstr "errore generico"
 
 #: lib/error.c:47
-#, fuzzy
 msgid "not enough privileges"
-msgstr "esecuzione senza privilegi di superutente"
+msgstr "privilegi insufficienti"
 
 #: lib/error.c:49
 msgid "access denied"
-msgstr ""
+msgstr "accesso negato"
 
 #: lib/error.c:51
 msgid "bad user/group name"
-msgstr ""
+msgstr "nome utente/gruppo errato"
 
 #: lib/error.c:53
 msgid "bad user/group id"
-msgstr ""
+msgstr "ID utente/gruppo errato"
 
 #: lib/error.c:55
 msgid "user/group name in use"
-msgstr ""
+msgstr "nome utente/gruppo in uso"
 
 #: lib/error.c:57
 msgid "user/group id in use"
-msgstr ""
+msgstr "ID utente/gruppo in uso"
 
 #: lib/error.c:59
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "errore nella modifica degli attributi del terminale"
 
 #: lib/error.c:61
-#, fuzzy
 msgid "error opening file"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore nell'apertura del file"
 
 #: lib/error.c:63
-#, fuzzy
 msgid "error locking file"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore nel bloccaggio del file"
 
 #: lib/error.c:65
-#, fuzzy
 msgid "error statting file"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore durante la chiamata stat del file"
 
 #: lib/error.c:67
-#, fuzzy
 msgid "error reading file"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore nella lettura del file"
 
 #: lib/error.c:69
-#, fuzzy
 msgid "error writing to file"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore nella scrittura su file"
 
 #: lib/error.c:71
 msgid "data not found in file"
-msgstr ""
+msgstr "dati non trovati nel file"
 
 #: lib/error.c:73
-#, fuzzy
 msgid "internal initialization error"
-msgstr "errore durante l'inizializzazione della library di kerberos"
+msgstr "errore di inizializzazione interna"
 
 #: lib/error.c:75
-#, fuzzy
 msgid "error loading module"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore di caricamento del modulo"
 
 #: lib/error.c:77
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "errore nella risoluzione del simbolo nel modulo"
 
 #: lib/error.c:79
-#, fuzzy
 msgid "library/module version mismatch"
-msgstr "mancata corrispondenza della versione di un modulo din `%s'"
+msgstr "mancata corrispondenza nella versione di modulo/libreria"
 
 #: lib/error.c:84
-#, fuzzy
 msgid "unknown error"
-msgstr "sconosciuto"
+msgstr "errore sconosciuto"
 
 #: lib/modules.c:112
 #, c-format
@@ -390,25 +380,24 @@ msgstr "nessuna funzione di inizializzazione %s in `%s'"
 #: lib/modules.c:138
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "mancata corrispondenza della versione di un modulo din `%s'"
+msgstr "mancata corrispondenza della versione del modulo in `%s'"
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "errore nella lettura degli attributi del terminale"
 
 #: lib/prompt.c:72 lib/prompt.c:84
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "Prelievo attributi dell'utente di defalut:\n"
+msgstr "errore nella configurazione degli attributi del terminale"
 
 #: lib/prompt.c:78
 msgid "error reading from terminal"
-msgstr ""
+msgstr "errore di lettura dal terminale"
 
 #: lib/util.c:200
 #, c-format
 msgid "error locking file: %s"
-msgstr "errore durante il bloccaggio del file: %s"
+msgstr "errore nel bloccaggio del file: %s"
 
 #: modules/files.c:109 modules/files.c:453 modules/files.c:822
 #: modules/files.c:1115 modules/files.c:1321 modules/files.c:1550
@@ -430,12 +419,12 @@ msgstr "impossibile eseguire lo stat su `%s': %s"
 #: modules/files.c:137
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "errore durante la creazione di `%s': %s"
+msgstr "errore nella creazione di `%s': %s"
 
 #: modules/files.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "il file di backup `%s' era un symlink"
+msgstr "il file di backup `%s' esiste e non è un file standard"
 
 #: modules/files.c:871 modules/files.c:1349
 #, c-format
@@ -476,23 +465,23 @@ msgstr ""
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr "errore durante l'inizializzazione della library di kerberos"
+msgstr "errore nell'inizializzazione della library di kerberos"
 
 #: modules/krb5.c:144 modules/krb5.c:224 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "errore durante l'analisi del nome utente `%s' per kerberos"
+msgstr "errore nell'analisi del nome utente `%s' per kerberos"
 
 #: modules/krb5.c:214 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "nessun attributo %s per la struttura dell'entità %s"
+msgstr "nessun %s o attributo %s per la struttura dell'entità"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "nessun attributo %s o %s per l'entità"
+msgstr "nessun %s o attributo %s per l'entità"
 
 #: modules/krb5.c:324
 #, c-format
@@ -502,7 +491,7 @@ msgstr "l'entità è stata creata senza attributi %s o %s"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "errore durante la lettura delle informazioni per `%s' da kerberos"
+msgstr "errore nella lettura delle informazioni per `%s' da kerberos"
 
 #: modules/krb5.c:604
 #, c-format
@@ -512,7 +501,7 @@ msgstr "nessun attributo %s per l'entità"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "errore durante la configurazione della password per `%s'"
+msgstr "errore nella configurazione della password per `%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -528,7 +517,7 @@ msgstr "Password per Admin Principal di kerberos"
 
 #: modules/ldap.c:215 modules/ldap.c:248
 msgid "error initializing ldap library"
-msgstr "errore durante l'inizializzazione library ldap"
+msgstr "errore nell'inizializzazione della libreria ldap"
 
 #: modules/ldap.c:226 modules/ldap.c:259
 #, c-format
@@ -541,16 +530,15 @@ msgstr "impossibile negoziare TLS con il server LDAP"
 
 #: modules/ldap.c:407
 msgid "could not bind to LDAP server"
-msgstr "impossibile collegarsi con il server LDAP"
+msgstr "impossibile collegarsi al server LDAP"
 
 #: modules/ldap.c:420
-#, fuzzy
 msgid "could not search LDAP server"
-msgstr "impossibile collegarsi con il server LDAP"
+msgstr "impossibile trovare il server LDAP"
 
 #: modules/ldap.c:429
 msgid "LDAP server appears to have no root DSE"
-msgstr ""
+msgstr "il server LDAP non ha DSE di root"
 
 #: modules/ldap.c:627 modules/ldap.c:1168 modules/ldap.c:1284
 #: modules/ldap.c:1347 modules/ldap.c:1460 modules/ldap.c:1554
@@ -561,7 +549,8 @@ msgstr ""
 
 #: modules/ldap.c:636
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "errore nella configurazione del nome sul nome distinto basato su LDAP"
+msgstr ""
+"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1142
 #, c-format
@@ -580,12 +569,12 @@ msgstr "impossibile convertire i dati interni in LDAPMods"
 #: modules/ldap.c:1201 modules/ldap.c:1412
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "errore durante la modifica della voce di directory LDAP: %s"
+msgstr "errore nella modifica della voce di directory LDAP: %s"
 
 #: modules/ldap.c:1221
 #, c-format
 msgid "error renaming LDAP directory entry: %s\n"
-msgstr "errore durante la rinominazione della voce di directory LDAP: %s\n"
+msgstr "errore nel rinominare la voce di directory LDAP: %s\n"
 
 #: modules/ldap.c:1269
 #, c-format
@@ -595,13 +584,13 @@ msgstr "nessun attributo %s per l'oggetto"
 #: modules/ldap.c:1296
 #, c-format
 msgid "error removing LDAP directory entry: %s.\n"
-msgstr "errore durante la rimozione della voce di directory LDAP: %s.\n"
+msgstr "errore nella rimozione della voce di directory LDAP: %s.\n"
 
 #: modules/ldap.c:1333 modules/ldap.c:1355 modules/ldap.c:1445
 #: modules/ldap.c:1539
 #, c-format
 msgid "object has no %s attribute"
-msgstr "nessun attributo %s per "
+msgstr "nessun attributo %s per l'oggetto"
 
 #: modules/ldap.c:1475
 msgid "no such object in LDAP directory"
@@ -616,17 +605,15 @@ msgstr "nessun attributo `%s' trovato"
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
-"errore durante la configurazione della password nella directory LDAP per %s: "
-"%s"
+"errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2171
 msgid "LDAP Server Name"
 msgstr "Nome del server LDAP"
 
 #: modules/ldap.c:2177
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP Base DN "
+msgstr "DN inizio ricerca LDAP "
 
 #: modules/ldap.c:2183
 msgid "LDAP Bind DN"
@@ -645,9 +632,9 @@ msgid "LDAP SASL Authorization User"
 msgstr "Autorizzazione utente LDAP SASL"
 
 #: samples/lookup.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Errore durante l'inizializzazione di %s: %s.\n"
+msgstr "Errore nell'inizializzazione di %s: %s.\n"
 
 #: samples/lookup.c:75
 #, c-format
@@ -679,90 +666,12 @@ msgstr "Classi oggetto utente di default:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "nomi attributi dell'utente di default:\n"
+msgstr "Nomi attributi dell'utente di default:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "Prelievo attributi dell'utente di defalut:\n"
+msgstr "Raccolta attributi dell'utente di default:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
-
-#~ msgid "error searching LDAP directory"
-#~ msgstr "errore durante la ricerca della directory LDAP"
-
-#~ msgid "no `%s' attribute using `%s' scheme found"
-#~ msgstr "nessun attributo `%s' usando lo schema `%s' trovato"
-
-#~ msgid "entity object has no `%s' attribute"
-#~ msgstr "l'oggetto entità non ha attributi `%s'"
-
-#, fuzzy
-#~ msgid "No group named `%s' exists.\n"
-#~ msgstr "Nessun nome gruppo specificato.\n"
-
-#, fuzzy
-#~ msgid "Error creating group `%s' with GID %ld.\n"
-#~ msgstr "Errore durante la creazione del gruppo per %s: %s.\n"
-
-#, fuzzy
-#~ msgid "No group with GID %ld exists.\n"
-#~ msgstr "Ricerca del gruppo con ID %d.\n"
-
-#~ msgid "Bad UID for %s.\n"
-#~ msgstr "UID per %s non valido.\n"
-
-#~ msgid "Bad GID for %s.\n"
-#~ msgstr "GID per %s non valido.\n"
-
-#~ msgid "No home directory for %s.\n"
-#~ msgstr "Nessuna directory home per %s.\n"
-
-#~ msgid "Error reading old home directory for %s: %s.\n"
-#~ msgstr ""
-#~ "Errore durante la lettura della vecchia directory home per %s: %s.\n"
-
-#~ msgid "dump of struct lu_ent at %p:\n"
-#~ msgstr "dump di struct lu_ent a %p:\n"
-
-#~ msgid " magic = %08x\n"
-#~ msgstr "magic = %08x\n"
-
-#~ msgid " type = %s\n"
-#~ msgstr " tipo = %s\n"
-
-#~ msgid "user"
-#~ msgstr "utente"
-
-#~ msgid "group"
-#~ msgstr "gruppo"
-
-#~ msgid ""
-#~ "\n"
-#~ "Before copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Prima della copiatura:\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "After copy:\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Dopo la copiatura:\n"
-
-#~ msgid "freeing lu_ent at %p.\n"
-#~ msgstr "liberazione di lu_ent a %p.\n"
-
-#~ msgid "Group #%d does not exist.\n"
-#~ msgstr "Il gruppo #%d non esiste.\n"
-
-#~ msgid "Error initializing lu.\n"
-#~ msgstr "Errore durante l'inizializzazione di lu.\n"
-
-#~ msgid "could not determine expected DN"
-#~ msgstr "impossibile determinare il DN previsto"
-
-#~ msgid "could not map name to DN"
-#~ msgstr "impossibile rilevare il nome dal DN"
