@@ -31,17 +31,22 @@ main(int argc, char **argv)
 {
 	struct lu_context *lu;
 	struct lu_error *error = NULL;
-	gboolean group = FALSE;
+	gboolean group = FALSE, full = FALSE;
 	int c;
+	struct lu_ent *ent;
 	GValueArray *names;
 	GValue *name;
+	GPtrArray *accounts;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 	setlocale(LC_ALL, "");
 
-	while ((c = getopt(argc, argv, "g")) != -1) {
+	while ((c = getopt(argc, argv, "fg")) != -1) {
 		switch (c) {
+		case 'f':
+			full = TRUE;
+			break;
 		case 'g':
 			group = TRUE;
 			break;
@@ -59,20 +64,37 @@ main(int argc, char **argv)
 		return 1;
 	}
 
-	if (group == FALSE) {
-		names = lu_users_enumerate(lu, argv[optind], &error);
-	} else {
-		names = lu_groups_enumerate(lu, argv[optind], &error);
-	}
+	if (full == FALSE) {
+		if (group == FALSE) {
+			names = lu_users_enumerate(lu, argv[optind], &error);
+		} else {
+			names = lu_groups_enumerate(lu, argv[optind], &error);
+		}
 
-	for (c = 0; (names != NULL) && (c < names->n_values); c++) {
-		name = g_value_array_get_nth(names, c);
-		g_print(" Found %s named `%s'.\n",
-			group ? "group" : "user",
-			g_value_get_string(name));
-	}
-	if (names != NULL) {
-		g_value_array_free(names);
+		for (c = 0; (names != NULL) && (c < names->n_values); c++) {
+			name = g_value_array_get_nth(names, c);
+			g_print(" Found %s named `%s'.\n",
+				group ? "group" : "user",
+				g_value_get_string(name));
+		}
+		if (names != NULL) {
+			g_value_array_free(names);
+		}
+	} else {
+		if (group == FALSE) {
+			accounts = lu_users_enumerate_full(lu, argv[optind], &error);
+		} else {
+			accounts = lu_groups_enumerate_full(lu, argv[optind], &error);
+		}
+		for (c = 0; (accounts != NULL) && (c < accounts->len); c++) {
+			ent = g_ptr_array_index(accounts, c);
+			g_print("Found account:\n");
+			lu_ent_dump(ent, stdout);
+			lu_ent_free(ent);
+		}
+		if (accounts != NULL) {
+			g_ptr_array_free(accounts, TRUE);
+		}
 	}
 
 	lu_end(lu);

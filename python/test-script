@@ -64,6 +64,8 @@ try:
 	dir = jimbo.get(libuser.HOMEDIRECTORY)
 	print "--------- Looking at user's directory."
 	os.system("ls " + dir[0])
+	print "--------- Looking at mail spool directory."
+	os.system("ls /var/mail/*")
 except:
 	pass
 
@@ -71,3 +73,8 @@ print "--------- Removing the user."
 admin.deleteUser(jimbo)
 print "--------- Grepping for the user."
 os.system("grep jimbo /etc/passwd /etc/group /etc/shadow /etc/gshadow")
+
+print "--------- Getting a list of all users."
+users = admin.enumerateUsersFull()
+for user in users:
+	print "  User `" + user[libuser.USERNAME] + "' has uid " + user[libuser.UIDNUMBER]

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-16 02:34-0500\n"
+"POT-Creation-Date: 2002-01-17 16:12-0500\n"
 "PO-Revision-Date: 2001-08-09 14:20+01:00\n"
 "Last-Translator: Claudia Krug <fhonig@redhat.it>\n"
 "Language-Team: German <LL@li.org>\n"
@@ -28,25 +28,29 @@ msgstr "Fehler beim Erzeugen von `%s': %s"
 msgid "Error removing `%s': %s"
 msgstr "Fehler beim Entfernen von `%s': %s"
 
-#: apps/apputil.c:410
+#: apps/apputil.c:404 apps/apputil.c:408
+msgid "Failed to drop privileges.\n"
+msgstr ""
+
+#: apps/apputil.c:417
 msgid "Internal error.\n"
 msgstr "Interner Fehler.\n"
 
-#: apps/apputil.c:419
+#: apps/apputil.c:426
 msgid "Error initializing PAM.\n"
 msgstr "Fehler beim Initialisieren von PAM.\n"
 
-#: apps/apputil.c:427 apps/apputil.c:451
+#: apps/apputil.c:434 apps/apputil.c:458
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentifizierung fehlgeschlagen: %s\n"
 
-#: apps/apputil.c:436
+#: apps/apputil.c:443
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Interner Fehler.\n"
 
-#: apps/apputil.c:442
+#: apps/apputil.c:449
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -412,7 +416,7 @@ msgstr "Fehler beim Sperren der Datei: %s"
 #: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
 #: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
 #: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
-#: modules/files.c:1949
+#: modules/files.c:1949 modules/files.c:2024 modules/files.c:2039
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' konnte nicht geöffnet werden: %s"
@@ -454,11 +458,11 @@ msgstr "in `%s' konnte nicht geschrieben werden: %s"
 msgid "entity object has no %s attribute"
 msgstr "entity Objekt besitzt kein %s Attribut"
 
-#: modules/files.c:2138 modules/files.c:2204
+#: modules/files.c:2252 modules/files.c:2318
 msgid "not executing with superuser privileges"
 msgstr "Keine Ausführung mit Superuser-Rechten."
 
-#: modules/files.c:2217
+#: modules/files.c:2331
 msgid "no shadow file present -- disabling"
 msgstr "Keine Shadow-Datei vorhanden -- Deaktivierung."
 

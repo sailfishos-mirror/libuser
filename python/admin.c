@@ -480,7 +480,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 				0700, &error)) {
 		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return Py_BuildValue("i", 1);
 	} else {
 		/* Failure.  Mark the error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -666,11 +666,11 @@ libuser_admin_destroy_mail(PyObject *self, PyObject *args, PyObject *kwargs)
 static PyObject *
 libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	PyObject *ent = NULL;
 	PyObject *ret = NULL;
 	PyObject *mkhomedir = self;
 	PyObject *mkmailspool = self;
 	PyObject *subargs, *subkwargs;
+	struct libuser_entity *ent = NULL;
 	struct lu_context *context = NULL;
 	char *keywords[] = { "entity", "mkhomedir", "mkmailspool", NULL };
 
@@ -700,7 +700,7 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			 * the entity structure in a tuple, so create a tuple
 			 * and add just that object to it. */
 			subargs = PyTuple_New(1);
-			PyTuple_SetItem(subargs, 0, ent);
+			PyTuple_SetItem(subargs, 0, (PyObject*) ent);
 			/* Create an empty dictionary for keyword args. */
 			subkwargs = PyDict_New();
 			/* We'll return the result of the creation call. */
@@ -709,12 +709,10 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 		}
 		/* If we got a non-NULL response, then it was okay. */
 		if ((mkmailspool != NULL) && (PyObject_IsTrue(mkmailspool))) {
-			struct libuser_entity *entity;
-			entity = (struct libuser_entity*) ent;
 			if (ret != NULL) {
 				Py_DECREF(ret);
 			}
-			ret = lu_mailspool_create_destroy(context, entity->ent, TRUE) ?
+			ret = lu_mailspool_create_destroy(context, ent->ent, TRUE) ?
 			      Py_BuildValue("") :
 			      NULL;
 		}

@@ -510,8 +510,7 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 	char buf[LINE_MAX * 4];
 	int fd;
 
-	/* Get the name of the directory to create the spool in. */
-	spooldir = lu_cfg_read_single(ctx, "defaults/maildir", "/var/mail");
+	lu_ent_dump(ent, stdout);
 
 	/* Find the GID of the owner of the file. */
 	gid = INVALID;
@@ -523,7 +522,7 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 			if (G_VALUE_HOLDS_LONG(value)) {
 				gid = g_value_get_long(value);
 			} else
-			if (G_VALUE_HOLDS_LONG(value)) {
+			if (G_VALUE_HOLDS_STRING(value)) {
 				gid = strtol(g_value_get_string(value), &p, 0);
 				if (*p != '\0') {
 					gid = INVALID;
@@ -557,6 +556,7 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 					gid = INVALID;
 				}
 			} else {
+				g_warning("Unable to determine user's GID.");
 				g_assert_not_reached();
 			}
 		}
@@ -570,12 +570,13 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 		if (G_VALUE_HOLDS_LONG(value)) {
 			uid = g_value_get_long(value);
 		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
+		if (G_VALUE_HOLDS_STRING(value)) {
 			uid = strtol(g_value_get_string(value), &p, 0);
 			if (*p != '\0') {
 				uid = INVALID;
 			}
 		} else {
+			g_warning("Unable to determine user's UID.");
 			g_assert_not_reached();
 		}
 	}
@@ -590,9 +591,10 @@ lu_mailspool_create_destroy(struct lu_context *ctx, struct lu_ent *ent,
 			username = g_strdup_printf("%ld",
 						   g_value_get_long(value));
 		} else
-		if (G_VALUE_HOLDS_LONG(value)) {
+		if (G_VALUE_HOLDS_STRING(value)) {
 			username = g_value_dup_string(value);
 		} else {
+			g_warning("Unable to determine user's name.");
 			g_assert_not_reached();
 		}
 	}

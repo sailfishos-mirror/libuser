@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser \n"
-"POT-Creation-Date: 2002-01-16 02:34-0500\n"
+"POT-Creation-Date: 2002-01-17 16:12-0500\n"
 "PO-Revision-Date: 2001-11-21 11:52+1000\n"
 "Last-Translator: Jin-Hee Shin <djoo@redhat.com>\n"
 "Language-Team: Red Hat Asia-Pacific\n"
@@ -28,25 +28,29 @@ msgstr "`%s' (을)를 생성하는 도중 오류 발생: %s"
 msgid "Error removing `%s': %s"
 msgstr "`%s' (을)를 삭제하는 도중 오류 발생: %s"
 
-#: apps/apputil.c:410
+#: apps/apputil.c:404 apps/apputil.c:408
+msgid "Failed to drop privileges.\n"
+msgstr ""
+
+#: apps/apputil.c:417
 msgid "Internal error.\n"
 msgstr "내부 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:419
+#: apps/apputil.c:426
 msgid "Error initializing PAM.\n"
 msgstr "PAM을 초기화 하는 도중 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:427 apps/apputil.c:451
+#: apps/apputil.c:434 apps/apputil.c:458
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s 의 인증에 실패했습니다.\n"
 
-#: apps/apputil.c:436
+#: apps/apputil.c:443
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "내부 오류가 발생했습니다.\n"
 
-#: apps/apputil.c:442
+#: apps/apputil.c:449
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -412,7 +416,7 @@ msgstr "`%s' 파일을 잠그는 도중 오류 발생: %s"
 #: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
 #: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
 #: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
-#: modules/files.c:1949
+#: modules/files.c:1949 modules/files.c:2024 modules/files.c:2039
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' (을)를 열 수 없음: %s"
@@ -454,11 +458,11 @@ msgstr "`%s' 에 작성할 수 없음: %s"
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:2138 modules/files.c:2204
+#: modules/files.c:2252 modules/files.c:2318
 msgid "not executing with superuser privileges"
 msgstr "수퍼유저 권한으로 실행할 수 없습니다"
 
-#: modules/files.c:2217
+#: modules/files.c:2331
 msgid "no shadow file present -- disabling"
 msgstr "현재 섀도우 파일이 없음 -- 불가능"
 

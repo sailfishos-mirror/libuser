@@ -52,7 +52,7 @@ struct format_specifier {
 
 static const struct format_specifier format_passwd[] = {
 	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_USERPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{2, LU_USERPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
 	{3, LU_UIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE},
@@ -62,14 +62,14 @@ static const struct format_specifier format_passwd[] = {
 
 static const struct format_specifier format_group[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{2, LU_GROUPPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
 	{3, LU_GIDNUMBER, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
 
 static const struct format_specifier format_shadow[] = {
 	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
 	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE},
 	{4, LU_SHADOWMIN, G_TYPE_LONG, GINT_TO_POINTER(0), FALSE, FALSE},
 	{5, LU_SHADOWMAX, G_TYPE_LONG, GINT_TO_POINTER(99999), FALSE, FALSE},
@@ -81,7 +81,7 @@ static const struct format_specifier format_shadow[] = {
 
 static const struct format_specifier format_gshadow[] = {
 	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, TRUE},
+	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, "!!", FALSE, FALSE},
 	{3, LU_ADMINISTRATORUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 	{4, LU_MEMBERUID, G_TYPE_STRING, NULL, TRUE, FALSE},
 };
@@ -321,6 +321,8 @@ lu_files_parse_user_entry(const gchar * line,
 			  struct lu_ent *ent)
 {
 	gboolean ret;
+	ent->type = lu_user;
+	lu_ent_clear_all(ent);
 	ret = parse_generic(line, format_passwd, G_N_ELEMENTS(format_passwd),
 			    ent);
 	return ret;
@@ -333,6 +335,8 @@ lu_files_parse_group_entry(const gchar * line,
 			   struct lu_ent *ent)
 {
 	gboolean ret;
+	ent->type = lu_group;
+	lu_ent_clear_all(ent);
 	ret = parse_generic(line, format_group, G_N_ELEMENTS(format_group),
 			    ent);
 	return ret;
@@ -345,6 +349,8 @@ lu_shadow_parse_user_entry(const gchar * line,
 			   struct lu_ent *ent)
 {
 	gboolean ret;
+	ent->type = lu_user;
+	lu_ent_clear_all(ent);
 	ret = parse_generic(line, format_shadow, G_N_ELEMENTS(format_shadow),
 			    ent);
 	return ret;
@@ -357,6 +363,8 @@ lu_shadow_parse_group_entry(const gchar * line,
 			    struct lu_ent *ent)
 {
 	gboolean ret;
+	ent->type = lu_group;
+	lu_ent_clear_all(ent);
 	ret = parse_generic(line, format_gshadow, G_N_ELEMENTS(format_gshadow),
 			    ent);
 	return ret;
@@ -426,9 +434,8 @@ lu_files_user_lookup_name(struct lu_module *module,
 			  struct lu_error **error)
 {
 	gboolean ret;
-	ret =
-	    generic_lookup(module, "passwd", name,
-			   lu_files_parse_user_entry, 1, ent, error);
+	ret = generic_lookup(module, "passwd", name,
+			     lu_files_parse_user_entry, 1, ent, error);
 	return ret;
 }
 
@@ -441,9 +448,8 @@ lu_files_user_lookup_id(struct lu_module *module,
 	char *key;
 	gboolean ret = FALSE;
 	key = g_strdup_printf("%ld", uid);
-	ret =
-	    generic_lookup(module, "passwd", key,
-			   lu_files_parse_user_entry, 3, ent, error);
+	ret = generic_lookup(module, "passwd", key,
+			     lu_files_parse_user_entry, 3, ent, error);
 	g_free(key);
 	return ret;
 }
@@ -2047,6 +2053,10 @@ lu_files_enumerate_full(struct lu_module *module,
 	ret = g_ptr_array_new();
 	while ((buf = line_read(fp)) != NULL) {
 		ent = lu_ent_new();
+		key = strchr(buf, '\n');
+		if (key != NULL) {
+			*key = '\0';
+		}
 		parser(buf, ent);
 		g_ptr_array_add(ret, ent);
 		g_free(buf);

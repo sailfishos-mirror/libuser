@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"POT-Creation-Date: 2002-01-16 02:34-0500\n"
+"POT-Creation-Date: 2002-01-17 16:12-0500\n"
 "PO-Revision-Date: 2001-08-07 23:05+0100\n"
 "Last-Translator: Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -35,33 +35,37 @@ msgstr "error al crear `%s': %s"
 msgid "Error removing `%s': %s"
 msgstr "Error al eliminar %s: %s"
 
+#: apps/apputil.c:404 apps/apputil.c:408
+msgid "Failed to drop privileges.\n"
+msgstr ""
+
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:410
+#: apps/apputil.c:417
 msgid "Internal error.\n"
 msgstr "Error interno.\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
-#: apps/apputil.c:419
+#: apps/apputil.c:426
 msgid "Error initializing PAM.\n"
 msgstr "Error inicializando PAM.\n"
 
 # apps/apputil.c:339
 # apps/apputil.c:339
-#: apps/apputil.c:427 apps/apputil.c:451
+#: apps/apputil.c:434 apps/apputil.c:458
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificación fallida para %s.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:436
+#: apps/apputil.c:443
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Error interno.\n"
 
-#: apps/apputil.c:442
+#: apps/apputil.c:449
 msgid "User mismatch.\n"
 msgstr ""
 
@@ -566,7 +570,7 @@ msgstr "error cerrando fichero: %s"
 #: modules/files.c:1395 modules/files.c:1565 modules/files.c:1680
 #: modules/files.c:1695 modules/files.c:1770 modules/files.c:1787
 #: modules/files.c:1838 modules/files.c:1857 modules/files.c:1934
-#: modules/files.c:1949
+#: modules/files.c:1949 modules/files.c:2024 modules/files.c:2039
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se ha podido abrir `%s': %s"
@@ -628,13 +632,13 @@ msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2138 modules/files.c:2204
+#: modules/files.c:2252 modules/files.c:2318
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2217
+#: modules/files.c:2331
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 

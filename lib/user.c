@@ -244,6 +244,9 @@ run_single(struct lu_context *context,
 	   gpointer *ret,
 	   struct lu_error **error)
 {
+	GPtrArray *ptrs;
+	int i;
+
 	g_assert(context != NULL);
 	g_assert(module != NULL);
 
@@ -315,6 +318,13 @@ run_single(struct lu_context *context,
 	case users_enumerate_full:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->users_enumerate_full(module, sdata, error);
+		if (*ret) {
+			ptrs = *ret;
+			for (i = 0; i < ptrs->len; i++) {
+				lu_ent_add_module(g_ptr_array_index(ptrs, i),
+						  module->name);
+			}
+		}
 		return TRUE;
 	case users_enumerate_by_group_full:
 		g_return_val_if_fail(sdata != NULL, FALSE);
@@ -324,6 +334,13 @@ run_single(struct lu_context *context,
 							     sdata,
 							     ldata,
 							     error);
+		if (*ret) {
+			ptrs = *ret;
+			for (i = 0; i < ptrs->len; i++) {
+				lu_ent_add_module(g_ptr_array_index(ptrs, i),
+						  module->name);
+			}
+		}
 		return TRUE;
 	case group_lookup_name:
 		g_return_val_if_fail(sdata != NULL, FALSE);
@@ -391,6 +408,13 @@ run_single(struct lu_context *context,
 	case groups_enumerate_full:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate_full(module, sdata, error);
+		if (*ret) {
+			ptrs = *ret;
+			for (i = 0; i < ptrs->len; i++) {
+				lu_ent_add_module(g_ptr_array_index(ptrs, i),
+						  module->name);
+			}
+		}
 		return TRUE;
 	case groups_enumerate_by_user_full:
 		g_return_val_if_fail(sdata != NULL, FALSE);
@@ -400,6 +424,13 @@ run_single(struct lu_context *context,
 							     sdata,
 							     ldata,
 							     error);
+		if (*ret) {
+			ptrs = *ret;
+			for (i = 0; i < ptrs->len; i++) {
+				lu_ent_add_module(g_ptr_array_index(ptrs, i),
+						  module->name);
+			}
+		}
 		return TRUE;
 	case uses_elevated_privileges:
 		return module->uses_elevated_privileges(module);
@@ -453,6 +484,122 @@ remove_duplicate_values(GValueArray *array)
 			}
 		}
 	}
+}
+
+static int
+compare_ints(gconstpointer a, gconstpointer b)
+{
+	return GPOINTER_TO_INT(a) - GPOINTER_TO_INT(b);
+}
+
+static GPtrArray *
+merge_ent_array_duplicates(GPtrArray *array)
+{
+	GPtrArray *ret = NULL;
+	GTree *tree;
+	int i, j;
+	const char *attr;
+	struct lu_ent *current, *saved;
+	GQuark key;
+	GValueArray *values;
+	GValue *value;
+	GList *attributes, *list;
+	struct {
+		GTree *name, *id;
+	} users, groups, *which;
+	g_return_val_if_fail(array != NULL, NULL);
+	/* We need four trees to hold the known entities. */
+	users.name = g_tree_new(compare_ints);
+	groups.name = g_tree_new(compare_ints);
+	users.id = g_tree_new(compare_ints);
+	groups.id = g_tree_new(compare_ints);
+	/* A structure to hold the new list. */
+	ret = g_ptr_array_new();
+	/* Iterate over every entity in the incoming list. */
+	for (i = 0; i < array->len; i++) {
+		current = g_ptr_array_index(array, i);
+		fflush(stdout);
+		key = 0;
+		which = NULL;
+		values = NULL;
+		tree = NULL;
+		/* Get the name of the user or group. */
+		if (current->type == lu_user) {
+			values = lu_ent_get(current, LU_USERNAME);
+			which = &users;
+		} else
+		if (current->type == lu_group) {
+			values = lu_ent_get(current, LU_GROUPNAME);
+			which = &groups;
+		} else {
+			g_warning("Unknown entity(%d) type: %d.\n",
+				  i, current->type);
+			g_assert_not_reached();
+		}
+		value = g_value_array_get_nth(values, 0);
+		/* Convert that name or number to a quark. */
+		if (G_VALUE_HOLDS_STRING(value)) {
+			key = g_quark_from_string(g_value_get_string(value));
+			tree = which->name;
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			key = g_value_get_long(value);
+			tree = which->id;
+		} else {
+			g_assert_not_reached();
+		}
+		/* Now we have a quark, and a tree.  Check if there's already
+		 * an entity with that quark in that tree. */
+		saved = g_tree_lookup(tree, GINT_TO_POINTER(key));
+		/* If it's not in there, add this one. */
+		if (saved == NULL) {
+			g_tree_insert(tree, GINT_TO_POINTER(key), current);
+			g_ptr_array_add(ret, current);
+		} else {
+			/* Merge all of its data into the existing one; first,
+			 * the pending data. */
+			attributes = lu_ent_get_attributes_current(current);
+			list = attributes;
+			while (attributes != NULL) {
+				attr = (const char *)attributes->data;
+				values = lu_ent_get_current(current, attr);
+				for (j = 0; j < values->n_values; j++) {
+					value = g_value_array_get_nth(values,
+								      j);
+					lu_ent_add_current(saved, attr, value);
+				}
+				attributes = g_list_next(attributes);
+			}
+			g_list_free(list);
+			/* Merge the current data. */
+			attributes = lu_ent_get_attributes(current);
+			while (attributes != NULL) {
+				attr = (const char *)attributes->data;
+				values = lu_ent_get(current, attr);
+				for (j = 0; j < values->n_values; j++) {
+					value = g_value_array_get_nth(values,
+								      j);
+					lu_ent_add(saved, attr, value);
+				}
+				attributes = g_list_next(attributes);
+			}
+			g_list_free(list);
+			/* Now merge the entity's list of modules. */
+			for (j = 0; j < current->modules->n_values; j++) {
+				value = g_value_array_get_nth(current->modules,
+							      j);
+				g_value_array_append(saved->modules, value);
+			}
+			remove_duplicate_values(saved->modules);
+			lu_ent_free(current);
+		}
+	}
+	g_tree_destroy(users.name);
+	g_tree_destroy(groups.name);
+	g_tree_destroy(users.id);
+	g_tree_destroy(groups.id);
+	g_ptr_array_free(array, TRUE);
+	return ret;
 }
 
 static gboolean
@@ -606,6 +753,7 @@ lu_dispatch(struct lu_context *context,
 	GPtrArray *ptrs = NULL;
 	GValue *value = NULL;
 	gpointer scratch = NULL;
+	int i;
 
 	LU_ERROR_CHECK(error);
 
@@ -699,6 +847,7 @@ lu_dispatch(struct lu_context *context,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
 			if (entity != NULL) {
+				lu_ent_revert(tmp);
 				lu_ent_copy(tmp, entity);
 			}
 			success = TRUE;
@@ -725,6 +874,7 @@ lu_dispatch(struct lu_context *context,
 		if (run_list(context, entity->modules,
 			    logic_and, id,
 			    sdata, ldata, tmp, &scratch, error)) {
+			lu_ent_revert(tmp);
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
 		}
@@ -789,8 +939,19 @@ lu_dispatch(struct lu_context *context,
 		if (run_list(context, context->module_names,
 			    logic_or, id,
 			    sdata, ldata, tmp, (gpointer*)&ptrs, error)) {
+			if (ptrs != NULL) {
+				for (i = 0; i < ptrs->len; i++) {
+					struct lu_ent *ent;
+					ent = g_ptr_array_index(ptrs, i);
+					lu_ent_revert(ent);
+				}
+			}
 			*ret = ptrs;
 			success = TRUE;
+		}
+		/* Clean up results. */
+		if (*ret != NULL) {
+			*ret = merge_ent_array_duplicates(*ret);
 		}
 		break;
 	case uses_elevated_privileges:

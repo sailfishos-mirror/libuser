@@ -76,10 +76,12 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 {
 	int i, j;
 	struct lu_attribute *attribute;
+	GValue *value;
 	g_return_if_fail(ent != NULL);
 	fprintf(fp, "dump of struct lu_ent at %p:\n", ent);
 	fprintf(fp, " magic = %08x\n", ent->magic);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	g_return_if_fail((ent->type == lu_user) || (ent->type == lu_group));
 	switch (ent->type) {
 		case lu_user:
 			fprintf(fp, " type = user\n");
@@ -88,10 +90,24 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 			fprintf(fp, " type = group\n");
 			break;
 		default:
-			g_return_if_fail((ent->type == lu_user) ||
-					 (ent->type == lu_group));
 			break;
 	}
+	fprintf(fp, " modules = (");
+	for (i = 0; i < ent->modules->n_values; i++) {
+		value = g_value_array_get_nth(ent->modules, i);
+		if (i > 0) {
+			fprintf(fp, ", ");
+		}
+		if (G_VALUE_HOLDS_STRING(value)) {
+			fprintf(fp, "`%s'", g_value_get_string(value));
+		} else
+		if (G_VALUE_HOLDS_LONG(value)) {
+			fprintf(fp, "%ld", g_value_get_long(value));
+		} else {
+			fprintf(fp, "?");
+		}
+	}
+	fprintf(fp, ")\n");
 	for (i = 0; i < ent->current->len; i++) {
 		attribute = &g_array_index(ent->current,
 					   struct lu_attribute,
@@ -334,6 +350,7 @@ static void
 lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
+	GValue *current;
 	struct lu_attribute newattr;
 	int i;
 	char *lattr;
@@ -354,7 +371,29 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 		g_array_append_val(list, newattr);
 		g_free(lattr);
 	}
-	g_value_array_append(dest, value);
+	for (i = 0; i < dest->n_values; i++) {
+		current = g_value_array_get_nth(dest, i);
+		if (G_VALUE_TYPE(value) != G_VALUE_TYPE(current)) {
+			continue;
+		}
+		if (G_VALUE_HOLDS_LONG(value)) {
+			if (g_value_get_long(value) ==
+			    g_value_get_long(current)) {
+				break;
+			}
+		} else
+		if (G_VALUE_HOLDS_STRING(value)) {
+			if (g_quark_from_string(g_value_get_string(value)) ==
+			    g_quark_from_string(g_value_get_string(current))) {
+				break;
+			}
+		} else {
+			g_assert_not_reached();
+		}
+	}
+	if (i >= dest->n_values) {
+		g_value_array_append(dest, value);
+	}
 }
 
 static void
