@@ -721,16 +721,17 @@ generic_mod(struct lu_module *module, const char *base_name,
 	fd = open(filename, O_RDWR);
 	if(fd != -1) {
 		lock = lu_util_lock_obtain(fd);
+		if(lock == NULL) {
+			g_free(filename);
+			g_return_val_if_fail(lock != NULL, FALSE);
+		}
 		for(i = 0; i < format_count; i++) {
 			if(formats[i].suppress) {
 				continue;
 			}
 			values = lu_ent_get(ent, formats[i].attribute);
 			if(!formats[i].multiple) {
-				p = (char*)values->data;
-				if(p == NULL) {
-					p = "";
-				}
+				p = (char*)values->data ?: "";
 				/* If there's a prefix, strip it. */
 				if(formats[i].prefix) {
 					if(strncmp(p, formats[i].prefix,
@@ -765,12 +766,43 @@ generic_mod(struct lu_module *module, const char *base_name,
 					new_value = q;
 				}
 			}
+#ifdef DEBUG
+			fprintf(stderr, "Calling lu_util_field_write(%s, %s, "
+				"%d, %s)\n", base_name, (const char*)name->data,
+				formats[i].position, new_value);
+#endif
 			ret = lu_util_field_write(fd, (const char*)name->data,
 						  formats[i].position,
 						  new_value);
 			g_free(new_value);
 			if(ret != TRUE) {
+#ifdef DEBUG
+				fprintf(stderr, "Error writing to field.\n");
+#endif
 				break;
+			} else {
+				/* we may have just renamed the account (we're
+				 * safe assuming the new name is correct here
+				 * because if we renamed, we did it first),
+				 * so switch to using the account's name */
+				if(ent->type == lu_user) {
+					name = lu_ent_get(ent, LU_USERNAME);
+					if(name == NULL) {
+						g_warning("entity object has "
+							  "no %s attribute",
+							  LU_USERNAME);
+						break;
+					}
+				}
+				if(ent->type == lu_group) {
+					name = lu_ent_get(ent, LU_GROUPNAME);
+					if(name == NULL) {
+						g_warning("entity object has "
+							  "no %s attribute",
+							  LU_GROUPNAME);
+						break;
+					}
+				}
 			}
 		}
 		lu_util_lock_free(fd, lock);

@@ -70,6 +70,8 @@ rm -fr $RPM_BUILD_ROOT
 * Fri Jun 15 2001 Nalin Dahyabhai <nalin@redhat.com>
 - clean up quota bindings some more
 - finish most of the ldap bindings
+- fix a subtle bug in the files module that would show up when renaming accounts
+- fix mapping methods for entity structures in python
 
 * Thu Jun 14 2001 Nalin Dahyabhai <nalin@redhat.com>
 - get bindings for prompts to work correctly

@@ -31,7 +31,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define DEBUG
+#undef  DEBUG
 
 enum interact_indices {
 	LU_LDAP_SERVER,

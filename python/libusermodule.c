@@ -27,7 +27,7 @@
 #define FIXME fprintf(stderr, "Function %s not implemented.\n", __FUNCTION__); \
 return NULL;
 
-#undef  DEBUG_BINDING
+#define DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING
 #endif
@@ -349,21 +349,14 @@ libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 	return convert_glist_pystringlist(lu_ent_get(self->ent, attr));
 }
 
-static PyObject*
+static int
 libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	       		PyObject *args)
 {
 	char *attr = NULL;
 	int i, size;
-	PyObject *arg;
 
 	DEBUG_ENTRY;
-
-	if(!PyArg_ParseTuple(args, "O", &arg)) {
-		PyErr_SetString(PyExc_TypeError, "expected a string or list");
-		DEBUG_EXIT;
-		return NULL;
-	}
 
 	if(!PyString_Check(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
@@ -375,7 +368,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 	#endif
 
-	if(PyString_Check(arg)) {
+	if(PyString_Check(args)) {
 		#ifdef DEBUG_BINDING
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n",
 			getindent(),
@@ -384,17 +377,17 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		#endif
 		lu_ent_set(self->ent, attr, PyString_AsString(args));
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return 0;
 	}
 
-	if(PyList_Check(arg)) {
-		size = PyList_Size(arg);
+	if(PyList_Check(args)) {
+		size = PyList_Size(args);
 		#ifdef DEBUG_BINDING
 		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
 		#endif
 		lu_ent_clear(self->ent, attr);
 		for(i = 0; i < size; i++) {
-			if(!PyString_Check(PyList_GetItem(arg, i))) {
+			if(!PyString_Check(PyList_GetItem(args, i))) {
 				PyErr_SetString(PyExc_TypeError,
 						"expected strings in list");
 				continue;
@@ -402,19 +395,19 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			#ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
-				PyString_AsString(PyList_GetItem(arg, i)),
+				PyString_AsString(PyList_GetItem(args, i)),
 				attr);
 			#endif
 			lu_ent_add(self->ent, attr,
-				   PyString_AsString(PyList_GetItem(arg, i)));
+				   PyString_AsString(PyList_GetItem(args, i)));
 		}
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		return 0;
 	}
 
 	PyErr_SetString(PyExc_TypeError, "expected string or list of strings");
 	DEBUG_EXIT;
-	return NULL;
+	return -1;
 }
 
 static PyMappingMethods
@@ -1276,7 +1269,6 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	int type = lu_user;
 	lu_context_t *context;
 	struct libuser_admin *ret;
-	PyObject *prompter;
 
 	DEBUG_ENTRY;
 

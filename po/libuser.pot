@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-15 05:02-0400\n"
+"POT-Creation-Date: 2001-06-15 17:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,12 +294,12 @@ msgstr ""
 msgid "freeing lu_ent at %p.\n"
 msgstr ""
 
-#: modules/files.c:116 modules/files.c:1148
+#: modules/files.c:116 modules/files.c:1180
 #, c-format
 msgid "Couldn't open '%s'.\n"
 msgstr ""
 
-#: modules/files.c:122 modules/files.c:159 modules/files.c:1155
+#: modules/files.c:122 modules/files.c:159 modules/files.c:1187
 #, c-format
 msgid "Couldn't lock '%s'.\n"
 msgstr ""
@@ -319,12 +319,12 @@ msgstr ""
 msgid "Couldn't stat or invalid permissions on '%s'.\n"
 msgstr ""
 
-#: modules/files.c:1163
+#: modules/files.c:1195
 #, c-format
 msgid "Couldn't open '%s' for reading.\n"
 msgstr ""
 
-#: modules/files.c:1230 modules/files.c:1280
+#: modules/files.c:1262 modules/files.c:1312
 msgid "Not executing with superuser privileges."
 msgstr ""
 
