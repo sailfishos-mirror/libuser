@@ -1,15 +1,17 @@
 # Slovak translations for libuser package
 # Slovenské preklady pre balík libuser.
-# Copyright (C) 2003 Red Hat, Inc.
+# Copyright (C) 2003, 2004 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
-# Marcel Telka <marcel@telka.sk>, 2003.
+# Marcel Telka <marcel@telka.sk>, 2003, 2004.
+#
+# $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2004-11-01 11:20+0100\n"
-"PO-Revision-Date: 2003-07-31 21:59+0200\n"
+"PO-Revision-Date: 2004-11-01 18:11+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -44,17 +46,16 @@ msgstr "Interná chyba.\n"
 #: apps/apputil.c:506
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s nemá oprávnenie meniť finger informácie pre %s\n"
 
 #: apps/apputil.c:508
-#, fuzzy
 msgid "Unknown user context"
-msgstr "neznáma chyba"
+msgstr "Neznámy kontext používateľa"
 
 #: apps/apputil.c:516
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Nepodarilo sa nastaviť predvolený kontext pre /etc/passwd\n"
 
 #: apps/apputil.c:525
 #, c-format
@@ -163,9 +164,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Platnosť konta vyprší:\t%s\n"
 
 #: apps/lchage.c:279
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Zlyhala úprava informácií o veku pre %s.\n"
+msgstr "Zlyhala úprava informácií o veku pre %s: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -237,9 +238,9 @@ msgid "Shell changed.\n"
 msgstr "Shell zmenený.\n"
 
 #: apps/lchsh.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Shell zmenený.\n"
+msgstr "Shell nezmenený: %s\n"
 
 #: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -251,9 +252,9 @@ msgid "No group name specified.\n"
 msgstr "Nebolo zadané meno skupiny.\n"
 
 #: apps/lgroupadd.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Vytvorenie skupiny zlyhalo.\n"
+msgstr "Vytvorenie skupiny zlyhalo: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:117 apps/lpasswd.c:152
 #, c-format
@@ -261,9 +262,9 @@ msgid "Group %s does not exist.\n"
 msgstr "Skupina %s neexistuje.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Skupiny %s nemohla byť vymazaná: %s.\n"
+msgstr "Skupina %s nemohla byť vymazaná: %s\n"
 
 #: apps/lgroupmod.c:110 apps/lusermod.c:118
 #, c-format
@@ -271,24 +272,24 @@ msgid "Both -L and -U specified.\n"
 msgstr "Boli zadané obidve -L a -U.\n"
 
 #: apps/lgroupmod.c:228 apps/lgroupmod.c:237
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Zlyhalo nastavenie hesla pre skupinu %s.\n"
+msgstr "Zlyhalo nastavenie hesla pre skupinu %s: %s\n"
 
 #: apps/lgroupmod.c:246
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Skupina %s nemohla byť uzamknutá.\n"
+msgstr "Skupina %s nemohla byť uzamknutá: %s\n"
 
 #: apps/lgroupmod.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Skupina %s nemohla byť odomknutá.\n"
+msgstr "Skupina %s nemohla byť odomknutá: %s\n"
 
 #: apps/lgroupmod.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Skupina %s nemohla byť zmenená: %s.\n"
+msgstr "Skupina %s nemohla byť zmenená: %s\n"
 
 #: apps/lid.c:82
 #, c-format
@@ -325,9 +326,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "Zamietam vytvorenie konta s UID 0.\n"
 
 #: apps/lnewusers.c:240
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %ld: %s\n"
-msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %ld.\n"
+msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %ld: %s\n"
 
 #: apps/lnewusers.c:294
 #, c-format
@@ -388,9 +389,9 @@ msgid "Password changed.\n"
 msgstr "Heslo zmenené.\n"
 
 #: apps/luseradd.c:198 apps/luseradd.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Chyba pri vytváraní skupiny `%s'.\n"
+msgstr "Chyba pri vytváraní skupiny `%s': %s\n"
 
 #: apps/luseradd.c:279
 #, c-format
@@ -430,7 +431,7 @@ msgstr "Skupina s GID %ld nemala meno skupiny.\n"
 #: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "Skupiny %s nemohla byť vymazaná: %s.\n"
+msgstr "Skupina %s nemohla byť vymazaná: %s.\n"
 
 #: apps/luserdel.c:152
 #, c-format
@@ -488,14 +489,14 @@ msgid "could not open configuration file `%s': %s"
 msgstr "nepodarilo sa otvoriť konfiguračný súbor `%s': %s"
 
 #: lib/config.c:79
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "nepodarilo sa otvoriť konfiguračný súbor `%s': %s"
+msgstr "nepodarilo sa zistiť stav konfiguračného súboru `%s': %s"
 
 #: lib/config.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "nepodarilo sa otvoriť konfiguračný súbor `%s': %s"
+msgstr "nepodarilo sa prečítať konfiguračný súbor `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -634,24 +635,24 @@ msgid "error locking file: %s"
 msgstr "chyba pri zamykaní súboru: %s"
 
 #: modules/files.c:109
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "nepodarilo sa zapísať do `%s': %s"
+msgstr "nepodarilo sa získať bezpečnostný kontext `%s': %s"
 
 #: modules/files.c:115
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "nepodarilo sa zistiť stav `%s': %s"
+msgstr "nepodarilo sa nastaviť predvolený bezpečnostný kontext: %s"
 
 #: modules/files.c:122
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "nepodarilo sa zapísať do `%s': %s"
+msgstr "nepodarilo sa nastaviť predvolený bezpečnostný kontext na `%s': %s"
 
 #: modules/files.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't reset default security context to `%s': %s"
-msgstr "nepodarilo sa zapísať do `%s': %s"
+msgstr "nepodarilo sa obnoviť predvolený bezpečnostný kontext na `%s': %s"
 
 #: modules/files.c:169 modules/files.c:512 modules/files.c:884
 #: modules/files.c:1157 modules/files.c:1358 modules/files.c:1569
@@ -702,9 +703,8 @@ msgid "entity object has no %s attribute"
 msgstr "objekt entity nemá príznak %s"
 
 #: modules/files.c:1901 modules/ldap.c:1624 modules/ldap.c:1878
-#, fuzzy
 msgid "error encrypting password"
-msgstr "chyba pri nastavovaní hesla pre `%s'"
+msgstr "chyba pri šifrovaní hesla"
 
 #: modules/files.c:2844 modules/files.c:2914
 msgid "not executing with superuser privileges"
@@ -791,9 +791,9 @@ msgid "could not bind to LDAP server"
 msgstr "nepodarilo sa pripojiť k LDAP serveru"
 
 #: modules/ldap.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "nepodarilo sa pripojiť k LDAP serveru"
+msgstr "nepodarilo sa pripojiť k LDAP serveru, prvý pokus ako `%s': %s"
 
 #: modules/ldap.c:422
 msgid "could not search LDAP server"
@@ -827,9 +827,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "nepodarilo sa konvertovať interné údaje do LDAPMods"
 
 #: modules/ldap.c:1425
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "chyba pri premonovávaní položky LDAP adresára: %s\n"
+msgstr "chyba pri vytváraní položky LDAP adresára: %s"
 
 #: modules/ldap.c:1451 modules/ldap.c:1671
 #, c-format
@@ -837,9 +837,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "chyba pri úprave položky LDAP adresára: %s"
 
 #: modules/ldap.c:1478
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "chyba pri premonovávaní položky LDAP adresára: %s\n"
+msgstr "chyba pri premonovávaní položky LDAP adresára: %s"
 
 #: modules/ldap.c:1527
 #, c-format
@@ -847,9 +847,9 @@ msgid "object had no %s attribute"
 msgstr "objekt nemal príznak %s"
 
 #: modules/ldap.c:1551
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "chyba pri odstraňovaní položky LDAP adresára: %s.\n"
+msgstr "chyba pri odstraňovaní položky LDAP adresára: %s"
 
 #: modules/ldap.c:1588 modules/ldap.c:1610 modules/ldap.c:1702
 #: modules/ldap.c:1800
@@ -967,11 +967,11 @@ msgstr "Položka nenájdená.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Výzvy úspešné.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Výzvy zlyhali.\n"
 
 #: samples/testuser.c:77
 msgid "Default user object classes:\n"
@@ -988,15 +988,3 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:96
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Chyba pri inicializácii %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Skupina %s nemohla byť vymazaná.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Skupina %s nemohla byť zmenená.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "chyba pri inicializácii modulu"
