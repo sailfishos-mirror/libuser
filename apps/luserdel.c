@@ -20,12 +20,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <libintl.h>
 #include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <popt.h>
+#include <string.h>
+#include <unistd.h>
 #include "../include/libuser/user.h"
 #include "apputil.h"
 
@@ -38,13 +39,15 @@ main(int argc, const char **argv)
 	GList *values = NULL;
 	const char *user = NULL;
 	int interactive = FALSE;
-	int remove_home = 0;
+	int remove_home = 0, dont_remove_group = 0;
 	int c;
 
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
+		{"dontremovegroup", 'G', POPT_ARG_NONE, &dont_remove_group, 0,
+		 "don't remove the user's private group, if the user has one", NULL},
 		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0,
 		 "remove the user's home directory", NULL},
 		POPT_AUTOHELP {NULL, '\0', POPT_ARG_NONE, NULL, 0,},
@@ -80,15 +83,43 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
+	if(!dont_remove_group) {
+		values = lu_ent_get(ent, LU_GIDNUMBER);
+		if(!(values && values->data)) {
+			fprintf(stderr, _("%s did not have a gid number.\n"), user);
+			return 4;
+		} else {
+			gid_t gid = atol(values->data);
+			if(lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
+				fprintf(stderr, _("Group #%d does not exist.\n"), gid);
+				return 5;
+			}
+			if(lu_ent_get(ent, LU_MEMBERUID) == NULL) {
+				values = lu_ent_get(ent, LU_GROUPNAME);
+				if(!(values && values->data)) {
+					fprintf(stderr, _("Group #%d did not have a group name.\n"), gid);
+					return 6;
+				} else {
+					if(strcmp(values->data, user) == 0) {
+						if(lu_group_delete(ctx, ent, &error) == FALSE) {
+							fprintf(stderr, _("Group %s could not be deleted: %s.\n"), (char*)values->data, error->string);
+							return 7;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	if(remove_home) {
-		values = lu_ent_get(ent, "homeDirectory");
+		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
 		if(!(values && values->data)) {
 			fprintf(stderr, _("%s did not have a home directory.\n"), user);
-			return 4;
+			return 8;
 		} else {
 			if(lu_homedir_remove(values->data, &error) == FALSE) {
 				fprintf(stderr, _("Error removing %s: %s.\n"), (char*)values->data, error->string);
-				return 5;
+				return 9;
 			}
 		}
 	}

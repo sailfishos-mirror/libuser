@@ -1,5 +1,5 @@
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(libuser,0.20)
+AM_INIT_AUTOMAKE(libuser,0.21)
 
 CFLAGS="$CFLAGS -D_GNU_SOURCE"
 
@@ -15,7 +15,7 @@ AM_PROG_LIBTOOL
 AC_CHECK_LIB(crypt,crypt)
 AM_PATH_GLIB(1.2.9,,,gmodule)
 
-ALL_LINGUAS="no"
+ALL_LINGUAS="en_US.biffster no"
 AM_GNU_GETTEXT
 
 popt=/usr
@@ -135,6 +135,15 @@ AC_SUBST(MODULES)
 AC_SUBST(KRB5_LIBS)
 AC_SUBST(LDAP_LIBS)
 
+if [ x$libdir != xNONE/lib ] ; then
+	pkglibdir=`eval echo ${libdir}/${PACKAGE}`
+elif [ x$execprefix != xNONE ] ; then
+	pkglibdir=`eval echo ${execprefix}/lib/${PACKAGE}`
+else
+	pkglibdir=`eval echo ${prefix}/lib/${PACKAGE}`
+fi
+AC_SUBST(pkglibdir)
+
 AM_CONFIG_HEADER(config.h)
 
 AC_OUTPUT(
@@ -152,11 +161,7 @@ apps/Makefile
 docs/Makefile
 docs/sgml/Makefile
 libuser.spec
+libuser.conf
 )
-
-sed \
-	-e "s%@pkglibdir@%${libdir}/${PACKAGE}%" \
-	-e "s%@sysconfdir@%${sysconfdir}%" \
-	< ${srcdir}/libuser.conf.in > libuser.conf
 
 $MAKE -C po -f Makefile.in Makefile
