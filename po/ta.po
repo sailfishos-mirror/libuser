@@ -2,20 +2,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Jayaradha N <jaya@pune.redhat.com>, 2004.
-# Jayaradha N <njaya@redhat.com>, 2004.
+# Jayaradha N <njaya@redhat.com>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-03-05 00:15+0100\n"
-"PO-Revision-Date: 2004-11-10 12:59+0530\n"
-"Last-Translator: Jayaradha N <njaya@redhat.com>\n"
+"PO-Revision-Date: 2005-03-22 12:42+0530\n"
+"Last-Translator: Jayaradha <njaya@redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 "\n"
@@ -33,15 +33,15 @@ msgstr "'%s':%s உருவாக்குவதில் பிழை"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "குழு அமைப்பதில் பிழை`%s': %s\n"
+msgstr "`%s' இன் உரிமையை மாற்றுவதில் பிழை: %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "'%s':%s உருவாக்குவதில் பிழை"
+msgstr "'%s':%s எழுதுவதில் பிழை"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -269,7 +269,7 @@ msgstr "குழுவின் பெயர் குறிப்பிடவ�
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "செல்லாத குழு ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -343,16 +343,16 @@ msgstr "கணக்கு உருவாக்குவதில் பிழ�
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "செல்லாத பயனர் ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
-msgstr "UID O உடன் கணக்கு உருவாக்குதல் மறுக்கப்பட்டது.\n"
+msgstr "UID 0 உடன் கணக்கு உருவாக்குதல் மறுக்கப்பட்டது.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "குழு உருவாக்குவதில் பிழை  `%s'  GID யுடன் %ld: %s\n"
+msgstr "குழு உருவாக்குவதில் பிழை `%s' GID யுடன் %jd: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
@@ -413,9 +413,9 @@ msgid "Password changed.\n"
 msgstr "கடவுச்சொல் மாற்றப்பட்டது.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "குழு %s இல்லை \n"
+msgstr "குழு %jd இல்லை \n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -448,14 +448,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s gid எண் இல்லை.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID யுடன் குழு இல்லை  %ld அடையாளம் இருக்கிறது, நீக்கப்படவில்லை.\n"
+msgstr "%jd GID எனக்கொண்ட குழு இல்லை, நீக்க முடியவில்லை.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID குழுவுடன் %ld அடையாளம் குழுப்பெயர் இல்லை.\n"
+msgstr "GID குழுவுடன் %jd அடையாளம் குழுப்பெயர் இல்லை.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -609,7 +609,7 @@ msgstr "நூலகம் / கூறு பதிப்பு பொறுத�
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "திறப்பதால் கடவுச்சொல் புலம் காலியாக்கப்படும்."
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -710,9 +710,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "காப்புநகல் கோப்பு %s' உள்ளது மற்றும் கோப்பு சீறான படிவத்தில் இல்லை"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "நூலகம் / கூறு பதிப்பு பொறுத்தம் இல்லை"
+msgstr "காப்பு கோப்பின் அளவில் பொருத்தமில்லை"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -966,12 +965,12 @@ msgstr "துவக்குவதில் பிழை %s: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "செல்லாத ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "குழு அடையாளம் தேடுகிறது %d.\n"
+msgstr "%jd அடையாளம் உடைய குழுவை தேடுகிறது.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -979,9 +978,9 @@ msgid "Searching for group named %s.\n"
 msgstr "குழுப்பெயருக்காக தேடி கொண்டு இருக்கிறது%s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "பயனர் அடையாளத்தை தேடுகிறது %d.\n"
+msgstr "%jd பயனர் அடையாளத்தை தேடுகிறது .\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -1018,5 +1017,3 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
 
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "`%s' க்கான இயல்பான பாதுகாப்பு சூழலை மீட்டமைக்க முடியவில்லை: %s"
