@@ -52,7 +52,7 @@ if test x$krb5 != xno ; then
 	AC_CHECK_LIB(kadm5clnt,kadm5_chpass_principal,KRB5_LIBS="-lkadm5clnt $KRB5_LIBS",,$KRB5_LIBS $LIBS)
 fi
 
-ldap=/usr/lcap
+ldap=/usr/ldap
 AC_ARG_WITH(ldap,
 [  --without-ldap=DIR       Use OpenLDAP 2.x headers and libraries under DIR],
 [
