@@ -87,6 +87,14 @@ popd
 %{_datadir}/gtk-doc/html/*
 
 %changelog
+* Wed Jul 24 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51.1-1
+- doc updates -- cvs tree moved
+- language updates
+- disallow weird characters in account names
+
+* Sun May 26 2002 Tim Powers <timp@redhat.com>
+- automated rebuild
+
 * Mon May 20 2002 Nalin Dahyabhai <nalin@redhat.com> 0.51-1
 - files: ignore blank lines in files
 - libuser: disallow creation of accounts with names containing whitespace,
