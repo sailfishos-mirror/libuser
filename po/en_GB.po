@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2004-10-10 23:37+0200\n"
+"POT-Creation-Date: 2004-11-14 23:22+0100\n"
 "PO-Revision-Date: 2004-10-10 23:37+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:129
@@ -42,132 +42,132 @@ msgstr "Failed to drop privileges.\n"
 msgid "Internal error.\n"
 msgstr "Internal error.\n"
 
-#: apps/apputil.c:526
+#: apps/apputil.c:506
+#, c-format
+msgid "%s is not authorized to change the finger info of %s\n"
+msgstr ""
+
+#: apps/apputil.c:508
+#, fuzzy
+msgid "Unknown user context"
+msgstr "unknown error"
+
+#: apps/apputil.c:516
+#, c-format
+msgid "Can't set default context for /etc/passwd\n"
+msgstr ""
+
+#: apps/apputil.c:525
 #, fuzzy, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Error initializing PAM.\n"
 
-#: apps/apputil.c:534 apps/apputil.c:558
+#: apps/apputil.c:533 apps/apputil.c:557
 #, fuzzy, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentication failed for %s.\n"
 
-#: apps/apputil.c:543
+#: apps/apputil.c:542
 #, fuzzy, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Internal PAM error `%s'.\n"
 
-#: apps/apputil.c:549
+#: apps/apputil.c:548
 #, fuzzy, c-format
 msgid "User mismatch.\n"
 msgstr "User mismatch.\n"
 
-#: apps/lchage.c:134 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:87
-#: apps/luserdel.c:65 apps/lusermod.c:87
+#: apps/lchage.c:140 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
+#: apps/luserdel.c:66 apps/lusermod.c:92
 #, fuzzy
 msgid "[OPTION...] user"
 msgstr "[OPTION...] user"
 
-#: apps/lchage.c:137 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:68
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:87 apps/lid.c:71 apps/lnewusers.c:77
-#: apps/lpasswd.c:73 apps/luseradd.c:90 apps/luserdel.c:68 apps/lusermod.c:90
+#: apps/lchage.c:143 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:69
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:89 apps/lid.c:71 apps/lnewusers.c:78
+#: apps/lpasswd.c:73 apps/luseradd.c:93 apps/luserdel.c:69 apps/lusermod.c:95
 #, fuzzy, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Error parsing arguments: %s.\n"
 
-#: apps/lchage.c:146 apps/lpasswd.c:89 apps/luseradd.c:105 apps/luserdel.c:76
-#: apps/lusermod.c:101
+#: apps/lchage.c:152 apps/lpasswd.c:89 apps/luseradd.c:108 apps/luserdel.c:77
+#: apps/lusermod.c:106
 #, fuzzy, c-format
 msgid "No user name specified.\n"
 msgstr "No user name specified.\n"
 
-#: apps/lchage.c:156 apps/lchfn.c:110 apps/lchsh.c:98 apps/lgroupadd.c:88
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:104 apps/lid.c:111 apps/lnewusers.c:88
-#: apps/lpasswd.c:99 apps/luseradd.c:115 apps/luserdel.c:85
-#: apps/lusermod.c:111 samples/testuser.c:72
+#: apps/lchage.c:162 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:121 apps/lid.c:111 apps/lnewusers.c:89
+#: apps/lpasswd.c:99 apps/luseradd.c:133 apps/luserdel.c:86
+#: apps/lusermod.c:147 samples/enum.c:64 samples/testuser.c:73
 #, fuzzy, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Error initializing %s: %s.\n"
 
-#: apps/lchage.c:158 apps/lchfn.c:112 apps/lchfn.c:374 apps/lchsh.c:100
-#: apps/lgroupadd.c:90 apps/lgroupdel.c:81 apps/lgroupmod.c:106 apps/lid.c:113
-#: apps/lnewusers.c:90 apps/lnewusers.c:293 apps/lnewusers.c:315
-#: apps/lnewusers.c:332 apps/lpasswd.c:101 apps/lpasswd.c:192
-#: apps/lpasswd.c:199 apps/luseradd.c:117 apps/luseradd.c:279
-#: apps/luseradd.c:322 apps/luserdel.c:87 apps/luserdel.c:101
-#: apps/luserdel.c:143 apps/luserdel.c:166 apps/lusermod.c:113
-#: apps/lusermod.c:195 apps/lusermod.c:208 apps/lusermod.c:219
-#: apps/lusermod.c:228 apps/lusermod.c:237 apps/lusermod.c:293
-#: apps/lusermod.c:315 lib/error.c:85 python/admin.c:341 python/admin.c:431
-#: samples/lookup.c:65
-#, fuzzy
-msgid "unknown error"
-msgstr "unknown error"
-
-#: apps/lchage.c:166 apps/lchfn.c:123 apps/lchsh.c:111 apps/lpasswd.c:148
-#: apps/luserdel.c:94 apps/lusermod.c:126
+#: apps/lchage.c:171 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
+#: apps/luserdel.c:94 apps/lusermod.c:161
 #, fuzzy, c-format
 msgid "User %s does not exist.\n"
 msgstr "User %s does not exist.\n"
 
-#: apps/lchage.c:174
+#: apps/lchage.c:179
 #, fuzzy, c-format
 msgid "Account is locked.\n"
 msgstr "Account is locked.\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:181
 #, fuzzy, c-format
 msgid "Account is not locked.\n"
 msgstr "Account is not locked.\n"
 
-#: apps/lchage.c:181
+#: apps/lchage.c:186
 #, fuzzy, c-format
 msgid "Minimum:\t%d\n"
 msgstr "Minimum:\t%d\n"
 
-#: apps/lchage.c:186
+#: apps/lchage.c:191
 #, fuzzy, c-format
 msgid "Maximum:\t%d\n"
 msgstr "Maximum:\t%d\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:196
 #, fuzzy, c-format
 msgid "Warning:\t%d\n"
 msgstr "Warning:\t%d\n"
 
-#: apps/lchage.c:196
+#: apps/lchage.c:201
 #, fuzzy, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Inactive:\t%d\n"
 
-#: apps/lchage.c:201 apps/lchage.c:209 apps/lchage.c:220 apps/lchage.c:230
+#: apps/lchage.c:206 apps/lchage.c:214 apps/lchage.c:225 apps/lchage.c:235
 #, fuzzy
 msgid "Never"
 msgstr "Never"
 
-#: apps/lchage.c:203
+#: apps/lchage.c:208
 #, fuzzy, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Last Change:\t%s\n"
 
-#: apps/lchage.c:213
+#: apps/lchage.c:218
 #, fuzzy, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Password Expires:\t%s\n"
 
-#: apps/lchage.c:225
+#: apps/lchage.c:230
 #, fuzzy, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Password Inactive:\t%s\n"
 
-#: apps/lchage.c:232
+#: apps/lchage.c:237
 #, fuzzy, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Account Expires:\t%s\n"
 
-#: apps/lchage.c:279
+#: apps/lchage.c:285
 #, fuzzy, c-format
-msgid "Failed to modify aging information for %s.\n"
+msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Failed to modify aging information for %s.\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
@@ -185,57 +185,52 @@ msgstr "No user name specified, no name for uid %d.\n"
 msgid "Changing finger information for %s.\n"
 msgstr "Changing finger information for %s.\n"
 
-#: apps/lchfn.c:114 apps/lchsh.c:102 apps/lgroupadd.c:92
-#, fuzzy, c-format
-msgid "Error initializing %s.\n"
-msgstr "Error initializing %s.\n"
-
-#: apps/lchfn.c:161
+#: apps/lchfn.c:148
 #, fuzzy
 msgid "Full Name"
 msgstr "Full Name"
 
-#: apps/lchfn.c:182
+#: apps/lchfn.c:160
 #, fuzzy
 msgid "Surname"
 msgstr "Surname"
 
-#: apps/lchfn.c:204
+#: apps/lchfn.c:173
 #, fuzzy
 msgid "Given Name"
 msgstr "Given Name"
 
-#: apps/lchfn.c:214
+#: apps/lchfn.c:183
 #, fuzzy
 msgid "Office"
 msgstr "Office"
 
-#: apps/lchfn.c:223
+#: apps/lchfn.c:192
 #, fuzzy
 msgid "Office Phone"
 msgstr "Office Phone"
 
-#: apps/lchfn.c:232
+#: apps/lchfn.c:201
 #, fuzzy
 msgid "Home Phone"
 msgstr "Home Phone"
 
-#: apps/lchfn.c:253
+#: apps/lchfn.c:213
 #, fuzzy
 msgid "E-Mail Address"
 msgstr "E-Mail Address"
 
-#: apps/lchfn.c:265
-#, fuzzy
+#: apps/lchfn.c:226
+#, fuzzy, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "Finger information not changed:  input error.\n"
 
-#: apps/lchfn.c:370
+#: apps/lchfn.c:331
 #, fuzzy
 msgid "Finger information changed.\n"
 msgstr "Finger information changed.\n"
 
-#: apps/lchfn.c:373
+#: apps/lchfn.c:334
 #, fuzzy, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "Finger information not changed: %s.\n"
@@ -245,65 +240,75 @@ msgstr "Finger information not changed: %s.\n"
 msgid "Changing shell for %s.\n"
 msgstr "Changing shell for %s.\n"
 
-#: apps/lchsh.c:122
+#: apps/lchsh.c:116
 #, fuzzy
 msgid "New Shell"
 msgstr "New Shell"
 
-#: apps/lchsh.c:150
+#: apps/lchsh.c:135
 #, fuzzy
 msgid "Shell changed.\n"
 msgstr "Shell changed.\n"
 
-#: apps/lgroupadd.c:65 apps/lgroupdel.c:57 apps/lgroupmod.c:84
+#: apps/lchsh.c:138
+#, fuzzy, c-format
+msgid "Shell not changed: %s\n"
+msgstr "Shell changed.\n"
+
+#: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 #, fuzzy
 msgid "[OPTION...] group"
 msgstr "[OPTION...] group"
 
-#: apps/lgroupadd.c:77 apps/lgroupdel.c:69 apps/lgroupmod.c:95
+#: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:97
 #, fuzzy, c-format
 msgid "No group name specified.\n"
 msgstr "No group name specified.\n"
 
-#: apps/lgroupadd.c:116
+#: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
+#, c-format
+msgid "Invalid group ID %s\n"
+msgstr ""
+
+#: apps/lgroupadd.c:128
 #, fuzzy, c-format
-msgid "Group creation failed.\n"
+msgid "Group creation failed: %s\n"
 msgstr "Group creation failed.\n"
 
-#: apps/lgroupdel.c:88 apps/lgroupmod.c:118 apps/lpasswd.c:153
+#: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, fuzzy, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Group %s does not exist.\n"
 
-#: apps/lgroupdel.c:94
+#: apps/lgroupdel.c:93
 #, fuzzy, c-format
-msgid "Group %s could not be deleted.\n"
-msgstr "Group %s could not be deleted.\n"
+msgid "Group %s could not be deleted: %s\n"
+msgstr "Group %s could not be deleted: %s.\n"
 
-#: apps/lgroupmod.c:111 apps/lusermod.c:119
+#: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, fuzzy, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Both -L and -U specified.\n"
 
-#: apps/lgroupmod.c:228 apps/lgroupmod.c:236
+#: apps/lgroupmod.c:238 apps/lgroupmod.c:247
 #, fuzzy, c-format
-msgid "Failed to set password for group %s.\n"
+msgid "Failed to set password for group %s: %s\n"
 msgstr "Failed to set password for group %s.\n"
 
-#: apps/lgroupmod.c:244
+#: apps/lgroupmod.c:256
 #, fuzzy, c-format
-msgid "Group %s could not be locked.\n"
+msgid "Group %s could not be locked: %s\n"
 msgstr "Group %s could not be locked.\n"
 
-#: apps/lgroupmod.c:252
+#: apps/lgroupmod.c:265
 #, fuzzy, c-format
-msgid "Group %s could not be unlocked.\n"
+msgid "Group %s could not be unlocked: %s\n"
 msgstr "Group %s could not be unlocked.\n"
 
-#: apps/lgroupmod.c:259
+#: apps/lgroupmod.c:272
 #, fuzzy, c-format
-msgid "Group %s could not be modified.\n"
-msgstr "Group %s could not be modified.\n"
+msgid "Group %s could not be modified: %s\n"
+msgstr "Group %s could not be modified: %s.\n"
 
 #: apps/lid.c:82
 #, fuzzy, c-format
@@ -320,7 +325,7 @@ msgstr "No group name specified, no name for gid %d.\n"
 msgid "No user name specified, using %s.\n"
 msgstr "No user name specified, using %s.\n"
 
-#: apps/lnewusers.c:74
+#: apps/lnewusers.c:75
 #, fuzzy
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
@@ -330,19 +335,24 @@ msgstr "[OPTION...]"
 msgid "Error opening `%s': %s.\n"
 msgstr "Error opening `%s': %s.\n"
 
-#: apps/lnewusers.c:131
+#: apps/lnewusers.c:134
 #, fuzzy, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Error creating account for `%s': line improperly formatted.\n"
 
-#: apps/lnewusers.c:138
+#: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
+#, c-format
+msgid "Invalid user ID %s\n"
+msgstr ""
+
+#: apps/lnewusers.c:151
 #, fuzzy
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Refusing to create account with UID 0.\n"
 
-#: apps/lnewusers.c:237
+#: apps/lnewusers.c:234
 #, fuzzy, c-format
-msgid "Error creating group for `%s' with GID %ld.\n"
+msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Error creating group for `%s' with GID %ld.\n"
 
 #: apps/lnewusers.c:288
@@ -350,17 +360,17 @@ msgstr "Error creating group for `%s' with GID %ld.\n"
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Error setting initial password for %s: %s\n"
 
-#: apps/lnewusers.c:310
+#: apps/lnewusers.c:308
 #, fuzzy, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Error creating home directory for %s: %s\n"
 
-#: apps/lnewusers.c:325
+#: apps/lnewusers.c:322
 #, fuzzy, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Error creating mail spool for %s.\n"
 
-#: apps/lnewusers.c:330
+#: apps/lnewusers.c:328
 #, fuzzy, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Error creating user account for %s: %s\n"
@@ -370,22 +380,22 @@ msgstr "Error creating user account for %s: %s\n"
 msgid "Changing password for %s.\n"
 msgstr "Changing password for %s.\n"
 
-#: apps/lpasswd.c:111
+#: apps/lpasswd.c:110
 #, fuzzy
 msgid "New password"
 msgstr "New password"
 
-#: apps/lpasswd.c:114
+#: apps/lpasswd.c:113
 #, fuzzy
 msgid "New password (confirm)"
 msgstr "New password (confirm)"
 
-#: apps/lpasswd.c:128
+#: apps/lpasswd.c:127
 #, fuzzy, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Passwords do not match, try again.\n"
 
-#: apps/lpasswd.c:133
+#: apps/lpasswd.c:132
 #, fuzzy, c-format
 msgid "Password change canceled.\n"
 msgstr "Password change canceled.\n"
@@ -395,32 +405,37 @@ msgstr "Password change canceled.\n"
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Error setting password for user %s: %s.\n"
 
-#: apps/lpasswd.c:197
+#: apps/lpasswd.c:198
 #, fuzzy, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Error setting password for group %s: %s.\n"
 
-#: apps/lpasswd.c:208
+#: apps/lpasswd.c:209
 #, fuzzy, c-format
 msgid "Password changed.\n"
 msgstr "Password changed.\n"
 
-#: apps/luseradd.c:199 apps/luseradd.c:211
+#: apps/luseradd.c:186
 #, fuzzy, c-format
-msgid "Error creating group `%s'.\n"
+msgid "Group %jd does not exist\n"
+msgstr "Group %s does not exist.\n"
+
+#: apps/luseradd.c:213 apps/luseradd.c:226
+#, fuzzy, c-format
+msgid "Error creating group `%s': %s\n"
 msgstr "Error creating group `%s'.\n"
 
-#: apps/luseradd.c:278
+#: apps/luseradd.c:286
 #, fuzzy, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Account creation failed: %s.\n"
 
-#: apps/luseradd.c:320
+#: apps/luseradd.c:316
 #, fuzzy, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creating %s: %s.\n"
 
-#: apps/luseradd.c:328
+#: apps/luseradd.c:323
 #, fuzzy, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Error creating mail spool.\n"
@@ -430,72 +445,72 @@ msgstr "Error creating mail spool.\n"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "User %s could not be deleted: %s.\n"
 
-#: apps/luserdel.c:110
+#: apps/luserdel.c:109
 #, fuzzy, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s did not have a gid number.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:117
 #, fuzzy, c-format
-msgid "No group with GID %ld exists, not removing.\n"
+msgid "No group with GID %jd exists, not removing.\n"
 msgstr "No group with GID %ld exists, not removing.\n"
 
-#: apps/luserdel.c:131
+#: apps/luserdel.c:124
 #, fuzzy, c-format
-msgid "Group with GID %ld did not have a group name.\n"
+msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Group with GID %ld did not have a group name.\n"
 
-#: apps/luserdel.c:139
+#: apps/luserdel.c:134
 #, fuzzy, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Group %s could not be deleted: %s.\n"
 
-#: apps/luserdel.c:155
+#: apps/luserdel.c:148
 #, fuzzy, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s did not have a home directory.\n"
 
-#: apps/luserdel.c:162
+#: apps/luserdel.c:155
 #, fuzzy, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Error removing %s: %s.\n"
 
-#: apps/lusermod.c:193 apps/lusermod.c:206
+#: apps/lusermod.c:232 apps/lusermod.c:245
 #, fuzzy, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Failed to set password for user %s: %s.\n"
 
-#: apps/lusermod.c:217
+#: apps/lusermod.c:255
 #, fuzzy, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "User %s could not be locked: %s.\n"
 
-#: apps/lusermod.c:226
+#: apps/lusermod.c:263
 #, fuzzy, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "User %s could not be unlocked: %s.\n"
 
-#: apps/lusermod.c:235
+#: apps/lusermod.c:271
 #, fuzzy, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "User %s could not be modified: %s.\n"
 
-#: apps/lusermod.c:289
+#: apps/lusermod.c:325
 #, fuzzy, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Group %s could not be modified: %s.\n"
 
-#: apps/lusermod.c:302
+#: apps/lusermod.c:336
 #, fuzzy, c-format
 msgid "No old home directory for %s.\n"
 msgstr "No old home directory for %s.\n"
 
-#: apps/lusermod.c:307
+#: apps/lusermod.c:341
 #, fuzzy, c-format
 msgid "No new home directory for %s.\n"
 msgstr "No new home directory for %s.\n"
 
-#: apps/lusermod.c:313
+#: apps/lusermod.c:347
 #, fuzzy, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Error moving %s to %s: %s.\n"
@@ -503,6 +518,16 @@ msgstr "Error moving %s to %s: %s.\n"
 #: lib/config.c:70
 #, fuzzy, c-format
 msgid "could not open configuration file `%s': %s"
+msgstr "could not open configuration file `%s': %s"
+
+#: lib/config.c:79
+#, fuzzy, c-format
+msgid "could not stat configuration file `%s': %s"
+msgstr "could not open configuration file `%s': %s"
+
+#: lib/config.c:87
+#, fuzzy, c-format
+msgid "could not read configuration file `%s': %s"
 msgstr "could not open configuration file `%s': %s"
 
 #: lib/error.c:42
@@ -605,12 +630,21 @@ msgstr "error resolving symbol in module"
 msgid "library/module version mismatch"
 msgstr "library/module version mismatch"
 
-#: lib/modules.c:98
+#: lib/error.c:82
+msgid "unlocking would make the password field empty"
+msgstr ""
+
+#: lib/error.c:88
+#, fuzzy
+msgid "unknown error"
+msgstr "unknown error"
+
+#: lib/modules.c:97
 #, fuzzy, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "no initialization function %s in `%s'"
 
-#: lib/modules.c:129
+#: lib/modules.c:128
 #, fuzzy, c-format
 msgid "module version mismatch in `%s'"
 msgstr "module version mismatch in `%s'"
@@ -630,32 +664,32 @@ msgstr "error setting terminal attributes"
 msgid "error reading from terminal"
 msgstr "error reading from terminal"
 
-#: lib/user.c:193
+#: lib/user.c:196
 #, fuzzy
 msgid "name is not set"
 msgstr "name is not set"
 
-#: lib/user.c:197
+#: lib/user.c:200
 #, fuzzy
 msgid "name is too short"
 msgstr "name is too short"
 
-#: lib/user.c:203
+#: lib/user.c:206
 #, fuzzy
 msgid "name contains non-ASCII characters"
 msgstr "name contains non-ASCII characters"
 
-#: lib/user.c:210
+#: lib/user.c:213
 #, fuzzy
 msgid "name contains control characters"
 msgstr "name contains control characters"
 
-#: lib/user.c:217
+#: lib/user.c:220
 #, fuzzy
 msgid "name contains whitespace"
 msgstr "name contains whitespace"
 
-#: lib/user.c:224
+#: lib/user.c:227
 #, fuzzy, c-format
 msgid "name contains invalid char `%c'"
 msgstr "name contains invalid char `%c'"
@@ -665,61 +699,81 @@ msgstr "name contains invalid char `%c'"
 msgid "error locking file: %s"
 msgstr "error locking file: %s"
 
-#: modules/files.c:172 modules/files.c:515 modules/files.c:887
-#: modules/files.c:1160 modules/files.c:1361 modules/files.c:1572
-#: modules/files.c:1662 modules/files.c:1866 modules/files.c:2056
-#: modules/files.c:2073 modules/files.c:2163 modules/files.c:2182
-#: modules/files.c:2250 modules/files.c:2271 modules/files.c:2368
-#: modules/files.c:2387 modules/files.c:2446 modules/files.c:2465
-#: modules/files.c:2566 modules/files.c:2581
+#: modules/files.c:112
+#, fuzzy, c-format
+msgid "couldn't get security context of `%s': %s"
+msgstr "couldn't write to `%s': %s"
+
+#: modules/files.c:118
+#, fuzzy, c-format
+msgid "couldn't set default security context: %s"
+msgstr "couldn't stat `%s': %s"
+
+#: modules/files.c:125
+#, fuzzy, c-format
+msgid "couldn't set default security context to `%s': %s"
+msgstr "couldn't write to `%s': %s"
+
+#: modules/files.c:169 modules/files.c:529 modules/files.c:874
+#: modules/files.c:1147 modules/files.c:1339 modules/files.c:1561
+#: modules/files.c:1648 modules/files.c:1885 modules/files.c:2076
+#: modules/files.c:2093 modules/files.c:2183 modules/files.c:2202
+#: modules/files.c:2270 modules/files.c:2291 modules/files.c:2388
+#: modules/files.c:2407 modules/files.c:2466 modules/files.c:2485
+#: modules/files.c:2586 modules/files.c:2601
 #, fuzzy, c-format
 msgid "couldn't open `%s': %s"
 msgstr "couldn't open `%s': %s"
 
-#: modules/files.c:188 modules/files.c:224 modules/files.c:262
-#: modules/files.c:899 modules/files.c:1373
+#: modules/files.c:185 modules/files.c:221 modules/files.c:259
+#: modules/files.c:886 modules/files.c:1351
 #, fuzzy, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "couldn't stat `%s': %s"
 
-#: modules/files.c:199
+#: modules/files.c:196
 #, fuzzy, c-format
 msgid "error creating `%s': %s"
 msgstr "error creating `%s': %s"
 
-#: modules/files.c:215
+#: modules/files.c:212
 #, fuzzy, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "backup file `%s' exists and is not a regular file"
 
-#: modules/files.c:929 modules/files.c:1382
+#: modules/files.c:916 modules/files.c:1360
 #, fuzzy, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "couldn't read from `%s': %s"
 
-#: modules/files.c:938 modules/files.c:945
+#: modules/files.c:925 modules/files.c:932
 #, fuzzy
 msgid "entry already present in file"
 msgstr "entry already present in file"
 
-#: modules/files.c:952 modules/files.c:967 modules/files.c:1432
-#: modules/files.c:1440
+#: modules/files.c:939 modules/files.c:954 modules/files.c:1406
+#: modules/files.c:1414
 #, fuzzy, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "couldn't write to `%s': %s"
 
-#: modules/files.c:1127 modules/files.c:1135 modules/files.c:1237
-#: modules/files.c:1245
+#: modules/files.c:1114 modules/files.c:1122 modules/files.c:1215
+#: modules/files.c:1223
 #, fuzzy, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity object has no %s attribute"
 
-#: modules/files.c:2848 modules/files.c:2918
+#: modules/files.c:1919 modules/ldap.c:1609 modules/ldap.c:1881
+#, fuzzy
+msgid "error encrypting password"
+msgstr "error setting password for `%s'"
+
+#: modules/files.c:2873 modules/files.c:2952
 #, fuzzy
 msgid "not executing with superuser privileges"
 msgstr "not executing with superuser privileges"
 
-#: modules/files.c:2931
+#: modules/files.c:2967
 #, fuzzy
 msgid "no shadow file present -- disabling"
 msgstr "no shadow file present -- disabling"
@@ -787,224 +841,258 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos Password for Admin Principal"
 
-#: modules/ldap.c:199
+#: modules/ldap.c:202
 #, fuzzy
 msgid "error initializing ldap library"
 msgstr "error initializing ldap library"
 
-#: modules/ldap.c:210
+#: modules/ldap.c:213
 #, fuzzy, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "could not set LDAP protocol to version %d"
 
-#: modules/ldap.c:222
+#: modules/ldap.c:225
 #, fuzzy
 msgid "could not negotiate TLS with LDAP server"
 msgstr "could not negotiate TLS with LDAP server"
 
-#: modules/ldap.c:380
+#: modules/ldap.c:408
 #, fuzzy
 msgid "could not bind to LDAP server"
 msgstr "could not bind to LDAP server"
 
-#: modules/ldap.c:392
+#: modules/ldap.c:411
+#, fuzzy, c-format
+msgid "could not bind to LDAP server, first attempt as `%s': %s"
+msgstr "could not bind to LDAP server"
+
+#: modules/ldap.c:425
 #, fuzzy
 msgid "could not search LDAP server"
 msgstr "could not search LDAP server"
 
-#: modules/ldap.c:401
+#: modules/ldap.c:434
 #, fuzzy
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP server appears to have no root DSE"
 
-#: modules/ldap.c:625 modules/ldap.c:1371 modules/ldap.c:1510
-#: modules/ldap.c:1571 modules/ldap.c:1687 modules/ldap.c:1783
+#: modules/ldap.c:628 modules/ldap.c:1386 modules/ldap.c:1524
+#: modules/ldap.c:1585 modules/ldap.c:1718 modules/ldap.c:1814
 #, fuzzy
 msgid "error mapping name to LDAP distinguished name"
 msgstr "error mapping name to LDAP distinguished name"
 
-#: modules/ldap.c:635
+#: modules/ldap.c:638
 #, fuzzy
 msgid "error mapping name to LDAP base distinguished name"
 msgstr "error mapping name to LDAP base distinguished name"
 
-#: modules/ldap.c:1348
+#: modules/ldap.c:1363
 #, fuzzy, c-format
 msgid "user object had no %s attribute"
 msgstr "user object had no %s attribute"
 
-#: modules/ldap.c:1357
+#: modules/ldap.c:1372
 #, fuzzy, c-format
 msgid "user object was created with no `%s'"
 msgstr "user object was created with no `%s'"
 
-#: modules/ldap.c:1382
+#: modules/ldap.c:1397
 #, fuzzy
 msgid "could not convert internal data to LDAPMods"
 msgstr "could not convert internal data to LDAPMods"
 
-#: modules/ldap.c:1422 modules/ldap.c:1643
+#: modules/ldap.c:1410
+#, fuzzy, c-format
+msgid "error creating a LDAP directory entry: %s"
+msgstr "error renaming LDAP directory entry: %s\n"
+
+#: modules/ldap.c:1436 modules/ldap.c:1674
 #, fuzzy, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "error modifying LDAP directory entry: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1463
 #, fuzzy, c-format
-msgid "error renaming LDAP directory entry: %s\n"
+msgid "error renaming LDAP directory entry: %s"
 msgstr "error renaming LDAP directory entry: %s\n"
 
-#: modules/ldap.c:1498
+#: modules/ldap.c:1512
 #, fuzzy, c-format
 msgid "object had no %s attribute"
 msgstr "object had no %s attribute"
 
-#: modules/ldap.c:1522
+#: modules/ldap.c:1536
 #, fuzzy, c-format
-msgid "error removing LDAP directory entry: %s.\n"
+msgid "error removing LDAP directory entry: %s"
 msgstr "error removing LDAP directory entry: %s.\n"
 
-#: modules/ldap.c:1559 modules/ldap.c:1581 modules/ldap.c:1674
-#: modules/ldap.c:1772
+#: modules/ldap.c:1573 modules/ldap.c:1595 modules/ldap.c:1705
+#: modules/ldap.c:1803
 #, fuzzy, c-format
 msgid "object has no %s attribute"
 msgstr "object has no %s attribute"
 
-#: modules/ldap.c:1707
+#: modules/ldap.c:1738
 #, fuzzy
 msgid "no such object in LDAP directory"
 msgstr "no such object in LDAP directory"
 
-#: modules/ldap.c:1719
+#: modules/ldap.c:1750
 #, fuzzy, c-format
 msgid "no `%s' attribute found"
 msgstr "no `%s' attribute found"
 
-#: modules/ldap.c:1882
+#: modules/ldap.c:1912
 #, fuzzy, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "error setting password in LDAP directory for %s: %s"
 
-#: modules/ldap.c:2442
+#: modules/ldap.c:2484
 #, fuzzy
 msgid "LDAP Server Name"
 msgstr "LDAP Server Name"
 
-#: modules/ldap.c:2448
+#: modules/ldap.c:2490
 #, fuzzy
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2454
+#: modules/ldap.c:2496
 #, fuzzy
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2503
 #, fuzzy
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind Password"
 
-#: modules/ldap.c:2467
+#: modules/ldap.c:2509
 #, fuzzy
 msgid "LDAP SASL User"
 msgstr "LDAP SASL User"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2516
 #, fuzzy
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Authorization User"
 
-#: modules/sasldb.c:145
-#, fuzzy, c-format
-msgid "Cyrus SASL error creating user: %s: %s"
-msgstr "Cyrus SASL error creating user: %s: %s"
-
-#: modules/sasldb.c:147
+#: modules/sasldb.c:123
 #, fuzzy, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL error creating user: %s"
 
-#: modules/sasldb.c:153
-#, fuzzy, c-format
-msgid "Cyrus SASL error removing user: %s: %s"
-msgstr "Cyrus SASL error removing user: %s: %s"
-
-#: modules/sasldb.c:155
+#: modules/sasldb.c:127
 #, fuzzy, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL error removing user: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:519 modules/sasldb.c:527
 #, fuzzy, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "error initializing Cyrus SASL: %s"
 
-#: python/admin.c:507
+#: python/admin.c:515
 #, fuzzy
 msgid "error creating home directory for user"
 msgstr "error creating home directory for user"
 
-#: python/admin.c:560
+#: python/admin.c:568
 #, fuzzy
 msgid "error removing home directory for user"
 msgstr "error removing home directory for user"
 
-#: python/admin.c:638
+#: python/admin.c:646
 #, fuzzy
 msgid "error moving home directory for user"
 msgstr "error moving home directory for user"
 
-#: python/admin.c:671
+#: python/admin.c:679
 #, fuzzy
 msgid "error creating mail spool for user"
 msgstr "error creating mail spool for user"
 
-#: samples/lookup.c:64
+#: samples/lookup.c:67
 #, fuzzy, c-format
 msgid "Error initializing %s: %s\n"
 msgstr "Error initializing %s: %s\n"
 
-#: samples/lookup.c:74
+#: samples/lookup.c:80
+#, c-format
+msgid "Invalid ID %s\n"
+msgstr ""
+
+#: samples/lookup.c:92
 #, fuzzy, c-format
-msgid "Searching for group with ID %d.\n"
+msgid "Searching for group with ID %jd.\n"
 msgstr "Searching for group with ID %d.\n"
 
-#: samples/lookup.c:78
+#: samples/lookup.c:96
 #, fuzzy, c-format
 msgid "Searching for group named %s.\n"
 msgstr "Searching for group named %s.\n"
 
-#: samples/lookup.c:86
+#: samples/lookup.c:103
 #, fuzzy, c-format
-msgid "Searching for user with ID %d.\n"
+msgid "Searching for user with ID %jd.\n"
 msgstr "Searching for user with ID %d.\n"
 
-#: samples/lookup.c:89
+#: samples/lookup.c:107
 #, fuzzy, c-format
 msgid "Searching for user named %s.\n"
 msgstr "Searching for user named %s.\n"
 
-#: samples/lookup.c:103
+#: samples/lookup.c:121
 #, fuzzy
 msgid "Entry not found.\n"
 msgstr "Entry not found.\n"
 
-#: samples/testuser.c:77
+#: samples/prompt.c:51
+msgid "Prompts succeeded.\n"
+msgstr ""
+
+#: samples/prompt.c:61
+#, fuzzy
+msgid "Prompts failed.\n"
+msgstr "Group creation failed.\n"
+
+#: samples/testuser.c:78
 #, fuzzy
 msgid "Default user object classes:\n"
 msgstr "Default user object classes:\n"
 
-#: samples/testuser.c:83
+#: samples/testuser.c:84
 #, fuzzy
 msgid "Default user attribute names:\n"
 msgstr "Default user attribute names:\n"
 
-#: samples/testuser.c:89
+#: samples/testuser.c:90
 #, fuzzy
 msgid "Getting default user attributes:\n"
 msgstr "Getting default user attributes:\n"
 
-#: samples/testuser.c:96
+#: samples/testuser.c:97
 #, fuzzy
 msgid "Copying user structure:\n"
 msgstr "Copying user structure:\n"
+
+#, fuzzy
+#~ msgid "Error initializing %s.\n"
+#~ msgstr "Error initializing %s.\n"
+
+#, fuzzy
+#~ msgid "Group %s could not be deleted.\n"
+#~ msgstr "Group %s could not be deleted.\n"
+
+#, fuzzy
+#~ msgid "Group %s could not be modified.\n"
+#~ msgstr "Group %s could not be modified.\n"
+
+#, fuzzy
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "Cyrus SASL error creating user: %s: %s"
+
+#, fuzzy
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Cyrus SASL error removing user: %s: %s"
