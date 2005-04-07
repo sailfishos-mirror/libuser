@@ -799,15 +799,15 @@ msgstr "błąd podczas ustalania hasła dla `%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr "obszar Kerberosa"
+msgstr "Obszar Kerberosa"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
-msgstr "administrator główny domeny Kerberosa"
+msgstr "Administrator główny domeny Kerberosa"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "hasło dostępu do Kerberosa dla administratora głównego"
+msgstr "Hasło dostępu do Kerberosa dla administratora głównego"
 
 #: modules/ldap.c:202
 msgid "error initializing ldap library"
