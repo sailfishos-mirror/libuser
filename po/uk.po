@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-06 00:09+0200\n"
-"PO-Revision-Date: 2005-01-27 18:35+0300\n"
+"PO-Revision-Date: 2005-04-08 18:35+0300\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,15 +28,15 @@ msgstr "Помилка створення `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Помилка створення групи `%s': %s\n"
+msgstr "Помилка зміни власника `%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Помилка створення `%s': %s"
+msgstr "Помилка запису `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -706,9 +706,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервний файл `%s' існує та не є звичайним файлом"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "невідповідність версії модуля та бібліотеки"
+msgstr "невідповідність розміру файлу резервної копії"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
