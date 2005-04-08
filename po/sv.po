@@ -1,5 +1,5 @@
 # Swedish messages for libuser.
-# Copyright (C) 2001, 2002, 2003, 2004 Christian Rose <menthos@menthos.com>.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005 Christian Rose <menthos@menthos.com>.
 #
 # $Id$
 #
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-06 00:09+0200\n"
-"PO-Revision-Date: 2004-11-06 18:58+0100\n"
+"PO-Revision-Date: 2005-04-08 23:56+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,15 +28,15 @@ msgstr "Fel vid skapande av \"%s\": %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Fel vid skapande av gruppen \"%s\": %s\n"
+msgstr "Fel vid ägarbyte för \"%s\": %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Fel vid skapande av \"%s\": %s"
+msgstr "Fel vid skrivning till \"%s\": %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -264,7 +264,7 @@ msgstr "Inget gruppnamn angivet.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Ogiltigt grupp-ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -338,15 +338,18 @@ msgstr "Fel vid skapande av konto för \"%s\": raden är felaktigt formaterad.\n
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Ogiltigt användar-ID %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Vägrar att skapa konto med UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
+msgstr "Fel vid skapande av grupp för \"%s\" med GID %jd: %s\n"
+
+msgid "Error creating group for `%s' with GID %ld: %s\n"
 msgstr "Fel vid skapande av grupp för \"%s\" med GID %ld: %s\n"
 
 #: apps/lnewusers.c:292
@@ -408,9 +411,12 @@ msgid "Password changed.\n"
 msgstr "Lösenordet ändrat.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Grupp nummer %d finns inte.\n"
+msgstr "Grupp nummer %jd finns inte\n"
+
+msgid "Group %ld does not exist.\n"
+msgstr "Grupp nummer %ld finns inte.\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
@@ -443,13 +449,19 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s hade inget gid-nummer.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
+msgstr "Det finns ingen grupp med GID %jd, tar inte bort.\n"
+
+msgid "No group with GID %ld exists, not removing.\n"
 msgstr "Det finns ingen grupp med GID %ld, tar inte bort.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
+msgstr "Gruppen med GID %jd hade inget gruppnamn.\n"
+
+msgid "Group with GID %ld did not have a group name.\n"
 msgstr "Gruppen med GID %ld hade inget gruppnamn.\n"
 
 #: apps/luserdel.c:134
@@ -604,7 +616,7 @@ msgstr "biblioteks-/modulversion stämmer inte överens"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "upplåsning skulle göra lösenordsfältet tomt"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -705,9 +717,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "säkerhetskopian \"%s\" finns och är inte en vanlig fil"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "biblioteks-/modulversion stämmer inte överens"
+msgstr "storleken på säkerhetskopian stämmer inte överens"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -960,14 +971,20 @@ msgid "Error initializing %s: %s\n"
 msgstr "Fel vid initiering av %s: %s\n"
 
 #: samples/lookup.c:80
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid ID %s\n"
-msgstr "Felaktigt GID för %s.\n"
+msgstr "Ogiltigt ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
+msgstr "Söker efter grupp med ID %jd.\n"
+
+msgid "Searching for group with ID %d.\n"
 msgstr "Söker efter grupp med ID %d.\n"
+
+msgid "Searching for group with ID %ld.\n"
+msgstr "Söker efter grupp med ID %ld.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -975,9 +992,15 @@ msgid "Searching for group named %s.\n"
 msgstr "Söker efter grupp med namnet %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
+msgstr "Söker efter användare med ID %jd.\n"
+
+msgid "Searching for user with ID %d.\n"
 msgstr "Söker efter användare med ID %d.\n"
+
+msgid "Searching for user with ID %ld.\n"
+msgstr "Söker efter användare med ID %ld.\n"
 
 #: samples/lookup.c:107
 #, c-format
