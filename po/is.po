@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-06 00:09+0200\n"
-"PO-Revision-Date: 2004-12-15 12:55+0000\n"
+"PO-Revision-Date: 2005-04-11 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -27,15 +27,15 @@ msgstr "Villa við að búa til `%s': %s"
 
 #: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Gat ekki búið til hóp `%s': %s\n"
+msgstr "Villa við að breyta eiganda `%s': %s"
 
 #: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Villa við að búa til `%s': %s"
+msgstr "Villa við að skrifa í `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
 #, c-format
@@ -705,9 +705,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "afritið `%s' er til og er ekki venjuleg skrá"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "útgáfumismunur eininga eða skráarsafna"
+msgstr "stærðarmunur á afritum"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
