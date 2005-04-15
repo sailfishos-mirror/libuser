@@ -1,3 +1,38 @@
+2005-04-15  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.5.
+
+	* NEWS: Update.
+
+	* tests/files_test.py (Tests.testUserEnumerate1): Rename from
+	testUserEnumerate.
+	(Tests.testGroupsEnumerate1): Rename from testGroupsEnumerate.
+	(Tests.testUsersEnumerateFull1): Rename from testUsersEnumerateFull.
+	Simplify.
+	(Tests.testGroupsEnumerateFull1): Rename from testGroupsEnumerateFull.
+	Simplify.
+	(Tests.testUsersEnumerateByGroup3): Simplify.
+	(Tests.testUserEnumerate2, Tests.testUsersEnumerateByGroup4)
+	(Tests.testUsersEnumerateFull2, Tests.testGroupsEnumerate2)
+	(Tests.testGroupsEnumerateByUser4, Tests.testGroupsEnumerateFull2):
+	New tests.
+
+	* modules/files.c (lu_files_enumerate) 
+	(lu_files_users_enumerate_by_group) 
+	(lu_files_groups_enumerate_by_user, lu_files_enumerate_full): Skip
+	nss_compat lines (starting with '+' or '-').
+	
+	* tests/files_test: Update initial file contents.
+
+	* apps/apputil.c: Remove unnecessary include.
+
+	* configure.in: Use AM_PATH_PYTHON instead of --with-python-version.
+
+	* Makefile.am (pythonexecdir): Replace by pyexecdir.
+	(DISTCHECK_CONFIGURE_FLAGS): Remove
+	--with-python-version.
+	(PYTHON_CPPFLAGS): New definition.
+
 2005-04-06  Miloslav Trmac  <mitr@volny.cz>
 
 	* configure.in: Version 0.53.4.

@@ -2,16 +2,14 @@
 
 ## Settings
 pkgconfigdir = $(libdir)/pkgconfig
-pythonexecdir = $(libdir)/python$(PYTHON_VERSION)/site-packages
 
 ACLOCAL_AMFLAGS = -I m4
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap \
-	--with-python-version=$(PYTHON_VERSION)
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap
 
 CVSTAG = "libuser-$$(echo '$(VERSION)' | tr '.' '_')"
 
 AM_CPPFLAGS = $(GOBJECT_CFLAGS)
-
+PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
 ## Targets
 SUBDIRS = po docs
@@ -55,9 +53,9 @@ endif
 if SASL
 pkglib_LTLIBRARIES += modules/libuser_sasldb.la
 endif
-pythonexec_LTLIBRARIES = python/libusermodule.la
+pyexec_LTLIBRARIES = python/libusermodule.la
 if QUOTA
-pythonexec_LTLIBRARIES += python/libuserquotamodule.la
+pyexec_LTLIBRARIES += python/libuserquotamodule.la
 endif
 
 dist_man_MANS = apps/lgroupadd.1 apps/lgroupdel.1 apps/lgroupmod.1 \
@@ -94,12 +92,12 @@ archive:
 	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.gz\".
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(pythonexecdir)/libuser*module.{a,la}
+	rm -f $(DESTDIR)$(pyexecdir)/libuser*module.{a,la}
 	rm -f $(DESTDIR)$(pkglibdir)/libuser_*.{a,la}
 # libtool uninstall doesn't work without the .la files
 # This assumes there are no external libuser plugins
 uninstall-local:
-	rm -f $(DESTDIR)$(pythonexecdir)/libuser*module.so
+	rm -f $(DESTDIR)$(pyexecdir)/libuser*module.so
 	rm -f $(DESTDIR)$(pkglibdir)/libuser_*.so
 
 
@@ -188,13 +186,13 @@ modules_libuser_sasldb_la_LIBADD = lib/libuser.la
 
 python_libusermodule_la_SOURCES = python/libusermodule.c python/common.h \
 	python/debug.h
-python_libusermodule_la_CPPFLAGS = -I$(PYTHON_INC) $(GOBJECT_CFLAGS)
+python_libusermodule_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(GOBJECT_CFLAGS)
 python_libusermodule_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS)
 python_libusermodule_la_LIBADD = apps/libapputil.la lib/libuser.la
 
 python_libuserquotamodule_la_SOURCES = python/quotamodule.c python/debug.h
-python_libuserquotamodule_la_CPPFLAGS = -I$(PYTHON_INC) $(GLIB_CFLAGS)
+python_libuserquotamodule_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(GLIB_CFLAGS)
 python_libuserquotamodule_la_LDFLAGS = -module -avoid-version -export-dynamic
 python_libuserquotamodule_la_LIBADD = lib/libuserquota.la
 

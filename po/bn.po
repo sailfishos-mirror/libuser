@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-06 00:09+0200\n"
+"POT-Creation-Date: 2005-04-15 15:29+0200\n"
 "PO-Revision-Date: 2004-11-23 15:57+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: bangla <redhat-translation@bengalinux.org>\n"
@@ -20,80 +20,80 @@ msgstr ""
 "\n"
 "\n"
 
-#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:232 apps/apputil.c:261
+#: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' পড়তে সমস্যা হয়েছে: %s"
 
-#: apps/apputil.c:138 apps/apputil.c:208
+#: apps/apputil.c:137 apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 
 # modified for RHEL
-#: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
+#: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
 #, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' দল তৈরি করতে সমস্যা হয়েছে: %s\n"
 
-#: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
+#: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
 #, fuzzy, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 
-#: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
+#: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' সরিয়ে ফেলতে সমস্যা হয়েছে: %s"
 
 # modified for RHEL
-#: apps/apputil.c:555 apps/apputil.c:559
+#: apps/apputil.c:554 apps/apputil.c:558
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "অধিকার হ্রাস করার প্রচেষ্টা ব্যর্থ।\n"
 
-#: apps/apputil.c:568
+#: apps/apputil.c:567
 #, c-format
 msgid "Internal error.\n"
 msgstr "অভ্যন্তরীণ সমস্যা।\n"
 
 # modified for RHEL
-#: apps/apputil.c:588
+#: apps/apputil.c:587
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s-র, %s-র finger সংক্রান্ত তথ্য পরিবর্তন করার অধিকার নেই।\n"
 
 # modified for RHEL
-#: apps/apputil.c:590
+#: apps/apputil.c:589
 msgid "Unknown user context"
 msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
 
 # modified for RHEL
-#: apps/apputil.c:598
+#: apps/apputil.c:597
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd-র জন্য ডিফল্ট প্রসঙ্গ নির্ধারণ করা সম্ভব হয়নি\n"
 
-#: apps/apputil.c:607
+#: apps/apputil.c:606
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM আরম্ভ করতে সমস্যা হয়েছে।\n"
 
 # modified for RHEL
-#: apps/apputil.c:615 apps/apputil.c:639
+#: apps/apputil.c:614 apps/apputil.c:638
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s-র য অনুমোদন প্রক্রিয়া ব্যর্থ হয়েছে।\n"
 
-#: apps/apputil.c:624
+#: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "PAM-র অভ্যন্তরীণ সমস্যা `%s'.\n"
 
-#: apps/apputil.c:630
+#: apps/apputil.c:629
 #, c-format
 msgid "User mismatch.\n"
 msgstr "ব্যবহারকারীর গরমিল।\n"
@@ -735,10 +735,10 @@ msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্�
 #: modules/files.c:169 modules/files.c:548 modules/files.c:893
 #: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
 #: modules/files.c:1678 modules/files.c:1915 modules/files.c:2106
-#: modules/files.c:2123 modules/files.c:2213 modules/files.c:2232
-#: modules/files.c:2300 modules/files.c:2321 modules/files.c:2418
-#: modules/files.c:2437 modules/files.c:2496 modules/files.c:2515
-#: modules/files.c:2616 modules/files.c:2631
+#: modules/files.c:2123 modules/files.c:2214 modules/files.c:2233
+#: modules/files.c:2301 modules/files.c:2322 modules/files.c:2419
+#: modules/files.c:2438 modules/files.c:2497 modules/files.c:2516
+#: modules/files.c:2617 modules/files.c:2632
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' খোলা সম্ভব হয়নি: %s"
@@ -791,11 +791,11 @@ msgid "error encrypting password"
 msgstr "পাসওয়ার্ড এনক্রিপ্ট করতে সমস্যা"
 
 # modified for RHEL
-#: modules/files.c:2903 modules/files.c:2982
+#: modules/files.c:2904 modules/files.c:2983
 msgid "not executing with superuser privileges"
 msgstr "সুপার-ইউজারের অধিকারসহ নির্বাহিত হচ্ছে না"
 
-#: modules/files.c:2997
+#: modules/files.c:2998
 msgid "no shadow file present -- disabling"
 msgstr "কোনো শেডো ফাইল উপস্থিত নেই -- নিষ্ক্রিয় করা হচ্ছে"
 

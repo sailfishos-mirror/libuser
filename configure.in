@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.53.4])
+AC_INIT([libuser], [0.53.5])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_SRCDIR([lib/user.c])
 AC_CONFIG_AUX_DIR([admin])
@@ -140,18 +140,7 @@ if test x$sasl != xno ; then
 fi
 AM_CONDITIONAL([SASL], [test $build_sasl = yes])
 
-PYTHON_VERSION=2.2
-AC_ARG_WITH([python-version],
-	    AS_HELP_STRING([--with-python-version=2.2],
-			   [version of Python to build modules for]),
-	    [PYTHON_VERSION=$withval])
-
-PYTHON_INC=/usr/include/python${PYTHON_VERSION}
-AC_ARG_WITH([python-path],
-	    AS_HELP_STRING([--with-python-path=DIR],
-			[directory headers for your version of Python are in]),
-	    [PYTHON_INC=$withval])
-
+AM_PATH_PYTHON
 
 AC_ARG_WITH([selinux],
 	    AS_HELP_STRING([--with-selinux],
@@ -237,8 +226,8 @@ AC_SUBST(PAM_MISC_LIBS)
 AC_SUBST(POPT_LIBS)
 AC_SUBST(SASL_LDADD)
 AC_SUBST(SASL_LIBS)
-AC_SUBST(PYTHON_VERSION)
-AC_SUBST(PYTHON_INC)
+dnl AC_SUBST(PYTHON_VERSION)
+dnl AC_SUBST(PYTHON_INC)
 
 scdir=`eval echo $sysconfdir`
 AC_SUBST(scdir)

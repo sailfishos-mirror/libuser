@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-06 00:09+0200\n"
+"POT-Creation-Date: 2005-04-15 15:29+0200\n"
 "PO-Revision-Date: 2004-02-24 12:28+0000\n"
 "Last-Translator: Owain Green <owaing@oceanfree.net>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -16,75 +16,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:232 apps/apputil.c:261
+#: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Gwall wrth ddarllen `%s': %s"
 
-#: apps/apputil.c:138 apps/apputil.c:208
+#: apps/apputil.c:137 apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Gwall wrth greu `%s': %s"
 
-#: apps/apputil.c:146 apps/apputil.c:215 apps/apputil.c:308
+#: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
 #, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Gwall wrth greu grŵp `%s'.\n"
 
-#: apps/apputil.c:245 apps/apputil.c:278 apps/apputil.c:294
+#: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
 #, fuzzy, c-format
 msgid "Error writing `%s': %s"
 msgstr "Gwall wrth greu `%s': %s"
 
-#: apps/apputil.c:347 apps/apputil.c:379 apps/apputil.c:396
+#: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Gwall wrth waredu `%s': %s"
 
-#: apps/apputil.c:555 apps/apputil.c:559
+#: apps/apputil.c:554 apps/apputil.c:558
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Methwyd gollwng breintiau.\n"
 
-#: apps/apputil.c:568
+#: apps/apputil.c:567
 #, c-format
 msgid "Internal error.\n"
 msgstr "Gwall mewnol.\n"
 
-#: apps/apputil.c:588
+#: apps/apputil.c:587
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:590
+#: apps/apputil.c:589
 #, fuzzy
 msgid "Unknown user context"
 msgstr "gwall anhysbys"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:597
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:607
+#: apps/apputil.c:606
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Gwall wrth ymgychwyn PAM.\n"
 
-#: apps/apputil.c:615 apps/apputil.c:639
+#: apps/apputil.c:614 apps/apputil.c:638
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Methodd dilysiant ar gyfer %s.\n"
 
-#: apps/apputil.c:624
+#: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Gwall PAM mewnol `%s'.\n"
 
-#: apps/apputil.c:630
+#: apps/apputil.c:629
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Defnyddiwr anghydwedd.\n"
@@ -683,10 +683,10 @@ msgstr "methwyd ysgrifennu i `%s': %s"
 #: modules/files.c:169 modules/files.c:548 modules/files.c:893
 #: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
 #: modules/files.c:1678 modules/files.c:1915 modules/files.c:2106
-#: modules/files.c:2123 modules/files.c:2213 modules/files.c:2232
-#: modules/files.c:2300 modules/files.c:2321 modules/files.c:2418
-#: modules/files.c:2437 modules/files.c:2496 modules/files.c:2515
-#: modules/files.c:2616 modules/files.c:2631
+#: modules/files.c:2123 modules/files.c:2214 modules/files.c:2233
+#: modules/files.c:2301 modules/files.c:2322 modules/files.c:2419
+#: modules/files.c:2438 modules/files.c:2497 modules/files.c:2516
+#: modules/files.c:2617 modules/files.c:2632
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "methwyd agor: `%s': %s"
@@ -738,11 +738,11 @@ msgstr "nid oes gan y gwrthrych endid briodoledd %s"
 msgid "error encrypting password"
 msgstr "gwall wrth osod cyfrinair ar gyfer `%s'"
 
-#: modules/files.c:2903 modules/files.c:2982
+#: modules/files.c:2904 modules/files.c:2983
 msgid "not executing with superuser privileges"
 msgstr "ddim yn gweithredu â breintiau'r uwchddefnydiwr"
 
-#: modules/files.c:2997
+#: modules/files.c:2998
 msgid "no shadow file present -- disabling"
 msgstr "dim ffeil gysgod yn bresennol -- yn analluogi"
 

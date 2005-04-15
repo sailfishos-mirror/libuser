@@ -1,3 +1,7 @@
+0.53.5
+* Ignore nss_compat lines in the "files" module.
+* Autodetect Python version.
+
 0.53.4
 * Fix adding of objectclasses to LDAP user accounts.
 

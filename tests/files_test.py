@@ -393,7 +393,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
 
-    def testUsersEnumerate(self):
+    def testUsersEnumerate1(self):
         e = self.a.initUser('user14_1')
         self.a.addUser(e, False, False)
         e = self.a.initUser('user14_2')
@@ -401,6 +401,11 @@ class Tests(unittest.TestCase):
         v = self.a.enumerateUsers('user14*')
         v.sort()
         self.assertEqual(v, ['user14_1', 'user14_2'])
+
+    def testUsersEnumerate2(self):
+        v = [name for name in self.a.enumerateUsers('*')
+             if name.startswith('-') or name.startswith('+')]
+        self.assertEqual(v, [])
 
     def testUsersEnumerateByGroup1(self):
         gid = 1501 # Hopefully unique
@@ -438,19 +443,27 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user15_4')
         e[libuser.GIDNUMBER] = gid + 10
         self.a.addUser(e, False, False)
-        v = self.a.enumerateUsersByGroup('group15_3')
         self.assertEqual(self.a.enumerateUsersByGroup('group15_3'),
                          ['user15_4'])
 
-    def testUsersEnumerateFull(self):
+    def testUsersEnumerateByGroup4(self):
+        # Data set up in files_test
+        self.assertEqual(self.a.enumerateUsersByGroup('group15_4'), [])
+
+    def testUsersEnumerateFull1(self):
         e = self.a.initUser('user16_1')
         self.a.addUser(e, False, False)
         e = self.a.initUser('user16_2')
         self.a.addUser(e, False, False)
-        v = map(lambda x: x[libuser.USERNAME],
-                self.a.enumerateUsersFull('user16*'))
+        v = [x[libuser.USERNAME] for x in self.a.enumerateUsersFull('user16*')]
         v.sort()
         self.assertEqual(v, [['user16_1'], ['user16_2']])
+
+    def testUsersEnumerateFull2(self):
+        v = [x[libuser.USERNAME] for x in self.a.enumerateUsersFull('*')]
+        v = [name for (name,) in v
+             if name.startswith('-') or name.startswith('+')]
+        self.assertEqual(v, [])
 
     def testGroupLookupName1(self):
         e = self.a.initGroup('group17_1')
@@ -753,7 +766,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
 
-    def testGroupsEnumerate(self):
+    def testGroupsEnumerate1(self):
         e = self.a.initGroup('group29_1')
         self.a.addGroup(e)
         e = self.a.initGroup('group29_2')
@@ -761,6 +774,11 @@ class Tests(unittest.TestCase):
         v = self.a.enumerateGroups('group29*')
         v.sort()
         self.assertEqual(v, ['group29_1', 'group29_2'])
+
+    def testGroupsEnumerate2(self):
+        v = [name for name in self.a.enumerateGroups('*')
+             if name.startswith('-') or name.startswith('+')]
+        self.assertEqual(v, [])
 
     def testGroupsEnumerateByUser1(self):
         gid = 3001 # Hopefully unique
@@ -801,15 +819,25 @@ class Tests(unittest.TestCase):
         self.assertEqual(self.a.enumerateGroupsByUser('user30_3'),
                          ['group30_4'])
 
-    def testGroupsEnumerateFull(self):
+    def testGroupsEnumerateByUser4(self):
+        # Data set up in files_test
+        self.assertEqual(self.a.enumerateGroupsByUser('user30_4'), [])
+
+    def testGroupsEnumerateFull1(self):
         e = self.a.initGroup('group31_1')
         self.a.addGroup(e)
         e = self.a.initGroup('group31_2')
         self.a.addGroup(e)
-        v = map(lambda x: x[libuser.GROUPNAME],
-                self.a.enumerateGroupsFull('group31*'))
+        v = [x[libuser.GROUPNAME]
+             for x in self.a.enumerateGroupsFull('group31*')]
         v.sort()
         self.assertEqual(v, [['group31_1'], ['group31_2']])
+
+    def testGroupsEnumerateFull2(self):
+        v = [x[libuser.GROUPNAME] for x in self.a.enumerateGroupsFull('*')]
+        v = [name for (name,) in v
+             if name.startswith('-') or name.startswith('+')]
+        self.assertEqual(v, [])
 
     def tearDown(self):
         del self.a        

@@ -25,7 +25,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/time.h>
-#include <crypt.h>
 #include <ctype.h>
 #include <dirent.h>
 #include <fcntl.h>

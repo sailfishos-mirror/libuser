@@ -2143,7 +2143,8 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 		if (p != NULL) {
 			/* snip off the parts we don't care about, */
 			*p = '\0';
-			if (fnmatch(pattern, buf, 0) == 0) {
+			if (buf[0] != '+' && buf[0] != '-' &&
+			    fnmatch(pattern, buf, 0) == 0) {
 				/* add add it to the list we're returning. */
 				g_value_set_string(&value, buf);
 				g_value_array_append(ret, &value);
@@ -2246,7 +2247,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 
 	/* Iterate over each line. */
 	while ((buf = line_read(fp)) != NULL) {
-		if (strlen(buf) == 1) {
+		if (strlen(buf) == 1 || buf[0] == '-' || buf[0] == '+') {
 			g_free(buf);
 			continue;
 		}
@@ -2330,7 +2331,7 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 
 	/* Iterate over all of these lines as well. */
 	while ((buf = line_read(fp)) != NULL) {
-		if (strlen(buf) == 1) {
+		if (strlen(buf) == 1 || buf[0] == '+' || buf[0] == '-') {
 			g_free(buf);
 			continue;
 		}
@@ -2451,7 +2452,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	/* Iterate through all of the lines in the file. */
 	key = NULL;
 	while ((buf = line_read(fp)) != NULL) {
-		if (strlen(buf) == 1) {
+		if (strlen(buf) == 1 || buf[0] == '+' || buf[0] == '-') {
 			g_free(buf);
 			continue;
 		}
@@ -2523,7 +2524,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 
 	/* Iterate through all of the lines in the file. */
 	while ((buf = line_read(fp)) != NULL) {
-		if (strlen(buf) == 1) {
+		if (strlen(buf) == 1 || buf[0] == '+' || buf[0] == '-') {
 			g_free(buf);
 			continue;
 		}
@@ -2638,7 +2639,7 @@ lu_files_enumerate_full(struct lu_module *module,
 	/* Allocate an array to hold results. */
 	ret = g_ptr_array_new();
 	while ((buf = line_read(fp)) != NULL) {
-		if (strlen(buf) == 1) {
+		if (strlen(buf) == 1 || buf[0] == '+' || buf[0] == '-') {
 			g_free(buf);
 			continue;
 		}
