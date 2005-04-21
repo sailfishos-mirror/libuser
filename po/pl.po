@@ -745,7 +745,7 @@ msgstr "błąd podczas szyfrowania hasła"
 
 #: modules/files.c:2904 modules/files.c:2983
 msgid "not executing with superuser privileges"
-msgstr "nie uruchamiam jako administrator (root) "
+msgstr "nie uruchamiaj jako administrator (root) "
 
 #: modules/files.c:2998
 msgid "no shadow file present -- disabling"
