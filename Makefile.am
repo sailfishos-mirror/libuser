@@ -22,8 +22,8 @@ EXTRA_DIST = \
 	$(EXTRA_MANS) \
 	python/modules.txt \
 	samples/genusers \
-	tests/config.conf tests/config_test tests/files.conf.in \
-	tests/files_test tests/files_test.py tests/ldap.conf.in tests/ldaprc \
+	tests/config.conf tests/files.conf.in tests/files_test \
+	tests/files_test.py tests/ldap.conf.in tests/ldaprc \
 	tests/ldap_skel.ldif tests/ldap_test tests/ldap_test.py \
 	tests/slapd.conf.in tests/utils.conf.in tests/utils_group \
 	tests/utils_gshadow tests/utils_passwd tests/utils_shadow \

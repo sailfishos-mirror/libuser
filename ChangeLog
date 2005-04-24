@@ -4,6 +4,8 @@
 
 	* NEWS: Update.
 
+	* Makefile.am: Don't ship test/config_test in distribution tarball.
+
 	* autogen.sh: Don't automatically run configure.
 	* Makefile.am: Update.
 
