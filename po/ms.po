@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-15 15:29+0200\n"
-"PO-Revision-Date: 2005-04-17 22:25+0800\n"
+"PO-Revision-Date: 2005-04-25 00:14+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -352,30 +352,30 @@ msgid "Failed to set password for group %s: %s\n"
 msgstr "Gagal untuk menetapkan katalaluan bagi kumpulan %s: %s\n"
 
 #: apps/lgroupmod.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Kumpulan %s tidak dapat dikunci: %s\n"
 
 #: apps/lgroupmod.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Kumpulan %s tidak dapat dinyahkunci: %s\n"
 
 #: apps/lgroupmod.c:256
 #: apps/lgroupmod.c:282
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Kumpulan %s tidak dapat diubahsuai: %s\n"
 
 #: apps/lid.c:82
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Tiada pengguna dinyatakan, tiada nama untuk uid %d.\n"
+msgstr "Tiada nama kumpulan dinyatakan, menggunakan %s.\n"
 
 #: apps/lid.c:86
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Tiada pengguna dinyatakan, tiada nama untuk uid %d.\n"
+msgstr "Tiada nama kumpulan dinyatakan, tiada nama untuk gid %d.\n"
 
 #: apps/lid.c:94
 #, fuzzy, c-format
