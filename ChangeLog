@@ -5,6 +5,7 @@
 	* NEWS: Update.
 
 	* autogen.sh: Don't automatically run configure.
+	* Makefile.am: Update.
 
 	* tests/config_test.c, tests/config.conf: New files.
 	* Makefile.am: Add tests/config_test.c and tests/config.conf.

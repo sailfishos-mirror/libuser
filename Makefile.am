@@ -87,8 +87,9 @@ archive:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	CVSROOT=`cat $(top_srcdir)/CVS/Root`; cd /tmp; cvs -d $$CVSROOT \
 		 export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
-	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh --without-sasl; \
-		make -C docs/reference; make dist
+	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh ; \
+		./configure --sysconfdir=/etc --with-ldap --enable-gtk-doc \
+		--without-sasl; make -C docs/reference; make dist
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.gz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.gz\".
