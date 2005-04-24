@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2004-12-30 13:19-0800\n"
 "Last-Translator: Nikolay Sarmadzhiev <nikolay@localhost.localdomain>\n"
 "Language-Team:  <bg@li.org>\n"
@@ -516,17 +516,17 @@ msgstr "Няма нова домашна директория за %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Грешка при преместване на %s към %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "не може да бъде отворен конфигурационен файл `%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "не може да stat конфигурационния файл `%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "не може да бъде прочетен конфигурационния файл `%s': %s"

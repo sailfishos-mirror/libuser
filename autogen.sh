@@ -14,5 +14,4 @@ aclocal -I m4
 autoconf -Wall
 autoheader -Wall
 automake -Wall --add-missing
-rm -f config.cache
-./configure --prefix=/usr --sysconfdir=/etc --with-ldap --with-sasl --enable-gtk-doc $@
+# ./configure --prefix=/usr --sysconfdir=/etc --with-ldap --with-sasl --enable-gtk-doc

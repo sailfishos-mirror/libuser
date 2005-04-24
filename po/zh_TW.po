@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-03-25 16:50+1000\n"
 "Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
 "Language-Team: Chinese Traditional <zh_TW@li.org>\n"
@@ -510,17 +510,17 @@ msgstr "沒有 %s 新的家目錄。\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "移動 %s 至 %s 錯誤: %s。\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "無法開啟組態設定檔`%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "無法 stat 組態設定檔`%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "無法讀取組態設定檔`%s': %s"

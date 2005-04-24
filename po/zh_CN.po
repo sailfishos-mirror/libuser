@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2004-11-16 16:33+1000\n"
 "Last-Translator: Tony Fu <tfu@redhat.com>\n"
 "Language-Team: Simplified Chinese <i18n@redhat.com>\n"
@@ -511,17 +511,17 @@ msgstr "%s 没有新的主目录。\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "将 %s 移至 %s 时出错：%s。\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "无法打开配置文件“%s”：%s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "无法打开配置文件“%s”：%s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "无法读取配置文件“%s”：%s"

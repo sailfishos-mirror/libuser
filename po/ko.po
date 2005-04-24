@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-04-05 09:43+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
@@ -511,17 +511,17 @@ msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s에서 %s(으)로 이동하는 도중 오류 발생: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "설정 파일 `%s'에 stat 명령 실행하는데 실패했습니다: %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "설정 파일 `%s'(을)를 읽을 수 없습니다: %s"

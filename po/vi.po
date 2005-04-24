@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2003-07-27 13:46+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -508,17 +508,17 @@ msgstr "%s không có thư mục home mới.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Lỗi chuyển %s thành %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "không thể mở tập tin cấu hình `%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, fuzzy, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "không thể mở tập tin cấu hình `%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, fuzzy, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "không thể mở tập tin cấu hình `%s': %s"

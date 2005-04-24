@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 9.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2003-07-13 23:10+0200\n"
 "Last-Translator: Roman Maurer <roman@lugos.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -510,17 +510,17 @@ msgstr "Ni novega domačega imenika za %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Napaka pri premikanju %s v %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, fuzzy, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, fuzzy, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"

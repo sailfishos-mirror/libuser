@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-03-12 00:45+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -514,17 +514,17 @@ msgstr "No hi ha cap directori personal nou per a %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "S'ha produït un error en moure %s cap a %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "no s'ha pogut obtenir informació del fitxer de configuració '%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "no s'ha pogut llegir el fitxer de configuració '%s': %s"

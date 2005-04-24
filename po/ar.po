@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2004-12-01 19:34+0300\n"
 "Last-Translator: Munzir Taha <munzirtaha@newhorizons.com.sa>\n"
 "Language-Team: Arabic <fedora-trans-ar@redhat.com>\n"
@@ -511,17 +511,17 @@ msgstr "لا دليل موطن جديد لـ%s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "خطأ في نقل %s إلى %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "لم يمكن فتح ملف التّهيئة ´%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "تعذّر stat ملف الإعداد `%s': %ss"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "تعذّر فتح ملف الإعداد `%s': %ss"

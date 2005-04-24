@@ -1,3 +1,6 @@
+0.53.6
+* Allow empty configuration values.
+
 0.53.5
 * Ignore nss_compat lines in the "files" module.
 * Autodetect Python version.

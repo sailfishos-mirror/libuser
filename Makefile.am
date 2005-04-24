@@ -13,7 +13,7 @@ PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
 ## Targets
 SUBDIRS = po docs
-TESTS = tests/files_test tests/utils_test
+TESTS = tests/config_test tests/files_test tests/utils_test
 if LDAP
 TESTS += tests/ldap_test
 endif
@@ -22,18 +22,20 @@ EXTRA_DIST = \
 	$(EXTRA_MANS) \
 	python/modules.txt \
 	samples/genusers \
-	tests/files.conf.in tests/files_test tests/files_test.py \
-	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
-	tests/ldap_test.py tests/slapd.conf.in tests/utils.conf.in \
-	tests/utils_group tests/utils_gshadow tests/utils_passwd \
-	tests/utils_shadow tests/utils_test
+	tests/config.conf tests/config_test tests/files.conf.in \
+	tests/files_test tests/files_test.py tests/ldap.conf.in tests/ldaprc \
+	tests/ldap_skel.ldif tests/ldap_test tests/ldap_test.py \
+	tests/slapd.conf.in tests/utils.conf.in tests/utils_group \
+	tests/utils_gshadow tests/utils_passwd tests/utils_shadow \
+	tests/utils_test
 
 bin_PROGRAMS = apps/lchfn apps/lchsh
 sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
 	apps/lid apps/lnewusers apps/lpasswd apps/luseradd apps/luserdel \
 	apps/lusermod
 noinst_PROGRAMS = samples/enum samples/field samples/homedir samples/lookup \
-	samples/prompt samples/testuser
+	samples/prompt samples/testuser \
+	tests/config_test
 if QUOTA
 noinst_PROGRAMS += samples/quotaq
 endif
@@ -216,3 +218,6 @@ samples_prompt_LDFLAGS = -no-install
 
 samples_testuser_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_testuser_LDFLAGS = -no-install
+
+tests_config_test_LDADD = lib/libuser.la $(GNODULE_LIBS)
+tests_config_test_LDFLAGS = -no-install

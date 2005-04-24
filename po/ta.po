@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-03-22 12:42+0530\n"
 "Last-Translator: Jayaradha <njaya@redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -512,17 +512,17 @@ msgstr "புதிய இல்ல அடைவு இல்லை %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "நகர்த்துவதில் பிழை %s   %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "உள்ளமைக்கபட்ட கோப்பை திறக்க இயலவில்லை`%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "உள்ளமைக்கபட்ட கோப்பை திறக்க இயலவில்லை`%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "உள்ளமைக்கபட்ட கோப்பை படிக்க இயலவில்லை`%s': %s"

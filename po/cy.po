@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-04-16 14:20+0100\n"
 "Last-Translator: Rhys Jones <rhys@sgwarnog.com>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -510,17 +510,17 @@ msgstr "Nid oes cyfeiriadur cartref newydd ar gyfer %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Gwall wrth symud %s i %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "methwyd agor ffeil gyflunio `%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "methwyd statio ffeil gyflunio `%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "methwyd darllen ffeil gyflunio `%s': %s"

@@ -1,3 +1,24 @@
+2005-04-24  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.6.
+
+	* NEWS: Update.
+
+	* autogen.sh: Don't automatically run configure.
+
+	* tests/config_test.c, tests/config.conf: New files.
+	* Makefile.am: Add tests/config_test.c and tests/config.conf.
+
+	* lib/config.c (lu_cfg_init): Don't ignore keys with empty values.
+
+	* lib/config.c (struct config_config): Store the configuration
+	in parsed form, not only the text of the config file.
+	(lu_cfg_init): Parse the configuration only at initialization time.
+	(lu_cfg_done): Update.
+	(lu_cfg_read, lu_cfg_read_keys): Use the paresd configuration.
+	(compare_section_names, compare_key_string, gather_values): New
+	functions.
+
 2005-04-15  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.5.

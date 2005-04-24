@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2004-03-15 23:27+0200\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -509,17 +509,17 @@ msgstr "%s için yeni ev dizini yok.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s %s'e taşınırken hata: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "`%s' yapılandırma dosyası açılamadı: %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, fuzzy, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "`%s' yapılandırma dosyası açılamadı: %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, fuzzy, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "`%s' yapılandırma dosyası açılamadı: %s"
