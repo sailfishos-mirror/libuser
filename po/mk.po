@@ -1,23 +1,24 @@
 # translation of mk.po to Macedonian
-# Macedonian translations for PACKAGE package.
-# Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Macedonian translations for mk package.
+# Copyright (C) 2004 THE mk'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mk package.
 # Automatically generated, 2004.
 # Arangel Angov <ufo@linux.net.mk>, 2004.
 # Tomislav Markovski <herrera@users.sourceforge.net>, 2004.
-#
+# Tomislav Markovski <herrera@users.sourceforge.net>, 2005.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
-"PO-Revision-Date: 2004-08-01 22:11+0200\n"
-"Last-Translator: Tomislav Markovski <herrera@users.sourceforge.net>\n"
+"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"PO-Revision-Date: 2005-04-25 20:18+0200\n"
+"Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
@@ -32,15 +33,15 @@ msgstr "Грешка при креирање на `%s': %s"
 
 #: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Грешка при креирање на групата `%s'.\n"
+msgstr "Грешка при менување на сопственикот на `%s': %s"
 
 #: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Грешка при креирање на `%s': %s"
+msgstr "Грешка при запишување `%s': %s"
 
 #: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
 #, c-format
@@ -60,17 +61,16 @@ msgstr "Внатрешна грешка.\n"
 #: apps/apputil.c:587
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s не е авторизиран за промена на информациите на %s\n"
 
 #: apps/apputil.c:589
-#, fuzzy
 msgid "Unknown user context"
-msgstr "непозната грешка"
+msgstr "Непознат корисничко контекст"
 
 #: apps/apputil.c:597
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Не можам да го поставам стандардниот контекст за /etc/passwd\n"
 
 #: apps/apputil.c:606
 #, c-format
@@ -179,9 +179,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Сметката истекува:\t%s\n"
 
 #: apps/lchage.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Не можев да ги променам информциите за стареење за %s.\n"
+msgstr "Не успеав да ги променам информциите за стареење за %s: %s\n"
 
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
@@ -253,9 +253,9 @@ msgid "Shell changed.\n"
 msgstr "Школката е сменета.\n"
 
 #: apps/lchsh.c:138
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Школката е сменета.\n"
+msgstr "Школката не е сменета: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 msgid "[OPTION...] group"
@@ -269,12 +269,12 @@ msgstr "Нема одредено име за групата.\n"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "Невалидно ID на група %s\n"
 
 #: apps/lgroupadd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Креирањето на групата е неуспешно.\n"
+msgstr "Креирањето на групата не успеа: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
 #, c-format
@@ -282,7 +282,7 @@ msgid "Group %s does not exist.\n"
 msgstr "Групата %s не постои.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Групата %s не може да биде избришана: %s.\n"
 
@@ -292,22 +292,22 @@ msgid "Both -L and -U specified.\n"
 msgstr "И -L и -U се одредени.\n"
 
 #: apps/lgroupmod.c:141 apps/lgroupmod.c:150
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Не успеав да поставам лозинка за групата %s.\n"
+msgstr "Не успеав да поставам лозинка за групата %s: %s.\n"
 
 #: apps/lgroupmod.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Групата %s не може да биде заклучена.\n"
+msgstr "Групата %s не може да биде заклучена: %s.\n"
 
 #: apps/lgroupmod.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Групата %s не може да биде отклучена.\n"
+msgstr "Групата %s не може да биде отклучена: %s.\n"
 
 #: apps/lgroupmod.c:256 apps/lgroupmod.c:282
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Групата %s не може да биде променета: %s.\n"
 
@@ -344,16 +344,16 @@ msgstr ""
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "Невалиден ID на корисник %s\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Одбивам да креирам сметка со UID 0.\n"
 
 #: apps/lnewusers.c:234
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Грешка при креирањето на група за `%s' со GID %ld.\n"
+msgstr "Грешка при креирањето на група за `%s' со GID %jd: %s.\n"
 
 #: apps/lnewusers.c:292
 #, c-format
@@ -414,14 +414,14 @@ msgid "Password changed.\n"
 msgstr "Лозинката е променета.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Групата %s не постои.\n"
+msgstr "Групата %jd не постои.\n"
 
 #: apps/luseradd.c:213 apps/luseradd.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Грешка при креирање на групата `%s'.\n"
+msgstr "Грешка при креирање на групата `%s': %s\n"
 
 #: apps/luseradd.c:287
 #, c-format
@@ -449,14 +449,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s нема gid број.\n"
 
 #: apps/luserdel.c:117
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Не постои група со GID %ld. Не отстранувам.\n"
+msgstr "Не постои група со GID %jd. Не отстранувам.\n"
 
 #: apps/luserdel.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Групата со GID %ld немаше име на групата.\n"
+msgstr "Групата со GID %jd немаше име на групата.\n"
 
 #: apps/luserdel.c:134
 #, c-format
@@ -513,20 +513,20 @@ msgstr "Нема нов домашен директориум за %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Грешка при преместување на %s до %s: %s.\n"
 
-#: lib/config.c:174
+#: lib/config.c:70
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "не можам да ја отворам датотеката со конфигурација `%s': %s"
 
-#: lib/config.c:183
-#, fuzzy, c-format
+#: lib/config.c:79
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "не можам да ја отворам датотеката со конфигурација `%s': %s"
+msgstr "не можам да ја отворам конфигурациската датотека `%s': %s"
 
-#: lib/config.c:191
-#, fuzzy, c-format
+#: lib/config.c:87
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "не можам да ја отворам датотеката со конфигурација `%s': %s"
+msgstr "не можам да ја отворам конфигурациската датотека`%s': %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -610,7 +610,7 @@ msgstr "библиотека/погрешна верзија на модул"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "отклучувањето ќе го испразни полето со лозинка"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -669,19 +669,19 @@ msgid "error locking file: %s"
 msgstr "грешка при заклучувањето на датотеката: %s"
 
 #: modules/files.c:112
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "не можам да запишам во `%s': %s"
+msgstr "не можам да го добијам безбедносниот контекст на `%s': %s"
 
 #: modules/files.c:118
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "не можам да одредам `%s': %s"
+msgstr "не можам да го поставам стандардниот безбедносен контекст: %s"
 
 #: modules/files.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "не можам да запишам во `%s': %s"
+msgstr "не можам да го поставам основниот безбедносен контекст на `%s': %s"
 
 #: modules/files.c:169 modules/files.c:548 modules/files.c:893
 #: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
@@ -711,9 +711,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервната датотека `%s' постои и не е регуларна датотека"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "библиотека/погрешна верзија на модул"
+msgstr "погрешна големина на резервната датотека"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -737,9 +736,8 @@ msgid "entity object has no %s attribute"
 msgstr "објектот нема %s атрибут"
 
 #: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
-#, fuzzy
 msgid "error encrypting password"
-msgstr "грешка при поставување на лозинката за `%s'"
+msgstr "грешка при кодирање на лозинката"
 
 #: modules/files.c:2904 modules/files.c:2983
 msgid "not executing with superuser privileges"
@@ -826,9 +824,9 @@ msgid "could not bind to LDAP server"
 msgstr "не можам да се врзам за LDAP серверот"
 
 #: modules/ldap.c:411
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "не можам да се врзам за LDAP серверот"
+msgstr "не можам да се врзам за LDAP серверот, првиот обид беше како `%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -862,9 +860,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "не можам да ги конвертирам внатрешните податоци со LDAPMods"
 
 #: modules/ldap.c:1419
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "грешка при преименувањето на записот во директориумот на LDAP: %s\n"
+msgstr "грешка при креирање на запис за LDAP: %s"
 
 #: modules/ldap.c:1445 modules/ldap.c:1683
 #, c-format
@@ -872,9 +870,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "грешка при менување на записот водиректориумот на LDAP: %s"
 
 #: modules/ldap.c:1472
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "грешка при преименувањето на записот во директориумот на LDAP: %s\n"
+msgstr "грешка при реименувањето на записот за LDAP: %s"
 
 #: modules/ldap.c:1521
 #, c-format
@@ -882,9 +880,9 @@ msgid "object had no %s attribute"
 msgstr "објектот нема %s атрибути"
 
 #: modules/ldap.c:1545
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "грешка при отстранување на записот во директориумот на LDAP: %s.\n"
+msgstr "грешка при отстранување на записот за LDAP: %s"
 
 #: modules/ldap.c:1582 modules/ldap.c:1604 modules/ldap.c:1714
 #: modules/ldap.c:1812
@@ -969,12 +967,12 @@ msgstr "Грешка при иницијализирање %s: %s\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "Невалиден ID %s\n"
 
 #: samples/lookup.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Барам група со ID %d.\n"
+msgstr "Барам група со ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
@@ -982,9 +980,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Барам група под името %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Барам корисник со ID %d.\n"
+msgstr "Барам корисник со ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
@@ -997,11 +995,11 @@ msgstr "Записот не е пронајден.\n"
 
 #: samples/prompt.c:51
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "Појавувањата беа успешни.\n"
 
 #: samples/prompt.c:61
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "Појавувањата не успеаа.\n"
 
 #: samples/testuser.c:78
 msgid "Default user object classes:\n"
