@@ -1,3 +1,15 @@
+2005-04-30  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.7.
+
+	* NEWS: Update.
+
+	* configure.in: Remove unused GETTEXT_PACKAGE definition.
+
+	* po/LINGUAS: New file, moved from ALL_LINGUAS in configure.in.
+	Add missing languages (bn_IN, en_GB, et, fi, gu, he, id, ka, ku, lo,
+	mr, si, sq, ur).
+
 2005-04-24  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.6.

@@ -1018,4 +1018,3 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
-

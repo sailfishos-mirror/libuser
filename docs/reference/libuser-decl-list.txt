@@ -1,7 +1,25 @@
 <SECTION>
+<FILE>userquota</FILE>
+quota_on
+quota_off
+quota_get_specials_user
+quota_get_specials_group
+quota_free_specials
+quota_get_user
+quota_set_user
+quota_get_group
+quota_set_group
+</SECTION>
+
+<SECTION>
+<FILE>prompt</FILE>
+lu_prompt_console
+lu_prompt_console_quiet
+</SECTION>
+
+<SECTION>
 <FILE>error</FILE>
 lu_status_t
-lu_error_t
 LU_ERROR_CHECK
 lu_error_new
 lu_strerror
@@ -13,7 +31,6 @@ lu_error_free
 
 <SECTION>
 <FILE>config</FILE>
-lu_context
 lu_cfg_read
 lu_cfg_read_single
 lu_cfg_read_keys
@@ -21,7 +38,6 @@ lu_cfg_read_keys
 
 <SECTION>
 <FILE>entity</FILE>
-lu_ent_t
 LU_USERNAME
 LU_USERPASSWORD
 LU_UIDNUMBER
@@ -76,7 +92,6 @@ lu_ent_dump
 <SECTION>
 <FILE>user</FILE>
 LU_VALUE_INVALID_ID
-lu_context_t
 lu_entity_type_t
 lu_value_strdup
 lu_values_equal
@@ -119,23 +134,5 @@ lu_users_enumerate_by_group
 lu_groups_enumerate_by_user
 lu_users_enumerate_full
 lu_groups_enumerate_full
-</SECTION>
-
-<SECTION>
-<FILE>prompt</FILE>
-lu_prompt
-</SECTION>
-
-<SECTION>
-<FILE>userquota</FILE>
-quota_on
-quota_off
-quota_get_specials_user
-quota_get_specials_group
-quota_free_specials
-quota_get_user
-quota_set_user
-quota_get_group
-quota_set_group
 </SECTION>
 

@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.53.6])
+AC_INIT([libuser], [0.53.7])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_SRCDIR([lib/user.c])
 AC_CONFIG_AUX_DIR([admin])
@@ -15,12 +15,8 @@ PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gobject-2.0])
 PKG_CHECK_MODULES(GMODULE,[glib-2.0 gmodule-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
 
-ALL_LINGUAS="ar bg bn ca cs cy da de es fr hi hr hu is it ja ko mk ms nb nl no pa pl pt pt_BR ru sk sl sv ta tr uk vi zh_CN zh_TW"
-
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.14.1])
-GETTEXT_PACKAGE=libuser
-AC_SUBST(GETTEXT_PACKAGE)
 
 LIBSAVE="$LIBS"
 AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])

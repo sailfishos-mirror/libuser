@@ -12,13 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-15 15:29+0200\n"
+"POT-Creation-Date: 2005-04-24 20:39+0200\n"
 "PO-Revision-Date: 2005-04-25 20:18+0200\n"
 "Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
@@ -513,17 +513,17 @@ msgstr "Нема нов домашен директориум за %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Грешка при преместување на %s до %s: %s.\n"
 
-#: lib/config.c:70
+#: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "не можам да ја отворам датотеката со конфигурација `%s': %s"
 
-#: lib/config.c:79
+#: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "не можам да ја отворам конфигурациската датотека `%s': %s"
 
-#: lib/config.c:87
+#: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "не можам да ја отворам конфигурациската датотека`%s': %s"
