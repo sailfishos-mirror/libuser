@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-24 20:39+0200\n"
-"PO-Revision-Date: 2005-02-21 09:05+0530\n"
+"PO-Revision-Date: 2005-05-03 10:42+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -35,15 +35,15 @@ msgstr "`%s' બનાવવામાં ભૂલ: %s"
 
 #: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "જૂથ `%s' બનાવવામાં ભૂલ: %s\n"
+msgstr "`%s' નો માલિક બદલવામાં ભૂલ: %s"
 
 #: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "`%s' બનાવવામાં ભૂલ: %s"
+msgstr "`%s' લખવામાં ભૂલ: %s"
 
 #: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
 #, c-format
@@ -712,9 +712,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "બેકઅપ ફાઈલ `%s' અસ્તિત્વમાં છે અને એ નિયમિત ફાઈલ નથી"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "લાઈબ્રેરી/મોડ્યુલની આવૃત્તિ બંધબેસતી નથી"
+msgstr "બેકઅપ ફાઈલ માપ બંધબેસતું નથી"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -1017,3 +1016,4 @@ msgstr "મૂળભુત વપરાશકર્તા લક્ષણો મ
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
+
