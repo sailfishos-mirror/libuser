@@ -1,4 +1,4 @@
-# translation of bg.po to 
+# translation of bg.po to
 # translation of bg.po to Български
 # translation of bg.po to Bulgarian
 # translation of bg.po to bulgarian
@@ -9,19 +9,20 @@
 # Doncho N. Gunchev <mr700@globalnet.bg>, 2004.
 # Николай Сърмаджиев <nikolayd@sarmadzhiev.tk>, 2004.
 # Nikolay Sarmadzhiev <nikolay@localhost.localdomain>, 2004.
+# Николай Сърмаджиев <nikolay@sarmadzhiev.com>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-04-24 20:39+0200\n"
-"PO-Revision-Date: 2004-12-30 13:19-0800\n"
-"Last-Translator: Nikolay Sarmadzhiev <nikolay@localhost.localdomain>\n"
-"Language-Team:  <bg@li.org>\n"
+"PO-Revision-Date: 2005-05-04 15:41-0700\n"
+"Last-Translator: Николай Сърмаджиев <nikolay@sarmadzhiev.com>\n"
+"Language-Team: Български <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10\n"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
@@ -36,15 +37,15 @@ msgstr "Грешка при създаване на`%s': %s"
 
 #: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Грешка при създаване на група `%s': %s\n"
+msgstr "Грешка при променяне на собственика на `%s': %s"
 
 #: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Грешка при създаване на`%s': %s"
+msgstr "Грешка при записването на`%s': %s"
 
 #: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
 #, c-format
@@ -355,8 +356,7 @@ msgstr "Отказано създаването на потребител с UID
 #: apps/lnewusers.c:234
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
-"Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
+msgstr "Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
@@ -714,9 +714,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "файла резервно копие `%s' съществува и не е обикновен файл"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "грешна версия на библиотека/модул"
+msgstr "размера на запасния файл - объркан"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -754,8 +753,7 @@ msgstr "няма наличен сенчест файл -- деактивира�
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
+msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1020,3 +1018,4 @@ msgstr "Извличане на стандартни потребителски 
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
+
