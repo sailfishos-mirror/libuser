@@ -341,7 +341,7 @@ msgstr "Błąd podczas otwierania `%s': %s.\n"
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Błąd podczas tworzenia konta dla `%s': linia jest sformatowana "
+"Błąd podczas tworzenia konta dla `%s': wiersz jest sformatowany "
 "nieprawidłowo.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
