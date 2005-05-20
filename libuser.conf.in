@@ -8,7 +8,7 @@
 [defaults]
 # The default (/usr/lib*/libuser) is usually correct
 # moduledir = /your/custom/directory
-skeleton = @scdir@/skel
+skeleton = @sysconfdir@/skel
 mailspooldir = /var/mail
 modules = files shadow
 create_modules = files shadow

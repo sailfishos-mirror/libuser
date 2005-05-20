@@ -1,3 +1,25 @@
+2005-05-20  Miloslav Trmac  <mitr@redhat.com>
+
+	* autogen.sh: Document the full set of testing flags.  Remove hardcoded
+	paths (used to be necessary to workaround parsing paths in configure).
+
+	* configure.in, Makefile.am: Don't attempt to parse paths in configure,
+	let (make) expand the variables.
+	* libuser.conf.in: Don't use both @scdir@ and @sysconfdir@.
+
+	* tests/config_test.sh: New file.
+	* tests/config.conf: Rename from tests/config.conf.in.  Define
+	defaults/moduledir to point to the build directory.
+	* tests/config_test.c: Don't define LIBUSER_CONF, it is defined by the
+	wrapper script now.
+
+	* configure.in: Remove many unnecessary tests, simplify others.  Fix
+	checking for __secure_getenv().
+	* Makefile.am: Hardcode variables with only a single possible value
+
+	* configure.in: Disable building of static libraries.
+	* Makefile.am: Don't remove *.{a,la} of plugins.
+
 2005-04-30  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.7.

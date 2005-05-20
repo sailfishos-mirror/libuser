@@ -1,4 +1,6 @@
 [defaults]
+# non-portable
+moduledir = @TOP_BUILDDIR@/modules/.libs
 modules = files shadow
 create_modules = files shadow
 

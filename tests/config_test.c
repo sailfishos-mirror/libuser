@@ -33,9 +33,6 @@ main(void)
 	struct lu_error *error;
 	GList *list;
 	
-	setenv("LIBUSER_CONF", g_strconcat(getenv("srcdir"),
-					   "/tests/config.conf",
-					   (const gchar *)NULL), 1);
 	error = NULL;
 	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console_quiet, NULL,
 		       &error);

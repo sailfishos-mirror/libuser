@@ -8,51 +8,31 @@ AC_PROG_CC
 AM_PROG_CC_C_O
 AC_ISC_POSIX
 
-AM_PROG_LIBTOOL
+AC_DISABLE_STATIC
+AC_PROG_LIBTOOL
 
 PKG_CHECK_MODULES(GLIB,[glib-2.0 gmodule-2.0])
 PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gobject-2.0])
 PKG_CHECK_MODULES(GMODULE,[glib-2.0 gmodule-2.0 gobject-2.0])
-AC_DEFINE(G_DISABLE_DEPRECATED,,[Stay away from deprecated glib functionality.])
+AC_DEFINE(G_DISABLE_DEPRECATED,,
+	[Stay away from deprecated glib functionality.])
 
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.14.1])
 
 LIBSAVE="$LIBS"
-AC_CHECK_FUNC(crypt,,[AC_CHECK_LIB(crypt,crypt)])
+AC_SEARCH_LIBS([crypt], [crypt])
 CRYPT_LIBS="$LIBS"
 LIBS="$LIBSAVE"
+AC_SUBST(CRYPT_LIBS)
 
-LIBSAVE="$LIBS"
-AC_CHECK_HEADERS(security/pam_appl.h)
-AC_CHECK_FUNC(pam_start,,[AC_CHECK_LIB(pam, pam_start)])
-AC_CHECK_FUNC(pam_authenticate,,[AC_CHECK_LIB(pam, pam_authenticate)])
-PAM_LIBS="$LIBS"
-AC_CHECK_FUNC(misc_conv,,[AC_CHECK_LIB(pam_misc, misc_conv)])
-PAM_MISC_LIBS="$LIBS"
-LIBS="$LIBSAVE"
-
-LIBSAVE="$LIBS"
-
-popt=/usr
 AC_ARG_WITH([popt], AS_HELP_STRING([--with-popt=DIR],
 				   [use popt headers and libraries under DIR]),
-[if test "x$withval" != x -a "x$withval" != xyes ; then
-	popt=$withval
-fi
-])
-
-if test x$popt != xno ; then
-	if test x$popt != x -a x$popt != x/usr ; then
-		CFLAGS="$CFLAGS -I$popt/include"
-		CPPFLAGS="$CPPFLAGS -I$popt/include"
-		LIBS="$LIBS -L$popt/lib"
-	fi
-	AC_CHECK_HEADERS(popt.h)
-	AC_CHECK_FUNC(poptGetContext,,[AC_CHECK_LIB(popt,poptGetContext)])
-fi
-POPT_LIBS="$LIBS"
-LIBS="$LIBSAVE"
+[if test "x$withval" != x -a "x$withval" != xyes -a "x$withval" != xno -a \
+	"x$withval" != x/usr ; then
+	CPPFLAGS="$CPPFLAGS -I$popt/include"
+	LDFLAGS="$LDFLAGS -L$popt/lib"
+fi])
 
 AC_ARG_WITH([ldap],
 	    AS_HELP_STRING([--with-ldap=DIR],
@@ -68,23 +48,10 @@ build_ldap=no
 if test x$ldap != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$ldap != xyes -a x$ldap != x/usr ; then
-		CFLAGS="$CFLAGS -I$ldap/include"
 		CPPFLAGS="$CPPFLAGS -I$ldap/include"
 		LDFLAGS="$LDFLAGS -L$ldap/lib"
-		if test x$ldap != x/usr ; then
-			LDAP_LDADD=-L$ldap/lib
-		fi
-		LIBS="$LIBS $LDAP_LDADD"
 	fi
-	AC_CHECK_HEADERS(ldap.h)
-	AC_CHECK_FUNC(ber_alloc,,[
-		AC_CHECK_LIB(lber,ber_alloc,[
-			     LDAP_LIBS="-llber $LDAP_LIBS"
-			     LIBS="-llber $LIBS"],,[$LDFLAGS $LIBS])])
-	AC_CHECK_FUNC(ldap_sasl_bind_s,,[
-		AC_CHECK_LIB(ldap,ldap_sasl_bind_s,[
-			     LDAP_LIBS="-lldap $LDAP_LIBS"
-			     LIBS="-lldap $LIBS"],,[$LDFLAGS $LIBS])])
+	AC_SEARCH_LIBS([ldap_sasl_interactive_bind_s], [ldap])
 	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,[
 	AC_CHECK_FUNC(ldap_set_option,[
 	AC_CHECK_FUNC(ldap_start_tls_s,[
@@ -111,27 +78,11 @@ build_sasl=no
 if test x$sasl != xno ; then
 	LIBSAVE="$LIBS"
 	if test x$sasl != xyes -a x$sasl != x/usr ; then
-		CFLAGS="$CFLAGS -I$sasl/include"
 		CPPFLAGS="$CPPFLAGS -I$sasl/include"
 		LDFLAGS="$LDFLAGS -L$sasl/lib"
-		if test x$sasl != x/usr ; then
-			SASL_LDADD=-L$sasl/lib
-		fi
-		LIBS="$LIBS $SASL_LDADD"
 	fi
-	AC_CHECK_HEADERS([sasl/sasl.h])
-	AC_CHECK_FUNC(sasl_setpass,,[
-		AC_CHECK_LIB([sasl2],[sasl_setpass],[
-			     SASL_LIBS="-lsasl2 $SASL_LIBS"
-			     LIBS="-lsasl2 $LIBS"
-			     build_sasl=yes]
-			     ,,[$LDFLAGS $LIBS])])
-	AC_CHECK_FUNCS(sasl_checkpass,,[
-	AC_CHECK_LIB(sasl2,sasl_checkpass,[
-	AC_DEFINE(HAVE_SASL_CHECKPASS,,[if sasl_checkpass() is defined])])])
-	AC_CHECK_FUNCS(sasl_user_exists,,[
-	AC_CHECK_LIB(sasl2,sasl_user_exists,[
-	AC_DEFINE(HAVE_SASL_USER_EXISTS,,[if sasl_user_exists() is defined])])])
+	AC_SEARCH_LIBS([sasl_setpass], [sasl2], [build_sasl=yes])
+	AC_CHECK_FUNCS([sasl_user_exists])
 	LIBS="$LIBSAVE"
 fi
 AM_CONDITIONAL([SASL], [test $build_sasl = yes])
@@ -155,18 +106,13 @@ AC_ARG_ENABLE([quota],
 	      [quota=$withval],[quota=no])
 AM_CONDITIONAL([QUOTA], [test x$quota != xno])
 
-AC_HEADER_STDC
-
 AC_C_CONST
 AC_TYPE_UID_T
 AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
-AC_CHECK_HEADERS([fcntl.h limits.h sys/time.h unistd.h])
-AC_CHECK_FUNC(__secure_getenv)
-AC_CHECK_FUNC(strstr)
-AC_CHECK_FUNC(strtol)
+AC_CHECK_FUNCS([__secure_getenv])
 
 # Modify CFLAGS after all tests are run (some of them could fail because
 # of the -Werror).
@@ -194,40 +140,11 @@ if test "$GCC" = yes ; then
      AC_MSG_RESULT([$enable_Werror])
 fi
 
-
-test "x$prefix" = xNONE && prefix=$ac_default_prefix
-test "x$exec_prefix" = xNONE && exec_prefix=${prefix}
-
-# FIXME: this doesn't work in general ("${prefix}/etc" etc.)
-LOCALEDIR=`eval echo $datadir/locale`
-AC_DEFINE_UNQUOTED(LOCALEDIR,"$LOCALEDIR",
-		   [location where locale files will be installed])
-MODULEDIR=`eval echo $libdir/$PACKAGE`
-AC_DEFINE_UNQUOTED(MODULEDIR,"$MODULEDIR",
-		   [location where modules will be installed])
-AC_DEFINE_UNQUOTED(SYSCONFDIR,"$sysconfdir",
-		   [location where config files will be installed])
-
 GTK_DOC_CHECK
 
 dnl Does not even compile
 AM_CONDITIONAL([KRB5], [false])
-AC_SUBST(CRYPT_LIBS)
-AC_SUBST(KRB5_LDADD)
-AC_SUBST(KRB5_LIBS)
-AC_SUBST(LDAP_LDADD)
-AC_SUBST(LDAP_LIBS)
-AC_SUBST(PAM_LIBS)
-AC_SUBST(PAM_MISC_LIBS)
-AC_SUBST(POPT_LIBS)
-AC_SUBST(SASL_LDADD)
-AC_SUBST(SASL_LIBS)
-dnl AC_SUBST(PYTHON_VERSION)
-dnl AC_SUBST(PYTHON_INC)
-
-scdir=`eval echo $sysconfdir`
-AC_SUBST(scdir)
 
 AC_CONFIG_FILES([Makefile po/Makefile.in docs/Makefile docs/reference/Makefile
-libuser.conf libuser.pc])
+libuser.pc])
 AC_OUTPUT
