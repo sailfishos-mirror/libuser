@@ -69,5 +69,5 @@ export LD_LIBRARY_PATH
 PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
-# Note that "$srcdir"/ldaprc is "./ldaprc" when accessing LDAP
-(cd "$srcdir"; python ldap_test.py)
+# Point "$HOME/ldaprc" to "$srcdir"/ldaprc
+HOME="$srcdir" strace -o /home/mitr/log python "$srcdir"/ldap_test.py
