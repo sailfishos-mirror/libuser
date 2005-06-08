@@ -70,4 +70,4 @@ PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
 # Point "$HOME/ldaprc" to "$srcdir"/ldaprc
-HOME="$srcdir" strace -o /home/mitr/log python "$srcdir"/ldap_test.py
+HOME="$srcdir" python "$srcdir"/ldap_test.py
