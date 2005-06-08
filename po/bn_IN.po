@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-03-23 18:55+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla <redhat-translation@bengalinux.org>\n"
@@ -685,27 +685,36 @@ msgstr "টার্মিনালের বৈশিষ্ট্য নির�
 msgid "error reading from terminal"
 msgstr "টার্মিনাল থেকে পড়তে সমস্যা"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "নাম নির্ধারণ করা হয়নি"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "নাম অত্যাধিক ছোট"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "নামের মধ্য non-ASCII অক্ষর লেখা হয়েছে"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "নামের মধ্য নিয়ন্ত্রক (control) অক্ষর লেখা হয়েছে"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "নামের মধ্যে শূণ্যস্থান রয়েছে"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "নামের মধ্য অবৈধ অক্ষর `%c' লেখা হয়েছে"

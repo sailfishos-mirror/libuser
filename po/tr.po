@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2004-03-15 23:27+0200\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -634,27 +634,36 @@ msgstr "uçbirim özellikleri ayarlanırken hata"
 msgid "error reading from terminal"
 msgstr "uçbirimden okumada hata"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "isim yok"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "isim çok kısa"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "isim ASCII olmayan karakterler içeriyor"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "isim denetim karakterleri içeriyor"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "isimde boşluk karakterleri var"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "isimde `%c' karakteri kullanılamaz"

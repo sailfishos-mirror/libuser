@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-04-11 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
@@ -632,27 +632,36 @@ msgstr "villa við að setja skjáeiginleika"
 msgid "error reading from terminal"
 msgstr "villa við lestur frá skjá"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "heitið er ekki stillt"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "heitið er of stutt"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "heitið inniheldur stafi sem ekki eru ASCII"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "heitið inniheldur stjórntákn"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "heitið inniheldur orðabil"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "heitið inniheldur ógilt tákn `%c'"

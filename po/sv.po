@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-04-08 23:56+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -632,27 +632,36 @@ msgstr "fel vid inställning av terminalattribut"
 msgid "error reading from terminal"
 msgstr "fel vid läsning från terminal"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "namnet är inte angivet"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "namnet är för kort"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "namnet innehåller tecken som inte är ASCII"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "namnet innehåller kontrolltecken"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "namnet innehåller blanksteg"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "namnet innehåller det ogiltiga tecknet \"%c\""

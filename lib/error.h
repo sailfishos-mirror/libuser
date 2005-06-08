@@ -85,7 +85,7 @@ do { \
 
 /* Functions for allocating and freeing error objects. */
 void lu_error_new(lu_error_t **error, lu_status_t code,
-		  const char *fmt, ...);
+		  const char *fmt, ...) G_GNUC_PRINTF(3, 4);
 const char *lu_strerror(lu_error_t *error);
 gboolean lu_error_is_success(lu_status_t status);
 gboolean lu_error_is_warning(lu_status_t status);

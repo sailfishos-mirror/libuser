@@ -64,6 +64,28 @@ class Tests(unittest.TestCase):
 
     # testUserAddPrep
     # Setting of USERPASSWORD to "x" tested below
+    def testUserAddPrep(self):
+        # Nothing to do with the "files" module: tests of lu_name_allowed()
+        e = self.a.initUser('very_long_name_123456789_123456789_123456789')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('non_ascii_name_\xff')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('nonprintable_name_\x0a')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('nonprintable_name_\x7f')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('name with spaces')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('-name_with_hyphen')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        del e
+        e = self.a.initUser('0.allowed-Name-TEST_0123456789$')
+        self.a.addUser(e, False, False)
 
     def testUserAdd1(self):
         # A minimal case

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-04-05 09:43+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
@@ -636,27 +636,36 @@ msgstr "터미널 속성을 설정하는 도중 오류 발생"
 msgid "error reading from terminal"
 msgstr "터미널로 부터 읽는 도중 오류 발생"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "이름이 설정되지 않았습니다."
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "이름이 너무 짧습니다."
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "이름에 아스키 (ASCII)가 아닌 문자가 들어 있습니다."
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "이름에 제어 문자가 포함되어 있습니다."
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "이름에 공백이 포함되어 있습니다."
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "이름에 잘못된 문자 `%c'가 있습니다."

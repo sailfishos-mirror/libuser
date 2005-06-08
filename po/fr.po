@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-05-09 20:30+0100\n"
 "Last-Translator: Philippe Villiers <philippe.villiers@wanadoo.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -640,27 +640,36 @@ msgstr "erreur lors de la configuration des attributs du terminal"
 msgid "error reading from terminal"
 msgstr "erreur de lecture depuis le terminal"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "le nom n'est pas défini"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "le nom est trop court"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "le nom contient des caractères qui ne sont pas des caractères ASCII"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "le nom contient des caractères de contrôle"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "le nom contient des espaces blancs"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "le nom contient un caractère incorrect '%c'"

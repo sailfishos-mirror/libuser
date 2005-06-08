@@ -1,3 +1,16 @@
+2005-06-08  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.53.8.
+
+	* NEWS: Update.
+
+	* lib/user.c (lu_name_allowed, INVALID_NAME_CHARS): Permit "portable"
+	user and group names as defined by SUSv3, plus trailing $.
+	* tests/files_test.py (Tests.testUserAddPrep): New test.
+
+	* lib/error.h: Use G_GNUC_PRINTF.
+	* python/debug.h (FIXME): Remove unused definition.
+
 2005-06-04  Miloslav Trmac  <mitr@redhat.com>
 
 	* autogen.sh: Don't set CFLAGS, we don't run configure any more.

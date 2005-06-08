@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-03-07 08:21+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanpreetalam@yahoo.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
@@ -641,27 +641,36 @@ msgstr "ਟਰਮੀਨਲ ਵਿਸ਼ੇਸ਼ਤਾ ਨਿਰਧਾਰਿਤ ਕਰ
 msgid "error reading from terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚੋ ਪੜਨ ਵਿੱਚ ਗਲਤੀ"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "ਨਾਂ ਨਿਰਧਾਰਿਤ ਨਹੀਂ ਕੀਤਾ"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "ਨਾਂ ਬਹੁਤ ਛੋਟਾ ਹੈ"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "ਨਾਂ ਵਿੱਚ ਨਾਨ-ASCII ਅੱਖਰ ਸ਼ਾਮਿਲ ਹਨ"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "ਨਾਂ ਵਿੱਚ ਕੰਟਰੋਲ ਅੱਖਰ ਸ਼ਾਮਿਲ ਹਨ"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "ਨਾਂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ ਸ਼ਾਮਿਲ ਹੈ"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "ਨਾਂ ਵਿੱਚ ਅਯੋਗ ਅੱਖਰ `%c' ਸ਼ਾਮਿਲ ਹਨ"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-05-03 10:42+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
@@ -640,27 +640,36 @@ msgstr "ટર્મિનલની લાક્ષણિકતાઓ સુય�
 msgid "error reading from terminal"
 msgstr "ટર્મિનલમાંથી વાંચવામાં ભૂલ"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "નામ સુયોજિત નથી"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "નામ ખૂબ નાનું છે"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "નામ બિન-ASCII અક્ષરો સમાવે છે"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "નામ નિયંત્રક અક્ષરો સમાવે છે"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "નામ ખાલી જગ્યાઓ સમાવે છે"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "નામ અયોગ્ય અક્ષર `%c' સમાવે છે"

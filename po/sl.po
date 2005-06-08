@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 9.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2003-07-13 23:10+0200\n"
 "Last-Translator: Roman Maurer <roman@lugos.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -635,27 +635,36 @@ msgstr "napaka pri nastavljanju atributov terminala"
 msgid "error reading from terminal"
 msgstr "napaka pri branju s terminala"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "ime ni nastavljeno"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "ime je prekratko"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "ime vsebuje ne-ASCII znake"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "ime vsebuje krmilne znake"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "ime vsebuje prazne znake"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "ime vsebuje neveljavni znak '%c'"

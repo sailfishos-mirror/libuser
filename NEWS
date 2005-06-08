@@ -1,3 +1,8 @@
+0.53.8
+* Permit "portable" user and group names as defined by SUSv3, plus trailing $
+* Disable building static libraries by default
+* Miscellaneous build machinery improvements
+
 0.53.7
 * Add missing translations
 * Update translations

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-04-24 20:39+0200\n"
+"POT-Creation-Date: 2005-06-08 18:33+0200\n"
 "PO-Revision-Date: 2005-03-06 00:25+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
@@ -635,27 +635,36 @@ msgstr "ターミナル属性の設定中にエラー"
 msgid "error reading from terminal"
 msgstr "ターミナルから読み込み中にエラー"
 
-#: lib/user.c:196
+#: lib/user.c:197
 msgid "name is not set"
 msgstr "名前が設定されていません"
 
-#: lib/user.c:200
+#: lib/user.c:202
 msgid "name is too short"
 msgstr "名前が短すぎます"
 
-#: lib/user.c:206
+#: lib/user.c:207
+#, c-format
+msgid "name is too long (%zu > %d)"
+msgstr ""
+
+#: lib/user.c:214
 msgid "name contains non-ASCII characters"
 msgstr "名前にASCII以外の文字があります"
 
-#: lib/user.c:213
+#: lib/user.c:221
 msgid "name contains control characters"
 msgstr "名前が制御文字を含んでいます"
 
-#: lib/user.c:220
+#: lib/user.c:228
 msgid "name contains whitespace"
 msgstr "名前に空白があります"
 
-#: lib/user.c:227
+#: lib/user.c:240
+msgid "name starts with a hyphen"
+msgstr ""
+
+#: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "名前に無効な文字`%c'があります"

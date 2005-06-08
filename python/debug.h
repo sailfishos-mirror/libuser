@@ -3,9 +3,6 @@
 
 #include <glib.h>
 
-#define FIXME fprintf(stderr, "Function %s not implemented.\n", __FUNCTION__); \
-return NULL;
-
 #undef  DEBUG_BINDING
 #ifdef  DEBUG
 #define DEBUG_BINDING

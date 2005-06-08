@@ -29,12 +29,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <utmp.h>
 #include "user_private.h"
 #include "modules.h"
 #include "util.h"
 
 #define DEFAULT_ID 500
-#define INVALID_NAME_CHARS ":,."
 
 enum lu_dispatch_id {
 	uses_elevated_privileges = 0x0003,
@@ -187,7 +187,8 @@ static gboolean
 lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 {
 	const char *sdata;
-	int i;
+	size_t len, i;
+	
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
 			     FALSE);
@@ -196,8 +197,15 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 		lu_error_new(error, lu_error_name_bad, _("name is not set"));
 		return FALSE;
 	}
-	if (strlen(sdata) == 0) {
+	len = strlen(sdata);
+	if (len == 0) {
 		lu_error_new(error, lu_error_name_bad, _("name is too short"));
+		return FALSE;
+	}
+	if (len > UT_NAMESIZE - 1) {
+		lu_error_new(error, lu_error_name_bad,
+			     _("name is too long (%zu > %d)"), len,
+			     UT_NAMESIZE - 1);
 		return FALSE;
 	}
 	for (i = 0; sdata[i] != '\0'; i++) {
@@ -221,8 +229,24 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 			return FALSE;
 		}
 	}
+	/* SUSv3 (3.426) says "To be portable across ..., the value is composed
+	   of characters from the portable filename character set. The hyphen
+	   should not be used as the first character of a portable user name.
+
+	   Note: "the value _is_ composed", not "should be" composed.  We don't
+	   have to allow more. */
+	if (sdata[0] == '-') {
+		lu_error_new(error, lu_error_name_bad,
+			     _("name starts with a hyphen"));
+		return FALSE;
+	}
 	for (i = 0; sdata[i] != '\0'; i++) {
-		if (strchr(INVALID_NAME_CHARS, sdata[i])) {
+		if (!((sdata[i] >= 'a' && sdata[i] <= 'z')
+		      || (sdata[i] >= 'A' && sdata[i] <= 'Z')
+		      || (sdata[i] >= '0' && sdata[i] <= '9')
+		      || sdata[i] == '.' || sdata[i] ==  '-' || sdata[i] == '_'
+		      /* Allow trailing $ for samba machine accounts. */
+		      || (sdata[i] == '$' && sdata[i + 1] == '\0'))) {
 			lu_error_new(error, lu_error_name_bad,
 				     _("name contains invalid char `%c'"),
 				     sdata[i]);
