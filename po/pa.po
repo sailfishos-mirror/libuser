@@ -652,7 +652,7 @@ msgstr "ਨਾਂ ਬਹੁਤ ਛੋਟਾ ਹੈ"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "ਨਾਂ ਬਹੁਤ ਵੱਡਾ ਹੈ (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -668,7 +668,7 @@ msgstr "ਨਾਂ ਵਿੱਚ ਖਾਲੀ ਥਾਂ ਸ਼ਾਮਿਲ ਹੈ"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "ਨਾਂ ਹਾਈਫਨ ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ"
 
 #: lib/user.c:251
 #, c-format
@@ -1027,3 +1027,4 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
+
