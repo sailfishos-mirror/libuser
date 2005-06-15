@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-03-07 09:50+0000\n"
+"PO-Revision-Date: 2005-06-15 10:29+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -641,7 +641,7 @@ msgstr "o nome é demasiado curto"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "o nome é demasiado comprimido (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -657,7 +657,7 @@ msgstr "o nome contém espaços em branco"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "o nome começa com o hífen"
 
 #: lib/user.c:251
 #, c-format
