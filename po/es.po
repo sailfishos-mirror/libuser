@@ -2,22 +2,24 @@
 # translation of es.po to
 # translation of es.po to Spanish
 # Copyright (C) 2001,2003, 2004 Free Software Foundation, Inc.
-# NÃºria Soriano <nsoriano@redhat.es>, 2001.
-# Fernando Ruiz-Tapiador GutiÃ©rrez <frtapiador@redhat.es>, 2001.
+# Núria Soriano <nsoriano@redhat.es>, 2001.
+# Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
 # Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
-#
+# José Julio Cidón <josejulio@cidon-mulliez.com>, 2005.
+# Rodolfo M. Raya <rodolfo@heartsome.net>, 2005.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-03-11 19:33-0200\n"
-"Last-Translator: Rodolfo M. Raya <rodolfo@heartsome.net>\n"
-"Language-Team:  <fedora-trans-es@redhat.com>\n"
+"PO-Revision-Date: 2005-06-17 12:16+0200\n"
+"Last-Translator: José Julio Cidón Peón <josejulio@cidon-mulliez.com>\n"
+"Language-Team: Spanish/Spain\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: XLFEdit 5.0.1\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
@@ -25,7 +27,7 @@ msgstr ""
 #: modules/files.c:238
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Error en la lectura `%s': %s"
+msgstr "Error leyendo `%s': %s"
 
 # apps/apputil.c:63
 # apps/apputil.c:63
@@ -40,7 +42,7 @@ msgstr "Error al crear `%s': %s"
 #: modules/files.c:222
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Error cambiando dueÃ±o de `%s': %s"
+msgstr "Error cambiando dueño de `%s': %s"
 
 # apps/apputil.c:63
 # apps/apputil.c:63
@@ -72,7 +74,7 @@ msgstr "Error interno.\n"
 #: apps/apputil.c:587
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s no estÃ¡ autorizado para cambiar la informaciÃ³n de finger de %s\n"
+msgstr "%s no está autorizado para cambiar la información de finger de %s\n"
 
 # lib/userent.c:46
 # lib/userent.c:47
@@ -97,7 +99,7 @@ msgstr "Error inicializando PAM.\n"
 #: apps/apputil.c:614 apps/apputil.c:638
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "AutentificaciÃ³n fallida para %s.\n"
+msgstr "Autentificación fallida para %s.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
@@ -116,7 +118,7 @@ msgstr "No corresponde el usuario.\n"
 #: apps/lchage.c:140 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
 #: apps/luserdel.c:66 apps/lusermod.c:92
 msgid "[OPTION...] user"
-msgstr "[OPCIÃ“N...] usuario"
+msgstr "[OPCIÓN...] usuario"
 
 # apps/luserdel.c:126
 # apps/luserdel.c:126
@@ -133,7 +135,7 @@ msgstr "Error al analizar argumentos %s.\n"
 #: apps/lusermod.c:106
 #, c-format
 msgid "No user name specified.\n"
-msgstr "No se especificÃ³ nombre de usuario.\n"
+msgstr "No se especificó nombre de usuario.\n"
 
 # apps/lchage.c:108 apps/lgroupadd.c:71 apps/lgroupdel.c:66
 # apps/lgroupmod.c:81 apps/luseradd.c:85 apps/luserdel.c:72
@@ -162,28 +164,28 @@ msgstr "El usuario %s no existe.\n"
 #: apps/lchage.c:179
 #, c-format
 msgid "Account is locked.\n"
-msgstr "La cuenta estÃ¡ bloqueada.\n"
+msgstr "La cuenta está bloqueada.\n"
 
 # apps/lchage.c:126
 # apps/lchage.c:126
 #: apps/lchage.c:181
 #, c-format
 msgid "Account is not locked.\n"
-msgstr "La cuenta no estÃ¡ bloqueada.\n"
+msgstr "La cuenta no está bloqueada.\n"
 
 # apps/lchage.c:130
 # apps/lchage.c:130
 #: apps/lchage.c:186
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr "MÃ­nimo:\t%d\n"
+msgstr "Mínimo:\t%d\n"
 
 # apps/lchage.c:134
 # apps/lchage.c:134
 #: apps/lchage.c:191
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "MÃ¡ximo:\t%d\n"
+msgstr "Máximo:\t%d\n"
 
 # apps/lchage.c:138
 # apps/lchage.c:138
@@ -210,21 +212,21 @@ msgstr "Nunca"
 #: apps/lchage.c:208
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr "Ãšltimo cambio:\t%s\n"
+msgstr "Último cambio:\t%s\n"
 
 # apps/lchage.c:156
 # apps/lchage.c:156
 #: apps/lchage.c:218
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "ContraseÃ±a caduca:\t%s\n"
+msgstr "Contraseña caduca:\t%s\n"
 
 # apps/lchage.c:165
 # apps/lchage.c:165
 #: apps/lchage.c:230
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "ContraseÃ±a inactiva:\t%s\n"
+msgstr "Contraseña inactiva:\t%s\n"
 
 # apps/lchage.c:172
 # apps/lchage.c:172
@@ -238,27 +240,27 @@ msgstr "Cuenta caduca:\t%s\n"
 #: apps/lchage.c:285
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "FallÃ³ al modificar la informaciÃ³n de caducidad para %s: %s\n"
+msgstr "Falló al modificar la información de caducidad para %s: %s\n"
 
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 #: apps/lchfn.c:74 apps/lchsh.c:61
 msgid "[OPTION...] [user]"
-msgstr "[OPCIÃ“N...] [usuario]"
+msgstr "[OPCIÓN...] [usuario]"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 #: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "No se especificÃ³ nombre de usuario, no hay un nombre para el uid %d.\n"
+msgstr "No se especificó nombre de usuario, no hay un nombre para el uid %d.\n"
 
 # apps/lchage.c:201
 # apps/lchage.c:201
 #: apps/lchfn.c:102
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Cambiando la informaciÃ³n de finger para %s.\n"
+msgstr "Cambiando la información de finger para %s.\n"
 
 #: apps/lchfn.c:148
 msgid "Full Name"
@@ -278,29 +280,29 @@ msgstr "Oficina"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr "TelÃ©fono de oficina"
+msgstr "Teléfono de oficina"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr "TelÃ©fono particular"
+msgstr "Teléfono particular"
 
 #: apps/lchfn.c:213
 msgid "E-Mail Address"
-msgstr "DirecciÃ³n de correo electrÃ³nico"
+msgstr "Dirección de correo electrónico"
 
 #: apps/lchfn.c:226
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr "InformaciÃ³n de finger sin modificaciones: error de entrada.\n"
+msgstr "Información de finger sin modificaciones: error de entrada.\n"
 
 #: apps/lchfn.c:331
 msgid "Finger information changed.\n"
-msgstr "InformaciÃ³n de finger modificada.\n"
+msgstr "Información de finger modificada.\n"
 
 #: apps/lchfn.c:334
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr "InformaciÃ³n de finger sin modificaciones: %s.\n"
+msgstr "Información de finger sin modificaciones: %s.\n"
 
 #: apps/lchsh.c:90
 #, c-format
@@ -324,26 +326,26 @@ msgstr "Shell sin modificar: %s\n"
 # apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
 msgid "[OPTION...] group"
-msgstr "[OPCIÃ“N...] grupo"
+msgstr "[OPCIÓN...] grupo"
 
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:97
 #, c-format
 msgid "No group name specified.\n"
-msgstr "No se especificÃ³ ningÃºn nombre de grupo.\n"
+msgstr "No se especificó ningún nombre de grupo.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr "ID de grupo %s no vÃ¡lida\n"
+msgstr "ID de grupo %s no válida\n"
 
 # apps/lgroupadd.c:88
 # apps/lgroupadd.c:88
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr "FallÃ³ la creaciÃ³n del grupo: %s\n"
+msgstr "Falló la creación del grupo: %s\n"
 
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
@@ -364,14 +366,14 @@ msgstr "No se pudo eliminar el grupo %s: %s\n"
 #: apps/lgroupmod.c:127 apps/lusermod.c:154
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "EspecificaciÃ³n de -L y -U\n"
+msgstr "Especificación de -L y -U\n"
 
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 # apps/lgroupmod.c:155 apps/lgroupmod.c:165
 #: apps/lgroupmod.c:141 apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "FallÃ³ al establecer la contraseÃ±a para el grupo %s: %s\n"
+msgstr "Falló al establecer la contraseña para el grupo %s: %s\n"
 
 # apps/lgroupmod.c:174
 # apps/lgroupmod.c:174
@@ -399,27 +401,27 @@ msgstr "El grupo %s no se pudo modificar:%s\n"
 #: apps/lid.c:82
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "No se especificÃ³ ningÃºn nombre de grupo, usando %s .\n"
+msgstr "No se especificó ningún nombre de grupo, usando %s .\n"
 
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 # apps/lgroupadd.c:64 apps/lgroupdel.c:59 apps/lgroupmod.c:74
 #: apps/lid.c:86
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "No se especificÃ³ ningÃºn nombre de grupo, no hay nombre para gid %d.\n"
+msgstr "No se especificó ningún nombre de grupo, no hay nombre para gid %d.\n"
 
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 # apps/lchage.c:101 apps/luseradd.c:78 apps/luserdel.c:65 apps/lusermod.c:75
 #: apps/lid.c:94
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "No se especificÃ³ nombre de usuario, usando %s.\n"
+msgstr "No se especificó nombre de usuario, usando %s.\n"
 
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 # apps/lchage.c:95 apps/luseradd.c:72 apps/luserdel.c:59 apps/lusermod.c:69
 #: apps/lnewusers.c:75
 msgid "[OPTION...]"
-msgstr "[OPCIÃ“N...]"
+msgstr "[OPCIÓN...]"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
@@ -432,31 +434,31 @@ msgstr "Error en la lectura `%s': %s.\n"
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Error creando cuenta para `%s': la lÃ­nea no estÃ¡ formateada de la forma "
+"Error creando cuenta para `%s': la línea no está formateada de la forma "
 "correcta.\n"
 
 #: apps/lnewusers.c:144 apps/luseradd.c:120 apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr "ID de usuario %s no vÃ¡lida\n"
+msgstr "ID de usuario %s no válida\n"
 
 #: apps/lnewusers.c:151
 msgid "Refusing to create account with UID 0.\n"
-msgstr "Rechazando la creaciÃ³n de cuenta con UID 0.\n"
+msgstr "Rechazando la creación de cuenta con UID 0.\n"
 
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #: apps/lnewusers.c:234
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Error en la creaciÃ³n de un grupo para  `%s' con GID  %jd: %s\n"
+msgstr "Error en la creación de un grupo para  `%s' con GID  %jd: %s\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
 #: apps/lnewusers.c:292
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "Error en la configuraciÃ³n de la contraseÃ±a para %s: %s\n"
+msgstr "Error en la configuración de la contraseña para %s: %s\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
@@ -484,44 +486,44 @@ msgstr "Error creando cuenta de usuario para %s: %s\n"
 #: apps/lpasswd.c:86
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "Cambiando contraseÃ±a para %s.\n"
+msgstr "Cambiando contraseña para %s.\n"
 
 #: apps/lpasswd.c:110
 msgid "New password"
-msgstr "Nueva contraseÃ±a"
+msgstr "Nueva contraseña"
 
 #: apps/lpasswd.c:113
 msgid "New password (confirm)"
-msgstr "Nueva contraseÃ±a (confirmar)"
+msgstr "Nueva contraseña (confirmar)"
 
 #: apps/lpasswd.c:127
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr "Las contraseÃ±as no coinciden, por favor intÃ©ntelo nuevamente.\n"
+msgstr "Las contraseñas no coinciden, por favor inténtelo nuevamente.\n"
 
 #: apps/lpasswd.c:132
 #, c-format
 msgid "Password change canceled.\n"
-msgstr "Cancelado el cambio de contraseÃ±as.\n"
+msgstr "Cancelado el cambio de contraseñas.\n"
 
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
 #: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Error al configurar la contraseÃ±a para el usuario  %s: %s.\n"
+msgstr "Error al configurar la contraseña para el usuario  %s: %s.\n"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
 #: apps/lpasswd.c:197
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Error en la configuraciÃ³n de la contraseÃ±a para el grupo %s: %s.\n"
+msgstr "Error en la configuración de la contraseña para el grupo %s: %s.\n"
 
 #: apps/lpasswd.c:208
 #, c-format
 msgid "Password changed.\n"
-msgstr "ContraseÃ±a modificada.\n"
+msgstr "Contraseña modificada.\n"
 
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
@@ -535,14 +537,14 @@ msgstr "El grupo %jd no existe.\n"
 #: apps/luseradd.c:213 apps/luseradd.c:226
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Error en la creaciÃ³n del grupo `%s': %s\n"
+msgstr "Error en la creación del grupo `%s': %s\n"
 
 # apps/luseradd.c:159
 # apps/luseradd.c:159
 #: apps/luseradd.c:287
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "CreaciÃ³n de la cuenta fallida: %s.\n"
+msgstr "Creación de la cuenta fallida: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
@@ -570,19 +572,19 @@ msgstr "No se pudo eliminar el usuario %s: %s.\n"
 #: apps/luserdel.c:109
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s no tenÃ­a un nÃºmero gid.\n"
+msgstr "%s no tenía un número gid.\n"
 
 #: apps/luserdel.c:117
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "No existe ningÃºn grupo con %jd de GID, no se eliminarÃ¡.\n"
+msgstr "No existe ningún grupo con %jd de GID, no se eliminará.\n"
 
 # apps/luserdel.c:105
 # apps/luserdel.c:105
 #: apps/luserdel.c:124
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "El grupo de GID %jd no tenÃ­a un nombre de grupo.\n"
+msgstr "El grupo de GID %jd no tenía un nombre de grupo.\n"
 
 # apps/luserdel.c:110
 # apps/luserdel.c:110
@@ -596,7 +598,7 @@ msgstr "No se pudo eliminar el grupo %s: %s.\n"
 #: apps/luserdel.c:148
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s no tenÃ­a un directorio principal.\n"
+msgstr "%s no tenía un directorio principal.\n"
 
 # apps/luserdel.c:126
 # apps/luserdel.c:126
@@ -610,7 +612,7 @@ msgstr "Error al eliminar %s: %s.\n"
 #: apps/lusermod.c:170 apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Intento fallido de configurar la contraseÃ±a para el usuario %s: %s.\n"
+msgstr "Intento fallido de configurar la contraseña para el usuario %s: %s.\n"
 
 # apps/lusermod.c:150
 # apps/lusermod.c:150
@@ -645,14 +647,14 @@ msgstr "El grupo %s no se pudo modificar:%s\n"
 #: apps/lusermod.c:335
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "NingÃºn directorio principal antiguo para %s.\n"
+msgstr "Ningún directorio principal antiguo para %s.\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
 #: apps/lusermod.c:340
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "NingÃºn directorio principal para %s.\n"
+msgstr "Ningún directorio principal para %s.\n"
 
 # apps/lusermod.c:177
 # apps/lusermod.c:177
@@ -666,35 +668,35 @@ msgstr "Error al trasladar %s a %s: %s.\n"
 #: lib/config.c:174
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "no se pudo abrir el archivo de configuraciÃ³n `%s': %s"
+msgstr "no se pudo abrir el archivo de configuración `%s': %s"
 
 # lib/usercfg.c:56
 # lib/usercfg.c:56
 #: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "no se pudo hacer stat del archivo de configuraciÃ³n `%s': %s"
+msgstr "no se pudo hacer stat del archivo de configuración `%s': %s"
 
 # lib/usercfg.c:56
 # lib/usercfg.c:56
 #: lib/config.c:191
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "no se pudo leer el archivo de configuraciÃ³n `%s': %s"
+msgstr "no se pudo leer el archivo de configuración `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr "Ã©xito"
+msgstr "éxito"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr "mÃ³dulo deshabilitado por la configuraciÃ³n"
+msgstr "módulo deshabilitado por la configuración"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
 #: lib/error.c:46
 msgid "generic error"
-msgstr "error genÃ©rico"
+msgstr "error genérico"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
@@ -766,27 +768,27 @@ msgstr "no se han encontrado los datos en el fichero"
 # modules/krb5.c:391 modules/krb5.c:459 modules/krb5.c:508
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr "error interno de iniciaciÃ³n"
+msgstr "error interno de iniciación"
 
 # modules/files.c:135
 # lib/userutil.c:177
 #: lib/error.c:76
 msgid "error loading module"
-msgstr "error al cargar el mÃ³dulo"
+msgstr "error al cargar el módulo"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "error al determinar el sÃ­mbolo en el mÃ³dulo"
+msgstr "error al determinar el símbolo en el módulo"
 
 # lib/user.c:144
 # lib/user.c:186
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr "versiÃ³n de biblioteca/mÃ³dulo discordante"
+msgstr "versión de biblioteca/módulo discordante"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr "desbloquear dejarÃ­a el campo contraseÃ±a vacÃ­o"
+msgstr "desbloquear dejaría el campo contraseña vacío"
 
 # lib/userent.c:46
 # lib/userent.c:47
@@ -799,14 +801,14 @@ msgstr "error desconocido"
 #: lib/modules.c:97
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "ninguna funciÃ³n de inicializaciÃ³n de %s en `%s'"
+msgstr "ninguna función de inicialización de %s en `%s'"
 
 # lib/user.c:144
 # lib/user.c:186
 #: lib/modules.c:128
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "versiÃ³n de mÃ³dulo discordante en `%s'"
+msgstr "versión de módulo discordante en `%s'"
 
 #: lib/prompt.c:67
 msgid "error reading terminal attributes"
@@ -816,7 +818,7 @@ msgstr "error al leer los atributos del terminal"
 # samples/testuser.c:71
 #: lib/prompt.c:74 lib/prompt.c:86
 msgid "error setting terminal attributes"
-msgstr "error en la configuraciÃ³n de los atributos del terminal"
+msgstr "error en la configuración de los atributos del terminal"
 
 #: lib/prompt.c:80
 msgid "error reading from terminal"
@@ -833,7 +835,7 @@ msgstr "el nombre es muy corto"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "nombre demasiado largo·(%zu·>·%d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -849,12 +851,12 @@ msgstr "el nombre contiene espacios en blanco"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "el nombre comienza con un guión"
 
 #: lib/user.c:251
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "el nombre contiene un caracter invÃ¡lido: `%c'"
+msgstr "el nombre contiene un caracter inválido: `%c'"
 
 # modules/files.c:135
 # lib/userutil.c:177
@@ -934,7 +936,7 @@ msgstr ""
 # lib/user.c:186
 #: modules/files.c:283
 msgid "backup file size mismatch"
-msgstr "tamaÃ±o de archivo de copia de seguridad discordante"
+msgstr "tamaño de archivo de copia de seguridad discordante"
 
 # modules/files.c:115
 # modules/files.c:601 modules/files.c:926
@@ -966,13 +968,13 @@ msgstr "no se pudo escribir en `%s': %s"
 #: modules/files.c:1248
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "el objeto de entidad no tiene ningÃºn atributo %s"
+msgstr "el objeto de entidad no tiene ningún atributo %s"
 
 # modules/krb5.c:549
 # modules/krb5.c:547
 #: modules/files.c:1949 modules/ldap.c:1618 modules/ldap.c:1890
 msgid "error encrypting password"
-msgstr "error al encriptar la contraseÃ±a"
+msgstr "error al encriptar la contraseña"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
@@ -984,7 +986,7 @@ msgstr "No se ejecuta con privilegios de superusuario."
 # modules/files.c:1743
 #: modules/files.c:2998
 msgid "no shadow file present -- disabling"
-msgstr "NingÃºn archivo shadow presente -- deshabilitando."
+msgstr "Ningún archivo shadow presente -- deshabilitando."
 
 # modules/krb5.c:104
 # modules/krb5.c:102
@@ -1012,7 +1014,7 @@ msgstr "error al inicializar la biblioteca kerberos"
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "error en el anÃ¡lisis del nombre de usuario `%s' para kerberos"
+msgstr "error en el análisis del nombre de usuario `%s' para kerberos"
 
 # modules/krb5.c:200 modules/krb5.c:357 modules/krb5.c:402 modules/krb5.c:470
 # modules/krb5.c:198 modules/krb5.c:355 modules/krb5.c:400 modules/krb5.c:468
@@ -1040,7 +1042,7 @@ msgstr "la entidad no ha sido creada con atributos ni %s ni %s"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "error al leer la informaciÃ³n para `%s' desde kerberos"
+msgstr "error al leer la información para `%s' desde kerberos"
 
 # modules/krb5.c:518
 # modules/krb5.c:516
@@ -1054,7 +1056,7 @@ msgstr "la entidad no tiene atributos %s"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "error en la configuraciÃ³n de la contraseÃ±a para `%s'"
+msgstr "error en la configuración de la contraseña para `%s'"
 
 # modules/krb5.c:662
 # modules/krb5.c:660
@@ -1072,7 +1074,7 @@ msgstr "Administrador principal de Kerberos"
 # modules/krb5.c:680
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr "ContraseÃ±a Kerberos para el administrador principal"
+msgstr "Contraseña Kerberos para el administrador principal"
 
 # modules/ldap.c:178
 # modules/ldap.c:175
@@ -1085,7 +1087,7 @@ msgstr "error al inicializar la biblioteca ldap"
 #: modules/ldap.c:213
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "no se pudo establecer un protocolo LDAP para la versiÃ³n %d"
+msgstr "no se pudo establecer un protocolo LDAP para la versión %d"
 
 # modules/ldap.c:202
 # modules/ldap.c:199
@@ -1123,20 +1125,20 @@ msgstr "El servidor LDAP parece non tener DSE de root"
 #: modules/ldap.c:628 modules/ldap.c:1395 modules/ldap.c:1533
 #: modules/ldap.c:1594 modules/ldap.c:1727 modules/ldap.c:1823
 msgid "error mapping name to LDAP distinguished name"
-msgstr "error en la proyecciÃ³n del nombre para el DN LDAP"
+msgstr "error en la proyección del nombre para el DN LDAP"
 
 # modules/ldap.c:321
 # modules/ldap.c:318
 #: modules/ldap.c:638
 msgid "error mapping name to LDAP base distinguished name"
-msgstr "error en la proyecciÃ³n del nombre para el DN base LDAP"
+msgstr "error en la proyección del nombre para el DN base LDAP"
 
 # modules/ldap.c:554
 # modules/ldap.c:556
 #: modules/ldap.c:1372
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "el objeto de usuario no tiene ningÃºn atributo %s"
+msgstr "el objeto de usuario no tiene ningún atributo %s"
 
 # modules/ldap.c:560
 # modules/ldap.c:562
@@ -1177,7 +1179,7 @@ msgstr "error al renombrar la entrada del directorio LDAP: %s"
 #: modules/ldap.c:1521
 #, c-format
 msgid "object had no %s attribute"
-msgstr "el objeto no tiene ningÃºn atributo %s"
+msgstr "el objeto no tiene ningún atributo %s"
 
 # modules/ldap.c:657
 # modules/ldap.c:660
@@ -1212,7 +1214,7 @@ msgstr "Atributo `%s' no encontrado"
 #: modules/ldap.c:1921
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "Error configurando contraseÃ±a en el directorio LDAP para %s: %s"
+msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
 # modules/ldap.c:1191
 # modules/ldap.c:1213
@@ -1224,7 +1226,7 @@ msgstr "Nombre del servidor LDAP"
 # modules/ldap.c:1218
 #: modules/ldap.c:2499
 msgid "LDAP Search Base DN"
-msgstr "DN base de bÃºsqueda de LDAP"
+msgstr "DN base de búsqueda de LDAP"
 
 # modules/ldap.c:1201
 # modules/ldap.c:1223
@@ -1236,7 +1238,7 @@ msgstr "DN Bind LDAP"
 # modules/ldap.c:1228
 #: modules/ldap.c:2512
 msgid "LDAP Bind Password"
-msgstr "ContraseÃ±a Bind LDAP"
+msgstr "Contraseña Bind LDAP"
 
 # modules/ldap.c:1212
 # modules/ldap.c:1234
@@ -1248,7 +1250,7 @@ msgstr "Usuario SASL LDAP"
 # modules/ldap.c:1239
 #: modules/ldap.c:2525
 msgid "LDAP SASL Authorization User"
-msgstr "Usuario de autorizaciÃ³n SASL LDAP"
+msgstr "Usuario de autorización SASL LDAP"
 
 # apps/apputil.c:63
 # modules/files.c:130
@@ -1313,7 +1315,7 @@ msgstr "Error al iniciar %s: %s.\n"
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr "ID %s no vÃ¡lida\n"
+msgstr "ID %s no válida\n"
 
 # samples/lookup.c:69
 # samples/lookup.c:69
@@ -1373,10 +1375,11 @@ msgstr "Nombres de atributos de usuario predeterminados:\n"
 # samples/testuser.c:71
 #: samples/testuser.c:90
 msgid "Getting default user attributes:\n"
-msgstr "ObtenciÃ³n de los atributos de usuario predeterminados:\n"
+msgstr "Obtención de los atributos de usuario predeterminados:\n"
 
 # samples/testuser.c:79
 # samples/testuser.c:79
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
