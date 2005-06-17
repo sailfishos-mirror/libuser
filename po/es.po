@@ -5,8 +5,8 @@
 # Núria Soriano <nsoriano@redhat.es>, 2001.
 # Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
 # Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
-# José Julio Cidón <josejulio@cidon-mulliez.com>, 2005.
 # Rodolfo M. Raya <rodolfo@heartsome.net>, 2005.
+# José Julio Cidón Peón <josejulio@cidon-mulliez.com>, 2005.
 # 
 # 
 msgid ""
