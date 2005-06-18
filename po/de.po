@@ -3,15 +3,16 @@
 # Bernd Groh <bgroh@redhat.com>, 2002,2003.
 # Verena <vfuehrer@redhat.com>, 2004.
 # Ronny Buchmann <ronny-vlug@vlugnet.org> 2005
+# Robert Scheck <redhat@linuxnetz.de>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005.03-25 16:32+0100\n"
-"Last-Translator: Ronny Buchmann <ronny-vlug@vlugnet.org>\n"
-"Language-Team:  <de@li.org>\n"
+"PO-Revision-Date: 2005-06-18 20:31+0200\n"
+"Last-Translator: Robert Scheck <redhat@linuxnetz.de>\n"
+"Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -646,7 +647,7 @@ msgstr "Name ist zu kurz"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "Name ist zu lang (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -662,7 +663,7 @@ msgstr "Name enthält Leerzeichen"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "Name beginnt mit einem Bindestrich"
 
 #: lib/user.c:251
 #, c-format
