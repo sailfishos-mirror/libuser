@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-03-13 21:29+0300\n"
+"PO-Revision-Date: 2005-06-19 14:58+0400\n"
 "Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -644,7 +644,7 @@ msgstr "имя слишком коротко"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "имя слишком длинное (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -660,7 +660,7 @@ msgstr "имя содержит пробелы"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "имя начинается с дефиса"
 
 #: lib/user.c:251
 #, c-format
