@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-06-26 22:18+0900\n"
+"PO-Revision-Date: 2005-06-26 22:19+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -646,7 +646,7 @@ msgstr "名前が短すぎます"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr "名前が長すぎます (%zu > %d))"
+msgstr "名前が長すぎます (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
