@@ -643,7 +643,7 @@ msgstr "namnet är för kort"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "namnet är för långt (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -659,7 +659,7 @@ msgstr "namnet innehåller blanksteg"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "namnet börjas med bindestreck"
 
 #: lib/user.c:251
 #, c-format
@@ -753,8 +753,7 @@ msgstr "ingen shadow-fil finns tillgänglig -- inaktiverar"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fel vid anslutning till kadm5-servern för tjänsten \"%s\" i realm \"%s\": %s"
+msgstr "fel vid anslutning till kadm5-servern för tjänsten \"%s\" i realm \"%s\": %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
