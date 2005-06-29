@@ -1,4 +1,5 @@
-# translation of pt_BR.po to 
+# translation of pt_BR.po to Português Brasil
+# translation of pt_BR.po to
 # translation of pt_BR.po to Portuguese
 # translation of pt_BR.po to pt_BR
 # Brazilian Portuguese localization of Red Hat Linux
@@ -8,18 +9,20 @@
 # David Barzilay <barzilay@redhat.com>, 2003,2004.
 # Tiago Pasqualotto <tiago@automacao.eng.br>, 2004.
 # Pedro Macedo <pmacedo@intel.dcc.ufmg.br>, 2005.
+# Rodrigo Padula de Oliveira <rodrigopadula@gmail.com>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-04-19 16:11-0300\n"
-"Last-Translator: Pedro Macedo <pmacedo@intel.dcc.ufmg.br>\n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2005-06-28 21:16-0300\n"
+"Last-Translator: Rodrigo Padula de Oliveira <rodrigopadula@gmail.com>\n"
+"Language-Team: Português Brasil\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10.1\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
@@ -521,8 +524,7 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:191
 #, c-format
@@ -650,7 +652,7 @@ msgstr "o nome é muito curto"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "o nome é muito longo (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -666,7 +668,7 @@ msgstr "o nome contém espaço"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "o nome inicia com um hífen"
 
 #: lib/user.c:251
 #, c-format
@@ -691,8 +693,7 @@ msgstr "não foi possível determinar o contexto de segurança default: %s"
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"não foi possível determinar o contexto de segurança default de `%s': %s"
+msgstr "não foi possível determinar o contexto de segurança default de `%s': %s"
 
 #: modules/files.c:169 modules/files.c:548 modules/files.c:893
 #: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
@@ -761,8 +762,7 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:105
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
+msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
 
 #: modules/krb5.c:137 modules/krb5.c:203 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -837,8 +837,7 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -1028,3 +1027,4 @@ msgstr "Obtendo atributos default dos usuários:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copiando estrutura do usuário:\n"
+
