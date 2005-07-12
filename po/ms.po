@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-07-01 01:23+0800\n"
+"PO-Revision-Date: 2005-07-13 01:31+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -781,9 +781,9 @@ msgid "couldn't set default security context: %s"
 msgstr "Tidak dapat menetapkan konteks default untuk /etc/passwd\n"
 
 #: modules/files.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "s"
+msgstr "tidak dapat menetapkan konteks keselamatan default kepada `%s': %s"
 
 #: modules/files.c:169
 #: modules/files.c:548
@@ -824,9 +824,9 @@ msgid "error creating `%s': %s"
 msgstr "Ralat mencipta `%s': %s"
 
 #: modules/files.c:205
-#, fuzzy, c-format
+#, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "fail s dan"
+msgstr "fail salinan `%s' wujud dan bukan fail biasa"
 
 #: modules/files.c:283
 #, fuzzy
@@ -859,9 +859,9 @@ msgstr "Tidak dapat menyambung ke %s:%u. %s."
 #: modules/files.c:1147
 #: modules/files.c:1240
 #: modules/files.c:1248
-#, fuzzy, c-format
+#, c-format
 msgid "entity object has no %s attribute"
-msgstr "tidak s"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/files.c:1949
 #: modules/ldap.c:1618
@@ -881,9 +881,9 @@ msgid "no shadow file present -- disabling"
 msgstr "tidak fail"
 
 #: modules/krb5.c:105
-#, fuzzy, c-format
+#, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "ralat for s dalam s"
+msgstr "ralat menyambung ke pelayan kadm5 untuk servis `%s' dalam kawasan `%s': %s"
 
 #: modules/krb5.c:137
 #: modules/krb5.c:203
@@ -904,9 +904,9 @@ msgstr "ralat memulakan Cyrus SASL: %s"
 #: modules/krb5.c:462
 #: modules/krb5.c:550
 #: modules/krb5.c:612
-#, fuzzy, c-format
+#, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "ralat pengguna unama s for"
+msgstr "ralat menghurai nama pengguna `%s' untuk kerberos"
 
 #: modules/krb5.c:214
 #: modules/krb5.c:400
@@ -1025,7 +1025,7 @@ msgstr "kepada"
 #: modules/ldap.c:1419
 #, fuzzy, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "ralat mencipta direktori rumah untuk pengguna"
+msgstr "Ralat mencipta direktori rumah untuk %s: %s\n"
 
 #: modules/ldap.c:1445
 #: modules/ldap.c:1683
