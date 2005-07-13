@@ -1,3 +1,5 @@
+# translation of bn_IN.po to Bangla (INDIA)
+# translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla
 # Bangla Translation of Libuser.po
 # Copyright (C) 2004 Red Hat Inc.
@@ -9,14 +11,14 @@ msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-03-23 18:55+0530\n"
+"PO-Revision-Date: 2005-07-13 12:27+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
-"Language-Team: Bangla <redhat-translation@bengalinux.org>\n"
+"Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 "\n"
 "\n"
@@ -696,7 +698,7 @@ msgstr "নাম অত্যাধিক ছোট"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "উল্লিখিত নাম অত্যাধিক লম্বা (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -712,7 +714,7 @@ msgstr "নামের মধ্যে শূণ্যস্থান রয়ে
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "নামের আরম্ভে হাইফেন চিহ্ন (-) উপস্থিত রয়েছে"
 
 #: lib/user.c:251
 #, c-format
@@ -889,8 +891,7 @@ msgstr "LDAP সার্ভারে bind করা সম্ভব হয়ন�
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
+msgstr "LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
 
 # modified for RHEL
 #: modules/ldap.c:425
@@ -910,8 +911,7 @@ msgstr "LDAP distinguished name (DN)-র সাথে নামটি ম্য�
 # modified for RHEL
 #: modules/ldap.c:638
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"LDAP base distinguished name (DN)-র সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
+msgstr "LDAP base distinguished name (DN)-র সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
 
 #: modules/ldap.c:1372
 #, c-format
@@ -1106,3 +1106,4 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
+
