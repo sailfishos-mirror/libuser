@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-04-11 12:55+0000\n"
+"PO-Revision-Date: 2005-07-18 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -643,7 +643,7 @@ msgstr "heitið er of stutt"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "heitið er of langt (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -659,7 +659,7 @@ msgstr "heitið inniheldur orðabil"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "heitið byrjar á bandstriki"
 
 #: lib/user.c:251
 #, c-format
