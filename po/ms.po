@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-07-13 01:31+0800\n"
+"PO-Revision-Date: 2005-07-23 01:49+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -773,12 +773,12 @@ msgstr "Ralat menulis fail sementara: %s"
 #: modules/files.c:112
 #, fuzzy, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "tak dapat masa but"
+msgstr "tidak dapat menetapkan konteks keselamatan default kepada `%s': %s"
 
 #: modules/files.c:118
 #, fuzzy, c-format
 msgid "couldn't set default security context: %s"
-msgstr "Tidak dapat menetapkan konteks default untuk /etc/passwd\n"
+msgstr "tidak dapat menetapkan konteks keselamatan default kepada `%s': %s"
 
 #: modules/files.c:125
 #, c-format
@@ -912,30 +912,30 @@ msgstr "ralat menghurai nama pengguna `%s' untuk kerberos"
 #: modules/krb5.c:400
 #: modules/krb5.c:452
 #: modules/krb5.c:540
-#, fuzzy, c-format
+#, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "tidak s atau s"
+msgstr "struktur entiti tidak mempunyai %s atau ciri %s"
 
 #: modules/krb5.c:311
 #, fuzzy, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "tidak s atau s"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/krb5.c:324
-#, fuzzy, c-format
+#, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "tidak s atau s"
+msgstr "entiti dicipta dengan tiada %s atau ciri %s"
 
 #: modules/krb5.c:475
 #: modules/krb5.c:563
-#, fuzzy, c-format
+#, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "ralat for s"
+msgstr "ralat membaca maklumat untuk `%s' dari kerberos"
 
 #: modules/krb5.c:604
 #, fuzzy, c-format
 msgid "entity has no %s attribute"
-msgstr "$$ dari `%s' tiada jenis diisytiharkan"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/krb5.c:642
 #, fuzzy, c-format
@@ -963,9 +963,9 @@ msgid "error initializing ldap library"
 msgstr "ralat memulakan Cyrus SASL: %s"
 
 #: modules/ldap.c:213
-#, fuzzy, c-format
+#, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "LDAP versi"
+msgstr "tidak dapat menetapkan protokol LDAP ke versi %d"
 
 #: modules/ldap.c:225
 #, fuzzy
@@ -978,9 +978,9 @@ msgid "could not bind to LDAP server"
 msgstr "LDAP"
 
 #: modules/ldap.c:411
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP"
+msgstr "tidak dapat mengikat ke pelayan LDAP, cubaan pertama sebagai `%s': %s"
 
 #: modules/ldap.c:425
 #, fuzzy
@@ -1010,7 +1010,7 @@ msgstr "ralat unama LDAP"
 #: modules/ldap.c:1372
 #, fuzzy, c-format
 msgid "user object had no %s attribute"
-msgstr "pengguna tidak s"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/ldap.c:1381
 #, fuzzy, c-format
@@ -1041,7 +1041,7 @@ msgstr "ralat LDAP direktori s"
 #: modules/ldap.c:1521
 #, fuzzy, c-format
 msgid "object had no %s attribute"
-msgstr "tidak s"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/ldap.c:1545
 #, fuzzy, c-format
@@ -1054,7 +1054,7 @@ msgstr "ralat membuang direktori rumah untuk pengguna"
 #: modules/ldap.c:1812
 #, fuzzy, c-format
 msgid "object has no %s attribute"
-msgstr "$$ dari `%s' tiada jenis diisytiharkan"
+msgstr "objek entiti tidak mempunyai ciri %s"
 
 #: modules/ldap.c:1747
 #, fuzzy
