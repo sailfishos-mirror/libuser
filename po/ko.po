@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-04-05 09:43+1000\n"
+"PO-Revision-Date: 2005-07-25 13:52+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
 "MIME-Version: 1.0\n"
@@ -647,7 +647,7 @@ msgstr "이름이 너무 짧습니다."
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "이름이 너무 깁니다 (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -663,7 +663,7 @@ msgstr "이름에 공백이 포함되어 있습니다."
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "이름이 하이픈(연결 부호)로 시작합니다"
 
 #: lib/user.c:251
 #, c-format
@@ -1024,3 +1024,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
