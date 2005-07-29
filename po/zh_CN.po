@@ -1,3 +1,4 @@
+# translation of zh_CN.po to Chinese, Simplified
 # translation of zh_CN.po to Simplified Chinese
 # translation of libuser.po to Simplified Chinese
 # Simplified Chinese Version of libuser.po file.
@@ -5,19 +6,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Sarah Wang <sarahs@redhat.com>, 2003,2004.
 # Tony Fu <tfu@redhat.com>, 2004.
+# Leah Liu <weliu@redhat.com>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2004-11-16 16:33+1000\n"
-"Last-Translator: Tony Fu <tfu@redhat.com>\n"
-"Language-Team: Simplified Chinese <i18n@redhat.com>\n"
+"PO-Revision-Date: 2005-07-29 16:20+1000\n"
+"Last-Translator: Leah Liu <weliu@redhat.com>\n"
+"Language-Team: Chinese, Simplified <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
 #: modules/files.c:238
@@ -32,13 +34,13 @@ msgstr "创建“%s”时出错：%s"
 
 #: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
 #: modules/files.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "创建组群'%s': %s出错。\n"
+msgstr "创建组群'%s': %s出错。"
 
 #: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
 #: modules/files.c:253 modules/files.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
 msgstr "创建“%s”时出错：%s"
 
@@ -647,7 +649,7 @@ msgstr "名称太短"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "名字太长(%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -663,7 +665,7 @@ msgstr "名称中包含空格"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "名字以连字符开头"
 
 #: lib/user.c:251
 #, c-format
@@ -718,9 +720,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "备份文件“%s”已存在，且不是常规文件"
 
 #: modules/files.c:283
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "库或模块版本错配"
+msgstr "备份文件大小与原文件不符"
 
 #: modules/files.c:935 modules/files.c:1385
 #, c-format
@@ -1024,24 +1025,3 @@ msgstr "正在获取默认的用户属性：\n"
 msgid "Copying user structure:\n"
 msgstr "正在复制用户结构：\n"
 
-#, fuzzy
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "无法写入“%s”：%s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "创建“%s”时出现 Cyrus SASL 错误：%s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "删除用户 %s 时出现 Cyrus SASL 错误：%s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "初始化 %s 出错。\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "组群 %s 无法被删除。\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "组群 %s 无法被修改。\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "初始化模块时出错"
