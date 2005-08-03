@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-03-24 23:35+0100\n"
+"PO-Revision-Date: 2005-08-03 16:02+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -643,7 +643,7 @@ msgstr "navnet er for kort"
 #: lib/user.c:207
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "navnet er for langt (%zu > %d)"
 
 #: lib/user.c:214
 msgid "name contains non-ASCII characters"
@@ -659,7 +659,7 @@ msgstr "navnet inneholder tomrom"
 
 #: lib/user.c:240
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "navnet starter med bindestrek"
 
 #: lib/user.c:251
 #, c-format
