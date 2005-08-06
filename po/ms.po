@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-07-30 00:55+0800\n"
+"PO-Revision-Date: 2005-08-07 00:57+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -451,26 +451,26 @@ msgid "Passwords do not match, try again.\n"
 msgstr "Katalaluan tidak sepadan, cuba lagi.\n"
 
 #: apps/lpasswd.c:132
-#, fuzzy, c-format
+#, c-format
 msgid "Password change canceled.\n"
-msgstr "Tukar katalaluan logmasuk anda"
+msgstr "Pertukaran katalaluan dibatalkan.\n"
 
 #: apps/lpasswd.c:189
 #: apps/luseradd.c:297
 #: apps/luseradd.c:307
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Ralat menetapkan katalaluan permulaan untuk %s: %s\n"
+msgstr "Ralat menetapkan katalaluan untuk pengguna %s: %s.\n"
 
 #: apps/lpasswd.c:197
-#, fuzzy, c-format
+#, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Ralat menetapkan katalaluan permulaan untuk %s: %s\n"
+msgstr "Ralat menetapkan katalaluan untuk kumpulan %s: %s.\n"
 
 #: apps/lpasswd.c:208
-#, fuzzy, c-format
+#, c-format
 msgid "Password changed.\n"
-msgstr "Shell berubah.\n"
+msgstr "Katalaluan ditukar.\n"
 
 #: apps/luseradd.c:186
 #, fuzzy, c-format
@@ -1027,9 +1027,9 @@ msgstr "Ralat mencipta direktori rumah untuk %s: %s\n"
 
 #: modules/ldap.c:1445
 #: modules/ldap.c:1683
-#, fuzzy, c-format
+#, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "ralat LDAP direktori"
+msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
 #: modules/ldap.c:1472
 #, fuzzy, c-format
