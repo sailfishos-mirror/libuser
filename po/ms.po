@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-08-07 00:57+0800\n"
+"PO-Revision-Date: 2005-08-13 21:31+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -473,25 +473,25 @@ msgid "Password changed.\n"
 msgstr "Katalaluan ditukar.\n"
 
 #: apps/luseradd.c:186
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Kumpulan Volume Diminta Tidak Wujud"
+msgstr "Kumpulan %jd tidak wujud\n"
 
 #: apps/luseradd.c:213
 #: apps/luseradd.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Mencipta kumpulan baru: %s"
+msgstr "Ralat mencipta kumpulan `%s': %s\n"
 
 #: apps/luseradd.c:287
-#, fuzzy, c-format
+#, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Gagal mencipta kumpulan: %s\n"
+msgstr "Gagal mencipta akaun: %s.\n"
 
 #: apps/luseradd.c:337
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "Ralat mencipta `%s': %s"
+msgstr "Ralat mencipta %s: %s.\n"
 
 #: apps/luseradd.c:344
 #, fuzzy, c-format
@@ -1023,7 +1023,7 @@ msgstr "kepada"
 #: modules/ldap.c:1419
 #, fuzzy, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "Ralat mencipta direktori rumah untuk %s: %s\n"
+msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
 #: modules/ldap.c:1445
 #: modules/ldap.c:1683
@@ -1034,7 +1034,7 @@ msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 #: modules/ldap.c:1472
 #, fuzzy, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "ralat LDAP direktori s"
+msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
 #: modules/ldap.c:1521
 #, fuzzy, c-format
@@ -1044,7 +1044,7 @@ msgstr "objek entiti tidak mempunyai ciri %s"
 #: modules/ldap.c:1545
 #, fuzzy, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "ralat membuang direktori rumah untuk pengguna"
+msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
 #: modules/ldap.c:1582
 #: modules/ldap.c:1604
@@ -1065,9 +1065,9 @@ msgid "no `%s' attribute found"
 msgstr "Tiada Pemacu Dijumpai"
 
 #: modules/ldap.c:1921
-#, fuzzy, c-format
+#, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "ralat dalam LDAP direktori for s"
+msgstr "ralat menetapkan katalaluan dalam direktori LDAP untuk %s: %s"
 
 #: modules/ldap.c:2493
 #, fuzzy
