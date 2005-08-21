@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-08-13 21:31+0800\n"
+"PO-Revision-Date: 2005-08-21 23:28+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -494,14 +494,14 @@ msgid "Error creating %s: %s.\n"
 msgstr "Ralat mencipta %s: %s.\n"
 
 #: apps/luseradd.c:344
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Ralat mencipta gulungan mel.\n"
 
 #: apps/luserdel.c:99
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Pengguna %s tidak dapat dipadam: %s.\n"
 
 #: apps/luserdel.c:109
 #, c-format
@@ -519,19 +519,19 @@ msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Kumpulan dengan GID %jd tidak mempunyai nama kumpulan.\n"
 
 #: apps/luserdel.c:134
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Kumpulan %s tidak dapat dipadam: %s.\n"
 
 #: apps/luserdel.c:148
-#, fuzzy, c-format
+#, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "Direktori rumah tidak wujud."
+msgstr "%s tidak mempunyai direktori rumah.\n"
 
 #: apps/luserdel.c:155
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "Ralat membuang `%s': %s"
+msgstr "Ralat membuang %s: %s.\n"
 
 #: apps/lusermod.c:170
 #: apps/lusermod.c:183
