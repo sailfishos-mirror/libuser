@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-08-21 23:28+0800\n"
+"PO-Revision-Date: 2005-09-03 17:27+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -535,29 +535,29 @@ msgstr "Ralat membuang %s: %s.\n"
 
 #: apps/lusermod.c:170
 #: apps/lusermod.c:183
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Gagal untuk menetapkan katalaluan bagi kumpulan %s: %s\n"
+msgstr "Gagal untuk menetapkan katalaluan bagi pengguna %s: %s\n"
 
 #: apps/lusermod.c:193
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Pengguna %s tidak dapat dikunci: %s.\n"
 
 #: apps/lusermod.c:201
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Pengguna %s tidak dapat dinyahkunci: %s.\n"
 
 #: apps/lusermod.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Pengguna %s tidak dapat diubahsuai: %s.\n"
 
 #: apps/lusermod.c:324
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
+msgstr "Kumpulan %s tidak dapat diubahsuai: %s\n"
 
 #: apps/lusermod.c:335
 #, c-format
@@ -728,7 +728,7 @@ msgstr "\"%s\" adalah nama giliran yang tidak sah."
 #: lib/user.c:202
 #, fuzzy
 msgid "name is too short"
-msgstr "Nama pengguna terlalu panjang"
+msgstr "Nama terlalu panjang"
 
 #: lib/user.c:207
 #, fuzzy, c-format
