@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-06-17 21:47+0530\n"
+"PO-Revision-Date: 2005-09-05 10:13+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
-"Language-Team: Gujarati <gu@li.org>\n"
+"Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +73,7 @@ msgstr "અજ્ઞાત વપરાશકર્તા સંદર્ભ"
 #: apps/apputil.c:597
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr "/etc/passwd માટે મૂળભુત સંદર્ભ સુયોજિત કરી શકતા નથી\n"
+msgstr "/etc/passwd માટે મૂળભૂત સંદર્ભ સુયોજિત કરી શકતા નથી\n"
 
 #: apps/apputil.c:606
 #, c-format
@@ -687,12 +687,12 @@ msgstr "`%s' નો સુરક્ષા સંદર્ભ મેળવી શ
 #: modules/files.c:118
 #, c-format
 msgid "couldn't set default security context: %s"
-msgstr "મૂળભુત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
+msgstr "મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
 
 #: modules/files.c:125
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "`%s' માં મૂળભુત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
+msgstr "`%s' માં મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
 
 #: modules/files.c:169 modules/files.c:548 modules/files.c:893
 #: modules/files.c:1172 modules/files.c:1364 modules/files.c:1591
@@ -1013,15 +1013,15 @@ msgstr "પ્રોમ્પ્ટ કરવામાં નિષ્ફળ.\n"
 
 #: samples/testuser.c:78
 msgid "Default user object classes:\n"
-msgstr "મૂળભુત વપરાશકર્તા ઓબ્જેક્ટ વર્ગો:\n"
+msgstr "મૂળભૂત વપરાશકર્તા ઓબ્જેક્ટ વર્ગો:\n"
 
 #: samples/testuser.c:84
 msgid "Default user attribute names:\n"
-msgstr "મૂળભુત વપરાશકર્તા લક્ષણોના નામો:\n"
+msgstr "મૂળભૂત વપરાશકર્તા લક્ષણોના નામો:\n"
 
 #: samples/testuser.c:90
 msgid "Getting default user attributes:\n"
-msgstr "મૂળભુત વપરાશકર્તા લક્ષણો મેળવી રહ્યા છીએ:\n"
+msgstr "મૂળભૂત વપરાશકર્તા લક્ષણો મેળવી રહ્યા છીએ:\n"
 
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
