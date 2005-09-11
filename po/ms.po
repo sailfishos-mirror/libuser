@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-06-08 18:33+0200\n"
-"PO-Revision-Date: 2005-09-03 17:27+0800\n"
+"PO-Revision-Date: 2005-09-11 21:15+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -570,33 +570,32 @@ msgid "No new home directory for %s.\n"
 msgstr "Tiada direktori rumah baru untuk %s.\n"
 
 #: apps/lusermod.c:346
-#, fuzzy, c-format
+#, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "Ralat menyambung ke RHN..."
+msgstr "Ralat memindahkan %s ke %s: %s.\n"
 
 #: lib/config.c:174
-#, fuzzy, c-format
+#, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "Tidak dapat menyimpan fail tetapan XRender"
+msgstr "tidak dapat membuka fail tetapan `%s': %s"
 
 #: lib/config.c:183
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "Tidak dapat menyimpan fail tetapan XRender"
+msgstr "tidak dapat stat fail tetapan `%s': %s"
 
 #: lib/config.c:191
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "Tidak dapat membaca fail stats."
+msgstr "tidak dapat membaca fail tetapan `%s': %s"
 
 #: lib/error.c:42
 msgid "success"
 msgstr "berjaya"
 
 #: lib/error.c:44
-#, fuzzy
 msgid "module disabled by configuration"
-msgstr "dimatikan"
+msgstr "modul dimatikan oleh tetapan"
 
 #: lib/error.c:46
 msgid "generic error"
@@ -644,12 +643,12 @@ msgstr "Ralat membuka fail kickstart %s: %s"
 #: lib/error.c:64
 #, fuzzy
 msgid "error locking file"
-msgstr "Ralat menulis fail sementara: %s"
+msgstr "Ralat membuka fail"
 
 #: lib/error.c:66
 #, fuzzy
 msgid "error statting file"
-msgstr "Ralat menulis fail sementara: %s"
+msgstr "Ralat membuka fail"
 
 #: lib/error.c:68
 #, fuzzy
@@ -674,7 +673,7 @@ msgstr "Ralat Dalaman Pelayan"
 #: lib/error.c:76
 #, fuzzy
 msgid "error loading module"
-msgstr "Memuatkan modul kernel pencetak USB ...\n"
+msgstr "Terdapat ralat semasa memuatkan modul."
 
 #: lib/error.c:78
 #, fuzzy
@@ -743,7 +742,7 @@ msgstr "unama"
 #: lib/user.c:221
 #, fuzzy
 msgid "name contains control characters"
-msgstr "Dua aksara bukan-kawalan diperlukan"
+msgstr "Name=Modul Kawalan KDE"
 
 #: lib/user.c:228
 #, fuzzy
@@ -753,10 +752,7 @@ msgstr "%s: nama ahli mengandungi `..'"
 #: lib/user.c:240
 #, fuzzy
 msgid "name starts with a hyphen"
-msgstr ""
-"Alias dengan nama\n"
-"\"%s\"\n"
-"telah wujud."
+msgstr "Name=Digunakan bersama KNewsTicker"
 
 #: lib/user.c:251
 #, fuzzy, c-format
@@ -766,7 +762,7 @@ msgstr "%s: mengandungi nombor volum yg tidak sah"
 #: lib/util.c:212
 #, fuzzy, c-format
 msgid "error locking file: %s"
-msgstr "Ralat menulis fail sementara: %s"
+msgstr "Ralat membuka fail"
 
 #: modules/files.c:112
 #, fuzzy, c-format
@@ -983,7 +979,7 @@ msgstr "tidak dapat mengikat ke pelayan LDAP, cubaan pertama sebagai `%s': %s"
 #: modules/ldap.c:425
 #, fuzzy
 msgid "could not search LDAP server"
-msgstr "tidak dapat menetapkan protokol LDAP ke versi %d"
+msgstr "Tidak dapat kirim ke pelayan:\n"
 
 #: modules/ldap.c:434
 #, fuzzy
