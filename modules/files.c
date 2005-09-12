@@ -48,11 +48,8 @@ LU_MODULE_INIT(libuser_shadow_init)
 
 enum lock_op { LO_LOCK, LO_UNLOCK, LO_UNLOCK_NONEMPTY };
 
-/* Guides for parsing and formatting entries in the files we're looking at.
- * For formatting purposes, these are all arranged in order of ascending
- * positions. */
+/* Guides for parsing and formatting entries in the files we're looking at. */
 struct format_specifier {
-	int position;
 	const char *attribute;
 	GType type;		/* G_TYPE_INVALID for "id_t" */
 	const char *def;
@@ -60,39 +57,50 @@ struct format_specifier {
 };
 
 static const struct format_specifier format_passwd[] = {
-	{1, LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{2, LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
-	{3, LU_UIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
-	{4, LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
-	{5, LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{6, LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{7, LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE, TRUE},
+	{ LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{
+	  LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE
+	},
+	{ LU_UIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
+	{ LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
+	{ LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{ LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{ LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE, TRUE },
 };
 
 static const struct format_specifier format_group[] = {
-	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{2, LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
-	{3, LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE},
-	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
+	{ LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{
+	  LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
+	  FALSE
+	},
+	{ LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
+	{ LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
 };
 
 static const struct format_specifier format_shadow[] = {
-	{1, LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
-	{3, LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE, FALSE},
-	{4, LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE, TRUE},
-	{5, LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE, TRUE},
-	{6, LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE, TRUE},
-	{7, LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
-	{8, LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
-	{9, LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE},
+	{ LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{
+	  LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
+	  FALSE
+	} ,
+	{ LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE, FALSE },
+	{ LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE, TRUE },
+	{ LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE, TRUE },
+	{ LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE, TRUE },
+	{ LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
+	{ LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
+	{ LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
 };
 
 static const struct format_specifier format_gshadow[] = {
-	{1, LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE},
-	{2, LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE},
-	{3, LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
-	{4, LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE},
+	{ LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
+	{
+	  LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
+	  FALSE
+	},
+	{ LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
+	{ LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
 };
 
 static gboolean
@@ -386,18 +394,15 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 	      size_t format_count, struct lu_ent *ent)
 {
 	size_t i;
-	int field, minimum = 1;
 	gchar **v = NULL;
 	GValue value;
 
 	/* Make sure the line is properly formatted, meaning that it has enough
-	 * fields in it for us to parse out all the fields we want, allowing for
-	 * the last one to be empty. */
-	for (i = 0; i < format_count; i++) {
-		minimum = MAX(minimum, formats[i].position);
-	}
+	   fields in it for us to parse out all the fields we want, allowing
+	   for the last one to be empty. */
 	v = g_strsplit(line, ":", format_count);
-	if (lu_strv_len(v) < (size_t)(minimum - 1)) {
+	g_assert(format_count > 0);
+	if (lu_strv_len(v) < format_count - 1) { /* FIXME: glib function */
 		g_warning("entry is incorrectly formatted");
 		return FALSE;
 	}
@@ -405,7 +410,6 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 	/* Now parse out the fields. */
 	memset(&value, 0, sizeof(value));
 	for (i = 0; i < format_count; i++) {
-		field = formats[i].position - 1;
 		/* Clear out old values in the destination structure. */
 		lu_ent_clear_current(ent, formats[i].attribute);
 		if (formats[i].multiple) {
@@ -414,7 +418,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			size_t j;
 
 			/* Split up the field. */
-			w = g_strsplit(v[field] ?: "", ",", 0);
+			w = g_strsplit(v[i] ?: "", ",", 0);
 			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
 				/* Skip over empty strings. */
@@ -432,9 +436,8 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			g_strfreev(w);
 		} else {
 			/* Check if we need to supply the default value. */
-			if (formats[i].def_if_empty &&
-			    (formats[i].def != NULL) &&
-			    (strlen(v[field]) == 0)) {
+			if (formats[i].def_if_empty && formats[i].def != NULL
+			    && strlen(v[i]) == 0) {
 				gboolean ret;
 
 				/* Make sure we're not doing something
@@ -446,7 +449,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 						  formats[i].def);
 				g_assert (ret != FALSE);
 			} else {
-				if (parse_field (formats + i, &value, v[field])
+				if (parse_field (formats + i, &value, v[i])
 				    == FALSE)
 					continue;
 			}
@@ -784,25 +787,9 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	for (i = 0; i < format_count; i++) {
 		char *field;
 
-		/* Add a separator, if we need to, before advancing to
-		 * this field.  This way we ensure that the correct number
-		 * of fields will result, even if they're empty.  Note that
-		 * this implies that position values are always in ascending
-		 * order. */
-		if (i > 0) {
-			size_t j;
-
-			g_assert(formats[i].position - formats[i - 1].position >= 0);
-			j = formats[i].position - formats[i - 1].position;
-			while (j-- > 0) {
-				tmp = g_strconcat(ret ?: "", ":", NULL);
-				g_free(ret);
-				ret = tmp;
-			}
-		}
-
 		field = format_field(ent, formats + i);
-		tmp = g_strconcat(ret ? ret : "", field, NULL);
+		tmp = g_strconcat(ret ? ret : "", i > 0 ? ":" : "", field,
+				  NULL);
 		g_free(field);
 		g_free(ret);
 		ret = tmp;
@@ -1191,7 +1178,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 
 		/* Write the new value. */
 		ret2 = lu_util_field_write(fd, g_value_get_string(value),
-					   formats[i].position, field, error);
+					   i + 1, field, error);
 		g_free(field);
 
 		/* If we had a write error, we fail now. */

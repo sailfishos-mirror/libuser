@@ -1,5 +1,10 @@
 2005-09-12  Miloslav Trmac  <mitr@redhat.com>
 
+	* modules/files.c (struct format_specifier): Remove member position,
+	assume position == index + 1.
+	(format_passwd, format_group, format_shadow, format_gshadow)
+	(parse_generic, format_generic, generic_mod): Update.
+
 	* lib/entity.c (lu_ent_add_int)
 	* modules.files.c (format_generic, generic_mod): Beautify.
 
