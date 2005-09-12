@@ -1,5 +1,7 @@
 2005-09-12  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/entity.c (quark_from_attribute): Use g_ascii_strdown ().
+
 	* modules/files.c (struct format_specifier): Remove member position,
 	assume position == index + 1.
 	(format_passwd, format_group, format_shadow, format_gshadow)

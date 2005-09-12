@@ -292,13 +292,8 @@ quark_from_attribute(const char *attribute)
 {
 	GQuark quark;
 	char *lower;
-	size_t i, len;
 
-	len = strlen(attribute);
-	lower = g_malloc(len + 1);
-	for (i = 0; i < len; i++)
-		lower[i] = g_ascii_tolower(attribute[i]);
-	lower[len] = '\0';
+	lower = g_ascii_strdown(attribute, -1);
 	quark = g_quark_from_string(lower);
 	g_free(lower);
 	return quark;
