@@ -610,11 +610,10 @@ lu_ldap_lookup(struct lu_module *module,
 
 		if (dn == NULL) {
 			array = lu_ent_get(ent, DISTINGUISHED_NAME);
-			if ((array != NULL) && (array->n_values > 0)) {
+			if (array != NULL) {
 				val = g_value_array_get_nth(array, 0);
-				if (G_VALUE_HOLDS_STRING(val)) {
+				if (G_VALUE_HOLDS_STRING(val))
 					dn = g_value_get_string(val);
-				}
 			}
 		}
 
@@ -934,7 +933,7 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 		old_count = ldap_count_values(old_values);
 	else
 		old_count = 0;
-	
+
 	if (ent->type == lu_user)
 		applicability = LU_LDAP_USER | LU_LDAP_SHADOW;
 	else
@@ -943,7 +942,7 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 	new_values = g_malloc(sizeof(*new_values) *
 			      (G_N_ELEMENTS(ldap_attribute_map) + 1 + 1));
 	new_count = 0;
-	
+
 	/* Iterate over all of the attributes the object possesses. */
 	attributes = lu_ent_get_attributes(ent);
 	for (a = attributes; a != NULL; a = a->next) {
@@ -1042,7 +1041,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			if (strcasecmp(attribute, LU_SHADOWPASSWORD) == 0)
 				continue;
 			vals = lu_ent_get(ent, attribute);
-			if (vals == NULL || vals->n_values == 0)
+			if (vals == NULL)
 				continue;
 			attribute = map_to_ldap(ent->cache, attribute);
 
@@ -1079,7 +1078,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 		if (ent->type == lu_user
 		    && lu_ent_get(ent, LU_COMMONNAME) == NULL) {
 			char *cn;
-			
+
 			vals = lu_ent_get(ent, LU_GECOS);
 			if (vals != NULL) {
 				char *p;
@@ -1476,7 +1475,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			}
 		}
 	}
-	
+
  err_mods:
 	free_ent_mods(mods);
 
@@ -1834,7 +1833,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	g_free(name_string);
 	mapped_password = map_to_ldap(module->scache, ent->type == lu_user
 				      ? LU_USERPASSWORD : LU_GROUPPASSWORD);
-	
+
 	previous = NULL;
 	values = NULL;
 	attributes[0] = (char *)mapped_password;

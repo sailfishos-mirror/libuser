@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
  *
- * This is free software; you can redistribute it and/or modify it under 
+ * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public 
+ * You should have received a copy of the GNU Library General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
@@ -43,6 +43,7 @@ lu_ent_new()
 	ent->modules = g_value_array_new(1);
 	return ent;
 }
+
 struct lu_ent *
 lu_ent_new_typed(enum lu_entity_type entity_type)
 {
@@ -148,12 +149,12 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 				fprintf(fp, " %s = %ld\n",
 					g_quark_to_string(attribute->name),
 					g_value_get_long(value));
-			
+
 			else if (G_VALUE_HOLDS_INT64(value))
 				fprintf(fp, " %s = %lld\n",
 					g_quark_to_string(attribute->name),
 					(long long)g_value_get_int64(value));
-			
+
 		}
 	}
 	fprintf(fp, "\n");
@@ -298,7 +299,7 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	lattr = g_strdup(attribute);
 	for (i = 0; lattr[i] != '\0'; i++) {
-		lattr[i] = g_ascii_tolower(lattr[i]);
+		lattr[i] = g_ascii_tolower(lattr[i]); /* FIXME: function */
 	}
 	aquark = g_quark_from_string(lattr);
 	g_free (lattr);
@@ -325,6 +326,33 @@ lu_ent_has_int(GArray *list, const char *attribute)
 }
 
 static void
+lu_ent_clear_int(GArray *list, const char *attribute)
+{
+	int i;
+	struct lu_attribute *attr = NULL;
+	char *lattr;
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	lattr = g_strdup(attribute);
+	for (i = 0; lattr[i] != '\0'; i++) {
+		lattr[i] = g_ascii_tolower(lattr[i]);
+	}
+	for (i = list->len - 1; i >= 0; i--) {
+		attr = &g_array_index(list, struct lu_attribute, i);
+		if (g_quark_from_string(lattr) == attr->name) {
+			break;
+		}
+	}
+	if (i >= 0) {
+		g_value_array_free(attr->values);
+		attr->values = NULL;
+		g_array_remove_index(list, i);
+	}
+	g_free(lattr);
+}
+
+static void
 lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
@@ -334,6 +362,10 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attr != NULL);
 	g_return_if_fail(strlen(attr) > 0);
+	if (values->n_values == 0) {
+		lu_ent_clear_int(list, attr);
+		return;
+	}
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
 		lattr = g_strdup(attr);
@@ -394,33 +426,6 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 }
 
 static void
-lu_ent_clear_int(GArray *list, const char *attribute)
-{
-	int i;
-	struct lu_attribute *attr = NULL;
-	char *lattr;
-	g_return_if_fail(list != NULL);
-	g_return_if_fail(attribute != NULL);
-	g_return_if_fail(strlen(attribute) > 0);
-	lattr = g_strdup(attribute);
-	for (i = 0; lattr[i] != '\0'; i++) {
-		lattr[i] = g_ascii_tolower(lattr[i]);
-	}
-	for (i = list->len - 1; i >= 0; i--) {
-		attr = &g_array_index(list, struct lu_attribute, i);
-		if (g_quark_from_string(lattr) == attr->name) {
-			break;
-		}
-	}
-	if (i >= 0) {
-		g_value_array_free(attr->values);
-		attr->values = NULL;
-		g_array_remove_index(list, i);
-	}
-	g_free(lattr);
-}
-
-static void
 lu_ent_clear_all_int(GArray *list)
 {
 	clear_attribute_list(list);
@@ -452,6 +457,8 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 		g_free(svalue);
 		if (i < dest->n_values) {
 			g_value_array_remove(dest, i);
+			if (dest->n_values == 0)
+				lu_ent_clear_int(list, attr);
 		}
 	}
 }

@@ -300,7 +300,7 @@ main(int argc, const char **argv)
 			return 3;
 		}
 	}
-	
+
 	if (cryptedUserPassword != NULL) {
 		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
 				    &error) == FALSE) {

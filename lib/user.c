@@ -188,7 +188,7 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 {
 	const char *sdata;
 	size_t len, i;
-	
+
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
 			     FALSE);
@@ -636,8 +636,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 		if (current->type == lu_user) {
 			values = lu_ent_get(current, LU_USERNAME);
 			tree = users;
-		} else
-		if (current->type == lu_group) {
+		} else if (current->type == lu_group) {
 			values = lu_ent_get(current, LU_GROUPNAME);
 			tree = groups;
 		} else {
@@ -943,7 +942,7 @@ lu_dispatch(struct lu_context *context,
 				id = group_lookup_name;
 			}
 			values = lu_ent_get_current(tmp, attr);
-			if ((values != NULL) && (values->n_values > 0)) {
+			if (values != NULL) {
 				value = g_value_array_get_nth(values, 0);
 				attr = g_value_get_string(value);
 				sdata = tmp->cache->cache(tmp->cache, attr);

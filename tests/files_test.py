@@ -261,6 +261,21 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.UIDNUMBER], [LARGE_ID + 730])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 731])
 
+    def testUserMod4(self):
+        # Some of the attributes are not present
+        e = self.a.initUser('user7_4')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_4')
+        e.clear(libuser.SHADOWFLAG)
+        e.clear(libuser.SHADOWMAX)
+        self.a.modifyUser(e, False)
+        del e
+        e = self.a.lookupUserByName('user7_4')
+        self.assert_(e)
+        self.assertEqual(e[libuser.SHADOWMAX], [99999])
+        self.assertEqual(e[libuser.SHADOWFLAG], [-1])
+
     def testUserDel(self):
         e = self.a.initUser('user8_1')
         self.a.addUser(e, False, False)

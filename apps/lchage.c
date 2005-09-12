@@ -37,40 +37,38 @@
 
 #define INVALID_LONG LONG_MIN
 
-/* Parse the first element of a value array for a count of days, and return
- * the value.  If the array is empty, or invalid somehow, return the default
- * of -1.  */
+/* Parse the first element of a (non-NULL, non-empty) value array for a count
+ * of days, and return the value.  If the array is invalid, return the default
+ * of -1. */
 static gint
 read_ndays(GValueArray *array)
 {
-	const char *s;
-	char *p;
 	GValue *value;
 	gint n_days = -1;
-	/* If we have a non-empty array, check its first element. */
-	if ((array != NULL) && (array->n_values > 0)) {
-		value = g_value_array_get_nth(array, 0);
-		if (value != NULL) {
-			/* If it's a string, use strtol to read it. */
-			if (G_VALUE_HOLDS_STRING(value)) {
-				s = g_value_get_string(value);
-				errno = 0;
-				n_days = strtol(s, &p, 10);
-				if (errno != 0 || *p != '\0' || p == s)
-					n_days = -1;
-			} else
-			/* If it's a long, read it directly. */
-			if (G_VALUE_HOLDS_LONG(value))
-				n_days = g_value_get_long(value);
-			else if (G_VALUE_HOLDS_INT64(value)) {
-				gint64 v;
 
-				v = g_value_get_int64(value);
-				n_days = (gint)v == v ? v : -1;
-			} else {
-				g_assert_not_reached();
-			}
-		}
+	/* If we have a non-empty array, check its first element. */
+	value = g_value_array_get_nth(array, 0);
+	if (value != NULL) {
+		/* If it's a string, use strtol to read it. */
+		if (G_VALUE_HOLDS_STRING(value)) {
+			const char *s;
+			char *p;
+
+			s = g_value_get_string(value);
+			errno = 0;
+			n_days = strtol(s, &p, 10);
+			if (errno != 0 || *p != '\0' || p == s)
+				n_days = -1;
+		} else if (G_VALUE_HOLDS_LONG(value))
+			/* If it's a long, read it directly. */
+			n_days = g_value_get_long(value);
+		else if (G_VALUE_HOLDS_INT64(value)) {
+			gint64 v;
+
+			v = g_value_get_int64(value);
+			n_days = (gint)v == v ? v : -1;
+		} else
+			g_assert_not_reached();
 	}
 	return n_days;
 }
@@ -182,35 +180,30 @@ main(int argc, const char **argv)
 		}
 
 		values = lu_ent_get(ent, LU_SHADOWMIN);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL)
 			printf(_("Minimum:\t%d\n"), read_ndays(values));
-		}
 
 		values = lu_ent_get(ent, LU_SHADOWMAX);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL)
 			printf(_("Maximum:\t%d\n"), read_ndays(values));
-		}
 
 		values = lu_ent_get(ent, LU_SHADOWWARNING);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL)
 			printf(_("Warning:\t%d\n"), read_ndays(values));
-		}
 
 		values = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL)
 			printf(_("Inactive:\t%d\n"), read_ndays(values));
-		}
 
 		values = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL) {
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values), buf, sizeof(buf));
 			printf(_("Last Change:\t%s\n"), buf);
 		}
 
 		values2 = lu_ent_get(ent, LU_SHADOWMAX);
-		if (values && (values->n_values > 0) &&
-		    values2 && (values2->n_values > 0)) {
+		if (values != NULL && values2 != NULL) {
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values) +
 				       read_ndays(values2),
@@ -219,9 +212,7 @@ main(int argc, const char **argv)
 		}
 
 		values3 = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if (values && (values->n_values > 0) &&
-		    values2 && (values2->n_values > 0) &&
-		    values3 && (values3->n_values > 0)) {
+		if (values != NULL && values2 != NULL && values3 != NULL) {
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values) +
 				       read_ndays(values2) +
@@ -231,7 +222,7 @@ main(int argc, const char **argv)
 		}
 
 		values = lu_ent_get(ent, LU_SHADOWEXPIRE);
-		if (values && (values->n_values > 0)) {
+		if (values != NULL) {
 			strcpy(buf, _("Never"));
 			date_to_string(read_ndays(values), buf, sizeof(buf));
 			printf(_("Account Expires:\t%s\n"), buf);

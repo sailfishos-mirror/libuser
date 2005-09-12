@@ -244,7 +244,7 @@ lu_files_create_backup(const char *filename,
 		p = buf;
 		while (left > 0) {
 			ssize_t out;
-			
+
 			out = write(ofd, p, left);
 			if (out == -1) {
 				if (errno == EINTR)
@@ -341,7 +341,7 @@ parse_field(const struct format_specifier *format, GValue *value,
 		g_value_init(value, G_TYPE_STRING);
 		g_value_set_string(value, string);
 		break;
-		
+
 	case G_TYPE_LONG: {
 		long l;
 		char *p;
@@ -411,7 +411,8 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 		if (formats[i].multiple) {
 			/* Field contains multiple comma-separated values. */
 			gchar **w;
-			int j;
+			size_t j;
+
 			/* Split up the field. */
 			w = g_strsplit(v[field] ?: "", ",", 0);
 			/* Clear out old values. */
@@ -636,7 +637,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 	if (ret) {
 		/* Now use the user's name to search the shadow file. */
 		values = lu_ent_get(ent, LU_USERNAME);
-		if ((values != NULL) && (values->n_values > 0)) {
+		if (values != NULL) {
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
 			ret = generic_lookup(module, "shadow", p, 1,
@@ -705,7 +706,7 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
-		if ((values != NULL) && (values->n_values > 0)) {
+		if (values != NULL) {
 			char *p;
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
@@ -752,7 +753,7 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 		}
 		/* Retrieve the values for this attribute. */
 		values = lu_ent_get(ent, formats[i].attribute);
-		if ((values != NULL) && (values->n_values > 0)) {
+		if (values != NULL) {
 			/* Iterate over all of the data items we can, prepending
 			 * a comma to all but the first. */
 			j = 0;
@@ -1132,7 +1133,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 
 	/* Get the array of names for the entity object. */
-	if (ent->type == lu_user) {
+	if (ent->type == lu_user) { /* FIXME: simplify */
 		names = lu_ent_get_current(ent, LU_USERNAME);
 		if (names == NULL) {
 			lu_error_new(error, lu_error_generic,
@@ -1184,6 +1185,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 
 		/* Read the values, and format them as a field. */
 		values = lu_ent_get(ent, formats[i].attribute);
+		/* FIXME: merge with format_generic */
 		new_value = NULL;
 		j = 0;
 		if (values != NULL) do {
@@ -1203,6 +1205,13 @@ generic_mod(struct lu_module *module, const char *base_name,
 			g_free(p);
 			j++;
 		} while (formats[i].multiple && (j < values->n_values));
+		else {
+			if (formats[i].def != NULL
+			    && formats[i].suppress_if_def == FALSE)
+				new_value = g_strdup(formats[i].def);
+			else
+				new_value = g_strdup("");
+		}
 
 		/* Get the current name for this entity. */
 		value = g_value_array_get_nth(names, 0);
@@ -1233,7 +1242,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 		 * the new name is correct here because if we renamed it, we
 		 * changed the name field first), so switch to using the
 		 * account's new name. */
-		if (ent->type == lu_user) {
+		if (ent->type == lu_user) { /* FIXME: simplify */
 			names = lu_ent_get(ent, LU_USERNAME);
 			if (names == NULL) {
 				lu_error_new(error, lu_error_generic,
@@ -1652,12 +1661,10 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
-	if (ent->type == lu_user) {
+	if (ent->type == lu_user)
 		name = lu_ent_get_current(ent, LU_USERNAME);
-	}
-	if (ent->type == lu_group) {
+	if (ent->type == lu_group)
 		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	}
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
@@ -1929,7 +1936,7 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	value = lu_util_field_read(fd, namestring, field, error);
 	if (value == NULL)
 		goto err_namestring;
-	
+
 	/* If we don't really care, nod our heads and smile.  Still allow
 	   "rescuing" accounts with invalid shadow password entries. */
 	if (!is_shadow && LU_CRYPT_INVALID(value)) {
@@ -2021,7 +2028,7 @@ set_shadow_last_change(struct lu_module *module, struct lu_ent *ent)
 	lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 	g_value_unset(&value);
 }
-		       
+
 static gboolean
 lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)

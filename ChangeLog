@@ -1,3 +1,30 @@
+2005-09-12  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/files.c (generic_mod): Fix crash when attribute is missing.
+	* tests/files_test.py (Tests.testUserMod4): New test.
+
+	* modules/files.c (parse_generic): Use size_t for field index.
+
+	* apps/lchage.c (read_ndays): Assume array != NULL
+	&& array->n_values > 0.  Beautify.
+
+	* lib/user.c (merge_ent_array_duplicates)
+	* modules/files.c (generic_is_locked)
+	* modules/ldap.c (lu_ldap_lookup, get_ent_adds): Beautify.
+
+	* apps/lchage.c (main)
+	* apps/lchsh.c (main)
+	* apps/luserdel.c (main)
+	* lib/user.c (lu_dispatch)
+	* modules/files.c (lu_shadow_user_lookup_id, lu_shadow_group_lookup_id)
+	(format_generic): Simplify conditions based on the guarantee
+	below.
+
+	* docs/reference/tmpl/entity.sgml: Document that attribute values have
+	always at least one value.
+	* lib/entity.c (lu_ent_set_int, lu_ent_del_int): Remove the attribute
+	if there are no values.
+
 2005-06-08  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.53.8.
@@ -18,7 +45,7 @@
 	* autogen.sh: Don't set CFLAGS, we don't run configure any more.
 
 	* configure.in: Use gettext 0.14.3.
-	
+
 	* tests/ldap_test: Really use tests/ldaprc.
 
 2005-05-20  Miloslav Trmac  <mitr@redhat.com>
@@ -98,11 +125,11 @@
 	(Tests.testGroupsEnumerateByUser4, Tests.testGroupsEnumerateFull2):
 	New tests.
 
-	* modules/files.c (lu_files_enumerate) 
-	(lu_files_users_enumerate_by_group) 
+	* modules/files.c (lu_files_enumerate)
+	(lu_files_users_enumerate_by_group)
 	(lu_files_groups_enumerate_by_user, lu_files_enumerate_full): Skip
 	nss_compat lines (starting with '+' or '-').
-	
+
 	* tests/files_test: Update initial file contents.
 
 	* apps/apputil.c: Remove unnecessary include.

@@ -18,6 +18,11 @@ The pending attributes are modified by default, the current attributes
 are modified by functions ending with _current.
 </para>
 
+<para>
+Each attribute contains a list of values.  The list is never empty; removing
+the last entry from the list removes the list completely.
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
@@ -348,9 +353,9 @@ Returns values associated with a pending attribute in a struct #lu_ent.
 
 @ent: an entity
 @attribute: attribute name
-@Returns: a list of values, valid at least until they are modified or deleted.
-The list should not be freed by the caller.  Returns %NULL if the attribute is
-not present at all or on error.
+@Returns: an array of values, valid at least until they are modified or
+deleted. The array is never empty and it should not be freed by the caller.
+Returns %NULL if the attribute is not present at all or on error.
 
 
 <!-- ##### FUNCTION lu_ent_get_attributes ##### -->
@@ -408,7 +413,7 @@ Checks if a struct #lu_ent has at least one current attribute @attribute.
 <!-- ##### FUNCTION lu_ent_set ##### -->
 <para>
 Replaces all pending attributes @attr in a struct #lu_ent by a copy of
-@values.
+@values.  If @values is empty, it removes the pending attribute completely.
 </para>
 
 @ent: an entity
@@ -419,7 +424,7 @@ Replaces all pending attributes @attr in a struct #lu_ent by a copy of
 <!-- ##### FUNCTION lu_ent_set_current ##### -->
 <para>
 Replaces all current attributes @attr in a struct #lu_ent by a copy of
-@values.
+@values.  If @values is empty, it removes the current attribute completely.
 </para>
 
 @ent: an entity

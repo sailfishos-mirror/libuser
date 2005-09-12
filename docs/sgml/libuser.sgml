@@ -64,7 +64,7 @@ extended easily by third parties due to its reliance on static linking.
 modifying, creating, and removing user and group accounts and account
 information.  Modules which provide access to information stores can
 request information from the accessing user in order to authenticate to
-the information store.  
+the information store.
 
 </sect1>
 

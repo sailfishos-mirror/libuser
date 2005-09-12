@@ -105,7 +105,7 @@ main(int argc, const char **argv)
 
 	if (!dont_remove_group) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if ((values == NULL) || (values->n_values == 0)) {
+		if (values == NULL) {
 			fprintf(stderr, _("%s did not have a gid number.\n"),
 				user);
 			return 4;
@@ -144,7 +144,7 @@ main(int argc, const char **argv)
 
 	if (remove_home) {
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		if ((values == NULL) || (values->n_values == 0)) {
+		if (values == NULL) {
 			fprintf(stderr, _("%s did not have a home "
 				"directory.\n"), user);
 			return 8;

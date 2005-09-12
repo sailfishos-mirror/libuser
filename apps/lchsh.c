@@ -108,7 +108,7 @@ main(int argc, const char **argv)
 
 	/* Read the user's shell. */
 	values = lu_ent_get(ent, LU_LOGINSHELL);
-	if ((values != NULL) && (values->n_values > 0)) {
+	if (values != NULL) {
 		value = g_value_array_get_nth(values, 0);
 		/* Fill in the prompt structure using the user's shell. */
 		memset(prompts, 0, sizeof(prompts));
