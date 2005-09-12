@@ -720,92 +720,97 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 	return ret;
 }
 
+/* Format a single field.
+   Return field string for g_free (). */
+static char *
+format_field(struct lu_ent *ent, const struct format_specifier *format)
+{
+	GValueArray *values;
+	char *ret;
+
+	values = lu_ent_get(ent, format->attribute);
+	if (values != NULL) {
+		size_t j;
+
+		/* Iterate over all of the data items we can, prepending a
+		   comma to all but the first. */
+		ret = NULL;
+		j = 0;
+		do {
+			GValue *val;
+			char *p, *tmp;
+
+			val = g_value_array_get_nth(values, j);
+			p = lu_value_strdup(val);
+			/* Add it to the end, prepending a comma if we need to
+			   separate it from another value, unless this is the
+			   default value for the field and we need to suppress
+			   it. */
+			if (format->multiple == FALSE
+			    && format->suppress_if_def == TRUE
+			    && format->def != NULL
+			    && strcmp(format->def, p) == 0)
+				tmp = g_strdup("");
+			else
+				tmp = g_strconcat(ret ? ret : "",
+						  (j > 0) ? "," : "", p, NULL);
+			g_free(p);
+			g_free(ret);
+			ret = tmp;
+			j++;
+		} while (format->multiple && j < values->n_values);
+	} else {
+		/* We have no values, so check for a default value,
+		 * unless we're suppressing it. */
+		if (format->def != NULL && format->suppress_if_def == FALSE)
+			ret = g_strdup(format->def);
+		else
+			ret = g_strdup("");
+	}
+	return ret;
+}
+
 /* Format a line for the user/group, using the information in ent, using
  * formats to guide the formatting. */
 static char *
 format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 	       size_t format_count)
 {
-	GValueArray *values;
-	GValue value, *val;
-	char *ret = NULL, *p, *tmp;
-	size_t i, j;
+	char *ret = NULL, *tmp;
+	size_t i;
 
 	g_return_val_if_fail(ent != NULL, NULL);
-	memset(&value, 0, sizeof(value));
 
 	for (i = 0; i < format_count; i++) {
+		char *field;
+
 		/* Add a separator, if we need to, before advancing to
 		 * this field.  This way we ensure that the correct number
 		 * of fields will result, even if they're empty.  Note that
 		 * this implies that position values are always in ascending
 		 * order. */
 		if (i > 0) {
+			size_t j;
+
 			g_assert(formats[i].position - formats[i - 1].position >= 0);
 			j = formats[i].position - formats[i - 1].position;
 			while (j-- > 0) {
 				tmp = g_strconcat(ret ?: "", ":", NULL);
-				if (ret) {
-					g_free(ret);
-				}
+				g_free(ret);
 				ret = tmp;
 			}
 		}
-		/* Retrieve the values for this attribute. */
-		values = lu_ent_get(ent, formats[i].attribute);
-		if (values != NULL) {
-			/* Iterate over all of the data items we can, prepending
-			 * a comma to all but the first. */
-			j = 0;
-			do {
-				/* Get a string representation of this value. */
-				val = g_value_array_get_nth(values, j);
-				p = lu_value_strdup(val);
-				/* Add it to the end, prepending a comma if we
-				 * need to separate it from another value,
-				 * unless this is the default value for the
-				 * field and we need to suppress it. */
-				if ((formats[i].def != NULL) &&
-				    (formats[i].multiple == FALSE) &&
-				    (strcmp(formats[i].def, p) == 0) &&
-				    (formats[i].suppress_if_def == TRUE)) {
-					tmp = g_strdup(ret);
-				} else {
-					tmp = g_strconcat(ret ?: "",
-							  (j > 0) ? "," : "",
-							  p,
-							  NULL);
-				}
-				g_free(p);
-				if (ret != NULL) {
-					g_free(ret);
-				}
-				ret = tmp;
-				j++;
-			} while (formats[i].multiple && (j < values->n_values));
-		} else {
-			/* We have no values, so check for a default value,
-			 * unless we're suppressing it. */
-			if ((formats[i].def != NULL) &&
-			    (formats[i].suppress_if_def == FALSE)) {
-				/* Use the default listed in the format
-				 * specifier. */
-				tmp = g_strconcat(ret ?: "",
-						  formats[i].def,
-						  NULL);
-				if (ret != NULL) {
-					g_free(ret);
-				}
-				ret = tmp;
-			}
-		}
+
+		field = format_field(ent, formats + i);
+		tmp = g_strconcat(ret ? ret : "", field, NULL);
+		g_free(field);
+		g_free(ret);
+		ret = tmp;
 	}
 	/* Add an end-of-line terminator. */
-	p = g_strconcat(ret ?: "", "\n", NULL);
-	if (ret) {
-		g_free(ret);
-	}
-	ret = p;
+	tmp = g_strconcat(ret ?: "", "\n", NULL);
+	g_free(ret);
+	ret = tmp;
 
 	return ret;
 }
@@ -1117,11 +1122,9 @@ generic_mod(struct lu_module *module, const char *base_name,
 	char *filename = NULL, *key = NULL;
 	int fd = -1;
 	gpointer lock;
-	size_t i, j;
-	const char *dir = NULL;
-	char *p, *q, *new_value;
-	GValueArray *names = NULL, *values = NULL;
-	GValue *value;
+	size_t i;
+	const char *dir = NULL, *name_attribute;
+	GValueArray *names = NULL;
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
@@ -1133,24 +1136,20 @@ generic_mod(struct lu_module *module, const char *base_name,
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 
 	/* Get the array of names for the entity object. */
-	if (ent->type == lu_user) { /* FIXME: simplify */
-		names = lu_ent_get_current(ent, LU_USERNAME);
-		if (names == NULL) {
-			lu_error_new(error, lu_error_generic,
-				     _("entity object has no %s attribute"),
-				     LU_USERNAME);
-			return FALSE;
-		}
-	} else if (ent->type == lu_group) {
-		names = lu_ent_get_current(ent, LU_GROUPNAME);
-		if (names == NULL) {
-			lu_error_new(error, lu_error_generic,
-				     _("entity object has no %s attribute"),
-				     LU_GROUPNAME);
-			return FALSE;
-		}
-	} else
+	if (ent->type == lu_user)
+		name_attribute = LU_USERNAME;
+	else if (ent->type == lu_group)
+		name_attribute = LU_GROUPNAME;
+	else
 		g_assert_not_reached();
+
+	names = lu_ent_get_current(ent, name_attribute);
+	if (names == NULL) {
+		lu_error_new(error, lu_error_generic,
+			     _("entity object has no %s attribute"),
+			     name_attribute);
+		return FALSE;
+	}
 
 	/* Generate the name of the file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
@@ -1181,58 +1180,19 @@ generic_mod(struct lu_module *module, const char *base_name,
 
 	/* We iterate over all of the fields individually. */
 	for (i = 0; i < format_count; i++) {
+		GValue *value;
+		char *field;
 		gboolean ret2;
 
-		/* Read the values, and format them as a field. */
-		values = lu_ent_get(ent, formats[i].attribute);
-		/* FIXME: merge with format_generic */
-		new_value = NULL;
-		j = 0;
-		if (values != NULL) do {
-			/* Convert a single value to a string. */
-			value = g_value_array_get_nth(values, j);
-			p = lu_value_strdup(value);
-			/* Add this new value to the existing string, prepending
-			 * a comma if we've already seen any other values. */
-			q = g_strconcat(new_value ?: "",
-					(j > 0) ? "," : "",
-					p,
-					NULL);
-			if (new_value != NULL) {
-				g_free(new_value);
-			}
-			new_value = q;
-			g_free(p);
-			j++;
-		} while (formats[i].multiple && (j < values->n_values));
-		else {
-			if (formats[i].def != NULL
-			    && formats[i].suppress_if_def == FALSE)
-				new_value = g_strdup(formats[i].def);
-			else
-				new_value = g_strdup("");
-		}
+		field = format_field(ent, formats + i);
 
 		/* Get the current name for this entity. */
 		value = g_value_array_get_nth(names, 0);
-		/* If the value we're about to write is the default, just use
-		 * an empty string. */
-		if ((formats[i].suppress_if_def == TRUE) &&
-		    (formats[i].def != NULL) &&
-		    (strcmp(formats[i].def, new_value) == 0)) {
-			ret2 = lu_util_field_write(fd,
-						   g_value_get_string(value),
-						   formats[i].position,
-						   "", error);
-		} else {
-			/* Otherwise write the new value. */
-			ret2 = lu_util_field_write(fd,
-						   g_value_get_string(value),
-						   formats[i].position,
-						   new_value, error);
-		}
 
-		g_free(new_value);
+		/* Write the new value. */
+		ret2 = lu_util_field_write(fd, g_value_get_string(value),
+					   formats[i].position, field, error);
+		g_free(field);
 
 		/* If we had a write error, we fail now. */
 		if (ret2 == FALSE)
@@ -1242,24 +1202,13 @@ generic_mod(struct lu_module *module, const char *base_name,
 		 * the new name is correct here because if we renamed it, we
 		 * changed the name field first), so switch to using the
 		 * account's new name. */
-		if (ent->type == lu_user) { /* FIXME: simplify */
-			names = lu_ent_get(ent, LU_USERNAME);
-			if (names == NULL) {
-				lu_error_new(error, lu_error_generic,
-					     _("entity object has no %s attribute"),
-					     LU_USERNAME);
-				goto err_lock;
-			}
-		} else if (ent->type == lu_group) {
-			names = lu_ent_get(ent, LU_GROUPNAME);
-			if (names == NULL) {
-				lu_error_new(error, lu_error_generic,
-					     _("entity object has no %s attribute"),
-					     LU_GROUPNAME);
-				goto err_lock;
-			}
-		} else
-			g_assert_not_reached();
+		names = lu_ent_get(ent, name_attribute);
+		if (names == NULL) {
+			lu_error_new(error, lu_error_generic,
+				     _("entity object has no %s attribute"),
+				     name_attribute);
+			goto err_lock;
+		}
 	}
 
 	ret = TRUE;

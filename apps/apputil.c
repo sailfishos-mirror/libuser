@@ -579,7 +579,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	if (is_selinux_enabled() > 0) {
 		if (getuid() == 0 && check_access(user, PASSWD__CHFN) != 0) {
 			security_context_t user_context;
-			
+
 			if (getprevcon(&user_context) < 0)
 				user_context = NULL;
 			/* FIXME: "change the finger info?" */

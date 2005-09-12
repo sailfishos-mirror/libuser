@@ -1,5 +1,17 @@
 2005-09-12  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_add_int)
+	* modules.files.c (format_generic, generic_mod): Beautify.
+
+	* modules/files.c (generic_mod): Simplify name extraction.
+
+	* modules/files.c (format_field): New function.
+	(format_generic, generic_mod): Use format_field ().
+
+	* lib/entity.c (quark_from_attribute): New function.
+	(lu_ent_get_int, lu_ent_clear_int, lu_ent_set_int, lu_ent_add_int):
+	Use quark_from_attribute ().
+
 	* modules/files.c (generic_mod): Fix crash when attribute is missing.
 	* tests/files_test.py (Tests.testUserMod4): New test.
 
@@ -169,8 +181,8 @@
 
 	* modules/ldap.c: Include Cyrus SASL v2 header file.
 
-	* modules/krb5.c (lu_krb5_user_add, lu_krb5_user_mod) 
-	(lu_krb5_user_del, lu_krb5_user_do_lock, lu_krb5_user_islocked) 
+	* modules/krb5.c (lu_krb5_user_add, lu_krb5_user_mod)
+	(lu_krb5_user_del, lu_krb5_user_do_lock, lu_krb5_user_islocked)
 	(lu_krb5_user_setpass): Fix checking of lu_ent magic.
 
 	* docs/reference/libuser-sections.txt: Add lu_values_equal.

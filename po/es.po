@@ -19,7 +19,7 @@ msgstr ""
 "Language-Team: Spanish/Spain\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 # apps/apputil.c:58
 # apps/apputil.c:58
@@ -1382,4 +1382,3 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
-

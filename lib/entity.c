@@ -286,23 +286,35 @@ lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 	dest->modules = g_value_array_copy(source->modules);
 }
 
+/* Return a GQark for lower-cased attribute */
+static GQuark
+quark_from_attribute(const char *attribute)
+{
+	GQuark quark;
+	char *lower;
+	size_t i, len;
+
+	len = strlen(attribute);
+	lower = g_malloc(len + 1);
+	for (i = 0; i < len; i++)
+		lower[i] = g_ascii_tolower(attribute[i]);
+	lower[len] = '\0';
+	quark = g_quark_from_string(lower);
+	g_free(lower);
+	return quark;
+}
+
 static GValueArray *
 lu_ent_get_int(GArray *list, const char *attribute)
 {
 	struct lu_attribute *attr;
 	GQuark aquark;
 	size_t i;
-	char *lattr;
 
 	g_return_val_if_fail(list != NULL, NULL);
 	g_return_val_if_fail(attribute != NULL, NULL);
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
-	lattr = g_strdup(attribute);
-	for (i = 0; lattr[i] != '\0'; i++) {
-		lattr[i] = g_ascii_tolower(lattr[i]); /* FIXME: function */
-	}
-	aquark = g_quark_from_string(lattr);
-	g_free (lattr);
+	aquark = quark_from_attribute(attribute);
 	for (i = 0; i < list->len; i++) {
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
@@ -330,26 +342,22 @@ lu_ent_clear_int(GArray *list, const char *attribute)
 {
 	int i;
 	struct lu_attribute *attr = NULL;
-	char *lattr;
+	GQuark aquark;
+
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attribute != NULL);
 	g_return_if_fail(strlen(attribute) > 0);
-	lattr = g_strdup(attribute);
-	for (i = 0; lattr[i] != '\0'; i++) {
-		lattr[i] = g_ascii_tolower(lattr[i]);
-	}
+	aquark = quark_from_attribute(attribute);
 	for (i = list->len - 1; i >= 0; i--) {
 		attr = &g_array_index(list, struct lu_attribute, i);
-		if (g_quark_from_string(lattr) == attr->name) {
+		if (attr->name == aquark)
 			break;
-		}
 	}
 	if (i >= 0) {
 		g_value_array_free(attr->values);
 		attr->values = NULL;
 		g_array_remove_index(list, i);
 	}
-	g_free(lattr);
 }
 
 static void
@@ -358,7 +366,7 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	GValueArray *dest, *copy;
 	struct lu_attribute newattr;
 	size_t i;
-	char *lattr;
+
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attr != NULL);
 	g_return_if_fail(strlen(attr) > 0);
@@ -368,24 +376,17 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	}
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
-		lattr = g_strdup(attr);
-		for (i = 0; lattr[i] != '\0'; i++) {
-			lattr[i] = g_ascii_tolower(lattr[i]);
-		}
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = g_quark_from_string(lattr);
+		newattr.name = quark_from_attribute(attr);
 		newattr.values = g_value_array_new(0);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
-		g_free(lattr);
 	}
-	while (dest->n_values > 0) {
+	while (dest->n_values > 0)
 		g_value_array_remove(dest, dest->n_values - 1);
-	}
 	copy = g_value_array_copy(values);
-	for (i = 0; i < copy->n_values; i++) {
+	for (i = 0; i < copy->n_values; i++)
 		g_value_array_append(dest, g_value_array_get_nth(copy, i));
-	}
 	g_value_array_free(copy);
 }
 
@@ -396,23 +397,18 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	GValue *current;
 	struct lu_attribute newattr;
 	size_t i;
-	char *lattr;
+
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(value != NULL);
 	g_return_if_fail(attr != NULL);
 	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
-		lattr = g_strdup(attr);
-		for (i = 0; lattr[i] != '\0'; i++) {
-			lattr[i] = g_ascii_tolower(lattr[i]);
-		}
 		memset(&newattr, 0, sizeof(newattr));
-		newattr.name = g_quark_from_string(lattr);
+		newattr.name = quark_from_attribute(attr);
 		newattr.values = g_value_array_new(1);
 		dest = newattr.values;
 		g_array_append_val(list, newattr);
-		g_free(lattr);
 	}
 	for (i = 0; i < dest->n_values; i++) {
 		current = g_value_array_get_nth(dest, i);
@@ -420,9 +416,8 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 		    && lu_values_equal(value, current))
 			break;
 	}
-	if (i >= dest->n_values) {
+	if (i >= dest->n_values)
 		g_value_array_append(dest, value);
-	}
 }
 
 static void
