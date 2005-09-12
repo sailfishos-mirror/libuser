@@ -402,7 +402,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 	   for the last one to be empty. */
 	v = g_strsplit(line, ":", format_count);
 	g_assert(format_count > 0);
-	if (lu_strv_len(v) < format_count - 1) { /* FIXME: glib function */
+	if (g_strv_length(v) < format_count - 1) {
 		g_warning("entry is incorrectly formatted");
 		return FALSE;
 	}

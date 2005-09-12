@@ -488,16 +488,10 @@ lu_converse(int num_msg, const struct pam_message **msg,
 			default:
 				/* Make this pending output text. */
 				pending = lu_strconcat(pending, (*msg)[i].msg);
-				p = strrchr(pending, ':');
-				if (p != NULL) {
-					*p = '\0';
-				}
 				break;
 		}
-		if (pending != NULL) {
-			g_free(pending);
-		}
 	}
+	g_free(pending); /* Discards trailing PAM_ERROR_MSG or PAM_TEXT_INFO */
 
 	/* Prompt the user. */
 	if (data->prompt(prompts, num_msg, data->callback_data, &error)) {
@@ -518,9 +512,7 @@ lu_converse(int num_msg, const struct pam_message **msg,
 				responses[i].resp = strdup(prompts[i].value);
 				prompts[i].free_value(prompts[i].value);
 			}
-			if (prompts[i].prompt != NULL) {
-				g_free((gpointer) prompts[i].prompt);
-			}
+			g_free((gpointer) prompts[i].prompt);
 		}
 		/* Set the return pointer. */
 		*resp = responses;

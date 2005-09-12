@@ -285,8 +285,8 @@ struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
 
-/* Get the length of an array, such as one returned by g_strsplit(). */
-guint lu_strv_len(char **);
+/* Use g_strv_length() */
+guint lu_strv_len(char **) G_GNUC_DEPRECATED;
 
 /* Lock a file. */
 gpointer lu_util_lock_obtain(int fd, struct lu_error **error);

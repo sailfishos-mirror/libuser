@@ -131,12 +131,7 @@ main(int argc, const char **argv)
 	fields = g_strsplit(gecos, ",", G_N_ELEMENTS(prompts));
 
 	/* Count the number of fields we got. */
-	fields_len = 0;
-	if (fields != NULL) {
-		while (fields[fields_len] != NULL) {
-			fields_len++;
-		}
-	}
+	fields_len = g_strv_length(fields);
 
 	/* Fill out the prompt structures. */
 	memset(prompts, 0, sizeof(prompts));

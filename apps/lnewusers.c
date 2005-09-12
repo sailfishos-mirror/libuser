@@ -121,15 +121,7 @@ main(int argc, const char **argv)
 
 		/* Make sure the line splits into *exactly* seven fields. */
 		fields = g_strsplit(buf, ":", 7);
-		if ((fields == NULL) ||
-		    (fields[0] == NULL) ||
-		    (fields[1] == NULL) ||
-		    (fields[2] == NULL) ||
-		    (fields[3] == NULL) ||
-		    (fields[4] == NULL) ||
-		    (fields[5] == NULL) ||
-		    (fields[6] == NULL) ||
-		    (fields[7] != NULL)) {
+		if (g_strv_length(fields) != 7) {
 			fprintf(stderr,
 				_("Error creating account for `%s': line "
 				  "improperly formatted.\n"), buf);
@@ -337,9 +329,7 @@ main(int argc, const char **argv)
 		}
 
 		g_free(homedir);
-		if (fields != NULL) {
-			g_strfreev(fields);
-		}
+		g_strfreev(fields);
 		lu_ent_clear_all(ent);
 		lu_ent_clear_all(groupEnt);
 	}

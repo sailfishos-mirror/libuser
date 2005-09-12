@@ -166,9 +166,7 @@ void
 lu_error_free(struct lu_error **error)
 {
 	if (error != NULL) {
-		if ((*error)->string != NULL) {
-			g_free((*error)->string);
-		}
+		g_free((*error)->string);
 		memset(*error, 0, sizeof(**error));
 		g_free(*error);
 		*error = NULL;

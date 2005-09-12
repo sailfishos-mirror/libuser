@@ -341,10 +341,7 @@ lu_util_line_get_matching3(int fd, const char *part,
 guint
 lu_strv_len(gchar ** v)
 {
-	int ret = 0;
-	while (v && v[ret])
-		ret++;
-	return ret;
+	return g_strv_length(v);
 }
 
 char *

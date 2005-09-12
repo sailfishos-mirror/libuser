@@ -282,8 +282,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if (self->prompt.prompt)
-			g_free((char *) self->prompt.prompt);
+		g_free((char *) self->prompt.prompt);
 		self->prompt.prompt = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
@@ -295,8 +294,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if (self->prompt.domain)
-			g_free((char *) self->prompt.domain);
+		g_free((char *) self->prompt.domain);
 		self->prompt.domain = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
@@ -308,8 +306,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if (self->prompt.key)
-			g_free((char *) self->prompt.key);
+		g_free((char *) self->prompt.key);
 		self->prompt.key = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
@@ -327,8 +324,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if (self->prompt.default_value)
-			g_free((char *) self->prompt.default_value);
+		g_free((char *) self->prompt.default_value);
 		self->prompt.default_value =
 		    (args == Py_None) ?
 		    NULL :

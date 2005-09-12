@@ -1,5 +1,19 @@
 2005-09-12  Miloslav Trmac  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_converse)
+	* apps/lnewusers.c (main)
+	* lib/error.c (lu_error_free)
+	* python/misc.c (libuser_prompt_setattr): Remove conditionals around
+	g_free () or g_strfreev ().
+
+	* apps/lchfn.c (main)
+	* apps/lnewusers.c (main)
+	* lib/util.c (lu_strv_len)
+	* modules/files.c (parse_generic): Use g_strv_length ().
+	* lib/user_private.h (lu_strv_len): Mark as deprecated.
+
+	* apps/apputil.c (lu_converse): Actually use the "pending" messages.
+
 	* lib/entity.c (quark_from_attribute): Use g_ascii_strdown ().
 
 	* modules/files.c (struct format_specifier): Remove member position,
