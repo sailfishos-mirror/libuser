@@ -1,5 +1,7 @@
 2005-09-13  Miloslav Trmac  <mitr@redhat.com>
 
+	* NEWS: Update.
+
 	* apps/apputil.h
 	* lib/internal.h: Add G_GNUC_INTERNAL to all declarations.
 
