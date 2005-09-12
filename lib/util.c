@@ -39,32 +39,12 @@
 #define LU_MAX_LOCK_ATTEMPTS 6
 #define LU_LOCK_TIMEOUT      2
 #include "user_private.h"
-#include "util.h"
+#include "internal.h"
 
 struct lu_lock {
 	int fd;
 	struct flock lock;
 };
-
-/* A function which returns non-zero if the strings are equal, and
- * zero if they are unequal.  Case-insensitive version. */
-gint
-lu_str_case_equal(gconstpointer v1, gconstpointer v2)
-{
-	g_return_val_if_fail(v1 != NULL, 0);
-	g_return_val_if_fail(v2 != NULL, 0);
-	return g_ascii_strcasecmp((char *) v1, (char *) v2) == 0;
-}
-
-/* A function which returns non-zero if the strings are equal, and
- * zero if they are unequal.  Case-sensitive version. */
-gint
-lu_str_equal(gconstpointer v1, gconstpointer v2)
-{
-	g_return_val_if_fail(v1 != NULL, 0);
-	g_return_val_if_fail(v2 != NULL, 0);
-	return strcmp((char *) v1, (char *) v2) == 0;
-}
 
 /* A wrapper for strcasecmp(). */
 gint
@@ -108,10 +88,10 @@ fill_urandom(char *output, size_t length)
 	g_return_val_if_fail(fd != -1, FALSE);
 
 	memset(output, '\0', length);
-	
+
 	while (got < length) {
 		ssize_t len;
-		
+
 		len = read(fd, output + got, length - got);
 		if (len == -1) {
 			if (errno == EINTR)
@@ -128,7 +108,7 @@ fill_urandom(char *output, size_t length)
 			len--;
 		}
 	}
-	
+
 	close(fd);
 	return TRUE;
 }
@@ -336,12 +316,6 @@ lu_util_line_get_matching3(int fd, const char *part,
 {
 	LU_ERROR_CHECK(error);
 	return lu_util_line_get_matchingx(fd, part, 3, error);
-}
-
-guint
-lu_strv_len(gchar ** v)
-{
-	return g_strv_length(v);
 }
 
 char *
@@ -599,34 +573,4 @@ lu_util_shadow_current_date(struct lu_string_cache *cache)
 	snprintf(buf, sizeof(buf), "%ld", days);
 
 	return cache->cache(cache, buf);
-}
-
-gboolean
-lu_account_name_is_valid(const char *prospective_name)
-{
-	int i;
-	g_return_val_if_fail(prospective_name != NULL, FALSE);
-	if (prospective_name[0] == '\0') {
-		return FALSE;
-	}
-	/* Validate a name using the method shadow 4.0.3 uses:
-	 * [a-z_][0-9a-z_-]*\$? */
-	if ((prospective_name[0] != '_') &&
-	    !((prospective_name[0] >= 'a') &&
-	      (prospective_name[0] <= 'z'))) {
-		return FALSE;
-	}
-	for (i = 1; prospective_name[i] != '\0'; i++) {
-		if (!((prospective_name[i] >= 'a') &&
-		      (prospective_name[i] <= 'z')) &&
-		    !((prospective_name[i] >= '0') &&
-		      (prospective_name[i] <= '9')) &&
-		    !(prospective_name[i] == '_') &&
-		    !(prospective_name[i] == '-') &&
-		    !((prospective_name[i] == '$') &&
-		      (prospective_name[i + 1] == '\0'))) {
-			return FALSE;
-		}
-	}
-	return TRUE;
 }

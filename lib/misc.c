@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "user_private.h"
-#include "modules.h"
+#include "internal.h"
 
 char *
 lu_value_strdup(const GValue *value)

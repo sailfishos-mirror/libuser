@@ -28,7 +28,7 @@
 #include <string.h>
 #include <glib.h>
 #include "user_private.h"
-#include "util.h"
+#include "internal.h"
 
 /* Create and return a new entity object. */
 struct lu_ent *

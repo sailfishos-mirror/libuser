@@ -75,7 +75,7 @@ check_access(const char *chuser, access_vector_t access)
 						     user_context,
 						     SECCLASS_PASSWD,
  						     access, &avd);
-			
+
 			if (retval == 0 && (avd.allowed & access) == access)
 				status = 0;
 		}
@@ -90,7 +90,7 @@ setup_default_context(const char *orig_file)
 {
 	if (is_selinux_enabled() > 0) {
 		security_context_t scontext;
-    
+
 		if (getfilecon(orig_file, &scontext) < 0)
 			return -1;
 
@@ -423,8 +423,9 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	return FALSE;
 }
 
+#if 0
 /* Concatenate a string onto another string on the heap. */
-char *
+static char *
 lu_strconcat(char *existing, const char *appendee)
 {
 	char *tmp;
@@ -438,7 +439,6 @@ lu_strconcat(char *existing, const char *appendee)
 	return existing;
 }
 
-#if 0
 struct conv_data {
 	lu_prompt_fn *prompt;
 	gpointer callback_data;

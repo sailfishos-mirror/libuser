@@ -33,19 +33,19 @@
 
 gboolean lu_homedir_populate(const char *skel, const char *directory,
 			     uid_t owner, gid_t group, mode_t mode,
-			     struct lu_error **error);
+			     struct lu_error **error) G_GNUC_INTERNAL;
 gboolean lu_homedir_move(const char *oldhome, const char *directory,
-			 struct lu_error **error);
-gboolean lu_homedir_remove(const char *directory, struct lu_error **error);
+			 struct lu_error **error) G_GNUC_INTERNAL;
+gboolean lu_homedir_remove(const char *directory, struct lu_error **error)
+	G_GNUC_INTERNAL;
 
-void lu_authenticate_unprivileged(const char *user, const char *appname);
+void lu_authenticate_unprivileged(const char *user, const char *appname)
+	G_GNUC_INTERNAL;
 
-char *lu_strconcat(char *existing, const char *appendee);
-
-void lu_hup_nscd(void);
-void lu_signal_nscd(int signum);
+void lu_hup_nscd(void) G_GNUC_INTERNAL;
+void lu_signal_nscd(int signum) G_GNUC_INTERNAL;
 
 gboolean lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
-				    gboolean action);
+				    gboolean action) G_GNUC_INTERNAL;
 
 #endif

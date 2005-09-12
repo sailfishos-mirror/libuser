@@ -28,7 +28,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "user_private.h"
-#include "util.h"
+#include "internal.h"
 
 #ifdef HAVE___SECURE_GETENV
 #define getenv(string) __secure_getenv(string)
@@ -183,7 +183,7 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 			     _("could not stat configuration file `%s': %s"),
 			     filename, strerror(errno));
 		goto err_config;
-	} 
+	}
 	/* Read the file's contents in. */
 	data = g_malloc0(st.st_size + 1);
 	if (read(fd, data, st.st_size) != st.st_size) {

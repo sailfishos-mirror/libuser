@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -20,14 +20,27 @@
 
 /* gtkdoc: private_header */
 
-#ifndef modules_h
-#define modules_h
+#ifndef internal_h
+#define internal_h
 
 #include <glib.h>
 
-gboolean lu_modules_load(struct lu_context *ctx, const char *module_list,
-			 GValueArray **names, struct lu_error **error);
+/* Configuration initialization and shutdown. */
+gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error)
+	G_GNUC_INTERNAL;
+void lu_cfg_done(struct lu_context *context) G_GNUC_INTERNAL;
 
-int lu_module_unload(gpointer key, gpointer value, gpointer data);
+/* Set the sources of record for a given entity structure. */
+void lu_ent_add_module(struct lu_ent *ent, const char *source) G_GNUC_INTERNAL;
+void lu_ent_clear_modules(struct lu_ent *ent) G_GNUC_INTERNAL;
+
+gboolean lu_modules_load(struct lu_context *ctx, const char *module_list,
+			 GValueArray **names, struct lu_error **error)
+	G_GNUC_INTERNAL;
+int lu_module_unload(gpointer key, gpointer value, gpointer data)
+	G_GNUC_INTERNAL;
+
+gint lu_strcasecmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
+gint lu_strcmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
 
 #endif

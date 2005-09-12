@@ -1,3 +1,35 @@
+2005-09-13  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/apputil.h
+	* lib/internal.h: Add G_GNUC_INTERNAL to all declarations.
+
+	* lib/util.c (lu_strv_len): Remove.
+	* lib/user_private.h (lu_strv_len): Remove declaration.
+
+	* lib/user.c (lu_default_int): Replace lu_str_case_equal () with its
+	contents.
+	* lib/util.c (lu_str_case_equal, lu_str_equal)
+	(lu_account_name_is_valid): Remove unused functions (not exported in
+	public header files).
+	* lib/internal.h (lu-str_case_equal, lu_str_equal)
+	(lu_account_name_is_valid: Remove
+	declarations.
+
+	* apps/apputil.c (lu_strconcat): Comment out like its only user.
+	* apps/apputil.h (lu_strconcat): Remove declaration.
+
+	* lib/internal.h: Merge lib/modules.h and lib/util.h.
+	* lib/user_private.h: Move internal interfaces to internal.h.
+	* Makefile.am (lib_libuser_la_SOURCES)
+	* docs/reference/Makefile.am (IGNORE_HFILES)
+	* lib/config.c
+	* lib/entity.c
+	* lib/misc.c
+	* lib/modules.c
+	* lib/scache.c
+	* lib/user.c
+	* modules/krb5.c: Update.
+
 2005-09-12  Miloslav Trmac  <mitr@redhat.com>
 
 	* apps/apputil.c (lu_converse)

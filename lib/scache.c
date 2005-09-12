@@ -22,7 +22,7 @@
 #endif
 #include <string.h>
 #include "user_private.h"
-#include "util.h"
+#include "internal.h"
 
 static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)

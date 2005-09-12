@@ -273,20 +273,10 @@ _fn (struct lu_context * context, struct lu_error ** error);
 typedef struct lu_module *(*lu_module_init_t) (struct lu_context * context,
 					       struct lu_error ** error);
 
-/* Configuration initialization and shutdown. */
-gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error);
-void lu_cfg_done(struct lu_context *context);
-
-/* Set the sources of record for a given entity structure. */
-void lu_ent_add_module(struct lu_ent *ent, const char *source);
-void lu_ent_clear_modules(struct lu_ent *ent);
 struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
-
-/* Use g_strv_length() */
-guint lu_strv_len(char **) G_GNUC_DEPRECATED;
 
 /* Lock a file. */
 gpointer lu_util_lock_obtain(int fd, struct lu_error **error);

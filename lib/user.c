@@ -31,8 +31,7 @@
 #include <string.h>
 #include <utmp.h>
 #include "user_private.h"
-#include "modules.h"
-#include "util.h"
+#include "internal.h"
 
 #define DEFAULT_ID 500
 
@@ -1800,7 +1799,7 @@ lu_default_int(struct lu_context *context, const char *name,
 		}
 		if (val != NULL) {
 			intmax_t imax;
-			
+
 			errno = 0;
 			imax = strtoimax(val, &tmp, 10);
 			if (errno == 0 && *tmp == 0 && tmp != val
@@ -1882,7 +1881,7 @@ lu_default_int(struct lu_context *context, const char *name,
 
 		/* Skip over the key which represents the user/group ID,
 		 * because we only used it as a starting point. */
-		if (lu_str_case_equal(idkey, key)) {
+		if (g_ascii_strcasecmp(idkey, key) == 0) {
 			continue;
 		}
 

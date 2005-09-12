@@ -30,7 +30,7 @@ HFILE_GLOB=
 CFILE_GLOB=
 
 # Header files to ignore when scanning.
-IGNORE_HFILES=modules.h user_private.h util.h
+IGNORE_HFILES=internal.h user_private.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES =

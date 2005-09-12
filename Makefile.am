@@ -156,12 +156,12 @@ apps_lusermod_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lusermod_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lusermod_LDFLAGS = $(GMODULE_LIBS) -lpopt
 
-lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/misc.c \
-	lib/modules.c lib/modules.h lib/prompt.c lib/scache.c lib/user.c \
-	lib/util.c lib/util.h
+lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/internal.h \
+	lib/misc.c lib/modules.c lib/prompt.c lib/scache.c lib/user.c \
+	lib/util.c
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
-	$(SYSCONFDIR_CPPFLAGS) -DMODULEDIR='"$(pkglibdir)"' 
+	$(SYSCONFDIR_CPPFLAGS) -DMODULEDIR='"$(pkglibdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:1:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 

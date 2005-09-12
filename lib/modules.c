@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "user_private.h"
-#include "modules.h"
+#include "internal.h"
 
 #define SEPARATORS "\t ,"
 
