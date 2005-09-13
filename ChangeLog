@@ -1,5 +1,8 @@
 2005-09-13  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.54.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+
 	* NEWS: Update.
 
 	* apps/apputil.h

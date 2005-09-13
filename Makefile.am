@@ -162,7 +162,7 @@ lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/internal.h \
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	$(SYSCONFDIR_CPPFLAGS) -DMODULEDIR='"$(pkglibdir)"'
-lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:1:1
+lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:2:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 lib_libuserquota_la_SOURCES = lib/userquota.c
