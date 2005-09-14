@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-07-25 13:52+1000\n"
+"PO-Revision-Date: 2005-09-15 09:51+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
 "MIME-Version: 1.0\n"
@@ -85,9 +85,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "내부 PAM 오류 `%s'(이)가 발생했습니다.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "알 수 없는 사용자 문맥"
+msgstr "알 수 없는 사용자 인증함.\n"
 
 #: apps/apputil.c:626
 #, c-format
@@ -1028,3 +1028,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
