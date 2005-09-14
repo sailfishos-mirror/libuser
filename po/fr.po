@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-06-23 21:02+0100\n"
 "Last-Translator: Philippe Villiers <philippe.villiers@wanadoo.fr>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -55,36 +55,41 @@ msgstr "Impossible de supprimer les privilèges.\n"
 msgid "Internal error.\n"
 msgstr "Erreur interne.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s n'est pas autorisé à changer les informations finger de %s\n"
 
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "Contexte utilisateur inconnu"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Impossible de définir le contexte par défaut pour /etc/passwd\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Erreur lors de l'initialisation de PAM.\n"
 
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentification échouée pour %s.\n"
 
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Erreur PAM interne %s.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "Contexte utilisateur inconnu"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Non correspondance de l'utilisateur.\n"

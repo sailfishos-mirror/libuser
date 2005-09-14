@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-07-25 15:22+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -56,36 +56,41 @@ msgstr "विशेषाधिकार हटाने में असफल
 msgid "Internal error.\n"
 msgstr "आंतरिक त्रुटि.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s की पहचान को बदलने के लिए %s अधिकृत नहीं है\n"
 
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "अज्ञात उपयोक्ता संदर्भ"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd के लिए मूलभूत संदर्भ व्यवस्थित नहीं कर सकता\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM प्रारंभिकीकरण त्रुटि.\n"
 
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s के लिए सत्यापन असफल.\n"
 
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "आंतरिक PAM त्रुटि`%s'.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "अज्ञात उपयोक्ता संदर्भ"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "उपयोक्ता बेमेल.\n"

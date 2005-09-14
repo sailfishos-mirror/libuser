@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-07-27 22:43+0200\n"
 "Last-Translator: Allan Sims <allan.sims@eau.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -55,36 +55,41 @@ msgstr "Õiguste eemaldamine ebaõnnestus.\n"
 msgid "Internal error.\n"
 msgstr "Sisemine viga.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s ei ole volitatud muutma %s infot\n"
 
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "tundmatu kasutaja kontekst"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "vaike konteksti seadistamine /etc/passwd jaoks ei ole võimalik\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM lähtestamisel esines viga.\n"
 
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s tuvastamine ebaõnnestus.\n"
 
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Sisemine PAM viga `%s'.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "tundmatu kasutaja kontekst"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Kasutaja ei sobi.\n"

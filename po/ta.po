@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-03-22 12:42+0530\n"
 "Last-Translator: Jayaradha <njaya@redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -58,36 +58,41 @@ msgstr "சலுகைகள் வழங்கபடாதது கைவி�
 msgid "Internal error.\n"
 msgstr "உள்ளமைந்த தவறு.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s க்கு %s இன் தகவலை மாற்ற அனுமதி இல்லை\n"
 
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "தெரியாத பயனர் தொடர்பு"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd இயல்பான சூழ்நிலைக்கேற்ப அமைக்க முடியவில்லை\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "துவக்கத்தில் பிழை PAM.\n"
 
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s உறுதிப்படுத்தல் தவறானது.\n"
 
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "உள்ளமைப்பில் PAM பிழை  `%s'.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "தெரியாத பயனர் தொடர்பு"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "பயனர் பொறுத்தம் இல்லை.\n"

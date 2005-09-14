@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-07-13 12:27+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
@@ -64,39 +64,45 @@ msgid "Internal error.\n"
 msgstr "অভ্যন্তরীণ সমস্যা।\n"
 
 # modified for RHEL
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s-র, %s-র finger সংক্রান্ত তথ্য পরিবর্তন করার অধিকার নেই।\n"
 
 # modified for RHEL
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
 
 # modified for RHEL
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd-র ডিফল্ট প্রসঙ্গ নির্ধারণ করা সম্ভব হয়নি\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM আরম্ভ করতে সমস্যা।\n"
 
 # modified for RHEL
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s-র পরিচয়প্রমাণ প্রক্রিয়া ব্যর্থ হয়েছে।\n"
 
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "PAM-র অভ্যন্তরীণ সমস্যা `%s'.\n"
 
-#: apps/apputil.c:621
+# modified for RHEL
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "ব্যবহারকারীর গরমিল।\n"

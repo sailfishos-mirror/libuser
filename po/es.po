@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-13 01:56+0200\n"
+"POT-Creation-Date: 2005-09-14 23:04+0200\n"
 "PO-Revision-Date: 2005-06-17 12:16+0200\n"
 "Last-Translator: José Julio Cidón Peón <josejulio@cidon-mulliez.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -71,44 +71,51 @@ msgstr "Imposible disminuir privilegios.\n"
 msgid "Internal error.\n"
 msgstr "Error interno.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s no está autorizado para cambiar la información de finger de %s\n"
 
 # lib/userent.c:46
 # lib/userent.c:47
-#: apps/apputil.c:581
+#: apps/apputil.c:582
 msgid "Unknown user context"
 msgstr "Contexto de usuario desconocido"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:590
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "No se pudo establecer el contexto predeterminado para /etc/passwd\n"
 
 # apps/apputil.c:332
 # apps/apputil.c:332
-#: apps/apputil.c:598
+#: apps/apputil.c:599
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Error inicializando PAM.\n"
 
 # apps/apputil.c:339
 # apps/apputil.c:339
-#: apps/apputil.c:606 apps/apputil.c:630
+#: apps/apputil.c:609 apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificación fallida para %s.\n"
 
 # apps/apputil.c:324
 # apps/apputil.c:324
-#: apps/apputil.c:615
+#: apps/apputil.c:617
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Error interno `%s' de PAM.\n"
 
-#: apps/apputil.c:621
+# lib/userent.c:46
+# lib/userent.c:47
+#: apps/apputil.c:622
+#, fuzzy, c-format
+msgid "Unknown user authenticated.\n"
+msgstr "Contexto de usuario desconocido"
+
+#: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "No corresponde el usuario.\n"

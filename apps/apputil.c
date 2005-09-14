@@ -533,7 +533,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 {
 	pam_handle_t *pamh;
 	struct pam_conv conv;
-	const void *puser = user;
+	const void *puser;
 	int ret;
 
 #if 0
@@ -544,11 +544,11 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 		/* Great!  We can drop privileges. */
 		if (setegid(getgid()) == -1) {
 			fprintf(stderr, _("Failed to drop privileges.\n"));
-			exit(1);
+			goto err;
 		}
 		if (seteuid(getuid()) == -1) {
 			fprintf(stderr, _("Failed to drop privileges.\n"));
-			exit(1);
+			goto err;
 		}
 		return;
 	}
@@ -557,7 +557,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	lu_get_prompter(ctx, &data.prompt, &data.callback_data);
 	if (data.prompt == NULL) {
 		fprintf(stderr, _("Internal error.\n"));
-		exit(1);
+		goto err;
 	}
 
 	conv.conv = lu_converse;
@@ -569,6 +569,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 
 #ifdef WITH_SELINUX
 	if (is_selinux_enabled() > 0) {
+		/* FIXME: PASSWD_CHSH, PASSWD_PASSWD ? */
 		if (getuid() == 0 && check_access(user, PASSWD__CHFN) != 0) {
 			security_context_t user_context;
 
@@ -581,14 +582,14 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 				: _("Unknown user context"), user);
 			if (user_context != NULL)
 				freecon(user_context);
-			exit(1);
+			goto err;
 		}
 		/* FIXME: is this right for lpasswd? */
 		if (setup_default_context("/etc/passwd") != 0) {
 			fprintf(stderr,
 				_("Can't set default context for "
 				  "/etc/passwd\n"));
-			exit(1);
+			goto err;
 		}
 	}
 #endif
@@ -596,17 +597,18 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	/* Start up PAM. */
 	if (pam_start(appname, user, &conv, &pamh) != PAM_SUCCESS) {
 		fprintf(stderr, _("Error initializing PAM.\n"));
-		exit(1);
+		goto err;
 	}
 
 	/* Use PAM to authenticate the user. */
 	ret = pam_authenticate(pamh, 0);
 	if (ret != PAM_SUCCESS) {
-		pam_get_item(pamh, PAM_USER, &puser);
+		if (pam_get_item(pamh, PAM_USER, &puser) != PAM_SUCCESS
+		    || puser == NULL)
+			puser = user;
 		fprintf(stderr, _("Authentication failed for %s.\n"),
 			(const char *)puser);
-		pam_end(pamh, 0);
-		exit(1);
+		goto err_pam;
 	}
 
 	/* Make sure we authenticated the user we wanted to authenticate. */
@@ -614,27 +616,36 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 	if (ret != PAM_SUCCESS) {
 		fprintf(stderr, _("Internal PAM error `%s'.\n"),
 			pam_strerror(pamh, ret));
-		pam_end(pamh, 0);
-		exit(1);
+		goto err_pam;
+	}
+	if (puser == NULL) {
+		fprintf(stderr, _("Unknown user authenticated.\n"));
+		goto err_pam;
 	}
 	if (strcmp(puser, user) != 0) {
 		fprintf(stderr, _("User mismatch.\n"));
-		pam_end(pamh, 0);
-		exit(1);
+		goto err_pam;
 	}
 
 	/* Check if the user is allowed to run this program. */
-	if (pam_acct_mgmt(pamh, 0) != PAM_SUCCESS) {
-		puser = user;
-		pam_get_item(pamh, PAM_USER, &puser);
+	ret = pam_acct_mgmt(pamh, 0);
+	if (ret != PAM_SUCCESS) {
+		if (pam_get_item(pamh, PAM_USER, &puser) != PAM_SUCCESS
+		    || puser == NULL)
+			puser = user;
 		fprintf(stderr, _("Authentication failed for %s.\n"),
 			(const char *)puser);
-		pam_end(pamh, 0);
-		exit(1);
+		goto err_pam;
 	}
 
 	/* Clean up -- we're done. */
-	pam_end(pamh, 0);
+	pam_end(pamh, PAM_SUCCESS);
+	return;
+
+err_pam:
+	pam_end(pamh, ret);
+err:
+	exit(1);
 }
 
 /* Send nscd an arbitrary signal. */
