@@ -67,8 +67,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:580
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
-"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:582
 msgid "Unknown user context"
@@ -95,9 +94,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Errore PAM interno %s.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Ambiente utente sconosciuto"
+msgstr "Utente sconosciuto autenticato.\n"
 
 #: apps/apputil.c:626
 #, c-format
@@ -693,8 +692,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:120
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:126
 #, c-format
@@ -868,8 +866,7 @@ msgstr ""
 
 #: modules/ldap.c:637
 msgid "error mapping name to LDAP base distinguished name"
-msgstr ""
-"errore nella configurazione del nome sull'identificatore unico basato su LDAP"
+msgstr "errore nella configurazione del nome sull'identificatore unico basato su LDAP"
 
 #: modules/ldap.c:1371
 #, c-format
@@ -928,8 +925,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1920
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2492
 msgid "LDAP Server Name"
@@ -1043,3 +1039,4 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
+
