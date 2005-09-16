@@ -15,13 +15,13 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-06-28 21:16-0300\n"
+"PO-Revision-Date: 2005-09-16 02:16-0300\n"
 "Last-Translator: Rodrigo Padula de Oliveira <rodrigopadula@gmail.com>\n"
 "Language-Team: Português Brasil\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
@@ -92,9 +92,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Erro interno no PAM `%s'.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Contexto de usuário desconhecido"
+msgstr "Usuário desconhecido autenticado.\n"
 
 #: apps/apputil.c:626
 #, c-format
@@ -529,8 +529,7 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:183
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:191
 #, c-format
@@ -699,8 +698,7 @@ msgstr "não foi possível determinar o contexto de segurança default: %s"
 #: modules/files.c:133
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"não foi possível determinar o contexto de segurança default de `%s': %s"
+msgstr "não foi possível determinar o contexto de segurança default de `%s': %s"
 
 #: modules/files.c:177 modules/files.c:552 modules/files.c:886
 #: modules/files.c:1159 modules/files.c:1309 modules/files.c:1536
@@ -768,8 +766,7 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
+msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
 #: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
@@ -844,8 +841,7 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:425
 msgid "could not search LDAP server"
@@ -1035,3 +1031,4 @@ msgstr "Obtendo atributos default dos usuários:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Copiando estrutura do usuário:\n"
+
