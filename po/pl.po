@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-09-10 18:27+0200\n"
+"PO-Revision-Date: 2005-09-15 16:46+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -86,14 +86,14 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Wewnętrzny błąd PAM `%s'.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Nieznany kontekst użytkownika"
+msgstr "Nieznany upoważniony użytkownik.\n"
 
 #: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
-msgstr "Użytkownik się nie zgadza.\n"
+msgstr "Użytkownik nie zgadza się.\n"
 
 #: apps/lchage.c:138 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
 #: apps/luserdel.c:66 apps/lusermod.c:92
@@ -140,12 +140,12 @@ msgstr "Konto nie jest zablokowane.\n"
 #: apps/lchage.c:184
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr "Minimum:\t%d\n"
+msgstr "Minimalnie:\t%d\n"
 
 #: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "Maksimum:\t%d\n"
+msgstr "Maksymalnie:\t%d\n"
 
 #: apps/lchage.c:192
 #, c-format
