@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-09-11 21:15+0800\n"
+"PO-Revision-Date: 2005-09-18 22:47+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,35 +16,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
+#: apps/apputil.c:129
+#: apps/apputil.c:197
+#: apps/apputil.c:231
+#: apps/apputil.c:260
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Ralat membaca `%s': %s"
 
-#: apps/apputil.c:137 apps/apputil.c:207
+#: apps/apputil.c:137
+#: apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Ralat mencipta `%s': %s"
 
-#: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
+#: apps/apputil.c:145
+#: apps/apputil.c:214
+#: apps/apputil.c:307
 #: modules/files.c:230
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Ralat menukar pemilik untuk `%s': %s"
 
-#: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
-#: modules/files.c:261 modules/files.c:275
+#: apps/apputil.c:244
+#: apps/apputil.c:277
+#: apps/apputil.c:293
+#: modules/files.c:261
+#: modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Ralat menulis `%s': %s"
 
-#: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
+#: apps/apputil.c:346
+#: apps/apputil.c:378
+#: apps/apputil.c:395
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Ralat membuang `%s': %s"
 
-#: apps/apputil.c:546 apps/apputil.c:550
+#: apps/apputil.c:546
+#: apps/apputil.c:550
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Gagal untuk mengurangkan kepentingan.\n"
@@ -73,7 +85,8 @@ msgstr "Tidak dapat menetapkan konteks default untuk /etc/passwd\n"
 msgid "Error initializing PAM.\n"
 msgstr "Ralat memulakan PAM.\n"
 
-#: apps/apputil.c:609 apps/apputil.c:636
+#: apps/apputil.c:609
+#: apps/apputil.c:636
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Pengesahan gagal untuk %s.\n"
@@ -84,43 +97,73 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Ralat dalaman PAM `%s'.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Konteks pengguna tidak diketahui"
+msgstr "Pengguna tidak diketahui disahkan.\n"
 
 #: apps/apputil.c:626
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Pengguna tidak sepadan.\n"
 
-#: apps/lchage.c:138 apps/lid.c:68 apps/lpasswd.c:70 apps/luseradd.c:90
-#: apps/luserdel.c:66 apps/lusermod.c:92
+#: apps/lchage.c:138
+#: apps/lid.c:68
+#: apps/lpasswd.c:70
+#: apps/luseradd.c:90
+#: apps/luserdel.c:66
+#: apps/lusermod.c:92
 msgid "[OPTION...] user"
 msgstr "[PILIHAN...] pengguna"
 
-#: apps/lchage.c:141 apps/lchfn.c:77 apps/lchsh.c:64 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:89 apps/lid.c:71 apps/lnewusers.c:78
-#: apps/lpasswd.c:73 apps/luseradd.c:93 apps/luserdel.c:69 apps/lusermod.c:95
+#: apps/lchage.c:141
+#: apps/lchfn.c:77
+#: apps/lchsh.c:64
+#: apps/lgroupadd.c:69
+#: apps/lgroupdel.c:60
+#: apps/lgroupmod.c:89
+#: apps/lid.c:71
+#: apps/lnewusers.c:78
+#: apps/lpasswd.c:73
+#: apps/luseradd.c:93
+#: apps/luserdel.c:69
+#: apps/lusermod.c:95
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Ralat hujah penelitian: %s.\n"
 
-#: apps/lchage.c:150 apps/lpasswd.c:89 apps/luseradd.c:108 apps/luserdel.c:77
+#: apps/lchage.c:150
+#: apps/lpasswd.c:89
+#: apps/luseradd.c:108
+#: apps/luserdel.c:77
 #: apps/lusermod.c:106
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Tiada nama pengguna dinyatakan.\n"
 
-#: apps/lchage.c:160 apps/lchfn.c:109 apps/lchsh.c:97 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:121 apps/lid.c:111 apps/lnewusers.c:89
-#: apps/lpasswd.c:99 apps/luseradd.c:133 apps/luserdel.c:86
-#: apps/lusermod.c:147 samples/enum.c:64 samples/testuser.c:73
+#: apps/lchage.c:160
+#: apps/lchfn.c:109
+#: apps/lchsh.c:97
+#: apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79
+#: apps/lgroupmod.c:121
+#: apps/lid.c:111
+#: apps/lnewusers.c:89
+#: apps/lpasswd.c:99
+#: apps/luseradd.c:133
+#: apps/luserdel.c:86
+#: apps/lusermod.c:147
+#: samples/enum.c:64
+#: samples/testuser.c:73
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Ralat memulakan %s: %s.\n"
 
-#: apps/lchage.c:169 apps/lchfn.c:117 apps/lchsh.c:105 apps/lpasswd.c:147
-#: apps/luserdel.c:94 apps/lusermod.c:161
+#: apps/lchage.c:169
+#: apps/lchfn.c:117
+#: apps/lchsh.c:105
+#: apps/lpasswd.c:147
+#: apps/luserdel.c:94
+#: apps/lusermod.c:161
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Pengguna %s tidak wujud.\n"
@@ -155,7 +198,10 @@ msgstr "Amaran:\t%d\n"
 msgid "Inactive:\t%d\n"
 msgstr "Tidak aktif:\t%d\n"
 
-#: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
+#: apps/lchage.c:200
+#: apps/lchage.c:207
+#: apps/lchage.c:216
+#: apps/lchage.c:226
 msgid "Never"
 msgstr "Tidak sekali"
 
@@ -184,11 +230,14 @@ msgstr "Akaun Luput:\t%s\n"
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Gagal menukar maklumat usia untuk %s: %s\n"
 
-#: apps/lchfn.c:74 apps/lchsh.c:61
+#: apps/lchfn.c:74
+#: apps/lchsh.c:61
 msgid "[OPTION...] [user]"
 msgstr "[PILIHAN...] [pengguna]"
 
-#: apps/lchfn.c:91 apps/lchsh.c:79 apps/lid.c:98
+#: apps/lchfn.c:91
+#: apps/lchsh.c:79
+#: apps/lid.c:98
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Tiada pengguna dinyatakan, tiada nama untuk uid %d.\n"
@@ -258,16 +307,22 @@ msgstr "Shell berubah.\n"
 msgid "Shell not changed: %s\n"
 msgstr "Shell tidak berubah: %s\n"
 
-#: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:86
+#: apps/lgroupadd.c:66
+#: apps/lgroupdel.c:57
+#: apps/lgroupmod.c:86
 msgid "[OPTION...] group"
 msgstr "[OPTION...] kumpulan"
 
-#: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:97
+#: apps/lgroupadd.c:78
+#: apps/lgroupdel.c:69
+#: apps/lgroupmod.c:97
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Tiada nama kumpulan dinyatakan.\n"
 
-#: apps/lgroupadd.c:91 apps/lgroupmod.c:109 apps/lusermod.c:118
+#: apps/lgroupadd.c:91
+#: apps/lgroupmod.c:109
+#: apps/lusermod.c:118
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "ID kumpulan %s tidak sah\n"
@@ -277,7 +332,9 @@ msgstr "ID kumpulan %s tidak sah\n"
 msgid "Group creation failed: %s\n"
 msgstr "Gagal mencipta kumpulan: %s\n"
 
-#: apps/lgroupdel.c:87 apps/lgroupmod.c:134 apps/lpasswd.c:152
+#: apps/lgroupdel.c:87
+#: apps/lgroupmod.c:134
+#: apps/lpasswd.c:152
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Kumpulan %s tidak wujud.\n"
@@ -287,12 +344,14 @@ msgstr "Kumpulan %s tidak wujud.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Kumpulan %s tidak dapat dipadam: %s\n"
 
-#: apps/lgroupmod.c:127 apps/lusermod.c:154
+#: apps/lgroupmod.c:127
+#: apps/lusermod.c:154
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Kedua-dua L dan U dinyatakan.\n"
 
-#: apps/lgroupmod.c:141 apps/lgroupmod.c:150
+#: apps/lgroupmod.c:141
+#: apps/lgroupmod.c:150
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Gagal untuk menetapkan katalaluan bagi kumpulan %s: %s\n"
@@ -307,7 +366,8 @@ msgstr "Kumpulan %s tidak dapat dikunci: %s\n"
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Kumpulan %s tidak dapat dinyahkunci: %s\n"
 
-#: apps/lgroupmod.c:256 apps/lgroupmod.c:282
+#: apps/lgroupmod.c:256
+#: apps/lgroupmod.c:282
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Kumpulan %s tidak dapat diubahsuai: %s\n"
@@ -341,7 +401,9 @@ msgstr "Ralat membuka `%s': %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Ralat mencipta akaun untuk `%s': baris tidak diformat dengan betul.\n"
 
-#: apps/lnewusers.c:136 apps/luseradd.c:120 apps/lusermod.c:133
+#: apps/lnewusers.c:136
+#: apps/luseradd.c:120
+#: apps/lusermod.c:133
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "ID pengguna tidak sah %s\n"
@@ -398,7 +460,9 @@ msgstr "Katalaluan tidak sepadan, cuba lagi.\n"
 msgid "Password change canceled.\n"
 msgstr "Pertukaran katalaluan dibatalkan.\n"
 
-#: apps/lpasswd.c:189 apps/luseradd.c:297 apps/luseradd.c:307
+#: apps/lpasswd.c:189
+#: apps/luseradd.c:297
+#: apps/luseradd.c:307
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ralat menetapkan katalaluan untuk pengguna %s: %s.\n"
@@ -418,7 +482,8 @@ msgstr "Katalaluan ditukar.\n"
 msgid "Group %jd does not exist\n"
 msgstr "Kumpulan %jd tidak wujud\n"
 
-#: apps/luseradd.c:213 apps/luseradd.c:226
+#: apps/luseradd.c:213
+#: apps/luseradd.c:226
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Ralat mencipta kumpulan `%s': %s\n"
@@ -473,7 +538,8 @@ msgstr "%s tidak mempunyai direktori rumah.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Ralat membuang %s: %s.\n"
 
-#: apps/lusermod.c:170 apps/lusermod.c:183
+#: apps/lusermod.c:170
+#: apps/lusermod.c:183
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Gagal untuk menetapkan katalaluan bagi pengguna %s: %s\n"
@@ -541,28 +607,24 @@ msgid "generic error"
 msgstr "ralat umum"
 
 #: lib/error.c:48
-#, fuzzy
 msgid "not enough privileges"
-msgstr "Ruang tidak mencukupi"
+msgstr "tidak cukup kelebihan"
 
 #: lib/error.c:50
 msgid "access denied"
 msgstr "tiada kebenaran"
 
 #: lib/error.c:52
-#, fuzzy
 msgid "bad user/group name"
-msgstr "Nama pengguna atau kata laluan tidak sah."
+msgstr "nama pengguna/kumpulan buruk"
 
 #: lib/error.c:54
-#, fuzzy
 msgid "bad user/group id"
-msgstr "Nyatakan ID kumpulan secara manual"
+msgstr "id pengguna/kumpulan buruk"
 
 #: lib/error.c:56
-#, fuzzy
 msgid "user/group name in use"
-msgstr "pengguna kumpulan unama dalam"
+msgstr "nama pengguna/kumpulan sedang digunakan"
 
 #: lib/error.c:58
 #, fuzzy
@@ -647,7 +709,8 @@ msgstr "Ralat telah berlaku didalam modul %s."
 msgid "error reading terminal attributes"
 msgstr "ralat membaca daripada direktori %s: %s\n"
 
-#: lib/prompt.c:74 lib/prompt.c:86
+#: lib/prompt.c:74
+#: lib/prompt.c:86
 #, fuzzy
 msgid "error setting terminal attributes"
 msgstr "%s: ralat kritikal membaca tetapan simpanan sementara"
@@ -717,19 +780,35 @@ msgstr "tidak dapat menetapkan konteks keselamatan default kepada `%s': %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "tidak dapat menetapkan konteks keselamatan default kepada `%s': %s"
 
-#: modules/files.c:177 modules/files.c:552 modules/files.c:886
-#: modules/files.c:1159 modules/files.c:1309 modules/files.c:1536
-#: modules/files.c:1621 modules/files.c:1858 modules/files.c:2049
-#: modules/files.c:2066 modules/files.c:2157 modules/files.c:2176
-#: modules/files.c:2244 modules/files.c:2265 modules/files.c:2362
-#: modules/files.c:2381 modules/files.c:2440 modules/files.c:2459
-#: modules/files.c:2560 modules/files.c:2575
+#: modules/files.c:177
+#: modules/files.c:552
+#: modules/files.c:886
+#: modules/files.c:1159
+#: modules/files.c:1309
+#: modules/files.c:1536
+#: modules/files.c:1621
+#: modules/files.c:1858
+#: modules/files.c:2049
+#: modules/files.c:2066
+#: modules/files.c:2157
+#: modules/files.c:2176
+#: modules/files.c:2244
+#: modules/files.c:2265
+#: modules/files.c:2362
+#: modules/files.c:2381
+#: modules/files.c:2440
+#: modules/files.c:2459
+#: modules/files.c:2560
+#: modules/files.c:2575
 #, fuzzy, c-format
 msgid "couldn't open `%s': %s"
 msgstr "Tidak dapat membuka \"%s\": %s"
 
-#: modules/files.c:189 modules/files.c:218 modules/files.c:283
-#: modules/files.c:898 modules/files.c:1321
+#: modules/files.c:189
+#: modules/files.c:218
+#: modules/files.c:283
+#: modules/files.c:898
+#: modules/files.c:1321
 #, fuzzy, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "tak dapat stat %s"
@@ -749,33 +828,43 @@ msgstr "fail salinan `%s' wujud dan bukan fail biasa"
 msgid "backup file size mismatch"
 msgstr "Saiz fail stats tidak betul.\n"
 
-#: modules/files.c:928 modules/files.c:1330
+#: modules/files.c:928
+#: modules/files.c:1330
 #, fuzzy, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "Fail tidak dapat dibaca\n"
 
-#: modules/files.c:937 modules/files.c:944
+#: modules/files.c:937
+#: modules/files.c:944
 #, fuzzy
 msgid "entry already present in file"
 msgstr "ralat pada $FILE: ipaddr $IPADDR kelihatan di $ipseen"
 
-#: modules/files.c:951 modules/files.c:961 modules/files.c:972
-#: modules/files.c:1376 modules/files.c:1384 modules/files.c:1392
+#: modules/files.c:951
+#: modules/files.c:961
+#: modules/files.c:972
+#: modules/files.c:1376
+#: modules/files.c:1384
+#: modules/files.c:1392
 #, fuzzy, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "Tidak dapat menyambung ke %s:%u. %s."
 
-#: modules/files.c:1136 modules/files.c:1195
+#: modules/files.c:1136
+#: modules/files.c:1195
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "objek entiti tidak mempunyai ciri %s"
 
-#: modules/files.c:1892 modules/ldap.c:1617 modules/ldap.c:1889
+#: modules/files.c:1892
+#: modules/ldap.c:1617
+#: modules/ldap.c:1889
 #, fuzzy
 msgid "error encrypting password"
 msgstr "Ralat dengan Katalaluan"
 
-#: modules/files.c:2847 modules/files.c:2926
+#: modules/files.c:2847
+#: modules/files.c:2926
 msgid "not executing with superuser privileges"
 msgstr "tidak melaksanakan dengan kelebihan superuser"
 
@@ -787,22 +876,35 @@ msgstr "tidak fail"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"ralat menyambung ke pelayan kadm5 untuk servis `%s' dalam kawasan `%s': %s"
+msgstr "ralat menyambung ke pelayan kadm5 untuk servis `%s' dalam kawasan `%s': %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136
+#: modules/krb5.c:202
+#: modules/krb5.c:300
+#: modules/krb5.c:388
+#: modules/krb5.c:440
+#: modules/krb5.c:528
+#: modules/krb5.c:594
 #, fuzzy
 msgid "error initializing kerberos library"
 msgstr "ralat memulakan Cyrus SASL: %s"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143
+#: modules/krb5.c:223
+#: modules/krb5.c:332
+#: modules/krb5.c:340
+#: modules/krb5.c:408
+#: modules/krb5.c:461
+#: modules/krb5.c:549
+#: modules/krb5.c:611
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "ralat menghurai nama pengguna `%s' untuk kerberos"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213
+#: modules/krb5.c:399
+#: modules/krb5.c:451
+#: modules/krb5.c:539
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "struktur entiti tidak mempunyai %s atau ciri %s"
@@ -817,7 +919,8 @@ msgstr "struktur entiti tidak mempunyai %s atau ciri %s"
 msgid "entity was created with no %s or %s attributes"
 msgstr "entiti dicipta dengan tiada %s atau ciri %s"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:474
+#: modules/krb5.c:562
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "ralat membaca maklumat untuk `%s' dari kerberos"
@@ -882,8 +985,12 @@ msgstr "Tidak dapat kirim ke pelayan:\n"
 msgid "LDAP server appears to have no root DSE"
 msgstr "LDAP tidak"
 
-#: modules/ldap.c:627 modules/ldap.c:1394 modules/ldap.c:1532
-#: modules/ldap.c:1593 modules/ldap.c:1726 modules/ldap.c:1822
+#: modules/ldap.c:627
+#: modules/ldap.c:1394
+#: modules/ldap.c:1532
+#: modules/ldap.c:1593
+#: modules/ldap.c:1726
+#: modules/ldap.c:1822
 #, fuzzy
 msgid "error mapping name to LDAP distinguished name"
 msgstr "ralat unama LDAP"
@@ -913,7 +1020,8 @@ msgstr "kepada"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
-#: modules/ldap.c:1444 modules/ldap.c:1682
+#: modules/ldap.c:1444
+#: modules/ldap.c:1682
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
@@ -933,7 +1041,9 @@ msgstr "objek entiti tidak mempunyai ciri %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
 
-#: modules/ldap.c:1581 modules/ldap.c:1603 modules/ldap.c:1713
+#: modules/ldap.c:1581
+#: modules/ldap.c:1603
+#: modules/ldap.c:1713
 #: modules/ldap.c:1811
 #, fuzzy, c-format
 msgid "object has no %s attribute"
@@ -992,7 +1102,8 @@ msgstr "Cyrus SASL ralat mencipta pengguna: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL ralat membuang pengguna: %s"
 
-#: modules/sasldb.c:519 modules/sasldb.c:527
+#: modules/sasldb.c:519
+#: modules/sasldb.c:527
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "ralat memulakan Cyrus SASL: %s"
@@ -1070,3 +1181,4 @@ msgstr "Mendapatkan ciri-ciri pengguna default:\n"
 #: samples/testuser.c:97
 msgid "Copying user structure:\n"
 msgstr "Menyalin struktur pengguna:\n"
+
