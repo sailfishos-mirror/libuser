@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-08-03 16:02+0200\n"
+"PO-Revision-Date: 2005-09-21 15:18+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -82,9 +82,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Intern PAM-feil «%s».\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Ukjent brukerkontekst"
+msgstr "Ukjent bruker autentisert.\n"
 
 #: apps/apputil.c:626
 #, c-format
