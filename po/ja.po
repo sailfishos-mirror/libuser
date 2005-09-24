@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-06-26 22:19+0900\n"
+"PO-Revision-Date: 2005-09-24 19:45+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -86,9 +86,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "内部PAMエラー `%s'。\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "不明なユーザーコンテキスト"
+msgstr "不明なユーザー認証。\n"
 
 #: apps/apputil.c:626
 #, c-format
