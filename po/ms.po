@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-09-18 22:47+0800\n"
+"PO-Revision-Date: 2005-09-30 00:01+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -627,29 +627,24 @@ msgid "user/group name in use"
 msgstr "nama pengguna/kumpulan sedang digunakan"
 
 #: lib/error.c:58
-#, fuzzy
 msgid "user/group id in use"
-msgstr "pengguna kumpulan dalam"
+msgstr "id pengguna/kumpulan sedang digunakan"
 
 #: lib/error.c:60
-#, fuzzy
 msgid "error manipulating terminal attributes"
-msgstr "ralat"
+msgstr "ralat memanipulasi sifat terminal"
 
 #: lib/error.c:62
-#, fuzzy
 msgid "error opening file"
-msgstr "Ralat membuka fail kickstart %s: %s"
+msgstr "ralat membuka fail"
 
 #: lib/error.c:64
-#, fuzzy
 msgid "error locking file"
-msgstr "Ralat membuka fail"
+msgstr "ralat mengunci fail"
 
 #: lib/error.c:66
-#, fuzzy
 msgid "error statting file"
-msgstr "Ralat membuka fail"
+msgstr "ralat stat fail"
 
 #: lib/error.c:68
 #, fuzzy
