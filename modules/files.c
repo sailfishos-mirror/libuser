@@ -2770,7 +2770,7 @@ lu_files_uses_elevated_privileges(struct lu_module *module)
 	gboolean ret = FALSE;
 	/* Get the directory the files are in. */
 	key = g_strconcat(module->name, "/directory", NULL);
-	directory = lu_cfg_read_single(module->lu_context, key, SYSCONFDIR);
+	directory = lu_cfg_read_single(module->lu_context, key, "/etc");
 	g_free(key);
 	/* If we can't access the passwd file as a normal user, then the
 	 * answer is "yes". */
@@ -2798,7 +2798,7 @@ lu_shadow_uses_elevated_privileges(struct lu_module *module)
 	gboolean ret = FALSE;
 	/* Get the directory the files are in. */
 	key = g_strconcat(module->name, "/directory", NULL);
-	directory = lu_cfg_read_single(module->lu_context, key, SYSCONFDIR);
+	directory = lu_cfg_read_single(module->lu_context, key, "/etc");
 	g_free(key);
 	/* If we can't access the shadow file as a normal user, then the
 	 * answer is "yes". */
@@ -2910,7 +2910,6 @@ libuser_shadow_init(struct lu_context *context,
 	struct lu_module *ret = NULL;
 	struct stat st;
 	char *shadow_file;
-	char *key;
 	const char *dir;
 
 	g_return_val_if_fail(context != NULL, NULL);
@@ -2918,7 +2917,7 @@ libuser_shadow_init(struct lu_context *context,
 	/* Handle authenticating to the data source. */
 	if (geteuid() != 0) {
 		const char *val;
-		
+
 		/* Needed for the test suite, handy for debugging. */
 		val = lu_cfg_read_single(context, "shadow/nonroot", NULL);
 		if (val == NULL || strcmp (val, "yes") != 0) {
@@ -2930,10 +2929,8 @@ libuser_shadow_init(struct lu_context *context,
 	}
 
 	/* Get the name of the shadow file. */
-	key = g_strconcat("shadow", "/directory", NULL);
-	dir = lu_cfg_read_single(context, key, "/etc");
+	dir = lu_cfg_read_single(context, "shadow/directory", "/etc");
 	shadow_file = g_strconcat(dir, "/shadow", NULL);
-	g_free(key);
 
 	/* Make sure we're actually using shadow passwords on this system. */
 	if ((stat(shadow_file, &st) == -1) && (errno == ENOENT)) {

@@ -1,3 +1,15 @@
+2005-09-29  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/files.c (libuser_shadow_init): Avoid useless runtime
+	computation.
+
+	* modules/files.c (lu_files_uses_elevated_privileges): Hardcode "/etc"
+	as default, like other functions.
+	* Makefile.am (modules_libuser_files_la_CPPFLAGS)
+	(modules_libuser_shadow_la_CPPFLAGS): Don't define SYSCONFDIR.
+	(modules_libuser_files_la_CPPFLAGS): Define SYSCONFDIR directly.
+	(SYSCONFDIR): Remove definition.
+
 2005-09-14  Miloslav Trmac  <mitr@redhat.com>
 
 	* apps/apputil.c (lu_authenticate_unprivileged): Correctly handle

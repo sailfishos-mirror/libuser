@@ -12,7 +12,6 @@ CVSTAG = "libuser-$$(echo '$(VERSION)' | tr '.' '_')"
 AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
 PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
-SYSCONFDIR_CPPFLAGS = -DSYSCONFDIR='"$(sysconfdir)"'
 
 CLEANFILES = libuser.conf
 
@@ -83,6 +82,7 @@ noinst_HEADERS = python/admin.c python/ent.c python/misc.c
 
 
 ## Rules
+# FIXME:hardcode /etc?
 libuser.conf: Makefile libuser.conf.in
 	sed 's,@sysconfdir\@,$(sysconfdir),g' $(srcdir)/libuser.conf.in > $@
 
@@ -161,7 +161,7 @@ lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/internal.h \
 	lib/util.c
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
-	$(SYSCONFDIR_CPPFLAGS) -DMODULEDIR='"$(pkglibdir)"'
+	-DMODULEDIR='"$(pkglibdir)"' -DSYSCONFDIR='"$(sysconfdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:2:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
@@ -170,15 +170,13 @@ lib_libuserquota_la_SOURCES = lib/userquota.c
 lib_libuserquota_la_CPPFLAGS = $(GLIB_CFLAGS) -Ilib
 lib_libuserquota_la_LDFLAGS = -version-info 2:1:1
 
-modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE \
-	$(SYSCONFDIR_CPPFLAGS)
+modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_files_la_SOURCES = modules/files.c
 modules_libuser_files_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(SELINUX_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
-modules_libuser_shadow_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE \
-	$(SYSCONFDIR_CPPFLAGS)
+modules_libuser_shadow_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_shadow_la_SOURCES = modules/files.c
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version -export-dynamic \
 	$(GOBJECT_LIBS) $(SELINUX_LIBS)
