@@ -185,19 +185,15 @@ lu_common_sgroup_default(struct lu_module *module,
 	return lu_common_group_default(module, name, is_system, ent, error);
 }
 
-static const char *salt_initializer_des = "";
-static const char *salt_initializer_md5 = "$1$";
-static const char *salt_initializer_blowfish = "$2a$";
-
 static const char *
 lu_common_default_salt_specifier(struct lu_module *module)
 {
 	const struct {
 		const char *name, *initializer;
 	} salt_types[] = {
-		{"des", salt_initializer_des},
-		{"md5", salt_initializer_md5},
-		{"blowfish", salt_initializer_blowfish},
+		{ "des", "" },
+		{ "md5", "$1$" },
+		{ "blowfish", "$2a$" },
 	};
 	const char *salt_type = NULL;
 	size_t i;

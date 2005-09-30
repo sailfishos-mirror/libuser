@@ -1,3 +1,9 @@
+2005-09-30  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/default.-c (salt_initializer_des, salt_initializer_md5)
+	(salt_initializer_blowfish): Remove unnecessary variables, fold values
+	in lu_common_default_salt_specifier ().
+
 2005-09-29  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/files.c (libuser_shadow_init): Avoid useless runtime
