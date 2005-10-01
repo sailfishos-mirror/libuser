@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-07-18 12:55+0000\n"
+"PO-Revision-Date: 2005-10-01 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -82,9 +82,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Innvær PAM villa `%s'.\n"
 
 #: apps/apputil.c:622
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "óþekktur notandaöryggishamur"
+msgstr "óþekktur notandi auðkenndi sig.\n"
 
 #: apps/apputil.c:626
 #, c-format
