@@ -144,9 +144,8 @@ process_line(char *line, struct lu_string_cache *cache,
 	*value = NULL;
 
 	/* Skip initial whitespace. */
-	while (isspace(*line) && (*line != '\0')) {
+	while (isspace((unsigned char)*line) && (*line != '\0'))
 		line++;
-	}
 
 	/* If it's a comment, bail. */
 	if (*line == '#') {
@@ -173,7 +172,7 @@ process_line(char *line, struct lu_string_cache *cache,
 	p = strchr(line, '=');
 	if (p != NULL) {
 		/* Trim any trailing whitespace off the key name. */
-		while (p != line && isspace(p[-1]))
+		while (p != line && isspace((unsigned char)p[-1]))
 			p--;
 
 		/* Save the key. */
@@ -184,13 +183,12 @@ process_line(char *line, struct lu_string_cache *cache,
 		/* Skip over any whitespace after the equal sign. */
 		line = strchr(line, '=');
 		line++;
-		while (isspace(*line) && (*line != '\0')) {
+		while (isspace((unsigned char)*line) && (*line != '\0'))
 			line++;
-		}
 
 		/* Trim off any trailing whitespace. */
 		p = strchr(line, '\0');
-		while (p != line && isspace(p[-1]))
+		while (p != line && isspace((unsigned char)p[-1]))
 			p--;
 
 		/* Save the value. */
