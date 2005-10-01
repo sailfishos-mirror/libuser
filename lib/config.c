@@ -62,6 +62,69 @@ compare_key_string(gconstpointer xa, gconstpointer b)
 	return g_ascii_strcasecmp(a->key, b);
 }
 
+/* Open a file and read it to memory, appending a terminating '\0'.
+   Return data for g_free (), or NULL on error. */
+static char *
+read_file(const char *filename, struct lu_error **error)
+{
+	int fd;
+	struct stat st;
+	char *data, *dest;
+	size_t left;
+
+	/* Try to open the file. */
+	fd = open(filename, O_RDONLY);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open,
+			     _("could not open configuration file `%s': %s"),
+			     filename, strerror(errno));
+		goto err;
+	}
+	if (fstat(fd, &st) == -1) {
+		lu_error_new(error, lu_error_stat,
+			     _("could not stat configuration file `%s': %s"),
+			     filename, strerror(errno));
+		goto err_fd;
+	}
+	/* Read the file's contents in. */
+	left = st.st_size;
+	if (left != st.st_size) {
+		lu_error_new(error, lu_error_generic,
+			     _("configuration file `%s' is too large"),
+			     filename);
+		goto err_fd;
+	}
+	data = g_malloc(st.st_size + 1);
+	dest = data;
+	while (left != 0) {
+		ssize_t res;
+
+		res = read(fd, dest, left);
+		if (res == 0)
+			break;
+		if (res == -1) {
+			if (errno == EINTR)
+				continue;
+			lu_error_new(error, lu_error_read,
+				     _("could not read configuration file "
+				       "`%s': %s"), filename, strerror(errno));
+			goto err_data;
+		}
+		dest += res;
+		left -= res;
+	}
+	close(fd);
+	*dest = 0;
+	return data;
+
+err_data:
+	g_free(data);
+err_fd:
+	close(fd);
+err:
+	return NULL;
+}
+
 /* Process a line, and assuming it contains a value, return the key and value
  * it provides us.  If we encounter a section start, change the section. */
 static void
@@ -141,8 +204,6 @@ process_line(char *line, struct lu_string_cache *cache,
 gboolean
 lu_cfg_init(struct lu_context *context, struct lu_error **error)
 {
-	int fd;
-	struct stat st;
 	const char *filename = SYSCONFDIR "/libuser.conf";
 	struct config_config *config = NULL;
 	char *data, *line, *xstrtok_ptr, *section = NULL;
@@ -160,33 +221,12 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		}
 	}
 
-	/* Try to open the file. */
-	fd = open(filename, O_RDONLY);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("could not open configuration file `%s': %s"),
-			     filename, strerror(errno));
+	data = read_file(filename, error);
+	if (data == NULL)
 		goto err;
-	}
 
 	/* Create a new structure to save the data. */
 	config = g_malloc0(sizeof(struct config_config));
-	if (fstat(fd, &st) == -1) {
-		lu_error_new(error, lu_error_stat,
-			     _("could not stat configuration file `%s': %s"),
-			     filename, strerror(errno));
-		goto err_config;
-	}
-	/* Read the file's contents in. */
-	data = g_malloc0(st.st_size + 1);
-	if (read(fd, data, st.st_size) != st.st_size) {
-		lu_error_new(error, lu_error_read,
-			     _("could not read configuration file `%s': %s"),
-			     filename, strerror(errno));
-		goto err_data;
-	}
-	close(fd);
-
 	config->cache = lu_string_cache_new(FALSE);
 	config->sections = g_tree_new(compare_section_names);
 	context->config = config;
@@ -228,12 +268,6 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 
 	return TRUE;
 
-
- err_data:
-	g_free(data);
- err_config:
-	g_free(config);
-	close(fd);
  err:
 	return FALSE;
 }
