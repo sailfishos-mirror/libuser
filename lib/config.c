@@ -1,6 +1,6 @@
 /* Copyright (C) 2000-2002 Red Hat, Inc.
  *
- * This is free software; you can redistribute it and/or modify it under 
+ * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -10,7 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public 
+ * You should have received a copy of the GNU Library General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
@@ -34,8 +34,6 @@
 #define getenv(string) __secure_getenv(string)
 #endif
 
-/* We read the configuration file at startup only, so we need to keep a
- * copy of it around. */
 struct config_config {
 	struct lu_string_cache *cache;
 	GTree *sections; /* GList of "struct config_key" for each section */
@@ -109,17 +107,14 @@ process_line(char *line, struct lu_string_cache *cache,
 
 	/* If the line contains a value, split the key and the value, trim off
 	 * any additional whitespace, and return them. */
-	if (strchr(line, '=')) {
-		p = strchr(line, '=');
-
+	p = strchr(line, '=');
+	if (p != NULL) {
 		/* Trim any trailing whitespace off the key name. */
-		p--;
-		while (isspace(*p) && (p > line)) {
+		while (p != line && isspace(p[-1]))
 			p--;
-		}
 
 		/* Save the key. */
-		tmp = g_strndup(line, p - line + 1);
+		tmp = g_strndup(line, p - line);
 		*key = cache->cache(cache, tmp);
 		g_free(tmp);
 
@@ -131,14 +126,12 @@ process_line(char *line, struct lu_string_cache *cache,
 		}
 
 		/* Trim off any trailing whitespace. */
-		p = line + strlen(line);
-		p--;
-		while (isspace(*p) && (p > line)) {
+		p = strchr(line, '\0');
+		while (p != line && isspace(p[-1]))
 			p--;
-		}
 
 		/* Save the value. */
-		tmp = g_strndup(line, p - line + 1);
+		tmp = g_strndup(line, p - line);
 		*value = cache->cache(cache, tmp);
 		g_free(tmp);
 	}

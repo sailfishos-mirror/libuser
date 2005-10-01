@@ -1,3 +1,8 @@
+2005-10-01  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/config.c (process_line): Fix accesses before the allocated
+	array.  Add some microoptimizations.
+
 2005-09-30  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/default.-c (salt_initializer_des, salt_initializer_md5)
