@@ -1,5 +1,9 @@
 2005-10-01  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/config.c (process_line): Cast arguments of isspace () to unsigned
+	char.
+	* apps/apputil.c: Remove unnecessary #include <ctype.h>.
+
 	* lib/config.c (process_line): Split from lu_cfg_init ().
 	Handle very large files and EINTR from read ().  Fix FD leak on
 	fstat () failure.  Don't prezero the buffer.
