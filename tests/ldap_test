@@ -51,7 +51,7 @@ sed "s|@WORKDIR@|$workdir|g" < "$srcdir"/slapd.conf.in > "$workdir"/slapd.conf
 # FIXME: path
 /usr/sbin/slapd -h 'ldap://127.0.0.1:3890/ ldaps://127.0.0.1:6360/' \
     -f "$workdir"/slapd.conf &
-sleep 1 # Time for slapd to initialize
+sleep 3 # Time for slapd to initialize
 slapd_pid=$(cat "$workdir"/slapd.pid)
 trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
 ldapadd -h 127.0.0.1 -p 3890 -f "$srcdir/ldap_skel.ldif" -x \

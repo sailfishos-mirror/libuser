@@ -1,3 +1,7 @@
+2005-10-07  Miloslav Trmac  <mitr@redhat.com>
+
+	* tests/ldap_test: Allow more time for slapd initialization.
+
 2005-10-01  Miloslav Trmac  <mitr@redhat.com>
 
 	* lib/config.c (process_line): Cast arguments of isspace () to unsigned
