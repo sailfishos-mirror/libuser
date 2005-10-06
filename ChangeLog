@@ -1,5 +1,10 @@
 2005-10-07  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/config.c (destroy_section): Split from lu_cfg_done().
+	(gather_values): Removed function.
+	(lu_cfg_done): Don't build a temporary list of sections to free.
+	(lu_cfg_read_single): Don't unnecessarily cache the default value.
+
 	* config.c (key_add_cached): Split from lu_cfg_init ().
 	(key_defined, key_add, handle_login_defs_key, import_login_defs)
 	(handle_default_useradd_key, import_default_useradd): New functions.
