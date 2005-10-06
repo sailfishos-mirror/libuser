@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -29,16 +29,144 @@
 
 #define SEPARATORS "\t ,"
 
+static gboolean
+load_one_module(struct lu_context *ctx, const char *module_dir,
+		char *module_name, struct lu_error **error)
+{
+	char *tmp, *symbol, *module_file;
+	GModule *handle;
+	lu_module_init_t module_init;
+	struct lu_module *module;
+
+	LU_ERROR_CHECK(error);
+
+	/* Generate the file name. */
+	tmp = g_strconcat(PACKAGE "_", module_name, NULL);
+	module_file = g_module_build_path(module_dir, tmp);
+	g_free(tmp);
+
+	/* Open the module. */
+	handle = g_module_open(module_file, 0);
+	if (handle == NULL) {
+		/* If the open failed, we return an error. */
+		lu_error_new(error, lu_error_module_load, "%s",
+			     g_module_error());
+		goto err_module_file;
+	}
+
+	/* Determine the name of the module's initialization function and try
+	 * to find it. */
+	symbol = g_strconcat(PACKAGE "_", module_name, "_init", NULL);
+	g_module_symbol(handle, symbol, (gpointer)&module_init);
+
+	/* If we couldn't find the entry point, error out. */
+	if (module_init == NULL) {
+		lu_error_new(error, lu_error_module_sym,
+			     _("no initialization function %s in `%s'"),
+			     symbol, module_file);
+		g_free(symbol);
+		goto err_handle;
+	}
+	g_free(symbol);
+
+	/* Ask the module to allocate the a module structure and hand it back
+	 * to us. */
+	module = module_init(ctx, error);
+
+	if (module == NULL) {
+		g_assert(*error != NULL);
+		goto err_handle;
+	}
+	/* Check that the module interface version is right, too. */
+	if (module->version != LU_MODULE_VERSION) {
+		lu_error_new(error, lu_error_module_version,
+			     _("module version mismatch in `%s'"),
+			     module_file);
+		/* Don't call module->close, the pointer might not be there */
+		goto err_handle;
+	}
+
+	/* For safety's sake, make sure that all functions provided by the
+	 * module exist.  This can often mean a useless round trip, but it
+	 * simplifies the logic of the library greatly. */
+#define M(MEMBER)							\
+	do {								\
+		if (module->MEMBER == NULL) {				\
+			lu_error_new(error, lu_error_module_sym,	\
+				     _("module `%s' does not define `%s'"), \
+				     module_file, #MEMBER);		\
+			goto err_module;				\
+		}							\
+	} while (0)
+	M(uses_elevated_privileges);
+	M(user_lookup_name);
+	M(user_lookup_id);
+	M(user_default);
+	M(user_add_prep);
+	M(user_add);
+	M(user_mod);
+	M(user_del);
+	M(user_lock);
+	M(user_unlock);
+	M(user_unlock_nonempty);
+	M(user_is_locked);
+	M(user_setpass);
+	M(user_removepass);
+	M(users_enumerate);
+	M(users_enumerate_by_group);
+	M(users_enumerate_full);
+	M(users_enumerate_by_group_full);
+
+	M(group_lookup_name);
+	M(group_lookup_id);
+	M(group_default);
+	M(group_add_prep);
+	M(group_add);
+	M(group_mod);
+	M(group_del);
+	M(group_lock);
+	M(group_unlock);
+	M(group_unlock_nonempty);
+	M(group_is_locked);
+	M(group_setpass);
+	M(group_removepass);
+	M(groups_enumerate);
+	M(groups_enumerate_by_user);
+	M(groups_enumerate_full);
+	M(groups_enumerate_by_user_full);
+
+	M(close);
+#undef M
+
+	g_free(module_file);
+
+	/* Initialize the last two fields in the module structure and add it to
+	   the module tree. */
+	module->lu_context = ctx;
+	module->module_handle = handle;
+	module_name = ctx->scache->cache(ctx->scache, module_name);
+	g_tree_insert(ctx->modules, module_name, module);
+
+	return TRUE;
+
+err_module:
+	if (module->close != NULL)
+		module->close(module);
+err_handle:
+	g_module_close(handle);
+err_module_file:
+	g_free(module_file);
+	return FALSE;
+}
+
 gboolean
 lu_modules_load(struct lu_context *ctx, const char *module_list,
 	       	GValueArray **names, struct lu_error **error)
 {
-	char *q, *tmp, *symbol, *modlist, *module_file = NULL;
-	GModule *handle = NULL;
-	const char *module_dir = NULL;
+	char *q, *modlist;
+	const char *module_dir;
 	char *module_name;
-	lu_module_init_t module_init = NULL;
-	struct lu_module *module = NULL;
+	GValueArray *our_names;
 
 	LU_ERROR_CHECK(error);
 
@@ -47,10 +175,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	g_assert(names != NULL);
 
 	/* Build a GValueArray for the module names. */
-	if (*names != NULL) {
-		g_value_array_free(*names);
-	}
-	*names = g_value_array_new(0);
+	our_names = g_value_array_new(0);
 
 	/* Figure out where the modules would be. */
 	module_dir = lu_cfg_read_single(ctx, "defaults/moduledir", MODULEDIR);
@@ -61,164 +186,38 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	     module_name != NULL;
 	     module_name = strtok_r(NULL, SEPARATORS, &q)) {
 		GValue value;
-		module_name = ctx->scache->cache(ctx->scache, module_name);
+
 		/* Only load the module if it's not already loaded. */
 		if (g_tree_lookup(ctx->modules, module_name) == NULL) {
-			/* Generate the file name. */
-			tmp = g_strconcat(PACKAGE "_", module_name, NULL);
-			module_file = g_module_build_path(module_dir, tmp);
-			g_free(tmp);
-			tmp = module_file;
-			module_file = ctx->scache->cache(ctx->scache, tmp);
-			g_free(tmp);
-
-			/* Open the module. */
-			handle = g_module_open(module_file, 0);
-			if (handle == NULL) {
-				/* If the open failed, we return an error. */
-				lu_error_new(error, lu_error_module_load,
-					     "%s", g_module_error());
-				g_free(modlist);
-				return FALSE;
-			}
-
-			/* Determine the name of the module's initialization
-			 * function and try to find it. */
-			tmp = g_strconcat(PACKAGE "_", module_name, "_init",
-					  NULL);
-			symbol = ctx->scache->cache(ctx->scache, tmp);
-			g_free(tmp);
-			g_module_symbol(handle, symbol,
-					(gpointer)&module_init);
-
-			/* If we couldn't find the entry point, error out. */
-			if (module_init == NULL) {
-				lu_error_new(error, lu_error_module_sym,
-					     _("no initialization function %s "
-					       "in `%s'"),
-					     symbol, module_file);
-				g_module_close(handle);
-				g_free(modlist);
-				return FALSE;
-			}
-
-			/* Ask the module to allocate the a module structure
-			 * and hand it back to us. */
-			module = module_init(ctx, error);
-
-			if (module == NULL) {
-				g_module_close(handle);
-				g_assert(error != NULL);
-				g_assert(*error != NULL);
-				/* The module initializer sets the error, but
-				 * we need to ignore warnings. */
+			if (load_one_module(ctx, module_dir, module_name,
+					    error) == FALSE) {
+				/* The module initializer may report a warning,
+				   which is not fatal. */
 				if (lu_error_is_warning((*error)->code)) {
 					lu_error_free(error);
 					continue;
 				} else {
+					/* Modules loaded before this failure
+					   are kept loaded, but the list of
+					   used modules does not change. */
+					g_value_array_free(our_names);
 					g_free(modlist);
 					return FALSE;
 				}
-			} else {
-				/* Check that the module interface version
-				 * is right, too. */
-				if (module->version != LU_MODULE_VERSION) {
-					lu_error_new(error,
-						     lu_error_module_version,
-						     _("module version "
-						       "mismatch in `%s'"),
-						     module_file);
-					g_module_close(handle);
-					g_free(modlist);
-					return FALSE;
-				}
-
-				/* Initialize the last two fields in the
-				 * module structure and add it to the module
-				 * tree. */
-				module->lu_context = ctx;
-				module->module_handle = handle;
-				g_tree_insert(ctx->modules,
-					      module_name, module);
 			}
-
-			/* For safety's sake, make sure that all functions
-			 * provided by the module exist.  This can often mean
-			 * a useless round trip, but it simplifies the logic
-			 * of the library greatly. */
-			g_return_val_if_fail(module->uses_elevated_privileges != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_lookup_name != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_lookup_id != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_default != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_add_prep != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_add != NULL, FALSE);
-			g_return_val_if_fail(module->user_mod != NULL, FALSE);
-			g_return_val_if_fail(module->user_del != NULL, FALSE);
-			g_return_val_if_fail(module->user_lock != NULL, FALSE);
-			g_return_val_if_fail(module->user_unlock != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_unlock_nonempty
-					     != NULL, FALSE);
-			g_return_val_if_fail(module->user_is_locked != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_setpass != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->user_removepass != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->users_enumerate != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->users_enumerate_by_group != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->users_enumerate_full != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->users_enumerate_by_group_full != NULL,
-					     FALSE);
-
-			g_return_val_if_fail(module->group_lookup_name != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->group_lookup_id != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->group_default != NULL, FALSE);
-			g_return_val_if_fail(module->group_add_prep != NULL, FALSE);
-			g_return_val_if_fail(module->group_add != NULL, FALSE);
-			g_return_val_if_fail(module->group_mod != NULL, FALSE);
-			g_return_val_if_fail(module->group_del != NULL, FALSE);
-			g_return_val_if_fail(module->group_lock != NULL, FALSE);
-			g_return_val_if_fail(module->group_unlock != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->group_unlock_nonempty
-					     != NULL, FALSE);
-			g_return_val_if_fail(module->group_is_locked != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->group_setpass != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->group_removepass != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->groups_enumerate != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->groups_enumerate_by_user != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->groups_enumerate_full != NULL,
-					     FALSE);
-			g_return_val_if_fail(module->groups_enumerate_by_user_full != NULL,
-					     FALSE);
-
-			g_return_val_if_fail(module->close != NULL, FALSE);
 		}
 
 		/* Record that we loaded the module. */
 		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);	
-		g_value_set_string(&value, module_name);	
-		g_value_array_append(*names, &value);
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, module_name);
+		g_value_array_append(our_names, &value);
 		g_value_unset(&value);
 	}
 	g_free(modlist);
+	if (*names != NULL)
+		g_value_array_free(*names);
+	*names = our_names;
 	return TRUE;
 }
 
@@ -227,20 +226,19 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 int
 lu_module_unload(gpointer key, gpointer value, gpointer data)
 {
-	struct lu_module *module;
-	GModule *handle = NULL;
-
 	(void)key;
 	(void)data;
 	/* Give the module a chance to clean itself up. */
 	if (value != NULL) {
+		struct lu_module *module;
+		GModule *handle;
+
 		module = (struct lu_module *) value;
 		handle = module->module_handle;
 		module->close(module);
-	}
-	/* Unload the module. */
-	if (handle != NULL) {
-		g_module_close(handle);
+		/* Unload the module. */
+		if (handle != NULL)
+			g_module_close(handle);
 	}
 	return 0;
 }

@@ -1,5 +1,13 @@
 2005-10-07  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/modules.c (load_one_module): Split from lu_modules_load.
+	Fix leaks.
+	(lu_modules_load): Keep the *modules unchanged on failure.
+	(lu_module_unload): Simplify.
+	* lib/user.c (lu_start): Allocate ctx->scache before lu_cfg_init ().
+	Fix leaks.
+	(lu_end): Remove unnecessary NULL checks.
+
 	* tests/ldap_test: Allow more time for slapd initialization.
 
 2005-10-01  Miloslav Trmac  <mitr@redhat.com>

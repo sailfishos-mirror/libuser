@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -92,15 +92,12 @@ lu_start(const char *auth_name, enum lu_entity_type auth_type,
 	/* Allocate space for the context. */
 	ctx = g_malloc0(sizeof(struct lu_context));
 
-	/* Create a configuration structure. */
-	if (lu_cfg_init(ctx, error) == FALSE) {
-		/* If there's an error, lu_cfg_init() sets it. */
-		g_free(ctx);
-		return NULL;
-	}
-
-	/* Initialize the rest of the fields. */
 	ctx->scache = lu_string_cache_new(TRUE);
+
+	/* Create a configuration structure. */
+	if (lu_cfg_init(ctx, error) == FALSE)
+		/* If there's an error, lu_cfg_init() sets it. */
+		goto err_scache;
 
 	ctx->auth_name = ctx->scache->cache(ctx->scache, auth_name);
 	ctx->auth_type = auth_type;
@@ -124,19 +121,23 @@ lu_start(const char *auth_name, enum lu_entity_type auth_type,
 	}
 
 	/* Load the modules. */
-	if (!lu_modules_load(ctx, modules, &ctx->module_names, error)) {
-		/* lu_module_load sets errors */
-		g_free(ctx);
-		return NULL;
-	}
+	if (!lu_modules_load(ctx, modules, &ctx->module_names, error))
+		goto err_modules; /* lu_module_load sets errors */
 	if (!lu_modules_load(ctx, create_modules, &ctx->create_module_names,
-			     error)) {
-		/* lu_module_load sets errors */
-		g_free(ctx);
-		return NULL;
-	}
+			     error))
+		goto err_module_names; /* lu_module_load sets errors */
 
 	return ctx;
+
+err_module_names:
+	g_value_array_free(ctx->module_names);
+	g_tree_foreach(ctx->modules, lu_module_unload, NULL);
+err_modules:
+	g_tree_destroy(ctx->modules);
+err_scache:
+	ctx->scache->free(ctx->scache);
+	g_free(ctx);
+	return NULL;
 }
 
 void
@@ -144,19 +145,15 @@ lu_end(struct lu_context *context)
 {
 	g_assert(context != NULL);
 
-	if (context->modules != NULL) {
-		g_tree_foreach(context->modules, lu_module_unload, NULL);
-		g_tree_destroy(context->modules);
-	}
+	g_tree_foreach(context->modules, lu_module_unload, NULL);
+	g_tree_destroy(context->modules);
 
 	g_value_array_free(context->create_module_names);
 	g_value_array_free(context->module_names);
 
 	lu_cfg_done(context);
 
-	if (context->scache != NULL) {
-		context->scache->free(context->scache);
-	}
+	context->scache->free(context->scache);
 
 	memset(context, 0, sizeof(struct lu_context));
 
