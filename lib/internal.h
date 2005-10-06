@@ -24,6 +24,11 @@
 #define internal_h
 
 #include <glib.h>
+#include <glib-object.h>
+
+struct lu_ent;
+struct lu_error;
+struct lu_context;
 
 /* Configuration initialization and shutdown. */
 gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error)
@@ -42,5 +47,8 @@ int lu_module_unload(gpointer key, gpointer value, gpointer data)
 
 gint lu_strcasecmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
 gint lu_strcmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
+
+/* Only for compatibility with shadow. */
+time_t lu_get_date(const char *, const time_t *) G_GNUC_INTERNAL;
 
 #endif

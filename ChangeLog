@@ -1,5 +1,11 @@
 2005-10-07  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in (YACC): New check.
+	* Makefile.am (lib_libuser_la_SOURCES): Add lib/getdate.y.
+	* lib/getdate.y: New file, copied from shadow and made reentrant.
+	* lib/internal.h: Declare lu_get_date ().  Remove dependencies on other
+	headers.
+
 	* lib/modules.c (load_one_module): Split from lu_modules_load.
 	Fix leaks.
 	(lu_modules_load): Keep the *modules unchanged on failure.
