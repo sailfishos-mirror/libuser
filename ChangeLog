@@ -1,5 +1,10 @@
 2005-10-07  Miloslav Trmac  <mitr@redhat.com>
 
+	* config.c (key_add_cached): Split from lu_cfg_init ().
+	(key_defined, key_add, handle_login_defs_key, import_login_defs)
+	(handle_default_useradd_key, import_default_useradd): New functions.
+	(lu_cfg_init): Handle import/login_defs and import/default_useradd.
+
 	* configure.in (YACC): New check.
 	* Makefile.am (lib_libuser_la_SOURCES): Add lib/getdate.y.
 	* lib/getdate.y: New file, copied from shadow and made reentrant.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2005 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -24,6 +24,9 @@
 #include <ctype.h>
 #include <fcntl.h>
 #include <glib.h>
+#include <grp.h>
+#include <inttypes.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -60,6 +63,41 @@ compare_key_string(gconstpointer xa, gconstpointer b)
 
 	a = xa;
 	return g_ascii_strcasecmp(a->key, b);
+}
+
+/* Return TRUE if section/key is defined. */
+static gboolean
+key_defined(struct config_config *config, const char *section, const char *key)
+{
+	GList *sect;
+
+	/* NULL (empty list) if not found */
+	sect = g_tree_lookup(config->sections, section);
+	return g_list_find_custom(sect, key, compare_key_string) != NULL;
+}
+
+/* Add value to section/key (all in config->cache). */
+static void
+key_add_cached(struct config_config *config, char *section, char *key,
+	       char *value)
+{
+	GList *sect, *k;
+	struct config_key *ck;
+
+	/* NULL (empty list) if not found */
+	sect = g_tree_lookup(config->sections, section);
+	k = g_list_find_custom(sect, key, compare_key_string);
+	if (k != NULL)
+		ck = k->data;
+	else {
+		ck = g_malloc(sizeof (*ck));
+		ck->key = key;
+		ck->values = NULL;
+		sect = g_list_append(sect, ck);
+		g_tree_insert(config->sections, section, sect);
+	}
+	if (g_list_index(ck->values, value) == -1)
+		ck->values = g_list_append(ck->values, value);
 }
 
 /* Open a file and read it to memory, appending a terminating '\0'.
@@ -198,6 +236,14 @@ process_line(char *line, struct lu_string_cache *cache,
 	}
 }
 
+/* Forward declarations */
+static gboolean import_login_defs(struct config_config *config,
+				  const char *filename,
+				  struct lu_error **error);
+static gboolean import_default_useradd(struct config_config *config,
+				       const char *filename,
+				       struct lu_error **error);
+
 /* Initialize the configuration structure. */
 gboolean
 lu_cfg_init(struct lu_context *context, struct lu_error **error)
@@ -236,34 +282,22 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 		/* See what this line contains. */
 		process_line(line, config->cache, &section, &key, &value);
 
-		/* If we have a valid line, */
 		if (section && key && value &&
-		    strlen(section) && strlen(key)) {
-			GList *sect, *k;
-			struct config_key *ck;
-
-			/* NULL (empty list) if not found */
-			sect = g_tree_lookup(config->sections, section);
-			k = g_list_find_custom(sect, key,
-					       compare_key_string);
-			if (k != NULL)
-				ck = k->data;
-			else {
-				ck = g_malloc(sizeof (*ck));
-				ck->key = key;
-				ck->values = NULL;
-				sect = g_list_append(sect, ck);
-				g_tree_insert(config->sections, section, sect);
-			}
-			/* add the value to the list if it's not
-			 * already in the list. */
-			if (g_list_index(ck->values, value) == -1)
-				ck->values = g_list_append(ck->values, value);
-		}
-
+		    strlen(section) && strlen(key))
+			key_add_cached(config, section, key, value);
 	}
 	g_free(data);
 
+	filename = lu_cfg_read_single(context, "import/login_defs", NULL);
+	if (filename != NULL) {
+		if (import_login_defs(config, filename, error) == FALSE)
+			goto err;
+	}
+	filename = lu_cfg_read_single(context, "import/default_useradd", NULL);
+	if (filename != NULL) {
+		if (import_default_useradd(config, filename, error) == FALSE)
+			goto err;
+	}
 	return TRUE;
 
  err:
@@ -293,6 +327,7 @@ lu_cfg_done(struct lu_context *context)
 	config = (struct config_config *) context->config;
 
 	sections = NULL;
+	/* FIXME: just use g_tree_init_full with a destructor */
 	g_tree_foreach(config->sections, gather_values, &sections);
 	g_tree_destroy(config->sections);
 	for (sect = sections; sect != NULL; sect = sect->next) {
@@ -300,7 +335,7 @@ lu_cfg_done(struct lu_context *context)
 
 		for (key = sect->data; key != NULL; key = key->next) {
 			struct config_key *ck;
-			
+
 			ck = key->data;
 			g_list_free(ck->values);
 			g_free(ck);
@@ -347,7 +382,7 @@ lu_cfg_read(struct lu_context *context, const char *key,
 		ck = k->data;
 		ret = g_list_copy(ck->values);
 	}
-	
+
  end:
 	/* If we still don't have data, return the default answer. */
 	if (ret == NULL) {
@@ -398,6 +433,7 @@ lu_cfg_read_single(struct lu_context *context, const char *key,
 	g_assert(context != NULL);
 	g_assert(context->config != NULL);
 
+	/* FIXME: only if it has to be used */
 	ret = context->scache->cache(context->scache, default_value);
 
 	/* Read the whole list. */
@@ -409,4 +445,237 @@ lu_cfg_read_single(struct lu_context *context, const char *key,
 	}
 
 	return ret;
+}
+
+ /* shadow config file compatibility */
+
+/* Add value to section/key. */
+static void
+key_add(struct config_config *config, const char *section, const char *key,
+	const char *value)
+{
+	struct lu_string_cache *cache;
+
+	cache = config->cache;
+	key_add_cached(config, cache->cache(cache, section),
+		       cache->cache(cache, key), cache->cache(cache, value));
+}
+
+#define ATTR_DEFINED(CONFIG, SECTION, KEY)				\
+(key_defined(CONFIG, SECTION, KEY) || key_defined(CONFIG, SECTION, #KEY))
+
+/* Convert a single /etc/login.defs key to config */
+static void
+handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
+{
+	static const struct conversion {
+		gboolean number;
+		const char *shadow, *section, *key, *key2;
+	} conv[] = {
+		{ TRUE, "GID_MIN", "groupdefaults", LU_GIDNUMBER,
+		  G_STRINGIFY_ARG(LU_GIDNUMBER) },
+		{ FALSE, "MAIL_DIR", "defaults", "mailspooldir", NULL },
+		{ TRUE, "PASS_MAX_DAYS", "userdefaults", LU_SHADOWMAX,
+		  G_STRINGIFY_ARG(LU_SHADOWMAX) },
+		{ TRUE, "PASS_MIN_DAYS", "userdefaults", LU_SHADOWMIN,
+		  G_STRINGIFY_ARG(LU_SHADOWMIN) },
+		{ TRUE, "PASS_WARN_AGE", "userdefaults", LU_SHADOWWARNING,
+		  G_STRINGIFY_ARG(LU_SHADOWMIN) },
+		{ TRUE, "UID_MIN", "userdefaults", LU_UIDNUMBER,
+		  G_STRINGIFY_ARG(LU_UIDNUMBER) },
+	};
+
+	const char *key, *value;
+	struct config_config *config;
+	size_t i;
+
+	value = xvalue;
+	key = xkey;
+	config = xconfig;
+	/* This is the only case that requires value conversion */
+	if (strcmp (key, "MD5_CRYPT_ENAB") == 0) {
+		if (!key_defined(config, "defaults", "crypt_style"))
+			key_add(config, "defaults", "crypt_style",
+				g_ascii_strcasecmp(value, "yes") == 0 ? "md5"
+				: "des");
+		return;
+	}
+	for (i = 0; i < G_N_ELEMENTS(conv); i++) {
+		if (strcmp (key, conv->shadow) != 0)
+			continue;
+		/* FIXME */
+		if (!key_defined(config, conv->section, conv->key)
+		    && (conv->key2 == NULL
+			|| !key_defined(config, conv->section, conv->key2))) {
+			/* We need roughly 0.3 characters per bit,
+			   this just is an obvious upper bound. */
+			char buf[sizeof(intmax_t) * CHAR_BIT + 1];
+
+			if (conv->number != 0) {
+				intmax_t num;
+				char *end;
+
+				errno = 0;
+				num = strtoimax(value, &end, 0);
+				if (errno != 0 || *end != 0 || end == value)
+					break; /* Ignore this invalid value */
+				snprintf(buf, sizeof(buf), "%jd", num);
+				value = buf;
+			}
+			key_add(config, conv->section, conv->key, value);
+		}
+		break;
+	}
+	/* Unimplemented: CREATE_HOME, GID_MAX, MAIL_FILE, SYSLOG_SG_ENAB,
+	   UID_MAX, UMASK, USERDEL_CMD, USERGROUPS_ENAB */
+}
+
+/* Import data from /etc/login.defs if libuser.conf doesn't specify the
+   values. */
+static gboolean
+import_login_defs(struct config_config *config, const char *filename,
+		  struct lu_error **error)
+{
+	GHashTable *hash;
+	char *data, *line, *xstrtok_ptr;
+
+	data = read_file(filename, error);
+	if (data == NULL)
+		goto err;
+
+	hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	for (line = strtok_r(data, "\n", &xstrtok_ptr); line != NULL;
+	     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
+		char *p, *key, *value;
+
+		while (*line == ' ' || *line == '\t')
+			line++;
+		if (*line == 0 || *line == '#')
+			continue;
+		p = strpbrk(line, " \t");
+		if (p == NULL)
+			continue;
+		key = g_strndup(line, p - line);
+		for (line = p; *line == ' ' || *line == '\t' || *line == '"';
+		     line++)
+			;
+		/* Note that shadow doesn't require that the quotes are either
+		   both present or both absent. */
+		p = strchr(line, '"');
+		if (p == NULL) {
+			for (p = strchr(line, '\0');
+			     p != line && (p[-1] == ' ' || p[-1] == '\t'); p--)
+				;
+		}
+		value = g_strndup(line, p - line);
+		/* May replace an older value if there are multiple
+		   definitions; that's what shadow does. */
+		g_hash_table_insert(hash, key, value);
+	}
+	g_free(data);
+	g_hash_table_foreach(hash, handle_login_defs_key, config);
+	g_hash_table_destroy(hash);
+
+	return TRUE;
+
+err:
+	return FALSE;
+}
+
+/* Convert a single /etc/default/useradd to config */
+static void
+handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
+{
+	const char *key, *value;
+	struct config_config *config;
+
+	value = xvalue;
+	key = xkey;
+	config = xconfig;
+	if (strcmp(key, "EXPIRE") == 0) {
+		if (!ATTR_DEFINED(config, "userdefaults", LU_SHADOWEXPIRE)) {
+			int day;
+			char buf[sizeof (day) * CHAR_BIT + 1];
+
+			if (*value == 0)
+				day = -1;
+			else {
+				time_t t;
+
+				t = lu_get_date(value, NULL);
+				if (t == -1)
+					day = -1;
+				else
+					day = (t + (24 * 3600) / 2)
+						/ (24 * 3600);
+			}
+			snprintf(buf, sizeof(buf), "%jd", (intmax_t)day);
+			key_add(config, "userdefaults", LU_SHADOWEXPIRE, buf);
+		}
+	} else if (strcmp(key, "GROUP") == 0) {
+		if (!ATTR_DEFINED(config, "userdefaults", LU_GIDNUMBER)) {
+			char buf[LINE_MAX * 4];
+			intmax_t val;
+			char *p;
+
+			errno = 0;
+			val = strtoimax(value, &p, 10);
+			if (errno != 0 || *p != 0 || p == value
+			    || (gid_t)val == val) {
+				struct group grp, *g;
+
+				getgrnam_r(value, &grp, buf, sizeof(buf), &g);
+				if (g != NULL)
+					value = g->gr_name;
+				/* else ignore the entry */
+			}
+			key_add(config, "userdefaults", LU_GIDNUMBER, value);
+		}
+	} else if (strcmp(key, "INACTIVE") == 0) {
+		if (!ATTR_DEFINED(config, "userdefaults", LU_SHADOWINACTIVE))
+			key_add(config, "userdefaults", LU_SHADOWINACTIVE,
+				value);
+	} else if (strcmp(key, "SHELL") == 0) {
+		if (!ATTR_DEFINED(config, "userdefaults", LU_LOGINSHELL))
+			key_add(config, "userdefaults", LU_LOGINSHELL, value);
+	} else if (strcmp(key, "SKEL") == 0) {
+		if (!key_defined(config, "defaults", "skeleton"))
+			key_add(config, "defaults", "skeleton", value);
+	}
+	/* Unimplemented: HOME */
+}
+
+static gboolean
+import_default_useradd(struct config_config *config, const char *filename,
+		       struct lu_error **error)
+{
+  	GHashTable *hash;
+	char *data, *line, *xstrtok_ptr;
+
+	data = read_file(filename, error);
+	if (data == NULL)
+		goto err;
+
+	hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	for (line = strtok_r(data, "\n", &xstrtok_ptr); line != NULL;
+	     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
+		char *p, *key, *value;
+
+		p = strchr(line, '=');
+		if (p == NULL)
+			continue;
+		key = g_strndup(line, p - line);
+		value = g_strdup(p + 1);
+		/* May replace an older value if there are multiple
+		   definitions; that's what shadow does. */
+		g_hash_table_insert(hash, key, value);
+	}
+	g_free(data);
+	g_hash_table_foreach(hash, handle_default_useradd_key, config);
+	g_hash_table_destroy(hash);
+
+	return TRUE;
+
+err:
+	return FALSE;
 }
