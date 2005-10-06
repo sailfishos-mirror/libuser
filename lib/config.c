@@ -304,13 +304,23 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	return FALSE;
 }
 
+/* Deallocate xsection */
 static gboolean
-gather_values(gpointer key, gpointer value, gpointer xdata)
+destroy_section (gpointer xkey, gpointer xsection, gpointer data)
 {
-	GList **data;
+	GList *section, *key;
 
-	data = xdata;
-	*data = g_list_append(*data, value);
+	(void)xkey;
+	(void)data;
+	section = xsection;
+	for (key = section; key != NULL; key = key->next) {
+		struct config_key *ck;
+
+		ck = key->data;
+		g_list_free(ck->values);
+		g_free(ck);
+	}
+	g_list_free(section);
 	return FALSE;
 }
 
@@ -319,32 +329,15 @@ void
 lu_cfg_done(struct lu_context *context)
 {
 	struct config_config *config = NULL;
-	GList *sections, *sect;
 
 	g_assert(context != NULL);
 	g_assert(context->config != NULL);
 
-	config = (struct config_config *) context->config;
+	config = context->config;
 
-	sections = NULL;
-	/* FIXME: just use g_tree_init_full with a destructor */
-	g_tree_foreach(config->sections, gather_values, &sections);
+	g_tree_foreach(config->sections, destroy_section, NULL);
+	/* The values in the tree now point to deallocated memory. */
 	g_tree_destroy(config->sections);
-	for (sect = sections; sect != NULL; sect = sect->next) {
-		GList *key;
-
-		for (key = sect->data; key != NULL; key = key->next) {
-			struct config_key *ck;
-
-			ck = key->data;
-			g_list_free(ck->values);
-			g_free(ck);
-		}
-		g_list_free(sect->data);
-	}
-	g_list_free(sections);
-	/* Free the cache, the file contents, and finally the config structure
-	 * itself. */
 	config->cache->free(config->cache);
 	g_free(config);
 	context->config = NULL;
@@ -427,14 +420,11 @@ const char *
 lu_cfg_read_single(struct lu_context *context, const char *key,
 		   const char *default_value)
 {
-	GList *answers = NULL;
-	const char *ret = NULL;
+	GList *answers;
+	const char *ret;
 
 	g_assert(context != NULL);
 	g_assert(context->config != NULL);
-
-	/* FIXME: only if it has to be used */
-	ret = context->scache->cache(context->scache, default_value);
 
 	/* Read the whole list. */
 	answers = lu_cfg_read(context, key, NULL);
@@ -442,7 +432,8 @@ lu_cfg_read_single(struct lu_context *context, const char *key,
 		/* Save the first value, and free the list. */
 		ret = context->scache->cache(context->scache, answers->data);
 		g_list_free(answers);
-	}
+	} else
+		ret = context->scache->cache(context->scache, default_value);
 
 	return ret;
 }
@@ -503,7 +494,6 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 	for (i = 0; i < G_N_ELEMENTS(conv); i++) {
 		if (strcmp (key, conv->shadow) != 0)
 			continue;
-		/* FIXME */
 		if (!key_defined(config, conv->section, conv->key)
 		    && (conv->key2 == NULL
 			|| !key_defined(config, conv->section, conv->key2))) {
