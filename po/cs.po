@@ -10,87 +10,87 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-09-14 23:05+0200\n"
+"POT-Creation-Date: 2005-10-07 00:06+0200\n"
+"PO-Revision-Date: 2005-10-07 00:54+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:129 apps/apputil.c:197 apps/apputil.c:231 apps/apputil.c:260
+#: apps/apputil.c:128 apps/apputil.c:196 apps/apputil.c:230 apps/apputil.c:259
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Chyba při čtení '%s': %s"
 
-#: apps/apputil.c:137 apps/apputil.c:207
+#: apps/apputil.c:136 apps/apputil.c:206
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Chyba při vytváření `%s': %s"
 
-#: apps/apputil.c:145 apps/apputil.c:214 apps/apputil.c:307
+#: apps/apputil.c:144 apps/apputil.c:213 apps/apputil.c:306
 #: modules/files.c:230
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Chyba při změně vlastníka `%s': %s"
 
-#: apps/apputil.c:244 apps/apputil.c:277 apps/apputil.c:293
+#: apps/apputil.c:243 apps/apputil.c:276 apps/apputil.c:292
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Chyba při zápisu `%s': %s"
 
-#: apps/apputil.c:346 apps/apputil.c:378 apps/apputil.c:395
+#: apps/apputil.c:345 apps/apputil.c:377 apps/apputil.c:394
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Chyba při odstraňování `%s': %s"
 
-#: apps/apputil.c:546 apps/apputil.c:550
+#: apps/apputil.c:545 apps/apputil.c:549
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Chyba při zahazování práv.\n"
 
-#: apps/apputil.c:559
+#: apps/apputil.c:558
 #, c-format
 msgid "Internal error.\n"
 msgstr "Interní chyba.\n"
 
-#: apps/apputil.c:580
+#: apps/apputil.c:579
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s není autorizován měnit informace finger o %s\n"
 
-#: apps/apputil.c:582
+#: apps/apputil.c:581
 msgid "Unknown user context"
 msgstr "Neznámý kontext uživatele"
 
-#: apps/apputil.c:590
+#: apps/apputil.c:589
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Nemohu nastavit implicitní kontext pro /etc/passwd\n"
 
-#: apps/apputil.c:599
+#: apps/apputil.c:598
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Chyba při inicializaci PAM.\n"
 
-#: apps/apputil.c:609 apps/apputil.c:636
+#: apps/apputil.c:608 apps/apputil.c:635
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Chyba při autentizaci %s.\n"
 
-#: apps/apputil.c:617
+#: apps/apputil.c:616
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Interní chyba PAM `%s'.\n"
 
-#: apps/apputil.c:622
+#: apps/apputil.c:621
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Autentizován neznámý uživatel.\n"
 
-#: apps/apputil.c:626
+#: apps/apputil.c:625
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Uživatel se neshoduje.\n"
@@ -515,17 +515,22 @@ msgstr "Nový domácí adresář pro %s nebyl vytvořen.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Chyba při přesunu %s do %s: %s.\n"
 
-#: lib/config.c:174
+#: lib/config.c:117
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "nemohu otevřít soubor s nastavením `%s': %s"
 
-#: lib/config.c:183
+#: lib/config.c:123
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "nemohu stat soubor s nastavením `%s': %s"
 
-#: lib/config.c:191
+#: lib/config.c:131
+#, c-format
+msgid "configuration file `%s' is too large"
+msgstr "soubor s nastavením `%s' je příliš velký"
+
+#: lib/config.c:147
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "nemohu číst soubor s nastavením `%s': %s"
@@ -618,15 +623,20 @@ msgstr "po odemčení by pole hesla bylo prázdné"
 msgid "unknown error"
 msgstr "neznámá chyba"
 
-#: lib/modules.c:97
+#: lib/modules.c:65
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "chybí inicializační funkce %s v '%s'"
 
-#: lib/modules.c:128
+#: lib/modules.c:83
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "nesouhlasí verze modulu v '%s'"
+
+#: lib/modules.c:96
+#, c-format
+msgid "module `%s' does not define `%s'"
+msgstr "modul `%s' nedefinuje `%s'"
 
 #: lib/prompt.c:67
 msgid "error reading terminal attributes"
@@ -640,36 +650,36 @@ msgstr "chyba při nastavování atributů terminálu"
 msgid "error reading from terminal"
 msgstr "chyba při čtení z terminálu"
 
-#: lib/user.c:196
+#: lib/user.c:193
 msgid "name is not set"
 msgstr "jméno není nastaveno"
 
-#: lib/user.c:201
+#: lib/user.c:198
 msgid "name is too short"
 msgstr "jméno je příliš krátké"
 
-#: lib/user.c:206
+#: lib/user.c:203
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr "jméno je příliš dlouhé (%zu > %d)"
 
-#: lib/user.c:213
+#: lib/user.c:210
 msgid "name contains non-ASCII characters"
 msgstr "jméno obsahuje ne-ASCII znaky"
 
-#: lib/user.c:220
+#: lib/user.c:217
 msgid "name contains control characters"
 msgstr "jméno obsahuje řídící znaky"
 
-#: lib/user.c:227
+#: lib/user.c:224
 msgid "name contains whitespace"
 msgstr "jméno obsahuje mezery"
 
-#: lib/user.c:239
+#: lib/user.c:236
 msgid "name starts with a hyphen"
 msgstr "jméno začíná pomlčkou"
 
-#: lib/user.c:250
+#: lib/user.c:247
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "jméno obsahuje neplatný znak `%c'"
@@ -749,11 +759,11 @@ msgstr "objekt entita nemá atribut %s"
 msgid "error encrypting password"
 msgstr "chyba při šifrování hesla"
 
-#: modules/files.c:2847 modules/files.c:2926
+#: modules/files.c:2847 modules/files.c:2925
 msgid "not executing with superuser privileges"
 msgstr "nespuštěno s právy administrátora (root)"
 
-#: modules/files.c:2941
+#: modules/files.c:2938
 msgid "no shadow file present -- disabling"
 msgstr "chybí soubor shadow -- zakazuji"
 
