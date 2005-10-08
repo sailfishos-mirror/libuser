@@ -1,3 +1,8 @@
+2005-10-09  Miloslav Trmac  <mitr@redhat.com>
+
+	* docs/libuser.conf.5.in: New file.
+	* docs/Makefile.am: Ship and install libuser.conf.5.
+
 2005-10-07  Miloslav Trmac  <mitr@redhat.com>
 
 	* lib/config.c (destroy_section): Split from lu_cfg_done().
