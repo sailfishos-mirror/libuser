@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-09-14 23:04+0200\n"
-"PO-Revision-Date: 2005-09-30 00:01+0800\n"
+"PO-Revision-Date: 2005-10-09 22:17+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -647,29 +647,24 @@ msgid "error statting file"
 msgstr "ralat stat fail"
 
 #: lib/error.c:68
-#, fuzzy
 msgid "error reading file"
-msgstr "Ralat membaca fail keutamaan."
+msgstr "ralat membaca fail"
 
 #: lib/error.c:70
-#, fuzzy
 msgid "error writing to file"
-msgstr "Ralat menulis kepada fail %s"
+msgstr "ralat menulis ke fail"
 
 #: lib/error.c:72
-#, fuzzy
 msgid "data not found in file"
-msgstr "Ralat ditemui dalam fail .nanorc"
+msgstr "data tidak ditemui dalam fail"
 
 #: lib/error.c:74
-#, fuzzy
 msgid "internal initialization error"
-msgstr "Ralat Dalaman Pelayan"
+msgstr "ralat permulaan dalaman"
 
 #: lib/error.c:76
-#, fuzzy
 msgid "error loading module"
-msgstr "Terdapat ralat semasa memuatkan modul."
+msgstr "ralat memuatkan modul"
 
 #: lib/error.c:78
 #, fuzzy
@@ -702,13 +697,13 @@ msgstr "Ralat telah berlaku didalam modul %s."
 #: lib/prompt.c:67
 #, fuzzy
 msgid "error reading terminal attributes"
-msgstr "ralat membaca daripada direktori %s: %s\n"
+msgstr "ralat memanipulasi sifat terminal"
 
 #: lib/prompt.c:74
 #: lib/prompt.c:86
 #, fuzzy
 msgid "error setting terminal attributes"
-msgstr "%s: ralat kritikal membaca tetapan simpanan sementara"
+msgstr "ralat memanipulasi sifat terminal"
 
 #: lib/prompt.c:80
 #, fuzzy
@@ -758,7 +753,7 @@ msgstr "%s: mengandungi nombor volum yg tidak sah"
 #: lib/util.c:192
 #, fuzzy, c-format
 msgid "error locking file: %s"
-msgstr "Ralat membuka fail"
+msgstr "ralat mengunci fail"
 
 #: modules/files.c:120
 #, fuzzy, c-format
