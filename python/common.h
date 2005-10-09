@@ -20,7 +20,7 @@ struct libuser_prompt {
 	PyObject_HEAD
 	struct lu_prompt prompt;
 };
-				
+
 static PyTypeObject EntityType;
 static PyTypeObject AdminType;
 static PyTypeObject PromptType;

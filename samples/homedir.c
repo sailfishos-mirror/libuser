@@ -32,7 +32,7 @@ int
 main(int argc, char **argv)
 {
 	struct lu_error *error = NULL;
-	int add = 0, mod = 0, rem = 0, c = -1;
+	int add = 0, mod = 0, rem = 0, c;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);

@@ -40,11 +40,8 @@ static PyTypeObject EntityType;
 static PyObject *
 convert_value_array_pylist(GValueArray *array)
 {
-	PyObject *ret = NULL;
-	GValue *value;
+	PyObject *ret;
 	size_t i;
-	long l;
-	const char *s;
 
 	DEBUG_ENTRY;
 
@@ -52,10 +49,13 @@ convert_value_array_pylist(GValueArray *array)
 	ret = PyList_New(0);
 	/* Iterate over the array. */
 	for (i = 0; (array != NULL) && (i < array->n_values); i++) {
+		GValue *value;
+
 		value = g_value_array_get_nth(array, i);
 		/* If the item is a G_TYPE_LONG, add it as a PyLong. */
 		if (G_VALUE_HOLDS_LONG(value)) {
 			PyObject *val;
+			long l;
 
 			l = g_value_get_long(value);
 			val = PyLong_FromLong(l);
@@ -79,6 +79,7 @@ convert_value_array_pylist(GValueArray *array)
 		/* If the item is a G_TYPE_STRING, add it as a PyString. */
 		if (G_VALUE_HOLDS_STRING(value)) {
 			PyObject *val;
+			const char *s;
 
 			s = g_value_get_string(value);
 			val = PyString_FromString(s);
@@ -98,7 +99,7 @@ convert_value_array_pylist(GValueArray *array)
 static PyObject *
 libuser_wrap_ent(struct lu_ent *ent)
 {
-	struct libuser_entity *ret = NULL;
+	struct libuser_entity *ret;
 
 	DEBUG_ENTRY;
 
@@ -174,7 +175,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		}
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (%lld) to list.\n", getindent(),
-			(long long)l);
+			(long long)ll);
 #endif
 	} else
 	/* If it's a PyString, convert it. */
@@ -189,7 +190,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 #ifdef Py_USING_UNICODE
 	if (PyUnicode_Check(item)) {
 		PyObject *tmp;
-		
+
 		g_value_init(value, G_TYPE_STRING);
 		tmp = PyUnicode_AsUTF8String(item);
 		g_value_set_string(value, PyString_AsString(tmp));
@@ -242,10 +243,9 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 static int
 libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 {
-	PyObject *list, *item;
-	GValue value;
-	int size, i, ret;
+	PyObject *list;
 	struct lu_ent *copy;
+	int ret;
 
 	DEBUG_ENTRY;
 
@@ -253,6 +253,10 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 	lu_ent_copy(self->ent, copy);
 	/* Parse out the arguments.  We expect a single object. */
 	if (PyArg_ParseTuple(args, "O", &list)) {
+		PyObject *item;
+		GValue value;
+		int size, i;
+
 		lu_ent_clear(self->ent, name);
 
 		/* If the item is a tuple, scan it. */
@@ -432,10 +436,9 @@ static PyObject *
 libuser_entity_set(struct libuser_entity *self, PyObject *args)
 {
 	char *attr = NULL;
-	PyObject *list = NULL, *item = NULL, *val = NULL, *ret;
+	PyObject *list = NULL, *val = NULL, *ret;
 	GValue value;
 	struct lu_ent *copy;
-	int i, size;
 
 	DEBUG_ENTRY;
 
@@ -443,6 +446,8 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 	lu_ent_copy(self->ent, copy);
 	/* We expect a string and some kind of object. */
 	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
+		int i, size;
+
 		/* It's a list. */
 		size = PyList_Size(list);
 #ifdef DEBUG_BINDING
@@ -455,6 +460,8 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		/* Add each of the list items in turn. */
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
+			PyObject *item;
+
 			item = PyList_GetItem(list, i);
 			if (libuser_convert_to_value(item, &value) == FALSE)
 				goto err;

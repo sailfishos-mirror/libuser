@@ -38,18 +38,20 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gecos = NULL, *homeDirectory = NULL, *loginShell = NULL,
-		   *skeleton = NULL, *name = NULL, *gid = NULL,
-		    *uid_number_str = NULL;
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL, *groupEnt = NULL;
+		   *skeleton = NULL, *name, *gid = NULL,
+		   *uid_number_str = NULL;
+	struct lu_context *ctx;
+	struct lu_ent *ent, *groupEnt;
 	struct lu_error *error = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
-	    system_account = FALSE, interactive = FALSE, create_group = FALSE;
+	    system_account = FALSE, interactive = FALSE, create_group;
 	int c;
+	intmax_t imax;
+	char *p;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -110,19 +112,16 @@ main(int argc, const char **argv)
 		return 1;
 	}
 	if (uid_number_str != NULL) {
-		intmax_t val;
-		char *p;
-
 		errno = 0;
-		val = strtoimax(uid_number_str, &p, 10);
+		imax = strtoimax(uid_number_str, &p, 10);
 		if (errno != 0 || *p != 0 || p == uid_number_str
-		    || (uid_t)val != val) {
+		    || (uid_t)imax != imax) {
 			fprintf(stderr, _("Invalid user ID %s\n"),
 				uid_number_str);
 			poptPrintUsage(popt, stderr, 0);
 			return 1;
 		}
-		uidNumber = val;
+		uidNumber = imax;
 	}
 
 	/* Initialize the library. */
@@ -152,19 +151,14 @@ main(int argc, const char **argv)
 	}
 
 	/* Try to convert the given GID to a number. */
-	if (gid != NULL) {
-		intmax_t imax;
-		char *p;
-
-		groupEnt = lu_ent_new();
-		errno = 0;
-		imax = strtoimax(gid, &p, 10);
-		if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
-			gidNumber = imax;
-		else
-			/* It's not a number, so it's a group name. */
-			gidNumber = LU_VALUE_INVALID_ID;
-	}
+	groupEnt = lu_ent_new();
+	errno = 0;
+	imax = strtoimax(gid, &p, 10);
+	if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
+		gidNumber = imax;
+	else
+		/* It's not a number, so it's a group name. */
+		gidNumber = LU_VALUE_INVALID_ID;
 
 	/* Check if the group exists. */
 	if (gidNumber == LU_VALUE_INVALID_ID) {

@@ -34,7 +34,8 @@
 struct lu_ent *
 lu_ent_new()
 {
-	struct lu_ent *ent = NULL;
+	struct lu_ent *ent;
+
 	ent = g_malloc0(sizeof(struct lu_ent));
 	ent->magic = LU_ENT_MAGIC;
 	ent->cache = lu_string_cache_new(TRUE);
@@ -184,7 +185,7 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 void
 lu_ent_add_module(struct lu_ent *ent, const char *source)
 {
-	GValue value, *val;
+	GValue value;
 	size_t i;
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
@@ -195,6 +196,8 @@ lu_ent_add_module(struct lu_ent *ent, const char *source)
 	g_value_set_string(&value, source);
 	/* Now scan the array for the value. */
 	for (i = 0; i < ent->modules->n_values; i++) {
+		GValue *val;
+
 		val = g_value_array_get_nth(ent->modules, i);
 		/* We only add strings, so there had better be only strings
 		 * in this list, otherwise someone is messing with us. */
@@ -229,8 +232,10 @@ static void
 clear_attribute_list(GArray *dest)
 {
 	int i;
-	struct lu_attribute *attr;
+
 	for (i = dest->len - 1; i >= 0; i--) {
+		struct lu_attribute *attr;
+
 		attr = &g_array_index(dest, struct lu_attribute, i);
 		g_value_array_free(attr->values);
 		attr->values = NULL;
@@ -244,11 +249,13 @@ static void
 copy_attributes(GArray *source, GArray *dest)
 {
 	size_t i;
-	struct lu_attribute *attr, newattr;
+
 	/* First, clear the destination list of all attributes. */
 	clear_attribute_list(dest);
 	/* Now copy all of the attributes and their values. */
 	for (i = 0; i < source->len; i++) {
+		struct lu_attribute *attr, newattr;
+
 		attr = &g_array_index(source, struct lu_attribute, i);
 		/* Copy the attribute name, then its values, into the holding
 		 * area. */
@@ -302,7 +309,6 @@ quark_from_attribute(const char *attribute)
 static GValueArray *
 lu_ent_get_int(GArray *list, const char *attribute)
 {
-	struct lu_attribute *attr;
 	GQuark aquark;
 	size_t i;
 
@@ -311,6 +317,8 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	aquark = quark_from_attribute(attribute);
 	for (i = 0; i < list->len; i++) {
+		struct lu_attribute *attr;
+
 		attr = &g_array_index(list, struct lu_attribute, i);
 		if (attr != NULL) {
 			if (attr->name == aquark) {
@@ -359,7 +367,6 @@ static void
 lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
-	struct lu_attribute newattr;
 	size_t i;
 
 	g_return_if_fail(list != NULL);
@@ -371,6 +378,8 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	}
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
+		struct lu_attribute newattr;
+
 		memset(&newattr, 0, sizeof(newattr));
 		newattr.name = quark_from_attribute(attr);
 		newattr.values = g_value_array_new(0);
@@ -389,8 +398,6 @@ static void
 lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
-	GValue *current;
-	struct lu_attribute newattr;
 	size_t i;
 
 	g_return_if_fail(list != NULL);
@@ -399,6 +406,8 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
+		struct lu_attribute newattr;
+
 		memset(&newattr, 0, sizeof(newattr));
 		newattr.name = quark_from_attribute(attr);
 		newattr.values = g_value_array_new(1);
@@ -406,6 +415,8 @@ lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 		g_array_append_val(list, newattr);
 	}
 	for (i = 0; i < dest->n_values; i++) {
+		GValue *current;
+
 		current = g_value_array_get_nth(dest, i);
 		if (G_VALUE_TYPE(value) == G_VALUE_TYPE(current)
 		    && lu_values_equal(value, current))
@@ -425,8 +436,6 @@ static void
 lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 {
 	GValueArray *dest;
-	GValue *tvalue;
-	char *svalue, *tmp;
 	size_t i;
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(value != NULL);
@@ -434,8 +443,13 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest != NULL) {
+		char *svalue;
+
 		svalue = g_strdup_value_contents(value);
 		for (i = 0; i < dest->n_values; i++) {
+			GValue *tvalue;
+			char *tmp;
+
 			tvalue = g_value_array_get_nth(dest, i);
 			tmp = g_strdup_value_contents(tvalue);
 			if (strcmp(tmp, svalue) == 0) {
@@ -456,11 +470,12 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 static GList *
 lu_ent_get_attributes_int(GArray *list)
 {
-	struct lu_attribute *attr;
 	size_t i;
 	GList *ret = NULL;
 	g_return_val_if_fail(list != NULL, NULL);
 	for (i = 0; i < list->len; i++) {
+		struct lu_attribute *attr;
+
 		attr = &g_array_index(list, struct lu_attribute, i);
 		ret = g_list_prepend(ret, (char*)g_quark_to_string(attr->name));
 	}

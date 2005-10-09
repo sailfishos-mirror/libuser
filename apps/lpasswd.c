@@ -36,16 +36,16 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL;
+	struct lu_context *ctx;
+	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	char *password = NULL, *cryptedPassword = NULL;
-	const char *user = NULL;
+	const char *user;
 	int c;
 	int plain_fd = -1, crypted_fd = -1;
 	int interactive = 0, groupflag = 0;
 	poptContext popt;
-	gboolean is_crypted = FALSE;
+	gboolean is_crypted;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
@@ -103,8 +103,9 @@ main(int argc, const char **argv)
 
 	if ((password == NULL) && (cryptedPassword == NULL) &&
 	    (plain_fd == -1) && (crypted_fd == -1)) {
-		struct lu_prompt prompts[2];
 		do {
+			struct lu_prompt prompts[2];
+
 			memset(&prompts, 0, sizeof(prompts));
 			prompts[0].key = "lpasswd/password1";
 			prompts[0].prompt = N_("New password");

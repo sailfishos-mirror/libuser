@@ -39,7 +39,7 @@ static gboolean
 lu_sasldb_user_lookup_name(struct lu_module *module, const char *name,
 			   struct lu_ent *ent, struct lu_error **error)
 {
-	int i = SASL_NOUSER;
+	int i;
 
 	(void)ent;
 	(void)error;
@@ -92,11 +92,8 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
 	size_t i;
-	int ret;
-	sasl_conn_t *connection = NULL;
-	GValueArray *values = NULL;
-	GValue *value;
-	char *tmp;
+	sasl_conn_t *connection;
+	GValueArray *values;
 
 	g_assert(module != NULL);
 	LU_ERROR_CHECK(error);
@@ -105,6 +102,10 @@ lu_sasldb_user_munge(struct lu_module *module, struct lu_ent *ent,
 
 	values = lu_ent_get(ent, LU_USERNAME);
 	for (i = 0; (values != NULL) && (i < values->n_values); i++) {
+		GValue *value;
+		char *tmp;
+		int ret;
+
 		value = g_value_array_get_nth(values, i);
 		tmp = lu_value_strdup(value);
 		ret = sasl_setpass(connection, tmp, password,
@@ -236,10 +237,10 @@ static gboolean
 lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			struct lu_error **error)
 {
-	int i = SASL_NOUSER;
+	int i;
 	GValueArray *values;
 	GValue *value;
-	char *name = NULL;
+	char *name;
 
 	(void)error;
 	values = lu_ent_get(ent, LU_USERNAME);
@@ -494,15 +495,16 @@ lu_sasldb_close_module(struct lu_module *module)
 struct lu_module *
 libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 {
-	struct lu_module *ret = NULL;
-	const char *appname = NULL;
-	const char *domain = NULL;
-	sasl_conn_t *connection;
 	static const struct sasl_callback cb = {
 		SASL_CB_LIST_END,
 		NULL,
 		NULL,
 	};
+
+	struct lu_module *ret;
+	const char *appname;
+	const char *domain;
+	sasl_conn_t *connection;
 	int i;
 
 	g_assert(context != NULL);

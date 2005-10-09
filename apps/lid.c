@@ -31,23 +31,66 @@
 #include "../lib/user.h"
 #include "apputil.h"
 
+static void
+do_id (struct lu_context *ctx, const char *name, int nameonly,
+       GValueArray *(*enumerate) (lu_context_t *, const char *, lu_error_t **),
+       gboolean (*lookup) (lu_context_t *, const char *, struct lu_ent *,
+			   lu_error_t **),
+       const char *id_attribute, const char *id_descr)
+{
+	GValueArray *values;
+	struct lu_error *error;
+
+	error = NULL;
+	values = enumerate(ctx, name, &error);
+	if (values != NULL) {
+		struct lu_ent *ent;
+		size_t i;
+
+		ent = lu_ent_new();
+		for (i = 0; i < values->n_values; i++) {
+			GValue *value;
+			const char *found;
+
+			value = g_value_array_get_nth(values, i);
+			found = g_value_get_string(value);
+			if (!nameonly && lookup(ctx, found, ent, &error)) {
+				GValueArray *attrs;
+
+				attrs = lu_ent_get(ent, id_attribute);
+				if (attrs != NULL) {
+					char *tmp;
+
+					value = g_value_array_get_nth(attrs,
+								      0);
+					tmp = lu_value_strdup(value);
+					g_print(" %s(%s=%s)\n", found,
+						id_descr, tmp);
+					g_free(tmp);
+				} else
+					g_print(" %s\n", found);
+			} else {
+				if (error != NULL)
+					lu_error_free(&error);
+				g_print(" %s\n", found);
+			}
+			lu_ent_clear_all(ent);
+		}
+		lu_ent_free(ent);
+		g_value_array_free(values);
+	}
+}
+
 int
 main(int argc, const char **argv)
 {
-	const char *name = NULL;
-	char *tmp = NULL;
-	struct lu_context *ctx = NULL;
+	const char *name;
+	struct lu_context *ctx;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent = NULL;
-	GValueArray *values, *attrs;
-	GValue *value;
 	int interactive = FALSE;
 	int groupflag = FALSE, nameonly = FALSE;
 	int c;
-	size_t i;
 	poptContext popt;
-	struct passwd *pwd = NULL;
-	struct group *grp = NULL;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 "prompt for all information", NULL},
@@ -77,6 +120,8 @@ main(int argc, const char **argv)
 
 	if (name == NULL) {
 		if (groupflag) {
+			struct group *grp;
+
 			grp = getgrgid(getgid());
 			if (grp != NULL) {
 				fprintf(stderr, _("No group name specified, "
@@ -89,6 +134,8 @@ main(int argc, const char **argv)
 				exit(1);
 			}
 		} else {
+			struct passwd *pwd;
+
 			pwd = getpwuid(getuid());
 			if (pwd != NULL) {
 				fprintf(stderr, _("No user name specified, "
@@ -113,76 +160,12 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
-	if (groupflag) {
-		values = lu_users_enumerate_by_group(ctx, name, &error);
-		if (values != NULL) {
-			ent = lu_ent_new();
-			for (i = 0; i < values->n_values; i++) {
-				value = g_value_array_get_nth(values, i);
-				name = g_value_get_string(value);
-				if (!nameonly
-				    && lu_user_lookup_name(ctx,
-					   		   name,
-							   ent,
-							   &error)) {
-					attrs = lu_ent_get(ent, LU_UIDNUMBER);
-					if (attrs != NULL) {
-						value = g_value_array_get_nth(attrs,
-									      0);
-						tmp = lu_value_strdup(value);
-						g_print(" %s(uid=%s)\n",
-							name, tmp);
-						g_free(tmp);
-					} else {
-						g_print(" %s\n", name);
-					}
-				} else {
-					if (error) {
-						lu_error_free(&error);
-					}
-					g_print(" %s\n", name);
-				}
-				lu_ent_clear_all(ent);
-			}
-			lu_ent_free(ent);
-			g_value_array_free(values);
-		}
-	} else {
-		values = lu_groups_enumerate_by_user(ctx, name, &error);
-		if (values != NULL) {
-			ent = lu_ent_new();
-			for (i = 0; i < values->n_values; i++) {
-				value = g_value_array_get_nth(values, i);
-				name = g_value_get_string(value);
-				if (!nameonly &&
-				    lu_group_lookup_name(ctx,
-					   		 name,
-							 ent,
-							 &error)) {
-					attrs = lu_ent_get(ent, LU_GIDNUMBER);
-					if (attrs != NULL) {
-						value = g_value_array_get_nth(attrs,
-									      0);
-						tmp = lu_value_strdup(value);
-						g_print(" %s(gid=%s)\n",
-							name,
-						        tmp);
-						g_free(tmp);
-					} else {
-						g_print(" %s\n", name);
-					}
-				} else {
-					if (error) {
-						lu_error_free(&error);
-					}
-					g_print(" %s\n", name);
-				}
-				lu_ent_clear_all(ent);
-			}
-			lu_ent_free(ent);
-			g_value_array_free(values);
-		}
-	}
+	if (groupflag)
+		do_id(ctx, name, nameonly, lu_users_enumerate_by_group,
+		      lu_user_lookup_name, LU_UIDNUMBER, "uid");
+	else
+		do_id(ctx, name, nameonly, lu_groups_enumerate_by_user,
+		      lu_group_lookup_name, LU_GIDNUMBER, "gid");
 
 	lu_end(ctx);
 

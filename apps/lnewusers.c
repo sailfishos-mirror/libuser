@@ -35,21 +35,13 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx = NULL;
+	struct lu_context *ctx;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent = NULL, *groupEnt = NULL;
-	int interactive = FALSE, nocreatehome = FALSE, creategroup = FALSE,
-	    nocreatemail = FALSE;
+	struct lu_ent *ent, *groupEnt;
+	int interactive = FALSE, nocreatehome = FALSE, nocreatemail = FALSE;
 	int c;
-	char *file = NULL, **fields;
+	char *file = NULL;
 	FILE *fp = stdin;
-	uid_t uid;
-	gid_t gid;
-	char *homedir, *gidstring;
-	const char *skeleton;
-	char *p;
-	GValueArray *values = NULL;
-	GValue *value, val;
 	char buf[LINE_MAX];
 	poptContext popt;
 	struct poptOption options[] = {
@@ -107,7 +99,13 @@ main(int argc, const char **argv)
 	groupEnt = lu_ent_new();
 
 	while (fgets(buf, sizeof(buf), fp)) {
+		int creategroup;
+		char **fields, *homedir, *gidstring, *p;
 		intmax_t imax;
+		uid_t uid;
+		gid_t gid;
+		GValueArray *values;
+		GValue *value, val;
 
 		/* Strip off the end-of-line terminators. */
 		if (strchr(buf, '\r')) {
@@ -156,7 +154,6 @@ main(int argc, const char **argv)
 		}
 
 		/* Try to convert the field to a number. */
-		p = NULL;
 		errno = 0;
 		imax = strtoimax(gidstring, &p, 10);
 		gid = LU_VALUE_INVALID_ID;
@@ -291,6 +288,8 @@ main(int argc, const char **argv)
 			/* Unless the nocreatehomedirs flag was given, attempt
 			 * to create the user's home directory. */
 			if (!nocreatehome) {
+				const char *skeleton;
+
 				skeleton = lu_cfg_read_single(ctx,
 							      "defaults/skeleton",
 							      "/etc/skel");

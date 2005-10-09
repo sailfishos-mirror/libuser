@@ -30,12 +30,14 @@ static void
 dump_attribute(const char *attribute, struct lu_ent *ent)
 {
 	GValueArray *array;
-	GValue *value;
-	size_t i;
 
 	array = lu_ent_get(ent, attribute);
 	if (array != NULL) {
+		size_t i;
+
 		for (i = 0; i < array->n_values; i++) {
+			GValue *value;
+
 			value = g_value_array_get_nth(array, i);
 			if (G_VALUE_HOLDS_STRING(value))
 				g_print("attribute %s = `%s'\n", attribute,
@@ -56,9 +58,9 @@ main(void)
 	struct lu_context *ctx;
 	struct lu_ent *ent, *tmp, *temp;
 	struct lu_error *error = NULL;
-	GList *ret = NULL;
+	GList *ret;
 	size_t i;
-	void *control = NULL;
+	void *control;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);

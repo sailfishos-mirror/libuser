@@ -40,7 +40,7 @@
 static PyObject *
 libuser_get_user_shells(PyObject * ignored)
 {
-	PyObject *ret = NULL;
+	PyObject *ret;
 	const char *shell;
 
 	(void)ignored;

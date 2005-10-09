@@ -170,6 +170,8 @@ libuser_admin_lookup_user_name(PyObject *self, PyObject *args,
 		return libuser_wrap_ent(ent);
 	} else {
 		/* No such user.  Clean up and bug out. */
+		if (error)
+			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -205,6 +207,8 @@ libuser_admin_lookup_user_id(PyObject *self, PyObject *args,
 		return libuser_wrap_ent(ent);
 	} else {
 		/* No such user.  Clean up and bug out. */
+		if (error != NULL)
+			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -236,6 +240,8 @@ libuser_admin_lookup_group_name(PyObject *self, PyObject *args,
 		return libuser_wrap_ent(ent);
 	} else {
 		/* We've got nothing.  Return nothing. */
+		if (error != NULL)
+			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -272,6 +278,8 @@ libuser_admin_lookup_group_id(PyObject *self, PyObject *args,
 		return libuser_wrap_ent(ent);
 	} else {
 		/* Clean up and exit, we have nothing to return. */
+		if (error != NULL)
+			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
 		return Py_BuildValue("");
@@ -391,6 +399,7 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
+	gboolean ret;
 
 	DEBUG_ENTRY;
 	/* Expect a Python Entity object and maybe some other stuff we
@@ -400,8 +409,11 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 		DEBUG_EXIT;
 	}
 	/* Run the function. */
+	ret = fn(me->ctx, ent->ent, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	DEBUG_EXIT;
-	return Py_BuildValue("i", (fn(me->ctx, ent->ent, &error)) ? 1 : 0);
+	return Py_BuildValue("i", ret ? 1 : 0);
 }
 
 /* Wrap the setpass function for either type of entity. */
@@ -450,7 +462,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	const char *dir = NULL, *skeleton = "/etc/skel";
+	const char *dir, *skeleton = "/etc/skel";
 	GValueArray *values;
 	GValue *value;
 	char *keywords[] = { "home", "skeleton", NULL };
@@ -527,7 +539,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	const char *dir = NULL;
+	const char *dir;
 	GValueArray *values;
 	GValue *value;
 	char *keywords[] = { "home", NULL };
@@ -777,7 +789,7 @@ libuser_admin_modify_user(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	PyObject *ent = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	PyObject *mvhomedir = NULL;
 	struct lu_ent *copy = NULL;
 	char *keywords[] = { "entity", "mvhomedir", NULL };
@@ -834,7 +846,7 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	PyObject *ent = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	PyObject *rmhomedir = NULL, *rmmailspool = NULL;
 	struct lu_context *context;
 	char *keywords[] = { "entity", "rmhomedir", "rmmailspool", NULL };
@@ -1020,7 +1032,7 @@ libuser_admin_enumerate_users(PyObject *self, PyObject *args,
 {
 	GValueArray *results;
 	const char *pattern = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1034,6 +1046,8 @@ libuser_admin_enumerate_users(PyObject *self, PyObject *args,
 	}
 	/* Read the list of all users. */
 	results = lu_users_enumerate(me->ctx, pattern, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
 	g_value_array_free(results);
@@ -1048,7 +1062,7 @@ libuser_admin_enumerate_groups(PyObject *self, PyObject *args,
 {
 	GValueArray *results;
 	const char *pattern = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1062,6 +1076,8 @@ libuser_admin_enumerate_groups(PyObject *self, PyObject *args,
 	}
 	/* Get the list of groups. */
 	results = lu_groups_enumerate(me->ctx, pattern, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
 	g_value_array_free(results);
@@ -1076,7 +1092,7 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 {
 	GValueArray *results;
 	char *group = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "group", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1089,6 +1105,8 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 	}
 	/* Get a list of the users in this group. */
 	results = lu_users_enumerate_by_group(me->ctx, group, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	ret = convert_value_array_pylist(results);
 	g_value_array_free(results);
 	DEBUG_EXIT;
@@ -1102,7 +1120,7 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 {
 	GValueArray *results;
 	char *user = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1115,6 +1133,8 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 	}
 	/* Get the list. */
 	results = lu_groups_enumerate_by_user(me->ctx, user, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	ret = convert_value_array_pylist(results);
 	g_value_array_free(results);
 	DEBUG_EXIT;
@@ -1128,7 +1148,7 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 {
 	GPtrArray *results;
 	const char *pattern = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1143,6 +1163,8 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 	}
 	/* Read the list of all users. */
 	results = lu_users_enumerate_full(me->ctx, pattern, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
@@ -1164,7 +1186,7 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 {
 	GPtrArray *results;
 	const char *pattern = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
@@ -1179,6 +1201,8 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	}
 	/* Get the list of groups. */
 	results = lu_groups_enumerate_full(me->ctx, pattern, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
@@ -1201,7 +1225,7 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 {
 	GPtrArray *results;
 	char *group = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	char *keywords[] = { "group", NULL };
 	int i;
 
@@ -1232,7 +1256,7 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 {
 	GPtrArray *results;
 	char *user = NULL;
-	PyObject *ret = NULL;
+	PyObject *ret;
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;

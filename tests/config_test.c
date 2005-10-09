@@ -32,7 +32,7 @@ main(void)
 	struct lu_context *ctx;
 	struct lu_error *error;
 	GList *list;
-	
+
 	error = NULL;
 	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console_quiet, NULL,
 		       &error);
@@ -54,13 +54,13 @@ main(void)
 
 	list = lu_cfg_read(ctx, "test/nonexistent", NULL);
 	assert(g_list_length(list) == 0);
-	
+
 	assert(strcmp(lu_cfg_read_single(ctx, "test/name", NULL), "value1")
 	       == 0);
 	assert(strcmp(lu_cfg_read_single(ctx, "test/nonexistent", "default"),
 		      "default") == 0);
 	assert(lu_cfg_read_single(ctx, "test/nonexistent", NULL) == NULL);
-	
+
 	list = lu_cfg_read_keys(ctx, "test");
 	assert(g_list_length(list) == 2);
 	assert(strcmp(list->data, "name") == 0);
@@ -68,7 +68,7 @@ main(void)
 
 	list = lu_cfg_read_keys(ctx, "invalid");
 	assert(g_list_length(list) == 0);
-	
+
 	lu_end(ctx);
 
 	return 0;

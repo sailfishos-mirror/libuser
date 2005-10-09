@@ -146,10 +146,10 @@ void
 lu_error_new(struct lu_error **error, enum lu_status code,
 	     const char *fmt, ...)
 {
-	struct lu_error *ret;
-	va_list args;
-
 	if (error != NULL) {
+		struct lu_error *ret;
+		va_list args;
+
 		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;

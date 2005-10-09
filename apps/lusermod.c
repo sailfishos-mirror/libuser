@@ -37,20 +37,18 @@ int
 main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
-		   *uid = NULL, *old_uid = NULL, *user = NULL, *gecos = NULL,
+		   *uid = NULL, *old_uid, *user, *gecos = NULL,
 		   *oldHomeDirectory, *homeDirectory = NULL,
 		   *loginShell = NULL, *gid_number_str = NULL,
 		   *uid_number_str = NULL;
-	const char *username, *groupname;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL;
+	struct lu_context *ctx;
+	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values, *members, *admins, *groups = NULL;
+	GValueArray *values, *groups = NULL;
 	GValue *value, val;
-	size_t i, j;
-	int change = FALSE, move_home = FALSE, lock = FALSE, unlock = FALSE;
+	int change, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
 
@@ -276,8 +274,13 @@ main(int argc, const char **argv)
 	/* If the user's name changed, we need to update supplemental
 	 * group membership information. */
 	if (change && (old_uid != NULL)) {
+		size_t i;
+
 		for (i = 0; (groups != NULL) && (i < groups->n_values); i++) {
 			struct lu_ent *group;
+			const char *username, *groupname;
+			GValueArray *members, *admins;
+			size_t j;
 
 			/* Get the name of this group. */
 			value = g_value_array_get_nth(groups, i);

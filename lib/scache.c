@@ -27,7 +27,8 @@
 static char *
 lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 {
-	char *ret = NULL;
+	char *ret;
+
 	if (string == NULL) {
 		return NULL;
 	}
@@ -53,13 +54,14 @@ static void
 lu_string_cache_free(struct lu_string_cache *cache)
 {
 	GList *list = NULL, *i;
-	char *tmp;
 
 	g_return_if_fail(cache != NULL);
 	g_tree_foreach(cache->tree, get_keys, &list);
 	g_tree_destroy(cache->tree);
 
 	for (i = list; i; i = g_list_next(i)) {
+		char *tmp;
+
 		if ((tmp = i->data) != NULL) {
 			memset(tmp, '\0', strlen(tmp));
 			g_free(tmp);

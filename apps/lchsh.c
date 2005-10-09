@@ -35,15 +35,13 @@
 int
 main(int argc, const char **argv)
 {
-	const char *user = NULL;
-	struct lu_context *ctx = NULL;
+	const char *user;
+	struct lu_context *ctx;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent = NULL;
-	GValueArray *values = NULL;
-	GValue *value, val;
+	struct lu_ent *ent;
+	GValueArray *values;
 	int interactive = FALSE;
 	int c;
-	struct lu_prompt prompts[1];
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
@@ -71,7 +69,8 @@ main(int argc, const char **argv)
 	/* If no user was specified, or we're setuid, force the user name to
 	 * be that of the current user. */
 	if ((user == NULL) || (geteuid() != getuid())) {
-		struct passwd *pwd = NULL;
+		struct passwd *pwd;
+
 		pwd = getpwuid(getuid());
 		if (pwd != NULL) {
 			user = g_strdup(pwd->pw_name);
@@ -109,6 +108,9 @@ main(int argc, const char **argv)
 	/* Read the user's shell. */
 	values = lu_ent_get(ent, LU_LOGINSHELL);
 	if (values != NULL) {
+		struct lu_prompt prompts[1];
+		GValue *value;
+
 		value = g_value_array_get_nth(values, 0);
 		/* Fill in the prompt structure using the user's shell. */
 		memset(prompts, 0, sizeof(prompts));
@@ -120,6 +122,8 @@ main(int argc, const char **argv)
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 				      NULL, &error)) {
+			GValue val;
+
 			/* Modify the in-memory structure's shell attribute. */
 			memset(&val, 0, sizeof(val));
 			g_value_init(&val, G_TYPE_STRING);

@@ -164,7 +164,6 @@ lu_files_create_backup(const char *filename,
 	gpointer ilock, olock;
 	char *backupname;
 	struct stat ist, ost;
-	char buf[CHUNK_SIZE];
 	gboolean res = FALSE;
 
 	g_assert(filename != NULL);
@@ -235,6 +234,7 @@ lu_files_create_backup(const char *filename,
 
 	/* Copy the data, block by block. */
 	for (;;) {
+		char buf[CHUNK_SIZE];
 		ssize_t left;
 		char *p;
 
@@ -468,12 +468,10 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 static gboolean
 lu_files_parse_user_entry(const gchar * line, struct lu_ent *ent)
 {
-	gboolean ret;
 	ent->type = lu_user;
 	lu_ent_clear_all(ent);
-	ret = parse_generic(line, format_passwd, G_N_ELEMENTS(format_passwd),
-			    ent);
-	return ret;
+	return parse_generic(line, format_passwd, G_N_ELEMENTS(format_passwd),
+			     ent);
 }
 
 /* Parse an entry from /etc/group into an ent structure, using the attribute
@@ -481,12 +479,10 @@ lu_files_parse_user_entry(const gchar * line, struct lu_ent *ent)
 static gboolean
 lu_files_parse_group_entry(const gchar * line, struct lu_ent *ent)
 {
-	gboolean ret;
 	ent->type = lu_group;
 	lu_ent_clear_all(ent);
-	ret = parse_generic(line, format_group, G_N_ELEMENTS(format_group),
-			    ent);
-	return ret;
+	return parse_generic(line, format_group, G_N_ELEMENTS(format_group),
+			     ent);
 }
 
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
@@ -494,12 +490,10 @@ lu_files_parse_group_entry(const gchar * line, struct lu_ent *ent)
 static gboolean
 lu_shadow_parse_user_entry(const gchar * line, struct lu_ent *ent)
 {
-	gboolean ret;
 	ent->type = lu_user;
 	lu_ent_clear_all(ent);
-	ret = parse_generic(line, format_shadow, G_N_ELEMENTS(format_shadow),
-			    ent);
-	return ret;
+	return parse_generic(line, format_shadow, G_N_ELEMENTS(format_shadow),
+			     ent);
 }
 
 /* Parse an entry from /etc/shadow into an ent structure, using the attribute
@@ -507,12 +501,10 @@ lu_shadow_parse_user_entry(const gchar * line, struct lu_ent *ent)
 static gboolean
 lu_shadow_parse_group_entry(const gchar * line, struct lu_ent *ent)
 {
-	gboolean ret;
 	ent->type = lu_group;
 	lu_ent_clear_all(ent);
-	ret = parse_generic(line, format_gshadow, G_N_ELEMENTS(format_gshadow),
-			    ent);
-	return ret;
+	return parse_generic(line, format_gshadow,
+			     G_N_ELEMENTS(format_gshadow), ent);
 }
 
 typedef gboolean(*parse_fn) (const gchar * line, struct lu_ent * ent);
@@ -525,7 +517,7 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	       const char *name, int field, parse_fn parser,
 	       struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret = FALSE;
+	gboolean ret;
 	const char *dir;
 	int fd = -1;
 	gpointer lock;
@@ -585,10 +577,8 @@ lu_files_user_lookup_name(struct lu_module *module,
 			  struct lu_ent *ent,
 			  struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lookup(module, "passwd", name, 1,
-			     lu_files_parse_user_entry, ent, error);
-	return ret;
+	return generic_lookup(module, "passwd", name, 1,
+			      lu_files_parse_user_entry, ent, error);
 }
 
 /* Look up a user by ID in /etc/passwd. */
@@ -599,7 +589,7 @@ lu_files_user_lookup_id(struct lu_module *module,
 			struct lu_error **error)
 {
 	char *key;
-	gboolean ret = FALSE;
+	gboolean ret;
 
 	key = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = generic_lookup(module, "passwd", key, 3,
@@ -615,10 +605,8 @@ lu_shadow_user_lookup_name(struct lu_module *module,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lookup(module, "shadow", name, 1,
-			     lu_shadow_parse_user_entry, ent, error);
-	return ret;
+	return generic_lookup(module, "shadow", name, 1,
+			      lu_shadow_parse_user_entry, ent, error);
 }
 
 /* Look up a user by ID in /etc/shadow.  This becomes a bit tricky because
@@ -630,17 +618,21 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key, *p;
-	GValueArray *values;
-	GValue *value;
-	gboolean ret = FALSE;
+	char *key;
+	gboolean ret;
+
 	/* First look the user up by ID. */
 	key = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
+		GValueArray *values;
+
 		/* Now use the user's name to search the shadow file. */
 		values = lu_ent_get(ent, LU_USERNAME);
 		if (values != NULL) {
+			GValue *value;
+			char *p;
+
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
 			ret = generic_lookup(module, "shadow", p, 1,
@@ -660,10 +652,8 @@ lu_files_group_lookup_name(struct lu_module *module,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lookup(module, "group", name, 1,
-			     lu_files_parse_group_entry, ent, error);
-	return ret;
+	return generic_lookup(module, "group", name, 1,
+			      lu_files_parse_group_entry, ent, error);
 }
 
 /* Look a group up by ID in /etc/group. */
@@ -688,10 +678,8 @@ static gboolean
 lu_shadow_group_lookup_name(struct lu_module *module, const char *name,
 			    struct lu_ent *ent, struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lookup(module, "gshadow", name, 1,
-			     lu_shadow_parse_group_entry, ent, error);
-	return ret;
+	return generic_lookup(module, "gshadow", name, 1,
+			      lu_shadow_parse_group_entry, ent, error);
 }
 
 /* Look up a group by ID in /etc/gshadow.  This file doesn't contain any
@@ -701,16 +689,18 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 			  struct lu_ent *ent, struct lu_error **error)
 {
 	char *key;
-	GValueArray *values;
-	GValue *value;
-	gboolean ret = FALSE;
+	gboolean ret;
 
 	key = g_strdup_printf("%jd", (intmax_t)gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
+		GValueArray *values;
+
 		values = lu_ent_get(ent, LU_GROUPNAME);
 		if (values != NULL) {
+			GValue *value;
 			char *p;
+
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
 			ret = generic_lookup(module, "gshadow", p, 1,
@@ -806,36 +796,29 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 static char *
 lu_files_format_user(struct lu_ent *ent)
 {
-	char *ret;
-	ret = format_generic(ent, format_passwd, G_N_ELEMENTS(format_passwd));
-	return ret;
+	return format_generic(ent, format_passwd, G_N_ELEMENTS(format_passwd));
 }
 
 /* Construct a line for /etc/group using data in the lu_ent structure. */
 static char *
 lu_files_format_group(struct lu_ent *ent)
 {
-	char *ret;
-	ret = format_generic(ent, format_group, G_N_ELEMENTS(format_group));
-	return ret;
+	return format_generic(ent, format_group, G_N_ELEMENTS(format_group));
 }
 
 /* Construct a line for /etc/shadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_user(struct lu_ent *ent)
 {
-	char *ret;
-	ret = format_generic(ent, format_shadow, G_N_ELEMENTS(format_shadow));
-	return ret;
+	return format_generic(ent, format_shadow, G_N_ELEMENTS(format_shadow));
 }
 
 /* Construct a line for /etc/gshadow using data in the lu_ent structure. */
 static char *
 lu_shadow_format_group(struct lu_ent *ent)
 {
-	char *ret;
-	ret = format_generic(ent, format_gshadow, G_N_ELEMENTS(format_gshadow));
-	return ret;
+	return format_generic(ent, format_gshadow,
+			      G_N_ELEMENTS(format_gshadow));
 }
 
 typedef char *(*format_fn) (struct lu_ent * ent);
@@ -852,7 +835,7 @@ generic_add(struct lu_module *module, const char *base_name,
 	char *key, *line, *filename, *contents;
 	char *fragment1, *fragment2;
 	int fd;
-	int r;
+	ssize_t r;
 	gpointer lock;
 	struct stat st;
 	off_t offset;
@@ -1012,9 +995,7 @@ static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_add(module, "passwd", lu_files_format_user, ent, error);
-	return ret;
+	return generic_add(module, "passwd", lu_files_format_user, ent, error);
 }
 
 /* Make last-minute changes to the record before adding it to /etc/shadow. */
@@ -1042,9 +1023,8 @@ static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_add(module, "shadow", lu_shadow_format_user, ent, error);
-	return ret;
+	return generic_add(module, "shadow", lu_shadow_format_user, ent,
+			   error);
 }
 
 /* Make last-minute changes before adding the group to the group file. */
@@ -1063,9 +1043,7 @@ static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_add(module, "group", lu_files_format_group, ent, error);
-	return ret;
+	return generic_add(module, "group", lu_files_format_group, ent, error);
 }
 
 /* Make last-minute changes before adding the shadowed group. */
@@ -1093,9 +1071,8 @@ static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_add(module, "gshadow", lu_shadow_format_group, ent, error);
-	return ret;
+	return generic_add(module, "gshadow", lu_shadow_format_group, ent,
+			   error);
 }
 
 /* Modify a particular record in the given file, field by field, using the
@@ -1106,12 +1083,12 @@ generic_mod(struct lu_module *module, const char *base_name,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	security_context_t prev_context;
-	char *filename = NULL, *key = NULL;
+	char *filename, *key;
 	int fd = -1;
 	gpointer lock;
 	size_t i;
-	const char *dir = NULL, *name_attribute;
-	GValueArray *names = NULL;
+	const char *dir, *name_attribute;
+	GValueArray *names;
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
@@ -1216,10 +1193,8 @@ static gboolean
 lu_files_user_mod(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_mod(module, "passwd", format_passwd,
-			  G_N_ELEMENTS(format_passwd), ent, error);
-	return ret;
+	return generic_mod(module, "passwd", format_passwd,
+			   G_N_ELEMENTS(format_passwd), ent, error);
 }
 
 /* Modify an entry in the group file. */
@@ -1227,10 +1202,8 @@ static gboolean
 lu_files_group_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_mod(module, "group", format_group,
-			  G_N_ELEMENTS(format_group), ent, error);
-	return ret;
+	return generic_mod(module, "group", format_group,
+			   G_N_ELEMENTS(format_group), ent, error);
 }
 
 /* Modify an entry in the shadow file. */
@@ -1238,11 +1211,8 @@ static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_mod(module, "shadow", format_shadow,
-			  G_N_ELEMENTS(format_shadow), ent, error);
-
-	return ret;
+	return generic_mod(module, "shadow", format_shadow,
+			   G_N_ELEMENTS(format_shadow), ent, error);
 }
 
 /* Modify an entry in the gshadow file. */
@@ -1250,10 +1220,8 @@ static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_mod(module, "gshadow", format_gshadow,
-			  G_N_ELEMENTS(format_gshadow), ent, error);
-	return ret;
+	return generic_mod(module, "gshadow", format_gshadow,
+			   G_N_ELEMENTS(format_gshadow), ent, error);
 }
 
 /* Delete an entity from the given file. */
@@ -1264,12 +1232,12 @@ generic_del(struct lu_module *module, const char *base_name,
 	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *value;
-	char *contents = NULL, *filename = NULL, *key = NULL;
-	char *fragment1 = NULL, *fragment2, *tmp;
+	char *contents, *filename, *key;
+	char *fragment1, *fragment2;
 	const char *dir;
 	struct stat st;
 	size_t len;
-	int fd = -1;
+	int fd;
         gboolean ret = FALSE;
 	gboolean found;
 	gpointer lock;
@@ -1341,6 +1309,8 @@ generic_del(struct lu_module *module, const char *base_name,
 	/* Remove all occurrences of this entry from the file. */
 	len = strlen(fragment1);
 	do {
+		char *tmp;
+
 		found = FALSE;
 		/* If the data is on the first line of the file, we remove the
 		 * first line. */
@@ -1395,7 +1365,7 @@ generic_del(struct lu_module *module, const char *base_name,
 	}
 	ret = TRUE;
 	/* Fall through */
-	
+
  err_contents:
 	g_free(contents);
  err_lock:
@@ -1413,9 +1383,7 @@ static gboolean
 lu_files_user_del(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_del(module, "passwd", ent, error);
-	return ret;
+	return generic_del(module, "passwd", ent, error);
 }
 
 /* Remove a group from the group file. */
@@ -1423,9 +1391,7 @@ static gboolean
 lu_files_group_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_del(module, "group", ent, error);
-	return ret;
+	return generic_del(module, "group", ent, error);
 }
 
 /* Remove a user from the shadow file. */
@@ -1433,9 +1399,7 @@ static gboolean
 lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_del(module, "shadow", ent, error);
-	return ret;
+	return generic_del(module, "shadow", ent, error);
 }
 
 /* Remove a group from the gshadow file. */
@@ -1443,9 +1407,7 @@ static gboolean
 lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_del(module, "gshadow", ent, error);
-	return ret;
+	return generic_del(module, "gshadow", ent, error);
 }
 
 /* Return a modified version of the cryptedPassword string, depending on
@@ -1495,10 +1457,10 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *val;
-	char *filename = NULL, *key = NULL;
+	char *filename, *key;
 	const char *dir;
-	char *value, *new_value, *namestring = NULL;
-	int fd = -1;
+	char *value, *new_value, *namestring;
+	int fd;
 	gpointer lock;
 	gboolean ret = FALSE;
 
@@ -1588,12 +1550,12 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 {
 	GValueArray *name = NULL;
 	GValue *val;
-	char *filename = NULL, *key = NULL;
+	char *filename, *key;
 	const char *dir;
 	char *value, *namestring;
-	int fd = -1;
+	int fd;
 	gpointer lock;
-	gboolean ret = FALSE;
+	gboolean ret;
 
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
@@ -1660,28 +1622,22 @@ static gboolean
 lu_files_user_lock(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "passwd", 2, ent, LO_LOCK, error);
-	return ret;
+	return generic_lock(module, "passwd", 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "passwd", 2, ent, LO_UNLOCK, error);
-	return ret;
+	return generic_lock(module, "passwd", 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_files_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			      struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "passwd", 2, ent, LO_UNLOCK_NONEMPTY,
-			   error);
-	return ret;
+	return generic_lock(module, "passwd", 2, ent, LO_UNLOCK_NONEMPTY,
+			    error);
 }
 
 /* Lock a group from the group file. */
@@ -1689,27 +1645,22 @@ static gboolean
 lu_files_group_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "group", 2, ent, LO_LOCK, error);
-	return ret;
+	return generic_lock(module, "group", 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "group", 2, ent, LO_UNLOCK, error);
-	return ret;
+	return generic_lock(module, "group", 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_files_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			       struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "group", 2, ent, LO_UNLOCK_NONEMPTY, error);
-	return ret;
+	return generic_lock(module, "group", 2, ent, LO_UNLOCK_NONEMPTY,
+			    error);
 }
 
 /* Lock a user in the shadow file. */
@@ -1717,28 +1668,22 @@ static gboolean
 lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "shadow", 2, ent, LO_LOCK, error);
-	return ret;
+	return generic_lock(module, "shadow", 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "shadow", 2, ent, LO_UNLOCK, error);
-	return ret;
+	return generic_lock(module, "shadow", 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_shadow_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			       struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "shadow", 2, ent, LO_UNLOCK_NONEMPTY,
-			   error);
-	return ret;
+	return generic_lock(module, "shadow", 2, ent, LO_UNLOCK_NONEMPTY,
+			    error);
 }
 
 /* Lock a group in the gshadow file. */
@@ -1746,28 +1691,22 @@ static gboolean
 lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "gshadow", 2, ent, LO_LOCK, error);
-	return ret;
+	return generic_lock(module, "gshadow", 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "gshadow", 2, ent, LO_UNLOCK, error);
-	return ret;
+	return generic_lock(module, "gshadow", 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_shadow_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 				struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_lock(module, "gshadow", 2, ent, LO_UNLOCK_NONEMPTY,
-			   error);
-	return ret;
+	return generic_lock(module, "gshadow", 2, ent, LO_UNLOCK_NONEMPTY,
+			    error);
 }
 
 /* Check if the account is locked. */
@@ -1775,36 +1714,28 @@ static gboolean
 lu_files_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_is_locked(module, "passwd", 2, ent, error);
-	return ret;
+	return generic_is_locked(module, "passwd", 2, ent, error);
 }
 
 static gboolean
 lu_files_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_is_locked(module, "group", 2, ent, error);
-	return ret;
+	return generic_is_locked(module, "group", 2, ent, error);
 }
 
 static gboolean
 lu_shadow_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_is_locked(module, "shadow", 2, ent, error);
-	return ret;
+	return generic_is_locked(module, "shadow", 2, ent, error);
 }
 
 static gboolean
 lu_shadow_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_is_locked(module, "gshadow", 2, ent, error);
-	return ret;
+	return generic_is_locked(module, "gshadow", 2, ent, error);
 }
 
 /* Change a password, in a given file, in a given field, for a given account,
@@ -1817,9 +1748,9 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	security_context_t prev_context;
 	GValueArray *name = NULL;
 	GValue *val;
-	char *filename = NULL, *key = NULL, *value, *namestring = NULL;
+	char *filename, *key, *value, *namestring;
 	const char *dir;
-	int fd = -1;
+	int fd;
 	gpointer lock;
 	gboolean ret = FALSE;
 
@@ -1916,39 +1847,32 @@ static gboolean
 lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		      const char *password, struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_setpass(module, "passwd", 2, ent, password, FALSE,
-			      error);
-	return ret;
+	return generic_setpass(module, "passwd", 2, ent, password, FALSE,
+			       error);
 }
 
 static gboolean
 lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_setpass(module, "group", 2, ent, password, FALSE, error);
-	return ret;
+	return generic_setpass(module, "group", 2, ent, password, FALSE,
+			       error);
 }
 
 static gboolean
 lu_files_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, FALSE,
-			      error);
-	return ret;
+	return generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, FALSE,
+			       error);
 }
 
 static gboolean
 lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_setpass(module, "group", 2, ent, LU_CRYPTED, FALSE,
-			      error);
-	return ret;
+	return generic_setpass(module, "group", 2, ent, LU_CRYPTED, FALSE,
+			       error);
 }
 
 /* Set the shadow last-changed field to today's date. */
@@ -2024,11 +1948,11 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 {
 	int fd;
 	gpointer lock;
-	GValueArray *ret = NULL;
+	GValueArray *ret;
 	GValue value;
 	char *buf;
-	char *key = NULL, *filename = NULL, *p;
-	const char *dir = NULL;
+	char *key, *filename;
+	const char *dir;
 	FILE *fp;
 
 	g_assert(module != NULL);
@@ -2077,6 +2001,8 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	g_value_init(&value, G_TYPE_STRING);
 	/* Read each line, */
 	while ((buf = line_read(fp)) != NULL) {
+		char *p;
+
 		if (strlen(buf) == 1) {
 			g_free(buf);
 			continue;
@@ -2111,18 +2037,14 @@ static GValueArray *
 lu_files_users_enumerate(struct lu_module *module, const char *pattern,
 			 struct lu_error **error)
 {
-	GValueArray *ret;
-	ret = lu_files_enumerate(module, "passwd", pattern, error);
-	return ret;
+	return lu_files_enumerate(module, "passwd", pattern, error);
 }
 
 static GValueArray *
 lu_files_groups_enumerate(struct lu_module *module, const char *pattern,
 			  struct lu_error **error)
 {
-	GValueArray *ret;
-	ret = lu_files_enumerate(module, "group", pattern, error);
-	return ret;
+	return lu_files_enumerate(module, "group", pattern, error);
 }
 
 /* Get a list of all of the users who are in a given group. */
@@ -2133,11 +2055,11 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 {
 	int fd;
 	gpointer lock;
-	GValueArray *ret = NULL;
+	GValueArray *ret;
 	GValue value;
 	char *buf, grp[CHUNK_SIZE];
-	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
-	const char *dir = NULL;
+	char *key, *pwdfilename, *grpfilename, *p, *q;
+	const char *dir;
 	FILE *fp;
 
 	g_assert(module != NULL);
@@ -2337,11 +2259,11 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 {
 	int fd;
 	gpointer lock;
-	GValueArray *ret = NULL;
+	GValueArray *ret;
 	GValue value;
 	char *buf;
-	char *key = NULL, *pwdfilename = NULL, *grpfilename = NULL, *p, *q;
-	const char *dir = NULL;
+	char *key, *pwdfilename, *grpfilename, *p, *q;
+	const char *dir;
 	FILE *fp;
 
 	(void)uid;
@@ -2537,10 +2459,9 @@ lu_files_enumerate_full(struct lu_module *module,
 	gpointer lock;
 	GPtrArray *ret = NULL;
 	char *buf;
-	char *key = NULL, *filename = NULL;
-	const char *dir = NULL;
+	char *key, *filename;
+	const char *dir;
 	FILE *fp;
-	struct lu_ent *ent;
 
 	g_assert(module != NULL);
 	g_assert(base_name != NULL);
@@ -2582,6 +2503,8 @@ lu_files_enumerate_full(struct lu_module *module,
 	/* Allocate an array to hold results. */
 	ret = g_ptr_array_new();
 	while ((buf = line_read(fp)) != NULL) {
+		struct lu_ent *ent;
+
 		if (strlen(buf) == 1 || buf[0] == '+' || buf[0] == '-') {
 			g_free(buf);
 			continue;
@@ -2832,14 +2755,14 @@ struct lu_module *
 libuser_files_init(struct lu_context *context,
 		   struct lu_error **error)
 {
-	struct lu_module *ret = NULL;
+	struct lu_module *ret;
 
 	g_return_val_if_fail(context != NULL, FALSE);
 
 	/* Handle authenticating to the data source. */
 	if (geteuid() != 0) {
 		const char *val;
-		
+
 		/* Needed for the test suite, handy for debugging. */
 		val = lu_cfg_read_single(context, "files/nonroot", NULL);
 		if (val == NULL || strcmp (val, "yes") != 0) {
@@ -2907,7 +2830,7 @@ struct lu_module *
 libuser_shadow_init(struct lu_context *context,
 	            struct lu_error **error)
 {
-	struct lu_module *ret = NULL;
+	struct lu_module *ret;
 	struct stat st;
 	char *shadow_file;
 	const char *dir;

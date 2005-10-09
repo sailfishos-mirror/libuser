@@ -38,10 +38,9 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL;
+	GValueArray *values;
 	GValue *value;
-	const char *user = NULL, *tmp = NULL;
-	gid_t gid;
+	const char *user, *tmp;
 	int interactive = FALSE;
 	int remove_home = 0, dont_remove_group = 0;
 	int c;
@@ -110,6 +109,8 @@ main(int argc, const char **argv)
 				user);
 			return 4;
 		} else {
+			gid_t gid;
+
 			value = g_value_array_get_nth(values, 0);
 			gid = lu_value_get_id(value);
 			g_assert(gid != LU_VALUE_INVALID_ID);

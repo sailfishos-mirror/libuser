@@ -43,11 +43,11 @@
 int
 main(int argc, const char **argv)
 {
-	const char *user = NULL, *gecos = NULL, *sn, *gn, *email, *filtered;
+	const char *user, *gecos;
 	const char *name, *office, *officephone, *homephone;
-	struct lu_context *ctx = NULL;
+	struct lu_context *ctx;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent = NULL;
+	struct lu_ent *ent;
 	GValueArray *values;
 	GValue *value, val;
 	int interactive = FALSE;
@@ -62,7 +62,6 @@ main(int argc, const char **argv)
 	char **fields;
 	size_t fields_len;
 	size_t pcount, i;
-	struct passwd *pwd = NULL;
 
 	/* Set up i18n. */
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -84,6 +83,8 @@ main(int argc, const char **argv)
 	/* If no user name was specified, or we're running in a setuid
 	 * environment, force the user name to be the current user. */
 	if ((user == NULL) || (geteuid() != getuid())) {
+		struct passwd *pwd;
+
 		pwd = getpwuid(getuid());
 		if (pwd != NULL) {
 			user = g_strdup(pwd->pw_name);
@@ -149,6 +150,8 @@ main(int argc, const char **argv)
 	/* If we have it, prompt for the user's surname. */
 	values = lu_ent_get(ent, LU_SN);
 	if (values != NULL) {
+		const char *sn;
+
 		value = g_value_array_get_nth(values, 0);
 		sn = lu_value_strdup(value);
 		prompts[pcount].key = SURNAME_KEY;
@@ -162,6 +165,8 @@ main(int argc, const char **argv)
 	/* If we have it, prompt for the user's givenname. */
 	values = lu_ent_get(ent, LU_GIVENNAME);
 	if (values != NULL) {
+		const char *gn;
+
 		value = g_value_array_get_nth(values, 0);
 		gn = lu_value_strdup(value);
 		prompts[pcount].key = GIVENNAME_KEY;
@@ -202,6 +207,8 @@ main(int argc, const char **argv)
 	/* If we have it, prompt for the user's email. */
 	values = lu_ent_get(ent, LU_EMAIL);
 	if (values != NULL) {
+		const char *email;
+
 		value = g_value_array_get_nth(values, 0);
 		email = lu_value_strdup(value);
 		prompts[pcount].key = EMAIL_KEY;
@@ -228,6 +235,8 @@ main(int argc, const char **argv)
 
 	/* Now iterate over the answers and figure things out. */
 	for (i = 0; i < pcount; i++) {
+		const char *filtered;
+
 		if (prompts[i].value == NULL) {
 			filtered = "";
 		} else
@@ -238,61 +247,26 @@ main(int argc, const char **argv)
 		}
 		g_value_set_string(&val, filtered);
 
-		if (strcmp(prompts[i].key, NAME_KEY) == 0) {
-			name = filtered;
-			lu_ent_clear(ent, LU_COMMONNAME);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_COMMONNAME, &val);
-			}
+#define ATTR__(KEY, EXTRA, ATTR)				\
+		if (strcmp(prompts[i].key, KEY) == 0) {		\
+			EXTRA;					\
+			lu_ent_clear(ent, ATTR);		\
+			if (strlen(filtered) > 0)		\
+				lu_ent_add(ent, ATTR, &val);	\
 		}
+#define ATTR(KEY, ATTR_) ATTR__(KEY, , ATTR_)
+#define NAMED_ATTR(KEY, NAME, ATTR_) ATTR__(KEY, NAME = filtered, ATTR_)
 
-		if (strcmp(prompts[i].key, SURNAME_KEY) == 0) {
-			sn = filtered;
-			lu_ent_clear(ent, LU_SN);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_SN, &val);
-			}
-		}
-
-		if (strcmp(prompts[i].key, GIVENNAME_KEY) == 0) {
-			gn = filtered;
-			lu_ent_clear(ent, LU_GIVENNAME);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_GIVENNAME, &val);
-			}
-		}
-
-		if (strcmp(prompts[i].key, OFFICE_KEY) == 0) {
-			office = filtered;
-			lu_ent_clear(ent, LU_ROOMNUMBER);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_ROOMNUMBER, &val);
-			}
-		}
-
-		if (strcmp(prompts[i].key, OFFICEPHONE_KEY) == 0) {
-			officephone = filtered;
-			lu_ent_clear(ent, LU_TELEPHONENUMBER);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_TELEPHONENUMBER, &val);
-			}
-		}
-
-		if (strcmp(prompts[i].key, HOMEPHONE_KEY) == 0) {
-			homephone = filtered;
-			lu_ent_clear(ent, LU_HOMEPHONE);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_HOMEPHONE, &val);
-			}
-		}
-
-		if (strcmp(prompts[i].key, EMAIL_KEY) == 0) {
-			email = filtered;
-			lu_ent_clear(ent, LU_EMAIL);
-			if (strlen(filtered) > 0) {
-				lu_ent_add(ent, LU_EMAIL, &val);
-			}
-		}
+		NAMED_ATTR(NAME_KEY, name, LU_COMMONNAME);
+		ATTR(SURNAME_KEY, LU_SN);
+		ATTR(GIVENNAME_KEY, LU_GIVENNAME);
+		NAMED_ATTR(OFFICE_KEY, office, LU_ROOMNUMBER);
+		NAMED_ATTR(OFFICEPHONE_KEY, officephone, LU_TELEPHONENUMBER);
+		NAMED_ATTR(HOMEPHONE_KEY, homephone, LU_HOMEPHONE);
+		ATTR(EMAIL_KEY, LU_EMAIL);
+#undef NAMED_ATTR
+#undef ATTR
+#undef ATTR__
 	}
 
 	g_value_reset(&val);

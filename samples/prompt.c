@@ -39,7 +39,6 @@ main(void)
 		 g_strdup("anonymous"), NULL, NULL},
 	};
 	struct lu_error *error = NULL;
-	size_t i;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
@@ -48,6 +47,8 @@ main(void)
 	if (lu_prompt_console(prompts,
 			      sizeof(prompts) / sizeof(prompts[0]),
 			      NULL, &error)) {
+		size_t i;
+
 		g_print(gettext("Prompts succeeded.\n"));
 		for (i = 0; i < sizeof(prompts) / sizeof(prompts[0]); i++) {
 			if (prompts[i].value) {

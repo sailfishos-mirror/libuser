@@ -237,8 +237,8 @@ interact(LDAP *ld, unsigned flags, void *defs, void *xinteract_data)
 
 	(void)ld;
 	(void)flags;
-	for(i = 0, retval = LDAP_SUCCESS, interact_data = xinteract_data;
-	    interact_data && (interact_data[i].id != SASL_CB_LIST_END);
+	interact_data = xinteract_data;
+	for(i = 0; interact_data && (interact_data[i].id != SASL_CB_LIST_END);
 	    i++) {
 		interact_data[i].result = NULL;
 		interact_data[i].len = 0;
@@ -268,10 +268,10 @@ interact(LDAP *ld, unsigned flags, void *defs, void *xinteract_data)
 static LDAP *
 bind_server(struct lu_ldap_context *context, struct lu_error **error)
 {
-	LDAP *ldap = NULL;
+	LDAP *ldap;
 	LDAPControl *server = NULL, *client = NULL;
 	int ret, first_failure;
-	const char *generated_binddn = "", *first_binddn;
+	const char *generated_binddn, *first_binddn;
 	char *binddn, *tmp;
 	char *user;
 	char *password;
@@ -499,11 +499,12 @@ static const char *
 lu_ldap_ent_to_dn(struct lu_module *module, const char *namingAttr,
 		  const char *name, const char *branch)
 {
+	static char *noattrs[] = { NULL };
+
 	const char *base, *mapped_naming_attr;
-	char *tmp = NULL, *ret = NULL, *filter;
-	char *noattrs[] = {NULL};
+	char *tmp, *ret = NULL, *filter;
 	struct lu_ldap_context *ctx;
-	LDAPMessage *messages = NULL, *entry = NULL;
+	LDAPMessage *messages = NULL;
 
 	g_assert(module != NULL);
 	g_assert(namingAttr != NULL);
@@ -519,6 +520,8 @@ lu_ldap_ent_to_dn(struct lu_module *module, const char *namingAttr,
 	filter = g_strdup_printf("(%s=%s)", mapped_naming_attr, name);
 	if (ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filter,
 			  noattrs, FALSE, &messages) == LDAP_SUCCESS) {
+		LDAPMessage *entry;
+
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if (entry != NULL) {
 			tmp = ldap_get_dn(ctx->ldap, entry);
@@ -550,13 +553,9 @@ lu_ldap_lookup(struct lu_module *module,
 	       enum lu_entity_type type, struct lu_error **error)
 {
 	LDAPMessage *messages = NULL, *entry = NULL;
-	GValueArray *array;
-	GValue value, *val;
-	const char *attr;
-	char *filt = NULL, **values = NULL, *p, **mapped_attributes;
+	char *filt, **mapped_attributes;
 	const char *dn = NULL;
-	const char *base = NULL;
-	size_t i, j;
+	const char *base;
 	gboolean ret = FALSE;
 	struct lu_ldap_context *ctx;
 
@@ -575,16 +574,16 @@ lu_ldap_lookup(struct lu_module *module,
 	ctx = module->module_context;
 
 	if (ent != NULL) {
+		GValueArray *array;
 		/* Try to use the dn the object already knows about. */
-		dn = NULL;
 
-		if (dn == NULL) {
-			array = lu_ent_get(ent, DISTINGUISHED_NAME);
-			if (array != NULL) {
-				val = g_value_array_get_nth(array, 0);
-				if (G_VALUE_HOLDS_STRING(val))
-					dn = g_value_get_string(val);
-			}
+		array = lu_ent_get(ent, DISTINGUISHED_NAME);
+		if (array != NULL) {
+			GValue *val;
+
+			val = g_value_array_get_nth(array, 0);
+			if (G_VALUE_HOLDS_STRING(val))
+				dn = g_value_get_string(val);
 		}
 
 		if (dn == NULL)
@@ -651,6 +650,10 @@ lu_ldap_lookup(struct lu_module *module,
 
 	/* If we got an entry, read its contents into an entity structure. */
 	while (entry != NULL) {
+		GValue value;
+		size_t i;
+		char *p;
+
 		/* Mark that the search succeeded. */
 		ret = TRUE;
 		/* If we need to add the data to the array, then create a new
@@ -669,12 +672,17 @@ lu_ldap_lookup(struct lu_module *module,
 
 		/* Read each of the attributes we asked for. */
 		for (i = 0; attributes[i]; i++) {
+			char **values;
+			const char *attr;
+
 			/* Get the values which correspond to this attribute. */
 			attr = attributes[i];
 			values = ldap_get_values(ctx->ldap, entry,
 						 mapped_attributes[i]);
 			/* If we got answers, add them. */
 			if (values) {
+				size_t j;
+
 				lu_ent_clear_current(ent, attr);
 				for (j = 0; values[j]; j++) {
 					intmax_t imax;
@@ -750,8 +758,8 @@ lu_ldap_user_lookup_id(struct lu_module *module, uid_t uid,
 		       struct lu_ent *ent, struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	gboolean ret = FALSE;
-	gchar *uid_string = NULL;
+	gboolean ret;
+	gchar *uid_string;
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
@@ -785,8 +793,8 @@ lu_ldap_group_lookup_id(struct lu_module *module, gid_t gid,
 			struct lu_ent *ent, struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	gboolean ret = FALSE;
-	gchar *gid_string = NULL;
+	gboolean ret;
+	gchar *gid_string;
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
@@ -846,7 +854,7 @@ objectclass_present(const char *dn, const char *class, char *const *old_values,
 		    size_t new_count)
 {
 	size_t i;
-	
+
 	for (i = 0; i < old_count; i++) {
 		if (strcmp(class, old_values[i]) == 0) {
 #ifdef DEBUG
@@ -1059,7 +1067,7 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 	     const char *namingAttr)
 {
 	LDAPMod **mods = NULL;
-	GList *attrs = NULL;
+	GList *attrs;
 
 	g_assert(ent != NULL);
 	g_assert(ent->magic == LU_ENT_MAGIC);
@@ -1184,10 +1192,13 @@ get_ent_mods(struct lu_module *module, struct lu_ent *ent,
 static void
 free_ent_mods(LDAPMod ** mods)
 {
-	int i, j;
+	size_t i;
+
 	g_assert(mods != NULL);
 	for (i = 0; mods && mods[i]; i++) {
 		if (mods[i]->mod_values) {
+			size_t j;
+
 			for (j = 0; mods[i]->mod_values[j] != NULL; j++) {
 				g_free(mods[i]->mod_values[j]);
 			}
@@ -1203,11 +1214,13 @@ free_ent_mods(LDAPMod ** mods)
 static void
 dump_mods(LDAPMod ** mods)
 {
-	int i, j;
+	size_t i;
 	g_assert(mods != NULL);
 	for (i = 0; mods[i]; i++) {
 		g_print("%s (%d)\n", mods[i]->mod_type, mods[i]->mod_op);
 		if (mods[i]->mod_values) {
+			size_t j;
+
 			for (j = 0; mods[i]->mod_values[j]; j++) {
 				g_print(" = `%s'\n",
 					mods[i]->mod_values[j]);
@@ -1224,10 +1237,11 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 			    const char *dn,
 			    struct lu_ent *ent)
 {
-	char *attrs[] = {
+	static char *attrs[] = {
 		OBJECTCLASS,
 		NULL,
 	};
+
 	char **old_values, **new_values;
 	LDAPMessage *res = NULL;
 	LDAPMessage *entry;
@@ -1281,12 +1295,12 @@ static gboolean
 lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	    struct lu_ent *ent, const char *branch, struct lu_error **error)
 {
-	LDAPMod **mods = NULL;
+	LDAPMod **mods;
 	LDAPControl *server = NULL, *client = NULL;
-	GValueArray *name = NULL, *old_name = NULL;
+	GValueArray *name, *old_name;
 	GValue *value;
 	char *name_string;
-	const char *dn = NULL, *namingAttr = NULL;
+	const char *dn, *namingAttr;
 	int err;
 	gboolean ret = FALSE;
 	struct lu_ldap_context *ctx;
@@ -1422,10 +1436,10 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 	    struct lu_ent *ent, const char *branch, struct lu_error **error)
 {
 	LDAPControl *server = NULL, *client = NULL;
-	GValueArray *name = NULL;
+	GValueArray *name;
 	GValue *value;
 	char *name_string;
-	const char *dn = NULL, *namingAttr = NULL;
+	const char *dn, *namingAttr;
 	int err;
 	gboolean ret = FALSE;
 	struct lu_ldap_context *ctx;
@@ -1488,7 +1502,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	GValue *value;
 	char *result, *name_string, *oldpassword, *values[2][2];
 	const char *tmp, *attribute;
-	struct lu_ldap_context *ctx = module->module_context;
+	struct lu_ldap_context *ctx;
 	size_t scheme_len = strlen(LU_CRYPTED);
 	int err;
 
@@ -1497,6 +1511,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	g_assert(namingAttr != NULL);
 	g_assert(strlen(namingAttr) > 0);
 	LU_ERROR_CHECK(error);
+	ctx = module->module_context;
 
 	/* Get the entry's name. */
 	name = lu_ent_get(ent, namingAttr);
@@ -1621,10 +1636,10 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
 	char *attributes[] = { NULL, NULL };
-	char **values = NULL;
+	char **values;
 	LDAPMessage *entry = NULL, *messages = NULL;
 	int i;
-	gboolean locked = FALSE;
+	gboolean locked;
 
 	/* Get the name of the user or group. */
 	name = lu_ent_get(ent, namingAttr);
@@ -1704,10 +1719,10 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	char *attributes[] = { NULL, NULL };
 	char **values, *addvalues[] = { NULL, NULL }, *rmvalues[] = {
 	NULL, NULL};
-	char *tmp = NULL, *previous;
+	char *previous;
 	int i;
 	size_t j;
-	LDAPMessage *entry = NULL, *messages = NULL;
+	LDAPMessage *messages = NULL;
 	LDAPMod addmod, rmmod;
 	LDAPMod *mods[3];
 	LDAPControl *server = NULL, *client = NULL;
@@ -1742,6 +1757,8 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	if ((i = ldap_search_s(ctx->ldap, dn, LDAP_SCOPE_BASE, filter,
 			       attributes, FALSE,
 			       &messages)) == LDAP_SUCCESS) {
+		LDAPMessage *entry;
+
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if (entry != NULL) {
 			values = ldap_get_values(ctx->ldap, entry,
@@ -1781,6 +1798,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		addvalues[0] = (char *)password;
 	} else {
 		const char *crypted;
+		char *tmp;
 
 		crypted =
 		    lu_make_crypted(password, previous
@@ -1857,12 +1875,10 @@ lu_ldap_enumerate(struct lu_module *module,
 		  const char *returnAttr, const char *branch,
 		  struct lu_error **error)
 {
-	LDAPMessage *messages = NULL, *entry = NULL;
-	char **values = NULL;
-	char *base = NULL, *filt = NULL;
-	int i;
+	LDAPMessage *messages = NULL;
+	char *base, *filt;
 	GValue value;
-	GValueArray *ret = NULL;
+	GValueArray *ret;
 	struct lu_ldap_context *ctx;
 	char *attributes[] = { (char *) returnAttr, NULL };
 
@@ -1871,8 +1887,6 @@ lu_ldap_enumerate(struct lu_module *module,
 	g_assert(strlen(searchAttr) > 0);
 	g_assert(returnAttr != NULL);
 	g_assert(strlen(returnAttr) > 0);
-	g_assert(attributes != NULL);
-	g_assert(attributes[0] != NULL);
 	LU_ERROR_CHECK(error);
 
 	ctx = module->module_context;
@@ -1896,9 +1910,14 @@ lu_ldap_enumerate(struct lu_module *module,
 	g_value_init(&value, G_TYPE_STRING);
 	if (ldap_search_s(ctx->ldap, base, LDAP_SCOPE_SUBTREE, filt, attributes,
 			  FALSE, &messages) == LDAP_SUCCESS) {
+		LDAPMessage *entry;
+
 		entry = ldap_first_entry(ctx->ldap, messages);
 		if (entry != NULL) {
 			while (entry != NULL) {
+				char **values;
+				size_t i;
+
 				values = ldap_get_values(ctx->ldap, entry,
 							 returnAttr);
 				for (i = 0;
@@ -2238,7 +2257,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 				 struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	GValueArray *primaries = NULL, *secondaries = NULL;
+	GValueArray *primaries;
 	GValue *value;
 	char *grp;
 	size_t i;
@@ -2250,6 +2269,8 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 	primaries = lu_ldap_enumerate(module, "gidNumber", grp, "uid",
 				      ctx->user_branch, error);
 	if ((error == NULL) || (*error == NULL)) {
+		GValueArray *secondaries;
+
 		secondaries = lu_ldap_enumerate(module, "cn", group,
 						"memberUid", ctx->group_branch,
 						error);
@@ -2292,11 +2313,9 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 				 struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	GValueArray *primaries = NULL, *secondaries = NULL, *values, *gids;
+	GValueArray *primaries, *gids;
 	GValue *value;
-	size_t i, j;
-	gid_t gid;
-	struct lu_ent *ent = NULL;
+	size_t i;
 
 	(void)uid;
 	LU_ERROR_CHECK(error);
@@ -2310,12 +2329,18 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 				 ctx->user_branch, error);
 	/* For each GID, look up the group.  Which has this GID. */
 	for (i = 0; (gids != NULL) && (i < gids->n_values); i++) {
+		gid_t gid;
+		struct lu_ent *ent;
+
 		value = g_value_array_get_nth(gids, i);
 		gid = lu_value_get_id(value);
 		g_assert (gid != LU_VALUE_INVALID_ID);
 		ent = lu_ent_new();
 		if (lu_group_lookup_id(module->lu_context, gid,
 				       ent, error)) {
+			GValueArray *values;
+			size_t j;
+
 			/* Get the group's names and add them to the list
 			 * of values to return. */
 			values = lu_ent_get(ent, LU_GROUPNAME);
@@ -2330,6 +2355,8 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	/* Search for the supplemental groups which list this user as
 	 * a member. */
 	if ((error == NULL) || (*error == NULL)) {
+		GValueArray *secondaries;
+
 		secondaries = lu_ldap_enumerate(module, "memberUid", user,
 						"cn", ctx->group_branch,
 						error);
@@ -2401,14 +2428,14 @@ lu_ldap_uses_elevated_privileges(struct lu_module *module)
 struct lu_module *
 libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 {
-	struct lu_module *ret = NULL;
-	struct lu_ldap_context *ctx = NULL;
+	struct lu_module *ret;
+	struct lu_ldap_context *ctx;
 	struct lu_prompt prompts[G_N_ELEMENTS(ctx->prompts)];
 	char *user;
 	const char *bind_type;
 	char **bind_types;
 	size_t i;
-	LDAP *ldap = NULL;
+	LDAP *ldap;
 
 	g_assert(context != NULL);
 	g_assert(context->prompter != NULL);

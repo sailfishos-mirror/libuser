@@ -40,12 +40,13 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			      gpointer callback_data,
 			      struct lu_error **error)
 {
-	PyObject *list = NULL, *tuple = NULL, *ret;
 	PyObject **prompt_data = (PyObject **) callback_data;
-	int i;
 
 	DEBUG_ENTRY;
 	if (count > 0) {
+		PyObject *list, *tuple, *ret;
+		int i;
+
 		if (!PyCallable_Check(prompt_data[0])) {
 			lu_error_new(error, lu_error_generic, NULL);
 			PyErr_SetString(PyExc_RuntimeError,
@@ -112,10 +113,9 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		     PyObject * kwargs, lu_prompt_fn * prompter)
 {
 	int count, i;
-	PyObject *list = NULL, *item = NULL, *moreargs = NULL;
-	struct lu_prompt *prompts = NULL;
+	PyObject *list = NULL, *moreargs = NULL;
+	struct lu_prompt *prompts;
 	struct lu_error *error = NULL;
-	gboolean success = FALSE;
 	char *keywords[] = { "prompt_list", "more_args", NULL };
 
 	g_return_val_if_fail(self != NULL, NULL);
@@ -131,6 +131,8 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 	count = PyList_Size(list);
 	DEBUG_CALL;
 	for (i = 0; i < count; i++) {
+		PyObject *item;
+
 		item = PyList_GetItem(list, i);
 		DEBUG_CALL;
 		if (!Prompt_Check(item)) {
@@ -168,8 +170,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		lu_prompt_console_quiet);
 	fprintf(stderr, "Calling prompter function at <%p>.\n", prompter);
 #endif
-	success = prompter(prompts, count, self->prompt_data, &error);
-	if (success) {
+	if (prompter(prompts, count, self->prompt_data, &error) != FALSE) {
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *obj;
 			obj = (struct libuser_prompt *) PyList_GetItem(list, i);
@@ -185,6 +186,8 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		DEBUG_EXIT;
 		return Py_BuildValue("");
 	} else {
+		if (error != NULL)
+			lu_error_free(&error);
 		for (i = 0; i < count; i++) {
 			PyObject *obj;
 
@@ -370,7 +373,7 @@ libuser_prompt_print(struct libuser_prompt *self, FILE * fp, int flags)
 static struct libuser_prompt *
 libuser_prompt_new(void)
 {
-	struct libuser_prompt *ret = NULL;
+	struct libuser_prompt *ret;
 	DEBUG_ENTRY;
 	ret = PyObject_NEW(struct libuser_prompt, &PromptType);
 	if (ret != NULL) {

@@ -162,7 +162,6 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 	int i;
 	int maxtries = LU_MAX_LOCK_ATTEMPTS;
 	int delay = LU_LOCK_TIMEOUT;
-	struct timeval tv;
 	struct lu_lock *ret;
 
 	LU_ERROR_CHECK(error);
@@ -178,6 +177,8 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 		}
 		i = fcntl(ret->fd, F_SETLK, &ret->lock);
 		if ((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
+			struct timeval tv;
+
 			if (maxtries-- <= 0) {
 				break;
 			}
@@ -216,11 +217,9 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			   struct lu_error **error)
 {
 	char *contents;
-	char *buf;
 	struct stat st;
 	off_t offset;
-	char *ret = NULL, *p, *q, *colon;
-	int i;
+	char *ret = NULL, *p;
 	gboolean mapped = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -255,6 +254,9 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 
 	p = contents;
 	do {
+		char *buf, *q, *colon;
+		int i;
+
 		q = memchr(p, '\n', st.st_size - (p - contents));
 
 		colon = buf = p;
@@ -323,9 +325,9 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		   struct lu_error **error)
 {
 	struct stat st;
-	char *buf = NULL;
-	char *pattern = NULL;
-	char *line = NULL, *start = NULL, *end = NULL;
+	char *buf;
+	char *pattern;
+	char *line, *start = NULL, *end = NULL;
 	char *ret;
 	size_t len;
 	gboolean mapped = FALSE;
@@ -347,6 +349,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		buf = g_malloc(st.st_size);
 		if (lseek(fd, 0, SEEK_SET) == -1) {
 			lu_error_new(error, lu_error_read, NULL);
+			g_free(buf);
 			return NULL;
 		}
 		if (read(fd, buf, st.st_size) != st.st_size) {
@@ -430,8 +433,8 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 {
 	struct stat st;
 	char *buf;
-	char *pattern = NULL;
-	char *line = NULL, *start = NULL, *end = NULL;
+	char *pattern;
+	char *line, *start = NULL, *end = NULL;
 	gboolean ret = FALSE;
 	unsigned fi = 1;
 
@@ -528,22 +531,26 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		size_t len;
 		if (lseek(fd, 0, SEEK_SET) == -1) {
 			lu_error_new(error, lu_error_write, NULL);
-			return FALSE;
+			ret = FALSE;
+			goto err;
 		}
 		len = strlen(buf);
 		if (write(fd, buf, len) == -1) {
 			lu_error_new(error, lu_error_write, NULL);
-			return FALSE;
+			ret = FALSE;
+			goto err;
 		}
 		if (ftruncate(fd, len) == -1) {
 			lu_error_new(error, lu_error_write, NULL);
-			return FALSE;
+			ret = FALSE;
+			goto err;
 		}
 	} else {
 		lu_error_new(error, lu_error_search, NULL);
-		return FALSE;
+		ret = FALSE;
 	}
 
+err:
 	g_free(pattern);
 	g_free(buf);
 

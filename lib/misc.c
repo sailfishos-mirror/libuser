@@ -82,7 +82,6 @@ lu_value_init_set_id(GValue *value, id_t id)
 		g_value_init(value, G_TYPE_INT64);
 		g_value_set_int64(value, id);
 	}
-	
 }
 
 id_t
@@ -149,10 +148,11 @@ const char *
 lu_get_modules(struct lu_context *context)
 {
 	char *tmp = NULL, *ret = NULL;
-	GValue *value;
 	size_t i;
 
 	for (i = 0; i < context->module_names->n_values; i++) {
+		GValue *value;
+
 		value = g_value_array_get_nth(context->module_names, i);
 		if (tmp) {
 			char *p;

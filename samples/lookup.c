@@ -33,7 +33,7 @@ int
 main(int argc, char **argv)
 {
 	struct lu_context *lu;
-	gboolean success = FALSE, group = FALSE, byid = FALSE;
+	gboolean success, group = FALSE, byid = FALSE;
 	int c;
 	id_t id;
 	struct lu_ent *ent, *tmp;

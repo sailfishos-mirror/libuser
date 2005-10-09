@@ -38,20 +38,19 @@ main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gid = NULL, *addAdmins = NULL, *remAdmins = NULL,
-		   *addMembers = NULL, *remMembers = NULL, *group = NULL,
-		   *tmp = NULL, *gid_number_str = NULL;
-	char **admins = NULL, **members = NULL;
+		   *addMembers = NULL, *remMembers = NULL, *group,
+		   *gid_number_str = NULL;
+	char **admins, **members;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	gid_t oldGidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL;
+	struct lu_context *ctx;
+	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	GValueArray *values = NULL, *users = NULL;
 	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
-	size_t i;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -198,7 +197,6 @@ main(int argc, const char **argv)
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
-			admins = NULL;
 		}
 		g_value_unset(&val);
 	}
@@ -214,7 +212,6 @@ main(int argc, const char **argv)
 			}
 			lu_hup_nscd();
 			g_strfreev(admins);
-			admins = NULL;
 		}
 		g_value_unset(&val);
 	}
@@ -231,7 +228,6 @@ main(int argc, const char **argv)
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
-			members = NULL;
 		}
 		g_value_unset(&val);
 	}
@@ -247,7 +243,6 @@ main(int argc, const char **argv)
 			}
 			lu_hup_nscd();
 			g_strfreev(members);
-			members = NULL;
 		}
 		g_value_unset(&val);
 	}
@@ -291,12 +286,16 @@ main(int argc, const char **argv)
 
 	if (oldGidNumber != LU_VALUE_INVALID_ID &&
 	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
+		size_t i;
+
 		ent = lu_ent_new();
 
 		memset(&val, 0, sizeof(val));
 		lu_value_init_set_id(&val, gidNumber);
 
 		for (i = 0; i < users->n_values; i++) {
+			const char *tmp;
+
 			value = g_value_array_get_nth(users, i);
 			tmp = g_value_get_string(value);
 			if (lu_user_lookup_name (ctx, tmp, ent, &error)) {

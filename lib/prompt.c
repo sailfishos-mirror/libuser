@@ -35,8 +35,6 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		  struct lu_error **error)
 {
 	int i;
-	char buf[LINE_MAX];
-	struct termios otermios, ntermios;
 
 	(void)calldata;
 	LU_ERROR_CHECK(error);
@@ -46,6 +44,9 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 	}
 
 	for (i = 0; i < count; i++) {
+		char buf[LINE_MAX];
+		struct termios otermios, ntermios;
+
 		if (prompts[i].prompt) {
 			g_print("%s",
 				prompts[i].domain ?

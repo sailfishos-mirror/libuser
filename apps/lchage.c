@@ -77,9 +77,9 @@ read_ndays(GValueArray *array)
 static void
 date_to_string(gint n_days, char *buf, size_t len)
 {
-	GDate *date;
-
 	if ((n_days >= 0) && (n_days < 99999)) {
+		GDate *date;
+
 		date = g_date_new_dmy(1, G_DATE_JANUARY, 1970);
 		g_date_add_days(date, n_days);
 		g_date_strftime(buf, len, "%x", date);
@@ -90,16 +90,13 @@ date_to_string(gint n_days, char *buf, size_t len)
 int
 main(int argc, const char **argv)
 {
-	char buf[LINE_MAX];
 	long shadowMin = INVALID_LONG, shadowMax = INVALID_LONG,
 	     shadowLastChange = INVALID_LONG, shadowInactive = INVALID_LONG,
 	     shadowExpire = INVALID_LONG, shadowWarning = INVALID_LONG;
-	const char *user = NULL;
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL;
+	const char *user;
+	struct lu_context *ctx;
+	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values, *values2, *values3;
-	GValue value;
 	int interactive = FALSE;
 	int list_only = FALSE;
 	int c;
@@ -171,6 +168,9 @@ main(int argc, const char **argv)
 	}
 
 	if (list_only) {
+		char buf[LINE_MAX];
+		GValueArray *values, *values2, *values3;
+
 		/* Just print out what we can find out, in a format similar
 		 * to the chage(1) utility from the shadow suite. */
 		if (lu_user_islocked(ctx, ent, &error)) {
@@ -228,6 +228,8 @@ main(int argc, const char **argv)
 			printf(_("Account Expires:\t%s\n"), buf);
 		}
 	} else {
+		GValue value;
+
 		/* Set values using parameters given on the command-line. */
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_LONG);

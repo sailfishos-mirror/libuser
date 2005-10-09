@@ -113,11 +113,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 {
 	struct dirent *ent;
 	DIR *dir;
-	struct stat st;
-	char skelpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
-	struct utimbuf timebuf;
-	int ifd = -1, ofd = -1;
-	off_t offset;
+	int ifd, ofd;
 	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -147,6 +143,9 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
+		char skelpath[PATH_MAX], path[PATH_MAX];
+		struct stat st;
+
 		/* Iterate through each item in the directory. */
 		/* Skip over self and parent hard links. */
 		if (strcmp(ent->d_name, ".") == 0) {
@@ -166,6 +165,9 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
 		if (lstat(skelpath, &st) != -1) {
+			char buf[PATH_MAX];
+			struct utimbuf timebuf;
+
 			/* We always want to preserve atime/mtime. */
 			timebuf.actime = st.st_atime;
 			timebuf.modtime = st.st_mtime;
@@ -221,6 +223,8 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 
 			/* If it's a regular file, copy it. */
 			if (S_ISREG(st.st_mode)) {
+				off_t offset;
+
 				/* Open both the input and output
 				 * files.  If we fail to do either,
 				 * we have to give up. */
@@ -236,7 +240,7 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 					   st.st_mode);
 				if (ofd == -1) {
 					if (errno == EEXIST) {
-						close(ofd);
+						close(ifd);
 						continue;
 					}
 					lu_error_new(error, lu_error_open,
@@ -333,8 +337,6 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 {
 	struct dirent *ent;
 	DIR *dir;
-	struct stat st;
-	char path[PATH_MAX];
 
 	LU_ERROR_CHECK(error);
 
@@ -349,6 +351,9 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 
 	/* Iterate over all of its contents. */
 	while ((ent = readdir(dir)) != NULL) {
+		struct stat st;
+		char path[PATH_MAX];
+
 		/* Skip over the self and parent hard links. */
 		if (strcmp(ent->d_name, ".") == 0) {
 			continue;
@@ -427,10 +432,10 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 static char *
 lu_strconcat(char *existing, const char *appendee)
 {
-	char *tmp;
 	if (existing == NULL) {
 		existing = g_strdup(appendee);
 	} else {
+		char *tmp;
 		tmp = g_strconcat(existing, appendee, NULL);
 		g_free(existing);
 		existing = tmp;
@@ -648,13 +653,14 @@ err:
 }
 
 /* Send nscd an arbitrary signal. */
-void
+static void
 lu_signal_nscd(int signum)
 {
 	FILE *fp;
-	char buf[LINE_MAX];
 	/* If it's running, then its PID is in this file.  Open it. */
 	if ((fp = fopen("/var/run/nscd.pid", "r")) != NULL) {
+		char buf[LINE_MAX];
+
 		/* Read the PID. */
 		memset(buf, 0, sizeof(buf));
 		/* If the PID is sane, send it a signal. */
@@ -686,11 +692,8 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	uid_t uid;
 	gid_t gid;
 	char *p, *username;
-	struct group grp, *err;
 	struct lu_ent *groupEnt;
 	struct lu_error *error = NULL;
-	char buf[LINE_MAX * 4];
-	int fd;
 
 	/* Find the GID of the owner of the file. */
 	gid = LU_VALUE_INVALID_ID;
@@ -706,6 +709,9 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 
 	/* Er, okay.  Check with libc. */
 	if (gid == LU_VALUE_INVALID_ID) {
+		struct group grp, *err;
+		char buf[LINE_MAX * 4];
+
 		if ((getgrnam_r("mail", &grp, buf, sizeof(buf), &err) == 0) &&
 		    (err == &grp)) {
 			gid = grp.gr_gid;
@@ -748,6 +754,8 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	p = g_strdup_printf("%s/%s", spooldir, username);
 	g_free(username);
 	if (action) {
+		int fd;
+
 		fd = open(p, O_WRONLY | O_CREAT, 0);
 		if (fd != -1) {
 			gboolean res = TRUE;

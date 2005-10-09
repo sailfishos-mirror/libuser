@@ -249,9 +249,8 @@ gboolean
 lu_cfg_init(struct lu_context *context, struct lu_error **error)
 {
 	const char *filename = SYSCONFDIR "/libuser.conf";
-	struct config_config *config = NULL;
+	struct config_config *config;
 	char *data, *line, *xstrtok_ptr, *section = NULL;
-	const char *t;
 
 	g_assert(context != NULL);
 
@@ -259,10 +258,11 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	 * we get the configuration file is, but only if we can trust the
 	 * environment. */
 	if ((getuid() == geteuid()) && (getgid() == getegid())) {
+		const char *t;
+
 		t = getenv("LIBUSER_CONF");
-		if (t != NULL) {
+		if (t != NULL)
 			filename = t;
-		}
 	}
 
 	data = read_file(filename, error);
@@ -328,7 +328,7 @@ destroy_section (gpointer xkey, gpointer xsection, gpointer data)
 void
 lu_cfg_done(struct lu_context *context)
 {
-	struct config_config *config = NULL;
+	struct config_config *config;
 
 	g_assert(context != NULL);
 	g_assert(context->config != NULL);
@@ -350,7 +350,7 @@ lu_cfg_read(struct lu_context *context, const char *key,
 	    const char *default_value)
 {
 	struct config_config *config;
-	char *section, *slash, *def;
+	char *section, *slash;
 	GList *sect, *ret = NULL, *k;
 
 	g_assert(context != NULL);
@@ -358,7 +358,7 @@ lu_cfg_read(struct lu_context *context, const char *key,
 	g_assert(key != NULL);
 	g_assert(strlen(key) > 0);
 
-	config = (struct config_config *) context->config;
+	config = context->config;
 
 	slash = strchr(key, '/');
 	if (slash == NULL)
@@ -380,6 +380,8 @@ lu_cfg_read(struct lu_context *context, const char *key,
 	/* If we still don't have data, return the default answer. */
 	if (ret == NULL) {
 		if (default_value != NULL) {
+			char *def;
+
 			def = context->scache->cache(context->scache,
 						     default_value);
 			ret = g_list_append(ret, def);
@@ -401,7 +403,7 @@ lu_cfg_read_keys(struct lu_context * context, const char *parent_key)
 	g_assert(parent_key != NULL);
 	g_assert(strlen(parent_key) > 0);
 
-	config = (struct config_config *) context->config;
+	config = context->config;
 
 	/* NULL (empty list) if not found */
 	for (sect = g_tree_lookup(config->sections, parent_key); sect != NULL;

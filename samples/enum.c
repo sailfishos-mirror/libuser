@@ -35,10 +35,6 @@ main(int argc, char **argv)
 	gboolean group = FALSE, full = FALSE;
 	int c;
 	size_t i;
-	struct lu_ent *ent;
-	GValueArray *names;
-	GValue *name;
-	GPtrArray *accounts;
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
@@ -67,6 +63,8 @@ main(int argc, char **argv)
 	}
 
 	if (full == FALSE) {
+		GValueArray *names;
+
 		if (group == FALSE) {
 			names = lu_users_enumerate(lu, argv[optind], &error);
 		} else {
@@ -74,6 +72,8 @@ main(int argc, char **argv)
 		}
 
 		for (i = 0; (names != NULL) && (i < names->n_values); i++) {
+			GValue *name;
+
 			name = g_value_array_get_nth(names, i);
 			g_print(" Found %s named `%s'.\n",
 				group ? "group" : "user",
@@ -83,12 +83,16 @@ main(int argc, char **argv)
 			g_value_array_free(names);
 		}
 	} else {
+		GPtrArray *accounts;
+
 		if (group == FALSE) {
 			accounts = lu_users_enumerate_full(lu, argv[optind], &error);
 		} else {
 			accounts = lu_groups_enumerate_full(lu, argv[optind], &error);
 		}
 		for (i = 0; (accounts != NULL) && (i < accounts->len); i++) {
+			struct lu_ent *ent;
+
 			ent = g_ptr_array_index(accounts, i);
 			g_print("Found account:\n");
 			lu_ent_dump(ent, stdout);

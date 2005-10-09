@@ -1,5 +1,8 @@
 2005-10-09  Miloslav Trmac  <mitr@redhat.com>
 
+	* Most functions: Move variables to inntermost scope, remove
+	unnecessary initializers.
+
 	* modules/ldap.c (struct lu_ldap_context): New members user_branch,
 	group_branch.
 	(libuser_ldap_init): Initialize user_branch, group_branch.

@@ -36,10 +36,10 @@
 int
 main(int argc, const char **argv)
 {
-	const char *name = NULL, *gid_number_str = NULL;
+	const char *name, *gid_number_str = NULL;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx = NULL;
-	struct lu_ent *ent = NULL;
+	struct lu_context *ctx;
+	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	int interactive = FALSE;
 	int system_account = FALSE;
@@ -95,7 +95,7 @@ main(int argc, const char **argv)
 		}
 		gidNumber = val;
 	}
-		
+
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :

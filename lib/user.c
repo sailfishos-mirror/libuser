@@ -79,7 +79,7 @@ lu_start(const char *auth_name, enum lu_entity_type auth_type,
 	 lu_prompt_fn *prompter, gpointer prompter_data,
 	 struct lu_error **error)
 {
-	struct lu_context *ctx = NULL;
+	struct lu_context *ctx;
 
 	LU_ERROR_CHECK(error);
 
@@ -288,6 +288,8 @@ convert_user_name_to_id(struct lu_context *context, const char *sdata)
 	if (lu_user_lookup_name(context, sdata, ent, &error) == TRUE) {
 		ret = extract_id(ent);
 	}
+	if (error != NULL)
+		lu_error_free(&error);
 	lu_ent_free(ent);
 	return ret;
 }
@@ -307,6 +309,8 @@ convert_group_name_to_id(struct lu_context *context, const char *sdata)
 	if (lu_group_lookup_name(context, sdata, ent, &error) == TRUE) {
 		ret = extract_id(ent);
 	}
+	if (error != NULL)
+		lu_error_free(&error);
 	lu_ent_free(ent);
 	return ret;
 }
@@ -580,12 +584,16 @@ logic_or(gboolean a, gboolean b)
 static void
 remove_duplicate_values(GValueArray *array)
 {
-	size_t i, j;
-	GValue *ivalue, *jvalue;
+	size_t i;
 
 	for (i = 0; i < array->n_values; i++) {
+		size_t j;
+		GValue *ivalue;
+
 		ivalue = g_value_array_get_nth(array, i);
 		for (j = i + 1; j < array->n_values; j++) {
+			GValue *jvalue;
+
 			jvalue = g_value_array_get_nth(array, j);
 			if (G_VALUE_TYPE(ivalue) == G_VALUE_TYPE(jvalue)
 			    && lu_values_equal(ivalue, jvalue)) {
@@ -606,23 +614,22 @@ compare_strings(gconstpointer a, gconstpointer b, gpointer data)
 static GPtrArray *
 merge_ent_array_duplicates(GPtrArray *array)
 {
-	GPtrArray *ret = NULL;
-	size_t i, j;
-	const char *attr;
-	struct lu_ent *current, *saved;
-	GValueArray *values;
-	GValue *value;
-	GList *attributes, *list;
-	GTree *users, *groups, *tree;
+	GPtrArray *ret;
+	size_t i;
+	GTree *users, *groups;
+
 	g_return_val_if_fail(array != NULL, NULL);
-	/* We need four trees to hold the known entities. */
 	users = g_tree_new_full(compare_strings, NULL, g_free, NULL);
 	groups = g_tree_new_full(compare_strings, NULL, g_free, NULL);
 	/* A structure to hold the new list. */
 	ret = g_ptr_array_new();
 	/* Iterate over every entity in the incoming list. */
 	for (i = 0; i < array->len; i++) {
+		struct lu_ent *current, *saved;
 		char *key;
+		GValueArray *values;
+		GValue *value;
+		GTree *tree;
 
 		current = g_ptr_array_index(array, i);
 		key = NULL;
@@ -641,7 +648,6 @@ merge_ent_array_duplicates(GPtrArray *array)
 			g_assert_not_reached();
 		}
 		value = g_value_array_get_nth(values, 0);
-		/* Convert that name or number to a quark. */
 		key = lu_value_strdup(value);
 		/* Check if there's already an entity with that name. */
 		saved = g_tree_lookup(tree, key);
@@ -650,6 +656,10 @@ merge_ent_array_duplicates(GPtrArray *array)
 			g_tree_insert(tree, key, current);
 			g_ptr_array_add(ret, current);
 		} else {
+			GList *attributes, *list;
+			const char *attr;
+			size_t j;
+
 			g_free (key);
 			/* Merge all of its data into the existing one; first,
 			 * the current data. */
@@ -668,6 +678,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 			g_list_free(list);
 			/* Merge the pending data. */
 			attributes = lu_ent_get_attributes(current);
+			list = attributes;
 			while (attributes != NULL) {
 				attr = (const char *)attributes->data;
 				values = lu_ent_get(current, attr);
@@ -705,16 +716,9 @@ run_list(struct lu_context *context,
 	 gpointer ret,
 	 struct lu_error **firsterror)
 {
-	struct lu_module *module;
-	GPtrArray *ptr_array = NULL, *tmp_ptr_array = NULL;
-	GValueArray *value_array = NULL, *tmp_value_array = NULL;
-	GValue *value;
-	gpointer scratch;
-	struct lu_ent *tmp_ent;
-	char *name;
-	gboolean success, tsuccess;
+	gboolean success;
 	struct lu_error *lasterror = NULL;
-	size_t i, j;
+	size_t i;
 
 	LU_ERROR_CHECK(firsterror);
 
@@ -761,6 +765,12 @@ run_list(struct lu_context *context,
 
 	success = FALSE;
 	for (i = 0; i < list->n_values; i++) {
+		struct lu_module *module;
+		gpointer scratch;
+		GValue *value;
+		char *name;
+		gboolean tsuccess;
+
 		value = g_value_array_get_nth(list, i);
 		name = g_value_dup_string(value);
 		module = g_tree_lookup(context->modules, name);
@@ -771,6 +781,10 @@ run_list(struct lu_context *context,
 				      sdata, ldata, entity, &scratch,
 				      &lasterror);
 		if (scratch != NULL) switch (id) {
+			GPtrArray *ptr_array, *tmp_ptr_array;
+			GValueArray *value_array, *tmp_value_array;
+			size_t j;
+
 			case users_enumerate:
 			case users_enumerate_by_group:
 			case groups_enumerate:
@@ -804,6 +818,8 @@ run_list(struct lu_context *context,
 				}
 				if (tmp_ptr_array != NULL) {
 					for (j = 0; j < tmp_ptr_array->len; j++) {
+						struct lu_ent *tmp_ent;
+
 						tmp_ent = g_ptr_array_index(tmp_ptr_array,
 									    j);
 						g_ptr_array_add(ptr_array, tmp_ent);
@@ -897,13 +913,11 @@ lu_dispatch(struct lu_context *context,
 	    gpointer ret,
 	    struct lu_error **error)
 {
-	struct lu_ent *tmp = NULL;
+	struct lu_ent *tmp;
 	gboolean success;
 	GValueArray *values = NULL;
 	GPtrArray *ptrs = NULL;
-	GValue *value = NULL;
 	gpointer scratch = NULL;
-	size_t i;
 
 	LU_ERROR_CHECK(error);
 
@@ -939,6 +953,8 @@ lu_dispatch(struct lu_context *context,
 			}
 			values = lu_ent_get_current(tmp, attr);
 			if (values != NULL) {
+				GValue *value;
+
 				value = g_value_array_get_nth(values, 0);
 				attr = g_value_get_string(value);
 				sdata = tmp->cache->cache(tmp->cache, attr);
@@ -1140,6 +1156,8 @@ lu_dispatch(struct lu_context *context,
 			    logic_or, id,
 			    sdata, ldata, tmp, &ptrs, error)) {
 			if (ptrs != NULL) {
+				size_t i;
+
 				for (i = 0; i < ptrs->len; i++) {
 					struct lu_ent *ent;
 					ent = g_ptr_array_index(ptrs, i);
@@ -1662,9 +1680,10 @@ lu_get_first_unused_id(struct lu_context *ctx,
 
 	ent = lu_ent_new();
 	if (type == lu_user) {
-		struct passwd pwd, *err;
 		struct lu_error *error = NULL;
 		do {
+			struct passwd pwd, *err;
+
 			/* There may be read-only sources of user information
 			 * on the system, and we want to avoid allocating an ID
 			 * that's already in use by a service we can't write
@@ -1687,9 +1706,10 @@ lu_get_first_unused_id(struct lu_context *ctx,
 			break;
 		} while (id != (id_t)-1);
 	} else if (type == lu_group) {
-		struct group grp, *err;
 		struct lu_error *error = NULL;
 		do {
+			struct group grp, *err;
+
 			/* There may be read-only sources of user information
 			 * on the system, and we want to avoid allocating an ID
 			 * that's already in use by a service we can't write
@@ -1723,9 +1743,8 @@ lu_default_int(struct lu_context *context, const char *name,
 {
 	GList *keys, *p;
 	GValue value;
-	char *cfgkey, *tmp, *end;
-	char buf[LINE_MAX * 4];
-	const char *top, *idkey, *idkeystring, *val, *key;
+	char *cfgkey;
+	const char *top, *idkey, *idkeystring, *val;
 	id_t id = DEFAULT_ID;
 	struct group grp, *err;
 	struct lu_error *error = NULL;
@@ -1749,6 +1768,8 @@ lu_default_int(struct lu_context *context, const char *name,
 	g_value_init(&value, G_TYPE_STRING);
 	g_value_set_string(&value, name);
 	if (ent->type == lu_user) {
+		char buf[LINE_MAX * 4];
+
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &value);
 		/* Additionally, pick a default default group. */
@@ -1796,10 +1817,11 @@ lu_default_int(struct lu_context *context, const char *name,
 		}
 		if (val != NULL) {
 			intmax_t imax;
+			char *end;
 
 			errno = 0;
-			imax = strtoimax(val, &tmp, 10);
-			if (errno == 0 && *tmp == 0 && tmp != val
+			imax = strtoimax(val, &end, 10);
+			if (errno == 0 && *end == 0 && end != val
 			    && (id_t)imax == imax)
 				id = imax;
 			else
@@ -1818,9 +1840,7 @@ lu_default_int(struct lu_context *context, const char *name,
 	/* Now iterate to find the rest. */
 	keys = lu_cfg_read_keys(context, top);
 	for (p = keys; p && p->data; p = g_list_next(p)) {
-		intmax_t imax;
-
-		struct {
+		static const struct {
 			const char *realkey, *configkey;
 		} keymap[] = {
 			{LU_USERNAME, G_STRINGIFY_ARG(LU_USERNAME)},
@@ -1857,6 +1877,10 @@ lu_default_int(struct lu_context *context, const char *name,
 			{LU_HOMEPHONE, G_STRINGIFY_ARG(LU_HOMEPHONE)},
 			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
 		};
+
+		intmax_t imax;
+		char *end, *tmp;
+		const char *key;
 		struct {
 			const char *format;
 			const char *value;
@@ -1868,7 +1892,7 @@ lu_default_int(struct lu_context *context, const char *name,
 		};
 
 		/* Possibly map the key to an internal name. */
-		key = (const char *) p->data;
+		key = p->data;
 		for (i = 0; i < G_N_ELEMENTS(keymap); i++) {
 			if (strcmp(key, keymap[i].configkey) == 0) {
 				key = keymap[i].realkey;
