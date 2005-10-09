@@ -1,5 +1,37 @@
 2005-10-09  Miloslav Trmac  <mitr@redhat.com>
 
+	* modules/ldap.c (struct lu_ldap_context): New members user_branch,
+	group_branch.
+	(libuser_ldap_init): Initialize user_branch, group_branch.
+	(lu_ldap_base, lu_ldap_ent_to_dn, lu_ldap_lookup, lu_ldap_set)
+	(lu_ldap_del, lu_ldap_handle_lock, lu_ldap_is_locked, lu_ldap_setpass)
+	(lu_ldap_enumerate): Replace the configKey and def parameters by
+	branch.  All callers changed to use struct lu_ldap_context members.
+	(lu_ldap_ent_to_dn): Rename variable branch to base.
+
+	(lu_ldap_base): Don't access module before asserting it is non-NULL.
+	Fix checking of empty branch.
+	(lu_ldap_ent_to_dn): Remove unused variable base.  Map namingAttr to
+	LDAP only once.
+	(libuser_ldap_init): Fix memory leak.
+
+	* modules/ldap.c (LU_LDAP_USER, LU_LDAP_GROUP, LU_LDAP_SHADOW): Remove.
+	(ldap_attribute_map): Replace applicability by type.
+	(lu_ldap_lookup): Replace applicability by type.  All
+	callers changed.
+
+	* modules/ldap.c (lu_ldap_base, lu_ldap_lookup, lu_ldap_set)
+	(lu_ldap_del, lu_ldap_handle_lock, lu_ldap_is_locked, lu_ldap_setpass):
+	Remove handling of NULL which can't ever trigger.
+
+	* modules/ldap.c (lu_ldap_user_lookup_name, lu_ldap_user_lookup_id)
+	(lu_ldap_group_lookup_name, lu_ldap_group_looup_id, getn_ent_adds)
+	(lu_ldap_is_locked, lu_ldap_setpass, lu_ldap_users_enumerate)
+	(lu_ldap_users_enumerate_full, lu_ldap_groups_enumerate)
+	(lu_ldap_groups_enumerate_full, lu_ldap_users_enumerate_by_group)
+	(lu_ldap_gropus_enumerate_by_user): Hardcode constant results
+	of map_to_ldap ().
+
 	* docs/libuser.conf.5.in: New file.
 	* docs/Makefile.am: Ship and install libuser.conf.5.
 
