@@ -1,24 +1,31 @@
-# This is a first-generation configuration file.  Eventually I'll rewrite
-# all of the configuration-reading code to use alchemist, but for now this
-# will have to do.
+# See libuser.conf(5) for more information.
 
 # Do not modify the default module list if you care about unattended calls
 # to programs (i.e., scripts) working!
 
+[import]
+# Data from these files is used when libuser.conf does not define a value.
+# The mapping is documented in the man page.
+login_defs = /etc/login.defs
+default_useradd = /etc/default/useradd
+
 [defaults]
 # The default (/usr/lib*/libuser) is usually correct
 # moduledir = /your/custom/directory
-skeleton = @sysconfdir@/skel
-mailspooldir = /var/mail
+
+# The following variables are usually imported:
+# skeleton = @sysconfdir@/skel
+# mailspooldir = /var/mail
+
+crypt_style = md5
 modules = files shadow
 create_modules = files shadow
-crypt_style = md5
 # modules = files shadow ldap krb5
 # create_modules = ldap krb5
 
 [userdefaults]
 LU_USERNAME = %n
-LU_UIDNUMBER = 500
+# LU_UIDNUMBER = 500
 LU_GIDNUMBER = %u
 # LU_USERPASSWORD = !!
 # LU_GECOS = %n
@@ -37,7 +44,7 @@ LU_GIDNUMBER = %u
 
 [groupdefaults]
 LU_GROUPNAME = %n
-LU_GIDNUMBER = 500
+# LU_GIDNUMBER = 500
 # LU_GROUPPASSWORD = !!
 # LU_MEMBERUID =
 # LU_ADMINISTRATORUID =

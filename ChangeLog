@@ -1,5 +1,7 @@
 2005-10-11  Miloslav Trmac  <mitr@redhat.com>
 
+	* libuser.conf.in: Update to import values from shadow where possible.
+
 	* NEWS: Update.
 
 2005-10-10  Miloslav Trmac  <mitr@redhat.com>
