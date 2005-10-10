@@ -13,8 +13,6 @@ AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
 PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
-CLEANFILES = libuser.conf
-
 ## Targets
 SUBDIRS = po docs
 TESTS = tests/config_test.sh tests/files_test tests/utils_test
@@ -23,7 +21,6 @@ TESTS += tests/ldap_test
 endif
 
 EXTRA_DIST = \
-	libuser.conf.in \
 	$(EXTRA_MANS) \
 	python/modules.txt \
 	samples/genusers \
@@ -73,7 +70,7 @@ dist_man_MANS = apps/lgroupadd.1 apps/lgroupdel.1 apps/lgroupmod.1 \
 EXTRA_MANS = lib/userquota.3
 
 pkgconfig_DATA = $(PACKAGE).pc
-sysconf_DATA = libuser.conf
+dist_sysconf_DATA = libuser.conf
 
 pkginclude_HEADERS = lib/config.h lib/entity.h lib/error.h lib/prompt.h \
 	lib/user.h lib/user_private.h lib/userquota.h \
@@ -84,10 +81,6 @@ noinst_HEADERS = python/admin.c python/ent.c python/misc.c
 
 
 ## Rules
-# FIXME:hardcode /etc?
-libuser.conf: Makefile libuser.conf.in
-	sed 's,@sysconfdir\@,$(sysconfdir),g' $(srcdir)/libuser.conf.in > $@
-
 force-tag:
 	cd $(top_srcdir); cvs tag -cFR $(CVSTAG) .
 
