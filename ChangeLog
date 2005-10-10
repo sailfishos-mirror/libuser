@@ -1,3 +1,7 @@
+2005-10-11  Miloslav Trmac  <mitr@redhat.com>
+
+	* NEWS: Update.
+
 2005-10-10  Miloslav Trmac  <mitr@redhat.com>
 
 	* tests/config_default_useradd, testes/config_import.conf.in,

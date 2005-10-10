@@ -1,3 +1,9 @@
+0.54.1
+* Support for importing of configuration from shadow (/etc/login.defs and
+  /etc/default/useradd)
+* New libuser.conf(5) man page
+* Minor cleanups and bug fixes all over the code
+
 0.54
 * Make sure attributes with no values can never appear
 * Fix crash in the "files" module when an attribute is missing
