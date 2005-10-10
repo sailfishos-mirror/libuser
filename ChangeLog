@@ -1,5 +1,8 @@
 2005-10-11  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.54.1.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+
 	* libuser.pc.in (Requires)
 	* configure.in: Use gmodule-no-export-2.0.
 
