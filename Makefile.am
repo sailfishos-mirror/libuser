@@ -27,12 +27,14 @@ EXTRA_DIST = \
 	$(EXTRA_MANS) \
 	python/modules.txt \
 	samples/genusers \
-	tests/config.conf.in tests/config_test.sh tests/files.conf.in \
-	tests/files_test tests/files_test.py tests/ldap.conf.in tests/ldaprc \
-	tests/ldap_skel.ldif tests/ldap_test tests/ldap_test.py \
-	tests/slapd.conf.in tests/utils.conf.in tests/utils_group \
-	tests/utils_gshadow tests/utils_passwd tests/utils_shadow \
-	tests/utils_test
+	tests/config.conf.in tests/config_default_useradd \
+	tests/config_import.conf.in tests/config_login.defs \
+	tests/config_override.conf.in tests/config_test.sh \
+	tests/files.conf.in tests/files_test tests/files_test.py \
+	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
+	tests/ldap_test.py tests/slapd.conf.in tests/utils.conf.in \
+	tests/utils_group tests/utils_gshadow tests/utils_passwd \
+	tests/utils_shadow tests/utils_test
 
 bin_PROGRAMS = apps/lchfn apps/lchsh
 sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \

@@ -30,11 +30,15 @@ rm -rf "$workdir"
 mkdir "$workdir"
 
 # Set up the client
-LIBUSER_CONF=$workdir/libuser.conf
-export LIBUSER_CONF
-sed "s|@TOP_BUILDDIR@|$(pwd)|g" < "$srcdir"/config.conf.in > "$LIBUSER_CONF"
+sed "s|@TOP_BUILDDIR@|$(pwd)|g" < "$srcdir"/config.conf.in \
+	> "$workdir/libuser.conf"
+sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
+	< "$srcdir"/config_import.conf.in > "$workdir/libuser_import.conf"
+sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
+	< "$srcdir"/config_override.conf.in > "$workdir/libuser_override.conf"
+
 # Ugly non-portable hacks
 LD_LIBRARY_PATH=$(pwd)/lib/.libs
 export LD_LIBRARY_PATH
 
-tests/config_test
+tests/config_test "$workdir"

@@ -473,7 +473,7 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 		{ TRUE, "PASS_MIN_DAYS", "userdefaults", LU_SHADOWMIN,
 		  G_STRINGIFY_ARG(LU_SHADOWMIN) },
 		{ TRUE, "PASS_WARN_AGE", "userdefaults", LU_SHADOWWARNING,
-		  G_STRINGIFY_ARG(LU_SHADOWMIN) },
+		  G_STRINGIFY_ARG(LU_SHADOWWARNING) },
 		{ TRUE, "UID_MIN", "userdefaults", LU_UIDNUMBER,
 		  G_STRINGIFY_ARG(LU_UIDNUMBER) },
 	};
@@ -494,16 +494,17 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 		return;
 	}
 	for (i = 0; i < G_N_ELEMENTS(conv); i++) {
-		if (strcmp (key, conv->shadow) != 0)
+		if (strcmp (key, conv[i].shadow) != 0)
 			continue;
-		if (!key_defined(config, conv->section, conv->key)
-		    && (conv->key2 == NULL
-			|| !key_defined(config, conv->section, conv->key2))) {
+		if (!key_defined(config, conv[i].section, conv[i].key)
+		    && (conv[i].key2 == NULL
+			|| !key_defined(config, conv[i].section,
+					conv[i].key2))) {
 			/* We need roughly 0.3 characters per bit,
 			   this just is an obvious upper bound. */
 			char buf[sizeof(intmax_t) * CHAR_BIT + 1];
 
-			if (conv->number != 0) {
+			if (conv[i].number != 0) {
 				intmax_t num;
 				char *end;
 
@@ -514,7 +515,7 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 				snprintf(buf, sizeof(buf), "%jd", num);
 				value = buf;
 			}
-			key_add(config, conv->section, conv->key, value);
+			key_add(config, conv[i].section, conv[i].key, value);
 		}
 		break;
 	}

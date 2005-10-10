@@ -1,3 +1,17 @@
+2005-10-10  Miloslav Trmac  <mitr@redhat.com>
+
+	* tests/config_default_useradd, testes/config_import.conf.in,
+	tests/config_login.defs, tests/config_override.conf.in: New files.
+	* tests/config_test.sh: Generate three config files, pass $workdir
+	to config_test instead of setting LIBUSER_CONF.
+	* tests/config_test.c (start): Split from main ().  Set LIBUSER_CONF.
+	(verify_var): Abstract from main ().
+	(main): Test configuration import from shadow.
+	* Makefile.am (EXTRA_DIST): Distribute the new test components.
+
+	* lib/config.c (handle_login_defs_key): Fix pasto.  Don't use the first
+	member of conv[] over and over.
+
 2005-10-09  Miloslav Trmac  <mitr@redhat.com>
 
 	* Most functions: Move variables to inntermost scope, remove

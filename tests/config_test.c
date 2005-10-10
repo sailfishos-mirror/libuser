@@ -19,6 +19,7 @@
 #include "config.h"
 #endif
 #include <glib.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,34 +27,58 @@
 #undef NDEBUG
 #include <assert.h>
 
-int
-main(void)
+static struct lu_context *
+start(const char *base, const char *file)
 {
 	struct lu_context *ctx;
 	struct lu_error *error;
-	GList *list;
 
+	/* A memory leak, whatever. */
+	putenv(g_strconcat("LIBUSER_CONF=", base, "/", file, NULL));
 	error = NULL;
 	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console_quiet, NULL,
 		       &error);
 	if (ctx == NULL) {
 		fprintf(stderr, "Error initializing %s: %s.\n", PACKAGE,
 			lu_strerror(error));
-		return 1;
+		exit(1);
 	}
+	return ctx;
+}
 
+static void
+verify_var(struct lu_context *ctx, const char *key, ...)
+{
+	GList *list;
+	va_list ap;
+	const char *val;
 
-	list = lu_cfg_read(ctx, "test/name", NULL);
-	assert(g_list_length(list) == 2);
-	assert(strcmp(list->data, "value1") == 0);
-	assert(strcmp(list->next->data, "value2") == 0);
+	list = lu_cfg_read(ctx, key, NULL);
+	va_start(ap, key);
+	while ((val = va_arg(ap, const char *)) != NULL) {
+		assert(list != NULL && strcmp(list->data, val) == 0);
+		list = list->next;
+	}
+	assert(list == NULL);
+}
+
+int
+main(int argc, char *argv[])
+{
+	struct lu_context *ctx;
+	GList *list;
+
+	assert(argc == 2);
+
+	ctx = start(argv[1], "libuser.conf");
+
+	verify_var(ctx, "test/name", "value1", "value2", (const char *)NULL);
 
 	list = lu_cfg_read(ctx, "test/nonexistent", "default");
 	assert(g_list_length(list) == 1);
 	assert(strcmp(list->data, "default") == 0);
 
-	list = lu_cfg_read(ctx, "test/nonexistent", NULL);
-	assert(g_list_length(list) == 0);
+	verify_var(ctx, "test/nonexistent", (const char *)NULL);
 
 	assert(strcmp(lu_cfg_read_single(ctx, "test/name", NULL), "value1")
 	       == 0);
@@ -69,6 +94,65 @@ main(void)
 	list = lu_cfg_read_keys(ctx, "invalid");
 	assert(g_list_length(list) == 0);
 
+	lu_end(ctx);
+
+	ctx = start(argv[1], "libuser_import.conf");
+	verify_var(ctx, "groupdefaults/" LU_GIDNUMBER, "1234",
+		   (const char *)NULL);
+	verify_var(ctx, "defaults/mailspooldir", "/mail/dir/value",
+		   (const char *)NULL);
+	verify_var(ctx, "defaults/crypt_style", "md5", (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWMAX, "1235",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWMIN, "1236",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWWARNING, "1237",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "1239",
+		   (const char *)NULL);
+	/* From (echo $(($(date -d 'may 1 1980 0:0' +%s) / 24 / 3600))) */
+	verify_var(ctx, "userdefaults/" LU_SHADOWEXPIRE, "3773",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_GIDNUMBER, "4322",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWINACTIVE, "4323",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_LOGINSHELL, "/login/shell",
+		   (const char *)NULL);
+	verify_var(ctx, "defaults/skeleton", "/skeleton/path",
+		   (const char *)NULL);
+	lu_end(ctx);
+
+	ctx = start(argv[1], "libuser_override.conf");
+	verify_var(ctx, "groupdefaults/LU_GIDNUMBER", "4242",
+		   (const char *)NULL);
+	verify_var(ctx, "groupdefaults/" LU_GIDNUMBER, (const char *)NULL);
+	verify_var(ctx, "defaults/mailspooldir", "/overridden/mailspooldir",
+		   (const char *)NULL);
+	verify_var(ctx, "defaults/crypt_style", "des", (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_SHADOWMAX", "4243",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWMAX, (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWMIN, "4244",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_SHADOWWARNING", "4245",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWWARNING, (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "4246",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_SHADOWEXPIRE", "4247",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWEXPIRE, (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_GIDNUMBER", "4248",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_GIDNUMBER, (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_SHADOWINACTIVE, "4249",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_LOGINSHELL", "/overridden/shell",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_LOGINSHELL, (const char *)NULL);
+	verify_var(ctx, "defaults/skeleton", "/overridden/skeleton",
+		   (const char *)NULL);
 	lu_end(ctx);
 
 	return 0;
