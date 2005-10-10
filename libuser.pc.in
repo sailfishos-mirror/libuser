@@ -7,5 +7,5 @@ Name: libuser
 Description: A user and group account administration library.
 Version: @VERSION@
 Libs: -L${libdir} -luser @CRYPT_LIBS@
-Requires: glib-2.0 gobject-2.0 gmodule-2.0
+Requires: glib-2.0 gobject-2.0 gmodule-no-export-2.0
 Cflags: -I${includedir}

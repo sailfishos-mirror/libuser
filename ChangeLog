@@ -1,5 +1,8 @@
 2005-10-11  Miloslav Trmac  <mitr@redhat.com>
 
+	* libuser.pc.in (Requires)
+	* configure.in: Use gmodule-no-export-2.0.
+
 	* libuser.conf: Rename from libuser.conf.in, hardcode @sysconfdir@ to
 	/etc.
 	* Makefile.am: Ship libuser.conf instead of libuser.conf.in.
