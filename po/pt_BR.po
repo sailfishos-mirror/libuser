@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-16 02:16-0300\n"
+"PO-Revision-Date: 2005-01-11 11:58-0200\n"
 "Last-Translator: Rodrigo Padula de Oliveira <rodrigopadula@gmail.com>\n"
 "Language-Team: Português Brasil\n"
 "MIME-Version: 1.0\n"
@@ -529,13 +529,12 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:123
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
+msgstr "o arquivo de configuração %s é muito grande"
 
 #: lib/config.c:147
 #, c-format
@@ -641,9 +640,9 @@ msgid "module version mismatch in `%s'"
 msgstr "versão não compatível de módulo em `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "O grupo %s não existe.\n"
+msgstr "o módulo %s não define %s "
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -709,8 +708,7 @@ msgstr "não foi possível determinar o contexto de segurança default: %s"
 #: modules/files.c:133
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"não foi possível determinar o contexto de segurança default de `%s': %s"
+msgstr "não foi possível determinar o contexto de segurança default de `%s': %s"
 
 #: modules/files.c:176 modules/files.c:544 modules/files.c:869
 #: modules/files.c:1136 modules/files.c:1277 modules/files.c:1498
@@ -778,8 +776,7 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
+msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
 #: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
@@ -854,8 +851,7 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:403
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:417
 msgid "could not search LDAP server"
@@ -1037,8 +1033,3 @@ msgstr "Obtendo atributos default dos usuários:\n"
 msgid "Copying user structure:\n"
 msgstr "Copiando estrutura do usuário:\n"
 
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "erro ao mapear nome para nome distinto do LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "erro ao mapear nome para o nome distinto do LDAP base"
