@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-18 17:18+0400\n"
+"PO-Revision-Date: 2005-10-11 16:47+0400\n"
 "Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -524,9 +524,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "невозможно получить информацию о файле конфигурации `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "невозможно открыть файл конфигурации `%s': %s"
+msgstr "файл конфигурации `%s' слишком велик"
 
 #: lib/config.c:147
 #, c-format
@@ -632,9 +632,9 @@ msgid "module version mismatch in `%s'"
 msgstr "несоответствие версии модуля в `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Группа %s не существует.\n"
+msgstr "в модуле `%s' не определено значение `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
