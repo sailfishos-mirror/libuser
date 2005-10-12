@@ -29,7 +29,7 @@ msgstr ""
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr " `%s' ਪੜਨ ਵਿੱਚ ਗਲਤੀ: %s"
+msgstr "`%s' ਪੜਨ ਵਿੱਚ ਗਲਤੀ: %s"
 
 #: apps/apputil.c:132 apps/apputil.c:208
 #, c-format
@@ -533,9 +533,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਨੂੰ ਖੋਲ ਨਹੀਂ ਸਕਿਆ: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਨੂੰ ਖੋਲ ਨਹੀਂ ਸਕਿਆ: %s"
+msgstr "ਸੰਰਚਨਾ ਫਾਇਲ '%s' ਬਹੁਤ ਵੱਡੀ ਹੈ"
 
 #: lib/config.c:147
 #, c-format
@@ -641,9 +641,9 @@ msgid "module version mismatch in `%s'"
 msgstr "`%s' ਵਿੱਚ ਮੈਡਿਊਲ ਵਰਜਨ ਭਿੰਨਤਾ"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "ਸਮੂਹ %s ਮੌਜੂਦ ਨਹੀਂ।\n"
+msgstr "ਮੈਡੀਊਲ `%s' `%s' ਨੂੰ ਪਰਭਾਸ਼ਿਤ ਨਹੀਂ ਕਰਦਾ ਹੈ"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -764,15 +764,15 @@ msgstr "ਇੰਦਰਾਜ ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤ�
 
 #: modules/files.c:1823 modules/ldap.c:1550 modules/ldap.c:1809
 msgid "error encrypting password"
-msgstr "ਗੁਪਤ-ਕੋਡ ਇਕ੍ਰਿਪਸ਼ਨ ਗਲਤੀ"
+msgstr "ਗੁਪਤ-ਕੋਡ ਇਕਰਿਪਸ਼ਨ ਗਲਤੀ"
 
 #: modules/files.c:2770 modules/files.c:2848
 msgid "not executing with superuser privileges"
-msgstr "ਮੁੱਖ-ਉਪਭੋਗਤਾ ਅਧਿਕਾਰਾਂ ਨਾਲ ਚੱਲ ਨਹੀਂ ਰਿਹਾ"
+msgstr "ਮੁੱਖ-ਉਪਭੋਗੀ ਅਧਿਕਾਰਾਂ ਨਾਲ ਚੱਲ ਨਹੀਂ ਰਿਹਾ"
 
 #: modules/files.c:2861
 msgid "no shadow file present -- disabling"
-msgstr "ਕੋਈ ਪਰਛਾਂਵਾ ਫਾਇਲ ਮੌਜੂਦ ਨਹੀਂ -- ਅਯੋਗ ਕੀਤਾ"
+msgstr "ਕੋਈ ਪਰਛਾਵਾਂ ਫਾਇਲ ਮੌਜੂਦ ਨਹੀਂ -- ਅਯੋਗ ਕੀਤਾ"
 
 #: modules/krb5.c:104
 #, c-format
@@ -782,13 +782,13 @@ msgstr "`%s' ਸੇਵਾ ਲਈ `%s' ਖੇਤਰ ਵਿੱਚ kadm5 ਸਰਵ�
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
 #: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
 msgid "error initializing kerberos library"
-msgstr "kerberos ਲਾਇਬ੍ਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+msgstr "kerberos ਲਾਇਬਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
 
 #: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
 #: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "kerberos ਲਈ ਉਪਭੋਗਤਾ ਨਾਂ `%s' ਪਾਰਸ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
+msgstr "kerberos ਲਈ ਉਪਭੋਗੀ ਨਾਂ `%s' ਪਾਰਸ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
 
 #: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
 #, c-format
@@ -1034,8 +1034,3 @@ msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰ
 msgid "Copying user structure:\n"
 msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
 
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "ਨਾਂ ਦੀ LDAP ਭਿੰਨਤਾ ਵਾਲੇ ਨਾਂ ਨਾਲ ਮੇਲ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "ਨਾਂ ਦੀ LDAP ਮੂਲ ਭਿੰਨਤਾ ਵਾਲੇ ਨਾਂ ਨਾਲ ਮੇਲ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
