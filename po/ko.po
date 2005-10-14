@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-15 09:51+1000\n"
+"PO-Revision-Date: 2005-10-14 14:08+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
 "MIME-Version: 1.0\n"
@@ -527,9 +527,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "설정 파일 `%s'에 stat 명령 실행하는데 실패했습니다: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
+msgstr "설정 파일 `%s' 용량이 너무 큽니다"
 
 #: lib/config.c:147
 #, c-format
@@ -635,9 +635,9 @@ msgid "module version mismatch in `%s'"
 msgstr "`%s'의 모듈 버젼이 일치하지 않습니다"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "%s 그룹이 존재하지 않습니다.\n"
+msgstr "`%s'  모듈은 `%s'을(를) 정의하지 않습니다"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1030,8 +1030,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
 
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "LDAP DN에서 이름을 비교하는 도중 오류가 발생했습니다"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "LDAP base DN에서 이름을 비교하는 도중 오류가 발생했습니다"
