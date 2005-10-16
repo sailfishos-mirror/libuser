@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-03-12 00:45+0100\n"
+"PO-Revision-Date: 2005-10-16 20:02+0200\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -84,9 +84,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "S'ha produït un error intern '%s' del PAM.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Context d'usuari desconegut"
+msgstr "S'ha autenticat un usuari desconegut.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -530,9 +530,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "no s'ha pogut obtenir informació del fitxer de configuració '%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
+msgstr "el fitxer de configuració '%s' és massa llarg"
 
 #: lib/config.c:147
 #, c-format
@@ -638,9 +638,9 @@ msgid "module version mismatch in `%s'"
 msgstr "la versió del mòdul no coincideix a '%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "El grup %s no existeix.\n"
+msgstr "el mòdul %s no defineix '%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -665,7 +665,7 @@ msgstr "el nom és massa curt"
 #: lib/user.c:203
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "el nom és massa llarg (%zu > %d)"
 
 #: lib/user.c:210
 msgid "name contains non-ASCII characters"
@@ -681,7 +681,7 @@ msgstr "el nom conté espais en blanc"
 
 #: lib/user.c:236
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "el nom comença amb un guió"
 
 #: lib/user.c:247
 #, c-format
