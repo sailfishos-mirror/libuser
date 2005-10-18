@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-21 15:18+0200\n"
+"PO-Revision-Date: 2005-10-18 21:18+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -523,9 +523,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "kunne ikke kjøre stat på konfigurasjonsfil «%s»: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "kunne ikke åpne konfigurasjonsfil «%s»: %s"
+msgstr "konfigurasjonsfil «%s» er for stor"
 
 #: lib/config.c:147
 #, c-format
@@ -631,9 +631,9 @@ msgid "module version mismatch in `%s'"
 msgstr "feil modulversjon i `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Gruppe %s eksisterer ikke.\n"
+msgstr "modul «%s» definerer ikke «%s»"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1024,9 +1024,3 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "feil under kobling av navn til LDAP distinguished name"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "feil under kobling av navn til LDAP base distinguished name"
