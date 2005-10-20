@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-10-20 05:43+0200\n"
+"PO-Revision-Date: 2005-10-20 05:47+0200\n"
 "Last-Translator: Francesco Tombolini <tombo@adamantio.net>\n"
 "Language-Team: Italiano <Fedora-trans-it@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -639,7 +639,7 @@ msgstr "mancata corrispondenza della versione del modulo in `%s'"
 #: lib/modules.c:96
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "il modulo %s non definisce `%s'"
+msgstr "il modulo `%s' non definisce `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
