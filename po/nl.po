@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-20 21:31+0200\n"
+"PO-Revision-Date: 2005-10-20 20:55+0200\n"
 "Last-Translator: Peter van Egdom <p.van.egdom@gmail.com>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -526,9 +526,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "kon de status van configuratiebestand `%s' niet opvragen: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "kon configuratiebestand `%s' niet openen: %s"
+msgstr "configuratiebestand `%s' is te groot"
 
 #: lib/config.c:147
 #, c-format
@@ -635,9 +635,9 @@ msgid "module version mismatch in `%s'"
 msgstr "moduleversie komt niet overeen in `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Groep %s bestaat niet.\n"
+msgstr "module `%s' definieert `%s' niet"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
