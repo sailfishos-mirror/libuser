@@ -1,18 +1,20 @@
+# translation of da.po to 
 # translation of da.po to Danish
 # Danish translation of libuser
 # Copyright (C) 2001 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
 # Keld Simonsen <keld@dkuug.dk>, 2001, 2005.
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004.
+# Keld Simonsen <keld@rap.dk>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-03-14 01:55+0100\n"
-"Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
-"Language-Team: Danish <<dansk@klid.dk>>\n"
+"PO-Revision-Date: 2005-10-21 21:05+0200\n"
+"Last-Translator: Keld Simonsen <keld@rap.dk>\n"
+"Language-Team:  <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -86,9 +88,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Intern PAM-fejl '%s'.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "ukendte bruger-omgivelser"
+msgstr "ukendt bruger godkendt.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -341,8 +343,7 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -527,9 +528,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "kunne ikke få stat()-oplysninger på konfigurationsfil `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "kunne ikke åbne konfigurationsfil `%s': %s"
+msgstr "konfigurationsfil `%s' er for stor"
 
 #: lib/config.c:147
 #, c-format
@@ -635,9 +636,9 @@ msgid "module version mismatch in `%s'"
 msgstr "gal modulversion i `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Gruppe %s eksisterer ikke.\n"
+msgstr "modeul %s definerer ikke '%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -662,7 +663,7 @@ msgstr "navn er for kort"
 #: lib/user.c:203
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "navn er for langt (%zu > %d)"
 
 #: lib/user.c:210
 msgid "name contains non-ASCII characters"
@@ -678,7 +679,7 @@ msgstr "Navn indeholder blanktegn"
 
 #: lib/user.c:236
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "navn starter med en bindestreg"
 
 #: lib/user.c:247
 #, c-format
@@ -771,8 +772,7 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
 #: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
@@ -1109,3 +1109,4 @@ msgstr "Kopierer brugerstruktur:\n"
 
 #~ msgid "freeing lu_ent at %p.\n"
 #~ msgstr "frigiver lu_ent ved %p.\n"
+
