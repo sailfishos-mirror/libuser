@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-10-19 00:12+0800\n"
+"PO-Revision-Date: 2005-10-23 21:01+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -698,30 +698,26 @@ msgid "module version mismatch in `%s'"
 msgstr "versi modul tidak sepadan dalam `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "pengguna %s tidak wujud"
+msgstr "modul `%s' tidak mentakrif `%s'"
 
 #: lib/prompt.c:68
-#, fuzzy
 msgid "error reading terminal attributes"
-msgstr "ralat memanipulasi sifat terminal"
+msgstr "ralat membaca sifat terminal"
 
 #: lib/prompt.c:75
 #: lib/prompt.c:87
-#, fuzzy
 msgid "error setting terminal attributes"
-msgstr "ralat memanipulasi sifat terminal"
+msgstr "ralat menetapkan sifat terminal"
 
 #: lib/prompt.c:81
-#, fuzzy
 msgid "error reading from terminal"
-msgstr "ralat membaca daripada direktori %s: %s\n"
+msgstr "ralat membaca dari terminal"
 
 #: lib/user.c:193
-#, fuzzy
 msgid "name is not set"
-msgstr "\"%s\" adalah nama giliran yang tidak sah."
+msgstr "nama tidak ditetapkan"
 
 #: lib/user.c:198
 #, fuzzy
