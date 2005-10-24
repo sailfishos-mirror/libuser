@@ -1,5 +1,7 @@
 # translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla (INDIA)
+# translation of bn_IN.po to Bangla (INDIA)
+# translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla
 # Bangla Translation of Libuser.po
 # Copyright (C) 2004 Red Hat Inc.
@@ -11,7 +13,7 @@ msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-07-13 12:27+0530\n"
+"PO-Revision-Date: 2005-10-24 09:51+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -98,9 +100,9 @@ msgstr "PAM-র অভ্যন্তরীণ সমস্যা `%s'.\n"
 
 # modified for RHEL
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
+msgstr "অজানা ব্যবহারকারী অনুমোদিত রয়েছেন।\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -577,9 +579,9 @@ msgstr "কনফিগারেশন ফাইল `%s' stat করা যা�
 
 # modified for RHEL
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "কনফিগারেশন ফাইল `%s' খোলা যায়নি: %s"
+msgstr "কনফিগারেশন ফাইল `%s' অত্যাধিক বড়"
 
 # modified for RHEL
 #: lib/config.c:147
@@ -688,9 +690,9 @@ msgid "module version mismatch in `%s'"
 msgstr "`%s'-র মডিউল সংস্করণে গরমিল"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "%s দলটি বর্তমানে উপস্থিত নেই।\n"
+msgstr "`%s' মডিউলের দ্বারা `%s'-র ব্যাখ্যা করা যায়নি"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -907,8 +909,7 @@ msgstr "LDAP সার্ভারে bind করা সম্ভব হয়ন�
 #: modules/ldap.c:403
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
+msgstr "LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
 
 # modified for RHEL
 #: modules/ldap.c:417
@@ -1113,12 +1114,3 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
 
-# modified for RHEL
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr ""
-#~ "LDAP distinguished name (DN)-র সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
-
-# modified for RHEL
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr ""
-#~ "LDAP base distinguished name (DN)-র সাথে নামটি ম্যাপ (map) করতে সমস্যা হয়েছে"
