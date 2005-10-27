@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-06-10 21:07+0200\n"
+"PO-Revision-Date: 2005-10-28 22:50+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -86,9 +86,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Interná chyba PAM `%s'.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Neznámy kontext používateľa"
+msgstr "Overená totožnosť neznámeho používateľa.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -527,9 +527,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "nepodarilo sa zistiť stav konfiguračného súboru `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "nepodarilo sa otvoriť konfiguračný súbor `%s': %s"
+msgstr "konfiguračný súbor `%s' je príliš veľký"
 
 #: lib/config.c:147
 #, c-format
@@ -635,9 +635,9 @@ msgid "module version mismatch in `%s'"
 msgstr "verzia modulu nezodpovedá v `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Skupina %s neexistuje.\n"
+msgstr "modul `%s' nedefinuje `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1028,9 +1028,3 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "chyba pri mapovaní mena na odlišné LDAP meno"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "chyba pri mapovaní mena na základné odlišné LDAP meno"
