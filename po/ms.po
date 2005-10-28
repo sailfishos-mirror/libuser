@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-10-23 21:01+0800\n"
+"PO-Revision-Date: 2005-10-28 23:35+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -720,29 +720,25 @@ msgid "name is not set"
 msgstr "nama tidak ditetapkan"
 
 #: lib/user.c:198
-#, fuzzy
 msgid "name is too short"
-msgstr "Nama terlalu panjang"
+msgstr "nama adalah terlalu pendek"
 
 #: lib/user.c:203
-#, fuzzy, c-format
+#, c-format
 msgid "name is too long (%zu > %d)"
-msgstr "Nama pengguna terlalu panjang"
+msgstr "nama adalah terlalu panjang (%zu > %d)"
 
 #: lib/user.c:210
-#, fuzzy
 msgid "name contains non-ASCII characters"
-msgstr "unama"
+msgstr "nama mengandungi aksara bukan-ASCII"
 
 #: lib/user.c:217
-#, fuzzy
 msgid "name contains control characters"
-msgstr "Name=Modul Kawalan KDE"
+msgstr "nama mengandungi aksara kawalan"
 
 #: lib/user.c:224
-#, fuzzy
 msgid "name contains whitespace"
-msgstr "%s: nama ahli mengandungi `..'"
+msgstr "nama mengandungi ruangputih"
 
 #: lib/user.c:236
 #, fuzzy
