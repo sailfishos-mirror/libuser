@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-10-23 18:42-0000\n"
+"PO-Revision-Date: 2005-10-30 17:14-0000\n"
 "Last-Translator: Miloš Komarčević <kmilos@gmail.com>\n"
 "Language-Team: Serbian (sr) <fedora@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,7 @@ msgstr "Кућни телефон"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr "Електронска адреса"
+msgstr "Адреса е-поште"
 
 #: apps/lchfn.c:228
 #, c-format
