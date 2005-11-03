@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-06-15 10:29+0100\n"
+"PO-Revision-Date: 2005-11-03 23:14+0000\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,9 +81,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Erro interno no PAM `%s'.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Contexto de utilizador desconhecido"
+msgstr "Utilizador desconhecido autenticado.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -521,9 +521,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "não foi possível fazer 'stat' ao ficheiro de configuração `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "não foi possível abrir ficheiro de configuração `%s': %s"
+msgstr "o ficheiro de configuração `%s' é demasiado grande"
 
 #: lib/config.c:147
 #, c-format
@@ -629,9 +629,9 @@ msgid "module version mismatch in `%s'"
 msgstr "versão não compatível de módulo em `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "O grupo %s não existe.\n"
+msgstr "o módulo `%s' não define o `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
