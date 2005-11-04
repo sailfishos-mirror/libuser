@@ -1,4 +1,4 @@
-# translation of zh_TW.po to 
+# translation of zh_TW.po to
 # translation of zh_TW.po to
 # translation of zh_TW.po to Chinese Traditional
 # translation of zh_TW.po to Traditional Chinese
@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: zh_TW\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-15 14:58+1000\n"
-"Last-Translator: Waika Liu <wliu@redhat.com>\n"
-"Language-Team:  <zh@li.org>\n"
+"PO-Revision-Date: 2005-11-04 10:41+1000\n"
+"Last-Translator: Chester Cheng <ccheng@redhat.com>\n"
+"Language-Team: Chinese Traditional <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -529,9 +529,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "無法 stat 組態設定檔`%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "無法開啟組態設定檔`%s': %s"
+msgstr "設定檔 `%s' 太大"
 
 #: lib/config.c:147
 #, c-format
@@ -637,9 +637,9 @@ msgid "module version mismatch in `%s'"
 msgstr "%s 的模組版本不符"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "%s 群組不存在。\n"
+msgstr "模組 `%s' 未定義 `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1030,8 +1030,3 @@ msgstr "取得預設使用者屬性:\n"
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構:\n"
 
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "映射名稱至 LDAP 著名的名稱發生錯誤"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "映射名稱至 LDAP base 著名的名稱發生錯誤"
