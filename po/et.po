@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-10-10 23:54+0200\n"
-"PO-Revision-Date: 2005-09-28 15:15+0200\n"
+"PO-Revision-Date: 2005-11-04 08:32+0200\n"
 "Last-Translator: Allan Sims <allan.sims@eau.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,35 +17,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
+#: apps/apputil.c:124
+#: apps/apputil.c:198
+#: apps/apputil.c:234
+#: apps/apputil.c:263
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Viga `%s' lugemisel:%s"
 
-#: apps/apputil.c:132 apps/apputil.c:208
+#: apps/apputil.c:132
+#: apps/apputil.c:208
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Viga `%s' loomisel: %s"
 
-#: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
+#: apps/apputil.c:140
+#: apps/apputil.c:215
+#: apps/apputil.c:310
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Viga `%s' omaniku muutmisel: %s"
 
-#: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
-#: modules/files.c:261 modules/files.c:275
+#: apps/apputil.c:247
+#: apps/apputil.c:280
+#: apps/apputil.c:296
+#: modules/files.c:261
+#: modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Viga `%s' kirjutamisel: %s"
 
-#: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
+#: apps/apputil.c:347
+#: apps/apputil.c:382
+#: apps/apputil.c:399
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Viga `%s' eemaldamisel:%s"
 
-#: apps/apputil.c:550 apps/apputil.c:554
+#: apps/apputil.c:550
+#: apps/apputil.c:554
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Õiguste eemaldamine ebaõnnestus.\n"
@@ -74,7 +86,8 @@ msgstr "vaike konteksti seadistamine /etc/passwd jaoks ei ole võimalik\n"
 msgid "Error initializing PAM.\n"
 msgstr "PAM lähtestamisel esines viga.\n"
 
-#: apps/apputil.c:613 apps/apputil.c:640
+#: apps/apputil.c:613
+#: apps/apputil.c:640
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s tuvastamine ebaõnnestus.\n"
@@ -87,41 +100,71 @@ msgstr "Sisemine PAM viga `%s'.\n"
 #: apps/apputil.c:626
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "tundmatu kasutaja tuvastatud.\n"
+msgstr "tuvastati tundmatu kasutaja.\n"
 
 #: apps/apputil.c:630
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Kasutaja ei sobi.\n"
 
-#: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
-#: apps/luserdel.c:65 apps/lusermod.c:90
+#: apps/lchage.c:135
+#: apps/lid.c:111
+#: apps/lpasswd.c:70
+#: apps/luseradd.c:92
+#: apps/luserdel.c:65
+#: apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[VALIK...] kasutaja"
 
-#: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
-#: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
+#: apps/lchage.c:138
+#: apps/lchfn.c:76
+#: apps/lchsh.c:62
+#: apps/lgroupadd.c:69
+#: apps/lgroupdel.c:60
+#: apps/lgroupmod.c:88
+#: apps/lid.c:114
+#: apps/lnewusers.c:70
+#: apps/lpasswd.c:73
+#: apps/luseradd.c:95
+#: apps/luserdel.c:68
+#: apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Viga analüüsides argumente: %s.\n"
+msgstr "Argumentide analüüsimise viga: %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:89 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147
+#: apps/lpasswd.c:89
+#: apps/luseradd.c:110
+#: apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr "Kasutaja nimi täpsustamata.\n"
+msgstr "Kasutajanimi täpsustamata.\n"
 
-#: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
-#: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
-#: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
+#: apps/lchage.c:157
+#: apps/lchfn.c:110
+#: apps/lchsh.c:96
+#: apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79
+#: apps/lgroupmod.c:120
+#: apps/lid.c:158
+#: apps/lnewusers.c:81
+#: apps/lpasswd.c:99
+#: apps/luseradd.c:132
+#: apps/luserdel.c:85
+#: apps/lusermod.c:145
+#: samples/enum.c:60
+#: samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%s lähtestamisel esines viga: %s.\n"
 
-#: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
-#: apps/luserdel.c:93 apps/lusermod.c:159
+#: apps/lchage.c:166
+#: apps/lchfn.c:118
+#: apps/lchsh.c:104
+#: apps/lpasswd.c:148
+#: apps/luserdel.c:93
+#: apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Kasutajat %s ei ole olemas.\n"
@@ -156,7 +199,10 @@ msgstr "Hoiatus:\t%d\n"
 msgid "Inactive:\t%d\n"
 msgstr "Tegevusetu:\t%d\n"
 
-#: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
+#: apps/lchage.c:200
+#: apps/lchage.c:207
+#: apps/lchage.c:216
+#: apps/lchage.c:226
 msgid "Never"
 msgstr "Mitte kunagi"
 
@@ -185,11 +231,14 @@ msgstr "Konto aegub:\t%s\n"
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Vananenud %s informatsiooni muutmine ebaõnnestus: %s\n"
 
-#: apps/lchfn.c:73 apps/lchsh.c:59
+#: apps/lchfn.c:73
+#: apps/lchsh.c:59
 msgid "[OPTION...] [user]"
 msgstr "[VALIK...] [kasutaja]"
 
-#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
+#: apps/lchfn.c:92
+#: apps/lchsh.c:78
+#: apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Kasutajanimi määramata, nimi puudub uid %d jaoks.\n"
@@ -259,16 +308,22 @@ msgstr "Kest muudetud.\n"
 msgid "Shell not changed: %s\n"
 msgstr "Kesta ei muudetud: %s\n"
 
-#: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
+#: apps/lgroupadd.c:66
+#: apps/lgroupdel.c:57
+#: apps/lgroupmod.c:85
 msgid "[OPTION...] group"
 msgstr "[VALIK...] grupp"
 
-#: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
+#: apps/lgroupadd.c:78
+#: apps/lgroupdel.c:69
+#: apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Grupinimi on määramata.\n"
 
-#: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
+#: apps/lgroupadd.c:91
+#: apps/lgroupmod.c:108
+#: apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Vigane grupi ID %s\n"
@@ -278,7 +333,9 @@ msgstr "Vigane grupi ID %s\n"
 msgid "Group creation failed: %s\n"
 msgstr "Grupi loomine ebaõnnestus: %s\n"
 
-#: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
+#: apps/lgroupdel.c:87
+#: apps/lgroupmod.c:133
+#: apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Gruppi %s ei ole olemas.\n"
@@ -288,12 +345,14 @@ msgstr "Gruppi %s ei ole olemas.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Gruppi %s pole võimalik kustutada: %s\n"
 
-#: apps/lgroupmod.c:126 apps/lusermod.c:152
+#: apps/lgroupmod.c:126
+#: apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Mõlemad -L ja -U on täpsustamata.\n"
 
-#: apps/lgroupmod.c:140 apps/lgroupmod.c:149
+#: apps/lgroupmod.c:140
+#: apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Grupi %s parooli seadmine ebaõnnestus: %s\n"
@@ -308,7 +367,8 @@ msgstr "Gruppi %s lukustamine ei ole võimalik: %s\n"
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Gruppi %s lukust lahti tegemine ei ole võimalik: %s\n"
 
-#: apps/lgroupmod.c:251 apps/lgroupmod.c:277
+#: apps/lgroupmod.c:251
+#: apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Gruppi %s pole võimalik muuta: %s\n"
@@ -342,7 +402,9 @@ msgstr "`%s' avamise viga: %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Konto loomise viga `%s' jaoks: rida ebasobivalt vormindatud.\n"
 
-#: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
+#: apps/lnewusers.c:134
+#: apps/luseradd.c:119
+#: apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Vigane kasutaja ID %s\n"
@@ -399,7 +461,9 @@ msgstr "Paroolid ei ühti, proovi uuesti.\n"
 msgid "Password change canceled.\n"
 msgstr "Parooli muutmisest loobutud.\n"
 
-#: apps/lpasswd.c:190 apps/luseradd.c:291 apps/luseradd.c:301
+#: apps/lpasswd.c:190
+#: apps/luseradd.c:291
+#: apps/luseradd.c:301
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Viga kasutaja %s parooli seadmisel: %s.\n"
@@ -419,7 +483,8 @@ msgstr "Parool on muudetud.\n"
 msgid "Group %jd does not exist\n"
 msgstr "Gruppi %jd ei ole olemas\n"
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:207
+#: apps/luseradd.c:220
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Viga grupi `%s' loomisel: %s\n"
@@ -474,7 +539,8 @@ msgstr "%s-il ei ole kodukataloogi.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Viga %s eemaldamisel: %s.\n"
 
-#: apps/lusermod.c:168 apps/lusermod.c:181
+#: apps/lusermod.c:168
+#: apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Kasutaja %s parooli seadmine ebaõnnestus: %s.\n"
@@ -525,9 +591,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "seadete faili `%s' avamine  pole võimalik: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "aeadete faili `%s' avadmine  pole võimalik: %s"
+msgstr "seadete faili `%s' on liiga suur"
 
 #: lib/config.c:147
 #, c-format
@@ -633,15 +699,16 @@ msgid "module version mismatch in `%s'"
 msgstr "mooduli versiooni mitteühtivus `%s'-s"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Gruppi %s ei ole olemas.\n"
+msgstr "moodul `%s' ei defineeri `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
 msgstr "viga terminali atribuutide lugemisel"
 
-#: lib/prompt.c:75 lib/prompt.c:87
+#: lib/prompt.c:75
+#: lib/prompt.c:87
 msgid "error setting terminal attributes"
 msgstr "viga terminali atribuutide seadmisel"
 
@@ -703,19 +770,35 @@ msgstr "vaike turvakonteksti ei ole võimalik seada: %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "vaike turvakonteksti seadistamine `%s'-ile ei ole võimalik: %s"
 
-#: modules/files.c:176 modules/files.c:544 modules/files.c:869
-#: modules/files.c:1136 modules/files.c:1277 modules/files.c:1498
-#: modules/files.c:1583 modules/files.c:1789 modules/files.c:1973
-#: modules/files.c:1990 modules/files.c:2079 modules/files.c:2098
-#: modules/files.c:2166 modules/files.c:2187 modules/files.c:2284
-#: modules/files.c:2303 modules/files.c:2362 modules/files.c:2381
-#: modules/files.c:2481 modules/files.c:2496
+#: modules/files.c:176
+#: modules/files.c:544
+#: modules/files.c:869
+#: modules/files.c:1136
+#: modules/files.c:1277
+#: modules/files.c:1498
+#: modules/files.c:1583
+#: modules/files.c:1789
+#: modules/files.c:1973
+#: modules/files.c:1990
+#: modules/files.c:2079
+#: modules/files.c:2098
+#: modules/files.c:2166
+#: modules/files.c:2187
+#: modules/files.c:2284
+#: modules/files.c:2303
+#: modules/files.c:2362
+#: modules/files.c:2381
+#: modules/files.c:2481
+#: modules/files.c:2496
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' avamine pole võimalik: %s"
 
-#: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:881 modules/files.c:1289
+#: modules/files.c:188
+#: modules/files.c:217
+#: modules/files.c:283
+#: modules/files.c:881
+#: modules/files.c:1289
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'-i polnud võimalik esitada: %s"
@@ -734,31 +817,41 @@ msgstr "on olemas varundfail  %s, mis ei ole tavaline fail"
 msgid "backup file size mismatch"
 msgstr "varundfaili suurus ei sobi"
 
-#: modules/files.c:911 modules/files.c:1298
+#: modules/files.c:911
+#: modules/files.c:1298
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'-st lugemine pole võimalik: %s"
 
-#: modules/files.c:920 modules/files.c:927
+#: modules/files.c:920
+#: modules/files.c:927
 msgid "entry already present in file"
 msgstr "failis on üksus juba olemas"
 
-#: modules/files.c:934 modules/files.c:944 modules/files.c:955
-#: modules/files.c:1346 modules/files.c:1354 modules/files.c:1362
+#: modules/files.c:934
+#: modules/files.c:944
+#: modules/files.c:955
+#: modules/files.c:1346
+#: modules/files.c:1354
+#: modules/files.c:1362
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'-i kirjutamine pole võimalik: %s"
 
-#: modules/files.c:1113 modules/files.c:1172
+#: modules/files.c:1113
+#: modules/files.c:1172
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "üksuse objektil puudub atribuut %s"
 
-#: modules/files.c:1823 modules/ldap.c:1550 modules/ldap.c:1809
+#: modules/files.c:1823
+#: modules/ldap.c:1550
+#: modules/ldap.c:1809
 msgid "error encrypting password"
 msgstr "parooli krüpteerimise viga"
 
-#: modules/files.c:2770 modules/files.c:2848
+#: modules/files.c:2770
+#: modules/files.c:2848
 msgid "not executing with superuser privileges"
 msgstr "superkasutaja õigustega ei käivitata"
 
@@ -771,18 +864,32 @@ msgstr "varifail puudub - keelatud"
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr "kadm5 serveri teenuse `%s' ühendamise viga piirkonnas `%s': %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136
+#: modules/krb5.c:202
+#: modules/krb5.c:300
+#: modules/krb5.c:388
+#: modules/krb5.c:440
+#: modules/krb5.c:528
+#: modules/krb5.c:594
 msgid "error initializing kerberos library"
 msgstr "viga kerberose teegi lähtestamisel"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143
+#: modules/krb5.c:223
+#: modules/krb5.c:332
+#: modules/krb5.c:340
+#: modules/krb5.c:408
+#: modules/krb5.c:461
+#: modules/krb5.c:549
+#: modules/krb5.c:611
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "kerberose jaoks kasutajanime `%s  analüüsimisel ilmnes viga"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213
+#: modules/krb5.c:399
+#: modules/krb5.c:451
+#: modules/krb5.c:539
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "üksuse struktuuril puudub %s või %s atribuut"
@@ -797,7 +904,8 @@ msgstr "üksusel puudub %s või %s atribuut"
 msgid "entity was created with no %s or %s attributes"
 msgstr "üksus loodi ilma %s või %s atribuudita"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:474
+#: modules/krb5.c:562
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "kerberosest %s ' jaoks informatsiooni lugemisel ilmnes viga"
@@ -835,8 +943,7 @@ msgstr "LDAP protokolli polnud võimalik seada versioonile %d"
 
 #: modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
-"Transpordikihi turbeprotokollil (TLS) polnud võimalik suhelda LDAP serveriga"
+msgstr "Transpordikihi turbeprotokollil (TLS) polnud võimalik suhelda LDAP serveriga"
 
 #: modules/ldap.c:400
 msgid "could not bind to LDAP server"
@@ -874,7 +981,8 @@ msgstr "sisemisi andmeid ei saa konventeerida LDAPMods-i"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse loomise viga: %s"
 
-#: modules/ldap.c:1392 modules/ldap.c:1615
+#: modules/ldap.c:1392
+#: modules/ldap.c:1615
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse muutmise viga: %s"
@@ -894,7 +1002,9 @@ msgstr "objektil puudus atribuut %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse eemaldamise viga: %s"
 
-#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1648
+#: modules/ldap.c:1520
+#: modules/ldap.c:1536
+#: modules/ldap.c:1648
 #: modules/ldap.c:1738
 #, c-format
 msgid "object has no %s attribute"
@@ -948,7 +1058,8 @@ msgstr "Cyrus SASL viga kasutaja loomisel: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL viga kasutaja eemaldamisel: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:521
+#: modules/sasldb.c:529
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "viga Cyrus SASL lähtestamisel: %s"
@@ -1029,24 +1140,18 @@ msgstr "Kasutajastruktuuri kopeerimine:\n"
 
 #~ msgid "error mapping name to LDAP distinguished name"
 #~ msgstr "viga nime kujutamise LDAP väljapaistvaks nimeks"
-
 #~ msgid "error mapping name to LDAP base distinguished name"
 #~ msgstr "nime kujutamise viga LDAP väljapaistvaks baasnimeks"
-
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Viga %s lähtestamisel.\n"
-
 #~ msgid "Group %s could not be deleted.\n"
 #~ msgstr "Gruppi %s ei saa kustutada.\n"
-
 #~ msgid "Group %s could not be modified.\n"
 #~ msgstr "Gruppi %s muutmine ei ole võimalik.\n"
-
 #~ msgid "error initializing module"
 #~ msgstr "viga mooduli lähtestamisel"
-
 #~ msgid "Cyrus SASL error creating user: %s: %s"
 #~ msgstr "Cyrus SASL viga kasutaja loomisel: %s: %s"
-
 #~ msgid "Cyrus SASL error removing user: %s: %s"
 #~ msgstr "Cyrus SASL viga kasutaja eemaldamisel: %s: %s"
+
