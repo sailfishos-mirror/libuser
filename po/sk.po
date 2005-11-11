@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-10-10 23:54+0200\n"
+"POT-Creation-Date: 2005-11-11 21:52+0100\n"
 "PO-Revision-Date: 2005-10-28 22:50+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -756,7 +756,7 @@ msgstr "nepodarilo sa zapísať do `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "objekt entity nemá príznak %s"
 
-#: modules/files.c:1823 modules/ldap.c:1550 modules/ldap.c:1809
+#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
 msgid "error encrypting password"
 msgstr "chyba pri šifrovaní hesla"
 
@@ -827,116 +827,108 @@ msgstr "Kerberos vedúci správca"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos heslo pre vedúceho správcu"
 
-#: modules/ldap.c:199
+#: modules/ldap.c:204
 msgid "error initializing ldap library"
 msgstr "chyba pri inicializácii knižnice ldap"
 
-#: modules/ldap.c:210
+#: modules/ldap.c:215
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "nepodarilo sa nastaviť LDAP protokol na verziu %d"
 
-#: modules/ldap.c:222
+#: modules/ldap.c:227
 msgid "could not negotiate TLS with LDAP server"
 msgstr "nepodarilo sa dohodnúť TLS s LDAP serverom"
 
-#: modules/ldap.c:400
+#: modules/ldap.c:408
 msgid "could not bind to LDAP server"
 msgstr "nepodarilo sa pripojiť k LDAP serveru"
 
-#: modules/ldap.c:403
+#: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "nepodarilo sa pripojiť k LDAP serveru, prvý pokus ako `%s': %s"
 
-#: modules/ldap.c:417
-msgid "could not search LDAP server"
-msgstr "nepodarilo sa vyhľadať LDAP server"
-
-#: modules/ldap.c:426
-msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP server vyzerá, že nemá koreňové DSE"
-
-#: modules/ldap.c:1326
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "objekt používateľa nemal príznak %s"
 
-#: modules/ldap.c:1335
+#: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "objekt používateľa bol vytvorený bez `%s'"
 
-#: modules/ldap.c:1353
+#: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
 msgstr "nepodarilo sa konvertovať interné údaje do LDAPMods"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1371
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "chyba pri vytváraní položky LDAP adresára: %s"
 
-#: modules/ldap.c:1392 modules/ldap.c:1615
+#: modules/ldap.c:1397 modules/ldap.c:1618
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "chyba pri úprave položky LDAP adresára: %s"
 
-#: modules/ldap.c:1419
+#: modules/ldap.c:1424
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "chyba pri premonovávaní položky LDAP adresára: %s"
 
-#: modules/ldap.c:1465
+#: modules/ldap.c:1469
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objekt nemal príznak %s"
 
-#: modules/ldap.c:1483
+#: modules/ldap.c:1487
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "chyba pri odstraňovaní položky LDAP adresára: %s"
 
-#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1648
-#: modules/ldap.c:1738
+#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
+#: modules/ldap.c:1750
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objekt nemá príznak %s"
 
-#: modules/ldap.c:1671
+#: modules/ldap.c:1676
 msgid "no such object in LDAP directory"
 msgstr "nie je taký objekt v LDAP adresári"
 
-#: modules/ldap.c:1683
+#: modules/ldap.c:1688
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nebol nájdený príznak `%s'"
 
-#: modules/ldap.c:1840
+#: modules/ldap.c:1857
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "chyba pri nastavovaní hesla v LDAP adresára pre %s: %s"
 
-#: modules/ldap.c:2449
+#: modules/ldap.c:2469
 msgid "LDAP Server Name"
 msgstr "Meno servera LDAP"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
 msgstr "LDAP DN vyhľadávacej základne"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2481
 msgid "LDAP Bind DN"
 msgstr "LDAP DN pripájania"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2488
 msgid "LDAP Bind Password"
 msgstr "LDAP heslo pripájania"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2494
 msgid "LDAP SASL User"
 msgstr "LDAP SASL používateľ"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL udelenie oprávnenia používateľa"
 
@@ -1028,3 +1020,9 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
+
+#~ msgid "could not search LDAP server"
+#~ msgstr "nepodarilo sa vyhľadať LDAP server"
+
+#~ msgid "LDAP server appears to have no root DSE"
+#~ msgstr "LDAP server vyzerá, že nemá koreňové DSE"

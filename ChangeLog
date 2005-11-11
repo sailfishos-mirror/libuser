@@ -1,5 +1,9 @@
 2005-11-11  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.54.2.
+	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+
 	* modules/ldap.c (close_server, connect_server, bind_server)
 	(lu_ldap_ent_to_dn, lu_ldap_lookup, lu_ldap_fudge_objectclasses)
 	(lu_ldap_is_locked, lu_ldap_setpass, lu_ldap_user_enumerate): Avoid

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-10-10 23:54+0200\n"
+"POT-Creation-Date: 2005-11-11 21:52+0100\n"
 "PO-Revision-Date: 2005-05-04 15:41-0700\n"
 "Last-Translator: Николай Сърмаджиев <nikolay@sarmadzhiev.com>\n"
 "Language-Team: Български <en@li.org>\n"
@@ -762,7 +762,7 @@ msgstr "не може да се пише в `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "обекта от записа няма атрибут %s"
 
-#: modules/files.c:1823 modules/ldap.c:1550 modules/ldap.c:1809
+#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
 msgid "error encrypting password"
 msgstr "грешка при криптиране на паролата"
 
@@ -833,116 +833,108 @@ msgstr "Kerberos принципи на администриране"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Парола за Kerberos Admin Principal"
 
-#: modules/ldap.c:199
+#: modules/ldap.c:204
 msgid "error initializing ldap library"
 msgstr "грешка при инициализация на ldap библиотеката"
 
-#: modules/ldap.c:210
+#: modules/ldap.c:215
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "не може да бъде установена версията на LDAP протокола на %d"
 
-#: modules/ldap.c:222
+#: modules/ldap.c:227
 msgid "could not negotiate TLS with LDAP server"
 msgstr "не може да бъде договорен TLS с LDAP сървъра"
 
-#: modules/ldap.c:400
+#: modules/ldap.c:408
 msgid "could not bind to LDAP server"
 msgstr "грешка при свързване с LDAP сървъра"
 
-#: modules/ldap.c:403
+#: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "грешка при свързване с LDAP сървъра, първи опит като `%s': %s"
 
-#: modules/ldap.c:417
-msgid "could not search LDAP server"
-msgstr "не може да се търси в LDAP сървъра"
-
-#: modules/ldap.c:426
-msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP сървъра изглежда няма root DSE"
-
-#: modules/ldap.c:1326
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "потребителския обект нямаше атрибут %s"
 
-#: modules/ldap.c:1335
+#: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "потребителския обект създаден без `%s'"
 
-#: modules/ldap.c:1353
+#: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
 msgstr "неуспешно преобразуване на вътрешни данни към LDAPMods"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1371
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "грешка при създаване на запис в LDAP директорията: %s"
 
-#: modules/ldap.c:1392 modules/ldap.c:1615
+#: modules/ldap.c:1397 modules/ldap.c:1618
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "грешка при промяна на LDAP директориен запис: %s"
 
-#: modules/ldap.c:1419
+#: modules/ldap.c:1424
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "грешка при преименуване на запис в LDAP директорията: %s"
 
-#: modules/ldap.c:1465
+#: modules/ldap.c:1469
 #, c-format
 msgid "object had no %s attribute"
 msgstr "обекта нямаше атрибут %s"
 
-#: modules/ldap.c:1483
+#: modules/ldap.c:1487
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "грешка при премахване на запис в LDAP директорията: %s"
 
-#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1648
-#: modules/ldap.c:1738
+#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
+#: modules/ldap.c:1750
 #, c-format
 msgid "object has no %s attribute"
 msgstr "обекта няма атрибут %s"
 
-#: modules/ldap.c:1671
+#: modules/ldap.c:1676
 msgid "no such object in LDAP directory"
 msgstr "няма такъв обект в LDAP директорията"
 
-#: modules/ldap.c:1683
+#: modules/ldap.c:1688
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "няма намерен атрибут `%s'"
 
-#: modules/ldap.c:1840
+#: modules/ldap.c:1857
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "грешка при задаване парола в LDAP директорията за %s: %s"
 
-#: modules/ldap.c:2449
+#: modules/ldap.c:2469
 msgid "LDAP Server Name"
 msgstr "Име на LDAP сървър"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
 msgstr "Базов DN за LDAP търсене"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2481
 msgid "LDAP Bind DN"
 msgstr "LDAP DN за връзка"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2488
 msgid "LDAP Bind Password"
 msgstr "LDAP парола за връзка"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2494
 msgid "LDAP SASL User"
 msgstr "LDAP SASL потребител"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL упълномощаващ потребител"
 
@@ -1034,6 +1026,12 @@ msgstr "Извличане на стандартни потребителски 
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
+
+#~ msgid "could not search LDAP server"
+#~ msgstr "не може да се търси в LDAP сървъра"
+
+#~ msgid "LDAP server appears to have no root DSE"
+#~ msgstr "LDAP сървъра изглежда няма root DSE"
 
 #~ msgid "error mapping name to LDAP distinguished name"
 #~ msgstr "грешка при намиране съответствие на име с LDAP отличително име"

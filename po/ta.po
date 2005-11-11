@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-10-10 23:54+0200\n"
+"POT-Creation-Date: 2005-11-11 21:52+0100\n"
 "PO-Revision-Date: 2005-03-22 12:42+0530\n"
 "Last-Translator: Jayaradha <njaya@redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -757,7 +757,7 @@ msgstr "எழுத முடியவில்லை`%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "உருபொருளிடம் %s குணங்கள் இல்லை"
 
-#: modules/files.c:1823 modules/ldap.c:1550 modules/ldap.c:1809
+#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
 msgid "error encrypting password"
 msgstr "கடவுச்சொல்லை குறிமுறையாக்குவதில் பிழை"
 
@@ -827,116 +827,108 @@ msgstr "கர்ப்ரோஸ் அட்மின் பிரின்ஸ�
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos கடவுச்சொல் நிர்வாக கோட்பாடுகள்"
 
-#: modules/ldap.c:199
+#: modules/ldap.c:204
 msgid "error initializing ldap library"
 msgstr "ldap நுலகத்தை துக்குவதில் பிழை"
 
-#: modules/ldap.c:210
+#: modules/ldap.c:215
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP நெறிமுறையினை பதிப்புக்காக அமைக்க இயலவில்லை %d"
 
-#: modules/ldap.c:222
+#: modules/ldap.c:227
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS யுடன் LDAP  வழங்கனை கேட்க முடியாது"
 
-#: modules/ldap.c:400
+#: modules/ldap.c:408
 msgid "could not bind to LDAP server"
 msgstr " LDAP வழங்கனுடன் சேர்க்க முடியவில்லை"
 
-#: modules/ldap.c:403
+#: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP வழங்கனுடன் சேர்க்க முடியவில்லை, முதல் முயற்சி `%s': %s"
 
-#: modules/ldap.c:417
-msgid "could not search LDAP server"
-msgstr "LDAP வழங்கனுடன் தேட முடியவில்லை"
-
-#: modules/ldap.c:426
-msgid "LDAP server appears to have no root DSE"
-msgstr "LDAP வழங்கனில் DSE வேர் இல்லை"
-
-#: modules/ldap.c:1326
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "பயனர் பொருளில் %s பண்புகள் இல்லை"
 
-#: modules/ldap.c:1335
+#: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "பயனர் பொருள் உருவாக்கத்தில் `%s' இல்லை"
 
-#: modules/ldap.c:1353
+#: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
 msgstr "உள் தகவலை LDAP பாங்காக மாற்ற இயலவில்லை"
 
-#: modules/ldap.c:1366
+#: modules/ldap.c:1371
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை உருவாக்குவதில் பிழை: %s"
 
-#: modules/ldap.c:1392 modules/ldap.c:1615
+#: modules/ldap.c:1397 modules/ldap.c:1618
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr " LDAP கோப்பு உள்ளீடுகளை மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1419
+#: modules/ldap.c:1424
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை பெயர் மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1465
+#: modules/ldap.c:1469
 #, c-format
 msgid "object had no %s attribute"
 msgstr "பொருளில் %s பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1483
+#: modules/ldap.c:1487
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP கோப்பு உள்ளீடுகளை நீக்குவதில் பிழை: %s"
 
-#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1648
-#: modules/ldap.c:1738
+#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
+#: modules/ldap.c:1750
 #, c-format
 msgid "object has no %s attribute"
 msgstr "பொருளுக்கு %s  பண்புக்கூறு இல்லை"
 
-#: modules/ldap.c:1671
+#: modules/ldap.c:1676
 msgid "no such object in LDAP directory"
 msgstr "அப்படிபட்ட பொருள் எதுவும் LDAP  கோப்புறையில் இல்லை"
 
-#: modules/ldap.c:1683
+#: modules/ldap.c:1688
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'  பண்புகூறுகள் இல்லை"
 
-#: modules/ldap.c:1840
+#: modules/ldap.c:1857
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP கோப்புறையில் %s: %s கடவுச்சொல் அமைப்பதில் பிழை"
 
-#: modules/ldap.c:2449
+#: modules/ldap.c:2469
 msgid "LDAP Server Name"
 msgstr "LDAP வழங்கன் பெயர்"
 
-#: modules/ldap.c:2455
+#: modules/ldap.c:2475
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடுதல் தளம் DN"
 
-#: modules/ldap.c:2461
+#: modules/ldap.c:2481
 msgid "LDAP Bind DN"
 msgstr "LDAP பைண்ட் DN"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2488
 msgid "LDAP Bind Password"
 msgstr "LDAP பைண்ட் கடவுச்சொல்"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2494
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2501
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 
@@ -1030,6 +1022,12 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
+
+#~ msgid "could not search LDAP server"
+#~ msgstr "LDAP வழங்கனுடன் தேட முடியவில்லை"
+
+#~ msgid "LDAP server appears to have no root DSE"
+#~ msgstr "LDAP வழங்கனில் DSE வேர் இல்லை"
 
 #~ msgid "error mapping name to LDAP distinguished name"
 #~ msgstr "மாறுபடுத்தபட்ட பெயர் LDAP இல் படமிடல் பெயரில் பிழை "

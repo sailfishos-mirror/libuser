@@ -1,3 +1,6 @@
+0.54.2
+* Avoid using deprecated openldap functions
+
 0.54.1
 * Support for importing of configuration from shadow (/etc/login.defs and
   /etc/default/useradd)
