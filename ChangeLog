@@ -1,3 +1,9 @@
+2005-11-12  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/krb5.c (lu_krb5_user_add)
+	* modules/ldap.c (lu_ldap_handle_lock, lu_ldap_setpass): Use
+	g_str_has_prefix () where appropriate.
+
 2005-11-11  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.54.2.

@@ -230,7 +230,7 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent,
 	pass = lu_ent_get(ent, LU_USERPASSWORD);
 	for (i = pass; i; i = g_list_next(i)) {
 		password = i->data;
-		if (password && (strncmp(password, "{crypt}", 7) != 0)) {
+		if (password && !g_str_has_prefix(password, "{crypt}")) {
 			/* we can use this one */
 			break;
 		}
@@ -241,7 +241,8 @@ lu_krb5_user_add(struct lu_module *module, struct lu_ent *ent,
 		pass = lu_ent_get(ent, LU_USERPASSWORD);
 		for (i = pass; i; i = g_list_next(i)) {
 			password = i->data;
-			if (password && (strncmp(password, "{", 1) != 0)) {
+			if (password
+			    && !g_str_has_prefix(password, "{") != 0) {
 				/* we can use this one */
 				break;
 			}

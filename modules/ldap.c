@@ -1506,7 +1506,6 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	char *result, *name_string, *oldpassword, *values[2][2];
 	const char *tmp, *attribute;
 	struct lu_ldap_context *ctx;
-	size_t scheme_len = strlen(LU_CRYPTED);
 	int err;
 
 	g_assert(module != NULL);
@@ -1545,7 +1544,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
-	if (strncmp(oldpassword, LU_CRYPTED, scheme_len) != 0) {
+	if (!g_str_has_prefix(oldpassword, LU_CRYPTED)) {
 		tmp = lu_make_crypted(oldpassword,
 				      lu_common_default_salt_specifier(module));
 		if (tmp == NULL) {
@@ -1554,9 +1553,9 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 			g_free(oldpassword);
 			return FALSE;
 		}
-	} else {
-		tmp = ent->cache->cache(ent->cache, oldpassword + scheme_len);
-	}
+	} else
+		tmp = ent->cache->cache(ent->cache,
+					oldpassword + strlen(LU_CRYPTED));
 	result = ent->cache->cache(ent->cache, tmp);
 
 	/* Generate a new string with the modification applied. */
@@ -1811,9 +1810,9 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		ldap_msgfree(messages);
 	}
 
-	if (strncmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
+	if (g_str_has_prefix(password, LU_CRYPTED))
 		addvalues[0] = (char *)password;
-	} else {
+	else {
 		const char *crypted;
 		char *tmp;
 
