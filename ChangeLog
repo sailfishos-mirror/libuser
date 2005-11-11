@@ -1,3 +1,21 @@
+2005-11-11  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (close_server, connect_server, bind_server)
+	(lu_ldap_ent_to_dn, lu_ldap_lookup, lu_ldap_fudge_objectclasses)
+	(lu_ldap_is_locked, lu_ldap_setpass, lu_ldap_user_enumerate): Avoid
+	functions deprecated by openldap.
+	(objectclass_present, lu_ldap_needed_objectclasses): Use BerValue's
+	instead of strings.  All callers updated.
+	(free_needed_objectclasses): New function.
+
+	(lu_ldap_close_module): Use close_server ().
+	(lu_ldap_set, lu_ldap_del, lu_ldap_handle_lock, lu_ldap_is_locked)
+	(lu_ldap_setpass, connect_server, bind_server): Replace empty LDAP
+	control vectors by NULL.
+
+	* configure.in: Remove checks for no longer used deprecated openldap
+	functions.
+
 2005-10-11  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.54.1.
