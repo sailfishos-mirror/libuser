@@ -7,14 +7,13 @@
 	(objectclass_present, lu_ldap_needed_objectclasses): Use BerValue's
 	instead of strings.  All callers updated.
 	(free_needed_objectclasses): New function.
+	* configure.in: Remove checks for no longer used deprecated openldap
+	functions.
 
 	(lu_ldap_close_module): Use close_server ().
 	(lu_ldap_set, lu_ldap_del, lu_ldap_handle_lock, lu_ldap_is_locked)
 	(lu_ldap_setpass, connect_server, bind_server): Replace empty LDAP
 	control vectors by NULL.
-
-	* configure.in: Remove checks for no longer used deprecated openldap
-	functions.
 
 2005-10-11  Miloslav Trmac  <mitr@redhat.com>
 

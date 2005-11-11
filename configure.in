@@ -56,11 +56,9 @@ if test x$ldap != xno ; then
 	AC_CHECK_FUNC(ldap_sasl_interactive_bind_s,[
 	AC_CHECK_FUNC(ldap_set_option,[
 	AC_CHECK_FUNC(ldap_start_tls_s,[
-	AC_CHECK_FUNC(ldap_search_s,[
-	AC_CHECK_FUNC(ldap_get_values,[
 	AC_CHECK_FUNC(ldap_modify_ext_s,[
 	AC_CHECK_FUNC(ldap_delete_ext_s,[
-	build_ldap=yes])])])])])])])
+	build_ldap=yes])])])])])
 	LIBS="$LIBSAVE"
 fi
 AM_CONDITIONAL([LDAP], [test $build_ldap = yes])
