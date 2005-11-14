@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-11-11 21:52+0100\n"
-"PO-Revision-Date: 2005-10-13 16:43+0200\n"
+"PO-Revision-Date: 2005-11-12 16:11+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1020,9 +1020,3 @@ msgstr "Pobieranie atrybutów domyślnego użytkownika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopiowanie struktury użytkownika:\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "nie można znaleźć serwera LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "serwer LDAP prawdopodobnie nie posiada głównej DSE"
