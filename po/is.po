@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-11-11 21:52+0100\n"
-"PO-Revision-Date: 2005-10-01 12:55+0000\n"
+"PO-Revision-Date: 2005-11-24 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -523,9 +523,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "gat ekki fundið stillingaskrána `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "gat ekki opnað stillingaskrána `%s': %s"
+msgstr "stillingaskráin `%s' er of stór"
 
 #: lib/config.c:147
 #, c-format
@@ -631,9 +631,9 @@ msgid "module version mismatch in `%s'"
 msgstr "útgáfumismunur eininga í `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Hópurinn %s er ekki til.\n"
+msgstr "einingin `%s' skilgreinir ekki `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1016,15 +1016,3 @@ msgstr "Sæki sjálfgefna notandaeiginleika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Afrita notendastrúktúr:\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "gat ekki leitað á LDAP þjóni"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP þjónninn virðist ekki hafa rótar DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "villa við að tengja nafn við LDAP grunnnafn"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "villa við að tengja nafn við LDAP grunnnafn"
