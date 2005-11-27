@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-11-11 21:52+0100\n"
-"PO-Revision-Date: 2005-09-24 19:45+0900\n"
+"PO-Revision-Date: 2005-11-27 21:12+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -526,9 +526,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "設定ファイル `%s' を stat できませんでした: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "設定ファイル`%s'を開けませんでした: %s"
+msgstr "設定ファイル `%s' が大きすぎます"
 
 #: lib/config.c:147
 #, c-format
@@ -634,9 +634,9 @@ msgid "module version mismatch in `%s'"
 msgstr "`%s'のモジュールバージョンの不一致"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "グループ%sは存在しません。\n"
+msgstr "モジュール `%s' が `%s' を定義していません"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
