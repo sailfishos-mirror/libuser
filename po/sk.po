@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-11-11 21:52+0100\n"
+"POT-Creation-Date: 2005-12-02 18:41+0100\n"
 "PO-Revision-Date: 2005-10-28 22:50+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -107,7 +107,7 @@ msgstr "[VOĽBA...] používateľ"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Chyba pri analýze parametrov: %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:89 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
@@ -378,7 +378,7 @@ msgstr "Chyba pri vytváraní odkladacieho priestoru pošty pre %s.\n"
 msgid "Error creating user account for %s: %s\n"
 msgstr "Chyba pri vytváraní používateľského konta pre %s: %s\n"
 
-#: apps/lpasswd.c:86
+#: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "Mením heslo pre %s.\n"
@@ -756,7 +756,7 @@ msgstr "nepodarilo sa zapísať do `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "objekt entity nemá príznak %s"
 
-#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
+#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "chyba pri šifrovaní hesla"
 
@@ -774,56 +774,56 @@ msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
 "chyba pri pripájaní ku kadm5 serveru pre službu `%s' v oblasti `%s': %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "chyba pri inicializácii kerberos knižnice"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "chyba pri analýze mena používateľa `%s' pre kerberos"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "štruktúra entity nemá príznaky %s alebo %s"
 
-#: modules/krb5.c:310
+#: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "entita nemá príznaky %s alebo %s"
 
-#: modules/krb5.c:323
+#: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "entita bola vytvorená bez príznakov %s alebo %s"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "chyba pri čítaní informácií pre `%s' z kerberosu"
 
-#: modules/krb5.c:603
+#: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "entita nemá príznak %s"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "chyba pri nastavovaní hesla pre `%s'"
 
-#: modules/krb5.c:767
+#: modules/krb5.c:768
 msgid "Kerberos Realm"
 msgstr "Kerberos oblasť"
 
-#: modules/krb5.c:774
+#: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos vedúci správca"
 
-#: modules/krb5.c:796
+#: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos heslo pre vedúceho správcu"
 
@@ -868,7 +868,7 @@ msgstr "nepodarilo sa konvertovať interné údaje do LDAPMods"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "chyba pri vytváraní položky LDAP adresára: %s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1618
+#: modules/ldap.c:1397 modules/ldap.c:1617
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "chyba pri úprave položky LDAP adresára: %s"
@@ -888,47 +888,47 @@ msgstr "objekt nemal príznak %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "chyba pri odstraňovaní položky LDAP adresára: %s"
 
-#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
-#: modules/ldap.c:1750
+#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
+#: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objekt nemá príznak %s"
 
-#: modules/ldap.c:1676
+#: modules/ldap.c:1675
 msgid "no such object in LDAP directory"
 msgstr "nie je taký objekt v LDAP adresári"
 
-#: modules/ldap.c:1688
+#: modules/ldap.c:1687
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nebol nájdený príznak `%s'"
 
-#: modules/ldap.c:1857
+#: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "chyba pri nastavovaní hesla v LDAP adresára pre %s: %s"
 
-#: modules/ldap.c:2469
+#: modules/ldap.c:2468
 msgid "LDAP Server Name"
 msgstr "Meno servera LDAP"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
 msgstr "LDAP DN vyhľadávacej základne"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2480
 msgid "LDAP Bind DN"
 msgstr "LDAP DN pripájania"
 
-#: modules/ldap.c:2488
+#: modules/ldap.c:2487
 msgid "LDAP Bind Password"
 msgstr "LDAP heslo pripájania"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2493
 msgid "LDAP SASL User"
 msgstr "LDAP SASL používateľ"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL udelenie oprávnenia používateľa"
 

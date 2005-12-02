@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-11-11 21:52+0100\n"
+"POT-Creation-Date: 2005-12-02 18:41+0100\n"
 "PO-Revision-Date: 2005-10-16 20:02+0200\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -105,7 +105,7 @@ msgstr "[OPCIÓ...] usuari"
 msgid "Error parsing arguments: %s.\n"
 msgstr "S'ha produït un error en analitzar els arguments: %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:89 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
@@ -379,7 +379,7 @@ msgstr "S'ha produït un error en crear la gestió de cues de correu per a %s.\n
 msgid "Error creating user account for %s: %s\n"
 msgstr "S'ha produït un error en crear un compte per a %s: %s\n"
 
-#: apps/lpasswd.c:86
+#: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "S'està canviant la contrasenya per a %s.\n"
@@ -760,7 +760,7 @@ msgstr "no s'ha pogut escriure a '%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "l'objecte de l'entitat no té l'atribut %s"
 
-#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
+#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
@@ -779,56 +779,56 @@ msgstr ""
 "s'ha produït un error en connectar amb el servidor kadm5 per al servei '%s' "
 "en el regne '%s': %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "s'ha produït un error en inicialitzar la biblioteca del Kerberos"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "s'ha produït un error en analitzar el nom d'usuari '%s' pel Kerberos"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "l'estructura de l'entitat no té atributs %s ni %s"
 
-#: modules/krb5.c:310
+#: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "l'entitat no té atributs %s ni %s"
 
-#: modules/krb5.c:323
+#: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "s'ha creat l'entitat sense atributs %s o %s"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "s'ha produït un error en llegir la informació per a '%s' del Kerberos"
 
-#: modules/krb5.c:603
+#: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "l'entitat no té cap atribut %s"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "s'ha produït un error en configurar la contrasenya per a '%s'"
 
-#: modules/krb5.c:767
+#: modules/krb5.c:768
 msgid "Kerberos Realm"
 msgstr "Regne del Kerberos"
 
-#: modules/krb5.c:774
+#: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
 msgstr "Administrador principal del Kerberos"
 
-#: modules/krb5.c:796
+#: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
 msgstr "Contrasenya del Kerberos per a l'administrador principal"
 
@@ -875,7 +875,7 @@ msgstr "no s'han pogut convertir les dades internes a LDAPMods"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "s'ha produït un error en crear l'entrada del directori de LDAP: %s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1618
+#: modules/ldap.c:1397 modules/ldap.c:1617
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
@@ -896,49 +896,49 @@ msgstr "l'objecte no tenia cap atribut %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "s'ha produït un error en eliminar l'entrada del directori LDAP: %s"
 
-#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
-#: modules/ldap.c:1750
+#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
+#: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objecte no té cap atribut %s"
 
-#: modules/ldap.c:1676
+#: modules/ldap.c:1675
 msgid "no such object in LDAP directory"
 msgstr "aquest objecte no existeix en el directori LDAP"
 
-#: modules/ldap.c:1688
+#: modules/ldap.c:1687
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "no s'ha trobat cap atribut '%s'"
 
-#: modules/ldap.c:1857
+#: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori LDAP per a "
 "%s: %s"
 
-#: modules/ldap.c:2469
+#: modules/ldap.c:2468
 msgid "LDAP Server Name"
 msgstr "Nom del servidor LDAP"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca de LDAP"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2480
 msgid "LDAP Bind DN"
 msgstr "DN del vincle de LDAP"
 
-#: modules/ldap.c:2488
+#: modules/ldap.c:2487
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2493
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 

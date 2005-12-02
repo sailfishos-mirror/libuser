@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-11-11 21:52+0100\n"
+"POT-Creation-Date: 2005-12-02 18:41+0100\n"
 "PO-Revision-Date: 2005-01-11 11:58-0200\n"
 "Last-Translator: Rodrigo Padula de Oliveira <rodrigopadula@gmail.com>\n"
 "Language-Team: Português Brasil\n"
@@ -113,7 +113,7 @@ msgstr "[OPÇÃO...] usuário"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Erro ao analisar argumentos: %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:89 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
@@ -383,7 +383,7 @@ msgstr "Erro ao criar 'mail spool' para %s.\n"
 msgid "Error creating user account for %s: %s\n"
 msgstr "Erro ao criar conta de usuário para %s: %s.\n"
 
-#: apps/lpasswd.c:86
+#: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "Alterando senha para %s.\n"
@@ -763,7 +763,7 @@ msgstr "não foi possível gravar em `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "o objeto da entidade não tem um atributo %s"
 
-#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
+#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "erro ao criptografar a senha"
 
@@ -781,56 +781,56 @@ msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
 "erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "erro ao inicializar a biblioteca do kerberos"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "erro ao analisar o nome de usuário `%s' para o kerberos"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "a estrutura da entidade não tem atributos %s ou %s"
 
-#: modules/krb5.c:310
+#: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "a entidade não tem atributos %s ou %s"
 
-#: modules/krb5.c:323
+#: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "a entidade foi criada sem os atributos %s ou %s"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "erro ao ler informações para `%s' do kerberos"
 
-#: modules/krb5.c:603
+#: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "entidade não tem o atributo %s"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "erro ao definir senha para `%s'"
 
-#: modules/krb5.c:767
+#: modules/krb5.c:768
 msgid "Kerberos Realm"
 msgstr "Reino Kerberos"
 
-#: modules/krb5.c:774
+#: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
 msgstr "Administração Principal do Kerberos"
 
-#: modules/krb5.c:796
+#: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
 msgstr "Senha do Kerberos para Administração Principal"
 
@@ -876,7 +876,7 @@ msgstr "não foi possível converter dados internos para LDAPMods"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "erro ao criar a entrada do diretório LDAP: %s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1618
+#: modules/ldap.c:1397 modules/ldap.c:1617
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "erro ao modificar entrada de diretório LDAP: %s"
@@ -896,47 +896,47 @@ msgstr "o objeto não tinha o atributo %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "erro ao apagar a entrada do diretório LDAP: %s"
 
-#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
-#: modules/ldap.c:1750
+#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
+#: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
 msgstr "o objeto não tem o atributo %s"
 
-#: modules/ldap.c:1676
+#: modules/ldap.c:1675
 msgid "no such object in LDAP directory"
 msgstr "objeto não encontrado no diretório LDAP"
 
-#: modules/ldap.c:1688
+#: modules/ldap.c:1687
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "atributo `%s' não encontrado"
 
-#: modules/ldap.c:1857
+#: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "erro ao definir senha no diretório LDAP para %s: %s"
 
-#: modules/ldap.c:2469
+#: modules/ldap.c:2468
 msgid "LDAP Server Name"
 msgstr "Nome do Servidor LDAP"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
 msgstr "DN de Base para Procuras LDAP"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2480
 msgid "LDAP Bind DN"
 msgstr "DN de Conexão LDAP"
 
-#: modules/ldap.c:2488
+#: modules/ldap.c:2487
 msgid "LDAP Bind Password"
 msgstr "Senha de Conexão LDAP"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2493
 msgid "LDAP SASL User"
 msgstr "Usuário SASL LDAP"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
 msgstr "Usuário de Autorização SASL LDAP"
 

@@ -1,3 +1,6 @@
+0.54.3
+* Fix a crash when lpasswd is run without specifying an user name
+
 0.54.2
 * Avoid using deprecated openldap functions
 

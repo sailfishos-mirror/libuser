@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-11-11 21:52+0100\n"
+"POT-Creation-Date: 2005-12-02 18:41+0100\n"
 "PO-Revision-Date: 2005-06-15 12:11+0100\n"
 "Last-Translator: Zoltan Kota <z.kota@gmx.net>\n"
 "Language-Team: Hungarian\n"
@@ -106,7 +106,7 @@ msgstr "[OPCIÓ...] felhasználó"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Hiba történt az argumentumok feldolgozásakor: %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:89 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
@@ -380,7 +380,7 @@ msgstr "%s levelezési sorának létrehozása nem sikerült.\n"
 msgid "Error creating user account for %s: %s\n"
 msgstr "Nem sikerült felhasználói azonosítót létrehozni ehhez: %s (%s)\n"
 
-#: apps/lpasswd.c:86
+#: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "%s jelszavának megváltoztatása.\n"
@@ -761,7 +761,7 @@ msgstr "nem sikerült írni ebbe: '%s' (%s)"
 msgid "entity object has no %s attribute"
 msgstr "az entitásobjektumnak nincs %s attribútuma"
 
-#: modules/files.c:1823 modules/ldap.c:1553 modules/ldap.c:1826
+#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "hiba történt a jelszó titkosításakor"
 
@@ -780,56 +780,56 @@ msgstr ""
 "nem sikerült csatlakozni a kadm5 kiszolgáló '%s' szolgáltatásához a(z) '%s' "
 "realm-ben: %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:300 modules/krb5.c:388
-#: modules/krb5.c:440 modules/krb5.c:528 modules/krb5.c:594
+#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "a Kerberos-programkönyvtár inicializálása nem sikerült"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:332 modules/krb5.c:340
-#: modules/krb5.c:408 modules/krb5.c:461 modules/krb5.c:549 modules/krb5.c:611
+#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "nem sikerült a(z) '%s' felhasználónevet feldolgozni a Kerberosban"
 
-#: modules/krb5.c:213 modules/krb5.c:399 modules/krb5.c:451 modules/krb5.c:539
+#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "az entitásstruktúra nem tartalmaz sem %s, sem %s attribútumot"
 
-#: modules/krb5.c:310
+#: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "az entitásnak nincs sem %s, sem %s attribútuma"
 
-#: modules/krb5.c:323
+#: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "az entitás %s és %s attribútum nélkül lett létrehozva"
 
-#: modules/krb5.c:474 modules/krb5.c:562
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "nem sikerült kiolvasni ezt az információt a Kerberosból: '%s'"
 
-#: modules/krb5.c:603
+#: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "az entitásnak nincs %s attribútuma"
 
-#: modules/krb5.c:641
+#: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "nem sikerült beállítani a jelszót ennél: '%s'"
 
-#: modules/krb5.c:767
+#: modules/krb5.c:768
 msgid "Kerberos Realm"
 msgstr "Kerberos-realm"
 
-#: modules/krb5.c:774
+#: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos Admin Principal"
 
-#: modules/krb5.c:796
+#: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
 msgstr "Az Admin Principal Kerberos-jelszava"
 
@@ -876,7 +876,7 @@ msgstr "nem sikerült a belső adatokat LDAPMods-ra alakítani"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "hiba történt az LDAP-címtárbejegyzés létrehozásakor: %s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1618
+#: modules/ldap.c:1397 modules/ldap.c:1617
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "hiba történt az LDAP-címtárbejegyzés módosításakor: %s"
@@ -896,47 +896,47 @@ msgstr "az objektumnak nem volt %s attribútuma"
 msgid "error removing LDAP directory entry: %s"
 msgstr "nem sikerült eltávolítani az LDAP-címtárbejegyzést: %s"
 
-#: modules/ldap.c:1523 modules/ldap.c:1539 modules/ldap.c:1651
-#: modules/ldap.c:1750
+#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
+#: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
 msgstr "az objektumnak nincs %s attribútuma"
 
-#: modules/ldap.c:1676
+#: modules/ldap.c:1675
 msgid "no such object in LDAP directory"
 msgstr "nincs ilyen objektum az LDAP-címtárban"
 
-#: modules/ldap.c:1688
+#: modules/ldap.c:1687
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nem található '%s' attribútum"
 
-#: modules/ldap.c:1857
+#: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "nem sikerült beállítani a jelszót az LDAP-címtárban ehhez: %s (%s)"
 
-#: modules/ldap.c:2469
+#: modules/ldap.c:2468
 msgid "LDAP Server Name"
 msgstr "LDAP kiszolgálónév"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
 msgstr "LDAP keresési alapnév"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2480
 msgid "LDAP Bind DN"
 msgstr "LDAP csatlakozás"
 
-#: modules/ldap.c:2488
+#: modules/ldap.c:2487
 msgid "LDAP Bind Password"
 msgstr "LDAP csatlakozási jelszó"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2493
 msgid "LDAP SASL User"
 msgstr "LDAP SASL felhasználónév"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL azonosítási felhasználónév"
 
