@@ -12,6 +12,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-POFile-SpellExtra: DN GID Kerberos group UID passwd id kerberos LDAPMods\n"
+"X-POFile-SpellExtra: stat email Admin gid finger kadm jd zu shadow Cyrus\n"
+"X-POFile-SpellExtra: PAM uid\n"
 
 #: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
 #: modules/files.c:246
