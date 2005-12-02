@@ -1,3 +1,8 @@
+2005-12-02  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/lpasswd.c (main): Determine user name before attempting to
+	autenticate a NULL user.
+
 2005-11-12  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/krb5.c (lu_krb5_user_add)

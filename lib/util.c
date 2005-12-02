@@ -119,7 +119,7 @@ static struct {
 	const char *separator;
 } salt_type_info[] = {
 	{"$1$", 8, "$"},
-	{"$2a$", 8, "$"},	/* FIXME: is this 8 or 16? */
+	{"$2a$", 8, "$"},     /* FIXME: number of rounds, base64 of 128 bits */
 	{ "", 2, ""},
 };
 

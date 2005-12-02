@@ -77,8 +77,6 @@ main(int argc, const char **argv)
 	}
 	user = poptGetArg(popt);
 
-	lu_authenticate_unprivileged(user, "passwd");
-
 	if ((user == NULL) || (geteuid() != getuid())) {
 		struct passwd *pwd;
 		pwd = getpwuid(getuid());
@@ -91,6 +89,8 @@ main(int argc, const char **argv)
 			return 1;
 		}
 	}
+
+	lu_authenticate_unprivileged(user, "passwd");
 
 	ctx = lu_start(user, groupflag ? lu_group : lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console :
