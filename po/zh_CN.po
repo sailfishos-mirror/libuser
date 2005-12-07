@@ -1,3 +1,4 @@
+# translation of zh_CN.po to 
 # translation of zh_CN.po to Chinese, Simplified
 # translation of zh_CN.po to Simplified Chinese
 # translation of libuser.po to Simplified Chinese
@@ -13,9 +14,9 @@ msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-12-02 18:41+0100\n"
-"PO-Revision-Date: 2005-07-29 16:20+1000\n"
-"Last-Translator: Leah Liu <weliu@redhat.com>\n"
-"Language-Team: Chinese, Simplified <zh@li.org>\n"
+"PO-Revision-Date: 2005-12-07 11:30+1000\n"
+"Last-Translator: \n"
+"Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -89,9 +90,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "内部 PAM 错误“%s”。\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "未知的用户上下文"
+msgstr "未知用户验证。\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -529,9 +530,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "无法打开配置文件“%s”：%s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "无法打开配置文件“%s”：%s"
+msgstr "配置文件“%s”太大"
 
 #: lib/config.c:147
 #, c-format
@@ -637,9 +638,9 @@ msgid "module version mismatch in `%s'"
 msgstr "在“%s”中模块版本错配"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "组群 %s 不存在。\n"
+msgstr "模块 `%s' 没有定义 `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1022,14 +1023,3 @@ msgstr "正在获取默认的用户属性：\n"
 msgid "Copying user structure:\n"
 msgstr "正在复制用户结构：\n"
 
-#~ msgid "could not search LDAP server"
-#~ msgstr "无法搜索 LDAP 服务器"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP 服务器似乎没有根 DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "将名称映射为 LDAP 识别名时出错。"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "将名称映射为 LDAP 基点识别名时出错。"
