@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-12-02 18:41+0100\n"
-"PO-Revision-Date: 2005-11-12 16:11+0200\n"
+"PO-Revision-Date: 2005-12-03 18:31+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -105,13 +105,13 @@ msgstr "[OPCJA...] użytkownik"
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Błąd podczas interpretowania argumentów: %s.\n"
+msgstr "Błąd podczas analizowania argumentów: %s.\n"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr "Nie podano nazwy użytkownika.\n"
+msgstr "Nie określono nazwy użytkownika.\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
@@ -193,7 +193,7 @@ msgstr "[OPCJA...] [użytkownik]"
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Brak nazwy użytkownika dla UID %d.\n"
+msgstr "Nie określono nazwy użytkownika dla UID %d.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -267,7 +267,7 @@ msgstr "[OPCJA...] grupa"
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr "Nie podano nazwy grupy.\n"
+msgstr "Nie określono nazwy grupy.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
@@ -292,7 +292,7 @@ msgstr "Grupa %s nie może zostać usunięta: %s\n"
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "Podano jednocześnie opcje -L oraz -U.\n"
+msgstr "Określono jednocześnie opcje -L oraz -U.\n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
@@ -317,17 +317,17 @@ msgstr "Grupa %s nie może być modyfikowana: %s\n"
 #: apps/lid.c:127
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Nie podano nazwy grupy, przyjęto %s.\n"
+msgstr "Nie określono nazwy grupy, używanie %s.\n"
 
 #: apps/lid.c:131
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Nie podano nazwy dla GID %d.\n"
+msgstr "Nie określono nazwy grupy, brak nazwy dla GID %d.\n"
 
 #: apps/lid.c:141
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Nie podano nazwy użytkownika, przyjęto %s.\n"
+msgstr "Nie określono nazwy użytkownika, używanie %s.\n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
@@ -342,8 +342,8 @@ msgstr "Błąd podczas otwierania `%s': %s.\n"
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Błąd podczas tworzenia konta dla `%s': wiersz jest sformatowany "
-"nieprawidłowo.\n"
+"Błąd podczas tworzenia konta dla `%s': wiersz jest nieprawidłowo "
+"sformatowany.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -783,7 +783,7 @@ msgstr "błąd podczas inicjowania biblioteki Kerberosa"
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "błąd podczas interpretowania nazwy użytkownika `%s' dla Kerberosa"
+msgstr "błąd podczas analizowania nazwy użytkownika `%s' dla Kerberosa"
 
 #: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
