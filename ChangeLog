@@ -1,3 +1,7 @@
+2005-12-20  Miloslav Trmac  <mitr@redhat.com>
+
+	* po/LINGUAS: Add hy, sr and sr@Latn.
+
 2005-12-02  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.54.3.
