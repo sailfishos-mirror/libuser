@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-12-02 18:41+0100\n"
-"PO-Revision-Date: 2005-07-25 15:22+0530\n"
+"PO-Revision-Date: 2005-12-26 12:01+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 
 #: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
@@ -86,9 +86,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "आंतरिक PAM त्रुटि`%s'.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "अज्ञात उपयोक्ता संदर्भ"
+msgstr "अज्ञात उपयोक्ता सत्यापित.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -526,9 +526,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "`%s' विन्यास फाइल स्टेट नहीं कर सका: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "`%s' विन्यास फाइल खोल नहीं सका: %s"
+msgstr "`%s' विन्यास फाइल काफी बड़ा है"
 
 #: lib/config.c:147
 #, c-format
@@ -634,9 +634,9 @@ msgid "module version mismatch in `%s'"
 msgstr "`%s' में मॉड्यूल संस्करण मेल नहीं खाता"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "%s समूह उपस्थित नहीं है.\n"
+msgstr "`%s' मौड्यूल `%s' को परिभाषित नहीं करता है"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -1019,14 +1019,3 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
 
-#~ msgid "could not search LDAP server"
-#~ msgstr "LDAP सर्वर में खोज नहीं कर सका "
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "ऐसा लगता है कि LDAP सर्वर का रूट DSE नहीं है"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "LDAP विशिष्ट नाम को नाम प्रतिचित्रण करने में त्रुटि"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "LDAP आधार विशिष्ट नाम को नाम प्रतिचित्रण करने में त्रुटि"
