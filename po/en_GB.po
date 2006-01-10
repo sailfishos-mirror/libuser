@@ -28,15 +28,15 @@ msgstr "Error creating `%s': %s"
 
 #: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
 #: modules/files.c:229
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Error creating group `%s': %s\n"
+msgstr "Error changing owner of `%s': %s"
 
 #: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
 #: modules/files.c:261 modules/files.c:275
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Error creating `%s': %s"
+msgstr "Error writing `%s': %s"
 
 #: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
 #, c-format
@@ -83,9 +83,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Internal PAM error `%s'.\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Unknown user context"
+msgstr "Unknown user authenticated.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -523,9 +523,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "could not open configuration file `%s': %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "could not open configuration file `%s': %s"
+msgstr "configuration file `%s' is too large"
 
 #: lib/config.c:147
 #, c-format
@@ -631,9 +631,9 @@ msgid "module version mismatch in `%s'"
 msgstr "module version mismatch in `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Group %s does not exist.\n"
+msgstr "module `%s' does not define `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -658,7 +658,7 @@ msgstr "name is too short"
 #: lib/user.c:203
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "name is too long (%zu > %d)"
 
 #: lib/user.c:210
 msgid "name contains non-ASCII characters"
@@ -674,7 +674,7 @@ msgstr "name contains whitespace"
 
 #: lib/user.c:236
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "name starts with a hyphen"
 
 #: lib/user.c:247
 #, c-format
@@ -729,9 +729,8 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "backup file `%s' exists and is not a regular file"
 
 #: modules/files.c:291
-#, fuzzy
 msgid "backup file size mismatch"
-msgstr "library/module version mismatch"
+msgstr "backup file size mismatch"
 
 #: modules/files.c:911 modules/files.c:1298
 #, c-format
@@ -861,9 +860,9 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "could not convert internal data to LDAPMods"
 
 #: modules/ldap.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "error creating LDAP directory entry: %s\n"
+msgstr "error creating an LDAP directory entry: %s"
 
 #: modules/ldap.c:1397 modules/ldap.c:1617
 #, c-format
@@ -871,9 +870,9 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr "error modifying LDAP directory entry: %s"
 
 #: modules/ldap.c:1424
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "error renaming LDAP directory entry: %s\n"
+msgstr "error renaming LDAP directory entry: %s"
 
 #: modules/ldap.c:1469
 #, c-format
@@ -881,9 +880,9 @@ msgid "object had no %s attribute"
 msgstr "object had no %s attribute"
 
 #: modules/ldap.c:1487
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "error removing LDAP directory entry: %s.\n"
+msgstr "error removing LDAP directory entry: %s"
 
 #: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
 #: modules/ldap.c:1749
@@ -1017,15 +1016,3 @@ msgstr "Getting default user attributes:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copying user structure:\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "could not search LDAP server"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP server appears to have no root DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "error mapping name to LDAP distinguished name"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "error mapping name to LDAP base distinguished name"
