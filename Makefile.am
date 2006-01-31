@@ -59,9 +59,11 @@ endif
 if SASL
 pkglib_LTLIBRARIES += modules/libuser_sasldb.la
 endif
+if WITH_PYTHON
 pyexec_LTLIBRARIES = python/libusermodule.la
 if QUOTA
 pyexec_LTLIBRARIES += python/libuserquotamodule.la
+endif
 endif
 
 dist_man_MANS = apps/lgroupadd.1 apps/lgroupdel.1 apps/lgroupmod.1 \

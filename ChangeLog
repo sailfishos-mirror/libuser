@@ -1,5 +1,10 @@
 2006-01-31  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in (WITH_PYTHON): New conditional.
+	* Makefile.am (pyexec_LTLIBRARIES, pyexec_LTLIBRARIES): Only use if
+	WITH_PYTHON.
+	Based on a patch by Dan Yefimov <dan@ns15.lightwave.net.ru>.
+
 	* lib/scache.c (get_keys): Fix C99-ism, patch by Dan Yefimov
 	<dan@ns15.lightwave.net.ru>.
 

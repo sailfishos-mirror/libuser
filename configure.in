@@ -86,7 +86,14 @@ if test x$sasl != xno ; then
 fi
 AM_CONDITIONAL([SASL], [test $build_sasl = yes])
 
-AM_PATH_PYTHON
+AC_ARG_WITH([python],
+	    AS_HELP_STRING([--with-python],
+			   [build Python modules (default is YES)]), [],
+	    [with_python=yes])
+AM_CONDITIONAL([WITH_PYTHON], [test $with_python != no])
+if test $with_python != no ; then
+   AM_PATH_PYTHON
+fi
 
 AC_ARG_WITH([selinux],
 	    AS_HELP_STRING([--with-selinux],
