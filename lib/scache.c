@@ -42,8 +42,8 @@ lu_string_cache_cache(struct lu_string_cache *cache, const char *string)
 static int
 get_keys(gpointer key, gpointer value, gpointer data)
 {
-	(void)value;
 	GList **list = data;
+	(void)value;
 	if (key) {
 		*list = g_list_append(*list, key);
 	}

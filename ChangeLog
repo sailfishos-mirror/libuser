@@ -1,3 +1,8 @@
+2006-01-31  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/scache.c (get_keys): Fix C99-ism, patch by Dan Yefimov
+	<dan@ns15.lightwave.net.ru>.
+
 2005-12-20  Miloslav Trmac  <mitr@redhat.com>
 
 	* po/LINGUAS: Add hy, sr and sr@Latn.
