@@ -1,21 +1,23 @@
+# translation of hu.po to hungarian
 # translation of hu.po to Hungarian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Tamas Szanto <tszanto@mol.hu>, 2003.
 # Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005.
+# Szentiványi Gábor <szentivanyi.gabor@ulx.hu>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-12-02 18:41+0100\n"
-"PO-Revision-Date: 2005-06-15 12:11+0100\n"
-"Last-Translator: Zoltan Kota <z.kota@gmx.net>\n"
-"Language-Team: Hungarian\n"
+"PO-Revision-Date: 2006-02-01 22:36+0100\n"
+"Last-Translator: Szentiványi Gábor <szentivanyi.gabor@ulx.hu>\n"
+"Language-Team: hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
 #: modules/files.c:246
@@ -85,9 +87,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Belső PAM-hiba ('%s').\n"
 
 #: apps/apputil.c:626
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Ismeretlen felhasználói kontextus"
+msgstr "Ismeretlen felhasználó azonosítva.\n"
 
 #: apps/apputil.c:630
 #, c-format
@@ -192,8 +194,7 @@ msgstr "[OPCIÓ...] [felhasználó]"
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
-"Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr "Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -322,8 +323,7 @@ msgstr "Nincs megadva csoportnév, ezt a nevet használom: %s.\n"
 #: apps/lid.c:131
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
-"Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr "Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lid.c:141
 #, c-format
@@ -342,8 +342,7 @@ msgstr "Hiba történt '%s' megnyitásakor: %s.\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
+msgstr "Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -357,8 +356,7 @@ msgstr "Nem lehet 0 értékű azonosítót létrehozni.\n"
 #: apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
-"Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
+msgstr "Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
 
 #: apps/lnewusers.c:281
 #, c-format
@@ -456,8 +454,7 @@ msgstr "%s nem rendelkezett csoportazonosítóval.\n"
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
-"Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
+msgstr "Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
 
 #: apps/luserdel.c:125
 #, c-format
@@ -1029,38 +1026,3 @@ msgstr "Az alapértelmezett felhasználójellemzők lekérdezése:\n"
 msgid "Copying user structure:\n"
 msgstr "Felhasználói struktúra másolása:\n"
 
-#~ msgid "could not search LDAP server"
-#~ msgstr "nem sikerült keresni az LDAP-kiszolgálón"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "az LDAP-kiszolgálónak valószínűleg nincs gyökér-DSE-je"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr ""
-#~ "nem sikerült leképezni a nevet egy LDAP-os DN-re (distinguished name)"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr ""
-#~ "nem sikerült leképezni a nevet egy LDAP-os alap DN-re (distinguished name)"
-
-#, fuzzy
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "nem sikerült írni (ebbe: '%s'): %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Cyrus SASL-felhasználó létrehozása: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Cyrus SASL-felhasználóeltávolítási hiba: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "%s inicializálása nem sikerült.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Nem sikerült törölni a(z) %s csoportot.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Nem sikerült módosítani a(z) %s csoportot.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "modulinicializálási hiba"
