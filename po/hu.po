@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2005-12-02 18:41+0100\n"
-"PO-Revision-Date: 2006-02-01 22:36+0100\n"
+"PO-Revision-Date: 2006-02-02 08:59+0100\n"
 "Last-Translator: Szentiványi Gábor <szentivanyi.gabor@ulx.hu>\n"
 "Language-Team: hungarian\n"
 "MIME-Version: 1.0\n"
@@ -527,9 +527,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "nem sikerült lekérdezni a(z) \"%s\" beállítási fájl adatait: %s"
 
 #: lib/config.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "nem sikerült megnyitni a(z) \"%s\" beállítási fájlt: %s"
+msgstr "a(z) %s beállítási fájl túl nagy"
 
 #: lib/config.c:147
 #, c-format
@@ -635,9 +635,9 @@ msgid "module version mismatch in `%s'"
 msgstr "modulverzió-hiba ebben: '%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Nem létezik %s nevű csoport.\n"
+msgstr "a(z) `%s' modul nem tartalmazza a(z) `%s' definícióját"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
