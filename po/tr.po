@@ -1,5 +1,5 @@
 # translation of tr.po to Turkish
-#
+# 
 # $Id$
 # Nilgün Belma Bugüner <nilgun@superonline.com>, 2003.
 # Bahadir Yagan <bahadir.yagan@mentorsystem.com>, 2004.

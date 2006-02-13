@@ -1,3 +1,9 @@
+2006-02-13  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.54.4.
+	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+
 2006-01-31  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in (WITH_PYTHON): New conditional.
