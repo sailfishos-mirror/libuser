@@ -486,7 +486,10 @@ lu_sasldb_groups_enumerate_by_user_full(struct lu_module *module,
 static gboolean
 lu_sasldb_close_module(struct lu_module *module)
 {
-	sasl_dispose((sasl_conn_t **) & module->module_context);
+	sasl_conn_t *connection;
+
+	connection = module->module_context;
+	sasl_dispose(&connection);
 	sasl_done();
 	g_free(module);
 	return TRUE;

@@ -1,3 +1,11 @@
+2006-02-21  Miloslav Trmac  <mitr@redhat.com>
+
+	* docs/libuser.conf.5.in: Remove @pkglibdir@ references to avoid
+	multilib conflicts.
+	* docs/Makefile.am (libuser.conf.5): Stop replacing @pkglibdir@.
+
+	* modules/sasldb.c (lu_sasldb_close_module): Fix invalid aliasing.
+
 2006-02-13  Miloslav Trmac  <mitr@redhat.com>
 
 	* po/LINGUAS: Add my.

@@ -83,7 +83,14 @@ Default value is \fB/var/mail\fR.
 The directory containing
 .B libuser
 modules.
-Default value is \fB@pkglibdir@\fR.
+Default value uses the modules installed with \fBlibuser\fR,
+corresponding to the architecture of the
+.B libuser
+library,
+e.g. \fB/usr/lib/libuser\fR or \fB/usr/lib64/libuser\fR
+(assuming
+.B libuser
+was configured with \fB--prefix=/usr\fR).
 
 .TP
 .B modules
