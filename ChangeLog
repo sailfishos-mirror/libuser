@@ -1,5 +1,10 @@
 2006-02-21  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.54.5.
+	* NEWS: Update.
+
+	* configure.in: Use newer gettext.
+
 	* docs/libuser.conf.5.in: Remove @pkglibdir@ references to avoid
 	multilib conflicts.
 	* docs/Makefile.am (libuser.conf.5): Stop replacing @pkglibdir@.

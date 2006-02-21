@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2005-10-14 14:08+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
@@ -943,7 +943,7 @@ msgstr "사용자를 생성하는 중 Cyrus SASL 오류 발생: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "사용자를 삭제하는 중 Cyrus SASL 오류 발생: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL를 초기화하는 중 오류 발생: %s"

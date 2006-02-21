@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2005-11-27 21:12+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
@@ -940,7 +940,7 @@ msgstr "ユーザーの作成中にCyrus SASLエラー: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "ユーザーの削除でCyrus SASLエラー: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASLの初期化でエラー: %s"

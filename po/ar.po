@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2004-12-01 19:34+0300\n"
 "Last-Translator: Munzir Taha <munzirtaha@newhorizons.com.sa>\n"
 "Language-Team: Arabic <fedora-trans-ar@redhat.com>\n"
@@ -942,7 +942,7 @@ msgstr "خطأ Cyrus SASL أثناء إنشاء المستخدم: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "خطأ Cyrus SASL أثناء إزالة المستخدم: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "خطأ في ابتداء Cyrus SASL: %s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2005-11-04 08:32+0200\n"
 "Last-Translator: Allan Sims <allan.sims@eau.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -940,7 +940,7 @@ msgstr "Cyrus SASL viga kasutaja loomisel: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL viga kasutaja eemaldamisel: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "viga Cyrus SASL lähtestamisel: %s"

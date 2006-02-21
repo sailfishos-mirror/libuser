@@ -1,3 +1,7 @@
+0.54.5
+* Don't reference @pkglibdir@ in libuser.conf.5 to avoid multilib file 
+  conflicts.
+
 0.54.4
 * Fix compilation with pre-C99 compilers (#179385, patch by Dan Yefimov).
 * Allow building without Python (#179384, original patch by Dan Yefimov).

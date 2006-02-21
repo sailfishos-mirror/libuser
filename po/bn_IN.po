@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2006-01-24 20:23+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
@@ -1017,7 +1017,7 @@ msgid "Cyrus SASL error removing user: %s"
 msgstr "ব্যবহারকারী মুছে ফেলার সময় Cyrus SASL সংক্রান্ত সমস্যা: %s"
 
 # modified for RHEL
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL আরম্ভ করতে সমস্যা: %s"

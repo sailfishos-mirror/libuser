@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2005-12-02 18:41+0100\n"
+"POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2005-04-16 14:20+0100\n"
 "Last-Translator: Rhys Jones <rhys@sgwarnog.com>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -942,7 +942,7 @@ msgstr "Gwall SASL Cyrus wrth greu'r defnyddiwr: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Gwall SASL Cyrus wrth greu'r defnyddiwr: %s"
 
-#: modules/sasldb.c:521 modules/sasldb.c:529
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "gwall wrth ymgychwyn SASL Cyrus: %s"
