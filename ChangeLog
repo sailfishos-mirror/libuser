@@ -1,5 +1,8 @@
 2006-02-21  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/getdate.y: Add missing #include.  Define YYENABLE_NLS to avoid
+	-Wundef.
+
 	* configure.in: Version 0.54.5.
 	* NEWS: Update.
 

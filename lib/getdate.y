@@ -25,6 +25,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
 #include <string.h>
@@ -84,6 +85,7 @@ static int yylex (union YYSTYPE *lvalp, const char **yyInput);
 static int yyerror (const char **yyInput, struct global *yy, char *s);
 static int yyparse (const char **yyInput, struct global *yy);
 
+#define YYENABLE_NLS 0
 #define YYLTYPE_IS_TRIVIAL 0
 
 %}
