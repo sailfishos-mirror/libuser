@@ -2,7 +2,7 @@
 # Claudia Krug <fhonig@redhat.it>, 2001.
 # Bernd Groh <bgroh@redhat.com>, 2002,2003.
 # Verena <vfuehrer@redhat.com>, 2004.
-# Ronny Buchmann <ronny-vlug@vlugnet.org> 2005
+# Ronny Buchmann <ronny-vlug@vlugnet.org>, 2005,2006.
 # Robert Scheck <redhat@linuxnetz.de>, 2005.
 #
 msgid ""
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-02-21 17:33+0100\n"
-"PO-Revision-Date: 2005-06-18 20:31+0200\n"
-"Last-Translator: Robert Scheck <redhat@linuxnetz.de>\n"
+"PO-Revision-Date: 2006-02-25 10:24+0100\n"
+"Last-Translator: Ronny Buchmann <ronny-vlug@vlugnet.org>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -130,12 +130,12 @@ msgstr "Benutzer %s existiert nicht.\n"
 #: apps/lchage.c:177
 #, c-format
 msgid "Account is locked.\n"
-msgstr "Account ist gesperrt.\n"
+msgstr "Benutzerkonto ist gesperrt.\n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Account is not locked.\n"
-msgstr "Account ist nicht gesperrt.\n"
+msgstr "Benutzerkonto ist nicht gesperrt.\n"
 
 #: apps/lchage.c:184
 #, c-format
@@ -179,7 +179,7 @@ msgstr "Passwort nicht aktiv:\t%s\n"
 #: apps/lchage.c:228
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Account läuft ab:\t%s\n"
+msgstr "Benutzerkonto läuft ab:\t%s\n"
 
 #: apps/lchage.c:278
 #, c-format
@@ -297,7 +297,7 @@ msgstr "Sowohl -L als auch -U angegeben.\n"
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Passwort konnte nicht eingestellt werden für Gruppe %s: %s\n"
+msgstr "Passwort konnte nicht gesetzt werden für Gruppe %s: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
@@ -342,7 +342,7 @@ msgstr "Fehler beim Öffnen von `%s': %s.\n"
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Fehler beim Erstellen des Accounts für `%s': Zeile inkorrekt formatiert.\n"
+"Fehler beim Erstellen des Benutzerkontos für `%s': Zeile inkorrekt formatiert.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -351,7 +351,7 @@ msgstr "Ungültige Benutzer-ID %s\n"
 
 #: apps/lnewusers.c:141
 msgid "Refusing to create account with UID 0.\n"
-msgstr "Erstellen des Accounts mit UID 0 verweigert.\n"
+msgstr "Erstellen eines Benutzerkontos mit UID 0 verweigert.\n"
 
 #: apps/lnewusers.c:223
 #, c-format
@@ -366,7 +366,7 @@ msgstr "Fehler beim Setzen des Initialpassworts für %s: %s\n"
 #: apps/lnewusers.c:303
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "Fehler beim Erstellen des Benutzererzeichnisses für %s: %s\n"
+msgstr "Fehler beim Erstellen des persönlichen Verzeichnisses für %s: %s\n"
 
 #: apps/lnewusers.c:317
 #, c-format
@@ -376,7 +376,7 @@ msgstr "Fehler beim Erstellen des E-Mail-Postfachs für %s.\n"
 #: apps/lnewusers.c:323
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Fehler beim Erstellen des Benutzer-Accounts für %s: %s.\n"
+msgstr "Fehler beim Erstellen des Benutzerkontos für %s: %s.\n"
 
 #: apps/lpasswd.c:84
 #, c-format
@@ -429,7 +429,7 @@ msgstr "Fehler beim Erstellen der Gruppe `%s': %s\n"
 #: apps/luseradd.c:281
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Die Erzeugung des Accounts ist fehlgeschlagen: %s.\n"
+msgstr "Die Erzeugung des Benutzerkontos ist fehlgeschlagen: %s.\n"
 
 #: apps/luseradd.c:331
 #, c-format
@@ -469,7 +469,7 @@ msgstr "Gruppe %s konnte nicht gelöscht werden: %s.\n"
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s hatte kein Benutzerverzeichnis.\n"
+msgstr "%s hatte kein persönliches Verzeichnis.\n"
 
 #: apps/luserdel.c:156
 #, c-format
@@ -504,12 +504,12 @@ msgstr "Gruppe %s konnte nicht modifiziert werden: %s.\n"
 #: apps/lusermod.c:338
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr "Kein altes Benutzerverzeichnis für %s.\n"
+msgstr "Kein altes persönliches Verzeichnis für %s.\n"
 
 #: apps/lusermod.c:343
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "Kein neues Benutzerverzeichnis für %s.\n"
+msgstr "Kein neues persönliches Verzeichnis für %s.\n"
 
 #: apps/lusermod.c:349
 #, c-format
@@ -610,7 +610,7 @@ msgstr "Fehler beim Laden des Moduls"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "Fehler beim Lösen des Symbols im Modul"
+msgstr "Fehler beim Auflösen des Symbols im Modul"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
@@ -896,7 +896,7 @@ msgstr "Objekt besitzt kein Attribut %s"
 
 #: modules/ldap.c:1675
 msgid "no such object in LDAP directory"
-msgstr "Kein entsprechendes Objekt in LDAP-Verzeichnis vorhanden"
+msgstr "Kein entsprechendes Objekt im LDAP-Verzeichnis vorhanden"
 
 #: modules/ldap.c:1687
 #, c-format
@@ -914,7 +914,7 @@ msgstr "LDAP Servername"
 
 #: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
-msgstr "LDAP DN Suchbasis"
+msgstr "LDAP Suche Basis-DN"
 
 #: modules/ldap.c:2480
 msgid "LDAP Bind DN"
