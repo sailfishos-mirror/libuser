@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -410,6 +410,11 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 	/* Now parse out the fields. */
 	memset(&value, 0, sizeof(value));
 	for (i = 0; i < format_count; i++) {
+		const gchar *val;
+
+		val = v[i];
+		if (val == NULL)
+			val = "";
 		/* Clear out old values in the destination structure. */
 		lu_ent_clear_current(ent, formats[i].attribute);
 		if (formats[i].multiple) {
@@ -418,7 +423,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			size_t j;
 
 			/* Split up the field. */
-			w = g_strsplit(v[i] ?: "", ",", 0);
+			w = g_strsplit(val, ",", 0);
 			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
 				/* Skip over empty strings. */
@@ -437,7 +442,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 		} else {
 			/* Check if we need to supply the default value. */
 			if (formats[i].def_if_empty && formats[i].def != NULL
-			    && strlen(v[i]) == 0) {
+			    && strlen(val) == 0) {
 				gboolean ret;
 
 				/* Make sure we're not doing something
@@ -449,7 +454,7 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 						  formats[i].def);
 				g_assert (ret != FALSE);
 			} else {
-				if (parse_field (formats + i, &value, v[i])
+				if (parse_field (formats + i, &value, val)
 				    == FALSE)
 					continue;
 			}
@@ -2522,12 +2527,10 @@ lu_files_enumerate_full(struct lu_module *module,
 		}
 		/* If the account name matches the pattern, parse it and add
 		 * it to the list. */
-		if (fnmatch(pattern, buf, 0) == 0) {
-			parser(buf, ent);
+		if (fnmatch(pattern, key, 0) == 0 && parser(buf, ent) != FALSE)
 			g_ptr_array_add(ret, ent);
-		} else {
+		else
 			lu_ent_free(ent);
-		}
 		g_free(buf);
 		g_free(key);
 	}

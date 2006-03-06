@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001,2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2001,2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -109,7 +109,7 @@ main(int argc, const char **argv)
 	values = lu_ent_get(ent, LU_LOGINSHELL);
 	if (values != NULL) {
 		struct lu_prompt prompts[1];
-		GValue *value;
+		GValue *value, val;
 
 		value = g_value_array_get_nth(values, 0);
 		/* Fill in the prompt structure using the user's shell. */
@@ -121,28 +121,31 @@ main(int argc, const char **argv)
 		prompts[0].default_value = lu_value_strdup(value);
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
-				      NULL, &error)) {
-			GValue val;
-
-			/* Modify the in-memory structure's shell attribute. */
-			memset(&val, 0, sizeof(val));
-			g_value_init(&val, G_TYPE_STRING);
-			g_value_set_string(&val, prompts[0].value);
-			if (prompts[0].free_value != NULL) {
-				prompts[0].free_value(prompts[0].value);
-				prompts[0].value = NULL;
-			}
-			lu_ent_clear(ent, LU_LOGINSHELL);
-			lu_ent_add(ent, LU_LOGINSHELL, &val);
-			/* Modify the user's record in the information store. */
-			if (lu_user_modify(ctx, ent, &error)) {
-				g_print(_("Shell changed.\n"));
-				lu_hup_nscd();
-			} else
-				fprintf(stderr, _("Shell not changed: %s\n"),
-					lu_strerror(error));
-			g_value_unset(&val);
+				      NULL, &error) == FALSE) {
+			fprintf(stderr,
+				_("Shell not changed: input error.\n"));
+			return 1;
 		}
+		/* Modify the in-memory structure's shell attribute. */
+		memset(&val, 0, sizeof(val));
+		g_value_init(&val, G_TYPE_STRING);
+		g_value_set_string(&val, prompts[0].value);
+		if (prompts[0].free_value != NULL) {
+			prompts[0].free_value(prompts[0].value);
+			prompts[0].value = NULL;
+		}
+		lu_ent_clear(ent, LU_LOGINSHELL);
+		lu_ent_add(ent, LU_LOGINSHELL, &val);
+		/* Modify the user's record in the information store. */
+		if (lu_user_modify(ctx, ent, &error)) {
+			g_print(_("Shell changed.\n"));
+			lu_hup_nscd();
+		} else {
+			fprintf(stderr, _("Shell not changed: %s\n"),
+				lu_strerror(error));
+			return 1;
+		}
+		g_value_unset(&val);
 	}
 
 	lu_ent_free(ent);

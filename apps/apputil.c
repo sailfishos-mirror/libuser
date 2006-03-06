@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -705,6 +705,8 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 			gid = lu_value_get_id(value);
 		}
 	}
+	if (error != NULL)
+		lu_error_free(&error);
 	lu_ent_free(groupEnt);
 
 	/* Er, okay.  Check with libc. */

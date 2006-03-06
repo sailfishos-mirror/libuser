@@ -502,6 +502,12 @@ class Tests(unittest.TestCase):
              if name.startswith('-') or name.startswith('+')]
         self.assertEqual(v, [])
 
+    def testUsersEnumerateFull3(self):
+        # Only the user name is matched
+        e = self.a.initUser('user16_3')
+        self.a.addUser(e, False, False)
+        self.assertEqual(self.a.enumerateUsersFull('user16_3:*'), [])
+
     def testGroupLookupName1(self):
         e = self.a.initGroup('group17_1')
         self.a.addGroup(e)
@@ -876,9 +882,15 @@ class Tests(unittest.TestCase):
              if name.startswith('-') or name.startswith('+')]
         self.assertEqual(v, [])
 
+    def testGroupsEnumerateFull3(self):
+        # Only the user name is matched
+        e = self.a.initGroup('group31_3')
+        self.a.addGroup(e)
+        self.assertEqual(self.a.enumerateGroupsFull('group31_3:*'), [])
+
     def tearDown(self):
-        del self.a        
-        
+        del self.a
+
 
 if __name__ == '__main__':
     unittest.main()

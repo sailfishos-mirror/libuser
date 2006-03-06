@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -302,6 +302,7 @@ main(int argc, const char **argv)
 	} else {
 		fprintf(stderr, _("Finger information not changed: %s.\n"),
 			lu_strerror(error));
+		return 1;
 	}
 
 	g_value_unset(&val);

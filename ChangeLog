@@ -1,3 +1,44 @@
+2006-03-06  Miloslav Trmac  <mitr@redhat.com>
+
+	* python/admin.c (libuser_admin_enumerate_users)
+	(libuser_admin_enumerate_groups)
+	(libuser_admin_enumerate_users_by_group)
+	(libuser_admin_enumerate_groups_by_user): Don't attempt to
+	g_value_array_free(NULL).
+
+	* lib/user.c (extract_id, extract_name): Don't warn if the attribute
+	has no value, leave it to the caller.
+	(lu_refresh_int): Don't unnecessarily call extract_id().  Don't attempt
+	to refresh an entity without name.
+	(convert_user_name_to_id, convert_group_name_to_id): Report errors
+	when the entity can't be found or has no ID.
+	(ent_has_name_and_id): New function.
+	(lu_dispatch): Report more detailed errors on insufficiently filled
+	entities, also fixing a memory leak.  Use constants for unused sdata,
+	ldata parameters.
+
+	* lib/user.c (lu_dispatch): Use g_assert_not_reached().
+
+	* apps/lid.c (do_id): Report lookup error.  Exit with status 1 on
+	error.
+
+	* apps/lchsh.c (main): Report error on prompting.  Exit with status 1
+	on error.
+
+	* apps/lchfn.c (main): Exit with status 1 on error.
+
+	* apps/apputil.c (lu_mailspool_create_remove): Fix memory leak.
+
+2006-03-05  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/files.c (parse_generic): Fix crash if the last field is
+	empty.
+
+	(lu_files_enumerate_full): Don't return empty data if the input line is
+	invalid.  Match only the user name against the supplied pattern.
+	* tests/files_test.py (Tests.testUsersEnumerateFull3)
+	(Tests.testGroupsEnumerateFull3): New tests.
+
 2006-02-21  Miloslav Trmac  <mitr@redhat.com>
 
 	* lib/getdate.y: Add missing #include.  Define YYENABLE_NLS to avoid

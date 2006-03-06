@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2004, 2005, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -172,8 +172,9 @@ extract_name(struct lu_ent *ent)
 	if (array == NULL) {
 		array = lu_ent_get_current(ent,
 					   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
+		if (array == NULL)
+			return NULL;
 	}
-	g_return_val_if_fail(array != NULL, NULL);
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, NULL);
 	return ent->cache->cache(ent->cache, g_value_get_string(value));
@@ -266,53 +267,86 @@ extract_id(struct lu_ent *ent)
 	if (array == NULL) {
 		array = lu_ent_get_current(ent,
 					   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
+		if (array == NULL)
+			return LU_VALUE_INVALID_ID;
 	}
-	g_return_val_if_fail(array != NULL, LU_VALUE_INVALID_ID);
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, LU_VALUE_INVALID_ID);
 	return lu_value_get_id(value);
 }
 
 static uid_t
-convert_user_name_to_id(struct lu_context *context, const char *sdata)
+convert_user_name_to_id(struct lu_context *context, const char *sdata,
+			struct lu_error **error)
 {
 	struct lu_ent *ent;
 	uid_t ret = LU_VALUE_INVALID_ID;
 	char buf[LINE_MAX * 4];
 	struct passwd *err, passwd;
-	struct lu_error *error = NULL;
+
 	if ((getpwnam_r(sdata, &passwd, buf, sizeof(buf), &err) == 0) &&
 	    (err == &passwd))
 		return passwd.pw_uid;
 	ent = lu_ent_new();
-	if (lu_user_lookup_name(context, sdata, ent, &error) == TRUE) {
+	if (lu_user_lookup_name(context, sdata, ent, error) == TRUE) {
 		ret = extract_id(ent);
+		if (ret == LU_VALUE_INVALID_ID)
+			lu_error_new(error, lu_error_generic,
+				     _("user %s has no UID"), sdata);
 	}
-	if (error != NULL)
-		lu_error_free(&error);
 	lu_ent_free(ent);
 	return ret;
 }
 
 static gid_t
-convert_group_name_to_id(struct lu_context *context, const char *sdata)
+convert_group_name_to_id(struct lu_context *context, const char *sdata,
+			 struct lu_error **error)
 {
 	struct lu_ent *ent;
 	gid_t ret = LU_VALUE_INVALID_ID;
 	char buf[LINE_MAX * 4];
 	struct group *err, group;
-	struct lu_error *error = NULL;
+
 	if ((getgrnam_r(sdata, &group, buf, sizeof(buf), &err) == 0) &&
 	    (err == &group))
 		return group.gr_gid;
 	ent = lu_ent_new();
-	if (lu_group_lookup_name(context, sdata, ent, &error) == TRUE) {
+	if (lu_group_lookup_name(context, sdata, ent, error) == TRUE) {
 		ret = extract_id(ent);
+		if (ret == LU_VALUE_INVALID_ID)
+			lu_error_new(error, lu_error_generic,
+				     _("group %s has no GID"), sdata);
 	}
-	if (error != NULL)
-		lu_error_free(&error);
 	lu_ent_free(ent);
 	return ret;
+}
+
+static gboolean ent_has_name_and_id(struct lu_ent *ent,
+				    struct lu_error **error)
+{
+	const char *name;
+	id_t id;
+
+	g_return_val_if_fail(ent->type == lu_user || ent->type == lu_group,
+			     FALSE);
+	name = extract_name(ent);
+	id = extract_id(ent);
+	if (name != NULL && id != LU_VALUE_INVALID_ID)
+		return TRUE;
+	if (id != LU_VALUE_INVALID_ID)
+		lu_error_new(error, lu_error_generic,
+			     ent->type == lu_user ? _("user %jd has no name")
+			     : _("group %jd has no name"),
+			     (intmax_t)id);
+	else if (name != NULL)
+		lu_error_new(error, lu_error_generic, ent->type == lu_user
+			     ? _("user %s has no UID")
+			     : _("group %s has no GID"), name);
+	else
+		lu_error_new(error, lu_error_generic, ent->type == lu_user
+			     ? _("user has neither a name nor an UID")
+			     : _("group has neither a name nor a GID"));
+	return FALSE;
 }
 
 static gboolean lu_refresh_int(struct lu_context *context,
@@ -882,7 +916,6 @@ lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
 {
 	enum lu_dispatch_id id = 0;
 	const char *sdata;
-	id_t ldata;
 	gpointer scratch = NULL;
 	g_return_val_if_fail((entity->type == lu_user) ||
 			     (entity->type == lu_group),
@@ -896,9 +929,10 @@ lu_refresh_int(struct lu_context *context, struct lu_ent *entity,
 		g_assert_not_reached();
 	}
 	sdata = extract_name(entity);
-	ldata = extract_id(entity);
+	if (sdata == NULL)
+		return FALSE;
 	if (run_list(context, entity->modules, logic_and, id,
-		     sdata, ldata, entity, &scratch, error)) {
+		     sdata, LU_VALUE_INVALID_ID, entity, &scratch, error)) {
 		lu_ent_revert(entity);
 		return TRUE;
 	}
@@ -971,11 +1005,10 @@ lu_dispatch(struct lu_context *context,
 	case group_lookup_name:
 		/* Make sure data items are right for this call. */
 		g_assert(sdata != NULL);
-		ldata = LU_VALUE_INVALID_ID;
 		/* Run the list. */
-		if (run_list(context, context->module_names,
-			    logic_or, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, context->module_names, logic_or, id,
+			     sdata, LU_VALUE_INVALID_ID, tmp, &scratch,
+			     error)) {
 			if (entity != NULL) {
 				lu_ent_revert(tmp);
 				lu_ent_copy(tmp, entity);
@@ -1000,15 +1033,12 @@ lu_dispatch(struct lu_context *context,
 	case user_add_prep:
 	case group_add_prep:
 		/* Make sure we have both name and ID here. */
-		sdata = sdata ?: extract_name(tmp);
-		if (ldata == LU_VALUE_INVALID_ID)
-			ldata = extract_id(tmp);
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ent_has_name_and_id(tmp, error) == FALSE)
+			break;
 		/* Run the checks and preps. */
-		if (run_list(context, context->create_module_names,
-			    logic_and, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, context->create_module_names, logic_and,
+			     id, NULL, LU_VALUE_INVALID_ID, tmp, &scratch,
+			     error)) {
 			if (entity != NULL) {
 				lu_ent_copy(tmp, entity);
 			}
@@ -1018,15 +1048,12 @@ lu_dispatch(struct lu_context *context,
 	case user_add:
 	case group_add:
 		/* Make sure we have both name and ID here. */
-		sdata = sdata ?: extract_name(tmp);
-		if (ldata == LU_VALUE_INVALID_ID)
-			ldata = extract_id(tmp);
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ent_has_name_and_id(tmp, error) == FALSE)
+			break;
 		/* Add the account. */
 		if (run_list(context, context->create_module_names,
-			    logic_and, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+			     logic_and, id, NULL, LU_VALUE_INVALID_ID,
+			     tmp, &scratch, error)) {
 			if (entity != NULL) {
 				lu_ent_copy(tmp, entity);
 			}
@@ -1036,18 +1063,13 @@ lu_dispatch(struct lu_context *context,
 	case user_mod:
 	case group_mod:
 		/* Make sure we have both name and ID here. */
-		/* FIXME: sdata, ldata contain new values (and are not even
-		   used). */
-		sdata = sdata ?: extract_name(tmp);
-		if (ldata == LU_VALUE_INVALID_ID)
-			ldata = extract_id(tmp);
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		/* FIXME: this checks current, not pending values */
+		if (ent_has_name_and_id(tmp, error) == FALSE)
+			break;
 		/* Make the changes. */
 		g_assert(entity != NULL);
-		if (run_list(context, entity->modules,
-			    logic_and, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, entity->modules, logic_and, id, NULL,
+			     LU_VALUE_INVALID_ID, tmp, &scratch, error)) {
 			lu_ent_commit(tmp);
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
@@ -1062,16 +1084,12 @@ lu_dispatch(struct lu_context *context,
 	case group_unlock:
 	case group_unlock_nonempty:
 		/* Make sure we have both name and ID here. */
-		sdata = sdata ?: extract_name(tmp);
-		if (ldata == LU_VALUE_INVALID_ID)
-			ldata = extract_id(tmp);
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ent_has_name_and_id(tmp, error) == FALSE)
+			break;
 		/* Make the changes. */
 		g_assert(entity != NULL);
-		if (run_list(context, entity->modules,
-			    logic_and, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, entity->modules, logic_and, id, NULL,
+			     LU_VALUE_INVALID_ID, tmp, &scratch, error)) {
 			lu_ent_revert(tmp);
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
@@ -1086,9 +1104,8 @@ lu_dispatch(struct lu_context *context,
 	case group_removepass:
 		/* Make the changes. */
 		g_assert(entity != NULL);
-		if (run_list(context, entity->modules,
-			    logic_and, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, entity->modules, logic_and, id, sdata,
+			     LU_VALUE_INVALID_ID, tmp, &scratch, error)) {
 			lu_ent_revert(tmp);
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
@@ -1097,16 +1114,12 @@ lu_dispatch(struct lu_context *context,
 	case user_is_locked:
 	case group_is_locked:
 		/* Make sure we have both name and ID here. */
-		sdata = sdata ?: extract_name(tmp);
-		if (ldata == LU_VALUE_INVALID_ID)
-			ldata = extract_id(tmp);
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ent_has_name_and_id(tmp, error) == FALSE)
+			break;
 		/* Run the checks. */
 		g_assert(entity != NULL);
-		if (run_list(context, entity->modules,
-			    logic_or, id,
-			    sdata, ldata, tmp, &scratch, error)) {
+		if (run_list(context, entity->modules, logic_or, id, NULL,
+			     LU_VALUE_INVALID_ID, tmp, &scratch, error)) {
 			lu_ent_copy(tmp, entity);
 			success = TRUE;
 		}
@@ -1115,15 +1128,15 @@ lu_dispatch(struct lu_context *context,
 	case groups_enumerate_by_user:
 		/* Make sure we have both name and ID here. */
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		if (id == users_enumerate_by_group) {
-			ldata = convert_group_name_to_id(context, sdata);
-		} else
-		if (id == groups_enumerate_by_user) {
-			ldata = convert_user_name_to_id(context, sdata);
-		} else {
+		if (id == users_enumerate_by_group)
+			ldata = convert_group_name_to_id(context, sdata,
+							 error);
+		else if (id == groups_enumerate_by_user)
+			ldata = convert_user_name_to_id(context, sdata, error);
+		else
 			g_assert_not_reached();
-		}
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ldata == LU_VALUE_INVALID_ID)
+			break;
 		/* fall through */
 	case users_enumerate:
 	case groups_enumerate:
@@ -1139,15 +1152,15 @@ lu_dispatch(struct lu_context *context,
 	case groups_enumerate_by_user_full:
 		/* Make sure we have both name and ID here. */
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		if (id == users_enumerate_by_group_full) {
-			ldata = convert_group_name_to_id(context, sdata);
-		} else
-		if (id == groups_enumerate_by_user_full) {
-			ldata = convert_user_name_to_id(context, sdata);
-		} else {
+		if (id == users_enumerate_by_group)
+			ldata = convert_group_name_to_id(context, sdata,
+							 error);
+		else if (id == groups_enumerate_by_user)
+			ldata = convert_user_name_to_id(context, sdata, error);
+		else
 			g_assert_not_reached();
-		}
-		g_return_val_if_fail(ldata != LU_VALUE_INVALID_ID, FALSE);
+		if (ldata == LU_VALUE_INVALID_ID)
+			break;
 		/* fall through */
 	case users_enumerate_full:
 	case groups_enumerate_full:
@@ -1181,7 +1194,7 @@ lu_dispatch(struct lu_context *context,
 		}
 		break;
 	default:
-		g_assert(0);	/* not reached */
+		g_assert_not_reached();
 		break;
 	}
 	lu_ent_free(tmp);

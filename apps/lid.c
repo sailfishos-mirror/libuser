@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -43,6 +43,12 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 
 	error = NULL;
 	values = enumerate(ctx, name, &error);
+	if (error != NULL) {
+		fprintf(stderr, _("Error looking up %s: %s\n"), name,
+			lu_strerror(error));
+		lu_error_free(&error);
+		exit(1);
+	}
 	if (values != NULL) {
 		struct lu_ent *ent;
 		size_t i;

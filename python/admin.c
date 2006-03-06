@@ -1,4 +1,4 @@
-/* Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
+/* Copyright (C) 2001, 2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -1050,7 +1050,8 @@ libuser_admin_enumerate_users(PyObject *self, PyObject *args,
 		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
-	g_value_array_free(results);
+	if (results != NULL)
+		g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1080,7 +1081,8 @@ libuser_admin_enumerate_groups(PyObject *self, PyObject *args,
 		lu_error_free(&error);
 	/* Convert the list to a PyList. */
 	ret = convert_value_array_pylist(results);
-	g_value_array_free(results);
+	if (results != NULL)
+		g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1108,7 +1110,8 @@ libuser_admin_enumerate_users_by_group(PyObject *self, PyObject *args,
 	if (error != NULL)
 		lu_error_free(&error);
 	ret = convert_value_array_pylist(results);
-	g_value_array_free(results);
+	if (results != NULL)
+		g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1136,7 +1139,8 @@ libuser_admin_enumerate_groups_by_user(PyObject *self, PyObject *args,
 	if (error != NULL)
 		lu_error_free(&error);
 	ret = convert_value_array_pylist(results);
-	g_value_array_free(results);
+	if (results != NULL)
+		g_value_array_free(results);
 	DEBUG_EXIT;
 	return ret;
 }
