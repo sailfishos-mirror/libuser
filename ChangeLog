@@ -1,3 +1,12 @@
+2006-03-12  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/ldap.c (get_ent_mods): Remove unused parameter module.
+
+	* lib/getdate.y: Quiesce some warnings.
+
+	* lib/config.c (read_file): Make type conversion explicit, assuming
+	sizeof (off_t) >= sizeof (size_t).
+
 2006-03-06  Miloslav Trmac  <mitr@redhat.com>
 
 	* python/admin.c (libuser_admin_enumerate_users)

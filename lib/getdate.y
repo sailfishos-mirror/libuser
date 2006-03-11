@@ -394,7 +394,7 @@ static TABLE const MonthDayTable[] = {
     { "thurs",		tDAY, 4 },
     { "friday",		tDAY, 5 },
     { "saturday",	tDAY, 6 },
-    { NULL }
+    { NULL, 0, 0 }
 };
 
 /* Time units table. */
@@ -409,7 +409,7 @@ static TABLE const UnitsTable[] = {
     { "min",		tMINUTE_UNIT,	1 },
     { "second",		tSEC_UNIT,	1 },
     { "sec",		tSEC_UNIT,	1 },
-    { NULL }
+    { NULL, 0, 0 }
 };
 
 /* Assorted relative-time words. */
@@ -434,7 +434,7 @@ static TABLE const OtherTable[] = {
     { "eleventh",	tUNUMBER,	11 },
     { "twelfth",	tUNUMBER,	12 },
     { "ago",		tAGO,	1 },
-    { NULL }
+    { NULL, 0, 0 }
 };
 
 /* The timezone table. */
@@ -489,7 +489,7 @@ static TABLE const TimezoneTable[] = {
     { "nzst",	tZONE,     -HOUR (12) },	/* New Zealand Standard */
     { "nzdt",	tDAYZONE,  -HOUR (12) },	/* New Zealand Daylight */
     { "idle",	tZONE,     -HOUR (12) },	/* International Date Line East */
-    {  NULL  }
+    {  NULL, 0, 0  }
 };
 
 /* Military timezone table. */
@@ -519,7 +519,7 @@ static TABLE const MilitaryTable[] = {
     { "x",	tZONE,	HOUR (-11) },
     { "y",	tZONE,	HOUR (-12) },
     { "z",	tZONE,	HOUR (  0) },
-    { NULL }
+    { NULL, 0, 0 }
 };
 
 
@@ -529,6 +529,9 @@ static TABLE const MilitaryTable[] = {
 static int
 yyerror (const char **yyInput, struct global *yy, char *s)
 {
+  (void)yyInput;
+  (void)yy;
+  (void)s;
   return 0;
 }
 

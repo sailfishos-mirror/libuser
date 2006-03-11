@@ -20,6 +20,7 @@
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
+#include <assert.h>
 #include <sys/stat.h>
 #include <ctype.h>
 #include <fcntl.h>
@@ -126,7 +127,8 @@ read_file(const char *filename, struct lu_error **error)
 	}
 	/* Read the file's contents in. */
 	left = st.st_size;
-	if (left != st.st_size) {
+	assert (sizeof (off_t) >= sizeof (size_t));
+	if ((off_t)left != st.st_size) {
 		lu_error_new(error, lu_error_generic,
 			     _("configuration file `%s' is too large"),
 			     filename);

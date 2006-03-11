@@ -828,6 +828,7 @@ objectclass_present(const char *dn, const char *class,
 {
 	size_t i, len;
 
+	(void)dn;
 	len = strlen(class);
 	for (i = 0; i < old_count; i++) {
 		const BerValue *val;
@@ -1068,8 +1069,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 /* Build a list of LDAPMod structures based on the differences between the
  * pending and current values in the entity object. */
 static LDAPMod **
-get_ent_mods(struct lu_module *module, struct lu_ent *ent,
-	     const char *namingAttr)
+get_ent_mods(struct lu_ent *ent, const char *namingAttr)
 {
 	LDAPMod **mods = NULL;
 	GList *attrs;
@@ -1352,7 +1352,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	if (add)
 		mods = get_ent_adds(dn, ent);
 	else
-		mods = get_ent_mods(module, ent, namingAttr);
+		mods = get_ent_mods(ent, namingAttr);
 	if (mods == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("could not convert internal data to LDAPMods"));
