@@ -7,6 +7,7 @@
 # Amanpreet Singh Alam <aalam@redhat.com>, 2004.
 # Amanpreet Singh Alam <amanpreetalam@yahoo.com>, 2005.
 # Harmeet Singh Phulewala <harmeetphulewala@yahoo.com>, 2005.
+# Amanpreet Singh Alam <aalam@redhat.com>, 2006
 #
 #
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-02-21 17:33+0100\n"
 "PO-Revision-Date: 2005-10-01 13:16+0530\n"
-"Last-Translator: Harmeet Singh Phulewala <harmeetphulewala@yahoo.com>\n"
+"Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +71,7 @@ msgstr "%s %s ਦੀ finger ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਨ �
 
 #: apps/apputil.c:586
 msgid "Unknown user context"
-msgstr "ਅਣਪਛਾਤੀ ਉਪਭੋਗਤਾ ਪ੍ਰਸੰਗ"
+msgstr "ਅਣਪਛਾਤੀ ਉਪਭੋਗੀ ਪ੍ਰਸੰਗ"
 
 #: apps/apputil.c:594
 #, c-format
@@ -95,12 +96,12 @@ msgstr "ਅੰਦਰੂਨੀ PAM ਗਲਤੀ `%s'।\n"
 #: apps/apputil.c:626
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "ਅਣਪਛਾਤੀ ਉਪਭੋਗਤਾ ਪ੍ਰਸੰਗ।\n"
+msgstr "ਅਣਜਾਣ ਉਪਭੋਗੀ ਪ੍ਰਸੰਗ।\n"
 
 #: apps/apputil.c:630
 #, c-format
 msgid "User mismatch.\n"
-msgstr "ਉਪਭੋਗਤਾ ਵੱਖਰਾ ਹੈ।\n"
+msgstr "ਉਪਭੋਗੀ ਰਲਦਾ ਨਹੀਂ ਹੈ।\n"
 
 #: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
@@ -118,7 +119,7 @@ msgstr "ਆਰਗੂਮਿੰਟ ਪਾਰਸ ਕਰਨ ਵਿੱਚ ਗਲਤ�
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr "ਕੋਈ ਉਪਭੋਗਤਾ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ।\n"
+msgstr "ਕੋਈ ਉਪਭੋਗੀ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ।\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
@@ -132,7 +133,7 @@ msgstr "%s ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਮੌਜੂਦ ਨਹੀਂ।\n"
+msgstr "ਉਪਭੋਗੀ %s ਮੌਜੂਦ ਨਹੀਂ।\n"
 
 #: apps/lchage.c:177
 #, c-format
@@ -147,12 +148,12 @@ msgstr "ਖਾਤਾ ਲਾਕ ਨਹੀਂ ਹੈ।\n"
 #: apps/lchage.c:184
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr "ਨਿਊਨਤਮ:\t%d\n"
+msgstr "ਘੱਟੋ-ਘੱਟ:\t%d\n"
 
 #: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr "ਅਧਿਕਤਮ:\t%d\n"
+msgstr "ਵੱਧ ਤੋਂ ਵੱਧ:\t%d\n"
 
 #: apps/lchage.c:192
 #, c-format
@@ -176,7 +177,7 @@ msgstr "ਆਖਰੀ ਤਬਦੀਲੀ:\t%s\n"
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "ਗੁਪਤ-ਕੋਡ ਖਤਮ ਹੋ ਗਿਆ:\t%s\n"
+msgstr "ਗੁਪਤ-ਕੋਡ ਦੀ ਮਿਆਦ ਖਤਮ ਹੋ ਗਈ ਹੈ:\t%s\n"
 
 #: apps/lchage.c:221
 #, c-format
@@ -200,7 +201,7 @@ msgstr "[ਚੋਣ...] [user]"
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "ਕੋਈ ਉਪਭੋਗਤਾ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, uid %d ਲਈ ਕੋਈ ਨਾਂ ਨਹੀਂ।\n"
+msgstr "ਕੋਈ ਉਪਭੋਗੀ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, uid %d ਲਈ ਕੋਈ ਨਾਂ ਨਹੀਂ।\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -274,27 +275,27 @@ msgstr "[ਚੋਣ...] group"
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr "ਕੋਈ ਸਮੂਹ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ।\n"
+msgstr "ਕੋਈ ਗਰੁੱਪ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ।\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr "ਗਲਤ ਸਮੂਹ ID %s\n"
+msgstr "ਗਲਤ ਗਰੁੱਪ ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr "ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ: %s\n"
+msgstr "ਗਰੁੱਪ ਬਣਾਉਣ ਵਿੱਚ ਅਸਫਲ: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr "ਸਮੂਹ %s ਮੌਜੂਦ ਨਹੀਂ।\n"
+msgstr "ਗਰੁੱਪ %s ਮੌਜੂਦ ਨਹੀਂ।\n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "ਸਮੂਹ %s ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਗਰੁੱਪ %s ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s।\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
@@ -304,37 +305,37 @@ msgstr "ਦੋਨੋ -L ਅਤੇ -U ਨਿਰਧਾਰਿਤ ਹਨ।\n"
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ: %s\n"
+msgstr "%s ਗਰੁੱਪ ਲਈ ਗੁਪਤ-ਕੋਡ ਦੇਣ ਲਈ ਅਸਫਲ: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "%s ਸਮੂਹ ਨੂੰ ਲਾਕ ਨਹੀਂ ਕਰ ਸਕਿਆ: %s\n"
+msgstr "%s ਗਰੁੱਪ ਨੂੰ ਲਾਕ ਨਹੀਂ ਕਰ ਸਕਿਆ: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "%s ਸਮੂਹ ਨੂੰ ਅਨ-ਲਾਕ ਨਹੀਂ ਕਰ ਸਕਿਆ: %s\n"
+msgstr "%s ਗਰੁੱਪ ਨੂੰ ਅਨ-ਲਾਕ ਨਹੀਂ ਕਰ ਸਕਿਆ: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "ਸਮੂਹ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s\n"
+msgstr "ਗਰੁੱਪ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s\n"
 
 #: apps/lid.c:127
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "ਕੋਈ ਸਮੂਹ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, %s ਵਰਤਣ ਵਾਲਾ।\n"
+msgstr "ਕੋਈ ਗਰੁੱਪ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, %s ਵਰਤਣ ਵਾਲਾ।\n"
 
 #: apps/lid.c:131
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "ਕੋਈ ਸਮੂਹ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, ਸਮੂਹ ਸ਼ੰਨ-ਨੰ %d ਲਈ ਕੋਈ ਨਾਂ ਨਹੀਂ।\n"
+msgstr "ਕੋਈ ਗਰੁੱਪ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, ਗਰੁੱਪ ਸ਼ੰਨ-ਨੰ %d ਲਈ ਕੋਈ ਨਾਂ ਨਹੀਂ।\n"
 
 #: apps/lid.c:141
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "ਕੋਈ ਉਪਭੋਗਤਾ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, %s ਵਰਤਣ ਵਾਲਾ।\n"
+msgstr "ਕੋਈ ਉਪਭੋਗੀ ਨਾਂ ਨਹੀਂ ਦਰਸਾਇਆ, %s ਦੀ ਵਰਤੋਂ ਕਰਕੇ।\n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
@@ -348,12 +349,12 @@ msgstr "`%s' ਨੂੰ ਖੋਲਣ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "`%s' ਲਈ ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: ਲਾਈਨ ਠੀਕ ਤਰਾਂ ਨਹੀਂ ਮਿਟਾਈ।\n"
+msgstr "`%s' ਲਈ ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: ਸਤਰ ਦਾ ਫਾਰਮੈਟ ਠੀਕ ਨਹੀਂ ਹੈ।\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr "ਗਲਤ ਉਪਭੋਗਤਾ ID %s\n"
+msgstr "ਗਲਤ ਉਪਭੋਗੀ ID %s\n"
 
 #: apps/lnewusers.c:141
 msgid "Refusing to create account with UID 0.\n"
@@ -362,12 +363,12 @@ msgstr "UID 0 ਨਾਲ ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਇਨਕਾਰ ਕ�
 #: apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "`%s' ਲਈ GID %jd ਨਾਲ ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "`%s' ਲਈ GID %jd ਨਾਲ ਗਰੁੱਪ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/lnewusers.c:281
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "%s ਲਈ ਸ਼ੁਰੂਆਤੀ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "%s ਲਈ ਸ਼ੁਰੂਆਤੀ ਗੁਪਤ-ਕੋਡ ਸਥਾਪਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/lnewusers.c:303
 #, c-format
@@ -382,7 +383,7 @@ msgstr "%s ਲਈ ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਵਿੱਚ ਗਲ�
 #: apps/lnewusers.c:323
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "%s ਲਈ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "%s ਲਈ ਉਪਭੋਗੀ ਖਾਤਾ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/lpasswd.c:84
 #, c-format
@@ -410,12 +411,12 @@ msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲੀ ਰੱਦ ਹੋਈ।\n"
 #: apps/lpasswd.c:190 apps/luseradd.c:291 apps/luseradd.c:301
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "%s ਉਪਭੋਗਤਾ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
+msgstr "%s ਉਪਭੋਗੀ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "%s ਸਮੂਹ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
+msgstr "%s ਗਰੁੱਪ ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -425,12 +426,12 @@ msgstr "ਗੁਪਤ-ਕੋਡ ਤਬਦੀਲ ਹੋਇਆ।\n"
 #: apps/luseradd.c:180
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr "ਸਮੂਹ %jd ਮੌਜੂਦ ਨਹੀਂ।\n"
+msgstr "ਗਰੁੱਪ %jd ਮੌਜੂਦ ਨਹੀਂ।\n"
 
 #: apps/luseradd.c:207 apps/luseradd.c:220
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "'%s' ਸਮੂਹ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
+msgstr "'%s' ਗਰੁੱਪ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s\n"
 
 #: apps/luseradd.c:281
 #, c-format
@@ -450,27 +451,27 @@ msgstr "ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਵਿੱਚ ਗਲਤੀ।\n
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ: %s|\n"
+msgstr "ਉਪਭੋਗੀ %s ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ: %s|\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s ਕੋਲ ਸਮੂਹ ਸ਼ੰਨ-ਨੰ ਨੰਬਰ ਨਹੀਂ ਸੀ।\n"
+msgstr "%s ਕੋਲ ਗਰੁੱਪ ਸ਼ੰਨ-ਨੰ ਨੰਬਰ ਨਹੀਂ ਸੀ।\n"
 
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %jd ਵਾਲਾ ਕੋਈ ਸਮੂਹ ਮੌਜੂਦ ਨਹੀਂ, ਮਿਟਾਇਆ ਨਹੀਂ।\n"
+msgstr "GID %jd ਵਾਲਾ ਕੋਈ ਗਰੁੱਪ ਮੌਜੂਦ ਨਹੀਂ, ਹਟਾਇਆ ਨਹੀਂ।\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "GID %jd ਵਾਲੇ ਸਮੂਹ ਦਾ ਸਮੂਹ ਨਾਂ ਨਹੀਂ ਹੈ।\n"
+msgstr "GID %jd ਵਾਲੇ ਗਰੁੱਪ ਦਾ ਗਰੁੱਪ ਨਾਂ ਨਹੀਂ ਹੈ।\n"
 
 #: apps/luserdel.c:135
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "ਸਮੂਹ %s ਮਿਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਗਰੁੱਪ %s ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s।\n"
 
 #: apps/luserdel.c:149
 #, c-format
@@ -480,32 +481,32 @@ msgstr "%s ਦੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨਹੀਂ ਸੀ।\n"
 #: apps/luserdel.c:156
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "%s ਨੂੰ ਮਿਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s।\n"
+msgstr "%s ਨੂੰ ਹਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s।\n"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s।\n"
+msgstr "ਉਪਭੋਗੀ %s ਲਈ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s।\n"
 
 #: apps/lusermod.c:191
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਲਾਕ ਨਹੀਂ ਹੋ ਸਕਿਆ: %s।\n"
+msgstr "ਉਪਭੋਗੀ %s ਲਾਕ ਨਹੀਂ ਹੋ ਸਕਿਆ: %s।\n"
 
 #: apps/lusermod.c:199
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਅਨ-ਲਾਕ ਨਹੀਂ ਹੋ ਸਕਿਆ: %s।\n"
+msgstr "ਉਪਭੋਗੀ %s ਅਨ-ਲਾਕ ਨਹੀਂ ਹੋ ਸਕਿਆ: %s।\n"
 
 #: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "ਉਪਭੋਗਤਾ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਉਪਭੋਗੀ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।\n"
 
 #: apps/lusermod.c:327
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "ਸਮੂਹ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।\n"
+msgstr "ਗਰੁੱਪ %s ਨੂੰ ਤਬਦੀਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s।\n"
 
 #: apps/lusermod.c:338
 #, c-format
@@ -520,7 +521,7 @@ msgstr "%s ਲਈ ਕੋਈ ਨਵੀਂ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨ�
 #: apps/lusermod.c:349
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "%s ਤੋਂ %s ਵਿਸਥਾਪਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s|\n"
+msgstr "%s ਤੋਂ %s ਵਿੱਚ ਭੇਜਣ ਦੌਰਾਨ ਗਲਤੀ: %s|\n"
 
 #: lib/config.c:117
 #, c-format
@@ -564,19 +565,19 @@ msgstr "ਪਹੁੰਚ ਪਾਬੰਦੀ"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr "ਗਲਤ ਉਪਯੋਗੀ/ਸਮੂਹ ਨਾਂ"
+msgstr "ਗਲਤ ਉਪਯੋਗੀ/ਗਰੁੱਪ ਨਾਂ"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr "ਗਲਤ ਉਪਯੋਗੀ/ਸਮੂਹ ਸ਼ੰਨ-ਨੰ"
+msgstr "ਗਲਤ ਉਪਯੋਗੀ/ਗਰੁੱਪ ਸ਼ੰਨ-ਨੰ"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr "ਵਰਤਿਆ ਜਾਂਦਾ ਉਪਯੋਗੀ/ਸਮੂਹ ਨਾਂ"
+msgstr "ਵਰਤਿਆ ਜਾਂਦਾ ਉਪਯੋਗੀ/ਗਰੁੱਪ ਨਾਂ"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr "ਵਰਤਿਆ ਜਾਂਦਾ ਉਪਯੋਗੀ/ਸਮੂਹ ਸ਼ੰਨ-ਨੰ"
+msgstr "ਵਰਤਿਆ ਜਾਂਦਾ ਉਪਯੋਗੀ/ਗਰੁੱਪ ਸ਼ੰਨ-ਨੰ"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
@@ -857,12 +858,12 @@ msgstr "LDAP ਸਰਵਰ ਨਾਲ ਪਹਿਲੀਂ ਕੋਸ਼ਿਸ ਵਿੱ
 #: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "ਉਪਭੋਗਤਾ ਇਕਾਈ ਕੋਲ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ"
+msgstr "ਉਪਭੋਗੀ ਇਕਾਈ ਕੋਲ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ"
 
 #: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "ਉਪਭੋਗਤਾ ਇਕਾਈ ਬਿਨਾਂ ਕਿਸੇ `%s' ਤੋਂ ਬਣਾਈ ਗਈ ਹੈ"
+msgstr "ਉਪਭੋਗੀ ਇਕਾਈ ਬਿਨਾਂ ਕਿਸੇ `%s' ਤੋਂ ਬਣਾਈ ਗਈ ਹੈ"
 
 #: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
@@ -940,12 +941,12 @@ msgstr "LDAP SASL ਪ੍ਰਬੰਧਕੀ ਉਪਯੋਗੀ"
 #: modules/sasldb.c:124
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "ਉਪਭੋਗਤਾ ਬਣਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s"
+msgstr "ਉਪਭੋਗੀ ਬਣਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s"
 
 #: modules/sasldb.c:128
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "ਉਪਭੋਗਤਾ ਹਟਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s"
+msgstr "ਉਪਭੋਗੀ ਹਟਾਉਣ ਸਮੇਂ ਸਾਇਰਸ SASL ਗਲਤੀ: %s"
 
 #: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
@@ -954,19 +955,19 @@ msgstr "ਸਾਇਰਸ SASL ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %
 
 #: python/admin.c:527
 msgid "error creating home directory for user"
-msgstr "ਉਪਭੋਗਤਾ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਸਮੇਂ ਗਲਤੀ"
+msgstr "ਉਪਭੋਗੀ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਸਮੇਂ ਗਲਤੀ"
 
 #: python/admin.c:580
 msgid "error removing home directory for user"
-msgstr "ਉਪਭੋਗਤਾ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਹਟਾਉਣ ਸਮੇਂ ਗਲਤੀ"
+msgstr "ਉਪਭੋਗੀ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਹਟਾਉਣ ਸਮੇਂ ਗਲਤੀ"
 
 #: python/admin.c:658
 msgid "error moving home directory for user"
-msgstr "ਉਪਭੋਗਤਾ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਹਿਲਾਉਣ ਸਮੇਂ ਗਲਤੀ"
+msgstr "ਉਪਭੋਗੀ ਲਈ ਘਰ ਡਾਇਰੈਕਟਰੀ ਹਿਲਾਉਣ ਸਮੇਂ ਗਲਤੀ"
 
 #: python/admin.c:691
 msgid "error creating mail spool for user"
-msgstr "ਉਪਭੋਗਤਾ ਲਈ ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਸਮੇਂ ਗਲਤੀ"
+msgstr "ਉਪਭੋਗੀ ਲਈ ਪੱਤਰ ਸਪੂਲ ਬਣਾਉਣ ਸਮੇਂ ਗਲਤੀ"
 
 #: samples/lookup.c:67
 #, c-format
@@ -981,22 +982,22 @@ msgstr "ਗਲਤੀ ID %s\n"
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "ID %jd ਵਾਲੇ ਸਮੂਹ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
+msgstr "ID %jd ਵਾਲੇ ਗਰੁੱਪ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
 
 #: samples/lookup.c:96
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "ਨਾਂ %s ਵਾਲੇ ਸਮੂਹ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
+msgstr "ਨਾਂ %s ਵਾਲੇ ਗਰੁੱਪ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "ID %jd ਵਾਲੇ ਉਪਭੋਗਤਾ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
+msgstr "ID %jd ਵਾਲੇ ਉਪਭੋਗੀ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
 
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "ਨਾਂ %s ਵਾਲੇ ਉਪਭੋਗਤਾ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
+msgstr "ਨਾਂ %s ਵਾਲੇ ਉਪਭੋਗੀ ਲਈ ਖੋਜ ਕਰ ਰਿਹਾ ਹੈ।\n"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
@@ -1012,19 +1013,19 @@ msgstr "ਅਸਫਲ ਹੈ।\n"
 
 #: samples/testuser.c:80
 msgid "Default user object classes:\n"
-msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਆਬਜੈਕਟ ਕਲਾਸਾਂ:\n"
+msgstr "ਮੂਲ ਉਪਭੋਗੀ ਆਬਜੈਕਟ ਕਲਾਸਾਂ:\n"
 
 #: samples/testuser.c:86
 msgid "Default user attribute names:\n"
-msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਦੇ ਨਾਂ:\n"
+msgstr "ਮੂਲ ਉਪਭੋਗੀ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਦੇ ਨਾਂ:\n"
 
 #: samples/testuser.c:92
 msgid "Getting default user attributes:\n"
-msgstr "ਮੂਲ ਉਪਭੋਗਤਾ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰ ਰਿਹਾ ਹੈ:\n"
+msgstr "ਮੂਲ ਉਪਭੋਗੀ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਪ੍ਰਾਪਤ ਕਰ ਰਿਹਾ ਹੈ:\n"
 
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
-msgstr "ਉਪਭੋਗਤਾ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
+msgstr "ਉਪਭੋਗੀ ਢਾਂਚੇ ਦੀ ਨਕਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ:\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "LDAP ਸਰਵਰ ਨੂੰ ਲੱਭ ਨਹੀਂ ਸਕਿਆ"
