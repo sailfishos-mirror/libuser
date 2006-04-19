@@ -1023,4 +1023,3 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
-
