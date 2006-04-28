@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: libuser 0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-02-21 17:33+0100\n"
-"PO-Revision-Date: 2006-04-28 16:32+0100\n"
+"PO-Revision-Date: 2006-04-28 16:38+0100\n"
 "Last-Translator: Renato Pavicic <renato@translator-shop.org>\n"
 "Language-Team: Renato Pavicic <www.translator-shop.org>\n"
 "MIME-Version: 1.0\n"
@@ -284,7 +284,7 @@ msgstr "Podaci usluge finger nisu izmijenjene: %s.\n"
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr "Projena korisničke ljuske za %s.\n"
+msgstr "Promjena korisničke ljuske za %s.\n"
 
 #: apps/lchsh.c:118
 msgid "New Shell"
@@ -292,11 +292,11 @@ msgstr "Nova ljuska"
 
 #: apps/lchsh.c:139
 msgid "Shell changed.\n"
-msgstr "Korisnička ljuska je promjenjena.\n"
+msgstr "Korisnička ljuska je promijenjena.\n"
 
 #: apps/lchsh.c:142
 msgid "Shell not changed: %s\n"
-msgstr "Korisnička ljuska nije promjenjena:%s\n"
+msgstr "Korisnička ljuska nije promijenjena:%s\n"
 
 #: apps/lgroupadd.c:66
 #: apps/lgroupdel.c:57
@@ -309,7 +309,7 @@ msgstr "[OPCIJA...] grupa"
 #: apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr "Nnaziv grupe nije određen.\n"
+msgstr "Naziv grupe nije određen.\n"
 
 #: apps/lgroupadd.c:91
 #: apps/lgroupmod.c:108
@@ -360,7 +360,7 @@ msgstr "Grupu %s nije moguće izmijeniti: %s.\n"
 #: apps/lid.c:127
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Naziv grupe nije određen. Bit će upotrebljen %s.\n"
+msgstr "Naziv grupe nije određen. Bit će upotrijebljen %s.\n"
 
 #: apps/lid.c:131
 #, c-format
@@ -370,7 +370,7 @@ msgstr "Naziv grupe nije određen. Nema naziva za gid %d.\n"
 #: apps/lid.c:141
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Nije određeno korisničko ime. Bit će upotrebljeno %s.\n"
+msgstr "Nije određeno korisničko ime. Bit će upotrijebljen %s.\n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
@@ -424,7 +424,7 @@ msgstr "Pogreška pri izradi korisničkog naloga za %s: %s\n"
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "Izmjenja lozinke za %s.\n"
+msgstr "Izmjena lozinke za %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
@@ -511,7 +511,7 @@ msgstr "Brisanje grupe %s nije moguće: %s.\n"
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr "%s nima početnu mapu.\n"
+msgstr "%s nema početnu mapu.\n"
 
 #: apps/luserdel.c:156
 #, c-format
@@ -650,7 +650,7 @@ msgstr "Pogreška pri učitavanju modula"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr "Pogreška pri razješavanju znaka u modulu"
+msgstr "Pogreška pri razrješavanju znaka u modulu"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
@@ -937,7 +937,7 @@ msgstr "Korisnički objekt je izrađen bez `%s'"
 
 #: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
-msgstr "Pretvoranje internih podatak u LDAPMods nije uspjelo"
+msgstr "Pretvaranje internih podatak u LDAPMods nije uspjelo"
 
 #: modules/ldap.c:1371
 msgid "error creating a LDAP directory entry: %s"
@@ -1066,7 +1066,7 @@ msgstr "Pretražuje se za korisnikom s ID %jd.\n"
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Pretražuje se za korinsikom s nazivom %s.\n"
+msgstr "Pretražuje se za korisnikom s nazivom %s.\n"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
