@@ -1,115 +1,116 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Red Hat, Inc.
+# translation of or.po to Oriya
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR Red Hat, Inc.
+# Subhransu Behera <sbehera@redhat.com>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-02-21 17:33+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-04-28 10:45+0530\n"
+"Last-Translator: Subhransu Behera <sbehera@redhat.com>\n"
+"Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 
 #: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ପଢିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: apps/apputil.c:132 apps/apputil.c:208
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "`%s' ର ମାଲିକ କୁ ପରିବର୍ତନ କରିବା ରେ ତ୍ରୁଟି: %s"
 
 #: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ଲେଖିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ଅପସାରଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: apps/apputil.c:550 apps/apputil.c:554
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "ବିଶେଷ ଆକର୍ଷଣ କୁ ତ୍ଯାଗ କରିବା ସମୟ ରେ ତ୍ରୁଟି\n"
 
 #: apps/apputil.c:563
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "ଆଭ୍ଯନ୍ତରୀଣ ତ୍ରୁଟି\n"
 
 #: apps/apputil.c:584
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s ଟି ବୈଧିକ୍ରୁତ ନୁହେଁ %s finger ସୂଚନା କୁ ପରିବର୍ତନ କରିବା ପାଇଁ\n"
 
 #: apps/apputil.c:586
 msgid "Unknown user context"
-msgstr ""
+msgstr "ଅଜଣା ଚାଳକ ପ୍ରସଙ୍ଗ"
 
 #: apps/apputil.c:594
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd ପ୍ରସଙ୍ଗ ପାଇଁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପ୍ରସଙ୍ଗ କୁ ସେଟ କରି ପାରିବ ନାହିଁ \n"
 
 #: apps/apputil.c:603
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "ପି.ଏ.ଏମ୍. କୁ ପ୍ରାରମ୍ଭିକରଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି\n"
 
 #: apps/apputil.c:613 apps/apputil.c:640
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ ବୈଧିକରଣ ବିଫଳ ହୋଇଗଲା \n"
 
 #: apps/apputil.c:621
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "ଆଭ୍ଯନ୍ତରୀଣ ପି.ଏ.ଏମ୍. ତ୍ରୁଟି `%s'.\n"
 
 #: apps/apputil.c:626
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr ""
+msgstr "ଅଜଣା ଚାଳକ ଟି ବୈଧିକ୍ରୁତ ହୋଇ ଯାଇଛି\n"
 
 #: apps/apputil.c:630
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "ଚାଳକ ଟି ମିଶୁ ନାହିଁ\n"
 
 #: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[ପସନ୍ଦ...] ଚାଳକ"
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "ସ୍ବତନ୍ତ୍ରଚର ମାନଙ୍କୁ ବିଶ୍ଳେଷଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "କୌଣସି ଚାଳକ ନାମ ଉଲ୍ଲେଖିତ ହୋଇ ନାହିଁ \n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
@@ -117,243 +118,243 @@ msgstr ""
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "%s କୁ ପ୍ରାରମ୍ଭିକରଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "%s ଚାଳକ ଟିି ଅବସ୍ଥିତ ନୁହେଁ \n"
 
 #: apps/lchage.c:177
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "ହିସାବ ଖାତା ଟି ଅପରିବର୍ତ୍ତନୀୟ ଅଛି \n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "ହିସାବ ଖାତା ଟି ଅପରିବର୍ତ୍ତନୀୟ ନାହିଁ \n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "ସର୍ବନିମ୍ନ:\t%d\n"
 
 #: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "ସର୍ବାଧିକ:\t%d\n"
 
 #: apps/lchage.c:192
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "ଚେତାବନୀ:\t%d\n"
 
 #: apps/lchage.c:196
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "ନିଷ୍କ୍ରିୟ:\t%d\n"
 
 #: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
 msgid "Never"
-msgstr ""
+msgstr "କେବେ ନୁହେଁ"
 
 #: apps/lchage.c:202
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "ଶେଷ ପରିବର୍ତନ:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "ପ୍ରବେଶ ସଙ୍କେତ ଟି ଅକ୍ରୁତ କାର୍ଯ୍ଯ ହୋଇ ଯାଏ:\t%s\n"
 
 #: apps/lchage.c:221
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "ପ୍ରବେଶ ସଙ୍କେତ ଟି ନିଷ୍କ୍ରିୟ ଅଟେ:\t%s\n"
 
 #: apps/lchage.c:228
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "ହିସାବ ଖାତା ଟି ଅକ୍ରୁତ କାର୍ଯ୍ଯ ହୋଇ ଯାଏ:\t%s\n"
 
 #: apps/lchage.c:278
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr ""
+msgstr "%s ପାଇଁ aging ସୂଚନା କୁ ରୂପାନ୍ତରଣ କରିବାକୁ ଅସଫଳ: %s\n"
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[ପସନ୍ଦ...] [ଚାଳକ]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "କୌଣସି ଚାଳକ ନାମ ଉଲ୍ଲଖିତ ହୋଇ ନାହିଁ, %d ୟୁ.ଆଇ.ଡି. ପାଇଁ କୌଣସି ନାମ ନାହିଁ \n"
 
 #: apps/lchfn.c:103
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ finger ସୂଚନା କୁ ପରିବର୍ତନ କରୁଅଛି \n"
 
 #: apps/lchfn.c:144
 msgid "Full Name"
-msgstr ""
+msgstr "ପୂରା ନାମ"
 
 #: apps/lchfn.c:158
 msgid "Surname"
-msgstr ""
+msgstr "କୁଳ ନାମ"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
-msgstr ""
+msgstr "ଦିଆ ଯାଇଥିବା ନାମ"
 
 #: apps/lchfn.c:183
 msgid "Office"
-msgstr ""
+msgstr "କାର୍ଯ୍ଯାଳୟ"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr ""
+msgstr "କାର୍ଯ୍ଯାଳୟ ଫୋନ"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr ""
+msgstr "ଘର ଫୋନ"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr ""
+msgstr "ଇ-ଡାକ ଠିକଣା ମାନ"
 
 #: apps/lchfn.c:228
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Finger ସୂଚନା ଟି ପରିବର୍ତିତ ହୋଇ ନାହିଁ: ନିବେଶ ତ୍ରୁଟି \n"
 
 #: apps/lchfn.c:300
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Finger ସୂଚନା ଟି ପରିବର୍ତିତ ହୋଇ ଗଲା \n"
 
 #: apps/lchfn.c:303
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Finger ସୂଚନା ଟି ପରିବର୍ତିତ ହେଲା ନାହିଁ: %s \n"
 
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ ଆବରଣ କୁ ପରିବର୍ତନ କରୁଅଛି \n"
 
 #: apps/lchsh.c:118
 msgid "New Shell"
-msgstr ""
+msgstr "ନୂତନ ଆବରଣ"
 
 #: apps/lchsh.c:139
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "ଆବରଣ ପରିବର୍ତିତ ହୋଇ ଗଲା \n"
 
 #: apps/lchsh.c:142
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "ଆବରଣ ଟି ପରିବର୍ତିତ ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[ପସନ୍ଦ...] ସମୂହ"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "କୌଣସି ସମୂହ ନାମ ଉଲ୍ଲଖିତ ହୋଇ ନାହିଁ \n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ସମୂହ ର ଅବୈଧ ପରିଚୟ %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr ""
+msgstr "ସମୂହ କୁ ସ୍ରୁଷ୍ଟି କରିବା କାର୍ଯ୍ଯ ବିଫଳ ହୋଇ ଗଲା: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "%s ସମୂହ ଟି ଅବସ୍ଥିତ ନାହିଁ \n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "%s ସମୂହ କୁ ଅପସାରଣ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "ଉଭୟ -L ଏବଂ -U କୁ ଉଲ୍ଲଖିତ କରା ଯାଇଛି \n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "%s ସମୂହ ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ ସେଟ କରିବା ରେ ଅସଫଳ: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr ""
+msgstr "%s ସମୂହ ଟି ଲକ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr ""
+msgstr "%s ସମୂହ ଟି ଅନ-ଲକ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr ""
+msgstr "%s ସମୂହ ଟି ରୂପାନ୍ତରିତ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lid.c:127
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "%s କୁ ବ୍ଯବହାର କରି, କୌଣସି ସମୂହ ନାମ ଉଲ୍ଲେଖିତ ହୋଇ ନାହିଁ \n"
 
 #: apps/lid.c:131
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "କୌଣସି ସମୂହ ନାମ ଉଲ୍ଲଖିତ ହୋଇ ନାହିଁ, %d ୟୁ.ଆଇ.ଡି. ପାଇଁ କୌଣସି ନାମ ନାହିଁ \n"
 
 #: apps/lid.c:141
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "%s କୁ ବ୍ଯବହାର କରି, କୌଣସି ଚାଳକ ନାମ ଉଲ୍ଲେଖିତ ହୋଇ ନାହିଁ \n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[ପସନ୍ଦ...]"
 
 #: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "`%s' କୁ ଖୋଲିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
 
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "`%s' ପାଇଁ ହିସାବ ଖାତା ଖୋଲିବା ସମୟ ରେ ତ୍ରୁଟି: ଲାଇନ ଟି ସଠିକ ଭାବ ରେ ସଜା ଯାଇ ନାହିଁ \n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ଚାଳକ ର ଅବୈଧ ପରିଚୟ %s\n"
 
 #: apps/lnewusers.c:141
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "ୟୁ.ଆଇ.ଡି. ୦ ସହିତ ଗୋଟିଏ ହିସାବ ଖାତା ସ୍ରୁଷ୍ଟି କରିବା ପାଇଁ ଅସ୍ବୀକାର କରୁଅଛି \n"
 
 #: apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
+msgstr "`%s' ପାଇଁ %jd ଜି.ଆଇ.ଡି. ସହିତ ଗୋଟିଏ ସମୂହ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
 
 #: apps/lnewusers.c:281
 #, c-format
@@ -1016,3 +1017,4 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
+
