@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-02-21 17:33+0100\n"
+"POT-Creation-Date: 2006-05-01 07:04+0200\n"
 "PO-Revision-Date: 2005-11-24 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
@@ -14,90 +14,90 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
+#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Villa við lestur `%s': %s"
 
-#: apps/apputil.c:132 apps/apputil.c:208
+#: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Villa við að búa til `%s': %s"
 
-#: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
+#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Villa við að breyta eiganda `%s': %s"
 
-#: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
+#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Villa við að skrifa í `%s': %s"
 
-#: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
+#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Villa við að fjarlægja `%s': %s"
 
-#: apps/apputil.c:550 apps/apputil.c:554
+#: apps/apputil.c:547 apps/apputil.c:551
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Gat ekki minnkað heimildir.\n"
 
-#: apps/apputil.c:563
+#: apps/apputil.c:560
 #, c-format
 msgid "Internal error.\n"
 msgstr "Innvær villa.\n"
 
-#: apps/apputil.c:584
+#: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s hefur ekki heimild til að breyta notandaupplýsingum %s\n"
 
-#: apps/apputil.c:586
+#: apps/apputil.c:583
 msgid "Unknown user context"
 msgstr "óþekktur notandaöryggishamur"
 
-#: apps/apputil.c:594
+#: apps/apputil.c:591
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Get ekki stillt sjálfgefinn öryggisham /etc/passwd\n"
 
-#: apps/apputil.c:603
+#: apps/apputil.c:600
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Villa við frumstillingu PAM.\n"
 
-#: apps/apputil.c:613 apps/apputil.c:640
+#: apps/apputil.c:610 apps/apputil.c:637
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Auðkenning mistókst hjá %s.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:618
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Innvær PAM villa `%s'.\n"
 
-#: apps/apputil.c:626
+#: apps/apputil.c:623
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "óþekktur notandi auðkenndi sig.\n"
 
-#: apps/apputil.c:630
+#: apps/apputil.c:627
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Misræmi í notanda.\n"
 
-#: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
+#: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[ROFI...] notandi"
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
@@ -110,7 +110,7 @@ msgid "No user name specified.\n"
 msgstr "Ekkert notandanafn tiltekið.\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
@@ -186,7 +186,7 @@ msgstr "Gat ekki breytt úreldingarupplýsingum notandans %s: %s\n"
 msgid "[OPTION...] [user]"
 msgstr "[ROFI...] [notandi]"
 
-#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
+#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Ekkert notandanafn tiltekið, ekkert heiti fyrir notandanúmer %d.\n"
@@ -247,11 +247,16 @@ msgstr "Skipti um skél hjá %s.\n"
 msgid "New Shell"
 msgstr "Ný skel"
 
-#: apps/lchsh.c:139
+#: apps/lchsh.c:126
+#, fuzzy, c-format
+msgid "Shell not changed: input error.\n"
+msgstr "Skél óbreytt: %s\n"
+
+#: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Skél breytt.\n"
 
-#: apps/lchsh.c:142
+#: apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Skél óbreytt: %s\n"
@@ -310,17 +315,22 @@ msgstr "Ekki var hægt að aflæsa hópnum %s: %s\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "Ekki var hægt að breyta hópnum %s: %s\n"
 
-#: apps/lid.c:127
+#: apps/lid.c:47
+#, fuzzy, c-format
+msgid "Error looking up %s: %s\n"
+msgstr "Villa við að eyða %s: %s.\n"
+
+#: apps/lid.c:133
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Ekkert hópsheiti tiltekið, nota %s.\n"
 
-#: apps/lid.c:131
+#: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Ekkert hópsheiti tiltekið, ekkert heiti fyrir gid %d.\n"
 
-#: apps/lid.c:141
+#: apps/lid.c:147
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Ekkert notandanafn tiltekið, nota %s.\n"
@@ -359,17 +369,17 @@ msgstr "Gat ekki búið til hóp fyrir `%s' með GID %jd: %s\n"
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Villa við að setja lykilorð fyrir %s: %s\n"
 
-#: apps/lnewusers.c:303
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Villa við að búa til heimasvæði fyrir %s: %s\n"
 
-#: apps/lnewusers.c:317
+#: apps/lnewusers.c:309
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Villa við að búa til pósthólf fyrir %s.\n"
 
-#: apps/lnewusers.c:323
+#: apps/lnewusers.c:315
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Villa við að búa til notandaaðgang fyrir %s: %s\n"
@@ -397,7 +407,7 @@ msgstr "Lykilorðin eru ekki eins. Reyndu aftur.\n"
 msgid "Password change canceled.\n"
 msgstr "Hætt við að breyta lykilorði.\n"
 
-#: apps/lpasswd.c:190 apps/luseradd.c:291 apps/luseradd.c:301
+#: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Villa við að búa til lykilorð notandans %s: %s.\n"
@@ -412,27 +422,27 @@ msgstr "Villa við að setja lykilorð fyrir hópinn %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Lykilorði breytt.\n"
 
-#: apps/luseradd.c:180
+#: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Hópurinn %jd er ekki til.\n"
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Gat ekki búið til hóp `%s': %s\n"
 
-#: apps/luseradd.c:281
+#: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Gat ekki búið til notanda: %s.\n"
 
-#: apps/luseradd.c:331
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Villa við að búa %s til: %s.\n"
 
-#: apps/luseradd.c:338
+#: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Villa við að búa til pósthólf.\n"
@@ -512,22 +522,22 @@ msgstr "Ekkert nýtt heimasvæði til fyrir notandann %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Villa við að færa %s í %s: %s.\n"
 
-#: lib/config.c:117
+#: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "gat ekki opnað stillingaskrána `%s': %s"
 
-#: lib/config.c:123
+#: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "gat ekki fundið stillingaskrána `%s': %s"
 
-#: lib/config.c:131
+#: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "stillingaskráin `%s' er of stór"
 
-#: lib/config.c:147
+#: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "gat ekki lesið stillingaskrána `%s': %s"
@@ -647,39 +657,67 @@ msgstr "villa við að setja skjáeiginleika"
 msgid "error reading from terminal"
 msgstr "villa við lestur frá skjá"
 
-#: lib/user.c:193
+#: lib/user.c:194
 msgid "name is not set"
 msgstr "heitið er ekki stillt"
 
-#: lib/user.c:198
+#: lib/user.c:199
 msgid "name is too short"
 msgstr "heitið er of stutt"
 
-#: lib/user.c:203
+#: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr "heitið er of langt (%zu > %d)"
 
-#: lib/user.c:210
+#: lib/user.c:211
 msgid "name contains non-ASCII characters"
 msgstr "heitið inniheldur stafi sem ekki eru ASCII"
 
-#: lib/user.c:217
+#: lib/user.c:218
 msgid "name contains control characters"
 msgstr "heitið inniheldur stjórntákn"
 
-#: lib/user.c:224
+#: lib/user.c:225
 msgid "name contains whitespace"
 msgstr "heitið inniheldur orðabil"
 
-#: lib/user.c:236
+#: lib/user.c:237
 msgid "name starts with a hyphen"
 msgstr "heitið byrjar á bandstriki"
 
-#: lib/user.c:247
+#: lib/user.c:248
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "heitið inniheldur ógilt tákn `%c'"
+
+#: lib/user.c:295 lib/user.c:343
+#, c-format
+msgid "user %s has no UID"
+msgstr ""
+
+#: lib/user.c:318 lib/user.c:344
+#, c-format
+msgid "group %s has no GID"
+msgstr ""
+
+#: lib/user.c:338
+#, c-format
+msgid "user %jd has no name"
+msgstr ""
+
+#: lib/user.c:339
+#, fuzzy, c-format
+msgid "group %jd has no name"
+msgstr "Hópurinn %jd er ekki til.\n"
+
+#: lib/user.c:347
+msgid "user has neither a name nor an UID"
+msgstr ""
+
+#: lib/user.c:348
+msgid "group has neither a name nor a GID"
+msgstr ""
 
 #: lib/util.c:193
 #, c-format
@@ -701,19 +739,19 @@ msgstr "gat ekki sett sjálfgefinn öryggisham: %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "gat ekki sett sjálfgefinn öryggisham í `%s': %s"
 
-#: modules/files.c:176 modules/files.c:544 modules/files.c:869
-#: modules/files.c:1136 modules/files.c:1277 modules/files.c:1498
-#: modules/files.c:1583 modules/files.c:1789 modules/files.c:1973
-#: modules/files.c:1990 modules/files.c:2079 modules/files.c:2098
-#: modules/files.c:2166 modules/files.c:2187 modules/files.c:2284
-#: modules/files.c:2303 modules/files.c:2362 modules/files.c:2381
-#: modules/files.c:2481 modules/files.c:2496
+#: modules/files.c:176 modules/files.c:549 modules/files.c:874
+#: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
+#: modules/files.c:1588 modules/files.c:1794 modules/files.c:1978
+#: modules/files.c:1995 modules/files.c:2084 modules/files.c:2103
+#: modules/files.c:2171 modules/files.c:2192 modules/files.c:2289
+#: modules/files.c:2308 modules/files.c:2367 modules/files.c:2386
+#: modules/files.c:2486 modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "gat ekki opnað `%s': %s"
 
 #: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:881 modules/files.c:1289
+#: modules/files.c:886 modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "gat ekki fundið `%s': %s"
@@ -732,35 +770,35 @@ msgstr "afritið `%s' er til og er ekki venjuleg skrá"
 msgid "backup file size mismatch"
 msgstr "stærðarmunur á afritum"
 
-#: modules/files.c:911 modules/files.c:1298
+#: modules/files.c:916 modules/files.c:1303
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "gat ekki lesið úr `%s': %s"
 
-#: modules/files.c:920 modules/files.c:927
+#: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
 msgstr "færslan er þegar til staðar í skránni"
 
-#: modules/files.c:934 modules/files.c:944 modules/files.c:955
-#: modules/files.c:1346 modules/files.c:1354 modules/files.c:1362
+#: modules/files.c:939 modules/files.c:949 modules/files.c:960
+#: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "gat ekki ritað í `%s': %s"
 
-#: modules/files.c:1113 modules/files.c:1172
+#: modules/files.c:1118 modules/files.c:1177
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "hluturinn er ekki með %s eiginleika"
 
-#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
+#: modules/files.c:1828 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "villa við að dulrita lykilorðið"
 
-#: modules/files.c:2770 modules/files.c:2848
+#: modules/files.c:2773 modules/files.c:2851
 msgid "not executing with superuser privileges"
 msgstr "er ekki keyrandi með rótarheimildum"
 
-#: modules/files.c:2861
+#: modules/files.c:2864
 msgid "no shadow file present -- disabling"
 msgstr "engin shadow skrá til staðar -- afvirki"
 
@@ -943,19 +981,19 @@ msgstr "Cyrus SASL villa við að fjarlægja notandann: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Villa við að frumstilla Cyrus SASL: %s"
 
-#: python/admin.c:527
+#: python/admin.c:530
 msgid "error creating home directory for user"
 msgstr "villa við að búa til nýtt heimasvæði fyrir notandann"
 
-#: python/admin.c:580
+#: python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "villa við að fjarlægja heimasvæði notanda"
 
-#: python/admin.c:658
+#: python/admin.c:661
 msgid "error moving home directory for user"
 msgstr "villa við að færa heimasvæði notanda"
 
-#: python/admin.c:691
+#: python/admin.c:694
 msgid "error creating mail spool for user"
 msgstr "villa við að búa til pósthólf notandans"
 

@@ -1,5 +1,12 @@
+0.54.6
+* Fix bugs in handling of invalid lines in the files and shadow modules.
+* Fix pattern matching in lu_*_enumerate_full in the files and shadow modules.
+* Add more error reporting, return non-zero exit status on error from utils.
+* Use the skeleton directory specified in libuser.conf by Python
+  admin.createHome and admin.addUser, add parameter skeleton= to admin.addUser.
+
 0.54.5
-* Don't reference @pkglibdir@ in libuser.conf.5 to avoid multilib file 
+* Don't reference @pkglibdir@ in libuser.conf.5 to avoid multilib file
   conflicts.
 
 0.54.4

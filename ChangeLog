@@ -1,5 +1,9 @@
 2006-05-01  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in: Version 0.54.6.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+	* NEWS: Update.
+
 	* apps/apputil.c (lu_homedir_copy): Split from lu_homedir_populate.
 	Reformat a bit.
 	(lu_homedir_populate): New parameter ctx.  Default skeleton to

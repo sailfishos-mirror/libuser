@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-02-21 17:33+0100\n"
+"POT-Creation-Date: 2006-05-01 07:04+0200\n"
 "PO-Revision-Date: 2003-02-24 23:52-0500\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -15,90 +15,90 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
+#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:132 apps/apputil.c:208
+#: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
+#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
+#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
+#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:550 apps/apputil.c:554
+#: apps/apputil.c:547 apps/apputil.c:551
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr ""
 
-#: apps/apputil.c:563
+#: apps/apputil.c:560
 #, c-format
 msgid "Internal error.\n"
 msgstr ""
 
-#: apps/apputil.c:584
+#: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:586
+#: apps/apputil.c:583
 msgid "Unknown user context"
 msgstr ""
 
-#: apps/apputil.c:594
+#: apps/apputil.c:591
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:603
+#: apps/apputil.c:600
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr ""
 
-#: apps/apputil.c:613 apps/apputil.c:640
+#: apps/apputil.c:610 apps/apputil.c:637
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr ""
 
-#: apps/apputil.c:621
+#: apps/apputil.c:618
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr ""
 
-#: apps/apputil.c:626
+#: apps/apputil.c:623
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr ""
 
-#: apps/apputil.c:630
+#: apps/apputil.c:627
 #, c-format
 msgid "User mismatch.\n"
 msgstr ""
 
-#: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
+#: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr ""
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
@@ -111,7 +111,7 @@ msgid "No user name specified.\n"
 msgstr ""
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
@@ -187,7 +187,7 @@ msgstr ""
 msgid "[OPTION...] [user]"
 msgstr ""
 
-#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
+#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr ""
@@ -248,11 +248,16 @@ msgstr ""
 msgid "New Shell"
 msgstr ""
 
-#: apps/lchsh.c:139
+#: apps/lchsh.c:126
+#, c-format
+msgid "Shell not changed: input error.\n"
+msgstr ""
+
+#: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr ""
 
-#: apps/lchsh.c:142
+#: apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr ""
@@ -311,17 +316,22 @@ msgstr ""
 msgid "Group %s could not be modified: %s\n"
 msgstr ""
 
-#: apps/lid.c:127
+#: apps/lid.c:47
+#, c-format
+msgid "Error looking up %s: %s\n"
+msgstr ""
+
+#: apps/lid.c:133
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr ""
 
-#: apps/lid.c:131
+#: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr ""
 
-#: apps/lid.c:141
+#: apps/lid.c:147
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr ""
@@ -359,17 +369,17 @@ msgstr ""
 msgid "Error setting initial password for %s: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:303
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:317
+#: apps/lnewusers.c:309
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr ""
 
-#: apps/lnewusers.c:323
+#: apps/lnewusers.c:315
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr ""
@@ -397,7 +407,7 @@ msgstr ""
 msgid "Password change canceled.\n"
 msgstr ""
 
-#: apps/lpasswd.c:190 apps/luseradd.c:291 apps/luseradd.c:301
+#: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
@@ -412,27 +422,27 @@ msgstr ""
 msgid "Password changed.\n"
 msgstr ""
 
-#: apps/luseradd.c:180
+#: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr ""
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr ""
 
-#: apps/luseradd.c:281
+#: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:331
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:338
+#: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr ""
@@ -512,22 +522,22 @@ msgstr ""
 msgid "Error moving %s to %s: %s.\n"
 msgstr ""
 
-#: lib/config.c:117
+#: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr ""
 
-#: lib/config.c:123
+#: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr ""
 
-#: lib/config.c:131
+#: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr ""
 
-#: lib/config.c:147
+#: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr ""
@@ -647,38 +657,66 @@ msgstr ""
 msgid "error reading from terminal"
 msgstr ""
 
-#: lib/user.c:193
+#: lib/user.c:194
 msgid "name is not set"
 msgstr ""
 
-#: lib/user.c:198
+#: lib/user.c:199
 msgid "name is too short"
 msgstr ""
 
-#: lib/user.c:203
+#: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr ""
 
-#: lib/user.c:210
+#: lib/user.c:211
 msgid "name contains non-ASCII characters"
 msgstr ""
 
-#: lib/user.c:217
+#: lib/user.c:218
 msgid "name contains control characters"
 msgstr ""
 
-#: lib/user.c:224
+#: lib/user.c:225
 msgid "name contains whitespace"
 msgstr ""
 
-#: lib/user.c:236
+#: lib/user.c:237
 msgid "name starts with a hyphen"
 msgstr ""
 
-#: lib/user.c:247
+#: lib/user.c:248
 #, c-format
 msgid "name contains invalid char `%c'"
+msgstr ""
+
+#: lib/user.c:295 lib/user.c:343
+#, c-format
+msgid "user %s has no UID"
+msgstr ""
+
+#: lib/user.c:318 lib/user.c:344
+#, c-format
+msgid "group %s has no GID"
+msgstr ""
+
+#: lib/user.c:338
+#, c-format
+msgid "user %jd has no name"
+msgstr ""
+
+#: lib/user.c:339
+#, c-format
+msgid "group %jd has no name"
+msgstr ""
+
+#: lib/user.c:347
+msgid "user has neither a name nor an UID"
+msgstr ""
+
+#: lib/user.c:348
+msgid "group has neither a name nor a GID"
 msgstr ""
 
 #: lib/util.c:193
@@ -701,19 +739,19 @@ msgstr ""
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 
-#: modules/files.c:176 modules/files.c:544 modules/files.c:869
-#: modules/files.c:1136 modules/files.c:1277 modules/files.c:1498
-#: modules/files.c:1583 modules/files.c:1789 modules/files.c:1973
-#: modules/files.c:1990 modules/files.c:2079 modules/files.c:2098
-#: modules/files.c:2166 modules/files.c:2187 modules/files.c:2284
-#: modules/files.c:2303 modules/files.c:2362 modules/files.c:2381
-#: modules/files.c:2481 modules/files.c:2496
+#: modules/files.c:176 modules/files.c:549 modules/files.c:874
+#: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
+#: modules/files.c:1588 modules/files.c:1794 modules/files.c:1978
+#: modules/files.c:1995 modules/files.c:2084 modules/files.c:2103
+#: modules/files.c:2171 modules/files.c:2192 modules/files.c:2289
+#: modules/files.c:2308 modules/files.c:2367 modules/files.c:2386
+#: modules/files.c:2486 modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr ""
 
 #: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:881 modules/files.c:1289
+#: modules/files.c:886 modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr ""
@@ -732,35 +770,35 @@ msgstr ""
 msgid "backup file size mismatch"
 msgstr ""
 
-#: modules/files.c:911 modules/files.c:1298
+#: modules/files.c:916 modules/files.c:1303
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr ""
 
-#: modules/files.c:920 modules/files.c:927
+#: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
 msgstr ""
 
-#: modules/files.c:934 modules/files.c:944 modules/files.c:955
-#: modules/files.c:1346 modules/files.c:1354 modules/files.c:1362
+#: modules/files.c:939 modules/files.c:949 modules/files.c:960
+#: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr ""
 
-#: modules/files.c:1113 modules/files.c:1172
+#: modules/files.c:1118 modules/files.c:1177
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
+#: modules/files.c:1828 modules/ldap.c:1552 modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr ""
 
-#: modules/files.c:2770 modules/files.c:2848
+#: modules/files.c:2773 modules/files.c:2851
 msgid "not executing with superuser privileges"
 msgstr ""
 
-#: modules/files.c:2861
+#: modules/files.c:2864
 msgid "no shadow file present -- disabling"
 msgstr ""
 
@@ -942,19 +980,19 @@ msgstr ""
 msgid "error initializing Cyrus SASL: %s"
 msgstr ""
 
-#: python/admin.c:527
+#: python/admin.c:530
 msgid "error creating home directory for user"
 msgstr ""
 
-#: python/admin.c:580
+#: python/admin.c:583
 msgid "error removing home directory for user"
 msgstr ""
 
-#: python/admin.c:658
+#: python/admin.c:661
 msgid "error moving home directory for user"
 msgstr ""
 
-#: python/admin.c:691
+#: python/admin.c:694
 msgid "error creating mail spool for user"
 msgstr ""
 

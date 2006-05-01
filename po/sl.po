@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 9.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-02-21 17:33+0100\n"
+"POT-Creation-Date: 2006-05-01 07:04+0200\n"
 "PO-Revision-Date: 2003-07-13 23:10+0200\n"
 "Last-Translator: Roman Maurer <roman@lugos.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -16,91 +16,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
+#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Napaka pri branju ,%s`: %s"
 
-#: apps/apputil.c:132 apps/apputil.c:208
+#: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Napaka pri ustvarjanju ,%s`: %s"
 
-#: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
+#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
 #, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Napaka pri ustvarjanju skupine ,%s`.\n"
 
-#: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
+#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
 #, fuzzy, c-format
 msgid "Error writing `%s': %s"
 msgstr "Napaka pri ustvarjanju ,%s`: %s"
 
-#: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
+#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Napaka pri odstranjevanju ,%s`: %s"
 
-#: apps/apputil.c:550 apps/apputil.c:554
+#: apps/apputil.c:547 apps/apputil.c:551
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Pravic ni bilo moč odstraniti.\n"
 
-#: apps/apputil.c:563
+#: apps/apputil.c:560
 #, c-format
 msgid "Internal error.\n"
 msgstr "Notranja napaka.\n"
 
-#: apps/apputil.c:584
+#: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:586
+#: apps/apputil.c:583
 #, fuzzy
 msgid "Unknown user context"
 msgstr "neznana napaka"
 
-#: apps/apputil.c:594
+#: apps/apputil.c:591
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:603
+#: apps/apputil.c:600
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Napaka pri inicializaciji PAM.\n"
 
-#: apps/apputil.c:613 apps/apputil.c:640
+#: apps/apputil.c:610 apps/apputil.c:637
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Avtentikacija za %s ni uspela.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:618
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Notranja napaka PAM ,%s`.\n"
 
-#: apps/apputil.c:626
+#: apps/apputil.c:623
 #, fuzzy, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "neznana napaka"
 
-#: apps/apputil.c:630
+#: apps/apputil.c:627
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Napačen uporabnik.\n"
 
-#: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
+#: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[IZBIRA...] uporabnik"
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
@@ -113,7 +113,7 @@ msgid "No user name specified.\n"
 msgstr "Uporabniško ime ni bilo določeno.\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
@@ -189,7 +189,7 @@ msgstr "Podatkov o staranju za %s ni bilo moč spremeniti.\n"
 msgid "[OPTION...] [user]"
 msgstr "[IZBIRA...] [uporabnik]"
 
-#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
+#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Uporabniško ime ni bilo določeno, ni imena za uid %d.\n"
@@ -250,11 +250,16 @@ msgstr "Ukazna lupina za %s se spreminja.\n"
 msgid "New Shell"
 msgstr "Nova lupina"
 
-#: apps/lchsh.c:139
+#: apps/lchsh.c:126
+#, fuzzy, c-format
+msgid "Shell not changed: input error.\n"
+msgstr "Lupina spremenjena.\n"
+
+#: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Lupina spremenjena.\n"
 
-#: apps/lchsh.c:142
+#: apps/lchsh.c:144
 #, fuzzy, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Lupina spremenjena.\n"
@@ -313,17 +318,22 @@ msgstr "Skupina %s ne more biti odklenjena.\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "Skupine %s ni moč spremeniti: %s.\n"
 
-#: apps/lid.c:127
+#: apps/lid.c:47
+#, fuzzy, c-format
+msgid "Error looking up %s: %s\n"
+msgstr "Napaka pri odstranjevanju %s: %s.\n"
+
+#: apps/lid.c:133
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Ime skupine ni bilo določeno, uporabljam %s.\n"
 
-#: apps/lid.c:131
+#: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Ime skupine ni bilo določeno, ni imena za gid %d.\n"
 
-#: apps/lid.c:141
+#: apps/lid.c:147
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Uporabniško ime ni bilo določeno, uporabljam %s.\n"
@@ -362,17 +372,17 @@ msgstr "Napaka pri ustvarjanju skupine ,%s` z GID %ld.\n"
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Napaka pri nastavljanju začetnega gesla za %s: %s\n"
 
-#: apps/lnewusers.c:303
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Napaka pri ustvarjanju domačega imenika za %s: %s\n"
 
-#: apps/lnewusers.c:317
+#: apps/lnewusers.c:309
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Napaka pri ustvarjanju poštne vrste za %s.\n"
 
-#: apps/lnewusers.c:323
+#: apps/lnewusers.c:315
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Napaka pri ustvarjanju uporabniškega računa za %s: %s\n"
@@ -400,7 +410,7 @@ msgstr "Gesli se ne ujemata, poskusite znova.\n"
 msgid "Password change canceled.\n"
 msgstr "Sprememba gesla je preklicana.\n"
 
-#: apps/lpasswd.c:190 apps/luseradd.c:291 apps/luseradd.c:301
+#: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Napaka pri nastavljanju gesla za uporabnika %s: %s.\n"
@@ -415,27 +425,27 @@ msgstr "Napaka pri nastavljanju gesla za skupino %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Geslo je spremenjeno.\n"
 
-#: apps/luseradd.c:180
+#: apps/luseradd.c:173
 #, fuzzy, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Skupina %s ne obstaja.\n"
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:200 apps/luseradd.c:213
 #, fuzzy, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Napaka pri ustvarjanju skupine ,%s`.\n"
 
-#: apps/luseradd.c:281
+#: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Izdelava računa ni uspela: %s.\n"
 
-#: apps/luseradd.c:331
+#: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Napaka pri ustvarjanju %s: %s.\n"
 
-#: apps/luseradd.c:338
+#: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Napaka pri ustvarjanju poštne čakalne vrste.\n"
@@ -515,22 +525,22 @@ msgstr "Ni novega domačega imenika za %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Napaka pri premikanju %s v %s: %s.\n"
 
-#: lib/config.c:117
+#: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/config.c:123
+#: lib/config.c:124
 #, fuzzy, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/config.c:131
+#: lib/config.c:133
 #, fuzzy, c-format
 msgid "configuration file `%s' is too large"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
 
-#: lib/config.c:147
+#: lib/config.c:149
 #, fuzzy, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "ni moč odpreti nastavitvene datoteke ,%s`: %s"
@@ -650,39 +660,67 @@ msgstr "napaka pri nastavljanju atributov terminala"
 msgid "error reading from terminal"
 msgstr "napaka pri branju s terminala"
 
-#: lib/user.c:193
+#: lib/user.c:194
 msgid "name is not set"
 msgstr "ime ni nastavljeno"
 
-#: lib/user.c:198
+#: lib/user.c:199
 msgid "name is too short"
 msgstr "ime je prekratko"
 
-#: lib/user.c:203
+#: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr ""
 
-#: lib/user.c:210
+#: lib/user.c:211
 msgid "name contains non-ASCII characters"
 msgstr "ime vsebuje ne-ASCII znake"
 
-#: lib/user.c:217
+#: lib/user.c:218
 msgid "name contains control characters"
 msgstr "ime vsebuje krmilne znake"
 
-#: lib/user.c:224
+#: lib/user.c:225
 msgid "name contains whitespace"
 msgstr "ime vsebuje prazne znake"
 
-#: lib/user.c:236
+#: lib/user.c:237
 msgid "name starts with a hyphen"
 msgstr ""
 
-#: lib/user.c:247
+#: lib/user.c:248
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "ime vsebuje neveljavni znak '%c'"
+
+#: lib/user.c:295 lib/user.c:343
+#, c-format
+msgid "user %s has no UID"
+msgstr ""
+
+#: lib/user.c:318 lib/user.c:344
+#, c-format
+msgid "group %s has no GID"
+msgstr ""
+
+#: lib/user.c:338
+#, c-format
+msgid "user %jd has no name"
+msgstr ""
+
+#: lib/user.c:339
+#, fuzzy, c-format
+msgid "group %jd has no name"
+msgstr "Skupina %s ne obstaja.\n"
+
+#: lib/user.c:347
+msgid "user has neither a name nor an UID"
+msgstr ""
+
+#: lib/user.c:348
+msgid "group has neither a name nor a GID"
+msgstr ""
 
 #: lib/util.c:193
 #, c-format
@@ -704,19 +742,19 @@ msgstr "ni moč ugotoviti stanja ,%s`: %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "ni moč pisati v ,%s`: %s"
 
-#: modules/files.c:176 modules/files.c:544 modules/files.c:869
-#: modules/files.c:1136 modules/files.c:1277 modules/files.c:1498
-#: modules/files.c:1583 modules/files.c:1789 modules/files.c:1973
-#: modules/files.c:1990 modules/files.c:2079 modules/files.c:2098
-#: modules/files.c:2166 modules/files.c:2187 modules/files.c:2284
-#: modules/files.c:2303 modules/files.c:2362 modules/files.c:2381
-#: modules/files.c:2481 modules/files.c:2496
+#: modules/files.c:176 modules/files.c:549 modules/files.c:874
+#: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
+#: modules/files.c:1588 modules/files.c:1794 modules/files.c:1978
+#: modules/files.c:1995 modules/files.c:2084 modules/files.c:2103
+#: modules/files.c:2171 modules/files.c:2192 modules/files.c:2289
+#: modules/files.c:2308 modules/files.c:2367 modules/files.c:2386
+#: modules/files.c:2486 modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "ni moč odpreti ,%s`: %s"
 
 #: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:881 modules/files.c:1289
+#: modules/files.c:886 modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "ni moč ugotoviti stanja ,%s`: %s"
@@ -736,36 +774,36 @@ msgstr "rezervna datoteka ,%s` obstaja in ni običajna datoteka"
 msgid "backup file size mismatch"
 msgstr "neujemanje različice modula/knjižnice"
 
-#: modules/files.c:911 modules/files.c:1298
+#: modules/files.c:916 modules/files.c:1303
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "ni moč brati iz ,%s`: %s"
 
-#: modules/files.c:920 modules/files.c:927
+#: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
 msgstr "vnos je že v datoteki"
 
-#: modules/files.c:934 modules/files.c:944 modules/files.c:955
-#: modules/files.c:1346 modules/files.c:1354 modules/files.c:1362
+#: modules/files.c:939 modules/files.c:949 modules/files.c:960
+#: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "ni moč pisati v ,%s`: %s"
 
-#: modules/files.c:1113 modules/files.c:1172
+#: modules/files.c:1118 modules/files.c:1177
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetni objekt nima atributa %s"
 
-#: modules/files.c:1823 modules/ldap.c:1552 modules/ldap.c:1825
+#: modules/files.c:1828 modules/ldap.c:1552 modules/ldap.c:1825
 #, fuzzy
 msgid "error encrypting password"
 msgstr "napaka pri nastavljanju gesla za ,%s`"
 
-#: modules/files.c:2770 modules/files.c:2848
+#: modules/files.c:2773 modules/files.c:2851
 msgid "not executing with superuser privileges"
 msgstr "ne izvaja se z dovolilnicami skrbnika"
 
-#: modules/files.c:2861
+#: modules/files.c:2864
 msgid "no shadow file present -- disabling"
 msgstr "ni datoteke z zastrtimi gesli -- onemogočam"
 
@@ -948,19 +986,19 @@ msgstr "Napaka Cyrus SASL pri odstranjevanju uporabnika: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "napaka pri inicializaciji Cyrus SASL: %s"
 
-#: python/admin.c:527
+#: python/admin.c:530
 msgid "error creating home directory for user"
 msgstr "napaka pri ustvarjanju domačega imenika za uporabnika"
 
-#: python/admin.c:580
+#: python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "napaka pri odstranjevanju domačega imenika za uporabnika"
 
-#: python/admin.c:658
+#: python/admin.c:661
 msgid "error moving home directory for user"
 msgstr "napaka pri premikanju domačega imenika za uporabnika"
 
-#: python/admin.c:691
+#: python/admin.c:694
 msgid "error creating mail spool for user"
 msgstr "napaka pri ustvarjanju poštne čakalne vrste za uporabnika"
 
