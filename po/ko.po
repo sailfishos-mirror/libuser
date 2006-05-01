@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-10-14 14:08+1000\n"
 "Last-Translator: Michelle Ji Yeen Kim <mkim@redhat.com>\n"
 "Language-Team: Korean\n"
@@ -250,19 +250,14 @@ msgstr "%s 용 쉘을 변경합니다.\n"
 msgid "New Shell"
 msgstr "새로운 쉘"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "쉘이 변경되지 않았습니다: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "쉘이 변경되었습니다.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "쉘이 변경되지 않았습니다: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1059,6 +1054,10 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "쉘이 변경되지 않았습니다: %s\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "LDAP 서버를 찾을 수 없습니다"

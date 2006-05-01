@@ -4,6 +4,8 @@
 	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
 	* NEWS: Update.
 
+	* apps/lchsh.c (main): Provide a more verbose error message.
+
 	* apps/apputil.c (lu_homedir_copy): Split from lu_homedir_populate.
 	Reformat a bit.
 	(lu_homedir_populate): New parameter ctx.  Default skeleton to

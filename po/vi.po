@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2003-07-27 13:46+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -249,18 +249,13 @@ msgstr "Đổi Shell của %s.\n"
 msgid "New Shell"
 msgstr "Shell mới"
 
-#: apps/lchsh.c:126
+#: apps/lchsh.c:125 apps/lchsh.c:144
 #, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+msgid "Shell not changed: %s\n"
 msgstr "Đã đổi Shell.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr "Đã đổi Shell.\n"
-
-#: apps/lchsh.c:144
-#, fuzzy, c-format
-msgid "Shell not changed: %s\n"
 msgstr "Đã đổi Shell.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
@@ -1056,6 +1051,10 @@ msgstr "Lấy thuộc tính người dùng mặc định:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Sao chép cấu trúc người dùng:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Đã đổi Shell.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "không thể tìm LDAP server"

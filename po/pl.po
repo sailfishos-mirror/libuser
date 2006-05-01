@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-12-03 18:31+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -251,19 +251,14 @@ msgstr "Zmienianie powłoki dla %s.\n"
 msgid "New Shell"
 msgstr "Nowa powłoka"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Powłoka nie została zmieniona: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Powłoka została zmieniona.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Powłoka nie została zmieniona: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1058,3 +1053,7 @@ msgstr "Pobieranie atrybutów domyślnego użytkownika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopiowanie struktury użytkownika:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Powłoka nie została zmieniona: %s\n"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-11-27 21:12+0900\n"
 "Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
 "Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
@@ -251,19 +251,14 @@ msgstr "%s用にシェルを変更中。\n"
 msgid "New Shell"
 msgstr "新規のシェル"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "シェル変更不可能: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "シェル変更済み。\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "シェル変更不可能: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1056,6 +1051,10 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "シェル変更不可能: %s\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "LDAPサーバを検出出来ませんでした。"

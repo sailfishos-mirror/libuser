@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-12-01 10:11+1000\n"
 "Last-Translator: Manuel Ospina <mospina@redhat.com>\n"
 "Language-Team: Spanish <en@li.org>\n"
@@ -322,19 +322,14 @@ msgstr "Cambiando el shell por  %s.\n"
 msgid "New Shell"
 msgstr "Nuevo shell"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell sin modificar: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell modificado.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell sin modificar: %s\n"
 
 # apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
 # apps/lgroupadd.c:58 apps/lgroupdel.c:53 apps/lgroupmod.c:68
@@ -1421,3 +1416,7 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Shell sin modificar: %s\n"

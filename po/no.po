@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2003-08-12 01:55+0200\n"
 "Last-Translator: Kjartan Maraas <teg@redhat.com>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -248,18 +248,13 @@ msgstr "Endrer skall for %s.\n"
 msgid "New Shell"
 msgstr "Nytt skall"
 
-#: apps/lchsh.c:126
+#: apps/lchsh.c:125 apps/lchsh.c:144
 #, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+msgid "Shell not changed: %s\n"
 msgstr "Skall endret.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr "Skall endret.\n"
-
-#: apps/lchsh.c:144
-#, fuzzy, c-format
-msgid "Shell not changed: %s\n"
 msgstr "Skall endret.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
@@ -1057,6 +1052,10 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Skall endret.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "kunne ikke søke på LDAP-tjener"

@@ -122,8 +122,8 @@ main(int argc, const char **argv)
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 				      NULL, &error) == FALSE) {
-			fprintf(stderr,
-				_("Shell not changed: input error.\n"));
+			fprintf(stderr, _("Shell not changed: %s\n"),
+				lu_strerror(error));
 			return 1;
 		}
 		/* Modify the in-memory structure's shell attribute. */

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-10-28 22:50+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -251,19 +251,14 @@ msgstr "Mením shell pre %s.\n"
 msgid "New Shell"
 msgstr "Nový shell"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell nezmenený: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell zmenený.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell nezmenený: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1058,6 +1053,10 @@ msgstr "Získavam štandardné príznaky používateľa:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopírujem štruktúrup používateľa:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Shell nezmenený: %s\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "nepodarilo sa vyhľadať LDAP server"

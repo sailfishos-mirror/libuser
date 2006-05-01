@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-10-11 11:27-0500\n"
 "Last-Translator: Daniel Cote <dcote@uottawa.ca>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -250,19 +250,14 @@ msgstr "Changer de shell pour %s.\n"
 msgid "New Shell"
 msgstr "Nouveau shell"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell inchangé : %s.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell changé.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell inchangé : %s.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1068,6 +1063,10 @@ msgstr "Obtention d'attributs d'utilisateur par défaut :\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Shell inchangé : %s.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "impossible de chercher le serveur LDAP"

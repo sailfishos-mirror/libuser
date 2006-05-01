@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2004-08-03 11:04+0300\n"
 "Last-Translator: Mikko Ikola <ikola@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-fi-discussion@lists.sourceforge.net>\n"
@@ -250,18 +250,13 @@ msgstr "Vaihdetaan komentotulkkia kohteelle %s.\n"
 msgid "New Shell"
 msgstr "Uusi komentotulkki"
 
-#: apps/lchsh.c:126
+#: apps/lchsh.c:125 apps/lchsh.c:144
 #, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+msgid "Shell not changed: %s\n"
 msgstr "Komentotulkki vaihdettu.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr "Komentotulkki vaihdettu.\n"
-
-#: apps/lchsh.c:144
-#, fuzzy, c-format
-msgid "Shell not changed: %s\n"
 msgstr "Komentotulkki vaihdettu.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
@@ -1059,6 +1054,10 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopioidaan käyttäjän rakenne:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Komentotulkki vaihdettu.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "ei voitu etsiä LDAP-palvelinta"

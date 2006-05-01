@@ -1,17 +1,15 @@
-# $Id$
-#
 # Czech translation for libuser
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Copyright (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>
 # Milan Kerslager <kerslage@linux.cz>, 2002
-# Miloslav Trmac <mitr@volny.cz>, 2002, 2003, 2004, 2005.
+# Miloslav Trmac <mitr@volny.cz>, 2002, 2003, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
-"PO-Revision-Date: 2005-10-07 00:54+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
+"PO-Revision-Date: 2006-05-01 07:12+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -251,19 +249,14 @@ msgstr "Měním shell pro %s.\n"
 msgid "New Shell"
 msgstr "Nový shell"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell nebyl změněn: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell změněn.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell nebyl změněn: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -320,9 +313,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Skupinu %s nelze změnit: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Chyba při odstraňování %s: %s.\n"
+msgstr "Chyba při odstraňování %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -697,30 +690,30 @@ msgstr "jméno obsahuje neplatný znak `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "uživatel %s nemá UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "skupina %s nemá GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "uživatel %jd nemá jméno"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Skupina %jd neexistuje\n"
+msgstr "skupina %jd nemá jméno"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "uživatel nemá ani jméno, ani UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "skupina nemá ani jméno, ani GID"
 
 #: lib/util.c:193
 #, c-format

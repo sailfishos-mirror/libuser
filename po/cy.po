@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-04-16 14:20+0100\n"
 "Last-Translator: Rhys Jones <rhys@sgwarnog.com>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -250,19 +250,14 @@ msgstr "Yn newid plisgyn ar gyfer %s.\n"
 msgid "New Shell"
 msgstr "Plisgyn Newydd"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Ni newidiwyd y plisgyn: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Newidiwyd y plisgyn.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Ni newidiwyd y plisgyn: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1058,6 +1053,10 @@ msgstr "Yn nôl priodoleddau defnyddiwr rhagosodedig:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Yn copïo strwythur defnyddiwr:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Ni newidiwyd y plisgyn: %s\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "methwyd chwilio'r gweinydd LDAP"

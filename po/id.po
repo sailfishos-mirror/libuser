@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-11-01 00:05+0700\n"
 "Last-Translator: Teguh DC <dheche@bradjamoesti.or.id>\n"
 "Language-Team: Linux Indonesia <http://www.linux.or.id>\n"
@@ -249,19 +249,14 @@ msgstr "Mengubah shell untuk %s.\n"
 msgid "New Shell"
 msgstr "Shell Baru"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell tidak berubah: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell telah berubah.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell tidak berubah: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1057,6 +1052,10 @@ msgstr "Mengambil atribut pengguna standar:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Meng-copy struktur pengguna:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Shell tidak berubah: %s\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "tidak dapat mencari server LDAP"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2006-01-26 22:21+0600\n"
 "Last-Translator: Jamil Ahmed <jamil@bengalinux.org>\n"
 "Language-Team: Bengali <redhat-translation@bengalinux.org>\n"
@@ -264,20 +264,14 @@ msgid "New Shell"
 msgstr "নতুন শেল"
 
 # modified for RHEL
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "শেল পরিবর্তিত হয়নি: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "শেল পরিবর্তিত হয়েছে।\n"
-
-# modified for RHEL
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "শেল পরিবর্তিত হয়নি: %s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1142,3 +1136,8 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
+
+# modified for RHEL
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "শেল পরিবর্তিত হয়নি: %s\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-10-16 20:02+0200\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -250,19 +250,14 @@ msgstr "S'està canviant l'intèrpret d'ordres per a %s.\n"
 msgid "New Shell"
 msgstr "Nou intèrpret d'ordres"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "L'intèrpret d'ordres ha canviat.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1069,6 +1064,10 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "no s'ha pogut cercar el servidor del LDAP"

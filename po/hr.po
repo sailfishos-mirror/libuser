@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2006-04-28 16:38+0100\n"
 "Last-Translator: Renato Pavicic <renato@translator-shop.org>\n"
 "Language-Team: Renato Pavicic <www.translator-shop.org>\n"
@@ -245,19 +245,14 @@ msgstr "Promjena korisničke ljuske za %s.\n"
 msgid "New Shell"
 msgstr "Nova ljuska"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Korisnička ljuska nije promijenjena:%s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Korisnička ljuska je promijenjena.\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Korisnička ljuska nije promijenjena:%s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1053,3 +1048,7 @@ msgstr "Dohvaćanje zdanih korisničkih atributa:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopiranje strukture korisnika:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Korisnička ljuska nije promijenjena:%s\n"

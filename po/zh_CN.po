@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2005-12-07 11:30+1000\n"
 "Last-Translator: \n"
 "Language-Team:  <zh@li.org>\n"
@@ -255,19 +255,14 @@ msgstr "改变 %s 的 shell。\n"
 msgid "New Shell"
 msgstr "新建 Shell"
 
-#: apps/lchsh.c:126
-#, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+#: apps/lchsh.c:125 apps/lchsh.c:144
+#, c-format
+msgid "Shell not changed: %s\n"
 msgstr "Shell 没有改变：%s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
 msgstr "Shell 被改变。\n"
-
-#: apps/lchsh.c:144
-#, c-format
-msgid "Shell not changed: %s\n"
-msgstr "Shell 没有改变：%s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -1060,3 +1055,7 @@ msgstr "正在获取默认的用户属性：\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "正在复制用户结构：\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Shell 没有改变：%s\n"

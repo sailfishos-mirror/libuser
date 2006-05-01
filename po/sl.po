@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 9.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:04+0200\n"
+"POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2003-07-13 23:10+0200\n"
 "Last-Translator: Roman Maurer <roman@lugos.si>\n"
 "Language-Team: Slovenian <translation-team-sl@lists.sourceforge.net>\n"
@@ -250,18 +250,13 @@ msgstr "Ukazna lupina za %s se spreminja.\n"
 msgid "New Shell"
 msgstr "Nova lupina"
 
-#: apps/lchsh.c:126
+#: apps/lchsh.c:125 apps/lchsh.c:144
 #, fuzzy, c-format
-msgid "Shell not changed: input error.\n"
+msgid "Shell not changed: %s\n"
 msgstr "Lupina spremenjena.\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr "Lupina spremenjena.\n"
-
-#: apps/lchsh.c:144
-#, fuzzy, c-format
-msgid "Shell not changed: %s\n"
 msgstr "Lupina spremenjena.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
@@ -1059,6 +1054,10 @@ msgstr "Dobivamo privzete atribute uporabnika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Prepisovanje uporabniške strukture:\n"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Lupina spremenjena.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "ni bilo moč preiskati strežnika LDAP"
