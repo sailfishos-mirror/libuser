@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-11-03 23:14+0000\n"
+"PO-Revision-Date: 2006-05-01 13:40+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -313,9 +313,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "O grupo %s não pode ser modificado: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Erro ao apagar %s: %s.\n"
+msgstr "Erro ao procurar o %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -690,30 +690,30 @@ msgstr "o nome contém o caracter inválido `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "o utilizador %s não tem um UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "o grupo %s não tem um GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "o utilizador %jd não tem nome"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "O grupo %jd não existe.\n"
+msgstr "O grupo %jd não tem nome"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "o utilizador não tem nenhum nome ou UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "o grupo não tem nenhum nome ou GID"
 
 #: lib/util.c:193
 #, c-format
@@ -1051,19 +1051,3 @@ msgstr "A obter atributos por omissão dos utilizadores:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "A copiar estrutura do utilizador:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "'Shell' não alterada: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "não foi possível procurar no servidor LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "servidor LDAP parece não ter um DSE de raiz"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "erro ao mapear nome para nome distinto LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "erro ao mapear nome para nome base distinto LDAP"
