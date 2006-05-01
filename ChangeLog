@@ -1,3 +1,15 @@
+2006-05-01  Miloslav Trmac  <mitr@redhat.com>
+
+	* apps/apputil.c (lu_homedir_copy): Split from lu_homedir_populate.
+	Reformat a bit.
+	(lu_homedir_populate): New parameter ctx.  Default skeleton to
+	defaults/skeleton.  All users updated to pass NULL instead of reading
+	the config value.
+	* apps/apputil.h (lu_homedir_populate): Update prototype.
+	* python/admin.c (libuser_admin_add_user): New keyword parameter
+	"skeleton".
+	* python/modules.txt: Document new addUser parameter.
+
 2006-03-12  Miloslav Trmac  <mitr@redhat.com>
 
 	* modules/ldap.c (get_ent_mods): Remove unused parameter module.

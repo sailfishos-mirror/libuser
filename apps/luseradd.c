@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -132,13 +132,6 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
 		return 1;
-	}
-
-	/* If we didn't get the location of a skeleton directory, read
-	 * the name of the directory from the configuration file. */
-	if (skeleton == NULL) {
-		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
-					      "/etc/skel");
 	}
 
 	/* Select a group name for the user to be in. */
@@ -325,7 +318,7 @@ main(int argc, const char **argv)
 		value = g_value_array_get_nth(values, 0);
 		homeDirectory = g_value_get_string(value);
 
-		if (lu_homedir_populate(skeleton, homeDirectory,
+		if (lu_homedir_populate(ctx, skeleton, homeDirectory,
 					uidNumber, gidNumber, 0700,
 					&error) == FALSE) {
 			fprintf(stderr, _("Error creating %s: %s.\n"),

@@ -462,7 +462,8 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	const char *dir, *skeleton = "/etc/skel";
+	struct lu_context *context;
+	const char *dir, *skeleton = NULL;
 	GValueArray *values;
 	GValue *value;
 	char *keywords[] = { "home", "skeleton", NULL };
@@ -472,6 +473,8 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 
 	(void)self;
 	DEBUG_ENTRY;
+
+	context = ((struct libuser_admin *)self)->ctx;
 
 	/* Expect an object and a string. */
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|s", keywords,
@@ -514,7 +517,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	gidNumber = lu_value_get_id(value);
 
 	/* Attempt to populate the directory. */
-	if (lu_homedir_populate(skeleton, dir, uidNumber, gidNumber,
+	if (lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
 				0700, &error)) {
 		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
@@ -714,9 +717,12 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	PyObject *ret = NULL;
 	PyObject *mkhomedir = self;
 	PyObject *mkmailspool = self;
+	PyObject *skeleton = NULL;
 	struct libuser_entity *ent = NULL;
 	struct lu_context *context = NULL;
-	char *keywords[] = { "entity", "mkhomedir", "mkmailspool", NULL };
+	char *keywords[] = {
+		"entity", "mkhomedir", "mkmailspool", "skeleton", NULL
+	};
 
 	DEBUG_ENTRY;
 
@@ -724,9 +730,10 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	/* Expect an entity and a flag to tell us if we need to create the
 	 * user's home directory. */
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|OO", keywords,
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!|OOO", keywords,
 					 &EntityType, &ent,
-					 &mkhomedir, &mkmailspool)) {
+					 &mkhomedir, &mkmailspool,
+					 &skeleton)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
@@ -748,8 +755,13 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			subargs = PyTuple_New(1);
 			Py_INCREF(ent);
 			PyTuple_SetItem(subargs, 0, (PyObject*) ent);
-			/* Create an empty dictionary for keyword args. */
+			/* Create a dictionary for keyword args. */
 			subkwargs = PyDict_New();
+			if (skeleton != NULL) {
+				Py_INCREF(skeleton);
+				PyDict_SetItemString(subkwargs, "skeleton",
+						     skeleton);
+			}
 			/* We'll return the result of the creation call. */
 			ret = libuser_admin_create_home(self, subargs,
 							subkwargs);

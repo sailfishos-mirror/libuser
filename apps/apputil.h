@@ -31,9 +31,10 @@
 #define N_(String) (String)
 #endif
 
-gboolean lu_homedir_populate(const char *skel, const char *directory,
-			     uid_t owner, gid_t group, mode_t mode,
-			     struct lu_error **error) G_GNUC_INTERNAL;
+gboolean lu_homedir_populate(struct lu_context *ctx, const char *skel,
+			     const char *directory, uid_t owner, gid_t group,
+			     mode_t mode, struct lu_error **error)
+	G_GNUC_INTERNAL;
 gboolean lu_homedir_move(const char *oldhome, const char *directory,
 			 struct lu_error **error) G_GNUC_INTERNAL;
 gboolean lu_homedir_remove(const char *directory, struct lu_error **error)

@@ -53,12 +53,25 @@ main(int argc, char **argv)
 		}
 	}
 
-	if (add
-	    && !lu_homedir_populate("/etc/skel", argv[optind], 500, 500,
-				    0700, &error)) {
-		fprintf(stderr, "populate_homedir(%s) failed: %s\n",
-			argv[optind], lu_strerror(error));
-		return 1;
+	if (add) {
+		struct lu_context *ctx;
+		struct lu_error *error;
+
+		error = NULL;
+		ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console, NULL,
+			       &error);
+		if (ctx == NULL) {
+			fprintf(stderr, gettext("Error initializing %s: %s\n"),
+				PACKAGE, lu_strerror(error));
+			return 1;
+		}
+		if (!lu_homedir_populate(ctx, "/etc/skel", argv[optind], 500,
+					 500, 0700, &error)) {
+			fprintf(stderr, "populate_homedir(%s) failed: %s\n",
+				argv[optind], lu_strerror(error));
+			return 1;
+		}
+		lu_end(ctx);
 	}
 	if (mod
 	    && !lu_homedir_move(argv[optind], argv[optind + 1], &error)) {

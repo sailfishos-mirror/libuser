@@ -103,13 +103,12 @@ setup_default_context(const char *orig_file)
 }
 #endif
 
-/* Populate a user's home directory, copying data from a named skeleton
- * directory, setting all ownerships as given, and setting the mode of
- * the top-level directory as given. */
-gboolean
-lu_homedir_populate(const char *skeleton, const char *directory,
-		    uid_t owner, gid_t group, mode_t mode,
-		    struct lu_error **error)
+/* Copy the "src" directory to "dest", setting all ownerships as given, and
+   setting the mode of the top-level directory as given.  The group ID of the
+   copied files is preserved if it is nonzero. */
+static gboolean
+lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
+		mode_t mode, struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
@@ -118,33 +117,34 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 
 	LU_ERROR_CHECK(error);
 
-	dir = opendir(skeleton);
+	dir = opendir(src);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error reading `%s': %s"), skeleton,
+			     _("Error reading `%s': %s"), src,
 			     strerror(errno));
 		goto err;
 	}
 
 	/* Create the top-level directory. */
-	if ((mkdir(directory, mode) == -1) && (errno != EEXIST)) {
+	if (mkdir(dest, mode) == -1 && errno != EEXIST) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error creating `%s': %s"), directory,
+			     _("Error creating `%s': %s"), dest,
 			     strerror(errno));
 		goto err_dir;
 	}
 
 	/* Set the ownership on the top-level directory. */
-	if (chown(directory, owner, group) == -1 && errno != EPERM) {
+	if (chown(dest, owner, group) == -1 && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"), directory,
+			     _("Error changing owner of `%s': %s"), dest,
 			     strerror(errno));
 		goto err_dir;
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
-		char skelpath[PATH_MAX], path[PATH_MAX];
+		char srcpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
 		struct stat st;
+		struct utimbuf timebuf;
 
 		/* Iterate through each item in the directory. */
 		/* Skip over self and parent hard links. */
@@ -155,168 +155,153 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 			continue;
 		}
 
-		/* Build the path of the skeleton file or directory and
-		 * its corresponding member in the new tree. */
-		snprintf(skelpath, sizeof(skelpath), "%s/%s",
-			 skeleton, ent->d_name);
-		snprintf(path, sizeof(path), "%s/%s", directory,
-			 ent->d_name);
+		/* Build the path of the source file or directory and its
+		   corresponding member in the new tree. */
+		snprintf(srcpath, sizeof(srcpath), "%s/%s", src, ent->d_name);
+		snprintf(path, sizeof(path), "%s/%s", dest, ent->d_name);
 
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
-		if (lstat(skelpath, &st) != -1) {
-			char buf[PATH_MAX];
-			struct utimbuf timebuf;
+		if (lstat(srcpath, &st) != 0)
+			continue;
 
-			/* We always want to preserve atime/mtime. */
-			timebuf.actime = st.st_atime;
-			timebuf.modtime = st.st_mtime;
+		/* We always want to preserve atime/mtime. */
+		timebuf.actime = st.st_atime;
+		timebuf.modtime = st.st_mtime;
 
-			/* If it's a directory, descend into it. */
-			if (S_ISDIR(st.st_mode)) {
-				if (!lu_homedir_populate(skelpath,
-							 path,
-							 owner,
-							 st.st_gid ?: group,
-							 st.st_mode,
-							 error)) {
-					/* Aargh!  Fail up. */
-					goto err_dir;
+		/* If it's a directory, descend into it. */
+		if (S_ISDIR(st.st_mode)) {
+			if (!lu_homedir_copy(srcpath, path, owner,
+					     st.st_gid ?: group, st.st_mode,
+					     error))
+				/* Aargh!  Fail up. */
+				goto err_dir;
+			/* Set the date on the directory. */
+			utime(path, &timebuf);
+			continue;
+		}
+
+		/* If it's a symlink, duplicate it. */
+		if (S_ISLNK(st.st_mode)) {
+			ssize_t len;
+
+			len = readlink(srcpath, buf, sizeof(buf) - 1);
+			if (len == -1) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error reading `%s': %s"),
+					     srcpath, strerror(errno));
+				goto err_dir;
+			}
+			buf[len] = '\0';
+			if (symlink(buf, path) == -1) {
+				if (errno == EEXIST)
+					continue;
+				lu_error_new(error, lu_error_generic,
+					     _("Error creating `%s': %s"),
+					     path, strerror(errno));
+				goto err_dir;
+			}
+			if (lchown(path, owner, st.st_gid ?: group) == -1
+			    && errno != EPERM && errno != EOPNOTSUPP) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error changing owner of `%s': "
+					       "%s"), dest, strerror(errno));
+				goto err_dir;
+			}
+			utime(path, &timebuf);
+			continue;
+		}
+
+		/* If it's a regular file, copy it. */
+		if (S_ISREG(st.st_mode)) {
+			off_t offset;
+
+			/* Open both the input and output files.  If we fail to
+			   do either, we have to give up. */
+			ifd = open(srcpath, O_RDONLY);
+			if (ifd == -1) {
+				lu_error_new(error, lu_error_open,
+					     _("Error reading `%s': %s"),
+					     srcpath, strerror(errno));
+				goto err_dir;
+			}
+			ofd = open(path, O_EXCL | O_CREAT | O_WRONLY,
+				   st.st_mode);
+			if (ofd == -1) {
+				if (errno == EEXIST) {
+					close(ifd);
+					continue;
 				}
-				/* Set the date on the directory. */
-				utime(path, &timebuf);
-				continue;
+				lu_error_new(error, lu_error_open,
+					     _("Error writing `%s': %s"),
+					     path, strerror(errno));
+				goto err_ifd;
 			}
 
-			/* If it's a symlink, duplicate it. */
-			if (S_ISLNK(st.st_mode)) {
-				ssize_t len;
+			/* Now just copy the data. */
+			for (;;) {
+				ssize_t left;
+				char *p;
 
-				len = readlink(skelpath, buf, sizeof(buf) - 1);
-				if (len == -1) {
-					lu_error_new(error, lu_error_generic,
-						     _("Error reading `%s': %s"),
-						     skelpath,
-						     strerror(errno));
-					goto err_dir;
-				}
-				buf[len] = '\0';
-				if (symlink(buf, path) == -1) {
-					if (errno == EEXIST)
+				left = read(ifd, &buf, sizeof(buf));
+				if (left == -1) {
+					if (errno == EINTR)
 						continue;
-					lu_error_new(error, lu_error_generic,
-						     _("Error creating `%s': %s"),
-						     path, strerror(errno));
-					goto err_dir;
-				}
-				if (lchown(path, owner, st.st_gid ?: group) == -1
-				    && errno != EPERM && errno != EOPNOTSUPP) {
-					lu_error_new(error, lu_error_generic,
-						     _("Error changing owner of `%s': %s"),
-						     directory,
+					lu_error_new(error, lu_error_read,
+						     _("Error reading `%s': "
+						       "%s"), srcpath,
 						     strerror(errno));
-					goto err_dir;
+					goto err_ofd;
 				}
-				utime(path, &timebuf);
-				continue;
-			}
+				if (left == 0)
+					break;
+				p = buf;
+				while (left > 0) {
+					ssize_t out;
 
-			/* If it's a regular file, copy it. */
-			if (S_ISREG(st.st_mode)) {
-				off_t offset;
-
-				/* Open both the input and output
-				 * files.  If we fail to do either,
-				 * we have to give up. */
-				ifd = open(skelpath, O_RDONLY);
-				if (ifd == -1) {
-					lu_error_new(error, lu_error_open,
-						     _("Error reading `%s': %s"),
-						     skelpath,
-						     strerror(errno));
-					goto err_dir;
-				}
-				ofd = open(path, O_EXCL | O_CREAT | O_WRONLY,
-					   st.st_mode);
-				if (ofd == -1) {
-					if (errno == EEXIST) {
-						close(ifd);
-						continue;
-					}
-					lu_error_new(error, lu_error_open,
-						     _("Error writing `%s': %s"),
-						     path, strerror(errno));
-					goto err_ifd;
-				}
-
-				/* Now just copy the data. */
-				for (;;) {
-					ssize_t left;
-					char *p;
-
-					left = read(ifd, &buf, sizeof(buf));
-					if (left == -1) {
+					out = write(ofd, p, left);
+					if (out == -1) {
 						if (errno == EINTR)
 							continue;
 						lu_error_new(error,
-							     lu_error_read,
-							     _("Error reading `%s': %s"),
-							     skelpath,
-							     strerror(errno));
-						goto err_ofd;
-					}
-					if (left == 0)
-						break;
-					p = buf;
-					while (left > 0) {
-						ssize_t out;
-
-						out = write(ofd, p, left);
-						if (out == -1) {
-							if (errno == EINTR)
-								continue;
-							lu_error_new(error,
-								     lu_error_write,
-								     _("Error writing `%s': %s"),
-								     path,
-								     strerror(errno));
-							goto err_ofd;
-						}
-						p += out;
-						left -= out;
-					}
-				}
-
-				/* Close the files. */
-				offset = lseek(ofd, 0, SEEK_CUR);
-				if (offset != ((off_t) -1)) {
-					if (ftruncate(ofd, offset) == -1) {
-						lu_error_new(error,
-							     lu_error_generic,
-							     _("Error writing `%s': %s"),
+							     lu_error_write,
+							     _("Error writing "
+							       "`%s': %s"),
 							     path,
 							     strerror(errno));
 						goto err_ofd;
 					}
+					p += out;
+					left -= out;
 				}
-				close (ifd);
-				close (ofd);
-
-				/* Set the ownership and timestamp on
-				 * the new file. */
-				if (chown(path, owner, st.st_gid ?: group) == -1
-				    && errno != EPERM) {
-					lu_error_new(error, lu_error_generic,
-						     _("Error changing owner of `%s': %s"),
-						     directory,
-						     strerror(errno));
-					goto err_dir;
-				}
-				utime(path, &timebuf);
-				continue;
 			}
-			/* Note that we don't copy device specials. */
+
+			/* Close the files. */
+			offset = lseek(ofd, 0, SEEK_CUR);
+			if (offset != ((off_t) -1)) {
+				if (ftruncate(ofd, offset) == -1) {
+					lu_error_new(error, lu_error_generic,
+						     _("Error writing `%s': "
+						       "%s"), path,
+						     strerror(errno));
+					goto err_ofd;
+				}
+			}
+			close (ifd);
+			close (ofd);
+
+			/* Set the ownership and timestamp on the new file. */
+			if (chown(path, owner, st.st_gid ?: group) == -1
+			    && errno != EPERM) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error changing owner of `%s': "
+					       "%s"), dest, strerror(errno));
+				goto err_dir;
+			}
+			utime(path, &timebuf);
+			continue;
 		}
+		/* Note that we don't copy device specials. */
 	}
 	ret = TRUE;
 	goto err_dir;
@@ -329,6 +314,20 @@ lu_homedir_populate(const char *skeleton, const char *directory,
 	closedir(dir);
  err:
 	return ret;
+}
+
+/* Populate a user's home directory, copying data from a named skeleton
+   directory (or default if skeleton is NULL), setting all ownerships as
+   given, and setting the mode of the top-level directory as given. */
+gboolean
+lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
+		    const char *directory, uid_t owner, gid_t group,
+		    mode_t mode, struct lu_error **error)
+{
+	if (skeleton == NULL)
+		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
+					      "/etc/skel");
+	return lu_homedir_copy(skeleton, directory, owner, group, mode, error);
 }
 
 /* Recursively remove a user's home (or really, any) directory. */
@@ -416,12 +415,10 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	/* If the directory exists... */
 	if (stat(oldhome, &st) != -1) {
 		/* ... and we can copy it ... */
-		if (lu_homedir_populate(oldhome, newhome,
-					st.st_uid, st.st_gid, st.st_mode,
-					error)) {
+		if (lu_homedir_copy(oldhome, newhome, st.st_uid, st.st_gid,
+				    st.st_mode, error))
 			/* ... remove the old one. */
 			return lu_homedir_remove(oldhome, error);
-		}
 	}
 
 	return FALSE;

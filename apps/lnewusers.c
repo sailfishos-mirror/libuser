@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001, 2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004, 2006 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -288,17 +288,9 @@ main(int argc, const char **argv)
 			/* Unless the nocreatehomedirs flag was given, attempt
 			 * to create the user's home directory. */
 			if (!nocreatehome) {
-				const char *skeleton;
-
-				skeleton = lu_cfg_read_single(ctx,
-							      "defaults/skeleton",
-							      "/etc/skel");
-				if (lu_homedir_populate(skeleton,
-							homedir,
-							uid,
-							gid,
-							0700,
-							&error) == FALSE) {
+				if (lu_homedir_populate(ctx, NULL, homedir,
+							uid, gid, 0700, &error)
+				    == FALSE) {
 					fprintf(stderr,
 						_("Error creating home "
 						  "directory for %s: %s\n"),

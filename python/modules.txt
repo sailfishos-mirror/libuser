@@ -91,6 +91,12 @@ libuser:
 						directory for the user
 						should be created (optional,
 						defaults yes).
+						A true/false object indicating
+						whether or not the mail spool
+						for the user should be created
+						(optional, defaults yes).
+					Keyword Arguments:
+						skeleton=
 
 				- addGroup: Add a new group to the system:
 					Arguments:
