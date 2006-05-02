@@ -4,6 +4,7 @@
 # translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla (INDIA)
+# translation of bn_IN.po to Bangla (INDIA)
 # translation of bn_IN.po to Bangla
 # Bangla Translation of Libuser.po
 # Copyright (C) 2004 Red Hat Inc.
@@ -15,7 +16,7 @@ msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-01-24 20:23+0530\n"
+"PO-Revision-Date: 2006-05-02 17:39+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla (INDIA) <redhat-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -347,9 +348,9 @@ msgstr "%s দল পরিবর্তন করা যায়নি: %s\n"
 
 # modified for RHEL
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s সরিয়ে ফেলতে সমস্যা: %s।\n"
+msgstr "%s অনুসন্ধানে সমস্যা: %s।\n"
 
 # modified for RHEL
 #: apps/lid.c:133
@@ -751,31 +752,31 @@ msgstr "নামের মধ্য অবৈধ অক্ষর `%c' লেখ
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "%s নামক ব্যবহারকারীর ক্ষেত্রে UID ধার্য করা হয়নি"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "%s নামক দলের ক্ষেত্রে GID ধার্য করা হয়নি"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "%jd ব্যবহারকারীর নাম উল্লিখিত নেই"
 
 # modified for RHEL
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "%jd দলটি বর্তমানে উপস্থিত নেই।\n"
+msgstr "%jd দলের নাম উল্লিখিত নেই"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ব্যবহারকারীর নাম ও UID ধার্য করা হয়নি"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "দলের নাম ও GID ধার্য করা হয়নি"
 
 #: lib/util.c:193
 #, c-format
@@ -946,8 +947,7 @@ msgstr "LDAP সার্ভারে bind করা সম্ভব হয়ন�
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
+msgstr "LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' হিসাবে প্রথম প্রচেষ্টা করা হয়েছে: %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -1143,7 +1143,3 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর স্ট্রাকচার কপি করা হচ্ছে:\n"
 
-# modified for RHEL
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "শেল পরিবর্তিত হয়নি: %s\n"
