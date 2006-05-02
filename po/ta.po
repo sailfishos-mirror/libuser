@@ -1,23 +1,24 @@
-# translation of ta.po to 
+# translation of ta.po to
 # translation of ta.po to Tamil
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Jayaradha N <jaya@pune.redhat.com>, 2004.
 # Jayaradha N <njaya@redhat.com>, 2004, 2005, 2006.
+# Felix <ifelix@redhat.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-03-06 15:37+0530\n"
-"Last-Translator: \n"
-"Language-Team:  <ta@li.org>\n"
+"PO-Revision-Date: 2006-05-02 17:01+0530\n"
+"Last-Translator: Felix <ifelix@redhat.com>\n"
+"Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 "\n"
 
@@ -318,9 +319,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "குழுவை %s ஐ மாற்ற இயலவில்லை: %s.\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "பிழை நீக்குதல் %s: %s.\n"
+msgstr "பிழை சரிபார்த்தல் %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -695,30 +696,30 @@ msgstr "பெயர் தவறான எழுத்தை கொண்டத
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "பயனர் %s UID இல்லை"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "குழு %s GID இல்லை"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "பயனர் %jd க்கு பெயர் இல்லை"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "குழு %jd இல்லை \n"
+msgstr "குழு %jd க்கு பெயர் இல்லை"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "பயனரிடம் பெயர் அல்லது UID இல்லை"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "குழுவில் ஒரு பெயர் அல்லது ஒரு GID இல்லை"
 
 #: lib/util.c:193
 #, c-format
@@ -1057,6 +1058,3 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "ஷெல் மாற்றப்படவில்லை: %s\n"
