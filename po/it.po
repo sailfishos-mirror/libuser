@@ -1,22 +1,23 @@
+# translation of it.po to 
 # translation of  it to italian
 # Copyright (C) 2001 Red Hat, Inc.
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004, 2005.
 # Nicolò Nepote <nepote@labinf.polito.it>, 2005.
-# Francesco Tombolini <tombo@adamantio.net>, 2005.
+# Francesco Tombolini <tombo@adamantio.net>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-20 05:47+0200\n"
-"Last-Translator: Francesco Tombolini <tombo@adamantio.net>\n"
-"Language-Team: Italiano <Fedora-trans-it@redhat.com>\n"
+"PO-Revision-Date: 2006-05-02 01:00+0200\n"
+"Last-Translator: \n"
+"Language-Team:  <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
@@ -60,8 +61,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
-"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:583
 msgid "Unknown user context"
@@ -317,9 +317,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Il gruppo %s non può essere modificato: %s.\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Errore nella rimozione di %s: %s.\n"
+msgstr "Errore nella ricerca di %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -696,30 +696,30 @@ msgstr "nome contiene il carattero invalido `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "l'utente %s non ha alcun UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "il gruppo %s non ha alcun GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "l'utente %jd non ha alcun nome"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Il gruppo %jd non esiste.\n"
+msgstr "Il gruppo %jd non ha alcun nome"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "l'utente non ha ne' un nome ne' un UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "il gruppo non ha ne' un nome ne' un GID"
 
 #: lib/util.c:193
 #, c-format
@@ -729,8 +729,7 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:120
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:126
 #, c-format
@@ -944,8 +943,7 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2468
 msgid "LDAP Server Name"
@@ -1060,12 +1058,3 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "La shell non è cambiata: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "impossibile trovare il server LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "il server LDAP non ha DSE di root"
