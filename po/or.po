@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-04-30 23:32+0530\n"
+"PO-Revision-Date: 2006-05-02 10:54+0530\n"
 "Last-Translator: Subhransu Behera <sbehera@redhat.com>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
@@ -315,9 +315,8 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "%s ସମୂହ ଟି ରୂପାନ୍ତରିତ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "`%s' କୁ ଖୋଲିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
+msgstr "%s କୁ ଅବଲୋକନ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -375,367 +374,367 @@ msgstr "%s ପାଇଁ ଗୋଟିଏ ମୂଳ ସ୍ଥାନ ଡିରେ�
 #: apps/lnewusers.c:309
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "%s ପାଇଁ \n"
+msgstr "%s ପାଇଁ ଡାକ ସ୍ପୁଲ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି \n"
 
 #: apps/lnewusers.c:315
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "%s ପାଇଁ ଗୋଟିଏ ଚାଳକ ହିସାବ ଖାତା ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
 
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ କୁ ପରିବର୍ତନ କରୁଅଛି \n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "ନୂତନ ପ୍ରବେଶ ସଙ୍କେତ"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "ନୂତନ ପ୍ରବେଶ ସଙ୍କେତ (ନିଶ୍ଚିତ କରନ୍ତୁ)"
 
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "ପ୍ରବେଶ ସଙ୍କେତ ଟି ମିଶ୍ୁ ନାହିଁ, ପୁନର୍ବାର ପ୍ରଚେଷ୍ଟା କରନ୍ତୁ \n"
 
 #: apps/lpasswd.c:133
 #, c-format
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "ପ୍ରବେଶ ସଙ୍କେତ ର ପରିବର୍ତନ ବାତିଲ ହୋଇ ଗଲା \n"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ ସେଟ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "%s ସମୂହ ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ ସେଟ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
-msgstr ""
+msgstr "ପ୍ରବେଶ ସଙ୍କେତ ଟି ପରବର୍ତିତ ହୋଇ ଗଲା \n"
 
 #: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "%jd ସମୂହ ଟି ଅବସ୍ଥିତ ନୁହେଁ \n"
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "`%s' ସମୂହ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "ହିସାବ ଖାତା ର ସ୍ରୁଷ୍ଟି କରିବା ବିଫଳ ହୋଇ ଗଲା: %s \n"
 
 #: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "%s କୁ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s.\n"
 
 #: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "ଡାକ ସ୍ପୁଲ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି \n"
 
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ କୁ ଅପସାରଣ କରି ହେଲା ନାହିଁ: %s.\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s ର ଗୋଟିଏ ଜି.ଆଇ.ଡି. ନମ୍ବର ନାହିଁ \n"
 
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "%jd ଜି.ଆଇ.ଡି. ଥିବା କୌଣସି ସମୂହ ଅବସ୍ଥିତ ନାହିଁ, ଅପସ୍ରୁତ ହେଉ ନାହିଁ \n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "%jd ଜି.ଆଇ.ଡି. ଥିବା କୌଣସି ସମୂହ ମାନଙ୍କ ର କୌଣସି ସମୂହ ନାମ ନାହିଁ \n"
 
 #: apps/luserdel.c:135
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "%s ସମୂହ କୁ ଅପସାରଣ କରି ହେଲା ନାହିଁ: %s.\n"
 
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s ର ଗୋଟିଏ ମୂଳ ସ୍ଥାନ ଡିରେକ୍ଟୋରି ନାହିଁ \n"
 
 #: apps/luserdel.c:156
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "%s କୁ ଅପସାରଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ ସେଟ କରିବା ରେ ବିଫଳ: %s \n"
 
 #: apps/lusermod.c:191
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ କୁ ଲକ୍ କରି ହେଲା ନାହିଁ: %s \n"
 
 #: apps/lusermod.c:199
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ କୁ ଆନ-ଲକ୍ କରି ହେଲା ନାହିଁ: %s \n"
 
 #: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "%s ଚାଳକ ଟି ରୂପାନ୍ତରିତ ହୋଇ ପାରିଲା ନାହିଁ: %s \n"
 
 #: apps/lusermod.c:327
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "%s ସମୂହ ଟି ରୂପାନ୍ତରିତ ହୋଇ ପାରିଲା ନାହିଁ: %s \n"
 
 #: apps/lusermod.c:338
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ କୌଣସି ମୂଳସ୍ଥାନ ଡିରେକ୍ଟୋରି ନାହିଁ \n"
 
 #: apps/lusermod.c:343
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "%s ପାଇଁ କୌଣସି ନୂତନ ମୂଳସ୍ଥାନ ଡିରେକ୍ଟୋରି ନାହିଁ \n"
 
 #: apps/lusermod.c:349
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "%s ରୁ %s କୁ ସ୍ଥାନାସ୍ତରିତ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s \n"
 
 #: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "`%s' ବିନ୍ଯାସ ଫାଇଲ କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
 
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
+msgstr "`%s' ବିନ୍ଯାସ ଫାଇଲ କୁ ପ୍ରାରମ୍ଭ କରି ପାରିଲା ନାହିଁ: %s"
 
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr ""
+msgstr "`%s' ବିନ୍ଯାସ ଫାଇଲ ଟି ଖୁବ ବଡ ଅଟେ"
 
 #: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr ""
+msgstr "`%s' ବିନ୍ଯାସ ଫାଇଲ କୁ ପଢି ପାରିଲା ନାହିଁ: %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "ସଫଳ"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "ଏକକାଂଶ ଟି ବିନ୍ଯାସ ଦ୍ବାରା ନିଷ୍କ୍ରିୟ ହୋଇ ଗଲା"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr ""
+msgstr "ବର୍ଗୀୟ ତ୍ରୁଟି"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "ଯଥେଷ୍ଟ ବିଶେଷ ଆକର୍ଷଣ ନାହିଁ"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr ""
+msgstr "ପ୍ରବେଶାନୁମତି ଅସ୍ବୀକ୍ରୁତ ହୋଇ ଗଲା"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "ଖରାପ ଚାଳକ/ସମୂହ ନାମ"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "ଖରାପ ଚାଳକ/ସମୂହ ପରିଚୟ"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "ଚାଳକ/ସମୂହ ନାମ ବ୍ଯବହ୍ରୁତ ହେଉଅଛି"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "ଚାଳକ/ସମୂହ ପରିଚୟ ବ୍ଯବହ୍ରୁତ ହେଉଅଛି"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "ଟର୍ମିନାଲ ର ଗୁଣ ମାନଙ୍କୁ ପ୍ରକଳିତ କରୁଅଛି"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "ଫାଇଲ ଖୋଲିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "ଫାଇଲ କୁ ଲକ କରିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr ""
+msgstr "ଫାଇଲ ଉପରେ ଷ୍ଟାର୍ଟ କରିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "ଫାଇଲ ର ପଠନ ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "ଫାଇଲ େର ଲିଖନ ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "ଫାଇଲ ରେ ତଥ୍ଯ ମିଳିଲା ନାହିଁ"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "ଆଭ୍ଯନ୍ତରୀଣ ପ୍ରାରମ୍ଭିକୀକରଣ ତ୍ରୁଟି"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "ଏକକାଂଶ କୁ ଧାରଣ କରିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "ଏକକାଂଶ ରେ ପ୍ରତୀକ ର ସମାଧାନ କରିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "ପାଠାଗାର/ଏକକାଂଶ ର ସଂସ୍କରଣ ମିଶୁ ନାହିଁ"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "ଆଲ-ଲକ କଲେ ଏହା ପ୍ରବେଶ ସଙ୍କେତ ର କ୍ଷେତ୍ର କୁ ଖାଲି କରି ଦେବ"
 
 #: lib/error.c:88
 msgid "unknown error"
-msgstr ""
+msgstr "ଅଜଣା ତ୍ରୁଟି"
 
 #: lib/modules.c:65
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "କୌଣସି ପ୍ରାରମ୍ଭିକୀକରଣ %s କାର୍ଯ୍ଯ `%s' ରେ ନାହିଁ"
 
 #: lib/modules.c:83
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "`%s' ରେ ଏକକାଂଶ ର ସଂସ୍କରଣ ମିଶୁ ନାହିଁ"
 
 #: lib/modules.c:96
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr ""
+msgstr "`%s' ଏକକାଂଶ ଟି `%s' କୁ ବ୍ଯାଖ୍ଯା କରୁନାହିଁ"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "ଟର୍ମିନାଲ ର ଗୁଣ ମାନଙ୍କୁ ପଢିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/prompt.c:75 lib/prompt.c:87
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "ଟର୍ମିନାଲ ର ଗୁଣ ମାନଙ୍କୁ ସେଟ ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/prompt.c:81
 msgid "error reading from terminal"
-msgstr ""
+msgstr "ଟର୍ମିନାଲ ରୁ ପଢିବା ସମୟ ରେ ତ୍ରୁଟି"
 
 #: lib/user.c:194
 msgid "name is not set"
-msgstr ""
+msgstr "ନାମ ଟି ସେଟ ହୋଇ ନାହିଁ"
 
 #: lib/user.c:199
 msgid "name is too short"
-msgstr ""
+msgstr "ନାମ ଟି ଅତି କ୍ଷୁଦ୍ର ଅଟେ"
 
 #: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "ନାମ ଟି ଅତ୍ଯଧିକ ବ୍ରୁହତ ଅଟେ (%zu > %d)"
 
 #: lib/user.c:211
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "ନାମ ଟି ନନ୍-ଆସ୍କି ଅକ୍ଷର ମାନଙ୍କୁ ଧାରଣ କରିଅଛି"
 
 #: lib/user.c:218
 msgid "name contains control characters"
-msgstr ""
+msgstr "ନାମ ଟି ନିୟନ୍ତ୍ରଣ ଅକ୍ଷର ମାନଙ୍କୁ ଧାରଣ କରିଅଛି"
 
 #: lib/user.c:225
 msgid "name contains whitespace"
-msgstr ""
+msgstr "ନାମ ଟି ହ୍ବାଇଟ-ସ୍ପେଶ ଧାରଣ କରିଅଛି"
 
 #: lib/user.c:237
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "ନାମ ଟି ଗୋଟିଏ ସଂଯୋଜକ ଚିହ୍ନ ଦ୍ବାରା ଆରମ୍ଭ ହୋଇଥାଏ"
 
 #: lib/user.c:248
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "ନାମ ଟି ଗୋଟିଏ ଅବୈଧ ଅକ୍ଷର `%c' କୁ ଧାରଣ କରିଅଛି"
 
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "%s ଚାଳକ ର କୌଣସି ୟୁ.ଆଇ.ଡି. ନାହିଁ"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "%s ସମୂହ ର କୌଣସି ୟୁ.ଆଇ.ଡି. ନାହିଁ"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "%jd ଚାଳକ ର କୌଣସି ନାମ ନାହିଁ"
 
 #: lib/user.c:339
 #, c-format
 msgid "group %jd has no name"
-msgstr ""
+msgstr "%jd ନାମ ର କୌଣସି ନାମ ନାହିଁ"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ଚାଳକ ର କୌଣସି ନାମ କିମ୍ବା ୟୁ.ଆଇ.ଡି. ନାହିଁ"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "ସମୂହ ର କୌଣସି ନାମ କିମ୍ବା ୟୁ.ଆଇ.ଡି. ନାହିଁ"
 
 #: lib/util.c:193
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "ଫାଇଲ କୁ ଲକ କରୁଥିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: modules/files.c:120
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
+msgstr "`%s' ର ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ ପାଇ ପାରିଲା ନାହିଁ: %s"
 
 #: modules/files.c:126
 #, c-format
 msgid "couldn't set default security context: %s"
-msgstr ""
+msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ ସେଟ କରି ପାରିଲା ନାହିଁ: %s"
 
 #: modules/files.c:133
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
+msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ `%s' କୁ ସେଟ କରି ପାରିଲା ନାହିଁ: %s"
 
 #: modules/files.c:176 modules/files.c:549 modules/files.c:874
 #: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
@@ -746,18 +745,18 @@ msgstr ""
 #: modules/files.c:2486 modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
 
 #: modules/files.c:188 modules/files.c:217 modules/files.c:283
 #: modules/files.c:886 modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "`%s' ଉପରେ ଷ୍ଟାର୍ଟ କୁ କାର୍ଯ୍ଯକାରି କରି ପାରିଲା ନାହିଁ: %s"
 
 #: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "`%s' କୁ ସ୍ରୁଷ୍ଟି କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s"
 
 #: modules/files.c:212
 #, c-format
@@ -1051,3 +1050,4 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
+
