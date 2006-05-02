@@ -2,21 +2,21 @@
 # translation of libuser.po to Gujarati
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Ankit Patel <ankit@redhat.com>, 2004, 2005.
+# Ankit Patel <ankit@redhat.com>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-11 12:49+0530\n"
+"PO-Revision-Date: 2006-05-02 08:39+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -323,9 +323,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "જૂથ %s સુધારી શકાયું નહિં: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s દૂર કરવામાં ભૂલ: %s.\n"
+msgstr "%s જોવામાં ભૂલ: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -700,30 +700,30 @@ msgstr "નામ અયોગ્ય અક્ષર `%c' સમાવે છે
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "વપરાશકર્તા %s ને કોઈ UID નથી"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "જૂથ %s ને કોઈ GID નથી"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "વપરાશકર્તા %jd ને કોઈ નામ નથી"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "જૂથ %jd અસ્તિત્વમાં નથી\n"
+msgstr "જૂથ %jd ને કોઈ નામ નથી"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "વપરાશકર્તાને ક્યાં તો નામ કે UID નથી"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "જૂથને નહિં તો નામ કે GID છે"
 
 #: lib/util.c:193
 #, c-format
@@ -1060,12 +1060,3 @@ msgstr "મૂળભૂત વપરાશકર્તા લક્ષણો મ
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "શેલ બદલાયેલ નથી: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "LDAP સર્વર શોધી શક્યા નહિં"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP સર્વર પાસે કોઈ રુટ DSE હોય નહિં એવું લાગે છે"
