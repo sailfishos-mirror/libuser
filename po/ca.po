@@ -1,16 +1,16 @@
 # Catalan translations of libuser package by Softcatalà.
-# Copyright (C) 2004, 2005 Free Software Foundation
+# Copyright © 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libuser package.
 # Isabel Cama <c.gomez.febrel@terra.es>, 2004.
-# Xavier Conde Rueda <xaviconde@eresmas.com>, 2004, 2005
+# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004, 2005, 2006
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-16 20:02+0200\n"
-"Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
+"PO-Revision-Date: 2006-05-03 08:54+0200\n"
+"Last-Translator: Xavier Conde Rueda <xavi.conde@gmail.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,29 +20,29 @@ msgstr ""
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "S'ha produït un error en llegir '%s': %s"
+msgstr "S'ha produït un error en llegir «%s»: %s"
 
 #: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "S'ha produït un error en crear '%s': %s"
+msgstr "S'ha produït un error en crear «%s»: %s"
 
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "S'ha produït un error en canviar el propietari de '%s': %s"
+msgstr "S'ha produït un error en canviar el propietari de «%s»: %s"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr "S'ha produït un error en escriure '%s': %s"
+msgstr "S'ha produït un error en escriure «%s»: %s"
 
 #: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "S'ha produït un error en eliminar '%s': %s"
+msgstr "S'ha produït un error en eliminar «%s»: %s"
 
 #: apps/apputil.c:547 apps/apputil.c:551
 #, c-format
@@ -81,7 +81,7 @@ msgstr "Ha fallat l'autenticació per a %s.\n"
 #: apps/apputil.c:618
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "S'ha produït un error intern '%s' del PAM.\n"
+msgstr "S'ha produït un error intern «%s» del PAM.\n"
 
 #: apps/apputil.c:623
 #, c-format
@@ -314,9 +314,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "No s'ha pogut modificar el grup %s: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "S'ha produït un error en eliminar %s: %s.\n"
+msgstr "S'ha produït un error en cercar %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -361,7 +361,7 @@ msgstr "No es pot crear un compte amb l'UID 0.\n"
 #: apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "S'ha produït un error en crear un grup per a '%s' amb el GID %jd: %s\n"
+msgstr "S'ha produït un error en crear un grup per a «%s» amb el GID %jd: %s\n"
 
 #: apps/lnewusers.c:281
 #, c-format
@@ -432,7 +432,7 @@ msgstr "El grup %jd no existeix\n"
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "S'ha produït un error en crear el grup '%s': %s.\n"
+msgstr "S'ha produït un error en crear el grup «%s»: %s.\n"
 
 #: apps/luseradd.c:274
 #, c-format
@@ -527,22 +527,22 @@ msgstr "S'ha produït un error en moure %s cap a %s: %s.\n"
 #: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "no s'ha pogut obrir el fitxer de configuració '%s': %s"
+msgstr "no s'ha pogut obrir el fitxer de configuració «%s»: %s"
 
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "no s'ha pogut obtenir informació del fitxer de configuració '%s': %s"
+msgstr "no s'ha pogut obtenir informació del fitxer de configuració «%s»: %s"
 
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr "el fitxer de configuració '%s' és massa llarg"
+msgstr "el fitxer de configuració «%s» és massa llarg"
 
 #: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "no s'ha pogut llegir el fitxer de configuració '%s': %s"
+msgstr "no s'ha pogut llegir el fitxer de configuració «%s»: %s"
 
 #: lib/error.c:42
 msgid "success"
@@ -635,17 +635,17 @@ msgstr "error desconegut"
 #: lib/modules.c:65
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "no s'ha trobat cap funció d'inicialització %s a '%s'"
+msgstr "no s'ha trobat cap funció d'inicialització %s a «%s»"
 
 #: lib/modules.c:83
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "la versió del mòdul no coincideix a '%s'"
+msgstr "la versió del mòdul no coincideix a «%s»"
 
 #: lib/modules.c:96
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "el mòdul %s no defineix '%s'"
+msgstr "el mòdul %s no defineix «%s»"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -691,35 +691,35 @@ msgstr "el nom comença amb un guió"
 #: lib/user.c:248
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "el nom conté el caràcter invàlid '%c'"
+msgstr "el nom conté el caràcter invàlid «%c»"
 
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "l'usuari %s no té UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "el grup %s no té GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "l'usuari %jd no té nom"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "El grup %jd no existeix\n"
+msgstr "El grup %jd no té nom"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "l'usuari no té ni nom ni UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "el grup no té ni nom ni GID"
 
 #: lib/util.c:193
 #, c-format
@@ -729,7 +729,7 @@ msgstr "s'ha produït un error en bloquejar el fitxer: %s"
 #: modules/files.c:120
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "no s'ha pogut obtenir el context de seguretat de '%s': %s"
+msgstr "no s'ha pogut obtenir el context de seguretat de «%s»: %s"
 
 #: modules/files.c:126
 #, c-format
@@ -740,7 +740,7 @@ msgstr "no s'ha pogut establir el context de seguretat predeterminat: %s"
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
-"no s'ha pogut establir el context de seguretat predeterminat a '%s': %s"
+"no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
 
 #: modules/files.c:176 modules/files.c:549 modules/files.c:874
 #: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
@@ -751,23 +751,23 @@ msgstr ""
 #: modules/files.c:2486 modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "no s'ha pogut obrir '%s': %s"
+msgstr "no s'ha pogut obrir «%s»: %s"
 
 #: modules/files.c:188 modules/files.c:217 modules/files.c:283
 #: modules/files.c:886 modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "no s'ha pogut obtenir informació de '%s': %s"
+msgstr "no s'ha pogut obtenir informació de «%s»: %s"
 
 #: modules/files.c:199
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "s'ha produït un error en crear '%s': %s"
+msgstr "s'ha produït un error en crear «%s»: %s"
 
 #: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "la còpia de seguretat '%s' existeix i no és un fitxer per a dades"
+msgstr "la còpia de seguretat «%s» existeix i no és un fitxer per a dades"
 
 #: modules/files.c:291
 msgid "backup file size mismatch"
@@ -776,7 +776,7 @@ msgstr "la mida del fitxer de còpia de seguretat no coincideix"
 #: modules/files.c:916 modules/files.c:1303
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "no s'ha podut llegir res de '%s': %s"
+msgstr "no s'ha podut llegir res de «%s»: %s"
 
 #: modules/files.c:925 modules/files.c:932
 msgid "entry already present in file"
@@ -786,7 +786,7 @@ msgstr "el registre ja es troba en el fitxer"
 #: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "no s'ha pogut escriure a '%s': %s"
+msgstr "no s'ha pogut escriure a «%s»: %s"
 
 #: modules/files.c:1118 modules/files.c:1177
 #, c-format
@@ -809,8 +809,8 @@ msgstr "no hi ha cap fitxer shadow present -- es deshabilitarà"
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"s'ha produït un error en connectar amb el servidor kadm5 per al servei '%s' "
-"en el regne '%s': %s"
+"s'ha produït un error en connectar amb el servidor kadm5 per al servei «%s» "
+"en el regne «%s»: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -821,7 +821,7 @@ msgstr "s'ha produït un error en inicialitzar la biblioteca del Kerberos"
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr "s'ha produït un error en analitzar el nom d'usuari '%s' pel Kerberos"
+msgstr "s'ha produït un error en analitzar el nom d'usuari «%s» pel Kerberos"
 
 #: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
@@ -841,7 +841,7 @@ msgstr "s'ha creat l'entitat sense atributs %s o %s"
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr "s'ha produït un error en llegir la informació per a '%s' del Kerberos"
+msgstr "s'ha produït un error en llegir la informació per a «%s» del Kerberos"
 
 #: modules/krb5.c:604
 #, c-format
@@ -851,7 +851,7 @@ msgstr "l'entitat no té cap atribut %s"
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "s'ha produït un error en configurar la contrasenya per a '%s'"
+msgstr "s'ha produït un error en configurar la contrasenya per a «%s»"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
@@ -887,7 +887,7 @@ msgstr "no s'ha pogut crear un vincle amb el servidor de LDAP"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr ""
 "no s'ha pogut vincular amb el servidor de LDAP. El primer intent ha estat "
-"com a '%s': %s"
+"com a «%s»: %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -897,7 +897,7 @@ msgstr "l'objecte de l'usuari no tenia atribut %s"
 #: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "s'ha creat l'objecte de l'usuari sense '%s'"
+msgstr "s'ha creat l'objecte de l'usuari sense «%s»"
 
 #: modules/ldap.c:1358
 msgid "could not convert internal data to LDAPMods"
@@ -942,7 +942,7 @@ msgstr "aquest objecte no existeix en el directori LDAP"
 #: modules/ldap.c:1687
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "no s'ha trobat cap atribut '%s'"
+msgstr "no s'ha trobat cap atribut «%s»"
 
 #: modules/ldap.c:1856
 #, c-format
@@ -1064,10 +1064,6 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
 
 #~ msgid "could not search LDAP server"
 #~ msgstr "no s'ha pogut cercar el servidor del LDAP"
