@@ -1,87 +1,88 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Red Hat, Inc.
+# translation of ml.po to Malayalam
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR Red Hat, Inc.
+# Ani Peter <apeter@redhat.com>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-02-21 17:33+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2006-05-03 19:55+0530\n"
+"Last-Translator: Ani Peter <apeter@redhat.com>\n"
+"Language-Team: Malayalam\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 
 #: apps/apputil.c:124 apps/apputil.c:198 apps/apputil.c:234 apps/apputil.c:263
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "`%s' വായിക്കുന്നതില്‍ പിഴവ്: %s"
 
 #: apps/apputil.c:132 apps/apputil.c:208
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr ""
+msgstr "`%s'സൃഷ്ടിയില്‍ പിഴവ് : %s"
 
 #: apps/apputil.c:140 apps/apputil.c:215 apps/apputil.c:310
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "`%s' ഉടമസ്ഥനെ മാറ്റുന്നതിന്‍ പിഴവ്: %s"
 
 #: apps/apputil.c:247 apps/apputil.c:280 apps/apputil.c:296
 #: modules/files.c:261 modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "`%s'എഴുതുന്നതില്‍ പിഴവ്: %s"
 
 #: apps/apputil.c:347 apps/apputil.c:382 apps/apputil.c:399
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "`%s'നീക്കം ചെയ്യുന്നതില്‍ പിഴവ് : %s"
 
 #: apps/apputil.c:550 apps/apputil.c:554
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "Failed to drop privileges.\n"
 
 #: apps/apputil.c:563
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "ഇന്‍റേണല്‍ പിഴവ്.\n"
 
 #: apps/apputil.c:584
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%sന്‍റെ ഫിന്‍ഗറ്‍ ഇന്‍ഫോ മാറ്റുവാന്‍ %sന് അധികാരമില്ല \n"
 
 #: apps/apputil.c:586
 msgid "Unknown user context"
-msgstr ""
+msgstr "Unknown user context"
 
 #: apps/apputil.c:594
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwdന് ഡീഫോള്‍ട്ട് കോണ്‍ട്ടെക്സ്റ്റ് സെറ്റ് ചെയ്യുമാന്‍ സാധ്യമല്ല\n"
 
 #: apps/apputil.c:603
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "PAM initialise ചെയ്യുന്നതില്‍ പിഴവ്.\n"
 
 #: apps/apputil.c:613 apps/apputil.c:640
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "%sന് ഓഥന്‍റിക്കേഷന്‍ പരാജയപ്പട്ടു.\n"
 
 #: apps/apputil.c:621
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "PAMന്‍റെ ഇന്‍റേണല്‍ പിഴവ് `%s'.\n"
 
 #: apps/apputil.c:626
 #, c-format
@@ -91,25 +92,25 @@ msgstr ""
 #: apps/apputil.c:630
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "യൂസറുകള്‍ തമ്മില്‍ പൊരുത്തക്കേട്.\n"
 
 #: apps/lchage.c:135 apps/lid.c:111 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[OPTION...] യൂസറ്‍"
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:114 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "ആറ്‍ഗ്യിമെന്‍റുകള്‍ പാഴ്സ് ചെയ്യുന്നതില്‍ പിഴവ്: %s.\n"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "യൂസറ്‍നെയിം വ്യക്തമാക്കിയിട്ടില്ല.\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:158 apps/lnewusers.c:81
@@ -117,81 +118,81 @@ msgstr ""
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "Error initializing %s: %s.\n"
 
 #: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "%s എന്ന യൂസറ്‍ നിലവിലില്ല.\n"
 
 #: apps/lchage.c:177
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "അക്കൌണ്ട് ലോക്ക് ചെയ്തിരിക്കുന്നു.\n"
 
 #: apps/lchage.c:179
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "അക്കൌണ്ട് ലോക്ക് ചെയ്തിട്ടില്ല.\n"
 
 #: apps/lchage.c:184
 #, c-format
 msgid "Minimum:\t%d\n"
-msgstr ""
+msgstr "ഏറ്റവും കുറവ്:\t%d\n"
 
 #: apps/lchage.c:188
 #, c-format
 msgid "Maximum:\t%d\n"
-msgstr ""
+msgstr "പരമാവധി:\t%d\n"
 
 #: apps/lchage.c:192
 #, c-format
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "മുന്നറിയിപ്പ്:\t%d\n"
 
 #: apps/lchage.c:196
 #, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
+msgstr "ഇന്നാക്ക്റ്റീവ്:\t%d\n"
 
 #: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
 msgid "Never"
-msgstr ""
+msgstr "ഒരിക്കലും ഇല്ല"
 
 #: apps/lchage.c:202
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "ഒടുവിലത്തെ മാറ്റം:\t%s\n"
 
 #: apps/lchage.c:211
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "പാസ്വേഡ് കാലാവധി തീരുന്നു:\t%s\n"
 
 #: apps/lchage.c:221
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "പാസ്വേഡ് ഇന്നാക്ക്റ്റീവ്:\t%s\n"
 
 #: apps/lchage.c:228
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "അക്കൌണ്ടിന്‍റെ കാലാവധി തീരുന്നു:\t%s\n"
 
 #: apps/lchage.c:278
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr ""
+msgstr "Failed to modify aging information for %s: %s\n"
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[OPTION...] [യൂസറ്‍]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:145
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "യൂസറിന്‍റെ പേര് വ്യക്തമാക്കിയിട്ടില്ല, uid %dയ്ക്ക് പേരില്ല.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -200,31 +201,31 @@ msgstr ""
 
 #: apps/lchfn.c:144
 msgid "Full Name"
-msgstr ""
+msgstr "മുഴുവന്‍ പേര്"
 
 #: apps/lchfn.c:158
 msgid "Surname"
-msgstr ""
+msgstr "സറ്‍നെയിം"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
-msgstr ""
+msgstr "തന്നിരിക്കുന്ന പേര്"
 
 #: apps/lchfn.c:183
 msgid "Office"
-msgstr ""
+msgstr "ഓഫീസ്"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr ""
+msgstr "ഓഫീസിലെ ഫോണ്‍ നംമ്പറ്‍"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr ""
+msgstr "വീട്ടിലെ ഫോണ്‍ നംമ്പറ്‍"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr ""
+msgstr "ഈ-മെയില്‍ അഡ്രസ്സ്"
 
 #: apps/lchfn.c:228
 #, c-format
@@ -243,34 +244,34 @@ msgstr ""
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%sന്‍റെ ഷെല്ല് മാറ്റുന്നു.\n"
 
 #: apps/lchsh.c:118
 msgid "New Shell"
-msgstr ""
+msgstr "പുതിയ ഷെല്ല്"
 
 #: apps/lchsh.c:139
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "ഷെല്ല് മാറ്റിയിരിക്കുന്നു.\n"
 
 #: apps/lchsh.c:142
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "ഷെല്ല് മാറ്റിയിട്ടില്ല:%s\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[OPTION...] ഗ്രൂപ്പ്"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "ഗ്രൂപ്പ് നെയിം വ്യക്തമാക്കിയിട്ടില്ല.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "അസാധുവായ ഗ്രൂപ്പ് ID%s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
@@ -280,22 +281,22 @@ msgstr ""
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "%s എന്ന ഗ്രൂപ്പ് നിലവിലില്ല.\n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "%s എന്ന ഗ്രൂപ്പ നീക്കം ചെയ്യുവാന്‍ സാധിക്കുന്നില്ല: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "-Lും -Uും വ്യക്തമാക്കിയിട്ടുണ്ട്.       \n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "%s എന്ന ഗ്രൂപ്പിന് പാസ്വേഡ് സെറ്റ് ചെയ്യുന്നതില്‍ പരാജയപ്പെട്ടു: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
@@ -329,12 +330,12 @@ msgstr ""
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[OPTION...]"
 
 #: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "`%s' തുറക്കുന്നതില്‍ പിഴവ്: %s.\n"
 
 #: apps/lnewusers.c:124
 #, c-format
@@ -344,7 +345,7 @@ msgstr ""
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "അസാധുവായ യൂസറ്‍ ID %s\n"
 
 #: apps/lnewusers.c:141
 msgid "Refusing to create account with UID 0.\n"
@@ -378,20 +379,20 @@ msgstr ""
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%sന് പാസ്വേഡ് മാറ്റുന്നു.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "പുതിയ പാസ്വേഡ്"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "പുതിയ പാസ്വേഡ് (ഉറപ്പ് വരുത്തുക)"
 
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "പാസ്വേഡുകള്‍ തമ്മില്‍ ചേരുന്നില്ല.\n"
 
 #: apps/lpasswd.c:133
 #, c-format
@@ -926,7 +927,7 @@ msgstr ""
 
 #: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL Authorization User"
 
 #: modules/sasldb.c:124
 #, c-format
@@ -1016,3 +1017,4 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
+
