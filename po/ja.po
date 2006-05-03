@@ -1,22 +1,23 @@
+# translation of ja.po to 
 # translation of ja.po to Japanese
 # libuser jaj.po
 # Copyright (C) Red Hat, Inc.
 # Yukihiro Nakai <ynakai@redhat.com>, 2001.
-# James Hashida <khashida@redhat.com>, 2002
-# Hirofumi Saito <hi_saito@yk.rim.or.jp>, 2004, 2005.
+# James Hashida <khashida@redhat.com>, 2002.
+# Hirofumi Saito <hi_saito@yk.rim.or.jp>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-11-27 21:12+0900\n"
-"Last-Translator: Hirofumi Saito <hi_saito@yk.rim.or.jp>\n"
-"Language-Team: Japanese <fedora-trans-ja@redhat.com>\n"
+"PO-Revision-Date: 2006-05-03 14:59+1000\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -315,9 +316,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "グループ %s は修正できませんでした: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%sの削除でエラー: %s。\n"
+msgstr "%sの検索でエラー: %s。\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -692,30 +693,30 @@ msgstr "名前に無効な文字`%c'があります"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "ユーザ %s には UID がありません。"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "グループ %s には GID がありません。"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "ユーザ %jd には 名前がありません。"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "グループ %jd は存在しません\n"
+msgstr "グループ %jd にはありません。"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ユーザには名前もしくは UID がありません。"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "グループには名前もしくは GID がありません。"
 
 #: lib/util.c:193
 #, c-format
@@ -1052,39 +1053,3 @@ msgstr "デフォルトユーザ属性を取得中:\n"
 msgid "Copying user structure:\n"
 msgstr "ユーザ構造体をコピー中:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "シェル変更不可能: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "LDAPサーバを検出出来ませんでした。"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAPサーバはルートDSEを持たないようです。"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "LDAP削除名の名前のマッピングでエラー"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "LDAPベース削除名の名前のマッピングでエラー"
-
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "`%s' にデフォルトのセキュリティー情報をリセットできませんでした: %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "ユーザーの作成中にCyrus SASLエラー: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "ユーザーの削除でCyrus SASLエラー: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "%sの初期化でエラー。\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "グループ%sは削除できませんでした。\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "グループ%sは修正されませんでした。\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "モジュールの初期化でエラー"
