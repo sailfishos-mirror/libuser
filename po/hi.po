@@ -1,21 +1,21 @@
 # translation of hi.po to Hindi
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Rajesh Ranjan <rranjan@redhat.com>, 2004, 2005.
+# Rajesh Ranjan <rranjan@redhat.com>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-12-26 12:01+0530\n"
+"PO-Revision-Date: 2006-05-04 15:35+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 
@@ -316,9 +316,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "%s समूह को परिवर्तित नहीं किया जा सका: %ss\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s हटाने में त्रुटि: %s।\n"
+msgstr "%s देखने में त्रुटि: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -1053,6 +1053,3 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "शैल नहीं बदला गया:%s\n"
