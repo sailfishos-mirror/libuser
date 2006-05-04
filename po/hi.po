@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-05-04 15:35+0530\n"
+"PO-Revision-Date: 2006-05-04 16:39+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -693,30 +693,30 @@ msgstr "नाम में अनुचित अक्षर `%c' समाह
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "उपयोक्ता के पास %s कोई UID नहीं है."
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "समूह के पास %s कोई GID नहीं है"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "उपयोक्ता %jd के पास कोई नाम नहीं है"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "%jd समूह उपस्थित नहीं है.\n"
+msgstr "समूह %jd का कोई नाम नहीं है"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "उपयोक्ता के पास कोई नाम या UID नहीं है"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "समूह के पास न तो नाम है न GID."
 
 #: lib/util.c:193
 #, c-format
