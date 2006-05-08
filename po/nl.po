@@ -1,21 +1,21 @@
 # Dutch translation of libuser
-# Copyright (C) 2003, 2004, 2005 The Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2006 The Free Software Foundation, Inc.
 # This file is distributed under the same license as the libuser package.
-# Tino Meinen <a.t.meinen@chello.nl>, 2003.
-# Peter van Egdom <p.van.egdom@gmail.com>, 2004, 2005.
 #
+# Tino Meinen <a.t.meinen@chello.nl>, 2003.
+# Peter van Egdom <p.van.egdom@gmail.com>, 2004, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-20 20:55+0200\n"
+"PO-Revision-Date: 2006-05-08 20:32+0200\n"
 "Last-Translator: Peter van Egdom <p.van.egdom@gmail.com>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -315,9 +315,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Groep %s kon niet worden aangepast: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Fout bij verwijderen %s: %s.\n"
+msgstr "Fout bij opzoeken %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -693,30 +693,30 @@ msgstr "naam bevat ongeldig teken `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "gebruiker %s heeft geen UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "groep %s heeft geen GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "gebruiker %jd heeft geen naam"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Groep %jd bestaat niet\n"
+msgstr "groep %jd heeft geen naam"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "gebruiker heeft zowel geen naam als geen UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "groep heeft zowel geen naam als geen GID"
 
 #: lib/util.c:193
 #, c-format
