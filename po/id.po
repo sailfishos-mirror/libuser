@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-11-01 00:05+0700\n"
+"PO-Revision-Date: 2006-05-10 01:05+0700\n"
 "Last-Translator: Teguh DC <dheche@bradjamoesti.or.id>\n"
 "Language-Team: Linux Indonesia <http://www.linux.or.id>\n"
 "MIME-Version: 1.0\n"
@@ -313,9 +313,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Grup %s tidak dapat diubah: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Salah saat menghapus %s: %s.\n"
+msgstr "Salah saat mencari %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -692,30 +692,30 @@ msgstr "nama mengandung karakter `%c' yang tidak valid"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "user %s tidak memiliki UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "grup %s tidak memiliki GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "user %jd tidak memiliki nama"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Grup %jd tidak ada\n"
+msgstr "Grup %jd tidak memiliki nama"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "user tidak memiliki nama ataupun UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "grup tidak memiliki nama atau GID"
 
 #: lib/util.c:193
 #, c-format
