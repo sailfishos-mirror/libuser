@@ -9,43 +9,55 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-11 11:27-0500\n"
-"Last-Translator: Daniel Cote <dcote@uottawa.ca>\n"
+"PO-Revision-Date: 2006-05-26 17:31+0100\n"
+"Last-Translator: Philippe Villiers <kissifrot@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
-#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
+#: apps/apputil.c:123
+#: apps/apputil.c:191
+#: apps/apputil.c:224
+#: apps/apputil.c:251
 #: modules/files.c:246
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Erreur lors de la lecture de `%s' : %s"
 
-#: apps/apputil.c:131 apps/apputil.c:200
+#: apps/apputil.c:131
+#: apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Erreur lors de la création de `%s' : %s"
 
-#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
+#: apps/apputil.c:139
+#: apps/apputil.c:207
+#: apps/apputil.c:297
 #: modules/files.c:229
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Erreur lors du changement de propriétaire de `%s' : %s"
 
-#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
-#: modules/files.c:261 modules/files.c:275
+#: apps/apputil.c:236
+#: apps/apputil.c:268
+#: apps/apputil.c:284
+#: modules/files.c:261
+#: modules/files.c:275
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Erreur lors de l'écriture de `%s' : %s"
 
-#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
+#: apps/apputil.c:346
+#: apps/apputil.c:381
+#: apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Erreur lors de la suppression de `%s': %s"
 
-#: apps/apputil.c:547 apps/apputil.c:551
+#: apps/apputil.c:547
+#: apps/apputil.c:551
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Impossible de supprimer les privilèges.\n"
@@ -74,7 +86,8 @@ msgstr "Impossible de définir le contexte par défaut pour /etc/passwd\n"
 msgid "Error initializing PAM.\n"
 msgstr "Erreur lors de l'initialisation de PAM.\n"
 
-#: apps/apputil.c:610 apps/apputil.c:637
+#: apps/apputil.c:610
+#: apps/apputil.c:637
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Authentification échouée pour %s.\n"
@@ -94,34 +107,64 @@ msgstr "Utilisateur authentifié inconnu.\n"
 msgid "User mismatch.\n"
 msgstr "Non correspondance de l'utilisateur.\n"
 
-#: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
-#: apps/luserdel.c:65 apps/lusermod.c:90
+#: apps/lchage.c:135
+#: apps/lid.c:117
+#: apps/lpasswd.c:70
+#: apps/luseradd.c:92
+#: apps/luserdel.c:65
+#: apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[OPTION...] utilisateur"
 
-#: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
-#: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
+#: apps/lchage.c:138
+#: apps/lchfn.c:76
+#: apps/lchsh.c:62
+#: apps/lgroupadd.c:69
+#: apps/lgroupdel.c:60
+#: apps/lgroupmod.c:88
+#: apps/lid.c:120
+#: apps/lnewusers.c:70
+#: apps/lpasswd.c:73
+#: apps/luseradd.c:95
+#: apps/luserdel.c:68
+#: apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Erreur lors de l'analyse des arguments : %s.\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:147
+#: apps/lpasswd.c:87
+#: apps/luseradd.c:110
+#: apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Aucun nom d'utilisateur spécifié.\n"
 
-#: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
-#: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
-#: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
+#: apps/lchage.c:157
+#: apps/lchfn.c:110
+#: apps/lchsh.c:96
+#: apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79
+#: apps/lgroupmod.c:120
+#: apps/lid.c:164
+#: apps/lnewusers.c:81
+#: apps/lpasswd.c:99
+#: apps/luseradd.c:132
+#: apps/luserdel.c:85
+#: apps/lusermod.c:145
+#: samples/enum.c:60
+#: samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Erreur lors de l'initialisation de %s : %s.\n"
 
-#: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
-#: apps/luserdel.c:93 apps/lusermod.c:159
+#: apps/lchage.c:166
+#: apps/lchfn.c:118
+#: apps/lchsh.c:104
+#: apps/lpasswd.c:148
+#: apps/luserdel.c:93
+#: apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "L'utilisateur %s n'existe pas.\n"
@@ -156,7 +199,10 @@ msgstr "Avertissement :\t%d\n"
 msgid "Inactive:\t%d\n"
 msgstr "Désactivé:\t%d\n"
 
-#: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
+#: apps/lchage.c:200
+#: apps/lchage.c:207
+#: apps/lchage.c:216
+#: apps/lchage.c:226
 msgid "Never"
 msgstr "Jamais"
 
@@ -185,11 +231,14 @@ msgstr "Expiration du compte:\t%s\n"
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Impossible de modifier les informations d'expiration pour %s : %s.\n"
 
-#: apps/lchfn.c:73 apps/lchsh.c:59
+#: apps/lchfn.c:73
+#: apps/lchsh.c:59
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [utilisateur]"
 
-#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
+#: apps/lchfn.c:92
+#: apps/lchsh.c:78
+#: apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Aucun nom d'utilisateur spécifié, aucun nom pour uid %d.\n"
@@ -250,7 +299,8 @@ msgstr "Changer de shell pour %s.\n"
 msgid "New Shell"
 msgstr "Nouveau shell"
 
-#: apps/lchsh.c:125 apps/lchsh.c:144
+#: apps/lchsh.c:125
+#: apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Shell inchangé : %s.\n"
@@ -259,16 +309,22 @@ msgstr "Shell inchangé : %s.\n"
 msgid "Shell changed.\n"
 msgstr "Shell changé.\n"
 
-#: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
+#: apps/lgroupadd.c:66
+#: apps/lgroupdel.c:57
+#: apps/lgroupmod.c:85
 msgid "[OPTION...] group"
 msgstr "[OPTION...] groupe"
 
-#: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
+#: apps/lgroupadd.c:78
+#: apps/lgroupdel.c:69
+#: apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Aucun nom de groupe spécifié.\n"
 
-#: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
+#: apps/lgroupadd.c:91
+#: apps/lgroupmod.c:108
+#: apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "ID groupe %s invalide\n"
@@ -278,7 +334,9 @@ msgstr "ID groupe %s invalide\n"
 msgid "Group creation failed: %s\n"
 msgstr "La création du groupe a échoué : %s\n"
 
-#: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
+#: apps/lgroupdel.c:87
+#: apps/lgroupmod.c:133
+#: apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Le groupe %s n'existe pas.\n"
@@ -288,12 +346,14 @@ msgstr "Le groupe %s n'existe pas.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Le groupe %s ne peut pas être supprimé : %s\n"
 
-#: apps/lgroupmod.c:126 apps/lusermod.c:152
+#: apps/lgroupmod.c:126
+#: apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Aussi bien -L que -U spécifiés.\n"
 
-#: apps/lgroupmod.c:140 apps/lgroupmod.c:149
+#: apps/lgroupmod.c:140
+#: apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Erreur lors de la configuration du mot de passe du groupe %s : %s\n"
@@ -308,15 +368,16 @@ msgstr "Le groupe %s ne peut pas être verrouillé : %s\n"
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Le groupe %s ne peut pas être déverrouillé : %s\n"
 
-#: apps/lgroupmod.c:251 apps/lgroupmod.c:277
+#: apps/lgroupmod.c:251
+#: apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Le groupe %s ne peut pas être modifié : %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Erreur lors de la suppression de %s : %s.\n"
+msgstr "Erreur lors de la vérification de %s : %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -345,10 +406,11 @@ msgstr "Erreur lors de la lecture de `%s': %s.\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
+msgstr "Erreur lors de la création d'un compte pour `%s': ligne mal formatée.\n"
 
-#: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
+#: apps/lnewusers.c:134
+#: apps/luseradd.c:119
+#: apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "ID utilisateur %s invalide\n"
@@ -405,17 +467,17 @@ msgstr "Les mots de passe ne sont pas les mêmes, essayez de nouveau.\n"
 msgid "Password change canceled.\n"
 msgstr "Changement de mot de passe annulé.\n"
 
-#: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
+#: apps/lpasswd.c:190
+#: apps/luseradd.c:284
+#: apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -427,7 +489,8 @@ msgstr "Mot de passe changé.\n"
 msgid "Group %jd does not exist\n"
 msgstr "Le groupe %jd n'existe pas\n"
 
-#: apps/luseradd.c:200 apps/luseradd.c:213
+#: apps/luseradd.c:200
+#: apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Erreur lors de la création du groupe `%s' : %s\n"
@@ -482,11 +545,11 @@ msgstr "%s n'avait pas de répertoire personnel.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Erreur lors de la suppression de %s : %s.\n"
 
-#: apps/lusermod.c:168 apps/lusermod.c:181
+#: apps/lusermod.c:168
+#: apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
@@ -531,9 +594,7 @@ msgstr "impossible d'ouvrir le fichier de configuration `%s' : %s"
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"impossible d'exécuter la fonction stat sur le fichier de configuration `%"
-"s' : %s"
+msgstr "impossible d'exécuter la fonction stat sur le fichier de configuration `%s' : %s"
 
 #: lib/config.c:133
 #, c-format
@@ -652,7 +713,8 @@ msgstr "le module `%s' ne définit pas `%s'"
 msgid "error reading terminal attributes"
 msgstr "erreur lors de la lecture des attributs du terminal"
 
-#: lib/prompt.c:75 lib/prompt.c:87
+#: lib/prompt.c:75
+#: lib/prompt.c:87
 msgid "error setting terminal attributes"
 msgstr "erreur lors de la configuration des attributs du terminal"
 
@@ -694,33 +756,35 @@ msgstr "le nom commence par un trait d'union"
 msgid "name contains invalid char `%c'"
 msgstr "le nom contient un caractère incorrect '%c'"
 
-#: lib/user.c:295 lib/user.c:343
+#: lib/user.c:295
+#: lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "l'utilisateur %s n'a pas de GID"
 
-#: lib/user.c:318 lib/user.c:344
+#: lib/user.c:318
+#: lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "le groupe %s n'a pas de GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "l'utilisateur %jd n'a pas de nom"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Le groupe %jd n'existe pas\n"
+msgstr "Le groupe %jd n'a pas de nom"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "l'utilisateur n'a ni nom ni UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "le groupe n'a ni nom ni GID"
 
 #: lib/util.c:193
 #, c-format
@@ -742,19 +806,35 @@ msgstr "impossible de définir le contexte de sécurité par défaut : %s"
 msgid "couldn't set default security context to `%s': %s"
 msgstr "impossible de définir le contexte de sécurité par défaut sur `%s' : %s"
 
-#: modules/files.c:176 modules/files.c:549 modules/files.c:874
-#: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
-#: modules/files.c:1588 modules/files.c:1794 modules/files.c:1978
-#: modules/files.c:1995 modules/files.c:2084 modules/files.c:2103
-#: modules/files.c:2171 modules/files.c:2192 modules/files.c:2289
-#: modules/files.c:2308 modules/files.c:2367 modules/files.c:2386
-#: modules/files.c:2486 modules/files.c:2501
+#: modules/files.c:176
+#: modules/files.c:549
+#: modules/files.c:874
+#: modules/files.c:1141
+#: modules/files.c:1282
+#: modules/files.c:1503
+#: modules/files.c:1588
+#: modules/files.c:1794
+#: modules/files.c:1978
+#: modules/files.c:1995
+#: modules/files.c:2084
+#: modules/files.c:2103
+#: modules/files.c:2171
+#: modules/files.c:2192
+#: modules/files.c:2289
+#: modules/files.c:2308
+#: modules/files.c:2367
+#: modules/files.c:2386
+#: modules/files.c:2486
+#: modules/files.c:2501
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "impossible d'ouvrir `%s' : %s"
 
-#: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:886 modules/files.c:1294
+#: modules/files.c:188
+#: modules/files.c:217
+#: modules/files.c:283
+#: modules/files.c:886
+#: modules/files.c:1294
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "impossible d'exécuter la fonction stat `%s' : %s"
@@ -773,31 +853,41 @@ msgstr "le fichier de sauvegarde `%s' existe et il n'est pas standard"
 msgid "backup file size mismatch"
 msgstr "différence de taille du fichier de sauvegarde"
 
-#: modules/files.c:916 modules/files.c:1303
+#: modules/files.c:916
+#: modules/files.c:1303
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "impossible de lire à partir de `%s' : %s"
 
-#: modules/files.c:925 modules/files.c:932
+#: modules/files.c:925
+#: modules/files.c:932
 msgid "entry already present in file"
 msgstr "entrée déjà présente dans le fichier"
 
-#: modules/files.c:939 modules/files.c:949 modules/files.c:960
-#: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
+#: modules/files.c:939
+#: modules/files.c:949
+#: modules/files.c:960
+#: modules/files.c:1351
+#: modules/files.c:1359
+#: modules/files.c:1367
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "impossible d'écrire sur `%s' : %s"
 
-#: modules/files.c:1118 modules/files.c:1177
+#: modules/files.c:1118
+#: modules/files.c:1177
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "l'objet n'a pas d'attribut %s"
 
-#: modules/files.c:1828 modules/ldap.c:1552 modules/ldap.c:1825
+#: modules/files.c:1828
+#: modules/ldap.c:1552
+#: modules/ldap.c:1825
 msgid "error encrypting password"
 msgstr "erreur lors du cryptage du mot de passe"
 
-#: modules/files.c:2773 modules/files.c:2851
+#: modules/files.c:2773
+#: modules/files.c:2851
 msgid "not executing with superuser privileges"
 msgstr "exécution sans les privilèges du super-utilisateur"
 
@@ -808,22 +898,34 @@ msgstr "pas de fichier shadow présent -- désactivation."
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erreur lors de la connexion au serveur kadm5 pour le service `%s' dans la "
-"zone `%s' : %s"
+msgstr "erreur lors de la connexion au serveur kadm5 pour le service `%s' dans la zone `%s' : %s"
 
-#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
-#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
+#: modules/krb5.c:136
+#: modules/krb5.c:202
+#: modules/krb5.c:301
+#: modules/krb5.c:389
+#: modules/krb5.c:441
+#: modules/krb5.c:529
+#: modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "erreur lors de l'initialisation de la bibliothèque kerberos"
 
-#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
-#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
+#: modules/krb5.c:143
+#: modules/krb5.c:223
+#: modules/krb5.c:333
+#: modules/krb5.c:341
+#: modules/krb5.c:409
+#: modules/krb5.c:462
+#: modules/krb5.c:550
+#: modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "erreur lors de l'analyse du nom d'utilisateur '%s' pour kerberos"
 
-#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
+#: modules/krb5.c:213
+#: modules/krb5.c:400
+#: modules/krb5.c:452
+#: modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "la structure de l'entité n'a pas d'attribut %s ou %s"
@@ -838,7 +940,8 @@ msgstr "l'entité n'a pas d'attribut %s ou %s"
 msgid "entity was created with no %s or %s attributes"
 msgstr "l'entité a été créée sans attribut %s ou %s"
 
-#: modules/krb5.c:475 modules/krb5.c:563
+#: modules/krb5.c:475
+#: modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "erreur lors de la lecture des informations de kerberos pour `%s'"
@@ -885,9 +988,7 @@ msgstr "impossible de se connecter au serveur LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"impossible de se connecter au serveur LDAP, première tentative en tant que `%"
-"s' : %s"
+msgstr "impossible de se connecter au serveur LDAP, première tentative en tant que `%s' : %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -908,7 +1009,8 @@ msgstr "impossible de convertir les données internes en LDAPMods"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "erreur lors de la création de l'entrée de répertoire LDAP : %s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1617
+#: modules/ldap.c:1397
+#: modules/ldap.c:1617
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "erreur lors de la modification de l'entrée de répertoire LDAP : %s"
@@ -928,7 +1030,9 @@ msgstr "l'objet n'avait pas d'attribut %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "erreur lors de la suppression de l'entrée de répertoire LDAP : %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
+#: modules/ldap.c:1522
+#: modules/ldap.c:1538
+#: modules/ldap.c:1650
 #: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
@@ -946,9 +1050,7 @@ msgstr "aucun attribut `%s' trouvé"
 #: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
-"erreur lors de la configuration du mot de passe dans le répertoire LDAP pour "
-"%s : %s."
+msgstr "erreur lors de la configuration du mot de passe dans le répertoire LDAP pour %s : %s."
 
 #: modules/ldap.c:2468
 msgid "LDAP Server Name"
@@ -984,7 +1086,8 @@ msgstr "Erreur SASL Cyrus lors de la création de l'utilisateur : %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Erreur SASL Cyrus lors de la suppression de l'utilisateur : %s"
 
-#: modules/sasldb.c:524 modules/sasldb.c:532
+#: modules/sasldb.c:524
+#: modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Erreur lors de l'initialisation SASL Cyrus : %s"
@@ -995,8 +1098,7 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:583
 msgid "error removing home directory for user"
-msgstr ""
-"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:661
 msgid "error moving home directory for user"
@@ -1067,38 +1169,28 @@ msgstr "Copie de la structure de l'utilisateur :\n"
 #, fuzzy
 #~ msgid "Shell not changed: input error.\n"
 #~ msgstr "Shell inchangé : %s.\n"
-
 #~ msgid "could not search LDAP server"
 #~ msgstr "impossible de chercher le serveur LDAP"
-
 #~ msgid "LDAP server appears to have no root DSE"
 #~ msgstr "Le serveur LDAP n'a pas de DSE racine"
-
 #~ msgid "error mapping name to LDAP distinguished name"
 #~ msgstr "erreur de mappage du nom sur le nom distingué LDAP"
-
 #~ msgid "error mapping name to LDAP base distinguished name"
 #~ msgstr "erreur de mappage du nom sur le nom distingué de base LDAP"
-
 #~ msgid "couldn't reset default security context to `%s': %s"
 #~ msgstr ""
 #~ "impossible de réinitialiser le contexte de sécurité par défaut sur `%s' : "
 #~ "%s"
-
 #~ msgid "Cyrus SASL error creating user: %s: %s"
 #~ msgstr "Erreur SASL Cyrus lors de la création de l'utilisateur : %s : %s"
-
 #~ msgid "Cyrus SASL error removing user: %s: %s"
 #~ msgstr "Erreur SASL Cyrus lors de la suppression de l'utilisateur : %s : %s"
-
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Erreur lors de l'initialisation de %s.\n"
-
 #~ msgid "Group %s could not be deleted.\n"
 #~ msgstr "Le groupe %s ne peux pas être supprimé.\n"
-
 #~ msgid "Group %s could not be modified.\n"
 #~ msgstr "Le groupe %s ne peut pas être modifié.\n"
-
 #~ msgid "error initializing module"
 #~ msgstr "erreur lors de l'initialisation du module"
+
