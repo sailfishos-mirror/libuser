@@ -13,14 +13,13 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-05-22 18:37-0300\n"
+"PO-Revision-Date: 2006-05-27 15:46-0300\n"
 "Last-Translator: Rodrigo Padula <rodrigopadula@localhost.localdomain>\n"
 "Language-Team:  <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -319,9 +318,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "O grupo %s não pôde ser modificado: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Erro ao apagar %s: %s.\n"
+msgstr "Erro ao procurar %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
