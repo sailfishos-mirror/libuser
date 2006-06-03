@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-12-03 18:31+0200\n"
+"PO-Revision-Date: 2005-05-04 12:26+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -315,9 +315,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Grupa %s nie może być modyfikowana: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Błąd podczas usuwania %s: %s.\n"
+msgstr "Błąd podczas wyszukiwania %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -694,30 +694,30 @@ msgstr "nazwa zawiera nieprawidłowy znak `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "użytkownik %s nie posiada UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "grupa %s nie posiada GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "użytkownik %jd nie posiada nazwy"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Grupa %jd nie istnieje\n"
+msgstr "grupa %jd nie posiada nazwy"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "użytkownik nie posiada ani nazwy, ani UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "grupa nie posiada ani nazwy, ani GID"
 
 #: lib/util.c:193
 #, c-format
@@ -1053,7 +1053,3 @@ msgstr "Pobieranie atrybutów domyślnego użytkownika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopiowanie struktury użytkownika:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Powłoka nie została zmieniona: %s\n"
