@@ -1,13 +1,13 @@
 # Norwegian bokmål translation of libuser.
 # Copyright (C) 2001 Red Hat, Inc.
 # Trond Eivind Glomsrød <teg@redhat.com>, 2001.
-# Kjartan Maraas  <kmaraas@gnu.org>, 2001-2005.
+# Kjartan Maraas  <kmaraas@gnu.org>, 2001-2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-10-18 21:18+0200\n"
+"PO-Revision-Date: 2006-06-12 14:45+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -311,9 +311,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Kunne ikke endre gruppe %s: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Feil under fjerning av %s: %s.\n"
+msgstr "Feil under oppslag av %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -689,30 +689,30 @@ msgstr "navnet inneholder ugyldig tegn «%c»"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "bruker %s har ingen UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "gruppe %s har ingen GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "bruker %jd har ikke navn"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Gruppe %jd eksisterer ikke\n"
+msgstr "Gruppe %jd har ikke navn"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "bruker har hverken navn eller en UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "gruppen har hverken et navn eller en GID"
 
 #: lib/util.c:193
 #, c-format
@@ -1049,13 +1049,3 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Skallet ble ikke endret: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "kunne ikke søke på LDAP-tjener"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP-tjener ser ikke ut til å ha en rot-DSE"
