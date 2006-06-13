@@ -1,47 +1,56 @@
+# translation of mr.po to Marathi
 # Marathi translations for PACKAGE package.
 # Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Automatically generated, 2004.
+# Rahul Bhalerao <rbhalera@redhat.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2003-02-24 23:52-0500\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2006-06-13 14:34+0530\n"
+"Last-Translator: Rahul Bhalerao <rbhalera@redhat.com>\n"
+"Language-Team: Marathi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
 #, c-format
+#, fuzzy
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
+#, fuzzy
 msgid "Error creating `%s': %s"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
 #, c-format
+#, fuzzy
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
 #, c-format
+#, fuzzy
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
+#, fuzzy
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:547 apps/apputil.c:551
 #, c-format
@@ -59,8 +68,9 @@ msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
 #: apps/apputil.c:583
+#, fuzzy
 msgid "Unknown user context"
-msgstr ""
+msgstr "अपरिचित"
 
 #: apps/apputil.c:591
 #, c-format
@@ -69,13 +79,15 @@ msgstr ""
 
 #: apps/apputil.c:600
 #, c-format
+#, fuzzy
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/apputil.c:610 apps/apputil.c:637
 #, c-format
+#, fuzzy
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "अधिप्रमाणन"
 
 #: apps/apputil.c:618
 #, c-format
@@ -84,8 +96,9 @@ msgstr ""
 
 #: apps/apputil.c:623
 #, c-format
+#, fuzzy
 msgid "Unknown user authenticated.\n"
-msgstr ""
+msgstr "अपरिचित"
 
 #: apps/apputil.c:627
 #, c-format
@@ -101,22 +114,25 @@ msgstr ""
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
+#, fuzzy
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
+#, fuzzy
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
+#, fuzzy
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
@@ -146,8 +162,9 @@ msgstr ""
 
 #: apps/lchage.c:192
 #, c-format
+#, fuzzy
 msgid "Warning:\t%d\n"
-msgstr ""
+msgstr "ताकीद"
 
 #: apps/lchage.c:196
 #, c-format
@@ -165,13 +182,15 @@ msgstr ""
 
 #: apps/lchage.c:211
 #, c-format
+#, fuzzy
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: apps/lchage.c:221
 #, c-format
+#, fuzzy
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: apps/lchage.c:228
 #, c-format
@@ -189,8 +208,9 @@ msgstr ""
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
+#, fuzzy
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -245,8 +265,9 @@ msgid "Changing shell for %s.\n"
 msgstr ""
 
 #: apps/lchsh.c:118
+#, fuzzy
 msgid "New Shell"
-msgstr ""
+msgstr "नविन"
 
 #: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
@@ -263,8 +284,9 @@ msgstr ""
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
+#, fuzzy
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
@@ -313,23 +335,27 @@ msgstr ""
 
 #: apps/lid.c:47
 #, c-format
+#, fuzzy
 msgid "Error looking up %s: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lid.c:133
 #, c-format
+#, fuzzy
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lid.c:137
 #, c-format
+#, fuzzy
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lid.c:147
 #, c-format
+#, fuzzy
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
@@ -337,13 +363,15 @@ msgstr ""
 
 #: apps/lnewusers.c:90
 #, c-format
+#, fuzzy
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:124
 #, c-format
+#, fuzzy
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -356,28 +384,33 @@ msgstr ""
 
 #: apps/lnewusers.c:223
 #, c-format
+#, fuzzy
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:281
 #, c-format
+#, fuzzy
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:295
 #, c-format
+#, fuzzy
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:309
 #, c-format
+#, fuzzy
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lnewusers.c:315
 #, c-format
+#, fuzzy
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lpasswd.c:84
 #, c-format
@@ -385,12 +418,14 @@ msgid "Changing password for %s.\n"
 msgstr ""
 
 #: apps/lpasswd.c:111
+#, fuzzy
 msgid "New password"
-msgstr ""
+msgstr "नविन"
 
 #: apps/lpasswd.c:114
+#, fuzzy
 msgid "New password (confirm)"
-msgstr ""
+msgstr "नविन"
 
 #: apps/lpasswd.c:128
 #, c-format
@@ -399,23 +434,27 @@ msgstr ""
 
 #: apps/lpasswd.c:133
 #, c-format
+#, fuzzy
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
+#, fuzzy
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lpasswd.c:198
 #, c-format
+#, fuzzy
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lpasswd.c:209
 #, c-format
+#, fuzzy
 msgid "Password changed.\n"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: apps/luseradd.c:173
 #, c-format
@@ -424,8 +463,9 @@ msgstr ""
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
+#, fuzzy
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/luseradd.c:274
 #, c-format
@@ -434,13 +474,15 @@ msgstr ""
 
 #: apps/luseradd.c:324
 #, c-format
+#, fuzzy
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/luseradd.c:331
 #, c-format
+#, fuzzy
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/luserdel.c:98
 #, c-format
@@ -454,8 +496,9 @@ msgstr ""
 
 #: apps/luserdel.c:118
 #, c-format
+#, fuzzy
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/luserdel.c:125
 #, c-format
@@ -474,8 +517,9 @@ msgstr ""
 
 #: apps/luserdel.c:156
 #, c-format
+#, fuzzy
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
@@ -504,18 +548,21 @@ msgstr ""
 
 #: apps/lusermod.c:338
 #, c-format
+#, fuzzy
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lusermod.c:343
 #, c-format
+#, fuzzy
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "नाही"
 
 #: apps/lusermod.c:349
 #, c-format
+#, fuzzy
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "चूक"
 
 #: lib/config.c:118
 #, c-format
@@ -852,8 +899,9 @@ msgid "Kerberos Admin Principal"
 msgstr ""
 
 #: modules/krb5.c:797
+#, fuzzy
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: modules/ldap.c:204
 msgid "error initializing ldap library"
@@ -937,20 +985,23 @@ msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 
 #: modules/ldap.c:2468
+#, fuzzy
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "सर्वर"
 
 #: modules/ldap.c:2474
+#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "आधार"
 
 #: modules/ldap.c:2480
 msgid "LDAP Bind DN"
 msgstr ""
 
 #: modules/ldap.c:2487
+#, fuzzy
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "गुप्तशब्द"
 
 #: modules/ldap.c:2493
 msgid "LDAP SASL User"
@@ -993,8 +1044,9 @@ msgstr ""
 
 #: samples/lookup.c:67
 #, c-format
+#, fuzzy
 msgid "Error initializing %s: %s\n"
-msgstr ""
+msgstr "चूक"
 
 #: samples/lookup.c:80
 #, c-format
@@ -1003,23 +1055,27 @@ msgstr ""
 
 #: samples/lookup.c:92
 #, c-format
+#, fuzzy
 msgid "Searching for group with ID %jd.\n"
-msgstr ""
+msgstr "शोधत आहे"
 
 #: samples/lookup.c:96
 #, c-format
+#, fuzzy
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "शोधत आहे"
 
 #: samples/lookup.c:103
 #, c-format
+#, fuzzy
 msgid "Searching for user with ID %jd.\n"
-msgstr ""
+msgstr "शोधत आहे"
 
 #: samples/lookup.c:107
 #, c-format
+#, fuzzy
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "शोधत आहे"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
@@ -1034,12 +1090,14 @@ msgid "Prompts failed.\n"
 msgstr ""
 
 #: samples/testuser.c:80
+#, fuzzy
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "मुलभूत"
 
 #: samples/testuser.c:86
+#, fuzzy
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "मुलभूत"
 
 #: samples/testuser.c:92
 msgid "Getting default user attributes:\n"
@@ -1048,3 +1106,4 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
+
