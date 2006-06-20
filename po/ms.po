@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-05-06 15:43+0800\n"
+"PO-Revision-Date: 2006-06-21 00:54+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -376,7 +376,7 @@ msgstr "Kumpulan %s tidak dapat diubahsuai: %s\n"
 #: apps/lid.c:47
 #, fuzzy, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Ralat membuang %s: %s.\n"
+msgstr "Menaikkan antaramuka $i: "
 
 #: apps/lid.c:133
 #, c-format
@@ -759,23 +759,23 @@ msgstr "nama mengandungi aksara tidak sah `%c'"
 #: lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "pengguna %s tidak mempunyai UID"
 
 #: lib/user.c:318
 #: lib/user.c:344
-#, c-format
+#, fuzzy, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "Tiada nama kumpulan dinyatakan, tiada nama untuk gid %d.\n"
 
 #: lib/user.c:338
-#, c-format
+#, fuzzy, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "Tiada nama pengguna dinyatakan, menggunakan %s.\n"
 
 #: lib/user.c:339
 #, fuzzy, c-format
 msgid "group %jd has no name"
-msgstr "Kumpulan %jd tidak wujud\n"
+msgstr "Tiada nama kumpulan dinyatakan, menggunakan %s.\n"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
@@ -996,24 +996,23 @@ msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "tidak dapat mengikat ke pelayan LDAP, cubaan pertama sebagai `%s': %s"
 
 #: modules/ldap.c:1331
-#, fuzzy, c-format
+#, c-format
 msgid "user object had no %s attribute"
-msgstr "objek entiti tidak mempunyai ciri %s"
+msgstr "objek pengguna tidak mempunyai ciri %s"
 
 #: modules/ldap.c:1340
-#, fuzzy, c-format
+#, c-format
 msgid "user object was created with no `%s'"
-msgstr "entiti dicipta dengan tiada %s atau ciri %s"
+msgstr "objek pengguna telah dicipta dengan tanpa `%s'"
 
 #: modules/ldap.c:1358
-#, fuzzy
 msgid "could not convert internal data to LDAPMods"
-msgstr "kepada"
+msgstr "tidak dapat menukar data dalaman ke LDAPMods"
 
 #: modules/ldap.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "ralat mengubahsuai masukan direktori LDAP: %s"
+msgstr "ralat mencipta masukan direktori LDAP: %s"
 
 #: modules/ldap.c:1397
 #: modules/ldap.c:1617
