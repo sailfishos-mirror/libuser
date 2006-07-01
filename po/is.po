@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2005-11-24 12:55+0000\n"
+"PO-Revision-Date: 2006-07-01 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -311,9 +311,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Ekki var hægt að breyta hópnum %s: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Villa við að eyða %s: %s.\n"
+msgstr "Villa við að fletta upp %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -689,30 +689,30 @@ msgstr "heitið inniheldur ógilt tákn `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "notandinn %s hefur ekkert UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "hópurinn %s hefur ekkert GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "notandinn %jd hefur ekkert heiti"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Hópurinn %jd er ekki til.\n"
+msgstr "hópurinn %jd hefur ekkert heiti"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "notandinn hefur hvorki heiti eða UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "hópurinn hefur hvorki heiti eða GID"
 
 #: lib/util.c:193
 #, c-format
@@ -1049,7 +1049,3 @@ msgstr "Sæki sjálfgefna notandaeiginleika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Afrita notendastrúktúr:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Skél óbreytt: %s\n"
