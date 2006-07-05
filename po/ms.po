@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-06-21 00:54+0800\n"
+"PO-Revision-Date: 2006-07-05 23:32+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -961,19 +961,16 @@ msgid "Kerberos Realm"
 msgstr "Realm Kerberos:"
 
 #: modules/krb5.c:775
-#, fuzzy
 msgid "Kerberos Admin Principal"
-msgstr "pelayan admin kerberos default"
+msgstr "Pentadbir Utama Kerberos"
 
 #: modules/krb5.c:797
-#, fuzzy
 msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberos Katalaluan for Pentadbir"
+msgstr "Katalaluan Kerberos untuk Pentadbir Utama"
 
 #: modules/ldap.c:204
-#, fuzzy
 msgid "error initializing ldap library"
-msgstr "ralat memulakan pustaka kerberos"
+msgstr "ralat memulakan pustaka ldap"
 
 #: modules/ldap.c:215
 #, c-format
@@ -981,14 +978,12 @@ msgid "could not set LDAP protocol to version %d"
 msgstr "tidak dapat menetapkan protokol LDAP ke versi %d"
 
 #: modules/ldap.c:227
-#, fuzzy
 msgid "could not negotiate TLS with LDAP server"
-msgstr "LDAP"
+msgstr "tidak dapat merunding TLS dengan pelayan LDAP"
 
 #: modules/ldap.c:408
-#, fuzzy
 msgid "could not bind to LDAP server"
-msgstr "tidak dapat menetapkan protokol LDAP ke versi %d"
+msgstr "tidak dapat mengikat ke pelayan LDAP"
 
 #: modules/ldap.c:411
 #, c-format
