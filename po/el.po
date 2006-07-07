@@ -1,20 +1,23 @@
+# translation of el.po to Greek
 # Translation of libuser to Greek.
 # Copyright (C) 2006 Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Simos Xenitellis <simos@gnome.org>, 2006.
+# Dimitris Glezos <dimitris@glezos.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-07-07 16:33+0300\n"
-"Last-Translator: Simos Xenitellis <simos@gnome.org>\n"
-"Language-Team: Greek <team@gnome.gr>\n"
+"PO-Revision-Date: 2006-07-08 00:54+0100\n"
+"Last-Translator: Dimitris Glezos <dimitris@glezos.com>\n"
+"Language-Team: Greek <fedora-trans-el@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -893,14 +896,13 @@ msgid "entity has no %s attribute"
 msgstr "Όποιο_δήποτε επιλεγμένο γνώρισμα"
 
 #: modules/krb5.c:642
-#, fuzzy, c-format
+#, c-format
 msgid "error setting password for `%s'"
-msgstr "Εισάγετε κωδικό πρόσβασης για %s"
+msgstr "σφάλμα ορισμού κωδικού πρόσβασης για `%s'"
 
 #: modules/krb5.c:768
-#, fuzzy
 msgid "Kerberos Realm"
-msgstr "Kerberos 4"
+msgstr "Περιοχή Kerberos"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
@@ -918,7 +920,7 @@ msgstr "Σφάλμα κατά την ενεργοποίηση της συσκε�
 #: modules/ldap.c:215
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr ""
+msgstr "δεν μπόρεσε να οριστεί πρωτόκολλο LDAP στην έκδοση %d"
 
 #: modules/ldap.c:227
 #, fuzzy
@@ -938,12 +940,12 @@ msgstr ""
 #: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "το αντικείμενο χρήστη δεν είχε όρισμα %s"
 
 #: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "το αντικείμενο χρήστη δημιουργήθηκε χωρίς `%s'"
 
 #: modules/ldap.c:1358
 #, fuzzy
@@ -951,24 +953,24 @@ msgid "could not convert internal data to LDAPMods"
 msgstr "Δεν ήταν δυνατή η υπογραφή δεδομένων:%s"
 
 #: modules/ldap.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "Σφάλμα δημιουργίας εγγραφής καταλόγου LDAP: %s"
 
 #: modules/ldap.c:1397 modules/ldap.c:1617
-#, fuzzy, c-format
+#, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "Σφάλμα επεξεργασίας εγγραφής καταλόγου LDAP: %s"
 
 #: modules/ldap.c:1424
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "Σφάλμα μετονομασίας εγγραφής καταλόγου LDAP: %s"
 
 #: modules/ldap.c:1469
 #, c-format
 msgid "object had no %s attribute"
-msgstr ""
+msgstr "το αντικείμενο δεν έχει ιδιότητα %s"
 
 #: modules/ldap.c:1487
 #, fuzzy, c-format
@@ -979,90 +981,81 @@ msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
 #: modules/ldap.c:1749
 #, c-format
 msgid "object has no %s attribute"
-msgstr ""
+msgstr "το αντικείμενο δεν έχει ιδιότητα %s"
 
 #: modules/ldap.c:1675
-#, fuzzy
 msgid "no such object in LDAP directory"
-msgstr "Δεν είναι κατάλογος"
+msgstr "δεν υπάρχει τέτοιο αντικείμενο στον κατάλογο LDAP"
 
 #: modules/ldap.c:1687
-#, fuzzy, c-format
+#, c-format
 msgid "no `%s' attribute found"
-msgstr "Δεν βρέθηκε το εικονίδιο '%s'"
+msgstr "δε βρέθηκε ιδιότητα `%s'"
 
 #: modules/ldap.c:1856
-#, fuzzy, c-format
+#, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "σφάλμα καθορισμού κωδικού στον κατάλογο LDAP για %s: %s"
 
 #: modules/ldap.c:2468
-#, fuzzy
 msgid "LDAP Server Name"
-msgstr "Όνομα εξυπηρετητή"
+msgstr "Όνομα εξυπηρετητή LDAP"
 
 #: modules/ldap.c:2474
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "Απέτυχε η αναζήτηση LDAP\n"
+msgstr "LDAP Search Base DN"
 
 #: modules/ldap.c:2480
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2487
-#, fuzzy
 msgid "LDAP Bind Password"
-msgstr "Κωδικός:"
+msgstr "Συνθηματικό LDAP Bind"
 
 #: modules/ldap.c:2493
-#, fuzzy
 msgid "LDAP SASL User"
-msgstr "Εξυπηρετητής LDAP"
+msgstr "Χρήστης LDAP SASL"
 
 #: modules/ldap.c:2500
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "Χρήστης εξουσιοδότησης LDAP SASL"
 
 #: modules/sasldb.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα Cyrus SASL στη δημιουργία χρήστη: %s"
 
 #: modules/sasldb.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Σφάλμα στην αφαίρεση `%s': %s"
+msgstr "Σφάλμα Cyrus SASL στη διαγραφή χρήστη: %s"
 
 #: modules/sasldb.c:524 modules/sasldb.c:532
-#, fuzzy, c-format
+#, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "Σφάλμα κατά την ενεργοποίηση της συσκευής %s\n"
+msgstr "σφάλμα αρχικοποίησης Cyrus SASL: %s"
 
 #: python/admin.c:530
-#, fuzzy
 msgid "error creating home directory for user"
-msgstr "αδυναμία δημιουργίας καταλόγου [%s] για την αναφορά σφάλματος"
+msgstr "σφάλμα δημιουργίας αρχικού καταλόγου χρήστη"
 
 #: python/admin.c:583
-#, fuzzy
 msgid "error removing home directory for user"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "σφάλμα διαγραφής αρχικού καταλόγου χρήστη"
 
 #: python/admin.c:661
-#, fuzzy
 msgid "error moving home directory for user"
-msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
+msgstr "σφάλμα μετακίνησης αρχικού καταλόγου χρήστη"
 
 #: python/admin.c:694
-#, fuzzy
 msgid "error creating mail spool for user"
-msgstr "Σφάλμα στην δημιουργία του ταχυδρομικού νήματος.\n"
+msgstr "σφάλμα στη δημιουργία ταχυδρομικού spool χρήστη"
 
 #: samples/lookup.c:67
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Σφάλμα κατά την ενεργοποίηση της συσκευής %s\n"
+msgstr "Σφάλμα αρχικοποίησης %s: %s\n"
 
 #: samples/lookup.c:80
 #, c-format
@@ -1072,54 +1065,48 @@ msgstr "Μη έγκυρο ID %s\n"
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr ""
+msgstr "Αναζήτηση για ομάδα με ID %jd.\n"
 
 #: samples/lookup.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Αναζήτηση για '%s'..."
+msgstr "Αναζήτηση για ομάδα με όνομα %s.\n"
 
 #: samples/lookup.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Γίνεται αναζήτηση για σαρωτές ..."
+msgstr "Αναζήτηση για χρήστη με ID %jd.\n"
 
 #: samples/lookup.c:107
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Γίνεται αναζήτηση για σαρωτές ..."
+msgstr "Αναζήτηση για χρήστη με όνομα %s.\n"
 
 #: samples/lookup.c:121
-#, fuzzy
 msgid "Entry not found.\n"
-msgstr "H βιβλιοθήκη δεν βρέθηκε\n"
+msgstr "Η είσοδος δε βρέθηκε\n"
 
 #: samples/prompt.c:52
-#, fuzzy
 msgid "Prompts succeeded.\n"
-msgstr "Λειτουργία ολοκληρώθηκε"
+msgstr "Οι ειδοποιήσεις ολοκληρώθηκαν.\n"
 
 #: samples/prompt.c:62
-#, fuzzy
 msgid "Prompts failed.\n"
-msgstr "Ενεργοποίηση ειδοποίησης"
+msgstr "Οι ειδοποιήσεις απέτυχαν.\n"
 
 #: samples/testuser.c:80
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "Προεπιλεγμένες κλάσεις αντικειμένων χρήστη:\n"
 
 #: samples/testuser.c:86
-#, fuzzy
 msgid "Default user attribute names:\n"
-msgstr "Μετάθεση γνωρίσματος"
+msgstr "Προεπιλεγμένα ονόματα ιδιοτήτων χρήστη:\n"
 
 #: samples/testuser.c:92
-#, fuzzy
 msgid "Getting default user attributes:\n"
-msgstr "Ενεργοποίηση προεπιλεγμένης γραμματοσειράς: "
+msgstr "Λήψη προεπιλεγμένων ιδιοτήτων χρήστη:\n"
 
 #: samples/testuser.c:99
-#, fuzzy
 msgid "Copying user structure:\n"
-msgstr "Φόρτωση της δομής των μενού"
+msgstr "Αντιγραφή δομής χρήστη:\n"
 
