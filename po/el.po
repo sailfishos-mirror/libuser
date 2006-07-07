@@ -1,5 +1,5 @@
 # Translation of libuser to Greek.
-# Copyright (C) YEAR Red Hat, Inc.
+# Copyright (C) 2006 Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Simos Xenitellis <simos@gnome.org>, 2006.
@@ -8,14 +8,13 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-07-05 14:48+0100\n"
+"PO-Revision-Date: 2006-07-07 16:33+0300\n"
 "Last-Translator: Simos Xenitellis <simos@gnome.org>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -51,9 +50,9 @@ msgid "Failed to drop privileges.\n"
 msgstr "Αποτυχία ανάκτησης μηνύματος"
 
 #: apps/apputil.c:560
-#, fuzzy, c-format
+#, c-format
 msgid "Internal error.\n"
-msgstr "Εσωτερικό μεγαφωνάκι"
+msgstr "Εσωτερικό σφάλμα.\n"
 
 #: apps/apputil.c:581
 #, fuzzy, c-format
@@ -81,9 +80,9 @@ msgid "Authentication failed for %s.\n"
 msgstr "Η πιστοποίηση απέτυχε."
 
 #: apps/apputil.c:618
-#, fuzzy, c-format
+#, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Λήψη PAM σφάλματος %d.\n"
+msgstr "Εσωτερικό σφάλμα PAM `%s'.\n"
 
 #: apps/apputil.c:623
 #, fuzzy, c-format
@@ -138,28 +137,24 @@ msgid "Account is not locked.\n"
 msgstr "Αυτή η σημείωση είναι κλειδωμένη"
 
 #: apps/lchage.c:184
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%d\n"
-msgstr "Ελάχιστο:"
+msgstr "Ελάχιστο:\t%d\n"
 
 #: apps/lchage.c:188
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%d\n"
-msgstr "Μέγιστο:"
+msgstr "Μέγιστο:\t%d\n"
 
 #: apps/lchage.c:192
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%d\n"
-msgstr "Προειδοποίηση:"
+msgstr "Προειδοποίηση:\t%d\n"
 
 #: apps/lchage.c:196
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%d\n"
-msgstr ""
-"#-#-#-#-#  gnome-nettool.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Ανενεργή\n"
-"#-#-#-#-#  gnome-session.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Ανενεργό"
+msgstr "Ανενεργό:\t%d\n"
 
 #: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
 msgid "Never"
@@ -176,9 +171,9 @@ msgid "Password Expires:\t%s\n"
 msgstr "Κωδικός για το %s"
 
 #: apps/lchage.c:221
-#, fuzzy, c-format
+#, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "Κωδικός:"
+msgstr "Ανενεργός κωδικός:\t%s\n"
 
 #: apps/lchage.c:228
 #, fuzzy, c-format
@@ -205,41 +200,24 @@ msgid "Changing finger information for %s.\n"
 msgstr "Τροποποίηση προσωπικών πληροφοριών."
 
 #: apps/lchfn.c:144
-#, fuzzy
 msgid "Full Name"
-msgstr ""
-"#-#-#-#-#  evolution-data-server.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Πλήρες Όνομα\n"
-"#-#-#-#-#  evolution.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Πλήρες Όνομα\n"
-"#-#-#-#-#  gnome-control-center.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Ονοματεπώνυμο\n"
-"#-#-#-#-#  drakfax-el.po (drakfax-gr)  #-#-#-#-#\n"
-"Πλήρες Όνομα\n"
-"#-#-#-#-#  userdrake-el.po (userdrake-el)  #-#-#-#-#\n"
-"Πλήρες Όνομα"
+msgstr "Πλήρες όνομα"
 
 #: apps/lchfn.c:158
 msgid "Surname"
 msgstr ""
 
 #: apps/lchfn.c:173
-#, fuzzy
 msgid "Given Name"
-msgstr ""
-"#-#-#-#-#  evolution-data-server.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Δοθέν όνομα\n"
-"#-#-#-#-#  evolution.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Δοθέν Όνομα"
+msgstr "Δοθέν όνομα"
 
 #: apps/lchfn.c:183
 msgid "Office"
 msgstr "Γραφείο"
 
 #: apps/lchfn.c:192
-#, fuzzy
 msgid "Office Phone"
-msgstr "Τηλεφωνικό Νούμερο Γραφείου:"
+msgstr "Τηλέφωνο γραφείου"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
@@ -376,9 +354,9 @@ msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid user ID %s\n"
-msgstr "Μη έγκυρο ID χρήστη"
+msgstr "Μη έγκυρο ID χρήστη %s\n"
 
 #: apps/lnewusers.c:141
 msgid "Refusing to create account with UID 0.\n"
@@ -415,32 +393,24 @@ msgid "Changing password for %s.\n"
 msgstr "Εισάγετε κωδικό πρόσβασης για %s"
 
 #: apps/lpasswd.c:111
-#, fuzzy
 msgid "New password"
-msgstr "_Νέος κωδικός:"
+msgstr "Νέος κωδικός"
 
 #: apps/lpasswd.c:114
-#, fuzzy
 msgid "New password (confirm)"
-msgstr "_Νέος κωδικός:"
+msgstr "Νέος κωδικός (επιβεβαίωση)"
 
 #: apps/lpasswd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
-"Οι κωδικοί δεν συμπίπτουν\n"
-"Παρακαλώ προσπαθήστε ξανά\n"
+msgstr "Οι κωδικοί δεν συμπίπτουν, παρακαλώ προσπαθήστε ξανά.\n"
 
 # #-#-#-#-#  gdm2.gnome-2-14.el.po (el)  #-#-#-#-#
 #
 #: apps/lpasswd.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "Password change canceled.\n"
-msgstr ""
-"#-#-#-#-#  gdm2.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Αναλλοίωτος κωδικός πρόσβασης\n"
-"#-#-#-#-#  usermode-el.po (usermode-el)  #-#-#-#-#\n"
-"Ο κωδικός πρόσβασης δεν άλλαξε"
+msgstr "Ακύρωση κωδικού πρόσβασης.\n"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, fuzzy, c-format
@@ -455,13 +425,9 @@ msgstr "Σφάλμα λήψης τιμής για  '%s': %s"
 # #-#-#-#-#  gdm2.gnome-2-14.el.po (el)  #-#-#-#-#
 #
 #: apps/lpasswd.c:209
-#, fuzzy, c-format
+#, c-format
 msgid "Password changed.\n"
-msgstr ""
-"#-#-#-#-#  gdm2.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"Αναλλοίωτος κωδικός πρόσβασης\n"
-"#-#-#-#-#  usermode-el.po (usermode-el)  #-#-#-#-#\n"
-"Ο κωδικός πρόσβασης δεν άλλαξε"
+msgstr "Ο κωδικός πρόσβασης άλλαξε.\n"
 
 #: apps/luseradd.c:173
 #, fuzzy, c-format
@@ -584,9 +550,8 @@ msgid "could not read configuration file `%s': %s"
 msgstr "Αδυναμία ανάγνωσης χαιρετισμού από %s: %s"
 
 #: lib/error.c:42
-#, fuzzy
 msgid "success"
-msgstr "Επιτυχία"
+msgstr "επιτυχία"
 
 #: lib/error.c:44
 #, fuzzy
@@ -594,9 +559,8 @@ msgid "module disabled by configuration"
 msgstr "Χειροκίνητη ρύθμιση"
 
 #: lib/error.c:46
-#, fuzzy
 msgid "generic error"
-msgstr "Γενικό σφάλμα"
+msgstr "γενικό σφάλμα"
 
 #: lib/error.c:48
 #, fuzzy
@@ -604,13 +568,8 @@ msgid "not enough privileges"
 msgstr "Προνόμια χρήστη"
 
 #: lib/error.c:50
-#, fuzzy
 msgid "access denied"
-msgstr ""
-"#-#-#-#-#  grpmi-el.po (grpmi)  #-#-#-#-#\n"
-"Αρνήθηκε η πρόσβαση στο Ftp\n"
-"#-#-#-#-#  rpmdrake-el.po (rpmdrake-el)  #-#-#-#-#\n"
-"Αρνηση πρόσβασης στο FTP\n"
+msgstr "Άρνηση πρόσβασης"
 
 #: lib/error.c:52
 #, fuzzy
@@ -1106,9 +1065,9 @@ msgid "Error initializing %s: %s\n"
 msgstr "Σφάλμα κατά την ενεργοποίηση της συσκευής %s\n"
 
 #: samples/lookup.c:80
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid ID %s\n"
-msgstr "Μη έγκυρο ID Κλειδιού (%s)"
+msgstr "Μη έγκυρο ID %s\n"
 
 #: samples/lookup.c:92
 #, c-format
