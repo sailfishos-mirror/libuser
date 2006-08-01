@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-07-29 23:14-0300\n"
+"PO-Revision-Date: 2006-07-31 23:51-0300\n"
 "Last-Translator: Igor Pires Soares <igor@projetofedora.org>\n"
 "Language-Team: Portuguese/Brazil <fedora-trans-pt_br@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr "Erro interno.\n"
 #: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s não está autorizado a alterar as informações finger de %s\n"
+msgstr "%s não está autorizado a alterar as informações do finger de %s\n"
 
 #: apps/apputil.c:583
 msgid "Unknown user context"
@@ -204,7 +204,7 @@ msgstr "Nenhum nome de usuário especificado, sem nome para o uid %d.\n"
 #: apps/lchfn.c:103
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Alterando informações gerais para %s.\n"
+msgstr "Alterando informações do finger para %s.\n"
 
 #: apps/lchfn.c:144
 msgid "Full Name"
@@ -237,16 +237,16 @@ msgstr "Endereço de E-Mail"
 #: apps/lchfn.c:228
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr "Informações gerais inalteradas:  erro de entrada.\n"
+msgstr "Informações do finger não alteradas:  erro de entrada.\n"
 
 #: apps/lchfn.c:300
 msgid "Finger information changed.\n"
-msgstr "Informações gerais alteradas.\n"
+msgstr "Informações do finger alteradas.\n"
 
 #: apps/lchfn.c:303
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr "Informações gerais não alteradas: %s.\n"
+msgstr "Informações do finger não alteradas: %s.\n"
 
 #: apps/lchsh.c:89
 #, c-format
@@ -519,7 +519,7 @@ msgstr "Não há um diretório 'home' antigo para %s.\n"
 #: apps/lusermod.c:343
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr "Não há diretório 'home' novo para %s.\n"
+msgstr "Não há um novo diretório 'home' para %s.\n"
 
 #: apps/lusermod.c:349
 #, c-format
@@ -534,8 +534,7 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
-"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:133
 #, c-format
@@ -718,7 +717,7 @@ msgstr "grupo %jd não possui nome"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr "o usuário possui nome nem UID"
+msgstr "o usuário não possui nome nem UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
@@ -737,13 +736,12 @@ msgstr "não foi possível obter o contexto de segurança de `%s': %s"
 #: modules/files.c:126
 #, c-format
 msgid "couldn't set default security context: %s"
-msgstr "não foi possível determinar o contexto de segurança default: %s"
+msgstr "não foi possível determinar o contexto padrão de segurança: %s"
 
 #: modules/files.c:133
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"não foi possível determinar o contexto de segurança default de `%s': %s"
+msgstr "não foi possível determinar o contexto padrão de segurança de `%s': %s"
 
 #: modules/files.c:176 modules/files.c:549 modules/files.c:874
 #: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
@@ -770,7 +768,7 @@ msgstr "erro ao criar `%s': %s"
 #: modules/files.c:212
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "arquivo de backup `%s' existe e não é um arquivo normal"
+msgstr "o arquivo de backup `%s' existe e não é um arquivo normal"
 
 #: modules/files.c:291
 msgid "backup file size mismatch"
@@ -802,7 +800,7 @@ msgstr "erro ao criptografar a senha"
 
 #: modules/files.c:2773 modules/files.c:2851
 msgid "not executing with superuser privileges"
-msgstr "executando sem os privilégios de super-usuário"
+msgstr "executando sem os privilégios de superusuário"
 
 #: modules/files.c:2864
 msgid "no shadow file present -- disabling"
@@ -811,8 +809,7 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço `%s' no reino `%s': %s"
+msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no domínio `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -857,7 +854,7 @@ msgstr "erro ao definir senha para `%s'"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr "Reino Kerberos"
+msgstr "Domínio Kerberos"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
@@ -887,8 +884,7 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -955,7 +951,7 @@ msgstr "Nome do Servidor LDAP"
 
 #: modules/ldap.c:2474
 msgid "LDAP Search Base DN"
-msgstr "DN de Base para Procuras LDAP"
+msgstr "DN de Base para Pesquisas LDAP"
 
 #: modules/ldap.c:2480
 msgid "LDAP Bind DN"
@@ -990,19 +986,19 @@ msgstr "erro ao inicializar Cyrus SASL: %s"
 
 #: python/admin.c:530
 msgid "error creating home directory for user"
-msgstr "erro ao criar diretório home para usuário"
+msgstr "erro ao criar diretório home para o usuário"
 
 #: python/admin.c:583
 msgid "error removing home directory for user"
-msgstr "erro ao remover diretório home para usúario"
+msgstr "erro ao remover diretório home para o usúario"
 
 #: python/admin.c:661
 msgid "error moving home directory for user"
-msgstr "erro ao mover diretório home para usuário"
+msgstr "erro ao mover diretório home para o usuário"
 
 #: python/admin.c:694
 msgid "error creating mail spool for user"
-msgstr "erro ao criar 'mail spool' para usuário"
+msgstr "erro ao criar spool de e-mail para o usuário"
 
 #: samples/lookup.c:67
 #, c-format
@@ -1017,22 +1013,22 @@ msgstr "ID %s inválido\n"
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Procurando por grupo com ID %jd.\n"
+msgstr "Pesquisando por grupo com ID %jd.\n"
 
 #: samples/lookup.c:96
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Procurando por grupo de nome %s.\n"
+msgstr "Pesquisando por grupo de nome %s.\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Procurando por usuário com ID %jd.\n"
+msgstr "Pesquisando por usuário com ID %jd.\n"
 
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Procurando por usuário de nome %s.\n"
+msgstr "Pesquisando por usuário de nome %s.\n"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
@@ -1048,15 +1044,15 @@ msgstr "Prompts falharam.\n"
 
 #: samples/testuser.c:80
 msgid "Default user object classes:\n"
-msgstr "Classes default de objetos dos usuários:\n"
+msgstr "Classes padrões de objetos dos usuários:\n"
 
 #: samples/testuser.c:86
 msgid "Default user attribute names:\n"
-msgstr "Nomes default dos atributos dos usuários:\n"
+msgstr "Nomes padrões dos atributos dos usuários:\n"
 
 #: samples/testuser.c:92
 msgid "Getting default user attributes:\n"
-msgstr "Obtendo atributos default dos usuários:\n"
+msgstr "Obtendo atributos padrões dos usuários:\n"
 
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
