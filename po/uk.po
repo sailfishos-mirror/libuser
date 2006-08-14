@@ -1,7 +1,7 @@
 # Ukrainian translation to libuser.
 # Copyright (C) Free Software Foundation
 # This file is distributed under the same license as the libuser package.
-# Maxim Dziumanenko <mvd@mylinux.com.ua>, 2003.
+# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2006.
 #
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
 "PO-Revision-Date: 2006-02-16 18:35+0300\n"
-"Last-Translator: Maxim Dziumanenko <mvd@mylinux.ua>\n"
+"Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -312,9 +312,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Групу %s не вдається змінити: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Помилка видалення %s: %s.\n"
+msgstr "Помилка блокування %s: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -690,30 +690,30 @@ msgstr "ім'я містить неправильний символ `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "користувач %s не має UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "група %s не має GID"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "користувач %jd не має імені"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Група %jd не існує.\n"
+msgstr "Група %jd не має назви"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "користувач не має ані назви, ані UID"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "групи не має ані назви, ані GID"
 
 #: lib/util.c:193
 #, c-format
@@ -1049,19 +1049,3 @@ msgstr "Отримання стандартних атрибутів корис�
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Копіювання структури користувача:\n"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Оболонку змінено: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "не вдається виконати пошук на сервері LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "Схоже, що сервер LDAP не має кореневого DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "помилка перетворення імені у форму, зрозумілу для LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "помилка перетворення імені у форму, зрозумілу для бази LDAP"
