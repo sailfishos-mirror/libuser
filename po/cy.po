@@ -85,9 +85,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Gwall PAM mewnol `%s'.\n"
 
 #: apps/apputil.c:623
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Cyd-destun defnyddiwr yn anhysbys"
+msgstr "Dilyswyd defnyddiwr anhysbys.\n"
 
 #: apps/apputil.c:627
 #, c-format
@@ -314,9 +314,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Nid oedd modd addasu'r grŵp %s: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Gwall wrth waredu %s: %s.\n"
+msgstr "Gwall wrth waredu %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -531,9 +531,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "methwyd statio ffeil gyflunio `%s': %s"
 
 #: lib/config.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "methwyd agor ffeil gyflunio `%s': %s"
+msgstr "Mae ffeil gyfluniad '%s' yn rhy fawr"
 
 #: lib/config.c:149
 #, c-format
@@ -639,9 +639,9 @@ msgid "module version mismatch in `%s'"
 msgstr "anghydweddiad fersiwn modwl yn `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Nid yw'r grŵp %s yn bodoli.\n"
+msgstr "nid yw modiwl '%s' yn diffinio '%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -666,7 +666,7 @@ msgstr "mae'r enw rhy fyr"
 #: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "Mae enw yn rhy hir (%zu > %d)"
 
 #: lib/user.c:211
 msgid "name contains non-ASCII characters"
@@ -682,7 +682,7 @@ msgstr "mae'r enw'n cynnwys gofod gwyn"
 
 #: lib/user.c:237
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "Enw yn cychwyn gyda chysylltnod"
 
 #: lib/user.c:248
 #, c-format
@@ -692,30 +692,30 @@ msgstr "mae'r enw'n cynnwys nod annilys `%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "Nid oes UID gan defynddiwr %s"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "Nid oes GID gan grŵp %s"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "Nid oes enw gan defnyddiwr %jd"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Nid yw'r grŵp %jd yn bodoli\n"
+msgstr "Nid oes enw gan grŵp %jd"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "Nid oes enw neu UID gan defynddiwr %jd"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "Nid oes enw neu GID gan grŵp %jd"
 
 #: lib/util.c:193
 #, c-format
@@ -1054,40 +1054,3 @@ msgstr "Yn nôl priodoleddau defnyddiwr rhagosodedig:\n"
 msgid "Copying user structure:\n"
 msgstr "Yn copïo strwythur defnyddiwr:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Ni newidiwyd y plisgyn: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "methwyd chwilio'r gweinydd LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "ymddengys nad oes gwraidd DSE gan y gweinydd LDAP"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "gwall wrth fapio'r enw yn enw gwahaniaethol LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "gwall wrth fapio'r enw yn enw sail gwahaniaethol LDAP"
-
-#, fuzzy
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "methwyd ysgrifennu i `%s': %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Gwall SASL Cyrus wrth greu'r defnyddiwr: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Gwall SASL Cyrus wrth waredu'r defnyddiwr: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Gwall wrth ymgychwyn %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Nid oedd modd dileu'r grŵp %s.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Nid oedd modd addasu'r grŵp %s.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "gwall wrth ymgychwyn modwl"
