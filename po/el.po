@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-07-08 00:54+0100\n"
+"PO-Revision-Date: 2006-08-29 22:50+0100\n"
 "Last-Translator: Dimitris Glezos <dimitris@glezos.com>\n"
 "Language-Team: Greek <fedora-trans-el@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -32,15 +32,15 @@ msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα αλλαγής ιδιοκτήτη του `%s': %s"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα εγγραφής `%s': %s"
 
 #: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
@@ -63,9 +63,8 @@ msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "Το %s δεν υποστηρίζεται από αυτή την έκδοση του Mandriva Linux."
 
 #: apps/apputil.c:583
-#, fuzzy
 msgid "Unknown user context"
-msgstr "Άγνωστος χρήστης."
+msgstr "Άγνωστο πλαίσιο χρήστη"
 
 #: apps/apputil.c:591
 #, fuzzy, c-format
@@ -73,14 +72,14 @@ msgid "Can't set default context for /etc/passwd\n"
 msgstr "Χρήση των προεπιλεγμένων γραμματοσειρών συστήματος."
 
 #: apps/apputil.c:600
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing PAM.\n"
-msgstr "Σφάλμα κατά την ενεργοποίηση της συσκευής %s\n"
+msgstr "Σφάλμα αρχικοποίησης PAM.\n"
 
 #: apps/apputil.c:610 apps/apputil.c:637
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "Η πιστοποίηση απέτυχε."
+msgstr "Η πιστοποίηση απέτυχε για %s.\n"
 
 #: apps/apputil.c:618
 #, c-format
@@ -88,9 +87,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Εσωτερικό σφάλμα PAM `%s'.\n"
 
 #: apps/apputil.c:623
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Άγνωστη κατάσταση πιστοποίησης."
+msgstr "Πιστοποιήθηκε άγνωστος χρήστης.\n"
 
 #: apps/apputil.c:627
 #, fuzzy, c-format
@@ -100,44 +99,44 @@ msgstr "Τα συνθηματικά δεν ταιριάζουν."
 #: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[ΕΠΙΛΟΓΗ...] χρήστης"
 
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "Σφάλμα στην ανάλυση φίλτρου: %s: %s"
+msgstr "Σφάλμα κατά την ανάλυση ορισμάτων: %s.\n"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified.\n"
-msgstr "Δεν έχει οριστεί όνομα φακέλου."
+msgstr "Δεν έχει οριστεί όνομα χρήστη.\n"
 
 #: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
-#, fuzzy, c-format
+#, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "Σφάλμα κατά την ενεργοποίηση της συσκευής %s\n"
+msgstr "Σφάλμα κατά την αρχικοποίηση %s: %s.\n"
 
 #: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "User %s does not exist.\n"
-msgstr "δεν υπάρχει το %s"
+msgstr "Ο χρήστης %s δεν υπάρχει.\n"
 
 #: apps/lchage.c:177
-#, fuzzy, c-format
+#, c-format
 msgid "Account is locked.\n"
-msgstr "Αυτή η σημείωση είναι κλειδωμένη"
+msgstr "Ο λογαριασμός είναι κλειδωμένος.\n"
 
 #: apps/lchage.c:179
-#, fuzzy, c-format
+#, c-format
 msgid "Account is not locked.\n"
-msgstr "Αυτή η σημείωση είναι κλειδωμένη"
+msgstr "Ο λογαριασμός δεν είναι κλειδωμένος.\n"
 
 #: apps/lchage.c:184
 #, c-format
@@ -164,14 +163,14 @@ msgid "Never"
 msgstr "Ποτέ"
 
 #: apps/lchage.c:202
-#, fuzzy, c-format
+#, c-format
 msgid "Last Change:\t%s\n"
-msgstr "Τελευταία αλλαγή:"
+msgstr "Τελευταία αλλαγή:\t%s\n"
 
 #: apps/lchage.c:211
-#, fuzzy, c-format
+#, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "Κωδικός για το %s"
+msgstr "Ο κωδικός λήγει:\t%s\n"
 
 #: apps/lchage.c:221
 #, c-format
@@ -179,9 +178,9 @@ msgid "Password Inactive:\t%s\n"
 msgstr "Ανενεργός κωδικός:\t%s\n"
 
 #: apps/lchage.c:228
-#, fuzzy, c-format
+#, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Επεξεργαστής Λογαριασμού"
+msgstr "Ο λογαριασμός λήγει:\t%s\n"
 
 #: apps/lchage.c:278
 #, fuzzy, c-format
@@ -190,7 +189,7 @@ msgstr "Αποτυχία φόρτωσης πληροφοριών εικόνας"
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[ΕΠΙΛΟΓΗ...] [χρήστης]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, fuzzy, c-format
@@ -208,7 +207,7 @@ msgstr "Πλήρες όνομα"
 
 #: apps/lchfn.c:158
 msgid "Surname"
-msgstr ""
+msgstr "Επώνυμο"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
@@ -246,53 +245,51 @@ msgid "Finger information not changed: %s.\n"
 msgstr "Περισσότερες πληροφορίες στο πακέτο %s"
 
 #: apps/lchsh.c:89
-#, fuzzy, c-format
+#, c-format
 msgid "Changing shell for %s.\n"
-msgstr "Τροποποίηση κελύφους login. "
+msgstr "Τροποποίηση κελύφους για %s.\n"
 
 #: apps/lchsh.c:118
-#, fuzzy
 msgid "New Shell"
-msgstr "Newhall"
+msgstr "Νέο κέλυφος"
 
 #: apps/lchsh.c:125 apps/lchsh.c:144
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Αλλαγή Τραγουδιού %s"
+msgstr "Δεν έγινε αλλαγή κελύφους: %s\n"
 
 #: apps/lchsh.c:141
-#, fuzzy
 msgid "Shell changed.\n"
-msgstr "Αποθήκευση αλλαγών"
+msgstr "Έγινε αλλαγή κελύφους.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[ΕΠΙΛΟΓΗ...] ομάδα"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified.\n"
-msgstr "Δεν έχει οριστεί όνομα φακέλου."
+msgstr "Δεν έχει οριστεί όνομα ομάδας.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid group ID %s\n"
-msgstr "Μη έγκυρο ID ομάδας"
+msgstr "Μη έγκυρο ID ομάδας %s\n"
 
 #: apps/lgroupadd.c:128
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Η λειτουργία απέτυχε: %s"
+msgstr "Η δημιουργία ομάδας απέτυχε: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s does not exist.\n"
-msgstr "δεν υπάρχει το %s"
+msgstr "Η ομάδα %s δεν υπάρχει.\n"
 
 #: apps/lgroupdel.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Η ομάδα \"root\" δεν πρέπει διαγραφεί"
+msgstr "Δε μπόρεσε να γίνει διαγραφή ομάδας %s: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, fuzzy, c-format
@@ -305,19 +302,19 @@ msgid "Failed to set password for group %s: %s\n"
 msgstr "Αποτυχία ορισμού process group id of child %d: %s.\n"
 
 #: apps/lgroupmod.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "(tt) %s: αδυναμία φόρτωσης πρόσοψης: %s\n"
+msgstr "Δε μπόρεσε να γίνει κλείδωμα ομάδας %s: %s\n"
 
 #: apps/lgroupmod.c:167
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Δεν είναι δυνατό το ερώτημα σε αυτό το CD: %s\n"
+msgstr "Δε μπόρεσε να γίνει ξεκλείδωμα ομάδας %s: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "(tt) %s: αδυναμία ορισμού του μεγέθους πόντου: %s\n"
+msgstr "Δε μπόρεσε να γίνει τροποποίηση ομάδας %s: %s\n"
 
 #: apps/lid.c:47
 #, fuzzy, c-format
@@ -327,29 +324,28 @@ msgstr ""
 " %s"
 
 #: apps/lid.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "Δεν έχει οριστεί όνομα φακέλου."
+msgstr "Δεν έχει οριστεί όνομα ομάδας, γίνεται χρήση %s.\n"
 
 #: apps/lid.c:137
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Δεν καθορίστηκαν τίτλοι στήλης για το διάλογο λίστας\n"
+msgstr "Δεν έχει οριστεί όνομα ομάδας, κανένα όνομα για gid %d.\n"
 
 #: apps/lid.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "Δεν έχει οριστεί όνομα φακέλου."
+msgstr "Δεν έχει οριστεί όνομα χρήστη, γίνεται χρήση %s.\n"
 
 #: apps/lnewusers.c:67
-#, fuzzy
 msgid "[OPTION...]"
-msgstr "ΕΠΙΛΟΓΕΣ"
+msgstr "[ΕΠΙΛΟΓΗ...]"
 
 #: apps/lnewusers.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Σφάλμα αποθήκευσης `%s': %s"
+msgstr "Σφάλμα ανοίγματος `%s': %s.\n"
 
 #: apps/lnewusers.c:124
 #, c-format
@@ -391,9 +387,9 @@ msgid "Error creating user account for %s: %s\n"
 msgstr "Λογαριασμός Exchange για %s σε %s"
 
 #: apps/lpasswd.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Changing password for %s.\n"
-msgstr "Εισάγετε κωδικό πρόσβασης για %s"
+msgstr "Αλλαγή συνθηματικού για %s.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
@@ -413,7 +409,7 @@ msgstr "Οι κωδικοί δεν συμπίπτουν, παρακαλώ προ
 #: apps/lpasswd.c:133
 #, c-format
 msgid "Password change canceled.\n"
-msgstr "Ακύρωση κωδικού πρόσβασης.\n"
+msgstr "Ακύρωση αλλαγής συνθηματικού.\n"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, fuzzy, c-format
@@ -488,34 +484,34 @@ msgid "%s did not have a home directory.\n"
 msgstr "Παρακαλώ βεβαιωθείτε ότι έχετε ένα αρχικό κατάλογο."
 
 #: apps/luserdel.c:156
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "Σφάλμα στην αφαίρεση `%s': %s"
+msgstr "Σφάλμα κατά την αφαίρεση του %s: %s.\n"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Αποτυχία ορισμού τιμής διαστημάτων: %s."
+msgstr "Αποτυχία στον ορισμό συνθηματικού για τον χρήστη %s: %s.\n"
 
 #: apps/lusermod.c:191
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "Το %s δε μπόρεσε να ανοιχτεί."
+msgstr "Δε μπόρεσε να γίνει κλείδωμα του χρήστη %s: %s.\n"
 
 #: apps/lusermod.c:199
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "Δεν είναι δυνατό το ερώτημα σε αυτό το CD: %s\n"
+msgstr "Δε μπόρεσε να γίνει ξεκλείδωμα του χρήστη %s: %s.\n"
 
 #: apps/lusermod.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "Δεν είναι δυνατό το ερώτημα σε αυτό το CD: %s\n"
+msgstr "Δε μπόρεσε να γίνει τροποποίηση του χρήστη %s: %s.\n"
 
 #: apps/lusermod.c:327
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "Το %s δε μπόρεσε να ανοιχτεί."
+msgstr "Δε μπόρεσε να γίνει κλείδωμα της ομάδας %s: %s.\n"
 
 #: apps/lusermod.c:338
 #, fuzzy, c-format
@@ -528,9 +524,9 @@ msgid "No new home directory for %s.\n"
 msgstr "Νέα τιμή για κατάλογο: %s\n"
 
 #: apps/lusermod.c:349
-#, fuzzy, c-format
+#, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "Σφάλμα στην αφαίρεση `%s': %s"
+msgstr "Σφάλμα στη μετακίνηση του %s στο %s: %s.\n"
 
 #: lib/config.c:118
 #, fuzzy, c-format
@@ -543,9 +539,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "Δεν ήταν δυνατή η σάρωση του φακέλου `%s': %s"
 
 #: lib/config.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "Το αρχείο ρύθμισης %s του NUT λείπει"
+msgstr "το αρχείο ρύθμισης `%s' είναι πολύ μεγάλο"
 
 #: lib/config.c:149
 #, fuzzy, c-format
@@ -566,63 +562,52 @@ msgid "generic error"
 msgstr "γενικό σφάλμα"
 
 #: lib/error.c:48
-#, fuzzy
 msgid "not enough privileges"
-msgstr "Προνόμια χρήστη"
+msgstr "ανεπαρκή προνόμια χρήστη"
 
 #: lib/error.c:50
 msgid "access denied"
 msgstr "Άρνηση πρόσβασης"
 
 #: lib/error.c:52
-#, fuzzy
 msgid "bad user/group name"
-msgstr "Όνομα εξυπηρετητή αλληλογραφίας"
+msgstr "κακό όνομα χρήστη/ομάδας"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "κακό id χρήστη/ομάδας"
 
 #: lib/error.c:56
-#, fuzzy
 msgid "user/group name in use"
-msgstr "Το όνομα ομάδας είναι κενό"
+msgstr "όνομα χρήστη/ομάδας σε χρήση"
 
 #: lib/error.c:58
-#, fuzzy
 msgid "user/group id in use"
-msgstr ""
-"%s\n"
-"Το id της ομάδας υπάρχεί ήδη"
+msgstr "id χρήστη/ομάδας σε χρήση"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
 msgstr ""
 
 #: lib/error.c:62
-#, fuzzy
 msgid "error opening file"
-msgstr "Σφάλμα ανοίγματος αρχείου %s"
+msgstr "σφάλμα στο άνοιγμα αρχείου"
 
 #: lib/error.c:64
-#, fuzzy
 msgid "error locking file"
-msgstr "Σφάλμα ανοίγματος αρχείου %s"
+msgstr "Σφάλμα στο κλείδωμα αρχείου"
 
 #: lib/error.c:66
-#, fuzzy
 msgid "error statting file"
-msgstr "Σφάλμα αποθήκευσης αρχείου %s"
+msgstr "Σφάλμα στο stat αρχείου"
 
 #: lib/error.c:68
-#, fuzzy
 msgid "error reading file"
-msgstr "Σφάλμα κατά την ανάγνωση του αρχείου %s"
+msgstr "Σφάλμα στην ανάγνωση αρχείου"
 
 #: lib/error.c:70
-#, fuzzy
 msgid "error writing to file"
-msgstr "Σφάλμα εγγραφής στο αρχείο %s"
+msgstr "Σφάλμα στην εγγραφή στο αρχείο"
 
 #: lib/error.c:72
 #, fuzzy
@@ -635,9 +620,8 @@ msgid "internal initialization error"
 msgstr "Σφάλμα αρχικοποίησης XKB "
 
 #: lib/error.c:76
-#, fuzzy
 msgid "error loading module"
-msgstr "Σφάλμα φόρτωσης λίστας memo"
+msgstr "σφάλμα φόρτωσης αρθρώματος"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
@@ -652,13 +636,8 @@ msgid "unlocking would make the password field empty"
 msgstr ""
 
 #: lib/error.c:88
-#, fuzzy
 msgid "unknown error"
-msgstr ""
-"#-#-#-#-#  totem.gnome-2-14.el.po (el)  #-#-#-#-#\n"
-"άγνωστο σφάλμα\n"
-"#-#-#-#-#  userdrake-el.po (userdrake-el)  #-#-#-#-#\n"
-"Παρουσιάστηκε άγνωστο σφάλμα"
+msgstr "άγνωστο σφάλμα"
 
 #: lib/modules.c:65
 #, c-format
@@ -691,19 +670,17 @@ msgid "error reading from terminal"
 msgstr "Σφάλμα ανάγνωσης από θυγατρικό: %s."
 
 #: lib/user.c:194
-#, fuzzy
 msgid "name is not set"
-msgstr "το μέρισμα είναι σε χρήση\n"
+msgstr "το όνομα δεν έχει οριστεί"
 
 #: lib/user.c:199
-#, fuzzy
 msgid "name is too short"
-msgstr "Ο κωδικός πρόσβασης είναι πολύ σύντομος"
+msgstr "το όνομα είναι πολύ σύντομο"
 
 #: lib/user.c:204
-#, fuzzy, c-format
+#, c-format
 msgid "name is too long (%zu > %d)"
-msgstr "Το όνομα είναι πολύ μακρύ"
+msgstr "το όνομα είναι πολύ μακρύ (%zu > %d)"
 
 #: lib/user.c:211
 #, fuzzy
@@ -725,9 +702,8 @@ msgstr ""
 "Όνομα περιέχει"
 
 #: lib/user.c:237
-#, fuzzy
 msgid "name starts with a hyphen"
-msgstr "ξεκινά με"
+msgstr "το όνομα ξεκινά με μια παύλα"
 
 #: lib/user.c:248
 #, fuzzy, c-format
