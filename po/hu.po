@@ -1,23 +1,23 @@
-# translation of hu.po to hungarian
-# translation of hu.po to Hungarian
+# translation of hu.po to hu
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+#
 # Tamas Szanto <tszanto@mol.hu>, 2003.
 # Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005.
 # Szentiványi Gábor <szentivanyi.gabor@ulx.hu>, 2006.
-#
+# Gábor Szentiványi <szenti@ulx.hu>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-02-02 08:59+0100\n"
-"Last-Translator: Szentiványi Gábor <szentivanyi.gabor@ulx.hu>\n"
-"Language-Team: hungarian\n"
+"PO-Revision-Date: 2006-09-01 16:01+0200\n"
+"Last-Translator: Gábor Szentiványi <szenti@ulx.hu>\n"
+"Language-Team: hu <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -194,8 +194,7 @@ msgstr "[OPCIÓ...] [felhasználó]"
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
-"Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr "Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -317,9 +316,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Nem sikerült módosítani a(z) %s csoportot: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s eltávolítása nem sikerült: %s.\n"
+msgstr "%s kikeresése nem sikerült: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -329,8 +328,7 @@ msgstr "Nincs megadva csoportnév, ezt a nevet használom: %s.\n"
 #: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
-"Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr "Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lid.c:147
 #, c-format
@@ -349,8 +347,7 @@ msgstr "Hiba történt '%s' megnyitásakor: %s.\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
+msgstr "Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -364,8 +361,7 @@ msgstr "Nem lehet 0 értékű azonosítót létrehozni.\n"
 #: apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
-"Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
+msgstr "Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
 
 #: apps/lnewusers.c:281
 #, c-format
@@ -463,8 +459,7 @@ msgstr "%s nem rendelkezett csoportazonosítóval.\n"
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
-"Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
+msgstr "Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
 
 #: apps/luserdel.c:125
 #, c-format
@@ -698,30 +693,30 @@ msgstr "a név érvénytelen karaktert tartalmaz: '%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "A(z) %s felhasználónak nincs azonosítója (UID)"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "A(z) %s csoportnak nincs csoportazonosítója (GID)"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "A(z) %jd felhasználónak nincs neve"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Nem létezik \"%jd\" azonosítójú csoport\n"
+msgstr "A(z) %jd csoportnak nincs neve"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "felhasználónak nincs neve és azonosítója (UID) sem"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "csoportnak nincs neve és azonosítója (GID) sem"
 
 #: lib/util.c:193
 #, c-format
@@ -1064,6 +1059,3 @@ msgstr "Az alapértelmezett felhasználójellemzők lekérdezése:\n"
 msgid "Copying user structure:\n"
 msgstr "Felhasználói struktúra másolása:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "A parancsértelmező nem változott: %s\n"
