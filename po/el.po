@@ -60,7 +60,7 @@ msgstr "Εσωτερικό σφάλμα.\n"
 #: apps/apputil.c:581
 #, fuzzy, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "Το %s δεν υποστηρίζεται από αυτή την έκδοση του Mandriva Linux."
+msgstr "Το %s δεν υποστηρίζεται από αυτήν την έκδοση του Mandriva Linux."
 
 #: apps/apputil.c:583
 msgid "Unknown user context"
