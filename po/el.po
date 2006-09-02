@@ -223,7 +223,7 @@ msgstr "Τηλέφωνο γραφείου"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr "Τηλέφωνο Οικίας"
+msgstr "Τηλέφωνο οικίας"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
