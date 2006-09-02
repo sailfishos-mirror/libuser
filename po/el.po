@@ -364,7 +364,7 @@ msgstr ""
 #: apps/lnewusers.c:223
 #, fuzzy, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
 #: apps/lnewusers.c:281
 #, fuzzy, c-format
@@ -379,7 +379,7 @@ msgstr "Σφάλμα φόρτωσης καταλόγου gconf '%s': %s"
 #: apps/lnewusers.c:309
 #, fuzzy, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr "Σφάλμα στην δημιουργία του ταχυδρομικού νήματος.\n"
+msgstr "Σφάλμα στη δημιουργία του ταχυδρομικού νήματος.\n"
 
 #: apps/lnewusers.c:315
 #, fuzzy, c-format
@@ -436,7 +436,7 @@ msgstr "δεν υπάρχει το %s"
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, fuzzy, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
 #: apps/luseradd.c:274
 #, fuzzy, c-format
@@ -446,12 +446,12 @@ msgstr "Η πιστοποίηση απέτυχε."
 #: apps/luseradd.c:324
 #, fuzzy, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
 #: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr "Σφάλμα στην δημιουργία του ταχυδρομικού νήματος.\n"
+msgstr "Σφάλμα στη δημιουργία του ταχυδρομικού νήματος.\n"
 
 #: apps/luserdel.c:98
 #, fuzzy, c-format
@@ -491,7 +491,7 @@ msgstr "Σφάλμα κατά την αφαίρεση του %s: %s.\n"
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Αποτυχία στον ορισμό συνθηματικού για τον χρήστη %s: %s.\n"
+msgstr "Αποτυχία στον ορισμό συνθηματικού για το χρήστη %s: %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
@@ -516,7 +516,7 @@ msgstr "Δε μπόρεσε να γίνει κλείδωμα της ομάδας
 #: apps/lusermod.c:338
 #, fuzzy, c-format
 msgid "No old home directory for %s.\n"
-msgstr "Αποτυχία κατά την διαγραφή του καταλόγου %s."
+msgstr "Αποτυχία κατά τη διαγραφή του καταλόγου %s."
 
 #: apps/lusermod.c:343
 #, fuzzy, c-format
@@ -780,7 +780,7 @@ msgstr "Δεν ήταν δυνατό να φορτωθεί το %s: %s"
 #: modules/files.c:199
 #, fuzzy, c-format
 msgid "error creating `%s': %s"
-msgstr "Σφάλμα στην δημιουργία `%s': %s"
+msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
 #: modules/files.c:212
 #, fuzzy, c-format
