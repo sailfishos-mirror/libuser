@@ -879,7 +879,8 @@ msgstr "LDAPサーバーとバインドできませんでした"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "LDAP サーバーとバインドできませんでした。最初に `%s' として試みます: %s"
+msgstr ""
+"LDAP サーバーとバインドできませんでした。最初に `%s' として試みます: %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -1052,4 +1053,3 @@ msgstr "デフォルトユーザー属性を取得中:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ユーザー構造体をコピー中:\n"
-
