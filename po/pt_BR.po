@@ -22,7 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n > 1);"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -534,7 +534,8 @@ msgstr "não foi possível abrir o arquivo de configuração `%s': %s"
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "não foi possível obter as propriedades do arquivo de configuração `%s': %s"
+msgstr ""
+"não foi possível obter as propriedades do arquivo de configuração `%s': %s"
 
 #: lib/config.c:133
 #, c-format
@@ -809,7 +810,8 @@ msgstr "arquivo shadow não está presente -- desativando"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "erro ao conectar ao servidor kadm5 para o serviço `%s' no domínio `%s': %s"
+msgstr ""
+"erro ao conectar ao servidor kadm5 para o serviço `%s' no domínio `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -884,7 +886,8 @@ msgstr "não foi possível conectar ao servidor LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
+msgstr ""
+"não foi possível conectar ao servidor LDAP, primeira tentativa como `%s': %s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -1057,4 +1060,3 @@ msgstr "Obtendo atributos padrões dos usuários:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copiando estrutura do usuário:\n"
-
