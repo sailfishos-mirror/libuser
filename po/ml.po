@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-07-03 18:35+0530\n"
+"PO-Revision-Date: 2006-09-21 14:06+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
@@ -315,9 +315,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "%s എന്ന ഗ്രൂപ്പില്‍ മാറ്റം വരുത്തുവാന്‍ സാധിക്കുന്നില്ല: %s\n"
 
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s നീക്കം ചെയ്യുന്നതില്‍ പിഴവ്: %s.\n"
+msgstr "%s-ല്‍ തിരയുന്നതില്‍ പിഴവ്: %s.\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -692,30 +692,32 @@ msgstr "പേരില്‍ '%c' എന്ന അസാധുവായ charact
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "%s എന്ന ഉപയോക്താവിന് UID ലഭ്യമല്ല"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "ഗ്രൂപ്പ് %s-ന് GID ലഭ്യമല്ല"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
 msgstr ""
+"%jd എന്ന ഉപയോക്താവിന്\n"
+"പേരില്ല"
 
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "%jdഎന്ന ഗ്രൂപ്പ് നിലവിലില്ല\n"
+msgstr "%jdഎന്ന ഗ്രൂപ്പിന് പേരില്ല"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ഉപയോഗിക്കുന്ന ആളിന് പേരോ UID-യോ ലഭ്യമല്ല"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "ഗ്രൂപ്പിന് പേരോ GID-യോ ലഭ്യമല്ല"
 
 #: lib/util.c:193
 #, c-format
@@ -803,8 +805,7 @@ msgstr "ഷാഡോ ഫൈല്‍ ലഭ്യമല്ല -- disabling"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
+msgstr "`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1052,3 +1053,4 @@ msgstr "Getting default user attributes:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "യൂസറിന്‍റെ structure പകറ്‍ത്തുന്നു:\n"
+
