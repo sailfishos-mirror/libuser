@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 "\n"
 
@@ -1052,4 +1053,3 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
-

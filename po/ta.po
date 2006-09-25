@@ -18,7 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 "\n"
 "\n"
 
@@ -1057,4 +1058,3 @@ msgstr "இயல்பான பயனர் பண்புகளை பெற
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "அமைப்பை நகலெடுக்கிறது:\n"
-

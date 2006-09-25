@@ -1055,4 +1055,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-

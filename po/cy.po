@@ -1053,4 +1053,3 @@ msgstr "Yn nôl priodoleddau defnyddiwr rhagosodedig:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Yn copïo strwythur defnyddiwr:\n"
-

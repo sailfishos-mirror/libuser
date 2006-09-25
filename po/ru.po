@@ -1089,4 +1089,3 @@ msgstr "Копирование структуры пользователя:\n"
 
 #~ msgid "error initializing module"
 #~ msgstr "ошибка инициализации модуля"
-

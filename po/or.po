@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
@@ -315,6 +316,7 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "%s ସମୂହ ଟି ରୂପାନ୍ତରିତ କରି ହେଲା ନାହିଁ: %s\n"
 
 #: apps/lid.c:47
+#, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "%s କୁ ଅବଲୋକନ କରିବା ସମୟ ରେ ତ୍ରୁଟି: %s\n"
 
@@ -802,7 +804,8 @@ msgstr "କୌଣସି ଛାୟା ଫାଇଲ ଉପସ୍ଥିତ ନା�
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' ସେବା ଏବଂ `%s' ଅଧିକାର ପାଇଁ କେ.ଏ.ଡି.ଏମ.୫ ସେବକ ସହିତ ସଂଯୋଗ କରିବା ରେ ତ୍ରୁଟି: %s"
+msgstr ""
+"`%s' ସେବା ଏବଂ `%s' ଅଧିକାର ପାଇଁ କେ.ଏ.ଡି.ଏମ.୫ ସେବକ ସହିତ ସଂଯୋଗ କରିବା ରେ ତ୍ରୁଟି: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1050,4 +1053,3 @@ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଚାଳକ ର ଗୁ
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ଚାଳକ ର ସଂରଚନା କୁ ନକଲ କରୁଅଛି:\n"
-

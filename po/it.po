@@ -61,7 +61,8 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:581
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr ""
+"%s non è autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:583
 msgid "Unknown user context"
@@ -729,7 +730,8 @@ msgstr "errore nel bloccaggio del file: %s"
 #: modules/files.c:120
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
+msgstr ""
+"impossibile recuperare le informazioni sull'ambiente di sicurezza: `%s': %s"
 
 #: modules/files.c:126
 #, c-format
@@ -943,7 +945,8 @@ msgstr "nessun attributo `%s' trovato"
 #: modules/ldap.c:1856
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "errore nella configurazione della password nella directory LDAP per %s: %s"
+msgstr ""
+"errore nella configurazione della password nella directory LDAP per %s: %s"
 
 #: modules/ldap.c:2468
 msgid "LDAP Server Name"
@@ -1057,4 +1060,3 @@ msgstr "Raccolta attributi dell'utente di default:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copia della struttura dell'utente:\n"
-

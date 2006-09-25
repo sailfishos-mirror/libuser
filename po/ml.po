@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 "\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
@@ -805,7 +806,8 @@ msgstr "ഷാഡോ ഫൈല്‍ ലഭ്യമല്ല -- disabling"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
+msgstr ""
+"`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1053,4 +1055,3 @@ msgstr "Getting default user attributes:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "യൂസറിന്‍റെ structure പകറ്‍ത്തുന്നു:\n"
-

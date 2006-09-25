@@ -21,34 +21,29 @@ msgstr ""
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error reading `%s': %s"
 msgstr "चूक"
 
 #: apps/apputil.c:131 apps/apputil.c:200
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating `%s': %s"
 msgstr "चूक"
 
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
 #: modules/files.c:229
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "चूक"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:261 modules/files.c:275
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error writing `%s': %s"
 msgstr "चूक"
 
 #: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error removing `%s': %s"
 msgstr "चूक"
 
@@ -78,14 +73,12 @@ msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
 #: apps/apputil.c:600
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error initializing PAM.\n"
 msgstr "चूक"
 
 #: apps/apputil.c:610 apps/apputil.c:637
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "अधिप्रमाणन"
 
@@ -95,8 +88,7 @@ msgid "Internal PAM error `%s'.\n"
 msgstr ""
 
 #: apps/apputil.c:623
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "अपरिचित"
 
@@ -113,15 +105,13 @@ msgstr ""
 #: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "चूक"
 
 #: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No user name specified.\n"
 msgstr "नाही"
 
@@ -129,8 +119,7 @@ msgstr "नाही"
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "चूक"
 
@@ -161,8 +150,7 @@ msgid "Maximum:\t%d\n"
 msgstr ""
 
 #: apps/lchage.c:192
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Warning:\t%d\n"
 msgstr "ताकीद"
 
@@ -181,14 +169,12 @@ msgid "Last Change:\t%s\n"
 msgstr ""
 
 #: apps/lchage.c:211
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "गुप्तशब्द"
 
 #: apps/lchage.c:221
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "गुप्तशब्द"
 
@@ -207,8 +193,7 @@ msgid "[OPTION...] [user]"
 msgstr ""
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "नाही"
 
@@ -283,8 +268,7 @@ msgid "[OPTION...] group"
 msgstr ""
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No group name specified.\n"
 msgstr "नाही"
 
@@ -334,26 +318,22 @@ msgid "Group %s could not be modified: %s\n"
 msgstr ""
 
 #: apps/lid.c:47
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "चूक"
 
 #: apps/lid.c:133
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "नाही"
 
 #: apps/lid.c:137
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "नाही"
 
 #: apps/lid.c:147
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "नाही"
 
@@ -362,14 +342,12 @@ msgid "[OPTION...]"
 msgstr ""
 
 #: apps/lnewusers.c:90
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "चूक"
 
 #: apps/lnewusers.c:124
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "चूक"
 
@@ -383,32 +361,27 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr ""
 
 #: apps/lnewusers.c:223
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "चूक"
 
 #: apps/lnewusers.c:281
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "चूक"
 
 #: apps/lnewusers.c:295
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "चूक"
 
 #: apps/lnewusers.c:309
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "चूक"
 
 #: apps/lnewusers.c:315
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "चूक"
 
@@ -433,26 +406,22 @@ msgid "Passwords do not match, try again.\n"
 msgstr ""
 
 #: apps/lpasswd.c:133
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Password change canceled.\n"
 msgstr "गुप्तशब्द"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "चूक"
 
 #: apps/lpasswd.c:198
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "चूक"
 
 #: apps/lpasswd.c:209
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Password changed.\n"
 msgstr "गुप्तशब्द"
 
@@ -462,8 +431,7 @@ msgid "Group %jd does not exist\n"
 msgstr ""
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "चूक"
 
@@ -473,14 +441,12 @@ msgid "Account creation failed: %s.\n"
 msgstr ""
 
 #: apps/luseradd.c:324
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "चूक"
 
 #: apps/luseradd.c:331
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error creating mail spool.\n"
 msgstr "चूक"
 
@@ -495,8 +461,7 @@ msgid "%s did not have a gid number.\n"
 msgstr ""
 
 #: apps/luserdel.c:118
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "नाही"
 
@@ -516,8 +481,7 @@ msgid "%s did not have a home directory.\n"
 msgstr ""
 
 #: apps/luserdel.c:156
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "चूक"
 
@@ -547,20 +511,17 @@ msgid "Group %s could not be modified: %s.\n"
 msgstr ""
 
 #: apps/lusermod.c:338
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No old home directory for %s.\n"
 msgstr "नाही"
 
 #: apps/lusermod.c:343
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "No new home directory for %s.\n"
 msgstr "नाही"
 
 #: apps/lusermod.c:349
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "चूक"
 
@@ -1043,8 +1004,7 @@ msgid "error creating mail spool for user"
 msgstr ""
 
 #: samples/lookup.c:67
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Error initializing %s: %s\n"
 msgstr "चूक"
 
@@ -1054,26 +1014,22 @@ msgid "Invalid ID %s\n"
 msgstr ""
 
 #: samples/lookup.c:92
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Searching for group with ID %jd.\n"
 msgstr "शोधत आहे"
 
 #: samples/lookup.c:96
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Searching for group named %s.\n"
 msgstr "शोधत आहे"
 
 #: samples/lookup.c:103
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Searching for user with ID %jd.\n"
 msgstr "शोधत आहे"
 
 #: samples/lookup.c:107
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "Searching for user named %s.\n"
 msgstr "शोधत आहे"
 
@@ -1106,4 +1062,3 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
-

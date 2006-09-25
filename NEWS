@@ -1,3 +1,6 @@
+0.54.7
+* Update translations
+
 0.54.6
 * Fix bugs in handling of invalid lines in the files and shadow modules.
 * Fix pattern matching in lu_*_enumerate_full in the files and shadow modules.

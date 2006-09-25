@@ -1,3 +1,10 @@
+2006-09-25  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.54.7.
+	* NEWS: Update.
+
+	* po/LINGUAS: Add el, ml and or.
+
 2006-05-01  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.54.6.
