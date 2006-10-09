@@ -4,13 +4,15 @@
 # Runa Bhattacharjee <runab@redhat.com>, 2004.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
 # Jamil Ahmed <jamil@bengalinux.org>, 2006.
+# Mahay Alam Khan (মাহে আলম) <makl10n@yahoo.com>, 2006.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-05-01 07:12+0200\n"
-"PO-Revision-Date: 2006-01-26 22:21+0600\n"
-"Last-Translator: Jamil Ahmed <jamil@bengalinux.org>\n"
+"PO-Revision-Date: 2006-09-23 01:16+0600\n"
+"Last-Translator: Mahay Alam Khan (মাহে আলম) <makl10n@yahoo.com>\n"
 "Language-Team: Bengali <redhat-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -339,9 +341,9 @@ msgstr "%s গ্রুপ পরিবর্তন করা যায়নি: %
 
 # modified for RHEL
 #: apps/lid.c:47
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "%s সরিয়ে ফেলতে সমস্যা হয়েছে: %s।\n"
+msgstr "%s: %s সমস্যা খোঁজা হচ্ছে\n"
 
 # modified for RHEL
 #: apps/lid.c:133
@@ -744,31 +746,31 @@ msgstr "নামের মধ্য অবৈধ অক্ষর `%c' লেখ
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "ব্যবহারকারী %s এর কোন UID নেই"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "গ্রুপ %s এর কোন GID নেই"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "ব্যবহারকারী %jd এর কোন নাম নেই"
 
 # modified for RHEL
 #: lib/user.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "%jd দলটি বর্তমানে উপস্থিত নেই।\n"
+msgstr "গ্রুপ %jd এর কোন নাম নেই"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ব্যবহারকারীর কোন নাম নেই এমনকি কোন UID ও নেই"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "গ্রুপের কোন নাম নেই এমনকি কোন GID ও নেই"
 
 #: lib/util.c:193
 #, c-format
