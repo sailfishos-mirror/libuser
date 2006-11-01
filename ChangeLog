@@ -1,3 +1,16 @@
+2006-11-02  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.54.8.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+	* NEWS: Update.
+
+	* lib/config.c (handle_default_useradd_key): Import HOME.
+	* docs/libuser.conf.5.in: Document HOME is imported from
+	default/useradd.
+	* tests/config_default_useradd
+	* tests/config_override.conf.in
+	* tests/config_test.c (main): Test import of HOME.
+
 2006-09-25  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.54.7.

@@ -164,6 +164,7 @@ lb|lb.
 Variable,Imported as
 EXPIRE,userdefaults/LU_SHADOWEXPIRE
 GROUP,userdefaults/LU_GIDNUMBER
+HOME,userdefaults/LU_HOMEDIRECTORY
 INACTIVE,userdefaults/LU_SHADOWINACTIVE
 SHELL,userdefaults/LU_LOGINSHELL
 SKEL,defaults/skeleton
@@ -171,9 +172,9 @@ SKEL,defaults/skeleton
 
 The
 .B HOME
-variable is
-.I not
-imported.
+variable value has
+.B /%n
+appended to it before importing.
 
 .SH \fB[userdefaults]\fR
 This section defines attribute values of newly created user entities.

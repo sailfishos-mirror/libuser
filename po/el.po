@@ -744,7 +744,8 @@ msgstr "Σφάλμα ανοίγματος αρχείου %s"
 #: modules/files.c:120
 #, fuzzy, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr ""
+"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #
 #: modules/files.c:126
@@ -755,7 +756,8 @@ msgstr "Αποτυχία ρύθμισης των διαπιστευτηρίων 
 #: modules/files.c:133
 #, fuzzy, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr ""
+"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #: modules/files.c:176 modules/files.c:549 modules/files.c:874
 #: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
@@ -1082,4 +1084,3 @@ msgstr "Λήψη προεπιλεγμένων ιδιοτήτων χρήστη:\n
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Αντιγραφή δομής χρήστη:\n"
-

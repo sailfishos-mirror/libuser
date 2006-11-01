@@ -24,6 +24,7 @@ pw_uid = 4246
 
 LU_SHADOWEXPIRE = 4247
 LU_GIDNUMBER = 4248
+LU_HOMEDIRECTORY = /overridden/home-%n
 # LU_SHADOWINACTIVE
 sp_inact = 4249
 LU_LOGINSHELL = /overridden/shell

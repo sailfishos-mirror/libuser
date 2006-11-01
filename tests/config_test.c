@@ -115,6 +115,8 @@ main(int argc, char *argv[])
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_GIDNUMBER, "4322",
 		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_HOMEDIRECTORY, "/custom/homes/%n",
+		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_SHADOWINACTIVE, "4323",
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_LOGINSHELL, "/login/shell",
@@ -146,6 +148,9 @@ main(int argc, char *argv[])
 	verify_var(ctx, "userdefaults/LU_GIDNUMBER", "4248",
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_GIDNUMBER, (const char *)NULL);
+	verify_var(ctx, "userdefaults/LU_HOMEDIRECTORY", "/overridden/home-%n",
+		   (const char *)NULL);
+	verify_var(ctx, "userdefaults/" LU_HOMEDIRECTORY, (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_SHADOWINACTIVE, "4249",
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/LU_LOGINSHELL", "/overridden/shell",

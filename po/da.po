@@ -348,7 +348,8 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:124
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr ""
+"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -805,7 +806,8 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr ""
+"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1053,4 +1055,3 @@ msgstr "Henter standard brugerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brugerstruktur:\n"
-

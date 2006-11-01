@@ -626,6 +626,14 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 			}
 			key_add(config, "userdefaults", LU_GIDNUMBER, value);
 		}
+	} else if (strcmp(key, "HOME") == 0) {
+		if (!ATTR_DEFINED(config, "userdefaults", LU_HOMEDIRECTORY)) {
+			char *dir;
+
+			dir = g_strconcat(value, "/%n", NULL);
+			key_add(config, "userdefaults", LU_HOMEDIRECTORY, dir);
+			g_free(dir);
+		}
 	} else if (strcmp(key, "INACTIVE") == 0) {
 		if (!ATTR_DEFINED(config, "userdefaults", LU_SHADOWINACTIVE))
 			key_add(config, "userdefaults", LU_SHADOWINACTIVE,
@@ -637,7 +645,6 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 		if (!key_defined(config, "defaults", "skeleton"))
 			key_add(config, "defaults", "skeleton", value);
 	}
-	/* Unimplemented: HOME */
 }
 
 static gboolean
