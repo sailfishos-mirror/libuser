@@ -1049,4 +1049,3 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
-
