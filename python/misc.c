@@ -182,7 +182,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 			struct libuser_prompt *obj;
 			obj = (struct libuser_prompt *)PyList_GetItem(list, i);
 			obj->prompt.value = g_strdup(prompts[i].value ? : "");
-			obj->prompt.free_value = (typeof(obj->prompt.free_value)) g_free;
+			obj->prompt.free_value = g_free;
 			if (prompts[i].value && prompts[i].free_value) {
 				prompts[i].free_value(prompts[i].value);
 				prompts[i].value = NULL;
@@ -352,8 +352,7 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 		if (self->prompt.value && self->prompt.free_value)
 			self->prompt.free_value(self->prompt.value);
 		self->prompt.value = g_strdup(PyString_AsString(args));
-		self->prompt.free_value =
-		    (typeof(self->prompt.free_value)) g_free;
+		self->prompt.free_value = g_free;
 		DEBUG_EXIT;
 		return 0;
 	}

@@ -1,5 +1,8 @@
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* python/misc.c (libuser_admin_prompt, libuser_prompt_setattr): Remove
+	an unnecessary use of typeof.
+
 	* apps/apputil.c (lu_converse): Use calloc () instead of malloc () and
 	memset ().
 
