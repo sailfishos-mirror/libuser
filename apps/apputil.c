@@ -499,11 +499,9 @@ lu_converse(int num_msg, const struct pam_message **msg,
 		/* Allocate room for responses.  This memory will be
 		 * freed by the calling application, so use malloc() instead
 		 * of g_malloc() and friends. */
-		responses = malloc(sizeof(struct pam_response) * i);
-		if (responses == NULL) {
+		responses = calloc(num_msg, sizeof(*responses));
+		if (responses == NULL)
 			return PAM_BUF_ERR;
-		}
-		memset(responses, 0, sizeof(struct pam_response) * i);
 		/* Transcribe the responses into the PAM structure. */
 		for (i = 0; i < num_msg; i++) {
 			/* Set the response code and text (if we have text),

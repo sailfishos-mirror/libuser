@@ -1,5 +1,8 @@
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_converse): Use calloc () instead of malloc () and
+	memset ().
+
 	* python/common.h (Py_ssize_t, lenfunc): New definitions.
 	* python/ent.c (libuser_entity_setattr, libuser_entity_set)
 	(libuser_entity_length, libuser_entity_set_item): Use Py_ssize_t.
