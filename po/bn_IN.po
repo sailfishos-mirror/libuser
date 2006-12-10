@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:12+0200\n"
+"POT-Creation-Date: 2006-12-10 23:07+0100\n"
 "PO-Revision-Date: 2006-09-20 10:51+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali India\n"
@@ -60,56 +60,56 @@ msgid "Error removing `%s': %s"
 msgstr "`%s' অপসারণে সমস্যা: %s"
 
 # modified for RHEL
-#: apps/apputil.c:547 apps/apputil.c:551
+#: apps/apputil.c:545 apps/apputil.c:549
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "অধিকার হ্রাসের প্রচেষ্টা ব্যর্থ।\n"
 
-#: apps/apputil.c:560
+#: apps/apputil.c:558
 #, c-format
 msgid "Internal error.\n"
 msgstr "অভ্যন্তরীণ সমস্যা।\n"
 
 # modified for RHEL
-#: apps/apputil.c:581
+#: apps/apputil.c:579
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s-র, %s-র finger সংক্রান্ত তথ্য পরিবর্তন করার অধিকার নেই।\n"
 
 # modified for RHEL
-#: apps/apputil.c:583
+#: apps/apputil.c:581
 msgid "Unknown user context"
 msgstr "ব্যবহারকারীর প্রাসঙ্গিক বিবরণ অজানা"
 
 # modified for RHEL
-#: apps/apputil.c:591
+#: apps/apputil.c:589
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd-র ডিফল্ট প্রসঙ্গ নির্ধারণ করা সম্ভব হয়নি\n"
 
-#: apps/apputil.c:600
+#: apps/apputil.c:598
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM আরম্ভ করতে সমস্যা।\n"
 
 # modified for RHEL
-#: apps/apputil.c:610 apps/apputil.c:637
+#: apps/apputil.c:608 apps/apputil.c:635
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s-র পরিচয়প্রমাণ প্রক্রিয়া ব্যর্থ হয়েছে।\n"
 
-#: apps/apputil.c:618
+#: apps/apputil.c:616
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "PAM-র অভ্যন্তরীণ সমস্যা `%s'.\n"
 
 # modified for RHEL
-#: apps/apputil.c:623
+#: apps/apputil.c:621
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "অজানা ব্যবহারকারী অনুমোদিত রয়েছেন।\n"
 
-#: apps/apputil.c:627
+#: apps/apputil.c:625
 #, c-format
 msgid "User mismatch.\n"
 msgstr "ব্যবহারকারীর গরমিল।\n"
@@ -1061,22 +1061,22 @@ msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL আরম্ভ করতে সমস্যা: %s"
 
 # modified for RHEL
-#: python/admin.c:530
+#: python/admin.c:531
 msgid "error creating home directory for user"
 msgstr "ব্যবহারকারীর জন্য ব্যক্তিগত (হোম) ডিরেক্টরি তৈরি করতে সমস্যা"
 
 # modified for RHEL
-#: python/admin.c:583
+#: python/admin.c:584
 msgid "error removing home directory for user"
 msgstr "ব্যবহারকারীর ব্যক্তিগত (হোম) ডিরেক্টরি মুছে ফেলতে সমস্যা"
 
 # modified for RHEL
-#: python/admin.c:661
+#: python/admin.c:662
 msgid "error moving home directory for user"
 msgstr "ব্যবহারকারীর ব্যক্তিগত (হোম) ডিরেক্টরি সরাতে সমস্যা"
 
 # modified for RHEL
-#: python/admin.c:694
+#: python/admin.c:695
 msgid "error creating mail spool for user"
 msgstr "ব্যবহারকারীর জন্য মেইল-স্পুল তৈরি করতে সমস্যা"
 

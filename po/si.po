@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-05-01 07:12+0200\n"
+"POT-Creation-Date: 2006-12-10 23:07+0100\n"
 "PO-Revision-Date: 2003-02-24 23:52-0500\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -43,51 +43,51 @@ msgstr ""
 msgid "Error removing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:547 apps/apputil.c:551
+#: apps/apputil.c:545 apps/apputil.c:549
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr ""
 
-#: apps/apputil.c:560
+#: apps/apputil.c:558
 #, c-format
 msgid "Internal error.\n"
 msgstr ""
 
-#: apps/apputil.c:581
+#: apps/apputil.c:579
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:583
+#: apps/apputil.c:581
 msgid "Unknown user context"
 msgstr ""
 
-#: apps/apputil.c:591
+#: apps/apputil.c:589
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:600
+#: apps/apputil.c:598
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr ""
 
-#: apps/apputil.c:610 apps/apputil.c:637
+#: apps/apputil.c:608 apps/apputil.c:635
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr ""
 
-#: apps/apputil.c:618
+#: apps/apputil.c:616
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr ""
 
-#: apps/apputil.c:623
+#: apps/apputil.c:621
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr ""
 
-#: apps/apputil.c:627
+#: apps/apputil.c:625
 #, c-format
 msgid "User mismatch.\n"
 msgstr ""
@@ -975,19 +975,19 @@ msgstr ""
 msgid "error initializing Cyrus SASL: %s"
 msgstr ""
 
-#: python/admin.c:530
+#: python/admin.c:531
 msgid "error creating home directory for user"
 msgstr ""
 
-#: python/admin.c:583
+#: python/admin.c:584
 msgid "error removing home directory for user"
 msgstr ""
 
-#: python/admin.c:661
+#: python/admin.c:662
 msgid "error moving home directory for user"
 msgstr ""
 
-#: python/admin.c:694
+#: python/admin.c:695
 msgid "error creating mail spool for user"
 msgstr ""
 

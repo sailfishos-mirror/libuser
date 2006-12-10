@@ -1,3 +1,9 @@
+0.55
+* Remove the quota library and Python module.  It doesn't even compile and
+  has no known users.
+* Add support for the 64-bit API of Python 2.5
+* Minor cleanups
+
 0.54.8
 * Add importing of HOME from default/useradd.
 
