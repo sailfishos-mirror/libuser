@@ -5,7 +5,6 @@
 <!ENTITY libuser-entity SYSTEM "xml/entity.xml">
 <!ENTITY libuser-error SYSTEM "xml/error.xml">
 <!ENTITY libuser-prompt SYSTEM "xml/prompt.xml">
-<!ENTITY libuser-quota SYSTEM "xml/quota.xml">
 <!ENTITY libuser-user SYSTEM "xml/user.xml">
 <!ENTITY libuser-value SYSTEM "xml/value.xml">
 ]>
@@ -21,7 +20,6 @@
     &libuser-entity;
     &libuser-error;
     &libuser-prompt;
-    &libuser-quota;
     &libuser-user;
   </chapter>
 </book>

@@ -1,5 +1,20 @@
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* autogen.sh
+	* Makefile.am (EXTRA_MANS, pkginclude_HEADERS, dist_noinst_SCRIPTS)
+	[QUOTA] (noinst_PROGRAMS, lib_LTLIBRARIES, pyexec_LTLIBRARIES)
+	* configure.in
+	* docs/reference/libuser-docs.sgml
+	* docs/reference/libuser-sections.txt
+	* python/modules.txt: Remove the quota library and Python module.
+	* docs/reference/tmpl/quota.sgml
+	* lib/userquota.3
+	* lib/userquota.c
+	* lib/userquota.h
+	* python/quota-script
+	* python/quotamodule.c
+	* samples/quotaq.c: Removed files.
+
 	* python/admin.c (libuser_admin_setattr)
 	(libuser_admin_lookup_user_name, libuser_admin_lookup_user_id)
 	(libuser_admin_lookup_group_name, libuser_admin_lookup_group_id)

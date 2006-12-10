@@ -104,13 +104,6 @@ if test "x$selinux" != xno ; then
     AC_DEFINE([WITH_SELINUX], [1], [Define to 1 to use SELinux extensions])
 fi
 AC_SUBST(SELINUX_LIBS)
-   
-
-AC_ARG_ENABLE([quota],
-	      AS_HELP_STRING([--enable-quota],
-			     [provide support for configuring quotas]),
-	      [quota=$withval],[quota=no])
-AM_CONDITIONAL([QUOTA], [test x$quota != xno])
 
 AC_C_CONST
 AC_TYPE_UID_T
