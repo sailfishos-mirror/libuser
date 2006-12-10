@@ -30,6 +30,11 @@
 #include "../lib/userquota.h"
 #include "debug.h"
 
+/* FIXME: remove this when dropping Python < 2.5 compatibility */
+#if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
+typedef int Py_ssize_t;
+#endif
+
 void initlibuserquota(void);
 
 static PyTypeObject quota_object_type;
@@ -440,7 +445,8 @@ quotamodule_set(PyObject * self, PyObject * args)
 	DEBUG_ENTRY;
 
 	if (PyList_Check(args)) {
-		int i;
+		Py_ssize_t i;
+
 		for (i = 0; i < PyList_Size(args); i++) {
 			if (quotamodule_set(self, PyList_GetItem(args, i))
 			    == NULL) {

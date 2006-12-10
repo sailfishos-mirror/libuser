@@ -21,8 +21,9 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <pwd.h>
 #include <grp.h>
+#include <limits.h>
+#include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <glib.h>
@@ -74,12 +75,14 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			            PyTuple_Size(prompt_data[1]) + 1 : 1);
 		PyTuple_SetItem(tuple, 0, list);
 		if (PyTuple_Check(prompt_data[1])) {
-			for (i = 0; i < PyTuple_Size(prompt_data[1]); i++) {
+			Py_ssize_t j;
+
+			for (j = 0; j < PyTuple_Size(prompt_data[1]); j++) {
 				PyObject *obj;
 
-				obj = PyTuple_GetItem(prompt_data[1], i);
+				obj = PyTuple_GetItem(prompt_data[1], j);
 				Py_INCREF(obj);
-				PyTuple_SetItem(tuple, i + 1, obj);
+				PyTuple_SetItem(tuple, j + 1, obj);
 			}
 		}
 		ret = PyObject_CallObject(prompt_data[0], tuple);
@@ -94,9 +97,10 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 		}
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
-			prompt =
-			    (struct libuser_prompt *) PyList_GetItem(list,
-								     i);
+			/* i doesn't have to be Py_ssize_t because count is int
+			   as well. */
+			prompt = (struct libuser_prompt *)PyList_GetItem(list,
+									 i);
 			prompts[i].value = g_strdup(prompt->prompt.value);
 			prompts[i].free_value = g_free;
 		}
@@ -112,7 +116,8 @@ static PyObject *
 libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		     PyObject * kwargs, lu_prompt_fn * prompter)
 {
-	int count, i;
+	Py_ssize_t count;
+	int i;
 	PyObject *list = NULL, *moreargs = NULL;
 	struct lu_prompt *prompts;
 	struct lu_error *error = NULL;
@@ -127,9 +132,13 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		DEBUG_EXIT;
 		return NULL;
 	}
-	DEBUG_CALL;
 	count = PyList_Size(list);
-	DEBUG_CALL;
+	if (count > INT_MAX) {
+		PyErr_SetString(PyExc_ValueError, "too many prompts");
+		DEBUG_EXIT;
+		return NULL;
+	}
+	/* i now may be int because count fits in int */
 	for (i = 0; i < count; i++) {
 		PyObject *item;
 
@@ -143,8 +152,6 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		}
 		DEBUG_CALL;
 	}
-	DEBUG_CALL;
-	count = PyList_Size(list);
 	DEBUG_CALL;
 	prompts = g_malloc0(count * sizeof(struct lu_prompt));
 	DEBUG_CALL;
@@ -173,7 +180,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 	if (prompter(prompts, count, self->prompt_data, &error) != FALSE) {
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *obj;
-			obj = (struct libuser_prompt *) PyList_GetItem(list, i);
+			obj = (struct libuser_prompt *)PyList_GetItem(list, i);
 			obj->prompt.value = g_strdup(prompts[i].value ? : "");
 			obj->prompt.free_value = (typeof(obj->prompt.free_value)) g_free;
 			if (prompts[i].value && prompts[i].free_value) {

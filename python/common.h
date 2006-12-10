@@ -5,6 +5,12 @@
 #include "../lib/user.h"
 #include "debug.h"
 
+/* FIXME: remove this when dropping Python < 2.5 compatibility */
+#if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
+typedef int Py_ssize_t;
+typedef inquiry lenfunc;
+#endif
+
 struct libuser_admin {
 	PyObject_HEAD
 	PyObject *prompt_data[2];

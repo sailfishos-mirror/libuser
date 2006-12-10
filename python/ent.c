@@ -255,7 +255,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 	if (PyArg_ParseTuple(args, "O", &list)) {
 		PyObject *item;
 		GValue value;
-		int size, i;
+		Py_ssize_t size, i;
 
 		lu_ent_clear(self->ent, name);
 
@@ -264,8 +264,8 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			/* We need the length of the tuple. */
 			size = PyTuple_Size(list);
 #ifdef DEBUG_BINDING
-			fprintf(stderr, "%sTuple has %d items.\n",
-				getindent(), size);
+			fprintf(stderr, "%sTuple has %jd items.\n",
+				getindent(), (intmax_t)size);
 #endif
 			/* Add each item in turn. */
 			memset(&value, 0, sizeof(value));
@@ -290,8 +290,8 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			/* We need the length of the list. */
 			size = PyList_Size(list);
 #ifdef DEBUG_BINDING
-			fprintf(stderr, "%sList has %d items.\n",
-				getindent(), size);
+			fprintf(stderr, "%sList has %jd items.\n",
+				getindent(), (intmax_t)size);
 #endif
 
 			/* Add each item in turn. */
@@ -446,12 +446,13 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 	lu_ent_copy(self->ent, copy);
 	/* We expect a string and some kind of object. */
 	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
-		int i, size;
+		Py_ssize_t i, size;
 
 		/* It's a list. */
 		size = PyList_Size(list);
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
+		fprintf(stderr, "%sList has %jd items.\n", getindent(),
+			(intmax_t)size);
 #endif
 
 		/* Remove all current values. */
@@ -540,7 +541,7 @@ libuser_entity_revert(struct libuser_entity *self, PyObject * args)
 }
 
 /* Get the length of the list of attributes. */
-static int
+static Py_ssize_t
 libuser_entity_length(struct libuser_entity *self)
 {
 	DEBUG_CALL;
@@ -597,7 +598,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 			PyObject *args)
 {
 	char *attr = NULL;
-	int i, size, ret;
+	Py_ssize_t i, size;
+	int ret;
 	GValue value;
 	struct lu_ent *copy;
 
@@ -620,7 +622,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	if (PyList_Check(args)) {
 		size = PyList_Size(args);
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sList has %d items.\n", getindent(), size);
+		fprintf(stderr, "%sList has %jd items.\n", getindent(),
+			(intmax_t)size);
 #endif
 		lu_ent_clear(self->ent, attr);
 		memset(&value, 0, sizeof(value));
@@ -643,7 +646,8 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	if (PyTuple_Check(args)) {
 		size = PyTuple_Size(args);
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sTuple has %d items.\n", getindent(), size);
+		fprintf(stderr, "%sTuple has %jd items.\n", getindent(),
+			(intmax_t)size);
 #endif
 		lu_ent_clear(self->ent, attr);
 		memset(&value, 0, sizeof(value));
@@ -693,7 +697,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 }
 
 static PyMappingMethods libuser_entity_mapping_methods = {
-	(inquiry) libuser_entity_length,
+	(lenfunc) libuser_entity_length,
 	(binaryfunc) libuser_entity_get_item,
 	(objobjargproc) libuser_entity_set_item,
 };
