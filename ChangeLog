@@ -1,5 +1,7 @@
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* configure.in (AM_GNU_GETTEXT_VERSION): Use gettext-0.14.6.
+
 	* configure.in: Version 0.55.
 	* NEWS: Update.
 

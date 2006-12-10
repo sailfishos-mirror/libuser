@@ -19,7 +19,7 @@ AC_DEFINE(G_DISABLE_DEPRECATED,,
 	[Stay away from deprecated glib functionality.])
 
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.14.4])
+AM_GNU_GETTEXT_VERSION([0.14.6])
 
 LIBSAVE="$LIBS"
 AC_SEARCH_LIBS([crypt], [crypt])
