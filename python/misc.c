@@ -191,7 +191,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 			Py_DECREF(obj);
 		}
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	} else {
 		if (error != NULL)
 			lu_error_free(&error);
@@ -264,17 +264,17 @@ libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
 	if ((strcmp(attr, "default_value") == 0) ||
 	    (strcmp(attr, "defaultValue") == 0)) {
 		DEBUG_EXIT;
-		return self->prompt.
-		    default_value ? PyString_FromString(self->prompt.
-							default_value) :
-		    Py_BuildValue("");
+		if (self->prompt.default_value != NULL)
+			return PyString_FromString(self->prompt.default_value);
+		else
+			Py_RETURN_NONE;
 	}
 	if (strcmp(attr, "value") == 0) {
 		DEBUG_EXIT;
-		return self->prompt.value ? PyString_FromString(self->
-								prompt.
-								value) :
-		    Py_BuildValue("");
+		if (self->prompt.value != NULL)
+			return PyString_FromString(self->prompt.value);
+		else
+			Py_RETURN_NONE;
 	}
 	DEBUG_EXIT;
 	return Py_FindMethod(NULL, (PyObject *) self, attr);

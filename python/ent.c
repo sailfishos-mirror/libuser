@@ -428,7 +428,7 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 	lu_ent_add(self->ent, attr, &value);
 	g_value_unset(&value);
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 /* Set the attribute to a given list of arguments. */
@@ -469,7 +469,8 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 			lu_ent_add(self->ent, attr, &value);
 			g_value_unset(&value);
 		}
-		ret = Py_BuildValue("");
+		Py_INCREF(Py_None);
+		ret = Py_None;
 		goto end;
 	}
 	PyErr_Clear (); /* PyArg_ParseTuple() above has raised an exception */
@@ -486,7 +487,8 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 		/* Add this one value. */
 		lu_ent_add(self->ent, attr, &value);
 		g_value_unset(&value);
-		ret = Py_BuildValue("");
+		Py_INCREF(Py_None);
+		ret = Py_None;
 		goto end;
 	}
 
@@ -512,7 +514,7 @@ libuser_entity_clear(struct libuser_entity *self, PyObject * args)
 		return NULL;
 	}
 	lu_ent_clear(self->ent, arg);
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 /* Clear out all values for all attributes. */
@@ -525,7 +527,7 @@ libuser_entity_clear_all(struct libuser_entity *self, PyObject * args)
 		return NULL;
 	}
 	lu_ent_clear_all(self->ent);
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 /* Roll-back any changes we've made to the object since it was last read from or
@@ -537,7 +539,7 @@ libuser_entity_revert(struct libuser_entity *self, PyObject * args)
 	DEBUG_ENTRY;
 	lu_ent_revert(self->ent);
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 /* Get the length of the list of attributes. */
@@ -589,7 +591,7 @@ libuser_entity_has_key(struct libuser_entity *self, PyObject *item)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	return Py_BuildValue("i", lu_ent_has(self->ent, attr) ? 1 : 0);
+	return PyInt_FromLong(lu_ent_has(self->ent, attr) ? 1 : 0);
 }
 
 /* Set a value, dictionary style. */

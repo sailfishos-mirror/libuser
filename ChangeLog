@@ -1,5 +1,22 @@
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
+	* python/admin.c (libuser_admin_setattr)
+	(libuser_admin_lookup_user_name, libuser_admin_lookup_user_id)
+	(libuser_admin_lookup_group_name, libuser_admin_lookup_group_id)
+	(libuser_admin_do_wrap, libuser_admin_wrap_boolean)
+	(libuser_admin_setpass, libuser_admin_create_home)
+	(libuser_admin_remove_home, libuser_admin_move_home)
+	(libuser_admin_create_remove_mail, libuser_admin_add_user)
+	(libuser_admin_delete_user)
+	(libuser_admin_get_first_unused_id_type, libuser_admin_new)
+	* python/ent.c (libuser_entity_add, libuser_entity_set)
+	(libuser_entity_clear, libuser_entity_clear_all)
+	(libuser_entity_revert, libuser_entity_has_key)
+	* python/misc.c (libuser_admin_prompt, libuser_prompt_getattr):
+	* python/quotamodule.c (quotamodule_set, quotamodule_on)
+	(quotamodule_off):
+	Replace all trivial uses of Py_BuildValue ().
+
 	* python/misc.c (libuser_admin_prompt, libuser_prompt_setattr): Remove
 	an unnecessary use of typeof.
 

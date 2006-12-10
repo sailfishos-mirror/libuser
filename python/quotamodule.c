@@ -455,7 +455,7 @@ quotamodule_set(PyObject * self, PyObject * args)
 			}
 		}
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	}
 
 	if (!PyArg_ParseTuple(args, "O!", &quota_object_type, &obj)) {
@@ -513,7 +513,7 @@ quotamodule_set(PyObject * self, PyObject * args)
 		}
 	}
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 static PyObject *
@@ -527,7 +527,7 @@ quotamodule_on(PyObject * self, PyObject * args, PyObject * kwargs)
 		return NULL;
 	}
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 static PyObject *
@@ -541,7 +541,7 @@ quotamodule_off(PyObject * self, PyObject * args, PyObject * kwargs)
 		return NULL;
 	}
 	DEBUG_EXIT;
-	return Py_BuildValue("");
+	Py_RETURN_NONE;
 }
 
 static PyMethodDef quota_methods[] = {

@@ -113,7 +113,8 @@ libuser_admin_setattr(PyObject *self, const char *attr, PyObject *args)
 			Py_DECREF(me->prompt_data[1]);
 			me->prompt_data[0] = args;
 			Py_INCREF(me->prompt_data[0]);
-			me->prompt_data[1] = Py_BuildValue("");
+			me->prompt_data[1] = Py_None;
+			Py_INCREF(me->prompt_data[0]);
 		}
 		/* If it's a tuple, the first item is the function, and the
 		 * rest are arguments to pass to it. */
@@ -174,7 +175,7 @@ libuser_admin_lookup_user_name(PyObject *self, PyObject *args,
 			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	}
 }
 
@@ -211,7 +212,7 @@ libuser_admin_lookup_user_id(PyObject *self, PyObject *args,
 			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	}
 }
 
@@ -244,7 +245,7 @@ libuser_admin_lookup_group_name(PyObject *self, PyObject *args,
 			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	}
 }
 
@@ -282,7 +283,7 @@ libuser_admin_lookup_group_id(PyObject *self, PyObject *args,
 			lu_error_free(&error);
 		lu_ent_free(ent);
 		DEBUG_EXIT;
-		return Py_BuildValue("");
+		Py_RETURN_NONE;
 	}
 }
 
@@ -352,7 +353,7 @@ libuser_admin_do_wrap(PyObject *self, struct libuser_entity *ent,
 	if (fn(me->ctx, ent->ent, &error)) {
 		/* It succeeded!  Return truth. */
 		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		/* It failed.  Build an exception and return an error. */
 		PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
@@ -413,7 +414,7 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	if (error != NULL)
 		lu_error_free(&error);
 	DEBUG_EXIT;
-	return Py_BuildValue("i", ret ? 1 : 0);
+	return PyInt_FromLong(ret ? 1 : 0);
 }
 
 /* Wrap the setpass function for either type of entity. */
@@ -444,7 +445,7 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 	       &error)) {
 		/* The change succeeded.  Return a truth. */
 		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		/* The change failed.  Return an error. */
 		PyErr_SetString(PyExc_SystemError, lu_strerror(error));
@@ -521,7 +522,7 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 				0700, &error)) {
 		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		/* Failure.  Mark the error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -573,7 +574,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	if (lu_homedir_remove(dir, &error)) {
 		/* Successfully removed. */
 		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		/* Removal failed.  You'll have to come back for repeated
 		 * treatments. */
@@ -652,7 +653,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	if (lu_homedir_move(olddir, newdir, &error)) {
 		/* Success! */
 		DEBUG_EXIT;
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		/* Failure.  Set an error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -688,7 +689,7 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 
 	/* Now just pass it to the internal function. */
 	if (lu_mailspool_create_remove(me->ctx, ent->ent, action)) {
-		return Py_BuildValue("i", 1);
+		return PyInt_FromLong(1);
 	} else {
 		PyErr_SetString(PyExc_RuntimeError,
 				_("error creating mail spool for user"));
@@ -773,9 +774,10 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 			if (ret != NULL) {
 				Py_DECREF(ret);
 			}
-			if (lu_mailspool_create_remove(context, ent->ent, TRUE) ) {
-				ret = Py_BuildValue("i", 1);
-			} else {
+			if (lu_mailspool_create_remove(context, ent->ent,
+						       TRUE))
+				ret = PyInt_FromLong(1);
+			else {
 				/* An exception has been thrown. */
 				ret = NULL;
 			}
@@ -895,9 +897,9 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 			struct libuser_entity *entity;
 			Py_DECREF(ret);
 			entity = (struct libuser_entity *)ent;
-			ret = lu_mailspool_create_remove(context, entity->ent, TRUE) ?
-			      Py_BuildValue("i", 1) :
-			      NULL;
+			ret = lu_mailspool_create_remove(context, entity->ent,
+							 TRUE)
+				? PyInt_FromLong(1) : NULL;
 		}
 	}
 
@@ -1324,9 +1326,8 @@ libuser_admin_get_first_unused_id_type(struct libuser_admin *self,
 		return NULL;
 	}
 
-	return Py_BuildValue("L", (PY_LONG_LONG)lu_get_first_unused_id(me->ctx,
-								       enttype,
-								       start));
+	return PyLong_FromLongLong(lu_get_first_unused_id(me->ctx, enttype,
+							  start));
 }
 
 static PyObject *
@@ -1575,12 +1576,11 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 				  "promptConsole");
 	}
 
-	if (prompt_data != NULL) {
+	if (prompt_data != NULL)
 		ret->prompt_data[1] = prompt_data;
-		Py_INCREF(ret->prompt_data[1]);
-	} else {
-		ret->prompt_data[1] = Py_BuildValue("");
-	}
+	else
+		ret->prompt_data[1] = Py_None;
+	Py_INCREF(ret->prompt_data[1]);
 
 #ifdef DEBUG_BINDING
 	fprintf(stderr,
