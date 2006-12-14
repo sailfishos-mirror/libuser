@@ -126,25 +126,27 @@ libuser_wrap_ent(struct lu_ent *ent)
 
 /* Destroy an entity Python object. */
 static void
-libuser_entity_destroy(struct libuser_entity *self)
+libuser_entity_destroy(PyObject *self)
 {
+	struct libuser_entity *me;
+
 	DEBUG_ENTRY;
-	lu_ent_free(self->ent);
-	self->ent = NULL;
-	PyMem_DEL(self);
+	me = (struct libuser_entity *)self;
+	lu_ent_free(me->ent);
+	me->ent = NULL;
+	PyMem_DEL(me);
 	DEBUG_EXIT;
 }
 
 /* The getattr function.  Returns the right method given its name. */
 static PyObject *
-libuser_entity_getattr(struct libuser_entity *self, char *name)
+libuser_entity_getattr(PyObject *self, char *name)
 {
 	DEBUG_CALL;
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "Searching for attribute `%s'\n", name);
 #endif
-	return Py_FindMethod(libuser_entity_methods, (PyObject *) self,
-			     name);
+	return Py_FindMethod(libuser_entity_methods, self, name);
 }
 
 /* A helper function to convert a PyObject to a GValue. */
@@ -241,23 +243,25 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 /* The setattr function.  Sets an attribute to have the value of the given
  * Python object. */
 static int
-libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
+libuser_entity_setattr(PyObject *self, char *name, PyObject *args)
 {
+	struct libuser_entity *me;
 	PyObject *list;
 	struct lu_ent *copy;
 	int ret;
 
 	DEBUG_ENTRY;
 
+	me = (struct libuser_entity *)self;
 	copy = lu_ent_new();
-	lu_ent_copy(self->ent, copy);
+	lu_ent_copy(me->ent, copy);
 	/* Parse out the arguments.  We expect a single object. */
 	if (PyArg_ParseTuple(args, "O", &list)) {
 		PyObject *item;
 		GValue value;
 		Py_ssize_t size, i;
 
-		lu_ent_clear(self->ent, name);
+		lu_ent_clear(me->ent, name);
 
 		/* If the item is a tuple, scan it. */
 		if (PyTuple_Check(list)) {
@@ -279,7 +283,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 					getindent(),
 					g_value_get_string(&value));
 #endif
-				lu_ent_add(self->ent, name, &value);
+				lu_ent_add(me->ent, name, &value);
 				g_value_unset(&value);
 			}
 			ret = 0;
@@ -306,7 +310,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 					getindent(),
 					g_value_get_string(&value));
 #endif
-				lu_ent_add(self->ent, name, &value);
+				lu_ent_add(me->ent, name, &value);
 				g_value_unset(&value);
 			}
 			ret = 0;
@@ -322,7 +326,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			fprintf(stderr, "%sAdding single item %s.\n",
 				getindent(), g_value_get_string(&value));
 #endif
-			lu_ent_add(self->ent, name, &value);
+			lu_ent_add(me->ent, name, &value);
 			g_value_unset(&value);
 			ret = 0;
 			goto end;
@@ -333,7 +337,7 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 			"expected Number, Long, String, Tuple, or List");
 
  err:
-	lu_ent_copy(copy, self->ent);
+	lu_ent_copy(copy, me->ent);
 	ret = -1;
 
  end:
@@ -344,15 +348,17 @@ libuser_entity_setattr(struct libuser_entity *self, char *name, PyObject *args)
 
 /* Get the list of attributes, returning them as a PyList of PyStrings. */
 static PyObject *
-libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
+libuser_entity_getattrlist(PyObject *self, PyObject *ignore)
 {
+	struct libuser_entity *me;
 	GList *i;
 	PyObject *ret;
 
-	(void)args;
+	(void)ignore;
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 	ret = PyList_New(0);
-	for (i = lu_ent_get_attributes(self->ent);
+	for (i = lu_ent_get_attributes(me->ent);
 	     i != NULL;
 	     i = g_list_next(i)) {
 		PyObject *str;
@@ -367,21 +373,26 @@ libuser_entity_getattrlist(struct libuser_entity *self, PyObject * args)
 
 /* Get the names of the modules which had something to do with this object. */
 static PyObject *
-libuser_entity_modules(struct libuser_entity *self, PyObject * args)
+libuser_entity_modules(PyObject *self, PyObject *ignore)
 {
-	(void)args;
+	struct libuser_entity *me;
+
+	(void)ignore;
 	DEBUG_CALL;
-	return convert_value_array_pylist(self->ent->modules);
+	me = (struct libuser_entity *)self;
+	return convert_value_array_pylist(me->ent->modules);
 }
 
 /* Get the values for a particular attribute, or somesuch. */
 static PyObject *
-libuser_entity_get(struct libuser_entity *self, PyObject * args)
+libuser_entity_get(PyObject *self, PyObject *args)
 {
 	char *arg;
 	PyObject *default_value = NULL;
+	struct libuser_entity *me;
 
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 	/* The first argument should be the name of the attribute, and the
 	 * optional argument is the default value. */
 	if (!PyArg_ParseTuple(args, "s|O", &arg, &default_value)) {
@@ -389,9 +400,9 @@ libuser_entity_get(struct libuser_entity *self, PyObject * args)
 		return NULL;
 	}
 	/* If we have this attribute, convert it to a list and hand it back. */
-	if (lu_ent_has(self->ent, arg)) {
+	if (lu_ent_has(me->ent, arg)) {
 		DEBUG_EXIT;
-		return convert_value_array_pylist(lu_ent_get(self->ent, arg));
+		return convert_value_array_pylist(lu_ent_get(me->ent, arg));
 	} else {
 		/* If not, return a new reference for the default. */
 		if (default_value != NULL) {
@@ -408,12 +419,15 @@ libuser_entity_get(struct libuser_entity *self, PyObject * args)
 
 /* Add a value to the entity. */
 static PyObject *
-libuser_entity_add(struct libuser_entity *self, PyObject *args)
+libuser_entity_add(PyObject *self, PyObject *args)
 {
+	struct libuser_entity *me;
 	char *attr = NULL;
 	PyObject *val;
 	GValue value;
+
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 	/* We expect a string and some kind of object. */
 	if (!PyArg_ParseTuple(args, "sO", &attr, &val)) {
 		DEBUG_EXIT;
@@ -425,7 +439,7 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_ent_add(self->ent, attr, &value);
+	lu_ent_add(me->ent, attr, &value);
 	g_value_unset(&value);
 	DEBUG_EXIT;
 	Py_RETURN_NONE;
@@ -433,17 +447,19 @@ libuser_entity_add(struct libuser_entity *self, PyObject *args)
 
 /* Set the attribute to a given list of arguments. */
 static PyObject *
-libuser_entity_set(struct libuser_entity *self, PyObject *args)
+libuser_entity_set(PyObject *self, PyObject *args)
 {
+	struct libuser_entity *me;
 	char *attr = NULL;
 	PyObject *list = NULL, *val = NULL, *ret;
 	GValue value;
 	struct lu_ent *copy;
 
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 
 	copy = lu_ent_new();
-	lu_ent_copy(self->ent, copy);
+	lu_ent_copy(me->ent, copy);
 	/* We expect a string and some kind of object. */
 	if (PyArg_ParseTuple(args, "sO!", &attr, &PyList_Type, &list)) {
 		Py_ssize_t i, size;
@@ -456,7 +472,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 #endif
 
 		/* Remove all current values. */
-		lu_ent_clear(self->ent, attr);
+		lu_ent_clear(me->ent, attr);
 
 		/* Add each of the list items in turn. */
 		memset(&value, 0, sizeof(value));
@@ -466,7 +482,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 			item = PyList_GetItem(list, i);
 			if (libuser_convert_to_value(item, &value) == FALSE)
 				goto err;
-			lu_ent_add(self->ent, attr, &value);
+			lu_ent_add(me->ent, attr, &value);
 			g_value_unset(&value);
 		}
 		Py_INCREF(Py_None);
@@ -482,10 +498,10 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 			goto err;
 
 		/* Remove all current values. */
-		lu_ent_clear(self->ent, attr);
+		lu_ent_clear(me->ent, attr);
 
 		/* Add this one value. */
-		lu_ent_add(self->ent, attr, &value);
+		lu_ent_add(me->ent, attr, &value);
 		g_value_unset(&value);
 		Py_INCREF(Py_None);
 		ret = Py_None;
@@ -495,7 +511,7 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 	PyErr_SetString(PyExc_SystemError,
 			"expected value or list of values");
  err:
-	lu_ent_copy(copy, self->ent);
+	lu_ent_copy(copy, me->ent);
 	ret = NULL;
  end:
 	lu_ent_free(copy);
@@ -505,58 +521,69 @@ libuser_entity_set(struct libuser_entity *self, PyObject *args)
 
 /* Clear out all values for an attribute. */
 static PyObject *
-libuser_entity_clear(struct libuser_entity *self, PyObject * args)
+libuser_entity_clear(PyObject *self, PyObject *args)
 {
+	struct libuser_entity *me;
 	char *arg;
+
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 	if (!PyArg_ParseTuple(args, "s", &arg)) {
 		DEBUG_EXIT;
 		return NULL;
 	}
-	lu_ent_clear(self->ent, arg);
+	lu_ent_clear(me->ent, arg);
 	Py_RETURN_NONE;
 }
 
 /* Clear out all values for all attributes. */
 static PyObject *
-libuser_entity_clear_all(struct libuser_entity *self, PyObject * args)
+libuser_entity_clear_all(PyObject *self, PyObject *ignore)
 {
+	struct libuser_entity *me;
+
+	(void)ignore;
 	DEBUG_ENTRY;
-	if (!PyArg_ParseTuple(args, "")) {
-		DEBUG_EXIT;
-		return NULL;
-	}
-	lu_ent_clear_all(self->ent);
+	me = (struct libuser_entity *)self;
+	lu_ent_clear_all(me->ent);
 	Py_RETURN_NONE;
 }
 
 /* Roll-back any changes we've made to the object since it was last read from or
  * saved to the information store. */
 static PyObject *
-libuser_entity_revert(struct libuser_entity *self, PyObject * args)
+libuser_entity_revert(PyObject *self, PyObject *ignore)
 {
-	(void)args;
+	struct libuser_entity *me;
+
+	(void)ignore;
 	DEBUG_ENTRY;
-	lu_ent_revert(self->ent);
+	me = (struct libuser_entity *)self;
+	lu_ent_revert(me->ent);
 	DEBUG_EXIT;
 	Py_RETURN_NONE;
 }
 
 /* Get the length of the list of attributes. */
 static Py_ssize_t
-libuser_entity_length(struct libuser_entity *self)
+libuser_entity_length(PyObject *self)
 {
+	struct libuser_entity *me;
+
 	DEBUG_CALL;
-	return g_list_length(lu_ent_get_attributes(self->ent));
+	me = (struct libuser_entity *)self;
+	return g_list_length(lu_ent_get_attributes(me->ent));
 }
 
 /* Get the value for a particular item, dictionary style. */
 static PyObject *
-libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
+libuser_entity_get_item(PyObject *self, PyObject *item)
 {
+	struct libuser_entity *me;
 	char *attr;
 
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 
 	/* Our lone argument should be a string. */
 	if (!PyString_Check(item)) {
@@ -566,7 +593,7 @@ libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 	}
 	attr = PyString_AsString(item);
 
-	if (!lu_ent_has(self->ent, attr)) {
+	if (!lu_ent_has(me->ent, attr)) {
 		PyErr_SetString(PyExc_KeyError,
 				"no such attribute defined for this entity");
 		DEBUG_EXIT;
@@ -574,31 +601,33 @@ libuser_entity_get_item(struct libuser_entity *self, PyObject *item)
 	}
 
 	DEBUG_EXIT;
-	return convert_value_array_pylist(lu_ent_get(self->ent, attr));
+	return convert_value_array_pylist(lu_ent_get(me->ent, attr));
 }
 
 /* Check if an object has values for the given attribute. */
 static PyObject *
-libuser_entity_has_key(struct libuser_entity *self, PyObject *item)
+libuser_entity_has_key(PyObject *self, PyObject *item)
 {
 	char *attr;
+	struct libuser_entity *me;
 
 	DEBUG_ENTRY;
 
+	me = (struct libuser_entity *)self;
 	if (!PyArg_ParseTuple(item, "s", &attr)) {
 		PyErr_SetString(PyExc_TypeError,
 				"expected a tuple or string");
 		DEBUG_EXIT;
 		return NULL;
 	}
-	return PyInt_FromLong(lu_ent_has(self->ent, attr) ? 1 : 0);
+	return PyInt_FromLong(lu_ent_has(me->ent, attr) ? 1 : 0);
 }
 
 /* Set a value, dictionary style. */
 static int
-libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
-			PyObject *args)
+libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 {
+	struct libuser_entity *me;
 	char *attr = NULL;
 	Py_ssize_t i, size;
 	int ret;
@@ -606,6 +635,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	struct lu_ent *copy;
 
 	DEBUG_ENTRY;
+	me = (struct libuser_entity *)self;
 
 	/* The item should be a string. */
 	if (!PyString_Check(item)) {
@@ -619,7 +649,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 #endif
 
 	copy = lu_ent_new();
-	lu_ent_copy(self->ent, copy);
+	lu_ent_copy(me->ent, copy);
 	/* If the new value is a list, convert each and add in turn. */
 	if (PyList_Check(args)) {
 		size = PyList_Size(args);
@@ -627,7 +657,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		fprintf(stderr, "%sList has %jd items.\n", getindent(),
 			(intmax_t)size);
 #endif
-		lu_ent_clear(self->ent, attr);
+		lu_ent_clear(me->ent, attr);
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyList_GetItem(args, i);
@@ -638,7 +668,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 				getindent(),
 				g_value_get_string(&value));
 #endif
-			lu_ent_add(self->ent, attr, &value);
+			lu_ent_add(me->ent, attr, &value);
 			g_value_unset(&value);
 		}
 		ret = 0;
@@ -651,7 +681,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		fprintf(stderr, "%sTuple has %jd items.\n", getindent(),
 			(intmax_t)size);
 #endif
-		lu_ent_clear(self->ent, attr);
+		lu_ent_clear(me->ent, attr);
 		memset(&value, 0, sizeof(value));
 		for (i = 0; i < size; i++) {
 			item = PyTuple_GetItem(args, i);
@@ -662,7 +692,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 				getindent(),
 				g_value_get_string(&value));
 #endif
-			lu_ent_add(self->ent, attr, &value);
+			lu_ent_add(me->ent, attr, &value);
 			g_value_unset(&value);
 		}
 		ret = 0;
@@ -672,7 +702,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	if (PyString_Check(args) ||
 	    PyNumber_Check(args) ||
 	    PyLong_Check(args)) {
-		lu_ent_clear(self->ent, attr);
+		lu_ent_clear(me->ent, attr);
 		memset(&value, 0, sizeof(value));
 		if (libuser_convert_to_value(args, &value) == FALSE)
 			goto err;
@@ -680,7 +710,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 		fprintf(stderr, "%sSetting (`%s') to `%s'.\n", getindent(),
 			attr, g_value_get_string(value));
 #endif
-		lu_ent_add(self->ent, attr, &value);
+		lu_ent_add(me->ent, attr, &value);
 		g_value_unset(&value);
 		ret = 0;
 		goto end;
@@ -689,7 +719,7 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 	PyErr_SetString(PyExc_TypeError,
 			"expected values or list of values");
  err:
-	lu_ent_copy(copy, self->ent);
+	lu_ent_copy(copy, me->ent);
 	ret = -1;
 
  end:
@@ -699,54 +729,50 @@ libuser_entity_set_item(struct libuser_entity *self, PyObject *item,
 }
 
 static PyMappingMethods libuser_entity_mapping_methods = {
-	(lenfunc) libuser_entity_length,
-	(binaryfunc) libuser_entity_get_item,
-	(objobjargproc) libuser_entity_set_item,
+	libuser_entity_length,	/* mp_length */
+	libuser_entity_get_item, /* mp_subscript */
+	libuser_entity_set_item, /* mp_ass_subscript */
 };
 
 static PyMethodDef libuser_entity_methods[] = {
-	{"getattrlist", (PyCFunction) libuser_entity_getattrlist,
-	 METH_VARARGS,
+	{"getattrlist", libuser_entity_getattrlist, METH_NOARGS,
 	 "get a list of the attributes this entity has"},
-	{"has_key", (PyCFunction) libuser_entity_has_key, METH_VARARGS,
+	{"has_key", libuser_entity_has_key, METH_VARARGS,
 	 "check if the entity has a given attribute"},
-	{"get", (PyCFunction) libuser_entity_get, METH_VARARGS,
+	{"get", libuser_entity_get, METH_VARARGS,
 	 "get a list of the values for a given attribute"},
-	{"keys", (PyCFunction) libuser_entity_getattrlist, METH_VARARGS},
-	{"clear", (PyCFunction) libuser_entity_clear, METH_VARARGS,
+	{"keys", libuser_entity_getattrlist, METH_NOARGS},
+	{"clear", libuser_entity_clear, METH_VARARGS,
 	 "clear the list of values for a given attribute"},
-	{"set", (PyCFunction) libuser_entity_set, METH_VARARGS,
+	{"set", libuser_entity_set, METH_VARARGS,
 	 "set the list of values for a given attribute"},
-	{"add", (PyCFunction) libuser_entity_add, METH_VARARGS,
+	{"add", libuser_entity_add, METH_VARARGS,
 	 "add a value to the current list of values for a given attribute"},
-	{"clear_all", (PyCFunction) libuser_entity_clear_all, METH_VARARGS,
+	{"clear_all", libuser_entity_clear_all, METH_NOARGS,
 	 "clear all values for all attributes"},
-	{"revert", (PyCFunction) libuser_entity_revert, METH_VARARGS,
+	{"revert", libuser_entity_revert, METH_NOARGS,
 	 "revert the list of values for a given attribute to the values which "
 	 "were set when the entity was looked up"},
-	{"modules", (PyCFunction) libuser_entity_modules, 0,
+	{"modules", libuser_entity_modules, METH_NOARGS,
 	 "get a list of the modules which generated or looked up this object"},
 	{NULL, NULL, 0, NULL},
 };
 
 static PyTypeObject EntityType = {
 	PyObject_HEAD_INIT(&PyType_Type)
-	    0,
-	"Entity",
-	sizeof(struct libuser_entity),
 	0,
+	"Entity",		/* tp_name */
+	sizeof(struct libuser_entity), /* tp_basicsize */
+	0,			/* tp_itemsize */
 
-	(destructor) libuser_entity_destroy,
-	(printfunc) NULL,
-	(getattrfunc) libuser_entity_getattr,
-	(setattrfunc) libuser_entity_setattr,
-	(cmpfunc) NULL,
-	(reprfunc) NULL,
+	libuser_entity_destroy, /* tp_dealloc */
+	NULL,			/* tp_print */
+	libuser_entity_getattr,	/* tp_getattr */
+	libuser_entity_setattr,	/* tp_setattr */
+	NULL,			/* tp_compare */
+	NULL,			/* tp_repr */
 
-	(PyNumberMethods *) NULL,
-	(PySequenceMethods *) NULL,
-	(PyMappingMethods *) & libuser_entity_mapping_methods,
-	(hashfunc) NULL,
-	(ternaryfunc) NULL,
-	(reprfunc) NULL,
+	NULL,			/* tp_as_number */
+	NULL,			/* tp_as_sequence */
+	&libuser_entity_mapping_methods, /* tp_as_mapping */
 };

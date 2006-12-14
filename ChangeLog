@@ -1,3 +1,42 @@
+2006-12-14  Miloslav Trmac  <mitr@redhat.com>
+
+	* python/admin.c (AdminType)
+	* python/ent.c (libuser_entity_mapping_methods, EntityType)
+	* python/misc.c (PromptType):
+	Remove casts, use comments to indicate struct members.
+
+	* python/admin.c (libuser_admin_setattr)
+	(libuser_admin_get_first_unused_id, libuser_admin_get_first_unused_gid)
+	(libuser_admin_new): Add manual casts to conform to
+	PyCFunctionWithKeywords.
+	(libuser_admin_get_first_unused_id_type): Remove unnecessary variable.
+	(libuser_admin_methods) [getUserShells]: Use METH_NOARGS.
+	* python/common.h (lenfunc): Remove definition.
+	(libuser_admin_new, libuser_prompt_new, libuser_get_user_shells):
+	Update prototypes.
+	* python/ent.c (libuser_entity_destroy, libuser_entity_getattr)
+	(libuser_entity_setattr, libuser_entity_length)
+	(libuser_entity_get_item, libuser_entity_set_item): Add manual casts to
+	conform to method types.
+	(libuser_entity_getattrlist, libuser_entity_module)
+	(libuser_entity_clear_all, libuser_entity_revert): Use METH_NOARGS.
+	(libuser_entity_get, libuser_entity_add, libuser_entity_set)
+	(libuser_entity_clear)
+	(libuser_entity_has_key): Add manual casts to conform to PyCFunction.
+	(libuser_entity_methods) [getattrlist, keys, clear_all, revert]
+	[modules]: Use METH_NOARGS.
+	[has_key, get, clear, set, add]: Remove casts.
+	* python/libusermodule.c (libuser_get_user_shells): Use METH_NOARGS.
+	(libuser_methods) [prompt, get_user_shells, PROMPT, getUserShells]: Use
+	METH_NOARGS.
+	* python/misc.c (libuser_prompt_destroy, libuser_prompt_getattr)
+	(libuser_prompt_setattr, libuser_prompt_print): Add manual casts to
+	conform to method types.
+	(libuser_prompt_new): Use METH_NOARGS.
+
+	* python/admin.c (libuser_admin_new)
+	* python/misc.c (libuser_prompt_new): Remove redundant declarations.
+
 2006-12-10  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in (AM_GNU_GETTEXT_VERSION): Use gettext-0.14.6.

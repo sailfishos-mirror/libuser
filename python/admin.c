@@ -38,10 +38,6 @@ static PyMethodDef libuser_admin_methods[];
 static PyTypeObject AdminType;
 #define Admin_Check(__x) ((__x)->ob_type == &AdminType)
 
-static struct libuser_admin *libuser_admin_new(PyObject *self,
-					       PyObject *args,
-					       PyObject *kwargs);
-
 /* Destroy the object. */
 static void
 libuser_admin_destroy(PyObject *self)
@@ -96,7 +92,7 @@ libuser_admin_getattr(PyObject *self, char *name)
 
 /* Set an attribute in the admin object. */
 static int
-libuser_admin_setattr(PyObject *self, const char *attr, PyObject *args)
+libuser_admin_setattr(PyObject *self, char *attr, PyObject *args)
 {
 	struct libuser_admin *me = (struct libuser_admin *) self;
 
@@ -1303,16 +1299,15 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 #endif
 
 static PyObject *
-libuser_admin_get_first_unused_id_type(struct libuser_admin *self,
+libuser_admin_get_first_unused_id_type(struct libuser_admin *me,
 				       PyObject * args, PyObject * kwargs,
 				       enum lu_entity_type enttype)
 {
 	char *keywords[] = { "start", NULL };
-	struct libuser_admin *me = (struct libuser_admin *) self;
 
 	PY_LONG_LONG start = 500;
 
-	g_return_val_if_fail(self != NULL, NULL);
+	g_return_val_if_fail(me != NULL, NULL);
 
 	DEBUG_ENTRY;
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|L", keywords,
@@ -1331,23 +1326,19 @@ libuser_admin_get_first_unused_id_type(struct libuser_admin *self,
 }
 
 static PyObject *
-libuser_admin_get_first_unused_uid(struct libuser_admin *self, PyObject * args,
-			           PyObject * kwargs)
+libuser_admin_get_first_unused_uid(PyObject *self, PyObject * args,
+				   PyObject *kwargs)
 {
-	return libuser_admin_get_first_unused_id_type(self,
-						      args,
-						      kwargs,
-						      lu_user);
+	return libuser_admin_get_first_unused_id_type
+		((struct libuser_admin *)self, args, kwargs, lu_user);
 }
 
 static PyObject *
-libuser_admin_get_first_unused_gid(struct libuser_admin *self, PyObject * args,
-			           PyObject * kwargs)
+libuser_admin_get_first_unused_gid(PyObject *self, PyObject * args,
+				   PyObject *kwargs)
 {
-	return libuser_admin_get_first_unused_id_type(self,
-						      args,
-						      kwargs,
-						      lu_group);
+	return libuser_admin_get_first_unused_id_type
+		((struct libuser_admin *)self, args, kwargs, lu_group);
 }
 
 static struct PyMethodDef libuser_admin_methods[] = {
@@ -1483,7 +1474,7 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 METH_VARARGS | METH_KEYWORDS,
 	 "remove a mail spool for a user"},
 
-	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
+	{"getUserShells", libuser_get_user_shells, METH_NOARGS,
 	 "return a list of valid shells"},
 
 
@@ -1503,26 +1494,19 @@ static struct PyMethodDef libuser_admin_methods[] = {
 static PyTypeObject AdminType = {
 	PyObject_HEAD_INIT(&PyType_Type)
        	0,
-	"Admin",
-	sizeof(struct libuser_admin),
-	0,
+	"Admin",		/* tp_name */
+	sizeof(struct libuser_admin), /* tp_basicsize */
+	0,			/* tp_itemsize */
 
-	(destructor) libuser_admin_destroy,
-	(printfunc) NULL,
-	(getattrfunc) libuser_admin_getattr,
-	(setattrfunc) libuser_admin_setattr,
-	(cmpfunc) NULL,
-	(reprfunc) NULL,
-
-	(PyNumberMethods *) NULL,
-	(PySequenceMethods *) NULL,
-	(PyMappingMethods *) NULL,
-	(hashfunc) NULL,
-	(ternaryfunc) NULL,
-	(reprfunc) NULL,
+	libuser_admin_destroy,	/* tp_dealloc */
+	NULL,			/* tp_print */
+	libuser_admin_getattr,	/* tp_getattr */
+	libuser_admin_setattr,	/* tp_setattr */
+	NULL,			/* tp_compare */
+	NULL,			/* tp_repr */
 };
 
-static struct libuser_admin *
+static PyObject *
 libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *name = getlogin(), *modules = NULL, *create = NULL, *p, *q;
@@ -1605,5 +1589,5 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	ret->ctx = context;
 
 	DEBUG_EXIT;
-	return ret;
+	return self;
 }

@@ -38,11 +38,12 @@
 /* Return a list of the valid shells in the system, picked up from
  * getusershells(). */
 static PyObject *
-libuser_get_user_shells(PyObject * ignored)
+libuser_get_user_shells(PyObject *self, PyObject *ignored)
 {
 	PyObject *ret;
 	const char *shell;
 
+	(void)self;
 	(void)ignored;
 	DEBUG_ENTRY;
 
@@ -64,15 +65,15 @@ libuser_get_user_shells(PyObject * ignored)
 static PyMethodDef libuser_methods[] = {
 	{"admin", (PyCFunction) libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
 	 "create a new administration context"},
-	{"prompt", (PyCFunction) libuser_prompt_new, 0,
+	{"prompt", libuser_prompt_new, METH_NOARGS,
 	 "create and return a new prompt record"},
-	{"get_user_shells", (PyCFunction) libuser_get_user_shells, 0,
+	{"get_user_shells", libuser_get_user_shells, METH_NOARGS,
 	 "return a list of valid shells"},
 	{"ADMIN", (PyCFunction) libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
 	 "create a new administration context"},
-	{"PROMPT", (PyCFunction) libuser_prompt_new, 0,
+	{"PROMPT", libuser_prompt_new, METH_NOARGS,
 	 "create and return a new prompt record"},
-	{"getUserShells", (PyCFunction) libuser_get_user_shells, 0,
+	{"getUserShells", libuser_get_user_shells, METH_NOARGS,
 	 "return a list of valid shells"},
 	{NULL, NULL, 0, NULL},
 };

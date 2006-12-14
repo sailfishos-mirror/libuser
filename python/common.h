@@ -8,7 +8,6 @@
 /* FIXME: remove this when dropping Python < 2.5 compatibility */
 #if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
 typedef int Py_ssize_t;
-typedef inquiry lenfunc;
 #endif
 
 struct libuser_admin {
@@ -31,9 +30,8 @@ static PyTypeObject EntityType;
 static PyTypeObject AdminType;
 static PyTypeObject PromptType;
 
-static struct libuser_admin *libuser_admin_new(PyObject *self,
-					       PyObject *args,
-					       PyObject *kwargs);
+static PyObject *libuser_admin_new(PyObject *self, PyObject *args,
+				   PyObject *kwargs);
 
 static gboolean libuser_admin_python_prompter(struct lu_prompt *prompts,
 					      int count,
@@ -47,9 +45,9 @@ static PyObject *libuser_admin_prompt_console_quiet(PyObject *self,
 						    PyObject *kwargs);
 
 static PyObject *convert_value_array_pylist(GValueArray *array);
-static struct libuser_prompt *libuser_prompt_new(void);
+static PyObject *libuser_prompt_new(PyObject *ignored_self, PyObject *ignore);
 
-static PyObject *libuser_get_user_shells(PyObject *ignored);
+static PyObject *libuser_get_user_shells(PyObject *self, PyObject *ignored);
 static PyObject *libuser_wrap_ent(struct lu_ent *ent);
 
 void initlibuser(void);

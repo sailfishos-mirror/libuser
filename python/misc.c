@@ -34,8 +34,6 @@
 static PyTypeObject PromptType;
 #define Prompt_Check(__x) ((__x)->ob_type == &PromptType)
 
-static struct libuser_prompt *libuser_prompt_new(void);
-
 static gboolean
 libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			      gpointer callback_data,
@@ -59,7 +57,8 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 		for (i = 0; i < count; i++) {
 			struct libuser_prompt *prompt;
 
-			prompt = libuser_prompt_new();
+			prompt = (struct libuser_prompt *)
+			  libuser_prompt_new(NULL, NULL);
 			prompt->prompt.key = g_strdup(prompts[i].key);
 			prompt->prompt.prompt = g_strdup(prompts[i].prompt);
 			prompt->prompt.domain = g_strdup(prompts[i].domain);
@@ -227,64 +226,72 @@ libuser_admin_prompt_console_quiet(PyObject * self, PyObject * args,
 }
 
 static void
-libuser_prompt_destroy(struct libuser_prompt *self)
+libuser_prompt_destroy(PyObject *self)
 {
+	struct libuser_prompt *me;
+
 	DEBUG_ENTRY;
-	if (self->prompt.value && self->prompt.free_value)
-		self->prompt.free_value(self->prompt.value);
-	g_free((void *)self->prompt.key);
-	g_free((void *)self->prompt.prompt);
-	g_free((void *)self->prompt.domain);
-	g_free((void *)self->prompt.default_value);
-	memset(&self->prompt, 0, sizeof(self->prompt));
-	PyMem_DEL(self);
+	me = (struct libuser_prompt *)self;
+	if (me->prompt.value && me->prompt.free_value)
+		me->prompt.free_value(me->prompt.value);
+	g_free((void *)me->prompt.key);
+	g_free((void *)me->prompt.prompt);
+	g_free((void *)me->prompt.domain);
+	g_free((void *)me->prompt.default_value);
+	memset(&me->prompt, 0, sizeof(me->prompt));
+	PyMem_DEL(me);
 	DEBUG_EXIT;
 }
 
 static PyObject *
-libuser_prompt_getattr(struct libuser_prompt *self, char *attr)
+libuser_prompt_getattr(PyObject *self, char *attr)
 {
+	struct libuser_prompt *me;
+
 	DEBUG_ENTRY;
+	me = (struct libuser_prompt *)self;
 	if (strcmp(attr, "key") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(self->prompt.key);
+		return PyString_FromString(me->prompt.key);
 	}
 	if (strcmp(attr, "prompt") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(self->prompt.prompt);
+		return PyString_FromString(me->prompt.prompt);
 	}
 	if (strcmp(attr, "domain") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(self->prompt.domain ?: "");
+		return PyString_FromString(me->prompt.domain ?: "");
 	}
 	if (strcmp(attr, "visible") == 0) {
 		DEBUG_EXIT;
-		return PyInt_FromLong(self->prompt.visible);
+		return PyInt_FromLong(me->prompt.visible);
 	}
 	if ((strcmp(attr, "default_value") == 0) ||
 	    (strcmp(attr, "defaultValue") == 0)) {
 		DEBUG_EXIT;
-		if (self->prompt.default_value != NULL)
-			return PyString_FromString(self->prompt.default_value);
+		if (me->prompt.default_value != NULL)
+			return PyString_FromString(me->prompt.default_value);
 		else
 			Py_RETURN_NONE;
 	}
 	if (strcmp(attr, "value") == 0) {
 		DEBUG_EXIT;
-		if (self->prompt.value != NULL)
-			return PyString_FromString(self->prompt.value);
+		if (me->prompt.value != NULL)
+			return PyString_FromString(me->prompt.value);
 		else
 			Py_RETURN_NONE;
 	}
 	DEBUG_EXIT;
-	return Py_FindMethod(NULL, (PyObject *) self, attr);
+	return Py_FindMethod(NULL, self, attr);
 }
 
 static int
-libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
-		       PyObject * args)
+libuser_prompt_setattr(PyObject *self, char *attr, PyObject * args)
 {
+	struct libuser_prompt *me;
+
 	DEBUG_ENTRY;
+	me = (struct libuser_prompt *)self;
 	if (strcmp(attr, "prompt") == 0) {
 		if (!PyString_Check(args)) {
 			PyErr_SetString(PyExc_TypeError,
@@ -292,8 +299,8 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		g_free((char *) self->prompt.prompt);
-		self->prompt.prompt = g_strdup(PyString_AsString(args));
+		g_free((char *)me->prompt.prompt);
+		me->prompt.prompt = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -304,8 +311,8 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		g_free((char *) self->prompt.domain);
-		self->prompt.domain = g_strdup(PyString_AsString(args));
+		g_free((char *)me->prompt.domain);
+		me->prompt.domain = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -316,13 +323,13 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		g_free((char *) self->prompt.key);
-		self->prompt.key = g_strdup(PyString_AsString(args));
+		g_free((char *)me->prompt.key);
+		me->prompt.key = g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
 	if (strcmp(attr, "visible") == 0) {
-		self->prompt.visible = PyObject_IsTrue(args);
+		me->prompt.visible = PyObject_IsTrue(args);
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -334,11 +341,9 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		g_free((char *) self->prompt.default_value);
-		self->prompt.default_value =
-		    (args == Py_None) ?
-		    NULL :
-		    g_strdup(PyString_AsString(args));
+		g_free((char *)me->prompt.default_value);
+		me->prompt.default_value = (args == Py_None)
+			? NULL : g_strdup(PyString_AsString(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -349,10 +354,10 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 			DEBUG_EXIT;
 			return -1;
 		}
-		if (self->prompt.value && self->prompt.free_value)
-			self->prompt.free_value(self->prompt.value);
-		self->prompt.value = g_strdup(PyString_AsString(args));
-		self->prompt.free_value = g_free;
+		if (me->prompt.value && me->prompt.free_value)
+			me->prompt.free_value(me->prompt.value);
+		me->prompt.value = g_strdup(PyString_AsString(args));
+		me->prompt.free_value = g_free;
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -362,51 +367,51 @@ libuser_prompt_setattr(struct libuser_prompt *self, const char *attr,
 }
 
 static int
-libuser_prompt_print(struct libuser_prompt *self, FILE * fp, int flags)
+libuser_prompt_print(PyObject *self, FILE *fp, int flags)
 {
+	struct libuser_prompt *me;
+
 	(void)flags;
+	me = (struct libuser_prompt *)self;
 	fprintf(fp,
-		"(key = \"%s\", prompt = \"%s\", domain = \"%s\", visible = %s, default_value = \"%s\", value = \"%s\")",
-		self->prompt.key ? : "",
-		self->prompt.prompt ? : "",
-		self->prompt.domain ? : "",
-		self->prompt.visible ? "true" : "false",
-		self->prompt.default_value ? : "",
-		self->prompt.value ? : "");
+		"(key = \"%s\", prompt = \"%s\", domain = \"%s\", "
+		"visible = %s, default_value = \"%s\", value = \"%s\")",
+		me->prompt.key ? me->prompt.key : "",
+		me->prompt.prompt ? me->prompt.prompt : "",
+		me->prompt.domain ? me->prompt.domain : "",
+		me->prompt.visible ? "true" : "false",
+		me->prompt.default_value ? me->prompt.default_value : "",
+		me->prompt.value ? me->prompt.value : "");
 	return 0;
 }
 
-static struct libuser_prompt *
-libuser_prompt_new(void)
+static PyObject *
+libuser_prompt_new(PyObject *ignored_self, PyObject *ignore)
 {
 	struct libuser_prompt *ret;
+
+	(void)ignored_self;
+	(void)ignore;
 	DEBUG_ENTRY;
 	ret = PyObject_NEW(struct libuser_prompt, &PromptType);
 	if (ret != NULL) {
 		memset(&ret->prompt, 0, sizeof(ret->prompt));
 	}
 	DEBUG_EXIT;
-	return ret;
+	return (PyObject *)ret;
 }
 
 static PyTypeObject PromptType = {
 	PyObject_HEAD_INIT(&PyType_Type)
-	    0,
-	"Prompt",
-	sizeof(struct libuser_prompt),
 	0,
+	"Prompt",		/* tp_name */
+	sizeof(struct libuser_prompt), /* tp_basicsize */
+	0,			/* tp_itemsize */
 
-	(destructor) libuser_prompt_destroy,
-	(printfunc) libuser_prompt_print,
-	(getattrfunc) libuser_prompt_getattr,
-	(setattrfunc) libuser_prompt_setattr,
-	(cmpfunc) NULL,
-	(reprfunc) NULL,
-
-	(PyNumberMethods *) NULL,
-	(PySequenceMethods *) NULL,
-	(PyMappingMethods *) NULL,
-	(hashfunc) NULL,
-	(ternaryfunc) NULL,
-	(reprfunc) NULL,
+	libuser_prompt_destroy,	/* tp_dealloc */
+	libuser_prompt_print,	/* tp_print */
+	libuser_prompt_getattr,	/* tp_getattr */
+	libuser_prompt_setattr,	/* tp_setattr */
+	NULL,			/* tp_compare */
+	NULL,			/* tp_repr */
 };
