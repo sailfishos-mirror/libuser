@@ -60,7 +60,7 @@ libuser_admin_destroy(PyObject *self)
 		me->prompt_data[i] = NULL;
 	}
 	/* Delete the python object. */
-	PyMem_DEL(self);
+	PyObject_DEL(self);
 	DEBUG_EXIT;
 }
 

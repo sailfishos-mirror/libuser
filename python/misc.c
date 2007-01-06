@@ -239,7 +239,7 @@ libuser_prompt_destroy(PyObject *self)
 	g_free((void *)me->prompt.domain);
 	g_free((void *)me->prompt.default_value);
 	memset(&me->prompt, 0, sizeof(me->prompt));
-	PyMem_DEL(me);
+	PyObject_DEL(me);
 	DEBUG_EXIT;
 }
 

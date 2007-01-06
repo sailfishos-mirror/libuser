@@ -134,7 +134,7 @@ libuser_entity_destroy(PyObject *self)
 	me = (struct libuser_entity *)self;
 	lu_ent_free(me->ent);
 	me->ent = NULL;
-	PyMem_DEL(me);
+	PyObject_DEL(me);
 	DEBUG_EXIT;
 }
 
