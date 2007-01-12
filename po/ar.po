@@ -1,23 +1,23 @@
 # translation of ar.po to Arabic
-# translation of libuser.po to Arabic
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+#
 # Abd el rahman Ghareeb <king_abdo@yahoo.com>, 2004.
 # Ossama M. Khayat <okhayat@yahoo.com>, 2004.
 # Munzir Taha <munzirtaha@newhorizons.com.sa>, 2004.
-#
+# Ali Ghareb <ali.gareb@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-12-10 23:07+0100\n"
-"PO-Revision-Date: 2004-12-01 19:34+0300\n"
-"Last-Translator: Munzir Taha <munzirtaha@newhorizons.com.sa>\n"
-"Language-Team: Arabic <fedora-trans-ar@redhat.com>\n"
+"PO-Revision-Date: 2007-01-12 09:34+0200\n"
+"Last-Translator: Ali Ghareb <ali.gareb@gmail.com>\n"
+"Language-Team: Arabic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:246
@@ -667,7 +667,7 @@ msgstr "الاسم قصير جدّاً"
 #: lib/user.c:204
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "اسم طويل جدا (%zu>%d)"
 
 #: lib/user.c:211
 msgid "name contains non-ASCII characters"
@@ -683,7 +683,7 @@ msgstr "الاسم يحتوي على مسافات"
 
 #: lib/user.c:237
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "اسم يبدأ بوصلة"
 
 #: lib/user.c:248
 #, c-format
@@ -693,17 +693,17 @@ msgstr "الاسم يحتوي على حرف غير صالح ´%c'"
 #: lib/user.c:295 lib/user.c:343
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "المستخدم %s ليس لدية رقم تعريف"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "المجموعة %s ليس لديها رقم تعريف"
 
 #: lib/user.c:338
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "المستخدم %jd ليس لديه اسم"
 
 #: lib/user.c:339
 #, fuzzy, c-format
@@ -712,11 +712,11 @@ msgstr "المجموعة %jd غير موجودة\n"
 
 #: lib/user.c:347
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "المستخدم ليس لديه اسم أو رقم تعريف"
 
 #: lib/user.c:348
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "المجموعة ليست لديها اسم أو رقم تعريف"
 
 #: lib/util.c:193
 #, c-format
@@ -1054,18 +1054,3 @@ msgstr "جاري الاستعلام عن خصائص المستخدم الافت�
 msgid "Copying user structure:\n"
 msgstr "جاري نسخ بناء موطن المستخدم:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "لم يتم تغيير الـ shell: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "تعذّر البحث في خادم LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "يبدو أنّ خادم LDAP ليس له DSE جذريّة"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "خطأ في تعيين الاسم إلى اسم مُميِّز من LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "خطأ في تعيين الاسم إلى اسم مُميِّز أساسي من LDAP"
