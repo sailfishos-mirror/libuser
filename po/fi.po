@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-12-10 23:07+0100\n"
-"PO-Revision-Date: 2006-12-27 13:16+0200\n"
+"PO-Revision-Date: 2007-01-13 17:23+0200\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:123
 #: apps/apputil.c:191
@@ -46,7 +46,7 @@ msgstr "`%s':n omistajaa vaihdettaessa tapahtui virhe: %s"
 #: apps/apputil.c:284
 #: modules/files.c:261
 #: modules/files.c:275
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing `%s': %s"
 msgstr "Virhe kirjoitettaessa `%s': %s"
 
@@ -74,12 +74,11 @@ msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "käyttäjällä %s ei ole valtuutusta muuttaa käyttäjän %s finger-tietoja\n"
 
 #: apps/apputil.c:581
-#, fuzzy
 msgid "Unknown user context"
 msgstr "Tuntematon käyttäjäympäristö"
 
 #: apps/apputil.c:589
-#, fuzzy, c-format
+#, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Tiedoston /etc/passwd oletusympäristöä ei voi asettaa\n"
 
@@ -100,9 +99,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Sisäinen PAM-virhe \"%s\".\n"
 
 #: apps/apputil.c:621
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Tuntematon käyttäjä on tunnistettu.\n"
+msgstr "Tuntematon käyttäjä on kirjautunut.\n"
 
 #: apps/apputil.c:625
 #, c-format
@@ -198,7 +197,7 @@ msgstr "Varoitus:\t%d\n"
 
 # Translated the same way as "Password Inactive"
 #: apps/lchage.c:196
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%d\n"
 msgstr "Pois käytöstä:\t%d\n"
 
@@ -230,7 +229,7 @@ msgid "Account Expires:\t%s\n"
 msgstr "Tunnus vanhentuu:\t%s\n"
 
 #: apps/lchage.c:278
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Vanhenemistiedon muuttaminen epäonnistui %s:lle: %s\n"
 
@@ -383,7 +382,7 @@ msgid "Error looking up %s: %s\n"
 msgstr "Virhe etsittäessä %s: %s\n"
 
 #: apps/lid.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Ryhmänimeä ei määritelty, käytetään %s.\n"
 
@@ -393,7 +392,7 @@ msgid "No group name specified, no name for gid %d.\n"
 msgstr "Ryhmänimeä ei määritelty, ei nimeä gid:lle %d.\n"
 
 #: apps/lid.c:147
-#, fuzzy, c-format
+#, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Käyttäjänimeä ei määritelty, käytetään %s.\n"
 
@@ -407,7 +406,7 @@ msgid "Error opening `%s': %s.\n"
 msgstr "Virhe avattaessa `%s': %s.\n"
 
 #: apps/lnewusers.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Virhe luotaessa tunnusta käyttäjälle `%s': virheellinen rivi.\n"
 
@@ -419,7 +418,6 @@ msgid "Invalid user ID %s\n"
 msgstr "Epäkelpo käyttäjätunnus %s\n"
 
 #: apps/lnewusers.c:141
-#, fuzzy
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Kieltäydytään luomasta tunnusta UID:llä 0.\n"
 
@@ -520,7 +518,7 @@ msgid "User %s could not be deleted: %s.\n"
 msgstr "Käyttäjää %s ei voitu poistaa: %s.\n"
 
 #: apps/luserdel.c:108
-#, fuzzy, c-format
+#, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s:lla ei ollut gid-numeroa.\n"
 
@@ -540,7 +538,7 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "Ryhmää %s ei voitu poistaa: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s:lla ei ollut kotikansiota.\n"
 
@@ -691,7 +689,6 @@ msgid "library/module version mismatch"
 msgstr "kirjasto/moduuli versioristiriita"
 
 #: lib/error.c:82
-#, fuzzy
 msgid "unlocking would make the password field empty"
 msgstr "lukituksen avaaminen tyhjentäisi salasanakentän"
 
@@ -753,7 +750,6 @@ msgid "name contains whitespace"
 msgstr "nimi sisältää välilyöntejä"
 
 #: lib/user.c:237
-#, fuzzy
 msgid "name starts with a hyphen"
 msgstr "nimi alkaa väliviivalla"
 
@@ -798,17 +794,17 @@ msgid "error locking file: %s"
 msgstr "virhe tiedoston lukitsemisessa: %s"
 
 #: modules/files.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "ei voitu hakea turvaympäristöä `%s': %s"
 
 #: modules/files.c:126
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context: %s"
-msgstr "ei voitu asettaa oletusturvakontekstia: %s"
+msgstr "ei voitu asettaa oletusturvaympäristöä: %s"
 
 #: modules/files.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "ei voitu asettaa oletusturvakontekstia`%s':%s"
 
@@ -867,7 +863,6 @@ msgstr "ei voitu lukea kohteesta `%s': %s"
 
 #: modules/files.c:925
 #: modules/files.c:932
-#, fuzzy
 msgid "entry already present in file"
 msgstr "merkintä on jo tiedostossa"
 
@@ -890,9 +885,8 @@ msgstr ""
 #: modules/files.c:1828
 #: modules/ldap.c:1552
 #: modules/ldap.c:1825
-#, fuzzy
 msgid "error encrypting password"
-msgstr "Virhe salasanan kryptauksessa"
+msgstr "virhe salasanan kryptauksessa"
 
 #: modules/files.c:2773
 #: modules/files.c:2851
@@ -900,7 +894,6 @@ msgid "not executing with superuser privileges"
 msgstr "ei suoriteta pääkäyttäjän oikeuksilla"
 
 #: modules/files.c:2864
-#, fuzzy
 msgid "no shadow file present -- disabling"
 msgstr "varjosalasanatiedostoa ei ole -- otetaan pois käytöstä"
 
@@ -991,7 +984,6 @@ msgid "could not negotiate TLS with LDAP server"
 msgstr "ei voitu tehdä TLS-neuvottelua LDAP-palvelimen kanssa"
 
 #: modules/ldap.c:408
-#, fuzzy
 msgid "could not bind to LDAP server"
 msgstr "sitoutuminen LDAP-palvelimeen epäonnistui"
 
@@ -1015,7 +1007,7 @@ msgid "could not convert internal data to LDAPMods"
 msgstr ""
 
 #: modules/ldap.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "virhe LDAP-hakemistomerkinnän luomisessa: %s"
 
@@ -1026,17 +1018,17 @@ msgid "error modifying LDAP directory entry: %s"
 msgstr ""
 
 #: modules/ldap.c:1424
-#, fuzzy, c-format
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "virhe LDAP-hakemistomerkinnän uudelleennimeämisessä: %s"
 
 #: modules/ldap.c:1469
-#, fuzzy, c-format
+#, c-format
 msgid "object had no %s attribute"
 msgstr "elementillä ei ollut %s-attribuuttia"
 
 #: modules/ldap.c:1487
-#, fuzzy, c-format
+#, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "virhe poistettaessa LDAP-hakemistomerkintää: %s"
 
@@ -1044,7 +1036,7 @@ msgstr "virhe poistettaessa LDAP-hakemistomerkintää: %s"
 #: modules/ldap.c:1538
 #: modules/ldap.c:1650
 #: modules/ldap.c:1749
-#, fuzzy, c-format
+#, c-format
 msgid "object has no %s attribute"
 msgstr "elementillä ei ole %s-attribuuttia"
 
@@ -1150,7 +1142,6 @@ msgid "Searching for user named %s.\n"
 msgstr "Etsitään %s-nimistä käyttäjää.\n"
 
 #: samples/lookup.c:121
-#, fuzzy
 msgid "Entry not found.\n"
 msgstr "Merkintää ei löydy.\n"
 
@@ -1167,7 +1158,6 @@ msgid "Default user object classes:\n"
 msgstr ""
 
 #: samples/testuser.c:86
-#, fuzzy
 msgid "Default user attribute names:\n"
 msgstr "Oletuskäyttäjäattribuuttien nimet:\n"
 
