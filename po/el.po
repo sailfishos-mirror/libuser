@@ -1,18 +1,19 @@
+# translation of el.po to Greek
 # translation of el.po to
 # Translation of libuser to Greek.
 # Copyright (C) 2006 Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Simos Xenitellis <simos@gnome.org>, 2006.
-# Dimitris Glezos <dimitris@glezos.com>, 2006.
+# Dimitris Glezos <dimitris@glezos.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2006-12-10 23:07+0100\n"
-"PO-Revision-Date: 2006-09-26 02:38+0100\n"
-"Last-Translator: Dimitris Glezos\n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2007-02-03 02:29+0000\n"
+"Last-Translator: Dimitris Glezos <dimitris@glezos.com>\n"
+"Language-Team: Greek <fedora-trans-el@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,9 +59,9 @@ msgid "Internal error.\n"
 msgstr "Εσωτερικό σφάλμα.\n"
 
 #: apps/apputil.c:579
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "Το %s δεν υποστηρίζεται από αυτήν την έκδοση του Mandriva Linux."
+msgstr "O %s δεν επιτρέπεται να τροποποιήσει τις πληροφορίες finger του %s\n"
 
 #: apps/apputil.c:581
 msgid "Unknown user context"
@@ -231,8 +232,9 @@ msgstr "Διεύθυνση E-Mail "
 
 #: apps/lchfn.c:228
 #, c-format
+#, fuzzy
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Finger not τροποποιημένο σφάλμα ο"
 
 #: apps/lchfn.c:300
 #, fuzzy
@@ -347,8 +349,9 @@ msgstr "Σφάλμα ανοίγματος `%s': %s.\n"
 
 #: apps/lnewusers.c:124
 #, c-format
+#, fuzzy
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "Σφάλμα δημιουργία λογαριασμός για s ο"
 
 #: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -356,8 +359,9 @@ msgid "Invalid user ID %s\n"
 msgstr "Μη έγκυρο ID χρήστη %s\n"
 
 #: apps/lnewusers.c:141
+#, fuzzy
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "στο λογαριασμός με UID ο"
 
 #: apps/lnewusers.c:223
 #, c-format
@@ -463,13 +467,15 @@ msgstr "το %s δεν ανταποκρίνεται"
 
 #: apps/luserdel.c:118
 #, c-format
+#, fuzzy
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "Όχι ομάδα με GID υπάρχει not ο"
 
 #: apps/luserdel.c:125
 #, c-format
+#, fuzzy
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "Ομάδα με GID not a ομάδα όνομα ο"
 
 #: apps/luserdel.c:135
 #, fuzzy, c-format
@@ -584,8 +590,9 @@ msgid "user/group id in use"
 msgstr "id χρήστη/ομάδας σε χρήση"
 
 #: lib/error.c:60
+#, fuzzy
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "σφάλμα τερματικό"
 
 #: lib/error.c:62
 msgid "error opening file"
@@ -622,16 +629,19 @@ msgid "error loading module"
 msgstr "σφάλμα φόρτωσης αρθρώματος"
 
 #: lib/error.c:78
+#, fuzzy
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "σφάλμα in άρθρωμα"
 
 #: lib/error.c:80
+#, fuzzy
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "άρθρωμα έκδοση"
 
 #: lib/error.c:82
+#, fuzzy
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "πεδίο κενό"
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -639,13 +649,15 @@ msgstr "άγνωστο σφάλμα"
 
 #: lib/modules.c:65
 #, c-format
+#, fuzzy
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "όχι συνάρτηση s in s"
 
 #: lib/modules.c:83
 #, c-format
+#, fuzzy
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "άρθρωμα έκδοση in s"
 
 #: lib/modules.c:96
 #, fuzzy, c-format
@@ -709,13 +721,15 @@ msgstr "Το όνομα χρήστη δεν έχει έγκυρους χαρακ
 
 #: lib/user.c:295 lib/user.c:343
 #, c-format
+#, fuzzy
 msgid "user %s has no UID"
-msgstr ""
+msgstr "χρήστης s όχι UID"
 
 #: lib/user.c:318 lib/user.c:344
 #, c-format
+#, fuzzy
 msgid "group %s has no GID"
-msgstr ""
+msgstr "ομάδα s όχι GID"
 
 #: lib/user.c:338
 #, fuzzy, c-format
@@ -733,8 +747,9 @@ msgid "user has neither a name nor an UID"
 msgstr "Παρακαλώ εισάγετε ένα όνομα και προσπαθείστε ξανά."
 
 #: lib/user.c:348
+#, fuzzy
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "ομάδα a όνομα a GID"
 
 #: lib/util.c:193
 #, fuzzy, c-format
@@ -744,8 +759,7 @@ msgstr "Σφάλμα ανοίγματος αρχείου %s"
 #: modules/files.c:120
 #, fuzzy, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #
 #: modules/files.c:126
@@ -756,8 +770,7 @@ msgstr "Αποτυχία ρύθμισης των διαπιστευτηρίων 
 #: modules/files.c:133
 #, fuzzy, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #: modules/files.c:176 modules/files.c:549 modules/files.c:874
 #: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
@@ -787,8 +800,9 @@ msgid "backup file `%s' exists and is not a regular file"
 msgstr "Το αρχείο υπάρχει αλλά δεν είναι ένα κανονικό αρχείο."
 
 #: modules/files.c:291
+#, fuzzy
 msgid "backup file size mismatch"
-msgstr ""
+msgstr "αρχείο μέγεθος"
 
 #: modules/files.c:916 modules/files.c:1303
 #, fuzzy, c-format
@@ -821,17 +835,20 @@ msgstr ""
 "Λάθος συνθηματικό"
 
 #: modules/files.c:2773 modules/files.c:2851
+#, fuzzy
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "not με"
 
 #: modules/files.c:2864
+#, fuzzy
 msgid "no shadow file present -- disabling"
-msgstr ""
+msgstr "όχι αρχείο ενεστώτα"
 
 #: modules/krb5.c:104
 #, c-format
+#, fuzzy
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
+msgstr "σφάλμα στο εξυπηρετητής για s in s s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -842,13 +859,15 @@ msgstr "Σφάλμα κατά την ενεργοποίηση της συσκε�
 #: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
+#, fuzzy
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "σφάλμα χρήστης όνομα s για"
 
 #: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
+#, fuzzy
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "όχι s ή s"
 
 #: modules/krb5.c:311
 #, fuzzy, c-format
@@ -857,8 +876,9 @@ msgstr "Όποιο_δήποτε επιλεγμένο γνώρισμα"
 
 #: modules/krb5.c:324
 #, c-format
+#, fuzzy
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "με όχι s ή s"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, fuzzy, c-format
@@ -880,12 +900,14 @@ msgid "Kerberos Realm"
 msgstr "Περιοχή Kerberos"
 
 #: modules/krb5.c:775
+#, fuzzy
 msgid "Kerberos Admin Principal"
-msgstr ""
+msgstr "Kerberos Διαχειριστή Κεφάλαιο"
 
 #: modules/krb5.c:797
+#, fuzzy
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "Kerberos Κωδικός πρόσβασης για Διαχειριστή Κεφάλαιο"
 
 #: modules/ldap.c:204
 #, fuzzy
@@ -909,8 +931,9 @@ msgstr "Αδυναμία σύνδεσης στον εξυπηρετητή"
 
 #: modules/ldap.c:411
 #, c-format
+#, fuzzy
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
+msgstr "not στο LDAP εξυπηρετητής πρώτο s s"
 
 #: modules/ldap.c:1331
 #, c-format
@@ -1084,3 +1107,4 @@ msgstr "Λήψη προεπιλεγμένων ιδιοτήτων χρήστη:\n
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Αντιγραφή δομής χρήστη:\n"
+
