@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2007 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -35,7 +35,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC		0x00000006
-#define LU_MODULE_VERSION	0x000b0000
+#define LU_MODULE_VERSION	0x000c0000
 /* FIXME: should use dgettext */
 #define _(String)		gettext(String)
 #define N_(String)		String
@@ -293,7 +293,8 @@ char *lu_util_field_read(int fd, const char *first, unsigned int field,
 			 struct lu_error **error);
 gboolean lu_util_field_write(int fd, const char *first, unsigned int field,
 			     const char *value, struct lu_error **error);
-char *lu_util_shadow_current_date(struct lu_string_cache *cache);
+
+void lu_util_update_shadow_last_change(struct lu_ent *ent);
 
 /* Find the first unused ID of the given type, searching starting at "id". */
 id_t lu_get_first_unused_id(struct lu_context *ctx, enum lu_entity_type type,

@@ -1885,29 +1885,15 @@ lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
 			       error);
 }
 
-/* Set the shadow last-changed field to today's date. */
-static void
-set_shadow_last_change(struct lu_module *module, struct lu_ent *ent)
-{
-	GValue value;
-
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
-	g_value_set_string(&value, lu_util_shadow_current_date(module->scache));
-	lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-	lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-	g_value_unset(&value);
-}
-
 static gboolean
 lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
 	gboolean ret;
+
 	ret = generic_setpass(module, "shadow", 2, ent, password, TRUE, error);
-	if (ret) {
-		set_shadow_last_change(module, ent);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1916,11 +1902,11 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 			const char *password, struct lu_error **error)
 {
 	gboolean ret;
+
 	ret = generic_setpass(module, "gshadow", 2, ent, password, TRUE,
 			      error);
-	if (ret) {
-		set_shadow_last_change(module, ent);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1929,11 +1915,11 @@ lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
 	gboolean ret;
+
 	ret = generic_setpass(module, "shadow", 2, ent, LU_CRYPTED, TRUE,
 			      error);
-	if (ret) {
-		set_shadow_last_change(module, ent);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1944,9 +1930,8 @@ lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 	gboolean ret;
 	ret = generic_setpass(module, "gshadow", 2, ent, LU_CRYPTED, TRUE,
 			      error);
-	if (ret) {
-		set_shadow_last_change(module, ent);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2005 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2005, 2007 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -47,6 +47,8 @@ int lu_module_unload(gpointer key, gpointer value, gpointer data)
 
 gint lu_strcasecmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
 gint lu_strcmp(gconstpointer v1, gconstpointer v2) G_GNUC_INTERNAL;
+
+long lu_util_shadow_current_date(void) G_GNUC_INTERNAL;
 
 /* Only for compatibility with shadow. */
 time_t lu_get_date(const char *, const time_t *) G_GNUC_INTERNAL;

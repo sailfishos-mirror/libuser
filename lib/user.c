@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2004, 2005, 2006 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2004, 2005, 2006, 2007 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -802,13 +802,11 @@ run_list(struct lu_context *context,
 		struct lu_module *module;
 		gpointer scratch;
 		GValue *value;
-		char *name;
 		gboolean tsuccess;
 
 		value = g_value_array_get_nth(list, i);
-		name = g_value_dup_string(value);
-		module = g_tree_lookup(context->modules, name);
-		g_free(name);
+		module = g_tree_lookup(context->modules,
+				       g_value_get_string(value));
 		g_assert(module != NULL);
 		scratch = NULL;
 		tsuccess = run_single(context, module, id,
@@ -1429,16 +1427,8 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 	if (ret) {
 		ret = lu_refresh_user(context, ent, error);
 	}
-	if (ret) {
-		GValue value;
-		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->cache));
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1457,16 +1447,8 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 	if (ret) {
 		ret = lu_refresh_user(context, ent, error);
 	}
-	if (ret) {
-		GValue value;
-		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->cache));
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1548,16 +1530,8 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	if (ret) {
 		ret = lu_refresh_group(context, ent, error);
 	}
-	if (ret) {
-		GValue value;
-		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->cache));
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1576,16 +1550,8 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 	if (ret) {
 		ret = lu_refresh_group(context, ent, error);
 	}
-	if (ret) {
-		GValue value;
-		lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value,
-				   lu_util_shadow_current_date(ent->cache));
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
+	if (ret)
+		lu_util_update_shadow_last_change(ent);
 	return ret;
 }
 
@@ -1750,6 +1716,31 @@ lu_get_first_unused_id(struct lu_context *ctx,
 	return id;
 }
 
+/* Replace all instances of OLD in g_malloc()'ed STRING by NEW. */
+static char *
+replace_all(char *string, const char *old, const char *new)
+{
+	char *pos;
+
+	pos = strstr(string, old);
+	if (pos != NULL) {
+		size_t old_len;
+
+		old_len = strlen(old);
+		do {
+			char *p, *prefix;
+
+			prefix = g_strndup(string, pos - string);
+			p = g_strconcat(prefix, new, pos + old_len, NULL);
+			g_free(prefix);
+			g_free(string);
+			string = p;
+			pos = strstr(string, old);
+		} while (pos != NULL);
+	}
+	return string;
+}
+
 static gboolean
 lu_default_int(struct lu_context *context, const char *name,
 	       enum lu_entity_type type, gboolean is_system, struct lu_ent *ent)
@@ -1892,17 +1883,8 @@ lu_default_int(struct lu_context *context, const char *name,
 		};
 
 		intmax_t imax;
-		char *end, *tmp;
+		char *end, *tmp, *replacement;
 		const char *key;
-		struct {
-			const char *format;
-			const char *value;
-		} subst[] = {
-			{"%n", name},
-			{"%d", lu_util_shadow_current_date(context->scache)},
-			/* Must be index 2, see below! */
-			{"%u", NULL} /* value set later */
-		};
 
 		/* Possibly map the key to an internal name. */
 		key = p->data;
@@ -1928,27 +1910,14 @@ lu_default_int(struct lu_context *context, const char *name,
 		g_assert(val != NULL);
 		tmp = g_strdup(val);
 
-		subst[2].value = g_strdup_printf("%jd", (intmax_t)id);
-		/* Perform substitutions. */
-		for (i = 0; i < G_N_ELEMENTS(subst); i++) {
-			while (strstr(tmp, subst[i].format) != NULL) {
-				char *pre, *post, *tmp2, *where;
-
-				where = strstr(tmp, subst[i].format);
-				pre = g_strndup(tmp, where - tmp);
-				post = g_strdup(where +
-						strlen(subst[i].format));
-				tmp2 = g_strconcat(pre,
-						   subst[i].value,
-						   post,
-						   NULL);
-				g_free(pre);
-				g_free(post);
-				g_free(tmp);
-				tmp = tmp2;
-			}
-		}
-		g_free((char *)subst[2].value);
+		tmp = replace_all(tmp, "%n", name);
+		replacement = g_strdup_printf("%ld",
+					      lu_util_shadow_current_date());
+		tmp = replace_all(tmp, "%d", replacement);
+		g_free(replacement);
+		replacement = g_strdup_printf("%jd", (intmax_t)id);
+		tmp = replace_all(tmp, "%u", replacement);
+		g_free(replacement);
 
 		/* Check if we can represent this value as a number. */
 		errno = 0;

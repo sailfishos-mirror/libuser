@@ -118,13 +118,11 @@ lu_common_suser_default(struct lu_module *module,
 		        struct lu_ent *ent, struct lu_error **error)
 {
 	GValue value;
-	const char *today;
 
 	(void)module;
 	(void)is_system;
 	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
-	today = lu_util_shadow_current_date(ent->cache);
 	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
@@ -132,12 +130,8 @@ lu_common_suser_default(struct lu_module *module,
 		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
 		g_value_unset(&value);
 	}
-	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, today);
-		lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL)
+		lu_util_update_shadow_last_change(ent);
 	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL) {
 		g_value_init(&value, G_TYPE_LONG);
 		g_value_set_long(&value, 0);

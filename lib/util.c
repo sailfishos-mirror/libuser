@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2007 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under 
  * the terms of the GNU Library General Public License as published by
@@ -557,27 +557,37 @@ err:
 	return ret;
 }
 
-char *
-lu_util_shadow_current_date(struct lu_string_cache *cache)
+long
+lu_util_shadow_current_date(void)
 {
-	struct tm gmt;
+	const struct tm *gmt;
 	time_t now;
-	char buf[LINE_MAX];
 	GDate *today, *epoch;
 	long days;
 
 	time(&now);
-	gmt = *(gmtime(&now));
+	gmt = gmtime(&now);
 
-	today =
-	    g_date_new_dmy(gmt.tm_mday, gmt.tm_mon + 1,
-			   gmt.tm_year + 1900);
+	today = g_date_new_dmy(gmt->tm_mday, gmt->tm_mon + 1,
+			       gmt->tm_year + 1900);
 	epoch = g_date_new_dmy(1, 1, 1970);
 	days = g_date_get_julian(today) - g_date_get_julian(epoch);
 	g_date_free(today);
 	g_date_free(epoch);
 
-	snprintf(buf, sizeof(buf), "%ld", days);
+	return days;
+}
 
-	return cache->cache(cache, buf);
+/* Set the shadow last-changed field to today's date. */
+void
+lu_util_update_shadow_last_change(struct lu_ent *ent)
+{
+	GValue value;
+
+	memset(&value, 0, sizeof(value));
+	g_value_init(&value, G_TYPE_LONG);
+	g_value_set_long(&value, lu_util_shadow_current_date());
+	lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
+	lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
+	g_value_unset(&value);
 }

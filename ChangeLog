@@ -1,4 +1,28 @@
+2007-02-16  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/user.c (lu_user_setpass, lu_user_removepass)
+	(lu_group_setpass, lu_group_removepass, lu_default_int): Use
+	lu_util_update_shadow_last_change ().
+
+	* lib/util.c (lu_util_shadow_current_date): Return the number of days
+	as an integer.  Clean up.
+	(lu_util_update_shadow_last_change): Move from ...
+	* modules/files.c (set_shadow_last_change): ... here.  All callers
+	updated.
+	* lib/internal.h (lu_util_shadow_current_date): Update prototype.  Move
+	declaration from...
+	* lib/user_private.h (lu_util_shadow_current_date): ... here.
+	(lu_util_update_shadow_last_change): New declaration.
+	(LU_MODULE_VERSION): Bump.
+
+	* lib/user.c (replace_all): New function, based on a part of
+	lu_default_int ().
+	(lu_default_int): Perform substitutions one by one instead of
+	precomputing a list of them.
+
 2007-02-15  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/user.c (run_list): Avoid unnecessary g_value_dup_string ().
 
 	* lib/entity.c (lu_ent_dump): Remove output of value types that are
 	not expected to appear.
