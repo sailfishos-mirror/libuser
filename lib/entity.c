@@ -153,16 +153,10 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 		GValue *value;
 
 		value = g_value_array_get_nth(ent->modules, i);
-		if (i > 0) {
+		if (i > 0)
 			fprintf(fp, ", ");
-		}
 		if (G_VALUE_HOLDS_STRING(value))
 			fprintf(fp, "`%s'", g_value_get_string(value));
-		else if (G_VALUE_HOLDS_LONG(value))
-			fprintf(fp, "%ld", g_value_get_long(value));
-		else if (G_VALUE_HOLDS_INT64(value))
-			fprintf(fp, "%lld",
-				(long long)g_value_get_int64(value));
 		else
 			fprintf(fp, "?");
 	}
@@ -177,16 +171,11 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 void
 lu_ent_add_module(struct lu_ent *ent, const char *source)
 {
-	GValue value;
 	size_t i;
+
 	g_return_if_fail(ent != NULL);
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	g_return_if_fail(ent->modules != NULL);
-	/* Initialize a value with the string. */
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
-	g_value_set_string(&value, source);
-	/* Now scan the array for the value. */
 	for (i = 0; i < ent->modules->n_values; i++) {
 		GValue *val;
 
@@ -194,17 +183,21 @@ lu_ent_add_module(struct lu_ent *ent, const char *source)
 		/* We only add strings, so there had better be only strings
 		 * in this list, otherwise someone is messing with us. */
 		g_assert(G_VALUE_HOLDS_STRING(val));
-		if (strcmp(g_value_get_string(val),
-			   g_value_get_string(&value)) == 0) {
+		if (strcmp(g_value_get_string(val), source) == 0)
 			break;
-		}
 	}
 	/* If we fell of the end of the array, then the new value is not
 	 * in there, so we should add it. */
 	if (i >= ent->modules->n_values) {
+		GValue value;
+
+		/* Initialize a value with the string. */
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value, source);
 		g_value_array_append(ent->modules, &value);
+		g_value_unset(&value);
 	}
-	g_value_unset(&value);
 }
 
 /* Clear the list of modules which affect this module, by freeing the array
