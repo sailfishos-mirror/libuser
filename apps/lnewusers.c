@@ -108,14 +108,12 @@ main(int argc, const char **argv)
 		GValue *value, val;
 
 		/* Strip off the end-of-line terminators. */
-		if (strchr(buf, '\r')) {
-			p = strchr(buf, '\r');
+		p = strchr(buf, '\r');
+		if (p != NULL)
 			*p = '\0';
-		}
-		if (strchr(buf, '\n')) {
-			p = strchr(buf, '\n');
+		p = strchr(buf, '\n');
+		if (p != NULL)
 			*p = '\0';
-		}
 
 		/* Make sure the line splits into *exactly* seven fields. */
 		fields = g_strsplit(buf, ":", 7);

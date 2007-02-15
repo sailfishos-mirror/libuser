@@ -44,7 +44,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 	}
 
 	for (i = 0; i < count; i++) {
-		char buf[LINE_MAX];
+		char buf[LINE_MAX], *p;
 		struct termios otermios, ntermios;
 
 		if (prompts[i].prompt) {
@@ -90,14 +90,12 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 			g_print("\n");
 		}
 
-		if (strchr(buf, '\r')) {
-			char *p = strchr(buf, '\r');
+		p = strchr(buf, '\r');
+		if (p != NULL)
 			*p = '\0';
-		}
-		if (strchr(buf, '\n')) {
-			char *p = strchr(buf, '\n');
+		p = strchr(buf, '\n');
+		if (p != NULL)
 			*p = '\0';
-		}
 
 		prompts[i].value = (strlen(buf) > 0) ?
 			g_strdup(buf) :
