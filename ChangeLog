@@ -1,5 +1,9 @@
 2007-02-15  Miloslav Trmac  <mitr@redhat.com>
 
+	* modules/files.c (line_read): Simplify and clean up.
+	(generic_del): Use memmove for copying strings that overlap.  Clean up
+	the code a bit.
+
 	* apps/lnewusers.c (main)
 	* lib/prompt.c (lu_prompt_console): Eliminate duplicate strchr ()
 	calls.

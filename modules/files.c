@@ -313,25 +313,19 @@ static char *
 line_read(FILE * fp)
 {
 	char *p, *buf;
-	size_t buf_size = CHUNK_SIZE;
-	p = buf = g_malloc0(buf_size);
-	while (fgets(p, buf_size - (p - buf) - 1, fp) != NULL) {
-		p = buf + strlen(buf);
-		if (p > buf) {
-			p--;
-		}
-		if (*p == '\n') {
+	size_t len, buf_size = CHUNK_SIZE;
+
+	p = buf = g_malloc(buf_size);
+	len = 0;
+	while (fgets(buf + len, buf_size - len, fp) != NULL) {
+		len += strlen(buf + len);
+		if (len > 0 && buf[len - 1] == '\n')
 			break;
-		}
 
 		buf_size += CHUNK_SIZE;
-		p = g_malloc0(buf_size);
-		strcpy(p, buf);
-		g_free(buf);
-		buf = p;
-		p += strlen(p);
+		buf = g_realloc(buf, buf_size);
 	}
-	if (strlen(buf) == 0) {
+	if (len == 0) {
 		g_free(buf);
 		return NULL;
 	} else {
@@ -1297,13 +1291,14 @@ generic_del(struct lu_module *module, const char *base_name,
 	}
 
 	/* Allocate space to hold the file and read it all in. */
-	contents = g_malloc0(st.st_size + 1);
+	contents = g_malloc(st.st_size + 1);
 	if (read(fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"), filename,
 			     strerror(errno));
 		goto err_contents;
 	}
+	contents[st.st_size] = '\0';
 
 	/* Generate string versions of what the beginning of a line might
 	 * look like. */
@@ -1321,14 +1316,24 @@ generic_del(struct lu_module *module, const char *base_name,
 		 * first line. */
 		if (strncmp(contents, fragment1, len) == 0
 			&& contents[len] == ':') {
-			char *p = strchr(contents, '\n');
-			strcpy(contents, p ? (p + 1) : "");
+			char *p;
+
+			p = strchr(contents, '\n');
+			if (p != NULL)
+				memmove(contents, p + 1, strlen(p + 1) + 1);
+			else
+				strcpy(contents, "");
 			found = TRUE;
 		} else
 		/* If the data occurs elsewhere, cover it up. */
 		if ((tmp = strstr(contents, fragment2)) != NULL) {
-			char *p = strchr(tmp + 1, '\n');
-			strcpy(tmp + 1, p ? (p + 1) : "");
+			char *p;
+
+			p = strchr(tmp + 1, '\n');
+			if (p != NULL)
+				memmove(tmp + 1, p + 1, strlen (p + 1) + 1);
+			else
+				strcpy(tmp + 1, "");
 			found = TRUE;
 		}
 	} while(found);
