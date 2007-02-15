@@ -90,14 +90,44 @@ lu_ent_free(struct lu_ent *ent)
 	g_free(ent);
 }
 
+/* Dump a set of attributes */
+static void
+lu_ent_dump_attributes(GArray *attrs, FILE *fp)
+{
+	size_t i;
+
+	for (i = 0; i < attrs->len; i++) {
+		struct lu_attribute *attribute;
+		size_t j;
+
+		attribute = &g_array_index(attrs, struct lu_attribute, i);
+		for (j = 0; j < attribute->values->n_values; j++) {
+			GValue *value;
+
+			value = g_value_array_get_nth(attribute->values, j);
+			fprintf(fp, " %s = ",
+				g_quark_to_string(attribute->name));
+			if (G_VALUE_HOLDS_STRING(value))
+				fprintf(fp, "`%s'\n",
+					g_value_get_string(value));
+			else if (G_VALUE_HOLDS_LONG(value))
+				fprintf(fp, "%ld\n", g_value_get_long(value));
+			else if (G_VALUE_HOLDS_INT64(value))
+				fprintf(fp, "%lld\n",
+					(long long)g_value_get_int64(value));
+			else
+				fprintf(fp, "???\n");
+		}
+	}
+}
+
 /* Dump the contents of an entity structure.  This is primarily for
  * debugging. */
 void
 lu_ent_dump(struct lu_ent *ent, FILE *fp)
 {
-	size_t i, j;
-	struct lu_attribute *attribute;
-	GValue *value;
+	size_t i;
+
 	g_return_if_fail(ent != NULL);
 	fprintf(fp, "dump of struct lu_ent at %p:\n", ent);
 	fprintf(fp, " magic = %08x\n", ent->magic);
@@ -120,6 +150,8 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	/* Print the module list. */
 	fprintf(fp, " modules = (");
 	for (i = 0; i < ent->modules->n_values; i++) {
+		GValue *value;
+
 		value = g_value_array_get_nth(ent->modules, i);
 		if (i > 0) {
 			fprintf(fp, ", ");
@@ -136,49 +168,9 @@ lu_ent_dump(struct lu_ent *ent, FILE *fp)
 	}
 	fprintf(fp, ")\n");
 	/* Print the current data values. */
-	for (i = 0; i < ent->current->len; i++) {
-		attribute = &g_array_index(ent->current,
-					   struct lu_attribute,
-					   i);
-		for (j = 0; j < attribute->values->n_values; j++) {
-			value = g_value_array_get_nth(attribute->values, j);
-			if (G_VALUE_HOLDS_STRING(value))
-				fprintf(fp, " %s = `%s'\n",
-					g_quark_to_string(attribute->name),
-					g_value_get_string(value));
-			else if (G_VALUE_HOLDS_LONG(value))
-				fprintf(fp, " %s = %ld\n",
-					g_quark_to_string(attribute->name),
-					g_value_get_long(value));
-
-			else if (G_VALUE_HOLDS_INT64(value))
-				fprintf(fp, " %s = %lld\n",
-					g_quark_to_string(attribute->name),
-					(long long)g_value_get_int64(value));
-
-		}
-	}
+	lu_ent_dump_attributes(ent->current, fp);
 	fprintf(fp, "\n");
-	for (i = 0; i < ent->pending->len; i++) {
-		attribute = &g_array_index(ent->pending,
-					   struct lu_attribute,
-					   i);
-		for (j = 0; j < attribute->values->n_values; j++) {
-			value = g_value_array_get_nth(attribute->values, j);
-			if (G_VALUE_HOLDS_STRING(value))
-				fprintf(fp, " %s = `%s'\n",
-					g_quark_to_string(attribute->name),
-					g_value_get_string(value));
-			else if (G_VALUE_HOLDS_LONG(value))
-				fprintf(fp, " %s = %ld\n",
-					g_quark_to_string(attribute->name),
-					g_value_get_long(value));
-			else if (G_VALUE_HOLDS_INT64(value))
-				fprintf(fp, " %s = %lld\n",
-					g_quark_to_string(attribute->name),
-					(long long)g_value_get_int64(value));
-		}
-	}
+	lu_ent_dump_attributes(ent->pending, fp);
 }
 
 /* Add a module to the list of modules kept for this entity. */
