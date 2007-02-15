@@ -32,7 +32,7 @@ char *
 lu_value_strdup(const GValue *value)
 {
 	char *ret;
-	
+
 	if (G_VALUE_HOLDS_STRING(value))
 		ret = g_value_dup_string(value);
 	else if (G_VALUE_HOLDS_LONG(value))
