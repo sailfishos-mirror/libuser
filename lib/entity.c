@@ -435,22 +435,14 @@ lu_ent_del_int(GArray *list, const char *attr, const GValue *value)
 	g_return_if_fail(strlen(attr) > 0);
 	dest = lu_ent_get_int(list, attr);
 	if (dest != NULL) {
-		char *svalue;
-
-		svalue = g_strdup_value_contents(value);
 		for (i = 0; i < dest->n_values; i++) {
 			GValue *tvalue;
-			char *tmp;
 
 			tvalue = g_value_array_get_nth(dest, i);
-			tmp = g_strdup_value_contents(tvalue);
-			if (strcmp(tmp, svalue) == 0) {
-				g_free(tmp);
+			if (G_VALUE_TYPE(value) == G_VALUE_TYPE(tvalue)
+			    && lu_values_equal(value, tvalue))
 				break;
-			}
-			g_free(tmp);
 		}
-		g_free(svalue);
 		if (i < dest->n_values) {
 			g_value_array_remove(dest, i);
 			if (dest->n_values == 0)

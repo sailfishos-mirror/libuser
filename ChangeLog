@@ -1,5 +1,9 @@
 2007-02-15  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_del_int): Use lu_values_equal () instead of
+	g_strdup_value_contents (), which is intended for human-readable
+	debugging dumps.
+
 	* lib/entity.c (lu_ent_dump_attributes): Split from
 	lu_ent_dump_attributes ().  Show something for unsupported value types.
 
