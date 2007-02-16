@@ -26,6 +26,7 @@
 #include <locale.h>
 #include <popt.h>
 #include <pwd.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "../lib/user.h"
@@ -65,14 +66,13 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 
 				attrs = lu_ent_get(ent, id_attribute);
 				if (attrs != NULL) {
-					char *tmp;
+					id_t id;
 
 					value = g_value_array_get_nth(attrs,
 								      0);
-					tmp = lu_value_strdup(value);
-					g_print(" %s(%s=%s)\n", found,
-						id_descr, tmp);
-					g_free(tmp);
+					id = lu_value_get_id(value);
+					g_print(" %s(%s=%jd)\n", found,
+						id_descr, (intmax_t)id);
 				} else
 					g_print(" %s\n", found);
 			} else {
