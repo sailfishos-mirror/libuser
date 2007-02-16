@@ -61,7 +61,7 @@ to NULL after the error is freed.
 Check if the error code held by an error structure is a success code.
 </para>
 
-@status: 
+@status: An error code
 @Returns: a #gboolean indicating whether or not the error is a success code.
 
 
@@ -70,7 +70,7 @@ Check if the error code held by an error structure is a success code.
 Check if the error code held by an error structure is a warning code.
 </para>
 
-@status: 
+@status: An error code
 @Returns: a #gboolean indicating whether or not the error is a warning code.
 
 
@@ -79,7 +79,7 @@ Check if the error code held by an error structure is a warning code.
 Check if the error code held by an error structure is an error code.
 </para>
 
-@status: 
+@status: An error code
 @Returns: a #gboolean indicating whether or not the error is an error code.
 
 
