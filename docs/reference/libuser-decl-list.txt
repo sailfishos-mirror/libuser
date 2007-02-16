@@ -25,6 +25,7 @@ lu_value_strdup
 lu_values_equal
 lu_value_init_set_id
 lu_value_get_id
+lu_value_init_set_attr_from_string
 lu_start
 lu_end
 lu_set_prompter

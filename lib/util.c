@@ -113,14 +113,14 @@ fill_urandom(char *output, size_t length)
 	return TRUE;
 }
 
-static struct {
-	const char *initial;
+static const struct {
+	const char initial[5];
+	char separator[2];
 	size_t salt_length;
-	const char *separator;
 } salt_type_info[] = {
-	{"$1$", 8, "$"},
-	{"$2a$", 8, "$"},     /* FIXME: number of rounds, base64 of 128 bits */
-	{ "", 2, ""},
+	{"$1$", "$", 8 },
+	{"$2a$", "$", 8 },    /* FIXME: number of rounds, base64 of 128 bits */
+	{ "", "", 2 },
 };
 
 const char *

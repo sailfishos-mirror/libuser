@@ -35,6 +35,9 @@ typedef enum lu_status {
 
 	/* Since 0.53 */
 	lu_error_unlock_empty,
+
+	/* Since 0.56 */
+	lu_error_invalid_attribute_value
 } lu_status_t;
 </ENUM>
 <STRUCT>
@@ -151,6 +154,11 @@ GValue *value, id_t id
 <NAME>lu_value_get_id</NAME>
 <RETURNS>id_t </RETURNS>
 const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_init_set_attr_from_string</NAME>
+<RETURNS>gboolean </RETURNS>
+GValue *value, const char *attr,const char *string,lu_error_t **error
 </FUNCTION>
 <FUNCTION>
 <NAME>lu_start</NAME>

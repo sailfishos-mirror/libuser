@@ -9,6 +9,7 @@ lu_cfg_read_keys
 <FILE>value</FILE>
 LU_VALUE_INVALID_ID
 lu_value_strdup
+lu_value_init_set_attr_from_string
 lu_value_init_set_id
 lu_value_get_id
 lu_values_equal
@@ -87,7 +88,6 @@ lu_prompt_console_quiet
 
 <SECTION>
 <FILE>user</FILE>
-	
 lu_start
 lu_end
 

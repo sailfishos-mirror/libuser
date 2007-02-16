@@ -1,5 +1,9 @@
 2007-02-16  Miloslav Trmac  <mitr@redhat.com>
 
+	* lib/util.c (salt_type_info): Use char[] instead of char * and reorder
+	fields within the structure to eliminate run-time relocations and save
+	some space.
+
 	* docs/reference/tmpl/error.sgml: Add missing parameter documentation.
 
 	* lib/user.c (lu_user_setpass, lu_user_removepass)

@@ -22,6 +22,15 @@ values are an internal implementation detail of libuser and applications should
 not rely on them.
 </para>
 
+<para>
+Values of each attribute are expected to have a specific type, documented in
+the documentation of the specific attribute name.  Using other types (e.g.
+using %G_TYPE_STRING for %LU_UIDNUMBER) is not allowed and results in undefined
+behavior.. You can use lu_value_strdup() and
+lu_value_init_set_attr_from_string() for conversion between strings and values
+appropriate for a specific attribute.
+</para>
+
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
@@ -45,6 +54,22 @@ to hard-coding checks for expected value types.
 
 @value: value
 @Returns: string, should be freed by g_free()
+
+
+<!-- ##### FUNCTION lu_value_init_set_attr_from_string ##### -->
+<para>
+Initializes a zero-filled (uninitialized) @value for storing a value of
+attribute @attr and sets it to the contents of @string.  To see whether a
+specific type is used for an attribute, see the documentation of that
+attribute.
+</para>
+
+@value: #GValue
+@attr: attribute name
+@string: the string to convert
+@error: filled with a #lu_error if an error occurs, or %NULL if @attr is
+unknown
+@Returns: %TRUE on success, %FALSE on error or if @attr is unknown
 
 
 <!-- ##### FUNCTION lu_value_init_set_id ##### -->

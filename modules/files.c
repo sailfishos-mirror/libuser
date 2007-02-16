@@ -51,56 +51,44 @@ enum lock_op { LO_LOCK, LO_UNLOCK, LO_UNLOCK_NONEMPTY };
 /* Guides for parsing and formatting entries in the files we're looking at. */
 struct format_specifier {
 	const char *attribute;
-	GType type;		/* G_TYPE_INVALID for "id_t" */
 	const char *def;
 	gboolean multiple, suppress_if_def, def_if_empty;
 };
 
 static const struct format_specifier format_passwd[] = {
-	{ LU_USERNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{
-	  LU_USERPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE, FALSE
-	},
-	{ LU_UIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
-	{ LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
-	{ LU_GECOS, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{ LU_HOMEDIRECTORY, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{ LU_LOGINSHELL, G_TYPE_STRING, DEFAULT_SHELL, FALSE, FALSE, TRUE },
+	{ LU_USERNAME, NULL, FALSE, FALSE, FALSE },
+	{ LU_USERPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_UIDNUMBER, NULL, FALSE, FALSE, FALSE },
+	{ LU_GIDNUMBER, NULL, FALSE, FALSE, FALSE },
+	{ LU_GECOS, NULL, FALSE, FALSE, FALSE },
+	{ LU_HOMEDIRECTORY, NULL, FALSE, FALSE, FALSE },
+	{ LU_LOGINSHELL, DEFAULT_SHELL, FALSE, FALSE, TRUE },
 };
 
 static const struct format_specifier format_group[] = {
-	{ LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{
-	  LU_GROUPPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
-	  FALSE
-	},
-	{ LU_GIDNUMBER, G_TYPE_INVALID, NULL, FALSE, FALSE, FALSE },
-	{ LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
+	{ LU_GROUPNAME, NULL, FALSE, FALSE, FALSE },
+	{ LU_GROUPPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_GIDNUMBER, NULL, FALSE, FALSE, FALSE },
+	{ LU_MEMBERNAME, NULL, TRUE, FALSE, FALSE },
 };
 
 static const struct format_specifier format_shadow[] = {
-	{ LU_SHADOWNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{
-	  LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
-	  FALSE
-	} ,
-	{ LU_SHADOWLASTCHANGE, G_TYPE_LONG, NULL, FALSE, FALSE, FALSE },
-	{ LU_SHADOWMIN, G_TYPE_LONG, "0", FALSE, FALSE, TRUE },
-	{ LU_SHADOWMAX, G_TYPE_LONG, "99999", FALSE, FALSE, TRUE },
-	{ LU_SHADOWWARNING, G_TYPE_LONG, "7", FALSE, FALSE, TRUE },
-	{ LU_SHADOWINACTIVE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
-	{ LU_SHADOWEXPIRE, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
-	{ LU_SHADOWFLAG, G_TYPE_LONG, "-1", FALSE, TRUE, TRUE },
+	{ LU_SHADOWNAME, NULL, FALSE, FALSE, FALSE },
+	{ LU_SHADOWPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_SHADOWLASTCHANGE, NULL, FALSE, FALSE, FALSE },
+	{ LU_SHADOWMIN, "0", FALSE, FALSE, TRUE },
+	{ LU_SHADOWMAX, "99999", FALSE, FALSE, TRUE },
+	{ LU_SHADOWWARNING, "7", FALSE, FALSE, TRUE },
+	{ LU_SHADOWINACTIVE, "-1", FALSE, TRUE, TRUE },
+	{ LU_SHADOWEXPIRE, "-1", FALSE, TRUE, TRUE },
+	{ LU_SHADOWFLAG, "-1", FALSE, TRUE, TRUE },
 };
 
 static const struct format_specifier format_gshadow[] = {
-	{ LU_GROUPNAME, G_TYPE_STRING, NULL, FALSE, FALSE, FALSE },
-	{
-	  LU_SHADOWPASSWORD, G_TYPE_STRING, DEFAULT_PASSWORD, FALSE, FALSE,
-	  FALSE
-	},
-	{ LU_ADMINISTRATORNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
-	{ LU_MEMBERNAME, G_TYPE_STRING, NULL, TRUE, FALSE, FALSE },
+	{ LU_GROUPNAME, NULL, FALSE, FALSE, FALSE },
+	{ LU_SHADOWPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_ADMINISTRATORNAME, NULL, TRUE, FALSE, FALSE },
+	{ LU_MEMBERNAME, NULL, TRUE, FALSE, FALSE },
 };
 
 static gboolean
@@ -338,47 +326,18 @@ static gboolean
 parse_field(const struct format_specifier *format, GValue *value,
 	    const char *string)
 {
-	switch (format->type) {
-	case G_TYPE_STRING:
-		g_value_init(value, G_TYPE_STRING);
-		g_value_set_string(value, string);
-		break;
+	lu_error_t *err;
+	gboolean ret;
 
-	case G_TYPE_LONG: {
-		long l;
-		char *p;
-
-		errno = 0;
-		l = strtol(string, &p, 10);
-		if (errno != 0 || *p != 0 || p == string) {
-			g_warning("invalid number '%s'", string);
-			return FALSE;
-		}
-		g_value_init(value, G_TYPE_LONG);
-		g_value_set_long(value, l);
-		break;
+	err = NULL;
+	ret = lu_value_init_set_attr_from_string(value, format->attribute,
+						 string, &err);
+	if (ret == FALSE) {
+		g_assert(err != NULL);
+		g_warning(lu_strerror(err));
+		lu_error_free(&err);
 	}
-
-	case G_TYPE_INVALID: {
-		intmax_t imax;
-		char *p;
-
-		errno = 0;
-		imax = strtoimax(string, &p, 10);
-		if (errno != 0 || *p != 0 || p == string
-		    || (id_t)imax != imax) {
-			g_warning("invalid ID '%s'", string);
-			return FALSE;
-		}
-		lu_value_init_set_id(value, imax);
-		break;
-	}
-
-	default:
-		g_assert_not_reached();
-		return FALSE;
-	}
-	return TRUE;
+	return ret;
 }
 
 /* Parse a string into an ent structure using the elements in the format
@@ -418,15 +377,17 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 
 			/* Split up the field. */
 			w = g_strsplit(val, ",", 0);
-			/* Clear out old values. */
 			for (j = 0; (w != NULL) && (w[j] != NULL); j++) {
+				gboolean ret;
+
 				/* Skip over empty strings. */
 				if (strlen(w[j]) == 0)
 					continue;
-				/* Always succeeds assuming
-				   formats[i].type == G_TYPE_STRING, which is
-				   currently true. */
-				parse_field(formats + i, &value, w[j]);
+				/* Always succeeds assuming the attribute
+				   values use G_TYPE_STRING, which is currently
+				   true. */
+				ret = parse_field(formats + i, &value, w[j]);
+				g_assert (ret != FALSE);
 				/* Add it to the current values list. */
 				lu_ent_add_current(ent, formats[i].attribute,
 						   &value);
@@ -439,10 +400,6 @@ parse_generic(const gchar *line, const struct format_specifier *formats,
 			    && strlen(val) == 0) {
 				gboolean ret;
 
-				/* Make sure we're not doing something
-				 * potentially-dangerous here. */
-				if (formats[i].type != G_TYPE_STRING)
-					g_assert(strlen(formats[i].def) > 0);
 				/* Convert the default to the right type. */
 				ret = parse_field(formats + i, &value,
 						  formats[i].def);

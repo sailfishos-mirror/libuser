@@ -43,6 +43,9 @@ char *lu_value_strdup(const GValue *value);
 int lu_values_equal(const GValue *a, const GValue *b);
 void lu_value_init_set_id(GValue *value, id_t id);
 id_t lu_value_get_id(const GValue *value);
+gboolean lu_value_init_set_attr_from_string(GValue *value, const char *attr,
+					    const char *string,
+					    lu_error_t **error);
 
 lu_context_t *lu_start(const char *authname,
 		       lu_entity_type_t auth_type,

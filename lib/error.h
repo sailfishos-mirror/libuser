@@ -60,6 +60,9 @@ typedef enum lu_status {
 
 	/* Since 0.53 */
 	lu_error_unlock_empty,
+
+	/* Since 0.56 */
+	lu_error_invalid_attribute_value
 } lu_status_t;
 
 typedef struct lu_error {

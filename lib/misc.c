@@ -20,6 +20,7 @@
 #ifdef HAVE_CONFIG_H
 #include "../config.h"
 #endif
+#include <inttypes.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -88,7 +89,7 @@ id_t
 lu_value_get_id(const GValue *value)
 {
 	long long val;
-	
+
 	if (G_VALUE_HOLDS_LONG(value))
 		val = g_value_get_long(value);
 	else if (G_VALUE_HOLDS_INT64(value))
@@ -114,6 +115,81 @@ lu_value_get_id(const GValue *value)
 		return LU_VALUE_INVALID_ID;
 	}
 	return val;
+}
+
+/* Check whether NAME is within LIST, which is a NUL-separated sequence of
+   strings, terminated by double NUL. */
+static gboolean
+attr_in_list(const char *attr, const char *list)
+{
+	size_t attr_len;
+
+	attr_len = strlen(attr);
+	while (*list != '\0') {
+		size_t s_len;
+
+		s_len = strlen(list);
+		if (attr_len == s_len && strcmp(attr, list) == 0)
+			return TRUE;
+		list += s_len + 1;
+	}
+	return FALSE;
+}
+
+/* The error messages returned from this function don't contain the input
+   string, to allow the caller to output at least partially usable error
+   message without disclosing the invalid string in e.g. /etc/shadow, which
+   might be somebody's misplaced password. */
+gboolean
+lu_value_init_set_attr_from_string(GValue *value, const char *attr,
+				   const char *string, lu_error_t **error)
+{
+	LU_ERROR_CHECK(error);
+#define A(NAME) NAME "\0"
+	if (attr_in_list(attr, A(LU_USERNAME) A(LU_USERPASSWORD) A(LU_GECOS)
+			 A(LU_HOMEDIRECTORY) A(LU_LOGINSHELL) A(LU_GROUPNAME)
+			 A(LU_GROUPPASSWORD) A(LU_MEMBERNAME)
+			 A(LU_ADMINISTRATORNAME) A(LU_SHADOWNAME)
+			 A(LU_SHADOWPASSWORD) A(LU_COMMONNAME) A(LU_GIVENNAME)
+			 A(LU_SN) A(LU_ROOMNUMBER) A(LU_TELEPHONENUMBER)
+			 A(LU_HOMEPHONE) A(LU_EMAIL))) {
+		g_value_init(value, G_TYPE_STRING);
+		g_value_set_string(value, string);
+	} else if (attr_in_list(attr, A(LU_SHADOWLASTCHANGE) A(LU_SHADOWMIN)
+				A(LU_SHADOWMAX) A(LU_SHADOWWARNING)
+				A(LU_SHADOWINACTIVE) A(LU_SHADOWEXPIRE)
+				A(LU_SHADOWFLAG))) {
+		long l;
+		char *p;
+
+		errno = 0;
+		l = strtol(string, &p, 10);
+		if (errno != 0 || *p != 0 || p == string) {
+			lu_error_new(error, lu_error_invalid_attribute_value,
+				     _("invalid number"));
+			return FALSE;
+		}
+		g_value_init(value, G_TYPE_LONG);
+		g_value_set_long(value, l);
+	} else if (attr_in_list(attr, A(LU_UIDNUMBER) A(LU_GIDNUMBER))) {
+		intmax_t imax;
+		char *p;
+
+		errno = 0;
+		imax = strtoimax(string, &p, 10);
+		if (errno != 0 || *p != 0 || p == string
+		    || (id_t)imax != imax) {
+			lu_error_new(error, lu_error_invalid_attribute_value,
+				     _("invalid ID"));
+			return FALSE;
+		}
+		lu_value_init_set_id(value, imax);
+	} else {
+		*error = NULL;
+		return FALSE;
+	}
+#undef A
+	return TRUE;
 }
 
 void
