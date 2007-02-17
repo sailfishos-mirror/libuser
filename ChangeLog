@@ -19,7 +19,6 @@
 	* lib/error.c (lu_error_new): Don't use lu_strerror () result as a
 	format string.  Beautify.
 
-
 	* apps/lchage.c (read_ndays): Assume the value is a G_TYPE_LONG.
 	Return a g_type_long.  All callers updated.
 	(date_to_string): Use glong for n_days.
