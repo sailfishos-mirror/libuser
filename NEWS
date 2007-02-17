@@ -1,3 +1,10 @@
+0.56
+* Document the correct types used for attribute values.  Use these types for
+  parsing, to avoid corrupting number-like strings, e.g. '07' -> 7; this
+  expands the API requirements
+* Miscellaneous bug fixes, optimizations and cleanups; module interface ABI
+  has changed
+
 0.55
 * Remove the quota library and Python module.  It doesn't even compile and
   has no known users.

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2006-12-10 23:07+0100\n"
+"POT-Creation-Date: 2007-02-17 14:19+0100\n"
 "PO-Revision-Date: 2006-05-29 20:29+0800\n"
 "Last-Translator: Joel Gump <biglaughing@gmail.com>\n"
 "Language-Team:  <zh@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
-#: modules/files.c:246
+#: modules/files.c:234
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "读取“%s”时出错：%s"
@@ -34,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "创建“%s”时出错：%s"
 
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
-#: modules/files.c:229
+#: modules/files.c:217
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "创建组群'%s': %s出错。"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
-#: modules/files.c:261 modules/files.c:275
+#: modules/files.c:249 modules/files.c:263
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "创建“%s”时出错：%s"
@@ -99,25 +99,25 @@ msgstr "未知用户验证。\n"
 msgid "User mismatch.\n"
 msgstr "用户错配。\n"
 
-#: apps/lchage.c:135 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
+#: apps/lchage.c:115 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[OPTION...] 用户"
 
-#: apps/lchage.c:138 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
+#: apps/lchage.c:118 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "解析参数时出错：%s。\n"
 
-#: apps/lchage.c:147 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
+#: apps/lchage.c:127 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
 msgstr "没有指定的用户名。\n"
 
-#: apps/lchage.c:157 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
+#: apps/lchage.c:137 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
 #: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
@@ -125,67 +125,67 @@ msgstr "没有指定的用户名。\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "初始化 %s 出错：%s。\n"
 
-#: apps/lchage.c:166 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
+#: apps/lchage.c:146 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "用户 %s 不存在。\n"
 
-#: apps/lchage.c:177
+#: apps/lchage.c:157
 #, c-format
 msgid "Account is locked.\n"
 msgstr "帐号被锁。\n"
 
-#: apps/lchage.c:179
+#: apps/lchage.c:159
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "帐号没被锁。\n"
 
-#: apps/lchage.c:184
-#, c-format
-msgid "Minimum:\t%d\n"
+#: apps/lchage.c:164
+#, fuzzy, c-format
+msgid "Minimum:\t%ld\n"
 msgstr "至少：\t%d\n"
 
-#: apps/lchage.c:188
-#, c-format
-msgid "Maximum:\t%d\n"
+#: apps/lchage.c:168
+#, fuzzy, c-format
+msgid "Maximum:\t%ld\n"
 msgstr "至多：\t%d\n"
 
-#: apps/lchage.c:192
-#, c-format
-msgid "Warning:\t%d\n"
+#: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Warning:\t%ld\n"
 msgstr "警告：\t%d\n"
 
-#: apps/lchage.c:196
-#, c-format
-msgid "Inactive:\t%d\n"
+#: apps/lchage.c:176
+#, fuzzy, c-format
+msgid "Inactive:\t%ld\n"
 msgstr "不活跃：\t%d\n"
 
-#: apps/lchage.c:200 apps/lchage.c:207 apps/lchage.c:216 apps/lchage.c:226
+#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
 msgstr "从不"
 
-#: apps/lchage.c:202
+#: apps/lchage.c:182
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "最后一次改变：\t%s\n"
 
-#: apps/lchage.c:211
+#: apps/lchage.c:191
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "口令过期：\t%s\n"
 
-#: apps/lchage.c:221
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "口令不活跃：\t%s\n"
 
-#: apps/lchage.c:228
+#: apps/lchage.c:208
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "帐号过期：\t%s\n"
 
-#: apps/lchage.c:278
+#: apps/lchage.c:258
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "为 %s: %s 修改老化信息失败。\n"
@@ -318,7 +318,7 @@ msgstr "组群 %s 无法被开锁：%s\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "组群 %s 无法被修改：%s\n"
 
-#: apps/lid.c:47
+#: apps/lid.c:48
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "查找 %s 时出错：%s \n"
@@ -347,41 +347,41 @@ msgstr "[OPTION...]"
 msgid "Error opening `%s': %s.\n"
 msgstr "打开“%s”时出错：%s\n"
 
-#: apps/lnewusers.c:124
+#: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "为“%s”创建账号时出错：行格式不正确。\n"
 
-#: apps/lnewusers.c:134 apps/luseradd.c:119 apps/lusermod.c:131
+#: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "无效的用户 ID %s\n"
 
-#: apps/lnewusers.c:141
+#: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒绝使用 UID 0 来创建账号。\n"
 
-#: apps/lnewusers.c:223
+#: apps/lnewusers.c:221
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "创建组群“%s”时出错，使用 GID %jd: %s\n"
 
-#: apps/lnewusers.c:281
+#: apps/lnewusers.c:278
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "为“%s”设置初始口令时出错：%s\n"
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:292
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "为 %s 创建主目录时出错：%s\n"
 
-#: apps/lnewusers.c:309
+#: apps/lnewusers.c:306
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "为 %s 创建邮件池时出错。\n"
 
-#: apps/lnewusers.c:315
+#: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "为 %s 创建用户账号失败：%s\n"
@@ -659,148 +659,153 @@ msgstr "设置终端属性时出错"
 msgid "error reading from terminal"
 msgstr "从终端上读取时出错"
 
-#: lib/user.c:194
+#: lib/user.c:195
 msgid "name is not set"
 msgstr "没有设置名称"
 
-#: lib/user.c:199
+#: lib/user.c:200
 msgid "name is too short"
 msgstr "名称太短"
 
-#: lib/user.c:204
+#: lib/user.c:205
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr "名字太长(%zu > %d)"
 
-#: lib/user.c:211
+#: lib/user.c:212
 msgid "name contains non-ASCII characters"
 msgstr "名称中包含非 ASCII 字符"
 
-#: lib/user.c:218
+#: lib/user.c:219
 msgid "name contains control characters"
 msgstr "名称中包含控制字符"
 
-#: lib/user.c:225
+#: lib/user.c:226
 msgid "name contains whitespace"
 msgstr "名称中包含空格"
 
-#: lib/user.c:237
+#: lib/user.c:238
 msgid "name starts with a hyphen"
 msgstr "名字以连字符开头"
 
-#: lib/user.c:248
+#: lib/user.c:249
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "名称中包含无效字符“%c”"
 
-#: lib/user.c:295 lib/user.c:343
+#: lib/user.c:296 lib/user.c:344
 #, c-format
 msgid "user %s has no UID"
 msgstr "用户 %s 没有 UID"
 
-#: lib/user.c:318 lib/user.c:344
+#: lib/user.c:319 lib/user.c:345
 #, c-format
 msgid "group %s has no GID"
 msgstr "组 %s 没有GID"
 
-#: lib/user.c:338
+#: lib/user.c:339
 #, c-format
 msgid "user %jd has no name"
 msgstr "用户 %jd 没有名字"
 
-#: lib/user.c:339
+#: lib/user.c:340
 #, c-format
 msgid "group %jd has no name"
 msgstr "组群 %jd 没有名字"
 
-#: lib/user.c:347
+#: lib/user.c:348
 msgid "user has neither a name nor an UID"
 msgstr "用户 %s 没有名字也没有 UID"
 
-#: lib/user.c:348
+#: lib/user.c:349
 msgid "group has neither a name nor a GID"
 msgstr "组 %s 没有名字也没有 UID"
+
+#: lib/user.c:1931
+#, c-format
+msgid "Invalid default value of field %s: %s"
+msgstr ""
 
 #: lib/util.c:193
 #, c-format
 msgid "error locking file: %s"
 msgstr "锁文件时出错：%s"
 
-#: modules/files.c:120
+#: modules/files.c:108
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "无法得到“%s”：%s 的安全上下文"
 
-#: modules/files.c:126
+#: modules/files.c:114
 #, c-format
 msgid "couldn't set default security context: %s"
 msgstr "无法设置默认的安全上下文：%s"
 
-#: modules/files.c:133
+#: modules/files.c:121
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "无法为“%s”：%s 设置默认的上下文"
 
-#: modules/files.c:176 modules/files.c:549 modules/files.c:874
-#: modules/files.c:1141 modules/files.c:1282 modules/files.c:1503
-#: modules/files.c:1588 modules/files.c:1794 modules/files.c:1978
-#: modules/files.c:1995 modules/files.c:2084 modules/files.c:2103
-#: modules/files.c:2171 modules/files.c:2192 modules/files.c:2289
-#: modules/files.c:2308 modules/files.c:2367 modules/files.c:2386
-#: modules/files.c:2486 modules/files.c:2501
+#: modules/files.c:164 modules/files.c:500 modules/files.c:813
+#: modules/files.c:1080 modules/files.c:1221 modules/files.c:1453
+#: modules/files.c:1538 modules/files.c:1744 modules/files.c:1913
+#: modules/files.c:1930 modules/files.c:2019 modules/files.c:2038
+#: modules/files.c:2106 modules/files.c:2127 modules/files.c:2224
+#: modules/files.c:2243 modules/files.c:2302 modules/files.c:2321
+#: modules/files.c:2421 modules/files.c:2436
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "无法打开“%s”：%s"
 
-#: modules/files.c:188 modules/files.c:217 modules/files.c:283
-#: modules/files.c:886 modules/files.c:1294
+#: modules/files.c:176 modules/files.c:205 modules/files.c:271
+#: modules/files.c:825 modules/files.c:1233
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "无法 stat “%s”：%s"
 
-#: modules/files.c:199
+#: modules/files.c:187
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "创建“%s”时出错：%s"
 
-#: modules/files.c:212
+#: modules/files.c:200
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "备份文件“%s”已存在，且不是常规文件"
 
-#: modules/files.c:291
+#: modules/files.c:279
 msgid "backup file size mismatch"
 msgstr "备份文件大小与原文件不符"
 
-#: modules/files.c:916 modules/files.c:1303
+#: modules/files.c:855 modules/files.c:1242
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "无法从“%s”中读取：%s"
 
-#: modules/files.c:925 modules/files.c:932
+#: modules/files.c:864 modules/files.c:871
 msgid "entry already present in file"
 msgstr "项目已在文件中出现"
 
-#: modules/files.c:939 modules/files.c:949 modules/files.c:960
-#: modules/files.c:1351 modules/files.c:1359 modules/files.c:1367
+#: modules/files.c:878 modules/files.c:888 modules/files.c:899
+#: modules/files.c:1301 modules/files.c:1309 modules/files.c:1317
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "无法写入“%s”：%s"
 
-#: modules/files.c:1118 modules/files.c:1177
+#: modules/files.c:1057 modules/files.c:1116
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "实体对象没有任何 %s 属性"
 
-#: modules/files.c:1828 modules/ldap.c:1552 modules/ldap.c:1825
+#: modules/files.c:1778 modules/ldap.c:1535 modules/ldap.c:1804
 msgid "error encrypting password"
 msgstr "错误的加密口令"
 
-#: modules/files.c:2773 modules/files.c:2851
+#: modules/files.c:2708 modules/files.c:2786
 msgid "not executing with superuser privileges"
 msgstr "没有使用超级用户的特权在执行"
 
-#: modules/files.c:2864
+#: modules/files.c:2799
 msgid "no shadow file present -- disabling"
 msgstr "没有屏蔽文件 -- 将禁用"
 
@@ -884,86 +889,86 @@ msgstr "无法关联到 LDAP 服务器"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "无法关联到 LDAP 服务器，第一此作为 `%s': %s 尝试"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1314
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "用户对象没有任何 %s 属性"
 
-#: modules/ldap.c:1340
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "用户对象创建时没有包括“%s”"
 
-#: modules/ldap.c:1358
+#: modules/ldap.c:1341
 msgid "could not convert internal data to LDAPMods"
 msgstr "无法将内部数据转换成 LDAPMods"
 
-#: modules/ldap.c:1371
+#: modules/ldap.c:1354
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "建立 LDAP 目录项目时出错：%s"
 
-#: modules/ldap.c:1397 modules/ldap.c:1617
+#: modules/ldap.c:1380 modules/ldap.c:1596
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目录项目时出错：%s"
 
-#: modules/ldap.c:1424
+#: modules/ldap.c:1407
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "将 LDAP 目录项目更名时出错：%s"
 
-#: modules/ldap.c:1469
+#: modules/ldap.c:1452
 #, c-format
 msgid "object had no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1487
+#: modules/ldap.c:1470
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "删除 LDAP 目录项目时出错：%s。"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1650
-#: modules/ldap.c:1749
+#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
+#: modules/ldap.c:1728
 #, c-format
 msgid "object has no %s attribute"
 msgstr "对象没有任何 %s 属性"
 
-#: modules/ldap.c:1675
+#: modules/ldap.c:1654
 msgid "no such object in LDAP directory"
 msgstr "在 LDAP 目录中没有此类对象"
 
-#: modules/ldap.c:1687
+#: modules/ldap.c:1666
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "没有发现任何“%s”属性"
 
-#: modules/ldap.c:1856
+#: modules/ldap.c:1835
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目录中为 %s 设置口令时出错：%s"
 
-#: modules/ldap.c:2468
+#: modules/ldap.c:2446
 msgid "LDAP Server Name"
 msgstr "LDAP 服务器名"
 
-#: modules/ldap.c:2474
+#: modules/ldap.c:2452
 msgid "LDAP Search Base DN"
 msgstr "LDAP 搜索基点 DN"
 
-#: modules/ldap.c:2480
+#: modules/ldap.c:2458
 msgid "LDAP Bind DN"
 msgstr "LDAP 关联 DN"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2465
 msgid "LDAP Bind Password"
 msgstr "LDAP 关联口令"
 
-#: modules/ldap.c:2493
+#: modules/ldap.c:2471
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 用户"
 
-#: modules/ldap.c:2500
+#: modules/ldap.c:2478
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 授权用户"
 
@@ -982,19 +987,19 @@ msgstr "删除用户时出现 Cyrus SASL错误：%s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "初始化 Cyrus SASL 时出错：%s"
 
-#: python/admin.c:531
+#: python/admin.c:527
 msgid "error creating home directory for user"
 msgstr "为用户创建主目录时出错"
 
-#: python/admin.c:584
+#: python/admin.c:580
 msgid "error removing home directory for user"
 msgstr "删除用户的主目录时出错"
 
-#: python/admin.c:662
+#: python/admin.c:658
 msgid "error moving home directory for user"
 msgstr "移动用户的主目录时出错"
 
-#: python/admin.c:695
+#: python/admin.c:691
 msgid "error creating mail spool for user"
 msgstr "为用户创建邮件池时出错"
 
