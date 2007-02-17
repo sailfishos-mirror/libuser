@@ -33,189 +33,200 @@ the last entry from the list removes the list completely.
 
 <!-- ##### MACRO LU_USERNAME ##### -->
 <para>
-
+User name, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_USERPASSWORD ##### -->
 <para>
-
+User password, a %G_TYPE_STRING.  If shadow passwords are used, this is the
+placeholder password.
 </para>
 
 
 
 <!-- ##### MACRO LU_UIDNUMBER ##### -->
 <para>
-
+User ID, an #id_t.
 </para>
 
 
 
 <!-- ##### MACRO LU_GIDNUMBER ##### -->
 <para>
-
+Group ID, an #id_t.
 </para>
 
 
 
 <!-- ##### MACRO LU_GECOS ##### -->
 <para>
-
+Usually user's real name, a %G_TYPE_STRING.  Often contains user's real name,
+office name, office phone, home phone, separated by commas.
 </para>
 
 
 
 <!-- ##### MACRO LU_HOMEDIRECTORY ##### -->
 <para>
-
+User's home directory, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_LOGINSHELL ##### -->
 <para>
-
+User's login shell, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_GROUPNAME ##### -->
 <para>
-
+Group name, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_GROUPPASSWORD ##### -->
 <para>
-
+Group password, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_MEMBERNAME ##### -->
 <para>
-
+Group member names; each member is represented by a separate %G_TYPE_STRING
+value.
 </para>
 
 
 
 <!-- ##### MACRO LU_ADMINISTRATORNAME ##### -->
 <para>
-
+Group administrator names; each administrator is represented by a separate
+%G_TYPE_STRING value.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWNAME ##### -->
 <para>
-
+User name, a %G_TYPE_STRING.  Note that %LU_SHADOWNAME is not distinct from
+%LU_USERNAME.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWPASSWORD ##### -->
 <para>
-
+User password in the shadow file, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWLASTCHANGE ##### -->
 <para>
-
+The number of days since the epoch to the day when the password was last
+changed, a %G_TYPE_LONG.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWMIN ##### -->
 <para>
-
+Minimum password lifetime in days before it can be changed, a %G_TYPE_LONG.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWMAX ##### -->
 <para>
-
+Maximum password lifetime in days before it must be changed, a %G_TYPE_LONG.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWWARNING ##### -->
 <para>
-
+Days before the password lifetime expires when the user should start to be
+warned, a %G_TYPE_LONG.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWINACTIVE ##### -->
 <para>
-
+Days after the password lifetime expires when the user account is disabled
+(because it is considered inactive), a %G_TYPE_LONG.  -1 to disable inactive
+account disabling.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWEXPIRE ##### -->
 <para>
-
+The number of days since the epoch to the day when the account expires and
+is disabled, a %G_TYPE_LONG.  -1 to disable account expiration.
 </para>
 
 
 
 <!-- ##### MACRO LU_SHADOWFLAG ##### -->
 <para>
-
+A reserved value "for future use", a %G_TYPE_LONG.  In most cases the value is
+-1.
 </para>
 
 
 
 <!-- ##### MACRO LU_COMMONNAME ##### -->
 <para>
-
+User's real name, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_GIVENNAME ##### -->
 <para>
-
+User's given name, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_SN ##### -->
 <para>
-
+User's surname, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_ROOMNUMBER ##### -->
 <para>
-
+User's room number, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_TELEPHONENUMBER ##### -->
 <para>
-
+User's telephone number, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_HOMEPHONE ##### -->
 <para>
-
+User's home telephone number, a %G_TYPE_STRING.
 </para>
 
 
 
 <!-- ##### MACRO LU_EMAIL ##### -->
 <para>
-
+User's email address, a %G_TYPE_STRING.
 </para>
 
 

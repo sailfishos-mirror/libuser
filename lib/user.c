@@ -1882,9 +1882,9 @@ lu_default_int(struct lu_context *context, const char *name,
 			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
 		};
 
-		intmax_t imax;
-		char *end, *tmp, *replacement;
+		char *tmp, *replacement;
 		const char *key;
+		gboolean ok;
 
 		/* Possibly map the key to an internal name. */
 		key = p->data;
@@ -1904,7 +1904,6 @@ lu_default_int(struct lu_context *context, const char *name,
 		/* Generate the key and read the value for the item. */
 		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
-		g_free(cfgkey);
 
 		/* Create a copy of the value to mess with. */
 		g_assert(val != NULL);
@@ -1919,26 +1918,31 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = replace_all(tmp, "%u", replacement);
 		g_free(replacement);
 
-		/* Check if we can represent this value as a number. */
-		errno = 0;
-		imax = strtoimax(tmp, &end, 10);
-		if (errno == 0 && *end == 0 && end != tmp
-		    && (long)imax == imax) {
-			g_value_init(&value, G_TYPE_LONG);
-			g_value_set_long(&value, imax);
-		} else if (errno == 0 && *end == 0 && end != tmp
-			   && (id_t)imax == imax)
-			lu_value_init_set_id(&value, imax);
-		else {
-			g_value_init(&value, G_TYPE_STRING);
-			g_value_set_string(&value, tmp);
+		ok = lu_value_init_set_attr_from_string(&value, key, tmp,
+							&error);
+		if (ok == FALSE) {
+			if (error == NULL) {
+				/* Whatever this attribute is, default to a
+				   string. */
+				g_value_init(&value, G_TYPE_STRING);
+				g_value_set_string(&value, tmp);
+				ok = TRUE;
+			} else {
+				g_warning(_("Invalid default value of field "
+					    "%s: %s"), cfgkey,
+					  lu_strerror(error));
+				lu_error_free(&error);
+			}
 		}
 		g_free(tmp);
+		g_free(cfgkey);
 
-		/* Add the transformed value. */
-		lu_ent_clear(ent, key);
-		lu_ent_add(ent, key, &value);
-		g_value_unset(&value);
+		if (ok != FALSE) {
+			/* Add the transformed value. */
+			lu_ent_clear(ent, key);
+			lu_ent_add(ent, key, &value);
+			g_value_unset(&value);
+		}
 	}
 	if (keys != NULL) {
 		g_list_free(keys);

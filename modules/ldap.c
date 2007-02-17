@@ -655,7 +655,8 @@ lu_ldap_lookup(struct lu_module *module,
 				lu_ent_clear_current(ent, attr);
 				for (j = 0; values[j]; j++) {
 					char *val;
-					intmax_t imax;
+					gboolean ok;
+					struct lu_error *error;
 
 					val = g_strndup(values[j]->bv_val,
 							values[j]->bv_len);
@@ -663,30 +664,18 @@ lu_ldap_lookup(struct lu_module *module,
 					g_print("Got `%s' = `%s'.\n", attr,
 						val);
 #endif
-					/* Check if the value is numeric. */
-					errno = 0;
-					imax = strtoimax(val, &p, 10);
-					if (errno == 0 && *p == '\0'
-					    && p != val
-					    && (long)imax == imax) {
-						/* If it's a number, use a
-						 * long. */
-						g_value_init(&value, G_TYPE_LONG);
-						g_value_set_long(&value, imax);
-					} else if (errno == 0 && *p == '\0'
-						   && p != val
-						   && (id_t)imax == imax)
-						lu_value_init_set_id(&value,
-								     imax);
-					else {
-						/* Otherwise it's a string. */
-						g_value_init(&value, G_TYPE_STRING);
-						g_value_set_string(&value, val);
+					error = NULL;
+					ok = lu_value_init_set_attr_from_string
+						(&value, attr, val, &error);
+					if (ok == FALSE) {
+						g_assert(error != NULL);
+						g_warning(lu_strerror(error));
+						lu_error_free(&error);
+					} else {
+						lu_ent_add_current(ent, attr,
+								   &value);
+						g_value_unset(&value);
 					}
-					/* Add this value, and then clear the
-					 * value structure. */
-					lu_ent_add_current(ent, attr, &value);
-					g_value_unset(&value);
 					g_free(val);
 				}
 				ldap_value_free_len(values);

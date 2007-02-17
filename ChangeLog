@@ -1,5 +1,17 @@
 2007-02-17  Miloslav Trmac  <mitr@redhat.com>
 
+	* apps/lchage.c (read_ndays): Assume the value is a G_TYPE_LONG.
+	Return a g_type_long.  All callers updated.
+	(date_to_string): Use glong for n_days.
+
+	* lib/user.c (lu_default_int)
+	* modules/ldap.c (lu_ldap_lookup): Use
+	lu_value_init_set_attr_from_string ().  Report invalid values.
+	* tests/ldap_test.py (Tests.testUserAdd2): Use correct value types.
+
+	* docs/reference/tmpl/entity.sgml: Document the value types used for
+	entities.
+
 	* lib/config.c (handle_default_useradd_key): Try harder to eliminate
 	the possibility of date overflow.
 

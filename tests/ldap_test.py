@@ -87,9 +87,9 @@ class Tests(unittest.TestCase):
         e[libuser.COMMONNAME] = 'Common Name'
         e[libuser.GIVENNAME] = 'Given'
         e[libuser.SN] = 'Surname'
-        e[libuser.ROOMNUMBER] = 404
-        e[libuser.TELEPHONENUMBER] = 1234
-        e[libuser.HOMEPHONE] = 4321
+        e[libuser.ROOMNUMBER] = '404'
+        e[libuser.TELEPHONENUMBER] = '1234'
+        e[libuser.HOMEPHONE] = '4321'
         e[libuser.EMAIL] = 'user6_2@example.com'
         self.a.addUser(e, False, False)
         del e
@@ -113,9 +113,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.COMMONNAME], ['Common Name'])
         self.assertEqual(e[libuser.GIVENNAME], ['Given'])
         self.assertEqual(e[libuser.SN], ['Surname'])
-        self.assertEqual(e[libuser.ROOMNUMBER], [404])
-        self.assertEqual(e[libuser.TELEPHONENUMBER], [1234])
-        self.assertEqual(e[libuser.HOMEPHONE], [4321])
+        self.assertEqual(e[libuser.ROOMNUMBER], ['404'])
+        self.assertEqual(e[libuser.TELEPHONENUMBER], ['1234'])
+        self.assertEqual(e[libuser.HOMEPHONE], ['4321'])
         # Not stored by our LDAP module
         # self.assertEqual(e[libuser.EMAIL], ['user6_2@example.com'])
 

@@ -38,44 +38,24 @@
 #define INVALID_LONG LONG_MIN
 
 /* Parse the first element of a (non-NULL, non-empty) value array for a count
- * of days, and return the value.  If the array is invalid, return the default
- * of -1. */
-static gint
+ * of days in G_TYPE_LONG, and return the value.  If the array is invalid,
+ * return the default of -1. */
+static glong
 read_ndays(GValueArray *array)
 {
 	GValue *value;
-	gint n_days = -1;
 
-	/* If we have a non-empty array, check its first element. */
 	value = g_value_array_get_nth(array, 0);
 	if (value != NULL) {
-		/* If it's a string, use strtol to read it. */
-		if (G_VALUE_HOLDS_STRING(value)) {
-			const char *s;
-			char *p;
-
-			s = g_value_get_string(value);
-			errno = 0;
-			n_days = strtol(s, &p, 10);
-			if (errno != 0 || *p != '\0' || p == s)
-				n_days = -1;
-		} else if (G_VALUE_HOLDS_LONG(value))
-			/* If it's a long, read it directly. */
-			n_days = g_value_get_long(value);
-		else if (G_VALUE_HOLDS_INT64(value)) {
-			gint64 v;
-
-			v = g_value_get_int64(value);
-			n_days = (gint)v == v ? v : -1;
-		} else
-			g_assert_not_reached();
-	}
-	return n_days;
+		g_assert(G_VALUE_HOLDS_LONG(value));
+		return g_value_get_long(value);
+	} else
+		return -1;
 }
 
 /* Format a count of days into a string that's intelligible to a user. */
 static void
-date_to_string(gint n_days, char *buf, size_t len)
+date_to_string(glong n_days, char *buf, size_t len)
 {
 	if ((n_days >= 0) && (n_days < 99999)) {
 		GDate *date;
@@ -181,19 +161,19 @@ main(int argc, const char **argv)
 
 		values = lu_ent_get(ent, LU_SHADOWMIN);
 		if (values != NULL)
-			printf(_("Minimum:\t%d\n"), read_ndays(values));
+			printf(_("Minimum:\t%ld\n"), read_ndays(values));
 
 		values = lu_ent_get(ent, LU_SHADOWMAX);
 		if (values != NULL)
-			printf(_("Maximum:\t%d\n"), read_ndays(values));
+			printf(_("Maximum:\t%ld\n"), read_ndays(values));
 
 		values = lu_ent_get(ent, LU_SHADOWWARNING);
 		if (values != NULL)
-			printf(_("Warning:\t%d\n"), read_ndays(values));
+			printf(_("Warning:\t%ld\n"), read_ndays(values));
 
 		values = lu_ent_get(ent, LU_SHADOWINACTIVE);
 		if (values != NULL)
-			printf(_("Inactive:\t%d\n"), read_ndays(values));
+			printf(_("Inactive:\t%ld\n"), read_ndays(values));
 
 		values = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
 		if (values != NULL) {
