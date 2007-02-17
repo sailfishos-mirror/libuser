@@ -4,6 +4,8 @@
 	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
 	* NEWS: Update.
 
+	* configure.in (AM_INIT_AUTOMAKE): Use dist-bzip2.
+
 	* tests/files_test.py (Tests.testUserLookupName3)
 	(Tests.testUserDefault, Tests.testGroupLookupName3)
 	(Tests.testGroupDefault): New tests.
