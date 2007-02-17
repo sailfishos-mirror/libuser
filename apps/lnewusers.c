@@ -257,10 +257,9 @@ main(int argc, const char **argv)
 				value = g_value_array_get_nth(values,
 							      0);
 				homedir = g_strdup(g_value_get_string(value));
-			} else {
-				homedir = g_strdup_printf("/home/%s",
-							  fields[0]);
-			}
+			} else
+				homedir = g_strconcat("/home/", fields[0],
+						      (const gchar *)NULL);
 		}
 		if (strlen(fields[6]) > 0) {
 			g_value_set_string(&val, fields[6]);

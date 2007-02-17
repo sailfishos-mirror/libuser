@@ -24,6 +24,7 @@
 #include <errno.h>
 #include <grp.h>
 #include <inttypes.h>
+#include <limits.h>
 #include <pwd.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -1811,11 +1812,12 @@ lu_default_int(struct lu_context *context, const char *name,
 	if (is_system) {
 		id = 1;
 	} else {
-		cfgkey = g_strdup_printf("%s/%s", top, idkey);
+		cfgkey = g_strconcat(top, "/", idkey, (const gchar *)NULL);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
 		g_free(cfgkey);
 		if (val == NULL) {
-			cfgkey = g_strdup_printf("%s/%s", top, idkeystring);
+			cfgkey = g_strconcat(top, "/", idkeystring,
+					     (const gchar *)NULL);
 			val = lu_cfg_read_single(context, cfgkey, NULL);
 			g_free(cfgkey);
 		}
@@ -1882,7 +1884,7 @@ lu_default_int(struct lu_context *context, const char *name,
 			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
 		};
 
-		char *tmp, *replacement;
+		char *tmp, replacement[sizeof (intmax_t) * CHAR_BIT + 1];
 		const char *key;
 		gboolean ok;
 
@@ -1902,7 +1904,8 @@ lu_default_int(struct lu_context *context, const char *name,
 		}
 
 		/* Generate the key and read the value for the item. */
-		cfgkey = g_strdup_printf("%s/%s", top, (const char *)p->data);
+		cfgkey = g_strconcat(top, "/", (const gchar *)p->data,
+				     (const gchar *)NULL);
 		val = lu_cfg_read_single(context, cfgkey, NULL);
 
 		/* Create a copy of the value to mess with. */
@@ -1910,13 +1913,10 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = g_strdup(val);
 
 		tmp = replace_all(tmp, "%n", name);
-		replacement = g_strdup_printf("%ld",
-					      lu_util_shadow_current_date());
+		sprintf(replacement, "%ld", lu_util_shadow_current_date());
 		tmp = replace_all(tmp, "%d", replacement);
-		g_free(replacement);
-		replacement = g_strdup_printf("%jd", (intmax_t)id);
+		sprintf(replacement, "%jd", (intmax_t)id);
 		tmp = replace_all(tmp, "%u", replacement);
-		g_free(replacement);
 
 		ok = lu_value_init_set_attr_from_string(&value, key, tmp,
 							&error);

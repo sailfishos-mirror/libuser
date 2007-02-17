@@ -148,16 +148,18 @@ lu_error_new(struct lu_error **error, enum lu_status code,
 {
 	if (error != NULL) {
 		struct lu_error *ret;
-		va_list args;
 
 		g_assert(*error == NULL);
 		ret = g_malloc0(sizeof(struct lu_error));
 		ret->code = code;
-		va_start(args, fmt);
-		ret->string = fmt ?
-			g_strdup_vprintf(fmt, args) :
-			g_strdup_printf(lu_strerror(ret), strerror(errno));
-		va_end(args);
+		if (fmt != NULL) {
+			va_list args;
+
+			va_start(args, fmt);
+			ret->string = g_strdup_vprintf(fmt, args);
+			va_end(args);
+		} else
+			ret->string = g_strdup(lu_strerror(ret));
 		*error = ret;
 	}
 }

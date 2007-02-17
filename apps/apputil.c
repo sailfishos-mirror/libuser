@@ -748,7 +748,7 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 				      "/var/mail");
 
 	/* That wasn't that hard.  Now we just need to create the file. */
-	p = g_strdup_printf("%s/%s", spooldir, username);
+	p = g_strconcat(spooldir, "/", username, (const gchar *)NULL);
 	g_free(username);
 	if (action) {
 		int fd;

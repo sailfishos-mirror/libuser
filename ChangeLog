@@ -1,5 +1,20 @@
 2007-02-17  Miloslav Trmac  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_mailspool_create_remove)
+	* apps/lnewusers.c (main)
+	* lib/user.c (lu_default_int)
+	* modules/files.c (lu_files_user_lookup_id)
+	(lu_shadow_user_lookup_id, lu_files_group_lookup_id)
+	(lu_shadow_group_lookup_id, generic_del)
+	* modules/ldap.c (lu_ldap_base, lu_ldap_user_lookup_id)
+	(lu_ldap_group_lookup_id, lu_ldap_handle_lock)
+	(lu_ldap_users_enumerate_by_group): Don't use g_strdup_printf ()
+	when a simpler alternative can be used.
+
+	* lib/error.c (lu_error_new): Don't use lu_strerror () result as a
+	format string.  Beautify.
+
+
 	* apps/lchage.c (read_ndays): Assume the value is a G_TYPE_LONG.
 	Return a g_type_long.  All callers updated.
 	(date_to_string): Use glong for n_days.

@@ -447,8 +447,9 @@ lu_ldap_base(struct lu_module *module, const char *branch)
 
 	/* Generate the branch DN. */
 	if (strlen(branch) != 0)
-		tmp = g_strdup_printf("%s,%s", branch,
-				      context->prompts[LU_LDAP_BASEDN].value);
+		tmp = g_strconcat(branch, ",",
+				  context->prompts[LU_LDAP_BASEDN].value,
+				  (const gchar *)NULL);
 	else
 		tmp = g_strdup(context->prompts[LU_LDAP_BASEDN].value);
 
@@ -720,19 +721,15 @@ lu_ldap_user_lookup_id(struct lu_module *module, uid_t uid,
 		       struct lu_ent *ent, struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	gboolean ret;
-	gchar *uid_string;
+	char uid_string[sizeof (uid) * CHAR_BIT + 1];
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
-	uid_string = g_strdup_printf("%jd", (intmax_t)uid);
-	ret = lu_ldap_lookup(module, "uidNumber",
-			     uid_string, ent, NULL, ctx->user_branch,
-			     "("OBJECTCLASS"="POSIXACCOUNT")",
-			     lu_ldap_user_attributes, lu_user, error);
-	g_free(uid_string);
-
-	return ret;
+	sprintf(uid_string, "%jd", (intmax_t)uid);
+	return lu_ldap_lookup(module, "uidNumber", uid_string, ent, NULL,
+			      ctx->user_branch,
+			      "("OBJECTCLASS"="POSIXACCOUNT")",
+			      lu_ldap_user_attributes, lu_user, error);
 }
 
 /* Look up a group by name. */
@@ -755,18 +752,15 @@ lu_ldap_group_lookup_id(struct lu_module *module, gid_t gid,
 			struct lu_ent *ent, struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	gboolean ret;
-	gchar *gid_string;
+	char gid_string[sizeof (gid) * CHAR_BIT + 1];
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
-	gid_string = g_strdup_printf("%jd", (intmax_t)gid);
-	ret = lu_ldap_lookup(module, "gidNumber", gid_string, ent, NULL,
-			     ctx->group_branch, "("OBJECTCLASS"="POSIXGROUP")",
-			     lu_ldap_group_attributes, lu_group, error);
-	g_free(gid_string);
-
-	return ret;
+	sprintf(gid_string, "%jd", (intmax_t)gid);
+	return lu_ldap_lookup(module, "gidNumber", gid_string, ent, NULL,
+			      ctx->group_branch,
+			      "("OBJECTCLASS"="POSIXGROUP")",
+			      lu_ldap_group_attributes, lu_group, error);
 }
 
 /* Compare the contents of two GValueArrays, and return TRUE if they contain
@@ -1554,27 +1548,23 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 			result = g_strdup_printf("%s%c%s", LU_CRYPTED,
 						 LOCKCHAR, result);
 		else
-			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
-		break;
-	case LO_UNLOCK:
-		if (result[0] == LOCKCHAR)
-			result = g_strdup_printf("%s%s", LU_CRYPTED,
-						 result + 1);
-		else
-			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
+			result = g_strconcat(LU_CRYPTED, result,
+					     (const gchar *)NULL);
 		break;
 	case LO_UNLOCK_NONEMPTY:
-		if (result[0] == LOCKCHAR) {
-			if (result[1] == '\0') {
-				lu_error_new(error, lu_error_unlock_empty,
-					     NULL);
-				g_free(oldpassword);
-				return FALSE;
-			}
-			result = g_strdup_printf("%s%s", LU_CRYPTED,
-						 result + 1);
-		} else
-			result = g_strdup_printf("%s%s", LU_CRYPTED, result);
+		if (result[0] == LOCKCHAR && result[1] == '\0') {
+			lu_error_new(error, lu_error_unlock_empty, NULL);
+			g_free(oldpassword);
+			return FALSE;
+		}
+		/* Fall through */
+	case LO_UNLOCK:
+		if (result[0] == LOCKCHAR)
+			result = g_strconcat(LU_CRYPTED, result + 1,
+					     (const gchar *)NULL);
+		else
+			result = g_strconcat(LU_CRYPTED, result,
+					     (const gchar *)NULL);
 		break;
 	default:
 		g_assert_not_reached();
@@ -2267,12 +2257,12 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 	struct lu_ldap_context *ctx;
 	GValueArray *primaries;
 	GValue *value;
-	char *grp;
+	char grp[sizeof (gid) * CHAR_BIT + 1];
 	size_t i;
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
-	grp = g_strdup_printf("%jd", (intmax_t)gid);
+	sprintf(grp, "%jd", (intmax_t)gid);
 
 	primaries = lu_ldap_enumerate(module, "gidNumber", grp, "uid",
 				      ctx->user_branch, error);
@@ -2296,7 +2286,6 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 			g_value_get_string(value));
 	}
 #endif
-	g_free(grp);
 	return primaries;
 }
 

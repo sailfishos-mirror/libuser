@@ -544,14 +544,11 @@ lu_files_user_lookup_id(struct lu_module *module,
 			struct lu_ent *ent,
 			struct lu_error **error)
 {
-	char *key;
-	gboolean ret;
+	char key[sizeof (uid) * CHAR_BIT + 1];
 
-	key = g_strdup_printf("%jd", (intmax_t)uid);
-	ret = generic_lookup(module, "passwd", key, 3,
-			     lu_files_parse_user_entry, ent, error);
-	g_free(key);
-	return ret;
+	sprintf(key, "%jd", (intmax_t)uid);
+	return generic_lookup(module, "passwd", key, 3,
+			      lu_files_parse_user_entry, ent, error);
 }
 
 /* Look up a user by name in /etc/shadow. */
@@ -574,11 +571,9 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key;
 	gboolean ret;
 
 	/* First look the user up by ID. */
-	key = g_strdup_printf("%jd", (intmax_t)uid);
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
 		GValueArray *values;
@@ -597,7 +592,6 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 			g_free(p);
 		}
 	}
-	g_free(key);
 	return ret;
 }
 
@@ -619,14 +613,11 @@ lu_files_group_lookup_id(struct lu_module *module,
 			 struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	char *key;
-	gboolean ret;
+	char key[sizeof (gid) * CHAR_BIT + 1];
 
-	key = g_strdup_printf("%jd", (intmax_t)gid);
-	ret = generic_lookup(module, "group", key, 3,
-			     lu_files_parse_group_entry, ent, error);
-	g_free(key);
-	return ret;
+	sprintf(key, "%jd", (intmax_t)gid);
+	return generic_lookup(module, "group", key, 3,
+			      lu_files_parse_group_entry, ent, error);
 }
 
 /* Look a group up by name in /etc/gshadow. */
@@ -644,10 +635,8 @@ static gboolean
 lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 			  struct lu_ent *ent, struct lu_error **error)
 {
-	char *key;
 	gboolean ret;
 
-	key = g_strdup_printf("%jd", (intmax_t)gid);
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
 		GValueArray *values;
@@ -665,7 +654,6 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 			g_free(p);
 		}
 	}
-	g_free(key);
 	return ret;
 }
 
@@ -1261,7 +1249,7 @@ generic_del(struct lu_module *module, const char *base_name,
 	 * look like. */
 	value = g_value_array_get_nth(name, 0);
 	fragment1 = lu_value_strdup(value);
-	fragment2 = g_strdup_printf("\n%s:", fragment1);
+	fragment2 = g_strconcat("\n", fragment1, ":", (const gchar *)NULL);
 
 	/* Remove all occurrences of this entry from the file. */
 	len = strlen(fragment1);
