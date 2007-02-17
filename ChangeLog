@@ -5,6 +5,7 @@
 	* NEWS: Update.
 
 	* configure.in (AM_INIT_AUTOMAKE): Use dist-bzip2.
+	* Makefile (archive): Use the bzip2 tarball.
 
 	* tests/files_test.py (Tests.testUserLookupName3)
 	(Tests.testUserDefault, Tests.testGroupLookupName3)
