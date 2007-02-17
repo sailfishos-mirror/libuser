@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2005-05-04 12:26+0200\n"
+"PO-Revision-Date: 2007-02-17 22:17+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,24 +138,24 @@ msgid "Account is not locked.\n"
 msgstr "Konto nie jest zablokowane.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Minimalnie:\t%d\n"
+msgstr "Minimalnie:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Maksymalnie:\t%d\n"
+msgstr "Maksymalnie:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Ostrzeżenie:\t%d\n"
+msgstr "Ostrzeżenie:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Nieaktywne:\t%d\n"
+msgstr "Nieaktywne:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -722,7 +722,7 @@ msgstr "grupa nie posiada ani nazwy, ani GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Nieprawidłowa domyślna wartość pola %s: %s"
 
 #: lib/util.c:193
 #, c-format
