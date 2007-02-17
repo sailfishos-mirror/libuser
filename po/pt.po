@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2006-05-01 13:40+0100\n"
+"PO-Revision-Date: 2007-02-17 14:35+0000\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-POFile-SpellExtra: DN GID Kerberos group UID passwd id kerberos LDAPMods\n"
 "X-POFile-SpellExtra: stat email Admin gid finger kadm jd zu shadow Cyrus\n"
-"X-POFile-SpellExtra: PAM uid\n"
+"X-POFile-SpellExtra: PAM uid ld\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:234
@@ -136,24 +136,24 @@ msgid "Account is not locked.\n"
 msgstr "A conta não está trancada.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Mínimo:\t%d\n"
+msgstr "Mínimo:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Máximo:\t%d\n"
+msgstr "Máximo:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Aviso:\t%d\n"
+msgstr "Aviso:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Inactivo:\t%d\n"
+msgstr "Inactivo:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -718,7 +718,7 @@ msgstr "o grupo não tem nenhum nome ou GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Valor predefinido inválido do campo %s: %s"
 
 #: lib/util.c:193
 #, c-format
