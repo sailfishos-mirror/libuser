@@ -1,7 +1,7 @@
 # Swedish messages for libuser.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005 Christian Rose <menthos@menthos.com>.
-# $Id$
+# Copyright (C) 2006, 2007 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2006.
+# Magnus Larsson <fedoratrans@gmail.com>, 2007.
 # 
 # 
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2006-08-22 02:09-0400\n"
+"PO-Revision-Date: 2007-02-17 10:14-0500\n"
 "Last-Translator: Magnus Larsson <fedoratrans@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -136,24 +136,24 @@ msgid "Account is not locked.\n"
 msgstr "Kontot är inte låst.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Kortaste:\t%d\n"
+msgstr "Kortaste:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Längsta:\t%d\n"
+msgstr "Längsta:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Varning:\t%d\n"
+msgstr "Varning:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Inaktiv:\t%d\n"
+msgstr "Inaktiv:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -718,7 +718,7 @@ msgstr "gruppen har varken ett namn eller ett GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Ogiltigt standardvärde för fält %s: %s"
 
 #: lib/util.c:193
 #, c-format
