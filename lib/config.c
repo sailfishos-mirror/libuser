@@ -589,7 +589,7 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 	config = xconfig;
 	if (strcmp(key, "EXPIRE") == 0) {
 		if (!ATTR_DEFINED(config, "userdefaults", LU_SHADOWEXPIRE)) {
-			int day;
+			intmax_t day;
 			char buf[sizeof (day) * CHAR_BIT + 1];
 
 			if (*value == 0)
@@ -604,7 +604,7 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 					day = (t + (24 * 3600) / 2)
 						/ (24 * 3600);
 			}
-			snprintf(buf, sizeof(buf), "%jd", (intmax_t)day);
+			snprintf(buf, sizeof(buf), "%jd", day);
 			key_add(config, "userdefaults", LU_SHADOWEXPIRE, buf);
 		}
 	} else if (strcmp(key, "GROUP") == 0) {

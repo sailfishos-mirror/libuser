@@ -1,3 +1,8 @@
+2007-02-17  Miloslav Trmac  <mitr@redhat.com>
+
+	* lib/config.c (handle_default_useradd_key): Try harder to eliminate
+	the possibility of date overflow.
+
 2007-02-16  Miloslav Trmac  <mitr@redhat.com>
 
 	* apps/lid.c (do_id): Avoid an unnecessary lu_value_strdup ().
