@@ -1,5 +1,10 @@
 2007-02-17  Miloslav Trmac  <mitr@redhat.com>
 
+	* tests/files_test.py (Tests.testUserLookupName3)
+	(Tests.testUserDefault, Tests.testGroupLookupName3)
+	(Tests.testGroupDefault): New tests.
+	* tests/files_test: Update file contents.
+
 	* apps/apputil.c (lu_mailspool_create_remove)
 	* apps/lnewusers.c (main)
 	* lib/user.c (lu_default_int)

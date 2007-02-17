@@ -44,6 +44,27 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWEXPIRE], [-1])
         self.assertEqual(e[libuser.SHADOWFLAG], [-1])
 
+    def testUserLookupName3(self):
+        # Handling of values that appear to be numbers
+        e = self.a.lookupUserByName('077')
+        self.assert_(e)
+        self.assertEqual(e[libuser.USERNAME], ['077'])
+        self.assertEqual(e[libuser.USERPASSWORD], ['077'])
+        self.assertEqual(e[libuser.UIDNUMBER], [230])
+        self.assertEqual(e[libuser.GIDNUMBER], [231])
+        self.assertEqual(e[libuser.GECOS], ['077'])
+        self.assertEqual(e[libuser.HOMEDIRECTORY], ['077'])
+        self.assertEqual(e[libuser.LOGINSHELL], ['077'])
+        self.assertEqual(e[libuser.SHADOWNAME], ['077'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['077'])
+        self.assertEqual(e[libuser.SHADOWLASTCHANGE], [77])
+        self.assertEqual(e[libuser.SHADOWMIN], [77])
+        self.assertEqual(e[libuser.SHADOWMAX], [77])
+        self.assertEqual(e[libuser.SHADOWWARNING], [77])
+        self.assertEqual(e[libuser.SHADOWINACTIVE], [77])
+        self.assertEqual(e[libuser.SHADOWEXPIRE], [77])
+        self.assertEqual(e[libuser.SHADOWFLAG], [77])
+
     def testUserLookupId(self):
         e = self.a.initUser('user3_1')
         self.a.addUser(e, False, False)
@@ -59,10 +80,12 @@ class Tests(unittest.TestCase):
         e = self.a.lookupUserById(LARGE_ID + 310)
         self.assertEqual(e, None)
 
-    # testUserDefault
-    # There is little to test, in addition most is configurable
+    def testUserDefault(self):
+        # Test the default/LU_USERNAME = %n preserves usernames that appear to
+        # be numbers
+        e = self.a.initUser('077')
+        self.assertEqual(e[libuser.USERNAME], ['077'])
 
-    # testUserAddPrep
     # Setting of USERPASSWORD to "x" tested below
     def testUserAddPrep(self):
         # Nothing to do with the "files" module: tests of lu_name_allowed()
@@ -530,6 +553,17 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
         self.assertRaises(KeyError, lambda x: x[libuser.ADMINISTRATORNAME], e)
 
+    def testGroupLookupName3(self):
+        # Handling of values that appear to be numbers
+        e = self.a.lookupGroupByName('077')
+        self.assert_(e)
+        self.assertEqual(e[libuser.GROUPNAME], ['077'])
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['077'])
+        self.assertEqual(e[libuser.GIDNUMBER], [1730])
+        self.assertEqual(e[libuser.MEMBERNAME], ['077'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['077'])
+        self.assertEqual(e[libuser.ADMINISTRATORNAME], ['077'])
+
     def testGroupLookupId(self):
         e = self.a.initGroup('group18_1')
         self.a.addGroup(e)
@@ -545,8 +579,11 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupById(LARGE_ID + 1810)
         self.assertEqual(e, None)
 
-    # testGroupDefault
-    # There is little to test, in addition most is configurable
+    def testGroupDefault(self):
+        # Test the default/LU_GROUPNAME = %n preserves groupnames that appear
+        # to be numbers
+        e = self.a.initGroup('077')
+        self.assertEqual(e[libuser.GROUPNAME], ['077'])
 
     # testGroupAddPrep
     # Setting of GROUPPASSWORD to "x" tested below

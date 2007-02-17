@@ -34,6 +34,7 @@ mkdir "$workdir"/files
 
 cat > "$workdir"/files/passwd <<\EOF
 empty_user::42:43:::
+077:077:230:231:077:077:077
 +::::::
 -nonis_user::::::
 +nis_user:::1504:::
@@ -41,18 +42,23 @@ user30_4::3004:3004:::
 EOF
 cat > "$workdir"/files/shadow <<\EOF
 empty_user::1000::::::
+077:077:077:077:077:077:077:077:077
 +::::::::
 -nonis_user::::::::
 +nis_user::::::::
 EOF
 cat > "$workdir"/files/group <<\EOF
 empty_group::44:
+077:077:1730:077
 +:::
 +nis_group:::user30_4
 -nonis_group:::
 group15_4::1504:
 EOF
-echo 'empty_group:::' > "$workdir"/files/gshadow
+cat > "$workdir"/files/gshadow <<\EOF
+empty_group:::
+077:077:077:077
+EOF
 
 # Set up the client
 LIBUSER_CONF=$workdir/libuser.conf
