@@ -1,15 +1,15 @@
 # Catalan translations of libuser package by Softcatalà.
-# Copyright © 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright © 2004, 2005, 2006, 2007 The Free Software Foundation, Inc.
 # This file is distributed under the same license as the libuser package.
 # Isabel Cama <c.gomez.febrel@terra.es>, 2004.
-# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004, 2005, 2006
+# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004, 2005, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2006-05-03 08:54+0200\n"
+"PO-Revision-Date: 2007-02-18 10:10+0100\n"
 "Last-Translator: Xavier Conde Rueda <xavi.conde@gmail.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -136,24 +136,24 @@ msgid "Account is not locked.\n"
 msgstr "El compte no està bloquejat.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Mínim:\t%d\n"
+msgstr "Mínim:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Màxim:\t%d\n"
+msgstr "Màxim:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Advertència:\t%d\n"
+msgstr "Advertència:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Inactiu:\t%d\n"
+msgstr "Inactiu:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -724,7 +724,7 @@ msgstr "el grup no té ni nom ni GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "El valor per defecte del camp %s no és vàlid: %s"
 
 #: lib/util.c:193
 #, c-format
