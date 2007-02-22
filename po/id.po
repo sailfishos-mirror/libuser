@@ -2,14 +2,14 @@
 # Copyright (C) 2004 Red Hat, Inc.
 # This file is distributed under the same license as the libuser package.
 # Erwien Samantha Y <erwiensamantha@sederhana.or.id>, 2004.
-# Teguh DC <dheche@bradjamoesti.or.id>, 2005.
+# Teguh DC <dheche@bradjamoesti.or.id>, 2005-2007.
 # $Id$
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2006-05-10 01:05+0700\n"
+"PO-Revision-Date: 2007-02-23 02:44+0700\n"
 "Last-Translator: Teguh DC <dheche@bradjamoesti.or.id>\n"
 "Language-Team: Linux Indonesia <http://www.linux.or.id>\n"
 "MIME-Version: 1.0\n"
@@ -136,24 +136,24 @@ msgid "Account is not locked.\n"
 msgstr "Akun tidak dikunci.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Minimum:\t%d\n"
+msgstr "Minimum:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Maksimum:\t%d\n"
+msgstr "Maksimum:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Peringatan:\t%d\n"
+msgstr "Peringatan:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Inaktif:\t%d\n"
+msgstr "Inaktif:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -720,7 +720,7 @@ msgstr "grup tidak memiliki nama atau GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Nilai default kolom %s tidak valid: %s "
 
 #: lib/util.c:193
 #, c-format
