@@ -43,6 +43,8 @@ typedef char security_context_t; /* "Something" */
 
 #define CHUNK_SIZE	(LINE_MAX * 4)
 
+#define SHADOW_MODULE_NAME "shadow"
+
 LU_MODULE_INIT(libuser_files_init)
 LU_MODULE_INIT(libuser_shadow_init)
 
@@ -1693,6 +1695,23 @@ lu_shadow_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 	return generic_is_locked(module, "gshadow", 2, ent, error);
 }
 
+/* Was ent found by the shadow module? */
+static gboolean
+ent_has_shadow (struct lu_ent *ent)
+{
+	size_t i;
+
+	for (i = 0; i < ent->modules->n_values; i++) {
+		GValue *value;
+
+		value = g_value_array_get_nth(ent->modules, i);
+		g_assert(G_VALUE_HOLDS_STRING(value));
+		if (strcmp(g_value_get_string(value), SHADOW_MODULE_NAME) == 0)
+			return TRUE;
+	}
+	return FALSE;
+}
+
 /* Change a password, in a given file, in a given field, for a given account,
  * to a given value.  Got that? */
 static gboolean
@@ -1759,16 +1778,28 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	if (value == NULL)
 		goto err_namestring;
 
-	/* If we don't really care, nod our heads and smile.  Still allow
-	   "rescuing" accounts with invalid shadow password entries. */
-	if (!is_shadow && LU_CRYPT_INVALID(value)) {
+	/* pam_unix uses shadow passwords only if pw_passwd is "x"
+	   (or ##${username}).  Make sure to preserve the shadow marker
+	   unmodified (most importantly, don't replace it by an encrypted
+	   password) -- but only a shadow entry exists. */
+	if (!is_shadow && ent_has_shadow(ent)
+	    && lu_ent_get_current(ent, LU_SHADOWPASSWORD) != NULL
+	    && (strcmp(value, "x") == 0
+		|| (strncmp(value, "##", 2) == 0
+		    && strcmp(value + 2, namestring) == 0))) {
 		ret = TRUE;
 		goto err_value;
 	}
-
+	/* Otherwise, if there is a shadow password and the shadow marker is
+	   invalid, set it to the standard value. */
+	if (!is_shadow && ent_has_shadow(ent)
+	    && lu_ent_get_current(ent, LU_SHADOWPASSWORD) != NULL
+	    && LU_CRYPT_INVALID(value))
+		password = "x";
 	/* The crypt prefix indicates that the password is already hashed.  If
 	 * we don't see it, hash the password. */
-	if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED)) == 0) {
+	else if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED))
+		 == 0) {
 		password = password + strlen(LU_CRYPTED);
 	} else {
 		password = lu_make_crypted(password,
@@ -2806,7 +2837,7 @@ libuser_shadow_init(struct lu_context *context,
 	ret = g_malloc0(sizeof(struct lu_module));
 	ret->version = LU_MODULE_VERSION;
 	ret->scache = lu_string_cache_new(TRUE);
-	ret->name = ret->scache->cache(ret->scache, "shadow");
+	ret->name = ret->scache->cache(ret->scache, SHADOW_MODULE_NAME);
 
 	/* Set the method pointers. */
 	ret->uses_elevated_privileges = lu_shadow_uses_elevated_privileges;

@@ -1,3 +1,18 @@
+2007-02-23  Miloslav Trmac  <mitr@redhat.com>
+
+	* modules/files.c (SHADOW_MODULE_NAME): New macro.
+	(ent_has_shadow): New function.
+	(generic_setpass): Only silently ignore known shadow markers,
+	and replace invalid shadow markers by "x";  both only if a shadow
+	entry exists.
+	(libuser_shadow_init): Use SHADOW_MODULE_NAME.
+	* tests/files_test.py (Tests.testUserSetpass1): Rename from
+	testUserSetpass.
+	(Tests.testGroupSetpass1): Rename from testGroupSetpass.
+	(Tests.testUserSetpass2, tests.testUserSetpass3)
+	(Tests.testGroupSetpass2, tests.testGroupSetpass3): New tests.
+	* tests/files_test: Update file contents.
+
 2007-02-17  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.

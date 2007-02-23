@@ -38,6 +38,7 @@ empty_user::42:43:::
 +::::::
 -nonis_user::::::
 +nis_user:::1504:::
+user12_3:*:1203:1203:::
 user30_4::3004:3004:::
 EOF
 cat > "$workdir"/files/shadow <<\EOF
@@ -54,6 +55,7 @@ empty_group::44:
 +nis_group:::user30_4
 -nonis_group:::
 group15_4::1504:
+group27_3:*:2703:
 EOF
 cat > "$workdir"/files/gshadow <<\EOF
 empty_group:::

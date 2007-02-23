@@ -428,7 +428,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['01aK1FxKE9YVU'])
         self.assertEqual(self.a.userIsLocked(e), 0)
 
-    def testUserSetpass(self):
+    def testUserSetpass1(self):
         e = self.a.initUser('user12_1')
         e[libuser.SHADOWPASSWORD] = '02oawyZdjhhpg'
         self.a.addUser(e, False, False)
@@ -440,6 +440,38 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
+
+    def testUserSetpass2(self):
+        # Forcing the non-shadow password to 'x'
+        e = self.a.initUser('user12_2')
+        e[libuser.USERPASSWORD] = '*'
+        e[libuser.SHADOWPASSWORD] = '08lnuxCM.c36E'
+        self.a.addUser(e, False, False)
+        del e
+        # shadow module's addUser forces USERPASSWORD to 'x'
+        e = self.a.lookupUserByName('user12_2')
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['08lnuxCM.c36E'])
+        e[libuser.USERPASSWORD] = '*'
+        self.a.modifyUser(e, False)
+        del e
+        e = self.a.lookupUserByName('user12_2')
+        self.assertEqual(e[libuser.USERPASSWORD], ['*'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['08lnuxCM.c36E'])
+        self.a.setpassUser(e, 'password', False)
+        self.assertEqual(e[libuser.USERPASSWORD], ['x'])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
+
+    def testUserSetpass3(self):
+        # Overriding an invalid encrypted password
+        e = self.a.lookupUserByName('user12_3')
+        self.assertEqual(e[libuser.USERPASSWORD], ['*'])
+        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.a.setpassUser(e, 'password', False)
+        crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][:11])
+        self.assertEqual(e[libuser.USERPASSWORD], [crypted])
+        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
 
     def testUserRemovepass(self):
         e = self.a.initUser('user13_1')
@@ -820,8 +852,8 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['05/lfLEyErrp2'])
         self.assertEqual(self.a.groupIsLocked(e), 0)
-        
-    def testGroupSetpass(self):
+
+    def testGroupSetpass1(self):
         e = self.a.initGroup('group27_1')
         e[libuser.SHADOWPASSWORD] = '06aZrb3pzuu/6'
         self.a.addGroup(e)
@@ -833,6 +865,38 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
+
+    def testGroupSetpass2(self):
+        # Forcing the non-shadow password to 'x'
+        e = self.a.initGroup('group27_2')
+        e[libuser.GROUPPASSWORD] = '*'
+        e[libuser.SHADOWPASSWORD] = '07ZZy2Pihe/gg'
+        self.a.addGroup(e)
+        del e
+        # shadow module's addGroup forces GROUPPASSWORD to 'x'
+        e = self.a.lookupGroupByName('group27_2')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['07ZZy2Pihe/gg'])
+        e[libuser.GROUPPASSWORD] = '*'
+        self.a.modifyGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group27_2')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['*'])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], ['07ZZy2Pihe/gg'])
+        self.a.setpassGroup(e, 'password', False)
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
+
+    def testGroupSetpass3(self):
+        # Overriding an invalid encrypted password
+        e = self.a.lookupGroupByName('group27_3')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['*'])
+        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.a.setpassGroup(e, 'password', False)
+        crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][:11])
+        self.assertEqual(e[libuser.GROUPPASSWORD], [crypted])
+        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
 
     def testGroupRemovepass(self):
         e = self.a.initGroup('group28_1')
