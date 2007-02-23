@@ -467,11 +467,11 @@ class Tests(unittest.TestCase):
         # Overriding an invalid encrypted password
         e = self.a.lookupUserByName('user12_3')
         self.assertEqual(e[libuser.USERPASSWORD], ['*'])
-        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
         self.a.setpassUser(e, 'password', False)
         crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][:11])
         self.assertEqual(e[libuser.USERPASSWORD], [crypted])
-        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
 
     def testUserRemovepass(self):
         e = self.a.initUser('user13_1')
@@ -581,9 +581,9 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPNAME], ['empty_group'])
         self.assertEqual(e[libuser.GROUPPASSWORD], [''])
         self.assertEqual(e[libuser.GIDNUMBER], [44])
-        self.assertRaises(KeyError, lambda x: x[libuser.MEMBERNAME], e)
+        self.assertRaises(KeyError, lambda: e[libuser.MEMBERNAME])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
-        self.assertRaises(KeyError, lambda x: x[libuser.ADMINISTRATORNAME], e)
+        self.assertRaises(KeyError, lambda: e[libuser.ADMINISTRATORNAME])
 
     def testGroupLookupName3(self):
         # Handling of values that appear to be numbers
@@ -892,11 +892,11 @@ class Tests(unittest.TestCase):
         # Overriding an invalid encrypted password
         e = self.a.lookupGroupByName('group27_3')
         self.assertEqual(e[libuser.GROUPPASSWORD], ['*'])
-        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
         self.a.setpassGroup(e, 'password', False)
         crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][:11])
         self.assertEqual(e[libuser.GROUPPASSWORD], [crypted])
-        self.assertRaises(KeyError, lambda x: x[libuser.SHADOWPASSWORD], e)
+        self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
 
     def testGroupRemovepass(self):
         e = self.a.initGroup('group28_1')

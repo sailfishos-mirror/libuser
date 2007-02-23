@@ -1,5 +1,9 @@
 2007-02-23  Miloslav Trmac  <mitr@redhat.com>
 
+	* tests/files_test.py (Tests.testUserSetpass3)
+	(Tests.testGroupLookupName2, Tests.testGroupSetpass3): Simplify the
+	lambda expression.
+
 	* modules/files.c (suffix_passwd, suffix_shadow, suffix_group)
 	(suffix_gshadow): New variables.
 	(generic_lookup, generic_add, generic_mod, generic_del, generic_lock)
