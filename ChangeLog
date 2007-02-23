@@ -1,5 +1,18 @@
 2007-02-23  Miloslav Trmac  <mitr@redhat.com>
 
+	* modules/files.c (suffix_passwd, suffix_shadow, suffix_group)
+	(suffix_gshadow): New variables.
+	(generic_lookup, generic_add, generic_mod, generic_del, generic_lock)
+	(generic_is_locked, generic_setpass, lu_files_enumerate)
+	(lu_files_users_enumerate_by_group, lu_files_groups_enumerate_by_user)
+	(lu_files_enumerate_full, lu_files_uses_elevated_privileges)
+	(lu_shadow_uses_elevated_privileges, libuser_shadow_init): Use suffix_*
+	instead of separate "/" and copy&pasted basenames.  All users changed.
+
+	* modules/files.c (lu_files_uses_elevated_privileges)
+	(lu_shadow_uses_elevated_privileges): Fix incorrect conversion from
+	g_strdup_printf ().
+
 	* modules/files.c (SHADOW_MODULE_NAME): New macro.
 	(ent_has_shadow): New function.
 	(generic_setpass): Only silently ignore known shadow markers,

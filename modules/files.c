@@ -93,6 +93,13 @@ static const struct format_specifier format_gshadow[] = {
 	{ LU_MEMBERNAME, NULL, TRUE, FALSE, FALSE },
 };
 
+/* Use these variables instead of string constants mainly to eliminate the risk
+   of a typo */
+static const char suffix_passwd[] = "/passwd";
+static const char suffix_shadow[] = "/shadow";
+static const char suffix_group[] = "/group";
+static const char suffix_gshadow[] = "/gshadow";
+
 static gboolean
 set_default_context(const char *filename, security_context_t *prev_context,
 		    struct lu_error **error)
@@ -471,7 +478,7 @@ typedef gboolean(*parse_fn) (const gchar * line, struct lu_ent * ent);
  * a key, looking for it in the field'th field, using the given parsing
  * function to load any results we find into the entity structure. */
 static gboolean
-generic_lookup(struct lu_module *module, const char *base_name,
+generic_lookup(struct lu_module *module, const char *file_suffix,
 	       const char *name, int field, parse_fn parser,
 	       struct lu_ent *ent, struct lu_error **error)
 {
@@ -482,8 +489,6 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	char *line, *filename, *key;
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(name != NULL);
 	g_assert(parser != NULL);
 	g_assert(field > 0);
@@ -492,7 +497,7 @@ generic_lookup(struct lu_module *module, const char *base_name,
 	/* Determine the name of the file we're going to read. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	/* Open the file and lock it. */
@@ -535,7 +540,7 @@ lu_files_user_lookup_name(struct lu_module *module,
 			  struct lu_ent *ent,
 			  struct lu_error **error)
 {
-	return generic_lookup(module, "passwd", name, 1,
+	return generic_lookup(module, suffix_passwd, name, 1,
 			      lu_files_parse_user_entry, ent, error);
 }
 
@@ -549,7 +554,7 @@ lu_files_user_lookup_id(struct lu_module *module,
 	char key[sizeof (uid) * CHAR_BIT + 1];
 
 	sprintf(key, "%jd", (intmax_t)uid);
-	return generic_lookup(module, "passwd", key, 3,
+	return generic_lookup(module, suffix_passwd, key, 3,
 			      lu_files_parse_user_entry, ent, error);
 }
 
@@ -560,7 +565,7 @@ lu_shadow_user_lookup_name(struct lu_module *module,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
-	return generic_lookup(module, "shadow", name, 1,
+	return generic_lookup(module, suffix_shadow, name, 1,
 			      lu_shadow_parse_user_entry, ent, error);
 }
 
@@ -588,7 +593,7 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
-			ret = generic_lookup(module, "shadow", p, 1,
+			ret = generic_lookup(module, suffix_shadow, p, 1,
 					     lu_shadow_parse_user_entry,
 					     ent, error);
 			g_free(p);
@@ -604,7 +609,7 @@ lu_files_group_lookup_name(struct lu_module *module,
 			   struct lu_ent *ent,
 			   struct lu_error **error)
 {
-	return generic_lookup(module, "group", name, 1,
+	return generic_lookup(module, suffix_group, name, 1,
 			      lu_files_parse_group_entry, ent, error);
 }
 
@@ -618,7 +623,7 @@ lu_files_group_lookup_id(struct lu_module *module,
 	char key[sizeof (gid) * CHAR_BIT + 1];
 
 	sprintf(key, "%jd", (intmax_t)gid);
-	return generic_lookup(module, "group", key, 3,
+	return generic_lookup(module, suffix_group, key, 3,
 			      lu_files_parse_group_entry, ent, error);
 }
 
@@ -627,7 +632,7 @@ static gboolean
 lu_shadow_group_lookup_name(struct lu_module *module, const char *name,
 			    struct lu_ent *ent, struct lu_error **error)
 {
-	return generic_lookup(module, "gshadow", name, 1,
+	return generic_lookup(module, suffix_gshadow, name, 1,
 			      lu_shadow_parse_group_entry, ent, error);
 }
 
@@ -650,7 +655,7 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 
 			value = g_value_array_get_nth(values, 0);
 			p = lu_value_strdup(value);
-			ret = generic_lookup(module, "gshadow", p, 1,
+			ret = generic_lookup(module, suffix_gshadow, p, 1,
 					     lu_shadow_parse_group_entry,
 					     ent, error);
 			g_free(p);
@@ -772,7 +777,7 @@ typedef char *(*format_fn) (struct lu_ent * ent);
 /* Add an entity to a given flat file, using a given formatting functin to
  * construct the proper text data. */
 static gboolean
-generic_add(struct lu_module *module, const char *base_name,
+generic_add(struct lu_module *module, const char *file_suffix,
 	    format_fn formatter, struct lu_ent *ent,
 	    struct lu_error **error)
 {
@@ -788,15 +793,13 @@ generic_add(struct lu_module *module, const char *base_name,
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(formatter != NULL);
 	g_assert(ent != NULL);
 
 	/* Generate the name of a file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	if (!set_default_context(filename, &prev_context, error)) {
@@ -941,7 +944,8 @@ static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	return generic_add(module, "passwd", lu_files_format_user, ent, error);
+	return generic_add(module, suffix_passwd, lu_files_format_user, ent,
+			   error);
 }
 
 /* Make last-minute changes to the record before adding it to /etc/shadow. */
@@ -969,7 +973,7 @@ static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_add(module, "shadow", lu_shadow_format_user, ent,
+	return generic_add(module, suffix_shadow, lu_shadow_format_user, ent,
 			   error);
 }
 
@@ -989,7 +993,8 @@ static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_add(module, "group", lu_files_format_group, ent, error);
+	return generic_add(module, suffix_group, lu_files_format_group, ent,
+			   error);
 }
 
 /* Make last-minute changes before adding the shadowed group. */
@@ -1017,14 +1022,14 @@ static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_add(module, "gshadow", lu_shadow_format_group, ent,
+	return generic_add(module, suffix_gshadow, lu_shadow_format_group, ent,
 			   error);
 }
 
 /* Modify a particular record in the given file, field by field, using the
  * given format specifiers. */
 static gboolean
-generic_mod(struct lu_module *module, const char *base_name,
+generic_mod(struct lu_module *module, const char *file_suffix,
 	    const struct format_specifier *formats, size_t format_count,
 	    struct lu_ent *ent, struct lu_error **error)
 {
@@ -1038,8 +1043,6 @@ generic_mod(struct lu_module *module, const char *base_name,
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(formats != NULL);
 	g_assert(format_count > 0);
 	g_assert(ent != NULL);
@@ -1064,7 +1067,7 @@ generic_mod(struct lu_module *module, const char *base_name,
 	/* Generate the name of the file to open. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	if (!set_default_context(filename, &prev_context, error)) {
@@ -1139,7 +1142,7 @@ static gboolean
 lu_files_user_mod(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	return generic_mod(module, "passwd", format_passwd,
+	return generic_mod(module, suffix_passwd, format_passwd,
 			   G_N_ELEMENTS(format_passwd), ent, error);
 }
 
@@ -1148,7 +1151,7 @@ static gboolean
 lu_files_group_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_mod(module, "group", format_group,
+	return generic_mod(module, suffix_group, format_group,
 			   G_N_ELEMENTS(format_group), ent, error);
 }
 
@@ -1157,7 +1160,7 @@ static gboolean
 lu_shadow_user_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_mod(module, "shadow", format_shadow,
+	return generic_mod(module, suffix_shadow, format_shadow,
 			   G_N_ELEMENTS(format_shadow), ent, error);
 }
 
@@ -1166,13 +1169,13 @@ static gboolean
 lu_shadow_group_mod(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_mod(module, "gshadow", format_gshadow,
+	return generic_mod(module, suffix_gshadow, format_gshadow,
 			   G_N_ELEMENTS(format_gshadow), ent, error);
 }
 
 /* Delete an entity from the given file. */
 static gboolean
-generic_del(struct lu_module *module, const char *base_name,
+generic_del(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	security_context_t prev_context;
@@ -1198,14 +1201,12 @@ generic_del(struct lu_module *module, const char *base_name,
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
 	/* Generate the name of the file we're going to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	if (!set_default_context(filename, &prev_context, error)) {
@@ -1340,7 +1341,7 @@ static gboolean
 lu_files_user_del(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	return generic_del(module, "passwd", ent, error);
+	return generic_del(module, suffix_passwd, ent, error);
 }
 
 /* Remove a group from the group file. */
@@ -1348,7 +1349,7 @@ static gboolean
 lu_files_group_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_del(module, "group", ent, error);
+	return generic_del(module, suffix_group, ent, error);
 }
 
 /* Remove a user from the shadow file. */
@@ -1356,7 +1357,7 @@ static gboolean
 lu_shadow_user_del(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_del(module, "shadow", ent, error);
+	return generic_del(module, suffix_shadow, ent, error);
 }
 
 /* Remove a group from the gshadow file. */
@@ -1364,7 +1365,7 @@ static gboolean
 lu_shadow_group_del(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_del(module, "gshadow", ent, error);
+	return generic_del(module, suffix_gshadow, ent, error);
 }
 
 /* Return a modified version of the cryptedPassword string, depending on
@@ -1408,7 +1409,7 @@ lock_process(char *cryptedPassword, enum lock_op op, struct lu_ent *ent,
 /* Lock or unlock an account in the given file, with its encrypted password
  * stored in the given field number. */
 static gboolean
-generic_lock(struct lu_module *module, const char *base_name, int field,
+generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
 	security_context_t prev_context;
@@ -1430,14 +1431,12 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
 	/* Generate the name of the file we're going to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	if (!set_default_context(filename, &prev_context, error)) {
@@ -1502,7 +1501,7 @@ generic_lock(struct lu_module *module, const char *base_name, int field,
 
 /* Check if an account [password] is locked. */
 static gboolean
-generic_is_locked(struct lu_module *module, const char *base_name,
+generic_is_locked(struct lu_module *module, const char *file_suffix,
 		  int field, struct lu_ent *ent, struct lu_error **error)
 {
 	GValueArray *name = NULL;
@@ -1523,14 +1522,12 @@ generic_is_locked(struct lu_module *module, const char *base_name,
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
 	/* Construct the name of the file to read. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	/* Open the file. */
@@ -1579,21 +1576,21 @@ static gboolean
 lu_files_user_lock(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_lock(module, "passwd", 2, ent, LO_LOCK, error);
+	return generic_lock(module, suffix_passwd, 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_files_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
-	return generic_lock(module, "passwd", 2, ent, LO_UNLOCK, error);
+	return generic_lock(module, suffix_passwd, 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_files_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			      struct lu_error **error)
 {
-	return generic_lock(module, "passwd", 2, ent, LO_UNLOCK_NONEMPTY,
+	return generic_lock(module, suffix_passwd, 2, ent, LO_UNLOCK_NONEMPTY,
 			    error);
 }
 
@@ -1602,21 +1599,21 @@ static gboolean
 lu_files_group_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_lock(module, "group", 2, ent, LO_LOCK, error);
+	return generic_lock(module, suffix_group, 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_files_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
-	return generic_lock(module, "group", 2, ent, LO_UNLOCK, error);
+	return generic_lock(module, suffix_group, 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_files_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			       struct lu_error **error)
 {
-	return generic_lock(module, "group", 2, ent, LO_UNLOCK_NONEMPTY,
+	return generic_lock(module, suffix_group, 2, ent, LO_UNLOCK_NONEMPTY,
 			    error);
 }
 
@@ -1625,21 +1622,21 @@ static gboolean
 lu_shadow_user_lock(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_lock(module, "shadow", 2, ent, LO_LOCK, error);
+	return generic_lock(module, suffix_shadow, 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_shadow_user_unlock(struct lu_module *module, struct lu_ent *ent,
 		      struct lu_error **error)
 {
-	return generic_lock(module, "shadow", 2, ent, LO_UNLOCK, error);
+	return generic_lock(module, suffix_shadow, 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_shadow_user_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 			       struct lu_error **error)
 {
-	return generic_lock(module, "shadow", 2, ent, LO_UNLOCK_NONEMPTY,
+	return generic_lock(module, suffix_shadow, 2, ent, LO_UNLOCK_NONEMPTY,
 			    error);
 }
 
@@ -1648,21 +1645,21 @@ static gboolean
 lu_shadow_group_lock(struct lu_module *module, struct lu_ent *ent,
 		     struct lu_error **error)
 {
-	return generic_lock(module, "gshadow", 2, ent, LO_LOCK, error);
+	return generic_lock(module, suffix_gshadow, 2, ent, LO_LOCK, error);
 }
 
 static gboolean
 lu_shadow_group_unlock(struct lu_module *module, struct lu_ent *ent,
 		       struct lu_error **error)
 {
-	return generic_lock(module, "gshadow", 2, ent, LO_UNLOCK, error);
+	return generic_lock(module, suffix_gshadow, 2, ent, LO_UNLOCK, error);
 }
 
 static gboolean
 lu_shadow_group_unlock_nonempty(struct lu_module *module, struct lu_ent *ent,
 				struct lu_error **error)
 {
-	return generic_lock(module, "gshadow", 2, ent, LO_UNLOCK_NONEMPTY,
+	return generic_lock(module, suffix_gshadow, 2, ent, LO_UNLOCK_NONEMPTY,
 			    error);
 }
 
@@ -1671,28 +1668,28 @@ static gboolean
 lu_files_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
-	return generic_is_locked(module, "passwd", 2, ent, error);
+	return generic_is_locked(module, suffix_passwd, 2, ent, error);
 }
 
 static gboolean
 lu_files_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	return generic_is_locked(module, "group", 2, ent, error);
+	return generic_is_locked(module, suffix_group, 2, ent, error);
 }
 
 static gboolean
 lu_shadow_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	return generic_is_locked(module, "shadow", 2, ent, error);
+	return generic_is_locked(module, suffix_shadow, 2, ent, error);
 }
 
 static gboolean
 lu_shadow_group_is_locked(struct lu_module *module, struct lu_ent *ent,
 			 struct lu_error **error)
 {
-	return generic_is_locked(module, "gshadow", 2, ent, error);
+	return generic_is_locked(module, suffix_gshadow, 2, ent, error);
 }
 
 /* Was ent found by the shadow module? */
@@ -1715,7 +1712,7 @@ ent_has_shadow (struct lu_ent *ent)
 /* Change a password, in a given file, in a given field, for a given account,
  * to a given value.  Got that? */
 static gboolean
-generic_setpass(struct lu_module *module, const char *base_name, int field,
+generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_ent *ent, const char *password, gboolean is_shadow,
 		struct lu_error **error)
 {
@@ -1737,14 +1734,12 @@ generic_setpass(struct lu_module *module, const char *base_name, int field,
 	g_assert(name != NULL);
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	g_assert(ent != NULL);
 
 	/* Construct the name of the file to modify. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	if (!set_default_context(filename, &prev_context, error)) {
@@ -1833,7 +1828,7 @@ static gboolean
 lu_files_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		      const char *password, struct lu_error **error)
 {
-	return generic_setpass(module, "passwd", 2, ent, password, FALSE,
+	return generic_setpass(module, suffix_passwd, 2, ent, password, FALSE,
 			       error);
 }
 
@@ -1841,7 +1836,7 @@ static gboolean
 lu_files_group_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
-	return generic_setpass(module, "group", 2, ent, password, FALSE,
+	return generic_setpass(module, suffix_group, 2, ent, password, FALSE,
 			       error);
 }
 
@@ -1849,7 +1844,7 @@ static gboolean
 lu_files_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
-	return generic_setpass(module, "passwd", 2, ent, LU_CRYPTED, FALSE,
+	return generic_setpass(module, suffix_passwd, 2, ent, LU_CRYPTED, FALSE,
 			       error);
 }
 
@@ -1857,7 +1852,7 @@ static gboolean
 lu_files_group_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
-	return generic_setpass(module, "group", 2, ent, LU_CRYPTED, FALSE,
+	return generic_setpass(module, suffix_group, 2, ent, LU_CRYPTED, FALSE,
 			       error);
 }
 
@@ -1867,7 +1862,7 @@ lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 {
 	gboolean ret;
 
-	ret = generic_setpass(module, "shadow", 2, ent, password, TRUE, error);
+	ret = generic_setpass(module, suffix_shadow, 2, ent, password, TRUE, error);
 	if (ret)
 		lu_util_update_shadow_last_change(ent);
 	return ret;
@@ -1879,7 +1874,7 @@ lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 {
 	gboolean ret;
 
-	ret = generic_setpass(module, "gshadow", 2, ent, password, TRUE,
+	ret = generic_setpass(module, suffix_gshadow, 2, ent, password, TRUE,
 			      error);
 	if (ret)
 		lu_util_update_shadow_last_change(ent);
@@ -1892,7 +1887,7 @@ lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
 {
 	gboolean ret;
 
-	ret = generic_setpass(module, "shadow", 2, ent, LU_CRYPTED, TRUE,
+	ret = generic_setpass(module, suffix_shadow, 2, ent, LU_CRYPTED, TRUE,
 			      error);
 	if (ret)
 		lu_util_update_shadow_last_change(ent);
@@ -1904,7 +1899,7 @@ lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 			   struct lu_error **error)
 {
 	gboolean ret;
-	ret = generic_setpass(module, "gshadow", 2, ent, LU_CRYPTED, TRUE,
+	ret = generic_setpass(module, suffix_gshadow, 2, ent, LU_CRYPTED, TRUE,
 			      error);
 	if (ret)
 		lu_util_update_shadow_last_change(ent);
@@ -1914,7 +1909,7 @@ lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 /* Get a list of all of the entries in a given file which patch a
  * particular pattern. */
 static GValueArray *
-lu_files_enumerate(struct lu_module *module, const char *base_name,
+lu_files_enumerate(struct lu_module *module, const char *file_suffix,
 		   const char *pattern, struct lu_error **error)
 {
 	int fd;
@@ -1927,14 +1922,12 @@ lu_files_enumerate(struct lu_module *module, const char *base_name,
 	FILE *fp;
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	pattern = pattern ?: "*";
 
 	/* Generate the name of the file we'll be reading. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	/* Open the file. */
@@ -2008,14 +2001,14 @@ static GValueArray *
 lu_files_users_enumerate(struct lu_module *module, const char *pattern,
 			 struct lu_error **error)
 {
-	return lu_files_enumerate(module, "passwd", pattern, error);
+	return lu_files_enumerate(module, suffix_passwd, pattern, error);
 }
 
 static GValueArray *
 lu_files_groups_enumerate(struct lu_module *module, const char *pattern,
 			  struct lu_error **error)
 {
-	return lu_files_enumerate(module, "group", pattern, error);
+	return lu_files_enumerate(module, suffix_group, pattern, error);
 }
 
 /* Get a list of all of the users who are in a given group. */
@@ -2039,8 +2032,8 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	/* Generate the names of the two files we'll be looking at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	pwdfilename = g_strconcat(dir, "/passwd", NULL);
-	grpfilename = g_strconcat(dir, "/group", NULL);
+	pwdfilename = g_strconcat(dir, suffix_passwd, NULL);
+	grpfilename = g_strconcat(dir, suffix_group, NULL);
 	g_free(key);
 
 	/* Open the passwd file. */
@@ -2244,8 +2237,8 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	/* Generate the names of files we'll be looking at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	pwdfilename = g_strconcat(dir, "/passwd", NULL);
-	grpfilename = g_strconcat(dir, "/group", NULL);
+	pwdfilename = g_strconcat(dir, suffix_passwd, NULL);
+	grpfilename = g_strconcat(dir, suffix_group, NULL);
 	g_free(key);
 
 	/* Open the first file. */
@@ -2420,11 +2413,9 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 /* Enumerate all of the accounts listed in the given file, using the
  * given parser to parse matching accounts into an array of entity pointers. */
 static GPtrArray *
-lu_files_enumerate_full(struct lu_module *module,
-			const char *base_name,
-			parse_fn parser,
-		        const char *pattern,
-		        struct lu_error **error)
+lu_files_enumerate_full(struct lu_module *module, const char *file_suffix,
+			parse_fn parser, const char *pattern,
+			struct lu_error **error)
 {
 	int fd;
 	gpointer lock;
@@ -2435,14 +2426,12 @@ lu_files_enumerate_full(struct lu_module *module,
 	FILE *fp;
 
 	g_assert(module != NULL);
-	g_assert(base_name != NULL);
-	g_assert(strlen(base_name) > 0);
 	pattern = pattern ?: "*";
 
 	/* Generate the name of the file to look at. */
 	key = g_strconcat(module->name, "/directory", NULL);
 	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, "/", base_name, NULL);
+	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
 	/* Open the file. */
@@ -2514,9 +2503,8 @@ lu_files_users_enumerate_full(struct lu_module *module,
 			      const char *user,
 			      struct lu_error **error)
 {
-	return lu_files_enumerate_full(module, "passwd",
-				       lu_files_parse_user_entry,
-				       user, error);
+	return lu_files_enumerate_full(module, suffix_passwd,
+				       lu_files_parse_user_entry, user, error);
 }
 
 static GPtrArray *
@@ -2524,9 +2512,9 @@ lu_files_groups_enumerate_full(struct lu_module *module,
 			       const char *group,
 			       struct lu_error **error)
 {
-	return lu_files_enumerate_full(module, "group",
-				       lu_files_parse_group_entry,
-				       group, error);
+	return lu_files_enumerate_full(module, suffix_group,
+				       lu_files_parse_group_entry, group,
+				       error);
 }
 
 static GPtrArray *
@@ -2610,9 +2598,9 @@ lu_shadow_users_enumerate_full(struct lu_module *module,
 			       const char *pattern,
 			       struct lu_error **error)
 {
-	return lu_files_enumerate_full(module, "shadow",
-				       lu_shadow_parse_user_entry,
-				       pattern, error);
+	return lu_files_enumerate_full(module, suffix_shadow,
+				       lu_shadow_parse_user_entry, pattern,
+				       error);
 }
 
 static GPtrArray *
@@ -2620,9 +2608,9 @@ lu_shadow_groups_enumerate_full(struct lu_module *module,
 				const char *pattern,
 				struct lu_error **error)
 {
-	return lu_files_enumerate_full(module, "gshadow",
-				       lu_shadow_parse_group_entry,
-				       pattern, error);
+	return lu_files_enumerate_full(module, suffix_gshadow,
+				       lu_shadow_parse_group_entry, pattern,
+				       error);
 }
 
 static GPtrArray *
@@ -2666,14 +2654,14 @@ lu_files_uses_elevated_privileges(struct lu_module *module)
 	g_free(key);
 	/* If we can't access the passwd file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat("%s/%s", directory, "/passwd", NULL);
+	path = g_strconcat(directory, suffix_passwd, NULL);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
 	g_free(path);
 	/* If we can't access the group file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat("%s/%s", directory, "/group", NULL);
+	path = g_strconcat(directory, suffix_group, NULL);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
@@ -2694,14 +2682,14 @@ lu_shadow_uses_elevated_privileges(struct lu_module *module)
 	g_free(key);
 	/* If we can't access the shadow file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat("%s/%s", directory, "/shadow", NULL);
+	path = g_strconcat(directory, suffix_shadow, NULL);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
 	g_free(path);
 	/* If we can't access the gshadow file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat("%s/%s", directory, "/gshadow", NULL);
+	path = g_strconcat(directory, suffix_gshadow, NULL);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
@@ -2822,7 +2810,7 @@ libuser_shadow_init(struct lu_context *context,
 
 	/* Get the name of the shadow file. */
 	dir = lu_cfg_read_single(context, "shadow/directory", "/etc");
-	shadow_file = g_strconcat(dir, "/shadow", NULL);
+	shadow_file = g_strconcat(dir, suffix_shadow, NULL);
 
 	/* Make sure we're actually using shadow passwords on this system. */
 	if ((stat(shadow_file, &st) == -1) && (errno == ENOENT)) {
