@@ -1,3 +1,7 @@
+0.56.1
+* When changing passwords, only silently ignore known shadow markers, not all
+  invalid hashes
+
 0.56
 * Document the correct types used for attribute values.  Use these types for
   parsing, to avoid corrupting number-like strings, e.g. '07' -> 7; this

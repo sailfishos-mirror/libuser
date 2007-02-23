@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-17 14:19+0100\n"
+"POT-Creation-Date: 2007-02-23 16:17+0100\n"
 "PO-Revision-Date: 2007-02-17 18:43+0300\n"
 "Last-Translator: \n"
 "Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
@@ -17,47 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: apps/apputil.c:123
-#: apps/apputil.c:191
-#: apps/apputil.c:224
-#: apps/apputil.c:251
-#: modules/files.c:234
+#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
+#: modules/files.c:243
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Ошибка чтения `%s': %s"
 
-#: apps/apputil.c:131
-#: apps/apputil.c:200
+#: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Ошибка создания `%s': %s"
 
-#: apps/apputil.c:139
-#: apps/apputil.c:207
-#: apps/apputil.c:297
-#: modules/files.c:217
+#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
+#: modules/files.c:226
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Ошибка смены владельца `%s': %s"
 
-#: apps/apputil.c:236
-#: apps/apputil.c:268
-#: apps/apputil.c:284
-#: modules/files.c:249
-#: modules/files.c:263
+#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
+#: modules/files.c:258 modules/files.c:272
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Ошибка записи `%s': %s"
 
-#: apps/apputil.c:346
-#: apps/apputil.c:381
-#: apps/apputil.c:398
+#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Ошибка удаления `%s': %s"
 
-#: apps/apputil.c:545
-#: apps/apputil.c:549
+#: apps/apputil.c:545 apps/apputil.c:549
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Ошибка сброса привилегий.\n"
@@ -86,8 +74,7 @@ msgstr "Не могу установить контекст по умолчан�
 msgid "Error initializing PAM.\n"
 msgstr "Ошибка инициализации PAM.\n"
 
-#: apps/apputil.c:608
-#: apps/apputil.c:635
+#: apps/apputil.c:608 apps/apputil.c:635
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Ошибка аутентификации для %s.\n"
@@ -107,64 +94,34 @@ msgstr "Аутентификация неизвестного пользоват
 msgid "User mismatch.\n"
 msgstr "Пользователь не совпадает.\n"
 
-#: apps/lchage.c:115
-#: apps/lid.c:117
-#: apps/lpasswd.c:70
-#: apps/luseradd.c:92
-#: apps/luserdel.c:65
-#: apps/lusermod.c:90
+#: apps/lchage.c:115 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
+#: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
 msgstr "[ПАРАМЕТР...] пользователь"
 
-#: apps/lchage.c:118
-#: apps/lchfn.c:76
-#: apps/lchsh.c:62
-#: apps/lgroupadd.c:69
-#: apps/lgroupdel.c:60
-#: apps/lgroupmod.c:88
-#: apps/lid.c:120
-#: apps/lnewusers.c:70
-#: apps/lpasswd.c:73
-#: apps/luseradd.c:95
-#: apps/luserdel.c:68
-#: apps/lusermod.c:93
+#: apps/lchage.c:118 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
+#: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
+#: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Ошибка разбора аргументов: %s.\n"
 
-#: apps/lchage.c:127
-#: apps/lpasswd.c:87
-#: apps/luseradd.c:110
-#: apps/luserdel.c:76
+#: apps/lchage.c:127 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Имя пользователя не указано.\n"
 
-#: apps/lchage.c:137
-#: apps/lchfn.c:110
-#: apps/lchsh.c:96
-#: apps/lgroupadd.c:104
-#: apps/lgroupdel.c:79
-#: apps/lgroupmod.c:120
-#: apps/lid.c:164
-#: apps/lnewusers.c:81
-#: apps/lpasswd.c:99
-#: apps/luseradd.c:132
-#: apps/luserdel.c:85
-#: apps/lusermod.c:145
-#: samples/enum.c:60
-#: samples/testuser.c:75
+#: apps/lchage.c:137 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
+#: apps/lpasswd.c:99 apps/luseradd.c:132 apps/luserdel.c:85
+#: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Ошибка инициализации %s: %s.\n"
 
-#: apps/lchage.c:146
-#: apps/lchfn.c:118
-#: apps/lchsh.c:104
-#: apps/lpasswd.c:148
-#: apps/luserdel.c:93
-#: apps/lusermod.c:159
+#: apps/lchage.c:146 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
+#: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Пользователь %s не существует.\n"
@@ -199,10 +156,7 @@ msgstr "Предупреждение:\t%ld\n"
 msgid "Inactive:\t%ld\n"
 msgstr "Неактивных:\t%ld\n"
 
-#: apps/lchage.c:180
-#: apps/lchage.c:187
-#: apps/lchage.c:196
-#: apps/lchage.c:206
+#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
 msgstr "Никогда"
 
@@ -231,14 +185,11 @@ msgstr "Учетная запись действительна до:\t%s\n"
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Ошибка изменения информации о сроках для %s: %s\n"
 
-#: apps/lchfn.c:73
-#: apps/lchsh.c:59
+#: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
 msgstr "[ПАРАМЕТР...] [пользователь]"
 
-#: apps/lchfn.c:92
-#: apps/lchsh.c:78
-#: apps/lid.c:151
+#: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Имя пользователя не указано, нет имени для uid %d.\n"
@@ -299,8 +250,7 @@ msgstr "Изменение оболочки для %s\n"
 msgid "New Shell"
 msgstr "Новая оболочка"
 
-#: apps/lchsh.c:125
-#: apps/lchsh.c:144
+#: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Оболочка не изменена: %s\n"
@@ -309,22 +259,16 @@ msgstr "Оболочка не изменена: %s\n"
 msgid "Shell changed.\n"
 msgstr "Оболочка изменена.\n"
 
-#: apps/lgroupadd.c:66
-#: apps/lgroupdel.c:57
-#: apps/lgroupmod.c:85
+#: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
 msgstr "[ПАРАМЕТР...] группа"
 
-#: apps/lgroupadd.c:78
-#: apps/lgroupdel.c:69
-#: apps/lgroupmod.c:96
+#: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Не указано имя группы.\n"
 
-#: apps/lgroupadd.c:91
-#: apps/lgroupmod.c:108
-#: apps/lusermod.c:116
+#: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Неверен ID группы %s\n"
@@ -334,9 +278,7 @@ msgstr "Неверен ID группы %s\n"
 msgid "Group creation failed: %s\n"
 msgstr "Ошибка создания группы: %s\n"
 
-#: apps/lgroupdel.c:87
-#: apps/lgroupmod.c:133
-#: apps/lpasswd.c:153
+#: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Группа %s не существует.\n"
@@ -346,14 +288,12 @@ msgstr "Группа %s не существует.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Группа %s не может быть удалена: %s\n"
 
-#: apps/lgroupmod.c:126
-#: apps/lusermod.c:152
+#: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "-L и -U указаны одновременно.\n"
 
-#: apps/lgroupmod.c:140
-#: apps/lgroupmod.c:149
+#: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Ошибка установки пароля для группы %s: %s\n"
@@ -368,8 +308,7 @@ msgstr "Группа %s не может быть заблокирована: %s\
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Группа %s не может быть разблокирована: %s\n"
 
-#: apps/lgroupmod.c:251
-#: apps/lgroupmod.c:277
+#: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Группа %s не может быть изменена: %s\n"
@@ -408,9 +347,7 @@ msgstr "Ошибка открытия `%s': %s\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Ошибка создания учетной записи для `%s': неверный формат строки.\n"
 
-#: apps/lnewusers.c:132
-#: apps/luseradd.c:119
-#: apps/lusermod.c:131
+#: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Неверен ID пользователя %s\n"
@@ -467,9 +404,7 @@ msgstr "Пароли не совпадают, попробуйте еще раз
 msgid "Password change canceled.\n"
 msgstr "Изменение пароля отменено.\n"
 
-#: apps/lpasswd.c:190
-#: apps/luseradd.c:284
-#: apps/luseradd.c:294
+#: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ошибка установки пароля для пользователя %s: %s.\n"
@@ -489,8 +424,7 @@ msgstr "Пароль изменен.\n"
 msgid "Group %jd does not exist\n"
 msgstr "Группа %jd не существует\n"
 
-#: apps/luseradd.c:200
-#: apps/luseradd.c:213
+#: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Ошибка создания группы `%s': %s\n"
@@ -545,8 +479,7 @@ msgstr "%s не имеет домашнего каталога.\n"
 msgid "Error removing %s: %s.\n"
 msgstr "Ошибка удаления %s: %s.\n"
 
-#: apps/lusermod.c:168
-#: apps/lusermod.c:181
+#: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Ошибка установки пароля для пользователя %s: %s.\n"
@@ -713,8 +646,7 @@ msgstr "в модуле `%s' не определено значение `%s'"
 msgid "error reading terminal attributes"
 msgstr "ошибка чтения атрибутов терминала"
 
-#: lib/prompt.c:75
-#: lib/prompt.c:87
+#: lib/prompt.c:75 lib/prompt.c:87
 msgid "error setting terminal attributes"
 msgstr "ошибка установки атрибутов терминала"
 
@@ -756,14 +688,12 @@ msgstr "имя начинается с дефиса"
 msgid "name contains invalid char `%c'"
 msgstr "имя содержит неверный символ `%c'"
 
-#: lib/user.c:296
-#: lib/user.c:344
+#: lib/user.c:296 lib/user.c:344
 #, c-format
 msgid "user %s has no UID"
 msgstr "пользователь %s не имеет UID"
 
-#: lib/user.c:319
-#: lib/user.c:345
+#: lib/user.c:319 lib/user.c:345
 #, c-format
 msgid "group %s has no GID"
 msgstr "группа %s не имеет GID"
@@ -796,141 +726,103 @@ msgstr "Неверное значение по умолчанию для пол�
 msgid "error locking file: %s"
 msgstr "ошибка блокировки файла: %s"
 
-#: modules/files.c:108
+#: modules/files.c:117
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "невозможно получить контекст безопасности для `%s': %s"
 
-#: modules/files.c:114
+#: modules/files.c:123
 #, c-format
 msgid "couldn't set default security context: %s"
 msgstr "невозможно задать контекст безопасности по умолчанию: %s"
 
-#: modules/files.c:121
+#: modules/files.c:130
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
+msgstr ""
+"невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
-#: modules/files.c:164
-#: modules/files.c:500
-#: modules/files.c:813
-#: modules/files.c:1080
-#: modules/files.c:1221
-#: modules/files.c:1453
-#: modules/files.c:1538
-#: modules/files.c:1744
-#: modules/files.c:1913
-#: modules/files.c:1930
-#: modules/files.c:2019
-#: modules/files.c:2038
-#: modules/files.c:2106
-#: modules/files.c:2127
-#: modules/files.c:2224
-#: modules/files.c:2243
-#: modules/files.c:2302
-#: modules/files.c:2321
-#: modules/files.c:2421
-#: modules/files.c:2436
+#: modules/files.c:173 modules/files.c:507 modules/files.c:818
+#: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
+#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
+#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
+#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
+#: modules/files.c:2441 modules/files.c:2456
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "невозможно открыть `%s': %s"
 
-#: modules/files.c:176
-#: modules/files.c:205
-#: modules/files.c:271
-#: modules/files.c:825
-#: modules/files.c:1233
+#: modules/files.c:185 modules/files.c:214 modules/files.c:280
+#: modules/files.c:830 modules/files.c:1236
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "невозможно получить сведения о `%s': %s"
 
-#: modules/files.c:187
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "ошибка создания `%s': %s"
 
-#: modules/files.c:200
+#: modules/files.c:209
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервный файл `%s' существует и не является обычным файлом"
 
-#: modules/files.c:279
+#: modules/files.c:288
 msgid "backup file size mismatch"
 msgstr "несоответствие размера файла резервной копии"
 
-#: modules/files.c:855
-#: modules/files.c:1242
+#: modules/files.c:860 modules/files.c:1245
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "невозможно прочитать из `%s': %s"
 
-#: modules/files.c:864
-#: modules/files.c:871
+#: modules/files.c:869 modules/files.c:876
 msgid "entry already present in file"
 msgstr "запись уже существует в файле"
 
-#: modules/files.c:878
-#: modules/files.c:888
-#: modules/files.c:899
-#: modules/files.c:1301
-#: modules/files.c:1309
-#: modules/files.c:1317
+#: modules/files.c:883 modules/files.c:893 modules/files.c:904
+#: modules/files.c:1304 modules/files.c:1312 modules/files.c:1320
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "невозможно записать в `%s': %s"
 
-#: modules/files.c:1057
-#: modules/files.c:1116
+#: modules/files.c:1062 modules/files.c:1121
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "объект не имеет атрибута %s"
 
-#: modules/files.c:1778
-#: modules/ldap.c:1535
-#: modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
 msgid "error encrypting password"
 msgstr "ошибка при шифровании пароля"
 
-#: modules/files.c:2708
-#: modules/files.c:2786
+#: modules/files.c:2727 modules/files.c:2805
 msgid "not executing with superuser privileges"
 msgstr "выполняется без привилегий суперпользователя"
 
-#: modules/files.c:2799
+#: modules/files.c:2818
 msgid "no shadow file present -- disabling"
 msgstr "нет файла shadow -- запрещено"
 
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr ""
+"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
-#: modules/krb5.c:136
-#: modules/krb5.c:202
-#: modules/krb5.c:301
-#: modules/krb5.c:389
-#: modules/krb5.c:441
-#: modules/krb5.c:529
-#: modules/krb5.c:595
+#: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
+#: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
 msgstr "ошибка инициализации библиотеки kerberos"
 
-#: modules/krb5.c:143
-#: modules/krb5.c:223
-#: modules/krb5.c:333
-#: modules/krb5.c:341
-#: modules/krb5.c:409
-#: modules/krb5.c:462
-#: modules/krb5.c:550
-#: modules/krb5.c:612
+#: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
+#: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "ошибка обработки имени пользователя `%s' для kerberos"
 
-#: modules/krb5.c:213
-#: modules/krb5.c:400
-#: modules/krb5.c:452
-#: modules/krb5.c:540
+#: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "структура не имеет атрибутов %s или %s"
@@ -945,8 +837,7 @@ msgstr "сущность не имеет атрибутов %s или %s"
 msgid "entity was created with no %s or %s attributes"
 msgstr "сущность была создана без атрибутов %s или %s"
 
-#: modules/krb5.c:475
-#: modules/krb5.c:563
+#: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "ошибка чтения информации для `%s' из kerberos"
@@ -1014,8 +905,7 @@ msgstr "невозможно преобразовать внутренние д�
 msgid "error creating a LDAP directory entry: %s"
 msgstr "ошибка создания записи каталога LDAP: %s"
 
-#: modules/ldap.c:1380
-#: modules/ldap.c:1596
+#: modules/ldap.c:1380 modules/ldap.c:1596
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ошибка изменения записи каталога LDAP: %s"
@@ -1035,9 +925,7 @@ msgstr "объект не имел атрибута %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "ошибка удаления записи каталога LDAP: %s"
 
-#: modules/ldap.c:1505
-#: modules/ldap.c:1521
-#: modules/ldap.c:1629
+#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
 #: modules/ldap.c:1728
 #, c-format
 msgid "object has no %s attribute"
@@ -1091,8 +979,7 @@ msgstr "ошибка Cyrus SASL при создании пользователя
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Ошибка SASL при удалении пользователя: %s"
 
-#: modules/sasldb.c:524
-#: modules/sasldb.c:532
+#: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "ошибка инициализации Cyrus SASL: %s"
@@ -1174,27 +1061,37 @@ msgstr "Копирование структуры пользователя:\n"
 #, fuzzy
 #~ msgid "Shell not changed: input error.\n"
 #~ msgstr "Оболочка не изменена: %s\n"
+
 #~ msgid "could not search LDAP server"
 #~ msgstr "невозможно искать сервер LDAP"
+
 #~ msgid "LDAP server appears to have no root DSE"
 #~ msgstr "Похоже, что сервер LDAP не имеет корневого DSE"
+
 #~ msgid "error mapping name to LDAP distinguished name"
 #~ msgstr "ошибка преобразования имени в форму, понятную для LDAP"
+
 #~ msgid "error mapping name to LDAP base distinguished name"
 #~ msgstr "ошибка преобразования имени в форму, понятную для базы LDAP"
+
 #~ msgid "couldn't reset default security context to `%s': %s"
 #~ msgstr ""
 #~ "невозможно сбросить значение контекста безопасности по умолчанию `%s': %s"
+
 #~ msgid "Cyrus SASL error creating user: %s: %s"
 #~ msgstr "ошибка Cyrus SASL при создании пользователя: %s: %s"
+
 #~ msgid "Cyrus SASL error removing user: %s: %s"
 #~ msgstr "Ошибка Cyrus SASL при удалении пользователя: %s: %s"
+
 #~ msgid "Error initializing %s.\n"
 #~ msgstr "Ошибка инициализации %s.\n"
+
 #~ msgid "Group %s could not be deleted.\n"
 #~ msgstr "Группа %s не может быть удалена.\n"
+
 #~ msgid "Group %s could not be modified.\n"
 #~ msgstr "Группа %s не может быть изменена.\n"
+
 #~ msgid "error initializing module"
 #~ msgstr "ошибка инициализации модуля"
-

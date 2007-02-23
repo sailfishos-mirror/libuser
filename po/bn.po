@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-17 14:19+0100\n"
+"POT-Creation-Date: 2007-02-23 16:17+0100\n"
 "PO-Revision-Date: 2006-09-23 01:16+0600\n"
 "Last-Translator: Mahay Alam Khan (মাহে আলম) <makl10n@yahoo.com>\n"
 "Language-Team: Bengali <redhat-translation@bengalinux.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
-#: modules/files.c:234
+#: modules/files.c:243
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' পড়তে সমস্যা হয়েছে: %s"
@@ -33,13 +33,13 @@ msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 
 # modified for RHEL
 #: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
-#: modules/files.c:217
+#: modules/files.c:226
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' এর মালিকানা পরিবর্তন করতে সমস্যা হয়েছে: %s"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
-#: modules/files.c:249 modules/files.c:263
+#: modules/files.c:258 modules/files.c:272
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' লিখতে সমস্যা হয়েছে: %s"
@@ -782,86 +782,86 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "ফাইল লক করতে সমস্যা হয়েছে: %s"
 
-#: modules/files.c:108
+#: modules/files.c:117
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s'-র জন্য প্রাসঙ্গিক নিরাপত্তা পাওয়া যায়নি: %s"
 
 # modified for RHEL
-#: modules/files.c:114
+#: modules/files.c:123
 #, c-format
 msgid "couldn't set default security context: %s"
 msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তা নির্ধারণ করা যায়নি: %s"
 
 # modified for RHEL
-#: modules/files.c:121
+#: modules/files.c:130
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "ডিফল্ট প্রাসঙ্গিক নিরাপত্তাকে `%s' হিসাবে নির্ধারণ করা যায়নি: %s"
 
-#: modules/files.c:164 modules/files.c:500 modules/files.c:813
-#: modules/files.c:1080 modules/files.c:1221 modules/files.c:1453
-#: modules/files.c:1538 modules/files.c:1744 modules/files.c:1913
-#: modules/files.c:1930 modules/files.c:2019 modules/files.c:2038
-#: modules/files.c:2106 modules/files.c:2127 modules/files.c:2224
-#: modules/files.c:2243 modules/files.c:2302 modules/files.c:2321
-#: modules/files.c:2421 modules/files.c:2436
+#: modules/files.c:173 modules/files.c:507 modules/files.c:818
+#: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
+#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
+#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
+#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
+#: modules/files.c:2441 modules/files.c:2456
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' খোলা সম্ভব হয়নি: %s"
 
-#: modules/files.c:176 modules/files.c:205 modules/files.c:271
-#: modules/files.c:825 modules/files.c:1233
+#: modules/files.c:185 modules/files.c:214 modules/files.c:280
+#: modules/files.c:830 modules/files.c:1236
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' stat করা যায়নি: %s"
 
-#: modules/files.c:187
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' তৈরি করতে সমস্যা হয়েছে: %s"
 
-#: modules/files.c:200
+#: modules/files.c:209
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "ব্যাকআপ ফাইল `%s' বর্তমানে উপস্থিত আছে এবং এটি কোনো সাধারণ ফাইল নয়"
 
-#: modules/files.c:279
+#: modules/files.c:288
 msgid "backup file size mismatch"
 msgstr "ব্যাকআপ ফাইল সাইজে গরমিল"
 
-#: modules/files.c:855 modules/files.c:1242
+#: modules/files.c:860 modules/files.c:1245
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' থেকে পড়া সম্ভব হয়নি: %s"
 
-#: modules/files.c:864 modules/files.c:871
+#: modules/files.c:869 modules/files.c:876
 msgid "entry already present in file"
 msgstr "ফাইলে এই এন্ট্রি আগেই আছে"
 
-#: modules/files.c:878 modules/files.c:888 modules/files.c:899
-#: modules/files.c:1301 modules/files.c:1309 modules/files.c:1317
+#: modules/files.c:883 modules/files.c:893 modules/files.c:904
+#: modules/files.c:1304 modules/files.c:1312 modules/files.c:1320
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'-এ লেখা যায়নি: %s"
 
 # sam:
-#: modules/files.c:1057 modules/files.c:1116
+#: modules/files.c:1062 modules/files.c:1121
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity object-এ কোনো %s বৈশিষ্ট্য নেই"
 
 # modified for RHEL
-#: modules/files.c:1778 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
 msgid "error encrypting password"
 msgstr "পাসওয়ার্ড এনক্রিপ্ট করতে সমস্যা"
 
 # modified for RHEL
-#: modules/files.c:2708 modules/files.c:2786
+#: modules/files.c:2727 modules/files.c:2805
 msgid "not executing with superuser privileges"
 msgstr "সুপার-ইউজারের অধিকারসহ নির্বাহিত হচ্ছে না"
 
-#: modules/files.c:2799
+#: modules/files.c:2818
 msgid "no shadow file present -- disabling"
 msgstr "কোনো শ্যাডো ফাইল উপস্থিত নেই -- নিষ্ক্রিয় করা হচ্ছে"
 
