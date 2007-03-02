@@ -1,20 +1,20 @@
 # translation of ml.po to Malayalam
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR Red Hat, Inc.
-# Ani Peter <apeter@redhat.com>, 2006.
 #
+# Ani Peter <apeter@redhat.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2006-09-21 14:06+0530\n"
+"PO-Revision-Date: 2007-03-02 11:49+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
-"Language-Team: Malayalam\n"
+"Language-Team: Malayalam <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 "\n"
@@ -139,24 +139,24 @@ msgid "Account is not locked.\n"
 msgstr "അക്കൌണ്ട് ലോക്ക് ചെയ്തിട്ടില്ല.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "ഏറ്റവും കുറവ്:\t%d\n"
+msgstr "ഏറ്റവും കുറഞ്ഞ:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "പരമാവധി:\t%d\n"
+msgstr "പരമാവധി:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "മുന്നറിയിപ്പ്:\t%d\n"
+msgstr "മുന്നറിയിപ്പ്:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "ഇന്നാക്ക്റ്റീവ്:\t%d\n"
+msgstr "സജീവമല്ലാത്ത:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -723,7 +723,7 @@ msgstr "ഗ്രൂപ്പിന് പേരോ GID-യോ ലഭ്യമ�
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "%s ഫീള്‍ഡിന്‍റെ ഡീഫോള്‍ട്ട് മൂല്ല്യം: %s"
 
 #: lib/util.c:193
 #, c-format
@@ -811,8 +811,7 @@ msgstr "ഷാഡോ ഫൈല്‍ ലഭ്യമല്ല -- disabling"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
+msgstr "`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1060,3 +1059,4 @@ msgstr "Getting default user attributes:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "യൂസറിന്‍റെ structure പകറ്‍ത്തുന്നു:\n"
+
