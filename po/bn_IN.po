@@ -10,21 +10,21 @@
 # Bangla Translation of Libuser.po
 # Copyright (C) 2004 Red Hat Inc.
 # This file is distributed under the same license as the libuser package.
-# Runa Bhattacharjee <runab@redhat.com>, 2004, 2005, 2006.
+# Runa Bhattacharjee <runab@redhat.com>, 2004, 2005, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2006-09-20 10:51+0530\n"
+"PO-Revision-Date: 2007-03-05 11:45+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali India\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -157,24 +157,24 @@ msgid "Account is not locked.\n"
 msgstr "অ্যাকাউন্ট লক করা নেই।\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "সর্বনিম্ন:\t%d\n"
+msgstr "সর্বনিম্ন:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "সর্বোচ্চ:\t%d\n"
+msgstr "সর্বোচ্চ:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "সতর্কবার্তা:\t%d\n"
+msgstr "সতর্কবার্তা:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "নিষ্ক্রিয়:\t%d\n"
+msgstr "নিষ্ক্রিয়:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -385,8 +385,7 @@ msgstr "`%s' খুলতে সমস্যা: %s।\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা: পংক্তিটি সঠিক বিন্যাসে গঠিত হয়নি।\n"
+msgstr "`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা: পংক্তিটি সঠিক বিন্যাসে গঠিত হয়নি।\n"
 
 # modified for RHEL
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
@@ -784,7 +783,7 @@ msgstr "দলের নাম ও GID ধার্য করা হয়নি"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "%s ক্ষেত্রে ডিফল্ট মান বৈধ নয়: %s"
 
 #: lib/util.c:193
 #, c-format
@@ -1150,3 +1149,4 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর বৈশিষ্ট্যের পরিকাঠামো কপি করা হচ্ছে:\n"
+
