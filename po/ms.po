@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ms\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2007-03-01 21:56+0800\n"
+"PO-Revision-Date: 2007-03-25 00:25+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -179,14 +179,14 @@ msgid "Account is not locked.\n"
 msgstr "Akaun tidak dikunci.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "(%ld)PELAYAN >>> %s"
+msgstr "Minimum:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "(%ld)PELAYAN >>> %s"
+msgstr "Maksimum:\t%ld\n"
 
 #: apps/lchage.c:172
 #, c-format
