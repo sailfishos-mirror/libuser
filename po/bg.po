@@ -1,28 +1,23 @@
-# translation of bg.po to
-# translation of bg.po to Български
-# translation of bg.po to Bulgarian
-# translation of bg.po to bulgarian
-# translation of libuser.po to bulgarian
+# translation of libuser.pot to Bulgarian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Boril Gourinov <boril@bitex.com>, 2004.
-# Doncho N. Gunchev <mr700@globalnet.bg>, 2004.
-# Николай Сърмаджиев <nikolayd@sarmadzhiev.tk>, 2004.
-# Nikolay Sarmadzhiev <nikolay@localhost.localdomain>, 2004.
-# Николай Сърмаджиев <nikolay@sarmadzhiev.com>, 2005.
 #
+# Boril Gourinov <boril@bitex.com>, 2004.
+# Doncho N. Gunchev <gunchev@gmail.com>, 2004.
+# Николай Сърмаджиев <nikolay@sarmadzhiev.com>, 2004, 2005.
+# Doncho N. Gunchev <gunchev@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: bg\n"
+"Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2005-05-04 15:41-0700\n"
-"Last-Translator: Николай Сърмаджиев <nikolay@sarmadzhiev.com>\n"
-"Language-Team: Български <en@li.org>\n"
+"PO-Revision-Date: 2007-03-28 14:09+0300\n"
+"Last-Translator: Doncho N. Gunchev <gunchev@gmail.com>\n"
+"Language-Team: Bulgarian <Bulgarian Translators' Team <dict@fsa-bg.org>>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:243
@@ -92,9 +87,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Вътрешна грешка на PAM `%s'.\n"
 
 #: apps/apputil.c:621
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Неизвестен потребителски контекст"
+msgstr "Удостовери се неизвестен потребител.\n"
 
 #: apps/apputil.c:625
 #, c-format
@@ -144,24 +139,24 @@ msgid "Account is not locked.\n"
 msgstr "Акаунта не е заключен.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Минимум:\t%d\n"
+msgstr "Минимум:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Максимум:\t%d\n"
+msgstr "Максимум:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Предупреждение:\t%d\n"
+msgstr "Предупреждение:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Неактивен:\t%d\n"
+msgstr "Неактивен:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -321,9 +316,9 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Група %s не може да бъде модифицирана: %s\n"
 
 #: apps/lid.c:48
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Грешка при изтриване на %s: %s.\n"
+msgstr "Грешка при търсене на %s: %s\n"
 
 #: apps/lid.c:133
 #, c-format
@@ -366,8 +361,7 @@ msgstr "Отказано създаването на потребител с UID
 #: apps/lnewusers.c:221
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
-"Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
+msgstr "Грешка при създаването на група за `%s' с групов идентификатор %jd: %s\n"
 
 #: apps/lnewusers.c:278
 #, c-format
@@ -538,9 +532,9 @@ msgid "could not stat configuration file `%s': %s"
 msgstr "не може да stat конфигурационния файл `%s': %s"
 
 #: lib/config.c:133
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "не може да бъде отворен конфигурационен файл `%s': %s"
+msgstr "конфигурационния файл `%s' е твърде голям"
 
 #: lib/config.c:149
 #, c-format
@@ -549,7 +543,7 @@ msgstr "не може да бъде прочетен конфигурацион�
 
 #: lib/error.c:42
 msgid "success"
-msgstr "успех"
+msgstr "успешно"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
@@ -646,9 +640,9 @@ msgid "module version mismatch in `%s'"
 msgstr "грешна версия на модул в `%s'"
 
 #: lib/modules.c:96
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Група %s не съществува.\n"
+msgstr "модул `%s' не дефинира `%s'"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
@@ -673,7 +667,7 @@ msgstr "името е твърде късо"
 #: lib/user.c:205
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "името е твърде дълго (%zu > %d)"
 
 #: lib/user.c:212
 msgid "name contains non-ASCII characters"
@@ -689,7 +683,7 @@ msgstr "името съдържа интервали"
 
 #: lib/user.c:238
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "името започва с тире"
 
 #: lib/user.c:249
 #, c-format
@@ -699,35 +693,35 @@ msgstr "името съдържа невалиден знак `%c'"
 #: lib/user.c:296 lib/user.c:344
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "потребител %s няма UID"
 
 #: lib/user.c:319 lib/user.c:345
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "група %s няма GID"
 
 #: lib/user.c:339
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "потребител %jd няма име"
 
 #: lib/user.c:340
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Група %jd не съществува\n"
+msgstr "група %jd няма име"
 
 #: lib/user.c:348
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "потребителя няма нито име нито UID"
 
 #: lib/user.c:349
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "групата няма нито име нито GID"
 
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Невалидна стойност по подразбиране на поле %s: %s"
 
 #: lib/util.c:193
 #, c-format
@@ -815,8 +809,7 @@ msgstr "няма наличен сенчест файл -- деактивира�
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
+msgstr "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1065,19 +1058,3 @@ msgstr "Извличане на стандартни потребителски 
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
 
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Обвивката не е променена: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "не може да се търси в LDAP сървъра"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP сървъра изглежда няма root DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "грешка при намиране съответствие на име с LDAP отличително име"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr ""
-#~ "грешка при намиране съответствие на име с LDAP базово отличително име"
