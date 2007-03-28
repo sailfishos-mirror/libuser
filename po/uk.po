@@ -135,24 +135,24 @@ msgid "Account is not locked.\n"
 msgstr "Обліковий рахунок не заблокований.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Мінімум:\t%d\n"
+msgstr "Мінімум:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Максимум:\t%d\n"
+msgstr "Максимум:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Попередження:\t%d\n"
+msgstr "Попередження:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Неактивних:\t%d\n"
+msgstr "Неактивних:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -718,7 +718,7 @@ msgstr "групи не має ані назви, ані GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Неправильне типове значення для поля %s: %s"
 
 #: lib/util.c:193
 #, c-format
