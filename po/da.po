@@ -5,14 +5,14 @@
 # This file is distributed under the same license as the libuser package.
 # Keld Simonsen <keld@dkuug.dk>, 2001, 2005.
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004.
-# Keld Simonsen <keld@rap.dk>, 2005, 2006.
+# Keld Simonsen <keld@rap.dk>, 2005, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2006-10-01 02:02+0200\n"
+"PO-Revision-Date: 2007-04-15 10:10+0200\n"
 "Last-Translator: Keld Simonsen <keld@rap.dk>\n"
 "Language-Team:  <da@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,24 +140,24 @@ msgid "Account is not locked.\n"
 msgstr "Konto er ikke låst.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Minimum:\t%d\n"
+msgstr "Minimum:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Maksimum:\t%d\n"
+msgstr "Maksimum:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Advarsel:\t%d\n"
+msgstr "Advarsel:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Inaktiv:\t%d\n"
+msgstr "Inaktiv:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -348,8 +348,7 @@ msgstr "Fejl ved åbning af `%s': %s.\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
+msgstr "Fejl under opretelse af konto for '%s': linjen er ikke rigtigt formatteret.\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -723,7 +722,7 @@ msgstr "gruppe har hverken et navn eller en GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Ugyldig standardværdi af felt %s: %s"
 
 #: lib/util.c:193
 #, c-format
@@ -811,8 +810,7 @@ msgstr "ingen skyggefil findes -- deaktiverer"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
+msgstr "fejl ved tilkobling til kadm5-tjeneren for tjeneste `%s' i område `%s': %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1060,3 +1058,4 @@ msgstr "Henter standard brugerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brugerstruktur:\n"
+
