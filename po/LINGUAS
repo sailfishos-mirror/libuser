@@ -1,8 +1,10 @@
-# To regenerate: (cd po; ls *.po | sed 's/\.po$//')
+# To regenerate: (cd po; ls *.po | sed 's/\.po$//').  Then remove languages with
+# no translations.
 ar
 bg
 bn_IN
 bn
+bs
 ca
 cs
 cy
@@ -15,24 +17,18 @@ et
 fi
 fr
 gu
-he
 hi
 hr
 hu
-hy
 id
 is
 it
 ja
-ka
 ko
-ku
-lo
 mk
 ml
 mr
 ms
-my
 nb
 nl
 or
@@ -41,17 +37,14 @@ pl
 pt_BR
 pt
 ru
-si
 sk
 sl
-sq
 sr@Latn
 sr
 sv
 ta
 tr
 uk
-ur
 vi
 zh_CN
 zh_TW

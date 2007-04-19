@@ -346,7 +346,8 @@ msgstr "Erreur lors de la lecture de « %s » : %s.\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Erreur lors de la création d'un compte pour « %s » : ligne mal formatée.\n"
+msgstr ""
+"Erreur lors de la création d'un compte pour « %s » : ligne mal formatée.\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -408,12 +409,14 @@ msgstr "Changement de mot de passe annulé.\n"
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -483,7 +486,8 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr ""
+"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
@@ -528,7 +532,9 @@ msgstr "impossible d'ouvrir le fichier de configuration « %s » : %s"
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "impossible d'exécuter la fonction stat sur le fichier de configuration « %s » : %s"
+msgstr ""
+"impossible d'exécuter la fonction stat sur le fichier de configuration « %s "
+"» : %s"
 
 #: lib/config.c:133
 #, c-format
@@ -740,7 +746,8 @@ msgstr "impossible de définir le contexte de sécurité par défaut : %s"
 #: modules/files.c:130
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "impossible de définir le contexte de sécurité par défaut sur « %s » : %s"
+msgstr ""
+"impossible de définir le contexte de sécurité par défaut sur « %s » : %s"
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
@@ -885,7 +892,9 @@ msgstr "impossible de se connecter au serveur LDAP"
 #: modules/ldap.c:411
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "impossible de se connecter au serveur LDAP, première tentative en tant que « %s » : %s"
+msgstr ""
+"impossible de se connecter au serveur LDAP, première tentative en tant que « "
+"%s » : %s"
 
 #: modules/ldap.c:1314
 #, c-format
@@ -944,7 +953,9 @@ msgstr "aucun attribut « %s » trouvé"
 #: modules/ldap.c:1835
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "erreur lors de la configuration du mot de passe dans le répertoire LDAP pour %s : %s."
+msgstr ""
+"erreur lors de la configuration du mot de passe dans le répertoire LDAP pour "
+"%s : %s."
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
@@ -991,7 +1002,8 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:580
 msgid "error removing home directory for user"
-msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr ""
+"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:658
 msgid "error moving home directory for user"
@@ -1058,4 +1070,3 @@ msgstr "Obtention d'attributs d'utilisateur par défaut :\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
-

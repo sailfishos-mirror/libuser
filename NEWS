@@ -1,3 +1,6 @@
+0.56.2
+* Update translations
+
 0.56.1
 * When changing passwords, only silently ignore known shadow markers, not all
   invalid hashes

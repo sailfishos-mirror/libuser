@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 "\n"
 
@@ -1057,4 +1058,3 @@ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଚାଳକ ର ଗୁ
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ଚାଳକ ର ସଂରଚନା କୁ ନକଲ କରୁଅଛି:\n"
-

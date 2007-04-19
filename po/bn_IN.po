@@ -24,7 +24,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -385,7 +386,8 @@ msgstr "`%s' খুলতে সমস্যা: %s।\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা: পংক্তিটি সঠিক বিন্যাসে গঠিত হয়নি।\n"
+msgstr ""
+"`%s' -র জন্য অ্যাকাউন্ট তৈরি করতে সমস্যা: পংক্তিটি সঠিক বিন্যাসে গঠিত হয়নি।\n"
 
 # modified for RHEL
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
@@ -1149,4 +1151,3 @@ msgstr "ব্যবহারকারীর ডিফল্ট বৈশিষ�
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "ব্যবহারকারীর বৈশিষ্ট্যের পরিকাঠামো কপি করা হচ্ছে:\n"
-

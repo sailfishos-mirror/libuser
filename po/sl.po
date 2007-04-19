@@ -347,7 +347,8 @@ msgstr "Napaka pri odpiranju '%s`: %s.\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Napaka pri ustvarjanju računa za '%s': nepravilno formatirana vrstica.\n"
+msgstr ""
+"Napaka pri ustvarjanju računa za '%s': nepravilno formatirana vrstica.\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -809,7 +810,8 @@ msgstr "ni datoteke z zastrtimi gesli -- onemogočam"
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "napaka pri prijavljanju v strežnik kadm5 za storitev ,%s` v realmu ,%s`: %s"
+msgstr ""
+"napaka pri prijavljanju v strežnik kadm5 za storitev ,%s` v realmu ,%s`: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1057,4 +1059,3 @@ msgstr "Dobivamo privzete atribute uporabnika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Prepisovanje uporabniške strukture:\n"
-

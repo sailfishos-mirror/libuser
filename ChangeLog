@@ -1,3 +1,10 @@
+2007-04-19  Miloslav Trmac  <mitr@redhat.com>
+
+	* configure.in: Version 0.56.2.
+	* NEWS: Update.
+
+	* po/LINGUAS:  Add bs.  Remove languages with no translated strings.
+
 2007-03-16  Miloslav Trmac  <mitr@redhat.com>
 
 	* libuser.conf: Remove all krb5 module references to avoid the

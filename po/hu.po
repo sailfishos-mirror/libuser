@@ -192,7 +192,8 @@ msgstr "[OPCIÓ...] [felhasználó]"
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr "Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr ""
+"Nincs megadva felhasználónév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -326,7 +327,8 @@ msgstr "Nincs megadva csoportnév, ezt a nevet használom: %s.\n"
 #: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
+msgstr ""
+"Nincs megadva csoportnév, nem tartozik név ehhez az azonosítóhoz: %d.\n"
 
 #: apps/lid.c:147
 #, c-format
@@ -345,7 +347,8 @@ msgstr "Hiba történt '%s' megnyitásakor: %s.\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
+msgstr ""
+"Hiba történt a(z) '%s' azonosító használatakor: egy sor formátuma hibás.\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -359,7 +362,8 @@ msgstr "Nem lehet 0 értékű azonosítót létrehozni.\n"
 #: apps/lnewusers.c:221
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
+msgstr ""
+"Nem sikerült létrehozni csoportot \"%s\" számára \"%jd\" azonosítóval: %s\n"
 
 #: apps/lnewusers.c:278
 #, c-format
@@ -457,7 +461,8 @@ msgstr "%s nem rendelkezett csoportazonosítóval.\n"
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
+msgstr ""
+"Nem létezik \"%jd\" azonosítójú csoport, ezért nem lehet eltávolítani.\n"
 
 #: apps/luserdel.c:125
 #, c-format
@@ -1061,4 +1066,3 @@ msgstr "Az alapértelmezett felhasználójellemzők lekérdezése:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Felhasználói struktúra másolása:\n"
-
