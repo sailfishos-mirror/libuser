@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2007-04-19 17:55+0200\n"
+"PO-Revision-Date: 2007-04-20 16:39+0200\n"
 "Last-Translator: Alain PORTAL <aportal@univ-montp2.fr>\n"
 "Language-Team: Français <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -958,14 +958,12 @@ msgid "LDAP Server Name"
 msgstr "Nom du serveur LDAP"
 
 #: modules/ldap.c:2452
-#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr "LDAP Search Base DN"
+msgstr "Racine DN de recherche LDAP"
 
 #: modules/ldap.c:2458
-#, fuzzy
 msgid "LDAP Bind DN"
-msgstr "LDAP Bind DN"
+msgstr "DN de liaison LDAP"
 
 #: modules/ldap.c:2465
 msgid "LDAP Bind Password"
