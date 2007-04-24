@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libuser 1.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2006-07-01 12:55+0000\n"
+"PO-Revision-Date: 2007-04-24 12:55+0000\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -134,24 +134,24 @@ msgid "Account is not locked.\n"
 msgstr "Notandinn er ekki læstur.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Minnst:\t%d\n"
+msgstr "Minnst:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Mest:\t%d\n"
+msgstr "Mest:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Aðvörun:\t%d\n"
+msgstr "Aðvörun:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Óvirkur:\t%d\n"
+msgstr "Óvirkur:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -717,7 +717,7 @@ msgstr "hópurinn hefur hvorki heiti eða GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Ógilt sjálfgefið gildi í svæði %s: %s"
 
 #: lib/util.c:193
 #, c-format
