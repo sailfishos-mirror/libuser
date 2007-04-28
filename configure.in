@@ -81,7 +81,7 @@ if test x$sasl != xno ; then
 		LDFLAGS="$LDFLAGS -L$sasl/lib"
 	fi
 	AC_SEARCH_LIBS([sasl_setpass], [sasl2], [build_sasl=yes])
-	AC_CHECK_FUNCS([sasl_user_exists])
+	AC_CHECK_FUNCS_ONCE([sasl_user_exists])
 	LIBS="$LIBSAVE"
 fi
 AM_CONDITIONAL([SASL], [test $build_sasl = yes])
@@ -111,7 +111,7 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
-AC_CHECK_FUNCS([__secure_getenv])
+AC_CHECK_FUNCS_ONCE([__secure_getenv])
 
 # Modify CFLAGS after all tests are run (some of them could fail because
 # of the -Werror).

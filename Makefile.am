@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
 ## Settings
-localedir = $(datadir)/locale
 pkgconfigdir = $(libdir)/pkgconfig
 
 ACLOCAL_AMFLAGS = -I m4

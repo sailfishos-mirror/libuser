@@ -1,3 +1,8 @@
+2007-04-28  Miloslav Trmač  <mitr@volny.cz>
+
+	* configure.in
+	* Makefile.am: Use features available in autoconf 2.61.
+
 2007-04-19  Miloslav Trmac  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.2.
