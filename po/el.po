@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-23 16:17+0100\n"
-"PO-Revision-Date: 2007-02-03 02:29+0000\n"
+"PO-Revision-Date: 2007-05-02 20:51+0100\n"
 "Last-Translator: Dimitris Glezos <dimitris@glezos.com>\n"
 "Language-Team: Greek <fedora-trans-el@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -140,24 +140,24 @@ msgid "Account is not locked.\n"
 msgstr "Ο λογαριασμός δεν είναι κλειδωμένος.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Ελάχιστο:\t%d\n"
+msgstr "Ελάχιστο:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Μέγιστο:\t%d\n"
+msgstr "Μέγιστο:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Προειδοποίηση:\t%d\n"
+msgstr "Προειδοποίηση:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Ανενεργό:\t%d\n"
+msgstr "Ανενεργό:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
@@ -198,9 +198,9 @@ msgid "No user name specified, no name for uid %d.\n"
 msgstr "Δεν καθορίστηκε όνομα χρήστη, κανένα όνομα για uid %d.\n"
 
 #: apps/lchfn.c:103
-#, fuzzy, c-format
+#, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "Τροποποίηση προσωπικών πληροφοριών."
+msgstr "Τροποποίηση προσωπικών πληροφοριών για %s.\n"
 
 #: apps/lchfn.c:144
 msgid "Full Name"
@@ -746,7 +746,7 @@ msgstr "ομάδα a όνομα a GID"
 #: lib/user.c:1931
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "Μη έγκυρη προεπιλεγμένη τιμή για το πεδίο %s: %s"
 
 #: lib/util.c:193
 #, fuzzy, c-format
@@ -756,8 +756,7 @@ msgstr "Σφάλμα ανοίγματος αρχείου %s"
 #: modules/files.c:117
 #, fuzzy, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
-"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #
 #: modules/files.c:123
@@ -768,8 +767,7 @@ msgstr "Αποτυχία ρύθμισης των διαπιστευτηρίων 
 #: modules/files.c:130
 #, fuzzy, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
+msgstr "Δεν ήταν δυνατή η διαγραφή του αρχείου περιεχομένων του φακέλου `%s': %s"
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
@@ -1101,3 +1099,4 @@ msgstr "Λήψη προεπιλεγμένων ιδιοτήτων χρήστη:\n
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Αντιγραφή δομής χρήστη:\n"
+
