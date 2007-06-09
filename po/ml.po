@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-23 16:17+0100\n"
+"POT-Creation-Date: 2007-06-09 18:56+0200\n"
 "PO-Revision-Date: 2007-03-02 11:49+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam <en@li.org>\n"
@@ -796,7 +796,7 @@ msgstr "`%s'ലേക്ക് എഴുതുവാന്‍ സാധിച്
 msgid "entity object has no %s attribute"
 msgstr "entity object has no %s attribute"
 
-#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
 msgid "error encrypting password"
 msgstr "പാസ്വേഡ് എന്‍ക്രിപ്റ്റ് ചെയ്യുന്നതില്‍ പിഴവ്"
 
@@ -867,108 +867,108 @@ msgstr "Kerberos അഡ്മിന്‍ പ്രിന്‍സിപ്പ�
 msgid "Kerberos Password for Admin Principal"
 msgstr "അഡ്മിന്‍ പ്രിന്‍സിപ്പളിന് Kerberos പാസ്വേഡ്"
 
-#: modules/ldap.c:204
+#: modules/ldap.c:205
 msgid "error initializing ldap library"
 msgstr "error initializing ldap library"
 
-#: modules/ldap.c:215
+#: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP പ്രോട്ടോക്കോള്‍ വേറ്‍ഷന്‍ %dലേക്ക് സെറ്റ് ചെയ്യുവാന്‍ സാധിച്ചില്ല"
 
-#: modules/ldap.c:227
+#: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
 msgstr "could not negotiate TLS with LDAP server"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:421
 msgid "could not bind to LDAP server"
 msgstr "LDAP സറ്‍വറിലേക്ക് bind ചെയ്യുവാന്‍ സാധിച്ചില്ല"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:424
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "could not bind to LDAP server, first attempt as `%s': %s"
 
-#: modules/ldap.c:1314
+#: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "user object had no %s attribute"
 
-#: modules/ldap.c:1323
+#: modules/ldap.c:1336
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "`%s' ഇല്ലാതെയാണ് യൂസറ്‍ ഒബ്ജക്ക്റ്റ് സൃഷ്ടിക്കപ്പെട്ടത്"
 
-#: modules/ldap.c:1341
+#: modules/ldap.c:1354
 msgid "could not convert internal data to LDAPMods"
 msgstr "ഇന്‍റേര്‍ണല്‍ ഡേറ്റാ LDAPModsലേക്ക് കണ്‍വേര്‍ട്ട് ചെയ്യുവാന്‍ സാധ്യമല്ല"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1367
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "ഒരു LDAP ഡയറക്ടറി എന്‍ട്രി നിര്‍മ്മിക്കുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1596
+#: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ഒരു LDAP ഡയറക്ടറി എന്‍ട്രിയില്‍ മാറ്റം വരുത്തുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1407
+#: modules/ldap.c:1420
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP ഡയറക്ടറി എന്‍ട്രിയുടെ പേര് മാറ്റുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1465
 #, c-format
 msgid "object had no %s attribute"
 msgstr "ഒബ്ജക്റ്റിന് %s എന്ന അട്ട്രിബ്യൂട്ടില്ല"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1483
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP ഡയറക്ടറി എന്‍ട്രി നീക്കം ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
-#: modules/ldap.c:1728
+#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
+#: modules/ldap.c:1741
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ഒബ്ജക്റ്റിന് %s എന്ന അട്ട്രിബ്യൂട്ടില്ല"
 
-#: modules/ldap.c:1654
+#: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
 msgstr "LDAP ഡയറക്ടറിയില്‍ അങ്ങനെ ഒരു ഒബ്ജക്റ്റില്ല"
 
-#: modules/ldap.c:1666
+#: modules/ldap.c:1679
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "%s എന്ന അട്ട്രിബ്യൂട്ട് കണ്ടുകിട്ടിയില്ല"
 
-#: modules/ldap.c:1835
+#: modules/ldap.c:1848
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP ഡയറക്ടറിയില്‍ %sനായി പാസ്വേര്‍ഡ് സെറ്റ് ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:2446
+#: modules/ldap.c:2459
 msgid "LDAP Server Name"
 msgstr "LDAP സറ്‍വറ്‍ നെയിം"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2465
 msgid "LDAP Search Base DN"
 msgstr "LDAP സറ്‍ച്ച് ബെയ്സ് DN"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2471
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2478
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind പാസ്വേഡ്"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2482
 msgid "LDAP SASL User"
 msgstr "LDAP SASL യൂസറ്‍"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ഓഥറയിസേഷന്‍"
 

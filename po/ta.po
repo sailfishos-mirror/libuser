@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-23 16:17+0100\n"
+"POT-Creation-Date: 2007-06-09 18:56+0200\n"
 "PO-Revision-Date: 2007-04-12 17:47+0530\n"
 "Last-Translator: I felix <ifelix@redhat.com>\n"
 "Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
@@ -800,7 +800,7 @@ msgstr "`%s'க்கு எழுத முடியவில்லை: %s"
 msgid "entity object has no %s attribute"
 msgstr "உருப்படியில் %s கூறுகள் இல்லை"
 
-#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
 msgid "error encrypting password"
 msgstr "கடவுச்சொல்லை குறிமுறையாக்குவதில் பிழை"
 
@@ -870,108 +870,108 @@ msgstr "Kerberos நிர்வாக தலைமை"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos கடவுச்சொல் நிர்வாக தலைமை"
 
-#: modules/ldap.c:204
+#: modules/ldap.c:205
 msgid "error initializing ldap library"
 msgstr "ldap நூலகத்தை துவக்குவதில் பிழை"
 
-#: modules/ldap.c:215
+#: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP நெறிமுறையைப் பதிப்பு %dக்காக அமைக்க முடியவில்லை"
 
-#: modules/ldap.c:227
+#: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS யுடன் LDAP சேவையகத்தை கேட்க முடியாது"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:421
 msgid "could not bind to LDAP server"
 msgstr "LDAP சேவையகத்துடன் பிணைக்க முடியவில்லை"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:424
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP சேவையகத்துடன் பிணைக்க முடியவில்லை, முதல் முயற்சி `%s': %s"
 
-#: modules/ldap.c:1314
+#: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "பயனர் பொருளில் %s கூறு இல்லை"
 
-#: modules/ldap.c:1323
+#: modules/ldap.c:1336
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "பயனர் பொருள் `%s' இல்லாமல் உருவாக்கப்பட்டது"
 
-#: modules/ldap.c:1341
+#: modules/ldap.c:1354
 msgid "could not convert internal data to LDAPMods"
 msgstr "உள்ளார்ந்த தரவை LDAPModsக்கு மாற்ற முடியவில்லை"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1367
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை உருவாக்கும் போது பிழை: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1596
+#: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை மாற்றும் போது பிழை: %s"
 
-#: modules/ldap.c:1407
+#: modules/ldap.c:1420
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீடுகளை பெயர் மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1465
 #, c-format
 msgid "object had no %s attribute"
 msgstr "பொருளில் %s கூறுகள் இல்லை"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1483
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை நீக்கும் போது பிழை: %s"
 
-#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
-#: modules/ldap.c:1728
+#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
+#: modules/ldap.c:1741
 #, c-format
 msgid "object has no %s attribute"
 msgstr "பொருளுக்கு %s கூறு இல்லை"
 
-#: modules/ldap.c:1654
+#: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
 msgstr "LDAP அடைவில் பொருள் எதுவும் இல்லை"
 
-#: modules/ldap.c:1666
+#: modules/ldap.c:1679
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' கூறு இல்லை"
 
-#: modules/ldap.c:1835
+#: modules/ldap.c:1848
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP அடைவில் %s க்கு கடவுச்சொல் அமைப்பதில் பிழை: %s"
 
-#: modules/ldap.c:2446
+#: modules/ldap.c:2459
 msgid "LDAP Server Name"
 msgstr "LDAP சேவையக பெயர்"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2465
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடல் தளம் DN"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2471
 msgid "LDAP Bind DN"
 msgstr "LDAP பிணைத்தல் DN"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2478
 msgid "LDAP Bind Password"
 msgstr "LDAP பிணைத்தல் கடவுச்சொல்"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2482
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 

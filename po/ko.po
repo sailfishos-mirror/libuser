@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-23 16:17+0100\n"
+"POT-Creation-Date: 2007-06-09 18:56+0200\n"
 "PO-Revision-Date: 2006-12-19 15:37+1000\n"
 "Last-Translator: Eunju Kim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -796,7 +796,7 @@ msgstr "`%s'에 작성할 수 없음: %s"
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
 msgid "error encrypting password"
 msgstr "암호를 암호화하는 도중 오류 발생"
 
@@ -868,108 +868,108 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Admin Principal의 Kerberos 암호"
 
-#: modules/ldap.c:204
+#: modules/ldap.c:205
 msgid "error initializing ldap library"
 msgstr "ldap 라이브러리를 초기화하는 도중 오류가 발생했습니다"
 
-#: modules/ldap.c:215
+#: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "%d 버전에 LDAP 프로토콜을 설정할 수 없습니다"
 
-#: modules/ldap.c:227
+#: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
 msgstr "LDAP 서버와 TLS 연결할 수 없습니다"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:421
 msgid "could not bind to LDAP server"
 msgstr "LDAP 서버와 연결할 수 없습니다"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:424
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP 서버와 연결할 수 없습니다, `%s'로 첫번째 시도: %s"
 
-#: modules/ldap.c:1314
+#: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "사용자 개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1323
+#: modules/ldap.c:1336
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "`%s'(이)가 없는 사용자 개체가 생성되었습니다"
 
-#: modules/ldap.c:1341
+#: modules/ldap.c:1354
 msgid "could not convert internal data to LDAPMods"
 msgstr "내부 데이타를 LDAPMods로 변환할 수 없습니다"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1367
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 생성하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1596
+#: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 목록(entry)을 편집하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1407
+#: modules/ldap.c:1420
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목의 이름을 변경하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1465
 #, c-format
 msgid "object had no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1483
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 삭제하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
-#: modules/ldap.c:1728
+#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
+#: modules/ldap.c:1741
 #, c-format
 msgid "object has no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1654
+#: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
 msgstr "LDAP 디렉토리 안에 그러한 개체가 없습니다"
 
-#: modules/ldap.c:1666
+#: modules/ldap.c:1679
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' 속성을 찾을 수 없습니다"
 
-#: modules/ldap.c:1835
+#: modules/ldap.c:1848
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s의 LDAP 디렉토리 안에 암호를 설정하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:2446
+#: modules/ldap.c:2459
 msgid "LDAP Server Name"
 msgstr "LDAP 서버 이름"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2465
 msgid "LDAP Search Base DN"
 msgstr "LDAP 검색 기반 DN"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2471
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN "
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2478
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 암호"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2482
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 사용자"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 권한부여 사용자"
 

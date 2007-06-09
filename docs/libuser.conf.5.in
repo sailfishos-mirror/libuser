@@ -355,11 +355,11 @@ Default value is empty.
 .TP
 .B bindtype
 The list of bind types to use, separated by commas.
-Allowed bind types are
-.B simple
-and
-.B sasl
-(both case-insensitive).
+Allowed bind types are \fBsimple\fR, \fBsasl\fR, and \fBsasl/\fImechanism\fR,
+where
+.I mechanism
+is a SASL mechanism.
+The bind types (but not necessarily \fImechanism\fR) are case-insensitive.
 If more than one bind type is specified, their relative order is ignored.
 Default value is \fBsimple,sasl\fR.
 

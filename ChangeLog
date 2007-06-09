@@ -1,3 +1,19 @@
+2007-06-09  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Version 0.56.3.
+	* NEWS: Update.
+
+	* modules/ldap.c (struct lu_ldap_context): New member sasl_mechanism.
+	(interact): Return "" to SASL_CB_GETREALM.  Shorten variable names for
+	better formating, simplify a bit.
+	(bind_server): Use context->sasl_mechanism.  Replace contradictory
+	LDAP_SASL_INTERACTIVE | LDAP_SASL_QUIET by LDAP_SASL_AUTOMATIC.
+	(lu_ldap_close_module): Free sasl_mechanism.
+	(libuser_ldap_init): Default ldap/user to "".  Allow specifying SASL
+	bind mechanism as "sasl/MECHANISM".
+	* docs/libuser.conf.5.in: Update bindtype documentation.
+	Original patch by Simo Sorce <ssorce@redhat.com>.
+
 2007-04-28  Miloslav Trmač  <mitr@volny.cz>
 
 	* configure.in

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-23 16:17+0100\n"
+"POT-Creation-Date: 2007-06-09 18:56+0200\n"
 "PO-Revision-Date: 2003-07-27 13:46+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
@@ -792,7 +792,7 @@ msgstr "không thể ghi vào `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr "đối tượnc thực thể không có thuộc tính %s"
 
-#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
 #, fuzzy
 msgid "error encrypting password"
 msgstr "lỗi đặt mật khẩu cho `%s'"
@@ -863,108 +863,108 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos Password for Admin Principal"
 
-#: modules/ldap.c:204
+#: modules/ldap.c:205
 msgid "error initializing ldap library"
 msgstr "lỗi khởi tạo thư viện ldap"
 
-#: modules/ldap.c:215
+#: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "không thể đặt giao thức LDAP cho phiên bản %d"
 
-#: modules/ldap.c:227
+#: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
 msgstr "không thể thỏa thuận TLS với LDAP server"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:421
 msgid "could not bind to LDAP server"
 msgstr "không thể gắn vào LDAP server"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:424
 #, fuzzy, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "không thể gắn vào LDAP server"
 
-#: modules/ldap.c:1314
+#: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "đối tượng người dùng không có thuộc tính %s"
 
-#: modules/ldap.c:1323
+#: modules/ldap.c:1336
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "đối tượng người dùng được tạo mà không có `%s'"
 
-#: modules/ldap.c:1341
+#: modules/ldap.c:1354
 msgid "could not convert internal data to LDAPMods"
 msgstr "không thể chuyển dữ liệu nội tại sang LDAPMods"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1367
 #, fuzzy, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "lỗi đổi tên mục nhập thư mục LDAP: %s.\n"
 
-#: modules/ldap.c:1380 modules/ldap.c:1596
+#: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "lỗi hiệu chỉnh mục nhập thư mục LDAP: %s"
 
-#: modules/ldap.c:1407
+#: modules/ldap.c:1420
 #, fuzzy, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "lỗi đổi tên mục nhập thư mục LDAP: %s.\n"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1465
 #, c-format
 msgid "object had no %s attribute"
 msgstr "đối tượng không có thuộc tính %s"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1483
 #, fuzzy, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "lỗi loại bỏ mục nhập thư mục LDAP: %s.\n"
 
-#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
-#: modules/ldap.c:1728
+#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
+#: modules/ldap.c:1741
 #, c-format
 msgid "object has no %s attribute"
 msgstr "đối tượng không có thuộc tính %s"
 
-#: modules/ldap.c:1654
+#: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
 msgstr "không có đối tượng đó trong thư mục LDAP"
 
-#: modules/ldap.c:1666
+#: modules/ldap.c:1679
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "không tìm thấy thuộc tính `%s'"
 
-#: modules/ldap.c:1835
+#: modules/ldap.c:1848
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "lỗi đặt mật khẩu trong thư mục LDAP cho %s: %s"
 
-#: modules/ldap.c:2446
+#: modules/ldap.c:2459
 msgid "LDAP Server Name"
 msgstr "Tên Server LDAP"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2465
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2471
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2478
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind Password"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2482
 msgid "LDAP SASL User"
 msgstr "Người dùng LDAP SASL"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Authorization User"
 

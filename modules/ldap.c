@@ -146,6 +146,7 @@ struct lu_ldap_context {
 	struct lu_module *module;		/* The module's structure. */
 	struct lu_prompt prompts[LU_LDAP_MAX];	/* Questions and answers. */
 	gboolean bind_simple, bind_sasl;	/* What kind of bind to use. */
+	char *sasl_mechanism;	/* What sasl mechanism to use. */
 	const char *user_branch, *group_branch;	/* Cached config values */
 	char **mapped_user_attributes, **mapped_group_attributes;
 	LDAP *ldap;				/* The connection. */
@@ -234,37 +235,49 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 
 /* Authentication callback. */
 static int
-interact(LDAP *ld, unsigned flags, void *defs, void *xinteract_data)
+interact(LDAP *ld, unsigned flags, void *defs, void *xres)
 {
-	sasl_interact_t *interact_data;
+	sasl_interact_t *res;
 	struct lu_ldap_context *ctx = (struct lu_ldap_context*) defs;
 	int i, retval = LDAP_SUCCESS;
 
 	(void)ld;
 	(void)flags;
-	interact_data = xinteract_data;
-	for(i = 0; interact_data && (interact_data[i].id != SASL_CB_LIST_END);
-	    i++) {
-		interact_data[i].result = NULL;
-		interact_data[i].len = 0;
-		switch(interact_data[i].id) {
-			case SASL_CB_USER:
-				interact_data[i].result = ctx->prompts[LU_LDAP_AUTHUSER].value ?: "";
-				interact_data[i].len = strlen(interact_data[i].result);
+	res = xres;
+	for(i = 0; res && res[i].id != SASL_CB_LIST_END; i++) {
+		res[i].result = NULL;
+		switch(res[i].id) {
+		case SASL_CB_USER:
+			res[i].result = ctx->prompts[LU_LDAP_AUTHUSER].value;
+			if (res[i].result == NULL)
+				res[i].result = "";
 #ifdef DEBUG
-				g_print("Sending SASL user `%s'.\n", (char*)interact_data[i].result);
+			g_print("Sending SASL user `%s'.\n",
+				(const char *)res[i].result);
 #endif
-				break;
-			case SASL_CB_AUTHNAME:
-				interact_data[i].result = ctx->prompts[LU_LDAP_AUTHZUSER].value;
-				interact_data[i].len = strlen(interact_data[i].result);
+			break;
+		case SASL_CB_AUTHNAME:
+			res[i].result = ctx->prompts[LU_LDAP_AUTHZUSER].value;
 #ifdef DEBUG
-				g_print("Sending SASL auth user `%s'.\n", (char*)interact_data[i].result);
+			g_print("Sending SASL auth user `%s'.\n",
+				(const char *)res[i].result);
 #endif
-				break;
-			default:
-				retval = LDAP_OTHER;
+			break;
+		case SASL_CB_GETREALM:
+			/* Always tell sasl to find it on its own. */
+			res[i].result = "";
+			break;
+		default:
+#ifdef DEBUG
+			g_print("Unhandled SASL Intreractive option `%d'.\n",
+				res[i].id);
+#endif
+			retval = LDAP_OTHER;
 		}
+		if (res[i].result != NULL)
+			res[i].len = strlen(res[i].result);
+		else
+			res[i].len = 0;
 	}
 	return retval;
 }
@@ -335,10 +348,10 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 #ifdef DEBUG
 			g_print("Attempting SASL bind to `%s'.\n", binddn);
 #endif
-			ret = ldap_sasl_interactive_bind_s(ldap, binddn, NULL,
+			ret = ldap_sasl_interactive_bind_s(ldap, binddn,
+							   context->sasl_mechanism,
 							   NULL, NULL,
-							   LDAP_SASL_INTERACTIVE |
-							   LDAP_SASL_QUIET,
+							   LDAP_SASL_AUTOMATIC,
 							   interact,
 							   context);
 			if (ret != LDAP_SUCCESS) {
@@ -353,9 +366,9 @@ bind_server(struct lu_ldap_context *context, struct lu_error **error)
 #endif
 			ret = ldap_sasl_interactive_bind_s(ldap,
 							   generated_binddn,
-							   NULL, NULL, NULL,
-							   LDAP_SASL_INTERACTIVE |
-							   LDAP_SASL_QUIET,
+							   context->sasl_mechanism,
+							   NULL, NULL,
+							   LDAP_SASL_AUTOMATIC,
 							   interact, context);
 			if (ret != LDAP_SUCCESS
 			    && first_failure == LDAP_SUCCESS) {
@@ -2405,6 +2418,7 @@ lu_ldap_close_module(struct lu_module *module)
 			ctx->prompts[i].free_value(ctx->prompts[i].value);
 		}
 	}
+	g_free(ctx->sasl_mechanism);
 	g_free(ctx->mapped_user_attributes);
 	g_free(ctx->mapped_group_attributes);
 	g_free(ctx);
@@ -2428,7 +2442,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	struct lu_module *ret;
 	struct lu_ldap_context *ctx;
 	struct lu_prompt prompts[G_N_ELEMENTS(ctx->prompts)];
-	char *user;
 	const char *bind_type;
 	char **bind_types;
 	size_t i;
@@ -2465,13 +2478,11 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = N_("LDAP Bind Password");
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
-	user = getuser();
-
 	ctx->prompts[LU_LDAP_AUTHUSER].key = "ldap/user";
 	ctx->prompts[LU_LDAP_AUTHUSER].prompt = N_("LDAP SASL User");
 	ctx->prompts[LU_LDAP_AUTHUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHUSER].default_value =
-		lu_cfg_read_single(context, "ldap/user", user);
+		lu_cfg_read_single(context, "ldap/user", "");
 
 	ctx->prompts[LU_LDAP_AUTHZUSER].key = "ldap/authuser";
 	ctx->prompts[LU_LDAP_AUTHZUSER].prompt =
@@ -2479,11 +2490,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ctx->prompts[LU_LDAP_AUTHZUSER].visible = TRUE;
 	ctx->prompts[LU_LDAP_AUTHZUSER].default_value =
 		lu_cfg_read_single(context, "ldap/authuser", "");
-
-	if (user) {
-		free(user);
-		user = NULL;
-	}
 
 	/* Try to be somewhat smart and allow the user to specify which bind
 	 * type to use, which should prevent us from asking for information
@@ -2496,6 +2502,11 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 		} else
 		if (g_ascii_strcasecmp(bind_types[i], "sasl") == 0) {
 			ctx->bind_sasl = TRUE;
+			ctx->sasl_mechanism = NULL;
+		}
+		if (g_ascii_strncasecmp(bind_types[i], "sasl/", 5) == 0) {
+			ctx->bind_sasl = TRUE;
+			ctx->sasl_mechanism = g_strdup(bind_types[i] + 5);
 		}
 	}
 	g_strfreev(bind_types);

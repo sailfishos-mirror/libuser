@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-02-23 16:17+0100\n"
+"POT-Creation-Date: 2007-06-09 18:56+0200\n"
 "PO-Revision-Date: 2007-04-12 07:20+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
@@ -802,7 +802,7 @@ msgstr "`%s' ਵਿੱਚ ਲਿਖਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s"
 msgid "entity object has no %s attribute"
 msgstr "ਇੰਦਰਾਜ ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ"
 
-#: modules/files.c:1804 modules/ldap.c:1535 modules/ldap.c:1804
+#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
 msgid "error encrypting password"
 msgstr "ਗੁਪਤ-ਕੋਡ ਇਕਰਿਪਸ਼ਨ ਗਲਤੀ"
 
@@ -872,108 +872,108 @@ msgstr "ਕੀਰਬੀਰੋਸ ਪਰਸ਼ਾਸ਼ਨ ਪ੍ਰਿੰਸੀ�
 msgid "Kerberos Password for Admin Principal"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ ਪ੍ਰਿੰਸੀਪਲ ਲਈ ਕੀਰਬੀਰੋਸ ਗੁਪਤ-ਕੋਡ"
 
-#: modules/ldap.c:204
+#: modules/ldap.c:205
 msgid "error initializing ldap library"
 msgstr "ldap ਲਾਇਬ੍ਰੇਰੀ ਸ਼ੁਰੂ ਕਰਨ ਵਿੱਚ ਗਲਤੀ"
 
-#: modules/ldap.c:215
+#: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "ਵਰਜਨ %d ਲਈ LDAP ਪ੍ਰੋਟੋਕੋਲ ਨਿਰਧਾਰਿਤ ਨਹੀਂ ਕਰ ਸਕਿਆ"
 
-#: modules/ldap.c:227
+#: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS ਨੂੰ LDAP ਸਰਵਰ ਨਾਲ ਗੱਲਬਾਤ ਨਹੀਂ ਕਰਾ ਸਕਿਆ"
 
-#: modules/ldap.c:408
+#: modules/ldap.c:421
 msgid "could not bind to LDAP server"
 msgstr "LDAP ਸਰਵਰ ਨਾਲ ਜੁੜ ਨਹੀਂ ਸਕਿਆ"
 
-#: modules/ldap.c:411
+#: modules/ldap.c:424
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP ਸਰਵਰ ਨਾਲ ਪਹਿਲੀਂ ਕੋਸ਼ਿਸ ਵਿੱਚ `%s' ਵਾਂਗ ਜੁੜਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ: %s"
 
-#: modules/ldap.c:1314
+#: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "ਉਪਭੋਗੀ ਇਕਾਈ ਕੋਲ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ"
 
-#: modules/ldap.c:1323
+#: modules/ldap.c:1336
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "ਉਪਭੋਗੀ ਇਕਾਈ ਬਿਨਾਂ ਕਿਸੇ `%s' ਤੋਂ ਬਣਾਈ ਗਈ ਹੈ"
 
-#: modules/ldap.c:1341
+#: modules/ldap.c:1354
 msgid "could not convert internal data to LDAPMods"
 msgstr "ਅੰਦਰੂਨੀ ਡਾਟੇ ਨੂੰ LDAPMods ਵਿੱਚ ਤਬਦੀਲ ਨਹੀਂ ਕਰ ਸਕਿਆ"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1367
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1596
+#: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਤਬਦੀਲ ਕਰਨ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: modules/ldap.c:1407
+#: modules/ldap.c:1420
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਮੁੜ ਨਾਂ ਦੇਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1465
 #, c-format
 msgid "object had no %s attribute"
 msgstr "ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਸੀ"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1483
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ ਨੂੰ ਹਟਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: modules/ldap.c:1505 modules/ldap.c:1521 modules/ldap.c:1629
-#: modules/ldap.c:1728
+#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
+#: modules/ldap.c:1741
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ਇਕਾਈ ਦੀ ਕੋਈ %s ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਹੈ"
 
-#: modules/ldap.c:1654
+#: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
 msgstr "LDAP ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਅਜਿਹੀ ਕੋਈ ਇਕਾਈ ਨਹੀਂ ਹੈ"
 
-#: modules/ldap.c:1666
+#: modules/ldap.c:1679
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ਕੋਈ `%s' ਵਿਸ਼ੇਸ਼ਤਾ ਨਹੀਂ ਲੱਭੀ"
 
-#: modules/ldap.c:1835
+#: modules/ldap.c:1848
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s ਲਈ LDAP ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਗੁਪਤ-ਕੋਡ ਨਿਰਧਾਰਿਤ ਕਰਨ ਵਿੱਚ ਗਲਤੀ : %s"
 
-#: modules/ldap.c:2446
+#: modules/ldap.c:2459
 msgid "LDAP Server Name"
 msgstr "LDAP ਸਰਵਰ ਨਾਂ"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2465
 msgid "LDAP Search Base DN"
 msgstr "LDAP ਖੋਜ ਮੂਲ DN"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2471
 msgid "LDAP Bind DN"
 msgstr "LDAP ਬੰਧਨ DN"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2478
 msgid "LDAP Bind Password"
 msgstr "LDAP ਬੰਧਨ ਗੁਪਤ-ਕੋਡ"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2482
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ਉਪਯੋਗੀ"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ਪ੍ਰਬੰਧਕੀ ਉਪਯੋਗੀ"
 
