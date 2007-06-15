@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-09 18:56+0200\n"
+"POT-Creation-Date: 2007-06-15 14:15+0200\n"
 "PO-Revision-Date: 2007-02-18 00:29-0300\n"
 "Last-Translator: Domingo Becker <beckerde@hotmail.com>\n"
 "Language-Team: Spanish <en@li.org>\n"
@@ -918,7 +918,7 @@ msgstr "el usuario no tiene nombre ni un UID"
 msgid "group has neither a name nor a GID"
 msgstr "el grupo no tiene un nombre ni un GID"
 
-#: lib/user.c:1931
+#: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Valor por defecto inválido en el campo %s: %s"
@@ -964,11 +964,11 @@ msgstr ""
 # modules/files.c:1593
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
-#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
-#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
-#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
-#: modules/files.c:2441 modules/files.c:2456
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no se pudo abrir `%s': %s"
@@ -1042,13 +1042,13 @@ msgstr "error al encriptar la contraseña"
 
 # modules/files.c:1676 modules/files.c:1732
 # modules/files.c:1675 modules/files.c:1731
-#: modules/files.c:2727 modules/files.c:2805
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "No se ejecuta con privilegios de superusuario."
 
 # modules/files.c:1744
 # modules/files.c:1743
-#: modules/files.c:2818
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "Ningún archivo shadow presente -- deshabilitando."
 

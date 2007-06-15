@@ -1,5 +1,8 @@
 2007-06-15  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Version 0.56.4.
+	* NEWS: Update.
+
 	* tests/files_test.py (Tests.testUserSetpass1)
 	(Tests.testUserRemovepass)
 	* tests/ldap_test.py (Tests.testUserSetpass1)

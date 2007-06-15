@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-09 18:56+0200\n"
+"POT-Creation-Date: 2007-06-15 14:15+0200\n"
 "PO-Revision-Date: 2007-03-02 11:49+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam <en@li.org>\n"
@@ -720,7 +720,7 @@ msgstr "ഉപയോഗിക്കുന്ന ആളിന് പേരോ UID
 msgid "group has neither a name nor a GID"
 msgstr "ഗ്രൂപ്പിന് പേരോ GID-യോ ലഭ്യമല്ല"
 
-#: lib/user.c:1931
+#: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ഫീള്‍ഡിന്‍റെ ഡീഫോള്‍ട്ട് മൂല്ല്യം: %s"
@@ -747,11 +747,11 @@ msgstr "couldn't set default security context to `%s': %s"
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
-#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
-#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
-#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
-#: modules/files.c:2441 modules/files.c:2456
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' തുറക്കുവാന്‍ സാധിച്ചില്ല: %s"
@@ -800,11 +800,11 @@ msgstr "entity object has no %s attribute"
 msgid "error encrypting password"
 msgstr "പാസ്വേഡ് എന്‍ക്രിപ്റ്റ് ചെയ്യുന്നതില്‍ പിഴവ്"
 
-#: modules/files.c:2727 modules/files.c:2805
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "not executing with superuser privileges"
 
-#: modules/files.c:2818
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "ഷാഡോ ഫൈല്‍ ലഭ്യമല്ല -- disabling"
 

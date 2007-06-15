@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-09 18:56+0200\n"
+"POT-Creation-Date: 2007-06-15 14:15+0200\n"
 "PO-Revision-Date: 2007-03-01 16:49+0530\n"
 "Last-Translator: Subhransu Behera <sbehera@redhat.com>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
@@ -719,7 +719,7 @@ msgstr "ଚାଳକ ର କୌଣସି ନାମ କିମ୍ବା ୟୁ.ଆ
 msgid "group has neither a name nor a GID"
 msgstr "ସମୂହ ର କୌଣସି ନାମ କିମ୍ବା ୟୁ.ଆଇ.ଡି. ନାହିଁ"
 
-#: lib/user.c:1931
+#: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ର ଅବୈଧ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ମୂଲ୍ଯ: %s"
@@ -746,11 +746,11 @@ msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ସୁରକ୍ଷା 
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
-#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
-#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
-#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
-#: modules/files.c:2441 modules/files.c:2456
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
@@ -799,11 +799,11 @@ msgstr "ବସ୍ତୁ ର %s ଭଳି କୌଣସି ଗୁଣ ନାହି�
 msgid "error encrypting password"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ କୁ ସଂଗୁପ୍ତ କରିବା ସମୟରେ ତୃଟି"
 
-#: modules/files.c:2727 modules/files.c:2805
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "ପ୍ରମୂଖ ଚାଳକ ର ବିଶେଷ ଆକର୍ଷଣ ମାନଙ୍କ ସହିତ ନିଷ୍ପାଦିତ ହେଉ ନାହିଁ"
 
-#: modules/files.c:2818
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "କୌଣସି ଛାୟା ଫାଇଲ ଉପସ୍ଥିତ ନାହିଁ -- disabling"
 

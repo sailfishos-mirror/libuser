@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-09 18:56+0200\n"
+"POT-Creation-Date: 2007-06-15 14:15+0200\n"
 "PO-Revision-Date: 2007-02-21 14:06+0100\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
@@ -717,7 +717,7 @@ msgstr "bruker har hverken navn eller en UID"
 msgid "group has neither a name nor a GID"
 msgstr "gruppen har hverken et navn eller en GID"
 
-#: lib/user.c:1931
+#: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ugyldig standardverdi for felt %s: %s"
@@ -744,11 +744,11 @@ msgstr "kunne ikke sette forvalgt sikkerhetskontekst til «%s»: %s"
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
-#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
-#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
-#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
-#: modules/files.c:2441 modules/files.c:2456
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "kunne ikke åpne `%s': %s"
@@ -797,11 +797,11 @@ msgstr "entitetsobjekt har ingen %s-attributt"
 msgid "error encrypting password"
 msgstr "feil under kryptering av passord"
 
-#: modules/files.c:2727 modules/files.c:2805
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "kjører ikke med superbruker-privilegier"
 
-#: modules/files.c:2818
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "ingen skyggefil finnes -- deaktiverer"
 

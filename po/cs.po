@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-09 18:56+0200\n"
+"POT-Creation-Date: 2007-06-15 14:15+0200\n"
 "PO-Revision-Date: 2007-02-17 14:20+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -715,7 +715,7 @@ msgstr "uživatel nemá ani jméno, ani UID"
 msgid "group has neither a name nor a GID"
 msgstr "skupina nemá ani jméno, ani GID"
 
-#: lib/user.c:1931
+#: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Neplatná implicitní hodnota pole %s: %s"
@@ -742,11 +742,11 @@ msgstr "nemohu nastavit implicitní kontext zabezpečení na `%s': %s"
 
 #: modules/files.c:173 modules/files.c:507 modules/files.c:818
 #: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1937
-#: modules/files.c:1954 modules/files.c:2043 modules/files.c:2062
-#: modules/files.c:2130 modules/files.c:2151 modules/files.c:2248
-#: modules/files.c:2267 modules/files.c:2326 modules/files.c:2345
-#: modules/files.c:2441 modules/files.c:2456
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "nemohu otevřít `%s': %s"
@@ -795,11 +795,11 @@ msgstr "objekt entita nemá atribut %s"
 msgid "error encrypting password"
 msgstr "chyba při šifrování hesla"
 
-#: modules/files.c:2727 modules/files.c:2805
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "nespuštěno s právy administrátora (root)"
 
-#: modules/files.c:2818
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "chybí soubor shadow -- zakazuji"
 
