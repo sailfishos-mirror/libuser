@@ -340,13 +340,19 @@ class Tests(unittest.TestCase):
     def testUserSetpass1(self):
         e = self.a.initUser('user12_1')
         e[libuser.USERPASSWORD] = '{CRYPT}02oawyZdjhhpg'
+        e[libuser.SHADOWLASTCHANGE] = 100
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user12_1')
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}02oawyZdjhhpg'])
+        self.assertEqual(e[libuser.SHADOWLASTCHANGE], [100])
         self.a.setpassUser(e, 'password', False)
+        del e
+        e = self.a.lookupUserByName('user12_1')
         crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][7:])
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}' + crypted])
+        self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
+
 
     def testUserSetpass2(self):
         e = self.a.initUser('user12_2')
@@ -379,12 +385,17 @@ class Tests(unittest.TestCase):
     def testUserRemovepass1(self):
         e = self.a.initUser('user13_1')
         e[libuser.USERPASSWORD] = '{CRYPT}03dgZm5nZvqOc'
+        e[libuser.SHADOWLASTCHANGE] = 100
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user13_1')
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}03dgZm5nZvqOc'])
+        self.assertEqual(e[libuser.SHADOWLASTCHANGE], [100])
         self.a.removepassUser(e)
+        del e
+        e = self.a.lookupUserByName('user13_1')
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}'])
+        self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
 
     def testUserRemovepass2(self):
         e = self.a.initUser('user13_2')

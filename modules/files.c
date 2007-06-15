@@ -1860,50 +1860,32 @@ static gboolean
 lu_shadow_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		       const char *password, struct lu_error **error)
 {
-	gboolean ret;
-
-	ret = generic_setpass(module, suffix_shadow, 2, ent, password, TRUE, error);
-	if (ret)
-		lu_util_update_shadow_last_change(ent);
-	return ret;
+	return generic_setpass(module, suffix_shadow, 2, ent, password, TRUE,
+			       error);
 }
 
 static gboolean
 lu_shadow_group_setpass(struct lu_module *module, struct lu_ent *ent,
 			const char *password, struct lu_error **error)
 {
-	gboolean ret;
-
-	ret = generic_setpass(module, suffix_gshadow, 2, ent, password, TRUE,
-			      error);
-	if (ret)
-		lu_util_update_shadow_last_change(ent);
-	return ret;
+	return generic_setpass(module, suffix_gshadow, 2, ent, password, TRUE,
+			       error);
 }
 
 static gboolean
 lu_shadow_user_removepass(struct lu_module *module, struct lu_ent *ent,
 		          struct lu_error **error)
 {
-	gboolean ret;
-
-	ret = generic_setpass(module, suffix_shadow, 2, ent, LU_CRYPTED, TRUE,
-			      error);
-	if (ret)
-		lu_util_update_shadow_last_change(ent);
-	return ret;
+	return generic_setpass(module, suffix_shadow, 2, ent, LU_CRYPTED, TRUE,
+			       error);
 }
 
 static gboolean
 lu_shadow_group_removepass(struct lu_module *module, struct lu_ent *ent,
 			   struct lu_error **error)
 {
-	gboolean ret;
-	ret = generic_setpass(module, suffix_gshadow, 2, ent, LU_CRYPTED, TRUE,
-			      error);
-	if (ret)
-		lu_util_update_shadow_last_change(ent);
-	return ret;
+	return generic_setpass(module, suffix_gshadow, 2, ent, LU_CRYPTED, TRUE,
+			       error);
 }
 
 /* Get a list of all of the entries in a given file which patch a

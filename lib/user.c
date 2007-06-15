@@ -1425,11 +1425,12 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 	ret = lu_dispatch(context, user_setpass, tmp, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	g_free(tmp);
-	if (ret) {
-		ret = lu_refresh_user(context, ent, error);
-	}
 	if (ret)
+		ret = lu_refresh_user(context, ent, error);
+	if (ret) {
 		lu_util_update_shadow_last_change(ent);
+		ret = lu_user_modify(context, ent, error);
+	}
 	return ret;
 }
 
@@ -1445,11 +1446,12 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 
 	ret = lu_dispatch(context, user_removepass, NULL, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
-	if (ret) {
-		ret = lu_refresh_user(context, ent, error);
-	}
 	if (ret)
+		ret = lu_refresh_user(context, ent, error);
+	if (ret) {
 		lu_util_update_shadow_last_change(ent);
+		ret = lu_user_modify(context, ent, error);
+	}
 	return ret;
 }
 
@@ -1528,11 +1530,8 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	ret = lu_dispatch(context, group_setpass, tmp, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
 	g_free(tmp);
-	if (ret) {
-		ret = lu_refresh_group(context, ent, error);
-	}
 	if (ret)
-		lu_util_update_shadow_last_change(ent);
+		ret = lu_refresh_group(context, ent, error);
 	return ret;
 }
 
@@ -1548,11 +1547,8 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 
 	ret = lu_dispatch(context, group_removepass, NULL, LU_VALUE_INVALID_ID,
 			  ent, NULL, error);
-	if (ret) {
-		ret = lu_refresh_group(context, ent, error);
-	}
 	if (ret)
-		lu_util_update_shadow_last_change(ent);
+		ret = lu_refresh_group(context, ent, error);
 	return ret;
 }
 

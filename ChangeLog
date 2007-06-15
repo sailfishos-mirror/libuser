@@ -1,3 +1,20 @@
+2007-06-15  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/files_test.py (Tests.testUserSetpass1)
+	(Tests.testUserRemovepass)
+	* tests/ldap_test.py (Tests.testUserSetpass1)
+	(Tests.testUserRemovepass1): Test LU_SHADOWLASTCHANGE is updated.
+
+	* modules/files.c (lu_shadow_user_setpass)
+	(lu_shadow_group_setpass, lu_shadow_user_removepass)
+	(lu_shadow_group_removepass): Remove redundant
+	lu_util_update_shadow_last_change() calls.
+
+	* lib/user.c (lu_user_setpass, lu_user_removepass): Save the modified
+	LU_SHADOWLASTCHANGE value.
+	(lu_group_setpass, lu_group_removepass): Don't update
+	LU_SHADOWLASTCHANGE, the field is valid only for user entities.
+
 2007-06-09  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.3.
