@@ -148,7 +148,7 @@ lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/getdate.y \
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DSYSCONFDIR='"$(sysconfdir)"'
-lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:8:1
+lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:9:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE

@@ -2,6 +2,7 @@
 
 	* configure.in: Version 0.56.4.
 	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
 
 	* tests/files_test.py (Tests.testUserSetpass1)
 	(Tests.testUserRemovepass)
