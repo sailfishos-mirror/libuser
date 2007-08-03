@@ -1,23 +1,23 @@
 # translation of ko.po to
 # translation of ko.po to Korean
 # Copyright (C) 2001 Red Hat, Inc.
+#
 # Michelle Kim <mkim@redhat.com>, 2001,2002.
 # Michelle J Kim <mkim@redhat.com>, 2004.
 # Michelle Ji Yeen Kim <mkim@redhat.com>, 2005, 2006.
-# Eunju Kim <eukim@redhat.com>, 2006.
-#
+# Eunju Kim <eukim@redhat.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-06-15 14:15+0200\n"
-"PO-Revision-Date: 2006-12-19 15:37+1000\n"
+"PO-Revision-Date: 2007-08-03 11:34+1000\n"
 "Last-Translator: Eunju Kim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
 #: modules/files.c:243
@@ -139,28 +139,28 @@ msgid "Account is not locked.\n"
 msgstr "계정이 정지되지 않았습니다.\n"
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "최소값:\t%d\n"
+msgstr "최소값:\t%ld\n"
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "최대값:\t%d\n"
+msgstr "최대값:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "경고:\t%d\n"
+msgstr "경고:\t%ld\n"
 
 #: apps/lchage.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "불활성:\t%d\n"
+msgstr "비활성:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
-msgstr "절대"
+msgstr "없음"
 
 #: apps/lchage.c:182
 #, c-format
@@ -175,7 +175,7 @@ msgstr "암호 만기일:\t%s\n"
 #: apps/lchage.c:201
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "암호 불활성:\t%s\n"
+msgstr "암호 비활성:\t%s\n"
 
 #: apps/lchage.c:208
 #, c-format
@@ -723,12 +723,12 @@ msgstr "그룹은 이름과 GID가 없습니다"
 #: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "%s 란의 기본값이 잘못됨: %s"
 
 #: lib/util.c:193
 #, c-format
 msgid "error locking file: %s"
-msgstr "`' 파일을 잠그는 도중 오류 발생: %s"
+msgstr "파일을 잠그는 도중 오류 발생: %s"
 
 #: modules/files.c:117
 #, c-format
@@ -1061,3 +1061,4 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
+
