@@ -46,7 +46,7 @@ load_one_module(struct lu_context *ctx, const char *module_dir,
 	g_free(tmp);
 
 	/* Open the module. */
-	handle = g_module_open(module_file, 0);
+	handle = g_module_open(module_file, G_MODULE_BIND_LOCAL);
 	if (handle == NULL) {
 		/* If the open failed, we return an error. */
 		lu_error_new(error, lu_error_module_load, "%s",

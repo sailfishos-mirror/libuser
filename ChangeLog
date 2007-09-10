@@ -1,3 +1,7 @@
+2007-09-10  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/modules.c (load_one_module): Use G_MODULE_BIND_LOCAL.
+
 2007-06-15  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.4.
