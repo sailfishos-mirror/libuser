@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-02-17 14:19+0100\n"
-"PO-Revision-Date: 2007-09-21 23:38+0530\n"
+"PO-Revision-Date: 2007-09-23 23:43+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: modules/files.c:234
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "`%s' ಅನ್ನು ಓದುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:131 apps/apputil.c:200
 #, c-format
@@ -32,28 +32,28 @@ msgstr "`%s' ಅನ್ನು ಸೃಜಿಸು: %s"
 #: modules/files.c:217
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "`%s' ನ ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
 #: modules/files.c:249 modules/files.c:263
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "`%s' ಗೆ ಬರೆಯುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "`%s' ಅನ್ನು ತೆಗೆದುಹಾಕುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:545 apps/apputil.c:549
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "ಸವಲತ್ತುಗಳನ್ನು ತ್ಯಜಿಸುವಲ್ಲಿ ದೋಷ.\n"
 
 #: apps/apputil.c:558
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "ಆಂತರಿಕ ದೋಷ.\n"
 
 #: apps/apputil.c:579
 #, c-format
@@ -62,42 +62,42 @@ msgstr ""
 
 #: apps/apputil.c:581
 msgid "Unknown user context"
-msgstr ""
+msgstr "ಅಜ್ಞಾತ ಬಳಕೆದಾರ ಸನ್ನಿವೇಶ"
 
 #: apps/apputil.c:589
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd ಗೆ ಪೂರ್ವನಿಯೋಜಿತ ಸನ್ನಿವೇಶವನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗಿಲ್ಲ\n"
 
 #: apps/apputil.c:598
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "PAM ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲ್ಲಿ ದೋಷ.\n"
 
 #: apps/apputil.c:608 apps/apputil.c:635
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "%s ಗಾಗಿ ದೃಢೀಕರಣವು ವಿಫಲಗೊಂಡಿದೆ.\n"
 
 #: apps/apputil.c:616
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "ಆಂತರಿಕ PAM ದೋಷ `%s'.\n"
 
 #: apps/apputil.c:621
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr ""
+msgstr "ಅಜ್ಞಾತ ಬಳಕೆದಾರನನ್ನು ದೃಢೀಕರಿಸಲಾಗಿದೆ.\n"
 
 #: apps/apputil.c:625
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರರು ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ.\n"
 
 #: apps/lchage.c:115 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[ಆಯ್ಕೆ...] ಬಳಕೆದಾರ"
 
 #: apps/lchage.c:118 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
@@ -110,7 +110,7 @@ msgstr ""
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಹೆಸರು ಸೂಚಿತಗೊಂಡಿಲ್ಲ.\n"
 
 #: apps/lchage.c:137 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
@@ -118,67 +118,67 @@ msgstr ""
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "%s ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ: %s.\n"
 
 #: apps/lchage.c:146 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ.\n"
 
 #: apps/lchage.c:157
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "ಖಾತೆಯು ಲಾಕ್ ಆಗಿದೆ.\n"
 
 #: apps/lchage.c:159
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "ಖಾತೆಯು ಲಾಕ್ ಆಗಿಲ್ಲ.\n"
 
 #: apps/lchage.c:164
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr ""
+msgstr "ಕನಿಷ್ಟ:\t%ld\n"
 
 #: apps/lchage.c:168
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr ""
+msgstr "ಗರಿಷ್ಟ:\t%ld\n"
 
 #: apps/lchage.c:172
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr ""
+msgstr "ಎಚ್ಚರಿಕೆ:\t%ld\n"
 
 #: apps/lchage.c:176
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr ""
+msgstr "ನಿಷ್ಕ್ರಿಯ:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
-msgstr ""
+msgstr "ಎಂದೂ ಅಲ್ಲ"
 
 #: apps/lchage.c:182
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "ಕಡೆಯ ಬದಲಾವಣೆ:\t%s\n"
 
 #: apps/lchage.c:191
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "ಗುಪ್ತಪದದ ಕಾಲಾವಧಿ ಮುಗಿದು ಹೋಗುತ್ತದೆ:\t%s\n"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "ಗುಪ್ತಪದವು ನಿಷ್ಕ್ರಿಯವಾಗಿದೆ:\t%s\n"
 
 #: apps/lchage.c:208
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "ಖಾತೆಯ ಕಾಲಾವಧಿ ಮುಗಿದು ಹೋಗುತ್ತದೆ:\t%s\n"
 
 #: apps/lchage.c:258
 #, c-format
@@ -187,12 +187,12 @@ msgstr ""
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[ಆಯ್ಕೆ...] [ಬಳಕೆದಾರ]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಬಳಕೆದಾರ ಹೆಸರು ಸೂಚಿತಗೊಂಡಿಲ್ಲ, uid %d ಗೆ ಯಾವುದೆ ಹೆಸರಿಲ್ಲ.\n"
 
 #: apps/lchfn.c:103
 #, c-format
@@ -201,31 +201,32 @@ msgstr ""
 
 #: apps/lchfn.c:144
 msgid "Full Name"
-msgstr ""
+msgstr "ಸಂಪೂರ್ಣ ಹೆಸರು"
 
 #: apps/lchfn.c:158
+#, fuzzy
 msgid "Surname"
-msgstr ""
+msgstr "ಅಡ್ಡಹೆಸರು"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
-msgstr ""
+msgstr "ಕೊಡಲಾದ ಹೆಸರು"
 
 #: apps/lchfn.c:183
 msgid "Office"
-msgstr ""
+msgstr "ಕಛೇರಿ"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr ""
+msgstr "ಕಛೇರಿ ದೂರವಾಣಿ ಸಂಖ್ಯೆ"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr ""
+msgstr "ಮನೆಯ ದೂರವಾಣಿ ಸಂಖ್ಯೆ"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr ""
+msgstr "ಈ-ಮೈಲ್ ವಿಳಾಸ"
 
 #: apps/lchfn.c:228
 #, c-format
@@ -244,74 +245,74 @@ msgstr ""
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s ಗಾಗಿ ಶೆಲ್ ಮಾಹಿತಿಯನ್ನು ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ.\n"
 
 #: apps/lchsh.c:118
 msgid "New Shell"
-msgstr ""
+msgstr "ಹೊಸ ಶೆಲ್"
 
 #: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "ಶೆಲ್ ಬದಲಾಗಿಲ್ಲ: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "ಶೆಲ್ ಬದಲಾಗಿದೆ.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[ಆಯ್ಕೆ...] ಸಮೂಹ"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಸಮೂಹದ ಹೆಸರು ನಿಗದಿತಗೊಂಡಿಲ್ಲ.\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ಅಮಾನ್ಯ ಸಮೂಹ ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹದ ರಚನೆ ವಿಫಲಗೊಂಡಿದೆ: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ.\n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವನ್ನು ಅಳಿಸಲಾಗುವುದಿಲ್ಲ: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "-L ಹಾಗೂ -U ಎರಡೂ ಸೂಚಿತಗೊಂಡಿದೆ.\n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ಕ್ಕೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ವಿಫಲತೆ: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವನ್ನು ಲಾಕ್ ಮಾಡಲಾಗಿಲ್ಲ: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವನ್ನು ಅನ್-ಲಾಕ್ ಮಾಡಲಾಗಿಲ್ಲ: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವನ್ನು ಮಾರ್ಪಡಿಸಲಾಗಿಲ್ಲ: %s\n"
 
 #: apps/lid.c:48
 #, c-format
@@ -321,26 +322,26 @@ msgstr ""
 #: apps/lid.c:133
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಸಮೂಹದ ಹೆಸರು ಸೂಚಿತಗೊಂಡಿಲ್ಲ, %s ಅನ್ನು ಬಳಸಲಾಗುತ್ತ್ತಿದೆ.\n"
 
 #: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಸಮೂಹದ ಹೆಸರು ಸೂಚಿತಗೊಂಡಿಲ್ಲ, gid %d ಗೆ ಯಾವುದೆ ಹೆಸರಿಲ್ಲ.\n"
 
 #: apps/lid.c:147
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "ಯಾವುದೆ ಬಳಕೆದಾರರ ಹೆಸರು ಸೂಚಿತಗೊಂಡಿಲ್ಲ, %s ಅನ್ನು ಬಳಸಲಾಗುತ್ತ್ತಿದೆ.\n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[ಆಯ್ಕೆ...]"
 
 #: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "`%s' ಅನ್ನು ತೆರೆಯುವಲ್ಲಿ ದೋಷ: %s.\n"
 
 #: apps/lnewusers.c:122
 #, c-format
@@ -350,7 +351,7 @@ msgstr ""
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ಅಮಾನ್ಯ ಬಳಕೆದಾರ ID %s\n"
 
 #: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
@@ -364,12 +365,12 @@ msgstr ""
 #: apps/lnewusers.c:278
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "%s ಗೆ ಆರಂಭಿಕ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "%s ಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
 #: apps/lnewusers.c:306
 #, c-format
@@ -379,65 +380,65 @@ msgstr ""
 #: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "%s ಗಾಗಿ ಬಳಕೆದಾರ ಖಾತೆಯನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s ಗಾಗಿ ಗುಪ್ತಪದವನ್ನು ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "ಹೊಸ ಗುಪ್ತಪದ"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "ಹೊಸ ಗುಪ್ತಪದ (ಖಚಿತಪಡಿಸಲಾದ)"
 
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "ಗುಪ್ತಪದಗಳು ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ್ಲ, ಪುನಃ ಪ್ರಯತ್ನಿಸಿ.\n"
 
 #: apps/lpasswd.c:133
 #, c-format
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "ಗುಪ್ತಪದದ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ.\n"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "%s ಬಳಕೆದಾರನಿಗೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "%s ಸಮೂಹಕ್ಕೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
-msgstr ""
+msgstr "ಗುಪ್ತಪದ ಬದಲಾಯಿಸಲ್ಪಟ್ಟಿದೆ.\n"
 
 #: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "ಸಮೂಹ %jd ವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ\n"
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "ಸಮೂಹ`%s' ವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
 #: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "ಖಾತೆಯನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
 #: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "%s ಅನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
 #: apps/luseradd.c:331
 #, c-format
@@ -447,105 +448,105 @@ msgstr ""
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನನ್ನು ಅಳಿಸಿಹಾಕಲಾಗಲಿಲ್ಲ: %s.\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s ವು ಒಂದು gid ಸಂಖ್ಯೆಯನ್ನು ಹೊಂದಿಲ್ಲ.\n"
 
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "GID %jd ಹೊಂದಿರುವ ಒಂದು ಸಮೂಹ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ, ತೆಗೆಯಲಾಗುತ್ತಿಲ್ಲ.\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "GID %jd ಹೊಂದಿರುವ ಸಮೂಹಕ್ಕೆ ಒಂದು ಸಮೂಹದ ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ.\n"
 
 #: apps/luserdel.c:135
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ಅನ್ನು ಅಳಿಸಲಾಗುವುದಿಲ್ಲ: %s.\n"
 
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s ವು ಒಂದು ನೆಲೆ ಕಡತ ಕೋಶವನ್ನು ಹೊಂದಿಲ್ಲ.\n"
 
 #: apps/luserdel.c:156
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "%s ಅನ್ನು ತೆಗೆಯುವಲ್ಲಿ ದೋಷ: %s.\n"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನಿಗೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ವಿಫಲತೆ: %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನನ್ನು ಲಾಕ್ ಮಾಡಲಾಗಿಲ್ಲ: %s.\n"
 
 #: apps/lusermod.c:199
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನನ್ನು ಅನ್-ಲಾಕ್ ಮಾಡಲಾಗಿಲ್ಲ: %s.\n"
 
 #: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %s ನನ್ನು ಮಾರ್ಪಾಡು ಮಾಡಲಾಗಿಲ್ಲ: %s.\n"
 
 #: apps/lusermod.c:327
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವನ್ನು ಮಾರ್ಪಾಡು ಮಾಡಲಾಗಿಲ್ಲ: %s.\n"
 
 #: apps/lusermod.c:338
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "%s ಗೆ ಹಳೆಯ ನೆಲೆ ಕಡತಕೋಶವಿಲ್ಲ.\n"
 
 #: apps/lusermod.c:343
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "%s ಗೆ ಹೊಸ ನೆಲೆ ಕಡತಕೋಶವಿಲ್ಲ.\n"
 
 #: apps/lusermod.c:349
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "%s ಅನ್ನು %s ಗೆ ತೆಗೆಯುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
 
 #: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "ಸಂರಚನಾ ಕಡತ `%s' ವನ್ನು ತೆಗೆಯುವಲ್ಲಿ ದೋಷ ಎದುರಾಗಿದೆ: %s"
 
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
+msgstr "ಸಂರಚನಾ ಕಡತ `%s' ವನ್ನು ಆರಂಭಿಸಲಾಗಿಲ್ಲ: %s"
 
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr ""
+msgstr "ಸಂರಚನಾ ಕಡತ `%s' ವು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ"
 
 #: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr ""
+msgstr "ಸಂರಚನಾ ಕಡತ `%s' ವನ್ನು ಓದಲಾಗಿಲ್ಲ: %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "ಯಶಸ್ವಿಯಾಗಿದೆ"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "ಸಂರಚನೆಯಿಂದ ಘಟಕವು ಅಶಕ್ತಗೊಂಡಿದೆ"
 
 #: lib/error.c:46
 msgid "generic error"
@@ -553,27 +554,28 @@ msgstr ""
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "ಸಾಕಷ್ಟು ಸವಲತ್ತುಗಳಿಲ್ಲ"
 
 #: lib/error.c:50
+#, fuzzy
 msgid "access denied"
-msgstr ""
+msgstr "ನಿಲುಕಣೆಯನ್ನು "
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "ಕೆಟ್ಟ ಬಳಕೆದಾರನ/ಸಮೂಹದ ಹೆಸರು"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "ಕೆಟ್ಟ ಬಳಕೆದಾರನ/ಸಮೂಹದ id"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "ಬಳಸಲಾಗುತ್ತಿರುವ ಬಳಕೆದಾರನ/ಸಮೂಹದ ಹೆಸರು"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "ಬಳಸಲಾಗುತ್ತಿರುವ ಬಳಕೆದಾರನ/ಸಮೂಹದ id"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
@@ -581,11 +583,11 @@ msgstr ""
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "ಕಡತವನ್ನು ತೆಗೆಯುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:66
 msgid "error statting file"
@@ -593,39 +595,39 @@ msgstr ""
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "ಕಡತವನ್ನು ಓದುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "ಕಡತಕ್ಕೆ ಬರೆಯುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "ಕಡತದಲ್ಲಿ ದತ್ತಾಂಶವು ಕಂಡುಬಂದಿಲ್ಲ"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "ಆಂತರಿಕ ಆರಂಭಿಕ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "ಘಟಕವನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "ಘಟಕದಲ್ಲಿ ಸಂಕೇತವನ್ನು ಪರಿಹರಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "ಲೈಬ್ರರಿ/ಘಟಕದ ಆವೃತ್ತಿಯು ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "ಅನ್-ಲಾಕ್ ಮಾಡುವುದರಿಂದ ಗುಪ್ತಪದ ಜಾಗವು ಖಾಲಿ ಉಳಿಯುತ್ತದೆ"
 
 #: lib/error.c:88
 msgid "unknown error"
-msgstr ""
+msgstr "ಅಜ್ಞಾತ ದೋಷ"
 
 #: lib/modules.c:65
 #, c-format
@@ -656,28 +658,28 @@ msgstr ""
 
 #: lib/user.c:195
 msgid "name is not set"
-msgstr ""
+msgstr "ಯಾವುದೇ ಹೆಸರು ಹೊಂದಿಸಿಲ್ಲ"
 
 #: lib/user.c:200
 msgid "name is too short"
-msgstr ""
+msgstr "ಹೆಸರು ಬಹಳ ಚಿಕ್ಕದಾಗಿದೆ"
 
 #: lib/user.c:205
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "ಹೆಸರು ಬಹಳ ಉದ್ದವಾಗಿದೆ (%zu > %d)"
 
 #: lib/user.c:212
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "ಹೆಸರು ASCII-ಅಲ್ಲದ ಅಕ್ಷರಗಳನ್ನು ಒಳಗೊಂಡಿದೆ"
 
 #: lib/user.c:219
 msgid "name contains control characters"
-msgstr ""
+msgstr "ಹೆಸರು ನಿಯಂತ್ರಣ ಅಕ್ಷರಗಳನ್ನು ಒಳಗೊಂಡಿದೆ"
 
 #: lib/user.c:226
 msgid "name contains whitespace"
-msgstr ""
+msgstr "ಹೆಸರು ಖಾಲಿ ಜಾಗಗಳನ್ನು ಒಳಗೊಂಡಿದೆ"
 
 #: lib/user.c:238
 msgid "name starts with a hyphen"
@@ -696,17 +698,17 @@ msgstr ""
 #: lib/user.c:319 lib/user.c:345
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "ಸಮೂಹ %s ವು GID ಯನ್ನು ಹೊಂದಿಲ್ಲ"
 
 #: lib/user.c:339
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "ಬಳಕೆದಾರ %jd ನು ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ"
 
 #: lib/user.c:340
 #, c-format
 msgid "group %jd has no name"
-msgstr ""
+msgstr "ಸಮೂಹ %jd ವು ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ"
 
 #: lib/user.c:348
 msgid "user has neither a name nor an UID"
@@ -724,7 +726,7 @@ msgstr ""
 #: lib/util.c:193
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s"
 
 #: modules/files.c:108
 #, c-format
@@ -750,7 +752,7 @@ msgstr ""
 #: modules/files.c:2421 modules/files.c:2436
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "`%s' ಅನ್ನು ತೆರೆಯಲಾಗಿಲ್ಲ: %s"
 
 #: modules/files.c:176 modules/files.c:205 modules/files.c:271
 #: modules/files.c:825 modules/files.c:1233
@@ -785,7 +787,7 @@ msgstr ""
 #: modules/files.c:1301 modules/files.c:1309 modules/files.c:1317
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "`%s' ಗೆ ಬರೆಯಲಾಗಿಲ್ಲ: %s"
 
 #: modules/files.c:1057 modules/files.c:1116
 #, c-format
@@ -852,7 +854,7 @@ msgstr ""
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "ಕರ್ಬರೋಸ್ ಕ್ಷೇತ್ರ(Kerberos Realm)"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
@@ -945,7 +947,7 @@ msgstr ""
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "LDAP ಪರಿಚಾರಕದ ಹೆಸರು"
 
 #: modules/ldap.c:2452
 msgid "LDAP Search Base DN"
@@ -961,7 +963,7 @@ msgstr ""
 
 #: modules/ldap.c:2471
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL ಬಳಕೆದಾರ"
 
 #: modules/ldap.c:2478
 msgid "LDAP SASL Authorization User"
@@ -1001,12 +1003,12 @@ msgstr ""
 #: samples/lookup.c:67
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr ""
+msgstr "%s ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "ಅಮಾನ್ಯ ID %s\n"
 
 #: samples/lookup.c:92
 #, c-format
@@ -1030,7 +1032,7 @@ msgstr ""
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "ನಮೂದು ಕಂಡು ಬಂದಿಲ್ಲ.\n"
 
 #: samples/prompt.c:52
 msgid "Prompts succeeded.\n"
