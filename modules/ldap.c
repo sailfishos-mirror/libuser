@@ -1216,7 +1216,11 @@ static void
 dump_mods(LDAPMod ** mods)
 {
 	size_t i;
-	g_assert(mods != NULL);
+
+	if (mods == NULL) {
+		g_print("NULL modifications");
+		return;
+	}
 	for (i = 0; mods[i]; i++) {
 		g_print("%s (%d)\n", mods[i]->mod_type, mods[i]->mod_op);
 		if (mods[i]->mod_values) {
@@ -1303,7 +1307,7 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	char *name_string;
 	const char *dn, *namingAttr;
 	int err;
-	gboolean ret = FALSE;
+	gboolean ret;
 	struct lu_ldap_context *ctx;
 
 	g_assert(module != NULL);
@@ -1344,40 +1348,31 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
 	g_free(name_string);
 
-	/* Get the list of changes needed. */
-	if (add)
-		mods = get_ent_adds(dn, ent);
-	else
-		mods = get_ent_mods(ent, namingAttr);
-	if (mods == NULL) {
-		lu_error_new(error, lu_error_generic,
-			     _("could not convert internal data to LDAPMods"));
-		return FALSE;
-	}
 	if (add) {
+		mods = get_ent_adds(dn, ent);
 #ifdef DEBUG
 		dump_mods(mods);
 		g_message("Adding `%s'.\n", dn);
 #endif
 		err = ldap_add_ext_s(ctx->ldap, dn, mods, NULL, NULL);
-		if (err == LDAP_SUCCESS)
-			ret = TRUE;
-		else {
+		if (err != LDAP_SUCCESS) {
 			lu_error_new(error, lu_error_write,
 				     _("error creating a LDAP directory "
 				       "entry: %s"), ldap_err2string(err));
+			ret = FALSE;
 			goto err_mods;
 		}
 	} else {
+		mods = get_ent_mods(ent, namingAttr);
 #ifdef DEBUG
 		dump_mods(mods);
 		g_message("Modifying `%s'.\n", dn);
 #endif
-		/* Attempt the modify operation. */
-		err = ldap_modify_ext_s(ctx->ldap, dn, mods, NULL, NULL);
-		if (err == LDAP_SUCCESS)
-			ret = TRUE;
-		else {
+		/* Attempt the modify operation.  The Fedora Directory server
+		   rejects modify operations with no modifications. */
+		if (mods != NULL && mods[0] != NULL) {
+			err = ldap_modify_ext_s(ctx->ldap, dn, mods, NULL,
+						NULL);
 			if (err == LDAP_OBJECT_CLASS_VIOLATION) {
 				/* AAAARGH!  The application decided it wanted
 				 * to add some new attributes!  Damage
@@ -1386,13 +1381,12 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 				err = ldap_modify_ext_s(ctx->ldap, dn, mods,
 							NULL, NULL);
 			}
-			if (err == LDAP_SUCCESS)
-				ret = TRUE;
-			else {
+			if (err != LDAP_SUCCESS) {
 				lu_error_new(error, lu_error_write,
 					     _("error modifying LDAP "
 					       "directory entry: %s"),
 					     ldap_err2string(err));
+				ret = FALSE;
 				goto err_mods;
 			}
 		}
@@ -1401,7 +1395,6 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 		if (arrays_equal(name, old_name) == FALSE) {
 			char *tmp1, *tmp2;
 
-			ret = FALSE;
 			/* Format the name to rename it to. */
 			value = g_value_array_get_nth(name, 0);
 			tmp1 = lu_value_strdup(value);
@@ -1413,17 +1406,17 @@ lu_ldap_set(struct lu_module *module, enum lu_entity_type type, int add,
 			err = ldap_rename_s(ctx->ldap, dn, tmp2, NULL, TRUE,
 					    NULL, NULL);
 			g_free(tmp2);
-			if (err == LDAP_SUCCESS)
-				ret = TRUE;
-			else {
+			if (err != LDAP_SUCCESS) {
 				lu_error_new(error, lu_error_write,
 					     _("error renaming LDAP directory "
 					       "entry: %s"),
 					     ldap_err2string(err));
+				ret = FALSE;
 				goto err_mods;
 			}
 		}
 	}
+	ret = TRUE;
 
  err_mods:
 	free_ent_mods(mods);

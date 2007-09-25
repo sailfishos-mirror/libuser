@@ -1,3 +1,12 @@
+2007-09-25  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/ldap_test.py (Tests.testUserMod4): Test empty modifications.
+
+	* modules/ldap.c (dump_mods): Handle NULL mods.
+	(lu_ldap_set): Do not call ldap_modify_ext_s() when no attributes need
+	to be modified, to avoid spurious errors on Fedora Directory Server.
+	Beautify.
+
 2007-09-10  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/modules.c (load_one_module): Use G_MODULE_BIND_LOCAL.

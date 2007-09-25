@@ -226,6 +226,17 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.UIDNUMBER], [LARGE_ID + 730])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 731])
 
+    def testUserMod4(self):
+        # No modification at all
+        e = self.a.initUser('user7_4')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_4')
+        self.a.modifyUser(e, False)
+        del e
+        e = self.a.lookupUserByName('user7_4')
+        self.assert_(e)
+
     def testUserDel(self):
         e = self.a.initUser('user8_1')
         self.a.addUser(e, False, False)
