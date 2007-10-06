@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-06-15 14:15+0200\n"
-"PO-Revision-Date: 2007-03-10 00:46+0200\n"
+"PO-Revision-Date: 2007-10-06 23:54+0300\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -892,7 +892,7 @@ msgstr "ei voitu sitoutua LDAP-palvelimelle, ensimmäinen yritys `%s': %s"
 #: modules/ldap.c:1327
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "käyttäjäobjektilla ei ole attribuuttia %s"
 
 #: modules/ldap.c:1336
 #, c-format
@@ -911,7 +911,7 @@ msgstr "virhe LDAP-hakemistomerkinnän luomisessa: %s"
 #: modules/ldap.c:1393 modules/ldap.c:1609
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr ""
+msgstr "virhe LDAP-hakemistomerkinnän luomisessa: %s"
 
 #: modules/ldap.c:1420
 #, c-format
@@ -936,7 +936,7 @@ msgstr "elementillä ei ole %s-attribuuttia"
 
 #: modules/ldap.c:1667
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "objektia ei ole LDAP-hakemistossa"
 
 #: modules/ldap.c:1679
 #, c-format
@@ -966,11 +966,11 @@ msgstr "LDAP Bind -salasana"
 
 #: modules/ldap.c:2482
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL -käyttäjä"
 
 #: modules/ldap.c:2489
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL -valtuutuksen käyttäjä"
 
 #: modules/sasldb.c:124
 #, c-format
@@ -1047,7 +1047,7 @@ msgstr ""
 
 #: samples/testuser.c:80
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "Oletuskäyttäjäobjektiluokat:\n"
 
 #: samples/testuser.c:86
 msgid "Default user attribute names:\n"
