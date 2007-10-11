@@ -1,3 +1,18 @@
+2007-10-11  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/files_test.py (workdir): New variable.
+	(Tests.testUserAdd4, Tests.testUserAdd5): New tests.
+
+	* tests/files_test: Pass workdir to files_test.py.
+
+	* apps/apputil.c (lu_homedir_copy): Report an error if the destination
+	(home directory) is a relative path.
+	* python/admin.c (libuser_admin_add_user): Don't ignore a raised
+	exception before creating a mail spool.  Create an exception object
+	if creating a mail spool fails.  Beautify.
+	(libuser_admin_delete_user): Create an exception object if removing
+	a mail spool fails.  Beautify.
+
 2007-09-25  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/ldap_test.py (Tests.testUserMod4): Test empty modifications.

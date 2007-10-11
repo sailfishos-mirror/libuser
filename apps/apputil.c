@@ -117,6 +117,13 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 	LU_ERROR_CHECK(error);
 
+	if (*dest != '/') {
+		lu_error_new(error, lu_error_generic,
+			     _("Home directory path `%s' is not absolute"),
+			     dest);
+		goto err;
+	}
+
 	dir = opendir(src);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,

@@ -737,46 +737,37 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 
 	/* Pass the entity object to lu_user_add(). */
 	ret = libuser_admin_do_wrap(self, ent, lu_user_add);
-	if (ret != NULL) {
-		/* If we got a non-NULL response, then it was okay. */
-		if ((mkhomedir != NULL) && (PyObject_IsTrue(mkhomedir))) {
-			PyObject *subargs, *subkwargs;
+	if (ret != NULL && mkhomedir != NULL && PyObject_IsTrue(mkhomedir)) {
+		PyObject *subargs, *subkwargs;
 
-			/* Free the result we got. */
-			if (ret != NULL) {
-				Py_DECREF(ret);
-			}
-			/* Create the user's home directory we need to pass
-			 * the entity structure in a tuple, so create a tuple
-			 * and add just that object to it. */
-			subargs = PyTuple_New(1);
-			Py_INCREF(ent);
-			PyTuple_SetItem(subargs, 0, (PyObject*) ent);
-			/* Create a dictionary for keyword args. */
-			subkwargs = PyDict_New();
-			if (skeleton != NULL) {
-				Py_INCREF(skeleton);
-				PyDict_SetItemString(subkwargs, "skeleton",
-						     skeleton);
-			}
-			/* We'll return the result of the creation call. */
-			ret = libuser_admin_create_home(self, subargs,
-							subkwargs);
-			Py_DECREF(subargs);
-			Py_DECREF(subkwargs);
+		Py_DECREF(ret);
+		/* Create the user's home directory we need to pass the entity
+		   structure in a tuple, so create a tuple * and add just that
+		   object to it. */
+		subargs = PyTuple_New(1);
+		Py_INCREF(ent);
+		PyTuple_SetItem(subargs, 0, (PyObject*) ent);
+		/* Create a dictionary for keyword args. */
+		subkwargs = PyDict_New();
+		if (skeleton != NULL) {
+			Py_INCREF(skeleton);
+			PyDict_SetItemString(subkwargs, "skeleton", skeleton);
 		}
-		/* If we got a non-NULL response, then it was okay. */
-		if ((mkmailspool != NULL) && (PyObject_IsTrue(mkmailspool))) {
-			if (ret != NULL) {
-				Py_DECREF(ret);
-			}
-			if (lu_mailspool_create_remove(context, ent->ent,
-						       TRUE))
-				ret = PyInt_FromLong(1);
-			else {
-				/* An exception has been thrown. */
-				ret = NULL;
-			}
+		/* We'll return the result of the creation call. */
+		ret = libuser_admin_create_home(self, subargs, subkwargs);
+		Py_DECREF(subargs);
+		Py_DECREF(subkwargs);
+	}
+	if (ret != NULL && mkmailspool != NULL
+	    && PyObject_IsTrue(mkmailspool)) {
+		Py_DECREF(ret);
+		if (lu_mailspool_create_remove(context, ent->ent, TRUE))
+			ret = PyInt_FromLong(1);
+		else {
+			PyErr_SetString(PyExc_RuntimeError,
+					_("error creating mail spool for "
+					  "user"));
+			ret = NULL;
 		}
 	}
 
@@ -873,29 +864,31 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 
 	ret = libuser_admin_do_wrap(self, (struct libuser_entity *)ent,
 				    lu_user_delete);
-	if (ret != NULL) {
-		if ((rmhomedir != NULL) && (PyObject_IsTrue(rmhomedir))) {
-			PyObject *subargs, *subkwargs;
+	if (ret != NULL && rmhomedir != NULL && PyObject_IsTrue(rmhomedir)) {
+		PyObject *subargs, *subkwargs;
 
-			Py_DECREF(ret);
-			subargs = PyTuple_New(1);
-			Py_INCREF(ent);
-			PyTuple_SetItem(subargs, 0, ent);
-			subkwargs = PyDict_New();
-			ret = libuser_admin_remove_home(self, subargs,
-						        subkwargs);
-			Py_DECREF(subargs);
-			Py_DECREF(subkwargs);
-		}
+		Py_DECREF(ret);
+		subargs = PyTuple_New(1);
+		Py_INCREF(ent);
+		PyTuple_SetItem(subargs, 0, ent);
+		subkwargs = PyDict_New();
+		ret = libuser_admin_remove_home(self, subargs, subkwargs);
+		Py_DECREF(subargs);
+		Py_DECREF(subkwargs);
 	}
-	if (ret != NULL) {
-		if ((rmmailspool!= NULL) && (PyObject_IsTrue(rmmailspool))) {
-			struct libuser_entity *entity;
-			Py_DECREF(ret);
-			entity = (struct libuser_entity *)ent;
-			ret = lu_mailspool_create_remove(context, entity->ent,
-							 TRUE)
-				? PyInt_FromLong(1) : NULL;
+	if (ret != NULL && rmmailspool != NULL
+	    && PyObject_IsTrue(rmmailspool)) {
+		struct libuser_entity *entity;
+
+		Py_DECREF(ret);
+		entity = (struct libuser_entity *)ent;
+		if (lu_mailspool_create_remove(context, entity->ent, TRUE))
+			ret = PyInt_FromLong(1);
+		else {
+			PyErr_SetString(PyExc_RuntimeError,
+					_("error removing mail spool for "
+					  "user"));
+			ret = NULL;
 		}
 	}
 

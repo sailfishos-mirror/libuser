@@ -1,8 +1,12 @@
 import crypt
 import libuser
+import os
+import os.path
 import unittest
 
 LARGE_ID = 2147483648
+
+workdir = os.environ['workdir']
 
 # Test case order matches the order of function pointers in struct lu_module
 class Tests(unittest.TestCase):
@@ -194,6 +198,19 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERNAME], ['user6_3'])
         self.assertEqual(e[libuser.UIDNUMBER], [LARGE_ID + 630])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 631])
+
+    def testUserAdd4(self):
+        # Error handling when creating the home directory
+        e = self.a.initUser('user6_4')
+        e[libuser.HOMEDIRECTORY] = os.path.join(workdir, 'this_doesnt_exist',
+                                                'user6_4')
+        self.assertRaises(RuntimeError, self.a.addUser, e, mkmailspool = False)
+
+    def testUserAdd5(self):
+        # Non-absolute home directories
+        e = self.a.initUser('user6_5')
+        e[libuser.HOMEDIRECTORY] = 'this_is_a_relative_path'
+        self.assertRaises(RuntimeError, self.a.addUser, e, mkmailspool = False)
 
     def testUserMod1(self):
         # A minimal case
