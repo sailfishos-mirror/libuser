@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-11 05:40+0200\n"
-"PO-Revision-Date: 2007-06-10 17:36+0200\n"
+"PO-Revision-Date: 2007-10-11 11:57+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Ścieżka do folderu domowego `%s' nie jest absolutna"
 
 #: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
@@ -1002,9 +1002,8 @@ msgid "error creating mail spool for user"
 msgstr "błąd podczas tworzenia buforu poczty dla użytkownika"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "błąd podczas tworzenia buforu poczty dla użytkownika"
+msgstr "błąd podczas usuwania buforu poczty dla użytkownika"
 
 #: samples/lookup.c:67
 #, c-format
@@ -1063,6 +1062,3 @@ msgstr "Pobieranie atrybutów domyślnego użytkownika:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopiowanie struktury użytkownika:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "nie można dokonać konwersji wewnętrznych danych do LDAPMods"
