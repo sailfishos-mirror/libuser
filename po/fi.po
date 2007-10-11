@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-15 14:15+0200\n"
+"POT-Creation-Date: 2007-10-11 05:40+0200\n"
 "PO-Revision-Date: 2007-10-06 23:54+0300\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -18,80 +18,85 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
+#: apps/apputil.c:122
+#, c-format
+msgid "Home directory path `%s' is not absolute"
+msgstr ""
+
+#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Virhe luettaessa `%s': %s"
 
-#: apps/apputil.c:131 apps/apputil.c:200
+#: apps/apputil.c:138 apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Virhe luotaessa `%s': %s"
 
-#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
+#: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
 #: modules/files.c:226
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s':n omistajaa vaihdettaessa tapahtui virhe: %s"
 
-#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
+#: apps/apputil.c:243 apps/apputil.c:275 apps/apputil.c:291
 #: modules/files.c:258 modules/files.c:272
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Virhe kirjoitettaessa `%s': %s"
 
-#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
+#: apps/apputil.c:353 apps/apputil.c:388 apps/apputil.c:405
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Virhe poistettaessa `%s': %s"
 
-#: apps/apputil.c:545 apps/apputil.c:549
+#: apps/apputil.c:552 apps/apputil.c:556
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Oikeuksien pudottaminen epäonnistui.\n"
 
-#: apps/apputil.c:558
+#: apps/apputil.c:565
 #, c-format
 msgid "Internal error.\n"
 msgstr "Sisäinen virhe.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:586
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 "käyttäjällä %s ei ole valtuutusta muuttaa käyttäjän %s finger-tietoja\n"
 
-#: apps/apputil.c:581
+#: apps/apputil.c:588
 msgid "Unknown user context"
 msgstr "Tuntematon käyttäjäympäristö"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:596
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Tiedoston /etc/passwd oletusympäristöä ei voi asettaa\n"
 
-#: apps/apputil.c:598
+#: apps/apputil.c:605
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Virhe PAM:n alustamisessa.\n"
 
-#: apps/apputil.c:608 apps/apputil.c:635
+#: apps/apputil.c:615 apps/apputil.c:642
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Todennus epäonnistui %s:lle.\n"
 
-#: apps/apputil.c:616
+#: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Sisäinen PAM-virhe \"%s\".\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:628
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Tuntematon käyttäjä on kirjautunut.\n"
 
-#: apps/apputil.c:625
+#: apps/apputil.c:632
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Käyttäjän tiedot ei täsmää.\n"
@@ -795,7 +800,7 @@ msgstr "ei voitu kirjoittaa `%s': %s"
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
+#: modules/files.c:1804 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
 msgstr "virhe salasanan kryptauksessa"
 
@@ -889,86 +894,82 @@ msgstr "sitoutuminen LDAP-palvelimeen epäonnistui"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "ei voitu sitoutua LDAP-palvelimelle, ensimmäinen yritys `%s': %s"
 
-#: modules/ldap.c:1327
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "käyttäjäobjektilla ei ole attribuuttia %s"
 
-#: modules/ldap.c:1336
+#: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr ""
 
-#: modules/ldap.c:1354
-msgid "could not convert internal data to LDAPMods"
-msgstr ""
-
-#: modules/ldap.c:1367
+#: modules/ldap.c:1360
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "virhe LDAP-hakemistomerkinnän luomisessa: %s"
 
-#: modules/ldap.c:1393 modules/ldap.c:1609
+#: modules/ldap.c:1386 modules/ldap.c:1602
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "virhe LDAP-hakemistomerkinnän luomisessa: %s"
 
-#: modules/ldap.c:1420
+#: modules/ldap.c:1411
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "virhe LDAP-hakemistomerkinnän uudelleennimeämisessä: %s"
 
-#: modules/ldap.c:1465
+#: modules/ldap.c:1458
 #, c-format
 msgid "object had no %s attribute"
 msgstr "elementillä ei ollut %s-attribuuttia"
 
-#: modules/ldap.c:1483
+#: modules/ldap.c:1476
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "virhe poistettaessa LDAP-hakemistomerkintää: %s"
 
-#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
-#: modules/ldap.c:1741
+#: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
+#: modules/ldap.c:1734
 #, c-format
 msgid "object has no %s attribute"
 msgstr "elementillä ei ole %s-attribuuttia"
 
-#: modules/ldap.c:1667
+#: modules/ldap.c:1660
 msgid "no such object in LDAP directory"
 msgstr "objektia ei ole LDAP-hakemistossa"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1672
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'-attribuuttia ei löytynyt"
 
-#: modules/ldap.c:1848
+#: modules/ldap.c:1841
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 
-#: modules/ldap.c:2459
+#: modules/ldap.c:2452
 msgid "LDAP Server Name"
 msgstr "LDAP-palvelimen nimi"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2458
 msgid "LDAP Search Base DN"
 msgstr ""
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2464
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2471
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind -salasana"
 
-#: modules/ldap.c:2482
+#: modules/ldap.c:2475
 msgid "LDAP SASL User"
 msgstr "LDAP SASL -käyttäjä"
 
-#: modules/ldap.c:2489
+#: modules/ldap.c:2482
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL -valtuutuksen käyttäjä"
 
@@ -999,8 +1000,13 @@ msgstr "virhe kotihakemiston poistamisessa käyttäjälle"
 msgid "error moving home directory for user"
 msgstr "virhe kotihakemiston siirtämisessä käyttäjälle"
 
-#: python/admin.c:691
+#: python/admin.c:691 python/admin.c:768
 msgid "error creating mail spool for user"
+msgstr "virhe postijonon luomisessa käyttäjälle"
+
+#: python/admin.c:889
+#, fuzzy
+msgid "error removing mail spool for user"
 msgstr "virhe postijonon luomisessa käyttäjälle"
 
 #: samples/lookup.c:67

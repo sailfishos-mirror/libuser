@@ -1,5 +1,10 @@
 2007-10-11  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Version 0.56.5.
+	* NEWS: Update.
+
+	* po/LINGUAS: Add kn, ro, te.
+
 	* tests/files_test.py (workdir): New variable.
 	(Tests.testUserAdd4, Tests.testUserAdd5): New tests.
 

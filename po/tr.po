@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-06-15 14:15+0200\n"
+"POT-Creation-Date: 2007-10-11 05:40+0200\n"
 "PO-Revision-Date: 2004-03-15 23:27+0200\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -16,80 +16,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 
-#: apps/apputil.c:123 apps/apputil.c:191 apps/apputil.c:224 apps/apputil.c:251
+#: apps/apputil.c:122
+#, c-format
+msgid "Home directory path `%s' is not absolute"
+msgstr ""
+
+#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' okunurken hata: %s"
 
-#: apps/apputil.c:131 apps/apputil.c:200
+#: apps/apputil.c:138 apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' oluşturulurken hata: %s"
 
-#: apps/apputil.c:139 apps/apputil.c:207 apps/apputil.c:297
+#: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
 #: modules/files.c:226
 #, fuzzy, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "%s için grup oluşturulurken hata.\n"
 
-#: apps/apputil.c:236 apps/apputil.c:268 apps/apputil.c:284
+#: apps/apputil.c:243 apps/apputil.c:275 apps/apputil.c:291
 #: modules/files.c:258 modules/files.c:272
 #, fuzzy, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' oluşturulurken hata: %s"
 
-#: apps/apputil.c:346 apps/apputil.c:381 apps/apputil.c:398
+#: apps/apputil.c:353 apps/apputil.c:388 apps/apputil.c:405
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' silinirken hata: %s"
 
-#: apps/apputil.c:545 apps/apputil.c:549
+#: apps/apputil.c:552 apps/apputil.c:556
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "İzinler bırakılamadı.\n"
 
-#: apps/apputil.c:558
+#: apps/apputil.c:565
 #, c-format
 msgid "Internal error.\n"
 msgstr "İç hata.\n"
 
-#: apps/apputil.c:579
+#: apps/apputil.c:586
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:581
+#: apps/apputil.c:588
 #, fuzzy
 msgid "Unknown user context"
 msgstr "bilinmeyen"
 
-#: apps/apputil.c:589
+#: apps/apputil.c:596
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:598
+#: apps/apputil.c:605
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM başlatılırken hata.\n"
 
-#: apps/apputil.c:608 apps/apputil.c:635
+#: apps/apputil.c:615 apps/apputil.c:642
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s için kimlik sınaması başarısız.\n"
 
-#: apps/apputil.c:616
+#: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "İç PAM hatası `%s'.\n"
 
-#: apps/apputil.c:621
+#: apps/apputil.c:628
 #, fuzzy, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "bilinmeyen"
 
-#: apps/apputil.c:625
+#: apps/apputil.c:632
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Kullanıcı aynı değil.\n"
@@ -793,7 +798,7 @@ msgstr "`%s'e yazılamadı: %s"
 msgid "entity object has no %s attribute"
 msgstr "öğe nesnesi %s özelliğine sahip değil"
 
-#: modules/files.c:1804 modules/ldap.c:1548 modules/ldap.c:1817
+#: modules/files.c:1804 modules/ldap.c:1541 modules/ldap.c:1810
 #, fuzzy
 msgid "error encrypting password"
 msgstr "`%s' için parola belirlenirken hata"
@@ -886,86 +891,82 @@ msgstr "LDAP sunucusuna bağlanılamadı"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP sunucusuna bağlanılamadı"
 
-#: modules/ldap.c:1327
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "kullanıcı nesnesi %s özelliğini içermiyor"
 
-#: modules/ldap.c:1336
+#: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "kullanıcı nesnesi `%s' olmaksızın oluşturuldu"
 
-#: modules/ldap.c:1354
-msgid "could not convert internal data to LDAPMods"
-msgstr "iç veri LDAPMods'a dönüştürülemedi"
-
-#: modules/ldap.c:1367
+#: modules/ldap.c:1360
 #, fuzzy, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi isimlendirilirken hata: %s\n"
 
-#: modules/ldap.c:1393 modules/ldap.c:1609
+#: modules/ldap.c:1386 modules/ldap.c:1602
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi değiştirilirken hata: %s"
 
-#: modules/ldap.c:1420
+#: modules/ldap.c:1411
 #, fuzzy, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi isimlendirilirken hata: %s\n"
 
-#: modules/ldap.c:1465
+#: modules/ldap.c:1458
 #, c-format
 msgid "object had no %s attribute"
 msgstr "nesne %s özelliğini içermiyor"
 
-#: modules/ldap.c:1483
+#: modules/ldap.c:1476
 #, fuzzy, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP dizin girdisi silinirken hata: %s.\n"
 
-#: modules/ldap.c:1518 modules/ldap.c:1534 modules/ldap.c:1642
-#: modules/ldap.c:1741
+#: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
+#: modules/ldap.c:1734
 #, c-format
 msgid "object has no %s attribute"
 msgstr "nesne %s özelliğini içermiyor"
 
-#: modules/ldap.c:1667
+#: modules/ldap.c:1660
 msgid "no such object in LDAP directory"
 msgstr "LDAP dizininde böyle bir nesne yok"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1672
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' özelliği bulunmuyor"
 
-#: modules/ldap.c:1848
+#: modules/ldap.c:1841
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP dizininde %s için parola belirlenirken hata: %s"
 
-#: modules/ldap.c:2459
+#: modules/ldap.c:2452
 msgid "LDAP Server Name"
 msgstr "LDAP Sunucu İsmi"
 
-#: modules/ldap.c:2465
+#: modules/ldap.c:2458
 msgid "LDAP Search Base DN"
 msgstr "LDAP Arama Tabanı DN"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2464
 msgid "LDAP Bind DN"
 msgstr "LDAP Bağlantı DN"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2471
 msgid "LDAP Bind Password"
 msgstr "LDAP Bağlantı Parolası"
 
-#: modules/ldap.c:2482
+#: modules/ldap.c:2475
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Kullanıcısı"
 
-#: modules/ldap.c:2489
+#: modules/ldap.c:2482
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Yetkilendirme Kullanıcısı"
 
@@ -996,8 +997,13 @@ msgstr "bu kullanıcı için ev dizini silinirken hata oluştu:"
 msgid "error moving home directory for user"
 msgstr "bu kullanıcı için eski ev dizini taşınırken hata oluştu:"
 
-#: python/admin.c:691
+#: python/admin.c:691 python/admin.c:768
 msgid "error creating mail spool for user"
+msgstr "bu kullanıcı için posta kuyruğu oluşturulurken hata oluştu:"
+
+#: python/admin.c:889
+#, fuzzy
+msgid "error removing mail spool for user"
 msgstr "bu kullanıcı için posta kuyruğu oluşturulurken hata oluştu:"
 
 #: samples/lookup.c:67
@@ -1057,6 +1063,9 @@ msgstr "Öntanımlı kullanıcı öznitelikleri alınıyor:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kullanıcı yapısı kopyalanıyor:\n"
+
+#~ msgid "could not convert internal data to LDAPMods"
+#~ msgstr "iç veri LDAPMods'a dönüştürülemedi"
 
 #, fuzzy
 #~ msgid "Shell not changed: input error.\n"

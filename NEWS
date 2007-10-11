@@ -1,3 +1,9 @@
+0.56.5
+* Work around spurious error messages when run against the Fedora Directory
+  server
+* Fix error reporting when creating home directories and creating / removing
+  mail spool files
+
 0.56.4
 * Update the last password change date field when changing passwords.
 
