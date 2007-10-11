@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-11 05:40+0200\n"
-"PO-Revision-Date: 2007-02-17 14:35+0000\n"
+"PO-Revision-Date: 2007-10-11 10:36+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "O local da pasta pessoal `%s' não é absoluto"
 
 #: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
@@ -1001,9 +1001,8 @@ msgid "error creating mail spool for user"
 msgstr "erro ao criar o ficheiro de e-mail do utilizador"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "erro ao criar o ficheiro de e-mail do utilizador"
+msgstr "erro ao criar a fila de correio para o utilizador"
 
 #: samples/lookup.c:67
 #, c-format
