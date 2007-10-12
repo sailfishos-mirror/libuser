@@ -1,29 +1,29 @@
-# translation of de.po to 
+# translation of de.po to
 # Copyright (C) 2001 Red Hat, Inc.
+#
 # Claudia Krug <fhonig@redhat.it>, 2001.
 # Bernd Groh <bgroh@redhat.com>, 2002,2003.
 # Verena <vfuehrer@redhat.com>, 2004.
 # Ronny Buchmann <ronny-vlug@vlugnet.org>, 2005,2006.
 # Robert Scheck <redhat@linuxnetz.de>, 2005.
 # PGP-KeyID: 0x037FD3CF <ttrinks@redhat.com>, 2007.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-11 05:40+0200\n"
-"PO-Revision-Date: 2007-02-20 08:09+1000\n"
+"PO-Revision-Date: 2007-10-12 14:28+1000\n"
 "Last-Translator: PGP-KeyID: 0x037FD3CF <ttrinks@redhat.com>\n"
-"Language-Team:  <en@li.org>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Der Verzeichnispfad des Stammverzeichnisses `%s' ist nicht absolut"
 
 #: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
@@ -817,8 +817,7 @@ msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
+msgstr "Fehler bei der Verbindung zum kadm5-Server für Dienst `%s' in Realm %s: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1068,5 +1067,3 @@ msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
 
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "interne Daten konnten nicht in LDAPMods konvertiert werden"
