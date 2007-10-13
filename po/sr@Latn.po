@@ -8,17 +8,19 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-11 05:40+0200\n"
-"PO-Revision-Date: 2007-02-17 17:26-0000\n"
+"PO-Revision-Date: 2007-10-13 20:00-0000\n"
 "Last-Translator: Miloš Komarčević <kmilos@gmail.com>\n"
-"Language-Team: Serbian (sr) <fedora@prevod.org>\n"
+"Language-Team: Serbian (sr) <fedora-trans-sr@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Putanja ličnog direktorijuma „%s“ nije apsolutna"
 
 #: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
@@ -999,9 +1001,8 @@ msgid "error creating mail spool for user"
 msgstr "greška pri pravljenju reda za poštu za korisnika"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "greška pri pravljenju reda za poštu za korisnika"
+msgstr "greška pri uklanjanju reda za poštu za korisnika"
 
 #: samples/lookup.c:67
 #, c-format
@@ -1060,6 +1061,3 @@ msgstr "Dobavljam podrazumevana korisnička svojstva:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Umnožavam korisničku strukturu:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "ne mogu da pretvorim unutrašnje podatke u LDAPMods"
