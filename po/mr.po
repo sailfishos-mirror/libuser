@@ -1,23 +1,26 @@
-# translation of mr.po to Marathi
+# translation of mr.po to marathi
 # Marathi translations for PACKAGE package.
 # Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+#
 # Automatically generated, 2004.
 # Rahul Bhalerao <rbhalera@redhat.com>, 2006.
-#
+# sandeep shedmake <sandeep.shedmake@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-11 05:40+0200\n"
-"PO-Revision-Date: 2006-06-13 14:34+0530\n"
-"Last-Translator: Rahul Bhalerao <rbhalera@redhat.com>\n"
-"Language-Team: Marathi\n"
+"PO-Revision-Date: 2007-10-16 10:40+0530\n"
+"Last-Translator: sandeep shedmake <sandeep.shedmake@gmail.com>\n"
+"Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
+"\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -26,20 +29,20 @@ msgstr ""
 
 #: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
 #: modules/files.c:243
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading `%s': %s"
-msgstr "चूक"
+msgstr "`%s' वाचतेवेळी चूक: %s"
 
 #: apps/apputil.c:138 apps/apputil.c:207
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating `%s': %s"
-msgstr "चूक"
+msgstr "`%s' निर्माण करतेवेळी चूक: %s"
 
 #: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
 #: modules/files.c:226
-#, fuzzy, c-format
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "चूक"
+msgstr "`%s' चा मालक बदलतेवेळी त्रूटी: %s"
 
 #: apps/apputil.c:243 apps/apputil.c:275 apps/apputil.c:291
 #: modules/files.c:258 modules/files.c:272
@@ -55,17 +58,17 @@ msgstr "चूक"
 #: apps/apputil.c:552 apps/apputil.c:556
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "हक्क वगळण्यास अपयशी.\n"
 
 #: apps/apputil.c:565
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "आंतरीक त्रूटी.\n"
 
 #: apps/apputil.c:586
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s ची finger माहिती बदलवण्यास %s ला अधिकार नाही\n"
 
 #: apps/apputil.c:588
 #, fuzzy
@@ -75,7 +78,7 @@ msgstr "अपरिचित"
 #: apps/apputil.c:596
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd करता मूलभूत संदर्भ निश्चित करू शकत नाही\n"
 
 #: apps/apputil.c:605
 #, fuzzy, c-format
@@ -90,22 +93,22 @@ msgstr "अधिप्रमाणन"
 #: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "आंतरीक PAM त्रूटी `%s'.\n"
 
 #: apps/apputil.c:628
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "अपरिचित"
+msgstr "अपरिचित वापरकर्ता अधिप्रमाणित.\n"
 
 #: apps/apputil.c:632
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "वापरकर्ता जुळला नाही.\n"
 
 #: apps/lchage.c:115 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[OPTION...] वापरकर्ता"
 
 #: apps/lchage.c:118 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
@@ -132,32 +135,32 @@ msgstr "चूक"
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "%s वापरकर्ता अस्तित्वात नाही.\n"
 
 #: apps/lchage.c:157
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "खाती कुलूपबंद.\n"
 
 #: apps/lchage.c:159
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "खाती कुलूपबंद नाही.\n"
 
 #: apps/lchage.c:164
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr ""
+msgstr "किमान:\t%ld\n"
 
 #: apps/lchage.c:168
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr ""
+msgstr "कमाल:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "ताकीद"
+msgstr "सावधान:\t%ld\n"
 
 #: apps/lchage.c:176
 #, fuzzy, c-format
@@ -166,12 +169,12 @@ msgstr "गुप्तशब्द"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
-msgstr ""
+msgstr "कधीच नाही"
 
 #: apps/lchage.c:182
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "शेवटचा बदल:\t%s\n"
 
 #: apps/lchage.c:191
 #, fuzzy, c-format
@@ -186,16 +189,16 @@ msgstr "गुप्तशब्द"
 #: apps/lchage.c:208
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "खाती कालबाह्य:\t%s\n"
 
 #: apps/lchage.c:258
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr ""
+msgstr "%s करता एजींग माहिती संपादित करू शकला नाही: %s\n"
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[OPTION...] [वापरकर्ता]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, fuzzy, c-format
@@ -205,54 +208,54 @@ msgstr "नाही"
 #: apps/lchfn.c:103
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr ""
+msgstr "%s करता finger माहिती बदलवा.\n"
 
 #: apps/lchfn.c:144
 msgid "Full Name"
-msgstr ""
+msgstr "पूर्ण नाव"
 
 #: apps/lchfn.c:158
 msgid "Surname"
-msgstr ""
+msgstr "आडनाव"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
-msgstr ""
+msgstr "दिलेले नाव"
 
 #: apps/lchfn.c:183
 msgid "Office"
-msgstr ""
+msgstr "ऑफिस"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr ""
+msgstr "ऑफिस फोन"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr ""
+msgstr "घरचा फोन"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr ""
+msgstr "इमेल पत्ता"
 
 #: apps/lchfn.c:228
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "finger माहिती बदल्यागेली नाह:  आदान त्रूटी.\n"
 
 #: apps/lchfn.c:300
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Finger माहिती बदलवण्यात आली.\n"
 
 #: apps/lchfn.c:303
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Finger माहिती बदलवली नाही: %s.\n"
 
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s कर्ता शेल बदलवत आहे.\n"
 
 #: apps/lchsh.c:118
 #, fuzzy
@@ -262,15 +265,15 @@ msgstr "नविन"
 #: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "शेल बदलवले नाही: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "शेल बदलवले.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[OPTION...] समुह"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, fuzzy, c-format
@@ -280,47 +283,47 @@ msgstr "नाही"
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "अवैध समुह ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr ""
+msgstr "समुह निर्माण करण्यास अपयशी: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "समुह %s अस्तित्वात नाही.\n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "समुह %s काढू शकत नाही: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "दोन्ही -L व -U दर्शविले आहे.\n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "%s समुहकर्ता गुप्तशब्द निश्चित करण्यास अपयशी: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr ""
+msgstr "%s समुह कुलूपबंद करू शकत नाही: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr ""
+msgstr "%s समुह कुलूपबंद करू शकला नाही: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr ""
+msgstr "%s समुह संपादित करू शकला नाही: %s\n"
 
 #: apps/lid.c:48
 #, fuzzy, c-format
@@ -344,7 +347,7 @@ msgstr "नाही"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[OPTION...]"
 
 #: apps/lnewusers.c:90
 #, fuzzy, c-format
@@ -359,11 +362,11 @@ msgstr "चूक"
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "अवैध वापरकर्ता ID %s\n"
 
 #: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "UID 0 सह खाती निर्माण करण्यास नकार.\n"
 
 #: apps/lnewusers.c:221
 #, fuzzy, c-format
@@ -393,7 +396,7 @@ msgstr "चूक"
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s करता गुप्तशब्द बदलवत आहे.\n"
 
 #: apps/lpasswd.c:111
 #, fuzzy
@@ -408,7 +411,7 @@ msgstr "नविन"
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "गुप्तशब्द जुळत नाही, पुन्हा प्रयत्न करा.\n"
 
 #: apps/lpasswd.c:133
 #, fuzzy, c-format
@@ -433,7 +436,7 @@ msgstr "गुप्तशब्द"
 #: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "समुह %jd अस्तित्वात नाही\n"
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, fuzzy, c-format
@@ -443,7 +446,7 @@ msgstr "चूक"
 #: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "खाती निर्माण करण्यास अपयशी: %s.\n"
 
 #: apps/luseradd.c:324
 #, fuzzy, c-format
@@ -458,12 +461,12 @@ msgstr "चूक"
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "%s वापरकर्ता काढू शकला नाही: %s.\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s ला gid क्रमांक नाही.\n"
 
 #: apps/luserdel.c:118
 #, fuzzy, c-format
@@ -473,17 +476,17 @@ msgstr "नाही"
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "GID %jd सह समुहला समुह नाव नाही.\n"
 
 #: apps/luserdel.c:135
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "%s समुह काढू शकला नाही: %s.\n"
 
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s ला मुख्य संचयीका नाही.\n"
 
 #: apps/luserdel.c:156
 #, fuzzy, c-format
@@ -493,32 +496,32 @@ msgstr "चूक"
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "%s वापरकर्त्यास गुप्तशब्द निश्चित करण्यास अपयशी: %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "%s वापरकर्त्यास कुलूपबंद करू शकला नाही: %s.\n"
 
 #: apps/lusermod.c:199
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "%s वापरकर्त्यास कुलूपबंदीतून सुटका करू शकला नाही: %s.\n"
 
 #: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "%s वापरकर्ता संपादित करू शकला नाही: %s.\n"
 
 #: apps/lusermod.c:327
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "समुह %s संपादित करू शकला नाही: %s.\n"
 
 #: apps/lusermod.c:338
-#, fuzzy, c-format
+#, c-format
 msgid "No old home directory for %s.\n"
-msgstr "नाही"
+msgstr "%s करता जुनी मुख्य संचयीका नाही.\n"
 
 #: apps/lusermod.c:343
 #, fuzzy, c-format
@@ -533,90 +536,90 @@ msgstr "चूक"
 #: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "संरचना फाइल `%s' उघडू शकला नाही: %s"
 
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
+msgstr "संरचना फाइल `%s' सुरू करू शकला नाही: %s"
 
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr ""
+msgstr "संरचना फाइल `%s' खूपच मोठी आहे"
 
 #: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr ""
+msgstr "`%s' संरचना फाइल वाचू शकला नाही: %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "यश"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "संरचनाने घटकास अकार्यान्वीत केले"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr ""
+msgstr "प्रजातीय त्रूटी"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "हवे थवडे हक्क नाही"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr ""
+msgstr "प्रवेश निषेध"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "वाईट वापरकर्ता/समुहाचे नाव"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "वाईट वापरकर्ता/समुहाचे आयडी"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "वापरणीत असलेले वापरकर्त्याचे/समुहाचे नाव"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "वापरणीत असलेले वापरकर्त्याचे/समुहाचे आयडी"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "टर्मिनलचे गुणधर्म संपादित करतेवेळी त्रूटी"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "फाइल उघडतेवेळी त्रूटी"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "फाइल कुलूपबंद करतेवेळी त्रूटी"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr ""
+msgstr "त्रूटी दर्शविणारी फाइल"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "फाइल वाचतेवेळी त्रूटी"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "फाइल मध्ये लिहीतेवेळी त्रूटी"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "फाइल मध्ये माहिती आढळली नाही"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "आंतरीक प्रारंभीकरण त्रूटी"
 
 #: lib/error.c:76
 msgid "error loading module"
@@ -1073,3 +1076,4 @@ msgstr ""
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr ""
+
