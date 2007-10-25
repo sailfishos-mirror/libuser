@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-10-11 11:57+0200\n"
+"PO-Revision-Date: 2007-10-25 20:17+0200\n"
 "Last-Translator: Tom Berner <tom@lodz.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -734,9 +734,9 @@ msgid "error locking file: %s"
 msgstr "błąd podczas blokowania pliku %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "nie można ustawić domyślnego kontekstu bezpieczeństwa: %s"
+msgstr "nie można uzyskać domyślnego kontekstu bezpieczeństwa: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -749,9 +749,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "nie można ustawić domyślnego kontekstu bezpieczeństwa dla`%s': %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "nie można ustawić domyślnego kontekstu bezpieczeństwa dla `%s': %s"
+msgstr "nie można ustalić domyślnego kontekstu bezpieczeństwa dla `%s': %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
