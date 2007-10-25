@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-10-13 20:00-0000\n"
+"PO-Revision-Date: 2007-10-25 19:56-0000\n"
 "Last-Translator: Miloš Komarčević <kmilos@gmail.com>\n"
 "Language-Team: Serbian (sr) <fedora-trans-sr@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -732,9 +732,9 @@ msgid "error locking file: %s"
 msgstr "грешка при закључавању датотеке: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "не могу да поставим подразумевани безбедносни контекст: %s"
+msgstr "не могу да добавим подразумевани безбедносни контекст: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -747,9 +747,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "не могу да поставим подразумевани безбедносни контекст на „%s“: %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "не могу да добавим безбедносни контекст за „%s“: %s"
+msgstr "не могу да утврдим безбедносни контекст за „%s“: %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
