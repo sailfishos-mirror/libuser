@@ -154,39 +154,34 @@ lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_files_la_SOURCES = modules/files.c
-modules_libuser_files_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS)
+modules_libuser_files_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
 modules_libuser_shadow_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_shadow_la_SOURCES = modules/files.c
-modules_libuser_shadow_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS)
+modules_libuser_shadow_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
 
 modules_libuser_krb5_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_krb5_la_SOURCES = modules/krb5.c
-modules_libuser_krb5_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS)
+modules_libuser_krb5_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_krb5_la_LIBADD = lib/libuser.la
 
 modules_libuser_ldap_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_ldap_la_SOURCES = modules/ldap.c
-modules_libuser_ldap_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS) -lldap
+modules_libuser_ldap_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) -lldap
 modules_libuser_ldap_la_LIBADD = lib/libuser.la
 
 modules_libuser_sasldb_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_sasldb_la_SOURCES = modules/sasldb.c
-modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS) -lsasl2
+modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) \
+	-lsasl2
 modules_libuser_sasldb_la_LIBADD = lib/libuser.la
 
 python_libusermodule_la_SOURCES = python/libusermodule.c python/common.h \
 	python/debug.h
 python_libusermodule_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
-python_libusermodule_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS)
+python_libusermodule_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 python_libusermodule_la_LIBADD = apps/libapputil.la lib/libuser.la
 
 samples_enum_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)

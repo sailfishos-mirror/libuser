@@ -1,5 +1,13 @@
 2007-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* Makefile.am (modules_libuser_files_la_LDFLAGS)
+	(modules_libuser_shadow_la_LDFLAGS)
+	(modules_libuser_krb5_la_LDFLAGS)
+	(modules_libuser_ldap_la_LDFLAGS)
+	(modules_libuser_sasldb_la_LDFLAGS)
+	(python_libusermodule_la_LDFLAGS): Don't use -export-dynamic, that
+	option is defined only for executables.
+
 	* apps/apputil.c (lu_homedir_copy, lu_homedir_populate)
 	(lu_homedir_move): Set up / preserve SELinux file contexts when
 	creating / copying home directories.
