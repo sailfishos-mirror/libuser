@@ -1,3 +1,7 @@
+0.56.6
+* Set SELinux file contexts when creating home directories and preserve them
+  when moving home directories
+
 0.56.5
 * Work around spurious error messages when run against the Fedora Directory
   server

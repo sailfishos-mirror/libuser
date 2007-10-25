@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-10-11 05:40+0200\n"
+"POT-Creation-Date: 2007-10-25 08:11+0200\n"
 "PO-Revision-Date: 2007-10-11 15:21+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms:  nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -27,84 +28,84 @@ msgstr ""
 "\n"
 "\n"
 
-#: apps/apputil.c:122
+#: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr "ઘર ડિરેક્ટરી પાથ `%s' ચોક્કસ નથી"
 
-#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
-#: modules/files.c:243
+#: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
+#: modules/files.c:186
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' વાંચવામાં ભૂલ: %s"
 
-#: apps/apputil.c:138 apps/apputil.c:207
+#: apps/apputil.c:127 apps/apputil.c:203
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' બનાવવામાં ભૂલ: %s"
 
-#: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
-#: modules/files.c:226
+#: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' નો માલિક બદલવામાં ભૂલ: %s"
 
-#: apps/apputil.c:243 apps/apputil.c:275 apps/apputil.c:291
-#: modules/files.c:258 modules/files.c:272
+#: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
+#: modules/files.c:201 modules/files.c:215
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' લખવામાં ભૂલ: %s"
 
-#: apps/apputil.c:353 apps/apputil.c:388 apps/apputil.c:405
+#: apps/apputil.c:362 apps/apputil.c:397 apps/apputil.c:414
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "`%s' દૂર કરવામાં ભૂલ: %s"
 
-#: apps/apputil.c:552 apps/apputil.c:556
+#: apps/apputil.c:572 apps/apputil.c:576
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "ખાસ ફાયદાઓ છોડી મૂકવામાં નિષ્ફળ.\n"
 
-#: apps/apputil.c:565
+#: apps/apputil.c:585
 #, c-format
 msgid "Internal error.\n"
 msgstr "આંતરિક ભૂલ.\n"
 
-#: apps/apputil.c:586
+#: apps/apputil.c:606
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s એ %s ફીંગર જાણકારી બદલવા માટે સત્તાધિકારીત નથી\n"
 
-#: apps/apputil.c:588
+#: apps/apputil.c:608
 msgid "Unknown user context"
 msgstr "અજ્ઞાત વપરાશકર્તા સંદર્ભ"
 
-#: apps/apputil.c:596
+#: apps/apputil.c:616
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd માટે મૂળભૂત સંદર્ભ સુયોજિત કરી શકતા નથી\n"
 
-#: apps/apputil.c:605
+#: apps/apputil.c:625
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM નો પ્રારંભ કરવામાં ભૂલ.\n"
 
-#: apps/apputil.c:615 apps/apputil.c:642
+#: apps/apputil.c:635 apps/apputil.c:662
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s માટેનું સત્તાધિકરણ નિષ્ફળ.\n"
 
-#: apps/apputil.c:623
+#: apps/apputil.c:643
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "આંતરિક PAM ભૂલ `%s'.\n"
 
-#: apps/apputil.c:628
+#: apps/apputil.c:648
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "અજ્ઞાત વપરાશકર્તા સત્તાધિકારીત થયો.\n"
 
-#: apps/apputil.c:632
+#: apps/apputil.c:652
 #, c-format
 msgid "User mismatch.\n"
 msgstr "વપરાશકર્તા બંધબેસતો નથી.\n"
@@ -736,86 +737,91 @@ msgstr "જૂથને નહિં તો નામ કે GID છે"
 msgid "Invalid default value of field %s: %s"
 msgstr "ક્ષેત્ર %s ની મૂળભૂત કિંમત અયોગ્ય છે: %s"
 
-#: lib/util.c:193
+#: lib/util.c:196
 #, c-format
 msgid "error locking file: %s"
 msgstr "ફાઈલને તાળુ લગાવવામાં ભૂલ: %s"
 
-#: modules/files.c:117
+#: lib/util.c:605
+#, fuzzy, c-format
+msgid "couldn't get default security context: %s"
+msgstr "મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
+
+#: lib/util.c:631
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' નો સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
 
-#: modules/files.c:123
-#, c-format
-msgid "couldn't set default security context: %s"
-msgstr "મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
-
-#: modules/files.c:130
+#: lib/util.c:637 lib/util.c:664
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' માં મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
 
-#: modules/files.c:173 modules/files.c:507 modules/files.c:818
-#: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
-#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
-#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
-#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
-#: modules/files.c:2423 modules/files.c:2438
+#: lib/util.c:658
+#, fuzzy, c-format
+msgid "couldn't determine security context for `%s': %s"
+msgstr "`%s' નો સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
+
+#: modules/files.c:116 modules/files.c:450 modules/files.c:761
+#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
+#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
+#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
+#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
+#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
+#: modules/files.c:2371 modules/files.c:2386
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' ખોલી શક્યા નહિં: %s"
 
-#: modules/files.c:185 modules/files.c:214 modules/files.c:280
-#: modules/files.c:830 modules/files.c:1236
+#: modules/files.c:128 modules/files.c:157 modules/files.c:223
+#: modules/files.c:773 modules/files.c:1181
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' ની સ્થિતિ કહી શક્યા નહિં: %s"
 
-#: modules/files.c:196
+#: modules/files.c:139
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' બનાવવામાં ભૂલ: %s"
 
-#: modules/files.c:209
+#: modules/files.c:152
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "બેકઅપ ફાઈલ `%s' અસ્તિત્વમાં છે અને એ નિયમિત ફાઈલ નથી"
 
-#: modules/files.c:288
+#: modules/files.c:231
 msgid "backup file size mismatch"
 msgstr "બેકઅપ ફાઈલ માપ બંધબેસતું નથી"
 
-#: modules/files.c:860 modules/files.c:1245
+#: modules/files.c:803 modules/files.c:1190
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' માંથી વાંચી શક્યા નહિં: %s"
 
-#: modules/files.c:869 modules/files.c:876
+#: modules/files.c:812 modules/files.c:819
 msgid "entry already present in file"
 msgstr "ફાઈલમાં પ્રવેશ પહેલાથી જ હાજર છે"
 
-#: modules/files.c:883 modules/files.c:893 modules/files.c:904
-#: modules/files.c:1304 modules/files.c:1312 modules/files.c:1320
+#: modules/files.c:826 modules/files.c:836 modules/files.c:847
+#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' માં લખી શક્યા નહિં: %s"
 
-#: modules/files.c:1062 modules/files.c:1121
+#: modules/files.c:1006 modules/files.c:1065
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "એન્ટીટી ઓબ્જેક્ટ પાસે કોઈ %s લક્ષણ નથી"
 
-#: modules/files.c:1804 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
 msgstr "પાસવર્ડ એનક્રિપ્ટ કરવામાં ભૂલ"
 
-#: modules/files.c:2709 modules/files.c:2787
+#: modules/files.c:2657 modules/files.c:2735
 msgid "not executing with superuser privileges"
 msgstr "શ્રેષ્ઠ વપરાશકર્તાની ફાયદાકારક સ્થિતિ સાથે નથી ચલાવી રહ્યા"
 
-#: modules/files.c:2800
+#: modules/files.c:2748
 msgid "no shadow file present -- disabling"
 msgstr "કોઈ શેડો ફાઈલ હાજર નથી -- નિષ્ક્રિય કરી રહ્યા છીએ"
 
@@ -1070,4 +1076,3 @@ msgstr "મૂળભૂત વપરાશકર્તા લક્ષણો મ
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
-

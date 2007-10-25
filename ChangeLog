@@ -1,5 +1,12 @@
 2007-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Version 0.56.6.
+	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update revision.
+
+	* docs/Makefile.am (CLEANFILES): Add sgml/libuser-1.html and
+	sgml/libuser-2.html.
+
 	* Makefile.am (modules_libuser_files_la_LDFLAGS)
 	(modules_libuser_shadow_la_LDFLAGS)
 	(modules_libuser_krb5_la_LDFLAGS)

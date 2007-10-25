@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-10-11 05:40+0200\n"
+"POT-Creation-Date: 2007-10-25 08:11+0200\n"
 "PO-Revision-Date: 2007-02-17 10:14-0500\n"
 "Last-Translator: Magnus Larsson <fedoratrans@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -16,84 +16,84 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/apputil.c:122
+#: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
-#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
-#: modules/files.c:243
+#: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
+#: modules/files.c:186
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Fel vid läsning av \"%s\": %s"
 
-#: apps/apputil.c:138 apps/apputil.c:207
+#: apps/apputil.c:127 apps/apputil.c:203
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Fel vid skapande av \"%s\": %s"
 
-#: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
-#: modules/files.c:226
+#: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Fel vid ägarbyte för \"%s\": %s"
 
-#: apps/apputil.c:243 apps/apputil.c:275 apps/apputil.c:291
-#: modules/files.c:258 modules/files.c:272
+#: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
+#: modules/files.c:201 modules/files.c:215
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Fel vid skrivning till \"%s\": %s"
 
-#: apps/apputil.c:353 apps/apputil.c:388 apps/apputil.c:405
+#: apps/apputil.c:362 apps/apputil.c:397 apps/apputil.c:414
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Fel vid borttagning av \"%s\": %s"
 
-#: apps/apputil.c:552 apps/apputil.c:556
+#: apps/apputil.c:572 apps/apputil.c:576
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Misslyckades med att släppa rättigheter.\n"
 
-#: apps/apputil.c:565
+#: apps/apputil.c:585
 #, c-format
 msgid "Internal error.\n"
 msgstr "Internt fel.\n"
 
-#: apps/apputil.c:586
+#: apps/apputil.c:606
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s är inte auktoriserad att ändra fingerinformationen för %s\n"
 
-#: apps/apputil.c:588
+#: apps/apputil.c:608
 msgid "Unknown user context"
 msgstr "Okänt användarsammanhang"
 
-#: apps/apputil.c:596
+#: apps/apputil.c:616
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Kan inte ställa in standardsammanhanget för /etc/password\n"
 
-#: apps/apputil.c:605
+#: apps/apputil.c:625
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Fel vid initiering av PAM.\n"
 
-#: apps/apputil.c:615 apps/apputil.c:642
+#: apps/apputil.c:635 apps/apputil.c:662
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentisering misslyckades för %s.\n"
 
-#: apps/apputil.c:623
+#: apps/apputil.c:643
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Internt PAM-fel \"%s\".\n"
 
-#: apps/apputil.c:628
+#: apps/apputil.c:648
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Okänd användare autentiserade.\n"
 
-#: apps/apputil.c:632
+#: apps/apputil.c:652
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Matchning av användare misslyckades.\n"
@@ -725,86 +725,91 @@ msgstr "gruppen har varken ett namn eller ett GID"
 msgid "Invalid default value of field %s: %s"
 msgstr "Ogiltigt standardvärde för fält %s: %s"
 
-#: lib/util.c:193
+#: lib/util.c:196
 #, c-format
 msgid "error locking file: %s"
 msgstr "fel vid låsning av fil: %s"
 
-#: modules/files.c:117
+#: lib/util.c:605
+#, fuzzy, c-format
+msgid "couldn't get default security context: %s"
+msgstr "kunde inte ställa in säkerhetssammanhanget: %s"
+
+#: lib/util.c:631
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "kunde inte få tag i säkerhetssammanhanget för \"%s\": %s"
 
-#: modules/files.c:123
-#, c-format
-msgid "couldn't set default security context: %s"
-msgstr "kunde inte ställa in säkerhetssammanhanget: %s"
-
-#: modules/files.c:130
+#: lib/util.c:637 lib/util.c:664
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "kunde inte ställa in standardsäkerhetssammanhanget till \"%s\": %s"
 
-#: modules/files.c:173 modules/files.c:507 modules/files.c:818
-#: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
-#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
-#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
-#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
-#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
-#: modules/files.c:2423 modules/files.c:2438
+#: lib/util.c:658
+#, fuzzy, c-format
+msgid "couldn't determine security context for `%s': %s"
+msgstr "kunde inte få tag i säkerhetssammanhanget för \"%s\": %s"
+
+#: modules/files.c:116 modules/files.c:450 modules/files.c:761
+#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
+#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
+#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
+#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
+#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
+#: modules/files.c:2371 modules/files.c:2386
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "kunde inte öppna \"%s\": %s"
 
-#: modules/files.c:185 modules/files.c:214 modules/files.c:280
-#: modules/files.c:830 modules/files.c:1236
+#: modules/files.c:128 modules/files.c:157 modules/files.c:223
+#: modules/files.c:773 modules/files.c:1181
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "kunde inte ta status på \"%s\": %s"
 
-#: modules/files.c:196
+#: modules/files.c:139
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "fel vid skapande av \"%s\": %s"
 
-#: modules/files.c:209
+#: modules/files.c:152
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "säkerhetskopian \"%s\" finns och är inte en vanlig fil"
 
-#: modules/files.c:288
+#: modules/files.c:231
 msgid "backup file size mismatch"
 msgstr "storleken på säkerhetskopian stämmer inte överens"
 
-#: modules/files.c:860 modules/files.c:1245
+#: modules/files.c:803 modules/files.c:1190
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "kunde inte läsa från \"%s\": %s"
 
-#: modules/files.c:869 modules/files.c:876
+#: modules/files.c:812 modules/files.c:819
 msgid "entry already present in file"
 msgstr "posten finns redan i filen"
 
-#: modules/files.c:883 modules/files.c:893 modules/files.c:904
-#: modules/files.c:1304 modules/files.c:1312 modules/files.c:1320
+#: modules/files.c:826 modules/files.c:836 modules/files.c:847
+#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "kunde inte skriva till \"%s\": %s"
 
-#: modules/files.c:1062 modules/files.c:1121
+#: modules/files.c:1006 modules/files.c:1065
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "enhetsobjektet har inget %s-attribut"
 
-#: modules/files.c:1804 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
 msgstr "fel vid kryptering av lösenord"
 
-#: modules/files.c:2709 modules/files.c:2787
+#: modules/files.c:2657 modules/files.c:2735
 msgid "not executing with superuser privileges"
 msgstr "kör inte med superanvändarrättigheter"
 
-#: modules/files.c:2800
+#: modules/files.c:2748
 msgid "no shadow file present -- disabling"
 msgstr "ingen shadow-fil finns tillgänglig -- inaktiverar"
 

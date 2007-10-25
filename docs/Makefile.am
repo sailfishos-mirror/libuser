@@ -2,7 +2,8 @@ SUBDIRS = reference
 
 man_MANS = libuser.conf.5
 
-CLEANFILES = $(man_MANS) sgml/libuser.html sgml/libuser.txt
+CLEANFILES = $(man_MANS) sgml/libuser.html sgml/libuser-1.html \
+	sgml/libuser-2.html sgml/libuser.txt
 EXTRA_DIST = attributes.txt libuser.conf.5.in rfc2307.txt sgml/libuser.sgml
 
 all: sgml/libuser.txt sgml/libuser.html
