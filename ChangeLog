@@ -1,3 +1,9 @@
+2007-10-25  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/Makefile.am (CLEANFILES): Add sgml/libuser.html and
+	sgml/libuser.txt.
+	(clean-local): Remove.
+
 2007-10-11  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.5.
