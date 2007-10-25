@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-10-11 15:21+0530\n"
+"PO-Revision-Date: 2007-10-25 13:46+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n!=1);\n"
+"Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -743,9 +743,9 @@ msgid "error locking file: %s"
 msgstr "ફાઈલને તાળુ લગાવવામાં ભૂલ: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
+msgstr "મૂળભૂત સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -758,9 +758,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' માં મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "`%s' નો સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
+msgstr "`%s' માટેનો સુરક્ષા સંદર્ભ નક્કી કરી શક્યા નહિં: %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
@@ -1076,3 +1076,4 @@ msgstr "મૂળભૂત વપરાશકર્તા લક્ષણો મ
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
+
