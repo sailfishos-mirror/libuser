@@ -30,6 +30,9 @@
 #include <gmodule.h>
 #include <libintl.h>
 #include <locale.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif
 #include "user.h"
 
 G_BEGIN_DECLS
@@ -277,6 +280,27 @@ struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
+
+/* Handle SELinux fscreate context.  Note that modules built WITH_SELINUX are
+   intentionally not compatible with libuser built !WITH_SELINUX. */
+#ifdef WITH_SELINUX
+typedef security_context_t lu_security_context_t;
+gboolean lu_util_fscreate_save(security_context_t *ctx,
+				      struct lu_error **error);
+void lu_util_fscreate_restore(security_context_t ctx);
+gboolean lu_util_fscreate_from_file(const char *file, struct lu_error **error);
+gboolean lu_util_fscreate_for_path(const char *path, mode_t mode,
+				   struct lu_error **error);
+
+#else
+typedef char lu_security_context_t; /* "Something" */
+#define lu_util_fscreate_save(CTX, ERROR) ((void)(CTX), (void)(ERROR), TRUE)
+#define lu_util_fscreate_restore(CTX) ((void)(CTX))
+#define lu_util_fscreate_from_file(FILE, ERROR) \
+  ((void)(FILE), (void)(ERROR), TRUE)
+#define lu_util_fscreate_for_path(PATH, MODE, ERROR) \
+  ((void)(PATH), (void)(MODE), (void)(ERROR), TRUE)
+#endif
 
 /* Lock a file. */
 gpointer lu_util_lock_obtain(int fd, struct lu_error **error);

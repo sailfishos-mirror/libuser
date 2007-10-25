@@ -148,19 +148,20 @@ lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/getdate.y \
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DSYSCONFDIR='"$(sysconfdir)"'
-lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) -version-info 2:9:1
+lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
+	-version-info 2:9:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_files_la_SOURCES = modules/files.c
 modules_libuser_files_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS) $(SELINUX_LIBS)
+	$(GOBJECT_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
 modules_libuser_shadow_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_shadow_la_SOURCES = modules/files.c
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version -export-dynamic \
-	$(GOBJECT_LIBS) $(SELINUX_LIBS)
+	$(GOBJECT_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
 
 modules_libuser_krb5_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE

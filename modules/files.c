@@ -33,11 +33,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#else
-typedef char security_context_t; /* "Something" */
-#endif
 #include "../lib/user_private.h"
 #include "default.-c"
 
@@ -99,58 +94,6 @@ static const char suffix_passwd[] = "/passwd";
 static const char suffix_shadow[] = "/shadow";
 static const char suffix_group[] = "/group";
 static const char suffix_gshadow[] = "/gshadow";
-
-static gboolean
-set_default_context(const char *filename, security_context_t *prev_context,
-		    struct lu_error **error)
-{
-	(void)filename;
-	(void)prev_context;
-	(void)error;
-#ifdef WITH_SELINUX
-	*prev_context = NULL;
-	if (is_selinux_enabled() > 0) {
-		security_context_t scontext;
-
-		if (getfilecon(filename, &scontext) < 0) {
-			lu_error_new(error, lu_error_stat,
-				     _("couldn't get security context of "
-				       "`%s': %s"), filename, strerror(errno));
-			return FALSE;
-		}
-		if (getfscreatecon(prev_context) < 0) {
-			lu_error_new(error, lu_error_stat,
-				     _("couldn't set default security "
-				       "context: %s"), strerror(errno));
-			freecon(scontext);
-			return FALSE;
-		}
-		if (setfscreatecon(scontext) < 0) {
-			lu_error_new(error, lu_error_stat,
-				     _("couldn't set default security context "
-				       "to `%s': %s"), scontext,
-				     strerror(errno));
-			freecon(scontext);
-			return FALSE;
-		}
-		freecon(scontext);
-	}
-#endif
-	return TRUE;
-}
-
-static void
-reset_default_context(security_context_t prev_context, struct lu_error **error)
-{
-	(void)prev_context;
-	(void)error;
-#ifdef WITH_SELINUX
-	setfscreatecon(prev_context);
-	if (prev_context) {
-		freecon(prev_context);
-	}
-#endif
-}
 
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
@@ -781,7 +724,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	    format_fn formatter, struct lu_ent *ent,
 	    struct lu_error **error)
 {
-	security_context_t prev_context;
+	lu_security_context_t fscreate;
 	const char *dir;
 	char *key, *line, *filename, *contents;
 	char *fragment1, *fragment2;
@@ -802,14 +745,14 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!set_default_context(filename, &prev_context, error)) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_filename;
+	if (!lu_util_fscreate_from_file(filename, error))
+		goto err_fscreate;
 
 	/* Create a backup copy of the file we're about to modify. */
 	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_filename;
+		goto err_fscreate;
 
 	/* Open the file. */
 	fd = open(filename, O_RDWR);
@@ -817,7 +760,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		goto err_filename;
+		goto err_fscreate;
 	}
 
 	/* Lock the file. */
@@ -922,9 +865,10 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	reset_default_context(prev_context, error);
 	return ret;
 }
 
@@ -1033,7 +977,7 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	    const struct format_specifier *formats, size_t format_count,
 	    struct lu_ent *ent, struct lu_error **error)
 {
-	security_context_t prev_context;
+	lu_security_context_t fscreate;
 	char *filename, *key;
 	int fd = -1;
 	gpointer lock;
@@ -1070,13 +1014,13 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!set_default_context(filename, &prev_context, error)) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_filename;
+	if (!lu_util_fscreate_from_file(filename, error))
+		goto err_fscreate;
 	/* Create a backup file. */
 	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_filename;
+		goto err_fscreate;
 
 	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
@@ -1084,7 +1028,7 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		goto err_filename;
+		goto err_fscreate;
 	}
 
 	/* Lock the file. */
@@ -1131,9 +1075,10 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	reset_default_context(prev_context, error);
 	return ret;
 }
 
@@ -1178,7 +1123,7 @@ static gboolean
 generic_del(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
-	security_context_t prev_context;
+	lu_security_context_t fscreate;
 	GValueArray *name = NULL;
 	GValue *value;
 	char *contents, *filename, *key;
@@ -1209,13 +1154,13 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!set_default_context(filename, &prev_context, error)) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_filename;
+	if (!lu_util_fscreate_from_file(filename, error))
+		goto err_fscreate;
 	/* Create a backup of that file. */
 	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_filename;
+		goto err_fscreate;
 
 	/* Open the file to be modified. */
 	fd = open(filename, O_RDWR);
@@ -1223,7 +1168,7 @@ generic_del(struct lu_module *module, const char *file_suffix,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		goto err_filename;
+		goto err_fscreate;
 	}
 
 	/* Lock the file. */
@@ -1330,9 +1275,10 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	reset_default_context(prev_context, error);
 	return ret;
 }
 
@@ -1412,7 +1358,7 @@ static gboolean
 generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
-	security_context_t prev_context;
+	lu_security_context_t fscreate;
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename, *key;
@@ -1439,13 +1385,13 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!set_default_context(filename, &prev_context, error)) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_filename;
+	if (!lu_util_fscreate_from_file(filename, error))
+		goto err_fscreate;
 	/* Create a backup of the file. */
 	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_filename;
+		goto err_fscreate;
 
 	/* Open the file. */
 	fd = open(filename, O_RDWR);
@@ -1453,7 +1399,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		goto err_filename;
+		goto err_fscreate;
 	}
 
 	/* Lock the file. */
@@ -1493,9 +1439,10 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	reset_default_context(prev_context, error);
 	return ret;
 }
 
@@ -1716,7 +1663,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_ent *ent, const char *password, gboolean is_shadow,
 		struct lu_error **error)
 {
-	security_context_t prev_context;
+	lu_security_context_t fscreate;
 	GValueArray *name = NULL;
 	GValue *val;
 	char *filename, *key, *value, *namestring;
@@ -1742,10 +1689,10 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!set_default_context(filename, &prev_context, error)) {
-		g_free(filename);
-		return FALSE;
-	}
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_filename;
+	if (!lu_util_fscreate_from_file(filename, error))
+		goto err_fscreate;
 
 	/* Create a backup of the file. */
 	if (lu_files_create_backup(filename, error) == FALSE)
@@ -1757,7 +1704,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		goto err_filename;
+		goto err_fscreate;
 	}
 
 	/* Lock the file. */
@@ -1817,8 +1764,9 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
  err_filename:
-	reset_default_context(prev_context, error);
 	g_free(filename);
 	return ret;
 }

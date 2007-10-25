@@ -34,6 +34,9 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif
 #define LU_DEFAULT_SALT_TYPE "$1$"
 #define LU_DEFAULT_SALT_LEN  8
 #define LU_MAX_LOCK_ATTEMPTS 6
@@ -591,3 +594,80 @@ lu_util_update_shadow_last_change(struct lu_ent *ent)
 	lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
 	g_value_unset(&value);
 }
+
+#ifdef WITH_SELINUX
+/* Store current fscreate context to ctx. */
+gboolean
+lu_util_fscreate_save(security_context_t *ctx, struct lu_error **error)
+{
+	if (is_selinux_enabled() > 0 && getfscreatecon(ctx) < 0) {
+		lu_error_new(error, lu_error_generic,
+			     _("couldn't get default security context: %s"),
+			     strerror(errno));
+		return FALSE;
+	}
+	return TRUE;
+}
+
+/* Restore fscreate context from ctx, and free it. */
+void
+lu_util_fscreate_restore(security_context_t ctx)
+{
+	/* Don't check is_selinux_enabled(), we ignore errors anyway */
+	(void)setfscreatecon(ctx);
+	if (ctx)
+		freecon(ctx);
+}
+
+/* Set fscreate context from context of file. */
+gboolean
+lu_util_fscreate_from_file(const char *file, struct lu_error **error)
+{
+	if (is_selinux_enabled() > 0) {
+		security_context_t ctx;
+
+		if (getfilecon(file, &ctx) < 0) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't get security context of "
+				       "`%s': %s"), file, strerror(errno));
+			return FALSE;
+		}
+		if (setfscreatecon(ctx) < 0) {
+			lu_error_new(error, lu_error_generic,
+				     _("couldn't set default security context "
+				       "to `%s': %s"), ctx, strerror(errno));
+			freecon(ctx);
+			return FALSE;
+		}
+		freecon(ctx);
+	}
+	return TRUE;
+}
+
+/* Set fscreate context for creating a file at path, with file type specified
+   by mode. */
+gboolean
+lu_util_fscreate_for_path(const char *path, mode_t mode,
+			  struct lu_error **error)
+{
+	if (is_selinux_enabled() > 0) {
+		security_context_t ctx;
+
+		if (matchpathcon(path, mode, &ctx) < 0) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't determine security context "
+				       "for `%s': %s"), path, strerror(errno));
+			return FALSE;
+		}
+		if (setfscreatecon(ctx) < 0) {
+			lu_error_new(error, lu_error_generic,
+				     _("couldn't set default security context "
+				       "to `%s': %s"), ctx, strerror(errno));
+			freecon(ctx);
+			return FALSE;
+		}
+		freecon(ctx);
+	}
+	return TRUE;
+}
+#endif

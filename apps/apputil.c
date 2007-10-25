@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2005, 2006 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005, 2006, 2007 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -46,8 +46,9 @@
 #include <selinux/flask.h>
 #include <selinux/context.h>
 #endif
-#include "../lib/user.h"
 #include "../lib/error.h"
+#include "../lib/user.h"
+#include "../lib/user_private.h"
 #include "apputil.h"
 
 #ifdef WITH_SELINUX
@@ -83,32 +84,20 @@ check_access(const char *chuser, access_vector_t access)
 	}
 	return status;
 }
-
-static int
-setup_default_context(const char *orig_file)
-{
-	if (is_selinux_enabled() > 0) {
-		security_context_t scontext;
-
-		if (getfilecon(orig_file, &scontext) < 0)
-			return -1;
-
-		if (setfscreatecon(scontext) < 0) {
-			freecon(scontext);
-			return -1;
-		}
-		freecon(scontext);
-	}
-	return 0;
-}
 #endif
 
 /* Copy the "src" directory to "dest", setting all ownerships as given, and
    setting the mode of the top-level directory as given.  The group ID of the
-   copied files is preserved if it is nonzero. */
+   copied files is preserved if it is nonzero.  If keep_contexts, preserve
+   SELinux contexts in files under dest; use matchpathcon otherwise.
+
+   Note that keep_contexts does NOT affect the context of dest; the caller must
+   perform an explicit setfscreatecon() before calling lu_homedir_copy() to set
+   the context of dest.  The SELinux fscreate context is on return from this
+   function is unspecified. */
 static gboolean
 lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
-		mode_t mode, struct lu_error **error)
+		mode_t mode, gboolean keep_contexts, struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
@@ -172,6 +161,13 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		if (lstat(srcpath, &st) != 0)
 			continue;
 
+		if (keep_contexts != 0) {
+			if (!lu_util_fscreate_from_file(srcpath, error))
+				goto err_dir;
+		} else if (!lu_util_fscreate_for_path(path, st.st_mode & S_IFMT,
+						      error))
+			goto err_dir;
+
 		/* We always want to preserve atime/mtime. */
 		timebuf.actime = st.st_atime;
 		timebuf.modtime = st.st_mtime;
@@ -180,7 +176,7 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(srcpath, path, owner,
 					     st.st_gid ?: group, st.st_mode,
-					     error))
+					     keep_contexts, error))
 				/* Aargh!  Fail up. */
 				goto err_dir;
 			/* Set the date on the directory. */
@@ -331,10 +327,23 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		    const char *directory, uid_t owner, gid_t group,
 		    mode_t mode, struct lu_error **error)
 {
+	lu_security_context_t fscreate;
+	gboolean ret;
+
 	if (skeleton == NULL)
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
 					      "/etc/skel");
-	return lu_homedir_copy(skeleton, directory, owner, group, mode, error);
+	ret = FALSE;
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err;
+	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
+		goto err_fscreate;
+	ret = lu_homedir_copy(skeleton, directory, owner, group, mode, 0,
+			      error);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
+err:
+	return ret;
 }
 
 /* Recursively remove a user's home (or really, any) directory. */
@@ -416,18 +425,29 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 		struct lu_error ** error)
 {
 	struct stat st;
+	lu_security_context_t fscreate;
 
 	LU_ERROR_CHECK(error);
 
 	/* If the directory exists... */
-	if (stat(oldhome, &st) != -1) {
-		/* ... and we can copy it ... */
-		if (lu_homedir_copy(oldhome, newhome, st.st_uid, st.st_gid,
-				    st.st_mode, error))
-			/* ... remove the old one. */
-			return lu_homedir_remove(oldhome, error);
-	}
+	if (stat(oldhome, &st) != 0)
+		goto err;
 
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err;
+	if (!lu_util_fscreate_from_file(oldhome, error))
+		goto err_fscreate;
+	/* ... and we can copy it ... */
+	if (!lu_homedir_copy(oldhome, newhome, st.st_uid, st.st_gid,
+			     st.st_mode, 1, error))
+		goto err_fscreate;
+	lu_util_fscreate_restore(fscreate);
+	/* ... remove the old one. */
+	return lu_homedir_remove(oldhome, error);
+
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
+err:
 	return FALSE;
 }
 
@@ -591,7 +611,7 @@ lu_authenticate_unprivileged(const char *user, const char *appname)
 			goto err;
 		}
 		/* FIXME: is this right for lpasswd? */
-		if (setup_default_context("/etc/passwd") != 0) {
+		if (!lu_util_fscreate_from_file("/etc/passwd", NULL)) {
 			fprintf(stderr,
 				_("Can't set default context for "
 				  "/etc/passwd\n"));

@@ -1,5 +1,28 @@
 2007-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_homedir_copy, lu_homedir_populate)
+	(lu_homedir_move): Set up / preserve SELinux file contexts when
+	creating / copying home directories.
+
+	* lib/user_private.h (lu_security_context_t, lu_util_fscreate_save)
+	(lu_util_fscreate_restore, lu_util_fscreate_from_file)
+	(lu_util_fscreate_for_path): New declarations.
+	* lib/util.c (lu_util_fscreate_save, lu_util_fscreate_restore)
+	(lu_util_fscreate_from_file, lu_util_fscreate_for_path): New functions.
+	* modules/files.c (set_default_context, reset_default_context): Remove.
+	(generic_add, generic_mod, generic_del, generic_lock)
+	(generic_setpass): Use lu_util_fscreate_save(),
+	lu_util_fscreate_from_file() and lu_util_fscreate_restore() instead of
+	set_default_context() and reset_default_context().  (This fixes a
+	possible leak of prev_context).
+	* apps/apputil.c (setup_default_context): Remove.
+	(lu_authenticate_unprivileged): Use lu_util_fscreate_from_file() instead
+	of setup_default_context().
+	* Makefile.am (lib_libuser_la_LDFLAGS): Link to SELINUX_LIBS.
+	(modules_libuser_files_la_LDFLAGS)
+	(modules_libuser_shadow_la_LDFLAGS): Don't link to SELINUX_LIBS
+	directly.
+
 	* docs/Makefile.am (CLEANFILES): Add sgml/libuser.html and
 	sgml/libuser.txt.
 	(clean-local): Remove.
