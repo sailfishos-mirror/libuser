@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-10-18 20:35+0300\n"
+"PO-Revision-Date: 2007-10-26 23:36+0300\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -735,9 +735,9 @@ msgid "error locking file: %s"
 msgstr "virhe tiedoston lukitsemisessa: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "ei voitu asettaa oletusturvaympäristöä: %s"
+msgstr "ei voitu hakea oletusturvaympäristöä: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -750,9 +750,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "ei voitu asettaa oletusturvakontekstia`%s':%s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "ei voitu hakea turvaympäristöä `%s': %s"
+msgstr "ei voitu määrittää turvaympäristöä `%s': %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
@@ -952,7 +952,7 @@ msgstr "`%s'-attribuuttia ei löytynyt"
 #: modules/ldap.c:1841
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
+msgstr "virhe asetettaessa salasanaa LDAP-hakemiston kohteelle %s: %s"
 
 #: modules/ldap.c:2452
 msgid "LDAP Server Name"
