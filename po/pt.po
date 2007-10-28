@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-10-11 10:36+0100\n"
+"PO-Revision-Date: 2007-10-27 19:47+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -731,9 +731,9 @@ msgid "error locking file: %s"
 msgstr "erro ao trancar ficheiro: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "não foi possível escolher o contexto de segurança predefinido: %s"
+msgstr "não foi possível obter o contexto de segurança predefinido: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -747,9 +747,9 @@ msgstr ""
 "não foi possível escolher o contexto de segurança predefinido como `%s': %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "não foi possível obter o contexto de segurança de `%s': %s"
+msgstr "não foi possível determinar o contexto de segurança de `%s': %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
