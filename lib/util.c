@@ -613,10 +613,11 @@ lu_util_fscreate_save(security_context_t *ctx, struct lu_error **error)
 void
 lu_util_fscreate_restore(security_context_t ctx)
 {
-	/* Don't check is_selinux_enabled(), we ignore errors anyway */
-	(void)setfscreatecon(ctx);
-	if (ctx)
-		freecon(ctx);
+	if (is_selinux_enabled() > 0) {
+		(void)setfscreatecon(ctx);
+		if (ctx)
+			freecon(ctx);
+	}
 }
 
 /* Set fscreate context from context of file. */

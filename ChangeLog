@@ -1,3 +1,8 @@
+2007-10-30  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/util.c (lu_util_fscreate_restore) [WITH_SELINUX]: Fix use of
+	uninitialized data when SELinux is disabled.
+
 2007-10-25  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.6.
