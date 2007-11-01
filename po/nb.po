@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-02-21 14:06+0100\n"
+"PO-Revision-Date: 2007-11-01 12:44+0100\n"
 "Last-Translator: Espen Stefansen <espenas@gmail.com>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Stil til hjemmekatalog «%s» er ikke absolutt"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
 #: modules/files.c:186
@@ -733,9 +733,9 @@ msgid "error locking file: %s"
 msgstr "feil under låsing av fil: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "kunne ikke sette forvalgt sikkerhetskontekst: %s"
+msgstr "kunne ikke finne forvalgt sikkerhetskontekst: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -748,9 +748,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "kunne ikke sette forvalgt sikkerhetskontekst til «%s»: %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "fant ikke sikkerhetskontekst for «%s»: %s"
+msgstr "kan ikke bestemme sikkerhetskontekst for «%s»: %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
@@ -1004,12 +1004,11 @@ msgstr "feil under flytting av hjemmekatalog for bruker"
 
 #: python/admin.c:691 python/admin.c:768
 msgid "error creating mail spool for user"
-msgstr "feil under oppretting av e-postkatalog for bruker"
+msgstr "feil under oppretting av e-postlager for bruker"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "feil under oppretting av e-postkatalog for bruker"
+msgstr "feil under fjerning av e-postlager for bruker"
 
 #: samples/lookup.c:67
 #, c-format
@@ -1068,6 +1067,3 @@ msgstr "Henter standard brukerattributter:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "Kopierer brukerstruktur:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "kunne ikke konvertere interne data til LDAPMods"
