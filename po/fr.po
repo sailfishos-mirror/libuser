@@ -6,14 +6,15 @@
 # Audrey Simons <asimons@redhat.com>, 2004, 2005.
 # Thomas Canniot <thomas.canniot@laposte.net>, 2007.
 # Alain PORTAL <aportal@univ-montp2.fr>, 2007.
+# Gauthier Ancelin <gauthier.ancelin@laposte.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-04-20 16:39+0200\n"
-"Last-Translator: Alain PORTAL <aportal@univ-montp2.fr>\n"
-"Language-Team: Français <traduc@traduc.org>\n"
+"PO-Revision-Date: 2007-10-31 23:45+0100\n"
+"Last-Translator: Gauthier Ancelin <gauthier.ancelin@laposte.net>\n"
+"Language-Team: Français <fedora-trans-fr@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,7 +23,7 @@ msgstr ""
 #: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Le chemin d'accès au répertoire personnel « %s » n'est pas absolu"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
 #: modules/files.c:186
@@ -352,8 +353,7 @@ msgstr "Erreur lors de la lecture de « %s » : %s.\n"
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"Erreur lors de la création d'un compte pour « %s » : ligne mal formatée.\n"
+msgstr "Erreur lors de la création d'un compte pour « %s » : ligne mal formatée.\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
@@ -417,14 +417,12 @@ msgstr "Modification du mot de passe annulée.\n"
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour le groupe %s : %s.\n"
 
 #: apps/lpasswd.c:209
 #, c-format
@@ -454,8 +452,7 @@ msgstr "Erreur lors de la création de %s : %s.\n"
 #: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr ""
-"Erreur lors de la création du répertoire de travail du client courriel.\n"
+msgstr "Erreur lors de la création du répertoire de travail du client courriel.\n"
 
 #: apps/luserdel.c:98
 #, c-format
@@ -495,8 +492,7 @@ msgstr "Erreur lors de la suppression de %s : %s.\n"
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
-"Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
+msgstr "Erreur lors de la configuration du mot de passe pour l'utilisateur %s : %s.\n"
 
 #: apps/lusermod.c:191
 #, c-format
@@ -743,9 +739,9 @@ msgid "error locking file: %s"
 msgstr "erreur lors du verrouillage du fichier : %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "impossible de définir le contexte de sécurité par défaut : %s"
+msgstr "impossible d'obtenir le contexte de sécurité par défaut : %s"
 
 #: lib/util.c:631
 #, c-format
@@ -755,13 +751,12 @@ msgstr "impossible d'obtenir le contexte de sécurité sur « %s » : %s"
 #: lib/util.c:637 lib/util.c:664
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"impossible de définir le contexte de sécurité par défaut sur « %s » : %s"
+msgstr "impossible de définir le contexte de sécurité par défaut sur « %s » : %s"
 
 #: lib/util.c:658
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "impossible d'obtenir le contexte de sécurité sur « %s » : %s"
+msgstr "impossible de déterminer le contexte de sécurité sur « %s » : %s"
 
 #: modules/files.c:116 modules/files.c:450 modules/files.c:761
 #: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
@@ -1012,8 +1007,7 @@ msgstr "Erreur lors de la création du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:580
 msgid "error removing home directory for user"
-msgstr ""
-"Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
+msgstr "Erreur lors de la suppression du répertoire personnel pour l'utilisateur"
 
 #: python/admin.c:658
 msgid "error moving home directory for user"
@@ -1026,11 +1020,8 @@ msgstr ""
 "l'utilisateur"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr ""
-"Erreur lors de la création du répertoire de travail du client courriel pour "
-"l'utilisateur"
+msgstr "Erreur lors de la suppression du spool de courrier de l'utilisateur"
 
 #: samples/lookup.c:67
 #, c-format
@@ -1090,5 +1081,3 @@ msgstr "Obtention d'attributs d'utilisateur par défaut :\n"
 msgid "Copying user structure:\n"
 msgstr "Copie de la structure de l'utilisateur :\n"
 
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "impossible de convertir les données internes en LDAPMods"
