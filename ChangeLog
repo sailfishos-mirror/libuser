@@ -1,3 +1,7 @@
+2007-11-14  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/util.c (lu_util_lock_obtain): Fix setting l_type.
+
 2007-10-30  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/util.c (lu_util_fscreate_restore) [WITH_SELINUX]: Fix use of

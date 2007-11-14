@@ -175,9 +175,8 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 	do {
 		ret->fd = fd;
 		ret->lock.l_type = F_RDLCK;
-		if (write(ret->fd, NULL, 0) == 0) {
-			ret->lock.l_type |= F_WRLCK;
-		}
+		if (write(ret->fd, NULL, 0) == 0)
+			ret->lock.l_type = F_WRLCK;
 		i = fcntl(ret->fd, F_SETLK, &ret->lock);
 		if ((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
 			struct timeval tv;
