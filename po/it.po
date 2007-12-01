@@ -1,10 +1,10 @@
 # translation of it.po to
-# Copyright (C) 2001 Red Hat, Inc.
-#
 # Bettina De Monti <bettina@redhat.it>, 2001.
 # Lorenzo Stobbione <lorenzo.stobbione@clsengineering.it>, 2004, 2005.
-# NicolÚ Nepote <nepote@labinf.polito.it>, 2005.
+# Nicol√≤ Nepote <nepote@labinf.polito.it>, 2005.
 # Francesco Tombolini <tombo@adamantio.net>, 2005, 2006, 2007.
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team:  <it@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr "Il percorso della home directory `%s' non Ë assoluto"
+msgstr "Il percorso della home directory `%s' non √® assoluto"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
 #: modules/files.c:186
@@ -65,7 +65,7 @@ msgstr "Errore interno.\n"
 #: apps/apputil.c:606
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s non Ë autorizzato a cambiare le informazioni di %s per il comando finger\n"
+msgstr "%s non √® autorizzato a cambiare le informazioni di %s per il comando finger\n"
 
 #: apps/apputil.c:608
 msgid "Unknown user context"
@@ -260,11 +260,11 @@ msgstr "Nuova shell"
 #: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr "La shell non Ë cambiata: %s\n"
+msgstr "La shell non √® cambiata: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr "La shell Ë cambiata.\n"
+msgstr "La shell √® cambiata.\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
@@ -293,7 +293,7 @@ msgstr "Il gruppo %s non esiste.\n"
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Il gruppo %s non puÚ essere eliminato: %s.\n"
+msgstr "Il gruppo %s non pu√≤ essere eliminato: %s.\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
@@ -308,17 +308,17 @@ msgstr "Configurazione password per il gruppo %s fallita: %s\n"
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Il gruppo %s non puÚ essere bloccato: %s\n"
+msgstr "Il gruppo %s non pu√≤ essere bloccato: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Il gruppo %s non puÚ essere sbloccato: %s\n"
+msgstr "Il gruppo %s non pu√≤ essere sbloccato: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Il gruppo %s non puÚ essere modificato: %s.\n"
+msgstr "Il gruppo %s non pu√≤ essere modificato: %s.\n"
 
 #: apps/lid.c:48
 #, c-format
@@ -541,7 +541,7 @@ msgstr "impossibile fare lo stat del file di configurazione `%s': %s"
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr "il file di configurazione `%s' Ë troppo grande"
+msgstr "il file di configurazione `%s' √® troppo grande"
 
 #: lib/config.c:149
 #, c-format
@@ -630,7 +630,7 @@ msgstr "mancata corrispondenza nella versione di modulo/libreria"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr "L'operazione unlock render‡ il campo della password vuoto."
+msgstr "L'operazione unlock render√† il campo della password vuoto."
 
 #: lib/error.c:88
 msgid "unknown error"
@@ -669,12 +669,12 @@ msgstr "nome non e' impostato"
 
 #: lib/user.c:200
 msgid "name is too short"
-msgstr "nome Ë troppo corto"
+msgstr "nome √® troppo corto"
 
 #: lib/user.c:205
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr "il nome Ë troppo corto (%zu > %d)"
+msgstr "il nome √® troppo corto (%zu > %d)"
 
 #: lib/user.c:212
 msgid "name contains non-ASCII characters"
@@ -780,7 +780,7 @@ msgstr "errore nella creazione di `%s': %s"
 #: modules/files.c:152
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "il file di backup `%s' esiste e non ÔøΩun file standard"
+msgstr "il file di backup `%s' esiste e non √® un file standard"
 
 #: modules/files.c:231
 msgid "backup file size mismatch"
@@ -793,7 +793,7 @@ msgstr "impossibile leggere da `%s': %s"
 
 #: modules/files.c:812 modules/files.c:819
 msgid "entry already present in file"
-msgstr "voce gi‡ presente nel file"
+msgstr "voce gi√† presente nel file"
 
 #: modules/files.c:826 modules/files.c:836 modules/files.c:847
 #: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
@@ -804,7 +804,7 @@ msgstr "impossibile scrivere su `%s': %s"
 #: modules/files.c:1006 modules/files.c:1065
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "nessun attributo %s per l'oggetto entit‡"
+msgstr "nessun attributo %s per l'oggetto entit√†"
 
 #: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
@@ -839,17 +839,17 @@ msgstr "errore nell'analisi del nome utente `%s' per kerberos"
 #: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "nessun %s o attributo %s per la struttura dell'entit‡"
+msgstr "nessun %s o attributo %s per la struttura dell'entit√†"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "nessun %s o attributo %s per l'entit‡"
+msgstr "nessun %s o attributo %s per l'entit√†"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "l'entit‡ Ë stata creata senza attributi %s o %s"
+msgstr "l'entit√† √® stata creata senza attributi %s o %s"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
@@ -859,7 +859,7 @@ msgstr "errore nella lettura delle informazioni per `%s' da kerberos"
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "nessun attributo %s per l'entit‡"
+msgstr "nessun attributo %s per l'entit√†"
 
 #: modules/krb5.c:642
 #, c-format
@@ -908,7 +908,7 @@ msgstr "nessun attributo %s per l'oggetto utente"
 #: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "l'oggetto utente Ë stato creato senza `%s'"
+msgstr "l'oggetto utente √® stato creato senza `%s'"
 
 #: modules/ldap.c:1360
 #, c-format
