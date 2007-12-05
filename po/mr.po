@@ -18,31 +18,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
 "\n"
 "\n"
 "\n"
 "\n"
 "\n"
 
-#: apps/apputil.c:111
+#: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr "मुख्य संचयीका मार्ग  `%s' संपूर्णतः नाही"
 
-#: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
-#: modules/files.c:186
+#: apps/apputil.c:130 apps/apputil.c:198 apps/apputil.c:231 apps/apputil.c:258
+#: modules/files.c:243
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' वाचतेवेळी चूक: %s"
 
-#: apps/apputil.c:127 apps/apputil.c:203
+#: apps/apputil.c:138 apps/apputil.c:207
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "`%s' निर्माण करतेवेळी चूक: %s"
 
-#: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
-#: modules/files.c:169
+#: apps/apputil.c:146 apps/apputil.c:214 apps/apputil.c:304
+#: modules/files.c:226
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' चा मालक बदलतेवेळी त्रूटी: %s"
@@ -58,17 +59,17 @@ msgstr "`%s' लिहीतेवेळी त्रुटी: %s"
 msgid "Error removing `%s': %s"
 msgstr "`%s' काढुन टाकतेवेळी त्रुटी: %s"
 
-#: apps/apputil.c:572 apps/apputil.c:576
+#: apps/apputil.c:552 apps/apputil.c:556
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "हक्क वगळण्यास अपयशी.\n"
 
-#: apps/apputil.c:585
+#: apps/apputil.c:565
 #, c-format
 msgid "Internal error.\n"
 msgstr "आंतरीक त्रूटी.\n"
 
-#: apps/apputil.c:606
+#: apps/apputil.c:586
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s ची finger माहिती बदलवण्यास %s ला अधिकार नाही\n"
@@ -77,7 +78,7 @@ msgstr "%s ची finger माहिती बदलवण्यास %s ल�
 msgid "Unknown user context"
 msgstr "अपरिचित वापरकर्ता संदर्भ"
 
-#: apps/apputil.c:616
+#: apps/apputil.c:596
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd करता मूलभूत संदर्भ निश्चित करू शकत नाही\n"
@@ -92,17 +93,17 @@ msgstr "PAM प्रारंभ करतेवेळी त्रुटी.\n
 msgid "Authentication failed for %s.\n"
 msgstr "%s करीता अधिप्रमाणन अयशस्वी.\n"
 
-#: apps/apputil.c:643
+#: apps/apputil.c:623
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "आंतरीक PAM त्रूटी `%s'.\n"
 
-#: apps/apputil.c:648
+#: apps/apputil.c:628
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "अपरिचित वापरकर्ता अधिप्रमाणित.\n"
 
-#: apps/apputil.c:652
+#: apps/apputil.c:632
 #, c-format
 msgid "User mismatch.\n"
 msgstr "वापरकर्ता जुळला नाही.\n"
@@ -734,98 +735,95 @@ msgstr "समुहास नाव किंवा GID नाही"
 msgid "Invalid default value of field %s: %s"
 msgstr "field %s ची अवैध मुलभूत संख्या: %s"
 
-#: lib/util.c:196
+#: lib/util.c:193
 #, c-format
 msgid "error locking file: %s"
 msgstr "फाइल कुलूपबंद करतेवेळी त्रूटी: %s"
 
-#: lib/util.c:605
+#: modules/files.c:117
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' चा सुरक्षा संदर्भ आढळला नाही: %s"
 
-#: lib/util.c:631
+#: modules/files.c:123
 #, c-format
 msgid "couldn't set default security context: %s"
 msgstr "मुलभूत सुरक्षा संदर्भ निश्चित करू शकला नाही: %s"
 
-#: lib/util.c:637 lib/util.c:664
+#: modules/files.c:130
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' करता मुलभूत सुरक्षा संदर्भ निश्चित केला नाही: %s"
 
-#: lib/util.c:658
-#, c-format
-msgid "couldn't determine security context for `%s': %s"
-msgstr "संरचना फाइल `%1$s' उघडू शकला नाही: %2$s"
-
-#: modules/files.c:116 modules/files.c:450 modules/files.c:761
-#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
-#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
-#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
-#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
-#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
-#: modules/files.c:2371 modules/files.c:2386
+#: modules/files.c:173 modules/files.c:507 modules/files.c:818
+#: modules/files.c:1085 modules/files.c:1224 modules/files.c:1454
+#: modules/files.c:1537 modules/files.c:1758 modules/files.c:1919
+#: modules/files.c:1936 modules/files.c:2025 modules/files.c:2044
+#: modules/files.c:2112 modules/files.c:2133 modules/files.c:2230
+#: modules/files.c:2249 modules/files.c:2308 modules/files.c:2327
+#: modules/files.c:2423 modules/files.c:2438
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' उघडू शकला नाही: %s"
 
-#: modules/files.c:128 modules/files.c:157 modules/files.c:223
-#: modules/files.c:773 modules/files.c:1181
+#: modules/files.c:185 modules/files.c:214 modules/files.c:280
+#: modules/files.c:830 modules/files.c:1236
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' दर्शवू शकला नाही: %s"
 
-#: modules/files.c:139
+#: modules/files.c:196
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' निर्माण करतेवेळी त्रूटी: %s"
 
-#: modules/files.c:152
+#: modules/files.c:209
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "अगाऊ फाइल `%s' अस्तित्वात आहे व ती सर्वसाधारण फाइल नाही"
 
-#: modules/files.c:231
+#: modules/files.c:288
 msgid "backup file size mismatch"
 msgstr "प्रतिकृती फॉईल आकार जुळत नाही"
 
-#: modules/files.c:803 modules/files.c:1190
+#: modules/files.c:860 modules/files.c:1245
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' पासुन वाचू शकले नाही: %s"
 
-#: modules/files.c:812 modules/files.c:819
+#: modules/files.c:869 modules/files.c:876
 msgid "entry already present in file"
 msgstr "फाइल मध्ये नोंदणी आधिपासुनच अस्तित्वात आहे"
 
-#: modules/files.c:826 modules/files.c:836 modules/files.c:847
-#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
+#: modules/files.c:883 modules/files.c:893 modules/files.c:904
+#: modules/files.c:1304 modules/files.c:1312 modules/files.c:1320
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' करीता लिहु शकले नाही: %s"
 
-#: modules/files.c:1006 modules/files.c:1065
+#: modules/files.c:1062 modules/files.c:1121
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "वस्तू ला %s गुणधर्म नाही"
 
-#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1804 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
 msgstr "गुप्तशब्द कुटलिपी करतेवेळी त्रुटी"
 
-#: modules/files.c:2657 modules/files.c:2735
+#: modules/files.c:2709 modules/files.c:2787
 msgid "not executing with superuser privileges"
 msgstr "अत्युतमवापरकर्ता हक्कासह कार्यान्वीत होत नाही"
 
-#: modules/files.c:2748
+#: modules/files.c:2800
 msgid "no shadow file present -- disabling"
 msgstr "शॅडो फाइल उपलब्ध नाही -- अकार्यान्वीत करत आहे"
 
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "error connecting to the `%s' मधील `%s' सेवा करीता kadm5 सर्वरशी जुळवणी करतेवेळी त्रुटी: %s"
+msgstr ""
+"error connecting to the `%s' मधील `%s' सेवा करीता kadm5 सर्वरशी जुळवणी करतेवेळी "
+"त्रुटी: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -1074,3 +1072,5 @@ msgstr "मुलभूत वापरकर्त्याचे गुणध�
 msgid "Copying user structure:\n"
 msgstr "वापरकर्ता संरचनाची प्रत बनवित आहे:\n"
 
+#~ msgid "couldn't determine security context for `%s': %s"
+#~ msgstr "संरचना फाइल `%1$s' उघडू शकला नाही: %2$s"
