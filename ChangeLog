@@ -1,3 +1,7 @@
+2007-12-06  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lid.1: Fix grammar.
+
 2007-11-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/util.c (lu_util_lock_obtain): Fix setting l_type.
