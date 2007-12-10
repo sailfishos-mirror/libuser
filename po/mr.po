@@ -1,4 +1,4 @@
-# translation of mr1.po to marathi
+# translation of mr.po to marathi
 # Marathi translations for PACKAGE package.
 # Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -8,17 +8,17 @@
 # sandeep shedmake <sandeep.shedmake@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: mr1\n"
+"Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2007-12-05 16:00+0530\n"
+"PO-Revision-Date: 2007-12-10 10:55+0530\n"
 "Last-Translator: sandeep shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -741,9 +741,9 @@ msgid "error locking file: %s"
 msgstr "फाइल कुलूपबंद करतेवेळी त्रूटी: %s"
 
 #: lib/util.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "मुलभूत सुरक्षा संदर्भ निश्चित करू शकला नाही: %s"
+msgstr "मुलभूत सुरक्षा संदर्भ प्राप्त करता आले नाही: %s"
 
 #: lib/util.c:631
 #, c-format
@@ -1076,3 +1076,4 @@ msgstr "मुलभूत वापरकर्त्याचे गुणध�
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "वापरकर्ता संरचनाची प्रत बनवित आहे:\n"
+
