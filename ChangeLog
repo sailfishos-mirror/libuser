@@ -1,3 +1,11 @@
+2008-01-07  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/files_test.py (Tests.testUserSetpass1)
+	(Tests.testUserSetpass2, Tests.testUserSetpass3)
+	(Tests.testGroupSetpass1, Tests.testGroupSetpass2)
+	(Tests.testGroupSetpass3): Don't assume the password salt is 11
+	characters long.
+
 2007-12-06  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lid.1: Fix grammar.

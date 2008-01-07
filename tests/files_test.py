@@ -459,7 +459,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user12_1')
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
-        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
         self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
 
@@ -482,7 +482,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['08lnuxCM.c36E'])
         self.a.setpassUser(e, 'password', False)
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
-        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
     def testUserSetpass3(self):
@@ -491,7 +491,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERPASSWORD], ['*'])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
         self.a.setpassUser(e, 'password', False)
-        crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0])
         self.assertEqual(e[libuser.USERPASSWORD], [crypted])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
 
@@ -890,7 +890,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['06aZrb3pzuu/6'])
         self.a.setpassGroup(e, 'password', False)
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
-        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
     def testGroupSetpass2(self):
@@ -912,7 +912,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['07ZZy2Pihe/gg'])
         self.a.setpassGroup(e, 'password', False)
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
-        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
     def testGroupSetpass3(self):
@@ -921,7 +921,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPPASSWORD], ['*'])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
         self.a.setpassGroup(e, 'password', False)
-        crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][:11])
+        crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0])
         self.assertEqual(e[libuser.GROUPPASSWORD], [crypted])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
 
