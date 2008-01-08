@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2005, 2006, 2007 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005, 2006, 2007, 2008 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -1744,8 +1744,11 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		 == 0) {
 		password = password + strlen(LU_CRYPTED);
 	} else {
-		password = lu_make_crypted(password,
-					   lu_common_default_salt_specifier(module));
+		char *salt;
+
+		salt = lu_common_default_salt_specifier(module);
+		password = lu_make_crypted(password, salt);
+		g_free(salt);
 		if (password == NULL) {
 			lu_error_new(error, lu_error_generic,
 				     _("error encrypting password"));

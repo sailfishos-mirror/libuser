@@ -1,3 +1,40 @@
+2008-01-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/libuser.conf.5.in: Document SHA support.
+
+	* tests/pwhash.conf.in
+	* tests/pwhash.py: New files
+	* tests/pwhash_test: New test.
+	* Makefile.am (TESTS): Add tests/pwhash_test.
+
+	* tests/config_import2.conf.in
+	* tests/config_login2.defs: New files.
+	* tests/config_login.defs: Add SHA_CRYPT_MIN_ROUNDS and
+	SHA_CRYPT_MAX_ROUNDS.
+	* tests/config_override.conf.in: Add hash_rounds_min and
+	hash_rounds_max.
+	* tests/config_test.sh: Create libuser_import2.conf.
+	* tests/config_test.c (main): Add tests for hash_rounds_min and
+	hash_rounds_max.  Test ENCRYPT_METHOD and MD5_CRYPT_ENAB interaction.
+
+	* lib/config.c (struct handle_login_defs_key_data): New definition.
+	(handle_login_defs_key): Expect struct handle_login_defs_key_data *
+	instead of struct config_config *.  Handle ENCRYPT_METHOD,
+	SHA_CRYPT_MIN_ROUNDS, SHA_CRYPT_MAX_ROUNDS.  Only use MD5_CRYPT_ENAB
+	if ENCRYPT_METHOD is not defined.
+	(import_login_defs): Pass struct handle_login_defs_key_data * to
+	handle_login_defs_key().
+
+	* lib/util.c (salt_type_info): New member sha_rounds.  Add SHA256 and
+	SHA512 entries.
+	(lu_make_crypted): Add support for SHA rounds specification.
+	* modules/default.-c (HASH_ROUNDS_MIN, HASH_ROUNDS_MAX): New macros.
+	(lu_common_parse_hash_rounds, lu_common_select_hash_rounds): New
+	functions.
+	(lu_common_default_salt_specifier): Add support for sha256 and sha512.
+	Add support for configurable number of hashing rounds.  Return a newly
+	allocated string.  All callers changed.
+
 2008-01-07  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/files_test.py (Tests.testUserSetpass1)

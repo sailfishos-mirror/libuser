@@ -5,6 +5,8 @@ modules = files shadow
 create_modules = files shadow
 mailspooldir = /overridden/mailspooldir
 crypt_style = des
+hash_rounds_min = 4250
+hash_rounds_max = 4251
 skeleton = /overridden/skeleton
 
 [import]

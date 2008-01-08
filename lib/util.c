@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2000-2002, 2007 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2007, 2008 Red Hat, Inc.
  *
- * This is free software; you can redistribute it and/or modify it under 
+ * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
@@ -120,9 +120,13 @@ static const struct {
 	const char initial[5];
 	char separator[2];
 	size_t salt_length;
+	gboolean sha_rounds;
 } salt_type_info[] = {
-	{"$1$", "$", 8 },
-	{"$2a$", "$", 8 },    /* FIXME: number of rounds, base64 of 128 bits */
+	{"$1$", "$", 8, FALSE },
+	/* FIXME: number of rounds, base64 of 128 bits */
+	{"$2a$", "$", 8, FALSE },
+	{"$5$", "$", 16, TRUE },
+	{"$6$", "$", 16, TRUE },
 	{ "", "", 2 },
 };
 
@@ -145,16 +149,24 @@ lu_make_crypted(const char *plain, const char *previous)
 
 	g_assert(i < G_N_ELEMENTS(salt_type_info));
 
-	memset(salt, '\0', sizeof(salt));
-	strncpy(salt, salt_type_info[i].initial, len);
+	if (salt_type_info[i].sha_rounds != FALSE
+	    && strncmp(previous + len, "rounds=", strlen("rounds=")) == 0) {
+		const char *start, *end;
 
-	g_assert(strlen(salt) +
-		 salt_type_info[i].salt_length +
-		 strlen(salt_type_info[i].separator) <
-		 sizeof(salt));
+		start = previous + len + strlen("rounds=");
+		end = strchr(start, '$');
+		if (end != NULL && end <= start + strlen("999999999"))
+			len = (end + 1) - previous;
+	}
+
+	g_assert(len + salt_type_info[i].salt_length
+		 + strlen(salt_type_info[i].separator) < sizeof(salt));
+	memcpy(salt, previous, len);
+
 	if (fill_urandom(salt + len, salt_type_info[i].salt_length) == FALSE)
 		return NULL;
-	strcat(salt, salt_type_info[i].separator);
+	strcpy(salt + len + salt_type_info[i].salt_length,
+	       salt_type_info[i].separator);
 
 	return crypt(plain, salt);
 }

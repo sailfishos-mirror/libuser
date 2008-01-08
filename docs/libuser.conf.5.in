@@ -1,6 +1,6 @@
 '\" t
 .\" A man page for libuser.conf -*- nroff -*-
-.\" Copyright (C) 2005 Red Hat, Inc.
+.\" Copyright (C) 2005, 2008 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -17,7 +17,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH libuser.conf 5 "Oct 8 2005" libuser
+.TH libuser.conf 5 "Jan 7 2008" libuser
 
 .SH NAME
 libuser.conf \- configuration for libuser and libuser utilities
@@ -68,10 +68,27 @@ The algorithm to use for password encryption when creating new passwords.
 The current algorithm may be retained
 when changing a password of an existing user, depending on the application.
 
-Possible values are \fBdes\fR, \fBmd5\fR or \fBblowfish\fR, all
-case-insensitive.
+Possible values are \fBdes\fR, \fBmd5\fR, \fBblowfish\fR,
+.B sha256
+and \fBsha512\fR, all case-insensitive.
 Unrecognized values are treated as \fBdes\fR.
 Default value is \fBdes\fR.
+
+.TP
+\fBhash_rounds_min\fR, \fBhash_rounds_max\fR
+These variables specify an inclusive range of hash rounds used when
+.B crypt_style
+is
+.B sha256
+or \fBsha512\fR.
+A number of hash rounds is choosen from this interval randomly.
+A larger number of rounds makes password checking, and brute-force attempts
+to guess the password by reversing the hash, more CPU-intensive.
+The number of rounds is restricted to the interval [1000, 999999999].
+
+If only one of the above variables is specified, the number of rounds used is
+specified by the other variable.
+If neither variable is specified, the number of rounds is chosen by \fBlibc\fR.
 
 .TP
 .B mailspooldir
@@ -125,12 +142,15 @@ l|l
 -|-
 lb|lb.
 Variable,Imported as
+ENCRYPT_METHOD,defaults/crypt_style
 GID_MIN,groupdefaults/LU_GIDNUMBER
 MAIL_DIR,defaults/mailspooldir
 MD5_CRYPT_ENAB,defaults/crypt_style
 PASS_MAX_DAYS,userdefaults/LU_SHADOWMAX
 PASS_MIN_DAYS,userdefaults/LU_SHADOWMIN
 PASS_WARN_AGE,userdefaults/LU_SHADOWWARNING
+SHA_CRYPT_MIN_ROUNDS,defaults/hash_rounds_min
+SHA_CRYPT_MAX_ROUNDS,defaults/hash_rounds_max
 UID_MIN,userdefaults/LU_UIDNUMBER
 .TE
 

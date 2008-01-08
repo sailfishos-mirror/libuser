@@ -1,7 +1,7 @@
 #! /bin/sh
 # Automated config handling regression tester
 #
-# Copyright (c) 2004, 2005 Red Hat, Inc. All rights reserved.
+# Copyright (c) 2004, 2005, 2008 Red Hat, Inc. All rights reserved.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Library General Public License as published by
@@ -34,6 +34,8 @@ sed "s|@TOP_BUILDDIR@|$(pwd)|g" < "$srcdir"/config.conf.in \
 	> "$workdir/libuser.conf"
 sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
 	< "$srcdir"/config_import.conf.in > "$workdir/libuser_import.conf"
+sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
+	< "$srcdir"/config_import2.conf.in > "$workdir/libuser_import2.conf"
 sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
 	< "$srcdir"/config_override.conf.in > "$workdir/libuser_override.conf"
 

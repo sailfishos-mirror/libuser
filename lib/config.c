@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2005 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2005, 2008 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -459,14 +459,22 @@ key_add(struct config_config *config, const char *section, const char *key,
 #define ATTR_DEFINED(CONFIG, SECTION, KEY)				\
 (key_defined(CONFIG, SECTION, KEY) || key_defined(CONFIG, SECTION, #KEY))
 
+struct handle_login_defs_key_data {
+	struct config_config *config;
+	GHashTable *hash;	/* login.defs key (char *) => value (char *) */
+};
+
 /* Convert a single /etc/login.defs key to config */
 static void
-handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
+handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xv)
 {
 	static const struct conversion {
 		gboolean number;
 		const char *shadow, *section, *key, *key2;
 	} conv[] = {
+		/* ENCRYPT_METHOD values are upper-case, crypt_style values are
+		   case-insensitive. */
+		{ FALSE, "ENCRYPT_METHOD", "defaults", "crypt_style", NULL },
 		{ TRUE, "GID_MIN", "groupdefaults", LU_GIDNUMBER,
 		  G_STRINGIFY_ARG(LU_GIDNUMBER) },
 		{ FALSE, "MAIL_DIR", "defaults", "mailspooldir", NULL },
@@ -476,21 +484,26 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 		  G_STRINGIFY_ARG(LU_SHADOWMIN) },
 		{ TRUE, "PASS_WARN_AGE", "userdefaults", LU_SHADOWWARNING,
 		  G_STRINGIFY_ARG(LU_SHADOWWARNING) },
+		{ TRUE, "SHA_CRYPT_MIN_ROUNDS", "defaults", "hash_rounds_min",
+		  NULL },
+		{ TRUE, "SHA_CRYPT_MAX_ROUNDS", "defaults", "hash_rounds_max",
+		  NULL },
 		{ TRUE, "UID_MIN", "userdefaults", LU_UIDNUMBER,
 		  G_STRINGIFY_ARG(LU_UIDNUMBER) },
 	};
 
 	const char *key, *value;
-	struct config_config *config;
+	struct handle_login_defs_key_data *v;
 	size_t i;
 
 	value = xvalue;
 	key = xkey;
-	config = xconfig;
+	v = xv;
 	/* This is the only case that requires value conversion */
 	if (strcmp (key, "MD5_CRYPT_ENAB") == 0) {
-		if (!key_defined(config, "defaults", "crypt_style"))
-			key_add(config, "defaults", "crypt_style",
+		if (g_hash_table_lookup(v->hash, "ENCRYPT_METHOD") == NULL
+		    && !key_defined(v->config, "defaults", "crypt_style"))
+			key_add(v->config, "defaults", "crypt_style",
 				g_ascii_strcasecmp(value, "yes") == 0 ? "md5"
 				: "des");
 		return;
@@ -498,9 +511,9 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 	for (i = 0; i < G_N_ELEMENTS(conv); i++) {
 		if (strcmp (key, conv[i].shadow) != 0)
 			continue;
-		if (!key_defined(config, conv[i].section, conv[i].key)
+		if (!key_defined(v->config, conv[i].section, conv[i].key)
 		    && (conv[i].key2 == NULL
-			|| !key_defined(config, conv[i].section,
+			|| !key_defined(v->config, conv[i].section,
 					conv[i].key2))) {
 			/* We need roughly 0.3 characters per bit,
 			   this just is an obvious upper bound. */
@@ -517,7 +530,7 @@ handle_login_defs_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 				snprintf(buf, sizeof(buf), "%jd", num);
 				value = buf;
 			}
-			key_add(config, conv[i].section, conv[i].key, value);
+			key_add(v->config, conv[i].section, conv[i].key, value);
 		}
 		break;
 	}
@@ -531,14 +544,14 @@ static gboolean
 import_login_defs(struct config_config *config, const char *filename,
 		  struct lu_error **error)
 {
-	GHashTable *hash;
 	char *data, *line, *xstrtok_ptr;
+	struct handle_login_defs_key_data v;
 
 	data = read_file(filename, error);
 	if (data == NULL)
 		goto err;
 
-	hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	v.hash = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 	for (line = strtok_r(data, "\n", &xstrtok_ptr); line != NULL;
 	     line = strtok_r(NULL, "\n", &xstrtok_ptr)) {
 		char *p, *key, *value;
@@ -565,11 +578,12 @@ import_login_defs(struct config_config *config, const char *filename,
 		value = g_strndup(line, p - line);
 		/* May replace an older value if there are multiple
 		   definitions; that's what shadow does. */
-		g_hash_table_insert(hash, key, value);
+		g_hash_table_insert(v.hash, key, value);
 	}
 	g_free(data);
-	g_hash_table_foreach(hash, handle_login_defs_key, config);
-	g_hash_table_destroy(hash);
+	v.config = config;
+	g_hash_table_foreach(v.hash, handle_login_defs_key, &v);
+	g_hash_table_destroy(v.hash);
 
 	return TRUE;
 

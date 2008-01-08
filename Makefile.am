@@ -14,7 +14,7 @@ PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
 ## Targets
 SUBDIRS = po docs
-TESTS = tests/config_test.sh tests/files_test tests/utils_test
+TESTS = tests/config_test.sh tests/files_test tests/pwhash_test tests/utils_test
 if LDAP
 TESTS += tests/ldap_test
 endif

@@ -1,4 +1,4 @@
-/* Copyright (C) 2000-2002, 2005 Red Hat, Inc.
+/* Copyright (C) 2000-2002, 2005, 2008 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -110,6 +110,8 @@ main(int argc, char *argv[])
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "1239",
 		   (const char *)NULL);
+	verify_var(ctx, "defaults/hash_rounds_min", "1240", (const char *)NULL);
+	verify_var(ctx, "defaults/hash_rounds_max", "1241", (const char *)NULL);
 	/* From (echo $(($(date -d 'may 1 1980 0:0' +%s) / 24 / 3600))) */
 	verify_var(ctx, "userdefaults/" LU_SHADOWEXPIRE, "3773",
 		   (const char *)NULL);
@@ -123,6 +125,10 @@ main(int argc, char *argv[])
 		   (const char *)NULL);
 	verify_var(ctx, "defaults/skeleton", "/skeleton/path",
 		   (const char *)NULL);
+	lu_end(ctx);
+
+	ctx = start(argv[1], "libuser_import2.conf");
+	verify_var(ctx, "defaults/crypt_style", "SHA256", (const char *)NULL);
 	lu_end(ctx);
 
 	ctx = start(argv[1], "libuser_override.conf");
@@ -142,6 +148,8 @@ main(int argc, char *argv[])
 	verify_var(ctx, "userdefaults/" LU_SHADOWWARNING, (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_UIDNUMBER, "4246",
 		   (const char *)NULL);
+	verify_var(ctx, "defaults/hash_rounds_min", "4250", (const char *)NULL);
+	verify_var(ctx, "defaults/hash_rounds_max", "4251", (const char *)NULL);
 	verify_var(ctx, "userdefaults/LU_SHADOWEXPIRE", "4247",
 		   (const char *)NULL);
 	verify_var(ctx, "userdefaults/" LU_SHADOWEXPIRE, (const char *)NULL);

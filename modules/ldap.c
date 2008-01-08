@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2005 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2005, 2008 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -1534,8 +1534,11 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
 	if (!g_str_has_prefix(oldpassword, LU_CRYPTED)) {
-		tmp = lu_make_crypted(oldpassword,
-				      lu_common_default_salt_specifier(module));
+		char *salt;
+
+		salt = lu_common_default_salt_specifier(module);
+		tmp = lu_make_crypted(oldpassword, salt);
+		g_free(salt);
 		if (tmp == NULL) {
 			lu_error_new(error, lu_error_generic,
 				     _("error encrypting password"));
@@ -1799,12 +1802,15 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		addvalues[0] = (char *)password;
 	else {
 		const char *crypted;
-		char *tmp;
+		char *salt, *tmp;
 
-		crypted =
-		    lu_make_crypted(password, previous
-				    ? (previous + strlen(LU_CRYPTED)) :
-				    lu_common_default_salt_specifier(module));
+		if (previous != NULL)
+			salt = previous + strlen(LU_CRYPTED);
+		else
+			salt = lu_common_default_salt_specifier(module);
+		crypted = lu_make_crypted(password, salt);
+		if (previous == NULL)
+			g_free(salt);
 		if (crypted == NULL) {
 			lu_error_new(error, lu_error_generic,
 				     _("error encrypting password"));
