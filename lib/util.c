@@ -44,6 +44,9 @@
 #include "user_private.h"
 #include "internal.h"
 
+#define HASH_ROUNDS_MIN 1000
+#define HASH_ROUNDS_MAX 999999999
+
 struct lu_lock {
 	int fd;
 	struct flock lock;
@@ -155,7 +158,8 @@ lu_make_crypted(const char *plain, const char *previous)
 
 		start = previous + len + strlen("rounds=");
 		end = strchr(start, '$');
-		if (end != NULL && end <= start + strlen("999999999"))
+		if (end != NULL
+		    && end <= start + strlen(G_STRINGIFY(HASH_ROUNDS_MAX)))
 			len = (end + 1) - previous;
 	}
 
@@ -169,6 +173,96 @@ lu_make_crypted(const char *plain, const char *previous)
 	       salt_type_info[i].separator);
 
 	return crypt(plain, salt);
+}
+
+
+static const char *
+parse_hash_rounds(struct lu_context *context, const char *key,
+		  unsigned long *value)
+{
+	const char *s;
+
+	s = lu_cfg_read_single(context, key, NULL);
+	if (s != NULL) {
+		char *end;
+
+		errno = 0;
+		*value = strtoul(s, &end, 10);
+		if (errno != 0 || *end != 0 || end == s) {
+			g_warning("Invalid %s value '%s'", key, s);
+			s = NULL;
+		}
+	}
+	return s;
+}
+
+static unsigned long
+select_hash_rounds(struct lu_context *context)
+{
+	const char *min_s, *max_s;
+	unsigned long min, max, rounds;
+
+	min_s = parse_hash_rounds(context, "defaults/hash_rounds_min", &min);
+	max_s = parse_hash_rounds(context, "defaults/hash_rounds_max", &max);
+	if (min_s == NULL && max_s == NULL)
+		return 0;
+	if (min_s != NULL && max_s != NULL) {
+		if (min <= max) {
+			if (max > HASH_ROUNDS_MAX)
+				/* To avoid overflow in (max + 1) below */
+				max = HASH_ROUNDS_MAX;
+			rounds = g_random_int_range(min, max + 1);
+		} else
+			rounds = min;
+	} else if (min_s != NULL)
+		rounds = min;
+	else /* max_s != NULL */
+		rounds = max;
+	if (rounds < HASH_ROUNDS_MIN)
+		rounds = HASH_ROUNDS_MIN;
+	else if (rounds > HASH_ROUNDS_MAX)
+		rounds = HASH_ROUNDS_MAX;
+	return rounds;
+}
+
+char *
+lu_util_default_salt_specifier(struct lu_context *context)
+{
+	static const struct {
+		const char *name, *initializer;
+		gboolean sha_rounds;
+	} salt_types[] = {
+		{ "des", "", FALSE },
+		{ "md5", "$1$", FALSE },
+		{ "blowfish", "$2a$", FALSE },
+		{ "sha256", "$5$", TRUE },
+		{ "sha512", "$6$", TRUE },
+	};
+
+	const char *salt_type;
+	size_t i;
+
+	g_return_val_if_fail(context != NULL, g_strdup(""));
+
+	salt_type = lu_cfg_read_single(context, "defaults/crypt_style", "des");
+
+	for (i = 0; i < G_N_ELEMENTS(salt_types); i++) {
+		if (strcasecmp(salt_types[i].name, salt_type) == 0)
+			goto found;
+	}
+	return g_strdup("");
+
+found:
+	if (salt_types[i].sha_rounds != FALSE) {
+		unsigned long rounds;
+
+		rounds = select_hash_rounds(context);
+		if (rounds != 0)
+			return g_strdup_printf("%srounds=%lu$",
+					       salt_types[i].initializer,
+					       rounds);
+	}
+	return g_strdup(salt_types[i].initializer);
 }
 
 gpointer

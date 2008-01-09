@@ -1,3 +1,28 @@
+2008-01-09  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/common.c: New file, moving most code from modules/default.-c.
+	(lu_common_user_default, lu_common_group_default)
+	(lu_common_suser_default, lu_common_sgroup_default): Make public.
+	* lib/user_private.h (LU_COMMON_DEFAULT_PASSWORD)
+	(LU_COMMON_DEFAULT_SHADOW_PASSWORD, LU_COMMON_DEFAULT_SHELL): New
+	definitions, moved from modules/default.-c.
+	(lu_common_user_default, lu_common_group_default)
+	(lu_common_suser_default, lu_common_sgroup_default)
+	(lu_util_default_salt_specifier): New declarations.
+	* lib/util.c (HASH_ROUNDS_MIN, HASH_ROUNDS_MAX)
+	(parse_hash_rounds, select_hash_rounds): Move from modules/default.-c.
+	(lu_util_default_salt_specifier): Move from modules/default.-c.  Use
+	a lu_context * instead of lu_module *.  All users changed.
+	(lu_make_crypted): Use HASH_ROUNDS_MAX.
+	* modules/default.-c: Remove.  All users changed.
+	* Makefile.am (pkginclude_HEADERS): Remove modules/default.-c.
+	(lib_libuser_la_SOURCES): Add lib/common.c.
+	(modules_libuser_files_la_CPPFLAGS)
+	(modules_libuser_shadow_la_CPPFLAGS)
+	(modules_libuser_krb5_la_CPPFLAGS)
+	(modules_libuser_ldap_la_CPPFLAGS)
+	(modules_libuser_sasldb_la_CPPFLAGS): Remove.
+
 2008-01-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* po/sr@latin.po: Rename from po/sr@Latn.po

@@ -1,4 +1,4 @@
-/* -*- C -*-
+/*
  * Copyright (C) 2000-2002, 2008 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
@@ -16,34 +16,13 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* This file contains functions suitable for inclusion in modules, for
-   initializing user and group records. */
-
-#ident "$Id$"
-
-#include <sys/param.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <glib.h>
-#include <glib-object.h>
 #include <string.h>
 
-/* Define _LIBUSER_MODULE if your module is being built alongside libuser. */
-#ifdef _LIBUSER_MODULE
-#include "../lib/user_private.h"
-#else
-#include <libuser/user_private.h>
-#endif
-
-#define DEFAULT_PASSWORD	"!!"
-#define DEFAULT_SHADOW_PASSWORD	"x"
-#define DEFAULT_SHELL		"/bin/bash"
-
-#define HASH_ROUNDS_MIN 1000
-#define HASH_ROUNDS_MAX 999999999
+#include "user_private.h"
 
 /* Populate the fields of a user structure with non-name, non-ID data. */
-static gboolean
+gboolean
 lu_common_user_default(struct lu_module *module,
 		       const char *name, gboolean is_system,
 		       struct lu_ent *ent, struct lu_error **error)
@@ -57,13 +36,13 @@ lu_common_user_default(struct lu_module *module,
 	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
+		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
 		lu_ent_add(ent, LU_USERPASSWORD, &value);
 		g_value_unset(&value);
 	}
 	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
+		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
 		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
 		g_value_unset(&value);
 	}
@@ -85,7 +64,7 @@ lu_common_user_default(struct lu_module *module,
 	}
 	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_SHELL);
+		g_value_set_string(&value, LU_COMMON_DEFAULT_SHELL);
 		lu_ent_add(ent, LU_LOGINSHELL, &value);
 		g_value_unset(&value);
 	}
@@ -93,7 +72,7 @@ lu_common_user_default(struct lu_module *module,
 }
 
 /* Populate the fields of a group structure with non-name, non-ID data. */
-static gboolean
+gboolean
 lu_common_group_default(struct lu_module *module,
 		        const char *name, gboolean is_system,
 		        struct lu_ent *ent, struct lu_error **error)
@@ -107,7 +86,7 @@ lu_common_group_default(struct lu_module *module,
 
 		memset(&value, 0, sizeof(value));
 		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
+		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
 		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
 		g_value_unset(&value);
 	}
@@ -115,7 +94,7 @@ lu_common_group_default(struct lu_module *module,
 }
 
 /* Populate the fields of a user structure with non-name, non-ID data. */
-static gboolean
+gboolean
 lu_common_suser_default(struct lu_module *module,
 		        const char *name, gboolean is_system,
 		        struct lu_ent *ent, struct lu_error **error)
@@ -129,7 +108,7 @@ lu_common_suser_default(struct lu_module *module,
 	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, DEFAULT_PASSWORD);
+		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
 		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
 		g_value_unset(&value);
 	}
@@ -174,105 +153,11 @@ lu_common_suser_default(struct lu_module *module,
 	return TRUE;
 }
 
-static gboolean
+gboolean
 lu_common_sgroup_default(struct lu_module *module,
 		         const char *name, gboolean is_system,
 		         struct lu_ent *ent, struct lu_error **error)
 {
 	g_return_val_if_fail(name != NULL, FALSE);
 	return lu_common_group_default(module, name, is_system, ent, error);
-}
-
-static const char *
-lu_common_parse_hash_rounds(struct lu_module *module, const char *key,
-			    unsigned long *value)
-{
-	const char *s;
-
-	s = lu_cfg_read_single(module->lu_context, key, NULL);
-	if (s != NULL) {
-		char *end;
-
-		errno = 0;
-		*value = strtoul(s, &end, 10);
-		if (errno != 0 || *end != 0 || end == s) {
-			g_warning("Invalid %s value '%s'", key, s);
-			s = NULL;
-		}
-	}
-	return s;
-}
-
-static unsigned long
-lu_common_select_hash_rounds(struct lu_module *module)
-{
-	const char *min_s, *max_s;
-	unsigned long min, max, rounds;
-
-	min_s = lu_common_parse_hash_rounds(module, "defaults/hash_rounds_min",
-					    &min);
-	max_s = lu_common_parse_hash_rounds(module, "defaults/hash_rounds_max",
-					    &max);
-	if (min_s == NULL && max_s == NULL)
-		return 0;
-	if (min_s != NULL && max_s != NULL) {
-		if (min <= max) {
-			if (max > HASH_ROUNDS_MAX)
-				/* To avoid overflow in (max + 1) below */
-				max = HASH_ROUNDS_MAX;
-			rounds = g_random_int_range(min, max + 1);
-		} else
-			rounds = min;
-	} else if (min_s != NULL)
-		rounds = min;
-	else /* max_s != NULL */
-		rounds = max;
-	if (rounds < HASH_ROUNDS_MIN)
-		rounds = HASH_ROUNDS_MIN;
-	else if (rounds > HASH_ROUNDS_MAX)
-		rounds = HASH_ROUNDS_MAX;
-	return rounds;
-}
-
-static char *
-lu_common_default_salt_specifier(struct lu_module *module)
-{
-	static const struct {
-		const char *name, *initializer;
-		gboolean sha_rounds;
-	} salt_types[] = {
-		{ "des", "", FALSE },
-		{ "md5", "$1$", FALSE },
-		{ "blowfish", "$2a$", FALSE },
-		{ "sha256", "$5$", TRUE },
-		{ "sha512", "$6$", TRUE },
-	};
-
-	const char *salt_type;
-	size_t i;
-
-	g_return_val_if_fail(module != NULL, "");
-
-	salt_type = lu_cfg_read_single(module->lu_context,
-				       "defaults/crypt_style",
-				       "des");
-
-	for (i = 0; i < G_N_ELEMENTS(salt_types); i++) {
-		if (strcasecmp(salt_types[i].name, salt_type) == 0) {
-			goto found;
-		}
-	}
-	return g_strdup("");
-
-found:
-	if (salt_types[i].sha_rounds != FALSE) {
-		unsigned long rounds;
-
-		rounds = lu_common_select_hash_rounds(module);
-		if (rounds != 0)
-			return g_strdup_printf("%srounds=%lu$",
-					       salt_types[i].initializer,
-					       rounds);
-	}
-	return g_strdup(salt_types[i].initializer);
 }

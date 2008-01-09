@@ -37,8 +37,6 @@
 #include <sasl/sasl.h>
 #include "../lib/user_private.h"
 
-#include "default.-c"
-
 #undef  DEBUG
 #define LOCKCHAR '!'
 #define LOCKSTRING "!"
@@ -1536,7 +1534,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	if (!g_str_has_prefix(oldpassword, LU_CRYPTED)) {
 		char *salt;
 
-		salt = lu_common_default_salt_specifier(module);
+		salt = lu_util_default_salt_specifier(module->lu_context);
 		tmp = lu_make_crypted(oldpassword, salt);
 		g_free(salt);
 		if (tmp == NULL) {
@@ -1807,7 +1805,8 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		if (previous != NULL)
 			salt = previous + strlen(LU_CRYPTED);
 		else
-			salt = lu_common_default_salt_specifier(module);
+			salt = lu_util_default_salt_specifier(module
+							      ->lu_context);
 		crypted = lu_make_crypted(password, salt);
 		if (previous == NULL)
 			g_free(salt);

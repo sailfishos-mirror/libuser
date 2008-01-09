@@ -34,7 +34,6 @@
 #include <string.h>
 #include <unistd.h>
 #include "../lib/user_private.h"
-#include "default.-c"
 
 #define CHUNK_SIZE	(LINE_MAX * 4)
 
@@ -54,24 +53,24 @@ struct format_specifier {
 
 static const struct format_specifier format_passwd[] = {
 	{ LU_USERNAME, NULL, FALSE, FALSE, FALSE },
-	{ LU_USERPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_USERPASSWORD, LU_COMMON_DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
 	{ LU_UIDNUMBER, NULL, FALSE, FALSE, FALSE },
 	{ LU_GIDNUMBER, NULL, FALSE, FALSE, FALSE },
 	{ LU_GECOS, NULL, FALSE, FALSE, FALSE },
 	{ LU_HOMEDIRECTORY, NULL, FALSE, FALSE, FALSE },
-	{ LU_LOGINSHELL, DEFAULT_SHELL, FALSE, FALSE, TRUE },
+	{ LU_LOGINSHELL, LU_COMMON_DEFAULT_SHELL, FALSE, FALSE, TRUE },
 };
 
 static const struct format_specifier format_group[] = {
 	{ LU_GROUPNAME, NULL, FALSE, FALSE, FALSE },
-	{ LU_GROUPPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_GROUPPASSWORD, LU_COMMON_DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
 	{ LU_GIDNUMBER, NULL, FALSE, FALSE, FALSE },
 	{ LU_MEMBERNAME, NULL, TRUE, FALSE, FALSE },
 };
 
 static const struct format_specifier format_shadow[] = {
 	{ LU_SHADOWNAME, NULL, FALSE, FALSE, FALSE },
-	{ LU_SHADOWPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_SHADOWPASSWORD, LU_COMMON_DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
 	{ LU_SHADOWLASTCHANGE, NULL, FALSE, FALSE, FALSE },
 	{ LU_SHADOWMIN, "0", FALSE, FALSE, TRUE },
 	{ LU_SHADOWMAX, "99999", FALSE, FALSE, TRUE },
@@ -83,7 +82,7 @@ static const struct format_specifier format_shadow[] = {
 
 static const struct format_specifier format_gshadow[] = {
 	{ LU_GROUPNAME, NULL, FALSE, FALSE, FALSE },
-	{ LU_SHADOWPASSWORD, DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
+	{ LU_SHADOWPASSWORD, LU_COMMON_DEFAULT_PASSWORD, FALSE, FALSE, FALSE },
 	{ LU_ADMINISTRATORNAME, NULL, TRUE, FALSE, FALSE },
 	{ LU_MEMBERNAME, NULL, TRUE, FALSE, FALSE },
 };
@@ -1746,7 +1745,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	} else {
 		char *salt;
 
-		salt = lu_common_default_salt_specifier(module);
+		salt = lu_util_default_salt_specifier(module->lu_context);
 		password = lu_make_crypted(password, salt);
 		g_free(salt);
 		if (password == NULL) {

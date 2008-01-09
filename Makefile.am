@@ -64,8 +64,7 @@ pkgconfig_DATA = $(PACKAGE).pc
 dist_sysconf_DATA = libuser.conf
 
 pkginclude_HEADERS = lib/config.h lib/entity.h lib/error.h lib/prompt.h \
-	lib/user.h lib/user_private.h \
-	modules/default.-c
+	lib/user.h lib/user_private.h
 
 dist_noinst_SCRIPTS = python/ldap-script python/test-script
 noinst_HEADERS = python/admin.c python/ent.c python/misc.c
@@ -142,9 +141,9 @@ apps_lusermod_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lusermod_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
 apps_lusermod_LDFLAGS = $(GMODULE_LIBS) -lpopt
 
-lib_libuser_la_SOURCES = lib/config.c lib/entity.c lib/error.c lib/getdate.y \
-	lib/internal.h lib/misc.c lib/modules.c lib/prompt.c lib/scache.c \
-	lib/user.c lib/util.c
+lib_libuser_la_SOURCES = lib/common.c lib/config.c lib/entity.c lib/error.c \
+	lib/getdate.y lib/internal.h lib/misc.c lib/modules.c lib/prompt.c \
+	lib/scache.c lib/user.c lib/util.c
 # -Ilib so that "../config.h" is the result of configure
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DSYSCONFDIR='"$(sysconfdir)"'
@@ -152,27 +151,22 @@ lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
 	-version-info 2:10:1
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
-modules_libuser_files_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_files_la_SOURCES = modules/files.c
 modules_libuser_files_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_files_la_LIBADD = lib/libuser.la
 
-modules_libuser_shadow_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_shadow_la_SOURCES = modules/files.c
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
 
-modules_libuser_krb5_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_krb5_la_SOURCES = modules/krb5.c
 modules_libuser_krb5_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_krb5_la_LIBADD = lib/libuser.la
 
-modules_libuser_ldap_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_ldap_la_SOURCES = modules/ldap.c
 modules_libuser_ldap_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) -lldap
 modules_libuser_ldap_la_LIBADD = lib/libuser.la
 
-modules_libuser_sasldb_la_CPPFLAGS = $(AM_CPPFLAGS) -D_LIBUSER_MODULE
 modules_libuser_sasldb_la_SOURCES = modules/sasldb.c
 modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) \
 	-lsasl2

@@ -43,7 +43,7 @@ G_BEGIN_DECLS
 #define _(String)		gettext(String)
 #define N_(String)		String
 /* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
- * character, and we assume that all crypt algorithms generate stringa at
+ * character, and we assume that all crypt algorithms generate strings at
  * least this long. */
 #define LU_CRYPTED		"{CRYPT}"
 #define LU_CRYPT_SIZE		howmany(64,6)
@@ -51,6 +51,10 @@ G_BEGIN_DECLS
 				((strlen(String) > 0) && \
 				 (String[0] != '!') && \
 				 (strlen(String) < LU_CRYPT_SIZE))
+
+#define LU_COMMON_DEFAULT_PASSWORD		"!!"
+#define LU_COMMON_DEFAULT_SHADOW_PASSWORD	"x"
+#define LU_COMMON_DEFAULT_SHELL			"/bin/bash"
 
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
@@ -278,8 +282,23 @@ typedef struct lu_module *(*lu_module_init_t) (struct lu_context * context,
 
 struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 
+/* Common code expected to be used by some modules. */
+gboolean lu_common_user_default(struct lu_module *module, const char *name,
+				gboolean is_system, struct lu_ent *ent,
+				struct lu_error **error);
+gboolean lu_common_group_default(struct lu_module *module, const char *name,
+				 gboolean is_system, struct lu_ent *ent,
+				 struct lu_error **error);
+gboolean lu_common_suser_default(struct lu_module *module, const char *name,
+				 gboolean is_system, struct lu_ent *ent,
+				 struct lu_error **error);
+gboolean lu_common_sgroup_default(struct lu_module *module, const char *name,
+				  gboolean is_system, struct lu_ent *ent,
+				  struct lu_error **error);
+
 /* Generate a crypted password. */
 const char *lu_make_crypted(const char *plain, const char *previous);
+char *lu_util_default_salt_specifier(struct lu_context *context);
 
 /* Handle SELinux fscreate context.  Note that modules built WITH_SELINUX are
    intentionally not compatible with libuser built !WITH_SELINUX. */
