@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ml\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-10-25 08:11+0200\n"
+"POT-Creation-Date: 2008-01-09 11:36+0100\n"
 "PO-Revision-Date: 2007-12-07 18:45+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam\n"
@@ -25,7 +25,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "ഹോം ഡയറക്ടറിയുടെ പാഥ് ആയ `%s' ആബ്സല്യൂട്ട് അല്ല"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
-#: modules/files.c:186
+#: modules/files.c:185
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' വായിക്കുന്നതില്‍ പിഴവ്: %s"
@@ -36,13 +36,13 @@ msgid "Error creating `%s': %s"
 msgstr "`%s'സൃഷ്ടിയില്‍ പിഴവ് : %s"
 
 #: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
-#: modules/files.c:169
+#: modules/files.c:168
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' ഉടമസ്ഥനെ മാറ്റുന്നതിന്‍ പിഴവ്: %s"
 
 #: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
-#: modules/files.c:201 modules/files.c:215
+#: modules/files.c:200 modules/files.c:214
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s'എഴുതുന്നതില്‍ പിഴവ്: %s"
@@ -730,98 +730,99 @@ msgstr "ഗ്രൂപ്പിന് പേരോ GID-യോ ലഭ്യമ�
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ഫീള്‍ഡിന്‍റെ ഡീഫോള്‍ട്ട് മൂല്ല്യം: %s"
 
-#: lib/util.c:196
+#: lib/util.c:301
 #, c-format
 msgid "error locking file: %s"
 msgstr "ഫൈല്‍ ലോക്ക് ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: lib/util.c:605
+#: lib/util.c:710
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "സ്വതവേയുള്ള സെക്യൂരിറ്റി കോണ്‍ടെക്സ്റ്റ ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല: %s"
 
-#: lib/util.c:631
+#: lib/util.c:737
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "couldn't get security context of `%s': %s"
 
-#: lib/util.c:637 lib/util.c:664
+#: lib/util.c:743 lib/util.c:770
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "couldn't set default security context to `%s': %s"
 
-#: lib/util.c:658
+#: lib/util.c:764
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s'- നുള്ള സെക്യൂരിറ്റി കോണ്‍ടെക്സ്റ്റ് ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല: %s"
 
-#: modules/files.c:116 modules/files.c:450 modules/files.c:761
-#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
-#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
-#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
-#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
-#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
-#: modules/files.c:2371 modules/files.c:2386
+#: modules/files.c:115 modules/files.c:449 modules/files.c:760
+#: modules/files.c:1028 modules/files.c:1168 modules/files.c:1399
+#: modules/files.c:1483 modules/files.c:1704 modules/files.c:1869
+#: modules/files.c:1886 modules/files.c:1975 modules/files.c:1994
+#: modules/files.c:2062 modules/files.c:2083 modules/files.c:2180
+#: modules/files.c:2199 modules/files.c:2258 modules/files.c:2277
+#: modules/files.c:2373 modules/files.c:2388
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' തുറക്കുവാന്‍ സാധിച്ചില്ല: %s"
 
-#: modules/files.c:128 modules/files.c:157 modules/files.c:223
-#: modules/files.c:773 modules/files.c:1181
+#: modules/files.c:127 modules/files.c:156 modules/files.c:222
+#: modules/files.c:772 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' stat ചെയ്യുവാന്‍ സാധിച്ചില്ല: %s"
 
-#: modules/files.c:139
+#: modules/files.c:138
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' create ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/files.c:152
+#: modules/files.c:151
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "%s എന്ന ബാക്കപ്പ് ഫൈല്‍ നിലവിലുണ്ട്, അത് ഒരു സാധാരണ ഫൈലല്ല"
 
-#: modules/files.c:231
+#: modules/files.c:230
 msgid "backup file size mismatch"
 msgstr "ബാക്കപ്പ് ഫൈലിന്‍റെ വലിപ്പത്തില്‍ പൊരുത്തക്കേട്"
 
-#: modules/files.c:803 modules/files.c:1190
+#: modules/files.c:802 modules/files.c:1189
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' നിന്നും വായിക്കുവാന്‍ സാധിച്ചില്ല: %s"
 
-#: modules/files.c:812 modules/files.c:819
+#: modules/files.c:811 modules/files.c:818
 msgid "entry already present in file"
 msgstr "എന്‍ട്രി ഫൈലില്‍ നിലനില്‍ക്കുന്നു"
 
-#: modules/files.c:826 modules/files.c:836 modules/files.c:847
-#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
+#: modules/files.c:825 modules/files.c:835 modules/files.c:846
+#: modules/files.c:1248 modules/files.c:1256 modules/files.c:1264
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'ലേക്ക് എഴുതുവാന്‍ സാധിച്ചില്ല : %s"
 
-#: modules/files.c:1006 modules/files.c:1065
+#: modules/files.c:1005 modules/files.c:1064
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity object has no %s attribute"
 
-#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1753 modules/ldap.c:1542 modules/ldap.c:1815
 msgid "error encrypting password"
 msgstr "പാസ്വേഡ് എന്‍ക്രിപ്റ്റ് ചെയ്യുന്നതില്‍ പിഴവ്"
 
-#: modules/files.c:2657 modules/files.c:2735
+#: modules/files.c:2659 modules/files.c:2737
 msgid "not executing with superuser privileges"
 msgstr "not executing with superuser privileges"
 
-#: modules/files.c:2748
+#: modules/files.c:2750
 msgid "no shadow file present -- disabling"
 msgstr "ഷാഡോ ഫൈല്‍ ലഭ്യമല്ല -- disabling"
 
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
+msgstr ""
+"`%s' എന്ന realmല്‍ `%s' എന്ന സറ്‍വീസിനായി kadm5 സറ്‍വറുമായി കണക്റ്റ് ചെയ്യുന്നതില്‍‍ പിഴവ്: %s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
@@ -876,104 +877,104 @@ msgstr "Kerberos അഡ്മിന്‍ പ്രിന്‍സിപ്പ�
 msgid "Kerberos Password for Admin Principal"
 msgstr "അഡ്മിന്‍ പ്രിന്‍സിപ്പളിന് Kerberos പാസ്വേഡ്"
 
-#: modules/ldap.c:205
+#: modules/ldap.c:203
 msgid "error initializing ldap library"
 msgstr "error initializing ldap library"
 
-#: modules/ldap.c:216
+#: modules/ldap.c:214
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP പ്രോട്ടോക്കോള്‍ വേറ്‍ഷന്‍ %dലേക്ക് സെറ്റ് ചെയ്യുവാന്‍ സാധിച്ചില്ല"
 
-#: modules/ldap.c:228
+#: modules/ldap.c:226
 msgid "could not negotiate TLS with LDAP server"
 msgstr "could not negotiate TLS with LDAP server"
 
-#: modules/ldap.c:421
+#: modules/ldap.c:419
 msgid "could not bind to LDAP server"
 msgstr "LDAP സറ്‍വറിലേക്ക് bind ചെയ്യുവാന്‍ സാധിച്ചില്ല"
 
-#: modules/ldap.c:424
+#: modules/ldap.c:422
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "could not bind to LDAP server, first attempt as `%s': %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1329
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "user object had no %s attribute"
 
-#: modules/ldap.c:1340
+#: modules/ldap.c:1338
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "`%s' ഇല്ലാതെയാണ് യൂസറ്‍ ഒബ്ജക്ക്റ്റ് സൃഷ്ടിക്കപ്പെട്ടത്"
 
-#: modules/ldap.c:1360
+#: modules/ldap.c:1358
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "ഒരു LDAP ഡയറക്ടറി എന്‍ട്രി നിര്‍മ്മിക്കുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1386 modules/ldap.c:1602
+#: modules/ldap.c:1384 modules/ldap.c:1603
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ഒരു LDAP ഡയറക്ടറി എന്‍ട്രിയില്‍ മാറ്റം വരുത്തുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1411
+#: modules/ldap.c:1409
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP ഡയറക്ടറി എന്‍ട്രിയുടെ പേര് മാറ്റുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1458
+#: modules/ldap.c:1456
 #, c-format
 msgid "object had no %s attribute"
 msgstr "ഒബ്ജക്റ്റിന് %s എന്ന അട്ട്രിബ്യൂട്ടില്ല"
 
-#: modules/ldap.c:1476
+#: modules/ldap.c:1474
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP ഡയറക്ടറി എന്‍ട്രി നീക്കം ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
-#: modules/ldap.c:1734
+#: modules/ldap.c:1509 modules/ldap.c:1525 modules/ldap.c:1636
+#: modules/ldap.c:1735
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ഒബ്ജക്റ്റിന് %s എന്ന അട്ട്രിബ്യൂട്ടില്ല"
 
-#: modules/ldap.c:1660
+#: modules/ldap.c:1661
 msgid "no such object in LDAP directory"
 msgstr "LDAP ഡയറക്ടറിയില്‍ അങ്ങനെ ഒരു ഒബ്ജക്റ്റില്ല"
 
-#: modules/ldap.c:1672
+#: modules/ldap.c:1673
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "%s എന്ന അട്ട്രിബ്യൂട്ട് കണ്ടുകിട്ടിയില്ല"
 
-#: modules/ldap.c:1841
+#: modules/ldap.c:1846
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP ഡയറക്ടറിയില്‍ %sനായി പാസ്വേര്‍ഡ് സെറ്റ് ചെയ്യുന്നതില്‍ പിഴവ്: %s"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2457
 msgid "LDAP Server Name"
 msgstr "LDAP സറ്‍വറ്‍ നെയിം"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2463
 msgid "LDAP Search Base DN"
 msgstr "LDAP സറ്‍ച്ച് ബെയ്സ് DN"
 
-#: modules/ldap.c:2464
+#: modules/ldap.c:2469
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2476
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind പാസ്വേഡ്"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL യൂസറ്‍"
 
-#: modules/ldap.c:2482
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ഓഥറയിസേഷന്‍"
 
@@ -1069,4 +1070,3 @@ msgstr "Getting default user attributes:\n"
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
 msgstr "യൂസറിന്‍റെ structure പകറ്‍ത്തുന്നു:\n"
-

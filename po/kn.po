@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-10-25 08:11+0200\n"
+"POT-Creation-Date: 2008-01-09 11:36+0100\n"
 "PO-Revision-Date: 2007-09-23 23:43+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
@@ -23,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
-#: modules/files.c:186
+#: modules/files.c:185
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' ಅನ್ನು ಓದುವಲ್ಲಿ ದೋಷ: %s"
@@ -34,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "`%s' ಅನ್ನು ಸೃಜಿಸು: %s"
 
 #: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
-#: modules/files.c:169
+#: modules/files.c:168
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' ನ ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
-#: modules/files.c:201 modules/files.c:215
+#: modules/files.c:200 modules/files.c:214
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' ಗೆ ಬರೆಯುವಲ್ಲಿ ದೋಷ: %s"
@@ -728,91 +728,91 @@ msgstr ""
 msgid "Invalid default value of field %s: %s"
 msgstr ""
 
-#: lib/util.c:196
+#: lib/util.c:301
 #, c-format
 msgid "error locking file: %s"
 msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s"
 
-#: lib/util.c:605
+#: lib/util.c:710
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:631
+#: lib/util.c:737
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr ""
 
-#: lib/util.c:637 lib/util.c:664
+#: lib/util.c:743 lib/util.c:770
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 
-#: lib/util.c:658
+#: lib/util.c:764
 #, fuzzy, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ಗೆ ಬರೆಯಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:116 modules/files.c:450 modules/files.c:761
-#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
-#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
-#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
-#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
-#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
-#: modules/files.c:2371 modules/files.c:2386
+#: modules/files.c:115 modules/files.c:449 modules/files.c:760
+#: modules/files.c:1028 modules/files.c:1168 modules/files.c:1399
+#: modules/files.c:1483 modules/files.c:1704 modules/files.c:1869
+#: modules/files.c:1886 modules/files.c:1975 modules/files.c:1994
+#: modules/files.c:2062 modules/files.c:2083 modules/files.c:2180
+#: modules/files.c:2199 modules/files.c:2258 modules/files.c:2277
+#: modules/files.c:2373 modules/files.c:2388
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' ಅನ್ನು ತೆರೆಯಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:128 modules/files.c:157 modules/files.c:223
-#: modules/files.c:773 modules/files.c:1181
+#: modules/files.c:127 modules/files.c:156 modules/files.c:222
+#: modules/files.c:772 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr ""
 
-#: modules/files.c:139
+#: modules/files.c:138
 #, c-format
 msgid "error creating `%s': %s"
 msgstr ""
 
-#: modules/files.c:152
+#: modules/files.c:151
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr ""
 
-#: modules/files.c:231
+#: modules/files.c:230
 msgid "backup file size mismatch"
 msgstr ""
 
-#: modules/files.c:803 modules/files.c:1190
+#: modules/files.c:802 modules/files.c:1189
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr ""
 
-#: modules/files.c:812 modules/files.c:819
+#: modules/files.c:811 modules/files.c:818
 msgid "entry already present in file"
 msgstr ""
 
-#: modules/files.c:826 modules/files.c:836 modules/files.c:847
-#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
+#: modules/files.c:825 modules/files.c:835 modules/files.c:846
+#: modules/files.c:1248 modules/files.c:1256 modules/files.c:1264
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' ಗೆ ಬರೆಯಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:1006 modules/files.c:1065
+#: modules/files.c:1005 modules/files.c:1064
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1753 modules/ldap.c:1542 modules/ldap.c:1815
 msgid "error encrypting password"
 msgstr ""
 
-#: modules/files.c:2657 modules/files.c:2735
+#: modules/files.c:2659 modules/files.c:2737
 msgid "not executing with superuser privileges"
 msgstr ""
 
-#: modules/files.c:2748
+#: modules/files.c:2750
 msgid "no shadow file present -- disabling"
 msgstr ""
 
@@ -874,104 +874,104 @@ msgstr ""
 msgid "Kerberos Password for Admin Principal"
 msgstr ""
 
-#: modules/ldap.c:205
+#: modules/ldap.c:203
 msgid "error initializing ldap library"
 msgstr ""
 
-#: modules/ldap.c:216
+#: modules/ldap.c:214
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr ""
 
-#: modules/ldap.c:228
+#: modules/ldap.c:226
 msgid "could not negotiate TLS with LDAP server"
 msgstr ""
 
-#: modules/ldap.c:421
+#: modules/ldap.c:419
 msgid "could not bind to LDAP server"
 msgstr ""
 
-#: modules/ldap.c:424
+#: modules/ldap.c:422
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr ""
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1329
 #, c-format
 msgid "user object had no %s attribute"
 msgstr ""
 
-#: modules/ldap.c:1340
+#: modules/ldap.c:1338
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr ""
 
-#: modules/ldap.c:1360
+#: modules/ldap.c:1358
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr ""
 
-#: modules/ldap.c:1386 modules/ldap.c:1602
+#: modules/ldap.c:1384 modules/ldap.c:1603
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
 
-#: modules/ldap.c:1411
+#: modules/ldap.c:1409
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr ""
 
-#: modules/ldap.c:1458
+#: modules/ldap.c:1456
 #, c-format
 msgid "object had no %s attribute"
 msgstr ""
 
-#: modules/ldap.c:1476
+#: modules/ldap.c:1474
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr ""
 
-#: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
-#: modules/ldap.c:1734
+#: modules/ldap.c:1509 modules/ldap.c:1525 modules/ldap.c:1636
+#: modules/ldap.c:1735
 #, c-format
 msgid "object has no %s attribute"
 msgstr ""
 
-#: modules/ldap.c:1660
+#: modules/ldap.c:1661
 msgid "no such object in LDAP directory"
 msgstr ""
 
-#: modules/ldap.c:1672
+#: modules/ldap.c:1673
 #, c-format
 msgid "no `%s' attribute found"
 msgstr ""
 
-#: modules/ldap.c:1841
+#: modules/ldap.c:1846
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2457
 msgid "LDAP Server Name"
 msgstr "LDAP ಪರಿಚಾರಕದ ಹೆಸರು"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2463
 msgid "LDAP Search Base DN"
 msgstr ""
 
-#: modules/ldap.c:2464
+#: modules/ldap.c:2469
 msgid "LDAP Bind DN"
 msgstr ""
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2476
 msgid "LDAP Bind Password"
 msgstr ""
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ಬಳಕೆದಾರ"
 
-#: modules/ldap.c:2482
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr ""
 

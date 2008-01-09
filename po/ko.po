@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2007-10-25 08:11+0200\n"
+"POT-Creation-Date: 2008-01-09 11:36+0100\n"
 "PO-Revision-Date: 2007-08-03 11:34+1000\n"
 "Last-Translator: Eunju Kim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -25,7 +25,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
-#: modules/files.c:186
+#: modules/files.c:185
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s'(을)를 읽는 도중 오류 발생: %s"
@@ -36,13 +36,13 @@ msgid "Error creating `%s': %s"
 msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
 
 #: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
-#: modules/files.c:169
+#: modules/files.c:168
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' 소유자를 변경하는 도중 오류 발생: %s"
 
 #: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
-#: modules/files.c:201 modules/files.c:215
+#: modules/files.c:200 modules/files.c:214
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s'(을)를 기록하는 도중 오류 발생: %s"
@@ -730,91 +730,91 @@ msgstr "그룹은 이름과 GID가 없습니다"
 msgid "Invalid default value of field %s: %s"
 msgstr "%s 란의 기본값이 잘못됨: %s"
 
-#: lib/util.c:196
+#: lib/util.c:301
 #, c-format
 msgid "error locking file: %s"
 msgstr "파일을 잠그는 도중 오류 발생: %s"
 
-#: lib/util.c:605
+#: lib/util.c:710
 #, fuzzy, c-format
 msgid "couldn't get default security context: %s"
 msgstr "기본 보안 문맥을 설정하지 못했습니다: %s"
 
-#: lib/util.c:631
+#: lib/util.c:737
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s'의 보안 문맥을 읽어오는데 실패했습니다: %s"
 
-#: lib/util.c:637 lib/util.c:664
+#: lib/util.c:743 lib/util.c:770
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "기본 보안 문맥을 `%s'으로 설정할 수 없습니다: %s"
 
-#: lib/util.c:658
+#: lib/util.c:764
 #, fuzzy, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s'의 보안 문맥을 읽어오는데 실패했습니다: %s"
 
-#: modules/files.c:116 modules/files.c:450 modules/files.c:761
-#: modules/files.c:1029 modules/files.c:1169 modules/files.c:1400
-#: modules/files.c:1484 modules/files.c:1705 modules/files.c:1867
-#: modules/files.c:1884 modules/files.c:1973 modules/files.c:1992
-#: modules/files.c:2060 modules/files.c:2081 modules/files.c:2178
-#: modules/files.c:2197 modules/files.c:2256 modules/files.c:2275
-#: modules/files.c:2371 modules/files.c:2386
+#: modules/files.c:115 modules/files.c:449 modules/files.c:760
+#: modules/files.c:1028 modules/files.c:1168 modules/files.c:1399
+#: modules/files.c:1483 modules/files.c:1704 modules/files.c:1869
+#: modules/files.c:1886 modules/files.c:1975 modules/files.c:1994
+#: modules/files.c:2062 modules/files.c:2083 modules/files.c:2180
+#: modules/files.c:2199 modules/files.c:2258 modules/files.c:2277
+#: modules/files.c:2373 modules/files.c:2388
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s'(을)를 열 수 없음: %s"
 
-#: modules/files.c:128 modules/files.c:157 modules/files.c:223
-#: modules/files.c:773 modules/files.c:1181
+#: modules/files.c:127 modules/files.c:156 modules/files.c:222
+#: modules/files.c:772 modules/files.c:1180
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'(을)를 표시(stat)할 수 없음: %s"
 
-#: modules/files.c:139
+#: modules/files.c:138
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
 
-#: modules/files.c:152
+#: modules/files.c:151
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "백업 파일 `%s' 존재하지만 정규 파일이 아닙니다"
 
-#: modules/files.c:231
+#: modules/files.c:230
 msgid "backup file size mismatch"
 msgstr "백업 파일 용량이 일치하지 않음"
 
-#: modules/files.c:803 modules/files.c:1190
+#: modules/files.c:802 modules/files.c:1189
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'(을)를 읽을 수 없음: %s"
 
-#: modules/files.c:812 modules/files.c:819
+#: modules/files.c:811 modules/files.c:818
 msgid "entry already present in file"
 msgstr "파일 안에 목록(entry)이 이미 존재합니다"
 
-#: modules/files.c:826 modules/files.c:836 modules/files.c:847
-#: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
+#: modules/files.c:825 modules/files.c:835 modules/files.c:846
+#: modules/files.c:1248 modules/files.c:1256 modules/files.c:1264
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'에 작성할 수 없음: %s"
 
-#: modules/files.c:1006 modules/files.c:1065
+#: modules/files.c:1005 modules/files.c:1064
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entity 개체에 %s 속성이 없습니다"
 
-#: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
+#: modules/files.c:1753 modules/ldap.c:1542 modules/ldap.c:1815
 msgid "error encrypting password"
 msgstr "암호를 암호화하는 도중 오류 발생"
 
-#: modules/files.c:2657 modules/files.c:2735
+#: modules/files.c:2659 modules/files.c:2737
 msgid "not executing with superuser privileges"
 msgstr "수퍼유저 권한으로 실행할 수 없습니다"
 
-#: modules/files.c:2748
+#: modules/files.c:2750
 msgid "no shadow file present -- disabling"
 msgstr "현재 섀도우 파일이 없음 -- 불가능"
 
@@ -878,104 +878,104 @@ msgstr "Kerberos Admin Principal"
 msgid "Kerberos Password for Admin Principal"
 msgstr "Admin Principal의 Kerberos 암호"
 
-#: modules/ldap.c:205
+#: modules/ldap.c:203
 msgid "error initializing ldap library"
 msgstr "ldap 라이브러리를 초기화하는 도중 오류가 발생했습니다"
 
-#: modules/ldap.c:216
+#: modules/ldap.c:214
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "%d 버전에 LDAP 프로토콜을 설정할 수 없습니다"
 
-#: modules/ldap.c:228
+#: modules/ldap.c:226
 msgid "could not negotiate TLS with LDAP server"
 msgstr "LDAP 서버와 TLS 연결할 수 없습니다"
 
-#: modules/ldap.c:421
+#: modules/ldap.c:419
 msgid "could not bind to LDAP server"
 msgstr "LDAP 서버와 연결할 수 없습니다"
 
-#: modules/ldap.c:424
+#: modules/ldap.c:422
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP 서버와 연결할 수 없습니다, `%s'로 첫번째 시도: %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1329
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "사용자 개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1340
+#: modules/ldap.c:1338
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "`%s'(이)가 없는 사용자 개체가 생성되었습니다"
 
-#: modules/ldap.c:1360
+#: modules/ldap.c:1358
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 생성하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1386 modules/ldap.c:1602
+#: modules/ldap.c:1384 modules/ldap.c:1603
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 목록(entry)을 편집하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1411
+#: modules/ldap.c:1409
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목의 이름을 변경하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1458
+#: modules/ldap.c:1456
 #, c-format
 msgid "object had no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1476
+#: modules/ldap.c:1474
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 삭제하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
-#: modules/ldap.c:1734
+#: modules/ldap.c:1509 modules/ldap.c:1525 modules/ldap.c:1636
+#: modules/ldap.c:1735
 #, c-format
 msgid "object has no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
-#: modules/ldap.c:1660
+#: modules/ldap.c:1661
 msgid "no such object in LDAP directory"
 msgstr "LDAP 디렉토리 안에 그러한 개체가 없습니다"
 
-#: modules/ldap.c:1672
+#: modules/ldap.c:1673
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' 속성을 찾을 수 없습니다"
 
-#: modules/ldap.c:1841
+#: modules/ldap.c:1846
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s의 LDAP 디렉토리 안에 암호를 설정하는 도중 오류 발생: %s"
 
-#: modules/ldap.c:2452
+#: modules/ldap.c:2457
 msgid "LDAP Server Name"
 msgstr "LDAP 서버 이름"
 
-#: modules/ldap.c:2458
+#: modules/ldap.c:2463
 msgid "LDAP Search Base DN"
 msgstr "LDAP 검색 기반 DN"
 
-#: modules/ldap.c:2464
+#: modules/ldap.c:2469
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN "
 
-#: modules/ldap.c:2471
+#: modules/ldap.c:2476
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 암호"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2480
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 사용자"
 
-#: modules/ldap.c:2482
+#: modules/ldap.c:2487
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 권한부여 사용자"
 
