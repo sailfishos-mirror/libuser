@@ -1,5 +1,5 @@
 #! /bin/sh
-# Automated files/shadow regression tester
+# Automated password hashing regression tester
 #
 # Copyright (c) 2008 Red Hat, Inc. All rights reserved.
 #

@@ -1,3 +1,7 @@
+2008-01-11  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/pwhash_test: Fix description.
+
 2008-01-09  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.7.
