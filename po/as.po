@@ -1,120 +1,123 @@
 # translation of as.po to Assamese
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR Red Hat, Inc.
-# Amitakhya Phukan <amitakhya.phukan@gmail.com>, 2006.
 #
+# Amitakhya Phukan <amitakhya.phukan@gmail.com>, 2006.
+# Amitakhya Phukan <aphukan@fedoraproject.org>, 2008.
+# Amitakhya Phukan <aphukan@redhat.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2007-10-25 08:11+0200\n"
-"PO-Revision-Date: 2006-09-29 12:39+0530\n"
-"Last-Translator: Amitakhya Phukan <amitakhya.phukan@gmail.com>\n"
+"PO-Revision-Date: 2008-01-21 15:23+0530\n"
+"Last-Translator: Amitakhya Phukan <aphukan@fedoraproject.org>\n"
 "Language-Team: Assamese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1)\n"
 
 #: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "ঘৰৰ পঞ্জিকাৰ পথ `%s' সম্পূৰ্ণ নহয়"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
 #: modules/files.c:186
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "`%s' পঢ়োঁতে ভুল: %s"
 
 #: apps/apputil.c:127 apps/apputil.c:203
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr ""
+msgstr "`%s' সৃষ্টি কৰোঁতে ভুল: %s"
 
 #: apps/apputil.c:135 apps/apputil.c:210 apps/apputil.c:300
 #: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "`%s' ৰ গৰাকীৰ পৰিবৰ্তনত ভুল: %s"
 
 #: apps/apputil.c:239 apps/apputil.c:271 apps/apputil.c:287
 #: modules/files.c:201 modules/files.c:215
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "`%s' লিখতে সমস্যা: %s"
 
 #: apps/apputil.c:362 apps/apputil.c:397 apps/apputil.c:414
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr ""
+msgstr "`%s' অপসাৰণে সমস্যা: %s"
 
 #: apps/apputil.c:572 apps/apputil.c:576
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "অধিকাৰ হ্ৰাসেৰ প্ৰচেষ্টা ব্যৰ্থ।\n"
 
 #: apps/apputil.c:585
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "অভ্যন্তৰীণ সমস্যা।\n"
 
 #: apps/apputil.c:606
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s-ৰ, %s-ৰ finger সংক্ৰান্ত তথ্য পৰিবৰ্তন কৰাৰ অধিকাৰ নেই।\n"
 
 #: apps/apputil.c:608
 msgid "Unknown user context"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ প্ৰাসঙ্গিক বিবৰণ অজানা"
 
 #: apps/apputil.c:616
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd-ৰ অবিকল্পিত প্ৰসঙ্গ নিৰ্ধাৰণ কৰা সম্ভব নহয়\n"
 
 #: apps/apputil.c:625
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "PAM আৰম্ভ কৰোঁতে সমস্যা।\n"
 
 #: apps/apputil.c:635 apps/apputil.c:662
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "%s-ৰ পৰিচয়প্ৰমাণ প্ৰক্ৰিয়া ব্যৰ্থ হয়েছে।\n"
 
 #: apps/apputil.c:643
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "PAM-ৰ অভ্যন্তৰীণ সমস্যা `%s'.\n"
 
 #: apps/apputil.c:648
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr ""
+msgstr "অজানা ব্যৱহাৰকৰোঁতা অনুমোদিত ৰয়েছেন।\n"
 
 #: apps/apputil.c:652
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ গৰমিল।\n"
 
 #: apps/lchage.c:115 apps/lid.c:117 apps/lpasswd.c:70 apps/luseradd.c:92
 #: apps/luserdel.c:65 apps/lusermod.c:90
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[OPTION...] user"
 
 #: apps/lchage.c:118 apps/lchfn.c:76 apps/lchsh.c:62 apps/lgroupadd.c:69
 #: apps/lgroupdel.c:60 apps/lgroupmod.c:88 apps/lid.c:120 apps/lnewusers.c:70
 #: apps/lpasswd.c:73 apps/luseradd.c:95 apps/luserdel.c:68 apps/lusermod.c:93
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "আৰ্গুমেন্ট পাৰ্স কৰোঁতে সমস্যা: %s.\n"
 
 #: apps/lchage.c:127 apps/lpasswd.c:87 apps/luseradd.c:110 apps/luserdel.c:76
 #: apps/lusermod.c:104
 #, c-format
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "কোনো ব্যৱহাৰকৰোঁতাৰ নাম উল্লেখ কৰা নহয়।\n"
 
 #: apps/lchage.c:137 apps/lchfn.c:110 apps/lchsh.c:96 apps/lgroupadd.c:104
 #: apps/lgroupdel.c:79 apps/lgroupmod.c:120 apps/lid.c:164 apps/lnewusers.c:81
@@ -122,613 +125,613 @@ msgstr ""
 #: apps/lusermod.c:145 samples/enum.c:60 samples/testuser.c:75
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
+msgstr "%s আৰম্ভ কৰোঁতে সমস্যা: %s।\n"
 
 #: apps/lchage.c:146 apps/lchfn.c:118 apps/lchsh.c:104 apps/lpasswd.c:148
 #: apps/luserdel.c:93 apps/lusermod.c:159
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতা বৰ্তমানে উপস্থিত নেই।\n"
 
 #: apps/lchage.c:157
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "অ্যাকাউন্ট লক কৰা আছে।\n"
 
 #: apps/lchage.c:159
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "অ্যাকাউন্ট লক কৰা নেই।\n"
 
 #: apps/lchage.c:164
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr ""
+msgstr "সৰ্বনিম্ন:\t%ld\n"
 
 #: apps/lchage.c:168
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr ""
+msgstr "সৰ্বোচ্চ:\t%ld\n"
 
 #: apps/lchage.c:172
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr ""
+msgstr "সতৰ্কবাৰ্তা:\t%ld\n"
 
 #: apps/lchage.c:176
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr ""
+msgstr "নিষ্ক্ৰিয়:\t%ld\n"
 
 #: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
 msgid "Never"
-msgstr ""
+msgstr "কখনো নয়"
 
 #: apps/lchage.c:182
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "সৰ্বশেষ পৰিবৰ্তন:\t%s\n"
 
 #: apps/lchage.c:191
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "পাসওয়াৰ্ডেৰ মেয়াদপূৰ্তী:\t%s\n"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "পাসওয়াৰ্ড নিষ্ক্ৰিয়:\t%s\n"
 
 #: apps/lchage.c:208
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "অ্যাকাউন্টেৰ মেয়াদপূৰ্তী:\t%s\n"
 
 #: apps/lchage.c:258
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr ""
+msgstr "%s সংক্ৰান্ত পুৰোনো তথ্য পৰিবৰ্তনেৰ প্ৰচেষ্টা ব্যৰ্থ: %s।\n"
 
 #: apps/lchfn.c:73 apps/lchsh.c:59
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[OPTION...] [user]"
 
 #: apps/lchfn.c:92 apps/lchsh.c:78 apps/lid.c:151
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "কোনো ব্যৱহাৰকৰোঁতাৰ নাম নিৰ্দিষ্ট নহয়, %d uid-ৰ কোনো নাম উল্লিখিত নহয়।\n"
 
 #: apps/lchfn.c:103
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr ""
+msgstr "%s সংক্ৰান্ত finger তথ্য পৰিবৰ্তন কৰা হৈছে ।\n"
 
 #: apps/lchfn.c:144
 msgid "Full Name"
-msgstr ""
+msgstr "সম্পূৰ্ণ নাম"
 
 #: apps/lchfn.c:158
 msgid "Surname"
-msgstr ""
+msgstr "পদবি"
 
 #: apps/lchfn.c:173
 msgid "Given Name"
-msgstr ""
+msgstr "প্ৰদত্ত নাম"
 
 #: apps/lchfn.c:183
 msgid "Office"
-msgstr ""
+msgstr "কৰ্মস্থল"
 
 #: apps/lchfn.c:192
 msgid "Office Phone"
-msgstr ""
+msgstr "কৰ্মস্থলেৰ ফোন"
 
 #: apps/lchfn.c:201
 msgid "Home Phone"
-msgstr ""
+msgstr "গৃহেৰ ফোন"
 
 #: apps/lchfn.c:215
 msgid "E-Mail Address"
-msgstr ""
+msgstr "ই-মেইল ঠিকানা"
 
 #: apps/lchfn.c:228
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "Finger সংক্ৰান্ত তথ্য পৰিবৰ্তন কৰা নাযায়:  ইনপুটজড়িত ত্ৰুটি।\n"
 
 #: apps/lchfn.c:300
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "Finger সংক্ৰান্ত তথ্য পৰিবৰ্তন কৰা হয়েছে।\n"
 
 #: apps/lchfn.c:303
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "Finger সংক্ৰান্ত তথ্য পৰিবৰ্তন কৰা নহয়: %s।\n"
 
 #: apps/lchsh.c:89
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s-ৰ শেল পৰিবৰ্তন কৰা হৈছে ।\n"
 
 #: apps/lchsh.c:118
 msgid "New Shell"
-msgstr ""
+msgstr "নতুন শেল"
 
 #: apps/lchsh.c:125 apps/lchsh.c:144
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "শেল পৰিবৰ্তিত নহয়: %s\n"
 
 #: apps/lchsh.c:141
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "শেল পৰিবৰ্তিত হয়েছে।\n"
 
 #: apps/lgroupadd.c:66 apps/lgroupdel.c:57 apps/lgroupmod.c:85
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[OPTION...] group"
 
 #: apps/lgroupadd.c:78 apps/lgroupdel.c:69 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "কোনো সমষ্টিৰ নাম নিৰ্ধাৰণ কৰা নহয়।\n"
 
 #: apps/lgroupadd.c:91 apps/lgroupmod.c:108 apps/lusermod.c:116
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "সমষ্টিৰ অবৈধ ID %s\n"
 
 #: apps/lgroupadd.c:128
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr ""
+msgstr "সমষ্টি তৈৰি কৰোঁতে ব্যৰ্থ: %s\n"
 
 #: apps/lgroupdel.c:87 apps/lgroupmod.c:133 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "%s সমষ্টিটি বৰ্তমানে উপস্থিত নেই।\n"
 
 #: apps/lgroupdel.c:93
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "%s সমষ্টিটি মুছে ফেলা সম্ভব নহয়: %s\n"
 
 #: apps/lgroupmod.c:126 apps/lusermod.c:152
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "-L এবং -U দুটিই নিৰ্দিষ্ট কৰা হয়েছে।\n"
 
 #: apps/lgroupmod.c:140 apps/lgroupmod.c:149
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "%s সমষ্টিৰ পাসওয়াৰ্ড তৈৰি কৰোঁতে ব্যৰ্থ: %s\n"
 
 #: apps/lgroupmod.c:158
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr ""
+msgstr "%s সমষ্টিটি লক কৰা নাযায়: %s\n"
 
 #: apps/lgroupmod.c:167
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr ""
+msgstr "%s সমষ্টিটি আন-লক কৰা নাযায়: %s\n"
 
 #: apps/lgroupmod.c:251 apps/lgroupmod.c:277
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr ""
+msgstr "%s সমষ্টি পৰিবৰ্তন কৰা নাযায়: %s\n"
 
 #: apps/lid.c:48
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr ""
+msgstr "%s অনুসন্ধানে সমস্যা: %s।\n"
 
 #: apps/lid.c:133
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "সমষ্টিৰ নাম উল্লেখ কৰা নহয়, %s ব্যবহাৰ কৰা হৈছে ।\n"
 
 #: apps/lid.c:137
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "সমষ্টিৰ নাম উল্লেখ কৰা নহয়, %d gid-ৰ বাবে কোনো নাম লেখা নহয়।\n"
 
 #: apps/lid.c:147
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ নাম উল্লেখ কৰা নহয়, %s ব্যবহাৰ কৰা হৈছে ।\n"
 
 #: apps/lnewusers.c:67
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[OPTION...]"
 
 #: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "`%s' খুলতে সমস্যা: %s।\n"
 
 #: apps/lnewusers.c:122
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
+msgstr "`%s' -ৰ বাবে অ্যাকাউন্ট তৈৰি কৰোঁতে সমস্যা: পংক্তিটি সঠিক বিন্যাসে গঠিত নহয়।\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:119 apps/lusermod.c:131
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা অবৈধ ID %s\n"
 
 #: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "UID 0 ব্যবহাৰ কৰে অ্যাকাউন্ট তৈৰি কৰা হবে না।\n"
 
 #: apps/lnewusers.c:221
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
+msgstr "`%s'-ৰ বাবে, GID %jd ব্যবহাৰ কৰে সমষ্টি তৈৰি কৰোঁতে সমস্যা: %s\n"
 
 #: apps/lnewusers.c:278
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "%s-ৰ বাবে প্ৰাৰম্ভিক পাসওয়াৰ্ড নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s\n"
 
 #: apps/lnewusers.c:292
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "%s-ৰ বাবে ব্যক্তিগত (হোম) পঞ্জিকা তৈৰি কৰোঁতে সমস্যা: %s\n"
 
 #: apps/lnewusers.c:306
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "%s-ৰ বাবে মেইল স্পুল তৈৰি কৰোঁতে সমস্যা।\n"
 
 #: apps/lnewusers.c:312
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "%s-ৰ বাবে ব্যৱহাৰকৰোঁতাৰ অ্যাকাউন্ট তৈৰি কৰোঁতে সমস্যা:%s\n"
 
 #: apps/lpasswd.c:84
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s-ৰ পাসওয়াৰ্ড পৰিবৰ্তন কৰা হৈছে ।\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "নতুন পাসওয়াৰ্ড"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "নতুন পাসওয়াৰ্ড (নিশ্চায়ন)"
 
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "পাসওয়াৰ্ড দুটি মেলেনি, পুনৰায় চেষ্টা কৰুন।\n"
 
 #: apps/lpasswd.c:133
 #, c-format
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "পাসওয়াৰ্ড পৰিবৰ্তন প্ৰক্ৰিয়া বাতিল কৰা হয়েছে।\n"
 
 #: apps/lpasswd.c:190 apps/luseradd.c:284 apps/luseradd.c:294
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাৰ বাবে পাসওয়াৰ্ড নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s।\n"
 
 #: apps/lpasswd.c:198
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "%s সমষ্টিৰ বাবে পাসওয়াৰ্ড নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s।\n"
 
 #: apps/lpasswd.c:209
 #, c-format
 msgid "Password changed.\n"
-msgstr ""
+msgstr "পাসওয়াৰ্ড পৰিবৰ্তিত হয়েছে।\n"
 
 #: apps/luseradd.c:173
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "%jd সমষ্টিটি বৰ্তমানে উপস্থিত নেই।\n"
 
 #: apps/luseradd.c:200 apps/luseradd.c:213
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "`%s' সমষ্টি তৈৰি কৰোঁতে সমস্যা: %s\n"
 
 #: apps/luseradd.c:274
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "অ্যাকাউন্ট তৈৰি কৰোঁতে ব্যৰ্থ: %s।\n"
 
 #: apps/luseradd.c:324
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "%s তৈৰি কৰোঁতে সমস্যা: %s।\n"
 
 #: apps/luseradd.c:331
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "মেইল স্পুল তৈৰি কৰোঁতে সমস্যা।\n"
 
 #: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা %s'ৰ অ্যাকাউন্ট মুছে ফেলা সম্ভব নহয়: %s।\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s-ৰ কোনো gid সংখ্যা নেই।\n"
 
 #: apps/luserdel.c:118
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "%jd GIDসহ কোনো সমষ্টি বৰ্তমানে উপস্থিত নেই, মুছে ফেলা সম্ভব নয়।\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "%jd GIDসহ সমষ্টিৰ কোনো নাম উল্লিখিত নহয়।\n"
 
 #: apps/luserdel.c:135
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "%s সমষ্টিটি মুছে ফেলা সম্ভব নহয়: %s।\n"
 
 #: apps/luserdel.c:149
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s-ৰ ব্যক্তিগত (হোম) পঞ্জিকা উপস্থিত ছিল না।\n"
 
 #: apps/luserdel.c:156
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "%s সৰিয়ে ফেলতে সমস্যা: %s।\n"
 
 #: apps/lusermod.c:168 apps/lusermod.c:181
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাৰ বাবে পাসওয়াৰ্ড নিৰ্ধাৰণ কৰা সম্ভব নহয়: %s।\n"
 
 #: apps/lusermod.c:191
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাকে লক (lock) কৰা সম্ভব নহয়: %s।\n"
 
 #: apps/lusermod.c:199
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাকে আন-লক (unlock) কৰা সম্ভব নহয়: %s।\n"
 
 #: apps/lusermod.c:268
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাৰ তথ্য পৰিবৰ্তন কৰা সম্ভব নহয়: %s।\n"
 
 #: apps/lusermod.c:327
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "%s সমষ্টিৰ তথ্য পৰিবৰ্তন কৰা সম্ভব নহয়: %s।\n"
 
 #: apps/lusermod.c:338
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "%s-ৰ ক্ষেত্ৰে পুৰোনো ব্যক্তিগত (হোম) পঞ্জিকা উপস্থিত নেই।\n"
 
 #: apps/lusermod.c:343
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "%s-ৰ কোনো নতুন ব্যক্তিগত (হোম) পঞ্জিকা উপস্থিত নেই।\n"
 
 #: apps/lusermod.c:349
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "%s কে %s-এ সৰিয়ে নিতে সমস্যা হয়েছে: %s।\n"
 
 #: lib/config.c:118
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "কনফিগাৰেশন ফাইল `%s' খোলা নাযায়: %s"
 
 #: lib/config.c:124
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
+msgstr "কনফিগাৰেশন ফাইল `%s' stat কৰা নাযায়: %s"
 
 #: lib/config.c:133
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr ""
+msgstr "কনফিগাৰেশন ফাইল `%s' অত্যাধিক বড়"
 
 #: lib/config.c:149
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr ""
+msgstr "কনফিগাৰেশন ফাইল `%s' পড়া নাযায়: %s"
 
 #: lib/error.c:42
 msgid "success"
-msgstr ""
+msgstr "সফল"
 
 #: lib/error.c:44
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "কনফিগাৰেশনেৰ দৰুণ মডিউলটি নিষ্ক্ৰিয় হয়ে গেছে"
 
 #: lib/error.c:46
 msgid "generic error"
-msgstr ""
+msgstr "সাধাৰণ সমস্যা"
 
 #: lib/error.c:48
 msgid "not enough privileges"
-msgstr ""
+msgstr "অপৰ্যাপ্ত অধিকাৰ"
 
 #: lib/error.c:50
 msgid "access denied"
-msgstr ""
+msgstr "অনুমোদন কৰা নহয়"
 
 #: lib/error.c:52
 msgid "bad user/group name"
-msgstr ""
+msgstr "অবৈধ ব্যৱহাৰকৰোঁতা/সমষ্টিৰ নাম"
 
 #: lib/error.c:54
 msgid "bad user/group id"
-msgstr ""
+msgstr "অবৈধ ব্যৱহাৰকৰোঁতা/সমষ্টিৰ id"
 
 #: lib/error.c:56
 msgid "user/group name in use"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা/সমষ্টিৰ নাম বৰ্তমানে ব্যবহৃত হৈছে"
 
 #: lib/error.c:58
 msgid "user/group id in use"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা/সমষ্টিৰ id বৰ্তমানে ব্যবহৃত হৈছে"
 
 #: lib/error.c:60
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "টাৰ্মিনালেৰ বৈশিষ্ট্য পৰিবৰ্তন কৰোঁতে সমস্যা"
 
 #: lib/error.c:62
 msgid "error opening file"
-msgstr ""
+msgstr "ফাইল খুলতে সমস্যা"
 
 #: lib/error.c:64
 msgid "error locking file"
-msgstr ""
+msgstr "ফাইল লক কৰোঁতে সমস্যা"
 
 #: lib/error.c:66
 msgid "error statting file"
-msgstr ""
+msgstr "ফাইল stat কৰোঁতে সমস্যা"
 
 #: lib/error.c:68
 msgid "error reading file"
-msgstr ""
+msgstr "ফাইল পড়তে সমস্যা"
 
 #: lib/error.c:70
 msgid "error writing to file"
-msgstr ""
+msgstr "ফাইলে লিখতে সমস্যা"
 
 #: lib/error.c:72
 msgid "data not found in file"
-msgstr ""
+msgstr "ফাইলে তথ্য পোৱা নাযায়"
 
 #: lib/error.c:74
 msgid "internal initialization error"
-msgstr ""
+msgstr "অভ্যন্তৰীণ প্ৰাৰম্ভিক সমস্যা"
 
 #: lib/error.c:76
 msgid "error loading module"
-msgstr ""
+msgstr "মডিউল লোড কৰোঁতে সমস্যা"
 
 #: lib/error.c:78
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "মডিউলেৰ সিম্বল মীমাংসা কৰোঁতে সমস্যা"
 
 #: lib/error.c:80
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "লাইব্ৰেৰি/মডিউলেৰ সংস্কৰণে গৰমিল"
 
 #: lib/error.c:82
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "আন-লক কৰা হলে পাসওয়াৰ্ডেৰ ক্ষেত্ৰ ফাঁকা হয়ে যাবে"
 
 #: lib/error.c:88
 msgid "unknown error"
-msgstr ""
+msgstr "অজানা সমস্যা"
 
 #: lib/modules.c:65
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "%s প্ৰাৰম্ভিক কাৰ্য `%s'-ৰ মধ্যে উপস্থিত নেই"
 
 #: lib/modules.c:83
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "`%s'-ৰ মডিউল সংস্কৰণে গৰমিল"
 
 #: lib/modules.c:96
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr ""
+msgstr "`%s' মডিউলেৰ দ্বাৰা `%s'-ৰ ব্যাখ্যা কৰা নাযায়"
 
 #: lib/prompt.c:68
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "টাৰ্মিনালেৰ বৈশিষ্ট্য পড়তে সমস্যা"
 
 #: lib/prompt.c:75 lib/prompt.c:87
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "টাৰ্মিনালেৰ বৈশিষ্ট্য নিৰ্ধাৰণ কৰোঁতে সমস্যা"
 
 #: lib/prompt.c:81
 msgid "error reading from terminal"
-msgstr ""
+msgstr "টাৰ্মিনাল থেকে পড়তে সমস্যা"
 
 #: lib/user.c:195
 msgid "name is not set"
-msgstr ""
+msgstr "নাম নিৰ্ধাৰণ কৰা নহয়"
 
 #: lib/user.c:200
 msgid "name is too short"
-msgstr ""
+msgstr "নাম অত্যাধিক ছোট"
 
 #: lib/user.c:205
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "উল্লিখিত নাম অত্যাধিক লম্বা (%zu > %d)"
 
 #: lib/user.c:212
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "নামেৰ মধ্য non-ASCII অক্ষৰ লেখা হয়েছে"
 
 #: lib/user.c:219
 msgid "name contains control characters"
-msgstr ""
+msgstr "নামেৰ মধ্য নিয়ন্ত্ৰক (control) অক্ষৰ লেখা হয়েছে"
 
 #: lib/user.c:226
 msgid "name contains whitespace"
-msgstr ""
+msgstr "নামেৰ মধ্যে শূণ্যস্থান ৰয়েছে"
 
 #: lib/user.c:238
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "নামেৰ প্ৰাৰম্ভে হাইফেন চিহ্ন (-) উপস্থিত ৰয়েছে"
 
 #: lib/user.c:249
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "নামেৰ মধ্য অবৈধ অক্ষৰ `%c' লেখা হয়েছে"
 
 #: lib/user.c:296 lib/user.c:344
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "%s নামক ব্যৱহাৰকৰোঁতাৰ ক্ষেত্ৰে UID ধাৰ্য কৰা নহয়"
 
 #: lib/user.c:319 lib/user.c:345
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "%s নামক সমষ্টিৰ ক্ষেত্ৰে GID ধাৰ্য কৰা নহয়"
 
 #: lib/user.c:339
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "%jd ব্যৱহাৰকৰোঁতাৰ নাম উল্লিখিত নেই"
 
 #: lib/user.c:340
 #, c-format
 msgid "group %jd has no name"
-msgstr ""
+msgstr "%jd সমষ্টিৰ নাম উল্লিখিত নেই"
 
 #: lib/user.c:348
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ নাম আৰু UID ধাৰ্য কৰা নহয়"
 
 #: lib/user.c:349
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "সমষ্টিৰ নাম আৰু GID ধাৰ্য কৰা নহয়"
 
 #: lib/user.c:1927
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "%s ক্ষেত্ৰে অবিকল্পিত মান বৈধ নয়: %s"
 
 #: lib/util.c:196
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "ফাইল লক কৰোঁতে সমস্যা: %s"
 
 #: lib/util.c:605
 #, c-format
@@ -738,12 +741,12 @@ msgstr ""
 #: lib/util.c:631
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
+msgstr "`%s'-ৰ বাবে প্ৰাসঙ্গিক নিৰাপত্তাৰ বিবৰণ প্ৰাপ্ত কৰা নাযায়: %s"
 
 #: lib/util.c:637 lib/util.c:664
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
+msgstr "অবিকল্পিত প্ৰাসঙ্গিক নিৰাপত্তাৰ বিবৰণ`%s' হিসাবে নিৰ্ধাৰণ কৰা নাযায়: %s"
 
 #: lib/util.c:658
 #, c-format
@@ -759,308 +762,311 @@ msgstr ""
 #: modules/files.c:2371 modules/files.c:2386
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "`%s' খোলা সম্ভব নহয়: %s"
 
 #: modules/files.c:128 modules/files.c:157 modules/files.c:223
 #: modules/files.c:773 modules/files.c:1181
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "`%s' stat কৰা নাযায়: %s"
 
 #: modules/files.c:139
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "`%s' তৈৰি কৰোঁতে সমস্যা: %s"
 
 #: modules/files.c:152
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
+msgstr "ব্যাক-আপ ফাইল `%s' বৰ্তমানে উপস্থিত আছে এবং এটি কোনো সাধাৰণ ফাইল নয়"
 
 #: modules/files.c:231
 msgid "backup file size mismatch"
-msgstr ""
+msgstr "ব্যাক-আপ ফাইলেৰ মাপে গৰমিল"
 
 #: modules/files.c:803 modules/files.c:1190
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "`%s' থেকে পড়া সম্ভব নহয়: %s"
 
 #: modules/files.c:812 modules/files.c:819
 msgid "entry already present in file"
-msgstr ""
+msgstr "ফাইলেৰ মধ্যে এন্ট্ৰি বৰ্তমানে উপস্থিত আছে"
 
 #: modules/files.c:826 modules/files.c:836 modules/files.c:847
 #: modules/files.c:1249 modules/files.c:1257 modules/files.c:1265
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "`%s'-এ লেখা নাযায়: %s"
 
 #: modules/files.c:1006 modules/files.c:1065
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "স্বত্বাৰ অবজেক্টেৰ মধ্যে %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/files.c:1751 modules/ldap.c:1541 modules/ldap.c:1810
 msgid "error encrypting password"
-msgstr ""
+msgstr "পাসওয়াৰ্ড এনক্ৰিপ্ট কৰোঁতে সমস্যা"
 
 #: modules/files.c:2657 modules/files.c:2735
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "সুপাৰ-ইউজাৰেৰ অধিকাৰসহ সঞ্চালিত হৈছে না"
 
 #: modules/files.c:2748
 msgid "no shadow file present -- disabling"
-msgstr ""
+msgstr "কোনো শেডো ফাইল উপস্থিত নেই -- নিষ্ক্ৰিয় কৰা হৈছে"
 
 #: modules/krb5.c:104
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
+"`%s' পৰিসেবাৰ বাবে kdam5 সাৰ্ভাৰটিৰ সাথে সংযোগ কৰোঁতে `%s' realm-এ সমস্যা হয়েছে: %"
+"s"
 
 #: modules/krb5.c:136 modules/krb5.c:202 modules/krb5.c:301 modules/krb5.c:389
 #: modules/krb5.c:441 modules/krb5.c:529 modules/krb5.c:595
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "kerberos লাইব্ৰেৰি আৰম্ভ কৰোঁতে সমস্যা"
 
 #: modules/krb5.c:143 modules/krb5.c:223 modules/krb5.c:333 modules/krb5.c:341
 #: modules/krb5.c:409 modules/krb5.c:462 modules/krb5.c:550 modules/krb5.c:612
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "`%s' ব্যৱহাৰকৰোঁতাৰ নাম kerberos-ৰ বাবে পাৰ্স কৰোঁতে সমস্যা"
 
 #: modules/krb5.c:213 modules/krb5.c:400 modules/krb5.c:452 modules/krb5.c:540
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "স্বত্বাৰ গঠনে কোনো %s অথবা %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/krb5.c:311
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr ""
+msgstr "স্বত্বায় কোনো %s অথবা %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/krb5.c:324
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "কোনো %s অথবা %s বৈশিষ্ট্য বিনা স্বত্বা তৈৰি কৰা হয়েছে"
 
 #: modules/krb5.c:475 modules/krb5.c:563
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr ""
+msgstr "`%s'-ৰ বাবে kerberos থেকে তথ্য পড়তে সমস্যা"
 
 #: modules/krb5.c:604
 #, c-format
 msgid "entity has no %s attribute"
-msgstr ""
+msgstr "এন্ট্ৰিতে কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/krb5.c:642
 #, c-format
 msgid "error setting password for `%s'"
-msgstr ""
+msgstr "`%s'-ৰ বাবে পাসওয়াৰ্ড নিৰ্ধাৰণ কৰোঁতে সমস্যা"
 
 #: modules/krb5.c:768
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "Kerberos Realm"
 
 #: modules/krb5.c:775
 msgid "Kerberos Admin Principal"
-msgstr ""
+msgstr "Kerberos Admin Principal"
 
 #: modules/krb5.c:797
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "Admin Principal-ৰ বাবে Kerberos পাসওয়াৰ্ড"
 
 #: modules/ldap.c:205
 msgid "error initializing ldap library"
-msgstr ""
+msgstr "Ldap লাইব্ৰেৰি আৰম্ভ কৰোঁতে সমস্যা"
 
 #: modules/ldap.c:216
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr ""
+msgstr "LDAP প্ৰোটোকল %d সংস্কৰণেৰ সাথে স্থাপন কৰা নাযায়"
 
 #: modules/ldap.c:228
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
+msgstr "LDAP সাৰ্ভাৰেৰ সাথে TLS মীমাংসা কৰা সম্ভব নহয়"
 
 #: modules/ldap.c:421
 msgid "could not bind to LDAP server"
-msgstr ""
+msgstr "LDAP সাৰ্ভাৰে bind কৰা সম্ভব নহয়"
 
 #: modules/ldap.c:424
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
+msgstr "LDAP সাৰ্ভাৰে bind কৰা সম্ভব নহয়, `%s' ৰূপে প্ৰথম প্ৰচেষ্টা কৰা হয়েছে: %s"
 
 #: modules/ldap.c:1331
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ অবজেক্টে কোনো `%s' বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/ldap.c:1340
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ অবজেক্ট `%s' বিনা নিৰ্মিত হয়েছে"
 
 #: modules/ldap.c:1360
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr ""
+msgstr "LDAP পঞ্জিকা এন্ট্ৰি তৈৰি কৰোঁতে সমস্যা: %s"
 
 #: modules/ldap.c:1386 modules/ldap.c:1602
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr ""
+msgstr "LDAP পঞ্জিকা এন্ট্ৰি পৰিবৰ্তন কৰোঁতে সমস্যা: %s"
 
 #: modules/ldap.c:1411
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr ""
+msgstr "LDAP পঞ্জিকা এন্ট্ৰিৰ নাম পৰিবৰ্তন কৰোঁতে সমস্যা: %s"
 
 #: modules/ldap.c:1458
 #, c-format
 msgid "object had no %s attribute"
-msgstr ""
+msgstr "অবজেক্টেৰ মধ্যে কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/ldap.c:1476
 #, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr ""
+msgstr "LDAP পঞ্জিকা এন্ট্ৰি মুছে ফেলতে সমস্যা: %s"
 
 #: modules/ldap.c:1511 modules/ldap.c:1527 modules/ldap.c:1635
 #: modules/ldap.c:1734
 #, c-format
 msgid "object has no %s attribute"
-msgstr ""
+msgstr "অবজেক্টেৰ মধ্যে %s বৈশিষ্ট্য উপস্থিত নেই"
 
 #: modules/ldap.c:1660
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "LDAP পঞ্জিকাৰ মধ্যে এই ধৰনেৰ কোনো বস্তু উপস্থিত নেই"
 
 #: modules/ldap.c:1672
 #, c-format
 msgid "no `%s' attribute found"
-msgstr ""
+msgstr "কোনো `%s' বৈশিষ্ট্য পোৱা নাযায়"
 
 #: modules/ldap.c:1841
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
+msgstr "%s-ৰ বাবে LDAP পঞ্জিকাতে পাসওয়াৰ্ড নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s"
 
 #: modules/ldap.c:2452
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "LDAP সাৰ্ভাৰেৰ নাম"
 
 #: modules/ldap.c:2458
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "LDAP Search Base DN"
 
 #: modules/ldap.c:2464
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP Bind DN"
 
 #: modules/ldap.c:2471
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "LDAP Bind পাসওয়াৰ্ড"
 
 #: modules/ldap.c:2475
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL ব্যৱহাৰকৰোঁতা"
 
 #: modules/ldap.c:2482
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL-ৰ অনুমোদন ব্যৱহাৰকৰোঁতা"
 
 #: modules/sasldb.c:124
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা তৈৰি কৰোঁতে Cyrus SASL সংক্ৰান্ত সমস্যা: %s"
 
 #: modules/sasldb.c:128
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতা মুছে ফেলাৰ সময় Cyrus SASL সংক্ৰান্ত সমস্যা: %s"
 
 #: modules/sasldb.c:524 modules/sasldb.c:532
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr ""
+msgstr "Cyrus SASL আৰম্ভ কৰোঁতে সমস্যা: %s"
 
 #: python/admin.c:527
 msgid "error creating home directory for user"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ বাবে ব্যক্তিগত (হোম) পঞ্জিকা তৈৰি কৰোঁতে সমস্যা"
 
 #: python/admin.c:580
 msgid "error removing home directory for user"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ ব্যক্তিগত (হোম) পঞ্জিকা মুছে ফেলতে সমস্যা"
 
 #: python/admin.c:658
 msgid "error moving home directory for user"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ ব্যক্তিগত পঞ্জিকা গমন কৰোঁতে ভুল"
 
 #: python/admin.c:691 python/admin.c:768
 msgid "error creating mail spool for user"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ বাবে পত্ৰৰ ভঁৰাল সৃষ্টি কৰোঁতে ভুল"
 
 #: python/admin.c:889
 msgid "error removing mail spool for user"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ পত্ৰৰ ভঁৰাল আঁতৰাওঁতে ভুল"
 
 #: samples/lookup.c:67
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr ""
+msgstr "%s আৰম্ভ কৰোঁতে সমস্যা: %s\n"
 
 #: samples/lookup.c:80
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "অবৈধ ID %s\n"
 
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr ""
+msgstr "%jd ID ৰ সমষ্টিৰ সন্ধান কৰা হৈছে ।\n"
 
 #: samples/lookup.c:96
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "%s সমষ্টিৰ সন্ধান কৰা হৈছে ।\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr ""
+msgstr "%jd ID ৰ ব্যৱহাৰকৰোঁতাৰ সন্ধান কৰা হৈছে ।\n"
 
 #: samples/lookup.c:107
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "%s ব্যৱহাৰকৰোঁতাক সন্ধান কৰা হৈছে ।\n"
 
 #: samples/lookup.c:121
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "নিবেশ পোৱা নাযায় ।\n"
 
 #: samples/prompt.c:52
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "প্ৰম্পটসমূহ সফল হ'ল ।\n"
 
 #: samples/prompt.c:62
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "প্ৰম্পটসমূহ বিফল হ'ল ।\n"
 
 #: samples/testuser.c:80
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ অবিকল্পিত অবজেক্ট ক্লাছ:\n"
 
 #: samples/testuser.c:86
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ অবিকল্পিত বৈশিষ্ট্যৰ নাম:\n"
 
 #: samples/testuser.c:92
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ অবিকল্পিত বৈশিষ্ট্য আহৰণ কৰা হৈছে:\n"
 
 #: samples/testuser.c:99
 msgid "Copying user structure:\n"
-msgstr ""
+msgstr "ব্যৱহাৰকৰোঁতাৰ গঠন নকল কৰা হৈছে:\n"
+
