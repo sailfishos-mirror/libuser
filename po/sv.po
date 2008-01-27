@@ -1,15 +1,15 @@
 # Swedish messages for libuser.
 # Copyright (C) 2006, 2007 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2006.
-# Magnus Larsson <fedoratrans@gmail.com>, 2007.
-# 
-# 
+# Magnus Larsson <fedoratrans@gmail.com>, 2007, 2008.
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-01-09 11:36+0100\n"
-"PO-Revision-Date: 2007-02-17 10:14-0500\n"
+"PO-Revision-Date: 2008-01-27 18:07-0500\n"
 "Last-Translator: Magnus Larsson <fedoratrans@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: apps/apputil.c:111
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "Sökvägen till hemkatalogen `%s' är inte absolut"
 
 #: apps/apputil.c:119 apps/apputil.c:194 apps/apputil.c:227 apps/apputil.c:254
 #: modules/files.c:185
@@ -66,12 +66,12 @@ msgstr "%s är inte auktoriserad att ändra fingerinformationen för %s\n"
 
 #: apps/apputil.c:608
 msgid "Unknown user context"
-msgstr "Okänt användarsammanhang"
+msgstr "Okänt användarkontext"
 
 #: apps/apputil.c:616
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr "Kan inte ställa in standardsammanhanget för /etc/password\n"
+msgstr "Kan inte ställa in standardkontext för /etc/password\n"
 
 #: apps/apputil.c:625
 #, c-format
@@ -731,24 +731,24 @@ msgid "error locking file: %s"
 msgstr "fel vid låsning av fil: %s"
 
 #: lib/util.c:710
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "kunde inte ställa in säkerhetssammanhanget: %s"
+msgstr "kunde inte hämta standardsäkerhetskontext: %s"
 
 #: lib/util.c:737
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "kunde inte få tag i säkerhetssammanhanget för \"%s\": %s"
+msgstr "kunde inte få tag i säkerhetskontext för \"%s\": %s"
 
 #: lib/util.c:743 lib/util.c:770
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "kunde inte ställa in standardsäkerhetssammanhanget till \"%s\": %s"
+msgstr "kunde inte sätta standardsäkerhetskontext till \"%s\": %s"
 
 #: lib/util.c:764
-#, fuzzy, c-format
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "kunde inte få tag i säkerhetssammanhanget för \"%s\": %s"
+msgstr "kunde inte få tag i säkerhetskontext för \"%s\": %s"
 
 #: modules/files.c:115 modules/files.c:449 modules/files.c:760
 #: modules/files.c:1028 modules/files.c:1168 modules/files.c:1399
@@ -1005,9 +1005,8 @@ msgid "error creating mail spool for user"
 msgstr "fel vid skapande av e-postspool för användare"
 
 #: python/admin.c:889
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "fel vid skapande av e-postspool för användare"
+msgstr "fel vid borttagning av e-post-spool för användare"
 
 #: samples/lookup.c:67
 #, c-format
