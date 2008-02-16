@@ -81,7 +81,7 @@ These variables specify an inclusive range of hash rounds used when
 is
 .B sha256
 or \fBsha512\fR.
-A number of hash rounds is choosen from this interval randomly.
+A number of hash rounds is chosen from this interval randomly.
 A larger number of rounds makes password checking, and brute-force attempts
 to guess the password by reversing the hash, more CPU-intensive.
 The number of rounds is restricted to the interval [1000, 999999999].

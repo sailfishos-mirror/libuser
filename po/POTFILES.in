@@ -13,6 +13,7 @@ apps/luserdel.c
 apps/lusermod.c
 lib/config.c
 lib/error.c
+lib/misc.c
 lib/modules.c
 lib/prompt.c
 lib/user.c

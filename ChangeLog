@@ -1,3 +1,7 @@
+2008-02-16  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/libuser.conf.5.in: Fix a typo.
+
 2008-01-11  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/pwhash_test: Fix description.
