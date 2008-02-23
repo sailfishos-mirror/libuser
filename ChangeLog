@@ -4,7 +4,8 @@
 	* NEWS: Update.
 
 	* Makefile.am (EXTRA_DIST): Add tests/config_import2.conf.in,
-	tests/pwhash.conf.in, tests/pwhash.py and tests/pwhash_test.
+	tests/config_login2.defs, tests/pwhash.conf.in, tests/pwhash.py and
+	tests/pwhash_test.
 
 	* All relevant source files: Use <> for #including config.h, in
 	particular do not use "../config.h", which can refer to a file outside
