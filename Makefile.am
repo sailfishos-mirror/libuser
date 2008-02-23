@@ -6,7 +6,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 ACLOCAL_AMFLAGS = -I m4
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap
 
-CVSTAG = "libuser-$$(echo '$(VERSION)' | tr '.' '_')"
+HGTAG = 'libuser-$(VERSION)'
 
 AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
@@ -24,13 +24,16 @@ EXTRA_DIST = \
 	python/modules.txt \
 	samples/genusers \
 	tests/config.conf.in tests/config_default_useradd \
-	tests/config_import.conf.in tests/config_login.defs \
+	tests/config_import.conf.in tests/config_import2.conf.in \
+	tests/config_login.defs tests/config_login2.defs \
 	tests/config_override.conf.in tests/config_test.sh \
 	tests/files.conf.in tests/files_test tests/files_test.py \
 	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
-	tests/ldap_test.py tests/slapd.conf.in tests/utils.conf.in \
-	tests/utils_group tests/utils_gshadow tests/utils_passwd \
-	tests/utils_shadow tests/utils_test
+	tests/ldap_test.py \
+	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
+	tests/slapd.conf.in \
+	tests/utils.conf.in tests/utils_group tests/utils_gshadow \
+	tests/utils_passwd tests/utils_shadow tests/utils_test
 
 bin_PROGRAMS = apps/lchfn apps/lchsh
 sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
@@ -72,15 +75,14 @@ noinst_HEADERS = python/admin.c python/ent.c python/misc.c
 
 ## Rules
 force-tag:
-	cd $(top_srcdir); cvs tag -cFR $(CVSTAG) .
+	cd $(top_srcdir); hg tag -f $(HGTAG)
 
 tag:
-	cd $(top_srcdir); cvs tag -cR $(CVSTAG) .
+	cd $(top_srcdir); hg tag $(HGTAG)
 
 archive:
 	rm -fr /tmp/$(PACKAGE)-export-tmp
-	CVSROOT=`cat $(top_srcdir)/CVS/Root`; cd /tmp; cvs -d $$CVSROOT \
-		 export -r $(CVSTAG) -d $(PACKAGE)-export-tmp $(PACKAGE)
+	hg clone -r $(HGTAG) $(abs_top_srcdir) /tmp/$(PACKAGE)-export-tmp
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh ; \
 		./configure --sysconfdir=/etc --with-ldap --enable-gtk-doc \
 		--without-sasl; make -C docs/reference; make dist

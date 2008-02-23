@@ -15,11 +15,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ident "$Id$"
-
-#ifdef HAVE_CONFIG_H
-#include "../config.h"
-#endif
+#include <config.h>
 #include <libintl.h>
 #include <limits.h>
 #include <stdio.h>

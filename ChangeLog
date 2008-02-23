@@ -1,3 +1,21 @@
+2008-02-23  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Version 0.56.8.
+	* NEWS: Update.
+
+	* Makefile.am (EXTRA_DIST): Add tests/config_import2.conf.in,
+	tests/pwhash.conf.in, tests/pwhash.py and tests/pwhash_test.
+
+	* All relevant source files: Use <> for #including config.h, in
+	particular do not use "../config.h", which can refer to a file outside
+	the build directory.  Remove #ifdef HAVE_CONFIG_H, we know that is true.
+
+	* Makefile.am (HGTAG): Replace CVSTAG.
+	(force-tag, tag, archive): Update to use Mercurial.
+	* all files: Remove CVS keywords.
+
+	* README: Point to the home page hosted at fedoraproject.org.
+
 2008-02-16  Miloslav Trmač  <mitr@redhat.com>
 
 	* po/POTFILES.in: Add missing lib/misc.c.

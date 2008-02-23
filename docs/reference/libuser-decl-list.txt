@@ -1,6 +1,8 @@
 <SECTION>
 <FILE>prompt</FILE>
-lu_prompt
+free_value
+lu_prompt_console
+lu_prompt_console_quiet
 </SECTION>
 
 <SECTION>

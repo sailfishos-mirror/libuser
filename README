@@ -1,9 +1,17 @@
-This package is still under development, but the API
-appears to have settled to the point where it's reasonable
-to write applications with it.
+About
+=====
+The libuser library implements a standardized interface for manipulating and
+administering user and group accounts.  The library uses pluggable back-ends to
+interface to its data sources.
 
-This source tree is available via anonymous CVS:
-  cvs -d :pserver:anoncvs@elvis.redhat.com:/usr/local/CVS login
-  cvs -d :pserver:anoncvs@elvis.redhat.com:/usr/local/CVS co libuser
+Sample applications modeled after those included with the shadow password suite
+are included.
 
-The password is "anoncvs".
+New releases will be available at https://fedorahosted.org/libuser/ .
+
+Bugs
+====
+Please consider reporting the bug to your distribution's bug tracking system.
+
+Otherwise, report bugs at https://fedorahosted.org/libuser/ .  Bug reports
+with patches are especially welcome.
