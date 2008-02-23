@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-02-23 00:56+0100\n"
-"PO-Revision-Date: 2008-02-19 22:11+0200\n"
+"PO-Revision-Date: 2008-02-23 17:08+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -277,7 +277,7 @@ msgstr "Nie określono nazwy grupy.\n"
 #: apps/lgroupadd.c:87 apps/lgroupmod.c:104 apps/lusermod.c:112
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr "Nieprawidłowy ID grupy %s\n"
+msgstr "Nieprawidłowy identyfikator grupy %s\n"
 
 #: apps/lgroupadd.c:124
 #, c-format
@@ -358,7 +358,7 @@ msgstr ""
 #: apps/lnewusers.c:128 apps/luseradd.c:115 apps/lusermod.c:127
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr "Nieprawidłowy ID użytkownika %s\n"
+msgstr "Nieprawidłowy identyfikator użytkownika %s\n"
 
 #: apps/lnewusers.c:135
 msgid "Refusing to create account with UID 0.\n"
@@ -573,7 +573,7 @@ msgstr "błędna nazwa użytkownika/grupy"
 
 #: lib/error.c:50
 msgid "bad user/group id"
-msgstr "błędny ID użytkownika/grupy"
+msgstr "błędny identyfikator użytkownika/grupy"
 
 #: lib/error.c:52
 msgid "user/group name in use"
@@ -581,7 +581,7 @@ msgstr "nazwa użytkownika/grupy jest już używana"
 
 #: lib/error.c:54
 msgid "user/group id in use"
-msgstr "ID użytkownika/grupy jest już używany"
+msgstr "identyfikator użytkownika/grupy jest już używany"
 
 #: lib/error.c:56
 msgid "error manipulating terminal attributes"
@@ -636,14 +636,12 @@ msgid "unknown error"
 msgstr "nieznany błąd"
 
 #: lib/misc.c:165
-#, fuzzy
 msgid "invalid number"
-msgstr "Nieprawidłowy ID użytkownika %s\n"
+msgstr "nieprawidłowy numer"
 
 #: lib/misc.c:179
-#, fuzzy
 msgid "invalid ID"
-msgstr "Nieprawidłowy ID %s\n"
+msgstr "nieprawidłowy identyfikator"
 
 #: lib/modules.c:61
 #, c-format
@@ -1029,12 +1027,12 @@ msgstr "Błąd inicjowania %s: %s\n"
 #: samples/lookup.c:76
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr "Nieprawidłowy ID %s\n"
+msgstr "Nieprawidłowy identyfikator %s\n"
 
 #: samples/lookup.c:88
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Wyszukiwanie grupy o ID %jd.\n"
+msgstr "Wyszukiwanie grupy o identyfikatorze %jd.\n"
 
 #: samples/lookup.c:92
 #, c-format
@@ -1044,7 +1042,7 @@ msgstr "Wyszukiwanie grupy %s.\n"
 #: samples/lookup.c:99
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Wyszukiwanie użytkownika o ID %jd.\n"
+msgstr "Wyszukiwanie użytkownika o identyfikatorze %jd.\n"
 
 #: samples/lookup.c:103
 #, c-format
