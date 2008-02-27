@@ -1,5 +1,5 @@
 .\" A man page for lusermod
-.\" Copyright (C) 2005 Red Hat, Inc.
+.\" Copyright (C) 2005, 2008 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -16,7 +16,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH lusermod 1 "Jan 15 2005" libuser
+.TH lusermod 1 "Feb 27 2008" libuser
 
 .SH NAME
 lusermod \- Modify an user
@@ -41,6 +41,11 @@ Set \fIuser\fR's home directory to \fIdirectory\fR.
 .TP
 \fB\-g\fR, \fB\-\-gid\fR=\fIgid\fR
 Change \fIuser\fR's primary group ID to \fIgid\fR.
+If group with ID
+.I gid
+does not exist,
+a warning is printed,
+but the operation is performed anyway.
 
 .TP
 \fB\-i\fR, \fB\-\-interactive\fR 

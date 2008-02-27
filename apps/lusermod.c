@@ -213,6 +213,17 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 	}
 	if (gidNumber != LU_VALUE_INVALID_ID) {
+		struct lu_ent *group_ent;
+
+		group_ent = lu_ent_new();
+		if (lu_group_lookup_id(ctx, gidNumber, group_ent, &error)
+		    == FALSE) {
+			fprintf(stderr, _("Warning: Group with ID %jd does not "
+					  "exist.\n"), (intmax_t)gidNumber);
+			if (error != NULL)
+				lu_error_free(&error);
+		}
+		lu_ent_free(group_ent);
 		lu_value_init_set_id(&val, gidNumber);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		lu_ent_add(ent, LU_GIDNUMBER, &val);
