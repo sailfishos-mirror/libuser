@@ -11,3 +11,4 @@ user7_1:x:2147484358:2147484358:GECOS7_1:HomeDir7_1:Shell7_1
 user9_2:x:2147484559:2147484568:GECOS9_1:HomeDir9_1:Shell9_1
 user9_3:x:2147484578:2147484578:user9_3:/home/user9_3:/bin/bash
 user9_5:x:2147484588:2147484588:user9_4:/home/user9_4:/bin/bash
+user9_6:x:2147484608:2147484609:user9_6:/home/user9_6:/bin/bash

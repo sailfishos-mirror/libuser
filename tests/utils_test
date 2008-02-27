@@ -169,6 +169,14 @@ lgroupadd -g "$(expr $LARGE_ID + 950)" group9_5
 luseradd -g "$(expr $LARGE_ID + 940)" -u "$(expr $LARGE_ID + 940)" -M user9_4
 lgroupmod -M user9_4 group9_5
 lusermod -l user9_5 user9_4
+#  lusermod -g warns if the group does not exist
+lgroupadd -g "$(expr $LARGE_ID + 960)" group9_6
+luseradd -g group9_6 -u "$(expr $LARGE_ID + 960)" -M user9_6
+LC_ALL=C lusermod -g "$(expr $LARGE_ID + 961)" user9_6 \
+    2>"$workdir"/lusermod_output
+diff - "$workdir"/lusermod_output <<EOF
+Warning: Group with ID $(expr $LARGE_ID + 961) does not exist.
+EOF
 #  untested: -m, -P
 
 sed 's/^group6_4:x:[0123456789]*:$/group6_4:x:GID:/' < "$workdir"/files/group \
