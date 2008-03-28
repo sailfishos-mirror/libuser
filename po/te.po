@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libuser.tip.te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-03-24 17:16+0000\n"
-"PO-Revision-Date: 2008-03-26 19:45+0530\n"
+"PO-Revision-Date: 2008-03-28 11:24+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 
 #: ../apps/apputil.c:107
 #, c-format
@@ -72,7 +73,7 @@ msgstr "తెలియని వినియోగదారుని సంద�
 #: ../apps/apputil.c:612
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr " /etc/passwd కు సిద్ద సందర్భాన్ని అమర్చలేము \n"
+msgstr "/etc/passwd కు సిద్ద సందర్భాన్ని అమర్చలేము \n"
 
 #: ../apps/apputil.c:621
 #, c-format
