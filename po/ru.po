@@ -1,22 +1,20 @@
-# translation of libuser.tip.ru.po to
-# Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# translation of libuser.HEAD.ru.po to Russian
+# Copyright (C) 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 #
 # Leonid Kanter <leon@geon.donetsk.ua>, 2003.
 # Andrew Martynov <andrewm@inventa.ru>, 2004, 2005, 2006, 2007.
 # Nikolay Sivov <bunglehead@gmail.com>, 2007.
-# Yulia Poyarkova <yulia.poyarkova@redhat.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser.tip.ru\n"
+"Project-Id-Version: libuser.HEAD.ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-27 17:16-0700\n"
-"PO-Revision-Date: 2008-03-19 10:28+1100\n"
-"Last-Translator: Yulia Poyarkova <yulia.poyarkova@redhat.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2008-03-24 17:16+0000\n"
+"PO-Revision-Date: 2008-03-31 22:24+0300\n"
+"Last-Translator: Andrew Martynov <andrewm@inventa.ru>\n"
+"Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../apps/apputil.c:107
 #, c-format
@@ -509,7 +507,7 @@ msgstr "Пользователь %s не может быть разблокир�
 #: ../apps/lusermod.c:221
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Предупреждение: Группа %jd не существует\n"
+msgstr "Предупреждение: Группа с номером %jd не существуетю.\n"
 
 #: ../apps/lusermod.c:275
 #, c-format
@@ -767,7 +765,8 @@ msgstr "невозможно получить контекст безопасн�
 #: ../lib/util.c:739 ../lib/util.c:766
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
+msgstr ""
+"невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
 #: ../lib/util.c:760
 #, c-format
@@ -840,7 +839,8 @@ msgstr "нет файла shadow -- запрещено"
 #: ../modules/krb5.c:100
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr ""
+"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 
 #: ../modules/krb5.c:132 ../modules/krb5.c:198 ../modules/krb5.c:297
 #: ../modules/krb5.c:385 ../modules/krb5.c:437 ../modules/krb5.c:525
@@ -1092,3 +1092,43 @@ msgstr "Получение стандартных атрибутов польз�
 msgid "Copying user structure:\n"
 msgstr "Копирование структуры пользователя:\n"
 
+#~ msgid "could not convert internal data to LDAPMods"
+#~ msgstr "невозможно преобразовать внутренние данные в LDAPMods"
+
+#, fuzzy
+#~ msgid "Shell not changed: input error.\n"
+#~ msgstr "Оболочка не изменена: %s\n"
+
+#~ msgid "could not search LDAP server"
+#~ msgstr "невозможно искать сервер LDAP"
+
+#~ msgid "LDAP server appears to have no root DSE"
+#~ msgstr "Похоже, что сервер LDAP не имеет корневого DSE"
+
+#~ msgid "error mapping name to LDAP distinguished name"
+#~ msgstr "ошибка преобразования имени в форму, понятную для LDAP"
+
+#~ msgid "error mapping name to LDAP base distinguished name"
+#~ msgstr "ошибка преобразования имени в форму, понятную для базы LDAP"
+
+#~ msgid "couldn't reset default security context to `%s': %s"
+#~ msgstr ""
+#~ "невозможно сбросить значение контекста безопасности по умолчанию `%s': %s"
+
+#~ msgid "Cyrus SASL error creating user: %s: %s"
+#~ msgstr "ошибка Cyrus SASL при создании пользователя: %s: %s"
+
+#~ msgid "Cyrus SASL error removing user: %s: %s"
+#~ msgstr "Ошибка Cyrus SASL при удалении пользователя: %s: %s"
+
+#~ msgid "Error initializing %s.\n"
+#~ msgstr "Ошибка инициализации %s.\n"
+
+#~ msgid "Group %s could not be deleted.\n"
+#~ msgstr "Группа %s не может быть удалена.\n"
+
+#~ msgid "Group %s could not be modified.\n"
+#~ msgstr "Группа %s не может быть изменена.\n"
+
+#~ msgid "error initializing module"
+#~ msgstr "ошибка инициализации модуля"
