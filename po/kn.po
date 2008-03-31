@@ -1,3 +1,4 @@
+# translation of libuser.tip.kn.po to Kannada
 # translation of libuser.tip.kn.po to
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
@@ -8,14 +9,14 @@ msgstr ""
 "Project-Id-Version: libuser.tip.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-03-24 17:16+0000\n"
-"PO-Revision-Date: 2008-03-31 10:35+0530\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2008-03-31 11:07+0530\n"
+"Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
+"Language-Team: Kannada <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 "\n"
 "\n"
@@ -911,7 +912,7 @@ msgstr "LDAP ಪ್ರೋಟೋಕಾಲ್ ಅನ್ನು ಆವೃತ್ತ�
 
 #: ../modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
-msgstr "TLS ಅನ್ನು LDAP ಪರಿಚಾರಕದೊಂದಿಗೆ ವ್ಯವಹರಿಸಲಾಗಲಿಲ್ಲ"
+msgstr "TLS ಅನ್ನು LDAP ಪರಿಚಾರಕದೊಂದಿಗೆ ವ್ಯವಹರಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
 
 #: ../modules/ldap.c:415
 msgid "could not bind to LDAP server"
