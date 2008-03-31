@@ -1,27 +1,29 @@
-# translation of libuser.tip.po to Kannada
+# translation of libuser.tip.kn.po to
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Shankar Prasad <svenkate@redhat.com>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser.tip\n"
+"Project-Id-Version: libuser.tip.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-03-24 17:16+0000\n"
-"PO-Revision-Date: 2008-03-27 00:15+0530\n"
-"Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
-"Language-Team: Kannada <en@li.org>\n"
+"PO-Revision-Date: 2008-03-31 10:35+0530\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
+"\n"
 "\n"
 
 #: ../apps/apputil.c:107
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr ""
+msgstr "ನೆಲೆ ಕಡತಕೋಶದ ಮಾರ್ಗ `%s' ವು ಸಂಪೂರ್ಣವಾಗಿಲ್ಲ"
 
 #: ../apps/apputil.c:115 ../apps/apputil.c:190 ../apps/apputil.c:223
 #: ../apps/apputil.c:250 ../modules/files.c:181
@@ -594,7 +596,7 @@ msgstr "ಬಳಸಲಾಗುತ್ತಿರುವ ಬಳಕೆದಾರನ/ಸ�
 
 #: ../lib/error.c:56
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "ಟರ್ಮಿನಲ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಮ್ಯಾನಿಪುಲೇಟ್ ಮಾಡುವಲ್ಲಿ ದೋಷ"
 
 #: ../lib/error.c:58
 msgid "error opening file"
@@ -606,7 +608,7 @@ msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋ
 
 #: ../lib/error.c:62
 msgid "error statting file"
-msgstr ""
+msgstr "ಕಡತವನ್ನು statting ಮಾಡುವಲ್ಲಿ ದೋಷ"
 
 #: ../lib/error.c:64
 msgid "error reading file"
@@ -655,7 +657,7 @@ msgstr "ಅಮಾನ್ಯ ID"
 #: ../lib/modules.c:61
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "ಯಾವುದೆ ಆರಂಭಿಕ ಕ್ರಿಯೆ %s ಯು `%s' ನಲ್ಲಿಲ್ಲ"
 
 #: ../lib/modules.c:79
 #, c-format
@@ -672,11 +674,11 @@ msgstr "`%s' ಘಟಕವು %s' ಅನ್ನು ವಿವರಿಸುವುದ�
 
 #: ../lib/prompt.c:64
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "ಟರ್ಮಿನಲ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಓದುವಾಗ ದೋಷ"
 
 #: ../lib/prompt.c:71 ../lib/prompt.c:83
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "ಟರ್ಮಿನಲ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹೊಂದಿಸುವಾಗ ದೋಷ"
 
 #: ../lib/prompt.c:77
 msgid "error reading from terminal"
@@ -789,7 +791,7 @@ msgstr "`%s' ಅನ್ನು ತೆರೆಯಲಾಗಿಲ್ಲ: %s"
 #: ../modules/files.c:768 ../modules/files.c:1176
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "`%s' ಅನ್ನು stat ಮಾಡಲಾಗಲಿಲ್ಲ: %s"
 
 #: ../modules/files.c:134
 #, c-format
@@ -831,7 +833,7 @@ msgstr "ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸ�
 
 #: ../modules/files.c:2655 ../modules/files.c:2733
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "ಮೂಲಬಳಕೆದಾರನ ಸವಲತ್ತುಗಳೊಂದಿಗೆ ಕಾರ್ಯಗತಗೊಳ್ಳುತ್ತಿಲ್ಲ"
 
 #: ../modules/files.c:2746
 msgid "no shadow file present -- disabling"
@@ -858,9 +860,8 @@ msgstr "ಕರ್ಬರೋಸ್‍ಗಾಗಿ ಬಳಕೆದಾರ ಹೆಸ�
 #: ../modules/krb5.c:209 ../modules/krb5.c:396 ../modules/krb5.c:448
 #: ../modules/krb5.c:536
 #, c-format
-#, fuzzy
 msgid "entity structure has no %s or %s attributes"
-msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
+msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹೊಂದಿಲ್ಲ"
 
 #: ../modules/krb5.c:307
 #, c-format
@@ -869,9 +870,8 @@ msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯವನ್ನ�
 
 #: ../modules/krb5.c:320
 #, c-format
-#, fuzzy
 msgid "entity was created with no %s or %s attributes"
-msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
+msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯಗಳಿಲ್ಲದೆ ನಿರ್ಮಿಸಲ್ಪಟ್ಟಿದೆ"
 
 #: ../modules/krb5.c:471 ../modules/krb5.c:559
 #, c-format
@@ -893,13 +893,12 @@ msgid "Kerberos Realm"
 msgstr "ಕರ್ಬರೋಸ್ ಕ್ಷೇತ್ರ(Kerberos Realm)"
 
 #: ../modules/krb5.c:771
-#, fuzzy
 msgid "Kerberos Admin Principal"
-msgstr "ಕರ್ಬರೋಸ್ ನಿರ್ವಹಣಾ"
+msgstr "ಕರ್ಬರೋಸ್ ನಿರ್ವಹಣಾ ಪ್ರಮುಖ"
 
 #: ../modules/krb5.c:793
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "ನಿರ್ವಹಣಾ ಪ್ರಮುಖನಿಗಾಗಿ ಕರ್ಬರೋಸ್ ಗುಪ್ತಪದ"
 
 #: ../modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -912,7 +911,7 @@ msgstr "LDAP ಪ್ರೋಟೋಕಾಲ್ ಅನ್ನು ಆವೃತ್ತ�
 
 #: ../modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
+msgstr "TLS ಅನ್ನು LDAP ಪರಿಚಾರಕದೊಂದಿಗೆ ವ್ಯವಹರಿಸಲಾಗಲಿಲ್ಲ"
 
 #: ../modules/ldap.c:415
 msgid "could not bind to LDAP server"
@@ -931,7 +930,7 @@ msgstr "ಬಳಕೆದಾರ ಆಬ್ಜೆಕ್ಟ್‍ %s ವೈಶಿಷ�
 #: ../modules/ldap.c:1334
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "ಯಾವುದೆ `%s' ಇಲ್ಲದೆ ಬಳಕೆದಾರ ಆಬ್ಜೆಕ್ಟ್‍ ರಚಿಸಲ್ಪಟ್ಟಿದೆ"
 
 #: ../modules/ldap.c:1354
 #, c-format
@@ -971,7 +970,7 @@ msgstr "LDAP ಕಡತಕೋಶದಲ್ಲಿ ಯಾವುದೆ ಆಬ್ಜ�
 #: ../modules/ldap.c:1669
 #, c-format
 msgid "no `%s' attribute found"
-msgstr ""
+msgstr "ಯಾವುದೆ `%s' ವೈಶಿಷ್ಟ್ಯವು ಕಂಡು ಬಂದಿಲ್ಲ"
 
 #: ../modules/ldap.c:1842
 #, c-format
@@ -984,7 +983,7 @@ msgstr "LDAP ಪರಿಚಾರಕದ ಹೆಸರು"
 
 #: ../modules/ldap.c:2459
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "LDAP ಶೋಧನಾ ಮೂಲ DN"
 
 #: ../modules/ldap.c:2465
 msgid "LDAP Bind DN"
@@ -1081,7 +1080,7 @@ msgstr "ಪ್ರಾಂಪ್ಟ್‍ಗಳು ವಿಫಲಗೊಂಡಿವ�
 
 #: ../samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಆಬ್ಜೆಕ್ಟ್‍ ವರ್ಗಗಳು:\n"
 
 #: ../samples/testuser.c:82
 msgid "Default user attribute names:\n"
