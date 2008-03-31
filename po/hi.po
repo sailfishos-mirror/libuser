@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser.tip.hi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-02-27 17:16-0700\n"
-"PO-Revision-Date: 2008-03-25 11:02+0530\n"
+"PO-Revision-Date: 2008-03-31 15:28+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <hindi.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -513,7 +513,7 @@ msgstr "%s उपयोक्ता को अतालकित नहीं �
 #: ../apps/lusermod.c:221
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "चेतावनी: ID %jd के साथ समूह मौजद नहीं है.\n"
+msgstr "चेतावनी: ID %jd के साथ समूह मौजूद नहीं है.\n"
 
 #: ../apps/lusermod.c:275
 #, c-format
@@ -761,7 +761,7 @@ msgstr "%s फाइल तालकित करने में त्रु�
 #: ../lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr "मूलभूत सुरक्षा संदर्भ पा नहीं सका: %s"
+msgstr "मूलभूत सुरक्षा संदर्भ पा नहीं कर सका: %s"
 
 #: ../lib/util.c:733
 #, c-format
@@ -776,7 +776,7 @@ msgstr "`%s' में मूलभूत सुरक्षा संदर्�
 #: ../lib/util.c:760
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "`%s' के लिए सुरक्षा संदर्भ निर्धारित नहीं कर सका: %s"
+msgstr "`%s' के लिए सुरक्षा संदर्भ निर्धारित नहीं सका: %s"
 
 #: ../modules/files.c:111 ../modules/files.c:445 ../modules/files.c:756
 #: ../modules/files.c:1024 ../modules/files.c:1164 ../modules/files.c:1395
