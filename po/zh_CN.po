@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-27 17:16-0700\n"
-"PO-Revision-Date: 2008-03-20 13:48+1000\n"
+"POT-Creation-Date: 2008-03-24 17:16+0000\n"
+"PO-Revision-Date: 2008-04-01 15:45+1000\n"
 "Last-Translator: Leah Liu <lliu@redhat.com>\n"
 "Language-Team: Simplified Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -180,12 +180,12 @@ msgstr "最后一次改变：\t%s\n"
 #: ../apps/lchage.c:187
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "口令过期：\t%s\n"
+msgstr "密码过期：\t%s\n"
 
 #: ../apps/lchage.c:197
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr "口令不活跃：\t%s\n"
+msgstr "密码不活跃：\t%s\n"
 
 #: ../apps/lchage.c:204
 #, c-format
@@ -310,7 +310,7 @@ msgstr " -L 和 -U 两者皆被指定。\n"
 #: ../apps/lgroupmod.c:136 ../apps/lgroupmod.c:145
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "为组群 %s: %s 设置口令失败。\n"
+msgstr "为组群 %s: %s 设置密码失败。\n"
 
 #: ../apps/lgroupmod.c:154
 #, c-format
@@ -378,7 +378,7 @@ msgstr "创建组群`%s'时出错，使用 GID %jd: %s\n"
 #: ../apps/lnewusers.c:274
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "为`%s'设置初始口令时出错：%s\n"
+msgstr "为`%s'设置初始密码时出错：%s\n"
 
 #: ../apps/lnewusers.c:288
 #, c-format
@@ -398,40 +398,40 @@ msgstr "为 %s 创建用户账号失败：%s\n"
 #: ../apps/lpasswd.c:80
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "为`%s'改变口令。\n"
+msgstr "为`%s'改变密码。\n"
 
 #: ../apps/lpasswd.c:107
 msgid "New password"
-msgstr "新口令"
+msgstr "新密码"
 
 #: ../apps/lpasswd.c:110
 msgid "New password (confirm)"
-msgstr "新口令(确认)"
+msgstr "新密码(确认)"
 
 #: ../apps/lpasswd.c:124
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr "口令不匹配，请重试。\n"
+msgstr "密码不匹配，请重试。\n"
 
 #: ../apps/lpasswd.c:129
 #, c-format
 msgid "Password change canceled.\n"
-msgstr "口令改变被取消。\n"
+msgstr "密码改变被取消。\n"
 
 #: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "为用户 %s 设置口令失败：%s。\n"
+msgstr "为用户 %s 设置密码失败：%s。\n"
 
 #: ../apps/lpasswd.c:194
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "为组群`%s'设置口令时出错：%s\n"
+msgstr "为组群`%s'设置密码时出错：%s\n"
 
 #: ../apps/lpasswd.c:205
 #, c-format
 msgid "Password changed.\n"
-msgstr "口令被改变。\n"
+msgstr "密码被改变。\n"
 
 #: ../apps/luseradd.c:169
 #, c-format
@@ -497,7 +497,7 @@ msgstr "删除 %s 时出错：%s。\n"
 #: ../apps/lusermod.c:164 ../apps/lusermod.c:177
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "为用户 %s 设置口令失败：%s。\n"
+msgstr "为用户 %s 设置密码失败：%s。\n"
 
 #: ../apps/lusermod.c:187
 #, c-format
@@ -641,7 +641,7 @@ msgstr "库或模块版本错配"
 
 #: ../lib/error.c:78
 msgid "unlocking would make the password field empty"
-msgstr "解锁将使口令域为空"
+msgstr "解锁将使密码域为空"
 
 #: ../lib/error.c:84
 msgid "unknown error"
@@ -649,11 +649,11 @@ msgstr "未知错误"
 
 #: ../lib/misc.c:165
 msgid "invalid number"
-msgstr "无效号码"
+msgstr "无效数字"
 
 #: ../lib/misc.c:179
 msgid "invalid ID"
-msgstr "无效 ID"
+msgstr "无效的 ID"
 
 #: ../lib/modules.c:61
 #, c-format
@@ -830,7 +830,7 @@ msgstr "实体对象没有任何 %s 属性"
 
 #: ../modules/files.c:1749 ../modules/ldap.c:1538 ../modules/ldap.c:1811
 msgid "error encrypting password"
-msgstr "错误的加密口令"
+msgstr "错误的加密密码"
 
 #: ../modules/files.c:2655 ../modules/files.c:2733
 msgid "not executing with superuser privileges"
@@ -887,7 +887,7 @@ msgstr "实体没有任何 %s 属性"
 #: ../modules/krb5.c:638
 #, c-format
 msgid "error setting password for `%s'"
-msgstr "为`%s'设置口令时出错"
+msgstr "为`%s'设置密码时出错"
 
 #: ../modules/krb5.c:764
 msgid "Kerberos Realm"
@@ -899,7 +899,7 @@ msgstr "Kerberos 主管理员"
 
 #: ../modules/krb5.c:793
 msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberos 主管理员口令"
+msgstr "Kerberos 主管理员密码"
 
 #: ../modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -976,7 +976,7 @@ msgstr "没有发现任何`%s' 属性"
 #: ../modules/ldap.c:1842
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "在 LDAP 目录中为 %s 设置口令时出错：%s"
+msgstr "在 LDAP 目录中为 %s 设置密码时出错：%s"
 
 #: ../modules/ldap.c:2453
 msgid "LDAP Server Name"
@@ -992,7 +992,7 @@ msgstr "LDAP 关联 DN"
 
 #: ../modules/ldap.c:2472
 msgid "LDAP Bind Password"
-msgstr "LDAP 关联口令"
+msgstr "LDAP 关联密码"
 
 #: ../modules/ldap.c:2476
 msgid "LDAP SASL User"
