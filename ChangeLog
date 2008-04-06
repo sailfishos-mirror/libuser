@@ -1,3 +1,7 @@
+2008-03-25  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lpasswd.1 (DESCRIPTION): Fix another pasto.
+
 2008-02-27  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lusermod.c (main): Warn if the new GID does not refer to an
