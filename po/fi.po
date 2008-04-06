@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-27 17:16-0700\n"
-"PO-Revision-Date: 2008-03-16 23:23+0200\n"
+"POT-Creation-Date: 2008-04-02 10:24+0000\n"
+"PO-Revision-Date: 2008-04-06 13:29+0300\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
 "MIME-Version: 1.0\n"
@@ -648,7 +648,7 @@ msgstr "tuntematon virhe"
 
 #: ../lib/misc.c:165
 msgid "invalid number"
-msgstr "virheellinen numero"
+msgstr "virhellinen numero"
 
 #: ../lib/misc.c:179
 msgid "invalid ID"
