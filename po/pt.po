@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2007-10-27 19:47+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <morais@kde.org>\n"
@@ -498,27 +498,32 @@ msgstr "O utilizador %s não pode ser trancado: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "O utilizador %s não pode ser destrancado: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "O grupo %jd não existe.\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "O utilizador %s não pode ser modificado: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "O grupo %s não pode ser modificado: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Não existe um directoria pessoal antiga para %s.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Não existe um directoria pessoal nova para %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Erro ao mover %s para %s: %s.\n"

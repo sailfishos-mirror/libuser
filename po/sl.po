@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2008-02-23 00:53+0100\n"
 "Last-Translator: Rok Papez <rok.papez@lugos.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -500,27 +500,32 @@ msgstr "Uporabnika %s ni moč zakleniti: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Uporabnika %s ni moč odkleniti: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "Skupina %jd ne obstaja\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Uporabnika %s ni moč spremeniti: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Skupine %s ni moč spremeniti: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ni starega domačega imenika za %s.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ni novega domačega imenika za %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Napaka pri premikanju %s v %s: %s.\n"

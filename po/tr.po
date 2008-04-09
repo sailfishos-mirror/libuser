@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2008-02-23 00:53+0100\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -498,27 +498,32 @@ msgstr "Kullanıcı %s kilitlenemedi: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Kullanıcı %s için kilit kaldırılamadı: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "Grup %s yok.\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Kullanıcı %s değiştirilemedi: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "%s grubu değiştirilemedi: %s\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s için eski ev dizini yok.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s için yeni ev dizini yok.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s %s'e taşınırken hata: %s.\n"

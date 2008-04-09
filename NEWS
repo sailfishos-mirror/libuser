@@ -1,3 +1,8 @@
+0.56.9
+* Warn in lusermod if changing a primary group ID to a group that does not
+  exist. (#1)
+* Fix pastos in man pages.
+
 0.56.8
 * New home page at https://fedorahosted.org/libuser/ .
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2007-10-16 13:46+0100\n"
 "Last-Translator: Renato Pavicic <renato<attt>translator-shop.org>\n"
 "Language-Team: Renato Pavicic <www.translator-shop.org>\n"
@@ -494,27 +494,32 @@ msgstr "Korisnik %s nije mogao biti zaključan: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Korisnik %s nije mogao biti otključan: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "Grupa %jd ne postoji.\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Korisnik %s nije mogao biti izmijenjen: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Izmjena grupe %s nije moguća: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Prethodna početna mapa za %s ne postoji.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Novi naziv za mapu %s ne postoji.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Pogreška pri premještanju %s u %s: %s.\n"

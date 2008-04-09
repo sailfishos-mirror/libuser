@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2008-01-27 18:07-0500\n"
 "Last-Translator: Magnus Larsson <fedoratrans@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -498,27 +498,32 @@ msgstr "Användaren %s kunde inte låsas: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Användaren %s kunde inte låsas upp: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "Grupp nummer %jd finns inte\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Användaren %s kunde inte ändras: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Gruppen %s kunde inte ändras: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Ingen gammal hemkatalog för %s.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Ingen ny hemkatalog för %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Fel vid flytt av %s till %s: %s.\n"

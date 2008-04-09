@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-02-23 00:56+0100\n"
+"POT-Creation-Date: 2008-03-23 02:54+0100\n"
 "PO-Revision-Date: 2007-01-12 09:34+0200\n"
 "Last-Translator: Ali Ghareb <ali.gareb@gmail.com>\n"
 "Language-Team: Arabic <en@li.org>\n"
@@ -501,27 +501,32 @@ msgstr "لم يمكن قفل حساب المستخدم %s: %s.\n"
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "لم يتمكن من إلغاء قفل حساب المستخدم %s: %s.\n"
 
-#: apps/lusermod.c:264
+#: apps/lusermod.c:221
+#, fuzzy, c-format
+msgid "Warning: Group with ID %jd does not exist.\n"
+msgstr "المجموعة %jd غير موجودة\n"
+
+#: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "لم يمكن تعديل المستخدم %s: %s.\n"
 
-#: apps/lusermod.c:323
+#: apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "لم يمكن تعديل المجموعة %s: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:345
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "لا يوجد دليل موطن سابق لـ%s.\n"
 
-#: apps/lusermod.c:339
+#: apps/lusermod.c:350
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "لا دليل موطن جديد لـ%s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "خطأ في نقل %s إلى %s: %s.\n"

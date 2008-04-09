@@ -1,5 +1,8 @@
 2008-04-09  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Version 0.56.9.
+	* NEWS: Update.
+
 	* po/LINGUAS: Add as.
 
 2008-03-25  Miloslav Trmač  <mitr@redhat.com>
