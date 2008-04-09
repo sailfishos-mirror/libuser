@@ -1,6 +1,7 @@
 # To regenerate: (cd po; ls *.po | sed 's/\.po$//').  Then remove languages with
 # no translations.
 ar
+as
 bg
 bn_IN
 bn
