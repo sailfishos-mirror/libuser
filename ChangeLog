@@ -1,3 +1,8 @@
+2008-07-13  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lnewusers.1: Fix .IP argument quoting.  Use sentence
+	capitalization for field names.  Fix a typo.
+
 2008-04-09  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.9.

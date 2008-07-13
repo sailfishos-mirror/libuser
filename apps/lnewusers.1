@@ -1,5 +1,5 @@
 .\" A man page for lnewusers
-.\" Copyright (C) 2005 Red Hat, Inc.
+.\" Copyright (C) 2005, 2008 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -16,7 +16,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH lnewusers 1 "Jan 12 2005" libuser
+.TH lnewusers 1 "Jul 13 2008" libuser
 
 .SH NAME
 lnewusers \- Create new user accounts
@@ -27,12 +27,12 @@ lnewusers [\fIOPTION\fR]...
 .SH DESCRIPTION
 Creates new user accounts using data read from standard input.
 
-The input data consits of lines,
+The input data consists of lines,
 each line has 7 colon-separated fields:
 
-.IP "User Name"
+.IP "User name"
 
-.IP "Plaintext Password"
+.IP "Plaintext password"
 
 .IP "User ID"
 .B lnewusers
@@ -54,7 +54,7 @@ the created group has group name equal to the user name.
 The \f[SM]GECOS\fR field is traditionally used to store user's real name
 and other information.
 
-.IP Home Directory
+.IP "Home directory"
 If this field is empty,
 a default specified by
 .B libuser
@@ -64,7 +64,7 @@ or \fB/home/\fIusername\fR if
 configuration does not specify a default,
 is used.
 
-.IP Login Shell
+.IP "Login shell"
 If this field is empty,
 a default specified by
 .B libuser
