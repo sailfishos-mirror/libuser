@@ -11,7 +11,7 @@ pidfile @WORKDIR@/slapd.pid
 TLSCertificateFile @WORKDIR@/key.pem
 TLSCertificateKeyFile @WORKDIR@/key.pem
 
-database ldbm
+database bdb
 suffix "dc=libuser"
 rootdn "cn=Manager,dc=libuser"
 rootpw {SSHA}ABgelmLFZQ/OJzVEp3OM5MzWQ9rt3b4F

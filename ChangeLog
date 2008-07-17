@@ -1,3 +1,8 @@
+2008-07-18  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/slapd.conf.in: Use the "bdb" database backend, ldbm was removed
+	in openldap-2.4.
+
 2008-07-13  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lnewusers.1: Fix .IP argument quoting.  Use sentence
