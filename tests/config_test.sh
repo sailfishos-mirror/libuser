@@ -21,7 +21,7 @@
 
 srcdir=$srcdir/tests
 
-workdir=$(pwd)/test_files
+workdir=$(pwd)/test_config
 
 trap 'status=$?; rm -rf "$workdir"; exit $status' 0
 trap '(exit 1); exit 1' 1 2 13 15

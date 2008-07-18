@@ -1,7 +1,7 @@
 #! /bin/sh
 # Automated libuser utilities regression tester
 #
-# Copyright (c) 2004, 2005 Red Hat, Inc. All rights reserved.
+# Copyright (c) 2004, 2005, 2008 Red Hat, Inc. All rights reserved.
 #
 # This is free software; you can redistribute it and/or modify it under
 # the terms of the GNU Library General Public License as published by
@@ -21,7 +21,7 @@
 
 srcdir=$srcdir/tests
 
-workdir=$(pwd)/test_files
+workdir=$(pwd)/test_utils
 
 trap 'status=$?; rm -rf "$workdir"; exit $status' 0
 trap '(exit 1); exit 1' 1 2 13 15

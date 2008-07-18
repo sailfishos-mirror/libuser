@@ -1,5 +1,10 @@
 2008-07-18  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/config_test.sh (workdir):
+	* tests/pwhash_test (workdir):
+	* tests/utils_test (workdir): Use a work directory distinct from
+	tests/files_test.
+
 	* tests/slapd.conf.in: Use the "bdb" database backend, ldbm was removed
 	in openldap-2.4.
 
