@@ -653,10 +653,11 @@ format_field(struct lu_ent *ent, const struct format_specifier *format)
 }
 
 /* Format a line for the user/group, using the information in ent, using
- * formats to guide the formatting. */
+   formats to guide the formatting.
+   Return a line for g_free(), or NULL on error. */
 static char *
 format_generic(struct lu_ent *ent, const struct format_specifier *formats,
-	       size_t format_count)
+	       size_t format_count, struct lu_error **error)
 {
 	char *ret = NULL, *tmp;
 	size_t i;
@@ -667,57 +668,41 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 		char *field;
 
 		field = format_field(ent, formats + i);
-		tmp = g_strconcat(ret ? ret : "", i > 0 ? ":" : "", field,
-				  NULL);
-		g_free(field);
+		if (i != format_count - 1 && strchr(field, ':') != NULL) {
+			lu_error_new(error, lu_error_invalid_attribute_value,
+				     _("%s value `%s': `:' not allowed"),
+				     formats[i].attribute, field);
+			g_free(field);
+			goto err;
+		}
+		if (i == 0)
+			tmp = field;
+		else {
+			tmp = g_strconcat(ret, ":", field, NULL);
+			g_free(field);
+		}
 		g_free(ret);
 		ret = tmp;
 	}
 	/* Add an end-of-line terminator. */
-	tmp = g_strconcat(ret ?: "", "\n", NULL);
+	g_assert(format_count != 0 && ret != NULL);
+	tmp = g_strconcat(ret, "\n", NULL);
 	g_free(ret);
 	ret = tmp;
 
 	return ret;
-}
 
-/* Construct a line for /etc/passwd using data in the lu_ent structure. */
-static char *
-lu_files_format_user(struct lu_ent *ent)
-{
-	return format_generic(ent, format_passwd, G_N_ELEMENTS(format_passwd));
+err:
+	g_free(ret);
+	return NULL;
 }
-
-/* Construct a line for /etc/group using data in the lu_ent structure. */
-static char *
-lu_files_format_group(struct lu_ent *ent)
-{
-	return format_generic(ent, format_group, G_N_ELEMENTS(format_group));
-}
-
-/* Construct a line for /etc/shadow using data in the lu_ent structure. */
-static char *
-lu_shadow_format_user(struct lu_ent *ent)
-{
-	return format_generic(ent, format_shadow, G_N_ELEMENTS(format_shadow));
-}
-
-/* Construct a line for /etc/gshadow using data in the lu_ent structure. */
-static char *
-lu_shadow_format_group(struct lu_ent *ent)
-{
-	return format_generic(ent, format_gshadow,
-			      G_N_ELEMENTS(format_gshadow));
-}
-
-typedef char *(*format_fn) (struct lu_ent * ent);
 
 /* Add an entity to a given flat file, using a given formatting functin to
  * construct the proper text data. */
 static gboolean
 generic_add(struct lu_module *module, const char *file_suffix,
-	    format_fn formatter, struct lu_ent *ent,
-	    struct lu_error **error)
+	    const struct format_specifier *formats, size_t format_count,
+	    struct lu_ent *ent, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
 	const char *dir;
@@ -731,7 +716,8 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	gboolean ret = FALSE;
 
 	g_assert(module != NULL);
-	g_assert(formatter != NULL);
+	g_assert(formats != NULL);
+	g_assert(format_count > 0);
 	g_assert(ent != NULL);
 
 	/* Generate the name of a file to open. */
@@ -740,8 +726,12 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!lu_util_fscreate_save(&fscreate, error))
+	line = format_generic(ent, formats, format_count, error);
+	if (line == NULL)
 		goto err_filename;
+
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_line;
 	if (!lu_util_fscreate_from_file(filename, error))
 		goto err_fscreate;
 
@@ -770,11 +760,6 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		goto err_lock;
 	}
 
-	/* Generate a new line with the right data in it, and allocate space
-	 * for the contents of the file. */
-	line = formatter(ent);
-	contents = g_malloc0(st.st_size + 1);
-
 	/* We sanity-check here to make sure that the entity isn't already
 	 * listed in the file by name by searching for the initial part of
 	 * the line. */
@@ -793,11 +778,12 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	/* Read the entire file in.  There's some room for improvement here,
 	 * but at least we still have the lock, so it's not going to get
 	 * funky on us. */
+	contents = g_malloc0(st.st_size + 1);
 	if (read(fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"),
 			     filename, strerror(errno));
-		goto err_fragment2;
+		goto err_contents;
 	}
 
 	/* Check if the beginning of the file is the same as the beginning
@@ -805,14 +791,14 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	if (strncmp(contents, fragment1, strlen(fragment1)) == 0) {
 		lu_error_new(error, lu_error_generic,
 			     _("entry already present in file"));
-		goto err_fragment2;
+		goto err_contents;
 	} else
 	/* If not, search for a newline followed by the beginning of
 	 * the entry. */
 	if (strstr(contents, fragment2) != NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("entry already present in file"));
-		goto err_fragment2;
+		goto err_contents;
 	}
 	/* Hooray, we can add this entry at the end of the file. */
 	offset = lseek(fd, 0, SEEK_END);
@@ -820,7 +806,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"),
 			     filename, strerror(errno));
-		goto err_fragment2;
+		goto err_contents;
 	}
 	/* If the last byte in the file isn't a newline, add one, and silently
 	 * curse people who use text editors (which shall remain unnamed) which
@@ -831,7 +817,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 				     _("couldn't write to `%s': %s"),
 				     filename,
 				     strerror(errno));
-			goto err_fragment2;
+			goto err_contents;
 		}
 	}
 	/* Attempt to write the entire line to the end. */
@@ -845,24 +831,25 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		/* Truncate off whatever we actually managed to write and
 		 * give up. */
 		(void)ftruncate(fd, offset);
-		goto err_fragment2;
+		goto err_contents;
 	}
 	/* Hey, it succeeded. */
 	ret = TRUE;
 	/* Fall through */
 
- err_fragment2:
+err_contents:
+	g_free(contents);
 	g_free(fragment2);
 	g_free(fragment1);
-	g_free(contents);
-	g_free(line);
- err_lock:
+err_lock:
 	lu_util_lock_free(lock);
- err_fd:
+err_fd:
 	close(fd);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
- err_filename:
+err_line:
+	g_free(line);
+err_filename:
 	g_free(filename);
 	return ret;
 }
@@ -883,8 +870,8 @@ static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
-	return generic_add(module, suffix_passwd, lu_files_format_user, ent,
-			   error);
+	return generic_add(module, suffix_passwd, format_passwd,
+			   G_N_ELEMENTS(format_passwd), ent, error);
 }
 
 /* Make last-minute changes to the record before adding it to /etc/shadow. */
@@ -912,8 +899,8 @@ static gboolean
 lu_shadow_user_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_add(module, suffix_shadow, lu_shadow_format_user, ent,
-			   error);
+	return generic_add(module, suffix_shadow, format_shadow,
+			   G_N_ELEMENTS(format_shadow), ent, error);
 }
 
 /* Make last-minute changes before adding the group to the group file. */
@@ -932,8 +919,8 @@ static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
-	return generic_add(module, suffix_group, lu_files_format_group, ent,
-			   error);
+	return generic_add(module, suffix_group, format_group,
+			   G_N_ELEMENTS(format_group), ent, error);
 }
 
 /* Make last-minute changes before adding the shadowed group. */
@@ -961,8 +948,8 @@ static gboolean
 lu_shadow_group_add(struct lu_module *module, struct lu_ent *ent,
 		    struct lu_error **error)
 {
-	return generic_add(module, suffix_gshadow, lu_shadow_format_group, ent,
-			   error);
+	return generic_add(module, suffix_gshadow, format_gshadow,
+			   G_N_ELEMENTS(format_gshadow), ent, error);
 }
 
 /* Modify a particular record in the given file, field by field, using the
@@ -973,13 +960,15 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	char *filename, *key;
-	int fd = -1;
+	char *filename, *key, *new_line, *contents, *line, *rest;
+	char *fragment1, *fragment2;
+	int fd;
 	gpointer lock;
-	size_t i;
 	const char *dir, *name_attribute;
 	GValueArray *names;
 	gboolean ret = FALSE;
+	struct stat st;
+	size_t len;
 
 	g_assert(module != NULL);
 	g_assert(formats != NULL);
@@ -1009,8 +998,12 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	filename = g_strconcat(dir, file_suffix, NULL);
 	g_free(key);
 
-	if (!lu_util_fscreate_save(&fscreate, error))
+	new_line = format_generic(ent, formats, format_count, error);
+	if (new_line == NULL)
 		goto err_filename;
+
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err_new_line;
 	if (!lu_util_fscreate_from_file(filename, error))
 		goto err_fscreate;
 	/* Create a backup file. */
@@ -1030,49 +1023,73 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
 		goto err_fd;
 
-	/* We iterate over all of the fields individually. */
-	for (i = 0; i < format_count; i++) {
-		GValue *value;
-		char *field;
-		gboolean ret2;
-
-		field = format_field(ent, formats + i);
-
-		/* Get the current name for this entity. */
-		value = g_value_array_get_nth(names, 0);
-
-		/* Write the new value. */
-		ret2 = lu_util_field_write(fd, g_value_get_string(value),
-					   i + 1, field, error);
-		g_free(field);
-
-		/* If we had a write error, we fail now. */
-		if (ret2 == FALSE)
-			goto err_lock;
-
-		/* We may have just renamed the account (we're safe assuming
-		 * the new name is correct here because if we renamed it, we
-		 * changed the name field first), so switch to using the
-		 * account's new name. */
-		names = lu_ent_get(ent, name_attribute);
-		if (names == NULL) {
-			lu_error_new(error, lu_error_generic,
-				     _("entity object has no %s attribute"),
-				     name_attribute);
-			goto err_lock;
-		}
+	if (fstat(fd, &st) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     filename, strerror(errno));
+		goto err_lock;
 	}
 
+	contents = g_malloc(st.st_size + 1 + strlen(new_line));
+	if (read(fd, contents, st.st_size) != st.st_size) {
+		lu_error_new(error, lu_error_read,
+			     _("couldn't read from `%s': %s"), filename,
+			     strerror(errno));
+		goto err_contents;
+	}
+	contents[st.st_size] = '\0';
+
+	fragment1 = lu_value_strdup(g_value_array_get_nth(names, 0));
+	fragment2 = g_strconcat("\n", fragment1, ":", (const gchar *)NULL);
+	len = strlen(fragment1);
+	if (strncmp(contents, fragment1, len) == 0 && contents[len] == ':')
+		line = contents;
+	else {
+		line = strstr(contents, fragment2);
+		if (line != NULL)
+			line++;
+	}
+	g_free(fragment1);
+	g_free(fragment2);
+	if (line == NULL) {
+		lu_error_new(error, lu_error_search, NULL);
+		goto err_contents;
+	}
+
+	rest = strchr(line, '\n');
+	if (rest != NULL)
+		rest++;
+	else
+		rest = strchr(line, '\0');
+	memmove(line + strlen(new_line), rest,
+		contents + st.st_size + 1 - rest);
+	memcpy(line, new_line, strlen(new_line));
+	if (lseek(fd, line - contents, SEEK_SET) == -1) {
+		lu_error_new(error, lu_error_write, NULL);
+		goto err_contents;
+	}
+	len = strlen(line);
+	if ((size_t)write(fd, line, len) != len) {
+		lu_error_new(error, lu_error_write, NULL);
+		goto err_contents;
+	}
+	if (ftruncate(fd, (line - contents) + len) != 0) {
+		lu_error_new(error, lu_error_write, NULL);
+		goto err_contents;
+	}
 	ret = TRUE;
 	/* Fall through */
 
- err_lock:
+err_contents:
+	g_free(contents);
+err_lock:
 	lu_util_lock_free(lock);
- err_fd:
+err_fd:
 	close(fd);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
- err_filename:
+err_new_line:
+	g_free(new_line);
+err_filename:
 	g_free(filename);
 	return ret;
 }
@@ -1718,7 +1735,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	/* pam_unix uses shadow passwords only if pw_passwd is "x"
 	   (or ##${username}).  Make sure to preserve the shadow marker
 	   unmodified (most importantly, don't replace it by an encrypted
-	   password) -- but only a shadow entry exists. */
+	   password) -- but only if a shadow entry exists. */
 	if (!is_shadow && ent_has_shadow(ent)
 	    && lu_ent_get_current(ent, LU_SHADOWPASSWORD) != NULL
 	    && (strcmp(value, "x") == 0
@@ -1738,6 +1755,12 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	else if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED))
 		 == 0) {
 		password = password + strlen(LU_CRYPTED);
+		if (strchr(password, ':') != NULL) {
+			lu_error_new(error, lu_error_invalid_attribute_value,
+				     _("`:' not allowed in encrypted "
+				       "password"));
+			goto err_value;
+		}
 	} else {
 		char *salt;
 

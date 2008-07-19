@@ -212,6 +212,27 @@ class Tests(unittest.TestCase):
         e[libuser.HOMEDIRECTORY] = 'this_is_a_relative_path'
         self.assertRaises(RuntimeError, self.a.addUser, e, mkmailspool = False)
 
+    def testUserAdd6(self):
+        # ':' in field values
+        # libuser.USERPASSWORD not tested because lu_shadow_user_add_prep()
+        # always replaces it by 'x'.  libuser.UIDNUMBER not tested because
+        # ent_has_name_and_id() interprets the value as a number.
+        for field in (libuser.USERNAME, libuser.GIDNUMBER, libuser.GECOS,
+                      libuser.HOMEDIRECTORY, libuser.SHADOWPASSWORD,
+                      libuser.SHADOWLASTCHANGE, libuser.SHADOWMIN,
+                      libuser.SHADOWMAX, libuser.SHADOWWARNING,
+                      libuser.SHADOWINACTIVE, libuser.SHADOWEXPIRE):
+            e = self.a.initUser('user_6_6' + field)
+            e[field] = str(e[field][0]) + ':x'
+            self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+        # libuser.SHADOWFLAG not tested because it is parsed as an integer
+        e = self.a.initUser('user_6_6' + libuser.LOGINSHELL)
+        e[libuser.LOGINSHELL] = e[libuser.LOGINSHELL][0] + ':x'
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user_6_6' + libuser.LOGINSHELL)
+        self.assert_(':' in e[libuser.LOGINSHELL][0])
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')
@@ -315,6 +336,39 @@ class Tests(unittest.TestCase):
         self.assert_(e)
         self.assertEqual(e[libuser.SHADOWMAX], [99999])
         self.assertEqual(e[libuser.SHADOWFLAG], [-1])
+
+    def testUserMod5(self):
+        # ':' in field values
+        # libuser.USERPASSWORD not tested because lu_shadow_user_add_prep()
+        # always replaces it by 'x'.  libuser.UIDNUMBER not tested because
+        # ent_has_name_and_id() interprets the value as a number.
+        for field in (libuser.USERNAME, libuser.USERPASSWORD, libuser.GIDNUMBER,
+                      libuser.GECOS, libuser.HOMEDIRECTORY,
+                      libuser.SHADOWPASSWORD, libuser.SHADOWLASTCHANGE,
+                      libuser.SHADOWMIN, libuser.SHADOWMAX,
+                      libuser.SHADOWWARNING, libuser.SHADOWINACTIVE,
+                      libuser.SHADOWEXPIRE):
+            e = self.a.initUser('user7_5' + field)
+            self.a.addUser(e, False, False)
+            del e
+            e = self.a.lookupUserByName('user7_5' + field)
+            self.assert_(e)
+            self.assert_(':' not in str(e[field][0]))
+            e[field] = str(e[field][0]) + ':x'
+            self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
+        # libuser.SHADOWFLAG not tested because it is parsed as an integer
+        e = self.a.initUser('user7_5')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_5')
+        self.assert_(e)
+        self.assert_(':' not in e[libuser.LOGINSHELL][0])
+        e[libuser.LOGINSHELL] = e[libuser.LOGINSHELL][0] + ':x'
+        self.a.modifyUser(e, False)
+        del e
+        e = self.a.lookupUserByName('user7_5')
+        self.assert_(e)
+        self.assert_(':' in e[libuser.LOGINSHELL][0])
 
     def testUserDel(self):
         e = self.a.initUser('user8_1')
@@ -494,6 +548,20 @@ class Tests(unittest.TestCase):
         crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0])
         self.assertEqual(e[libuser.USERPASSWORD], [crypted])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
+
+    def testUserSetpass4(self):
+        # ':' in field value
+        e = self.a.initUser('user12_4')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user12_4')
+        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertRaises(SystemError, self.a.setpassUser, e, 'a:b', True)
+        self.a.setpassUser(e, 'a:b', False)
+        del e
+        e = self.a.lookupUserByName('user12_4')
+        crypted = crypt.crypt('a:b', e[libuser.SHADOWPASSWORD][0])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
     def testUserRemovepass(self):
         e = self.a.initUser('user13_1')
@@ -690,6 +758,26 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPNAME], ['group21_3'])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2130])
 
+    def testGroupAdd4(self):
+        # ':' in field values
+        # libuser.GROUPPASSWORD not tested because lu_shadow_group_add_prep()
+        # always replaces it by 'x'.  libuser.GIDNUMBER not tested because
+        # ent_has_name_and_id() interprets the value as a number.
+        for field in (libuser.GROUPNAME, libuser.SHADOWPASSWORD,
+                      libuser.ADMINISTRATORNAME):
+            e = self.a.initGroup('group_21_4' + field)
+            if e.has_key(field):
+                e[field] = str(e[field][0]) + ':x'
+            else:
+                e[field] = field + ':x'
+            self.assertRaises(RuntimeError, self.a.addGroup, e)
+        e = self.a.initGroup('group21_4' + libuser.MEMBERNAME)
+        e[libuser.MEMBERNAME] = 'group21_4:member'
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group21_4' + libuser.MEMBERNAME)
+        self.assertEqual(e[libuser.MEMBERNAME], ['group21_4:member'])
+
     def testGroupMod1(self):
         # A minimal case
         e = self.a.initGroup('group22_1')
@@ -750,6 +838,36 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group22_3')
         self.assert_(e)
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2230])
+
+    def testGroupMod4(self):
+        # ':' in field values
+        # libuser.GIDNUMBER not tested because ent_has_name_and_id() interprets
+        # the value as a number.
+        for field in (libuser.GROUPNAME, libuser.GROUPPASSWORD,
+                      libuser.SHADOWPASSWORD, libuser.ADMINISTRATORNAME):
+            e = self.a.initGroup('group22_4' + field)
+            self.a.addGroup(e)
+            del e
+            e = self.a.lookupGroupByName('group22_4' + field)
+            self.assert_(e)
+            if e.has_key(field):
+                self.assert_(':' not in str(e[field][0]))
+                e[field] = str(e[field][0]) + ':x'
+            else:
+                e[field] = field + ':x'
+            self.assertRaises(RuntimeError, self.a.modifyGroup, e)
+        e = self.a.initGroup('group22_4' + libuser.MEMBERNAME)
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
+        self.assert_(e)
+        not e.has_key(libuser.MEMBERNAME)
+        e[libuser.MEMBERNAME] = 'group22_4:member'
+        self.a.modifyGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
+        self.assert_(e)
+        self.assertEqual(e[libuser.MEMBERNAME], ['group22_4:member'])
 
     def testGroupDel(self):
         e = self.a.initGroup('group23_1')
@@ -924,6 +1042,20 @@ class Tests(unittest.TestCase):
         crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0])
         self.assertEqual(e[libuser.GROUPPASSWORD], [crypted])
         self.assertRaises(KeyError, lambda: e[libuser.SHADOWPASSWORD])
+
+    def testGroupSetpass4(self):
+        # ':' in field value
+        e = self.a.initGroup('group27_4')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group27_4')
+        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertRaises(SystemError, self.a.setpassGroup, e, 'a:b', True)
+        self.a.setpassGroup(e, 'a:b', False)
+        del e
+        e = self.a.lookupGroupByName('group27_4')
+        crypted = crypt.crypt('a:b', e[libuser.SHADOWPASSWORD][0])
+        self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
     def testGroupRemovepass(self):
         e = self.a.initGroup('group28_1')

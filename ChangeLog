@@ -1,3 +1,23 @@
+2008-07-19  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/files_test.py (Tests.testUserAdd6, Tests.testUserMod5)
+	(Tests.testUserSetpass4, Tests.testGroupAdd4)
+	(Tests.testGroupMod4, Tests.testGroupSetpass4): New tests.
+
+	* modules/files.c (format_generic): New parameter error.  Reject fields
+	contaning a ':' that would be interpreted as a field separator.
+	(format_fn): Remove.
+	(generic_add): New parameters formats, format_count instead of
+	formatter.  All users changed.  Format the new line first, and refuse
+	to use it if it is invalid.
+	(lu_files_format_user, lu_files_format_group, lu_shadow_format_user)
+	(lu_shadow_format_group): Fold into generic_add callers.
+	(generic_mod): Format the new line first, and refuse to use it if it is
+	invalid.  Modify the file one line at a time instead of one field at a
+	time.
+	(generic_setpass): Refuse to use the new password if it contains a
+	literal ':'.
+
 2008-07-18  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/config_test.sh (workdir):
