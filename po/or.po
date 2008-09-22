@@ -4,19 +4,20 @@
 #
 # Subhransu Behera <sbehera@redhat.com>, 2006, 2007.
 # Manoj Kumar Giri <giri.manojkr@gmail.com>, 2008.
+# Manoj Kumar Giri <mgiri@redhat.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-04-10 01:15+0000\n"
-"PO-Revision-Date: 2008-05-30 15:38+0530\n"
-"Last-Translator: Manoj Kumar Giri <giri.manojkr@gmail.com>\n"
+"POT-Creation-Date: 2008-08-25 15:56+0000\n"
+"PO-Revision-Date: 2008-09-22 14:31+0530\n"
+"Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2;plural=(n!=1)\n"
 "\n"
 "\n"
 "\n"
@@ -777,19 +778,19 @@ msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ସୁରକ୍ଷା 
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ର ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ ସ୍ଥିର କରିପାରିଲା ନାହିଁ: %s"
 
-#: ../modules/files.c:111 ../modules/files.c:445 ../modules/files.c:756
-#: ../modules/files.c:1024 ../modules/files.c:1164 ../modules/files.c:1395
-#: ../modules/files.c:1479 ../modules/files.c:1700 ../modules/files.c:1865
-#: ../modules/files.c:1882 ../modules/files.c:1971 ../modules/files.c:1990
-#: ../modules/files.c:2058 ../modules/files.c:2079 ../modules/files.c:2176
-#: ../modules/files.c:2195 ../modules/files.c:2254 ../modules/files.c:2273
-#: ../modules/files.c:2369 ../modules/files.c:2384
+#: ../modules/files.c:111 ../modules/files.c:445 ../modules/files.c:746
+#: ../modules/files.c:1017 ../modules/files.c:1181 ../modules/files.c:1412
+#: ../modules/files.c:1496 ../modules/files.c:1717 ../modules/files.c:1888
+#: ../modules/files.c:1905 ../modules/files.c:1994 ../modules/files.c:2013
+#: ../modules/files.c:2081 ../modules/files.c:2102 ../modules/files.c:2199
+#: ../modules/files.c:2218 ../modules/files.c:2277 ../modules/files.c:2296
+#: ../modules/files.c:2392 ../modules/files.c:2407
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
 
 #: ../modules/files.c:123 ../modules/files.c:152 ../modules/files.c:218
-#: ../modules/files.c:768 ../modules/files.c:1176
+#: ../modules/files.c:758 ../modules/files.c:1027 ../modules/files.c:1193
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' ଉପରେ ଷ୍ଟାର୍ଟ କୁ କାର୍ଯ୍ଯକାରି କରି ପାରିଲା ନାହିଁ: %s"
@@ -808,35 +809,44 @@ msgstr "`%s' ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ଅବସ୍ଥିତ 
 msgid "backup file size mismatch"
 msgstr "ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ର ଆକାର ମିଶୁ ନାହିଁ"
 
-#: ../modules/files.c:798 ../modules/files.c:1185
+#: ../modules/files.c:673
+#, c-format
+msgid "%s value `%s': `:' not allowed"
+msgstr "%s ମୂଲ୍ୟ `%s': `:' ଅନୁମୋଦିତ ନୁହଁ"
+
+#: ../modules/files.c:784 ../modules/files.c:1035 ../modules/files.c:1202
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' ରୁ ପଢି ପାରିଲା ନାହିଁ: %s"
 
-#: ../modules/files.c:807 ../modules/files.c:814
+#: ../modules/files.c:793 ../modules/files.c:800
 msgid "entry already present in file"
 msgstr "ଫାଇଲ ରେ ଭରଣ ପୂର୍ବ ରୁ ରହିଛି"
 
-#: ../modules/files.c:821 ../modules/files.c:831 ../modules/files.c:842
-#: ../modules/files.c:1244 ../modules/files.c:1252 ../modules/files.c:1260
+#: ../modules/files.c:807 ../modules/files.c:817 ../modules/files.c:828
+#: ../modules/files.c:1261 ../modules/files.c:1269 ../modules/files.c:1277
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' ରେ ଲେଖି ପାରିଲା ନାହିଁ: %s"
 
-#: ../modules/files.c:1001 ../modules/files.c:1060
+#: ../modules/files.c:990
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "ବସ୍ତୁ ର %s ଭଳି କୌଣସି ଗୁଣ ନାହିଁ"
 
-#: ../modules/files.c:1749 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1760
+msgid "`:' not allowed in encrypted password"
+msgstr "`:' ସଂଗୁପ୍ତ ପ୍ରବେଶ ସଂକେତରେ ଅନୁମୋଦିତ ନୁହଁ"
+
+#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
 msgid "error encrypting password"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ କୁ ସଂଗୁପ୍ତ କରିବା ସମୟରେ ତୃଟି"
 
-#: ../modules/files.c:2655 ../modules/files.c:2733
+#: ../modules/files.c:2678 ../modules/files.c:2756
 msgid "not executing with superuser privileges"
 msgstr "ପ୍ରମୂଖ ଚାଳକ ର ବିଶେଷ ଆକର୍ଷଣ ମାନଙ୍କ ସହିତ ନିଷ୍ପାଦିତ ହେଉ ନାହିଁ"
 
-#: ../modules/files.c:2746
+#: ../modules/files.c:2769
 msgid "no shadow file present -- disabling"
 msgstr "କୌଣସି ଛାୟା ଫାଇଲ ଉପସ୍ଥିତ ନାହିଁ -- disabling"
 
