@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-08-25 15:55+0000\n"
-"PO-Revision-Date: 2008-09-02 14:46+1000\n"
+"PO-Revision-Date: 2008-09-24 14:28+1000\n"
 "Last-Translator: Terry Chuang <tchuang@redhat.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr "`%s' 這個家目錄路徑並非絕對路徑"
 #: ../apps/apputil.c:250 ../modules/files.c:181
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "讀取 `%s' 錯誤: %s"
+msgstr "讀取 `%s' 錯誤：%s"
 
 #: ../apps/apputil.c:123 ../apps/apputil.c:199
 #, c-format
 msgid "Error creating `%s': %s"
-msgstr "建立 `%s' 錯誤: %s"
+msgstr "建立 `%s' 錯誤：%s"
 
 #: ../apps/apputil.c:131 ../apps/apputil.c:206 ../apps/apputil.c:296
 #: ../modules/files.c:164
@@ -52,7 +52,7 @@ msgstr "寫入 `%s' 錯誤：%s"
 #: ../apps/apputil.c:358 ../apps/apputil.c:393 ../apps/apputil.c:410
 #, c-format
 msgid "Error removing `%s': %s"
-msgstr "移除 `%s' 錯誤: %s"
+msgstr "移除 `%s' 錯誤：%s"
 
 #: ../apps/apputil.c:568 ../apps/apputil.c:572
 #, c-format
@@ -71,7 +71,7 @@ msgstr "並未授權 %s 修改 %s 的 finger 資訊\n"
 
 #: ../apps/apputil.c:604
 msgid "Unknown user context"
-msgstr "未知的使用者本文"
+msgstr "不明的使用者本文"
 
 #: ../apps/apputil.c:612
 #, c-format
@@ -96,7 +96,7 @@ msgstr "內部 PAM 錯誤 `%s'。\n"
 #: ../apps/apputil.c:644
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "未知的使用者認證。\n"
+msgstr "不明的使用者認證。\n"
 
 #: ../apps/apputil.c:648
 #, c-format
@@ -114,7 +114,7 @@ msgstr "[OPTION...] 使用者"
 #: ../apps/luseradd.c:91 ../apps/luserdel.c:64 ../apps/lusermod.c:89
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr "語法上分析引數錯誤: %s。\n"
+msgstr "語法上分析引數錯誤：%s。\n"
 
 #: ../apps/lchage.c:123 ../apps/lpasswd.c:83 ../apps/luseradd.c:106
 #: ../apps/luserdel.c:72 ../apps/lusermod.c:100
@@ -129,7 +129,7 @@ msgstr "沒有指定使用者名稱。\n"
 #: ../samples/enum.c:56 ../samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "初始化 %s 錯誤: %s。\n"
+msgstr "初始化 %s 錯誤：%s。\n"
 
 #: ../apps/lchage.c:142 ../apps/lchfn.c:114 ../apps/lchsh.c:100
 #: ../apps/lpasswd.c:144 ../apps/luserdel.c:89 ../apps/lusermod.c:155
@@ -243,7 +243,7 @@ msgstr "電子郵件位址"
 #: ../apps/lchfn.c:224
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr "finger 的資訊未變更: 輸入錯誤。\n"
+msgstr "finger 的資訊未變更：輸入錯誤。\n"
 
 #: ../apps/lchfn.c:296
 msgid "Finger information changed.\n"
@@ -252,7 +252,7 @@ msgstr "finger 的資訊已變更。\n"
 #: ../apps/lchfn.c:299
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr "finger 的資訊未變更: %s。\n"
+msgstr "finger 的資訊未變更：%s。\n"
 
 #. Give the user some idea of what's going on.
 #: ../apps/lchsh.c:85
@@ -330,7 +330,7 @@ msgstr "%s 群組無法被修改：%s\n"
 #: ../apps/lid.c:44
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "查詢 %s 錯誤: %s\n"
+msgstr "查詢 %s 錯誤：%s\n"
 
 #: ../apps/lid.c:129
 #, c-format
@@ -354,12 +354,12 @@ msgstr "[OPTION...]"
 #: ../apps/lnewusers.c:86
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "開啟 `%s' 錯誤: %s。\n"
+msgstr "開啟 `%s' 錯誤：%s。\n"
 
 #: ../apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "建立 `%s' 的帳號發生錯誤: 含有不當格式的行列。\n"
+msgstr "建立 `%s' 的帳號發生錯誤：含有不當格式的行列。\n"
 
 #: ../apps/lnewusers.c:128 ../apps/luseradd.c:115 ../apps/lusermod.c:127
 #, c-format
@@ -378,12 +378,12 @@ msgstr "為 `%s' 建立群組時（使用 GID %jd）發生錯誤：%s\n"
 #: ../apps/lnewusers.c:274
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "設定初始密碼給 %s 發生錯誤: %s\n"
+msgstr "設定初始密碼給 %s 發生錯誤：%s\n"
 
 #: ../apps/lnewusers.c:288
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "建立 %s 的家目錄發生錯誤: %s\n"
+msgstr "建立 %s 的家目錄發生錯誤：%s\n"
 
 #: ../apps/lnewusers.c:302
 #, c-format
@@ -393,7 +393,7 @@ msgstr "建立 %s 的郵件緩衝器時發生錯誤。\n"
 #: ../apps/lnewusers.c:308
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "建立 %s 的使用者帳號時發生錯誤: %s。\n"
+msgstr "建立 %s 的使用者帳號時發生錯誤：%s。\n"
 
 #: ../apps/lpasswd.c:80
 #, c-format
@@ -421,12 +421,12 @@ msgstr "取消密碼變更。\n"
 #: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "為 %s 使用者設定密碼發生錯誤: %s。\n"
+msgstr "為 %s 使用者設定密碼發生錯誤：%s。\n"
 
 #: ../apps/lpasswd.c:194
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "設定密碼給 %s 群組發生錯誤: %s。\n"
+msgstr "設定密碼給 %s 群組發生錯誤：%s。\n"
 
 #: ../apps/lpasswd.c:205
 #, c-format
@@ -447,12 +447,12 @@ msgstr "建立 `%s' 群組發生錯誤：%s\n"
 #: ../apps/luseradd.c:270
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "帳號建立失敗: %s。\n"
+msgstr "帳號建立失敗：%s。\n"
 
 #: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "建立 %s 發生錯誤: %s。\n"
+msgstr "建立 %s 發生錯誤：%s。\n"
 
 #: ../apps/luseradd.c:327
 #, c-format
@@ -462,12 +462,12 @@ msgstr "建立郵件 spool 時發生錯誤。\n"
 #: ../apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "無法刪除 %s 使用者: %s。\n"
+msgstr "無法刪除 %s 使用者：%s。\n"
 
 #: ../apps/luserdel.c:104
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s 沒有群組 ID (gid) 號碼。\n"
+msgstr "%s 沒有群組 ID（gid）號碼。\n"
 
 #: ../apps/luserdel.c:114
 #, c-format
@@ -482,7 +482,7 @@ msgstr "GID %jd 的群組沒有群組名稱。\n"
 #: ../apps/luserdel.c:131
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "無法刪除 %s 群組: %s。\n"
+msgstr "無法刪除 %s 群組：%s。\n"
 
 #: ../apps/luserdel.c:145
 #, c-format
@@ -492,22 +492,22 @@ msgstr "%s 沒有家目錄。\n"
 #: ../apps/luserdel.c:152
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "移除 %s 錯誤: %s。\n"
+msgstr "移除 %s 錯誤：%s。\n"
 
 #: ../apps/lusermod.c:164 ../apps/lusermod.c:177
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "為 %s 使用者設定密碼失敗: %s。\n"
+msgstr "為 %s 使用者設定密碼失敗：%s。\n"
 
 #: ../apps/lusermod.c:187
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s 使用者無法被鎖定: %s。\n"
+msgstr "%s 使用者無法被鎖定：%s。\n"
 
 #: ../apps/lusermod.c:195
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s 使用者無法被開啟: %s。\n"
+msgstr "%s 使用者無法被開啟：%s。\n"
 
 #: ../apps/lusermod.c:221
 #, c-format
@@ -517,12 +517,12 @@ msgstr "警告：ID 為 %jd 的群組不存在。\n"
 #: ../apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s 使用者無法被修改: %s。\n"
+msgstr "%s 使用者無法被修改：%s。\n"
 
 #: ../apps/lusermod.c:334
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s 群組無法被修改: %s。\n"
+msgstr "%s 群組無法被修改：%s。\n"
 
 #: ../apps/lusermod.c:345
 #, c-format
@@ -537,17 +537,17 @@ msgstr "沒有 %s 新的家目錄。\n"
 #: ../apps/lusermod.c:356
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "移動 %s 至 %s 錯誤: %s。\n"
+msgstr "移動 %s 至 %s 錯誤：%s。\n"
 
 #: ../lib/config.c:114
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "無法開啟組態設定檔`%s': %s"
+msgstr "無法開啟組態設定檔`%s'：%s"
 
 #: ../lib/config.c:120
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "無法 stat 組態設定檔`%s': %s"
+msgstr "無法 stat 組態設定檔`%s'：%s"
 
 #: ../lib/config.c:129
 #, c-format
@@ -557,7 +557,7 @@ msgstr "設定檔 `%s' 太大"
 #: ../lib/config.c:145
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "無法讀取組態設定檔`%s': %s"
+msgstr "無法讀取組態設定檔`%s'：%s"
 
 #: ../lib/error.c:38
 msgid "success"
@@ -581,7 +581,7 @@ msgstr "拒絕存取"
 
 #: ../lib/error.c:48
 msgid "bad user/group name"
-msgstr "不當的 使用者/群組 名稱"
+msgstr "不當的使用者/群組名稱"
 
 #: ../lib/error.c:50
 msgid "bad user/group id"
@@ -645,7 +645,7 @@ msgstr "解鎖會讓密碼欄成為空白"
 
 #: ../lib/error.c:84
 msgid "unknown error"
-msgstr "未知的錯誤"
+msgstr "不明錯誤"
 
 #: ../lib/misc.c:165
 msgid "invalid number"
@@ -696,7 +696,7 @@ msgstr "名稱太短"
 #: ../lib/user.c:201
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr "名稱太長 (%zu > %d)"
+msgstr "名稱太長（%zu > %d）"
 
 #: ../lib/user.c:208
 msgid "name contains non-ASCII characters"
@@ -786,18 +786,18 @@ msgstr "無法判斷 `%s' 的安全本文：%s"
 #: ../modules/files.c:2392 ../modules/files.c:2407
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "無法開啟`%s': %s"
+msgstr "無法開啟`%s'：%s"
 
 #: ../modules/files.c:123 ../modules/files.c:152 ../modules/files.c:218
 #: ../modules/files.c:758 ../modules/files.c:1027 ../modules/files.c:1193
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "無法 stat `%s': %s"
+msgstr "無法 stat `%s'：%s"
 
 #: ../modules/files.c:134
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "建立`%s' 發生錯誤: %s"
+msgstr "建立`%s' 發生錯誤：%s"
 
 #: ../modules/files.c:147
 #, c-format
@@ -816,7 +816,7 @@ msgstr "%s value `%s': `:' 不被允許"
 #: ../modules/files.c:784 ../modules/files.c:1035 ../modules/files.c:1202
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "無法從`%s' 讀取: %s"
+msgstr "無法從`%s' 讀取：%s"
 
 #: ../modules/files.c:793 ../modules/files.c:800
 msgid "entry already present in file"
@@ -826,7 +826,7 @@ msgstr "項目已存在檔案中"
 #: ../modules/files.c:1261 ../modules/files.c:1269 ../modules/files.c:1277
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "無法寫入`%s': %s"
+msgstr "無法寫入`%s'：%s"
 
 #: ../modules/files.c:990
 #, c-format
@@ -843,7 +843,7 @@ msgstr "為密碼編碼時錯誤"
 
 #: ../modules/files.c:2678 ../modules/files.c:2756
 msgid "not executing with superuser privileges"
-msgstr "非以超級使用者(superuser)的權限執行"
+msgstr "非以超級使用者（superuser）的權限執行"
 
 #: ../modules/files.c:2769
 msgid "no shadow file present -- disabling"
@@ -852,7 +852,7 @@ msgstr "找不到 shadow 檔案 -- 停用中"
 #: ../modules/krb5.c:100
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "連線至提供`%s' 服務的 %s realm 伺服器發生錯誤: %s"
+msgstr "連線至提供`%s' 服務的 %s realm 伺服器發生錯誤：%s"
 
 #: ../modules/krb5.c:132 ../modules/krb5.c:198 ../modules/krb5.c:297
 #: ../modules/krb5.c:385 ../modules/krb5.c:437 ../modules/krb5.c:525
@@ -925,7 +925,7 @@ msgstr "無法妥協 TLS 與 LDAP 伺服器"
 
 #: ../modules/ldap.c:415
 msgid "could not bind to LDAP server"
-msgstr "無法連接(bind) 至 LDAP 伺服器"
+msgstr "無法連接（bind）至 LDAP 伺服器"
 
 #: ../modules/ldap.c:418
 #, c-format
@@ -950,12 +950,12 @@ msgstr "建立 LDAP 目錄登錄發生錯誤：%s"
 #: ../modules/ldap.c:1380 ../modules/ldap.c:1599
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "修改 LDAP 目錄登錄發生錯誤: %s"
+msgstr "修改 LDAP 目錄登錄發生錯誤：%s"
 
 #: ../modules/ldap.c:1405
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "為 LDAP 目錄登錄重新命名時發生錯誤: %s"
+msgstr "為 LDAP 目錄登錄重新命名時發生錯誤：%s"
 
 #: ../modules/ldap.c:1452
 #, c-format
@@ -985,7 +985,7 @@ msgstr "找不到 `%s' 屬性"
 #: ../modules/ldap.c:1842
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤： %s"
+msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤：%s"
 
 #: ../modules/ldap.c:2453
 msgid "LDAP Server Name"
@@ -1014,17 +1014,17 @@ msgstr "LDAP SASL 認證使用者"
 #: ../modules/sasldb.c:120
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "建立使用者時發生 Cyrus SASL 錯誤: %s"
+msgstr "建立使用者時發生 Cyrus SASL 錯誤：%s"
 
 #: ../modules/sasldb.c:124
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "移除使用者時發生 Cyrus SASL 錯誤: %s"
+msgstr "移除使用者時發生 Cyrus SASL 錯誤：%s"
 
 #: ../modules/sasldb.c:520 ../modules/sasldb.c:528
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr "初始化 Cyrus SASL 發生錯誤: %s"
+msgstr "初始化 Cyrus SASL 發生錯誤：%s"
 
 #: ../python/admin.c:523
 msgid "error creating home directory for user"
@@ -1049,7 +1049,7 @@ msgstr "為使用者移除郵件緩衝器時發生錯誤"
 #: ../samples/lookup.c:63
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "初始化 %s 錯誤: %s\n"
+msgstr "初始化 %s 錯誤：%s\n"
 
 #: ../samples/lookup.c:76
 #, c-format
@@ -1090,17 +1090,17 @@ msgstr "提示失敗。\n"
 
 #: ../samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr "預設使用者物件類別:\n"
+msgstr "預設使用者物件類別：\n"
 
 #: ../samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "預設使用者屬性名稱:\n"
+msgstr "預設使用者屬性名稱：\n"
 
 #: ../samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "取得預設使用者屬性:\n"
+msgstr "取得預設使用者屬性：\n"
 
 #: ../samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr "複製使用者結構:\n"
+msgstr "複製使用者結構：\n"
 
