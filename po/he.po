@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-10-06 13:15+0000\n"
-"PO-Revision-Date: 2008-10-20 23:12GMT\n"
+"PO-Revision-Date: 2008-10-21 13:08GMT\n"
 "Last-Translator: Oron Peled <oron@actcom.co.il>\n"
 "Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: ../apps/apputil.c:107
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr "שם תיקיית הבית '%s' הוא שם יחסי"
+msgstr "שם תיקיית הבית '%s` הוא שם יחסי"
 
 #: ../apps/apputil.c:115 ../apps/apputil.c:190 ../apps/apputil.c:223
 #: ../apps/apputil.c:250 ../modules/files.c:181
@@ -370,106 +370,106 @@ msgstr "מסרב ליצור חשבון עם זיהוי משתמש (UID)‏ 0.\n"
 #: ../apps/lnewusers.c:217
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
+msgstr "יצירת קבוצה עבור '%s` נכשלה עם GID ‏%jd:‏ %s\n"
 
 #: ../apps/lnewusers.c:274
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "כישלון בקביעת ססמה התחלתית עבור %s:‏ %s\n"
 
 #: ../apps/lnewusers.c:288
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "כישלון ביצירת תיקיית בית עבור %s:‏ %s\n"
 
 #: ../apps/lnewusers.c:302
 #, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "כישלון ביצירת קובץ דואר נכנס עבור %s.‏\n"
 
 #: ../apps/lnewusers.c:308
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "כישלון ביצירת חשבון משתמש עבור %s:‏ %s\n"
 
 #: ../apps/lpasswd.c:80
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "שינוי ססמה עבור %s.‏\n"
 
 #: ../apps/lpasswd.c:107
 msgid "New password"
-msgstr ""
+msgstr "ססמה חדשה"
 
 #: ../apps/lpasswd.c:110
 msgid "New password (confirm)"
-msgstr ""
+msgstr "ססמה חדשה (אישור)"
 
 #: ../apps/lpasswd.c:124
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "ססמאות אינן תואמות, יש לנסות שנית.\n"
 
 #: ../apps/lpasswd.c:129
 #, c-format
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "שינוי ססמה בוטל.\n"
 
 #: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "כישלון בקביעת ססמה עבור המשתמש %s:‏ %s.‏\n"
 
 #: ../apps/lpasswd.c:194
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "כישלון בקביעת ססמה עבור הקבוצה %s:‏ %s.‏\n"
 
 #: ../apps/lpasswd.c:205
 #, c-format
 msgid "Password changed.\n"
-msgstr ""
+msgstr "ססמה עודכנה.\n"
 
 #: ../apps/luseradd.c:169
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "הקבוצה %jd אינה קיימת\n"
 
 #. Aargh!  Abandon all hope.
 #: ../apps/luseradd.c:196 ../apps/luseradd.c:209
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "שגיאה ביצירת קבוצה '%s`:‏ %s.‏\n"
 
 #: ../apps/luseradd.c:270
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "יצירת חשבון משתמש נכשלה: %s.‏\n"
 
 #: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "כישלון ביצירת %s:‏ %s.‏\n"
 
 #: ../apps/luseradd.c:327
 #, c-format
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "כישלון ביצירת קובץ דואר נכנס.\n"
 
 #: ../apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "לא ניתן למחוק את המשתמש %s:‏ %s.‏\n"
 
 #: ../apps/luserdel.c:104
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "לקבוצה %s לא היה מספר זיהוי (gid).‏\n"
 
 #: ../apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "אין קבוצה עם מספר זיהוי (GID)‏ %jd, לא ניתן למחוק.\n"
 
 #: ../apps/luserdel.c:121
 #, c-format
