@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2008-10-06 13:15+0000\n"
-"PO-Revision-Date: 2008-11-11 22:07+0100\n"
+"PO-Revision-Date: 2008-11-12 18:21+0100\n"
 "Last-Translator: Rui Gouveia <rui.gouveia@globaltek.pt>\n"
 "Language-Team: pt <morais@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -571,7 +571,7 @@ msgstr "O utilizador %s não pode ser destrancado: %s.\n"
 #: ../apps/lusermod.c:221
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Atenção: O grupo com o ID %jd não existe.\n"
+msgstr "Warning: O grupo com o ID %jd não existe.\n"
 
 #: ../apps/lusermod.c:275
 #, c-format
@@ -922,7 +922,7 @@ msgstr "a entidade não tem um atributo %s"
 
 #: ../modules/files.c:1760
 msgid "`:' not allowed in encrypted password"
-msgstr "`:' não é permitido em senhas cifradas"
+msgstr "`:' não permitido em senhas cifradas"
 
 #: ../modules/files.c:1772
 #: ../modules/ldap.c:1538
