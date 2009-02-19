@@ -40,7 +40,7 @@ main(int argc, const char **argv)
 	struct lu_ent *ent, *groupEnt;
 	struct lu_error *error = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
-	gid_t gidNumber = LU_VALUE_INVALID_ID;
+	gid_t gidNumber;
 	GValueArray *values;
 	GValue *value, val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
@@ -132,24 +132,26 @@ main(int argc, const char **argv)
 
 	/* Select a group name for the user to be in. */
 	if (gid == NULL) {
-		if (dont_create_group) {
+		if (dont_create_group)
 			gid = "users";
-		} else {
+		else
 			gid = name;
-		}
+		/* Consider "gid" a group name even if it is composed of
+		   digits. */
+		gidNumber = LU_VALUE_INVALID_ID;
+	} else {
+		/* Try to convert the given GID to a number. */
+		errno = 0;
+		imax = strtoimax(gid, &p, 10);
+		if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
+			gidNumber = imax;
+		else
+			/* It's not a number, so it's a group name. */
+			gidNumber = LU_VALUE_INVALID_ID;
 	}
 
-	/* Try to convert the given GID to a number. */
-	groupEnt = lu_ent_new();
-	errno = 0;
-	imax = strtoimax(gid, &p, 10);
-	if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
-		gidNumber = imax;
-	else
-		/* It's not a number, so it's a group name. */
-		gidNumber = LU_VALUE_INVALID_ID;
-
 	/* Check if the group exists. */
+	groupEnt = lu_ent_new();
 	if (gidNumber == LU_VALUE_INVALID_ID) {
 		if (lu_group_lookup_name(ctx, gid, groupEnt, &error)) {
 			/* Retrieve the group's GID. */
@@ -173,25 +175,16 @@ main(int argc, const char **argv)
 	}
 
 	if (create_group) {
-		if (error) {
+		g_assert(gidNumber == LU_VALUE_INVALID_ID);
+		if (error)
 			lu_error_free(&error);
-		}
 		/* Create the group template. */
 		lu_group_default(ctx, gid, FALSE, groupEnt);
 
-		/* Replace the GID with the forced one, if we need to. */
-		if (gidNumber != LU_VALUE_INVALID_ID) {
-			memset(&val, 0, sizeof(val));
-			lu_value_init_set_id(&val, gidNumber);
-			lu_ent_clear(groupEnt, LU_GIDNUMBER);
-			lu_ent_add(groupEnt, LU_GIDNUMBER, &val);
-			g_value_unset(&val);
-		}
-
 		/* Try to add the group. */
-		if (lu_group_add(ctx, groupEnt, &error)) {
+		if (lu_group_add(ctx, groupEnt, &error))
 			lu_hup_nscd();
-		} else {
+		else {
 			/* Aargh!  Abandon all hope. */
 			fprintf(stderr, _("Error creating group `%s': %s\n"),
 				gid, lu_strerror(error));

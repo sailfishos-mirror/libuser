@@ -1,3 +1,14 @@
+2009-02-19  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/utils_test
+	* tests/utils_group
+	* tests/utils_gshadow
+	* tests/utils_passwd
+	* tests/utils_shadow: Test useradd with a numerical user name.
+
+	* apps/luseradd.c (main): When the user name is used as a group name,
+	never interpret it as a number.
+
 2008-10-13  Miloslav Trmač  <mitr@redhat.com>
 
 	* po/POTFILES.skip: New file (used by transifex at

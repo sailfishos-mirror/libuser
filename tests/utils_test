@@ -141,6 +141,9 @@ lgroupadd -g "$(expr $LARGE_ID + 710)" group7_1
 luseradd -c GECOS7_1 -d HomeDir7_1 -g group7_1 -M -p '03dgZm5nZvqOc' \
     -s Shell7_1 -u "$(expr $LARGE_ID + 710)" user7_1
 #  untested: -k, -r, -n, -P
+# Handling numeric user names: default to the same numeric group name
+lgroupadd -g "$(expr $LARGE_ID + 720)" "$(expr $LARGE_ID + 721)"
+luseradd -M -u "$(expr $LARGE_ID + 722)" "$(expr $LARGE_ID + 721)"
 
 # luserdel:
 lgroupadd -g "$(expr $LARGE_ID + 810)" group8_1
