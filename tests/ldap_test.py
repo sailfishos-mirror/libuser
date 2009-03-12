@@ -268,6 +268,16 @@ class Tests(unittest.TestCase):
         self.a.lockUser(e)
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!00as1wm0AZG56'])
 
+    def testUserLock3(self):
+        e = self.a.initUser('user9_3')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user9_3')
+        self.assertEqual(e[libuser.USERPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.lockUser, e)
+
     def testUserUnlock1(self):
         e = self.a.initUser('user10_1')
         self.a.addUser(e, False, False)
@@ -297,6 +307,16 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!'])
         self.a.unlockUser(e)
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}'])
+
+    def testUserUnlock4(self):
+        e = self.a.initUser('user10_4')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user10_4')
+        self.assertEqual(e[libuser.USERPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.unlockUser, e)
 
     def testUserUnlockNonempty1(self):
         e = self.a.initUser('user32_1')
@@ -329,6 +349,16 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user32_3')
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!'])
+
+    def testUserUnlockNonempty4(self):
+        e = self.a.initUser('user32_4')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user32_4')
+        self.assertEqual(e[libuser.USERPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.unlockUser, e, True)
 
     def testUserIslocked1(self):
         e = self.a.initUser('user11_1')
@@ -649,6 +679,16 @@ class Tests(unittest.TestCase):
         self.a.lockGroup(e)
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}!04cmES7HM6wtg'])
 
+    def testGroupLock3(self):
+        e = self.a.initGroup('group24_3')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group24_3')
+        self.assertEqual(e[libuser.GROUPPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.lockGroup, e)
+
     def testGroupUnlock1(self):
         e = self.a.initGroup('group25_1')
         self.a.addGroup(e)
@@ -678,6 +718,16 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}!'])
         self.a.unlockGroup(e)
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}'])
+
+    def testGroupUnlock4(self):
+        e = self.a.initGroup('group25_4')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group25_4')
+        self.assertEqual(e[libuser.GROUPPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.unlockGroup, e)
 
     def testGroupUnlockNonempty1(self):
         e = self.a.initGroup('group33_1')
@@ -710,6 +760,16 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group33_3')
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}!'])
+
+    def testGroupUnlockNonempty4(self):
+        e = self.a.initGroup('group33_4')
+        e[libuser.USERPASSWORD] = '{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group33_4')
+        self.assertEqual(e[libuser.GROUPPASSWORD],
+                         ['{MD5}Xr4ilOzQ4PCOq3aQ0qbuaQ=='])
+        self.assertRaises(RuntimeError, self.a.unlockGroup, e, True)
 
     def testGroupIsLocked1(self):
         e = self.a.initGroup('group26_1')

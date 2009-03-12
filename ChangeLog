@@ -1,3 +1,15 @@
+2009-03-12  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/ldap_test.py (Tests.testUserLock3)
+	(Tests.testUserUnlock4, Tests.testUserUnlockNonempty4)
+	(Tests.testGroupLock3, Tests.testGroupUnlock4)
+	(Tests.testGroupUnlockNonempty4): Test handling of unsupported
+	encryption schemes when locking or unlocking passwords.
+
+	* modules/ldap.c (userPassword_has_scheme): New function.
+	(lu_ldap_handle_lock): Don't re-encrypt (corrupt) passwords that use
+	a different encryption scheme than {crypt}.
+
 2009-02-19  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/utils_test

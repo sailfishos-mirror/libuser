@@ -1475,6 +1475,23 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 	return ret;
 }
 
+/* Return TRUE if pw starts with a valid scheme specification */
+static gboolean
+userPassword_has_scheme(const char *pw)
+{
+#define ALPHA "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	static const char alpha[2*26] = ALPHA;
+	static const char keystring_chars[] = ALPHA "0123456789-;";
+#undef ALPHA
+
+	/* { keystring }, keystring is defined in RFC2252. */
+	if (*pw != '{' || memchr(alpha, pw[1], sizeof(alpha)) == NULL)
+		return FALSE;
+	pw += 2;
+	pw += strspn(pw, keystring_chars);
+	return *pw == '}';
+}
+
 /* Lock an account of some kind. */
 static gboolean
 lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
@@ -1522,6 +1539,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 			     LU_USERPASSWORD);
 		return FALSE;
 	}
+	/* Note that this handles only one userPassword value! */
 	value = g_value_array_get_nth(password, 0);
 	oldpassword = lu_value_strdup(value);
 
@@ -1530,6 +1548,13 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	if (!g_str_has_prefix(oldpassword, LU_CRYPTED)) {
 		char *salt;
 
+		if (userPassword_has_scheme(oldpassword)) {
+			lu_error_new(error, lu_error_generic,
+				     _("unsupported password encryption "
+				       "scheme"));
+			g_free(oldpassword);
+			return FALSE;
+		}
 		salt = lu_util_default_salt_specifier(module->lu_context);
 		tmp = lu_make_crypted(oldpassword, salt);
 		g_free(salt);
