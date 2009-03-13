@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:56+0000\n"
-"PO-Revision-Date: 2008-09-19 10:10+0100\n"
+"POT-Creation-Date: 2009-03-12 17:15+0000\n"
+"PO-Revision-Date: 2009-03-13 10:10+0100\n"
 "Last-Translator: Xavier Conde Rueda <xavi.conde@gmail.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
 "MIME-Version: 1.0\n"
@@ -417,7 +417,7 @@ msgstr "Les contrasenyes són diferents, intenteu-ho de nou.\n"
 msgid "Password change canceled.\n"
 msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
@@ -434,28 +434,28 @@ msgstr ""
 msgid "Password changed.\n"
 msgstr "S'ha canviat la contrasenya.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "El grup %jd no existeix\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "S'ha produït un error en crear el grup «%s»: %s.\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "No s'ha pogut crear el compte: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "S'ha produït un error en crear %s: %s.\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "S'ha produït un error en crear la gestió de cues de correu.\n"
@@ -839,7 +839,7 @@ msgstr "l'objecte de l'entitat no té l'atribut %s"
 msgid "`:' not allowed in encrypted password"
 msgstr "no es permet ':' a la contrasenya xifrada"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
@@ -953,7 +953,7 @@ msgstr "s'ha creat l'objecte de l'usuari sense «%s»"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "s'ha produït un error en crear l'entrada del directori de LDAP: %s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
@@ -974,49 +974,53 @@ msgstr "l'objecte no tenia cap atribut %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "s'ha produït un error en eliminar l'entrada del directori LDAP: %s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objecte no té cap atribut %s"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "esquema de xifratge de contrasenyes no disponible"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "aquest objecte no existeix en el directori LDAP"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "no s'ha trobat cap atribut «%s»"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori LDAP per a "
 "%s: %s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "Nom del servidor LDAP"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca de LDAP"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "DN del vincle de LDAP"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 
@@ -1054,8 +1058,7 @@ msgstr ""
 
 #: ../python/admin.c:885
 msgid "error removing mail spool for user"
-msgstr ""
-"s'ha produït un error en esborrar el correu de l'usuari"
+msgstr "s'ha produït un error en esborrar el correu de l'usuari"
 
 #: ../samples/lookup.c:63
 #, c-format
