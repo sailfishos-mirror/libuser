@@ -15,10 +15,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:56+0000\n"
-"PO-Revision-Date: 2008-09-03 08:57-0300\n"
+"POT-Creation-Date: 2009-03-12 17:15+0000\n"
+"PO-Revision-Date: 2009-03-15 21:36-0300\n"
 "Last-Translator: Domingo Becker <domingobecker@gmail.com>\n"
-"Language-Team: Spanish <fedora-trans-es@redhat.com>\n"
+"Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -596,8 +596,8 @@ msgstr "Cancelado el cambio de contraseñas.\n"
 # apps/lusermod.c:133 apps/lusermod.c:142
 # apps/lusermod.c:133 apps/lusermod.c:142
 #: ../apps/lpasswd.c:186
-#: ../apps/luseradd.c:280
-#: ../apps/luseradd.c:290
+#: ../apps/luseradd.c:273
+#: ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Error al configurar la contraseña para el usuario  %s: %s.\n"
@@ -616,7 +616,7 @@ msgstr "Contraseña modificada.\n"
 
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
 # apps/lgroupdel.c:76 apps/lgroupmod.c:96
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "El grupo %jd no existe.\n"
@@ -624,29 +624,29 @@ msgstr "El grupo %jd no existe.\n"
 # apps/luseradd.c:112
 # apps/luseradd.c:112
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196
-#: ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189
+#: ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Error en la creación del grupo `%s': %s\n"
 
 # apps/luseradd.c:159
 # apps/luseradd.c:159
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Creación de la cuenta fallida: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creando %s: %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Error al crear un spool de correo.\n"
@@ -1174,8 +1174,8 @@ msgstr "`:' no permitido en contraseñas encriptada"
 # modules/krb5.c:549
 # modules/krb5.c:547
 #: ../modules/files.c:1772
-#: ../modules/ldap.c:1538
-#: ../modules/ldap.c:1811
+#: ../modules/ldap.c:1563
+#: ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "error al encriptar la contraseña"
 
@@ -1349,7 +1349,7 @@ msgstr "error al crear una entrada al directorio LDAP: %s"
 # modules/ldap.c:585 modules/ldap.c:748
 # modules/ldap.c:587 modules/ldap.c:751
 #: ../modules/ldap.c:1380
-#: ../modules/ldap.c:1599
+#: ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "error al modificar la entrada del directorio LDAP: %s"
@@ -1377,67 +1377,71 @@ msgstr "error al eliminar la entrada del directorio LDAP: %s"
 
 # modules/ldap.c:703 modules/ldap.c:715 modules/ldap.c:790 modules/ldap.c:867
 # modules/ldap.c:706 modules/ldap.c:718 modules/ldap.c:793 modules/ldap.c:874
-#: ../modules/ldap.c:1505
-#: ../modules/ldap.c:1521
-#: ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522
+#: ../modules/ldap.c:1538
+#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "el objeto no tiene atributos %s"
 
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "esquema de encriptado de contraseñas no soportado"
+
 # modules/ldap.c:808
 # modules/ldap.c:811
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "Objeto no encontrado en el directorio LDAP"
 
 # modules/ldap.c:832
 # modules/ldap.c:836
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "Atributo `%s' no encontrado"
 
 # modules/ldap.c:928
 # modules/ldap.c:939
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
 # modules/ldap.c:1191
 # modules/ldap.c:1213
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "Nombre del servidor LDAP"
 
 # modules/ldap.c:1196
 # modules/ldap.c:1218
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "DN base de búsqueda de LDAP"
 
 # modules/ldap.c:1201
 # modules/ldap.c:1223
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "DN Bind LDAP"
 
 # modules/ldap.c:1206
 # modules/ldap.c:1228
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "Contraseña Bind LDAP"
 
 # modules/ldap.c:1212
 # modules/ldap.c:1234
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "Usuario SASL LDAP"
 
 # modules/ldap.c:1217
 # modules/ldap.c:1239
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "Usuario de autorización SASL LDAP"
 
