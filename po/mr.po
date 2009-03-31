@@ -6,13 +6,13 @@
 # Automatically generated, 2004.
 # Rahul Bhalerao <rbhalera@redhat.com>, 2006.
 # sandeep shedmake <sandeep.shedmake@gmail.com>, 2007.
-# Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008.
+# Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:56+0000\n"
-"PO-Revision-Date: 2008-10-03 17:15+0530\n"
+"POT-Creation-Date: 2009-03-31 08:44+0000\n"
+"PO-Revision-Date: 2009-03-31 18:35+0530\n"
 "Last-Translator: Sandeep Shedmake <sandeep.shedmake@gmail.com>\n"
 "Language-Team: marathi\n"
 "MIME-Version: 1.0\n"
@@ -246,6 +246,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "finger माहिती बदल्यागेली नाह:  आदान त्रूटी.\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "Finger माहिती बदलवण्यात आली.\n"
 
@@ -270,6 +271,7 @@ msgid "Shell not changed: %s\n"
 msgstr "शेल बदलवले नाही: %s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "शेल बदलवले.\n"
 
@@ -367,6 +369,7 @@ msgid "Invalid user ID %s\n"
 msgstr "अवैध वापरकर्ता ID %s\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 सह खाती निर्माण करण्यास नकार.\n"
 
@@ -418,7 +421,7 @@ msgstr "गुप्तशब्द जुळत नाही, पुन्ह�
 msgid "Password change canceled.\n"
 msgstr "गुप्तशब्द बदल रद्द केले.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s वापरकर्त्यास गुप्तशब्द निश्चित करतेवेळी त्रुटी: %s.\n"
@@ -433,28 +436,28 @@ msgstr "%s समुहकरीता गुप्तशब्द निश्�
 msgid "Password changed.\n"
 msgstr "गुप्तशब्द बदलविले.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "समुह %jd अस्तित्वात नाही\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "%s समुह निर्माण करतेवेळी त्रुटी: %s.\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "खाती निर्माण करण्यास अपयशी: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s निर्माण करतेवेळी त्रुटी: %s.\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "मेल स्पुल निर्माण करतेवेळी.\n"
@@ -837,7 +840,7 @@ msgstr "वस्तू ला %s गुणधर्म नाही"
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' एन्क्रीप्ट गुप्तशब्द अंतर्गत परवानगी नाही"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "गुप्तशब्द कुटलिपी करतेवेळी त्रुटी"
 
@@ -949,7 +952,7 @@ msgstr "वापरकर्ता वस्तु `%s' विना निर�
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP संचयीका नोंदणी निर्माण करतेवेळी त्रुटी: %s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP संचयीका संपादन करतेवेळी त्रुटी: %s"
@@ -969,47 +972,51 @@ msgstr "वस्तुकडे %s गुणधर्म नाही"
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP संचयीका नोंदणी काढुन टाकतेवेळी त्रुटी: %s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "वस्तुकडे %s गुणधर्म नाही"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "असमर्थीत गुप्तशब्द एनक्रिप्शन योजना"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "LDAP संचयीकेत वस्तु नाही"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' गुणधर्म आढळले नाही"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP संचयीकेत %s करीता गुप्तशब्द निश्चित करतेवेळी त्रुटी: %s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP सर्वरचे नाव"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP पायभुत शोध DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind गुप्तशब्द"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL वापरकर्ता"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL अधिप्रमाणन वापरकर्ता"
 
@@ -1079,30 +1086,37 @@ msgid "Searching for user named %s.\n"
 msgstr "%s नामांकीत वापरकर्ता शोधत आहे.\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "नोंदणी आढळली नाही.\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "सुचना यशस्वी.\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "सुचना अयशस्वी.\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "मुलभूत वापरकर्ता वस्तु श्रेणी:\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "मुलभूत वापरकर्ता गुणधर्म नाव:\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "मुलभूत वापरकर्त्याचे गुणधर्म मिळवा:\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "वापरकर्ता संरचनाची प्रत बनवित आहे:\n"
 
