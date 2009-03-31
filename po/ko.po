@@ -1,17 +1,17 @@
-# translation of libuser.tip.po to Korean
+# translation of libuser.tip.ko.po to Korean
 # translation of ko.po to
 # Copyright (C) 2001 Red Hat, Inc.
 #
 # Michelle Kim <mkim@redhat.com>, 2001,2002.
 # Michelle J Kim <mkim@redhat.com>, 2004.
 # Michelle Ji Yeen Kim <mkim@redhat.com>, 2005, 2006.
-# Eunju Kim <eukim@redhat.com>, 2006, 2007, 2008.
+# Eunju Kim <eukim@redhat.com>, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser.tip\n"
+"Project-Id-Version: libuser.tip.ko\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:56+0000\n"
-"PO-Revision-Date: 2008-10-13 16:23+1000\n"
+"POT-Creation-Date: 2009-03-30 19:42+0000\n"
+"PO-Revision-Date: 2009-03-31 12:25+1000\n"
 "Last-Translator: Eunju Kim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 
 #: ../apps/apputil.c:107
@@ -246,6 +247,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "finger 정보가 변경되지 않았습니다:  입력 오류.\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "finger 정보가 변경되었습니다.\n"
 
@@ -270,6 +272,7 @@ msgid "Shell not changed: %s\n"
 msgstr "쉘이 변경되지 않았습니다: %s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "쉘이 변경되었습니다.\n"
 
@@ -369,6 +372,7 @@ msgid "Invalid user ID %s\n"
 msgstr "잘못된 사용자 ID %s\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 
@@ -420,7 +424,7 @@ msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
 msgid "Password change canceled.\n"
 msgstr "암호 변경이 취소되었습니다.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
@@ -435,28 +439,28 @@ msgstr "`%s' 그룹의 암호를 설정하는 도중 오류 발생: %s.\n"
 msgid "Password changed.\n"
 msgstr "암호가 변경되었습니다.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "%jd 그룹이 존재하지 않습니다\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "`%s' 그룹을 생성하는 도중 오류 발생: %s\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "계정 생성에 실패함: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
@@ -839,7 +843,7 @@ msgstr "entity 개체에 %s 속성이 없습니다"
 msgid "`:' not allowed in encrypted password"
 msgstr "`:'은 암호화된 암호에서 허용되지 않음 "
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "암호를 암호화하는 도중 오류 발생"
 
@@ -951,7 +955,7 @@ msgstr "`%s'(이)가 없는 사용자 개체가 생성되었습니다"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 생성하는 도중 오류 발생: %s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 목록(entry)을 편집하는 도중 오류 발생: %s"
@@ -971,47 +975,51 @@ msgstr "개체에 %s 속성이 없습니다"
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP 디렉토리 항목을 삭제하는 도중 오류 발생: %s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "개체에 %s 속성이 없습니다"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "지원되지 않는 암호화 체계입니다  "
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "LDAP 디렉토리 안에 그러한 개체가 없습니다"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' 속성을 찾을 수 없습니다"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s의 LDAP 디렉토리 안에 암호를 설정하는 도중 오류 발생: %s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP 서버 이름"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP 검색 기반 DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN "
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 암호"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 사용자"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 권한부여 사용자"
 
@@ -1081,30 +1089,37 @@ msgid "Searching for user named %s.\n"
 msgstr "%s 사용자를 검색하고 있습니다.\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "목록(Entry)을 찾을 수 없습니다.\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "프롬프트 성공.\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "프롬프트 실패.\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "기본 사용자 객체 클래스:\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "기본 사용자 속성 이름들:\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "기본 사용자 속성을 읽음:\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
 
