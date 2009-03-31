@@ -1,4 +1,4 @@
-# translation of libuser.tip.po to Traditional Chinese
+# translation of libuser.tip.po to
 # translation of zh_TW.po to
 # translation of zh_TW.po to
 # Copyright (C) 2002 Red Hat, Inc.
@@ -7,15 +7,15 @@
 # Ben Wu <hpwu@redhat.com>, 2002.
 # Chester Cheng <ccheng@redhat.com>, 2004, 2005, 2006.
 # Waika Liu <wliu@redhat.com>, 2005.
-# Terry Chuang <tchuang@redhat.com>, 2008.
+# Terry Chuang <tchuang@redhat.com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:55+0000\n"
-"PO-Revision-Date: 2008-09-24 14:28+1000\n"
+"POT-Creation-Date: 2009-03-30 19:42+0000\n"
+"PO-Revision-Date: 2009-03-31 12:27+1000\n"
 "Last-Translator: Terry Chuang <tchuang@redhat.com>\n"
-"Language-Team: Traditional Chinese <zh@li.org>\n"
+"Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -246,6 +246,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "finger 的資訊未變更：輸入錯誤。\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "finger 的資訊已變更。\n"
 
@@ -270,6 +271,7 @@ msgid "Shell not changed: %s\n"
 msgstr "shell 並未變更：%s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "shell 已變更。\n"
 
@@ -367,6 +369,7 @@ msgid "Invalid user ID %s\n"
 msgstr "無效的使用者 ID %s\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒絕建立 UID 為 0 的帳號。\n"
 
@@ -418,7 +421,7 @@ msgstr "密碼不符，請再試一次。\n"
 msgid "Password change canceled.\n"
 msgstr "取消密碼變更。\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "為 %s 使用者設定密碼發生錯誤：%s。\n"
@@ -433,28 +436,28 @@ msgstr "設定密碼給 %s 群組發生錯誤：%s。\n"
 msgid "Password changed.\n"
 msgstr "密碼已變更。\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "%jd 群組不存在\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "建立 `%s' 群組發生錯誤：%s\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "帳號建立失敗：%s。\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "建立 %s 發生錯誤：%s。\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "建立郵件 spool 時發生錯誤。\n"
@@ -837,7 +840,7 @@ msgstr "實體物件沒有 %s 屬性"
 msgid "`:' not allowed in encrypted password"
 msgstr "加密的密碼中不允許使用 `:'"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "為密碼編碼時錯誤"
 
@@ -947,7 +950,7 @@ msgstr "使用者物件建立當時就沒有 %s"
 msgid "error creating a LDAP directory entry: %s"
 msgstr "建立 LDAP 目錄登錄發生錯誤：%s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "修改 LDAP 目錄登錄發生錯誤：%s"
@@ -967,47 +970,51 @@ msgstr "物件沒有 %s 屬性"
 msgid "error removing LDAP directory entry: %s"
 msgstr "移除 LDAP 目錄登錄發生錯誤：%s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "物件沒有 %s 屬性"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "不受支援的密碼加密法"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "在 LDAP 目錄中沒有物件"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "找不到 `%s' 屬性"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤：%s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP 伺服器名稱"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 密碼"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 使用者"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 認證使用者"
 
@@ -1077,30 +1084,37 @@ msgid "Searching for user named %s.\n"
 msgstr "搜尋是 %s 名稱的使用者。\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "找不到登錄。\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "提示成功。\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "提示失敗。\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "預設使用者物件類別：\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "預設使用者屬性名稱：\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "取得預設使用者屬性：\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "複製使用者結構：\n"
 
