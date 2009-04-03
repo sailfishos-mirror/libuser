@@ -3,13 +3,13 @@
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Shankar Prasad <svenkate@redhat.com>, 2007, 2008.
+# Shankar Prasad <svenkate@redhat.com>, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-10-06 13:15+0000\n"
-"PO-Revision-Date: 2008-10-19 23:41+0530\n"
+"POT-Creation-Date: 2009-04-01 08:35+0000\n"
+"PO-Revision-Date: 2009-04-02 18:06+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -247,6 +247,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "ಫಿಂಗರ್ ಮಾಹಿತಿಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿಲ್ಲ:  ಆದಾನ ದೋಷ.\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "ಫಿಂಗರ್ ಮಾಹಿತಿಯನ್ನು ಬದಲಾಯಿಸಲಾಗಿದೆ.\n"
 
@@ -271,6 +272,7 @@ msgid "Shell not changed: %s\n"
 msgstr "ಶೆಲ್ ಬದಲಾಗಿಲ್ಲ: %s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "ಶೆಲ್ ಬದಲಾಗಿದೆ.\n"
 
@@ -368,6 +370,7 @@ msgid "Invalid user ID %s\n"
 msgstr "ಅಮಾನ್ಯ ಬಳಕೆದಾರ ID %s\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 ಯೊಂದಿಗೆ ಖಾತೆಯನ್ನು ಸೃಜಿಸಲು ನಿರಾಕರಿಸುತ್ತಿದೆ.\n"
 
@@ -419,7 +422,7 @@ msgstr "ಗುಪ್ತಪದಗಳು ತಾಳೆಯಾಗುತ್ತಿಲ�
 msgid "Password change canceled.\n"
 msgstr "ಗುಪ್ತಪದದ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s ಬಳಕೆದಾರನಿಗೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
@@ -434,28 +437,28 @@ msgstr "%s ಸಮೂಹಕ್ಕೆ ಗುಪ್ತಪದವನ್ನು ಸಿ�
 msgid "Password changed.\n"
 msgstr "ಗುಪ್ತಪದ ಬದಲಾಯಿಸಲ್ಪಟ್ಟಿದೆ.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "ಸಮೂಹ %jd ವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "ಸಮೂಹ`%s' ವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "ಖಾತೆಯನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s ಅನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "ಮೈಲ್ ಸ್ಪೂಲನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ.\n"
@@ -838,7 +841,7 @@ msgstr "ನಮೂದು ಆಬ್ಜೆಕ್ಟ್‍ %s ವೈಶಿಷ್ಟ�
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸುವಲ್ಲಿ ದೋಷ"
 
@@ -950,7 +953,7 @@ msgstr "ಯಾವುದೆ `%s' ಇಲ್ಲದೆ ಬಳಕೆದಾರ ಆಬ�
 msgid "error creating a LDAP directory entry: %s"
 msgstr "ಒಂದು LDAP ಕಡತಕೋಶ ನಮೂದನ್ನು ನಿರ್ಮಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "ಒಂದು LDAP ಕಡತಕೋಶ ನಮೂದನ್ನು ಮಾರ್ಪಡಿಸುವಲ್ಲಿ ದೋಷ: %s"
@@ -970,47 +973,51 @@ msgstr "ಆಬ್ಜೆಕ್ಟ್‍ %s ವೈಶಿಷ್ಟ್ಯವನ್�
 msgid "error removing LDAP directory entry: %s"
 msgstr "ಒಂದು LDAP ಕಡತಕೋಶ ನಮೂದನ್ನು ತೆಗೆದು ಹಾಕುವಲ್ಲಿ ದೋಷ: %s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ಆಬ್ಜೆಕ್ಟ್‍ %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "ಬೆಂಬಲವಿರದ ಗುಪ್ತಪದ ಗೂಢಲಿಪೀಕರಣ ಸ್ಕೀಮ್"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "LDAP ಕಡತಕೋಶದಲ್ಲಿ ಯಾವುದೆ ಆಬ್ಜೆಕ್ಟ್‍ ಇಲ್ಲ"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ಯಾವುದೆ `%s' ವೈಶಿಷ್ಟ್ಯವು ಕಂಡು ಬಂದಿಲ್ಲ"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s ಕ್ಕಾಗಿ LDAP ಕಡತಕೋಶದಲ್ಲಿ ಗುಪ್ತಪದವನ್ನು ಹೊಂದಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP ಪರಿಚಾರಕದ ಹೆಸರು"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP ಶೋಧನಾ ಮೂಲ DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP ಬೈಂಡ್ DN"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP ಬೈಂಡ್ ಗುಪ್ತಪದ"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ಬಳಕೆದಾರ"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ದೃಢೀಕರಣ ಬಳಕೆದಾರ"
 
@@ -1080,30 +1087,37 @@ msgid "Searching for user named %s.\n"
 msgstr "%s ಹೆಸರಿನ ಬಳಕೆದಾರನಿಗಾಗಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ.\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "ನಮೂದು ಕಂಡು ಬಂದಿಲ್ಲ.\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "ಪ್ರಾಂಪ್ಟ್‍ಗಳು ಯಶಸ್ವಿಯಾಗಿವೆ.\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "ಪ್ರಾಂಪ್ಟ್‍ಗಳು ವಿಫಲಗೊಂಡಿವೆ.\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "ಡೀಫಾಲ್ಟ್‍  ಆಬ್ಜೆಕ್ಟ್‍ ವರ್ಗಗಳು:\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "ಡೀಫಾಲ್ಟ್‍  ಬಳಕೆದಾರ ವೈಶಿಷ್ಟ್ಯದ ಹೆಸರುಗಳು:\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "ಡೀಫಾಲ್ಟ್‍  ಬಳಕೆದಾರ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಪಡೆಯಲಾಗುತ್ತಿದೆ:\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "ಬಳಕೆದಾರ ರಚನೆಯನ್ನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ:\n"
 
