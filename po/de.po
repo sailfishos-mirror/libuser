@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:55+0000\n"
-"PO-Revision-Date: 2008-08-31 10:34+0100\n"
-"Last-Translator: Fabian Affolter <fab@fedoraproject.org>\n"
+"POT-Creation-Date: 2009-04-03 02:45+0000\n"
+"PO-Revision-Date: 2009-04-03 09:57+0100\n"
+"Last-Translator: Dominik Sandjaja <dominiksandjaja@fedoraproject.org>\n"
 "Language-Team: German <fedora-trans-de@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -295,6 +295,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "Finger-Informationen nicht geändert: Eingabefehler.\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "Finger-Informationen geändert.\n"
 
@@ -320,6 +321,7 @@ msgid "Shell not changed: %s\n"
 msgstr "Shell nicht geändert: %s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "Shell geändert.\n"
 
@@ -430,6 +432,7 @@ msgid "Invalid user ID %s\n"
 msgstr "Ungültige Benutzer-ID %s\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Erstellen eines Benutzerkontos mit UID 0 verweigert.\n"
 
@@ -482,8 +485,8 @@ msgid "Password change canceled.\n"
 msgstr "Passwortänderung abgebrochen.\n"
 
 #: ../apps/lpasswd.c:186
-#: ../apps/luseradd.c:280
-#: ../apps/luseradd.c:290
+#: ../apps/luseradd.c:273
+#: ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fehler beim Erstellen des Passworts für Benutzer %s: %s.\n"
@@ -498,29 +501,29 @@ msgstr "Fehler beim Erstellen des Passworts für Gruppe %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Passwort geändert.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Gruppe %jd existiert nicht\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196
-#: ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189
+#: ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Fehler beim Erstellen der Gruppe `%s': %s\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Die Erzeugung des Benutzerkontos ist fehlgeschlagen: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fehler bei der Erzeugung von %s: %s.\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fehler beim Erstellen des E-Mail-Postfachs.\n"
@@ -933,8 +936,8 @@ msgid "`:' not allowed in encrypted password"
 msgstr "`:' nicht erlaubt in verschlüsselten Passwörtern"
 
 #: ../modules/files.c:1772
-#: ../modules/ldap.c:1538
-#: ../modules/ldap.c:1811
+#: ../modules/ldap.c:1563
+#: ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "Fehler beim Verschlüsseln des Passworts"
 
@@ -1058,7 +1061,7 @@ msgid "error creating a LDAP directory entry: %s"
 msgstr "Fehler beim Erstellen eines LDAP-Verzeichniseintrags: %s"
 
 #: ../modules/ldap.c:1380
-#: ../modules/ldap.c:1599
+#: ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "Fehler bei der Änderung des LDAP-Verzeichniseintrags: %s"
@@ -1078,49 +1081,53 @@ msgstr "Objekt hatte kein Attribut %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "Fehler beim Entfernen des LDAP-Verzeichniseintrags: %s"
 
-#: ../modules/ldap.c:1505
-#: ../modules/ldap.c:1521
-#: ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522
+#: ../modules/ldap.c:1538
+#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "Objekt besitzt kein Attribut %s"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "nicht unterstütztes Passwort-Verschlüsselungsschema"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "Kein entsprechendes Objekt im LDAP-Verzeichnis vorhanden"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "kein `%s' Attribut gefunden"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Fehler beim Einrichten des Passworts im LDAP-Verzeichnis für %s: %s."
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP-Servername"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP Suche Basis-DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-Passwort"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-Benutzer"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-Autorisierungsbenutzer"
 
@@ -1192,30 +1199,37 @@ msgid "Searching for user named %s.\n"
 msgstr "Suche nach Benutzer mit Namen %s.\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "Eintrag wurde nicht gefunden.\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "Prompts erfolgreich.\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "Prompts fehlgeschlagen.\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "Standardmässige Benutzerobjekt-Klassen:\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "Standardmässige Benutzerattribut-Namen:\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "Suche nach standardmäßigen Benutzerattributen:\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen kopieren:\n"
 
