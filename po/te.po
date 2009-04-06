@@ -1,14 +1,14 @@
-# translation of te.po to Telugu
+# translation of libuser.tip.te.po to Telugu
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Krishna Babu K <kkrothap@redhat.com>, 2007, 2008.
+# Krishna Babu K <kkrothap@redhat.com>, 2007, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: te\n"
+"Project-Id-Version: libuser.tip.te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2008-08-25 15:56+0000\n"
-"PO-Revision-Date: 2008-09-29 15:59+0530\n"
+"POT-Creation-Date: 2009-04-06 08:23+0000\n"
+"PO-Revision-Date: 2009-04-06 19:36+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 
@@ -244,6 +245,7 @@ msgid "Finger information not changed:  input error.\n"
 msgstr "ఫింగర్ సమాచారం మార్చబడలేదు:  ప్రవేశ దోషం.\n"
 
 #: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "ఫింగర్ సమాచారం మార్చబడినది.\n"
 
@@ -268,6 +270,7 @@ msgid "Shell not changed: %s\n"
 msgstr "షెల్ మార్చబడలేదు:%s\n"
 
 #: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "షెల్ మార్చబడినది.\n"
 
@@ -365,6 +368,7 @@ msgid "Invalid user ID %s\n"
 msgstr "వినియోగదారుని ID %s సరిగా లేదు\n"
 
 #: ../apps/lnewusers.c:135
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 తో ఖాతా సృష్టించుటకు తిరస్కరిస్తుంది.\n"
 
@@ -416,7 +420,7 @@ msgstr "అనుమతిపదం సరితూగలేదు,మరలా 
 msgid "Password change canceled.\n"
 msgstr "అనుమతిపదం మార్పు రద్దుచేయబడింది.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:280 ../apps/luseradd.c:290
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s కు అనుమతిపదం అమరికలో దోషం: %s\n"
@@ -431,28 +435,28 @@ msgstr "%s సమూహం కు అనుమతిపదం అమరికల
 msgid "Password changed.\n"
 msgstr "అనుమతిపదం మార్చబడినది.\n"
 
-#: ../apps/luseradd.c:169
+#: ../apps/luseradd.c:171
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "సమూహం %jd లేదు\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:196 ../apps/luseradd.c:209
+#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "సమూహం %s సృష్టించుటలో దోషం: %s\n"
 
-#: ../apps/luseradd.c:270
+#: ../apps/luseradd.c:263
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "ఖాతా సృష్టీకరణ విఫలం: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:313
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s సృష్టించుటలో దోషం: %s\n"
 
-#: ../apps/luseradd.c:327
+#: ../apps/luseradd.c:320
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "టపా స్పూల్ సృష్టించుటలో దోషం.\n"
@@ -835,7 +839,7 @@ msgstr "ప్రవేశపెట్టిన ఆబ్జక్టు యా�
 msgid "`:' not allowed in encrypted password"
 msgstr "ఎన్క్రిప్టెడ్ సంకేతపదమునందు `:' అనుమతించబడలేదు"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1538 ../modules/ldap.c:1811
+#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "అనుమతిపదం ను ఎన్క్రిప్టు చేయడం లో దోషం"
 
@@ -945,7 +949,7 @@ msgstr "వినియోగదారుని ఆబ్జక్టు `%s' �
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP పదకోశ ప్రవేశం సృష్టీకరణలో దోషం: %s"
 
-#: ../modules/ldap.c:1380 ../modules/ldap.c:1599
+#: ../modules/ldap.c:1380 ../modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP పదకోశ ప్రవేశం మార్చుటలో దోషం: %s"
@@ -965,47 +969,51 @@ msgstr "ఆబ్జక్టు %s యాట్రిబ్యూట్ కల�
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP పదకోశ ప్రవేశం తొలగించుటలో దోషం: %s"
 
-#: ../modules/ldap.c:1505 ../modules/ldap.c:1521 ../modules/ldap.c:1632
-#: ../modules/ldap.c:1731
+#: ../modules/ldap.c:1522 ../modules/ldap.c:1538 ../modules/ldap.c:1657
+#: ../modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
 msgstr "ఆబ్జక్టు %s యాట్రిబ్యూట్ కలిగిలేదు"
 
-#: ../modules/ldap.c:1657
+#: ../modules/ldap.c:1553
+msgid "unsupported password encryption scheme"
+msgstr "మద్దతీయని సంకేతపదపు ఎన్క్రిప్షన్ పథకము"
+
+#: ../modules/ldap.c:1682
 msgid "no such object in LDAP directory"
 msgstr "LDAP లో అటువంటి ఆబ్జక్టు లేదు"
 
-#: ../modules/ldap.c:1669
+#: ../modules/ldap.c:1694
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' యాట్రిబ్యూట్ కనబడలేదు"
 
-#: ../modules/ldap.c:1842
+#: ../modules/ldap.c:1867
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s కోరకు LDAP పదకోశం లో అనుమతిపదం వ్యవస్థాపించుటలో దోషం: %s"
 
-#: ../modules/ldap.c:2453
+#: ../modules/ldap.c:2478
 msgid "LDAP Server Name"
 msgstr "LDAP సేవిక పేరు"
 
-#: ../modules/ldap.c:2459
+#: ../modules/ldap.c:2484
 msgid "LDAP Search Base DN"
 msgstr "LDAP సెర్చు ఆధారం DN"
 
-#: ../modules/ldap.c:2465
+#: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
 msgstr "LDAP బైండ్ DN"
 
-#: ../modules/ldap.c:2472
+#: ../modules/ldap.c:2497
 msgid "LDAP Bind Password"
 msgstr "LDAP బైండ్ అనుమతిపదం"
 
-#: ../modules/ldap.c:2476
+#: ../modules/ldap.c:2501
 msgid "LDAP SASL User"
 msgstr "LDAP SASL వినియోగదారి"
 
-#: ../modules/ldap.c:2483
+#: ../modules/ldap.c:2508
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL దృవీకరించు వినియోగదారి"
 
@@ -1075,30 +1083,37 @@ msgid "Searching for user named %s.\n"
 msgstr "%s పేరుగల వినియోగదారుని కొరకు వెతుకులాట.\n"
 
 #: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "ప్రవేశం కనిపించలేదు.\n"
 
 #: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "ప్రాంమ్ట్సు సఫలం.\n"
 
 #: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "ప్రాంమ్ట్సు విఫలం.\n"
 
 #: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "సిద్ద వినియోగదారుని ఆబ్జక్టు క్లాసులు:\n"
 
 #: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "సిద్ద వినియోగదారుని యాట్రిబ్యూట్సు పేరులు:\n"
 
 #: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "సిద్ద వినియోగదారుని యాట్రిబ్యూట్సు పొందుట:\n"
 
 #: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "వినియోగదారుని ఆకృతిని నకలుతీయుట:\n"
 
