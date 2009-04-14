@@ -1,3 +1,12 @@
+0.56.10
+* Prohibit entity values that contain ':' in the files and shadow module
+  (except for the last field on the line).
+* Don't corrupt LDAP passwords that use an unsupported password encryption
+  scheme.
+* When the user name is used as a default group name, don't interpret it as
+  a number.
+* Minor test suite and man page fixes.
+
 0.56.9
 * Warn in lusermod if changing a primary group ID to a group that does not
   exist. (#1)
