@@ -111,7 +111,8 @@ main(int argc, const char **argv)
 		errno = 0;
 		imax = strtoimax(uid_number_str, &p, 10);
 		if (errno != 0 || *p != 0 || p == uid_number_str
-		    || (uid_t)imax != imax) {
+		    || (uid_t)imax != imax
+		    || (uid_t)imax == LU_VALUE_INVALID_ID) {
 			fprintf(stderr, _("Invalid user ID %s\n"),
 				uid_number_str);
 			poptPrintUsage(popt, stderr, 0);
@@ -143,9 +144,14 @@ main(int argc, const char **argv)
 		/* Try to convert the given GID to a number. */
 		errno = 0;
 		imax = strtoimax(gid, &p, 10);
-		if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax)
+		if (errno == 0 && *p == 0 && p != gid && (gid_t)imax == imax) {
 			gidNumber = imax;
-		else
+			if (gidNumber == LU_VALUE_INVALID_ID) {
+				fprintf(stderr, _("Invalid group ID %s\n"),
+					gid);
+				return 1;
+			}
+		} else
 			/* It's not a number, so it's a group name. */
 			gidNumber = LU_VALUE_INVALID_ID;
 	}

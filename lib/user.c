@@ -166,12 +166,8 @@ extract_name(struct lu_ent *ent)
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), NULL);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
-	if (array == NULL) {
-		array = lu_ent_get_current(ent,
-					   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
-		if (array == NULL)
-			return NULL;
-	}
+	if (array == NULL)
+		return NULL;
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, NULL);
 	return ent->cache->cache(ent->cache, g_value_get_string(value));
@@ -261,12 +257,8 @@ extract_id(struct lu_ent *ent)
 			     LU_VALUE_INVALID_ID);
 	array = lu_ent_get(ent,
 			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
-	if (array == NULL) {
-		array = lu_ent_get_current(ent,
-					   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
-		if (array == NULL)
-			return LU_VALUE_INVALID_ID;
-	}
+	if (array == NULL)
+		return LU_VALUE_INVALID_ID;
 	value = g_value_array_get_nth(array, 0);
 	g_return_val_if_fail(value != NULL, LU_VALUE_INVALID_ID);
 	return lu_value_get_id(value);
@@ -1769,18 +1761,15 @@ lu_default_int(struct lu_context *context, const char *name,
 
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &value);
+		lu_ent_clear(ent, LU_GIDNUMBER);
 		/* Additionally, pick a default default group. */
-		g_value_unset(&value);
 		/* FIXME: handle arbitrarily long lines. */
 		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
-		    (err == &grp))
+		    (err == &grp)) {
+			g_value_unset(&value);
 			lu_value_init_set_id(&value, grp.gr_gid);
-		else {
-			g_value_init(&value, G_TYPE_LONG);
-			g_value_set_long(&value, -1);
+			lu_ent_add(ent, LU_GIDNUMBER, &value);
 		}
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &value);
 	} else if (ent->type == lu_group) {
 		lu_ent_clear(ent, LU_GROUPNAME);
 		lu_ent_add(ent, LU_GROUPNAME, &value);
@@ -1830,10 +1819,13 @@ lu_default_int(struct lu_context *context, const char *name,
 	/* Search for a free ID. */
 	id = lu_get_first_unused_id(context, type, id);
 
-	/* Add this ID to the entity. */
-	lu_value_init_set_id(&value, id);
-	lu_ent_add(ent, idkey, &value);
-	g_value_unset(&value);
+	if (id != 0 && id != (id_t)-1) {
+		/* Add this ID to the entity. */
+		lu_value_init_set_id(&value, id);
+		lu_ent_add(ent, idkey, &value);
+		g_value_unset(&value);
+	}
+	/* Otherwise the user must specify an ID. */
 
 	/* Now iterate to find the rest. */
 	keys = lu_cfg_read_keys(context, top);
@@ -1907,8 +1899,10 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = replace_all(tmp, "%n", name);
 		sprintf(replacement, "%ld", lu_util_shadow_current_date());
 		tmp = replace_all(tmp, "%d", replacement);
-		sprintf(replacement, "%jd", (intmax_t)id);
-		tmp = replace_all(tmp, "%u", replacement);
+		if (id != 0 && id != (id_t)-1) {
+			sprintf(replacement, "%jd", (intmax_t)id);
+			tmp = replace_all(tmp, "%u", replacement);
+		}
 
 		ok = lu_value_init_set_attr_from_string(&value, key, tmp,
 							&error);

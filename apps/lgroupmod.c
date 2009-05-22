@@ -100,7 +100,7 @@ main(int argc, const char **argv)
 		errno = 0;
 		val = strtoimax(gid_number_str, &p, 10);
 		if (errno != 0 || *p != 0 || p == gid_number_str
-		    || (gid_t)val != val) {
+		    || (gid_t)val != val || (gid_t)val == LU_VALUE_INVALID_ID) {
 			fprintf(stderr, _("Invalid group ID %s\n"),
 				gid_number_str);
 			poptPrintUsage(popt, stderr, 0);

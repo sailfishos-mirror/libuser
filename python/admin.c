@@ -510,8 +510,10 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	gidNumber = lu_value_get_id(value);
 
 	/* Attempt to populate the directory. */
-	if (lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
-				0700, &error)) {
+	if (uidNumber != LU_VALUE_INVALID_ID
+	    && gidNumber != LU_VALUE_INVALID_ID
+	    && lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
+				   0700, &error)) {
 		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
 		return PyInt_FromLong(1);

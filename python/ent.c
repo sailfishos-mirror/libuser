@@ -163,7 +163,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		if ((long)ll == ll) {
 			g_value_init(value, G_TYPE_LONG);
 			g_value_set_long(value, ll);
-		} else if ((id_t)ll == ll)
+		} else if ((id_t)ll == ll && (id_t)ll != LU_VALUE_INVALID_ID)
 			lu_value_init_set_id(value, ll);
 		else {
 			PyErr_SetString(PyExc_OverflowError,
@@ -214,7 +214,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		if ((long)ll == ll) {
 			g_value_init(value, G_TYPE_LONG);
 			g_value_set_long(value, ll);
-		} else if ((id_t)ll == ll)
+		} else if ((id_t)ll == ll && (id_t)ll != LU_VALUE_INVALID_ID)
 			lu_value_init_set_id(value, ll);
 		else {
 			PyErr_SetString(PyExc_OverflowError,

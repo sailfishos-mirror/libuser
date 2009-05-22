@@ -1,3 +1,24 @@
+2009-05-22  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/files.c (generic_add): Remove unnecessary "line != NULL"
+	conditions.
+
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main): Refuse GID and UID (id_t)-1.
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main): Refuse GID (gid_t)-1.
+	* lib/user.c (extract_name, extract_id): Only check pending values,
+	nothing else falls back on current values like these functions did.
+	(lu_default_int): Don't default LU_GIDNUMBER to -1 if the "users" group
+	does not exist. Don't set ID to 0 or -1 if a new ID can't be allocated.
+	Don't replace %u in default values by 0 or -1 if a new ID can't be
+	allocated.
+	* python/admin.c (libuser_admin_create_home): Dont populate home
+	directory if UID or GID is (id_t)-1.
+	* python/ent.c (libuser_convert_to_value): Try to refuse GID and UID
+	(id_t)-1.
+
 2009-04-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Version 0.56.10.

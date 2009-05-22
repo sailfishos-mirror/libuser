@@ -763,16 +763,12 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	/* We sanity-check here to make sure that the entity isn't already
 	 * listed in the file by name by searching for the initial part of
 	 * the line. */
-	if (line && strchr(line, ':')) {
+	if (strchr(line, ':') != NULL)
 		fragment1 = g_strndup(line, strchr(line, ':') - line + 1);
-	} else {
-		if (line && strchr(line, '\n')) {
-			fragment1 = g_strndup(line,
-					      strchr(line, '\n') - line + 1);
-		} else {
-			fragment1 = g_strdup(line);
-		}
-	}
+	else if (strchr(line, '\n') != NULL)
+		fragment1 = g_strndup(line, strchr(line, '\n') - line + 1);
+	else
+		fragment1 = g_strdup(line);
 	fragment2 = g_strconcat("\n", fragment1, NULL);
 
 	/* Read the entire file in.  There's some room for improvement here,

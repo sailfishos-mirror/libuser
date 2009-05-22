@@ -124,7 +124,8 @@ main(int argc, const char **argv)
 		errno = 0;
 		imax = strtoimax(fields[2], &p, 10);
 		if (errno != 0 || *p != 0 || p == fields[2]
-		    || (uid_t)imax != imax) {
+		    || (uid_t)imax != imax
+		    || (uid_t)imax == LU_VALUE_INVALID_ID) {
 			g_print(_("Invalid user ID %s\n"), fields[2]);
 			g_strfreev(fields);
 			continue;
@@ -173,6 +174,11 @@ main(int argc, const char **argv)
 		} else {
 			/* It's a group number -- see if it's being used. */
 			gid = imax;
+			if (gid == LU_VALUE_INVALID_ID) {
+				g_print(_("Invalid group ID %s\n"), gidstring);
+				g_strfreev(fields);
+				continue;
+			}
 			if (lu_group_lookup_id(ctx, gid, ent, &error)) {
 				/* Retrieve the group's GID. */
 				values = lu_ent_get(ent, LU_GIDNUMBER);
