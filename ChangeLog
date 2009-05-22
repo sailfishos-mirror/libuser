@@ -1,5 +1,8 @@
 2009-05-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/luserdel.c (main): Remove user's mail spool as well.
+	* apps/luserdel.1: Update.
+
 	* lib/user.c (run_single): Prohibit renaming entities to an invalid
 	name.
 	* tests/files_test.py (Tests.testUserMod6, Tests.testGroupMod5): New

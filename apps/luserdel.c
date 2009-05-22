@@ -154,6 +154,11 @@ main(int argc, const char **argv)
 				return 9;
 			}
 		}
+		/* Create a mail spool for the user. */
+		if (lu_mailspool_create_remove(ctx, ent, FALSE) != TRUE) {
+			fprintf(stderr, _("Error removing mail spool.\n"));
+			return 1;
+		}
 	}
 
 	lu_ent_free(ent);
