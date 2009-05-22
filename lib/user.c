@@ -417,6 +417,8 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case user_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
+		if (lu_name_allowed(entity, error) == FALSE)
+			return FALSE;
 		return module->user_mod(module, entity, error);
 	case user_del:
 		g_return_val_if_fail(entity != NULL, FALSE);
@@ -521,6 +523,8 @@ run_single(struct lu_context *context,
 		return FALSE;
 	case group_mod:
 		g_return_val_if_fail(entity != NULL, FALSE);
+		if (lu_name_allowed(entity, error) == FALSE)
+			return FALSE;
 		return module->group_mod(module, entity, error);
 	case group_del:
 		g_return_val_if_fail(entity != NULL, FALSE);

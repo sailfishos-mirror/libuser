@@ -1,5 +1,10 @@
 2009-05-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user.c (run_single): Prohibit renaming entities to an invalid
+	name.
+	* tests/files_test.py (Tests.testUserMod6, Tests.testGroupMod5): New
+	tests.
+
 	* modules/files.c (generic_add): Remove unnecessary "line != NULL"
 	conditions.
 

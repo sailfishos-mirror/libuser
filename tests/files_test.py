@@ -370,6 +370,16 @@ class Tests(unittest.TestCase):
         self.assert_(e)
         self.assert_(':' in e[libuser.LOGINSHELL][0])
 
+    def testUserMod6(self):
+        # Nothing to do with the files module: test lu_name_allowed is called.
+        e = self.a.initUser('user7_6')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_6')
+        e[libuser.USERNAME] = 'very_long_name_123456789_123456789_123456789'
+        self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
+        del e
+
     def testUserDel(self):
         e = self.a.initUser('user8_1')
         self.a.addUser(e, False, False)
@@ -868,6 +878,16 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
         self.assert_(e)
         self.assertEqual(e[libuser.MEMBERNAME], ['group22_4:member'])
+
+    def testGroupMod5(self):
+        # Nothing to do with the files module: test lu_name_allowed is called.
+        e = self.a.initGroup('group22_5')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group22_5')
+        e[libuser.GROUPNAME] = 'very_long_name_123456789_123456789_123456789'
+        self.assertRaises(RuntimeError, self.a.modifyGroup, e)
+        del e
 
     def testGroupDel(self):
         e = self.a.initGroup('group23_1')
