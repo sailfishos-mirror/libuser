@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-04-15 19:43+0000\n"
-"PO-Revision-Date: 2009-04-15 23:20+0000\n"
+"POT-Creation-Date: 2009-06-10 08:34+0000\n"
+"PO-Revision-Date: 2009-06-10 12:24+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgstr "Ekkert notandanafn tiltekið.\n"
 #: ../apps/lchage.c:133 ../apps/lchfn.c:106 ../apps/lchsh.c:92
 #: ../apps/lgroupadd.c:100 ../apps/lgroupdel.c:75 ../apps/lgroupmod.c:116
 #: ../apps/lid.c:160 ../apps/lnewusers.c:77 ../apps/lpasswd.c:95
-#: ../apps/luseradd.c:128 ../apps/luserdel.c:81 ../apps/lusermod.c:141
+#: ../apps/luseradd.c:129 ../apps/luserdel.c:81 ../apps/lusermod.c:141
 #: ../samples/enum.c:56 ../samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
@@ -280,7 +280,8 @@ msgstr "[ROFI...] hópur"
 msgid "No group name specified.\n"
 msgstr "Enginn hópur tiltekinn.\n"
 
-#: ../apps/lgroupadd.c:87 ../apps/lgroupmod.c:104 ../apps/lusermod.c:112
+#: ../apps/lgroupadd.c:87 ../apps/lgroupmod.c:104 ../apps/lnewusers.c:178
+#: ../apps/luseradd.c:150 ../apps/lusermod.c:112
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Ógilt hópnúmer %s\n"
@@ -359,37 +360,37 @@ msgstr "Villa við að opna `%s': %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Villa við að búa til notandaaðgang fyrir `%s': rangt sniðnar upplýsingar.\n"
 
-#: ../apps/lnewusers.c:128 ../apps/luseradd.c:115 ../apps/lusermod.c:127
+#: ../apps/lnewusers.c:129 ../apps/luseradd.c:116 ../apps/lusermod.c:127
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Ógilt notandanúmer %s\n"
 
-#: ../apps/lnewusers.c:135
+#: ../apps/lnewusers.c:136
 #, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Ég neita að búa til notandaaðgang með UID 0.\n"
 
-#: ../apps/lnewusers.c:217
+#: ../apps/lnewusers.c:223
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Gat ekki búið til hóp fyrir `%s' með GID %jd: %s\n"
 
-#: ../apps/lnewusers.c:274
+#: ../apps/lnewusers.c:280
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Villa við að setja lykilorð fyrir %s: %s\n"
 
-#: ../apps/lnewusers.c:288
+#: ../apps/lnewusers.c:294
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Villa við að búa til heimasvæði fyrir %s: %s\n"
 
-#: ../apps/lnewusers.c:302
+#: ../apps/lnewusers.c:308
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Villa við að búa til pósthólf fyrir %s.\n"
 
-#: ../apps/lnewusers.c:308
+#: ../apps/lnewusers.c:314
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Villa við að búa til notandaaðgang fyrir %s: %s\n"
@@ -417,7 +418,7 @@ msgstr "Lykilorðin eru ekki eins. Reyndu aftur.\n"
 msgid "Password change canceled.\n"
 msgstr "Hætt við að breyta lykilorði.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:273 ../apps/luseradd.c:283
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:279 ../apps/luseradd.c:289
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Villa við að búa til lykilorð notandans %s: %s.\n"
@@ -432,28 +433,28 @@ msgstr "Villa við að setja lykilorð fyrir hópinn %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Lykilorði breytt.\n"
 
-#: ../apps/luseradd.c:171
+#: ../apps/luseradd.c:177
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Hópurinn %jd er ekki til.\n"
 
 #. Aargh!  Abandon all hope.
-#: ../apps/luseradd.c:189 ../apps/luseradd.c:202
+#: ../apps/luseradd.c:195 ../apps/luseradd.c:208
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Gat ekki búið til hóp `%s': %s\n"
 
-#: ../apps/luseradd.c:263
+#: ../apps/luseradd.c:269
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Gat ekki búið til notanda: %s.\n"
 
-#: ../apps/luseradd.c:313
+#: ../apps/luseradd.c:319
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Villa við að búa %s til: %s.\n"
 
-#: ../apps/luseradd.c:320
+#: ../apps/luseradd.c:326
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Villa við að búa til pósthólf.\n"
@@ -492,6 +493,11 @@ msgstr "%s var ekki með heimasvæði.\n"
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Villa við að eyða %s: %s.\n"
+
+#: ../apps/luserdel.c:159
+#, c-format
+msgid "Error removing mail spool.\n"
+msgstr "Villa við að fjarlægja pósthólf.\n"
 
 #: ../apps/lusermod.c:164 ../apps/lusermod.c:177
 #, c-format
@@ -684,69 +690,69 @@ msgstr "villa við að setja skjáeiginleika"
 msgid "error reading from terminal"
 msgstr "villa við lestur frá skjá"
 
-#: ../lib/user.c:191
+#: ../lib/user.c:187
 msgid "name is not set"
 msgstr "heitið er ekki stillt"
 
-#: ../lib/user.c:196
+#: ../lib/user.c:192
 msgid "name is too short"
 msgstr "heitið er of stutt"
 
-#: ../lib/user.c:201
+#: ../lib/user.c:197
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr "heitið er of langt (%zu > %d)"
 
-#: ../lib/user.c:208
+#: ../lib/user.c:204
 msgid "name contains non-ASCII characters"
 msgstr "heitið inniheldur stafi sem ekki eru ASCII"
 
-#: ../lib/user.c:215
+#: ../lib/user.c:211
 msgid "name contains control characters"
 msgstr "heitið inniheldur stjórntákn"
 
-#: ../lib/user.c:222
+#: ../lib/user.c:218
 msgid "name contains whitespace"
 msgstr "heitið inniheldur orðabil"
 
-#: ../lib/user.c:234
+#: ../lib/user.c:230
 msgid "name starts with a hyphen"
 msgstr "heitið byrjar á bandstriki"
 
-#: ../lib/user.c:245
+#: ../lib/user.c:241
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "heitið inniheldur ógilt tákn `%c'"
 
-#: ../lib/user.c:292 ../lib/user.c:340
+#: ../lib/user.c:284 ../lib/user.c:332
 #, c-format
 msgid "user %s has no UID"
 msgstr "notandinn %s hefur ekkert UID"
 
-#: ../lib/user.c:315 ../lib/user.c:341
+#: ../lib/user.c:307 ../lib/user.c:333
 #, c-format
 msgid "group %s has no GID"
 msgstr "hópurinn %s hefur ekkert GID"
 
-#: ../lib/user.c:335
+#: ../lib/user.c:327
 #, c-format
 msgid "user %jd has no name"
 msgstr "notandinn %jd hefur ekkert heiti"
 
-#: ../lib/user.c:336
+#: ../lib/user.c:328
 #, c-format
 msgid "group %jd has no name"
 msgstr "hópurinn %jd hefur ekkert heiti"
 
-#: ../lib/user.c:344
+#: ../lib/user.c:336
 msgid "user has neither a name nor an UID"
 msgstr "notandinn hefur hvorki heiti eða UID"
 
-#: ../lib/user.c:345
+#: ../lib/user.c:337
 msgid "group has neither a name nor a GID"
 msgstr "hópurinn hefur hvorki heiti eða GID"
 
-#: ../lib/user.c:1923
+#: ../lib/user.c:1921
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ógilt sjálfgefið gildi í svæði %s: %s"
@@ -777,18 +783,18 @@ msgid "couldn't determine security context for `%s': %s"
 msgstr "gat ekki skilgreint öryggisham fyrir `%s': %s"
 
 #: ../modules/files.c:111 ../modules/files.c:445 ../modules/files.c:746
-#: ../modules/files.c:1017 ../modules/files.c:1181 ../modules/files.c:1412
-#: ../modules/files.c:1496 ../modules/files.c:1717 ../modules/files.c:1888
-#: ../modules/files.c:1905 ../modules/files.c:1994 ../modules/files.c:2013
-#: ../modules/files.c:2081 ../modules/files.c:2102 ../modules/files.c:2199
-#: ../modules/files.c:2218 ../modules/files.c:2277 ../modules/files.c:2296
-#: ../modules/files.c:2392 ../modules/files.c:2407
+#: ../modules/files.c:1013 ../modules/files.c:1177 ../modules/files.c:1408
+#: ../modules/files.c:1492 ../modules/files.c:1713 ../modules/files.c:1884
+#: ../modules/files.c:1901 ../modules/files.c:1990 ../modules/files.c:2009
+#: ../modules/files.c:2077 ../modules/files.c:2098 ../modules/files.c:2195
+#: ../modules/files.c:2214 ../modules/files.c:2273 ../modules/files.c:2292
+#: ../modules/files.c:2388 ../modules/files.c:2403
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "gat ekki opnað `%s': %s"
 
 #: ../modules/files.c:123 ../modules/files.c:152 ../modules/files.c:218
-#: ../modules/files.c:758 ../modules/files.c:1027 ../modules/files.c:1193
+#: ../modules/files.c:758 ../modules/files.c:1023 ../modules/files.c:1189
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "gat ekki fundið `%s': %s"
@@ -812,39 +818,39 @@ msgstr "stærðarmunur á afritum"
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s gildi `%s': `:' er ekki leyfilegt"
 
-#: ../modules/files.c:784 ../modules/files.c:1035 ../modules/files.c:1202
+#: ../modules/files.c:780 ../modules/files.c:1031 ../modules/files.c:1198
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "gat ekki lesið úr `%s': %s"
 
-#: ../modules/files.c:793 ../modules/files.c:800
+#: ../modules/files.c:789 ../modules/files.c:796
 msgid "entry already present in file"
 msgstr "færslan er þegar til staðar í skránni"
 
-#: ../modules/files.c:807 ../modules/files.c:817 ../modules/files.c:828
-#: ../modules/files.c:1261 ../modules/files.c:1269 ../modules/files.c:1277
+#: ../modules/files.c:803 ../modules/files.c:813 ../modules/files.c:824
+#: ../modules/files.c:1257 ../modules/files.c:1265 ../modules/files.c:1273
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "gat ekki ritað í `%s': %s"
 
-#: ../modules/files.c:990
+#: ../modules/files.c:986
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "hluturinn er ekki með %s eiginleika"
 
-#: ../modules/files.c:1760
+#: ../modules/files.c:1756
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' er ekki leyfilegt í dulkóðuðu lykilorði"
 
-#: ../modules/files.c:1772 ../modules/ldap.c:1563 ../modules/ldap.c:1836
+#: ../modules/files.c:1768 ../modules/ldap.c:1563 ../modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "villa við að dulrita lykilorðið"
 
-#: ../modules/files.c:2678 ../modules/files.c:2756
+#: ../modules/files.c:2674 ../modules/files.c:2752
 msgid "not executing with superuser privileges"
 msgstr "er ekki keyrandi með rótarheimildum"
 
-#: ../modules/files.c:2769
+#: ../modules/files.c:2765
 msgid "no shadow file present -- disabling"
 msgstr "engin shadow skrá til staðar -- afvirki"
 
@@ -1029,23 +1035,23 @@ msgstr "Cyrus SASL villa við að fjarlægja notandann: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Villa við að frumstilla Cyrus SASL: %s"
 
-#: ../python/admin.c:523
+#: ../python/admin.c:525
 msgid "error creating home directory for user"
 msgstr "villa við að búa til nýtt heimasvæði fyrir notandann"
 
-#: ../python/admin.c:576
+#: ../python/admin.c:578
 msgid "error removing home directory for user"
 msgstr "villa við að fjarlægja heimasvæði notanda"
 
-#: ../python/admin.c:654
+#: ../python/admin.c:656
 msgid "error moving home directory for user"
 msgstr "villa við að færa heimasvæði notanda"
 
-#: ../python/admin.c:687 ../python/admin.c:764
+#: ../python/admin.c:689 ../python/admin.c:766
 msgid "error creating mail spool for user"
 msgstr "villa við að búa til pósthólf notandans"
 
-#: ../python/admin.c:885
+#: ../python/admin.c:887
 msgid "error removing mail spool for user"
 msgstr "villa við að fjarlægja pósthólf notandans"
 
