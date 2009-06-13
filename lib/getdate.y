@@ -90,8 +90,8 @@ static int yyparse (const char **yyInput, struct global *yy);
 
 %}
 
-%name-prefix="lu_gd"
-%pure-parser
+%name-prefix "lu_gd"
+%define api.pure
 
 %parse-param { const char **yyInput }
 %lex-param { const char **yyInput }

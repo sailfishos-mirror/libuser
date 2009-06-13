@@ -1,239 +1,97 @@
-<FUNCTION>
-<NAME>free_value</NAME>
-<RETURNS>void </RETURNS>
-void *
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_prompt_console</NAME>
-<RETURNS>gboolean </RETURNS>
-struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_prompt_console_quiet</NAME>
-<RETURNS>gboolean </RETURNS>
-struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
-</FUNCTION>
-<MACRO>
-<NAME>LU_VALUE_INVALID_ID</NAME>
-#define LU_VALUE_INVALID_ID ((id_t)-1)
-</MACRO>
-<TYPEDEF>
-<NAME>lu_context_t</NAME>
-typedef struct lu_context lu_context_t;
-</TYPEDEF>
 <ENUM>
-<NAME>lu_entity_type_t</NAME>
-typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
+<NAME>lu_status_t</NAME>
+typedef enum lu_status {
+	/* Non-fatal. */
+	lu_success = 0,
+	lu_warning_config_disabled,
+
+	/* Fatal. */
+	lu_error_generic,
+	lu_error_privilege,
+	lu_error_access_denied,
+
+	/* Data validation errors. */
+	lu_error_name_bad,
+	lu_error_id_bad,
+	lu_error_name_used,
+	lu_error_id_used,
+
+	/* Terminal manipulation errors. */
+	lu_error_terminal,
+
+	/* File I/O errors. */
+	lu_error_open,
+	lu_error_lock,
+	lu_error_stat,
+	lu_error_read,
+	lu_error_write,
+	lu_error_search,
+
+	/* Initialization or module-loading errors. */
+	lu_error_init,
+	lu_error_module_load,
+	lu_error_module_sym,
+	lu_error_module_version,
+
+	/* Since 0.53 */
+	lu_error_unlock_empty,
+
+	/* Since 0.56 */
+	lu_error_invalid_attribute_value
+} lu_status_t;
 </ENUM>
+<STRUCT>
+<NAME>lu_error_t</NAME>
+typedef struct lu_error {
+	enum lu_status code;
+	char *string;
+} lu_error_t;
+</STRUCT>
+<MACRO>
+<NAME>LU_ERROR_CHECK</NAME>
+#define LU_ERROR_CHECK(err_p_p) \
+do { \
+	struct lu_error **__err = (err_p_p); \
+	if ((__err == NULL) || (*__err != NULL)) { \
+		if(__err == NULL) { \
+			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
+		} else \
+		if(*__err != NULL) { \
+			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\n", __FUNCTION__); \
+		} \
+		abort(); \
+	} \
+} while(0)
+</MACRO>
 <FUNCTION>
-<NAME>lu_value_strdup</NAME>
-<RETURNS>char *</RETURNS>
-const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_values_equal</NAME>
-<RETURNS>int </RETURNS>
-const GValue *a, const GValue *b
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_value_init_set_id</NAME>
+<NAME>lu_error_new</NAME>
 <RETURNS>void </RETURNS>
-GValue *value, id_t id
+lu_error_t **error, lu_status_t code,const char *fmt, ...
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_value_get_id</NAME>
-<RETURNS>id_t </RETURNS>
-const GValue *value
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_value_init_set_attr_from_string</NAME>
-<RETURNS>gboolean </RETURNS>
-GValue *value, const char *attr,const char *string,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_start</NAME>
-<RETURNS>lu_context_t *</RETURNS>
-const char *authname,lu_entity_type_t auth_type,const char *modules, const char *create_modules,lu_prompt_fn *prompter,gpointer callback_data,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_end</NAME>
-<RETURNS>void </RETURNS>
-lu_context_t *context
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_set_prompter</NAME>
-<RETURNS>void </RETURNS>
-lu_context_t *context,lu_prompt_fn *prompter, gpointer callback_data
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_get_prompter</NAME>
-<RETURNS>void </RETURNS>
-lu_context_t *context,lu_prompt_fn ** prompter, gpointer *callback_data
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_set_modules</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,const char *list, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_get_modules</NAME>
+<NAME>lu_strerror</NAME>
 <RETURNS>const char *</RETURNS>
-lu_context_t *context
+lu_error_t *error
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_uses_elevated_privileges</NAME>
+<NAME>lu_error_is_success</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_context_t *context
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_user_default</NAME>
+<NAME>lu_error_is_warning</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_group_default</NAME>
+<NAME>lu_error_is_error</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
+lu_status_t status
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_user_lookup_name</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_lookup_name</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_lookup_id</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context, uid_t uid,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_lookup_id</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context, gid_t gid,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_add</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_add</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_modify</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_modify</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_delete</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_delete</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_lock</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_lock</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_unlock</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_unlock</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_unlock_nonempty</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context, struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_unlock_nonempty</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context, struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_islocked</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_islocked</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_setpass</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_setpass</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_user_removepass</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_group_removepass</NAME>
-<RETURNS>gboolean </RETURNS>
-lu_context_t *context,struct lu_ent *ent,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_users_enumerate</NAME>
-<RETURNS>GValueArray *</RETURNS>
-lu_context_t *context,const char *pattern,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_groups_enumerate</NAME>
-<RETURNS>GValueArray *</RETURNS>
-lu_context_t *context,const char *pattern,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_users_enumerate_by_group</NAME>
-<RETURNS>GValueArray *</RETURNS>
-lu_context_t *context,const char *group,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_groups_enumerate_by_user</NAME>
-<RETURNS>GValueArray *</RETURNS>
-lu_context_t *context,const char *user,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_users_enumerate_full</NAME>
-<RETURNS>GPtrArray *</RETURNS>
-lu_context_t *context,const char *pattern,lu_error_t **error
-</FUNCTION>
-<FUNCTION>
-<NAME>lu_groups_enumerate_full</NAME>
-<RETURNS>GPtrArray *</RETURNS>
-lu_context_t *context,const char *pattern,lu_error_t **error
+<NAME>lu_error_free</NAME>
+<RETURNS>void </RETURNS>
+lu_error_t **error
 </FUNCTION>
 <TYPEDEF>
 <NAME>lu_ent_t</NAME>
@@ -476,98 +334,240 @@ struct lu_context *context,const char *key, const char *default_value
 <RETURNS>GList *</RETURNS>
 struct lu_context *context,const char *parent_key
 </FUNCTION>
-<ENUM>
-<NAME>lu_status_t</NAME>
-typedef enum lu_status {
-	/* Non-fatal. */
-	lu_success = 0,
-	lu_warning_config_disabled,
-
-	/* Fatal. */
-	lu_error_generic,
-	lu_error_privilege,
-	lu_error_access_denied,
-
-	/* Data validation errors. */
-	lu_error_name_bad,
-	lu_error_id_bad,
-	lu_error_name_used,
-	lu_error_id_used,
-
-	/* Terminal manipulation errors. */
-	lu_error_terminal,
-
-	/* File I/O errors. */
-	lu_error_open,
-	lu_error_lock,
-	lu_error_stat,
-	lu_error_read,
-	lu_error_write,
-	lu_error_search,
-
-	/* Initialization or module-loading errors. */
-	lu_error_init,
-	lu_error_module_load,
-	lu_error_module_sym,
-	lu_error_module_version,
-
-	/* Since 0.53 */
-	lu_error_unlock_empty,
-
-	/* Since 0.56 */
-	lu_error_invalid_attribute_value
-} lu_status_t;
-</ENUM>
-<STRUCT>
-<NAME>lu_error_t</NAME>
-typedef struct lu_error {
-	enum lu_status code;
-	char *string;
-} lu_error_t;
-</STRUCT>
+<FUNCTION>
+<NAME>free_value</NAME>
+<RETURNS>void </RETURNS>
+void *
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_prompt_console</NAME>
+<RETURNS>gboolean </RETURNS>
+struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_prompt_console_quiet</NAME>
+<RETURNS>gboolean </RETURNS>
+struct lu_prompt *prompts,int count,gpointer callback_data,struct lu_error **error
+</FUNCTION>
 <MACRO>
-<NAME>LU_ERROR_CHECK</NAME>
-#define LU_ERROR_CHECK(err_p_p) \
-do { \
-	struct lu_error **__err = (err_p_p); \
-	if ((__err == NULL) || (*__err != NULL)) { \
-		if(__err == NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with NULL " #err_p_p "\n", __FUNCTION__); \
-		} else \
-		if(*__err != NULL) { \
-			fprintf(stderr, "libuser fatal error: %s() called with non-NULL *" #err_p_p "\n", __FUNCTION__); \
-		} \
-		abort(); \
-	} \
-} while(0)
+<NAME>LU_VALUE_INVALID_ID</NAME>
+#define LU_VALUE_INVALID_ID ((id_t)-1)
 </MACRO>
+<TYPEDEF>
+<NAME>lu_context_t</NAME>
+typedef struct lu_context lu_context_t;
+</TYPEDEF>
+<ENUM>
+<NAME>lu_entity_type_t</NAME>
+typedef enum lu_entity_type { lu_invalid, lu_user, lu_group } lu_entity_type_t;
+</ENUM>
 <FUNCTION>
-<NAME>lu_error_new</NAME>
-<RETURNS>void </RETURNS>
-lu_error_t **error, lu_status_t code,const char *fmt, ...
+<NAME>lu_value_strdup</NAME>
+<RETURNS>char *</RETURNS>
+const GValue *value
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_strerror</NAME>
+<NAME>lu_values_equal</NAME>
+<RETURNS>int </RETURNS>
+const GValue *a, const GValue *b
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_init_set_id</NAME>
+<RETURNS>void </RETURNS>
+GValue *value, id_t id
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_get_id</NAME>
+<RETURNS>id_t </RETURNS>
+const GValue *value
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_value_init_set_attr_from_string</NAME>
+<RETURNS>gboolean </RETURNS>
+GValue *value, const char *attr,const char *string,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_start</NAME>
+<RETURNS>lu_context_t *</RETURNS>
+const char *authname,lu_entity_type_t auth_type,const char *modules, const char *create_modules,lu_prompt_fn *prompter,gpointer callback_data,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_end</NAME>
+<RETURNS>void </RETURNS>
+lu_context_t *context
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_set_prompter</NAME>
+<RETURNS>void </RETURNS>
+lu_context_t *context,lu_prompt_fn *prompter, gpointer callback_data
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_get_prompter</NAME>
+<RETURNS>void </RETURNS>
+lu_context_t *context,lu_prompt_fn ** prompter, gpointer *callback_data
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_set_modules</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,const char *list, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_get_modules</NAME>
 <RETURNS>const char *</RETURNS>
-lu_error_t *error
+lu_context_t *context
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_error_is_success</NAME>
+<NAME>lu_uses_elevated_privileges</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_status_t status
+lu_context_t *context
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_error_is_warning</NAME>
+<NAME>lu_user_default</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_status_t status
+lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_error_is_error</NAME>
+<NAME>lu_group_default</NAME>
 <RETURNS>gboolean </RETURNS>
-lu_status_t status
+lu_context_t *ctx, const char *name,gboolean system_account, struct lu_ent *ent
 </FUNCTION>
 <FUNCTION>
-<NAME>lu_error_free</NAME>
-<RETURNS>void </RETURNS>
-lu_error_t **error
+<NAME>lu_user_lookup_name</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_lookup_name</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,const char *name, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_lookup_id</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context, uid_t uid,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_lookup_id</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context, gid_t gid,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_add</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_add</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_modify</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_modify</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_delete</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_delete</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_lock</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_lock</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_unlock</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_unlock</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_unlock_nonempty</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_unlock_nonempty</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context, struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_islocked</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_islocked</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_setpass</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_setpass</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent, const char *newpass,gboolean crypted,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_user_removepass</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_group_removepass</NAME>
+<RETURNS>gboolean </RETURNS>
+lu_context_t *context,struct lu_ent *ent,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_users_enumerate</NAME>
+<RETURNS>GValueArray *</RETURNS>
+lu_context_t *context,const char *pattern,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_groups_enumerate</NAME>
+<RETURNS>GValueArray *</RETURNS>
+lu_context_t *context,const char *pattern,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_users_enumerate_by_group</NAME>
+<RETURNS>GValueArray *</RETURNS>
+lu_context_t *context,const char *group,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_groups_enumerate_by_user</NAME>
+<RETURNS>GValueArray *</RETURNS>
+lu_context_t *context,const char *user,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_users_enumerate_full</NAME>
+<RETURNS>GPtrArray *</RETURNS>
+lu_context_t *context,const char *pattern,lu_error_t **error
+</FUNCTION>
+<FUNCTION>
+<NAME>lu_groups_enumerate_full</NAME>
+<RETURNS>GPtrArray *</RETURNS>
+lu_context_t *context,const char *pattern,lu_error_t **error
 </FUNCTION>
