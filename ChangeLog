@@ -1,5 +1,8 @@
 2009-06-14  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Add AC_CONFIG_MACRO_DIR.  Drop AC_ISC_POSIX.  Update for
+	libtool 2.
+
 	* lib/getdate.y: Update for bison 2.4.
 	* configure.in: Update gettext version to 0.17.
 
