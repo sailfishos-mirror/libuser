@@ -31,9 +31,11 @@
 #include <pwd.h>
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
+#include <spawn.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <utime.h>
 #ifdef WITH_SELINUX
@@ -670,33 +672,32 @@ err:
 	exit(1);
 }
 
-/* Send nscd an arbitrary signal. */
-static void
-lu_signal_nscd(int signum)
-{
-	FILE *fp;
-	/* If it's running, then its PID is in this file.  Open it. */
-	if ((fp = fopen("/var/run/nscd.pid", "r")) != NULL) {
-		char buf[LINE_MAX];
-
-		/* Read the PID. */
-		memset(buf, 0, sizeof(buf));
-		/* If the PID is sane, send it a signal. */
-		if (fgets(buf, sizeof(buf), fp) != NULL && strlen(buf) > 0) {
-			pid_t pid = atol(buf);
-			if (pid != 0) {
-				kill(pid, signum);
-			}
-		}
-		fclose(fp);
-	}
-}
-
-/* Send nscd a SIGHUP. */
+/* Flush the specified nscd cache */
 void
-lu_hup_nscd()
+lu_nscd_flush_cache (const char *table)
 {
-	lu_signal_nscd(SIGHUP);
+	static char *const envp[] = { NULL };
+
+	posix_spawn_file_actions_t fa;
+        char *argv[4];
+        pid_t pid;
+
+	if (posix_spawn_file_actions_init(&fa) != 0
+	    || posix_spawn_file_actions_addopen(&fa, STDERR_FILENO, "/dev/null",
+						O_RDWR, 0) != 0)
+                return;
+
+	argv[0] = NSCD;
+	argv[1] = "-i";
+	argv[2] = (char *)table;
+	argv[3] = NULL;
+	if (posix_spawn(&pid, argv[0], &fa, NULL, argv, envp) != 0)
+		return;
+	posix_spawn_file_actions_destroy(&fa);
+
+        /* Wait for the spawned process to exit */
+	while (waitpid(pid, NULL, 0) == -1 && errno == EINTR)
+		; /* Nothing */
 }
 
 /* Create a mail spool for the user. */

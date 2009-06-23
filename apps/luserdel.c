@@ -96,7 +96,7 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	lu_hup_nscd();
+	lu_nscd_flush_cache("passwd");
 
 	if (!dont_remove_group) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
@@ -134,10 +134,9 @@ main(int argc, const char **argv)
 					return 7;
 				}
 			}
+			lu_nscd_flush_cache("group");
 		}
 	}
-
-	lu_hup_nscd();
 
 	if (remove_home) {
 		values = lu_ent_get(ent, LU_HOMEDIRECTORY);

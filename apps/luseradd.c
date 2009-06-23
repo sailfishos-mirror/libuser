@@ -189,7 +189,7 @@ main(int argc, const char **argv)
 
 		/* Try to add the group. */
 		if (lu_group_add(ctx, groupEnt, &error))
-			lu_hup_nscd();
+			lu_nscd_flush_cache("group");
 		else {
 			/* Aargh!  Abandon all hope. */
 			fprintf(stderr, _("Error creating group `%s': %s\n"),
@@ -271,8 +271,6 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	lu_hup_nscd();
-
 	if (userPassword != NULL) {
 		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
 		    == FALSE) {
@@ -292,6 +290,8 @@ main(int argc, const char **argv)
 			return 3;
 		}
 	}
+
+        lu_nscd_flush_cache("passwd");
 
 	/* If we don't have the the don't-create-home flag, create the user's
 	 * home directory. */

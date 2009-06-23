@@ -91,7 +91,7 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	lu_hup_nscd();
+	lu_nscd_flush_cache("group");
 
 	lu_ent_free(ent);
 

@@ -1,3 +1,33 @@
+2009-06-23  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lgroupmod.c (main): Remove unnecessary nscd refreshes.  Refresh
+	the "passwd" nscd cache only once after modifying all affected users.
+	* apps/lnewusers.c (main): Refresh the "group" nscd cache after adding
+	a group.  Refresh the "passwd" nscd cache only after changing the user's
+	password.
+	* apps/lpasswd.c (main): Refresh the relevant nscd cache after changing
+	the password.
+	* apps/luseradd.c (main): Refresh the "passwd" nscd cache only after
+	changing the user's password.
+	* apps/luserdel.c (main): Only refresh the "group" cache if a group was
+	deleted.
+
+	* Makefile.am (apps_libapputil_la_CPPFLAGS): New variable.
+	* apps/apputil.c (lu_nscd_flush_cache): New function.
+	(lu_signal_nscd, lu_hup_nscd): Remove.
+	* apps/apputil.h: Update prototypes.
+	* apps/lchage.c (main)
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lgroupadd.c (main)
+	* apps/lgroupdel.c (main)
+	* apps/lgroupmod.c (main):
+	* apps/lnewusers.c (main):
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main): Use lu_nscd_flush_cache () instead of
+	lu_hup_nscd ().
+	Based on a patch by Masahiro Matsuya <mmatsuya@redhat.com>.
+
 2009-06-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Add AC_CONFIG_MACRO_DIR.  Drop AC_ISC_POSIX.  Update for

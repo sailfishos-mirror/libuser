@@ -41,7 +41,7 @@ gboolean lu_homedir_remove(const char *directory, struct lu_error **error)
 void lu_authenticate_unprivileged(const char *user, const char *appname)
 	G_GNUC_INTERNAL;
 
-void lu_hup_nscd(void) G_GNUC_INTERNAL;
+void lu_nscd_flush_cache (const char *table) G_GNUC_INTERNAL;
 
 gboolean lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 				    gboolean action) G_GNUC_INTERNAL;

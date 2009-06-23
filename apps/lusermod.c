@@ -276,7 +276,7 @@ main(int argc, const char **argv)
 			user, lu_strerror(error));
 		return 9;
 	}
-	lu_hup_nscd();
+	lu_nscd_flush_cache("passwd");
 
 	/* If the user's name changed, we need to update supplemental
 	 * group membership information. */
@@ -336,7 +336,7 @@ main(int argc, const char **argv)
 					groupname, lu_strerror(error));
 			lu_ent_free(group);
 		}
-		lu_hup_nscd();
+       		lu_nscd_flush_cache("group");
 	}
 
 	/* If we need to move the user's directory, we do that now. */

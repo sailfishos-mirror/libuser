@@ -188,6 +188,7 @@ main(int argc, const char **argv)
 				lu_strerror(error));
 			return 3;
 		}
+		lu_nscd_flush_cache("passwd");
 	} else {
 		if (lu_group_setpass(ctx, ent, password, is_crypted, &error)
 		    == FALSE) {
@@ -196,6 +197,7 @@ main(int argc, const char **argv)
 				lu_strerror(error));
 			return 3;
 		}
+		lu_nscd_flush_cache("group");
 	}
 
 	lu_ent_free(ent);

@@ -92,6 +92,7 @@ archive:
 
 
 ## Dependency data
+apps_libapputil_la_CPPFLAGS = $(AM_CPPFLAGS) -DNSCD='"$(NSCD)"'
 apps_libapputil_la_SOURCES = apps/apputil.c apps/apputil.h
 apps_libapputil_la_LDFLAGS = $(GOBJECT_LIBS) -lpam -lpam_misc $(SELINUX_LIBS)
 

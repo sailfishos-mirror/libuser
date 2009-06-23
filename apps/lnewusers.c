@@ -213,6 +213,7 @@ main(int argc, const char **argv)
 			/* Try to create the group, and if it works, get its
 			 * GID, which we need to give to this user. */
 			if (lu_group_add(ctx, ent, &error)) {
+				lu_nscd_flush_cache("group");
 				values = lu_ent_get(ent, LU_GIDNUMBER);
 				value = g_value_array_get_nth(values, 0);
 				gid = lu_value_get_id(value);
@@ -273,7 +274,6 @@ main(int argc, const char **argv)
 
 		/* Now try to add the user's account. */
 		if (lu_user_add(ctx, ent, &error)) {
-			lu_hup_nscd();
 			if (!lu_user_setpass(ctx, ent, fields[1], FALSE,
 					     &error)) {
 				fprintf(stderr,
@@ -284,6 +284,7 @@ main(int argc, const char **argv)
 					lu_error_free(&error);
 				}
 			}
+			lu_nscd_flush_cache("passwd");
 			/* Unless the nocreatehomedirs flag was given, attempt
 			 * to create the user's home directory. */
 			if (!nocreatehome) {

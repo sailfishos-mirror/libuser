@@ -8,6 +8,9 @@ AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects -Wall])
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_CHECK_PROG([YACC], [bison -y], [bison -y], [:])
+AC_PATH_PROG([NSCD], [nscd], [/usr/sbin/nscd],
+	     [$PATH$PATH_SEPARATOR/usr/sbin$PATH_SEPARATOR/sbin])
+AC_ARG_VAR([NSCD], [Path to nscd])
 
 LT_INIT([disable-static])
 

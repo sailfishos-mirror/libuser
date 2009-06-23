@@ -191,7 +191,6 @@ main(int argc, const char **argv)
 				lu_ent_add(ent, LU_ADMINISTRATORNAME, &val);
 				g_value_reset(&val);
 			}
-			lu_hup_nscd();
 			g_strfreev(admins);
 		}
 		g_value_unset(&val);
@@ -206,7 +205,6 @@ main(int argc, const char **argv)
 				lu_ent_del(ent, LU_ADMINISTRATORNAME, &val);
 				g_value_reset(&val);
 			}
-			lu_hup_nscd();
 			g_strfreev(admins);
 		}
 		g_value_unset(&val);
@@ -222,7 +220,6 @@ main(int argc, const char **argv)
 				lu_ent_add(ent, LU_MEMBERNAME, &val);
 				g_value_reset(&val);
 			}
-			lu_hup_nscd();
 			g_strfreev(members);
 		}
 		g_value_unset(&val);
@@ -237,7 +234,6 @@ main(int argc, const char **argv)
 				lu_ent_del(ent, LU_MEMBERNAME, &val);
 				g_value_reset(&val);
 			}
-			lu_hup_nscd();
 			g_strfreev(members);
 		}
 		g_value_unset(&val);
@@ -276,9 +272,9 @@ main(int argc, const char **argv)
 		}
 	}
 
-	lu_hup_nscd();
-
 	lu_ent_free(ent);
+
+	lu_nscd_flush_cache("group");
 
 	if (oldGidNumber != LU_VALUE_INVALID_ID &&
 	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
@@ -304,13 +300,13 @@ main(int argc, const char **argv)
 					lu_user_modify(ctx, ent, &error);
 					if (error != NULL)
 						lu_error_free(&error);
-					lu_hup_nscd();
 				}
 			}
 		}
-
 		g_value_unset(&val);
 		lu_ent_free(ent);
+
+		lu_nscd_flush_cache("passwd");
 	}
 
 	lu_end(ctx);
