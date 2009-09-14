@@ -1,102 +1,104 @@
+# translation of ru.po to Russian
 # translation of ru.po to
 # translation of libuser.tip.ru.po to
 # Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+#
+#
 # Leonid Kanter <leon@geon.donetsk.ua>, 2003.
 # Andrew Martynov <andrewm@inventa.ru>, 2004, 2005, 2006, 2007.
 # Nikolay Sivov <bunglehead@gmail.com>, 2007.
 # Yulia Poyarkova <yulia.poyarkova@redhat.com>, 2008, 2009.
-# 
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-05-26 08:53+0000\n"
-"PO-Revision-Date: 2009-05-26 12:05+0300\n"
+"POT-Creation-Date: 2009-09-13 22:17+0000\n"
+"PO-Revision-Date: 2009-09-14 12:33+1000\n"
 "Last-Translator: Yulia Poyarkova <yulia.poyarkova@redhat.com>\n"
-"Language-Team:  <ru@li.org>\n"
+"Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
-#: ../apps/apputil.c:107
+#: ../apps/apputil.c:109
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr "Путь к домашнему каталогу `%s' не является абсолютным"
 
-#: ../apps/apputil.c:115 ../apps/apputil.c:190 ../apps/apputil.c:223
-#: ../apps/apputil.c:250 ../modules/files.c:181
+#: ../apps/apputil.c:117 ../apps/apputil.c:192 ../apps/apputil.c:225
+#: ../apps/apputil.c:252 ../modules/files.c:181
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Ошибка чтения `%s': %s"
 
-#: ../apps/apputil.c:123 ../apps/apputil.c:199
+#: ../apps/apputil.c:125 ../apps/apputil.c:201
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Ошибка создания `%s': %s"
 
-#: ../apps/apputil.c:131 ../apps/apputil.c:206 ../apps/apputil.c:296
+#: ../apps/apputil.c:133 ../apps/apputil.c:208 ../apps/apputil.c:298
 #: ../modules/files.c:164
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Ошибка смены владельца `%s': %s"
 
-#: ../apps/apputil.c:235 ../apps/apputil.c:267 ../apps/apputil.c:283
+#: ../apps/apputil.c:237 ../apps/apputil.c:269 ../apps/apputil.c:285
 #: ../modules/files.c:196 ../modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Ошибка записи `%s': %s"
 
-#: ../apps/apputil.c:358 ../apps/apputil.c:393 ../apps/apputil.c:410
+#: ../apps/apputil.c:360 ../apps/apputil.c:395 ../apps/apputil.c:412
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Ошибка удаления `%s': %s"
 
-#: ../apps/apputil.c:568 ../apps/apputil.c:572
+#: ../apps/apputil.c:570 ../apps/apputil.c:574
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Ошибка сброса привилегий.\n"
 
-#: ../apps/apputil.c:581
+#: ../apps/apputil.c:583
 #, c-format
 msgid "Internal error.\n"
 msgstr "Внутренняя ошибка.\n"
 
-#: ../apps/apputil.c:602
+#: ../apps/apputil.c:604
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s не авторизован для изменения finger информации о %s\n"
 
-#: ../apps/apputil.c:604
+#: ../apps/apputil.c:606
 msgid "Unknown user context"
 msgstr "Неизвестный пользовательский контекст"
 
-#: ../apps/apputil.c:612
+#: ../apps/apputil.c:614
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Не могу установить контекст по умолчанию для  /etc/passwd\n"
 
-#: ../apps/apputil.c:621
+#: ../apps/apputil.c:623
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Ошибка инициализации PAM.\n"
 
-#: ../apps/apputil.c:631 ../apps/apputil.c:658
+#: ../apps/apputil.c:633 ../apps/apputil.c:660
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Ошибка аутентификации для %s.\n"
 
-#: ../apps/apputil.c:639
+#: ../apps/apputil.c:641
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Внутренняя ошибка PAM `%s'.\n"
 
-#: ../apps/apputil.c:644
+#: ../apps/apputil.c:646
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Аутентификация неизвестного пользователя.\n"
 
-#: ../apps/apputil.c:648
+#: ../apps/apputil.c:650
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Пользователь не совпадает.\n"
@@ -323,7 +325,7 @@ msgstr "Группа %s не может быть заблокирована: %s\
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Группа %s не может быть разблокирована: %s\n"
 
-#: ../apps/lgroupmod.c:247 ../apps/lgroupmod.c:273
+#: ../apps/lgroupmod.c:243 ../apps/lgroupmod.c:269
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Группа %s не может быть изменена: %s\n"
@@ -372,7 +374,7 @@ msgstr "Неверен ID пользователя %s\n"
 msgid "Refusing to create account with UID 0.\n"
 msgstr "Отказ в создании учетной записи с UID 0.\n"
 
-#: ../apps/lnewusers.c:223
+#: ../apps/lnewusers.c:224
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Ошибка создания группы для `%s' с GID %jd: %s\n"
@@ -382,17 +384,17 @@ msgstr "Ошибка создания группы для `%s' с GID %jd: %s\n"
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Ошибка установки начального пароля для %s: %s\n"
 
-#: ../apps/lnewusers.c:294
+#: ../apps/lnewusers.c:295
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Ошибка создания домашнего каталога для %s: %s\n"
 
-#: ../apps/lnewusers.c:308
+#: ../apps/lnewusers.c:309
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Ошибка создания почтовой очереди для %s.\n"
 
-#: ../apps/lnewusers.c:314
+#: ../apps/lnewusers.c:315
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Ошибка создания учетной записи пользователя %s: %s\n"
@@ -420,17 +422,17 @@ msgstr "Пароли не совпадают, попробуйте еще раз
 msgid "Password change canceled.\n"
 msgstr "Изменение пароля отменено.\n"
 
-#: ../apps/lpasswd.c:186 ../apps/luseradd.c:279 ../apps/luseradd.c:289
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:277 ../apps/luseradd.c:287
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Ошибка установки пароля для пользователя %s: %s.\n"
 
-#: ../apps/lpasswd.c:194
+#: ../apps/lpasswd.c:195
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Ошибка установки пароля для группы %s: %s.\n"
 
-#: ../apps/lpasswd.c:205
+#: ../apps/lpasswd.c:207
 #, c-format
 msgid "Password changed.\n"
 msgstr "Пароль изменен.\n"
@@ -486,17 +488,17 @@ msgstr "Группа c GID %jd не имела имени.\n"
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Группа %s не может быть удалена: %s.\n"
 
-#: ../apps/luserdel.c:145
+#: ../apps/luserdel.c:144
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%s не имеет домашнего каталога.\n"
 
-#: ../apps/luserdel.c:152
+#: ../apps/luserdel.c:151
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "Ошибка удаления %s: %s.\n"
 
-#: ../apps/luserdel.c:159
+#: ../apps/luserdel.c:158
 #, c-format
 msgid "Error removing mail spool.\n"
 msgstr "Ошибка удаления почтовой очереди.\n"
@@ -519,7 +521,7 @@ msgstr "Пользователь %s не может быть разблокир�
 #: ../apps/lusermod.c:221
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Предупреждение: Группа с номером %jd не существуетю.\n"
+msgstr "Предупреждение: Группа с номером %jd не существует.\n"
 
 #: ../apps/lusermod.c:275
 #, c-format
@@ -777,8 +779,7 @@ msgstr "невозможно получить контекст безопасн�
 #: ../lib/util.c:739 ../lib/util.c:766
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"невозможно задать значение контекста безопасности по умолчанию `%s': %s"
+msgstr "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
 #: ../lib/util.c:760
 #, c-format
@@ -860,14 +861,13 @@ msgstr "нет файла shadow -- запрещено"
 #: ../modules/krb5.c:100
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "ошибка подключения к серверу kadm5 службы `%s' в области `%s': %s"
 
 #: ../modules/krb5.c:132 ../modules/krb5.c:198 ../modules/krb5.c:297
 #: ../modules/krb5.c:385 ../modules/krb5.c:437 ../modules/krb5.c:525
 #: ../modules/krb5.c:591
 msgid "error initializing kerberos library"
-msgstr "ошибка инициализации библиотеки kerberos"
+msgstr "ошибка инициализации библиотеки kerberos "
 
 #: ../modules/krb5.c:139 ../modules/krb5.c:219 ../modules/krb5.c:329
 #: ../modules/krb5.c:337 ../modules/krb5.c:405 ../modules/krb5.c:458
@@ -885,12 +885,12 @@ msgstr "структура не имеет атрибутов %s или %s"
 #: ../modules/krb5.c:307
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "сущность не имеет атрибутов %s или %s"
+msgstr "объект не имеет атрибутов %s или %s"
 
 #: ../modules/krb5.c:320
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "сущность была создана без атрибутов %s или %s"
+msgstr "объект был создан без атрибутов %s или %s"
 
 #: ../modules/krb5.c:471 ../modules/krb5.c:559
 #, c-format
@@ -900,7 +900,7 @@ msgstr "ошибка чтения информации для `%s' из kerberos
 #: ../modules/krb5.c:600
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "сущность не имеет атрибута %s"
+msgstr "объект не имеет атрибута %s"
 
 #: ../modules/krb5.c:638
 #, c-format
@@ -909,7 +909,7 @@ msgstr "ошибка установки пароля для `%s'"
 
 #: ../modules/krb5.c:764
 msgid "Kerberos Realm"
-msgstr "Kerberos Realm"
+msgstr "Область Kerberos"
 
 #: ../modules/krb5.c:771
 msgid "Kerberos Admin Principal"
