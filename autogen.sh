@@ -1,6 +1,6 @@
 #!/bin/sh
 set -x -e
-[ -d admin ] || mkdir admin
+mkdir -p admin m4
 gtkdocize --docdir docs/reference
 libtoolize --force
 autopoint

@@ -5,6 +5,8 @@
 	* po/LINGUAS: Update.
 	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
 
+	* autogen.sh: Fix (make archive).
+
 	* apps/luserdel.c (main): Fix comment.
 
 2009-06-23  Miloslav Trmač  <mitr@redhat.com>
