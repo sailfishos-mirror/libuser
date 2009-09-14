@@ -1,3 +1,9 @@
+0.56.11
+* Remove user's mail spool as well in (luserdel -r).
+* Refuse GID and UID values (id_t)-1.
+* Verify name validity when renaming an entity.
+* Fix flushing of nscd cache by luser* utilities.
+
 0.56.10
 * Prohibit entity values that contain ':' in the files and shadow module
   (except for the last field on the line).

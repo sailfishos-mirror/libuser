@@ -1,3 +1,12 @@
+2009-09-14  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Release version 0.56.11.
+	* NEWS: Update.
+	* po/LINGUAS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
+	* apps/luserdel.c (main): Fix comment.
+
 2009-06-23  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lgroupmod.c (main): Remove unnecessary nscd refreshes.  Refresh
