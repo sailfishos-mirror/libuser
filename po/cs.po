@@ -326,7 +326,7 @@ msgstr "Skupinu %s nelze změnit: %s\n"
 #: apps/lid.c:44
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Chyba při odstraňování %s: %s\n"
+msgstr "Chyba při vyhledávání %s: %s\n"
 
 #: apps/lid.c:129
 #, c-format
