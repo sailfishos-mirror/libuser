@@ -1,3 +1,9 @@
+2009-10-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lid.c (do_id): Report error when the name does not exist (as
+	opposed to the case when a group exists but does not have any members).
+	Caller updated.
+
 2009-10-02  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release version 0.56.12.

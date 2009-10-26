@@ -1,17 +1,4 @@
 <SECTION>
-<FILE>error</FILE>
-lu_status_t
-lu_error_t
-LU_ERROR_CHECK
-lu_error_new
-lu_strerror
-lu_error_is_success
-lu_error_is_warning
-lu_error_is_error
-lu_error_free
-</SECTION>
-
-<SECTION>
 <FILE>entity</FILE>
 lu_ent_t
 LU_USERNAME
@@ -78,6 +65,19 @@ lu_cfg_read_keys
 free_value
 lu_prompt_console
 lu_prompt_console_quiet
+</SECTION>
+
+<SECTION>
+<FILE>error</FILE>
+lu_status_t
+lu_error_t
+LU_ERROR_CHECK
+lu_error_new
+lu_strerror
+lu_error_is_success
+lu_error_is_warning
+lu_error_is_error
+lu_error_free
 </SECTION>
 
 <SECTION>

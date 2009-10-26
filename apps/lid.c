@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2001, 2002, 2004, 2006 Red Hat, Inc.
+ * Copyright (C) 2001, 2002, 2004, 2006, 2009 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -30,15 +30,31 @@
 
 static void
 do_id (struct lu_context *ctx, const char *name, int nameonly,
+       gboolean (*lookup_name) (lu_context_t *, const char *, struct lu_ent *,
+				lu_error_t **),
        GValueArray *(*enumerate) (lu_context_t *, const char *, lu_error_t **),
-       gboolean (*lookup) (lu_context_t *, const char *, struct lu_ent *,
-			   lu_error_t **),
+       gboolean (*lookup_member) (lu_context_t *, const char *, struct lu_ent *,
+				  lu_error_t **),
        const char *id_attribute, const char *id_descr)
 {
 	GValueArray *values;
 	struct lu_error *error;
+	struct lu_ent *ent;
 
 	error = NULL;
+
+	ent = lu_ent_new();
+	if (lookup_name(ctx, name, ent, &error) == FALSE) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error looking up %s: %s\n"), name,
+				lu_strerror(error));
+			lu_error_free(&error);
+		} else
+			fprintf(stderr, _("%s does not exist\n"), name);
+		exit(1);
+	}
+	lu_ent_clear_all(ent);
+
 	values = enumerate(ctx, name, &error);
 	if (error != NULL) {
 		fprintf(stderr, _("Error looking up %s: %s\n"), name,
@@ -47,17 +63,16 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 		exit(1);
 	}
 	if (values != NULL) {
-		struct lu_ent *ent;
 		size_t i;
 
-		ent = lu_ent_new();
 		for (i = 0; i < values->n_values; i++) {
 			GValue *value;
 			const char *found;
 
 			value = g_value_array_get_nth(values, i);
 			found = g_value_get_string(value);
-			if (!nameonly && lookup(ctx, found, ent, &error)) {
+			if (!nameonly
+			    && lookup_member(ctx, found, ent, &error)) {
 				GValueArray *attrs;
 
 				attrs = lu_ent_get(ent, id_attribute);
@@ -78,9 +93,9 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 			}
 			lu_ent_clear_all(ent);
 		}
-		lu_ent_free(ent);
 		g_value_array_free(values);
 	}
+	lu_ent_free(ent);
 }
 
 int
@@ -163,11 +178,13 @@ main(int argc, const char **argv)
 	}
 
 	if (groupflag)
-		do_id(ctx, name, nameonly, lu_users_enumerate_by_group,
-		      lu_user_lookup_name, LU_UIDNUMBER, "uid");
+		do_id(ctx, name, nameonly, lu_group_lookup_name,
+		      lu_users_enumerate_by_group, lu_user_lookup_name,
+		      LU_UIDNUMBER, "uid");
 	else
-		do_id(ctx, name, nameonly, lu_groups_enumerate_by_user,
-		      lu_group_lookup_name, LU_GIDNUMBER, "gid");
+		do_id(ctx, name, nameonly, lu_user_lookup_name,
+		      lu_groups_enumerate_by_user, lu_group_lookup_name,
+		      LU_GIDNUMBER, "gid");
 
 	lu_end(ctx);
 
