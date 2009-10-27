@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-16 21:03+0000\n"
-"PO-Revision-Date: 2009-10-16 01:30+0200\n"
+"POT-Creation-Date: 2009-10-26 23:47+0000\n"
+"PO-Revision-Date: 2009-10-27 02:45+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <fedora-trans-pl@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -100,14 +100,14 @@ msgstr "Nieznany upoważniony użytkownik.\n"
 msgid "User mismatch.\n"
 msgstr "Użytkownik nie zgadza się.\n"
 
-#: ../apps/lchage.c:111 ../apps/lid.c:113 ../apps/lpasswd.c:66
+#: ../apps/lchage.c:111 ../apps/lid.c:128 ../apps/lpasswd.c:66
 #: ../apps/luseradd.c:88 ../apps/luserdel.c:61 ../apps/lusermod.c:86
 msgid "[OPTION...] user"
 msgstr "[OPCJA...] użytkownik"
 
 #: ../apps/lchage.c:114 ../apps/lchfn.c:72 ../apps/lchsh.c:58
 #: ../apps/lgroupadd.c:65 ../apps/lgroupdel.c:56 ../apps/lgroupmod.c:84
-#: ../apps/lid.c:116 ../apps/lnewusers.c:66 ../apps/lpasswd.c:69
+#: ../apps/lid.c:131 ../apps/lnewusers.c:66 ../apps/lpasswd.c:69
 #: ../apps/luseradd.c:91 ../apps/luserdel.c:64 ../apps/lusermod.c:89
 #, c-format
 msgid "Error parsing arguments: %s.\n"
@@ -121,7 +121,7 @@ msgstr "Nie podano nazwy użytkownika.\n"
 
 #: ../apps/lchage.c:133 ../apps/lchfn.c:106 ../apps/lchsh.c:92
 #: ../apps/lgroupadd.c:100 ../apps/lgroupdel.c:75 ../apps/lgroupmod.c:116
-#: ../apps/lid.c:160 ../apps/lnewusers.c:77 ../apps/lpasswd.c:95
+#: ../apps/lid.c:175 ../apps/lnewusers.c:77 ../apps/lpasswd.c:95
 #: ../apps/luseradd.c:129 ../apps/luserdel.c:81 ../apps/lusermod.c:141
 #: ../samples/enum.c:56 ../samples/testuser.c:71
 #, c-format
@@ -198,7 +198,7 @@ msgstr "Wystąpił błąd podczas próby modyfikacji okresu ważności dla %s: %
 msgid "[OPTION...] [user]"
 msgstr "[OPCJA...] [użytkownik]"
 
-#: ../apps/lchfn.c:88 ../apps/lchsh.c:74 ../apps/lid.c:147
+#: ../apps/lchfn.c:88 ../apps/lchsh.c:74 ../apps/lid.c:162
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Nie podano nazwy użytkownika dla UID %d.\n"
@@ -327,22 +327,27 @@ msgstr "Grupa %s nie może zostać odblokowana: %s\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "Grupa %s nie może zostać zmodyfikowana: %s\n"
 
-#: ../apps/lid.c:44
+#: ../apps/lid.c:49 ../apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "Błąd podczas wyszukiwania %s: %s\n"
 
-#: ../apps/lid.c:129
+#: ../apps/lid.c:53
+#, c-format
+msgid "%s does not exist\n"
+msgstr "%s nie istnieje\n"
+
+#: ../apps/lid.c:144
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Nie podano nazwy grupy, używanie %s.\n"
 
-#: ../apps/lid.c:133
+#: ../apps/lid.c:148
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Nie podano nazwy grupy, brak nazwy dla GID %d.\n"
 
-#: ../apps/lid.c:143
+#: ../apps/lid.c:158
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Nie podano nazwy użytkownika, używanie %s.\n"
