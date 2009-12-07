@@ -96,7 +96,7 @@ lu_common_user_add_check(struct lu_module *module, struct lu_ent *ent,
 	if (lu_ent_get(ent, LU_INVALID_HOMEDIRECTORY) != NULL) {
 		if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
 			lu_error_new(error, lu_error_name_bad,
-				     _("refusing to use dangerous home "
+				     _("Refusing to use dangerous home "
 				       "directory by default"));
 			return FALSE;
 		}

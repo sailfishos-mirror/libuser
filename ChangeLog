@@ -1,5 +1,7 @@
 2009-12-07  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/common.c (lu_common_user_add_check): Capitalize error message.
+
 	* lib/user_private.h (lu_common_user_add_check): New declaration.
 	* lib/common.c (LU_INVALID_HOMEDIRECTORY): New definition.
 	(lu_common_user_default): Don't set home directory to /home/. or
