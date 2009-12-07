@@ -1,3 +1,16 @@
+2009-12-07  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user_private.h (lu_common_user_add_check): New declaration.
+	* lib/common.c (LU_INVALID_HOMEDIRECTORY): New definition.
+	(lu_common_user_default): Don't set home directory to /home/. or
+	/home/.. by default.
+	(lu_common_user_add_check): New function.
+	* modules/files.c (lu_files_user_add)
+	* modules/ldap.c (lu_ldap_user_add): Call lu_common_user_add_check ().
+	* po/POTFILES.in: Add lib/common.c.
+	* tests/files_test.py (Tests.testUserAdd7)
+	* tests/ldap_test.py (Tests.testUserAdd5): New tests.
+
 2009-10-26  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lid.c (do_id): Report error when the name does not exist (as

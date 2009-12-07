@@ -11,6 +11,7 @@ apps/lpasswd.c
 apps/luseradd.c
 apps/luserdel.c
 apps/lusermod.c
+lib/common.c
 lib/config.c
 lib/error.c
 lib/misc.c

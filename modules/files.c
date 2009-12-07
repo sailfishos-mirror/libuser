@@ -866,6 +866,8 @@ static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
+	if (lu_common_user_add_check(module, ent, error) == FALSE)
+		return FALSE;
 	return generic_add(module, suffix_passwd, format_passwd,
 			   G_N_ELEMENTS(format_passwd), ent, error);
 }

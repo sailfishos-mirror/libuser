@@ -233,6 +233,27 @@ class Tests(unittest.TestCase):
         e = self.a.lookupUserByName('user_6_6' + libuser.LOGINSHELL)
         self.assert_(':' in e[libuser.LOGINSHELL][0])
 
+    def testUserAdd7(self):
+        # Let the user specify dangerous/dubious home directory paths explicitly
+        for name in ('.', '..'):
+            e = self.a.initUser(name)
+            e[libuser.HOMEDIRECTORY] = '/home/' + name
+            self.a.addUser(e, False, False)
+            del e
+            e = self.a.lookupUserByName(name)
+            self.assertEqual(e[libuser.HOMEDIRECTORY], ['/home/' + name])
+            self.a.deleteUser(e, False, False)
+        e = self.a.initUser('user6_7')
+        e[libuser.HOMEDIRECTORY] = '/home/..'
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user6_7')
+        self.assertEqual(e[libuser.HOMEDIRECTORY], ['/home/..'])
+        # ... but never create such home directory paths by default
+        for name in ('.', '..'):
+            e = self.a.initUser(name)
+            self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')

@@ -286,6 +286,10 @@ struct lu_ent *lu_ent_new_typed(enum lu_entity_type entity_type);
 gboolean lu_common_user_default(struct lu_module *module, const char *name,
 				gboolean is_system, struct lu_ent *ent,
 				struct lu_error **error);
+/* If a module calls lu_common_user_default, it must call the following
+   function in user_add(). */
+gboolean lu_common_user_add_check(struct lu_module *module, struct lu_ent *ent,
+				  struct lu_error **error);
 gboolean lu_common_group_default(struct lu_module *module, const char *name,
 				 gboolean is_system, struct lu_ent *ent,
 				 struct lu_error **error);

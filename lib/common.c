@@ -21,6 +21,10 @@
 
 #include "user_private.h"
 
+/* An internal attribute used only in lu_common_user_default() and
+   lu_common_user_add_check() */
+#define LU_INVALID_HOMEDIRECTORY "__pw_dir_invalid!*/\\:"
+
 /* Populate the fields of a user structure with non-name, non-ID data. */
 gboolean
 lu_common_user_default(struct lu_module *module,
@@ -53,20 +57,52 @@ lu_common_user_default(struct lu_module *module,
 		g_value_unset(&value);
 	}
 	if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
-		char *tmp;
+		if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0) {
+			g_value_init(&value, G_TYPE_LONG);
+			g_value_set_long(&value, 1);
+			lu_ent_add(ent, LU_INVALID_HOMEDIRECTORY, &value);
+			g_value_unset(&value);
+			/* Don't set the default home directory, so that
+			   lu_common_user_add_check() can recognize and
+			   explicitly set home directory that ends with "." or
+			   "..". */
+		} else {
+			char *tmp;
 
-		g_value_init(&value, G_TYPE_STRING);
-		tmp = g_strdup_printf("/home/%s", name);
-		g_value_set_string(&value, tmp);
-		g_free(tmp);
-		lu_ent_add(ent, LU_HOMEDIRECTORY, &value);
-		g_value_unset(&value);
+			g_value_init(&value, G_TYPE_STRING);
+			tmp = g_strdup_printf("/home/%s", name);
+			g_value_set_string(&value, tmp);
+			g_free(tmp);
+			lu_ent_add(ent, LU_HOMEDIRECTORY, &value);
+			g_value_unset(&value);
+		}
 	}
 	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL) {
 		g_value_init(&value, G_TYPE_STRING);
 		g_value_set_string(&value, LU_COMMON_DEFAULT_SHELL);
 		lu_ent_add(ent, LU_LOGINSHELL, &value);
 		g_value_unset(&value);
+	}
+	return TRUE;
+}
+
+/* If a module calls lu_common_user_default, it must call the following
+   function in user_add(). */
+gboolean
+lu_common_user_add_check(struct lu_module *module, struct lu_ent *ent,
+			 struct lu_error **error)
+{
+	(void)module;
+	if (lu_ent_get(ent, LU_INVALID_HOMEDIRECTORY) != NULL) {
+		if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
+			lu_error_new(error, lu_error_name_bad,
+				     _("refusing to use dangerous home "
+				       "directory by default"));
+			return FALSE;
+		}
+		/* LU_INVALID_HOMEDIRECTORY is purely internal to this file,
+		   make sure it won't get saved anywhere. */
+		lu_ent_clear(ent, LU_INVALID_HOMEDIRECTORY);
 	}
 	return TRUE;
 }
