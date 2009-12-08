@@ -1,3 +1,25 @@
+2009-12-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/lnewusers.c (main): Refuse using dubious home directories unless
+	specified explicitly.
+	* tests/utils_test: Test handling of dubious default home directories in
+	lnewusers.
+
+	* lib/internal.h (LU_DUBIOUS_HOMEDIRECTORY): New definition.
+	* lib/user.c (lu_user_add): Refuse to create an user with a dubious home
+	directory unless specified explicitly.
+	(replace_all): New parameter "key".  Recognize dubious home directory
+	value created by the substitution.  Caller updated.
+	* lib/user_private.h (lu_common_user_add_check): Remove declaration.
+	* lib/common.c (LU_INVALID_HOMEDIRECTORY): Remove.
+	(lu_common_user_default): Set LU_DUBIOUS_HOMEDIRECTORY instead of
+	LU_INVALID_HOMEDIRECTORY, and only if LU_DUBIOUS_HOMEDIRECTORY is not
+	already set.
+	(lu_common_user_add_check): Remove.
+	* modules/files.c (lu_files_user_add)
+	* modules/ldap.c (lu_ldap_user_add): Remove call to
+	lu_common_user_add_check ().
+
 2009-12-07  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/common.c (lu_common_user_add_check): Capitalize error message.

@@ -1268,11 +1268,28 @@ gboolean
 lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	    struct lu_error ** error)
 {
+	GValueArray *array;
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
 
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
+	array = lu_ent_get(ent, LU_DUBIOUS_HOMEDIRECTORY);
+	if (array != NULL) {
+		if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
+			GValue *value;
+
+			value = g_value_array_get_nth(array, 0);
+			lu_error_new(error, lu_error_name_bad,
+				     _("Refusing to use dangerous home "
+				       "directory `%s' by default"),
+				     g_value_get_string(value));
+			return FALSE;
+		}
+		/* LU_DUBIOUS_HOMEDIRECTORY is purely internal, make sure it
+		   won't get saved anywhere. */
+		lu_ent_clear(ent, LU_DUBIOUS_HOMEDIRECTORY);
+	}
 
 	if (lu_dispatch(context, user_add_prep, NULL, LU_VALUE_INVALID_ID,
 			ent, NULL, error)) {
@@ -1705,9 +1722,11 @@ lu_get_first_unused_id(struct lu_context *ctx,
 	return id;
 }
 
-/* Replace all instances of OLD in g_malloc()'ed STRING by NEW. */
+/* Replace all instances of OLD in g_malloc()'ed STRING by NEW.
+   Change LU_HOMEDIRECTORY *KEY to LU_DUBIOUS_HOMEDIRECTORY if the substitution
+   results in a new "." or ".." directory component. */
 static char *
-replace_all(char *string, const char *old, const char *new)
+replace_all(char *string, const char *old, const char *new, const char **key)
 {
 	char *pos;
 
@@ -1717,13 +1736,26 @@ replace_all(char *string, const char *old, const char *new)
 
 		old_len = strlen(old);
 		do {
-			char *p, *prefix;
+			char *new_string, *prefix, *p;
 
 			prefix = g_strndup(string, pos - string);
-			p = g_strconcat(prefix, new, pos + old_len, NULL);
+			new_string = g_strconcat(prefix, new, pos + old_len,
+						 NULL);
+			p = new_string + (pos - string);
 			g_free(prefix);
 			g_free(string);
-			string = p;
+			string = new_string;
+			if (strcmp(*key, LU_HOMEDIRECTORY) == 0) {
+				while (p > new_string && p[-1] != '/')
+					p--;
+				if (*p == '.'
+				    && (p[1] == '\0' || p[1] == '/'
+					|| (p[1] == '.'
+					    && (p[2] == '\0' || p[2] == '/'))))
+					/* A new "." or ".." pathname component
+					   appeared. */
+					*key = LU_DUBIOUS_HOMEDIRECTORY;
+			}
 			pos = strstr(string, old);
 		} while (pos != NULL);
 	}
@@ -1900,12 +1932,12 @@ lu_default_int(struct lu_context *context, const char *name,
 		g_assert(val != NULL);
 		tmp = g_strdup(val);
 
-		tmp = replace_all(tmp, "%n", name);
+		tmp = replace_all(tmp, "%n", name, &key);
 		sprintf(replacement, "%ld", lu_util_shadow_current_date());
-		tmp = replace_all(tmp, "%d", replacement);
+		tmp = replace_all(tmp, "%d", replacement, &key);
 		if (id != 0 && id != (id_t)-1) {
 			sprintf(replacement, "%jd", (intmax_t)id);
-			tmp = replace_all(tmp, "%u", replacement);
+			tmp = replace_all(tmp, "%u", replacement, &key);
 		}
 
 		ok = lu_value_init_set_attr_from_string(&value, key, tmp,

@@ -129,9 +129,13 @@ user6_2:password:$(expr $LARGE_ID + 620)::::
 Invalid line
 user6_3:password:$(expr $LARGE_ID + 630):$(expr $LARGE_ID + 630):::
 user6_4:password:$(expr $LARGE_ID + 640):group6_4:::
+.:password:$(expr $LARGE_ID + 650):$(expr $LARGE_ID + 650):::
+..:password:$(expr $LARGE_ID + 660):$(expr $LARGE_ID + 660):::
 EOF
 diff - "$workdir"/lnewusers_output <<\EOF
 Error creating account for `Invalid line': line improperly formatted.
+Refusing to use dangerous home directory `/home/.' for . by default
+Refusing to use dangerous home directory `/home/..' for .. by default
 EOF
 
 # lpasswd: untested (requires system account)
@@ -183,14 +187,16 @@ EOF
 #  untested: -m, -P
 
 sed 's/^group6_4:x:[0123456789]*:$/group6_4:x:GID:/' < "$workdir"/files/group \
-    > "$workdir"/group
+    | grep -v '^\.\.\?:' > "$workdir"/group
 diff -u "$srcdir"/utils_group "$workdir"/group
-diff -u "$srcdir"/utils_gshadow "$workdir"/files/gshadow
+grep -v '^\.\.\?:' < "$workdir"/files/gshadow > "$workdir"/gshadow
+diff -u "$srcdir"/utils_gshadow "$workdir"/gshadow
 sed 's/^\(user6_4:x:[^:]*\):[0123456789]*:\(.*\)$/\1:GID:\2/' \
     < "$workdir"/files/passwd > "$workdir"/passwd
 diff -u "$srcdir"/utils_passwd "$workdir"/passwd
 sed -e 's/^\([^:]*:[^:]*\):[0123456789]\{5,\}:\(.*\)$/\1:DATE:\2/' \
     -e 's/^\([^:]*\):\$1\$[^:]*:\(.*\)$/\1:HASH:\2/' \
-    < "$workdir"/files/shadow > "$workdir"/shadow
+    < "$workdir"/files/shadow \
+    | grep -v '^\.\.\?:' > "$workdir"/shadow
 diff -u "$srcdir"/utils_shadow "$workdir"/shadow
 )

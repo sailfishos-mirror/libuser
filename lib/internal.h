@@ -28,6 +28,12 @@ struct lu_ent;
 struct lu_error;
 struct lu_context;
 
+/* An internal attribute checked (and removed) only in lu_user_add(), contains
+   a default LU_HOMEDIRECTORY value that we refuse to use.  In that case,
+   LU_HOMEDIRECTORY is not set by default, and exists only if the user has
+   explicitly defined it. */
+#define LU_DUBIOUS_HOMEDIRECTORY "__pw_dir_invalid!*/\\:"
+
 /* Configuration initialization and shutdown. */
 gboolean lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	G_GNUC_INTERNAL;

@@ -2000,8 +2000,6 @@ lu_ldap_user_add(struct lu_module *module, struct lu_ent *ent,
 	struct lu_ldap_context *ctx;
 
 	LU_ERROR_CHECK(error);
-	if (lu_common_user_add_check(module, ent, error) == FALSE)
-		return FALSE;
 	ctx = module->module_context;
 	return lu_ldap_set(module, lu_user, 1, ent, ctx->user_branch, error);
 }

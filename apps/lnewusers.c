@@ -95,7 +95,7 @@ main(int argc, const char **argv)
 	groupEnt = lu_ent_new();
 
 	while (fgets(buf, sizeof(buf), fp)) {
-		int creategroup;
+		gboolean creategroup, dubious_homedir;
 		char **fields, *homedir, *gidstring, *p;
 		intmax_t imax;
 		uid_t uid;
@@ -249,6 +249,7 @@ main(int argc, const char **argv)
 			lu_ent_clear(ent, LU_GECOS);
 			lu_ent_add(ent, LU_GECOS, &val);
 		}
+		dubious_homedir = 0;
 		if (strlen(fields[5]) > 0) {
 			homedir = g_strdup(fields[5]);
 			g_value_set_string(&val, homedir);
@@ -260,9 +261,13 @@ main(int argc, const char **argv)
 				value = g_value_array_get_nth(values,
 							      0);
 				homedir = g_strdup(g_value_get_string(value));
-			} else
+			} else {
 				homedir = g_strconcat("/home/", fields[0],
 						      (const gchar *)NULL);
+				if (strcmp(fields[0], ".") == 0
+				    || strcmp(fields[0], "..") == 0)
+					dubious_homedir = 1;
+			}
 		}
 		if (strlen(fields[6]) > 0) {
 			g_value_set_string(&val, fields[6]);
@@ -273,7 +278,11 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 
 		/* Now try to add the user's account. */
-		if (lu_user_add(ctx, ent, &error)) {
+		if (dubious_homedir)
+			fprintf(stderr,
+				_("Refusing to use dangerous home directory `%s' "
+				  "for %s by default\n"), homedir, fields[0]);
+		else if (lu_user_add(ctx, ent, &error)) {
 			if (!lu_user_setpass(ctx, ent, fields[1], FALSE,
 					     &error)) {
 				fprintf(stderr,
