@@ -160,6 +160,14 @@ class Tests(unittest.TestCase):
             e = self.a.initUser(name)
             self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
 
+    def testUserAdd6(self):
+        # Adding duplicate entries
+        e = self.a.initUser('user6_6')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.initUser('user6_6')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')
@@ -257,6 +265,18 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user7_4')
         self.assert_(e)
+
+    def testUserMod5(self):
+        # Renaming to create duplicate entries
+        e = self.a.initUser('user7_5')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.initUser('user7_6')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_6')
+        e[libuser.USERNAME] = 'user7_5'
+        self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
 
     def testUserDel(self):
         e = self.a.initUser('user8_1')
@@ -614,6 +634,14 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPNAME], ['group21_3'])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2130])
 
+    def testGroupAdd4(self):
+        # Adding duplicate entries
+        e = self.a.initGroup('group21_4')
+        self.a.addGroup(e)
+        del e
+        e = self.a.initGroup('group21_4')
+        self.assertRaises(RuntimeError, self.a.addGroup, e)
+
     def testGroupMod1(self):
         # A minimal case
         e = self.a.initGroup('group22_1')
@@ -668,6 +696,18 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group22_3')
         self.assert_(e)
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2230])
+
+    def testGroupMod4(self):
+        # Renaming to create duplicate entries
+        e = self.a.initGroup('group22_4')
+        self.a.addGroup(e)
+        del e
+        e = self.a.initGroup('group22_5')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group22_5')
+        e[libuser.GROUPNAME] = 'group22_4'
+        self.assertRaises(RuntimeError, self.a.modifyGroup, e)
 
     def testGroupDel(self):
         e = self.a.initGroup('group23_1')
@@ -944,8 +984,8 @@ class Tests(unittest.TestCase):
         self.assertEqual(v, [['group31_1'], ['group31_2']])
 
     def tearDown(self):
-        del self.a        
-        
+        del self.a
+
 
 if __name__ == '__main__':
     unittest.main()

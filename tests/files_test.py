@@ -254,6 +254,14 @@ class Tests(unittest.TestCase):
             e = self.a.initUser(name)
             self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
 
+    def testUserAdd8(self):
+        # Adding duplicate entries
+        e = self.a.initUser('user6_8')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.initUser('user6_8')
+        self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')
@@ -400,6 +408,18 @@ class Tests(unittest.TestCase):
         e[libuser.USERNAME] = 'very_long_name_123456789_123456789_123456789'
         self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
         del e
+
+    def testUserMod7(self):
+        # Renaming to create duplicate entries
+        e = self.a.initUser('user7_7')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.initUser('user7_8')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user7_8')
+        e[libuser.USERNAME] = 'user7_7'
+        self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
 
     def testUserDel(self):
         e = self.a.initUser('user8_1')
@@ -809,6 +829,14 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group21_4' + libuser.MEMBERNAME)
         self.assertEqual(e[libuser.MEMBERNAME], ['group21_4:member'])
 
+    def testGroupAdd5(self):
+        # Adding duplicate entries
+        e = self.a.initGroup('group21_5')
+        self.a.addGroup(e)
+        del e
+        e = self.a.initGroup('group21_5')
+        self.assertRaises(RuntimeError, self.a.addGroup, e)
+
     def testGroupMod1(self):
         # A minimal case
         e = self.a.initGroup('group22_1')
@@ -909,6 +937,18 @@ class Tests(unittest.TestCase):
         e[libuser.GROUPNAME] = 'very_long_name_123456789_123456789_123456789'
         self.assertRaises(RuntimeError, self.a.modifyGroup, e)
         del e
+
+    def testGroupMod6(self):
+        # Renaming to create duplicate entries
+        e = self.a.initGroup('group22_6')
+        self.a.addGroup(e)
+        del e
+        e = self.a.initGroup('group22_7')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group22_7')
+        e[libuser.GROUPNAME] = 'group22_6'
+        self.assertRaises(RuntimeError, self.a.modifyGroup, e)
 
     def testGroupDel(self):
         e = self.a.initGroup('group23_1')

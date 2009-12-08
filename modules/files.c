@@ -697,6 +697,33 @@ err:
 	return NULL;
 }
 
+/* Does NUL-terminated CONTENTS contains an entry with the same entry name used
+   in LINE? */
+static gboolean
+entry_name_conflicts(const char *contents, const char *line)
+{
+	size_t prefix_len;
+	char *prefix, *fragment;
+	gboolean res;
+
+	if (strchr(line, ':') != NULL)
+		prefix_len = strchr(line, ':') - line + 1;
+	else if (strchr(line, '\n') != NULL)
+		prefix_len = strchr(line, '\n') - line + 1;
+	else
+		prefix_len = strlen(line);
+	if (strncmp(contents, line, prefix_len) == 0)
+		return TRUE;
+
+	prefix = g_strndup(line, prefix_len);
+	fragment = g_strconcat("\n", prefix, NULL);
+	g_free(prefix);
+
+	res = strstr(contents, fragment) != NULL;
+	g_free(fragment);
+	return res;
+}
+
 /* Add an entity to a given flat file, using a given formatting functin to
  * construct the proper text data. */
 static gboolean
@@ -707,7 +734,6 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	lu_security_context_t fscreate;
 	const char *dir;
 	char *key, *line, *filename, *contents;
-	char *fragment1, *fragment2;
 	int fd;
 	ssize_t r;
 	gpointer lock;
@@ -760,17 +786,6 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		goto err_lock;
 	}
 
-	/* We sanity-check here to make sure that the entity isn't already
-	 * listed in the file by name by searching for the initial part of
-	 * the line. */
-	if (strchr(line, ':') != NULL)
-		fragment1 = g_strndup(line, strchr(line, ':') - line + 1);
-	else if (strchr(line, '\n') != NULL)
-		fragment1 = g_strndup(line, strchr(line, '\n') - line + 1);
-	else
-		fragment1 = g_strdup(line);
-	fragment2 = g_strconcat("\n", fragment1, NULL);
-
 	/* Read the entire file in.  There's some room for improvement here,
 	 * but at least we still have the lock, so it's not going to get
 	 * funky on us. */
@@ -782,16 +797,9 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		goto err_contents;
 	}
 
-	/* Check if the beginning of the file is the same as the beginning
-	 * of the entry. */
-	if (strncmp(contents, fragment1, strlen(fragment1)) == 0) {
-		lu_error_new(error, lu_error_generic,
-			     _("entry already present in file"));
-		goto err_contents;
-	} else
-	/* If not, search for a newline followed by the beginning of
-	 * the entry. */
-	if (strstr(contents, fragment2) != NULL) {
+	/* Sanity-check to make sure that the entity isn't already listed in
+	   the file. */
+	if (entry_name_conflicts(contents, line)) {
 		lu_error_new(error, lu_error_generic,
 			     _("entry already present in file"));
 		goto err_contents;
@@ -835,8 +843,6 @@ generic_add(struct lu_module *module, const char *file_suffix,
 
 err_contents:
 	g_free(contents);
-	g_free(fragment2);
-	g_free(fragment1);
 err_lock:
 	lu_util_lock_free(lock);
 err_fd:
@@ -957,7 +963,7 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 {
 	lu_security_context_t fscreate;
 	char *filename, *key, *new_line, *contents, *line, *rest;
-	char *fragment1, *fragment2;
+	char *current_name, *fragment;
 	int fd;
 	gpointer lock;
 	const char *dir, *name_attribute;
@@ -1034,18 +1040,28 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	}
 	contents[st.st_size] = '\0';
 
-	fragment1 = lu_value_strdup(g_value_array_get_nth(names, 0));
-	fragment2 = g_strconcat("\n", fragment1, ":", (const gchar *)NULL);
-	len = strlen(fragment1);
-	if (strncmp(contents, fragment1, len) == 0 && contents[len] == ':')
+	current_name = lu_value_strdup(g_value_array_get_nth(names, 0));
+	fragment = g_strconcat("\n", current_name, ":", (const gchar *)NULL);
+	len = strlen(current_name);
+	if (strncmp(contents, current_name, len) == 0 && contents[len] == ':')
 		line = contents;
 	else {
-		line = strstr(contents, fragment2);
+		line = strstr(contents, fragment);
 		if (line != NULL)
 			line++;
 	}
-	g_free(fragment1);
-	g_free(fragment2);
+	g_free(fragment);
+
+	if ((strncmp(new_line, current_name, len) != 0 || new_line[len] != ':')
+	    && entry_name_conflicts(contents, new_line)) {
+		g_free(current_name);
+		lu_error_new(error, lu_error_generic,
+			     _("entry with conflicting name already present "
+			       "in file"));
+		goto err_contents;
+	}
+	g_free(current_name);
+
 	if (line == NULL) {
 		lu_error_new(error, lu_error_search, NULL);
 		goto err_contents;

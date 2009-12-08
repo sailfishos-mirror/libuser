@@ -1,5 +1,12 @@
 2009-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/files.c (entry_name_conflicts): Split from generic_add ().
+	(generic_mod): Refuse to rename to an existing name.
+	* tests/files_test.py (Tests.testUserAdd8, Tests.testUserMod7)
+	(Tests.testGroupAdd5, Tests.testGroupMod6)
+	* tests/ldap_test.py (Tests.testUserAdd6, Tests.testUserMod5)
+	(Tests.testGroupAdd4, Tests.testGroupMod4): New test cases.
+
 	* apps/lnewusers.c (main): Refuse using dubious home directories unless
 	specified explicitly.
 	* tests/utils_test: Test handling of dubious default home directories in
