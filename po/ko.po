@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-07 20:17+0000\n"
-"PO-Revision-Date: 2009-12-08 10:16+1000\n"
+"POT-Creation-Date: 2009-12-08 21:11+0000\n"
+"PO-Revision-Date: 2009-12-09 10:49+1000\n"
 "Last-Translator: Eunju Kim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -389,22 +389,27 @@ msgstr "UID 0를 가진 계정을 생성하기를 거부합니다.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s'에 GID %jd를 사용하여 그룹을 생성하는데 오류 발생: : %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "%s에 대해 기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s의 홈 디렉토리를 생성하는 도중 오류가 발생했습니다: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s의 메일 스풀을 생성하는 도중 오류 발생.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s의 사용자 계정을 생성하는 도중 오류 발생: %s.\n"
@@ -766,7 +771,12 @@ msgstr "사용자는 이름과 UID가 없습니다"
 msgid "group has neither a name nor a GID"
 msgstr "그룹은 이름과 GID가 없습니다"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다  "
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s 란의 기본값이 잘못됨: %s"
