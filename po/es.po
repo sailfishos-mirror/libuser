@@ -1,8 +1,5 @@
-# translation of libuser.tip.es.po to Spanish
-# translation of es.po to
-# translation of es.po to
-# Copyright (C) 2001,2003, 2004, 2005, 2008 Free Software Foundation, Inc.
-#
+# Fedora Spanish translation of libuser.tip
+# This file is distributed under the same license as the libuser.tip package.
 #
 # Núria Soriano <nsoriano@redhat.es>, 2001.
 # Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
@@ -11,13 +8,14 @@
 # José Julio Cidón Peón <josejulio@cidon-mulliez.com>, 2005.
 # Manuel Ospina <mospina@redhat.com>, 2005.
 # Domingo Becker <domingobecker@gmail.com>, 2008.
+# Héctor Daniel Cabrera <logan@fedoraproject.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.es\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-27 23:38+0000\n"
-"PO-Revision-Date: 2009-10-27 20:48-0300\n"
-"Last-Translator: Domingo Becker <domingobecker@gmail.com>\n"
+"POT-Creation-Date: 2009-12-09 08:41+0000\n"
+"PO-Revision-Date: 2009-12-09 10:54-0300\n"
+"Last-Translator: Héctor Daniel Cabrera <logan@fedoraproject.org>\n"
 "Language-Team: Fedora Spanish <fedora-trans-es@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,6 +23,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Spanish\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: ARGENTINA\n"
 
 #: ../apps/apputil.c:109
 #, c-format
@@ -553,30 +552,35 @@ msgstr "Rechazando la creación de cuenta con UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Error en la creación de un grupo para  `%s' con GID  %jd: %s\n"
 
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "Por defecto, para %s se niega la utilización del directorio principal peligroso `%s'\n"
+
 # modules/krb5.c:549
 # modules/krb5.c:547
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Error en la configuración de la contraseña para %s: %s\n"
 
 # apps/lusermod.c:173
 # apps/lusermod.c:173
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Error creando directorio principal para %s: %s\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Error al crear un spool de correo para  %s.\n"
 
 # apps/luseradd.c:194
 # apps/luseradd.c:194
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Error creando cuenta de usuario para %s: %s\n"
@@ -1035,7 +1039,12 @@ msgstr "el usuario no tiene nombre ni un UID"
 msgid "group has neither a name nor a GID"
 msgstr "el grupo no tiene un nombre ni un GID"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "Por defecto, se niega la utilización del directorio principal peligroso `%s'"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Valor por defecto inválido en el campo %s: %s"
