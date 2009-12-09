@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-11-13 03:28+0000\n"
-"PO-Revision-Date: 2009-11-13 13:09+0530\n"
+"POT-Creation-Date: 2009-12-09 08:41+0000\n"
+"PO-Revision-Date: 2009-12-09 19:19+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
 "Language-Team: Marathi <fedora-trans-mr@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -385,22 +385,27 @@ msgstr "UID 0 सह खाती निर्माण करण्यास �
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' करीता GID %jd सह समुह बनवितेवेळी त्रुटी: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "पूर्वनिर्धारीतपणे हानीकारक होम डिरेक्ट्री `%s' चा वापर, %s करीता, नकारात आहे\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s करीता प्रारंभी परवलीचा शब्द निश्चित करा: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s करीता मुख्य संचयीका निर्माण करतेवेळी त्रुटी: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s करीता मेल स्पुल निर्माण करतेवेळी त्रुटी.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s वापरकर्त्यास खाती बनवितेवेळी त्रुटी: %s\n"
@@ -762,7 +767,12 @@ msgstr "वापरकर्त्यास नाव किंवा UID न�
 msgid "group has neither a name nor a GID"
 msgstr "समुहास नाव किंवा GID नाही"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "पूर्वनिर्धारीतपणे होम डिरेक्ट्री `%s' चा वापर करण्यापासून नकारत आहे"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "field %s ची अवैध मुलभूत संख्या: %s"
