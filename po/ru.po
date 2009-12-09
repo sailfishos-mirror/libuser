@@ -1,4 +1,3 @@
-# translation of ru.po to Russian
 # translation of ru.po to
 # translation of libuser.tip.ru.po to
 # Copyright (C) 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
@@ -12,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-07 20:17+0000\n"
-"PO-Revision-Date: 2009-12-08 10:20+1100\n"
+"POT-Creation-Date: 2009-12-09 02:51+0000\n"
+"PO-Revision-Date: 2009-12-09 15:48+1100\n"
 "Last-Translator: Yulia <ypoyarko@redhat.com>\n"
-"Language-Team: Russian <fedora-trans-ru@redhat.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +23,7 @@ msgstr ""
 #: ../apps/apputil.c:109
 #, c-format
 msgid "Home directory path `%s' is not absolute"
-msgstr "Путь к домашнему каталогу `%s' не является абсолютным"
+msgstr "Путь к домашнему каталогу «%s» не является абсолютным"
 
 #: ../apps/apputil.c:117 ../apps/apputil.c:192 ../apps/apputil.c:225
 #: ../apps/apputil.c:252 ../modules/files.c:181
@@ -367,7 +366,7 @@ msgstr "Ошибка открытия `%s': %s\n"
 #: ../apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Ошибка создания учетной записи для `%s': неверный формат строки.\n"
+msgstr "Ошибка создания учётной записи для «%s»: неверный формат строки.\n"
 
 #: ../apps/lnewusers.c:129 ../apps/luseradd.c:116 ../apps/lusermod.c:127
 #, c-format
@@ -382,24 +381,29 @@ msgstr "Отказ в создании учетной записи с UID 0.\n"
 #: ../apps/lnewusers.c:224
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Ошибка создания группы для `%s' с GID %jd: %s\n"
+msgstr "Ошибка создания группы для «%s» с GID %jd: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "Отказ использования небезопасного домашнего каталога «%s» для %s по умолчанию\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Ошибка установки начального пароля для %s: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Ошибка создания домашнего каталога для %s: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Ошибка создания почтовой очереди для %s.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Ошибка создания учетной записи пользователя %s: %s\n"
@@ -731,7 +735,7 @@ msgstr "имя начинается с дефиса"
 #: ../lib/user.c:241
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "имя содержит неверный символ `%c'"
+msgstr "имя содержит неверный символ «%c»"
 
 #: ../lib/user.c:284 ../lib/user.c:332
 #, c-format
@@ -761,7 +765,12 @@ msgstr "пользователь не имеет имени и кода UID"
 msgid "group has neither a name nor a GID"
 msgstr "группа не имеет имени и кода UID"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "Отказ использования небезопасного домашнего каталога «%s» по умолчанию"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Неверное значение по умолчанию для поля %s: %s"

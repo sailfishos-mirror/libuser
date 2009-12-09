@@ -1,4 +1,4 @@
-# translation of libuser.tip.bn_IN.po to Bengali INDIA
+# translation of libuser.tip.po to Bengali INDIA
 # Bangla Translation of Libuser.po
 # Copyright (C) 2004 Red Hat Inc.
 # This file is distributed under the same license as the libuser package.
@@ -7,10 +7,10 @@
 # Runa Bhattacharjee <runab@fedoraproject.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser.tip.bn_IN\n"
+"Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-07 02:50+0000\n"
-"PO-Revision-Date: 2009-12-07 14:09+0530\n"
+"POT-Creation-Date: 2009-12-09 02:51+0000\n"
+"PO-Revision-Date: 2009-12-09 09:59+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
 "MIME-Version: 1.0\n"
@@ -418,22 +418,27 @@ msgstr "UID 0 ব্যবহার করে অ্যাকাউন্ট ত
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s'-র জন্য, GID %jd ব্যবহার করে দল তৈরি করতে সমস্যা: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "ডিফল্টরূপে, ক্ষতিকর ব্যক্তিগত ডিরেক্টরি `%s'-টি %s-র জন্য ব্যবহার করতে প্রত্যাখ্যান করা হয়েছে\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s-র জন্য প্রারম্ভিক পাসওয়ার্ড নির্ধারণ করতে সমস্যা: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s-র জন্য ব্যক্তিগত (হোম) ডিরেক্টরি তৈরি করতে সমস্যা: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s-র জন্য মেইল স্পুল তৈরি করতে সমস্যা।\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s-র জন্য ব্যবহারকারীর অ্যাকাউন্ট তৈরি করতে সমস্যা:%s\n"
@@ -819,7 +824,12 @@ msgstr "ব্যবহারকারীর নাম ও UID ধার্য �
 msgid "group has neither a name nor a GID"
 msgstr "দলের নাম ও GID ধার্য করা হয়নি"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "ডিফল্টরূপে, ক্ষতিকর ব্যক্তিগত ডিরেক্টরি `%s' ব্যবহার প্রত্যাখ্যান করা হয়েছে"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ক্ষেত্রে ডিফল্ট মান বৈধ নয়: %s"

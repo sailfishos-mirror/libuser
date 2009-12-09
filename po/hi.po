@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-11-12 04:13+0000\n"
-"PO-Revision-Date: 2009-11-12 16:21+0530\n"
+"POT-Creation-Date: 2009-12-09 02:51+0000\n"
+"PO-Revision-Date: 2009-12-09 13:02+0530\n"
 "Last-Translator: Rajesh Ranjan <rajesh672@gmail.com>\n"
 "Language-Team: Hindi <hindi.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -392,22 +393,27 @@ msgstr "UID 0 से लेखा बनाने के लिए इंका�
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' के लिए GID %jd से समूह बनाने में त्रुटि: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "ख़तरनाक घर निर्देशिका `%s' को %s के लिए तयशुदा रूप से प्रयोग के लिए अस्वीकृत कर रहा है\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s के लिए प्रारंभिक शब्दकूट जमा करने में त्रुटि: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s के लिए घर निर्देशिका बनाने में त्रुटि: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s के लिए डाक स्पूल बनाने में त्रुटि\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s के लिए उपयोक्ता लेखा बनाने में त्रुटि: %s\n"
@@ -769,7 +775,12 @@ msgstr "उपयोक्ता के पास कोई नाम या UID
 msgid "group has neither a name nor a GID"
 msgstr "समूह के पास न तो नाम है न GID."
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "ख़तरनाक घर निर्देशिका `%s' को तयशुदा रूप से प्रयोग के लिए अस्वीकृत कर रहा है"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s क्षेत्र का अवैध मूलभूत मान: %s"
