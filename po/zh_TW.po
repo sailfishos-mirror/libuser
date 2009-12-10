@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-07 20:17+0000\n"
-"PO-Revision-Date: 2009-12-08 11:09+1000\n"
+"POT-Creation-Date: 2009-12-09 20:04+0000\n"
+"PO-Revision-Date: 2009-12-10 10:13+1000\n"
 "Last-Translator: Terry Chuang <tchuang@redhat.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -385,22 +385,27 @@ msgstr "拒絕建立 UID 為 0 的帳號。\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "為 `%s' 建立群組時（使用 GID %jd）發生錯誤：%s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "就預設值拒絕為 %s 使用不安全的家目錄「%s」\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "設定初始密碼給 %s 發生錯誤：%s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "建立 %s 的家目錄發生錯誤：%s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "建立 %s 的郵件緩衝器時發生錯誤。\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "建立 %s 的使用者帳號時發生錯誤：%s。\n"
@@ -762,7 +767,12 @@ msgstr "使用者沒有名稱也沒有 UID"
 msgid "group has neither a name nor a GID"
 msgstr "群組沒有名稱也沒有 GID"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "就預設值拒絕使用不安全的家目錄「%s」"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "欄位 %s 的預設值無效：%s"
