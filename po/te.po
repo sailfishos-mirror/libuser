@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-11-12 04:13+0000\n"
-"PO-Revision-Date: 2009-11-12 12:51+0530\n"
+"POT-Creation-Date: 2009-12-10 02:40+0000\n"
+"PO-Revision-Date: 2009-12-10 12:19+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -378,29 +379,34 @@ msgstr "వినియోగదారుని ID %s సరిగా లేద�
 #: ../apps/lnewusers.c:136
 #, c-format
 msgid "Refusing to create account with UID 0.\n"
-msgstr "UID 0 తో ఖాతా సృష్టించుటకు తిరస్కరిస్తుంది.\n"
+msgstr "UID 0 తో ఖాతా సృష్టించుటకు తిరస్కరిస్తోంది.\n"
 
 #: ../apps/lnewusers.c:224
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' కు GID %jd తో సమూహం సృష్టించుటలో దోషం: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "ప్రమాదకరమైన డైరెక్టరీ `%s'ను %s కొరకు అప్రమేయంగా వుపయోగించుట తిరస్కరించుతోంది\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s కు తోలి అనుమతిపదం అమర్చుటలో దోషం: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s కు నివాస సంచయం సృష్టించుటలో దోషం: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s కు టపా స్పూల్ సృష్టించుటలో దోషం.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s కు వినియోగదారుని ఖాతా సృష్టించుటలో దోషం: %s\n"
@@ -762,7 +768,12 @@ msgstr "వినియోగదారుడు పేరుకాని UID న
 msgid "group has neither a name nor a GID"
 msgstr "సమూహం పేరును కాని GID ని కాని కలిగి లేదు"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "ప్రమాదకరమైన నివాస సంచయం `%s' అప్రమేయంగా వుపయోగించుటకు తిరస్కరించుతోంది"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s కు సరికాని సిద్దవిలువ : %s"
