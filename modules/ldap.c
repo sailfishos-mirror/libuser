@@ -263,7 +263,7 @@ interact(LDAP *ld, unsigned flags, void *defs, void *xres)
 			break;
 		default:
 #ifdef DEBUG
-			g_print("Unhandled SASL Intreractive option `%d'.\n",
+			g_print("Unhandled SASL Intreractive option `%lu'.\n",
 				res[i].id);
 #endif
 			retval = LDAP_OTHER;
@@ -913,7 +913,7 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 		new_values[new_count] = bv;
 #ifdef DEBUG
 		g_print("Adding entity `%s' to class `%s'.\n", dn,
-			new_values[new_count]);
+			ldap_attribute_map[i].objectclass);
 #endif
 		new_count++;
 	}
@@ -1703,7 +1703,7 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 		val = values[i];
 		prefix_len = strlen(LU_CRYPTED);
 #ifdef DEBUG
-		g_print("Got `%s' = `.*%s'.\n", mapped_password,
+		g_print("Got `%s' = `%.*s'.\n", mapped_password,
 			(int)val->bv_len, val->bv_val);
 #endif
 		if (val->bv_len >= prefix_len

@@ -1,3 +1,8 @@
+2009-12-11  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/ldap.c (interact, lu_ldap_needed_objectclasses)
+	(lu_ldap_is_locked): Fix debug print parameters.
+
 2009-12-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* modules/files.c (entry_name_conflicts): Split from generic_add ().
