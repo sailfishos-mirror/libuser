@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2009-12-11 11:02+0100\n"
-"PO-Revision-Date: 2009-12-10 17:02+0100\n"
+"PO-Revision-Date: 2009-12-11 18:25+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <fedora-trans-pl@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -848,9 +848,8 @@ msgid "entity object has no %s attribute"
 msgstr "obiekt nie posiada atrybutu %s"
 
 #: modules/files.c:1059
-#, fuzzy
 msgid "entry with conflicting name already present in file"
-msgstr "wpis znajduje się już w pliku"
+msgstr "wpis o nazwie w konflikcie znajduje się już w pliku"
 
 #: modules/files.c:1772
 msgid "`:' not allowed in encrypted password"
