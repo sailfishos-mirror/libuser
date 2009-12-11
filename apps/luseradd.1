@@ -1,5 +1,5 @@
 .\" A man page for luseradd
-.\" Copyright (C) 2005 Red Hat, Inc.
+.\" Copyright (C) 2005, 2009 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -16,7 +16,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH luseradd 1 "Jan 12 2005" libuser
+.TH luseradd 1 2009-12-09 libuser
 
 .SH NAME
 luseradd \- Add an user
@@ -122,6 +122,54 @@ configuration is used.
 \fB\-u\fR, \fB\-\-uid\fR=\fIuid\fR
 Use user ID \fIuid\fR for the newly created user.
 An user ID is selected automatically if this option is not present.
+
+.TP
+\fB\-\-commonname\fP=\fIname\fP
+Use common name
+.I name
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-givenname\fP=\fIname\fP
+Use given name
+.I name
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-homephone\fP=\fIphone\fP
+Use home telephone number
+.I phone
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-roomnumber\fP=\fIroom\fP
+Use room number
+.I room
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-surname\fP=\fIname\fP
+Use surname
+.I name
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-telephonenumber\fP=\fIphone\fP
+Use telephone number
+.I phone
+for the newly created user.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
 
 .SH EXIT STATUS
 The exit status is 0 on success, nonzero on error.

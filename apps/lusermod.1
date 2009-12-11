@@ -1,5 +1,5 @@
 .\" A man page for lusermod
-.\" Copyright (C) 2005, 2008 Red Hat, Inc.
+.\" Copyright (C) 2005, 2008, 2009 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -16,7 +16,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH lusermod 1 "Feb 27 2008" libuser
+.TH lusermod 1 2009-12-11 libuser
 
 .SH NAME
 lusermod \- Modify an user
@@ -96,6 +96,42 @@ Unlock \fIuser\fR's account.
 .TP
 \fB\-u\fR, \fB\-\-uid\fR=\fIuid\fR
 Change \fIuser\fR's user ID to \fIuid\fR.
+
+.TP
+\fB\-\-commonname\fP=\fIname\fP
+Set \fIuser\fP's common name to \fIname\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-givenname\fP=\fIname\fP
+Set \fIuser\fP's given name to \fIname\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-homephone\fP=\fIphone\fP
+Set \fIuser\fP's home telephone number to \fIphone\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-roomnumber\fP=\fIroom\fP
+Set \fIuser\fP's room number to \fIroom\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-surname\fP=\fIname\fP
+Set \fIuser\fP's surname to \fIname\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
+
+.TP
+\fB\-\-telephonenumber\fP=\fIphone\fP
+Set \fIuser\fP's telephone number to \fIphone\fP.
+This attribute is only supported in some backends (e.g.LDAP),
+and its support may have further limitations (e.g. LDAP schema rules).
 
 .SH EXIT STATUS
 The exit status is 0 on success, nonzero on error.

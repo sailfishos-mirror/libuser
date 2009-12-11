@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2009 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -36,7 +36,9 @@ main(int argc, const char **argv)
 		   *uid = NULL, *old_uid, *user, *gecos = NULL,
 		   *oldHomeDirectory, *homeDirectory = NULL,
 		   *loginShell = NULL, *gid_number_str = NULL,
-		   *uid_number_str = NULL;
+		   *uid_number_str = NULL, *commonName = NULL,
+		   *givenName = NULL, *surname = NULL, *roomNumber = NULL,
+		   *telephoneNumber = NULL, *homePhone = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx;
@@ -73,6 +75,18 @@ main(int argc, const char **argv)
 		{"lock", 'L', POPT_ARG_NONE, &lock, 0, "lock account", NULL},
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0,
 		 "unlock account", NULL},
+		{"commonname", 0, POPT_ARG_STRING, &commonName, 0,
+		 "common name for new user", "STRING"},
+		{"givenname", 0, POPT_ARG_STRING, &givenName, 0,
+		 "given name for new user", "STRING"},
+		{"surname", 0, POPT_ARG_STRING, &surname, 0,
+		 "surname for new user", "STRING"},
+		{"roomnumber", 0, POPT_ARG_STRING, &roomNumber, 0,
+		 "room number for new user", "STRING"},
+		{"telephonenumber", 0, POPT_ARG_STRING, &telephoneNumber, 0,
+		 "telephone number for new user", "STRING"},
+		{"homephone", 0, POPT_ARG_STRING, &homePhone, 0,
+		 "home telephone number for new user", "STRING"},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 
@@ -199,8 +213,9 @@ main(int argc, const char **argv)
 	}
 
 	/* Determine if we actually need to change anything. */
-	change = uid || gecos || homeDirectory || loginShell ||
-		 uidNumber != LU_VALUE_INVALID_ID ||
+	change = uid || gecos || homeDirectory || loginShell || commonName ||
+		 givenName || surname || roomNumber || telephoneNumber ||
+		 homePhone || uidNumber != LU_VALUE_INVALID_ID ||
 		 gidNumber != LU_VALUE_INVALID_ID;
 
 	/* Change the user's UID and GID. */
@@ -232,17 +247,22 @@ main(int argc, const char **argv)
 
 	/* Change the user's shell and GECOS information. */
 	g_value_init(&val, G_TYPE_STRING);
+#define PARAM(ATTR, VAR)				\
+	if ((VAR) != NULL) {				\
+		g_value_set_string(&val, (VAR));	\
+		lu_ent_clear(ent, (ATTR));		\
+		lu_ent_add(ent, (ATTR), &val);		\
+	}
 
-	if (loginShell != NULL) {
-		g_value_set_string(&val, loginShell);
-		lu_ent_clear(ent, LU_LOGINSHELL);
-		lu_ent_add(ent, LU_LOGINSHELL, &val);
-	}
-	if (gecos != NULL) {
-		g_value_set_string(&val, gecos);
-		lu_ent_clear(ent, LU_GECOS);
-		lu_ent_add(ent, LU_GECOS, &val);
-	}
+	PARAM(LU_LOGINSHELL, loginShell);
+	PARAM(LU_GECOS, gecos);
+	PARAM(LU_COMMONNAME, commonName);
+	PARAM(LU_GIVENNAME, givenName);
+	PARAM(LU_SN, surname);
+	PARAM(LU_ROOMNUMBER, roomNumber);
+	PARAM(LU_TELEPHONENUMBER, telephoneNumber);
+	PARAM(LU_HOMEPHONE, homePhone);
+#undef PARAM
 
 	/* If the user changed names or home directories, we need to keep track
 	 * of the old values. */

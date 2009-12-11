@@ -1,5 +1,12 @@
 2009-12-11  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/luseradd.c (main): New arguments --commonname, --givenname,
+	--surname, --roomnumber, --telephonenumber, --homephone.
+	* apps/luseradd.1: Document new arguments.
+	* apps/lusermod.c (main): New arguments --commonname, --givenname,
+	--surname, --roomnumber, --telephonenumber, --homephone.
+	* apps/lusermod.1: Document new arguments.
+
 	* modules/ldap.c (interact, lu_ldap_needed_objectclasses)
 	(lu_ldap_is_locked): Fix debug print parameters.
 

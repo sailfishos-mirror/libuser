@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2000-2002, 2004, 2006 Red Hat, Inc.
+ * Copyright (C) 2000-2002, 2004, 2006, 2009 Red Hat, Inc.
  *
  * This is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Library General Public License as published by
@@ -35,7 +35,9 @@ main(int argc, const char **argv)
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
 		   *gecos = NULL, *homeDirectory = NULL, *loginShell = NULL,
 		   *skeleton = NULL, *name, *gid = NULL,
-		   *uid_number_str = NULL;
+		   *uid_number_str = NULL, *commonName = NULL,
+		   *givenName = NULL, *surname = NULL, *roomNumber = NULL,
+		   *telephoneNumber = NULL, *homePhone = NULL;
 	struct lu_context *ctx;
 	struct lu_ent *ent, *groupEnt;
 	struct lu_error *error = NULL;
@@ -75,6 +77,18 @@ main(int argc, const char **argv)
 		 "plaintext password for use with group", "STRING"},
 		{"password", 'p', POPT_ARG_STRING, &cryptedUserPassword, 0,
 		 "pre-hashed password for use with group", "STRING"},
+		{"commonname", 0, POPT_ARG_STRING, &commonName, 0,
+		 "common name for new user", "STRING"},
+		{"givenname", 0, POPT_ARG_STRING, &givenName, 0,
+		 "given name for new user", "STRING"},
+		{"surname", 0, POPT_ARG_STRING, &surname, 0,
+		 "surname for new user", "STRING"},
+		{"roomnumber", 0, POPT_ARG_STRING, &roomNumber, 0,
+		 "room number for new user", "STRING"},
+		{"telephonenumber", 0, POPT_ARG_STRING, &telephoneNumber, 0,
+		 "telephone number for new user", "STRING"},
+		{"homephone", 0, POPT_ARG_STRING, &homePhone, 0,
+		 "home telephone number for new user", "STRING"},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 
@@ -239,29 +253,23 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 	}
 
-	/* Modify the default GECOS if we had one passed in. */
 	g_value_init(&val, G_TYPE_STRING);
-
-	if (gecos != NULL) {
-		g_value_set_string(&val, gecos);
-		lu_ent_clear(ent, LU_GECOS);
-		lu_ent_add(ent, LU_GECOS, &val);
+#define PARAM(ATTR, VAR)				\
+	if ((VAR) != NULL) {				\
+		g_value_set_string(&val, (VAR));	\
+		lu_ent_clear(ent, (ATTR));		\
+		lu_ent_add(ent, (ATTR), &val);		\
 	}
-
-	/* Modify the default GID if we had one passed in. */
-	if (homeDirectory != NULL) {
-		g_value_set_string(&val, homeDirectory);
-		lu_ent_clear(ent, LU_HOMEDIRECTORY);
-		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
-	}
-
-	/* Modify the default login shell if we had one passed in. */
-	if (loginShell != NULL) {
-		g_value_set_string(&val, loginShell);
-		lu_ent_clear(ent, LU_LOGINSHELL);
-		lu_ent_add(ent, LU_LOGINSHELL, &val);
-	}
-
+	PARAM(LU_GECOS, gecos);
+	PARAM(LU_HOMEDIRECTORY, homeDirectory);
+	PARAM(LU_LOGINSHELL, loginShell);
+	PARAM(LU_COMMONNAME, commonName);
+	PARAM(LU_GIVENNAME, givenName);
+	PARAM(LU_SN, surname);
+	PARAM(LU_ROOMNUMBER, roomNumber);
+	PARAM(LU_TELEPHONENUMBER, telephoneNumber);
+	PARAM(LU_HOMEPHONE, homePhone);
+#undef PARAM
 	g_value_unset(&val);
 
 	/* Moment-of-truth time. */
