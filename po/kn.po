@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-11-12 04:13+0000\n"
-"PO-Revision-Date: 2009-11-12 13:31+0530\n"
+"POT-Creation-Date: 2009-12-10 20:11+0000\n"
+"PO-Revision-Date: 2009-12-11 12:47+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
-"Language-Team: Kannada <en@li.org>\n"
+"Language-Team: Kannada <kde-l10n-kn@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "\n"
 "\n"
@@ -385,22 +385,28 @@ msgstr "UID 0 ಯೊಂದಿಗೆ ಖಾತೆಯನ್ನು ಸೃಜಿಸ�
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' ಗಾಗಿ GID %jd ಯೊಂದಿಗೆ ಸಮೂಹವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr ""
+"ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಅಪಾಯಕಾರಿ ನೆಲೆ ಕಡತಕೋಶ `%s' ಅನ್ನು %s ಗಾಗಿ ಬಳಸಲು ನಿರಾಕರಿಸಲಾಗುತ್ತಿದೆ\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s ಗೆ ಆರಂಭಿಕ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s ಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s ಗಾಗಿ ಸ್ಪೂಲ್ ಅನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s ಗಾಗಿ ಬಳಕೆದಾರ ಖಾತೆಯನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
@@ -762,7 +768,12 @@ msgstr "ಬಳಕೆದಾರ ಒಂದು ಹೆಸರು ಅಥವ ಒಂದ�
 msgid "group has neither a name nor a GID"
 msgstr "ಸಮೂಹವು ಒಂದು ಹೆಸರು ಅಥವ ಒಂದು GID ಅನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಅಪಾಯಕಾರಿ ನೆಲೆ ಕಡತಕೋಶ `%s' ಅನ್ನು ಬಳಸಲು ನಿರಾಕರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ಕ್ಷೇತ್ರದ ಡೀಫಾಲ್ಟ್‍  ಮೌಲ್ಯವು ಅಮಾನ್ಯವಾಗಿದೆ: %s"
