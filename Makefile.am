@@ -151,7 +151,7 @@ lib_libuser_la_SOURCES = lib/common.c lib/config.c lib/entity.c lib/error.c \
 lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DSYSCONFDIR='"$(sysconfdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
-	-version-info 3:1:2
+	-version-info 3:2:2
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_SOURCES = modules/files.c

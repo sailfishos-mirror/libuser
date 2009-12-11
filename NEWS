@@ -1,3 +1,13 @@
+0.56.13
+* Report error in lid if the specified name does not exist.
+* Don't default a home directory to a path that contains a "." or ".." component
+  derived from the user name (explicitly specified home directories that contain
+  such components are accepted).
+* Detect naming conflicts when renaming an entry in the "files" or "shadow"
+  module.
+* Add new arguments to luseradd and lusermod, to support creating and modifying
+  LDAP user entries with the inetOrgPerson objectClass.
+
 0.56.12
 * Update translations.
 

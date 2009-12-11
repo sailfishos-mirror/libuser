@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-02 00:53+0200\n"
+"POT-Creation-Date: 2009-12-11 11:02+0100\n"
 "PO-Revision-Date: 2008-03-23 13:38+0100\n"
 "Last-Translator: Marek Mahut <mmahut@fedoraproject.org>\n"
 "Language-Team: Slovak <fedora-trans-sk@redhat.com>\n"
@@ -98,34 +98,35 @@ msgstr "Overená totožnosť neznámeho používateľa.\n"
 msgid "User mismatch.\n"
 msgstr "Používateľ sa nezhoduje.\n"
 
-#: apps/lchage.c:111 apps/lid.c:113 apps/lpasswd.c:66 apps/luseradd.c:88
-#: apps/luserdel.c:61 apps/lusermod.c:86
+#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[VOĽBA...] používateľ"
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:116 apps/lnewusers.c:66
-#: apps/lpasswd.c:69 apps/luseradd.c:91 apps/luserdel.c:64 apps/lusermod.c:89
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
+#: apps/lusermod.c:103
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Chyba pri analýze parametrov: %s.\n"
 
-#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:106 apps/luserdel.c:72
-#: apps/lusermod.c:100
+#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:120 apps/luserdel.c:72
+#: apps/lusermod.c:114
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Nebolo zadané meno používateľa.\n"
 
 #: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:160 apps/lnewusers.c:77
-#: apps/lpasswd.c:95 apps/luseradd.c:129 apps/luserdel.c:81
-#: apps/lusermod.c:141 samples/enum.c:56 samples/testuser.c:71
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
+#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Chyba pri inicializácii %s: %s.\n"
 
 #: apps/lchage.c:142 apps/lchfn.c:114 apps/lchsh.c:100 apps/lpasswd.c:144
-#: apps/luserdel.c:89 apps/lusermod.c:155
+#: apps/luserdel.c:89 apps/lusermod.c:169
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Používateľ %s neexistuje.\n"
@@ -193,7 +194,7 @@ msgstr "Zlyhala úprava informácií o veku pre %s: %s\n"
 msgid "[OPTION...] [user]"
 msgstr "[VOĽBA...] [používateľ]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:147
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Nebolo zadané meno používateľa, nie je meno pre uid %d.\n"
@@ -273,7 +274,7 @@ msgid "No group name specified.\n"
 msgstr "Nebolo zadané meno skupiny.\n"
 
 #: apps/lgroupadd.c:87 apps/lgroupmod.c:104 apps/lnewusers.c:178
-#: apps/luseradd.c:150 apps/lusermod.c:112
+#: apps/luseradd.c:164 apps/lusermod.c:126
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Neplatné ID skupiny %s\n"
@@ -293,7 +294,7 @@ msgstr "Skupina %s neexistuje.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Skupina %s nemohla byť vymazaná: %s\n"
 
-#: apps/lgroupmod.c:122 apps/lusermod.c:148
+#: apps/lgroupmod.c:122 apps/lusermod.c:162
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Boli zadané obidve -L a -U.\n"
@@ -318,22 +319,27 @@ msgstr "Skupina %s nemohla byť odomknutá: %s\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "Skupina %s nemohla byť zmenená: %s\n"
 
-#: apps/lid.c:44
+#: apps/lid.c:49 apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "Chyba pri uzamykaní %s: %s\n"
 
-#: apps/lid.c:129
+#: apps/lid.c:53
+#, fuzzy, c-format
+msgid "%s does not exist\n"
+msgstr "Používateľ %s neexistuje.\n"
+
+#: apps/lid.c:144
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Nebolo zadané meno skupiny, použijem %s.\n"
 
-#: apps/lid.c:133
+#: apps/lid.c:148
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Nebolo zadané meno skupiny, gid %d bez mena.\n"
 
-#: apps/lid.c:143
+#: apps/lid.c:158
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Nebolo zadané meno používateľa, použijem %s.\n"
@@ -353,7 +359,7 @@ msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
 "Chyba pri vytváraní konta pre `%s': riadok je nesprávne naformátovaný.\n"
 
-#: apps/lnewusers.c:129 apps/luseradd.c:116 apps/lusermod.c:127
+#: apps/lnewusers.c:129 apps/luseradd.c:130 apps/lusermod.c:141
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Neplatné ID používateľa %s\n"
@@ -367,22 +373,27 @@ msgstr "Zamietam vytvorenie konta s UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Chyba pri vytváraní skupiny pre `%s' s GID %jd: %s\n"
 
-#: apps/lnewusers.c:280
+#: apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr ""
+
+#: apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Chyba pri nastavovaní počiatočného hesla pre %s: %s\n"
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Chyba pri vytváraní domovského adresára pre %s: %s\n"
 
-#: apps/lnewusers.c:309
+#: apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty pre %s.\n"
 
-#: apps/lnewusers.c:315
+#: apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Chyba pri vytváraní používateľského konta pre %s: %s\n"
@@ -410,7 +421,7 @@ msgstr "Heslá sa nezhodujú, skúste znova.\n"
 msgid "Password change canceled.\n"
 msgstr "Zmena hesla zrušená.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:277 apps/luseradd.c:287
+#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Chyba pri nastavovaní hesla pre používateľa %s: %s.\n"
@@ -425,27 +436,27 @@ msgstr "Chyby pri nastavovaní hesla pre skupinu %s: %s.\n"
 msgid "Password changed.\n"
 msgstr "Heslo zmenené.\n"
 
-#: apps/luseradd.c:177
+#: apps/luseradd.c:191
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Skupina %jd neexistuje\n"
 
-#: apps/luseradd.c:195 apps/luseradd.c:208
+#: apps/luseradd.c:209 apps/luseradd.c:222
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Chyba pri vytváraní skupiny `%s': %s\n"
 
-#: apps/luseradd.c:269
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Vytváranie konta zlyhalo: %s.\n"
 
-#: apps/luseradd.c:319
+#: apps/luseradd.c:327
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Chyba pri vytváraní %s: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:334
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"
@@ -490,47 +501,47 @@ msgstr "Chyba pri odstraňovaní %s: %s.\n"
 msgid "Error removing mail spool.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"
 
-#: apps/lusermod.c:164 apps/lusermod.c:177
+#: apps/lusermod.c:178 apps/lusermod.c:191
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Zlyhalo nastavenie hesla pre používateľa %s: %s.\n"
 
-#: apps/lusermod.c:187
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Používateľ %s nemohol byť zamknutý: %s.\n"
 
-#: apps/lusermod.c:195
+#: apps/lusermod.c:209
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Používateľ %s nemohol byť odomknutý: %s.\n"
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:236
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr "Upozornenie: Skupina %jd neexistuje.\n"
 
-#: apps/lusermod.c:275
+#: apps/lusermod.c:295
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Používateľ %s nemohol byť zmenený: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:354
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Skupina %s nemohla byť zmenená: %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:365
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Nie je starý domovský adresár pre %s.\n"
 
-#: apps/lusermod.c:350
+#: apps/lusermod.c:370
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Nie je nový domovský adresár pre %s.\n"
 
-#: apps/lusermod.c:356
+#: apps/lusermod.c:376
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Chyba pri presune %s do %s: %s.\n"
@@ -740,7 +751,12 @@ msgstr "používateľ nemá ani meno ani UID"
 msgid "group has neither a name nor a GID"
 msgstr "skupina nemá ani meno ani GID"
 
-#: lib/user.c:1921
+#: lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr ""
+
+#: lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Nesprávna štandardná hodnota položky %s: %s"
@@ -770,19 +786,19 @@ msgstr "nepodarilo sa nastaviť predvolený bezpečnostný kontext na `%s': %s"
 msgid "couldn't determine security context for `%s': %s"
 msgstr "nepodarilo sa získať bezpečnostný kontext pre `%s': %s"
 
-#: modules/files.c:111 modules/files.c:445 modules/files.c:746
-#: modules/files.c:1013 modules/files.c:1177 modules/files.c:1408
-#: modules/files.c:1492 modules/files.c:1713 modules/files.c:1884
-#: modules/files.c:1901 modules/files.c:1990 modules/files.c:2009
-#: modules/files.c:2077 modules/files.c:2098 modules/files.c:2195
-#: modules/files.c:2214 modules/files.c:2273 modules/files.c:2292
-#: modules/files.c:2388 modules/files.c:2403
+#: modules/files.c:111 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
+#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
+#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
+#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
+#: modules/files.c:2404 modules/files.c:2419
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "nepodarilo sa otvoriť `%s': %s"
 
 #: modules/files.c:123 modules/files.c:152 modules/files.c:218
-#: modules/files.c:758 modules/files.c:1023 modules/files.c:1189
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "nepodarilo sa zistiť stav `%s': %s"
@@ -806,39 +822,44 @@ msgstr "veľkosť záložného súboru nezodpovedá"
 msgid "%s value `%s': `:' not allowed"
 msgstr ""
 
-#: modules/files.c:780 modules/files.c:1031 modules/files.c:1198
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "nepodarilo sa čítať z `%s': %s"
 
-#: modules/files.c:789 modules/files.c:796
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "položka už existuje v súbore"
 
-#: modules/files.c:803 modules/files.c:813 modules/files.c:824
-#: modules/files.c:1257 modules/files.c:1265 modules/files.c:1273
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "nepodarilo sa zapísať do `%s': %s"
 
-#: modules/files.c:986
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "objekt entity nemá príznak %s"
 
-#: modules/files.c:1756
+#: modules/files.c:1059
+#, fuzzy
+msgid "entry with conflicting name already present in file"
+msgstr "položka už existuje v súbore"
+
+#: modules/files.c:1772
 msgid "`:' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1768 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "chyba pri šifrovaní hesla"
 
-#: modules/files.c:2674 modules/files.c:2752
+#: modules/files.c:2690 modules/files.c:2768
 msgid "not executing with superuser privileges"
 msgstr "nespúšťam s právami superpoužívateľa"
 
-#: modules/files.c:2765
+#: modules/files.c:2781
 msgid "no shadow file present -- disabling"
 msgstr "tieňový súbor nie je prítomný -- deaktivujem"
 

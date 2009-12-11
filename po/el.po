@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-02 00:53+0200\n"
+"POT-Creation-Date: 2009-12-11 11:02+0100\n"
 "PO-Revision-Date: 2009-11-01 13:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: Greek <fedora-trans-el@redhat.com>\n"
@@ -27,47 +27,35 @@ msgstr ""
 msgid "Home directory path `%s' is not absolute"
 msgstr "Η διαδρομή του αρχικού καταλόγου `%s' δεν είναι απόλυτη"
 
-#: apps/apputil.c:117
-#: apps/apputil.c:192
-#: apps/apputil.c:225
-#: apps/apputil.c:252
+#: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
 #: modules/files.c:181
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Σφάλμα στην ανάγνωση `%s': %s"
 
-#: apps/apputil.c:125
-#: apps/apputil.c:201
+#: apps/apputil.c:125 apps/apputil.c:201
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "Σφάλμα στη δημιουργία `%s': %s"
 
-#: apps/apputil.c:133
-#: apps/apputil.c:208
-#: apps/apputil.c:298
+#: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
 #: modules/files.c:164
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Σφάλμα αλλαγής ιδιοκτήτη του `%s': %s"
 
-#: apps/apputil.c:237
-#: apps/apputil.c:269
-#: apps/apputil.c:285
-#: modules/files.c:196
-#: modules/files.c:210
+#: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
+#: modules/files.c:196 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Σφάλμα εγγραφής `%s': %s"
 
-#: apps/apputil.c:360
-#: apps/apputil.c:395
-#: apps/apputil.c:412
+#: apps/apputil.c:360 apps/apputil.c:395 apps/apputil.c:412
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "Σφάλμα στην αφαίρεση `%s': %s"
 
-#: apps/apputil.c:570
-#: apps/apputil.c:574
+#: apps/apputil.c:570 apps/apputil.c:574
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Αποτυχία εγκατάλειψης δικαιωμάτων.\n"
@@ -96,8 +84,7 @@ msgstr "Αδυναμία ορισμού προεπιλεγμένου περιβ�
 msgid "Error initializing PAM.\n"
 msgstr "Σφάλμα αρχικοποίησης PAM.\n"
 
-#: apps/apputil.c:633
-#: apps/apputil.c:660
+#: apps/apputil.c:633 apps/apputil.c:660
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Η πιστοποίηση απέτυχε για %s.\n"
@@ -117,64 +104,35 @@ msgstr "Πιστοποιήθηκε άγνωστος χρήστης.\n"
 msgid "User mismatch.\n"
 msgstr "Κακό ταίριασμα χρήστη.\n"
 
-#: apps/lchage.c:111
-#: apps/lid.c:113
-#: apps/lpasswd.c:66
-#: apps/luseradd.c:88
-#: apps/luserdel.c:61
-#: apps/lusermod.c:86
+#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[ΕΠΙΛΟΓΗ...] χρήστης"
 
-#: apps/lchage.c:114
-#: apps/lchfn.c:72
-#: apps/lchsh.c:58
-#: apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56
-#: apps/lgroupmod.c:84
-#: apps/lid.c:116
-#: apps/lnewusers.c:66
-#: apps/lpasswd.c:69
-#: apps/luseradd.c:91
-#: apps/luserdel.c:64
-#: apps/lusermod.c:89
+#: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
+#: apps/lusermod.c:103
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Σφάλμα κατά την ανάλυση ορισμάτων: %s.\n"
 
-#: apps/lchage.c:123
-#: apps/lpasswd.c:83
-#: apps/luseradd.c:106
-#: apps/luserdel.c:72
-#: apps/lusermod.c:100
+#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:120 apps/luserdel.c:72
+#: apps/lusermod.c:114
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Δεν έχει οριστεί όνομα χρήστη.\n"
 
-#: apps/lchage.c:133
-#: apps/lchfn.c:106
-#: apps/lchsh.c:92
-#: apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75
-#: apps/lgroupmod.c:116
-#: apps/lid.c:160
-#: apps/lnewusers.c:77
-#: apps/lpasswd.c:95
-#: apps/luseradd.c:129
-#: apps/luserdel.c:81
-#: apps/lusermod.c:141
-#: samples/enum.c:56
-#: samples/testuser.c:71
+#: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
+#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Σφάλμα κατά την αρχικοποίηση %s: %s.\n"
 
-#: apps/lchage.c:142
-#: apps/lchfn.c:114
-#: apps/lchsh.c:100
-#: apps/lpasswd.c:144
-#: apps/luserdel.c:89
-#: apps/lusermod.c:155
+#: apps/lchage.c:142 apps/lchfn.c:114 apps/lchsh.c:100 apps/lpasswd.c:144
+#: apps/luserdel.c:89 apps/lusermod.c:169
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Ο χρήστης %s δεν υπάρχει.\n"
@@ -209,10 +167,7 @@ msgstr "Προειδοποίηση:\t%ld\n"
 msgid "Inactive:\t%ld\n"
 msgstr "Ανενεργό:\t%ld\n"
 
-#: apps/lchage.c:176
-#: apps/lchage.c:183
-#: apps/lchage.c:192
-#: apps/lchage.c:202
+#: apps/lchage.c:176 apps/lchage.c:183 apps/lchage.c:192 apps/lchage.c:202
 msgid "Never"
 msgstr "Ποτέ"
 
@@ -241,14 +196,11 @@ msgstr "Ο λογαριασμός λήγει:\t%s\n"
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Αδυναμία τροποποίησης πληροφοριών aging για %s: %s\n"
 
-#: apps/lchfn.c:69
-#: apps/lchsh.c:55
+#: apps/lchfn.c:69 apps/lchsh.c:55
 msgid "[OPTION...] [user]"
 msgstr "[ΕΠΙΛΟΓΗ...] [χρήστης]"
 
-#: apps/lchfn.c:88
-#: apps/lchsh.c:74
-#: apps/lid.c:147
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Δεν καθορίστηκε όνομα χρήστη, κανένα όνομα για uid %d.\n"
@@ -309,8 +261,7 @@ msgstr "Τροποποίηση κελύφους για %s.\n"
 msgid "New Shell"
 msgstr "Νέο κέλυφος"
 
-#: apps/lchsh.c:121
-#: apps/lchsh.c:140
+#: apps/lchsh.c:121 apps/lchsh.c:140
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Δεν έγινε αλλαγή κελύφους: %s\n"
@@ -319,24 +270,17 @@ msgstr "Δεν έγινε αλλαγή κελύφους: %s\n"
 msgid "Shell changed.\n"
 msgstr "Έγινε αλλαγή κελύφους.\n"
 
-#: apps/lgroupadd.c:62
-#: apps/lgroupdel.c:53
-#: apps/lgroupmod.c:81
+#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:81
 msgid "[OPTION...] group"
 msgstr "[ΕΠΙΛΟΓΗ...] ομάδα"
 
-#: apps/lgroupadd.c:74
-#: apps/lgroupdel.c:65
-#: apps/lgroupmod.c:92
+#: apps/lgroupadd.c:74 apps/lgroupdel.c:65 apps/lgroupmod.c:92
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Δεν έχει οριστεί όνομα ομάδας.\n"
 
-#: apps/lgroupadd.c:87
-#: apps/lgroupmod.c:104
-#: apps/lnewusers.c:178
-#: apps/luseradd.c:150
-#: apps/lusermod.c:112
+#: apps/lgroupadd.c:87 apps/lgroupmod.c:104 apps/lnewusers.c:178
+#: apps/luseradd.c:164 apps/lusermod.c:126
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Μη έγκυρο ID ομάδας %s\n"
@@ -346,9 +290,7 @@ msgstr "Μη έγκυρο ID ομάδας %s\n"
 msgid "Group creation failed: %s\n"
 msgstr "Η δημιουργία ομάδας απέτυχε: %s\n"
 
-#: apps/lgroupdel.c:83
-#: apps/lgroupmod.c:129
-#: apps/lpasswd.c:149
+#: apps/lgroupdel.c:83 apps/lgroupmod.c:129 apps/lpasswd.c:149
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Η ομάδα %s δεν υπάρχει.\n"
@@ -358,14 +300,12 @@ msgstr "Η ομάδα %s δεν υπάρχει.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Δε μπόρεσε να γίνει διαγραφή ομάδας %s: %s\n"
 
-#: apps/lgroupmod.c:122
-#: apps/lusermod.c:148
+#: apps/lgroupmod.c:122 apps/lusermod.c:162
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Καθορίστηκε και το -L και το -U.\n"
 
-#: apps/lgroupmod.c:136
-#: apps/lgroupmod.c:145
+#: apps/lgroupmod.c:136 apps/lgroupmod.c:145
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Αποτυχία ορισμού συνθηματικού για ομάδα %s: %s\n"
@@ -380,28 +320,32 @@ msgstr "Δε μπόρεσε να γίνει κλείδωμα ομάδας %s: %s
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Δε μπόρεσε να γίνει ξεκλείδωμα ομάδας %s: %s\n"
 
-#: apps/lgroupmod.c:243
-#: apps/lgroupmod.c:269
+#: apps/lgroupmod.c:243 apps/lgroupmod.c:269
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Δε μπόρεσε να γίνει τροποποίηση ομάδας %s: %s\n"
 
-#: apps/lid.c:44
+#: apps/lid.c:49 apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "Σφάλμα εύρεσης %s: %s\n"
 
-#: apps/lid.c:129
+#: apps/lid.c:53
+#, fuzzy, c-format
+msgid "%s does not exist\n"
+msgstr "Ο χρήστης %s δεν υπάρχει.\n"
+
+#: apps/lid.c:144
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Δεν έχει οριστεί όνομα ομάδας, γίνεται χρήση %s.\n"
 
-#: apps/lid.c:133
+#: apps/lid.c:148
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Δεν έχει οριστεί όνομα ομάδας, κανένα όνομα για gid %d.\n"
 
-#: apps/lid.c:143
+#: apps/lid.c:158
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Δεν έχει οριστεί όνομα χρήστη, γίνεται χρήση %s.\n"
@@ -418,11 +362,10 @@ msgstr "Σφάλμα ανοίγματος `%s': %s.\n"
 #: apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Σφάλμα δημιουργία λογαριασμού για `%s': μη επιτρεπτή μορφοποίηση γραμμής.\n"
+msgstr ""
+"Σφάλμα δημιουργία λογαριασμού για `%s': μη επιτρεπτή μορφοποίηση γραμμής.\n"
 
-#: apps/lnewusers.c:129
-#: apps/luseradd.c:116
-#: apps/lusermod.c:127
+#: apps/lnewusers.c:129 apps/luseradd.c:130 apps/lusermod.c:141
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Μη έγκυρο ID χρήστη %s\n"
@@ -436,22 +379,27 @@ msgstr "Άρνηση δημιουργίας λογαριασμού με UID 0.\n
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Σφάλμα στη δημιουργία ομάδας για `%s' με GID %jd: %s\n"
 
-#: apps/lnewusers.c:280
+#: apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr ""
+
+#: apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Σφάλμα ορισμού αρχικού συνθηματικού για %s: %s\n"
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Σφάλμα ορισμού αρχικού καταλόγου για %s: %s\n"
 
-#: apps/lnewusers.c:309
+#: apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Σφάλμα στη δημιουργία του mail spool για %s.\n"
 
-#: apps/lnewusers.c:315
+#: apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Σφάλμα δημιουργίας λογαριασμού χρήστη για %s: %s\n"
@@ -481,9 +429,7 @@ msgstr "Οι κωδικοί δε συμπίπτουν, παρακαλώ προσ
 msgid "Password change canceled.\n"
 msgstr "Ακύρωση αλλαγής συνθηματικού.\n"
 
-#: apps/lpasswd.c:186
-#: apps/luseradd.c:277
-#: apps/luseradd.c:287
+#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Σφάλμα ορισμού συνθηματικού για το χρήστη %s: %s\n"
@@ -500,28 +446,27 @@ msgstr "Σφάλμα ορισμού συνθηματικού για την ομ�
 msgid "Password changed.\n"
 msgstr "Το συνθηματικό άλλαξε.\n"
 
-#: apps/luseradd.c:177
+#: apps/luseradd.c:191
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Δεν υπάρχει η ομάδα %jd\n"
 
-#: apps/luseradd.c:195
-#: apps/luseradd.c:208
+#: apps/luseradd.c:209 apps/luseradd.c:222
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Σφάλμα στη δημιουργία ομάδας `%s': %s\n"
 
-#: apps/luseradd.c:269
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Αποτυχία δημιουργίας λογαριασμού: %s.\n"
 
-#: apps/luseradd.c:319
+#: apps/luseradd.c:327
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Σφάλμα στη δημιουργία %s: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:334
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Σφάλμα στη δημιουργία του ταχυδρομικού νήματος.\n"
@@ -566,48 +511,47 @@ msgstr "Σφάλμα κατά την αφαίρεση του %s: %s.\n"
 msgid "Error removing mail spool.\n"
 msgstr "Σφάλμα απομάκρυνσης mail spool.\n"
 
-#: apps/lusermod.c:164
-#: apps/lusermod.c:177
+#: apps/lusermod.c:178 apps/lusermod.c:191
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Αποτυχία στον ορισμό συνθηματικού για το χρήστη %s: %s.\n"
 
-#: apps/lusermod.c:187
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Δε μπόρεσε να γίνει κλείδωμα του χρήστη %s: %s.\n"
 
-#: apps/lusermod.c:195
+#: apps/lusermod.c:209
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Δε μπόρεσε να γίνει ξεκλείδωμα του χρήστη %s: %s.\n"
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:236
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr "Προειδοποίηση: Η ομάδα με ID %jd δεν υπάρχει.\n"
 
-#: apps/lusermod.c:275
+#: apps/lusermod.c:295
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Δε μπόρεσε να γίνει τροποποίηση του χρήστη %s: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:354
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Δε μπόρεσε να γίνει κλείδωμα της ομάδας %s: %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:365
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Δεν υπάρχει παλιός αρχικός κατάλογος για %s.\n"
 
-#: apps/lusermod.c:350
+#: apps/lusermod.c:370
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Δεν υπάρχει νέος αρχικός κατάλογος για %s.\n"
 
-#: apps/lusermod.c:356
+#: apps/lusermod.c:376
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Σφάλμα στη μετακίνηση του %s στο %s: %s.\n"
@@ -747,8 +691,7 @@ msgstr "το άρθρωμα `%s' δεν ορίζει `%s'"
 msgid "error reading terminal attributes"
 msgstr "σφάλμα κατά την ανάγνωση των γνωρισμάτων τερματικού"
 
-#: lib/prompt.c:71
-#: lib/prompt.c:83
+#: lib/prompt.c:71 lib/prompt.c:83
 msgid "error setting terminal attributes"
 msgstr "σφάλμα κατά τον ορισμό των γνωρισμάτων τερματικού"
 
@@ -790,14 +733,12 @@ msgstr "το όνομα ξεκινά με μια παύλα"
 msgid "name contains invalid char `%c'"
 msgstr "το όνομα περιέχει μη έγκυρο χαρακτήρα `%c'"
 
-#: lib/user.c:284
-#: lib/user.c:332
+#: lib/user.c:284 lib/user.c:332
 #, c-format
 msgid "user %s has no UID"
 msgstr "ο χρήστης %s δεν έχει UID"
 
-#: lib/user.c:307
-#: lib/user.c:333
+#: lib/user.c:307 lib/user.c:333
 #, c-format
 msgid "group %s has no GID"
 msgstr "η ομάδα %s δεν έχει GID"
@@ -820,7 +761,12 @@ msgstr "ο χρήστης δεν έχει όνομα ούτε UID"
 msgid "group has neither a name nor a GID"
 msgstr "η ομάδα δεν έχει όνομα ούτε UID"
 
-#: lib/user.c:1921
+#: lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr ""
+
+#: lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Μη έγκυρη προεπιλεγμένη τιμή για το πεδίο %s: %s"
@@ -841,8 +787,7 @@ msgstr "αδυναμία λήψης προεπιλεγμένου περιβάλ�
 msgid "couldn't get security context of `%s': %s"
 msgstr "αδυναμία λήψης περιβάλλοντος ασφάλειας του `%s': %s"
 
-#: lib/util.c:739
-#: lib/util.c:766
+#: lib/util.c:739 lib/util.c:766
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "αδυναμία λήψης περιβάλλοντος ασφάλειας του `%s': %s"
@@ -852,36 +797,19 @@ msgstr "αδυναμία λήψης περιβάλλοντος ασφάλεια�
 msgid "couldn't determine security context for `%s': %s"
 msgstr "αδυναμία καθορισμού περιβάλλοντος ασφάλειας του `%s': %s"
 
-#: modules/files.c:111
-#: modules/files.c:445
-#: modules/files.c:746
-#: modules/files.c:1013
-#: modules/files.c:1177
-#: modules/files.c:1408
-#: modules/files.c:1492
-#: modules/files.c:1713
-#: modules/files.c:1884
-#: modules/files.c:1901
-#: modules/files.c:1990
-#: modules/files.c:2009
-#: modules/files.c:2077
-#: modules/files.c:2098
-#: modules/files.c:2195
-#: modules/files.c:2214
-#: modules/files.c:2273
-#: modules/files.c:2292
-#: modules/files.c:2388
-#: modules/files.c:2403
+#: modules/files.c:111 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
+#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
+#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
+#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
+#: modules/files.c:2404 modules/files.c:2419
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "αδυναμία ανοίγματος `%s': %s"
 
-#: modules/files.c:123
-#: modules/files.c:152
-#: modules/files.c:218
-#: modules/files.c:758
-#: modules/files.c:1023
-#: modules/files.c:1189
+#: modules/files.c:123 modules/files.c:152 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "αδυναμία stat `%s': %s"
@@ -905,83 +833,66 @@ msgstr "αταίριαστο μέγεθος αντιγράφου ασφαλεί�
 msgid "%s value `%s': `:' not allowed"
 msgstr "η %s τιμή `%s': `:' δεν επιτρέπεται"
 
-#: modules/files.c:780
-#: modules/files.c:1031
-#: modules/files.c:1198
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "αδυναμία ανάγνωσης από `%s': %s"
 
-#: modules/files.c:789
-#: modules/files.c:796
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "η καταχώριση υπάρχει ήδη στο αρχείο"
 
-#: modules/files.c:803
-#: modules/files.c:813
-#: modules/files.c:824
-#: modules/files.c:1257
-#: modules/files.c:1265
-#: modules/files.c:1273
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "αδυναμία εγγραφής σε `%s': %s"
 
-#: modules/files.c:986
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "το αντικείμενο οντότητας δεν έχει γνώρισμα  %s"
 
-#: modules/files.c:1756
+#: modules/files.c:1059
+#, fuzzy
+msgid "entry with conflicting name already present in file"
+msgstr "η καταχώριση υπάρχει ήδη στο αρχείο"
+
+#: modules/files.c:1772
 msgid "`:' not allowed in encrypted password"
 msgstr "η `:' δεν επιτρέπεται σε κρυπτογραφημένο συνθηματικό"
 
-#: modules/files.c:1768
-#: modules/ldap.c:1563
-#: modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "σφάλμα κρυπτογράφησης συνθηματικού"
 
-#: modules/files.c:2674
-#: modules/files.c:2752
+#: modules/files.c:2690 modules/files.c:2768
 msgid "not executing with superuser privileges"
 msgstr "δεν γίνεται εκτέλεση με προνόμια υπερχρήστη"
 
-#: modules/files.c:2765
+#: modules/files.c:2781
 msgid "no shadow file present -- disabling"
 msgstr "δεν υπάρχει αρχείο shadow -- γίνεται πενεργοποίηση"
 
 #: modules/krb5.c:100
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "σφάλμα σύνδεσης στον εξυπηρετητή kadm5 για την υπηρεσία `%s' στο realm `%s': %s"
+msgstr ""
+"σφάλμα σύνδεσης στον εξυπηρετητή kadm5 για την υπηρεσία `%s' στο realm `%s': "
+"%s"
 
-#: modules/krb5.c:132
-#: modules/krb5.c:198
-#: modules/krb5.c:297
-#: modules/krb5.c:385
-#: modules/krb5.c:437
-#: modules/krb5.c:525
-#: modules/krb5.c:591
+#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
+#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
 msgid "error initializing kerberos library"
 msgstr "σφάλμα κατά την ενεργοποίηση της βιβλιοθήκης kerberos"
 
-#: modules/krb5.c:139
-#: modules/krb5.c:219
-#: modules/krb5.c:329
-#: modules/krb5.c:337
-#: modules/krb5.c:405
-#: modules/krb5.c:458
-#: modules/krb5.c:546
-#: modules/krb5.c:608
+#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
+#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "σφάλμα ανάλυσης ονόματος χρήστη `%s' για kerberos"
 
-#: modules/krb5.c:209
-#: modules/krb5.c:396
-#: modules/krb5.c:448
-#: modules/krb5.c:536
+#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "η δομή οντότητας δεν έχει %s ή %s γνωρίσματα"
@@ -996,8 +907,7 @@ msgstr "η οντότητα δεν έχει %s ή %s γνωρίσματα"
 msgid "entity was created with no %s or %s attributes"
 msgstr "η οντότητα δημιουργήθηκε με %s ή %s γνωρίσματα"
 
-#: modules/krb5.c:471
-#: modules/krb5.c:559
+#: modules/krb5.c:471 modules/krb5.c:559
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "σφάλμα ανάγνωσης πληροφοριών για `%s' από kerberos"
@@ -1044,7 +954,8 @@ msgstr "αδυναμία δέσμευσης με τον εξυπηρετητή L
 #: modules/ldap.c:418
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "αδυναμία δέσμευσης με τον εξυπηρετητή LDAP, πρώτη προσπάθεια ως `%s': %s"
+msgstr ""
+"αδυναμία δέσμευσης με τον εξυπηρετητή LDAP, πρώτη προσπάθεια ως `%s': %s"
 
 #: modules/ldap.c:1325
 #, c-format
@@ -1061,8 +972,7 @@ msgstr "το αντικείμενο χρήστη δημιουργήθηκε χω
 msgid "error creating a LDAP directory entry: %s"
 msgstr "Σφάλμα δημιουργίας εγγραφής καταλόγου LDAP: %s"
 
-#: modules/ldap.c:1380
-#: modules/ldap.c:1624
+#: modules/ldap.c:1380 modules/ldap.c:1624
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "Σφάλμα επεξεργασίας εγγραφής καταλόγου LDAP: %s"
@@ -1082,9 +992,7 @@ msgstr "το αντικείμενο δεν έχει ιδιότητα %s"
 msgid "error removing LDAP directory entry: %s"
 msgstr "σφάλμα κατά την απομάκρυνση καταχώρισης καταλόγου LDAP: %s"
 
-#: modules/ldap.c:1522
-#: modules/ldap.c:1538
-#: modules/ldap.c:1657
+#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
 #: modules/ldap.c:1756
 #, c-format
 msgid "object has no %s attribute"
@@ -1142,8 +1050,7 @@ msgstr "Σφάλμα Cyrus SASL στη δημιουργία χρήστη: %s"
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Σφάλμα Cyrus SASL στη διαγραφή χρήστη: %s"
 
-#: modules/sasldb.c:520
-#: modules/sasldb.c:528
+#: modules/sasldb.c:520 modules/sasldb.c:528
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "σφάλμα αρχικοποίησης Cyrus SASL: %s"
@@ -1160,8 +1067,7 @@ msgstr "σφάλμα διαγραφής αρχικού καταλόγου χρή
 msgid "error moving home directory for user"
 msgstr "σφάλμα μετακίνησης αρχικού καταλόγου χρήστη"
 
-#: python/admin.c:689
-#: python/admin.c:766
+#: python/admin.c:689 python/admin.c:766
 msgid "error creating mail spool for user"
 msgstr "σφάλμα στη δημιουργία ταχυδρομικού spool χρήστη"
 
@@ -1230,4 +1136,3 @@ msgstr "Αντιγραφή δομής χρήστη:\n"
 #, fuzzy
 #~ msgid "could not convert internal data to LDAPMods"
 #~ msgstr "Δεν ήταν δυνατή η υπογραφή δεδομένων:%s"
-

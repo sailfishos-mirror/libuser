@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-02 00:53+0200\n"
+"POT-Creation-Date: 2009-12-11 11:02+0100\n"
 "PO-Revision-Date: 2009-08-29 00:15+0300\n"
 "Last-Translator: Ville-Pekka Vainio <vpivaini@cs.helsinki.fi>\n"
 "Language-Team: Finnish <laatu@lokalisointi.org>\n"
@@ -100,34 +100,35 @@ msgstr "Tuntematon käyttäjä on kirjautunut.\n"
 msgid "User mismatch.\n"
 msgstr "Käyttäjän tiedot ei täsmää.\n"
 
-#: apps/lchage.c:111 apps/lid.c:113 apps/lpasswd.c:66 apps/luseradd.c:88
-#: apps/luserdel.c:61 apps/lusermod.c:86
+#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[VALITSIN...] käyttäjä"
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:116 apps/lnewusers.c:66
-#: apps/lpasswd.c:69 apps/luseradd.c:91 apps/luserdel.c:64 apps/lusermod.c:89
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
+#: apps/lusermod.c:103
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Argumenttien käsittelyssä tapahtui virhe: %s\n"
 
-#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:106 apps/luserdel.c:72
-#: apps/lusermod.c:100
+#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:120 apps/luserdel.c:72
+#: apps/lusermod.c:114
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Käyttäjänimeä ei ole määritelty.\n"
 
 #: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:160 apps/lnewusers.c:77
-#: apps/lpasswd.c:95 apps/luseradd.c:129 apps/luserdel.c:81
-#: apps/lusermod.c:141 samples/enum.c:56 samples/testuser.c:71
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
+#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Virhe alustettaessa %s: %s.\n"
 
 #: apps/lchage.c:142 apps/lchfn.c:114 apps/lchsh.c:100 apps/lpasswd.c:144
-#: apps/luserdel.c:89 apps/lusermod.c:155
+#: apps/luserdel.c:89 apps/lusermod.c:169
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Käyttäjää %s ei ole olemassa.\n"
@@ -196,7 +197,7 @@ msgstr "Vanhenemistiedon muuttaminen epäonnistui %s:lle: %s\n"
 msgid "[OPTION...] [user]"
 msgstr "[VALITSIN...] [käyttäjä]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:147
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Käyttäjänimeä ei määritelty, ei nimeä uid:lle %d.\n"
@@ -276,7 +277,7 @@ msgid "No group name specified.\n"
 msgstr "Ryhmän nimeä ei määritelty.\n"
 
 #: apps/lgroupadd.c:87 apps/lgroupmod.c:104 apps/lnewusers.c:178
-#: apps/luseradd.c:150 apps/lusermod.c:112
+#: apps/luseradd.c:164 apps/lusermod.c:126
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "Epäkelpo ryhmätunnus %s\n"
@@ -296,7 +297,7 @@ msgstr "Ryhmää %s ei ole olemassa.\n"
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Ryhmää %s ei voitu poistaa: %s.\n"
 
-#: apps/lgroupmod.c:122 apps/lusermod.c:148
+#: apps/lgroupmod.c:122 apps/lusermod.c:162
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "Sekä -L että -U annettu.\n"
@@ -321,22 +322,27 @@ msgstr "Ryhmän %s lukitusta ei voitu avata: %s.\n"
 msgid "Group %s could not be modified: %s\n"
 msgstr "Ryhmää %s ei voitu muokata: %s\n"
 
-#: apps/lid.c:44
+#: apps/lid.c:49 apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "Virhe etsittäessä %s: %s\n"
 
-#: apps/lid.c:129
+#: apps/lid.c:53
+#, fuzzy, c-format
+msgid "%s does not exist\n"
+msgstr "Käyttäjää %s ei ole olemassa.\n"
+
+#: apps/lid.c:144
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Ryhmänimeä ei määritelty, käytetään %s.\n"
 
-#: apps/lid.c:133
+#: apps/lid.c:148
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Ryhmänimeä ei määritelty, ei nimeä gid:lle %d.\n"
 
-#: apps/lid.c:143
+#: apps/lid.c:158
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Käyttäjänimeä ei määritelty, käytetään %s.\n"
@@ -355,7 +361,7 @@ msgstr "Virhe avattaessa ”%s”: %s.\n"
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Virhe luotaessa tunnusta käyttäjälle ”%s”: virheellinen rivi.\n"
 
-#: apps/lnewusers.c:129 apps/luseradd.c:116 apps/lusermod.c:127
+#: apps/lnewusers.c:129 apps/luseradd.c:130 apps/lusermod.c:141
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "Epäkelpo käyttäjätunnus %s\n"
@@ -369,22 +375,27 @@ msgstr "Kieltäydytään luomasta tunnusta UID:llä 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Virhe luotaessa ryhmää ”%s” GID:llä %jd: %s\n"
 
-#: apps/lnewusers.c:280
+#: apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr ""
+
+#: apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Virhe ensimmäisen salasanan asettamisessa käyttäjälle %s:%s\n"
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Virhe kotihakemiston luomisessa kohteelle %s:%s\n"
 
-#: apps/lnewusers.c:309
+#: apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Virhe postijonon luomisessa kohteelle %s.\n"
 
-#: apps/lnewusers.c:315
+#: apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Virhe käyttäjätunnuksen luomisessa kohteelle %s:%s\n"
@@ -412,7 +423,7 @@ msgstr "Salasanat eivät täsmää, yritä uudelleen.\n"
 msgid "Password change canceled.\n"
 msgstr "Salasanan vaihto peruutettu.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:277 apps/luseradd.c:287
+#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Virhe salasanan asettamisessa käyttäjälle %s:%s.\n"
@@ -427,27 +438,27 @@ msgstr "Virhe salasanan asettamisessa ryhmälle %s:%s.\n"
 msgid "Password changed.\n"
 msgstr "Salasana vaihdettu.\n"
 
-#: apps/luseradd.c:177
+#: apps/luseradd.c:191
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "Ryhmää %jd ei ole olemassa\n"
 
-#: apps/luseradd.c:195 apps/luseradd.c:208
+#: apps/luseradd.c:209 apps/luseradd.c:222
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "Virhe luotaessa ryhmää ”%s”: %s\n"
 
-#: apps/luseradd.c:269
+#: apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Tunnuksen luominen epäonnistu: %s.\n"
 
-#: apps/luseradd.c:319
+#: apps/luseradd.c:327
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Virhe luotaessa %s: %s.\n"
 
-#: apps/luseradd.c:326
+#: apps/luseradd.c:334
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Virhe luotaessa postijonoa.\n"
@@ -492,47 +503,47 @@ msgstr "Virhe poistettaessa %s:%s.\n"
 msgid "Error removing mail spool.\n"
 msgstr "Virhe poistettaessa postijonoa.\n"
 
-#: apps/lusermod.c:164 apps/lusermod.c:177
+#: apps/lusermod.c:178 apps/lusermod.c:191
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Salasanan asettaminen käyttäjälle %s:%s epäonnistui.\n"
 
-#: apps/lusermod.c:187
+#: apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "Käyttäjää %s ei voitu lukita: %s.\n"
 
-#: apps/lusermod.c:195
+#: apps/lusermod.c:209
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "Käyttäjän %s lukitusta ei voitu avata: %s.\n"
 
-#: apps/lusermod.c:221
+#: apps/lusermod.c:236
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr "Varoitus: Ryhmää ID:llä %jd ei ole olemassa.\n"
 
-#: apps/lusermod.c:275
+#: apps/lusermod.c:295
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "Käyttäjää %s ei voitu muokata: %s.\n"
 
-#: apps/lusermod.c:334
+#: apps/lusermod.c:354
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "Ryhmää %s ei voitu muokata: %s.\n"
 
-#: apps/lusermod.c:345
+#: apps/lusermod.c:365
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "Käyttäjällä %s ei ole vanhaa kotihakemistoa.\n"
 
-#: apps/lusermod.c:350
+#: apps/lusermod.c:370
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "Käyttäjällä %s ei ole uutta kotihakemistoa.\n"
 
-#: apps/lusermod.c:356
+#: apps/lusermod.c:376
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Virhe siirrettäessä %s kohteeseen %s:%s.\n"
@@ -742,7 +753,12 @@ msgstr "käyttäjällä ei ole nimeä eikä UID:tä"
 msgid "group has neither a name nor a GID"
 msgstr "ryhmällä ei ole nimeä eikä GID:tä"
 
-#: lib/user.c:1921
+#: lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr ""
+
+#: lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Kentän %s oletusarvo ei kelpaa: %s"
@@ -772,19 +788,19 @@ msgstr "ei voitu asettaa oletusturvakontekstia ”%s”: %s"
 msgid "couldn't determine security context for `%s': %s"
 msgstr "ei voitu määrittää turvaympäristöä ”%s”: %s"
 
-#: modules/files.c:111 modules/files.c:445 modules/files.c:746
-#: modules/files.c:1013 modules/files.c:1177 modules/files.c:1408
-#: modules/files.c:1492 modules/files.c:1713 modules/files.c:1884
-#: modules/files.c:1901 modules/files.c:1990 modules/files.c:2009
-#: modules/files.c:2077 modules/files.c:2098 modules/files.c:2195
-#: modules/files.c:2214 modules/files.c:2273 modules/files.c:2292
-#: modules/files.c:2388 modules/files.c:2403
+#: modules/files.c:111 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
+#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
+#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
+#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
+#: modules/files.c:2404 modules/files.c:2419
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "ei voitu avata ”%s”: %s"
 
 #: modules/files.c:123 modules/files.c:152 modules/files.c:218
-#: modules/files.c:758 modules/files.c:1023 modules/files.c:1189
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "ei voitu avata ”%s”: %s"
@@ -808,39 +824,44 @@ msgstr "varmuuskopiotiedoston koko ei täsmää"
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s arvo ”%s”: merkkiä ”:” ei sallita"
 
-#: modules/files.c:780 modules/files.c:1031 modules/files.c:1198
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "ei voitu lukea kohteesta ”%s”: %s"
 
-#: modules/files.c:789 modules/files.c:796
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "merkintä on jo tiedostossa"
 
-#: modules/files.c:803 modules/files.c:813 modules/files.c:824
-#: modules/files.c:1257 modules/files.c:1265 modules/files.c:1273
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "ei voitu kirjoittaa ”%s”: %s"
 
-#: modules/files.c:986
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1756
+#: modules/files.c:1059
+#, fuzzy
+msgid "entry with conflicting name already present in file"
+msgstr "merkintä on jo tiedostossa"
+
+#: modules/files.c:1772
 msgid "`:' not allowed in encrypted password"
 msgstr "merkkiä ”:” ei sallita salatussa salasanassa"
 
-#: modules/files.c:1768 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
 msgid "error encrypting password"
 msgstr "virhe salasanan kryptauksessa"
 
-#: modules/files.c:2674 modules/files.c:2752
+#: modules/files.c:2690 modules/files.c:2768
 msgid "not executing with superuser privileges"
 msgstr "ei suoriteta pääkäyttäjän oikeuksilla"
 
-#: modules/files.c:2765
+#: modules/files.c:2781
 msgid "no shadow file present -- disabling"
 msgstr "varjosalasanatiedostoa ei ole – otetaan pois käytöstä"
 
