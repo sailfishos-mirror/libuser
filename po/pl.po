@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-10-26 23:47+0000\n"
-"PO-Revision-Date: 2009-10-27 02:45+0100\n"
+"POT-Creation-Date: 2009-12-10 14:44+0000\n"
+"PO-Revision-Date: 2009-12-10 17:02+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <fedora-trans-pl@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -383,22 +383,29 @@ msgstr "Nie można utworzyć konta o UID 0.\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "Błąd podczas tworzenie grupy dla \"%s\" z GID %jd: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr ""
+"Odmawianie domyślnego użycia niebezpiecznego katalogu domowego \"%s\" dla "
+"%s\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "Błąd podczas ustawiania wstępnego hasła dla %s: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Błąd podczas tworzenia katalogu domowego dla %s: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "Błąd podczas tworzenia bufora poczty dla %s.\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Błąd podczas tworzenia konta użytkownika dla %s: %s\n"
@@ -760,7 +767,12 @@ msgstr "użytkownik nie posiada nazwy ani UID"
 msgid "group has neither a name nor a GID"
 msgstr "grupa nie posiada nazwy ani GID"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "Odmawianie domyślnego użycia niebezpiecznego katalogu domowego \"%s\""
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Nieprawidłowa domyślna wartość pola %s: %s"

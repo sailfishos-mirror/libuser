@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-07 20:17+0000\n"
-"PO-Revision-Date: 2009-12-08 09:56+0900\n"
+"POT-Creation-Date: 2009-12-10 02:40+0000\n"
+"PO-Revision-Date: 2009-12-10 14:23+0900\n"
 "Last-Translator: Kiyoto Hashida <khashida@redhat.com>\n"
 "Language-Team: Japanese <jp@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: Plural-Forms: nplurals=1; plural=0;\n\n"
+"\n"
 
 #: ../apps/apputil.c:109
 #, c-format
@@ -387,22 +388,27 @@ msgstr "UID 0でのアカウント作成を拒否中です。\n"
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s' 用に GID %jd でグループ作成中にエラー: %s\n"
 
-#: ../apps/lnewusers.c:280
+#: ../apps/lnewusers.c:283
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
+msgstr "デフォルトで %s 用の危険なホームディレクトリ `%s' の使用を拒否中です\n"
+
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s 用の初期パスワード設定中にエラー: %s\n"
 
-#: ../apps/lnewusers.c:295
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s 用の新規ホームディレクトリー作成でエラー: %s\n"
 
-#: ../apps/lnewusers.c:309
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%s 用のメールスプール作成でエラー。\n"
 
-#: ../apps/lnewusers.c:315
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s 用のユーザーアカウント作成でエラー: %s。\n"
@@ -764,7 +770,12 @@ msgstr "ユーザーには名前もしくは UID がありません。"
 msgid "group has neither a name nor a GID"
 msgstr "グループには名前もしくは GID がありません。"
 
-#: ../lib/user.c:1921
+#: ../lib/user.c:1284
+#, c-format
+msgid "Refusing to use dangerous home directory `%s' by default"
+msgstr "デフォルトで危険なホームディレクトリ `%s' の使用を拒否中です"
+
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "領域 %s の値は無効なデフォルト値です : %s"
