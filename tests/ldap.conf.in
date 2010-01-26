@@ -38,4 +38,3 @@ server = 127.0.0.1:3890
 basedn = dc=libuser
 bindtype = simple
 binddn = cn=Manager,dc=libuser
-password = password

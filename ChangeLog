@@ -1,3 +1,7 @@
+2010-01-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/ldap.conf.in (ldap/password): Remove, the value is not used.
+
 2009-12-11  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release version 0.56.13.
