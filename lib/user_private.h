@@ -25,6 +25,7 @@
 #ifndef libuser_user_private_h
 #define libuser_user_private_h
 
+#include <config.h>
 #include <sys/types.h>
 #include <glib.h>
 #include <gmodule.h>
@@ -39,8 +40,7 @@ G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC		0x00000006
 #define LU_MODULE_VERSION	0x000c0000
-/* FIXME: should use dgettext */
-#define _(String)		gettext(String)
+#define _(String)		dgettext(PACKAGE_NAME, String)
 #define N_(String)		String
 /* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
  * character, and we assume that all crypt algorithms generate strings at
