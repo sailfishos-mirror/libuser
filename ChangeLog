@@ -1,7 +1,11 @@
+2010-02-03  Thierry Vignaud <tvignaud@mandriva.com>
+
+	* po/fr.po: Update.
+
 2010-02-03  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/user_private.h (_): Use dcgettext ().  Based on patch by
-	Thierry Vignaud" <tvignaud@mandriva.com>.
+	Thierry Vignaud <tvignaud@mandriva.com>.
 
 2010-01-26  Miloslav Trmač  <mitr@redhat.com>
 
