@@ -30,7 +30,7 @@ gboolean
 lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		  struct lu_error **error)
 {
-	int i;
+	int i, is_tty;
 
 	(void)calldata;
 	LU_ERROR_CHECK(error);
@@ -39,6 +39,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		g_assert(prompts != NULL);
 	}
 
+	is_tty = isatty(fileno(stdin));
 	for (i = 0; i < count; i++) {
 		char buf[LINE_MAX], *p;
 		struct termios otermios, ntermios;
@@ -58,7 +59,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 		prompts[i].value = NULL;
 		prompts[i].free_value = NULL;
 
-		if (prompts[i].visible == FALSE) {
+		if (prompts[i].visible == FALSE && is_tty) {
 			if (tcgetattr(fileno(stdin), &otermios) == -1) {
 				lu_error_new(error, lu_error_terminal,
 					     _("error reading terminal attributes"));
@@ -77,7 +78,7 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 				     _("error reading from terminal"));
 			return FALSE;
 		}
-		if (prompts[i].visible == FALSE) {
+		if (prompts[i].visible == FALSE && is_tty) {
 			if (tcsetattr(fileno(stdin), TCSADRAIN, &otermios) == -1) {
 				lu_error_new(error, lu_error_terminal,
 					     _("error setting terminal attributes"));

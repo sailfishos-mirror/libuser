@@ -1,3 +1,8 @@
+2010-02-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/prompt.c (lu_prompt_console): Don't try to modify TTY attributes
+	if stdin is not a TTY.
+
 2010-02-03  Thierry Vignaud <tvignaud@mandriva.com>
 
 	* po/fr.po: Update.
