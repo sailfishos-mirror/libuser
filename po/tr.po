@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2008-02-23 00:53+0100\n"
 "Last-Translator: Bahadir Yagan <bahadir.yagan@mentorsystem.com>\n"
 "Language-Team: Turkish <fedora-trans-tr@redhat.com>\n"
@@ -676,15 +676,15 @@ msgstr "`%s' de modül sürümü uyumsuzluğu"
 msgid "module `%s' does not define `%s'"
 msgstr "Grup %s yok.\n"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "uçbirim özellikleri okunurken hata"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "uçbirim özellikleri ayarlanırken hata"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "uçbirimden okumada hata"
 
@@ -1019,11 +1019,11 @@ msgstr "LDAP Bağlantı DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP Bağlantı Parolası"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Kullanıcısı"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Yetkilendirme Kullanıcısı"
 

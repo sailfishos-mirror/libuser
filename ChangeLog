@@ -1,5 +1,9 @@
 2010-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Release 0.56.14.
+	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 	* docs/libuser.conf.5.in ([ldap]): Document the "password" option.
 
 2010-02-08  Rob Myers  <rob.myers@gtri.gatech.edu>

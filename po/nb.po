@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.15\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-10-05 12:15+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@broadpark.no>\n"
 "Language-Team: Norwegian/Bokmaal <i18n-nb@lister.ping.uio.no>\n"
@@ -678,15 +678,15 @@ msgstr "feil modulversjon i `%s'"
 msgid "module `%s' does not define `%s'"
 msgstr "modul «%s» definerer ikke «%s»"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "feil under lesing av terminalattributter"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "feil under setting av terminalattributter"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "feil ved lesing fra terminal"
 
@@ -1020,11 +1020,11 @@ msgstr "LDAP Bind DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-passord"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruker"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-autorisasjonsbruker"
 

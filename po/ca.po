@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-08-03 10:10+0100\n"
 "Last-Translator: Xavier Conde Rueda <xavi.conde@gmail.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
@@ -682,15 +682,15 @@ msgstr "la versió del mòdul no coincideix a «%s»"
 msgid "module `%s' does not define `%s'"
 msgstr "el mòdul %s no defineix «%s»"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "s'ha produït un error en llegir els atributs del terminal"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "s'ha produït un error en configurar els atributs del terminal"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "s'ha produït un error en llegir del terminal"
 
@@ -1030,11 +1030,11 @@ msgstr "DN del vincle de LDAP"
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-12-09 11:38+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
@@ -689,15 +689,15 @@ msgstr "`%s' ରେ ଏକକାଂଶ ର ସଂସ୍କରଣ ମିଶୁ �
 msgid "module `%s' does not define `%s'"
 msgstr "`%s' ଏକକାଂଶ ଟି `%s' କୁ ବ୍ଯାଖ୍ଯା କରୁନାହିଁ"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "ଟର୍ମିନାଲ ର ଗୁଣ ମାନଙ୍କୁ ପଢିବା ସମୟରେ ତୃଟି"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "ଟର୍ମିନାଲ ର ଗୁଣ ମାନଙ୍କୁ ସେଟ ସମୟରେ ତୃଟି"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "ଟର୍ମିନାଲ ରୁ ପଢିବା ସମୟରେ ତୃଟି"
 
@@ -1030,11 +1030,11 @@ msgstr "ଡି.ଏନ୍. ବନ୍ଧିତ ଏଲ.ଡି.ଏ.ପି."
 msgid "LDAP Bind Password"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ ବନ୍ଧିତ ଏଲ.ଡି.ଏ.ପି."
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "ଏଲ.ଡି.ଏ.ପି. ଏସ୍.ଏ.ଏସ୍.ଏଲ. ଚାଳକ"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "ଏଲ.ଡି.ଏ.ପି. ଏସ୍.ଏ.ଏସ୍.ଏଲ. ବୈଧିକରଣ ଚାଳକ"
 

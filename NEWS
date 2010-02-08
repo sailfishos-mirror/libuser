@@ -1,3 +1,9 @@
+0.56.14
+* Use dgettext() inside the library.
+* Allow passing passwords using a pipe.
+* Allow specifying the LDAP password in a config file (patch by Rob Myers
+  <rob.myers@gtri.gatech.edu>).
+
 0.56.13
 * Report error in lid if the specified name does not exist.
 * Don't default a home directory to a path that contains a "." or ".." component

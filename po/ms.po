@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ms\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2007-03-25 00:25+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <translation-team-ms@lists.sourceforge.net>\n"
@@ -678,15 +678,15 @@ msgstr "versi modul tidak sepadan dalam `%s'"
 msgid "module `%s' does not define `%s'"
 msgstr "modul `%s' tidak mentakrif `%s'"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "ralat membaca sifat terminal"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "ralat menetapkan sifat terminal"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "ralat membaca dari terminal"
 
@@ -1020,11 +1020,11 @@ msgstr "DN Bind LDAP"
 msgid "LDAP Bind Password"
 msgstr "Katalaluan Bind LDAP"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "Pengguna LDAP SASL"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "Pengguna Pengesahan LDAP SASL"
 

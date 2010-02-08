@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-09-08 18:33+0100\n"
 "Last-Translator: Nagy István Zoltán <nagyesta@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -686,15 +686,15 @@ msgstr "modulverzió-hiba ebben: '%s'"
 msgid "module `%s' does not define `%s'"
 msgstr "a(z) `%s' modul nem tartalmazza a(z) `%s' definícióját"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "hiba történt a terminálattribútumok beolvasásakor"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "nem sikerült beállítani a terminál jellemzőit"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "nem sikerült olvasni a terminálról"
 
@@ -1033,11 +1033,11 @@ msgstr "LDAP csatlakozás"
 msgid "LDAP Bind Password"
 msgstr "LDAP csatlakozási jelszó"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL felhasználónév"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL azonosítási felhasználónév"
 

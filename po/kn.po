@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.kn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-12-11 12:47+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <kde-l10n-kn@kde.org>\n"
@@ -684,15 +684,15 @@ msgstr "`%s' ನಲ್ಲಿ ಘಟಕ ಆವೃತ್ತಿಯು ತಾಳೆ�
 msgid "module `%s' does not define `%s'"
 msgstr "`%s' ಘಟಕವು %s' ಅನ್ನು ವಿವರಿಸುವುದಿಲ್ಲ"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "ಟರ್ಮಿನಲ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಓದುವಾಗ ದೋಷ"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "ಟರ್ಮಿನಲ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹೊಂದಿಸುವಾಗ ದೋಷ"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "ಟರ್ಮಿನಲ್‍ನಿಂದ ಓದುವಲ್ಲಿ ದೋಷ"
 
@@ -1027,11 +1027,11 @@ msgstr "LDAP ಬೈಂಡ್ DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP ಬೈಂಡ್ ಗುಪ್ತಪದ"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ಬಳಕೆದಾರ"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ದೃಢೀಕರಣ ಬಳಕೆದಾರ"
 

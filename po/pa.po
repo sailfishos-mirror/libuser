@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.pa\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-12-09 11:17+0530\n"
 "Last-Translator: Jaswinder Singh <jsingh@redhat.com>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -688,15 +688,15 @@ msgstr "`%s' ਵਿੱਚ ਮੋਡੀਊਲ ਵਰਜਨ ਭਿੰਨਤਾ"
 msgid "module `%s' does not define `%s'"
 msgstr "`%s' ਮੈਡੀਊਲ `%s' ਨੂੰ ਪਰਭਾਸ਼ਿਤ ਨਹੀਂ ਕਰਦਾ ਹੈ"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "ਟਰਮੀਨਲ ਵਿਸ਼ੇਸ਼ਤਾ ਪੜਨ ਵਿੱਚ ਗਲਤੀ"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "ਟਰਮੀਨਲ ਵਿਸ਼ੇਸ਼ਤਾ ਦੇਣ ਵਿੱਚ ਗਲਤੀ"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚੋਂ ਪੜ੍ਹਨ ਵਿੱਚ ਗਲਤੀ"
 
@@ -1029,11 +1029,11 @@ msgstr "LDAP ਬੰਧਨ DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP ਬੰਧਨ ਗੁਪਤ-ਕੋਡ"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ਉਪਯੋਗੀ"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ਪ੍ਰਬੰਧਕੀ ਉਪਯੋਗੀ"
 

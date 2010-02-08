@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2009-12-11 10:49+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <fedora-cs-list@redhat.com>\n"
@@ -681,15 +681,15 @@ msgstr "nesouhlasí verze modulu v '%s'"
 msgid "module `%s' does not define `%s'"
 msgstr "modul `%s' nedefinuje `%s'"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "chyba při čtení atributů terminálu"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "chyba při nastavování atributů terminálu"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "chyba při čtení z terminálu"
 
@@ -1021,11 +1021,11 @@ msgstr "LDAP Bind DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind heslo"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL uživatel"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL uživatel pro autentizaci"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.HEAD.mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2009-12-11 11:02+0100\n"
+"POT-Creation-Date: 2010-02-08 14:50+0100\n"
 "PO-Revision-Date: 2007-07-18 15:25+0200\n"
 "Last-Translator: Jovan Naumovski <jovan@lugola.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -685,15 +685,15 @@ msgstr "погрешна верзија на модул во „%s“"
 msgid "module `%s' does not define `%s'"
 msgstr "модулот „%s“ не дефинира „%s“"
 
-#: lib/prompt.c:64
+#: lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "грешка при читање на атрибутите во терминалот"
 
-#: lib/prompt.c:71 lib/prompt.c:83
+#: lib/prompt.c:72 lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "грешка при подесување на атрибути за терминалот"
 
-#: lib/prompt.c:77
+#: lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "грешка при читање од терминалот"
 
@@ -1027,11 +1027,11 @@ msgstr "LDAP Bind DN"
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind лозинка"
 
-#: modules/ldap.c:2501
+#: modules/ldap.c:2503
 msgid "LDAP SASL User"
 msgstr "LDAP SASL корисник"
 
-#: modules/ldap.c:2508
+#: modules/ldap.c:2510
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL авторизација за корисник"
 
