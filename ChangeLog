@@ -1,5 +1,14 @@
 2010-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/libuser.conf.5.in ([ldap]): Document the "password" option.
+
+2010-02-08  Rob Myers  <rob.myers@gtri.gatech.edu>
+
+	* modules/ldap.c (libuser_ldap_init): Allow specifying the LDAP password
+	in a config file.
+
+2010-02-08  Miloslav Trmač  <mitr@redhat.com>
+
 	* lib/prompt.c (lu_prompt_console): Don't try to modify TTY attributes
 	if stdin is not a TTY.
 

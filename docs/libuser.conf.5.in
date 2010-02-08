@@ -1,6 +1,6 @@
 '\" t
 .\" A man page for libuser.conf -*- nroff -*-
-.\" Copyright (C) 2005, 2008 Red Hat, Inc.
+.\" Copyright (C) 2005, 2008, 2010 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -17,7 +17,7 @@
 .\" Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 .\"
 .\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH libuser.conf 5 "Jan 7 2008" libuser
+.TH libuser.conf 5 2010-02-08 libuser
 
 .SH NAME
 libuser.conf \- configuration for libuser and libuser utilities
@@ -366,6 +366,11 @@ Default value is \fBcn=manager,dc=example,dc=com\fR.
 The SASLv2 identity for authenticating to the LDAP server,
 also overrides the user name for generating a bind DN.
 Default value is the name of the invoking user.
+
+.TP
+.B password
+The password used for a simple bind by default.  If not specified, there is
+no default and the user must supply the password each time.
 
 .TP
 .B authuser

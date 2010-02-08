@@ -2495,6 +2495,8 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 
 	ctx->prompts[LU_LDAP_PASSWORD].key = "ldap/password";
 	ctx->prompts[LU_LDAP_PASSWORD].prompt = N_("LDAP Bind Password");
+	ctx->prompts[LU_LDAP_PASSWORD].default_value =
+		lu_cfg_read_single(context, "ldap/password", NULL);
 	ctx->prompts[LU_LDAP_PASSWORD].visible = FALSE;
 
 	ctx->prompts[LU_LDAP_AUTHUSER].key = "ldap/user";
