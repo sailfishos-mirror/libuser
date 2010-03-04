@@ -86,9 +86,9 @@ archive:
 	cd /tmp/$(PACKAGE)-export-tmp; ./autogen.sh ; \
 		./configure --sysconfdir=/etc --with-ldap --enable-gtk-doc \
 		--without-sasl; make -C docs/reference; make dist
-	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.bz2 .
+	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.xz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
-	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.bz2\".
+	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.xz\".
 
 
 ## Dependency data

@@ -4,6 +4,7 @@
 	* NEWS: Update.
 	* po/LINGUAS: Sort.
 
+	* Makefile.am (archive)
 	* configure.in: Use xz for compressing the distribution tarball.
 
 2010-02-08  Miloslav Trmač  <mitr@redhat.com>
