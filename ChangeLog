@@ -1,3 +1,11 @@
+2010-03-04  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Release 0.56.15.
+	* NEWS: Update.
+	* po/LINGUAS: Sort.
+
+	* configure.in: Use xz for compressing the distribution tarball.
+
 2010-02-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.56.14.

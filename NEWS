@@ -1,3 +1,6 @@
+0.56.13
+* Update translations.
+
 0.56.14
 * Use dgettext() inside the library.
 * Allow passing passwords using a pipe.
