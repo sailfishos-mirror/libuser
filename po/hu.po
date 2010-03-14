@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-13 13:49+0000\n"
-"PO-Revision-Date: 2010-03-14 10:50+0100\n"
-"Last-Translator: Nikolas Slivka <snicore@gmail.com>\n"
+"POT-Creation-Date: 2010-03-14 18:49+0000\n"
+"PO-Revision-Date: 2010-03-14 23:06+0100\n"
+"Last-Translator: Peter Bojtos <ptr@ulx.hu>\n"
 "Language-Team: Fedora Hungarian Translation Team <fedora-trans-hu@redhat.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -91,7 +91,7 @@ msgstr "Ismeretlen felhasználói környezet"
 #: ../apps/apputil.c:614
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "Az alapértelmezett kontextus beállítása nem sikerült a /etc/passwd esetében \n"
 
 #: ../apps/apputil.c:623
 #, c-format
@@ -142,7 +142,7 @@ msgstr "[OPCIÓ...] felhasználó"
 #: ../apps/lusermod.c:103
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "Hiba a paraméter értelmezésekor: %s.\n"
 
 #: ../apps/lchage.c:123
 #: ../apps/lpasswd.c:83
@@ -300,15 +300,15 @@ msgid "Finger information changed.\n"
 msgstr "Az információ frissítése megtörtént."
 
 #: ../apps/lchfn.c:299
-#, c-format
+#, fuzzy, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "A személyes adatok nem változtak: %s \n"
 
 #. Give the user some idea of what's going on.
 #: ../apps/lchsh.c:85
-#, fuzzy, c-format
+#, c-format
 msgid "Changing shell for %s.\n"
-msgstr "A parancsértelmező megváltoztatása."
+msgstr "%s parancsértelmezőjének megváltoztatása. \n"
 
 #: ../apps/lchsh.c:114
 msgid "New Shell"
@@ -350,7 +350,7 @@ msgstr "Érvénytelen csoportazonosító %s\n"
 #: ../apps/lgroupadd.c:124
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Csoportlétrehozás meghiúsult: %s\n"
+msgstr "Csoportl étrehozása meghiúsult: %s\n"
 
 #: ../apps/lgroupdel.c:83
 #: ../apps/lgroupmod.c:129
@@ -368,7 +368,7 @@ msgstr "A(z) %s csoport nem törölhető : %s\n"
 #: ../apps/lusermod.c:162
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "-L és -U is megvan adva.\n"
+msgstr "-L és -U is meg van adva.\n"
 
 #: ../apps/lgroupmod.c:136
 #: ../apps/lgroupmod.c:145
@@ -396,7 +396,7 @@ msgstr "%s csoportot nem lehet módosítani: %s\n"
 #: ../apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr ""
+msgstr "Hiba %s keresése közben: %s \n"
 
 #: ../apps/lid.c:53
 #, c-format
@@ -428,9 +428,9 @@ msgid "Error opening `%s': %s.\n"
 msgstr "Hiba a(z) `%s' megnyitásakor: %s.\n"
 
 #: ../apps/lnewusers.c:118
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "Error creating account for `%s': sor nem megfelelően formázott.\n"
+msgstr "A fiók létrehozása `%s' számára nem sikerült: a sor nem megfelelően formázott.\n"
 
 #: ../apps/lnewusers.c:129
 #: ../apps/luseradd.c:130
@@ -457,7 +457,7 @@ msgstr "A(z) `%s' veszélyes saját könyvtár használatának megtagadása %s s
 #: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "%s kezdeti jelszávanak beállítása nem sikerült: %s\n"
 
 #: ../apps/lnewusers.c:304
 #, c-format
@@ -465,9 +465,9 @@ msgid "Error creating home directory for %s: %s\n"
 msgstr "Hiba a(z) %s saját könyvtárának létrehozásakor: %s\n"
 
 #: ../apps/lnewusers.c:318
-#, c-format
+#, fuzzy, c-format
 msgid "Error creating mail spool for %s.\n"
-msgstr ""
+msgstr "%s levelesládájának létrehozása sikertelen\n"
 
 #: ../apps/lnewusers.c:324
 #, c-format
@@ -537,9 +537,9 @@ msgid "Error creating %s: %s.\n"
 msgstr "Hiba a(z) %s létrehozásakor: %s.\n"
 
 #: ../apps/luseradd.c:334
-#, c-format
+#, fuzzy, c-format
 msgid "Error creating mail spool.\n"
-msgstr ""
+msgstr "Levelesláda létrehozása sikertelen\n"
 
 #: ../apps/luserdel.c:94
 #, c-format
@@ -577,9 +577,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "Hiba a(z) %s eltávolításakor: %s.\n"
 
 #: ../apps/luserdel.c:158
-#, c-format
+#, fuzzy, c-format
 msgid "Error removing mail spool.\n"
-msgstr ""
+msgstr "Nem sikerült eltávolítani a levelesládát.\n"
 
 #: ../apps/lusermod.c:178
 #: ../apps/lusermod.c:191
@@ -730,7 +730,7 @@ msgstr "könyvtár/modul verzió eltérő"
 
 #: ../lib/error.c:78
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "a feloldás üresen hagyná a jelszó-mezőt"
 
 #: ../lib/error.c:84
 msgid "unknown error"
@@ -745,14 +745,14 @@ msgid "invalid ID"
 msgstr "érvénytelen azonosító"
 
 #: ../lib/modules.c:61
-#, c-format
+#, fuzzy, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "Nem található %s inicializáló funkció itt: %s"
 
 #: ../lib/modules.c:79
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "modul verzió eltérés itt: %s"
 
 #. For safety's sake, make sure that all functions provided by the
 #. * module exist.  This can often mean a useless round trip, but it
@@ -934,7 +934,7 @@ msgstr "%s érték `%s': `:' nem engedélyezett"
 #: ../modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "%s nem olvasható: %s"
 
 #: ../modules/files.c:804
 msgid "entry already present in file"
@@ -948,12 +948,12 @@ msgstr "bejegyzés már megtalálható a fájlban"
 #: ../modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "%s nem írható: %s"
 
 #: ../modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "A(z) %s entitás-objektumnak nincs attribútuma"
 
 #: ../modules/files.c:1059
 msgid "entry with conflicting name already present in file"
@@ -1021,9 +1021,9 @@ msgid "entity has no %s or %s attributes"
 msgstr "entitásnak nincs %s vagy %s attribútumai"
 
 #: ../modules/krb5.c:320
-#, c-format
+#, fuzzy, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "az entitás %s és %s attribútumok nélkül jött létre"
 
 #: ../modules/krb5.c:471
 #: ../modules/krb5.c:559
@@ -1078,7 +1078,7 @@ msgstr ""
 #: ../modules/ldap.c:1325
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "A felhasználói objektumnak nincs %s attribútuma"
 
 #: ../modules/ldap.c:1334
 #, c-format
@@ -1142,8 +1142,9 @@ msgid "LDAP Server Name"
 msgstr "LDAP kiszolgálónév"
 
 #: ../modules/ldap.c:2484
+#, fuzzy
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "LDAP keresés Base DN-je"
 
 #: ../modules/ldap.c:2490
 msgid "LDAP Bind DN"
@@ -1193,12 +1194,14 @@ msgstr "hiba a felhasználó saját könyvtárának mozgatásakor"
 
 #: ../python/admin.c:689
 #: ../python/admin.c:766
+#, fuzzy
 msgid "error creating mail spool for user"
-msgstr ""
+msgstr "hiba a felhasználó levelesládájának létrehozásakor"
 
 #: ../python/admin.c:887
+#, fuzzy
 msgid "error removing mail spool for user"
-msgstr ""
+msgstr "hiba történt a felhasználó levelesládájának törlésekor"
 
 #: ../samples/lookup.c:63
 #, c-format
@@ -1251,14 +1254,14 @@ msgid "Default user object classes:\n"
 msgstr "Alapértelmezett felhasználói objektumosztályok:\n"
 
 #: ../samples/testuser.c:82
-#, c-format
+#, fuzzy, c-format
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "Alapértelmezett felhasználói attríbútumok nevei: \n"
 
 #: ../samples/testuser.c:88
-#, c-format
+#, fuzzy, c-format
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "Alapértelmezett felhasználói attribútumok lekérése: \n"
 
 #: ../samples/testuser.c:95
 #, c-format
