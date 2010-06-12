@@ -1,4 +1,6 @@
-AC_INIT([libuser], [0.56.16])
+AC_INIT([libuser], [0.56.16], [mitr@redhat.com], ,
+        [https://fedorahosted.org/libuser/])
+AC_PREREQ([2.63b])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([lib/user.c])
