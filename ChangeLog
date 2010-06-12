@@ -1,3 +1,7 @@
+2010-06-12  Miloslav Trmač  <mitr@redhat.com>
+
+	* autogen.sh: Run aclocal with -Wall.
+
 2010-03-25  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.56.16.

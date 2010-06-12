@@ -18,6 +18,9 @@ from the libuser configuration.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lu_cfg_read ##### -->
 <para>
 Reads the list of values for a given key from the configuration space.

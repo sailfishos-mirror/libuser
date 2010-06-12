@@ -4,7 +4,7 @@ mkdir -p admin m4
 gtkdocize --docdir docs/reference
 libtoolize --force
 autopoint
-aclocal -I m4
+aclocal -Wall -I m4
 autoconf -Wall
 autoheader -Wall
 automake -Wall --add-missing

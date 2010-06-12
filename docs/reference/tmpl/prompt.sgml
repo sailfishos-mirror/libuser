@@ -21,6 +21,9 @@ graphical implementations.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lu_prompt_console ##### -->
 <para>
 Prompts the user using a text console.

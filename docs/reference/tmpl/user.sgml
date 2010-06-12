@@ -23,6 +23,9 @@ modifications of the system information store.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION lu_start ##### -->
 <para>
 Initializes the libuser library.

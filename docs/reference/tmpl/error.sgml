@@ -25,6 +25,9 @@ by %LC_CTYPE locale category.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO LU_ERROR_CHECK ##### -->
 <para>
 Checks that the given pointer to a pointer to a struct does not already point

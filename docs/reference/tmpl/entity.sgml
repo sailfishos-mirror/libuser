@@ -31,6 +31,9 @@ the last entry from the list removes the list completely.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO LU_USERNAME ##### -->
 <para>
 User name, a %G_TYPE_STRING.
@@ -236,6 +239,7 @@ User's email address, a %G_TYPE_STRING.
 Creates a new, empty struct #lu_ent.
 </para>
 
+@void: 
 @Returns: the created entity, which should be deallocated by lu_ent_free()
 
 

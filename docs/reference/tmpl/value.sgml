@@ -39,6 +39,9 @@ appropriate for a specific attribute.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO LU_VALUE_INVALID_ID ##### -->
 <para>
 An #id_t value that matches no valid user or group ID.
