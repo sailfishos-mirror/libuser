@@ -867,8 +867,8 @@ lu_ldap_needed_objectclasses(const char *dn, struct lu_ent *ent,
 	else
 		old_count = 0;
 
-	new_values = g_malloc(sizeof(*new_values) *
-			      (G_N_ELEMENTS(ldap_attribute_map) + 1 + 1));
+	new_values = g_malloc_n(G_N_ELEMENTS(ldap_attribute_map) + 1 + 1,
+				sizeof(*new_values));
 	new_count = 0;
 
 	/* Iterate over all of the attributes the object possesses. */
@@ -976,8 +976,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 		GValue *value;
 		const GList *a;
 
-		mods = g_malloc0(sizeof(*mods)
-				 * (g_list_length(attrs) + 2 + 1));
+		mods = g_malloc0_n(g_list_length(attrs) + 2 + 1, sizeof(*mods));
 		mod_count = 0;
 		for (a = attrs; a != NULL; a = a->next) {
 			const char *attribute;
@@ -996,9 +995,8 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			mod = g_malloc0(sizeof(*mod));
 			mod->mod_op = LDAP_MOD_ADD;
 			mod->mod_type = (char *)attribute;
-			mod->mod_values
-				= g_malloc0((vals->n_values + 1)
-					    * sizeof(*mod->mod_values));
+			mod->mod_values = g_malloc0_n(vals->n_values + 1,
+						      sizeof(*mod->mod_values));
 			for (i = 0; i < vals->n_values; i++) {
 				value = g_value_array_get_nth(vals, i);
 				mod->mod_values[i] = lu_value_strdup(value);
@@ -1013,8 +1011,8 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			mod->mod_op = LDAP_MOD_ADD;
 			mod->mod_type = OBJECTCLASS;
 			mod->mod_values
-				= g_malloc0((ldap_count_values_len(classes)
-					     + 1) * sizeof(*mod->mod_values));
+				= g_malloc0_n(ldap_count_values_len(classes)
+					      + 1, sizeof(*mod->mod_values));
 			for (i = 0; classes[i] != NULL; i++)
 				mod->mod_values[i]
 					= g_strdup(classes[i]->bv_val);
@@ -1080,8 +1078,7 @@ get_ent_mods(struct lu_ent *ent, const char *namingAttr)
 		empty = g_value_array_new(0);
 		/* Allocate an array big enough to hold two LDAPMod structures
 		 * for each attribute, in case all of them need changing. */
-		mods = g_malloc0(sizeof(*mods) *
-				 ((2 * g_list_length(attrs)) + 1));
+		mods = g_malloc0_n(2 * g_list_length(attrs) + 1, sizeof(*mods));
 		mod_count = 0;
 		for (a = attrs; a != NULL; a = a->next) {
 			GValueArray *current, *pending, *additions, *deletions;
@@ -1129,8 +1126,8 @@ get_ent_mods(struct lu_ent *ent, const char *namingAttr)
 				mod->mod_op = LDAP_MOD_DELETE;
 				mod->mod_type = attribute;
 				mod->mod_values
-					= g_malloc0((deletions->n_values + 1)
-						    * sizeof(*mod->mod_values));
+					= g_malloc0_n(deletions->n_values + 1,
+						      sizeof(*mod->mod_values));
 				for (j = 0; j < deletions->n_values; j++) {
 					value = g_value_array_get_nth(deletions, j);
 					mod->mod_values[j]
@@ -1163,8 +1160,8 @@ get_ent_mods(struct lu_ent *ent, const char *namingAttr)
 				mod->mod_op = LDAP_MOD_ADD;
 				mod->mod_type = attribute;
 				mod->mod_values
-					= g_malloc0((additions->n_values + 1)
-						    * sizeof(*mod->mod_values));
+					= g_malloc0_n(additions->n_values + 1,
+						      sizeof(*mod->mod_values));
 				for (j = 0; j < additions->n_values; j++) {
 					value = g_value_array_get_nth(additions, j);
 					mod->mod_values[j]
@@ -2585,8 +2582,8 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ctx->ldap = ldap;
 
 	ctx->mapped_user_attributes
-		= g_malloc0(sizeof(*ctx->mapped_user_attributes)
-			    * G_N_ELEMENTS(lu_ldap_user_attributes));
+		= g_malloc0_n(G_N_ELEMENTS(lu_ldap_user_attributes),
+			      sizeof(*ctx->mapped_user_attributes));
 	for (i = 0; i < G_N_ELEMENTS(lu_ldap_user_attributes); i++) {
 		if (lu_ldap_user_attributes[i] != NULL)
 			ctx->mapped_user_attributes[i] = (char *)
@@ -2597,8 +2594,8 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	}
 
 	ctx->mapped_group_attributes
-		= g_malloc0(sizeof(*ctx->mapped_group_attributes)
-			    * G_N_ELEMENTS(lu_ldap_group_attributes));
+		= g_malloc0_n(G_N_ELEMENTS(lu_ldap_group_attributes),
+			      sizeof(*ctx->mapped_group_attributes));
 	for (i = 0; i < G_N_ELEMENTS(lu_ldap_group_attributes); i++) {
 		if (lu_ldap_group_attributes[i] != NULL)
 			ctx->mapped_group_attributes[i] = (char *)

@@ -1,3 +1,9 @@
+2010-06-14  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/ldap.c (lu_ldap_needed_objectclasses, get_ent_adds)
+	(get_ent_mods, libuser_ldap_init)
+	* python/misc.c (libuser_admin_prompt): Use g_malloc*_n ().
+
 2010-06-12  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Define PACKAGE_BUGREPORT and PACKAGE_URL.

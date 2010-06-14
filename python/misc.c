@@ -148,7 +148,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		DEBUG_CALL;
 	}
 	DEBUG_CALL;
-	prompts = g_malloc0(count * sizeof(struct lu_prompt));
+	prompts = g_malloc0_n(count, sizeof(struct lu_prompt));
 	DEBUG_CALL;
 
 	for (i = 0; i < count; i++) {
