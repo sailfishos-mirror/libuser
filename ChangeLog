@@ -1,3 +1,8 @@
+2010-07-02  Miloslav Trmač  <mitr@redhat.com>
+
+	* python/libusermodule.c (initlibuser): Provide VALUE_INVALID_ID.
+	* python/modules.txt (libuser): Document VALUE_INVALID_ID.
+
 2010-06-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* modules/ldap.c (lu_ldap_needed_objectclasses, get_ent_adds)

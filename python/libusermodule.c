@@ -145,6 +145,8 @@ initlibuser(void)
 
 	/* Miscellaneous. */
 	PyDict_SetItemString(dict, "UT_NAMESIZE", PyInt_FromLong(UT_NAMESIZE));
+	PyDict_SetItemString(dict, "VALUE_INVALID_ID",
+			     PyLong_FromLongLong(LU_VALUE_INVALID_ID));
 
 	DEBUG_EXIT;
 }

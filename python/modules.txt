@@ -28,6 +28,7 @@ libuser:
         	- SHADOWWARNING
 
 		- UT_NAMESIZE
+		- VALUE_INVALID_ID
 
 	Methods:
 		- getUserShells: Returns a list of valid shells for users on
