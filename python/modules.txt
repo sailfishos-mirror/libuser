@@ -49,6 +49,10 @@ libuser:
 			Arguments:
 				None.
 			Returns: a libuser.Prompt object.
+		- validateIdValue: Verifies an id_t value is in the valid range.
+			Arguments:
+				id_t integer value
+			Returns: None.  Raises an exception on error.
 	Types:
 		- Admin - An administrative context.
 			Methods:

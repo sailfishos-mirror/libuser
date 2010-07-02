@@ -1,5 +1,10 @@
 2010-07-02  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (libuser_validate_id_value): New function.
+	(libuser_methods): Add validateIdValue.
+	* python/modules.txt (libuser): Document validateIdValue.
+	* tests/files_test.py (Tests.testValidateIdValue): New test.
+
 	* python/libusermodule.c (initlibuser): Provide VALUE_INVALID_ID.
 	* python/modules.txt (libuser): Document VALUE_INVALID_ID.
 

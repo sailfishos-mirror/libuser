@@ -58,6 +58,36 @@ libuser_get_user_shells(PyObject *self, PyObject *ignored)
 	return ret;
 }
 
+static PyObject *
+libuser_validate_id_value(PyObject *self, PyObject *value)
+{
+	PY_LONG_LONG ll;
+
+	DEBUG_ENTRY;
+	ll = PyLong_AsLongLong(value);
+	if (PyErr_Occurred())
+		goto error;
+
+	if ((id_t)ll != ll) {
+		PyErr_SetString(PyExc_OverflowError, _("Value out of range"));
+		goto error;
+	}
+	if (ll < 0) {
+		PyErr_SetString(PyExc_ValueError, _("ID must not be negative"));
+		goto error;
+	}
+	if (ll == LU_VALUE_INVALID_ID) {
+		PyErr_SetString(PyExc_ValueError, _("Invalid ID value"));
+		goto error;
+	}
+	DEBUG_EXIT;
+	Py_RETURN_NONE;
+
+error:
+	DEBUG_EXIT;
+	return NULL;
+}
+
 static PyMethodDef libuser_methods[] = {
 	{"admin", (PyCFunction) libuser_admin_new, METH_VARARGS | METH_KEYWORDS,
 	 "create a new administration context"},
@@ -71,6 +101,8 @@ static PyMethodDef libuser_methods[] = {
 	 "create and return a new prompt record"},
 	{"getUserShells", libuser_get_user_shells, METH_NOARGS,
 	 "return a list of valid shells"},
+	{"validateIdValue", libuser_validate_id_value, METH_O,
+	 "validate an id_t value"},
 	{NULL, NULL, 0, NULL},
 };
 

@@ -1229,6 +1229,26 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         self.assertEqual(self.a.enumerateGroupsFull('group31_3:*'), [])
 
+    # ValidateIdValue is unrelated to the files module.
+    def testValidateIdValue(self):
+        libuser.validateIdValue(0)
+        libuser.validateIdValue(1)
+        libuser.validateIdValue(500)
+        libuser.validateIdValue(500L)
+        self.assertRaises(TypeError, libuser.validateIdValue, 'abc')
+        # OverflowError if id_t is signed, ValueError otherwise
+        self.assertRaises((ValueError, OverflowError), libuser.validateIdValue,
+                          -1)
+        self.assertRaises((ValueError, OverflowError), libuser.validateIdValue,
+                          -2)
+        self.assertRaises(ValueError, libuser.validateIdValue,
+                          libuser.VALUE_INVALID_ID)
+        if libuser.VALUE_INVALID_ID > 0:
+            libuser.validateIdValue(libuser.VALUE_INVALID_ID - 1)
+            if libuser.VALUE_INVALID_ID < 2 ** 64 - 1:
+                self.assertRaises(OverflowError, libuser.validateIdValue,
+                                  2 ** 64 - 1)
+
     def tearDown(self):
         del self.a
 
