@@ -1236,7 +1236,7 @@ class Tests(unittest.TestCase):
         libuser.validateIdValue(500)
         libuser.validateIdValue(500L)
         self.assertRaises(TypeError, libuser.validateIdValue, 'abc')
-        # OverflowError if id_t is signed, ValueError otherwise
+        # OverflowError if id_t is unsigned, ValueError otherwise
         self.assertRaises((ValueError, OverflowError), libuser.validateIdValue,
                           -1)
         self.assertRaises((ValueError, OverflowError), libuser.validateIdValue,
