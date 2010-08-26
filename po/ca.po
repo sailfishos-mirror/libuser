@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-25 16:44+0100\n"
+"POT-Creation-Date: 2010-08-26 20:46+0200\n"
 "PO-Revision-Date: 2009-08-03 10:10+0100\n"
 "Last-Translator: Xavier Conde Rueda <xavi.conde@gmail.com>\n"
 "Language-Team: Catalan <fedora@softcatala.net>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -784,7 +785,8 @@ msgstr "no s'ha pogut obtenir el context de seguretat de «%s»: %s"
 #: lib/util.c:739 lib/util.c:766
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
+msgstr ""
+"no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
 
 #: lib/util.c:760
 #, c-format
@@ -856,7 +858,7 @@ msgstr "el registre ja es troba en el fitxer"
 msgid "`:' not allowed in encrypted password"
 msgstr "no es permet ':' a la contrasenya xifrada"
 
-#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
@@ -952,89 +954,89 @@ msgstr ""
 "no s'ha pogut vincular amb el servidor de LDAP. El primer intent ha estat "
 "com a «%s»: %s"
 
-#: modules/ldap.c:1325
+#: modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "l'objecte de l'usuari no tenia atribut %s"
 
-#: modules/ldap.c:1334
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "s'ha creat l'objecte de l'usuari sense «%s»"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "s'ha produït un error en crear l'entrada del directori de LDAP: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1624
+#: modules/ldap.c:1377 modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
 "s'ha produït un error en modificar el registre del directori del LDAP: %s"
 
-#: modules/ldap.c:1405
+#: modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "s'ha produït un error en canviar l'entrada del directori del LDAP: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "l'objecte no tenia cap atribut %s"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "s'ha produït un error en eliminar l'entrada del directori LDAP: %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
-#: modules/ldap.c:1756
+#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
+#: modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objecte no té cap atribut %s"
 
-#: modules/ldap.c:1553
+#: modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr "esquema de xifratge de contrasenyes no disponible"
 
-#: modules/ldap.c:1682
+#: modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "aquest objecte no existeix en el directori LDAP"
 
-#: modules/ldap.c:1694
+#: modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "no s'ha trobat cap atribut «%s»"
 
-#: modules/ldap.c:1867
+#: modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori LDAP per a "
 "%s: %s"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2475
 msgid "LDAP Server Name"
 msgstr "Nom del servidor LDAP"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2481
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca de LDAP"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2487
 msgid "LDAP Bind DN"
 msgstr "DN del vincle de LDAP"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2494
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2500
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2507
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 

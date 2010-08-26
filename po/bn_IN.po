@@ -9,10 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-25 16:44+0100\n"
+"POT-Creation-Date: 2010-08-26 20:46+0200\n"
 "PO-Revision-Date: 2010-02-18 13:05+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
+"Language: bn_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -918,7 +919,7 @@ msgid "`:' not allowed in encrypted password"
 msgstr "এনক্রিপ্ট করা পাসওয়ার্ডের মধ্যে `:' ব্যবহার করা যাবে না"
 
 # modified for RHEL
-#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "পাসওয়ার্ড এনক্রিপ্ট করতে সমস্যা"
 
@@ -935,8 +936,8 @@ msgstr "কোনো শেডো ফাইল উপস্থিত নেই -
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"`%s' পরিসেবার জন্য kdam5 সার্ভারটির সাথে সংযোগ করতে `%s' realm-এ সমস্যা হয়েছে: %"
-"s"
+"`%s' পরিসেবার জন্য kdam5 সার্ভারটির সাথে সংযোগ করতে `%s' realm-এ সমস্যা হয়েছে: "
+"%s"
 
 #: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
 #: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
@@ -1015,92 +1016,92 @@ msgstr "LDAP সার্ভারে bind করা সম্ভব হয়ন�
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP সার্ভারে bind করা সম্ভব হয়নি, `%s' রূপে প্রথম প্রচেষ্টা করা হয়েছে: %s"
 
-#: modules/ldap.c:1325
+#: modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "ব্যবহারকারীর অবজেক্টে কোনো `%s' বৈশিষ্ট্য উপস্থিত নেই"
 
 # modified for RHEL
-#: modules/ldap.c:1334
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "ব্যবহারকারীর অবজেক্ট `%s' বিনা নির্মিত হয়েছে"
 
 # modified for RHEL
-#: modules/ldap.c:1354
+#: modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরি এন্ট্রি তৈরি করতে সমস্যা: %s"
 
 # modified for RHEL
-#: modules/ldap.c:1380 modules/ldap.c:1624
+#: modules/ldap.c:1377 modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরি এন্ট্রি পরিবর্তন করতে সমস্যা: %s"
 
 # modified for RHEL
-#: modules/ldap.c:1405
+#: modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরি এন্ট্রির নাম পরিবর্তন করতে সমস্যা: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "অবজেক্টের মধ্যে কোনো %s বৈশিষ্ট্য উপস্থিত নেই"
 
 # modified for RHEL
-#: modules/ldap.c:1470
+#: modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP ডিরেক্টরি এন্ট্রি মুছে ফেলতে সমস্যা: %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
-#: modules/ldap.c:1756
+#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
+#: modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "অবজেক্টের মধ্যে %s বৈশিষ্ট্য উপস্থিত নেই"
 
-#: modules/ldap.c:1553
+#: modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr "পাসওয়ার্ড এনক্রিপশনের বিন্যাস সমর্থিত নয়"
 
 # modified for RHEL
-#: modules/ldap.c:1682
+#: modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "LDAP ডিরেক্টরির মধ্যে এই ধরনের কোনো বস্তু উপস্থিত নেই"
 
-#: modules/ldap.c:1694
+#: modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "কোনো `%s' বৈশিষ্ট্য পাওয়া যায়নি"
 
-#: modules/ldap.c:1867
+#: modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s-র জন্য LDAP ডিরেক্টরিতে পাসওয়ার্ড নির্ধারণ করতে সমস্যা: %s"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2475
 msgid "LDAP Server Name"
 msgstr "LDAP সার্ভারের নাম"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2481
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2487
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2494
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind পাসওয়ার্ড"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2500
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ব্যবহারকারী"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2507
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-র অনুমোদন ব্যবহারকারী"
 

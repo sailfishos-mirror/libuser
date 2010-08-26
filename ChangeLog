@@ -1,5 +1,8 @@
 2010-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Release 0.56.17.
+	* NEWS: Update.
+
 	* autogen.sh: Fix running autogen on an old checkout.
 
 	* tests/slapd.conf.in: Make the tests run with current openldap again.

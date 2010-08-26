@@ -13,10 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.HEAD.mk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-25 16:44+0100\n"
+"POT-Creation-Date: 2010-08-26 20:46+0200\n"
 "PO-Revision-Date: 2007-07-18 15:25+0200\n"
 "Last-Translator: Jovan Naumovski <jovan@lugola.net>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
+"Language: mk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -859,7 +860,7 @@ msgstr "записот веќе постои во датотеката"
 msgid "`:' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "грешка при кодирање на лозинката"
 
@@ -952,86 +953,86 @@ msgstr "не можам да се врзам за LDAP серверот"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "не можам да се врзам за LDAP серверот, првиот обид беше како „%s“: %s"
 
-#: modules/ldap.c:1325
+#: modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "корисничкиот објект нема %s атрибут"
 
-#: modules/ldap.c:1334
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "корисничкиот објект беше креиран без „%s“"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "грешка при креирање на запис за LDAP: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1624
+#: modules/ldap.c:1377 modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "грешка при менување на записот водиректориумот на LDAP: %s"
 
-#: modules/ldap.c:1405
+#: modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "грешка при реименувањето на записот за LDAP: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "објектот нема %s атрибути"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "грешка при отстранување на записот за LDAP: %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
-#: modules/ldap.c:1756
+#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
+#: modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "објектот нема %s атрибут"
 
-#: modules/ldap.c:1553
+#: modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr ""
 
-#: modules/ldap.c:1682
+#: modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "нема таков објект во директориумот на LDAP"
 
-#: modules/ldap.c:1694
+#: modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "не пронајдов атрибут„%s“"
 
-#: modules/ldap.c:1867
+#: modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "грешка при поставување на лозинка во директориумот на LDAP за %s: %s"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2475
 msgid "LDAP Server Name"
 msgstr "Име на LDAP сервер"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2481
 msgid "LDAP Search Base DN"
 msgstr "База за пребарување на LDAP "
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2487
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2494
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind лозинка"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2500
 msgid "LDAP SASL User"
 msgstr "LDAP SASL корисник"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2507
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL авторизација за корисник"
 

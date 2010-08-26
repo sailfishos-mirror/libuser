@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-25 16:44+0100\n"
+"POT-Creation-Date: 2010-08-26 20:46+0200\n"
 "PO-Revision-Date: 2010-02-15 00:04+0200\n"
 "Last-Translator: Kris Thomsen <lakristho@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -853,7 +854,7 @@ msgstr "element med konfliktende navn findes allerede i filen"
 msgid "`:' not allowed in encrypted password"
 msgstr "\":\" ikke tilladt i krypteret adgangskode"
 
-#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "fejl ved kryptering af adgangskode"
 
@@ -869,8 +870,8 @@ msgstr "der findes ingen skyggefil -- deaktiverer"
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
-"kunne ikke forbinde til kadm5-serveren for tjeneste \"%s\" i område \"%s\": %"
-"s"
+"kunne ikke forbinde til kadm5-serveren for tjeneste \"%s\" i område \"%s\": "
+"%s"
 
 #: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
 #: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
@@ -947,86 +948,86 @@ msgstr "kunne ikke binde til LDAP-server"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "kunne ikke binde til LDAP-server, første forsøg som \"%s\": %s"
 
-#: modules/ldap.c:1325
+#: modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "bruger-objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1334
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "brugerobjektet blev oprettet uden \"%s\""
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "fejl ved oprettelse af LDAP-mappeindgang: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1624
+#: modules/ldap.c:1377 modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "fejl ved ændring af LDAP-mappeopføring: %s"
 
-#: modules/ldap.c:1405
+#: modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "fejl ved ændring af navn på LDAP-mappeindgang %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektet havde ingen %s-attribut"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "fejl ved fjernelse af LDAP-mappeopføring: %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
-#: modules/ldap.c:1756
+#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
+#: modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektet har ikke attribut %s"
 
-#: modules/ldap.c:1553
+#: modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr "ikke understøttet krypteringsskema for adgangskode"
 
-#: modules/ldap.c:1682
+#: modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "ingen sådanne objekter i LDAP-mappen"
 
-#: modules/ldap.c:1694
+#: modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "ingen \"%s\"-attribut fundet"
 
-#: modules/ldap.c:1867
+#: modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "fejl ved indstilling af adgangskode i LDAP-mappen for %s: %s"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2475
 msgid "LDAP Server Name"
 msgstr "Navn på LDAP-server"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2481
 msgid "LDAP Search Base DN"
 msgstr "LDAP søgebase DN"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2487
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2494
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-adgangskode"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2500
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruger"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2507
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-godkendelsesbruger"
 

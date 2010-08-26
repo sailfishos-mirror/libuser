@@ -11,10 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-03-25 16:44+0100\n"
+"POT-Creation-Date: 2010-08-26 20:46+0200\n"
 "PO-Revision-Date: 2009-12-11 10:49+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <fedora-cs-list@redhat.com>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -854,7 +855,7 @@ msgstr "položka s kolidujícím názvem je již v souboru obsažena"
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' není povoleno v šifrovaném hesle"
 
-#: modules/files.c:1784 modules/ldap.c:1563 modules/ldap.c:1836
+#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "chyba při šifrování hesla"
 
@@ -946,86 +947,86 @@ msgstr "nemohu se připojit k LDAP serveru"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "nemohu se připojit k LDAP serveru, první pokus jako `%s': %s"
 
-#: modules/ldap.c:1325
+#: modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "objekt uživatel nemá atribut %s"
 
-#: modules/ldap.c:1334
+#: modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "objekt uživatel byl vytvořen bez '%s'"
 
-#: modules/ldap.c:1354
+#: modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "chyba při tvorbě LDAP položky: %s"
 
-#: modules/ldap.c:1380 modules/ldap.c:1624
+#: modules/ldap.c:1377 modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "chyba při modifikaci LDAP položky: %s"
 
-#: modules/ldap.c:1405
+#: modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "chyba při přejmenovávání LDAP položky: %s"
 
-#: modules/ldap.c:1452
+#: modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objekt nemá atribut %s"
 
-#: modules/ldap.c:1470
+#: modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "chyba při odstraňování LDAP položky: %s"
 
-#: modules/ldap.c:1522 modules/ldap.c:1538 modules/ldap.c:1657
-#: modules/ldap.c:1756
+#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
+#: modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objekt nemá atribut %s"
 
-#: modules/ldap.c:1553
+#: modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr "nepodporované schéma šifrování hesla"
 
-#: modules/ldap.c:1682
+#: modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "není objekt v LDAP adresáři"
 
-#: modules/ldap.c:1694
+#: modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "atribut '%s' nenalezen"
 
-#: modules/ldap.c:1867
+#: modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "chyba při nastavování hesla v LDAP adresáři pro %s: %s"
 
-#: modules/ldap.c:2478
+#: modules/ldap.c:2475
 msgid "LDAP Server Name"
 msgstr "Jméno LDAP serveru"
 
-#: modules/ldap.c:2484
+#: modules/ldap.c:2481
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2490
+#: modules/ldap.c:2487
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2497
+#: modules/ldap.c:2494
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind heslo"
 
-#: modules/ldap.c:2503
+#: modules/ldap.c:2500
 msgid "LDAP SASL User"
 msgstr "LDAP SASL uživatel"
 
-#: modules/ldap.c:2510
+#: modules/ldap.c:2507
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL uživatel pro autentizaci"
 
