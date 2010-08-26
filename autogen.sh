@@ -3,7 +3,7 @@ set -x -e
 mkdir -p admin m4
 gtkdocize --docdir docs/reference
 libtoolize --force
-autopoint
+autopoint -f
 aclocal -Wall -I m4
 autoconf -Wall
 autoheader -Wall
