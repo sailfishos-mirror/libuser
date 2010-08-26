@@ -1,3 +1,7 @@
+2010-08-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/slapd.conf.in: Make the tests run with current openldap again.
+
 2010-07-07  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/files_test.py (Tests.testValidateIdValue): Fix comment.
