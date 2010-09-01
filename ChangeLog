@@ -1,3 +1,7 @@
+2010-09-01  Miloslav Trmač  <mitr@redhat.com>
+
+	* libuser.conf (crypt_style): Change default to sha512.
+
 2010-08-26  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.56.17.
