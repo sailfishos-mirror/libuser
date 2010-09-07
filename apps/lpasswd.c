@@ -86,8 +86,6 @@ main(int argc, const char **argv)
 		}
 	}
 
-	lu_authenticate_unprivileged(user, "passwd");
-
 	ctx = lu_start(user, groupflag ? lu_group : lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -96,6 +94,8 @@ main(int argc, const char **argv)
 			lu_strerror(error));
 		return 1;
 	}
+
+	lu_authenticate_unprivileged(ctx, user, "passwd");
 
 	if ((password == NULL) && (cryptedPassword == NULL) &&
 	    (plain_fd == -1) && (crypted_fd == -1)) {

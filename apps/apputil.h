@@ -38,7 +38,8 @@ gboolean lu_homedir_move(const char *oldhome, const char *directory,
 gboolean lu_homedir_remove(const char *directory, struct lu_error **error)
 	G_GNUC_INTERNAL;
 
-void lu_authenticate_unprivileged(const char *user, const char *appname)
+void lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
+				  const char *appname)
 	G_GNUC_INTERNAL;
 
 void lu_nscd_flush_cache (const char *table) G_GNUC_INTERNAL;

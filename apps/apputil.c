@@ -553,13 +553,19 @@ lu_converse(int num_msg, const struct pam_message **msg,
 /* Authenticate the user if the invoking user is not privileged.  If
  * authentication fails, exit immediately. */
 void
-lu_authenticate_unprivileged(const char *user, const char *appname)
+lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
+			     const char *appname)
 {
 	pam_handle_t *pamh;
 	struct pam_conv conv;
 	const void *puser;
 	int ret;
 
+	/* Don't bother (us and the user) if none of the modules makes use of
+	 * elevated privileges and the program is not set*id. */
+	if (lu_uses_elevated_privileges(ctx) == FALSE
+	    && geteuid() == getuid() && getegid() == getgid())
+		return;
 #if 0
 	struct conv_data data;
 	/* Don't bother if none of the modules makes use of elevated

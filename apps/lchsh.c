@@ -78,9 +78,6 @@ main(int argc, const char **argv)
 		}
 	}
 
-	/* Authenticate the user if we need to. */
-	lu_authenticate_unprivileged(user, "chsh");
-
 	/* Give the user some idea of what's going on. */
 	g_print(_("Changing shell for %s.\n"), user);
 
@@ -93,6 +90,9 @@ main(int argc, const char **argv)
 			lu_strerror(error));
 		return 1;
 	}
+
+	/* Authenticate the user if we need to. */
+	lu_authenticate_unprivileged(ctx, user, "chsh");
 
 	/* Look up this user's record. */
 	ent = lu_ent_new();

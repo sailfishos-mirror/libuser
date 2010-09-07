@@ -1,5 +1,10 @@
 2010-09-07  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_authenticate_unprivileged): New parameter ctx.  All
+	users changed.  Don't authenticate the user if the application is not
+	set*id and elevated privileges are not necessary.
+	* apps/apputil.h (lu_authenticate_unprivileged): Update prototype.
+
 	* lib/misc.c (lu_value_get_id): Don't abort the program if the value
 	is not a valid ID.
 
