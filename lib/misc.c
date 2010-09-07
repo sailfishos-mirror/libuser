@@ -97,19 +97,11 @@ lu_value_get_id(const GValue *value)
 		src = g_value_get_string(value);
 		errno = 0;
 		val = strtoll(src, &end, 10);
-		if (errno != 0 || *end != 0 || end == src) {
-			g_error("lu_value_get_id(): invalid id_t value '%s'",
-				 src);
-			return LU_VALUE_INVALID_ID;
-		}
-	} else {
-		g_error("lu_value_get_id(): invalid GValue type");
-		return LU_VALUE_INVALID_ID;
-	}
-	if ((id_t)val != val) {
-		g_error("lu_value_get_id(): value %lld out of range", val);
-		return LU_VALUE_INVALID_ID;
-	}
+		if (errno != 0 || *end != 0 || end == src)
+			g_return_val_if_reached(LU_VALUE_INVALID_ID);
+	} else
+		g_return_val_if_reached(LU_VALUE_INVALID_ID);
+	g_return_val_if_fail((id_t)val == val, LU_VALUE_INVALID_ID);
 	return val;
 }
 

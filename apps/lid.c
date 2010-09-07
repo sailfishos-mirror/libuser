@@ -74,17 +74,19 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 			if (!nameonly
 			    && lookup_member(ctx, found, ent, &error)) {
 				GValueArray *attrs;
+				id_t id;
 
 				attrs = lu_ent_get(ent, id_attribute);
-				if (attrs != NULL) {
-					id_t id;
-
-					value = g_value_array_get_nth(attrs,
-								      0);
+				if (attrs == NULL)
+					id = LU_VALUE_INVALID_ID;
+				else {
+					value = g_value_array_get_nth(attrs, 0);
 					id = lu_value_get_id(value);
+				}
+				if (id != LU_VALUE_INVALID_ID)
 					g_print(" %s(%s=%jd)\n", found,
 						id_descr, (intmax_t)id);
-				} else
+				else
 					g_print(" %s\n", found);
 			} else {
 				if (error != NULL)

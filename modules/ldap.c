@@ -2360,7 +2360,8 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 
 		value = g_value_array_get_nth(gids, i);
 		gid = lu_value_get_id(value);
-		g_assert (gid != LU_VALUE_INVALID_ID);
+		if (gid == LU_VALUE_INVALID_ID)
+			continue;
 		ent = lu_ent_new();
 		if (lu_group_lookup_id(module->lu_context, gid,
 				       ent, error)) {

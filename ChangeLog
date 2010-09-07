@@ -1,3 +1,11 @@
+2010-09-07  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/misc.c (lu_value_get_id): Don't abort the program if the value
+	is not a valid ID.
+
+	* modules/ldap.c (lu_ldap_groups_enumerate_by_user)
+	* apps/lid.c (do_id): Handle invalid ID values, for completeness.
+
 2010-09-01  Miloslav Trmač  <mitr@redhat.com>
 
 	* libuser.conf (crypt_style): Change default to sha512.
