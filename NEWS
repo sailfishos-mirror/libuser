@@ -1,3 +1,6 @@
+0.56.18
+* Update translations.
+
 0.56.17
 * New Python constant VALUE_INVALID_ID and function validateIdValue.
 * Update translations.
