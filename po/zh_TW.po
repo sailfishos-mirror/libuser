@@ -849,9 +849,8 @@ msgid "entity object has no %s attribute"
 msgstr "實體物件沒有 %s 屬性"
 
 #: modules/files.c:1059
-#, fuzzy
 msgid "entry with conflicting name already present in file"
-msgstr "項目已存在檔案中"
+msgstr "名稱產生衝突的項目已存在檔案中"
 
 #: modules/files.c:1772
 msgid "`:' not allowed in encrypted password"
