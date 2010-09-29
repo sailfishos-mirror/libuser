@@ -1,5 +1,7 @@
 2010-09-29  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_fscreate_for_path): Don't pass NULL to %s.
+
 	* lib/util.c (lu_util_fscreate_for_path): Handle cases when a path is
 	not in the matchpathcon database.
 

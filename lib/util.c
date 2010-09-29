@@ -769,7 +769,9 @@ lu_util_fscreate_for_path(const char *path, mode_t mode,
 		if (setfscreatecon(ctx) < 0) {
 			lu_error_new(error, lu_error_generic,
 				     _("couldn't set default security context "
-				       "to `%s': %s"), ctx, strerror(errno));
+				       "to `%s': %s"),
+				     ctx != NULL ? ctx : "<<none>>",
+				     strerror(errno));
 			freecon(ctx);
 			return FALSE;
 		}
