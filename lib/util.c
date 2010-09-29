@@ -756,10 +756,15 @@ lu_util_fscreate_for_path(const char *path, mode_t mode,
 		security_context_t ctx;
 
 		if (matchpathcon(path, mode, &ctx) < 0) {
-			lu_error_new(error, lu_error_stat,
-				     _("couldn't determine security context "
-				       "for `%s': %s"), path, strerror(errno));
-			return FALSE;
+			if (errno == ENOENT)
+				ctx = NULL;
+			else {
+				lu_error_new(error, lu_error_stat,
+					     _("couldn't determine security "
+					       "context for `%s': %s"), path,
+					     strerror(errno));
+				return FALSE;
+			}
 		}
 		if (setfscreatecon(ctx) < 0) {
 			lu_error_new(error, lu_error_generic,

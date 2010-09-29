@@ -1,3 +1,8 @@
+2010-09-29  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/util.c (lu_util_fscreate_for_path): Handle cases when a path is
+	not in the matchpathcon database.
+
 2010-09-07  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/apputil.c (lu_authenticate_unprivileged): New parameter ctx.  All
