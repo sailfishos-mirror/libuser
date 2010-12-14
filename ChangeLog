@@ -1,5 +1,10 @@
 2010-12-14  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/ldap_test: Don't run (openssl req) in batch mode so that we
+	can specify a host name.  Use "127.0.0.1" as host name to fix CN
+	mismatches, "localhost" when connecting is apparently replaced by the
+	actual host name.
+
 	* Makefile.am (tests_config_test_LDADD): Fix a typo.
 
 2010-09-29  Miloslav Trmač  <mitr@redhat.com>

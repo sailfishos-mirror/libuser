@@ -30,14 +30,14 @@ rm -rf "$workdir"
 mkdir "$workdir"
 
 # Create a SSL key
-/usr/bin/openssl req -batch -newkey rsa:512 -keyout "$workdir"/key1 -nodes \
-    -x509 -days 2 -out "$workdir"/key3 <<EOF
+/usr/bin/openssl req -newkey rsa:512 -keyout "$workdir"/key1 -nodes \
+    -x509 -days 2 -out "$workdir"/key3 2>/dev/null <<EOF
 .
 .
 .
 .
 .
-localhost
+127.0.0.1
 .
 EOF
 echo > "$workdir"/key2
