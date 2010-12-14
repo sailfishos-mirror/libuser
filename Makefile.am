@@ -204,5 +204,5 @@ samples_testuser_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 samples_testuser_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_testuser_LDFLAGS = -no-install
 
-tests_config_test_LDADD = lib/libuser.la $(GNODULE_LIBS)
+tests_config_test_LDADD = lib/libuser.la $(GMODULE_LIBS)
 tests_config_test_LDFLAGS = -no-install

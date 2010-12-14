@@ -1,3 +1,7 @@
+2010-12-14  Miloslav Trmač  <mitr@redhat.com>
+
+	* Makefile.am (tests_config_test_LDADD): Fix a typo.
+
 2010-09-29  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/util.c (lu_util_fscreate_for_path): Don't pass NULL to %s.
