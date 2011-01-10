@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-09-14 15:08+0200\n"
+"POT-Creation-Date: 2011-01-10 17:30+0100\n"
 "PO-Revision-Date: 2009-12-10 10:13+1000\n"
 "Last-Translator: Terry Chuang <tchuang@redhat.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
@@ -29,7 +29,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "`%s' 這個家目錄路徑並非絕對路徑"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:181
+#: modules/files.c:179
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "讀取 `%s' 錯誤：%s"
@@ -40,13 +40,13 @@ msgid "Error creating `%s': %s"
 msgstr "建立 `%s' 錯誤：%s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:164
+#: modules/files.c:162
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "改變 `%s' 的所有人時發生錯誤：%s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:196 modules/files.c:210
+#: modules/files.c:194 modules/files.c:208
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "寫入 `%s' 錯誤：%s"
@@ -56,62 +56,62 @@ msgstr "寫入 `%s' 錯誤：%s"
 msgid "Error removing `%s': %s"
 msgstr "移除 `%s' 錯誤：%s"
 
-#: apps/apputil.c:570 apps/apputil.c:574
+#: apps/apputil.c:576 apps/apputil.c:580
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "終止權限失敗。\n"
 
-#: apps/apputil.c:583
+#: apps/apputil.c:589
 #, c-format
 msgid "Internal error.\n"
 msgstr "內部錯誤。\n"
 
-#: apps/apputil.c:604
+#: apps/apputil.c:610
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "並未授權 %s 修改 %s 的 finger 資訊\n"
 
-#: apps/apputil.c:606
+#: apps/apputil.c:612
 msgid "Unknown user context"
 msgstr "不明的使用者本文"
 
-#: apps/apputil.c:614
+#: apps/apputil.c:620
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "無法為 /etc/passwd 設定預設的本文\n"
 
-#: apps/apputil.c:623
+#: apps/apputil.c:629
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "初始化 PAM 錯誤。\n"
 
-#: apps/apputil.c:633 apps/apputil.c:660
+#: apps/apputil.c:639 apps/apputil.c:666
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "為 %s 認證失敗。\n"
 
-#: apps/apputil.c:641
+#: apps/apputil.c:647
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "內部 PAM 錯誤 `%s'。\n"
 
-#: apps/apputil.c:646
+#: apps/apputil.c:652
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "不明的使用者認證。\n"
 
-#: apps/apputil.c:650
+#: apps/apputil.c:656
 #, c-format
 msgid "User mismatch.\n"
 msgstr "使用者不符。\n"
 
-#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/lchage.c:111 apps/lid.c:130 apps/lpasswd.c:66 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[OPTION...] 使用者"
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
 #: apps/lusermod.c:103
 #, c-format
@@ -124,9 +124,9 @@ msgstr "語法上分析引數錯誤：%s。\n"
 msgid "No user name specified.\n"
 msgstr "沒有指定使用者名稱。\n"
 
-#: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
-#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lchage.c:133 apps/lchfn.c:103 apps/lchsh.c:89 apps/lgroupadd.c:100
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:177 apps/lnewusers.c:77
+#: apps/lpasswd.c:93 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
@@ -201,12 +201,12 @@ msgstr "修改 %s 的老舊資訊失敗：%s\n"
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [使用者]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:164
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "沒有指定使用者名稱，uid %d 沒有指定使用者名稱。\n"
 
-#: apps/lchfn.c:99
+#: apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "修改  %s 的 finger 資訊。\n"
@@ -253,7 +253,7 @@ msgstr "finger 的資訊已變更。\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "finger 的資訊未變更：%s。\n"
 
-#: apps/lchsh.c:85
+#: apps/lchsh.c:82
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "變更 %s 的 shell。\n"
@@ -336,17 +336,17 @@ msgstr "查詢 %s 錯誤：%s\n"
 msgid "%s does not exist\n"
 msgstr "%s 不存在\n"
 
-#: apps/lid.c:144
+#: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "沒有指定群組名稱，使用 %s。\n"
 
-#: apps/lid.c:148
+#: apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "沒有指定群組名稱，gid %d 沒有指定名稱。\n"
 
-#: apps/lid.c:158
+#: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "沒有指定使用者名稱，使用 %s。\n"
@@ -656,15 +656,23 @@ msgstr "函式庫/模組 版本不符"
 msgid "unlocking would make the password field empty"
 msgstr "解鎖會讓密碼欄成為空白"
 
-#: lib/error.c:84
+#: lib/error.c:81
+msgid "invalid attribute value"
+msgstr ""
+
+#: lib/error.c:83
+msgid "invalid module combination"
+msgstr ""
+
+#: lib/error.c:88
 msgid "unknown error"
 msgstr "不明錯誤"
 
-#: lib/misc.c:165
+#: lib/misc.c:157
 msgid "invalid number"
 msgstr "無效的號碼"
 
-#: lib/misc.c:179
+#: lib/misc.c:171
 msgid "invalid ID"
 msgstr "無效的 ID"
 
@@ -782,89 +790,94 @@ msgstr "無法取得預設的安全本文：%s"
 msgid "couldn't get security context of `%s': %s"
 msgstr "無法獲得`%s'的安全本文：%s"
 
-#: lib/util.c:739 lib/util.c:766
+#: lib/util.c:739 lib/util.c:771
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "無法為`%s'設定預設的安全本文：%s"
 
-#: lib/util.c:760
+#: lib/util.c:763
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "無法判斷 `%s' 的安全本文：%s"
 
-#: modules/files.c:111 modules/files.c:445 modules/files.c:772
-#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
-#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
-#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
-#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
-#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
-#: modules/files.c:2404 modules/files.c:2419
+#: modules/files.c:109 modules/files.c:443 modules/files.c:770
+#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
+#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
+#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
+#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
+#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
+#: modules/files.c:2403 modules/files.c:2418
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "無法開啟`%s'：%s"
 
-#: modules/files.c:123 modules/files.c:152 modules/files.c:218
-#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
+#: modules/files.c:121 modules/files.c:150 modules/files.c:216
+#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "無法 stat `%s'：%s"
 
-#: modules/files.c:134
+#: modules/files.c:132
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "建立`%s' 發生錯誤：%s"
 
-#: modules/files.c:147
+#: modules/files.c:145
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "備份檔`%s' 存在而它不是一個正常的檔案"
 
-#: modules/files.c:226
+#: modules/files.c:224
 msgid "backup file size mismatch"
 msgstr "備份檔案的大小不符"
 
-#: modules/files.c:673
+#: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s value `%s': `:' 不被允許"
 
-#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
+#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "無法從`%s' 讀取：%s"
 
-#: modules/files.c:804
+#: modules/files.c:802
 msgid "entry already present in file"
 msgstr "項目已存在檔案中"
 
-#: modules/files.c:811 modules/files.c:821 modules/files.c:832
-#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
+#: modules/files.c:809 modules/files.c:819 modules/files.c:830
+#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "無法寫入`%s'：%s"
 
-#: modules/files.c:992
+#: modules/files.c:990
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "實體物件沒有 %s 屬性"
 
-#: modules/files.c:1059
+#: modules/files.c:1057
 msgid "entry with conflicting name already present in file"
 msgstr "名稱產生衝突的項目已存在檔案中"
 
-#: modules/files.c:1772
+#: modules/files.c:1771
 msgid "`:' not allowed in encrypted password"
 msgstr "加密的密碼中不允許使用 `:'"
 
-#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "為密碼編碼時錯誤"
 
-#: modules/files.c:2690 modules/files.c:2768
+#: modules/files.c:2625 modules/ldap.c:2484
+#, c-format
+msgid "the `%s' and `%s' modules can not be combined"
+msgstr ""
+
+#: modules/files.c:2717 modules/files.c:2797
 msgid "not executing with superuser privileges"
 msgstr "非以超級使用者（superuser）的權限執行"
 
-#: modules/files.c:2781
+#: modules/files.c:2810
 msgid "no shadow file present -- disabling"
 msgstr "找不到 shadow 檔案 -- 停用中"
 
@@ -1007,41 +1020,41 @@ msgstr "找不到 `%s' 屬性"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤：%s"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2520
 msgid "LDAP Server Name"
 msgstr "LDAP 伺服器名稱"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2526
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2532
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2539
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind 密碼"
 
-#: modules/ldap.c:2500
+#: modules/ldap.c:2545
 msgid "LDAP SASL User"
 msgstr "LDAP SASL 使用者"
 
-#: modules/ldap.c:2507
+#: modules/ldap.c:2552
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 認證使用者"
 
-#: modules/sasldb.c:120
+#: modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "建立使用者時發生 Cyrus SASL 錯誤：%s"
 
-#: modules/sasldb.c:124
+#: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "移除使用者時發生 Cyrus SASL 錯誤：%s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:532 modules/sasldb.c:540
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "初始化 Cyrus SASL 發生錯誤：%s"

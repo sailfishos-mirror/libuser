@@ -1,3 +1,16 @@
+0.57
+* Resolve an ambiguity about "password" value format that could cause setting
+  a known plaintext password in LDAP accounts: the "files"/"shadow" and LDAP
+  modules may not be used together any more, and the module interface ABI has
+  changed to support this.
+* Don't authenticate the user (in lchfn, lchsh, lpasswd) if the application
+  is not set*id and it does not need elevated privileges.  In particular, this
+  allows the above programs to be used for LDAP administration by unprivileged
+  users.
+* Change default crypt_style to sha512.
+* Don't abort on invalid ID values.
+* Miscellaneous bug fixes.
+
 0.56.18
 * Update translations.
 

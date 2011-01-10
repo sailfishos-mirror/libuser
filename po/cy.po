@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.cy\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-09-14 15:08+0200\n"
+"POT-Creation-Date: 2011-01-10 17:30+0100\n"
 "PO-Revision-Date: 2005-04-16 14:20+0100\n"
 "Last-Translator: Rhys Jones <rhys@sgwarnog.com>\n"
 "Language-Team: Cymraeg <Cy@li.org>\n"
@@ -24,7 +24,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:181
+#: modules/files.c:179
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Gwall wrth ddarllen `%s': %s"
@@ -35,13 +35,13 @@ msgid "Error creating `%s': %s"
 msgstr "Gwall wrth greu `%s': %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:164
+#: modules/files.c:162
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Gwall wrth newid perchennog `%s': %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:196 modules/files.c:210
+#: modules/files.c:194 modules/files.c:208
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Gwall wrth ysgrifennu `%s': %s"
@@ -51,62 +51,62 @@ msgstr "Gwall wrth ysgrifennu `%s': %s"
 msgid "Error removing `%s': %s"
 msgstr "Gwall wrth waredu `%s': %s"
 
-#: apps/apputil.c:570 apps/apputil.c:574
+#: apps/apputil.c:576 apps/apputil.c:580
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Methwyd gollwng breintiau.\n"
 
-#: apps/apputil.c:583
+#: apps/apputil.c:589
 #, c-format
 msgid "Internal error.\n"
 msgstr "Gwall mewnol.\n"
 
-#: apps/apputil.c:604
+#: apps/apputil.c:610
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "Does gan %s ddim caniatâd i newid gwybodaeth 'finger' %s\n"
 
-#: apps/apputil.c:606
+#: apps/apputil.c:612
 msgid "Unknown user context"
 msgstr "Cyd-destun defnyddiwr yn anhysbys"
 
-#: apps/apputil.c:614
+#: apps/apputil.c:620
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Methu gosod y cyd-destun rhagosodedig ar gyfer /etc/passwd\n"
 
-#: apps/apputil.c:623
+#: apps/apputil.c:629
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Gwall wrth ymgychwyn PAM.\n"
 
-#: apps/apputil.c:633 apps/apputil.c:660
+#: apps/apputil.c:639 apps/apputil.c:666
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Methodd dilysiant ar gyfer %s.\n"
 
-#: apps/apputil.c:641
+#: apps/apputil.c:647
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Gwall PAM mewnol `%s'.\n"
 
-#: apps/apputil.c:646
+#: apps/apputil.c:652
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Dilyswyd defnyddiwr anhysbys.\n"
 
-#: apps/apputil.c:650
+#: apps/apputil.c:656
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Defnyddiwr anghydwedd.\n"
 
-#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/lchage.c:111 apps/lid.c:130 apps/lpasswd.c:66 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[DEWISIAD...] defnyddiwr"
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
 #: apps/lusermod.c:103
 #, c-format
@@ -119,9 +119,9 @@ msgstr "Gwall wrth ddyrannu ymresymiadau: %s.\n"
 msgid "No user name specified.\n"
 msgstr "Ni phenodwyd enw defnyddiwr.\n"
 
-#: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
-#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lchage.c:133 apps/lchfn.c:103 apps/lchsh.c:89 apps/lgroupadd.c:100
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:177 apps/lnewusers.c:77
+#: apps/lpasswd.c:93 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
@@ -196,12 +196,12 @@ msgstr "Methwyd addasu'r wybodaeth heneiddio ar gyfer %s: %s\n"
 msgid "[OPTION...] [user]"
 msgstr "[DEWISIAD...] [defnyddiwr]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:164
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Ni phenodwyd enw defnyddiwr, dim enw ar gyfer uid %d.\n"
 
-#: apps/lchfn.c:99
+#: apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "Yn newid gwybodaeth byseddu ar gyfer %s.\n"
@@ -248,7 +248,7 @@ msgstr "Newidiwyd gwybodaeth fyseddu.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Ni newidiwyd gwybodaeth fyseddu: %s.\n"
 
-#: apps/lchsh.c:85
+#: apps/lchsh.c:82
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "Yn newid plisgyn ar gyfer %s.\n"
@@ -331,17 +331,17 @@ msgstr "Gwall wrth waredu %s: %s\n"
 msgid "%s does not exist\n"
 msgstr "Nid yw'r defnyddiwr %s yn bodoli.\n"
 
-#: apps/lid.c:144
+#: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Ni phenodwyd enw grŵp, yn defnyddio %s.\n"
 
-#: apps/lid.c:148
+#: apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Ni phenodwyd enw grŵp, dim enw ar gyfer gid %d.\n"
 
-#: apps/lid.c:158
+#: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Ni phenodwyd enw defnyddiwr, yn defnyddio %s.\n"
@@ -652,16 +652,24 @@ msgstr "Fersiwn llyfrgell/modwl yn wahanol"
 msgid "unlocking would make the password field empty"
 msgstr "mi fyddai datgloi yn achosi i'r maes cyfrinair fod yn wag"
 
-#: lib/error.c:84
+#: lib/error.c:81
+msgid "invalid attribute value"
+msgstr ""
+
+#: lib/error.c:83
+msgid "invalid module combination"
+msgstr ""
+
+#: lib/error.c:88
 msgid "unknown error"
 msgstr "gwall anhysbys"
 
-#: lib/misc.c:165
+#: lib/misc.c:157
 #, fuzzy
 msgid "invalid number"
 msgstr "%s yn ID defnyddiwr annilys\n"
 
-#: lib/misc.c:179
+#: lib/misc.c:171
 #, fuzzy
 msgid "invalid ID"
 msgstr "ID annilys %s\n"
@@ -780,90 +788,95 @@ msgstr "methwyd gosod cyd-destun diogelwch rhagosodedig: %s"
 msgid "couldn't get security context of `%s': %s"
 msgstr "methwyd cael cyd-destun diogelwch `%s': %s"
 
-#: lib/util.c:739 lib/util.c:766
+#: lib/util.c:739 lib/util.c:771
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "methwyd gosod y cyd-destun diogelwch rhagosodedig i `%s': %s"
 
-#: lib/util.c:760
+#: lib/util.c:763
 #, fuzzy, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "methwyd cael cyd-destun diogelwch `%s': %s"
 
-#: modules/files.c:111 modules/files.c:445 modules/files.c:772
-#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
-#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
-#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
-#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
-#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
-#: modules/files.c:2404 modules/files.c:2419
+#: modules/files.c:109 modules/files.c:443 modules/files.c:770
+#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
+#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
+#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
+#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
+#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
+#: modules/files.c:2403 modules/files.c:2418
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "methwyd agor: `%s': %s"
 
-#: modules/files.c:123 modules/files.c:152 modules/files.c:218
-#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
+#: modules/files.c:121 modules/files.c:150 modules/files.c:216
+#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "methwyd statio: `%s': %s"
 
-#: modules/files.c:134
+#: modules/files.c:132
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "gwall wrth greu: `%s': %s"
 
-#: modules/files.c:147
+#: modules/files.c:145
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "mae'r ffeil wrthgefn `%s' yn bodoli, ac nid yw'n ffeil arferol"
 
-#: modules/files.c:226
+#: modules/files.c:224
 msgid "backup file size mismatch"
 msgstr "maint ffeiliau wrthgefn yn wahanol i'w gilydd"
 
-#: modules/files.c:673
+#: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr ""
 
-#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
+#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "methwyd darllen o `%s': %s"
 
-#: modules/files.c:804
+#: modules/files.c:802
 msgid "entry already present in file"
 msgstr "cofnod eisoes yn bresennol yn y ffeil"
 
-#: modules/files.c:811 modules/files.c:821 modules/files.c:832
-#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
+#: modules/files.c:809 modules/files.c:819 modules/files.c:830
+#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "methwyd ysgrifennu i `%s': %s"
 
-#: modules/files.c:992
+#: modules/files.c:990
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "nid oes gan y gwrthrych endid briodoledd %s"
 
-#: modules/files.c:1059
+#: modules/files.c:1057
 #, fuzzy
 msgid "entry with conflicting name already present in file"
 msgstr "cofnod eisoes yn bresennol yn y ffeil"
 
-#: modules/files.c:1772
+#: modules/files.c:1771
 msgid "`:' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "gwall wrth amgryptio cyfrinair"
 
-#: modules/files.c:2690 modules/files.c:2768
+#: modules/files.c:2625 modules/ldap.c:2484
+#, c-format
+msgid "the `%s' and `%s' modules can not be combined"
+msgstr ""
+
+#: modules/files.c:2717 modules/files.c:2797
 msgid "not executing with superuser privileges"
 msgstr "ddim yn gweithredu â breintiau'r uwchddefnydiwr"
 
-#: modules/files.c:2781
+#: modules/files.c:2810
 msgid "no shadow file present -- disabling"
 msgstr "dim ffeil gysgod yn bresennol -- yn analluogi"
 
@@ -1008,41 +1021,41 @@ msgstr "ni chanfuwyd priodoledd `%s'"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "gwall wrth osod cyfrinair yn y cyfeiriadur LDAP ar gyfer %s: %s"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2520
 msgid "LDAP Server Name"
 msgstr "Enw Gweinydd LDAP"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2526
 msgid "LDAP Search Base DN"
 msgstr "EP Sail Chwilio LDAP"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2532
 msgid "LDAP Bind DN"
 msgstr "EP Rhwymo LDAP"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2539
 msgid "LDAP Bind Password"
 msgstr "Cyfrinair Rhwymo LDAP"
 
-#: modules/ldap.c:2500
+#: modules/ldap.c:2545
 msgid "LDAP SASL User"
 msgstr "Defnyddiwr SASL LDAP"
 
-#: modules/ldap.c:2507
+#: modules/ldap.c:2552
 msgid "LDAP SASL Authorization User"
 msgstr "Defnyddiwr Awdurdodi SASL LDAP"
 
-#: modules/sasldb.c:120
+#: modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Gwall SASL Cyrus wrth greu'r defnyddiwr: %s"
 
-#: modules/sasldb.c:124
+#: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Gwall SASL Cyrus wrth greu'r defnyddiwr: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:532 modules/sasldb.c:540
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "gwall wrth ymgychwyn SASL Cyrus: %s"

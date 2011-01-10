@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2010-09-14 15:08+0200\n"
+"POT-Creation-Date: 2011-01-10 17:30+0100\n"
 "PO-Revision-Date: 2009-12-09 19:19+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
 "Language-Team: Marathi <fedora-trans-mr@redhat.com>\n"
@@ -29,7 +29,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "मुख्य संचयीका मार्ग  `%s' संपूर्णतः नाही"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:181
+#: modules/files.c:179
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' वाचतेवेळी चूक: %s"
@@ -40,13 +40,13 @@ msgid "Error creating `%s': %s"
 msgstr "`%s' निर्माण करतेवेळी चूक: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:164
+#: modules/files.c:162
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' चा मालक बदलतेवेळी त्रूटी: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:196 modules/files.c:210
+#: modules/files.c:194 modules/files.c:208
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' लिहीतेवेळी त्रुटी: %s"
@@ -56,62 +56,62 @@ msgstr "`%s' लिहीतेवेळी त्रुटी: %s"
 msgid "Error removing `%s': %s"
 msgstr "`%s' काढुन टाकतेवेळी त्रुटी: %s"
 
-#: apps/apputil.c:570 apps/apputil.c:574
+#: apps/apputil.c:576 apps/apputil.c:580
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "हक्क वगळण्यास अपयशी.\n"
 
-#: apps/apputil.c:583
+#: apps/apputil.c:589
 #, c-format
 msgid "Internal error.\n"
 msgstr "आंतरीक त्रूटी.\n"
 
-#: apps/apputil.c:604
+#: apps/apputil.c:610
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s ची finger माहिती बदलवण्यास %s ला अधिकार नाही\n"
 
-#: apps/apputil.c:606
+#: apps/apputil.c:612
 msgid "Unknown user context"
 msgstr "अपरिचित वापरकर्ता संदर्भ"
 
-#: apps/apputil.c:614
+#: apps/apputil.c:620
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd करता मूलभूत संदर्भ निश्चित करू शकत नाही\n"
 
-#: apps/apputil.c:623
+#: apps/apputil.c:629
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM प्रारंभ करतेवेळी त्रुटी.\n"
 
-#: apps/apputil.c:633 apps/apputil.c:660
+#: apps/apputil.c:639 apps/apputil.c:666
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s करीता अधिप्रमाणन अयशस्वी.\n"
 
-#: apps/apputil.c:641
+#: apps/apputil.c:647
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "आंतरीक PAM त्रूटी `%s'.\n"
 
-#: apps/apputil.c:646
+#: apps/apputil.c:652
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "अपरिचित वापरकर्ता अधिप्रमाणित.\n"
 
-#: apps/apputil.c:650
+#: apps/apputil.c:656
 #, c-format
 msgid "User mismatch.\n"
 msgstr "वापरकर्ता जुळला नाही.\n"
 
-#: apps/lchage.c:111 apps/lid.c:128 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/lchage.c:111 apps/lid.c:130 apps/lpasswd.c:66 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[OPTION...] वापरकर्ता"
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:131 apps/lnewusers.c:66
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
 #: apps/lusermod.c:103
 #, c-format
@@ -124,9 +124,9 @@ msgstr "बाबी वाचतेवेळी त्रुटी: %s.\n"
 msgid "No user name specified.\n"
 msgstr "वापरकर्त्याचे नाव दर्शविले नाही.\n"
 
-#: apps/lchage.c:133 apps/lchfn.c:106 apps/lchsh.c:92 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:175 apps/lnewusers.c:77
-#: apps/lpasswd.c:95 apps/luseradd.c:143 apps/luserdel.c:81
+#: apps/lchage.c:133 apps/lchfn.c:103 apps/lchsh.c:89 apps/lgroupadd.c:100
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:177 apps/lnewusers.c:77
+#: apps/lpasswd.c:93 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
@@ -201,12 +201,12 @@ msgstr "%s करता एजींग माहिती संपादित
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [वापरकर्ता]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:162
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:164
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "वापरकर्त्याचे नाव दर्शविले नाही, uid %d करीता नाव नाही.\n"
 
-#: apps/lchfn.c:99
+#: apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "%s करता finger माहिती बदलवा.\n"
@@ -253,7 +253,7 @@ msgstr "Finger माहिती बदलवण्यात आली.\n"
 msgid "Finger information not changed: %s.\n"
 msgstr "Finger माहिती बदलवली नाही: %s.\n"
 
-#: apps/lchsh.c:85
+#: apps/lchsh.c:82
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "%s कर्ता शेल बदलवत आहे.\n"
@@ -336,17 +336,17 @@ msgstr "%s शोधतेवेळी त्रुटी: %s\n"
 msgid "%s does not exist\n"
 msgstr "%s अस्तित्वात नाही\n"
 
-#: apps/lid.c:144
+#: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "%s वापरून, समुहाचे नाव व्याख्यित नाही.\n"
 
-#: apps/lid.c:148
+#: apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "समुह नाव दर्शविले नाही, gid %d करीता नाव नाही.\n"
 
-#: apps/lid.c:158
+#: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "%s वापरुन, वापरकर्त्याचे नाव व्याख्यित नाही.\n"
@@ -656,15 +656,23 @@ msgstr "लायब्ररी/घटकाच्या आवृत्ती�
 msgid "unlocking would make the password field empty"
 msgstr "कुलूपबंद नाहीसे केल्यास परवलीचा शब्द रिक्त होते"
 
-#: lib/error.c:84
+#: lib/error.c:81
+msgid "invalid attribute value"
+msgstr ""
+
+#: lib/error.c:83
+msgid "invalid module combination"
+msgstr ""
+
+#: lib/error.c:88
 msgid "unknown error"
 msgstr "अपरिचीत त्रूटी"
 
-#: lib/misc.c:165
+#: lib/misc.c:157
 msgid "invalid number"
 msgstr "अवैध क्रमांक"
 
-#: lib/misc.c:179
+#: lib/misc.c:171
 msgid "invalid ID"
 msgstr "अवैध ID"
 
@@ -782,90 +790,95 @@ msgstr "मुलभूत सुरक्षा संदर्भ प्रा
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' चा सुरक्षा संदर्भ आढळला नाही: %s"
 
-#: lib/util.c:739 lib/util.c:766
+#: lib/util.c:739 lib/util.c:771
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' करता मुलभूत सुरक्षा संदर्भ निश्चित केला नाही: %s"
 
-#: lib/util.c:760
+#: lib/util.c:763
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "संरचना फाइल `%1$s' उघडू शकला नाही: %2$s"
 
-#: modules/files.c:111 modules/files.c:445 modules/files.c:772
-#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
-#: modules/files.c:1508 modules/files.c:1729 modules/files.c:1900
-#: modules/files.c:1917 modules/files.c:2006 modules/files.c:2025
-#: modules/files.c:2093 modules/files.c:2114 modules/files.c:2211
-#: modules/files.c:2230 modules/files.c:2289 modules/files.c:2308
-#: modules/files.c:2404 modules/files.c:2419
+#: modules/files.c:109 modules/files.c:443 modules/files.c:770
+#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
+#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
+#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
+#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
+#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
+#: modules/files.c:2403 modules/files.c:2418
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' उघडू शकला नाही: %s"
 
-#: modules/files.c:123 modules/files.c:152 modules/files.c:218
-#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
+#: modules/files.c:121 modules/files.c:150 modules/files.c:216
+#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' दर्शवू शकला नाही: %s"
 
-#: modules/files.c:134
+#: modules/files.c:132
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' निर्माण करतेवेळी त्रूटी: %s"
 
-#: modules/files.c:147
+#: modules/files.c:145
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "अगाऊ फाइल `%s' अस्तित्वात आहे व ती सर्वसाधारण फाइल नाही"
 
-#: modules/files.c:226
+#: modules/files.c:224
 msgid "backup file size mismatch"
 msgstr "प्रतिकृती फॉईल आकार जुळत नाही"
 
-#: modules/files.c:673
+#: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s मुल्य `%s': `:' परवानगी नाही"
 
-#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
+#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' पासुन वाचू शकले नाही: %s"
 
-#: modules/files.c:804
+#: modules/files.c:802
 msgid "entry already present in file"
 msgstr "फाइल मध्ये नोंदणी आधिपासुनच अस्तित्वात आहे"
 
-#: modules/files.c:811 modules/files.c:821 modules/files.c:832
-#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
+#: modules/files.c:809 modules/files.c:819 modules/files.c:830
+#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' करीता लिहु शकले नाही: %s"
 
-#: modules/files.c:992
+#: modules/files.c:990
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "वस्तू ला %s गुणधर्म नाही"
 
-#: modules/files.c:1059
+#: modules/files.c:1057
 #, fuzzy
 msgid "entry with conflicting name already present in file"
 msgstr "फाइल मध्ये नोंदणी आधिपासुनच अस्तित्वात आहे"
 
-#: modules/files.c:1772
+#: modules/files.c:1771
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' एन्क्रीप्ट परवलीचा शब्द अंतर्गत परवानगी नाही"
 
-#: modules/files.c:1784 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "परवलीचा शब्द कुटलिपी करतेवेळी त्रुटी"
 
-#: modules/files.c:2690 modules/files.c:2768
+#: modules/files.c:2625 modules/ldap.c:2484
+#, c-format
+msgid "the `%s' and `%s' modules can not be combined"
+msgstr ""
+
+#: modules/files.c:2717 modules/files.c:2797
 msgid "not executing with superuser privileges"
 msgstr "अत्युतमवापरकर्ता हक्कासह कार्यान्वीत होत नाही"
 
-#: modules/files.c:2781
+#: modules/files.c:2810
 msgid "no shadow file present -- disabling"
 msgstr "शॅडो फाइल उपलब्ध नाही -- अकार्यान्वीत करत आहे"
 
@@ -1010,41 +1023,41 @@ msgstr "`%s' गुणधर्म आढळले नाही"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP संचयीकेत %s करीता परवलीचा शब्द निश्चित करतेवेळी त्रुटी: %s"
 
-#: modules/ldap.c:2475
+#: modules/ldap.c:2520
 msgid "LDAP Server Name"
 msgstr "LDAP सर्वरचे नाव"
 
-#: modules/ldap.c:2481
+#: modules/ldap.c:2526
 msgid "LDAP Search Base DN"
 msgstr "LDAP पायभुत शोध DN"
 
-#: modules/ldap.c:2487
+#: modules/ldap.c:2532
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2494
+#: modules/ldap.c:2539
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind परवलीचा शब्द"
 
-#: modules/ldap.c:2500
+#: modules/ldap.c:2545
 msgid "LDAP SASL User"
 msgstr "LDAP SASL वापरकर्ता"
 
-#: modules/ldap.c:2507
+#: modules/ldap.c:2552
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL अधिप्रमाणन वापरकर्ता"
 
-#: modules/sasldb.c:120
+#: modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "वापरकर्ता निर्माण करतेवेळी Cyrus SASL त्रुटी: %s"
 
-#: modules/sasldb.c:124
+#: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "वापरकर्ता काढुन टाकतेवेळी Cyrus SASL त्रुटी: %s"
 
-#: modules/sasldb.c:520 modules/sasldb.c:528
+#: modules/sasldb.c:532 modules/sasldb.c:540
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL प्रारंभ करतेवेऴी त्रुटी: %s"

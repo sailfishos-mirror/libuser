@@ -1,3 +1,10 @@
+2011-01-10  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Release 0.57.
+	* NEWS: Update.
+	* po/LINGUAS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 2011-01-03  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/default_pw_test
