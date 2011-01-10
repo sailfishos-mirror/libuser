@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC		0x00000006
-#define LU_MODULE_VERSION	0x000c0000
+#define LU_MODULE_VERSION	0x000d0000
 #define _(String)		dgettext(PACKAGE_NAME, String)
 #define N_(String)		String
 /* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
@@ -55,6 +55,11 @@ G_BEGIN_DECLS
 #define LU_COMMON_DEFAULT_PASSWORD		"!!"
 #define LU_COMMON_DEFAULT_SHADOW_PASSWORD	"x"
 #define LU_COMMON_DEFAULT_SHELL			"/bin/bash"
+
+/* Well-known module names */
+#define LU_MODULE_NAME_FILES "files"
+#define LU_MODULE_NAME_LDAP "ldap"
+#define LU_MODULE_NAME_SHADOW "shadow"
 
 /* A string cache structure.  Useful for side-stepping most issues with
  * whether or not returned strings should be freed. */
@@ -116,6 +121,14 @@ struct lu_module {
 	const char *name;		/* Name of the module. */
 	struct lu_context *lu_context;	/* Context the module was opened in. */
 	void *module_context;		/* Module-private data. */
+
+	/* Check if the current list of module combinations (array of module
+	   names) is valid.  Note that this can be called several times during
+	   the lifetime of the module (probably at least twice, for "modules"
+	   and "create_modules"). */
+	gboolean(*valid_module_combination) (struct lu_module *module,
+					     GValueArray *names,
+					     struct lu_error **error);
 
 	/* A function for telling if the module makes use of elevated
 	 * privileges (i.e., modifying files which normal users can't. */

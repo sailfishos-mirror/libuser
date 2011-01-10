@@ -77,6 +77,10 @@ lu_strerror(struct lu_error *error)
 			case lu_error_unlock_empty:
 				return _("unlocking would make the password "
 					 "field empty");
+			case lu_error_invalid_attribute_value:
+				return _("invalid attribute value");
+			case lu_error_invalid_module_combination:
+				return _("invalid module combination");
 			default:
 				break;
 		}
@@ -131,6 +135,8 @@ lu_error_is_error(enum lu_status code)
 		case lu_error_module_sym:
 		case lu_error_module_version:
 		case lu_error_unlock_empty:
+		case lu_error_invalid_attribute_value:
+		case lu_error_invalid_module_combination:
 			return TRUE;
 		default:
 			return FALSE;

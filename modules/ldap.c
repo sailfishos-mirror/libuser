@@ -2207,6 +2207,20 @@ lu_ldap_user_default(struct lu_module *module,
 		     const char *user, gboolean is_system,
 		     struct lu_ent *ent, struct lu_error **error)
 {
+	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
+		GValue value;
+
+		memset(&value, 0, sizeof(value));
+		g_value_init(&value, G_TYPE_STRING);
+		g_value_set_string(&value,
+				   LU_CRYPTED LU_COMMON_DEFAULT_PASSWORD);
+		lu_ent_add(ent, LU_USERPASSWORD, &value);
+		g_value_unset(&value);
+	}
+	/* This will set LU_SHADOWPASSWORD, which we ignore.  The default
+	   LU_USERPASSWORD value, which is incompatibly formated by
+	   lu_common_user_default(), will not be used because LU_USERPASSWORD
+	   was set above. */
 	return lu_common_user_default(module, user, is_system, ent, error) &&
 	       lu_common_suser_default(module, user, is_system, ent, error);
 }
@@ -2216,6 +2230,8 @@ lu_ldap_group_default(struct lu_module *module,
 		      const char *group, gboolean is_system,
 		      struct lu_ent *ent, struct lu_error **error)
 {
+	/* This sets LU_SHADOWPASSWORD, which is ignored by our backend.
+	   LU_GROUPPASSWORD is not set. */
 	return lu_common_group_default(module, group, is_system, ent, error) &&
 	       lu_common_sgroup_default(module, group, is_system, ent, error);
 }
@@ -2446,6 +2462,34 @@ lu_ldap_close_module(struct lu_module *module)
 }
 
 static gboolean
+lu_ldap_valid_module_combination(struct lu_module *module, GValueArray *names,
+				 struct lu_error **error)
+{
+	size_t i;
+
+	g_assert(module != NULL);
+	g_assert(names != NULL);
+	LU_ERROR_CHECK(error);
+	for (i = 0; i < names->n_values; i++) {
+		const char *name;
+
+		name = g_value_get_string(g_value_array_get_nth(names, i));
+		if (strcmp(name, LU_MODULE_NAME_FILES) == 0
+		    || strcmp(name, LU_MODULE_NAME_SHADOW) == 0) {
+			/* These modules use an incompatible LU_*PASSWORD
+			   format: the LU_CRYPTED prefix, or a similar
+			   indicator of an LDAP-defined hashing method, is
+			   missing. */
+			lu_error_new(error, lu_error_invalid_module_combination,
+				     _("the `%s' and `%s' modules can not be "
+				       "combined"), module->name, name);
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+static gboolean
 lu_ldap_uses_elevated_privileges(struct lu_module *module)
 {
 	(void)module;
@@ -2564,7 +2608,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->version = LU_MODULE_VERSION;
 	ret->module_context = ctx;
 	ret->scache = lu_string_cache_new(TRUE);
-	ret->name = ret->scache->cache(ret->scache, "ldap");
+	ret->name = ret->scache->cache(ret->scache, LU_MODULE_NAME_LDAP);
 	ctx->module = ret;
 
 	ctx->user_branch = lu_cfg_read_single(context, "ldap/userBranch",
@@ -2607,6 +2651,7 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	}
 
 	/* Set the method pointers. */
+	ret->valid_module_combination = lu_ldap_valid_module_combination;
 	ret->uses_elevated_privileges = lu_ldap_uses_elevated_privileges;
 
 	ret->user_lookup_name = lu_ldap_user_lookup_name;

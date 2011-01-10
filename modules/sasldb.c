@@ -24,6 +24,18 @@
 #include "../lib/user_private.h"
 
 static gboolean
+lu_sasldb_valid_module_combination(struct lu_module *module, GValueArray *names,
+				   struct lu_error **error)
+{
+	(void)module;
+	(void)names;
+	(void)error;
+	/* We never access LU_*PASSWORD, so no formatting conflicts are
+	   possible. */
+	return TRUE;
+}
+
+static gboolean
 lu_sasldb_uses_elevated_privileges(struct lu_module *module)
 {
 	(void)module;
@@ -538,6 +550,7 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->module_context = connection;
 
 	/* Set the method pointers. */
+	ret->valid_module_combination = lu_sasldb_valid_module_combination;
 	ret->uses_elevated_privileges = lu_sasldb_uses_elevated_privileges;
 
 	ret->user_lookup_name = lu_sasldb_user_lookup_name;

@@ -1,3 +1,49 @@
+2011-01-03  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/default_pw_test
+	* tests/default_pw_test.py
+	* tests/default_pw.conf.in: New test.
+	* Makefile.am (TESTS)
+	(EXTRA_DIST): Add tests/default_pw.conf.in, tests/default_pw_test and
+	tests/default_pw_test.py.
+
+	* tests/ldap_test.py (Tests.testUserAdd1, Tests.testGroupAdd1):
+	Verify default password value of newly created entries.
+
+	* modules/ldap.c (lu_ldap_user_default): Use an LDAP-specific
+	default for LU_USERPASSWORD.
+	(lu_ldap_group_default): Comment absence of default password.
+
+	* lib/user_private.h (struct lu_module): New member
+	valid_module_combination.
+	* lib/error.h (lu_status_t): Add lu_error_invalid_module_combination.
+	* lib/error.c (lu_strerror, lu_error_is_error): Handle
+	lu_error_invalid_module_combination.
+	* lib/modules.c (load_one_module): Verify `valid_module_combination'
+	is provided.
+	(lu_modules_load): After loading modules, let each one verify the
+	module combination.
+	* modules/files.c (lu_files_shadow_valid_module_combination): New
+	function.
+	(libuser_files_init, libuser_shadow_init): Provide
+	`valid_module_combination'.
+	* modules/ldap.c (lu_ldap_valid_module_combination): New function.
+	(libuser_ldap_init): Provide `valid_module_combination'.
+	* modules/sasldb.c (lu_sasldb_valid_module_combination): New function.
+	(libuser_sasldb_init): Provide `valid_module_combination'.
+
+	* lib/user_private.h (LU_MODULE_NAME_FILES, LU_MODULE_NAME_LDAP)
+	(LU_MODULE_NAME_SHADOW): New definitions.
+	* modules/files.c (SHADOW_MODULE_NAME): Remove, replaced by
+	LU_MODULE_NAME_SHADOW.  All users updated.
+	(libuser_files_init): Use LU_MODULE_NAME_FILES.
+	* modules/ldap.c (libuser_ldap_init): Use LU_MODULE_NAME_LDAP.
+
+	* lib/user_private.h (LU_MODULE_VERSION): Increase.
+
+	* lib/error.c (lu_strerror, lu_error_is_error): Handle
+	lu_error_invalid_attribute_value.
+
 2010-12-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/ldap_test: Don't run (openssl req) in batch mode so that we

@@ -94,6 +94,7 @@ load_one_module(struct lu_context *ctx, const char *module_dir,
 			goto err_module;				\
 		}							\
 	} while (0)
+	M(valid_module_combination);
 	M(uses_elevated_privileges);
 	M(user_lookup_name);
 	M(user_lookup_id);
@@ -163,6 +164,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 	const char *module_dir;
 	char *module_name;
 	GValueArray *our_names;
+	size_t i;
 
 	LU_ERROR_CHECK(error);
 
@@ -189,17 +191,9 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 					    error) == FALSE) {
 				/* The module initializer may report a warning,
 				   which is not fatal. */
-				if (lu_error_is_warning((*error)->code)) {
-					lu_error_free(error);
-					continue;
-				} else {
-					/* Modules loaded before this failure
-					   are kept loaded, but the list of
-					   used modules does not change. */
-					g_value_array_free(our_names);
-					g_free(modlist);
-					return FALSE;
-				}
+				if (!lu_error_is_warning((*error)->code))
+					goto error;
+				lu_error_free(error);
 			}
 		}
 
@@ -210,11 +204,31 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 		g_value_array_append(our_names, &value);
 		g_value_unset(&value);
 	}
+
+	for (i = 0; i < our_names->n_values; i++) {
+		GValue *value;
+		struct lu_module *module;
+
+		value = g_value_array_get_nth(our_names, i);
+		module = g_tree_lookup(ctx->modules, g_value_get_string(value));
+		g_assert(module != NULL);
+		if (module->valid_module_combination(module, our_names, error)
+		    == FALSE)
+			goto error;
+	}
+
 	g_free(modlist);
 	if (*names != NULL)
 		g_value_array_free(*names);
 	*names = our_names;
 	return TRUE;
+
+error:
+	/* Modules loaded before the failure are kept loaded, but the list of
+	   used modules does not change. */
+	g_value_array_free(our_names);
+	g_free(modlist);
+	return FALSE;
 }
 
 /* Unload a given module, implemented as a callback for a GTree where the

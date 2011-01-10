@@ -16,7 +16,7 @@ PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 SUBDIRS = po docs
 TESTS = tests/config_test.sh tests/files_test tests/pwhash_test tests/utils_test
 if LDAP
-TESTS += tests/ldap_test
+TESTS += tests/default_pw_test tests/ldap_test
 endif
 
 EXTRA_DIST = \
@@ -27,6 +27,7 @@ EXTRA_DIST = \
 	tests/config_import.conf.in tests/config_import2.conf.in \
 	tests/config_login.defs tests/config_login2.defs \
 	tests/config_override.conf.in tests/config_test.sh \
+	tests/default_pw.conf.in tests/default_pw_test tests/default_pw_test.py \
 	tests/files.conf.in tests/files_test tests/files_test.py \
 	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
 	tests/ldap_test.py \

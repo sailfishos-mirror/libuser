@@ -65,6 +65,7 @@ class Tests(unittest.TestCase):
         e = self.a.lookupUserByName('user6_1')
         self.assert_(e)
         self.assertEqual(e[libuser.USERNAME], ['user6_1'])
+        self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!!'])
 
     def testUserAdd2(self):
         # A maximal case
@@ -604,6 +605,7 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group21_1')
         self.assert_(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group21_1'])
+        self.assertRaises(KeyError, lambda x: x[libuser.GROUPPASSWORD], e)
 
     def testGroupAdd2(self):
         # A maximal case

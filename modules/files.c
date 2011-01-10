@@ -33,8 +33,6 @@
 
 #define CHUNK_SIZE	(LINE_MAX * 4)
 
-#define SHADOW_MODULE_NAME "shadow"
-
 LU_MODULE_INIT(libuser_files_init)
 LU_MODULE_INIT(libuser_shadow_init)
 
@@ -1674,7 +1672,8 @@ ent_has_shadow (struct lu_ent *ent)
 
 		value = g_value_array_get_nth(ent->modules, i);
 		g_assert(G_VALUE_HOLDS_STRING(value));
-		if (strcmp(g_value_get_string(value), SHADOW_MODULE_NAME) == 0)
+		if (strcmp(g_value_get_string(value), LU_MODULE_NAME_SHADOW)
+		    == 0)
 			return TRUE;
 	}
 	return FALSE;
@@ -2604,6 +2603,34 @@ lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
 	return NULL;
 }
 
+static gboolean
+lu_files_shadow_valid_module_combination(struct lu_module *module,
+					 GValueArray *names,
+					 struct lu_error **error)
+{
+	size_t i;
+
+	g_assert(module != NULL);
+	g_assert(names != NULL);
+	LU_ERROR_CHECK(error);
+	for (i = 0; i < names->n_values; i++) {
+		const char *name;
+
+		name = g_value_get_string(g_value_array_get_nth(names, i));
+		if (strcmp(name, LU_MODULE_NAME_LDAP) == 0) {
+			/* LDAP uses an incompatible LU_*PASSWORD format: the
+			   LU_CRYPTED prefix, or a similar indicator of an
+			   LDAP-defined hashing method, is included. */
+			lu_error_new(error, lu_error_invalid_module_combination,
+				     _("the `%s' and `%s' modules can not be "
+				       "combined"), module->name, name);
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+
 /* Check if we use/need elevated privileges to manipulate our files. */
 static gboolean
 lu_files_uses_elevated_privileges(struct lu_module *module)
@@ -2697,9 +2724,11 @@ libuser_files_init(struct lu_context *context,
 	ret = g_malloc0(sizeof(struct lu_module));
 	ret->version = LU_MODULE_VERSION;
 	ret->scache = lu_string_cache_new(TRUE);
-	ret->name = ret->scache->cache(ret->scache, "files");
+	ret->name = ret->scache->cache(ret->scache, LU_MODULE_NAME_FILES);
 
 	/* Set the method pointers. */
+	ret->valid_module_combination
+	  = lu_files_shadow_valid_module_combination;
 	ret->uses_elevated_privileges = lu_files_uses_elevated_privileges;
 
 	ret->user_lookup_name = lu_files_user_lookup_name;
@@ -2788,9 +2817,11 @@ libuser_shadow_init(struct lu_context *context,
 	ret = g_malloc0(sizeof(struct lu_module));
 	ret->version = LU_MODULE_VERSION;
 	ret->scache = lu_string_cache_new(TRUE);
-	ret->name = ret->scache->cache(ret->scache, SHADOW_MODULE_NAME);
+	ret->name = ret->scache->cache(ret->scache, LU_MODULE_NAME_SHADOW);
 
 	/* Set the method pointers. */
+	ret->valid_module_combination
+	  = lu_files_shadow_valid_module_combination;
 	ret->uses_elevated_privileges = lu_shadow_uses_elevated_privileges;
 
 	ret->user_lookup_name = lu_shadow_user_lookup_name;
