@@ -1,5 +1,9 @@
 2011-01-14  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Release 0.57.1.
+	* NEWS: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 	* lib/modules.c (lu_modules_load): Fix handling of modules that report
 	non-fatal errors.
 

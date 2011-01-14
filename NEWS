@@ -1,3 +1,7 @@
+0.57.1
+* Fix a crash when a module refuses to load with a warning (e.g. the "shadow"
+  module when /etc/shadow is not present)
+
 0.57
 * Resolve an ambiguity about "password" value format that could cause setting
   a known plaintext password in LDAP accounts: the "files"/"shadow" and LDAP
