@@ -194,6 +194,7 @@ lu_modules_load(struct lu_context *ctx, const char *module_list,
 				if (!lu_error_is_warning((*error)->code))
 					goto error;
 				lu_error_free(error);
+				continue;
 			}
 		}
 
