@@ -169,6 +169,39 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user6_6')
         self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
 
+    def testUserAdd7(self):
+        # Adding commonName if it is not defined:
+        # - Explicitly set
+        e = self.a.initUser('user6_7')
+        e[libuser.COMMONNAME] = 'Common Name'
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user6_7')
+        self.assertEqual(e[libuser.COMMONNAME], ['Common Name'])
+        # - Defaulted from GECOS
+        e = self.a.initUser('user6_8')
+        e[libuser.GECOS] = 'Full Name,Office,1234,4321'
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user6_8')
+        self.assertEqual(e[libuser.COMMONNAME], ['Full Name'])
+        # Defaulted from user name
+        e = self.a.initUser('user6_9')
+        self.assertEqual(e[libuser.GECOS], ['user6_9'])
+        e.clear(libuser.GECOS)
+        self.assertRaises(KeyError, lambda x: x[libuser.GECOS], e)
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user6_9')
+        self.assertEqual(e[libuser.COMMONNAME], ['user6_9'])
+        # Defaulted from user name if GECOS is empty
+        e = self.a.initUser('user6_10')
+        e[libuser.GECOS] = ''
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user6_10')
+        self.assertEqual(e[libuser.COMMONNAME], ['user6_10'])
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')

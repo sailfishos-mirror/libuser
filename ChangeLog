@@ -1,3 +1,9 @@
+2011-01-20  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/ldap.c (get_ent_adds): Don't use empty gecos as a commonName
+	value.
+	* tests/ldap_test.py (Tests.testUserAdd7): New test.
+
 2011-01-14  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.57.1.

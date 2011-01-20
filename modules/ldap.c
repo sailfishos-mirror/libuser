@@ -1026,6 +1026,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 		    && lu_ent_get(ent, LU_COMMONNAME) == NULL) {
 			char *cn;
 
+			cn = NULL;
 			vals = lu_ent_get(ent, LU_GECOS);
 			if (vals != NULL) {
 				char *p;
@@ -1035,7 +1036,11 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 				p = strchr(cn, ',');
 				if (p != NULL)
 					*p = 0;
-			} else {
+				/* Note that gecos may be empty, but
+				   commonName (as a DirectoryString) is not
+				   allowed to be empty. */
+			}
+			if (cn == NULL || *cn == 0) {
 				vals = lu_ent_get(ent, LU_USERNAME);
 				/* Guaranteed by lu_ldap_set() */
 				g_assert (vals != NULL);
