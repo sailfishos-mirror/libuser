@@ -1825,9 +1825,13 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 		const char *crypted;
 		char *salt, *tmp;
 
-		if (previous != NULL)
+		if (previous != NULL
+		    && strcmp(previous + strlen(LU_CRYPTED),
+			      LU_COMMON_DEFAULT_PASSWORD) != 0) {
 			salt = previous + strlen(LU_CRYPTED);
-		else
+			if (*salt == LOCKCHAR)
+				salt++;
+		} else
 			salt = lu_util_default_salt_specifier(module
 							      ->lu_context);
 		crypted = lu_make_crypted(password, salt);

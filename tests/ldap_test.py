@@ -465,6 +465,7 @@ class Tests(unittest.TestCase):
         self.a.setpassUser(e, 'password', False)
         del e
         e = self.a.lookupUserByName('user12_1')
+        self.assertNotEqual(e[libuser.USERPASSWORD][0][7], '$')
         crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][7:])
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}' + crypted])
         self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
@@ -482,6 +483,7 @@ class Tests(unittest.TestCase):
         self.a.setpassUser(e, 'password', False)
         v = e[libuser.USERPASSWORD]
         v.sort()
+        self.assertNotEqual(v[1][7], '$')
         crypted = crypt.crypt('password', v[1][7:])
         self.assertEqual(v, ['unknown', '{CRYPT}' + crypted])
 
@@ -495,6 +497,36 @@ class Tests(unittest.TestCase):
         v.sort()
         self.assertEqual(v, ['unknown1', 'unknown2'])
         self.a.setpassUser(e, 'password', False)
+        self.assertEqual(e[libuser.USERPASSWORD][0][7:10], '$1$')
+        crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][7:])
+        self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}' + crypted])
+
+    def testUserSetpass4(self):
+        # Test that crypt_style is honored on accounts with no existing hash
+        e = self.a.initUser('user12_4')
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user12_4')
+        self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!!'])
+        self.a.setpassUser(e, 'password', False)
+        del e
+        e = self.a.lookupUserByName('user12_4')
+        self.assertEqual(e[libuser.USERPASSWORD][0][7:10], '$1$')
+        crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][7:])
+        self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}' + crypted])
+
+    def testUserSetpass5(self):
+        # Test that existing hash is recognized on locked accounts
+        e = self.a.initUser('user12_5')
+        e[libuser.USERPASSWORD] = ['{CRYPT}!05q.yCrQKlZy6']
+        self.a.addUser(e, False, False)
+        del e
+        e = self.a.lookupUserByName('user12_5')
+        self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}!05q.yCrQKlZy6'])
+        self.a.setpassUser(e, 'password', False)
+        del e
+        e = self.a.lookupUserByName('user12_5')
+        self.assertNotEqual(e[libuser.USERPASSWORD][0][7], '$')
         crypted = crypt.crypt('password', e[libuser.USERPASSWORD][0][7:])
         self.assertEqual(e[libuser.USERPASSWORD], ['{CRYPT}' + crypted])
 
@@ -893,6 +925,7 @@ class Tests(unittest.TestCase):
         e = self.a.lookupGroupByName('group27_1')
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}06aZrb3pzuu/6'])
         self.a.setpassGroup(e, 'password', False)
+        self.assertNotEqual(e[libuser.GROUPPASSWORD][0][7], '$')
         crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][7:])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}' + crypted])
 
@@ -908,6 +941,7 @@ class Tests(unittest.TestCase):
         self.a.setpassGroup(e, 'password', False)
         v = e[libuser.GROUPPASSWORD]
         v.sort()
+        self.assertNotEqual(e[libuser.GROUPPASSWORD][1][7], '$')
         crypted = crypt.crypt('password', v[1][7:])
         self.assertEqual(v, ['unknown', '{CRYPT}' + crypted])
 
@@ -921,6 +955,36 @@ class Tests(unittest.TestCase):
         v.sort()
         self.assertEqual(v, ['unknown1', 'unknown2'])
         self.a.setpassGroup(e, 'password', False)
+        self.assertEqual(e[libuser.GROUPPASSWORD][0][7:10], '$1$')
+        crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][7:])
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}' + crypted])
+
+    def testGroupSetpass4(self):
+        # Test that crypt_style is honored on accounts with no existing hash
+        e = self.a.initGroup('group27_4')
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group27_4')
+        self.assertRaises(KeyError, lambda x: x[libuser.GROUPPASSWORD], e)
+        self.a.setpassGroup(e, 'password', False)
+        del e
+        e = self.a.lookupGroupByName('group27_4')
+        self.assertEqual(e[libuser.GROUPPASSWORD][0][7:10], '$1$')
+        crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][7:])
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}' + crypted])
+
+    def testGroupSetpass5(self):
+        # Test that crypt_style is honored on accounts with no existing hash
+        e = self.a.initGroup('group27_5')
+        e[libuser.GROUPPASSWORD] = ['{CRYPT}!05XMoJIk1se52']
+        self.a.addGroup(e)
+        del e
+        e = self.a.lookupGroupByName('group27_5')
+        self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}!05XMoJIk1se52'])
+        self.a.setpassGroup(e, 'password', False)
+        del e
+        e = self.a.lookupGroupByName('group27_5')
+        self.assertNotEqual(e[libuser.GROUPPASSWORD][0][7], '$')
         crypted = crypt.crypt('password', e[libuser.GROUPPASSWORD][0][7:])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['{CRYPT}' + crypted])
 

@@ -1,3 +1,25 @@
+2011-02-01  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/ldap.c (lu_ldap_setpass): Don't use "!!" (password
+	missing) as an algorithm indicator to be preserved.  Skip over '!'
+	(account locked) when looking for the algorithm indicator.
+	* tests/files_test.py (Tests.testUserSetpass1)
+	(Tests.testUserSetpass2, Tests.testUserSetpass3)
+	(Tests.testUserSetpass4, Tests.testGroupSetpass1)
+	(Tests.testGroupSetpass2, Tests.testGroupSetpass3)
+	(Tests.testGroupSetpass4): Verify that crypt_style is honored.
+	* tests/ldap_test.py (Tests.testUserSetpass1)
+	(Tests.testUserSetpass2, Tests.testGroupSetpass1)
+	(Tests.testGroupSetpass2): Verify that the existing algorithm is
+	preserved.
+	(Tests.testUserSetpass3, Tests.testGroupSetpass3): Verify that
+	crypt_style is honored.
+	(Tests.testUserSetpass4, Tests.testUserSetpass5)
+	(Tests.testGroupSetpass4, Tests.testGroupSetpass5): New tests.
+
+	* tests/files_test.py (Tests.testUserSetpass4, Tests.testGroupSetpass4):
+	Verify that the encrypted password value does not contain ':'.
+
 2011-01-20  Miloslav Trmač  <mitr@redhat.com>
 
 	* modules/ldap.c (get_ent_adds): Don't use empty gecos as a commonName
