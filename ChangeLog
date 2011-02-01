@@ -1,5 +1,11 @@
 2011-02-01  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/misc.c (lu_value_get_id): Explicitly return
+	LU_VALUE_INVALID_ID for LU_VALUE_INVALID_ID :) (with a warning,
+	from now on).
+	(lu_value_init_set_attr_from_string): Reject LU_VALUE_INVALID_ID
+	as an id_t value.
+
 	* modules/ldap.c (lu_ldap_setpass): Don't use "!!" (password
 	missing) as an algorithm indicator to be preserved.  Skip over '!'
 	(account locked) when looking for the algorithm indicator.

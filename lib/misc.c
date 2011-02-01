@@ -102,6 +102,7 @@ lu_value_get_id(const GValue *value)
 	} else
 		g_return_val_if_reached(LU_VALUE_INVALID_ID);
 	g_return_val_if_fail((id_t)val == val, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(val != LU_VALUE_INVALID_ID, LU_VALUE_INVALID_ID);
 	return val;
 }
 
@@ -166,7 +167,7 @@ lu_value_init_set_attr_from_string(GValue *value, const char *attr,
 		errno = 0;
 		imax = strtoimax(string, &p, 10);
 		if (errno != 0 || *p != 0 || p == string
-		    || (id_t)imax != imax) {
+		    || (id_t)imax != imax || imax == LU_VALUE_INVALID_ID) {
 			lu_error_new(error, lu_error_invalid_attribute_value,
 				     _("invalid ID"));
 			return FALSE;
