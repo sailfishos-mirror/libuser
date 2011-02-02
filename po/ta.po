@@ -8,20 +8,22 @@
 # Felix <ifelix@redhat.com>, 2006.
 # I felix <ifelix@redhat.com>, 2007.
 # I. Felix <ifelix@redhat.com>, 2008, 2009.
+# I Felix <ifelix@redhat.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser.tip.ta\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2009-12-09 16:42+0530\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2011-01-11 01:50+0000\n"
+"PO-Revision-Date: 2011-02-02 15:19+0530\n"
+"Last-Translator: I Felix <ifelix@redhat.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
-"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"Language: ta\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -31,1119 +33,1140 @@ msgstr ""
 "\n"
 "\n"
 
-#: apps/apputil.c:109
+#: ../apps/apputil.c:109
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr "இல்ல அடைவு பாதை `%s' முழுமையாக இல்லை"
 
-#: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: ../apps/apputil.c:117 ../apps/apputil.c:192 ../apps/apputil.c:225
+#: ../apps/apputil.c:252 ../modules/files.c:179
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "வாசிப்பதில் பிழை `%s': %s"
 
-#: apps/apputil.c:125 apps/apputil.c:201
+#: ../apps/apputil.c:125 ../apps/apputil.c:201
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr "'%s' உருவாக்குவதில் பிழை :%s"
 
-#: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: ../apps/apputil.c:133 ../apps/apputil.c:208 ../apps/apputil.c:298
+#: ../modules/files.c:162
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' இன் உரிமையாளரை மாற்றுவதில் பிழை: %s"
 
-#: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: ../apps/apputil.c:237 ../apps/apputil.c:269 ../apps/apputil.c:285
+#: ../modules/files.c:194 ../modules/files.c:208
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "'%s' எழுதுவதில் பிழை :%s"
 
-#: apps/apputil.c:360 apps/apputil.c:395 apps/apputil.c:412
+#: ../apps/apputil.c:360 ../apps/apputil.c:395 ../apps/apputil.c:412
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr "'%s' நீக்குவதில் பிழை :%s"
 
-#: apps/apputil.c:576 apps/apputil.c:580
+#: ../apps/apputil.c:576 ../apps/apputil.c:580
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "சலுகைகள் வழங்கபடாதது கைவிடப்படுகிறது.\n"
 
-#: apps/apputil.c:589
+#: ../apps/apputil.c:589
 #, c-format
 msgid "Internal error.\n"
 msgstr "உள்ளார்ந்த பிழை.\n"
 
-#: apps/apputil.c:610
+#: ../apps/apputil.c:610
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s க்கு %s இன் தகவலை மாற்ற அனுமதி இல்லை\n"
 
-#: apps/apputil.c:612
+#: ../apps/apputil.c:612
 msgid "Unknown user context"
 msgstr "தெரியாத பயனர் தொடர்பு"
 
-#: apps/apputil.c:620
+#: ../apps/apputil.c:620
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "/etc/passwd முன்னிருப்பு சூழலை அமைக்க முடியவில்லை\n"
 
-#: apps/apputil.c:629
+#: ../apps/apputil.c:629
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "PAM துவக்குவதில் பிழை.\n"
 
-#: apps/apputil.c:639 apps/apputil.c:666
+#: ../apps/apputil.c:639 ../apps/apputil.c:666
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s உறுதிப்படுத்தல் தவறானது.\n"
 
-#: apps/apputil.c:647
+#: ../apps/apputil.c:647
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "உள்ளார்ந்த PAM பிழை  `%s'.\n"
 
-#: apps/apputil.c:652
+#: ../apps/apputil.c:652
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "தெரியாத பயனர் அங்கீரித்தல்.\n"
 
-#: apps/apputil.c:656
+#: ../apps/apputil.c:656
 #, c-format
 msgid "User mismatch.\n"
 msgstr "பயனர் பொறுத்தம் இல்லை.\n"
 
-#: apps/lchage.c:111 apps/lid.c:130 apps/lpasswd.c:66 apps/luseradd.c:102
-#: apps/luserdel.c:61 apps/lusermod.c:100
+#: ../apps/lchage.c:111 ../apps/lid.c:130 ../apps/lpasswd.c:66
+#: ../apps/luseradd.c:102 ../apps/luserdel.c:61 ../apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr "[OPTION...] பயனர்"
 
-#: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:133 apps/lnewusers.c:66
-#: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
-#: apps/lusermod.c:103
+#: ../apps/lchage.c:114 ../apps/lchfn.c:72 ../apps/lchsh.c:58
+#: ../apps/lgroupadd.c:65 ../apps/lgroupdel.c:56 ../apps/lgroupmod.c:84
+#: ../apps/lid.c:133 ../apps/lnewusers.c:66 ../apps/lpasswd.c:69
+#: ../apps/luseradd.c:105 ../apps/luserdel.c:64 ../apps/lusermod.c:103
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "அளவுருக்கள் பகுப்பதில் பிழை: %s.\n"
 
-#: apps/lchage.c:123 apps/lpasswd.c:83 apps/luseradd.c:120 apps/luserdel.c:72
-#: apps/lusermod.c:114
+#: ../apps/lchage.c:123 ../apps/lpasswd.c:83 ../apps/luseradd.c:120
+#: ../apps/luserdel.c:72 ../apps/lusermod.c:114
 #, c-format
 msgid "No user name specified.\n"
 msgstr "பயனர் பெயர் எதுவும் குறிப்பிடப்படவில்லை.\n"
 
-#: apps/lchage.c:133 apps/lchfn.c:103 apps/lchsh.c:89 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:177 apps/lnewusers.c:77
-#: apps/lpasswd.c:93 apps/luseradd.c:143 apps/luserdel.c:81
-#: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
+#: ../apps/lchage.c:133 ../apps/lchfn.c:103 ../apps/lchsh.c:89
+#: ../apps/lgroupadd.c:100 ../apps/lgroupdel.c:75 ../apps/lgroupmod.c:116
+#: ../apps/lid.c:177 ../apps/lnewusers.c:77 ../apps/lpasswd.c:93
+#: ../apps/luseradd.c:143 ../apps/luserdel.c:81 ../apps/lusermod.c:155
+#: ../samples/enum.c:56 ../samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "%sஐ துவங்குவதில் பிழை: %s.\n"
 
-#: apps/lchage.c:142 apps/lchfn.c:114 apps/lchsh.c:100 apps/lpasswd.c:144
-#: apps/luserdel.c:89 apps/lusermod.c:169
+#: ../apps/lchage.c:142 ../apps/lchfn.c:114 ../apps/lchsh.c:100
+#: ../apps/lpasswd.c:144 ../apps/luserdel.c:89 ../apps/lusermod.c:169
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "பயனர்%s இல்லை.\n"
 
-#: apps/lchage.c:153
+#: ../apps/lchage.c:153
 #, c-format
 msgid "Account is locked.\n"
 msgstr "கணக்கு பூட்டப்பட்டது.\n"
 
-#: apps/lchage.c:155
+#: ../apps/lchage.c:155
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "கணக்கு பூட்டப்படவில்லை.\n"
 
-#: apps/lchage.c:160
+#: ../apps/lchage.c:160
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "குறைந்தபட்சம்:\t%ld\n"
 
-#: apps/lchage.c:164
+#: ../apps/lchage.c:164
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "அதிகபட்சம்:\t%ld\n"
 
-#: apps/lchage.c:168
+#: ../apps/lchage.c:168
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "எச்சரிக்கை:\t%ld\n"
 
-#: apps/lchage.c:172
+#: ../apps/lchage.c:172
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "செயலிழக்கப்பட்டது:\t%ld\n"
 
-#: apps/lchage.c:176 apps/lchage.c:183 apps/lchage.c:192 apps/lchage.c:202
+#: ../apps/lchage.c:176 ../apps/lchage.c:183 ../apps/lchage.c:192
+#: ../apps/lchage.c:202
 msgid "Never"
 msgstr "எப்போதும் இல்லை"
 
-#: apps/lchage.c:178
+#: ../apps/lchage.c:178
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "கடைசி மாற்றம்:\t%s\n"
 
-#: apps/lchage.c:187
+#: ../apps/lchage.c:187
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "கடவுச்சொல் முடிவுற்றது:\t%s\n"
 
-#: apps/lchage.c:197
+#: ../apps/lchage.c:197
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "செயலிழக்கப்பட்ட கடவுச்சொல் :\t%s\n"
 
-#: apps/lchage.c:204
+#: ../apps/lchage.c:204
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "கணக்கு முடிவுற்றது:\t%s\n"
 
-#: apps/lchage.c:254
+#: ../apps/lchage.c:254
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "பழைய செய்தியை %sக்கு மாற்ற முடியவில்லை: %s\n"
 
-#: apps/lchfn.c:69 apps/lchsh.c:55
+#: ../apps/lchfn.c:69 ../apps/lchsh.c:55
 msgid "[OPTION...] [user]"
 msgstr "[OPTION...] [user]"
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:164
+#: ../apps/lchfn.c:88 ../apps/lchsh.c:74 ../apps/lid.c:164
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "பயனர் பெயர் எதுவும் குறிப்பிடவில்லை, பயனர் குறியீடு %dக்கு பெயர் இல்லை.\n"
 
-#: apps/lchfn.c:96
+#. Give the user some idea of what's going on.
+#: ../apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "%sக்கு தகவல் மாற்றப்படுகிறது.\n"
 
-#: apps/lchfn.c:140
+#: ../apps/lchfn.c:140
 msgid "Full Name"
 msgstr "முழுப்பெயர்"
 
-#: apps/lchfn.c:154
+#: ../apps/lchfn.c:154
 msgid "Surname"
 msgstr "துணைப்பெயர்"
 
-#: apps/lchfn.c:169
+#: ../apps/lchfn.c:169
 msgid "Given Name"
 msgstr "கொடுத்த பெயர்"
 
-#: apps/lchfn.c:179
+#: ../apps/lchfn.c:179
 msgid "Office"
 msgstr "அலுவலகம்"
 
-#: apps/lchfn.c:188
+#: ../apps/lchfn.c:188
 msgid "Office Phone"
 msgstr "அலுவலக தொலைபேசி "
 
-#: apps/lchfn.c:197
+#: ../apps/lchfn.c:197
 msgid "Home Phone"
 msgstr "வீட்டு தொலைபேசி "
 
-#: apps/lchfn.c:211
+#: ../apps/lchfn.c:211
 msgid "E-Mail Address"
 msgstr "மின்அஞ்சல் முகவரி"
 
-#: apps/lchfn.c:224
+#: ../apps/lchfn.c:224
 #, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "தகவல் மாற்றவில்லை: உள்ளீடு பிழை.\n"
 
-#: apps/lchfn.c:296
+#: ../apps/lchfn.c:296
+#, c-format
 msgid "Finger information changed.\n"
 msgstr "தகவல் மாற்றப்பட்டது.\n"
 
-#: apps/lchfn.c:299
+#: ../apps/lchfn.c:299
 #, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "தகவல் மாற்ற முடியவில்லை.%s.\n"
 
-#: apps/lchsh.c:82
+#. Give the user some idea of what's going on.
+#: ../apps/lchsh.c:82
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "%sக்கு ஷெல் மாற்றப்படுகிறது.\n"
 
-#: apps/lchsh.c:114
+#: ../apps/lchsh.c:114
 msgid "New Shell"
 msgstr "புதிய ஷெல் "
 
-#: apps/lchsh.c:121 apps/lchsh.c:140
+#: ../apps/lchsh.c:121 ../apps/lchsh.c:140
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "ஷெல் மாற்றப்படவில்லை: %s\n"
 
-#: apps/lchsh.c:137
+#: ../apps/lchsh.c:137
+#, c-format
 msgid "Shell changed.\n"
 msgstr "ஷெல் மாற்றப்பட்டது.\n"
 
-#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:81
+#: ../apps/lgroupadd.c:62 ../apps/lgroupdel.c:53 ../apps/lgroupmod.c:81
 msgid "[OPTION...] group"
 msgstr "[OPTION...] குழு"
 
-#: apps/lgroupadd.c:74 apps/lgroupdel.c:65 apps/lgroupmod.c:92
+#: ../apps/lgroupadd.c:74 ../apps/lgroupdel.c:65 ../apps/lgroupmod.c:92
 #, c-format
 msgid "No group name specified.\n"
 msgstr "குழுப் பெயர் எதுவும் குறிப்பிடவில்லை\n"
 
-#: apps/lgroupadd.c:87 apps/lgroupmod.c:104 apps/lnewusers.c:178
-#: apps/luseradd.c:164 apps/lusermod.c:126
+#: ../apps/lgroupadd.c:87 ../apps/lgroupmod.c:104 ../apps/lnewusers.c:178
+#: ../apps/luseradd.c:164 ../apps/lusermod.c:126
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "தவறான குழு ID %s\n"
 
-#: apps/lgroupadd.c:124
+#: ../apps/lgroupadd.c:124
 #, c-format
 msgid "Group creation failed: %s\n"
 msgstr "குழு உருவாக்க முடியவில்லை: %s\n"
 
-#: apps/lgroupdel.c:83 apps/lgroupmod.c:129 apps/lpasswd.c:149
+#: ../apps/lgroupdel.c:83 ../apps/lgroupmod.c:129 ../apps/lpasswd.c:149
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "குழு %s இல்லை.\n"
 
-#: apps/lgroupdel.c:89
+#: ../apps/lgroupdel.c:89
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
 msgstr "குழு %sஐ அழிக்க முடியவில்லை: %s.\n"
 
-#: apps/lgroupmod.c:122 apps/lusermod.c:162
+#: ../apps/lgroupmod.c:122 ../apps/lusermod.c:162
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "இரண்டும் -L மற்றும் -U குறிப்பிடப்பட்டது.\n"
 
-#: apps/lgroupmod.c:136 apps/lgroupmod.c:145
+#: ../apps/lgroupmod.c:136 ../apps/lgroupmod.c:145
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "குழு %sக்கான கடவுச்சொல்லை அமைக்க முடியவில்லை: %s\n"
 
-#: apps/lgroupmod.c:154
+#: ../apps/lgroupmod.c:154
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "குழு%s ஐ பூட்ட முடியவில்லை: %s\n"
 
-#: apps/lgroupmod.c:163
+#: ../apps/lgroupmod.c:163
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "குழு %s ஐ பூட்டு நீக்க முடியவில்லை: %s\n"
 
-#: apps/lgroupmod.c:243 apps/lgroupmod.c:269
+#: ../apps/lgroupmod.c:243 ../apps/lgroupmod.c:269
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "குழு %s ஐ மாற்ற முடியவில்லை: %s.\n"
 
-#: apps/lid.c:49 apps/lid.c:60
+#: ../apps/lid.c:49 ../apps/lid.c:60
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "%sஇல் பிழை தேடுதல்: %s.\n"
 
-#: apps/lid.c:53
+#: ../apps/lid.c:53
 #, c-format
 msgid "%s does not exist\n"
 msgstr "%s இல்லை.\n"
 
-#: apps/lid.c:146
+#: ../apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "%s ஐ பயன்படுத்தி, குழுப் பெயர் குறிப்பிடவில்லை .\n"
 
-#: apps/lid.c:150
+#: ../apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "குழுப் பெயர் குறிப்பிடப்படவில்லை, குழு குறியீடுக்கு பெயர் இல்லை%d.\n"
 
-#: apps/lid.c:160
+#: ../apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "%s பயன்படுத்தி, பயனர் பெயர் எதுவும் குறிப்பிடப்படவில்லை.\n"
 
-#: apps/lnewusers.c:63
+#: ../apps/lnewusers.c:63
 msgid "[OPTION...]"
 msgstr "[OPTION...]"
 
-#: apps/lnewusers.c:86
+#: ../apps/lnewusers.c:86
 #, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "`%s' ஐ திறப்பதில் பிழை: %s.\n"
 
-#: apps/lnewusers.c:118
+#: ../apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "'%s'க்கு கணக்கு உருவாக்குவதில் பிழை. வரி ஒழுங்கின்றி வடிவமைக்கப்பட்டுள்ளது.\n"
 
-#: apps/lnewusers.c:129 apps/luseradd.c:130 apps/lusermod.c:141
+#: ../apps/lnewusers.c:129 ../apps/luseradd.c:130 ../apps/lusermod.c:141
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "தவறான பயனர் குறியீடு %s\n"
 
-#: apps/lnewusers.c:136
+#: ../apps/lnewusers.c:136
+#, c-format
 msgid "Refusing to create account with UID 0.\n"
 msgstr "UID 0 உடன் கணக்கு உருவாக்க மறுக்கப்படுகிறது.\n"
 
-#: apps/lnewusers.c:224
+#: ../apps/lnewusers.c:224
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "`%s'க்கு GID %jd: உடன் குழு உருவாக்கவதில் பிழை %s\n"
 
-#: apps/lnewusers.c:283
+#: ../apps/lnewusers.c:283
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "அபாயகரமான இல்ல அடைவு `%s' க்கு %sஐ முன்னிப்பாக பயன்படுத்த மறுக்கிறது\n"
 
-#: apps/lnewusers.c:289
+#: ../apps/lnewusers.c:289
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%sக்கு ஆரம்ப கடவுச்சொல் அமைப்பதில் பிழை: %s\n"
 
-#: apps/lnewusers.c:304
+#: ../apps/lnewusers.c:304
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%sக்கு இல்ல அடைவை உருவாக்குவதில் பிழை: %s\n"
 
-#: apps/lnewusers.c:318
+#: ../apps/lnewusers.c:318
 #, c-format
 msgid "Error creating mail spool for %s.\n"
 msgstr "%sக்கு அஞ்சல் ஸ்ப்பூல் உருவக்குவதில் பிழை.\n"
 
-#: apps/lnewusers.c:324
+#: ../apps/lnewusers.c:324
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%sக்கு பயனர் கணக்கு உருவாக்குவதில் பிழை: %s\n"
 
-#: apps/lpasswd.c:80
+#: ../apps/lpasswd.c:80
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "%sக்கு கடவுச்சொல்லை மாற்றுகிறது.\n"
 
-#: apps/lpasswd.c:107
+#: ../apps/lpasswd.c:107
 msgid "New password"
 msgstr "புதிய கடவுச்சொல்"
 
-#: apps/lpasswd.c:110
+#: ../apps/lpasswd.c:110
 msgid "New password (confirm)"
 msgstr "புதிய கடவுச்சொல் (உறுதிப்படுத்துதல்)"
 
-#: apps/lpasswd.c:124
+#: ../apps/lpasswd.c:124
 #, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "கடவுச்சொல் பொருந்தவில்லை. மீண்டும் முயற்சி செய்யவும்.\n"
 
-#: apps/lpasswd.c:129
+#: ../apps/lpasswd.c:129
 #, c-format
 msgid "Password change canceled.\n"
 msgstr "மாற்றிய கடவுச்சொல் ரத்து செய்யப்பட்டது.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: ../apps/lpasswd.c:186 ../apps/luseradd.c:285 ../apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "பயனர் %sக்கு கடவுச்சொல் அமைப்பதில் பிழை: %s.\n"
 
-#: apps/lpasswd.c:195
+#: ../apps/lpasswd.c:195
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "குழு %sக்கு கடவுச்சொல் அமைப்பதில் பிழை: %s.\n"
 
-#: apps/lpasswd.c:207
+#: ../apps/lpasswd.c:207
 #, c-format
 msgid "Password changed.\n"
 msgstr "கடவுச்சொல் மாற்றப்பட்டது.\n"
 
-#: apps/luseradd.c:191
+#: ../apps/luseradd.c:191
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "குழு %jd இல்லை \n"
 
-#: apps/luseradd.c:209 apps/luseradd.c:222
+#. Aargh!  Abandon all hope.
+#: ../apps/luseradd.c:209 ../apps/luseradd.c:222
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "குழு `%s' அமைப்பதில் பிழை: %s\n"
 
-#: apps/luseradd.c:277
+#: ../apps/luseradd.c:277
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "கணக்கு உருவாக்க முடியவில்லை: %s.\n"
 
-#: apps/luseradd.c:327
+#: ../apps/luseradd.c:327
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%sஐ உருவாக்குவதில் பிழை: %s.\n"
 
-#: apps/luseradd.c:334
+#: ../apps/luseradd.c:334
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "அஞ்சல் ஸ்பூல் உருவாக்குவதில் பிழை.\n"
 
-#: apps/luserdel.c:94
+#: ../apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "பயனர் %sஐ அழிக்க முடியாது: %s.\n"
 
-#: apps/luserdel.c:104
+#: ../apps/luserdel.c:104
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%sக்கு ஒரு gid எண் இல்லை.\n"
 
-#: apps/luserdel.c:114
+#: ../apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "%jd GID எனக்கொண்ட குழு இல்லை, நீக்கப்படவில்லை.\n"
 
-#: apps/luserdel.c:121
+#: ../apps/luserdel.c:121
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd உடன் உள்ள குழுவுக்கு குழுப்பெயர் இல்லை.\n"
 
-#: apps/luserdel.c:131
+#: ../apps/luserdel.c:131
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "குழு %sஐ அழிக்க முடியவில்லை: %s.\n"
 
-#: apps/luserdel.c:144
+#: ../apps/luserdel.c:144
 #, c-format
 msgid "%s did not have a home directory.\n"
 msgstr "%sஇல் இல்ல அடைவு இல்லை.\n"
 
-#: apps/luserdel.c:151
+#: ../apps/luserdel.c:151
 #, c-format
 msgid "Error removing %s: %s.\n"
 msgstr "பிழை %sஐ நீக்குகிறது : %s.\n"
 
-#: apps/luserdel.c:158
+#: ../apps/luserdel.c:158
 #, c-format
 msgid "Error removing mail spool.\n"
 msgstr "அஞ்சல் ஸ்பூல் நீக்குவதில் பிழை.\n"
 
-#: apps/lusermod.c:178 apps/lusermod.c:191
+#: ../apps/lusermod.c:178 ../apps/lusermod.c:191
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "பயனர் %sக்கு கடவுச்சொல் அமைக்க முடியவில்லை: %s.\n"
 
-#: apps/lusermod.c:201
+#: ../apps/lusermod.c:201
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "பயனர்%s ஐ பூட்ட இயலவில்லை: %s.\n"
 
-#: apps/lusermod.c:209
+#: ../apps/lusermod.c:209
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "பயனர்%s இன் பூட்டை நீக்க முடியவில்லை: %s.\n"
 
-#: apps/lusermod.c:236
+#: ../apps/lusermod.c:236
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr "எச்சரிக்கை: குழு குறியீடு %jd இல்லை.\n"
 
-#: apps/lusermod.c:295
+#: ../apps/lusermod.c:295
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "பயனர்%s ஐ மாற்ற முடியவில்லை: %s.\n"
 
-#: apps/lusermod.c:354
+#: ../apps/lusermod.c:354
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "குழுவை %s ஐ மாற்ற முடியவில்லை: %s.\n"
 
-#: apps/lusermod.c:365
+#: ../apps/lusermod.c:365
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "பழைய இல்ல அடைவு எதுவும் இல்லை %s.\n"
 
-#: apps/lusermod.c:370
+#: ../apps/lusermod.c:370
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%sக்கு புதிய இல்ல அடைவு இல்லை.\n"
 
-#: apps/lusermod.c:376
+#: ../apps/lusermod.c:376
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr " %s இலிருந்து %sக்கு நகர்த்துவதில் பிழை: %s.\n"
 
-#: lib/config.c:114
+#: ../lib/config.c:114
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "கட்டமைப்பு கோப்பு `%s'ஐ திறக்க முடியவில்லை: %s"
 
-#: lib/config.c:120
+#: ../lib/config.c:120
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "கட்டமைப்பு கோப்பு `%s'ஐ ஆரம்பிக்க முடியவில்லை: %s"
 
-#: lib/config.c:129
+#: ../lib/config.c:129
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "கட்டமைப்பு கோப்பு `%s' மிகப் பெரியது"
 
-#: lib/config.c:145
+#: ../lib/config.c:145
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "கட்டமைக்கப்பட்ட கோப்பு `%s'ஐ வாசிக்க முடியவில்லை: %s"
 
-#: lib/error.c:38
+#: ../lib/error.c:38
 msgid "success"
 msgstr "வெற்றி"
 
-#: lib/error.c:40
+#: ../lib/error.c:40
 msgid "module disabled by configuration"
 msgstr "கட்டமைப்பால் தொகுதி செயல்நீக்கப்பட்டது"
 
-#: lib/error.c:42
+#: ../lib/error.c:42
 msgid "generic error"
 msgstr "உற்பத்தி பிழை"
 
-#: lib/error.c:44
+#: ../lib/error.c:44
 msgid "not enough privileges"
 msgstr "போதிய சலுகைகள் இல்லை"
 
-#: lib/error.c:46
+#: ../lib/error.c:46
 msgid "access denied"
 msgstr "அனுமதி மறுக்கப்பட்டது"
 
-#: lib/error.c:48
+#: ../lib/error.c:48
 msgid "bad user/group name"
 msgstr "தவறான பயனர்/குழுப் பெயர்"
 
-#: lib/error.c:50
+#: ../lib/error.c:50
 msgid "bad user/group id"
 msgstr "தவறான பயனர்/குழு குறியீடு"
 
-#: lib/error.c:52
+#: ../lib/error.c:52
 msgid "user/group name in use"
 msgstr "பயனர்/குழு பெயர் பயனில் உள்ளது"
 
-#: lib/error.c:54
+#: ../lib/error.c:54
 msgid "user/group id in use"
 msgstr "பயனர்/குழு குறியீடு பயனில் உள்ளது"
 
-#: lib/error.c:56
+#: ../lib/error.c:56
 msgid "error manipulating terminal attributes"
 msgstr "முனையம் கூறுகளை கணக்கிடும் போது பிழை"
 
-#: lib/error.c:58
+#: ../lib/error.c:58
 msgid "error opening file"
 msgstr "கோப்பினை திறக்கும் போது பிழை"
 
-#: lib/error.c:60
+#: ../lib/error.c:60
 msgid "error locking file"
 msgstr "கோப்பினை பூட்டும் போது பிழை"
 
-#: lib/error.c:62
+#: ../lib/error.c:62
 msgid "error statting file"
 msgstr "கோப்பின் நிலையில் பிழை"
 
-#: lib/error.c:64
+#: ../lib/error.c:64
 msgid "error reading file"
 msgstr "கோப்பினை வாசிப்பதில் பிழை"
 
-#: lib/error.c:66
+#: ../lib/error.c:66
 msgid "error writing to file"
 msgstr "கோப்பில் எழுதுவதில் பிழை"
 
-#: lib/error.c:68
+#: ../lib/error.c:68
 msgid "data not found in file"
 msgstr "கோப்பில் தகவல் இல்லை"
 
-#: lib/error.c:70
+#: ../lib/error.c:70
 msgid "internal initialization error"
 msgstr "உள்ளார்ந்த துவக்க பிழை"
 
-#: lib/error.c:72
+#: ../lib/error.c:72
 msgid "error loading module"
 msgstr "தொகுதி ஏற்றும் போது பிழை"
 
-#: lib/error.c:74
+#: ../lib/error.c:74
 msgid "error resolving symbol in module"
 msgstr "தொகுதியில் சின்னத்தை சரி செய்யும் போது பிழை"
 
-#: lib/error.c:76
+#: ../lib/error.c:76
 msgid "library/module version mismatch"
 msgstr "நூலகம்/தொகுதி பதிப்பு பொறுத்தம் இல்லை"
 
-#: lib/error.c:78
+#: ../lib/error.c:78
 msgid "unlocking would make the password field empty"
 msgstr "பூட்டு நீக்குதல் கடவுச்சொல் புலத்தை வெறுமையாக்கும்"
 
-#: lib/error.c:81
+#: ../lib/error.c:81
 msgid "invalid attribute value"
-msgstr ""
+msgstr "தவறான அளவுரு மதிப்புதவறான அற"
 
-#: lib/error.c:83
+#: ../lib/error.c:83
 msgid "invalid module combination"
-msgstr ""
+msgstr "தவறான தொகுதி கலவைதவறான "
 
-#: lib/error.c:88
+#: ../lib/error.c:88
 msgid "unknown error"
 msgstr "தெரியாத பிழை"
 
-#: lib/misc.c:157
+#: ../lib/misc.c:157
 msgid "invalid number"
 msgstr "தவறான எண்"
 
-#: lib/misc.c:171
+#: ../lib/misc.c:171
 msgid "invalid ID"
 msgstr "தவறான குறியீடு"
 
-#: lib/modules.c:61
+#: ../lib/modules.c:61
 #, c-format
 msgid "no initialization function %s in `%s'"
 msgstr "`%s'இல் துவக்க செயல்பாடு %s இல்லை"
 
-#: lib/modules.c:79
+#: ../lib/modules.c:79
 #, c-format
 msgid "module version mismatch in `%s'"
 msgstr "`%s'இல் தொகுதி பதிப்பு பொருந்தவில்லை"
 
-#: lib/modules.c:92
+#. For safety's sake, make sure that all functions provided by the
+#. * module exist.  This can often mean a useless round trip, but it
+#. * simplifies the logic of the library greatly.
+#: ../lib/modules.c:92
 #, c-format
 msgid "module `%s' does not define `%s'"
 msgstr "தொகுதி `%s' யானது `%s'ஐ குறிப்பிடவில்லை"
 
-#: lib/prompt.c:65
+#: ../lib/prompt.c:65
 msgid "error reading terminal attributes"
 msgstr "முனையம் கூறுகளை வாசிப்பதில் பிழை"
 
-#: lib/prompt.c:72 lib/prompt.c:84
+#: ../lib/prompt.c:72 ../lib/prompt.c:84
 msgid "error setting terminal attributes"
 msgstr "முனையம் கூறுகளை அமைப்பதில் பிழை"
 
-#: lib/prompt.c:78
+#: ../lib/prompt.c:78
 msgid "error reading from terminal"
 msgstr "முனையத்திலிருந்து வாசிப்பதில் பிழை"
 
-#: lib/user.c:187
+#: ../lib/user.c:187
 msgid "name is not set"
 msgstr "பெயர் அமைக்கவில்லை"
 
-#: lib/user.c:192
+#: ../lib/user.c:192
 msgid "name is too short"
 msgstr "பெயர் மிகச் சிறியதாக உள்ளது"
 
-#: lib/user.c:197
+#: ../lib/user.c:197
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr "பெயர் மிக நீளமாக உள்ளது (%zu > %d)"
 
-#: lib/user.c:204
+#: ../lib/user.c:204
 msgid "name contains non-ASCII characters"
 msgstr "பெயர் ASCII அல்லாத எழுத்தை கொண்டுள்ளது"
 
-#: lib/user.c:211
+#: ../lib/user.c:211
 msgid "name contains control characters"
 msgstr "பெயர் கட்டுப்பாட்டு எழுத்துகளை கொண்டுள்ளது"
 
-#: lib/user.c:218
+#: ../lib/user.c:218
 msgid "name contains whitespace"
 msgstr "பெயர் வெற்றிடத்தை கொண்டுள்ளது"
 
-#: lib/user.c:230
+#: ../lib/user.c:230
 msgid "name starts with a hyphen"
 msgstr "பெயர் இடைக்கோட்டினால் ஆரம்பமாகிறது"
 
-#: lib/user.c:241
+#: ../lib/user.c:241
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr "பெயர் தவறான எழுத்து `%c' ஐ கொண்டுள்ளது"
 
-#: lib/user.c:284 lib/user.c:332
+#: ../lib/user.c:284 ../lib/user.c:332
 #, c-format
 msgid "user %s has no UID"
 msgstr "பயனர் %sம் UID இல்லை"
 
-#: lib/user.c:307 lib/user.c:333
+#: ../lib/user.c:307 ../lib/user.c:333
 #, c-format
 msgid "group %s has no GID"
 msgstr "குழு %sம் GID இல்லை"
 
-#: lib/user.c:327
+#: ../lib/user.c:327
 #, c-format
 msgid "user %jd has no name"
 msgstr "பயனர் %jd க்கு பெயர் இல்லை"
 
-#: lib/user.c:328
+#: ../lib/user.c:328
 #, c-format
 msgid "group %jd has no name"
 msgstr "குழு %jd க்கு பெயர் இல்லை"
 
-#: lib/user.c:336
+#: ../lib/user.c:336
 msgid "user has neither a name nor an UID"
 msgstr "பயனரிடம் பெயர் அல்லது UID இல்லை"
 
-#: lib/user.c:337
+#: ../lib/user.c:337
 msgid "group has neither a name nor a GID"
 msgstr "குழுவில் ஒரு பெயர் அல்லது ஒரு GID இல்லை"
 
-#: lib/user.c:1284
+#: ../lib/user.c:1284
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "அபாயகரமான இல்ல அடைவு `%s'ஐ முன்னிப்பாக பயன்படுத்த மறுக்கிறது"
 
-#: lib/user.c:1953
+#: ../lib/user.c:1953
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "புலத்தின் தவறான முன்னிருப்பு மதிப்பு %s: %s"
 
-#: lib/util.c:297
+#: ../lib/util.c:297
 #, c-format
 msgid "error locking file: %s"
 msgstr "கோப்பினை பூட்டுவதில் பிழை : %s"
 
-#: lib/util.c:706
+#: ../lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "முன்னிருப்பு பாதுகாப்பு சூழலை பெற முடியவில்லை:%s"
 
-#: lib/util.c:733
+#: ../lib/util.c:733
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s'இன் பாதுகாப்பு சூழலை பெற முடியவில்லை: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: ../lib/util.c:739 ../lib/util.c:771
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' க்கு முன்னிருப்பு பாதுகாப்பு சூழலை அமைக்க முடியவில்லை: %s"
 
-#: lib/util.c:763
+#: ../lib/util.c:763
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s'இன் பாதுகாப்பு சூழலை குறிப்பிட முடியவில்லை: %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: ../modules/files.c:109 ../modules/files.c:443 ../modules/files.c:770
+#: ../modules/files.c:1017 ../modules/files.c:1191 ../modules/files.c:1422
+#: ../modules/files.c:1506 ../modules/files.c:1728 ../modules/files.c:1899
+#: ../modules/files.c:1916 ../modules/files.c:2005 ../modules/files.c:2024
+#: ../modules/files.c:2092 ../modules/files.c:2113 ../modules/files.c:2210
+#: ../modules/files.c:2229 ../modules/files.c:2288 ../modules/files.c:2307
+#: ../modules/files.c:2403 ../modules/files.c:2418
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' ஐ திறக்க முடியவில்லை: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: ../modules/files.c:121 ../modules/files.c:150 ../modules/files.c:216
+#: ../modules/files.c:782 ../modules/files.c:1027 ../modules/files.c:1203
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "'%s' வரையறுக்க முடியவில்லை: %s"
 
-#: modules/files.c:132
+#: ../modules/files.c:132
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s'ஐ உருவாக்குவதில் பிழை : %s"
 
-#: modules/files.c:145
+#: ../modules/files.c:145
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "பின்சேமிப்பு கோப்பு %s' உள்ளது, ஆனால் அது இயல்பான கோப்பில்லை"
 
-#: modules/files.c:224
+#: ../modules/files.c:224
 msgid "backup file size mismatch"
 msgstr "பின்சேமிப்பு கோப்பின் அளவு தவறானது"
 
-#: modules/files.c:671
+#: ../modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s மதிப்பு `%s': `:' அனுமதிக்கப்படுவதில்லை"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: ../modules/files.c:793 ../modules/files.c:1035 ../modules/files.c:1212
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'இலிருந்து வாசிக்க முடியவில்லை: %s"
 
-#: modules/files.c:802
+#: ../modules/files.c:802
 msgid "entry already present in file"
 msgstr "உள்ளீடு ஏற்கனவே கோப்பில் உள்ளது"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: ../modules/files.c:809 ../modules/files.c:819 ../modules/files.c:830
+#: ../modules/files.c:1271 ../modules/files.c:1279 ../modules/files.c:1287
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'க்கு எழுத முடியவில்லை: %s"
 
-#: modules/files.c:990
+#: ../modules/files.c:990
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "உருப்படியில் %s கூறுகள் இல்லை"
 
-#: modules/files.c:1057
-#, fuzzy
+#: ../modules/files.c:1057
 msgid "entry with conflicting name already present in file"
-msgstr "உள்ளீடு ஏற்கனவே கோப்பில் உள்ளது"
+msgstr "முரண்படும் பெயருடன் உள்ள உள்ளீடு ஏற்கனவே கோப்பில் உள்ளது"
 
-#: modules/files.c:1771
+#: ../modules/files.c:1771
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' மறைகுறியாக்கப்பட்ட கடவுச்சொல்லில் அனுமதிக்கப்படுவதில்லை"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: ../modules/files.c:1783 ../modules/ldap.c:1560 ../modules/ldap.c:1833
 msgid "error encrypting password"
 msgstr "கடவுச்சொல்லை குறிமுறையாக்குவதில் பிழை"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: ../modules/files.c:2625 ../modules/ldap.c:2484
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr ""
+msgstr "`%s' மற்றும் `%s' தொகுதிகளை கலக்க முடியாது"
 
-#: modules/files.c:2717 modules/files.c:2797
+#: ../modules/files.c:2717 ../modules/files.c:2797
 msgid "not executing with superuser privileges"
 msgstr "சிறப்பு பயனர் சலுகைகளை செயல்படுத்தவில்லை"
 
-#: modules/files.c:2810
+#: ../modules/files.c:2810
 msgid "no shadow file present -- disabling"
 msgstr "நிழல் கோப்பு இல்லை - செயல்நீக்கப்படுகிறது"
 
-#: modules/krb5.c:100
+#: ../modules/krb5.c:100
 #, c-format
 msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr "realm`%s' இல் சேவை `%s' காக kadm5 சேவையகத்தில் இணைப்பதில் பிழை: %s"
 
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
+#: ../modules/krb5.c:132 ../modules/krb5.c:198 ../modules/krb5.c:297
+#: ../modules/krb5.c:385 ../modules/krb5.c:437 ../modules/krb5.c:525
+#: ../modules/krb5.c:591
 msgid "error initializing kerberos library"
 msgstr "kerberos நுலகத்தின் துவக்குவதில் பிழை"
 
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
+#: ../modules/krb5.c:139 ../modules/krb5.c:219 ../modules/krb5.c:329
+#: ../modules/krb5.c:337 ../modules/krb5.c:405 ../modules/krb5.c:458
+#: ../modules/krb5.c:546 ../modules/krb5.c:608
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
 msgstr "kerberosக்கு `%s' பயனர் பெயர் பகுப்பதில் பிழை"
 
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
+#: ../modules/krb5.c:209 ../modules/krb5.c:396 ../modules/krb5.c:448
+#: ../modules/krb5.c:536
 #, c-format
 msgid "entity structure has no %s or %s attributes"
 msgstr "உருப்படி வடிவத்தில் %s அல்லது %s கூறுகள் இல்லை"
 
-#: modules/krb5.c:307
+#: ../modules/krb5.c:307
 #, c-format
 msgid "entity has no %s or %s attributes"
 msgstr "உருப்படியில் %s  அல்லது %s கூறுகள் இல்லை"
 
-#: modules/krb5.c:320
+#: ../modules/krb5.c:320
 #, c-format
 msgid "entity was created with no %s or %s attributes"
 msgstr "உருப்படி %s அல்லது %s கூறுகளால் உருவாக்கப்படவில்லை"
 
-#: modules/krb5.c:471 modules/krb5.c:559
+#: ../modules/krb5.c:471 ../modules/krb5.c:559
 #, c-format
 msgid "error reading information for `%s' from kerberos"
 msgstr "kerberos இலிருந்து `%s' க்காக தகவல் வாசிப்பதில் பிழை"
 
-#: modules/krb5.c:600
+#: ../modules/krb5.c:600
 #, c-format
 msgid "entity has no %s attribute"
 msgstr "உருப்படியில் %s கூறுகள் இல்லை"
 
-#: modules/krb5.c:638
+#: ../modules/krb5.c:638
 #, c-format
 msgid "error setting password for `%s'"
 msgstr "`%s'க்கு கடவுச்சொல் அமைப்பதில் பிழை"
 
-#: modules/krb5.c:764
+#: ../modules/krb5.c:764
 msgid "Kerberos Realm"
 msgstr "Kerberos Realm"
 
-#: modules/krb5.c:771
+#: ../modules/krb5.c:771
 msgid "Kerberos Admin Principal"
 msgstr "Kerberos நிர்வாக தலைமை"
 
-#: modules/krb5.c:793
+#: ../modules/krb5.c:793
 msgid "Kerberos Password for Admin Principal"
 msgstr "Kerberos கடவுச்சொல் நிர்வாக தலைமை"
 
-#: modules/ldap.c:199
+#: ../modules/ldap.c:199
 msgid "error initializing ldap library"
 msgstr "ldap நூலகத்தை துவக்குவதில் பிழை"
 
-#: modules/ldap.c:210
+#: ../modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
 msgstr "LDAP நெறிமுறையைப் பதிப்பு %dக்காக அமைக்க முடியவில்லை"
 
-#: modules/ldap.c:222
+#: ../modules/ldap.c:222
 msgid "could not negotiate TLS with LDAP server"
 msgstr "TLS யுடன் LDAP சேவையகத்தை கேட்க முடியாது"
 
-#: modules/ldap.c:415
+#: ../modules/ldap.c:415
 msgid "could not bind to LDAP server"
 msgstr "LDAP சேவையகத்துடன் பிணைக்க முடியவில்லை"
 
-#: modules/ldap.c:418
+#: ../modules/ldap.c:418
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP சேவையகத்துடன் பிணைக்க முடியவில்லை, முதல் முயற்சி `%s': %s"
 
-#: modules/ldap.c:1322
+#: ../modules/ldap.c:1322
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "பயனர் பொருளில் %s கூறு இல்லை"
 
-#: modules/ldap.c:1331
+#: ../modules/ldap.c:1331
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "பயனர் பொருள் `%s' இல்லாமல் உருவாக்கப்பட்டது"
 
-#: modules/ldap.c:1351
+#: ../modules/ldap.c:1351
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை உருவாக்கும் போது பிழை: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: ../modules/ldap.c:1377 ../modules/ldap.c:1621
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை மாற்றும் போது பிழை: %s"
 
-#: modules/ldap.c:1402
+#: ../modules/ldap.c:1402
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீடுகளை பெயர் மாற்றுவதில் பிழை: %s"
 
-#: modules/ldap.c:1449
+#: ../modules/ldap.c:1449
 #, c-format
 msgid "object had no %s attribute"
 msgstr "பொருளில் %s கூறுகள் இல்லை"
 
-#: modules/ldap.c:1467
+#: ../modules/ldap.c:1467
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP அடைவு உள்ளீட்டை நீக்கும் போது பிழை: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: ../modules/ldap.c:1519 ../modules/ldap.c:1535 ../modules/ldap.c:1654
+#: ../modules/ldap.c:1753
 #, c-format
 msgid "object has no %s attribute"
 msgstr "பொருளுக்கு %s கூறு இல்லை"
 
-#: modules/ldap.c:1550
+#: ../modules/ldap.c:1550
 msgid "unsupported password encryption scheme"
 msgstr "துணைபுரியாத கடவுச்சொல் மறைக்குறியாக்க திட்டம்"
 
-#: modules/ldap.c:1679
+#: ../modules/ldap.c:1679
 msgid "no such object in LDAP directory"
 msgstr "LDAP அடைவில் பொருள் எதுவும் இல்லை"
 
-#: modules/ldap.c:1691
+#: ../modules/ldap.c:1691
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s' கூறு இல்லை"
 
-#: modules/ldap.c:1864
+#: ../modules/ldap.c:1864
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP அடைவில் %s க்கு கடவுச்சொல் அமைப்பதில் பிழை: %s"
 
-#: modules/ldap.c:2520
+#: ../modules/ldap.c:2520
 msgid "LDAP Server Name"
 msgstr "LDAP சேவையக பெயர்"
 
-#: modules/ldap.c:2526
+#: ../modules/ldap.c:2526
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடல் தளம் DN"
 
-#: modules/ldap.c:2532
+#: ../modules/ldap.c:2532
 msgid "LDAP Bind DN"
 msgstr "LDAP பிணைத்தல் DN"
 
-#: modules/ldap.c:2539
+#: ../modules/ldap.c:2539
 msgid "LDAP Bind Password"
 msgstr "LDAP பிணைத்தல் கடவுச்சொல்"
 
-#: modules/ldap.c:2545
+#: ../modules/ldap.c:2545
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2552
+#: ../modules/ldap.c:2552
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 
-#: modules/sasldb.c:132
+#: ../modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
 msgstr "Cyrus SASL பயனர் உருவாக்குவதில் பிழை: %s"
 
-#: modules/sasldb.c:136
+#: ../modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
 msgstr "Cyrus SASL பயனரை நீக்குவதில் பிழை: %s"
 
-#: modules/sasldb.c:532 modules/sasldb.c:540
+#: ../modules/sasldb.c:532 ../modules/sasldb.c:540
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL துவக்குவதில் பிழை: %s"
 
-#: python/admin.c:525
+#: ../python/admin.c:525
 msgid "error creating home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை உருவாக்குவதில் பிழை"
 
-#: python/admin.c:578
+#: ../python/admin.c:578
 msgid "error removing home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை நீக்குவதில் பிழை"
 
-#: python/admin.c:656
+#: ../python/admin.c:656
 msgid "error moving home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை நகர்த்துவதில் பிழை"
 
-#: python/admin.c:689 python/admin.c:766
+#: ../python/admin.c:689 ../python/admin.c:766
 msgid "error creating mail spool for user"
 msgstr "பயனருக்காக அஞ்சல் ஸ்பூல் உருவாக்குவதில் பிழை"
 
-#: python/admin.c:887
+#: ../python/admin.c:887
 msgid "error removing mail spool for user"
 msgstr "பயனருக்காக அஞ்சல் ஸ்பூல் நீக்குவதில் பிழை"
 
-#: samples/lookup.c:63
+#: ../samples/lookup.c:63
 #, c-format
 msgid "Error initializing %s: %s\n"
 msgstr "துவக்குவதில் பிழை %s: %s\n"
 
-#: samples/lookup.c:76
+#: ../samples/lookup.c:76
 #, c-format
 msgid "Invalid ID %s\n"
 msgstr "தவறான குறியீடு %s\n"
 
-#: samples/lookup.c:88
+#: ../samples/lookup.c:88
 #, c-format
 msgid "Searching for group with ID %jd.\n"
 msgstr "குறியீடு %jd ஐ கொண்ட குழுவை தேடுகிறது.\n"
 
-#: samples/lookup.c:92
+#: ../samples/lookup.c:92
 #, c-format
 msgid "Searching for group named %s.\n"
 msgstr "குழுப்பெயர் %sஐ தேடுகிறது.\n"
 
-#: samples/lookup.c:99
+#: ../samples/lookup.c:99
 #, c-format
 msgid "Searching for user with ID %jd.\n"
 msgstr "%jd பயனர் குறியீட்டை தேடுகிறது .\n"
 
-#: samples/lookup.c:103
+#: ../samples/lookup.c:103
 #, c-format
 msgid "Searching for user named %s.\n"
 msgstr ""
 "பயனர் பெயர் %sஐ தேடுகிறது.\n"
 "\n"
 
-#: samples/lookup.c:117
+#: ../samples/lookup.c:117
+#, c-format
 msgid "Entry not found.\n"
 msgstr "உள்ளீடு இல்லை.\n"
 
-#: samples/prompt.c:48
+#: ../samples/prompt.c:48
+#, c-format
 msgid "Prompts succeeded.\n"
 msgstr "வெற்றிகரமாக கண்டுபிடித்தது.\n"
 
-#: samples/prompt.c:58
+#: ../samples/prompt.c:58
+#, c-format
 msgid "Prompts failed.\n"
 msgstr "கண்டுபிடிக்க முடியவில்லை.\n"
 
-#: samples/testuser.c:76
+#: ../samples/testuser.c:76
+#, c-format
 msgid "Default user object classes:\n"
 msgstr "முன்னிருப்பு பயனர் பொருள் வகுப்புகள்:\n"
 
-#: samples/testuser.c:82
+#: ../samples/testuser.c:82
+#, c-format
 msgid "Default user attribute names:\n"
 msgstr "முன்னிருப்பு பயனர் கூறுகளின் பெயர்கள்:\n"
 
-#: samples/testuser.c:88
+#: ../samples/testuser.c:88
+#, c-format
 msgid "Getting default user attributes:\n"
 msgstr "முன்னிருப்பு பயனர் கூறுகளை பெறுகிறது :\n"
 
-#: samples/testuser.c:95
+#: ../samples/testuser.c:95
+#, c-format
 msgid "Copying user structure:\n"
 msgstr "பயனர் வடிவத்தை நகலெடுக்கிறது:\n"
+
