@@ -1,3 +1,8 @@
+2011-02-04  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/files.c (line_read): Remove an unused variable.
+	* modules/ldap.c (lu_ldap_fudge_objectclasses): Silence a warning.
+
 2011-02-01  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/misc.c (lu_value_get_id): Explicitly return

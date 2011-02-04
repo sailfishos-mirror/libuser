@@ -1282,6 +1282,7 @@ lu_ldap_fudge_objectclasses(struct lu_ldap_context *ctx,
 		dump_mods(mods);
 #endif
 		err = ldap_modify_ext_s(ctx->ldap, dn, mods, NULL, NULL);
+		(void)err;
 #ifdef DEBUG
 		g_message("Fudged: `%s'.\n", ldap_err2string(err));
 #endif

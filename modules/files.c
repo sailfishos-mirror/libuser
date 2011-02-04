@@ -245,10 +245,10 @@ lu_files_create_backup(const char *filename,
 static char *
 line_read(FILE * fp)
 {
-	char *p, *buf;
+	char *buf;
 	size_t len, buf_size = CHUNK_SIZE;
 
-	p = buf = g_malloc(buf_size);
+	buf = g_malloc(buf_size);
 	len = 0;
 	while (fgets(buf + len, buf_size - len, fp) != NULL) {
 		len += strlen(buf + len);
