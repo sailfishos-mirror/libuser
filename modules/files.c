@@ -97,6 +97,7 @@ lu_files_create_backup(const char *filename,
 	gpointer ilock, olock;
 	char *backupname;
 	struct stat ist, ost;
+	off_t offset;
 	gboolean res = FALSE;
 
 	g_assert(filename != NULL);
@@ -203,7 +204,8 @@ lu_files_create_backup(const char *filename,
 	/* Flush data to disk, and truncate at the current offset.  This is
 	 * necessary if the file existed before we opened it. */
 	fsync(ofd);
-	if (ftruncate(ofd, lseek(ofd, 0, SEEK_CUR)) == -1) {
+	offset = lseek(ofd, 0, SEEK_CUR);
+	if (offset == -1 || ftruncate(ofd, offset) == -1) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error writing `%s': %s"), backupname,
 			     strerror(errno));

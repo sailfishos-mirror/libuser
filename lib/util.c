@@ -333,6 +333,10 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	g_assert(field > 0);
 
 	offset = lseek(fd, 0, SEEK_CUR);
+	if (offset == -1) {
+		lu_error_new(error, lu_error_read, NULL);
+		return NULL;
+	}
 
 	if (fstat(fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat, NULL);
@@ -342,12 +346,9 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	contents = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
 	if (contents == MAP_FAILED) {
 		contents = g_malloc(st.st_size);
-		if (lseek(fd, 0, SEEK_SET) == -1) {
-			lu_error_new(error, lu_error_read, NULL);
-			g_free(contents);
-			return NULL;
-		}
-		if (read(fd, contents, st.st_size) != st.st_size) {
+		if (lseek(fd, 0, SEEK_SET) == -1
+		    || read(fd, contents, st.st_size) != st.st_size
+		    || lseek(fd, offset, SEEK_SET) == -1) {
 			lu_error_new(error, lu_error_read, NULL);
 			g_free(contents);
 			return NULL;
@@ -404,7 +405,6 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		g_free(contents);
 	}
 
-	lseek(fd, offset, SEEK_SET);
 	return ret;
 }
 
@@ -541,6 +541,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	char *line, *start = NULL, *end = NULL;
 	gboolean ret = FALSE;
 	unsigned fi = 1;
+	size_t len;
 
 	LU_ERROR_CHECK(error);
 
@@ -612,47 +613,36 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		memmove(start + strlen(value), end,
 			st.st_size - (end - buf) + 1);
 		memcpy(start, value, strlen(value));
-		ret = TRUE;
 	} else {
-		if (line) {
-			/* fi contains the number of fields, so the difference
-			 * between field and fi is the number of colons we need
-			 * to add to the end of the line to create the field */
-			end = line;
-			while ((*end != '\0') && (*end != '\n')) {
-				end++;
-			}
-			start = end;
-			memmove(start + strlen(value) + (field - fi), end,
-				st.st_size - (end - buf) + 1);
-			memset(start, ':', field - fi);
-			memcpy(start + (field - fi), value, strlen(value));
-			ret = TRUE;
-		}
+		/* fi contains the number of fields, so the difference between
+		 * field and fi is the number of colons we need to add to the
+		 * end of the line to create the field */
+		for (end = line; *end != '\0' && *end != '\n'; end++)
+			;
+		start = end;
+		memmove(start + strlen(value) + (field - fi), end,
+			st.st_size - (end - buf) + 1);
+		memset(start, ':', field - fi);
+		memcpy(start + (field - fi), value, strlen(value));
 	}
 
-	if (ret == TRUE) {
-		size_t len;
-		if (lseek(fd, 0, SEEK_SET) == -1) {
-			lu_error_new(error, lu_error_write, NULL);
-			ret = FALSE;
-			goto err;
-		}
-		len = strlen(buf);
-		if (write(fd, buf, len) == -1) {
-			lu_error_new(error, lu_error_write, NULL);
-			ret = FALSE;
-			goto err;
-		}
-		if (ftruncate(fd, len) == -1) {
-			lu_error_new(error, lu_error_write, NULL);
-			ret = FALSE;
-			goto err;
-		}
-	} else {
-		lu_error_new(error, lu_error_search, NULL);
+	if (lseek(fd, 0, SEEK_SET) == -1) {
+		lu_error_new(error, lu_error_write, NULL);
 		ret = FALSE;
+		goto err;
 	}
+	len = strlen(buf);
+	if (write(fd, buf, len) == -1) {
+		lu_error_new(error, lu_error_write, NULL);
+		ret = FALSE;
+		goto err;
+	}
+	if (ftruncate(fd, len) == -1) {
+		lu_error_new(error, lu_error_write, NULL);
+		ret = FALSE;
+		goto err;
+	}
+	ret = TRUE;
 
 err:
 	g_free(pattern);

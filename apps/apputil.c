@@ -307,10 +307,10 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 	ret = TRUE;
 	goto err_dir;
 
- err_ifd:
-	close(ifd);
  err_ofd:
 	close(ofd);
+ err_ifd:
+	close(ifd);
  err_dir:
 	closedir(dir);
  err:

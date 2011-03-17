@@ -167,7 +167,7 @@ static void
 process_line(char *line, struct lu_string_cache *cache,
 	     char **section, char **key, char **value)
 {
-	char *p, *tmp;
+	char *equals, *p, *tmp;
 
 	g_return_if_fail(line != NULL);
 	g_return_if_fail(cache != NULL);
@@ -205,11 +205,12 @@ process_line(char *line, struct lu_string_cache *cache,
 
 	/* If the line contains a value, split the key and the value, trim off
 	 * any additional whitespace, and return them. */
-	p = strchr(line, '=');
-	if (p != NULL) {
+	equals = strchr(line, '=');
+	if (equals != NULL) {
 		/* Trim any trailing whitespace off the key name. */
-		while (p != line && isspace((unsigned char)p[-1]))
-			p--;
+		for (p = equals; p != line && isspace((unsigned char)p[-1]);
+		     p--)
+			;
 
 		/* Save the key. */
 		tmp = g_strndup(line, p - line);
@@ -217,10 +218,9 @@ process_line(char *line, struct lu_string_cache *cache,
 		g_free(tmp);
 
 		/* Skip over any whitespace after the equal sign. */
-		line = strchr(line, '=');
-		line++;
-		while (isspace((unsigned char)*line) && (*line != '\0'))
-			line++;
+		for (line = equals + 1;
+		     isspace((unsigned char)*line) && *line != '\0'; line++)
+			;
 
 		/* Trim off any trailing whitespace. */
 		p = strchr(line, '\0');

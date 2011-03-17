@@ -777,12 +777,7 @@ arrays_equal(GValueArray *a, GValueArray *b)
 {
 	GValue *aval, *bval;
 	size_t i, j;
-	if ((a != NULL) && (b == NULL)) {
-		return FALSE;
-	}
-	if ((a == NULL) && (b != NULL)) {
-		return FALSE;
-	}
+
 	for (i = 0; i < a->n_values; i++) {
 		aval = g_value_array_get_nth(a, i);
 		for (j = 0; j < b->n_values; j++) {

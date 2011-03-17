@@ -57,6 +57,7 @@ verify_var(struct lu_context *ctx, const char *key, ...)
 		assert(list != NULL && strcmp(list->data, val) == 0);
 		list = list->next;
 	}
+	va_end(ap);
 	assert(list == NULL);
 }
 

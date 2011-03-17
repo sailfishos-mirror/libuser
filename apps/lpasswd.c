@@ -153,9 +153,15 @@ main(int argc, const char **argv)
 
 	if (plain_fd != -1) {
 		char buf[LINE_MAX + 1];
-		int i;
+		ssize_t i;
 
 		i = read(plain_fd, buf, sizeof(buf) - 1);
+		if (i < 0) {
+			fprintf(stderr,
+				_("Error reading from file descriptor %d.\n"),
+				plain_fd);
+			return 1;
+		}
 		while ((i > 0) &&
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
 			i--;
@@ -164,8 +170,15 @@ main(int argc, const char **argv)
 		is_crypted = FALSE;
 	} else if (crypted_fd != -1) {
 		char buf[LINE_MAX + 1];
-		int i;
+		ssize_t i;
+
 		i = read(crypted_fd, buf, sizeof(buf) - 1);
+		if (i < 0) {
+			fprintf(stderr,
+				_("Error reading from file descriptor %d.\n"),
+				crypted_fd);
+			return 1;
+		}
 		while ((i > 0) &&
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
 			i--;

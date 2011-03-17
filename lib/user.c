@@ -1143,10 +1143,10 @@ lu_dispatch(struct lu_context *context,
 	case groups_enumerate_by_user_full:
 		/* Make sure we have both name and ID here. */
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		if (id == users_enumerate_by_group)
+		if (id == users_enumerate_by_group_full)
 			ldata = convert_group_name_to_id(context, sdata,
 							 error);
-		else if (id == groups_enumerate_by_user)
+		else if (id == groups_enumerate_by_user_full)
 			ldata = convert_user_name_to_id(context, sdata, error);
 		else
 			g_assert_not_reached();

@@ -1,3 +1,30 @@
+2011-03-17  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/config_test.c (verify_var): Call va_end().
+
+	* lib/config.c (process_line): Only search for '=' once.
+
+	* modules/files.c (lu_files_create_backup): Handle lseek() failure.
+
+	* lib/util.c (lu_util_line_get_matchingx): Handle lseek() failures.
+	Only restore file position if we have actually altered it.
+
+	* apps/lpasswd.c (main): Handle errors when reading the password from
+	a supplied file descriptor.
+
+	* apps/apputil.c (lu_homedir_copy): Don't leak a file descriptor on
+	error.
+
+	* modules/ldap.c (arrays_equal): Drop unnecessary checks.
+
+	* lib/util.c (lu_util_field_write): Simplify: unless we return
+	lu_error_search, we know line != NULL, and ret == TRUE a little below.
+	This could be simplified further - the current function both reject
+	lines which match but don't contain the specified field, and supports
+	adding the field.
+
+	* lib/user.c (lu_dispatch): Fix a pasto.
+
 2011-03-04  Miloslav Trmač  <mitr@redhat.com>
 
 	* .tx/config: New file.
