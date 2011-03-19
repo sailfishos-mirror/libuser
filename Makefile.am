@@ -42,7 +42,7 @@ sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
 	apps/lusermod
 noinst_PROGRAMS = samples/enum samples/field samples/homedir samples/lookup \
 	samples/prompt samples/testuser \
-	tests/config_test
+	tests/alloc_port tests/config_test
 
 noinst_LTLIBRARIES = apps/libapputil.la
 lib_LTLIBRARIES = lib/libuser.la
@@ -204,6 +204,8 @@ samples_prompt_LDFLAGS = -no-install
 samples_testuser_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 samples_testuser_LDADD = lib/libuser.la $(GMODULE_LIBS)
 samples_testuser_LDFLAGS = -no-install
+
+tests_alloc_port_LDFLAGS = -no-install
 
 tests_config_test_LDADD = lib/libuser.la $(GMODULE_LIBS)
 tests_config_test_LDFLAGS = -no-install

@@ -69,8 +69,8 @@ get_file_password() # file under $workdir/files, entry name
 get_ldap_password() # entry filter
 {
     echo "Checking $1 ..." >&2
-    ldapsearch -LLL -h 127.0.0.1 -p 3890 -x -b 'dc=libuser' "$1" userPassword \
-	| sed -n 's/userPassword:: //p'
+    ldapsearch -LLL -h 127.0.0.1 -p "$ldap_port" -x -b 'dc=libuser' "$1" \
+	userPassword | sed -n 's/userPassword:: //p'
 }
 
 valid_password() # encoded value
@@ -79,6 +79,7 @@ valid_password() # encoded value
     [ "x$v" = "x$1" ]
 }
 
+ldap_port=
 # Try all concievable combinations and orders, assuming "shadow" requires
 # "files".
 for modules in \
@@ -94,20 +95,23 @@ for modules in \
     touch "$workdir"/files/{passwd,shadow,group,gshadow}
     case $modules in
 	*ldap*)
+	    # This is racy, but much better than a static port
+	    [ -z "$ldap_port" ] && ldap_port=$(tests/alloc_port)
 	    # FIXME: path
-	    /usr/sbin/slapd -h ldap://127.0.0.1:3890/ -f "$workdir"/slapd.conf &
+	    /usr/sbin/slapd -h ldap://127.0.0.1:"$ldap_port"/ \
+		-f "$workdir"/slapd.conf &
 	    sleep 3 # Time for slapd to initialize
 	    slapd_pid=$(cat "$workdir"/slapd.pid)
 	    trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
-	    ldapadd -h 127.0.0.1 -p 3890 -f "$srcdir/ldap_skel.ldif" -x \
+	    ldapadd -h 127.0.0.1 -p "$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \
 		-D cn=Manager,dc=libuser -w password
 	    ;;
     esac
 
     # Set up the client
     sed -e "s|@WORKDIR@|$workdir|g; s|@TOP_BUILDDIR@|$(pwd)|g" \
-	-e "s|@MODULES@|$modules|g" < "$srcdir"/default_pw.conf.in \
-	> "$LIBUSER_CONF"
+	-e "s|@MODULES@|$modules|g; s|@LDAP_PORT@|$ldap_port|g" \
+	< "$srcdir"/default_pw.conf.in > "$LIBUSER_CONF"
 
     valid_combination=1
     case $modules in

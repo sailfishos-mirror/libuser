@@ -1,5 +1,14 @@
 2011-03-19  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/alloc_port.c: New file.
+	* Makefile.am (noinst_PROGRAMS): Add tests/alloc_port.
+	(tests_alloc_port_LDFLAGS): New definition.
+	* tests/default_pw_test:
+	* tests/default_pw.conf.in (ldap/server)
+	* tests/ldap_test:
+	* tests/ldap.conf.in (ldap/server): Use a dynamically allocated port for
+	the LDAP server.
+
 	* tests/default_pw_test:
 	* tests/ldap_test: Don't set up port 6360 for ldaps, it is not used.
 

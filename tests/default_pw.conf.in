@@ -34,7 +34,7 @@ LU_GIDNUMBER = 500
 # LU_ADMINISTRATORUID =
 
 [ldap]
-server = 127.0.0.1:3890
+server = 127.0.0.1:@LDAP_PORT@
 basedn = dc=libuser
 bindtype = simple
 binddn = cn=Manager,dc=libuser
