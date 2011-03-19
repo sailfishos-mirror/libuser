@@ -1,3 +1,8 @@
+2011-03-19  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/default_pw_test:
+	* tests/ldap_test: Don't set up port 6360 for ldaps, it is not used.
+
 2011-03-17  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/config_test.c (verify_var): Call va_end().

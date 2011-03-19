@@ -95,9 +95,7 @@ for modules in \
     case $modules in
 	*ldap*)
 	    # FIXME: path
-	    /usr/sbin/slapd \
-		-h 'ldap://127.0.0.1:3890/ ldaps://127.0.0.1:6360/' \
-		-f "$workdir"/slapd.conf &
+	    /usr/sbin/slapd -h ldap://127.0.0.1:3890/ -f "$workdir"/slapd.conf &
 	    sleep 3 # Time for slapd to initialize
 	    slapd_pid=$(cat "$workdir"/slapd.pid)
 	    trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
