@@ -1,24 +1,21 @@
-# Swedish messages for libuser.
-# Copyright © 2008-2010 Free Software Foundation, Inc.
-# This file is distributed under the same license as the libuser package.
-# Christian Rose <menthos@menthos.com>, 2006.
-# Magnus Larsson <fedoratrans@gmail.com>, 2007, 2008.
-# Göran Uddeborg <goeran@uddeborg.se>, 2008-2010.
-#
-# $Revision: 1.9 $
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2010-03-16 18:58+0100\n"
-"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
-"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-24 21:54+0000\n"
+"Last-Translator: goeran <goeran@uddeborg.se>\n"
+"Language-Team: Swedish <None>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -26,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "Sökvägen till hemkatalogen \"%s\" är inte absolut"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Fel när \"%s\" lästes: %s"
@@ -37,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "Fel när \"%s\" skapades: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Fel när ägaren till \"%s\" ändrades: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Fel när \"%s\" skrevs: %s"
@@ -424,17 +421,22 @@ msgstr "Lösenorden stämmer inte överens, försök igen.\n"
 msgid "Password change canceled.\n"
 msgstr "Lösenordsändringen avbruten.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr "Fel vid läsning från filhandtag %d.\n"
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fel när lösenord för användare %s sattes: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Fel när lösenord för grupp %s sattes: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "Lösenordet ändrat.\n"
@@ -655,21 +657,21 @@ msgstr "att låsa upp skulle göra lösenordsfältet tomt"
 
 #: lib/error.c:81
 msgid "invalid attribute value"
-msgstr ""
+msgstr "ogiltigt attributvärde"
 
 #: lib/error.c:83
 msgid "invalid module combination"
-msgstr ""
+msgstr "ogiltig modulkombination"
 
 #: lib/error.c:88
 msgid "unknown error"
 msgstr "okänt fel"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr "ogiltigt tal"
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr "ogiltigt id"
 
@@ -777,104 +779,104 @@ msgstr "Ogiltigt standardvärd för fält %s: %s"
 msgid "error locking file: %s"
 msgstr "fel när filen låstes: %s"
 
-#: lib/util.c:706
+#: lib/util.c:696
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "det gick inte att få standardsäkerhetskontext: %s"
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "det gick inte att få säkerhetskontext för \"%s\": %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "det gick inte att sätta standardsäkerhetskontext till \"%s\": %s"
 
-#: lib/util.c:763
+#: lib/util.c:753
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "det gick inte att avgöra säkerhetskontext för \"%s\": %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "det gick inte att öppna \"%s\": %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "det gick inte att ta status på \"%s\": %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "fel när \"%s\" skapades: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "säkerhetskopieringsfil \"%s\" finns och är inte en normal fil"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "storleken på säkerhetskopieringsfilen stämmer inte"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s värde \"%s\": \":\" är inte tillåtet"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "det gick inte att läsa från \"%s\": %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "posten finns redan i filen"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "det gick inte att skriva till \"%s\": %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "entitetsobjektet har inget %s-attribut"
 
-#: modules/files.c:1057
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
 msgstr "en post med motstridigt namn finns redan i filen"
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr "\":\" är inte tillåtet i krypterade lösenord"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "fel när lösenordet krypterades"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr ""
+msgstr "modulerna ”%s” och ”%s” kan inte kombineras"
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "kör inte med superanvändarrättigheter"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "det finns ingen skuggfil -- avaktiverar"
 
@@ -960,86 +962,86 @@ msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr ""
 "det gick inte att binda till en LDAP-server, första försöket som \"%s\": %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "användarobjektet hade inget %s-attribut"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "användarobjektet var skapat utan \"%s\""
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "fel när en LDAP-katalogpost skapades: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "fel när en LDAP-katalogpost ändrades: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "fel när namnet byttes på en LDAP-katalogpost: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektet hade inget %s-attribut"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "fel när LDAP-katalogpost togs bort: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektet har inget %s-attribut"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr "ej stödd krypteringsmetod för lösenord"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "inget sådant objekt i LDAP-katalogen"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "det finns inget \"%s\"-attribut"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "fel när lösenordet sattes i LDAP-katalogen för %s: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "LDAP-servernamn"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP sökningsbas-DN"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP bindnings-DN"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP bindningslösenord"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-användare"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-auktoriseringsanvändare"
 

@@ -1,3 +1,10 @@
+0.57.2
+* Fix adding LDAP users with empty gecos.
+* Correctly preserve algorithm used to hash an LDAP password when changing it.
+* Don't hard-code ports used in the test suite (to allow parallel development
+  and builds).
+* Miscellaneous bug fixes.
+
 0.57.1
 * Fix a crash when a module refuses to load with a warning (e.g. the "shadow"
   module when /etc/shadow is not present)

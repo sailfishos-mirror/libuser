@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2002 THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# pclouds <pclouds@gmx.net>, 2003.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser VERSION\n"
+"Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2003-07-27 13:46+0700\n"
-"Last-Translator: pclouds <pclouds@gmx.net>\n"
-"Language-Team: GnomeVI <gnomevi-list@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
+"Last-Translator: mitr <mitr@volny.cz>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -22,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Lỗi đọc `%s': %s"
@@ -33,16 +34,16 @@ msgid "Error creating `%s': %s"
 msgstr "Lỗi tạo `%s': %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
-#, fuzzy, c-format
+#: modules/files.c:163
+#, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Lỗi tạo nhóm `%s'.\n"
+msgstr ""
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
-#, fuzzy, c-format
+#: modules/files.c:195 modules/files.c:210
+#, c-format
 msgid "Error writing `%s': %s"
-msgstr "Lỗi tạo `%s': %s"
+msgstr ""
 
 #: apps/apputil.c:360 apps/apputil.c:395 apps/apputil.c:412
 #, c-format
@@ -65,9 +66,8 @@ msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
 #: apps/apputil.c:612
-#, fuzzy
 msgid "Unknown user context"
-msgstr "lỗi lạ"
+msgstr ""
 
 #: apps/apputil.c:620
 #, c-format
@@ -90,9 +90,9 @@ msgid "Internal PAM error `%s'.\n"
 msgstr "Lỗi nội tại của PAM `%s'.\n"
 
 #: apps/apputil.c:652
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "lỗi lạ"
+msgstr ""
 
 #: apps/apputil.c:656
 #, c-format
@@ -143,24 +143,24 @@ msgid "Account is not locked.\n"
 msgstr "Tài khoản không bị khóa.\n"
 
 #: apps/lchage.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Tối thiểu:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Tối đa:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Cảnh báo:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Không hoạt động:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:176 apps/lchage.c:183 apps/lchage.c:192 apps/lchage.c:202
 msgid "Never"
@@ -187,9 +187,9 @@ msgid "Account Expires:\t%s\n"
 msgstr "Tài khoản hết hiệu lực:\t%s\n"
 
 #: apps/lchage.c:254
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "Lỗi thay đổi thông tin ngày tháng của %s.\n"
+msgstr ""
 
 #: apps/lchfn.c:69 apps/lchsh.c:55
 msgid "[OPTION...] [user]"
@@ -257,9 +257,9 @@ msgid "New Shell"
 msgstr "Shell mới"
 
 #: apps/lchsh.c:121 apps/lchsh.c:140
-#, fuzzy, c-format
+#, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Đã đổi Shell.\n"
+msgstr ""
 
 #: apps/lchsh.c:137
 msgid "Shell changed.\n"
@@ -281,9 +281,9 @@ msgid "Invalid group ID %s\n"
 msgstr ""
 
 #: apps/lgroupadd.c:124
-#, fuzzy, c-format
+#, c-format
 msgid "Group creation failed: %s\n"
-msgstr "Thất bại tạo nhóm.\n"
+msgstr ""
 
 #: apps/lgroupdel.c:83 apps/lgroupmod.c:129 apps/lpasswd.c:149
 #, c-format
@@ -291,9 +291,9 @@ msgid "Group %s does not exist.\n"
 msgstr "Nhóm %s không tồn tại.\n"
 
 #: apps/lgroupdel.c:89
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "Nhóm %s không thể bị xóa: %s.\n"
+msgstr ""
 
 #: apps/lgroupmod.c:122 apps/lusermod.c:162
 #, c-format
@@ -301,34 +301,34 @@ msgid "Both -L and -U specified.\n"
 msgstr "Chưa xác định cả -L và -U.\n"
 
 #: apps/lgroupmod.c:136 apps/lgroupmod.c:145
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "Lỗi đặt mật khẩu cho nhóm %s.\n"
+msgstr ""
 
 #: apps/lgroupmod.c:154
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr "Nhóm %s không thể bị khóa.\n"
+msgstr ""
 
 #: apps/lgroupmod.c:163
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr "Nhóm %s không thể bị mở khóa.\n"
+msgstr ""
 
 #: apps/lgroupmod.c:243 apps/lgroupmod.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "Nhóm %s không thể bị thay đổi: %s.\n"
+msgstr ""
 
 #: apps/lid.c:49 apps/lid.c:60
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Lỗi loại bỏ %s: %s.\n"
+msgstr ""
 
 #: apps/lid.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "%s does not exist\n"
-msgstr "Người dùng %s không tồn tại.\n"
+msgstr ""
 
 #: apps/lid.c:146
 #, c-format
@@ -369,9 +369,9 @@ msgid "Refusing to create account with UID 0.\n"
 msgstr "Từ chối tạo tài khoản cho UID 0.\n"
 
 #: apps/lnewusers.c:224
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Lỗi tạo nhóm cho `%s' với GID %ld.\n"
+msgstr ""
 
 #: apps/lnewusers.c:283
 #, c-format
@@ -421,30 +421,35 @@ msgstr "Mật khẩu không khớp, vui lòng thử lại.\n"
 msgid "Password change canceled.\n"
 msgstr "Hủy bỏ thay đổi mật khẩu.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr ""
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Lỗi thiết lập mật khẩu cho người dùng %s: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Lỗi thiết lập mật khẩu cho nhóm %s: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "Đã thay đổi mật khẩu.\n"
 
 #: apps/luseradd.c:191
-#, fuzzy, c-format
+#, c-format
 msgid "Group %jd does not exist\n"
-msgstr "Nhóm %s không tồn tại.\n"
+msgstr ""
 
 #: apps/luseradd.c:209 apps/luseradd.c:222
-#, fuzzy, c-format
+#, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Lỗi tạo nhóm `%s'.\n"
+msgstr ""
 
 #: apps/luseradd.c:277
 #, c-format
@@ -472,14 +477,14 @@ msgid "%s did not have a gid number.\n"
 msgstr "%s không phải là số GID.\n"
 
 #: apps/luserdel.c:114
-#, fuzzy, c-format
+#, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Không có nhóm nào có GID %ld, không loại bỏ.\n"
+msgstr ""
 
 #: apps/luserdel.c:121
-#, fuzzy, c-format
+#, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Nhóm có GID %ld không có tên nhóm.\n"
+msgstr ""
 
 #: apps/luserdel.c:131
 #, c-format
@@ -497,9 +502,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "Lỗi loại bỏ %s: %s.\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool.\n"
-msgstr "Lỗi tạo mail spool.\n"
+msgstr ""
 
 #: apps/lusermod.c:178 apps/lusermod.c:191
 #, c-format
@@ -517,9 +522,9 @@ msgid "User %s could not be unlocked: %s.\n"
 msgstr "Người dùng %s không thể bị mở khóa: %s.\n"
 
 #: apps/lusermod.c:236
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Nhóm %s không tồn tại.\n"
+msgstr ""
 
 #: apps/lusermod.c:295
 #, c-format
@@ -552,19 +557,19 @@ msgid "could not open configuration file `%s': %s"
 msgstr "không thể mở tập tin cấu hình `%s': %s"
 
 #: lib/config.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "không thể mở tập tin cấu hình `%s': %s"
+msgstr ""
 
 #: lib/config.c:129
-#, fuzzy, c-format
+#, c-format
 msgid "configuration file `%s' is too large"
-msgstr "không thể mở tập tin cấu hình `%s': %s"
+msgstr ""
 
 #: lib/config.c:145
-#, fuzzy, c-format
+#, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "không thể mở tập tin cấu hình `%s': %s"
+msgstr ""
 
 #: lib/error.c:38
 msgid "success"
@@ -662,11 +667,11 @@ msgstr ""
 msgid "unknown error"
 msgstr "lỗi lạ"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr ""
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr ""
 
@@ -681,9 +686,9 @@ msgid "module version mismatch in `%s'"
 msgstr "không khớp phiên bản module trong `%s'"
 
 #: lib/modules.c:92
-#, fuzzy, c-format
+#, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "Nhóm %s không tồn tại.\n"
+msgstr ""
 
 #: lib/prompt.c:65
 msgid "error reading terminal attributes"
@@ -747,9 +752,9 @@ msgid "user %jd has no name"
 msgstr ""
 
 #: lib/user.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Nhóm %s không tồn tại.\n"
+msgstr ""
 
 #: lib/user.c:336
 msgid "user has neither a name nor an UID"
@@ -774,107 +779,104 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "lỗi khóa tập tin: %s"
 
-#: lib/util.c:706
-#, fuzzy, c-format
+#: lib/util.c:696
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "không thể stat() `%s': %s"
+msgstr ""
 
-#: lib/util.c:733
-#, fuzzy, c-format
+#: lib/util.c:723
+#, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "không thể ghi vào `%s': %s"
+msgstr ""
 
-#: lib/util.c:739 lib/util.c:771
-#, fuzzy, c-format
+#: lib/util.c:729 lib/util.c:761
+#, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "không thể ghi vào `%s': %s"
+msgstr ""
 
-#: lib/util.c:763
-#, fuzzy, c-format
+#: lib/util.c:753
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "không thể ghi vào `%s': %s"
+msgstr ""
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "không thể mở `%s': %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "không thể stat() `%s': %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "không thể tạo `%s': %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "tập tin sao lưu `%s' tồn tại nhưng không phải là tập tin bình thường"
 
-#: modules/files.c:224
-#, fuzzy
+#: modules/files.c:226
 msgid "backup file size mismatch"
-msgstr "không khớp phiên bản thư viện/module"
+msgstr ""
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr ""
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "không thể đọc từ `%s': %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "mục nhập đã có trong tập tin"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "không thể ghi vào `%s': %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "đối tượnc thực thể không có thuộc tính %s"
 
-#: modules/files.c:1057
-#, fuzzy
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
-msgstr "mục nhập đã có trong tập tin"
+msgstr ""
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
-#, fuzzy
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
-msgstr "lỗi đặt mật khẩu cho `%s'"
+msgstr ""
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "không thực thi với quyền siêu người dùng"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "không có tập tin shadow -- tắt"
 
@@ -954,90 +956,90 @@ msgid "could not bind to LDAP server"
 msgstr "không thể gắn vào LDAP server"
 
 #: modules/ldap.c:418
-#, fuzzy, c-format
+#, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "không thể gắn vào LDAP server"
+msgstr ""
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "đối tượng người dùng không có thuộc tính %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "đối tượng người dùng được tạo mà không có `%s'"
 
-#: modules/ldap.c:1351
-#, fuzzy, c-format
+#: modules/ldap.c:1352
+#, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "lỗi đổi tên mục nhập thư mục LDAP: %s.\n"
+msgstr ""
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "lỗi hiệu chỉnh mục nhập thư mục LDAP: %s"
 
-#: modules/ldap.c:1402
-#, fuzzy, c-format
+#: modules/ldap.c:1403
+#, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "lỗi đổi tên mục nhập thư mục LDAP: %s.\n"
+msgstr ""
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "đối tượng không có thuộc tính %s"
 
-#: modules/ldap.c:1467
-#, fuzzy, c-format
+#: modules/ldap.c:1468
+#, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "lỗi loại bỏ mục nhập thư mục LDAP: %s.\n"
+msgstr ""
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "đối tượng không có thuộc tính %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr ""
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "không có đối tượng đó trong thư mục LDAP"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "không tìm thấy thuộc tính `%s'"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "lỗi đặt mật khẩu trong thư mục LDAP cho %s: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "Tên Server LDAP"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind Password"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "Người dùng LDAP SASL"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Authorization User"
 
@@ -1073,9 +1075,8 @@ msgid "error creating mail spool for user"
 msgstr "lỗi tạo mail spool cho người dùng"
 
 #: python/admin.c:887
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "lỗi tạo mail spool cho người dùng"
+msgstr ""
 
 #: samples/lookup.c:63
 #, c-format
@@ -1088,9 +1089,9 @@ msgid "Invalid ID %s\n"
 msgstr ""
 
 #: samples/lookup.c:88
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Đang tìm nhóm với ID %d.\n"
+msgstr ""
 
 #: samples/lookup.c:92
 #, c-format
@@ -1098,9 +1099,9 @@ msgid "Searching for group named %s.\n"
 msgstr "Đang tìm nhóm tên %s.\n"
 
 #: samples/lookup.c:99
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Đang tìm người dùng với ID %d.\n"
+msgstr ""
 
 #: samples/lookup.c:103
 #, c-format
@@ -1134,44 +1135,3 @@ msgstr "Lấy thuộc tính người dùng mặc định:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Sao chép cấu trúc người dùng:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "không thể chuyển dữ liệu nội tại sang LDAPMods"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Đã đổi Shell.\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "không thể tìm LDAP server"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "LDAP server có vẻ không có DSE gốc"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "lỗi ánh xạ tên sang tên phân biệt LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "lỗi ánh xạ tên sang tên phân biệt cơ sở LDAP"
-
-#, fuzzy
-#~ msgid "couldn't reset default security context to `%s': %s"
-#~ msgstr "không thể ghi vào `%s': %s"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Lỗi Cyrus SASL tạo người dùng: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Lỗi Cyrus SASL loại bỏ người dùng: %s: %s"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Lỗi khởi tạo %s.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Nhóm %s không thể bị xóa.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Nhóm %s không thể bị hiệu chỉnh.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "lỗi khởi tạo module"

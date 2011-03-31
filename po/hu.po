@@ -1,30 +1,21 @@
-# Hungarian translation of usermode.
-# Copyright (C) 2003-2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# This file is distributed under the same license as the usermode package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Tamas Szanto <tszanto@mol.hu>, 2003.
-# Laszlo Dvornik <dvornikl@mailbox.hu>, 2004.
-# Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005, 2007.
-# Szentiványi Gábor <szentivanyi.gabor@ulx.hu>, 2006.
-# Nikolas Slivka <snicore@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2010-03-16 16:19+0100\n"
-"Last-Translator: Peter Bojtos <ptr@ulx.hu>\n"
-"Language-Team: Fedora Hungarian Translation Team <fedora-trans-hu@redhat."
-"org>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
+"Last-Translator: mitr <mitr@volny.cz>\n"
+"Language-Team: Hungarian <trans-hu@lists.fedoraproject.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Poedit-Language: Hungarian\n"
-"X-Poedit-Country: HUNGARY\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -32,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "A(z) `%s' saját könyvtár útvonal nem teljes"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Hiba a(z) `%s' olvasásakor: %s"
@@ -43,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "Hiba a(z) `%s' létrehozásakor: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Hiba a(z) `%s' tulajdonosának változatásakor: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Hiba a(z) `%s' írasakor: %s"
@@ -436,17 +427,22 @@ msgstr "A két jelszó nem egyezik meg, próbálja újból.\n"
 msgid "Password change canceled.\n"
 msgstr "Jelszóváltoztatás megszakítva.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr ""
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Hiba a(z) %s felhasználó jelszavának beállításakor: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Hiba a(z) %s csoport jelszavának beállításakor: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "A jelszó megváltoztatva.\n"
@@ -677,11 +673,11 @@ msgstr ""
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr "érvénytelen szám"
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr "érvénytelen azonosító"
 
@@ -790,106 +786,106 @@ msgstr "%s mező érvénytelen alapértelmezett értéke: %s"
 msgid "error locking file: %s"
 msgstr "hiba a fájl zárolásakor: %s"
 
-#: lib/util.c:706
+#: lib/util.c:696
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "Nem sikerült lekérni az alap futtatási kontextust: %s"
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "%s biztonsági kontextusa nem kérhető le: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Nem sikerült beállítani az alap futtatási kontextust erre: %s: %s"
 
-#: lib/util.c:763
+#: lib/util.c:753
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
 "Nem sikerült meghatározni az alapértelmezett kontextust az alábbi program "
 "számára: %s: %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' nem nyitható meg: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'-t nem lehet beállítani: %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "hiba a(z) `%s' létrehozásakor: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "`%s' backup fájl már létezik és nem szabályos fájl"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "backup fájl mérete nem egyezik"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s érték `%s': `:' nem engedélyezett"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "%s nem olvasható: %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "bejegyzés már megtalálható a fájlban"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "%s nem írható: %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "A(z) %s entitás-objektumnak nincs attribútuma"
 
-#: modules/files.c:1057
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
 msgstr "bejegyzés ellentétes névvel már a fájlban van"
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' nem megengedett a titkosított jelszavakban"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "hiba a jelszó titkosításakor"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "nem végrehajtható rendszergazdai jogosultságokkal"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "nincs árnyék fájl -- kikapcsolás"
 
@@ -975,86 +971,86 @@ msgstr "nem lehet kapcsolódni az LDAP kiszolgálóhoz"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP kiszolgáló elérése nem sikerült. Első próbálkozás, mint %s: %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "A felhasználói objektumnak nincs %s attribútuma"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "felhasználói objektum létrehozva `%s' nélkül"
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "hiba az LDAP könyvtár-bejegyzés létrehozásakor: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "hiba az LDAP könyvtár-bejegyzés módosításakor: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "hiba az LDAP könyvtár-bejegyzés átnevezésekor: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektumnak nem volt %s attribútuma"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "hiba az LDAP könyvtár-bejegyzés eltávolításakor: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektumnak nincs %s attribútuma"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr "nem támogatott jelszó-titkosítási séma "
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "nincs ilyen objektum az LDAP könyvtárban"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "nincs `%s' attribútum"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "hiba a(z) %s jelszavának beállításakor az LDAP könyvtárban: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "LDAP kiszolgálónév"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP keresés Base DN-je"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP keresés DN-je"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP kapcsolódási jelszó"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "LDAP SASL felhasználó"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL hitelesített felhasználó"
 
@@ -1150,308 +1146,3 @@ msgstr "Alapértelmezett felhasználói attribútumok lekérése: \n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Felhasználói szerkezet másolása:\n"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Exit"
-#~ msgstr "Kilépés"
-
-#~ msgid "Cancel"
-#~ msgstr "Mégsem"
-
-#~ msgid "(current) UNIX password: "
-#~ msgstr "(a jelenlegi) UNIX-jelszó: "
-
-#~ msgid "Retype new UNIX password: "
-#~ msgstr "Az új UNIX-jelszó (még egyszer): "
-
-#~ msgid "BAD PASSWORD: it's WAY too short"
-#~ msgstr "A JELSZÓ HIBÁS: túlságosan rövid"
-
-#~ msgid "BAD PASSWORD: it is too short"
-#~ msgstr "A JELSZÓ HIBÁS: túl rövid"
-
-#~ msgid "Launch system-wide configuration tools without a password."
-#~ msgstr "Adminisztrátori programok indítása jelszó nélkül."
-
-#~ msgid "login: "
-#~ msgstr "Név: "
-
-#~ msgid "Password: "
-#~ msgstr "Jelszó: "
-
-#~ msgid "%s failed to connect to the session manager: %s\n"
-#~ msgstr "%s hiba a munkafolymat-kezelőhöz való csatlakozáskor: %s\n"
-
-#~ msgid ""
-#~ "Failed to drop administrator privileges: pam_timestamp_check returned "
-#~ "failure code %d"
-#~ msgstr ""
-#~ "Nem sikerült leválasztani a rendszergazdai jogosultságot: "
-#~ "pam_timestamp_check ezt a hibakódot adta vissza: %d"
-
-#~ msgid ""
-#~ "You're currently authorized to configure system-wide settings (that "
-#~ "affect all users) without typing the administrator password again. You "
-#~ "can give up this authorization."
-#~ msgstr ""
-#~ "Most jogosultsága van a rendszerszintű beállítások megváltoztatására "
-#~ "(amelyek minden felhasználóra érvényesek), a rendszergazdai jelszó újbóli "
-#~ "megadása nélkül. Le lehet mondai erről a jogosultságról."
-
-#~ msgid "Forget Authorization"
-#~ msgstr "A jogosultság eldobása"
-
-#~ msgid "pam_timestamp_check is not setuid root"
-#~ msgstr "a pam_timestamp_check nem Set UID root módban van"
-
-#~ msgid "no controlling tty for pam_timestamp_check"
-#~ msgstr "nincs vezérlő tty itt: pam_timestamp_check"
-
-#~ msgid "user unknown to pam_timestamp_check"
-#~ msgstr "ismeretlen felhasználó ennél: pam_timestamp_check"
-
-#~ msgid "permissions error in pam_timestamp_check"
-#~ msgstr "jogosultsági hiba itt: pam_timestamp_check"
-
-#~ msgid "invalid controlling tty in pam_timestamp_check"
-#~ msgstr "érvénytelen vezérlési tty itt: pam_timestamp_check"
-
-#~ msgid "Failed to set IO channel nonblocking: %s\n"
-#~ msgstr "Nem sikerült beállítani nem blokkolóra az IO csatornát: %s\n"
-
-#~ msgid "pam-panel-icon: failed to connect to session manager\n"
-#~ msgstr ""
-#~ "pam-panel-icon: nem sikerült csatlakozni a munkafolyamat-kezelőhöz\n"
-
-#~ msgid "Unknown exit code."
-#~ msgstr "Ismeretlen kilépési kód."
-
-#~ msgid ""
-#~ "The password you typed is invalid.\n"
-#~ "Please try again."
-#~ msgstr ""
-#~ "A megadott jelszó érvénytelen.\n"
-#~ "Próbálja meg újra."
-
-#~ msgid ""
-#~ "One or more of the changed fields is invalid.\n"
-#~ "This is probably due to either colons or commas in one of the fields.\n"
-#~ "Please remove those and try again."
-#~ msgstr ""
-#~ "Egy vagy több módosított mező tartalma érvénytelen.\n"
-#~ "Valószínűleg kettőspont vagy vessző maradt valamelyik mezőben.\n"
-#~ "Távolítsa el ezeket, majd próbálkozzon újra."
-
-#~ msgid "Password resetting error."
-#~ msgstr "A jelszó alapállapotba hozása nem sikerült."
-
-#~ msgid ""
-#~ "Some systems files are locked.\n"
-#~ "Please try again in a few moments."
-#~ msgstr ""
-#~ "Néhány rendszerfájl zárolva van.\n"
-#~ "Próbálkozzon újra néhány másodperc múlva."
-
-#~ msgid "Insufficient rights."
-#~ msgstr "Nincs megfelelő jogosultság."
-
-#~ msgid "Invalid call to subprocess."
-#~ msgstr "Érvénytelen hívási kísérlet történt egy alfolyamatra."
-
-#~ msgid ""
-#~ "Your current shell is not listed in /etc/shells.\n"
-#~ "You are not allowed to change your shell.\n"
-#~ "Consult your system administrator."
-#~ msgstr ""
-#~ "A mostani parancsértelmező nem szerepel az /etc/shells fájlban.\n"
-#~ "A parancsértelmezőt ezért nem lehet megváltoztatni.\n"
-#~ "Kérjen segítséget a rendszergazdától."
-
-#~ msgid "Out of memory."
-#~ msgstr "Nincs elég memória."
-
-#~ msgid "The exec() call failed."
-#~ msgstr "Az exec() hívás végrehajtása nem sikerült."
-
-#~ msgid "Failed to find selected program."
-#~ msgstr "A kiválasztott program nem található."
-
-#~ msgid "Request canceled."
-#~ msgstr "A kérés törölve."
-
-#~ msgid "Query"
-#~ msgstr "Lekérdezés"
-
-#~ msgid "Error"
-#~ msgstr "Hiba"
-
-#~ msgid "Information"
-#~ msgstr "Információ"
-
-#~ msgid ""
-#~ "You are attempting to run \"%s\" which may benefit from administrative "
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "\"%s\" indítását kezdeményezte. A programot érdemesebb lehet "
-#~ "rendszergazdai jogosultsággal indítani, ehhez viszont további információ "
-#~ "szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run \"%s\" which requires administrative "
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "\"%s\" indítását kezdeményezte. A program csak rendszergazdai "
-#~ "jogosultsággal indítható el, ehhez pedig további információ szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run a command which may benefit from administrative "
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "Egy olyan parancs végrehajtását kezdeményezte, amelyet érdemesebb lehet "
-#~ "rendszergazdai jogosultsággal végrehajtani - ehhez viszont további "
-#~ "információ szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run a command which requires administrative "
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "Egy olyan parancs végrehajtását kezdeményezte, amelyhez rendszergazdai "
-#~ "jogosultság szükséges - ehhez pedig további információra van szükség."
-
-#~ msgid "_Run Unprivileged"
-#~ msgstr "Futtatás n_ormál jogosultsággal"
-
-#~ msgid "Pipe error.\n"
-#~ msgstr "Pipe (csővezeték)-kezelési hiba.\n"
-
-#~ msgid "Cannot fork().\n"
-#~ msgstr "Nem sikerült végrehajtani egy fork() hívást (programindítást).\n"
-
-#~ msgid "Can't set binary encoding on an IO channel: %s\n"
-#~ msgstr "A(z) %s IO csatornán nem lehet beállítani a bináris kódolást\n"
-
-#~ msgid "dup2() error.\n"
-#~ msgstr "dup2()-hiba.\n"
-
-#~ msgid "execl() error, errno=%d\n"
-#~ msgstr "execl()-hiba, errno=%d\n"
-
-#~ msgid ""
-#~ "You are attempting to run \"%s\" which may benefit from administrative\n"
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "\"%s\" indítását kezdeményezte. A programot érdemesebb lehet\n"
-#~ "rendszergazdai jogosultsággal indítani, ehhez viszont további\n"
-#~ "információ szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run \"%s\" which requires administrative\n"
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "\"%s\" indítását kezdeményezte. A program csak rendszergazdai\n"
-#~ "jogosultsággal indítható el, ehhez pedig további információ szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run a command which may benefit from\n"
-#~ "administrative privileges, but more information is needed in order to do "
-#~ "so."
-#~ msgstr ""
-#~ "Egy olyan parancs végrehajtását kezdeményezte, amelyet érdemesebb lehet\n"
-#~ "rendszergazdai jogosultsággal végrehajtani - ehhez viszont további\n"
-#~ "információ szükséges."
-
-#~ msgid ""
-#~ "You are attempting to run a command which requires administrative\n"
-#~ "privileges, but more information is needed in order to do so."
-#~ msgstr ""
-#~ "Egy olyan parancs végrehajtását kezdeményezte, amelyhez rendszergazdai\n"
-#~ "jogosultság szükséges - ehhez pedig további információra van szükség."
-
-#~ msgid "userhelper must be setuid root\n"
-#~ msgstr "a userhelper programnak 'setuid root' beállításúnak kell lennie\n"
-
-#~ msgid ""
-#~ "Unable to open graphical window, and unable to find controlling "
-#~ "terminal.\n"
-#~ msgstr ""
-#~ "Grafikus ablakot nem sikerült megnyitni, vezérlőterminál pedig nem "
-#~ "található.\n"
-
-#~ msgid "Unexpected argument"
-#~ msgstr "Váratlan argumentum"
-
-#~ msgid "You don't exist.  Go away.\n"
-#~ msgstr "Az Ön neve nem is létezik...\n"
-
-#~ msgid "About Myself"
-#~ msgstr "Magamról"
-
-#~ msgid "Change personal information"
-#~ msgstr "A személyes adatok megváltoztatása"
-
-#~ msgid "Login Shell:"
-#~ msgstr "Bejelentkezési parancsértelmező:"
-
-#~ msgid "User Information"
-#~ msgstr "Felhasználói adatok"
-
-#~ msgid "_Mount"
-#~ msgstr "_Csatlakoztatás"
-
-#~ msgid "Un_mount"
-#~ msgstr "Le_választás"
-
-#~ msgid ""
-#~ "Are you sure you want to format this disk?  You will destroy any data it "
-#~ "currently contains."
-#~ msgstr ""
-#~ "Biztosan formázza a lemezt? A rajta található adatok véglegesen elvesznek!"
-
-#~ msgid "Perform a _low-level format."
-#~ msgstr "Ala_csony szintű formázás végrehajtása."
-
-#~ msgid "Select a _filesystem type to create:"
-#~ msgstr "Válassza ki _a kívánt fájlrendszertípust:"
-
-#~ msgid ""
-#~ "There are no filesystems which you are allowed to mount or unmount.\n"
-#~ "Contact your administrator."
-#~ msgstr ""
-#~ "Önnek nincs jogosultsága egyetlen fájlrendszer csatlakoztatására/"
-#~ "leválasztására sem.\n"
-#~ "Kérjen segítséget a rendszergazdától."
-
-#~ msgid "User Mount Tool"
-#~ msgstr "Lemezcsatlakoztatási segédprogram"
-
-#~ msgid "_Format"
-#~ msgstr "_Formázás"
-
-#~ msgid "Device"
-#~ msgstr "Eszköz"
-
-#~ msgid "Directory"
-#~ msgstr "Könyvtár"
-
-#~ msgid "Filesystem"
-#~ msgstr "Fájlrendszer"
-
-#~ msgid "The device '%s' can not be formatted."
-#~ msgstr "A(z) %s eszközt nem lehet megformázni."
-
-#~ msgid "Disk Management"
-#~ msgstr "Lemezkezelés"
-
-#~ msgid "Mount and unmount filesystems"
-#~ msgstr "Fájlrendszerek csatolása és leválasztása"
-
-#~ msgid "Change your login password"
-#~ msgstr "Bejelentkezési jelszó módosítása"
-
-#~ msgid "Placeholder text."
-#~ msgstr "Alapértelmezett szöveg."
-
-#~ msgid "Password for %s: "
-#~ msgstr "%s jelszava: "

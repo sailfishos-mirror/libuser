@@ -1,21 +1,21 @@
-# Catalan translations of libuser package by Softcatalà.
-# Copyright © 2004, 2005, 2006, 2007 The Free Software Foundation, Inc.
-# This file is distributed under the same license as the libuser package.
-# Isabel Cama <c.gomez.febrel@terra.es>, 2004.
-# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004-8.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2010-08-29 05:53+0100\n"
-"Last-Translator: Robert Antoni Buj Gelonch <robert.buj@gmail.com>\n"
-"Language-Team: Catalan <fedora@softcatala.net>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
+"Last-Translator: mitr <mitr@volny.cz>\n"
+"Language-Team: Catalan <fedora@llistes.softcatala.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -23,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "El camí al directori d'inici «%s» no és absolut"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "S'ha produït un error en llegir «%s»: %s"
@@ -34,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "S'ha produït un error en crear «%s»: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "S'ha produït un error en canviar el propietari de «%s»: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "S'ha produït un error en escriure «%s»: %s"
@@ -427,19 +427,24 @@ msgstr "Les contrasenyes són diferents, intenteu-ho de nou.\n"
 msgid "Password change canceled.\n"
 msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr ""
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
 "S'ha produït un error en configurar la contrasenya per a l'usuari %s: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr ""
 "S'ha produït un error en configurar la contrasenya per al grup %s: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "S'ha canviat la contrasenya.\n"
@@ -670,11 +675,11 @@ msgstr ""
 msgid "unknown error"
 msgstr "error desconegut"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr "número invàlid"
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr "ID invàlid"
 
@@ -783,105 +788,105 @@ msgstr "El valor per defecte del camp %s no és vàlid: %s"
 msgid "error locking file: %s"
 msgstr "s'ha produït un error en bloquejar el fitxer: %s"
 
-#: lib/util.c:706
+#: lib/util.c:696
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "no s'ha pogut obtenir el context de seguretat predeterminat: %s"
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "no s'ha pogut obtenir el context de seguretat de «%s»: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 "no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
 
-#: lib/util.c:763
+#: lib/util.c:753
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "no s'ha pogut determinar el context de seguretat per a «%s»: %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no s'ha pogut obrir «%s»: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no s'ha pogut obtenir informació de «%s»: %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "s'ha produït un error en crear «%s»: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "la còpia de seguretat «%s» existeix i no és un fitxer per a dades"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "la mida del fitxer de còpia de seguretat no coincideix"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s valor «%s»: ':' no està disponible"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "no s'ha podut llegir res de «%s»: %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "el registre ja es troba en el fitxer"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no s'ha pogut escriure a «%s»: %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "l'objecte de l'entitat no té l'atribut %s"
 
-#: modules/files.c:1057
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
 msgstr "el registre amb el nom conflictiu ja es troba en el fitxer"
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr "no es permet ':' a la contrasenya xifrada"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "no s'està executant amb permisos de superusuari"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "no hi ha cap fitxer shadow present -- es deshabilitarà"
 
@@ -969,89 +974,89 @@ msgstr ""
 "no s'ha pogut vincular amb el servidor de LDAP. El primer intent ha estat "
 "com a «%s»: %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "l'objecte de l'usuari no tenia atribut %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "s'ha creat l'objecte de l'usuari sense «%s»"
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "s'ha produït un error en crear l'entrada del directori de LDAP: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr ""
 "s'ha produït un error en modificar el registre del directori del LDAP: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "s'ha produït un error en canviar l'entrada del directori del LDAP: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "l'objecte no tenia cap atribut %s"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "s'ha produït un error en eliminar l'entrada del directori LDAP: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "l'objecte no té cap atribut %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr "esquema de xifratge de contrasenyes no disponible"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "aquest objecte no existeix en el directori LDAP"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "no s'ha trobat cap atribut «%s»"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori LDAP per a "
 "%s: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "Nom del servidor LDAP"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca de LDAP"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "DN del vincle de LDAP"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 
@@ -1148,20 +1153,3 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "no s'han pogut convertir les dades internes a LDAPMods"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "no s'ha pogut cercar el servidor del LDAP"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "sembla que el servidor del LDAP no té arrel DSE"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "s'ha produït un error en mapar el nom amb el nom distingit del LDAP"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr ""
-#~ "s'ha produït un error en mapar el nom amb el nom de base distingit del "
-#~ "LDAP"

@@ -1,31 +1,21 @@
-# translation of libuser.default.po to
-# translation of de.po to
-# Copyright (C) 2001 Red Hat, Inc.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Claudia Krug <fhonig@redhat.it>, 2001.
-# Bernd Groh <bgroh@redhat.com>, 2002,2003.
-# Verena <vfuehrer@redhat.com>, 2004.
-# Ronny Buchmann <ronny-vlug@vlugnet.org>, 2005,2006.
-# Robert Scheck <redhat@linuxnetz.de>, 2005,2007.
-# Timo Trinks <ttrinks@redhat.com>, 2007.
-# Jens Maucher <jensm@fedoraproject.org>, 2009.
-# Fabian Affolter <fab@fedoraproject.org>, 2008, 2009.
-# sknirT omiT <moc.tahder@sknirtt>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser.default\n"
+"Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2010-03-17 15:11+1000\n"
-"Last-Translator: sknirT omiT <moc.tahder@sknirtt>\n"
-"Language-Team:  <de@li.org>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-31 17:02+0000\n"
+"Last-Translator: mitr <mitr@volny.cz>\n"
+"Language-Team: German <trans-de@lists.fedoraproject.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: German\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -34,7 +24,7 @@ msgstr ""
 "Der Verzeichnispfad des persönlichen Verzeichnisses `%s' ist nicht absolut"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Fehler beim Lesen von `%s': %s"
@@ -45,13 +35,13 @@ msgid "Error creating `%s': %s"
 msgstr "Fehler beim Erzeugen von `%s': %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Fehler beim Ändern des Eigentümers von `%s': %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Fehler beim Schreiben von `%s': %s"
@@ -436,17 +426,22 @@ msgstr "Passwörter stimmen nicht überein. Noch einmal eingeben.\n"
 msgid "Password change canceled.\n"
 msgstr "Passwortänderung abgebrochen.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr "Fehler beim Lesen von Dateideskriptor %d.\n"
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fehler beim Erstellen des Passworts für Benutzer %s: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Fehler beim Erstellen des Passworts für Gruppe %s: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "Passwort geändert.\n"
@@ -667,21 +662,21 @@ msgstr "Entsperrung würde das Passwortfeld leer machen"
 
 #: lib/error.c:81
 msgid "invalid attribute value"
-msgstr ""
+msgstr "ungültiger Attributwert"
 
 #: lib/error.c:83
 msgid "invalid module combination"
-msgstr ""
+msgstr "ungültige Modulkombination"
 
 #: lib/error.c:88
 msgid "unknown error"
 msgstr "Unbekannter Fehler"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr "Ungültige Nummer"
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr "Ungültige ID"
 
@@ -791,104 +786,104 @@ msgstr "Ungültiger Wert in Feld %s: %s"
 msgid "error locking file: %s"
 msgstr "Fehler beim Sperren der Datei: %s"
 
-#: lib/util.c:706
+#: lib/util.c:696
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "konnte Standard-Sicherheitskontext nicht setzen: %s"
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "konnte Sicherheitskontext `%s' nicht bekommen: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Sicherheitskontext konnte nicht nach `%s' geschrieben werden: %s"
 
-#: lib/util.c:763
+#: lib/util.c:753
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "konnte Sicherheitskontext `%s' nicht bestimmen: %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' konnte nicht geöffnet werden: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "stat `%s' konnte nicht ausgeführt werden: %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "Fehler beim Erzeugen von `%s': %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "Backup-Datei `%s' ist vorhanden und keine reguläre Datei"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "Sicherungsdateigröße passt nicht"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s Wert`%s': `:' nicht erlaubt"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' konnte nicht gelesen werden: %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "Eintrag bereits in der Datei vorhanden"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "nach `%s' konnte nicht geschrieben werden: %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "Entitätsobjekt besitzt kein %s Attribut"
 
-#: modules/files.c:1057
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
 msgstr "Eintrag mit kollidierendem Namen bereits in der Datei vorhanden"
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr "`:' nicht erlaubt in verschlüsselten Passwörtern"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "Fehler beim Verschlüsseln des Passworts"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr ""
+msgstr "die Module `%s' und `%s' können nicht miteinander kombiniert werden"
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "Keine Ausführung mit Administrator-Rechten."
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "Keine Shadow-Datei vorhanden -- Deaktiviere."
 
@@ -973,86 +968,86 @@ msgstr "Konnte nicht zum LDAP-Server verbinden"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "Konnte nicht zum LDAP-Server verbinden, erster Versuch `%s': %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "Benutzerobjekt hatte kein Attribut %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "Benutzerobjekt wurde ohne `%s' erstellt"
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "Fehler beim Erstellen eines LDAP-Verzeichniseintrags: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "Fehler bei der Änderung des LDAP-Verzeichniseintrags: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "Fehler beim Umbenennen des LDAP-Verzeichniseintrags: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "Objekt hatte kein Attribut %s"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "Fehler beim Entfernen des LDAP-Verzeichniseintrags: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "Objekt besitzt kein Attribut %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr "nicht unterstütztes Passwort-Verschlüsselungsschema"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "Kein entsprechendes Objekt im LDAP-Verzeichnis vorhanden"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "kein `%s' Attribut gefunden"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Fehler beim Einrichten des Passworts im LDAP-Verzeichnis für %s: %s."
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "LDAP-Servername"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP Suche Basis-DN"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-Passwort"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-Benutzer"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-Autorisierungsbenutzer"
 

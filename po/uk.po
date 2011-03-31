@@ -1,23 +1,22 @@
-# Ukrainian translation to libuser.
-# Copyright (C) Free Software Foundation
-# This file is distributed under the same license as the libuser package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2006.
-# Yuri Chornoivan <yurchor@ukr.net>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2011-01-11 21:13+0200\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
+"Last-Translator: yurchor <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -25,7 +24,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr "Шлях до домашнього каталогу «%s» не є абсолютним"
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Помилка зчитування «%s»: %s"
@@ -36,13 +35,13 @@ msgid "Error creating `%s': %s"
 msgstr "Помилка створення «%s»: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Помилка зміни власника «%s»: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Помилка запису «%s»: %s"
@@ -426,17 +425,22 @@ msgstr "Паролі не збігаються, спробуйте ще раз.\
 msgid "Password change canceled.\n"
 msgstr "Зміну паролю скасовано.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr "Помилка читання з дескриптора файла %d.\n"
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Помилка встановлення паролю користувача %s: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Помилка встановлення паролю для групи %s: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "Пароль змінено.\n"
@@ -667,11 +671,11 @@ msgstr "некоректне поєднання модулів"
 msgid "unknown error"
 msgstr "невідома помилка"
 
-#: lib/misc.c:157
+#: lib/misc.c:158
 msgid "invalid number"
 msgstr "неправильний номер"
 
-#: lib/misc.c:171
+#: lib/misc.c:172
 msgid "invalid ID"
 msgstr "неправильний ідентифікатор"
 
@@ -780,104 +784,104 @@ msgstr "Неправильне типове значення для поля %s:
 msgid "error locking file: %s"
 msgstr "помилка блокування файлу: %s"
 
-#: lib/util.c:706
+#: lib/util.c:696
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "не вдається отримати типовий контекст безпеки: %s"
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "не вдається отримати контекст безпеки для «%s»: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "не вдається задати значення типового контексту безпеки «%s»: %s"
 
-#: lib/util.c:763
+#: lib/util.c:753
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "не вдається визначити контекст безпеки для «%s»: %s"
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "не вдається відкрити «%s»: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "не вдається отримати відомості про «%s»: %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "помилка створення «%s»: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "резервний файл «%s» існує та не є звичайним файлом"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "невідповідність розміру файлу резервної копії"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "Значення %s неприпустиме «%s», використано «:»"
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "не вдається прочитати з «%s»: %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "запис вже існує у файлі"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "не вдається записати «%s»: %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "об'єкт не має атрибута %s"
 
-#: modules/files.c:1057
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
 msgstr "вже є запис з назвою, що конфліктує"
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr "Не допускається використання `:' у паролях"
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "помилка шифрування пароля"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "не можна поєднувати модуль «%s» з модулем «%s»"
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "виконується без привілей адміністратора"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "немає файлу shadow — вимикаємо"
 
@@ -961,86 +965,86 @@ msgstr "не вдається під'єднатись до сервера LDAP"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "не вдається під'єднатись до сервера LDAP, перша спроба - «%s»: %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "об'єкт користувача не має атрибута %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "об'єкт користувача створений без «%s»"
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "помилка створення запису каталогу LDAP: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "помилка зміни запису каталогу LDAP: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "помилка перейменування запису каталогу LDAP: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "об'єкт не мав атрибут %s"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "помилка вилучення запису каталогу LDAP: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "об'єкт не має атрибута %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr "схема шифрування паролів не підтримується"
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "немає такого об'єкта у каталозі LDAP"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "не знайдено атрибут `%s"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "помилка встановлення паролю в каталозі LDAP для %s: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "Назва сервера LDAP"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind пароль"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "Користувач LDAP SASL"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "Авторизований користувач LDAP SASL"
 
@@ -1136,6 +1140,3 @@ msgstr "Отримання стандартних атрибутів корис�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Копіювання структури користувача:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "не вдається перетворити внутрішні дані у LDAPMods"

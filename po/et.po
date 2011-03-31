@@ -1,22 +1,21 @@
-# translation of et.po to Estonian
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Allan Sims <allsi@eau.ee>, 2004.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: et\n"
+"Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2011-01-14 15:25+0100\n"
-"PO-Revision-Date: 2005-11-04 08:32+0200\n"
-"Last-Translator: Allan Sims <allan.sims@eau.ee>\n"
-"Language-Team: Estonian <et@li.org>\n"
+"POT-Creation-Date: 2011-03-31 19:00+0200\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
+"Last-Translator: mitr <mitr@volny.cz>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:109
 #, c-format
@@ -24,7 +23,7 @@ msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
 #: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
-#: modules/files.c:179
+#: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "Viga `%s' lugemisel:%s"
@@ -35,13 +34,13 @@ msgid "Error creating `%s': %s"
 msgstr "Viga `%s' loomisel: %s"
 
 #: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
-#: modules/files.c:162
+#: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Viga `%s' omaniku muutmisel: %s"
 
 #: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
-#: modules/files.c:194 modules/files.c:208
+#: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "Viga `%s' kirjutamisel: %s"
@@ -144,24 +143,24 @@ msgid "Account is not locked.\n"
 msgstr "Konto ei ole lukustatud.\n"
 
 #: apps/lchage.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Minimaalne:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:164
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Maksimaalne:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:168
-#, fuzzy, c-format
+#, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Hoiatus:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Tegevusetu:\t%d\n"
+msgstr ""
 
 #: apps/lchage.c:176 apps/lchage.c:183 apps/lchage.c:192 apps/lchage.c:202
 msgid "Never"
@@ -322,14 +321,14 @@ msgid "Group %s could not be modified: %s\n"
 msgstr "Gruppi %s pole võimalik muuta: %s\n"
 
 #: apps/lid.c:49 apps/lid.c:60
-#, fuzzy, c-format
+#, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "Viga %s eemaldamisel: %s.\n"
+msgstr ""
 
 #: apps/lid.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "%s does not exist\n"
-msgstr "Kasutajat %s ei ole olemas.\n"
+msgstr ""
 
 #: apps/lid.c:146
 #, c-format
@@ -422,17 +421,22 @@ msgstr "Paroolid ei ühti, proovi uuesti.\n"
 msgid "Password change canceled.\n"
 msgstr "Parooli muutmisest loobutud.\n"
 
-#: apps/lpasswd.c:186 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:161 apps/lpasswd.c:178
+#, c-format
+msgid "Error reading from file descriptor %d.\n"
+msgstr ""
+
+#: apps/lpasswd.c:199 apps/luseradd.c:285 apps/luseradd.c:295
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Viga kasutaja %s parooli seadmisel: %s.\n"
 
-#: apps/lpasswd.c:195
+#: apps/lpasswd.c:208
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Viga grupi %s parooli seadmisel: %s.\n"
 
-#: apps/lpasswd.c:207
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Password changed.\n"
 msgstr "Parool on muudetud.\n"
@@ -498,9 +502,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "Viga %s eemaldamisel: %s.\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool.\n"
-msgstr "Viga postispuuli loomisel.\n"
+msgstr ""
 
 #: apps/lusermod.c:178 apps/lusermod.c:191
 #, c-format
@@ -518,9 +522,9 @@ msgid "User %s could not be unlocked: %s.\n"
 msgstr "Kasutajat %s pole võimalik lukust lahti teha: %s.\n"
 
 #: apps/lusermod.c:236
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Gruppi %jd ei ole olemas\n"
+msgstr ""
 
 #: apps/lusermod.c:295
 #, c-format
@@ -663,15 +667,13 @@ msgstr ""
 msgid "unknown error"
 msgstr "tundmatu viga"
 
-#: lib/misc.c:157
-#, fuzzy
+#: lib/misc.c:158
 msgid "invalid number"
-msgstr "Vigane kasutaja ID %s\n"
+msgstr ""
 
-#: lib/misc.c:171
-#, fuzzy
+#: lib/misc.c:172
 msgid "invalid ID"
-msgstr "Vigane ID %s\n"
+msgstr ""
 
 #: lib/modules.c:61
 #, c-format
@@ -750,9 +752,9 @@ msgid "user %jd has no name"
 msgstr ""
 
 #: lib/user.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "group %jd has no name"
-msgstr "Gruppi %jd ei ole olemas\n"
+msgstr ""
 
 #: lib/user.c:336
 msgid "user has neither a name nor an UID"
@@ -777,105 +779,104 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "viga faili lukustamisel: %s"
 
-#: lib/util.c:706
-#, fuzzy, c-format
+#: lib/util.c:696
+#, c-format
 msgid "couldn't get default security context: %s"
-msgstr "vaike turvakonteksti ei ole võimalik seada: %s"
+msgstr ""
 
-#: lib/util.c:733
+#: lib/util.c:723
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "turvakonteksti `%s' saamine ei ole võimalik: %s"
 
-#: lib/util.c:739 lib/util.c:771
+#: lib/util.c:729 lib/util.c:761
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "vaike turvakonteksti seadistamine `%s'-ile ei ole võimalik: %s"
 
-#: lib/util.c:763
-#, fuzzy, c-format
+#: lib/util.c:753
+#, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "turvakonteksti `%s' saamine ei ole võimalik: %s"
+msgstr ""
 
-#: modules/files.c:109 modules/files.c:443 modules/files.c:770
-#: modules/files.c:1017 modules/files.c:1191 modules/files.c:1422
-#: modules/files.c:1506 modules/files.c:1728 modules/files.c:1899
-#: modules/files.c:1916 modules/files.c:2005 modules/files.c:2024
-#: modules/files.c:2092 modules/files.c:2113 modules/files.c:2210
-#: modules/files.c:2229 modules/files.c:2288 modules/files.c:2307
-#: modules/files.c:2403 modules/files.c:2418
+#: modules/files.c:110 modules/files.c:445 modules/files.c:772
+#: modules/files.c:1019 modules/files.c:1193 modules/files.c:1424
+#: modules/files.c:1508 modules/files.c:1730 modules/files.c:1901
+#: modules/files.c:1918 modules/files.c:2007 modules/files.c:2026
+#: modules/files.c:2094 modules/files.c:2115 modules/files.c:2212
+#: modules/files.c:2231 modules/files.c:2290 modules/files.c:2309
+#: modules/files.c:2405 modules/files.c:2420
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' avamine pole võimalik: %s"
 
-#: modules/files.c:121 modules/files.c:150 modules/files.c:216
-#: modules/files.c:782 modules/files.c:1027 modules/files.c:1203
+#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s'-i polnud võimalik esitada: %s"
 
-#: modules/files.c:132
+#: modules/files.c:133
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "viga `%s' loomisel: %s"
 
-#: modules/files.c:145
+#: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "on olemas varundfail  %s, mis ei ole tavaline fail"
 
-#: modules/files.c:224
+#: modules/files.c:226
 msgid "backup file size mismatch"
 msgstr "varundfaili suurus ei sobi"
 
-#: modules/files.c:671
+#: modules/files.c:673
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr ""
 
-#: modules/files.c:793 modules/files.c:1035 modules/files.c:1212
+#: modules/files.c:795 modules/files.c:1037 modules/files.c:1214
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s'-st lugemine pole võimalik: %s"
 
-#: modules/files.c:802
+#: modules/files.c:804
 msgid "entry already present in file"
 msgstr "failis on üksus juba olemas"
 
-#: modules/files.c:809 modules/files.c:819 modules/files.c:830
-#: modules/files.c:1271 modules/files.c:1279 modules/files.c:1287
+#: modules/files.c:811 modules/files.c:821 modules/files.c:832
+#: modules/files.c:1273 modules/files.c:1281 modules/files.c:1289
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s'-i kirjutamine pole võimalik: %s"
 
-#: modules/files.c:990
+#: modules/files.c:992
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "üksuse objektil puudub atribuut %s"
 
-#: modules/files.c:1057
-#, fuzzy
+#: modules/files.c:1059
 msgid "entry with conflicting name already present in file"
-msgstr "failis on üksus juba olemas"
+msgstr ""
 
-#: modules/files.c:1771
+#: modules/files.c:1773
 msgid "`:' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1783 modules/ldap.c:1560 modules/ldap.c:1833
+#: modules/files.c:1785 modules/ldap.c:1561 modules/ldap.c:1838
 msgid "error encrypting password"
 msgstr "parooli krüpteerimise viga"
 
-#: modules/files.c:2625 modules/ldap.c:2484
+#: modules/files.c:2627 modules/ldap.c:2489
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2717 modules/files.c:2797
+#: modules/files.c:2719 modules/files.c:2799
 msgid "not executing with superuser privileges"
 msgstr "superkasutaja õigustega ei käivitata"
 
-#: modules/files.c:2810
+#: modules/files.c:2812
 msgid "no shadow file present -- disabling"
 msgstr "varifail puudub - keelatud"
 
@@ -960,86 +961,86 @@ msgstr "LDAP serverit polnud võimalik siduda"
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
 msgstr "LDAP serverit polnud võimalik siduda, esmalt üritati `%s': %s"
 
-#: modules/ldap.c:1322
+#: modules/ldap.c:1323
 #, c-format
 msgid "user object had no %s attribute"
 msgstr "kasutaja objektil puudub atribuut %s"
 
-#: modules/ldap.c:1331
+#: modules/ldap.c:1332
 #, c-format
 msgid "user object was created with no `%s'"
 msgstr "kasutaja objekt loodi `%s'-ta"
 
-#: modules/ldap.c:1351
+#: modules/ldap.c:1352
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse loomise viga: %s"
 
-#: modules/ldap.c:1377 modules/ldap.c:1621
+#: modules/ldap.c:1378 modules/ldap.c:1622
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse muutmise viga: %s"
 
-#: modules/ldap.c:1402
+#: modules/ldap.c:1403
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse ümbernimetamise viga: %s"
 
-#: modules/ldap.c:1449
+#: modules/ldap.c:1450
 #, c-format
 msgid "object had no %s attribute"
 msgstr "objektil puudus atribuut %s"
 
-#: modules/ldap.c:1467
+#: modules/ldap.c:1468
 #, c-format
 msgid "error removing LDAP directory entry: %s"
 msgstr "LDAP kataloogi üksuse eemaldamise viga: %s"
 
-#: modules/ldap.c:1519 modules/ldap.c:1535 modules/ldap.c:1654
-#: modules/ldap.c:1753
+#: modules/ldap.c:1520 modules/ldap.c:1536 modules/ldap.c:1655
+#: modules/ldap.c:1754
 #, c-format
 msgid "object has no %s attribute"
 msgstr "objektil puudub atribuut %s"
 
-#: modules/ldap.c:1550
+#: modules/ldap.c:1551
 msgid "unsupported password encryption scheme"
 msgstr ""
 
-#: modules/ldap.c:1679
+#: modules/ldap.c:1680
 msgid "no such object in LDAP directory"
 msgstr "LDAP kataloogis puudub selline objekt"
 
-#: modules/ldap.c:1691
+#: modules/ldap.c:1692
 #, c-format
 msgid "no `%s' attribute found"
 msgstr "`%s'-i atribuuti ei leitud"
 
-#: modules/ldap.c:1864
+#: modules/ldap.c:1869
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "parooli seadmisel LDAP kataloogile %s tekkis viga: %s"
 
-#: modules/ldap.c:2520
+#: modules/ldap.c:2525
 msgid "LDAP Server Name"
 msgstr "LDAP serverinimi"
 
-#: modules/ldap.c:2526
+#: modules/ldap.c:2531
 msgid "LDAP Search Base DN"
 msgstr "LDAP sidumise baasnumber"
 
-#: modules/ldap.c:2532
+#: modules/ldap.c:2537
 msgid "LDAP Bind DN"
 msgstr "LDAP sidumise number"
 
-#: modules/ldap.c:2539
+#: modules/ldap.c:2544
 msgid "LDAP Bind Password"
 msgstr "LDAP sidumise parool"
 
-#: modules/ldap.c:2545
+#: modules/ldap.c:2550
 msgid "LDAP SASL User"
 msgstr "LDAP SASL kasutaja"
 
-#: modules/ldap.c:2552
+#: modules/ldap.c:2557
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL kasutaja autoriseerimine"
 
@@ -1075,9 +1076,8 @@ msgid "error creating mail spool for user"
 msgstr "kasutajale postispuuleri loomise viga"
 
 #: python/admin.c:887
-#, fuzzy
 msgid "error removing mail spool for user"
-msgstr "kasutajale postispuuleri loomise viga"
+msgstr ""
 
 #: samples/lookup.c:63
 #, c-format
@@ -1136,40 +1136,3 @@ msgstr "Kasutaja vaikeatribuutide saamine:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kasutajastruktuuri kopeerimine:\n"
-
-#~ msgid "could not convert internal data to LDAPMods"
-#~ msgstr "sisemisi andmeid ei saa konventeerida LDAPMods-i"
-
-#, fuzzy
-#~ msgid "Shell not changed: input error.\n"
-#~ msgstr "Kesta ei muudetud: %s\n"
-
-#~ msgid "could not search LDAP server"
-#~ msgstr "LDAP serverit polnud võimalik otsida"
-
-#~ msgid "LDAP server appears to have no root DSE"
-#~ msgstr "Tundub, et LDAP serveril puudub andmekeskjaam (DSE)"
-
-#~ msgid "error mapping name to LDAP distinguished name"
-#~ msgstr "viga nime kujutamise LDAP väljapaistvaks nimeks"
-
-#~ msgid "error mapping name to LDAP base distinguished name"
-#~ msgstr "nime kujutamise viga LDAP väljapaistvaks baasnimeks"
-
-#~ msgid "Error initializing %s.\n"
-#~ msgstr "Viga %s lähtestamisel.\n"
-
-#~ msgid "Group %s could not be deleted.\n"
-#~ msgstr "Gruppi %s ei saa kustutada.\n"
-
-#~ msgid "Group %s could not be modified.\n"
-#~ msgstr "Gruppi %s muutmine ei ole võimalik.\n"
-
-#~ msgid "error initializing module"
-#~ msgstr "viga mooduli lähtestamisel"
-
-#~ msgid "Cyrus SASL error creating user: %s: %s"
-#~ msgstr "Cyrus SASL viga kasutaja loomisel: %s: %s"
-
-#~ msgid "Cyrus SASL error removing user: %s: %s"
-#~ msgstr "Cyrus SASL viga kasutaja eemaldamisel: %s: %s"
