@@ -879,23 +879,13 @@ run_list(struct lu_context *context,
 		} else {
 			success = logic_function(success, tsuccess);
 		}
-		if (firsterror != NULL) {
-			if (*firsterror == NULL) {
-				/* Make this the error we report. */
-				*firsterror = lasterror;
-				lasterror = NULL;
-			} else {
-				/* Already have an error, discard. */
-				if (lasterror != NULL) {
-					lu_error_free(&lasterror);
-				}
-			}
-		} else {
-			/* Can't report this error. */
-			if (lasterror != NULL) {
-				lu_error_free(&lasterror);
-			}
-		}
+		if (*firsterror == NULL) {
+			/* Make this the error we report. */
+			*firsterror = lasterror;
+			lasterror = NULL;
+		} else if (lasterror != NULL)
+			/* Already have an error, discard. */
+			lu_error_free(&lasterror);
 	}
 
 	return success;
