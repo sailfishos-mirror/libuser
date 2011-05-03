@@ -1,3 +1,7 @@
+2011-05-03  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.c (run_list): Use a better assertion.
+
 2011-03-31  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.57.2.

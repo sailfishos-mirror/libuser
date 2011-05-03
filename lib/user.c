@@ -751,7 +751,7 @@ run_list(struct lu_context *context,
 
 	g_assert(context != NULL);
 	g_assert(context->module_names != NULL);
-	g_assert(context->modules != NULL);
+	g_assert(list != NULL);
 	g_assert(entity != NULL);
 	g_assert(logic_function != NULL);
 	g_assert((id == user_lookup_name) ||
