@@ -1,3 +1,17 @@
+# FIXME: remove this workaround after bugzilla.gnome.org #657377 is fixed
+setup-build-workaround.stamp:
+	-@if test "$(abs_srcdir)" != "$(abs_builddir)" ; then \
+	   echo 'WORKAROUND: Preparing build'; \
+	   test -d $(abs_srcdir)/tmpl && \
+	       { cp -r $(abs_srcdir)/tmpl $(abs_builddir)/; \
+		 chmod -R u+w $(abs_builddir)/tmpl; } \
+	fi
+	@touch setup-build.stamp
+
+setup.stamp: setup-build-workaround.stamp
+
+# Note that there is another workaround at the bottom of this file!
+
 ## Process this file with automake to produce Makefile.in
 
 # This is a blank Makefile.am for using gtk-doc.
@@ -14,7 +28,7 @@ DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 # The directory containing the source code. Relative to $(srcdir).
 # gtk-doc will search all .c & .h files beneath here for inline comments
 # documenting functions and macros.
-DOC_SOURCE_DIR=../../lib
+DOC_SOURCE_DIR=$(abs_top_srcdir)/lib
 
 # Extra options to supply to gtkdoc-scan.
 SCAN_OPTIONS=
@@ -51,3 +65,16 @@ GTKDOC_LIBS =
 DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 
 include $(srcdir)/gtk-doc.make
+
+# FIXME: remove this workaround after updating to gtk-doc >= 1.18
+# This code is based on git version of dist-hook in gtk-doc.make
+dist-hook: dist-check-gtkdoc dist-hook-local
+	@mkdir $(distdir)/tmpl
+	@mkdir $(distdir)/html
+	@-cp ./tmpl/*.sgml $(distdir)/tmpl
+	@cp ./html/* $(distdir)/html
+	@-cp ./$(DOC_MODULE).pdf $(distdir)/
+	@-cp ./$(DOC_MODULE).types $(distdir)/
+	@-cp ./$(DOC_MODULE)-sections.txt $(distdir)/
+	@cd $(distdir) && rm -f $(DISTCLEANFILES)
+	@$(GTKDOC_REBASE) --online --relative --html-dir=$(distdir)/html
