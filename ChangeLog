@@ -1,5 +1,7 @@
 2011-08-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/libuser-docs.sgml: Regenerate with gtk-doc 1.17.
+
 	* docs/reference/Makefile.am: Update from gtk-doc 1.17.
 
 	* docs/reference/Makefile.am (setup-build-workaround.stamp)
