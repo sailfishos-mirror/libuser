@@ -1,11 +1,14 @@
 2011-08-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/Makefile.am: Update from gtk-doc 1.17.
+
 	* docs/reference/Makefile.am (setup-build-workaround.stamp)
 	(setup.stamp): Workaround incorrect gtk-doc handling of tmpl when
 	$(builddir) != $(srcdir).
 	(DOC_SOURCE_DIR): Workaround incorrect gtk-doc handling of sources when
 	$(builddir) != $(srcdir).
 	(dist-hook): Workaround references to $(build) instead of $(builddir).
+
 
 2011-05-03  Miloslav Trmač  <mitr@redhat.com>
 
