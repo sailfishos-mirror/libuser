@@ -1,5 +1,7 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/Makefile.am (TESTS): Uncomment to enable gtk-doc tests.
+
 	* lib/user.h (struct lu_context): Document.
 	(lu_context_t): Document, mark as deprecated.  All users changed.
 	* docs/reference/tmpl/user.sgml: Regenerate.
