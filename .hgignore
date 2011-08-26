@@ -15,15 +15,6 @@
 ^docs/Makefile\.in$
 ^docs/reference/Makefile\.in$
 ^docs/reference/gtk-doc\.make
-^docs/reference/html.*
-^docs/reference/libuser\.interfaces
-^docs/reference/libuser\.prerequisites
-^docs/reference/libuser-unused\.txt
-^docs/reference/libuser-undocumented\.txt
-^docs/reference/libuser-undeclared\.txt
-^docs/reference/sgml\.stamp
-^docs/reference/tmpl\.stamp
-^docs/reference/xml.*
 ^m4.*
 ^po/.*\.gmo$
 ^po/Makefile\.in\.in$

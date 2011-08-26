@@ -1,5 +1,11 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/libuser-decl-list.txt
+	* docs/reference/libuser-decl.txt
+	* docs/reference/libuser.args
+	* docs/reference/libuser.hierarchy
+	* docs/reference/libuser.signals: Stop tracking generated files.
+
 	* docs/reference/tmpl/prompt.sgml: Move contents...
 	* lib/prompt.c: ... here.
 
