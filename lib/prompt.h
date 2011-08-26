@@ -49,9 +49,11 @@ struct lu_prompt {
 	const char *default_value;
 	/* The user's response.  This is set by the prompter function. */
 	char *value;
+#ifndef __GTK_DOC_IGNORE__
 	/* A function which can free the user's response.  This is set by the
 	 * prompter function.  If NULL, the response will not be freed, ever. */
 	void (*free_value) (void *);
+#endif
 };
 
 /* A prompter function. */

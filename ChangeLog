@@ -1,3 +1,8 @@
+2011-08-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/prompt.h (lu_prompt): Workaround a gtk-doc parser bug, treating
+	free_value as an external symbol.
+
 2011-08-25  Miloslav Trmač  <mitr@redhat.com>
 
 	* docs/reference/libuser-docs.sgml: Regenerate with gtk-doc 1.17.
