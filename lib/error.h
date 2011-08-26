@@ -76,6 +76,8 @@ typedef enum lu_status lu_status_t;
  *
  * Error and status information.
  */
+/* gtk-doc is dumb. */
+struct lu_error;
 struct lu_error {
 	enum lu_status code;
 	char *string;

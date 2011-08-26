@@ -1,10 +1,14 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/error.h (struct lu_error): Add a redundant declaration to let
+	gtk-doc recognize existence of the type.
+
 	* lib/error.h (lu_status_t): Split; should be marked as deprecated, but
 	gtk-doc can't handle an enum typedef.  All users changed.
 	(struct lu_error): Add minimal documentation (fields not documented
 	because gtk-doc doesn't find them).
 	(lu_error_t): Document, mark as deprecated.  All users changed.
+
 	* docs/reference/tmpl/error.sgml: Regenerate.
 	* docs/reference/libuser-sections.txt: Add lu_error and lu_error_t.
 
