@@ -26,6 +26,30 @@
 #include "user.h"
 #include "user_private.h"
 
+/**
+ * SECTION:error
+ * @short_description: Functions for allocating and manipulating #lu_error
+ * structures.
+ * @include: libuser/error.h
+ *
+ * <filename>error.h</filename> includes declarations for allocating and
+ * manipulating #lu_error structures.  These structures hold error and status
+ * information passed between libuser, its modules, and applications.
+ *
+ * A struct #lu_error contains an error code and a human-readable, possibly
+ * translated error string.  The error string uses the encoding specified by
+ * the %LC_CTYPE locale category.
+ */
+
+/**
+ * lu_strerror:
+ * @error: An error
+ *
+ * Converts an #lu_error structure to a string describing the error.  If the
+ * @error->string is %NULL, returns a text representation of @error->code.
+ *
+ * Returns: An error string valid at least until @error is freed.
+ */
 const char *
 lu_strerror(struct lu_error *error)
 {
@@ -88,10 +112,18 @@ lu_strerror(struct lu_error *error)
 	return _("unknown error");
 }
 
+/**
+ * lu_error_is_success:
+ * @status: An error code
+ *
+ * Check if the error code held by an error structure is a success code.
+ *
+ * Returns: a #gboolean indicating whether or not the error is a success code.
+ */
 gboolean
-lu_error_is_success(enum lu_status code)
+lu_error_is_success(enum lu_status status)
 {
-	switch (code) {
+	switch (status) {
 		case lu_success:
 			return TRUE;
 		default:
@@ -100,10 +132,18 @@ lu_error_is_success(enum lu_status code)
 	return FALSE;
 }
 
+/**
+ * lu_error_is_warning:
+ * @status: An error code
+ *
+ * Check if the error code held by an error structure is a warning code.
+ *
+ * Returns: a #gboolean indicating whether or not the error is a warning code.
+ */
 gboolean
-lu_error_is_warning(enum lu_status code)
+lu_error_is_warning(enum lu_status status)
 {
-	switch (code) {
+	switch (status) {
 		case lu_warning_config_disabled:
 			return TRUE;
 		default:
@@ -112,10 +152,18 @@ lu_error_is_warning(enum lu_status code)
 	return FALSE;
 }
 
+/**
+ * lu_error_is_error:
+ * @status: An error code
+ *
+ * Check if the error code held by an error structure is an error code.
+ *
+ * Returns: a #gboolean indicating whether or not the error is an error code.
+ */
 gboolean
-lu_error_is_error(enum lu_status code)
+lu_error_is_error(enum lu_status status)
 {
-	switch (code) {
+	switch (status) {
 		case lu_error_generic:
 		case lu_error_privilege:
 		case lu_error_access_denied:
@@ -144,6 +192,16 @@ lu_error_is_error(enum lu_status code)
 	return FALSE;
 }
 
+/**
+ * lu_error_new:
+ * @error: A pointer to a struct #lu_error * which will hold the newly-created
+ * error structure. It must point to #NULL before calling this function.
+ * @code: An error code
+ * @fmt: Format string describing the error. If #NULL, a default string is used.
+ * @...: Arguments for @fmt, if necessary
+ *
+ * Creates a new #lu_error structure.
+ */
 void
 lu_error_new(struct lu_error **error, enum lu_status code,
 	     const char *fmt, ...)
@@ -166,6 +224,13 @@ lu_error_new(struct lu_error **error, enum lu_status code,
 	}
 }
 
+/**
+ * lu_error_free:
+ * @error: A pointer to a pointer to the structure to be freed.  The pointer is
+ * set to %NULL after the error is freed.
+ *
+ * Frees an #lu_error structure.
+ */
 void
 lu_error_free(struct lu_error **error)
 {

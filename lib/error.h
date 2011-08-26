@@ -94,8 +94,15 @@ struct lu_error {
 typedef struct lu_error lu_error_t;
 #endif
 
-/* Checks that a passed-in error pointer is not already populated, and calls
-   abort() if it is. */
+/**
+ * LU_ERROR_CHECK:
+ * @err_p_p: A pointer to a struct #lu_error * which will be checked.
+ *
+ * Checks that the given pointer to a pointer to a struct does not already
+ * point to a valid #lu_error structure, and calls abort() on failure.  This
+ * macro is used by many internal functions to check that an error has not
+ * already occurred when they are invoked.
+ */
 #define LU_ERROR_CHECK(err_p_p) \
 do { \
 	struct lu_error **__err = (err_p_p); \
@@ -110,7 +117,6 @@ do { \
 	} \
 } while(0)
 
-/* Functions for allocating and freeing error objects. */
 void lu_error_new(struct lu_error **error, enum lu_status code,
 		  const char *fmt, ...) G_GNUC_PRINTF(3, 4);
 const char *lu_strerror(struct lu_error *error);

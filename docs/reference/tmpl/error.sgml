@@ -1,26 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-error
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Functions for allocating and manipulating #lu_error structures.
+
 
 <!-- ##### SECTION Long_Description ##### -->
-<para>
-<filename>error.h</filename> includes declarations for allocating and
-manipulating #lu_error structures.  These structures hold error and status
-information passed between libuser, its modules, and applications.
-</para>
 
-<para>
-A struct #lu_error contains an error code and a human-readable, possibly
-translated error string.  The error string is using the encoding specified
-by %LC_CTYPE locale category.
-</para>
 
 <!-- ##### SECTION See_Also ##### -->
-<para>
 
-</para>
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -29,83 +17,59 @@ by %LC_CTYPE locale category.
 
 
 <!-- ##### STRUCT lu_error ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### TYPEDEF lu_error_t ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### MACRO LU_ERROR_CHECK ##### -->
-<para>
-Checks that the given pointer to a pointer to a struct does not already point
-to a valid #lu_error structure.  This macro is used by many internal functions
-to check that an error has not already occurred when they are invoked.
-</para>
 
-@err_p_p: A pointer to a struct #lu_error * which will be checked.  If there
+
+@err_p_p: 
 
 
 <!-- ##### FUNCTION lu_error_new ##### -->
-<para>
-Creates a new #lu_error structure.
-</para>
 
-@error: A pointer to a struct #lu_error * which will hold the newly-created
-error structure. It must point to #NULL before calling this function.
-@code: An error code
-@fmt: Format string describing the error. If #NULL, a default string is used.
-@Varargs: Arguments for @fmt, if necessary
+
+@error: 
+@code: 
+@fmt: 
+@Varargs: 
 
 
 <!-- ##### FUNCTION lu_error_free ##### -->
-<para>
-Frees an #lu_error structure.
-</para>
 
-@error: A pointer to a pointer to the structure to be freed.  The pointer is set
-to NULL after the error is freed.
+
+@error: 
 
 
 <!-- ##### FUNCTION lu_error_is_success ##### -->
-<para>
-Check if the error code held by an error structure is a success code.
-</para>
 
-@status: An error code
-@Returns: a #gboolean indicating whether or not the error is a success code.
+
+@status: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_error_is_warning ##### -->
-<para>
-Check if the error code held by an error structure is a warning code.
-</para>
 
-@status: An error code
-@Returns: a #gboolean indicating whether or not the error is a warning code.
+
+@status: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_error_is_error ##### -->
-<para>
-Check if the error code held by an error structure is an error code.
-</para>
 
-@status: An error code
-@Returns: a #gboolean indicating whether or not the error is an error code.
+
+@status: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_strerror ##### -->
-<para>
-Converts an #lu_error structure to a string describing the error.
-If the @error->string is %NULL, returns a text representation of
- @error->code.
-</para>
 
-@error: An error
-@Returns: error string valid at least until @error is freed.
+
+@error: 
+@Returns: 
 
 
