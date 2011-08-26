@@ -26,7 +26,26 @@
 
 G_BEGIN_DECLS
 
-/* Opaque data type. */
+/**
+ * lu_ent:
+ *
+ * An opaque structure used to hold data about a particular user or group
+ * account.
+ *
+ * Each struct lu_ent contains two sets of attributes: pending and current.
+ * The pending attributes are modified by default, the current attributes are
+ * modified by functions ending with _current.
+ *
+ * Each attribute contains a list of values.  The list is never empty; removing
+ * the last entry from the list removes the list completely.
+ */
+struct lu_ent;
+/**
+ * lu_ent_t:
+ *
+ * An alias for struct #lu_ent.
+ * Deprecated: 0.57.3: Use struct #lu_ent directly.
+ */
 typedef struct lu_ent lu_ent_t;
 
 /* Attributes carried by all user structures. */
@@ -67,47 +86,47 @@ typedef struct lu_ent lu_ent_t;
 #define LU_EMAIL		"mail"
 
 /* Function to allocate a new entity structure, or destroy one. */
-lu_ent_t *lu_ent_new(void);
-void lu_ent_free(lu_ent_t *ent);
+struct lu_ent *lu_ent_new(void);
+void lu_ent_free(struct lu_ent *ent);
 
 /* Deep-copy the contents of one entity structure into another. */
-void lu_ent_copy(lu_ent_t *source, lu_ent_t *dest);
+void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
 
 /* Entity structures have a limited form of version-control, and that gives
  * us the ability to roll back changes. */
-void lu_ent_revert(lu_ent_t *ent);
+void lu_ent_revert(struct lu_ent *ent);
 
 /* This function rolls changes forward. */
-void lu_ent_commit(lu_ent_t *ent);
+void lu_ent_commit(struct lu_ent *ent);
 
 /* These functions are used to set and query "current" data attributes, the
  * values the library itself usually sets. */
-GValueArray *lu_ent_get_current(lu_ent_t *ent, const char *attribute);
-gboolean lu_ent_has_current(lu_ent_t *ent, const char *attribute);
-void lu_ent_set_current(lu_ent_t *ent, const char *attr,
+GValueArray *lu_ent_get_current(struct lu_ent *ent, const char *attribute);
+gboolean lu_ent_has_current(struct lu_ent *ent, const char *attribute);
+void lu_ent_set_current(struct lu_ent *ent, const char *attr,
 			const GValueArray *values);
-void lu_ent_add_current(lu_ent_t *ent, const char *attr,
+void lu_ent_add_current(struct lu_ent *ent, const char *attr,
 			const GValue *value);
-void lu_ent_clear_current(lu_ent_t *ent, const char *attr);
-void lu_ent_clear_all_current(lu_ent_t *ent);
-void lu_ent_del_current(lu_ent_t *ent, const char *attr,
+void lu_ent_clear_current(struct lu_ent *ent, const char *attr);
+void lu_ent_clear_all_current(struct lu_ent *ent);
+void lu_ent_del_current(struct lu_ent *ent, const char *attr,
 			const GValue *value);
-GList *lu_ent_get_attributes_current(lu_ent_t *ent);
+GList *lu_ent_get_attributes_current(struct lu_ent *ent);
 
 /* These functions are used to set and query "pending" data attributes, which
  * will take effect when we write this entry back out. */
-GValueArray *lu_ent_get(lu_ent_t *ent, const char *attribute);
-gboolean lu_ent_has(lu_ent_t *ent, const char *attribute);
-void lu_ent_set(lu_ent_t *ent, const char *attr,
+GValueArray *lu_ent_get(struct lu_ent *ent, const char *attribute);
+gboolean lu_ent_has(struct lu_ent *ent, const char *attribute);
+void lu_ent_set(struct lu_ent *ent, const char *attr,
 		const GValueArray *values);
-void lu_ent_add(lu_ent_t *ent, const char *attr,
+void lu_ent_add(struct lu_ent *ent, const char *attr,
 		const GValue *value);
-void lu_ent_clear(lu_ent_t *ent, const char *attr);
-void lu_ent_clear_all(lu_ent_t *ent);
-void lu_ent_del(lu_ent_t *ent, const char *attr, const GValue *value);
-GList *lu_ent_get_attributes(lu_ent_t *ent);
+void lu_ent_clear(struct lu_ent *ent, const char *attr);
+void lu_ent_clear_all(struct lu_ent *ent);
+void lu_ent_del(struct lu_ent *ent, const char *attr, const GValue *value);
+GList *lu_ent_get_attributes(struct lu_ent *ent);
 
-void lu_ent_dump(lu_ent_t *ent, FILE *fp);
+void lu_ent_dump(struct lu_ent *ent, FILE *fp);
 
 G_END_DECLS
 

@@ -7,20 +7,9 @@ Functions for manipulating lu_ent structures.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-entity.h declares functions for manipulating lu_ent structures, which are used
+entity.h declares functions for manipulating #lu_ent structures, which are used
 by libuser, its modules, and applications to hold data about a particular
 user or group account.
-</para>
-
-<para>
-Each struct lu_ent contains two sets of attributes: pending and current.
-The pending attributes are modified by default, the current attributes
-are modified by functions ending with _current.
-</para>
-
-<para>
-Each attribute contains a list of values.  The list is never empty; removing
-the last entry from the list removes the list completely.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -32,6 +21,18 @@ the last entry from the list removes the list completely.
 
 
 <!-- ##### SECTION Image ##### -->
+
+
+<!-- ##### STRUCT lu_ent ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF lu_ent_t ##### -->
+<para>
+
+</para>
 
 
 <!-- ##### MACRO LU_USERNAME ##### -->

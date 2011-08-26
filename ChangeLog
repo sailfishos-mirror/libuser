@@ -1,5 +1,11 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/tmpl/entity.sgml (SECTION Long_Description): Move
+	struct lu_ent documentation ...
+	* lib/entity.h (struct lu_ent): ... here.
+	(lu_ent_t): Document, mark as deprecated.  All users changed.
+	* docs/reference/libuser-sections.txt: Add lu_ent and lu_ent_t.
+
 	* lib/prompt.h (lu_prompt): Workaround a gtk-doc parser bug, treating
 	free_value as an external symbol.
 

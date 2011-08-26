@@ -17,6 +17,9 @@ lu_values_equal
 
 <SECTION>
 <FILE>entity</FILE>
+lu_ent
+lu_ent_t
+
 LU_USERNAME
 LU_USERPASSWORD
 LU_UIDNUMBER
