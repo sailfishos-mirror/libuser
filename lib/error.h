@@ -68,7 +68,9 @@ enum lu_status {
 	lu_error_invalid_module_combination,
 };
 #ifndef __GTK_DOC_IGNORE__
+#ifndef LU_DISABLE_DEPRECATED
 typedef enum lu_status lu_status_t;
+#endif
 #endif
 
 /**
@@ -82,6 +84,7 @@ struct lu_error {
 	enum lu_status code;
 	char *string;
 };
+#ifndef LU_DISABLE_DEPRECATED
 /**
  * lu_error_t:
  *
@@ -89,6 +92,7 @@ struct lu_error {
  * Deprecated: 0.57.3: Use struct #lu_error directly.
  */
 typedef struct lu_error lu_error_t;
+#endif
 
 /* Checks that a passed-in error pointer is not already populated, and calls
    abort() if it is. */

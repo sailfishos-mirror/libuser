@@ -1,5 +1,12 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.h (lu_ent_t)
+	* lib/error.h (lu_status_t, lu_error_t)
+	* lib/user.h (lu_context_t, lu_entity_type_t): Mark with #ifndef
+	LU_DISABLE_DEPRECATED.
+	* docs/reference/Makefile.am (SCAN_OPTIONS): Recognize
+	LU_DISABLE_DEPRECATED.
+
 	* docs/reference/Makefile.am (TESTS): Uncomment to enable gtk-doc tests.
 
 	* lib/user.h (struct lu_context): Document.

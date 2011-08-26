@@ -39,6 +39,7 @@ G_BEGIN_DECLS
  * state (to allow several independent callers in a single process).
  */
 struct lu_context;
+#ifndef LU_DISABLE_DEPRECATED
 /**
  * lu_context_t:
  *
@@ -46,6 +47,7 @@ struct lu_context;
  * Deprecated: 0.57.3: Use struct #lu_context directly.
  */
 typedef struct lu_context lu_context_t;
+#endif
 
 /* An enumeration which decides whether we want to modify information about
  * users or groups.  We don't support both simultaneously.  */
@@ -55,7 +57,9 @@ enum lu_entity_type {
 	lu_group,
 };
 #ifndef __GTK_DOC_IGNORE__
+#ifndef LU_DISABLE_DEPRECATED
 typedef enum lu_entity_type lu_entity_type_t;
+#endif
 #endif
 
 char *lu_value_strdup(const GValue *value);

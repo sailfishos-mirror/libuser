@@ -40,6 +40,7 @@ G_BEGIN_DECLS
  * the last entry from the list removes the list completely.
  */
 struct lu_ent;
+#ifndef LU_DISABLE_DEPRECATED
 /**
  * lu_ent_t:
  *
@@ -47,6 +48,7 @@ struct lu_ent;
  * Deprecated: 0.57.3: Use struct #lu_ent directly.
  */
 typedef struct lu_ent lu_ent_t;
+#endif
 
 /* Attributes carried by all user structures. */
 #define LU_USERNAME		"pw_name"
