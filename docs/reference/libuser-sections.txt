@@ -94,6 +94,8 @@ lu_prompt_console_quiet
 
 <SECTION>
 <FILE>user</FILE>
+lu_context
+lu_context_t
 lu_start
 lu_end
 

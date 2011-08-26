@@ -1,5 +1,10 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user.h (struct lu_context): Document.
+	(lu_context_t): Document, mark as deprecated.  All users changed.
+	* docs/reference/tmpl/user.sgml: Regenerate.
+	* docs/reference/libuser-sections.txt: Add lu_context and lu_context_t.
+
 	* lib/error.h (struct lu_error): Add a redundant declaration to let
 	gtk-doc recognize existence of the type.
 

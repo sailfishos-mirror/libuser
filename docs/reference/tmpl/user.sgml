@@ -26,6 +26,18 @@ modifications of the system information store.
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### STRUCT lu_context ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF lu_context_t ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### FUNCTION lu_start ##### -->
 <para>
 Initializes the libuser library.
