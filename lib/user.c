@@ -30,6 +30,17 @@
 #include "user_private.h"
 #include "internal.h"
 
+/**
+ * SECTION:user
+ * @short_description: Functions for initializing the library, looking up
+ * information, and making changes to the system information store.
+ * @include: libuser/user.h
+ *
+ * <filename>user.h</filename> contains declarations for functions which start
+ * up and shut down the libuser library, and for functions which perform lookup
+ * queries and modifications of the system information store.
+ */
+
 #define DEFAULT_ID 500
 
 enum lu_dispatch_id {
@@ -70,6 +81,23 @@ enum lu_dispatch_id {
 	groups_enumerate_by_user_full,
 };
 
+/**
+ * lu_start:
+ * @authname: Suggested client name to use when connecting to servers, or %NULL
+ * @auth_type: Whether auth_name is a user or a group
+ * @modules: A list of modules to use for queries (separated by whitespace or
+ * commas), or %NULL to use modules specified in the config file
+ * @create_modules: A list of modules to use for entity creation (separated by
+ * whitespace or commas), or %NULL to use modules specified in the config file
+ * @prompter: A function to use for getting information from the user
+ * @callback_data: Data for @prompter
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Initializes the libuser library.
+ *
+ * Returns: a context which should be freed by lu_end() on success, %NULL on
+ * failure
+ */
 struct lu_context *
 lu_start(const char *auth_name, enum lu_entity_type auth_type,
 	 const char *modules, const char *create_modules,
@@ -137,6 +165,12 @@ err_scache:
 	return NULL;
 }
 
+/**
+ * lu_end:
+ * @context: a context
+ *
+ * Destroys a libuser library context
+ */
 void
 lu_end(struct lu_context *context)
 {
@@ -1203,6 +1237,15 @@ lu_dispatch(struct lu_context *context,
 	return success;
 }
 
+/**
+ * lu_uses_elevated_privileges:
+ * @context: A context
+ *
+ * Checks if any module uses elevated privileges (e.g. modifies files that
+ * normal users can't modify).
+ *
+ * Returns: %TRUE if at least one module uses elevated privileges
+ */
 /* FIXME: error status, if any, is not reported to the caller */
 gboolean
 lu_uses_elevated_privileges (struct lu_context *context)
@@ -1216,6 +1259,17 @@ lu_uses_elevated_privileges (struct lu_context *context)
 	return ret;
 }
 
+/**
+ * lu_user_lookup_name:
+ * @context: A context
+ * @name: User name
+ * @ent: An entity filled with received information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Looks up an user by name.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_lookup_name(struct lu_context * context, const char *name,
 		    struct lu_ent * ent, struct lu_error ** error)
@@ -1226,6 +1280,17 @@ lu_user_lookup_name(struct lu_context * context, const char *name,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_group_lookup_name:
+ * @context: A context
+ * @name: Group name
+ * @ent: An entity filled with received information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Looks up a group by name.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_lookup_name(struct lu_context * context, const char *name,
 		     struct lu_ent * ent, struct lu_error ** error)
@@ -1236,6 +1301,17 @@ lu_group_lookup_name(struct lu_context * context, const char *name,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_user_lookup_id:
+ * @context: A context
+ * @uid: User ID
+ * @ent: An entity filled with received information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Looks up an user by UID.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_lookup_id(struct lu_context * context, uid_t uid,
 		  struct lu_ent * ent, struct lu_error ** error)
@@ -1245,6 +1321,17 @@ lu_user_lookup_id(struct lu_context * context, uid_t uid,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_group_lookup_id:
+ * @context: A context
+ * @gid: Group ID
+ * @ent: An entity filled with received information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Looks up a group by GID.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_lookup_id(struct lu_context * context, gid_t gid,
 		   struct lu_ent * ent, struct lu_error ** error)
@@ -1254,6 +1341,17 @@ lu_group_lookup_id(struct lu_context * context, gid_t gid,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_user_add:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with resulting
+ * account
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Creates an user in all modules specified for entity creation.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	    struct lu_error ** error)
@@ -1290,6 +1388,17 @@ lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_group_add:
+ * @context: A context
+ * @ent: An entity describing the group, on success updated with resulting
+ * account
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Creates a group in all modules specified for entity creation.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_add(struct lu_context * context, struct lu_ent * ent,
 	     struct lu_error ** error)
@@ -1309,6 +1418,17 @@ lu_group_add(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_user_modify:
+ * @context: A context
+ * @ent: An entity with pending modifications, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Modifies an user entity.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
@@ -1321,6 +1441,17 @@ lu_user_modify(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_user(context, ent, error);
 }
 
+/**
+ * lu_group_modify:
+ * @context: A context
+ * @ent: An entity with pending modifications, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Modifies a group entity.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
@@ -1333,6 +1464,16 @@ lu_group_modify(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_group(context, ent, error);
 }
 
+/**
+ * lu_user_delete:
+ * @context: A context
+ * @ent: An entity describing the user
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Deletes an user.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
@@ -1344,6 +1485,16 @@ lu_user_delete(struct lu_context * context, struct lu_ent * ent,
 			   NULL, error);
 }
 
+/**
+ * lu_group_delete:
+ * @context: A context
+ * @ent: An entity describing the group
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Deletes a group.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
@@ -1355,6 +1506,17 @@ lu_group_delete(struct lu_context * context, struct lu_ent * ent,
 			   NULL, error);
 }
 
+/**
+ * lu_user_lock:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Locks an user account.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	     struct lu_error ** error)
@@ -1367,6 +1529,17 @@ lu_user_lock(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_user(context, ent, error);
 }
 
+/**
+ * lu_user_unlock:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Unlocks an user account.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	       struct lu_error ** error)
@@ -1379,6 +1552,19 @@ lu_user_unlock(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_user(context, ent, error);
 }
 
+/**
+ * lu_user_unlock_nonempty:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Unlocks an user account.  If unlocking the account would result in an empty
+ * password field, it fails with %lu_error_unlock_empty.  Note that the
+ * password can still be empty.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
 			struct lu_error ** error)
@@ -1391,6 +1577,16 @@ lu_user_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_user(context, ent, error);
 }
 
+/**
+ * lu_user_islocked:
+ * @context: A context
+ * @ent: An entity describing the user
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Checks if an user account is locked.
+ *
+ * Returns: %TRUE if the account is locked in at least one module
+ */
 gboolean
 lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 		 struct lu_error ** error)
@@ -1404,6 +1600,19 @@ lu_user_islocked(struct lu_context * context, struct lu_ent * ent,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_user_setpass:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with current
+ * information and %LU_SHADOWLASTCHANGE
+ * @newpass: New password
+ * @crypted: Non-zero if @newpass is already encrypted
+ * @error: Filled with an #lu_error if an error occurs
+ *
+ * Changes an user's password.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 		const char *password, gboolean is_crypted,
@@ -1433,6 +1642,17 @@ lu_user_setpass(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_user_removepass:
+ * @context: A context
+ * @ent: An entity describing the user, on success updated with current
+ * information and %LU_SHADOWLASTCHANGE
+ * @error: Filled with an #lu_error if an error occurs
+ *
+ * Changes an user's password to an empty string.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 		   struct lu_error ** error)
@@ -1454,6 +1674,17 @@ lu_user_removepass(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_group_lock:
+ * @context: A context
+ * @ent: An entity describing the group, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Locks a group account
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	      struct lu_error ** error)
@@ -1468,6 +1699,17 @@ lu_group_lock(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_group(context, ent, error);
 }
 
+/**
+ * lu_group_unlock:
+ * @context: A context
+ * @ent: An entity describing the group, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Unlocks a group account.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 		struct lu_error ** error)
@@ -1482,6 +1724,19 @@ lu_group_unlock(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_group(context, ent, error);
 }
 
+/**
+ * lu_group_unlock_nonempty:
+ * @context: A context
+ * @ent: An entity describing the group, on success updated with current
+ * information
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Unlocks a group account.  If unlocking the account would result in an empty
+ * password field, it fails with %lu_error_unlock_empty.  Note that the
+ * password can still be empty.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
 			 struct lu_error ** error)
@@ -1496,6 +1751,16 @@ lu_group_unlock_nonempty(struct lu_context * context, struct lu_ent * ent,
 	       lu_refresh_group(context, ent, error);
 }
 
+/**
+ * lu_group_islocked:
+ * @context: A context
+ * @ent: An entity describing the group
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Checks if a group account is locked.
+ *
+ * Returns: %TRUE if the account is locked in at least one module
+ */
 gboolean
 lu_group_islocked(struct lu_context * context, struct lu_ent * ent,
 		  struct lu_error ** error)
@@ -1509,6 +1774,19 @@ lu_group_islocked(struct lu_context * context, struct lu_ent * ent,
 			   ent, NULL, error);
 }
 
+/**
+ * lu_group_setpass:
+ * @context: A context
+ * @ent: An entity describing the group, on success updated with current
+ * information and %LU_SHADOWLASTCHANGE
+ * @newpass: New password
+ * @crypted: Non-zero if @newpass is already encrypted
+ * @error: Filled with an #lu_error if an error occurs
+ *
+ * Changes a group password.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 		 const char *password, gboolean is_crypted,
@@ -1534,6 +1812,17 @@ lu_group_setpass(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_group_removepass:
+ * @context: A context
+ * @ent: An entity describing the group, on success udpated with current
+ * information and %LU_SHADOWLASTCHANGE
+ * @error: Filled with in #lu_error if an error occurs
+ *
+ * Changes a group password to an empty string.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 		    struct lu_error ** error)
@@ -1551,6 +1840,17 @@ lu_group_removepass(struct lu_context * context, struct lu_ent * ent,
 	return ret;
 }
 
+/**
+ * lu_users_enumerate:
+ * @context: A context
+ * @pattern: A glob-like pattern for user name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of all users matching a pattern.
+ *
+ * Returns: An array of strings, each representing one user name.  The array
+ * should be freed by the caller.
+ */
 GValueArray *
 lu_users_enumerate(struct lu_context * context, const char *pattern,
 		   struct lu_error ** error)
@@ -1562,6 +1862,17 @@ lu_users_enumerate(struct lu_context * context, const char *pattern,
 	return ret;
 }
 
+/**
+ * lu_groups_enumerate:
+ * @context: A context
+ * @pattern: A glob-like pattern for group name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of all groups matching a pattern.
+ *
+ * Returns: An array of strings, each representing one group name.  The array
+ * should be freed by the caller.
+ */
 GValueArray *
 lu_groups_enumerate(struct lu_context * context, const char *pattern,
 		    struct lu_error ** error)
@@ -1573,6 +1884,17 @@ lu_groups_enumerate(struct lu_context * context, const char *pattern,
 	return ret;
 }
 
+/**
+ * lu_users_enumerate_by_group:
+ * @context: A context
+ * @group: Group name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of all members of a group @group.
+ *
+ * Returns: An array of strings, each representing one user name.  The array
+ * should be freed by the caller.
+ */
 GValueArray *
 lu_users_enumerate_by_group(struct lu_context * context, const char *group,
 			    struct lu_error ** error)
@@ -1584,6 +1906,17 @@ lu_users_enumerate_by_group(struct lu_context * context, const char *group,
 	return ret;
 }
 
+/**
+ * lu_groups_enumerate_by_user:
+ * @context: A context
+ * @user: User name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of all groups containing an user @user.
+ *
+ * Returns: An array of strings, each representing one group name.  The array
+ * should be freed by the caller.
+ */
 GValueArray *
 lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 			    struct lu_error ** error)
@@ -1595,6 +1928,17 @@ lu_groups_enumerate_by_user(struct lu_context * context, const char *user,
 	return ret;
 }
 
+/**
+ * lu_users_enumerate_full:
+ * @context: A context
+ * @pattern: A glob-like pattern for user name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of entities, one for each user matching a pattern.
+ *
+ * Returns: A list of pointers to user entities.  The entities and the
+ * list should be freed by the caller.
+ */
 GPtrArray *
 lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 		        struct lu_error ** error)
@@ -1606,6 +1950,17 @@ lu_users_enumerate_full(struct lu_context * context, const char *pattern,
 	return ret;
 }
 
+/**
+ * lu_groups_enumerate_full:
+ * @context: A context
+ * @pattern: A glob-like pattern for group name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of entities, one for each group matching a pattern.
+ *
+ * Returns: a list of pointers to group entities.  The entities and the
+ * list should be freed by the caller.
+ */
 GPtrArray *
 lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 			 struct lu_error ** error)
@@ -1973,6 +2328,18 @@ lu_default_int(struct lu_context *context, const char *name,
 	return TRUE;
 }
 
+/**
+ * lu_user_default:
+ * @ctx: A context
+ * @name: New user name
+ * @system_account: Non-zero if the user is a system user
+ * @ent: An entity
+ *
+ * Fills out an user entity as specified by the config file and modules
+ * to prepare for creation of the user.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_user_default(struct lu_context *context, const char *name,
 		gboolean system_account, struct lu_ent *ent)
@@ -1980,6 +2347,18 @@ lu_user_default(struct lu_context *context, const char *name,
 	return lu_default_int(context, name, lu_user, system_account, ent);
 }
 
+/**
+ * lu_group_default:
+ * @ctx: A context
+ * @name: New group name
+ * @system_account: Non-zero if the group is a system group
+ * @ent: An entity
+ *
+ * Fills out a group entity as specified by the config file and modules
+ * to prepare for creation of the group.
+ *
+ * Returns: %TRUE on success
+ */
 gboolean
 lu_group_default(struct lu_context *context, const char *name,
 		 gboolean system_account, struct lu_ent *ent)

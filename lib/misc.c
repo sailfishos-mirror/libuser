@@ -263,6 +263,14 @@ lu_value_init_set_attr_from_string(GValue *value, const char *attr,
 	return TRUE;
 }
 
+/**
+ * lu_set_prompter:
+ * @context: A context
+ * @prompter: A new function to user for getting information from the user
+ * @callback_data: Data for @prompter
+ *
+ * Changes the prompter function in a context
+ */
 void
 lu_set_prompter(struct lu_context *context, lu_prompt_fn * prompter,
 		gpointer prompter_data)
@@ -272,6 +280,16 @@ lu_set_prompter(struct lu_context *context, lu_prompt_fn * prompter,
 	context->prompter_data = prompter_data;
 }
 
+/**
+ * lu_get_prompter:
+ * @context: A context
+ * @prompter: If not %NULL, points to a place where the current prompter
+ * function will be stored
+ * @callback_data: If not %NULL, points to a place where the current prompter
+ * function data will be stored
+ *
+ * Gets current prompter function from a context.
+ */
 void
 lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter,
 		gpointer *prompter_data)
@@ -284,6 +302,16 @@ lu_get_prompter(struct lu_context *context, lu_prompt_fn **prompter,
 	}
 }
 
+/**
+ * lu_set_modules:
+ * @context: A context
+ * @list: A list of modules (separated by whitespace or commas)
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Replaces the current set of modules for queries in @context to @list.
+ *
+ * Returns: %TRUE on success, %FALSE on failure
+ */
 gboolean
 lu_set_modules(struct lu_context * context, const char *list,
 	       struct lu_error ** error)
@@ -291,6 +319,15 @@ lu_set_modules(struct lu_context * context, const char *list,
 	return lu_modules_load(context, list, &context->module_names, error);
 }
 
+/**
+ * lu_get_modules:
+ * @context: A context
+ *
+ * Returns a list of modules for queries in @context.
+ *
+ * Returns: A list of modules separated by spaces, or %NULL if the list of
+ * modules is empty.  The list should not be freed by the caller.
+ */
 const char *
 lu_get_modules(struct lu_context *context)
 {

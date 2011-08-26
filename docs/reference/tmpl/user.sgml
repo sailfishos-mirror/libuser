@@ -1,24 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-user
+
 
 <!-- ##### SECTION Short_Description ##### -->
 
-Functions for initializing the library, looking up information, and making 
-changes to the system information store.
 
 <!-- ##### SECTION Long_Description ##### -->
-<para>
 
-user.h contains declarations for functions which start up and shut down the
-libuser library, and for functions which perform lookup queries and
-modifications of the system information store.
-
-</para>
 
 <!-- ##### SECTION See_Also ##### -->
-<para>
 
-</para>
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -27,457 +17,348 @@ modifications of the system information store.
 
 
 <!-- ##### STRUCT lu_context ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### TYPEDEF lu_context_t ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### FUNCTION lu_start ##### -->
-<para>
-Initializes the libuser library.
-</para>
 
-@authname: suggested client name to use when connecting to servers, or %NULL
-@auth_type: whether auth_name is a user or a group
-@modules: a list of modules to use for queries (separated by whitespace or
-commas), or %NULL to use modules specified in the config file
-@create_modules: a list of modules to use for entity creation (separated by
-whitespace or commas), or %NULL to use modules specified in the config file
-@prompter: a function to use for getting information from the user
-@callback_data: data for @prompter
-@error: filled with a #lu_error if an error occurs
-@Returns: a context which should be freed by lu_end() on success, %NULL on
-failure
+
+@authname: 
+@auth_type: 
+@modules: 
+@create_modules: 
+@prompter: 
+@callback_data: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_end ##### -->
-<para>
-Destroys a libuser library context
-</para>
 
-@context: a context
+
+@context: 
 
 
 <!-- ##### FUNCTION lu_set_prompter ##### -->
-<para>
-Changes the prompter function in a context
-</para>
 
-@context: a context
-@prompter: a new function to user for getting information from the user
-@callback_data: data for @prompter
+
+@context: 
+@prompter: 
+@callback_data: 
 
 
 <!-- ##### FUNCTION lu_get_prompter ##### -->
-<para>
-Gets current prompter function from a context
-</para>
 
-@context: a context
-@prompter: if not %NULL, points to a place where the current prompter function
-will be stored
-@callback_data: if not %NULL, points to a place where the current prompter
-function data will be stored
+
+@context: 
+@prompter: 
+@callback_data: 
 
 
 <!-- ##### FUNCTION lu_set_modules ##### -->
-<para>
-Replaces the current set of modules for queries in @context to @list.
-</para>
 
-@context: a context
-@list: a list of modules (separated by whitespace or commas)
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success, %FALSE on failure
+
+@context: 
+@list: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_get_modules ##### -->
-<para>
-Returns a list of modules for queries in @context.
-</para>
 
-@context: a context
-@Returns: a list of modules separated by spaces, or %NULL if the list of
-modules is empty.  The list should not be freed by the caller.
+
+@context: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_uses_elevated_privileges ##### -->
-<para>
-Checks if any module uses elevated privileges (e.g. modifies files that
-normal users can't modify).
-</para>
 
-@context: a context
-@Returns: %TRUE if at least one module uses elevated privileges
+
+@context: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_lookup_name ##### -->
-<para>
-Looks up an user by name.
-</para>
 
-@context: a context
-@name: user name
-@ent: an entity filled with received information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@name: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_lookup_id ##### -->
-<para>
-Looks up an user by UID.
-</para>
 
-@context: a context
-@uid: user ID
-@ent: an entity filled with received information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@uid: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_default ##### -->
-<para>
-Fills out an user entity as specified by the config file and modules
-to prepare for creation of the user.
-</para>
 
-@ctx: a context
-@name: new user name
-@system_account: non-zero if the user is a system user
-@ent: an entity
-@Returns: %TRUE on success
+
+@ctx: 
+@name: 
+@system_account: 
+@ent: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_add ##### -->
-<para>
-Creates an user in all modules specified for entity creation.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with resulting account
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_modify ##### -->
-<para>
-Modifies an user entity.
-</para>
 
-@context: a context
-@ent: an entity with pending modifications, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_delete ##### -->
-<para>
-Deletes an user.
-</para>
 
-@context: a context
-@ent: an entity describing the user
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_setpass ##### -->
-<para>
-Changes an user's password.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with current
-information and LU_SHADOWLASTCHANGE
-@newpass: new password
-@crypted: non-zero if @newpass is already encrypted
-@error: filled with an #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@newpass: 
+@crypted: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_removepass ##### -->
-<para>
-Changes an user's password to an empty string.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with current
-information and LU_SHADOWLASTCHANGE
-@error: filled with an #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_lock ##### -->
-<para>
-Locks an user account.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_unlock ##### -->
-<para>
-Unlocks an user account.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_unlock_nonempty ##### -->
-<para>
-Unlocks an user account.  If unlocking the account would result in an empty
-password field, it fails with %lu_error_unlock_empty.  Note that the
-password can still be empty.
-</para>
 
-@context: a context
-@ent: an entity describing the user, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_user_islocked ##### -->
-<para>
-Checks if an user account is locked.
-</para>
 
-@context: a context
-@ent: an entity describing the user
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE if the account is locked in at least one module
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_users_enumerate ##### -->
-<para>
-Returns a list of all users matching a pattern.
-</para>
 
-@context: a context
-@pattern: a glob-like pattern for user name
-@error: filled with a #lu_error if an error occurs
-@Returns: an array of strings, each representing one user name.  The array
-should be freed by the caller.
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_users_enumerate_by_group ##### -->
-<para>
-Returns a list of all members of a group @group.
-</para>
 
-@context: a context
-@group: group name
-@error: filled with a #lu_error if an error occurs
-@Returns: an array of strings, each representing one user name.  The array
-should be freed by the caller.
+
+@context: 
+@group: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_users_enumerate_full ##### -->
-<para>
-Returns a list of entities, one for each user matching a pattern.
-</para>
 
-@context: a context
-@pattern: a glob-like pattern for user name
-@error: filled with a #lu_error if an error occurs
-@Returns: a list of pointers to user entities.  The entities and the
-list should be freed by the caller.
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_lookup_name ##### -->
-<para>
-Looks up a group by name.
-</para>
 
-@context: a context
-@name: group name
-@ent: an entity filled with received information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@name: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_lookup_id ##### -->
-<para>
-Looks up a group by GID.
-</para>
 
-@context: a context
-@gid: group ID
-@ent: an entity filled with received information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@gid: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_default ##### -->
-<para>
-Fills out a group entity as specified by the config file and modules
-to prepare for creation of the group.
-</para>
 
-@ctx: a context
-@name: new group name
-@system_account: non-zero if the group is a system group
-@ent: an entity
-@Returns: %TRUE on success
+
+@ctx: 
+@name: 
+@system_account: 
+@ent: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_add ##### -->
-<para>
-Creates a group in all modules specified for entity creation.
-</para>
 
-@context: a context
-@ent: an entity describing the group, on success updated with resulting account
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_modify ##### -->
-<para>
-Modifies a group entity.
-</para>
 
-@context: a context
-@ent: an entity with pending modifications, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_delete ##### -->
-<para>
-Deletes a group.
-</para>
 
-@context: a context
-@ent: an entity describing the group
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_setpass ##### -->
-<para>
-Changes a group password.
-</para>
 
-@context: a contect
-@ent: an entity describing the group, on success updated with current
-information and LU_SHADOWLASTCHANGE
-@newpass: new password
-@crypted: non-zero if @newpass is already encrypted
-@error: filled with an #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@newpass: 
+@crypted: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_removepass ##### -->
-<para>
-Changes a group password to an empty string.
-</para>
 
-@context: a context
-@ent: an entity describing the group, on success udpated with current
-information and LU_SHADOWLASTCHANGE
-@error: filled with in #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_lock ##### -->
-<para>
-Locks a group account
-</para>
 
-@context: a context
-@ent: an entity describing the group, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_unlock ##### -->
-<para>
-Unlocks a group account.
-</para>
 
-@context: a context
-@ent: an entity describing the group, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_unlock_nonempty ##### -->
-<para>
-Unlocks a group account.  If unlocking the account would result in an empty
-password field, it fails with %lu_error_unlock_empty.  Note that the
-password can still be empty.
-</para>
 
-@context: a context
-@ent: an entity describing the group, on success updated with current
-information
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE on success
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_group_islocked ##### -->
-<para>
-Checks if a group account is locked.
-</para>
 
-@context: a context
-@ent: an entity describing the group
-@error: filled with a #lu_error if an error occurs
-@Returns: %TRUE if the account is locked in at least one module
+
+@context: 
+@ent: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_groups_enumerate ##### -->
-<para>
-Returns a list of all groups matching a pattern.
-</para>
 
-@context: a context
-@pattern: a glob-like pattern for group name
-@error: filled with a #lu_error if an error occurs
-@Returns: an array of strings, each representing one group name.  The array
-should be freed by the caller.
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_groups_enumerate_by_user ##### -->
-<para>
-Returns a list of all groups containing an user @user.
-</para>
 
-@context: a context
-@user: user name
-@error: filled with a #lu_error if an error occurs
-@Returns: an array of strings, each representing one group name.  The array
-should be freed by the caller.
+
+@context: 
+@user: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_groups_enumerate_full ##### -->
-<para>
-Returns a list of entities, one for each group matching a pattern.
-</para>
 
-@context: a context
-@pattern: a glob-like pattern for group name
-@error: filled with a #lu_error if an error occurs
-@Returns: a list of pointers to group entities.  The entities and the
-list should be freed by the caller.
+
+@context: 
+@pattern: 
+@error: 
+@Returns: 
 
 
