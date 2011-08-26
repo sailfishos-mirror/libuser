@@ -1,5 +1,16 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/tmpl/config.sgml
+	* docs/reference/tmpl/entity.sgml
+	* docs/reference/tmpl/error.sgml
+	* docs/reference/tmpl/libuser-unused.sgml
+	* docs/reference/tmpl/prompt.sgml
+	* docs/reference/tmpl/user.sgml
+	* docs/reference/tmpl/value.sgml: Remove, all information is now stored
+	in *.[ch].
+	* docs/reference/Makefile.am (setup-build-workaround.stamp, setup.stamp)
+	(dist-hook): Remove workarounds necessary for tmpl in $(srcdir).
+
 	* docs/reference/Makefile.am (HFILE_GLOB, CFILE_GLOB): Fill in.
 
 	* docs/reference/tmpl/user.sgml: Move contents...
