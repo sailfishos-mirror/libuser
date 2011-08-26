@@ -1,21 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-entity
+
 
 <!-- ##### SECTION Short_Description ##### -->
 
-Functions for manipulating lu_ent structures.
 
 <!-- ##### SECTION Long_Description ##### -->
-<para>
-entity.h declares functions for manipulating #lu_ent structures, which are used
-by libuser, its modules, and applications to hold data about a particular
-user or group account.
-</para>
+
 
 <!-- ##### SECTION See_Also ##### -->
-<para>
 
-</para>
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -24,430 +17,304 @@ user or group account.
 
 
 <!-- ##### STRUCT lu_ent ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### TYPEDEF lu_ent_t ##### -->
-<para>
 
-</para>
 
 
 <!-- ##### MACRO LU_USERNAME ##### -->
-<para>
-User name, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_USERPASSWORD ##### -->
-<para>
-User password, a %G_TYPE_STRING.  If shadow passwords are used, this is the
-placeholder password.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_UIDNUMBER ##### -->
-<para>
-User ID, an #id_t.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_GIDNUMBER ##### -->
-<para>
-Group ID, an #id_t.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_GECOS ##### -->
-<para>
-Usually user's real name, a %G_TYPE_STRING.  Often contains user's real name,
-office name, office phone, home phone, separated by commas.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_HOMEDIRECTORY ##### -->
-<para>
-User's home directory, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_LOGINSHELL ##### -->
-<para>
-User's login shell, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_GROUPNAME ##### -->
-<para>
-Group name, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_GROUPPASSWORD ##### -->
-<para>
-Group password, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_MEMBERNAME ##### -->
-<para>
-Group member names; each member is represented by a separate %G_TYPE_STRING
-value.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_ADMINISTRATORNAME ##### -->
-<para>
-Group administrator names; each administrator is represented by a separate
-%G_TYPE_STRING value.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWNAME ##### -->
-<para>
-User name, a %G_TYPE_STRING.  Note that %LU_SHADOWNAME is not distinct from
-%LU_USERNAME.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWPASSWORD ##### -->
-<para>
-User password in the shadow file, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWLASTCHANGE ##### -->
-<para>
-The number of days since the epoch to the day when the password was last
-changed, a %G_TYPE_LONG.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWMIN ##### -->
-<para>
-Minimum password lifetime in days before it can be changed, a %G_TYPE_LONG.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWMAX ##### -->
-<para>
-Maximum password lifetime in days before it must be changed, a %G_TYPE_LONG.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWWARNING ##### -->
-<para>
-Days before the password lifetime expires when the user should start to be
-warned, a %G_TYPE_LONG.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWINACTIVE ##### -->
-<para>
-Days after the password lifetime expires when the user account is disabled
-(because it is considered inactive), a %G_TYPE_LONG.  -1 to disable inactive
-account disabling.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWEXPIRE ##### -->
-<para>
-The number of days since the epoch to the day when the account expires and
-is disabled, a %G_TYPE_LONG.  -1 to disable account expiration.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SHADOWFLAG ##### -->
-<para>
-A reserved value "for future use", a %G_TYPE_LONG.  In most cases the value is
--1.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_COMMONNAME ##### -->
-<para>
-User's real name, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_GIVENNAME ##### -->
-<para>
-User's given name, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_SN ##### -->
-<para>
-User's surname, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_ROOMNUMBER ##### -->
-<para>
-User's room number, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_TELEPHONENUMBER ##### -->
-<para>
-User's telephone number, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_HOMEPHONE ##### -->
-<para>
-User's home telephone number, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### MACRO LU_EMAIL ##### -->
-<para>
-User's email address, a %G_TYPE_STRING.
-</para>
+
 
 
 
 <!-- ##### FUNCTION lu_ent_new ##### -->
-<para>
-Creates a new, empty struct #lu_ent.
-</para>
+
 
 @void: 
-@Returns: the created entity, which should be deallocated by lu_ent_free()
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_free ##### -->
-<para>
-Frees an struct #lu_ent, including all strings it owns.
-</para>
 
-@ent: the entity to free
+
+@ent: 
 
 
 <!-- ##### FUNCTION lu_ent_copy ##### -->
-<para>
-Copies one struct #lu_ent over another.
-</para>
 
-@source: the entity to copy
-@dest: the destination space, must be already allocated by lu_ent_new()
+
+@source: 
+@dest: 
 
 
 <!-- ##### FUNCTION lu_ent_commit ##### -->
-<para>
-Sets pending attribute changes as current values of the entity.
-</para>
 
-@ent: an entity
+
+@ent: 
 
 
 <!-- ##### FUNCTION lu_ent_revert ##### -->
-<para>
-Replaces all attributes with changes pending by their current values,
-forgetting the pending changes.
-</para>
 
-@ent: an entity
+
+@ent: 
 
 
 <!-- ##### FUNCTION lu_ent_add ##### -->
-<para>
-Appends @value to pending attribute @attr in a struct #lu_ent if @value
-is not yet in the list of @attr values.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@value: new attribute value
+
+@ent: 
+@attr: 
+@value: 
 
 
 <!-- ##### FUNCTION lu_ent_add_current ##### -->
-<para>
-Appends @value to current attribute @attr in a struct #lu_ent if @value
-is not yet in the list of @attr values.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@value: new attribute value
+
+@ent: 
+@attr: 
+@value: 
 
 
 <!-- ##### FUNCTION lu_ent_clear ##### -->
-<para>
-Removes all values of pending attribute @attribute from a struct #lu_ent.
-</para>
 
-@ent: an entity
-@attr: attribute name
+
+@ent: 
+@attr: 
 
 
 <!-- ##### FUNCTION lu_ent_clear_all ##### -->
-<para>
-Removes all pending attributes from a struct #lu_ent.
-</para>
 
-@ent: an entity
+
+@ent: 
 
 
 <!-- ##### FUNCTION lu_ent_clear_all_current ##### -->
-<para>
-Removes all current attributes from a struct #lu_ent.
-</para>
 
-@ent: an entity
+
+@ent: 
 
 
 <!-- ##### FUNCTION lu_ent_clear_current ##### -->
-<para>
-Removes all values of current attribute @attribute from a struct #lu_ent.
-</para>
 
-@ent: an entity
-@attr: attribute name
+
+@ent: 
+@attr: 
 
 
 <!-- ##### FUNCTION lu_ent_del ##### -->
-<para>
-Removes a pending attribute @attr value @value from a struct #lu_ent, if
-present.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@value: attribute value
+
+@ent: 
+@attr: 
+@value: 
 
 
 <!-- ##### FUNCTION lu_ent_del_current ##### -->
-<para>
-Removes a current attribute @attr value @value from a struct #lu_ent, if
-present.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@value: attribute value
+
+@ent: 
+@attr: 
+@value: 
 
 
 <!-- ##### FUNCTION lu_ent_dump ##### -->
-<para>
-Dumps an struct #lu_ent to a file in text form, for debugging.
-</para>
 
-@ent: the entity to dump
-@fp: destination file
+
+@ent: 
+@fp: 
 
 
 <!-- ##### FUNCTION lu_ent_get ##### -->
-<para>
-Returns values associated with a pending attribute in a struct #lu_ent.
-</para>
 
-@ent: an entity
-@attribute: attribute name
-@Returns: an array of values, valid at least until they are modified or
-deleted. The array is never empty and it should not be freed by the caller.
-Returns %NULL if the attribute is not present at all or on error.
+
+@ent: 
+@attribute: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_get_attributes ##### -->
-<para>
-Returns a list of all pending attributes in a struct #lu_ent.
-</para>
 
-@ent: an entity
-@Returns: a #GList of attribute names.  The list (but not the strings
-in the list) should be freed by the caller.
+
+@ent: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_get_attributes_current ##### -->
-<para>
-Returns a list of all current attributes in a struct #lu_ent.
-</para>
 
-@ent: an entity
-@Returns: a #GList of attribute names.  The list (but not the strings
-in the list) should be freed by the caller.
+
+@ent: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_get_current ##### -->
-<para>
-Returns values associated with a current attribute in a struct #lu_ent.
-</para>
 
-@ent: an entity
-@attribute: attribute name
-@Returns: a list of values, valid at least until they are modified or deleted.
-The list should not be freed by the caller.  Returns %NULL if the attribute is
-not present at all or on error.
+
+@ent: 
+@attribute: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_has ##### -->
-<para>
-Checks if a struct #lu_ent has at least one pending attribute @attribute.
-</para>
 
-@ent: an entity
-@attribute: attribute name
-@Returns: %TRUE if @attribute has a value in @ent.
+
+@ent: 
+@attribute: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_has_current ##### -->
-<para>
-Checks if a struct #lu_ent has at least one current attribute @attribute.
-</para>
 
-@ent: an entity
-@attribute: attribute name
-@Returns: %TRUE if @attribute has a value in @ent.
+
+@ent: 
+@attribute: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_ent_set ##### -->
-<para>
-Replaces all pending attributes @attr in a struct #lu_ent by a copy of
-@values.  If @values is empty, it removes the pending attribute completely.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@values: an array of values
+
+@ent: 
+@attr: 
+@values: 
 
 
 <!-- ##### FUNCTION lu_ent_set_current ##### -->
-<para>
-Replaces all current attributes @attr in a struct #lu_ent by a copy of
-@values.  If @values is empty, it removes the current attribute completely.
-</para>
 
-@ent: an entity
-@attr: attribute name
-@values: an array of values
+
+@ent: 
+@attr: 
+@values: 
 
 

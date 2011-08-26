@@ -26,7 +26,24 @@
 #include "user_private.h"
 #include "internal.h"
 
-/* Create and return a new entity object. */
+/**
+ * SECTION:entity
+ * @short_description: Functions for manipulating #lu_ent structures.
+ * @include: libuser/error.h
+ *
+ * <filename>entity.h</filename> declares functions for manipulating #lu_ent
+ * structures, which are used by libuser, its modules, and applications to hold
+ * data about a particular user or group account.
+ */
+
+
+/**
+ * lu_ent_new:
+ *
+ * Creates a new, empty struct #lu_ent.
+ *
+ * Returns: The created entity, which should be deallocated by lu_ent_free()
+ */
 struct lu_ent *
 lu_ent_new()
 {
@@ -50,7 +67,12 @@ lu_ent_new_typed(enum lu_entity_type entity_type)
 	return ret;
 }
 
-/* Free an entity object. */
+/**
+ * lu_ent_free:
+ * @ent: The entity to free
+ *
+ * Frees an struct #lu_ent, including all strings it owns.
+ */
 void
 lu_ent_free(struct lu_ent *ent)
 {
@@ -117,8 +139,13 @@ lu_ent_dump_attributes(GArray *attrs, FILE *fp)
 	}
 }
 
-/* Dump the contents of an entity structure.  This is primarily for
- * debugging. */
+/**
+ * lu_ent_dump:
+ * @ent: The entity to dump
+ * @fp: Destination file
+ *
+ * Dumps a struct #lu_ent to a file in text form, for debugging.
+ */
 void
 lu_ent_dump(struct lu_ent *ent, FILE *fp)
 {
@@ -248,18 +275,38 @@ copy_attributes(GArray *source, GArray *dest)
 	}
 }
 
+/**
+ * lu_ent_revert:
+ * @ent: an entity
+ *
+ * Replaces all attributes with changes pending by their current values,
+ * forgetting the pending changes.
+ */
 void
 lu_ent_revert(struct lu_ent *entity)
 {
 	copy_attributes(entity->current, entity->pending);
 }
 
+/**
+ * lu_ent_commit:
+ * @ent: An entity
+ *
+ * Sets pending attribute changes as current values of the entity.
+ */
 void
 lu_ent_commit(struct lu_ent *entity)
 {
 	copy_attributes(entity->pending, entity->current);
 }
 
+/**
+ * lu_ent_copy:
+ * @source: The entity to copy
+ * @dest: The destination space, must be already allocated by lu_ent_new()
+ *
+ * Copies one struct #lu_ent over another.
+ */
 void
 lu_ent_copy(struct lu_ent *source, struct lu_ent *dest)
 {
@@ -455,6 +502,17 @@ lu_ent_get_attributes_int(GArray *list)
 	return g_list_reverse(ret);
 }
 
+/**
+ * lu_ent_get:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns values associated with a pending attribute in a struct #lu_ent.
+ *
+ * Returns: a #GValueArray of values, valid at least until they are modified or
+ * deleted. The array is never empty and it should not be freed by the caller.
+ * Returns %NULL if the attribute is not present at all or on error.
+ */
 GValueArray *
 lu_ent_get(struct lu_ent *ent, const char *attribute)
 {
@@ -464,7 +522,17 @@ lu_ent_get(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_int(ent->pending, attribute);
 }
-
+/**
+ * lu_ent_get_current:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns values associated with a current attribute in a struct #lu_ent.
+ *
+ * Returns: a #GValueArray of values, valid at least until they are modified or
+ * deleted. The array is never empty and it should not be freed by the caller.
+ * Returns %NULL if the attribute is not present at all or on error.
+ */
 GValueArray *
 lu_ent_get_current(struct lu_ent *ent, const char *attribute)
 {
@@ -475,6 +543,15 @@ lu_ent_get_current(struct lu_ent *ent, const char *attribute)
 	return lu_ent_get_int(ent->current, attribute);
 }
 
+/**
+ * lu_ent_has:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Checks if a struct #lu_ent has at least one pending attribute @attribute.
+ *
+ * Returns: %TRUE if @attribute has a value in @ent.
+ */
 gboolean
 lu_ent_has(struct lu_ent *ent, const char *attribute)
 {
@@ -484,6 +561,15 @@ lu_ent_has(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(strlen(attribute) > 0, FALSE);
 	return lu_ent_has_int(ent->pending, attribute);
 }
+/**
+ * lu_ent_has_current:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Checks if a struct #lu_ent has at least one current attribute @attribute.
+ *
+ * Returns: %TRUE if @attribute has a value in @ent.
+ */
 gboolean
 lu_ent_has_current(struct lu_ent *ent, const char *attribute)
 {
@@ -494,6 +580,15 @@ lu_ent_has_current(struct lu_ent *ent, const char *attribute)
 	return lu_ent_has_int(ent->current, attribute);
 }
 
+/**
+ * lu_ent_set:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @values: An array of values
+ *
+ * Replaces all pending attributes @attr in a struct #lu_ent by a copy of
+ * @values.  If @values is empty, it removes the pending attribute completely.
+ */
 void
 lu_ent_set(struct lu_ent *ent, const char *attribute, const GValueArray *values)
 {
@@ -503,6 +598,15 @@ lu_ent_set(struct lu_ent *ent, const char *attribute, const GValueArray *values)
 	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_set_int(ent->pending, attribute, values);
 }
+/**
+ * lu_ent_set_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @values: An array of values
+ *
+ * Replaces all current attributes @attr in a struct #lu_ent by a copy of
+ * @values.  If @values is empty, it removes the pending attribute completely.
+ */
 void
 lu_ent_set_current(struct lu_ent *ent, const char *attribute,
 		   const GValueArray *values)
@@ -514,6 +618,15 @@ lu_ent_set_current(struct lu_ent *ent, const char *attribute,
 	lu_ent_set_int(ent->current, attribute, values);
 }
 
+/**
+ * lu_ent_add:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: New attribute value
+ *
+ * Appends @value to pending attribute @attr in a struct #lu_ent if @value is
+ * not yet in the list of @attr values.
+ */
 void
 lu_ent_add(struct lu_ent *ent, const char *attribute, const GValue *value)
 {
@@ -523,6 +636,15 @@ lu_ent_add(struct lu_ent *ent, const char *attribute, const GValue *value)
 	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_add_int(ent->pending, attribute, value);
 }
+/**
+ * lu_ent_add_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: New attribute value
+ *
+ * Appends @value to current attribute @attr in a struct #lu_ent if @value is
+ * not yet in the list of @attr values.
+ */
 void
 lu_ent_add_current(struct lu_ent *ent, const char *attribute,
 		   const GValue *value)
@@ -534,6 +656,13 @@ lu_ent_add_current(struct lu_ent *ent, const char *attribute,
 	lu_ent_add_int(ent->current, attribute, value);
 }
 
+/**
+ * lu_ent_clear:
+ * @ent: An entity
+ * @attr: Attribute name
+ *
+ * Removes all values of pending attribute @attribute from a struct #lu_ent.
+ */
 void
 lu_ent_clear(struct lu_ent *ent, const char *attribute)
 {
@@ -543,6 +672,13 @@ lu_ent_clear(struct lu_ent *ent, const char *attribute)
 	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_clear_int(ent->pending, attribute);
 }
+/**
+ * lu_ent_clear_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ *
+ * Removes all values of current attribute @attribute from a struct #lu_ent.
+ */
 void
 lu_ent_clear_current(struct lu_ent *ent, const char *attribute)
 {
@@ -553,6 +689,12 @@ lu_ent_clear_current(struct lu_ent *ent, const char *attribute)
 	lu_ent_clear_int(ent->current, attribute);
 }
 
+/**
+ * lu_ent_clear_all:
+ * @ent: an entity
+ *
+ * Removes all pending attributes from a struct #lu_ent.
+ */
 void
 lu_ent_clear_all(struct lu_ent *ent)
 {
@@ -560,6 +702,12 @@ lu_ent_clear_all(struct lu_ent *ent)
 	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
 	lu_ent_clear_all_int(ent->pending);
 }
+/**
+ * lu_ent_clear_all_current:
+ * @ent: an entity
+ *
+ * Removes all current attributes from a struct #lu_ent.
+ */
 void
 lu_ent_clear_all_current(struct lu_ent *ent)
 {
@@ -568,6 +716,15 @@ lu_ent_clear_all_current(struct lu_ent *ent)
 	lu_ent_clear_all_int(ent->current);
 }
 
+/**
+ * lu_ent_del:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: Attribute value
+ *
+ * Removes a pending attribute @attr value @value from a struct #lu_ent, if
+ * present.
+ */
 void
 lu_ent_del(struct lu_ent *ent, const char *attribute, const GValue *value)
 {
@@ -578,6 +735,15 @@ lu_ent_del(struct lu_ent *ent, const char *attribute, const GValue *value)
 	g_return_if_fail(value != NULL);
 	lu_ent_del_int(ent->pending, attribute, value);
 }
+/**
+ * lu_ent_del_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: Attribute value
+ *
+ * Removes a current attribute @attr value @value from a struct #lu_ent, if
+ * present.
+ */
 void
 lu_ent_del_current(struct lu_ent *ent, const char *attribute,
 		   const GValue *value)
@@ -590,6 +756,15 @@ lu_ent_del_current(struct lu_ent *ent, const char *attribute,
 	lu_ent_del_int(ent->current, attribute, value);
 }
 
+/**
+ * lu_ent_get_attributes:
+ * @ent: An entity
+ *
+ * Returns a list of all pending attributes in a struct #lu_ent.
+ *
+ * Returns: a #GList of attribute names.  The list (but not the strings in the
+ * list) should be freed by the caller.
+ */
 GList *
 lu_ent_get_attributes(struct lu_ent *ent)
 {
@@ -597,7 +772,15 @@ lu_ent_get_attributes(struct lu_ent *ent)
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
 	return lu_ent_get_attributes_int(ent->pending);
 }
-
+/**
+ * lu_ent_get_attributes_current:
+ * @ent: An entity
+ *
+ * Returns a list of all current attributes in a struct #lu_ent.
+ *
+ * Returns: a #GList of attribute names.  The list (but not the strings in the
+ * list) should be freed by the caller.
+ */
 GList *
 lu_ent_get_attributes_current(struct lu_ent *ent)
 {

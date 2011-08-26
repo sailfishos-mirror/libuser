@@ -51,58 +51,196 @@ typedef struct lu_ent lu_ent_t;
 #endif
 
 /* Attributes carried by all user structures. */
+/**
+ * LU_USERNAME:
+ *
+ * User name, a %G_TYPE_STRING.
+ */
 #define LU_USERNAME		"pw_name"
+/**
+ * LU_USERPASSWORD:
+ *
+ * User password, a %G_TYPE_STRING.  If shadow passwords are used, this is the
+ * placeholder password.
+ */
 #define LU_USERPASSWORD		"pw_passwd"
+/**
+ * LU_UIDNUMBER:
+ *
+ * User ID, an #id_t.
+ */
 #define LU_UIDNUMBER		"pw_uid"
+/**
+ * LU_GIDNUMBER:
+ *
+ * Group ID, an #id_t.
+ */
 #define LU_GIDNUMBER		"pw_gid"
+/**
+ * LU_GECOS:
+ *
+ * Usually user's real name, a %G_TYPE_STRING.  Often contains user's real name,
+ * office name, office phone, home phone, separated by commas.
+ */
 #define LU_GECOS		"pw_gecos"
+/**
+ * LU_HOMEDIRECTORY:
+ *
+ * User's home directory, a %G_TYPE_STRING.
+ */
 #define LU_HOMEDIRECTORY	"pw_dir"
+/**
+ * LU_LOGINSHELL:
+ *
+ * User's login shell, a %G_TYPE_STRING.
+ */
 #define LU_LOGINSHELL		"pw_shell"
 
 /* Attributes carried by group structures. */
+/**
+ * LU_GROUPNAME:
+ *
+ * Group name, a %G_TYPE_STRING.
+ */
 #define LU_GROUPNAME		"gr_name"
+/**
+ * LU_GROUPPASSWORD:
+ *
+ * Group password, a %G_TYPE_STRING.
+ */
 #define LU_GROUPPASSWORD	"gr_passwd"
 /* #define LU_GIDNUMBER		"gr_gid" */
+/**
+ * LU_MEMBERNAME:
+ *
+ * Group member names; each member is represented by a separate %G_TYPE_STRING
+ * value.
+ */
 #define LU_MEMBERNAME		"gr_mem"
+/**
+ * LU_ADMINISTRATORNAME:
+ *
+ * Group administrator names; each administrator is represented by a separate
+ * %G_TYPE_STRING value.
+ */
 #define LU_ADMINISTRATORNAME	"gr_adm"
 
 /* Attributes carried by shadow user structures. */
+/**
+ * LU_SHADOWNAME:
+ *
+ * User name, a %G_TYPE_STRING.  Note that %LU_SHADOWNAME is not distinct from
+ * %LU_USERNAME.
+ */
 #define LU_SHADOWNAME		LU_USERNAME
+/**
+ * LU_SHADOWPASSWORD:
+ *
+ * User password in the shadow file, a %G_TYPE_STRING.
+ */
 #define LU_SHADOWPASSWORD	"sp_pwdp"
+/**
+ * LU_SHADOWLASTCHANGE:
+ *
+ * The number of days since the epoch to the day when the password was last
+ * changed, a %G_TYPE_LONG.
+ */
 #define LU_SHADOWLASTCHANGE	"sp_lstchg"
+/**
+ * LU_SHADOWMIN:
+ *
+ * Minimum password lifetime in days before it can be changed, a %G_TYPE_LONG.
+ */
 #define LU_SHADOWMIN		"sp_min"
+/**
+ * LU_SHADOWMAX:
+ *
+ * Maximum password lifetime in days before it must be changed, a %G_TYPE_LONG.
+ */
 #define LU_SHADOWMAX		"sp_max"
+/**
+ * LU_SHADOWWARNING:
+ *
+ * Days before the password lifetime expires when the user should start to be
+ * warned, a %G_TYPE_LONG.
+ */
 #define LU_SHADOWWARNING	"sp_warn"
+/**
+ * LU_SHADOWINACTIVE:
+ *
+ * Days after the password lifetime expires when the user account is disabled
+ * (because it is considered inactive), a %G_TYPE_LONG.  -1 to disable inactive
+ * account disabling.
+ */
 #define LU_SHADOWINACTIVE	"sp_inact"
+/**
+ * LU_SHADOWEXPIRE:
+ *
+ * The number of days since the epoch to the day when the account expires and
+ * is disabled, a %G_TYPE_LONG.  -1 to disable account expiration.
+ */
 #define LU_SHADOWEXPIRE		"sp_expire"
+/**
+ * LU_SHADOWFLAG:
+ *
+ * A reserved value "for future use", a %G_TYPE_LONG.  In most cases the value
+ * is -1.
+ */
 #define LU_SHADOWFLAG		"sp_flag"
 
 /* Additional fields carried by some structures.  If they have them,
  * it's safe to change them. */
+/**
+ * LU_COMMONNAME:
+ *
+ * User's real name, a %G_TYPE_STRING.
+ */
 #define LU_COMMONNAME		"cn"
+/**
+ * LU_GIVENNAME:
+ *
+ * User's given name, a %G_TYPE_STRING.
+ */
 #define LU_GIVENNAME		"givenName"
+/**
+ * LU_SN:
+ *
+ * User's surname, a %G_TYPE_STRING.
+ */
 #define LU_SN			"sn"
+/**
+ * LU_ROOMNUMBER:
+ *
+ * User's room number, a %G_TYPE_STRING.
+ */
 #define LU_ROOMNUMBER		"roomNumber"
+/**
+ * LU_TELEPHONENUMBER:
+ *
+ * User's telephone number, a %G_TYPE_STRING.
+ */
 #define LU_TELEPHONENUMBER	"telephoneNumber"
+/**
+ * LU_HOMEPHONE:
+ *
+ * User's home telephone number, a %G_TYPE_STRING.
+ */
 #define LU_HOMEPHONE		"homePhone"
+/**
+ * LU_EMAIL:
+ *
+ * User's email address, a %G_TYPE_STRING.
+ */
 #define LU_EMAIL		"mail"
 
-/* Function to allocate a new entity structure, or destroy one. */
 struct lu_ent *lu_ent_new(void);
 void lu_ent_free(struct lu_ent *ent);
 
-/* Deep-copy the contents of one entity structure into another. */
 void lu_ent_copy(struct lu_ent *source, struct lu_ent *dest);
 
-/* Entity structures have a limited form of version-control, and that gives
- * us the ability to roll back changes. */
 void lu_ent_revert(struct lu_ent *ent);
-
-/* This function rolls changes forward. */
 void lu_ent_commit(struct lu_ent *ent);
 
-/* These functions are used to set and query "current" data attributes, the
- * values the library itself usually sets. */
 GValueArray *lu_ent_get_current(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has_current(struct lu_ent *ent, const char *attribute);
 void lu_ent_set_current(struct lu_ent *ent, const char *attr,
@@ -115,8 +253,6 @@ void lu_ent_del_current(struct lu_ent *ent, const char *attr,
 			const GValue *value);
 GList *lu_ent_get_attributes_current(struct lu_ent *ent);
 
-/* These functions are used to set and query "pending" data attributes, which
- * will take effect when we write this entry back out. */
 GValueArray *lu_ent_get(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has(struct lu_ent *ent, const char *attribute);
 void lu_ent_set(struct lu_ent *ent, const char *attr,
