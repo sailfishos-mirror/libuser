@@ -1,5 +1,7 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/Makefile.am (HFILE_GLOB, CFILE_GLOB): Fill in.
+
 	* docs/reference/tmpl/user.sgml: Move contents...
 	* lib/misc.c: ... here and ...
 	* lib/user.c: ... here.
