@@ -1,5 +1,9 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/tmpl/value.sgml: Move contents...
+	* lib/misc.c: ... here and ...
+	* lib/user.h: ... here.
+
 	* docs/reference/tmpl/config.sgml: Move contents...
 	* lib/config.c: ... here, and update somewhat.
 	* lib/config.h: Drop redundant documentation.

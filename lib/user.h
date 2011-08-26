@@ -28,6 +28,11 @@
 
 G_BEGIN_DECLS
 
+/**
+ * LU_VALUE_INVALID_ID:
+ *
+ * An #id_t value that matches no valid user or group ID.
+ */
 /* (id_t)-1 is used by setreuid() to indicate "not a valid ID", so it should be
    safe to use for error indication. */
 #define LU_VALUE_INVALID_ID ((id_t)-1)

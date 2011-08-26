@@ -25,6 +25,42 @@
 #include "user_private.h"
 #include "internal.h"
 
+/**
+ * SECTION:value
+ * @short_description: Simplified interface to GValue types used in libuser
+ * entities.
+ * @include: libuser/user.h
+ *
+ * Libuser entities store attribute values as #GValue, which allows representing
+ * any possible data type.  Only a few types are needed in practice; the only
+ * types applications should hard-code are %G_TYPE_LONG and %G_TYPE_STRING
+ * (%G_TYPE_STRING can usually be used as a fallback for other number types).
+ *
+ * The only currently used data types that are not conveniently supported using
+ * the above types are #uid_t and #gid_t (which can be together represented in
+ * #id_t), because they can support values outside of the range of #glong.
+ * Helper functions are provided to convert values between #id_t and #GValue,
+ * even if the value is stored using %G_TYPE_STRING.  The #GValue types used
+ * for storing #id_t values are an internal implementation detail of libuser
+ * and applications should not rely on them.
+ *
+ * Values of each attribute are expected to have a specific type, documented in
+ * the documentation of the specific attribute name.  Using other types (e.g.
+ * using %G_TYPE_STRING for %LU_UIDNUMBER) is not allowed and results in
+ * undefined behavior.  You can use lu_value_strdup() and
+ * lu_value_init_set_attr_from_string() for conversion between strings and
+ * values appropriate for a specific attribute.
+ */
+
+/**
+ * lu_value_strdup:
+ * @value: #GValue
+ *
+ * Converts @value, of any type used by libuser, to a string.  Preferable to
+ * hard-coding checks for expected value types.
+ *
+ * Returns: string, should be freed by g_free()
+ */
 char *
 lu_value_strdup(const GValue *value)
 {
@@ -44,6 +80,15 @@ lu_value_strdup(const GValue *value)
 	return ret;
 }
 
+/**
+ * lu_values_equal:
+ * @a: #GValue
+ * @b: #GValue
+ *
+ * Check whether @a and @b have the same type and value.
+ *
+ * Returns: #TRUE if @a and @b have the same type and value
+ */
 int
 lu_values_equal(const GValue *a, const GValue *b)
 {
@@ -61,6 +106,14 @@ lu_values_equal(const GValue *a, const GValue *b)
 	}
 }
 
+/**
+ * lu_value_init_set_id:
+ * @value: #GValue
+ * @id: User or group ID.
+ *
+ * Initializes a zero-filled (uninitialized) @value with an unspecified type and
+ * sets it to @id.
+ */
 void
 lu_value_init_set_id(GValue *value, id_t id)
 {
@@ -81,6 +134,18 @@ lu_value_init_set_id(GValue *value, id_t id)
 	}
 }
 
+/**
+ * lu_value_get_id:
+ * @value: #GValue
+ *
+ * Get the contents of @value. @value should be initialized by
+ * lu_value_init_set_id() or use %G_TYPE_LONG or %G_TYPE_STRING.
+ *
+ * If @value does not contain a valid #id_t value, %LU_VALUE_INVALID_ID
+ * is returned.
+ *
+ * Returns: ID value or %LU_VALUE_INVALID_ID
+ */
 id_t
 lu_value_get_id(const GValue *value)
 {
@@ -125,10 +190,27 @@ attr_in_list(const char *attr, const char *list)
 	return FALSE;
 }
 
-/* The error messages returned from this function don't contain the input
-   string, to allow the caller to output at least partially usable error
-   message without disclosing the invalid string in e.g. /etc/shadow, which
-   might be somebody's misplaced password. */
+/**
+ * lu_value_init_set_attr_from_string:
+ * @value: #GValue
+ * @attr: Attribute name
+ * @string: The string to convert
+ * @error: Filled with a #lu_error if an error occurs, or %NULL if @attr is
+ * unknown
+ *
+ * Initializes a zero-filled (uninitialized) @value for storing a value of
+ * attribute @attr and sets it to the contents of @string.  To see whether a
+ * specific type is used for an attribute, see the documentation of that
+ * attribute.
+ *
+ * The error messages returned from this function don't contain the input
+ * string, to allow the caller to output at least partially usable error
+ * message without disclosing the invalid string in
+ * e.g. <filename>/etc/shadow</filename>, which might be somebody's misplaced
+ * password.
+ *
+ * Returns: %TRUE on success, %FALSE on error or if @attr is unknown
+ */
 gboolean
 lu_value_init_set_attr_from_string(GValue *value, const char *attr,
 				   const char *string, struct lu_error **error)

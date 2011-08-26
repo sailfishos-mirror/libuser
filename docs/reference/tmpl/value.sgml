@@ -1,40 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-value
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Simplified interface to GValue types used in libuser entities.
+
 
 <!-- ##### SECTION Long_Description ##### -->
-<para>
-Libuser entities store attribute values as #GValue, which allows representing
-any possible data type.  Only a few types are needed in practice; the only
-types applications should hard-code are %G_TYPE_LONG and %G_TYPE_STRING
-(%G_TYPE_STRING can usually be used as a fallback for other number types).
-</para>
 
-<para>
-The only currently used data types that are not conveniently supported using
-the above types are #uid_t and #gid_t (which can be together represented in
-#id_t), because they can support values outside of the range of #glong.  Helper
-functions are provided to convert values between #id_t and #GValue, even if the
-value is stored using %G_TYPE_STRING.  The #GValue types used for storing #id_t
-values are an internal implementation detail of libuser and applications should
-not rely on them.
-</para>
-
-<para>
-Values of each attribute are expected to have a specific type, documented in
-the documentation of the specific attribute name.  Using other types (e.g.
-using %G_TYPE_STRING for %LU_UIDNUMBER) is not allowed and results in undefined
-behavior.. You can use lu_value_strdup() and
-lu_value_init_set_attr_from_string() for conversion between strings and values
-appropriate for a specific attribute.
-</para>
 
 <!-- ##### SECTION See_Also ##### -->
-<para>
 
-</para>
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -43,70 +17,46 @@ appropriate for a specific attribute.
 
 
 <!-- ##### MACRO LU_VALUE_INVALID_ID ##### -->
-<para>
-An #id_t value that matches no valid user or group ID.
-</para>
+
 
 
 
 <!-- ##### FUNCTION lu_value_strdup ##### -->
-<para>
-Converts @value, of any type used by libuser, to a string.  Preferable
-to hard-coding checks for expected value types.
-</para>
 
-@value: value
-@Returns: string, should be freed by g_free()
+
+@value: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_value_init_set_attr_from_string ##### -->
-<para>
-Initializes a zero-filled (uninitialized) @value for storing a value of
-attribute @attr and sets it to the contents of @string.  To see whether a
-specific type is used for an attribute, see the documentation of that
-attribute.
-</para>
 
-@value: #GValue
-@attr: attribute name
-@string: the string to convert
-@error: filled with a #lu_error if an error occurs, or %NULL if @attr is
-unknown
-@Returns: %TRUE on success, %FALSE on error or if @attr is unknown
+
+@value: 
+@attr: 
+@string: 
+@error: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_value_init_set_id ##### -->
-<para>
-Initializes a zero-filled (uninitialized) @value with an unspecified type and
-sets it to @id.
-</para>
 
-@value: #GValue
-@id: user or group ID.
+
+@value: 
+@id: 
 
 
 <!-- ##### FUNCTION lu_value_get_id ##### -->
-<para>
-Get the contents of @value. @value should be initialized by
-lu_value_init_set_id () or use %G_TYPE_LONG or %G_TYPE_STRING.
-</para>
 
-<para>
-If @value does not contain a valid #id_t value, %LU_VALUE_INVALID_ID
-is returned.
-</para>
 
-@value: #GValue
-@Returns: ID value or %LU_VALUE_INVALID_ID
+@value: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_values_equal ##### -->
-<para>
-Check whether @a and @b have the same type and value.
-</para>
 
-@a: #GValue
-@b: #GValue
-@Returns: #TRUE if @a and @b have the same type and value
+
+@a: 
+@b: 
+@Returns: 
 
 
