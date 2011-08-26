@@ -26,13 +26,36 @@
 #include "user.h"
 #include "user_private.h"
 
+/**
+ * SECTION:prompt
+ * @short_description: Sample prompter functions for use with the libuser
+ * library.
+ * @include: libuser/prompt.h
+ *
+ * prompt.h declares two predefined prompter functions which applications can
+ * use instead of providing their own.  These should suffice for most
+ * command-line applications.  Authors of graphical applications are encouraged
+ * to supply graphical implementations.
+ */
+
+/**
+ * lu_prompt_console:
+ * @prompts: An array of #lu_prompt structures.
+ * @count: The number of elements in the @prompts array.
+ * @callback_data: Ignored.
+ * @error: The location to store error information in the event of an error.
+ *
+ * Prompts the user using a text console.
+ *
+ * Returns: A #gboolean indicating success or failure.
+ */
 gboolean
-lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
+lu_prompt_console(struct lu_prompt *prompts, int count, gpointer callback_data,
 		  struct lu_error **error)
 {
 	int i, is_tty;
 
-	(void)calldata;
+	(void)callback_data;
 	LU_ERROR_CHECK(error);
 
 	if (count > 0) {
@@ -104,9 +127,23 @@ lu_prompt_console(struct lu_prompt *prompts, int count, gpointer calldata,
 	return TRUE;
 }
 
+/**
+ * lu_prompt_console_quiet:
+ * @prompts: An array of #lu_prompt structures.
+ * @count: The number of elements in the @prompts array.
+ * @callback_data: Ignored.
+ * @error: The location to store error information in the event of an error.
+ *
+ * Prompts the user using a text console.  Unlike lu_prompt_console(), this
+ * function will not prompt users for a question for which the calling
+ * application or module supplies a default, and will simply return the
+ * default.
+ *
+ * Returns: A #gboolean indicating success or failure.
+ */
 gboolean
 lu_prompt_console_quiet(struct lu_prompt * prompts, int count,
-			gpointer calldata, struct lu_error ** error)
+			gpointer callback_data, struct lu_error ** error)
 {
 	int i;
 	gboolean ret = TRUE;
@@ -124,7 +161,7 @@ lu_prompt_console_quiet(struct lu_prompt * prompts, int count,
 			prompts[i].free_value = (void *) g_free;
 		} else {
 			ret = ret &&
-			      lu_prompt_console(&prompts[i], 1, calldata,
+			      lu_prompt_console(&prompts[i], 1, callback_data,
 					        error);
 		}
 	}

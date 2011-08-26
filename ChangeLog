@@ -1,5 +1,8 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/tmpl/prompt.sgml: Move contents...
+	* lib/prompt.c: ... here.
+
 	* lib/entity.h (lu_ent_t)
 	* lib/error.h (lu_status_t, lu_error_t)
 	* lib/user.h (lu_context_t, lu_entity_type_t): Mark with #ifndef

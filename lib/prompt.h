@@ -62,7 +62,6 @@ typedef gboolean (lu_prompt_fn)(struct lu_prompt * prompts,
 				gpointer callback_data,
 				struct lu_error ** error);
 
-/* Built-in prompter functions. */
 gboolean lu_prompt_console(struct lu_prompt *prompts,
 			   int count,
 			   gpointer callback_data,
