@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-typedef enum lu_status {
+enum lu_status {
 	/* Non-fatal. */
 	lu_success = 0,
 	lu_warning_config_disabled,
@@ -66,12 +66,27 @@ typedef enum lu_status {
 
 	/* Since 0.57 */
 	lu_error_invalid_module_combination,
-} lu_status_t;
+};
+#ifndef __GTK_DOC_IGNORE__
+typedef enum lu_status lu_status_t;
+#endif
 
-typedef struct lu_error {
+/**
+ * lu_error:
+ *
+ * Error and status information.
+ */
+struct lu_error {
 	enum lu_status code;
 	char *string;
-} lu_error_t;
+};
+/**
+ * lu_error_t:
+ *
+ * An alias for struct #lu_error.
+ * Deprecated: 0.57.3: Use struct #lu_error directly.
+ */
+typedef struct lu_error lu_error_t;
 
 /* Checks that a passed-in error pointer is not already populated, and calls
    abort() if it is. */
@@ -90,13 +105,13 @@ do { \
 } while(0)
 
 /* Functions for allocating and freeing error objects. */
-void lu_error_new(lu_error_t **error, lu_status_t code,
+void lu_error_new(struct lu_error **error, enum lu_status code,
 		  const char *fmt, ...) G_GNUC_PRINTF(3, 4);
-const char *lu_strerror(lu_error_t *error);
-gboolean lu_error_is_success(lu_status_t status);
-gboolean lu_error_is_warning(lu_status_t status);
-gboolean lu_error_is_error(lu_status_t status);
-void lu_error_free(lu_error_t **error);
+const char *lu_strerror(struct lu_error *error);
+gboolean lu_error_is_success(enum lu_status status);
+gboolean lu_error_is_warning(enum lu_status status);
+gboolean lu_error_is_error(enum lu_status status);
+void lu_error_free(struct lu_error **error);
 
 G_END_DECLS
 

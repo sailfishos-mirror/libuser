@@ -74,6 +74,9 @@ lu_ent_set_current
 
 <SECTION>
 <FILE>error</FILE>
+lu_error
+lu_error_t
+
 LU_ERROR_CHECK
 lu_error_new
 lu_error_free

@@ -45,14 +45,14 @@ void lu_value_init_set_id(GValue *value, id_t id);
 id_t lu_value_get_id(const GValue *value);
 gboolean lu_value_init_set_attr_from_string(GValue *value, const char *attr,
 					    const char *string,
-					    lu_error_t **error);
+					    struct lu_error **error);
 
 lu_context_t *lu_start(const char *authname,
 		       lu_entity_type_t auth_type,
 		       const char *modules, const char *create_modules,
 		       lu_prompt_fn *prompter,
 		       gpointer callback_data,
-		       lu_error_t **error);
+		       struct lu_error **error);
 void lu_end(lu_context_t *context);
 
 void lu_set_prompter(lu_context_t *context,
@@ -61,7 +61,7 @@ void lu_get_prompter(lu_context_t *context,
 		     lu_prompt_fn ** prompter, gpointer *callback_data);
 
 gboolean lu_set_modules(lu_context_t *context,
-			const char *list, lu_error_t **error);
+			const char *list, struct lu_error **error);
 const char *lu_get_modules(lu_context_t *context);
 gboolean lu_uses_elevated_privileges (lu_context_t *context);
 
@@ -72,79 +72,79 @@ gboolean lu_group_default(lu_context_t *ctx, const char *name,
 
 gboolean lu_user_lookup_name(lu_context_t *context,
 			     const char *name, struct lu_ent *ent,
-			     lu_error_t **error);
+			     struct lu_error **error);
 gboolean lu_group_lookup_name(lu_context_t *context,
 			      const char *name, struct lu_ent *ent,
-			      lu_error_t **error);
+			      struct lu_error **error);
 gboolean lu_user_lookup_id(lu_context_t *context, uid_t uid,
-			   struct lu_ent *ent, lu_error_t **error);
+			   struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_lookup_id(lu_context_t *context, gid_t gid,
-			    struct lu_ent *ent, lu_error_t **error);
+			    struct lu_ent *ent, struct lu_error **error);
 gboolean lu_user_add(lu_context_t *context,
-		     struct lu_ent *ent, lu_error_t **error);
+		     struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_add(lu_context_t *context,
-		      struct lu_ent *ent, lu_error_t **error);
+		      struct lu_ent *ent, struct lu_error **error);
 gboolean lu_user_modify(lu_context_t *context,
-			struct lu_ent *ent, lu_error_t **error);
+			struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_modify(lu_context_t *context,
-			 struct lu_ent *ent, lu_error_t **error);
+			 struct lu_ent *ent, struct lu_error **error);
 gboolean lu_user_delete(lu_context_t *context,
-			struct lu_ent *ent, lu_error_t **error);
+			struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_delete(lu_context_t *context,
-			 struct lu_ent *ent, lu_error_t **error);
+			 struct lu_ent *ent, struct lu_error **error);
 
 gboolean lu_user_lock(lu_context_t *context,
-		      struct lu_ent *ent, lu_error_t **error);
+		      struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_lock(lu_context_t *context,
-		       struct lu_ent *ent, lu_error_t **error);
+		       struct lu_ent *ent, struct lu_error **error);
 gboolean lu_user_unlock(lu_context_t *context,
-			struct lu_ent *ent, lu_error_t **error);
+			struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_unlock(lu_context_t *context,
-			 struct lu_ent *ent, lu_error_t **error);
+			 struct lu_ent *ent, struct lu_error **error);
 gboolean lu_user_unlock_nonempty(lu_context_t *context, struct lu_ent *ent,
-				 lu_error_t **error);
+				 struct lu_error **error);
 gboolean lu_group_unlock_nonempty(lu_context_t *context, struct lu_ent *ent,
-				  lu_error_t **error);
+				  struct lu_error **error);
 
 gboolean lu_user_islocked(lu_context_t *context,
-			  struct lu_ent *ent, lu_error_t **error);
+			  struct lu_ent *ent, struct lu_error **error);
 gboolean lu_group_islocked(lu_context_t *context,
-			   struct lu_ent *ent, lu_error_t **error);
+			   struct lu_ent *ent, struct lu_error **error);
 
 gboolean lu_user_setpass(lu_context_t *context,
 			 struct lu_ent *ent, const char *newpass,
 			 gboolean crypted,
-			 lu_error_t **error);
+			 struct lu_error **error);
 gboolean lu_group_setpass(lu_context_t *context,
 			  struct lu_ent *ent, const char *newpass,
 			  gboolean crypted,
-			  lu_error_t **error);
+			  struct lu_error **error);
 gboolean lu_user_removepass(lu_context_t *context,
 			    struct lu_ent *ent,
-			    lu_error_t **error);
+			    struct lu_error **error);
 gboolean lu_group_removepass(lu_context_t *context,
 			     struct lu_ent *ent,
-			     lu_error_t **error);
+			     struct lu_error **error);
 
 GValueArray *lu_users_enumerate(lu_context_t *context,
 				const char *pattern,
-				lu_error_t **error);
+				struct lu_error **error);
 GValueArray *lu_groups_enumerate(lu_context_t *context,
 				 const char *pattern,
-				 lu_error_t **error);
+				 struct lu_error **error);
 GValueArray *lu_users_enumerate_by_group(lu_context_t *context,
 					 const char *group,
-					 lu_error_t **error);
+					 struct lu_error **error);
 GValueArray *lu_groups_enumerate_by_user(lu_context_t *context,
 					 const char *user,
-					 lu_error_t **error);
+					 struct lu_error **error);
 
 GPtrArray *lu_users_enumerate_full(lu_context_t *context,
 			           const char *pattern,
-			           lu_error_t **error);
+			           struct lu_error **error);
 GPtrArray *lu_groups_enumerate_full(lu_context_t *context,
 			            const char *pattern,
-			            lu_error_t **error);
+			            struct lu_error **error);
 
 G_END_DECLS
 #endif

@@ -31,10 +31,11 @@
 static void
 do_id (struct lu_context *ctx, const char *name, int nameonly,
        gboolean (*lookup_name) (lu_context_t *, const char *, struct lu_ent *,
-				lu_error_t **),
-       GValueArray *(*enumerate) (lu_context_t *, const char *, lu_error_t **),
+				struct lu_error **),
+       GValueArray *(*enumerate) (lu_context_t *, const char *,
+				  struct lu_error **),
        gboolean (*lookup_member) (lu_context_t *, const char *, struct lu_ent *,
-				  lu_error_t **),
+				  struct lu_error **),
        const char *id_attribute, const char *id_descr)
 {
 	GValueArray *values;

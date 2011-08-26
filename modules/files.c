@@ -273,7 +273,7 @@ static gboolean
 parse_field(const struct format_specifier *format, GValue *value,
 	    const char *string)
 {
-	lu_error_t *err;
+	struct lu_error *err;
 	gboolean ret;
 
 	err = NULL;

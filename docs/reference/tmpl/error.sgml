@@ -28,6 +28,18 @@ by %LC_CTYPE locale category.
 <!-- ##### SECTION Image ##### -->
 
 
+<!-- ##### STRUCT lu_error ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF lu_error_t ##### -->
+<para>
+
+</para>
+
+
 <!-- ##### MACRO LU_ERROR_CHECK ##### -->
 <para>
 Checks that the given pointer to a pointer to a struct does not already point

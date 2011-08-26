@@ -131,7 +131,7 @@ attr_in_list(const char *attr, const char *list)
    might be somebody's misplaced password. */
 gboolean
 lu_value_init_set_attr_from_string(GValue *value, const char *attr,
-				   const char *string, lu_error_t **error)
+				   const char *string, struct lu_error **error)
 {
 	LU_ERROR_CHECK(error);
 #define A(NAME) NAME "\0"
