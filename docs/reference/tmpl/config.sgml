@@ -1,19 +1,14 @@
 <!-- ##### SECTION Title ##### -->
-config
+
 
 <!-- ##### SECTION Short_Description ##### -->
-Routines for reading configuration information for the libuser library.
+
 
 <!-- ##### SECTION Long_Description ##### -->
-<para>
-These routines allow an application or module to read configuration data
-from the libuser configuration.
-</para>
+
 
 <!-- ##### SECTION See_Also ##### -->
-<para>
 
-</para>
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -22,46 +17,28 @@ from the libuser configuration.
 
 
 <!-- ##### FUNCTION lu_cfg_read ##### -->
-<para>
-Reads the list of values for a given key from the configuration space.
-</para>
 
-@context: A valid libuser library context.
-@key: The value to be read from the configuration.  The key should be of the
-form "section/key" for most purposes.  For example, the #files module uses
-keys of the form "file/foo" for all of its configuration data.
-@default_value: A default value to be returned in case none are found.  Can
-be NULL.
-@Returns: A #GList of values, formatted as strings.  The list must be freed
-by calling g_list_free().
+
+@context: 
+@key: 
+@default_value: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_cfg_read_single ##### -->
-<para>
-Read a single value set for a given key in the configuration space.  This is
-a convenience function.
-</para>
 
-@context: A valid libuser library context.
-@key: The value to be read from the configuration.  The key should be of the
-form "section/key" for most purposes.  For example, the #files module uses
-keys of the form "file/foo" for all of its configuration data.
-@default_value: A default value to be returned in case none are found.  Can
-be NULL.
-@Returns: A string representation of one of the values set for the key.  This
-string must not be freed.
+
+@context: 
+@key: 
+@default_value: 
+@Returns: 
 
 
 <!-- ##### FUNCTION lu_cfg_read_keys ##### -->
-<para>
-Read the names of all of the keys "below" a given key in the configuration
-space.  This function is typically used for walking the configuration space.
-</para>
 
-@context: A valid libuser library context.
-@parent_key: The parent key under which the caller wishes to know which subkeys
-are present.
-@Returns: A #GList of string representations of key names.  The list must be
-freed using g_list_free().
+
+@context: 
+@parent_key: 
+@Returns: 
 
 

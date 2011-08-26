@@ -30,6 +30,16 @@
 #include "user_private.h"
 #include "internal.h"
 
+/**
+ * SECTION:config
+ * @short_description: Routines for reading configuration information for the
+ * libuser library.
+ * @include: libuser/config.h
+ *
+ * These routines allow an application or module to read configuration data
+ * from the libuser configuration.
+ */
+
 #ifdef HAVE___SECURE_GETENV
 #define getenv(string) __secure_getenv(string)
 #endif
@@ -341,8 +351,20 @@ lu_cfg_done(struct lu_context *context)
 	context->config = NULL;
 }
 
-/* Read a specific key from the stored configuration, and return a list of
- * the values.  The list must be freed. */
+/**
+ * lu_cfg_read:
+ * @context: A valid libuser library context.
+ * @key: The value to be read from the configuration.  The key should be of the
+ * form "section/key" for most purposes.  For example, the #files module uses
+ * keys of the form "files/foo" for all of its configuration data.
+ * @default_value: A default value to be returned in case none are found.  Can
+ * be %NULL.
+ *
+ * Reads the list of values for a given key from the configuration space.
+ *
+ * Returns: A #GList of values, formatted as strings.  The list must be freed
+ * by calling g_list_free().
+ */
 GList *
 lu_cfg_read(struct lu_context *context, const char *key,
 	    const char *default_value)
@@ -389,7 +411,19 @@ lu_cfg_read(struct lu_context *context, const char *key,
 	return ret;
 }
 
-/* Read the list of keys in a particular section of the file. */
+
+/**
+ * lu_cfg_read_keys:
+ * @context: A valid libuser library context.
+ * @parent_key: The parent key under which the caller wishes to know which
+ * subkeys are present.
+ *
+ * Read the names of all of the keys in a specified section of the configuration
+ * space.  This function is typically used for walking the configuration space.
+ *
+ * Returns: A #GList of string representations of key names.  The list must be
+ * freed using g_list_free().
+ */
 GList *
 lu_cfg_read_keys(struct lu_context * context, const char *parent_key)
 {
@@ -415,7 +449,21 @@ lu_cfg_read_keys(struct lu_context * context, const char *parent_key)
 	return ret;
 }
 
-/* Read a configuration entry, and return no more than one value. */
+/**
+ * lu_cfg_read_single:
+ * @context: A valid libuser library context.
+ * @key: The value to be read from the configuration.  The key should be of the
+ * form "section/key" for most purposes.  For example, the #files module uses
+ * keys of the form "files/foo" for all of its configuration data.
+ * @default_value: A default value to be returned in case none are found.  Can
+ * be %NULL.
+ *
+ * Read a single value set for a given key in the configuration space.  This is
+ * a convenience function.  Additional values, if any, will be ignored.
+ *
+ * Returns: A string representation of one of the values set for the key.  This
+ * string must not be freed.
+ */
 const char *
 lu_cfg_read_single(struct lu_context *context, const char *key,
 		   const char *default_value)

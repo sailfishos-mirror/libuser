@@ -1,5 +1,9 @@
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/tmpl/config.sgml: Move contents...
+	* lib/config.c: ... here, and update somewhat.
+	* lib/config.h: Drop redundant documentation.
+
 	* docs/reference/libuser-decl-list.txt
 	* docs/reference/libuser-decl.txt
 	* docs/reference/libuser.args
