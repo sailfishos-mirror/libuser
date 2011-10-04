@@ -1,3 +1,7 @@
+2011-10-04  Miloslav Trmač  <mitr@redhat.com>
+
+	* libuser.conf: Comment hard-coded "500" values.
+
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
 
 	* docs/reference/tmpl/config.sgml
