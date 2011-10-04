@@ -26,7 +26,8 @@ EXTRA_DIST = \
 	tests/config.conf.in tests/config_default_useradd \
 	tests/config_import.conf.in tests/config_import2.conf.in \
 	tests/config_login.defs tests/config_login2.defs \
-	tests/config_override.conf.in tests/config_test.sh \
+	tests/config_override.conf.in tests/config_test.py \
+	tests/config_test.sh \
 	tests/default_pw.conf.in tests/default_pw_test tests/default_pw_test.py \
 	tests/files.conf.in tests/files_test tests/files_test.py \
 	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \

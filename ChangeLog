@@ -1,5 +1,11 @@
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/admin.c (libuser_admin_get_first_unused_id_type): Read default
+	start value from configuration.
+	* tests/config_test.py: New file.
+	* tests/config_test.sh (workdir): Run tests/config_test.py.
+	* Makefile.am (EXTRA_DIST): Add tests/config_test.py
+
 	* apps/lgroupadd.1:
 	* apps/luseradd.1: Fix documentation of start of non-system ID values.
 

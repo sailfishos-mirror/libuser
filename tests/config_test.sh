@@ -42,5 +42,11 @@ sed -e "s|@TOP_BUILDDIR@|$(pwd)|g" -e "s|@SRCDIR@|$srcdir|g" \
 # Ugly non-portable hacks
 LD_LIBRARY_PATH=$(pwd)/lib/.libs
 export LD_LIBRARY_PATH
+PYTHONPATH=$(pwd)/python/.libs
+export PYTHONPATH
 
 tests/config_test "$workdir"
+
+LIBUSER_CONF="$workdir/libuser_import.conf"
+export LIBUSER_CONF
+workdir="$workdir" python "$srcdir"/config_test.py

@@ -17,7 +17,9 @@
 
 #include <Python.h>
 #include <config.h>
+#include <errno.h>
 #include <grp.h>
+#include <inttypes.h>
 #include <pwd.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -1294,13 +1296,39 @@ libuser_admin_get_first_unused_id_type(struct libuser_admin *me,
 				       PyObject * args, PyObject * kwargs,
 				       enum lu_entity_type enttype)
 {
+	const char *key, *key_string, *val;
 	char *keywords[] = { "start", NULL };
-
 	PY_LONG_LONG start = 500;
 
 	g_return_val_if_fail(me != NULL, NULL);
 
 	DEBUG_ENTRY;
+
+	switch (enttype) {
+	case lu_user:
+		key = "userdefaults/" LU_UIDNUMBER;
+		key_string = "userdefaults/" G_STRINGIFY_ARG(LU_UIDNUMBER);
+		break;
+	case lu_group:
+		key = "groupdefaults/" LU_GIDNUMBER;
+		key_string = "groupdefaults/" G_STRINGIFY_ARG(LU_GIDNUMBER);
+		break;
+	default:
+		g_assert_not_reached();
+	}
+	val = lu_cfg_read_single(me->ctx, key, NULL);
+	if (val == NULL)
+		val = lu_cfg_read_single(me->ctx, key_string, NULL);
+	if (val != NULL) {
+		intmax_t imax;
+		char *end;
+
+		errno = 0;
+		imax = strtoimax(val, &end, 10);
+		if (errno == 0 && *end == 0 && end != val && (id_t)imax == imax)
+			start = imax;
+	}
+
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|L", keywords,
 					 &start)) {
 		DEBUG_EXIT;
