@@ -1,5 +1,8 @@
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lgroupadd.1:
+	* apps/luseradd.1: Fix documentation of start of non-system ID values.
+
 	* libuser.conf: Comment hard-coded "500" values.
 
 2011-08-26  Miloslav Trmač  <mitr@redhat.com>
