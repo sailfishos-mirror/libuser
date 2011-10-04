@@ -84,10 +84,22 @@ check_access(const char *chuser, access_vector_t access)
 }
 #endif
 
+/* Return current umask value */
+static mode_t
+current_umask(void)
+{
+	mode_t value;
+
+	value = umask(S_IRWXU | S_IRWXG | S_IRWXO);
+	umask(value);
+	return value;
+}
+
 /* Copy the "src" directory to "dest", setting all ownerships as given, and
    setting the mode of the top-level directory as given.  The group ID of the
    copied files is preserved if it is nonzero.  If keep_contexts, preserve
-   SELinux contexts in files under dest; use matchpathcon otherwise.
+   SELinux contexts in files under dest; use matchpathcon otherwise.  Assume
+   umask_value is the current value of umask.
 
    Note that keep_contexts does NOT affect the context of dest; the caller must
    perform an explicit setfscreatecon() before calling lu_homedir_copy() to set
@@ -95,7 +107,8 @@ check_access(const char *chuser, access_vector_t access)
    function is unspecified. */
 static gboolean
 lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
-		mode_t mode, gboolean keep_contexts, struct lu_error **error)
+		mode_t mode, gboolean keep_contexts, mode_t umask_value,
+		struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
@@ -131,6 +144,15 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 	if (chown(dest, owner, group) == -1 && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error changing owner of `%s': %s"), dest,
+			     strerror(errno));
+		goto err_dir;
+	}
+
+	/* Set modes explicitly to preserve S_ISGID and other bits.  Do this
+	   after chown, because chown is permitted to reset these bits. */
+	if (chmod(dest, mode & ~umask_value) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error setting mode of `%s': %s"), dest,
 			     strerror(errno));
 		goto err_dir;
 	}
@@ -174,7 +196,7 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(srcpath, path, owner,
 					     st.st_gid ?: group, st.st_mode,
-					     keep_contexts, error))
+					     keep_contexts, umask_value, error))
 				/* Aargh!  Fail up. */
 				goto err_dir;
 			/* Set the date on the directory. */
@@ -337,7 +359,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
 		goto err_fscreate;
 	ret = lu_homedir_copy(skeleton, directory, owner, group, mode, 0,
-			      error);
+			      current_umask(), error);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
 err:
@@ -437,7 +459,7 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 		goto err_fscreate;
 	/* ... and we can copy it ... */
 	if (!lu_homedir_copy(oldhome, newhome, st.st_uid, st.st_gid,
-			     st.st_mode, 1, error))
+			     st.st_mode, 1, current_umask(), error))
 		goto err_fscreate;
 	lu_util_fscreate_restore(fscreate);
 	/* ... remove the old one. */

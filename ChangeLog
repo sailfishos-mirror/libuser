@@ -1,5 +1,9 @@
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (current_umask): New function.
+	(lu_homedir_copy): Preserve S_ISGID and other bits for
+	directories.  New parameter umask_value.  All users updated.
+
 	* python/admin.c (libuser_admin_get_first_unused_id_type): Read default
 	start value from configuration.
 	* tests/config_test.py: New file.
