@@ -20,6 +20,7 @@
 # Author: Miloslav Trmač <mitr@redhat.com>
 
 srcdir=$srcdir/tests
+. $srcdir/test_utils.sh
 
 workdir=$(pwd)/test_default_pw
 
@@ -100,7 +101,7 @@ for modules in \
 	    # FIXME: path
 	    /usr/sbin/slapd -h ldap://127.0.0.1:"$ldap_port"/ \
 		-f "$workdir"/slapd.conf &
-	    sleep 3 # Time for slapd to initialize
+	    wait_for_slapd "$workdir"/slapd.pid
 	    slapd_pid=$(cat "$workdir"/slapd.pid)
 	    trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
 	    ldapadd -h 127.0.0.1 -p "$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \

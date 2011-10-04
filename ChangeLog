@@ -1,5 +1,10 @@
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/test_utils.sh: New file.
+	* tests/default_pw_test
+	* tests/ldap_test: Use common wait_for_slapd, also increasing the
+	timeout to 30 seconds.
+
 	* po/*.po (many): Mark an invalid translation as fuzzy.
 
 	* configure.in: Release 0.57.3.
