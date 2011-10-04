@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
 "POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:32+0000\n"
+"PO-Revision-Date: 2011-10-04 12:55+0200\n"
 "Last-Translator: mitr <mitr@volny.cz>\n"
 "Language-Team: Korean (http://www.transifex.net/projects/p/fedora/team/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -667,6 +667,7 @@ msgid "unlocking would make the password field empty"
 msgstr "잠금 해제하시면 암호 입력란이 비워집니다"
 
 #: lib/error.c:105
+#, fuzzy
 msgid "invalid attribute value"
 msgstr "올바르지 않은 속성 \n"
 

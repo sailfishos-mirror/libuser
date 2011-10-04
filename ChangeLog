@@ -1,6 +1,6 @@
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
-	* po/ar.po: Mark an invalid translation as fuzzy.
+	* po/*.po (many): Mark an invalid translation as fuzzy.
 
 	* configure.in: Release 0.57.3.
 	* NEWS: Update.

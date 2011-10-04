@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
 "POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:32+0000\n"
+"PO-Revision-Date: 2011-10-04 12:54+0200\n"
 "Last-Translator: mitr <mitr@volny.cz>\n"
 "Language-Team: Tamil <tamil-users@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -670,6 +670,7 @@ msgid "unlocking would make the password field empty"
 msgstr "பூட்டு நீக்குதல் கடவுச்சொல் புலத்தை வெறுமையாக்கும்"
 
 #: lib/error.c:105
+#, fuzzy
 msgid "invalid attribute value"
 msgstr "தவறான அளவுரு மதிப்புதவறான அற\n"
 

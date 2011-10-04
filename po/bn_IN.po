@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
 "POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:32+0000\n"
+"PO-Revision-Date: 2011-10-04 12:52+0200\n"
 "Last-Translator: mitr <mitr@volny.cz>\n"
 "Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
 "MIME-Version: 1.0\n"
@@ -669,6 +669,7 @@ msgid "unlocking would make the password field empty"
 msgstr "আন-লক করা হলে পাসওয়ার্ডের ক্ষেত্র ফাঁকা হয়ে যাবে"
 
 #: lib/error.c:105
+#, fuzzy
 msgid "invalid attribute value"
 msgstr "অ্যাট্রিবিউটের মান বৈধ নয়\n"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
 "POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:32+0000\n"
+"PO-Revision-Date: 2011-10-04 12:54+0200\n"
 "Last-Translator: mitr <mitr@volny.cz>\n"
 "Language-Team: Portuguese <trans-pt@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -664,6 +664,7 @@ msgid "unlocking would make the password field empty"
 msgstr "desbloquear tornaria o campo de senha vazio"
 
 #: lib/error.c:105
+#, fuzzy
 msgid "invalid attribute value"
 msgstr "valor de atributo inválido\n"
 
