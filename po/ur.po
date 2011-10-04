@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
-"POT-Creation-Date: 2011-03-17 17:23+0100\n"
-"PO-Revision-Date: 2011-03-31 16:39+0000\n"
+"POT-Creation-Date: 2011-10-04 12:31+0200\n"
+"PO-Revision-Date: 2011-10-04 10:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Urdu <trans-urdu@lists.fedoraproject.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,95 +17,100 @@ msgstr ""
 "Language: ur\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: apps/apputil.c:109
+#: apps/apputil.c:122
 #, c-format
 msgid "Home directory path `%s' is not absolute"
 msgstr ""
 
-#: apps/apputil.c:117 apps/apputil.c:192 apps/apputil.c:225 apps/apputil.c:252
+#: apps/apputil.c:130 apps/apputil.c:214 apps/apputil.c:247 apps/apputil.c:274
 #: modules/files.c:180
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:125 apps/apputil.c:201
+#: apps/apputil.c:138 apps/apputil.c:223
 #, c-format
 msgid "Error creating `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:133 apps/apputil.c:208 apps/apputil.c:298
+#: apps/apputil.c:146 apps/apputil.c:230 apps/apputil.c:320
 #: modules/files.c:163
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:237 apps/apputil.c:269 apps/apputil.c:285
+#: apps/apputil.c:155
+#, c-format
+msgid "Error setting mode of `%s': %s"
+msgstr ""
+
+#: apps/apputil.c:259 apps/apputil.c:291 apps/apputil.c:307
 #: modules/files.c:195 modules/files.c:210
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:360 apps/apputil.c:395 apps/apputil.c:412
+#: apps/apputil.c:382 apps/apputil.c:417 apps/apputil.c:434
 #, c-format
 msgid "Error removing `%s': %s"
 msgstr ""
 
-#: apps/apputil.c:576 apps/apputil.c:580
+#: apps/apputil.c:598 apps/apputil.c:602
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr ""
 
-#: apps/apputil.c:589
+#: apps/apputil.c:611
 #, c-format
 msgid "Internal error.\n"
 msgstr ""
 
-#: apps/apputil.c:610
+#: apps/apputil.c:632
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr ""
 
-#: apps/apputil.c:612
+#: apps/apputil.c:634
 msgid "Unknown user context"
 msgstr ""
 
-#: apps/apputil.c:620
+#: apps/apputil.c:642
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr ""
 
-#: apps/apputil.c:629
+#: apps/apputil.c:651
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr ""
 
-#: apps/apputil.c:639 apps/apputil.c:666
+#: apps/apputil.c:661 apps/apputil.c:688
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr ""
 
-#: apps/apputil.c:647
+#: apps/apputil.c:669
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr ""
 
-#: apps/apputil.c:652
+#: apps/apputil.c:674
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr ""
 
-#: apps/apputil.c:656
+#: apps/apputil.c:678
 #, c-format
 msgid "User mismatch.\n"
 msgstr ""
 
-#: apps/lchage.c:111 apps/lid.c:130 apps/lpasswd.c:66 apps/luseradd.c:102
+#: apps/lchage.c:111 apps/lid.c:131 apps/lpasswd.c:66 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:100
 msgid "[OPTION...] user"
 msgstr ""
 
 #: apps/lchage.c:114 apps/lchfn.c:72 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:133 apps/lnewusers.c:66
+#: apps/lgroupdel.c:56 apps/lgroupmod.c:84 apps/lid.c:134 apps/lnewusers.c:66
 #: apps/lpasswd.c:69 apps/luseradd.c:105 apps/luserdel.c:64
 #: apps/lusermod.c:103
 #, c-format
@@ -119,7 +124,7 @@ msgid "No user name specified.\n"
 msgstr ""
 
 #: apps/lchage.c:133 apps/lchfn.c:103 apps/lchsh.c:89 apps/lgroupadd.c:100
-#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:177 apps/lnewusers.c:77
+#: apps/lgroupdel.c:75 apps/lgroupmod.c:116 apps/lid.c:178 apps/lnewusers.c:77
 #: apps/lpasswd.c:93 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:155 samples/enum.c:56 samples/testuser.c:71
 #, c-format
@@ -195,7 +200,7 @@ msgstr ""
 msgid "[OPTION...] [user]"
 msgstr ""
 
-#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:164
+#: apps/lchfn.c:88 apps/lchsh.c:74 apps/lid.c:165
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr ""
@@ -320,27 +325,27 @@ msgstr ""
 msgid "Group %s could not be modified: %s\n"
 msgstr ""
 
-#: apps/lid.c:49 apps/lid.c:60
+#: apps/lid.c:50 apps/lid.c:61
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr ""
 
-#: apps/lid.c:53
+#: apps/lid.c:54
 #, c-format
 msgid "%s does not exist\n"
 msgstr ""
 
-#: apps/lid.c:146
+#: apps/lid.c:147
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr ""
 
-#: apps/lid.c:150
+#: apps/lid.c:151
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr ""
 
-#: apps/lid.c:160
+#: apps/lid.c:161
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr ""
@@ -551,127 +556,127 @@ msgstr ""
 msgid "Error moving %s to %s: %s.\n"
 msgstr ""
 
-#: lib/config.c:114
+#: lib/config.c:124
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr ""
 
-#: lib/config.c:120
+#: lib/config.c:130
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr ""
 
-#: lib/config.c:129
+#: lib/config.c:139
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr ""
 
-#: lib/config.c:145
+#: lib/config.c:155
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr ""
 
-#: lib/error.c:38
+#: lib/error.c:62
 msgid "success"
 msgstr ""
 
-#: lib/error.c:40
+#: lib/error.c:64
 msgid "module disabled by configuration"
 msgstr ""
 
-#: lib/error.c:42
+#: lib/error.c:66
 msgid "generic error"
 msgstr ""
 
-#: lib/error.c:44
+#: lib/error.c:68
 msgid "not enough privileges"
 msgstr ""
 
-#: lib/error.c:46
+#: lib/error.c:70
 msgid "access denied"
 msgstr ""
 
-#: lib/error.c:48
+#: lib/error.c:72
 msgid "bad user/group name"
 msgstr ""
 
-#: lib/error.c:50
+#: lib/error.c:74
 msgid "bad user/group id"
 msgstr ""
 
-#: lib/error.c:52
+#: lib/error.c:76
 msgid "user/group name in use"
 msgstr ""
 
-#: lib/error.c:54
+#: lib/error.c:78
 msgid "user/group id in use"
 msgstr ""
 
-#: lib/error.c:56
+#: lib/error.c:80
 msgid "error manipulating terminal attributes"
 msgstr ""
 
-#: lib/error.c:58
+#: lib/error.c:82
 msgid "error opening file"
 msgstr ""
 
-#: lib/error.c:60
+#: lib/error.c:84
 msgid "error locking file"
 msgstr ""
 
-#: lib/error.c:62
+#: lib/error.c:86
 msgid "error statting file"
 msgstr ""
 
-#: lib/error.c:64
+#: lib/error.c:88
 msgid "error reading file"
 msgstr ""
 
-#: lib/error.c:66
+#: lib/error.c:90
 msgid "error writing to file"
 msgstr ""
 
-#: lib/error.c:68
+#: lib/error.c:92
 msgid "data not found in file"
 msgstr ""
 
-#: lib/error.c:70
+#: lib/error.c:94
 msgid "internal initialization error"
 msgstr ""
 
-#: lib/error.c:72
+#: lib/error.c:96
 msgid "error loading module"
 msgstr ""
 
-#: lib/error.c:74
+#: lib/error.c:98
 msgid "error resolving symbol in module"
 msgstr ""
 
-#: lib/error.c:76
+#: lib/error.c:100
 msgid "library/module version mismatch"
 msgstr ""
 
-#: lib/error.c:78
+#: lib/error.c:102
 msgid "unlocking would make the password field empty"
 msgstr ""
 
-#: lib/error.c:81
+#: lib/error.c:105
 msgid "invalid attribute value"
 msgstr ""
 
-#: lib/error.c:83
+#: lib/error.c:107
 msgid "invalid module combination"
 msgstr ""
 
-#: lib/error.c:88
+#: lib/error.c:112
 msgid "unknown error"
 msgstr ""
 
-#: lib/misc.c:158
+#: lib/misc.c:240
 msgid "invalid number"
 msgstr ""
 
-#: lib/misc.c:172
+#: lib/misc.c:254
 msgid "invalid ID"
 msgstr ""
 
@@ -690,86 +695,86 @@ msgstr ""
 msgid "module `%s' does not define `%s'"
 msgstr ""
 
-#: lib/prompt.c:65
+#: lib/prompt.c:88
 msgid "error reading terminal attributes"
 msgstr ""
 
-#: lib/prompt.c:72 lib/prompt.c:84
+#: lib/prompt.c:95 lib/prompt.c:107
 msgid "error setting terminal attributes"
 msgstr ""
 
-#: lib/prompt.c:78
+#: lib/prompt.c:101
 msgid "error reading from terminal"
 msgstr ""
 
-#: lib/user.c:187
+#: lib/user.c:221
 msgid "name is not set"
 msgstr ""
 
-#: lib/user.c:192
+#: lib/user.c:226
 msgid "name is too short"
 msgstr ""
 
-#: lib/user.c:197
+#: lib/user.c:231
 #, c-format
 msgid "name is too long (%zu > %d)"
 msgstr ""
 
-#: lib/user.c:204
+#: lib/user.c:238
 msgid "name contains non-ASCII characters"
 msgstr ""
 
-#: lib/user.c:211
+#: lib/user.c:245
 msgid "name contains control characters"
 msgstr ""
 
-#: lib/user.c:218
+#: lib/user.c:252
 msgid "name contains whitespace"
 msgstr ""
 
-#: lib/user.c:230
+#: lib/user.c:264
 msgid "name starts with a hyphen"
 msgstr ""
 
-#: lib/user.c:241
+#: lib/user.c:275
 #, c-format
 msgid "name contains invalid char `%c'"
 msgstr ""
 
-#: lib/user.c:284 lib/user.c:332
+#: lib/user.c:318 lib/user.c:366
 #, c-format
 msgid "user %s has no UID"
 msgstr ""
 
-#: lib/user.c:307 lib/user.c:333
+#: lib/user.c:341 lib/user.c:367
 #, c-format
 msgid "group %s has no GID"
 msgstr ""
 
-#: lib/user.c:327
+#: lib/user.c:361
 #, c-format
 msgid "user %jd has no name"
 msgstr ""
 
-#: lib/user.c:328
+#: lib/user.c:362
 #, c-format
 msgid "group %jd has no name"
 msgstr ""
 
-#: lib/user.c:336
+#: lib/user.c:370
 msgid "user has neither a name nor an UID"
 msgstr ""
 
-#: lib/user.c:337
+#: lib/user.c:371
 msgid "group has neither a name nor a GID"
 msgstr ""
 
-#: lib/user.c:1284
+#: lib/user.c:1372
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 
-#: lib/user.c:1953
+#: lib/user.c:2298
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr ""
@@ -1059,23 +1064,23 @@ msgstr ""
 msgid "error initializing Cyrus SASL: %s"
 msgstr ""
 
-#: python/admin.c:525
+#: python/admin.c:527
 msgid "error creating home directory for user"
 msgstr ""
 
-#: python/admin.c:578
+#: python/admin.c:580
 msgid "error removing home directory for user"
 msgstr ""
 
-#: python/admin.c:656
+#: python/admin.c:658
 msgid "error moving home directory for user"
 msgstr ""
 
-#: python/admin.c:689 python/admin.c:766
+#: python/admin.c:691 python/admin.c:768
 msgid "error creating mail spool for user"
 msgstr ""
 
-#: python/admin.c:887
+#: python/admin.c:889
 msgid "error removing mail spool for user"
 msgstr ""
 
@@ -1136,3 +1141,5 @@ msgstr ""
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr ""
+
+

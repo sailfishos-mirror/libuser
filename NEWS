@@ -1,3 +1,10 @@
+0.57.3
+* Don't assume user/group IDs start at 500 in Python getFirstUnusedGid and
+  getFirstUnusedUid.
+* Preserve S_ISGID and other bits when copying directories from /etc/skel.
+* Deprecate lu_*_t typedefs: use {struct,enum} lu_* instead.
+* Update to build with recent gtk-doc.
+
 0.57.2
 * Fix adding LDAP users with empty gecos.
 * Correctly preserve algorithm used to hash an LDAP password when changing it.
