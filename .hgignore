@@ -15,6 +15,7 @@
 ^docs/Makefile\.in$
 ^docs/reference/Makefile\.in$
 ^docs/reference/gtk-doc\.make
+^docs/reference/tmpl
 ^m4.*
 ^po/.*\.gmo$
 ^po/Makefile\.in\.in$
