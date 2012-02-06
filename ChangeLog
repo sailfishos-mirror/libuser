@@ -1,5 +1,8 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_lock_obtain): Don't corrupt errno before using it,
+	simplify.
+
 	* modules/files.c (lu_files_create_backup): Handle a fchmod () failure.
 
 	* lib/config.c (handle_default_useradd_key): Fix a check for invalid

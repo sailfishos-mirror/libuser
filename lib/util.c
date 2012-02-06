@@ -274,32 +274,31 @@ lu_util_lock_obtain(int fd, struct lu_error ** error)
 	g_assert(fd != -1);
 	ret = g_malloc0(sizeof(*ret));
 
-	do {
+	for (;;) {
+		struct timeval tv;
+
 		ret->fd = fd;
 		ret->lock.l_type = F_RDLCK;
 		if (write(ret->fd, NULL, 0) == 0)
 			ret->lock.l_type = F_WRLCK;
 		i = fcntl(ret->fd, F_SETLK, &ret->lock);
-		if ((i == -1) && ((errno == EINTR) || (errno == EAGAIN))) {
-			struct timeval tv;
+		if (i != -1)
+			return ret;
 
-			if (maxtries-- <= 0) {
-				break;
-			}
-			memset(&tv, 0, sizeof(tv));
-			tv.tv_usec = (delay *= 2);
-			select(0, NULL, NULL, NULL, &tv);
-		}
-	} while ((i == -1) && ((errno == EINTR) || (errno == EAGAIN)));
+		if (errno != EINTR && errno != EAGAIN)
+			break;
 
-	if (i == -1) {
-		lu_error_new(error, lu_error_lock,
-			     _("error locking file: %s"), strerror(errno));
-		g_free(ret);
-		return NULL;
+		if (maxtries-- <= 0)
+			break;
+		memset(&tv, 0, sizeof(tv));
+		tv.tv_usec = (delay *= 2);
+		select(0, NULL, NULL, NULL, &tv);
 	}
 
-	return ret;
+	lu_error_new(error, lu_error_lock,
+		     _("error locking file: %s"), strerror(errno));
+	g_free(ret);
+	return NULL;
 }
 
 void
