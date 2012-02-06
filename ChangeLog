@@ -1,5 +1,8 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user.c (run_single): Replace an unreachable return with a
+	g_assert_not_reached ().
+
 	* lib/error.c (lu_error_is_success, lu_error_is_warning)
 	(lu_error_is_error): Remove unreachable code.
 

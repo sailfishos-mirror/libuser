@@ -627,7 +627,7 @@ run_single(struct lu_context *context,
 	default:
 		g_assert_not_reached();	/* not reached */
 	}
-	return FALSE;
+	g_assert_not_reached();
 }
 
 static gboolean
