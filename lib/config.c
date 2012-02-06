@@ -207,8 +207,6 @@ process_line(char *line, struct lu_string_cache *cache,
 			tmp = g_strndup(line, p - line);
 			*section = cache->cache(cache, tmp);
 			g_free(tmp);
-			*key = NULL;
-			*value = NULL;
 		}
 		return;
 	}

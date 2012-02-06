@@ -1,5 +1,7 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/config.c (process_line): Remove redundant code.
+
 	* lib/util.c (lu_util_lock_obtain): Don't corrupt errno before using it,
 	simplify.
 
