@@ -159,7 +159,12 @@ lu_files_create_backup(const char *filename,
 			     strerror(errno));
 		goto err_olock;
 	}
-	fchmod(ofd, ist.st_mode);
+	if (fchmod(ofd, ist.st_mode) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing mode of `%s': %s"), backupname,
+			     strerror(errno));
+		goto err_olock;
+	}
 
 	/* Copy the data, block by block. */
 	for (;;) {
