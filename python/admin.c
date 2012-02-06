@@ -402,6 +402,7 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords,
 					 &EntityType, &ent)) {
 		DEBUG_EXIT;
+		return NULL;
 	}
 	/* Run the function. */
 	ret = fn(me->ctx, ent->ent, &error);
