@@ -135,21 +135,16 @@ lu_files_create_backup(const char *filename,
 		goto err_backupname;
 	}
 
-	/* If we can't read its size, or it's not a normal file, bail. */
-	if ((fstat(ofd, &ost) == -1) || !S_ISREG(ost.st_mode)) {
-		struct stat st;
-		if ((stat(backupname, &st) == -1) ||
-		    !S_ISREG(st.st_mode) ||
-		    (st.st_dev != ost.st_dev) ||
-		    (st.st_ino != ost.st_ino)) {
-			lu_error_new(error, lu_error_open,
-				     _("backup file `%s' exists and is not a regular file"),
-				     backupname);
-			goto err_ofd;
-		}
-		lu_error_new(error, lu_error_stat,
-			     _("couldn't stat `%s': %s"), backupname,
-			     strerror(errno));
+	/* If we can't read its type, or it's not a normal file, bail. */
+	if (fstat(ofd, &ost) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     backupname, strerror(errno));
+		goto err_ofd;
+	}
+	if (!S_ISREG(ost.st_mode)) {
+		lu_error_new(error, lu_error_open,
+			     _("backup file `%s' exists and is not a regular file"),
+			     backupname);
 		goto err_ofd;
 	}
 
