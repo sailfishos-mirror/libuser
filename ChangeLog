@@ -1,3 +1,74 @@
+2011-10-06  Miloslav Trmač  <mitr@redhat.com>
+
+	* COPYING
+	* apps/apputil.c
+	* apps/apputil.h
+	* apps/lchage.1
+	* apps/lchage.c
+	* apps/lchfn.1
+	* apps/lchfn.c
+	* apps/lchsh.1
+	* apps/lchsh.c
+	* apps/lgroupadd.1
+	* apps/lgroupadd.c
+	* apps/lgroupdel.1
+	* apps/lgroupdel.c
+	* apps/lgroupmod.1
+	* apps/lgroupmod.c
+	* apps/lid.1
+	* apps/lid.c
+	* apps/lnewusers.1
+	* apps/lnewusers.c
+	* apps/lpasswd.1
+	* apps/lpasswd.c
+	* apps/luseradd.1
+	* apps/luseradd.c
+	* apps/luserdel.1
+	* apps/luserdel.c
+	* apps/lusermod.1
+	* apps/lusermod.c
+	* docs/libuser.conf.5.in
+	* lib/common.c
+	* lib/config.c
+	* lib/config.h
+	* lib/entity.c
+	* lib/entity.h
+	* lib/error.c
+	* lib/error.h
+	* lib/internal.h
+	* lib/misc.c
+	* lib/modules.c
+	* lib/prompt.c
+	* lib/prompt.h
+	* lib/scache.c
+	* lib/user.c
+	* lib/user.h
+	* lib/user_private.h
+	* lib/util.c
+	* modules/files.c
+	* modules/krb5.c
+	* modules/ldap.c
+	* modules/sasldb.c
+	* python/admin.c
+	* python/ent.c
+	* python/libusermodule.c
+	* python/misc.c
+	* samples/enum.c
+	* samples/field.c
+	* samples/homedir.c
+	* samples/lookup.c
+	* samples/prompt.c
+	* samples/testuser.c
+	* tests/alloc_port.c
+	* tests/config_test.c
+	* tests/config_test.sh
+	* tests/default_pw_test
+	* tests/files_test
+	* tests/ldap_test
+	* tests/pwhash_test
+	* tests/test_utils.sh
+	* tests/utils_test: Update FSF address.
+
 2011-10-04  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/test_utils.sh: New file.
