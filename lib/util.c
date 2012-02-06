@@ -608,7 +608,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		return FALSE;
 	}
 
-	if ((start != NULL) && (end != NULL)) {
+	if (start != NULL) {
 		/* insert the text here, after moving the data around */
 		memmove(start + strlen(value), end,
 			st.st_size - (end - buf) + 1);
