@@ -1,5 +1,8 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/config.c (handle_default_useradd_key): Fix a check for invalid
+	GID number.
+
 	* apps/lpasswd.c (main): Handle strdup () allocation failure.
 
 	* python/misc.c (libuser_admin_python_prompter): Handle an allocation

@@ -674,7 +674,7 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 			errno = 0;
 			val = strtoimax(value, &p, 10);
 			if (errno != 0 || *p != 0 || p == value
-			    || (gid_t)val == val) {
+			    || (gid_t)val != val) {
 				struct group grp, *g;
 
 				getgrnam_r(value, &grp, buf, sizeof(buf), &g);
