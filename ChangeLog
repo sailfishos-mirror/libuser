@@ -1,5 +1,7 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_write): Add FIXME.
+
 	* modules/files.c (lu_files_create_backup): Drop some code with
 	unclear purpose (probably supposed to check for a symlink, but not
 	really), avoid using uinitiazed data.

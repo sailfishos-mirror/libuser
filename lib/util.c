@@ -614,6 +614,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 			st.st_size - (end - buf) + 1);
 		memcpy(start, value, strlen(value));
 	} else {
+		/* FIXME: this code currently can't execute */
 		/* fi contains the number of fields, so the difference between
 		 * field and fi is the number of colons we need to add to the
 		 * end of the line to create the field */
