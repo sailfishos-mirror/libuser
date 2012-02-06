@@ -691,6 +691,7 @@ lu_util_update_shadow_last_change(struct lu_ent *ent)
 gboolean
 lu_util_fscreate_save(security_context_t *ctx, struct lu_error **error)
 {
+	*ctx = NULL;
 	if (is_selinux_enabled() > 0 && getfscreatecon(ctx) < 0) {
 		lu_error_new(error, lu_error_generic,
 			     _("couldn't get default security context: %s"),

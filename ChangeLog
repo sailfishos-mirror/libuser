@@ -1,5 +1,9 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_fscreate_save): Make sure *ctx is initialized
+	so that lu_util_fscreate_restore() callers don't handle an undefined
+	value.
+
 	* lib/getdate.y (LookupWord): Correctly cast an argument to tolower ().
 
 2011-10-06  Miloslav Trmač  <mitr@redhat.com>
