@@ -55,6 +55,11 @@ libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 
 			prompt = (struct libuser_prompt *)
 			  libuser_prompt_new(NULL, NULL);
+			if (prompt == NULL) {
+				Py_DECREF(list);
+				DEBUG_EXIT;
+				return FALSE;
+			}
 			prompt->prompt.key = g_strdup(prompts[i].key);
 			prompt->prompt.prompt = g_strdup(prompts[i].prompt);
 			prompt->prompt.domain = g_strdup(prompts[i].domain);

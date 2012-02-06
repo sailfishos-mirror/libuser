@@ -1,5 +1,8 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/misc.c (libuser_admin_python_prompter): Handle an allocation
+	failure.
+
 	* lib/util.c (lu_util_field_read): Simplify code.
 
 	* lib/util.c (lu_util_field_write): Simplify a condition.
