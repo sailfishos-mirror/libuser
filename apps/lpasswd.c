@@ -77,8 +77,8 @@ main(int argc, const char **argv)
 		struct passwd *pwd;
 		pwd = getpwuid(getuid());
 		if (pwd != NULL) {
-			fprintf(stderr, _("Changing password for %s.\n"),
-				user = strdup(pwd->pw_name));
+			user = g_strdup(pwd->pw_name);
+			fprintf(stderr, _("Changing password for %s.\n"), user);
 		} else {
 			fprintf(stderr, _("No user name specified.\n"));
 			poptPrintUsage(popt, stderr, 0);

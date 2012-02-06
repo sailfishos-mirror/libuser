@@ -1,5 +1,7 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lpasswd.c (main): Handle strdup () allocation failure.
+
 	* python/misc.c (libuser_admin_python_prompter): Handle an allocation
 	failure.
 
