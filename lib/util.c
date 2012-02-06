@@ -431,7 +431,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	struct stat st;
 	char *buf;
 	char *pattern;
-	char *line, *start = NULL, *end = NULL;
+	char *line, *start = NULL;
 	char *ret;
 	size_t len;
 	gboolean mapped = FALSE;
@@ -486,7 +486,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	if (line != NULL) {
 		unsigned i = 1;
 		char *p;
-		start = end = NULL;
+		start = NULL;
 
 		/* find the start of the field */
 		if (i == field) {
@@ -507,15 +507,14 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 
 	/* find the end of the field */
 	if (start != NULL) {
+		char *end;
+
 		end = start;
 		while ((*end != '\0') && (*end != '\n') && (*end != ':')) {
 			end++;
 		}
 		g_assert((*end == '\0') || (*end == '\n')
 			 || (*end == ':'));
-	}
-
-	if ((start != NULL) && (end != NULL)) {
 		ret = g_strndup(start, end - start);
 	} else {
 		ret = g_strdup("");
