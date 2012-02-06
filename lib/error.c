@@ -129,7 +129,6 @@ lu_error_is_success(enum lu_status status)
 		default:
 			return FALSE;
 	}
-	return FALSE;
 }
 
 /**
@@ -149,7 +148,6 @@ lu_error_is_warning(enum lu_status status)
 		default:
 			return FALSE;
 	}
-	return FALSE;
 }
 
 /**
@@ -189,7 +187,6 @@ lu_error_is_error(enum lu_status status)
 		default:
 			return FALSE;
 	}
-	return FALSE;
 }
 
 /**

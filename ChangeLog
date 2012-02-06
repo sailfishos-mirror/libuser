@@ -1,5 +1,8 @@
 2012-02-06  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/error.c (lu_error_is_success, lu_error_is_warning)
+	(lu_error_is_error): Remove unreachable code.
+
 	* lib/config.c (process_line): Remove redundant code.
 
 	* lib/util.c (lu_util_lock_obtain): Don't corrupt errno before using it,
