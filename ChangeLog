@@ -1,5 +1,8 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lub/util.c (lu_util_line_get_matchingx): Fix field search to not
+	continue into the following line.
+
 	* lib/util.c (lu_util_field_write): Cleanup field search.
 
 	* lib/util.c (lu_util_field_write): Report an error when the entry

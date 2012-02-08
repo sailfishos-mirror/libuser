@@ -362,17 +362,26 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	line = contents;
 	for (;;) {
 		char *line_end, *field_start;
-		int i;
 
 		line_end = memchr(line, '\n', contents_end - line);
 
-		field_start = line;
-		for (i = 1; i < field; i++) {
-			field_start = memchr(field_start, ':',
-					     contents_end - field_start);
-			if (field_start == NULL)
-				break;
-			field_start++;
+		if (field == 1)
+			field_start = line;
+		else {
+			int i;
+			char *p;
+
+			field_start = NULL;
+			i = 1;
+			for (p = line; p < contents_end && *p != '\n'; p++) {
+				if (*p == ':') {
+					i++;
+					if (i >= field) {
+						field_start = p + 1;
+						break;
+					}
+				}
+			}
 		}
 
 		if (field_start != NULL
