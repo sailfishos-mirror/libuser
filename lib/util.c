@@ -322,7 +322,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	char *contents, *contents_end;
 	struct stat st;
 	off_t offset;
-	char *ret = NULL, *p;
+	char *ret = NULL, *line;
 	gboolean mapped = FALSE;
 	size_t part_len;
 
@@ -359,13 +359,12 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	contents_end = contents + st.st_size;
 
 	part_len = strlen(part);
-	p = contents;
-	do {
-		char *line, *line_end, *field_start;
+	line = contents;
+	for (;;) {
+		char *line_end, *field_start;
 		int i;
 
-		line = p;
-		line_end = memchr(p, '\n', contents_end - p);
+		line_end = memchr(line, '\n', contents_end - line);
 
 		field_start = line;
 		for (i = 1; i < field; i++) {
@@ -392,8 +391,10 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			}
 		}
 
-		p = line_end != NULL ? line_end + 1 : NULL;
-	} while (p != NULL);
+		if (line_end == NULL)
+			break;
+		line = line_end + 1;
+	}
 
 	if (mapped) {
 		munmap(contents, st.st_size);
