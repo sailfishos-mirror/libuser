@@ -1,5 +1,8 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_write): Report an error when the entry
+	is not found early to simplify the code.
+
 	* lib/util.c (lu_util_field_read): Cleanup field search.
 
 	* lib/util.c (lu_util_field_read): Simplify search for the matching

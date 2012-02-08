@@ -563,26 +563,27 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		/* found it somewhere in the middle */
 		line++;
 	}
+	if (line == NULL) {
+		lu_error_new(error, lu_error_search, NULL);
+		goto err;
+	}
 
-	if (line != NULL) {
+	start = end = NULL;
+	/* find the start of the field */
+	if (fi == field) {
+		start = line;
+	} else {
 		char *p;
-		start = end = NULL;
 
-		/* find the start of the field */
-		if (fi == field) {
-			start = line;
-		} else
-			for (p = line;
-			     (fi < field) && (*p != '\n') && (*p != '\0');
-			     p++) {
-				if (*p == ':') {
-					fi++;
-				}
-				if (fi >= field) {
-					start = p + 1;
-					break;
-				}
+		for (p = line; fi < field && *p != '\n' && *p != '\0'; p++) {
+			if (*p == ':') {
+				fi++;
 			}
+			if (fi >= field) {
+				start = p + 1;
+				break;
+			}
+		}
 	}
 
 	/* find the end of the field */
