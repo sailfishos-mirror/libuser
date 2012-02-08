@@ -448,12 +448,8 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	buf = mmap(NULL, st.st_size, PROT_READ, MAP_SHARED, fd, 0);
 	if (buf == MAP_FAILED) {
 		buf = g_malloc(st.st_size);
-		if (lseek(fd, 0, SEEK_SET) == -1) {
-			lu_error_new(error, lu_error_read, NULL);
-			g_free(buf);
-			return NULL;
-		}
-		if (read(fd, buf, st.st_size) != st.st_size) {
+		if (lseek(fd, 0, SEEK_SET) == -1
+		    || read(fd, buf, st.st_size) != st.st_size) {
 			lu_error_new(error, lu_error_read, NULL);
 			g_free(buf);
 			return NULL;
