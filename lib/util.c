@@ -426,7 +426,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		   struct lu_error **error)
 {
 	struct stat st;
-	char *buf;
+	char *buf, *buf_end;
 	char *pattern;
 	char *line, *start = NULL;
 	char *ret;
@@ -457,6 +457,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	} else {
 		mapped = TRUE;
 	}
+	buf_end = buf + st.st_size;
 
 	pattern = g_strdup_printf("%s:", first);
 	len = strlen(pattern);
@@ -464,11 +465,9 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	if ((st.st_size >= (off_t)len) && (memcmp(buf, pattern, len) == 0)) {
 		/* found it on the first line */
 	} else
-		while ((line =
-			memchr(line, '\n',
-			       st.st_size - (line - buf))) != NULL) {
+		while ((line = memchr(line, '\n', buf_end - line)) != NULL) {
 			line++;
-			if (line < buf + st.st_size - len) {
+			if (buf_end - line > len) {
 				if (memcmp(line, pattern, len) == 0) {
 					/* found it somewhere in the middle */
 					break;
@@ -485,8 +484,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		if (i == field) {
 			start = line;
 		} else
-			for (p = line;
-			     i < field && p < buf + st.st_size && *p != '\n';
+			for (p = line; i < field && p < buf_end && *p != '\n';
 			     p++) {
 				if (*p == ':') {
 					i++;
@@ -503,10 +501,9 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		char *end;
 
 		end = start;
-		while (end < buf + st.st_size && *end != '\n' && *end != ':')
+		while (end < buf_end && *end != '\n' && *end != ':')
 			end++;
-		g_assert(end == buf + st.st_size || *end == '\n'
-			 || *end == ':');
+		g_assert(end == buf_end || *end == '\n' || *end == ':');
 		ret = g_strndup(start, end - start);
 	} else {
 		ret = g_strdup("");
