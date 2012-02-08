@@ -380,22 +380,21 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 
 		if (colon != NULL
 		    && st.st_size - (colon - contents) >= part_len) {
-			if (strncmp(colon, part, part_len) == 0) {
-				if (colon + part_len == contents + st.st_size
-				    || colon[part_len] == ':'
-				    || colon[part_len] == '\n') {
-					size_t maxl;
-					maxl =
-					    st.st_size - (line - contents);
-					if (q) {
-						ret =
-						    g_strndup(line,
-							      q - line);
-					} else {
-						ret = g_strndup(line, maxl);
-					}
-					break;
+			char *expected_field_end;
+
+			expected_field_end = colon + part_len;
+			if (strncmp(colon, part, part_len) == 0
+			    && (expected_field_end == contents + st.st_size
+				|| *expected_field_end == ':'
+				|| *expected_field_end == '\n')) {
+				size_t maxl;
+				maxl = st.st_size - (line - contents);
+				if (q) {
+					ret = g_strndup(line, q - line);
+				} else {
+					ret = g_strndup(line, maxl);
 				}
+				break;
 			}
 		}
 

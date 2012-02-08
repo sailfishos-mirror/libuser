@@ -1,5 +1,7 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_line_get_matchingx): Cleanup field testing.
+
 	* lib/util.c (lu_util_line_get_matchingx): Rename a confusing variable
 	`buf' to `line'.
 
