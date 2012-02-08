@@ -568,20 +568,20 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		goto err;
 	}
 
-	start = end = NULL;
 	/* find the start of the field */
-	if (fi == field) {
+	if (fi == field)
 		start = line;
-	} else {
+	else {
 		char *p;
 
+		start = NULL;
 		for (p = line; fi < field && *p != '\n' && *p != '\0'; p++) {
 			if (*p == ':') {
 				fi++;
-			}
-			if (fi >= field) {
-				start = p + 1;
-				break;
+				if (fi >= field) {
+					start = p + 1;
+					break;
+				}
 			}
 		}
 	}

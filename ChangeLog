@@ -1,5 +1,7 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_write): Cleanup field search.
+
 	* lib/util.c (lu_util_field_write): Report an error when the entry
 	is not found early to simplify the code.
 
