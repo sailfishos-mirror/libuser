@@ -492,7 +492,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 			start = line;
 		} else
 			for (p = line;
-			     (i < field) && (*p != '\n') && (*p != '\0');
+			     i < field && p < buf + st.st_size && *p != '\n';
 			     p++) {
 				if (*p == ':') {
 					i++;
@@ -509,11 +509,10 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		char *end;
 
 		end = start;
-		while ((*end != '\0') && (*end != '\n') && (*end != ':')) {
+		while (end < buf + st.st_size && *end != '\n' && *end != ':')
 			end++;
-		}
-		g_assert((*end == '\0') || (*end == '\n')
-			 || (*end == ':'));
+		g_assert(end == buf + st.st_size || *end == '\n'
+			 || *end == ':');
 		ret = g_strndup(start, end - start);
 	} else {
 		ret = g_strdup("");
