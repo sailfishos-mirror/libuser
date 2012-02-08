@@ -1,5 +1,8 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_line_get_matchingx): Don't access memory after the
+	mmap()ed area.
+
 	* lib/util.c (lu_util_field_read): Don't access memory after the
 	mmap()ed area if the file doesn't end with a newline.
 

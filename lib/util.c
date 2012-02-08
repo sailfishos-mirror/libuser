@@ -324,6 +324,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	off_t offset;
 	char *ret = NULL, *p;
 	gboolean mapped = FALSE;
+	size_t part_len;
 
 	LU_ERROR_CHECK(error);
 
@@ -356,6 +357,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		mapped = TRUE;
 	}
 
+	part_len = strlen(part);
 	p = contents;
 	do {
 		char *buf, *q, *colon;
@@ -376,10 +378,12 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			}
 		}
 
-		if (colon) {
-			if (strncmp(colon, part, strlen(part)) == 0) {
-				if ((colon[strlen(part)] == ':')
-				    || (colon[strlen(part)] == '\n')) {
+		if (colon != NULL
+		    && st.st_size - (colon - contents) >= part_len) {
+			if (strncmp(colon, part, part_len) == 0) {
+				if (colon + part_len == contents + st.st_size
+				    || colon[part_len] == ':'
+				    || colon[part_len] == '\n') {
 					size_t maxl;
 					maxl =
 					    st.st_size - (buf - contents);
