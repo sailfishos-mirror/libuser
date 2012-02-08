@@ -360,12 +360,12 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	part_len = strlen(part);
 	p = contents;
 	do {
-		char *buf, *q, *colon;
+		char *line, *q, *colon;
 		int i;
 
 		q = memchr(p, '\n', st.st_size - (p - contents));
 
-		colon = buf = p;
+		colon = line = p;
 		for (i = 1; (i < field) && (colon != NULL); i++) {
 			if (colon) {
 				colon =
@@ -386,13 +386,13 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 				    || colon[part_len] == '\n') {
 					size_t maxl;
 					maxl =
-					    st.st_size - (buf - contents);
+					    st.st_size - (line - contents);
 					if (q) {
 						ret =
-						    g_strndup(buf,
-							      q - buf);
+						    g_strndup(line,
+							      q - line);
 					} else {
-						ret = g_strndup(buf, maxl);
+						ret = g_strndup(line, maxl);
 					}
 					break;
 				}
