@@ -319,7 +319,7 @@ char *
 lu_util_line_get_matchingx(int fd, const char *part, int field,
 			   struct lu_error **error)
 {
-	char *contents;
+	char *contents, *contents_end;
 	struct stat st;
 	off_t offset;
 	char *ret = NULL, *p;
@@ -356,6 +356,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	} else {
 		mapped = TRUE;
 	}
+	contents_end = contents + st.st_size;
 
 	part_len = strlen(part);
 	p = contents;
@@ -364,32 +365,29 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 		int i;
 
 		line = p;
-		line_end = memchr(p, '\n', st.st_size - (p - contents));
+		line_end = memchr(p, '\n', contents_end - p);
 
 		colon = line;
 		for (i = 1; (i < field) && (colon != NULL); i++) {
 			if (colon) {
-				colon =
-				    memchr(colon, ':',
-					   st.st_size - (colon -
-							 contents));
+				colon = memchr(colon, ':',
+					       contents_end - colon);
 			}
 			if (colon) {
 				colon++;
 			}
 		}
 
-		if (colon != NULL
-		    && st.st_size - (colon - contents) >= part_len) {
+		if (colon != NULL && contents_end - colon >= part_len) {
 			char *expected_field_end;
 
 			expected_field_end = colon + part_len;
 			if (strncmp(colon, part, part_len) == 0
-			    && (expected_field_end == contents + st.st_size
+			    && (expected_field_end == contents_end
 				|| *expected_field_end == ':'
 				|| *expected_field_end == '\n')) {
 				size_t maxl;
-				maxl = st.st_size - (line - contents);
+				maxl = contents_end - line;
 				if (line_end != NULL) {
 					ret = g_strndup(line, line_end - line);
 				} else {
