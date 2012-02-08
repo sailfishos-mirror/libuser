@@ -1,5 +1,8 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_read): Report an error when the entry is
+	not found.
+
 	* lib/util.c (lu_util_field_write): Fix a memory leak.
 
 	* lib/util.c (lu_util_field_read): Simplify testing for end of file.

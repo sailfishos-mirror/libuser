@@ -431,6 +431,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	char *line, *start = NULL;
 	char *ret;
 	size_t len;
+	unsigned i = 1;
 	gboolean mapped = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -474,26 +475,28 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 				}
 			}
 		}
+	if (line == NULL) {
+		lu_error_new(error, lu_error_search, NULL);
+		ret = NULL;
+		goto err;
+	}
 
-	if (line != NULL) {
-		unsigned i = 1;
+	/* find the start of the field */
+	start = NULL;
+	if (i == field) {
+		start = line;
+	} else {
 		char *p;
-		start = NULL;
 
-		/* find the start of the field */
-		if (i == field) {
-			start = line;
-		} else
-			for (p = line; i < field && p < buf_end && *p != '\n';
-			     p++) {
-				if (*p == ':') {
-					i++;
-				}
-				if (i >= field) {
-					start = p + 1;
-					break;
-				}
+		for (p = line; i < field && p < buf_end && *p != '\n'; p++) {
+			if (*p == ':') {
+				i++;
 			}
+			if (i >= field) {
+				start = p + 1;
+				break;
+			}
+		}
 	}
 
 	/* find the end of the field */
@@ -509,6 +512,7 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 		ret = g_strdup("");
 	}
 
+err:
 	g_free(pattern);
 	if (mapped) {
 		munmap(buf, st.st_size);
