@@ -360,12 +360,13 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 	part_len = strlen(part);
 	p = contents;
 	do {
-		char *line, *q, *colon;
+		char *line, *line_end, *colon;
 		int i;
 
-		q = memchr(p, '\n', st.st_size - (p - contents));
+		line = p;
+		line_end = memchr(p, '\n', st.st_size - (p - contents));
 
-		colon = line = p;
+		colon = line;
 		for (i = 1; (i < field) && (colon != NULL); i++) {
 			if (colon) {
 				colon =
@@ -389,8 +390,8 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 				|| *expected_field_end == '\n')) {
 				size_t maxl;
 				maxl = st.st_size - (line - contents);
-				if (q) {
-					ret = g_strndup(line, q - line);
+				if (line_end != NULL) {
+					ret = g_strndup(line, line_end - line);
 				} else {
 					ret = g_strndup(line, maxl);
 				}
@@ -398,7 +399,7 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			}
 		}
 
-		p = q ? q + 1 : NULL;
+		p = line_end != NULL ? line_end + 1 : NULL;
 	} while ((p != NULL) && (ret == NULL));
 
 	if (mapped) {
