@@ -386,19 +386,15 @@ lu_util_line_get_matchingx(int fd, const char *part, int field,
 			    && (expected_field_end == contents_end
 				|| *expected_field_end == ':'
 				|| *expected_field_end == '\n')) {
-				size_t maxl;
-				maxl = contents_end - line;
-				if (line_end != NULL) {
-					ret = g_strndup(line, line_end - line);
-				} else {
-					ret = g_strndup(line, maxl);
-				}
+				if (line_end == NULL)
+					line_end = contents_end;
+				ret = g_strndup(line, line_end - line);
 				break;
 			}
 		}
 
 		p = line_end != NULL ? line_end + 1 : NULL;
-	} while ((p != NULL) && (ret == NULL));
+	} while (p != NULL);
 
 	if (mapped) {
 		munmap(contents, st.st_size);

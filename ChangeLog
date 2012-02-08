@@ -1,5 +1,8 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_line_get_matchingx): Cleanup return value
+	handling.
+
 	* lib/util.c (lu_util_line_get_matchingx): Simplify testing for end
 	of file.
 
