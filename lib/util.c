@@ -593,7 +593,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		}
 	} else {
 		lu_error_new(error, lu_error_search, NULL);
-		return FALSE;
+		goto err;
 	}
 
 	if (start != NULL) {
