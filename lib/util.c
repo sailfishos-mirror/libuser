@@ -431,7 +431,6 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	char *line, *start = NULL;
 	char *ret;
 	size_t len;
-	unsigned i = 1;
 	gboolean mapped = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -478,19 +477,20 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 found_line:
 
 	/* find the start of the field */
-	start = NULL;
-	if (i == field) {
+	if (field == 1)
 		start = line;
-	} else {
+	else {
+		unsigned i = 1;
 		char *p;
 
-		for (p = line; i < field && p < buf_end && *p != '\n'; p++) {
+		start = NULL;
+		for (p = line; p < buf_end && *p != '\n'; p++) {
 			if (*p == ':') {
 				i++;
-			}
-			if (i >= field) {
-				start = p + 1;
-				break;
+				if (i >= field) {
+					start = p + 1;
+					break;
+				}
 			}
 		}
 	}

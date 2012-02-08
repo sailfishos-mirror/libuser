@@ -1,5 +1,7 @@
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_read): Cleanup field search.
+
 	* lib/util.c (lu_util_field_read): Simplify search for the matching
 	entry.
 
