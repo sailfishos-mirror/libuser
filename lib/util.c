@@ -463,23 +463,19 @@ lu_util_field_read(int fd, const char *first, unsigned int field,
 	pattern = g_strdup_printf("%s:", first);
 	len = strlen(pattern);
 	line = buf;
-	if ((st.st_size >= (off_t)len) && (memcmp(buf, pattern, len) == 0)) {
-		/* found it on the first line */
-	} else
-		while ((line = memchr(line, '\n', buf_end - line)) != NULL) {
-			line++;
-			if (buf_end - line > len) {
-				if (memcmp(line, pattern, len) == 0) {
-					/* found it somewhere in the middle */
-					break;
-				}
-			}
-		}
-	if (line == NULL) {
-		lu_error_new(error, lu_error_search, NULL);
-		ret = NULL;
-		goto err;
+	for (;;) {
+		if (buf_end - line >= len && memcmp (line, pattern, len) == 0)
+			goto found_line;
+		line = memchr(line, '\n', buf_end - line);
+		if (line == NULL)
+			break;
+		line++;
 	}
+	lu_error_new(error, lu_error_search, NULL);
+	ret = NULL;
+	goto err;
+
+found_line:
 
 	/* find the start of the field */
 	start = NULL;
