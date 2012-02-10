@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
-"POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:34+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-02-10 17:26+0100\n"
+"PO-Revision-Date: 2012-02-10 16:28+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Sinhala (http://www.transifex.net/projects/p/fedora/team/si/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +34,7 @@ msgid "Error creating `%s': %s"
 msgstr ""
 
 #: apps/apputil.c:146 apps/apputil.c:230 apps/apputil.c:320
-#: modules/files.c:163
+#: modules/files.c:158
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr ""
@@ -403,7 +403,7 @@ msgstr ""
 msgid "Error creating user account for %s: %s\n"
 msgstr ""
 
-#: apps/lpasswd.c:80
+#: apps/lpasswd.c:81
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr ""
@@ -779,7 +779,7 @@ msgstr ""
 msgid "Invalid default value of field %s: %s"
 msgstr ""
 
-#: lib/util.c:297
+#: lib/util.c:299
 #, c-format
 msgid "error locking file: %s"
 msgstr ""
@@ -815,7 +815,7 @@ msgstr ""
 msgid "couldn't open `%s': %s"
 msgstr ""
 
-#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:122 modules/files.c:140 modules/files.c:218
 #: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
@@ -829,6 +829,11 @@ msgstr ""
 #: modules/files.c:146
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
+msgstr ""
+
+#: modules/files.c:164
+#, c-format
+msgid "Error changing mode of `%s': %s"
 msgstr ""
 
 #: modules/files.c:226
@@ -1064,23 +1069,23 @@ msgstr ""
 msgid "error initializing Cyrus SASL: %s"
 msgstr ""
 
-#: python/admin.c:527
+#: python/admin.c:528
 msgid "error creating home directory for user"
 msgstr ""
 
-#: python/admin.c:580
+#: python/admin.c:581
 msgid "error removing home directory for user"
 msgstr ""
 
-#: python/admin.c:658
+#: python/admin.c:659
 msgid "error moving home directory for user"
 msgstr ""
 
-#: python/admin.c:691 python/admin.c:768
+#: python/admin.c:692 python/admin.c:769
 msgid "error creating mail spool for user"
 msgstr ""
 
-#: python/admin.c:889
+#: python/admin.c:890
 msgid "error removing mail spool for user"
 msgstr ""
 

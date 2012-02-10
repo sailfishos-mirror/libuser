@@ -1,23 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # mitr <mitr@volny.cz>, 2011.
 # Nikola Pajtic <salgeras@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
-"POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 10:32+0000\n"
-"Last-Translator: mitr <mitr@volny.cz>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2012-02-10 18:02+0100\n"
+"PO-Revision-Date: 2012-02-10 16:28+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sr@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -36,7 +37,7 @@ msgid "Error creating `%s': %s"
 msgstr "Greška pri pravljenju „%s“: %s"
 
 #: apps/apputil.c:146 apps/apputil.c:230 apps/apputil.c:320
-#: modules/files.c:163
+#: modules/files.c:158
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "Greška pri promeni vlasnika „%s“: %s"
@@ -405,7 +406,7 @@ msgstr "Greška pri pravljenju reda za poštu za %s.\n"
 msgid "Error creating user account for %s: %s\n"
 msgstr "Greška pri pravljenju korisničkog naloga za %s: %s\n"
 
-#: apps/lpasswd.c:80
+#: apps/lpasswd.c:81
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "Menjam lozinku za %s.\n"
@@ -781,7 +782,7 @@ msgstr "Odbijam da podrazumevano upotrebim opasan direktorijum „%s“"
 msgid "Invalid default value of field %s: %s"
 msgstr "Neispravna podrazumevana vrednost za polje %s: %s"
 
-#: lib/util.c:297
+#: lib/util.c:299
 #, c-format
 msgid "error locking file: %s"
 msgstr "greška pri zaključavanju datoteke: %s"
@@ -817,7 +818,7 @@ msgstr "ne mogu da utvrdim bezbednosni kontekst za „%s“: %s"
 msgid "couldn't open `%s': %s"
 msgstr "ne mogu da otvorim „%s“: %s"
 
-#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:122 modules/files.c:140 modules/files.c:218
 #: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
@@ -832,6 +833,11 @@ msgstr "greška pri pravljenju „%s“: %s"
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "rezervna datoteka „%s“ postoji i nije redovna datoteka"
+
+#: modules/files.c:164
+#, c-format
+msgid "Error changing mode of `%s': %s"
+msgstr ""
 
 #: modules/files.c:226
 msgid "backup file size mismatch"
@@ -889,8 +895,7 @@ msgstr "nema prisutne shadow datoteke -- isključujem"
 
 #: modules/krb5.c:100
 #, c-format
-msgid ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
 "greška pri povezivanju na kadm5 server za servis „%s“ u području „%s“: %s"
 
@@ -1067,23 +1072,23 @@ msgstr "Cyrus SASL greška pri uklanjanju korisnika: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "greška pri inicijalizaciji Cyrus SASL-a: %s"
 
-#: python/admin.c:527
+#: python/admin.c:528
 msgid "error creating home directory for user"
 msgstr "greška pri pravljenju ličnog direktorijuma za korisnika"
 
-#: python/admin.c:580
+#: python/admin.c:581
 msgid "error removing home directory for user"
 msgstr "greška pri uklanjanju ličnog direktorijuma za korisnika"
 
-#: python/admin.c:658
+#: python/admin.c:659
 msgid "error moving home directory for user"
 msgstr "greška pri premeštanju ličnog direktorijuma za korisnika"
 
-#: python/admin.c:691 python/admin.c:768
+#: python/admin.c:692 python/admin.c:769
 msgid "error creating mail spool for user"
 msgstr "greška pri pravljenju reda za poštu za korisnika"
 
-#: python/admin.c:889
+#: python/admin.c:890
 msgid "error removing mail spool for user"
 msgstr "greška pri uklanjanju reda za poštu za korisnika"
 
@@ -1144,5 +1149,3 @@ msgstr "Dobavljam podrazumevana korisnička svojstva:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Umnožavam korisničku strukturu:\n"
-
-

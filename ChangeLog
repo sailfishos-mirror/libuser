@@ -1,5 +1,10 @@
 2012-02-10  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Release 0.57.4.
+	* NEWS: Update.
+	* po/*: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 	* po/libuser.pot: Update for Transifex.
 
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>

@@ -1,23 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Bahadir Yagan <bahadir.yagan@mentorsystem.com>, 2004.
-# Hasan Alp İNAN <hasanalpinan@gmail.com>, 2011.
+# Hasan Alp İNAN <hasanalpinan@gmail.com>, 2011, 2012.
 # mitr <mitr@volny.cz>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
-"POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 12:54+0200\n"
-"Last-Translator: mitr <mitr@volny.cz>\n"
-"Language-Team: Turkish (http://www.transifex.net/projects/p/fedora/team/tr/)\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2012-02-10 18:02+0100\n"
+"PO-Revision-Date: 2012-02-10 17:45+0100\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Turkish (http://www.transifex.net/projects/p/fedora/team/"
+"tr/)\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: apps/apputil.c:122
@@ -37,7 +38,7 @@ msgid "Error creating `%s': %s"
 msgstr "`%s' oluşturulurken hata: %s"
 
 #: apps/apputil.c:146 apps/apputil.c:230 apps/apputil.c:320
-#: modules/files.c:163
+#: modules/files.c:158
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' dosya/dizininin sahipliği değiştirilirken hata: %s"
@@ -45,7 +46,7 @@ msgstr "`%s' dosya/dizininin sahipliği değiştirilirken hata: %s"
 #: apps/apputil.c:155
 #, c-format
 msgid "Error setting mode of `%s': %s"
-msgstr ""
+msgstr "`%s' kipinin hata ayarı : %s"
 
 #: apps/apputil.c:259 apps/apputil.c:291 apps/apputil.c:307
 #: modules/files.c:195 modules/files.c:210
@@ -409,7 +410,7 @@ msgstr "%s için posta kuyruğu oluşturulurken hata.\n"
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s için kullanıcı hesabı oluşturulurken hata: %s.\n"
 
-#: apps/lpasswd.c:80
+#: apps/lpasswd.c:81
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "`%s' için parola değiştiriliyor.\n"
@@ -667,9 +668,8 @@ msgid "unlocking would make the password field empty"
 msgstr "kilidi kaldırmak parola alanının boş olması anlamına gelir"
 
 #: lib/error.c:105
-#, fuzzy
 msgid "invalid attribute value"
-msgstr "geçersiz öznitelik değeri\n"
+msgstr "geçersiz öznitelik değeri"
 
 #: lib/error.c:107
 msgid "invalid module combination"
@@ -786,7 +786,7 @@ msgstr "`%s' tehlikeli ev dizininin öntanımlı olarak kullanılması reddedild
 msgid "Invalid default value of field %s: %s"
 msgstr "%s alanı geçersiz bir öntanımlı değere sahip: %s"
 
-#: lib/util.c:297
+#: lib/util.c:299
 #, c-format
 msgid "error locking file: %s"
 msgstr "dosya kilitlenirken hata: %s"
@@ -822,7 +822,7 @@ msgstr "`%s' dosyasının güvenlik kapsamı belirlenemedi: %s"
 msgid "couldn't open `%s': %s"
 msgstr "`%s' açılamadı: %s"
 
-#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:122 modules/files.c:140 modules/files.c:218
 #: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
@@ -837,6 +837,11 @@ msgstr "`%s' oluşturulurken hata: %s"
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "yedek dosyası `%s' var ama normal bir dosya değil"
+
+#: modules/files.c:164
+#, c-format
+msgid "Error changing mode of `%s': %s"
+msgstr ""
 
 #: modules/files.c:226
 msgid "backup file size mismatch"
@@ -894,10 +899,8 @@ msgstr "shadow dosyası yok -- iptal ediliyor"
 
 #: modules/krb5.c:100
 #, c-format
-msgid ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"`%s' hizmeti için `%s' alanındaki kadm5 suncusuna bağlanırken hata: %s"
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "`%s' hizmeti için `%s' alanındaki kadm5 suncusuna bağlanırken hata: %s"
 
 #: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
 #: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
@@ -1072,23 +1075,23 @@ msgstr "kullanıcı silinirken Cyrus SASL hatası: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL ilklendirilirken hata: %s"
 
-#: python/admin.c:527
+#: python/admin.c:528
 msgid "error creating home directory for user"
 msgstr "bu kullanıcı için ev dizini oluşturulurken hata oluştu"
 
-#: python/admin.c:580
+#: python/admin.c:581
 msgid "error removing home directory for user"
 msgstr "bu kullanıcı için ev dizini silinirken hata oluştu"
 
-#: python/admin.c:658
+#: python/admin.c:659
 msgid "error moving home directory for user"
 msgstr "bu kullanıcı için eski ev dizini taşınırken hata oluştu"
 
-#: python/admin.c:691 python/admin.c:768
+#: python/admin.c:692 python/admin.c:769
 msgid "error creating mail spool for user"
 msgstr "bu kullanıcı için posta kuyruğu oluşturulurken hata oluştu"
 
-#: python/admin.c:889
+#: python/admin.c:890
 msgid "error removing mail spool for user"
 msgstr "bu kullanıcı için posta kuyruğu silinirken hata oluştu"
 
@@ -1149,5 +1152,3 @@ msgstr "Öntanımlı kullanıcı öznitelikleri alınıyor:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kullanıcı yapısı kopyalanıyor:\n"
-
-

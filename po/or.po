@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Red Hat, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Manoj Kumar Giri <giri.manojkr@gmail.com>, 2008.
 # Manoj Kumar Giri <mgiri@redhat.com>, 2008, 2009, 2011.
@@ -10,15 +10,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
-"Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
-"POT-Creation-Date: 2011-10-04 12:31+0200\n"
-"PO-Revision-Date: 2011-10-04 12:54+0200\n"
-"Last-Translator: mitr <mitr@volny.cz>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
+"POT-Creation-Date: 2012-02-10 18:02+0100\n"
+"PO-Revision-Date: 2012-02-10 17:43+0100\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Oriya (http://www.transifex.net/projects/p/fedora/team/or/)\n"
+"Language: or\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: or\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: apps/apputil.c:122
@@ -38,7 +38,7 @@ msgid "Error creating `%s': %s"
 msgstr "`%s' କୁ ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟି: %s"
 
 #: apps/apputil.c:146 apps/apputil.c:230 apps/apputil.c:320
-#: modules/files.c:163
+#: modules/files.c:158
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' ର ମାଲିକ କୁ ପରିବର୍ତନ କରିବା ରେ ତୃଟି: %s"
@@ -81,8 +81,7 @@ msgstr "ଅଜଣା ଚାଳକ ପ୍ରସଙ୍ଗ"
 #: apps/apputil.c:642
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
-"/etc/passwd ପ୍ରସଙ୍ଗ ପାଇଁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପ୍ରସଙ୍ଗ କୁ ସେଟ କରି ପାରିବ ନାହିଁ \n"
+msgstr "/etc/passwd ପ୍ରସଙ୍ଗ ପାଇଁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପ୍ରସଙ୍ଗ କୁ ସେଟ କରି ପାରିବ ନାହିଁ \n"
 
 #: apps/apputil.c:651
 #, c-format
@@ -367,8 +366,7 @@ msgstr "`%s' କୁ ଖୋଲିବା ସମୟରେ ତୃଟି: %s\n"
 #: apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr ""
-"`%s' ପାଇଁ ହିସାବ ଖାତା ଖୋଲିବା ସମୟରେ ତୃଟି: ଲାଇନ ଟି ସଠିକ ଭାବ ରେ ସଜା ଯାଇ ନାହିଁ \n"
+msgstr "`%s' ପାଇଁ ହିସାବ ଖାତା ଖୋଲିବା ସମୟରେ ତୃଟି: ଲାଇନ ଟି ସଠିକ ଭାବ ରେ ସଜା ଯାଇ ନାହିଁ \n"
 
 #: apps/lnewusers.c:129 apps/luseradd.c:130 apps/lusermod.c:141
 #, c-format
@@ -388,8 +386,8 @@ msgstr "`%s' ପାଇଁ %jd ଜି.ଆଇ.ଡି. ସହିତ ଗୋଟିଏ
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
-"ବିପଦ ଜନକ ହୋମ ଡିରେକ୍ଟୋରୀ `%s' କୁ %s ପାଇଁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହାର କରିବା"
-" ପାଇଁ ମନା କରୁଅଛି\n"
+"ବିପଦ ଜନକ ହୋମ ଡିରେକ୍ଟୋରୀ `%s' କୁ %s ପାଇଁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହାର କରିବା ପାଇଁ ମନା "
+"କରୁଅଛି\n"
 
 #: apps/lnewusers.c:289
 #, c-format
@@ -411,7 +409,7 @@ msgstr "%s ପାଇଁ ଡାକ ସ୍ପୁଲ ସୃଷ୍ଟି କରି�
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s ପାଇଁ ଗୋଟିଏ ଚାଳକ ହିସାବ ଖାତା ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟି: %s\n"
 
-#: apps/lpasswd.c:80
+#: apps/lpasswd.c:81
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "%s ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ କୁ ପରିବର୍ତନ କରୁଅଛି \n"
@@ -669,9 +667,8 @@ msgid "unlocking would make the password field empty"
 msgstr "ଆଲ-ଲକ କଲେ ଏହା ପ୍ରବେଶ ସଙ୍କେତ ର କ୍ଷେତ୍ର କୁ ଖାଲି କରି ଦେବ"
 
 #: lib/error.c:105
-#, fuzzy
 msgid "invalid attribute value"
-msgstr "ଅବୈଧ ବସ୍ତୁ ମୂଲ୍ୟ\n"
+msgstr "ଅବୈଧ ବସ୍ତୁ ମୂଲ୍ୟ"
 
 #: lib/error.c:107
 msgid "invalid module combination"
@@ -781,16 +778,14 @@ msgstr "ସମୂହ ର କୌଣସି ନାମ କିମ୍ବା ୟୁ.ଆ
 #: lib/user.c:1372
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
-msgstr ""
-"ବିପଦ ଜନକ ହୋମ ଡିରେକ୍ଟୋରୀ `%s' କୁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହାର କରିବା ପାଇଁ "
-"ମନା କରୁଅଛି"
+msgstr "ବିପଦ ଜନକ ହୋମ ଡିରେକ୍ଟୋରୀ `%s' କୁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହାର କରିବା ପାଇଁ ମନା କରୁଅଛି"
 
 #: lib/user.c:2298
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ର ଅବୈଧ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ମୂଲ୍ଯ: %s"
 
-#: lib/util.c:297
+#: lib/util.c:299
 #, c-format
 msgid "error locking file: %s"
 msgstr "ଫାଇଲ କୁ ଲକ କରୁଥିବା ସମୟରେ ତୃଟି: %s"
@@ -826,7 +821,7 @@ msgstr "`%s' ର ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ ସ୍ଥି
 msgid "couldn't open `%s': %s"
 msgstr "`%s' କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:122 modules/files.c:151 modules/files.c:218
+#: modules/files.c:122 modules/files.c:140 modules/files.c:218
 #: modules/files.c:784 modules/files.c:1029 modules/files.c:1205
 #, c-format
 msgid "couldn't stat `%s': %s"
@@ -841,6 +836,11 @@ msgstr "`%s' କୁ ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟ
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
 msgstr "`%s' ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ଅବସ୍ଥିତ ଅଛି ଏବଂ ଏହା ଏକ ନିୟମିତ ଫାଇଲ ନୁହେଁ"
+
+#: modules/files.c:164
+#, c-format
+msgid "Error changing mode of `%s': %s"
+msgstr ""
 
 #: modules/files.c:226
 msgid "backup file size mismatch"
@@ -898,11 +898,8 @@ msgstr "କୌଣସି ଛାୟା ଫାଇଲ ଉପସ୍ଥିତ ନା�
 
 #: modules/krb5.c:100
 #, c-format
-msgid ""
-"error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"`%s' ସେବା ଏବଂ `%s' ଅଧିକାର ପାଇଁ କେ.ଏ.ଡି.ଏମ.୫ ସେବକ ସହିତ ସଂଯୋଗ କରିବା ରେ ତୃଟି: "
-"%s"
+msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+msgstr "`%s' ସେବା ଏବଂ `%s' ଅଧିକାର ପାଇଁ କେ.ଏ.ଡି.ଏମ.୫ ସେବକ ସହିତ ସଂଯୋଗ କରିବା ରେ ତୃଟି: %s"
 
 #: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
 #: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
@@ -977,8 +974,7 @@ msgstr "ଏଲ.ଡି.ଏ.ପି. ସେବକ ସହିତ ବାନ୍ଧି �
 #: modules/ldap.c:418
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
-"ଏଲ.ଡି.ଏ.ପି. ସେବକ ସହିତ ବାନ୍ଧି ପାରିଲା ନାହିଁ, `%s' ରୂପ ରେ ପ୍ରଥମ ପ୍ରଚେଷ୍ଟା: %s"
+msgstr "ଏଲ.ଡି.ଏ.ପି. ସେବକ ସହିତ ବାନ୍ଧି ପାରିଲା ନାହିଁ, `%s' ରୂପ ରେ ପ୍ରଥମ ପ୍ରଚେଷ୍ଟା: %s"
 
 #: modules/ldap.c:1323
 #, c-format
@@ -1078,23 +1074,23 @@ msgstr "ଚାଳକ କୁ ଅପସାରଣ କରିବା ସମୟରେ �
 msgid "error initializing Cyrus SASL: %s"
 msgstr "ସାଇରସ୍ ଏସ୍.ଏ.ଏସ୍.ଏଲ. ର ପ୍ରାରମ୍ଭିକୀକରଣ ସମୟରେ ତୃଟି: %s"
 
-#: python/admin.c:527
+#: python/admin.c:528
 msgid "error creating home directory for user"
 msgstr "ଚାଳକ ପାଇଁ ମୂଳ ସ୍ଥାନ ଡିରେକ୍ଟୋରି ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟି"
 
-#: python/admin.c:580
+#: python/admin.c:581
 msgid "error removing home directory for user"
 msgstr "ଚାଳକ ପାଇଁ ମୂଳ ସ୍ଥାନ ଡିରେକ୍ଟୋରି କୁ ଅପସାରଣ କରିବା ସମୟରେ ତୃଟି"
 
-#: python/admin.c:658
+#: python/admin.c:659
 msgid "error moving home directory for user"
 msgstr "ଚାଳକ ପାଇଁ ମୂଳ ସ୍ଥାନ ଡିରେକ୍ଟୋରି କୁ ସ୍ଥାନାନ୍ତରଣ କରିବା ସମୟରେ ତୃଟି"
 
-#: python/admin.c:691 python/admin.c:768
+#: python/admin.c:692 python/admin.c:769
 msgid "error creating mail spool for user"
 msgstr "ଚାଳକ ପାଇଁ ଡାକ-ସ୍ପୁଲ ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟି"
 
-#: python/admin.c:889
+#: python/admin.c:890
 msgid "error removing mail spool for user"
 msgstr "ଚାଳକ ପାଇଁ ଡାକ-ସ୍ପୁଲ କାଢିବା ସମୟରେ ତୃଟି"
 
@@ -1155,5 +1151,3 @@ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଚାଳକ ର ଗୁ
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ଚାଳକ ର ସଂରଚନା କୁ ନକଲ କରୁଅଛି:\n"
-
-
