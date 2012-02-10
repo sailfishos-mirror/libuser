@@ -1,3 +1,7 @@
+2012-02-10  Miloslav Trmač  <mitr@redhat.com>
+
+	* po/libuser.pot: Update for Transifex.
+
 2012-02-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* lub/util.c (lu_util_line_get_matchingx): Fix field search to not
