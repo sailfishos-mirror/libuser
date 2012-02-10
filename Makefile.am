@@ -34,6 +34,7 @@ EXTRA_DIST = \
 	tests/ldap_test.py \
 	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
 	tests/slapd.conf.in \
+	tests/test_utils.sh \
 	tests/utils.conf.in tests/utils_group tests/utils_gshadow \
 	tests/utils_passwd tests/utils_shadow tests/utils_test
 

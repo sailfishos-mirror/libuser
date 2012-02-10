@@ -1,5 +1,7 @@
 2012-02-10  Miloslav Trmač  <mitr@redhat.com>
 
+	* Makefile.am (EXTRA_DIST): Add tests/test_utils.sh.
+
 	* configure.in: Release 0.57.4.
 	* NEWS: Update.
 	* po/*: Update.
