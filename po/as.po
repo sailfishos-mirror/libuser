@@ -8,14 +8,15 @@
 # Amitakhya Phukan <aphukan@redhat.com>, 2008.
 # mitr <mitr@volny.cz>, 2011.
 # ngoswami <ngoswami@redhat.com>, 2011.
+# Nilamdyuti Goswami <ngoswami@redhat.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:37+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Assamese (http://www.transifex.net/projects/p/fedora/team/"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-15 12:24+0000\n"
+"Last-Translator: ngoswami <ngoswami@redhat.com>\n"
+"Language-Team: Assamese (http://www.transifex.net/projects/p/fedora/language/"
 "as/)\n"
 "Language: as\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +49,7 @@ msgstr "`%s' ৰ গৰাকীৰ পৰিবৰ্তনত ভুল: %s"
 #: apps/apputil.c:155
 #, c-format
 msgid "Error setting mode of `%s': %s"
-msgstr ""
+msgstr "`%s' ৰ ত্ৰুটি সংহতি অৱস্থা: %s"
 
 #: apps/apputil.c:259 apps/apputil.c:291 apps/apputil.c:307
 #: modules/files.c:195 modules/files.c:210
@@ -842,7 +843,7 @@ msgstr "বেক-আপ নথিপত্ৰ `%s' বৰ্তমানে উ
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "`%s' ৰ ত্ৰুটি পৰিৱৰ্তন অৱস্থা: %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

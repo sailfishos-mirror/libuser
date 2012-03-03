@@ -11,7 +11,7 @@
 # Mario Blättermann <mariobl@freenet.de>, 2011.
 # mitr <mitr@volny.cz>, 2011.
 # Robert Scheck <redhat@linuxnetz.de>, 2005, 2007.
-# Roman Spirgi <rspirgi@gmail.com>, 2011.
+# Roman Spirgi <rspirgi@gmail.com>, 2011, 2012.
 # Ronny Buchmann <ronny-vlug@vlugnet.org>, 2005, 2006.
 # sknirT omiT <moc.tahder@sknirtt>, 2010.
 # Timo Trinks <ttrinks@redhat.com>, 2007.
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 16:28+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-21 07:35+0000\n"
+"Last-Translator: Roman Spirgi <bigant@fedoraproject.org>\n"
 "Language-Team: German <trans-de@lists.fedoraproject.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -853,7 +853,7 @@ msgstr "Sicherungsdatei »%s« ist vorhanden und keine reguläre Datei"
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "Fehler beim Ändern des Modus von `%s': %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

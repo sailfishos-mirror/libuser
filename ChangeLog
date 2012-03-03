@@ -1,3 +1,9 @@
+2012-03-03  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Release 0.57.5.
+	* NEWS: Update.
+	* po/*: Update.
+
 2012-02-10  Miloslav Trmač  <mitr@redhat.com>
 
 	* Makefile.am (EXTRA_DIST): Add tests/test_utils.sh.

@@ -4,16 +4,17 @@
 #
 # Translators:
 # mitr <mitr@volny.cz>, 2011.
+#   <prasad.mvs@gmail.com>, 2012.
 # Shankar Prasad <svenkate@redhat.com>, 2007, 2008, 2009.
 # shanky <prasad.mvs@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:42+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Kannada (http://www.transifex.net/projects/p/fedora/team/"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-28 11:20+0000\n"
+"Last-Translator: shanky <prasad.mvs@gmail.com>\n"
+"Language-Team: Kannada (http://www.transifex.net/projects/p/fedora/language/"
 "kn/)\n"
 "Language: kn\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +47,7 @@ msgstr "`%s' ನ ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸುವಲ�
 #: apps/apputil.c:155
 #, c-format
 msgid "Error setting mode of `%s': %s"
-msgstr ""
+msgstr "`%s' ನ ಕ್ರಮವನ್ನು ಹೊಂದಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
 #: apps/apputil.c:259 apps/apputil.c:291 apps/apputil.c:307
 #: modules/files.c:195 modules/files.c:210
@@ -840,7 +841,7 @@ msgstr "ಬ್ಯಾಕ್ಅಪ್ ಕಡತ `%s' ಅಸ್ತಿತ್ವದ�
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "`%s' ನ ಕ್ರಮವನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

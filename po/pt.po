@@ -4,14 +4,14 @@
 #
 # Translators:
 # mitr <mitr@volny.cz>, 2011.
-# Rui Gouveia <rui.gouveia@gmail.com>, 2010, 2011.
+# Rui Gouveia <rui.gouveia@gmail.com>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:44+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-14 17:25+0000\n"
+"Last-Translator: Rui Gouveia <rui.gouveia@gmail.com>\n"
 "Language-Team: Portuguese <trans-pt@lists.fedoraproject.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -838,7 +838,7 @@ msgstr "ficheiro de cópia de segurança `%s' existe e não é um ficheiro regul
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "Erro ao mudar o modo de `%s': %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

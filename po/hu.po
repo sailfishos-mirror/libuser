@@ -9,14 +9,14 @@
 # Nikolas Slivka <snicore@gmail.com>, 2010.
 #   <ptr@ulx.hu>, 2011.
 # Tamas Szanto <tszanto@mol.hu>, 2003.
-# Zoltan Hoppár <hopparz@gmail.com>, 2011.
+# Zoltan Hoppár <hopparz@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:41+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-14 08:39+0000\n"
+"Last-Translator: Zoltan Hoppár <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <trans-hu@lists.fedoraproject.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -850,7 +850,7 @@ msgstr "`%s' backup fájl már létezik és nem szabályos fájl"
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "Hiba a '%s' mód váltáskor: %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

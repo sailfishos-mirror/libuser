@@ -4,7 +4,7 @@
 #
 # Translators:
 # Ben Wu <hpwu@redhat.com>, 2002.
-# Cheng-Chia Tseng <pswo10680@gmail.com>, 2011.
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2011, 2012.
 # Chester Cheng <ccheng@redhat.com>, 2004, 2005, 2006.
 # mitr <mitr@volny.cz>, 2011.
 # Terry Chuang <tchuang@redhat.com>, 2008, 2009.
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:45+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-19 06:16+0000\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <trans-zh_TW@lists.fedoraproject.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -840,7 +840,7 @@ msgstr "備份檔「%s」已存在且非通常檔案"
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "變更「%s」的模式時發生錯誤：%s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

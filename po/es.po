@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Claudio Rodrigo Pereyra Diaz <elsupergomez@gmail.com>, 2011.
+# Claudio Rodrigo Pereyra Diaz <elsupergomez@gmail.com>, 2011, 2012.
 # Domingo Becker <domingobecker@gmail.com>, 2008.
 # Manuel Ospina <mospina@redhat.com>, 2005.
 # mitr <mitr@volny.cz>, 2011.
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 17:40+0100\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-14 18:21+0000\n"
+"Last-Translator: Claudio Rodrigo Pereyra Diaz <elsupergomez@gmail.com>\n"
 "Language-Team: Spanish (Castilian) <trans-es@lists.fedoraproject.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -846,7 +846,7 @@ msgstr ""
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "Error cambiando modo de `%s': %s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"

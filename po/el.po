@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Dimitris Glaros <dimitrisglaros@gmail.com>, 2011.
+# Dimitris Glaros <dimitrisglaros@gmail.com>, 2011, 2012.
 # Dimitris Glezos <dimitris@glezos.com>, 2006, 2007.
 # Kostas Papadimas <pkst@gnome.org>, 2009.
 # mitr <mitr@volny.cz>, 2011.
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-02-10 18:02+0100\n"
-"PO-Revision-Date: 2012-02-10 16:28+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2012-03-03 05:08+0100\n"
+"PO-Revision-Date: 2012-02-14 08:39+0000\n"
+"Last-Translator: Dimitris Glaros <dimitrisglaros@gmail.com>\n"
 "Language-Team: Greek <trans-el@lists.fedoraproject.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Σφάλμα αλλαγής ιδιοκτήτη του `%s': %s"
 #: apps/apputil.c:155
 #, c-format
 msgid "Error setting mode of `%s': %s"
-msgstr ""
+msgstr "Σφάλμα λειτουργικής ρυθμισης του `%s:%s"
 
 #: apps/apputil.c:259 apps/apputil.c:291 apps/apputil.c:307
 #: modules/files.c:195 modules/files.c:210
@@ -841,7 +841,7 @@ msgstr "το αντίγραφο ασφάλειας`%s' υπάρχει αλλά �
 #: modules/files.c:164
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "Σφάλμα αλλαγής την κατάσταση του `%s:%s"
 
 #: modules/files.c:226
 msgid "backup file size mismatch"
