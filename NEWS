@@ -1,3 +1,10 @@
+0.57.6
+* Make it possible to use ldapi: URLs by not trying to use TLS (based on
+  a patch by <davide.principi@nethesis.it>).
+* Hopefully fix races in test suite, causing failures on slower computers.
+* Mark --help messages for translation and improve them a bit.
+* Update translations.
+
 0.57.5
 * Update translations.
 

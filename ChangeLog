@@ -1,5 +1,9 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.in: Release 0.57.6.
+	* NEWS: Update.
+	* po/*: Update.
+
 	* po/libuser.pot: Update for Transifex.
 
 	* apps/lchage.c (main)
