@@ -44,12 +44,12 @@ main(int argc, const char **argv)
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		{"dontremovegroup", 'G', POPT_ARG_NONE, &dont_remove_group, 0,
-		 "don't remove the user's private group, if the user has one",
-		 NULL},
+		 N_("don't remove the user's private group, if the user has "
+		    "one"), NULL},
 		{"removehome", 'r', POPT_ARG_NONE, &remove_home, 0,
-		 "remove the user's home directory", NULL},
+		 N_("remove the user's home directory"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

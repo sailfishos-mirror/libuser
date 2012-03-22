@@ -42,13 +42,13 @@ main(int argc, const char **argv)
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		{"file", 'f', POPT_ARG_STRING, &file, 0,
-		 "file with user information records", "STDIN"},
+		 N_("file with user information records"), N_("STDIN")},
 		{"nocreatehome", 'M', POPT_ARG_NONE, &nocreatehome, 0,
-		 "don't create home directories", NULL},
+		 N_("don't create home directories"), NULL},
 		{"nocreatemail", 'n', POPT_ARG_NONE, &nocreatemail, 0,
-		 "don't create mail spools", NULL},
+		 N_("don't create mail spools"), NULL},
 		POPT_AUTOHELP
 		POPT_TABLEEND
 	};

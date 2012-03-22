@@ -1,5 +1,18 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lchage.c (main)
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lgroupadd.c (main)
+	* apps/lgroupdel.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lid.c (main)
+	* apps/lnewusers.c (main)
+	* apps/lpasswd.c (main)
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main)
+	* apps/lusermod.c (main): Mark --help messages for translation.
+
 	* modules/ldap.c (connect_server): Don't try to use STARTTLS for ldapi:
 	URLs.  Based on a patch by <davide.principi@nethesis.it>.
 	* docs/libuser.conf.5.in: Document that TLS is never used for ldapi:.

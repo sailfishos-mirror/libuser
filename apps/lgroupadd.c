@@ -44,11 +44,11 @@ main(int argc, const char **argv)
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
-		 "gid to force for new group", "NUM"},
+		 N_("gid to force for new group"), N_("NUM")},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
-		 "make this a system group", NULL},
+		 N_("make this a system group"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

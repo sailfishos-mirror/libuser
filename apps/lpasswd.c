@@ -44,17 +44,17 @@ main(int argc, const char **argv)
 	gboolean is_crypted;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		{"group", 'g', POPT_ARG_NONE, &groupflag, 0,
-		 "set group password instead of user password", NULL},
+		 N_("set group password instead of user password"), NULL},
 		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0,
-		 "new plain password", NULL},
+		 N_("new plain password"), NULL},
 		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0,
-		 "new crypted password", NULL},
+		 N_("new crypted password"), NULL},
 		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0,
-		 "read new plain password from given descriptor", NULL},
+		 N_("read new plain password from given descriptor"), NULL},
 		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0,
-		 "read new crypted password from given descriptor", NULL},
+		 N_("read new crypted password from given descriptor"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

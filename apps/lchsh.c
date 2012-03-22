@@ -41,7 +41,7 @@ main(int argc, const char **argv)
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

@@ -80,23 +80,23 @@ main(int argc, const char **argv)
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
-		 "prompt for all information", NULL},
+		 N_("prompt for all information"), NULL},
 		{"list", 'l', POPT_ARG_NONE, &list_only, 0,
-		 "list aging parameters for the user", NULL},
+		 N_("list aging parameters for the user"), NULL},
 		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0,
-		 "minimum days between password changes", "NUM"},
+		 N_("minimum days between password changes"), N_("NUM")},
 		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0,
-		 "maximum days between password changes", "NUM"},
+		 N_("maximum days between password changes"), N_("NUM")},
 		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0,
-		 "date of last password change, relative to days since "
-		 "1/1/70", "NUM"},
+		 N_("date of last password change, relative to days since "
+		    "1/1/70"), N_("NUM")},
 		{"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
-		 "number of days after expiration date when account "
-		 "is considered inactive", "NUM"},
+		 N_("number of days after expiration date when account "
+		    "is considered inactive"), N_("NUM")},
 		{"expire", 'E', POPT_ARG_LONG, &shadowExpire, 0,
-		 "password expiration date", "NUM"},
+		 N_("password expiration date"), N_("NUM")},
 		{"warndays", 'W', POPT_ARG_LONG, &shadowWarning, 0,
-		 "days before expiration to begin warning user", "NUM"},
+		 N_("days before expiration to begin warning user"), N_("NUM")},
 		POPT_AUTOHELP
 		POPT_TABLEEND
 	};
