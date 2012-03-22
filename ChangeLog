@@ -1,5 +1,18 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/wait_for_slapd_exit.c
+	* tests/wait_for_slapd_start.c: New files.
+	* tests/default_pw_test
+	* tests/ldap_test: Use tests/wait_for_slapd_exit and
+	tests/wait_for_slapd_start, making the waiting both shorter and more
+	precise.
+	* tests/test_utils.sh: Remove.
+	* Makefile.am (check_PROGRAMS): Add tests/wait_for_slapd_exit and
+	tests/wait_for_slapd_start.
+	(tests_wait_for_slapd_exit_LDFLAGS)
+	(tests_wait_for_slapd_start_LDFLAGS): New definitions.
+	(EXTRA_DIST): Don't ship tests/test_utils.sh any more.
+
 	* Makefile.am (noinst_PROGRAMS): Move tests/alloc_port ...
 	(check_PROGRAMS): ... here.  There's no benefit in building it when the
 	tests are not run.

@@ -34,7 +34,6 @@ EXTRA_DIST = \
 	tests/ldap_test.py \
 	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
 	tests/slapd.conf.in \
-	tests/test_utils.sh \
 	tests/utils.conf.in tests/utils_group tests/utils_gshadow \
 	tests/utils_passwd tests/utils_shadow tests/utils_test
 
@@ -45,7 +44,8 @@ sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
 noinst_PROGRAMS = samples/enum samples/field samples/homedir samples/lookup \
 	samples/prompt samples/testuser \
 	tests/config_test
-check_PROGRAMS = tests/alloc_port
+check_PROGRAMS = tests/alloc_port tests/wait_for_slapd_exit \
+	tests/wait_for_slapd_start
 
 noinst_LTLIBRARIES = apps/libapputil.la
 lib_LTLIBRARIES = lib/libuser.la
@@ -212,3 +212,7 @@ tests_alloc_port_LDFLAGS = -no-install
 
 tests_config_test_LDADD = lib/libuser.la $(GMODULE_LIBS)
 tests_config_test_LDFLAGS = -no-install
+
+tests_wait_for_slapd_exit_LDFLAGS = -no-install
+
+tests_wait_for_slapd_start_LDFLAGS = -no-install

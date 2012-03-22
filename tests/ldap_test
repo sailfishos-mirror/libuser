@@ -20,7 +20,6 @@
 # Author: Miloslav Trmac <mitr@redhat.com>
 
 srcdir=$srcdir/tests
-. $srcdir/test_utils.sh
 
 workdir=$(pwd)/test_ldap
 
@@ -52,7 +51,7 @@ sed "s|@WORKDIR@|$workdir|g" < "$srcdir"/slapd.conf.in > "$workdir"/slapd.conf
 ldap_port=$(tests/alloc_port) # This is racy, but much better than a static port
 # FIXME: path
 /usr/sbin/slapd -h ldap://127.0.0.1:"$ldap_port"/ -f "$workdir"/slapd.conf &
-wait_for_slapd "$workdir"/slapd.pid
+tests/wait_for_slapd_start "$workdir"/slapd.pid "$ldap_port"
 slapd_pid=$(cat "$workdir"/slapd.pid)
 trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
 ldapadd -h 127.0.0.1 -p "$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \
