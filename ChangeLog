@@ -1,3 +1,9 @@
+2012-03-22  Miloslav Trmač  <mitr@redhat.com>
+
+	* Makefile.am (noinst_PROGRAMS): Move tests/alloc_port ...
+	(check_PROGRAMS): ... here.  There's no benefit in building it when the
+	tests are not run.
+
 2012-03-03  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.57.5.

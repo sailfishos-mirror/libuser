@@ -44,7 +44,8 @@ sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
 	apps/lusermod
 noinst_PROGRAMS = samples/enum samples/field samples/homedir samples/lookup \
 	samples/prompt samples/testuser \
-	tests/alloc_port tests/config_test
+	tests/config_test
+check_PROGRAMS = tests/alloc_port
 
 noinst_LTLIBRARIES = apps/libapputil.la
 lib_LTLIBRARIES = lib/libuser.la
