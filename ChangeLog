@@ -1,5 +1,7 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/ldap_test: Wait for slapd exit before returning from the test.
+
 	* tests/wait_for_slapd_exit.c
 	* tests/wait_for_slapd_start.c: New files.
 	* tests/default_pw_test
