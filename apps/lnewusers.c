@@ -44,7 +44,7 @@ main(int argc, const char **argv)
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 N_("prompt for all information"), NULL},
 		{"file", 'f', POPT_ARG_STRING, &file, 0,
-		 N_("file with user information records"), N_("STDIN")},
+		 N_("file with user information records"), N_("PATH")},
 		{"nocreatehome", 'M', POPT_ARG_NONE, &nocreatehome, 0,
 		 N_("don't create home directories"), NULL},
 		{"nocreatemail", 'n', POPT_ARG_NONE, &nocreatemail, 0,

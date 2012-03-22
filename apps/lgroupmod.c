@@ -53,7 +53,7 @@ main(int argc, const char **argv)
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 N_("prompt for all information"), NULL},
 		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
-		 N_("gid to change group to"), N_("NUM")},
+		 N_("set GID for group"), N_("NUM")},
 		{"name", 'n', POPT_ARG_STRING, &gid, 0,
 		 N_("change group to have given name"), N_("NAME")},
 		{"plainpassword", 'P', POPT_ARG_STRING, &userPassword, 0,

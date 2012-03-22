@@ -1,6 +1,14 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lchage.c (main)
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/lpasswd.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main): Improve --help messages.
+
+	* apps/lchage.c (main)
 	* apps/lchfn.c (main)
 	* apps/lchsh.c (main)
 	* apps/lgroupadd.c (main)

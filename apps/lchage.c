@@ -84,19 +84,21 @@ main(int argc, const char **argv)
 		{"list", 'l', POPT_ARG_NONE, &list_only, 0,
 		 N_("list aging parameters for the user"), NULL},
 		{"mindays", 'm', POPT_ARG_LONG, &shadowMin, 0,
-		 N_("minimum days between password changes"), N_("NUM")},
+		 N_("minimum days between password changes"), N_("DAYS")},
 		{"maxdays", 'M', POPT_ARG_LONG, &shadowMax, 0,
-		 N_("maximum days between password changes"), N_("NUM")},
+		 N_("maximum days between password changes"), N_("DAYS")},
 		{"date", 'd', POPT_ARG_LONG, &shadowLastChange, 0,
-		 N_("date of last password change, relative to days since "
-		    "1/1/70"), N_("NUM")},
+		 N_("date of last password change in days since 1/1/70"),
+		 N_("DAYS")},
 		{"inactive", 'I', POPT_ARG_LONG, &shadowInactive, 0,
-		 N_("number of days after expiration date when account "
-		    "is considered inactive"), N_("NUM")},
+		 N_("number of days after password expiration date when "
+		    "account is considered inactive"), N_("DAYS")},
 		{"expire", 'E', POPT_ARG_LONG, &shadowExpire, 0,
-		 N_("password expiration date"), N_("NUM")},
+		 N_("password expiration date in days since 1/1/70"),
+		 N_("DAYS")},
 		{"warndays", 'W', POPT_ARG_LONG, &shadowWarning, 0,
-		 N_("days before expiration to begin warning user"), N_("NUM")},
+		 N_("days before expiration to begin warning user"),
+		 N_("DAYS")},
 		POPT_AUTOHELP
 		POPT_TABLEEND
 	};

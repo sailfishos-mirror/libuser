@@ -77,17 +77,17 @@ main(int argc, const char **argv)
 		{"unlock", 'U', POPT_ARG_NONE, &unlock, 0,
 		 N_("unlock account"), NULL},
 		{"commonname", 0, POPT_ARG_STRING, &commonName, 0,
-		 N_("common name for new user"), N_("STRING")},
+		 N_("set common name for user"), N_("STRING")},
 		{"givenname", 0, POPT_ARG_STRING, &givenName, 0,
-		 N_("given name for new user"), N_("STRING")},
+		 N_("set given name for user"), N_("STRING")},
 		{"surname", 0, POPT_ARG_STRING, &surname, 0,
-		 N_("surname for new user"), N_("STRING")},
+		 N_("set surname for user"), N_("STRING")},
 		{"roomnumber", 0, POPT_ARG_STRING, &roomNumber, 0,
-		 N_("room number for new user"), N_("STRING")},
+		 N_("set room number for user"), N_("STRING")},
 		{"telephonenumber", 0, POPT_ARG_STRING, &telephoneNumber, 0,
-		 N_("telephone number for new user"), N_("STRING")},
+		 N_("set telephone number for user"), N_("STRING")},
 		{"homephone", 0, POPT_ARG_STRING, &homePhone, 0,
-		 N_("home telephone number for new user"), N_("STRING")},
+		 N_("set home telephone number for user"), N_("STRING")},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

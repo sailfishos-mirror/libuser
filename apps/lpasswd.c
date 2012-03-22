@@ -48,13 +48,15 @@ main(int argc, const char **argv)
 		{"group", 'g', POPT_ARG_NONE, &groupflag, 0,
 		 N_("set group password instead of user password"), NULL},
 		{"plainpassword", 'P', POPT_ARG_STRING, &password, 0,
-		 N_("new plain password"), NULL},
+		 N_("new plain password"), N_("STRING")},
 		{"password", 'p', POPT_ARG_STRING, &cryptedPassword, 0,
-		 N_("new crypted password"), NULL},
+		 N_("new crypted password"), N_("STRING")},
 		{"plainpassword-fd", 'F', POPT_ARG_INT, &plain_fd, 0,
-		 N_("read new plain password from given descriptor"), NULL},
+		 N_("read new plain password from given descriptor"),
+		 N_("NUM")},
 		{"password-fd", 'f', POPT_ARG_INT, &crypted_fd, 0,
-		 N_("read new crypted password from given descriptor"), NULL},
+		 N_("read new crypted password from given descriptor"),
+		 N_("NUM")},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 

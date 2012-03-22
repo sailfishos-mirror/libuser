@@ -46,9 +46,9 @@ main(int argc, const char **argv)
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
 		 N_("prompt for all information"), NULL},
 		{"gid", 'g', POPT_ARG_STRING, &gid_number_str, 0,
-		 N_("gid to force for new group"), N_("NUM")},
+		 N_("gid for new group"), N_("NUM")},
 		{"reserved", 'r', POPT_ARG_NONE, &system_account, 0,
-		 N_("make this a system group"), NULL},
+		 N_("create a system group"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
 
