@@ -1,5 +1,7 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* po/libuser.pot: Update for Transifex.
+
 	* apps/lchage.c (main)
 	* apps/lgroupadd.c (main)
 	* apps/lgroupmod.c (main)
