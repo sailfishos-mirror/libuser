@@ -328,8 +328,8 @@ Default value is \fBou=Group\fR.
 .TP
 .B server
 A domain name or an URI of the LDAP server.
-The URI can use the
-.B ldap
+The URI can use the \fBldap\fR,
+.B ldapi
 or the
 .B ldaps
 protocol.
@@ -338,6 +338,9 @@ the connection fails if TLS can not be used;
 an URI using the
 .B ldap
 protocol allows connection without TLS.
+TLS is never used with the
+.B ldapi
+protocol.
 Default value is \fBldap\fR.
 
 .TP

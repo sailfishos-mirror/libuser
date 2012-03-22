@@ -1,5 +1,9 @@
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/ldap.c (connect_server): Don't try to use STARTTLS for ldapi:
+	URLs.  Based on a patch by <davide.principi@nethesis.it>.
+	* docs/libuser.conf.5.in: Document that TLS is never used for ldapi:.
+
 	* tests/ldap_test: Wait for slapd exit before returning from the test.
 
 	* tests/wait_for_slapd_exit.c

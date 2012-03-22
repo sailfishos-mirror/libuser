@@ -213,15 +213,24 @@ connect_server(struct lu_ldap_context *context, struct lu_error **error)
 		return NULL;
 	}
 
-	/* Try to start TLS. */
-	ret = ldap_start_tls_s(ldap, NULL, NULL);
-	/* Note that TLS is not required for ldap:// URLs (unlike simple server
-	   names). */
-	if (ret != LDAP_SUCCESS && start_tls) {
-		lu_error_new(error, lu_error_init,
-			     _("could not negotiate TLS with LDAP server"));
-		close_server(ldap);
-		return NULL;
+	/* Skip STARTTLS for ldapi: Even if the server is set up for TLS in
+	   general, NSS doesn't support TLS over AF_UNIX; the STARTTLS
+	   operation would be accepted, but ldap_start_tls_s() would fail,
+	   keeping the connection broken to make authentication impossible.
+	   TLS on AF_UNIX does not make much sense anyway. */
+	if (strncmp(context->prompts[LU_LDAP_SERVER].value, "ldapi://", 8)
+	    != 0) {
+        	/* Try to start TLS. */
+	        ret = ldap_start_tls_s(ldap, NULL, NULL);
+		/* Note that TLS is not required for ldap:// URLs (unlike simple
+		   server names). */
+		if (ret != LDAP_SUCCESS && start_tls) {
+			lu_error_new(error, lu_error_init,
+				     _("could not negotiate TLS with LDAP "
+				       "server"));
+			close_server(ldap);
+			return NULL;
+		}
 	}
 
 	return ldap;
