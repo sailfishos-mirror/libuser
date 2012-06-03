@@ -4,7 +4,7 @@
 pkgconfigdir = $(libdir)/pkgconfig
 
 ACLOCAL_AMFLAGS = -I m4
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --with-ldap
 
 HGTAG = 'libuser-$(VERSION)'
 

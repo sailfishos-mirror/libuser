@@ -1,3 +1,8 @@
+2012-06-03  Miloslav Trmač  <mitr@redhat.com>
+
+	* Makefile.am (AM_DISTCHECK_CONFIGURE_FLAGS): Rename from
+	DISTCHECK_CONFIGURE_FLAGS to follow automake-1.11.3.
+
 2012-03-22  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.57.6.
