@@ -1225,7 +1225,6 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	return ret;
 }
 
-#ifdef PLACEHOLDERS
 /* Get the list of users who belong to a group. */
 static PyObject *
 libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
@@ -1234,8 +1233,10 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 	GPtrArray *results;
 	char *group = NULL;
 	PyObject *ret;
+	struct lu_error *error = NULL;
 	char *keywords[] = { "group", NULL };
-	int i;
+	struct libuser_admin *me = (struct libuser_admin *) self;
+	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect the group's name. */
@@ -1244,6 +1245,9 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 		return NULL;
 	}
 	/* Get a list of the users in this group. */
+	results = lu_users_enumerate_by_group_full(me->ctx, group, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
 		PyObject *ent;
@@ -1268,7 +1272,7 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	int i;
+	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect the user's name. */
@@ -1277,6 +1281,9 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 		return NULL;
 	}
 	/* Get the list. */
+	results = lu_groups_enumerate_by_user_full(me->ctx, user, &error);
+	if (error != NULL)
+		lu_error_free(&error);
 	ret = PyList_New(0);
 	for (i = 0; i < results->len; i++) {
 		PyObject *ent;
@@ -1290,7 +1297,6 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	DEBUG_EXIT;
 	return ret;
 }
-#endif
 
 static PyObject *
 libuser_admin_get_first_unused_id_type(struct libuser_admin *me,
@@ -1458,7 +1464,6 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"enumerateGroupsFull", (PyCFunction) libuser_admin_enumerate_groups_full,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups matching a pattern, in listed databases"},
-#ifdef PLACEHOLDERS
 	{"enumerateUsersByGroupFull",
 	 (PyCFunction) libuser_admin_enumerate_users_by_group_full,
 	 METH_VARARGS | METH_KEYWORDS,
@@ -1467,7 +1472,6 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	 (PyCFunction) libuser_admin_enumerate_groups_by_user_full,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "get a list of groups to which a user belongs"},
-#endif
 
 	{"promptConsole", (PyCFunction) libuser_admin_prompt_console,
 	 METH_VARARGS | METH_KEYWORDS,

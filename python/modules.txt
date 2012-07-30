@@ -217,6 +217,24 @@ libuser:
 					modules, along with any data which can
 					be looked up about them.
 
+				- enumerateUsersByGroupFull: Get a list of users
+					who belong to a particular group, along
+					with any data which can be looked up
+					about them.
+					Arguments:
+						A group's name (required).
+					Returns: a list of libuser.Entity
+						objects.
+
+				- enumerateGroupsByUserFull: Get a list of
+					groups to which a user belongs, along
+					with any data which can be looked up
+					about them.
+					Arguments:
+						A user's name (required).
+					Returns: a list of libuser.Entity
+						objects.
+
 				- promptConsole: Prompt the user for
 					information, including for information
 					for which there is a supplied default.

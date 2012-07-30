@@ -1,3 +1,21 @@
+2012-07-30  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.h (lu_users_enumerate_by_group_full)
+	(lu_groups_enumerate_by_user_full): New declarations.
+	* lib/user.c (lu_users_enumerate_by_group_full)
+	(lu_groups_enumerate_by_user_full): Uncomment functions.
+	Use a simple group or user name instead of a pattern.  Add
+	documentation.
+	* docs/reference/libuser-sections.txt: Add
+	lu_users_enumerate_by_group_full and lu_groups_enumerate_by_user_full.
+	* python/admin.c (libuser_admin_enumerate_users_by_group_full)
+	(libuser_admin_enumerate_groups_by_user_full): Uncomment and fix
+	functions.
+	(libuser_admin_methods): Uncomment enumerateUsersByGroupFull and
+	enumerateGroupsByUserFull.
+	* python/modules.txt: Document enumerateUsersByGroupFull and
+	enumerateGroupsByUserFull.
+
 2012-06-03  Miloslav Trmač  <mitr@redhat.com>
 
 	* Makefile.am (AM_DISTCHECK_CONFIGURE_FLAGS): Rename from

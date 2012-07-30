@@ -1972,31 +1972,51 @@ lu_groups_enumerate_full(struct lu_context * context, const char *pattern,
 	return ret;
 }
 
-#if 0
+/**
+ * lu_users_enumerate_by_group_full:
+ * @context: A context
+ * @group: Group name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of entities, one for each member of a group @group.
+ *
+ * Returns: A list of pointers to user entities.  The entities and the
+ * list should be freed by the caller.
+ */
 GPtrArray *
 lu_users_enumerate_by_group_full(struct lu_context * context,
-				 const char *pattern,
+				 const char * group,
 				 struct lu_error ** error)
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group_full, pattern,
-		    LU_VALUE_INVALID_ID, NULL, (gpointer*) &ret, error);
+	lu_dispatch(context, users_enumerate_by_group_full, group,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
 
+/**
+ * lu_groups_enumerate_by_user_full:
+ * @context: A context
+ * @user: User name
+ * @error: Filled with a #lu_error if an error occurs
+ *
+ * Returns a list of entities, one for each group containing an user @user.
+ *
+ * Returns: a list of pointers to group entities.  The entities and the
+ * list should be freed by the caller.
+ */
 GPtrArray *
 lu_groups_enumerate_by_user_full(struct lu_context * context,
-				 const char *pattern,
+				 const char *user,
 				 struct lu_error ** error)
 {
 	GPtrArray *ret = NULL;
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user_full, pattern,
-		    LU_VALUE_INVALID_ID, NULL, (gpointer*) &ret, error);
+	lu_dispatch(context, groups_enumerate_by_user_full, user,
+		    LU_VALUE_INVALID_ID, NULL, &ret, error);
 	return ret;
 }
-#endif
 
 id_t
 lu_get_first_unused_id(struct lu_context *ctx,
