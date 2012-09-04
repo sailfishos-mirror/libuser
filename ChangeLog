@@ -1,3 +1,7 @@
+2012-09-04  Miloslav Trmač  <mitr@redhat.com>
+
+	* apps/luseradd.c (main): Free groupEnt.
+
 2012-07-30  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/user.h (lu_users_enumerate_by_group_full)

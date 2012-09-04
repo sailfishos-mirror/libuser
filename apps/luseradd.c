@@ -231,6 +231,8 @@ main(int argc, const char **argv)
 	gidNumber = lu_value_get_id(value);
 	g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
+	lu_ent_free(groupEnt);
+
 	/* Create the user record. */
 	ent = lu_ent_new();
 	lu_user_default(ctx, name, system_account, ent);
