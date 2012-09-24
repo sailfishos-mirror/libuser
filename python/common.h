@@ -45,6 +45,7 @@ static PyObject *libuser_admin_prompt_console_quiet(PyObject *self,
 						    PyObject *kwargs);
 
 static PyObject *convert_value_array_pylist(GValueArray *array);
+static PyObject *convert_ent_array_pylist(GPtrArray *array);
 static PyObject *libuser_prompt_new(PyObject *ignored_self, PyObject *ignore);
 
 static PyObject *libuser_get_user_shells(PyObject *self, PyObject *ignored);

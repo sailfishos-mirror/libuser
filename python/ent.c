@@ -91,6 +91,29 @@ convert_value_array_pylist(GValueArray *array)
 	return ret;
 }
 
+/* Convert a (potentially NULL) GPtrArray of entities into a Python list of
+   values. */
+static PyObject *
+convert_ent_array_pylist(GPtrArray *array)
+{
+	PyObject *ret;
+	size_t i;
+
+	DEBUG_ENTRY;
+
+	ret = PyList_New(0);
+	for (i = 0; array != NULL && i < array->len; i++) {
+		PyObject *ent;
+
+		ent = libuser_wrap_ent(g_ptr_array_index(array, i));
+		PyList_Append(ret, ent);
+		Py_DECREF(ent);
+	}
+
+	DEBUG_EXIT;
+	return ret;
+}
+
 /* Wrap up an entity object in a pretty Python wrapper. */
 static PyObject *
 libuser_wrap_ent(struct lu_ent *ent)

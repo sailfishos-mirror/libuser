@@ -1160,7 +1160,6 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect a possible pattern. */
@@ -1174,15 +1173,9 @@ libuser_admin_enumerate_users_full(PyObject *self, PyObject *args,
 	if (error != NULL)
 		lu_error_free(&error);
 	/* Convert the list to a PyList. */
-	ret = PyList_New(0);
-	for (i = 0; i < results->len; i++) {
-		PyObject *ent;
-
-		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
-		PyList_Append(ret, ent);
-		Py_DECREF(ent);
-	}
-	g_ptr_array_free(results, TRUE);
+	ret = convert_ent_array_pylist(results);
+	if (results != NULL)
+		g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1198,7 +1191,6 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "pattern", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	size_t i;
 
 	DEBUG_ENTRY;
 	/* Possibly expect a pattern. */
@@ -1212,15 +1204,9 @@ libuser_admin_enumerate_groups_full(PyObject *self, PyObject *args,
 	if (error != NULL)
 		lu_error_free(&error);
 	/* Convert the list to a PyList. */
-	ret = PyList_New(0);
-	for (i = 0; i < results->len; i++) {
-		PyObject *ent;
-
-		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
-		PyList_Append(ret, ent);
-		Py_DECREF(ent);
-	}
-	g_ptr_array_free(results, TRUE);
+	ret = convert_ent_array_pylist(results);
+	if (results != NULL)
+		g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1236,7 +1222,6 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "group", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect the group's name. */
@@ -1248,15 +1233,9 @@ libuser_admin_enumerate_users_by_group_full(PyObject *self, PyObject *args,
 	results = lu_users_enumerate_by_group_full(me->ctx, group, &error);
 	if (error != NULL)
 		lu_error_free(&error);
-	ret = PyList_New(0);
-	for (i = 0; i < results->len; i++) {
-		PyObject *ent;
-
-		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
-		PyList_Append(ret, ent);
-		Py_DECREF(ent);
-	}
-	g_ptr_array_free(results, TRUE);
+	ret = convert_ent_array_pylist(results);
+	if (results != NULL)
+		g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -1272,7 +1251,6 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	struct lu_error *error = NULL;
 	char *keywords[] = { "user", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
-	size_t i;
 
 	DEBUG_ENTRY;
 	/* Expect the user's name. */
@@ -1284,16 +1262,9 @@ libuser_admin_enumerate_groups_by_user_full(PyObject *self, PyObject *args,
 	results = lu_groups_enumerate_by_user_full(me->ctx, user, &error);
 	if (error != NULL)
 		lu_error_free(&error);
-	ret = PyList_New(0);
-	for (i = 0; i < results->len; i++) {
-		PyObject *ent;
-
-		ent = libuser_wrap_ent(g_ptr_array_index(results, i));
-		PyList_Append(ret, ent);
-		Py_DECREF(ent);
-	}
-	g_ptr_array_free(results, TRUE);
-	results = lu_groups_enumerate_by_user_full(me->ctx, user, &error);
+	ret = convert_ent_array_pylist(results);
+	if (results != NULL)
+		g_ptr_array_free(results, TRUE);
 	DEBUG_EXIT;
 	return ret;
 }

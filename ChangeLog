@@ -1,5 +1,14 @@
 2012-09-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h: Declare convert_ent_array_pylist.
+	* python/ent.c (convert_ent_array_pylist): New function.
+	* python/admin.c (libuser_admin_enumerate_users_full)
+	(libuser_admin_enumerate_groups_full)
+	(libuser_admin_enumerate_users_by_group_full)
+	(libuser_admin_enumerate_groups_by_user_full): Use
+	convert_ent_array_pylist (also fixes a crash on error).
+	(libuser_admin_enumerate_groups_by_user_full): Remove a duplicated line.
+
 	* lib/user.c (convert_user_name_to_id, convert_group_name_to_id): Set
 	*error if the entity was not found.
 	(lu_user_lookup_name, lu_group_lookup_name, lu_user_lookup_id)
