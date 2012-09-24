@@ -1,3 +1,11 @@
+2012-09-24  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.c (convert_user_name_to_id, convert_group_name_to_id): Set
+	*error if the entity was not found.
+	(lu_user_lookup_name, lu_group_lookup_name, lu_user_lookup_id)
+	(lu_group_lookup_id): Document that error is not set if the entity
+	was not found.
+
 2012-09-04  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/luseradd.c (main): Free groupEnt.

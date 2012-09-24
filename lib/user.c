@@ -316,7 +316,9 @@ convert_user_name_to_id(struct lu_context *context, const char *sdata,
 		if (ret == LU_VALUE_INVALID_ID)
 			lu_error_new(error, lu_error_generic,
 				     _("user %s has no UID"), sdata);
-	}
+	} else if (*error == NULL)
+		lu_error_new(error, lu_error_generic, _("user %s not found"),
+			     sdata);
 	lu_ent_free(ent);
 	return ret;
 }
@@ -339,7 +341,9 @@ convert_group_name_to_id(struct lu_context *context, const char *sdata,
 		if (ret == LU_VALUE_INVALID_ID)
 			lu_error_new(error, lu_error_generic,
 				     _("group %s has no GID"), sdata);
-	}
+	} else if (*error == NULL)
+		lu_error_new(error, lu_error_generic, _("group %s not found"),
+			     sdata);
 	lu_ent_free(ent);
 	return ret;
 }
@@ -1268,7 +1272,8 @@ lu_uses_elevated_privileges (struct lu_context *context)
  *
  * Looks up an user by name.
  *
- * Returns: %TRUE on success
+ * Returns: %TRUE on success.  If the user doesn't exist, returns %FALSE without
+ * setting @error.
  */
 gboolean
 lu_user_lookup_name(struct lu_context * context, const char *name,
@@ -1289,7 +1294,8 @@ lu_user_lookup_name(struct lu_context * context, const char *name,
  *
  * Looks up a group by name.
  *
- * Returns: %TRUE on success
+ * Returns: %TRUE on success.  If the group doesn't exist, returns %FALSE
+ * without setting @error.
  */
 gboolean
 lu_group_lookup_name(struct lu_context * context, const char *name,
@@ -1310,7 +1316,8 @@ lu_group_lookup_name(struct lu_context * context, const char *name,
  *
  * Looks up an user by UID.
  *
- * Returns: %TRUE on success
+ * Returns: %TRUE on success.  If the user doesn't exist, returns %FALSE without
+ * setting @error.
  */
 gboolean
 lu_user_lookup_id(struct lu_context * context, uid_t uid,
@@ -1330,7 +1337,8 @@ lu_user_lookup_id(struct lu_context * context, uid_t uid,
  *
  * Looks up a group by GID.
  *
- * Returns: %TRUE on success
+ * Returns: %TRUE on success.  If the group doesn't exist, returns %FALSE
+ * without setting @error.
  */
 gboolean
 lu_group_lookup_id(struct lu_context * context, gid_t gid,
