@@ -11,15 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -592,7 +592,7 @@ msgstr "शब्दकूट बदलाव रद्द किया गय�
 msgid "Error reading from file descriptor %d.\n"
 msgstr "विवरणकर्ता %d से फ़ाइल पढ़ने में त्रुटि.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s उपयोक्ता के लिए शब्दकूट जमावट त्रुटि: %s।\n"
@@ -677,17 +677,17 @@ msgstr "%jd समूह उपस्थित नहीं है.\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "`%s' समूह बनाने में त्रुटि: %s.\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "लेखा बनावट असफल: %s।\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s बनाने में त्रुटि: %s।\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "डाक स्पूल बनाने में त्रुटि.\n"
@@ -1038,40 +1038,50 @@ msgstr "नाम हाइफन से शुरू होता है"
 msgid "name contains invalid char `%c'"
 msgstr "नाम में अनुचित अक्षर `%c' समाहित है"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "उपयोक्ता के पास %s कोई UID नहीं है."
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "समूह के पास %s कोई GID नहीं है"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "उपयोक्ता %jd के पास कोई नाम नहीं है"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "समूह %jd का कोई नाम नहीं है"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "उपयोक्ता के पास कोई नाम या UID नहीं है"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "समूह के पास न तो नाम है न GID."
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "ख़तरनाक घर निर्देशिका `%s' को तयशुदा रूप से प्रयोग के लिए अस्वीकृत कर रहा है"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s क्षेत्र का अवैध मूलभूत मान: %s"
@@ -1174,7 +1184,7 @@ msgstr "`:' गोपित कूटशब्द में अनुमति �
 msgid "error encrypting password"
 msgstr "शब्दकूट गोपन में त्रुटि "
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' और `%s' मॉड्यूल को जोड़ा नहीं जा सकता है"
@@ -1326,27 +1336,27 @@ msgstr "कोई `%s' गुण नहीं मिला"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s के लिए LDAP निर्देशिका में शब्दकूट जमावट त्रुटि: %s "
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP सर्वर नाम "
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP खोज आधार DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP बंधन DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP बंधन शब्दकूट"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL उपयोक्ता"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL प्राधिकरण उपयोक्ता"
 

@@ -3,24 +3,36 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+#  <ccheng@brisbane.redhat.com>, 2004.
 # Christian Rose <menthos@menthos.com>, 2006.
+# Daniel Guerrero <daniel@danguer.com>, 2003.
+# Domingo Becker <domingobecker@gmail.com>, 2008.
+# Fernando Gonzalez Blanco <fgonz@fedoraproject.org>, 2009.
+# Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
+# Gladys Guerrero Lozano <gguerrer@redhat.com>, 2009, 2010.
 # Göran Uddeborg <goeran@uddeborg.se>, 2011, 2012.
+# Héctor Daniel Cabrera <h.daniel.cabrera@gmail.com>, 2009.
+# Luis Mayoral <mayoral@linuxadicto.org>, 2003.
 # Magnus Larsson <fedoratrans@gmail.com>, 2007, 2008.
+# Manuel Ospina <mospina@redhat.com>, 2005, 2006.
 # mitr <mitr@volny.cz>, 2011.
+# Tullio Dovera <tdovera@redhat.it>, 2000.
+# Ulrika Uddeborg <aurorauddeborg@gmail.com>, 2012.
+# Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Swedish (http://www.transifex.net/projects/p/fedora/language/"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/fedora/language/"
 "sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -113,42 +125,42 @@ msgstr "Användare stämmer inte.\n"
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:116 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "fråga efter all information"
 
 #: apps/lchage.c:85
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "lista åldringsparametrar för användaren"
 
 #: apps/lchage.c:87
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "minsta antal dagar mellan lösenordsändringar"
 
 #: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
 #: apps/lchage.c:98 apps/lchage.c:101
 msgid "DAYS"
-msgstr ""
+msgstr "DAGAR"
 
 #: apps/lchage.c:89
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "maximalt antal dagar mellan lösenordsändringar"
 
 #: apps/lchage.c:91
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "datum för senaste lösenordsändringen i dagar sedan 1/1/70"
 
 #: apps/lchage.c:94
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
-msgstr ""
+msgstr "antal dagar efter lösenordet gått ut som kontot anses inaktivt"
 
 #: apps/lchage.c:97
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "utgångsdatum för lösenord i dagar sedan 1/1/70"
 
 #: apps/lchage.c:100
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "dagar innan upphörande som användaren skall börja varnas"
 
 #: apps/lchage.c:113 apps/lid.c:131 apps/lpasswd.c:68 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:101
@@ -318,16 +330,16 @@ msgstr "Skal ändrat.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid för ny grupp"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:69 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "NUM"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "skapa en systemgrupp"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -361,19 +373,19 @@ msgstr "Grupp %s gick inte att ta bort: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "sätt GID för grupp"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "ändra gruppen till att ha det angivna namnet"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "NAMN"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "lösenord i klartext att användas med gruppen"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -385,35 +397,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "STRÄNG"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "för-hashat lösenord att användas med gruppen"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "lista med administratörer att lägga till"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "lista med administratörer att ta bort"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "lista med gruppmedlemmar att lägga till"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "lista med gruppmedlemmar att ta bort"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "lås grupp"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "lås upp grupp"
 
 #: apps/lgroupmod.c:123 apps/lusermod.c:163
 #, c-format
@@ -455,10 +467,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"lista medelmmar av en namngiven grupp istället för gruppmedlemskapen för den "
+"namngivna användaren"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "lista bara medelmskapsinformation med namn, och inte UID/GID"
 
 #: apps/lid.c:147
 #, c-format
@@ -477,19 +491,19 @@ msgstr "Inget användarnamn angivet, använder %s.\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "fil med poster med användarinformation"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "SÖKVÄG"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "skapa inte hemkataloger"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "skapa inte brevlådor"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -546,23 +560,23 @@ msgstr "Fel när användarkonto för %s skapades: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "ange grupplösenord istället fr användarlösenord"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "nytt lösenord i klartext"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "nytt krypterat lösenord"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "läs ett nytt lösenord i klartext från den angivna deskriptorn"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "läs ett nytt krypterat lösenord från den angivna deskriptorn"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -592,7 +606,7 @@ msgstr "Lösenordsändringen avbruten.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Fel vid läsning från filbeskrivare %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fel när lösenord för användare %s sattes: %s.\n"
@@ -609,63 +623,63 @@ msgstr "Lösenordet ändrat.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "skapa systemanvändare"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "GECOS-information för ny användare"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "hemkatalog för ny användare"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "katalog med filer för den nya användaren"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "skal för ny användare"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "uid för ny användare"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "grupp för ny användare"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "skapa inte hemkatalog för användare"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "skapa inte grupp med amma namn som användare"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "vanliga namnet för den nya användaren"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "tilltalsnamn för ny användare"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "efternamn för ny användare"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "rumsnummer för ny användare"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "telefonnummer för ny användare"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "hemtelefonnummer för ny användare"
 
 #: apps/luseradd.c:191
 #, c-format
@@ -677,28 +691,28 @@ msgstr "Grupp %jd finns inte\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Fel när grupp \"%s\" skapades: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Kontoskapandet misslyckades: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fel när %s skapades: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fel när brevlåda skapades.\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "ta inte bort användarens prvata grupp, om användaren har en"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "ta bort användarens hemkatalog"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -742,71 +756,71 @@ msgstr "Fel när brevlåda togs bort.\n"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS-information"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "hemkatalog"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "flytta innehåll i hemkatalog"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "ange skal för användare"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "ange UID för användare"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "ange primärt GID för användare"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "ändra inloggningsnamn för användare"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "lösenord i klartext för användaren"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "för-hashat lösenord för användaren"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "lås konto"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "lås upp konto"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "sätt det vanliga namnet för användaren"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "ange tilltalsnamn för användare"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "ange efternamn för användare"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "ange rumsnummer för användare"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "ange telefonnummer för användare"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "ange hemtelefonnummer för användare"
 
 #: apps/lusermod.c:179 apps/lusermod.c:192
 #, c-format
@@ -1038,40 +1052,50 @@ msgstr "namnet startar med ett bindestreck"
 msgid "name contains invalid char `%c'"
 msgstr "namnet innehåller ogiltigt tecken \"%c\""
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "användare %s har ingen UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "grupp %s har ingen GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "användare %jd har inget namn"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "grupp %jd har inget namn"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "användaren har varken ett namn eller en UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "gruppen har varken ett namn eller en GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Vägrar att använda farlig hemkatalog \"%s\" som standard"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ogiltigt standardvärd för fält %s: %s"
@@ -1174,7 +1198,7 @@ msgstr "\":\" är inte tillåtet i krypterade lösenord"
 msgid "error encrypting password"
 msgstr "fel när lösenordet krypterades"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "modulerna ”%s” och ”%s” kan inte kombineras"
@@ -1328,27 +1352,27 @@ msgstr "det finns inget \"%s\"-attribut"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "fel när lösenordet sattes i LDAP-katalogen för %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP-servernamn"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP sökningsbas-DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP bindnings-DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP bindningslösenord"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-användare"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-auktoriseringsanvändare"
 

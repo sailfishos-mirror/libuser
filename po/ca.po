@@ -11,15 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Catalan <fedora@llistes.softcatala.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -597,7 +597,7 @@ msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "S'ha produït un error al llegir des del descriptor d'arxiu %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr ""
@@ -684,17 +684,17 @@ msgstr "El grup %jd no existeix\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "S'ha produït un error en crear el grup «%s»: %s.\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "No s'ha pogut crear el compte: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "S'ha produït un error en crear %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "S'ha produït un error en crear la gestió de cues de correu.\n"
@@ -1045,41 +1045,51 @@ msgstr "el nom comença amb un guió"
 msgid "name contains invalid char `%c'"
 msgstr "el nom conté el caràcter invàlid «%c»"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "l'usuari %s no té UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "el grup %s no té GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "l'usuari %jd no té nom"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "El grup %jd no té nom"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "l'usuari no té ni nom ni UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "el grup no té ni nom ni GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Es refusa la utilització per defecte del directori perillós d'inici «%s»"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "El valor per defecte del camp %s no és vàlid: %s"
@@ -1183,7 +1193,7 @@ msgstr "no es permet ':' a la contrasenya xifrada"
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "els mòduls «%s» i «%s» no es poden combinar"
@@ -1342,27 +1352,27 @@ msgstr ""
 "s'ha produït un error en establir una contrasenya en el directori LDAP per a "
 "%s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Nom del servidor LDAP"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "DN de la base de cerca de LDAP"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "DN del vincle de LDAP"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "Contrasenya del vincle de LDAP"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "Usuari del SASL del LDAP"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "Usuari d'autorització del SASL del LDAP"
 

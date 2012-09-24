@@ -13,16 +13,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Assamese (http://www.transifex.net/projects/p/fedora/language/"
+"Language-Team: Assamese (http://www.transifex.com/projects/p/fedora/language/"
 "as/)\n"
 "Language: as\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -596,7 +596,7 @@ msgstr "গুপ্তশব্দ পৰিবৰ্তন প্ৰক্ৰ�
 msgid "Error reading from file descriptor %d.\n"
 msgstr "%d নথিপত্ৰ বিৱৰকৰ পৰা পঢ়োতে ত্ৰুটি।\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s ব্যৱহাৰকৰোঁতাৰ বাবে গুপ্তশব্দ নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s  ।\n"
@@ -681,17 +681,17 @@ msgstr "%jd সমষ্টিটি বৰ্তমানে নাই  ।\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "`%s' সমষ্টি সৃষ্টি কৰোঁতে সমস্যা: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "হিচাপ সৃষ্টি কৰোঁতে ব্যৰ্থ: %s  ।\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s সৃষ্টি কৰোঁতে সমস্যা: %s  ।\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "মেইল স্পুল সৃষ্টি কৰোঁতে সমস্যা  ।\n"
@@ -1042,40 +1042,50 @@ msgstr "নামৰ আৰম্ভণিত হাইফেন চিহ্ন
 msgid "name contains invalid char `%c'"
 msgstr "নামত অবৈধ আখৰ `%c' লিখা হৈছে"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "%s নামক ব্যৱহাৰকৰোঁতাৰ ক্ষেত্ৰত UID ধাৰ্য কৰা নহয়"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "%s নামক সমষ্টিৰ ক্ষেত্ৰত GID ধাৰ্য কৰা নহয়"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "%jd ব্যৱহাৰকৰোঁতাৰ নাম উল্লিখিত নাই"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "%jd সমষ্টিৰ নাম উল্লিখিত নাই"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "ব্যৱহাৰকৰোঁতাৰ নাম আৰু UID ধাৰ্য কৰা নহয়"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "সমষ্টিৰ নাম আৰু GID ধাৰ্য কৰা নহয়"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "অবিকল্পিত ৰূপে বিপদজনক ঘৰৰ পঞ্জিকা `%s' ব্যৱহাৰ কৰিবলৈ নমনা হৈছে"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ক্ষেত্ৰত অবিকল্পিত মান বৈধ নহয়: %s"
@@ -1178,7 +1188,7 @@ msgstr "`:' ৰ গুপুত কৰা গুপ্তশব্দত অন�
 msgid "error encrypting password"
 msgstr "গুপ্তশব্দ এনক্ৰিপ্ট কৰোঁতে সমস্যা"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' আৰু `%s' মডুলসমূহ সংযুক্ত কৰিব নোৱাৰি"
@@ -1331,27 +1341,27 @@ msgstr "কোনো `%s' বৈশিষ্ট্য পোৱা নাযা�
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s ৰ বাবে LDAP পঞ্জিকাত গুপ্তশব্দ নিৰ্ধাৰণ কৰোঁতে সমস্যা: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP সেৱকৰ নাম"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind গুপ্তশব্দ"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ব্যৱহাৰকৰোঁতা"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ৰ অনুমোদন ব্যৱহাৰকৰোঁতা"
 

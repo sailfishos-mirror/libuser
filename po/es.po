@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Spanish (Castilian) <trans-es@lists.fedoraproject.org>\n"
+"Language-Team: Spanish <trans-es@lists.fedoraproject.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -113,42 +113,45 @@ msgstr "No corresponde el usuario.\n"
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:116 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "solicitar toda la información"
 
 #: apps/lchage.c:85
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "lista parámetros de envejecimiento para el usuario"
 
 #: apps/lchage.c:87
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "cantidad mínima de días entre las modificaciones de contraseñas"
 
 #: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
 #: apps/lchage.c:98 apps/lchage.c:101
 msgid "DAYS"
-msgstr ""
+msgstr "DIAS"
 
 #: apps/lchage.c:89
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "cantidad máxima de días entre las modificaciones de contraseñas"
 
 #: apps/lchage.c:91
 msgid "date of last password change in days since 1/1/70"
 msgstr ""
+"fecha de la última modificación de la contraseña, en días, desde 1/1/70"
 
 #: apps/lchage.c:94
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"cantidad de días posteriores a la fecha de vencimiento de la contraseña para "
+"que la cuenta sea considerada inactiva"
 
 #: apps/lchage.c:97
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "fecha de vencimiento de la contraseña, en días, desde 1/1/70"
 
 #: apps/lchage.c:100
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "cantidad de días previos al vencimiento para advertir al usuario"
 
 #: apps/lchage.c:113 apps/lid.c:131 apps/lpasswd.c:68 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:101
@@ -318,16 +321,16 @@ msgstr "Shell modificado.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid para el nuevo grupo"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:69 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "NUM"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "crear un grupo de sistema"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -361,19 +364,19 @@ msgstr "No se pudo eliminar el grupo %s: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "definir un GID para un grupo"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "modificar el grupo para que posea el nombre definido"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "NOMBRE"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "contraseña en formato de texto simple para utilizarse con el grupo"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -385,35 +388,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "CADENA"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "contraseña pre-hasheada para utilizar con el grupo"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "lista de administradores a ser agregados"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "lista de administradores a ser eliminados"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "lista de miembros del grupo a ser agregados"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "lista de miembros del grupo a ser eliminados"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "bloquear grupo"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "desbloquear grupo"
 
 #: apps/lgroupmod.c:123 apps/lusermod.c:163
 #, c-format
@@ -455,10 +458,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"muestra los miembros de un grupo determinado en lugar de las membresías al "
+"grupo del usuario identificado"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "solo muestra información de membresía por nombre, y no por UID/GID"
 
 #: apps/lid.c:147
 #, c-format
@@ -477,19 +482,19 @@ msgstr "No se especificó nombre de usuario, usando %s.\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "archivo con registro de información del usuario"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "RUTA"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "no generar directorios personales"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "no generar almacenamientos de correo"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -550,23 +555,23 @@ msgstr "Error creando cuenta de usuario para %s: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "define contraseña de grupo en lugar de una contraseña de usuario"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "nueva contraseña de texto simple"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "nueva contraseña cifrada"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "lee una nueva contraseña de texto simple desde el descriptor ofrecido"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "lee una nueva contraseña cifrada desde el descriptor ofrecido"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -596,7 +601,7 @@ msgstr "Cancelado el cambio de contraseñas.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Error al leer el archivo descriptor: %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Error al configurar la contraseña para el usuario  %s: %s.\n"
@@ -613,63 +618,63 @@ msgstr "Contraseña modificada.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "crea un usuario del sistema"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "información GECOS del nuevo usuario"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "directorio personal para el nuevo usuario"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "directorio con archivos para el nuevo usuario"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "shell para el nuevo usuario"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "uid del nuevo usuario"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "grupo del nuevo usuario"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "no genera un directorio personal para el usuario"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "no genera un grupo con el mismo nombre del usuario"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "nombre general del nuevo usuario"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "nombre definido del nuevo usuario"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "apellido del nuevo usuario"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "número de habitación del nuevo usuario"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "número telefónico del nuevo usuario"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "número telefónico personal del nuevo usuario"
 
 #: apps/luseradd.c:191
 #, c-format
@@ -681,28 +686,28 @@ msgstr "El grupo %jd no existe.\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Error en la creación del grupo `%s': %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Creación de la cuenta fallida: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Error creando %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Error al crear un spool de correo.\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "si es que posee uno, no elimina el grupo privado del usuario "
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "elimina el directorio personal del usuario"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -746,71 +751,71 @@ msgstr "Error al eliminar el spool de correo.\n"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "información GECOS"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "directorio personal"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "traslada los contenidos del directorio personal"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "define el shell para el usuario"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "define el UID para el usuario"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "define el GID primario para el usuario"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "modifica el nombre de registro del usuario"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "contraseña de texto simple del usuario"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "contraseña previamente hasheada para el usuario"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "bloquear cuenta"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "desbloquear cuenta"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "definir un nombre general para el usuario"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "definir el nombre otorgado al usuario"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "definir el apellido del usuario"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "definir número de habitación del usuario"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "definir numero telefónico del usuario"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "definir número telefónico personal del usario"
 
 #: apps/lusermod.c:179 apps/lusermod.c:192
 #, c-format
@@ -1042,41 +1047,51 @@ msgstr "el nombre comienza con un guión"
 msgid "name contains invalid char `%c'"
 msgstr "el nombre contiene un caracter inválido: `%c'"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "el usuario %s no tiene UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "el grupo %s no tiene GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "el usuario %jd no tiene nombre"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "el grupo %jd no tiene nombre"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "el usuario no tiene nombre ni un UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "el grupo no tiene un nombre ni un GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Por defecto, se niega la utilización del directorio principal peligroso `%s'"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Valor por defecto inválido en el campo %s: %s"
@@ -1181,7 +1196,7 @@ msgstr "`:' no permitido en contraseñas encriptada"
 msgid "error encrypting password"
 msgstr "error al encriptar la contraseña"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "los módulos `%s' y `%s' no pueden ser combinados"
@@ -1335,27 +1350,27 @@ msgstr "Atributo `%s' no encontrado"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "Error configurando contraseña en el directorio LDAP para %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Nombre del servidor LDAP"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "DN base de búsqueda de LDAP"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "DN Bind LDAP"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "Contraseña Bind LDAP"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "Usuario SASL LDAP"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "Usuario de autorización SASL LDAP"
 

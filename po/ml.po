@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Malayalam <discuss@lists.smc.org.in>\n"
 "Language: ml\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -589,7 +589,7 @@ msgstr "രഹസ്യവാക്കില്‍ മാറ്റം വരു�
 msgid "Error reading from file descriptor %d.\n"
 msgstr ""
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s എന്ന ഉപയോക്താവിനു് രഹസ്യവാക്ക്  ഉറപ്പിക്കുന്നതില്‍ പിഴവ് സംഭവിച്ചിരിക്കുന്നു: %s.\n"
@@ -674,17 +674,17 @@ msgstr "%jdഎന്ന ഗ്രൂപ്പ് നിലവിലില്ല\
 msgid "Error creating group `%s': %s\n"
 msgstr "`%s' എന്ന ഗ്രൂപ്പ് സൃഷ്ടിക്കുന്നതില്‍ പിഴവ് സംഭവിച്ചിരിക്കുന്നു: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "അക്കൌണ്ട് സൃഷ്ടിക്കുവാന്‍ സാധിച്ചില്ല: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s സൃഷ്ടിക്കുന്നതില്‍ പിഴവ് സംഭവിച്ചിരിക്കുന്നു: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "മെയില്‍ സ്പൂള്‍ സൃഷ്ടിക്കുന്നതില്‍ പിഴവ് സംഭവിച്ചിരിക്കുന്നു.\n"
@@ -1035,42 +1035,52 @@ msgstr "പേര് ഹൈഫന്‍ കൊണ്ട് തുടങ്ങു
 msgid "name contains invalid char `%c'"
 msgstr "പേരില്‍ '%c' എന്ന അസാധുവായ ചിഹ്നം"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "%s എന്ന ഉപയോക്താവിന് UID ലഭ്യ‌‌മല്ല"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "ഗ്രൂപ്പ് %s-ന് GID ലഭ്യ‌‌മല്ല"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr ""
 "%jd എന്ന ഉപയോക്താവിന്\n"
 "പേരില്ല"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "%jdഎന്ന ഗ്രൂപ്പിന് പേരില്ല"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "ഉപയോഗിക്കുന്ന ആളിന് പേരോ UID-യോ ഇല്ല"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "ഗ്രൂപ്പിന് പേരോ GID-യോ ഇല്ല"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "സ്വതവേയുള്ള അപകടകാരിയായ `%s' ഹോം ഡയറക്ടറി ഉപയോഗിക്കുന്നതു് നിഷേധിക്കുന്നു"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ഫീല്‍‍ഡിന്റെ തനത് മൂല്യം: %s"
@@ -1173,7 +1183,7 @@ msgstr "എന്‍ക്രിപ്റ്റ് ചെയ്തിട്ട�
 msgid "error encrypting password"
 msgstr "രഹസ്യവാക്ക് എന്‍ക്രിപ്റ്റ് ചെയ്യുന്നതില്‍ പിഴവ്"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
@@ -1326,27 +1336,27 @@ msgstr "%s എന്ന അട്രിബ്യൂട്ട് കണ്ടു�
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP ഡയറക്ടറിയില്‍ %s നായുള്ള രഹസ്യവാക്ക് ഉറപ്പിക്കുന്നതില്‍  പിഴവ്: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP സര്‍വര്‍ നാമം"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP സര്‍ച്ച് ബെയ്‌‌‌സ് DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind  രഹസ്യവാക്ക്"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ഉപയോക്താവ്"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ചുമതലയുള്ള ഉപയോക്താവ്"
 

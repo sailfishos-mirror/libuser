@@ -5,22 +5,22 @@
 # Translators:
 # Keld Simonsen <keld@dkuug.dk>, 2001, 2005.
 # Keld Simonsen <keld@rap.dk>, 2005, 2006, 2007.
-# Kris Thomsen <lakristho@gmail.com>, 2009, 2010, 2011, 2012.
+# Kris Thomsen <lakristho@gmail.com>, 2009-2012.
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004.
 # mitr <mitr@volny.cz>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -113,42 +113,43 @@ msgstr "Manglende bruger-overensstemmelse.\n"
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:116 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "bed om alle informationer"
 
 #: apps/lchage.c:85
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "oplist brugerens forældelses-parametre"
 
 #: apps/lchage.c:87
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "minimum antal dage mellem adgangskode-ændringer"
 
 #: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
 #: apps/lchage.c:98 apps/lchage.c:101
 msgid "DAYS"
-msgstr ""
+msgstr "DAGE"
 
 #: apps/lchage.c:89
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "maksimum antal dage mellem skift af adgangskode"
 
 #: apps/lchage.c:91
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "dato siden sidste adgangskode-ændring i dage siden 1/1/70"
 
 #: apps/lchage.c:94
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"antal af dage efter adgangskode-udløbsdato'en, før konto'en anses som inaktiv"
 
 #: apps/lchage.c:97
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "adgangskode-udløbsdato i dage siden 1/1/70"
 
 #: apps/lchage.c:100
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "dage før udløb begynder at advare bruger"
 
 #: apps/lchage.c:113 apps/lid.c:131 apps/lpasswd.c:68 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:101
@@ -318,16 +319,16 @@ msgstr "Skal ændret.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid for ny gruppe"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:69 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "NUMMER"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "opret en systemgruppe"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -361,19 +362,19 @@ msgstr "Gruppe %s kunne ikke slettes: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "indstil GID for gruppe"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "ændr gruppe til at have givet navn"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "NAVN"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "klartekst-adgangskode til brug med gruppe"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -385,35 +386,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "STRENG"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "præ-hashet adgangskode til brug med gruppe"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "liste over administratorer som skal tilføjes"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "liste over administratorer som skal fjernes"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "liste over gruppe-medlemmer som skal tilføjes"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "liste over gruppe-medlemmer som skal fjernes"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "lås gruppe"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "lås gruppe op"
 
 #: apps/lgroupmod.c:123 apps/lusermod.c:163
 #, c-format
@@ -455,10 +456,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"medlemmer af en navngivet gruppe istedet for den navngivne brugers gruppe-"
+"medlemsskaber"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "oplist kun medlemsskab-information efter navn, og ikke UID/GID"
 
 #: apps/lid.c:147
 #, c-format
@@ -477,19 +480,19 @@ msgstr "Brugernavn ikke specificeret, bruger %s.\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "fil med optegnelser over bruger-information"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "STI"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "opret ikke hjemme-mapper"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "opret ikke mail-køer"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -547,23 +550,23 @@ msgstr "Fejl ved oprettelse af brugerkonto for %s: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "indstil gruppe-adgangskode istedet for bruger-adgangskode"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "ny almindelig adgangskode"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "nyt krypteret adgangskode"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "læs ny almindelig adgangskode fra given beskriver"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "læs ny krypteret adgangskode fra given beskriver"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -593,7 +596,7 @@ msgstr "Ændring af adgangskode annulleret.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Fejl under læsning fra fil-deskriptor %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fejl ved indstilling af adgangskode for bruger %s: %s.\n"
@@ -610,63 +613,63 @@ msgstr "Adgangskode ændret.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "opret en systembruger"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "ny brugers GECOS-information"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "hjemme-mappe til ny bruger"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "mappe med filer til den nye bruger"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "shell til ny bruger"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "uid til ny bruger"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "gruppe til ny bruger"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "opret ikke en hjemme-mappe til brugeren"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "opret ikke en gruppe med samme navn som brugeren"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "ny brugers almindelige navn"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "ny brugers fornavn"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "ny brugers efternavn"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "ny brugers værelsesnummer"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "ny brugers telefonnummer"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "ny brugers hjemme-telefonnummer"
 
 #: apps/luseradd.c:191
 #, c-format
@@ -678,28 +681,28 @@ msgstr "Gruppe %jd eksisterer ikke\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Fejl ved oprettelse af gruppe \"%s\": %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Fejl ved oprettelse af konto: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fejl ved oprettelse af %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Fejl ved oprettelse af postkø.\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "fjern ikke brugerens private gruppe, hvis brugeren har en"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "fjern brugerens hjemme-mappe"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -743,71 +746,71 @@ msgstr "Fejl ved fjernelse af postkø.\n"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS-information"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "hjemme-mappe"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "flyt hjemme-mappe-indhold"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "indstil shell for bruger"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "indstil UID for bruger"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "indstil primær GID for bruger"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "skift logind-navn for bruger"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "brugerens klartekst-adgangskode"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "brugerens præ-hashede adgangskode"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "lås konto"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "lås konto op"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "indstil brugerens almindelige navn"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "indstil brugerens fornavn"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "indstil brugerens efternavn"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "indstil brugerens værelsesnummer"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "indstil brugerens telefonnummer"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "indstil brugerens hjemme-telefonnummer"
 
 #: apps/lusermod.c:179 apps/lusermod.c:192
 #, c-format
@@ -1039,40 +1042,50 @@ msgstr "navn starter med en bindestreg"
 msgid "name contains invalid char `%c'"
 msgstr "navn indeholder ugyldigt tegn \"%c\""
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "bruger %s har ingen UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "gruppe %s har ingen GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "bruger %jd har ikke noget navn"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "gruppe %jd har ikke noget navn"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "bruger har hverken et navn eller en UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "gruppe har hverken et navn eller en GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Nægter at bruge farlig hjemmemappe \"%s\" som standard"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ugyldig standardværdi af felt %s: %s"
@@ -1175,7 +1188,7 @@ msgstr "\":\" ikke tilladt i krypteret adgangskode"
 msgid "error encrypting password"
 msgstr "fejl ved kryptering af adgangskode"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "modulerne \"%s\" og \"%s\" kan ikke kombineres"
@@ -1329,27 +1342,27 @@ msgstr "ingen \"%s\"-attribut fundet"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "fejl ved indstilling af adgangskode i LDAP-mappen for %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Navn på LDAP-server"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP søgebase DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP Bind-adgangskode"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL-bruger"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL-godkendelsesbruger"
 

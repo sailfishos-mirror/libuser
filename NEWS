@@ -1,3 +1,12 @@
+0.57.7
+* lu_users_enumerate_by_group_full() added, implemented ONLY for LDAP for now.
+  Related functions and functionality in other modules will be added later.
+  Applications are advised to NOT USE these functions yet.
+* group/user list by name of a user/group now returns an error if the
+  user/group was not found.  The Python bindings enumerateUsersFull and
+  enumerateGroupsFull no longer crash in this situation.
+* Updated translations.
+
 0.57.6
 * Make it possible to use ldapi: URLs by not trying to use TLS (based on
   a patch by <davide.principi@nethesis.it>).

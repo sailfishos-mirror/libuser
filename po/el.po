@@ -13,15 +13,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Greek <trans-el@lists.fedoraproject.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -594,7 +594,7 @@ msgstr "Ακύρωση αλλαγής συνθηματικού.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Σφάλμα κατά την ανάγνωση από το αρχείο Περιγραφή %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Σφάλμα ορισμού συνθηματικού για το χρήστη %s: %s\n"
@@ -679,17 +679,17 @@ msgstr "Δεν υπάρχει η ομάδα %jd\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Σφάλμα στη δημιουργία ομάδας `%s': %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Αποτυχία δημιουργίας λογαριασμού: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Σφάλμα στη δημιουργία %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Σφάλμα στη δημιουργία του ταχυδρομικού νήματος.\n"
@@ -1040,40 +1040,50 @@ msgstr "το όνομα ξεκινά με μια παύλα"
 msgid "name contains invalid char `%c'"
 msgstr "το όνομα περιέχει μη έγκυρο χαρακτήρα `%c'"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "ο χρήστης %s δεν έχει UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "η ομάδα %s δεν έχει GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "ο χρήστης %jd δεν έχει όνομα"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "η ομάδα %jd δεν έχει όνομα"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "ο χρήστης δεν έχει όνομα ούτε UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "η ομάδα δεν έχει όνομα ούτε UID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Άρνησή χρίσης επικίνδυνου κατάλογου `%s 'από προεπιλογή"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Μη έγκυρη προεπιλεγμένη τιμή για το πεδίο %s: %s"
@@ -1176,7 +1186,7 @@ msgstr "η `:' δεν επιτρέπεται σε κρυπτογραφημένο
 msgid "error encrypting password"
 msgstr "σφάλμα κρυπτογράφησης συνθηματικού"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "το `%s 'και`%s' μονάδες δεν μπορούν να συνδυαστούν"
@@ -1331,27 +1341,27 @@ msgstr "δε βρέθηκε ιδιότητα `%s'"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "σφάλμα καθορισμού συνθηματικού στον κατάλογο LDAP για %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Όνομα εξυπηρετητή LDAP"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP Search Base DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP Bind DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "Συνθηματικό LDAP Bind"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "Χρήστης LDAP SASL"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "Χρήστης εξουσιοδότησης LDAP SASL"
 

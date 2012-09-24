@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Bulgarian <trans-bg@lists.fedoraproject.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -111,42 +111,44 @@ msgstr "Несъответстващ потребител.\n"
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:116 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "подканване за всичко в информацията"
 
 #: apps/lchage.c:85
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "показвай параметрите за стареене за потребителя"
 
 #: apps/lchage.c:87
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "минимум дни между смени на паролата"
 
 #: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
 #: apps/lchage.c:98 apps/lchage.c:101
 msgid "DAYS"
-msgstr ""
+msgstr "ДНИ"
 
 #: apps/lchage.c:89
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "максимум дни между смени на паролата"
 
 #: apps/lchage.c:91
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "дата на последна смяна на паролата в дни след 1/1/70"
 
 #: apps/lchage.c:94
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"брой дни след датата на изтичане на паролата, когато акаунтът да се счита за "
+"неактивен"
 
 #: apps/lchage.c:97
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "дата на изтичане на паролата в дни след 1/1/70"
 
 #: apps/lchage.c:100
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "дни за предупреждаване на потребителя преди изтичането"
 
 #: apps/lchage.c:113 apps/lid.c:131 apps/lpasswd.c:68 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:101
@@ -316,16 +318,16 @@ msgstr "Командният интерпретатор е променен.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid за новата група"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:69 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "NUM"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "създава системна група"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -359,19 +361,19 @@ msgstr "Група %s не може да бъде премахната: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "задава GID за група"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "променя групата така, че да има даденото име"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "ИМЕ"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "парола в прав текст за употреба с групата"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -383,35 +385,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "НИЗ"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "pre-hashed парола за употреба с групата"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "списък администратори за добавяне"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "списък администратори за премахване"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "списък членове на група за добавяне"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "списък членове на група за премахване"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "заключва група"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "отключва група"
 
 #: apps/lgroupmod.c:123 apps/lusermod.c:163
 #, c-format
@@ -453,10 +455,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"показвай членовете на посочената група вместо членството в групи на "
+"посочения потребител"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "показвай информацията за членството по име, а не по UID/GID"
 
 #: apps/lid.c:147
 #, c-format
@@ -475,19 +479,19 @@ msgstr "Не е посочен потребител, ще бъде използ�
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "файл със записи на информация за потребителя"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "ПЪТ"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "не създавай домашни директории"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "не създавай директории за съхранение на поща"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -547,23 +551,23 @@ msgstr "Грешка при създаване на потребителски �
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "задай парола на групата вместо на потребителя"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "нова парола в прав текст"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "нова криптирана парола"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "прочети новата парола в прав текст от дадения дескриптор"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "прочети новата криптирана парола от дадения дескриптор"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -593,7 +597,7 @@ msgstr "Смяната на паролата прекъсната.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Грешка при четене от дескриптора на файл %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Грешка при задаване паролата за потребител %s: %s.\n"
@@ -610,63 +614,63 @@ msgstr "Паролата е променена.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "създава системен потребител"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "GECOS информация за новия потребител"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "домашна директория за новия потребител"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "директория с файлове за новия потребител"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "shell за новия потребител"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "uid за новия потребител"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "група за новия потребител"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "не създавай домашна директория за потребителя"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "не създавай група със същото като на потребителя име"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "common име на новия потребител"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "собствено име на новия потребител"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "фамилно име на новия потребител"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "номер на стая на новия потребител"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "номер на телефон на новия потребител"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "номер на домашен телефон на новия потребител"
 
 #: apps/luseradd.c:191
 #, c-format
@@ -678,28 +682,28 @@ msgstr "Група %jd не съществува\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Грешка при създаване на група `%s': %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Неуспех при създаването на акаунт: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Грешка при създаване на %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Грешка при създаване на файл за поща.\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "не премахвай личната група на потребителя, ако има такава"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "премахни домашната директория на потребителя"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -743,71 +747,71 @@ msgstr "Грешка при изтриване на файл за поща.\n"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS информация"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "домашна директория"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "премести съдържанието на домашната директория"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "задава shell за потребителя"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "задава UID за потребителя"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "задава първичен GID за потребителя"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "заменя името за влизане на потребителя"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "парола в прав текст за потребителя"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "pre-hashed парола за потребителя"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "заключва акаунта"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "отключва акаунта"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "задава common име за потребител"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "задава собствено име за потребител"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "задава фамилно име за потребител"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "задава номер на стая на потребител"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "задава номер на телефон на потребител"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "задава номер на домашен телефон на потребител"
 
 #: apps/lusermod.c:179 apps/lusermod.c:192
 #, c-format
@@ -1039,40 +1043,50 @@ msgstr "името започва с тире"
 msgid "name contains invalid char `%c'"
 msgstr "името съдържа невалиден знак `%c'"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "потребител %s няма UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "група %s няма GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "потребител %jd няма име"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "група %jd няма име"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "потребителят няма нито име нито UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "групата няма нито име нито GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Отказано използване на опасна домашна директория `%s' по подразбиране"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Невалидна стойност по подразбиране на поле %s: %s"
@@ -1175,7 +1189,7 @@ msgstr "`:' не е позволено в криптирана парола"
 msgid "error encrypting password"
 msgstr "грешка при криптиране на паролата"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "Модулите `%s' и `%s' не могат да се комбинират"
@@ -1328,27 +1342,27 @@ msgstr "няма намерен атрибут `%s'"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "грешка при задаване парола в LDAP директорията за %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Име на LDAP сървър"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "Базов DN за LDAP търсене"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP DN за връзка"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP парола за връзка"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL Потребител"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL Упълномощаване на потребител"
 

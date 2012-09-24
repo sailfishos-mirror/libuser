@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Kannada (http://www.transifex.net/projects/p/fedora/language/"
+"Language-Team: Kannada (http://www.transifex.com/projects/p/fedora/language/"
 "kn/)\n"
 "Language: kn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -594,7 +594,7 @@ msgstr "ಗುಪ್ತಪದದ ಬದಲಾವಣೆಯನ್ನು ರದ್�
 msgid "Error reading from file descriptor %d.\n"
 msgstr "%d ಎಂಬ ಕಡತ ವಿವರಣೆಗಾರನಿಂದ ಓದುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s ಬಳಕೆದಾರನಿಗೆ ಗುಪ್ತಪದವನ್ನು ಸಿದ್ಧಗೊಳಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
@@ -679,17 +679,17 @@ msgstr "ಸಮೂಹ %jd ವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ
 msgid "Error creating group `%s': %s\n"
 msgstr "ಸಮೂಹ`%s' ವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "ಖಾತೆಯನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s ಅನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ವಿಫಲತೆ ಉಂಟಾಗಿದೆ: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "ಮೈಲ್ ಸ್ಪೂಲನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ.\n"
@@ -1040,40 +1040,50 @@ msgstr "ಹೆಸರು ಅಡ್ಡಗೆರೆಯಿಂದ ಆರಂಭಗೊ�
 msgid "name contains invalid char `%c'"
 msgstr "ಹೆಸರಿನಲ್ಲಿ ಅಮಾನ್ಯ ಅಕ್ಷರವಾದ`%c' ಇದೆ"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "ಬಳಕೆದಾರ %s ವು UID ಅನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "ಸಮೂಹ %s ವು GID ಯನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "ಬಳಕೆದಾರ %jd ನು ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "ಸಮೂಹ %jd ವು ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "ಬಳಕೆದಾರ ಒಂದು ಹೆಸರು ಅಥವ ಒಂದು UID ಅನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "ಸಮೂಹವು ಒಂದು ಹೆಸರು ಅಥವ ಒಂದು GID ಅನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಅಪಾಯಕಾರಿ ನೆಲೆ ಕಡತಕೋಶ `%s' ಅನ್ನು ಬಳಸಲು ನಿರಾಕರಿಸಲಾಗುತ್ತಿದೆ"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ಕ್ಷೇತ್ರದ ಡೀಫಾಲ್ಟ್‍  ಮೌಲ್ಯವು ಅಮಾನ್ಯವಾಗಿದೆ: %s"
@@ -1176,7 +1186,7 @@ msgstr "`:' ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿ�
 msgid "error encrypting password"
 msgstr "ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸುವಲ್ಲಿ ದೋಷ"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' ಹಾಗು `%s' ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಸಂಯೋಜಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
@@ -1330,27 +1340,27 @@ msgstr "ಯಾವುದೆ `%s' ವೈಶಿಷ್ಟ್ಯವು ಕಂಡು �
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s ಕ್ಕಾಗಿ LDAP ಕಡತಕೋಶದಲ್ಲಿ ಗುಪ್ತಪದವನ್ನು ಹೊಂದಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP ಪರಿಚಾರಕದ ಹೆಸರು"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP ಶೋಧನಾ ಮೂಲ DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP ಬೈಂಡ್ DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP ಬೈಂಡ್ ಗುಪ್ತಪದ"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ಬಳಕೆದಾರ"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL ದೃಢೀಕರಣ ಬಳಕೆದಾರ"
 

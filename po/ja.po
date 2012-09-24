@@ -11,22 +11,22 @@
 # Makoto Mizukami <mmk9060@aol.com>, 2008.
 # mitr <mitr@volny.cz>, 2011.
 # Noriko Mizumoto <noriko@redhat.com>, 2007, 2008, 2009.
-# Tomoyuki KATO <tomo@dream.daynight.jp>, 2011, 2012.
+# Tomoyuki KATO <tomo@dream.daynight.jp>, 2011-2012.
 #   <www.carrotsoft@gmail.com>, 2011.
 # Yukihiro Nakai <ynakai@redhat.com>, 2001.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Japanese <trans-ja@lists.fedoraproject.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -132,7 +132,7 @@ msgstr ""
 #: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
 #: apps/lchage.c:98 apps/lchage.c:101
 msgid "DAYS"
-msgstr ""
+msgstr "日数"
 
 #: apps/lchage.c:89
 msgid "maximum days between password changes"
@@ -324,16 +324,16 @@ msgstr "シェル変更済み\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "新しいグループの GID"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:69 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "番号"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "システムグループを作成します"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -367,7 +367,7 @@ msgstr "グループ %s は削除できませんでした: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "グループの GID を設定します"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
@@ -375,7 +375,7 @@ msgstr ""
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "名前"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:77
 msgid "plaintext password for use with group"
@@ -391,7 +391,7 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "文字列"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
@@ -415,11 +415,11 @@ msgstr ""
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "グループをロックします"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "グループをロック解除します"
 
 #: apps/lgroupmod.c:123 apps/lusermod.c:163
 #, c-format
@@ -598,7 +598,7 @@ msgstr "パスワード変更は取り消されました。\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "エラー: ファイルディスクリプター %d から読み込みできません。\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "ユーザー %s のパスワード設定に失敗: %s。\n"
@@ -683,17 +683,17 @@ msgstr "グループ %jd は存在しません\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "グループ `%s' の作成に失敗: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "アカウントの作成に失敗しました: %s。\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s の作成に失敗: %s。\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "メールスプールの作成中にエラーが発生しました。\n"
@@ -1046,40 +1046,50 @@ msgstr "ハイフンから名前が始まっています"
 msgid "name contains invalid char `%c'"
 msgstr "名前に無効な文字 `%c' があります"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "ユーザー %s には UID がありません。"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "グループ %s には GID がありません。"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "ユーザー %jd には 名前がありません。"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "グループ %jd にはありません。"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "ユーザーには名前もしくは UID がありません。"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "グループには名前もしくは GID がありません。"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "デフォルトで危険なホームディレクトリ `%s' の使用を拒否中です"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "領域 %s の値は無効なデフォルト値です : %s"
@@ -1182,7 +1192,7 @@ msgstr "`:' は暗号化パスワードでは許可されていません"
 msgid "error encrypting password"
 msgstr "パスワードの暗号化中にエラーが発生しました"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' と `%s' のモジュールは組み合わせできません。"
@@ -1335,27 +1345,27 @@ msgstr "`%s' 属性は見つかりませんでした"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "%s の LDAP ディレクトリーのパスワード設定でエラー: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP サーバー名"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP 検索ベース DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP バインド DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP バインドパスワード"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL ユーザー"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL 認証ユーザー"
 

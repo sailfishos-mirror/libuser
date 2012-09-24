@@ -14,15 +14,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 19:10+0000\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 19:46+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Tamil <tamil-users@lists.fedoraproject.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -594,7 +594,7 @@ msgstr "மாற்றிய கடவுச்சொல் ரத்து ச
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Error reading from file descriptor %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "பயனர் %sக்கு கடவுச்சொல் அமைப்பதில் பிழை: %s.\n"
@@ -679,17 +679,17 @@ msgstr "குழு %jd இல்லை \n"
 msgid "Error creating group `%s': %s\n"
 msgstr "குழு `%s' அமைப்பதில் பிழை: %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "கணக்கு உருவாக்க முடியவில்லை: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%sஐ உருவாக்குவதில் பிழை: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "அஞ்சல் ஸ்பூல் உருவாக்குவதில் பிழை.\n"
@@ -1040,40 +1040,50 @@ msgstr "பெயர் இடைக்கோட்டினால் ஆரம�
 msgid "name contains invalid char `%c'"
 msgstr "பெயர் தவறான எழுத்து `%c' ஐ கொண்டுள்ளது"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "பயனர் %sம் UID இல்லை"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "குழு %sம் GID இல்லை"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "பயனர் %jd க்கு பெயர் இல்லை"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "குழு %jd க்கு பெயர் இல்லை"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "பயனரிடம் பெயர் அல்லது UID இல்லை"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "குழுவில் ஒரு பெயர் அல்லது ஒரு GID இல்லை"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "அபாயகரமான இல்ல அடைவு `%s'ஐ முன்னிப்பாக பயன்படுத்த மறுக்கிறது"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "புலத்தின் தவறான முன்னிருப்பு மதிப்பு %s: %s"
@@ -1176,7 +1186,7 @@ msgstr "`:' மறைகுறியாக்கப்பட்ட கடவு�
 msgid "error encrypting password"
 msgstr "கடவுச்சொல்லை குறிமுறையாக்குவதில் பிழை"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' மற்றும் `%s' தொகுதிகளை கலக்க முடியாது"
@@ -1328,27 +1338,27 @@ msgstr "`%s' கூறு இல்லை"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "LDAP அடைவில் %s க்கு கடவுச்சொல் அமைப்பதில் பிழை: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "LDAP சேவையக பெயர்"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP தேடல் தளம் DN"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP பிணைத்தல் DN"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP பிணைத்தல் கடவுச்சொல்"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL பயனர்"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL அனுமதிக்கப்பட்ட பயனர்"
 

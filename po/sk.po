@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-03-22 20:50+0100\n"
-"PO-Revision-Date: 2012-03-22 20:49+0100\n"
+"POT-Creation-Date: 2012-09-24 22:04+0200\n"
+"PO-Revision-Date: 2012-09-24 22:05+0200\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Slovak (http://www.transifex.net/projects/p/fedora/language/"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/fedora/language/"
 "sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: apps/apputil.c:122
 #, c-format
@@ -594,7 +594,7 @@ msgstr "Zmena hesla zrušená.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Chyba počas načítavania z popisovača súboru %d.\n"
 
-#: apps/lpasswd.c:201 apps/luseradd.c:285 apps/luseradd.c:295
+#: apps/lpasswd.c:201 apps/luseradd.c:287 apps/luseradd.c:297
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Chyba pri nastavovaní hesla pre používateľa %s: %s.\n"
@@ -679,17 +679,17 @@ msgstr "Skupina %jd neexistuje\n"
 msgid "Error creating group `%s': %s\n"
 msgstr "Chyba pri vytváraní skupiny `%s': %s\n"
 
-#: apps/luseradd.c:277
+#: apps/luseradd.c:279
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "Vytváranie konta zlyhalo: %s.\n"
 
-#: apps/luseradd.c:327
+#: apps/luseradd.c:329
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Chyba pri vytváraní %s: %s.\n"
 
-#: apps/luseradd.c:334
+#: apps/luseradd.c:336
 #, c-format
 msgid "Error creating mail spool.\n"
 msgstr "Chyba pri vytváraní odkladacieho priestoru pošty.\n"
@@ -1040,41 +1040,51 @@ msgstr "meno začína s pomlčkou"
 msgid "name contains invalid char `%c'"
 msgstr "meno obsahuje neplatný znak `%c'"
 
-#: lib/user.c:318 lib/user.c:366
+#: lib/user.c:318 lib/user.c:370
 #, c-format
 msgid "user %s has no UID"
 msgstr "používateľ %s nemá žiadne UID"
 
-#: lib/user.c:341 lib/user.c:367
+#: lib/user.c:320
+#, c-format
+msgid "user %s not found"
+msgstr ""
+
+#: lib/user.c:343 lib/user.c:371
 #, c-format
 msgid "group %s has no GID"
 msgstr "skupina %s nemá žiadne GID"
 
-#: lib/user.c:361
+#: lib/user.c:345
+#, c-format
+msgid "group %s not found"
+msgstr ""
+
+#: lib/user.c:365
 #, c-format
 msgid "user %jd has no name"
 msgstr "používateľ %jd nemá meno"
 
-#: lib/user.c:362
+#: lib/user.c:366
 #, c-format
 msgid "group %jd has no name"
 msgstr "Skupina %jd nemá meno"
 
-#: lib/user.c:370
+#: lib/user.c:374
 msgid "user has neither a name nor an UID"
 msgstr "používateľ nemá ani meno ani UID"
 
-#: lib/user.c:371
+#: lib/user.c:375
 msgid "group has neither a name nor a GID"
 msgstr "skupina nemá ani meno ani GID"
 
-#: lib/user.c:1372
+#: lib/user.c:1380
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Zamieta sa použitie nebezpečného domovského adresára `%s' ako štandardného"
 
-#: lib/user.c:2298
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Nesprávna štandardná hodnota položky %s: %s"
@@ -1177,7 +1187,7 @@ msgstr "`:' nepovolené v zakódovanom hesle"
 msgid "error encrypting password"
 msgstr "chyba pri šifrovaní hesla"
 
-#: modules/files.c:2627 modules/ldap.c:2498
+#: modules/files.c:2627 modules/ldap.c:2533
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "moduly `%s' a `%s' nemôžu byť skombinované"
@@ -1330,27 +1340,27 @@ msgstr "nebol nájdený príznak `%s'"
 msgid "error setting password in LDAP directory for %s: %s"
 msgstr "chyba pri nastavovaní hesla v LDAP adresára pre %s: %s"
 
-#: modules/ldap.c:2534
+#: modules/ldap.c:2569
 msgid "LDAP Server Name"
 msgstr "Meno servera LDAP"
 
-#: modules/ldap.c:2540
+#: modules/ldap.c:2575
 msgid "LDAP Search Base DN"
 msgstr "LDAP DN vyhľadávacej základne"
 
-#: modules/ldap.c:2546
+#: modules/ldap.c:2581
 msgid "LDAP Bind DN"
 msgstr "LDAP DN pripájania"
 
-#: modules/ldap.c:2553
+#: modules/ldap.c:2588
 msgid "LDAP Bind Password"
 msgstr "LDAP heslo pripájania"
 
-#: modules/ldap.c:2559
+#: modules/ldap.c:2594
 msgid "LDAP SASL User"
 msgstr "LDAP SASL používateľ"
 
-#: modules/ldap.c:2566
+#: modules/ldap.c:2601
 msgid "LDAP SASL Authorization User"
 msgstr "LDAP SASL udelenie oprávnenia používateľa"
 
