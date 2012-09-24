@@ -2353,11 +2353,46 @@ lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
 				      const char *group, gid_t gid,
 				      struct lu_error **error)
 {
-	(void)module;
-	(void)group;
-	(void)gid;
-	(void)error;
-	return NULL;
+	struct lu_ldap_context *ctx;
+	GPtrArray *primaries = g_ptr_array_new();
+	char grp[sizeof (gid) * CHAR_BIT + 1];
+
+	LU_ERROR_CHECK(error);
+	ctx = module->module_context;
+	sprintf(grp, "%jd", (intmax_t)gid);
+
+	lu_ldap_lookup(module, "gidNumber", grp, NULL, primaries,
+		       ctx->user_branch, "("OBJECTCLASS"="POSIXACCOUNT")",
+		       lu_ldap_user_attributes, lu_user, error);
+	if (*error == NULL) {
+		GValueArray *secondaries;
+		size_t i;
+
+		secondaries = lu_ldap_enumerate(module, "cn", group,
+						"memberUid", ctx->group_branch,
+						error);
+		for (i = 0; secondaries != NULL && i < secondaries->n_values;
+		     i++) {
+			GValue *value;
+			const char *name;
+			struct lu_ent *ent;
+
+			value = g_value_array_get_nth(secondaries, i);
+			name = g_value_get_string(value);
+			ent = lu_ent_new();
+			if (lu_user_lookup_name(module->lu_context, name, ent,
+						error))
+				g_ptr_array_add(primaries, ent);
+			else {
+				lu_ent_free(ent);
+				if (*error != NULL)
+					break;
+			}
+		}
+		g_value_array_free(secondaries);
+	}
+
+	return primaries;
 }
 
 /* Get a list of all groups to which the user belongs, via either primary or

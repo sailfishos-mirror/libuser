@@ -1,5 +1,10 @@
 2012-09-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/ldap.c (lu_ldap_users_enumerate_by_group_full): Implement.
+	* tests/ldap_test.py (Tests.testUsersEnumerateByGroupFull1)
+	(Tests.testUsersEnumerateByGroupFull2)
+	(Tests.testUsersEnumerateByGroupFull3): New tests.
+
 	* python/common.h: Declare convert_ent_array_pylist.
 	* python/ent.c (convert_ent_array_pylist): New function.
 	* python/admin.c (libuser_admin_enumerate_users_full)
