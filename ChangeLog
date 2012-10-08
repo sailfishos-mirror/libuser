@@ -1,3 +1,8 @@
+2012-10-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/libuser.conf.5.in ([ldap]): Warn against storing a password
+	in the system-wide file.
+
 2012-09-24  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.in: Release 0.57.7.

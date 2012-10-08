@@ -375,6 +375,13 @@ Default value is the name of the invoking user.
 The password used for a simple bind by default.  If not specified, there is
 no default and the user must supply the password each time.
 
+.B IT IS STRONGLY RECOMMENDED NOT TO STORE A PASSWORD IN THE SYSTEM-WIDE
+.I @sysconfdir@/libuser.conf
+.B FILE.
+The configuration file is world-readable by default,
+and setuid programs that prompt for a server name could be used
+to send the password to an attacker-controlled server.
+
 .TP
 .B authuser
 The SASLv2 authorization user, if non-empty.
