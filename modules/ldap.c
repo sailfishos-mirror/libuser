@@ -2314,7 +2314,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 				 struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	GValueArray *primaries;
+	GValueArray *ret;
 	GValue *value;
 	char grp[sizeof (gid) * CHAR_BIT + 1];
 	size_t i;
@@ -2323,8 +2323,8 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 	ctx = module->module_context;
 	sprintf(grp, "%jd", (intmax_t)gid);
 
-	primaries = lu_ldap_enumerate(module, "gidNumber", grp, "uid",
-				      ctx->user_branch, error);
+	ret = lu_ldap_enumerate(module, "gidNumber", grp, "uid",
+				ctx->user_branch, error);
 	if ((error == NULL) || (*error == NULL)) {
 		GValueArray *secondaries;
 
@@ -2333,19 +2333,19 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 						error);
 		for (i = 0; i < secondaries->n_values; i++) {
 			value = g_value_array_get_nth(secondaries, i);
-			g_value_array_append(primaries, value);
+			g_value_array_append(ret, value);
 		}
 		g_value_array_free(secondaries);
 	}
 
 #ifdef DEBUG
-	for (i = 0; i < primaries->n_values; i++) {
-		value = g_value_array_get_nth(primaries, i);
+	for (i = 0; i < ret->n_values; i++) {
+		value = g_value_array_get_nth(ret, i);
 		g_print("`%s' contains `%s'\n", group,
 			g_value_get_string(value));
 	}
 #endif
-	return primaries;
+	return ret;
 }
 
 static GPtrArray *
@@ -2354,15 +2354,15 @@ lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
 				      struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	GPtrArray *primaries = g_ptr_array_new();
+	GPtrArray *ret = g_ptr_array_new();
 	char grp[sizeof (gid) * CHAR_BIT + 1];
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
 	sprintf(grp, "%jd", (intmax_t)gid);
 
-	lu_ldap_lookup(module, "gidNumber", grp, NULL, primaries,
-		       ctx->user_branch, "("OBJECTCLASS"="POSIXACCOUNT")",
+	lu_ldap_lookup(module, "gidNumber", grp, NULL, ret, ctx->user_branch,
+		       "("OBJECTCLASS"="POSIXACCOUNT")",
 		       lu_ldap_user_attributes, lu_user, error);
 	if (*error == NULL) {
 		GValueArray *secondaries;
@@ -2382,7 +2382,7 @@ lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
 			ent = lu_ent_new();
 			if (lu_user_lookup_name(module->lu_context, name, ent,
 						error))
-				g_ptr_array_add(primaries, ent);
+				g_ptr_array_add(ret, ent);
 			else {
 				lu_ent_free(ent);
 				if (*error != NULL)
@@ -2392,7 +2392,7 @@ lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
 		g_value_array_free(secondaries);
 	}
 
-	return primaries;
+	return ret;
 }
 
 /* Get a list of all groups to which the user belongs, via either primary or
@@ -2404,7 +2404,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 				 struct lu_error **error)
 {
 	struct lu_ldap_context *ctx;
-	GValueArray *primaries, *gids;
+	GValueArray *ret, *gids;
 	GValue *value;
 	size_t i;
 
@@ -2413,7 +2413,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	ctx = module->module_context;
 
 	/* Create an array to hold the values returned. */
-	primaries = g_value_array_new(0);
+	ret = g_value_array_new(0);
 
 	/* Get the user's primary GID(s). */
 	gids = lu_ldap_enumerate(module, "uid", user, "gidNumber",
@@ -2438,7 +2438,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 			values = lu_ent_get(ent, LU_GROUPNAME);
 			for (j = 0; j < values->n_values; j++) {
 				value = g_value_array_get_nth(values, j);
-				g_value_array_append(primaries, value);
+				g_value_array_append(ret, value);
 			}
 		}
 		lu_ent_free(ent);
@@ -2454,20 +2454,20 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 						error);
 		for (i = 0; i < secondaries->n_values; i++) {
 			value = g_value_array_get_nth(secondaries, i);
-			g_value_array_append(primaries, value);
+			g_value_array_append(ret, value);
 		}
 		g_value_array_free(secondaries);
 	}
 
 #ifdef DEBUG
-	for (i = 0; i < primaries->n_values; i++) {
-		value = g_value_array_get_nth(primaries, i);
+	for (i = 0; i < ret->n_values; i++) {
+		value = g_value_array_get_nth(ret, i);
 		g_print("`%s' is in `%s'\n", user,
 			g_value_get_string(value));
 	}
 #endif
 
-	return primaries;
+	return ret;
 }
 
 static GPtrArray *
