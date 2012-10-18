@@ -2325,7 +2325,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 
 	ret = lu_ldap_enumerate(module, "gidNumber", grp, "uid",
 				ctx->user_branch, error);
-	if ((error == NULL) || (*error == NULL)) {
+	if (*error == NULL) {
 		GValueArray *secondaries;
 
 		secondaries = lu_ldap_enumerate(module, "cn", group,
@@ -2450,7 +2450,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 	g_value_array_free(gids);
 	/* Search for the supplemental groups which list this user as
 	 * a member. */
-	if ((error == NULL) || (*error == NULL)) {
+	if (*error == NULL) {
 		GValueArray *secondaries;
 
 		secondaries = lu_ldap_enumerate(module, "memberUid", user,

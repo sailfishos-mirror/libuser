@@ -1,5 +1,8 @@
 2012-10-18  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/ldap.c (lu_ldap_users_enumerate_by_group)
+	(lu_ldap_groups_enumerate_by_user): Remove an unnecessary condition.
+
 	* modules/ldap.c (lu_ldap_users_enumerate_by_group_full): Silently
 	ignore errors when looking up group members, instead of returning a
 	non-error return value with error indication set.
