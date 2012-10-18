@@ -2375,18 +2375,22 @@ lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
 		     i++) {
 			GValue *value;
 			const char *name;
+			struct lu_error *err2;
 			struct lu_ent *ent;
 
 			value = g_value_array_get_nth(secondaries, i);
 			name = g_value_get_string(value);
 			ent = lu_ent_new();
+			err2 = NULL;
 			if (lu_user_lookup_name(module->lu_context, name, ent,
-						error))
+						&err2))
 				g_ptr_array_add(ret, ent);
 			else {
 				lu_ent_free(ent);
-				if (*error != NULL)
-					break;
+				/* Silently ignore the error and return at
+				   least some results. */
+				if (err2 != NULL)
+					lu_error_free(&err2);
 			}
 		}
 		g_value_array_free(secondaries);
