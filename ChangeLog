@@ -1,3 +1,10 @@
+2012-10-18  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/ldap.c (lu_ldap_groups_enumerate_by_user_full): Implement.
+	* tests/ldap_test.py (Tests.testGroupsEnumerateByUserFull1)
+	(Tests.testGroupsEnumerateByUserFull2)
+	(Tests.testGroupsEnumerateByUserFull3): New tests.
+
 2012-10-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* docs/libuser.conf.5.in ([ldap]): Warn against storing a password

@@ -2475,11 +2475,75 @@ lu_ldap_groups_enumerate_by_user_full(struct lu_module *module,
 				      const char *user, uid_t uid,
 				      struct lu_error **error)
 {
-	(void)module;
-	(void)user;
+	struct lu_ldap_context *ctx;
+	GPtrArray *ret;
+	GValueArray *gids;
+	GValue *value;
+	size_t i;
+
 	(void)uid;
-	(void)error;
-	return NULL;
+	LU_ERROR_CHECK(error);
+	ctx = module->module_context;
+
+	ret = g_ptr_array_new();
+
+	/* Get the user's primary GID(s). */
+	gids = lu_ldap_enumerate(module, "uid", user, "gidNumber",
+				 ctx->user_branch, error);
+	/* For each GID, look up the group.  Which has this GID. */
+	for (i = 0; gids != NULL && i < gids->n_values; i++) {
+		gid_t gid;
+		struct lu_error *err2;
+		struct lu_ent *ent;
+
+		value = g_value_array_get_nth(gids, i);
+		gid = lu_value_get_id(value);
+		if (gid == LU_VALUE_INVALID_ID)
+			continue;
+		ent = lu_ent_new();
+		err2 = NULL;
+		if (lu_group_lookup_id(module->lu_context, gid, ent, &err2))
+			g_ptr_array_add(ret, ent);
+		else {
+			lu_ent_free(ent);
+			if (err2 != NULL)
+				/* Silently ignore the error and return at
+				   least some results. */
+				lu_error_free(&err2);
+		}
+	}
+	g_value_array_free(gids);
+	/* Search for the supplemental groups which list this user as
+	 * a member. */
+	if (*error == NULL) {
+		GValueArray *secondaries;
+
+		secondaries = lu_ldap_enumerate(module, "memberUid", user,
+						"cn", ctx->group_branch,
+						error);
+		for (i = 0; i < secondaries->n_values; i++) {
+			const char *name;
+			struct lu_error *err2;
+			struct lu_ent *ent;
+
+			value = g_value_array_get_nth(secondaries, i);
+			name = g_value_get_string(value);
+			ent = lu_ent_new();
+			if (lu_group_lookup_name(module->lu_context, name, ent,
+						 &err2))
+				g_ptr_array_add(ret, ent);
+			else {
+				lu_ent_free(ent);
+				if (err2 != NULL)
+					/* Silently ignore the error and return
+					   at least some results. */
+					lu_error_free(&err2);
+			}
+		}
+		g_value_array_free(secondaries);
+	}
+
+	return ret;
 }
 
 static gboolean
