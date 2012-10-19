@@ -2315,9 +2315,7 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 {
 	struct lu_ldap_context *ctx;
 	GValueArray *ret;
-	GValue *value;
 	char grp[sizeof (gid) * CHAR_BIT + 1];
-	size_t i;
 
 	LU_ERROR_CHECK(error);
 	ctx = module->module_context;
@@ -2331,20 +2329,10 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 		secondaries = lu_ldap_enumerate(module, "cn", group,
 						"memberUid", ctx->group_branch,
 						error);
-		for (i = 0; i < secondaries->n_values; i++) {
-			value = g_value_array_get_nth(secondaries, i);
-			g_value_array_append(ret, value);
-		}
+		lu_util_append_values(ret, secondaries);
 		g_value_array_free(secondaries);
 	}
 
-#ifdef DEBUG
-	for (i = 0; i < ret->n_values; i++) {
-		value = g_value_array_get_nth(ret, i);
-		g_print("`%s' contains `%s'\n", group,
-			g_value_get_string(value));
-	}
-#endif
 	return ret;
 }
 
@@ -2433,18 +2421,11 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 			continue;
 		ent = lu_ent_new();
 		if (lu_group_lookup_id(module->lu_context, gid,
-				       ent, error)) {
-			GValueArray *values;
-			size_t j;
-
+				       ent, error))
 			/* Get the group's names and add them to the list
 			 * of values to return. */
-			values = lu_ent_get(ent, LU_GROUPNAME);
-			for (j = 0; j < values->n_values; j++) {
-				value = g_value_array_get_nth(values, j);
-				g_value_array_append(ret, value);
-			}
-		}
+			lu_util_append_values(ret,
+					      lu_ent_get(ent, LU_GROUPNAME));
 		lu_ent_free(ent);
 	}
 	g_value_array_free(gids);
@@ -2456,10 +2437,7 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 		secondaries = lu_ldap_enumerate(module, "memberUid", user,
 						"cn", ctx->group_branch,
 						error);
-		for (i = 0; i < secondaries->n_values; i++) {
-			value = g_value_array_get_nth(secondaries, i);
-			g_value_array_append(ret, value);
-		}
+		lu_util_append_values(ret, secondaries);
 		g_value_array_free(secondaries);
 	}
 

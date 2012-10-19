@@ -756,11 +756,7 @@ merge_ent_array_duplicates(GPtrArray *array)
 			}
 			g_list_free(list);
 			/* Now merge the entity's list of modules. */
-			for (j = 0; j < current->modules->n_values; j++) {
-				value = g_value_array_get_nth(current->modules,
-							      j);
-				g_value_array_append(saved->modules, value);
-			}
+			lu_util_append_values(saved->modules, current->modules);
 			remove_duplicate_values(saved->modules);
 			lu_ent_free(current);
 		}
@@ -858,12 +854,8 @@ run_list(struct lu_context *context,
 					value_array = g_value_array_new(0);
 				}
 				if (tmp_value_array != NULL) {
-					for (j = 0; j < tmp_value_array->n_values; j++) {
-						value = g_value_array_get_nth(tmp_value_array,
-									      j);
-						g_value_array_append(value_array,
-								     value);
-					}
+					lu_util_append_values(value_array,
+							      tmp_value_array);
 					g_value_array_free(tmp_value_array);
 				}
 				remove_duplicate_values(value_array);

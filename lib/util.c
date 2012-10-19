@@ -770,3 +770,13 @@ lu_util_fscreate_for_path(const char *path, mode_t mode,
 	return TRUE;
 }
 #endif
+
+/* Append a copy of VALUES to DEST */
+void
+lu_util_append_values(GValueArray *dest, GValueArray *values)
+{
+	size_t i;
+
+	for (i = 0; i < values->n_values; i++)
+		g_value_array_append(dest, g_value_array_get_nth(values, i));
+}

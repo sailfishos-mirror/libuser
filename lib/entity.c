@@ -395,7 +395,6 @@ static void
 lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 {
 	GValueArray *dest, *copy;
-	size_t i;
 
 	g_return_if_fail(list != NULL);
 	g_return_if_fail(attr != NULL);
@@ -417,8 +416,7 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	while (dest->n_values > 0)
 		g_value_array_remove(dest, dest->n_values - 1);
 	copy = g_value_array_copy(values);
-	for (i = 0; i < copy->n_values; i++)
-		g_value_array_append(dest, g_value_array_get_nth(copy, i));
+	lu_util_append_values(dest, copy);
 	g_value_array_free(copy);
 }
 

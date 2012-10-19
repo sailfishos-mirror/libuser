@@ -356,6 +356,9 @@ void lu_util_update_shadow_last_change(struct lu_ent *ent);
 id_t lu_get_first_unused_id(struct lu_context *ctx, enum lu_entity_type type,
 			    id_t id);
 
+/* Append a copy of VALUES to DEST */
+void lu_util_append_values(GValueArray *dest, GValueArray *values);
+
 G_END_DECLS
 
 #endif
