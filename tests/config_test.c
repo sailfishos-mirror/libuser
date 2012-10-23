@@ -28,11 +28,14 @@
 static struct lu_context *
 start(const char *base, const char *file)
 {
+	char *path;
 	struct lu_context *ctx;
 	struct lu_error *error;
 
-	/* A memory leak, whatever. */
-	putenv(g_strconcat("LIBUSER_CONF=", base, "/", file, NULL));
+	path = g_strconcat(base, "/", file, NULL);
+	setenv("LIBUSER_CONF", path, 1);
+	g_free(path);
+
 	error = NULL;
 	ctx = lu_start(NULL, 0, NULL, NULL, lu_prompt_console_quiet, NULL,
 		       &error);
@@ -47,18 +50,22 @@ start(const char *base, const char *file)
 static void
 verify_var(struct lu_context *ctx, const char *key, ...)
 {
-	GList *list;
+	GList *list, *it;
 	va_list ap;
 	const char *val;
 
 	list = lu_cfg_read(ctx, key, NULL);
+
+	it = list;
 	va_start(ap, key);
 	while ((val = va_arg(ap, const char *)) != NULL) {
-		assert(list != NULL && strcmp(list->data, val) == 0);
-		list = list->next;
+		assert(it != NULL && strcmp(it->data, val) == 0);
+		it = it->next;
 	}
 	va_end(ap);
-	assert(list == NULL);
+	assert(it == NULL);
+
+	g_list_free(list);
 }
 
 int
@@ -76,6 +83,7 @@ main(int argc, char *argv[])
 	list = lu_cfg_read(ctx, "test/nonexistent", "default");
 	assert(g_list_length(list) == 1);
 	assert(strcmp(list->data, "default") == 0);
+	g_list_free(list);
 
 	verify_var(ctx, "test/nonexistent", (const char *)NULL);
 
@@ -89,9 +97,11 @@ main(int argc, char *argv[])
 	assert(g_list_length(list) == 2);
 	assert(strcmp(list->data, "name") == 0);
 	assert(strcmp(list->next->data, "name2") == 0);
+	g_list_free(list);
 
 	list = lu_cfg_read_keys(ctx, "invalid");
 	assert(g_list_length(list) == 0);
+	g_list_free(list);
 
 	lu_end(ctx);
 

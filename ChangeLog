@@ -1,5 +1,7 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/config_test.c (start, verify_var, main): Fix memory leaks.
+
 	* tests/valgrind.supp: Simplify and generalize g_type_init suppression.
 
 	* tests/config_test.sh:
