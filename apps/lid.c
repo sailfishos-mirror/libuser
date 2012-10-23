@@ -29,18 +29,14 @@
 #include "apputil.h"
 
 static void
-do_id (struct lu_context *ctx, const char *name, int nameonly,
-       GValueArray *(*enumerate) (struct lu_context *, const char *,
-				  struct lu_error **),
-       gboolean (*lookup_member) (struct lu_context *, const char *,
-				  struct lu_ent *, struct lu_error **),
-       const char *id_attribute, const char *id_descr)
+do_nameonly(struct lu_context *ctx, const char *name,
+	    GValueArray *(*enumerate) (struct lu_context *, const char *,
+				       struct lu_error **))
 {
 	GValueArray *values;
 	struct lu_error *error;
 
 	error = NULL;
-
 	values = enumerate(ctx, name, &error);
 	if (error != NULL) {
 		fprintf(stderr, _("Error looking up %s: %s\n"), name,
@@ -49,42 +45,67 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 		exit(1);
 	}
 	if (values != NULL) {
+		size_t i;
+
+		for (i = 0; i < values->n_values; i++) {
+			GValue *value;
+
+			value = g_value_array_get_nth(values, i);
+			g_print(" %s\n", g_value_get_string(value));
+		}
+		g_value_array_free(values);
+	}
+}
+
+static void
+do_full(struct lu_context *ctx, const char *name,
+	GPtrArray *(*enumerate_full) (struct lu_context *, const char *,
+				   struct lu_error **),
+	const char *name_attribute, const char *id_attribute,
+	const char *id_descr)
+{
+	GPtrArray *entities;
+	struct lu_error *error;
+
+	error = NULL;
+
+	entities = enumerate_full(ctx, name, &error);
+	if (error != NULL) {
+		fprintf(stderr, _("Error looking up %s: %s\n"), name,
+			lu_strerror(error));
+		lu_error_free(&error);
+		exit(1);
+	}
+	if (entities != NULL) {
 		struct lu_ent *ent;
 		size_t i;
 
-		ent = lu_ent_new();
-		for (i = 0; i < values->n_values; i++) {
+		for (i = 0; i < entities->len; i++) {
+			GValueArray *attrs;
 			GValue *value;
-			const char *found;
+			id_t id;
+			const char *ent_name;
 
-			value = g_value_array_get_nth(values, i);
-			found = g_value_get_string(value);
-			if (!nameonly
-			    && lookup_member(ctx, found, ent, &error)) {
-				GValueArray *attrs;
-				id_t id;
+			ent = g_ptr_array_index(entities, i);
+			attrs = lu_ent_get(ent, name_attribute);
+			value = g_value_array_get_nth(attrs, 0);
+			ent_name = g_value_get_string(value);
 
-				attrs = lu_ent_get(ent, id_attribute);
-				if (attrs == NULL)
-					id = LU_VALUE_INVALID_ID;
-				else {
-					value = g_value_array_get_nth(attrs, 0);
-					id = lu_value_get_id(value);
-				}
-				if (id != LU_VALUE_INVALID_ID)
-					g_print(" %s(%s=%jd)\n", found,
-						id_descr, (intmax_t)id);
-				else
-					g_print(" %s\n", found);
-			} else {
-				if (error != NULL)
-					lu_error_free(&error);
-				g_print(" %s\n", found);
+			attrs = lu_ent_get(ent, id_attribute);
+			if (attrs == NULL)
+				id = LU_VALUE_INVALID_ID;
+			else {
+				value = g_value_array_get_nth(attrs, 0);
+				id = lu_value_get_id(value);
 			}
-			lu_ent_clear_all(ent);
+			if (id != LU_VALUE_INVALID_ID)
+				g_print(" %s(%s=%jd)\n", ent_name,
+					id_descr, (intmax_t)id);
+			else
+				g_print(" %s\n", ent_name);
+			lu_ent_free(ent);
 		}
-		lu_ent_free(ent);
-		g_value_array_free(values);
+		g_ptr_array_free(entities, TRUE);
 	}
 }
 
@@ -181,12 +202,18 @@ main(int argc, const char **argv)
 	}
 	lu_ent_free(ent);
 
-	if (groupflag)
-		do_id(ctx, name, nameonly, lu_users_enumerate_by_group,
-		      lu_user_lookup_name, LU_UIDNUMBER, "uid");
-	else
-		do_id(ctx, name, nameonly, lu_groups_enumerate_by_user,
-		      lu_group_lookup_name, LU_GIDNUMBER, "gid");
+	if (nameonly)
+		do_nameonly(ctx, name,
+			    groupflag ? lu_users_enumerate_by_group
+			    : lu_groups_enumerate_by_user);
+	else {
+		if (groupflag)
+			do_full(ctx, name, lu_users_enumerate_by_group_full,
+				LU_USERNAME, LU_UIDNUMBER, "uid");
+		else
+			do_full(ctx, name, lu_groups_enumerate_by_user_full,
+				LU_GROUPNAME, LU_GIDNUMBER, "gid");
+	}
 
 	lu_end(ctx);
 

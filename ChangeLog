@@ -1,5 +1,9 @@
 2012-10-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lid.c (do_nameonly, do_full): Specialize from do_id.  Caller
+	updated.
+	(do_full): Use lu_*_enumerate_by_*_full().
+
 	* apps/lid.c (do_id): Remove entity existence verification.  Removed
 	parameter lookup_name.
 	(main): Do entity existence verification here.
