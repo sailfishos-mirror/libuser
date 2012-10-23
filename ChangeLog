@@ -1,5 +1,8 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/files.c (lu_files_groups_enumerate_by_user): Fix two memory
+	leaks.  Simplify error handling a little.
+
 	* python/libusermodule.c (dict_add_stolen_object)
 	(dict_add_string): New functions.
 	(initlibuser): Use dict_add_stolen_object() and dict_add_string() to

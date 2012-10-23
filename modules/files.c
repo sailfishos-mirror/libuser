@@ -2211,17 +2211,13 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_pwdfilename;
 	}
 
 	/* Lock it. */
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_pwdfilename;
 	}
 
 	/* Open it so that we can use stdio. */
@@ -2232,9 +2228,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 			     strerror(errno));
 		lu_util_lock_free(lock);
 		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_pwdfilename;
 	}
 
 	/* Initialize the list of values we'll return. */
@@ -2289,17 +2283,13 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_key;
 	}
 
 	/* Lock it. */
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
 		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_key;
 	}
 
 	/* Open it so that we can use stdio. */
@@ -2310,9 +2300,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 			     strerror(errno));
 		lu_util_lock_free(lock);
 		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
+		goto err_key;
 	}
 
 	/* Iterate through all of the lines in the file. */
@@ -2364,6 +2352,7 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		}
 		g_free(buf);
 	}
+	g_free(key);
 	g_value_unset(&value);
 
 	lu_util_lock_free(lock);
@@ -2372,6 +2361,14 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	g_free(grpfilename);
 
 	return ret;
+
+ err_key:
+	g_free(key);
+	g_value_array_free(ret);
+ err_pwdfilename:
+	g_free(pwdfilename);
+	g_free(grpfilename);
+	return NULL;
 }
 
 /* Enumerate all of the accounts listed in the given file, using the
