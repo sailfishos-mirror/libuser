@@ -1989,9 +1989,40 @@ lu_users_enumerate_by_group_full(struct lu_context * context,
 				 struct lu_error ** error)
 {
 	GPtrArray *ret = NULL;
+	GValueArray *names;
+	size_t i;
+
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, users_enumerate_by_group_full, group,
-		    LU_VALUE_INVALID_ID, NULL, &ret, error);
+	/* We may have the membership information stored in one module,
+	   but the user information in a different module, so don't just let
+	   each module load its own information; only get the list of users,
+	   and then look for the users in all modules. */
+	names = lu_users_enumerate_by_group(context, group, error);
+	if (*error != NULL)
+		return NULL;
+
+	ret = g_ptr_array_new();
+	for (i = 0; i < names->n_values; i++) {
+		const char *name;
+		struct lu_error *err2;
+		struct lu_ent *ent;
+
+		name = g_value_get_string(g_value_array_get_nth(names, i));
+		ent = lu_ent_new();
+		err2 = NULL;
+		if (lu_user_lookup_name(context, name, ent, &err2))
+			g_ptr_array_add(ret, ent);
+		else {
+			lu_ent_free(ent);
+			/* Silently ignore the error and return at
+			   least some results. */
+			if (err2 != NULL)
+				lu_error_free(&err2);
+		}
+	}
+
+	g_value_array_free(names);
+
 	return ret;
 }
 
@@ -2012,9 +2043,40 @@ lu_groups_enumerate_by_user_full(struct lu_context * context,
 				 struct lu_error ** error)
 {
 	GPtrArray *ret = NULL;
+	GValueArray *names;
+	size_t i;
+
 	LU_ERROR_CHECK(error);
-	lu_dispatch(context, groups_enumerate_by_user_full, user,
-		    LU_VALUE_INVALID_ID, NULL, &ret, error);
+	/* We may have the membership information stored in one module,
+	   but the group information in a different module, so don't just let
+	   each module load its own information; only get the list of groups,
+	   and then look for the users in all modules. */
+	names = lu_groups_enumerate_by_user(context, user, error);
+	if (*error != NULL)
+		return NULL;
+
+	ret = g_ptr_array_new();
+	for (i = 0; i < names->n_values; i++) {
+		const char *name;
+		struct lu_error *err2;
+		struct lu_ent *ent;
+
+		name = g_value_get_string(g_value_array_get_nth(names, i));
+		ent = lu_ent_new();
+		err2 = NULL;
+		if (lu_group_lookup_name(context, name, ent, &err2))
+			g_ptr_array_add(ret, ent);
+		else {
+			lu_ent_free(ent);
+			/* Silently ignore the error and return at
+			   least some results. */
+			if (err2 != NULL)
+				lu_error_free(&err2);
+		}
+	}
+
+	g_value_array_free(names);
+
 	return ret;
 }
 

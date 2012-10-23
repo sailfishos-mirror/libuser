@@ -1,3 +1,10 @@
+2012-10-23  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.c (lu_users_enumerate_by_group_full)
+	(lu_groups_enumerate_by_user_full): Instead of dispatching into the
+	modules to get full data, only gather names and look up by these names
+	in all modules.
+
 2012-10-19  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/user_private.h (lu_util_append_values): New declaration.
