@@ -106,6 +106,21 @@ static PyMethodDef libuser_methods[] = {
 	{NULL, NULL, 0, NULL},
 };
 
+/* Add KEY=VALUE to DICT, stealing the refrence to VALUE. */
+static void
+dict_add_stolen_object(PyObject *dict, const char *key, PyObject *value)
+{
+	PyDict_SetItemString(dict, key, value);
+	Py_DECREF(value);
+}
+
+/* Add KEY=VALUE to DICT */
+static void
+dict_add_string(PyObject *dict, const char *key, const char *value)
+{
+	dict_add_stolen_object(dict, key, PyString_FromString(value));
+}
+
 void
 initlibuser(void)
 {
@@ -113,72 +128,49 @@ initlibuser(void)
 	DEBUG_ENTRY;
 	module = Py_InitModule("libuser", libuser_methods);
 	dict = PyModule_GetDict(module);
-	PyDict_SetItemString(dict, "USER", PyInt_FromLong(lu_user));
-	PyDict_SetItemString(dict, "GROUP", PyInt_FromLong(lu_group));
+	dict_add_stolen_object(dict, "USER", PyInt_FromLong(lu_user));
+	dict_add_stolen_object(dict, "GROUP", PyInt_FromLong(lu_group));
 
 	/* User attributes. */
-	PyDict_SetItemString(dict, "USERNAME",
-			     PyString_FromString(LU_USERNAME));
-	PyDict_SetItemString(dict, "USERPASSWORD",
-			     PyString_FromString(LU_USERPASSWORD));
-	PyDict_SetItemString(dict, "UIDNUMBER",
-			     PyString_FromString(LU_UIDNUMBER));
-	PyDict_SetItemString(dict, "GIDNUMBER",
-			     PyString_FromString(LU_GIDNUMBER));
-	PyDict_SetItemString(dict, "GECOS", PyString_FromString(LU_GECOS));
-	PyDict_SetItemString(dict, "HOMEDIRECTORY",
-			     PyString_FromString(LU_HOMEDIRECTORY));
-	PyDict_SetItemString(dict, "LOGINSHELL",
-			     PyString_FromString(LU_LOGINSHELL));
+	dict_add_string(dict, "USERNAME", LU_USERNAME);
+	dict_add_string(dict, "USERPASSWORD", LU_USERPASSWORD);
+	dict_add_string(dict, "UIDNUMBER", LU_UIDNUMBER);
+	dict_add_string(dict, "GIDNUMBER", LU_GIDNUMBER);
+	dict_add_string(dict, "GECOS", LU_GECOS);
+	dict_add_string(dict, "HOMEDIRECTORY", LU_HOMEDIRECTORY);
+	dict_add_string(dict, "LOGINSHELL", LU_LOGINSHELL);
 
 	/* Group attributes. */
-	PyDict_SetItemString(dict, "GROUPNAME",
-			     PyString_FromString(LU_GROUPNAME));
-	PyDict_SetItemString(dict, "GROUPPASSWORD",
-			     PyString_FromString(LU_GROUPPASSWORD));
-	PyDict_SetItemString(dict, "ADMINISTRATORNAME",
-			     PyString_FromString(LU_ADMINISTRATORNAME));
-	PyDict_SetItemString(dict, "MEMBERNAME",
-			     PyString_FromString(LU_MEMBERNAME));
+	dict_add_string(dict, "GROUPNAME", LU_GROUPNAME);
+	dict_add_string(dict, "GROUPPASSWORD", LU_GROUPPASSWORD);
+	dict_add_string(dict, "ADMINISTRATORNAME", LU_ADMINISTRATORNAME);
+	dict_add_string(dict, "MEMBERNAME", LU_MEMBERNAME);
 
 	/* Shadow attributes. */
-	PyDict_SetItemString(dict, "SHADOWNAME",
-			     PyString_FromString(LU_SHADOWNAME));
-	PyDict_SetItemString(dict, "SHADOWPASSWORD",
-			     PyString_FromString(LU_SHADOWPASSWORD));
-	PyDict_SetItemString(dict, "SHADOWLASTCHANGE",
-			     PyString_FromString(LU_SHADOWLASTCHANGE));
-	PyDict_SetItemString(dict, "SHADOWMIN",
-			     PyString_FromString(LU_SHADOWMIN));
-	PyDict_SetItemString(dict, "SHADOWMAX",
-			     PyString_FromString(LU_SHADOWMAX));
-	PyDict_SetItemString(dict, "SHADOWWARNING",
-			     PyString_FromString(LU_SHADOWWARNING));
-	PyDict_SetItemString(dict, "SHADOWINACTIVE",
-			     PyString_FromString(LU_SHADOWINACTIVE));
-	PyDict_SetItemString(dict, "SHADOWEXPIRE",
-			     PyString_FromString(LU_SHADOWEXPIRE));
-	PyDict_SetItemString(dict, "SHADOWFLAG",
-			     PyString_FromString(LU_SHADOWFLAG));
+	dict_add_string(dict, "SHADOWNAME", LU_SHADOWNAME);
+	dict_add_string(dict, "SHADOWPASSWORD", LU_SHADOWPASSWORD);
+	dict_add_string(dict, "SHADOWLASTCHANGE", LU_SHADOWLASTCHANGE);
+	dict_add_string(dict, "SHADOWMIN", LU_SHADOWMIN);
+	dict_add_string(dict, "SHADOWMAX", LU_SHADOWMAX);
+	dict_add_string(dict, "SHADOWWARNING", LU_SHADOWWARNING);
+	dict_add_string(dict, "SHADOWINACTIVE", LU_SHADOWINACTIVE);
+	dict_add_string(dict, "SHADOWEXPIRE", LU_SHADOWEXPIRE);
+	dict_add_string(dict, "SHADOWFLAG", LU_SHADOWFLAG);
 
 	/* Additional fields. */
-	PyDict_SetItemString(dict, "COMMONNAME",
-			     PyString_FromString(LU_COMMONNAME));
-	PyDict_SetItemString(dict, "GIVENNAME",
-			     PyString_FromString(LU_GIVENNAME));
-	PyDict_SetItemString(dict, "SN", PyString_FromString(LU_SN));
-	PyDict_SetItemString(dict, "ROOMNUMBER",
-			     PyString_FromString(LU_ROOMNUMBER));
-	PyDict_SetItemString(dict, "TELEPHONENUMBER",
-			     PyString_FromString(LU_TELEPHONENUMBER));
-	PyDict_SetItemString(dict, "HOMEPHONE",
-			     PyString_FromString(LU_HOMEPHONE));
-	PyDict_SetItemString(dict, "EMAIL", PyString_FromString(LU_EMAIL));
+	dict_add_string(dict, "COMMONNAME", LU_COMMONNAME);
+	dict_add_string(dict, "GIVENNAME", LU_GIVENNAME);
+	dict_add_string(dict, "SN", LU_SN);
+	dict_add_string(dict, "ROOMNUMBER", LU_ROOMNUMBER);
+	dict_add_string(dict, "TELEPHONENUMBER", LU_TELEPHONENUMBER);
+	dict_add_string(dict, "HOMEPHONE", LU_HOMEPHONE);
+	dict_add_string(dict, "EMAIL", LU_EMAIL);
 
 	/* Miscellaneous. */
-	PyDict_SetItemString(dict, "UT_NAMESIZE", PyInt_FromLong(UT_NAMESIZE));
-	PyDict_SetItemString(dict, "VALUE_INVALID_ID",
-			     PyLong_FromLongLong(LU_VALUE_INVALID_ID));
+	dict_add_stolen_object(dict, "UT_NAMESIZE",
+			       PyInt_FromLong(UT_NAMESIZE));
+	dict_add_stolen_object(dict, "VALUE_INVALID_ID",
+			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
 
 	DEBUG_EXIT;
 }

@@ -1,5 +1,10 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (dict_add_stolen_object)
+	(dict_add_string): New functions.
+	(initlibuser): Use dict_add_stolen_object() and dict_add_string() to
+	avoid leaking references.
+
 	* modules/ldap.c (lu_ldap_setpass): Fix a memory leak.
 
 	* tests/valgrind.supp: Add librpm and glibc suppressions.
