@@ -30,8 +30,6 @@
 
 static void
 do_id (struct lu_context *ctx, const char *name, int nameonly,
-       gboolean (*lookup_name) (struct lu_context *, const char *,
-				struct lu_ent *, struct lu_error **),
        GValueArray *(*enumerate) (struct lu_context *, const char *,
 				  struct lu_error **),
        gboolean (*lookup_member) (struct lu_context *, const char *,
@@ -40,21 +38,8 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 {
 	GValueArray *values;
 	struct lu_error *error;
-	struct lu_ent *ent;
 
 	error = NULL;
-
-	ent = lu_ent_new();
-	if (lookup_name(ctx, name, ent, &error) == FALSE) {
-		if (error != NULL) {
-			fprintf(stderr, _("Error looking up %s: %s\n"), name,
-				lu_strerror(error));
-			lu_error_free(&error);
-		} else
-			fprintf(stderr, _("%s does not exist\n"), name);
-		exit(1);
-	}
-	lu_ent_clear_all(ent);
 
 	values = enumerate(ctx, name, &error);
 	if (error != NULL) {
@@ -64,8 +49,10 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 		exit(1);
 	}
 	if (values != NULL) {
+		struct lu_ent *ent;
 		size_t i;
 
+		ent = lu_ent_new();
 		for (i = 0; i < values->n_values; i++) {
 			GValue *value;
 			const char *found;
@@ -96,9 +83,9 @@ do_id (struct lu_context *ctx, const char *name, int nameonly,
 			}
 			lu_ent_clear_all(ent);
 		}
+		lu_ent_free(ent);
 		g_value_array_free(values);
 	}
-	lu_ent_free(ent);
 }
 
 int
@@ -107,6 +94,7 @@ main(int argc, const char **argv)
 	const char *name;
 	struct lu_context *ctx;
 	struct lu_error *error = NULL;
+	struct lu_ent *ent;
 	int interactive = FALSE;
 	int groupflag = FALSE, nameonly = FALSE;
 	int c;
@@ -180,14 +168,25 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	ent = lu_ent_new();
+	if ((groupflag ? lu_group_lookup_name : lu_user_lookup_name)
+	    (ctx, name, ent, &error) == FALSE) {
+		if (error != NULL) {
+			fprintf(stderr, _("Error looking up %s: %s\n"), name,
+				lu_strerror(error));
+			lu_error_free(&error);
+		} else
+			fprintf(stderr, _("%s does not exist\n"), name);
+		return 1;
+	}
+	lu_ent_free(ent);
+
 	if (groupflag)
-		do_id(ctx, name, nameonly, lu_group_lookup_name,
-		      lu_users_enumerate_by_group, lu_user_lookup_name,
-		      LU_UIDNUMBER, "uid");
+		do_id(ctx, name, nameonly, lu_users_enumerate_by_group,
+		      lu_user_lookup_name, LU_UIDNUMBER, "uid");
 	else
-		do_id(ctx, name, nameonly, lu_user_lookup_name,
-		      lu_groups_enumerate_by_user, lu_group_lookup_name,
-		      LU_GIDNUMBER, "gid");
+		do_id(ctx, name, nameonly, lu_groups_enumerate_by_user,
+		      lu_group_lookup_name, LU_GIDNUMBER, "gid");
 
 	lu_end(ctx);
 
