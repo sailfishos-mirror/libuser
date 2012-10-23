@@ -693,6 +693,48 @@ class Tests(unittest.TestCase):
         # Data set up in files_test
         self.assertEqual(self.a.enumerateUsersByGroup('group15_4'), [])
 
+    def testUsersEnumerateByGroupFull1(self):
+        gid = 3401 # Hopefully unique
+        e = self.a.initGroup('group34_1')
+        e[libuser.GIDNUMBER] = gid
+        e[libuser.MEMBERNAME] = 'user34_2'
+        self.a.addGroup(e)
+        e = self.a.initUser('user34_1')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addUser(e, False, False)
+        e = self.a.initUser('user34_2')
+        e[libuser.GIDNUMBER] = gid + 10
+        self.a.addUser(e, False, False)
+        v = map(lambda x: x[libuser.USERNAME],
+                self.a.enumerateUsersByGroupFull('group34_1'))
+        v.sort()
+        self.assertEqual(v, [['user34_1'], ['user34_2']])
+
+    def testUsersEnumerateByGroupFull2(self):
+        gid = 3402 # Hopefully unique
+        e = self.a.initGroup('group34_2')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addGroup(e)
+        e = self.a.initUser('user34_3')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addUser(e, False, False)
+        v = map(lambda x: x[libuser.USERNAME],
+                self.a.enumerateUsersByGroupFull('group34_2'))
+        self.assertEqual(v, [['user34_3']])
+
+    def testUsersEnumerateByGroupFull3(self):
+        gid = 3403 # Hopefully unique
+        e = self.a.initGroup('group34_3')
+        e[libuser.GIDNUMBER] = gid
+        e[libuser.MEMBERNAME] = 'user34_4'
+        self.a.addGroup(e)
+        e = self.a.initUser('user34_4')
+        e[libuser.GIDNUMBER] = gid + 10
+        self.a.addUser(e, False, False)
+        v = map(lambda x: x[libuser.USERNAME],
+                self.a.enumerateUsersByGroupFull('group34_3'))
+        self.assertEqual(v, [['user34_4']])
+
     def testUsersEnumerateFull1(self):
         e = self.a.initUser('user16_1')
         self.a.addUser(e, False, False)
@@ -1216,6 +1258,48 @@ class Tests(unittest.TestCase):
     def testGroupsEnumerateByUser4(self):
         # Data set up in files_test
         self.assertEqual(self.a.enumerateGroupsByUser('user30_4'), [])
+
+    def testGroupsEnumerateByUserFull1(self):
+        gid = 3501 # Hopefully unique
+        e = self.a.initUser('user35_1')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addUser(e, False, False)
+        e = self.a.initGroup('group35_1')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addGroup(e)
+        e = self.a.initGroup('group35_2')
+        e[libuser.GIDNUMBER] = gid + 10
+        e[libuser.MEMBERNAME] = 'user35_1'
+        self.a.addGroup(e)
+        v = map(lambda x: x[libuser.GROUPNAME],
+                self.a.enumerateGroupsByUserFull('user35_1'))
+        v.sort()
+        self.assertEqual(v, [['group35_1'], ['group35_2']])
+
+    def testGroupsEnumerateByUserFull2(self):
+        gid = 3502 # Hopefully unique
+        e = self.a.initUser('user35_2')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addUser(e, False, False)
+        e = self.a.initGroup('group35_3')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addGroup(e)
+        v = map(lambda x: x[libuser.GROUPNAME],
+                self.a.enumerateGroupsByUserFull('user35_2'))
+        self.assertEqual(v, [['group35_3']])
+
+    def testGroupsEnumerateByUserFull3(self):
+        gid = 3503 # Hopefully unique
+        e = self.a.initUser('user35_3')
+        e[libuser.GIDNUMBER] = gid
+        self.a.addUser(e, False, False)
+        e = self.a.initGroup('group35_4')
+        e[libuser.GIDNUMBER] = gid + 10
+        e[libuser.MEMBERNAME] = 'user35_3'
+        self.a.addGroup(e)
+        v = map(lambda x: x[libuser.GROUPNAME],
+                self.a.enumerateGroupsByUserFull('user35_3'))
+        self.assertEqual(v, [['group35_4']])
 
     def testGroupsEnumerateFull1(self):
         e = self.a.initGroup('group31_1')

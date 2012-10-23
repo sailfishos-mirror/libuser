@@ -1,5 +1,12 @@
 2012-10-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/files_test.py (Tests.testUsersEnumerateByGroupFull1)
+	(Tests.testUsersEnumerateByGroupFull2)
+	(Tests.testUsersEnumerateByGroupFull3)
+	(Tests.testGroupsEnumerateByUserFull1)
+	(Tests.testGroupsEnumerateByUserFull2)
+	(Tests.testGroupsEnumerateByUserFull3): New tests.
+
 	* lib/user.c (lu_users_enumerate_by_group_full)
 	(lu_groups_enumerate_by_user_full): Instead of dispatching into the
 	modules to get full data, only gather names and look up by these names
