@@ -42,7 +42,8 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL, *users = NULL;
+	GValueArray *values = NULL;
+	GPtrArray *users = NULL;
 	GValue *value, val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
@@ -246,7 +247,7 @@ main(int argc, const char **argv)
 		return 8;
 	}
 	if (gidNumber != LU_VALUE_INVALID_ID) {
-		users = lu_users_enumerate_by_group(ctx, gid, &error);
+		users = lu_users_enumerate_by_group_full(ctx, gid, &error);
 
 		values = lu_ent_get(ent, LU_GIDNUMBER);
 		if (values) {
@@ -281,31 +282,23 @@ main(int argc, const char **argv)
 	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
 		size_t i;
 
-		ent = lu_ent_new();
-
 		memset(&val, 0, sizeof(val));
 		lu_value_init_set_id(&val, gidNumber);
 
-		for (i = 0; i < users->n_values; i++) {
-			const char *tmp;
-
-			value = g_value_array_get_nth(users, i);
-			tmp = g_value_get_string(value);
-			if (lu_user_lookup_name (ctx, tmp, ent, &error)) {
-				values = lu_ent_get(ent, LU_GIDNUMBER);
-				if (values &&
-				    lu_value_get_id(g_value_array_get_nth(values, 0)) ==
-				    oldGidNumber) {
-					lu_ent_clear(ent, LU_GIDNUMBER);
-					lu_ent_add(ent, LU_GIDNUMBER, &val);
-					lu_user_modify(ctx, ent, &error);
-					if (error != NULL)
-						lu_error_free(&error);
-				}
+		for (i = 0; i < users->len; i++) {
+			ent = g_ptr_array_index(users, i);
+			values = lu_ent_get(ent, LU_GIDNUMBER);
+			if (values != NULL &&
+			    lu_value_get_id(g_value_array_get_nth(values, 0)) ==
+			    oldGidNumber) {
+				lu_ent_clear(ent, LU_GIDNUMBER);
+				lu_ent_add(ent, LU_GIDNUMBER, &val);
+				lu_user_modify(ctx, ent, &error);
+				if (error != NULL)
+					lu_error_free(&error);
 			}
 		}
 		g_value_unset(&val);
-		lu_ent_free(ent);
 
 		lu_nscd_flush_cache("passwd");
 	}

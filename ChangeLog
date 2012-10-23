@@ -1,5 +1,10 @@
 2012-10-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lgroupmod.c (main): Use lu_users_enumerate_by_group_full()
+	instead of looking up the full data manually.
+	* apps/lusermod.c (main): Use lu_groups_enumerate_by_user_full() instead
+	of looking up the full data manually.
+
 	* lib/user_private.h (LU_MODULE_VERSION): Increase.
 	(lu_module): Remove members users_enumerate_by_group_full and
 	groups_enumerate_by_user_full.

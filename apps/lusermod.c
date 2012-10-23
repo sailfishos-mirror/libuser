@@ -44,7 +44,8 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values, *groups = NULL;
+	GValueArray *values;
+	GPtrArray *groups = NULL;
 	GValue *value, val;
 	int change, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
@@ -275,7 +276,7 @@ main(int argc, const char **argv)
 		g_value_set_string(&val, uid);
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &val);
-		groups = lu_groups_enumerate_by_user(ctx, old_uid, &error);
+		groups = lu_groups_enumerate_by_user_full(ctx, old_uid, &error);
 		if (error)
 			lu_error_free(&error);
 	}
@@ -304,24 +305,16 @@ main(int argc, const char **argv)
 	if (change && (old_uid != NULL)) {
 		size_t i;
 
-		for (i = 0; (groups != NULL) && (i < groups->n_values); i++) {
+		for (i = 0; groups != NULL && i < groups->len; i++) {
 			struct lu_ent *group;
-			const char *username, *groupname;
+			const char *username;
 			GValueArray *members, *admins;
 			size_t j;
 
-			/* Get the name of this group. */
-			value = g_value_array_get_nth(groups, i);
-			groupname = g_value_get_string(value);
-			/* Look up the group. */
-			members = admins = NULL;
-			group = lu_ent_new();
-			if (lu_group_lookup_name(ctx, groupname, group,
-						 &error)) {
-				/* Get a list of the group's members. */
-				members = lu_ent_get(group, LU_MEMBERNAME);
-				admins = lu_ent_get(group, LU_ADMINISTRATORNAME);
-			}
+			group = g_ptr_array_index(groups, i);
+			/* Get a list of the group's members. */
+			members = lu_ent_get(group, LU_MEMBERNAME);
+			admins = lu_ent_get(group, LU_ADMINISTRATORNAME);
 			/* Search for this user in the member list. */
 			for (j = 0;
 			     (members != NULL) && (j < members->n_values);
@@ -351,11 +344,16 @@ main(int argc, const char **argv)
 				}
 			}
 			/* Save the changes to the group. */
-			if (lu_group_modify(ctx, group, &error) == FALSE)
+			if (lu_group_modify(ctx, group, &error) == FALSE) {
+				const char *groupname;
+
+				values = lu_ent_get(group, LU_GROUPNAME);
+				value = g_value_array_get_nth(values, 0);
+				groupname = g_value_get_string(value);
 				fprintf(stderr, _("Group %s could not be "
 						  "modified: %s.\n"),
 					groupname, lu_strerror(error));
-			lu_ent_free(group);
+			}
 		}
        		lu_nscd_flush_cache("group");
 	}
