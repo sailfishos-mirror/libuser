@@ -39,7 +39,7 @@
 G_BEGIN_DECLS
 
 #define LU_ENT_MAGIC		0x00000006
-#define LU_MODULE_VERSION	0x000d0000
+#define LU_MODULE_VERSION	0x000e0000
 #define _(String)		dgettext(PACKAGE_NAME, String)
 #define N_(String)		String
 /* A crypt hash is at least 64 bits of data, encoded 6 bits per printable
@@ -203,12 +203,6 @@ struct lu_module {
 	GPtrArray* (*users_enumerate_full) (struct lu_module * module,
 					    const char *pattern,
 					    struct lu_error ** error);
-	/* Placeholder.  Can't come up with a reason to have it other than
-	 * symmetry.  */
-	GPtrArray* (*users_enumerate_by_group_full) (struct lu_module * module,
-						     const char *group,
-						     gid_t gid,
-						     struct lu_error ** error);
 	/* Search for a group by name or ID. */
 	gboolean(*group_lookup_name) (struct lu_module * module,
 				      const char *name,
@@ -274,11 +268,6 @@ struct lu_module {
 	GPtrArray* (*groups_enumerate_full) (struct lu_module * module,
 					     const char *pattern,
 					     struct lu_error ** error);
-	/* Placeholder.  Can't come up with a reason to have it. */
-	GPtrArray* (*groups_enumerate_by_user_full) (struct lu_module * module,
-						     const char *user,
-						     uid_t uid,
-						     struct lu_error ** error);
 
 	/* Clean up any data this module has, and unload it. */
 	gboolean(*close) (struct lu_module * module);

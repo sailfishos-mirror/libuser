@@ -112,7 +112,6 @@ load_one_module(struct lu_context *ctx, const char *module_dir,
 	M(users_enumerate);
 	M(users_enumerate_by_group);
 	M(users_enumerate_full);
-	M(users_enumerate_by_group_full);
 
 	M(group_lookup_name);
 	M(group_lookup_id);
@@ -130,7 +129,6 @@ load_one_module(struct lu_context *ctx, const char *module_dir,
 	M(groups_enumerate);
 	M(groups_enumerate_by_user);
 	M(groups_enumerate_full);
-	M(groups_enumerate_by_user_full);
 
 	M(close);
 #undef M

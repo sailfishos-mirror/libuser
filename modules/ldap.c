@@ -2336,57 +2336,6 @@ lu_ldap_users_enumerate_by_group(struct lu_module *module,
 	return ret;
 }
 
-static GPtrArray *
-lu_ldap_users_enumerate_by_group_full(struct lu_module *module,
-				      const char *group, gid_t gid,
-				      struct lu_error **error)
-{
-	struct lu_ldap_context *ctx;
-	GPtrArray *ret = g_ptr_array_new();
-	char grp[sizeof (gid) * CHAR_BIT + 1];
-
-	LU_ERROR_CHECK(error);
-	ctx = module->module_context;
-	sprintf(grp, "%jd", (intmax_t)gid);
-
-	lu_ldap_lookup(module, "gidNumber", grp, NULL, ret, ctx->user_branch,
-		       "("OBJECTCLASS"="POSIXACCOUNT")",
-		       lu_ldap_user_attributes, lu_user, error);
-	if (*error == NULL) {
-		GValueArray *secondaries;
-		size_t i;
-
-		secondaries = lu_ldap_enumerate(module, "cn", group,
-						"memberUid", ctx->group_branch,
-						error);
-		for (i = 0; secondaries != NULL && i < secondaries->n_values;
-		     i++) {
-			GValue *value;
-			const char *name;
-			struct lu_error *err2;
-			struct lu_ent *ent;
-
-			value = g_value_array_get_nth(secondaries, i);
-			name = g_value_get_string(value);
-			ent = lu_ent_new();
-			err2 = NULL;
-			if (lu_user_lookup_name(module->lu_context, name, ent,
-						&err2))
-				g_ptr_array_add(ret, ent);
-			else {
-				lu_ent_free(ent);
-				/* Silently ignore the error and return at
-				   least some results. */
-				if (err2 != NULL)
-					lu_error_free(&err2);
-			}
-		}
-		g_value_array_free(secondaries);
-	}
-
-	return ret;
-}
-
 /* Get a list of all groups to which the user belongs, via either primary or
  * supplemental group memberships. */
 static GValueArray *
@@ -2448,82 +2397,6 @@ lu_ldap_groups_enumerate_by_user(struct lu_module *module,
 			g_value_get_string(value));
 	}
 #endif
-
-	return ret;
-}
-
-static GPtrArray *
-lu_ldap_groups_enumerate_by_user_full(struct lu_module *module,
-				      const char *user, uid_t uid,
-				      struct lu_error **error)
-{
-	struct lu_ldap_context *ctx;
-	GPtrArray *ret;
-	GValueArray *gids;
-	GValue *value;
-	size_t i;
-
-	(void)uid;
-	LU_ERROR_CHECK(error);
-	ctx = module->module_context;
-
-	ret = g_ptr_array_new();
-
-	/* Get the user's primary GID(s). */
-	gids = lu_ldap_enumerate(module, "uid", user, "gidNumber",
-				 ctx->user_branch, error);
-	/* For each GID, look up the group.  Which has this GID. */
-	for (i = 0; gids != NULL && i < gids->n_values; i++) {
-		gid_t gid;
-		struct lu_error *err2;
-		struct lu_ent *ent;
-
-		value = g_value_array_get_nth(gids, i);
-		gid = lu_value_get_id(value);
-		if (gid == LU_VALUE_INVALID_ID)
-			continue;
-		ent = lu_ent_new();
-		err2 = NULL;
-		if (lu_group_lookup_id(module->lu_context, gid, ent, &err2))
-			g_ptr_array_add(ret, ent);
-		else {
-			lu_ent_free(ent);
-			if (err2 != NULL)
-				/* Silently ignore the error and return at
-				   least some results. */
-				lu_error_free(&err2);
-		}
-	}
-	g_value_array_free(gids);
-	/* Search for the supplemental groups which list this user as
-	 * a member. */
-	if (*error == NULL) {
-		GValueArray *secondaries;
-
-		secondaries = lu_ldap_enumerate(module, "memberUid", user,
-						"cn", ctx->group_branch,
-						error);
-		for (i = 0; i < secondaries->n_values; i++) {
-			const char *name;
-			struct lu_error *err2;
-			struct lu_ent *ent;
-
-			value = g_value_array_get_nth(secondaries, i);
-			name = g_value_get_string(value);
-			ent = lu_ent_new();
-			if (lu_group_lookup_name(module->lu_context, name, ent,
-						 &err2))
-				g_ptr_array_add(ret, ent);
-			else {
-				lu_ent_free(ent);
-				if (err2 != NULL)
-					/* Silently ignore the error and return
-					   at least some results. */
-					lu_error_free(&err2);
-			}
-		}
-		g_value_array_free(secondaries);
-	}
 
 	return ret;
 }
@@ -2765,7 +2638,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->users_enumerate = lu_ldap_users_enumerate;
 	ret->users_enumerate_by_group = lu_ldap_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_ldap_users_enumerate_full;
-	ret->users_enumerate_by_group_full = lu_ldap_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_ldap_group_lookup_name;
 	ret->group_lookup_id = lu_ldap_group_lookup_id;
@@ -2783,7 +2655,6 @@ libuser_ldap_init(struct lu_context *context, struct lu_error **error)
 	ret->groups_enumerate = lu_ldap_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_ldap_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_ldap_groups_enumerate_full;
-	ret->groups_enumerate_by_user_full = lu_ldap_groups_enumerate_by_user_full;
 
 	ret->close = lu_ldap_close_module;
 

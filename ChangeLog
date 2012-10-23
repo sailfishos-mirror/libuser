@@ -1,5 +1,29 @@
 2012-10-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user_private.h (LU_MODULE_VERSION): Increase.
+	(lu_module): Remove members users_enumerate_by_group_full and
+	groups_enumerate_by_user_full.
+	* lib/modules.c (load_one_module): Don't require members
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+	* lib/user.c (lu_dispatch_id): Remove values
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+	(run_single, run_list): Remove no longer used handling of
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+	* modules/files.c (lu_files_users_enumerate_by_group_full)
+	(lu_files_groups_enumerate_by_user_full)
+	(lu_shadow_users_enumerate_by_group_full)
+	(lu_shadow_groups_enumerate_by_user_full): Remove placeholders.
+	(libuser_files_init, libuser_shadow_init): Don't initialize members
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+	* modules/ldap.c (lu_ldap_users_enumerate_by_group_full)
+	(lu_ldap_groups_enumerate_by_user_full): Remove functions.
+	(libuser_ldap_init): Don't initialize members
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+	* modules/sasldb.c (lu_sasldb_users_enumerate_by_group_full)
+	(lu_sasldb_groups_enumerate_by_user_full): Remove placeholders.
+	(libuser_sasldb_init): Don't initialize members
+	users_enumerate_by_group_full and groups_enumerate_by_user_full.
+
 	* tests/files_test.py (Tests.testUsersEnumerateByGroupFull1)
 	(Tests.testUsersEnumerateByGroupFull2)
 	(Tests.testUsersEnumerateByGroupFull3)

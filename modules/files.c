@@ -2481,34 +2481,6 @@ lu_files_groups_enumerate_full(struct lu_module *module,
 				       error);
 }
 
-static GPtrArray *
-lu_files_users_enumerate_by_group_full(struct lu_module *module,
-				       const char *user,
-				       uid_t uid,
-				       struct lu_error **error)
-{
-	(void)module;
-	(void)user;
-	(void)uid;
-	(void)error;
-	/* Implement the placeholder. */
-	return NULL;
-}
-
-static GPtrArray *
-lu_files_groups_enumerate_by_user_full(struct lu_module *module,
-				       const char *user,
-				       uid_t uid,
-				       struct lu_error **error)
-{
-	(void)module;
-	(void)user;
-	(void)uid;
-	(void)error;
-	/* Implement the placeholder. */
-	return NULL;
-}
-
 static GValueArray *
 lu_shadow_users_enumerate(struct lu_module *module,
 			  const char *pattern,
@@ -2575,34 +2547,6 @@ lu_shadow_groups_enumerate_full(struct lu_module *module,
 	return lu_files_enumerate_full(module, suffix_gshadow,
 				       lu_shadow_parse_group_entry, pattern,
 				       error);
-}
-
-static GPtrArray *
-lu_shadow_users_enumerate_by_group_full(struct lu_module *module,
-					const char *group,
-					gid_t gid,
-					struct lu_error **error)
-{
-	(void)module;
-	(void)group;
-	(void)gid;
-	(void)error;
-	/* Implement the placeholder. */
-	return NULL;
-}
-
-static GPtrArray *
-lu_shadow_groups_enumerate_by_user_full(struct lu_module *module,
-					const char *user,
-					uid_t uid,
-					struct lu_error **error)
-{
-	(void)module;
-	(void)user;
-	(void)uid;
-	(void)error;
-	/* Implement the placeholder. */
-	return NULL;
 }
 
 static gboolean
@@ -2750,7 +2694,6 @@ libuser_files_init(struct lu_context *context,
 	ret->users_enumerate = lu_files_users_enumerate;
 	ret->users_enumerate_by_group = lu_files_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_files_users_enumerate_full;
-	ret->users_enumerate_by_group_full = lu_files_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_files_group_lookup_name;
 	ret->group_lookup_id = lu_files_group_lookup_id;
@@ -2769,7 +2712,6 @@ libuser_files_init(struct lu_context *context,
 	ret->groups_enumerate = lu_files_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_files_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_files_groups_enumerate_full;
-	ret->groups_enumerate_by_user_full = lu_files_groups_enumerate_by_user_full;
 
 	ret->close = close_module;
 
@@ -2843,7 +2785,6 @@ libuser_shadow_init(struct lu_context *context,
 	ret->users_enumerate = lu_shadow_users_enumerate;
 	ret->users_enumerate_by_group = lu_shadow_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_shadow_users_enumerate_full;
-	ret->users_enumerate_by_group_full = lu_shadow_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_shadow_group_lookup_name;
 	ret->group_lookup_id = lu_shadow_group_lookup_id;
@@ -2862,7 +2803,6 @@ libuser_shadow_init(struct lu_context *context,
 	ret->groups_enumerate = lu_shadow_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_shadow_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_shadow_groups_enumerate_full;
-	ret->groups_enumerate_by_user_full = lu_shadow_groups_enumerate_by_user_full;
 
 	ret->close = close_module;
 

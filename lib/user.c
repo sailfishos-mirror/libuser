@@ -61,7 +61,6 @@ enum lu_dispatch_id {
 	users_enumerate,
 	users_enumerate_by_group,
 	users_enumerate_full,
-	users_enumerate_by_group_full,
 	group_lookup_name,
 	group_lookup_id,
 	group_default,
@@ -78,7 +77,6 @@ enum lu_dispatch_id {
 	groups_enumerate,
 	groups_enumerate_full,
 	groups_enumerate_by_user,
-	groups_enumerate_by_user_full,
 };
 
 /**
@@ -504,22 +502,6 @@ run_single(struct lu_context *context,
 			}
 		}
 		return TRUE;
-	case users_enumerate_by_group_full:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
-		g_return_val_if_fail(ret != NULL, FALSE);
-		*ret = module->users_enumerate_by_group_full(module,
-							     sdata,
-							     ldata,
-							     error);
-		if (*ret) {
-			ptrs = *ret;
-			for (i = 0; i < ptrs->len; i++) {
-				lu_ent_add_module(g_ptr_array_index(ptrs, i),
-						  module->name);
-			}
-		}
-		return TRUE;
 	case group_lookup_name:
 		g_return_val_if_fail(sdata != NULL, FALSE);
 		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
@@ -602,22 +584,6 @@ run_single(struct lu_context *context,
 	case groups_enumerate_full:
 		g_return_val_if_fail(ret != NULL, FALSE);
 		*ret = module->groups_enumerate_full(module, sdata, error);
-		if (*ret) {
-			ptrs = *ret;
-			for (i = 0; i < ptrs->len; i++) {
-				lu_ent_add_module(g_ptr_array_index(ptrs, i),
-						  module->name);
-			}
-		}
-		return TRUE;
-	case groups_enumerate_by_user_full:
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		g_return_val_if_fail(strlen(sdata) > 0, FALSE);
-		g_return_val_if_fail(ret != NULL, FALSE);
-		*ret = module->groups_enumerate_by_user_full(module,
-							     sdata,
-							     ldata,
-							     error);
 		if (*ret) {
 			ptrs = *ret;
 			for (i = 0; i < ptrs->len; i++) {
@@ -804,7 +770,6 @@ run_list(struct lu_context *context,
 		 (id == users_enumerate) ||
 		 (id == users_enumerate_by_group) ||
 		 (id == users_enumerate_full) ||
-		 (id == users_enumerate_by_group_full) ||
 		 (id == group_lookup_name) ||
 		 (id == group_lookup_id) ||
 		 (id == group_default) ||
@@ -821,7 +786,6 @@ run_list(struct lu_context *context,
 		 (id == groups_enumerate) ||
 		 (id == groups_enumerate_by_user) ||
 		 (id == groups_enumerate_full) ||
-		 (id == groups_enumerate_by_user_full) ||
 		 (id == uses_elevated_privileges));
 
 	success = FALSE;
@@ -862,9 +826,7 @@ run_list(struct lu_context *context,
 				*(GValueArray **)ret = value_array;
 				break;
 			case users_enumerate_full:
-			case users_enumerate_by_group_full:
 			case groups_enumerate_full:
-			case groups_enumerate_by_user_full:
 				/* FIXME: do some kind of merging here. */
 				tmp_ptr_array = scratch;
 				ptr_array = *(GPtrArray **)ret;
@@ -1159,20 +1121,6 @@ lu_dispatch(struct lu_context *context,
 			success = TRUE;
 		}
 		break;
-	case users_enumerate_by_group_full:
-	case groups_enumerate_by_user_full:
-		/* Make sure we have both name and ID here. */
-		g_return_val_if_fail(sdata != NULL, FALSE);
-		if (id == users_enumerate_by_group_full)
-			ldata = convert_group_name_to_id(context, sdata,
-							 error);
-		else if (id == groups_enumerate_by_user_full)
-			ldata = convert_user_name_to_id(context, sdata, error);
-		else
-			g_assert_not_reached();
-		if (ldata == LU_VALUE_INVALID_ID)
-			break;
-		/* fall through */
 	case users_enumerate_full:
 	case groups_enumerate_full:
 		/* Get the lists. */

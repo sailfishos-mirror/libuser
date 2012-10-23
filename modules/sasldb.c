@@ -453,36 +453,11 @@ lu_sasldb_users_enumerate_by_group(struct lu_module *module,
 	return NULL;
 }
 
-static GPtrArray *
-lu_sasldb_users_enumerate_by_group_full(struct lu_module *module,
-					const char *group, gid_t gid,
-					struct lu_error **error)
-{
-	(void)module;
-	(void)group;
-	(void)gid;
-	(void)error;
-	return NULL;
-}
-
 static GValueArray *
 lu_sasldb_groups_enumerate_by_user(struct lu_module *module,
 				   const char *user,
 				   uid_t uid,
 				   struct lu_error **error)
-{
-	(void)module;
-	(void)user;
-	(void)uid;
-	(void)error;
-	return NULL;
-}
-
-static GPtrArray *
-lu_sasldb_groups_enumerate_by_user_full(struct lu_module *module,
-					const char *user,
-					uid_t uid,
-					struct lu_error **error)
 {
 	(void)module;
 	(void)user;
@@ -570,7 +545,6 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->users_enumerate = lu_sasldb_users_enumerate;
 	ret->users_enumerate_by_group = lu_sasldb_users_enumerate_by_group;
 	ret->users_enumerate_full = lu_sasldb_users_enumerate_full;
-	ret->users_enumerate_by_group_full = lu_sasldb_users_enumerate_by_group_full;
 
 	ret->group_lookup_name = lu_sasldb_group_lookup_name;
 	ret->group_lookup_id = lu_sasldb_group_lookup_id;
@@ -589,7 +563,6 @@ libuser_sasldb_init(struct lu_context *context, struct lu_error **error)
 	ret->groups_enumerate = lu_sasldb_groups_enumerate;
 	ret->groups_enumerate_by_user = lu_sasldb_groups_enumerate_by_user;
 	ret->groups_enumerate_full = lu_sasldb_groups_enumerate_full;
-	ret->groups_enumerate_by_user_full = lu_sasldb_groups_enumerate_by_user_full;
 
 	ret->close = lu_sasldb_close_module;
 
