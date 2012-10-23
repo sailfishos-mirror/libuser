@@ -1836,12 +1836,12 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 			salt = previous + strlen(LU_CRYPTED);
 			if (*salt == LOCKCHAR)
 				salt++;
+			salt = g_strdup(salt);
 		} else
 			salt = lu_util_default_salt_specifier(module
 							      ->lu_context);
 		crypted = lu_make_crypted(password, salt);
-		if (previous == NULL)
-			g_free(salt);
+		g_free(salt);
 		if (crypted == NULL) {
 			lu_error_new(error, lu_error_generic,
 				     _("error encrypting password"));
