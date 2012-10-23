@@ -72,4 +72,4 @@ PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
 # Point "$HOME/ldaprc" to "$srcdir"/ldaprc
-HOME="$srcdir" python "$srcdir"/ldap_test.py
+HOME="$srcdir" $VALGRIND python "$srcdir"/ldap_test.py

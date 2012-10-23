@@ -73,4 +73,4 @@ export LD_LIBRARY_PATH
 PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
-workdir="$workdir" python "$srcdir"/files_test.py
+workdir="$workdir" $VALGRIND python "$srcdir"/files_test.py

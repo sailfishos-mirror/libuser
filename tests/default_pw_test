@@ -124,7 +124,8 @@ for modules in \
     esac
 
     # Point "$HOME/ldaprc" to "$srcdir"/ldaprc
-    HOME="$srcdir" python "$srcdir"/default_pw_test.py "$valid_combination"
+    HOME="$srcdir" $VALGRIND python "$srcdir"/default_pw_test.py \
+	"$valid_combination"
 
     if [ "$valid_combination" -ne 0 ]; then
 	# Test that {passwd,group} handle passwords correctly

@@ -12,6 +12,12 @@ AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
 PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
+VG_EXECUTION = libtool --mode=execute \
+	valgrind --quiet --suppressions=$(srcdir)/tests/valgrind.supp \
+	--leak-check=full --log-fd=3
+VG_ENVIRONMENT = G_SLICE=always-malloc \
+	G_DEBUG=gc-friendly,resident-modules
+
 ## Targets
 SUBDIRS = po docs
 TESTS = tests/config_test.sh tests/files_test tests/pwhash_test tests/utils_test
@@ -35,7 +41,8 @@ EXTRA_DIST = \
 	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
 	tests/slapd.conf.in \
 	tests/utils.conf.in tests/utils_group tests/utils_gshadow \
-	tests/utils_passwd tests/utils_shadow tests/utils_test
+	tests/utils_passwd tests/utils_shadow tests/utils_test \
+	tests/valgrind.supp
 
 bin_PROGRAMS = apps/lchfn apps/lchsh
 sbin_PROGRAMS = apps/lchage apps/lgroupadd apps/lgroupdel apps/lgroupmod \
@@ -93,6 +100,10 @@ archive:
 	mv /tmp/$(PACKAGE)-export-tmp/$(PACKAGE)-$(VERSION).tar.xz .
 	rm -fr /tmp/$(PACKAGE)-export-tmp
 	@echo Package is in \"$(PACKAGE)-$(VERSION).tar.xz\".
+
+valgrind:
+	VALGRIND='$(VG_EXECUTION)' \
+		$(MAKE) check TESTS_ENVIRONMENT='$(VG_ENVIRONMENT)' 3>&2
 
 
 ## Dependency data

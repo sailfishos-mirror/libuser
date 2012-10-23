@@ -1,0 +1,15 @@
+{
+   GLib g_type_init
+   Memcheck:Leak
+   fun:malloc
+   ...
+   fun:g_type_init_with_debug_flags
+}
+
+{
+   GLib g_type_init
+   Memcheck:Leak
+   fun:calloc
+   ...
+   fun:g_type_init_with_debug_flags
+}

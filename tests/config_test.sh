@@ -45,8 +45,8 @@ export LD_LIBRARY_PATH
 PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
-tests/config_test "$workdir"
+$VALGRIND tests/config_test "$workdir"
 
 LIBUSER_CONF="$workdir/libuser_import.conf"
 export LIBUSER_CONF
-workdir="$workdir" python "$srcdir"/config_test.py
+workdir="$workdir" $VALGRIND python "$srcdir"/config_test.py
