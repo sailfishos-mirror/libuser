@@ -4,3 +4,40 @@
    ...
    fun:g_type_init_with_debug_flags
 }
+
+{
+   librpm addr1
+   Memcheck:Addr1
+   ...
+   fun:init_rpm
+}
+
+{
+   librpm addr2
+   Memcheck:Addr2
+   ...
+   fun:init_rpm
+}
+
+{
+   librpm addr4
+   Memcheck:Addr4
+   ...
+   fun:init_rpm
+}
+
+{
+   librpm/NSS
+   Memcheck:Leak
+   ...
+   fun:NSS_NoDB_Init
+   ...
+   fun:init_rpm
+}
+
+{
+   glibc crypt_r
+   Memcheck:Cond
+   fun:__stpncpy_sse2_unaligned
+   fun:__md5_crypt_r
+}
