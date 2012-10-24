@@ -336,6 +336,7 @@ main(int argc, const char **argv)
 		lu_ent_clear_all(groupEnt);
 	}
 
+	lu_ent_free(groupEnt);
 	lu_ent_free(ent);
 
 	lu_end(ctx);

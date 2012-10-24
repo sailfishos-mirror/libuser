@@ -361,6 +361,7 @@ main(int argc, const char **argv)
 
        		lu_nscd_flush_cache("group");
 	}
+	g_free(old_uid);
 
 	/* If we need to move the user's directory, we do that now. */
 	if (change && move_home) {
@@ -382,6 +383,7 @@ main(int argc, const char **argv)
 			return 12;
 		}
 	}
+	g_free(oldHomeDirectory);
 
 	lu_ent_free(ent);
 

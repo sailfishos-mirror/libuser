@@ -1,5 +1,10 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lnewusers.c (main)
+	* apps/lusermod.c (main): Fix some memory leaks.
+
+	* tests/valgrind.supp: Add popt suppressions.
+
 	* tests/utils_test: Refer to utilities using a full path to allow
 	libtool --mode=execute (and hence valgrind) to work.
 
