@@ -1,5 +1,8 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/utils_test: Refer to utilities using a full path to allow
+	libtool --mode=execute (and hence valgrind) to work.
+
 	* apps/lgroupmod.c (main)
 	* apps/lusermod.c (main): Fix a memory leak.
 

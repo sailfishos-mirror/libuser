@@ -41,42 +41,43 @@ LIBUSER_CONF=$workdir/libuser.conf
 export LIBUSER_CONF
 sed "s|@WORKDIR@|$workdir|g; s|@TOP_BUILDDIR@|$(pwd)|g" \
     < "$srcdir"/utils.conf.in > "$LIBUSER_CONF"
-PATH=$(pwd)/apps:$PATH
+P=$(pwd)/apps
 VG=$VALGRIND
 
 LARGE_ID=2147483648
 (
 set -e
 # lgroupadd:
-$VG lgroupadd -g "$(expr $LARGE_ID + 110)" group1_1
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 110)" group1_1
 #  untested: -r
 
 # lgroupdel:
-$VG lgroupadd group2_1
-$VG lgroupdel group2_1
+$VG "$P"/lgroupadd group2_1
+$VG "$P"/lgroupdel group2_1
 
 # lgroupmod:
-$VG lgroupadd -g "$(expr $LARGE_ID + 310)" group3_1
-$VG lgroupmod -A user3_1,user3_2 -g "$(expr $LARGE_ID + 311)" -L \
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 310)" group3_1
+$VG "$P"/lgroupmod -A user3_1,user3_2 -g "$(expr $LARGE_ID + 311)" -L \
     -M user3_3,user3_4 -n group3_2 -p '01vokOibos3pg' group3_1
-$VG lgroupmod -a user3_1,user3_1notexist -m user3_3,user3_2notexist -L group3_2
-$VG lgroupadd -g "$(expr $LARGE_ID + 330)" group3_3
-$VG lgroupmod -p '!!02yd6IWnPes66' group3_3
-$VG lgroupmod -U group3_3
+$VG "$P"/lgroupmod -a user3_1,user3_1notexist -m user3_3,user3_2notexist -L \
+    group3_2
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 330)" group3_3
+$VG "$P"/lgroupmod -p '!!02yd6IWnPes66' group3_3
+$VG "$P"/lgroupmod -U group3_3
 #  Handling of GID change for primary and secondary groups
-$VG lgroupadd -g "$(expr $LARGE_ID + 340)" group3_4
-$VG luseradd -M -g group3_4 -u "$(expr $LARGE_ID + 350)" user3_5
-$VG lgroupadd -g "$(expr $LARGE_ID + 350)" group3_5
-$VG luseradd -M -g group3_5 -u "$(expr $LARGE_ID + 360)" user3_6
-$VG lgroupmod -M user3_6 group3_4
-$VG lgroupmod -g "$(expr $LARGE_ID + 341)" group3_4
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 340)" group3_4
+$VG "$P"/luseradd -M -g group3_4 -u "$(expr $LARGE_ID + 350)" user3_5
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 350)" group3_5
+$VG "$P"/luseradd -M -g group3_5 -u "$(expr $LARGE_ID + 360)" user3_6
+$VG "$P"/lgroupmod -M user3_6 group3_4
+$VG "$P"/lgroupmod -g "$(expr $LARGE_ID + 341)" group3_4
 #  untested: -P
 
 # lchage:
-$VG lgroupadd -g "$(expr $LARGE_ID + 410)" user4_1
-$VG luseradd -M -u "$(expr $LARGE_ID + 410)" user4_1
-$VG lchage -d 400 -E 410 -I 420 -m 430 -M 440 -W 450 user4_1
-LC_ALL=C $VG lchage -l user4_1 > "$workdir"/lchage_output
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 410)" user4_1
+$VG "$P"/luseradd -M -u "$(expr $LARGE_ID + 410)" user4_1
+$VG "$P"/lchage -d 400 -E 410 -I 420 -m 430 -M 440 -W 450 user4_1
+LC_ALL=C $VG "$P"/lchage -l user4_1 > "$workdir"/lchage_output
 diff - "$workdir"/lchage_output <<\EOF
 Account is locked.
 Minimum:	430
@@ -93,38 +94,38 @@ EOF
 # lchsh: untested (requires system account)
 
 # lid:
-$VG lgroupadd -g "$(expr $LARGE_ID + 510)" group5_1
-$VG lgroupadd -g "$(expr $LARGE_ID + 520)" group5_2
-$VG lgroupadd -g "$(expr $LARGE_ID + 530)" group5_3
-$VG luseradd -M -g group5_1 -u "$(expr $LARGE_ID + 510)" user5_1
-$VG luseradd -M -g group5_3 -u "$(expr $LARGE_ID + 520)" user5_2
-$VG lgroupmod -M user5_1,user5_2 group5_2
-$VG lgroupmod -M user5_2 group5_1
-$VG lid user5_1 > "$workdir"/lid_output1
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 510)" group5_1
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 520)" group5_2
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 530)" group5_3
+$VG "$P"/luseradd -M -g group5_1 -u "$(expr $LARGE_ID + 510)" user5_1
+$VG "$P"/luseradd -M -g group5_3 -u "$(expr $LARGE_ID + 520)" user5_2
+$VG "$P"/lgroupmod -M user5_1,user5_2 group5_2
+$VG "$P"/lgroupmod -M user5_2 group5_1
+$VG "$P"/lid user5_1 > "$workdir"/lid_output1
 diff - "$workdir"/lid_output1 <<EOF
  group5_1(gid=$(expr $LARGE_ID + 510))
  group5_2(gid=$(expr $LARGE_ID + 520))
 EOF
-$VG lid -n user5_1 > "$workdir"/lid_output2
+$VG "$P"/lid -n user5_1 > "$workdir"/lid_output2
 diff - "$workdir"/lid_output2 <<\EOF
  group5_1
  group5_2
 EOF
-$VG lid -g group5_1 > "$workdir"/lid_output3
+$VG "$P"/lid -g group5_1 > "$workdir"/lid_output3
 diff - "$workdir"/lid_output3 <<EOF
  user5_1(uid=$(expr $LARGE_ID + 510))
  user5_2(uid=$(expr $LARGE_ID + 520))
 EOF
-$VG lid -g -n group5_1 > "$workdir"/lid_output4
+$VG "$P"/lid -g -n group5_1 > "$workdir"/lid_output4
 diff - "$workdir"/lid_output4 <<\EOF
  user5_1
  user5_2
 EOF
 
 # lnewusers:
-$VG lgroupadd -g "$(expr $LARGE_ID + 620)" user6_2
-$VG lgroupadd -g "$(expr $LARGE_ID + 630)" group6_3
-LC_ALL=C $VG lnewusers -M -n 2> "$workdir"/lnewusers_output <<EOF
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 620)" user6_2
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 630)" group6_3
+LC_ALL=C $VG "$P"/lnewusers -M -n 2> "$workdir"/lnewusers_output <<EOF
 user6_1:password:$(expr $LARGE_ID + 610):$(expr $LARGE_ID + 610):GECOS6_1:HomeDir6_1:Shell6_1
 user6_2:password:$(expr $LARGE_ID + 620)::::
 Invalid line
@@ -142,46 +143,47 @@ EOF
 # lpasswd: untested (requires system account)
 
 # luseradd:
-$VG lgroupadd -g "$(expr $LARGE_ID + 710)" group7_1
-$VG luseradd -c GECOS7_1 -d HomeDir7_1 -g group7_1 -M -p '03dgZm5nZvqOc' \
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 710)" group7_1
+$VG "$P"/luseradd -c GECOS7_1 -d HomeDir7_1 -g group7_1 -M -p '03dgZm5nZvqOc' \
     -s Shell7_1 -u "$(expr $LARGE_ID + 710)" user7_1
 #  untested: -k, -r, -n, -P
 # Handling numeric user names: default to the same numeric group name
-$VG lgroupadd -g "$(expr $LARGE_ID + 720)" "$(expr $LARGE_ID + 721)"
-$VG luseradd -M -u "$(expr $LARGE_ID + 722)" "$(expr $LARGE_ID + 721)"
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 720)" "$(expr $LARGE_ID + 721)"
+$VG "$P"/luseradd -M -u "$(expr $LARGE_ID + 722)" "$(expr $LARGE_ID + 721)"
 
 # luserdel:
-$VG lgroupadd -g "$(expr $LARGE_ID + 810)" group8_1
-$VG luseradd -g group8_1 -M user8_1
-$VG luserdel user8_1
-$VG luseradd -M user8_2
-$VG luserdel user8_2
-$VG lgroupadd -g "$(expr $LARGE_ID + 830)" user8_3
-$VG luseradd -M user8_3
-$VG luserdel -G user8_3
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 810)" group8_1
+$VG "$P"/luseradd -g group8_1 -M user8_1
+$VG "$P"/luserdel user8_1
+$VG "$P"/luseradd -M user8_2
+$VG "$P"/luserdel user8_2
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 830)" user8_3
+$VG "$P"/luseradd -M user8_3
+$VG "$P"/luserdel -G user8_3
 
 # lusermod:
-$VG lgroupadd -g "$(expr $LARGE_ID + 910)" group9_1
-$VG luseradd -g group9_1 -u "$(expr $LARGE_ID + 910)" -M user9_1
-$VG lgroupadd -g "$(expr $LARGE_ID + 920)" group9_2
-$VG lusermod -c GECOS9_1 -d HomeDir9_1 -g "$(expr $LARGE_ID + 920)" -l user9_2 \
-    -p '04aqostCGmvZM' -s Shell9_1 -u "$(expr $LARGE_ID + 911)" user9_1
-$VG lusermod -L user9_2
-$VG lgroupadd -g "$(expr $LARGE_ID + 930)" group9_3
-$VG luseradd -g group9_3 -u "$(expr $LARGE_ID + 930)" -M user9_3
-$VG lusermod -p '!!05FdoegP8UniQ' user9_3
-$VG lusermod -U user9_3
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 910)" group9_1
+$VG "$P"/luseradd -g group9_1 -u "$(expr $LARGE_ID + 910)" -M user9_1
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 920)" group9_2
+$VG "$P"/lusermod -c GECOS9_1 -d HomeDir9_1 -g "$(expr $LARGE_ID + 920)" \
+    -l user9_2 -p '04aqostCGmvZM' -s Shell9_1 -u "$(expr $LARGE_ID + 911)" \
+    user9_1
+$VG "$P"/lusermod -L user9_2
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 930)" group9_3
+$VG "$P"/luseradd -g group9_3 -u "$(expr $LARGE_ID + 930)" -M user9_3
+$VG "$P"/lusermod -p '!!05FdoegP8UniQ' user9_3
+$VG "$P"/lusermod -U user9_3
 #  Handling of username change for primary and secondary groups
-$VG lgroupadd -g "$(expr $LARGE_ID + 940)" group9_4
-$VG lgroupadd -g "$(expr $LARGE_ID + 950)" group9_5
-$VG luseradd -g "$(expr $LARGE_ID + 940)" -u "$(expr $LARGE_ID + 940)" \
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 940)" group9_4
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 950)" group9_5
+$VG "$P"/luseradd -g "$(expr $LARGE_ID + 940)" -u "$(expr $LARGE_ID + 940)" \
     -M user9_4
-$VG lgroupmod -M user9_4 group9_5
-$VG lusermod -l user9_5 user9_4
+$VG "$P"/lgroupmod -M user9_4 group9_5
+$VG "$P"/lusermod -l user9_5 user9_4
 #  lusermod -g warns if the group does not exist
-$VG lgroupadd -g "$(expr $LARGE_ID + 960)" group9_6
-$VG luseradd -g group9_6 -u "$(expr $LARGE_ID + 960)" -M user9_6
-LC_ALL=C $VG lusermod -g "$(expr $LARGE_ID + 961)" user9_6 \
+$VG "$P"/lgroupadd -g "$(expr $LARGE_ID + 960)" group9_6
+$VG "$P"/luseradd -g group9_6 -u "$(expr $LARGE_ID + 960)" -M user9_6
+LC_ALL=C $VG "$P"/lusermod -g "$(expr $LARGE_ID + 961)" user9_6 \
     2>"$workdir"/lusermod_output
 diff - "$workdir"/lusermod_output <<EOF
 Warning: Group with ID $(expr $LARGE_ID + 961) does not exist.
