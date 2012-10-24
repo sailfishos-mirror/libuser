@@ -88,6 +88,19 @@ static const char suffix_shadow[] = "/shadow";
 static const char suffix_group[] = "/group";
 static const char suffix_gshadow[] = "/gshadow";
 
+/* Return the path of FILE_SUFFIX configured in MODULE, for g_free() */
+static char *
+module_filename(struct lu_module *module, const char *file_suffix)
+{
+	const char *dir;
+	char *key;
+
+	key = g_strconcat(module->name, "/directory", NULL);
+	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
+	g_free(key);
+	return g_strconcat(dir, file_suffix, NULL);
+}
+
 /* Create a backup copy of "filename" named "filename-". */
 static gboolean
 lu_files_create_backup(const char *filename,
@@ -421,10 +434,9 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 	       struct lu_ent *ent, struct lu_error **error)
 {
 	gboolean ret;
-	const char *dir;
 	int fd = -1;
 	gpointer lock;
-	char *line, *filename, *key;
+	char *line, *filename;
 
 	g_assert(module != NULL);
 	g_assert(name != NULL);
@@ -432,11 +444,7 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 	g_assert(field > 0);
 	g_assert(ent != NULL);
 
-	/* Determine the name of the file we're going to read. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	/* Open the file and lock it. */
 	fd = open(filename, O_RDONLY);
@@ -722,8 +730,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	const char *dir;
-	char *key, *line, *filename, *contents;
+	char *line, *filename, *contents;
 	int fd;
 	ssize_t r;
 	gpointer lock;
@@ -736,11 +743,7 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	g_assert(format_count > 0);
 	g_assert(ent != NULL);
 
-	/* Generate the name of a file to open. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	line = format_generic(ent, formats, format_count, error);
 	if (line == NULL)
@@ -952,11 +955,11 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	char *filename, *key, *new_line, *contents, *line, *rest;
+	char *filename, *new_line, *contents, *line, *rest;
 	char *current_name, *fragment;
 	int fd;
 	gpointer lock;
-	const char *dir, *name_attribute;
+	const char *name_attribute;
 	gboolean ret = FALSE;
 	struct stat st;
 	size_t len;
@@ -984,11 +987,7 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 		return FALSE;
 	}
 
-	/* Generate the name of the file to open. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	new_line = format_generic(ent, formats, format_count, error);
 	if (new_line == NULL)
@@ -1137,9 +1136,8 @@ generic_del(struct lu_module *module, const char *file_suffix,
 {
 	lu_security_context_t fscreate;
 	char *name;
-	char *contents, *filename, *key;
+	char *contents, *filename;
 	char *fragment2;
-	const char *dir;
 	struct stat st;
 	size_t len;
 	int fd;
@@ -1159,11 +1157,7 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	/* Generate the name of the file we're going to modify. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err_filename;
@@ -1367,8 +1361,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	char *filename, *key;
-	const char *dir;
+	char *filename;
 	char *value, *new_value, *name;
 	int fd;
 	gpointer lock;
@@ -1385,11 +1378,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	/* Generate the name of the file we're going to modify. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err_filename;
@@ -1453,8 +1442,7 @@ static gboolean
 generic_is_locked(struct lu_module *module, const char *file_suffix,
 		  int field, struct lu_ent *ent, struct lu_error **error)
 {
-	char *filename, *key;
-	const char *dir;
+	char *filename;
 	char *value, *name;
 	int fd;
 	gpointer lock;
@@ -1471,11 +1459,7 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	/* Construct the name of the file to read. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	/* Open the file. */
 	fd = open(filename, O_RDONLY);
@@ -1657,8 +1641,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	char *filename, *key, *value, *name;
-	const char *dir;
+	char *filename, *value, *name;
 	int fd;
 	gpointer lock;
 	gboolean ret = FALSE;
@@ -1674,11 +1657,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	/* Construct the name of the file to modify. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err_filename;
@@ -1843,18 +1822,13 @@ lu_files_enumerate(struct lu_module *module, const char *file_suffix,
 	GValueArray *ret;
 	GValue value;
 	char *buf;
-	char *key, *filename;
-	const char *dir;
+	char *filename;
 	FILE *fp;
 
 	g_assert(module != NULL);
 	pattern = pattern ?: "*";
 
-	/* Generate the name of the file we'll be reading. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	/* Open the file. */
 	fd = open(filename, O_RDONLY);
@@ -1948,19 +1922,15 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	GValueArray *ret;
 	GValue value;
 	char *buf, grp[CHUNK_SIZE];
-	char *key, *pwdfilename, *grpfilename, *p, *q;
-	const char *dir;
+	char *pwdfilename, *grpfilename, *p, *q;
 	FILE *fp;
 
 	g_assert(module != NULL);
 	g_assert(group != NULL);
 
 	/* Generate the names of the two files we'll be looking at. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	pwdfilename = g_strconcat(dir, suffix_passwd, NULL);
-	grpfilename = g_strconcat(dir, suffix_group, NULL);
-	g_free(key);
+	pwdfilename = module_filename(module, suffix_passwd);
+	grpfilename = module_filename(module, suffix_group);
 
 	/* Open the passwd file. */
 	fd = open(pwdfilename, O_RDONLY);
@@ -2153,7 +2123,6 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	GValue value;
 	char *buf;
 	char *key, *pwdfilename, *grpfilename, *p, *q;
-	const char *dir;
 	FILE *fp;
 
 	(void)uid;
@@ -2161,11 +2130,8 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	g_assert(user != NULL);
 
 	/* Generate the names of files we'll be looking at. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	pwdfilename = g_strconcat(dir, suffix_passwd, NULL);
-	grpfilename = g_strconcat(dir, suffix_group, NULL);
-	g_free(key);
+	pwdfilename = module_filename(module, suffix_passwd);
+	grpfilename = module_filename(module, suffix_group);
 
 	/* Open the first file. */
 	fd = open(pwdfilename, O_RDONLY);
@@ -2345,17 +2311,12 @@ lu_files_enumerate_full(struct lu_module *module, const char *file_suffix,
 	GPtrArray *ret = NULL;
 	char *buf;
 	char *key, *filename;
-	const char *dir;
 	FILE *fp;
 
 	g_assert(module != NULL);
 	pattern = pattern ?: "*";
 
-	/* Generate the name of the file to look at. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	dir = lu_cfg_read_single(module->lu_context, key, "/etc");
-	filename = g_strconcat(dir, file_suffix, NULL);
-	g_free(key);
+	filename = module_filename(module, file_suffix);
 
 	/* Open the file. */
 	fd = open(filename, O_RDONLY);
@@ -2540,23 +2501,19 @@ lu_files_shadow_valid_module_combination(struct lu_module *module,
 static gboolean
 lu_files_uses_elevated_privileges(struct lu_module *module)
 {
-	const char *directory;
-	char *path, *key;
+	char *path;
 	gboolean ret = FALSE;
-	/* Get the directory the files are in. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	directory = lu_cfg_read_single(module->lu_context, key, "/etc");
-	g_free(key);
+
 	/* If we can't access the passwd file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat(directory, suffix_passwd, NULL);
+	path = module_filename(module, suffix_passwd);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
 	g_free(path);
 	/* If we can't access the group file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat(directory, suffix_group, NULL);
+	path = module_filename(module, suffix_group);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
@@ -2568,23 +2525,19 @@ lu_files_uses_elevated_privileges(struct lu_module *module)
 static gboolean
 lu_shadow_uses_elevated_privileges(struct lu_module *module)
 {
-	const char *directory;
-	char *path, *key;
+	char *path;
 	gboolean ret = FALSE;
-	/* Get the directory the files are in. */
-	key = g_strconcat(module->name, "/directory", NULL);
-	directory = lu_cfg_read_single(module->lu_context, key, "/etc");
-	g_free(key);
+
 	/* If we can't access the shadow file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat(directory, suffix_shadow, NULL);
+	path = module_filename(module, suffix_shadow);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}
 	g_free(path);
 	/* If we can't access the gshadow file as a normal user, then the
 	 * answer is "yes". */
-	path = g_strconcat(directory, suffix_gshadow, NULL);
+	path = module_filename(module, suffix_gshadow);
 	if (access(path, R_OK | W_OK) != 0) {
 		ret = TRUE;
 	}

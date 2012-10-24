@@ -1,8 +1,17 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/files.c (module_filename): New function.
+	(generic_lookup, generic_add, generic_mod, generic_del)
+	(generic_lock, generic_is_locked, generic_setpass)
+	(lu_files_enumerate, lu_files_users_enumerate_by_group)
+	(lu_files_groups_enumerate_by_user, lu_files_enumerate_full)
+	(lu_files_uses_elevated_privileges)
+	(lu_shadow_uses_elevated_privileges): Use module_filename().
+
 	* modules/files.c (generic_lock, generic_is_locked)
 	(generic_setpass): Use `name' instead of `namestring' for better
 	readability.
+
 	* modules/ldap.c (lu_ldap_del, lu_ldap_handle_lock)
 	(lu_ldap_is_locked, lu_ldap_setpass): Use `name' instead of
 	`name_string' for better readability.
