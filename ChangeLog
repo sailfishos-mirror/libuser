@@ -1,5 +1,7 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/valgrind.supp: Also cover SHA-256 in glibc suppression.
+
 	* python/ent.c (libuser_entity_getattrlist)
 	(libuser_entity_length): Fix memory leaks.
 

@@ -36,8 +36,15 @@
 }
 
 {
-   glibc crypt_r
+   glibc md5
    Memcheck:Cond
    fun:__stpncpy_sse2_unaligned
    fun:__md5_crypt_r
+}
+
+{
+   glibc sha512
+   Memcheck:Cond
+   fun:__stpncpy_sse2_unaligned
+   fun:__sha512_crypt_r
 }
