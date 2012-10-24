@@ -480,15 +480,13 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	}
 
 	/* Get the user's home directory value. */
-	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
-	if (values == NULL) {
+	dir = lu_ent_get_first_string(ent->ent, LU_HOMEDIRECTORY);
+	if (dir == NULL) {
 		PyErr_SetString(PyExc_KeyError,
 				"user does not have a `" LU_HOMEDIRECTORY
 				"' attribute");
 		return NULL;
 	}
-	value = g_value_array_get_nth(values, 0);
-	dir = g_value_get_string(value);
 
 	/* Get the user's UID. */
 	values = lu_ent_get(ent->ent, LU_UIDNUMBER);
@@ -541,8 +539,6 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 {
 	struct libuser_entity *ent = NULL;
 	const char *dir;
-	GValueArray *values;
-	GValue *value;
 	char *keywords[] = { "home", NULL };
 	struct lu_error *error = NULL;
 
@@ -557,15 +553,13 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	}
 
 	/* Get the user's home directory. */
-	values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
-	if (values == NULL) {
+	dir = lu_ent_get_first_string(ent->ent, LU_HOMEDIRECTORY);
+	if (dir == NULL) {
 		PyErr_SetString(PyExc_KeyError,
 				"user does not have a `" LU_HOMEDIRECTORY
 				"' attribute");
 		return NULL;
 	}
-	value = g_value_array_get_nth(values, 0);
-	dir = g_value_get_string(value);
 
 	/* Remove the directory. */
 	if (lu_homedir_remove(dir, &error)) {
@@ -594,8 +588,6 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 {
 	struct libuser_entity *ent = NULL;
 	const char *olddir = NULL, *newdir = NULL;
-	GValueArray *values;
-	GValue *value;
 	char *keywords[] = { "entity", "newhome", NULL };
 	struct lu_error *error = NULL;
 
@@ -612,38 +604,33 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	if (newdir != NULL) {
 		/* We were given a string, so move the user's home directory
 		 * to the new location. */
-		values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
-		if (values == NULL) {
+		olddir = lu_ent_get_first_string(ent->ent, LU_HOMEDIRECTORY);
+		if (olddir == NULL) {
 			PyErr_SetString(PyExc_KeyError,
 					"user does not have a current `"
 					LU_HOMEDIRECTORY "' attribute");
 			return NULL;
 		}
-		value = g_value_array_get_nth(values, 0);
-		olddir = g_value_get_string(value);
 	} else {
 		/* We weren't given a string, so use the current and pending
 		 * values, and move from one to the other. */
-		values = lu_ent_get_current(ent->ent, LU_HOMEDIRECTORY);
-		if (values == NULL) {
+		olddir = lu_ent_get_first_current_string(ent->ent,
+							 LU_HOMEDIRECTORY);
+		if (olddir == NULL) {
 			PyErr_SetString(PyExc_KeyError,
 					"user does not have a current `"
 					LU_HOMEDIRECTORY "' attribute");
 			return NULL;
 		}
-		value = g_value_array_get_nth(values, 0);
-		olddir = g_value_get_string(value);
 
 		/* Now read the pending directory. */
-		values = lu_ent_get(ent->ent, LU_HOMEDIRECTORY);
-		if (values == NULL) {
+		newdir = lu_ent_get_first_string(ent->ent, LU_HOMEDIRECTORY);
+		if (newdir == NULL) {
 			PyErr_SetString(PyExc_KeyError,
 					"user does not have a pending `"
 					LU_HOMEDIRECTORY "' attribute");
 			return NULL;
 		}
-		value = g_value_array_get_nth(values, 0);
-		newdir = g_value_get_string(value);
 	}
 
 	/* Attempt the move. */

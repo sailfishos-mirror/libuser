@@ -359,6 +359,21 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	return NULL;
 }
 
+static const char *
+lu_ent_get_first_string_int(GArray *list, const char *attribute)
+{
+	GValueArray *vals;
+	GValue *v;
+
+	vals = lu_ent_get_int(list, attribute);
+	if (vals == NULL)
+		return NULL;
+	v = g_value_array_get_nth(vals, 0);
+	if (!G_VALUE_HOLDS_STRING(v))
+		return NULL;
+	return g_value_get_string(v);
+}
+
 static gboolean
 lu_ent_has_int(GArray *list, const char *attribute)
 {
@@ -539,6 +554,51 @@ lu_ent_get_current(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(attribute != NULL, NULL);
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_int(ent->current, attribute);
+}
+
+/**
+ * lu_ent_get_first_string:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns the first string associated with a pending attribute in a struct
+ * #lu_ent.
+ *
+ * Returns: a string * pointer valid at least the value is modified or deleted
+ * if the the attribute is present and the first value is a string.  Returns
+ * %NULL if the attribute is not present, the first value is not a string, or
+ * on error.
+ */
+const char *
+lu_ent_get_first_string(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_string_int(ent->pending, attribute);
+}
+/**
+ * lu_ent_get_first_current_string:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns the first string associated with a current attribute in a struct
+ * #lu_ent.
+ *
+ * Returns: a string * pointer valid at least the value is modified or deleted
+ * if the the attribute is present and the first value is a string.  Returns
+ * %NULL if the attribute is not present, the first value is not a string, or
+ * on error.
+ */
+const char *
+lu_ent_get_first_current_string(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_string_int(ent->current, attribute);
 }
 
 /**

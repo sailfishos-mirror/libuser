@@ -87,9 +87,7 @@ do_full(struct lu_context *ctx, const char *name,
 			const char *ent_name;
 
 			ent = g_ptr_array_index(entities, i);
-			attrs = lu_ent_get(ent, name_attribute);
-			value = g_value_array_get_nth(attrs, 0);
-			ent_name = g_value_get_string(value);
+			ent_name = lu_ent_get_first_string(ent, name_attribute);
 
 			attrs = lu_ent_get(ent, id_attribute);
 			if (attrs == NULL)

@@ -118,15 +118,13 @@ main(int argc, const char **argv)
 					(intmax_t)gid);
 				return 5;
 			}
-			values = lu_ent_get(ent, LU_GROUPNAME);
-			if (values == NULL) {
+			tmp = lu_ent_get_first_string(ent, LU_GROUPNAME);
+			if (tmp == NULL) {
 				fprintf(stderr, _("Group with GID %jd did not "
 					"have a group name.\n"),
 					(intmax_t)gid);
 				return 6;
 			}
-			value = g_value_array_get_nth(values, 0);
-			tmp = g_value_get_string(value);
 			if (strcmp(tmp, user) == 0) {
 				if (lu_group_delete(ctx, ent, &error)
 				    == FALSE){
@@ -141,19 +139,16 @@ main(int argc, const char **argv)
 	}
 
 	if (remove_home) {
-		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		if (values == NULL) {
+		tmp = lu_ent_get_first_string(ent, LU_HOMEDIRECTORY);
+		if (tmp == NULL) {
 			fprintf(stderr, _("%s did not have a home "
 				"directory.\n"), user);
 			return 8;
-		} else {
-			value = g_value_array_get_nth(values, 0);
-			tmp = g_value_get_string(value);
-			if (lu_homedir_remove(tmp, &error) == FALSE) {
-				fprintf(stderr, _("Error removing %s: %s.\n"),
-					tmp, lu_strerror(error));
-				return 9;
-			}
+		}
+		if (lu_homedir_remove(tmp, &error) == FALSE) {
+			fprintf(stderr, _("Error removing %s: %s.\n"), tmp,
+				lu_strerror(error));
+			return 9;
 		}
 		/* Delete the user's mail spool. */
 		if (lu_mail_spool_remove(ctx, ent, &error) != TRUE) {

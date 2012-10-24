@@ -1,5 +1,22 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_get_first_string_int)
+	(lu_ent_get_first_string, lu_ent_get_first_current_string): New
+	functions.
+	* lib/entity.h (lu_ent_get_first_string)
+	(lu_ent_get_first_current_string): New declarations.
+	* docs/reference/libuser-sections.txt: Add lu_ent_get_first_string
+	and lu_ent_get_first_current_string.
+	* apps/lid.c (do_full)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main)
+	* apps/lusermod.c (main)
+	* lib/user.c (extract_name, lu_dispatch, lu_user_add)
+	* python/admin.c (libuser_admin_create_home)
+	(libuser_admin_remove_home, libuser_admin_move_home): Use
+	lu_ent_get_first_string() and lu_ent_get_first_current_string().
+
 	* lib/fs.h (LU_NSCD_CACHE_PASSWD, LU_NSCD_CACHE_GROUP): New macros.
 	* docs/reference/libuser-sections.txt: Add LU_NSCD_CACHE_GROUP and
 	LU_NSCD_CACHE_PASSWD.

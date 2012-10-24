@@ -258,12 +258,12 @@ main(int argc, const char **argv)
 			lu_ent_clear(ent, LU_HOMEDIRECTORY);
 			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
 		} else {
-			values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-			if (values != NULL) {
-				value = g_value_array_get_nth(values,
-							      0);
-				homedir = g_strdup(g_value_get_string(value));
-			} else {
+			const char *home;
+
+			home = lu_ent_get_first_string(ent, LU_HOMEDIRECTORY);
+			if (home != NULL)
+				homedir = g_strdup(home);
+			else {
 				homedir = g_strconcat("/home/", fields[0],
 						      (const gchar *)NULL);
 				if (strcmp(fields[0], ".") == 0

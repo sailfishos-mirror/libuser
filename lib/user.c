@@ -192,17 +192,16 @@ lu_end(struct lu_context *context)
 static const char *
 extract_name(struct lu_ent *ent)
 {
-	GValueArray *array;
-	GValue *value;
+	const char *name;
+
 	g_return_val_if_fail(ent != NULL, NULL);
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group), NULL);
-	array = lu_ent_get(ent,
-			   ent->type == lu_user ? LU_USERNAME : LU_GROUPNAME);
-	if (array == NULL)
+	name = lu_ent_get_first_string(ent,
+				       ent->type == lu_user ? LU_USERNAME
+				       : LU_GROUPNAME);
+	if (name == NULL)
 		return NULL;
-	value = g_value_array_get_nth(array, 0);
-	g_return_val_if_fail(value != NULL, NULL);
-	return ent->cache->cache(ent->cache, g_value_get_string(value));
+	return ent->cache->cache(ent->cache, name);
 }
 
 static gboolean
@@ -958,14 +957,10 @@ lu_dispatch(struct lu_context *context,
 				attr = LU_GROUPNAME;
 				id = group_lookup_name;
 			}
-			values = lu_ent_get_current(tmp, attr);
-			if (values != NULL) {
-				GValue *value;
-
-				value = g_value_array_get_nth(values, 0);
-				attr = g_value_get_string(value);
-				sdata = tmp->cache->cache(tmp->cache, attr);
-			} else {
+			sdata = lu_ent_get_first_current_string(tmp, attr);
+			if (sdata != NULL)
+				sdata = tmp->cache->cache(tmp->cache, sdata);
+			else {
 				/* No values for the right attribute. */
 				break;
 			}
@@ -1304,22 +1299,19 @@ gboolean
 lu_user_add(struct lu_context * context, struct lu_ent * ent,
 	    struct lu_error ** error)
 {
-	GValueArray *array;
+	const char *dubious_home;
 	gboolean ret = FALSE;
 	LU_ERROR_CHECK(error);
 
 	g_return_val_if_fail(ent != NULL, FALSE);
 	g_return_val_if_fail(ent->type == lu_user, FALSE);
-	array = lu_ent_get(ent, LU_DUBIOUS_HOMEDIRECTORY);
-	if (array != NULL) {
+	dubious_home = lu_ent_get_first_string(ent, LU_DUBIOUS_HOMEDIRECTORY);
+	if (dubious_home != NULL) {
 		if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL) {
-			GValue *value;
-
-			value = g_value_array_get_nth(array, 0);
 			lu_error_new(error, lu_error_name_bad,
 				     _("Refusing to use dangerous home "
 				       "directory `%s' by default"),
-				     g_value_get_string(value));
+				     dubious_home);
 			return FALSE;
 		}
 		/* LU_DUBIOUS_HOMEDIRECTORY is purely internal, make sure it

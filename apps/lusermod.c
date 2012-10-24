@@ -345,16 +345,12 @@ main(int argc, const char **argv)
 				}
 			}
 			/* Save the changes to the group. */
-			if (lu_group_modify(ctx, group, &error) == FALSE) {
-				const char *groupname;
-
-				values = lu_ent_get(group, LU_GROUPNAME);
-				value = g_value_array_get_nth(values, 0);
-				groupname = g_value_get_string(value);
+			if (lu_group_modify(ctx, group, &error) == FALSE)
 				fprintf(stderr, _("Group %s could not be "
 						  "modified: %s.\n"),
-					groupname, lu_strerror(error));
-			}
+					lu_ent_get_first_string(group,
+								LU_GROUPNAME),
+					lu_strerror(error));
 			lu_ent_free(group);
 		}
 		g_ptr_array_free(groups, TRUE);

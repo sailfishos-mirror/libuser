@@ -321,9 +321,7 @@ main(int argc, const char **argv)
 		g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
 		/* Read the user's home directory. */
-		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		value = g_value_array_get_nth(values, 0);
-		homeDirectory = g_value_get_string(value);
+		homeDirectory = lu_ent_get_first_string(ent, LU_HOMEDIRECTORY);
 
 		if (lu_homedir_populate(ctx, skeleton, homeDirectory,
 					uidNumber, gidNumber, 0700,
