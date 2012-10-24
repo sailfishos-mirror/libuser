@@ -606,7 +606,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	} else {
 		/* We weren't given a string, so use the current and pending
 		 * values, and move from one to the other. */
-		olddir = lu_ent_get_first_current_string(ent->ent,
+		olddir = lu_ent_get_first_string_current(ent->ent,
 							 LU_HOMEDIRECTORY);
 		if (olddir == NULL) {
 			PyErr_SetString(PyExc_KeyError,

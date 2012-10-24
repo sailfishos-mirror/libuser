@@ -593,7 +593,7 @@ lu_ent_get_first_string(struct lu_ent *ent, const char *attribute)
 	return lu_ent_get_first_string_int(ent->pending, attribute);
 }
 /**
- * lu_ent_get_first_current_string:
+ * lu_ent_get_first_string_current:
  * @ent: An entity
  * @attribute: Attribute name
  *
@@ -605,7 +605,7 @@ lu_ent_get_first_string(struct lu_ent *ent, const char *attribute)
  * the attribute is not present, the first value is not a string, or on error.
  */
 const char *
-lu_ent_get_first_current_string(struct lu_ent *ent, const char *attribute)
+lu_ent_get_first_string_current(struct lu_ent *ent, const char *attribute)
 {
 	g_return_val_if_fail(ent != NULL, NULL);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
@@ -636,7 +636,7 @@ lu_ent_get_first_id(struct lu_ent *ent, const char *attribute)
 	return lu_ent_get_first_id_int(ent->pending, attribute);
 }
 /**
- * lu_ent_get_first_current_id:
+ * lu_ent_get_first_id_current:
  * @ent: An entity
  * @attribute: Attribute name
  *
@@ -648,7 +648,7 @@ lu_ent_get_first_id(struct lu_ent *ent, const char *attribute)
  * value cannot be converted, or on error.
  */
 id_t
-lu_ent_get_first_current_id(struct lu_ent *ent, const char *attribute)
+lu_ent_get_first_id_current(struct lu_ent *ent, const char *attribute)
 {
 	g_return_val_if_fail(ent != NULL, NULL);
 	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);

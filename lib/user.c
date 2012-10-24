@@ -950,7 +950,7 @@ lu_dispatch(struct lu_context *context,
 				attr = LU_GROUPNAME;
 				id = group_lookup_name;
 			}
-			sdata = lu_ent_get_first_current_string(tmp, attr);
+			sdata = lu_ent_get_first_string_current(tmp, attr);
 			if (sdata != NULL)
 				sdata = tmp->cache->cache(tmp->cache, sdata);
 			else {
