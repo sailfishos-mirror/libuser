@@ -299,7 +299,7 @@ main(int argc, const char **argv)
 			user, lu_strerror(error));
 		return 9;
 	}
-	lu_nscd_flush_cache("passwd");
+	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	/* If the user's name changed, we need to update supplemental
 	 * group membership information. */
@@ -359,7 +359,7 @@ main(int argc, const char **argv)
 		}
 		g_ptr_array_free(groups, TRUE);
 
-       		lu_nscd_flush_cache("group");
+       		lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 	}
 	g_free(old_uid);
 

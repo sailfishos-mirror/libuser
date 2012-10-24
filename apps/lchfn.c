@@ -296,7 +296,7 @@ main(int argc, const char **argv)
 	/* Try to save our changes. */
 	if (lu_user_modify(ctx, ent, &error)) {
 		g_print(_("Finger information changed.\n"));
-		lu_nscd_flush_cache("passwd");
+		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	} else {
 		fprintf(stderr, _("Finger information not changed: %s.\n"),
 			lu_strerror(error));

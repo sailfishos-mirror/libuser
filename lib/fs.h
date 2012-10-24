@@ -35,6 +35,19 @@ gboolean lu_homedir_move(const char *oldhome, const char *newhome,
 			 struct lu_error **error);
 gboolean lu_homedir_remove(const char *directory, struct lu_error **error);
 
+/**
+ * LU_NSCD_CACHE_PASSWD:
+ *
+ * Name of the NSCD cache containing user data.
+ */
+#define LU_NSCD_CACHE_PASSWD "passwd"
+/**
+ * LU_NSCD_CACHE_GROUP:
+ *
+ * Name of the NSCD cache containing group data.
+ */
+#define LU_NSCD_CACHE_GROUP "group"
+
 void lu_nscd_flush_cache(const char *table);
 
 gboolean lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,

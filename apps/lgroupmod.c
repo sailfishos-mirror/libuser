@@ -278,7 +278,7 @@ main(int argc, const char **argv)
 
 	lu_ent_free(ent);
 
-	lu_nscd_flush_cache("group");
+	lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 
 	if (oldGidNumber != LU_VALUE_INVALID_ID &&
 	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
@@ -304,7 +304,7 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 		g_ptr_array_free(users, TRUE);
 
-		lu_nscd_flush_cache("passwd");
+		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	}
 
 	lu_end(ctx);

@@ -137,7 +137,7 @@ main(int argc, const char **argv)
 		/* Modify the user's record in the information store. */
 		if (lu_user_modify(ctx, ent, &error)) {
 			g_print(_("Shell changed.\n"));
-			lu_nscd_flush_cache("passwd");
+			lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 		} else {
 			fprintf(stderr, _("Shell not changed: %s\n"),
 				lu_strerror(error));

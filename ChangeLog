@@ -1,5 +1,21 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.h (LU_NSCD_CACHE_PASSWD, LU_NSCD_CACHE_GROUP): New macros.
+	* docs/reference/libuser-sections.txt: Add LU_NSCD_CACHE_GROUP and
+	LU_NSCD_CACHE_PASSWD.
+	* apps/lchage.c (main)
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lgroupadd.c (main)
+	* apps/lgroupdel.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/lpasswd.c (main)
+	* apps/luseradd.c (main)
+	* apps/luserdel.c (main)
+	* apps/lusermod.c (main): Use the LU_NSCD_CACHE_GROUP and
+	LU_NSCD_CACHE_PASSWD macros.
+
 	* apps/lusermod.c (main): Don't mark data to be freed as "const".
 
 	* apps/apputil.c (current_umask, lu_homedir_copy, lu_homedir_populate)

@@ -93,6 +93,9 @@ lu_homedir_populate
 lu_homedir_remove
 lu_mail_spool_create
 lu_mail_spool_remove
+
+LU_NSCD_CACHE_GROUP
+LU_NSCD_CACHE_PASSWD
 lu_nscd_flush_cache
 </SECTION>
 

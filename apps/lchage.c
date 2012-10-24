@@ -260,7 +260,7 @@ main(int argc, const char **argv)
 			return 3;
 		}
 
-		lu_nscd_flush_cache("passwd");
+		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	}
 
 	lu_ent_free(ent);

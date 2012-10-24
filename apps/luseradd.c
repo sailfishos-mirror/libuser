@@ -205,7 +205,7 @@ main(int argc, const char **argv)
 
 		/* Try to add the group. */
 		if (lu_group_add(ctx, groupEnt, &error))
-			lu_nscd_flush_cache("group");
+			lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 		else {
 			/* Aargh!  Abandon all hope. */
 			fprintf(stderr, _("Error creating group `%s': %s\n"),
@@ -303,7 +303,7 @@ main(int argc, const char **argv)
 		}
 	}
 
-        lu_nscd_flush_cache("passwd");
+        lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	/* If we don't have the the don't-create-home flag, create the user's
 	 * home directory. */

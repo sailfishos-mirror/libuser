@@ -98,7 +98,7 @@ main(int argc, const char **argv)
 		return 3;
 	}
 
-	lu_nscd_flush_cache("passwd");
+	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	if (!dont_remove_group) {
 		values = lu_ent_get(ent, LU_GIDNUMBER);
@@ -136,7 +136,7 @@ main(int argc, const char **argv)
 					return 7;
 				}
 			}
-			lu_nscd_flush_cache("group");
+			lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 		}
 	}
 
