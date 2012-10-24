@@ -1045,6 +1045,7 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 				   allowed to be empty. */
 			}
 			if (cn == NULL || *cn == 0) {
+				g_free(cn);
 				vals = lu_ent_get(ent, LU_USERNAME);
 				/* Guaranteed by lu_ldap_set() */
 				g_assert (vals != NULL);
