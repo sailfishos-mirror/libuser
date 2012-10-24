@@ -1,5 +1,7 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lusermod.c (main): Don't mark data to be freed as "const".
+
 	* apps/apputil.c (current_umask, lu_homedir_copy, lu_homedir_populate)
 	(lu_homedir_remove, lu_homedir_move, lu_nscd_flush_cache)
 	(mail_spool_path, lu_mail_spool_create, lu_mail_spool_remove): Move...

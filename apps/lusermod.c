@@ -33,12 +33,12 @@ int
 main(int argc, const char **argv)
 {
 	const char *userPassword = NULL, *cryptedUserPassword = NULL,
-		   *uid = NULL, *old_uid, *user, *gecos = NULL,
-		   *oldHomeDirectory, *homeDirectory = NULL,
+		   *uid = NULL, *user, *gecos = NULL, *homeDirectory = NULL,
 		   *loginShell = NULL, *gid_number_str = NULL,
 		   *uid_number_str = NULL, *commonName = NULL,
 		   *givenName = NULL, *surname = NULL, *roomNumber = NULL,
 		   *telephoneNumber = NULL, *homePhone = NULL;
+	char *old_uid, *oldHomeDirectory;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	struct lu_context *ctx;
