@@ -1,5 +1,7 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/valgrind.supp: Add popt suppressions.
+
 	* apps/lnewusers.c (main)
 	* apps/lusermod.c (main): Fix some memory leaks.
 

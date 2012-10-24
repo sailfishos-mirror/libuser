@@ -62,3 +62,25 @@
    ...
    fun:NSS_InitContext
 }
+
+{
+   strlen() in popt (?)
+   Memcheck:Addr4
+   ...
+   fun:poptGetNextOpt
+}
+
+{
+   known memory leak "in" popt (well, the data is for the caller...)
+   Memcheck:Leak
+   fun:malloc
+   fun:poptGetNextOpt
+}
+
+{
+   known memory leak in popt
+   Memcheck:Leak
+   fun:realloc
+   fun:poptGetNextOpt
+   fun:main
+}
