@@ -629,10 +629,10 @@ lu_ent_get_first_string_current(struct lu_ent *ent, const char *attribute)
 id_t
 lu_ent_get_first_id(struct lu_ent *ent, const char *attribute)
 {
-	g_return_val_if_fail(ent != NULL, NULL);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
-	g_return_val_if_fail(attribute != NULL, NULL);
-	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	g_return_val_if_fail(ent != NULL, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(attribute != NULL, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(strlen(attribute) > 0, LU_VALUE_INVALID_ID);
 	return lu_ent_get_first_id_int(ent->pending, attribute);
 }
 /**
@@ -650,10 +650,10 @@ lu_ent_get_first_id(struct lu_ent *ent, const char *attribute)
 id_t
 lu_ent_get_first_id_current(struct lu_ent *ent, const char *attribute)
 {
-	g_return_val_if_fail(ent != NULL, NULL);
-	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
-	g_return_val_if_fail(attribute != NULL, NULL);
-	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	g_return_val_if_fail(ent != NULL, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(attribute != NULL, LU_VALUE_INVALID_ID);
+	g_return_val_if_fail(strlen(attribute) > 0, LU_VALUE_INVALID_ID);
 	return lu_ent_get_first_id_int(ent->current, attribute);
 }
 

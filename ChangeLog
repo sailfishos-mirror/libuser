@@ -1,5 +1,8 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_get_first_id)
+	(lu_ent_get_first_id_current): Fix value returned on invalid arguments.
+
 	* lib/entity.c (lu_ent_get_first_current_string): Rename to ...
 	(lu_ent_get_first_string_current): ... this.  All references updated.
 	(lu_ent_get_first_current_id): Rename to ...
