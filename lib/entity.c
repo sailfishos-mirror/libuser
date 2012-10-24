@@ -436,18 +436,13 @@ lu_ent_clear_int(GArray *list, const char *attribute)
 	}
 }
 
-static void
-lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
+/* Delete all existing values of ATTR in LIST and return a GValueArray to which
+   new values should be appended. */
+static GValueArray *
+lu_ent_set_prepare(GArray *list, const char *attr)
 {
-	GValueArray *dest, *copy;
+	GValueArray *dest;
 
-	g_return_if_fail(list != NULL);
-	g_return_if_fail(attr != NULL);
-	g_return_if_fail(strlen(attr) > 0);
-	if (values->n_values == 0) {
-		lu_ent_clear_int(list, attr);
-		return;
-	}
 	dest = lu_ent_get_int(list, attr);
 	if (dest == NULL) {
 		struct lu_attribute newattr;
@@ -460,6 +455,22 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	}
 	while (dest->n_values > 0)
 		g_value_array_remove(dest, dest->n_values - 1);
+	return dest;
+}
+
+static void
+lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
+{
+	GValueArray *dest, *copy;
+
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
+	if (values->n_values == 0) {
+		lu_ent_clear_int(list, attr);
+		return;
+	}
+	dest = lu_ent_set_prepare(list, attr);
 	copy = g_value_array_copy(values);
 	lu_util_append_values(dest, copy);
 	g_value_array_free(copy);
