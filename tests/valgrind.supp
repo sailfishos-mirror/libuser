@@ -48,3 +48,10 @@
    fun:__stpncpy_sse2_unaligned
    fun:__sha512_crypt_r
 }
+
+{
+   NSS initialization
+   Memcheck:Leak
+   ...
+   fun:NSS_InitContext
+}
