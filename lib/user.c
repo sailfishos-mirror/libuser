@@ -660,18 +660,18 @@ merge_ent_array_duplicates(GPtrArray *array)
 		tree = NULL;
 		/* Get the name of the user or group. */
 		if (current->type == lu_user) {
-			values = lu_ent_get(current, LU_USERNAME);
+			key = lu_ent_get_first_value_strdup(current,
+							    LU_USERNAME);
 			tree = users;
 		} else if (current->type == lu_group) {
-			values = lu_ent_get(current, LU_GROUPNAME);
+			key = lu_ent_get_first_value_strdup(current,
+							    LU_GROUPNAME);
 			tree = groups;
 		} else {
 			g_warning("Unknown entity(%zu) type: %d.\n",
 				  i, current->type);
 			g_assert_not_reached();
 		}
-		value = g_value_array_get_nth(values, 0);
-		key = lu_value_strdup(value);
 		/* Check if there's already an entity with that name. */
 		saved = g_tree_lookup(tree, key);
 		/* If it's not in there, add this one. */

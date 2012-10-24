@@ -246,14 +246,10 @@ lu_sasldb_user_is_locked(struct lu_module *module, struct lu_ent *ent,
 			struct lu_error **error)
 {
 	int i;
-	GValueArray *values;
-	GValue *value;
 	char *name;
 
 	(void)error;
-	values = lu_ent_get(ent, LU_USERNAME);
-	value = g_value_array_get_nth(values, 0);
-	name = lu_value_strdup(value);
+	name = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
 #ifdef HAVE_SASL_USER_EXISTS
 	i = sasl_user_exists(module->module_context, NULL, NULL, name);
 #else

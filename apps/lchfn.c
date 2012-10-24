@@ -44,8 +44,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent;
-	GValueArray *values;
-	GValue *value, val;
+	GValue val;
 	int interactive = FALSE;
 	int c;
 	struct lu_prompt prompts[7];
@@ -55,7 +54,7 @@ main(int argc, const char **argv)
 		 N_("prompt for all information"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
-	char **fields;
+	char **fields, *p;
 	size_t fields_len;
 	size_t pcount, i;
 
@@ -118,13 +117,9 @@ main(int argc, const char **argv)
 	}
 
 	/* Read the user's GECOS information. */
-	values = lu_ent_get(ent, LU_GECOS);
-	if (values != NULL) {
-		value = g_value_array_get_nth(values, 0);
-		gecos = lu_value_strdup(value);
-	} else {
+	gecos = lu_ent_get_first_value_strdup(ent, LU_GECOS);
+	if (gecos == NULL)
 		gecos = "";
-	}
 
 	/* Split the gecos into the prompt structures. */
 	fields = g_strsplit(gecos, ",", G_N_ELEMENTS(prompts));
@@ -146,32 +141,24 @@ main(int argc, const char **argv)
 	pcount++;
 
 	/* If we have it, prompt for the user's surname. */
-	values = lu_ent_get(ent, LU_SN);
-	if (values != NULL) {
-		const char *sn;
-
-		value = g_value_array_get_nth(values, 0);
-		sn = lu_value_strdup(value);
+	p = lu_ent_get_first_value_strdup(ent, LU_SN);
+	if (p != NULL) {
 		prompts[pcount].key = SURNAME_KEY;
 		prompts[pcount].prompt = N_("Surname");
 		prompts[pcount].domain = PACKAGE;
 		prompts[pcount].visible = TRUE;
-		prompts[pcount].default_value = sn;
+		prompts[pcount].default_value = p;
 		pcount++;
 	}
 
 	/* If we have it, prompt for the user's givenname. */
-	values = lu_ent_get(ent, LU_GIVENNAME);
-	if (values != NULL) {
-		const char *gn;
-
-		value = g_value_array_get_nth(values, 0);
-		gn = lu_value_strdup(value);
+	p = lu_ent_get_first_value_strdup(ent, LU_GIVENNAME);
+	if (p != NULL) {
 		prompts[pcount].key = GIVENNAME_KEY;
 		prompts[pcount].prompt = N_("Given Name");
 		prompts[pcount].domain = PACKAGE;
 		prompts[pcount].visible = TRUE;
-		prompts[pcount].default_value = gn;
+		prompts[pcount].default_value = p;
 		pcount++;
 	}
 
@@ -203,17 +190,13 @@ main(int argc, const char **argv)
 	pcount++;
 
 	/* If we have it, prompt for the user's email. */
-	values = lu_ent_get(ent, LU_EMAIL);
-	if (values != NULL) {
-		const char *email;
-
-		value = g_value_array_get_nth(values, 0);
-		email = lu_value_strdup(value);
+	p = lu_ent_get_first_value_strdup(ent, LU_EMAIL);
+	if (p != NULL) {
 		prompts[pcount].key = EMAIL_KEY;
 		prompts[pcount].prompt = N_("E-Mail Address");
 		prompts[pcount].domain = PACKAGE;
 		prompts[pcount].visible = TRUE;
-		prompts[pcount].default_value = email;
+		prompts[pcount].default_value = p;
 		pcount++;
 	}
 

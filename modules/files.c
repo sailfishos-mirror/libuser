@@ -521,16 +521,11 @@ lu_shadow_user_lookup_id(struct lu_module *module,
 	/* First look the user up by ID. */
 	ret = lu_files_user_lookup_id(module, uid, ent, error);
 	if (ret) {
-		GValueArray *values;
+		char *p;
 
 		/* Now use the user's name to search the shadow file. */
-		values = lu_ent_get(ent, LU_USERNAME);
-		if (values != NULL) {
-			GValue *value;
-			char *p;
-
-			value = g_value_array_get_nth(values, 0);
-			p = lu_value_strdup(value);
+		p = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
+		if (p != NULL) {
 			ret = generic_lookup(module, suffix_shadow, p, 1,
 					     lu_shadow_parse_user_entry,
 					     ent, error);
@@ -584,15 +579,10 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 
 	ret = lu_files_group_lookup_id(module, gid, ent, error);
 	if (ret) {
-		GValueArray *values;
+		char *p;
 
-		values = lu_ent_get(ent, LU_GROUPNAME);
-		if (values != NULL) {
-			GValue *value;
-			char *p;
-
-			value = g_value_array_get_nth(values, 0);
-			p = lu_value_strdup(value);
+		p = lu_ent_get_first_value_strdup(ent, LU_GROUPNAME);
+		if (p != NULL) {
 			ret = generic_lookup(module, suffix_gshadow, p, 1,
 					     lu_shadow_parse_group_entry,
 					     ent, error);
@@ -967,7 +957,6 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	int fd;
 	gpointer lock;
 	const char *dir, *name_attribute;
-	GValueArray *names;
 	gboolean ret = FALSE;
 	struct stat st;
 	size_t len;
@@ -986,8 +975,9 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	else
 		g_assert_not_reached();
 
-	names = lu_ent_get_current(ent, name_attribute);
-	if (names == NULL) {
+	current_name = lu_ent_get_first_value_strdup_current(ent,
+							     name_attribute);
+	if (current_name == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("entity object has no %s attribute"),
 			     name_attribute);
@@ -1040,7 +1030,6 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	}
 	contents[st.st_size] = '\0';
 
-	current_name = lu_value_strdup(g_value_array_get_nth(names, 0));
 	fragment = g_strconcat("\n", current_name, ":", (const gchar *)NULL);
 	len = strlen(current_name);
 	if (strncmp(contents, current_name, len) == 0 && contents[len] == ':')
@@ -1054,13 +1043,11 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 
 	if ((strncmp(new_line, current_name, len) != 0 || new_line[len] != ':')
 	    && entry_name_conflicts(contents, new_line)) {
-		g_free(current_name);
 		lu_error_new(error, lu_error_generic,
 			     _("entry with conflicting name already present "
 			       "in file"));
 		goto err_contents;
 	}
-	g_free(current_name);
 
 	if (line == NULL) {
 		lu_error_new(error, lu_error_search, NULL);
@@ -1103,6 +1090,7 @@ err_new_line:
 	g_free(new_line);
 err_filename:
 	g_free(filename);
+	g_free(current_name);
 	return ret;
 }
 
@@ -1148,10 +1136,9 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	GValueArray *name = NULL;
-	GValue *value;
+	char *name;
 	char *contents, *filename, *key;
-	char *fragment1, *fragment2;
+	char *fragment2;
 	const char *dir;
 	struct stat st;
 	size_t len;
@@ -1162,9 +1149,9 @@ generic_del(struct lu_module *module, const char *file_suffix,
 
 	/* Get the entity's current name. */
 	if (ent->type == lu_user)
-		name = lu_ent_get_current(ent, LU_USERNAME);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_USERNAME);
 	else if (ent->type == lu_group)
-		name = lu_ent_get_current(ent, LU_GROUPNAME);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_GROUPNAME);
 	else
 		g_assert_not_reached();
 	g_assert(name != NULL);
@@ -1217,21 +1204,18 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	}
 	contents[st.st_size] = '\0';
 
-	/* Generate string versions of what the beginning of a line might
-	 * look like. */
-	value = g_value_array_get_nth(name, 0);
-	fragment1 = lu_value_strdup(value);
-	fragment2 = g_strconcat("\n", fragment1, ":", (const gchar *)NULL);
+	/* Generate a pattern for a beginning of a non-first line */
+	fragment2 = g_strconcat("\n", name, ":", (const gchar *)NULL);
 
 	/* Remove all occurrences of this entry from the file. */
-	len = strlen(fragment1);
+	len = strlen(name);
 	do {
 		char *tmp;
 
 		found = FALSE;
 		/* If the data is on the first line of the file, we remove the
 		 * first line. */
-		if (strncmp(contents, fragment1, len) == 0
+		if (strncmp(contents, name, len) == 0
 			&& contents[len] == ':') {
 			char *p;
 
@@ -1255,7 +1239,6 @@ generic_del(struct lu_module *module, const char *file_suffix,
 		}
 	} while(found);
 
-	g_free(fragment1);
 	g_free(fragment2);
 
 	/* If the resulting memory chunk is the same size as the file, then
@@ -1303,6 +1286,7 @@ err_fscreate:
 	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
+	g_free(name);
 	return ret;
 }
 
@@ -1383,8 +1367,6 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	GValueArray *name = NULL;
-	GValue *val;
 	char *filename, *key;
 	const char *dir;
 	char *value, *new_value, *namestring;
@@ -1395,10 +1377,13 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	/* Get the name which keys the entries of interest in the file. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		name = lu_ent_get_current(ent, LU_USERNAME);
+		namestring = lu_ent_get_first_value_strdup_current(ent,
+								   LU_USERNAME);
 	if (ent->type == lu_group)
-		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	g_assert(name != NULL);
+		namestring
+			= lu_ent_get_first_value_strdup_current(ent,
+								LU_GROUPNAME);
+	g_assert(namestring != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1430,14 +1415,10 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
 		goto err_fd;
 
-	/* Generate a string representation of the name. */
-	val = g_value_array_get_nth(name, 0);
-	namestring = lu_value_strdup(val);
-
 	/* Read the old value from the file. */
 	value = lu_util_field_read(fd, namestring, field, error);
 	if (value == NULL)
-		goto err_namestring;
+		goto err_lock;
 
 	/* Check that we actually care about this.  If there's a non-empty,
 	 * not locked string in there, but it's too short to be a hash, then
@@ -1445,21 +1426,20 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	if (LU_CRYPT_INVALID(value)) {
 		g_free(value);
 		ret = TRUE;
-		goto err_namestring;
+		goto err_lock;
 	}
 
 	/* Generate a new value for the file. */
 	new_value = lock_process(value, op, ent, error);
 	g_free(value);
 	if (new_value == NULL)
-		goto err_namestring;
+		goto err_lock;
 
 	/* Make the change. */
 	ret = lu_util_field_write(fd, namestring, field, new_value, error);
 	/* Fall through */
 
- err_namestring:
-	g_free(namestring);
+err_lock:
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
@@ -1467,6 +1447,7 @@ err_fscreate:
 	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
+	g_free(namestring);
 	return ret;
 }
 
@@ -1475,22 +1456,23 @@ static gboolean
 generic_is_locked(struct lu_module *module, const char *file_suffix,
 		  int field, struct lu_ent *ent, struct lu_error **error)
 {
-	GValueArray *name = NULL;
-	GValue *val;
 	char *filename, *key;
 	const char *dir;
 	char *value, *namestring;
 	int fd;
 	gpointer lock;
-	gboolean ret;
+	gboolean ret = FALSE;
 
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		name = lu_ent_get_current(ent, LU_USERNAME);
+		namestring = lu_ent_get_first_value_strdup_current(ent,
+								   LU_USERNAME);
 	if (ent->type == lu_group)
-		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	g_assert(name != NULL);
+		namestring
+			= lu_ent_get_first_value_strdup_current(ent,
+								LU_GROUPNAME);
+	g_assert(namestring != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1507,38 +1489,30 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		g_free(filename);
-		return FALSE;
+		goto err_filename;
 	}
 
 	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
-
-	/* Construct the actual name of the account holder(s). */
-	val = g_value_array_get_nth(name, 0);
-	namestring = lu_value_strdup(val);
+	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
+		goto err_fd;
 
 	/* Read the value. */
 	value = lu_util_field_read(fd, namestring, field, error);
-	g_free (namestring);
-	if (value == NULL) {
-		lu_util_lock_free(lock);
-		close(fd);
-		g_free(filename);
-		return FALSE;
-	}
+	if (value == NULL)
+		goto err_lock;
 
 	/* It all comes down to this. */
 	ret = value[0] == '!';
 	g_free(value);
+	/* Fall through */
 
+err_lock:
 	lu_util_lock_free(lock);
+err_fd:
 	close(fd);
+err_filename:
 	g_free(filename);
+	g_free(namestring);
 	return ret;
 }
 
@@ -1689,8 +1663,6 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	GValueArray *name = NULL;
-	GValue *val;
 	char *filename, *key, *value, *namestring;
 	const char *dir;
 	int fd;
@@ -1700,10 +1672,13 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		name = lu_ent_get_current(ent, LU_USERNAME);
+		namestring = lu_ent_get_first_value_strdup_current(ent,
+								   LU_USERNAME);
 	else if (ent->type == lu_group)
-		name = lu_ent_get_current(ent, LU_GROUPNAME);
-	g_assert(name != NULL);
+		namestring
+			= lu_ent_get_first_value_strdup_current(ent,
+								LU_GROUPNAME);
+	g_assert(namestring != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1736,14 +1711,10 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
 		goto err_fd;
 
-	/* Get the name of the account. */
-	val = g_value_array_get_nth(name, 0);
-	namestring = lu_value_strdup(val);
-
 	/* Read the current contents of the field. */
 	value = lu_util_field_read(fd, namestring, field, error);
 	if (value == NULL)
-		goto err_namestring;
+		goto err_lock;
 
 	/* pam_unix uses shadow passwords only if pw_passwd is "x"
 	   (or ##${username}).  Make sure to preserve the shadow marker
@@ -1793,8 +1764,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 
  err_value:
 	g_free(value);
- err_namestring:
-	g_free(namestring);
+err_lock:
 	lu_util_lock_free(lock);
  err_fd:
 	close(fd);
@@ -1802,6 +1772,7 @@ err_fscreate:
 	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
+	g_free(namestring);
 	return ret;
 }
 

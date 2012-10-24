@@ -1030,13 +1030,10 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 		    && lu_ent_get(ent, LU_COMMONNAME) == NULL) {
 			char *cn;
 
-			cn = NULL;
-			vals = lu_ent_get(ent, LU_GECOS);
-			if (vals != NULL) {
+			cn = lu_ent_get_first_value_strdup(ent, LU_GECOS);
+			if (cn != NULL) {
 				char *p;
 
-				value = g_value_array_get_nth(vals, 0);
-				cn = lu_value_strdup(value);
 				p = strchr(cn, ',');
 				if (p != NULL)
 					*p = 0;
@@ -1046,11 +1043,10 @@ get_ent_adds(const char *dn, struct lu_ent *ent)
 			}
 			if (cn == NULL || *cn == 0) {
 				g_free(cn);
-				vals = lu_ent_get(ent, LU_USERNAME);
+				cn = lu_ent_get_first_value_strdup(ent,
+								   LU_USERNAME);
 				/* Guaranteed by lu_ldap_set() */
-				g_assert (vals != NULL);
-				value = g_value_array_get_nth(vals, 0);
-				cn = lu_value_strdup(value);
+				g_assert (cn != NULL);
 			}
 			mod = g_malloc0(sizeof(*mod));
 			mod->mod_op = LDAP_MOD_ADD;
@@ -1431,8 +1427,6 @@ static gboolean
 lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 	    struct lu_ent *ent, const char *branch, struct lu_error **error)
 {
-	GValueArray *name;
-	GValue *value;
 	char *name_string;
 	const char *dn, *namingAttr;
 	int err;
@@ -1454,16 +1448,14 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 		namingAttr = LU_GROUPNAME;
 	}
 
-	name = lu_ent_get(ent, namingAttr);
-	if (name == NULL) {
+	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name_string == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object had no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	value = g_value_array_get_nth(name, 0);
-	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
 	g_free(name_string);
 	/* Process the removal. */
@@ -1509,8 +1501,6 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	const char *dn;
 	gboolean ret = FALSE;
 	LDAPMod mod[2], *mods[3];
-	GValueArray *name, *password;
-	GValue *value;
 	char *result, *name_string, *oldpassword, *values[2][2];
 	const char *tmp, *attribute;
 	struct lu_ldap_context *ctx;
@@ -1524,32 +1514,28 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	ctx = module->module_context;
 
 	/* Get the entry's name. */
-	name = lu_ent_get(ent, namingAttr);
-	if (name == NULL) {
+	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name_string == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	value = g_value_array_get_nth(name, 0);
-	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
 	g_free(name_string);
 
 	attribute = ent->type == lu_user ? LU_USERPASSWORD : LU_GROUPPASSWORD;
 
-	/* Get the values for the entry's password. */
-	password = lu_ent_get_current(ent, attribute);
-	if (password == NULL) {
+	/* Get the values for the entry's password.
+	   Note that this handles only one userPassword value! */
+	oldpassword = lu_ent_get_first_value_strdup_current(ent, attribute);
+	if (oldpassword == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"),
 			     LU_USERPASSWORD);
 		return FALSE;
 	}
-	/* Note that this handles only one userPassword value! */
-	value = g_value_array_get_nth(password, 0);
-	oldpassword = lu_value_strdup(value);
 
 	/* We only know how to lock crypted passwords, so crypt it if it
 	 * isn't already. */
@@ -1648,8 +1634,6 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 	static const char mapped_password[] = "userPassword";
 
 	const char *dn;
-	GValueArray *name;
-	GValue *value;
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
 	char *attributes[] = { NULL, NULL };
@@ -1659,16 +1643,14 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 	gboolean locked;
 
 	/* Get the name of the user or group. */
-	name = lu_ent_get(ent, namingAttr);
-	if (name == NULL) {
+	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name_string == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	value = g_value_array_get_nth(name, 0);
-	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
 	g_free(name_string);
 #ifdef DEBUG
@@ -1739,8 +1721,6 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	static const char mapped_password[] = "userPassword";
 
 	const char *dn;
-	GValueArray *name;
-	GValue *value;
 	char *name_string;
 	struct lu_ldap_context *ctx = module->module_context;
 	char *attributes[] = { NULL, NULL };
@@ -1758,16 +1738,14 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 #ifdef DEBUG
 	g_print("Setting password to `%s'.\n", password);
 #endif
-	name = lu_ent_get(ent, namingAttr);
-	if (name == NULL) {
+	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name_string == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	value = g_value_array_get_nth(name, 0);
-	name_string = lu_value_strdup(value);
 	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
 #ifdef DEBUG
 	g_print("Setting password for `%s'.\n", dn);

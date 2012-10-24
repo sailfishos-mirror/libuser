@@ -35,7 +35,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent;
-	GValueArray *values;
+	char *shell;
 	int interactive = FALSE;
 	int c;
 	poptContext popt;
@@ -104,19 +104,18 @@ main(int argc, const char **argv)
 	}
 
 	/* Read the user's shell. */
-	values = lu_ent_get(ent, LU_LOGINSHELL);
-	if (values != NULL) {
+	shell = lu_ent_get_first_value_strdup(ent, LU_LOGINSHELL);
+	if (shell != NULL) {
 		struct lu_prompt prompts[1];
-		GValue *value, val;
+		GValue val;
 
-		value = g_value_array_get_nth(values, 0);
 		/* Fill in the prompt structure using the user's shell. */
 		memset(prompts, 0, sizeof(prompts));
 		prompts[0].key = "lchfn/shell";
 		prompts[0].prompt = N_("New Shell");
 		prompts[0].domain = PACKAGE;
 		prompts[0].visible = TRUE;
-		prompts[0].default_value = lu_value_strdup(value);
+		prompts[0].default_value = shell;
 		/* Prompt for a new shell. */
 		if (lu_prompt_console(prompts, G_N_ELEMENTS(prompts),
 				      NULL, &error) == FALSE) {

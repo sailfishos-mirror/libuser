@@ -1,5 +1,26 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_get_first_value_strdup_int)
+	(lu_ent_get_first_value_strdup)
+	(lu_ent_get_first_value_strdup_current): New functions.
+	* lib/entity.h (lu_ent_get_first_value_strdup)
+	(lu_ent_get_first_value_strdup_current): New declarations.
+	* docs/reference/libuser-sections.txt: Add lu_ent_get_first_value_strdup
+	and lu_ent_get_first_value_strdup_current.
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lusermod.c (main)
+	* lib/fs.c (mail_spool_path)
+	* lib/user.c (merge_ent_array_duplicates)
+	* modules/files.c (lu_shadow_user_lookup_id)
+	(lu_shadow_group_lookup_id, generic_mod, generic_del)
+	(generic_lock, generic_is_locked, generic_setpass)
+	* modules/ldap.c (get_ent_adds, lu_ldap_del)
+	(lu_ldap_handle_lock, lu_ldap_is_locked, lu_ldap_setpass)
+	* modules/sasldb.c (lu_sasldb_user_is_locked): Use
+	lu_ent_get_first_value_strdup() and
+	lu_ent_get_first_value_strdup_current().
+
 	* apps/luserdel.c (main): Don't use the same entity for groups and
 	users (potentially looking up LU_HOMEDIR_COPY in the group data).
 

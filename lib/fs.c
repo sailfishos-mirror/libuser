@@ -509,18 +509,11 @@ static char *
 mail_spool_path(struct lu_context *ctx, struct lu_ent *ent,
 		struct lu_error **error)
 {
-	GValueArray *array;
-	GValue *value;
 	const char *spooldir;
 	char *p, *username;
 
 	/* Now get the user's login. */
-	username = NULL;
-	array = lu_ent_get(ent, LU_USERNAME);
-	if (array != NULL) {
-		value = g_value_array_get_nth(array, 0);
-		username = lu_value_strdup(value);
-	}
+	username = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
 	if (username == NULL) {
 		lu_error_new(error, lu_error_name_bad,
 			     _("Missing user name"));

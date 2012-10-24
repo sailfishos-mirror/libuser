@@ -44,7 +44,6 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values;
 	GPtrArray *groups = NULL;
 	GValue *value, val;
 	int change, move_home = FALSE, lock = FALSE, unlock = FALSE;
@@ -271,9 +270,7 @@ main(int argc, const char **argv)
 	 * of the old values. */
 	old_uid = NULL;
 	if (uid != NULL) {
-		values = lu_ent_get(ent, LU_USERNAME);
-		value = g_value_array_get_nth(values, 0);
-		old_uid = lu_value_strdup(value);
+		old_uid = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
 		g_value_set_string(&val, uid);
 		lu_ent_clear(ent, LU_USERNAME);
 		lu_ent_add(ent, LU_USERNAME, &val);
@@ -283,9 +280,8 @@ main(int argc, const char **argv)
 	}
 	oldHomeDirectory = NULL;
 	if (homeDirectory != NULL) {
-		values = lu_ent_get(ent, LU_HOMEDIRECTORY);
-		value = g_value_array_get_nth(values, 0);
-		oldHomeDirectory = lu_value_strdup(value);
+		oldHomeDirectory
+			= lu_ent_get_first_value_strdup(ent, LU_HOMEDIRECTORY);
 		g_value_set_string(&val, homeDirectory);
 		lu_ent_clear(ent, LU_HOMEDIRECTORY);
 		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);

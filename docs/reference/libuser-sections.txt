@@ -65,6 +65,8 @@ lu_ent_dump
 lu_ent_get
 lu_ent_get_first_string
 lu_ent_get_first_string_current
+lu_ent_get_first_value_strdup
+lu_ent_get_first_value_strdup_current
 lu_ent_get_first_id
 lu_ent_get_first_id_current
 lu_ent_get_attributes

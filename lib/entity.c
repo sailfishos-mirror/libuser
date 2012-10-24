@@ -376,6 +376,21 @@ lu_ent_get_first_string_int(GArray *list, const char *attribute)
 	return g_value_get_string(v);
 }
 
+/* Return a string representation of the first value of ATTRIBUTE in LIST if
+   any, or NULL if ATTRIBUTE doesn't exist or on error.
+
+   The caller should call g_free() on the result. */
+static char *
+lu_ent_get_first_value_strdup_int(GArray *list, const char *attribute)
+{
+	GValueArray *vals;
+
+	vals = lu_ent_get_int(list, attribute);
+	if (vals == NULL)
+		return NULL;
+	return lu_value_strdup(g_value_array_get_nth(vals, 0));
+}
+
 /* Return an id_t contents of the first value of ATTRIBUTE in LIST if any,
    or LU_VALUE_INVALID_ID if ATTRIBUTE doesn't exist or on error. */
 static id_t
@@ -612,6 +627,47 @@ lu_ent_get_first_string_current(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(attribute != NULL, NULL);
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_first_string_int(ent->current, attribute);
+}
+
+/**
+ * lu_ent_get_first_value_strdup:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns a string representation (as if by lu_value_strdup()) of the first
+ * value associated with a pending attribute in a struct #lu_ent.
+ *
+ * Returns: a string, should be freed by g_free() if the attribute is present.
+ * Returns %NULL if the attribute is not present or on error.
+ */
+char *
+lu_ent_get_first_value_strdup(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_value_strdup_int(ent->pending, attribute);
+}
+/**
+ * lu_ent_get_first_value_strdup_current:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns a string representation (as if by lu_value_strdup()) of the first
+ * value associated with a current attribute in a struct #lu_ent.
+ *
+ * Returns: a string, should be freed by g_free() if the attribute is present.
+ * Returns %NULL if the attribute is not present or on error.
+ */
+char *
+lu_ent_get_first_value_strdup_current(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_value_strdup_int(ent->current, attribute);
 }
 
 /**
