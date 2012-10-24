@@ -74,6 +74,8 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	poptFreeContext(popt);
+
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);

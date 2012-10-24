@@ -78,6 +78,8 @@ main(int argc, const char **argv)
 		}
 	}
 
+	poptFreeContext(popt);
+
 	/* Give the user some idea of what's going on. */
 	g_print(_("Changing shell for %s.\n"), user);
 

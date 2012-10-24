@@ -127,6 +127,8 @@ main(int argc, const char **argv)
 		return 1;
 	}
 
+	poptFreeContext(popt);
+
 	/* Start up the library. */
 	ctx = lu_start(user, lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console :

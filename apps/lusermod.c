@@ -148,6 +148,7 @@ main(int argc, const char **argv)
 		uidNumber = val;
 	}
 
+	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -354,7 +355,10 @@ main(int argc, const char **argv)
 						  "modified: %s.\n"),
 					groupname, lu_strerror(error));
 			}
+			lu_ent_free(group);
 		}
+		g_ptr_array_free(groups, TRUE);
+
        		lu_nscd_flush_cache("group");
 	}
 

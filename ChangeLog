@@ -1,5 +1,22 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lgroupmod.c (main)
+	* apps/lusermod.c (main): Fix a memory leak.
+
+	* apps/lchage.c (main):
+	* apps/lchfn.c (main):
+	* apps/lchsh.c (main):
+	* apps/lgroupadd.c (main):
+	* apps/lgroupdel.c (main):
+	* apps/lgroupmod.c (main):
+	* apps/lid.c (main):
+	* apps/lnewusers.c (main):
+	* apps/lpasswd.c (main):
+	* apps/luseradd.c (main):
+	* apps/luserdel.c (main):
+	* apps/lusermod.c (main):
+	* apps/luseradd.c (main): Free popt context after use.
+
 	* tests/valgrind.supp: One more glibc suppression.
 
 	* modules/ldap.c (get_ent_adds): Fix a memory leak.

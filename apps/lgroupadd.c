@@ -92,6 +92,8 @@ main(int argc, const char **argv)
 		gidNumber = val;
 	}
 
+	poptFreeContext(popt);
+
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :

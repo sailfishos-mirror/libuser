@@ -180,6 +180,8 @@ main(int argc, const char **argv)
 		}
 	}
 
+	poptFreeContext(popt);
+
 	ctx = lu_start(name, groupflag ? lu_user : lu_group, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);

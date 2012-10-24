@@ -110,7 +110,9 @@ main(int argc, const char **argv)
 		}
 		gidNumber = val;
 	}
-	
+
+	poptFreeContext(popt);
+
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
 		       lu_prompt_console_quiet, NULL, &error);
@@ -297,8 +299,10 @@ main(int argc, const char **argv)
 				if (error != NULL)
 					lu_error_free(&error);
 			}
+			lu_ent_free(ent);
 		}
 		g_value_unset(&val);
+		g_ptr_array_free(users, TRUE);
 
 		lu_nscd_flush_cache("passwd");
 	}

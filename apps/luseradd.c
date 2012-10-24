@@ -135,6 +135,8 @@ main(int argc, const char **argv)
 		uidNumber = imax;
 	}
 
+	poptFreeContext(popt);
+
 	/* Initialize the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
