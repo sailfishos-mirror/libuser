@@ -1,5 +1,8 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* Makefile.am (VG_EXECUTION): Use a more practical valgrind
+	configuration.
+
 	* tests/valgrind.supp: Add generic NSS initialization suppression.
 
 	* tests/valgrind.supp: Also cover SHA-256 in glibc suppression.

@@ -12,9 +12,13 @@ AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
 PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 
+# Ignore possibly lost, there are too many due to Python.  --gen-suppressions
+# makes the run interactive, which is not good for regression testing - we
+# are not there yet.
 VG_EXECUTION = libtool --mode=execute \
 	valgrind --quiet --suppressions=$(srcdir)/tests/valgrind.supp \
-	--leak-check=full --log-fd=3
+	--leak-check=full --num-callers=20 --log-fd=3 \
+	--gen-suppressions=yes --show-possibly-lost=no
 VG_ENVIRONMENT = G_SLICE=always-malloc \
 	G_DEBUG=gc-friendly,resident-modules
 
