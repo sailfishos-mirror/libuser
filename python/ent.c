@@ -370,22 +370,22 @@ static PyObject *
 libuser_entity_getattrlist(PyObject *self, PyObject *ignore)
 {
 	struct libuser_entity *me;
-	GList *i;
+	GList *list, *i;
 	PyObject *ret;
 
 	(void)ignore;
 	DEBUG_ENTRY;
 	me = (struct libuser_entity *)self;
 	ret = PyList_New(0);
-	for (i = lu_ent_get_attributes(me->ent);
-	     i != NULL;
-	     i = g_list_next(i)) {
+	list = lu_ent_get_attributes(me->ent);
+	for (i = list; i != NULL; i = g_list_next(i)) {
 		PyObject *str;
 
 		str = PyString_FromString((char*)i->data);
 		PyList_Append(ret, str);
 		Py_DECREF(str);
 	}
+	g_list_free(list);
 	DEBUG_EXIT;
 	return ret;
 }
@@ -588,10 +588,15 @@ static Py_ssize_t
 libuser_entity_length(PyObject *self)
 {
 	struct libuser_entity *me;
+	GList *list;
+	Py_ssize_t ret;
 
 	DEBUG_CALL;
 	me = (struct libuser_entity *)self;
-	return g_list_length(lu_ent_get_attributes(me->ent));
+	list = lu_ent_get_attributes(me->ent);
+	ret = g_list_length(list);
+	g_list_free(list);
+	return ret;
 }
 
 /* Get the value for a particular item, dictionary style. */

@@ -1,5 +1,8 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ent.c (libuser_entity_getattrlist)
+	(libuser_entity_length): Fix memory leaks.
+
 	* modules/files.c (lu_files_groups_enumerate_by_user): Fix two memory
 	leaks.  Simplify error handling a little.
 
