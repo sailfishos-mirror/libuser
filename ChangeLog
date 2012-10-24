@@ -1,5 +1,8 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (mail_spool_path): Split from ...
+	(lu_mailspool_create_remove): ... here.
+
 	* tests/valgrind.supp: Add popt suppressions.
 
 	* apps/lnewusers.c (main)

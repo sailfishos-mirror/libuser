@@ -728,6 +728,34 @@ lu_nscd_flush_cache (const char *table)
 		; /* Nothing */
 }
 
+/* Return mail spool path for an USER.
+   Returns: A path for g_free (), or NULL on error */
+static char *
+mail_spool_path(struct lu_context *ctx, struct lu_ent *ent)
+{
+	GValueArray *array;
+	GValue *value;
+	const char *spooldir;
+	char *p, *username;
+
+	/* Now get the user's login. */
+	username = NULL;
+	array = lu_ent_get(ent, LU_USERNAME);
+	if (array != NULL) {
+		value = g_value_array_get_nth(array, 0);
+		username = lu_value_strdup(value);
+	}
+	g_return_val_if_fail(username != NULL, NULL);
+
+	/* Get the location of the spool directory. */
+	spooldir = lu_cfg_read_single(ctx, "defaults/mailspooldir",
+				      "/var/mail");
+
+	p = g_strconcat(spooldir, "/", username, (const gchar *)NULL);
+	g_free(username);
+	return p;
+}
+
 /* Create a mail spool for the user. */
 gboolean
 lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
@@ -735,13 +763,15 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 {
 	GValueArray *array;
 	GValue *value;
-	const char *spooldir;
 	uid_t uid;
 	gid_t gid;
-	char *p, *username;
+	char *p;
 	struct lu_ent *groupEnt;
 	struct lu_error *error = NULL;
 
+	p = mail_spool_path(ctx, ent);
+	if (p == NULL)
+		return FALSE;
 	/* Find the GID of the owner of the file. */
 	gid = LU_VALUE_INVALID_ID;
 	groupEnt = lu_ent_new();
@@ -786,22 +816,6 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	}
 	g_return_val_if_fail(uid != LU_VALUE_INVALID_ID, FALSE);
 
-	/* Now get the user's login. */
-	username = NULL;
-	array = lu_ent_get(ent, LU_USERNAME);
-	if (array != NULL) {
-		value = g_value_array_get_nth(array, 0);
-		username = lu_value_strdup(value);
-	}
-	g_return_val_if_fail(username != NULL, FALSE);
-
-	/* Get the location of the spool directory. */
-	spooldir = lu_cfg_read_single(ctx, "defaults/mailspooldir",
-				      "/var/mail");
-
-	/* That wasn't that hard.  Now we just need to create the file. */
-	p = g_strconcat(spooldir, "/", username, (const gchar *)NULL);
-	g_free(username);
 	if (action) {
 		int fd;
 
