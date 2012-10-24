@@ -674,6 +674,7 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
+	gboolean res;
 
 	DEBUG_ENTRY;
 
@@ -685,7 +686,11 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 	}
 
 	/* Now just pass it to the internal function. */
-	if (lu_mailspool_create_remove(me->ctx, ent->ent, action)) {
+	if (action)
+		res = lu_mail_spool_create(me->ctx, ent->ent);
+	else
+		res = lu_mail_spool_remove(me->ctx, ent->ent);
+	if (res) {
 		return PyInt_FromLong(1);
 	} else {
 		PyErr_SetString(PyExc_RuntimeError,
@@ -762,7 +767,7 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	if (ret != NULL && mkmailspool != NULL
 	    && PyObject_IsTrue(mkmailspool)) {
 		Py_DECREF(ret);
-		if (lu_mailspool_create_remove(context, ent->ent, TRUE))
+		if (lu_mail_spool_create(context, ent->ent))
 			ret = PyInt_FromLong(1);
 		else {
 			PyErr_SetString(PyExc_RuntimeError,
@@ -883,7 +888,7 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 
 		Py_DECREF(ret);
 		entity = (struct libuser_entity *)ent;
-		if (lu_mailspool_create_remove(context, entity->ent, TRUE))
+		if (lu_mail_spool_remove(context, entity->ent))
 			ret = PyInt_FromLong(1);
 		else {
 			PyErr_SetString(PyExc_RuntimeError,

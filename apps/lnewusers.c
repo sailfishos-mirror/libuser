@@ -314,8 +314,7 @@ main(int argc, const char **argv)
 			/* Unless the nocreatemail flag was given, give the
 			 * user a mail spool. */
 			if (!nocreatemail) {
-				if (!lu_mailspool_create_remove(ctx, ent,
-								TRUE))
+				if (!lu_mail_spool_create(ctx, ent))
 					fprintf(stderr,
 						_("Error creating mail spool "
 						  "for %s.\n"), fields[0]);

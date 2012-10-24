@@ -758,20 +758,21 @@ mail_spool_path(struct lu_context *ctx, struct lu_ent *ent)
 
 /* Create a mail spool for the user. */
 gboolean
-lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
-			   gboolean action)
+lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
 {
 	GValueArray *array;
 	GValue *value;
 	uid_t uid;
 	gid_t gid;
-	char *p;
+	char *spool_path;
 	struct lu_ent *groupEnt;
 	struct lu_error *error = NULL;
+	int fd;
 
-	p = mail_spool_path(ctx, ent);
-	if (p == NULL)
+	spool_path = mail_spool_path(ctx, ent);
+	if (spool_path == NULL)
 		return FALSE;
+
 	/* Find the GID of the owner of the file. */
 	gid = LU_VALUE_INVALID_ID;
 	groupEnt = lu_ent_new();
@@ -816,31 +817,39 @@ lu_mailspool_create_remove(struct lu_context *ctx, struct lu_ent *ent,
 	}
 	g_return_val_if_fail(uid != LU_VALUE_INVALID_ID, FALSE);
 
-	if (action) {
-		int fd;
+	fd = open(spool_path, O_WRONLY | O_CREAT, 0);
+	g_free(spool_path);
+	if (fd != -1) {
+		gboolean res = TRUE;
 
-		fd = open(p, O_WRONLY | O_CREAT, 0);
-		if (fd != -1) {
-			gboolean res = TRUE;
+		if (fchown(fd, uid, gid) == -1)
+			res = FALSE;
+		if (fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) == -1)
+			res = FALSE;
+		close(fd);
+		return res;
+	}
 
-			if (fchown(fd, uid, gid) == -1)
-				res = FALSE;
-			if (fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP)
-			    == -1)
-				res = FALSE;
-			close(fd);
-			g_free(p);
-			return res;
-		}
-	} else {
-		if (unlink(p) == 0) {
-			g_free(p);
-			return TRUE;
-		}
-		if (errno == ENOENT) {
-			g_free(p);
-			return TRUE;
-		}
+	return FALSE;
+}
+
+/* Remove user's mail spool */
+gboolean
+lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent)
+{
+	char *p;
+
+	p = mail_spool_path(ctx, ent);
+	if (p == NULL)
+		return FALSE;
+
+	if (unlink(p) == 0) {
+		g_free(p);
+		return TRUE;
+	}
+	if (errno == ENOENT) {
+		g_free(p);
+		return TRUE;
 	}
 	g_free(p);
 

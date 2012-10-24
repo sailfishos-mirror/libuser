@@ -1,5 +1,13 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (lu_mail_spool_create, lu_mail_spool_remove): Split...
+	(lu_mailspool_create_remove): ... this.  All users updated.
+	* apps/apputil.h (lu_mail_spool_create, lu_mail_spool_remove): New
+	declarations.
+	(lu_mailspool_create_remove): Remove declaration.
+	* python/admin.c (libuser_admin_delete_user): Instead of creating a mail
+	spool, remove it.
+
 	* apps/apputil.c (mail_spool_path): Split from ...
 	(lu_mailspool_create_remove): ... here.
 
