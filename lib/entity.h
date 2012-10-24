@@ -244,6 +244,7 @@ void lu_ent_commit(struct lu_ent *ent);
 GValueArray *lu_ent_get_current(struct lu_ent *ent, const char *attribute);
 const char *lu_ent_get_first_current_string(struct lu_ent *ent,
 					    const char *attribute);
+id_t lu_ent_get_first_current_id(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has_current(struct lu_ent *ent, const char *attribute);
 void lu_ent_set_current(struct lu_ent *ent, const char *attr,
 			const GValueArray *values);
@@ -257,6 +258,7 @@ GList *lu_ent_get_attributes_current(struct lu_ent *ent);
 
 GValueArray *lu_ent_get(struct lu_ent *ent, const char *attribute);
 const char *lu_ent_get_first_string(struct lu_ent *ent, const char *attribute);
+id_t lu_ent_get_first_id(struct lu_ent *ent, const char *attribute);
 gboolean lu_ent_has(struct lu_ent *ent, const char *attribute);
 void lu_ent_set(struct lu_ent *ent, const char *attr,
 		const GValueArray *values);

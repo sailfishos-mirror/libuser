@@ -102,8 +102,7 @@ main(int argc, const char **argv)
 		intmax_t imax;
 		uid_t uid;
 		gid_t gid;
-		GValueArray *values;
-		GValue *value, val;
+		GValue val;
 
 		/* Strip off the end-of-line terminators. */
 		p = strchr(buf, '\r');
@@ -160,13 +159,7 @@ main(int argc, const char **argv)
 			 * see if it's being used. */
 			if (lu_group_lookup_name(ctx, gidstring, ent, &error)) {
 				/* Retrieve the group's GID. */
-				values = lu_ent_get(ent, LU_GIDNUMBER);
-				if (values != NULL) {
-					value = g_value_array_get_nth(values,
-								      0);
-					gid = lu_value_get_id(value);
-					g_assert(gid != LU_VALUE_INVALID_ID);
-				}
+				gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 				creategroup = FALSE;
 			} else {
 				/* Mark that we need to create a group for the
@@ -183,13 +176,7 @@ main(int argc, const char **argv)
 			}
 			if (lu_group_lookup_id(ctx, gid, ent, &error)) {
 				/* Retrieve the group's GID. */
-				values = lu_ent_get(ent, LU_GIDNUMBER);
-				if (values != NULL) {
-					value = g_value_array_get_nth(values,
-								      0);
-					gid = lu_value_get_id(value);
-					g_assert(gid != LU_VALUE_INVALID_ID);
-				}
+				gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 				creategroup = FALSE;
 			} else {
 				/* Mark that we need to create a group for the
@@ -216,9 +203,7 @@ main(int argc, const char **argv)
 			 * GID, which we need to give to this user. */
 			if (lu_group_add(ctx, ent, &error)) {
 				lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
-				values = lu_ent_get(ent, LU_GIDNUMBER);
-				value = g_value_array_get_nth(values, 0);
-				gid = lu_value_get_id(value);
+				gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 				g_assert(gid != LU_VALUE_INVALID_ID);
 			} else {
 				/* Aargh!  Abandon all hope. */

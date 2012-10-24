@@ -44,7 +44,7 @@ main(int argc, const char **argv)
 	struct lu_error *error = NULL;
 	GValueArray *values = NULL;
 	GPtrArray *users = NULL;
-	GValue *value, val;
+	GValue val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -251,12 +251,7 @@ main(int argc, const char **argv)
 	if (gidNumber != LU_VALUE_INVALID_ID) {
 		users = lu_users_enumerate_by_group_full(ctx, gid, &error);
 
-		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if (values) {
-			value = g_value_array_get_nth(values, 0);
-			oldGidNumber = lu_value_get_id(value);
-			g_assert(oldGidNumber != LU_VALUE_INVALID_ID);
-		}
+		oldGidNumber = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 
 		memset(&val, 0, sizeof(val));
 		lu_value_init_set_id(&val, gidNumber);
@@ -289,10 +284,8 @@ main(int argc, const char **argv)
 
 		for (i = 0; i < users->len; i++) {
 			ent = g_ptr_array_index(users, i);
-			values = lu_ent_get(ent, LU_GIDNUMBER);
-			if (values != NULL &&
-			    lu_value_get_id(g_value_array_get_nth(values, 0)) ==
-			    oldGidNumber) {
+			if (lu_ent_get_first_id(ent, LU_GIDNUMBER)
+			    == oldGidNumber) {
 				lu_ent_clear(ent, LU_GIDNUMBER);
 				lu_ent_add(ent, LU_GIDNUMBER, &val);
 				lu_user_modify(ctx, ent, &error);

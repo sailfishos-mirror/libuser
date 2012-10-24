@@ -550,8 +550,6 @@ gboolean
 lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
 		     struct lu_error **error)
 {
-	GValueArray *array;
-	GValue *value;
 	uid_t uid;
 	gid_t gid;
 	char *spool_path;
@@ -568,13 +566,8 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
 	gid = LU_VALUE_INVALID_ID;
 	groupEnt = lu_ent_new();
 	err2 = NULL;
-	if (lu_group_lookup_name(ctx, "mail", groupEnt, &err2)) {
-		array = lu_ent_get(groupEnt, LU_GIDNUMBER);
-		if (array != NULL) {
-			value = g_value_array_get_nth(array, 0);
-			gid = lu_value_get_id(value);
-		}
-	}
+	if (lu_group_lookup_name(ctx, "mail", groupEnt, &err2))
+		gid = lu_ent_get_first_id(groupEnt, LU_GIDNUMBER);
 	if (err2 != NULL)
 		lu_error_free(&err2);
 	lu_ent_free(groupEnt);
@@ -591,13 +584,8 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
 	}
 
 	/* Aiieee.  Use the user's group. */
-	if (gid == LU_VALUE_INVALID_ID) {
-		array = lu_ent_get(ent, LU_GIDNUMBER);
-		if (array != NULL) {
-			value = g_value_array_get_nth(array, 0);
-			gid = lu_value_get_id(value);
-		}
-	}
+	if (gid == LU_VALUE_INVALID_ID)
+		gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 	if (gid == LU_VALUE_INVALID_ID) {
 		lu_error_new(error, lu_error_generic,
 			     _("Cannot determine GID to use for mail spool"));
@@ -605,12 +593,7 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
 	}
 
 	/* Now get the user's UID. */
-	uid = LU_VALUE_INVALID_ID;
-	array = lu_ent_get(ent, LU_UIDNUMBER);
-	if (array != NULL) {
-		value = g_value_array_get_nth(array, 0);
-		uid = lu_value_get_id(value);
-	}
+	uid = lu_ent_get_first_id(ent, LU_UIDNUMBER);
 	if (uid == LU_VALUE_INVALID_ID) {
 		lu_error_new(error, lu_error_generic,
 			     _("Cannot determine UID to use for mail spool"));

@@ -280,19 +280,12 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 static id_t
 extract_id(struct lu_ent *ent)
 {
-	GValueArray *array;
-	GValue *value;
-
 	g_return_val_if_fail(ent != NULL, LU_VALUE_INVALID_ID);
 	g_return_val_if_fail((ent->type == lu_user) || (ent->type == lu_group),
 			     LU_VALUE_INVALID_ID);
-	array = lu_ent_get(ent,
-			   ent->type == lu_user ? LU_UIDNUMBER : LU_GIDNUMBER);
-	if (array == NULL)
-		return LU_VALUE_INVALID_ID;
-	value = g_value_array_get_nth(array, 0);
-	g_return_val_if_fail(value != NULL, LU_VALUE_INVALID_ID);
-	return lu_value_get_id(value);
+	return lu_ent_get_first_id(ent,
+				   ent->type == lu_user ? LU_UIDNUMBER
+				   : LU_GIDNUMBER);
 }
 
 static uid_t

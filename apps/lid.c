@@ -81,21 +81,13 @@ do_full(struct lu_context *ctx, const char *name,
 		size_t i;
 
 		for (i = 0; i < entities->len; i++) {
-			GValueArray *attrs;
-			GValue *value;
 			id_t id;
 			const char *ent_name;
 
 			ent = g_ptr_array_index(entities, i);
 			ent_name = lu_ent_get_first_string(ent, name_attribute);
 
-			attrs = lu_ent_get(ent, id_attribute);
-			if (attrs == NULL)
-				id = LU_VALUE_INVALID_ID;
-			else {
-				value = g_value_array_get_nth(attrs, 0);
-				id = lu_value_get_id(value);
-			}
+			id = lu_ent_get_first_id(ent, id_attribute);
 			if (id != LU_VALUE_INVALID_ID)
 				g_print(" %s(%s=%jd)\n", ent_name,
 					id_descr, (intmax_t)id);

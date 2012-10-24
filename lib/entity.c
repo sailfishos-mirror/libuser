@@ -359,6 +359,8 @@ lu_ent_get_int(GArray *list, const char *attribute)
 	return NULL;
 }
 
+/* Return a read-only pointer to the first string value of ATTRIBUTE in LIST
+   if any, or NULL if ATTRIBUTE doesn't exist or on error. */
 static const char *
 lu_ent_get_first_string_int(GArray *list, const char *attribute)
 {
@@ -372,6 +374,19 @@ lu_ent_get_first_string_int(GArray *list, const char *attribute)
 	if (!G_VALUE_HOLDS_STRING(v))
 		return NULL;
 	return g_value_get_string(v);
+}
+
+/* Return an id_t contents of the first value of ATTRIBUTE in LIST if any,
+   or LU_VALUE_INVALID_ID if ATTRIBUTE doesn't exist or on error. */
+static id_t
+lu_ent_get_first_id_int(GArray *list, const char *attribute)
+{
+	GValueArray *vals;
+
+	vals = lu_ent_get_int(list, attribute);
+	if (vals == NULL)
+		return LU_VALUE_INVALID_ID;
+	return lu_value_get_id(g_value_array_get_nth(vals, 0));
 }
 
 static gboolean
@@ -564,10 +579,9 @@ lu_ent_get_current(struct lu_ent *ent, const char *attribute)
  * Returns the first string associated with a pending attribute in a struct
  * #lu_ent.
  *
- * Returns: a string * pointer valid at least the value is modified or deleted
- * if the the attribute is present and the first value is a string.  Returns
- * %NULL if the attribute is not present, the first value is not a string, or
- * on error.
+ * Returns: a string pointer valid at least the value is modified or deleted if
+ * the attribute is present and the first value is a string.  Returns %NULL if
+ * the attribute is not present, the first value is not a string, or on error.
  */
 const char *
 lu_ent_get_first_string(struct lu_ent *ent, const char *attribute)
@@ -586,10 +600,9 @@ lu_ent_get_first_string(struct lu_ent *ent, const char *attribute)
  * Returns the first string associated with a current attribute in a struct
  * #lu_ent.
  *
- * Returns: a string * pointer valid at least the value is modified or deleted
- * if the the attribute is present and the first value is a string.  Returns
- * %NULL if the attribute is not present, the first value is not a string, or
- * on error.
+ * Returns: a string pointer valid at least the value is modified or deleted if
+ * the attribute is present and the first value is a string.  Returns %NULL if
+ * the attribute is not present, the first value is not a string, or on error.
  */
 const char *
 lu_ent_get_first_current_string(struct lu_ent *ent, const char *attribute)
@@ -599,6 +612,49 @@ lu_ent_get_first_current_string(struct lu_ent *ent, const char *attribute)
 	g_return_val_if_fail(attribute != NULL, NULL);
 	g_return_val_if_fail(strlen(attribute) > 0, NULL);
 	return lu_ent_get_first_string_int(ent->current, attribute);
+}
+
+/**
+ * lu_ent_get_first_id:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns the first #id_t value associated with a pending attribute in a struct
+ * #lu_ent.
+ *
+ * Returns: ID value the attribute is present and can be converted into #id_t.
+ * Returns %LU_VALUE_INVALID_ID if the attribute is not present, the first
+ * value cannot be converted, or on error.
+ */
+id_t
+lu_ent_get_first_id(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_id_int(ent->pending, attribute);
+}
+/**
+ * lu_ent_get_first_current_id:
+ * @ent: An entity
+ * @attribute: Attribute name
+ *
+ * Returns the first #id_t value associated with a current attribute in a struct
+ * #lu_ent.
+ *
+ * Returns: ID value the attribute is present and can be converted into #id_t.
+ * Returns %LU_VALUE_INVALID_ID if the attribute is not present, the first
+ * value cannot be converted, or on error.
+ */
+id_t
+lu_ent_get_first_current_id(struct lu_ent *ent, const char *attribute)
+{
+	g_return_val_if_fail(ent != NULL, NULL);
+	g_return_val_if_fail(ent->magic == LU_ENT_MAGIC, NULL);
+	g_return_val_if_fail(attribute != NULL, NULL);
+	g_return_val_if_fail(strlen(attribute) > 0, NULL);
+	return lu_ent_get_first_id_int(ent->current, attribute);
 }
 
 /**

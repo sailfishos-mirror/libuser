@@ -43,8 +43,7 @@ main(int argc, const char **argv)
 	struct lu_error *error = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber;
-	GValueArray *values;
-	GValue *value, val;
+	GValue val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
 	    system_account = FALSE, interactive = FALSE, create_group;
 	int c;
@@ -177,9 +176,7 @@ main(int argc, const char **argv)
 	if (gidNumber == LU_VALUE_INVALID_ID) {
 		if (lu_group_lookup_name(ctx, gid, groupEnt, &error)) {
 			/* Retrieve the group's GID. */
-			values = lu_ent_get(groupEnt, LU_GIDNUMBER);
-			value = g_value_array_get_nth(values, 0);
-			gidNumber = lu_value_get_id(value);
+			gidNumber = lu_ent_get_first_id(groupEnt, LU_GIDNUMBER);
 			g_assert(gidNumber != LU_VALUE_INVALID_ID);
 			create_group = FALSE;
 		} else {
@@ -219,8 +216,8 @@ main(int argc, const char **argv)
 	}
 
 	/* Retrieve the group ID. */
-	values = lu_ent_get(groupEnt, LU_GIDNUMBER);
-	if (values == NULL) {
+	gidNumber = lu_ent_get_first_id(groupEnt, LU_GIDNUMBER);
+	if (gidNumber == LU_VALUE_INVALID_ID) {
 		fprintf(stderr, _("Error creating group `%s': %s\n"), gid,
 			lu_strerror(error));
 		if (error) {
@@ -229,8 +226,6 @@ main(int argc, const char **argv)
 		lu_end(ctx);
 		return 1;
 	}
-	value = g_value_array_get_nth(values, 0);
-	gidNumber = lu_value_get_id(value);
 	g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
 	lu_ent_free(groupEnt);
@@ -309,15 +304,11 @@ main(int argc, const char **argv)
 	 * home directory. */
 	if (!dont_create_home) {
 		/* Read the user's UID. */
-		values = lu_ent_get(ent, LU_UIDNUMBER);
-		value = g_value_array_get_nth(values, 0);
-		uidNumber = lu_value_get_id(value);
+		uidNumber = lu_ent_get_first_id(ent, LU_UIDNUMBER);
 		g_assert(uidNumber != LU_VALUE_INVALID_ID);
 
 		/* Read the user's GID. */
-		values = lu_ent_get(ent, LU_GIDNUMBER);
-		value = g_value_array_get_nth(values, 0);
-		gidNumber = lu_value_get_id(value);
+		gidNumber = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 		g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
 		/* Read the user's home directory. */

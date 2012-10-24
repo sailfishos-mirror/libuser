@@ -460,8 +460,6 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	struct libuser_entity *ent = NULL;
 	struct lu_context *context;
 	const char *dir, *skeleton = NULL;
-	GValueArray *values;
-	GValue *value;
 	char *keywords[] = { "home", "skeleton", NULL };
 	uid_t uidNumber = 0;
 	gid_t gidNumber = 0;
@@ -489,32 +487,26 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	}
 
 	/* Get the user's UID. */
-	values = lu_ent_get(ent->ent, LU_UIDNUMBER);
-	if (values == NULL) {
+	uidNumber = lu_ent_get_first_id(ent->ent, LU_UIDNUMBER);
+	if (uidNumber == LU_VALUE_INVALID_ID) {
 		PyErr_SetString(PyExc_KeyError,
 				"user does not have a `" LU_UIDNUMBER
 				"' attribute");
 		return NULL;
 	}
-	value = g_value_array_get_nth(values, 0);
-	uidNumber = lu_value_get_id(value);
 
 	/* Get the user's GID. */
-	values = lu_ent_get(ent->ent, LU_GIDNUMBER);
-	if (values == NULL) {
+	gidNumber = lu_ent_get_first_id(ent->ent, LU_GIDNUMBER);
+	if (gidNumber == LU_VALUE_INVALID_ID) {
 		PyErr_SetString(PyExc_KeyError,
 				"user does not have a `" LU_GIDNUMBER
 				"' attribute");
 		return NULL;
 	}
-	value = g_value_array_get_nth(values, 0);
-	gidNumber = lu_value_get_id(value);
 
 	/* Attempt to populate the directory. */
-	if (uidNumber != LU_VALUE_INVALID_ID
-	    && gidNumber != LU_VALUE_INVALID_ID
-	    && lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
-				   0700, &error)) {
+	if (lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
+				0700, &error)) {
 		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
 		return PyInt_FromLong(1);

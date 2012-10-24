@@ -34,8 +34,6 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values;
-	GValue *value;
 	const char *user, *tmp;
 	int interactive = FALSE;
 	int remove_home = 0, dont_remove_group = 0;
@@ -101,41 +99,34 @@ main(int argc, const char **argv)
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	if (!dont_remove_group) {
-		values = lu_ent_get(ent, LU_GIDNUMBER);
-		if (values == NULL) {
+		gid_t gid;
+
+		gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
+		if (gid == LU_VALUE_INVALID_ID) {
 			fprintf(stderr, _("%s did not have a gid number.\n"),
 				user);
 			return 4;
-		} else {
-			gid_t gid;
-
-			value = g_value_array_get_nth(values, 0);
-			gid = lu_value_get_id(value);
-			g_assert(gid != LU_VALUE_INVALID_ID);
-			if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE){
-				fprintf(stderr, _("No group with GID %jd "
-					"exists, not removing.\n"),
-					(intmax_t)gid);
-				return 5;
-			}
-			tmp = lu_ent_get_first_string(ent, LU_GROUPNAME);
-			if (tmp == NULL) {
-				fprintf(stderr, _("Group with GID %jd did not "
-					"have a group name.\n"),
-					(intmax_t)gid);
-				return 6;
-			}
-			if (strcmp(tmp, user) == 0) {
-				if (lu_group_delete(ctx, ent, &error)
-				    == FALSE){
-					fprintf(stderr, _("Group %s could not "
-							  "be deleted: %s.\n"),
-						tmp, lu_strerror(error));
-					return 7;
-				}
-			}
-			lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 		}
+		if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
+			fprintf(stderr, _("No group with GID %jd exists, not "
+					  "removing.\n"), (intmax_t)gid);
+			return 5;
+		}
+		tmp = lu_ent_get_first_string(ent, LU_GROUPNAME);
+		if (tmp == NULL) {
+			fprintf(stderr, _("Group with GID %jd did not have a "
+					  "group name.\n"), (intmax_t)gid);
+			return 6;
+		}
+		if (strcmp(tmp, user) == 0) {
+			if (lu_group_delete(ctx, ent, &error) == FALSE) {
+				fprintf(stderr, _("Group %s could not be "
+						  "deleted: %s.\n"), tmp,
+					lu_strerror(error));
+				return 7;
+			}
+		}
+		lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 	}
 
 	if (remove_home) {
