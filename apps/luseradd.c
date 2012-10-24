@@ -334,8 +334,9 @@ main(int argc, const char **argv)
 		}
 
 		/* Create a mail spool for the user. */
-		if (lu_mail_spool_create(ctx, ent) != TRUE) {
-			fprintf(stderr, _("Error creating mail spool.\n"));
+		if (lu_mail_spool_create(ctx, ent, &error) != TRUE) {
+			fprintf(stderr, _("Error creating mail spool: %s\n"),
+				lu_strerror(error));
 			return 8;
 		}
 	}

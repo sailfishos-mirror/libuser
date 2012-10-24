@@ -44,10 +44,12 @@ void lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 
 void lu_nscd_flush_cache (const char *table) G_GNUC_INTERNAL;
 
-gboolean lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
+gboolean lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
+			      struct lu_error **error)
 	G_GNUC_INTERNAL;
 
-gboolean lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent)
+gboolean lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent,
+			      struct lu_error **error)
 	G_GNUC_INTERNAL;
 
 #endif

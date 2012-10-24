@@ -731,7 +731,8 @@ lu_nscd_flush_cache (const char *table)
 /* Return mail spool path for an USER.
    Returns: A path for g_free (), or NULL on error */
 static char *
-mail_spool_path(struct lu_context *ctx, struct lu_ent *ent)
+mail_spool_path(struct lu_context *ctx, struct lu_ent *ent,
+		struct lu_error **error)
 {
 	GValueArray *array;
 	GValue *value;
@@ -745,7 +746,11 @@ mail_spool_path(struct lu_context *ctx, struct lu_ent *ent)
 		value = g_value_array_get_nth(array, 0);
 		username = lu_value_strdup(value);
 	}
-	g_return_val_if_fail(username != NULL, NULL);
+	if (username == NULL) {
+		lu_error_new(error, lu_error_name_bad,
+			     _("Missing user name"));
+		return NULL;
+	}
 
 	/* Get the location of the spool directory. */
 	spooldir = lu_cfg_read_single(ctx, "defaults/mailspooldir",
@@ -758,7 +763,8 @@ mail_spool_path(struct lu_context *ctx, struct lu_ent *ent)
 
 /* Create a mail spool for the user. */
 gboolean
-lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
+lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
+		     struct lu_error **error)
 {
 	GValueArray *array;
 	GValue *value;
@@ -766,25 +772,27 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
 	gid_t gid;
 	char *spool_path;
 	struct lu_ent *groupEnt;
-	struct lu_error *error = NULL;
+	struct lu_error *err2;
 	int fd;
 
-	spool_path = mail_spool_path(ctx, ent);
+	LU_ERROR_CHECK(error);
+	spool_path = mail_spool_path(ctx, ent, error);
 	if (spool_path == NULL)
-		return FALSE;
+		goto err;
 
 	/* Find the GID of the owner of the file. */
 	gid = LU_VALUE_INVALID_ID;
 	groupEnt = lu_ent_new();
-	if (lu_group_lookup_name(ctx, "mail", groupEnt, &error)) {
+	err2 = NULL;
+	if (lu_group_lookup_name(ctx, "mail", groupEnt, &err2)) {
 		array = lu_ent_get(groupEnt, LU_GIDNUMBER);
 		if (array != NULL) {
 			value = g_value_array_get_nth(array, 0);
 			gid = lu_value_get_id(value);
 		}
 	}
-	if (error != NULL)
-		lu_error_free(&error);
+	if (err2 != NULL)
+		lu_error_free(&err2);
 	lu_ent_free(groupEnt);
 
 	/* Er, okay.  Check with libc. */
@@ -806,7 +814,11 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
 			gid = lu_value_get_id(value);
 		}
 	}
-	g_return_val_if_fail(gid != LU_VALUE_INVALID_ID, FALSE);
+	if (gid == LU_VALUE_INVALID_ID) {
+		lu_error_new(error, lu_error_generic,
+			     _("Cannot determine GID to use for mail spool"));
+		goto err_spool_path;
+	}
 
 	/* Now get the user's UID. */
 	uid = LU_VALUE_INVALID_ID;
@@ -815,43 +827,61 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent)
 		value = g_value_array_get_nth(array, 0);
 		uid = lu_value_get_id(value);
 	}
-	g_return_val_if_fail(uid != LU_VALUE_INVALID_ID, FALSE);
-
-	fd = open(spool_path, O_WRONLY | O_CREAT, 0);
-	g_free(spool_path);
-	if (fd != -1) {
-		gboolean res = TRUE;
-
-		if (fchown(fd, uid, gid) == -1)
-			res = FALSE;
-		if (fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) == -1)
-			res = FALSE;
-		close(fd);
-		return res;
+	if (uid == LU_VALUE_INVALID_ID) {
+		lu_error_new(error, lu_error_generic,
+			     _("Cannot determine UID to use for mail spool"));
+		goto err_spool_path;
 	}
 
+	fd = open(spool_path, O_WRONLY | O_CREAT, 0);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open, _("couldn't open `%s': %s"),
+			     spool_path, strerror(errno));
+		goto err_spool_path;
+	}
+	if (fchown(fd, uid, gid) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing owner of `%s': %s"), spool_path,
+			     strerror(errno));
+		goto err_fd;
+	}
+	if (fchmod(fd, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing mode of `%s': %s"), spool_path,
+			     strerror(errno));
+		goto err_fd;
+	}
+	close(fd);
+
+	g_free(spool_path);
+	return TRUE;
+
+err_fd:
+	close(fd);
+err_spool_path:
+	g_free(spool_path);
+err:
 	return FALSE;
 }
 
 /* Remove user's mail spool */
 gboolean
-lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent)
+lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent,
+		     struct lu_error **error)
 {
 	char *p;
 
-	p = mail_spool_path(ctx, ent);
+	p = mail_spool_path(ctx, ent, error);
 	if (p == NULL)
 		return FALSE;
 
-	if (unlink(p) == 0) {
+	if (unlink(p) != 0 && errno != ENOENT) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error removing `%s': %s"), p, strerror (errno));
 		g_free(p);
-		return TRUE;
+		return FALSE;
 	}
-	if (errno == ENOENT) {
-		g_free(p);
-		return TRUE;
-	}
-	g_free(p);
 
-	return FALSE;
+	g_free(p);
+	return TRUE;
 }

@@ -156,8 +156,9 @@ main(int argc, const char **argv)
 			}
 		}
 		/* Delete the user's mail spool. */
-		if (lu_mail_spool_remove(ctx, ent) != TRUE) {
-			fprintf(stderr, _("Error removing mail spool.\n"));
+		if (lu_mail_spool_remove(ctx, ent, &error) != TRUE) {
+			fprintf(stderr, _("Error removing mail spool: %s"),
+				lu_strerror(error));
 			return 1;
 		}
 	}

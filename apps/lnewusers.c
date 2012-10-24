@@ -314,11 +314,15 @@ main(int argc, const char **argv)
 			/* Unless the nocreatemail flag was given, give the
 			 * user a mail spool. */
 			if (!nocreatemail) {
-				if (!lu_mail_spool_create(ctx, ent))
+				if (!lu_mail_spool_create(ctx, ent, &error)) {
 					fprintf(stderr,
 						_("Error creating mail spool "
-						  "for %s.\n"), fields[0]);
-
+						  "for %s: %s\n"), fields[0],
+						lu_strerror(error));
+					if (error) {
+						lu_error_free(&error);
+					}
+				}
 			}
 		} else {
 			fprintf(stderr,

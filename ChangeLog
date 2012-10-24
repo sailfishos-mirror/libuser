@@ -1,5 +1,11 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/apputil.c (mail_spool_path, lu_mail_spool_create)
+	(lu_mail_spool_remove): Add error reporting using struct lu_error.
+	All users updated.
+	* apps/apputil.h (lu_mail_spool_create, lu_mail_spool_remove): Update
+	declarations.
+
 	* apps/apputil.c (lu_mail_spool_create, lu_mail_spool_remove): Split...
 	(lu_mailspool_create_remove): ... this.  All users updated.
 	* apps/apputil.h (lu_mail_spool_create, lu_mail_spool_remove): New

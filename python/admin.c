@@ -674,6 +674,7 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 
 	char *keywords[] = { "entity", NULL };
 	struct libuser_admin *me = (struct libuser_admin *) self;
+	struct lu_error *error;
 	gboolean res;
 
 	DEBUG_ENTRY;
@@ -686,15 +687,17 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 	}
 
 	/* Now just pass it to the internal function. */
+	error = NULL;
 	if (action)
-		res = lu_mail_spool_create(me->ctx, ent->ent);
+		res = lu_mail_spool_create(me->ctx, ent->ent, &error);
 	else
-		res = lu_mail_spool_remove(me->ctx, ent->ent);
+		res = lu_mail_spool_remove(me->ctx, ent->ent, &error);
 	if (res) {
 		return PyInt_FromLong(1);
 	} else {
-		PyErr_SetString(PyExc_RuntimeError,
-				_("error creating mail spool for user"));
+		PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
+		if (error != NULL)
+			lu_error_free(&error);
 		return NULL;
 	}
 }
@@ -766,13 +769,16 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 	}
 	if (ret != NULL && mkmailspool != NULL
 	    && PyObject_IsTrue(mkmailspool)) {
+		struct lu_error *error;
+
 		Py_DECREF(ret);
-		if (lu_mail_spool_create(context, ent->ent))
+		error = NULL;
+		if (lu_mail_spool_create(context, ent->ent, &error))
 			ret = PyInt_FromLong(1);
 		else {
-			PyErr_SetString(PyExc_RuntimeError,
-					_("error creating mail spool for "
-					  "user"));
+			PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
+			if (error != NULL)
+				lu_error_free(&error);
 			ret = NULL;
 		}
 	}
@@ -885,15 +891,17 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 	if (ret != NULL && rmmailspool != NULL
 	    && PyObject_IsTrue(rmmailspool)) {
 		struct libuser_entity *entity;
+		struct lu_error *error;
 
 		Py_DECREF(ret);
 		entity = (struct libuser_entity *)ent;
-		if (lu_mail_spool_remove(context, entity->ent))
+		error = NULL;
+		if (lu_mail_spool_remove(context, entity->ent, &error))
 			ret = PyInt_FromLong(1);
 		else {
-			PyErr_SetString(PyExc_RuntimeError,
-					_("error removing mail spool for "
-					  "user"));
+			PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
+			if (error != NULL)
+				lu_error_free(&error);
 			ret = NULL;
 		}
 	}
