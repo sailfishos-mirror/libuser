@@ -87,6 +87,16 @@ lu_strerror
 </SECTION>
 
 <SECTION>
+<FILE>fs</FILE>
+lu_homedir_move
+lu_homedir_populate
+lu_homedir_remove
+lu_mail_spool_create
+lu_mail_spool_remove
+lu_nscd_flush_cache
+</SECTION>
+
+<SECTION>
 <FILE>prompt</FILE>
 lu_prompt_console
 lu_prompt_console_quiet

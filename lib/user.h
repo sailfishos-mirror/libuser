@@ -24,6 +24,7 @@
 #include "config.h"
 #include "entity.h"
 #include "error.h"
+#include "fs.h"
 #include "prompt.h"
 
 G_BEGIN_DECLS

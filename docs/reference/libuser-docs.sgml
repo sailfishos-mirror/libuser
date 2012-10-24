@@ -17,6 +17,7 @@
     <xi:include href="xml/error.xml"/>
     <xi:include href="xml/prompt.xml"/>
     <xi:include href="xml/user.xml"/>
+    <xi:include href="xml/fs.xml"/>
 
   </chapter>
   <index id="api-index-full">
