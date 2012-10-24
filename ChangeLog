@@ -1,5 +1,12 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/files.c (generic_lock, generic_is_locked)
+	(generic_setpass): Use `name' instead of `namestring' for better
+	readability.
+	* modules/ldap.c (lu_ldap_del, lu_ldap_handle_lock)
+	(lu_ldap_is_locked, lu_ldap_setpass): Use `name' instead of
+	`name_string' for better readability.
+
 	* lib/entity.c (lu_ent_get_first_value_strdup_int)
 	(lu_ent_get_first_value_strdup)
 	(lu_ent_get_first_value_strdup_current): New functions.

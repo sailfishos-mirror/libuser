@@ -1427,7 +1427,7 @@ static gboolean
 lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 	    struct lu_ent *ent, const char *branch, struct lu_error **error)
 {
-	char *name_string;
+	char *name;
 	const char *dn, *namingAttr;
 	int err;
 	gboolean ret = FALSE;
@@ -1448,16 +1448,16 @@ lu_ldap_del(struct lu_module *module, enum lu_entity_type type,
 		namingAttr = LU_GROUPNAME;
 	}
 
-	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
-	if (name_string == NULL) {
+	name = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object had no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
-	g_free(name_string);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name, branch);
+	g_free(name);
 	/* Process the removal. */
 #ifdef DEBUG
 	g_message("Removing `%s'.\n", dn);
@@ -1501,7 +1501,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	const char *dn;
 	gboolean ret = FALSE;
 	LDAPMod mod[2], *mods[3];
-	char *result, *name_string, *oldpassword, *values[2][2];
+	char *result, *name, *oldpassword, *values[2][2];
 	const char *tmp, *attribute;
 	struct lu_ldap_context *ctx;
 	int err;
@@ -1514,16 +1514,16 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 	ctx = module->module_context;
 
 	/* Get the entry's name. */
-	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
-	if (name_string == NULL) {
+	name = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
-	g_free(name_string);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name, branch);
+	g_free(name);
 
 	attribute = ent->type == lu_user ? LU_USERPASSWORD : LU_GROUPPASSWORD;
 
@@ -1634,7 +1634,7 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 	static const char mapped_password[] = "userPassword";
 
 	const char *dn;
-	char *name_string;
+	char *name;
 	struct lu_ldap_context *ctx = module->module_context;
 	char *attributes[] = { NULL, NULL };
 	BerValue **values;
@@ -1643,16 +1643,16 @@ lu_ldap_is_locked(struct lu_module *module, struct lu_ent *ent,
 	gboolean locked;
 
 	/* Get the name of the user or group. */
-	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
-	if (name_string == NULL) {
+	name = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
-	g_free(name_string);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name, branch);
+	g_free(name);
 #ifdef DEBUG
 	g_print("Looking up `%s'.\n", dn);
 #endif
@@ -1721,7 +1721,7 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 	static const char mapped_password[] = "userPassword";
 
 	const char *dn;
-	char *name_string;
+	char *name;
 	struct lu_ldap_context *ctx = module->module_context;
 	char *attributes[] = { NULL, NULL };
 	char *addvalues[] = { NULL, NULL }, *rmvalues[] = { NULL, NULL };
@@ -1738,22 +1738,22 @@ lu_ldap_setpass(struct lu_module *module, const char *namingAttr,
 #ifdef DEBUG
 	g_print("Setting password to `%s'.\n", password);
 #endif
-	name_string = lu_ent_get_first_value_strdup(ent, namingAttr);
-	if (name_string == NULL) {
+	name = lu_ent_get_first_value_strdup(ent, namingAttr);
+	if (name == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("object has no %s attribute"), namingAttr);
 		return FALSE;
 	}
 
 	/* Convert the name to a distinguished name. */
-	dn = lu_ldap_ent_to_dn(module, namingAttr, name_string, branch);
+	dn = lu_ldap_ent_to_dn(module, namingAttr, name, branch);
 #ifdef DEBUG
 	g_print("Setting password for `%s'.\n", dn);
 #endif
 
 	snprintf(filter, sizeof(filter), "(%s=%s)",
-		 map_to_ldap(module->scache, namingAttr), name_string);
-	g_free(name_string);
+		 map_to_ldap(module->scache, namingAttr), name);
+	g_free(name);
 
 	previous = NULL;
 	values = NULL;

@@ -1369,7 +1369,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	lu_security_context_t fscreate;
 	char *filename, *key;
 	const char *dir;
-	char *value, *new_value, *namestring;
+	char *value, *new_value, *name;
 	int fd;
 	gpointer lock;
 	gboolean ret = FALSE;
@@ -1377,13 +1377,10 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	/* Get the name which keys the entries of interest in the file. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		namestring = lu_ent_get_first_value_strdup_current(ent,
-								   LU_USERNAME);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_USERNAME);
 	if (ent->type == lu_group)
-		namestring
-			= lu_ent_get_first_value_strdup_current(ent,
-								LU_GROUPNAME);
-	g_assert(namestring != NULL);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_GROUPNAME);
+	g_assert(name != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1416,7 +1413,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 		goto err_fd;
 
 	/* Read the old value from the file. */
-	value = lu_util_field_read(fd, namestring, field, error);
+	value = lu_util_field_read(fd, name, field, error);
 	if (value == NULL)
 		goto err_lock;
 
@@ -1436,7 +1433,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 		goto err_lock;
 
 	/* Make the change. */
-	ret = lu_util_field_write(fd, namestring, field, new_value, error);
+	ret = lu_util_field_write(fd, name, field, new_value, error);
 	/* Fall through */
 
 err_lock:
@@ -1447,7 +1444,7 @@ err_fscreate:
 	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	g_free(namestring);
+	g_free(name);
 	return ret;
 }
 
@@ -1458,7 +1455,7 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 {
 	char *filename, *key;
 	const char *dir;
-	char *value, *namestring;
+	char *value, *name;
 	int fd;
 	gpointer lock;
 	gboolean ret = FALSE;
@@ -1466,13 +1463,10 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		namestring = lu_ent_get_first_value_strdup_current(ent,
-								   LU_USERNAME);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_USERNAME);
 	if (ent->type == lu_group)
-		namestring
-			= lu_ent_get_first_value_strdup_current(ent,
-								LU_GROUPNAME);
-	g_assert(namestring != NULL);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_GROUPNAME);
+	g_assert(name != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1497,7 +1491,7 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 		goto err_fd;
 
 	/* Read the value. */
-	value = lu_util_field_read(fd, namestring, field, error);
+	value = lu_util_field_read(fd, name, field, error);
 	if (value == NULL)
 		goto err_lock;
 
@@ -1512,7 +1506,7 @@ err_fd:
 	close(fd);
 err_filename:
 	g_free(filename);
-	g_free(namestring);
+	g_free(name);
 	return ret;
 }
 
@@ -1663,7 +1657,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_error **error)
 {
 	lu_security_context_t fscreate;
-	char *filename, *key, *value, *namestring;
+	char *filename, *key, *value, *name;
 	const char *dir;
 	int fd;
 	gpointer lock;
@@ -1672,13 +1666,10 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	/* Get the name of this account. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
 	if (ent->type == lu_user)
-		namestring = lu_ent_get_first_value_strdup_current(ent,
-								   LU_USERNAME);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_USERNAME);
 	else if (ent->type == lu_group)
-		namestring
-			= lu_ent_get_first_value_strdup_current(ent,
-								LU_GROUPNAME);
-	g_assert(namestring != NULL);
+		name = lu_ent_get_first_value_strdup_current(ent, LU_GROUPNAME);
+	g_assert(name != NULL);
 
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
@@ -1712,7 +1703,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		goto err_fd;
 
 	/* Read the current contents of the field. */
-	value = lu_util_field_read(fd, namestring, field, error);
+	value = lu_util_field_read(fd, name, field, error);
 	if (value == NULL)
 		goto err_lock;
 
@@ -1724,7 +1715,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	    && lu_ent_get_current(ent, LU_SHADOWPASSWORD) != NULL
 	    && (strcmp(value, "x") == 0
 		|| (strncmp(value, "##", 2) == 0
-		    && strcmp(value + 2, namestring) == 0))) {
+		    && strcmp(value + 2, name) == 0))) {
 		ret = TRUE;
 		goto err_value;
 	}
@@ -1759,7 +1750,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	}
 
 	/* Now write our changes to the file. */
-	ret = lu_util_field_write(fd, namestring, field, password, error);
+	ret = lu_util_field_write(fd, name, field, password, error);
 	/* Fall through */
 
  err_value:
@@ -1772,7 +1763,7 @@ err_fscreate:
 	lu_util_fscreate_restore(fscreate);
  err_filename:
 	g_free(filename);
-	g_free(namestring);
+	g_free(name);
 	return ret;
 }
 
