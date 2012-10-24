@@ -1,5 +1,7 @@
 2012-10-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/valgrind.supp: One more glibc suppression.
+
 	* modules/ldap.c (get_ent_adds): Fix a memory leak.
 
 	* Makefile.am (VG_EXECUTION): Use a more practical valgrind

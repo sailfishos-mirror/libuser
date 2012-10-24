@@ -43,6 +43,13 @@
 }
 
 {
+   glibc sha256
+   Memcheck:Cond
+   fun:__stpncpy_sse2_unaligned
+   fun:__sha256_crypt_r
+}
+
+{
    glibc sha512
    Memcheck:Cond
    fun:__stpncpy_sse2_unaligned
