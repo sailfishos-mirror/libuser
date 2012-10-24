@@ -1,5 +1,8 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/luserdel.c (main): Don't use the same entity for groups and
+	users (potentially looking up LU_HOMEDIR_COPY in the group data).
+
 	* lib/entity.c (lu_ent_get_first_id)
 	(lu_ent_get_first_id_current): Fix value returned on invalid arguments.
 

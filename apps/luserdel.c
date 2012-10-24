@@ -99,6 +99,7 @@ main(int argc, const char **argv)
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	if (!dont_remove_group) {
+		struct lu_ent *group_ent;
 		gid_t gid;
 
 		gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
@@ -107,25 +108,27 @@ main(int argc, const char **argv)
 				user);
 			return 4;
 		}
-		if (lu_group_lookup_id(ctx, gid, ent, &error) == FALSE) {
+		group_ent = lu_ent_new();
+		if (lu_group_lookup_id(ctx, gid, group_ent, &error) == FALSE) {
 			fprintf(stderr, _("No group with GID %jd exists, not "
 					  "removing.\n"), (intmax_t)gid);
 			return 5;
 		}
-		tmp = lu_ent_get_first_string(ent, LU_GROUPNAME);
+		tmp = lu_ent_get_first_string(group_ent, LU_GROUPNAME);
 		if (tmp == NULL) {
 			fprintf(stderr, _("Group with GID %jd did not have a "
 					  "group name.\n"), (intmax_t)gid);
 			return 6;
 		}
 		if (strcmp(tmp, user) == 0) {
-			if (lu_group_delete(ctx, ent, &error) == FALSE) {
+			if (lu_group_delete(ctx, group_ent, &error) == FALSE) {
 				fprintf(stderr, _("Group %s could not be "
 						  "deleted: %s.\n"), tmp,
 					lu_strerror(error));
 				return 7;
 			}
 		}
+		lu_ent_free(group_ent);
 		lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 	}
 
