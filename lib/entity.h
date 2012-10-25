@@ -253,6 +253,8 @@ void lu_ent_set_current(struct lu_ent *ent, const char *attr,
 void lu_ent_set_string_current(struct lu_ent *ent, const char *attr,
 			       const char *value);
 void lu_ent_set_id_current(struct lu_ent *ent, const char *attr, id_t value);
+void lu_ent_set_long_current(struct lu_ent *ent, const char *attr,
+			     long int value);
 void lu_ent_add_current(struct lu_ent *ent, const char *attr,
 			const GValue *value);
 void lu_ent_clear_current(struct lu_ent *ent, const char *attr);
@@ -270,6 +272,7 @@ void lu_ent_set(struct lu_ent *ent, const char *attr,
 		const GValueArray *values);
 void lu_ent_set_string(struct lu_ent *ent, const char *attr, const char *value);
 void lu_ent_set_id(struct lu_ent *ent, const char *attr, id_t value);
+void lu_ent_set_long(struct lu_ent *ent, const char *attr, long int value);
 void lu_ent_add(struct lu_ent *ent, const char *attr,
 		const GValue *value);
 void lu_ent_clear(struct lu_ent *ent, const char *attr);

@@ -515,6 +515,25 @@ lu_ent_set_id_int(GArray *list, const char *attr, id_t value)
 	g_value_unset(&v);
 }
 
+/* Replace current value of ATTR in LIST with a single long VALUE */
+static void
+lu_ent_set_long_int(GArray *list, const char *attr, long value)
+{
+	GValueArray *dest;
+	GValue v;
+
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
+	dest = lu_ent_set_prepare(list, attr);
+
+	memset(&v, 0, sizeof(v));
+	g_value_init(&v, G_TYPE_LONG);
+	g_value_set_long(&v, value);
+	g_value_array_append(dest, &v);
+	g_value_unset(&v);
+}
+
 static void
 lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
@@ -913,6 +932,41 @@ lu_ent_set_id_current(struct lu_ent *ent, const char *attribute, id_t value)
 	g_return_if_fail(strlen(attribute) > 0);
 	g_return_if_fail(value != LU_VALUE_INVALID_ID);
 	lu_ent_set_id_int(ent->current, attribute, value);
+}
+
+/**
+ * lu_ent_set_long:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: A value
+ *
+ * Replaces all pending attributes @attr in a struct #lu_ent by a long @value.
+ */
+void
+lu_ent_set_long(struct lu_ent *ent, const char *attribute, long value)
+{
+	g_return_if_fail(ent != NULL);
+	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	lu_ent_set_long_int(ent->pending, attribute, value);
+}
+/**
+ * lu_ent_set_long_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: A value
+ *
+ * Replaces all current attributes @attr in a struct #lu_ent by a long @value.
+ */
+void
+lu_ent_set_long_current(struct lu_ent *ent, const char *attribute, long value)
+{
+	g_return_if_fail(ent != NULL);
+	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	lu_ent_set_long_int(ent->current, attribute, value);
 }
 
 /**

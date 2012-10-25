@@ -208,48 +208,20 @@ main(int argc, const char **argv)
 			printf(_("Account Expires:\t%s\n"), buf);
 		}
 	} else {
-		GValue value;
-
 		/* Set values using parameters given on the command-line. */
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_LONG);
-		if (shadowLastChange != INVALID_LONG) {
-			g_value_set_long(&value, shadowLastChange);
-			lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-			lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-			g_value_reset(&value);
-		}
-		if (shadowMin != INVALID_LONG) {
-			g_value_set_long(&value, shadowMin);
-			lu_ent_clear(ent, LU_SHADOWMIN);
-			lu_ent_add(ent, LU_SHADOWMIN, &value);
-			g_value_reset(&value);
-		}
-		if (shadowMax != INVALID_LONG) {
-			g_value_set_long(&value, shadowMax);
-			lu_ent_clear(ent, LU_SHADOWMAX);
-			lu_ent_add(ent, LU_SHADOWMAX, &value);
-			g_value_reset(&value);
-		}
-		if (shadowWarning != INVALID_LONG) {
-			g_value_set_long(&value, shadowWarning);
-			lu_ent_clear(ent, LU_SHADOWWARNING);
-			lu_ent_add(ent, LU_SHADOWWARNING, &value);
-			g_value_reset(&value);
-		}
-		if (shadowInactive != INVALID_LONG) {
-			g_value_set_long(&value, shadowInactive);
-			lu_ent_clear(ent, LU_SHADOWINACTIVE);
-			lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
-			g_value_reset(&value);
-		}
-		if (shadowExpire != INVALID_LONG) {
-			g_value_set_long(&value, shadowExpire);
-			lu_ent_clear(ent, LU_SHADOWEXPIRE);
-			lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
-			g_value_reset(&value);
-		}
-		g_value_unset(&value);
+		if (shadowLastChange != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWLASTCHANGE,
+					shadowLastChange);
+		if (shadowMin != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWMIN, shadowMin);
+		if (shadowMax != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWMAX, shadowMax);
+		if (shadowWarning != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWWARNING, shadowWarning);
+		if (shadowInactive != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWINACTIVE, shadowInactive);
+		if (shadowExpire != INVALID_LONG)
+			lu_ent_set_long(ent, LU_SHADOWEXPIRE, shadowExpire);
 
 		/* Now actually modify the user's data in the system
 		 * information store. */

@@ -78,54 +78,27 @@ lu_common_suser_default(struct lu_module *module,
 		        const char *name, gboolean is_system,
 		        struct lu_ent *ent, struct lu_error **error)
 {
-	GValue value;
-
 	(void)module;
 	(void)is_system;
 	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
-	memset(&value, 0, sizeof(value));
 	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL)
 		lu_ent_set_string(ent, LU_SHADOWPASSWORD,
 				  LU_COMMON_DEFAULT_PASSWORD);
 	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL)
 		lu_util_update_shadow_last_change(ent);
-	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 0);
-		lu_ent_add(ent, LU_SHADOWMIN, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWMAX) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 99999);
-		lu_ent_add(ent, LU_SHADOWMAX, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWWARNING) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, 7);
-		lu_ent_add(ent, LU_SHADOWWARNING, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWINACTIVE) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWINACTIVE, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWEXPIRE) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWEXPIRE, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWFLAG) == NULL) {
-		g_value_init(&value, G_TYPE_LONG);
-		g_value_set_long(&value, -1);
-		lu_ent_add(ent, LU_SHADOWFLAG, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWMIN, 0);
+	if (lu_ent_get(ent, LU_SHADOWMAX) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWMAX, 99999);
+	if (lu_ent_get(ent, LU_SHADOWWARNING) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWWARNING, 7);
+	if (lu_ent_get(ent, LU_SHADOWINACTIVE) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWINACTIVE, -1);
+	if (lu_ent_get(ent, LU_SHADOWEXPIRE) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWEXPIRE, -1);
+	if (lu_ent_get(ent, LU_SHADOWFLAG) == NULL)
+		lu_ent_set_long(ent, LU_SHADOWFLAG, -1);
 	return TRUE;
 }
 

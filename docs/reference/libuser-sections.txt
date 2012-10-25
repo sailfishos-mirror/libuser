@@ -80,6 +80,8 @@ lu_ent_set_string
 lu_ent_set_string_current
 lu_ent_set_id
 lu_ent_set_id_current
+lu_ent_set_long
+lu_ent_set_long_current
 </SECTION>
 
 <SECTION>

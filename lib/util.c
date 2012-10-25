@@ -675,14 +675,8 @@ lu_util_shadow_current_date(void)
 void
 lu_util_update_shadow_last_change(struct lu_ent *ent)
 {
-	GValue value;
-
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_LONG);
-	g_value_set_long(&value, lu_util_shadow_current_date());
-	lu_ent_clear(ent, LU_SHADOWLASTCHANGE);
-	lu_ent_add(ent, LU_SHADOWLASTCHANGE, &value);
-	g_value_unset(&value);
+	lu_ent_set_long(ent, LU_SHADOWLASTCHANGE,
+			lu_util_shadow_current_date());
 }
 
 #ifdef WITH_SELINUX
