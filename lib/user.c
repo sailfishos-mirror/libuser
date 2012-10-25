@@ -2149,25 +2149,19 @@ lu_default_int(struct lu_context *context, const char *name,
 	ent->type = type;
 
 	/* Set the name of the user/group. */
-	memset(&value, 0, sizeof(value));
-	g_value_init(&value, G_TYPE_STRING);
-	g_value_set_string(&value, name);
 	if (ent->type == lu_user) {
 		char buf[LINE_MAX * 4];
 
 		lu_ent_set_string(ent, LU_USERNAME, name);
-		lu_ent_clear(ent, LU_GIDNUMBER);
 		/* Additionally, pick a default default group. */
 		/* FIXME: handle arbitrarily long lines. */
 		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
-		    (err == &grp)) {
-			g_value_unset(&value);
-			lu_value_init_set_id(&value, grp.gr_gid);
-			lu_ent_add(ent, LU_GIDNUMBER, &value);
-		}
+		    (err == &grp))
+			lu_ent_set_id(ent, LU_GIDNUMBER, grp.gr_gid);
+		else
+			lu_ent_clear(ent, LU_GIDNUMBER);
 	} else if (ent->type == lu_group)
 		lu_ent_set_string(ent, LU_GROUPNAME, name);
-	g_value_unset(&value);
 
 	/* Figure out which part of the configuration we need to iterate over
 	 * to initialize the structure. */
@@ -2208,6 +2202,8 @@ lu_default_int(struct lu_context *context, const char *name,
 				id = DEFAULT_ID;
 		}
 	}
+
+	memset(&value, 0, sizeof(value));
 
 	/* Search for a free ID. */
 	id = lu_get_first_unused_id(context, type, id);

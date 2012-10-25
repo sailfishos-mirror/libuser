@@ -250,13 +250,7 @@ main(int argc, const char **argv)
 
 		oldGidNumber = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 
-		memset(&val, 0, sizeof(val));
-		lu_value_init_set_id(&val, gidNumber);
-
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &val);
-
-		g_value_unset(&val);
+		lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
 
 		if (error != NULL)
 			lu_error_free(&error);
@@ -276,22 +270,17 @@ main(int argc, const char **argv)
 	    gidNumber != LU_VALUE_INVALID_ID && users != NULL) {
 		size_t i;
 
-		memset(&val, 0, sizeof(val));
-		lu_value_init_set_id(&val, gidNumber);
-
 		for (i = 0; i < users->len; i++) {
 			ent = g_ptr_array_index(users, i);
 			if (lu_ent_get_first_id(ent, LU_GIDNUMBER)
 			    == oldGidNumber) {
-				lu_ent_clear(ent, LU_GIDNUMBER);
-				lu_ent_add(ent, LU_GIDNUMBER, &val);
+				lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
 				lu_user_modify(ctx, ent, &error);
 				if (error != NULL)
 					lu_error_free(&error);
 			}
 			lu_ent_free(ent);
 		}
-		g_value_unset(&val);
 		g_ptr_array_free(users, TRUE);
 
 		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);

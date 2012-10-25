@@ -43,7 +43,6 @@ main(int argc, const char **argv)
 	struct lu_error *error = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber;
-	GValue val;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
 	    system_account = FALSE, interactive = FALSE, create_group;
 	int c;
@@ -235,22 +234,12 @@ main(int argc, const char **argv)
 	lu_user_default(ctx, name, system_account, ent);
 
 	/* Modify the default UID if we had one passed in. */
-	memset(&val, 0, sizeof(val));
-
-	if (uidNumber != LU_VALUE_INVALID_ID) {
-		lu_value_init_set_id(&val, uidNumber);
-		lu_ent_clear(ent, LU_UIDNUMBER);
-		lu_ent_add(ent, LU_UIDNUMBER, &val);
-		g_value_unset(&val);
-	}
+	if (uidNumber != LU_VALUE_INVALID_ID)
+		lu_ent_set_id(ent, LU_UIDNUMBER, uidNumber);
 
 	/* Use the GID we've created, or the one which was passed in. */
-	if (gidNumber != LU_VALUE_INVALID_ID) {
-		lu_value_init_set_id(&val, gidNumber);
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &val);
-		g_value_unset(&val);
-	}
+	if (gidNumber != LU_VALUE_INVALID_ID)
+		lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
 
 #define PARAM(ATTR, VAR)				\
 	if ((VAR) != NULL)				\

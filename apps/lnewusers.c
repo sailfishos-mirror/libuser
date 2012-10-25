@@ -102,7 +102,6 @@ main(int argc, const char **argv)
 		intmax_t imax;
 		uid_t uid;
 		gid_t gid;
-		GValue val;
 
 		/* Strip off the end-of-line terminators. */
 		p = strchr(buf, '\r');
@@ -191,11 +190,7 @@ main(int argc, const char **argv)
 			 * otherwise we need to use the default group name. */
 			if (gid != LU_VALUE_INVALID_ID) {
 				lu_group_default(ctx, fields[0], FALSE, ent);
-				memset(&val, 0, sizeof(val));
-				lu_value_init_set_id(&val, gid);
-				lu_ent_clear(ent, LU_GIDNUMBER);
-				lu_ent_add(ent, LU_GIDNUMBER, &val);
-				g_value_unset(&val);
+				lu_ent_set_id(ent, LU_GIDNUMBER, gid);
 			} else {
 				lu_group_default(ctx, gidstring, FALSE, ent);
 			}
@@ -218,15 +213,8 @@ main(int argc, const char **argv)
 
 		/* Create a new user record, and set the user's primary GID. */
 		lu_user_default(ctx, fields[0], FALSE, ent);
-		memset(&val, 0, sizeof(val));
-		lu_value_init_set_id(&val, uid);
-		lu_ent_clear(ent, LU_UIDNUMBER);
-		lu_ent_add(ent, LU_UIDNUMBER, &val);
-		g_value_unset(&val);
-		lu_value_init_set_id(&val, gid);
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &val);
-		g_value_unset(&val);
+		lu_ent_set_id(ent, LU_UIDNUMBER, uid);
+		lu_ent_set_id(ent, LU_GIDNUMBER, gid);
 
 		/* Set other fields if we've got them. */
 		if (strlen(fields[4]) > 0)

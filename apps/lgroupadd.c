@@ -111,15 +111,8 @@ main(int argc, const char **argv)
 
 	/* If the user specified a particular GID number, override the
 	 * default. */
-	if (gidNumber != LU_VALUE_INVALID_ID) {
-		GValue value;
-
-		memset(&value, 0, sizeof(value));
-		lu_value_init_set_id(&value, gidNumber);
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &value);
-		g_value_unset(&value);
-	}
+	if (gidNumber != LU_VALUE_INVALID_ID)
+		lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
 
 	/* Try to create the group. */
 	if (lu_group_add(ctx, ent, &error) == FALSE) {

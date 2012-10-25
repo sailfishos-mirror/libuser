@@ -45,7 +45,7 @@ main(int argc, const char **argv)
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
 	GPtrArray *groups = NULL;
-	GValue *value, val;
+	GValue *value;
 	int change, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
@@ -221,14 +221,8 @@ main(int argc, const char **argv)
 		 gidNumber != LU_VALUE_INVALID_ID;
 
 	/* Change the user's UID and GID. */
-	memset(&val, 0, sizeof(val));
-
-	if (uidNumber != LU_VALUE_INVALID_ID) {
-		lu_value_init_set_id(&val, uidNumber);
-		lu_ent_clear(ent, LU_UIDNUMBER);
-		lu_ent_add(ent, LU_UIDNUMBER, &val);
-		g_value_unset(&val);
-	}
+	if (uidNumber != LU_VALUE_INVALID_ID)
+		lu_ent_set_id(ent, LU_UIDNUMBER, uidNumber);
 	if (gidNumber != LU_VALUE_INVALID_ID) {
 		struct lu_ent *group_ent;
 
@@ -241,10 +235,7 @@ main(int argc, const char **argv)
 				lu_error_free(&error);
 		}
 		lu_ent_free(group_ent);
-		lu_value_init_set_id(&val, gidNumber);
-		lu_ent_clear(ent, LU_GIDNUMBER);
-		lu_ent_add(ent, LU_GIDNUMBER, &val);
-		g_value_unset(&val);
+		lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
 	}
 
 	/* Change the user's shell and GECOS information. */

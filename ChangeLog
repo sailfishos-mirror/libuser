@@ -1,5 +1,17 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_set_id_int, lu_ent_set_id)
+	(lu_ent_set_id_current): New functions.
+	* lib/entity.h (lu_ent_set_id, lu_ent_set_id_current): New declarations.
+	* docs/reference/libuser-sections.txt: Add lu_ent_set_id and
+	and lu_ent_set_id_current.
+	* apps/lgroupadd.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main)
+	* lib/user.c (lu_default_int): Use lu_ent_set_id().
+
 	* lib/entity.c (lu_ent_set_string_int, lu_ent_set_string)
 	(lu_ent_set_string_current): New functions.
 	* lib/entity.h (lu_ent_set_string, lu_ent_set_string_current): New
