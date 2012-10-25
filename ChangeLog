@@ -1,5 +1,9 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user.c (lu_default_int): Simplify.  We don't need to clear
+	previous values because the entity is completely wiped at the beginning
+	of the function.
+
 	* lib/entity.c (lu_ent_set_long_int, lu_ent_set_long)
 	(lu_ent_set_long_current): New functions.
 	* lib/entity.h (lu_ent_set_long, lu_ent_set_long_current): New

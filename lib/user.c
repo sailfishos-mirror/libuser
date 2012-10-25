@@ -2158,8 +2158,6 @@ lu_default_int(struct lu_context *context, const char *name,
 		if ((getgrnam_r("users", &grp, buf, sizeof(buf), &err) == 0) &&
 		    (err == &grp))
 			lu_ent_set_id(ent, LU_GIDNUMBER, grp.gr_gid);
-		else
-			lu_ent_clear(ent, LU_GIDNUMBER);
 	} else if (ent->type == lu_group)
 		lu_ent_set_string(ent, LU_GROUPNAME, name);
 
@@ -2203,20 +2201,16 @@ lu_default_int(struct lu_context *context, const char *name,
 		}
 	}
 
-	memset(&value, 0, sizeof(value));
-
 	/* Search for a free ID. */
 	id = lu_get_first_unused_id(context, type, id);
 
-	if (id != 0 && id != (id_t)-1) {
+	if (id != 0 && id != (id_t)-1)
 		/* Add this ID to the entity. */
-		lu_value_init_set_id(&value, id);
-		lu_ent_add(ent, idkey, &value);
-		g_value_unset(&value);
-	}
+		lu_ent_set_id(ent, idkey, id);
 	/* Otherwise the user must specify an ID. */
 
 	/* Now iterate to find the rest. */
+	memset(&value, 0, sizeof(value));
 	keys = lu_cfg_read_keys(context, top);
 	for (p = keys; p && p->data; p = g_list_next(p)) {
 		static const struct {
