@@ -1,5 +1,9 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lgroupmod.c (main): Drop unnecessary variable.
+	* modules/ldap.c (lu_ldap_lookup, lu_ldap_user_default): Use the new
+	interfaces instead of manipulating GValues manually.
+
 	* lib/entity.c (lu_ent_set_id_int, lu_ent_set_id)
 	(lu_ent_set_id_current): New functions.
 	* lib/entity.h (lu_ent_set_id, lu_ent_set_id_current): New declarations.
@@ -7,6 +11,7 @@
 	and lu_ent_set_id_current.
 	* apps/lgroupadd.c (main)
 	* apps/lgroupmod.c (main)
+
 	* apps/lnewusers.c (main)
 	* apps/luseradd.c (main)
 	* apps/lusermod.c (main)

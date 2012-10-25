@@ -557,18 +557,8 @@ lu_ldap_lookup(struct lu_module *module,
 	ctx = module->module_context;
 
 	if (ent != NULL) {
-		GValueArray *array;
 		/* Try to use the dn the object already knows about. */
-
-		array = lu_ent_get(ent, DISTINGUISHED_NAME);
-		if (array != NULL) {
-			GValue *val;
-
-			val = g_value_array_get_nth(array, 0);
-			if (G_VALUE_HOLDS_STRING(val))
-				dn = g_value_get_string(val);
-		}
-
+		dn = lu_ent_get_first_string(ent, DISTINGUISHED_NAME);
 		if (dn == NULL)
 			/* Map the user or group name to an LDAP object name. */
 			dn = lu_ldap_ent_to_dn(module, namingAttr, name,
@@ -647,16 +637,12 @@ lu_ldap_lookup(struct lu_module *module,
 		if (ent_array != NULL)
 			ent = lu_ent_new_typed(type);
 		/* Set the distinguished name. */
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
 		p = ldap_get_dn(ctx->ldap, entry);
-		g_value_set_string(&value, p);
+		lu_ent_set_string_current(ent, DISTINGUISHED_NAME, p);
 		ldap_memfree(p);
-		lu_ent_clear_current(ent, DISTINGUISHED_NAME);
-		lu_ent_add_current(ent, DISTINGUISHED_NAME, &value);
-		g_value_unset(&value);
 
 		/* Read each of the attributes we asked for. */
+		memset(&value, 0, sizeof(value));
 		for (i = 0; attributes[i]; i++) {
 			BerValue **values;
 			const char *attr;
@@ -2200,16 +2186,9 @@ lu_ldap_user_default(struct lu_module *module,
 		     const char *user, gboolean is_system,
 		     struct lu_ent *ent, struct lu_error **error)
 {
-	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
-		GValue value;
-
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value,
-				   LU_CRYPTED LU_COMMON_DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_USERPASSWORD, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL)
+		lu_ent_set_string(ent, LU_USERPASSWORD,
+				  LU_CRYPTED LU_COMMON_DEFAULT_PASSWORD);
 	/* This will set LU_SHADOWPASSWORD, which we ignore.  The default
 	   LU_USERPASSWORD value, which is incompatibly formated by
 	   lu_common_user_default(), will not be used because LU_USERPASSWORD

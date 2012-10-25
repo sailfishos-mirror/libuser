@@ -42,7 +42,6 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	GValueArray *values = NULL;
 	GPtrArray *users = NULL;
 	GValue val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
@@ -173,8 +172,7 @@ main(int argc, const char **argv)
 	change = gid || addAdmins || remAdmins || addMembers || remMembers;
 
 	if (gid != NULL) {
-		values = lu_ent_get(ent, LU_GROUPNAME);
-		if (values)
+		if (lu_ent_get(ent, LU_GROUPNAME) != NULL)
 			lu_ent_set_string(ent, LU_GROUPNAME, gid);
 		else {
 			lu_ent_clear(ent, LU_GROUPNAME);
