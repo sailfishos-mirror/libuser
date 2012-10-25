@@ -174,15 +174,12 @@ main(int argc, const char **argv)
 
 	if (gid != NULL) {
 		values = lu_ent_get(ent, LU_GROUPNAME);
-		lu_ent_clear(ent, LU_GROUPNAME);
-		if (values) {
-			memset(&val, 0, sizeof(val));
-			g_value_init(&val, G_TYPE_STRING);
-			g_value_set_string(&val, gid);
-			lu_ent_add(ent, LU_GROUPNAME, &val);
-			g_value_unset(&val);
-		} else
+		if (values)
+			lu_ent_set_string(ent, LU_GROUPNAME, gid);
+		else {
+			lu_ent_clear(ent, LU_GROUPNAME);
 			gid = group;
+		}
 	} else
 		gid = group;
 	if (addAdmins) {

@@ -248,13 +248,9 @@ main(int argc, const char **argv)
 	}
 
 	/* Change the user's shell and GECOS information. */
-	g_value_init(&val, G_TYPE_STRING);
 #define PARAM(ATTR, VAR)				\
-	if ((VAR) != NULL) {				\
-		g_value_set_string(&val, (VAR));	\
-		lu_ent_clear(ent, (ATTR));		\
-		lu_ent_add(ent, (ATTR), &val);		\
-	}
+	if ((VAR) != NULL)				\
+		lu_ent_set_string(ent, (ATTR), (VAR));
 
 	PARAM(LU_LOGINSHELL, loginShell);
 	PARAM(LU_GECOS, gecos);
@@ -271,9 +267,7 @@ main(int argc, const char **argv)
 	old_uid = NULL;
 	if (uid != NULL) {
 		old_uid = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
-		g_value_set_string(&val, uid);
-		lu_ent_clear(ent, LU_USERNAME);
-		lu_ent_add(ent, LU_USERNAME, &val);
+		lu_ent_set_string(ent, LU_USERNAME, uid);
 		groups = lu_groups_enumerate_by_user_full(ctx, old_uid, &error);
 		if (error)
 			lu_error_free(&error);
@@ -282,12 +276,8 @@ main(int argc, const char **argv)
 	if (homeDirectory != NULL) {
 		oldHomeDirectory
 			= lu_ent_get_first_value_strdup(ent, LU_HOMEDIRECTORY);
-		g_value_set_string(&val, homeDirectory);
-		lu_ent_clear(ent, LU_HOMEDIRECTORY);
-		lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+		lu_ent_set_string(ent, LU_HOMEDIRECTORY, homeDirectory);
 	}
-
-	g_value_unset(&val);
 
 	/* If we need to change anything about the user, do it. */
 	if (change && (lu_user_modify(ctx, ent, &error) == FALSE)) {

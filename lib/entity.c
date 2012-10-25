@@ -476,6 +476,26 @@ lu_ent_set_int(GArray *list, const char *attr, const GValueArray *values)
 	g_value_array_free(copy);
 }
 
+/* Replace current value of ATTR in LIST with a single STRING value */
+static void
+lu_ent_set_string_int(GArray *list, const char *attr, const char *value)
+{
+	GValueArray *dest;
+	GValue v;
+
+	g_return_if_fail(list != NULL);
+	g_return_if_fail(attr != NULL);
+	g_return_if_fail(strlen(attr) > 0);
+	g_return_if_fail(value != NULL);
+	dest = lu_ent_set_prepare(list, attr);
+
+	memset(&v, 0, sizeof(v));
+	g_value_init(&v, G_TYPE_STRING);
+	g_value_set_string(&v, value);
+	g_value_array_append(dest, &v);
+	g_value_unset(&v);
+}
+
 static void
 lu_ent_add_int(GArray *list, const char *attr, const GValue *value)
 {
@@ -797,6 +817,46 @@ lu_ent_set_current(struct lu_ent *ent, const char *attribute,
 	g_return_if_fail(attribute != NULL);
 	g_return_if_fail(strlen(attribute) > 0);
 	lu_ent_set_int(ent->current, attribute, values);
+}
+
+/**
+ * lu_ent_set_string:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: A string
+ *
+ * Replaces all pending attributes @attr in a struct #lu_ent by a copy of
+ * string @value.
+ */
+void
+lu_ent_set_string(struct lu_ent *ent, const char *attribute, const char *value)
+{
+	g_return_if_fail(ent != NULL);
+	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	g_return_if_fail(value != NULL);
+	lu_ent_set_string_int(ent->pending, attribute, value);
+}
+/**
+ * lu_ent_set_string_current:
+ * @ent: An entity
+ * @attr: Attribute name
+ * @value: A string
+ *
+ * Replaces all current attributes @attr in a struct #lu_ent by a copy of
+ * string @value.
+ */
+void
+lu_ent_set_string_current(struct lu_ent *ent, const char *attribute,
+			  const char *value)
+{
+	g_return_if_fail(ent != NULL);
+	g_return_if_fail(ent->magic == LU_ENT_MAGIC);
+	g_return_if_fail(attribute != NULL);
+	g_return_if_fail(strlen(attribute) > 0);
+	g_return_if_fail(value != NULL);
+	lu_ent_set_string_int(ent->current, attribute, value);
 }
 
 /**

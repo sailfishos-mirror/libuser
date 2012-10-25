@@ -2155,8 +2155,7 @@ lu_default_int(struct lu_context *context, const char *name,
 	if (ent->type == lu_user) {
 		char buf[LINE_MAX * 4];
 
-		lu_ent_clear(ent, LU_USERNAME);
-		lu_ent_add(ent, LU_USERNAME, &value);
+		lu_ent_set_string(ent, LU_USERNAME, name);
 		lu_ent_clear(ent, LU_GIDNUMBER);
 		/* Additionally, pick a default default group. */
 		/* FIXME: handle arbitrarily long lines. */
@@ -2166,10 +2165,8 @@ lu_default_int(struct lu_context *context, const char *name,
 			lu_value_init_set_id(&value, grp.gr_gid);
 			lu_ent_add(ent, LU_GIDNUMBER, &value);
 		}
-	} else if (ent->type == lu_group) {
-		lu_ent_clear(ent, LU_GROUPNAME);
-		lu_ent_add(ent, LU_GROUPNAME, &value);
-	}
+	} else if (ent->type == lu_group)
+		lu_ent_set_string(ent, LU_GROUPNAME, name);
 	g_value_unset(&value);
 
 	/* Figure out which part of the configuration we need to iterate over

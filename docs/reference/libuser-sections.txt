@@ -76,6 +76,8 @@ lu_ent_has
 lu_ent_has_current
 lu_ent_set
 lu_ent_set_current
+lu_ent_set_string
+lu_ent_set_string_current
 </SECTION>
 
 <SECTION>

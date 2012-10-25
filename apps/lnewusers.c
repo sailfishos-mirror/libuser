@@ -229,19 +229,12 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 
 		/* Set other fields if we've got them. */
-		memset(&val, 0, sizeof(val));
-		g_value_init(&val, G_TYPE_STRING);
-		if (strlen(fields[4]) > 0) {
-			g_value_set_string(&val, fields[4]);
-			lu_ent_clear(ent, LU_GECOS);
-			lu_ent_add(ent, LU_GECOS, &val);
-		}
+		if (strlen(fields[4]) > 0)
+			lu_ent_set_string(ent, LU_GECOS, fields[4]);
 		dubious_homedir = 0;
 		if (strlen(fields[5]) > 0) {
 			homedir = g_strdup(fields[5]);
-			g_value_set_string(&val, homedir);
-			lu_ent_clear(ent, LU_HOMEDIRECTORY);
-			lu_ent_add(ent, LU_HOMEDIRECTORY, &val);
+			lu_ent_set_string(ent, LU_HOMEDIRECTORY, homedir);
 		} else {
 			const char *home;
 
@@ -256,13 +249,8 @@ main(int argc, const char **argv)
 					dubious_homedir = 1;
 			}
 		}
-		if (strlen(fields[6]) > 0) {
-			g_value_set_string(&val, fields[6]);
-			lu_ent_clear(ent, LU_LOGINSHELL);
-			lu_ent_add(ent, LU_LOGINSHELL, &val);
-		}
-
-		g_value_unset(&val);
+		if (strlen(fields[6]) > 0)
+			lu_ent_set_string(ent, LU_LOGINSHELL, fields[6]);
 
 		/* Now try to add the user's account. */
 		if (dubious_homedir)

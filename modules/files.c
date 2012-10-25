@@ -874,18 +874,10 @@ static gboolean
 lu_shadow_user_add_prep(struct lu_module *module, struct lu_ent *ent,
 		        struct lu_error **error)
 {
-	GValue svalue;
-
 	(void)module;
 	(void)error;
 	/* Make sure the regular password says "shadow!" */
-	memset(&svalue, 0, sizeof(svalue));
-	g_value_init(&svalue, G_TYPE_STRING);
-	g_value_set_string(&svalue, "x");
-	lu_ent_clear(ent, LU_USERPASSWORD);
-	lu_ent_add(ent, LU_USERPASSWORD, &svalue);
-	g_value_unset(&svalue);
-
+	lu_ent_set_string(ent, LU_USERPASSWORD, "x");
 	return TRUE;
 }
 
@@ -923,18 +915,10 @@ static gboolean
 lu_shadow_group_add_prep(struct lu_module *module, struct lu_ent *ent,
 		         struct lu_error **error)
 {
-	GValue svalue;
-
 	(void)module;
 	(void)error;
 	/* Make sure the regular password says "shadow!" */
-	memset(&svalue, 0, sizeof(svalue));
-	g_value_init(&svalue, G_TYPE_STRING);
-	g_value_set_string(&svalue, "x");
-	lu_ent_clear(ent, LU_GROUPPASSWORD);
-	lu_ent_add(ent, LU_GROUPPASSWORD, &svalue);
-	g_value_unset(&svalue);
-
+	lu_ent_set_string(ent, LU_GROUPPASSWORD, "x");
 	return TRUE;
 }
 

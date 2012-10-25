@@ -44,7 +44,6 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_error *error = NULL;
 	struct lu_ent *ent;
-	GValue val;
 	int interactive = FALSE;
 	int c;
 	struct lu_prompt prompts[7];
@@ -210,10 +209,6 @@ main(int argc, const char **argv)
 		exit(1);
 	}
 
-	/* Initialize the temporary value variable. */
-	memset(&val, 0, sizeof(val));
-	g_value_init(&val, G_TYPE_STRING);
-
 	/* Now iterate over the answers and figure things out. */
 	for (i = 0; i < pcount; i++) {
 		const char *filtered;
@@ -226,14 +221,14 @@ main(int argc, const char **argv)
 		} else {
 			filtered = prompts[i].value;
 		}
-		g_value_set_string(&val, filtered);
 
-#define ATTR__(KEY, EXTRA, ATTR)				\
-		if (strcmp(prompts[i].key, KEY) == 0) {		\
-			EXTRA;					\
-			lu_ent_clear(ent, ATTR);		\
-			if (strlen(filtered) > 0)		\
-				lu_ent_add(ent, ATTR, &val);	\
+#define ATTR__(KEY, EXTRA, ATTR)					\
+		if (strcmp(prompts[i].key, KEY) == 0) {			\
+			EXTRA;						\
+			if (strlen(filtered) > 0)			\
+				lu_ent_set_string(ent, ATTR, filtered);	\
+			else						\
+				lu_ent_clear(ent, ATTR);		\
 		}
 #define ATTR(KEY, ATTR_) ATTR__(KEY, , ATTR_)
 #define NAMED_ATTR(KEY, NAME, ATTR_) ATTR__(KEY, NAME = filtered, ATTR_)
@@ -249,8 +244,6 @@ main(int argc, const char **argv)
 #undef ATTR
 #undef ATTR__
 	}
-
-	g_value_reset(&val);
 
 	/* Build a new gecos string. */
 	gecos = g_strjoin(",",
@@ -270,11 +263,7 @@ main(int argc, const char **argv)
 		}
 	}
 
-	/* Set the GECOS attribute. */
-	g_value_set_string(&val, gecos);
-	lu_ent_clear(ent, LU_GECOS);
-	lu_ent_add(ent, LU_GECOS, &val);
-	g_value_reset(&val);
+	lu_ent_set_string(ent, LU_GECOS, gecos);
 
 	/* Try to save our changes. */
 	if (lu_user_modify(ctx, ent, &error)) {
@@ -285,8 +274,6 @@ main(int argc, const char **argv)
 			lu_strerror(error));
 		return 1;
 	}
-
-	g_value_unset(&val);
 
 	g_strfreev(fields);
 

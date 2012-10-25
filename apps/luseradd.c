@@ -252,13 +252,9 @@ main(int argc, const char **argv)
 		g_value_unset(&val);
 	}
 
-	g_value_init(&val, G_TYPE_STRING);
 #define PARAM(ATTR, VAR)				\
-	if ((VAR) != NULL) {				\
-		g_value_set_string(&val, (VAR));	\
-		lu_ent_clear(ent, (ATTR));		\
-		lu_ent_add(ent, (ATTR), &val);		\
-	}
+	if ((VAR) != NULL)				\
+		lu_ent_set_string(ent, (ATTR), (VAR));
 	PARAM(LU_GECOS, gecos);
 	PARAM(LU_HOMEDIRECTORY, homeDirectory);
 	PARAM(LU_LOGINSHELL, loginShell);
@@ -269,7 +265,6 @@ main(int argc, const char **argv)
 	PARAM(LU_TELEPHONENUMBER, telephoneNumber);
 	PARAM(LU_HOMEPHONE, homePhone);
 #undef PARAM
-	g_value_unset(&val);
 
 	/* Moment-of-truth time. */
 	if (lu_user_add(ctx, ent, &error) == FALSE) {

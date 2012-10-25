@@ -28,51 +28,31 @@ lu_common_user_default(struct lu_module *module,
 		       const char *name, gboolean is_system,
 		       struct lu_ent *ent, struct lu_error **error)
 {
-	GValue value;
-
 	(void)module;
 	(void)is_system;
 	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
-	memset(&value, 0, sizeof(value));
-	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_USERPASSWORD, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
-		g_value_unset(&value);
-	}
-	if (lu_ent_get(ent, LU_GECOS) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, name);
-		lu_ent_add(ent, LU_GECOS, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_USERPASSWORD) == NULL)
+		lu_ent_set_string(ent, LU_USERPASSWORD,
+				  LU_COMMON_DEFAULT_PASSWORD);
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL)
+		lu_ent_set_string(ent, LU_SHADOWPASSWORD,
+				  LU_COMMON_DEFAULT_PASSWORD);
+	if (lu_ent_get(ent, LU_GECOS) == NULL)
+		lu_ent_set_string(ent, LU_GECOS, name);
 	if (lu_ent_get(ent, LU_HOMEDIRECTORY) == NULL
 	    && lu_ent_get(ent, LU_DUBIOUS_HOMEDIRECTORY) == NULL) {
 		char *tmp;
 
-		g_value_init(&value, G_TYPE_STRING);
 		tmp = g_strdup_printf("/home/%s", name);
-		g_value_set_string(&value, tmp);
-		g_free(tmp);
 		if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0)
-			lu_ent_add(ent, LU_DUBIOUS_HOMEDIRECTORY, &value);
+			lu_ent_set_string(ent, LU_DUBIOUS_HOMEDIRECTORY, tmp);
 		else
-			lu_ent_add(ent, LU_HOMEDIRECTORY, &value);
-		g_value_unset(&value);
+			lu_ent_set_string(ent, LU_HOMEDIRECTORY, tmp);
+		g_free(tmp);
 	}
-	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, LU_COMMON_DEFAULT_SHELL);
-		lu_ent_add(ent, LU_LOGINSHELL, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_LOGINSHELL) == NULL)
+		lu_ent_set_string(ent, LU_LOGINSHELL, LU_COMMON_DEFAULT_SHELL);
 	return TRUE;
 }
 
@@ -86,15 +66,9 @@ lu_common_group_default(struct lu_module *module,
 	(void)is_system;
 	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
-	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
-		GValue value;
-
-		memset(&value, 0, sizeof(value));
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL)
+		lu_ent_set_string(ent, LU_SHADOWPASSWORD,
+				  LU_COMMON_DEFAULT_PASSWORD);
 	return TRUE;
 }
 
@@ -111,12 +85,9 @@ lu_common_suser_default(struct lu_module *module,
 	(void)error;
 	g_return_val_if_fail(name != NULL, FALSE);
 	memset(&value, 0, sizeof(value));
-	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL) {
-		g_value_init(&value, G_TYPE_STRING);
-		g_value_set_string(&value, LU_COMMON_DEFAULT_PASSWORD);
-		lu_ent_add(ent, LU_SHADOWPASSWORD, &value);
-		g_value_unset(&value);
-	}
+	if (lu_ent_get(ent, LU_SHADOWPASSWORD) == NULL)
+		lu_ent_set_string(ent, LU_SHADOWPASSWORD,
+				  LU_COMMON_DEFAULT_PASSWORD);
 	if (lu_ent_get(ent, LU_SHADOWLASTCHANGE) == NULL)
 		lu_util_update_shadow_last_change(ent);
 	if (lu_ent_get(ent, LU_SHADOWMIN) == NULL) {

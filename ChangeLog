@@ -1,5 +1,23 @@
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.c (lu_ent_set_string_int, lu_ent_set_string)
+	(lu_ent_set_string_current): New functions.
+	* lib/entity.h (lu_ent_set_string, lu_ent_set_string_current): New
+	declarations.
+	* docs/reference/libuser-sections.txt: Add lu_ent_set_string and
+	and lu_ent_set_string_current.
+	* apps/lchfn.c (main)
+	* apps/lchsh.c (main)
+	* apps/lgroupmod.c (main)
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main)
+	* apps/lusermod.c (main)
+	* lib/common.c (lu_common_user_default, lu_common_group_default)
+	(lu_common_suser_default)
+	* lib/user.c (lu_default_int)
+	* modules/files.c (lu_shadow_user_add_prep)
+	(lu_shadow_group_add_prep): Use lu_ent_set_string().
+
 	* lib/entity.c (lu_ent_set_prepare): Split from lu_ent_set_int().
 
 	* modules/files.c (module_filename): New function.

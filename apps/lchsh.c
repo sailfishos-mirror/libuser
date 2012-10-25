@@ -107,7 +107,6 @@ main(int argc, const char **argv)
 	shell = lu_ent_get_first_value_strdup(ent, LU_LOGINSHELL);
 	if (shell != NULL) {
 		struct lu_prompt prompts[1];
-		GValue val;
 
 		/* Fill in the prompt structure using the user's shell. */
 		memset(prompts, 0, sizeof(prompts));
@@ -124,15 +123,11 @@ main(int argc, const char **argv)
 			return 1;
 		}
 		/* Modify the in-memory structure's shell attribute. */
-		memset(&val, 0, sizeof(val));
-		g_value_init(&val, G_TYPE_STRING);
-		g_value_set_string(&val, prompts[0].value);
+		lu_ent_set_string(ent, LU_LOGINSHELL, prompts[0].value);
 		if (prompts[0].free_value != NULL) {
 			prompts[0].free_value(prompts[0].value);
 			prompts[0].value = NULL;
 		}
-		lu_ent_clear(ent, LU_LOGINSHELL);
-		lu_ent_add(ent, LU_LOGINSHELL, &val);
 		/* Modify the user's record in the information store. */
 		if (lu_user_modify(ctx, ent, &error)) {
 			g_print(_("Shell changed.\n"));
@@ -142,7 +137,6 @@ main(int argc, const char **argv)
 				lu_strerror(error));
 			return 1;
 		}
-		g_value_unset(&val);
 	}
 
 	lu_ent_free(ent);
