@@ -1,3 +1,8 @@
+2012-11-01  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/entity.h (LU_USERPASSWORD, LU_GROUPPASSWORD, LU_SHADOWPASSWORD):
+	Document that users shouldn't modify these values directly.
+
 2012-10-25  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/user.c (lu_default_int): Simplify.  We don't need to clear

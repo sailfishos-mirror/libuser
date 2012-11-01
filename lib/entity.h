@@ -62,6 +62,9 @@ typedef struct lu_ent lu_ent_t;
  *
  * User password, a %G_TYPE_STRING.  If shadow passwords are used, this is the
  * placeholder password.
+ *
+ * Don't modify passwords by changing this attribute directly, use one of the
+ * specialized functions.
  */
 #define LU_USERPASSWORD		"pw_passwd"
 /**
@@ -107,6 +110,9 @@ typedef struct lu_ent lu_ent_t;
  * LU_GROUPPASSWORD:
  *
  * Group password, a %G_TYPE_STRING.
+ *
+ * Don't modify passwords by changing this attribute directly, use one of the
+ * specialized functions.
  */
 #define LU_GROUPPASSWORD	"gr_passwd"
 /* #define LU_GIDNUMBER		"gr_gid" */
@@ -137,6 +143,9 @@ typedef struct lu_ent lu_ent_t;
  * LU_SHADOWPASSWORD:
  *
  * User password in the shadow file, a %G_TYPE_STRING.
+ *
+ * Don't modify passwords by changing this attribute directly, use one of the
+ * specialized functions.
  */
 #define LU_SHADOWPASSWORD	"sp_pwdp"
 /**
