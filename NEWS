@@ -1,3 +1,21 @@
+0.58
+* API enhancements:
+  * New helpers for attribute access replace 4-5 function calls with 1:
+    lu_ent_get_first_{string,id,value_strdup}(),
+    lu_ent_set_{string,id,long}()
+  * New header <libuser/fs.h>, providing lu_homedir_{populate,move,remove},
+    lu_nscd_flush_cache(), and lu_mail_spool_{create,remove}.
+  * lu_users_enumerate_by_group_full() and lu_groups_enumerate_by_user_full()
+    are now fully supported.
+  * New module-private function lu_util_append_values().
+  * Documented that LU_*PASSWORD should not be manipulated directly.
+* deleteUser in Python bindings now removes the mail spool instead of creating
+  it.
+* New warning in libuser.conf.5 about storing a LDAP password in system-wide
+  configuration.
+* Module interface ABI has changed.
+* Miscellaneous bug fixes and cleanups, quite a few memory leaks fixed.
+
 0.57.7
 * lu_users_enumerate_by_group_full() added, implemented ONLY for LDAP for now.
   Related functions and functionality in other modules will be added later.

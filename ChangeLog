@@ -1,3 +1,10 @@
+2012-11-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Release 0.58.
+	* NEWS: Update.
+	* po/*: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 2012-11-01  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/entity.h (LU_USERPASSWORD, LU_GROUPPASSWORD, LU_SHADOWPASSWORD):
