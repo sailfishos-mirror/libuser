@@ -1,6 +1,7 @@
 user3_5:x:2147483998:2147483989:user3_5:/home/user3_5:/bin/bash
 user3_6:x:2147484008:2147483998:user3_6:/home/user3_6:/bin/bash
 user4_1:x:2147484058:2147484058:user4_1:/home/user4_1:/bin/bash
+user4_2:x:2147484068:2147484068:user4_2:/home/user4_2:/bin/bash
 user5_1:x:2147484158:2147484158:user5_1:/home/user5_1:/bin/bash
 user5_2:x:2147484168:2147484178:user5_2:/home/user5_2:/bin/bash
 user6_1:x:2147484258:2147484258:GECOS6_1:HomeDir6_1:Shell6_1

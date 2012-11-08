@@ -40,10 +40,10 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.LOGINSHELL], ['/bin/bash'])
         self.assertEqual(e[libuser.SHADOWNAME], ['empty_user'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
-        self.assertEqual(e[libuser.SHADOWLASTCHANGE], [1000])
-        self.assertEqual(e[libuser.SHADOWMIN], [0])
-        self.assertEqual(e[libuser.SHADOWMAX], [99999])
-        self.assertEqual(e[libuser.SHADOWWARNING], [7])
+        self.assertEqual(e[libuser.SHADOWLASTCHANGE], [-1])
+        self.assertEqual(e[libuser.SHADOWMIN], [-1])
+        self.assertEqual(e[libuser.SHADOWMAX], [-1])
+        self.assertEqual(e[libuser.SHADOWWARNING], [-1])
         self.assertEqual(e[libuser.SHADOWINACTIVE], [-1])
         self.assertEqual(e[libuser.SHADOWEXPIRE], [-1])
         self.assertEqual(e[libuser.SHADOWFLAG], [-1])
@@ -363,7 +363,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupUserByName('user7_4')
         self.assert_(e)
-        self.assertEqual(e[libuser.SHADOWMAX], [99999])
+        self.assertEqual(e[libuser.SHADOWMAX], [-1])
         self.assertEqual(e[libuser.SHADOWFLAG], [-1])
 
     def testUserMod5(self):

@@ -33,20 +33,21 @@
 
 #define INVALID_LONG LONG_MIN
 
-/* Parse the first element of a (non-NULL, non-empty) value array for a count
- * of days in G_TYPE_LONG, and return the value.  If the array is invalid,
- * return the default of -1. */
+/* Return the first G_TYPE_LONG value of ATTR if ENT, if exists, or -1 if the
+   attribute is missing or invalid. */
 static glong
-read_ndays(GValueArray *array)
+read_ndays(struct lu_ent *ent, const char *attr)
 {
+	GValueArray *values;
 	GValue *value;
 
-	value = g_value_array_get_nth(array, 0);
-	if (value != NULL) {
-		g_assert(G_VALUE_HOLDS_LONG(value));
-		return g_value_get_long(value);
-	} else
+	values = lu_ent_get(ent, attr);
+	if (values == NULL)
 		return -1;
+
+	value = g_value_array_get_nth(values, 0);
+	g_assert(G_VALUE_HOLDS_LONG(value));
+	return g_value_get_long(value);
 }
 
 /* Format a count of days into a string that's intelligible to a user. */
@@ -149,64 +150,73 @@ main(int argc, const char **argv)
 
 	if (list_only) {
 		char buf[LINE_MAX];
-		GValueArray *values, *values2, *values3;
 
 		/* Just print out what we can find out, in a format similar
-		 * to the chage(1) utility from the shadow suite. */
+		   to the chage(1) utility from the shadow suite.
+
+		   To make it a little easier to understand, convert "-1" to
+		   "0" in cases where the two have the same meaning. */
 		if (lu_user_islocked(ctx, ent, &error)) {
 			printf(_("Account is locked.\n"));
 		} else {
 			printf(_("Account is not locked.\n"));
 		}
 
-		values = lu_ent_get(ent, LU_SHADOWMIN);
-		if (values != NULL)
-			printf(_("Minimum:\t%ld\n"), read_ndays(values));
+		shadowMin = read_ndays(ent, LU_SHADOWMIN);
+		printf(_("Minimum:\t%ld\n"), shadowMin != -1 ? shadowMin : 0);
 
-		values = lu_ent_get(ent, LU_SHADOWMAX);
-		if (values != NULL)
-			printf(_("Maximum:\t%ld\n"), read_ndays(values));
+		shadowMax = read_ndays(ent, LU_SHADOWMAX);
+		if (shadowMax != -1)
+			printf(_("Maximum:\t%ld\n"), shadowMax);
+		else
+			printf(_("Maximum:\tNone\n"));
 
-		values = lu_ent_get(ent, LU_SHADOWWARNING);
-		if (values != NULL)
-			printf(_("Warning:\t%ld\n"), read_ndays(values));
+		shadowWarning = read_ndays(ent, LU_SHADOWWARNING);
+		printf(_("Warning:\t%ld\n"),
+		       shadowWarning != -1 ? shadowWarning : 0);
 
-		values = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if (values != NULL)
-			printf(_("Inactive:\t%ld\n"), read_ndays(values));
+		shadowInactive = read_ndays(ent, LU_SHADOWINACTIVE);
+		if (shadowInactive != -1)
+			printf(_("Inactive:\t%ld\n"), shadowInactive);
+		else
+			printf(_("Inactive:\tNever\n"));
 
-		values = lu_ent_get(ent, LU_SHADOWLASTCHANGE);
-		if (values != NULL) {
+		shadowLastChange = read_ndays(ent, LU_SHADOWLASTCHANGE);
+		if (shadowLastChange == 0)
+			strcpy(buf, _("Must change password on next login"));
+		else {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values), buf, sizeof(buf));
-			printf(_("Last Change:\t%s\n"), buf);
+			date_to_string(shadowLastChange, buf, sizeof(buf));
 		}
+		printf(_("Last Change:\t%s\n"), buf);
 
-		values2 = lu_ent_get(ent, LU_SHADOWMAX);
-		if (values != NULL && values2 != NULL) {
+		if (shadowLastChange == 0)
+			strcpy(buf, _("Must change password on next login"));
+		else {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values) +
-				       read_ndays(values2),
-				       buf, sizeof(buf));
-			printf(_("Password Expires:\t%s\n"), buf);
+			if (shadowLastChange != -1 && shadowMax != -1)
+				date_to_string(shadowLastChange + shadowMax,
+					       buf, sizeof(buf));
 		}
+		printf(_("Password Expires:\t%s\n"), buf);
 
-		values3 = lu_ent_get(ent, LU_SHADOWINACTIVE);
-		if (values != NULL && values2 != NULL && values3 != NULL) {
+		if (shadowLastChange == 0)
+			strcpy(buf, _("Must change password on next login"));
+		else {
 			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values) +
-				       read_ndays(values2) +
-				       read_ndays(values3),
-				       buf, sizeof(buf));
-			printf(_("Password Inactive:\t%s\n"), buf);
+			if (shadowLastChange != -1 && shadowMax != -1
+			    && shadowInactive != -1)
+				date_to_string(shadowLastChange + shadowMax
+					       + shadowInactive, buf,
+					       sizeof(buf));
 		}
+		printf(_("Password Inactive:\t%s\n"), buf);
 
-		values = lu_ent_get(ent, LU_SHADOWEXPIRE);
-		if (values != NULL) {
-			strcpy(buf, _("Never"));
-			date_to_string(read_ndays(values), buf, sizeof(buf));
-			printf(_("Account Expires:\t%s\n"), buf);
-		}
+		strcpy(buf, _("Never"));
+		shadowExpire = read_ndays(ent, LU_SHADOWEXPIRE);
+		if (shadowExpire != -1)
+			date_to_string(shadowExpire, buf, sizeof(buf));
+		printf(_("Account Expires:\t%s\n"), buf);
 	} else {
 		/* Set values using parameters given on the command-line. */
 		if (shadowLastChange != INVALID_LONG)

@@ -153,18 +153,30 @@ typedef struct lu_ent lu_ent_t;
  *
  * The number of days since the epoch to the day when the password was last
  * changed, a %G_TYPE_LONG.
+ *
+ * May be -1 to indicate that the field exists without a value.  This should be
+ * handled the same as if the attribute was missing altogether, and consistently
+ * with shadow(5).
  */
 #define LU_SHADOWLASTCHANGE	"sp_lstchg"
 /**
  * LU_SHADOWMIN:
  *
  * Minimum password lifetime in days before it can be changed, a %G_TYPE_LONG.
+ *
+ * May be -1 to indicate that the field exists without a value.  This should be
+ * handled the same as if the attribute was missing altogether, and consistently
+ * with shadow(5).
  */
 #define LU_SHADOWMIN		"sp_min"
 /**
  * LU_SHADOWMAX:
  *
  * Maximum password lifetime in days before it must be changed, a %G_TYPE_LONG.
+ *
+ * May be -1 to indicate that the field exists without a value.  This should be
+ * handled the same as if the attribute was missing altogether, and consistently
+ * with shadow(5).
  */
 #define LU_SHADOWMAX		"sp_max"
 /**
@@ -172,6 +184,10 @@ typedef struct lu_ent lu_ent_t;
  *
  * Days before the password lifetime expires when the user should start to be
  * warned, a %G_TYPE_LONG.
+ *
+ * May be -1 to indicate that the field exists without a value.  This should be
+ * handled the same as if the attribute was missing altogether, and consistently
+ * with shadow(5).
  */
 #define LU_SHADOWWARNING	"sp_warn"
 /**

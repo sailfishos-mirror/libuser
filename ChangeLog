@@ -1,5 +1,40 @@
 2012-11-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/entity.h (LU_SHADOWLASTCHANGE, LU_SHADOWMIN, LU_SHADOWMAX)
+	(LU_SHADOWWARNING): Document that -1 should be treated the same
+	as a missing value.
+	* modules/files.c (format_shadow): Treat most missing fields as default
+	value "-1", and suppress it on output, to stop deviating from shadow(5).
+	* apps/lchage.c (read_ndays): Move lu_ent_get() call from the callers.
+	Handle missing value and value -1 equivalently.  All callers updated.
+	(main): Always print all fields, even if the account attributes
+	are missing.  Output missing minimum password age, and missing
+	passwod warning period, as 0.  Output missing maximum password age
+	as "None".  Output missing password inactivity period as "Never".
+	Output missing last password change and missing account expiration date
+	as "Never".
+	Consistently report "Must change password on next login" in all fields
+	affected by this setting, and "Never" if the respective password
+	expiration feature is disabled.
+	* apps/lchage.1 (--date): Document values 0 and -1.
+	(--inactive): Document value -1.
+	(--mindays): Document value -1, and interaction with --maxdays.
+	(--maxdays): Document value -1, don't recommend 99999 to disable
+	password expiration.
+	(--warndays): Document values 0 and -1.
+	(NOTES): New section.
+	* tests/files_test: Test also empty sp_lstchg.
+	* tests/files_test.py (Tests.testUserLookupName2)
+	(Tests.testUserMod4): Update expected values to follow lib/entity.h and
+	shadow(5), and for updated empty_user contents.
+	* tests/utils_test (lchage): Test handling of -d 0, and handling of
+	-1 for all fields.
+	* tests/utils_shadow: Verify that -1 values are correctly suppressed
+	on output.
+	* tests/utils_group
+	* tests/utils_gshadow
+	* tests/utils_passwd: Add user4_2 added by tests/utils_test.
+
 	* configure.in: Release 0.58.
 	* NEWS: Update.
 	* po/*: Update.

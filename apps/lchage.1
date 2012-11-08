@@ -1,5 +1,5 @@
 .\" A man page for lchage
-.\" Copyright (C) 2005 Red Hat, Inc.
+.\" Copyright (C) 2005, 2012 Red Hat, Inc.
 .\"
 .\" This is free software; you can redistribute it and/or modify it under
 .\" the terms of the GNU Library General Public License as published by
@@ -15,8 +15,8 @@
 .\" License along with this program; if not, write to the Free Software
 .\" Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 .\"
-.\" Author: Miloslav Trmac <mitr@redhat.com>
-.TH lchage 1 "Jan 12 2005" libuser
+.\" Author: Miloslav Trmač <mitr@redhat.com>
+.TH lchage 1 "Nov 8 2012" libuser
 
 .SH NAME
 lchage \- Display or change user password policy
@@ -31,6 +31,16 @@ Displays or allows changing password policy of \fIuser\fR.
 .TP
 \fB\-d\fR, \fB\-\-date\fR=\fIdays\fR
 Set the date of last password change to \fIdays\fR after Jan 1 1970.
+
+Set
+.I days
+to -1 to disable password expiration
+(i.e. to ignore \fB\-\-mindays\fP, and \fB\-\-maxdays\fP and related settings).
+
+Set
+.I days
+to 0 to enforce password change on next login.
+(This also disables password expiration until the password is changed.)
 
 .TP
 \fB\-E\fR, \fB\-\-expire\fR=\fIdays\fR
@@ -47,7 +57,10 @@ configuration.
 .TP
 \fB\-I\fR, \fB\-\-inactive\fR=\fIdays\fR
 Disable the account after \fIdays\fR after password expires (after
-the user user is required to change the password).
+the user is required to change the password).
+Set
+.I days
+to -1 to keep the account enabled indefinitely after password expiration.
 
 .TP
 \fB\-l\fR, \fB\-\-list\fR
@@ -56,17 +69,31 @@ Only list current \fIuser\fR's policy and make no changes.
 .TP
 \fB\-m\fR, \fB\-\-mindays\fR=\fIdays\fR
 Require at least \fIdays\fR days between password changes.
-Set \fIdays\fR to 0 to disable this checking.
+Set \fIdays\fR to 0 or -1 to disable this requirement.
+
+If this value is larger than the value set by \fB\-\-maxdays\fP,
+the user cannot change the pasword.
 
 .TP
 \fB\-M\fR, \fB\-\-maxdays\fR=\fIdays\fR
 Require changing the password after \fIdays\fR since last password change.
-Set \fIdays\fR to 99999 to disable this checking.
+Set \fIdays\fR to -1 to disable password expiration.
 
 .TP
 \fB\-W\fR, \fB\-\-warndays\fR=\fIdays\fR
 Start warning the user \fIdays\fR before password expires (before
 the user is required to change the password).
+Set
+.I days
+to 0 or -1 to disable the warning.
 
 .SH EXIT STATUS
 The exit status is 0 on success, nonzero on error.
+
+.SH NOTES
+Note that \(lqaccount expiration\(rq
+(set by \fB\-\-expire\fP)
+is distinct from \(lqpassword expiration\(rq
+(set by \fB\-\-maxdays\fP).
+Account expiration happens on a fixed date regardless of password changes.
+Password expiration is relative to the date of last password change.
