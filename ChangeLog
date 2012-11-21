@@ -1,3 +1,9 @@
+2012-11-21  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/default_pw_test:
+	* tests/ldap_test: Use 1024-bit RSA keys instead of 512-bit, to
+	run correctly in FIPS mode.
+
 2012-11-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/entity.h (LU_SHADOWLASTCHANGE, LU_SHADOWMIN, LU_SHADOWMAX)
