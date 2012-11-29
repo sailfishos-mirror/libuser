@@ -1,3 +1,7 @@
+2012-11-29  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.c (lu_dispatch): Add a comment about unreachable code.
+
 2012-11-21  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/default_pw_test:

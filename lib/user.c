@@ -1148,11 +1148,17 @@ lu_dispatch(struct lu_context *context,
 
 	if (success) {
 		switch (id) {
+			/* user_lookup_id was converted into user_lookup_name
+			   above; this case label is included only for
+			   completeness. */
 			case user_lookup_id:
 			case user_lookup_name:
 				g_assert(entity != NULL);
 				entity->type = lu_user;
 				break;
+			/* group_lookup_id was converted into group_lookup_name
+			   above; this case label is included only for
+			   completeness. */
 			case group_lookup_name:
 			case group_lookup_id:
 				g_assert(entity != NULL);
