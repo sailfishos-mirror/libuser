@@ -87,7 +87,8 @@ fill_urandom(char *output, size_t length)
 	size_t got = 0;
 
 	fd = open("/dev/urandom", O_RDONLY);
-	g_return_val_if_fail(fd != -1, FALSE);
+	if (fd == -1)
+		return FALSE;
 
 	memset(output, '\0', length);
 

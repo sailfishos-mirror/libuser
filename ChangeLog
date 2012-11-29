@@ -1,5 +1,8 @@
 2012-11-29  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (fill_urandom): Don't use g_return_val_if_fail(), glib
+	can be configured so that it does nothing.
+
 	* lib/user.c (lu_dispatch): Add a comment about unreachable code.
 
 2012-11-21  Miloslav Trmač  <mitr@redhat.com>
