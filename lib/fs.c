@@ -58,24 +58,34 @@ current_umask(void)
 	return value;
 }
 
-/* Copy the "src" directory to "dest", setting all ownerships as given, and
+/* Copy SRC_DIR_NAME under SRC_PARENT_FD, which corresponds to SRC_DIR_PATH,
+   to "dest", setting all ownerships as given, and
    setting the mode of the top-level directory as given.  The group ID of the
    copied files is preserved if it is nonzero.  If keep_contexts, preserve
    SELinux contexts in files under dest; use matchpathcon otherwise.  Assume
    umask_value is the current value of umask.
 
+   SRC_PARENT_FD may be AT_FDCWD.
+
    Note that keep_contexts does NOT affect the context of dest; the caller must
    perform an explicit setfscreatecon() before calling lu_homedir_copy() to set
    the context of dest.  The SELinux fscreate context is on return from this
-   function is unspecified. */
+   function is unspecified.
+
+   Note that SRC_DIR_PATH should only be used for error messages, not to access
+   the files; if the user is still logged in, a directory in the path may be
+   replaced by a symbolic link, redirecting the access outside of
+   SRC_PARENT_FD/SRC_DIR_NAME. */
 static gboolean
-lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
+lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
+		const char *src_dir_path, const char *dest, uid_t owner,
+		gid_t group,
 		mode_t mode, gboolean keep_contexts, mode_t umask_value,
 		struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
-	int ifd, ofd;
+	int src_dir_fd, ifd, ofd;
 	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -87,11 +97,19 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		goto err;
 	}
 
-	dir = opendir(src);
+	src_dir_fd = openat(src_parent_fd, src_dir_name,
+			    O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (src_dir_fd == -1) {
+		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
+			     src_dir_path, strerror(errno));
+		return FALSE;
+	}
+	dir = fdopendir(src_dir_fd);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error reading `%s': %s"), src,
+			     _("Error reading `%s': %s"), src_dir_path,
 			     strerror(errno));
+		close(src_dir_fd);
 		goto err;
 	}
 
@@ -136,13 +154,14 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 		/* Build the path of the source file or directory and its
 		   corresponding member in the new tree. */
-		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s", src,
-			 ent->d_name);
+		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s",
+			 src_dir_path, ent->d_name);
 		snprintf(path, sizeof(path), "%s/%s", dest, ent->d_name);
 
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
-		if (lstat(src_ent_path, &st) != 0)
+		if (fstatat(src_dir_fd, ent->d_name, &st,
+			    AT_SYMLINK_NOFOLLOW) != 0)
 			continue;
 
 		if (keep_contexts != 0) {
@@ -158,7 +177,8 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
-			if (!lu_homedir_copy(src_ent_path, path, owner,
+			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
+					     src_ent_path, path, owner,
 					     st.st_gid ?: group, st.st_mode,
 					     keep_contexts, umask_value, error))
 				/* Aargh!  Fail up. */
@@ -172,7 +192,8 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		if (S_ISLNK(st.st_mode)) {
 			ssize_t len;
 
-			len = readlink(src_ent_path, buf, sizeof(buf) - 1);
+			len = readlinkat(src_dir_fd, ent->d_name, buf,
+					 sizeof(buf) - 1);
 			if (len == -1) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error reading `%s': %s"),
@@ -205,7 +226,8 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 			/* Open both the input and output files.  If we fail to
 			   do either, we have to give up. */
-			ifd = open(src_ent_path, O_RDONLY);
+			ifd = openat(src_dir_fd, ent->d_name,
+				     O_RDONLY | O_NOFOLLOW);
 			if (ifd == -1) {
 				lu_error_new(error, lu_error_open,
 					     _("Error reading `%s': %s"),
@@ -334,7 +356,8 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		goto err;
 	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
 		goto err_fscreate;
-	ret = lu_homedir_copy(skeleton, directory, owner, group, mode, 0,
+	ret = lu_homedir_copy(AT_FDCWD, skeleton, skeleton, directory, owner,
+			      group, mode, 0,
 			      current_umask(), error);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
@@ -351,7 +374,8 @@ err:
 
    Note that DIR_PATH should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
-   replaced by a symbolic link, redirecting the access outside of DIRFD. */
+   replaced by a symbolic link, redirecting the access outside of
+   PARENT_FD/DIR_NAME. */
 static gboolean
 remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
 		    struct lu_error **error)
@@ -485,7 +509,8 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	if (!lu_util_fscreate_from_file(oldhome, error))
 		goto err_fscreate;
 	/* ... and we can copy it ... */
-	if (!lu_homedir_copy(oldhome, newhome, st.st_uid, st.st_gid,
+	if (!lu_homedir_copy(AT_FDCWD, oldhome, oldhome, newhome, st.st_uid,
+			     st.st_gid,
 			     st.st_mode, 1, current_umask(), error))
 		goto err_fscreate;
 	lu_util_fscreate_restore(fscreate);
