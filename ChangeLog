@@ -1,5 +1,9 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_access_options): Fix description of member umask.
+	(mode_for_copy): New helper function.
+	(lu_homedir_copy_and_close): Use mode_for_copy().
+
 	* lib/fs.c (lu_homedir_copy_and_close): Rename from ...
 	(lu_homedir_copy) ... this.  When scanning a directory, open() each
 	entry and then fstat() instead of fstatat() + possible openat(), which

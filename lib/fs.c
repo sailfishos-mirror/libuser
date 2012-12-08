@@ -66,7 +66,7 @@ struct copy_access_options
 	uid_t uid;		/* UID to use for the copy. */
 	/* GID to use for the copy (only!) if original is owned by GID 0. */
 	gid_t gid;
-	mode_t umask;		/* umask to apply to directories (only!). */
+	mode_t umask;		/* umask to apply to modes */
 };
 
 /* Return an UID appropriate for a copy of ST given OPTIONS. */
@@ -84,6 +84,13 @@ gid_for_copy(const struct copy_access_options *options, const struct stat *st)
 	if (st->st_gid != 0) /* Skeleton wants us to us a different group */
 		return st->st_gid;
 	return options->gid;
+}
+
+/* Return a mode_t value appropriate for a copy of ST given OPTIONS. */
+static mode_t
+mode_for_copy(const struct copy_access_options *options, const struct stat *st)
+{
+	return st->st_mode & ~options->umask;
 }
 
 /* Copy SRC_DIR_FD, which corresponds to SRC_DIR_PATH, to DEST_DIR_NAME under
@@ -172,7 +179,7 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 	   other bits.  Do this after chown, because chown is permitted to
 	   reset these bits. */
 	if (fchmod(dest_dir_fd,
-		   src_dir_stat->st_mode & ~access_options->umask) == -1) {
+		   mode_for_copy(access_options, src_dir_stat)) == -1) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error setting mode of `%s': %s"), dest_dir_path,
 			     strerror(errno));
@@ -339,7 +346,7 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 			   preserve S_ISGID and other bits.  Do this after
 			   chown, because chown is permitted to reset these
 			   bits. */
-			if (fchmod(ofd, st.st_mode & ~access_options->umask)
+			if (fchmod(ofd, mode_for_copy(access_options, &st))
 			    == -1) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error setting mode of `%s': "
