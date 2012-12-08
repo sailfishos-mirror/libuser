@@ -86,27 +86,29 @@ gid_for_copy(const struct copy_access_options *options, const struct stat *st)
 	return options->gid;
 }
 
-/* Copy SRC_DIR_NAME under SRC_PARENT_FD, which corresponds to SRC_DIR_PATH,
-   to DEST_DIR_NAME under DEST_PARENT_FD, which corresponds to DEST_DIR_PATH.
-   Use ACCESS_OPTIONS.  Use SRC_DIR_STAT for data about SRC_DIR_PATH.
+/* Copy SRC_DIR_FD, which corresponds to SRC_DIR_PATH, to DEST_DIR_NAME under
+   DEST_PARENT_FD, which corresponds to DEST_DIR_PATH.  Use ACCESS_OPTIONS.  Use
+   SRC_DIR_STAT for data about SRC_DIR_PATH.
 
-   SRC_PARENT_FD and DEST_PARENT_FD may be AT_FDCWD.
+   In every case, even on error, close SRC_DIR_FD.
+
+   DEST_PARENT_FD may be AT_FDCWD.
 
    Note that SRC_DIR_PATH should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
    SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
 static gboolean
-lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
-		const char *src_dir_path, int dest_parent_fd,
-		const char *dest_dir_name, const char *dest_dir_path,
-		const struct stat *src_dir_stat,
-		struct copy_access_options *access_options,
-		struct lu_error **error)
+lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
+			  int dest_parent_fd, const char *dest_dir_name,
+			  const char *dest_dir_path,
+			  const struct stat *src_dir_stat,
+			  struct copy_access_options *access_options,
+			  struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
-	int src_dir_fd, dest_dir_fd, ifd, ofd;
+	int dest_dir_fd, ifd, ofd;
 	struct timespec timebuf[2];
 	gboolean ret = FALSE;
 
@@ -116,23 +118,15 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		lu_error_new(error, lu_error_generic,
 			     _("Home directory path `%s' is not absolute"),
 			     dest_dir_path);
-		goto err;
+		goto err_src_dir_fd;
 	}
 
-	src_dir_fd = openat(src_parent_fd, src_dir_name,
-			    O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
-	if (src_dir_fd == -1) {
-		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
-			     src_dir_path, strerror(errno));
-		return FALSE;
-	}
 	dir = fdopendir(src_dir_fd);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error reading `%s': %s"), src_dir_path,
 			     strerror(errno));
-		close(src_dir_fd);
-		goto err;
+		goto err_src_dir_fd;
 	}
 
 	if (access_options->preserve_contexts) {
@@ -206,35 +200,39 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		snprintf(dest_ent_path, sizeof(dest_ent_path), "%s/%s",
 			 dest_dir_path, ent->d_name);
 
-		/* What we do next depends on the type of entry we're
-		 * looking at. */
-		if (fstatat(src_dir_fd, ent->d_name, &st,
-			    AT_SYMLINK_NOFOLLOW) != 0)
-			continue;
-
-		/* If it's a directory, descend into it. */
-		if (S_ISDIR(st.st_mode)) {
-			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
-					     src_ent_path, dest_dir_fd,
-					     ent->d_name, dest_ent_path, &st,
-					     access_options, error))
-				/* Aargh!  Fail up. */
-				goto err_dest_dir_fd;
-			continue;
-		}
-
-		/* If it's a symlink, duplicate it. */
-		if (S_ISLNK(st.st_mode)) {
+		/* Open the input entry first, then we can fstat() it and be
+		   certain that it is still the same file.  O_NONBLOCK protects
+		   us against FIFOs and perhaps side-effects of the open() of a
+		   device file if there ever was one here, and doesn't matter
+		   for regular files or directories. */
+		ifd = openat(src_dir_fd, ent->d_name,
+			     O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
+		if (ifd == -1) {
 			ssize_t len;
+			int saved_errno;
+
+			saved_errno = errno;
+			if (errno != ELOOP
+			    || fstatat(src_dir_fd, ent->d_name, &st,
+				       AT_SYMLINK_NOFOLLOW) != 0
+			    || !S_ISLNK(st.st_mode)) {
+				lu_error_new(error, lu_error_open,
+					     _("Error opening `%s': %s"),
+					     src_ent_path,
+					     strerror(saved_errno));
+				goto err_dest_dir_fd;
+			}
+
+			/* OK, we have a symlink.  Duplicate it. */
 
 			/* In the worst case here, we end up with a wrong
-			   SELinux context for a symbolic link.  That's
-			   unfortunate, but symlink contents are more or less
-			   public anyway... (A possible improvement would be to
-			   use Linux-only O_PATH to open src_ent_path first,
-			   then see if it is a symlink, and "upgrade" to an
-			   O_RDONLY if not.  But O_PATH is available only in
-			   Linux >= 2.6.39.) */
+			   SELinux context for a symbolic link due to a path
+			   name lookup race.  That's unfortunate, but symlink
+			   contents are more or less public anyway... (A
+			   possible improvement would be to use Linux-only
+			   O_PATH to open src_ent_path first, then see if it is
+			   a symlink, and "upgrade" to an O_RDONLY if not.  But
+			   O_PATH is available only in Linux >= 2.6.39.) */
 			if (access_options->preserve_contexts) {
 				if (!lu_util_fscreate_from_lfile(src_ent_path,
 								 error))
@@ -278,20 +276,28 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			continue;
 		}
 
+		if (fstat(ifd, &st) != 0) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't stat `%s': %s"), src_ent_path,
+				     strerror(errno));
+			goto err_ifd;
+		}
+		g_assert(!S_ISLNK(st.st_mode));
+
+		/* If it's a directory, descend into it. */
+		if (S_ISDIR(st.st_mode)) {
+			if (!lu_homedir_copy_and_close(ifd, src_ent_path,
+						       dest_dir_fd, ent->d_name,
+						       dest_ent_path, &st,
+						       access_options, error))
+				/* Aargh!  Fail up. */
+				goto err_dest_dir_fd;
+			continue;
+		}
+
 		/* If it's a regular file, copy it. */
 		if (S_ISREG(st.st_mode)) {
 			off_t offset;
-
-			/* Open both the input and output files.  If we fail to
-			   do either, we have to give up. */
-			ifd = openat(src_dir_fd, ent->d_name,
-				     O_RDONLY | O_NOFOLLOW);
-			if (ifd == -1) {
-				lu_error_new(error, lu_error_open,
-					     _("Error reading `%s': %s"),
-					     src_ent_path, strerror(errno));
-				goto err_dest_dir_fd;
-			}
 
 			if (access_options->preserve_contexts) {
 				if (!lu_util_fscreate_from_fd(ifd, src_ent_path,
@@ -402,6 +408,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			continue;
 		}
 		/* Note that we don't copy device specials. */
+		close(ifd);
 	}
 
 	timebuf[0] = src_dir_stat->st_atim;
@@ -419,7 +426,10 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 	close(dest_dir_fd);
  err_dir:
 	closedir(dir);
- err:
+	src_dir_fd = -1;
+ err_src_dir_fd:
+	if (src_dir_fd != -1)
+		close(src_dir_fd);
 	return ret;
 }
 
@@ -443,6 +453,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		    const char *directory, uid_t owner, gid_t group,
 		    mode_t mode, struct lu_error **error)
 {
+	int skeleton_fd;
 	struct copy_access_options access_options;
 	struct stat st;
 	lu_security_context_t fscreate;
@@ -452,23 +463,33 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
 					      "/etc/skel");
 	ret = FALSE;
-	if (lstat(skeleton, &st) == -1) {
-		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
-			     skeleton, strerror(errno));
-		goto err;
-	}
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
+
+	skeleton_fd = open(skeleton,
+			   O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (skeleton_fd == -1) {
+		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
+			     skeleton, strerror(errno));
+		goto err_fscreate;
+	}
+	if (fstat(skeleton_fd, &st) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     skeleton, strerror(errno));
+		goto err_skeleton_fd;
+	}
+
 	access_options.preserve_contexts = FALSE;
 	access_options.uid = owner;
 	access_options.gid = group;
 	access_options.umask = current_umask();
-	if (!lu_homedir_copy(AT_FDCWD, skeleton, skeleton, AT_FDCWD, directory,
-			     directory, &st, &access_options, error))
+	if (!lu_homedir_copy_and_close(skeleton_fd, skeleton, AT_FDCWD,
+				       directory, directory, &st,
+				       &access_options, error))
 		goto err_fscreate;
 
 	/* Now reconfigure the toplevel directory as desired.  The directory
-	   thus might have incorred owner/permissions for a while; this is OK
+	   thus might have incorrect owner/permissions for a while; this is OK
 	   because the contents are public anyway (every users sees them on
 	   first access), and write access is not allowed because the skeleton
 	   is not writable. */
@@ -492,7 +513,10 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		goto err_fscreate;
 	}
 	ret = TRUE;
+	goto err_fscreate;
 
+err_skeleton_fd:
+	close(skeleton_fd);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
 err:
@@ -629,30 +653,44 @@ gboolean
 lu_homedir_move(const char *oldhome, const char *newhome,
 		struct lu_error ** error)
 {
+	int oldhome_fd;
 	struct copy_access_options access_options;
 	struct stat st;
 	lu_security_context_t fscreate;
 
 	LU_ERROR_CHECK(error);
 
-	/* If the directory exists... */
-	if (stat(oldhome, &st) != 0)
-		goto err;
-
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
+
+	/* If the directory exists... */
+	oldhome_fd = open(oldhome,
+			  O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (oldhome_fd == -1) {
+		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
+			     oldhome, strerror(errno));
+		goto err_fscreate;
+	}
+	if (fstat(oldhome_fd, &st) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     oldhome, strerror(errno));
+		goto err_oldhome_fd;
+	}
+
 	/* ... and we can copy it ... */
 	access_options.preserve_contexts = TRUE;
 	access_options.uid = st.st_uid;
 	access_options.gid = st.st_gid;
 	access_options.umask = current_umask();
-	if (!lu_homedir_copy(AT_FDCWD, oldhome, oldhome, AT_FDCWD, newhome,
-			     newhome, &st, &access_options, error))
+	if (!lu_homedir_copy_and_close(oldhome_fd, oldhome, AT_FDCWD, newhome,
+				       newhome, &st, &access_options, error))
 		goto err_fscreate;
 	lu_util_fscreate_restore(fscreate);
 	/* ... remove the old one. */
 	return lu_homedir_remove(oldhome, error);
 
+err_oldhome_fd:
+	close(oldhome_fd);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
 err:

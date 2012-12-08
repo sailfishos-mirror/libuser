@@ -1,5 +1,12 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_homedir_copy_and_close): Rename from ...
+	(lu_homedir_copy) ... this.  When scanning a directory, open() each
+	entry and then fstat() instead of fstatat() + possible openat(), which
+	is racy.
+	(lu_homedir_populate, lu_homedir_move): Update for
+	lu_homedir_copy_and_close().
+
 	* lib/user_private.h (lu_util_fscreate_from_fd)
 	(lu_util_fscreate_from_lfile): New declarations and fallback macros.
 	* lib/util.c (lu_util_fscreate_from_fd, lu_util_fscreate_from_lfile):
