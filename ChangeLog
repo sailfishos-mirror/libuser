@@ -1,5 +1,10 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_homedir_copy): When creating copies, start with
+	minimal permissions, set owner, then set the desired permissions.
+	Thus, start preserving S_IS[UG]ID flags on copied regular files, and
+	make sure they aren't even momentarily undesirably acessible.
+
 	* lib/fs.c (copy_access_options): Drop member is_toplevel again.
 	(gid_for_copy): Don't use options->is_toplevel.
 	(lu_homedir_populate): Don't make a special case for the top-level

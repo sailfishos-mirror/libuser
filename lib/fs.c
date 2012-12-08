@@ -140,9 +140,10 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		goto err;
 	}
 
-	/* Create the top-level directory. */
-	if (mkdirat(dest_parent_fd, dest_dir_name,
-		    src_dir_stat->st_mode & ~access_options->umask) == -1
+	/* Create the directory.  It starts owned by us (presumbaly root), with
+	   fairly restrictive permissions that still allow us to use the
+	   directory. */
+	if (mkdirat(dest_parent_fd, dest_dir_name, S_IRWXU) == -1
 	    && errno != EEXIST) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error creating `%s': %s"), dest_dir_path,
@@ -159,7 +160,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		goto err_dir;
 	}
 
-	/* Set the ownership on the top-level directory. */
+	/* Set the ownership on the directory.  Permissions are still
+	   fairly restrictive. */
 	if (fchown(dest_dir_fd, uid_for_copy(access_options, src_dir_stat),
 		   gid_for_copy(access_options, src_dir_stat)) == -1
 	    && errno != EPERM) {
@@ -169,8 +171,9 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		goto err_dest_dir_fd;
 	}
 
-	/* Set modes explicitly to preserve S_ISGID and other bits.  Do this
-	   after chown, because chown is permitted to reset these bits. */
+	/* Set the desired mode.  Do this explicitly to preserve S_ISGID and
+	   other bits.  Do this after chown, because chown is permitted to
+	   reset these bits. */
 	if (fchmod(dest_dir_fd,
 		   src_dir_stat->st_mode & ~access_options->umask) == -1) {
 		lu_error_new(error, lu_error_generic,
@@ -284,9 +287,12 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     src_ent_path, strerror(errno));
 				goto err_dest_dir_fd;
 			}
+			/* Start with absolutely restrictive permissions; the
+			   original file may be e.g. a hardlink to
+			   /etc/shadow. */
 			ofd = openat(dest_dir_fd, ent->d_name,
 				     O_EXCL | O_CREAT | O_WRONLY | O_NOFOLLOW,
-				     st.st_mode);
+				     0);
 			if (ofd == -1) {
 				if (errno == EEXIST) {
 					close(ifd);
@@ -296,6 +302,31 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     _("Error writing `%s': %s"),
 					     dest_ent_path, strerror(errno));
 				goto err_ifd;
+			}
+
+			/* Set the ownership; permissions are still
+			   restrictive. */
+			if (fchown(ofd, uid_for_copy(access_options, &st),
+				   gid_for_copy(access_options, &st)) == -1
+			    && errno != EPERM) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error changing owner of `%s': "
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_ofd;
+			}
+
+			/* Set the desired mode.  Do this explicitly to
+			   preserve S_ISGID and other bits.  Do this after
+			   chown, because chown is permitted to reset these
+			   bits. */
+			if (fchmod(ofd, st.st_mode & ~access_options->umask)
+			    == -1) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error setting mode of `%s': "
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_ofd;
 			}
 
 			/* Now just copy the data. */
@@ -350,18 +381,6 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			close (ifd);
 			close (ofd);
 
-			/* Set the ownership and timestamp on the new file. */
-			if (fchownat(dest_dir_fd, ent->d_name,
-				     uid_for_copy(access_options, &st),
-				     gid_for_copy(access_options, &st),
-				     AT_SYMLINK_NOFOLLOW) == -1
-			    && errno != EPERM) {
-				lu_error_new(error, lu_error_generic,
-					     _("Error changing owner of `%s': "
-					       "%s"), dest_ent_path,
-					     strerror(errno));
-				goto err_dest_dir_fd;
-			}
 			utimensat(dest_dir_fd, ent->d_name, timebuf,
 				  AT_SYMLINK_NOFOLLOW);
 			continue;
