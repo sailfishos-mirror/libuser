@@ -63,16 +63,43 @@ struct copy_access_options
 {
 	/* Preserve selinux contexts; otherwise use matchpathcon. */
 	gboolean preserve_contexts;
+	/* Initialized to TRUE for use on the top-level directory, then
+	   FALSE. */
+	gboolean is_toplevel;
+	uid_t uid;		/* UID to use for the copy. */
+	/* GID to use for the copy (only!) if original is owned by GID 0. */
+	gid_t gid;
 	mode_t umask;		/* umask to apply to directories (only!). */
 };
 
+/* Return an UID appropriate for a copy of ST given OPTIONS. */
+static uid_t
+uid_for_copy(const struct copy_access_options *options, const struct stat *st)
+{
+	(void)st;
+	return options->gid;
+}
+
+/* Return a GID appropriate for a copy of ST given OPTIONS. */
+static gid_t
+gid_for_copy(const struct copy_access_options *options, const struct stat *st)
+{
+	if (options->is_toplevel)
+		/* Ugly special case: always use the specified GID for the
+		   user's home directory even if the skeleton were owned by
+		   somebody else for some reason. */
+		return options->gid;
+	if (st->st_gid != 0) /* Skeleton wants us to us a different group */
+		return st->st_gid;
+	return options->gid;
+}
+
 /* Copy SRC_DIR_NAME under SRC_PARENT_FD, which corresponds to SRC_DIR_PATH,
    to DEST_DIR_NAME under DEST_PARENT_FD, which corresponds to DEST_DIR_PATH,
-   setting all ownerships as given, and
-   setting the mode of the top-level directory as given.  The group ID of the
-   copied files is preserved if it is nonzero.  Use ACCESS_OPTIONS.
+   setting the mode of the top-level directory as given.  Use ACCESS_OPTIONS.
+   Use SRC_DIR_STAT for data about SRC_DIR_PATH.
 
-   SRC_PARENT_FD may be AT_FDCWD.
+   SRC_PARENT_FD and DEST_PARENT_FD may be AT_FDCWD.
 
    Note that ACCESS_OPTIONS->preserve_contexts does NOT affect the context of
    DEST_DIR_PATH; the caller must
@@ -83,13 +110,13 @@ struct copy_access_options
    Note that SRC_DIR_PATH should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
-   SRC_PARENT_FD/SRC_DIR_NAME. */
+   SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
 static gboolean
 lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		const char *src_dir_path, int dest_parent_fd,
 		const char *dest_dir_name, const char *dest_dir_path,
-		uid_t owner, gid_t group,
-		mode_t mode, const struct copy_access_options *access_options,
+		const struct stat *src_dir_stat,
+		mode_t mode, struct copy_access_options *access_options,
 		struct lu_error **error)
 {
 	struct dirent *ent;
@@ -141,7 +168,9 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 	}
 
 	/* Set the ownership on the top-level directory. */
-	if (fchown(dest_dir_fd, owner, group) == -1 && errno != EPERM) {
+	if (fchown(dest_dir_fd, uid_for_copy(access_options, src_dir_stat),
+		   gid_for_copy(access_options, src_dir_stat)) == -1
+	    && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error changing owner of `%s': %s"),
 			     dest_dir_path, strerror(errno));
@@ -156,6 +185,10 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			     strerror(errno));
 		goto err_dest_dir_fd;
 	}
+
+	/* If this was the top-level call, we are done with configuring
+	   access. */
+	access_options->is_toplevel = FALSE;
 
 	while ((ent = readdir(dir)) != NULL) {
 		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
@@ -201,8 +234,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
 					     src_ent_path, dest_dir_fd,
-					     ent->d_name, dest_ent_path, owner,
-					     st.st_gid ?: group, st.st_mode,
+					     ent->d_name, dest_ent_path, &st,
+					     st.st_mode,
 					     access_options, error))
 				/* Aargh!  Fail up. */
 				goto err_dest_dir_fd;
@@ -233,9 +266,10 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     dest_ent_path, strerror(errno));
 				goto err_dest_dir_fd;
 			}
-			if (fchownat(dest_dir_fd, ent->d_name, owner,
-				     st.st_gid ?: group, AT_SYMLINK_NOFOLLOW)
-			    == -1
+			if (fchownat(dest_dir_fd, ent->d_name,
+				     uid_for_copy(access_options, &st),
+				     gid_for_copy(access_options, &st),
+				     AT_SYMLINK_NOFOLLOW) == -1
 			    && errno != EPERM && errno != EOPNOTSUPP) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
@@ -329,9 +363,11 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			close (ofd);
 
 			/* Set the ownership and timestamp on the new file. */
-			if (fchownat(dest_dir_fd, ent->d_name, owner,
-				     st.st_gid ?: group, AT_SYMLINK_NOFOLLOW)
-			    == -1 && errno != EPERM) {
+			if (fchownat(dest_dir_fd, ent->d_name,
+				     uid_for_copy(access_options, &st),
+				     gid_for_copy(access_options, &st),
+				     AT_SYMLINK_NOFOLLOW) == -1
+			    && errno != EPERM) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
 					       "%s"), dest_ent_path,
@@ -380,6 +416,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		    mode_t mode, struct lu_error **error)
 {
 	struct copy_access_options access_options;
+	struct stat st;
 	lu_security_context_t fscreate;
 	gboolean ret;
 
@@ -387,14 +424,22 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
 					      "/etc/skel");
 	ret = FALSE;
+	if (lstat(skeleton, &st) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     skeleton, strerror(errno));
+		goto err;
+	}
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
 	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
 		goto err_fscreate;
 	access_options.preserve_contexts = FALSE;
+	access_options.is_toplevel = TRUE;
+	access_options.uid = owner;
+	access_options.gid = group;
 	access_options.umask = current_umask();
 	ret = lu_homedir_copy(AT_FDCWD, skeleton, skeleton, AT_FDCWD, directory,
-			      directory, owner, group, mode, &access_options,
+			      directory, &st, mode, &access_options,
 			      error);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
@@ -548,9 +593,12 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 		goto err_fscreate;
 	/* ... and we can copy it ... */
 	access_options.preserve_contexts = TRUE;
+	access_options.is_toplevel = TRUE;
+	access_options.uid = st.st_uid;
+	access_options.gid = st.st_gid;
 	access_options.umask = current_umask();
 	if (!lu_homedir_copy(AT_FDCWD, oldhome, oldhome, AT_FDCWD, newhome,
-			     newhome, st.st_uid, st.st_gid,
+			     newhome, &st,
 			     st.st_mode, &access_options, error))
 		goto err_fscreate;
 	lu_util_fscreate_restore(fscreate);

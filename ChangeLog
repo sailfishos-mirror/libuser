@@ -1,5 +1,10 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_access_options): New members is_toplevel, uid and gid.
+	(uid_for_copy, gid_for_copy): New functions.
+	(lu_homedir_copy): Use access_options to pass around ownership
+	information.  All users updated, no change in semantics.
+
 	* lib/fs.c (copy_access_options): New structure.
 	(lu_homedir_copy): Use struct copy_access_options for keep_contexts
 	and umask.  All users updated, no change in semantics.
