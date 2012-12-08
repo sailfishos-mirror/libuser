@@ -59,11 +59,12 @@ current_umask(void)
 }
 
 /* Copy SRC_DIR_NAME under SRC_PARENT_FD, which corresponds to SRC_DIR_PATH,
-   to "dest", setting all ownerships as given, and
+   to DEST_DIR_NAME under DEST_PARENT_FD, which corresponds to DEST_DIR_PATH,
+   setting all ownerships as given, and
    setting the mode of the top-level directory as given.  The group ID of the
    copied files is preserved if it is nonzero.  If keep_contexts, preserve
-   SELinux contexts in files under dest; use matchpathcon otherwise.  Assume
-   umask_value is the current value of umask.
+   SELinux contexts in files under DEST_DIR_PATH; use matchpathcon otherwise.
+   Assume umask_value is the current value of umask.
 
    SRC_PARENT_FD may be AT_FDCWD.
 
@@ -78,22 +79,23 @@ current_umask(void)
    SRC_PARENT_FD/SRC_DIR_NAME. */
 static gboolean
 lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
-		const char *src_dir_path, const char *dest, uid_t owner,
-		gid_t group,
+		const char *src_dir_path, int dest_parent_fd,
+		const char *dest_dir_name, const char *dest_dir_path,
+		uid_t owner, gid_t group,
 		mode_t mode, gboolean keep_contexts, mode_t umask_value,
 		struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
-	int src_dir_fd, ifd, ofd;
+	int src_dir_fd, dest_dir_fd, ifd, ofd;
 	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
 
-	if (*dest != '/') {
+	if (*dest_dir_path != '/') {
 		lu_error_new(error, lu_error_generic,
 			     _("Home directory path `%s' is not absolute"),
-			     dest);
+			     dest_dir_path);
 		goto err;
 	}
 
@@ -114,35 +116,45 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 	}
 
 	/* Create the top-level directory. */
-	if (mkdir(dest, mode) == -1 && errno != EEXIST) {
+	if (mkdirat(dest_parent_fd, dest_dir_name, mode) == -1
+	    && errno != EEXIST) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error creating `%s': %s"), dest,
+			     _("Error creating `%s': %s"), dest_dir_path,
 			     strerror(errno));
+		goto err_dir;
+	}
+	/* FIXME: O_SEARCH would be ideal here, but Linux doesn't currently
+	   provide it. */
+	dest_dir_fd = openat(dest_parent_fd, dest_dir_name,
+			     O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (dest_dir_fd == -1) {
+		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
+			     dest_dir_path, strerror(errno));
 		goto err_dir;
 	}
 
 	/* Set the ownership on the top-level directory. */
-	if (chown(dest, owner, group) == -1 && errno != EPERM) {
+	if (fchown(dest_dir_fd, owner, group) == -1 && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"), dest,
-			     strerror(errno));
-		goto err_dir;
+			     _("Error changing owner of `%s': %s"),
+			     dest_dir_path, strerror(errno));
+		goto err_dest_dir_fd;
 	}
 
 	/* Set modes explicitly to preserve S_ISGID and other bits.  Do this
 	   after chown, because chown is permitted to reset these bits. */
-	if (chmod(dest, mode & ~umask_value) == -1) {
+	if (fchmod(dest_dir_fd, mode & ~umask_value) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error setting mode of `%s': %s"), dest,
+			     _("Error setting mode of `%s': %s"), dest_dir_path,
 			     strerror(errno));
-		goto err_dir;
+		goto err_dest_dir_fd;
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
 		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
 		char buf[PATH_MAX];
 		struct stat st;
-		struct utimbuf timebuf;
+		struct timespec timebuf[2];
 
 		/* Iterate through each item in the directory. */
 		/* Skip over self and parent hard links. */
@@ -157,8 +169,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		   corresponding member in the new tree. */
 		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s",
 			 src_dir_path, ent->d_name);
-		snprintf(dest_ent_path, sizeof(dest_ent_path), "%s/%s", dest,
-			 ent->d_name);
+		snprintf(dest_ent_path, sizeof(dest_ent_path), "%s/%s",
+			 dest_dir_path, ent->d_name);
 
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
@@ -168,26 +180,28 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 
 		if (keep_contexts != 0) {
 			if (!lu_util_fscreate_from_file(src_ent_path, error))
-				goto err_dir;
+				goto err_dest_dir_fd;
 		} else if (!lu_util_fscreate_for_path(dest_ent_path,
 						      st.st_mode & S_IFMT,
 						      error))
-			goto err_dir;
+			goto err_dest_dir_fd;
 
 		/* We always want to preserve atime/mtime. */
-		timebuf.actime = st.st_atime;
-		timebuf.modtime = st.st_mtime;
+		timebuf[0] = st.st_atim;
+		timebuf[1] = st.st_mtim;
 
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
-					     src_ent_path, dest_ent_path, owner,
+					     src_ent_path, dest_dir_fd,
+					     ent->d_name, dest_ent_path, owner,
 					     st.st_gid ?: group, st.st_mode,
 					     keep_contexts, umask_value, error))
 				/* Aargh!  Fail up. */
-				goto err_dir;
+				goto err_dest_dir_fd;
 			/* Set the date on the directory. */
-			utime(dest_ent_path, &timebuf);
+			utimensat(dest_dir_fd, ent->d_name, timebuf,
+				  AT_SYMLINK_NOFOLLOW);
 			continue;
 		}
 
@@ -201,26 +215,29 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				lu_error_new(error, lu_error_generic,
 					     _("Error reading `%s': %s"),
 					     src_ent_path, strerror(errno));
-				goto err_dir;
+				goto err_dest_dir_fd;
 			}
 			buf[len] = '\0';
-			if (symlink(buf, dest_ent_path) == -1) {
+			if (symlinkat(buf, dest_dir_fd, ent->d_name) == -1) {
 				if (errno == EEXIST)
 					continue;
 				lu_error_new(error, lu_error_generic,
 					     _("Error creating `%s': %s"),
 					     dest_ent_path, strerror(errno));
-				goto err_dir;
+				goto err_dest_dir_fd;
 			}
-			if (lchown(dest_ent_path, owner,
-				   st.st_gid ?: group) == -1
+			if (fchownat(dest_dir_fd, ent->d_name, owner,
+				     st.st_gid ?: group, AT_SYMLINK_NOFOLLOW)
+			    == -1
 			    && errno != EPERM && errno != EOPNOTSUPP) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
-					       "%s"), dest, strerror(errno));
-				goto err_dir;
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_dest_dir_fd;
 			}
-			utime(dest_ent_path, &timebuf);
+			utimensat(dest_dir_fd, ent->d_name, timebuf,
+				  AT_SYMLINK_NOFOLLOW);
 			continue;
 		}
 
@@ -236,10 +253,11 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				lu_error_new(error, lu_error_open,
 					     _("Error reading `%s': %s"),
 					     src_ent_path, strerror(errno));
-				goto err_dir;
+				goto err_dest_dir_fd;
 			}
-			ofd = open(dest_ent_path, O_EXCL | O_CREAT | O_WRONLY,
-				   st.st_mode);
+			ofd = openat(dest_dir_fd, ent->d_name,
+				     O_EXCL | O_CREAT | O_WRONLY | O_NOFOLLOW,
+				     st.st_mode);
 			if (ofd == -1) {
 				if (errno == EEXIST) {
 					close(ifd);
@@ -304,26 +322,30 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			close (ofd);
 
 			/* Set the ownership and timestamp on the new file. */
-			if (chown(dest_ent_path, owner,
-				  st.st_gid ?: group) == -1
-			    && errno != EPERM) {
+			if (fchownat(dest_dir_fd, ent->d_name, owner,
+				     st.st_gid ?: group, AT_SYMLINK_NOFOLLOW)
+			    == -1 && errno != EPERM) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
-					       "%s"), dest, strerror(errno));
-				goto err_dir;
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_dest_dir_fd;
 			}
-			utime(dest_ent_path, &timebuf);
+			utimensat(dest_dir_fd, ent->d_name, timebuf,
+				  AT_SYMLINK_NOFOLLOW);
 			continue;
 		}
 		/* Note that we don't copy device specials. */
 	}
 	ret = TRUE;
-	goto err_dir;
+	goto err_dest_dir_fd;
 
  err_ofd:
 	close(ofd);
  err_ifd:
 	close(ifd);
+ err_dest_dir_fd:
+	close(dest_dir_fd);
  err_dir:
 	closedir(dir);
  err:
@@ -361,8 +383,8 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		goto err;
 	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
 		goto err_fscreate;
-	ret = lu_homedir_copy(AT_FDCWD, skeleton, skeleton, directory, owner,
-			      group, mode, 0,
+	ret = lu_homedir_copy(AT_FDCWD, skeleton, skeleton, AT_FDCWD, directory,
+			      directory, owner, group, mode, 0,
 			      current_umask(), error);
 err_fscreate:
 	lu_util_fscreate_restore(fscreate);
@@ -514,8 +536,8 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	if (!lu_util_fscreate_from_file(oldhome, error))
 		goto err_fscreate;
 	/* ... and we can copy it ... */
-	if (!lu_homedir_copy(AT_FDCWD, oldhome, oldhome, newhome, st.st_uid,
-			     st.st_gid,
+	if (!lu_homedir_copy(AT_FDCWD, oldhome, oldhome, AT_FDCWD, newhome,
+			     newhome, st.st_uid, st.st_gid,
 			     st.st_mode, 1, current_umask(), error))
 		goto err_fscreate;
 	lu_util_fscreate_restore(fscreate);
