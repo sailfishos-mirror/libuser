@@ -454,8 +454,9 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 
    To be secure, neither SRC_DIR nor DEST_DIR should contain any
    user-controlled parent directories in the path.  SRC_DIR may be an
-   user-owned directory, but its parent should not be user-writable (so that
-   the user can't replace it with a symlink). */
+   user-owned directory, or even a symlink, but its parent should not be
+   user-writable (so that the user can't replace it with a symlink or change
+   the symlink). */
 static gboolean
 lu_homedir_copy(const char *src_dir, const char *dest_dir,
 		const struct copy_access_options *access_options,
@@ -470,7 +471,7 @@ lu_homedir_copy(const char *src_dir, const char *dest_dir,
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
 
-	fd = open(src_dir, O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	fd = open(src_dir, O_RDONLY | O_CLOEXEC | O_DIRECTORY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
 			     src_dir, strerror(errno));

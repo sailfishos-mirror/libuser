@@ -1,5 +1,8 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_homedir_copy): Allow src_dir to be a symlink again.
+	This fixes an API incompatibility.
+
 	* lib/fs.c (lu_copy_dir_and_close): Rename again from...
 	(lu_homedir_copy_and_close): ... this.
 	(lu_homedir_copy): New helper function.
