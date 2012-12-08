@@ -114,12 +114,12 @@ mode_for_copy(const struct copy_access_options *options, const struct stat *st)
    replaced by a symbolic link, redirecting the access outside of
    SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
 static gboolean
-lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
-			  int dest_parent_fd, const char *dest_dir_name,
-			  const char *dest_dir_path,
-			  const struct stat *src_dir_stat,
-			  struct copy_access_options *access_options,
-			  struct lu_error **error)
+lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
+		      int dest_parent_fd, const char *dest_dir_name,
+		      const char *dest_dir_path,
+		      const struct stat *src_dir_stat,
+		      const struct copy_access_options *access_options,
+		      struct lu_error **error)
 {
 	struct dirent *ent;
 	DIR *dir;
@@ -301,10 +301,10 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
-			if (!lu_homedir_copy_and_close(ifd, src_ent_path,
-						       dest_dir_fd, ent->d_name,
-						       dest_ent_path, &st,
-						       access_options, error))
+			if (!lu_copy_dir_and_close(ifd, src_ent_path,
+						   dest_dir_fd, ent->d_name,
+						   dest_ent_path, &st,
+						   access_options, error))
 				/* Aargh!  Fail up. */
 				goto err_dest_dir_fd;
 			continue;
@@ -448,6 +448,52 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 	return ret;
 }
 
+/* Copy SRC_DIR to DEST_DIR.  Use ACCESS_OPTIONS.
+
+   Return TRUE on error.
+
+   To be secure, neither SRC_DIR nor DEST_DIR should contain any
+   user-controlled parent directories in the path.  SRC_DIR may be an
+   user-owned directory, but its parent should not be user-writable (so that
+   the user can't replace it with a symlink). */
+static gboolean
+lu_homedir_copy(const char *src_dir, const char *dest_dir,
+		const struct copy_access_options *access_options,
+		struct lu_error **error)
+{
+	lu_security_context_t fscreate;
+	int fd;
+	struct stat st;
+	gboolean ret;
+
+	ret = FALSE;
+	if (!lu_util_fscreate_save(&fscreate, error))
+		goto err;
+
+	fd = open(src_dir, O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
+			     src_dir, strerror(errno));
+		goto err_fscreate;
+	}
+	if (fstat(fd, &st) == -1) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     src_dir, strerror(errno));
+		goto err_fd;
+	}
+
+	ret = lu_copy_dir_and_close(fd, src_dir, AT_FDCWD, dest_dir, dest_dir,
+				    &st, access_options, error);
+	goto err_fscreate;
+
+err_fd:
+	close(fd);
+err_fscreate:
+	lu_util_fscreate_restore(fscreate);
+err:
+	return ret;
+}
+
 /**
  * lu_homedir_populate:
  * @ctx: A context
@@ -461,6 +507,10 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
  *
  * Creates a new home directory for an user.
  *
+ * If you want to use this in a hostile environment, ensure that no untrusted
+ * user has write permission to any parent of @sekeleton or @directory.  Usually
+ * /home is only writable by root, which is safe.
+ *
  * Returns: %TRUE on success
  */
 gboolean
@@ -468,40 +518,17 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		    const char *directory, uid_t owner, gid_t group,
 		    mode_t mode, struct lu_error **error)
 {
-	int skeleton_fd;
 	struct copy_access_options access_options;
-	struct stat st;
-	lu_security_context_t fscreate;
-	gboolean ret;
 
 	if (skeleton == NULL)
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
 					      "/etc/skel");
-	ret = FALSE;
-	if (!lu_util_fscreate_save(&fscreate, error))
-		goto err;
-
-	skeleton_fd = open(skeleton,
-			   O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
-	if (skeleton_fd == -1) {
-		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
-			     skeleton, strerror(errno));
-		goto err_fscreate;
-	}
-	if (fstat(skeleton_fd, &st) == -1) {
-		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
-			     skeleton, strerror(errno));
-		goto err_skeleton_fd;
-	}
-
 	access_options.preserve_source = FALSE;
 	access_options.uid = owner;
 	access_options.gid = group;
 	access_options.umask = current_umask();
-	if (!lu_homedir_copy_and_close(skeleton_fd, skeleton, AT_FDCWD,
-				       directory, directory, &st,
-				       &access_options, error))
-		goto err_fscreate;
+	if (!lu_homedir_copy(skeleton, directory, &access_options, error))
+		return FALSE;
 
 	/* Now reconfigure the toplevel directory as desired.  The directory
 	   thus might have incorrect owner/permissions for a while; this is OK
@@ -517,7 +544,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		lu_error_new(error, lu_error_generic,
 			     _("Error changing owner of `%s': %s"), directory,
 			     strerror(errno));
-		goto err_fscreate;
+		return FALSE;
 	}
 	/* Set modes as required instead of preserving st.st_mode.  Do this
 	   after chown, because chown is permitted to reset these bits. */
@@ -525,17 +552,10 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		lu_error_new(error, lu_error_generic,
 			     _("Error setting mode of `%s': %s"), directory,
 			     strerror(errno));
-		goto err_fscreate;
+		return FALSE;
 	}
-	ret = TRUE;
-	goto err_fscreate;
 
-err_skeleton_fd:
-	close(skeleton_fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
-err:
-	return ret;
+	return TRUE;
 }
 
 /* Recursively remove directory DIR_NAME under PARENT_FD, which corresponds to
@@ -639,7 +659,7 @@ err_dir:
  * Recursively removes a user's home (or really, any) directory.
  *
  * If you want to use this in a hostile environment, ensure that no untrusted
- * use has write permission to any parent of @directory.
+ * user has write permission to any parent of @directory.
  *
  * Returns: %TRUE on success
  */
@@ -662,51 +682,26 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
  * Currently implemented by first creating a copy, then deleting the original,
  * expect this to take a long time.
  *
+ * If you want to use this in a hostile environment, ensure that no untrusted
+ * user has write permission to any parent of @oldhome or @newhome.  Usually
+ * /home is only writable by root, which is safe; user's write permission to
+ * @oldhome itself is OK.
+ *
  * Returns: %TRUE on success
  */
 gboolean
 lu_homedir_move(const char *oldhome, const char *newhome,
 		struct lu_error ** error)
 {
-	int oldhome_fd;
 	struct copy_access_options access_options;
-	struct stat st;
-	lu_security_context_t fscreate;
 
 	LU_ERROR_CHECK(error);
 
-	if (!lu_util_fscreate_save(&fscreate, error))
-		goto err;
-
-	/* If the directory exists... */
-	oldhome_fd = open(oldhome,
-			  O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
-	if (oldhome_fd == -1) {
-		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
-			     oldhome, strerror(errno));
-		goto err_fscreate;
-	}
-	if (fstat(oldhome_fd, &st) == -1) {
-		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
-			     oldhome, strerror(errno));
-		goto err_oldhome_fd;
-	}
-
-	/* ... and we can copy it ... */
 	access_options.preserve_source = TRUE;
-	if (!lu_homedir_copy_and_close(oldhome_fd, oldhome, AT_FDCWD, newhome,
-				       newhome, &st, &access_options, error))
-		goto err_fscreate;
-	lu_util_fscreate_restore(fscreate);
-	/* ... remove the old one. */
-	return lu_homedir_remove(oldhome, error);
+	if (!lu_homedir_copy(oldhome, newhome, &access_options, error))
+		return FALSE;
 
-err_oldhome_fd:
-	close(oldhome_fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
-err:
-	return FALSE;
+	return lu_homedir_remove(oldhome, error);
 }
 
 /**
