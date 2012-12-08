@@ -92,12 +92,6 @@ gid_for_copy(const struct copy_access_options *options, const struct stat *st)
 
    SRC_PARENT_FD and DEST_PARENT_FD may be AT_FDCWD.
 
-   Note that ACCESS_OPTIONS->preserve_contexts does NOT affect the context of
-   DEST_DIR_PATH; the caller must
-   perform an explicit setfscreatecon() before calling lu_homedir_copy() to set
-   the context of dest.  The SELinux fscreate context is on return from this
-   function is unspecified.
-
    Note that SRC_DIR_PATH should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
@@ -140,6 +134,14 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		close(src_dir_fd);
 		goto err;
 	}
+
+	if (access_options->preserve_contexts) {
+		if (!lu_util_fscreate_from_fd(src_dir_fd, src_dir_path, error))
+			goto err_dir;
+	} else if (!lu_util_fscreate_for_path(dest_dir_path,
+					      src_dir_stat->st_mode & S_IFMT,
+					      error))
+		goto err_dir;
 
 	/* Create the directory.  It starts owned by us (presumbaly root), with
 	   fairly restrictive permissions that still allow us to use the
@@ -210,14 +212,6 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			    AT_SYMLINK_NOFOLLOW) != 0)
 			continue;
 
-		if (access_options->preserve_contexts != FALSE) {
-			if (!lu_util_fscreate_from_file(src_ent_path, error))
-				goto err_dest_dir_fd;
-		} else if (!lu_util_fscreate_for_path(dest_ent_path,
-						      st.st_mode & S_IFMT,
-						      error))
-			goto err_dest_dir_fd;
-
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
@@ -232,6 +226,22 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		/* If it's a symlink, duplicate it. */
 		if (S_ISLNK(st.st_mode)) {
 			ssize_t len;
+
+			/* In the worst case here, we end up with a wrong
+			   SELinux context for a symbolic link.  That's
+			   unfortunate, but symlink contents are more or less
+			   public anyway... (A possible improvement would be to
+			   use Linux-only O_PATH to open src_ent_path first,
+			   then see if it is a symlink, and "upgrade" to an
+			   O_RDONLY if not.  But O_PATH is available only in
+			   Linux >= 2.6.39.) */
+			if (access_options->preserve_contexts) {
+				if (!lu_util_fscreate_from_lfile(src_ent_path,
+								 error))
+					goto err_dest_dir_fd;
+			} else if (!lu_util_fscreate_for_path
+				   (dest_ent_path, st.st_mode & S_IFMT, error))
+				goto err_dest_dir_fd;
 
 			len = readlinkat(src_dir_fd, ent->d_name, buf,
 					 sizeof(buf) - 1);
@@ -282,6 +292,14 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     src_ent_path, strerror(errno));
 				goto err_dest_dir_fd;
 			}
+
+			if (access_options->preserve_contexts) {
+				if (!lu_util_fscreate_from_fd(ifd, src_ent_path,
+							      error))
+					goto err_ifd;
+			} else if (!lu_util_fscreate_for_path
+				   (dest_ent_path, st.st_mode & S_IFMT, error))
+				goto err_ifd;
 			/* Start with absolutely restrictive permissions; the
 			   original file may be e.g. a hardlink to
 			   /etc/shadow. */
@@ -441,8 +459,6 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 	}
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
-	if (!lu_util_fscreate_for_path(directory, S_IFDIR, error))
-		goto err_fscreate;
 	access_options.preserve_contexts = FALSE;
 	access_options.uid = owner;
 	access_options.gid = group;
@@ -625,8 +641,6 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
-	if (!lu_util_fscreate_from_file(oldhome, error))
-		goto err_fscreate;
 	/* ... and we can copy it ... */
 	access_options.preserve_contexts = TRUE;
 	access_options.uid = st.st_uid;

@@ -706,6 +706,32 @@ lu_util_fscreate_restore(security_context_t ctx)
 	}
 }
 
+/* Set fscreate context from context of fd.  Use path only for diagnostics. */
+gboolean
+lu_util_fscreate_from_fd(int fd, const char *path, struct lu_error **error)
+{
+	if (is_selinux_enabled() > 0) {
+		security_context_t ctx;
+
+		if (fgetfilecon(fd, &ctx) < 0) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't get security context of "
+				       "`%s': %s"), path, strerror(errno));
+			return FALSE;
+		}
+		if (setfscreatecon(ctx) < 0) {
+			lu_error_new(error, lu_error_generic,
+				     _("couldn't set default security context "
+				       "to `%s': %s"), ctx, strerror(errno));
+			freecon(ctx);
+			return FALSE;
+		}
+		freecon(ctx);
+	}
+	return TRUE;
+}
+
+
 /* Set fscreate context from context of file. */
 gboolean
 lu_util_fscreate_from_file(const char *file, struct lu_error **error)
@@ -714,6 +740,32 @@ lu_util_fscreate_from_file(const char *file, struct lu_error **error)
 		security_context_t ctx;
 
 		if (getfilecon(file, &ctx) < 0) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't get security context of "
+				       "`%s': %s"), file, strerror(errno));
+			return FALSE;
+		}
+		if (setfscreatecon(ctx) < 0) {
+			lu_error_new(error, lu_error_generic,
+				     _("couldn't set default security context "
+				       "to `%s': %s"), ctx, strerror(errno));
+			freecon(ctx);
+			return FALSE;
+		}
+		freecon(ctx);
+	}
+	return TRUE;
+}
+
+/* Set fscreate context from context of file, not resolving it if it is a
+   symlink. */
+gboolean
+lu_util_fscreate_from_lfile(const char *file, struct lu_error **error)
+{
+	if (is_selinux_enabled() > 0) {
+		security_context_t ctx;
+
+		if (lgetfilecon(file, &ctx) < 0) {
 			lu_error_new(error, lu_error_stat,
 				     _("couldn't get security context of "
 				       "`%s': %s"), file, strerror(errno));

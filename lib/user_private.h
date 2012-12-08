@@ -309,7 +309,10 @@ typedef security_context_t lu_security_context_t;
 gboolean lu_util_fscreate_save(security_context_t *ctx,
 				      struct lu_error **error);
 void lu_util_fscreate_restore(security_context_t ctx);
+gboolean lu_util_fscreate_from_fd(int fd, const char *path,
+				  struct lu_error **error);
 gboolean lu_util_fscreate_from_file(const char *file, struct lu_error **error);
+gboolean lu_util_fscreate_from_lfile(const char *file, struct lu_error **error);
 gboolean lu_util_fscreate_for_path(const char *path, mode_t mode,
 				   struct lu_error **error);
 
@@ -317,7 +320,11 @@ gboolean lu_util_fscreate_for_path(const char *path, mode_t mode,
 typedef char lu_security_context_t; /* "Something" */
 #define lu_util_fscreate_save(CTX, ERROR) ((void)(CTX), (void)(ERROR), TRUE)
 #define lu_util_fscreate_restore(CTX) ((void)(CTX))
+#define lu_util_fscreate_from_fd(FD, PATH, ERROR) \
+  ((void)(FILE), (void)(PATH), (void)(ERROR), TRUE)
 #define lu_util_fscreate_from_file(FILE, ERROR) \
+  ((void)(FILE), (void)(ERROR), TRUE)
+#define lu_util_fscreate_from_lfile(FILE, ERROR) \
   ((void)(FILE), (void)(ERROR), TRUE)
 #define lu_util_fscreate_for_path(PATH, MODE, ERROR) \
   ((void)(PATH), (void)(MODE), (void)(ERROR), TRUE)

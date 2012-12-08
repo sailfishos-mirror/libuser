@@ -1,5 +1,17 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user_private.h (lu_util_fscreate_from_fd)
+	(lu_util_fscreate_from_lfile): New declarations and fallback macros.
+	* lib/util.c (lu_util_fscreate_from_fd, lu_util_fscreate_from_lfile):
+	New functions.
+	* lib/fs.c (lu_homedir_copy): Set SELinux context immediately
+	before creating a new file, based on the file descriptor we will
+	be using, removing another path lookup race and avoiding the
+	top-level-directory special case.  Use lu_util_fscreate_from_lfile()
+	for symbolic links, fixing a bug.
+	(lu_homedir_populate, lu_homedir_move): Stop setting SELinux contexts
+	manually.
+
 	* lib/fs.c (lu_homedir_copy): Modify file times through existing
 	descriptors if possible.
 
