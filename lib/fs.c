@@ -139,7 +139,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
-		char src_ent_path[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
+		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
+		char buf[PATH_MAX];
 		struct stat st;
 		struct utimbuf timebuf;
 
@@ -156,7 +157,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		   corresponding member in the new tree. */
 		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s",
 			 src_dir_path, ent->d_name);
-		snprintf(path, sizeof(path), "%s/%s", dest, ent->d_name);
+		snprintf(dest_ent_path, sizeof(dest_ent_path), "%s/%s", dest,
+			 ent->d_name);
 
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
@@ -167,7 +169,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		if (keep_contexts != 0) {
 			if (!lu_util_fscreate_from_file(src_ent_path, error))
 				goto err_dir;
-		} else if (!lu_util_fscreate_for_path(path, st.st_mode & S_IFMT,
+		} else if (!lu_util_fscreate_for_path(dest_ent_path,
+						      st.st_mode & S_IFMT,
 						      error))
 			goto err_dir;
 
@@ -178,13 +181,13 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
-					     src_ent_path, path, owner,
+					     src_ent_path, dest_ent_path, owner,
 					     st.st_gid ?: group, st.st_mode,
 					     keep_contexts, umask_value, error))
 				/* Aargh!  Fail up. */
 				goto err_dir;
 			/* Set the date on the directory. */
-			utime(path, &timebuf);
+			utime(dest_ent_path, &timebuf);
 			continue;
 		}
 
@@ -201,22 +204,23 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				goto err_dir;
 			}
 			buf[len] = '\0';
-			if (symlink(buf, path) == -1) {
+			if (symlink(buf, dest_ent_path) == -1) {
 				if (errno == EEXIST)
 					continue;
 				lu_error_new(error, lu_error_generic,
 					     _("Error creating `%s': %s"),
-					     path, strerror(errno));
+					     dest_ent_path, strerror(errno));
 				goto err_dir;
 			}
-			if (lchown(path, owner, st.st_gid ?: group) == -1
+			if (lchown(dest_ent_path, owner,
+				   st.st_gid ?: group) == -1
 			    && errno != EPERM && errno != EOPNOTSUPP) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
 					       "%s"), dest, strerror(errno));
 				goto err_dir;
 			}
-			utime(path, &timebuf);
+			utime(dest_ent_path, &timebuf);
 			continue;
 		}
 
@@ -234,7 +238,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     src_ent_path, strerror(errno));
 				goto err_dir;
 			}
-			ofd = open(path, O_EXCL | O_CREAT | O_WRONLY,
+			ofd = open(dest_ent_path, O_EXCL | O_CREAT | O_WRONLY,
 				   st.st_mode);
 			if (ofd == -1) {
 				if (errno == EEXIST) {
@@ -243,7 +247,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				}
 				lu_error_new(error, lu_error_open,
 					     _("Error writing `%s': %s"),
-					     path, strerror(errno));
+					     dest_ent_path, strerror(errno));
 				goto err_ifd;
 			}
 
@@ -276,7 +280,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 							     lu_error_write,
 							     _("Error writing "
 							       "`%s': %s"),
-							     path,
+							     dest_ent_path,
 							     strerror(errno));
 						goto err_ofd;
 					}
@@ -291,7 +295,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				if (ftruncate(ofd, offset) == -1) {
 					lu_error_new(error, lu_error_generic,
 						     _("Error writing `%s': "
-						       "%s"), path,
+						       "%s"), dest_ent_path,
 						     strerror(errno));
 					goto err_ofd;
 				}
@@ -300,14 +304,15 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 			close (ofd);
 
 			/* Set the ownership and timestamp on the new file. */
-			if (chown(path, owner, st.st_gid ?: group) == -1
+			if (chown(dest_ent_path, owner,
+				  st.st_gid ?: group) == -1
 			    && errno != EPERM) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error changing owner of `%s': "
 					       "%s"), dest, strerror(errno));
 				goto err_dir;
 			}
-			utime(path, &timebuf);
+			utime(dest_ent_path, &timebuf);
 			continue;
 		}
 		/* Note that we don't copy device specials. */
