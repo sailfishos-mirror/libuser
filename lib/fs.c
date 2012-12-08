@@ -341,32 +341,40 @@ err:
 	return ret;
 }
 
-/**
- * lu_homedir_remove:
- * @directory: Path to the root of the directory tree
- * @error: Filled with #lu_error if an error occurs
- *
- * Recursively removes a user's home (or really, any) directory.
- *
- * Note that the implementation is not currently race-free; calling this when
- * the user may still be logged in is discouraged.
- *
- * Returns: %TRUE on success
- */
-gboolean
-lu_homedir_remove(const char *directory, struct lu_error ** error)
+/* Recursively remove directory DIR_NAME under PARENT_FD, which corresponds to
+   DIR_PATH.
+
+   Return TRUE on sucess.
+
+   PARENT_FD may be AT_FDCWD.
+
+   Note that DIR_PATH should only be used for error messages, not to access
+   the files; if the user is still logged in, a directory in the path may be
+   replaced by a symbolic link, redirecting the access outside of DIRFD. */
+static gboolean
+remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
+		    struct lu_error **error)
 {
+	int dir_fd;
 	struct dirent *ent;
 	DIR *dir;
 
 	LU_ERROR_CHECK(error);
 
-	/* Open the directory.  This catches the case that it's already gone. */
-	dir = opendir(directory);
-	if (dir == NULL) {
-		lu_error_new(error, lu_error_generic,
-			     _("Error removing `%s': %s"), directory,
+	dir_fd = openat(parent_fd, dir_name,
+			O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
+	if (dir_fd == -1) {
+		lu_error_new(error, lu_error_open,
+			     _("Error opening `%s': %s"), dir_path,
 			     strerror(errno));
+		return FALSE;
+	}
+	dir = fdopendir(dir_fd);
+	if (dir == NULL) {
+		lu_error_new(error, lu_error_open,
+			     _("Error opening `%s': %s"), dir_path,
+			     strerror(errno));
+		close(dir_fd);
 		return FALSE;
 	}
 
@@ -376,38 +384,34 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 		char path[PATH_MAX];
 
 		/* Skip over the self and parent hard links. */
-		if (strcmp(ent->d_name, ".") == 0) {
+		if (strcmp(ent->d_name, ".") == 0
+		    || strcmp(ent->d_name, "..") == 0)
 			continue;
-		}
-		if (strcmp(ent->d_name, "..") == 0) {
-			continue;
-		}
 
 		/* Generate the full path of the next victim. */
-		snprintf(path, sizeof(path), "%s/%s", directory, ent->d_name);
+		snprintf(path, sizeof(path), "%s/%s", dir_path, ent->d_name);
 
 		/* What we do next depends on whether or not the next item to
-		 * remove is a directory. */
-		if (lstat(path, &st) != -1) {
-			if (S_ISDIR(st.st_mode)) {
-				/* We decend into subdirectories... */
-				if (lu_homedir_remove(path, error) == FALSE) {
-					closedir(dir);
-					return FALSE;
-				}
-			} else {
-				/* ... and unlink everything else. */
-				if (unlink(path) == -1) {
-					lu_error_new(error,
-						     lu_error_generic,
-						     _("Error removing "
-						     "`%s': %s"),
-						     path,
-						     strerror
-						     (errno));
-					closedir(dir);
-					return FALSE;
-				}
+		   remove is a directory. */
+		if (fstatat(dir_fd, ent->d_name, &st,
+			    AT_SYMLINK_NOFOLLOW) == -1) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't stat `%s': %s"), path,
+				     strerror(errno));
+			goto err_dir;
+		}
+		if (S_ISDIR(st.st_mode)) {
+			/* We descend into subdirectories... */
+			if (remove_subdirectory(dir_fd, ent->d_name, path,
+						error) == FALSE)
+				goto err_dir;
+		} else {
+			/* ... and unlink everything else. */
+			if (unlinkat(dir_fd, ent->d_name, 0) == -1) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error removing `%s': %s"), path,
+					     strerror(errno));
+				goto err_dir;
 			}
 		}
 	}
@@ -415,14 +419,38 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 	closedir(dir);
 
 	/* As a final step, remove the directory itself. */
-	if (rmdir(directory) == -1) {
+	if (unlinkat(parent_fd, dir_name, AT_REMOVEDIR) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error removing `%s': %s"), directory,
+			     _("Error removing `%s': %s"), dir_path,
 			     strerror(errno));
 		return FALSE;
 	}
 
 	return TRUE;
+
+err_dir:
+	closedir(dir);
+	return FALSE;
+}
+
+/**
+ * lu_homedir_remove:
+ * @directory: Path to the root of the directory tree
+ * @error: Filled with #lu_error if an error occurs
+ *
+ * Recursively removes a user's home (or really, any) directory.
+ *
+ * If you want to use this in a hostile environment, ensure that no untrusted
+ * use has write permission to any parent of @directory.
+ *
+ * Returns: %TRUE on success
+ */
+gboolean
+lu_homedir_remove(const char *directory, struct lu_error ** error)
+{
+	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(directory != NULL, FALSE);
+	return remove_subdirectory(AT_FDCWD, directory, directory, error);
 }
 
 /**
