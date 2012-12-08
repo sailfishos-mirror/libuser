@@ -1,5 +1,18 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_access_options): Rename member preserve_contexts
+	to preserve_source.  Document that other fields apply only if
+	!preserve_source.
+	(uid_for_copy): Implement preserve_source.  Fix a spectacular typo.
+	(gid_for_copy, mode_for_copy): Implement preserve_srouce.
+	(lu_homedir_copy_and_close, (lu_homedir_populate): Update for renamed
+	field preserve_source.
+	(lu_homedir_move): Update for renamed field preserve source.  This
+	also means that while moving the directory we do not override the
+	original owner in the copy, fixing a security hole (the user could
+	have a had hardlink to a file they couldn't read, and we would
+	helpfully create a copy owned by them).
+
 	* lib/fs.c (copy_access_options): Fix description of member umask.
 	(mode_for_copy): New helper function.
 	(lu_homedir_copy_and_close): Use mode_for_copy().

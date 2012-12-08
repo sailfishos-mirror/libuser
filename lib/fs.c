@@ -61,26 +61,32 @@ current_umask(void)
 /* What should the ownership and permissions of the copied files be? */
 struct copy_access_options
 {
-	/* Preserve selinux contexts; otherwise use matchpathcon. */
-	gboolean preserve_contexts;
-	uid_t uid;		/* UID to use for the copy. */
-	/* GID to use for the copy (only!) if original is owned by GID 0. */
+	/* Preserve ownership and permissions of the original unmodified;
+	   otherwise, use matchpathcon() for SELinux contexts and apply
+	   the following fields.. */
+	gboolean preserve_source;
+	uid_t uid;	     /* UID to use for the copy if !preserve_source. */
+	/* GID to use for the copy if !preserve_source and original is owned by
+	   GID 0. */
 	gid_t gid;
-	mode_t umask;		/* umask to apply to modes */
+	mode_t umask;	      /* umask to apply to modes if !preserve_source */
 };
 
 /* Return an UID appropriate for a copy of ST given OPTIONS. */
 static uid_t
 uid_for_copy(const struct copy_access_options *options, const struct stat *st)
 {
-	(void)st;
-	return options->gid;
+	if (options->preserve_source)
+		return st->st_uid;
+	return options->uid;
 }
 
 /* Return a GID appropriate for a copy of ST given OPTIONS. */
 static gid_t
 gid_for_copy(const struct copy_access_options *options, const struct stat *st)
 {
+	if (options->preserve_source)
+		return st->st_gid;
 	if (st->st_gid != 0) /* Skeleton wants us to us a different group */
 		return st->st_gid;
 	return options->gid;
@@ -90,6 +96,8 @@ gid_for_copy(const struct copy_access_options *options, const struct stat *st)
 static mode_t
 mode_for_copy(const struct copy_access_options *options, const struct stat *st)
 {
+	if (options->preserve_source)
+		return st->st_mode;
 	return st->st_mode & ~options->umask;
 }
 
@@ -136,7 +144,7 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 		goto err_src_dir_fd;
 	}
 
-	if (access_options->preserve_contexts) {
+	if (access_options->preserve_source) {
 		if (!lu_util_fscreate_from_fd(src_dir_fd, src_dir_path, error))
 			goto err_dir;
 	} else if (!lu_util_fscreate_for_path(dest_dir_path,
@@ -240,7 +248,7 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 			   O_PATH to open src_ent_path first, then see if it is
 			   a symlink, and "upgrade" to an O_RDONLY if not.  But
 			   O_PATH is available only in Linux >= 2.6.39.) */
-			if (access_options->preserve_contexts) {
+			if (access_options->preserve_source) {
 				if (!lu_util_fscreate_from_lfile(src_ent_path,
 								 error))
 					goto err_dest_dir_fd;
@@ -306,7 +314,7 @@ lu_homedir_copy_and_close(int src_dir_fd, const char *src_dir_path,
 		if (S_ISREG(st.st_mode)) {
 			off_t offset;
 
-			if (access_options->preserve_contexts) {
+			if (access_options->preserve_source) {
 				if (!lu_util_fscreate_from_fd(ifd, src_ent_path,
 							      error))
 					goto err_ifd;
@@ -486,7 +494,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		goto err_skeleton_fd;
 	}
 
-	access_options.preserve_contexts = FALSE;
+	access_options.preserve_source = FALSE;
 	access_options.uid = owner;
 	access_options.gid = group;
 	access_options.umask = current_umask();
@@ -685,10 +693,7 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	}
 
 	/* ... and we can copy it ... */
-	access_options.preserve_contexts = TRUE;
-	access_options.uid = st.st_uid;
-	access_options.gid = st.st_gid;
-	access_options.umask = current_umask();
+	access_options.preserve_source = TRUE;
 	if (!lu_homedir_copy_and_close(oldhome_fd, oldhome, AT_FDCWD, newhome,
 				       newhome, &st, &access_options, error))
 		goto err_fscreate;
