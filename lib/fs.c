@@ -121,7 +121,7 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 	}
 
 	while ((ent = readdir(dir)) != NULL) {
-		char srcpath[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
+		char src_ent_path[PATH_MAX], path[PATH_MAX], buf[PATH_MAX];
 		struct stat st;
 		struct utimbuf timebuf;
 
@@ -136,16 +136,17 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 		/* Build the path of the source file or directory and its
 		   corresponding member in the new tree. */
-		snprintf(srcpath, sizeof(srcpath), "%s/%s", src, ent->d_name);
+		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s", src,
+			 ent->d_name);
 		snprintf(path, sizeof(path), "%s/%s", dest, ent->d_name);
 
 		/* What we do next depends on the type of entry we're
 		 * looking at. */
-		if (lstat(srcpath, &st) != 0)
+		if (lstat(src_ent_path, &st) != 0)
 			continue;
 
 		if (keep_contexts != 0) {
-			if (!lu_util_fscreate_from_file(srcpath, error))
+			if (!lu_util_fscreate_from_file(src_ent_path, error))
 				goto err_dir;
 		} else if (!lu_util_fscreate_for_path(path, st.st_mode & S_IFMT,
 						      error))
@@ -157,7 +158,7 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
-			if (!lu_homedir_copy(srcpath, path, owner,
+			if (!lu_homedir_copy(src_ent_path, path, owner,
 					     st.st_gid ?: group, st.st_mode,
 					     keep_contexts, umask_value, error))
 				/* Aargh!  Fail up. */
@@ -171,11 +172,11 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 		if (S_ISLNK(st.st_mode)) {
 			ssize_t len;
 
-			len = readlink(srcpath, buf, sizeof(buf) - 1);
+			len = readlink(src_ent_path, buf, sizeof(buf) - 1);
 			if (len == -1) {
 				lu_error_new(error, lu_error_generic,
 					     _("Error reading `%s': %s"),
-					     srcpath, strerror(errno));
+					     src_ent_path, strerror(errno));
 				goto err_dir;
 			}
 			buf[len] = '\0';
@@ -204,11 +205,11 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 
 			/* Open both the input and output files.  If we fail to
 			   do either, we have to give up. */
-			ifd = open(srcpath, O_RDONLY);
+			ifd = open(src_ent_path, O_RDONLY);
 			if (ifd == -1) {
 				lu_error_new(error, lu_error_open,
 					     _("Error reading `%s': %s"),
-					     srcpath, strerror(errno));
+					     src_ent_path, strerror(errno));
 				goto err_dir;
 			}
 			ofd = open(path, O_EXCL | O_CREAT | O_WRONLY,
@@ -235,7 +236,7 @@ lu_homedir_copy(const char *src, const char *dest, uid_t owner, gid_t group,
 						continue;
 					lu_error_new(error, lu_error_read,
 						     _("Error reading `%s': "
-						       "%s"), srcpath,
+						       "%s"), src_ent_path,
 						     strerror(errno));
 					goto err_ofd;
 				}
