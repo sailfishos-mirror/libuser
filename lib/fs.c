@@ -113,6 +113,7 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 	struct dirent *ent;
 	DIR *dir;
 	int src_dir_fd, dest_dir_fd, ifd, ofd;
+	struct timespec timebuf[2];
 	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
@@ -186,7 +187,6 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
 		char buf[PATH_MAX];
 		struct stat st;
-		struct timespec timebuf[2];
 
 		/* Iterate through each item in the directory. */
 		/* Skip over self and parent hard links. */
@@ -218,10 +218,6 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 						      error))
 			goto err_dest_dir_fd;
 
-		/* We always want to preserve atime/mtime. */
-		timebuf[0] = st.st_atim;
-		timebuf[1] = st.st_mtim;
-
 		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_homedir_copy(src_dir_fd, ent->d_name,
@@ -230,9 +226,6 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     access_options, error))
 				/* Aargh!  Fail up. */
 				goto err_dest_dir_fd;
-			/* Set the date on the directory. */
-			utimensat(dest_dir_fd, ent->d_name, timebuf,
-				  AT_SYMLINK_NOFOLLOW);
 			continue;
 		}
 
@@ -268,6 +261,8 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 					     strerror(errno));
 				goto err_dest_dir_fd;
 			}
+			timebuf[0] = st.st_atim;
+			timebuf[1] = st.st_mtim;
 			utimensat(dest_dir_fd, ent->d_name, timebuf,
 				  AT_SYMLINK_NOFOLLOW);
 			continue;
@@ -379,14 +374,22 @@ lu_homedir_copy(int src_parent_fd, const char *src_dir_name,
 				}
 			}
 			close (ifd);
+
+			timebuf[0] = st.st_atim;
+			timebuf[1] = st.st_mtim;
+			futimens(ofd, timebuf);
+
 			close (ofd);
 
-			utimensat(dest_dir_fd, ent->d_name, timebuf,
-				  AT_SYMLINK_NOFOLLOW);
 			continue;
 		}
 		/* Note that we don't copy device specials. */
 	}
+
+	timebuf[0] = src_dir_stat->st_atim;
+	timebuf[1] = src_dir_stat->st_mtim;
+	futimens(dest_dir_fd, timebuf);
+
 	ret = TRUE;
 	goto err_dest_dir_fd;
 

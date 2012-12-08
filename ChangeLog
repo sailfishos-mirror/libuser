@@ -1,5 +1,8 @@
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_homedir_copy): Modify file times through existing
+	descriptors if possible.
+
 	* lib/fs.c (lu_homedir_copy): When creating copies, start with
 	minimal permissions, set owner, then set the desired permissions.
 	Thus, start preserving S_IS[UG]ID flags on copied regular files, and
