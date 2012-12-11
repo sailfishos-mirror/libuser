@@ -316,8 +316,6 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 
 		/* If it's a regular file, copy it. */
 		if (S_ISREG(st.st_mode)) {
-			off_t offset;
-
 			if (access_options->preserve_source) {
 				if (!lu_util_fscreate_from_fd(ifd, src_ent_path,
 							      error))
@@ -405,17 +403,6 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 				}
 			}
 
-			/* Close the files. */
-			offset = lseek(ofd, 0, SEEK_CUR);
-			if (offset != ((off_t) -1)) {
-				if (ftruncate(ofd, offset) == -1) {
-					lu_error_new(error, lu_error_generic,
-						     _("Error writing `%s': "
-						       "%s"), dest_ent_path,
-						     strerror(errno));
-					goto err_ofd;
-				}
-			}
 			close (ifd);
 
 			timebuf[0] = st.st_atim;

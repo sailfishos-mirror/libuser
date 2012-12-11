@@ -1,5 +1,8 @@
 2012-12-11  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_copy_dir_and_close): Don't unnecessarily ftruncate() a
+	file we just created.
+
 	* lib/fs.c (lu_copy_dir_and_close): Only make the directory accessible
 	to the target user after all work in it is done.  Still doesn't handle
 	pre-existing directories.
