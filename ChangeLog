@@ -1,3 +1,9 @@
+2012-12-11  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/fs.c (lu_copy_dir_and_close): Only make the directory accessible
+	to the target user after all work in it is done.  Still doesn't handle
+	pre-existing directories.
+
 2012-12-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/fs.c (lu_homedir_copy): Allow src_dir to be a symlink again.

@@ -171,28 +171,24 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			     dest_dir_path, strerror(errno));
 		goto err_dir;
 	}
+	/* The openat() after mkdirat() is not 100% safe; we may be modifying
+	   ownership/permissions of another user's directory that was moved to
+	   dest_dir_name in the mean time!  (Although why there would exist an
+	   another user's directory, assuming lack hardlinks of directories, is
+	   not clear.)
 
-	/* Set the ownership on the directory.  Permissions are still
-	   fairly restrictive. */
-	if (fchown(dest_dir_fd, uid_for_copy(access_options, src_dir_stat),
-		   gid_for_copy(access_options, src_dir_stat)) == -1
-	    && errno != EPERM) {
-		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"),
-			     dest_dir_path, strerror(errno));
-		goto err_dest_dir_fd;
-	}
+	   There's no way to do this completely atomically; so, rely on
+	   permissions of the parent directory (write access to parent is
+	   required to rename directories).  This holds for the top-level
+	   directory, and for the others we achieve this by creating them
+	   root-owned and S_IRWXU, and only applying the original ownership and
+	   permissions after finishing other work.  See also the comment below
+	   about symlinks.
 
-	/* Set the desired mode.  Do this explicitly to preserve S_ISGID and
-	   other bits.  Do this after chown, because chown is permitted to
-	   reset these bits. */
-	if (fchmod(dest_dir_fd,
-		   mode_for_copy(access_options, src_dir_stat)) == -1) {
-		lu_error_new(error, lu_error_generic,
-			     _("Error setting mode of `%s': %s"), dest_dir_path,
-			     strerror(errno));
-		goto err_dest_dir_fd;
-	}
+	   Handling any preexisting directory structure complicates this -
+	   should we temporarily chown/chmod any existing directory to
+	   root:root/S_IRWXU?  That might be very disruptive, and such
+	   structures should not exist in the first place. */
 
 	while ((ent = readdir(dir)) != NULL) {
 		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
@@ -247,7 +243,15 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			   possible improvement would be to use Linux-only
 			   O_PATH to open src_ent_path first, then see if it is
 			   a symlink, and "upgrade" to an O_RDONLY if not.  But
-			   O_PATH is available only in Linux >= 2.6.39.) */
+			   O_PATH is available only in Linux >= 2.6.39.)
+
+			   The symlinkat()/fchownat()/utimensat() calls are
+			   also not safe against an user meddling; we might be
+			   able to ensure the fchownat()/utimensat() are done
+			   on the same file using O_PATH again, but
+			   symlinkat()/the rest is definitely unatomic.  Rely
+			   on having an unwritable the parent directory, same
+			   as in the mkdirat()/openat() case. */
 			if (access_options->preserve_source) {
 				if (!lu_util_fscreate_from_lfile(src_ent_path,
 								 error))
@@ -424,6 +428,28 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 		}
 		/* Note that we don't copy device specials. */
 		close(ifd);
+	}
+
+	/* Set the ownership on the directory.  Permissions are still
+	   fairly restrictive. */
+	if (fchown(dest_dir_fd, uid_for_copy(access_options, src_dir_stat),
+		   gid_for_copy(access_options, src_dir_stat)) == -1
+	    && errno != EPERM) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error changing owner of `%s': %s"),
+			     dest_dir_path, strerror(errno));
+		goto err_dest_dir_fd;
+	}
+
+	/* Set the desired mode.  Do this explicitly to preserve S_ISGID and
+	   other bits.  Do this after chown, because chown is permitted to
+	   reset these bits. */
+	if (fchmod(dest_dir_fd,
+		   mode_for_copy(access_options, src_dir_stat)) == -1) {
+		lu_error_new(error, lu_error_generic,
+			     _("Error setting mode of `%s': %s"), dest_dir_path,
+			     strerror(errno));
+		goto err_dest_dir_fd;
 	}
 
 	timebuf[0] = src_dir_stat->st_atim;
