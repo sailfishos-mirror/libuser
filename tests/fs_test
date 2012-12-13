@@ -23,7 +23,7 @@ srcdir=$srcdir/tests
 
 workdir=$(pwd)/test_fs
 
-trap 'status=$?; rm -rf "$workdir"; exit $status' 0
+trap 'status=$?; chmod -R u+rwx "$workdir"; rm -rf "$workdir"; exit $status' 0
 trap '(exit 1); exit 1' 1 2 13 15
 
 rm -rf "$workdir"
@@ -41,6 +41,11 @@ LIBUSER_CONF=$workdir/libuser.conf
 export LIBUSER_CONF
 sed "s|@WORKDIR@|$workdir|g; s|@TOP_BUILDDIR@|$(pwd)|g" \
     < "$srcdir"/fs.conf.in > "$LIBUSER_CONF"
+# Ugly non-portable hacks
+LD_LIBRARY_PATH=$(pwd)/lib/.libs
+export LD_LIBRARY_PATH
+PYTHONPATH=$(pwd)/python/.libs
+export PYTHONPATH
 
 # Test lu_homedir_remove()
 fakeroot > rm_output <<EOF
@@ -65,9 +70,9 @@ if [ \$? -ne 0 ]; then
    exit 1
 fi
 
-ls -lnR "$workdir/rm" | tail -n +3 | \
+LC_ALL=C ls -lnR "$workdir/rm" | tail -n +3 | \
 	awk '{ printf("%.10s %d %4d %4d %8d %s\n",
-		      \$1, \$2, \$3, \$4, \$5, \$8) ;}'
+		      \$1, \$2, \$3, \$4, \$5, \$9) ;}'
 
 EOF
 
@@ -75,3 +80,143 @@ diff rm_output - <<EOF
 -rw-rw-r-- 1    0    0        0 kept
 ---------- 1    0    0        4 secret
 EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+
+# Prepare an "interesting" home directory, to be used both directly and as
+# a skeleton
+fakeroot -s "$workdir"/save <<EOF
+mkdir -p "$workdir"/common/{dir,unreadable,group-owned}
+cd "$workdir"/common
+# User's "own" content
+for i in '.' dir group-owned; do
+    touch "\$i"/f "\$i"/setuid
+    chmod u+xs "\$i"/setuid
+    mkfifo "\$i"/fifo
+    ln -s ../outside "\$i"/symlink
+done
+mkdir setgid
+chmod g+s setgid
+echo 'content' > unreadable/f
+chmod 000 unreadable/f unreadable
+chown -R 555:555 .
+chgrp -R 444 group-owned
+
+# Other content in the home directory
+mknod block b 1 1
+mknod char c 1 1
+echo 'foo' > secret
+chmod 000 secret
+EOF
+
+
+# Test lu_homedir_move()
+fakeroot -i "$workdir"/save -s "$workdir"/save > mv_output <<EOF
+cp -a "$workdir"/common "$workdir"/home1
+# This seems to be a fakeroot bug
+# (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
+# files are really unreadable in the underlying filesystem.  However, a chmod
+# resets the state.
+chmod 0 "$workdir"/home1/{unreadable,unreadable/f,secret}
+
+$VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/{home1,home2}
+if [ \$? -ne 0 ]; then
+   exit 1
+fi
+
+cd "$workdir"/home2
+LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
+			     \$1, \$2, \$3, \$4, \$9); }
+             NF <= 3 && !/total/ { print }'
+EOF
+
+# Special files and fifos are not copied over.  Ownership and permissions are
+# preserved.
+diff mv_output - <<EOF
+.:
+drwx------ 2  555  555 dir
+-rw------- 1  555  555 f
+drwx------ 2  555  444 group-owned
+---------- 1    0    0 secret
+drwxrwsr-x 2  555  555 setgid
+-rwsrw-r-- 1  555  555 setuid
+lrwxrwxrwx 1  555  555 symlink
+d--------- 2  555  555 unreadable
+
+./dir:
+-rw------- 1  555  555 f
+-rwsrw-r-- 1  555  555 setuid
+lrwxrwxrwx 1  555  555 symlink
+
+./group-owned:
+-rw------- 1  555  444 f
+-rwsrw-r-- 1  555  444 setuid
+lrwxrwxrwx 1  555  444 symlink
+
+./setgid:
+
+./unreadable:
+---------- 1  555  555 f
+EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+
+# Test lu_homedir_populate()
+fakeroot -i "$workdir"/save -s "$workdir"/save > pop_output <<EOF
+cp -a "$workdir"/common "$workdir"/skel
+# This seems to be a fakeroot bug
+# (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
+# files are really unreadable in the underlying filesystem.  However, a chmod
+# resets the state.
+chmod 0 "$workdir"/skel/{unreadable,unreadable/f,secret}
+chown -R 0:0 "$workdir"/skel
+chgrp -R 444 "$workdir"/skel/group-owned
+
+$VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/newhome 556 557
+if [ \$? -ne 0 ]; then
+   exit 1
+fi
+
+cd "$workdir"/newhome
+LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
+			     \$1, \$2, \$3, \$4, \$9); }
+             NF <= 3 && !/total/ { print }'
+EOF
+
+# Special files and fifos are not copied over.  Permissions are preserved,
+# ownership is changed to the desired values except for non-root groups
+diff pop_output - <<EOF
+.:
+drwx------ 2  556  557 dir
+-rw------- 1  556  557 f
+drwx------ 2  556  444 group-owned
+---------- 1  556  557 secret
+drwxrwsr-x 2  556  557 setgid
+-rwsrw-r-- 1  556  557 setuid
+lrwxrwxrwx 1  556  557 symlink
+d--------- 2  556  557 unreadable
+
+./dir:
+-rw------- 1  556  557 f
+-rwsrw-r-- 1  556  557 setuid
+lrwxrwxrwx 1  556  557 symlink
+
+./group-owned:
+-rw------- 1  556  444 f
+-rwsrw-r-- 1  556  444 setuid
+lrwxrwxrwx 1  556  444 symlink
+
+./setgid:
+
+./unreadable:
+---------- 1  556  557 f
+EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi

@@ -28,6 +28,20 @@ def main():
         u = a.initUser('fs_test_remove')
         u[libuser.HOMEDIRECTORY] = sys.argv[2]
         a.removeHome(u)
+    elif sys.argv[1] == '--move':
+        a = libuser.admin()
+        u = a.initUser('fs_test_move')
+        u[libuser.HOMEDIRECTORY] = sys.argv[2]
+        a.moveHome(u, sys.argv[3])
+    elif sys.argv[1] == '--populate':
+        a = libuser.admin()
+        u = a.initUser('fs_test_populate')
+	u[libuser.HOMEDIRECTORY] = sys.argv[2]
+	u[libuser.UIDNUMBER] = int(sys.argv[3])
+	u[libuser.GIDNUMBER] = int(sys.argv[4])
+	a.createHome(u)
+    else:
+	sys.exit('Unexpected mode')
 
 if __name__ == '__main__':
     main()
