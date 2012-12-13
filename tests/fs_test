@@ -42,7 +42,8 @@ export LIBUSER_CONF
 sed "s|@WORKDIR@|$workdir|g; s|@TOP_BUILDDIR@|$(pwd)|g" \
     < "$srcdir"/fs.conf.in > "$LIBUSER_CONF"
 
-fakeroot <<EOF
+# Test lu_homedir_remove()
+fakeroot > rm_output <<EOF
 # User's "own" content
 mkdir -p "$workdir"/rm/root/{dir,unreadable}
 touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
@@ -63,11 +64,14 @@ $VALGRIND python "$srcdir"/fs_test.py --remove "$workdir/rm/root"
 if [ \$? -ne 0 ]; then
    exit 1
 fi
-if [ "\$(find "$workdir"/rm | wc -l)" -ne 3 ]; then
-    exit 1
-fi
-if [ "\$(cat "$workdir/rm/secret")" != "foo" ]; then
-    exit 1
-fi
 
+ls -lnR "$workdir/rm" | tail -n +3 | \
+	awk '{ printf("%.10s %d %4d %4d %8d %s\n",
+		      \$1, \$2, \$3, \$4, \$5, \$8) ;}'
+
+EOF
+
+diff rm_output - <<EOF
+-rw-rw-r-- 1    0    0        0 kept
+---------- 1    0    0        4 secret
 EOF

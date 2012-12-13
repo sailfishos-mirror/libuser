@@ -1,5 +1,7 @@
 2012-12-13  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/fs_test: Check the final situation more thoroughly.
+
 	* tests/fs.conf.in
 	* tests/fs_test
 	* tests/fs_test.py: New files.
