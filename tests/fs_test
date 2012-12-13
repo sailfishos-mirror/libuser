@@ -1,0 +1,73 @@
+#! /bin/sh
+# Automated libuser fs function regression tester
+#
+# Copyright (c) 2012 Red Hat, Inc. All rights reserved.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Library General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# Author: Miloslav Trmač <mitr@redhat.com>
+
+srcdir=$srcdir/tests
+
+workdir=$(pwd)/test_fs
+
+trap 'status=$?; rm -rf "$workdir"; exit $status' 0
+trap '(exit 1); exit 1' 1 2 13 15
+
+rm -rf "$workdir"
+mkdir "$workdir"
+
+# Set up an the environment
+mkdir "$workdir"/files
+> "$workdir"/files/passwd
+> "$workdir"/files/shadow
+> "$workdir"/files/group
+> "$workdir"/files/gshadow
+
+# Set up the client
+LIBUSER_CONF=$workdir/libuser.conf
+export LIBUSER_CONF
+sed "s|@WORKDIR@|$workdir|g; s|@TOP_BUILDDIR@|$(pwd)|g" \
+    < "$srcdir"/fs.conf.in > "$LIBUSER_CONF"
+
+fakeroot <<EOF
+# User's "own" content
+mkdir -p "$workdir"/rm/root/{dir,unreadable}
+touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
+mkfifo "$workdir"/rm/root/fifo
+ln -s ../kept "$workdir"/rm/root/symlink
+chown -R 555:555 "$workdir"/rm/root
+chmod 701 "$workdir"/rm/root
+chmod 000 "$workdir"/rm/root/unreadable
+
+# Other content in the home directory
+mknod "$workdir"/rm/root/block b 1 1
+mknod "$workdir"/rm/root/char c 1 1
+echo 'foo' > "$workdir"/rm/secret
+chmod 000 "$workdir"/rm/secret
+ln "$workdir"/rm/{secret,root/hardlink}
+
+$VALGRIND python "$srcdir"/fs_test.py --remove "$workdir/rm/root"
+if [ \$? -ne 0 ]; then
+   exit 1
+fi
+if [ "\$(find "$workdir"/rm | wc -l)" -ne 3 ]; then
+    exit 1
+fi
+if [ "\$(cat "$workdir/rm/secret")" != "foo" ]; then
+    exit 1
+fi
+
+EOF

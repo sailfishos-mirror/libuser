@@ -24,7 +24,8 @@ VG_ENVIRONMENT = G_SLICE=always-malloc \
 
 ## Targets
 SUBDIRS = po docs
-TESTS = tests/config_test.sh tests/files_test tests/pwhash_test tests/utils_test
+TESTS = tests/config_test.sh tests/fs_test tests/files_test tests/pwhash_test \
+	tests/utils_test
 if LDAP
 TESTS += tests/default_pw_test tests/ldap_test
 endif
@@ -40,6 +41,7 @@ EXTRA_DIST = \
 	tests/config_test.sh \
 	tests/default_pw.conf.in tests/default_pw_test tests/default_pw_test.py \
 	tests/files.conf.in tests/files_test tests/files_test.py \
+	tests/fs.conf.in tests/fs_tests tests/fs_test.py \
 	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
 	tests/ldap_test.py \
 	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
