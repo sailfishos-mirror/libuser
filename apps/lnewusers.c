@@ -246,16 +246,6 @@ main(int argc, const char **argv)
 				_("Refusing to use dangerous home directory `%s' "
 				  "for %s by default\n"), homedir, fields[0]);
 		else if (lu_user_add(ctx, ent, &error)) {
-			if (!lu_user_setpass(ctx, ent, fields[1], FALSE,
-					     &error)) {
-				fprintf(stderr,
-					_("Error setting initial password for "
-					  "%s: %s\n"), fields[0],
-					lu_strerror(error));
-				if (error) {
-					lu_error_free(&error);
-				}
-			}
 			lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 			/* Unless the nocreatehomedirs flag was given, attempt
 			 * to create the user's home directory. */
@@ -285,6 +275,21 @@ main(int argc, const char **argv)
 					}
 				}
 			}
+			/* Set the password after creating the home directory
+			   to prevent the user from seeing an incomplete
+			   home, and to prevent the user from interfering with
+			   the creation of the home directory. */
+			if (!lu_user_setpass(ctx, ent, fields[1], FALSE,
+					     &error)) {
+				fprintf(stderr,
+					_("Error setting initial password for "
+					  "%s: %s\n"), fields[0],
+					lu_strerror(error));
+				if (error) {
+					lu_error_free(&error);
+				}
+			}
+			lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 		} else {
 			fprintf(stderr,
 				_("Error creating user account for %s: %s\n"),

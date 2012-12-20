@@ -261,27 +261,6 @@ main(int argc, const char **argv)
 			lu_strerror(error));
 		return 3;
 	}
-
-	if (userPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
-		    == FALSE) {
-			fprintf(stderr, _("Error setting password for user "
-					  "%s: %s.\n"), name,
-				lu_strerror(error));
-			return 3;
-		}
-	}
-
-	if (cryptedUserPassword != NULL) {
-		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
-				    &error) == FALSE) {
-			fprintf(stderr, _("Error setting password for user "
-					  "%s: %s.\n"), name,
-				lu_strerror(error));
-			return 3;
-		}
-	}
-
         lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	/* If we don't have the the don't-create-home flag, create the user's
@@ -313,6 +292,29 @@ main(int argc, const char **argv)
 			return 8;
 		}
 	}
+
+	/* Set the password after creating the home directory to prevent the
+	   user from seeing an incomplete home, and to prevent the user from
+	   interfering with the creation of the home directory. */
+	if (userPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, userPassword, FALSE, &error)
+		    == FALSE) {
+			fprintf(stderr, _("Error setting password for user "
+					  "%s: %s.\n"), name,
+				lu_strerror(error));
+			return 3;
+		}
+	}
+	if (cryptedUserPassword != NULL) {
+		if (lu_user_setpass(ctx, ent, cryptedUserPassword, TRUE,
+				    &error) == FALSE) {
+			fprintf(stderr, _("Error setting password for user "
+					  "%s: %s.\n"), name,
+				lu_strerror(error));
+			return 3;
+		}
+	}
+	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	lu_ent_free(ent);
 

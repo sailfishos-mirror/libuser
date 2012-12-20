@@ -1,5 +1,9 @@
 2012-12-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/lnewusers.c (main)
+	* apps/luseradd.c (main): Only set the user's password after the
+	home directory is created.
+
 	* lib/fs.c (struct copy_access_options): New member ignore_eexist.
 	(lu_copy_dir_and_close): Use access_options->ignore_eexist.
 	(lu_homedir_populate, lu_homedir_move): Set
