@@ -340,31 +340,6 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 				goto err_ifd;
 			}
 
-			/* Set the ownership; permissions are still
-			   restrictive. */
-			if (fchown(ofd, uid_for_copy(access_options, &st),
-				   gid_for_copy(access_options, &st)) == -1
-			    && errno != EPERM) {
-				lu_error_new(error, lu_error_generic,
-					     _("Error changing owner of `%s': "
-					       "%s"), dest_ent_path,
-					     strerror(errno));
-				goto err_ofd;
-			}
-
-			/* Set the desired mode.  Do this explicitly to
-			   preserve S_ISGID and other bits.  Do this after
-			   chown, because chown is permitted to reset these
-			   bits. */
-			if (fchmod(ofd, mode_for_copy(access_options, &st))
-			    == -1) {
-				lu_error_new(error, lu_error_generic,
-					     _("Error setting mode of `%s': "
-					       "%s"), dest_ent_path,
-					     strerror(errno));
-				goto err_ofd;
-			}
-
 			/* Now just copy the data. */
 			for (;;) {
 				ssize_t left;
@@ -401,6 +376,31 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 					p += out;
 					left -= out;
 				}
+			}
+
+			/* Set the ownership; permissions are still
+			   restrictive. */
+			if (fchown(ofd, uid_for_copy(access_options, &st),
+				   gid_for_copy(access_options, &st)) == -1
+			    && errno != EPERM) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error changing owner of `%s': "
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_ofd;
+			}
+
+			/* Set the desired mode.  Do this explicitly to
+			   preserve S_ISGID and other bits.  Do this after
+			   chown, because chown is permitted to reset these
+			   bits. */
+			if (fchmod(ofd, mode_for_copy(access_options, &st))
+			    == -1) {
+				lu_error_new(error, lu_error_generic,
+					     _("Error setting mode of `%s': "
+					       "%s"), dest_ent_path,
+					     strerror(errno));
+				goto err_ofd;
 			}
 
 			close (ifd);
