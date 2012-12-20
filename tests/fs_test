@@ -165,6 +165,18 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Moving onto an existing directory is prohibited
+fakeroot > mv2_output 2>&1 <<EOF
+mkdir "$workdir"/mv2home{1,2}
+
+$VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
+echo \$?
+EOF
+diff mv2_output - <<EOF
+Error creating \`$workdir/mv2home2': File exists
+1
+EOF
+
 
 # Test lu_homedir_populate()
 fakeroot -i "$workdir"/save -s "$workdir"/save > pop_output <<EOF

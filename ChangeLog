@@ -1,5 +1,14 @@
 2012-12-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (struct copy_access_options): New member ignore_eexist.
+	(lu_copy_dir_and_close): Use access_options->ignore_eexist.
+	(lu_homedir_populate, lu_homedir_move): Set
+	access_options.ignore_eexist.
+	* tests/fs_test.py (main): Don't output a full traceback if moveHome
+	fails.
+	* tests/fs_test: Test that moving onto an existing directory is
+	prohibited.
+
 	* lib/fs.c (lu_copy_dir_and_close): Only set the ownership and mode
 	of newly created files after the content is copied.  This is better
 	because 1) write(3) is allowed to reset the S_ISUID and S_ISGID bits,

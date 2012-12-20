@@ -32,7 +32,10 @@ def main():
         a = libuser.admin()
         u = a.initUser('fs_test_move')
         u[libuser.HOMEDIRECTORY] = sys.argv[2]
-        a.moveHome(u, sys.argv[3])
+        try:
+            a.moveHome(u, sys.argv[3])
+        except RuntimeError, e:
+            sys.exit(str(e))
     elif sys.argv[1] == '--populate':
         a = libuser.admin()
         u = a.initUser('fs_test_populate')

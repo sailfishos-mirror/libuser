@@ -65,6 +65,8 @@ struct copy_access_options
 	   otherwise, use matchpathcon() for SELinux contexts and apply
 	   the following fields.. */
 	gboolean preserve_source;
+	/* Ignore EEXIST errors.  This will go away in the future. */
+	gboolean ignore_eexist;
 	uid_t uid;	     /* UID to use for the copy if !preserve_source. */
 	/* GID to use for the copy if !preserve_source and original is owned by
 	   GID 0. */
@@ -156,7 +158,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	   fairly restrictive permissions that still allow us to use the
 	   directory. */
 	if (mkdirat(dest_parent_fd, dest_dir_name, S_IRWXU) == -1
-	    && errno != EEXIST) {
+	    && (errno != EEXIST || !access_options->ignore_eexist)) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error creating `%s': %s"), dest_dir_path,
 			     strerror(errno));
@@ -270,7 +272,8 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			}
 			buf[len] = '\0';
 			if (symlinkat(buf, dest_dir_fd, ent->d_name) == -1) {
-				if (errno == EEXIST)
+				if (errno == EEXIST
+				    && access_options->ignore_eexist)
 					continue;
 				lu_error_new(error, lu_error_generic,
 					     _("Error creating `%s': %s"),
@@ -330,7 +333,8 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 				     O_EXCL | O_CREAT | O_WRONLY | O_NOFOLLOW,
 				     0);
 			if (ofd == -1) {
-				if (errno == EEXIST) {
+				if (errno == EEXIST
+				    && access_options->ignore_eexist) {
 					close(ifd);
 					continue;
 				}
@@ -538,6 +542,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
 					      "/etc/skel");
 	access_options.preserve_source = FALSE;
+	access_options.ignore_eexist = TRUE;
 	access_options.uid = owner;
 	access_options.gid = group;
 	access_options.umask = current_umask();
@@ -712,6 +717,7 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	LU_ERROR_CHECK(error);
 
 	access_options.preserve_source = TRUE;
+	access_options.ignore_eexist = FALSE;
 	if (!lu_homedir_copy(oldhome, newhome, &access_options, error))
 		return FALSE;
 
