@@ -1,6 +1,12 @@
 2013-02-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.ac: Define GLIB_VERSION_MIN_REQUIRED to shut up warnings
+	about GValueArray being deprecated.
+	* lib/common.c: #include <config.h> first, to let the
+	GLIB_VERSION_MIN_REQUIRED take effect.
+
 	* configure.ac: Rename from ...
+
 	* configure.in: ... the obsolete name.
 
 	* configure.in: Enable system extensions, in particular the

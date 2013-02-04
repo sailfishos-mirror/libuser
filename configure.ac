@@ -22,6 +22,10 @@ PKG_CHECK_MODULES(GOBJECT,[glib-2.0 gobject-2.0])
 PKG_CHECK_MODULES(GMODULE,[glib-2.0 gmodule-no-export-2.0 gobject-2.0])
 AC_DEFINE(G_DISABLE_DEPRECATED,,
 	[Stay away from deprecated glib functionality.])
+# GValueArray is a part of external API of the library; warnings about it being
+# deprecated do no good.
+AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_30],
+	[Shut up warnings about deprecated GValueArray])
 
 AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
