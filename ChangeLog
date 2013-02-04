@@ -1,3 +1,12 @@
+2013-02-04  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.in: Enable system extensions, in particular the
+	secure_getenv() declaration.  Check for secure_getenv() in
+	addition to __secure_getenv().
+	* lib/config.c: Use secure_getenv() if __secure_getenv() is not
+	available, abort build if neither is available.
+	Patch by Viktor Hercinger <vhercing@redhat.com>.
+
 2012-12-20  Miloslav Trmač  <mitr@redhat.com>
 
 	* apps/lnewusers.c (main)

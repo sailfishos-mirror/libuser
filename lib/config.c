@@ -40,8 +40,12 @@
  * from the libuser configuration.
  */
 
-#ifdef HAVE___SECURE_GETENV
-#define getenv(string) __secure_getenv(string)
+#if defined(HAVE_SECURE_GETENV)
+#  define safe_getenv(string) secure_getenv(string)
+#elif defined(HAVE___SECURE_GETENV)
+#  define safe_getenv(string) __secure_getenv(string)
+#else
+#  error Neither secure_getenv not __secure_getenv are available
 #endif
 
 struct config_config {
@@ -266,7 +270,7 @@ lu_cfg_init(struct lu_context *context, struct lu_error **error)
 	if ((getuid() == geteuid()) && (getgid() == getegid())) {
 		const char *t;
 
-		t = getenv("LIBUSER_CONF");
+		t = safe_getenv("LIBUSER_CONF");
 		if (t != NULL)
 			filename = t;
 	}

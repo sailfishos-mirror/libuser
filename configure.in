@@ -13,6 +13,7 @@ AC_CHECK_PROG([YACC], [bison -y], [bison -y], [:])
 AC_PATH_PROG([NSCD], [nscd], [/usr/sbin/nscd],
 	     [$PATH$PATH_SEPARATOR/usr/sbin$PATH_SEPARATOR/sbin])
 AC_ARG_VAR([NSCD], [Path to nscd])
+AC_USE_SYSTEM_EXTENSIONS
 
 LT_INIT([disable-static])
 
@@ -115,7 +116,7 @@ AC_TYPE_MODE_T
 AC_TYPE_OFF_T
 AC_TYPE_SIZE_T
 
-AC_CHECK_FUNCS_ONCE([__secure_getenv])
+AC_CHECK_FUNCS([__secure_getenv secure_getenv])
 
 # Modify CFLAGS after all tests are run (some of them could fail because
 # of the -Werror).
