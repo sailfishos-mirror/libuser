@@ -1,5 +1,8 @@
 2013-02-04  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.ac: Rename from ...
+	* configure.in: ... the obsolete name.
+
 	* configure.in: Enable system extensions, in particular the
 	secure_getenv() declaration.  Check for secure_getenv() in
 	addition to __secure_getenv().
