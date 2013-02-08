@@ -1,5 +1,9 @@
 2013-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_dir_entry): Split from ...
+	(lu_copy_dir_and_close): ... to simplify handling of src_path_buf and
+	dest_path_buf.
+
 	* lib/fs.c (lu_copy_dir_and_close, lu_homedir_copy): Use GString
 	buffers to build paths, removing the PATH_MAX limit and reducing O(N^2)
 	memory use to O(N).

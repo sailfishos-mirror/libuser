@@ -293,6 +293,84 @@ err_src_fd:
 	return ret;
 }
 
+/* Forward declaration. */
+static gboolean lu_copy_dir_and_close(int src_dir_fd, GString *src_path_buf,
+				      int dest_parent_fd,
+				      const char *dest_dir_name,
+				      GString *dest_path_buf,
+				      const struct stat *src_dir_stat,
+				      const struct copy_access_options
+				      *access_options, struct lu_error **error);
+
+/* Copy ENT_NAME in SRC_DIR_FD, which corresponds to SRC_PATH_BUF,
+   to DEST_DIR_FD, which corresponds to DEST_PATH_BUF.  Use ACCESS_OPTIONS.
+
+   On return from this function, SELinux fscreate context is unspecified.  This
+   function may temporarily modify SRC_PATH_BUF and DEST_PATH_BUF, but they
+   will be unchanged on return.
+
+   Note that SRC_PATH_BUF should only be used for error messages, not to access
+   the files; if the user is still logged in, a directory in the path may be
+   replaced by a symbolic link, redirecting the access outside of SRC_DIR_FD.
+   Likewise for DEST_*. */
+static gboolean
+copy_dir_entry(int src_dir_fd, GString *src_path_buf, int dest_dir_fd,
+	       GString *dest_path_buf, const char *ent_name,
+	       const struct copy_access_options *access_options,
+	       struct lu_error **error)
+{
+	struct stat st;
+	int ifd;
+
+	/* Open the input entry first, then we can fstat() it and be certain
+	   that it is still the same file.  O_NONBLOCK protects us against
+	   FIFOs and perhaps side-effects of the open() of a device file if
+	   there ever was one here, and doesn't matter for regular files or
+	   directories. */
+	ifd = openat(src_dir_fd, ent_name,
+		     O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
+	if (ifd == -1) {
+		int saved_errno;
+
+		saved_errno = errno;
+		if (errno != ELOOP || fstatat(src_dir_fd, ent_name, &st,
+					      AT_SYMLINK_NOFOLLOW) != 0
+		    || !S_ISLNK(st.st_mode)) {
+			lu_error_new(error, lu_error_open,
+				     _("Error opening `%s': %s"),
+				     src_path_buf->str, strerror(saved_errno));
+			return FALSE;
+		}
+
+		return copy_symlink(src_dir_fd, src_path_buf->str, dest_dir_fd,
+				    dest_path_buf->str, ent_name, &st,
+				    access_options, error);
+	}
+
+	if (fstat(ifd, &st) != 0) {
+		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
+			     src_path_buf->str, strerror(errno));
+		close(ifd);
+		return FALSE;
+	}
+	g_assert(!S_ISLNK(st.st_mode));
+
+	if (S_ISDIR(st.st_mode))
+		return lu_copy_dir_and_close(ifd, src_path_buf, dest_dir_fd,
+					     ent_name, dest_path_buf, &st,
+					     access_options, error);
+	else if (S_ISREG(st.st_mode))
+		return copy_regular_file_and_close(ifd, src_path_buf->str,
+						   dest_dir_fd, ent_name,
+						   dest_path_buf->str, &st,
+						   access_options, error);
+	else {
+		/* Note that we don't copy device specials. */
+		close(ifd);
+		return TRUE;
+	}
+}
+
 /* Copy SRC_DIR_FD, which corresponds to SRC_PATH_BUF, to DEST_DIR_NAME under
    DEST_PARENT_FD, which corresponds to DEST_PATH_BUF.  Use ACCESS_OPTIONS.  Use
    SRC_DIR_STAT for data about SRC_PATH_BUF.
@@ -379,8 +457,8 @@ lu_copy_dir_and_close(int src_dir_fd, GString *src_path_buf, int dest_parent_fd,
 	   required to rename directories).  This holds for the top-level
 	   directory, and for the others we achieve this by creating them
 	   root-owned and S_IRWXU, and only applying the original ownership and
-	   permissions after finishing other work.  See also the comment below
-	   about symlinks.
+	   permissions after finishing other work.  See also the comment in
+	   copy_symlink().
 
 	   Handling any preexisting directory structure complicates this -
 	   should we temporarily chown/chmod any existing directory to
@@ -388,22 +466,10 @@ lu_copy_dir_and_close(int src_dir_fd, GString *src_path_buf, int dest_parent_fd,
 	   structures should not exist in the first place. */
 
 	while ((ent = readdir(dir)) != NULL) {
-		struct stat st;
-		int ifd;
-
-		/* Iterate through each item in the directory. */
-		/* Skip over self and parent hard links. */
-		if (strcmp(ent->d_name, ".") == 0) {
+		if (strcmp(ent->d_name, ".") == 0
+		    || strcmp(ent->d_name, "..") == 0)
 			continue;
-		}
-		if (strcmp(ent->d_name, "..") == 0) {
-			continue;
-		}
 
-		/* Truncate here to account for various ways to exit the loop
-		   body. */
-		g_string_truncate(src_path_buf, orig_src_path_buf_len);
-		g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 		/* Build the path of the source file or directory and its
 		   corresponding member in the new tree. */
 		g_string_append_c(src_path_buf, '/');
@@ -411,65 +477,14 @@ lu_copy_dir_and_close(int src_dir_fd, GString *src_path_buf, int dest_parent_fd,
 		g_string_append_c(dest_path_buf, '/');
 		g_string_append(dest_path_buf, ent->d_name);
 
-		/* Open the input entry first, then we can fstat() it and be
-		   certain that it is still the same file.  O_NONBLOCK protects
-		   us against FIFOs and perhaps side-effects of the open() of a
-		   device file if there ever was one here, and doesn't matter
-		   for regular files or directories. */
-		ifd = openat(src_dir_fd, ent->d_name,
-			     O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
-		if (ifd == -1) {
-			int saved_errno;
-
-			saved_errno = errno;
-			if (errno != ELOOP
-			    || fstatat(src_dir_fd, ent->d_name, &st,
-				       AT_SYMLINK_NOFOLLOW) != 0
-			    || !S_ISLNK(st.st_mode)) {
-				lu_error_new(error, lu_error_open,
-					     _("Error opening `%s': %s"),
-					     src_path_buf->str,
-					     strerror(saved_errno));
-				goto err_dest_dir_fd;
-			}
-
-			if (!copy_symlink(src_dir_fd, src_path_buf->str,
-					  dest_dir_fd, dest_path_buf->str,
-					  ent->d_name, &st, access_options,
-					  error))
-				goto err_dest_dir_fd;
-			continue;
-		}
-
-		if (fstat(ifd, &st) != 0) {
-			lu_error_new(error, lu_error_stat,
-				     _("couldn't stat `%s': %s"),
-				     src_path_buf->str, strerror(errno));
-			close(ifd);
+		if (!copy_dir_entry(src_dir_fd, src_path_buf, dest_dir_fd,
+				    dest_path_buf, ent->d_name, access_options,
+				    error))
 			goto err_dest_dir_fd;
-		}
-		g_assert(!S_ISLNK(st.st_mode));
 
-		if (S_ISDIR(st.st_mode)) {
-			if (!lu_copy_dir_and_close(ifd, src_path_buf,
-						   dest_dir_fd, ent->d_name,
-						   dest_path_buf, &st,
-						   access_options, error))
-				goto err_dest_dir_fd;
-		} else if (S_ISREG(st.st_mode)) {
-			if (!copy_regular_file_and_close(ifd, src_path_buf->str,
-							 dest_dir_fd,
-							 ent->d_name,
-							 dest_path_buf->str,
-							 &st, access_options,
-							 error))
-				goto err_dest_dir_fd;
-		} else
-			/* Note that we don't copy device specials. */
-			close(ifd);
+		g_string_truncate(src_path_buf, orig_src_path_buf_len);
+		g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 	}
-	g_string_truncate(src_path_buf, orig_src_path_buf_len);
-	g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 
 	/* Set the ownership on the directory.  Permissions are still
 	   fairly restrictive. */
