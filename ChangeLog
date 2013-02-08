@@ -1,5 +1,10 @@
 2013-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_regular_file): Rename from...
+	(copy_regular_file_and_close): ... this, and stop closing src_fd; we
+	don't really need to use this irregular model here.
+	(copy_dir_entry): Update.
+
 	* lib/fs.c (lu_homedir_populate, lu_homedir_move)
 	(lu_nscd_flush_cache, lu_mail_spool_create)
 	(lu_mail_spool_remove): These functions are public API, add

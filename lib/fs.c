@@ -183,8 +183,6 @@ copy_symlink(int src_dir_fd, const char *src_path, int dest_dir_fd,
    which corresponds to DEST_PATH.  Use ACCESS_OPTIONS.  Use SRC_STAT for data
    about SRC_PATH.
 
-   In every case, even on error, close SRC_FD.
-
    On return from this function, SELinux fscreate context is unspecified.
 
    Note that SRC_PATH should only be used for error messages, not to access the
@@ -192,11 +190,11 @@ copy_symlink(int src_dir_fd, const char *src_path, int dest_dir_fd,
    replaced by a symbolic link, redirecting the access outside of SRC_FD.
    Likewise for DEST_*. */
 static gboolean
-copy_regular_file_and_close(int src_fd, const char *src_path, int dest_dir_fd,
-			    const char *dest_name, const char *dest_path,
-			    const struct stat *src_stat,
-			    const struct copy_access_options *access_options,
-			    struct lu_error **error)
+copy_regular_file(int src_fd, const char *src_path, int dest_dir_fd,
+		  const char *dest_name, const char *dest_path,
+		  const struct stat *src_stat,
+		  const struct copy_access_options *access_options,
+		  struct lu_error **error)
 {
 	int dest_fd;
 	struct timespec timebuf[2];
@@ -206,23 +204,21 @@ copy_regular_file_and_close(int src_fd, const char *src_path, int dest_dir_fd,
 
 	if (access_options->preserve_source) {
 		if (!lu_util_fscreate_from_fd(src_fd, src_path, error))
-			goto err_src_fd;
+			return FALSE;
 	} else if (!lu_util_fscreate_for_path(dest_path,
 					      src_stat->st_mode & S_IFMT,
 					      error))
-		goto err_src_fd;
+		return FALSE;
 	/* Start with absolutely restrictive permissions; the original file may
 	   be e.g. a hardlink to /etc/shadow. */
 	dest_fd = openat(dest_dir_fd, dest_name,
 			 O_EXCL | O_CREAT | O_WRONLY | O_NOFOLLOW, 0);
 	if (dest_fd == -1) {
-		if (errno == EEXIST && access_options->ignore_eexist) {
-			ret = TRUE;
-			goto err_src_fd;
-		}
+		if (errno == EEXIST && access_options->ignore_eexist)
+			return TRUE;
 		lu_error_new(error, lu_error_open, _("Error writing `%s': %s"),
 			     dest_path, strerror(errno));
-		goto err_src_fd;
+		return FALSE;
 	}
 
 	/* Now just copy the data. */
@@ -289,8 +285,6 @@ copy_regular_file_and_close(int src_fd, const char *src_path, int dest_dir_fd,
 
 err_dest_fd:
 	close(dest_fd);
-err_src_fd:
-	close(src_fd);
 	return ret;
 }
 
@@ -322,6 +316,7 @@ copy_dir_entry(int src_dir_fd, GString *src_path_buf, int dest_dir_fd,
 {
 	struct stat st;
 	int ifd;
+	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
 
@@ -353,25 +348,28 @@ copy_dir_entry(int src_dir_fd, GString *src_path_buf, int dest_dir_fd,
 	if (fstat(ifd, &st) != 0) {
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
 			     src_path_buf->str, strerror(errno));
-		close(ifd);
-		return FALSE;
+		goto err_ifd;
 	}
 	g_assert(!S_ISLNK(st.st_mode));
 
-	if (S_ISDIR(st.st_mode))
-		return lu_copy_dir_and_close(ifd, src_path_buf, dest_dir_fd,
-					     ent_name, dest_path_buf, &st,
-					     access_options, error);
-	else if (S_ISREG(st.st_mode))
-		return copy_regular_file_and_close(ifd, src_path_buf->str,
-						   dest_dir_fd, ent_name,
-						   dest_path_buf->str, &st,
-						   access_options, error);
-	else {
+	if (S_ISDIR(st.st_mode)) {
+		ret = lu_copy_dir_and_close(ifd, src_path_buf, dest_dir_fd,
+					    ent_name, dest_path_buf, &st,
+					    access_options, error);
+		ifd = -1;
+	} else if (S_ISREG(st.st_mode))
+		ret = copy_regular_file(ifd, src_path_buf->str, dest_dir_fd,
+					ent_name, dest_path_buf->str, &st,
+					access_options, error);
+	else
 		/* Note that we don't copy device specials. */
+		ret = TRUE;
+	/* Fall through */
+
+err_ifd:
+	if (ifd != -1)
 		close(ifd);
-		return TRUE;
-	}
+	return ret;
 }
 
 /* Copy SRC_DIR_FD, which corresponds to SRC_PATH_BUF, to DEST_DIR_NAME under
