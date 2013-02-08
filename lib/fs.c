@@ -316,7 +316,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 {
 	struct dirent *ent;
 	DIR *dir;
-	int dest_dir_fd, ifd;
+	int dest_dir_fd;
 	struct timespec timebuf[2];
 	gboolean ret = FALSE;
 
@@ -386,6 +386,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	while ((ent = readdir(dir)) != NULL) {
 		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
 		struct stat st;
+		int ifd;
 
 		/* Iterate through each item in the directory. */
 		/* Skip over self and parent hard links. */
@@ -442,29 +443,22 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 		}
 		g_assert(!S_ISLNK(st.st_mode));
 
-		/* If it's a directory, descend into it. */
 		if (S_ISDIR(st.st_mode)) {
 			if (!lu_copy_dir_and_close(ifd, src_ent_path,
 						   dest_dir_fd, ent->d_name,
 						   dest_ent_path, &st,
 						   access_options, error))
-				/* Aargh!  Fail up. */
 				goto err_dest_dir_fd;
-			continue;
-		}
-
-		/* If it's a regular file, copy it. */
-		if (S_ISREG(st.st_mode)) {
+		} else if (S_ISREG(st.st_mode)) {
 			if (!copy_regular_file_and_close(ifd, src_ent_path,
 							 dest_dir_fd,
 							 ent->d_name,
 							 dest_ent_path, &st,
 							 access_options, error))
 				goto err_dest_dir_fd;
-			continue;
-		}
-		/* Note that we don't copy device specials. */
-		close(ifd);
+		} else
+			/* Note that we don't copy device specials. */
+			close(ifd);
 	}
 
 	/* Set the ownership on the directory.  Permissions are still

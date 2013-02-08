@@ -1,5 +1,7 @@
 2013-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (lu_copy_dir_and_close): Simplify the control flow a little.
+
 	* lib/fs.c (copy_symlink, copy_regular_file_and_close): Split from ...
 	(lu_copy_dir_and_close): ... this.
 
