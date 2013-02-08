@@ -109,10 +109,10 @@ mode_for_copy(const struct copy_access_options *options, const struct stat *st)
 
    On return from this function, SELinux fscreate context is unspecified.
 
-   Note that SRC_PATH should only be used for error messages, not to access
-   the files; if the user is still logged in, a directory in the path may be
+   Note that SRC_PATH should only be used for error messages, not to access the
+   files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
-   SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
+   SRC_DIR_FD/SYMLINK_NAME.  Likewise for DEST_*. */
 static gboolean
 copy_symlink(int src_dir_fd, const char *src_path, int dest_dir_fd,
 	     const char *dest_path, const char *symlink_name,
@@ -138,7 +138,7 @@ copy_symlink(int src_dir_fd, const char *src_path, int dest_dir_fd,
 	   fchownat()/utimensat() are done on the same file using O_PATH again,
 	   but symlinkat()/the rest is definitely unatomic.  Rely on having an
 	   unwritable the parent directory, same as in the mkdirat()/openat()
-	   case. */
+	   case of lu_homedir_copy_and_close(). */
 	if (access_options->preserve_source) {
 		if (!lu_util_fscreate_from_lfile(src_path, error))
 			return FALSE;
