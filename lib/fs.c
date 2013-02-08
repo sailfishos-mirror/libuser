@@ -293,27 +293,28 @@ err_src_fd:
 	return ret;
 }
 
-/* Copy SRC_DIR_FD, which corresponds to SRC_DIR_PATH, to DEST_DIR_NAME under
-   DEST_PARENT_FD, which corresponds to DEST_DIR_PATH.  Use ACCESS_OPTIONS.  Use
-   SRC_DIR_STAT for data about SRC_DIR_PATH.
+/* Copy SRC_DIR_FD, which corresponds to SRC_PATH_BUF, to DEST_DIR_NAME under
+   DEST_PARENT_FD, which corresponds to DEST_PATH_BUF.  Use ACCESS_OPTIONS.  Use
+   SRC_DIR_STAT for data about SRC_PATH_BUF.
 
    In every case, even on error, close SRC_DIR_FD.
 
    DEST_PARENT_FD may be AT_FDCWD.  On return from this function, SELinux
-   fscreate context is unspecified.
+   fscreate context is unspecified.  This function may temporarily modify
+   SRC_PATH_BUF and DEST_PATH_BUF, but they will be unchanged on return.
 
-   Note that SRC_DIR_PATH should only be used for error messages, not to access
+   Note that SRC_PATH_BUF should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
    SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
 static gboolean
-lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
-		      int dest_parent_fd, const char *dest_dir_name,
-		      const char *dest_dir_path,
+lu_copy_dir_and_close(int src_dir_fd, GString *src_path_buf, int dest_parent_fd,
+		      const char *dest_dir_name, GString *dest_path_buf,
 		      const struct stat *src_dir_stat,
 		      const struct copy_access_options *access_options,
 		      struct lu_error **error)
 {
+	size_t orig_src_path_buf_len, orig_dest_path_buf_len;
 	struct dirent *ent;
 	DIR *dir;
 	int dest_dir_fd;
@@ -321,26 +322,29 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	gboolean ret = FALSE;
 
 	LU_ERROR_CHECK(error);
+	orig_src_path_buf_len = src_path_buf->len;
+	orig_dest_path_buf_len = dest_path_buf->len;
 
-	if (*dest_dir_path != '/') {
+	if (*dest_path_buf->str != '/') {
 		lu_error_new(error, lu_error_generic,
 			     _("Home directory path `%s' is not absolute"),
-			     dest_dir_path);
+			     dest_path_buf->str);
 		goto err_src_dir_fd;
 	}
 
 	dir = fdopendir(src_dir_fd);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error reading `%s': %s"), src_dir_path,
+			     _("Error reading `%s': %s"), src_path_buf->str,
 			     strerror(errno));
 		goto err_src_dir_fd;
 	}
 
 	if (access_options->preserve_source) {
-		if (!lu_util_fscreate_from_fd(src_dir_fd, src_dir_path, error))
+		if (!lu_util_fscreate_from_fd(src_dir_fd, src_path_buf->str,
+					      error))
 			goto err_dir;
-	} else if (!lu_util_fscreate_for_path(dest_dir_path,
+	} else if (!lu_util_fscreate_for_path(dest_path_buf->str,
 					      src_dir_stat->st_mode & S_IFMT,
 					      error))
 		goto err_dir;
@@ -351,7 +355,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	if (mkdirat(dest_parent_fd, dest_dir_name, S_IRWXU) == -1
 	    && (errno != EEXIST || !access_options->ignore_eexist)) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error creating `%s': %s"), dest_dir_path,
+			     _("Error creating `%s': %s"), dest_path_buf->str,
 			     strerror(errno));
 		goto err_dir;
 	}
@@ -361,7 +365,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			     O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
 	if (dest_dir_fd == -1) {
 		lu_error_new(error, lu_error_open, _("Error opening `%s': %s"),
-			     dest_dir_path, strerror(errno));
+			     dest_path_buf->str, strerror(errno));
 		goto err_dir;
 	}
 	/* The openat() after mkdirat() is not 100% safe; we may be modifying
@@ -384,7 +388,6 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	   structures should not exist in the first place. */
 
 	while ((ent = readdir(dir)) != NULL) {
-		char src_ent_path[PATH_MAX], dest_ent_path[PATH_MAX];
 		struct stat st;
 		int ifd;
 
@@ -397,12 +400,16 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			continue;
 		}
 
+		/* Truncate here to account for various ways to exit the loop
+		   body. */
+		g_string_truncate(src_path_buf, orig_src_path_buf_len);
+		g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 		/* Build the path of the source file or directory and its
 		   corresponding member in the new tree. */
-		snprintf(src_ent_path, sizeof(src_ent_path), "%s/%s",
-			 src_dir_path, ent->d_name);
-		snprintf(dest_ent_path, sizeof(dest_ent_path), "%s/%s",
-			 dest_dir_path, ent->d_name);
+		g_string_append_c(src_path_buf, '/');
+		g_string_append(src_path_buf, ent->d_name);
+		g_string_append_c(dest_path_buf, '/');
+		g_string_append(dest_path_buf, ent->d_name);
 
 		/* Open the input entry first, then we can fstat() it and be
 		   certain that it is still the same file.  O_NONBLOCK protects
@@ -421,13 +428,13 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 			    || !S_ISLNK(st.st_mode)) {
 				lu_error_new(error, lu_error_open,
 					     _("Error opening `%s': %s"),
-					     src_ent_path,
+					     src_path_buf->str,
 					     strerror(saved_errno));
 				goto err_dest_dir_fd;
 			}
 
-			if (!copy_symlink(src_dir_fd, src_ent_path,
-					  dest_dir_fd, dest_ent_path,
+			if (!copy_symlink(src_dir_fd, src_path_buf->str,
+					  dest_dir_fd, dest_path_buf->str,
 					  ent->d_name, &st, access_options,
 					  error))
 				goto err_dest_dir_fd;
@@ -436,30 +443,33 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 
 		if (fstat(ifd, &st) != 0) {
 			lu_error_new(error, lu_error_stat,
-				     _("couldn't stat `%s': %s"), src_ent_path,
-				     strerror(errno));
+				     _("couldn't stat `%s': %s"),
+				     src_path_buf->str, strerror(errno));
 			close(ifd);
 			goto err_dest_dir_fd;
 		}
 		g_assert(!S_ISLNK(st.st_mode));
 
 		if (S_ISDIR(st.st_mode)) {
-			if (!lu_copy_dir_and_close(ifd, src_ent_path,
+			if (!lu_copy_dir_and_close(ifd, src_path_buf,
 						   dest_dir_fd, ent->d_name,
-						   dest_ent_path, &st,
+						   dest_path_buf, &st,
 						   access_options, error))
 				goto err_dest_dir_fd;
 		} else if (S_ISREG(st.st_mode)) {
-			if (!copy_regular_file_and_close(ifd, src_ent_path,
+			if (!copy_regular_file_and_close(ifd, src_path_buf->str,
 							 dest_dir_fd,
 							 ent->d_name,
-							 dest_ent_path, &st,
-							 access_options, error))
+							 dest_path_buf->str,
+							 &st, access_options,
+							 error))
 				goto err_dest_dir_fd;
 		} else
 			/* Note that we don't copy device specials. */
 			close(ifd);
 	}
+	g_string_truncate(src_path_buf, orig_src_path_buf_len);
+	g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 
 	/* Set the ownership on the directory.  Permissions are still
 	   fairly restrictive. */
@@ -468,7 +478,7 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	    && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
 			     _("Error changing owner of `%s': %s"),
-			     dest_dir_path, strerror(errno));
+			     dest_path_buf->str, strerror(errno));
 		goto err_dest_dir_fd;
 	}
 
@@ -478,8 +488,8 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
 	if (fchmod(dest_dir_fd,
 		   mode_for_copy(access_options, src_dir_stat)) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error setting mode of `%s': %s"), dest_dir_path,
-			     strerror(errno));
+			     _("Error setting mode of `%s': %s"),
+			     dest_path_buf->str, strerror(errno));
 		goto err_dest_dir_fd;
 	}
 
@@ -498,6 +508,8 @@ lu_copy_dir_and_close(int src_dir_fd, const char *src_dir_path,
  err_src_dir_fd:
 	if (src_dir_fd != -1)
 		close(src_dir_fd);
+	g_string_truncate(src_path_buf, orig_src_path_buf_len);
+	g_string_truncate(dest_path_buf, orig_dest_path_buf_len);
 	return ret;
 }
 
@@ -518,6 +530,7 @@ lu_homedir_copy(const char *src_dir, const char *dest_dir,
 	lu_security_context_t fscreate;
 	int fd;
 	struct stat st;
+	GString *src_path_buf, *dest_path_buf;
 	gboolean ret;
 
 	ret = FALSE;
@@ -536,8 +549,12 @@ lu_homedir_copy(const char *src_dir, const char *dest_dir,
 		goto err_fd;
 	}
 
-	ret = lu_copy_dir_and_close(fd, src_dir, AT_FDCWD, dest_dir, dest_dir,
-				    &st, access_options, error);
+	src_path_buf = g_string_new(src_dir);
+	dest_path_buf = g_string_new(dest_dir);
+	ret = lu_copy_dir_and_close(fd, src_path_buf, AT_FDCWD, dest_dir,
+				    dest_path_buf, &st, access_options, error);
+	g_string_free(dest_path_buf, TRUE);
+	g_string_free(src_path_buf, TRUE);
 	goto err_fscreate;
 
 err_fd:
