@@ -176,6 +176,9 @@ diff mv2_output - <<EOF
 Error creating \`$workdir/mv2home2': File exists
 1
 EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
 
 
 # Test lu_homedir_populate()
@@ -228,6 +231,22 @@ lrwxrwxrwx 1  556  444 symlink
 
 ./unreadable:
 ---------- 1  556  557 f
+EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# Populating an existing directory is prohibited
+fakeroot > pop2_output 2>&1 <<EOF
+rm -rf "$workdir"/skel
+mkdir "$workdir"/{skel,pop2}
+
+$VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/pop2 556 557
+echo \$?
+EOF
+diff pop2_output - <<EOF
+Error creating \`$workdir/pop2': File exists
+1
 EOF
 if [ $? -ne 0 ]; then
     exit 1

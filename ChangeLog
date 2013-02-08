@@ -1,3 +1,16 @@
+2013-02-09  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/fs.c (struct copy_access_options): Remove member ignore_eexist.
+	(copy_symlink, copy_regular_file, lu_copy_dir_and_close): Remove the
+	possibility to ignore EEXIST, always fail on pre-existing contents.
+	(lu_homedir_populate): Incompatible change: Refuse to populate
+	pre-existing directories.
+	(lu_homedir_move): Stop setting access_options.ignore_eexist.
+	* tests/fs_test.py (main): Beautify output on createHome failure
+	to help checking the output.
+	* tests/fs_test: Fix mv2_output check.  Test that attempts to
+	populate a pre-existing home directory are refused.
+
 2013-02-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/fs.c (copy_regular_file): Rename from...

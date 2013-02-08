@@ -42,7 +42,10 @@ def main():
 	u[libuser.HOMEDIRECTORY] = sys.argv[2]
 	u[libuser.UIDNUMBER] = int(sys.argv[3])
 	u[libuser.GIDNUMBER] = int(sys.argv[4])
-	a.createHome(u)
+        try:
+            a.createHome(u)
+        except RuntimeError, e:
+            sys.exit(str(e))
     else:
 	sys.exit('Unexpected mode')
 
