@@ -1,5 +1,11 @@
 2013-02-08  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/fs.c (copy_symlink, copy_regular_file_and_close)
+	(copy_dir_entry, lu_homedir_copy, lu_homedir_populate)
+	(mail_spool_path, lu_mail_spool_remove): Add LU_ERROR_CHECK calls.
+	* lib/fs.c (copy_symlink, copy_regular_file_and_close): Use simpler
+	parameter names.
+
 	* lib/fs.c (copy_dir_entry): Split from ...
 	(lu_copy_dir_and_close): ... to simplify handling of src_path_buf and
 	dest_path_buf.

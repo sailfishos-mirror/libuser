@@ -103,20 +103,20 @@ mode_for_copy(const struct copy_access_options *options, const struct stat *st)
 	return st->st_mode & ~options->umask;
 }
 
-/* Copy symlink SYMLINK_NAME in SRC_DIR_FD, which corresponds to SRC_ENT_PATH,
-   to SYMLINK_NAME in DEST_DIR_FD, which corresponds to DEST_ENT_PATH.  Use
-   ACCESS_OPTIONS.  Use SRC_ENT_STAT for data about SRC_ENT_PATH.
+/* Copy symlink SYMLINK_NAME in SRC_DIR_FD, which corresponds to SRC_PATH, to
+   SYMLINK_NAME in DEST_DIR_FD, which corresponds to DEST_PATH.  Use
+   ACCESS_OPTIONS.  Use SRC_STAT for data about SRC_PATH.
 
    On return from this function, SELinux fscreate context is unspecified.
 
-   Note that SRC_ENT_PATH should only be used for error messages, not to access
+   Note that SRC_PATH should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
    SRC_PARENT_FD/SRC_DIR_NAME.   Likewise for DEST_*. */
 static gboolean
-copy_symlink(int src_dir_fd, const char *src_ent_path, int dest_dir_fd,
-	     const char *dest_ent_path, const char *symlink_name,
-	     const struct stat *src_ent_stat,
+copy_symlink(int src_dir_fd, const char *src_path, int dest_dir_fd,
+	     const char *dest_path, const char *symlink_name,
+	     const struct stat *src_stat,
 	     const struct copy_access_options *access_options,
 	     struct lu_error **error)
 {
@@ -124,10 +124,12 @@ copy_symlink(int src_dir_fd, const char *src_ent_path, int dest_dir_fd,
 	ssize_t len;
 	struct timespec timebuf[2];
 
+	LU_ERROR_CHECK(error);
+
 	/* In the worst case here, we end up with a wrong SELinux context for a
 	   symbolic link due to a path name lookup race.  That's unfortunate,
 	   but symlink contents are more or less public anyway... (A possible
-	   improvement would be to use Linux-only O_PATH to open src_ent_path
+	   improvement would be to use Linux-only O_PATH to open src_path
 	   first, then see if it is a symlink, and "upgrade" to an O_RDONLY if
 	   not.  But O_PATH is available only in Linux >= 2.6.39.)
 
@@ -138,17 +140,17 @@ copy_symlink(int src_dir_fd, const char *src_ent_path, int dest_dir_fd,
 	   unwritable the parent directory, same as in the mkdirat()/openat()
 	   case. */
 	if (access_options->preserve_source) {
-		if (!lu_util_fscreate_from_lfile(src_ent_path, error))
+		if (!lu_util_fscreate_from_lfile(src_path, error))
 			return FALSE;
-	} else if (!lu_util_fscreate_for_path(dest_ent_path,
-					      src_ent_stat->st_mode & S_IFMT,
+	} else if (!lu_util_fscreate_for_path(dest_path,
+					      src_stat->st_mode & S_IFMT,
 					      error))
 		return FALSE;
 
 	len = readlinkat(src_dir_fd, symlink_name, buf, sizeof(buf) - 1);
 	if (len == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error reading `%s': %s"), src_ent_path,
+			     _("Error reading `%s': %s"), src_path,
 			     strerror(errno));
 		return FALSE;
 	}
@@ -157,43 +159,42 @@ copy_symlink(int src_dir_fd, const char *src_ent_path, int dest_dir_fd,
 		if (errno == EEXIST && access_options->ignore_eexist)
 			return TRUE;
 		lu_error_new(error, lu_error_generic,
-			     _("Error creating `%s': %s"), dest_ent_path,
+			     _("Error creating `%s': %s"), dest_path,
 			     strerror(errno));
 		return FALSE;
 	}
 	if (fchownat(dest_dir_fd, symlink_name,
-		     uid_for_copy(access_options, src_ent_stat),
-		     gid_for_copy(access_options, src_ent_stat),
+		     uid_for_copy(access_options, src_stat),
+		     gid_for_copy(access_options, src_stat),
 		     AT_SYMLINK_NOFOLLOW) == -1
 	    && errno != EPERM && errno != EOPNOTSUPP) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"),
-			     dest_ent_path, strerror(errno));
+			     _("Error changing owner of `%s': %s"), dest_path,
+			     strerror(errno));
 		return FALSE;
 	}
-	timebuf[0] = src_ent_stat->st_atim;
-	timebuf[1] = src_ent_stat->st_mtim;
+	timebuf[0] = src_stat->st_atim;
+	timebuf[1] = src_stat->st_mtim;
 	utimensat(dest_dir_fd, symlink_name, timebuf, AT_SYMLINK_NOFOLLOW);
 	return TRUE;
 }
 
-/* Copy SRC_FD, which corresponds to SRC_ENT_PATH, to DEST_ENT_NAME in
-   DEST_DIR_FD, which corresponds to DEST_ENT_PATH.  Use ACCESS_OPTIONS.  Use
-   SRC_ENT_STAT for data about SRC_ENT_PATH.
+/* Copy SRC_FD, which corresponds to SRC_PATH, to DEST_NAME in DEST_DIR_FD,
+   which corresponds to DEST_PATH.  Use ACCESS_OPTIONS.  Use SRC_STAT for data
+   about SRC_PATH.
 
    In every case, even on error, close SRC_FD.
 
    On return from this function, SELinux fscreate context is unspecified.
 
-   Note that SRC_ENT_PATH should only be used for error messages, not to access
-   the files; if the user is still logged in, a directory in the path may be
+   Note that SRC_PATH should only be used for error messages, not to access the
+   files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of SRC_FD.
    Likewise for DEST_*. */
 static gboolean
-copy_regular_file_and_close(int src_fd, const char *src_ent_path,
-			    int dest_dir_fd, const char *dest_ent_name,
-			    const char *dest_ent_path,
-			    const struct stat *src_ent_stat,
+copy_regular_file_and_close(int src_fd, const char *src_path, int dest_dir_fd,
+			    const char *dest_name, const char *dest_path,
+			    const struct stat *src_stat,
 			    const struct copy_access_options *access_options,
 			    struct lu_error **error)
 {
@@ -201,16 +202,18 @@ copy_regular_file_and_close(int src_fd, const char *src_ent_path,
 	struct timespec timebuf[2];
 	gboolean ret = FALSE;
 
+	LU_ERROR_CHECK(error);
+
 	if (access_options->preserve_source) {
-		if (!lu_util_fscreate_from_fd(src_fd, src_ent_path, error))
+		if (!lu_util_fscreate_from_fd(src_fd, src_path, error))
 			goto err_src_fd;
-	} else if (!lu_util_fscreate_for_path(dest_ent_path,
-					      src_ent_stat->st_mode & S_IFMT,
+	} else if (!lu_util_fscreate_for_path(dest_path,
+					      src_stat->st_mode & S_IFMT,
 					      error))
 		goto err_src_fd;
 	/* Start with absolutely restrictive permissions; the original file may
 	   be e.g. a hardlink to /etc/shadow. */
-	dest_fd = openat(dest_dir_fd, dest_ent_name,
+	dest_fd = openat(dest_dir_fd, dest_name,
 			 O_EXCL | O_CREAT | O_WRONLY | O_NOFOLLOW, 0);
 	if (dest_fd == -1) {
 		if (errno == EEXIST && access_options->ignore_eexist) {
@@ -218,7 +221,7 @@ copy_regular_file_and_close(int src_fd, const char *src_ent_path,
 			goto err_src_fd;
 		}
 		lu_error_new(error, lu_error_open, _("Error writing `%s': %s"),
-			     dest_ent_path, strerror(errno));
+			     dest_path, strerror(errno));
 		goto err_src_fd;
 	}
 
@@ -233,7 +236,7 @@ copy_regular_file_and_close(int src_fd, const char *src_ent_path,
 			if (errno == EINTR)
 				continue;
 			lu_error_new(error, lu_error_read,
-				     _("Error reading `%s': %s"), src_ent_path,
+				     _("Error reading `%s': %s"), src_path,
 				     strerror(errno));
 			goto err_dest_fd;
 		}
@@ -249,8 +252,7 @@ copy_regular_file_and_close(int src_fd, const char *src_ent_path,
 					continue;
 				lu_error_new(error, lu_error_write,
 					     _("Error writing `%s': %s"),
-					     dest_ent_path,
-					     strerror(errno));
+					     dest_path, strerror(errno));
 				goto err_dest_fd;
 			}
 			p += out;
@@ -259,28 +261,27 @@ copy_regular_file_and_close(int src_fd, const char *src_ent_path,
 	}
 
 	/* Set the ownership; permissions are still restrictive. */
-	if (fchown(dest_fd, uid_for_copy(access_options, src_ent_stat),
-		   gid_for_copy(access_options, src_ent_stat)) == -1
+	if (fchown(dest_fd, uid_for_copy(access_options, src_stat),
+		   gid_for_copy(access_options, src_stat)) == -1
 	    && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"),
-			     dest_ent_path, strerror(errno));
+			     _("Error changing owner of `%s': %s"), dest_path,
+			     strerror(errno));
 		goto err_dest_fd;
 	}
 
 	/* Set the desired mode.  Do this explicitly to preserve S_ISGID and
 	   other bits.  Do this after chown, because chown is permitted to
 	   reset these bits. */
-	if (fchmod(dest_fd, mode_for_copy(access_options, src_ent_stat))
-	    == -1) {
+	if (fchmod(dest_fd, mode_for_copy(access_options, src_stat)) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error setting mode of `%s': %s"), dest_ent_path,
+			     _("Error setting mode of `%s': %s"), dest_path,
 			     strerror(errno));
 		goto err_dest_fd;
 	}
 
-	timebuf[0] = src_ent_stat->st_atim;
-	timebuf[1] = src_ent_stat->st_mtim;
+	timebuf[0] = src_stat->st_atim;
+	timebuf[1] = src_stat->st_mtim;
 	futimens(dest_fd, timebuf);
 
 	ret = TRUE;
@@ -321,6 +322,8 @@ copy_dir_entry(int src_dir_fd, GString *src_path_buf, int dest_dir_fd,
 {
 	struct stat st;
 	int ifd;
+
+	LU_ERROR_CHECK(error);
 
 	/* Open the input entry first, then we can fstat() it and be certain
 	   that it is still the same file.  O_NONBLOCK protects us against
@@ -548,6 +551,8 @@ lu_homedir_copy(const char *src_dir, const char *dest_dir,
 	GString *src_path_buf, *dest_path_buf;
 	gboolean ret;
 
+	LU_ERROR_CHECK(error);
+
 	ret = FALSE;
 	if (!lu_util_fscreate_save(&fscreate, error))
 		goto err;
@@ -605,6 +610,8 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 		    mode_t mode, struct lu_error **error)
 {
 	struct copy_access_options access_options;
+
+	LU_ERROR_CHECK(error);
 
 	if (skeleton == NULL)
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
@@ -847,6 +854,8 @@ mail_spool_path(struct lu_context *ctx, struct lu_ent *ent,
 	const char *spooldir;
 	char *p, *username;
 
+	LU_ERROR_CHECK(error);
+
 	/* Now get the user's login. */
 	username = lu_ent_get_first_value_strdup(ent, LU_USERNAME);
 	if (username == NULL) {
@@ -974,6 +983,8 @@ lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent,
 		     struct lu_error **error)
 {
 	char *p;
+
+	LU_ERROR_CHECK(error);
 
 	p = mail_spool_path(ctx, ent, error);
 	if (p == NULL)
