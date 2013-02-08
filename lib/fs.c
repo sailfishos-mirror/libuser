@@ -614,38 +614,41 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 }
 
 /* Recursively remove directory DIR_NAME under PARENT_FD, which corresponds to
-   DIR_PATH.
+   PATH_BUF.
 
    Return TRUE on sucess.
 
-   PARENT_FD may be AT_FDCWD.
+   PARENT_FD may be AT_FDCWD.  This function may temporarily modify PATH_BUF,
+   but it will be unchanged on return.
 
-   Note that DIR_PATH should only be used for error messages, not to access
+   Note that PATH_BUF should only be used for error messages, not to access
    the files; if the user is still logged in, a directory in the path may be
    replaced by a symbolic link, redirecting the access outside of
    PARENT_FD/DIR_NAME. */
 static gboolean
-remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
+remove_subdirectory(int parent_fd, const char *dir_name, GString *path_buf,
 		    struct lu_error **error)
 {
+	size_t orig_path_buf_len;
 	int dir_fd;
 	struct dirent *ent;
 	DIR *dir;
 
 	LU_ERROR_CHECK(error);
+	orig_path_buf_len = path_buf->len;
 
 	dir_fd = openat(parent_fd, dir_name,
 			O_RDONLY | O_CLOEXEC | O_DIRECTORY | O_NOFOLLOW);
 	if (dir_fd == -1) {
 		lu_error_new(error, lu_error_open,
-			     _("Error opening `%s': %s"), dir_path,
+			     _("Error opening `%s': %s"), path_buf->str,
 			     strerror(errno));
 		return FALSE;
 	}
 	dir = fdopendir(dir_fd);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_open,
-			     _("Error opening `%s': %s"), dir_path,
+			     _("Error opening `%s': %s"), path_buf->str,
 			     strerror(errno));
 		close(dir_fd);
 		return FALSE;
@@ -654,7 +657,6 @@ remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
 	/* Iterate over all of its contents. */
 	while ((ent = readdir(dir)) != NULL) {
 		struct stat st;
-		char path[PATH_MAX];
 
 		/* Skip over the self and parent hard links. */
 		if (strcmp(ent->d_name, ".") == 0
@@ -662,31 +664,34 @@ remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
 			continue;
 
 		/* Generate the full path of the next victim. */
-		snprintf(path, sizeof(path), "%s/%s", dir_path, ent->d_name);
+		g_string_append_c(path_buf, '/');
+		g_string_append(path_buf, ent->d_name);
 
 		/* What we do next depends on whether or not the next item to
 		   remove is a directory. */
 		if (fstatat(dir_fd, ent->d_name, &st,
 			    AT_SYMLINK_NOFOLLOW) == -1) {
 			lu_error_new(error, lu_error_stat,
-				     _("couldn't stat `%s': %s"), path,
+				     _("couldn't stat `%s': %s"), path_buf->str,
 				     strerror(errno));
 			goto err_dir;
 		}
 		if (S_ISDIR(st.st_mode)) {
 			/* We descend into subdirectories... */
-			if (remove_subdirectory(dir_fd, ent->d_name, path,
+			if (remove_subdirectory(dir_fd, ent->d_name, path_buf,
 						error) == FALSE)
 				goto err_dir;
 		} else {
 			/* ... and unlink everything else. */
 			if (unlinkat(dir_fd, ent->d_name, 0) == -1) {
 				lu_error_new(error, lu_error_generic,
-					     _("Error removing `%s': %s"), path,
-					     strerror(errno));
+					     _("Error removing `%s': %s"),
+					     path_buf->str, strerror(errno));
 				goto err_dir;
 			}
 		}
+
+		g_string_truncate(path_buf, orig_path_buf_len);
 	}
 
 	closedir(dir);
@@ -694,7 +699,7 @@ remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
 	/* As a final step, remove the directory itself. */
 	if (unlinkat(parent_fd, dir_name, AT_REMOVEDIR) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error removing `%s': %s"), dir_path,
+			     _("Error removing `%s': %s"), path_buf->str,
 			     strerror(errno));
 		return FALSE;
 	}
@@ -703,6 +708,7 @@ remove_subdirectory(int parent_fd, const char *dir_name, const char *dir_path,
 
 err_dir:
 	closedir(dir);
+	g_string_truncate(path_buf, orig_path_buf_len);
 	return FALSE;
 }
 
@@ -721,9 +727,15 @@ err_dir:
 gboolean
 lu_homedir_remove(const char *directory, struct lu_error ** error)
 {
+	gboolean ret;
+	GString *path_buf;
+
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(directory != NULL, FALSE);
-	return remove_subdirectory(AT_FDCWD, directory, directory, error);
+	path_buf = g_string_new(directory);
+	ret = remove_subdirectory(AT_FDCWD, directory, path_buf, error);
+	g_string_free(path_buf, TRUE);
+	return ret;
 }
 
 /**
