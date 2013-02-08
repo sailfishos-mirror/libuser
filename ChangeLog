@@ -1,3 +1,8 @@
+2013-02-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/fs.c (copy_symlink, copy_regular_file_and_close): Split from ...
+	(lu_copy_dir_and_close): ... this.
+
 2013-02-04  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.ac: Define GLIB_VERSION_MIN_REQUIRED to shut up warnings
