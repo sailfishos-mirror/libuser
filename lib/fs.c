@@ -612,6 +612,8 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 	struct copy_access_options access_options;
 
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ctx != NULL, FALSE);
+	g_return_val_if_fail(directory != NULL, FALSE);
 
 	if (skeleton == NULL)
 		skeleton = lu_cfg_read_single(ctx, "defaults/skeleton",
@@ -802,6 +804,8 @@ lu_homedir_move(const char *oldhome, const char *newhome,
 	struct copy_access_options access_options;
 
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(oldhome != NULL, FALSE);
+	g_return_val_if_fail(newhome != NULL, FALSE);
 
 	access_options.preserve_source = TRUE;
 	access_options.ignore_eexist = FALSE;
@@ -822,6 +826,8 @@ void
 lu_nscd_flush_cache (const char *table)
 {
 	static char *const envp[] = { NULL };
+
+	g_return_if_fail(table != NULL);
 
 	posix_spawn_file_actions_t fa;
         char *argv[4];
@@ -895,6 +901,10 @@ lu_mail_spool_create(struct lu_context *ctx, struct lu_ent *ent,
 	int fd;
 
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ctx != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
 	spool_path = mail_spool_path(ctx, ent, error);
 	if (spool_path == NULL)
 		goto err;
@@ -985,6 +995,9 @@ lu_mail_spool_remove(struct lu_context *ctx, struct lu_ent *ent,
 	char *p;
 
 	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ctx != NULL, FALSE);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
 
 	p = mail_spool_path(ctx, ent, error);
 	if (p == NULL)
