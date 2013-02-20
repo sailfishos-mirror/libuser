@@ -1,3 +1,8 @@
+2013-02-20  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.ac: Enable large file support, in particular to enable
+	working with 64-bit inode numbers.
+
 2013-02-09  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/fs.c (struct copy_access_options): Remove member ignore_eexist.

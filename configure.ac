@@ -14,6 +14,7 @@ AC_PATH_PROG([NSCD], [nscd], [/usr/sbin/nscd],
 	     [$PATH$PATH_SEPARATOR/usr/sbin$PATH_SEPARATOR/sbin])
 AC_ARG_VAR([NSCD], [Path to nscd])
 AC_USE_SYSTEM_EXTENSIONS
+AC_SYS_LARGEFILE
 
 LT_INIT([disable-static])
 
