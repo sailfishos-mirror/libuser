@@ -1,3 +1,8 @@
+2013-03-22  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/fs_test: Set umask because it affects test output.
+	Patch by Viktor Hercinger <vhercing@redhat.com>.
+
 2013-02-20  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.ac: Enable large file support, in particular to enable
