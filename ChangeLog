@@ -1,3 +1,8 @@
+2013-03-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/fs.c (lu_homedir_populate): Fix typo in docstring.  Noticed by
+	Viktor Hercinger <vhercing@redhat.com>.
+
 2013-03-22  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/fs_test: Set umask because it affects test output.

@@ -585,7 +585,7 @@ err:
  * Creates a new home directory for an user.
  *
  * If you want to use this in a hostile environment, ensure that no untrusted
- * user has write permission to any parent of @sekeleton or @directory.  Usually
+ * user has write permission to any parent of @skeleton or @directory.  Usually
  * /home is only writable by root, which is safe.
  *
  * Returns: %TRUE on success
