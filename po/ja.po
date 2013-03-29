@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Hajime Taira <htaira@redhat.com>, 2011.
+# Hajime Taira <htaira@redhat.com>, 2011-2012.
 # Hirofumi Saito <hi_saito@yk.rim.or.jp>, 2004, 2005, 2006.
 # Hyu_gabaru Ryu_ichi <hyu_gabaru@yahoo.co.jp>, 2007, 2009.
 # James Hashida <khashida@redhat.com>, 2002.
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-10-02 22:16+0000\n"
-"Last-Translator: Tomoyuki KATO <tomo@dream.daynight.jp>\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2012-12-17 05:28+0000\n"
+"Last-Translator: Hajime Taira <htaira@redhat.com>\n"
 "Language-Team: Japanese <trans-ja@lists.fedoraproject.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -77,53 +77,53 @@ msgstr "不明なユーザー認証です。\n"
 msgid "User mismatch.\n"
 msgstr "ユーザーが一致しませんでした。\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "すべての情報について入力確認する"
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "ユーザーのエージングパラメーターを一覧表示する"
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "パスワード変更間隔の最小日数"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr "日数"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr "パスワード変更後の有効日数"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr "パスワード変更日 (1970/1/1 からの日数)"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
-msgstr ""
+msgstr "パスワード失効後、アカウントが無効であるとみなされるまでの日数"
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr "パスワード失効日 (1970/1/1 からの日数)"
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "ユーザーに警告を開始する、パスワード失効までの日数"
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[オプション...] ユーザー"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -131,13 +131,13 @@ msgstr "[オプション...] ユーザー"
 msgid "Error parsing arguments: %s.\n"
 msgstr "引数の構文解析に失敗: %s\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "ユーザー名が指定されていません。\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -145,67 +145,81 @@ msgstr "ユーザー名が指定されていません。\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "%s の初期化に失敗: %s\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "ユーザー %s は存在しません。\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "アカウントはロックされています。\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "アカウントはロックされていません。\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "最小:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "最大:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "最大:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "警告:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "無効:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "無効:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "なし"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "最終更新: \t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "パスワード期限切れ:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "パスワード無効:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "アカウント期限切れ:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "%s の情報の更新に失敗しました: %s\n"
@@ -333,7 +347,7 @@ msgstr "グループの GID を設定します"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "グループを指定された名前に変更する"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
@@ -341,7 +355,7 @@ msgstr "名前"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:75
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "グループに用いる平文パスワード"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -357,23 +371,23 @@ msgstr "文字列"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "グループに用いるハッシュ化パスワード"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "追加する管理者の一覧"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "削除する管理者の一覧"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "追加するグループメンバーの一覧"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "削除するグループメンバーの一覧"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
@@ -418,10 +432,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"指定された名前のユーザーがメンバーであるグループの代わりに、指定された名前の"
+"グループのメンバーを一覧表示します"
 
 #: apps/lid.c:120
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "名前かつ/または UID/GID によりメンバー情報のみを一覧表示する"
 
 #: apps/lid.c:146
 #, c-format
@@ -445,19 +461,19 @@ msgstr "%s は存在しません。\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "ユーザー情報レコードを持つファイル"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "パス"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "ホームディレクトリーを作成しない"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "メールスプールを作成しない"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -492,45 +508,45 @@ msgstr "%s 用にGID %jd でグループ作成中にエラーが発生しまし�
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "デフォルトで %s 用の危険なホームディレクトリー %s の使用を拒否中です\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "%s 用の初期パスワード設定中にエラーが発生しました: %s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s 用の新規ホームディレクトリー作成に失敗しました: %s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "%s 用のメールスプール作成に失敗しました。\n"
+msgstr "%s のメールスプールの作成中にエラーが発生しました: %s\n"
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "%s 用の初期パスワード設定中にエラーが発生しました: %s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s 用のユーザーアカウント作成に失敗しました: %s。\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "ユーザーのパスワードの代わりにグループのパスワードを設定します"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "新しい平文パスワード"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "新しい暗号文パスワード"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "指定された記述子から新しい平文パスワードを読み込みます"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "指定された記述子から新しい暗号パスワードを読み込みます"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -560,7 +576,7 @@ msgstr "パスワード変更は取り消されました。\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "エラー: ファイルディスクリプター %d から読み込みできません。\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "ユーザー %s のパスワード設定に失敗: %s。\n"
@@ -577,19 +593,19 @@ msgstr "パスワード変更済み。\n"
 
 #: apps/luseradd.c:57
 msgid "create a system user"
-msgstr ""
+msgstr "システムユーザーを作成する"
 
 #: apps/luseradd.c:59
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "新しいユーザーのゲコス情報"
 
 #: apps/luseradd.c:61
 msgid "home directory for new user"
-msgstr ""
+msgstr "新しいユーザーのホームディレクトリー"
 
 #: apps/luseradd.c:63
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "新しいユーザー向けファイルを持つディレクトリー"
 
 #: apps/luseradd.c:65
 msgid "shell for new user"
@@ -613,27 +629,27 @@ msgstr "ユーザーと同じ名前のグループを作成しない"
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
-msgstr ""
+msgstr "新しいユーザーの一般名"
 
 #: apps/luseradd.c:81
 msgid "given name for new user"
-msgstr ""
+msgstr "新しいユーザーの名"
 
 #: apps/luseradd.c:83
 msgid "surname for new user"
-msgstr ""
+msgstr "新しいユーザーの姓"
 
 #: apps/luseradd.c:85
 msgid "room number for new user"
-msgstr ""
+msgstr "新しいユーザーの部屋番号"
 
 #: apps/luseradd.c:87
 msgid "telephone number for new user"
-msgstr ""
+msgstr "新しいユーザーの電話番号"
 
 #: apps/luseradd.c:89
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "新しいユーザーの自宅電話番号"
 
 #: apps/luseradd.c:189
 #, c-format
@@ -650,23 +666,23 @@ msgstr "グループ `%s' の作成に失敗: %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "アカウントの作成に失敗しました: %s。\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s の作成に失敗: %s。\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "メールスプールの作成中にエラーが発生しました。\n"
+msgstr "メールスプールの作成中にエラーが発生しました: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "ユーザーがプライベートグループを持っていても、それを削除しません。"
 
 #: apps/luserdel.c:50
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "ユーザーのホームディレクトリーを削除する"
 
 #: apps/luserdel.c:94
 #, c-format
@@ -704,77 +720,77 @@ msgid "Error removing %s: %s.\n"
 msgstr "%s の削除に失敗: %s。\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "メールスプールの削除中にエラーが発生しました。\n"
+msgstr "メールスプールの削除中にエラーが発生しました: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS の情報"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "ホームディレクトリー"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "ホームディレクトリーの内容を移動する"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "ユーザーのシェルを設定する"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "ユーザーの UID を設定する"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "ユーザーのプライマリー GID を設定する"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "ユーザーのログイン名を変更する"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "ユーザーの平文パスワード"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "ユーザーのハッシュ済みパスワード"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "アカウントをロックする"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "アカウントをロック解除する"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "ユーザーの一般名を設定する"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "ユーザーの名を設定する"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "ユーザーの姓を設定する"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "ユーザーの部屋番号を設定する"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "ユーザーの電話番号を設定する"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "ユーザーの自宅電話番号を設定する"
 
 #: apps/lusermod.c:180 apps/lusermod.c:193
 #, c-format
@@ -823,22 +839,22 @@ msgstr ""
 "%s を %s に移動できませんでした: %s\n"
 "\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "設定ファイル `%s' を開けませんでした: %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "設定ファイル `%s' を stat できませんでした: %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "設定ファイル `%s' が大きすぎます"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "設定ファイル `%s' を開けませんでした: %s"
@@ -1016,7 +1032,7 @@ msgstr "ユーザー %s には UID がありません。"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "ユーザー %s が見つかりませんでした"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1026,7 +1042,7 @@ msgstr "グループ %s には GID がありません。"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "グループ %s が見つかりませんでした"
 
 #: lib/user.c:355
 #, c-format
@@ -1046,37 +1062,37 @@ msgstr "ユーザーには名前もしくは UID がありません。"
 msgid "group has neither a name nor a GID"
 msgstr "グループには名前もしくは GID がありません。"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "デフォルトで危険なホームディレクトリ `%s' の使用を拒否中です"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "領域 %s の値は無効なデフォルト値です : %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "ファイルのロック中にエラーが発生しました: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "デフォルトのセキュリティー情報を取得できません: %s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' のセキュリティー情報を取得できません: %s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' にデフォルトのセキュリティー情報を設定できません: %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' のセキュリティー情報を決定できません: %s"
@@ -1430,21 +1446,3 @@ msgstr "デフォルトユーザー属性を取得中:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ユーザー構造体をコピー中:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "ホームディレクトリーパス `%s' が絶対パスではありません"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "`%s'の作成に失敗: %s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "エラー: `%s' のモードを設定できません: %s "
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "`%s'の削除に失敗: %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "ユーザーのメールスプール作成に失敗しました"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "ユーザーのメールスプール削除に失敗しました"

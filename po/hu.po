@@ -9,13 +9,13 @@
 # Nikolas Slivka <snicore@gmail.com>, 2010.
 #   <ptr@ulx.hu>, 2011.
 # Tamas Szanto <tszanto@mol.hu>, 2003.
-# Zoltan Hoppár <hopparz@gmail.com>, 2011-2012.
+# Zoltan Hoppár <hopparz@gmail.com>, 2011-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-09-29 17:31+0000\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2013-01-08 18:55+0000\n"
 "Last-Translator: Zoltan Hoppár <hopparz@gmail.com>\n"
 "Language-Team: Hungarian <trans-hu@lists.fedoraproject.org>\n"
 "Language: hu\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "Jogosultságok ejtése meghiúsult.\n"
+msgstr "Jogosultságok eldobása sikertelen.\n"
 
 #: apps/apputil.c:210
 #, c-format
@@ -75,53 +75,53 @@ msgstr "Ismeretlen felhasználó hitelesítve.\n"
 msgid "User mismatch.\n"
 msgstr "Felhasználói eltérés.\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
 msgstr "összes információ megjelenítése"
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr "lista a felhasználó időkorlát paramétereiről"
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
 msgstr "minimális napok száma jelszó váltások között"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr "NAPOK"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr "maximális napok száma jelszó váltások között"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr "az utolsó jelszó cseréje napokban 1970/1/1 óta"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr "hány nappal a jelszó lejárata után váljon a regisztrált fiók inaktívvá"
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr "jelszó lejárati ideje napokban 1970/01/01 óta"
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr "hány nappal kezdjen el a lejárat előtt figyelmeztetést küldeni "
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[OPCIÓ...] felhasználó"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -129,13 +129,13 @@ msgstr "[OPCIÓ...] felhasználó"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Hiba a paraméter értelmezésekor: %s.\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Nincs felhasználónév megadva.\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -143,67 +143,81 @@ msgstr "Nincs felhasználónév megadva.\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "Hiba a(z) %s inicializálásakor: %s.\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "%s felhasználó nem létezik.\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
-msgstr "Számla zárolva.\n"
+msgstr "Azonosító zárolva.\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Fiók nincs lezárva.\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "Maximum:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Figyelmeztetés:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Inaktív:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "Inaktív:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "Soha"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Utolsó módosítás:\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Jelszó lejár:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "jelszó inaktív:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "Fiók lejár:\t%s\n"
+msgstr "Azonosító lejár:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "%s elévülési információit nem sikerült módosítani: %s\n"
@@ -271,20 +285,20 @@ msgstr "%s parancsértelmezőjének megváltoztatása. \n"
 
 #: apps/lchsh.c:114
 msgid "New Shell"
-msgstr "Új héj"
+msgstr "Új shell"
 
 #: apps/lchsh.c:121 apps/lchsh.c:136
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr "Héj nincs megváltoztatva: %s\n"
+msgstr "Shell nem változott: %s\n"
 
 #: apps/lchsh.c:133
 msgid "Shell changed.\n"
-msgstr "Héj megváltozott.\n"
+msgstr "Shell megváltozott.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr "az új csoport GID-je"
+msgstr "az új csoport GID azonosítója"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
@@ -482,7 +496,7 @@ msgstr "Érvénytelen felhasználói azonosító %s\n"
 
 #: apps/lnewusers.c:136
 msgid "Refusing to create account with UID 0.\n"
-msgstr "Felhasználó létrehozása 0 UID-al megtagadva.\n"
+msgstr "Felhasználó létrehozása 0 UID-val megtagadva.\n"
 
 #: apps/lnewusers.c:206
 #, c-format
@@ -493,28 +507,28 @@ msgstr "A(z) `%s' csoport nem hozható létre %jd GID-el: %s\n"
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
-"A(z) `%s' veszélyes saját könyvtár használatának megtagadása %s számára "
+"`%s' veszélyes home könyvtár használati jogának megtagadása %s számára "
 "alapértelmezésként\n"
 
-#: apps/lnewusers.c:252
+#: apps/lnewusers.c:257
+#, c-format
+msgid "Error creating home directory for %s: %s\n"
+msgstr "Hiba történt %s saját könyvtárának létrehozásakor: %s\n"
+
+#: apps/lnewusers.c:270
+#, c-format
+msgid "Error creating mail spool for %s: %s\n"
+msgstr "Hiba a levéltár %s részére való létrehozásakor: %s\n"
+
+#: apps/lnewusers.c:285
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "%s kezdeti jelszávanak beállítása nem sikerült: %s\n"
 
-#: apps/lnewusers.c:267
-#, c-format
-msgid "Error creating home directory for %s: %s\n"
-msgstr "Hiba a(z) %s saját könyvtárának létrehozásakor: %s\n"
-
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
-msgid "Error creating mail spool for %s: %s\n"
-msgstr "%s levelesládájának létrehozása sikertelen\n"
-
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "Hiba a(z) %s felhasználói fiók létrehozásakor: %s\n"
+msgstr "Hiba történt %s felhasználói fiók létrehozásakor: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
@@ -564,15 +578,15 @@ msgstr "Jelszóváltoztatás megszakítva.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Hiba %d fájl leírójának olvasásakor.\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "Hiba a(z) %s felhasználó jelszavának beállításakor: %s.\n"
+msgstr "Hiba történt %s felhasználó jelszavának beállításakor: %s.\n"
 
 #: apps/lpasswd.c:212
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "Hiba a(z) %s csoport jelszavának beállításakor: %s.\n"
+msgstr "Hiba történt %s csoport jelszavának beállításakor: %s.\n"
 
 #: apps/lpasswd.c:224
 #, c-format
@@ -647,22 +661,22 @@ msgstr "%jd csoport nem létezik\n"
 #: apps/luseradd.c:207 apps/luseradd.c:220
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Hiba a(z) `%s'  csoport létrehozásakor: %s\n"
+msgstr "Hiba történt `%s'  csoport létrehozásakor: %s\n"
 
 #: apps/luseradd.c:260
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr "Számla létrehozás meghiúsult: %s.\n"
+msgstr "Azonosító létrehozása meghiúsult: %s.\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr "Hiba a(z) %s létrehozásakor: %s.\n"
+msgstr "Hiba történt %s létrehozásakor: %s.\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "Levelesláda létrehozása sikertelen\n"
+msgstr "Hiba a levéltár létrehozásakor: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -681,17 +695,17 @@ msgstr "%s felhasználó nem törölhető: %s.\n"
 #: apps/luserdel.c:107
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s nem rendelkezik gid-számmal.\n"
+msgstr "%s nem rendelkezik  GID számmal.\n"
 
 #: apps/luserdel.c:113
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Nincs csoport %jd GID-el, nincs eltávolítás.\n"
+msgstr "Nincs csoport %jd GID azonosítóval, így nincs eltávolítás sem.\n"
 
 #: apps/luserdel.c:119
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "A(z) %jd GID-ű csoportnak nincs csoportneve.\n"
+msgstr "A %jd GID azonosítójú csoportnak nincs csoportneve.\n"
 
 #: apps/luserdel.c:125
 #, c-format
@@ -706,12 +720,12 @@ msgstr "%s nem rendelkezik saját könyvtárral.\n"
 #: apps/luserdel.c:143
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr "Hiba a(z) %s eltávolításakor: %s.\n"
+msgstr "Hiba történt %s eltávolításakor: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "Nem sikerült eltávolítani a levelesládát.\n"
+msgstr "Hiba a levéltár törlésekor: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -784,7 +798,7 @@ msgstr "otthoni telefonszám beállítása a felhasználó számára"
 #: apps/lusermod.c:180 apps/lusermod.c:193
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "Hiba a(z) %s felhasználó jelszavának beállításakor: %s.\n"
+msgstr "Hiba történt %s felhasználó jelszavának beállításakor: %s.\n"
 
 #: apps/lusermod.c:203
 #, c-format
@@ -794,12 +808,12 @@ msgstr "%s felhasználót nem lehet zárolni: %s.\n"
 #: apps/lusermod.c:211
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s felhasználót nem lehet kinyitni: %s.\n"
+msgstr "%s felhasználó nem megnyitható: %s.\n"
 
 #: apps/lusermod.c:232
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Figyelmeztetés: Csoport %jd GID-ű nem létezik.\n"
+msgstr "Figyelem: Csoport %jd GID azonosítóval nem létezik.\n"
 
 #: apps/lusermod.c:275
 #, c-format
@@ -824,24 +838,24 @@ msgstr "%s nem rendelkezik új saját könyvtárral.\n"
 #: apps/lusermod.c:353
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "Hiba a(z)%s mozgatásakor %s ide: %s.\n"
+msgstr "Hiba történt %s mozgatásakor %s: %s.\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "`%s' konfigurációs fájl nem nyitható meg: %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "`%s' konfigurációs fájl nem elérhető: %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "`%s' konfigurációs fájl túl nagy"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "a(z) `%s' konfigurációs fájlt nem lehet olvasni: %s"
@@ -1014,7 +1028,7 @@ msgstr "név érvénytelen `%c' karaktert tartalmaz"
 #: lib/user.c:308 lib/user.c:360
 #, c-format
 msgid "user %s has no UID"
-msgstr "%s felhasználónak nincs UID-je"
+msgstr "%s felhasználónak nincs UID azonosítója"
 
 #: lib/user.c:310
 #, c-format
@@ -1024,7 +1038,7 @@ msgstr "%s felhasználó nem található"
 #: lib/user.c:333 lib/user.c:361
 #, c-format
 msgid "group %s has no GID"
-msgstr "%s csoportnak nincs GID-je"
+msgstr "%s csoportnak nincs GID azonosítója"
 
 #: lib/user.c:335
 #, c-format
@@ -1043,44 +1057,44 @@ msgstr "%jd csoportnak nincs neve"
 
 #: lib/user.c:364
 msgid "user has neither a name nor an UID"
-msgstr "felhasználónak nincs se neve se UID-ja"
+msgstr "felhasználónak nincs se neve se UID azonosítója"
 
 #: lib/user.c:365
 msgid "group has neither a name nor a GID"
-msgstr "csoportnak nincs neve, sem GID-je"
+msgstr "csoportnak nincs neve, sem GID azonosítója"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
-"`%s' veszélyes saját könyvtár használatának megtagadása alapértelmezettként"
+"alapértelmezésben`%s' veszélyes home könyvtár használatának megtagadása"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s mező érvénytelen alapértelmezett értéke: %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "hiba a fájl zárolásakor: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "Nem sikerült lekérni az alap futtatási kontextust: %s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "%s biztonsági kontextusa nem kérhető le: %s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Nem sikerült beállítani az alap futtatási kontextust erre: %s: %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1327,7 +1341,7 @@ msgstr "nincs `%s' attribútum"
 #: modules/ldap.c:1843
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "hiba a(z) %s jelszavának beállításakor az LDAP könyvtárban: %s"
+msgstr "hiba történt %s jelszavának beállításakor az LDAP könyvtárban: %s"
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
@@ -1383,7 +1397,7 @@ msgstr "hiba a felhasználó saját könyvtárának mozgatásakor"
 #: samples/lookup.c:63
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "Hiba a(z) %s inicializálásakor: %s\n"
+msgstr "Hiba történt %s inicializálásakor: %s\n"
 
 #: samples/lookup.c:76
 #, c-format
@@ -1437,21 +1451,3 @@ msgstr "Alapértelmezett felhasználói attribútumok lekérése: \n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Felhasználói szerkezet másolása:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "A(z) `%s' saját könyvtár útvonal nem teljes"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "Hiba a(z) `%s' létrehozásakor: %s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "Hiba történt '%s' módjának megváltoztatásakor: %s."
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "Hiba a(z) `%s' eltávolításakor: %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "hiba a felhasználó levelesládájának létrehozásakor"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "hiba történt a felhasználó levelesládájának törlésekor"

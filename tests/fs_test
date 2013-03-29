@@ -50,7 +50,7 @@ PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
 # Test lu_homedir_remove()
-fakeroot > rm_output <<EOF
+fakeroot > "$workdir"/rm_output <<EOF
 # User's "own" content
 mkdir -p "$workdir"/rm/root/{dir,unreadable}
 touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
@@ -78,7 +78,7 @@ LC_ALL=C ls -lnR "$workdir/rm" | tail -n +3 | \
 
 EOF
 
-diff rm_output - <<EOF
+diff "$workdir"/rm_output - <<EOF
 -rw-rw-r-- 1    0    0        0 kept
 ---------- 1    0    0        4 secret
 EOF
@@ -115,7 +115,7 @@ EOF
 
 
 # Test lu_homedir_move()
-fakeroot -i "$workdir"/save -s "$workdir"/save > mv_output <<EOF
+fakeroot -i "$workdir"/save -s "$workdir"/save > "$workdir"/mv_output <<EOF
 cp -a "$workdir"/common "$workdir"/home1
 # This seems to be a fakeroot bug
 # (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
@@ -137,7 +137,7 @@ EOF
 
 # Special files and fifos are not copied over.  Ownership and permissions are
 # preserved.
-diff mv_output - <<EOF
+diff "$workdir"/mv_output - <<EOF
 .:
 drwx------ 2  555  555 dir
 -rw------- 1  555  555 f
@@ -168,13 +168,13 @@ if [ $? -ne 0 ]; then
 fi
 
 # Moving onto an existing directory is prohibited
-fakeroot > mv2_output 2>&1 <<EOF
+fakeroot > "$workdir"/mv2_output 2>&1 <<EOF
 mkdir "$workdir"/mv2home{1,2}
 
 $VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
 echo \$?
 EOF
-diff mv2_output - <<EOF
+diff "$workdir"/mv2_output - <<EOF
 Error creating \`$workdir/mv2home2': File exists
 1
 EOF
@@ -184,7 +184,7 @@ fi
 
 
 # Test lu_homedir_populate()
-fakeroot -i "$workdir"/save -s "$workdir"/save > pop_output <<EOF
+fakeroot -i "$workdir"/save -s "$workdir"/save > "$workdir"/pop_output <<EOF
 cp -a "$workdir"/common "$workdir"/skel
 # This seems to be a fakeroot bug
 # (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
@@ -208,7 +208,7 @@ EOF
 
 # Special files and fifos are not copied over.  Permissions are preserved,
 # ownership is changed to the desired values except for non-root groups
-diff pop_output - <<EOF
+diff "$workdir"/pop_output - <<EOF
 .:
 drwx------ 2  556  557 dir
 -rw------- 1  556  557 f
@@ -239,14 +239,14 @@ if [ $? -ne 0 ]; then
 fi
 
 # Populating an existing directory is prohibited
-fakeroot > pop2_output 2>&1 <<EOF
+fakeroot > "$workdir"/pop2_output 2>&1 <<EOF
 rm -rf "$workdir"/skel
 mkdir "$workdir"/{skel,pop2}
 
 $VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/pop2 556 557
 echo \$?
 EOF
-diff pop2_output - <<EOF
+diff "$workdir"/pop2_output - <<EOF
 Error creating \`$workdir/pop2': File exists
 1
 EOF

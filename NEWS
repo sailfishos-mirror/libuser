@@ -1,3 +1,18 @@
+0.59:
+* Fixed security vulnerabilities:
+  * Race conditions in copying and removing home directories (CVE-2012-5630)
+  * Information disclosure when moving users' home directory (CVE-2012-5644)
+  Related changes:
+  - INCOMPATIBLE API CHANGES: lu_homedir_move() and lu_homedir_populate()
+    will refuse to use a pre-existing directory as a destination.
+  - setuid/setgid bits are now preserved when copying regular files in home
+    directories (from /etc/skel or when moving a home directory)
+* Empty fields in /etc/shadow are now treated as "missing", like libc does.
+  * Specific values of the attributes can be used to represent "missing data".
+  * lchage(1) now handles missing fields on both input and output.
+* Refuse to build when secure_getenv() is not available.
+* Miscellaneous bug fixes and cleanups.
+
 0.58
 * API enhancements:
   * New helpers for attribute access replace 4-5 function calls with 1:

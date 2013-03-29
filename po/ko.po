@@ -4,6 +4,7 @@
 #
 # Translators:
 # bardisch <kwb0128@gmail.com>, 2011.
+# Bruce Lee <trans22@naver.com>, 2013.
 # Eunju Kim <eukim@redhat.com>, 2006, 2007, 2008, 2009.
 # Eun-Ju Kim <eukim@redhat.com>, 2012.
 # Michelle Ji Yeen Kim <mkim@redhat.com>, 2005, 2006.
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-09-24 19:46+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2013-03-14 07:29+0000\n"
+"Last-Translator: trans22 <trans22@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/fedora/language/"
 "ko/)\n"
 "Language: ko\n"
@@ -74,53 +75,53 @@ msgstr "알 수 없는 사용자 인증함.\n"
 msgid "User mismatch.\n"
 msgstr "사용자가 일치하지 않습니다.\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "모든 정보를 요청하다."
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr ""
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "최소한의 암호 유지기간"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
-msgstr ""
+msgstr "일"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "암호 최대 유지기간"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "일단위로 표시한 1970년 1월 1일 이후 마지막으로 암호가 변경될 날짜"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr ""
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr ""
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[옵션...] 사용자"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -128,13 +129,13 @@ msgstr "[옵션...] 사용자"
 msgid "Error parsing arguments: %s.\n"
 msgstr "인수를 처리(parsing)하는 도중 오류 발생: %s.\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "사용자 이름이 지정되지 않았습니다.\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -142,67 +143,81 @@ msgstr "사용자 이름이 지정되지 않았습니다.\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "%s(을)를 초기화하는 도중 오류 발생: %s.\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "%s 사용자가 존재하지 않습니다.\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "계정이 정지되었습니다.\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "계정이 정지되지 않았습니다.\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "최소값:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "최대값:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "최대값:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "경고:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "비활성:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "비활성:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "없음"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "최종 변경:\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "암호 만기일:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "암호 비활성:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "계정 만기일:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "%s의 사용 기한(aging) 정보를 수정하는데 실패했습니다: %s\n"
@@ -492,22 +507,22 @@ msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
 "%s에 대해 기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s의 홈 디렉토리를 생성하는 도중 오류가 발생했습니다: %s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "%s의 메일 스풀을 생성하는 도중 오류 발생.\n"
+msgstr ""
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s의 사용자 계정을 생성하는 도중 오류 발생: %s.\n"
@@ -560,7 +575,7 @@ msgstr "암호 변경이 취소되었습니다.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "파일 기술어 %d를 읽지 못했습니다.\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
@@ -650,15 +665,15 @@ msgstr "`%s' 그룹을 생성하는 도중 오류 발생: %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "계정 생성에 실패함: %s.\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "메일 스풀을 생성하는 도중 오류 발생.\n"
+msgstr ""
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -704,9 +719,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "%s(을)를 삭제하는 도중 오류 발생: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "메일 스풀을 삭제하는 도중 오류 발생.\n"
+msgstr ""
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -821,22 +836,22 @@ msgstr "%s의 새로운 홈 디렉토리가 없습니다.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s에서 %s(으)로 이동하는 도중 오류 발생: %s.\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "설정 파일 `%s'(을)를 열 수 없습니다: %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "설정 파일 `%s'에 stat 명령 실행하는데 실패했습니다: %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "설정 파일 `%s' 용량이 너무 큽니다"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "설정 파일 `%s'(을)를 읽을 수 없습니다: %s"
@@ -1044,37 +1059,37 @@ msgstr "사용자는 이름과 UID가 없습니다"
 msgid "group has neither a name nor a GID"
 msgstr "그룹은 이름과 GID가 없습니다"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다  "
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s 란의 기본값이 잘못됨: %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "파일을 잠그는 도중 오류 발생: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "기본 보안 문맥을 읽어오지 못했습니다: %s  "
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s'의 보안 문맥을 읽어오지 못했습니다: %s "
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "기본 보안 문맥을 `%s'으로 설정할 수 없습니다: %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s'의 보안 문맥을 결정하지 못했습니다: %s "
@@ -1429,21 +1444,3 @@ msgstr "기본 사용자 속성을 읽음:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "사용자 구조를 복사함:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "`%s' 홈 디렉토리 경로는 절대 경로가 아닙니다 "
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "`%s'(을)를 생성하는 도중 오류 발생: %s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "`%s'의 모드를 설정하는 도중 오류 발생: %s "
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "`%s'(을)를 삭제하는 도중 오류 발생: %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "사용자의 메일 스풀을 생성하는 도중 오류 발생"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "사용자의 메일 스풀을 삭제하는 도중 오류 발생 "

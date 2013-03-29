@@ -321,7 +321,7 @@ typedef char lu_security_context_t; /* "Something" */
 #define lu_util_fscreate_save(CTX, ERROR) ((void)(CTX), (void)(ERROR), TRUE)
 #define lu_util_fscreate_restore(CTX) ((void)(CTX))
 #define lu_util_fscreate_from_fd(FD, PATH, ERROR) \
-  ((void)(FILE), (void)(PATH), (void)(ERROR), TRUE)
+  ((void)(FD), (void)(PATH), (void)(ERROR), TRUE)
 #define lu_util_fscreate_from_file(FILE, ERROR) \
   ((void)(FILE), (void)(ERROR), TRUE)
 #define lu_util_fscreate_from_lfile(FILE, ERROR) \

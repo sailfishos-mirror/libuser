@@ -1,3 +1,14 @@
+2013-03-28  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.ac: Release 0.59.
+	* NEWS: Update.
+	* po/*: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+	(EXTRA_DIST): Fix a typo that broke (make distcheck).
+	* lib/user_private.h (lu_util_fscreate_from_fd): Fix the non-SELinux
+	macro.
+	* tests/fs_test: Create temporary files only in a temporary directory.
+
 2013-03-26  Miloslav Trmač  <mitr@redhat.com>
 
 	* lib/fs.c (lu_homedir_populate): Fix typo in docstring.  Noticed by

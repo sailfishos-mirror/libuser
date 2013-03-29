@@ -41,7 +41,7 @@ EXTRA_DIST = \
 	tests/config_test.sh \
 	tests/default_pw.conf.in tests/default_pw_test tests/default_pw_test.py \
 	tests/files.conf.in tests/files_test tests/files_test.py \
-	tests/fs.conf.in tests/fs_tests tests/fs_test.py \
+	tests/fs.conf.in tests/fs_test tests/fs_test.py \
 	tests/ldap.conf.in tests/ldaprc tests/ldap_skel.ldif tests/ldap_test \
 	tests/ldap_test.py \
 	tests/pwhash.conf.in tests/pwhash.py tests/pwhash_test \
@@ -173,7 +173,7 @@ lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DNSCD='"$(NSCD)"' \
 	-DSYSCONFDIR='"$(sysconfdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
-	-version-info 5:0:4
+	-version-info 5:1:4
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_SOURCES = modules/files.c

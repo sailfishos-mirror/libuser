@@ -5,16 +5,16 @@
 # Translators:
 # Ben Wu <hpwu@redhat.com>, 2002.
 # Cheng-Chia Tseng <pswo10680@gmail.com>, 2011-2012.
-# Chester Cheng <ccheng@redhat.com>, 2004, 2005, 2006.
+# Chester Cheng <ccheng@redhat.com>, 2004-2006.
 # mitr <mitr@volny.cz>, 2011.
-# Terry Chuang <tchuang@redhat.com>, 2008, 2009.
+# Terry Chuang <tchuang@redhat.com>, 2008-2009.
 # Waika Liu <wliu@redhat.com>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-11-02 15:51+0000\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2012-12-16 08:40+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <trans-zh_TW@lists.fedoraproject.org>\n"
 "Language: zh_TW\n"
@@ -72,53 +72,53 @@ msgstr "不明的使用者認證。\n"
 msgid "User mismatch.\n"
 msgstr "使用者不符。\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
 msgstr "提示請求所有資訊"
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr "列出使用者的老化參數"
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
 msgstr "密碼更動之間的最小天數"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr "DAYS"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr "密碼更動之間的最大天數"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr "上次密碼更動的日期，日子是從 1/1/70 算起"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr "當帳號在密碼過期日後幾天才被視為失效"
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr "密碼過期日，日子是從 1/1/70 算起"
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr "在過期之前開始警告使用者的天數"
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[選項...] 使用者"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -126,13 +126,13 @@ msgstr "[選項...] 使用者"
 msgid "Error parsing arguments: %s.\n"
 msgstr "解析引數時發生錯誤：%s。\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "沒有指定使用者名稱。\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -140,67 +140,81 @@ msgstr "沒有指定使用者名稱。\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "初始化 %s 時發生錯誤：%s。\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "使用者 %s 不存在。\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "帳號已鎖住。\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "帳號未鎖住。\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "最小值：\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "最大值：\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "最大值：\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "警告：\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "失效：\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "失效：\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "從不"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "上次更改：\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "密碼過期：\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "密碼失效：\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "帳號過期：\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "修改 %s 的老舊資訊失敗：%s\n"
@@ -487,22 +501,22 @@ msgstr "為「%s」建立群組時 (使用 GID %jd) 發生錯誤：%s\n"
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "預設狀況下為 %s 拒絕使用危險的「%s」家目錄\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "設定初始密碼給 %s 時發生錯誤：%s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "建立 %s 的家目錄時發生錯誤：%s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "建立 %s 的郵件儲蓄池時發生錯誤。\n"
+msgstr "為 %s 建立郵件池時發生錯誤：%s\n"
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "設定初始密碼給 %s 時發生錯誤：%s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "建立 %s 的使用者帳號時發生錯誤：%s。\n"
@@ -555,7 +569,7 @@ msgstr "取消密碼變更。\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "從檔案描述符 %d 讀取時發生錯誤。\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "為 %s 使用者設定密碼發生錯誤：%s。\n"
@@ -645,15 +659,15 @@ msgstr "建立「%s」群組發生錯誤：%s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "帳號建立失敗：%s。\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "建立 %s 發生錯誤：%s。\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "建立郵件儲蓄池時發生錯誤。\n"
+msgstr "建立郵件池時發生錯誤：%s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -699,9 +713,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "移除 %s 時發生錯誤：%s。\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "移除郵件儲蓄池時發生錯誤。\n"
+msgstr "移除郵件池時發生錯誤：%s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -816,22 +830,22 @@ msgstr "%s 沒有新的家目錄。\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "移動 %s 至 %s 時發生錯誤：%s。\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "無法開啟組態檔「%s」：%s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "無法取得組態檔「%s」的統計資料：%s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "設定檔「%s」過大"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "無法讀取組態檔「%s」：%s"
@@ -1039,37 +1053,37 @@ msgstr "使用者沒有名稱也沒有 UID"
 msgid "group has neither a name nor a GID"
 msgstr "群組沒有名稱也沒有 GID"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "預設情況下拒絕使用危險的「%s」家目錄"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "欄位 %s 的預設值無效：%s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "鎖定檔案時發生錯誤：%s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "無法取得預設的安全情境：%s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "無法獲得「%s」的安全情境：%s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "無將預設安全情境設為「%s」：%s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "無法判斷「%s」的安全情境：%s"
@@ -1422,21 +1436,3 @@ msgstr "正在取得預設使用者屬性：\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "正在複製使用者結構：\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "「%s」家目錄路徑並非絕對路徑"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "建立「%s」發生錯誤：%s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "設定「%s」的模式時發生錯誤：%s"
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "移除「%s」發生錯誤：%s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "為使用者建立郵件儲蓄池時時發生錯誤"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "為使用者移除郵件儲蓄池時發生錯誤"

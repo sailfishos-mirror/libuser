@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-09-24 19:46+0000\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2012-11-08 08:25+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Marathi (http://www.transifex.com/projects/p/fedora/language/"
 "mr/)\n"
@@ -73,53 +73,53 @@ msgstr "अपरिचित वापरकर्ता अधिप्रम�
 msgid "User mismatch.\n"
 msgstr "वापरकर्ता जुळला नाही.\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
 msgstr ""
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr ""
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
 msgstr ""
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr ""
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr ""
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr ""
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr ""
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr ""
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[OPTION...] वापरकर्ता"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -127,13 +127,13 @@ msgstr "[OPTION...] वापरकर्ता"
 msgid "Error parsing arguments: %s.\n"
 msgstr "बाबी वाचतेवेळी त्रुटी: %s.\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "वापरकर्त्याचे नाव दर्शविले नाही.\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -141,67 +141,81 @@ msgstr "वापरकर्त्याचे नाव दर्शविल�
 msgid "Error initializing %s: %s.\n"
 msgstr "%s प्रारंभ करतेवेळी त्रुटी: %s.\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "%s वापरकर्ता अस्तित्वात नाही.\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "खाती कुलूपबंद.\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "खाती कुलूपबंद नाही.\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "किमान:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "कमाल:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "कमाल:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "सावधान:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "निषक्रिय:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "निषक्रिय:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "कधीच नाही"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "शेवटचा बदल:\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "पासवर्ड कालबाह्य:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "पासवर्ड निषक्रिय:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "खाती कालबाह्य:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "%s करता एजींग माहिती संपादित करू शकला नाही: %s\n"
@@ -488,22 +502,22 @@ msgstr "`%s' करीता GID %jd सह समुह बनवितेव�
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "पूर्वनिर्धारीतपणे हानीकारक होम डिरेक्ट्री `%s' चा वापर, %s करीता, नकारात आहे\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "%s करीता प्रारंभी पासवर्ड निश्चित करा: %s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "%s करीता मुख्य संचयीका निर्माण करतेवेळी त्रुटी: %s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "%s करीता मेल स्पुल निर्माण करतेवेळी त्रुटी.\n"
+msgstr ""
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "%s करीता प्रारंभी पासवर्ड निश्चित करा: %s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "%s वापरकर्त्यास खाती बनवितेवेळी त्रुटी: %s\n"
@@ -556,7 +570,7 @@ msgstr "पासवर्ड बदल रद्द केले.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "फाइल डिस्क्रिप्टर %d पासून वाचतेवेळी त्रुटी.\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "%s वापरकर्त्यास पासवर्ड निश्चित करतेवेळी त्रुटी: %s.\n"
@@ -646,15 +660,15 @@ msgstr "%s समुह निर्माण करतेवेळी त्र
 msgid "Account creation failed: %s.\n"
 msgstr "खाती निर्माण करण्यास अपयशी: %s.\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "%s निर्माण करतेवेळी त्रुटी: %s.\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "मेल स्पुल निर्माण करतेवेळी.\n"
+msgstr ""
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -700,9 +714,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "%s काढुन टाकतेवेळी चुक: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "मेल स्पूल काढूण टाकतेवेळी त्रुटी आढळली.\n"
+msgstr ""
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -817,22 +831,22 @@ msgstr "%s करीता मुख्य संचयीका नाही.\n
 msgid "Error moving %s to %s: %s.\n"
 msgstr "%s पासुन %s पर्यंत स्थानांतर करतेवेळी त्रुटी: %s.\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "संरचना फाइल `%s' उघडू शकला नाही: %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "संरचना फाइल `%s' सुरू करू शकला नाही: %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "संरचना फाइल `%s' खूपच मोठी आहे"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "`%s' संरचना फाइल वाचू शकला नाही: %s"
@@ -1040,37 +1054,37 @@ msgstr "वापरकर्त्यास नाव किंवा UID न�
 msgid "group has neither a name nor a GID"
 msgstr "समुहास नाव किंवा GID नाही"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "पूर्वनिर्धारीतपणे होम डिरेक्ट्री `%s' चा वापर करण्यापासून नकारत आहे"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "field %s ची अवैध मुलभूत संख्या: %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "फाइल कुलूपबंद करतेवेळी त्रूटी: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "मुलभूत सुरक्षा संदर्भ प्राप्त करता आले नाही: %s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' चा सुरक्षा संदर्भ आढळला नाही: %s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' करता मुलभूत सुरक्षा संदर्भ निश्चित केला नाही: %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "संरचना फाइल `%1$s' उघडू शकला नाही: %2$s"
@@ -1425,18 +1439,3 @@ msgstr "मुलभूत वापरकर्त्याचे गुणध�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "वापरकर्ता संरचनाची प्रत बनवित आहे:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "मुख्य संचयीका मार्ग  `%s' संपूर्णतः नाही"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "`%s' निर्माण करतेवेळी चूक: %s"
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "`%s' काढुन टाकतेवेळी त्रुटी: %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "वापरकर्त्यास मेल स्पुल निर्माण करतेवेळी त्रुटी"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "वापरकर्ता मेल स्पुल काढुन टाकतेवेळी त्रुटी"

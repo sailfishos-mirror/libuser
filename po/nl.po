@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-09-25 09:48+0000\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2012-11-11 21:21+0000\n"
 "Last-Translator: Geert Warrink <geert.warrink@onsnet.nu>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/fedora/language/"
 "nl/)\n"
@@ -72,34 +72,34 @@ msgstr "Authenticatie voor onbekende gebruiker.\n"
 msgid "User mismatch.\n"
 msgstr "Gebruikers komen niet overeen.\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
 msgstr "vraag om alle informatie"
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr "toon veroudering parameters voor de gebruiker"
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
 msgstr "minimale aantal dagen tussen wachtwoordveranderingen"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr "DAGEN"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr "maximale aantal dagen tussen wachtwoordveranderingen"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr "datum van de laatste wachtwoordverandering in dagen sinds 1/1/70"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
@@ -107,21 +107,21 @@ msgstr ""
 "aantal dagen na wachtwoord vervaldatum als account als inactief beschouwd "
 "wordt"
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr "wachtwoord vervaldatum in dagen sinds 1/1/70"
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr ""
 "dagen voor vervaldatum te beginnen met het waarschuwen van de gebruiker"
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[OPTIE...] gebruiker"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -129,13 +129,13 @@ msgstr "[OPTIE...] gebruiker"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Fout bij verwerken argumenten: %s.\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Geen gebruikersnaam opgegeven.\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -143,67 +143,81 @@ msgstr "Geen gebruikersnaam opgegeven.\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "Fout bij initialiseren van %s: %s.\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Gebruiker %s bestaat niet.\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Account is vergrendeld.\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Account is niet vergrendeld.\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "Maximum:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Waarschuwing:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Inactief:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "Inactief:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "Nooit"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Laatste verandering:\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Wachtwoord verloopt:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Wachtwoord inactief:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Account verloopt:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Aanpassen verloop informatie voor %s mislukt: %s\n"
@@ -494,22 +508,22 @@ msgstr ""
 "Weigering om standaard de gevaarlijke persoonlijke map `%s' voor %s te "
 "gebruiken\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "Fout bij instellen initiële wachtwoord voor %s: %s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Fout bij aanmaken persoonlijke map voor %s: %s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "Fout bij aanmaken mail spool voor %s.\n"
+msgstr "Fout bij het aanmaken van mail spool voor %s: %s\n"
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Fout bij instellen initiële wachtwoord voor %s: %s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Fout bij aanmaken gebruiker account voor %s: %s\n"
@@ -562,7 +576,7 @@ msgstr "Wachtwoord veranderen geannuleerd.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Fout bij het lezen van bestand descriptor %d.\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fout bij instellen wachtwoord voor gebruiker %s: %s.\n"
@@ -652,15 +666,15 @@ msgstr "Fout bij aanmaken groep `%s': %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Aanmaken account mislukt: %s.\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fout bij aanmaken %s: %s.\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "Fout bij aanmaken mail spool.\n"
+msgstr "Fout bij het aanmaken van mail spool: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -707,9 +721,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "Fout bij verwijderen %s: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "Fout bij verwijderen mail spool.\n"
+msgstr "Fout bij het verwijderen van mail spool: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -824,22 +838,22 @@ msgstr "Geen nieuwe persoonlijke map voor %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Fout bij verplaatsen van %s naar %s: %s.\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "kon configuratiebestand `%s' niet openen: %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "kon de status van configuratiebestand `%s' niet opvragen: %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "configuratiebestand `%s' is te groot"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "kon configuratiebestand `%s' niet lezen: %s"
@@ -1047,38 +1061,38 @@ msgstr "gebruiker heeft zowel geen naam als geen UID"
 msgid "group has neither a name nor a GID"
 msgstr "groep heeft zowel geen naam als geen GID"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Weigeren om standaard de gevaarlijke persoonlijke map `%s' te gebruiken"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ongeldige standaard waarde van veld %s: %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "fout bij vergrendelen bestand: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "kon standaard beveiliging context niet verkrijgen: %s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "kon beveiliging context van `%s' niet verkrijgen: %s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "kon standaard beveiliging context niet instellen naar `%s': %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "kon beveiliging context voor `%s' niet bepalen: %s"
@@ -1432,21 +1446,3 @@ msgstr "Ophalen standaard gebruiker attributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Gebruiker structuur kopiëren:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "Pad van persoonlijke map `%s' is niet absoluut"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "Fout bij aanmaken van `%s': %s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "Fout bij instellen mode `%s': %s"
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "Fout bij verwijderen van `%s': %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "fout bij aanmaken mail spool voor gebruiker"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "fout bij verwijderen mail spool voor gebruiker"

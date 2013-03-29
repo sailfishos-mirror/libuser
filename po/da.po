@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2012-11-08 03:20+0100\n"
-"PO-Revision-Date: 2012-09-25 07:22+0000\n"
+"POT-Creation-Date: 2013-03-28 16:33+0100\n"
+"PO-Revision-Date: 2012-11-22 09:38+0000\n"
 "Last-Translator: Kris Thomsen <lakristho@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -71,54 +71,54 @@ msgstr "Ukendt bruger godkendt.\n"
 msgid "User mismatch.\n"
 msgstr "Manglende bruger-overensstemmelse.\n"
 
-#: apps/lchage.c:83 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
+#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
 msgstr "bed om alle informationer"
 
-#: apps/lchage.c:85
+#: apps/lchage.c:86
 msgid "list aging parameters for the user"
 msgstr "oplist brugerens forældelses-parametre"
 
-#: apps/lchage.c:87
+#: apps/lchage.c:88
 msgid "minimum days between password changes"
 msgstr "minimum antal dage mellem adgangskode-ændringer"
 
-#: apps/lchage.c:87 apps/lchage.c:89 apps/lchage.c:92 apps/lchage.c:95
-#: apps/lchage.c:98 apps/lchage.c:101
+#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
+#: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
 msgstr "DAGE"
 
-#: apps/lchage.c:89
+#: apps/lchage.c:90
 msgid "maximum days between password changes"
 msgstr "maksimum antal dage mellem skift af adgangskode"
 
-#: apps/lchage.c:91
+#: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
 msgstr "dato siden sidste adgangskode-ændring i dage siden 1/1/70"
 
-#: apps/lchage.c:94
+#: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
 "antal af dage efter adgangskode-udløbsdato'en, før konto'en anses som inaktiv"
 
-#: apps/lchage.c:97
+#: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
 msgstr "adgangskode-udløbsdato i dage siden 1/1/70"
 
-#: apps/lchage.c:100
+#: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr "dage før udløb begynder at advare bruger"
 
-#: apps/lchage.c:113 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
+#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
 msgstr "[TILVALG...] bruger"
 
-#: apps/lchage.c:116 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
+#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
 #: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
 #: apps/lusermod.c:104
@@ -126,13 +126,13 @@ msgstr "[TILVALG...] bruger"
 msgid "Error parsing arguments: %s.\n"
 msgstr "Fejl ved tolkning af argumenter: %s.\n"
 
-#: apps/lchage.c:125 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
+#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Brugernavn ikke specificeret.\n"
 
-#: apps/lchage.c:137 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
+#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
 #: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
 #: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
@@ -140,67 +140,81 @@ msgstr "Brugernavn ikke specificeret.\n"
 msgid "Error initializing %s: %s.\n"
 msgstr "Fejl ved initialisering af %s: %s.\n"
 
-#: apps/lchage.c:146 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
+#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Bruger %s eksisterer ikke.\n"
 
-#: apps/lchage.c:157
+#: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Konto er låst.\n"
 
-#: apps/lchage.c:159
+#: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Konto er ikke låst.\n"
 
-#: apps/lchage.c:164
+#: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum:\t%ld\n"
 
-#: apps/lchage.c:168
+#: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maksimum:\t%ld\n"
 
 #: apps/lchage.c:172
+#, fuzzy, c-format
+msgid "Maximum:\tNone\n"
+msgstr "Maksimum:\t%ld\n"
+
+#: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Advarsel:\t%ld\n"
 
-#: apps/lchage.c:176
+#: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Inaktiv:\t%ld\n"
 
-#: apps/lchage.c:180 apps/lchage.c:187 apps/lchage.c:196 apps/lchage.c:206
+#: apps/lchage.c:182
+#, fuzzy, c-format
+msgid "Inactive:\tNever\n"
+msgstr "Inaktiv:\t%ld\n"
+
+#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+msgid "Must change password on next login"
+msgstr ""
+
+#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
 msgstr "Aldrig"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Sidste ændring:\t%s\n"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Adgangskode udløber:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Adgangskode inaktiv:\t%s\n"
 
-#: apps/lchage.c:208
+#: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Konto udløber:\t%s\n"
 
-#: apps/lchage.c:230
+#: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Fejl ved ændring af aldringsinformation for %s: %s\n"
@@ -490,22 +504,22 @@ msgstr "Fejl ved oprettelse af gruppe for \"%s\" med GID %jd: %s\n"
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "Nægter at bruge farlig hjemmemappe \"%s\" til %s som standard\n"
 
-#: apps/lnewusers.c:252
-#, c-format
-msgid "Error setting initial password for %s: %s\n"
-msgstr "Fejl ved indstilling af første adgangskode for %s: %s\n"
-
-#: apps/lnewusers.c:267
+#: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "Fejl ved oprettelse af hjemmekatalog for %s: %s\n"
 
-#: apps/lnewusers.c:280
-#, fuzzy, c-format
+#: apps/lnewusers.c:270
+#, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr "Fejl ved oprettelse af postkø for %s.\n"
+msgstr "Fejl under oprettelse af mailspool for %s: %s\n"
 
-#: apps/lnewusers.c:290
+#: apps/lnewusers.c:285
+#, c-format
+msgid "Error setting initial password for %s: %s\n"
+msgstr "Fejl ved indstilling af første adgangskode for %s: %s\n"
+
+#: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "Fejl ved oprettelse af brugerkonto for %s: %s\n"
@@ -558,7 +572,7 @@ msgstr "Ændring af adgangskode annulleret.\n"
 msgid "Error reading from file descriptor %d.\n"
 msgstr "Fejl under læsning fra fil-deskriptor %d.\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:268 apps/luseradd.c:278
+#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Fejl ved indstilling af adgangskode for bruger %s: %s.\n"
@@ -648,15 +662,15 @@ msgstr "Fejl ved oprettelse af gruppe \"%s\": %s\n"
 msgid "Account creation failed: %s.\n"
 msgstr "Fejl ved oprettelse af konto: %s.\n"
 
-#: apps/luseradd.c:304
+#: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "Fejl ved oprettelse af %s: %s.\n"
 
-#: apps/luseradd.c:311
-#, fuzzy, c-format
+#: apps/luseradd.c:290
+#, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr "Fejl ved oprettelse af postkø.\n"
+msgstr "Fejl under oprettelse af mailspool: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -702,9 +716,9 @@ msgid "Error removing %s: %s.\n"
 msgstr "Fejl ved fjernelse af %s: %s.\n"
 
 #: apps/luserdel.c:149
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing mail spool: %s"
-msgstr "Fejl ved fjernelse af postkø.\n"
+msgstr "Fejl under fjernelse af mailspool: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -819,22 +833,22 @@ msgstr "Ingen ny hjemmemappe for %s.\n"
 msgid "Error moving %s to %s: %s.\n"
 msgstr "Fejl ved flytning af %s til %s: %s.\n"
 
-#: lib/config.c:124
+#: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
 msgstr "kunne ikke åbne konfigurationsfil \"%s\": %s"
 
-#: lib/config.c:130
+#: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
 msgstr "kunne ikke få stat()-oplysninger på konfigurationsfil \"%s\": %s"
 
-#: lib/config.c:139
+#: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
 msgstr "konfigurationsfil \"%s\" er for stor"
 
-#: lib/config.c:155
+#: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
 msgstr "kunne ikke læse konfigurationsfil \"%s\": %s"
@@ -1042,37 +1056,37 @@ msgstr "bruger har hverken et navn eller en UID"
 msgid "group has neither a name nor a GID"
 msgstr "gruppe har hverken et navn eller en GID"
 
-#: lib/user.c:1305
+#: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Nægter at bruge farlig hjemmemappe \"%s\" som standard"
 
-#: lib/user.c:2300
+#: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ugyldig standardværdi af felt %s: %s"
 
-#: lib/util.c:299
+#: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
 msgstr "fejl ved låsning af fil: %s"
 
-#: lib/util.c:690
+#: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "kunne ikke få fat på standard sikkerhedsomgivelser: %s"
 
-#: lib/util.c:717
+#: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "kunne ikke få fat på sikkerhedsomgivelser til \"%s\": %s"
 
-#: lib/util.c:723 lib/util.c:755
+#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "kunne ikke sætte standard sikkerhedsomgivelser til \"%s\": %s"
 
-#: lib/util.c:747
+#: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "kunne ikke bestemme sikkerhedsomgivelser til \"%s\": %s"
@@ -1427,21 +1441,3 @@ msgstr "Henter standard brugerattributter:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopierer brugerstruktur:\n"
-
-#~ msgid "Home directory path `%s' is not absolute"
-#~ msgstr "Stien \"%s\" til hjemmemappen er ikke komplet"
-
-#~ msgid "Error creating `%s': %s"
-#~ msgstr "Fejl ved oprettelse af \"%s\": %s"
-
-#~ msgid "Error setting mode of `%s': %s"
-#~ msgstr "Fejl under indstilling af tilstand for \"%s\": %s"
-
-#~ msgid "Error removing `%s': %s"
-#~ msgstr "Fejl ved fjernelse af \"%s\": %s"
-
-#~ msgid "error creating mail spool for user"
-#~ msgstr "fejl ved oprettelse af postkø for bruger"
-
-#~ msgid "error removing mail spool for user"
-#~ msgstr "fejl ved fjernelse af postkø for bruger"
