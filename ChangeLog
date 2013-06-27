@@ -1,5 +1,7 @@
 2013-06-28  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/fs_test: Skip the test if fakeroot is not available.
+
 	* .tx/config: Update configuration for hosted Transifex changes.
 
 2013-03-28  Miloslav Trmač  <mitr@redhat.com>

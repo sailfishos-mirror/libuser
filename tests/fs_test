@@ -19,6 +19,11 @@
 #
 # Author: Miloslav Trmač <mitr@redhat.com>
 
+if ! fakeroot --version &>/dev/null; then
+    echo 'fakeroot not available, skipping test' >&2
+    exit 77
+fi
+
 srcdir=$srcdir/tests
 
 workdir=$(pwd)/test_fs
