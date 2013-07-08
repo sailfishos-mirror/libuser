@@ -1,3 +1,10 @@
+2013-07-08  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.ac: Update gettext version, which avoids autoconf warnings.
+
+	* configure.ac: Use AM_PROG_AR to shut up automake.  This required moving
+	AC_USE_SYSTEM_EXTENSIONS up.
+
 2013-06-28  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/fs_test: Skip the test if fakeroot is not available.

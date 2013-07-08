@@ -7,13 +7,14 @@ AC_CONFIG_SRCDIR([lib/user.c])
 AC_CONFIG_AUX_DIR([admin])
 AM_INIT_AUTOMAKE([no-dist-gzip dist-xz subdir-objects -Wall])
 
+AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
 AM_PROG_CC_C_O
+AM_PROG_AR
 AC_CHECK_PROG([YACC], [bison -y], [bison -y], [:])
 AC_PATH_PROG([NSCD], [nscd], [/usr/sbin/nscd],
 	     [$PATH$PATH_SEPARATOR/usr/sbin$PATH_SEPARATOR/sbin])
 AC_ARG_VAR([NSCD], [Path to nscd])
-AC_USE_SYSTEM_EXTENSIONS
 AC_SYS_LARGEFILE
 
 LT_INIT([disable-static])
@@ -29,7 +30,7 @@ AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_30],
 	[Shut up warnings about deprecated GValueArray])
 
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.17])
+AM_GNU_GETTEXT_VERSION([0.18.2])
 
 LIBSAVE="$LIBS"
 AC_SEARCH_LIBS([crypt], [crypt])

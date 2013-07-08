@@ -1,5 +1,6 @@
 .*~$
 .*\.bak$
+^admin/ar-lib$
 ^admin/compile$
 ^admin/config\.guess$
 ^admin/config\.rpath$
@@ -9,6 +10,7 @@
 ^admin/ltmain\.sh
 ^admin/missing$
 ^admin/mkinstalldirs$
+^admin/test-driver$
 ^admin/ylwrap$
 ^autom4te\.cache.*
 ^build.*$
