@@ -1,7 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 
 # We require automake 1.6 at least.
-AUTOMAKE_OPTIONS = 1.6
+# The 'serial-tests' is a workaround for buggy test handling in
+# automake-1.13.4, which tries to save output in /usr/bin/gktdoc-check.{trs,log}
+AUTOMAKE_OPTIONS = 1.6 serial-tests
 
 # This is a blank Makefile.am for using gtk-doc.
 # Copy this to your project's API docs directory and modify the variables to
