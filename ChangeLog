@@ -1,3 +1,12 @@
+2013-09-20  Miloslav Trmač  <mitr@redhat.com>
+
+	* libuser.pc.in: Use Libs.private for @CRYPT_LIBS@, Requires.private for
+	gmodule-no-export-2.0.  glib-2.0 and gobject-2.0 stay in Requires:
+	because applications usually need both of them, and there are known
+	cases of applications that don't ask pkg-config for them explicitly. (We
+	might consider removing gobject-2.0 if all users use the non-GValueArray
+	helpers; removing glib-2.0 is pointless.)
+
 2013-07-08  Miloslav Trmač  <mitr@redhat.com>
 
 	* docs/reference/Makefile.am (AUTOMAKE_OPTIONS): Workaround a bug in
