@@ -34,7 +34,7 @@ main(int argc, const char **argv)
 	struct lu_context *ctx;
 	struct lu_ent *ent;
 	struct lu_error *error = NULL;
-	const char *user, *tmp;
+	const char *user;
 	int interactive = FALSE;
 	int remove_home = 0, dont_remove_group = 0;
 	int c;
@@ -101,6 +101,7 @@ main(int argc, const char **argv)
 	if (!dont_remove_group) {
 		struct lu_ent *group_ent;
 		gid_t gid;
+		const char *tmp;
 
 		gid = lu_ent_get_first_id(ent, LU_GIDNUMBER);
 		if (gid == LU_VALUE_INVALID_ID) {
@@ -133,14 +134,9 @@ main(int argc, const char **argv)
 	}
 
 	if (remove_home) {
-		tmp = lu_ent_get_first_string(ent, LU_HOMEDIRECTORY);
-		if (tmp == NULL) {
-			fprintf(stderr, _("%s did not have a home "
-				"directory.\n"), user);
-			return 8;
-		}
-		if (lu_homedir_remove(tmp, &error) == FALSE) {
-			fprintf(stderr, _("Error removing %s: %s.\n"), tmp,
+		if (lu_homedir_remove_for_user(ent, &error) == FALSE) {
+			fprintf(stderr,
+				_("Error removing home directory: %s.\n"),
 				lu_strerror(error));
 			return 9;
 		}

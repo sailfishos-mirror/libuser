@@ -530,7 +530,6 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 			  PyObject *kwargs)
 {
 	struct libuser_entity *ent = NULL;
-	const char *dir;
 	char *keywords[] = { "home", NULL };
 	struct lu_error *error = NULL;
 
@@ -544,17 +543,8 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 		return NULL;
 	}
 
-	/* Get the user's home directory. */
-	dir = lu_ent_get_first_string(ent->ent, LU_HOMEDIRECTORY);
-	if (dir == NULL) {
-		PyErr_SetString(PyExc_KeyError,
-				"user does not have a `" LU_HOMEDIRECTORY
-				"' attribute");
-		return NULL;
-	}
-
 	/* Remove the directory. */
-	if (lu_homedir_remove(dir, &error)) {
+	if (lu_homedir_remove_for_user(ent->ent, &error)) {
 		/* Successfully removed. */
 		DEBUG_EXIT;
 		return PyInt_FromLong(1);

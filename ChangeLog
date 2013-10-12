@@ -1,5 +1,10 @@
 2013-10-12  Miloslav Trmač  <mitr@redhat.com>
 
+	* apps/luserdel.c (main)
+	* python/admin.c (libuser_admin_remove_home): Use
+	lu_homedir_remove_for_user() instead of looking up LU_HOMEDIRECTORY
+	manually.
+
 	* lib/error.h (lu_status): New value lu_error_homedir_not_owned.
 	* lib/error.c (lu_strerror, lu_error_is_error): Support
 	lu_error_homedir_not_owned.
