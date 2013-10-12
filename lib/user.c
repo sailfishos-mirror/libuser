@@ -2134,7 +2134,8 @@ lu_default_int(struct lu_context *context, const char *name,
 {
 	GList *keys, *p;
 	GValue value;
-	char *cfgkey;
+	char *cfgkey, id_replacement[sizeof (intmax_t) * CHAR_BIT + 1];
+	char shadow_date_replacement[sizeof (intmax_t) * CHAR_BIT + 1];
 	const char *top, *idkey, *idkeystring, *val;
 	id_t id = DEFAULT_ID;
 	struct group grp, *err;
@@ -2210,10 +2211,16 @@ lu_default_int(struct lu_context *context, const char *name,
 	/* Search for a free ID. */
 	id = lu_get_first_unused_id(context, type, id);
 
-	if (id != 0 && id != (id_t)-1)
+	if (id != 0 && id != (id_t)-1) {
 		/* Add this ID to the entity. */
 		lu_ent_set_id(ent, idkey, id);
-	/* Otherwise the user must specify an ID. */
+		sprintf(id_replacement, "%jd", (intmax_t)id);
+	} else
+		/* Otherwise the user must specify an ID. */
+		id_replacement[0] = 0;
+
+	sprintf(shadow_date_replacement, "%ld",
+		lu_util_shadow_current_date_or_minus_1());
 
 	/* Now iterate to find the rest. */
 	memset(&value, 0, sizeof(value));
@@ -2257,7 +2264,7 @@ lu_default_int(struct lu_context *context, const char *name,
 			{LU_EMAIL, G_STRINGIFY_ARG(LU_EMAIL)},
 		};
 
-		char *tmp, replacement[sizeof (intmax_t) * CHAR_BIT + 1];
+		char *tmp;
 		const char *key;
 		gboolean ok;
 
@@ -2286,13 +2293,9 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = g_strdup(val);
 
 		tmp = replace_all(tmp, "%n", name, &key);
-		sprintf(replacement, "%ld",
-			lu_util_shadow_current_date_or_minus_1());
-		tmp = replace_all(tmp, "%d", replacement, &key);
-		if (id != 0 && id != (id_t)-1) {
-			sprintf(replacement, "%jd", (intmax_t)id);
-			tmp = replace_all(tmp, "%u", replacement, &key);
-		}
+		tmp = replace_all(tmp, "%d", shadow_date_replacement, &key);
+		if (id_replacement[0] != 0)
+			tmp = replace_all(tmp, "%u", id_replacement, &key);
 
 		ok = lu_value_init_set_attr_from_string(&value, key, tmp,
 							&error);

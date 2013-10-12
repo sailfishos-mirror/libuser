@@ -1,5 +1,10 @@
 2013-10-12  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/user.c (lu_default_int): Precompute the replacement strings
+	instead of computing it for each key.  This is a little faster,
+	and more importantly, we can be sure that the %d replacement value
+	will be the same for all keys.
+
 	* lib/util.c (lu_util_shadow_current_date): Rename to...
 	* lib/util.c (lu_util_shadow_current_date_or_minus_1): ... this.
 	Return -1 if the time is not available, or if the time would result in
