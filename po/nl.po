@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Geert Warrink <geert.warrink@onsnet.nu>, 2009,2011-2012.
-# mitr <mitr@volny.cz>, 2011.
-# Peter van Egdom <p.van.egdom@gmail.com>, 2004, 2005, 2006, 2007, 2008.
-# Tino Meinen <a.t.meinen@chello.nl>, 2003.
+# Geert Warrink <geert.warrink@onsnet.nu>, 2009,2011-2013
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Peter van Egdom <p.van.egdom@gmail.com>, 2004, 2005, 2006, 2007, 2008
+# Tino Meinen <a.t.meinen@chello.nl>, 2003
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-11 21:21+0000\n"
-"Last-Translator: Geert Warrink <geert.warrink@onsnet.nu>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/fedora/language/"
 "nl/)\n"
 "Language: nl\n"
@@ -170,9 +170,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Maximum:\t%ld\n"
+msgstr "Maximum:»geen\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -185,13 +185,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Inactief:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Inactief:\t%ld\n"
+msgstr "Inactief:»nooit\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Wachtwoord moet bij de volgende keer inloggen vernieuwd worden"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -690,37 +690,32 @@ msgstr "verwijder de persoonlijke map van de gebruiker"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Gebruiker %s kon niet worden verwijderd: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s heeft geen gid nummer.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Er bestaat geen groep met GID %jd, kan niet verwijderen.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Groep met GID %jd heeft geen groepsnaam.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Groep %s kon niet worden verwijderd: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s heeft geen persoonlijke map.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "fout bij verwijderen persoonlijke map voor gebruiker"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Fout bij verwijderen %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "Fout bij het verwijderen van mail spool: %s"
@@ -950,7 +945,12 @@ msgstr "ongeldige attribuut waarde"
 msgid "invalid module combination"
 msgstr "ongeldige module combinatie"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "persoonlijke map voor nieuwe gebruiker"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "onbekende fout"
 
@@ -1067,7 +1067,7 @@ msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Weigeren om standaard de gevaarlijke persoonlijke map `%s' te gebruiken"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ongeldige standaard waarde van veld %s: %s"
@@ -1077,22 +1077,22 @@ msgstr "Ongeldige standaard waarde van veld %s: %s"
 msgid "error locking file: %s"
 msgstr "fout bij vergrendelen bestand: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "kon standaard beveiliging context niet verkrijgen: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "kon beveiliging context van `%s' niet verkrijgen: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "kon standaard beveiliging context niet instellen naar `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "kon beveiliging context voor `%s' niet bepalen: %s"
@@ -1381,11 +1381,11 @@ msgstr "fout bij initialiseren Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "fout bij aanmaken persoonlijke map voor gebruiker"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "fout bij verwijderen persoonlijke map voor gebruiker"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "fout bij verplaatsen persoonlijke map voor gebruiker"
 
@@ -1446,3 +1446,9 @@ msgstr "Ophalen standaard gebruiker attributen:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Gebruiker structuur kopiëren:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s heeft geen persoonlijke map.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Fout bij verwijderen %s: %s.\n"

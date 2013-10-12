@@ -3,18 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# hi <rranjan@redhat.com>, 2007.
-# mitr <mitr@volny.cz>, 2011.
-# Rajesh Ranjan <rajesh672@gmail.com>, 2009.
-# Rajesh Ranjan <rranjan@redhat.com>, 2004, 2005, 2006, 2008, 2009, 2011, 2012.
+# Rajesh Ranjan <rranjan@redhat.com>, 2007
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Rajesh Ranjan <rajesh672@gmail.com>, 2009
+# Rajesh Ranjan <rranjan@redhat.com>, 2004, 2005, 2006, 2008, 2009, 2011, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
+"Language-Team: Hindi (http://www.transifex.com/projects/p/fedora/language/"
+"hi/)\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,9 +166,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "अधिकतम:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "अधिकतम:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -180,9 +181,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "निष्क्रिय:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "निष्क्रिय:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -681,37 +682,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "उपयोक्ता %s को विलोपित नहीं कर सका: %s।\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s के gid अंक नहीं है.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "GID %jd के साथ कोई जीवंत समूह मौजूद है, नहीं हटा रहे हैं.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd समूह का कोई समूह नाम नहीं है.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "समूह %s को विलोपित नहीं कर सका: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s की कोई घर निर्देशिका नहीं है.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "उपयोक्ता के लिए घर निर्देशिका हटाने में त्रुटि"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "%s हटाने में त्रुटि: %s।\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -941,7 +937,11 @@ msgstr "अवैध गुण मान"
 msgid "invalid module combination"
 msgstr "अवैध मॉड्यूल संयोग"
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "अज्ञात त्रुटि"
 
@@ -1057,7 +1057,7 @@ msgstr "समूह के पास न तो नाम है न GID."
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "ख़तरनाक घर निर्देशिका `%s' को तयशुदा रूप से प्रयोग के लिए अस्वीकृत कर रहा है"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s क्षेत्र का अवैध मूलभूत मान: %s"
@@ -1067,22 +1067,22 @@ msgstr "%s क्षेत्र का अवैध मूलभूत मा�
 msgid "error locking file: %s"
 msgstr "%s फाइल तालकित करने में त्रुटि"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "मूलभूत सुरक्षा संदर्भ व्यवस्थित पा नहीं सका: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' का सुरक्षा संदर्भ पा नहीं सका: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' में मूलभूत सुरक्षा संदर्भ व्यवस्थित नहीं कर सका: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' का सुरक्षा संदर्भ निर्धारित नहीं कर सका: %s"
@@ -1370,11 +1370,11 @@ msgstr "%s सायरस SASL प्रारंभिकीकरण त्�
 msgid "error creating home directory for user"
 msgstr "उपयोक्ता के लिए घर निर्देशिका बनाने में त्रुटि"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "उपयोक्ता के लिए घर निर्देशिका हटाने में त्रुटि"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "उपयोक्ता के लिए घर निर्देशिका चलाने में त्रुटि"
 
@@ -1435,3 +1435,9 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s की कोई घर निर्देशिका नहीं है.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "%s हटाने में त्रुटि: %s।\n"

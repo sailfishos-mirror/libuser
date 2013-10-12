@@ -1,3 +1,13 @@
+0.60:
+* New functions lu_homedir_remove_for_user() and
+  lu_homedir_remove_for_user_if_owned().
+* libuser's pkg-config file no longer refers to internally-used libraries.
+  glib-2.0 and gobject-2.0 are still included because they are required to
+  use the API anyway.
+* When setting dates in shadow fields, avoid the special value 0 if the clock is
+  incorrect.
+* Miscellaneous cleanups.
+
 0.59:
 * Fixed security vulnerabilities:
   * Race conditions in copying and removing home directories (CVE-2012-5630)

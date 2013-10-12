@@ -3,18 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Adam Pribyl <pribyl@lowlevel.cz>, 2008.
-# Jan Varta <jan.varta@atlas.cz>, 2013.
-# Milan Kerslager <kerslage@linux.cz>, 2002.
-# Miloslav Trmač <mitr@volny.cz>, 2012.
-# mitr <mitr@volny.cz>, 2011.
+# Adam Pribyl <pribyl@lowlevel.cz>, 2008
+# Zdenek Chmelar <chmelarz@gmail.com>, 2013
+# Jan Varta <jan.varta@atlas.cz>, 2013
+# Milan Kerslager <kerslage@linux.cz>, 2002
+# Miloslav Trmač <mitr@volny.cz>, 2011-2013
+# Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2013-03-28 16:17+0100\n"
-"Last-Translator: Jan Varta <jan.varta@atlas.cz>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-10-12 21:41+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/fedora/language/"
 "cs/)\n"
 "Language: cs\n"
@@ -684,37 +685,32 @@ msgstr "odstranit uživatelův domovský adresář"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Uživatele %s nelze odstranit: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s nemá GID číslo.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Skupina s GID %jd neexistuje, neodstraňuji.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Skupina s GID %jd nemá jméno skupiny.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Skupinu %s nelze odstranit: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s nemá domovský adresář.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "chyba při odstraňování domovského adresáře pro uživatele"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Chyba při odstraňování %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "Chyba odstraňování pošty: %s"
@@ -944,7 +940,12 @@ msgstr "neplatná hodnota atributu"
 msgid "invalid module combination"
 msgstr "neplatná kombinace modulů"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "domovský adresář pro nového uživatele"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "neznámá chyba"
 
@@ -1060,7 +1061,7 @@ msgstr "skupina nemá ani jméno, ani GID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Odmítám implicitně použít nebezpečný domovský adresář `%s'"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Neplatná implicitní hodnota pole %s: %s"
@@ -1070,22 +1071,22 @@ msgstr "Neplatná implicitní hodnota pole %s: %s"
 msgid "error locking file: %s"
 msgstr "chyba při zamykání souboru: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "nemohu získat implicitní kontext zabezpečení: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "nemohu získat kontext zabezpečení `%s': %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "nemohu nastavit implicitní kontext zabezpečení na `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "nemohu určit kontext zabezpečení pro `%s': %s"
@@ -1373,11 +1374,11 @@ msgstr "chyba při inicializaci Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "chyba při vytváření domovského adresáře pro uživatele"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "chyba při odstraňování domovského adresáře pro uživatele"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "chyba při přesouvání domovského adresáře pro uživatele"
 
@@ -1438,3 +1439,9 @@ msgstr "Načítám implicitní atributy uživatele:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopíruji uživatelskou strukturu:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s nemá domovský adresář.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Chyba při odstraňování %s: %s.\n"

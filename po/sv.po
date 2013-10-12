@@ -3,29 +3,29 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-#  <ccheng@brisbane.redhat.com>, 2004.
-# Christian Rose <menthos@menthos.com>, 2006.
-# Daniel Guerrero <daniel@danguer.com>, 2003.
-# Domingo Becker <domingobecker@gmail.com>, 2008.
-# Fernando Gonzalez Blanco <fgonz@fedoraproject.org>, 2009.
-# Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001.
-# Gladys Guerrero Lozano <gguerrer@redhat.com>, 2009, 2010.
-# Göran Uddeborg <goeran@uddeborg.se>, 2011, 2012.
-# Héctor Daniel Cabrera <h.daniel.cabrera@gmail.com>, 2009.
-# Luis Mayoral <mayoral@linuxadicto.org>, 2003.
-# Magnus Larsson <fedoratrans@gmail.com>, 2007, 2008.
-# Manuel Ospina <mospina@redhat.com>, 2005, 2006.
-# mitr <mitr@volny.cz>, 2011.
-# Tullio Dovera <tdovera@redhat.it>, 2000.
-# Ulrika Uddeborg <aurorauddeborg@gmail.com>, 2012.
-# Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
+#  <ccheng@brisbane.redhat.com>, 2004
+# Christian Rose <menthos@menthos.com>, 2006
+# Daniel Guerrero <daniel@danguer.com>, 2003
+# Domingo Becker <domingobecker@gmail.com>, 2008
+# Fernando Gonzalez Blanco <fgonz@fedoraproject.org>, 2009
+# Fernando Ruiz-Tapiador Gutiérrez <frtapiador@redhat.es>, 2001
+# Gladys Guerrero <gguerrer@redhat.com>, 2009, 2010
+# Göran Uddeborg <goeran@uddeborg.se>, 2011-2013
+# Héctor Daniel Cabrera <h.daniel.cabrera@gmail.com>, 2009
+# Luis Mayoral <mayoral@linuxadicto.org>, 2003
+# Magnus Larsson <fedoratrans@gmail.com>, 2007, 2008
+# Manuel Ospina <mospina@redhat.com>, 2005, 2006
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Tullio Dovera <tdovera@redhat.it>, 2000
+# Ulrika Uddeborg <aurorauddeborg@gmail.com>, 2012
+# Yelitza Louze <ylouze@redhat.com>, 2003, 2004
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 10:03+0000\n"
+"Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/fedora/language/"
 "sv/)\n"
 "Language: sv\n"
@@ -178,9 +178,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Maximum:\t%ld\n"
+msgstr "Maximum:»Inget\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -193,13 +193,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Inaktiv:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Inaktiv:\t%ld\n"
+msgstr "Inaktiv:»Aldrig\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Måste ändra lösenord vid nästa inloggning"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -522,7 +522,7 @@ msgstr "Fel när hemkatalog för %s skapades: %s\n"
 #: apps/lnewusers.c:270
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "Fel när brevlåda för %s skapades: %s\n"
 
 #: apps/lnewusers.c:285
 #, c-format
@@ -680,7 +680,7 @@ msgstr "Fel när %s skapades: %s.\n"
 #: apps/luseradd.c:290
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "Fel när brevlåda skapades: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -695,40 +695,35 @@ msgstr "ta bort användarens hemkatalog"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Användare %s gick inte att ta bort: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s hade inte något gid-nummer.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Det finns ingen grupp med GID %jd, tar inte bort.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Grupp med GID %jd hade inget gruppnamn.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Grupp %s gick inte att ta bort: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s hade inte någon hemkatalog.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "fel när hemkatalogen togs bort för användaren"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Fel när %s togs bort: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "Fel när brevlåda togs bort: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -955,7 +950,12 @@ msgstr "ogiltigt attributvärde"
 msgid "invalid module combination"
 msgstr "ogiltig modulkombination"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "hemkatalog för ny användare"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "okänt fel"
 
@@ -1036,7 +1036,7 @@ msgstr "användare %s har ingen UID"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "användaren %s finns inte"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1046,7 +1046,7 @@ msgstr "grupp %s har ingen GID"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "gruppen %s finns inte"
 
 #: lib/user.c:355
 #, c-format
@@ -1071,7 +1071,7 @@ msgstr "gruppen har varken ett namn eller en GID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Vägrar att använda farlig hemkatalog \"%s\" som standard"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Ogiltigt standardvärd för fält %s: %s"
@@ -1081,22 +1081,22 @@ msgstr "Ogiltigt standardvärd för fält %s: %s"
 msgid "error locking file: %s"
 msgstr "fel när filen låstes: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "det gick inte att få standardsäkerhetskontext: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "det gick inte att få säkerhetskontext för \"%s\": %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "det gick inte att sätta standardsäkerhetskontext till \"%s\": %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "det gick inte att avgöra säkerhetskontext för \"%s\": %s"
@@ -1386,11 +1386,11 @@ msgstr "fel när Cyrus SASL initierades: %s"
 msgid "error creating home directory for user"
 msgstr "fel när hemkatalogen skapades för användaren"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "fel när hemkatalogen togs bort för användaren"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "fel när hemkatalogen flyttades för användaren"
 
@@ -1451,3 +1451,9 @@ msgstr "Hämtar standardvärden för användarattribut:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopierar användarstruktur:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s hade inte någon hemkatalog.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Fel när %s togs bort: %s.\n"

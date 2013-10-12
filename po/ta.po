@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Arun Prakash  <arunprakash.pts@gmail.com>, 2012.
-# Felix <ifelix@redhat.com>, 2006.
-# Felix I <ifelix25@gmail.com>, 2011, 2012.
-# I felix <ifelix@redhat.com>, 2007.
-# Jayaradha N <jaya@pune.redhat.com>, 2004.
-# Jayaradha N <njaya@redhat.com>, 2004, 2005, 2006.
-# mitr <mitr@volny.cz>, 2011.
+# Arun Prakash <arunprakash.pts@gmail.com>, 2012
+# Felix <ifelix@redhat.com>, 2006
+# Felix I <ifelix25@gmail.com>, 2011, 2012
+# I felix <ifelix@redhat.com>, 2007
+# Jayaradha N <jaya@pune.redhat.com>, 2004
+# Jayaradha N <njaya@redhat.com>, 2004, 2005, 2006
+# Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Tamil <tamil-users@lists.fedoraproject.org>\n"
+"Language-Team: Tamil (http://www.transifex.com/projects/p/fedora/language/"
+"ta/)\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -168,9 +169,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "அதிகபட்சம்:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "அதிகபட்சம்:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -183,9 +184,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "செயலிழக்கப்பட்டது:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "செயலிழக்கப்பட்டது:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -683,37 +684,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "பயனர் %sஐ அழிக்க முடியாது: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%sக்கு ஒரு gid எண் இல்லை.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "%jd GID எனக்கொண்ட குழு இல்லை, நீக்கப்படவில்லை.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd உடன் உள்ள குழுவுக்கு குழுப்பெயர் இல்லை.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "குழு %sஐ அழிக்க முடியவில்லை: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%sஇல் இல்ல அடைவு இல்லை.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "பயனருக்காக இல்ல அடைவை நீக்குவதில் பிழை"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "பிழை %sஐ நீக்குகிறது : %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -943,7 +939,11 @@ msgstr "தவறான அளவுரு மதிப்புதவறான 
 msgid "invalid module combination"
 msgstr "தவறான தொகுதி கலவைதவறான "
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "தெரியாத பிழை"
 
@@ -1059,7 +1059,7 @@ msgstr "குழுவில் ஒரு பெயர் அல்லது �
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "அபாயகரமான இல்ல அடைவு `%s'ஐ முன்னிப்பாக பயன்படுத்த மறுக்கிறது"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "புலத்தின் தவறான முன்னிருப்பு மதிப்பு %s: %s"
@@ -1069,22 +1069,22 @@ msgstr "புலத்தின் தவறான முன்னிருப�
 msgid "error locking file: %s"
 msgstr "கோப்பினை பூட்டுவதில் பிழை : %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "முன்னிருப்பு பாதுகாப்பு சூழலை பெற முடியவில்லை:%s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s'இன் பாதுகாப்பு சூழலை பெற முடியவில்லை: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' க்கு முன்னிருப்பு பாதுகாப்பு சூழலை அமைக்க முடியவில்லை: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s'இன் பாதுகாப்பு சூழலை குறிப்பிட முடியவில்லை: %s"
@@ -1372,11 +1372,11 @@ msgstr "Cyrus SASL துவக்குவதில் பிழை: %s"
 msgid "error creating home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை உருவாக்குவதில் பிழை"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை நீக்குவதில் பிழை"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "பயனருக்காக இல்ல அடைவை நகர்த்துவதில் பிழை"
 
@@ -1439,3 +1439,9 @@ msgstr "முன்னிருப்பு பயனர் கூறுகள�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "பயனர் வடிவத்தை நகலெடுக்கிறது:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%sஇல் இல்ல அடைவு இல்லை.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "பிழை %sஐ நீக்குகிறது : %s.\n"

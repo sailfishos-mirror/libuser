@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-#   <aeperezt@fedoraproject.org>, 2012.
-# Claudio Rodrigo Pereyra Diaz <elsupergomez@gmail.com>, 2011, 2012.
-# Domingo Becker <domingobecker@gmail.com>, 2008,2012.
-# Manuel Ospina <mospina@redhat.com>, 2005.
-# mitr <mitr@volny.cz>, 2011.
-# Yelitza Louze <ylouze@redhat.com>, 2003, 2004.
+# alex_pe <aeperezt@fedoraproject.org>, 2012
+# Claudio Rodrigo Pereyra Diaz <elsupergomez@gmail.com>, 2011-2013
+# Domingo Becker <domingobecker@gmail.com>, 2008,2012
+# Manuel Ospina <mospina@redhat.com>, 2005
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Yelitza Louze <ylouze@redhat.com>, 2003, 2004
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-11 14:01+0000\n"
-"Last-Translator: Domingo Becker <domingobecker@gmail.com>\n"
-"Language-Team: Spanish <trans-es@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/fedora/language/"
+"es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,9 +171,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Máximo:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Máximo:\t%ld\n"
+msgstr "Máximo:\tNinguno\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -185,13 +186,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Inactivo:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Inactivo:\t%ld\n"
+msgstr "Inactivo:\tNunca\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Debe cambiar la contraseña en el proximo ingreso"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -691,37 +692,32 @@ msgstr "elimina el directorio personal del usuario"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "No se pudo eliminar el usuario %s: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s no tenía un número gid.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "No existe ningún grupo con %jd de GID, no se eliminará.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "El grupo de GID %jd no tenía un nombre de grupo.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "No se pudo eliminar el grupo %s: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s no tenía un directorio principal.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "error al eliminar el directorio principal para el usuario"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Error al eliminar %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "Error al eliminar el receptor de correo: %s"
@@ -951,7 +947,12 @@ msgstr "valor de atributo inválido"
 msgid "invalid module combination"
 msgstr "combinación de módulos invalida"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "directorio personal para el nuevo usuario"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "error desconocido"
 
@@ -1068,7 +1069,7 @@ msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Por defecto, se niega la utilización del directorio principal peligroso `%s'"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Valor por defecto inválido en el campo %s: %s"
@@ -1078,23 +1079,23 @@ msgstr "Valor por defecto inválido en el campo %s: %s"
 msgid "error locking file: %s"
 msgstr "error cerrando fichero: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "no se pudo obtener el contexto de seguridad predeterminado: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "no se pudo obtener el contexto de seguridad `%s': %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 "no se pudo configurar el contexto de seguridad predeterminado a `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "no se pudo determinar  el contexto de seguridad `%s': %s"
@@ -1140,7 +1141,7 @@ msgstr "Error cambiando modo de `%s': %s"
 #: modules/files.c:193
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Error leyendo `%s': %s"
+msgstr "Error al eliminar %s: %s."
 
 #: modules/files.c:208 modules/files.c:223
 #, c-format
@@ -1385,11 +1386,11 @@ msgstr "error al inicializar Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "error al crear directorio principal para el usuario"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "error al eliminar el directorio principal para el usuario"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "error moviendo el directorio principal para el usuario"
 
@@ -1450,3 +1451,9 @@ msgstr "Obtención de los atributos de usuario predeterminados:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Copia de la estructura de usuario:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s no tenía un directorio principal.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Error al eliminar %s: %s.\n"

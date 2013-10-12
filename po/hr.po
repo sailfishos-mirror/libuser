@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# mitr <mitr@volny.cz>, 2011.
+# Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Croatian (http://www.transifex.com/projects/p/fedora/language/"
+"hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,9 +164,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Najviše:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Najviše:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -178,9 +179,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "Neaktivno:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Neaktivno:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -678,37 +679,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Brisanje korisnika %s nije moguće: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s nema GID broj.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Ne postoji grupa s GID %jd. Nema uklanjanja.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Grupa s GID %jd nije imala naziv grupe.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Brisanje grupe %s nije moguće: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s nema početnu mapu.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "Pogreška pri uklanjanju početne mape za korisnika"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Pogreška pri uklanjanju %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -938,7 +934,11 @@ msgstr ""
 msgid "invalid module combination"
 msgstr ""
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "Nepoznata pogreška"
 
@@ -1054,7 +1054,7 @@ msgstr "Grupa nema ni naziv ni UID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Neispravana zadana vrijednost polja %s: %s"
@@ -1064,22 +1064,22 @@ msgstr "Neispravana zadana vrijednost polja %s: %s"
 msgid "error locking file: %s"
 msgstr "Pogreška pri zaključavanju datoteke: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "Dohvaćanje sigurnosnog sadržaja `%s' nije uspjelo: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Dohvaćanje sigurnosnog sadržaja u `%s' nije uspjelo: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1370,11 +1370,11 @@ msgstr "Pogreška pri inicijalizaciji Cyrus SASL-a: %s"
 msgid "error creating home directory for user"
 msgstr "Pogreška pri izradi početne mape za korisnika"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "Pogreška pri uklanjanju početne mape za korisnika"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "Pogreška pri premještanju početne mape za korisnika"
 
@@ -1435,3 +1435,9 @@ msgstr "Dohvaćanje zdanih korisničkih atributa:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Kopiranje strukture korisnika:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s nema početnu mapu.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Pogreška pri uklanjanju %s: %s.\n"

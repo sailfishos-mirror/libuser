@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005, 2007.
-# Laszlo Dvornik <dvornikl@mailbox.hu>, 2004.
-# mitr <mitr@volny.cz>, 2011.
-# Nikolas Slivka <snicore@gmail.com>, 2010.
-#   <ptr@ulx.hu>, 2011.
-# Tamas Szanto <tszanto@mol.hu>, 2003.
-# Zoltan Hoppár <hopparz@gmail.com>, 2011-2013.
+# Arpad Biro <biro_arpad@yahoo.com>, 2004, 2005, 2007
+# Laszlo Dvornik <dvornikl@mailbox.hu>, 2004
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Nikolas Slivka <snicore@gmail.com>, 2010
+# ptr <ptr@ulx.hu>, 2011
+# Tamas Szanto <tszanto@mol.hu>, 2003
+# Zoltan Hoppár <hopparz@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2013-01-08 18:55+0000\n"
-"Last-Translator: Zoltan Hoppár <hopparz@gmail.com>\n"
-"Language-Team: Hungarian <trans-hu@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/fedora/"
+"language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,9 +171,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Maximum:\t%ld\n"
+msgstr "Maximum:\tNincs\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -185,13 +186,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Inaktív:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Inaktív:\t%ld\n"
+msgstr "Inaktív:\tSoha\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Meg kell változtatnia jelszavát a következő bejelentkezésnél"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -692,37 +693,32 @@ msgstr "távolítsa el felhasználók home mappáját"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "%s felhasználó nem törölhető: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s nem rendelkezik  GID számmal.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Nincs csoport %jd GID azonosítóval, így nincs eltávolítás sem.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "A %jd GID azonosítójú csoportnak nincs csoportneve.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "%s csoportot nem lehet törölni: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s nem rendelkezik saját könyvtárral.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "hiba a felhasználó saját könyvtárának eltávolításakor"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Hiba történt %s eltávolításakor: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "Hiba a levéltár törlésekor: %s"
@@ -952,7 +948,12 @@ msgstr "rossz attributum érték"
 msgid "invalid module combination"
 msgstr "helytelen modulkombináció"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "az új felhasználó home mappája"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "ismeretlen hiba"
 
@@ -1069,7 +1070,7 @@ msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "alapértelmezésben`%s' veszélyes home könyvtár használatának megtagadása"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s mező érvénytelen alapértelmezett értéke: %s"
@@ -1079,22 +1080,22 @@ msgstr "%s mező érvénytelen alapértelmezett értéke: %s"
 msgid "error locking file: %s"
 msgstr "hiba a fájl zárolásakor: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "Nem sikerült lekérni az alap futtatási kontextust: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "%s biztonsági kontextusa nem kérhető le: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Nem sikerült beállítani az alap futtatási kontextust erre: %s: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1386,11 +1387,11 @@ msgstr "hiba a Cyrus SASL előkészítésekor: %s"
 msgid "error creating home directory for user"
 msgstr "hiba a felhasználó saját könyvtárának létrehozásakor"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "hiba a felhasználó saját könyvtárának eltávolításakor"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "hiba a felhasználó saját könyvtárának mozgatásakor"
 
@@ -1451,3 +1452,9 @@ msgstr "Alapértelmezett felhasználói attribútumok lekérése: \n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Felhasználói szerkezet másolása:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s nem rendelkezik saját könyvtárral.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Hiba történt %s eltávolításakor: %s.\n"

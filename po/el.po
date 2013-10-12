@@ -3,20 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Dimitris Glaros <dimitrisglaros@gmail.com>, 2011, 2012.
-# Dimitris Glezos <dimitris@glezos.com>, 2006, 2007.
-# Kostas Papadimas <pkst@gnome.org>, 2009.
-# mitr <mitr@volny.cz>, 2011.
-# Simos Xenitellis <simos@gnome.org>, 2006.
-# Thalia Papoutsaki <saliyath@gmail.com>, 2010.
+# Dimitris Glaros <dimitrisglaros@gmail.com>, 2011, 2012
+# Dimitris Glezos <dimitris@glezos.com>, 2006, 2007
+# ioza1964 <ioza1964@yahoo.gr>, 2013
+# Kostas Papadimas <pkst@gnome.org>, 2009
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Simos Xenitellis <simos@gnome.org>, 2006
+# mitzie <zacharias.mitzelos@gmail.com>, 2013
+# Thalia Papoutsaki <saliyath@gmail.com>, 2010
+# KAT.RAT12 <spanish.katerina@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Greek <trans-el@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-08-06 08:52+0000\n"
+"Last-Translator: ioza1964 <ioza1964@yahoo.gr>\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/fedora/language/"
+"el/)\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,42 +80,44 @@ msgstr "Κακό ταίριασμα χρήστη.\n"
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "έτοιμο για όλες τις πληροφορίες "
 
 #: apps/lchage.c:86
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "προβάλετε χρονικές παραμέτρους για τον χρήστη στη λίστα "
 
 #: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "ελάχιστος αριθμός ημερών ανάμεσα στις αλλαγές "
 
 #: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
 #: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
-msgstr ""
+msgstr "ΗΜΕΡΕΣ"
 
 #: apps/lchage.c:90
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "μέγιστος αριθμός ημερών μεταξύ των αλλαγών κωδικών πρόσβασης "
 
 #: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "ημερομηνία τελευταίας αλλαγής κωδκού από τις 1/1/70."
 
 #: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"αριθμός ημερών μετά την λήξη του κωδικού πρόσβασης όταν ο λογαρισμός είναι  "
+"ανενεργός "
 
 #: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "ημερομηνία λήξης κωδικού πρόσβασης σε μέρες από 1/1/70"
 
 #: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "μέρες πριν την ειδοποίηση του χρήστη για την λήξη."
 
 #: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
@@ -167,9 +173,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Μέγιστο:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Μέγιστο:\t%ld\n"
+msgstr "Μέγιστο: Τίποτα\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -182,13 +188,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Ανενεργό:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Ανενεργό:\t%ld\n"
+msgstr "Ανενεργό: Ποτέ\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Πρέπει να αλλάξει ο κωδικός στην επόμενη σύνδεση "
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -295,16 +301,16 @@ msgstr "Έγινε αλλαγή κελύφους.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid για νέα ομάδα "
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "ΑΡΙΘ."
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "δημιουργείστε συστημική ομάδα "
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -338,19 +344,19 @@ msgstr "Δε μπόρεσε να γίνει διαγραφή ομάδας %s: %s
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "εγκατασττήστε το GID για την ομάδα. "
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "αλλαγή της ομάδς για να έχει συγκεκριμένο όνομα "
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "ΟΝΟΜΑ "
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:75
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "κωδικός πρόσβασης βασικού κειμένου για χρήση με την ομάδα "
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -362,35 +368,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "ΣΕΙΡΑ "
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "προ-θεώρημένος κωδικός πρόσβασης για χρήση με την ομάδα "
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "πρόσθση λίστας διαχειριστών "
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "λίστα διαχειριστών για αφαίρεση "
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "λίστα μελών ομάδας για πρόσθεση"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "λίστα μελών ομάδας για αφαίρεση "
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "ξεκλειδώστε την ομάδα "
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "ξεκλειδώστε ομάδα "
 
 #: apps/lgroupmod.c:125 apps/lusermod.c:164
 #, c-format
@@ -427,10 +433,12 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"λίστα μελών μιας συγκεκριμένης ομάδας αντί των εγγραφών μελών για τον "
+"ονομασμένο χρήστη. "
 
 #: apps/lid.c:120
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "πληροφοριες μόνο για την λίστα συνδρομής με όνομα, και όχι UID/GID. "
 
 #: apps/lid.c:146
 #, c-format
@@ -454,19 +462,19 @@ msgstr " %s δεν υπάρχει\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "φάκελλος με εγγραφές πληροφοριών χρήστη "
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "ΕΙΣΟΔΟΣ "
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "μην δημιουργήσετε λίστα διευθύνσεων για χρήστη "
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "μην δημιουργείτε συνωστισμό μηνυμάτων "
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -511,6 +519,9 @@ msgstr "Σφάλμα ορισμού αρχικού καταλόγου για %s:
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
 msgstr ""
+"Σφάλμα στη δημιουργία του ταχυδρομικού νήματος για %s: %s\n"
+"\n"
+"\n"
 
 #: apps/lnewusers.c:285
 #, c-format
@@ -524,23 +535,23 @@ msgstr "Σφάλμα δημιουργίας λογαριασμού χρήστη 
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "βάλτε κωδικό ομάδας αντί κωδικό χρήστη "
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "νέος  κωδικός πεδίου "
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "νέος κωδικός με απόκρυψη "
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "διαβάστε τον νέο κωδικό πεδίο από την δοσμένη περιγραφή "
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "διαβάστε τον νέο κωδικό πεδίο από την δοσμένη περιγραφή "
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -587,63 +598,63 @@ msgstr "Το συνθηματικό άλλαξε.\n"
 
 #: apps/luseradd.c:57
 msgid "create a system user"
-msgstr ""
+msgstr "δημιουργήστε χρήστη συστήματος "
 
 #: apps/luseradd.c:59
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "Πληροφορίες GEGOS για τον νέο χρήστη "
 
 #: apps/luseradd.c:61
 msgid "home directory for new user"
-msgstr ""
+msgstr "αρχική  λίστα διευθύνσεων για τον  νέο χρήστη "
 
 #: apps/luseradd.c:63
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "λίστα διευθύνσεων με φακέλλους για τον νέο χρήστη "
 
 #: apps/luseradd.c:65
 msgid "shell for new user"
-msgstr ""
+msgstr "περίβλημα για τον νέο χρήστη "
 
 #: apps/luseradd.c:67
 msgid "uid for new user"
-msgstr ""
+msgstr "Πληροφορίες GEGOS για τον νέο χρήστη "
 
 #: apps/luseradd.c:69
 msgid "group for new user"
-msgstr ""
+msgstr "ομάδα για τον νέο χρήστη "
 
 #: apps/luseradd.c:71
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "μην δημιουργήσετε λίστα διευθύνσεων για χρήστη "
 
 #: apps/luseradd.c:73
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "μην δημιουργείτε ομάδα με το ίδιο όνομα χρήστη "
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
-msgstr ""
+msgstr "κοινό όνομα για τον νέο χρήστη "
 
 #: apps/luseradd.c:81
 msgid "given name for new user"
-msgstr ""
+msgstr "δεδομένο όνομα για νέο χρήστη "
 
 #: apps/luseradd.c:83
 msgid "surname for new user"
-msgstr ""
+msgstr "επίθετο του νέου χρήστη "
 
 #: apps/luseradd.c:85
 msgid "room number for new user"
-msgstr ""
+msgstr "αριθμός χώρου για τον νέο χρήστη "
 
 #: apps/luseradd.c:87
 msgid "telephone number for new user"
-msgstr ""
+msgstr "αριθμός τηλεφώνου για τον νέο χρήστη "
 
 #: apps/luseradd.c:89
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "αρχική  λίστα διευθύνσεων για τον  νέο χρήστη "
 
 #: apps/luseradd.c:189
 #, c-format
@@ -669,122 +680,119 @@ msgstr "Σφάλμα στη δημιουργία %s: %s.\n"
 #, c-format
 msgid "Error creating mail spool: %s\n"
 msgstr ""
+"Σφάλμα στη δημιουργία του ταχυδρομικού νήματος: %s\n"
+"\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "μην αφαιρείτε την προσωπική ομάδα χρήστη, αν ο χρήστης έχει μία "
 
 #: apps/luserdel.c:50
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "αφαιρέστε την λίστα διευθύνσεων χρήστη "
 
 #: apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Δεν είναι δυνατή η διαγραφή του χρήστη %s: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s δεν έχει αριθμό gid.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Με υπάρχει ομάδα με GID %jd, δεν γίνεται απομάκρυνση.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Η ομάδα με GID %jd δεν έχει όνομα ομάδας.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Δεν ήταν δυνατή η διαγραφή της ομάδας %s: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "Ο %s  δεν έχει ένα αρχικό κατάλογο.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "σφάλμα διαγραφής αρχικού καταλόγου χρήστη"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Σφάλμα κατά την αφαίρεση του %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "Σφάλμα απομάκρυνσης ταχυδρομικού νήματος: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "πληροφορίες GECOS "
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "αρχική  λίστα διευθύνσεων για τον  νέο χρήστη "
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "μετακινείστε τα περιεχόμενα της λίστας σπιτιών "
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "θέστε το πλαίσιο για τον χρήστη "
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "θέστε το UID για τον χρήστη "
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "θέστε το βασικό GID του χρήστη "
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "αλλάξτε τον κωδικό εισόδπυ για τον χρήστη "
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "κωδικός κυρίως κειμένου για τον χρήστη "
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "προ-κλείδωσμα κωδικού για τον χρήστη "
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "κλείδωμα λογαριασμού "
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "ξεκλείδωμα λογαρισμού "
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "βάλτε κοινό όνομα χρήστη "
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "βάλτε συγκεκριμένο όνομα χρήστη "
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "βάλτε κύριο όνομα χρήστη "
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "βάλτε αριθμό δωματίου χρήστη "
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "βάλτε αριθμό τηλεφώνου για τον χρήστη "
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "βάλτε αριθμό τηλεφώνου για τον χρήστη "
 
 #: apps/lusermod.c:180 apps/lusermod.c:193
 #, c-format
@@ -943,7 +951,12 @@ msgstr "μη έγκυρη τιμή χαρακτηριστικού"
 msgid "invalid module combination"
 msgstr "μη έγκυρος συνδυασμό module"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "αρχική  λίστα διευθύνσεων για τον  νέο χρήστη "
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "άγνωστο σφάλμα"
 
@@ -1024,7 +1037,7 @@ msgstr "ο χρήστης %s δεν έχει UID"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "ο χρήστης %s δεν βρέθηκε "
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1034,7 +1047,7 @@ msgstr "η ομάδα %s δεν έχει GID"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "η ομάδα %s δεν βρέθηκε "
 
 #: lib/user.c:355
 #, c-format
@@ -1059,7 +1072,7 @@ msgstr "η ομάδα δεν έχει όνομα ούτε UID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Άρνησή χρίσης επικίνδυνου κατάλογου `%s 'από προεπιλογή"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Μη έγκυρη προεπιλεγμένη τιμή για το πεδίο %s: %s"
@@ -1069,22 +1082,22 @@ msgstr "Μη έγκυρη προεπιλεγμένη τιμή για το πεδ
 msgid "error locking file: %s"
 msgstr "σφάλμα κλειδώματος αρχείου %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "αδυναμία λήψης προεπιλεγμένου περιβάλλοντος ασφάλειας: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "αδυναμία λήψης περιβάλλοντος ασφάλειας του `%s': %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "αδυναμία λήψης περιβάλλοντος ασφάλειας του `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "αδυναμία καθορισμού περιβάλλοντος ασφάλειας του `%s': %s"
@@ -1375,11 +1388,11 @@ msgstr "σφάλμα αρχικοποίησης Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "σφάλμα δημιουργίας αρχικού καταλόγου χρήστη"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "σφάλμα διαγραφής αρχικού καταλόγου χρήστη"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "σφάλμα μετακίνησης αρχικού καταλόγου χρήστη"
 
@@ -1440,3 +1453,9 @@ msgstr "Λήψη προεπιλεγμένων ιδιοτήτων χρήστη:\n
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Αντιγραφή δομής χρήστη:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "Ο %s  δεν έχει ένα αρχικό κατάλογο.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Σφάλμα κατά την αφαίρεση του %s: %s.\n"

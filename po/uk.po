@@ -3,17 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003.
-# mitr <mitr@volny.cz>, 2011.
-# Yuri Chornoivan <yurchor@ukr.net>, 2011-2012.
+# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Yuri Chornoivan <yurchor@ukr.net>, 2011-2013
+# Yuri Chornoivan <yurchor@ukr.net>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 12:16+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/fedora/"
+"language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -169,9 +171,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Максимум:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Максимум:\t%ld\n"
+msgstr "Максимум:\tнемає\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -181,16 +183,16 @@ msgstr "Попередження:\t%ld\n"
 #: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Неактивних:\t%ld\n"
+msgstr "Неактивний:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Неактивних:\t%ld\n"
+msgstr "Неактивний:\tніколи\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Під час наступного входу до системи слід змінити пароль"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -690,37 +692,32 @@ msgstr "вилучити домашній каталог користувача"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Не вдалося вилучити запис користувача %s: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s не має числа gid.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Група з GID %jd не існує, її не буде вилучено.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Група з GID  %jd не мала назви.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Групу %s вилучити не вдається: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s не має домашнього каталогу.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "помилка вилучення домашнього каталогу користувача"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Помилка вилучення %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "Помилка під час спроби вилучення буфера пошти: %s"
@@ -950,7 +947,12 @@ msgstr "некоректне значення атрибута"
 msgid "invalid module combination"
 msgstr "некоректне поєднання модулів"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "домашній каталог нового користувача"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "невідома помилка"
 
@@ -1067,7 +1069,7 @@ msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Відмова від використання небезпечного типового домашнього каталогу «%s»"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Неправильне типове значення для поля %s: %s"
@@ -1077,22 +1079,22 @@ msgstr "Неправильне типове значення для поля %s:
 msgid "error locking file: %s"
 msgstr "помилка блокування файлу: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "не вдається отримати типовий контекст безпеки: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "не вдається отримати контекст безпеки для «%s»: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "не вдається задати значення типового контексту безпеки «%s»: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "не вдається визначити контекст безпеки для «%s»: %s"
@@ -1380,11 +1382,11 @@ msgstr "помилка ініціалізації Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "помилка створення домашнього каталогу користувача"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "помилка вилучення домашнього каталогу користувача"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "помилка переміщення домашнього каталогу користувача"
 
@@ -1445,3 +1447,9 @@ msgstr "Отримання стандартних атрибутів корис�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Копіювання структури користувача:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s не має домашнього каталогу.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Помилка вилучення %s: %s.\n"

@@ -3,22 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Leah Liu <lliu@redhat.com>, 2008, 2009.
-# Leah Liu <weliu@redhat.com>, 2005.
-#   <lovenemesis@gmail.com>, 2012.
-# Mike Ma <zhtx10@gmail.com>, 2011.
-# mitr <mitr@volny.cz>, 2011.
-# Sarah Wang <sarahs@redhat.com>, 2003, 2004.
-# Tommy He <lovenemesis@gmail.com>, 2012.
-# Tony Fu <tfu@redhat.com>, 2004.
+# Christopher Meng <cickumqt@gmail.com>, 2013
+# Leah Liu <lliu@redhat.com>, 2008, 2009
+# Leah Liu <weliu@redhat.com>, 2005
+# Tommy He <lovenemesis@gmail.com>, 2012
+# Mike Manilone <zhtx10@gmail.com>, 2011
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Sarah Wang <sarahs@redhat.com>, 2003, 2004
+# Tommy He <lovenemesis@gmail.com>, 2012
+# Tony Fu <tfu@redhat.com>, 2004
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-12-18 08:41+0000\n"
-"Last-Translator: Tommy He <lovenemesis@gmail.com>\n"
-"Language-Team: Chinese (China) <trans-zh_cn@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-09-22 11:49+0000\n"
+"Last-Translator: Christopher Meng <cickumqt@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/fedora/"
+"language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -169,9 +171,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "至多:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "至多:\t%ld\n"
+msgstr "至多：\t无\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -184,13 +186,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "不活跃：\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "不活跃：\t%ld\n"
+msgstr "不活跃：\t从不\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "强制在下次登录时修改密码"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -684,37 +686,32 @@ msgstr "移除用户主文件夹"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "用户 %s 无法被删除：%s。\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s 没有 gid 号码。\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "GID 号码为 %jd 的组群不存在，无法删除。\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID 号码为 %jd 的组群没有组群名。\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "组群 %s 无法被删除：%s。\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s 没有主目录。\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "删除用户的主目录时出错"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "删除 %s 时出错：%s。\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "删除邮件池时出错: %s"
@@ -944,7 +941,12 @@ msgstr "无效属性值"
 msgid "invalid module combination"
 msgstr "无效模块组合"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "新用户的主文件夹"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "未知错误"
 
@@ -1060,7 +1062,7 @@ msgstr "组 %s 没有名字也没有 UID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "默认拒绝使用危险主目录 `%s'"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "无效默认值%s: %s"
@@ -1070,22 +1072,22 @@ msgstr "无效默认值%s: %s"
 msgid "error locking file: %s"
 msgstr "锁文件时出错：%s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "无法获取默认的安全内容：%s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "无法得到 `%s': %s的安全上下文"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "无法为`%s': %s 设置默认的上下文"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "无法为 `%s': %s 决定安全内容"
@@ -1373,11 +1375,11 @@ msgstr "初始化 Cyrus SASL 时出错：%s"
 msgid "error creating home directory for user"
 msgstr "为用户创建主目录时出错"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "删除用户的主目录时出错"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "移动用户的主目录时出错"
 
@@ -1438,3 +1440,9 @@ msgstr "正在获取默认的用户属性：\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "正在复制用户结构：\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s 没有主目录。\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "删除 %s 时出错：%s。\n"

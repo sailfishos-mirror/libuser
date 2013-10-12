@@ -3,17 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# mitr <mitr@volny.cz>, 2011.
-# Translation by Owain Green <owaing@oceanfree.net>, 2004.
-# Updated by Rhys Jones <rhys@sgwarnog.com>, 2005.
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Translation by Owain Green <owaing@oceanfree.net>, 2004
+# Updated by Rhys Jones <rhys@sgwarnog.com>, 2005
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Welsh (http://www.transifex.com/projects/p/fedora/language/"
+"cy/)\n"
 "Language: cy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,9 +166,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Uchafswm:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Uchafswm:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -180,9 +181,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "Anweithredol:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Anweithredol:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -681,37 +682,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Nid oedd modd dileu'r defnyddiwr %s: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "Nid oedd rhif gid gyda %s.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Nid oes grŵp â'r GID %jd yn bodoli, felly gwaredir e ddim.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Doedd gan y grŵp â'r GID %jd ddim enw.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Nid oedd modd dileu'r grŵp %s: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "Nid oedd gan %s gyfeiriadur cartref.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "gwall wrth waredu cyfeiriadur cartref ar gyfer y defnyddiwr"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Gwall wrth waredu %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -941,7 +937,11 @@ msgstr ""
 msgid "invalid module combination"
 msgstr ""
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "gwall anhysbys"
 
@@ -1057,7 +1057,7 @@ msgstr "Nid oes enw neu GID gan grŵp %jd"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Annilys yw'r gwerth rhagosodiedig o maes %s: %s"
@@ -1067,22 +1067,22 @@ msgstr "Annilys yw'r gwerth rhagosodiedig o maes %s: %s"
 msgid "error locking file: %s"
 msgstr "gwall wrth gloi ffeil: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "methwyd cael cyd-destun diogelwch `%s': %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "methwyd gosod y cyd-destun diogelwch rhagosodedig i `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1372,11 +1372,11 @@ msgstr "gwall wrth ymgychwyn SASL Cyrus: %s"
 msgid "error creating home directory for user"
 msgstr "gwall wrth greu cyfeiriadur cartref ar gyfer y defnyddiwr"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "gwall wrth waredu cyfeiriadur cartref ar gyfer y defnyddiwr"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "gwall wrth symud cyfeiriadur cartref ar gyfer y defnyddiwr"
 
@@ -1437,3 +1437,9 @@ msgstr "Yn nôl priodoleddau defnyddiwr rhagosodedig:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Yn copïo strwythur defnyddiwr:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "Nid oedd gan %s gyfeiriadur cartref.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Gwall wrth waredu %s: %s.\n"

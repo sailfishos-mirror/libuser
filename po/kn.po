@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# mitr <mitr@volny.cz>, 2011.
-#   <prasad.mvs@gmail.com>, 2012.
-# Shankar Prasad <svenkate@redhat.com>, 2007, 2008, 2009.
-# shanky <prasad.mvs@gmail.com>, 2011.
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# shanky <prasad.mvs@gmail.com>, 2012
+# shankar <svenkate@redhat.com>, 2007, 2008, 2009
+# shanky <prasad.mvs@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Kannada (http://www.transifex.com/projects/p/fedora/language/"
 "kn/)\n"
@@ -166,9 +166,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "ಗರಿಷ್ಟ:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "ಗರಿಷ್ಟ:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -181,9 +181,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "ನಿಷ್ಕ್ರಿಯ:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "ನಿಷ್ಕ್ರಿಯ:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -683,37 +683,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "ಬಳಕೆದಾರ %s ನನ್ನು ಅಳಿಸಿಹಾಕಲಾಗಲಿಲ್ಲ: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s ವು ಒಂದು gid ಸಂಖ್ಯೆಯನ್ನು ಹೊಂದಿಲ್ಲ.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "GID %jd ಹೊಂದಿರುವ ಒಂದು ಸಮೂಹ ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ, ತೆಗೆಯಲಾಗುತ್ತಿಲ್ಲ.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd ಹೊಂದಿರುವ ಸಮೂಹಕ್ಕೆ ಒಂದು ಸಮೂಹದ ಹೆಸರನ್ನು ಹೊಂದಿಲ್ಲ.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "ಸಮೂಹ %s ಅನ್ನು ಅಳಿಸಲಾಗುವುದಿಲ್ಲ: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s ವು ಒಂದು ನೆಲೆ ಕಡತ ಕೋಶವನ್ನು ಹೊಂದಿಲ್ಲ.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "ಬಳಕೆದಾರರಿಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ತೆಗೆದು ಹಾಕುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "%s ಅನ್ನು ತೆಗೆಯುವಲ್ಲಿ ದೋಷ: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -943,7 +938,11 @@ msgstr "ಅಮಾನ್ಯವಾದ ಗುಣವಿಶೇಷ ಮೌಲ್ಯ"
 msgid "invalid module combination"
 msgstr "ಅಮಾನ್ಯವಾದ ಮಾಡ್ಯೂಲ್ ಸಂಯೋಜನೆ"
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "ಅಜ್ಞಾತ ದೋಷ"
 
@@ -1059,7 +1058,7 @@ msgstr "ಸಮೂಹವು ಒಂದು ಹೆಸರು ಅಥವ ಒಂದು G
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಅಪಾಯಕಾರಿ ನೆಲೆ ಕಡತಕೋಶ `%s' ಅನ್ನು ಬಳಸಲು ನಿರಾಕರಿಸಲಾಗುತ್ತಿದೆ"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ಕ್ಷೇತ್ರದ ಡೀಫಾಲ್ಟ್‍  ಮೌಲ್ಯವು ಅಮಾನ್ಯವಾಗಿದೆ: %s"
@@ -1069,22 +1068,22 @@ msgstr "%s ಕ್ಷೇತ್ರದ ಡೀಫಾಲ್ಟ್‍  ಮೌಲ್ಯ
 msgid "error locking file: %s"
 msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "ಡೀಫಾಲ್ಟ್‍  ಸುರಕ್ಷತಾ ಸನ್ನಿವೇಶವನ್ನು ಪಡೆಯಲಾಗಲಿಲ್ಲ: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' ನ ಡೀಫಾಲ್ಟ್‍  ಸುರಕ್ಷತಾ ಸನ್ನಿವೇಶವನ್ನು ಪಡೆಯಲಾಗಲಿಲ್ಲ:: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "ಡೀಫಾಲ್ಟ್‍  ಸುರಕ್ಷತಾ ಸನ್ನಿವೇಶವನ್ನು `%s' ಕ್ಕೆ ಹೊಂದಿಸಲಾಗಲಿಲ್ಲ: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ಕ್ಕೆ ಸುರಕ್ಷತಾ ಸನ್ನಿವೇಶವನ್ನು ನಿರ್ಧರಿಸಲಾಗಲಿಲ್ಲ: %s"
@@ -1374,11 +1373,11 @@ msgstr "Cyrus SASL ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋ�
 msgid "error creating home directory for user"
 msgstr "ಬಳಕೆದಾರರಿಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "ಬಳಕೆದಾರರಿಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ತೆಗೆದು ಹಾಕುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "ಬಳಕೆದಾರರಿಗಾಗಿ ನೆಲೆ ಕಡತಕೋಶವನ್ನು ಸ್ಥಳಾಂತರಿಸುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ"
 
@@ -1439,3 +1438,9 @@ msgstr "ಡೀಫಾಲ್ಟ್‍  ಬಳಕೆದಾರ ವೈಶಿಷ್ಟ
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ಬಳಕೆದಾರ ರಚನೆಯನ್ನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s ವು ಒಂದು ನೆಲೆ ಕಡತ ಕೋಶವನ್ನು ಹೊಂದಿಲ್ಲ.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "%s ಅನ್ನು ತೆಗೆಯುವಲ್ಲಿ ದೋಷ: %s.\n"

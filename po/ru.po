@@ -3,24 +3,26 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Andrew Martynov <andrewm@inventa.ru>, 2004, 2005, 2006, 2007.
-#   <iya777@yandex.ru>, 2012.
-# Leonid Kanter <leon@geon.donetsk.ua>, 2003.
-# Misha Shnurapet <shnurapet@fedoraproject.org>, 2011.
-# mitr <mitr@volny.cz>, 2011.
-# Nikolay Sivov <bunglehead@gmail.com>, 2007.
-# Stanislav Darchinov <darchinov@gmail.com>, 2011.
-# Yulia <ypoyarko@redhat.com>, 2008, 2009.
-# Yulia  <yulia.poyarkova@redhat.com>, 2012.
-# Леонид Кузин <dg.inc.lcf@gmail.com>, 2012.
+# Andrew Martynov <andrewm@inventa.ru>, 2004, 2005, 2006, 2007
+# triplepointfive <iya777@yandex.ru>, 2012
+# Leonid Kanter <leon@geon.donetsk.ua>, 2003
+# Misha Shnurapet <shnurapet@fedoraproject.org>, 2011
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Nikolay Sivov <bunglehead@gmail.com>, 2007
+# Stanislav Darchinov <darchinov@gmail.com>, 2011
+# Yulia <ypoyarko@redhat.com>, 2008, 2009
+# Yulia <yulia.poyarkova@redhat.com>, 2012
+# Игорь Горбунов <igor.gorbounov@gmail.com>, 2013
+# Леонид Кузин <dg.inc.lcf@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Russian <trans-ru@lists.fedoraproject.org>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/fedora/language/"
+"ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,9 +178,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Максимум:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Максимум:\t%ld\n"
+msgstr "Максимум:\tнет\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -191,13 +193,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "Неактивных:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Неактивных:\t%ld\n"
+msgstr "Неактивных:\tНикогда\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Должен сменить пароль при следующем входе"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -522,7 +524,7 @@ msgstr "Ошибка создания домашнего каталога для
 #: apps/lnewusers.c:270
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "Ошибка создания почтовой очереди для %s: %s\n"
 
 #: apps/lnewusers.c:285
 #, c-format
@@ -682,7 +684,7 @@ msgstr "Ошибка создания %s: %s.\n"
 #: apps/luseradd.c:290
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "Ошибка создания почтовой очереди: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
@@ -697,40 +699,35 @@ msgstr "удалить домашний каталог пользователя"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "Пользователь %s не может быть удален: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s не имеет уровня gid.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "Не существует группы с GID %jd, не удаляется.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "Группа c GID %jd не имела имени.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "Группа %s не может быть удалена: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s не имеет домашнего каталога.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "ошибка удаления домашнего каталога для пользователя"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "Ошибка удаления %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "Ошибка при удалении почтовой очереди: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
@@ -957,7 +954,12 @@ msgstr "неверное значение аттрибута"
 msgid "invalid module combination"
 msgstr "неверный состав модуля"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "домашний каталог для нового пользователя"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "неизвестная ошибка"
 
@@ -1038,7 +1040,7 @@ msgstr "пользователь %s не имеет UID"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "пользователь %s не найден"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1048,7 +1050,7 @@ msgstr "группа %s не имеет GID"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "группа %s не найдена"
 
 #: lib/user.c:355
 #, c-format
@@ -1073,7 +1075,7 @@ msgstr "группа не имеет имени и кода UID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "Отказ использования небезопасного домашнего каталога «%s» по умолчанию"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "Неверное значение по умолчанию для поля %s: %s"
@@ -1083,23 +1085,23 @@ msgstr "Неверное значение по умолчанию для пол�
 msgid "error locking file: %s"
 msgstr "ошибка блокировки файла: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "невозможно получить контекст безопасности по умолчанию: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "невозможно получить контекст безопасности для `%s': %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 "невозможно задать значение контекста безопасности по умолчанию `%s': %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "невозможно определить контекст безопасности для `%s': %s"
@@ -1134,7 +1136,7 @@ msgstr "резервный файл `%s' существует и не являе
 #: modules/files.c:171
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Ошибка смены владельца `%s': %s"
+msgstr "Ошибка при смене владельца «%s»: %s"
 
 #: modules/files.c:177
 #, c-format
@@ -1149,7 +1151,7 @@ msgstr "Ошибка чтения `%s': %s"
 #: modules/files.c:208 modules/files.c:223
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr "Ошибка записи `%s': %s"
+msgstr "Ошибка при записи «%s»: %s"
 
 #: modules/files.c:239
 msgid "backup file size mismatch"
@@ -1387,11 +1389,11 @@ msgstr "ошибка инициализации Cyrus SASL: %s"
 msgid "error creating home directory for user"
 msgstr "ошибка создания домашнего каталога для пользователя"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "ошибка удаления домашнего каталога для пользователя"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "ошибка перемещения домашнего каталога для пользователя"
 
@@ -1452,3 +1454,9 @@ msgstr "Получение стандартных атрибутов польз�
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "Копирование структуры пользователя:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s не имеет домашнего каталога.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "Ошибка удаления %s: %s.\n"

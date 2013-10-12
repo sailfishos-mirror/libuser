@@ -3,18 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Bernabé Borrero <bernabeborrero@gmail.com>, 2012.
-# Isabel Cama <c.gomez.febrel@terra.es>, 2004.
-# mitr <mitr@volny.cz>, 2011.
-# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004.
+# Bernabé Borrero <bernabeborrero@gmail.com>, 2012
+# Isabel Cama <c.gomez.febrel@terra.es>, 2004
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Xavier Conde Rueda <xavi.conde@gmail.com>, 2004
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Catalan <fedora@llistes.softcatala.org>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/fedora/language/"
+"ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,9 +166,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "Màxim:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "Màxim:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -180,9 +181,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "Inactiu:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "Inactiu:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -688,37 +689,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "L'usuari %s no s'ha pogut suprimir: %s.\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "A %s li falta el nombre de gid.\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "No existeix cap grup amb el gid %jd. No se suprimirà.\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "El grup amb el GID %jd no tenia un nom de grup.\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "No s'ha pogut suprimir el grup %s: %s.\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s no té un directori personal.\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "s'ha produït un error en eliminar el directori personal per a l'usuari"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "S'ha produït un error en eliminar %s: %s.\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -948,7 +944,11 @@ msgstr "valor d'atribut invàlid"
 msgid "invalid module combination"
 msgstr "combinació de mòdul invàlida"
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "error desconegut"
 
@@ -1065,7 +1065,7 @@ msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 "Es refusa la utilització per defecte del directori perillós d'inici «%s»"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "El valor per defecte del camp %s no és vàlid: %s"
@@ -1075,23 +1075,23 @@ msgstr "El valor per defecte del camp %s no és vàlid: %s"
 msgid "error locking file: %s"
 msgstr "s'ha produït un error en bloquejar el fitxer: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "no s'ha pogut obtenir el context de seguretat predeterminat: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "no s'ha pogut obtenir el context de seguretat de «%s»: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 "no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "no s'ha pogut determinar el context de seguretat per a «%s»: %s"
@@ -1386,11 +1386,11 @@ msgstr "s'ha produït un error en inicialitzar el SASL del Cyrus: %s"
 msgid "error creating home directory for user"
 msgstr "s'ha produït un error en crear el directori personal per a l'usuari"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "s'ha produït un error en eliminar el directori personal per a l'usuari"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "s'ha produït un error en moure el directori personal per a l'usuari"
 
@@ -1451,3 +1451,9 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s no té un directori personal.\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "S'ha produït un error en eliminar %s: %s.\n"

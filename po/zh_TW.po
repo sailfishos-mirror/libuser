@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Ben Wu <hpwu@redhat.com>, 2002.
-# Cheng-Chia Tseng <pswo10680@gmail.com>, 2011-2012.
-# Chester Cheng <ccheng@redhat.com>, 2004-2006.
-# mitr <mitr@volny.cz>, 2011.
-# Terry Chuang <tchuang@redhat.com>, 2008-2009.
-# Waika Liu <wliu@redhat.com>, 2005.
+# Ben Wu <hpwu@redhat.com>, 2002
+# Cheng-Chia Tseng <pswo10680@gmail.com>, 2011-2012
+# Chester Cheng <ccheng@redhat.com>, 2004-2006
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Terry Chuang <tchuang@redhat.com>, 2008-2009
+# Waika Liu <wliu@redhat.com>, 2005
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-12-16 08:40+0000\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) <trans-zh_TW@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/fedora/"
+"language/zh_TW/)\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr ""
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "無法卸下權限。\n"
+msgstr "無法卸下特權。\n"
 
 #: apps/apputil.c:210
 #, c-format
@@ -55,7 +56,7 @@ msgstr "初始化 PAM 時發生錯誤。\n"
 #: apps/apputil.c:260 apps/apputil.c:287
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr "為 %s 認證失敗。\n"
+msgstr "%s 認證時失敗。\n"
 
 #: apps/apputil.c:268
 #, c-format
@@ -65,7 +66,7 @@ msgstr "內部 PAM 錯誤「%s」。\n"
 #: apps/apputil.c:273
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "不明的使用者認證。\n"
+msgstr "不明的使用者通過身份認證。\n"
 
 #: apps/apputil.c:277
 #, c-format
@@ -80,7 +81,7 @@ msgstr "提示請求所有資訊"
 
 #: apps/lchage.c:86
 msgid "list aging parameters for the user"
-msgstr "列出使用者的老化參數"
+msgstr "列出使用者的過時參數"
 
 #: apps/lchage.c:88
 msgid "minimum days between password changes"
@@ -103,7 +104,7 @@ msgstr "上次密碼更動的日期，日子是從 1/1/70 算起"
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
-msgstr "當帳號在密碼過期日後幾天才被視為失效"
+msgstr "當帳號在密碼過期日後多少天才被視為失效"
 
 #: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
@@ -167,9 +168,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "最大值：\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "最大值：\t%ld\n"
+msgstr "最大值：\t無\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -182,17 +183,17 @@ msgid "Inactive:\t%ld\n"
 msgstr "失效：\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "失效：\t%ld\n"
+msgstr "失效：\t永不\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "下次登入時必須更改密碼"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
-msgstr "從不"
+msgstr "永不"
 
 #: apps/lchage.c:191
 #, c-format
@@ -217,7 +218,7 @@ msgstr "帳號過期：\t%s\n"
 #: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "修改 %s 的老舊資訊失敗：%s\n"
+msgstr "修改 %s 的過時資訊時失敗：%s\n"
 
 #: apps/lchfn.c:67 apps/lchsh.c:55
 msgid "[OPTION...] [user]"
@@ -231,7 +232,7 @@ msgstr "沒有指定使用者名稱，uid %d 沒有名稱。\n"
 #: apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "修改  %s 的 finger 資訊。\n"
+msgstr "修改 %s 的 finger 資訊。\n"
 
 #: apps/lchfn.c:136
 msgid "Full Name"
@@ -239,11 +240,11 @@ msgstr "全名"
 
 #: apps/lchfn.c:146
 msgid "Surname"
-msgstr "姓"
+msgstr "姓氏"
 
 #: apps/lchfn.c:157
 msgid "Given Name"
-msgstr "名"
+msgstr "名字"
 
 #: apps/lchfn.c:167
 msgid "Office"
@@ -295,7 +296,7 @@ msgstr "shell 已變更。\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr "新群組的 gid"
+msgstr "新群組的 GID"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
@@ -342,7 +343,7 @@ msgstr "設定群組的 GID"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr "變更群組以擁有名"
+msgstr "變更群組以擁有名字"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
@@ -415,7 +416,7 @@ msgstr "%s 群組無法被解除鎖定：%s\n"
 #: apps/lgroupmod.c:242 apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr "%s 群組無法被修改：%s\n"
+msgstr "%s 群組無法修改：%s\n"
 
 #: apps/lid.c:42 apps/lid.c:74 apps/lid.c:188
 #, c-format
@@ -435,17 +436,17 @@ msgstr "僅依名稱列出成員資訊，而不是 UID/GID"
 #: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "沒有指定群組名稱，使用 %s。\n"
+msgstr "沒有指定群組名稱，所以使用 %s。\n"
 
 #: apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "沒有指定群組名稱，gid %d 沒有指定名稱。\n"
+msgstr "沒有指定群組名稱，GID %d 沒有指定名稱。\n"
 
 #: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "沒有指定使用者名稱，使用 %s。\n"
+msgstr "沒有指定使用者名稱，所以使用 %s。\n"
 
 #: apps/lid.c:192
 #, c-format
@@ -499,7 +500,7 @@ msgstr "為「%s」建立群組時 (使用 GID %jd) 發生錯誤：%s\n"
 #: apps/lnewusers.c:246
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
-msgstr "預設狀況下為 %s 拒絕使用危險的「%s」家目錄\n"
+msgstr "預設狀況下拒絕為 %2$s 使用危險的「%1$s」家目錄\n"
 
 #: apps/lnewusers.c:257
 #, c-format
@@ -514,7 +515,7 @@ msgstr "為 %s 建立郵件池時發生錯誤：%s\n"
 #: apps/lnewusers.c:285
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "設定初始密碼給 %s 時發生錯誤：%s\n"
+msgstr "為 %s 設定初始密碼時發生錯誤：%s\n"
 
 #: apps/lnewusers.c:295
 #, c-format
@@ -535,11 +536,11 @@ msgstr "新的加密密碼"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr "從給定的描述符讀取新的明文密碼"
+msgstr "從給定的描述元讀取新的明文密碼"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr "從給定的描述符讀取新的加密密碼"
+msgstr "從給定的描述元讀取新的加密密碼"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -567,17 +568,17 @@ msgstr "取消密碼變更。\n"
 #: apps/lpasswd.c:165 apps/lpasswd.c:182
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
-msgstr "從檔案描述符 %d 讀取時發生錯誤。\n"
+msgstr "從檔案描述元 %d 讀取時發生錯誤。\n"
 
 #: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "為 %s 使用者設定密碼發生錯誤：%s。\n"
+msgstr "為使用者 %s 設定密碼發生錯誤：%s。\n"
 
 #: apps/lpasswd.c:212
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "設定密碼給 %s 群組發生錯誤：%s。\n"
+msgstr "為群組 %s 設定密碼時發生錯誤：%s。\n"
 
 #: apps/lpasswd.c:224
 #, c-format
@@ -598,7 +599,7 @@ msgstr "新使用者的家目錄"
 
 #: apps/luseradd.c:63
 msgid "directory with files for the new user"
-msgstr "新使用者含檔案的家目錄"
+msgstr "新使用者的含檔案家目錄"
 
 #: apps/luseradd.c:65
 msgid "shell for new user"
@@ -606,7 +607,7 @@ msgstr "新使用者的 shell"
 
 #: apps/luseradd.c:67
 msgid "uid for new user"
-msgstr "新使用者的 uid"
+msgstr "新使用者的 UID"
 
 #: apps/luseradd.c:69
 msgid "group for new user"
@@ -618,7 +619,7 @@ msgstr "不要為使用者建立家目錄"
 
 #: apps/luseradd.c:73
 msgid "don't create group with same name as user"
-msgstr "不要以與使用者相同的名稱建立群組"
+msgstr "不要用與使用者相同的名稱建立群組"
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
@@ -626,11 +627,11 @@ msgstr "新使用者的通用名稱"
 
 #: apps/luseradd.c:81
 msgid "given name for new user"
-msgstr "新使用者的名"
+msgstr "新使用者的名字"
 
 #: apps/luseradd.c:83
 msgid "surname for new user"
-msgstr "新使用者的姓"
+msgstr "新使用者的姓氏"
 
 #: apps/luseradd.c:85
 msgid "room number for new user"
@@ -671,7 +672,7 @@ msgstr "建立郵件池時發生錯誤：%s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
-msgstr "不要移除使用者的私人群組，如果使用者有的話"
+msgstr "不要移除使用者的私人群組，如果使用者擁有的話"
 
 #: apps/luserdel.c:50
 msgid "remove the user's home directory"
@@ -682,37 +683,32 @@ msgstr "移除使用者的家目錄"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "無法刪除 %s 使用者：%s。\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s 沒有群組 ID (gid) 號碼。\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "GID %jd 的群組不存在，無法移除。\n"
+msgstr "GID %jd 的群組不存在，所以無法移除。\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd 的群組沒有群組名稱。\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "無法刪除 %s 群組：%s。\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s 沒有家目錄。\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "為使用者移除家目錄時發生錯誤"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "移除 %s 時發生錯誤：%s。\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "移除郵件池時發生錯誤：%s"
@@ -767,11 +763,11 @@ msgstr "設定使用者的通用名稱"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr "設定使用者的名"
+msgstr "設定使用者的名字"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr "設定使用者的姓"
+msgstr "設定使用者的姓氏"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
@@ -793,12 +789,12 @@ msgstr "為 %s 使用者設定密碼失敗：%s。\n"
 #: apps/lusermod.c:203
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr "%s 使用者無法被鎖定：%s。\n"
+msgstr "無法鎖定 %s 使用者：%s。\n"
 
 #: apps/lusermod.c:211
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr "%s 使用者無法被解除鎖定：%s。\n"
+msgstr "無法被解除 %s 使用者的鎖定：%s。\n"
 
 #: apps/lusermod.c:232
 #, c-format
@@ -808,12 +804,12 @@ msgstr "警告：ID 為 %jd 的群組不存在。\n"
 #: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr "%s 使用者無法被修改：%s。\n"
+msgstr "無法修改 %s 使用者：%s。\n"
 
 #: apps/lusermod.c:326
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr "%s 群組無法被修改：%s。\n"
+msgstr "無法修改 %s 群組：%s。\n"
 
 #: apps/lusermod.c:342
 #, c-format
@@ -828,7 +824,7 @@ msgstr "%s 沒有新的家目錄。\n"
 #: apps/lusermod.c:353
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr "移動 %s 至 %s 時發生錯誤：%s。\n"
+msgstr "將 %s 移動至 %s 時發生錯誤：%s。\n"
 
 #: lib/config.c:128
 #, c-format
@@ -838,12 +834,12 @@ msgstr "無法開啟組態檔「%s」：%s"
 #: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "無法取得組態檔「%s」的統計資料：%s"
+msgstr "無法取得組態檔「%s」的狀態：%s"
 
 #: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr "設定檔「%s」過大"
+msgstr "組態檔「%s」過大"
 
 #: lib/config.c:159
 #, c-format
@@ -856,7 +852,7 @@ msgstr "成功"
 
 #: lib/error.c:64
 msgid "module disabled by configuration"
-msgstr "模組被組態停用"
+msgstr "模組已由組態停用"
 
 #: lib/error.c:66
 msgid "generic error"
@@ -876,11 +872,11 @@ msgstr "不當的使用者/群組名稱"
 
 #: lib/error.c:74
 msgid "bad user/group id"
-msgstr "不當的 使用者/群組 ID"
+msgstr "不當的使用者/群組 ID"
 
 #: lib/error.c:76
 msgid "user/group name in use"
-msgstr "使用者/群組 名稱已被使用"
+msgstr "使用者/群組名稱已被使用"
 
 #: lib/error.c:78
 msgid "user/group id in use"
@@ -888,27 +884,27 @@ msgstr "使用者/群組 ID 已被使用"
 
 #: lib/error.c:80
 msgid "error manipulating terminal attributes"
-msgstr "處理終端機屬性發生錯誤"
+msgstr "處理終端機特性時發生錯誤"
 
 #: lib/error.c:82
 msgid "error opening file"
-msgstr "開啟檔案錯誤"
+msgstr "開啟檔案時發生錯誤"
 
 #: lib/error.c:84
 msgid "error locking file"
-msgstr "鎖定檔案錯誤"
+msgstr "鎖定檔案時發生錯誤"
 
 #: lib/error.c:86
 msgid "error statting file"
-msgstr "取得檔案統計資料發生錯誤"
+msgstr "取得檔案狀態時發生錯誤"
 
 #: lib/error.c:88
 msgid "error reading file"
-msgstr "讀取檔案錯誤"
+msgstr "讀取檔案時發生錯誤"
 
 #: lib/error.c:90
 msgid "error writing to file"
-msgstr "寫入檔案錯誤"
+msgstr "寫入檔案時發生錯誤"
 
 #: lib/error.c:92
 msgid "data not found in file"
@@ -920,15 +916,15 @@ msgstr "內部初始化錯誤"
 
 #: lib/error.c:96
 msgid "error loading module"
-msgstr "載入模組錯誤"
+msgstr "載入模組時發生錯誤"
 
 #: lib/error.c:98
 msgid "error resolving symbol in module"
-msgstr "解析模組裡的符號錯誤"
+msgstr "解析模組裡的符號時發生錯誤"
 
 #: lib/error.c:100
 msgid "library/module version mismatch"
-msgstr "函式庫/模組 版本不符"
+msgstr "函式庫/模組版本不符"
 
 #: lib/error.c:102
 msgid "unlocking would make the password field empty"
@@ -936,13 +932,18 @@ msgstr "解鎖會讓密碼欄成為空白"
 
 #: lib/error.c:105
 msgid "invalid attribute value"
-msgstr "無效的屬性值"
+msgstr "無效的特性值"
 
 #: lib/error.c:107
 msgid "invalid module combination"
 msgstr "無效的模組組合"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "新使用者的家目錄"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "不明錯誤"
 
@@ -957,12 +958,12 @@ msgstr "無效的 ID"
 #: lib/modules.c:61
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "無初始函式 %s 於「%s」內"
+msgstr "「%2$s」內無初始函式 %1$s 於"
 
 #: lib/modules.c:79
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "「%s」的模組版本不符"
+msgstr "「%s」中模組版本不符"
 
 #: lib/modules.c:92
 #, c-format
@@ -971,15 +972,15 @@ msgstr "模組「%s」未定義「%s」"
 
 #: lib/prompt.c:88
 msgid "error reading terminal attributes"
-msgstr "終端機屬性讀取錯誤"
+msgstr "讀取終端機特性時發生錯誤"
 
 #: lib/prompt.c:95 lib/prompt.c:107
 msgid "error setting terminal attributes"
-msgstr "終端機屬性設定錯誤"
+msgstr "設定終端機特性時發生錯誤"
 
 #: lib/prompt.c:101
 msgid "error reading from terminal"
-msgstr "終端機讀取錯誤"
+msgstr "從終端機讀取時發生錯誤"
 
 #: lib/user.c:218
 msgid "name is not set"
@@ -987,7 +988,7 @@ msgstr "名稱尚未設定"
 
 #: lib/user.c:223
 msgid "name is too short"
-msgstr "名稱太短"
+msgstr "名稱過短"
 
 #: lib/user.c:228
 #, c-format
@@ -1008,7 +1009,7 @@ msgstr "名稱包含空白"
 
 #: lib/user.c:261
 msgid "name starts with a hyphen"
-msgstr "名稱以連字號開始"
+msgstr "名稱以連字號開頭"
 
 #: lib/user.c:272
 #, c-format
@@ -1033,7 +1034,7 @@ msgstr "群組 %s 沒有 GID"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr "找不到群組 %s"
+msgstr "找不到 %s 群組"
 
 #: lib/user.c:355
 #, c-format
@@ -1058,7 +1059,7 @@ msgstr "群組沒有名稱也沒有 GID"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "預設情況下拒絕使用危險的「%s」家目錄"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "欄位 %s 的預設值無效：%s"
@@ -1068,25 +1069,25 @@ msgstr "欄位 %s 的預設值無效：%s"
 msgid "error locking file: %s"
 msgstr "鎖定檔案時發生錯誤：%s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "無法取得預設的安全情境：%s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "無法獲得「%s」的安全情境：%s"
+msgstr "無法取得「%s」的安全情境：%s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "無將預設安全情境設為「%s」：%s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "無法判斷「%s」的安全情境：%s"
+msgstr "無法判定「%s」的安全情境：%s"
 
 #: modules/files.c:123 modules/files.c:453 modules/files.c:765
 #: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
@@ -1103,7 +1104,7 @@ msgstr "無法開啟「%s」：%s"
 #: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "無法取得「%s」統計資料：%s"
+msgstr "無法取得「%s」的狀態：%s"
 
 #: modules/files.c:146
 #, c-format
@@ -1113,7 +1114,7 @@ msgstr "建立「%s」時發生錯誤：%s"
 #: modules/files.c:159
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr "備份檔「%s」已存在且非通常檔案"
+msgstr "備份檔「%s」已存在且非一般檔案"
 
 #: modules/files.c:171
 #, c-format
@@ -1128,12 +1129,12 @@ msgstr "變更「%s」的模式時發生錯誤：%s"
 #: modules/files.c:193
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "讀取「%s」發生錯誤：%s"
+msgstr "讀取「%s」時發生錯誤：%s"
 
 #: modules/files.c:208 modules/files.c:223
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr "寫入「%s」發生錯誤：%s"
+msgstr "寫入「%s」時發生錯誤：%s"
 
 #: modules/files.c:239
 msgid "backup file size mismatch"
@@ -1142,7 +1143,7 @@ msgstr "備份檔案的大小不符"
 #: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s 值「%s」：「:」不被允許"
+msgstr "%s 值「%s」：不允許有「:」"
 
 #: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
 #, c-format
@@ -1162,7 +1163,7 @@ msgstr "無法寫入「%s」：%s"
 #: modules/files.c:969
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "實體物件沒有 %s 屬性"
+msgstr "實體物件沒有 %s 特性"
 
 #: modules/files.c:1030
 msgid "entry with conflicting name already present in file"
@@ -1174,7 +1175,7 @@ msgstr "加密的密碼中不允許使用「:」"
 
 #: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
-msgstr "編碼密碼時發生錯誤"
+msgstr "加密密碼時發生錯誤"
 
 #: modules/files.c:2475 modules/ldap.c:2410
 #, c-format
@@ -1183,11 +1184,11 @@ msgstr "無法組合「%s」與「%s」模組"
 
 #: modules/files.c:2559 modules/files.c:2637
 msgid "not executing with superuser privileges"
-msgstr "非以超級使用者的權力執行中"
+msgstr "非以超級使用者的特權執行中"
 
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
-msgstr "找不到 shadow 檔案 -- 停用中"
+msgstr "shadow 檔案不存在 -- 停用中"
 
 #: modules/krb5.c:100
 #, c-format
@@ -1208,17 +1209,17 @@ msgstr "為 kerberos 解析使用者名稱「%s」時發生錯誤"
 #: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr "實體結構沒有 %s 或 %s 的屬性"
+msgstr "實體結構沒有 %s 或 %s 特性"
 
 #: modules/krb5.c:307
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr "實體沒有 %s 或 %s 的屬性"
+msgstr "實體沒有 %s 或 %s 特性"
 
 #: modules/krb5.c:320
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr "被建立的實體沒有 %s 或 %s 的屬性"
+msgstr "建立的實體沒有 %s 或 %s 特性"
 
 #: modules/krb5.c:471 modules/krb5.c:559
 #, c-format
@@ -1228,7 +1229,7 @@ msgstr "從 kerberos 讀取「%s」的資訊時發生錯誤"
 #: modules/krb5.c:600
 #, c-format
 msgid "entity has no %s attribute"
-msgstr "實體沒有 %s 屬性"
+msgstr "實體沒有 %s 特性"
 
 #: modules/krb5.c:638
 #, c-format
@@ -1254,7 +1255,7 @@ msgstr "初始化 ldap 函式庫時發生錯誤"
 #: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr "無法設定 LDAP 通訊協定為 %d 版"
+msgstr "無法將 LDAP 通訊協定設定為 %d 版"
 
 #: modules/ldap.c:229
 msgid "could not negotiate TLS with LDAP server"
@@ -1272,7 +1273,7 @@ msgstr "第一次以「%s」嘗試時，無法連接綁定至 LDAP 伺服器：%
 #: modules/ldap.c:1315
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "使用者物件沒有 %s 屬性"
+msgstr "使用者物件沒有 %s 特性"
 
 #: modules/ldap.c:1324
 #, c-format
@@ -1297,7 +1298,7 @@ msgstr "為 LDAP 目錄條目重新命名時發生錯誤：%s"
 #: modules/ldap.c:1440
 #, c-format
 msgid "object had no %s attribute"
-msgstr "物件沒有 %s 屬性"
+msgstr "物件沒有 %s 特性"
 
 #: modules/ldap.c:1456
 #, c-format
@@ -1308,25 +1309,25 @@ msgstr "移除 LDAP 目錄條目時發生錯誤：%s"
 #: modules/ldap.c:1730
 #, c-format
 msgid "object has no %s attribute"
-msgstr "物件沒有 %s 屬性"
+msgstr "物件沒有 %s 特性"
 
 #: modules/ldap.c:1533
 msgid "unsupported password encryption scheme"
-msgstr "不支援的密碼加密法"
+msgstr "不支援的密碼加密方案"
 
 #: modules/ldap.c:1658
 msgid "no such object in LDAP directory"
-msgstr "在 LDAP 目錄中沒有這類物件"
+msgstr "在 LDAP 目錄中沒有這項物件"
 
 #: modules/ldap.c:1670
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "找不到「%s」屬性"
+msgstr "找不到「%s」特性"
 
 #: modules/ldap.c:1843
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "在 LDAP 目錄設定  %s 的密碼發生錯誤：%s"
+msgstr "在 LDAP 目錄設定 %s 的密碼時發生錯誤：%s"
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
@@ -1371,23 +1372,23 @@ msgstr "初始化 Cyrus SASL 時發生錯誤：%s"
 msgid "error creating home directory for user"
 msgstr "為使用者建立家目錄時發生錯誤"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "為使用者移除家目錄時發生錯誤"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
-msgstr "為使用者移除家目錄時發生錯誤"
+msgstr "為使用者移動家目錄時發生錯誤"
 
 #: samples/lookup.c:63
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr "初始化 %s 錯誤：%s\n"
+msgstr "初始化 %s 時發生錯誤：%s\n"
 
 #: samples/lookup.c:76
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr "無效的 ID %s\n"
+msgstr "無效 ID %s\n"
 
 #: samples/lookup.c:88
 #, c-format
@@ -1427,12 +1428,18 @@ msgstr "預設使用者物件類別：\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr "預設使用者屬性名稱：\n"
+msgstr "預設使用者特性名稱：\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr "正在取得預設使用者屬性：\n"
+msgstr "正在取得預設使用者特性：\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "正在複製使用者結構：\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s 沒有家目錄。\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "移除 %s 時發生錯誤：%s。\n"

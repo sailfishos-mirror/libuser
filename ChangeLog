@@ -1,5 +1,10 @@
 2013-10-12  Miloslav Trmač  <mitr@redhat.com>
 
+	* configure.ac: Release 0.60.
+	* NEWS: Update.
+	* po/*: Update.
+	* Makefile.am (lib_libuser_la_LDFLAGS): Update version info.
+
 	* apps/luserdel.c (main)
 	* python/admin.c (libuser_admin_remove_home): Use
 	lu_homedir_remove_for_user() instead of looking up LU_HOMEDIRECTORY

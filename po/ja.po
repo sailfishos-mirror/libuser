@@ -3,25 +3,26 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Hajime Taira <htaira@redhat.com>, 2011-2012.
-# Hirofumi Saito <hi_saito@yk.rim.or.jp>, 2004, 2005, 2006.
-# Hyu_gabaru Ryu_ichi <hyu_gabaru@yahoo.co.jp>, 2007, 2009.
-# James Hashida <khashida@redhat.com>, 2002.
-# Kiyoto Hashida <khashida@redhat.com>, 2009.
-# Makoto Mizukami <mmk9060@aol.com>, 2008.
-# mitr <mitr@volny.cz>, 2011.
-# Noriko Mizumoto <noriko@redhat.com>, 2007, 2008, 2009.
-# Tomoyuki KATO <tomo@dream.daynight.jp>, 2011-2012.
-#   <www.carrotsoft@gmail.com>, 2011.
-# Yukihiro Nakai <ynakai@redhat.com>, 2001.
+# Hajime Taira <htaira@redhat.com>, 2011-2012
+# Hirofumi Saito <hi_saito@yk.rim.or.jp>, 2004, 2005, 2006
+# hyuugabaru <hyu_gabaru@yahoo.co.jp>, 2007, 2009
+# Kiyoto Hashida <khashida@redhat.com>, 2002
+# Kiyoto Hashida <khashida@redhat.com>, 2009
+# Makoto Mizukami <mmk9060@aol.com>, 2008
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# Noriko Mizumoto <noriko@redhat.com>, 2007, 2008, 2009
+# Tomoyuki KATO <tomo@dream.daynight.jp>, 2011-2013
+# 高一人参 @欠陥遺伝子 <www.carrotsoft@gmail.com>, 2011
+# Yukihiro Nakai <ynakai@redhat.com>, 2001
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-12-17 05:28+0000\n"
-"Last-Translator: Hajime Taira <htaira@redhat.com>\n"
-"Language-Team: Japanese <trans-ja@lists.fedoraproject.org>\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/fedora/language/"
+"ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,9 +173,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "最大:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "最大:\t%ld\n"
+msgstr "最大値:\tなし\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -187,13 +188,13 @@ msgid "Inactive:\t%ld\n"
 msgstr "無効:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "無効:\t%ld\n"
+msgstr "無効化:\tなし\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "次回ログイン時に必ずパスワード変更"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -689,37 +690,32 @@ msgstr "ユーザーのホームディレクトリーを削除する"
 msgid "User %s could not be deleted: %s.\n"
 msgstr "ユーザー %s は削除できませんでした: %s。\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s には GID 番号がありません。\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "GID %jd のグループが存在しないため、削除しません。\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd のグループにはグループ名がありません。\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "グループ %s は削除できませんでした: %s。\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s にはホームディレクトリーがありません。\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "ユーザーのホームディレクトリー削除に失敗しました"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "%s の削除に失敗: %s。\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "メールスプールの削除中にエラーが発生しました: %s"
@@ -951,7 +947,12 @@ msgstr "無効な属性の値です"
 msgid "invalid module combination"
 msgstr "無効なモジュールの組み合わせです"
 
-#: lib/error.c:112
+#: lib/error.c:109
+#, fuzzy
+msgid "user's home directory not owned by them"
+msgstr "新しいユーザーのホームディレクトリー"
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "不明なエラーが発生しました"
 
@@ -1067,7 +1068,7 @@ msgstr "グループには名前もしくは GID がありません。"
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "デフォルトで危険なホームディレクトリ `%s' の使用を拒否中です"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "領域 %s の値は無効なデフォルト値です : %s"
@@ -1077,22 +1078,22 @@ msgstr "領域 %s の値は無効なデフォルト値です : %s"
 msgid "error locking file: %s"
 msgstr "ファイルのロック中にエラーが発生しました: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "デフォルトのセキュリティー情報を取得できません: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' のセキュリティー情報を取得できません: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' にデフォルトのセキュリティー情報を設定できません: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' のセキュリティー情報を決定できません: %s"
@@ -1381,11 +1382,11 @@ msgstr "Cyrus SASL の初期化に失敗: %s"
 msgid "error creating home directory for user"
 msgstr "ユーザー用のホームディレクトリー作成に失敗しました"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "ユーザーのホームディレクトリー削除に失敗しました"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "ユーザーのホームディレクトリー移動に失敗しました"
 
@@ -1446,3 +1447,9 @@ msgstr "デフォルトユーザー属性を取得中:\n"
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ユーザー構造体をコピー中:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s にはホームディレクトリーがありません。\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "%s の削除に失敗: %s。\n"

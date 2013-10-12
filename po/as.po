@@ -3,18 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Amitakhya Phukan <amitakhya.phukan@gmail.com>, 2006.
-# Amitakhya Phukan <aphukan@fedoraproject.org>, 2008, 2009.
-# Amitakhya Phukan <aphukan@redhat.com>, 2008.
-# mitr <mitr@volny.cz>, 2011.
-# ngoswami <ngoswami@redhat.com>, 2011.
-# Nilamdyuti Goswami <ngoswami@redhat.com>, 2012.
+# Amitakhya Phukan <amitakhya.phukan@gmail.com>, 2006
+# Amitakhya Phukan <aphukan@fedoraproject.org>, 2008, 2009
+# Amitakhya Phukan <aphukan@redhat.com>, 2008
+# Miloslav Trmač <mitr@volny.cz>, 2011
+# ngoswami <ngoswami@redhat.com>, 2011
+# ngoswami <ngoswami@redhat.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2012-11-08 08:25+0000\n"
+"POT-Creation-Date: 2013-10-12 23:52+0200\n"
+"PO-Revision-Date: 2013-04-29 08:37+0000\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Assamese (http://www.transifex.com/projects/p/fedora/language/"
 "as/)\n"
@@ -168,9 +168,9 @@ msgid "Maximum:\t%ld\n"
 msgstr "সৰ্বোচ্চ:\t%ld\n"
 
 #: apps/lchage.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum:\tNone\n"
-msgstr "সৰ্বোচ্চ:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:175
 #, c-format
@@ -183,9 +183,9 @@ msgid "Inactive:\t%ld\n"
 msgstr "নিষ্ক্ৰিয়:\t%ld\n"
 
 #: apps/lchage.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Inactive:\tNever\n"
-msgstr "নিষ্ক্ৰিয়:\t%ld\n"
+msgstr ""
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
@@ -685,37 +685,32 @@ msgstr ""
 msgid "User %s could not be deleted: %s.\n"
 msgstr "ব্যৱহাৰকৰোঁতা %s'ৰ হিচাপ আঁতৰুৱা সম্ভৱ নহয়: %s  ।\n"
 
-#: apps/luserdel.c:107
+#: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s ৰ কোনো gid সংখ্যা নাই  ।\n"
 
-#: apps/luserdel.c:113
+#: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "%jd GIDসহ কোনো সমষ্টি বৰ্তমানে নাই, আঁতৰুৱা সম্ভৱ নহয়  ।\n"
 
-#: apps/luserdel.c:119
+#: apps/luserdel.c:120
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "%jd GIDসহ সমষ্টিৰ কোনো নাম উল্লিখিত নহয়  ।\n"
 
-#: apps/luserdel.c:125
+#: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "%s সমষ্টিটি আঁতৰুৱা সম্ভৱ নহয়: %s  ।\n"
 
-#: apps/luserdel.c:138
-#, c-format
-msgid "%s did not have a home directory.\n"
-msgstr "%s ৰ ঘৰৰ পঞ্জিকা উপস্থিত নাছিল  ।\n"
+#: apps/luserdel.c:139
+#, fuzzy, c-format
+msgid "Error removing home directory: %s.\n"
+msgstr "ব্যৱহাৰকৰোঁতাৰ ব্যক্তিগত পঞ্জিকা আঁতৰাওঁতে সমস্যা"
 
-#: apps/luserdel.c:143
-#, c-format
-msgid "Error removing %s: %s.\n"
-msgstr "%s আঁতৰাওঁতে সমস্যা: %s  ।\n"
-
-#: apps/luserdel.c:149
+#: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
@@ -945,7 +940,11 @@ msgstr "অবৈধ বৈশিষ্টৰ মান"
 msgid "invalid module combination"
 msgstr "অবৈধ মডুল সংযুক্তকৰণ"
 
-#: lib/error.c:112
+#: lib/error.c:109
+msgid "user's home directory not owned by them"
+msgstr ""
+
+#: lib/error.c:115
 msgid "unknown error"
 msgstr "অজ্ঞাত সমস্যা"
 
@@ -1061,7 +1060,7 @@ msgstr "সমষ্টিৰ নাম আৰু GID ধাৰ্য কৰা 
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "অবিকল্পিত ৰূপে বিপদজনক ঘৰৰ পঞ্জিকা `%s' ব্যৱহাৰ কৰিবলৈ নমনা হৈছে"
 
-#: lib/user.c:2306
+#: lib/user.c:2310
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ক্ষেত্ৰত অবিকল্পিত মান বৈধ নহয়: %s"
@@ -1071,22 +1070,22 @@ msgstr "%s ক্ষেত্ৰত অবিকল্পিত মান বৈ
 msgid "error locking file: %s"
 msgstr "নথিপত্ৰ লক কৰোঁতে সমস্যা: %s"
 
-#: lib/util.c:691
+#: lib/util.c:706
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "অবিকল্পিত সুৰক্ষাৰ পৰিবেশ পোৱা নাযায়: %s"
 
-#: lib/util.c:718 lib/util.c:744 lib/util.c:770
+#: lib/util.c:733 lib/util.c:759 lib/util.c:785
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' ৰ বাবে প্ৰাসঙ্গিক নিৰাপত্তাৰ বিৱৰণ প্ৰাপ্ত কৰা নাযায়: %s"
 
-#: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
+#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "অবিকল্পিত প্ৰাসঙ্গিক নিৰাপত্তাৰ বিৱৰণ`%s' হিচাপে নিৰ্ধাৰণ কৰা নাযায়: %s"
 
-#: lib/util.c:800
+#: lib/util.c:815
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ৰ বাবে সুৰক্ষাৰ পৰিবেশ নিৰ্ধাৰণ কৰিব নোৱাৰি: %s"
@@ -1375,11 +1374,11 @@ msgstr "Cyrus SASL আৰম্ভ কৰোঁতে সমস্যা: %s"
 msgid "error creating home directory for user"
 msgstr "ব্যৱহাৰকৰোঁতাৰ বাবে ব্যক্তিগত পঞ্জিকা সৃষ্টি কৰোঁতে সমস্যা"
 
-#: python/admin.c:567
+#: python/admin.c:557 python/admin.c:596
 msgid "error removing home directory for user"
 msgstr "ব্যৱহাৰকৰোঁতাৰ ব্যক্তিগত পঞ্জিকা আঁতৰাওঁতে সমস্যা"
 
-#: python/admin.c:638
+#: python/admin.c:667
 msgid "error moving home directory for user"
 msgstr "ব্যৱহাৰকৰোঁতাৰ ব্যক্তিগত পঞ্জিকা গমন কৰোঁতে ভুল"
 
@@ -1440,3 +1439,9 @@ msgstr "ব্যৱহাৰকৰোঁতাৰ অবিকল্পিত �
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
 msgstr "ব্যৱহাৰকৰোঁতাৰ গঠন নকল কৰা হৈছে:\n"
+
+#~ msgid "%s did not have a home directory.\n"
+#~ msgstr "%s ৰ ঘৰৰ পঞ্জিকা উপস্থিত নাছিল  ।\n"
+
+#~ msgid "Error removing %s: %s.\n"
+#~ msgstr "%s আঁতৰাওঁতে সমস্যা: %s  ।\n"
