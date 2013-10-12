@@ -651,15 +651,20 @@ err:
 	return ret;
 }
 
+/* Return current date in days since the epoch (suitable for LU_SHADOW*),
+   or -1 if the current date is unknown or obviously implausible (e.g. on a
+   system without a RTC). */
 long
-lu_util_shadow_current_date(void)
+lu_util_shadow_current_date_or_minus_1(void)
 {
 	const struct tm *gmt;
 	time_t now;
 	GDate *today, *epoch;
 	long days;
 
-	time(&now);
+	now = time(NULL);
+	if (now == (time_t)-1)
+		return -1;
 	gmt = gmtime(&now);
 
 	today = g_date_new_dmy(gmt->tm_mday, gmt->tm_mon + 1,
@@ -669,6 +674,16 @@ lu_util_shadow_current_date(void)
 	g_date_free(today);
 	g_date_free(epoch);
 
+	/* Refuse to return 0 (Jan 1, 1970): it is unquestionably incorrect in
+	   the real world, which is not really libuser's concern, but it is
+	   also a special case for LU_SHADOWLASTCHANGE (marking the account for
+	   forced password change) and LU_SHADOWEXPIRE (forbidden in
+	   shadow(5)).  In both cases, setting the value to -1 deactivates the
+	   real-time-related actions, which is a reasonable thing to do when
+	   the only available RTC is incorrect. */
+	if (days == 0)
+		return -1;
+
 	return days;
 }
 
@@ -677,7 +692,7 @@ void
 lu_util_update_shadow_last_change(struct lu_ent *ent)
 {
 	lu_ent_set_long(ent, LU_SHADOWLASTCHANGE,
-			lu_util_shadow_current_date());
+			lu_util_shadow_current_date_or_minus_1());
 }
 
 #ifdef WITH_SELINUX

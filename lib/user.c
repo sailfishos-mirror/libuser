@@ -2286,7 +2286,8 @@ lu_default_int(struct lu_context *context, const char *name,
 		tmp = g_strdup(val);
 
 		tmp = replace_all(tmp, "%n", name, &key);
-		sprintf(replacement, "%ld", lu_util_shadow_current_date());
+		sprintf(replacement, "%ld",
+			lu_util_shadow_current_date_or_minus_1());
 		tmp = replace_all(tmp, "%d", replacement, &key);
 		if (id != 0 && id != (id_t)-1) {
 			sprintf(replacement, "%jd", (intmax_t)id);

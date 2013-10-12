@@ -1,3 +1,10 @@
+2013-10-12  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/util.c (lu_util_shadow_current_date): Rename to...
+	* lib/util.c (lu_util_shadow_current_date_or_minus_1): ... this.
+	Return -1 if the time is not available, or if the time would result in
+	special-cased LU_SHADOW* values.  All users updated.
+
 2013-09-20  Miloslav Trmač  <mitr@redhat.com>
 
 	* libuser.pc.in: Use Libs.private for @CRYPT_LIBS@, Requires.private for
