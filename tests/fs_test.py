@@ -28,6 +28,15 @@ def main():
         u = a.initUser('fs_test_remove')
         u[libuser.HOMEDIRECTORY] = sys.argv[2]
         a.removeHome(u)
+    elif sys.argv[1] == '--remove-if-owned':
+        a = libuser.admin()
+        u = a.initUser('fs_test_remove')
+        u[libuser.HOMEDIRECTORY] = sys.argv[2]
+        u[libuser.UIDNUMBER] = int(sys.argv[3])
+        try:
+            a.removeHomeIfOwned(u)
+        except RuntimeError, e:
+            sys.exit(str(e))
     elif sys.argv[1] == '--move':
         a = libuser.admin()
         u = a.initUser('fs_test_move')

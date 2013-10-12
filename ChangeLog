@@ -1,5 +1,24 @@
 2013-10-12  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/error.h (lu_status): New value lu_error_homedir_not_owned.
+	* lib/error.c (lu_strerror, lu_error_is_error): Support
+	lu_error_homedir_not_owned.
+	* lib/fs.c (remove_subdirectory): New parameter required_toplevel_uid.
+	All users updated.
+	(homedir_remove_for_user, lu_homedir_remove_for_user)
+	(lu_homedir_remove_for_user_if_owned): New functions.
+	* lib/fs.h (lu_homedir_remove_for_user)
+	(lu_homedir_remove_for_user_if_owned): New declarations.
+	* docs/reference/libuser-sections.txt: Add lu_homedir_remove_for_user and
+	lu_homedir_remove_for_user_if_owned.
+	* python/admin.c (libuser_admin_remove_home_if_owned): New function.
+	(libuser_admin_methods): New entry for removeHomeIfOwned.
+	* tests/fs_test.py (main): New option --remove-if-owned.
+	* tests/fs_test: Test lu_homedir_remove_for_user_if_owned().
+	* python/modules.txt: Document createHome, moveHome, removeHome,
+	removeHomeIfOwned, createMail, removeMail.
+	Based on a smaller patch by Robin Hack <rhack@redhat.com>.
+
 	* lib/user.c (lu_default_int): Precompute the replacement strings
 	instead of computing it for each key.  This is a little faster,
 	and more importantly, we can be sure that the %d replacement value

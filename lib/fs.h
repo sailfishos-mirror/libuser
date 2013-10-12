@@ -34,6 +34,9 @@ gboolean lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 gboolean lu_homedir_move(const char *oldhome, const char *newhome,
 			 struct lu_error **error);
 gboolean lu_homedir_remove(const char *directory, struct lu_error **error);
+gboolean lu_homedir_remove_for_user(struct lu_ent *ent, struct lu_error **error);
+gboolean lu_homedir_remove_for_user_if_owned(struct lu_ent *ent,
+					     struct lu_error **error);
 
 /**
  * LU_NSCD_CACHE_PASSWD:

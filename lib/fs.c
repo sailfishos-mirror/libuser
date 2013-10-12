@@ -642,6 +642,10 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
 /* Recursively remove directory DIR_NAME under PARENT_FD, which corresponds to
    PATH_BUF.
 
+   Before doing anything, if REQUIRED_TOPLEVEL_UID is not LU_VALUE_INVALID_ID,
+   make sure that DIR_NAME is owned by that UID, or fail with
+   lu_error_homedir_not_owned.
+
    Return TRUE on sucess.
 
    PARENT_FD may be AT_FDCWD.  This function may temporarily modify PATH_BUF,
@@ -653,7 +657,7 @@ lu_homedir_populate(struct lu_context *ctx, const char *skeleton,
    PARENT_FD/DIR_NAME. */
 static gboolean
 remove_subdirectory(int parent_fd, const char *dir_name, GString *path_buf,
-		    struct lu_error **error)
+		    uid_t required_toplevel_uid, struct lu_error **error)
 {
 	size_t orig_path_buf_len;
 	int dir_fd;
@@ -671,13 +675,30 @@ remove_subdirectory(int parent_fd, const char *dir_name, GString *path_buf,
 			     strerror(errno));
 		return FALSE;
 	}
+
+	if (required_toplevel_uid != LU_VALUE_INVALID_ID) {
+		struct stat st;
+
+		if (fstat(dir_fd, &st) == -1) {
+			lu_error_new(error, lu_error_stat,
+				     _("couldn't stat `%s': %s"), path_buf->str,
+				     strerror(errno));
+			goto err_dir_fd;
+		}
+		if (st.st_uid != required_toplevel_uid) {
+			lu_error_new(error, lu_error_homedir_not_owned,
+				     _("`%s' is not owned by UID `%d'"),
+				     path_buf->str, required_toplevel_uid);
+			goto err_dir_fd;
+		}
+	}
+
 	dir = fdopendir(dir_fd);
 	if (dir == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("Error opening `%s': %s"), path_buf->str,
 			     strerror(errno));
-		close(dir_fd);
-		return FALSE;
+		goto err_dir_fd;
 	}
 
 	/* Iterate over all of its contents. */
@@ -705,6 +726,7 @@ remove_subdirectory(int parent_fd, const char *dir_name, GString *path_buf,
 		if (S_ISDIR(st.st_mode)) {
 			/* We descend into subdirectories... */
 			if (remove_subdirectory(dir_fd, ent->d_name, path_buf,
+						LU_VALUE_INVALID_ID,
 						error) == FALSE)
 				goto err_dir;
 		} else {
@@ -736,6 +758,10 @@ err_dir:
 	closedir(dir);
 	g_string_truncate(path_buf, orig_path_buf_len);
 	return FALSE;
+
+err_dir_fd:
+	close(dir_fd);
+	return FALSE;
 }
 
 /**
@@ -759,9 +785,98 @@ lu_homedir_remove(const char *directory, struct lu_error ** error)
 	LU_ERROR_CHECK(error);
 	g_return_val_if_fail(directory != NULL, FALSE);
 	path_buf = g_string_new(directory);
-	ret = remove_subdirectory(AT_FDCWD, directory, path_buf, error);
+	ret = remove_subdirectory(AT_FDCWD, directory, path_buf,
+				  LU_VALUE_INVALID_ID, error);
 	g_string_free(path_buf, TRUE);
 	return ret;
+}
+
+/* Recursively remove the home directory of user ENT if the top-level directory
+   is owned by REQUIRED_TOPLEVEL_UID or if REQUIRED_TOPLEVEL_UID is
+   LU_VALUE_INVALID_ID.  Otherwise fail with lu_error_homedir_not_owned.
+
+   Return TRUE on sucess.
+
+   If you want to use this in a hostile environment, ensure that no untrusted
+   user has write permission to any parent of ENT's home directory. */
+static gboolean
+homedir_remove_for_user(struct lu_ent *ent, uid_t required_toplevel_uid,
+			struct lu_error **error)
+{
+	gboolean ret;
+	const char *home;
+	GString *path_buf;
+
+	LU_ERROR_CHECK(error);
+	g_assert(ent->type == lu_user);
+
+	home = lu_ent_get_first_string(ent, LU_HOMEDIRECTORY);
+	if (home == NULL) {
+		lu_error_new(error, lu_error_generic,
+			     _("user object had no %s attribute"),
+			     LU_HOMEDIRECTORY);
+		return FALSE;
+	}
+	path_buf = g_string_new(home);
+	ret = remove_subdirectory(AT_FDCWD, home, path_buf,
+				  required_toplevel_uid, error);
+	g_string_free(path_buf, TRUE);
+	return ret;
+}
+
+/**
+ * lu_homedir_remove_for_user:
+ * @ent: An entity describing the user
+ * @error: Filled with #lu_error if an error occurs
+ *
+ * Recursively removes the home directory of user @ent.
+ *
+ * If you want to use this in a hostile environment, ensure that no untrusted
+ * user has write permission to any parent of @ent's home directory.
+ *
+ * Returns: %TRUE on success
+ */
+gboolean
+lu_homedir_remove_for_user(struct lu_ent *ent, struct lu_error **error)
+{
+	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
+	return homedir_remove_for_user(ent, LU_VALUE_INVALID_ID, error);
+}
+
+/**
+ * lu_homedir_remove_for_user_if_owned:
+ * @ent: An entity describing the user
+ * @error: Filled with #lu_error if an error occurs
+ *
+ * Recursively removes the home directory of user @ent, only if the directory
+ * is owned by @ent.  Otherwise fails with %lu_error_homedir_not_owned.
+ *
+ * If you want to use this in a hostile environment, ensure that no untrusted
+ * user has write permission to any parent of @ent's home directory.
+ *
+ * Returns: %TRUE on success
+ */
+gboolean
+lu_homedir_remove_for_user_if_owned(struct lu_ent *ent, struct lu_error **error)
+{
+	uid_t uid;
+
+	LU_ERROR_CHECK(error);
+	g_return_val_if_fail(ent != NULL, FALSE);
+	g_return_val_if_fail(ent->type == lu_user, FALSE);
+
+	uid = lu_ent_get_first_id(ent, LU_UIDNUMBER);
+	if (uid == LU_VALUE_INVALID_ID) {
+		lu_error_new(error, lu_error_generic,
+			     _("user object had no %s attribute"),
+			     LU_UIDNUMBER);
+		return FALSE;
+	}
+
+	return homedir_remove_for_user(ent, uid, error);
 }
 
 /**

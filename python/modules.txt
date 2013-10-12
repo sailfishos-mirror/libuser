@@ -251,6 +251,51 @@ libuser:
 						objects.
 					Returns: a true/false value indicating
 						success or failure.
+				- createHome: Create user's home directory.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+						Path to the skeleton home
+						directory (optional, default is
+						to use the system default)
+					Returns: a true value, or raises an
+						exception.
+				- moveHome: Move user's home directory.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+						Path for the new directory
+						(optional, default is to use
+						the "pending" value of the
+						LU_HOMEDIRECTORY attribute)
+					Returns: a true value, or raises an
+						exception.
+				- removeHome: Remove user's home directory.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+					Returns: a true value, or raises an
+						exception.
+				- removeHomeIfOwned: Remove user's home directory
+					if it is owned by them.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+					Returns: a true value, or raises an
+						exception.
+				- createMail: Create user's mail spool.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+					Returns: a true value, or raises an
+						exception.
+				- removeMail: Remove user's mail spool.
+					Arguments:
+						A libuser.Entity object
+						for the user.
+					Returns: a true value, or raises an
+						exception.
+
 				- getFirstUnusedUid: Search the system for
 					an unused UID.
 					Arguments:

@@ -92,6 +92,81 @@ if [ $? -ne 0 ]; then
 fi
 
 
+# Test lu_homedir_remove_for_user_if_owned()
+fakeroot > "$workdir"/rm_owned_output1 <<EOF
+# User's "own" content
+mkdir -p "$workdir"/rm_owned1/root/dir
+touch "$workdir"/rm_owned1/root/dir/f
+chown -R 555:555 "$workdir"/rm_owned1/root
+chmod 701 "$workdir"/rm_owned1/root
+
+# Other content in the home directory
+mkdir "$workdir"/rm_owned1/root/non-owned-dir
+touch "$workdir"/rm_owned1/root/non-owned-dir/f
+
+$VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
+	"$workdir/rm_owned1/root" 555
+if [ \$? -ne 0 ]; then
+   exit 1
+fi
+
+LC_ALL=C ls -lnR "$workdir"/rm_owned1 | tail -n +3 | \
+	awk '{ printf("%.10s %d %4d %4d %8d %s\n",
+		      \$1, \$2, \$3, \$4, \$5, \$9) ;}'
+
+EOF
+
+diff "$workdir"/rm_owned_output1 - <<EOF
+EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+# Nothing is touched if the home directory is not owned by the right UID
+fakeroot > "$workdir"/rm_owned_output2 2>&1 <<EOF
+# Non-owned home directory
+mkdir -p "$workdir"/rm_owned2/root/dir
+touch "$workdir"/rm_owned2/root/dir/f
+chown -R 555:555 "$workdir"/rm_owned2/root
+chown 444:444 "$workdir"/rm_owned2/root
+chmod 701 "$workdir"/rm_owned2/root
+
+# Other content in the home directory
+mkdir "$workdir"/rm_owned2/root/non-owned-dir
+touch "$workdir"/rm_owned2/root/non-owned-dir/f
+
+$VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
+	"$workdir/rm_owned2/root" 555
+echo \$?
+
+cd "$workdir"/rm_owned2
+LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
+			     \$1, \$2, \$3, \$4, \$9); }
+             NF <= 3 && !/total/ { print }'
+EOF
+
+diff "$workdir"/rm_owned_output2 - <<EOF
+\`$workdir/rm_owned2/root' is not owned by UID \`555'
+1
+.:
+drwx-----x 4  444  444 root
+
+./root:
+drwxrwxr-x 2  555  555 dir
+drwxrwxr-x 2    0    0 non-owned-dir
+
+./root/dir:
+-rw-rw-r-- 1  555  555 f
+
+./root/non-owned-dir:
+-rw-rw-r-- 1    0    0 f
+EOF
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+
 # Prepare an "interesting" home directory, to be used both directly and as
 # a skeleton
 fakeroot -s "$workdir"/save <<EOF

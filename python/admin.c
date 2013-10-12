@@ -573,6 +573,45 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	}
 }
 
+/* Remove a user's home directory if it is owned by them. */
+static PyObject *
+libuser_admin_remove_home_if_owned(PyObject *self, PyObject *args,
+				   PyObject *kwargs)
+{
+	struct libuser_entity *ent = NULL;
+	char *keywords[] = { "user", NULL };
+	struct lu_error *error = NULL;
+
+	(void)self;
+	DEBUG_ENTRY;
+
+	/* We expect an object. */
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!", keywords,
+					 &EntityType, &ent)) {
+		DEBUG_EXIT;
+		return NULL;
+	}
+
+	/* Remove the directory. */
+	if (lu_homedir_remove_for_user_if_owned(ent->ent, &error)) {
+		/* Successfully removed. */
+		DEBUG_EXIT;
+		return PyInt_FromLong(1);
+	} else {
+		/* Removal failed.  You'll have to come back for repeated
+		 * treatments. */
+		PyErr_SetString(PyExc_RuntimeError,
+				error ?
+				error->string :
+				_("error removing home directory for user"));
+		if (error) {
+			lu_error_free(&error);
+		}
+		DEBUG_EXIT;
+		return NULL;
+	}
+}
+
 /* Move a user's home directory somewhere else. */
 static PyObject *
 libuser_admin_move_home(PyObject *self, PyObject *args,
@@ -1453,6 +1492,9 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{"removeHome", (PyCFunction) libuser_admin_remove_home,
 	 METH_VARARGS | METH_KEYWORDS,
 	 "remove a user's home directory"},
+	{"removeHomeIfOwned", (PyCFunction) libuser_admin_remove_home_if_owned,
+	 METH_VARARGS | METH_KEYWORDS,
+	 "remove a user's home directory if it is owned by them"},
 
 	{"createMail", (PyCFunction) libuser_admin_create_mail,
 	 METH_VARARGS | METH_KEYWORDS,

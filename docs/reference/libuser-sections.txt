@@ -103,6 +103,8 @@ lu_strerror
 lu_homedir_move
 lu_homedir_populate
 lu_homedir_remove
+lu_homedir_remove_for_user
+lu_homedir_remove_for_user_if_owned
 lu_mail_spool_create
 lu_mail_spool_remove
 

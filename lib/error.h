@@ -66,6 +66,9 @@ enum lu_status {
 
 	/* Since 0.57 */
 	lu_error_invalid_module_combination,
+
+	/* Since 0.60 */
+	lu_error_homedir_not_owned,
 };
 #ifndef __GTK_DOC_IGNORE__
 #ifndef LU_DISABLE_DEPRECATED

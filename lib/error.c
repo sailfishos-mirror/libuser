@@ -105,6 +105,9 @@ lu_strerror(struct lu_error *error)
 				return _("invalid attribute value");
 			case lu_error_invalid_module_combination:
 				return _("invalid module combination");
+			case lu_error_homedir_not_owned:
+				return _("user's home directory not owned by "
+					 "them");
 			default:
 				break;
 		}
@@ -183,6 +186,7 @@ lu_error_is_error(enum lu_status status)
 		case lu_error_unlock_empty:
 		case lu_error_invalid_attribute_value:
 		case lu_error_invalid_module_combination:
+		case lu_error_homedir_not_owned:
 			return TRUE;
 		default:
 			return FALSE;
