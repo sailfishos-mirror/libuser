@@ -1,5 +1,8 @@
 2013-10-16  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ent.c (libuser_entity_set_item): Fix a missing parameter in
+	debug output.
+
 	* modules/krb5.c (lu_krb5_user_setpass): Fix a missing initialization.
 
 2013-10-12  Miloslav Trmač  <mitr@redhat.com>

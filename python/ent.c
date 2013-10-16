@@ -690,7 +690,7 @@ libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
-				g_value_get_string(&value));
+				g_value_get_string(&value), attr);
 #endif
 			lu_ent_add(me->ent, attr, &value);
 			g_value_unset(&value);
@@ -714,7 +714,7 @@ libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 #ifdef DEBUG_BINDING
 			fprintf(stderr, "%sAdding (`%s') to `%s'.\n",
 				getindent(),
-				g_value_get_string(&value));
+				g_value_get_string(&value), attr);
 #endif
 			lu_ent_add(me->ent, attr, &value);
 			g_value_unset(&value);
