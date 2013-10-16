@@ -592,6 +592,7 @@ lu_krb5_user_setpass(struct lu_module *module, struct lu_ent *ent,
 		return FALSE;
 	}
 
+	name = lu_ent_get(ent, LU_KRBNAME);
 	if (name == NULL) {
 		name = lu_ent_get(ent, LU_USERNAME);
 	}
