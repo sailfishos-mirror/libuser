@@ -1,3 +1,10 @@
+2013-10-18  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/Makefile.am (SGML_OUTPUTS): New variable.
+	(CLEANFILES): Use SGML_OUTPUTS.
+	(EXTRA_DIST): Add SGML_OUTPUTS so that sgml2txt is not required when
+	building from a release tarball.
+
 2013-10-16  Miloslav Trmač  <mitr@redhat.com>
 
 	* python/ent.c (libuser_entity_set_item): Fix a missing parameter in
