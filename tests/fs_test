@@ -64,6 +64,19 @@ export LD_LIBRARY_PATH
 PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
+# Like ls, but filtered to only contain interesting columns and avoid
+# varying data.  Expects one argument, a directory path
+filtered_ls() {
+    (
+	cd "$1";
+	LC_ALL=C ls -lnR | \
+	    awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
+             NF <= 3 && !/total/ { print }';
+    )
+}
+export -f filtered_ls
+
+
 # Test lu_homedir_remove()
 test_lu_homedir_remove() {
     # User's "own" content
@@ -87,15 +100,15 @@ test_lu_homedir_remove() {
 	exit 1
     fi
 
-    LC_ALL=C ls -lnR "$workdir/rm" | tail -n +3 | \
-	awk '{ printf("%.10s %d %4d %4d %8d %s\n", $1, $2, $3, $4, $5, $9); }'
+    filtered_ls "$workdir/rm"
 }
 export -f test_lu_homedir_remove
 run_test test_lu_homedir_remove > "$workdir"/rm_output
 
 diff "$workdir"/rm_output - <<EOF
--rw-rw-r-- 1    0    0        0 kept
----------- 1    0    0        4 secret
+.:
+-rw-rw-r-- 1    0    0 kept
+---------- 1    0    0 secret
 EOF
 if [ $? -ne 0 ]; then
     exit 1
@@ -120,14 +133,13 @@ test_lu_homedir_remove_for_user_if_owned1() {
 	exit 1
     fi
 
-    LC_ALL=C ls -lnR "$workdir"/rm_owned1 | tail -n +3 | \
-	awk '{ printf("%.10s %d %4d %4d %8d %s\n", $1, $2, $3, $4, $5, $9); }'
-
+    filtered_ls "$workdir"/rm_owned1
 }
 export -f test_lu_homedir_remove_for_user_if_owned1
 run_test test_lu_homedir_remove_for_user_if_owned1 > "$workdir"/rm_owned_output1
 
 diff "$workdir"/rm_owned_output1 - <<EOF
+.:
 EOF
 if [ $? -ne 0 ]; then
     exit 1
@@ -150,10 +162,7 @@ test_lu_homedir_remove_for_user_if_owned2() {
 	"$workdir/rm_owned2/root" 555
     echo $?
 
-    cd "$workdir"/rm_owned2
-    LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
-             NF <= 3 && !/total/ { print }'
+    filtered_ls "$workdir"/rm_owned2
 }
 export -f test_lu_homedir_remove_for_user_if_owned2
 run_test test_lu_homedir_remove_for_user_if_owned2 \
@@ -218,10 +227,7 @@ test_lu_homedir_move1() {
 	exit 1
     fi
 
-    cd "$workdir"/home2
-    LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
-             NF <= 3 && !/total/ { print }'
+    filtered_ls "$workdir"/home2
 }
 export -f test_lu_homedir_move1
 run_test test_lu_homedir_move1 > "$workdir"/mv_output
@@ -291,10 +297,7 @@ function test_lu_homedir_populate1() {
 	exit 1
     fi
 
-    cd "$workdir"/newhome
-    LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
-             NF <= 3 && !/total/ { print }'
+    filtered_ls "$workdir"/newhome
 }
 export -f test_lu_homedir_populate1
 run_test test_lu_homedir_populate1 > "$workdir"/pop_output
