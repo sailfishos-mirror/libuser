@@ -1,3 +1,9 @@
+2013-11-21  Miloslav Trmač  <mitr@redhat.com>
+
+	* tests/fs_test: Use a shell function instead of (cp -a) to prepare
+	source directories for tests, to avoid yet another fakeroot bug.  Update
+	the expected test results.
+
 2013-10-18  Miloslav Trmač  <mitr@redhat.com>
 
 	* docs/Makefile.am (SGML_OUTPUTS): New variable.

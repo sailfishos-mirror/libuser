@@ -167,41 +167,36 @@ if [ $? -ne 0 ]; then
 fi
 
 
-# Prepare an "interesting" home directory, to be used both directly and as
-# a skeleton
-fakeroot -s "$workdir"/save <<EOF
-mkdir -p "$workdir"/common/{dir,unreadable,group-owned}
-cd "$workdir"/common
-# User's "own" content
-for i in '.' dir group-owned; do
-    touch "\$i"/f "\$i"/setuid
-    chmod u+xs "\$i"/setuid
-    mkfifo "\$i"/fifo
-    ln -s ../outside "\$i"/symlink
-done
-mkdir setgid
-chmod g+s setgid
-echo 'content' > unreadable/f
-chmod 000 unreadable/f unreadable
-chown -R 555:555 .
-chgrp -R 444 group-owned
+# Prepare an "interesting" directory, to be used both directly as a home
+# directory and as a skeleton.  Note: changes the current directory!
+create_source_directory() {
+    mkdir -p "$1"/{dir,unreadable,group-owned}
+    # User's "own" content
+    for i in "$1" "$1"/dir "$1"/group-owned; do
+	touch "$i"/f "$i"/setuid
+	chmod u+xs "$i"/setuid
+	mkfifo "$i"/fifo
+	ln -s ../outside "$i"/symlink
+    done
+    mkdir "$1"/setgid
+    chmod g+s "$1"/setgid
+    echo 'content' > "$1"/unreadable/f
+    chmod 000 "$1"/unreadable/f "$1"/unreadable
+    chown -R 555:555 "$1"
+    chgrp -R 444 "$1"/group-owned
 
-# Other content in the home directory
-mknod block b 1 1
-mknod char c 1 1
-echo 'foo' > secret
-chmod 000 secret
-EOF
+    # Other content in the home directory
+    mknod "$1"/block b 1 1
+    mknod "$1"/char c 1 1
+    echo 'foo' > "$1"/secret
+    chmod 000 "$1"/secret
+}
+export -f create_source_directory
 
 
 # Test lu_homedir_move()
-fakeroot -i "$workdir"/save -s "$workdir"/save > "$workdir"/mv_output <<EOF
-cp -a "$workdir"/common "$workdir"/home1
-# This seems to be a fakeroot bug
-# (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
-# files are really unreadable in the underlying filesystem.  However, a chmod
-# resets the state.
-chmod 0 "$workdir"/home1/{unreadable,unreadable/f,secret}
+fakeroot > "$workdir"/mv_output <<EOF
+create_source_directory "$workdir"/home1
 
 $VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/{home1,home2}
 if [ \$? -ne 0 ]; then
@@ -219,9 +214,9 @@ EOF
 # preserved.
 diff "$workdir"/mv_output - <<EOF
 .:
-drwx------ 2  555  555 dir
--rw------- 1  555  555 f
-drwx------ 2  555  444 group-owned
+drwxrwxr-x 2  555  555 dir
+-rw-rw-r-- 1  555  555 f
+drwxrwxr-x 2  555  444 group-owned
 ---------- 1    0    0 secret
 drwxrwsr-x 2  555  555 setgid
 -rwsrw-r-- 1  555  555 setuid
@@ -229,12 +224,12 @@ lrwxrwxrwx 1  555  555 symlink
 d--------- 2  555  555 unreadable
 
 ./dir:
--rw------- 1  555  555 f
+-rw-rw-r-- 1  555  555 f
 -rwsrw-r-- 1  555  555 setuid
 lrwxrwxrwx 1  555  555 symlink
 
 ./group-owned:
--rw------- 1  555  444 f
+-rw-rw-r-- 1  555  444 f
 -rwsrw-r-- 1  555  444 setuid
 lrwxrwxrwx 1  555  444 symlink
 
@@ -264,13 +259,8 @@ fi
 
 
 # Test lu_homedir_populate()
-fakeroot -i "$workdir"/save -s "$workdir"/save > "$workdir"/pop_output <<EOF
-cp -a "$workdir"/common "$workdir"/skel
-# This seems to be a fakeroot bug
-# (https://bugzilla.redhat.com/show_bug.cgi?id=887001) - in the copy, mode-0
-# files are really unreadable in the underlying filesystem.  However, a chmod
-# resets the state.
-chmod 0 "$workdir"/skel/{unreadable,unreadable/f,secret}
+fakeroot > "$workdir"/pop_output <<EOF
+create_source_directory "$workdir"/skel
 chown -R 0:0 "$workdir"/skel
 chgrp -R 444 "$workdir"/skel/group-owned
 
@@ -290,9 +280,9 @@ EOF
 # ownership is changed to the desired values except for non-root groups
 diff "$workdir"/pop_output - <<EOF
 .:
-drwx------ 2  556  557 dir
--rw------- 1  556  557 f
-drwx------ 2  556  444 group-owned
+drwxrwxr-x 2  556  557 dir
+-rw-rw-r-- 1  556  557 f
+drwxrwxr-x 2  556  444 group-owned
 ---------- 1  556  557 secret
 drwxrwsr-x 2  556  557 setgid
 -rwsrw-r-- 1  556  557 setuid
@@ -300,12 +290,12 @@ lrwxrwxrwx 1  556  557 symlink
 d--------- 2  556  557 unreadable
 
 ./dir:
--rw------- 1  556  557 f
+-rw-rw-r-- 1  556  557 f
 -rwsrw-r-- 1  556  557 setuid
 lrwxrwxrwx 1  556  557 symlink
 
 ./group-owned:
--rw------- 1  556  444 f
+-rw-rw-r-- 1  556  444 f
 -rwsrw-r-- 1  556  444 setuid
 lrwxrwxrwx 1  556  444 symlink
 
