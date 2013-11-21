@@ -1,5 +1,8 @@
 2013-11-21  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/fs_test: Make files setuid after setting the owner, not before;
+	this doesn't matter with fakeroot but does matter without it.
+
 	* tests/fs_test: Make it possible to run tests as real root, without
 	fakeroot.
 

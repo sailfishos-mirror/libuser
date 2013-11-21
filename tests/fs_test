@@ -187,7 +187,6 @@ create_source_directory() {
     # User's "own" content
     for i in "$1" "$1"/dir "$1"/group-owned; do
 	touch "$i"/f "$i"/setuid
-	chmod u+xs "$i"/setuid
 	mkfifo "$i"/fifo
 	ln -s ../outside "$i"/symlink
     done
@@ -197,6 +196,9 @@ create_source_directory() {
     chmod 000 "$1"/unreadable/f "$1"/unreadable
     chown -R 555:555 "$1"
     chgrp -R 444 "$1"/group-owned
+    for i in "$1" "$1"/dir "$1"/group-owned; do
+	chmod u+xs "$i"/setuid
+    done
 
     # Other content in the home directory
     mknod "$1"/block b 1 1
@@ -279,6 +281,10 @@ function test_lu_homedir_populate1() {
     create_source_directory "$workdir"/skel
     chown -R 0:0 "$workdir"/skel
     chgrp -R 444 "$workdir"/skel/group-owned
+    # chown/chgrp have reset permissions, fix them up
+    for i in "$workdir"/skel "$workdir"/skel/dir "$workdir"/skel/group-owned; do
+	chmod u+xs "$i"/setuid
+    done
 
     $VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/newhome 556 557
     if [ $? -ne 0 ]; then
