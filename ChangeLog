@@ -1,5 +1,8 @@
 2013-11-21  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/fs_test: Make it possible to run tests as real root, without
+	fakeroot.
+
 	* tests/fs_test: Use a shell function instead of (cp -a) to prepare
 	source directories for tests, to avoid yet another fakeroot bug.  Update
 	the expected test results.

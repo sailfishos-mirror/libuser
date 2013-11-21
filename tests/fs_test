@@ -24,9 +24,19 @@ if ! fakeroot --version &>/dev/null; then
     exit 77
 fi
 
+run_test() {
+    fakeroot "$@"
+}
+# If you want to test this as real root, use the following instead, and run the
+# test manually.  Make sure you have backups!
+#run_test() {
+#    ( "$@"; )
+#}
+
 srcdir=$srcdir/tests
 
 workdir=$(pwd)/test_fs
+export workdir
 
 umask 002
 
@@ -55,33 +65,33 @@ PYTHONPATH=$(pwd)/python/.libs
 export PYTHONPATH
 
 # Test lu_homedir_remove()
-fakeroot > "$workdir"/rm_output <<EOF
-# User's "own" content
-mkdir -p "$workdir"/rm/root/{dir,unreadable}
-touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
-mkfifo "$workdir"/rm/root/fifo
-ln -s ../kept "$workdir"/rm/root/symlink
-chown -R 555:555 "$workdir"/rm/root
-chmod 701 "$workdir"/rm/root
-chmod 000 "$workdir"/rm/root/unreadable
+test_lu_homedir_remove() {
+    # User's "own" content
+    mkdir -p "$workdir"/rm/root/{dir,unreadable}
+    touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
+    mkfifo "$workdir"/rm/root/fifo
+    ln -s ../kept "$workdir"/rm/root/symlink
+    chown -R 555:555 "$workdir"/rm/root
+    chmod 701 "$workdir"/rm/root
+    chmod 000 "$workdir"/rm/root/unreadable
 
-# Other content in the home directory
-mknod "$workdir"/rm/root/block b 1 1
-mknod "$workdir"/rm/root/char c 1 1
-echo 'foo' > "$workdir"/rm/secret
-chmod 000 "$workdir"/rm/secret
-ln "$workdir"/rm/{secret,root/hardlink}
+    # Other content in the home directory
+    mknod "$workdir"/rm/root/block b 1 1
+    mknod "$workdir"/rm/root/char c 1 1
+    echo 'foo' > "$workdir"/rm/secret
+    chmod 000 "$workdir"/rm/secret
+    ln "$workdir"/rm/{secret,root/hardlink}
 
-$VALGRIND python "$srcdir"/fs_test.py --remove "$workdir/rm/root"
-if [ \$? -ne 0 ]; then
-   exit 1
-fi
+    $VALGRIND python "$srcdir"/fs_test.py --remove "$workdir/rm/root"
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 
-LC_ALL=C ls -lnR "$workdir/rm" | tail -n +3 | \
-	awk '{ printf("%.10s %d %4d %4d %8d %s\n",
-		      \$1, \$2, \$3, \$4, \$5, \$9) ;}'
-
-EOF
+    LC_ALL=C ls -lnR "$workdir/rm" | tail -n +3 | \
+	awk '{ printf("%.10s %d %4d %4d %8d %s\n", $1, $2, $3, $4, $5, $9); }'
+}
+export -f test_lu_homedir_remove
+run_test test_lu_homedir_remove > "$workdir"/rm_output
 
 diff "$workdir"/rm_output - <<EOF
 -rw-rw-r-- 1    0    0        0 kept
@@ -93,28 +103,29 @@ fi
 
 
 # Test lu_homedir_remove_for_user_if_owned()
-fakeroot > "$workdir"/rm_owned_output1 <<EOF
-# User's "own" content
-mkdir -p "$workdir"/rm_owned1/root/dir
-touch "$workdir"/rm_owned1/root/dir/f
-chown -R 555:555 "$workdir"/rm_owned1/root
-chmod 701 "$workdir"/rm_owned1/root
+test_lu_homedir_remove_for_user_if_owned1() {
+    # User's "own" content
+    mkdir -p "$workdir"/rm_owned1/root/dir
+    touch "$workdir"/rm_owned1/root/dir/f
+    chown -R 555:555 "$workdir"/rm_owned1/root
+    chmod 701 "$workdir"/rm_owned1/root
 
-# Other content in the home directory
-mkdir "$workdir"/rm_owned1/root/non-owned-dir
-touch "$workdir"/rm_owned1/root/non-owned-dir/f
+    # Other content in the home directory
+    mkdir "$workdir"/rm_owned1/root/non-owned-dir
+    touch "$workdir"/rm_owned1/root/non-owned-dir/f
 
-$VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
+    $VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
 	"$workdir/rm_owned1/root" 555
-if [ \$? -ne 0 ]; then
-   exit 1
-fi
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 
-LC_ALL=C ls -lnR "$workdir"/rm_owned1 | tail -n +3 | \
-	awk '{ printf("%.10s %d %4d %4d %8d %s\n",
-		      \$1, \$2, \$3, \$4, \$5, \$9) ;}'
+    LC_ALL=C ls -lnR "$workdir"/rm_owned1 | tail -n +3 | \
+	awk '{ printf("%.10s %d %4d %4d %8d %s\n", $1, $2, $3, $4, $5, $9); }'
 
-EOF
+}
+export -f test_lu_homedir_remove_for_user_if_owned1
+run_test test_lu_homedir_remove_for_user_if_owned1 > "$workdir"/rm_owned_output1
 
 diff "$workdir"/rm_owned_output1 - <<EOF
 EOF
@@ -123,28 +134,30 @@ if [ $? -ne 0 ]; then
 fi
 
 # Nothing is touched if the home directory is not owned by the right UID
-fakeroot > "$workdir"/rm_owned_output2 2>&1 <<EOF
-# Non-owned home directory
-mkdir -p "$workdir"/rm_owned2/root/dir
-touch "$workdir"/rm_owned2/root/dir/f
-chown -R 555:555 "$workdir"/rm_owned2/root
-chown 444:444 "$workdir"/rm_owned2/root
-chmod 701 "$workdir"/rm_owned2/root
+test_lu_homedir_remove_for_user_if_owned2() {
+    # Non-owned home directory
+    mkdir -p "$workdir"/rm_owned2/root/dir
+    touch "$workdir"/rm_owned2/root/dir/f
+    chown -R 555:555 "$workdir"/rm_owned2/root
+    chown 444:444 "$workdir"/rm_owned2/root
+    chmod 701 "$workdir"/rm_owned2/root
 
-# Other content in the home directory
-mkdir "$workdir"/rm_owned2/root/non-owned-dir
-touch "$workdir"/rm_owned2/root/non-owned-dir/f
+    # Other content in the home directory
+    mkdir "$workdir"/rm_owned2/root/non-owned-dir
+    touch "$workdir"/rm_owned2/root/non-owned-dir/f
 
-$VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
+    $VALGRIND python "$srcdir"/fs_test.py --remove-if-owned \
 	"$workdir/rm_owned2/root" 555
-echo \$?
+    echo $?
 
-cd "$workdir"/rm_owned2
-LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
-			     \$1, \$2, \$3, \$4, \$9); }
+    cd "$workdir"/rm_owned2
+    LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
              NF <= 3 && !/total/ { print }'
-EOF
+}
+export -f test_lu_homedir_remove_for_user_if_owned2
+run_test test_lu_homedir_remove_for_user_if_owned2 \
+	> "$workdir"/rm_owned_output2 2>&1
 
 diff "$workdir"/rm_owned_output2 - <<EOF
 \`$workdir/rm_owned2/root' is not owned by UID \`555'
@@ -195,20 +208,21 @@ export -f create_source_directory
 
 
 # Test lu_homedir_move()
-fakeroot > "$workdir"/mv_output <<EOF
-create_source_directory "$workdir"/home1
+test_lu_homedir_move1() {
+    create_source_directory "$workdir"/home1
 
-$VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/{home1,home2}
-if [ \$? -ne 0 ]; then
-   exit 1
-fi
+    $VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/{home1,home2}
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 
-cd "$workdir"/home2
-LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
-			     \$1, \$2, \$3, \$4, \$9); }
+    cd "$workdir"/home2
+    LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
              NF <= 3 && !/total/ { print }'
-EOF
+}
+export -f test_lu_homedir_move1
+run_test test_lu_homedir_move1 > "$workdir"/mv_output
 
 # Special files and fifos are not copied over.  Ownership and permissions are
 # preserved.
@@ -243,12 +257,14 @@ if [ $? -ne 0 ]; then
 fi
 
 # Moving onto an existing directory is prohibited
-fakeroot > "$workdir"/mv2_output 2>&1 <<EOF
-mkdir "$workdir"/mv2home{1,2}
+test_lu_homedir_move2() {
+    mkdir "$workdir"/mv2home{1,2}
 
-$VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
-echo \$?
-EOF
+    $VALGRIND python "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
+    echo $?
+}
+export -f test_lu_homedir_move2
+run_test test_lu_homedir_move2 > "$workdir"/mv2_output 2>&1
 diff "$workdir"/mv2_output - <<EOF
 Error creating \`$workdir/mv2home2': File exists
 1
@@ -259,22 +275,23 @@ fi
 
 
 # Test lu_homedir_populate()
-fakeroot > "$workdir"/pop_output <<EOF
-create_source_directory "$workdir"/skel
-chown -R 0:0 "$workdir"/skel
-chgrp -R 444 "$workdir"/skel/group-owned
+function test_lu_homedir_populate1() {
+    create_source_directory "$workdir"/skel
+    chown -R 0:0 "$workdir"/skel
+    chgrp -R 444 "$workdir"/skel/group-owned
 
-$VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/newhome 556 557
-if [ \$? -ne 0 ]; then
-   exit 1
-fi
+    $VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/newhome 556 557
+    if [ $? -ne 0 ]; then
+	exit 1
+    fi
 
-cd "$workdir"/newhome
-LC_ALL=C ls -lnR | \
-	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n",
-			     \$1, \$2, \$3, \$4, \$9); }
+    cd "$workdir"/newhome
+    LC_ALL=C ls -lnR | \
+	awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
              NF <= 3 && !/total/ { print }'
-EOF
+}
+export -f test_lu_homedir_populate1
+run_test test_lu_homedir_populate1 > "$workdir"/pop_output
 
 # Special files and fifos are not copied over.  Permissions are preserved,
 # ownership is changed to the desired values except for non-root groups
@@ -309,13 +326,15 @@ if [ $? -ne 0 ]; then
 fi
 
 # Populating an existing directory is prohibited
-fakeroot > "$workdir"/pop2_output 2>&1 <<EOF
-rm -rf "$workdir"/skel
-mkdir "$workdir"/{skel,pop2}
+function test_lu_homedir_populate2() {
+    rm -rf "$workdir"/skel
+    mkdir "$workdir"/{skel,pop2}
 
-$VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/pop2 556 557
-echo \$?
-EOF
+    $VALGRIND python "$srcdir"/fs_test.py --populate "$workdir"/pop2 556 557
+    echo $?
+}
+export -f test_lu_homedir_populate2
+run_test test_lu_homedir_populate2 > "$workdir"/pop2_output 2>&1
 diff "$workdir"/pop2_output - <<EOF
 Error creating \`$workdir/pop2': File exists
 1
