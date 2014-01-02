@@ -1,5 +1,7 @@
 2014-01-02  Miloslav Trmač  <mitr@redhat.com>
 
+	* lib/util.c (lu_util_field_write): Remove redundant assignments.
+
 	* lib/util.c (lu_util_field_write): Fix a memory leak.
 
 2013-11-21  Miloslav Trmač  <mitr@redhat.com>

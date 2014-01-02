@@ -628,18 +628,15 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 
 	if (lseek(fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
-		ret = FALSE;
 		goto err_pattern;
 	}
 	len = strlen(buf);
 	if (write(fd, buf, len) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
-		ret = FALSE;
 		goto err_pattern;
 	}
 	if (ftruncate(fd, len) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
-		ret = FALSE;
 		goto err_pattern;
 	}
 	ret = TRUE;
