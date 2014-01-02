@@ -1,4 +1,3 @@
-import crypt
 import libuser
 import sys
 import unittest
