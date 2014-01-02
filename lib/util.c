@@ -562,7 +562,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	buf = g_malloc0(st.st_size + 1 + strlen(value) + field);
 	if (read(fd, buf, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read, NULL);
-		return FALSE;
+		goto err_buf;
 	}
 
 	pattern = g_strdup_printf("\n%s:", first);
@@ -575,7 +575,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	}
 	if (line == NULL) {
 		lu_error_new(error, lu_error_search, NULL);
-		goto err;
+		goto err_pattern;
 	}
 
 	/* find the start of the field */
@@ -604,7 +604,7 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 		}
 	} else {
 		lu_error_new(error, lu_error_search, NULL);
-		goto err;
+		goto err_pattern;
 	}
 
 	if (start != NULL) {
@@ -629,23 +629,24 @@ lu_util_field_write(int fd, const char *first, unsigned int field,
 	if (lseek(fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
 		ret = FALSE;
-		goto err;
+		goto err_pattern;
 	}
 	len = strlen(buf);
 	if (write(fd, buf, len) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
 		ret = FALSE;
-		goto err;
+		goto err_pattern;
 	}
 	if (ftruncate(fd, len) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
 		ret = FALSE;
-		goto err;
+		goto err_pattern;
 	}
 	ret = TRUE;
 
-err:
+err_pattern:
 	g_free(pattern);
+err_buf:
 	g_free(buf);
 
 	return ret;
