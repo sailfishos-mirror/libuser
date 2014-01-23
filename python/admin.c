@@ -30,8 +30,6 @@
 #include "../apps/apputil.h"
 
 /* Boilerplate for the admin object, which wraps a libuser context. */
-static PyMethodDef libuser_admin_user_methods[];
-static PyMethodDef libuser_admin_group_methods[];
 static PyMethodDef libuser_admin_methods[];
 static PyTypeObject AdminType;
 #define Admin_Check(__x) ((__x)->ob_type == &AdminType)

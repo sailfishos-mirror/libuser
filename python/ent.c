@@ -28,7 +28,6 @@
 
 static PyMappingMethods libuser_entity_mapping_methods;
 static PyMethodDef libuser_entity_methods[];
-static PyMethodDef libuser_methods[];
 #define Entity_Check(__x) ((__x)->ob_type == &EntityType)
 
 /* Convert a g_value_array into a Python list of values. */

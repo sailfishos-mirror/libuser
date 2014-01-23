@@ -1,5 +1,9 @@
 2014-01-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/admin.c (libuser_admin_user_methods)
+	(libuser_admin_group_methods)
+	* python/ent.c (libuser_methods): Remove unused definitions.
+
 	* Makefile.am (noinst_HEADERS): Move ...
 	(python_libusermodule_la_SOURCES): ... here, to use ordinary linking
 	instead of #including .c files.
