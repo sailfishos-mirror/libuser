@@ -9,15 +9,8 @@
 #endif
 
 #ifdef DEBUG_BINDING
-static int indent = 0;
-static char *getindent()
-{
-	static char buf[LINE_MAX];
-	g_return_val_if_fail(indent < sizeof(buf), "");
-	memset(buf, 0, sizeof(buf));
-	memset(buf, ' ', indent);
-	return buf;
-}
+extern int indent G_GNUC_INTERNAL;
+char *getindent() G_GNUC_INTERNAL;
 #define DEBUG_ENTRY {\
 	fprintf(stderr, "%sEntering `%s' at line %d.\n", \
 		getindent(), __FUNCTION__, __LINE__); \

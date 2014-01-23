@@ -26,30 +26,27 @@ struct libuser_prompt {
 	struct lu_prompt prompt;
 };
 
-static PyTypeObject EntityType;
-static PyTypeObject AdminType;
-static PyTypeObject PromptType;
+extern PyTypeObject EntityType G_GNUC_INTERNAL;
 
-static PyObject *libuser_admin_new(PyObject *self, PyObject *args,
-				   PyObject *kwargs);
+PyObject *libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
+	G_GNUC_INTERNAL;
 
-static gboolean libuser_admin_python_prompter(struct lu_prompt *prompts,
-					      int count,
-		                              gpointer callback_data,
-					      struct lu_error **error);
-static PyObject *libuser_admin_prompt_console(PyObject *self,
-					      PyObject *args,
-					      PyObject *kwargs);
-static PyObject *libuser_admin_prompt_console_quiet(PyObject *self,
-						    PyObject *args,
-						    PyObject *kwargs);
+gboolean libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
+				       gpointer callback_data,
+				       struct lu_error **error) G_GNUC_INTERNAL;
+PyObject *libuser_admin_prompt_console(PyObject *self, PyObject *args,
+				       PyObject *kwargs) G_GNUC_INTERNAL;
+PyObject *libuser_admin_prompt_console_quiet(PyObject *self, PyObject *args,
+					     PyObject *kwargs) G_GNUC_INTERNAL;
 
-static PyObject *convert_value_array_pylist(GValueArray *array);
-static PyObject *convert_ent_array_pylist(GPtrArray *array);
-static PyObject *libuser_prompt_new(PyObject *ignored_self, PyObject *ignore);
+PyObject *convert_value_array_pylist(GValueArray *array) G_GNUC_INTERNAL;
+PyObject *convert_ent_array_pylist(GPtrArray *array) G_GNUC_INTERNAL;
+PyObject *libuser_prompt_new(PyObject *ignored_self, PyObject *ignore)
+	G_GNUC_INTERNAL;
 
-static PyObject *libuser_get_user_shells(PyObject *self, PyObject *ignored);
-static PyObject *libuser_wrap_ent(struct lu_ent *ent);
+PyObject *libuser_get_user_shells(PyObject *self, PyObject *ignored)
+	G_GNUC_INTERNAL;
+PyObject *libuser_wrap_ent(struct lu_ent *ent) G_GNUC_INTERNAL;
 
 void initlibuser(void);
 

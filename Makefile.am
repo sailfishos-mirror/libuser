@@ -84,7 +84,6 @@ pkginclude_HEADERS = lib/config.h lib/entity.h lib/error.h lib/fs.h \
 	lib/prompt.h lib/user.h lib/user_private.h
 
 dist_noinst_SCRIPTS = python/ldap-script python/test-script
-noinst_HEADERS = python/admin.c python/ent.c python/misc.c
 
 
 ## Rules
@@ -190,8 +189,8 @@ modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) \
 	-lsasl2
 modules_libuser_sasldb_la_LIBADD = lib/libuser.la
 
-python_libusermodule_la_SOURCES = python/libusermodule.c python/common.h \
-	python/debug.h
+python_libusermodule_la_SOURCES = python/admin.c python/ent.c \
+	python/libusermodule.c python/misc.c python/common.h python/debug.h
 python_libusermodule_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
 python_libusermodule_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 python_libusermodule_la_LIBADD = lib/libuser.la

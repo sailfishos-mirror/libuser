@@ -27,13 +27,22 @@
 #include "../lib/user_private.h"
 #include "common.h"
 
-#include "admin.c"
-#include "ent.c"
-#include "misc.c"
+#ifdef DEBUG_BINDING
+int indent = 0;
+
+char *getindent()
+{
+	static char buf[LINE_MAX];
+	g_return_val_if_fail(indent < sizeof(buf), "");
+	memset(buf, 0, sizeof(buf));
+	memset(buf, ' ', indent);
+	return buf;
+}
+#endif
 
 /* Return a list of the valid shells in the system, picked up from
  * getusershells(). */
-static PyObject *
+PyObject *
 libuser_get_user_shells(PyObject *self, PyObject *ignored)
 {
 	PyObject *ret;

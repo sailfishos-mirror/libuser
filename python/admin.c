@@ -1525,7 +1525,7 @@ static PyTypeObject AdminType = {
 	NULL,			/* tp_repr */
 };
 
-static PyObject *
+PyObject *
 libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 {
 	char *name = getlogin(), *modules = NULL, *create = NULL, *p, *q;

@@ -30,7 +30,7 @@
 static PyTypeObject PromptType;
 #define Prompt_Check(__x) ((__x)->ob_type == &PromptType)
 
-static gboolean
+gboolean
 libuser_admin_python_prompter(struct lu_prompt *prompts, int count,
 			      gpointer callback_data,
 			      struct lu_error **error)
@@ -208,7 +208,7 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 	}
 }
 
-static PyObject *
+PyObject *
 libuser_admin_prompt_console(PyObject * self, PyObject * args,
 			     PyObject * kwargs)
 {
@@ -217,7 +217,7 @@ libuser_admin_prompt_console(PyObject * self, PyObject * args,
 				    kwargs, lu_prompt_console);
 }
 
-static PyObject *
+PyObject *
 libuser_admin_prompt_console_quiet(PyObject * self, PyObject * args,
 				   PyObject * kwargs)
 {
@@ -386,7 +386,7 @@ libuser_prompt_print(PyObject *self, FILE *fp, int flags)
 	return 0;
 }
 
-static PyObject *
+PyObject *
 libuser_prompt_new(PyObject *ignored_self, PyObject *ignore)
 {
 	struct libuser_prompt *ret;

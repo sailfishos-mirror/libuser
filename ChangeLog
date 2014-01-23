@@ -1,5 +1,23 @@
 2014-01-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* Makefile.am (noinst_HEADERS): Move ...
+	(python_libusermodule_la_SOURCES): ... here, to use ordinary linking
+	instead of #including .c files.
+	* python/admin.c (libuser_admin_new)
+	* python/ent.c (convert_value_array_pylist, convert_ent_array_pylist)
+	(libuser_wrap_ent, EntityType)
+	* python/libusermodule.c (libuser_get_user_shells)
+	* python/misc.c (libuser_admin_python_prompter)
+	(libuser_admin_prompt_console, libuser_admin_prompt_console_quiet)
+	(libuser_prompt_new): Make non-static, module-internal.
+	* python/common.h: Use G_GNUC_INTERNAL declarations instead of static
+	declarations for all of the above symbols.	
+	* python/common.h (AdminType, PromptType): Remove declarations that
+	would result in redundant static definitions.
+	* python/debug.h (indent, getindent): Replace by declarations.
+	* python/libusermodule.c (indent, getindent): Move the definitions here
+	to keep the indent a shared value.	
+
 	* modules/krb5.c: Remove, there's no point distributing the non-working
 	code.  It can always be resurrected from the VCS.
 	* configure.ac (KRB5): Remove hardcoded-false conditional.

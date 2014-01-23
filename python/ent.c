@@ -29,11 +29,10 @@
 static PyMappingMethods libuser_entity_mapping_methods;
 static PyMethodDef libuser_entity_methods[];
 static PyMethodDef libuser_methods[];
-static PyTypeObject EntityType;
 #define Entity_Check(__x) ((__x)->ob_type == &EntityType)
 
 /* Convert a g_value_array into a Python list of values. */
-static PyObject *
+PyObject *
 convert_value_array_pylist(GValueArray *array)
 {
 	PyObject *ret;
@@ -93,7 +92,7 @@ convert_value_array_pylist(GValueArray *array)
 
 /* Convert a (potentially NULL) GPtrArray of entities into a Python list of
    values. */
-static PyObject *
+PyObject *
 convert_ent_array_pylist(GPtrArray *array)
 {
 	PyObject *ret;
@@ -115,7 +114,7 @@ convert_ent_array_pylist(GPtrArray *array)
 }
 
 /* Wrap up an entity object in a pretty Python wrapper. */
-static PyObject *
+PyObject *
 libuser_wrap_ent(struct lu_ent *ent)
 {
 	struct libuser_entity *ret;
@@ -782,7 +781,7 @@ static PyMethodDef libuser_entity_methods[] = {
 	{NULL, NULL, 0, NULL},
 };
 
-static PyTypeObject EntityType = {
+PyTypeObject EntityType = {
 	PyObject_HEAD_INIT(&PyType_Type)
 	0,
 	"Entity",		/* tp_name */
