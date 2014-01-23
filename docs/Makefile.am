@@ -14,10 +14,10 @@ libuser.conf.5: $(srcdir)/libuser.conf.5.in Makefile
 	sed 's,@sysconfdir\@,$(sysconfdir),g' \
 		< $(srcdir)/libuser.conf.5.in > $@
 
-sgml/libuser.txt: $(srcdir)/sgml/libuser.sgml
+sgml/libuser.txt: $(abs_srcdir)/sgml/libuser.sgml
 	[ -d sgml ] || mkdir sgml
-	cd sgml; sgml2txt ../$(srcdir)/sgml/libuser.sgml
+	cd sgml; sgml2txt $(abs_srcdir)/sgml/libuser.sgml
 
-sgml/libuser.html: $(srcdir)/sgml/libuser.sgml
+sgml/libuser.html: $(abs_srcdir)/sgml/libuser.sgml
 	[ -d sgml ] || mkdir sgml
-	cd sgml; sgml2html ../$(srcdir)/sgml/libuser.sgml
+	cd sgml; sgml2html $(abs_srcdir)/sgml/libuser.sgml

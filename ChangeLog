@@ -1,3 +1,8 @@
+2014-01-23  Miloslav Trmač  <mitr@redhat.com>
+
+	* docs/Makefile.am (sgml/libuser.txt, sgml/libuser.html): Fix build if
+	$(srcdir) is an absolute path. 
+
 2014-01-02  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/default_pw_test.py: Remove an unused import.
