@@ -63,9 +63,6 @@ check_PROGRAMS = tests/alloc_port tests/wait_for_slapd_exit \
 noinst_LTLIBRARIES = apps/libapputil.la
 lib_LTLIBRARIES = lib/libuser.la
 pkglib_LTLIBRARIES = modules/libuser_files.la modules/libuser_shadow.la
-if KRB5
-pkglib_LTLIBRARIES += modules/libuser_krb5.la
-endif
 if LDAP
 pkglib_LTLIBRARIES += modules/libuser_ldap.la
 endif
@@ -183,10 +180,6 @@ modules_libuser_files_la_LIBADD = lib/libuser.la
 modules_libuser_shadow_la_SOURCES = modules/files.c
 modules_libuser_shadow_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
 modules_libuser_shadow_la_LIBADD = lib/libuser.la
-
-modules_libuser_krb5_la_SOURCES = modules/krb5.c
-modules_libuser_krb5_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
-modules_libuser_krb5_la_LIBADD = lib/libuser.la
 
 modules_libuser_ldap_la_SOURCES = modules/ldap.c
 modules_libuser_ldap_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) -lldap

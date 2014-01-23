@@ -398,10 +398,6 @@ The bind types (but not necessarily \fImechanism\fR) are case-insensitive.
 If more than one bind type is specified, their relative order is ignored.
 Default value is \fBsimple,sasl\fR.
 
-.\" [krb5] is not currently implemented
-.\" realm: default is krb5's default realm
-.\" principal: default is $user/admin@$default_realm
-
 .SH \fB[sasl]\fR
 Configures the
 .B sasl

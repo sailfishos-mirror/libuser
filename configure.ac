@@ -152,9 +152,6 @@ fi
 
 GTK_DOC_CHECK
 
-dnl Does not even compile
-AM_CONDITIONAL([KRB5], [false])
-
 AC_CONFIG_FILES([Makefile po/Makefile.in docs/Makefile docs/reference/Makefile
 libuser.pc])
 AC_OUTPUT

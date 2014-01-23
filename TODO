@@ -1,6 +1,4 @@
 Easy:
-* Make krb5 module return a suitable error when it's only passed crypted
-  passwords ("this password is already hashed -- it is of no use to me").
 * Workalikes for various apps on other OSs:
   http://docs.sun.com/ab2/coll.40.6/REFMAN1/@Ab2PageView/169291
   http://docs.sun.com/ab2/coll.40.6/REFMAN1/@Ab2PageView/64438

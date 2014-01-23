@@ -1,7 +1,15 @@
 2014-01-23  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/krb5.c: Remove, there's no point distributing the non-working
+	code.  It can always be resurrected from the VCS.
+	* configure.ac (KRB5): Remove hardcoded-false conditional.
+	* Makefile.am (pkglib_LTLIBRARIES): Remove support for the KRB5
+	conditional.  Related configuration removed.
+	* docs/libuser.conf.5.in, docs/sgml/libuser.sgml, TODO: Remove
+	references to the krb5 module. 
+
 	* docs/Makefile.am (sgml/libuser.txt, sgml/libuser.html): Fix build if
-	$(srcdir) is an absolute path. 
+	$(srcdir) is an absolute path.
 
 2014-01-02  Miloslav Trmač  <mitr@redhat.com>
 

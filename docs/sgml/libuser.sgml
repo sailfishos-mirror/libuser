@@ -92,7 +92,7 @@ lists the modules to be consulted when looking up user information.
 account's authentication information from other information.  This is done
 to allow different information stores to be used for these functions, and
 because some information stores can only hold authentication data (for
-example, shadow and krb5).
+example, shadow).
 
 <p>For the <bf>info_modules</bf> and <bf>auth_modules</bf> lists, order
 is only important for account creation -- the library will attempt to
@@ -144,23 +144,6 @@ to store configuration data.  It presently recognizes these flags:
 <itemize>
 <item>directory - the directory the <bf>shadow</bf> and <bf>gshadow</bf>
 files are to be stored in.
-</itemize>
-
-</sect2>
-
-<sect2>krb5
-
-<p>The krb5 module implements only an authentication data store using
-a connection to the Kerberos realm's administrative server and the kadmin
-protocols.
-
-<p>This module uses the <bf>krb5</bf> section of the configuration file
-to store configuration data.  It presently recognizes these flags:
-
-<itemize>
-<item>realm - the default realm to administer accounts in.  If not specified,
-the value is taken from <bf>krb5.conf</bf> by the Kerberos libraries the
-module links with.
 </itemize>
 
 </sect2>
