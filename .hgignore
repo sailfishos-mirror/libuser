@@ -1,5 +1,9 @@
 .*~$
 .*\.bak$
+^.autotools$
+^.cproject$
+^.project$
+^.settings$
 ^admin/ar-lib$
 ^admin/compile$
 ^admin/config\.guess$
