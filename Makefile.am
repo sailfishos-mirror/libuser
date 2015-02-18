@@ -10,7 +10,7 @@ HGTAG = 'libuser-$(VERSION)'
 
 AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
-PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
+PYTHON_CPPFLAGS = -I$(PYINCLUDEDIR)
 
 # Ignore possibly lost, there are too many due to Python.  --gen-suppressions
 # makes the run interactive, which is not good for regression testing - we

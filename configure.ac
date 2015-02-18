@@ -104,7 +104,9 @@ AC_ARG_WITH([python],
 AM_CONDITIONAL([WITH_PYTHON], [test $with_python != no])
 if test $with_python != no ; then
    AM_PATH_PYTHON
+   PYINCLUDEDIR=`$PYTHON -c 'import sysconfig; print(sysconfig.get_path("include"))'`
 fi
+AC_SUBST(PYINCLUDEDIR)
 
 AC_ARG_WITH([selinux],
 	    AS_HELP_STRING([--with-selinux],

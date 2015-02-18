@@ -1,3 +1,9 @@
+2015-02-18  Miloslav Trmač  <mitr@redhat.com>
+
+	* configure.ac: Define PYINCLUDEDIR.
+	* Makefile.am (PYTHON_CPPFLAGS): Use PYINCLUDEDIR instead of hard-coding
+	the path.  This is necessary for Python 3.	 
+ 
 2014-01-23  Miloslav Trmač  <mitr@redhat.com>
 
 	* python/admin.c (libuser_admin_user_methods)
