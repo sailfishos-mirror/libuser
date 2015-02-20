@@ -7,6 +7,9 @@
 	* tests/fs_test:
 	* tests/ldap_test:
 	* tests/pwhash_test: Use $PYTHON to run tests.
+	
+	* Makefile.am (pyexec_LTLIBRARIES): Rename from libusermodule.so to
+	libuser.so so that Python 3 can find it.  Dependency data updated.
 
 2015-02-18  Miloslav Trmač  <mitr@redhat.com>
 

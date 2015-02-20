@@ -71,7 +71,7 @@ if SASL
 pkglib_LTLIBRARIES += modules/libuser_sasldb.la
 endif
 if WITH_PYTHON
-pyexec_LTLIBRARIES = python/libusermodule.la
+pyexec_LTLIBRARIES = python/libuser.la
 endif
 
 dist_man_MANS = apps/lgroupadd.1 apps/lgroupdel.1 apps/lgroupmod.1 \
@@ -190,11 +190,11 @@ modules_libuser_sasldb_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS) \
 	-lsasl2
 modules_libuser_sasldb_la_LIBADD = lib/libuser.la
 
-python_libusermodule_la_SOURCES = python/admin.c python/ent.c \
+python_libuser_la_SOURCES = python/admin.c python/ent.c \
 	python/libusermodule.c python/misc.c python/common.h python/debug.h
-python_libusermodule_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
-python_libusermodule_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
-python_libusermodule_la_LIBADD = lib/libuser.la
+python_libuser_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
+python_libuser_la_LDFLAGS = -module -avoid-version $(GOBJECT_LIBS)
+python_libuser_la_LIBADD = lib/libuser.la
 
 samples_enum_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 samples_enum_LDADD = lib/libuser.la $(GMODULE_LIBS)
