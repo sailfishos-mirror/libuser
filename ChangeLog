@@ -1,5 +1,10 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (initialize_libuser_module): Split from
+	initlibuser().
+	(libuser_module_doc, libuser_module, PyInit_libuser): New definitions
+	to support loading as a Python 3 module.
+
 	* python/common.h (PYINTTYPE_FROMLONG): New macro to abstract away
 	returning integers in Python 2 and 3.
 	* python/admin.c (libuser_admin_do_wrap, libuser_admin_wrap_boolean)

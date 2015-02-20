@@ -137,12 +137,11 @@ dict_add_string(PyObject *dict, const char *key, const char *value)
 	dict_add_stolen_object(dict, key, PYSTRTYPE_FROMSTRING(value));
 }
 
-void
-initlibuser(void)
+static void
+initialize_libuser_module(PyObject *module)
 {
-	PyObject *module, *dict;
-	DEBUG_ENTRY;
-	module = Py_InitModule("libuser", libuser_methods);
+	PyObject *dict;
+
 	dict = PyModule_GetDict(module);
 	dict_add_stolen_object(dict, "USER", PYINTTYPE_FROMLONG(lu_user));
 	dict_add_stolen_object(dict, "GROUP", PYINTTYPE_FROMLONG(lu_group));
@@ -187,6 +186,51 @@ initlibuser(void)
 			       PYINTTYPE_FROMLONG(UT_NAMESIZE));
 	dict_add_stolen_object(dict, "VALUE_INVALID_ID",
 			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
+}
 
+#if PY_MAJOR_VERSION < 3
+void
+initlibuser(void)
+{
+	PyObject *module;
+
+	DEBUG_ENTRY;
+	module = Py_InitModule("libuser", libuser_methods);
+	initialize_libuser_module(module);
 	DEBUG_EXIT;
 }
+
+#else /* PY_MAJOR_VERSION >= 3 */
+
+PyDoc_STRVAR(libuser_module_doc, "Python bindings for the libuser library");
+
+static struct PyModuleDef libuser_module = {
+	PyModuleDef_HEAD_INIT,
+	"libuser",
+	libuser_module_doc,
+	-1,
+	libuser_methods,
+	NULL,
+	NULL,
+	NULL,
+	NULL
+};
+
+PyMODINIT_FUNC
+PyInit_libuser(void)
+{
+	PyObject *module;
+
+	DEBUG_ENTRY;
+	module = PyModule_Create(&libuser_module);
+	if (module == NULL)
+		goto err;
+	initialize_libuser_module(module);
+	DEBUG_EXIT;
+	return module;
+
+err:
+	DEBUG_EXIT;
+	return NULL;
+}
+#endif /* PY_MAJOR_VERSION >= 3 */
