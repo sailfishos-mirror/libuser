@@ -203,7 +203,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		g_value_set_string(value, PYSTRTYPE_ASSTRING(item));
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
-			getindent(), PyString_AsString(item));
+			getindent(), PYSTRTYPE_ASSTRING(item));
 #endif
 	} else
 #if PY_MAJOR_VERSION < 3 && defined(Py_USING_UNICODE)
@@ -244,8 +244,8 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 			return FALSE;
 		}
 #ifdef DEBUG_BINDING
-		fprintf(stderr, "%sAdding (`%s') to list.\n",
-			getindent(), PyString_AsString(item));
+		fprintf(stderr, "%sAdding (%lld) to list.\n",
+			getindent(), ll);
 #endif
 	} else {
 		PyErr_SetString(PyExc_TypeError,

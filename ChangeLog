@@ -1,5 +1,8 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ent.c (libuser_convert_to_value): Remove two more direct uses
+	of PyString_AsString in debug output (converting one, fixing the other).
+
 	* python/ent.c (libuser_convert_to_value): Fix a type mismatch in debug
 	output.
 
