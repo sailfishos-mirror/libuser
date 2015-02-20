@@ -213,11 +213,11 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 		g_value_init(value, G_TYPE_STRING);
 		tmp = PyUnicode_AsUTF8String(item);
 		g_value_set_string(value, PyString_AsString(tmp));
-		Py_DECREF(tmp);
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding unicode (`%s') to list.\n",
-			getindent(), PyUnicode_AsUTF8String(item));
+			getindent(), PyString_AsString(tmp));
 #endif
+		Py_DECREF(tmp);
 	} else
 #endif
 	if (PyNumber_Check(item)) {

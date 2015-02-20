@@ -1,5 +1,8 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ent.c (libuser_convert_to_value): Fix a type mismatch in debug
+	output.
+
 	* python/common.h (PYSTRTYPE_ASSTRING, PYSTRTYPE_CHECK): New macros
 	to abstract away accepting strings from Python 2 and 3.
 	* python/ent.c (libuser_convert_to_value, libuser_entity_setattr)
