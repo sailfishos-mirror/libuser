@@ -1,5 +1,8 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (initlibuser): Use PyMODINIT_FUNC as Python
+	documents.
+
 	* python/libusermodule.c (initialize_libuser_module): Split from
 	initlibuser().
 	(libuser_module_doc, libuser_module, PyInit_libuser): New definitions

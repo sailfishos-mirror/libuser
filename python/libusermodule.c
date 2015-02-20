@@ -189,7 +189,7 @@ initialize_libuser_module(PyObject *module)
 }
 
 #if PY_MAJOR_VERSION < 3
-void
+PyMODINIT_FUNC
 initlibuser(void)
 {
 	PyObject *module;
