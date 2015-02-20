@@ -294,38 +294,38 @@ libuser_prompt_setattr(PyObject *self, char *attr, PyObject * args)
 	DEBUG_ENTRY;
 	me = (struct libuser_prompt *)self;
 	if (strcmp(attr, "prompt") == 0) {
-		if (!PyString_Check(args)) {
+		if (!PYSTRTYPE_CHECK(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"prompt must be a string");
 			DEBUG_EXIT;
 			return -1;
 		}
 		g_free((char *)me->prompt.prompt);
-		me->prompt.prompt = g_strdup(PyString_AsString(args));
+		me->prompt.prompt = g_strdup(PYSTRTYPE_ASSTRING(args));
 		DEBUG_EXIT;
 		return 0;
 	}
 	if (strcmp(attr, "domain") == 0) {
-		if (!PyString_Check(args)) {
+		if (!PYSTRTYPE_CHECK(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"domain must be a string");
 			DEBUG_EXIT;
 			return -1;
 		}
 		g_free((char *)me->prompt.domain);
-		me->prompt.domain = g_strdup(PyString_AsString(args));
+		me->prompt.domain = g_strdup(PYSTRTYPE_ASSTRING(args));
 		DEBUG_EXIT;
 		return 0;
 	}
 	if (strcmp(attr, "key") == 0) {
-		if (!PyString_Check(args)) {
+		if (!PYSTRTYPE_CHECK(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"key must be a string");
 			DEBUG_EXIT;
 			return -1;
 		}
 		g_free((char *)me->prompt.key);
-		me->prompt.key = g_strdup(PyString_AsString(args));
+		me->prompt.key = g_strdup(PYSTRTYPE_ASSTRING(args));
 		DEBUG_EXIT;
 		return 0;
 	}
@@ -336,7 +336,7 @@ libuser_prompt_setattr(PyObject *self, char *attr, PyObject * args)
 	}
 	if ((strcmp(attr, "default_value") == 0) ||
 	    (strcmp(attr, "defaultValue") == 0)) {
-		if (!PyString_Check(args)) {
+		if (!PYSTRTYPE_CHECK(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"default value must be a string");
 			DEBUG_EXIT;
@@ -344,12 +344,12 @@ libuser_prompt_setattr(PyObject *self, char *attr, PyObject * args)
 		}
 		g_free((char *)me->prompt.default_value);
 		me->prompt.default_value = (args == Py_None)
-			? NULL : g_strdup(PyString_AsString(args));
+			? NULL : g_strdup(PYSTRTYPE_ASSTRING(args));
 		DEBUG_EXIT;
 		return 0;
 	}
 	if (strcmp(attr, "value") == 0) {
-		if (!PyString_Check(args)) {
+		if (!PYSTRTYPE_CHECK(args)) {
 			PyErr_SetString(PyExc_TypeError,
 					"value must be a string");
 			DEBUG_EXIT;
@@ -357,7 +357,7 @@ libuser_prompt_setattr(PyObject *self, char *attr, PyObject * args)
 		}
 		if (me->prompt.value && me->prompt.free_value)
 			me->prompt.free_value(me->prompt.value);
-		me->prompt.value = g_strdup(PyString_AsString(args));
+		me->prompt.value = g_strdup(PYSTRTYPE_ASSTRING(args));
 		me->prompt.free_value = g_free;
 		DEBUG_EXIT;
 		return 0;

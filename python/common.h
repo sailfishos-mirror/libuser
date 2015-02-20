@@ -10,6 +10,14 @@
 typedef int Py_ssize_t;
 #endif
 
+#if PY_MAJOR_VERSION >= 3
+#define PYSTRTYPE_ASSTRING PyUnicode_AsUTF8
+#define PYSTRTYPE_CHECK PyUnicode_Check
+#else
+#define PYSTRTYPE_ASSTRING PyString_AsString
+#define PYSTRTYPE_CHECK PyString_Check
+#endif
+
 struct libuser_admin {
 	PyObject_HEAD
 	PyObject *prompt_data[2];

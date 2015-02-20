@@ -197,16 +197,16 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 			(long long)ll);
 #endif
 	} else
-	/* If it's a PyString, convert it. */
-	if (PyString_Check(item)) {
+	/* If it's a PyString/PyUnicode, convert it. */
+	if (PYSTRTYPE_CHECK(item)) {
 		g_value_init(value, G_TYPE_STRING);
-		g_value_set_string(value, PyString_AsString(item));
+		g_value_set_string(value, PYSTRTYPE_ASSTRING(item));
 #ifdef DEBUG_BINDING
 		fprintf(stderr, "%sAdding (`%s') to list.\n",
 			getindent(), PyString_AsString(item));
 #endif
 	} else
-#ifdef Py_USING_UNICODE
+#if PY_MAJOR_VERSION < 3 && defined(Py_USING_UNICODE)
 	if (PyUnicode_Check(item)) {
 		PyObject *tmp;
 
@@ -333,7 +333,7 @@ libuser_entity_setattr(PyObject *self, char *name, PyObject *args)
 			ret = 0;
 			goto end;
 		} else
-		if (PyString_Check(list) ||
+		if (PYSTRTYPE_CHECK(list) ||
 		    PyLong_Check(list) ||
 		    PyNumber_Check(list)) {
 			/* It's a single item, so just add it. */
@@ -608,12 +608,12 @@ libuser_entity_get_item(PyObject *self, PyObject *item)
 	me = (struct libuser_entity *)self;
 
 	/* Our lone argument should be a string. */
-	if (!PyString_Check(item)) {
+	if (!PYSTRTYPE_CHECK(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
 		DEBUG_EXIT;
 		return NULL;
 	}
-	attr = PyString_AsString(item);
+	attr = PYSTRTYPE_ASSTRING(item);
 
 	if (!lu_ent_has(me->ent, attr)) {
 		PyErr_SetString(PyExc_KeyError,
@@ -660,12 +660,12 @@ libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 	me = (struct libuser_entity *)self;
 
 	/* The item should be a string. */
-	if (!PyString_Check(item)) {
+	if (!PYSTRTYPE_CHECK(item)) {
 		PyErr_SetString(PyExc_TypeError, "expected a string");
 		DEBUG_EXIT;
 		return -1;
 	}
-	attr = PyString_AsString(item);
+	attr = PYSTRTYPE_ASSTRING(item);
 #ifdef DEBUG_BINDING
 	fprintf(stderr, "%sSetting item (`%s')...\n", getindent(), attr);
 #endif
@@ -721,7 +721,7 @@ libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 		goto end;
 	} else
 	/* If the new value is a value, convert it and add it. */
-	if (PyString_Check(args) ||
+	if (PYSTRTYPE_CHECK(args) ||
 	    PyNumber_Check(args) ||
 	    PyLong_Check(args)) {
 		lu_ent_clear(me->ent, attr);
