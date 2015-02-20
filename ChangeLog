@@ -1,5 +1,9 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (libuser_module_doc): Move out of the Python 3
+	conditional.
+	(initlibuser): Use libuser_module_doc. 
+
 	* python/libusermodule.c (initlibuser): Use PyMODINIT_FUNC as Python
 	documents.
 

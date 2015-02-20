@@ -188,6 +188,8 @@ initialize_libuser_module(PyObject *module)
 			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
 }
 
+PyDoc_STRVAR(libuser_module_doc, "Python bindings for the libuser library");
+
 #if PY_MAJOR_VERSION < 3
 PyMODINIT_FUNC
 initlibuser(void)
@@ -195,14 +197,12 @@ initlibuser(void)
 	PyObject *module;
 
 	DEBUG_ENTRY;
-	module = Py_InitModule("libuser", libuser_methods);
+	module = Py_InitModule3("libuser", libuser_methods, libuser_module_doc);
 	initialize_libuser_module(module);
 	DEBUG_EXIT;
 }
 
 #else /* PY_MAJOR_VERSION >= 3 */
-
-PyDoc_STRVAR(libuser_module_doc, "Python bindings for the libuser library");
 
 static struct PyModuleDef libuser_module = {
 	PyModuleDef_HEAD_INIT,
