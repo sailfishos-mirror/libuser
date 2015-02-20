@@ -658,7 +658,7 @@ libuser_entity_has_key(PyObject *self, PyObject *item)
 		DEBUG_EXIT;
 		return NULL;
 	}
-	return PyInt_FromLong(lu_ent_has(me->ent, attr) ? 1 : 0);
+	return PYINTTYPE_FROMLONG(lu_ent_has(me->ent, attr) ? 1 : 0);
 }
 
 /* Set a value, dictionary style. */

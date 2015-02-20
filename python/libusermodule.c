@@ -144,8 +144,8 @@ initlibuser(void)
 	DEBUG_ENTRY;
 	module = Py_InitModule("libuser", libuser_methods);
 	dict = PyModule_GetDict(module);
-	dict_add_stolen_object(dict, "USER", PyInt_FromLong(lu_user));
-	dict_add_stolen_object(dict, "GROUP", PyInt_FromLong(lu_group));
+	dict_add_stolen_object(dict, "USER", PYINTTYPE_FROMLONG(lu_user));
+	dict_add_stolen_object(dict, "GROUP", PYINTTYPE_FROMLONG(lu_group));
 
 	/* User attributes. */
 	dict_add_string(dict, "USERNAME", LU_USERNAME);
@@ -184,7 +184,7 @@ initlibuser(void)
 
 	/* Miscellaneous. */
 	dict_add_stolen_object(dict, "UT_NAMESIZE",
-			       PyInt_FromLong(UT_NAMESIZE));
+			       PYINTTYPE_FROMLONG(UT_NAMESIZE));
 	dict_add_stolen_object(dict, "VALUE_INVALID_ID",
 			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
 

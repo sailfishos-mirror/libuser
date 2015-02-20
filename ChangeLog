@@ -1,5 +1,16 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h (PYINTTYPE_FROMLONG): New macro to abstract away
+	returning integers in Python 2 and 3.
+	* python/admin.c (libuser_admin_do_wrap, libuser_admin_wrap_boolean)
+	(libuser_admin_setpass, libuser_admin_create_home)
+	(libuser_admin_remove_home, libuser_admin_remove_home_if_owned)
+	(libuser_admin_move_home, libuser_admin_create_remove_mail)
+	(libuser_admin_add_user, libuser_admin_delete_user)
+	* python/ent.c (libuser_entity_has_key)
+	* python/libusermodule (initlibuser)
+	* python/misc.c (libuser_prompt_getattr): Use PYINTTYPE_FROMLONG.
+
 	* python/common.h (PYSTRTYPE_FROMSTRING): New macro to abstract away
 	returning strings to Python 2 and 3.
 	* python/ent.c (convert_value_array_pylist): Document that it may now

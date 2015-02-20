@@ -11,10 +11,12 @@ typedef int Py_ssize_t;
 #endif
 
 #if PY_MAJOR_VERSION >= 3
+#define PYINTTYPE_FROMLONG PyLong_FromLong
 #define PYSTRTYPE_ASSTRING PyUnicode_AsUTF8
 #define PYSTRTYPE_CHECK PyUnicode_Check
 #define PYSTRTYPE_FROMSTRING PyUnicode_FromString
 #else
+#define PYINTTYPE_FROMLONG PyInt_FromLong
 #define PYSTRTYPE_ASSTRING PyString_AsString
 #define PYSTRTYPE_CHECK PyString_Check
 #define PYSTRTYPE_FROMSTRING PyString_FromString

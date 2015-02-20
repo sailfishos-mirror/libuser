@@ -345,7 +345,7 @@ libuser_admin_do_wrap(PyObject *self, struct libuser_entity *ent,
 	if (fn(me->ctx, ent->ent, &error)) {
 		/* It succeeded!  Return truth. */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* It failed.  Build an exception and return an error. */
 		PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
@@ -407,7 +407,7 @@ libuser_admin_wrap_boolean(PyObject *self, PyObject *args, PyObject *kwargs,
 	if (error != NULL)
 		lu_error_free(&error);
 	DEBUG_EXIT;
-	return PyInt_FromLong(ret ? 1 : 0);
+	return PYINTTYPE_FROMLONG(ret ? 1 : 0);
 }
 
 /* Wrap the setpass function for either type of entity. */
@@ -438,7 +438,7 @@ libuser_admin_setpass(PyObject *self, PyObject *args, PyObject *kwargs,
 	       &error)) {
 		/* The change succeeded.  Return a truth. */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* The change failed.  Return an error. */
 		PyErr_SetString(PyExc_SystemError, lu_strerror(error));
@@ -505,9 +505,8 @@ libuser_admin_create_home(PyObject *self, PyObject *args,
 	/* Attempt to populate the directory. */
 	if (lu_homedir_populate(context, skeleton, dir, uidNumber, gidNumber,
 				0700, &error)) {
-		/* Success -- return an empty tuple. */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* Failure.  Mark the error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -545,7 +544,7 @@ libuser_admin_remove_home(PyObject *self, PyObject *args,
 	if (lu_homedir_remove_for_user(ent->ent, &error)) {
 		/* Successfully removed. */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* Removal failed.  You'll have to come back for repeated
 		 * treatments. */
@@ -584,7 +583,7 @@ libuser_admin_remove_home_if_owned(PyObject *self, PyObject *args,
 	if (lu_homedir_remove_for_user_if_owned(ent->ent, &error)) {
 		/* Successfully removed. */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* Removal failed.  You'll have to come back for repeated
 		 * treatments. */
@@ -656,7 +655,7 @@ libuser_admin_move_home(PyObject *self, PyObject *args,
 	if (lu_homedir_move(olddir, newdir, &error)) {
 		/* Success! */
 		DEBUG_EXIT;
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		/* Failure.  Set an error. */
 		PyErr_SetString(PyExc_RuntimeError,
@@ -699,7 +698,7 @@ libuser_admin_create_remove_mail(PyObject *self, PyObject *args,
 	else
 		res = lu_mail_spool_remove(me->ctx, ent->ent, &error);
 	if (res) {
-		return PyInt_FromLong(1);
+		return PYINTTYPE_FROMLONG(1);
 	} else {
 		PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
 		if (error != NULL)
@@ -780,7 +779,7 @@ libuser_admin_add_user(PyObject *self, PyObject *args, PyObject *kwargs)
 		Py_DECREF(ret);
 		error = NULL;
 		if (lu_mail_spool_create(context, ent->ent, &error))
-			ret = PyInt_FromLong(1);
+			ret = PYINTTYPE_FROMLONG(1);
 		else {
 			PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
 			if (error != NULL)
@@ -903,7 +902,7 @@ libuser_admin_delete_user(PyObject *self, PyObject *args,
 		entity = (struct libuser_entity *)ent;
 		error = NULL;
 		if (lu_mail_spool_remove(context, entity->ent, &error))
-			ret = PyInt_FromLong(1);
+			ret = PYINTTYPE_FROMLONG(1);
 		else {
 			PyErr_SetString(PyExc_RuntimeError, lu_strerror(error));
 			if (error != NULL)

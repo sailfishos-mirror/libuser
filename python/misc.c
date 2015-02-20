@@ -265,7 +265,7 @@ libuser_prompt_getattr(PyObject *self, char *attr)
 	}
 	if (strcmp(attr, "visible") == 0) {
 		DEBUG_EXIT;
-		return PyInt_FromLong(me->prompt.visible);
+		return PYINTTYPE_FROMLONG(me->prompt.visible);
 	}
 	if ((strcmp(attr, "default_value") == 0) ||
 	    (strcmp(attr, "defaultValue") == 0)) {
