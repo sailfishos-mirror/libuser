@@ -12,6 +12,7 @@ AM_CPPFLAGS = $(GOBJECT_CFLAGS)
 LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
 PYTHON_CPPFLAGS = -I$(PYINCLUDEDIR)
 
+AM_TESTS_ENVIRONMENT = PYTHON=$(PYTHON); export PYTHON;
 # Ignore possibly lost, there are too many due to Python.  --gen-suppressions
 # makes the run interactive, which is not good for regression testing - we
 # are not there yet.

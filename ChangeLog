@@ -1,3 +1,13 @@
+2015-02-20  Miloslav Trmač  <mitr@redhat.com>
+
+	* Makefile.am (AM_TESTS_ENVIRONMENT): Define PYTHON in tests.
+	* tests/config_test.sh:
+	* tests/default_pw_test:
+	* tests/files_test:
+	* tests/fs_test:
+	* tests/ldap_test:
+	* tests/pwhash_test: Use $PYTHON to run tests.
+
 2015-02-18  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.ac: Define PYINCLUDEDIR.

@@ -75,7 +75,7 @@ get_ldap_password() # entry filter
 
 valid_password() # encoded value
 {
-    local v=$(python -c "import crypt; print crypt.crypt('password', '$1')")
+    local v=$($PYTHON -c "import crypt; print crypt.crypt('password', '$1')")
     [ "x$v" = "x$1" ]
 }
 
@@ -124,7 +124,7 @@ for modules in \
     esac
 
     # Point "$HOME/ldaprc" to "$srcdir"/ldaprc
-    HOME="$srcdir" $VALGRIND python "$srcdir"/default_pw_test.py \
+    HOME="$srcdir" $VALGRIND $PYTHON "$srcdir"/default_pw_test.py \
 	"$valid_combination"
 
     if [ "$valid_combination" -ne 0 ]; then

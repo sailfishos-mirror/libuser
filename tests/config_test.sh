@@ -49,4 +49,4 @@ $VALGRIND tests/config_test "$workdir"
 
 LIBUSER_CONF="$workdir/libuser_import.conf"
 export LIBUSER_CONF
-workdir="$workdir" $VALGRIND python "$srcdir"/config_test.py
+workdir="$workdir" $VALGRIND $PYTHON "$srcdir"/config_test.py
