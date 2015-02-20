@@ -253,15 +253,15 @@ libuser_prompt_getattr(PyObject *self, char *attr)
 	me = (struct libuser_prompt *)self;
 	if (strcmp(attr, "key") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(me->prompt.key);
+		return PYSTRTYPE_FROMSTRING(me->prompt.key);
 	}
 	if (strcmp(attr, "prompt") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(me->prompt.prompt);
+		return PYSTRTYPE_FROMSTRING(me->prompt.prompt);
 	}
 	if (strcmp(attr, "domain") == 0) {
 		DEBUG_EXIT;
-		return PyString_FromString(me->prompt.domain ?: "");
+		return PYSTRTYPE_FROMSTRING(me->prompt.domain ?: "");
 	}
 	if (strcmp(attr, "visible") == 0) {
 		DEBUG_EXIT;
@@ -271,14 +271,14 @@ libuser_prompt_getattr(PyObject *self, char *attr)
 	    (strcmp(attr, "defaultValue") == 0)) {
 		DEBUG_EXIT;
 		if (me->prompt.default_value != NULL)
-			return PyString_FromString(me->prompt.default_value);
+			return PYSTRTYPE_FROMSTRING(me->prompt.default_value);
 		else
 			Py_RETURN_NONE;
 	}
 	if (strcmp(attr, "value") == 0) {
 		DEBUG_EXIT;
 		if (me->prompt.value != NULL)
-			return PyString_FromString(me->prompt.value);
+			return PYSTRTYPE_FROMSTRING(me->prompt.value);
 		else
 			Py_RETURN_NONE;
 	}

@@ -30,7 +30,8 @@ static PyMappingMethods libuser_entity_mapping_methods;
 static PyMethodDef libuser_entity_methods[];
 #define Entity_Check(__x) ((__x)->ob_type == &EntityType)
 
-/* Convert a g_value_array into a Python list of values. */
+/* Convert a g_value_array into a Python list of values.
+   On error, raise a Python exception and return NULL. */
 PyObject *
 convert_value_array_pylist(GValueArray *array)
 {
@@ -76,7 +77,9 @@ convert_value_array_pylist(GValueArray *array)
 			const char *s;
 
 			s = g_value_get_string(value);
-			val = PyString_FromString(s);
+			val = PYSTRTYPE_FROMSTRING(s);
+			if (val == NULL)
+				goto err;
 			PyList_Append(ret, val);
 			Py_DECREF(val);
 #ifdef DEBUG_BINDING
@@ -87,6 +90,11 @@ convert_value_array_pylist(GValueArray *array)
 
 	DEBUG_EXIT;
 	return ret;
+
+err:
+	Py_DECREF(ret);
+	DEBUG_EXIT;
+	return NULL;
 }
 
 /* Convert a (potentially NULL) GPtrArray of entities into a Python list of
@@ -379,13 +387,21 @@ libuser_entity_getattrlist(PyObject *self, PyObject *ignore)
 	for (i = list; i != NULL; i = g_list_next(i)) {
 		PyObject *str;
 
-		str = PyString_FromString((char*)i->data);
+		str = PYSTRTYPE_FROMSTRING((char*)i->data);
+		if (str == NULL)
+			goto err;
 		PyList_Append(ret, str);
 		Py_DECREF(str);
 	}
 	g_list_free(list);
 	DEBUG_EXIT;
 	return ret;
+
+err:
+	g_list_free(list);
+	Py_DECREF(ret);
+	DEBUG_EXIT;
+	return NULL;
 }
 
 /* Get the names of the modules which had something to do with this object. */

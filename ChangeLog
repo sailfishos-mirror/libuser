@@ -1,5 +1,13 @@
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h (PYSTRTYPE_FROMSTRING): New macro to abstract away
+	returning strings to Python 2 and 3.
+	* python/ent.c (convert_value_array_pylist): Document that it may now
+	return NULL.
+	* python/ent.c (convert_value_array_pylist, libuser_entity_getattrlist)
+	* python/libusermodule.c (libuser_get_user_shells, dict_add_string)
+	* python/misc.c (libuser_prompt_getattr): Use PYSTRTYPE_FROMSTRING.
+
 	* python/ent.c (libuser_convert_to_value): Remove two more direct uses
 	of PyString_AsString in debug output (converting one, fixing the other).
 

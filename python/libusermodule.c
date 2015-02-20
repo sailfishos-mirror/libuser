@@ -57,7 +57,9 @@ libuser_get_user_shells(PyObject *self, PyObject *ignored)
 	while ((shell = getusershell()) != NULL) {
 		PyObject *str;
 
-		str = PyString_FromString(shell);
+		str = PYSTRTYPE_FROMSTRING(shell);
+		if (str == NULL)
+			goto err;
 		PyList_Append(ret, str);
 		Py_DECREF(str);
 	}
@@ -65,6 +67,11 @@ libuser_get_user_shells(PyObject *self, PyObject *ignored)
 
 	DEBUG_EXIT;
 	return ret;
+
+err:
+	endusershell();
+	Py_DECREF(ret);
+	return NULL;
 }
 
 static PyObject *
@@ -123,11 +130,11 @@ dict_add_stolen_object(PyObject *dict, const char *key, PyObject *value)
 	Py_DECREF(value);
 }
 
-/* Add KEY=VALUE to DICT */
+/* Add KEY=VALUE to DICT.  VALUE must be correct UTF-8. */
 static void
 dict_add_string(PyObject *dict, const char *key, const char *value)
 {
-	dict_add_stolen_object(dict, key, PyString_FromString(value));
+	dict_add_stolen_object(dict, key, PYSTRTYPE_FROMSTRING(value));
 }
 
 void
