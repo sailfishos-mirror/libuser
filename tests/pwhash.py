@@ -8,4 +8,4 @@ admin.setpassUser(e, 'password', False)
 res = e[libuser.SHADOWPASSWORD][0]
 admin.deleteUser(e, False, False)
 
-print res
+print(res)

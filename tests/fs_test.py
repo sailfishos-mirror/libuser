@@ -35,7 +35,7 @@ def main():
         u[libuser.UIDNUMBER] = int(sys.argv[3])
         try:
             a.removeHomeIfOwned(u)
-        except RuntimeError, e:
+        except RuntimeError as e:
             sys.exit(str(e))
     elif sys.argv[1] == '--move':
         a = libuser.admin()
@@ -43,20 +43,20 @@ def main():
         u[libuser.HOMEDIRECTORY] = sys.argv[2]
         try:
             a.moveHome(u, sys.argv[3])
-        except RuntimeError, e:
+        except RuntimeError as e:
             sys.exit(str(e))
     elif sys.argv[1] == '--populate':
         a = libuser.admin()
         u = a.initUser('fs_test_populate')
-	u[libuser.HOMEDIRECTORY] = sys.argv[2]
-	u[libuser.UIDNUMBER] = int(sys.argv[3])
-	u[libuser.GIDNUMBER] = int(sys.argv[4])
+        u[libuser.HOMEDIRECTORY] = sys.argv[2]
+        u[libuser.UIDNUMBER] = int(sys.argv[3])
+        u[libuser.GIDNUMBER] = int(sys.argv[4])
         try:
             a.createHome(u)
-        except RuntimeError, e:
+        except RuntimeError as e:
             sys.exit(str(e))
     else:
-	sys.exit('Unexpected mode')
+        sys.exit('Unexpected mode')
 
 if __name__ == '__main__':
     main()

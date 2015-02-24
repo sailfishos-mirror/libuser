@@ -2,6 +2,7 @@ import crypt
 import libuser
 import os
 import os.path
+import sys
 import unittest
 
 LARGE_ID = 2147483648
@@ -641,8 +642,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         e = self.a.initUser('user14_2')
         self.a.addUser(e, False, False)
-        v = self.a.enumerateUsers('user14*')
-        v.sort()
+        v = sorted(self.a.enumerateUsers('user14*'))
         self.assertEqual(v, ['user14_1', 'user14_2'])
 
     def testUsersEnumerate2(self):
@@ -662,8 +662,7 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user15_2')
         e[libuser.GIDNUMBER] = gid + 10
         self.a.addUser(e, False, False)
-        v = self.a.enumerateUsersByGroup('group15_1')
-        v.sort()
+        v = sorted(self.a.enumerateUsersByGroup('group15_1'))
         self.assertEqual(v, ['user15_1', 'user15_2'])
 
     def testUsersEnumerateByGroup2(self):
@@ -705,9 +704,8 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user34_2')
         e[libuser.GIDNUMBER] = gid + 10
         self.a.addUser(e, False, False)
-        v = map(lambda x: x[libuser.USERNAME],
-                self.a.enumerateUsersByGroupFull('group34_1'))
-        v.sort()
+        v = sorted([x[libuser.USERNAME]
+                    for x in self.a.enumerateUsersByGroupFull('group34_1')])
         self.assertEqual(v, [['user34_1'], ['user34_2']])
 
     def testUsersEnumerateByGroupFull2(self):
@@ -718,8 +716,8 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user34_3')
         e[libuser.GIDNUMBER] = gid
         self.a.addUser(e, False, False)
-        v = map(lambda x: x[libuser.USERNAME],
-                self.a.enumerateUsersByGroupFull('group34_2'))
+        v = [x[libuser.USERNAME]
+             for x in self.a.enumerateUsersByGroupFull('group34_2')]
         self.assertEqual(v, [['user34_3']])
 
     def testUsersEnumerateByGroupFull3(self):
@@ -731,8 +729,8 @@ class Tests(unittest.TestCase):
         e = self.a.initUser('user34_4')
         e[libuser.GIDNUMBER] = gid + 10
         self.a.addUser(e, False, False)
-        v = map(lambda x: x[libuser.USERNAME],
-                self.a.enumerateUsersByGroupFull('group34_3'))
+        v = [x[libuser.USERNAME]
+             for x in self.a.enumerateUsersByGroupFull('group34_3')]
         self.assertEqual(v, [['user34_4']])
 
     def testUsersEnumerateFull1(self):
@@ -740,8 +738,8 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         e = self.a.initUser('user16_2')
         self.a.addUser(e, False, False)
-        v = [x[libuser.USERNAME] for x in self.a.enumerateUsersFull('user16*')]
-        v.sort()
+        v = sorted([x[libuser.USERNAME]
+                    for x in self.a.enumerateUsersFull('user16*')])
         self.assertEqual(v, [['user16_1'], ['user16_2']])
 
     def testUsersEnumerateFull2(self):
@@ -840,8 +838,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.GROUPNAME], ['group21_2groupname'])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.GIDNUMBER], [4237])
-        v = e[libuser.MEMBERNAME]
-        v.sort()
+        v = sorted(e[libuser.MEMBERNAME])
         self.assertEqual(v, ['group21_2member1', 'group21_2member2'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], ['!!group21_2'])
 
@@ -910,8 +907,7 @@ class Tests(unittest.TestCase):
         e[libuser.GROUPPASSWORD] = '!!grgroup22_2'
         self.assertNotEqual(e[libuser.GIDNUMBER], [4237])
         e[libuser.GIDNUMBER] = 4237
-        v = e[libuser.MEMBERNAME]
-        v.sort()
+        v = sorted(e[libuser.MEMBERNAME])
         self.assertNotEqual(v, ['group22_2member1', 'group22_2member3'])
         e[libuser.MEMBERNAME] = ['group22_2member1', 'group22_2member3']
         self.assertNotEqual(e[libuser.SHADOWPASSWORD], ['!!group22_2'])
@@ -1207,8 +1203,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         e = self.a.initGroup('group29_2')
         self.a.addGroup(e)
-        v = self.a.enumerateGroups('group29*')
-        v.sort()
+        v = sorted(self.a.enumerateGroups('group29*'))
         self.assertEqual(v, ['group29_1', 'group29_2'])
 
     def testGroupsEnumerate2(self):
@@ -1228,8 +1223,7 @@ class Tests(unittest.TestCase):
         e[libuser.GIDNUMBER] = gid + 10
         e[libuser.MEMBERNAME] = 'user30_1'
         self.a.addGroup(e)
-        v = self.a.enumerateGroupsByUser('user30_1')
-        v.sort()
+        v = sorted(self.a.enumerateGroupsByUser('user30_1'))
         self.assertEqual(v, ['group30_1', 'group30_2'])
 
     def testGroupsEnumerateByUser2(self):
@@ -1271,9 +1265,8 @@ class Tests(unittest.TestCase):
         e[libuser.GIDNUMBER] = gid + 10
         e[libuser.MEMBERNAME] = 'user35_1'
         self.a.addGroup(e)
-        v = map(lambda x: x[libuser.GROUPNAME],
-                self.a.enumerateGroupsByUserFull('user35_1'))
-        v.sort()
+        v = sorted([x[libuser.GROUPNAME]
+                    for x in self.a.enumerateGroupsByUserFull('user35_1')])
         self.assertEqual(v, [['group35_1'], ['group35_2']])
 
     def testGroupsEnumerateByUserFull2(self):
@@ -1284,8 +1277,8 @@ class Tests(unittest.TestCase):
         e = self.a.initGroup('group35_3')
         e[libuser.GIDNUMBER] = gid
         self.a.addGroup(e)
-        v = map(lambda x: x[libuser.GROUPNAME],
-                self.a.enumerateGroupsByUserFull('user35_2'))
+        v = [x[libuser.GROUPNAME]
+             for x in self.a.enumerateGroupsByUserFull('user35_2')]
         self.assertEqual(v, [['group35_3']])
 
     def testGroupsEnumerateByUserFull3(self):
@@ -1297,8 +1290,8 @@ class Tests(unittest.TestCase):
         e[libuser.GIDNUMBER] = gid + 10
         e[libuser.MEMBERNAME] = 'user35_3'
         self.a.addGroup(e)
-        v = map(lambda x: x[libuser.GROUPNAME],
-                self.a.enumerateGroupsByUserFull('user35_3'))
+        v = [x[libuser.GROUPNAME]
+             for x in self.a.enumerateGroupsByUserFull('user35_3')]
         self.assertEqual(v, [['group35_4']])
 
     def testGroupsEnumerateFull1(self):
@@ -1306,9 +1299,8 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         e = self.a.initGroup('group31_2')
         self.a.addGroup(e)
-        v = [x[libuser.GROUPNAME]
-             for x in self.a.enumerateGroupsFull('group31*')]
-        v.sort()
+        v = sorted([x[libuser.GROUPNAME]
+                    for x in self.a.enumerateGroupsFull('group31*')])
         self.assertEqual(v, [['group31_1'], ['group31_2']])
 
     def testGroupsEnumerateFull2(self):
@@ -1328,7 +1320,8 @@ class Tests(unittest.TestCase):
         libuser.validateIdValue(0)
         libuser.validateIdValue(1)
         libuser.validateIdValue(500)
-        libuser.validateIdValue(500L)
+        if sys.version_info[0] < 3:
+            libuser.validateIdValue(long(500))
         self.assertRaises(TypeError, libuser.validateIdValue, 'abc')
         # OverflowError if id_t is unsigned, ValueError otherwise
         self.assertRaises((ValueError, OverflowError), libuser.validateIdValue,

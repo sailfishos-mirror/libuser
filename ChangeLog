@@ -1,5 +1,43 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/gtk_prompt_callback.py (libuser_gtk_prompt_callback, harness)
+	* python/ldap-script
+	* python/prompt-script
+	* python/test-script
+	* tests/default_pw_test.py
+	* tests/files_test.py (Tests.testUsersEnumerate1)
+	(Tests.testUsersEnumerateByGroup1, Tests.testUsersEnumerateByGroupFull1)
+	(Tests.testUsersEnumerateByGroupFull2)
+	(Tests.testUsersEnumerateByGroupFull3, Tests.testUsersEnumerateFull1)
+	(Tests.testGroupAdd2, Tests.testGroupAdd4, Tests.testGroupMod2)
+	(Tests.testGroupMod4, Tests.testGroupsEnumerate1)
+	(Tests.testGroupsEnumerateByUser1, Tests.testGroupsEnumerateByUserFull1)
+	(Tests.testGroupsEnumerateByUserFull2)
+	(Tests.testGroupsEnumerateByUserFull3, Tests.testGroupsEnumerateFull1)
+	(Tests.testValidateIdValue)
+	* tests/fs_test.py (main)
+	* tests/ldap_test.py (Tests.testUserSetpass2, Tests.testUserSetpass3)
+	(Tests.testUserRemovepass2, Tests.testUserRemovepass3)
+	(Tests.testUsersEnumerate, Tests.testUsersEnumerateByGroup1)
+	(Tests.testUsersEnumerateFull, Tests.testUsersEnumerateByGroupFull1)
+	(Tests.testUsersEnumerateByGroupFull2)
+	(Tests.testUsersEnumerateByGroupFull3, Tests.testGroupAdd2)
+	(Tests.testGroupMod2, Tests.testGroupSetpass2, Tests.testGroupSetpass3)
+	(Tests.testGroupRemovepass2, Tests.testGroupRemovepass3)
+	(Tests.testGroupsEnumerate, Tests.testGroupsEnumerateByUser1)
+	(Tests.testGroupsEnumerateFull, Tests.testGroupsEnumerateByUserFull1)
+	(Tests.testGroupsEnumerateByUserFull2)
+	(Tests.testGroupsEnumerateByUserFull3)
+	* tests/pwhash.py: Update using (2to3-3.3 -w -f all -f buffer -f idioms
+	-f set_literal -f ws_comma), add a few line wraps.
+	* tests/files_test.py (Tests.testGroupAdd4, Tests.testGroupMod4): Revert
+	overzealous .has_key removal.
+	(Tests.testValidateIdValue): Test with 500L again on Python 2.
+	* tests/default_pw_test.py: Use sys.stderr.write instead of print() for
+	compatibility with Python 2.
+	* tests/fs_test.py (main): Consistently use spaces for indentation.
+	* tests/default_pw_test (valid_password): Make compatible with Python 3.
+
 	* python/common.h (AdminType, PromptType): New declarations.
 	* python/admin.c (libuser_admin_getattr, libuser_admin_setattr): Replace
 	by ...

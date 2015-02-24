@@ -30,7 +30,7 @@ def libuser_gtk_prompt_callback(prompts):
 		
 	table.show_all()
 
-	print dialog.run()
+	print(dialog.run())
 
 	for (prompt, entry) in ret_list:
 		prompt.value = entry.get_text()
@@ -54,10 +54,10 @@ def harness():
 			("Real Name", 1, "Crutcher Dunnavant", ""),
 			("Home Dir", 1, "Home Dir", ""),
 			("Shell", 1, "/bin/bash", "")	]:
-		list.append(apply(fake_prompt, t))
+		list.append(fake_prompt(*t))
 	
 	libuser_gtk_prompt_callback(list)
 
-	print list
+	print(list)
 
 harness()

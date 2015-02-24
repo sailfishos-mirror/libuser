@@ -16,24 +16,24 @@ prompts[0].defaultValue = "blah"
 prompts[1].prompt = "Enter some invisible stuff"
 prompts[1].visible = 0
 
-print "Prompting using default prompter."
+print("Prompting using default prompter.")
 admin.prompt(prompts)
-print prompts[0].value
-print prompts[1].value
+print(prompts[0].value)
+print(prompts[1].value)
 
-print "\nPrompting using promptConsole."
+print("\nPrompting using promptConsole.")
 admin.promptConsole(prompts)
-print prompts[0].value
-print prompts[1].value
+print(prompts[0].value)
+print(prompts[1].value)
 
-print "\nPrompting using python function."
+print("\nPrompting using python function.")
 admin.prompt = prompt
 admin.prompt(prompts)
-print prompts[0].value
-print prompts[1].value
+print(prompts[0].value)
+print(prompts[1].value)
 
-print "\nPrompting using method."
+print("\nPrompting using method.")
 admin.prompt = admin.promptConsole
 admin.prompt(prompts)
-print prompts[0].value
-print prompts[1].value
+print(prompts[0].value)
+print(prompts[1].value)

@@ -3,17 +3,17 @@
 import libuser
 import os
 
-print "--------- Initializing."
+print("--------- Initializing.")
 admin = libuser.Admin()
 
-print "--------- Lookup."
+print("--------- Lookup.")
 user = admin.lookupUserByName("ldap")
 if(not user):
 	os.exit(0)
 
-print "--------- Setting new name."
+print("--------- Setting new name.")
 user[libuser.LU_USERNAME] = 'bubba'
-print user[libuser.LU_USERNAME]
+print(user[libuser.LU_USERNAME])
 
-print "--------- Modifying user."
+print("--------- Modifying user.")
 admin.modifyUser(user)

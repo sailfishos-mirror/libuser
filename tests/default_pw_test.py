@@ -21,9 +21,9 @@ else:
     try:
         admin = libuser.admin(prompt = prompt_callback)
     except SystemError:
-        print "Initialization error, as expected"
+        print("Initialization error, as expected")
         sys.exit(0)
-    print >> sys.stderr, "Initialization unexpectedly succeeded"
+    sys.stderr.write("Initialization unexpectedly succeeded\n")
     sys.exit(1)
 
 # Test case order matches the order of function pointers in struct lu_module
