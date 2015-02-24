@@ -1,5 +1,7 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/files_test.py (Tests.testGroupMod4): Add a missing assertion.
+
 	* python/libusermodule.c (dict_add_stolen_object)
 	(dict_add_string): Remove.
 	(initialize_libuser_module): Use PyModule_Add* instead of home-grown

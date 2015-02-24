@@ -963,7 +963,7 @@ class Tests(unittest.TestCase):
         del e
         e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
         self.assert_(e)
-        not e.has_key(libuser.MEMBERNAME)
+        self.assert_(not e.has_key(libuser.MEMBERNAME))
         e[libuser.MEMBERNAME] = 'group22_4:member'
         self.a.modifyGroup(e)
         del e
