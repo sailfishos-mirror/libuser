@@ -14,11 +14,13 @@ typedef int Py_ssize_t;
 #define PYINTTYPE_FROMLONG PyLong_FromLong
 #define PYSTRTYPE_ASSTRING PyUnicode_AsUTF8
 #define PYSTRTYPE_CHECK PyUnicode_Check
+#define PYSTRTYPE_FROMFORMAT PyUnicode_FromFormat
 #define PYSTRTYPE_FROMSTRING PyUnicode_FromString
 #else
 #define PYINTTYPE_FROMLONG PyInt_FromLong
 #define PYSTRTYPE_ASSTRING PyString_AsString
 #define PYSTRTYPE_CHECK PyString_Check
+#define PYSTRTYPE_FROMFORMAT PyString_FromFormat
 #define PYSTRTYPE_FROMSTRING PyString_FromString
 #endif
 

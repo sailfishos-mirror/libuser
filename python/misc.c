@@ -427,23 +427,20 @@ libuser_prompt_set_value(PyObject *self, PyObject *value, void *unused)
 	return 0;
 }
 
-static int
-libuser_prompt_print(PyObject *self, FILE *fp, int flags)
+static PyObject *
+libuser_prompt_str(PyObject *self)
 {
 	struct libuser_prompt *me;
 
-	(void)flags;
 	me = (struct libuser_prompt *)self;
-	fprintf(fp,
-		"(key = \"%s\", prompt = \"%s\", domain = \"%s\", "
-		"visible = %s, default_value = \"%s\", value = \"%s\")",
-		me->prompt.key ? me->prompt.key : "",
+	return PYSTRTYPE_FROMFORMAT("(key = \"%s\", prompt = \"%s\", "
+		"domain = \"%s\", visible = %s, default_value = \"%s\", "
+		"value = \"%s\")", me->prompt.key ? me->prompt.key : "",
 		me->prompt.prompt ? me->prompt.prompt : "",
 		me->prompt.domain ? me->prompt.domain : "",
 		me->prompt.visible ? "true" : "false",
 		me->prompt.default_value ? me->prompt.default_value : "",
 		me->prompt.value ? me->prompt.value : "");
-	return 0;
 }
 
 PyObject *
@@ -486,7 +483,7 @@ PyTypeObject PromptType = {
 	sizeof(struct libuser_prompt), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_prompt_destroy,	/* tp_dealloc */
-	libuser_prompt_print,	/* tp_print */
+	NULL,			/* tp_print */
 	NULL,			/* tp_getattr */
 	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */
@@ -496,7 +493,7 @@ PyTypeObject PromptType = {
 	NULL,			/* tp_as_mapping */
 	NULL,			/* tp_hash */
 	NULL,			/* tp_call */
-	NULL,			/* tp_str */
+	libuser_prompt_str,	/* tp_str */
 	NULL,			/* tp_getattro */
 	NULL,			/* tp_setattro */
 	NULL,			/* tp_as_buffer */

@@ -1,5 +1,9 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h (PYSTRTYPE_FROMFORMAT): New macro.
+	* python/misc.c (libuser_prompt_print): Replace with ...
+	(libuser_prompt_str): ... this.  PromptType updated.
+
 	* python/ent.c (libuser_entity_setattr): Rename to ...
 	(libuser_entity_setattro) ... this, updating the calling convention
 	and EntityType.
