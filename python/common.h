@@ -5,11 +5,6 @@
 #include "../lib/user.h"
 #include "debug.h"
 
-/* FIXME: remove this when dropping Python < 2.5 compatibility */
-#if PY_VERSION_HEX < 0x02050000 && !defined(PY_SSIZE_T_MIN)
-typedef int Py_ssize_t;
-#endif
-
 #if PY_MAJOR_VERSION >= 3
 #define PYINTTYPE_FROMLONG PyLong_FromLong
 #define PYSTRTYPE_ASSTRING PyUnicode_AsUTF8

@@ -1,5 +1,8 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h (Py_ssize_t): Remove, we can no longer support Python
+	< 2.5.
+
 	* python/admin.c (AdminType)
 	* python/ent.c (EntityType)
 	* python/misc.c (PromptType): Use the right form for tp_name.
