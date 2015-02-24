@@ -29,9 +29,6 @@
 #include "../lib/user_private.h"
 #include "../apps/apputil.h"
 
-/* Boilerplate for the admin object, which wraps a libuser context. */
-#define Admin_Check(__x) ((__x)->ob_type == &AdminType)
-
 /* Destroy the object. */
 static void
 libuser_admin_destroy(PyObject *self)

@@ -1,5 +1,8 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/admin.c (Admin_Check)
+	* python/ent.c (Entity_Check): Remove unused macros.
+
 	* python/ldap-script
 	* python/prompt-script
 	* python/test-script: Port from obsolete libuser API.

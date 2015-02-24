@@ -26,8 +26,6 @@
 #include "../lib/user_private.h"
 #include "common.h"
 
-#define Entity_Check(__x) ((__x)->ob_type == &EntityType)
-
 /* Convert a g_value_array into a Python list of values.
    On error, raise a Python exception and return NULL. */
 PyObject *
