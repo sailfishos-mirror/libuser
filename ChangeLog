@@ -1,5 +1,11 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ldap-script
+	* python/prompt-script
+	* python/test-script: Port from obsolete libuser API.
+	* python/test-script: Stop overwriting the list() function.  Don't use
+	list(_.keys()) unnecessarily.
+
 	* python/gtk_prompt_callback.py (libuser_gtk_prompt_callback, harness)
 	* python/ldap-script
 	* python/prompt-script

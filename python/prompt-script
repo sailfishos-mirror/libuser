@@ -7,7 +7,7 @@ def prompt(prompts):
 # main
 import libuser
 
-admin = libuser.admin(info="files", auth="shadow,files")
+admin = libuser.admin()
 
 prompts = [libuser.prompt(), libuser.prompt()]
 prompts[0].prompt = "Enter some stuff"

@@ -8,8 +8,7 @@ print("--------- Initializing.")
 admin = libuser.admin()
 
 print("--------- Listing.")
-list = sorted(admin.enumerateUsers("l*"))
-for item in list:
+for item in sorted(admin.enumerateUsers("l*")):
 	print("Found a user named \"" + item + "\".")
 
 print("--------- Lookup.")
@@ -45,11 +44,11 @@ print("--------- Looking up the wheel group.")
 wheel = admin.lookupGroupByName("wheel")
 
 print("--------- Reading attribute (memberUid).")
-print(wheel[libuser.MEMBERUID])
+print(wheel[libuser.MEMBERNAME])
 
 print("--------- Creating a new user (jimbo).")
 jimbo = admin.initUser("jimbo")
-for attr in list(jimbo.keys()):
+for attr in jimbo.keys():
 	print(" " + attr + ":", jimbo.get(attr))
 
 print("--------- Adding the user.")
