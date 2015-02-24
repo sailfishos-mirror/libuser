@@ -1,5 +1,9 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/ent.c (libuser_entity_setattr): Rename to ...
+	(libuser_entity_setattro) ... this, updating the calling convention
+	and EntityType.
+
 	* python/admin.c (Admin_Check)
 	* python/ent.c (Entity_Check): Remove unused macros.
 

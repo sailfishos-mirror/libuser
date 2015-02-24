@@ -250,23 +250,36 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 	return TRUE;
 }
 
-/* The setattr function.  Sets an attribute to have the value of the given
+/* The setattro function.  Sets an attribute to have the value of the given
  * Python object. */
 static int
-libuser_entity_setattr(PyObject *self, char *name, PyObject *args)
+libuser_entity_setattro(PyObject *self, PyObject *attr_name, PyObject *value)
 {
+	char *name;
 	struct libuser_entity *me;
 	PyObject *list;
 	struct lu_ent *copy;
 	int ret;
 
 	DEBUG_ENTRY;
-
 	me = (struct libuser_entity *)self;
+
+	if (!PYSTRTYPE_CHECK(attr_name)) {
+		PyErr_SetString(PyExc_TypeError,
+				"attribute name must be a string");
+		DEBUG_EXIT;
+		return -1;
+	}
+	name = PYSTRTYPE_ASSTRING(attr_name);
+	if (name == NULL) {
+		DEBUG_EXIT;
+		return -1;
+	}
+
 	copy = lu_ent_new();
 	lu_ent_copy(me->ent, copy);
 	/* Parse out the arguments.  We expect a single object. */
-	if (PyArg_ParseTuple(args, "O", &list)) {
+	if (PyArg_ParseTuple(value, "O", &list)) {
 		PyObject *item;
 		GValue value;
 		Py_ssize_t size, i;
@@ -789,7 +802,7 @@ PyTypeObject EntityType = {
 	libuser_entity_destroy, /* tp_dealloc */
 	NULL,			/* tp_print */
 	NULL,			/* tp_getattr */
-	libuser_entity_setattr,	/* tp_setattr */
+	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */
 	NULL,			/* tp_repr */
 	NULL,			/* tp_as_number */
@@ -799,7 +812,7 @@ PyTypeObject EntityType = {
 	NULL,			/* tp_call */
 	NULL,			/* tp_str */
 	NULL,			/* tp_getattro */
-	NULL,			/* tp_setattro */
+	libuser_entity_setattro,	/* tp_setattro */
 	NULL,			/* tp_as_buffer */
 	Py_TPFLAGS_DEFAULT,	/* tp_flags */
 	"Data about a particular user or group account",	/* tp_doc */
