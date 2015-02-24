@@ -1,5 +1,8 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/common.h (struct libuser_prompt): Move ...
+	* python/misc.c (struct libuser_prompt): ... here.
+
 	* python/common.h (Py_ssize_t): Remove, we can no longer support Python
 	< 2.5.
 

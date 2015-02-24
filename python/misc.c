@@ -27,6 +27,11 @@
 #include "../lib/user_private.h"
 #include "common.h"
 
+struct libuser_prompt {
+	PyObject_HEAD
+	struct lu_prompt prompt;
+};
+
 #define Prompt_Check(__x) ((__x)->ob_type == &PromptType)
 
 gboolean

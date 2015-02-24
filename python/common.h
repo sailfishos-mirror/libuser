@@ -30,11 +30,6 @@ struct libuser_entity {
 	struct lu_ent *ent;
 };
 
-struct libuser_prompt {
-	PyObject_HEAD
-	struct lu_prompt prompt;
-};
-
 extern PyTypeObject AdminType G_GNUC_INTERNAL;
 extern PyTypeObject EntityType G_GNUC_INTERNAL;
 extern PyTypeObject PromptType G_GNUC_INTERNAL;
