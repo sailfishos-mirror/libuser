@@ -22,7 +22,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user2_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user2_1'])
         del e
         e = self.a.lookupUserByName('user2_does_not_exist')
@@ -31,7 +31,7 @@ class Tests(unittest.TestCase):
     def testUserLookupName2(self):
         # Handling of empty/default values
         e = self.a.lookupUserByName('empty_user')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['empty_user'])
         self.assertEqual(e[libuser.USERPASSWORD], [''])
         self.assertEqual(e[libuser.UIDNUMBER], [42])
@@ -52,7 +52,7 @@ class Tests(unittest.TestCase):
     def testUserLookupName3(self):
         # Handling of values that appear to be numbers
         e = self.a.lookupUserByName('077')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['077'])
         self.assertEqual(e[libuser.USERPASSWORD], ['077'])
         self.assertEqual(e[libuser.UIDNUMBER], [230])
@@ -76,7 +76,7 @@ class Tests(unittest.TestCase):
         uid = e[libuser.UIDNUMBER][0]
         del e
         e = self.a.lookupUserById(uid)
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.UIDNUMBER], [uid])
         del e
         e = self.a.lookupUserById(999999)
@@ -121,7 +121,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user6_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user6_1'])
         # Default values
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
@@ -162,7 +162,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user6_2username')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user6_2username'])
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.UIDNUMBER], [4237])
@@ -195,7 +195,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user6_3')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user6_3'])
         self.assertEqual(e[libuser.UIDNUMBER], [LARGE_ID + 630])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 631])
@@ -232,7 +232,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user_6_6' + libuser.LOGINSHELL)
-        self.assert_(':' in e[libuser.LOGINSHELL][0])
+        self.assertIn(':', e[libuser.LOGINSHELL][0])
 
     def testUserAdd7(self):
         # Let the user specify dangerous/dubious home directory paths explicitly
@@ -318,7 +318,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e, None)
         del e
         e = self.a.lookupUserByName('user7_2username')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user7_2username'])
         self.assertEqual(e[libuser.USERPASSWORD], ['!!pwuser7_2'])
         self.assertEqual(e[libuser.UIDNUMBER], [4237])
@@ -348,7 +348,7 @@ class Tests(unittest.TestCase):
         self.a.modifyUser(e, False)
         del e
         e = self.a.lookupUserByName('user7_3')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.UIDNUMBER], [LARGE_ID + 730])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 731])
 
@@ -363,7 +363,7 @@ class Tests(unittest.TestCase):
         self.a.modifyUser(e, False)
         del e
         e = self.a.lookupUserByName('user7_4')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.SHADOWMAX], [-1])
         self.assertEqual(e[libuser.SHADOWFLAG], [-1])
 
@@ -382,8 +382,8 @@ class Tests(unittest.TestCase):
             self.a.addUser(e, False, False)
             del e
             e = self.a.lookupUserByName('user7_5' + field)
-            self.assert_(e)
-            self.assert_(':' not in str(e[field][0]))
+            self.assertIsNotNone(e)
+            self.assertNotIn(':', str(e[field][0]))
             e[field] = str(e[field][0]) + ':x'
             self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
         # libuser.SHADOWFLAG not tested because it is parsed as an integer
@@ -391,14 +391,14 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user7_5')
-        self.assert_(e)
-        self.assert_(':' not in e[libuser.LOGINSHELL][0])
+        self.assertIsNotNone(e)
+        self.assertNotIn(':', e[libuser.LOGINSHELL][0])
         e[libuser.LOGINSHELL] = e[libuser.LOGINSHELL][0] + ':x'
         self.a.modifyUser(e, False)
         del e
         e = self.a.lookupUserByName('user7_5')
-        self.assert_(e)
-        self.assert_(':' in e[libuser.LOGINSHELL][0])
+        self.assertIsNotNone(e)
+        self.assertIn(':', e[libuser.LOGINSHELL][0])
 
     def testUserMod6(self):
         # Nothing to do with the files module: test lu_name_allowed is called.
@@ -427,7 +427,7 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user8_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.a.deleteUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user8_1')
@@ -568,7 +568,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e[libuser.SHADOWPASSWORD][0][:3], '$1$')
         crypted = crypt.crypt('password', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
-        self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
+        self.assertGreater(e[libuser.SHADOWLASTCHANGE][0], 10000)
 
     def testUserSetpass2(self):
         # Forcing the non-shadow password to 'x'
@@ -610,13 +610,13 @@ class Tests(unittest.TestCase):
         self.a.addUser(e, False, False)
         del e
         e = self.a.lookupUserByName('user12_4')
-        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertNotIn(':', e[libuser.SHADOWPASSWORD][0])
         self.assertRaises(SystemError, self.a.setpassUser, e, 'a:b', True)
         self.a.setpassUser(e, 'a:b', False)
         del e
         e = self.a.lookupUserByName('user12_4')
         self.assertEqual(e[libuser.SHADOWPASSWORD][0][:3], '$1$')
-        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertNotIn(':', e[libuser.SHADOWPASSWORD][0])
         crypted = crypt.crypt('a:b', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 
@@ -635,7 +635,7 @@ class Tests(unittest.TestCase):
         e = self.a.lookupUserByName('user13_1')
         self.assertEqual(e[libuser.USERPASSWORD], ['x'])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [''])
-        self.assert_(e[libuser.SHADOWLASTCHANGE][0] > 10000)
+        self.assertGreater(e[libuser.SHADOWLASTCHANGE][0], 10000)
 
     def testUsersEnumerate1(self):
         e = self.a.initUser('user14_1')
@@ -759,7 +759,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group17_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group17_1'])
         del e
         e = self.a.lookupGroupByName('group17_does_not_exist')
@@ -768,7 +768,7 @@ class Tests(unittest.TestCase):
     def testGroupLookupName2(self):
         # Handling of empty/default values
         e = self.a.lookupGroupByName('empty_group')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['empty_group'])
         self.assertEqual(e[libuser.GROUPPASSWORD], [''])
         self.assertEqual(e[libuser.GIDNUMBER], [44])
@@ -779,7 +779,7 @@ class Tests(unittest.TestCase):
     def testGroupLookupName3(self):
         # Handling of values that appear to be numbers
         e = self.a.lookupGroupByName('077')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['077'])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['077'])
         self.assertEqual(e[libuser.GIDNUMBER], [1730])
@@ -793,7 +793,7 @@ class Tests(unittest.TestCase):
         gid = e[libuser.GIDNUMBER][0]
         del e
         e = self.a.lookupGroupById(gid)
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GIDNUMBER], [gid])
         del e
         e = self.a.lookupGroupById(999999)
@@ -817,7 +817,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group21_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group21_1'])
         # Default values
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
@@ -834,7 +834,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group21_2groupname')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group21_2groupname'])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['x'])
         self.assertEqual(e[libuser.GIDNUMBER], [4237])
@@ -849,7 +849,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group21_3')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group21_3'])
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2130])
 
@@ -918,7 +918,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(e, None)
         del e
         e = self.a.lookupGroupByName('group22_2groupname')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group22_2groupname'])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['!!grgroup22_2'])
         self.assertEqual(e[libuser.GIDNUMBER], [4237])
@@ -938,7 +938,7 @@ class Tests(unittest.TestCase):
         self.a.modifyGroup(e)
         del e
         e = self.a.lookupGroupByName('group22_3')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GIDNUMBER], [LARGE_ID + 2230])
 
     def testGroupMod4(self):
@@ -951,9 +951,9 @@ class Tests(unittest.TestCase):
             self.a.addGroup(e)
             del e
             e = self.a.lookupGroupByName('group22_4' + field)
-            self.assert_(e)
+            self.assertIsNotNone(e)
             if e.has_key(field):
-                self.assert_(':' not in str(e[field][0]))
+                self.assertNotIn(':', str(e[field][0]))
                 e[field] = str(e[field][0]) + ':x'
             else:
                 e[field] = field + ':x'
@@ -962,13 +962,13 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
-        self.assert_(e)
-        self.assert_(not e.has_key(libuser.MEMBERNAME))
+        self.assertIsNotNone(e)
+        self.assertFalse(e.has_key(libuser.MEMBERNAME))
         e[libuser.MEMBERNAME] = 'group22_4:member'
         self.a.modifyGroup(e)
         del e
         e = self.a.lookupGroupByName('group22_4' + libuser.MEMBERNAME)
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.assertEqual(e[libuser.MEMBERNAME], ['group22_4:member'])
 
     def testGroupMod5(self):
@@ -998,7 +998,7 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group23_1')
-        self.assert_(e)
+        self.assertIsNotNone(e)
         self.a.deleteGroup(e)
         del e
         e = self.a.lookupGroupByName('group23_1')
@@ -1176,13 +1176,13 @@ class Tests(unittest.TestCase):
         self.a.addGroup(e)
         del e
         e = self.a.lookupGroupByName('group27_4')
-        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertNotIn(':', e[libuser.SHADOWPASSWORD][0])
         self.assertRaises(SystemError, self.a.setpassGroup, e, 'a:b', True)
         self.a.setpassGroup(e, 'a:b', False)
         del e
         e = self.a.lookupGroupByName('group27_4')
         self.assertEqual(e[libuser.SHADOWPASSWORD][0][:3], '$1$')
-        self.assert_(':' not in e[libuser.SHADOWPASSWORD][0])
+        self.assertNotIn(':', e[libuser.SHADOWPASSWORD][0])
         crypted = crypt.crypt('a:b', e[libuser.SHADOWPASSWORD][0])
         self.assertEqual(e[libuser.SHADOWPASSWORD], [crypted])
 

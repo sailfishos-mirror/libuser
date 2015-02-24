@@ -1,5 +1,9 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* tests/files_test.py
+	* tests/ldap_test.py: Replace deprecated assert_ with more specific
+	assert* methods.
+
 	* tests/files_test.py (Tests.testGroupMod4): Add a missing assertion.
 
 	* python/libusermodule.c (dict_add_stolen_object)
