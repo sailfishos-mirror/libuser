@@ -38,7 +38,9 @@ struct libuser_prompt {
 	struct lu_prompt prompt;
 };
 
+extern PyTypeObject AdminType G_GNUC_INTERNAL;
 extern PyTypeObject EntityType G_GNUC_INTERNAL;
+extern PyTypeObject PromptType G_GNUC_INTERNAL;
 
 PyObject *libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 	G_GNUC_INTERNAL;

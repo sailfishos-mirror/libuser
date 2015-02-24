@@ -1,3 +1,35 @@
+2015-02-24  Miloslav Trmač  <mitr@redhat.com>
+
+	* python/common.h (AdminType, PromptType): New declarations.
+	* python/admin.c (libuser_admin_getattr, libuser_admin_setattr): Replace
+	by ...
+	(libuser_admin_get_prompt, libuser_admin_set_prompt)
+	(libuser_admin_get_prompt_args, libuser_admin_set_prompt_args)
+	(libuser_admin_getseters): ... use of PyGetSetDef.
+	(AdminType): Make public.  Add tp_doc, use tp_methods instead of
+	tp_getattr.
+	(libuser_admin_methods, AdminType): Remove no longer necessary forward
+	declarations.
+	(libuser_admin_new): Stop using Py_FindMethod unavailable in Python 3.
+	* python/ent.c (libuser_entity_getattr): Remove.
+	(EntityType): Add tp_doc, use tp_methods instead of tp_getattr.
+	(libuser_entity_mapping_methods, libuser_entity_methods): Remove no
+	longer necessary forward declarations.
+	* python/misc.c (libuser_prompt_getattr, libuser_prompt_setattr):
+	Replace by ...
+	(libuser_prompt_get_key, libuser_prompt_set_key)
+	(libuser_prompt_get_prompt, libuser_prompt_set_prompt)
+	(libuser_prompt_get_domain, libuser_prompt_set_domain)
+	(libuser_prompt_get_visible, libuser_prompt_set_visible)
+	(libuser_prompt_get_default_value, libuser_prompt_set_default_value)
+	(libuser_prompt_get_value, libuser_prompt_set_value)
+	(libuser_prompt_getseters): ... use of PyGetSetDef.
+	(PromptType): Make public.  Add tp_doc.
+	(PromptType): Remove no longer necessary forward declaration.
+	* python/libusermodule.c (initialize_libuser_module): Initialize types
+	as required to make tp_getseters and tp_methods work.  Add a return
+	value.  All users updated.
+
 2015-02-20  Miloslav Trmač  <mitr@redhat.com>
 
 	* python/libusermodule.c (libuser_module_doc): Move out of the Python 3

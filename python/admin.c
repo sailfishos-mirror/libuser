@@ -30,8 +30,6 @@
 #include "../apps/apputil.h"
 
 /* Boilerplate for the admin object, which wraps a libuser context. */
-static PyMethodDef libuser_admin_methods[];
-static PyTypeObject AdminType;
 #define Admin_Check(__x) ((__x)->ob_type == &AdminType)
 
 /* Destroy the object. */
@@ -60,82 +58,77 @@ libuser_admin_destroy(PyObject *self)
 	DEBUG_EXIT;
 }
 
-/* Get an attribute of the admin object. */
+/* "prompt" attribute getter */
 static PyObject *
-libuser_admin_getattr(PyObject *self, char *name)
+libuser_admin_get_prompt(PyObject *self, void *unused)
 {
-	struct libuser_admin *me = (struct libuser_admin *) self;
-	DEBUG_ENTRY;
-	/* The prompting function. */
-	if (strcmp(name, "prompt") == 0) {
-		Py_INCREF(me->prompt_data[0]);
-		DEBUG_EXIT;
-		return me->prompt_data[0];
-	}
-	/* The prompting function's arguments. */
-	if (strcmp(name, "prompt_args") == 0) {
-		Py_INCREF(me->prompt_data[1]);
-		DEBUG_EXIT;
-		return me->prompt_data[1];
-	}
-	/* Random other methods or members. */
-#ifdef DEBUG_BINDING
-	fprintf(stderr, "Searching for attribute `%s'\n", name);
-#endif
-	DEBUG_EXIT;
-	return Py_FindMethod(libuser_admin_methods, (PyObject *) self, name);
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	(void)unused;
+	DEBUG_CALL;
+	Py_INCREF(me->prompt_data[0]);
+	return me->prompt_data[0];
 }
 
-/* Set an attribute in the admin object. */
+/* "prompt" attribute setter */
 static int
-libuser_admin_setattr(PyObject *self, char *attr, PyObject *args)
+libuser_admin_set_prompt(PyObject *self, PyObject *value, void *unused)
 {
-	struct libuser_admin *me = (struct libuser_admin *) self;
+	struct libuser_admin *me = (struct libuser_admin *)self;
 
+	(void)unused;
 	DEBUG_ENTRY;
-#ifdef DEBUG_BINDING
-	fprintf(stderr, "%sSetting attribute `%s'\n", getindent(), attr);
-#endif
-	/* The prompting function. */
-	if (strcmp(attr, "prompt") == 0) {
-		/* If it's a wrapped up function, set the first prompt data
-		 * to the function, and the second to an empty tuple. */
-		if (PyCFunction_Check(args)) {
-			Py_DECREF(me->prompt_data[0]);
-			Py_DECREF(me->prompt_data[1]);
-			me->prompt_data[0] = args;
-			Py_INCREF(me->prompt_data[0]);
-			me->prompt_data[1] = Py_None;
-			Py_INCREF(me->prompt_data[0]);
-		}
-		/* If it's a tuple, the first item is the function, and the
-		 * rest are arguments to pass to it. */
-		if (PyTuple_Check(args)) {
-			Py_DECREF(me->prompt_data[0]);
-			Py_DECREF(me->prompt_data[1]);
-
-			me->prompt_data[0] = PyTuple_GetItem(args, 0);
-			Py_INCREF(me->prompt_data[0]);
-
-			me->prompt_data[1] = PyTuple_GetSlice(args, 1,
-							      PyTuple_Size(args));
-		}
-		DEBUG_EXIT;
-		return 0;
-	}
-	/* If it's just prompting arguments, save them as the second chunk of
-	 * prompting data. */
-	if (strcmp(attr, "prompt_args") == 0) {
+	/* If it's a wrapped up function, set the first prompt data
+	 * to the function, and the second to an empty tuple. */
+	if (PyCFunction_Check(value)) {
+		Py_DECREF(me->prompt_data[0]);
 		Py_DECREF(me->prompt_data[1]);
-		me->prompt_data[1] = args;
-		Py_INCREF(me->prompt_data[1]);
-		DEBUG_EXIT;
-		return 0;
+		me->prompt_data[0] = value;
+		Py_INCREF(me->prompt_data[0]);
+		me->prompt_data[1] = Py_None;
+		Py_INCREF(me->prompt_data[0]);
 	}
-	PyErr_SetString(PyExc_AttributeError,
-			"no such writable attribute");
+	/* If it's a tuple, the first item is the function, and the
+	 * rest are arguments to pass to it. */
+	if (PyTuple_Check(value)) {
+		Py_DECREF(me->prompt_data[0]);
+		Py_DECREF(me->prompt_data[1]);
+
+		me->prompt_data[0] = PyTuple_GetItem(value, 0);
+		Py_INCREF(me->prompt_data[0]);
+
+		me->prompt_data[1] = PyTuple_GetSlice(value, 1,
+						      PyTuple_Size(value));
+	}
 	DEBUG_EXIT;
-	return -1;
+	return 0;
+}
+
+/* "prompt_args" attribute getter */
+static PyObject *
+libuser_admin_get_prompt_args(PyObject *self, void *unused)
+{
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	(void)unused;
+	DEBUG_CALL;
+	Py_INCREF(me->prompt_data[1]);
+	return me->prompt_data[1];
+}
+
+/* "prompt_args" attribute setter */
+static int
+libuser_admin_set_prompt_args(PyObject *self, PyObject *value, void *unused)
+{
+	struct libuser_admin *me = (struct libuser_admin *)self;
+
+	(void)unused;
+	DEBUG_ENTRY;
+	Py_DECREF(me->prompt_data[1]);
+	me->prompt_data[1] = value;
+	Py_INCREF(me->prompt_data[1]);
+	DEBUG_EXIT;
+	return 0;
 }
 
 /* Look up a user by name. */
@@ -1507,19 +1500,46 @@ static struct PyMethodDef libuser_admin_methods[] = {
 	{NULL, NULL, 0, NULL},
 };
 
-static PyTypeObject AdminType = {
-	PyObject_HEAD_INIT(&PyType_Type)
-       	0,
+static struct PyGetSetDef libuser_admin_getseters[] = {
+	{"prompt", libuser_admin_get_prompt, libuser_admin_set_prompt,
+	 "a function to call for getting information from the user", NULL},
+	{"prompt_args", libuser_admin_get_prompt_args,
+	 libuser_admin_set_prompt_args,
+	 "additional arguments which should be passed to prompt", NULL},
+	{NULL, NULL, NULL, NULL, NULL}
+};
+
+PyTypeObject AdminType = {
+	PyVarObject_HEAD_INIT(&PyType_Type, 0)
 	"Admin",		/* tp_name */
 	sizeof(struct libuser_admin), /* tp_basicsize */
 	0,			/* tp_itemsize */
-
 	libuser_admin_destroy,	/* tp_dealloc */
 	NULL,			/* tp_print */
-	libuser_admin_getattr,	/* tp_getattr */
-	libuser_admin_setattr,	/* tp_setattr */
+	NULL,			/* tp_getattr */
+	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */
 	NULL,			/* tp_repr */
+	NULL,			/* tp_as_number */
+	NULL,			/* tp_as_sequence */
+	NULL,			/* tp_as_mapping */
+	NULL,			/* tp_hash */
+	NULL,			/* tp_call */
+	NULL,			/* tp_str */
+	NULL,			/* tp_getattro */
+	NULL,			/* tp_setattro */
+	NULL,			/* tp_as_buffer */
+	Py_TPFLAGS_DEFAULT,	/* tp_flags */
+	"A libuser context",	/* tp_doc */
+	NULL,			/* tp_traverse */
+	NULL,			/* tp_clear */
+	NULL,			/* tp_richcompare */
+	0,			/* tp_weaklistoffset */
+	NULL,			/* tp_iter */
+	NULL,			/* tp_iternext */
+	libuser_admin_methods,	/* tp_methods */
+	NULL,			/* tp_members */
+	libuser_admin_getseters,	/* tp_getseters */
 };
 
 PyObject *
@@ -1571,9 +1591,8 @@ libuser_admin_new(PyObject *self, PyObject *args, PyObject *kwargs)
 		ret->prompt_data[0] = prompt;
 		Py_INCREF(ret->prompt_data[0]);
 	} else {
-		ret->prompt_data[0] =
-		    Py_FindMethod(libuser_admin_methods, self,
-				  "promptConsole");
+		ret->prompt_data[0] = PyObject_GetAttrString(self,
+							     "promptConsole");
 	}
 
 	if (prompt_data != NULL)

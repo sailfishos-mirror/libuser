@@ -137,10 +137,14 @@ dict_add_string(PyObject *dict, const char *key, const char *value)
 	dict_add_stolen_object(dict, key, PYSTRTYPE_FROMSTRING(value));
 }
 
-static void
+static int
 initialize_libuser_module(PyObject *module)
 {
 	PyObject *dict;
+
+	if (PyType_Ready(&AdminType) < 0 || PyType_Ready(&EntityType) < 0
+	    || PyType_Ready(&PromptType) < 0)
+		return -1;
 
 	dict = PyModule_GetDict(module);
 	dict_add_stolen_object(dict, "USER", PYINTTYPE_FROMLONG(lu_user));
@@ -186,6 +190,7 @@ initialize_libuser_module(PyObject *module)
 			       PYINTTYPE_FROMLONG(UT_NAMESIZE));
 	dict_add_stolen_object(dict, "VALUE_INVALID_ID",
 			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
+	return 0;
 }
 
 PyDoc_STRVAR(libuser_module_doc, "Python bindings for the libuser library");
@@ -198,7 +203,7 @@ initlibuser(void)
 
 	DEBUG_ENTRY;
 	module = Py_InitModule3("libuser", libuser_methods, libuser_module_doc);
-	initialize_libuser_module(module);
+	(void)initialize_libuser_module(module);
 	DEBUG_EXIT;
 }
 
@@ -225,10 +230,13 @@ PyInit_libuser(void)
 	module = PyModule_Create(&libuser_module);
 	if (module == NULL)
 		goto err;
-	initialize_libuser_module(module);
+	if (initialize_libuser_module(module) < 0)
+		goto err_module;
 	DEBUG_EXIT;
 	return module;
 
+err_module:
+	Py_DECREF(module);
 err:
 	DEBUG_EXIT;
 	return NULL;

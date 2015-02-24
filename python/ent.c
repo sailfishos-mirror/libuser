@@ -26,8 +26,6 @@
 #include "../lib/user_private.h"
 #include "common.h"
 
-static PyMappingMethods libuser_entity_mapping_methods;
-static PyMethodDef libuser_entity_methods[];
 #define Entity_Check(__x) ((__x)->ob_type == &EntityType)
 
 /* Convert a g_value_array into a Python list of values.
@@ -161,17 +159,6 @@ libuser_entity_destroy(PyObject *self)
 	me->ent = NULL;
 	PyObject_DEL(me);
 	DEBUG_EXIT;
-}
-
-/* The getattr function.  Returns the right method given its name. */
-static PyObject *
-libuser_entity_getattr(PyObject *self, char *name)
-{
-	DEBUG_CALL;
-#ifdef DEBUG_BINDING
-	fprintf(stderr, "Searching for attribute `%s'\n", name);
-#endif
-	return Py_FindMethod(libuser_entity_methods, self, name);
 }
 
 /* A helper function to convert a PyObject to a GValue. */
@@ -797,20 +784,32 @@ static PyMethodDef libuser_entity_methods[] = {
 };
 
 PyTypeObject EntityType = {
-	PyObject_HEAD_INIT(&PyType_Type)
-	0,
+	PyVarObject_HEAD_INIT(&PyType_Type, 0)
 	"Entity",		/* tp_name */
 	sizeof(struct libuser_entity), /* tp_basicsize */
 	0,			/* tp_itemsize */
-
 	libuser_entity_destroy, /* tp_dealloc */
 	NULL,			/* tp_print */
-	libuser_entity_getattr,	/* tp_getattr */
+	NULL,			/* tp_getattr */
 	libuser_entity_setattr,	/* tp_setattr */
 	NULL,			/* tp_compare */
 	NULL,			/* tp_repr */
-
 	NULL,			/* tp_as_number */
 	NULL,			/* tp_as_sequence */
 	&libuser_entity_mapping_methods, /* tp_as_mapping */
+	NULL,			/* tp_hash */
+	NULL,			/* tp_call */
+	NULL,			/* tp_str */
+	NULL,			/* tp_getattro */
+	NULL,			/* tp_setattro */
+	NULL,			/* tp_as_buffer */
+	Py_TPFLAGS_DEFAULT,	/* tp_flags */
+	"Data about a particular user or group account",	/* tp_doc */
+	NULL,			/* tp_traverse */
+	NULL,			/* tp_clear */
+	NULL,			/* tp_richcompare */
+	0,			/* tp_weaklistoffset */
+	NULL,			/* tp_iter */
+	NULL,			/* tp_iternext */
+	libuser_entity_methods,	/* tp_methods */
 };
