@@ -1,5 +1,10 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/libusermodule.c (dict_add_stolen_object)
+	(dict_add_string): Remove.
+	(initialize_libuser_module): Use PyModule_Add* instead of home-grown
+	alternatives.
+
 	* python/common.h (struct libuser_prompt): Move ...
 	* python/misc.c (struct libuser_prompt): ... here.
 

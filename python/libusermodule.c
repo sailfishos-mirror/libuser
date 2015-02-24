@@ -122,74 +122,58 @@ static PyMethodDef libuser_methods[] = {
 	{NULL, NULL, 0, NULL},
 };
 
-/* Add KEY=VALUE to DICT, stealing the refrence to VALUE. */
-static void
-dict_add_stolen_object(PyObject *dict, const char *key, PyObject *value)
-{
-	PyDict_SetItemString(dict, key, value);
-	Py_DECREF(value);
-}
-
-/* Add KEY=VALUE to DICT.  VALUE must be correct UTF-8. */
-static void
-dict_add_string(PyObject *dict, const char *key, const char *value)
-{
-	dict_add_stolen_object(dict, key, PYSTRTYPE_FROMSTRING(value));
-}
-
 static int
 initialize_libuser_module(PyObject *module)
 {
-	PyObject *dict;
-
 	if (PyType_Ready(&AdminType) < 0 || PyType_Ready(&EntityType) < 0
 	    || PyType_Ready(&PromptType) < 0)
 		return -1;
 
-	dict = PyModule_GetDict(module);
-	dict_add_stolen_object(dict, "USER", PYINTTYPE_FROMLONG(lu_user));
-	dict_add_stolen_object(dict, "GROUP", PYINTTYPE_FROMLONG(lu_group));
+	PyModule_AddIntConstant(module, "USER", lu_user);
+	PyModule_AddIntConstant(module, "GROUP", lu_group);
 
 	/* User attributes. */
-	dict_add_string(dict, "USERNAME", LU_USERNAME);
-	dict_add_string(dict, "USERPASSWORD", LU_USERPASSWORD);
-	dict_add_string(dict, "UIDNUMBER", LU_UIDNUMBER);
-	dict_add_string(dict, "GIDNUMBER", LU_GIDNUMBER);
-	dict_add_string(dict, "GECOS", LU_GECOS);
-	dict_add_string(dict, "HOMEDIRECTORY", LU_HOMEDIRECTORY);
-	dict_add_string(dict, "LOGINSHELL", LU_LOGINSHELL);
+	PyModule_AddStringConstant(module, "USERNAME", LU_USERNAME);
+	PyModule_AddStringConstant(module, "USERPASSWORD", LU_USERPASSWORD);
+	PyModule_AddStringConstant(module, "UIDNUMBER", LU_UIDNUMBER);
+	PyModule_AddStringConstant(module, "GIDNUMBER", LU_GIDNUMBER);
+	PyModule_AddStringConstant(module, "GECOS", LU_GECOS);
+	PyModule_AddStringConstant(module, "HOMEDIRECTORY", LU_HOMEDIRECTORY);
+	PyModule_AddStringConstant(module, "LOGINSHELL", LU_LOGINSHELL);
 
 	/* Group attributes. */
-	dict_add_string(dict, "GROUPNAME", LU_GROUPNAME);
-	dict_add_string(dict, "GROUPPASSWORD", LU_GROUPPASSWORD);
-	dict_add_string(dict, "ADMINISTRATORNAME", LU_ADMINISTRATORNAME);
-	dict_add_string(dict, "MEMBERNAME", LU_MEMBERNAME);
+	PyModule_AddStringConstant(module, "GROUPNAME", LU_GROUPNAME);
+	PyModule_AddStringConstant(module, "GROUPPASSWORD", LU_GROUPPASSWORD);
+	PyModule_AddStringConstant(module, "ADMINISTRATORNAME",
+				   LU_ADMINISTRATORNAME);
+	PyModule_AddStringConstant(module, "MEMBERNAME", LU_MEMBERNAME);
 
 	/* Shadow attributes. */
-	dict_add_string(dict, "SHADOWNAME", LU_SHADOWNAME);
-	dict_add_string(dict, "SHADOWPASSWORD", LU_SHADOWPASSWORD);
-	dict_add_string(dict, "SHADOWLASTCHANGE", LU_SHADOWLASTCHANGE);
-	dict_add_string(dict, "SHADOWMIN", LU_SHADOWMIN);
-	dict_add_string(dict, "SHADOWMAX", LU_SHADOWMAX);
-	dict_add_string(dict, "SHADOWWARNING", LU_SHADOWWARNING);
-	dict_add_string(dict, "SHADOWINACTIVE", LU_SHADOWINACTIVE);
-	dict_add_string(dict, "SHADOWEXPIRE", LU_SHADOWEXPIRE);
-	dict_add_string(dict, "SHADOWFLAG", LU_SHADOWFLAG);
+	PyModule_AddStringConstant(module, "SHADOWNAME", LU_SHADOWNAME);
+	PyModule_AddStringConstant(module, "SHADOWPASSWORD", LU_SHADOWPASSWORD);
+	PyModule_AddStringConstant(module, "SHADOWLASTCHANGE",
+				   LU_SHADOWLASTCHANGE);
+	PyModule_AddStringConstant(module, "SHADOWMIN", LU_SHADOWMIN);
+	PyModule_AddStringConstant(module, "SHADOWMAX", LU_SHADOWMAX);
+	PyModule_AddStringConstant(module, "SHADOWWARNING", LU_SHADOWWARNING);
+	PyModule_AddStringConstant(module, "SHADOWINACTIVE", LU_SHADOWINACTIVE);
+	PyModule_AddStringConstant(module, "SHADOWEXPIRE", LU_SHADOWEXPIRE);
+	PyModule_AddStringConstant(module, "SHADOWFLAG", LU_SHADOWFLAG);
 
 	/* Additional fields. */
-	dict_add_string(dict, "COMMONNAME", LU_COMMONNAME);
-	dict_add_string(dict, "GIVENNAME", LU_GIVENNAME);
-	dict_add_string(dict, "SN", LU_SN);
-	dict_add_string(dict, "ROOMNUMBER", LU_ROOMNUMBER);
-	dict_add_string(dict, "TELEPHONENUMBER", LU_TELEPHONENUMBER);
-	dict_add_string(dict, "HOMEPHONE", LU_HOMEPHONE);
-	dict_add_string(dict, "EMAIL", LU_EMAIL);
+	PyModule_AddStringConstant(module, "COMMONNAME", LU_COMMONNAME);
+	PyModule_AddStringConstant(module, "GIVENNAME", LU_GIVENNAME);
+	PyModule_AddStringConstant(module, "SN", LU_SN);
+	PyModule_AddStringConstant(module, "ROOMNUMBER", LU_ROOMNUMBER);
+	PyModule_AddStringConstant(module, "TELEPHONENUMBER",
+				   LU_TELEPHONENUMBER);
+	PyModule_AddStringConstant(module, "HOMEPHONE", LU_HOMEPHONE);
+	PyModule_AddStringConstant(module, "EMAIL", LU_EMAIL);
 
 	/* Miscellaneous. */
-	dict_add_stolen_object(dict, "UT_NAMESIZE",
-			       PYINTTYPE_FROMLONG(UT_NAMESIZE));
-	dict_add_stolen_object(dict, "VALUE_INVALID_ID",
-			       PyLong_FromLongLong(LU_VALUE_INVALID_ID));
+	PyModule_AddIntMacro(module, UT_NAMESIZE);
+	PyModule_AddObject(module, "VALUE_INVALID_ID",
+			   PyLong_FromLongLong(LU_VALUE_INVALID_ID));
 	return 0;
 }
 
