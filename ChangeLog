@@ -1,5 +1,9 @@
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
+	* python/admin.c (AdminType)
+	* python/ent.c (EntityType)
+	* python/misc.c (PromptType): Use the right form for tp_name.
+
 	* python/common.h (PYSTRTYPE_FROMFORMAT): New macro.
 	* python/misc.c (libuser_prompt_print): Replace with ...
 	(libuser_prompt_str): ... this.  PromptType updated.

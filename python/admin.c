@@ -1508,7 +1508,7 @@ static struct PyGetSetDef libuser_admin_getseters[] = {
 
 PyTypeObject AdminType = {
 	PyVarObject_HEAD_INIT(&PyType_Type, 0)
-	"Admin",		/* tp_name */
+	"libuser.Admin",	/* tp_name */
 	sizeof(struct libuser_admin), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_admin_destroy,	/* tp_dealloc */

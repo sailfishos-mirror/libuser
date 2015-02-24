@@ -796,7 +796,7 @@ static PyMethodDef libuser_entity_methods[] = {
 
 PyTypeObject EntityType = {
 	PyVarObject_HEAD_INIT(&PyType_Type, 0)
-	"Entity",		/* tp_name */
+	"libuser.Entity",	/* tp_name */
 	sizeof(struct libuser_entity), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_entity_destroy, /* tp_dealloc */

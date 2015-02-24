@@ -479,7 +479,7 @@ static struct PyGetSetDef libuser_prompt_getseters[] = {
 
 PyTypeObject PromptType = {
 	PyVarObject_HEAD_INIT(&PyType_Type, 0)
-	"Prompt",		/* tp_name */
+	"libuser.Prompt",	/* tp_name */
 	sizeof(struct libuser_prompt), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_prompt_destroy,	/* tp_dealloc */
