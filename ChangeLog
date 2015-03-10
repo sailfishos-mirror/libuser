@@ -1,3 +1,8 @@
+2015-03-10  Miloslav Trmač  <mitr@redhat.com>
+
+	* python/libusermodule.c (PyInit_libuser): Raise NotImplementedError
+	when running in a non-UTF-8 locale.
+
 2015-02-24  Miloslav Trmač  <mitr@redhat.com>
 
 	* tests/files_test.py

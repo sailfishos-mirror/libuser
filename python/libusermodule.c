@@ -19,6 +19,7 @@
 #include <config.h>
 #include <pwd.h>
 #include <grp.h>
+#include <langinfo.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <utmp.h>
@@ -208,9 +209,30 @@ static struct PyModuleDef libuser_module = {
 PyMODINIT_FUNC
 PyInit_libuser(void)
 {
+	char *encoding;
 	PyObject *module;
 
 	DEBUG_ENTRY;
+	/* Python 3 makes it fairly difficult to use non-UTF-8 encodings for
+	 * C strings.  Support for this is not likely to be needed (among
+	 * other reasons because it is unlikely for other Python extensions to
+	 * care), so just make sure to fail loudly instead of silently
+	 * corrupting data.
+	 *
+	 * Python 3 always calls setlocale(LC_CTYPE, "") during initialization,
+	 * so doing this check already at module import time will properly
+	 * reflect system-wide encoding (the one we care for the system-wide
+	 * account databases and file system paths), even if the application
+	 * decided to locally override the locale to something else.
+	 */
+	encoding = nl_langinfo(CODESET);
+	if (strcmp(encoding, "UTF-8") != 0) {
+		PyErr_Format(PyExc_NotImplementedError,
+			     "libuser does not support non-UTF-8 locales with "
+			     "Python 3 (currently using %s)", encoding);
+		goto err;
+	}
+
 	module = PyModule_Create(&libuser_module);
 	if (module == NULL)
 		goto err;
