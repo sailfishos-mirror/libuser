@@ -21,7 +21,6 @@ lib/user.c
 lib/user_private.h
 lib/util.c
 modules/files.c
-modules/krb5.c
 modules/ldap.c
 modules/sasldb.c
 python/admin.c

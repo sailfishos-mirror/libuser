@@ -1,5 +1,7 @@
 2015-03-16  Miloslav Trmač  <mitr@redhat.com>
 
+	* po/POTFILES.in: Remove reference to removed modules/krb5.c.  
+
 	* .tx/config: Remove.
 	* zanata.xml: Add.  To pull updated translations, run (zanata-cli pull).
 
