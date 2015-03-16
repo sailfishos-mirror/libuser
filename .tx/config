@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[libuser.default]
-file_filter = po/<lang>.po
-source_file = po/libuser.pot
-source_lang = en
-

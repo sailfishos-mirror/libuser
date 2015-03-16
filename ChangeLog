@@ -1,3 +1,8 @@
+2015-03-16  Miloslav Trmač  <mitr@redhat.com>
+
+	* .tx/config: Remove.
+	* zanata.xml: Add.  To pull updated translations, run (zanata-cli pull).
+
 2015-03-10  Miloslav Trmač  <mitr@redhat.com>
 
 	* python/libusermodule.c (PyInit_libuser): Raise NotImplementedError
