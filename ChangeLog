@@ -1,3 +1,7 @@
+2015-03-17  Miloslav Trmač  <mitr@redhat.com>
+
+	* zanata.xml: Update for changed version name on the server.
+
 2015-03-16  Miloslav Trmač  <mitr@redhat.com>
 
 	* po/POTFILES.in: Remove reference to removed modules/krb5.c.  
