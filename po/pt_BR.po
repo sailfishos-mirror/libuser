@@ -13,13 +13,14 @@
 # Taylon Silmer <taylon@taylon.eti.br>, 2011
 # Tiago Pasqualotto <tiago@automacao.eng.br>, 2004
 # ufa <ufa@technotroll.org>, 2012
+# Jonatas Z. de Vasconcellos <jonataszv@fedoraproject.org>, 2015. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2015-03-23 12:14-0400\n"
+"Last-Translator: Jonatas Z. de Vasconcellos <jonataszv@fedoraproject.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "fedora/language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -27,6 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -94,7 +96,7 @@ msgstr ""
 #: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
 #: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
-msgstr ""
+msgstr "DIAS"
 
 #: apps/lchage.c:90
 msgid "maximum days between password changes"
@@ -351,7 +353,7 @@ msgstr ""
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "NOME"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:75
 msgid "plaintext password for use with group"
@@ -383,19 +385,19 @@ msgstr ""
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "lista de membros do grupo para adicionar"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "lista de membros do grupo para remover"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "bloquear grupo"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "desbloquear grupo"
 
 #: apps/lgroupmod.c:125 apps/lusermod.c:164
 #, c-format
@@ -1073,23 +1075,23 @@ msgstr "Valor padrão inválido para o campo %s: %s"
 msgid "error locking file: %s"
 msgstr "erro ao bloquear arquivo: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "não foi possível obter o contexto padrão de segurança: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "não foi possível obter o contexto de segurança de \"%s\": %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 "não foi possível determinar o contexto padrão de segurança de \"%s\": %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "não foi possível determinar o contexto de segurança para \"%s\": %s"
@@ -1194,66 +1196,6 @@ msgstr "executando sem os privilégios de superusuário"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "arquivo shadow não está presente -- desabilitando"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"erro ao conectar ao servidor kadm5 para o serviço \"%s\" no domínio \"%s\": "
-"%s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "erro ao inicializar a biblioteca do kerberos"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "erro ao analisar o nome de usuário \"%s\" para o kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "a estrutura da entidade não tem atributos %s ou %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "a entidade não tem atributos %s ou %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "a entidade foi criada sem os atributos %s ou %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "erro ao ler informações para \"%s\" do kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "a entidade não tem o atributo %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "erro ao definir senha para \"%s\""
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Domínio Kerberos"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Administração Principal do Kerberos"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Senha do Kerberos para administração principal"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1377,15 +1319,15 @@ msgstr "Erro do Cyrus SASL ao remover usuário: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "erro ao inicializar Cyrus SASL: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "erro ao criar diretório home para o usuário"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "erro ao remover diretório home para o usuário"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "erro ao mover diretório home para o usuário"
 
@@ -1447,8 +1389,41 @@ msgstr "Obtendo atributos padrões dos usuários:\n"
 msgid "Copying user structure:\n"
 msgstr "Copiando estrutura do usuário:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s não tinha um diretório home.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "erro ao conectar ao servidor kadm5 para o serviço \"%s\" no domínio \"%s"
+#~ "\": %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Erro ao apagar %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "erro ao inicializar a biblioteca do kerberos"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "erro ao analisar o nome de usuário \"%s\" para o kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "a estrutura da entidade não tem atributos %s ou %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "a entidade não tem atributos %s ou %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "a entidade foi criada sem os atributos %s ou %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "erro ao ler informações para \"%s\" do kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "a entidade não tem o atributo %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "erro ao definir senha para \"%s\""
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Domínio Kerberos"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Administração Principal do Kerberos"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Senha do Kerberos para administração principal"

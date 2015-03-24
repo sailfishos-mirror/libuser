@@ -10,10 +10,10 @@
 # sweta <swkothar@redhat.com>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Gujarati (http://www.transifex.com/projects/p/fedora/language/"
 "gu/)\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1067,22 +1068,22 @@ msgstr "ક્ષેત્ર %s ની મૂળભૂત કિંમત અ�
 msgid "error locking file: %s"
 msgstr "ફાઈલને તાળુ લગાવવામાં ભૂલ: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "મૂળભૂત સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' નો સુરક્ષા સંદર્ભ મેળવી શક્યા નહિં: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' માં મૂળભૂત સુરક્ષા સંદર્ભ સુયોજિત કરી શક્યા નહિં: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' માટેનો સુરક્ષા સંદર્ભ નક્કી કરી શક્યા નહિં: %s"
@@ -1187,64 +1188,6 @@ msgstr "શ્રેષ્ઠ વપરાશકર્તાની ફાયદ�
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "કોઈ શેડો ફાઈલ હાજર નથી -- નિષ્ક્રિય કરી રહ્યા છીએ"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "kadm5 સર્વર સાથે `%s' સેવા માટે મનગમતા ક્ષેત્ર `%s' માં જોડાણ કરવામાં ભૂલ: %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "કર્બરોઝ લાઈબ્રેરીનો પ્રારંભ કરવામાં ભૂલ"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "કર્બરોઝ માટે વપરાશકર્તા નામ `%s' નું પદચ્છેદ કરવામાં ભૂલ"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "એન્ટીટી સંરચના પાસે કોઈ %s અથવા %s લક્ષણો નથી"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "એન્ટીટી પાસે કોઈ %s અથવા %s લક્ષણો નથી"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "એન્ટીટી કોઈ %s અથવા %s લક્ષણો સાથે બની નથી"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "કર્બરોઝમાંથી `%s' માટે જાણકારી વાંચવામાં ભૂલ"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "એન્ટીટી પાસે કોઈ %s લક્ષણ નથી"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "`%s' માટે પાસવર્ડ સુયોજિત કરવામાં ભૂલ"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "કર્બરોઝનું મનગમતું ક્ષેત્ર"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "કર્બરોઝનો સંચાલન નિયમ"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "સંચાલન નિયમ માટે કર્બરોઝ પાસવર્ડ"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1366,15 +1309,15 @@ msgstr "વપરાશકર્તા દૂર કરવામાં Cyrus SAS
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL નો પ્રારંભ કરવામાં ભૂલ: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી બનાવવામાં ભૂલ"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી દૂર કરવામાં ભૂલ"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "વપરાશકર્તા માટે ઘર ડિરેક્ટરી ખસેડવામાં ભૂલ"
 
@@ -1436,8 +1379,39 @@ msgstr "મૂળભૂત વપરાશકર્તા લક્ષણો મ
 msgid "Copying user structure:\n"
 msgstr "વપરાશકર્તા સંરચનાની નકલ કરી રહ્યા છીએ:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s પાસે ઘર ડિરેક્ટરી નથી.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr "kadm5 સર્વર સાથે `%s' સેવા માટે મનગમતા ક્ષેત્ર `%s' માં જોડાણ કરવામાં ભૂલ: %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "%s દૂર કરવામાં ભૂલ: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "કર્બરોઝ લાઈબ્રેરીનો પ્રારંભ કરવામાં ભૂલ"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "કર્બરોઝ માટે વપરાશકર્તા નામ `%s' નું પદચ્છેદ કરવામાં ભૂલ"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "એન્ટીટી સંરચના પાસે કોઈ %s અથવા %s લક્ષણો નથી"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "એન્ટીટી પાસે કોઈ %s અથવા %s લક્ષણો નથી"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "એન્ટીટી કોઈ %s અથવા %s લક્ષણો સાથે બની નથી"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "કર્બરોઝમાંથી `%s' માટે જાણકારી વાંચવામાં ભૂલ"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "એન્ટીટી પાસે કોઈ %s લક્ષણ નથી"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "`%s' માટે પાસવર્ડ સુયોજિત કરવામાં ભૂલ"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "કર્બરોઝનું મનગમતું ક્ષેત્ર"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "કર્બરોઝનો સંચાલન નિયમ"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "સંચાલન નિયમ માટે કર્બરોઝ પાસવર્ડ"

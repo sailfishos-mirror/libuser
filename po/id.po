@@ -10,10 +10,10 @@
 # Teguh DC <dheche@bradjamoesti.or.id>, 2005
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/fedora/"
 "language/id/)\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1071,22 +1072,22 @@ msgstr "Nilai default kolom %s tidak valid: %s "
 msgid "error locking file: %s"
 msgstr "salah saat mengunci berkas: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "tidak dapat memperoleh konteks keamanan standar: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "tidak dapat memperoleh konteks keamanan dari `%s': %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "tidak dapat menset konteks keamanan standar ke `%s': %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "tidak dapat menentukan konteks keamanan dari `%s': %s"
@@ -1191,65 +1192,6 @@ msgstr "tidak mengeksekusi dengan hak akses superuser"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "tidak ada berkas shadow -- menonaktifkan"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"gagal saat menghubungi server kadm5 untuk layanan `%s' dalam realm `%s': %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "gagal saat menginisiasi pustaka kerberos"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "gagal saat menguraikan nama pengguna `%s' untuk kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "struktur entiti tidak memiliki atribut %s atau %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "entiti tidak memiliki atribut %s atau %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "entiti telah dibuat tanpa atribut %s atau %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "gagal saat membaca informasi untuk `%s' untuk kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "entiti tidak memiliki atribut %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "gagal saat menset kata sandi untuk `%s'"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Realm Kerberos"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Kepala Admin Kerberos"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Password Kerberos untuk Kepala Admin"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1371,15 +1313,15 @@ msgstr "Kesalahan SASL Cyrus saat menghapus pengguna: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "gagal saat menginisiasikan SASL Cyrus: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "gagal saat membuat direktori home untuk pengguna"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "gagal saat menghapus direktori home untuk pengguna"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "gagal saat memindahkan direktori home untuk pengguna"
 
@@ -1441,8 +1383,41 @@ msgstr "Mengambil atribut pengguna standar:\n"
 msgid "Copying user structure:\n"
 msgstr "Menyalin struktur pengguna:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s tidak memiliki direktori home.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "gagal saat menghubungi server kadm5 untuk layanan `%s' dalam realm `%s': "
+#~ "%s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Salah saat menghapus %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "gagal saat menginisiasi pustaka kerberos"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "gagal saat menguraikan nama pengguna `%s' untuk kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "struktur entiti tidak memiliki atribut %s atau %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "entiti tidak memiliki atribut %s atau %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "entiti telah dibuat tanpa atribut %s atau %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "gagal saat membaca informasi untuk `%s' untuk kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "entiti tidak memiliki atribut %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "gagal saat menset kata sandi untuk `%s'"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Realm Kerberos"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Kepala Admin Kerberos"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Password Kerberos untuk Kepala Admin"

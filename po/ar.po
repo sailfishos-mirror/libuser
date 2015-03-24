@@ -11,10 +11,10 @@
 # taljurf <taljurf@fedoraproject.org>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/fedora/language/"
 "ar/)\n"
@@ -24,6 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1069,22 +1070,22 @@ msgstr "قيمة غير صالحة للحقل %s: %s"
 msgid "error locking file: %s"
 msgstr "خطأ في قفل الملف: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "تعذّر الحصول على سياق الأمان الافتراضي: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "تعذّر الحصول على سياق الأمان لـ `%s': %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "تعذّر ضبط سياق أمان افتراضي لـ `%s': %s "
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "تعذّر تحديد سياق أمان لـ `%s': %s"
@@ -1189,64 +1190,6 @@ msgstr "لم يتمّ التّنفيذ بصلاحيات المدير"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "لا يوجد ملف shadow --  جاري التعطيل"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "خطأ في الاتصال بخادم إدارة كِرْبِروس 5 للخدمة ´%s' في المملكة ´%s': %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "خطأ في ابتداء مكتبة كِرْبِروس"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "خطأ في إعراب اسم المستخدم ´%s' لكِرْبِروس"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "بناء الكينونة ليس له %s أو خصائص %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "الكينونة ليس لها %s أو خاصّيّة %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "تم إنشاء الكينونة بدون %s أو خصائص %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "خطأ في قراءة المعلومات لـ ´%s' من كِرْبِروس"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "الكينونة ليس لها خاصّيّة %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "خطأ في وضع كلمة المرور لـ´%s'"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "مملكة كِرْبِروس"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "المدير الرئيسي لكِرْبِروس"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "كلمة مرور كِرْبِروس للمدير الرئيسي"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1368,15 +1311,15 @@ msgstr "خطأ Cyrus SASL أثناء إزالة المستخدم: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "خطأ في ابتداء Cyrus SASL: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "خطأ في انشاء مجلد رئيسي للمستخدم"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "خطأ في ازالة المجلد الرئيسي للمستخدم"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "خطأ في نقل المجلد الرئيسي للمستخدم"
 
@@ -1438,8 +1381,39 @@ msgstr "جاري الاستعلام عن خصائص المستخدم الافت�
 msgid "Copying user structure:\n"
 msgstr "جاري نسخ بنية المستخدم:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "لم يكن له %s دليل موطن.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr "خطأ في الاتصال بخادم إدارة كِرْبِروس 5 للخدمة ´%s' في المملكة ´%s': %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "خطأ في إزالة %s. %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "خطأ في ابتداء مكتبة كِرْبِروس"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "خطأ في إعراب اسم المستخدم ´%s' لكِرْبِروس"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "بناء الكينونة ليس له %s أو خصائص %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "الكينونة ليس لها %s أو خاصّيّة %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "تم إنشاء الكينونة بدون %s أو خصائص %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "خطأ في قراءة المعلومات لـ ´%s' من كِرْبِروس"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "الكينونة ليس لها خاصّيّة %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "خطأ في وضع كلمة المرور لـ´%s'"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "مملكة كِرْبِروس"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "المدير الرئيسي لكِرْبِروس"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "كلمة مرور كِرْبِروس للمدير الرئيسي"

@@ -1,3 +1,15 @@
+0.61:
+* Python 3 is now supported.
+  Consistent with the Python 3 C API and its prevailing usage, only UTF-8
+  locales work.  Note that importing libuser in non-UTF-8 locales will fail in
+  Python 3.
+* The Python extension now requires Python 2.7.
+* Translations are now maintained in https://fedora.zanata.org/ .
+* tests/fs_test can be edited to truly perform operations as root, without
+  fakeroot.
+* sgml2txt is no longer required for building from the released tarball.
+* Miscellaneous bug fixes and cleanups, primarily in the Python extension.
+
 0.60:
 * New functions lu_homedir_remove_for_user() and
   lu_homedir_remove_for_user_if_owned().

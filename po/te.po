@@ -8,10 +8,10 @@
 # Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Telugu (http://www.transifex.com/projects/p/fedora/language/"
 "te/)\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1065,22 +1066,22 @@ msgstr "%s కు సరికాని సిద్దవిలువ : %s"
 msgid "error locking file: %s"
 msgstr "దస్త్రం లాకింగ్ లో దోషం: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "సిద్ద రక్షణ సందర్బంను వ్యవస్థింపలేము: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' యొక్క రక్షణ సందర్బంను పొందలేము: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' కు సిద్ద రక్షణ వ్యవస్థను అమర్చలేము: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' యొక్క రక్షణ సందర్బంను పొందలేము: %s"
@@ -1185,64 +1186,6 @@ msgstr "సూపర్ యూజర్ అదికారాలతో నిష
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "షాడో ఫైల్ లేదు -- అచేతనం చేయబడింది"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "`%s' రియల్ము లో `%s' సేవ కొరకు kadm5 అనుసంధానంలో దోషం: %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "కేర్బ్రోస్ లైబ్రరి సిద్దికరణలో దోషం"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "కేర్బ్రోస్ కోరకు వినియోగదారుని పేరు `%s' పార్శింగ్ లో దోషం"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "ఎంటిటి ఆకృతి %s లేక %s యాట్రిబ్యూట్సు కలిగి లేదు"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "ఎంటిటి %s లేక %s యాట్రిబ్యూట్సు కలిగి లేదు"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "ఎంటిటి %s లేక %s యాట్రిబ్యూట్సు లేకుండానే సృష్టించబడింది"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "కేర్బ్రోస్ నుండి `%s' కొరకు సమాచారాన్ని చదువుటలో దోషం"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "ఎంటిటి యాట్రిబ్యూట్ %s ను కలిగి లేదు"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "`%s' కు అనుమతిపదం అమర్చుటలో దోషం"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "కేర్బ్రోస్ రియాల్ము"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "కెర్బ్రోస్ ఎడ్మిన్ ప్రిన్సిపల్"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "ఎడ్మిన్ ప్రిన్సిపల్ కొరకు కెర్బ్రోస్ అనుమతిపదం"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1364,15 +1307,15 @@ msgstr "వినియోగదారుని తోలగించుటల�
 msgid "error initializing Cyrus SASL: %s"
 msgstr "సైరస్ SASL సిద్దీకరించుటలో దోషం: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "వినియోగదారుని కొరకు నివాస సంచయం సృష్టించుటలో దోషం"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "వినియోగదారుని కొరకు నివాస సంచయం తొలగించుటలో దోషం"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "వినియోగదారుని కొరకు నివాస సంచయం కదుల్చుటలో దోషం"
 
@@ -1434,8 +1377,39 @@ msgstr "సిద్ద వినియోగదారుని యాట్ర�
 msgid "Copying user structure:\n"
 msgstr "వినియోగదారుని ఆకృతిని నకలుతీయుట:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s నివాస సంచయమును కలిగి లేదు.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr "`%s' రియల్ము లో `%s' సేవ కొరకు kadm5 అనుసంధానంలో దోషం: %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "%s ని దోషం తొలగిస్తోంది: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "కేర్బ్రోస్ లైబ్రరి సిద్దికరణలో దోషం"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "కేర్బ్రోస్ కోరకు వినియోగదారుని పేరు `%s' పార్శింగ్ లో దోషం"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "ఎంటిటి ఆకృతి %s లేక %s యాట్రిబ్యూట్సు కలిగి లేదు"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "ఎంటిటి %s లేక %s యాట్రిబ్యూట్సు కలిగి లేదు"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "ఎంటిటి %s లేక %s యాట్రిబ్యూట్సు లేకుండానే సృష్టించబడింది"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "కేర్బ్రోస్ నుండి `%s' కొరకు సమాచారాన్ని చదువుటలో దోషం"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "ఎంటిటి యాట్రిబ్యూట్ %s ను కలిగి లేదు"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "`%s' కు అనుమతిపదం అమర్చుటలో దోషం"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "కేర్బ్రోస్ రియాల్ము"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "కెర్బ్రోస్ ఎడ్మిన్ ప్రిన్సిపల్"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "ఎడ్మిన్ ప్రిన్సిపల్ కొరకు కెర్బ్రోస్ అనుమతిపదం"

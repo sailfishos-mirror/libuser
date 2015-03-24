@@ -19,12 +19,13 @@
 # Tullio Dovera <tdovera@redhat.it>, 2000
 # Ulrika Uddeborg <aurorauddeborg@gmail.com>, 2012
 # Yelitza Louze <ylouze@redhat.com>, 2003, 2004
+# Göran Uddeborg <goeran@uddeborg.se>, 2015. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 10:03+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2015-03-24 09:22-0400\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/fedora/language/"
 "sv/)\n"
@@ -33,6 +34,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -716,9 +718,9 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "Grupp %s gick inte att ta bort: %s.\n"
 
 #: apps/luserdel.c:139
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "fel när hemkatalogen togs bort för användaren"
+msgstr "Fel när hemkatalogen togs bort: %s.\n"
 
 #: apps/luserdel.c:145
 #, c-format
@@ -951,9 +953,8 @@ msgid "invalid module combination"
 msgstr "ogiltig modulkombination"
 
 #: lib/error.c:109
-#, fuzzy
 msgid "user's home directory not owned by them"
-msgstr "hemkatalog för ny användare"
+msgstr "användarens hemkatalog ägs inte av denne"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -1081,22 +1082,22 @@ msgstr "Ogiltigt standardvärd för fält %s: %s"
 msgid "error locking file: %s"
 msgstr "fel när filen låstes: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "det gick inte att få standardsäkerhetskontext: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "det gick inte att få säkerhetskontext för \"%s\": %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "det gick inte att sätta standardsäkerhetskontext till \"%s\": %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "det gick inte att avgöra säkerhetskontext för \"%s\": %s"
@@ -1201,65 +1202,6 @@ msgstr "kör inte med superanvändarrättigheter"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "det finns ingen skuggfil -- avaktiverar"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"fel vid anslutning till kadm5-servern för tjänst \"%s\" i rike \"%s\": %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "fel när kerberosbibliteket initierades"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "fel när användarnamnet \"%s\" tolkades för kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "entitetsstruktur har inga %s- eller %s-attribut"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "entiteten har inga %s- eller %s-attribut"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "entiteten skapades utan %s- eller %s-attribut"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "fel när information lästes för \"%s\" från kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "entiteten har inget %s-attribut"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "fel när lösenord sattes för \"%s\""
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Kerberosrike"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Kerberos administrativ principal"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberoslösenord för administrativ principal"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1382,15 +1324,15 @@ msgstr "Cyrus SASL-fel när anvädare togs bort: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "fel när Cyrus SASL initierades: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "fel när hemkatalogen skapades för användaren"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "fel när hemkatalogen togs bort för användaren"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "fel när hemkatalogen flyttades för användaren"
 
@@ -1452,8 +1394,40 @@ msgstr "Hämtar standardvärden för användarattribut:\n"
 msgid "Copying user structure:\n"
 msgstr "Kopierar användarstruktur:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s hade inte någon hemkatalog.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "fel vid anslutning till kadm5-servern för tjänst \"%s\" i rike \"%s\": %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Fel när %s togs bort: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "fel när kerberosbibliteket initierades"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "fel när användarnamnet \"%s\" tolkades för kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "entitetsstruktur har inga %s- eller %s-attribut"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "entiteten har inga %s- eller %s-attribut"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "entiteten skapades utan %s- eller %s-attribut"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "fel när information lästes för \"%s\" från kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "entiteten har inget %s-attribut"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "fel när lösenord sattes för \"%s\""
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Kerberosrike"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Kerberos administrativ principal"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Kerberoslösenord för administrativ principal"

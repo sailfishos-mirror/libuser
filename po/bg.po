@@ -8,10 +8,10 @@
 # Valentin Laskov <laskov@festa.bg>, 2011-2013
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-08-16 20:04+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-08-16 04:04-0400\n"
 "Last-Translator: Valentin Laskov <laskov@festa.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/fedora/"
 "language/bg/)\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1073,22 +1074,22 @@ msgstr "Невалидна стойност по подразбиране на �
 msgid "error locking file: %s"
 msgstr "грешка при заключване на файл: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "грешка при получаване подразбрания защитен контекст: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "не може да получи защитния контекст на `%s': %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "не може да се установи защитния контекст в `%s': %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "не може да получи защитния контекст за `%s': %s"
@@ -1193,65 +1194,6 @@ msgstr "няма да бъде изпълнено с администратор�
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "няма наличен shadow файл -- деактивиране"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "грешка при инициализация библиотеката на kerberos"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "грешка при анализ на потребителско име `%s' за kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "структурата в записа няма атрибути %s или %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "записа няма атрибути %s или %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "записа бе създаден без атрибути %s или %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "грешка при четене на данните за `%s' от kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "записа няма атрибут %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "грешка при задаване парола за `%s'"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Kerberos област"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Kerberos принципи на администриране"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Парола за Kerberos Admin Principal"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1373,15 +1315,15 @@ msgstr "Грешка на Cyrus SASL при премахване на потре
 msgid "error initializing Cyrus SASL: %s"
 msgstr "грешка при инициализация на Cyrus SASL: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "грешка при създаване домашна директория за потребител"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "грешка при премахване на домашна директория за потребител"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "грешка при преместване домашната директория на потребител"
 
@@ -1443,8 +1385,40 @@ msgstr "Извличане на стандартни потребителски 
 msgid "Copying user structure:\n"
 msgstr "Копиране на потребителска структура:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s нямаше домашна директория.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "грешка при свързване с kadm5 сървъра за услуга `%s' в областите `%s': %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Грешка при изтриване на %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "грешка при инициализация библиотеката на kerberos"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "грешка при анализ на потребителско име `%s' за kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "структурата в записа няма атрибути %s или %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "записа няма атрибути %s или %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "записа бе създаден без атрибути %s или %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "грешка при четене на данните за `%s' от kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "записа няма атрибут %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "грешка при задаване парола за `%s'"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Kerberos област"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Kerberos принципи на администриране"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Парола за Kerberos Admin Principal"

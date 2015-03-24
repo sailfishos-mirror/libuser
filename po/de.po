@@ -17,13 +17,14 @@
 # sknirT omiT <moc.tahder@sknirtt>, 2010
 # Timo Trinks <ttrinks@redhat.com>, 2007
 # Verena <vfuehrer@redhat.com>, 2004
+# Roman Spirgi <rspirgi@gmail.com>, 2015. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2015-03-22 07:11-0400\n"
+"Last-Translator: Roman Spirgi <rspirgi@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/fedora/language/"
 "de/)\n"
 "Language: de\n"
@@ -31,6 +32,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -723,9 +725,9 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "Gruppe %s konnte nicht gelöscht werden: %s.\n"
 
 #: apps/luserdel.c:139
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "Fehler beim Entfernen des persönlichen Ordners für Benutzer"
+msgstr "Fehler beim Entfernen des persönlichen Ordners: %s\n"
 
 #: apps/luserdel.c:145
 #, c-format
@@ -958,7 +960,6 @@ msgid "invalid module combination"
 msgstr "Ungültige Modulkombination"
 
 #: lib/error.c:109
-#, fuzzy
 msgid "user's home directory not owned by them"
 msgstr "Home-Verzeichnis für neuen Benutzer"
 
@@ -1090,22 +1091,22 @@ msgstr "Ungültiger Wert in Feld %s: %s"
 msgid "error locking file: %s"
 msgstr "Fehler beim Sperren der Datei: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "Standard-Sicherheitskontext konnte nicht gesetzt werden: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "Sicherheitskontext »%s« konnte nicht ermittelt werden: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Sicherheitskontext konnte nicht nach »%s« geschrieben werden: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "Sicherheitskontext »%s« konnte nicht bestimmt werden: %s"
@@ -1210,65 +1211,6 @@ msgstr "Keine Ausführung mit Administrator-Rechten."
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "Keine Shadow-Datei vorhanden -- wird deaktiviert."
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"Fehler bei der Verbindung zum kadm5-Server für Dienst »%s« in Realm %s: %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "Fehler bei der Initialisierung der Kerberos-Bibliothek"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "Fehler beim Parsen des Benutzernamens »%s« für Kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "Entitätenstruktur besitzt kein Attribut %s oder %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "Entität besitzt kein Attribut %s oder %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "Entität wurde ohne Attribut %s oder %s erstellt"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "Fehler beim Lesen der Informationen für »%s« von Kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "Entität besitzt kein Attribut %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "Fehler beim Einstellen des Passworts für »%s«"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Kerberos Realm"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Kerberos Admin Principal"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberos-Passwort für Admin Principal"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1392,15 +1334,15 @@ msgstr "Cyrus SASL-Fehler beim Entfernen des Benutzers: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Fehler beim Initialisieren von Cyrus SASL: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "Fehler beim Erstellen des persönlichen Ordners für Benutzer"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "Fehler beim Entfernen des persönlichen Ordners für Benutzer"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "Fehler beim Verschieben des persönlichen Ordners für Benutzer"
 
@@ -1462,8 +1404,40 @@ msgstr "Nach standardmäßigen Benutzerattributen wird gesucht:\n"
 msgid "Copying user structure:\n"
 msgstr "Benutzerstrukturen werden kopiert:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s hatte keinen persönlichen Ordner.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "Fehler bei der Verbindung zum kadm5-Server für Dienst »%s« in Realm %s: %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Fehler beim Entfernen von %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "Fehler bei der Initialisierung der Kerberos-Bibliothek"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "Fehler beim Parsen des Benutzernamens »%s« für Kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "Entitätenstruktur besitzt kein Attribut %s oder %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "Entität besitzt kein Attribut %s oder %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "Entität wurde ohne Attribut %s oder %s erstellt"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "Fehler beim Lesen der Informationen für »%s« von Kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "Entität besitzt kein Attribut %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "Fehler beim Einstellen des Passworts für »%s«"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Kerberos Realm"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Kerberos Admin Principal"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Kerberos-Passwort für Admin Principal"

@@ -7,13 +7,14 @@
 # Isabel Cama <c.gomez.febrel@terra.es>, 2004
 # Miloslav Trmač <mitr@volny.cz>, 2011
 # Xavier Conde Rueda <xavi.conde@gmail.com>, 2004
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2015. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2015-03-17 10:09-0400\n"
+"Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/fedora/language/"
 "ca/)\n"
 "Language: ca\n"
@@ -21,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -69,48 +71,50 @@ msgstr "S'ha autenticat un usuari desconegut.\n"
 #: apps/apputil.c:277
 #, c-format
 msgid "User mismatch.\n"
-msgstr "L'usuari és discordant.\n"
+msgstr "No coincideix l'usuari.\n"
 
 #: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "pregunta per tota la informació"
 
 #: apps/lchage.c:86
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "llista els paràmetres de l'antiguitat per a l'usuari"
 
 #: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "mínim de dies entre el canvi de contrasenua"
 
 #: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
 #: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
-msgstr ""
+msgstr "DIES"
 
 #: apps/lchage.c:90
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "màxim de dies entre el canvi de contrasenua"
 
 #: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "data de l'últim canvi de contrasenya en dies des del 1/1/70"
 
 #: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"nombre de dies després de la data de venciment de la contrasenya quan el "
+"compte es considera inactiu"
 
 #: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "data del venciment de la contrasenya en dies des del 1/1/70"
 
 #: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "dies abans del venciment per començar a advertir a l'usuari"
 
 #: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
@@ -168,7 +172,7 @@ msgstr "Màxim:\t%ld\n"
 #: apps/lchage.c:172
 #, c-format
 msgid "Maximum:\tNone\n"
-msgstr ""
+msgstr "Màxim:\tCap\n"
 
 #: apps/lchage.c:175
 #, c-format
@@ -183,11 +187,11 @@ msgstr "Inactiu:\t%ld\n"
 #: apps/lchage.c:182
 #, c-format
 msgid "Inactive:\tNever\n"
-msgstr ""
+msgstr "Inactiu:\tMai\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Ha de canviar la contrasenya en el següent inici  de sessió"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -201,7 +205,7 @@ msgstr "Últim canvi:\t%s\n"
 #: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr "La contrasenya venç el:\t%s\n"
+msgstr "La contrasenya venç:\t%s\n"
 
 #: apps/lchage.c:213
 #, c-format
@@ -211,12 +215,12 @@ msgstr "Contrasenya inactiva:\t%s\n"
 #: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr "El compte venç el:\t%s\n"
+msgstr "El compte venç:\t%s\n"
 
 #: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr "No s'ha pogut modificar la informació d'envelliment de %s: %s.\n"
+msgstr "No s'ha pogut modificar la informació d'antiguitat de %s: %s.\n"
 
 #: apps/lchfn.c:67 apps/lchsh.c:55
 msgid "[OPTION...] [user]"
@@ -235,7 +239,7 @@ msgstr "S'està canviant la informació del finger per a %s.\n"
 
 #: apps/lchfn.c:136
 msgid "Full Name"
-msgstr "Nom i cognoms"
+msgstr "Nom complet"
 
 #: apps/lchfn.c:146
 msgid "Surname"
@@ -259,7 +263,7 @@ msgstr "Telèfon particular"
 
 #: apps/lchfn.c:195
 msgid "E-Mail Address"
-msgstr "Adreça electrònica"
+msgstr "Adreça de correu electrònic"
 
 #: apps/lchfn.c:208
 #, c-format
@@ -278,33 +282,33 @@ msgstr "La informació del finger no ha canviat: %s.\n"
 #: apps/lchsh.c:84
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr "S'està canviant l'intèrpret d'ordres per a %s.\n"
+msgstr "S'està canviant el shell per a %s.\n"
 
 #: apps/lchsh.c:114
 msgid "New Shell"
-msgstr "Nou intèrpret d'ordres"
+msgstr "Nou shell"
 
 #: apps/lchsh.c:121 apps/lchsh.c:136
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr "L'intèrpret d'ordres no s'ha canviat: %s.\n"
+msgstr "No s'ha canviat el shell: %s.\n"
 
 #: apps/lchsh.c:133
 msgid "Shell changed.\n"
-msgstr "L'intèrpret d'ordres ha canviat.\n"
+msgstr "S'ha canviat el shell.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "gid per al nou grup"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "NÚM"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "crea un grup de sistema"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
@@ -319,12 +323,12 @@ msgstr "No s'ha especificat cap nom de grup.\n"
 #: apps/luseradd.c:164 apps/lusermod.c:127
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr "L'ID del grup %s no és vàlid\n"
+msgstr "L'Id. del grup %s no és vàlid\n"
 
 #: apps/lgroupadd.c:119
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr "No s'ha pogut crear el grup: %s.\n"
+msgstr "Ha fallat la creació del grup: %s.\n"
 
 #: apps/lgroupdel.c:85 apps/lgroupmod.c:132 apps/lpasswd.c:153
 #, c-format
@@ -334,23 +338,23 @@ msgstr "El grup %s no existeix.\n"
 #: apps/lgroupdel.c:91
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr "No s'ha pogut suprimir el grup %s: %s.\n"
+msgstr "No s'ha pogut eliminar el grup %s: %s.\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "estableix el GID per al grup"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "canvia el grup per a què tingui el nom indicat"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "NOM"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:75
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "contrasenya en text pla per utilitzar amb el grup"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -362,35 +366,35 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "TEXT"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "contrasenya pre-hash per utilitzar amb lúsuari"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "llista dels administradors a afegir"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "llista dels administradors a eliminar"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "llista dels membres del grup a afegir"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "llista dels membres del grup a eliminar"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "bloqueja el grup"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "desbloqueja el grup"
 
 #: apps/lgroupmod.c:125 apps/lusermod.c:164
 #, c-format
@@ -427,15 +431,17 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"llista els membres d'un grup amb nom en lloc de les afiliacions del grup per "
+"a l'usuari amb nom"
 
 #: apps/lid.c:120
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "tan sols llista la informació de l'afiliació per nom i no per UID/GID"
 
 #: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "No s'ha especificat cap nom de grup. Es farà servir %s.\n"
+msgstr "No s'ha especificat cap nom de grup, s'utilitza %s.\n"
 
 #: apps/lid.c:150
 #, c-format
@@ -445,7 +451,7 @@ msgstr "No s'ha especificat cap nom de grup, el gid %d no té nom.\n"
 #: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "No s'ha especificat cap nom d'usuari. Es farà servir %s.\n"
+msgstr "No s'ha especificat cap nom d'usuari, s'utilitza %s.\n"
 
 #: apps/lid.c:192
 #, c-format
@@ -454,19 +460,19 @@ msgstr "%s no existeix.\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "fitxer amb els registres d'informació d'usuari"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "CAMÍ"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "no creis els directoris d'inici"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "no creis les cues de correu"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -475,19 +481,19 @@ msgstr "[OPCIÓ...]"
 #: apps/lnewusers.c:88
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "S'ha produït un error en obrir '%s': %s.\n"
+msgstr "S'ha produït un error en obrir «%s» %s.\n"
 
 #: apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"S'ha produït un error en crear un compte per a '%s': s'ha formatat la línia "
+"S'ha produït un error en crear un compte per a «%s»: s'ha formatat la línia "
 "incorrectament.\n"
 
 #: apps/lnewusers.c:129 apps/luseradd.c:128 apps/lusermod.c:142
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr "L'ID de l'usuari %s no és vàlid\n"
+msgstr "L'Id. de l'usuari %s no és vàlid\n"
 
 #: apps/lnewusers.c:136
 msgid "Refusing to create account with UID 0.\n"
@@ -502,18 +508,18 @@ msgstr "S'ha produït un error en crear un grup per a «%s» amb el GID %jd: %s\
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
-"Es refusa la utilització per defecte del directori perillós d'inici «%s» per "
-"a «%s»\n"
+"Es rebutja la utilització per defecte del directori d'inici perillós «%s» "
+"per a «%s»\n"
 
 #: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr "S'ha produït un error en crear un directori personal per a %s: %s\n"
+msgstr "S'ha produït un error en crear un directori d'inici per a %s: %s\n"
 
 #: apps/lnewusers.c:270
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "S'ha produït un error en crear la cua de correu per a %s: %s\n"
 
 #: apps/lnewusers.c:285
 #, c-format
@@ -528,23 +534,23 @@ msgstr "S'ha produït un error en crear un compte per a %s: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "estableix la contrasenya de grup en lloc de la contrasenya d'usuari"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "nova contrasenya en text pla"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "nova contrasenya xifrada"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "llegeix la nova contrasenya en text pla per al descriptor indicat"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "llegeix la nova contrasenya xifrada per al descriptor indicat"
 
 #: apps/lpasswd.c:83
 #, c-format
@@ -572,7 +578,7 @@ msgstr "S'ha cancel·lat el canvi de contrasenya.\n"
 #: apps/lpasswd.c:165 apps/lpasswd.c:182
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
-msgstr "S'ha produït un error al llegir des del descriptor d'arxiu %d.\n"
+msgstr "S'ha produït un error en llegir des del descriptor de fitxer %d.\n"
 
 #: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
@@ -593,63 +599,63 @@ msgstr "S'ha canviat la contrasenya.\n"
 
 #: apps/luseradd.c:57
 msgid "create a system user"
-msgstr ""
+msgstr "crea un usuari de sistema"
 
 #: apps/luseradd.c:59
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "informació GECOS per al nou usuari"
 
 #: apps/luseradd.c:61
 msgid "home directory for new user"
-msgstr ""
+msgstr "directori d'inici per al nou usuari"
 
 #: apps/luseradd.c:63
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "directori amb fitxers per al nou usuari"
 
 #: apps/luseradd.c:65
 msgid "shell for new user"
-msgstr ""
+msgstr "shell per al nou usuari"
 
 #: apps/luseradd.c:67
 msgid "uid for new user"
-msgstr ""
+msgstr "uid per al nou usuari"
 
 #: apps/luseradd.c:69
 msgid "group for new user"
-msgstr ""
+msgstr "grup per al nou usuari"
 
 #: apps/luseradd.c:71
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "no creis el directori d'inici per a l'usuari"
 
 #: apps/luseradd.c:73
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "no creis el grup amb el mateix nom de l'usuari"
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
-msgstr ""
+msgstr "nom comú per al nou usuari"
 
 #: apps/luseradd.c:81
 msgid "given name for new user"
-msgstr ""
+msgstr "nom per al nou usuari"
 
 #: apps/luseradd.c:83
 msgid "surname for new user"
-msgstr ""
+msgstr "cognom per al nou usuari"
 
 #: apps/luseradd.c:85
 msgid "room number for new user"
-msgstr ""
+msgstr "número de despatx per al nou usuari"
 
 #: apps/luseradd.c:87
 msgid "telephone number for new user"
-msgstr ""
+msgstr "número de telèfon per al nou usuari"
 
 #: apps/luseradd.c:89
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "número de telèfon de casa per al nou usuari"
 
 #: apps/luseradd.c:189
 #, c-format
@@ -674,30 +680,30 @@ msgstr "S'ha produït un error en crear %s: %s.\n"
 #: apps/luseradd.c:290
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "S'ha produït un error en crear la cua de correu: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "no eliminis el grup privat de l'usuari si l'usuari en té un"
 
 #: apps/luserdel.c:50
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "elimina el directori d'inici de l'usuari"
 
 #: apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr "L'usuari %s no s'ha pogut suprimir: %s.\n"
+msgstr "No s'ha pogut eliminar l'usuari %s: %s.\n"
 
 #: apps/luserdel.c:108
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "A %s li falta el nombre de gid.\n"
+msgstr "%s no té un número de gid.\n"
 
 #: apps/luserdel.c:114
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "No existeix cap grup amb el gid %jd. No se suprimirà.\n"
+msgstr "No existeix cap grup amb el GID %jd, no s'elimina.\n"
 
 #: apps/luserdel.c:120
 #, c-format
@@ -707,85 +713,85 @@ msgstr "El grup amb el GID %jd no tenia un nom de grup.\n"
 #: apps/luserdel.c:126
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr "No s'ha pogut suprimir el grup %s: %s.\n"
+msgstr "No s'ha pogut eliminar el grup %s: %s.\n"
 
 #: apps/luserdel.c:139
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "s'ha produït un error en eliminar el directori personal per a l'usuari"
+msgstr "S'ha produït un error en eliminar el directori d'inici: %s.\n"
 
 #: apps/luserdel.c:145
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "S'ha produït un error en eliminar la cua de correu: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "informació GECOS"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "directori d'inici"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "mou els continguts del directori d'inici"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "estableix el shell per a l'usuari"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "estableix l'UID per a l'usuari"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "estableix el GID primari per a l'usuari"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "canvia el nom d'inici de sessió per a l'usuari"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "contrasenya en text pla per a l'usuari"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "contrasenya pre-hash per a l'usuari"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "bloqueja el compte"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "desbloqueja el compte"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "estableix el nom comú per a l'usuari"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "estableix el nom per a l'usuari"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "estableix el cognom per a l'usuari"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "estableix el número de despatx per a l'usuari"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "estableix el número de telèfon per a l'usuari"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "estableix el número de telèfon de casa per a l'usuari"
 
 #: apps/lusermod.c:180 apps/lusermod.c:193
 #, c-format
@@ -805,7 +811,7 @@ msgstr "L'usuari %s no s'ha pogut desbloquejar: %s.\n"
 #: apps/lusermod.c:232
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Avís: el grup amb ID %jd no existeix\n"
+msgstr "Advertència: el grup amb l'Id. %jd no existeix\n"
 
 #: apps/lusermod.c:275
 #, c-format
@@ -878,7 +884,7 @@ msgstr "nom d'usuari o de grup incorrecte"
 
 #: lib/error.c:74
 msgid "bad user/group id"
-msgstr "identificador d'usuari o de grup incorrecte"
+msgstr "Id. d'usuari o de grup incorrecte"
 
 #: lib/error.c:76
 msgid "user/group name in use"
@@ -886,7 +892,7 @@ msgstr "el nom d'usuari o de grup ja s'està utilitzant"
 
 #: lib/error.c:78
 msgid "user/group id in use"
-msgstr "l'identificador d'usuari o de grup ja s'està utilitzant"
+msgstr "l'Id. d'usuari o de grup ja s'està utilitzant"
 
 #: lib/error.c:80
 msgid "error manipulating terminal attributes"
@@ -910,11 +916,11 @@ msgstr "s'ha produït un error en llegir el fitxer"
 
 #: lib/error.c:90
 msgid "error writing to file"
-msgstr "s'ha produït un error en escriure en el fitxer"
+msgstr "s'ha produït un error en escriure al fitxer"
 
 #: lib/error.c:92
 msgid "data not found in file"
-msgstr "no s'han trobat les dades en el fitxer"
+msgstr "no s'han trobat les dades al fitxer"
 
 #: lib/error.c:94
 msgid "internal initialization error"
@@ -926,7 +932,7 @@ msgstr "s'ha produït un error en carregar el mòdul"
 
 #: lib/error.c:98
 msgid "error resolving symbol in module"
-msgstr "s'ha produït un error en determinar el símbol en el mòdul"
+msgstr "s'ha produït un error en determinar el símbol al mòdul"
 
 #: lib/error.c:100
 msgid "library/module version mismatch"
@@ -938,15 +944,15 @@ msgstr "en desbloquejar, el camp de la contrasenya quedarà buit"
 
 #: lib/error.c:105
 msgid "invalid attribute value"
-msgstr "valor d'atribut invàlid"
+msgstr "el valor de l'atribut no és vàlid"
 
 #: lib/error.c:107
 msgid "invalid module combination"
-msgstr "combinació de mòdul invàlida"
+msgstr "la combinació de mòdul no és vàlida"
 
 #: lib/error.c:109
 msgid "user's home directory not owned by them"
-msgstr ""
+msgstr "directori d'inici de l'usuari que no és de la seva propietat"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -954,11 +960,11 @@ msgstr "error desconegut"
 
 #: lib/misc.c:240
 msgid "invalid number"
-msgstr "número invàlid"
+msgstr "el número no és vàlid"
 
 #: lib/misc.c:254
 msgid "invalid ID"
-msgstr "ID invàlid"
+msgstr "l'Id. no és vàlid"
 
 #: lib/modules.c:61
 #, c-format
@@ -1019,7 +1025,7 @@ msgstr "el nom comença amb un guió"
 #: lib/user.c:272
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "el nom conté el caràcter invàlid «%c»"
+msgstr "el nom conté el caràcter no vàlid «%c»"
 
 #: lib/user.c:308 lib/user.c:360
 #, c-format
@@ -1029,7 +1035,7 @@ msgstr "l'usuari %s no té UID"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "no s'ha trobat l'usuari %s"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1039,7 +1045,7 @@ msgstr "el grup %s no té GID"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "no s'ha trobat el grup %s"
 
 #: lib/user.c:355
 #, c-format
@@ -1063,7 +1069,7 @@ msgstr "el grup no té ni nom ni GID"
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
-"Es refusa la utilització per defecte del directori perillós d'inici «%s»"
+"Es rebutja la utilització per defecte del directori d'inici perillós «%s»"
 
 #: lib/user.c:2310
 #, c-format
@@ -1075,23 +1081,22 @@ msgstr "El valor per defecte del camp %s no és vàlid: %s"
 msgid "error locking file: %s"
 msgstr "s'ha produït un error en bloquejar el fitxer: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr "no s'ha pogut obtenir el context de seguretat predeterminat: %s"
+msgstr "no s'ha pogut obtenir el context de seguretat per defecte: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "no s'ha pogut obtenir el context de seguretat de «%s»: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
-"no s'ha pogut establir el context de seguretat predeterminat a «%s»: %s"
+msgstr "no s'ha pogut establir el context de seguretat per defecte a «%s»: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "no s'ha pogut determinar el context de seguretat per a «%s»: %s"
@@ -1131,7 +1136,7 @@ msgstr "S'ha produït un error en canviar el propietari de «%s»: %s"
 #: modules/files.c:177
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "S'ha produït un error en canviar el mode de «%s»: %s"
 
 #: modules/files.c:193
 #, c-format
@@ -1150,16 +1155,16 @@ msgstr "la mida del fitxer de còpia de seguretat no coincideix"
 #: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s valor «%s»: ':' no està disponible"
+msgstr "%s valor «%s»: ':' no està permès"
 
 #: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "no s'ha podut llegir res de «%s»: %s"
+msgstr "no s'ha podut llegir des de «%s»: %s"
 
 #: modules/files.c:797
 msgid "entry already present in file"
-msgstr "el registre ja es troba en el fitxer"
+msgstr "el registre ja està present al fitxer"
 
 #: modules/files.c:804 modules/files.c:814 modules/files.c:825
 #: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
@@ -1197,66 +1202,6 @@ msgstr "no s'està executant amb permisos de superusuari"
 msgid "no shadow file present -- disabling"
 msgstr "no hi ha cap fitxer shadow present -- es deshabilitarà"
 
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"s'ha produït un error en connectar amb el servidor kadm5 per al servei «%s» "
-"en el regne «%s»: %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "s'ha produït un error en inicialitzar la biblioteca del Kerberos"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "s'ha produït un error en analitzar el nom d'usuari «%s» pel Kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "l'estructura de l'entitat no té atributs %s ni %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "l'entitat no té atributs %s ni %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "s'ha creat l'entitat sense atributs %s o %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "s'ha produït un error en llegir la informació per a «%s» del Kerberos"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "l'entitat no té cap atribut %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "s'ha produït un error en configurar la contrasenya per a «%s»"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Regne del Kerberos"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Administrador principal del Kerberos"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Contrasenya del Kerberos per a l'administrador principal"
-
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
 msgstr "s'ha produït un error en inicialitzar la biblioteca ldap"
@@ -1268,7 +1213,7 @@ msgstr "no s'ha pogut establir la versió del protocol LDAP a %d"
 
 #: modules/ldap.c:229
 msgid "could not negotiate TLS with LDAP server"
-msgstr "el TLS no ha pogut negociar amb el servidor de LDAP"
+msgstr "TLS no ha pogut negociar amb el servidor de LDAP"
 
 #: modules/ldap.c:424
 msgid "could not bind to LDAP server"
@@ -1289,7 +1234,7 @@ msgstr "l'objecte de l'usuari no tenia atribut %s"
 #: modules/ldap.c:1324
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "s'ha creat l'objecte de l'usuari sense «%s»"
+msgstr "s'ha creat l'objecte d'usuari sense «%s»"
 
 #: modules/ldap.c:1344
 #, c-format
@@ -1382,15 +1327,15 @@ msgstr "s'ha produït un error del SASL en eliminar un usuari del Cyrus: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "s'ha produït un error en inicialitzar el SASL del Cyrus: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "s'ha produït un error en crear el directori personal per a l'usuari"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "s'ha produït un error en eliminar el directori personal per a l'usuari"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "s'ha produït un error en moure el directori personal per a l'usuari"
 
@@ -1402,27 +1347,27 @@ msgstr "S'ha produït un error en inicialitzar %s: %s\n"
 #: samples/lookup.c:76
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr "L'ID %s no és vàlid\n"
+msgstr "L'Id. %s no és vàlid\n"
 
 #: samples/lookup.c:88
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "S'està cercant un grup amb ID %jd.\n"
+msgstr "S'està cercant el grup amb l'Id. %jd.\n"
 
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "S'està cercant un grup anomenat %s.\n"
+msgstr "S'està cercant el grup anomenat %s.\n"
 
 #: samples/lookup.c:99
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "S'està cercant un usuari amb ID %jd.\n"
+msgstr "S'està cercant l'usuari amb l'Id. %jd.\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "S'està cercant un usuari anomenat %s.\n"
+msgstr "S'està cercant l'usuari anomenat %s.\n"
 
 #: samples/lookup.c:117
 msgid "Entry not found.\n"
@@ -1452,8 +1397,43 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s no té un directori personal.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "s'ha produït un error en connectar amb el servidor kadm5 per al servei "
+#~ "«%s» en el regne «%s»: %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "S'ha produït un error en eliminar %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "s'ha produït un error en inicialitzar la biblioteca del Kerberos"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr ""
+#~ "s'ha produït un error en analitzar el nom d'usuari «%s» pel Kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "l'estructura de l'entitat no té atributs %s ni %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "l'entitat no té atributs %s ni %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "s'ha creat l'entitat sense atributs %s o %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr ""
+#~ "s'ha produït un error en llegir la informació per a «%s» del Kerberos"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "l'entitat no té cap atribut %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "s'ha produït un error en configurar la contrasenya per a «%s»"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Regne del Kerberos"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Administrador principal del Kerberos"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Contrasenya del Kerberos per a l'administrador principal"

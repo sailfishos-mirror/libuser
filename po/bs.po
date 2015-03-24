@@ -7,10 +7,10 @@
 # Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Bosnian (http://www.transifex.com/projects/p/fedora/language/"
 "bs/)\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1065,22 +1066,22 @@ msgstr ""
 msgid "error locking file: %s"
 msgstr "Pogreška pri zaključavanju datoteke: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "Dohvaćanje sigurnosnog sadržaja `%s' nije uspjelo: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "Dohvaćanje sigurnosnog sadržaja u `%s' nije uspjelo: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1185,66 +1186,6 @@ msgstr "Ne izvršava se s pravima superkorisnika"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "Datoteka lozinki u sjeni ne postoji -- Bit će onemogućeno"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"Pogreška pri povezivanju s kadm5 poslužiteljem za uslugu`%s' u području `"
-"%s': %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "Pogreška pri inicijalizaciji kerberos biblioteka"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "Pogreška pri raščlanjivanju korisničkog imena `%s' za kerberos"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "Struktura entiteta nema atribute %s ili %s"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "Entitet nema atribute %s ili %s"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "Entitet je izrađen bez atributa %s ili %s"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "Pogreška pri čitanju podataka za %s' iz kerberosa"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "Entitet nema atribut %s"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "Pogreška pri postavljanju lozinke za `%s'"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Područje Kerberosa"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Principal administratora kerberosa"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Lozinka kerberosa za principal administratora"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1367,15 +1308,15 @@ msgstr "Pogreška pri uklanjanju Cyrus SASL korisnika: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Pogreška pri inicijalizaciji Cyrus SASL-a: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "Pogreška pri izradi početne mape za korisnika"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "Pogreška pri uklanjanju početne mape za korisnika"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "Pogreška pri premještanju početne mape za korisnika"
 
@@ -1437,8 +1378,41 @@ msgstr "Dohvaćanje zdanih korisničkih atributa:\n"
 msgid "Copying user structure:\n"
 msgstr "Kopiranje strukture korisnika:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s nema početnu mapu.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "Pogreška pri povezivanju s kadm5 poslužiteljem za uslugu`%s' u području `"
+#~ "%s': %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Pogreška pri uklanjanju %s: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "Pogreška pri inicijalizaciji kerberos biblioteka"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "Pogreška pri raščlanjivanju korisničkog imena `%s' za kerberos"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "Struktura entiteta nema atribute %s ili %s"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "Entitet nema atribute %s ili %s"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "Entitet je izrađen bez atributa %s ili %s"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "Pogreška pri čitanju podataka za %s' iz kerberosa"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "Entitet nema atribut %s"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "Pogreška pri postavljanju lozinke za `%s'"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Područje Kerberosa"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Principal administratora kerberosa"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Lozinka kerberosa za principal administratora"

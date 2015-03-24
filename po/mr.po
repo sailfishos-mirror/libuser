@@ -11,10 +11,10 @@
 # sandeeps <sshedmak@redhat.com>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Marathi (http://www.transifex.com/projects/p/fedora/language/"
 "mr/)\n"
@@ -23,6 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1068,22 +1069,22 @@ msgstr "field %s ची अवैध मुलभूत संख्या: %s"
 msgid "error locking file: %s"
 msgstr "फाइल कुलूपबंद करतेवेळी त्रूटी: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "मुलभूत सुरक्षा संदर्भ प्राप्त करता आले नाही: %s"
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "`%s' चा सुरक्षा संदर्भ आढळला नाही: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' करता मुलभूत सुरक्षा संदर्भ निश्चित केला नाही: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "संरचना फाइल `%1$s' उघडू शकला नाही: %2$s"
@@ -1188,66 +1189,6 @@ msgstr "अत्युतमवापरकर्ता हक्कासह �
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "शॅडो फाइल उपलब्ध नाही -- अकार्यान्वीत करत आहे"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr ""
-"error connecting to the `%s' मधील `%s' सेवा करीता kadm5 सर्वरशी जुळवणी करतेवेळी "
-"त्रुटी: %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "केरबेरोस लायब्ररी प्रारंभ करतेवेळी त्रुटी"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "केरबेरोस करीता वापरकर्ता `%s' वाचतेवेळी त्रुटी"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "वस्तु रचनेत %s किंवा %s गुणधर्म नाही"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "वस्तु %s किंवा %s गुणधर्म नाही"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "वस्तु %s किंवा %s गुणधर्म विना निर्मीत केले"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "कर्बेरोस पासुन `%s' करीता माहिती वाचतेवेळी त्रुटी"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "वस्तुकडे %s गुणधर्म नाही"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "`%s' करीता पासवर्ड निश्चित करीत आहे"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "कर्बेरोस रिअल्म"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "कर्बेरोस ॲडमिन प्रिंसिपल"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "प्रशासक प्रमुखाकरीता कर्बेरोस पासवर्ड"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1369,15 +1310,15 @@ msgstr "वापरकर्ता काढुन टाकतेवेळी 
 msgid "error initializing Cyrus SASL: %s"
 msgstr "Cyrus SASL प्रारंभ करतेवेऴी त्रुटी: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "मुख्य संचयीका निर्माण करतेवेळी त्रुटी"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "वापरकर्त्यास मुख्य संचयीका काढुन टाकतेवेळी त्रुटी"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "वापरकर्त्यास मुख्य संचयीका स्थानांतर करतेवेळी त्रुटी"
 
@@ -1439,8 +1380,41 @@ msgstr "मुलभूत वापरकर्त्याचे गुणध�
 msgid "Copying user structure:\n"
 msgstr "वापरकर्ता संरचनाची प्रत बनवित आहे:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s ला मुख्य संचयीका नाही.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr ""
+#~ "error connecting to the `%s' मधील `%s' सेवा करीता kadm5 सर्वरशी जुळवणी "
+#~ "करतेवेळी त्रुटी: %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "%s काढुन टाकतेवेळी चुक: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "केरबेरोस लायब्ररी प्रारंभ करतेवेळी त्रुटी"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "केरबेरोस करीता वापरकर्ता `%s' वाचतेवेळी त्रुटी"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "वस्तु रचनेत %s किंवा %s गुणधर्म नाही"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "वस्तु %s किंवा %s गुणधर्म नाही"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "वस्तु %s किंवा %s गुणधर्म विना निर्मीत केले"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "कर्बेरोस पासुन `%s' करीता माहिती वाचतेवेळी त्रुटी"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "वस्तुकडे %s गुणधर्म नाही"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "`%s' करीता पासवर्ड निश्चित करीत आहे"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "कर्बेरोस रिअल्म"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "कर्बेरोस ॲडमिन प्रिंसिपल"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "प्रशासक प्रमुखाकरीता कर्बेरोस पासवर्ड"

@@ -8,10 +8,10 @@
 # Miloslav Trmač <mitr@volny.cz>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: libuser\n"
+"Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2013-10-12 23:52+0200\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
+"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/fedora/language/"
 "et/)\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Zanata 3.5.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1065,22 +1066,22 @@ msgstr "Välja %s vigane vaikeväärtus: %s"
 msgid "error locking file: %s"
 msgstr "viga faili lukustamisel: %s"
 
-#: lib/util.c:706
+#: lib/util.c:704
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:733 lib/util.c:759 lib/util.c:785
+#: lib/util.c:731 lib/util.c:757 lib/util.c:783
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "turvakonteksti `%s' saamine ei ole võimalik: %s"
 
-#: lib/util.c:739 lib/util.c:765 lib/util.c:791 lib/util.c:823
+#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "vaike turvakonteksti seadistamine `%s'-ile ei ole võimalik: %s"
 
-#: lib/util.c:815
+#: lib/util.c:813
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
@@ -1185,64 +1186,6 @@ msgstr "superkasutaja õigustega ei käivitata"
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
 msgstr "varifail puudub - keelatud"
-
-#: modules/krb5.c:100
-#, c-format
-msgid "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-msgstr "kadm5 serveri teenuse `%s' ühendamise viga piirkonnas `%s': %s"
-
-#: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
-#: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
-msgid "error initializing kerberos library"
-msgstr "viga kerberose teegi lähtestamisel"
-
-#: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
-#: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
-#, c-format
-msgid "error parsing user name `%s' for kerberos"
-msgstr "kerberose jaoks kasutajanime `%s  analüüsimisel ilmnes viga"
-
-#: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
-#, c-format
-msgid "entity structure has no %s or %s attributes"
-msgstr "üksuse struktuuril puudub %s või %s atribuut"
-
-#: modules/krb5.c:307
-#, c-format
-msgid "entity has no %s or %s attributes"
-msgstr "üksusel puudub %s või %s atribuut"
-
-#: modules/krb5.c:320
-#, c-format
-msgid "entity was created with no %s or %s attributes"
-msgstr "üksus loodi ilma %s või %s atribuudita"
-
-#: modules/krb5.c:471 modules/krb5.c:559
-#, c-format
-msgid "error reading information for `%s' from kerberos"
-msgstr "kerberosest %s ' jaoks informatsiooni lugemisel ilmnes viga"
-
-#: modules/krb5.c:600
-#, c-format
-msgid "entity has no %s attribute"
-msgstr "üksusel %s puudub atribuut"
-
-#: modules/krb5.c:638
-#, c-format
-msgid "error setting password for `%s'"
-msgstr "`%s'-le parooli seadmisel ilmnes viga"
-
-#: modules/krb5.c:764
-msgid "Kerberos Realm"
-msgstr "Kerberos piirkond"
-
-#: modules/krb5.c:771
-msgid "Kerberos Admin Principal"
-msgstr "Kerberos-e Haldusjuht"
-
-#: modules/krb5.c:793
-msgid "Kerberos Password for Admin Principal"
-msgstr "Kerberose parool Haldusjuhile"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1365,15 +1308,15 @@ msgstr "Cyrus SASL viga kasutaja eemaldamisel: %s"
 msgid "error initializing Cyrus SASL: %s"
 msgstr "viga Cyrus SASL lähtestamisel: %s"
 
-#: python/admin.c:518
+#: python/admin.c:505
 msgid "error creating home directory for user"
 msgstr "kasutaja kodukataloogi loomise viga"
 
-#: python/admin.c:557 python/admin.c:596
+#: python/admin.c:544 python/admin.c:583
 msgid "error removing home directory for user"
 msgstr "kasutaja kodukataloogi kustutamise viga"
 
-#: python/admin.c:667
+#: python/admin.c:654
 msgid "error moving home directory for user"
 msgstr "kasutaja kodukataloogi liigutamise viga"
 
@@ -1435,8 +1378,39 @@ msgstr "Kasutaja vaikeatribuutide saamine:\n"
 msgid "Copying user structure:\n"
 msgstr "Kasutajastruktuuri kopeerimine:\n"
 
-#~ msgid "%s did not have a home directory.\n"
-#~ msgstr "%s-il ei ole kodukataloogi.\n"
+#~ msgid ""
+#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
+#~ msgstr "kadm5 serveri teenuse `%s' ühendamise viga piirkonnas `%s': %s"
 
-#~ msgid "Error removing %s: %s.\n"
-#~ msgstr "Viga %s eemaldamisel: %s.\n"
+#~ msgid "error initializing kerberos library"
+#~ msgstr "viga kerberose teegi lähtestamisel"
+
+#~ msgid "error parsing user name `%s' for kerberos"
+#~ msgstr "kerberose jaoks kasutajanime `%s  analüüsimisel ilmnes viga"
+
+#~ msgid "entity structure has no %s or %s attributes"
+#~ msgstr "üksuse struktuuril puudub %s või %s atribuut"
+
+#~ msgid "entity has no %s or %s attributes"
+#~ msgstr "üksusel puudub %s või %s atribuut"
+
+#~ msgid "entity was created with no %s or %s attributes"
+#~ msgstr "üksus loodi ilma %s või %s atribuudita"
+
+#~ msgid "error reading information for `%s' from kerberos"
+#~ msgstr "kerberosest %s ' jaoks informatsiooni lugemisel ilmnes viga"
+
+#~ msgid "entity has no %s attribute"
+#~ msgstr "üksusel %s puudub atribuut"
+
+#~ msgid "error setting password for `%s'"
+#~ msgstr "`%s'-le parooli seadmisel ilmnes viga"
+
+#~ msgid "Kerberos Realm"
+#~ msgstr "Kerberos piirkond"
+
+#~ msgid "Kerberos Admin Principal"
+#~ msgstr "Kerberos-e Haldusjuht"
+
+#~ msgid "Kerberos Password for Admin Principal"
+#~ msgstr "Kerberose parool Haldusjuhile"
