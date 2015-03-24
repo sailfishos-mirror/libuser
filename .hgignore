@@ -3,6 +3,7 @@
 ^.autotools$
 ^.cproject$
 ^.project$
+^.pydevproject$
 ^.settings$
 ^.zanata-cache/etag-cache.xml$
 ^admin/ar-lib$
