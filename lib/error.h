@@ -25,6 +25,40 @@
 
 G_BEGIN_DECLS
 
+/**
+ * lu_status:
+ * @lu_success: Success.
+ * @lu_warning_config_disabled: Module disabled by configuration.
+ * @lu_error_generic: Generic error.
+ * @lu_error_privilege: Not enough privileges.
+ * @lu_error_access_denied: Access denied.
+ * @lu_error_name_bad: Bad user/group name.
+ * @lu_error_id_bad: Bad user/group id.
+ * @lu_error_name_used: User/group name in use.
+ * @lu_error_id_used: User/group id in use.
+ * @lu_error_terminal: Error manipulating terminal attributes.
+ * @lu_error_open: Error opening file.
+ * @lu_error_lock: Error locking file.
+ * @lu_error_stat: Error statting file.
+ * @lu_error_read: Error reading file.
+ * @lu_error_write: Error writing to file.
+ * @lu_error_search: Data not found in file.
+ * @lu_error_init: Internal initialization error.
+ * @lu_error_module_load: Error loading module.
+ * @lu_error_module_sym: Error resolving symbol in module.
+ * @lu_error_module_version: Library/module version mismatch.
+ * @lu_error_unlock_empty: Unlocking would make the password field empty.
+ *  Since: 0.53
+ * @lu_error_invalid_attribute_value: Invalid attribute value.
+ *  Since: 0.56
+ * @lu_error_invalid_module_combination: Invalid module combination.
+ *  Since: 0.57
+ * @lu_error_homedir_not_owned: User's home directory not owned by them.
+ *  Since: 0.60
+ *
+ * Program-readable error/status codes. Note that new ones may be added in the
+ * future, even for existing operations.
+ */
 enum lu_status {
 	/* Non-fatal. */
 	lu_success = 0,
@@ -78,11 +112,12 @@ typedef enum lu_status lu_status_t;
 
 /**
  * lu_error:
+ * @code: A program-readable error code.
+ * @string: A human-readable, possibly translated error string.  The error
+ *  string uses the encoding specified by the %LC_CTYPE locale category.
  *
  * Error and status information.
  */
-/* gtk-doc is dumb. */
-struct lu_error;
 struct lu_error {
 	enum lu_status code;
 	char *string;

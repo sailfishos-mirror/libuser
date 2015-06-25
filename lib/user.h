@@ -55,10 +55,18 @@ struct lu_context;
 typedef struct lu_context lu_context_t;
 #endif
 
-/* An enumeration which decides whether we want to modify information about
- * users or groups.  We don't support both simultaneously.  */
+/**
+ * lu_entity_type:
+ * @lu_user: An user.
+ * @lu_group: A group of users.
+ *
+ * Defines whether we are talking about an user or a group in cases where it is
+ * ambiguous.
+ */
 enum lu_entity_type {
+	/*< private >*/
 	lu_invalid,
+	/*< public >*/
 	lu_user,
 	lu_group,
 };

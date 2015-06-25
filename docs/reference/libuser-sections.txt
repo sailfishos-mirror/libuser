@@ -86,6 +86,7 @@ lu_ent_set_long_current
 
 <SECTION>
 <FILE>error</FILE>
+lu_status
 lu_error
 lu_error_t
 
@@ -115,12 +116,14 @@ lu_nscd_flush_cache
 
 <SECTION>
 <FILE>prompt</FILE>
+lu_prompt
 lu_prompt_console
 lu_prompt_console_quiet
 </SECTION>
 
 <SECTION>
 <FILE>user</FILE>
+lu_entity_type
 lu_context
 lu_context_t
 lu_start

@@ -24,36 +24,36 @@
 
 G_BEGIN_DECLS
 
-/* The type of data passed to a prompter function.  The library uses these
- * when it needs to prompt the user for information. */
+/**
+ * lu_prompt:
+ * @key: An invariant string of the form "module/name", which describes the
+ *  information being prompted for.  The calling application may use this value
+ *  as an index into a hash table used to cache answers to particular queries.
+ * @prompt: The text of a prompt to display.  This *may* be translated for the
+ *  current locale by a module.
+ * @domain: The text domain which contains this prompt's translations.  This may
+ *  be the default libuser domain, or a module-specific text domain which the
+ *  module which provided this prompt bound for gettext when it was loaded.
+ * @visible: Whether or not the user's response should be echoed to the screen
+ *  (in a console app) or visible in an entry field (in a GUI app).
+ * @default_value: A default value, given as a string.  This will only contain a
+ *  value if the string is visible, but the reverse won't necessarily be true
+ *  (default_value -> visible).
+ * @value: The user's response.  This is set by the prompter function.
+ * @free_value: A function which can free the user's response.  This is set by
+ *  the prompter function.  If NULL, the response will not be freed, ever.
+ *
+ * The type of data passed to a prompter function.  The library uses these
+ * when it needs to prompt the user for information.
+ */
 struct lu_prompt {
-	/* An invariant string of the form "module/name", which describes the
-	 * information being prompted for.  The calling application may use
-	 * this value as an index into a hash table used to cache answers to
-	 * particular queries. */
 	const char *key;
-	/* The text of a prompt to display.  This *may* be translated for the
-	 * current locale by a module. */
 	const char *prompt;
-	/* The text domain which contains this prompt's translations.  This
-	 * may be the default libuser domain, or a module-specific text domain
-	 * which the module which provided this prompt bound for gettext when
-	 * it was loaded. */
 	const char *domain;
-	/* Whether or not the user's response should be echoed to the screen
-	 * (in a console app) or visible in an entry field (in a GUI app).*/
 	gboolean visible;
-	/* A default value, given as a string.  This will only contain a
-	 * value if the string is visible, but the reverse won't necessarily
-	 * be true (default_value -> visible). */
 	const char *default_value;
-	/* The user's response.  This is set by the prompter function. */
 	char *value;
-#ifndef __GTK_DOC_IGNORE__
-	/* A function which can free the user's response.  This is set by the
-	 * prompter function.  If NULL, the response will not be freed, ever. */
 	void (*free_value) (void *);
-#endif
 };
 
 /* A prompter function. */

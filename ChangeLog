@@ -1,5 +1,19 @@
 2015-06-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* docs/reference/Makefile.am: Update from gtk-doc example.
+	(AUTOMAKE_OPTIONS): Remove no longer needed workaround.
+	(DOC_SOURCE_DIR): Follow upstream example.
+	* docs/reference/libuser-docs.sgml: Comment out unused reference.
+	* docs/reference/libuser-sections.txt: Add types newly recognized by
+	gtk-doc.
+	* lib/error.h (enum lu_status): Add docstring.
+	(struct lu_error): Document members.  Remove gtk-doc workaround.
+	* lib/prompt.h (struct lu_prompt): Use a docstring.  Remove gtk-doc
+	workaround.
+	* lib/user.h (enum lu_entity_type): Add docstring.
+
+2015-06-25  Miloslav Trmač  <mitr@redhat.com>
+
 	* lib/user.c (lu_dispatch)
 	* modules/ldap.c (lu_ldap_handle_lock)
 	* samples/homedir.c (main): Silence Eclipse warnings.
