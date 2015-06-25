@@ -961,7 +961,7 @@ lu_dispatch(struct lu_context *context,
 			/* No match on that ID. */
 			break;
 		}
-		/* fall through on successful ID->name conversion */
+		/* no break: fall through on successful ID->name conversion */
 	case user_lookup_name:
 	case group_lookup_name:
 		/* Make sure data items are right for this call. */
@@ -1060,7 +1060,7 @@ lu_dispatch(struct lu_context *context,
 	case group_setpass:
 		/* Make sure we have a valid password. */
 		g_return_val_if_fail(sdata != NULL, FALSE);
-		/* fall through */
+		/* no break: fall through */
 	case user_removepass:
 	case group_removepass:
 		/* Make the changes. */
@@ -1098,7 +1098,7 @@ lu_dispatch(struct lu_context *context,
 			g_assert_not_reached();
 		if (ldata == LU_VALUE_INVALID_ID)
 			break;
-		/* fall through */
+		/* no break: fall through */
 	case users_enumerate:
 	case groups_enumerate:
 		/* Get the lists. */

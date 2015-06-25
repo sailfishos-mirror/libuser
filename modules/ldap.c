@@ -1565,7 +1565,7 @@ lu_ldap_handle_lock(struct lu_module *module, struct lu_ent *ent,
 			g_free(oldpassword);
 			return FALSE;
 		}
-		/* Fall through */
+		/* no break: Fall through */
 	case LO_UNLOCK:
 		if (result[0] == LOCKCHAR)
 			result = g_strconcat(LU_CRYPTED, result + 1,

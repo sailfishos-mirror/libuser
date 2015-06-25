@@ -44,6 +44,7 @@ main(int argc, char **argv)
 			break;
 		case 'm':
 			mod = 1;
+			break;
 		default:
 			break;
 		}

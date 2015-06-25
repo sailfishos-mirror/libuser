@@ -1,3 +1,9 @@
+2015-06-25  Miloslav Trmač  <mitr@redhat.com>
+
+	* lib/user.c (lu_dispatch)
+	* modules/ldap.c (lu_ldap_handle_lock)
+	* samples/homedir.c (main): Silence Eclipse warnings.
+
 2015-03-24  Miloslav Trmač  <mitr@redhat.com>
 
 	* configure.ac: Release 0.61.
