@@ -25,6 +25,7 @@
 #include <fcntl.h>
 #include <fnmatch.h>
 #include <limits.h>
+#include <shadow.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -101,82 +102,79 @@ module_filename(struct lu_module *module, const char *file_suffix)
 	return g_strconcat(dir, file_suffix, NULL);
 }
 
-/* Create a backup copy of "filename" named "filename-". */
-static gboolean
-lu_files_create_backup(const char *filename,
-		       struct lu_error **error)
+/* Copy contents of INPUT_FILENAME to OUTPUT_FILENAME, exclusively creating it
+ * if EXCLUSIVE.
+ * Return the file descriptor for OUTPUT_FILENAME, open for reading and writing,
+ * or -1 on error.
+ * Note that this does no locking and assumes the directories hosting the files
+ * are not being manipulated by an attacker. */
+static int
+open_and_copy_file(const char *input_filename, const char *output_filename,
+		   gboolean exclusive, struct lu_error **error)
 {
 	int ifd, ofd;
-	gpointer ilock, olock;
-	char *backupname;
-	struct stat ist, ost;
-	off_t offset;
-	gboolean res = FALSE;
+	struct stat st;
+	int res = -1;
+	int flags;
 
-	g_assert(filename != NULL);
-	g_assert(strlen(filename) > 0);
+	g_assert(input_filename != NULL);
+	g_assert(strlen(input_filename) > 0);
+	g_assert(output_filename != NULL);
+	g_assert(strlen(output_filename) > 0);
 
-	/* Open the original file. */
-	ifd = open(filename, O_RDONLY);
+	/* Open the input file. */
+	ifd = open(input_filename, O_RDONLY);
 	if (ifd == -1) {
 		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
+			     _("couldn't open `%s': %s"), input_filename,
 			     strerror(errno));
 		goto err;
 	}
 
-	/* Lock the input file. */
-	if ((ilock = lu_util_lock_obtain(ifd, error)) == NULL)
-		goto err_ifd;
-
 	/* Read the input file's size. */
-	if (fstat(ifd, &ist) == -1) {
+	if (fstat(ifd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
-			     _("couldn't stat `%s': %s"), filename,
+			     _("couldn't stat `%s': %s"), input_filename,
 			     strerror(errno));
-		goto err_ilock;
+		goto err_ifd;
 	}
 
-	/* Generate the backup file's name and open it, creating it if it
-	 * doesn't already exist. */
-	backupname = g_strconcat(filename, "-", NULL);
-	ofd = open(backupname, O_WRONLY | O_CREAT, ist.st_mode);
+	/* We only need O_WRONLY, but the caller needs RDWR if ofd will be
+	 * used as e->new_fd. */
+	flags = O_RDWR | O_CREAT;
+	if (exclusive) {
+		/* This ensures that if there is a concurrent writer which is
+		 * not doing locking for some reason, we will not truncate their
+		 * temporary file. Still, the other writer may truncate our
+		 * file, and ultimately the rename() committing the changes will
+		 * lose one or the other set of changes. */
+		(void)unlink(output_filename);
+		flags |= O_EXCL;
+	} else
+		flags |= O_TRUNC;
+	/* Start with absolutely restrictive permissions to make sure nobody
+	 * can get a file descriptor for this file until we are done resetting
+	 * ownership. */
+	ofd = open(output_filename, flags, 0);
 	if (ofd == -1) {
 		lu_error_new(error, lu_error_open,
-			     _("error creating `%s': %s"), backupname,
+			     _("error creating `%s': %s"), output_filename,
 			     strerror(errno));
-		goto err_backupname;
+		goto err_ifd;
 	}
-
-	/* If we can't read its type, or it's not a normal file, bail. */
-	if (fstat(ofd, &ost) == -1) {
-		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
-			     backupname, strerror(errno));
-		goto err_ofd;
-	}
-	if (!S_ISREG(ost.st_mode)) {
-		lu_error_new(error, lu_error_open,
-			     _("backup file `%s' exists and is not a regular file"),
-			     backupname);
-		goto err_ofd;
-	}
-
-	/* Now lock the output file. */
-	if ((olock = lu_util_lock_obtain(ofd, error)) == NULL)
-		goto err_ofd;
 
 	/* Set the permissions on the new file to match the old one. */
-	if (fchown(ofd, ist.st_uid, ist.st_gid) == -1 && errno != EPERM) {
+	if (fchown(ofd, st.st_uid, st.st_gid) == -1 && errno != EPERM) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing owner of `%s': %s"), backupname,
-			     strerror(errno));
-		goto err_olock;
+			     _("Error changing owner of `%s': %s"),
+			     output_filename, strerror(errno));
+		goto err_ofd;
 	}
-	if (fchmod(ofd, ist.st_mode) == -1) {
+	if (fchmod(ofd, st.st_mode) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("Error changing mode of `%s': %s"), backupname,
-			     strerror(errno));
-		goto err_olock;
+			     _("Error changing mode of `%s': %s"),
+			     output_filename, strerror(errno));
+		goto err_ofd;
 	}
 
 	/* Copy the data, block by block. */
@@ -190,9 +188,9 @@ lu_files_create_backup(const char *filename,
 			if (errno == EINTR)
 				continue;
 			lu_error_new(error, lu_error_read,
-				     _("Error reading `%s': %s"), filename,
-				     strerror(errno));
-			goto err_olock;
+				     _("Error reading `%s': %s"),
+				     input_filename, strerror(errno));
+			goto err_ofd;
 		}
 		if (left == 0)
 			break;
@@ -206,54 +204,296 @@ lu_files_create_backup(const char *filename,
 					continue;
 				lu_error_new(error, lu_error_write,
 					     _("Error writing `%s': %s"),
-					     backupname, strerror(errno));
-				goto err_olock;
+					     output_filename, strerror(errno));
+				goto err_ofd;
 			}
 			p += out;
 			left -= out;
 		}
 	}
 
-	/* Flush data to disk, and truncate at the current offset.  This is
-	 * necessary if the file existed before we opened it. */
-	fsync(ofd);
-	offset = lseek(ofd, 0, SEEK_CUR);
-	if (offset == -1 || ftruncate(ofd, offset) == -1) {
-		lu_error_new(error, lu_error_generic,
-			     _("Error writing `%s': %s"), backupname,
-			     strerror(errno));
-		goto err_olock;
+	/* Flush data to disk. */
+	if (fsync(ofd) != 0 || lseek(ofd, 0, SEEK_SET) == -1) {
+		lu_error_new(error, lu_error_write, _("Error writing `%s': %s"),
+			     output_filename, strerror(errno));
+		goto err_ofd;
 	}
+	res = ofd;
+	goto err_ifd; /* Do not close ofd */
 
-	/* Re-read data about the output file. */
-	if (fstat(ofd, &ost) == -1) {
-		lu_error_new(error, lu_error_stat,
-			     _("couldn't stat `%s': %s"), backupname,
-			     strerror(errno));
-		goto err_olock;
-	}
-
-	/* Complain if the files are somehow not the same. */
-	if (ist.st_size != ost.st_size) {
-		lu_error_new(error, lu_error_generic,
-			     _("backup file size mismatch"));
-		goto err_olock;
-	}
-	res = TRUE;
-
- err_olock:
-	lu_util_lock_free(olock);
  err_ofd:
 	close(ofd);
- err_backupname:
-	g_free(backupname);
- err_ilock:
-	lu_util_lock_free(ilock);
  err_ifd:
 	close(ifd);
  err:
 	return res;
 }
+
+/* Deal with an existing LOCK_FILENAME.
+ * Return TRUE if the caller should try again. */
+static gboolean
+lock_file_handle_existing(const char *lock_filename, struct lu_error **error)
+{
+	gchar *lock_contents;
+	GError *gerror;
+	gboolean ret = FALSE;
+	uintmax_t pid;
+	char *p;
+
+	gerror = NULL;
+	if (g_file_get_contents(lock_filename, &lock_contents, NULL, &gerror)
+	    == FALSE) {
+		lu_error_new(error, lu_error_read,
+			     _("couldn't read from `%s': %s"), lock_filename,
+			     gerror->message);
+		g_error_free(gerror);
+		goto err;
+	}
+	errno = 0;
+	pid = strtoumax(lock_contents, &p, 10);
+	if (errno != 0 || *p != 0 || p == lock_contents || (pid_t)pid != pid) {
+		lu_error_new(error, lu_error_lock,
+			     _("Invalid contents of lock `%s'"), lock_filename);
+		goto err_lock_contents;
+	}
+	if (kill(pid, 0) == 0 || errno != ESRCH) {
+		lu_error_new(error, lu_error_lock,
+			     _("The lock %s is held by process %ju"),
+			     lock_filename, pid);
+		goto err_lock_contents;
+	}
+	/* This is unfixably racy, but that should matter only if a genuine
+	 * lock owner crashes. */
+	if (unlink(lock_filename) != 0) {
+		lu_error_new(error, lu_error_lock,
+		     _("Error removing stale lock `%s': %s"), lock_filename,
+		     strerror(errno));
+		goto err_lock_contents;
+	}
+	ret = TRUE;
+	/* Fall through */
+
+err_lock_contents:
+	g_free(lock_contents);
+err:
+	return ret;
+}
+
+/* Create a lock file for FILENAME. */
+static gboolean
+lock_file_create(const char *filename, struct lu_error **error)
+{
+	char *lock_filename, *tmp_filename;
+	char pid_string[sizeof (pid_t) * CHAR_BIT + 1];
+	int fd;
+	gboolean ret = FALSE;
+
+	lock_filename = g_strconcat(filename, ".lock", NULL);
+	tmp_filename = g_strdup_printf("%s.lock.XXXXXX", filename);
+
+	fd = mkstemp(tmp_filename);
+	if (fd == -1) {
+		lu_error_new(error, lu_error_open,
+			     _("error opening temporary file for `%s': %s"),
+			     lock_filename, strerror(errno));
+		goto err_tmp_filename;
+	}
+	if (snprintf(pid_string, sizeof(pid_string), "%ju", (uintmax_t)getpid())
+	    >= sizeof(pid_string))
+		g_assert_not_reached();
+	if (write(fd, pid_string, strlen(pid_string)) != strlen(pid_string)) {
+		lu_error_new(error, lu_error_write, _("Error writing `%s': %s"),
+			     tmp_filename, strerror(errno));
+		close(fd);
+		goto err_tmp_file;
+	}
+	close(fd);
+
+	if (link(tmp_filename, lock_filename) != 0) {
+		if (errno == EEXIST) {
+			if (lock_file_handle_existing(lock_filename, error)
+			    == FALSE)
+				goto err_tmp_file;
+			if (link(tmp_filename, lock_filename) == 0)
+				goto got_link;
+		}
+		lu_error_new(error, lu_error_lock,
+			     _("Cannot obtain lock `%s': %s"), lock_filename,
+			     strerror(errno));
+		goto err_tmp_file;
+	}
+got_link:
+	ret = TRUE;
+	/* Fall through */
+
+err_tmp_file:
+	(void)unlink(tmp_filename);
+err_tmp_filename:
+	g_free(tmp_filename);
+	g_free(lock_filename);
+	return ret;
+}
+
+/* Remove the lock file for FILENAME. */
+static void
+lock_file_remove(const char *filename)
+{
+	char *lock_file;
+
+	lock_file = g_strconcat(filename, ".lock", NULL);
+	(void)unlink(lock_file);
+	g_free(lock_file);
+}
+
+/* State related to a file currently open for editing. */
+struct editing {
+	char *filename;
+	lu_security_context_t fscreate;
+	char *new_filename;
+	int new_fd;
+};
+
+/* Open and lock FILE_SUFFIX in MODULE for editing.
+ * Return editing state, or NULL on error. */
+static struct editing *
+editing_open(struct lu_module *module, const char *file_suffix,
+	     struct lu_error **error)
+{
+	struct editing *e;
+	char *backup_name;
+	int fd;
+
+	e = g_malloc0(sizeof (*e));
+	e->filename = module_filename(module, file_suffix);
+	/* Make sure this all works if e->filename is a symbolic link, at least
+	 * as long as it points to the same file system. */
+
+	if (geteuid() == 0) {
+		if (lckpwdf() != 0) {
+			lu_error_new(error, lu_error_lock,
+				     _("error locking file: %s"),
+				     strerror(errno));
+			goto err_filename;
+		}
+	}
+	if (lock_file_create(e->filename, error) == FALSE)
+		goto err_lckpwdf;
+
+	if (!lu_util_fscreate_save(&e->fscreate, error))
+		goto err_locked;
+	if (!lu_util_fscreate_from_file(e->filename, error))
+		goto err_fscreate;
+
+	backup_name = g_strconcat(e->filename, "-", NULL);
+	fd = open_and_copy_file(e->filename, backup_name, FALSE, error);
+	g_free (backup_name);
+	close(fd);
+	if (fd == -1)
+		goto err_fscreate;
+
+	e->new_filename = g_strconcat(e->filename, "+", NULL);
+	e->new_fd = open_and_copy_file(e->filename, e->new_filename, TRUE,
+			       	       error);
+	if (e->new_fd == -1)
+		goto err_new_filename;
+
+	return e;
+
+err_new_filename:
+ 	g_free(e->new_filename);
+err_fscreate:
+	lu_util_fscreate_restore(e->fscreate);
+
+err_locked:
+	(void)lock_file_remove(e->filename);
+err_lckpwdf:
+	if (geteuid() == 0)
+		(void)ulckpwdf();
+
+err_filename:
+ 	g_free(e->filename);
+ 	g_free(e);
+ 	return NULL;
+}
+
+
+/* Replace DESTINATION with SOURCE, even if DESTINATION is a symbolic link. */
+static gboolean
+replace_file_or_symlink(const char *source, const char *destination,
+		        struct lu_error **error)
+{
+	struct stat st;
+	char *tmp;
+	gboolean ret = FALSE;
+
+	tmp = NULL;
+	if (lstat(destination, &st) == 0 && S_ISLNK(st.st_mode)) {
+		tmp = realpath(destination, NULL);
+		if (tmp == NULL) {
+			lu_error_new(error, lu_error_generic,
+				     _("Error resolving `%s': %s"), destination,
+				     strerror(errno));
+			goto err;
+		}
+		destination = tmp;
+	}
+	if (rename(source, destination) != 0) {
+		lu_error_new(error, lu_error_write,
+			     _("Error replacing `%s': %s"), destination,
+			     strerror(errno));
+		goto err;
+	}
+	ret = TRUE;
+	/* Fall through */
+
+err:
+	free(tmp);
+	return ret;
+}
+
+/* Finish editing E, commit edits if COMMIT.
+ * Return true only if RET_INPUT and everything went OK; suggested usage is
+ *  ret = editing_close(e, commit, ret, error); */
+static gboolean
+editing_close(struct editing *e, gboolean commit, gboolean ret_input,
+	      struct lu_error **error)
+{
+	gboolean ret = FALSE;
+	gboolean unlink_new_filename = TRUE;
+
+	g_assert(e != NULL);
+
+	if (commit && fsync(e->new_fd) != 0) {
+		lu_error_new(error, lu_error_write, _("Error writing `%s': %s"),
+			     e->new_filename, strerror(errno));
+		close(e->new_fd);
+		goto err;
+	}
+	close(e->new_fd);
+
+	if (commit) {
+		if (replace_file_or_symlink(e->new_filename, e->filename,
+					    error) == FALSE)
+			goto err;
+		unlink_new_filename = FALSE;
+	}
+	ret = ret_input;
+
+err:
+	if (unlink_new_filename)
+		(void)unlink(e->new_filename);
+	g_free(e->new_filename);
+	lu_util_fscreate_restore(e->fscreate);
+
+	(void)lock_file_remove(e->filename);
+	if (geteuid() == 0)
+		(void)ulckpwdf();
+
+	g_free(e->filename);
+	g_free(e);
+	return ret;
+}
+
 
 /* Read a line from the file, no matter how long it is, and return it as a
  * newly-allocated string, with the terminator intact. */
@@ -435,7 +675,6 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 {
 	gboolean ret;
 	int fd = -1;
-	gpointer lock;
 	char *line, *filename;
 
 	g_assert(module != NULL);
@@ -446,7 +685,7 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 
 	filename = module_filename(module, file_suffix);
 
-	/* Open the file and lock it. */
+	/* Open the file. */
 	fd = open(filename, O_RDONLY);
 	if (fd == -1) {
 		lu_error_new(error, lu_error_open,
@@ -457,15 +696,9 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 	}
 	g_free(filename);
 
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		return FALSE;
-	}
-
 	/* Search for the entry in this file. */
 	line = lu_util_line_get_matchingx(fd, name, field, error);
 	if (line == NULL) {
-		lu_util_lock_free(lock);
 		close(fd);
 		return FALSE;
 	}
@@ -473,7 +706,6 @@ generic_lookup(struct lu_module *module, const char *file_suffix,
 	/* If we found data, parse it and then free the data. */
 	ret = parser(line, ent);
 	g_free(line);
-	lu_util_lock_free(lock);
 	close(fd);
 
 	return ret;
@@ -666,6 +898,13 @@ format_generic(struct lu_ent *ent, const struct format_specifier *formats,
 		char *field;
 
 		field = format_field(ent, formats + i);
+		if (strchr(field, '\n') != NULL) {
+			lu_error_new(error, lu_error_invalid_attribute_value,
+				     _("%s value `%s': `\\n' not allowed"),
+				     formats[i].attribute, field);
+			g_free(field);
+			goto err;
+		}
 		if (i != format_count - 1 && strchr(field, ':') != NULL) {
 			lu_error_new(error, lu_error_invalid_attribute_value,
 				     _("%s value `%s': `:' not allowed"),
@@ -729,11 +968,9 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	    const struct format_specifier *formats, size_t format_count,
 	    struct lu_ent *ent, struct lu_error **error)
 {
-	lu_security_context_t fscreate;
-	char *line, *filename, *contents;
-	int fd;
+	struct editing *e;
+	char *line, *contents;
 	ssize_t r;
-	gpointer lock;
 	struct stat st;
 	off_t offset;
 	gboolean ret = FALSE;
@@ -743,50 +980,30 @@ generic_add(struct lu_module *module, const char *file_suffix,
 	g_assert(format_count > 0);
 	g_assert(ent != NULL);
 
-	filename = module_filename(module, file_suffix);
-
 	line = format_generic(ent, formats, format_count, error);
 	if (line == NULL)
-		goto err_filename;
+		goto err;
 
-	if (!lu_util_fscreate_save(&fscreate, error))
+	e = editing_open(module, file_suffix, error);
+	if (e == NULL)
 		goto err_line;
-	if (!lu_util_fscreate_from_file(filename, error))
-		goto err_fscreate;
-
-	/* Create a backup copy of the file we're about to modify. */
-	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_fscreate;
-
-	/* Open the file. */
-	fd = open(filename, O_RDWR);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
-			     strerror(errno));
-		goto err_fscreate;
-	}
-
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
 
 	/* Read the file's size. */
-	if (fstat(fd, &st) == -1) {
+	if (fstat(e->new_fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
-			     _("couldn't stat `%s': %s"), filename,
+			     _("couldn't stat `%s': %s"), e->new_filename,
 			     strerror(errno));
-		goto err_lock;
+		goto err_editing;
 	}
 
 	/* Read the entire file in.  There's some room for improvement here,
 	 * but at least we still have the lock, so it's not going to get
 	 * funky on us. */
 	contents = g_malloc0(st.st_size + 1);
-	if (read(fd, contents, st.st_size) != st.st_size) {
+	if (read(e->new_fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
 			     _("couldn't read from `%s': %s"),
-			     filename, strerror(errno));
+			     e->new_filename, strerror(errno));
 		goto err_contents;
 	}
 
@@ -798,54 +1015,43 @@ generic_add(struct lu_module *module, const char *file_suffix,
 		goto err_contents;
 	}
 	/* Hooray, we can add this entry at the end of the file. */
-	offset = lseek(fd, 0, SEEK_END);
+	offset = lseek(e->new_fd, 0, SEEK_END);
 	if (offset == -1) {
 		lu_error_new(error, lu_error_write,
 			     _("couldn't write to `%s': %s"),
-			     filename, strerror(errno));
+			     e->new_filename, strerror(errno));
 		goto err_contents;
 	}
 	/* If the last byte in the file isn't a newline, add one, and silently
 	 * curse people who use text editors (which shall remain unnamed) which
 	 * allow saving of the file without a final line terminator. */
 	if ((st.st_size > 0) && (contents[st.st_size - 1] != '\n')) {
-		if (write(fd, "\n", 1) != 1) {
+		if (write(e->new_fd, "\n", 1) != 1) {
 			lu_error_new(error, lu_error_write,
 				     _("couldn't write to `%s': %s"),
-				     filename,
-				     strerror(errno));
+				     e->new_filename, strerror(errno));
 			goto err_contents;
 		}
 	}
 	/* Attempt to write the entire line to the end. */
-	r = write(fd, line, strlen(line));
+	r = write(e->new_fd, line, strlen(line));
 	if ((size_t)r != strlen(line)) {
 		/* Oh, come on! */
 		lu_error_new(error, lu_error_write,
-			     _("couldn't write to `%s': %s"),
-			     filename,
+			     _("couldn't write to `%s': %s"), e->new_filename,
 			     strerror(errno));
-		/* Truncate off whatever we actually managed to write and
-		 * give up. */
-		(void)ftruncate(fd, offset);
 		goto err_contents;
 	}
-	/* Hey, it succeeded. */
 	ret = TRUE;
 	/* Fall through */
 
 err_contents:
 	g_free(contents);
-err_lock:
-	lu_util_lock_free(lock);
-err_fd:
-	close(fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
+err_editing:
+	ret = editing_close(e, ret, ret, error); /* Commit/rollback happens here. */
 err_line:
 	g_free(line);
-err_filename:
-	g_free(filename);
+err:
 	return ret;
 }
 
@@ -938,11 +1144,9 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	    const struct format_specifier *formats, size_t format_count,
 	    struct lu_ent *ent, struct lu_error **error)
 {
-	lu_security_context_t fscreate;
-	char *filename, *new_line, *contents, *line, *rest;
+	struct editing *e;
+	char *new_line, *contents, *line, *rest;
 	char *current_name, *fragment;
-	int fd;
-	gpointer lock;
 	const char *name_attribute;
 	gboolean ret = FALSE;
 	struct stat st;
@@ -971,43 +1175,24 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 		return FALSE;
 	}
 
-	filename = module_filename(module, file_suffix);
-
 	new_line = format_generic(ent, formats, format_count, error);
 	if (new_line == NULL)
-		goto err_filename;
+		goto err_current_name;
 
-	if (!lu_util_fscreate_save(&fscreate, error))
+	e = editing_open(module, file_suffix, error);
+	if (e == NULL)
 		goto err_new_line;
-	if (!lu_util_fscreate_from_file(filename, error))
-		goto err_fscreate;
-	/* Create a backup file. */
-	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_fscreate;
 
-	/* Open the file to be modified. */
-	fd = open(filename, O_RDWR);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
-			     strerror(errno));
-		goto err_fscreate;
-	}
-
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
-
-	if (fstat(fd, &st) == -1) {
+	if (fstat(e->new_fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat, _("couldn't stat `%s': %s"),
-			     filename, strerror(errno));
-		goto err_lock;
+			     e->new_filename, strerror(errno));
+		goto err_editing;
 	}
 
 	contents = g_malloc(st.st_size + 1 + strlen(new_line));
-	if (read(fd, contents, st.st_size) != st.st_size) {
+	if (read(e->new_fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
-			     _("couldn't read from `%s': %s"), filename,
+			     _("couldn't read from `%s': %s"), e->new_filename,
 			     strerror(errno));
 		goto err_contents;
 	}
@@ -1045,16 +1230,16 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 	memmove(line + strlen(new_line), rest,
 		contents + st.st_size + 1 - rest);
 	memcpy(line, new_line, strlen(new_line));
-	if (lseek(fd, line - contents, SEEK_SET) == -1) {
+	if (lseek(e->new_fd, line - contents, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write, NULL);
 		goto err_contents;
 	}
 	len = strlen(line);
-	if ((size_t)write(fd, line, len) != len) {
+	if ((size_t)write(e->new_fd, line, len) != len) {
 		lu_error_new(error, lu_error_write, NULL);
 		goto err_contents;
 	}
-	if (ftruncate(fd, (line - contents) + len) != 0) {
+	if (ftruncate(e->new_fd, (line - contents) + len) != 0) {
 		lu_error_new(error, lu_error_write, NULL);
 		goto err_contents;
 	}
@@ -1063,16 +1248,11 @@ generic_mod(struct lu_module *module, const char *file_suffix,
 
 err_contents:
 	g_free(contents);
-err_lock:
-	lu_util_lock_free(lock);
-err_fd:
-	close(fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
+err_editing:
+	ret = editing_close(e, ret, ret, error); /* Commit/rollback happens here. */
 err_new_line:
 	g_free(new_line);
-err_filename:
-	g_free(filename);
+err_current_name:
 	g_free(current_name);
 	return ret;
 }
@@ -1118,16 +1298,14 @@ static gboolean
 generic_del(struct lu_module *module, const char *file_suffix,
 	    struct lu_ent *ent, struct lu_error **error)
 {
-	lu_security_context_t fscreate;
+	struct editing *e;
 	char *name;
-	char *contents, *filename;
+	char *contents;
 	char *fragment2;
 	struct stat st;
 	size_t len;
-	int fd;
-        gboolean ret = FALSE;
+        gboolean commit = FALSE, ret = FALSE;
 	gboolean found;
-	gpointer lock;
 
 	/* Get the entity's current name. */
 	if (ent->type == lu_user)
@@ -1141,42 +1319,23 @@ generic_del(struct lu_module *module, const char *file_suffix,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	filename = module_filename(module, file_suffix);
-
-	if (!lu_util_fscreate_save(&fscreate, error))
-		goto err_filename;
-	if (!lu_util_fscreate_from_file(filename, error))
-		goto err_fscreate;
-	/* Create a backup of that file. */
-	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_fscreate;
-
-	/* Open the file to be modified. */
-	fd = open(filename, O_RDWR);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
-			     strerror(errno));
-		goto err_fscreate;
-	}
-
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
+	e = editing_open(module, file_suffix, error);
+	if (e == NULL)
+		goto err_name;
 
 	/* Determine the file's size. */
-	if (fstat(fd, &st) == -1) {
+	if (fstat(e->new_fd, &st) == -1) {
 		lu_error_new(error, lu_error_stat,
-			     _("couldn't stat `%s': %s"), filename,
+			     _("couldn't stat `%s': %s"), e->new_filename,
 			     strerror(errno));
-		goto err_lock;
+		goto err_editing;
 	}
 
 	/* Allocate space to hold the file and read it all in. */
 	contents = g_malloc(st.st_size + 1);
-	if (read(fd, contents, st.st_size) != st.st_size) {
+	if (read(e->new_fd, contents, st.st_size) != st.st_size) {
 		lu_error_new(error, lu_error_read,
-			     _("couldn't read from `%s': %s"), filename,
+			     _("couldn't read from `%s': %s"), e->new_filename,
 			     strerror(errno));
 		goto err_contents;
 	}
@@ -1229,41 +1388,38 @@ generic_del(struct lu_module *module, const char *file_suffix,
 
 	/* Otherwise we need to write the new data to the file.  Jump back to
 	 * the beginning of the file. */
-	if (lseek(fd, 0, SEEK_SET) == -1) {
+	if (lseek(e->new_fd, 0, SEEK_SET) == -1) {
 		lu_error_new(error, lu_error_write,
-			     _("couldn't write to `%s': %s"), filename,
+			     _("couldn't write to `%s': %s"), e->new_filename,
 			     strerror(errno));
 		goto err_contents;
 	}
 
 	/* Write the new contents out. */
-	if ((size_t)write(fd, contents, len) != len) {
+	if ((size_t)write(e->new_fd, contents, len) != len) {
 		lu_error_new(error, lu_error_write,
-			     _("couldn't write to `%s': %s"), filename,
+			     _("couldn't write to `%s': %s"), e->new_filename,
 			     strerror(errno));
 		goto err_contents;
 	}
 
 	/* Truncate the file to the new (certainly shorter) length. */
-	if (ftruncate(fd, len) == -1) {
+	if (ftruncate(e->new_fd, len) == -1) {
 		lu_error_new(error, lu_error_generic,
-			     _("couldn't write to `%s': %s"), filename,
+			     _("couldn't write to `%s': %s"), e->new_filename,
 			     strerror(errno));
 		goto err_contents;
 	}
+	commit = TRUE;
 	ret = TRUE;
 	/* Fall through */
 
  err_contents:
 	g_free(contents);
- err_lock:
-	lu_util_lock_free(lock);
- err_fd:
-	close(fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
- err_filename:
-	g_free(filename);
+err_editing:
+	/* Commit/rollback happens here. */
+	ret = editing_close(e, commit, ret, error);
+err_name:
 	g_free(name);
 	return ret;
 }
@@ -1344,12 +1500,9 @@ static gboolean
 generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
-	lu_security_context_t fscreate;
-	char *filename;
+	struct editing *e;
 	char *value, *new_value, *name;
-	int fd;
-	gpointer lock;
-	gboolean ret = FALSE;
+	gboolean commit = FALSE, ret = FALSE;
 
 	/* Get the name which keys the entries of interest in the file. */
 	g_assert((ent->type == lu_user) || (ent->type == lu_group));
@@ -1362,33 +1515,14 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	filename = module_filename(module, file_suffix);
-
-	if (!lu_util_fscreate_save(&fscreate, error))
-		goto err_filename;
-	if (!lu_util_fscreate_from_file(filename, error))
-		goto err_fscreate;
-	/* Create a backup of the file. */
-	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_fscreate;
-
-	/* Open the file. */
-	fd = open(filename, O_RDWR);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
-			     strerror(errno));
-		goto err_fscreate;
-	}
-
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
+	e = editing_open(module, file_suffix, error);
+	if (e == NULL)
+		goto err_name;
 
 	/* Read the old value from the file. */
-	value = lu_util_field_read(fd, name, field, error);
+	value = lu_util_field_read(e->new_fd, name, field, error);
 	if (value == NULL)
-		goto err_lock;
+		goto err_editing;
 
 	/* Check that we actually care about this.  If there's a non-empty,
 	 * not locked string in there, but it's too short to be a hash, then
@@ -1396,27 +1530,27 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	if (LU_CRYPT_INVALID(value)) {
 		g_free(value);
 		ret = TRUE;
-		goto err_lock;
+		goto err_editing;
 	}
 
 	/* Generate a new value for the file. */
 	new_value = lock_process(value, op, ent, error);
 	g_free(value);
 	if (new_value == NULL)
-		goto err_lock;
+		goto err_editing;
 
 	/* Make the change. */
-	ret = lu_util_field_write(fd, name, field, new_value, error);
+	if (lu_util_field_write(e->new_fd, name, field, new_value, error)
+	    == FALSE)
+		goto err_editing;
+	commit = TRUE;
+	ret = TRUE;
 	/* Fall through */
 
-err_lock:
-	lu_util_lock_free(lock);
- err_fd:
-	close(fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
- err_filename:
-	g_free(filename);
+err_editing:
+	/* Commit/rollback happens here. */
+	ret = editing_close(e, commit, ret, error);
+err_name:
 	g_free(name);
 	return ret;
 }
@@ -1429,7 +1563,6 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 	char *filename;
 	char *value, *name;
 	int fd;
-	gpointer lock;
 	gboolean ret = FALSE;
 
 	/* Get the name of this account. */
@@ -1454,22 +1587,16 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 		goto err_filename;
 	}
 
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
-
 	/* Read the value. */
 	value = lu_util_field_read(fd, name, field, error);
 	if (value == NULL)
-		goto err_lock;
+		goto err_fd;
 
 	/* It all comes down to this. */
 	ret = value[0] == '!';
 	g_free(value);
 	/* Fall through */
 
-err_lock:
-	lu_util_lock_free(lock);
 err_fd:
 	close(fd);
 err_filename:
@@ -1624,10 +1751,8 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_ent *ent, const char *password, gboolean is_shadow,
 		struct lu_error **error)
 {
-	lu_security_context_t fscreate;
-	char *filename, *value, *name;
-	int fd;
-	gpointer lock;
+	struct editing *e;
+	char *value, *name;
 	gboolean ret = FALSE;
 
 	/* Get the name of this account. */
@@ -1641,34 +1766,14 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 
-	filename = module_filename(module, file_suffix);
-
-	if (!lu_util_fscreate_save(&fscreate, error))
-		goto err_filename;
-	if (!lu_util_fscreate_from_file(filename, error))
-		goto err_fscreate;
-
-	/* Create a backup of the file. */
-	if (lu_files_create_backup(filename, error) == FALSE)
-		goto err_filename;
-
-	/* Open the file. */
-	fd = open(filename, O_RDWR);
-	if (fd == -1) {
-		lu_error_new(error, lu_error_open,
-			     _("couldn't open `%s': %s"), filename,
-			     strerror(errno));
-		goto err_fscreate;
-	}
-
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL)
-		goto err_fd;
+	e = editing_open(module, file_suffix, error);
+	if (e == NULL)
+		goto err_name;
 
 	/* Read the current contents of the field. */
-	value = lu_util_field_read(fd, name, field, error);
+	value = lu_util_field_read(e->new_fd, name, field, error);
 	if (value == NULL)
-		goto err_lock;
+		goto err_editing;
 
 	/* pam_unix uses shadow passwords only if pw_passwd is "x"
 	   (or ##${username}).  Make sure to preserve the shadow marker
@@ -1693,9 +1798,9 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	else if (g_ascii_strncasecmp(password, LU_CRYPTED, strlen(LU_CRYPTED))
 		 == 0) {
 		password = password + strlen(LU_CRYPTED);
-		if (strchr(password, ':') != NULL) {
+		if (strpbrk(password, ":\n") != NULL) {
 			lu_error_new(error, lu_error_invalid_attribute_value,
-				     _("`:' not allowed in encrypted "
+				     _("`:' and `\\n' not allowed in encrypted "
 				       "password"));
 			goto err_value;
 		}
@@ -1713,19 +1818,14 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 	}
 
 	/* Now write our changes to the file. */
-	ret = lu_util_field_write(fd, name, field, password, error);
+	ret = lu_util_field_write(e->new_fd, name, field, password, error);
 	/* Fall through */
 
- err_value:
+err_value:
 	g_free(value);
-err_lock:
-	lu_util_lock_free(lock);
- err_fd:
-	close(fd);
-err_fscreate:
-	lu_util_fscreate_restore(fscreate);
- err_filename:
-	g_free(filename);
+err_editing:
+	ret = editing_close(e, ret, ret, error); /* Commit/rollback happens here. */
+err_name:
 	g_free(name);
 	return ret;
 }
@@ -1802,7 +1902,6 @@ lu_files_enumerate(struct lu_module *module, const char *file_suffix,
 		   const char *pattern, struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GValueArray *ret;
 	GValue value;
 	char *buf;
@@ -1824,20 +1923,12 @@ lu_files_enumerate(struct lu_module *module, const char *file_suffix,
 		return NULL;
 	}
 
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(filename);
-		return NULL;
-	}
-
 	/* Wrap the file for stdio operations. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		g_free(filename);
 		return NULL;
@@ -1873,7 +1964,6 @@ lu_files_enumerate(struct lu_module *module, const char *file_suffix,
 
 	/* Clean up. */
 	g_value_unset(&value);
-	lu_util_lock_free(lock);
 	fclose(fp);
 	g_free(filename);
 
@@ -1902,7 +1992,6 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 				  struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GValueArray *ret;
 	GValue value;
 	char *buf, grp[CHUNK_SIZE];
@@ -1927,21 +2016,12 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		return NULL;
 	}
 
-	/* Lock the passwd file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		return NULL;
-	}
-
 	/* Wrap the descriptor in a stdio FILE. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
@@ -2000,7 +2080,6 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	}
 	/* Close the file. */
 	g_value_unset(&value);
-	lu_util_lock_free(lock);
 	fclose(fp);
 
 	/* Open the group file. */
@@ -2015,22 +2094,12 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 		return NULL;
 	}
 
-	/* Lock the group file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		g_free(pwdfilename);
-		g_free(grpfilename);
-		g_value_array_free(ret);
-		return NULL;
-	}
-
 	/* Wrap the group file in an stdio file. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		g_free(pwdfilename);
 		g_free(grpfilename);
@@ -2085,7 +2154,6 @@ lu_files_users_enumerate_by_group(struct lu_module *module,
 	}
 
 	/* Clean up. */
-	lu_util_lock_free(lock);
 	fclose(fp);
 
 	g_free(pwdfilename);
@@ -2102,7 +2170,6 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 				  struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GValueArray *ret;
 	GValue value;
 	char *buf;
@@ -2126,19 +2193,12 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		goto err_pwdfilename;
 	}
 
-	/* Lock it. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		goto err_pwdfilename;
-	}
-
 	/* Open it so that we can use stdio. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), pwdfilename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		goto err_pwdfilename;
 	}
@@ -2186,7 +2246,6 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		}
 		g_free(buf);
 	}
-	lu_util_lock_free(lock);
 	fclose(fp);
 
 	/* Open the groups file. */
@@ -2198,19 +2257,12 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 		goto err_key;
 	}
 
-	/* Lock it. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		goto err_key;
-	}
-
 	/* Open it so that we can use stdio. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), grpfilename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		goto err_key;
 	}
@@ -2267,7 +2319,6 @@ lu_files_groups_enumerate_by_user(struct lu_module *module,
 	g_free(key);
 	g_value_unset(&value);
 
-	lu_util_lock_free(lock);
 	fclose(fp);
 	g_free(pwdfilename);
 	g_free(grpfilename);
@@ -2291,7 +2342,6 @@ lu_files_enumerate_full(struct lu_module *module, const char *file_suffix,
 			struct lu_error **error)
 {
 	int fd;
-	gpointer lock;
 	GPtrArray *ret = NULL;
 	char *buf;
 	char *key, *filename;
@@ -2311,19 +2361,12 @@ lu_files_enumerate_full(struct lu_module *module, const char *file_suffix,
 		goto err_filename;
 	}
 
-	/* Lock the file. */
-	if ((lock = lu_util_lock_obtain(fd, error)) == NULL) {
-		close(fd);
-		goto err_filename;
-	}
-
 	/* Wrap the file up in stdio. */
 	fp = fdopen(fd, "r");
 	if (fp == NULL) {
 		lu_error_new(error, lu_error_open,
 			     _("couldn't open `%s': %s"), filename,
 			     strerror(errno));
-		lu_util_lock_free(lock);
 		close(fd);
 		goto err_filename;
 	}
@@ -2358,7 +2401,6 @@ lu_files_enumerate_full(struct lu_module *module, const char *file_suffix,
 		g_free(key);
 	}
 
-	lu_util_lock_free(lock);
 	fclose(fp);
 
  err_filename:

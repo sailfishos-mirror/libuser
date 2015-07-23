@@ -1,5 +1,30 @@
+2015-06-26  Miloslav Trmač  <mitr@redhat.com>
+
+	* modules/files.c (open_and_copy_file): Replace and heavily modify  ...
+	(lu_files_create_backup): ... this.
+	(lock_file_handle_existing, lock_file_create, lock_file_remove)
+	(struct editing, editing_open, replace_file_or_symlink)
+	(editing_close): New functions.
+	(generic_lookup, generic_is_locked, lu_files_enumerate)
+	(lu_files_users_enumerate_by_group, lu_files_groups_enumerate_by_user)
+	(lu_files_enumerate_full): Remove locking on read-only operations.
+	(generic_add, generic_mod, generic_del, generic_lock)
+	(generic_setpass): Use struct editing instead of dealing with locking,
+	backups, SELinux individually.
+	
+	* lib/user_private.h (lu_util_lock_obtain, lu_util_lock_free): Mark
+	as deprecated.
+	
+	* lib/util.c (lu_util_field_write): Fail on an incomplete write().
+
 2015-06-25  Miloslav Trmač  <mitr@redhat.com>
 
+	* modules/files.c (format_generic, generic_setpass): Refuse to write
+	field values which contain \n.
+	* tests/files_test.py (Tests.testUserAdd9, Tests.testUserMod8)
+	(tests.testUserSetpass5, tests.testGroupAdd6, tests.testGroupMod7)
+	(tests.testGroupSetpass4): New tests.  
+	
 	* docs/reference/Makefile.am: Update from gtk-doc example.
 	(AUTOMAKE_OPTIONS): Remove no longer needed workaround.
 	(DOC_SOURCE_DIR): Follow upstream example.

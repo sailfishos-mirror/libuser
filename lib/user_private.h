@@ -330,9 +330,11 @@ typedef char lu_security_context_t; /* "Something" */
   ((void)(PATH), (void)(MODE), (void)(ERROR), TRUE)
 #endif
 
-/* Lock a file. */
+#ifndef LU_DISABLE_DEPRECATED
+/* Lock a file. Deprecated. */
 gpointer lu_util_lock_obtain(int fd, struct lu_error **error);
 void lu_util_lock_free(gpointer lock);
+#endif
 
 /* Manipulate a colon-delimited flat text file. */
 char *lu_util_line_get_matching1(int fd, const char *firstpart,
