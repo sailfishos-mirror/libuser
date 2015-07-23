@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-03-21 05:22+0100\n"
-"PO-Revision-Date: 2015-03-17 10:09-0400\n"
+"POT-Creation-Date: 2015-07-23 21:13+0200\n"
+"PO-Revision-Date: 2015-05-09 07:56-0400\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/fedora/language/"
 "ca/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Zanata 3.5.1\n"
+"X-Generator: Zanata 3.6.2\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -85,7 +85,7 @@ msgstr "llista els paràmetres de l'antiguitat per a l'usuari"
 
 #: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr "mínim de dies entre el canvi de contrasenua"
+msgstr "mínim de dies entre els canvis de contrasenya"
 
 #: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
 #: apps/lchage.c:99 apps/lchage.c:102
@@ -94,11 +94,11 @@ msgstr "DIES"
 
 #: apps/lchage.c:90
 msgid "maximum days between password changes"
-msgstr "màxim de dies entre el canvi de contrasenua"
+msgstr "màxim de dies entre els canvis de contrasenya"
 
 #: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
-msgstr "data de l'últim canvi de contrasenya en dies des del 1/1/70"
+msgstr "data de l'últim canvi de contrasenya en dies des de l'1/1/70"
 
 #: apps/lchage.c:95
 msgid ""
@@ -110,7 +110,7 @@ msgstr ""
 
 #: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
-msgstr "data del venciment de la contrasenya en dies des del 1/1/70"
+msgstr "data del venciment de la contrasenya en dies des de l'1/1/70"
 
 #: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
@@ -191,7 +191,7 @@ msgstr "Inactiu:\tMai\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr "Ha de canviar la contrasenya en el següent inici  de sessió"
+msgstr "Ha de canviar la contrasenya en el següent inici de sessió"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
@@ -346,7 +346,7 @@ msgstr "estableix el GID per al grup"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr "canvia el grup per a què tingui el nom indicat"
+msgstr "canvia el grup perquè tingui el nom indicat"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
@@ -370,7 +370,7 @@ msgstr "TEXT"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "pre-hashed password for use with group"
-msgstr "contrasenya pre-hash per utilitzar amb lúsuari"
+msgstr "contrasenya pre-hash per utilitzar amb l'usuari"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
@@ -468,11 +468,11 @@ msgstr "CAMÍ"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr "no creis els directoris d'inici"
+msgstr "no creïs els directoris d'inici"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr "no creis les cues de correu"
+msgstr "no creïs les cues de correu"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
@@ -627,11 +627,11 @@ msgstr "grup per al nou usuari"
 
 #: apps/luseradd.c:71
 msgid "don't create home directory for user"
-msgstr "no creis el directori d'inici per a l'usuari"
+msgstr "no creïs el directori d'inici per a l'usuari"
 
 #: apps/luseradd.c:73
 msgid "don't create group with same name as user"
-msgstr "no creis el grup amb el mateix nom de l'usuari"
+msgstr "no creïs el grup amb el mateix nom de l'usuari"
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
@@ -851,7 +851,7 @@ msgstr "no s'ha pogut obtenir informació del fitxer de configuració «%s»: %s
 #: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr "el fitxer de configuració «%s» és massa llarg"
+msgstr "el fitxer de configuració «%s» és massa gran"
 
 #: lib/config.c:159
 #, c-format
@@ -1076,7 +1076,7 @@ msgstr ""
 msgid "Invalid default value of field %s: %s"
 msgstr "El valor per defecte del camp %s no és vàlid: %s"
 
-#: lib/util.c:300
+#: lib/util.c:300 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "s'ha produït un error en bloquejar el fitxer: %s"
@@ -1101,104 +1101,136 @@ msgstr "no s'ha pogut establir el context de seguretat per defecte a «%s»: %s"
 msgid "couldn't determine security context for `%s': %s"
 msgstr "no s'ha pogut determinar el context de seguretat per a «%s»: %s"
 
-#: modules/files.c:123 modules/files.c:453 modules/files.c:765
-#: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
-#: modules/files.c:1452 modules/files.c:1659 modules/files.c:1821
-#: modules/files.c:1838 modules/files.c:1923 modules/files.c:1942
-#: modules/files.c:2010 modules/files.c:2031 modules/files.c:2124
-#: modules/files.c:2139 modules/files.c:2196 modules/files.c:2211
-#: modules/files.c:2309 modules/files.c:2324
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
+#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
+#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
+#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
+#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "no s'ha pogut obrir «%s»: %s"
 
-#: modules/files.c:135 modules/files.c:153 modules/files.c:231
-#: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
+#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
+#: modules/files.c:1329
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "no s'ha pogut obtenir informació de «%s»: %s"
 
-#: modules/files.c:146
+#: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "s'ha produït un error en crear «%s»: %s"
 
-#: modules/files.c:159
-#, c-format
-msgid "backup file `%s' exists and is not a regular file"
-msgstr "la còpia de seguretat «%s» existeix i no és un fitxer per a dades"
-
-#: modules/files.c:171
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "S'ha produït un error en canviar el propietari de «%s»: %s"
 
-#: modules/files.c:177
+#: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
 msgstr "S'ha produït un error en canviar el mode de «%s»: %s"
 
-#: modules/files.c:193
+#: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "S'ha produït un error en llegir «%s»: %s"
 
-#: modules/files.c:208 modules/files.c:223
+#: modules/files.c:206 modules/files.c:217 modules/files.c:305
+#: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "S'ha produït un error en escriure «%s»: %s"
 
-#: modules/files.c:239
-msgid "backup file size mismatch"
-msgstr "la mida del fitxer de còpia de seguretat no coincideix"
+#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
+#: modules/files.c:1338
+#, c-format
+msgid "couldn't read from `%s': %s"
+msgstr "no s'ha pogut llegir des de «%s»: %s"
 
-#: modules/files.c:671
+#: modules/files.c:256
+#, c-format
+msgid "Invalid contents of lock `%s'"
+msgstr ""
+
+#: modules/files.c:261
+#, c-format
+msgid "The lock %s is held by process %ju"
+msgstr ""
+
+#: modules/files.c:269
+#, fuzzy, c-format
+msgid "Error removing stale lock `%s': %s"
+msgstr "S'ha produït un error en moure %s cap a %s: %s.\n"
+
+#: modules/files.c:297
+#, fuzzy, c-format
+msgid "error opening temporary file for `%s': %s"
+msgstr "S'ha produït un error en canviar el mode de «%s»: %s"
+
+#: modules/files.c:321
+#, c-format
+msgid "Cannot obtain lock `%s': %s"
+msgstr ""
+
+#: modules/files.c:434
+#, fuzzy, c-format
+msgid "Error resolving `%s': %s"
+msgstr "S'ha produït un error en llegir «%s»: %s"
+
+#: modules/files.c:442
+#, fuzzy, c-format
+msgid "Error replacing `%s': %s"
+msgstr "S'ha produït un error en llegir «%s»: %s"
+
+#: modules/files.c:903
+#, fuzzy, c-format
+msgid "%s value `%s': `\\n' not allowed"
+msgstr "%s valor «%s»: ':' no està permès"
+
+#: modules/files.c:910
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s valor «%s»: ':' no està permès"
 
-#: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
-#, c-format
-msgid "couldn't read from `%s': %s"
-msgstr "no s'ha podut llegir des de «%s»: %s"
-
-#: modules/files.c:797
+#: modules/files.c:1014
 msgid "entry already present in file"
 msgstr "el registre ja està present al fitxer"
 
-#: modules/files.c:804 modules/files.c:814 modules/files.c:825
-#: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
+#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
+#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "no s'ha pogut escriure a «%s»: %s"
 
-#: modules/files.c:969
+#: modules/files.c:1173
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "l'objecte de l'entitat no té l'atribut %s"
 
-#: modules/files.c:1030
+#: modules/files.c:1215
 msgid "entry with conflicting name already present in file"
 msgstr "el registre amb el nom conflictiu ja es troba en el fitxer"
 
-#: modules/files.c:1698
-msgid "`:' not allowed in encrypted password"
+#: modules/files.c:1803
+#, fuzzy
+msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "no es permet ':' a la contrasenya xifrada"
 
-#: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "s'ha produït un error en xifrar la contrasenya"
 
-#: modules/files.c:2475 modules/ldap.c:2410
+#: modules/files.c:2517 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "els mòduls «%s» i «%s» no es poden combinar"
 
-#: modules/files.c:2559 modules/files.c:2637
+#: modules/files.c:2601 modules/files.c:2679
 msgid "not executing with superuser privileges"
 msgstr "no s'està executant amb permisos de superusuari"
 
-#: modules/files.c:2650
+#: modules/files.c:2692
 msgid "no shadow file present -- disabling"
 msgstr "no hi ha cap fitxer shadow present -- es deshabilitarà"
 
@@ -1379,7 +1411,7 @@ msgstr "Les sol·licituds s'han completat amb èxit.\n"
 
 #: samples/prompt.c:58
 msgid "Prompts failed.\n"
-msgstr "Les sol·licituds han falla.\n"
+msgstr "Les sol·licituds han fallat.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
@@ -1397,43 +1429,8 @@ msgstr "S'estan definint els atributs de l'usuari per defecte:\n"
 msgid "Copying user structure:\n"
 msgstr "S'està copiant l'estructura de l'usuari:\n"
 
-#~ msgid ""
-#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-#~ msgstr ""
-#~ "s'ha produït un error en connectar amb el servidor kadm5 per al servei "
-#~ "«%s» en el regne «%s»: %s"
+#~ msgid "backup file `%s' exists and is not a regular file"
+#~ msgstr "la còpia de seguretat «%s» existeix i no és un fitxer convencional"
 
-#~ msgid "error initializing kerberos library"
-#~ msgstr "s'ha produït un error en inicialitzar la biblioteca del Kerberos"
-
-#~ msgid "error parsing user name `%s' for kerberos"
-#~ msgstr ""
-#~ "s'ha produït un error en analitzar el nom d'usuari «%s» pel Kerberos"
-
-#~ msgid "entity structure has no %s or %s attributes"
-#~ msgstr "l'estructura de l'entitat no té atributs %s ni %s"
-
-#~ msgid "entity has no %s or %s attributes"
-#~ msgstr "l'entitat no té atributs %s ni %s"
-
-#~ msgid "entity was created with no %s or %s attributes"
-#~ msgstr "s'ha creat l'entitat sense atributs %s o %s"
-
-#~ msgid "error reading information for `%s' from kerberos"
-#~ msgstr ""
-#~ "s'ha produït un error en llegir la informació per a «%s» del Kerberos"
-
-#~ msgid "entity has no %s attribute"
-#~ msgstr "l'entitat no té cap atribut %s"
-
-#~ msgid "error setting password for `%s'"
-#~ msgstr "s'ha produït un error en configurar la contrasenya per a «%s»"
-
-#~ msgid "Kerberos Realm"
-#~ msgstr "Regne del Kerberos"
-
-#~ msgid "Kerberos Admin Principal"
-#~ msgstr "Administrador principal del Kerberos"
-
-#~ msgid "Kerberos Password for Admin Principal"
-#~ msgstr "Contrasenya del Kerberos per a l'administrador principal"
+#~ msgid "backup file size mismatch"
+#~ msgstr "la mida del fitxer de còpia de seguretat no coincideix"

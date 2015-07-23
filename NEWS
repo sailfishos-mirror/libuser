@@ -1,3 +1,11 @@
+0.62:
+* Fixed security vulnerabilities:
+  * \n characters were allowed in files/shadow fields (CVE-2015-3245)
+  * Non-atomic file updates in files/shadow module (CVE-2015-3246)
+  Thanks to Qualys for reporting these issues.
+* The files and shadow modules now use a shadow-utils compatible
+  scheme (primarily lckpwdf()).
+
 0.61:
 * Python 3 is now supported.
   Consistent with the Python 3 C API and its prevailing usage, only UTF-8

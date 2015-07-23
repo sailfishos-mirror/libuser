@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"POT-Creation-Date: 2015-07-23 21:13+0200\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Kannada (http://www.transifex.com/projects/p/fedora/language/"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 3.5.1\n"
+"X-Generator: Zanata 3.6.2\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1064,7 +1064,7 @@ msgstr "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಅಪಾಯಕಾರ�
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ಕ್ಷೇತ್ರದ ಡೀಫಾಲ್ಟ್‍  ಮೌಲ್ಯವು ಅಮಾನ್ಯವಾಗಿದೆ: %s"
 
-#: lib/util.c:300
+#: lib/util.c:300 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "ಕಡತವನ್ನು ಲಾಕ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s"
@@ -1089,104 +1089,136 @@ msgstr "ಡೀಫಾಲ್ಟ್‍  ಸುರಕ್ಷತಾ ಸನ್ನಿವ
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ಕ್ಕೆ ಸುರಕ್ಷತಾ ಸನ್ನಿವೇಶವನ್ನು ನಿರ್ಧರಿಸಲಾಗಲಿಲ್ಲ: %s"
 
-#: modules/files.c:123 modules/files.c:453 modules/files.c:765
-#: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
-#: modules/files.c:1452 modules/files.c:1659 modules/files.c:1821
-#: modules/files.c:1838 modules/files.c:1923 modules/files.c:1942
-#: modules/files.c:2010 modules/files.c:2031 modules/files.c:2124
-#: modules/files.c:2139 modules/files.c:2196 modules/files.c:2211
-#: modules/files.c:2309 modules/files.c:2324
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
+#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
+#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
+#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
+#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' ಅನ್ನು ತೆರೆಯಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:135 modules/files.c:153 modules/files.c:231
-#: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
+#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
+#: modules/files.c:1329
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' ಅನ್ನು stat ಮಾಡಲಾಗಲಿಲ್ಲ: %s"
 
-#: modules/files.c:146
+#: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' ಅನ್ನು ಸೃಜಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/files.c:159
-#, c-format
-msgid "backup file `%s' exists and is not a regular file"
-msgstr "ಬ್ಯಾಕ್ಅಪ್ ಕಡತ `%s' ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ ಹಾಗು ಅದು ಸಾಮಾನ್ಯ ಕಡತವಾಗಿಲ್ಲ"
-
-#: modules/files.c:171
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' ನ ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/files.c:177
+#: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
 msgstr "`%s' ನ ಕ್ರಮವನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/files.c:193
+#: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' ಅನ್ನು ಓದುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/files.c:208 modules/files.c:223
+#: modules/files.c:206 modules/files.c:217 modules/files.c:305
+#: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' ಗೆ ಬರೆಯುವಲ್ಲಿ ದೋಷ: %s"
 
-#: modules/files.c:239
-msgid "backup file size mismatch"
-msgstr "ಬ್ಯಾಕ್ಅಪ್ ಕಡತದ ಗಾತ್ರವು ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ"
-
-#: modules/files.c:671
-#, c-format
-msgid "%s value `%s': `:' not allowed"
-msgstr "%s ಮೌಲ್ಯ `%s': `:' ಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ"
-
-#: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
+#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
+#: modules/files.c:1338
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' ನಿಂದ ಓದಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:797
+#: modules/files.c:256
+#, c-format
+msgid "Invalid contents of lock `%s'"
+msgstr ""
+
+#: modules/files.c:261
+#, c-format
+msgid "The lock %s is held by process %ju"
+msgstr ""
+
+#: modules/files.c:269
+#, fuzzy, c-format
+msgid "Error removing stale lock `%s': %s"
+msgstr "%s ಅನ್ನು %s ಗೆ ತೆಗೆಯುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ: %s.\n"
+
+#: modules/files.c:297
+#, fuzzy, c-format
+msgid "error opening temporary file for `%s': %s"
+msgstr "`%s' ನ ಕ್ರಮವನ್ನು ಬದಲಾಯಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: modules/files.c:321
+#, c-format
+msgid "Cannot obtain lock `%s': %s"
+msgstr ""
+
+#: modules/files.c:434
+#, fuzzy, c-format
+msgid "Error resolving `%s': %s"
+msgstr "`%s' ಅನ್ನು ಓದುವಲ್ಲಿ ದೋಷ: %s"
+
+#: modules/files.c:442
+#, fuzzy, c-format
+msgid "Error replacing `%s': %s"
+msgstr "`%s' ಅನ್ನು ಓದುವಲ್ಲಿ ದೋಷ: %s"
+
+#: modules/files.c:903
+#, fuzzy, c-format
+msgid "%s value `%s': `\\n' not allowed"
+msgstr "%s ಮೌಲ್ಯ `%s': `:' ಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ"
+
+#: modules/files.c:910
+#, c-format
+msgid "%s value `%s': `:' not allowed"
+msgstr "%s ಮೌಲ್ಯ `%s': `:' ಕ್ಕೆ ಅನುಮತಿ ಇಲ್ಲ"
+
+#: modules/files.c:1014
 msgid "entry already present in file"
 msgstr "ನಮೂದು ಈಗಾಗಲೆ ಕಡತದಲ್ಲಿದೆ"
 
-#: modules/files.c:804 modules/files.c:814 modules/files.c:825
-#: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
+#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
+#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' ಗೆ ಬರೆಯಲಾಗಿಲ್ಲ: %s"
 
-#: modules/files.c:969
+#: modules/files.c:1173
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "ನಮೂದು ಆಬ್ಜೆಕ್ಟ್‍ %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
 
-#: modules/files.c:1030
+#: modules/files.c:1215
 msgid "entry with conflicting name already present in file"
 msgstr "ಇದರೊಂದಿಗೆ ಘರ್ಷಣೆಗೆ ಕಾರಣವಾಗುವ ಹೆಸರಿನ ಒಂದು ನಮೂದು ಈಗಾಗಲೆ ಕಡತದಲ್ಲಿದೆ"
 
-#: modules/files.c:1698
-msgid "`:' not allowed in encrypted password"
+#: modules/files.c:1803
+#, fuzzy
+msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "`:' ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸುವುದಕ್ಕೆ ಬೆಂಬಲವಿಲ್ಲ"
 
-#: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "ಗುಪ್ತಪದವನ್ನು ಗೂಢಲಿಪೀಕರಿಸುವಲ್ಲಿ ದೋಷ"
 
-#: modules/files.c:2475 modules/ldap.c:2410
+#: modules/files.c:2517 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' ಹಾಗು `%s' ಮಾಡ್ಯೂಲ್‌ಗಳನ್ನು ಸಂಯೋಜಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
 
-#: modules/files.c:2559 modules/files.c:2637
+#: modules/files.c:2601 modules/files.c:2679
 msgid "not executing with superuser privileges"
 msgstr "ಮೂಲಬಳಕೆದಾರನ ಸವಲತ್ತುಗಳೊಂದಿಗೆ ಕಾರ್ಯಗತಗೊಳ್ಳುತ್ತಿಲ್ಲ"
 
-#: modules/files.c:2650
+#: modules/files.c:2692
 msgid "no shadow file present -- disabling"
 msgstr "ಛಾಯಾ ಕಡತವು ಇಲ್ಲ --ಅಶಕ್ತಗೊಳಿಸಲಾಗುತ್ತಿದೆ"
 
@@ -1380,41 +1412,8 @@ msgstr "ಡೀಫಾಲ್ಟ್‍  ಬಳಕೆದಾರ ವೈಶಿಷ್ಟ
 msgid "Copying user structure:\n"
 msgstr "ಬಳಕೆದಾರ ರಚನೆಯನ್ನ್ನು ನಕಲಿಸಲಾಗುತ್ತಿದೆ:\n"
 
-#~ msgid ""
-#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-#~ msgstr ""
-#~ "`%s' ಸೇವೆಗಾಗಿ `%s' ಕ್ಷೇತ್ರದಲ್ಲಿ kadm5 ಪರಿಚಾರಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸುವಲ್ಲಿ ದೋಷ "
-#~ "ಉಂಟಾಗಿದೆ: %s"
+#~ msgid "backup file `%s' exists and is not a regular file"
+#~ msgstr "ಬ್ಯಾಕ್ಅಪ್ ಕಡತ `%s' ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ ಹಾಗು ಅದು ಸಾಮಾನ್ಯ ಕಡತವಾಗಿಲ್ಲ"
 
-#~ msgid "error initializing kerberos library"
-#~ msgstr "ಕರ್ಬರೋಸ್ ಲೈಬ್ರರಿಯನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ದೋಷ"
-
-#~ msgid "error parsing user name `%s' for kerberos"
-#~ msgstr "ಕರ್ಬರೋಸ್‍ಗಾಗಿ ಬಳಕೆದಾರ ಹೆಸರು `%s' ಅನ್ನು ವಿವರಿಸುವಲ್ಲಿ ದೋಷ"
-
-#~ msgid "entity structure has no %s or %s attributes"
-#~ msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹೊಂದಿಲ್ಲ"
-
-#~ msgid "entity has no %s or %s attributes"
-#~ msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
-
-#~ msgid "entity was created with no %s or %s attributes"
-#~ msgstr "ನಮೂದು %s ಅಥವ %s ವೈಶಿಷ್ಟ್ಯಗಳಿಲ್ಲದೆ ನಿರ್ಮಿಸಲ್ಪಟ್ಟಿದೆ"
-
-#~ msgid "error reading information for `%s' from kerberos"
-#~ msgstr "`%s' ಗಾಗಿ ಕರ್ಬರೋಸ್‍ನಿಂದ ಮಾಹಿತಿಯನ್ನು ಓದುವಲ್ಲಿ ದೋಷ"
-
-#~ msgid "entity has no %s attribute"
-#~ msgstr "ನಮೂದು %s ವೈಶಿಷ್ಟ್ಯವನ್ನು ಹೊಂದಿಲ್ಲ"
-
-#~ msgid "error setting password for `%s'"
-#~ msgstr "`%s' ಗಾಗಿ ಗುಪ್ತಪದವನ್ನು ಹೊಂದಿಸುವಲ್ಲಿ ದೋಷ"
-
-#~ msgid "Kerberos Realm"
-#~ msgstr "ಕರ್ಬರೋಸ್ ಕ್ಷೇತ್ರ(Kerberos Realm)"
-
-#~ msgid "Kerberos Admin Principal"
-#~ msgstr "ಕರ್ಬರೋಸ್ ನಿರ್ವಹಣಾ ಪ್ರಮುಖ"
-
-#~ msgid "Kerberos Password for Admin Principal"
-#~ msgstr "ನಿರ್ವಹಣಾ ಪ್ರಮುಖನಿಗಾಗಿ ಕರ್ಬರೋಸ್ ಗುಪ್ತಪದ"
+#~ msgid "backup file size mismatch"
+#~ msgstr "ಬ್ಯಾಕ್ಅಪ್ ಕಡತದ ಗಾತ್ರವು ತಾಳೆಯಾಗುತ್ತಿಲ್ಲ"

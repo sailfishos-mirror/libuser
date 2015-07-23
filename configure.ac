@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.61], [mitr@redhat.com], ,
+AC_INIT([libuser], [0.62], [mitr@redhat.com], ,
         [https://fedorahosted.org/libuser/])
 AC_PREREQ([2.63b])
 AC_CONFIG_HEADERS(config.h)

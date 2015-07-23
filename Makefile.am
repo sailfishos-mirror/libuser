@@ -170,7 +170,7 @@ lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DNSCD='"$(NSCD)"' \
 	-DSYSCONFDIR='"$(sysconfdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
-	-version-info 6:1:5
+	-version-info 6:2:5
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_SOURCES = modules/files.c

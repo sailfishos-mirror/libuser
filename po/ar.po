@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"POT-Creation-Date: 2015-07-23 21:13+0200\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/fedora/language/"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Zanata 3.5.1\n"
+"X-Generator: Zanata 3.6.2\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1065,7 +1065,7 @@ msgstr "رَفْض استخدام مجلّد موطن خَطِر '%s' افترا
 msgid "Invalid default value of field %s: %s"
 msgstr "قيمة غير صالحة للحقل %s: %s"
 
-#: lib/util.c:300
+#: lib/util.c:300 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "خطأ في قفل الملف: %s"
@@ -1090,104 +1090,136 @@ msgstr "تعذّر ضبط سياق أمان افتراضي لـ `%s': %s "
 msgid "couldn't determine security context for `%s': %s"
 msgstr "تعذّر تحديد سياق أمان لـ `%s': %s"
 
-#: modules/files.c:123 modules/files.c:453 modules/files.c:765
-#: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
-#: modules/files.c:1452 modules/files.c:1659 modules/files.c:1821
-#: modules/files.c:1838 modules/files.c:1923 modules/files.c:1942
-#: modules/files.c:2010 modules/files.c:2031 modules/files.c:2124
-#: modules/files.c:2139 modules/files.c:2196 modules/files.c:2211
-#: modules/files.c:2309 modules/files.c:2324
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
+#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
+#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
+#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
+#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "تعذّر فتح ´%s': %s"
 
-#: modules/files.c:135 modules/files.c:153 modules/files.c:231
-#: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
+#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
+#: modules/files.c:1329
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "تعذّر استعلام وَضْع `%s': %s"
 
-#: modules/files.c:146
+#: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "خطأ في إنشاء ´%s': %s"
 
-#: modules/files.c:159
-#, c-format
-msgid "backup file `%s' exists and is not a regular file"
-msgstr "الملف الاحتياطي ´%s' موجود و ليس عاديَاً"
-
-#: modules/files.c:171
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "خطأ في تغيير المالك لـ `%s': %s"
 
-#: modules/files.c:177
+#: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
 msgstr ""
 
-#: modules/files.c:193
+#: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "خطأ في قراءة `%s': %s"
 
-#: modules/files.c:208 modules/files.c:223
+#: modules/files.c:206 modules/files.c:217 modules/files.c:305
+#: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "خطأ في كتابة `%s': %s"
 
-#: modules/files.c:239
-msgid "backup file size mismatch"
-msgstr "حجم الملف الاحتياطي غير متطابق"
-
-#: modules/files.c:671
-#, c-format
-msgid "%s value `%s': `:' not allowed"
-msgstr "%s القيمة `%s': `:' غير مسموح بها"
-
-#: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
+#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
+#: modules/files.c:1338
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "تعذّرت القراءة من ´%s': %s"
 
-#: modules/files.c:797
+#: modules/files.c:256
+#, c-format
+msgid "Invalid contents of lock `%s'"
+msgstr ""
+
+#: modules/files.c:261
+#, c-format
+msgid "The lock %s is held by process %ju"
+msgstr ""
+
+#: modules/files.c:269
+#, fuzzy, c-format
+msgid "Error removing stale lock `%s': %s"
+msgstr "خطأ في نقل %s إلى %s: %s.\n"
+
+#: modules/files.c:297
+#, fuzzy, c-format
+msgid "error opening temporary file for `%s': %s"
+msgstr "خطأ في فتح ´%s´، %s.\n"
+
+#: modules/files.c:321
+#, c-format
+msgid "Cannot obtain lock `%s': %s"
+msgstr ""
+
+#: modules/files.c:434
+#, fuzzy, c-format
+msgid "Error resolving `%s': %s"
+msgstr "خطأ في قراءة `%s': %s"
+
+#: modules/files.c:442
+#, fuzzy, c-format
+msgid "Error replacing `%s': %s"
+msgstr "خطأ في قراءة `%s': %s"
+
+#: modules/files.c:903
+#, fuzzy, c-format
+msgid "%s value `%s': `\\n' not allowed"
+msgstr "%s القيمة `%s': `:' غير مسموح بها"
+
+#: modules/files.c:910
+#, c-format
+msgid "%s value `%s': `:' not allowed"
+msgstr "%s القيمة `%s': `:' غير مسموح بها"
+
+#: modules/files.c:1014
 msgid "entry already present in file"
 msgstr "المُدخل موجود مسبقاً في الملف"
 
-#: modules/files.c:804 modules/files.c:814 modules/files.c:825
-#: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
+#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
+#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "تعذّرت الكتابة إلى ´%s': %s"
 
-#: modules/files.c:969
+#: modules/files.c:1173
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "الكائن ليس له خاصّيّة %s"
 
-#: modules/files.c:1030
+#: modules/files.c:1215
 msgid "entry with conflicting name already present in file"
 msgstr "هناك مُدخل باسم متعارض موجود مسبقاً في الملف"
 
-#: modules/files.c:1698
-msgid "`:' not allowed in encrypted password"
+#: modules/files.c:1803
+#, fuzzy
+msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "غير مسموح بـ':' في كلمة مرور مشفرة"
 
-#: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "خطأ في تشفير كلمة المرور"
 
-#: modules/files.c:2475 modules/ldap.c:2410
+#: modules/files.c:2517 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2559 modules/files.c:2637
+#: modules/files.c:2601 modules/files.c:2679
 msgid "not executing with superuser privileges"
 msgstr "لم يتمّ التّنفيذ بصلاحيات المدير"
 
-#: modules/files.c:2650
+#: modules/files.c:2692
 msgid "no shadow file present -- disabling"
 msgstr "لا يوجد ملف shadow --  جاري التعطيل"
 
@@ -1381,39 +1413,8 @@ msgstr "جاري الاستعلام عن خصائص المستخدم الافت�
 msgid "Copying user structure:\n"
 msgstr "جاري نسخ بنية المستخدم:\n"
 
-#~ msgid ""
-#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-#~ msgstr "خطأ في الاتصال بخادم إدارة كِرْبِروس 5 للخدمة ´%s' في المملكة ´%s': %s"
+#~ msgid "backup file `%s' exists and is not a regular file"
+#~ msgstr "الملف الاحتياطي ´%s' موجود و ليس عاديَاً"
 
-#~ msgid "error initializing kerberos library"
-#~ msgstr "خطأ في ابتداء مكتبة كِرْبِروس"
-
-#~ msgid "error parsing user name `%s' for kerberos"
-#~ msgstr "خطأ في إعراب اسم المستخدم ´%s' لكِرْبِروس"
-
-#~ msgid "entity structure has no %s or %s attributes"
-#~ msgstr "بناء الكينونة ليس له %s أو خصائص %s"
-
-#~ msgid "entity has no %s or %s attributes"
-#~ msgstr "الكينونة ليس لها %s أو خاصّيّة %s"
-
-#~ msgid "entity was created with no %s or %s attributes"
-#~ msgstr "تم إنشاء الكينونة بدون %s أو خصائص %s"
-
-#~ msgid "error reading information for `%s' from kerberos"
-#~ msgstr "خطأ في قراءة المعلومات لـ ´%s' من كِرْبِروس"
-
-#~ msgid "entity has no %s attribute"
-#~ msgstr "الكينونة ليس لها خاصّيّة %s"
-
-#~ msgid "error setting password for `%s'"
-#~ msgstr "خطأ في وضع كلمة المرور لـ´%s'"
-
-#~ msgid "Kerberos Realm"
-#~ msgstr "مملكة كِرْبِروس"
-
-#~ msgid "Kerberos Admin Principal"
-#~ msgstr "المدير الرئيسي لكِرْبِروس"
-
-#~ msgid "Kerberos Password for Admin Principal"
-#~ msgstr "كلمة مرور كِرْبِروس للمدير الرئيسي"
+#~ msgid "backup file size mismatch"
+#~ msgstr "حجم الملف الاحتياطي غير متطابق"

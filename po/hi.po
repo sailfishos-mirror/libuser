@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"POT-Creation-Date: 2015-07-23 21:13+0200\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Hindi (http://www.transifex.com/projects/p/fedora/language/"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Zanata 3.5.1\n"
+"X-Generator: Zanata 3.6.2\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1063,7 +1063,7 @@ msgstr "ख़तरनाक घर निर्देशिका `%s' को 
 msgid "Invalid default value of field %s: %s"
 msgstr "%s क्षेत्र का अवैध मूलभूत मान: %s"
 
-#: lib/util.c:300
+#: lib/util.c:300 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "%s फाइल तालकित करने में त्रुटि"
@@ -1088,104 +1088,136 @@ msgstr "`%s' में मूलभूत सुरक्षा संदर्�
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' का सुरक्षा संदर्भ निर्धारित नहीं कर सका: %s"
 
-#: modules/files.c:123 modules/files.c:453 modules/files.c:765
-#: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
-#: modules/files.c:1452 modules/files.c:1659 modules/files.c:1821
-#: modules/files.c:1838 modules/files.c:1923 modules/files.c:1942
-#: modules/files.c:2010 modules/files.c:2031 modules/files.c:2124
-#: modules/files.c:2139 modules/files.c:2196 modules/files.c:2211
-#: modules/files.c:2309 modules/files.c:2324
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
+#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
+#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
+#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
+#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' खोल नहीं सका: %s"
 
-#: modules/files.c:135 modules/files.c:153 modules/files.c:231
-#: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
+#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
+#: modules/files.c:1329
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' stat नहीं कर सका: %s"
 
-#: modules/files.c:146
+#: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' बनाने में त्रुटि: %s"
 
-#: modules/files.c:159
-#, c-format
-msgid "backup file `%s' exists and is not a regular file"
-msgstr "`%s' बैकअप फाइल जीवंत है और एक नियमित फाइल नहीं है"
-
-#: modules/files.c:171
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' के स्वामित्व बदलाव में त्रुटि: %s"
 
-#: modules/files.c:177
+#: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
 msgstr "`%s' मोड बदलने में त्रुटि: %s"
 
-#: modules/files.c:193
+#: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' पढ़ने में त्रुटि: %s"
 
-#: modules/files.c:208 modules/files.c:223
+#: modules/files.c:206 modules/files.c:217 modules/files.c:305
+#: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' लिखने में त्रुटि: %s"
 
-#: modules/files.c:239
-msgid "backup file size mismatch"
-msgstr "बैकअप फाइल आकार मेल नहीं खाया"
-
-#: modules/files.c:671
-#, c-format
-msgid "%s value `%s': `:' not allowed"
-msgstr "%s मान `%s': `:' नहीं अनुमति प्राप्त"
-
-#: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
+#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
+#: modules/files.c:1338
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' से पढ़ नहीं सका: %s"
 
-#: modules/files.c:797
+#: modules/files.c:256
+#, c-format
+msgid "Invalid contents of lock `%s'"
+msgstr ""
+
+#: modules/files.c:261
+#, c-format
+msgid "The lock %s is held by process %ju"
+msgstr ""
+
+#: modules/files.c:269
+#, fuzzy, c-format
+msgid "Error removing stale lock `%s': %s"
+msgstr "%s से %s को चलाने में त्रुटि: %s।\n"
+
+#: modules/files.c:297
+#, fuzzy, c-format
+msgid "error opening temporary file for `%s': %s"
+msgstr "`%s' मोड बदलने में त्रुटि: %s"
+
+#: modules/files.c:321
+#, c-format
+msgid "Cannot obtain lock `%s': %s"
+msgstr ""
+
+#: modules/files.c:434
+#, fuzzy, c-format
+msgid "Error resolving `%s': %s"
+msgstr "`%s' पढ़ने में त्रुटि: %s"
+
+#: modules/files.c:442
+#, fuzzy, c-format
+msgid "Error replacing `%s': %s"
+msgstr "`%s' पढ़ने में त्रुटि: %s"
+
+#: modules/files.c:903
+#, fuzzy, c-format
+msgid "%s value `%s': `\\n' not allowed"
+msgstr "%s मान `%s': `:' नहीं अनुमति प्राप्त"
+
+#: modules/files.c:910
+#, c-format
+msgid "%s value `%s': `:' not allowed"
+msgstr "%s मान `%s': `:' नहीं अनुमति प्राप्त"
+
+#: modules/files.c:1014
 msgid "entry already present in file"
 msgstr "फाइल में प्रविष्टि पहले से है"
 
-#: modules/files.c:804 modules/files.c:814 modules/files.c:825
-#: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
+#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
+#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' को लिख नहीं सका: %s"
 
-#: modules/files.c:969
+#: modules/files.c:1173
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "एंटिटी वस्तु का %s गुण नहीं है "
 
-#: modules/files.c:1030
+#: modules/files.c:1215
 msgid "entry with conflicting name already present in file"
 msgstr "फाइल में विरोधी नाम के साथ प्रविष्टि पहले से मौजूद है"
 
-#: modules/files.c:1698
-msgid "`:' not allowed in encrypted password"
+#: modules/files.c:1803
+#, fuzzy
+msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "`:' गोपित कूटशब्द में अनुमति प्राप्त नहीं"
 
-#: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "शब्दकूट गोपन में त्रुटि "
 
-#: modules/files.c:2475 modules/ldap.c:2410
+#: modules/files.c:2517 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' और `%s' मॉड्यूल को जोड़ा नहीं जा सकता है"
 
-#: modules/files.c:2559 modules/files.c:2637
+#: modules/files.c:2601 modules/files.c:2679
 msgid "not executing with superuser privileges"
 msgstr "सुपरयूजर विशेषाधिकार से निष्पादन नहीं कर रहा है"
 
-#: modules/files.c:2650
+#: modules/files.c:2692
 msgid "no shadow file present -- disabling"
 msgstr "कोई शेडो फाइल नहीं है -- असमर्थ कर रहा है"
 
@@ -1379,39 +1411,8 @@ msgstr "मूलभूत उपयोक्ता गुण ले रहे �
 msgid "Copying user structure:\n"
 msgstr "उपयोक्ता संरचना प्रतिलिपि कर रहा है:\n"
 
-#~ msgid ""
-#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-#~ msgstr "`%s' सेवा के लिए `%s' क्षेत्र में kadm5 सर्वर से संबंधित करने में त्रुटि: %s"
+#~ msgid "backup file `%s' exists and is not a regular file"
+#~ msgstr "`%s' बैकअप फाइल जीवंत है और एक नियमित फाइल नहीं है"
 
-#~ msgid "error initializing kerberos library"
-#~ msgstr "करबरोस लाइब्रेरी प्रारंभिकीकरण त्रुटि"
-
-#~ msgid "error parsing user name `%s' for kerberos"
-#~ msgstr "करबरोस के लिए `%s' उपयोक्ता नाम पद व्याख्या करने में त्रुटि"
-
-#~ msgid "entity structure has no %s or %s attributes"
-#~ msgstr "एंटिटी संरचना में %s या %s गुण नहीं हैं"
-
-#~ msgid "entity has no %s or %s attributes"
-#~ msgstr "एंटिटी में %s या %s गुण नहीं हैं"
-
-#~ msgid "entity was created with no %s or %s attributes"
-#~ msgstr "एंटिटी की बनावट %s या %s गुण के बिना की गई "
-
-#~ msgid "error reading information for `%s' from kerberos"
-#~ msgstr "करबरोस से `%s' के लिए जानकारी पढ़ने में त्रुटि"
-
-#~ msgid "entity has no %s attribute"
-#~ msgstr "एंटिटी में %s गुण नहीं है"
-
-#~ msgid "error setting password for `%s'"
-#~ msgstr "`%s' के लिए शब्दकूट जमावट त्रुटि"
-
-#~ msgid "Kerberos Realm"
-#~ msgstr "करबरोस क्षेत्र"
-
-#~ msgid "Kerberos Admin Principal"
-#~ msgstr "करबरोस प्रधान प्रशासक"
-
-#~ msgid "Kerberos Password for Admin Principal"
-#~ msgstr "प्रधान प्रशासक के लिए करबरोस शब्दकूट"
+#~ msgid "backup file size mismatch"
+#~ msgstr "बैकअप फाइल आकार मेल नहीं खाया"

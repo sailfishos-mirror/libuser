@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-03-21 05:22+0100\n"
+"POT-Creation-Date: 2015-07-23 21:13+0200\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Oriya (http://www.transifex.com/projects/p/fedora/language/"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Zanata 3.5.1\n"
+"X-Generator: Zanata 3.6.2\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
@@ -1064,7 +1064,7 @@ msgstr "ବିପଦ ଜନକ ହୋମ ଡିରେକ୍ଟୋରୀ `%s' କ
 msgid "Invalid default value of field %s: %s"
 msgstr "%s ର ଅବୈଧ ପୂର୍ବନିର୍ଦ୍ଧାରିତ ମୂଲ୍ଯ: %s"
 
-#: lib/util.c:300
+#: lib/util.c:300 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "ଫାଇଲ କୁ ଲକ କରୁଥିବା ସମୟରେ ତୃଟି: %s"
@@ -1089,104 +1089,136 @@ msgstr "ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ସୁରକ୍ଷା 
 msgid "couldn't determine security context for `%s': %s"
 msgstr "`%s' ର ସୁରକ୍ଷା ପ୍ରସଙ୍ଗ କୁ ସ୍ଥିର କରିପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:123 modules/files.c:453 modules/files.c:765
-#: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
-#: modules/files.c:1452 modules/files.c:1659 modules/files.c:1821
-#: modules/files.c:1838 modules/files.c:1923 modules/files.c:1942
-#: modules/files.c:2010 modules/files.c:2031 modules/files.c:2124
-#: modules/files.c:2139 modules/files.c:2196 modules/files.c:2211
-#: modules/files.c:2309 modules/files.c:2324
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
+#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
+#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
+#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
+#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "`%s' କୁ ଖୋଲି ପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:135 modules/files.c:153 modules/files.c:231
-#: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
+#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
+#: modules/files.c:1329
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "`%s' ଉପରେ ଷ୍ଟାର୍ଟ କୁ କାର୍ଯ୍ଯକାରି କରି ପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:146
+#: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
 msgstr "`%s' କୁ ସୃଷ୍ଟି କରିବା ସମୟରେ ତୃଟି: %s"
 
-#: modules/files.c:159
-#, c-format
-msgid "backup file `%s' exists and is not a regular file"
-msgstr "`%s' ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ଅବସ୍ଥିତ ଅଛି ଏବଂ ଏହା ଏକ ନିୟମିତ ଫାଇଲ ନୁହେଁ"
-
-#: modules/files.c:171
+#: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
 msgstr "`%s' ର ମାଲିକ କୁ ପରିବର୍ତନ କରିବା ରେ ତୃଟି: %s"
 
-#: modules/files.c:177
+#: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
 msgstr "`%s' ର ଧାରା ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: %s"
 
-#: modules/files.c:193
+#: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
 msgstr "`%s' କୁ ପଢିବା ସମୟରେ ତୃଟି: %s"
 
-#: modules/files.c:208 modules/files.c:223
+#: modules/files.c:206 modules/files.c:217 modules/files.c:305
+#: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
 msgstr "`%s' କୁ ଲେଖିବା ସମୟରେ ତୃଟି: %s"
 
-#: modules/files.c:239
-msgid "backup file size mismatch"
-msgstr "ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ର ଆକାର ମିଶୁ ନାହିଁ"
-
-#: modules/files.c:671
-#, c-format
-msgid "%s value `%s': `:' not allowed"
-msgstr "%s ମୂଲ୍ୟ `%s': `:' ଅନୁମୋଦିତ ନୁହଁ"
-
-#: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
+#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
+#: modules/files.c:1338
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "`%s' ରୁ ପଢି ପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:797
+#: modules/files.c:256
+#, c-format
+msgid "Invalid contents of lock `%s'"
+msgstr ""
+
+#: modules/files.c:261
+#, c-format
+msgid "The lock %s is held by process %ju"
+msgstr ""
+
+#: modules/files.c:269
+#, fuzzy, c-format
+msgid "Error removing stale lock `%s': %s"
+msgstr "%s ରୁ %s କୁ ସ୍ଥାନାସ୍ତରିତ କରିବା ସମୟରେ ତୃଟି: %s \n"
+
+#: modules/files.c:297
+#, fuzzy, c-format
+msgid "error opening temporary file for `%s': %s"
+msgstr "`%s' ର ଧାରା ପରିବର୍ତ୍ତନ କରିବା ସମୟରେ ତ୍ରୁଟି: %s"
+
+#: modules/files.c:321
+#, c-format
+msgid "Cannot obtain lock `%s': %s"
+msgstr ""
+
+#: modules/files.c:434
+#, fuzzy, c-format
+msgid "Error resolving `%s': %s"
+msgstr "`%s' କୁ ପଢିବା ସମୟରେ ତୃଟି: %s"
+
+#: modules/files.c:442
+#, fuzzy, c-format
+msgid "Error replacing `%s': %s"
+msgstr "`%s' କୁ ପଢିବା ସମୟରେ ତୃଟି: %s"
+
+#: modules/files.c:903
+#, fuzzy, c-format
+msgid "%s value `%s': `\\n' not allowed"
+msgstr "%s ମୂଲ୍ୟ `%s': `:' ଅନୁମୋଦିତ ନୁହଁ"
+
+#: modules/files.c:910
+#, c-format
+msgid "%s value `%s': `:' not allowed"
+msgstr "%s ମୂଲ୍ୟ `%s': `:' ଅନୁମୋଦିତ ନୁହଁ"
+
+#: modules/files.c:1014
 msgid "entry already present in file"
 msgstr "ଫାଇଲ ରେ ଭରଣ ପୂର୍ବ ରୁ ରହିଛି"
 
-#: modules/files.c:804 modules/files.c:814 modules/files.c:825
-#: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
+#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
+#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "`%s' ରେ ଲେଖି ପାରିଲା ନାହିଁ: %s"
 
-#: modules/files.c:969
+#: modules/files.c:1173
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "ବସ୍ତୁ ର %s ଭଳି କୌଣସି ଗୁଣ ନାହିଁ"
 
-#: modules/files.c:1030
+#: modules/files.c:1215
 msgid "entry with conflicting name already present in file"
 msgstr "ଫାଇଲରେ ଦ୍ୱନ୍ଦମୟ ନାମବିଶିଷ୍ଟ ଭରଣ ପୂର୍ବରୁ ରହିଅଛି"
 
-#: modules/files.c:1698
-msgid "`:' not allowed in encrypted password"
+#: modules/files.c:1803
+#, fuzzy
+msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "`:' ସଂଗୁପ୍ତ ପ୍ରବେଶ ସଂକେତରେ ଅନୁମୋଦିତ ନୁହଁ"
 
-#: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "ପ୍ରବେଶ ସଙ୍କେତ କୁ ସଂଗୁପ୍ତ କରିବା ସମୟରେ ତୃଟି"
 
-#: modules/files.c:2475 modules/ldap.c:2410
+#: modules/files.c:2517 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "`%s' ଏବଂ `%s' ଏକକାଂଶଗୁଡ଼ିକୁ ଯୋଡ଼ିପାରିବେ ନାହିଁ"
 
-#: modules/files.c:2559 modules/files.c:2637
+#: modules/files.c:2601 modules/files.c:2679
 msgid "not executing with superuser privileges"
 msgstr "ପ୍ରମୂଖ ଚାଳକ ର ବିଶେଷ ଆକର୍ଷଣ ମାନଙ୍କ ସହିତ ନିଷ୍ପାଦିତ ହେଉ ନାହିଁ"
 
-#: modules/files.c:2650
+#: modules/files.c:2692
 msgid "no shadow file present -- disabling"
 msgstr "କୌଣସି ଛାୟା ଫାଇଲ ଉପସ୍ଥିତ ନାହିଁ -- disabling"
 
@@ -1380,40 +1412,8 @@ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଚାଳକ ର ଗୁ
 msgid "Copying user structure:\n"
 msgstr "ଚାଳକ ର ସଂରଚନା କୁ ନକଲ କରୁଅଛି:\n"
 
-#~ msgid ""
-#~ "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
-#~ msgstr ""
-#~ "`%s' ସେବା ଏବଂ `%s' ଅଧିକାର ପାଇଁ କେ.ଏ.ଡି.ଏମ.୫ ସେବକ ସହିତ ସଂଯୋଗ କରିବା ରେ ତୃଟି: %s"
+#~ msgid "backup file `%s' exists and is not a regular file"
+#~ msgstr "`%s' ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ଅବସ୍ଥିତ ଅଛି ଏବଂ ଏହା ଏକ ନିୟମିତ ଫାଇଲ ନୁହେଁ"
 
-#~ msgid "error initializing kerberos library"
-#~ msgstr "କେର୍ବେରୋଶ ପାଠାଗାର ର ପ୍ରାରମ୍ଭିକୀକରଣ ସମୟରେ ତୃଟି"
-
-#~ msgid "error parsing user name `%s' for kerberos"
-#~ msgstr "କେର୍ବେରୋଶ ପାଇଁ `%s' ଚାଳକ ମାନ ର ବିଶ୍ଳେଷଣ କରିବା ସମୟରେ ତୃଟି"
-
-#~ msgid "entity structure has no %s or %s attributes"
-#~ msgstr "ବସ୍ତୁ ର ସଂରଚନା ରେ କୌଣସି %s କିମ୍ବା %s ଗୁଣ ମାନ ନାହିଁ"
-
-#~ msgid "entity has no %s or %s attributes"
-#~ msgstr "ବସ୍ତୁ ର କୌଣସି %s କିମ୍ବା %s ଗୁଣ ନାହିଁ"
-
-#~ msgid "entity was created with no %s or %s attributes"
-#~ msgstr "ବସ୍ତୁ ଟି %s କିମ୍ବା %s ଗୁଣ ବିନା ସୃଷ୍ଟି କରା ଯାଇଛି"
-
-#~ msgid "error reading information for `%s' from kerberos"
-#~ msgstr "`%s' ପାଇଁ କେର୍ବେରୋଶ ରୁ ସୂଚନା ପଢିବା ସମୟରେ ତୃଟି"
-
-#~ msgid "entity has no %s attribute"
-#~ msgstr "ବସ୍ତୁ ର କୌଣସି %s ଗୁଣ ନାହିଁ"
-
-#~ msgid "error setting password for `%s'"
-#~ msgstr "`%s' ପାଇଁ ପ୍ରବେଶ ସଙ୍କେତ ସେଟ କରିବା ସମୟରେ ତୃଟି"
-
-#~ msgid "Kerberos Realm"
-#~ msgstr "କେର୍ବେରୋଶ ଅଧିକାର"
-
-#~ msgid "Kerberos Admin Principal"
-#~ msgstr "କେର୍ବେରୋଶ ପ୍ରଶାସନୀୟ କତ୍ରୁପକ୍ଷ"
-
-#~ msgid "Kerberos Password for Admin Principal"
-#~ msgstr "ପ୍ରଶାସନୀୟ କତ୍ରୁପକ୍ଷ ଙ୍କ ପାଇଁ କେର୍ବେରୋଶ ପ୍ରବେଶ ସଙ୍କେତ"
+#~ msgid "backup file size mismatch"
+#~ msgstr "ନକଲ ସଂରକ୍ଷଣ ଫାଇଲ ର ଆକାର ମିଶୁ ନାହିଁ"
