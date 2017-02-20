@@ -18,8 +18,9 @@
 /admin/mkinstalldirs
 /admin/test-driver
 /admin/ylwrap
-/autom4te.cache*
-/build*
+/autom4te.cache
+/build
+/build3
 /docs/Makefile.in
 /docs/reference/Makefile.in
 /docs/reference/gtk-doc.make
