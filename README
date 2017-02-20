@@ -7,11 +7,11 @@ interface to its data sources.
 Sample applications modeled after those included with the shadow password suite
 are included.
 
-New releases will be available at https://fedorahosted.org/libuser/ .
+New releases will be available at https://pagure.io/libuser .
 
 Bugs
 ====
 Please consider reporting the bug to your distribution's bug tracking system.
 
-Otherwise, report bugs at https://fedorahosted.org/libuser/ .  Bug reports
-with patches are especially welcome.
+Otherwise, report bugs at https://pagure.io/libuser .  Pull requests are
+especially welcome.

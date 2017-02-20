@@ -1,5 +1,5 @@
-AC_INIT([libuser], [0.62], [mitr@redhat.com], ,
-        [https://fedorahosted.org/libuser/])
+AC_INIT([libuser], [0.62], [https://pagure.io/libuser], ,
+        [https://pagure.io/libuser])
 AC_PREREQ([2.63b])
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
