@@ -534,7 +534,7 @@ parse_field(const struct format_specifier *format, GValue *value,
 						 string, &err);
 	if (ret == FALSE) {
 		g_assert(err != NULL);
-		g_warning(lu_strerror(err));
+		g_warning("%s", lu_strerror(err));
 		lu_error_free(&err);
 	}
 	return ret;

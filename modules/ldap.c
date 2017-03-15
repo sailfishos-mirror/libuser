@@ -672,7 +672,7 @@ lu_ldap_lookup(struct lu_module *module,
 						(&value, attr, val, &error);
 					if (ok == FALSE) {
 						g_assert(error != NULL);
-						g_warning(lu_strerror(error));
+						g_warning("%s", lu_strerror(error));
 						lu_error_free(&error);
 					} else {
 						lu_ent_add_current(ent, attr,
