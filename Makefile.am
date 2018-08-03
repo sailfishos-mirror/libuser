@@ -116,7 +116,7 @@ apps_libapputil_la_LDFLAGS = $(GOBJECT_LIBS) -lpam -lpam_misc $(SELINUX_LIBS)
 
 apps_lchage_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lchage_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_lchage_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lchage_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lchfn_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lchfn_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
@@ -124,19 +124,19 @@ apps_lchfn_LDFLAGS = $(GMODULE_LIBS) -lpopt
 
 apps_lchsh_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lchsh_LDADD = apps/libapputil.la lib/libuser.la $(LTLIBINTL)
-apps_lchsh_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lchsh_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lgroupadd_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lgroupadd_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_lgroupadd_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lgroupadd_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lgroupdel_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lgroupdel_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_lgroupdel_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lgroupdel_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lgroupmod_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lgroupmod_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_lgroupmod_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lgroupmod_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lid_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lid_LDADD = lib/libuser.la $(LTLIBINTL)
@@ -152,15 +152,15 @@ apps_lpasswd_LDFLAGS = $(GMODULE_LIBS) -lpopt
 
 apps_luseradd_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_luseradd_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_luseradd_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_luseradd_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_luserdel_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_luserdel_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_luserdel_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_luserdel_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 apps_lusermod_CPPFLAGS = $(AM_CPPFLAGS) $(LOCALEDIR_CPPFLAGS)
 apps_lusermod_LDADD = lib/libuser.la $(LTLIBINTL)
-apps_lusermod_LDFLAGS = $(GMODULE_LIBS) -lpopt
+apps_lusermod_LDFLAGS = $(GMODULE_LIBS) -lpopt $(AUDIT_LIBS)
 
 lib_libuser_la_SOURCES = lib/common.c lib/config.c lib/entity.c lib/error.c \
 	lib/fs.c lib/getdate.y lib/internal.h lib/misc.c lib/modules.c \
@@ -170,7 +170,7 @@ lib_libuser_la_CPPFLAGS = $(GMODULE_CFLAGS) -Ilib $(LOCALEDIR_CPPFLAGS) \
 	-DMODULEDIR='"$(pkglibdir)"' -DNSCD='"$(NSCD)"' \
 	-DSYSCONFDIR='"$(sysconfdir)"'
 lib_libuser_la_LDFLAGS = $(GMODULE_LIBS) $(CRYPT_LIBS) $(SELINUX_LIBS) \
-	-version-info 6:2:5
+	$(AUDIT_LIBS) -version-info 6:2:5
 lib_libuser_la_LIBADD = $(LTLIBINTL)
 
 modules_libuser_files_la_SOURCES = modules/files.c

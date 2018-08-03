@@ -179,8 +179,13 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
 				user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
+					"updating-password", user,
+					uidNumber, 0);
 			return 5;
 		}
+		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
+				user, uidNumber, 0);
 	}
 
 	/* If we need to change a user's crypted password, try to change it,
@@ -192,8 +197,13 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Failed to set password for user %s: %s.\n"),
 				user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
+					"updating-password", user,
+					uidNumber, 0);
 			return 6;
 		}
+		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
+				user, uidNumber, 0);
 	}
 
 	/* If we need to lock/unlock the user's account, do that. */
@@ -202,16 +212,26 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("User %s could not be locked: %s.\n"),
 				user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
+					"locking-account", user,
+					uidNumber, 0);
 			return 7;
 		}
+		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "locking-account",
+				user, uidNumber, 0);
 	}
 	if (unlock) {
 		if (lu_user_unlock(ctx, ent, &error) == FALSE) {
 			fprintf(stderr,
 				_("User %s could not be unlocked: %s.\n"),
 				user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
+					"unlocking-account", user,
+					uidNumber, 0);
 			return 8;
 		}
+		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "unlocking-account",
+				user, uidNumber, 0);
 	}
 
 	/* Determine if we actually need to change anything. */
@@ -274,8 +294,13 @@ main(int argc, const char **argv)
 	if (change && (lu_user_modify(ctx, ent, &error) == FALSE)) {
 		fprintf(stderr, _("User %s could not be modified: %s.\n"),
 			user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT,
+					"modify-account", user,
+					uidNumber, 0);
 		return 9;
 	}
+	lu_audit_logger(AUDIT_USER_MGMT, "modify-account",
+			user, uidNumber, 1);
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
 	/* If the user's name changed, we need to update supplemental
@@ -322,12 +347,19 @@ main(int argc, const char **argv)
 				}
 			}
 			/* Save the changes to the group. */
-			if (lu_group_modify(ctx, group, &error) == FALSE)
+			if (lu_group_modify(ctx, group, &error) == FALSE) {
 				fprintf(stderr, _("Group %s could not be "
 						  "modified: %s.\n"),
 					lu_ent_get_first_string(group,
 								LU_GROUPNAME),
 					lu_strerror(error));
+				lu_audit_logger_with_group(AUDIT_USER_MGMT,
+						    "update-member-in-group", user, uidNumber,
+						    lu_ent_get_first_string(group, LU_GROUPNAME),0);
+			} else
+				lu_audit_logger_with_group(AUDIT_USER_MGMT,
+						    "update-member-in-group", user, uidNumber,
+						    lu_ent_get_first_string(group, LU_GROUPNAME),1);
 			lu_ent_free(group);
 		}
 		g_ptr_array_free(groups, TRUE);
@@ -353,8 +385,12 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Error moving %s to %s: %s.\n"),
 				oldHomeDirectory, homeDirectory,
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT, "moving-home-dir",
+					user, uidNumber, 0);
 			return 12;
 		}
+		lu_audit_logger(AUDIT_USER_MGMT, "moving-home-dir",
+				user, uidNumber, 1);
 	}
 	g_free(oldHomeDirectory);
 

@@ -24,6 +24,7 @@
 #include <locale.h>
 #include <popt.h>
 #include "../lib/user.h"
+#include "../lib/user_private.h"
 #include "apputil.h"
 
 int
@@ -90,6 +91,8 @@ main(int argc, const char **argv)
 	if (lu_group_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be deleted: %s\n"),
 			group, lu_strerror(error));
+		lu_audit_logger(AUDIT_DEL_GROUP, "delete-group", group,
+				AUDIT_NO_ID, 0);
 		return 3;
 	}
 
@@ -98,6 +101,9 @@ main(int argc, const char **argv)
 	lu_ent_free(ent);
 
 	lu_end(ctx);
+
+	lu_audit_logger(AUDIT_DEL_GROUP, "delete-group", group,
+			AUDIT_NO_ID, 1);
 
 	return 0;
 }

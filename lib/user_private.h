@@ -34,6 +34,9 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif
+#ifdef WITH_AUDIT
+#include <libaudit.h>
+#endif
 #include "user.h"
 
 G_BEGIN_DECLS
@@ -356,6 +359,18 @@ id_t lu_get_first_unused_id(struct lu_context *ctx, enum lu_entity_type type,
 
 /* Append a copy of VALUES to DEST */
 void lu_util_append_values(GValueArray *dest, GValueArray *values);
+
+#ifdef WITH_AUDIT
+void lu_audit_logger(int type, const char *op, const char *name,
+		     unsigned int id, unsigned int result);
+void lu_audit_logger_with_group(int type, const char *op, const char *name,
+				 unsigned int id, const char *grp,
+				 unsigned int result);
+#else
+#define lu_audit_logger(a, b, c, d, e)
+#define lu_audit_logger_with_group(a, b, c, d, e, f)
+#endif
+#define AUDIT_NO_ID	((unsigned int) -1)
 
 G_END_DECLS
 

@@ -118,6 +118,23 @@ if test "x$selinux" != xno ; then
 fi
 AC_SUBST(SELINUX_LIBS)
 
+AC_ARG_WITH(audit,
+AS_HELP_STRING([--with-audit],[log using Linux Audit in addition to syslog]),
+use_audit=$withval,
+use_audit=auto)
+if test x$use_audit != xno ; then
+        AC_SEARCH_LIBS([audit_open], [audit])
+        if test x$ac_cv_search_audit_open = xno ; then
+                if test x$use_audit != xauto ; then
+                        AC_MSG_ERROR([requested Linux Audit, but libaudit was not found])
+                fi
+        else
+                AC_DEFINE(WITH_AUDIT,1,[Define if you want to use Linux Audit.])
+		AUDIT_LIBS=-laudit
+        fi
+fi
+AC_SUBST(AUDIT_LIBS)
+
 AC_C_CONST
 AC_TYPE_UID_T
 AC_TYPE_MODE_T

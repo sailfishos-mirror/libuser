@@ -29,6 +29,7 @@
 #include <popt.h>
 #include <glib.h>
 #include "../lib/user.h"
+#include "../lib/user_private.h"
 #include "apputil.h"
 
 #define INVALID_LONG LONG_MIN
@@ -239,8 +240,12 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Failed to modify aging information for %s: "
 				  "%s\n"), user, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT, "change-age", user,
+				AUDIT_NO_ID, 0);
 			return 3;
 		}
+		lu_audit_logger(AUDIT_USER_MGMT, "change-age", user,
+				AUDIT_NO_ID, 1);
 
 		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	}
