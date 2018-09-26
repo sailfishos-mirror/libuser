@@ -691,10 +691,13 @@ merge_ent_array_duplicates(GPtrArray *array)
 			while (attributes != NULL) {
 				attr = (const char *)attributes->data;
 				values = lu_ent_get_current(current, attr);
-				for (j = 0; j < values->n_values; j++) {
-					value = g_value_array_get_nth(values,
-								      j);
-					lu_ent_add_current(saved, attr, value);
+				if (values != NULL) {
+					for (j = 0; j < values->n_values; j++) {
+						value = g_value_array_get_nth(
+									values,
+									j);
+						lu_ent_add_current(saved, attr, value);
+					}
 				}
 				attributes = g_list_next(attributes);
 			}
@@ -705,10 +708,13 @@ merge_ent_array_duplicates(GPtrArray *array)
 			while (attributes != NULL) {
 				attr = (const char *)attributes->data;
 				values = lu_ent_get(current, attr);
-				for (j = 0; j < values->n_values; j++) {
-					value = g_value_array_get_nth(values,
-								      j);
-					lu_ent_add(saved, attr, value);
+				if (values != NULL) {
+					for (j = 0; j < values->n_values; j++) {
+						value = g_value_array_get_nth(
+									values,
+									j);
+						lu_ent_add(saved, attr, value);
+					}
 				}
 				attributes = g_list_next(attributes);
 			}
