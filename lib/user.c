@@ -2060,13 +2060,14 @@ lu_get_first_unused_id(struct lu_context *ctx,
 		struct lu_error *error = NULL;
 		do {
 			struct group grp, *err;
+			int rv;
 
 			/* There may be read-only sources of user information
 			 * on the system, and we want to avoid allocating an ID
 			 * that's already in use by a service we can't write
 			 * to, so check with NSS first. */
-			getgrgid_r(id, &grp, buf, sizeof(buf), &err);
-			if (err == &grp) {
+			rv = getgrgid_r(id, &grp, buf, sizeof(buf), &err);
+			if (rv == 0 && err == &grp) {
 				id++;
 				continue;
 			}

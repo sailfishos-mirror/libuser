@@ -672,6 +672,7 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 			char buf[LINE_MAX * 4];
 			intmax_t val;
 			char *p;
+			int rv;
 
 			errno = 0;
 			val = strtoimax(value, &p, 10);
@@ -679,8 +680,8 @@ handle_default_useradd_key(gpointer xkey, gpointer xvalue, gpointer xconfig)
 			    || (gid_t)val != val) {
 				struct group grp, *g;
 
-				getgrnam_r(value, &grp, buf, sizeof(buf), &g);
-				if (g != NULL)
+				rv = getgrnam_r(value, &grp, buf, sizeof(buf), &g);
+				if (rv == 0 && g != NULL)
 					value = g->gr_name;
 				/* else ignore the entry */
 			}
