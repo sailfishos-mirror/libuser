@@ -1501,7 +1501,7 @@ generic_lock(struct lu_module *module, const char *file_suffix, int field,
 	     struct lu_ent *ent, enum lock_op op, struct lu_error **error)
 {
 	struct editing *e;
-	char *value, *new_value, *name;
+	char *value, *new_value, *name = NULL;
 	gboolean commit = FALSE, ret = FALSE;
 
 	/* Get the name which keys the entries of interest in the file. */
@@ -1561,7 +1561,7 @@ generic_is_locked(struct lu_module *module, const char *file_suffix,
 		  int field, struct lu_ent *ent, struct lu_error **error)
 {
 	char *filename;
-	char *value, *name;
+	char *value, *name = NULL;
 	int fd;
 	gboolean ret = FALSE;
 
@@ -1752,7 +1752,7 @@ generic_setpass(struct lu_module *module, const char *file_suffix, int field,
 		struct lu_error **error)
 {
 	struct editing *e;
-	char *value, *name;
+	char *value, *name = NULL;
 	gboolean ret = FALSE;
 
 	/* Get the name of this account. */
