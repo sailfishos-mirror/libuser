@@ -387,9 +387,9 @@ editing_open(struct lu_module *module, const char *file_suffix,
 	backup_name = g_strconcat(e->filename, "-", NULL);
 	fd = open_and_copy_file(e->filename, backup_name, FALSE, error);
 	g_free (backup_name);
-	close(fd);
 	if (fd == -1)
 		goto err_fscreate;
+	close(fd);
 
 	e->new_filename = g_strconcat(e->filename, "+", NULL);
 	e->new_fd = open_and_copy_file(e->filename, e->new_filename, TRUE,
