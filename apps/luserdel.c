@@ -26,6 +26,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../lib/user.h"
+#include "../lib/user_private.h"
 #include "apputil.h"
 
 int
@@ -93,8 +94,12 @@ main(int argc, const char **argv)
 	if (lu_user_delete(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s could not be deleted: %s.\n"),
 			user, lu_strerror(error));
+		lu_audit_logger(AUDIT_DEL_USER, "delete-user", user,
+				AUDIT_NO_ID, 0);
 		return 3;
 	}
+	lu_audit_logger(AUDIT_DEL_USER, "delete-user", user,
+			AUDIT_NO_ID, 1);
 
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
@@ -126,9 +131,15 @@ main(int argc, const char **argv)
 				fprintf(stderr, _("Group %s could not be "
 						  "deleted: %s.\n"), tmp,
 					lu_strerror(error));
+				lu_audit_logger_with_group (AUDIT_DEL_GROUP,
+					"delete-group", user, AUDIT_NO_ID,
+					tmp, 0);
 				return 7;
 			}
 		}
+		lu_audit_logger_with_group (AUDIT_DEL_GROUP,
+					    "delete-group", user,
+					    AUDIT_NO_ID, tmp, 1);
 		lu_ent_free(group_ent);
 		lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 	}
@@ -138,8 +149,14 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Error removing home directory: %s.\n"),
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT,
+					"deleting-home-directory", user,
+					AUDIT_NO_ID, 0);
 			return 9;
 		}
+		lu_audit_logger(AUDIT_USER_MGMT, "deleting-home-directory", user,
+				AUDIT_NO_ID, 1);
+
 		/* Delete the user's mail spool. */
 		if (lu_mail_spool_remove(ctx, ent, &error) != TRUE) {
 			fprintf(stderr, _("Error removing mail spool: %s"),

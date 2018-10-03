@@ -16,9 +16,10 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include <config.h>
+#include "config.h"
 #include <glib.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "internal.h"
 #include "user_private.h"
@@ -111,3 +112,65 @@ lu_common_sgroup_default(struct lu_module *module,
 	g_return_val_if_fail(name != NULL, FALSE);
 	return lu_common_group_default(module, name, is_system, ent, error);
 }
+
+#ifdef WITH_AUDIT
+static int audit_fd = 0;
+
+/* result - 1 is "success" and 0 is "failed" */
+void lu_audit_logger(int type, const char *op, const char *name,
+                        unsigned int id, unsigned int result)
+{
+	if (audit_fd == 0) {
+		/* First time through */
+		audit_fd = audit_open();
+		if (audit_fd < 0) {
+			/* You get these only when the kernel doesn't have
+			 * audit compiled in. */
+			if (	   (errno == EINVAL)
+				|| (errno == EPROTONOSUPPORT)
+				|| (errno == EAFNOSUPPORT))
+					return;
+			fputs("Cannot open audit interface - aborting.\n", stderr);
+			exit(EXIT_FAILURE);
+		}
+	}
+	if (audit_fd < 0)
+		return;
+	audit_log_acct_message(audit_fd, type, NULL, op, name, id,
+		NULL, NULL, NULL, (int) result);
+}
+
+/* result - 1 is "success" and 0 is "failed" */
+void lu_audit_logger_with_group (int type, const char *op, const char *name,
+		unsigned int id, const char *grp, unsigned int result)
+{
+	int len;
+	char enc_group[(LOGIN_NAME_MAX*2)+1], buf[1024];
+
+	if (audit_fd == 0) {
+		/* First time through */
+		audit_fd = audit_open();
+		if (audit_fd < 0) {
+			/* You get these only when the kernel doesn't have
+			 * audit compiled in. */
+			if (	   (errno == EINVAL)
+				|| (errno == EPROTONOSUPPORT)
+				|| (errno == EAFNOSUPPORT))
+					return;
+			fputs("Cannot open audit interface - aborting.\n", stderr);
+			exit(EXIT_FAILURE);
+		}
+	}
+	if (audit_fd < 0)
+		return;
+	len = strnlen(grp, sizeof(enc_group)/2);
+	if (audit_value_needs_encoding(grp, len)) {
+		snprintf(buf, sizeof(buf), "%s grp=%s", op,
+			audit_encode_value(enc_group, grp, len));
+	} else {
+		snprintf(buf, sizeof(buf), "%s grp=\"%s\"", op, grp);
+	}
+	audit_log_acct_message(audit_fd, type, NULL, buf, name, id,
+			NULL, NULL, NULL, (int) result);
+}
+#endif

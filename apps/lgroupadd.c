@@ -118,6 +118,8 @@ main(int argc, const char **argv)
 	if (lu_group_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group creation failed: %s\n"),
 			lu_strerror(error));
+		lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
+				AUDIT_NO_ID, 0);
 		return 2;
 	}
 
@@ -126,6 +128,9 @@ main(int argc, const char **argv)
 	lu_ent_free(ent);
 
 	lu_end(ctx);
+
+	lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
+				AUDIT_NO_ID, 1);
 
 	return 0;
 }

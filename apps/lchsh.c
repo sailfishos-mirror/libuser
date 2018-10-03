@@ -26,6 +26,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../lib/user.h"
+#include "../lib/user_private.h"
 #include "apputil.h"
 
 int
@@ -120,6 +121,8 @@ main(int argc, const char **argv)
 				      NULL, &error) == FALSE) {
 			fprintf(stderr, _("Shell not changed: %s\n"),
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT, "change-shell", user,
+				AUDIT_NO_ID, 0);
 			return 1;
 		}
 		/* Modify the in-memory structure's shell attribute. */
@@ -132,9 +135,13 @@ main(int argc, const char **argv)
 		if (lu_user_modify(ctx, ent, &error)) {
 			g_print(_("Shell changed.\n"));
 			lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
+			lu_audit_logger(AUDIT_USER_MGMT, "change-shell", user,
+				AUDIT_NO_ID, 1);
 		} else {
 			fprintf(stderr, _("Shell not changed: %s\n"),
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT, "change-shell", user,
+				AUDIT_NO_ID, 0);
 			return 1;
 		}
 	}

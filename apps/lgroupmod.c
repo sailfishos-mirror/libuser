@@ -138,8 +138,14 @@ main(int argc, const char **argv)
 		    == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s: %s\n"), group, lu_strerror(error));
+			lu_audit_logger(AUDIT_GRP_MGMT,
+					"changing-group-passwd", group,
+					AUDIT_NO_ID, 0);
 			return 4;
 		}
+		lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-passwd", group,
+				AUDIT_NO_ID, 1);
 	}
 
 	if (cryptedUserPassword) {
@@ -147,8 +153,14 @@ main(int argc, const char **argv)
 				     &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s: %s\n"), group, lu_strerror(error));
+			lu_audit_logger(AUDIT_GRP_MGMT,
+					"changing-group-passwd", group,
+					AUDIT_NO_ID, 0);
 			return 5;
 		}
+		lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-passwd", group,
+				AUDIT_NO_ID, 1);
 	}
 
 	if (lock) {
@@ -156,8 +168,14 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Group %s could not be locked: %s\n"), group,
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_GRP_MGMT,
+					"changing-group-lock", group,
+					AUDIT_NO_ID, 0);
 			return 6;
 		}
+		lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-lock", group,
+				AUDIT_NO_ID, 1);
 	}
 
 	if (unlock) {
@@ -165,8 +183,14 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Group %s could not be unlocked: %s\n"),
 				group, lu_strerror(error));
+			lu_audit_logger(AUDIT_GRP_MGMT,
+					"changing-group-lock", group,
+					AUDIT_NO_ID, 0);
 			return 7;
 		}
+		lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-lock", group,
+				AUDIT_NO_ID, 1);
 	}
 
 	change = gid || addAdmins || remAdmins || addMembers || remMembers;
@@ -241,8 +265,14 @@ main(int argc, const char **argv)
 	if (change && lu_group_modify(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s could not be modified: %s\n"),
 			group, lu_strerror(error));
+		lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-members", group,
+				AUDIT_NO_ID, 0);
 		return 8;
 	}
+	lu_audit_logger(AUDIT_GRP_MGMT,
+			"changing-group-members", group,
+			AUDIT_NO_ID, 1);
 	if (gidNumber != LU_VALUE_INVALID_ID) {
 		users = lu_users_enumerate_by_group_full(ctx, gid, &error);
 
@@ -256,8 +286,14 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Group %s could not be modified: %s\n"),
 				group, lu_strerror(error));
+			lu_audit_logger(AUDIT_GRP_MGMT,
+				"changing-group-id", group,
+				AUDIT_NO_ID, 0);
 			return 8;
 		}
+		lu_audit_logger(AUDIT_GRP_MGMT,
+			"changing-group-id", group,
+			AUDIT_NO_ID, 1);
 	}
 
 	lu_ent_free(ent);

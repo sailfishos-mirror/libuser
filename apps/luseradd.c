@@ -210,8 +210,12 @@ main(int argc, const char **argv)
 				lu_error_free(&error);
 			}
 			lu_end(ctx);
+			lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
+					AUDIT_NO_ID, 0);
 			return 1;
 		}
+		lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
+				AUDIT_NO_ID, 1);
 	}
 
 	/* Retrieve the group ID. */
@@ -259,9 +263,13 @@ main(int argc, const char **argv)
 	if (lu_user_add(ctx, ent, &error) == FALSE) {
 		fprintf(stderr, _("Account creation failed: %s.\n"),
 			lu_strerror(error));
+		lu_audit_logger(AUDIT_ADD_USER, "add-user", name,
+					AUDIT_NO_ID, 0);
+
 		return 3;
 	}
         lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
+	lu_audit_logger(AUDIT_ADD_USER, "add-user", name, AUDIT_NO_ID, 1);
 
 	/* If we don't have the the don't-create-home flag, create the user's
 	 * home directory. */
@@ -282,8 +290,12 @@ main(int argc, const char **argv)
 					&error) == FALSE) {
 			fprintf(stderr, _("Error creating %s: %s.\n"),
 				homeDirectory, lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_MGMT, "add-home-dir", name,
+				uidNumber, 0);
 			return 7;
 		}
+		lu_audit_logger(AUDIT_USER_MGMT, "add-home-dir", name,
+				uidNumber, 1);
 
 		/* Create a mail spool for the user. */
 		if (lu_mail_spool_create(ctx, ent, &error) != TRUE) {
@@ -311,8 +323,12 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Error setting password for user "
 					  "%s: %s.\n"), name,
 				lu_strerror(error));
+			lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
+					name, uidNumber, 0);
 			return 3;
 		}
+		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
+					name, uidNumber, 1);
 	}
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
