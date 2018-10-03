@@ -137,7 +137,12 @@ libuser_admin_prompt(struct libuser_admin *self, PyObject * args,
 		return NULL;
 	}
 	count = PyList_Size(list);
-	if (count > INT_MAX) {
+	if (count < 0) {
+		PyErr_SetString(PyExc_TypeError,
+				"prompt_list has no size; probably not a list");
+		DEBUG_EXIT;
+		return NULL;
+	} else if (count > INT_MAX) {
 		PyErr_SetString(PyExc_ValueError, "too many prompts");
 		DEBUG_EXIT;
 		return NULL;
