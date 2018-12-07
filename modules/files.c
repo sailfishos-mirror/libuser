@@ -832,6 +832,105 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 	return ret;
 }
 
+static gboolean
+lu_files_mod_is_id_unique(struct lu_module *module, struct lu_ent *ent,
+			  struct lu_error **error)
+{
+	id_t id_change = LU_VALUE_INVALID_ID;
+	struct lu_ent *dup_ent = NULL;
+	gboolean ret = FALSE;
+	gboolean found = FALSE;
+	const char *name_attribute;
+	const char *id_attribute;
+
+	g_assert(module != NULL);
+	g_assert(ent != NULL);
+	g_assert(error != NULL);
+
+	/* Get the array of names for the entity object. */
+	if (ent->type == lu_user) {
+		name_attribute = LU_USERNAME;
+		id_attribute = LU_UIDNUMBER;
+	} else if (ent->type == lu_group) {
+		name_attribute = LU_GROUPNAME;
+		id_attribute = LU_GIDNUMBER;
+	} else {
+		g_assert_not_reached();
+	}
+
+	id_change = lu_ent_get_first_id(ent, id_attribute);
+	if (id_change == LU_VALUE_INVALID_ID) {
+		/* The GID is not being changed, success */
+		return TRUE;
+	}
+
+	/* If the GID is being changed, check if there is another entry
+	 * with the same GID
+	 */
+	dup_ent = lu_ent_new();
+	if (dup_ent == NULL) {
+		return FALSE;
+	}
+
+	/* Get the array of names for the entity object. */
+	if (ent->type == lu_user) {
+		found = lu_files_user_lookup_id(module, id_change, dup_ent,
+						error);
+	} else if (ent->type == lu_group) {
+		found = lu_files_group_lookup_id(module, id_change, dup_ent,
+						error);
+	} else {
+		g_assert_not_reached();
+	}
+
+	if (found == TRUE) {
+		/* If there is, check if its original name is the same as
+		 * the original name of ent.
+		 */
+		const char *dup_name = NULL;
+		const char *ent_cur_name = NULL;
+
+		dup_name = lu_ent_get_first_string_current(dup_ent,
+							   name_attribute);
+		if (dup_name == NULL) {
+			lu_error_new(error, lu_error_generic,
+				     _("duplicate object has no %s attribute"),
+				     name_attribute);
+			ret = FALSE;
+			goto done;
+		}
+
+		ent_cur_name = lu_ent_get_first_string_current(ent,
+							       name_attribute);
+		if (ent_cur_name == NULL) {
+			lu_error_new(error, lu_error_generic,
+				     _("original object has no %s attribute"),
+				     name_attribute);
+			ret = FALSE;
+			goto done;
+		}
+
+		/* Another entry already has the same ID we're attempting to
+		 * set, * this can only work if we are also renaming the group
+		 * to the * duplicate name or if we're changing 'self'
+		 */
+		if (strcmp(dup_name, ent_cur_name) != 0) {
+			lu_error_new(error, lu_error_id_used,
+				     _("ID %lu already in use by %s"),
+				     (unsigned long) id_change, dup_name);
+			ret = FALSE;
+			goto done;
+		}
+	}
+
+	ret = TRUE;
+done:
+	if (dup_ent != NULL) {
+		lu_ent_free(dup_ent);
+	}
+	return ret;
+}
+
 /* Format a single field.
    Return field string for g_free (). */
 static char *
@@ -1071,6 +1170,13 @@ static gboolean
 lu_files_user_add(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
+	gboolean ret = FALSE;
+
+	ret = lu_files_mod_is_id_unique(module, ent, error);
+	if (ret == FALSE) {
+		return FALSE;
+	}
+
 	return generic_add(module, suffix_passwd, format_passwd,
 			   G_N_ELEMENTS(format_passwd), ent, error);
 }
@@ -1112,6 +1218,13 @@ static gboolean
 lu_files_group_add(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
+	gboolean ret = FALSE;
+
+	ret = lu_files_mod_is_id_unique(module, ent, error);
+	if (ret == FALSE) {
+		return FALSE;
+	}
+
 	return generic_add(module, suffix_group, format_group,
 			   G_N_ELEMENTS(format_group), ent, error);
 }
@@ -1262,6 +1375,13 @@ static gboolean
 lu_files_user_mod(struct lu_module *module, struct lu_ent *ent,
 		  struct lu_error **error)
 {
+	gboolean ret = FALSE;
+
+	ret = lu_files_mod_is_id_unique(module, ent, error);
+	if (ret == FALSE) {
+		return FALSE;
+	}
+
 	return generic_mod(module, suffix_passwd, format_passwd,
 			   G_N_ELEMENTS(format_passwd), ent, error);
 }
@@ -1271,6 +1391,13 @@ static gboolean
 lu_files_group_mod(struct lu_module *module, struct lu_ent *ent,
 		   struct lu_error **error)
 {
+	gboolean ret = FALSE;
+
+	ret = lu_files_mod_is_id_unique(module, ent, error);
+	if (ret == FALSE) {
+		return FALSE;
+	}
+
 	return generic_mod(module, suffix_group, format_group,
 			   G_N_ELEMENTS(format_group), ent, error);
 }
