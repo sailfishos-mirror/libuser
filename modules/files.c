@@ -833,6 +833,25 @@ lu_shadow_group_lookup_id(struct lu_module *module, gid_t gid,
 }
 
 static gboolean
+lu_files_permits_duplicate_ids(struct lu_module *module)
+{
+	const char *allow_id_dupes;
+
+	g_assert(module != NULL);
+	g_assert(module->lu_context != NULL);
+
+	allow_id_dupes = lu_cfg_read_single(module->lu_context,
+					    "files/allow_id_duplicates",
+					    "false");
+	if (allow_id_dupes &&
+	    strcasecmp(allow_id_dupes, "true") == 0) {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
 lu_files_mod_is_id_unique(struct lu_module *module, struct lu_ent *ent,
 			  struct lu_error **error)
 {
@@ -846,6 +865,10 @@ lu_files_mod_is_id_unique(struct lu_module *module, struct lu_ent *ent,
 	g_assert(module != NULL);
 	g_assert(ent != NULL);
 	g_assert(error != NULL);
+
+	if (lu_files_permits_duplicate_ids(module)) {
+		return TRUE;
+	}
 
 	/* Get the array of names for the entity object. */
 	if (ent->type == lu_user) {
