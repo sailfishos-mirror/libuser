@@ -138,12 +138,12 @@ main(int argc, const char **argv)
 		    == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s: %s\n"), group, lu_strerror(error));
-			lu_audit_logger(AUDIT_GRP_MGMT,
+			lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 					"changing-group-passwd", group,
 					AUDIT_NO_ID, 0);
 			return 4;
 		}
-		lu_audit_logger(AUDIT_GRP_MGMT,
+		lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 				"changing-group-passwd", group,
 				AUDIT_NO_ID, 1);
 	}
@@ -153,12 +153,12 @@ main(int argc, const char **argv)
 				     &error) == FALSE) {
 			fprintf(stderr, _("Failed to set password for group "
 				"%s: %s\n"), group, lu_strerror(error));
-			lu_audit_logger(AUDIT_GRP_MGMT,
+			lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 					"changing-group-passwd", group,
 					AUDIT_NO_ID, 0);
 			return 5;
 		}
-		lu_audit_logger(AUDIT_GRP_MGMT,
+		lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 				"changing-group-passwd", group,
 				AUDIT_NO_ID, 1);
 	}
