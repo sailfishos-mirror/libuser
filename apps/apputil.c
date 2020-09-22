@@ -26,8 +26,6 @@
 #include <unistd.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-#include <selinux/av_permissions.h>
-#include <selinux/flask.h>
 #include <selinux/context.h>
 #endif
 #include "../lib/error.h"
@@ -57,7 +55,7 @@ check_access(const char *chuser, access_vector_t access)
 
 			retval = security_compute_av(user_context,
 						     user_context,
-						     SECCLASS_PASSWD,
+						     string_to_security_class("passwd"),
  						     access, &avd);
 
 			if (retval == 0 && (avd.allowed & access) == access)
@@ -221,19 +219,25 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 #ifdef WITH_SELINUX
 	if (is_selinux_enabled() > 0) {
 		/* FIXME: PASSWD_CHSH, PASSWD_PASSWD ? */
-		if (getuid() == 0 && check_access(user, PASSWD__CHFN) != 0) {
-			security_context_t user_context;
+		if (getuid() == 0) {
+			security_class_t class;
+			access_vector_t perm;
+			class = string_to_security_class("passwd");
+			perm = string_to_av_perm(class, "chfn");
+			if (check_access(user, perm) != 0) {
+				security_context_t user_context;
 
-			if (getprevcon(&user_context) < 0)
-				user_context = NULL;
-			/* FIXME: "change the finger info?" */
-			fprintf(stderr,
-				_("%s is not authorized to change the finger "
-				  "info of %s\n"), user_context ? user_context
-				: _("Unknown user context"), user);
-			if (user_context != NULL)
-				freecon(user_context);
-			goto err;
+				if (getprevcon(&user_context) < 0)
+					user_context = NULL;
+				/* FIXME: "change the finger info?" */
+				fprintf(stderr,
+					_("%s is not authorized to change the finger "
+					  "info of %s\n"), user_context ? user_context
+					: _("Unknown user context"), user);
+				if (user_context != NULL)
+					freecon(user_context);
+				goto err;
+			}
 		}
 		/* FIXME: is this right for lpasswd? */
 		if (!lu_util_fscreate_from_file("/etc/passwd", NULL)) {
