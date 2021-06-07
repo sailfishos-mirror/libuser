@@ -50,6 +50,14 @@
 #define USE_XCRYPT_GENSALT 0
 #endif
 
+#if ((defined XCRYPT_VERSION_NUM && \
+      XCRYPT_VERSION_NUM >= ((4 << 16) | 3)) && \
+      USE_XCRYPT_GENSALT)
+#define HAVE_YESCRYPT 1
+#else
+#define HAVE_YESCRYPT 0
+#endif
+
 struct lu_lock {
 	int fd;
 	struct flock lock;
@@ -136,6 +144,9 @@ static const struct {
 	{"$2b$", "$", 8, FALSE },
 	{"$5$", "$", 16, TRUE },
 	{"$6$", "$", 16, TRUE },
+#if HAVE_YESCRYPT
+	{"$y$", "$", 24, FALSE },
+#endif
 	{ "", "", 2 },
 };
 
@@ -264,6 +275,9 @@ lu_util_default_salt_specifier(struct lu_context *context)
 		{ "blowfish", "$2b$", FALSE },
 		{ "sha256", "$5$", TRUE },
 		{ "sha512", "$6$", TRUE },
+#if HAVE_YESCRYPT
+		{ "yescrypt", "$y$", FALSE },
+#endif
 	};
 
 	const char *salt_type;
