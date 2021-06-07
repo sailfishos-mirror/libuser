@@ -43,6 +43,13 @@
 #define HASH_ROUNDS_MIN 1000
 #define HASH_ROUNDS_MAX 999999999
 
+#if (defined CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY && \
+     CRYPT_GENSALT_IMPLEMENTS_AUTO_ENTROPY)
+#define USE_XCRYPT_GENSALT 1
+#else
+#define USE_XCRYPT_GENSALT 0
+#endif
+
 struct lu_lock {
 	int fd;
 	struct flock lock;
@@ -66,6 +73,7 @@ lu_strcmp(gconstpointer v1, gconstpointer v2)
 	return strcmp((char *) v1, (char *) v2);
 }
 
+#if !USE_XCRYPT_GENSALT
 /* A list of allowed salt characters, according to SUSv2. */
 #define ACCEPTABLE "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
 		   "abcdefghijklmnopqrstuvwxyz" \
@@ -115,6 +123,7 @@ fill_urandom(char *output, size_t length)
 	close(fd);
 	return TRUE;
 }
+#endif
 
 static const struct {
 	const char initial[5];
@@ -135,6 +144,9 @@ lu_make_crypted(const char *plain, const char *previous)
 {
 	char salt[2048];
 	size_t i, len = 0;
+#if USE_XCRYPT_GENSALT
+	unsigned long rounds = 0;
+#endif
 
 	if (previous == NULL) {
 		previous = LU_DEFAULT_SALT_TYPE;
@@ -151,6 +163,23 @@ lu_make_crypted(const char *plain, const char *previous)
 
 	if (salt_type_info[i].sha_rounds != FALSE
 	    && strncmp(previous + len, "rounds=", strlen("rounds=")) == 0) {
+#if USE_XCRYPT_GENSALT
+		const char *start;
+		char *end;
+
+		start = previous + len + strlen("rounds=");
+		rounds = strtoul (start, &end, 10);
+
+		if (rounds < HASH_ROUNDS_MIN)
+			rounds = HASH_ROUNDS_MIN;
+		else if (rounds > HASH_ROUNDS_MAX)
+			rounds = HASH_ROUNDS_MAX;
+	}
+
+	g_assert(CRYPT_GENSALT_OUTPUT_SIZE <= sizeof(salt));
+
+	crypt_gensalt_rn(previous, rounds, NULL, 0, salt, sizeof(salt));
+#else
 		const char *start, *end;
 
 		start = previous + len + strlen("rounds=");
@@ -168,6 +197,7 @@ lu_make_crypted(const char *plain, const char *previous)
 		return NULL;
 	strcpy(salt + len + salt_type_info[i].salt_length,
 	       salt_type_info[i].separator);
+#endif
 
 	return crypt(plain, salt);
 }
@@ -251,13 +281,18 @@ lu_util_default_salt_specifier(struct lu_context *context)
 
 found:
 	if (salt_types[i].sha_rounds != FALSE) {
-		unsigned long rounds;
+		unsigned long rounds = 0;
 
 		rounds = select_hash_rounds(context);
+#if USE_XCRYPT_GENSALT
+		return g_strdup(crypt_gensalt(salt_types[i].initializer,
+					      rounds, NULL, 0));
+#else
 		if (rounds != 0)
 			return g_strdup_printf("%srounds=%lu$",
 					       salt_types[i].initializer,
 					       rounds);
+#endif
 	}
 	return g_strdup(salt_types[i].initializer);
 }
