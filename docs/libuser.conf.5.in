@@ -69,8 +69,8 @@ The current algorithm may be retained
 when changing a password of an existing user, depending on the application.
 
 Possible values are \fBdes\fR, \fBmd5\fR, \fBblowfish\fR,
-.B sha256
-and \fBsha512\fR, all case-insensitive.
+.B sha256,
+\fBsha512\fR, and \fByescrypt\fR, all case-insensitive.
 Unrecognized values are treated as \fBdes\fR.
 Default value is \fBdes\fR.
 
