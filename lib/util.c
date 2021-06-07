@@ -124,7 +124,7 @@ static const struct {
 } salt_type_info[] = {
 	{"$1$", "$", 8, FALSE },
 	/* FIXME: number of rounds, base64 of 128 bits */
-	{"$2a$", "$", 8, FALSE },
+	{"$2b$", "$", 8, FALSE },
 	{"$5$", "$", 16, TRUE },
 	{"$6$", "$", 16, TRUE },
 	{ "", "", 2 },
@@ -231,7 +231,7 @@ lu_util_default_salt_specifier(struct lu_context *context)
 	} salt_types[] = {
 		{ "des", "", FALSE },
 		{ "md5", "$1$", FALSE },
-		{ "blowfish", "$2a$", FALSE },
+		{ "blowfish", "$2b$", FALSE },
 		{ "sha256", "$5$", TRUE },
 		{ "sha512", "$6$", TRUE },
 	};
