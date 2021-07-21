@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public 
+ * You should have received a copy of the GNU Library General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  */
@@ -32,6 +32,7 @@
 #include <unistd.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
+#include <selinux/label.h>
 #endif
 #define LU_DEFAULT_SALT_TYPE "$1$"
 #define LU_DEFAULT_SALT_LEN  8
@@ -745,7 +746,7 @@ lu_util_update_shadow_last_change(struct lu_ent *ent)
 #ifdef WITH_SELINUX
 /* Store current fscreate context to ctx. */
 gboolean
-lu_util_fscreate_save(security_context_t *ctx, struct lu_error **error)
+lu_util_fscreate_save(char **ctx, struct lu_error **error)
 {
 	*ctx = NULL;
 	if (is_selinux_enabled() > 0 && getfscreatecon(ctx) < 0) {
@@ -759,7 +760,7 @@ lu_util_fscreate_save(security_context_t *ctx, struct lu_error **error)
 
 /* Restore fscreate context from ctx, and free it. */
 void
-lu_util_fscreate_restore(security_context_t ctx)
+lu_util_fscreate_restore(char *ctx)
 {
 	if (is_selinux_enabled() > 0) {
 		(void)setfscreatecon(ctx);
@@ -773,7 +774,7 @@ gboolean
 lu_util_fscreate_from_fd(int fd, const char *path, struct lu_error **error)
 {
 	if (is_selinux_enabled() > 0) {
-		security_context_t ctx;
+		char *ctx;
 
 		if (fgetfilecon(fd, &ctx) < 0) {
 			lu_error_new(error, lu_error_stat,
@@ -799,7 +800,7 @@ gboolean
 lu_util_fscreate_from_file(const char *file, struct lu_error **error)
 {
 	if (is_selinux_enabled() > 0) {
-		security_context_t ctx;
+		char *ctx;
 
 		if (getfilecon(file, &ctx) < 0) {
 			lu_error_new(error, lu_error_stat,
@@ -825,7 +826,7 @@ gboolean
 lu_util_fscreate_from_lfile(const char *file, struct lu_error **error)
 {
 	if (is_selinux_enabled() > 0) {
-		security_context_t ctx;
+		char *ctx;
 
 		if (lgetfilecon(file, &ctx) < 0) {
 			lu_error_new(error, lu_error_stat,
@@ -852,9 +853,18 @@ lu_util_fscreate_for_path(const char *path, mode_t mode,
 			  struct lu_error **error)
 {
 	if (is_selinux_enabled() > 0) {
-		security_context_t ctx;
+        char *ctx;
+        struct selabel_handle *label_handle = NULL;
 
-		if (matchpathcon(path, mode, &ctx) < 0) {
+        label_handle = selabel_open(SELABEL_CTX_FILE, NULL, 0);
+        if (!label_handle) {
+            lu_error_new(error, lu_error_open,
+					     _("couldn't obtain selabel file "
+					       "context handle: %s"),
+					     strerror(errno));
+            return FALSE;
+        }
+        if (selabel_lookup(label_handle, &ctx, path, mode) < 0) {
 			if (errno == ENOENT)
 				ctx = NULL;
 			else {
@@ -862,9 +872,11 @@ lu_util_fscreate_for_path(const char *path, mode_t mode,
 					     _("couldn't determine security "
 					       "context for `%s': %s"), path,
 					     strerror(errno));
+                selabel_close(label_handle);
 				return FALSE;
 			}
 		}
+        selabel_close(label_handle);
 		if (setfscreatecon(ctx) < 0) {
 			lu_error_new(error, lu_error_generic,
 				     _("couldn't set default security context "
