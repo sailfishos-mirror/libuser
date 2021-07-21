@@ -255,7 +255,7 @@ libuser_convert_to_value(PyObject *item, GValue *value)
 static int
 libuser_entity_setattro(PyObject *self, PyObject *attr_name, PyObject *value)
 {
-	char *name;
+	const char *name;
 	struct libuser_entity *me;
 	PyObject *list;
 	struct lu_ent *copy;
@@ -616,7 +616,7 @@ static PyObject *
 libuser_entity_get_item(PyObject *self, PyObject *item)
 {
 	struct libuser_entity *me;
-	char *attr;
+	const char *attr;
 
 	DEBUG_ENTRY;
 	me = (struct libuser_entity *)self;
@@ -664,7 +664,7 @@ static int
 libuser_entity_set_item(PyObject *self, PyObject *item, PyObject *args)
 {
 	struct libuser_entity *me;
-	char *attr = NULL;
+	const char *attr = NULL;
 	Py_ssize_t i, size;
 	int ret;
 	GValue value;
@@ -800,7 +800,7 @@ PyTypeObject EntityType = {
 	sizeof(struct libuser_entity), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_entity_destroy, /* tp_dealloc */
-	NULL,			/* tp_print */
+	0,              /* tp_print */
 	NULL,			/* tp_getattr */
 	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */

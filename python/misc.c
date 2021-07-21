@@ -493,7 +493,7 @@ PyTypeObject PromptType = {
 	sizeof(struct libuser_prompt), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_prompt_destroy,	/* tp_dealloc */
-	NULL,			/* tp_print */
+	0,              /* tp_print */
 	NULL,			/* tp_getattr */
 	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */
