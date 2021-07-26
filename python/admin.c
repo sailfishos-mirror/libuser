@@ -1512,7 +1512,7 @@ PyTypeObject AdminType = {
 	sizeof(struct libuser_admin), /* tp_basicsize */
 	0,			/* tp_itemsize */
 	libuser_admin_destroy,	/* tp_dealloc */
-	NULL,			/* tp_print */
+	0,	            /* tp_print */
 	NULL,			/* tp_getattr */
 	NULL,			/* tp_setattr */
 	NULL,			/* tp_compare */

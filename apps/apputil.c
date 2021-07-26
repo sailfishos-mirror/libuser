@@ -38,7 +38,7 @@ static int
 check_access(const char *chuser, access_vector_t access)
 {
 	int status;
-	security_context_t user_context;
+	char * user_context;
 
 	status = -1;
 	if (getprevcon(&user_context) == 0) {
@@ -225,7 +225,7 @@ lu_authenticate_unprivileged(struct lu_context *ctx, const char *user,
 			class = string_to_security_class("passwd");
 			perm = string_to_av_perm(class, "chfn");
 			if (check_access(user, perm) != 0) {
-				security_context_t user_context;
+				char *user_context;
 
 				if (getprevcon(&user_context) < 0)
 					user_context = NULL;

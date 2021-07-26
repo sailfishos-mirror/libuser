@@ -308,10 +308,10 @@ char *lu_util_default_salt_specifier(struct lu_context *context);
 /* Handle SELinux fscreate context.  Note that modules built WITH_SELINUX are
    intentionally not compatible with libuser built !WITH_SELINUX. */
 #ifdef WITH_SELINUX
-typedef security_context_t lu_security_context_t;
-gboolean lu_util_fscreate_save(security_context_t *ctx,
+typedef char * lu_security_context_t;
+gboolean lu_util_fscreate_save(char **ctx,
 				      struct lu_error **error);
-void lu_util_fscreate_restore(security_context_t ctx);
+void lu_util_fscreate_restore(char *ctx);
 gboolean lu_util_fscreate_from_fd(int fd, const char *path,
 				  struct lu_error **error);
 gboolean lu_util_fscreate_from_file(const char *file, struct lu_error **error);
