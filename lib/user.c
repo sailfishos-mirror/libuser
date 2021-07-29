@@ -986,7 +986,10 @@ lu_dispatch(struct lu_context *context,
 	case user_default:
 	case group_default:
 		/* Make sure we have both name and boolean here. */
-		g_return_val_if_fail(sdata != NULL, FALSE);
+		if (sdata == NULL) {
+			free(tmp);
+			return FALSE;
+		}
 		/* Run the checks and preps. */
 		if (run_list(context, context->create_module_names,
 			    logic_and, id,
@@ -1065,7 +1068,10 @@ lu_dispatch(struct lu_context *context,
 	case user_setpass:
 	case group_setpass:
 		/* Make sure we have a valid password. */
-		g_return_val_if_fail(sdata != NULL, FALSE);
+		if (sdata == NULL) {
+			free(tmp);
+			return FALSE;
+		}
 		/* no break: fall through */
 	case user_removepass:
 	case group_removepass:
@@ -1094,7 +1100,10 @@ lu_dispatch(struct lu_context *context,
 	case users_enumerate_by_group:
 	case groups_enumerate_by_user:
 		/* Make sure we have both name and ID here. */
-		g_return_val_if_fail(sdata != NULL, FALSE);
+		if (sdata == NULL) {
+			free(tmp);
+			return FALSE;
+		}
 		if (id == users_enumerate_by_group)
 			ldata = convert_group_name_to_id(context, sdata,
 							 error);
