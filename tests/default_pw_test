@@ -69,7 +69,7 @@ get_file_password() # file under $workdir/files, entry name
 get_ldap_password() # entry filter
 {
     echo "Checking $1 ..." >&2
-    ldapsearch -LLL -h 127.0.0.1 -p "$ldap_port" -x -b 'dc=libuser' "$1" \
+    ldapsearch -LLL -H ldap://127.0.0.1:$ldap_port -x -b 'dc=libuser' "$1" \
 	userPassword | sed -n 's/userPassword:: //p'
 }
 
@@ -103,7 +103,7 @@ for modules in \
 	    tests/wait_for_slapd_start "$workdir"/slapd.pid "$ldap_port"
 	    slapd_pid=$(cat "$workdir"/slapd.pid)
 	    trap 'status=$?; kill $slapd_pid; rm -rf "$workdir"; exit $status' 0
-	    ldapadd -h 127.0.0.1 -p "$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \
+	    ldapadd -H ldap://127.0.0.1:$ldap_port -f "$srcdir/ldap_skel.ldif" -x \
 		-D cn=Manager,dc=libuser -w password
 	    ;;
     esac
