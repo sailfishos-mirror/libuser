@@ -56,7 +56,7 @@ slapd_pid=$(cat "$workdir"/slapd.pid)
 trap 'status=$?; kill $slapd_pid
 	tests/wait_for_slapd_exit "$workdir"/slapd.pid "$ldap_port"
 	rm -rf "$workdir"; exit $status' 0
-ldapadd -h 127.0.0.1 -p "$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \
+ldapadd -H "ldap://127.0.0.1:$ldap_port" -f "$srcdir/ldap_skel.ldif" -x \
     -D cn=Manager,dc=libuser -w password
 
 
