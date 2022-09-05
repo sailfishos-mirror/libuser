@@ -1,116 +1,123 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Red Hat, Inc.
-# This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
+# libuser translation to Georgian.
+# Copyright (C) 2022 Red Hat, Inc.
+# This file is distributed under the same license as the libuser package.
+#
+# Translators: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
+
 msgid ""
 msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: https://fedorahosted.org/libuser/\n"
 "POT-Creation-Date: 2013-03-28 16:33+0100\n"
-"PO-Revision-Date: 2013-04-29 08:37+0000\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Georgian (http://www.transifex.com/projects/p/fedora/language/ka/)\n"
+"PO-Revision-Date: 2022-09-04 11:26+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian (http://www.transifex.com/projects/p/fedora/"
+"language/ka/)\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ka\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: apps/apputil.c:197 apps/apputil.c:201
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr ""
+msgstr "პრივილეგიების მოცილების შეცდომა.\n"
 
 #: apps/apputil.c:210
 #, c-format
 msgid "Internal error.\n"
-msgstr ""
+msgstr "შიდა შეცდომა.\n"
 
 #: apps/apputil.c:231
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr ""
+msgstr "%s-ს %s-ის ანაბეჭდის ინფორმაციის შეცვლა არ შეუძლია\n"
 
 #: apps/apputil.c:233
 msgid "Unknown user context"
-msgstr ""
+msgstr "მომხმარებლის უცნობი კონტექსტი"
 
 #: apps/apputil.c:241
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr ""
+msgstr "/etc/passwd-სთვის ნაგულისხმები კონტექსტის დაყენების შეცდომა\n"
 
 #: apps/apputil.c:250
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr ""
+msgstr "PAM-ის ინიციალიზაციის შეცდომა.\n"
 
 #: apps/apputil.c:260 apps/apputil.c:287
 #, c-format
 msgid "Authentication failed for %s.\n"
-msgstr ""
+msgstr "ავთენტიკაციის შეცდომა: %s.\n"
 
 #: apps/apputil.c:268
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr ""
+msgstr "PAM-ის შიდა შეცდომა '%s'.\n"
 
 #: apps/apputil.c:273
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr ""
+msgstr "უცნობი მომხმარებელი ავთენტიფიცირებულია.\n"
 
 #: apps/apputil.c:277
 #, c-format
 msgid "User mismatch.\n"
-msgstr ""
+msgstr "მომხმარებელი არ ემთხვევა\n"
 
 #: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
 #: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
 #: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
 msgid "prompt for all information"
-msgstr ""
+msgstr "ყველა ინფორმაციის მოთხოვნა"
 
 #: apps/lchage.c:86
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "მომხმარებლის ასაკის პარამეტრების სიის ჩვენება"
 
 #: apps/lchage.c:88
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "დღეების მინიმალური რაოდენობა პაროლის ცვლილებებს შორის"
 
 #: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
 #: apps/lchage.c:99 apps/lchage.c:102
 msgid "DAYS"
-msgstr ""
+msgstr "დღე"
 
 #: apps/lchage.c:90
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "დღეების მაქსიმალური რაოდენობა პაროლის ცვლილებებს შორის"
 
 #: apps/lchage.c:92
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "პაროლის ბოლო ცვლილების თარიღი 1/1/70-ის შემდეგ"
 
 #: apps/lchage.c:95
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"პაროლის ვადის ამოწურვის შემდეგ გასული დღეების რაოდენობა, როცა ანგარიშის "
+"არააქტიურად ცხადდება"
 
 #: apps/lchage.c:98
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "პაროლის ვადის გასვლის თარიღი 1/1/70-ის შემდეგ (დღეები)"
 
 #: apps/lchage.c:101
 msgid "days before expiration to begin warning user"
 msgstr ""
+"პაროლის ვადის ამოწურვამდე დარჩენილი დღეების რაოდენობა, როცა მომხმარებელი "
+"გაფრთხილებული იქნება"
 
 #: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
 #: apps/luserdel.c:59 apps/lusermod.c:101
 msgid "[OPTION...] user"
-msgstr ""
+msgstr "[პარამეტრი...] მომხმარებელი"
 
 #: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
 #: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
@@ -118,13 +125,13 @@ msgstr ""
 #: apps/lusermod.c:104
 #, c-format
 msgid "Error parsing arguments: %s.\n"
-msgstr ""
+msgstr "არგუმენტის დამუშავების შეცდომა: %s\n"
 
 #: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
 #: apps/lusermod.c:115
 #, c-format
 msgid "No user name specified.\n"
-msgstr ""
+msgstr "მომხმარებლის სახელი მითითებული არაა.\n"
 
 #: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
 #: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
@@ -133,218 +140,222 @@ msgstr ""
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr ""
+"%s-ის ინიციალიზაციის შეცდომა: %s.\n"
+"\n"
 
 #: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
 #: apps/luserdel.c:89 apps/lusermod.c:171
 #, c-format
 msgid "User %s does not exist.\n"
-msgstr ""
+msgstr "მომხმარებელი %s არ არსებობს.\n"
 
 #: apps/lchage.c:160
 #, c-format
 msgid "Account is locked.\n"
-msgstr ""
+msgstr "ანგარიში დაბლოკილია.\n"
 
 #: apps/lchage.c:162
 #, c-format
 msgid "Account is not locked.\n"
-msgstr ""
+msgstr "ანგარიში დაბლოკილი არაა.\n"
 
 #: apps/lchage.c:166
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr ""
+"მინიმუმ:\t%ld\n"
+"\n"
 
 #: apps/lchage.c:170
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr ""
+msgstr "მაქსიმუმ:\t%ld\n"
 
 #: apps/lchage.c:172
 #, c-format
 msgid "Maximum:\tNone\n"
-msgstr ""
+msgstr "მაქსიმუმ: არაფერი\n"
 
 #: apps/lchage.c:175
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr ""
+msgstr "გაფრთხილება:\t%ld\n"
 
 #: apps/lchage.c:180
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr ""
+msgstr "არააქტიური:\t%ld\n"
 
 #: apps/lchage.c:182
 #, c-format
 msgid "Inactive:\tNever\n"
-msgstr ""
+msgstr "არააქტიური: არასდროს\n"
 
 #: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
 msgid "Must change password on next login"
-msgstr ""
+msgstr "პაროლი შემდეგ შესვლაზე უნდა შეცვალოს"
 
 #: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
 msgid "Never"
-msgstr ""
+msgstr "არასდროს"
 
 #: apps/lchage.c:191
 #, c-format
 msgid "Last Change:\t%s\n"
-msgstr ""
+msgstr "ბოლო ცვლილება:\t%s\n"
 
 #: apps/lchage.c:201
 #, c-format
 msgid "Password Expires:\t%s\n"
-msgstr ""
+msgstr "პაროლი იწურება:\t%s\n"
 
 #: apps/lchage.c:213
 #, c-format
 msgid "Password Inactive:\t%s\n"
-msgstr ""
+msgstr "პაროლი არააქტიურია:\t%s\n"
 
 #: apps/lchage.c:219
 #, c-format
 msgid "Account Expires:\t%s\n"
-msgstr ""
+msgstr "ანგარიში იწურება:\t%s\n"
 
 #: apps/lchage.c:240
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
-msgstr ""
+msgstr "%s-სთვის ანგარიშის ინფორმაციის ცვლილების შეცდომა: %s\n"
 
 #: apps/lchfn.c:67 apps/lchsh.c:55
 msgid "[OPTION...] [user]"
-msgstr ""
+msgstr "[პარამეტრი...] მომხმარებელი"
 
 #: apps/lchfn.c:86 apps/lchsh.c:74 apps/lid.c:164
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
-msgstr ""
+msgstr "მომხმარებლის სახელი UID-სთვის %d მითითებული არაა.\n"
 
 #: apps/lchfn.c:96
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr ""
+msgstr "ანაბეჭდის ინფორმაციის ცვლილება %s-სთვის.\n"
 
 #: apps/lchfn.c:136
 msgid "Full Name"
-msgstr ""
+msgstr "სრული სახელი"
 
 #: apps/lchfn.c:146
 msgid "Surname"
-msgstr ""
+msgstr "გვარი"
 
 #: apps/lchfn.c:157
 msgid "Given Name"
-msgstr ""
+msgstr "სახელი"
 
 #: apps/lchfn.c:167
 msgid "Office"
-msgstr ""
+msgstr "ოფისი"
 
 #: apps/lchfn.c:176
 msgid "Office Phone"
-msgstr ""
+msgstr "ოფისის ტელეფონი"
 
 #: apps/lchfn.c:185
 msgid "Home Phone"
-msgstr ""
+msgstr "სახლის ტელეფონი"
 
 #: apps/lchfn.c:195
 msgid "E-Mail Address"
-msgstr ""
+msgstr "ელფოსტის მისამართი"
 
 #: apps/lchfn.c:208
 #, c-format
 msgid "Finger information not changed:  input error.\n"
-msgstr ""
+msgstr "თითის ინფორმაცია არ შეცვლილა: შეყვანის შეცდომა.\n"
 
 #: apps/lchfn.c:270
 msgid "Finger information changed.\n"
-msgstr ""
+msgstr "თითის ინფორმაცია შეიცვალა.\n"
 
 #: apps/lchfn.c:273
 #, c-format
 msgid "Finger information not changed: %s.\n"
-msgstr ""
+msgstr "თითის ინფორმაცია არ შეცვლილა: %s.\n"
 
 #: apps/lchsh.c:84
 #, c-format
 msgid "Changing shell for %s.\n"
-msgstr ""
+msgstr "%s-ის გარსის შეცვლა.\n"
 
 #: apps/lchsh.c:114
 msgid "New Shell"
-msgstr ""
+msgstr "ახალი გარსი"
 
 #: apps/lchsh.c:121 apps/lchsh.c:136
 #, c-format
 msgid "Shell not changed: %s\n"
-msgstr ""
+msgstr "გარსი არ შეცვლილა: %s\n"
 
 #: apps/lchsh.c:133
 msgid "Shell changed.\n"
-msgstr ""
+msgstr "გარსი შეიცვალა.\n"
 
 #: apps/lgroupadd.c:49
 msgid "gid for new group"
-msgstr ""
+msgstr "ახალი ჯგუფის GID"
 
 #: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
 #: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
 msgid "NUM"
-msgstr ""
+msgstr "რიცხვი"
 
 #: apps/lgroupadd.c:51
 msgid "create a system group"
-msgstr ""
+msgstr "სისტემური ჯგუფის შექმნა"
 
 #: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
 msgid "[OPTION...] group"
-msgstr ""
+msgstr "[პარამეტრი...] ჯგუფი"
 
 #: apps/lgroupadd.c:74 apps/lgroupdel.c:65 apps/lgroupmod.c:93
 #, c-format
 msgid "No group name specified.\n"
-msgstr ""
+msgstr "ჯგუფის სახელი მითითებული არაა.\n"
 
 #: apps/lgroupadd.c:87 apps/lgroupmod.c:105 apps/lnewusers.c:172
 #: apps/luseradd.c:164 apps/lusermod.c:127
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr ""
+msgstr "ჯგუფის არასწორი ID: %s\n"
 
 #: apps/lgroupadd.c:119
 #, c-format
 msgid "Group creation failed: %s\n"
-msgstr ""
+msgstr "ჯგუფის შექმნის შეცდომა: %s\n"
 
 #: apps/lgroupdel.c:85 apps/lgroupmod.c:132 apps/lpasswd.c:153
 #, c-format
 msgid "Group %s does not exist.\n"
-msgstr ""
+msgstr "ჯგუფი \"%s\" არ არსებობს.\n"
 
 #: apps/lgroupdel.c:91
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
-msgstr ""
+msgstr "ჯგუფის (%s) წაშლა შეუძლებელია: %s\n"
 
 #: apps/lgroupmod.c:56
 msgid "set GID for group"
-msgstr ""
+msgstr "ჯგუფის GID-ის დაყენება"
 
 #: apps/lgroupmod.c:58
 msgid "change group to have given name"
-msgstr ""
+msgstr "ჯგუფისთვის მითითებული სახელის დარქმევა"
 
 #: apps/lgroupmod.c:58
 msgid "NAME"
-msgstr ""
+msgstr "სახელი"
 
 #: apps/lgroupmod.c:60 apps/luseradd.c:75
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "ჯგუფისთვის გამოყენებული მარტივი ტექსტის სახით მითითებული პაროლი"
 
 #: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
 #: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
@@ -356,731 +367,735 @@ msgstr ""
 #: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
 #: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
 msgid "STRING"
-msgstr ""
+msgstr "სტრიქონი"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "ჯგუფისთვის გამოყენებული დაჰეშილი პაროლი"
 
 #: apps/lgroupmod.c:64
 msgid "list of administrators to add"
-msgstr ""
+msgstr "დასამატებელი ადმინისტრატორების სია"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "წასაშლელი ადმინისტრატორების სია"
 
 #: apps/lgroupmod.c:68
 msgid "list of group members to add"
-msgstr ""
+msgstr "ჯგუფის დასამატებელი წევრების სია"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to remove"
-msgstr ""
+msgstr "ჯგუფის წასაშლელი წევრების სია"
 
 #: apps/lgroupmod.c:71
 msgid "lock group"
-msgstr ""
+msgstr "ჯგუფის დაბლოკვა"
 
 #: apps/lgroupmod.c:72
 msgid "unlock group"
-msgstr ""
+msgstr "ჯგუფის განბლოკვა"
 
 #: apps/lgroupmod.c:125 apps/lusermod.c:164
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr ""
+msgstr "მითითებულია ორივე, -L და -U.\n"
 
 #: apps/lgroupmod.c:139 apps/lgroupmod.c:148
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr ""
+msgstr "პაროლის დაყენების შეცდომა ჯგუფისთვის %s: %s\n"
 
 #: apps/lgroupmod.c:157
 #, c-format
 msgid "Group %s could not be locked: %s\n"
-msgstr ""
+msgstr "ჯგუფის (%s) დაბლოკვის შეცდომა: %s\n"
 
 #: apps/lgroupmod.c:166
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
-msgstr ""
+msgstr "ჯგუფის (%s) განბლოკვის შეცდომა: %s\n"
 
 #: apps/lgroupmod.c:242 apps/lgroupmod.c:257
 #, c-format
 msgid "Group %s could not be modified: %s\n"
-msgstr ""
+msgstr "ჯგუფის (%s) შეცვლის შეცდომა: %s\n"
 
 #: apps/lid.c:42 apps/lid.c:74 apps/lid.c:188
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr ""
+msgstr "%s-ის ძებნის შეცდომა: %s\n"
 
 #: apps/lid.c:117
 msgid ""
-"list members of a named group instead of the group memberships for the named"
-" user"
+"list members of a named group instead of the group memberships for the "
+"named user"
 msgstr ""
+"მითითებული მომხმარებლის ჯგუფის სიის მაგიერ მითითებული ჯგუფის წევრების "
+"ჩამოთვლა"
 
 #: apps/lid.c:120
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "წევრობის ინფორმაციის მხოლოდ სახელით და არა UID/GD-ით"
 
 #: apps/lid.c:146
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr ""
+msgstr "ჯგუფის სახელი მითითებული არაა. გამოიყენება %s.\n"
 
 #: apps/lid.c:150
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr ""
+msgstr "ჯგუფის სახელი მითითებული არაა. GID-ს %d სახელი არ გააჩნია.\n"
 
 #: apps/lid.c:160
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr ""
+msgstr "მომხმარებლის სახელი მითითებული არაა. გამოიყენება %s.\n"
 
 #: apps/lid.c:192
 #, c-format
 msgid "%s does not exist\n"
-msgstr ""
+msgstr "%s არ არსებობს\n"
 
 #: apps/lnewusers.c:47
 msgid "file with user information records"
-msgstr ""
+msgstr "ფაილი მომხმარებლის ინფორმაციის ჩანაწერებით"
 
 #: apps/lnewusers.c:47
 msgid "PATH"
-msgstr ""
+msgstr "ბილიკი"
 
 #: apps/lnewusers.c:49
 msgid "don't create home directories"
-msgstr ""
+msgstr "საწყისი საქაღალდეები არ შეიქმნება"
 
 #: apps/lnewusers.c:51
 msgid "don't create mail spools"
-msgstr ""
+msgstr "საფოსტო ყუთები არ შეიქმნება"
 
 #: apps/lnewusers.c:63
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[პარამეტრი...]"
 
 #: apps/lnewusers.c:88
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr ""
+msgstr "%s-ის გახსნის შეცდომა: %s.\n"
 
 #: apps/lnewusers.c:118
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
+"'%s'-სთვის ანგარიშის შექმნის შეცდომა. ხაზი არასწორადაა ფორმატირებული.\n"
 
 #: apps/lnewusers.c:129 apps/luseradd.c:128 apps/lusermod.c:142
 #, c-format
 msgid "Invalid user ID %s\n"
-msgstr ""
+msgstr "მომხმარებლის არასწორი ID \"%s\"\n"
 
 #: apps/lnewusers.c:136
 msgid "Refusing to create account with UID 0.\n"
-msgstr ""
+msgstr "UID 0-ით ანგარიშის შექმნაზე უარის თქმა.\n"
 
 #: apps/lnewusers.c:206
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr ""
+msgstr "შეცდომა %s-სთვის ჯგუფის შექმნისას, GID-ით %jd: %s\n"
 
 #: apps/lnewusers.c:246
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
+"საშიში საწყისი საქაღალდის (%s) %s-სთვის ნაგულისხმებად გამოყენების უარი\n"
 
 #: apps/lnewusers.c:257
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
-msgstr ""
+msgstr "%s-სთვის საწყისი საქაღალდის შექმნის შეცდომა: %s\n"
 
 #: apps/lnewusers.c:270
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "%s-სთვის ფოსტის შექმნის შეცდომა: %s\n"
 
 #: apps/lnewusers.c:285
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr ""
+msgstr "%s-სთვის საწყისი პაროლის დაყენება შეუძლებელია: %s\n"
 
 #: apps/lnewusers.c:295
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr ""
+msgstr "%s-სთვის მომხმარებლის ანგარიშის შექმნა შეუძლებელია: %s\n"
 
 #: apps/lpasswd.c:49
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "მომხმარებლის მაგიერ ჯგუფის პაროლის დაყენება"
 
 #: apps/lpasswd.c:51
 msgid "new plain password"
-msgstr ""
+msgstr "ახალი უბრალო პაროლი"
 
 #: apps/lpasswd.c:53
 msgid "new crypted password"
-msgstr ""
+msgstr "ახალი დაშიფრული პაროლი"
 
 #: apps/lpasswd.c:55
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "ახალი უბრალო პაროლის მითითებული დესკრიპტორიდან წაკითხვა"
 
 #: apps/lpasswd.c:58
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "ახალი დაშიფრული პაროლის მითიტებული დესკრიპტორიდან წაკითხვა"
 
 #: apps/lpasswd.c:83
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr ""
+msgstr "%s-ის პაროლის შეცვლა.\n"
 
 #: apps/lpasswd.c:111
 msgid "New password"
-msgstr ""
+msgstr "ახალი პაროლი"
 
 #: apps/lpasswd.c:114
 msgid "New password (confirm)"
-msgstr ""
+msgstr "ახალი პაროლი (დაადასტურეთ)"
 
 #: apps/lpasswd.c:128
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr ""
+msgstr "პაროლი არ ემთხვევა. თავიდან სცადეთ.\n"
 
 #: apps/lpasswd.c:133
 #, c-format
 msgid "Password change canceled.\n"
-msgstr ""
+msgstr "პაროლის ცვლილება გაუქმდა.\n"
 
 #: apps/lpasswd.c:165 apps/lpasswd.c:182
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
-msgstr ""
+msgstr "ფაილის დესკრიპტორიდან (%d) წაკითხვის შეცდომა.\n"
 
 #: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr ""
+msgstr "მომხმარებლის (%s) პაროლის დაყენების შეცდომა: %s.\n"
 
 #: apps/lpasswd.c:212
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr ""
+msgstr "ჯგუფის (%s) პაროლის დაყენების შეცდომა: %s.\n"
 
 #: apps/lpasswd.c:224
 #, c-format
 msgid "Password changed.\n"
-msgstr ""
+msgstr "პაროლი შეიცვალა.\n"
 
 #: apps/luseradd.c:57
 msgid "create a system user"
-msgstr ""
+msgstr "სისტემური მომხმარებლი შეცვლა"
 
 #: apps/luseradd.c:59
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "GECOS ინფორმაცია ახალი მომხმარებლისთვის"
 
 #: apps/luseradd.c:61
 msgid "home directory for new user"
-msgstr ""
+msgstr "მომხმარებლის საწყისი საქაღალდე"
 
 #: apps/luseradd.c:63
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის ფაილების საქაღალდე"
 
 #: apps/luseradd.c:65
 msgid "shell for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის გარსი"
 
 #: apps/luseradd.c:67
 msgid "uid for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის UID"
 
 #: apps/luseradd.c:69
 msgid "group for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის ჯგუფი"
 
 #: apps/luseradd.c:71
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "მომხმარებლის საწყისი საქაღალდე არ შეიქმნება"
 
 #: apps/luseradd.c:73
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "ჯგუფი იგივე სახელით, როგორიც მომხმარებლისაა, არ შეიქმნება"
 
 #: apps/luseradd.c:79
 msgid "common name for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის საერთო სახელი"
 
 #: apps/luseradd.c:81
 msgid "given name for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის ნამდვილი სახელი"
 
 #: apps/luseradd.c:83
 msgid "surname for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის გვარი"
 
 #: apps/luseradd.c:85
 msgid "room number for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის ოთახის ნომერი"
 
 #: apps/luseradd.c:87
 msgid "telephone number for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის ტელეფონის ნომერი"
 
 #: apps/luseradd.c:89
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "ახალი მომხმარებლის სახლის ტელეფონის ნომერი"
 
 #: apps/luseradd.c:189
 #, c-format
 msgid "Group %jd does not exist\n"
-msgstr ""
+msgstr "ჯგუფი არ არსებობს: %jd\n"
 
 #: apps/luseradd.c:207 apps/luseradd.c:220
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr ""
+msgstr "ჯგუფის (%s) შექმნის შეცდომა: %s\n"
 
 #: apps/luseradd.c:260
 #, c-format
 msgid "Account creation failed: %s.\n"
-msgstr ""
+msgstr "ანგარიშის შექმნის შეცდომა: %s\n"
 
 #: apps/luseradd.c:283
 #, c-format
 msgid "Error creating %s: %s.\n"
-msgstr ""
+msgstr "%s-ის შექმნის შეცდომა: %s.\n"
 
 #: apps/luseradd.c:290
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "შეცდომა ელფოსტი შექმნისას: %s\n"
 
 #: apps/luserdel.c:47
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "თუ მომხმარებელს ის გააჩნია, მისი პირადი ჯგუფი არ წაიშლება"
 
 #: apps/luserdel.c:50
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "მომხმარებლის საწყისის საქაღალდის წაშლა"
 
 #: apps/luserdel.c:94
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "მომხმარებლის (%s) წაშლა შეუძლებელია: %s.\n"
 
 #: apps/luserdel.c:107
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr ""
+msgstr "%s-ს GID რიცხვი არ გააჩნია.\n"
 
 #: apps/luserdel.c:113
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr ""
+msgstr "ჯგუფი GID-ით %jd არ არსებობს. არ წაიშლება.\n"
 
 #: apps/luserdel.c:119
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr ""
+msgstr "ჯგუფს GID-ით %jd სახელი არ გააჩნია.\n"
 
 #: apps/luserdel.c:125
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
-msgstr ""
+msgstr "ჯგუფის (%s) წაშლის შეცდომა: %s.\n"
 
 #: apps/luserdel.c:138
 #, c-format
 msgid "%s did not have a home directory.\n"
-msgstr ""
+msgstr "%s-ს საწყისი საქაღალდე არ გააჩნია.\n"
 
 #: apps/luserdel.c:143
 #, c-format
 msgid "Error removing %s: %s.\n"
-msgstr ""
+msgstr "%s-ის წაშლის შეცდომა: %s.\n"
 
 #: apps/luserdel.c:149
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "ფოსტის წაშლის შეცდომა: %s"
 
 #: apps/lusermod.c:58
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS ინფორმაცია"
 
 #: apps/lusermod.c:60
 msgid "home directory"
-msgstr ""
+msgstr "საწყისი საქაღალდე"
 
 #: apps/lusermod.c:62
 msgid "move home directory contents"
-msgstr ""
+msgstr "საწყისი საქაღალდის შემცველობის გადატანა"
 
 #: apps/lusermod.c:64
 msgid "set shell for user"
-msgstr ""
+msgstr "მომხმარებლის გარსის დაყენება"
 
 #: apps/lusermod.c:66
 msgid "set UID for user"
-msgstr ""
+msgstr "მომხმარებლის UID-ის დაყენება"
 
 #: apps/lusermod.c:68
 msgid "set primary GID for user"
-msgstr ""
+msgstr "მოხმარებლის ძირითადი GID-ის დაყენება"
 
 #: apps/lusermod.c:70
 msgid "change login name for user"
-msgstr ""
+msgstr "მომხმარებლის სახელის შეცვლა"
 
 #: apps/lusermod.c:72
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "უბრალო ტექსტური პაროლი მომხმარებლისთვის"
 
 #: apps/lusermod.c:74
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "დაჰეშილი პაროლი მომხმარებლისთვის"
 
 #: apps/lusermod.c:75
 msgid "lock account"
-msgstr ""
+msgstr "ანგარიშის დაბლოკვა"
 
 #: apps/lusermod.c:78
 msgid "unlock account"
-msgstr ""
+msgstr "ანგარიშის განბლოკვა"
 
 #: apps/lusermod.c:80
 msgid "set common name for user"
-msgstr ""
+msgstr "მომხმარებლის საერთო სახელის დაყენება"
 
 #: apps/lusermod.c:82
 msgid "set given name for user"
-msgstr ""
+msgstr "მომხმარებლის სახელის დაყენება"
 
 #: apps/lusermod.c:84
 msgid "set surname for user"
-msgstr ""
+msgstr "მომხმარებლის გვარის დაყენება"
 
 #: apps/lusermod.c:86
 msgid "set room number for user"
-msgstr ""
+msgstr "მომხმარებლის ოთახის ნომრის დაყენება"
 
 #: apps/lusermod.c:88
 msgid "set telephone number for user"
-msgstr ""
+msgstr "მომხმარებლის ტელეფონის ნომრის დაყენება"
 
 #: apps/lusermod.c:90
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "მომხმარებლის სახლის ტელეფონის ნომრის დაყენება"
 
 #: apps/lusermod.c:180 apps/lusermod.c:193
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr ""
+msgstr "მომხმარებლისთვის (%s) პაროლის დაყენების შეცდომა: %s.\n"
 
 #: apps/lusermod.c:203
 #, c-format
 msgid "User %s could not be locked: %s.\n"
-msgstr ""
+msgstr "მომხმარებლის (%s) დაბლოკვის შეცდომა: %s.\n"
 
 #: apps/lusermod.c:211
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
-msgstr ""
+msgstr "მომხმარებლის (%s) განბლოკვის შეცდომა: %s.\n"
 
 #: apps/lusermod.c:232
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr ""
+msgstr "გაფრთხლება: ჯგუფი ID-ით %jd არ არსებობს.\n"
 
 #: apps/lusermod.c:275
 #, c-format
 msgid "User %s could not be modified: %s.\n"
-msgstr ""
+msgstr "მომხმარებელი %s ვერ შეიცვლება: %s.\n"
 
 #: apps/lusermod.c:326
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
-msgstr ""
+msgstr "ჯგუფის (%s) შეცვლის შეცდომა: %s\n"
 
 #: apps/lusermod.c:342
 #, c-format
 msgid "No old home directory for %s.\n"
-msgstr ""
+msgstr "%s-ს ძველი საწყისი საქაღალდე არ გააჩნია.\n"
 
 #: apps/lusermod.c:347
 #, c-format
 msgid "No new home directory for %s.\n"
-msgstr ""
+msgstr "%s-ს ახალი საწყისი საქაღალდე არ გააჩნია.\n"
 
 #: apps/lusermod.c:353
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
+msgstr "%s-ის %s-მდე გადატანის პრობლემა: %s.\n"
 
 #: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr ""
+msgstr "კონფიგურაციის ფაილის გახსნის შეცდომა `%s': %s"
 
 #: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr ""
+msgstr "კონფიგურაციის ფაილის აღმოჩენის შეცდომა `%s': %s"
 
 #: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr ""
+msgstr "კონფიგურაციის ფალი ძალიან დიდია: '%s'"
 
 #: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr ""
+msgstr "კონფიგურაციის ფაილის (%s) წაკითხვის შეცდომა: %s"
 
 #: lib/error.c:62
 msgid "success"
-msgstr ""
+msgstr "წარმატება"
 
 #: lib/error.c:64
 msgid "module disabled by configuration"
-msgstr ""
+msgstr "მოდული გათიშულია კონფიგურაციის მიერ"
 
 #: lib/error.c:66
 msgid "generic error"
-msgstr ""
+msgstr "ზოგადი შეცდომა"
 
 #: lib/error.c:68
 msgid "not enough privileges"
-msgstr ""
+msgstr "საკმარისი პრივილეგიების გარეშე"
 
 #: lib/error.c:70
 msgid "access denied"
-msgstr ""
+msgstr "წვდომა აკრძალულია"
 
 #: lib/error.c:72
 msgid "bad user/group name"
-msgstr ""
+msgstr "მომხმარებლის/ჯგუფის ცუდი სახელი"
 
 #: lib/error.c:74
 msgid "bad user/group id"
-msgstr ""
+msgstr "მომხმარებლის/ჯგუფის ცუდი ID"
 
 #: lib/error.c:76
 msgid "user/group name in use"
-msgstr ""
+msgstr "მომხმარებლის/ჯგუფის სახელი უკვე გამოიყენება"
 
 #: lib/error.c:78
 msgid "user/group id in use"
-msgstr ""
+msgstr "მომხმარებლის/ჯგუფის ID უკვე გამოიყენება"
 
 #: lib/error.c:80
 msgid "error manipulating terminal attributes"
-msgstr ""
+msgstr "ტერმინალის ატრიბუტების მართვის შეცდომა"
 
 #: lib/error.c:82
 msgid "error opening file"
-msgstr ""
+msgstr "შეცდომა ფაილის გახსნისას"
 
 #: lib/error.c:84
 msgid "error locking file"
-msgstr ""
+msgstr "ფაილის დაბლოკვის შეცდომა"
 
 #: lib/error.c:86
 msgid "error statting file"
-msgstr ""
+msgstr "ფაილის აღმოჩენის შეცდომა"
 
 #: lib/error.c:88
 msgid "error reading file"
-msgstr ""
+msgstr "ფაილის წაკითხვის შეცდომა"
 
 #: lib/error.c:90
 msgid "error writing to file"
-msgstr ""
+msgstr "ფაილში ჩაწერის შეცდომა"
 
 #: lib/error.c:92
 msgid "data not found in file"
-msgstr ""
+msgstr "ფაილში მონაცემების აღმოჩენის შეცდომა"
 
 #: lib/error.c:94
 msgid "internal initialization error"
-msgstr ""
+msgstr "შიდა ინიციალიზაციის შეცდომა"
 
 #: lib/error.c:96
 msgid "error loading module"
-msgstr ""
+msgstr "მოდულის ჩატვირთვის შეცდომა"
 
 #: lib/error.c:98
 msgid "error resolving symbol in module"
-msgstr ""
+msgstr "მოდულში სიმბოლოს გადაწყვეტის შეცდომა"
 
 #: lib/error.c:100
 msgid "library/module version mismatch"
-msgstr ""
+msgstr "ბიბლიოთეკის/მოდულის შეუთავსებელი ვერსია"
 
 #: lib/error.c:102
 msgid "unlocking would make the password field empty"
-msgstr ""
+msgstr "განბლოკვა პაროლის ველს ცარიელს დატოვებს"
 
 #: lib/error.c:105
 msgid "invalid attribute value"
-msgstr ""
+msgstr "ატრიბუტის არასწორი მნიშვნელობა"
 
 #: lib/error.c:107
 msgid "invalid module combination"
-msgstr ""
+msgstr "მოდულების არასწორი კომბინაცია"
 
 #: lib/error.c:112
 msgid "unknown error"
-msgstr ""
+msgstr "უცნობი შეცდომა"
 
 #: lib/misc.c:240
 msgid "invalid number"
-msgstr ""
+msgstr "არასწორი რიცხვი"
 
 #: lib/misc.c:254
 msgid "invalid ID"
-msgstr ""
+msgstr "არასწორი ID"
 
 #: lib/modules.c:61
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr ""
+msgstr "%2$s-ში ინიციალიზაციის ფუნქცია %1$s ნაპოვნი არაა"
 
 #: lib/modules.c:79
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr ""
+msgstr "%s-ში მოდულის ვერსია არ ემთხვევა"
 
 #: lib/modules.c:92
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr ""
+msgstr "მოდული '%s' '%s'-ს არ აღწერს"
 
 #: lib/prompt.c:88
 msgid "error reading terminal attributes"
-msgstr ""
+msgstr "ტერმინალის ატრიბუტების წაკითხვის შედომა"
 
 #: lib/prompt.c:95 lib/prompt.c:107
 msgid "error setting terminal attributes"
-msgstr ""
+msgstr "ტერმინალის ატრიბუტების დაყენების შეცდომა"
 
 #: lib/prompt.c:101
 msgid "error reading from terminal"
-msgstr ""
+msgstr "ტერმინალიდან წაკითხვის შეცდომა"
 
 #: lib/user.c:218
 msgid "name is not set"
-msgstr ""
+msgstr "სახელი დაყენებული არაა"
 
 #: lib/user.c:223
 msgid "name is too short"
-msgstr ""
+msgstr "სახელი ძალიან მოკლეა"
 
 #: lib/user.c:228
 #, c-format
 msgid "name is too long (%zu > %d)"
-msgstr ""
+msgstr "სახელი ძალიან გრძელია (%zu > %d)"
 
 #: lib/user.c:235
 msgid "name contains non-ASCII characters"
-msgstr ""
+msgstr "სახელი არა-ASCII სიმბოლოებს შეიცავს"
 
 #: lib/user.c:242
 msgid "name contains control characters"
-msgstr ""
+msgstr "სახელი საკონტროლო სიმბოლოებს შეიცავს"
 
 #: lib/user.c:249
 msgid "name contains whitespace"
-msgstr ""
+msgstr "სახელი ცარიელ სიმბოლოს შეიცავს"
 
 #: lib/user.c:261
 msgid "name starts with a hyphen"
-msgstr ""
+msgstr "სახელი ჰარეთი იწყება"
 
 #: lib/user.c:272
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr ""
+msgstr "სახელი არასწორ სიმბოლოს, '%c' შეიცავს"
 
 #: lib/user.c:308 lib/user.c:360
 #, c-format
 msgid "user %s has no UID"
-msgstr ""
+msgstr "მომხმარებელს %s UID არ გააჩნია"
 
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "მომხმარებელი %s არ არსებობს"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
 msgid "group %s has no GID"
-msgstr ""
+msgstr "ჯგუფს %s GID-ი არ გააჩნია"
 
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "ჯგუფი %s არ არსებობს"
 
 #: lib/user.c:355
 #, c-format
 msgid "user %jd has no name"
-msgstr ""
+msgstr "მომხარებელს %jd სახელი არ გააჩნია"
 
 #: lib/user.c:356
 #, c-format
 msgid "group %jd has no name"
-msgstr ""
+msgstr "ჯგუფს %jd სახელი არ გააჩნია"
 
 #: lib/user.c:364
 msgid "user has neither a name nor an UID"
-msgstr ""
+msgstr "მომხმარებელს არც სახელი აქვს, არც UID-ი"
 
 #: lib/user.c:365
 msgid "group has neither a name nor a GID"
-msgstr ""
+msgstr "ჯგუფის არც სახელი აქვს, არც GID-ი"
 
 #: lib/user.c:1311
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
-msgstr ""
+msgstr "საშიში საწყისი საქაღალდის (%s) ნაგულისხმებად გამოყენების უარი"
 
 #: lib/user.c:2306
 #, c-format
 msgid "Invalid default value of field %s: %s"
-msgstr ""
+msgstr "ველის (%s) არასწორი ნაგულისხმები მნიშვნელობა: %s"
 
 #: lib/util.c:300
 #, c-format
 msgid "error locking file: %s"
-msgstr ""
+msgstr "ფაილის დაბლოკვის შეცდომა: %s"
 
 #: lib/util.c:691
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr ""
+msgstr "ნაგულისხმები უსაფრთხოების კონტექსტის მიღების შეცდომა: %s"
 
 #: lib/util.c:718 lib/util.c:744 lib/util.c:770
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr ""
+msgstr "%s-ის უსაფრთხოების კონტექსტის მიღების შეცდომა: %s"
 
 #: lib/util.c:724 lib/util.c:750 lib/util.c:776 lib/util.c:808
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr ""
+msgstr "უსაფრთხოების კონტექსტის %s-ზე დაყენების შეცდომა: %s"
 
 #: lib/util.c:800
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr ""
+msgstr "%s-ის უსაფრთხოების კონტექსტის განსაზღვრის შეცდომა: %s"
 
 #: modules/files.c:123 modules/files.c:453 modules/files.c:765
 #: modules/files.c:992 modules/files.c:1158 modules/files.c:1379
@@ -1091,343 +1106,344 @@ msgstr ""
 #: modules/files.c:2309 modules/files.c:2324
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr ""
+msgstr "%s-ის გახსნა შეუძლებელია: %s"
 
 #: modules/files.c:135 modules/files.c:153 modules/files.c:231
 #: modules/files.c:777 modules/files.c:1002 modules/files.c:1170
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr ""
+msgstr "'%s'-ის აღმოჩენის შეცდომა: %s"
 
 #: modules/files.c:146
 #, c-format
 msgid "error creating `%s': %s"
-msgstr ""
+msgstr "%s-ის შექმნის შეცდომა: %s"
 
 #: modules/files.c:159
 #, c-format
 msgid "backup file `%s' exists and is not a regular file"
-msgstr ""
+msgstr "მარქაფის ფაილი %s არსებობს და ჩვეულებრივ ფაილს არ წარმოადგენს"
 
 #: modules/files.c:171
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr ""
+msgstr "'%s'-ის მფლობელის შეცვლის შეცდომა: %s"
 
 #: modules/files.c:177
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "%s-ის მოდელის შეცვლის შეცდომა: %s"
 
 #: modules/files.c:193
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr ""
+msgstr "შეცდომა '%s'-ის კითხვისას: %s"
 
 #: modules/files.c:208 modules/files.c:223
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr ""
+msgstr "შეცდომა '%s'-ის ჩაწერისას: %s"
 
 #: modules/files.c:239
 msgid "backup file size mismatch"
-msgstr ""
+msgstr "მარქაფის ფაილის ზომა არ ემთხვევა"
 
 #: modules/files.c:671
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr ""
+msgstr "%s-ის ნიშვნელობა '%s' დაუშვებელია"
 
 #: modules/files.c:788 modules/files.c:1010 modules/files.c:1179
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr ""
+msgstr "%s-დან წაკითხვა შეუძლებელია: %s"
 
 #: modules/files.c:797
 msgid "entry already present in file"
-msgstr ""
+msgstr "ფაილში ჩანაწერი უკვე არსებობს"
 
 #: modules/files.c:804 modules/files.c:814 modules/files.c:825
 #: modules/files.c:1234 modules/files.c:1242 modules/files.c:1250
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr ""
+msgstr "%s-ში ჩაწერის შეცდომა: %s"
 
 #: modules/files.c:969
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr ""
+msgstr "ობიექტს ატრიბუტი (%s) არ გააჩნია"
 
 #: modules/files.c:1030
 msgid "entry with conflicting name already present in file"
-msgstr ""
+msgstr "ფაილში ჩანაწერი იგივე სახელით, უკვე არსებობს"
 
 #: modules/files.c:1698
 msgid "`:' not allowed in encrypted password"
-msgstr ""
+msgstr "დაშიფრულ პაროლში \":\" დაუშვებელია"
 
 #: modules/files.c:1710 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
-msgstr ""
+msgstr "პაროლის დაშიფვრის შეცრომა"
 
 #: modules/files.c:2475 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr ""
+msgstr "'%s' და '%s' მოდულების ერთად გამოყენება შეუძლებელია"
 
 #: modules/files.c:2559 modules/files.c:2637
 msgid "not executing with superuser privileges"
-msgstr ""
+msgstr "საჭიროა ზემომხმარებლის პრივილეგიები"
 
 #: modules/files.c:2650
 msgid "no shadow file present -- disabling"
-msgstr ""
+msgstr "ფაილი shadow არ არსებობს -- გათიშვა"
 
 #: modules/krb5.c:100
 #, c-format
 msgid ""
 "error connecting to the kadm5 server for service `%s' in realm `%s': %s"
 msgstr ""
+"შეცდომა kadm5 სერვერთან მიერთებისას სერვისისთვის '%s' რეალმში '%s': %s"
 
 #: modules/krb5.c:132 modules/krb5.c:198 modules/krb5.c:297 modules/krb5.c:385
 #: modules/krb5.c:437 modules/krb5.c:525 modules/krb5.c:591
 msgid "error initializing kerberos library"
-msgstr ""
+msgstr "შეცდომა kerberos-ის ბიბლიოთეკის ინიციალიზაციისას"
 
 #: modules/krb5.c:139 modules/krb5.c:219 modules/krb5.c:329 modules/krb5.c:337
 #: modules/krb5.c:405 modules/krb5.c:458 modules/krb5.c:546 modules/krb5.c:608
 #, c-format
 msgid "error parsing user name `%s' for kerberos"
-msgstr ""
+msgstr "შეცდომა მომხმარებლის სახელის kerberos-ისთვის დამუშავებისას: %s"
 
 #: modules/krb5.c:209 modules/krb5.c:396 modules/krb5.c:448 modules/krb5.c:536
 #, c-format
 msgid "entity structure has no %s or %s attributes"
-msgstr ""
+msgstr "ობიექტის სტრუქტურას %s ან %s ატრიბუტები არ გააჩნია"
 
 #: modules/krb5.c:307
 #, c-format
 msgid "entity has no %s or %s attributes"
-msgstr ""
+msgstr "ობიექტს %s ან %s ატრიბუტები არ გააჩნია"
 
 #: modules/krb5.c:320
 #, c-format
 msgid "entity was created with no %s or %s attributes"
-msgstr ""
+msgstr "ობიექტი %s ან %s ატრიბუტების გარეშე შეიქმნა"
 
 #: modules/krb5.c:471 modules/krb5.c:559
 #, c-format
 msgid "error reading information for `%s' from kerberos"
-msgstr ""
+msgstr "შეცდომა %s-ისთვის kerberos-დან ინფორმაციის წაკითხვისას"
 
 #: modules/krb5.c:600
 #, c-format
 msgid "entity has no %s attribute"
-msgstr ""
+msgstr "ობიექტს ატრიბუტი (%s) არ გააჩნია"
 
 #: modules/krb5.c:638
 #, c-format
 msgid "error setting password for `%s'"
-msgstr ""
+msgstr "შეცდომა '%s'-სთვის პაროლის დაყენებისას"
 
 #: modules/krb5.c:764
 msgid "Kerberos Realm"
-msgstr ""
+msgstr "Kerberos-ის რეალმი"
 
 #: modules/krb5.c:771
 msgid "Kerberos Admin Principal"
-msgstr ""
+msgstr "Kerberos-ის Admin Principal-ი"
 
 #: modules/krb5.c:793
 msgid "Kerberos Password for Admin Principal"
-msgstr ""
+msgstr "Kerberos-ის პაროლი Admin Principal-ისთვის"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
-msgstr ""
+msgstr "შეცდომა ldap-ის ბიბლიოთეკის ინიციალიზაციისას"
 
 #: modules/ldap.c:210
 #, c-format
 msgid "could not set LDAP protocol to version %d"
-msgstr ""
+msgstr "შეცდომა LDAP-ის პროტოკოლის ვერსიის %d-ზე დაყენებისას"
 
 #: modules/ldap.c:229
 msgid "could not negotiate TLS with LDAP server"
-msgstr ""
+msgstr "\"LDAP TLS\" სესიის დაწყების შეცდომა: %s"
 
 #: modules/ldap.c:424
 msgid "could not bind to LDAP server"
-msgstr ""
+msgstr "შეცდომა LDAP სერვერთან მიბმისას"
 
 #: modules/ldap.c:427
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr ""
+msgstr "შეცდომა LDAP სერვერთან მიბმისას. პირველი ცდა, როგორც '%s': %s"
 
 #: modules/ldap.c:1315
 #, c-format
 msgid "user object had no %s attribute"
-msgstr ""
+msgstr "მომხმარებლის ობიექტს ატრიბუტი %s არ გააჩნია"
 
 #: modules/ldap.c:1324
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr ""
+msgstr "მომხმარებლის ობიექტი %s-ის გარეშე შეიქმნა"
 
 #: modules/ldap.c:1344
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr ""
+msgstr "შეცდომა LDAP -ში ჩანაწერის შექმნისას: %s"
 
 #: modules/ldap.c:1370 modules/ldap.c:1604
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr ""
+msgstr "შეცდომა LDAP -ში ჩანაწერის შეცვლისას: %s"
 
 #: modules/ldap.c:1395
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr ""
+msgstr "შეცდომა LDAP -ში ჩანაწერის სახელის გადარქმევისას: %s"
 
 #: modules/ldap.c:1440
 #, c-format
 msgid "object had no %s attribute"
-msgstr ""
+msgstr "ობიექტს მითითებული ატრიბუტი არ გააჩნია: %s"
 
 #: modules/ldap.c:1456
 #, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr ""
+msgstr "შეცდომა LDAP -ში ჩანაწერის წაშლისას: %s"
 
 #: modules/ldap.c:1506 modules/ldap.c:1521 modules/ldap.c:1635
 #: modules/ldap.c:1730
 #, c-format
 msgid "object has no %s attribute"
-msgstr ""
+msgstr "ობიექტს ატრიბუტი (%s) არ გააჩნია"
 
 #: modules/ldap.c:1533
 msgid "unsupported password encryption scheme"
-msgstr ""
+msgstr "პაროლის დაშიფვრის მხარდაუჭერელი სქემა"
 
 #: modules/ldap.c:1658
 msgid "no such object in LDAP directory"
-msgstr ""
+msgstr "\"LDAP\"-ში ასეთი ობიექტი არ არსებობს"
 
 #: modules/ldap.c:1670
 #, c-format
 msgid "no `%s' attribute found"
-msgstr ""
+msgstr "ატრიბუტი \"%s\" არ არსებობს"
 
 #: modules/ldap.c:1843
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr ""
+msgstr "შეცდომა LDAP-ში %s-ის პაროლის დაყენებისას: %s"
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
-msgstr ""
+msgstr "LDAP სერვერის სახელი"
 
 #: modules/ldap.c:2452
 msgid "LDAP Search Base DN"
-msgstr ""
+msgstr "LDAP-ის ნაგულისხმები საბაზისო DN"
 
 #: modules/ldap.c:2458
 msgid "LDAP Bind DN"
-msgstr ""
+msgstr "LDAP -ის მისამაგრებელი DN"
 
 #: modules/ldap.c:2465
 msgid "LDAP Bind Password"
-msgstr ""
+msgstr "LDAP -ის მისამაგრებელი პაროლი"
 
 #: modules/ldap.c:2471
 msgid "LDAP SASL User"
-msgstr ""
+msgstr "LDAP SASL მომხმარებელი"
 
 #: modules/ldap.c:2478
 msgid "LDAP SASL Authorization User"
-msgstr ""
+msgstr "LDAP SASL ავტორიზაციის მომხმარებელი"
 
 #: modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr ""
+msgstr "Cyrus SASL -ის შეცდომა მომხმარებლის შექმნისას: %s"
 
 #: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr ""
+msgstr "Cyrus SASL -ის შეცდომა მომხმარებლის წაშლისას: %s"
 
 #: modules/sasldb.c:503 modules/sasldb.c:511
 #, c-format
 msgid "error initializing Cyrus SASL: %s"
-msgstr ""
+msgstr "შეცდომა Cyrus SASL-ის ინიციალიზაციისას: %s"
 
 #: python/admin.c:518
 msgid "error creating home directory for user"
-msgstr ""
+msgstr "შეცდომა მომხმარებლის საწყისი საქაღალდის შექმნიას"
 
 #: python/admin.c:567
 msgid "error removing home directory for user"
-msgstr ""
+msgstr "შეცდომა მომხმარებლის საწყისი საქაღალდის წაშლისას"
 
 #: python/admin.c:638
 msgid "error moving home directory for user"
-msgstr ""
+msgstr "შეცდომა მომხმარებლის საწყისი საქაღალდის გადატანისას"
 
 #: samples/lookup.c:63
 #, c-format
 msgid "Error initializing %s: %s\n"
-msgstr ""
+msgstr "შეცდომა %s-ის ინიციალიზაციისას: %s\n"
 
 #: samples/lookup.c:76
 #, c-format
 msgid "Invalid ID %s\n"
-msgstr ""
+msgstr "არასწორი ID: %s\n"
 
 #: samples/lookup.c:88
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr ""
+msgstr "ვეძებ ჯგუფს ID-ით %jd.\n"
 
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr ""
+msgstr "ვეძებ ჯგუფს სახელით %s.\n"
 
 #: samples/lookup.c:99
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr ""
+msgstr "ვეძებ მომხმარებელს ID-ით %jd.\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr ""
+msgstr "ვეძებ მომხმარებელს სახელით %s.\n"
 
 #: samples/lookup.c:117
 msgid "Entry not found.\n"
-msgstr ""
+msgstr "ჩანაწერი ვერ ვიპოვე.\n"
 
 #: samples/prompt.c:48
 msgid "Prompts succeeded.\n"
-msgstr ""
+msgstr "მოთხოვნა წარმატებით დასრულდა.\n"
 
 #: samples/prompt.c:58
 msgid "Prompts failed.\n"
-msgstr ""
+msgstr "მოთხოვნის შეცდომა.\n"
 
 #: samples/testuser.c:76
 msgid "Default user object classes:\n"
-msgstr ""
+msgstr "მომხმარებლის ობიექტის ნაგულისხმები კლასები:\n"
 
 #: samples/testuser.c:82
 msgid "Default user attribute names:\n"
-msgstr ""
+msgstr "მომხმარებლის ობიექტის ნაგულისხმები ატრიბუტები:\n"
 
 #: samples/testuser.c:88
 msgid "Getting default user attributes:\n"
-msgstr ""
+msgstr "მომხმარებლის ნაგულისხმები ატრიბუტების მიღება:\n"
 
 #: samples/testuser.c:95
 msgid "Copying user structure:\n"
-msgstr ""
+msgstr "მომხმარებლის სტრუქტურის კოპირება:\n"
