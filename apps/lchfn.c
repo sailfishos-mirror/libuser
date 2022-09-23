@@ -41,11 +41,12 @@ main(int argc, const char **argv)
 {
 	const char *user, *gecos;
 	const char *name, *office, *officephone, *homephone;
-	struct lu_context *ctx;
+	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent;
+	struct lu_ent *ent = NULL;
 	int interactive = FALSE;
 	int c;
+	int result;
 	struct lu_prompt prompts[7];
 	poptContext popt;
 	struct poptOption options[] = {
@@ -53,7 +54,8 @@ main(int argc, const char **argv)
 		 N_("prompt for all information"), NULL},
 		POPT_AUTOHELP POPT_TABLEEND
 	};
-	char **fields, *p;
+	char **fields = NULL;
+	char *p;
 	size_t fields_len;
 	size_t pcount, i;
 
@@ -70,7 +72,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	user = poptGetArg(popt);
 
@@ -86,11 +89,11 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("No user name specified, no name "
 				"for uid %d.\n"), getuid());
 			poptPrintUsage(popt, stderr, 0);
-			exit(1);
+			result = 1;
+			goto done;
 		}
 	}
 
-	poptFreeContext(popt);
 
 	/* Give the user some idea of what's going on. */
 	g_print(_("Changing finger information for %s.\n"), user);
@@ -102,7 +105,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Authenticate the user to the "chfn" service. */
@@ -112,7 +116,8 @@ main(int argc, const char **argv)
 	ent = lu_ent_new();
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 
 	/* Read the user's GECOS information. */
@@ -206,7 +211,8 @@ main(int argc, const char **argv)
 	if (lu_prompt_console(prompts, pcount, NULL, &error) == FALSE) {
 		fprintf(stderr,
 			_("Finger information not changed:  input error.\n"));
-		exit(1);
+		result = 1;
+		goto done;
 	}
 
 	/* Now iterate over the answers and figure things out. */
@@ -272,14 +278,20 @@ main(int argc, const char **argv)
 	} else {
 		fprintf(stderr, _("Finger information not changed: %s.\n"),
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
+	result = 0;
+
+ done:
 	g_strfreev(fields);
 
-	lu_ent_free(ent);
+	if (ent) lu_ent_free(ent);
 
-	lu_end(ctx);
+	if (ctx) lu_end(ctx);
 
-	return 0;
+	poptFreeContext(popt);
+
+	return result;
 }

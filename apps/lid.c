@@ -103,12 +103,13 @@ int
 main(int argc, const char **argv)
 {
 	const char *name;
-	struct lu_context *ctx;
+	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent;
+	struct lu_ent *ent = NULL;
 	int interactive = FALSE;
 	int groupflag = FALSE, nameonly = FALSE;
 	int c;
+	int result;
 	poptContext popt;
 	struct poptOption options[] = {
 		{"interactive", 'i', POPT_ARG_NONE, &interactive, 0,
@@ -133,7 +134,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	name = poptGetArg(popt);
 
@@ -150,7 +152,8 @@ main(int argc, const char **argv)
 				fprintf(stderr, _("No group name specified, "
 					"no name for gid %d.\n"), getgid());
 				poptPrintUsage(popt, stderr, 0);
-				exit(1);
+				result = 1;
+				goto done;
 			}
 		} else {
 			struct passwd *pwd;
@@ -165,12 +168,11 @@ main(int argc, const char **argv)
 					"no name for uid %d.\n"),
 					getuid());
 				poptPrintUsage(popt, stderr, 0);
-				exit(1);
+				result = 1;
+				goto done;
 			}
 		}
 	}
-
-	poptFreeContext(popt);
 
 	ctx = lu_start(name, groupflag ? lu_user : lu_group, NULL, NULL,
 		       interactive ? lu_prompt_console :
@@ -178,7 +180,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	ent = lu_ent_new();
@@ -190,9 +193,9 @@ main(int argc, const char **argv)
 			lu_error_free(&error);
 		} else
 			fprintf(stderr, _("%s does not exist\n"), name);
-		return 1;
+		result = 1;
+		goto done;
 	}
-	lu_ent_free(ent);
 
 	if (nameonly)
 		do_nameonly(ctx, name,
@@ -207,7 +210,14 @@ main(int argc, const char **argv)
 				LU_GROUPNAME, LU_GIDNUMBER, "gid");
 	}
 
-	lu_end(ctx);
+	result = 0;
 
-	return 0;
+ done:
+	if (ent) lu_ent_free(ent);
+
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

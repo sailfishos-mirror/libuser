@@ -30,12 +30,13 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	const char *group;
 	int interactive = FALSE;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -57,7 +58,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	group = poptGetArg(popt);
 
@@ -65,10 +67,9 @@ main(int argc, const char **argv)
 	if (group == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
-
-	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -77,14 +78,16 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Look up the group structure. */
 	ent = lu_ent_new();
 	if (lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	/* Delete the group. */
@@ -93,17 +96,22 @@ main(int argc, const char **argv)
 			group, lu_strerror(error));
 		lu_audit_logger(AUDIT_DEL_GROUP, "delete-group", group,
 				AUDIT_NO_ID, 0);
-		return 3;
+		result = 3;
+		goto done;
 	}
 
 	lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 
-	lu_ent_free(ent);
-
-	lu_end(ctx);
-
 	lu_audit_logger(AUDIT_DEL_GROUP, "delete-group", group,
 			AUDIT_NO_ID, 1);
+	result = 0;
 
-	return 0;
+ done:
+	if (ent) lu_ent_free(ent);
+
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

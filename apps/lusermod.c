@@ -41,14 +41,15 @@ main(int argc, const char **argv)
 	char *old_uid, *oldHomeDirectory;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	GPtrArray *groups = NULL;
 	GValue *value;
 	int change, move_home = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -104,7 +105,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 
 	/* We need to have been passed a user name on the command-line.  We
@@ -114,7 +116,8 @@ main(int argc, const char **argv)
 	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
 	if (gid_number_str != NULL) {
 		intmax_t val;
@@ -127,7 +130,8 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Invalid group ID %s\n"),
 				gid_number_str);
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		gidNumber = val;
 	}
@@ -142,12 +146,11 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Invalid user ID %s\n"),
 				uid_number_str);
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		uidNumber = val;
 	}
-
-	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -156,20 +159,23 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Sanity-check arguments. */
 	if (lock && unlock) {
 		fprintf(stderr, _("Both -L and -U specified.\n"));
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	/* Look up the user's record. */
 	ent = lu_ent_new();
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
-		return 3;
+		result = 3;
+		goto done;
 	}
 
 	/* If the user's password needs to be changed, try to change it. */
@@ -182,7 +188,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
 					"updating-password", user,
 					uidNumber, 0);
-			return 5;
+			result = 5;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
 				user, uidNumber, 0);
@@ -200,7 +207,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
 					"updating-password", user,
 					uidNumber, 0);
-			return 6;
+			result = 6;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
 				user, uidNumber, 0);
@@ -215,7 +223,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
 					"locking-account", user,
 					uidNumber, 0);
-			return 7;
+			result = 7;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "locking-account",
 				user, uidNumber, 0);
@@ -228,7 +237,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_CHAUTHTOK,
 					"unlocking-account", user,
 					uidNumber, 0);
-			return 8;
+			result = 8;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "unlocking-account",
 				user, uidNumber, 0);
@@ -297,7 +307,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_MGMT,
 					"modify-account", user,
 					uidNumber, 0);
-		return 9;
+		result = 9;
+		goto done;
 	}
 	lu_audit_logger(AUDIT_USER_MGMT, "modify-account",
 			user, uidNumber, 1);
@@ -373,12 +384,14 @@ main(int argc, const char **argv)
 		if (oldHomeDirectory == NULL) {
 			fprintf(stderr, _("No old home directory for %s.\n"),
 				user);
-			return 10;
+			result = 10;
+			goto done;
 		}
 		if (homeDirectory == NULL) {
 			fprintf(stderr, _("No new home directory for %s.\n"),
 				user);
-			return 11;
+			result = 11;
+			goto done;
 		}
 		if (lu_homedir_move(oldHomeDirectory, homeDirectory,
 				    &error) == FALSE) {
@@ -387,16 +400,22 @@ main(int argc, const char **argv)
 				lu_strerror(error));
 			lu_audit_logger(AUDIT_USER_MGMT, "moving-home-dir",
 					user, uidNumber, 0);
-			return 12;
+			result = 12;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_MGMT, "moving-home-dir",
 				user, uidNumber, 1);
 	}
 	g_free(oldHomeDirectory);
 
-	lu_ent_free(ent);
+	result = 0;
 
-	lu_end(ctx);
+ done:
+	if (ent) lu_ent_free(ent);
 
-	return 0;
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }
