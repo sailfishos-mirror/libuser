@@ -71,13 +71,14 @@ main(int argc, const char **argv)
 	long shadowMin = INVALID_LONG, shadowMax = INVALID_LONG,
 	     shadowLastChange = INVALID_LONG, shadowInactive = INVALID_LONG,
 	     shadowExpire = INVALID_LONG, shadowWarning = INVALID_LONG;
-	const char *user;
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	const char *user = NULL;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	int interactive = FALSE;
 	int list_only = FALSE;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -118,7 +119,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	user = poptGetArg(popt);
 
@@ -126,10 +128,9 @@ main(int argc, const char **argv)
 	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
-
-	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(user, lu_user, NULL, NULL,
@@ -138,7 +139,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	ent = lu_ent_new();
@@ -146,7 +148,8 @@ main(int argc, const char **argv)
 	/* Look up information about the user. */
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	if (list_only) {
@@ -242,7 +245,8 @@ main(int argc, const char **argv)
 				  "%s\n"), user, lu_strerror(error));
 			lu_audit_logger(AUDIT_USER_MGMT, "change-age", user,
 				AUDIT_NO_ID, 0);
-			return 3;
+			result = 3;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_MGMT, "change-age", user,
 				AUDIT_NO_ID, 1);
@@ -250,9 +254,14 @@ main(int argc, const char **argv)
 		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	}
 
-	lu_ent_free(ent);
+	result = 0;
 
-	lu_end(ctx);
+ done:
+	if (ent) lu_ent_free(ent);
 
-	return 0;
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

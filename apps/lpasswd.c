@@ -32,12 +32,13 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	char *password = NULL, *cryptedPassword = NULL;
 	const char *user;
 	int c;
+	int result;
 	int plain_fd = -1, crypted_fd = -1;
 	int interactive = 0, groupflag = 0;
 	poptContext popt;
@@ -71,7 +72,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	user = poptGetArg(popt);
 
@@ -84,11 +86,10 @@ main(int argc, const char **argv)
 		} else {
 			fprintf(stderr, _("No user name specified.\n"));
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 	}
-
-	poptFreeContext(popt);
 
 	ctx = lu_start(user, groupflag ? lu_group : lu_user, NULL, NULL,
 		       interactive ? lu_prompt_console :
@@ -96,7 +97,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	lu_authenticate_unprivileged(ctx, user, "passwd");
@@ -132,7 +134,8 @@ main(int argc, const char **argv)
 				} else {
 					fprintf(stderr, _("Password change "
 						"canceled.\n"));
-					return 1;
+					result = 1;
+					goto done;
 				}
 			}
 			if (error) {
@@ -146,12 +149,14 @@ main(int argc, const char **argv)
 	if (!groupflag) {
 		if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 			fprintf(stderr, _("User %s does not exist.\n"), user);
-			return 2;
+			result = 2;
+			goto done;
 		}
 	} else {
 		if (lu_group_lookup_name(ctx, user, ent, &error) == FALSE) {
 			fprintf(stderr, _("Group %s does not exist.\n"), user);
-			return 2;
+			result = 2;
+			goto done;
 		}
 	}
 
@@ -164,7 +169,8 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Error reading from file descriptor %d.\n"),
 				plain_fd);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		while ((i > 0) &&
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
@@ -181,7 +187,8 @@ main(int argc, const char **argv)
 			fprintf(stderr,
 				_("Error reading from file descriptor %d.\n"),
 				crypted_fd);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		while ((i > 0) &&
 		       ((buf[i - 1] == '\r') || (buf[i - 1] == '\n')))
@@ -203,7 +210,8 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Error setting password for user "
 					  "%s: %s.\n"), user,
 				lu_strerror(error));
-			return 3;
+			result = 3;
+			goto done;
 		}
 		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	} else {
@@ -212,16 +220,21 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Error setting password for group "
 					  "%s: %s.\n"), user,
 				lu_strerror(error));
-			return 3;
+			result = 3;
+			goto done;
 		}
 		lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 	}
 
-	lu_ent_free(ent);
-
-	lu_end(ctx);
-
 	fprintf(stderr, _("Password changed.\n"));
+	result = 0;
 
-	return 0;
+ done:
+	if (ent) lu_ent_free(ent);
+
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

@@ -31,11 +31,13 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx;
+	struct lu_context *ctx = NULL;
 	struct lu_error *error = NULL;
-	struct lu_ent *ent, *groupEnt;
+	struct lu_ent *ent = NULL;
+	struct lu_ent *groupEnt = NULL;
 	int interactive = FALSE, nocreatehome = FALSE, nocreatemail = FALSE;
 	int c;
+	int result;
 	char *file = NULL;
 	FILE *fp = stdin;
 	char buf[LINE_MAX];
@@ -66,10 +68,9 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
-
-	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, lu_user, NULL, NULL,
@@ -78,7 +79,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Open the file we're going to look at. */
@@ -87,7 +89,8 @@ main(int argc, const char **argv)
 		if (fp == NULL) {
 			fprintf(stderr, _("Error opening `%s': %s.\n"),
 				file, strerror(errno));
-			return 2;
+			result = 2;
+			goto done;
 		}
 	} else {
 		fp = stdin;
@@ -305,10 +308,15 @@ main(int argc, const char **argv)
 		lu_ent_clear_all(groupEnt);
 	}
 
-	lu_ent_free(groupEnt);
-	lu_ent_free(ent);
+	result = 0;
 
-	lu_end(ctx);
+ done:
+	if (groupEnt) lu_ent_free(groupEnt);
+	if (ent) lu_ent_free(ent);
 
-	return 0;
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

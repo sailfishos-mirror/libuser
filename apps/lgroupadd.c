@@ -34,12 +34,13 @@ main(int argc, const char **argv)
 {
 	const char *name, *gid_number_str = NULL;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	int interactive = FALSE;
 	int system_account = FALSE;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -65,7 +66,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	name = poptGetArg(popt);
 
@@ -73,7 +75,8 @@ main(int argc, const char **argv)
 	if (name == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	if (gid_number_str != NULL) {
@@ -87,12 +90,11 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Invalid group ID %s\n"),
 				gid_number_str);
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		gidNumber = val;
 	}
-
-	poptFreeContext(popt);
 
 	/* Start up the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -101,7 +103,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Create a group entity object holding sensible defaults for a
@@ -120,17 +123,22 @@ main(int argc, const char **argv)
 			lu_strerror(error));
 		lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
 				AUDIT_NO_ID, 0);
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 
-	lu_ent_free(ent);
-
-	lu_end(ctx);
-
 	lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
 				AUDIT_NO_ID, 1);
+	result = 0;
 
-	return 0;
+ done:
+	if (ent) lu_ent_free(ent);
+
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

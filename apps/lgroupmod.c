@@ -39,14 +39,16 @@ main(int argc, const char **argv)
 	char **admins, **members;
 	gid_t gidNumber = LU_VALUE_INVALID_ID;
 	gid_t oldGidNumber = LU_VALUE_INVALID_ID;
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
+	struct lu_ent *user_ent;
 	struct lu_error *error = NULL;
 	GPtrArray *users = NULL;
 	GValue val;
 	int change = FALSE, lock = FALSE, unlock = FALSE;
 	int interactive = FALSE;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -85,14 +87,16 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	group = poptGetArg(popt);
 
 	if (group == NULL) {
 		fprintf(stderr, _("No group name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
 	if (gid_number_str != NULL) {
 		intmax_t val;
@@ -105,12 +109,11 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Invalid group ID %s\n"),
 				gid_number_str);
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		gidNumber = val;
 	}
-
-	poptFreeContext(popt);
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
@@ -118,19 +121,22 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	if (lock && unlock) {
 		fprintf(stderr, _("Both -L and -U specified.\n"));
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	ent = lu_ent_new();
 
 	if (lu_group_lookup_name(ctx, group, ent, &error) == FALSE) {
 		fprintf(stderr, _("Group %s does not exist.\n"), group);
-		return 3;
+		result = 3;
+		goto done;
 	}
 
 	if (userPassword) {
@@ -141,7 +147,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 					"changing-group-passwd", group,
 					AUDIT_NO_ID, 0);
-			return 4;
+			result = 4;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 				"changing-group-passwd", group,
@@ -156,7 +163,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 					"changing-group-passwd", group,
 					AUDIT_NO_ID, 0);
-			return 5;
+			result = 5;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_GRP_CHAUTHTOK,
 				"changing-group-passwd", group,
@@ -171,7 +179,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_GRP_MGMT,
 					"changing-group-lock", group,
 					AUDIT_NO_ID, 0);
-			return 6;
+			result = 6;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_GRP_MGMT,
 				"changing-group-lock", group,
@@ -186,7 +195,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_GRP_MGMT,
 					"changing-group-lock", group,
 					AUDIT_NO_ID, 0);
-			return 7;
+			result = 7;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_GRP_MGMT,
 				"changing-group-lock", group,
@@ -268,7 +278,8 @@ main(int argc, const char **argv)
 		lu_audit_logger(AUDIT_GRP_MGMT,
 				"changing-group-members", group,
 				AUDIT_NO_ID, 0);
-		return 8;
+		result = 8;
+		goto done;
 	}
 	lu_audit_logger(AUDIT_GRP_MGMT,
 			"changing-group-members", group,
@@ -289,14 +300,13 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_GRP_MGMT,
 				"changing-group-id", group,
 				AUDIT_NO_ID, 0);
-			return 8;
+			result = 8;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_GRP_MGMT,
 			"changing-group-id", group,
 			AUDIT_NO_ID, 1);
 	}
-
-	lu_ent_free(ent);
 
 	lu_nscd_flush_cache(LU_NSCD_CACHE_GROUP);
 
@@ -305,22 +315,29 @@ main(int argc, const char **argv)
 		size_t i;
 
 		for (i = 0; i < users->len; i++) {
-			ent = g_ptr_array_index(users, i);
-			if (lu_ent_get_first_id(ent, LU_GIDNUMBER)
+			user_ent = g_ptr_array_index(users, i);
+			if (lu_ent_get_first_id(user_ent, LU_GIDNUMBER)
 			    == oldGidNumber) {
-				lu_ent_set_id(ent, LU_GIDNUMBER, gidNumber);
-				lu_user_modify(ctx, ent, &error);
+				lu_ent_set_id(user_ent, LU_GIDNUMBER, gidNumber);
+				lu_user_modify(ctx, user_ent, &error);
 				if (error != NULL)
 					lu_error_free(&error);
 			}
-			lu_ent_free(ent);
+			lu_ent_free(user_ent);
 		}
 		g_ptr_array_free(users, TRUE);
 
 		lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	}
 
-	lu_end(ctx);
+	result = 0;
 
-	return 0;
+ done:
+	if (ent) lu_ent_free(ent);
+
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

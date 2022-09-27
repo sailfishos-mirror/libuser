@@ -38,14 +38,16 @@ main(int argc, const char **argv)
 		   *uid_number_str = NULL, *commonName = NULL,
 		   *givenName = NULL, *surname = NULL, *roomNumber = NULL,
 		   *telephoneNumber = NULL, *homePhone = NULL;
-	struct lu_context *ctx;
-	struct lu_ent *ent, *groupEnt;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
+	struct lu_ent *groupEnt = NULL;
 	struct lu_error *error = NULL;
 	uid_t uidNumber = LU_VALUE_INVALID_ID;
 	gid_t gidNumber;
 	int dont_create_group = FALSE, dont_create_home = FALSE,
 	    system_account = FALSE, interactive = FALSE, create_group;
 	int c;
+	int result;
 	intmax_t imax;
 	char *p;
 
@@ -103,7 +105,8 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 
 	/* Force certain flags one way or another. */
@@ -117,7 +120,8 @@ main(int argc, const char **argv)
 	if (name == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
 	if (uid_number_str != NULL) {
 		errno = 0;
@@ -128,12 +132,11 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Invalid user ID %s\n"),
 				uid_number_str);
 			poptPrintUsage(popt, stderr, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		uidNumber = imax;
 	}
-
-	poptFreeContext(popt);
 
 	/* Initialize the library. */
 	ctx = lu_start(NULL, 0, NULL, NULL,
@@ -142,7 +145,8 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	/* Select a group name for the user to be in. */
@@ -163,7 +167,8 @@ main(int argc, const char **argv)
 			if (gidNumber == LU_VALUE_INVALID_ID) {
 				fprintf(stderr, _("Invalid group ID %s\n"),
 					gid);
-				return 1;
+				result = 1;
+				goto done;
 			}
 		} else
 			/* It's not a number, so it's a group name. */
@@ -188,7 +193,8 @@ main(int argc, const char **argv)
 		} else {
 			fprintf(stderr, _("Group %jd does not exist\n"),
 				(intmax_t)gidNumber);
-			return 1;
+			result = 1;
+			goto done;
 		}
 	}
 
@@ -209,10 +215,10 @@ main(int argc, const char **argv)
 			if (error) {
 				lu_error_free(&error);
 			}
-			lu_end(ctx);
 			lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
 					AUDIT_NO_ID, 0);
-			return 1;
+			result = 1;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_ADD_GROUP, "add-group", name,
 				AUDIT_NO_ID, 1);
@@ -226,8 +232,8 @@ main(int argc, const char **argv)
 		if (error) {
 			lu_error_free(&error);
 		}
-		lu_end(ctx);
-		return 1;
+		result = 1;
+		goto done;
 	}
 	g_assert(gidNumber != LU_VALUE_INVALID_ID);
 
@@ -266,7 +272,8 @@ main(int argc, const char **argv)
 		lu_audit_logger(AUDIT_ADD_USER, "add-user", name,
 					AUDIT_NO_ID, 0);
 
-		return 3;
+		result = 3;
+		goto done;
 	}
         lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 	lu_audit_logger(AUDIT_ADD_USER, "add-user", name, AUDIT_NO_ID, 1);
@@ -292,7 +299,8 @@ main(int argc, const char **argv)
 				homeDirectory, lu_strerror(error));
 			lu_audit_logger(AUDIT_USER_MGMT, "add-home-dir", name,
 				uidNumber, 0);
-			return 7;
+			result = 7;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_MGMT, "add-home-dir", name,
 				uidNumber, 1);
@@ -301,7 +309,8 @@ main(int argc, const char **argv)
 		if (lu_mail_spool_create(ctx, ent, &error) != TRUE) {
 			fprintf(stderr, _("Error creating mail spool: %s\n"),
 				lu_strerror(error));
-			return 8;
+			result = 8;
+			goto done;
 		}
 	}
 
@@ -314,7 +323,8 @@ main(int argc, const char **argv)
 			fprintf(stderr, _("Error setting password for user "
 					  "%s: %s.\n"), name,
 				lu_strerror(error));
-			return 3;
+			result = 3;
+			goto done;
 		}
 	}
 	if (cryptedUserPassword != NULL) {
@@ -325,16 +335,22 @@ main(int argc, const char **argv)
 				lu_strerror(error));
 			lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
 					name, uidNumber, 0);
-			return 3;
+			result = 3;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_CHAUTHTOK, "updating-password",
 					name, uidNumber, 1);
 	}
 	lu_nscd_flush_cache(LU_NSCD_CACHE_PASSWD);
 
-	lu_ent_free(ent);
+	result = 0;
 
-	lu_end(ctx);
+ done:
+	if (ent) lu_ent_free(ent);
 
-	return 0;
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }

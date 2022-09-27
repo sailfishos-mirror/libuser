@@ -32,13 +32,14 @@
 int
 main(int argc, const char **argv)
 {
-	struct lu_context *ctx;
-	struct lu_ent *ent;
+	struct lu_context *ctx = NULL;
+	struct lu_ent *ent = NULL;
 	struct lu_error *error = NULL;
 	const char *user;
 	int interactive = FALSE;
 	int remove_home = 0, dont_remove_group = 0;
 	int c;
+	int result;
 
 	poptContext popt;
 	struct poptOption options[] = {
@@ -63,17 +64,17 @@ main(int argc, const char **argv)
 		fprintf(stderr, _("Error parsing arguments: %s.\n"),
 			poptStrerror(c));
 		poptPrintUsage(popt, stderr, 0);
-		exit(1);
+		result = 1;
+		goto done;
 	}
 	user = poptGetArg(popt);
 
 	if (user == NULL) {
 		fprintf(stderr, _("No user name specified.\n"));
 		poptPrintUsage(popt, stderr, 0);
-		return 1;
+		result = 1;
+		goto done;
 	}
-
-	poptFreeContext(popt);
 
 	ctx = lu_start(NULL, 0, NULL, NULL,
 		       interactive ? lu_prompt_console :
@@ -81,14 +82,16 @@ main(int argc, const char **argv)
 	if (ctx == NULL) {
 		fprintf(stderr, _("Error initializing %s: %s.\n"), PACKAGE,
 			lu_strerror(error));
-		return 1;
+		result = 1;
+		goto done;
 	}
 
 	ent = lu_ent_new();
 
 	if (lu_user_lookup_name(ctx, user, ent, &error) == FALSE) {
 		fprintf(stderr, _("User %s does not exist.\n"), user);
-		return 2;
+		result = 2;
+		goto done;
 	}
 
 	if (lu_user_delete(ctx, ent, &error) == FALSE) {
@@ -96,7 +99,8 @@ main(int argc, const char **argv)
 			user, lu_strerror(error));
 		lu_audit_logger(AUDIT_DEL_USER, "delete-user", user,
 				AUDIT_NO_ID, 0);
-		return 3;
+		result = 3;
+		goto done;
 	}
 	lu_audit_logger(AUDIT_DEL_USER, "delete-user", user,
 			AUDIT_NO_ID, 1);
@@ -112,19 +116,22 @@ main(int argc, const char **argv)
 		if (gid == LU_VALUE_INVALID_ID) {
 			fprintf(stderr, _("%s did not have a gid number.\n"),
 				user);
-			return 4;
+			result = 4;
+			goto done;
 		}
 		group_ent = lu_ent_new();
 		if (lu_group_lookup_id(ctx, gid, group_ent, &error) == FALSE) {
 			fprintf(stderr, _("No group with GID %jd exists, not "
 					  "removing.\n"), (intmax_t)gid);
-			return 5;
+			result = 5;
+			goto done;
 		}
 		tmp = lu_ent_get_first_string(group_ent, LU_GROUPNAME);
 		if (tmp == NULL) {
 			fprintf(stderr, _("Group with GID %jd did not have a "
 					  "group name.\n"), (intmax_t)gid);
-			return 6;
+			result = 6;
+			goto done;
 		}
 		if (strcmp(tmp, user) == 0) {
 			if (lu_group_delete(ctx, group_ent, &error) == FALSE) {
@@ -134,7 +141,8 @@ main(int argc, const char **argv)
 				lu_audit_logger_with_group (AUDIT_DEL_GROUP,
 					"delete-group", user, AUDIT_NO_ID,
 					tmp, 0);
-				return 7;
+				result = 7;
+				goto done;
 			}
 		}
 		lu_audit_logger_with_group (AUDIT_DEL_GROUP,
@@ -152,7 +160,8 @@ main(int argc, const char **argv)
 			lu_audit_logger(AUDIT_USER_MGMT,
 					"deleting-home-directory", user,
 					AUDIT_NO_ID, 0);
-			return 9;
+			result = 9;
+			goto done;
 		}
 		lu_audit_logger(AUDIT_USER_MGMT, "deleting-home-directory", user,
 				AUDIT_NO_ID, 1);
@@ -161,13 +170,19 @@ main(int argc, const char **argv)
 		if (lu_mail_spool_remove(ctx, ent, &error) != TRUE) {
 			fprintf(stderr, _("Error removing mail spool: %s"),
 				lu_strerror(error));
-			return 1;
+			result = 1;
+			goto done;
 		}
 	}
 
-	lu_ent_free(ent);
+	result = 0;
 
-	lu_end(ctx);
+ done:
+	if (ent) lu_ent_free(ent);
 
-	return 0;
+	if (ctx) lu_end(ctx);
+
+	poptFreeContext(popt);
+
+	return result;
 }
