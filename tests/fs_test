@@ -82,7 +82,7 @@ test_lu_homedir_remove() {
     # User's "own" content
     mkdir -p "$workdir"/rm/root/{dir,unreadable}
     touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
-    mkfifo "$workdir"/rm/root/fifo
+    mkfifo "$workdir"/rm/root/fifo 2>/dev/null
     ln -s ../kept "$workdir"/rm/root/symlink
     chown -R 555:555 "$workdir"/rm/root
     chmod 701 "$workdir"/rm/root
@@ -199,7 +199,7 @@ create_source_directory() {
     # User's "own" content
     for i in "$1" "$1"/dir "$1"/group-owned; do
 	touch "$i"/f "$i"/setuid
-	mkfifo "$i"/fifo
+	mkfifo "$i"/fifo 2>/dev/null
 	ln -s ../outside "$i"/symlink
     done
     mkdir "$1"/setgid
