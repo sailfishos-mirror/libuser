@@ -111,6 +111,7 @@ diff "$workdir"/rm_output - <<EOF
 ----------    0    0 secret
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove" >&1
     exit 1
 fi
 
@@ -142,6 +143,7 @@ diff "$workdir"/rm_owned_output1 - <<EOF
 .:
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove_for_user_if_owned1" >&1
     exit 1
 fi
 
@@ -185,6 +187,7 @@ drwxrwxr-x    0    0 non-owned-dir
 -rw-rw-r--    0    0 f
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove_for_user_if_owned2" >&1
     exit 1
 fi
 
@@ -261,6 +264,7 @@ lrwxrwxrwx  555  444 symlink
 ----------  555  555 f
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_move1" >&2
     exit 1
 fi
 
@@ -278,6 +282,7 @@ Error creating \`$workdir/mv2home2': File exists
 1
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_move2" >&2
     exit 1
 fi
 
@@ -331,6 +336,7 @@ lrwxrwxrwx  556  444 symlink
 ----------  556  557 f
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_populate1" >&2
     exit 1
 fi
 
@@ -349,5 +355,6 @@ Error creating \`$workdir/pop2': File exists
 1
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_populate2" >&2
     exit 1
 fi
