@@ -70,7 +70,7 @@ filtered_ls() {
     (
 	cd "$1";
 	LC_ALL=C ls -lnR | \
-	    awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
+	    awk 'NF > 3 { printf("%.10s %4d %4d %s\n", $1, $3, $4, $9); }
              NF <= 3 && !/total/ { print }';
     )
 }
@@ -107,8 +107,8 @@ run_test test_lu_homedir_remove > "$workdir"/rm_output
 
 diff "$workdir"/rm_output - <<EOF
 .:
--rw-rw-r-- 1    0    0 kept
----------- 1    0    0 secret
+-rw-rw-r--    0    0 kept
+----------    0    0 secret
 EOF
 if [ $? -ne 0 ]; then
     exit 1
@@ -172,17 +172,17 @@ diff "$workdir"/rm_owned_output2 - <<EOF
 \`$workdir/rm_owned2/root' is not owned by UID \`555'
 1
 .:
-drwx-----x 4  444  444 root
+drwx-----x  444  444 root
 
 ./root:
-drwxrwxr-x 2  555  555 dir
-drwxrwxr-x 2    0    0 non-owned-dir
+drwxrwxr-x  555  555 dir
+drwxrwxr-x    0    0 non-owned-dir
 
 ./root/dir:
--rw-rw-r-- 1  555  555 f
+-rw-rw-r--  555  555 f
 
 ./root/non-owned-dir:
--rw-rw-r-- 1    0    0 f
+-rw-rw-r--    0    0 f
 EOF
 if [ $? -ne 0 ]; then
     exit 1
@@ -236,29 +236,29 @@ run_test test_lu_homedir_move1 > "$workdir"/mv_output
 # preserved.
 diff "$workdir"/mv_output - <<EOF
 .:
-drwxrwxr-x 2  555  555 dir
--rw-rw-r-- 1  555  555 f
-drwxrwxr-x 2  555  444 group-owned
----------- 1    0    0 secret
-drwxrwsr-x 2  555  555 setgid
--rwsrw-r-- 1  555  555 setuid
-lrwxrwxrwx 1  555  555 symlink
-d--------- 2  555  555 unreadable
+drwxrwxr-x  555  555 dir
+-rw-rw-r--  555  555 f
+drwxrwxr-x  555  444 group-owned
+----------    0    0 secret
+drwxrwsr-x  555  555 setgid
+-rwsrw-r--  555  555 setuid
+lrwxrwxrwx  555  555 symlink
+d---------  555  555 unreadable
 
 ./dir:
--rw-rw-r-- 1  555  555 f
--rwsrw-r-- 1  555  555 setuid
-lrwxrwxrwx 1  555  555 symlink
+-rw-rw-r--  555  555 f
+-rwsrw-r--  555  555 setuid
+lrwxrwxrwx  555  555 symlink
 
 ./group-owned:
--rw-rw-r-- 1  555  444 f
--rwsrw-r-- 1  555  444 setuid
-lrwxrwxrwx 1  555  444 symlink
+-rw-rw-r--  555  444 f
+-rwsrw-r--  555  444 setuid
+lrwxrwxrwx  555  444 symlink
 
 ./setgid:
 
 ./unreadable:
----------- 1  555  555 f
+----------  555  555 f
 EOF
 if [ $? -ne 0 ]; then
     exit 1
@@ -306,29 +306,29 @@ run_test test_lu_homedir_populate1 > "$workdir"/pop_output
 # ownership is changed to the desired values except for non-root groups
 diff "$workdir"/pop_output - <<EOF
 .:
-drwxrwxr-x 2  556  557 dir
--rw-rw-r-- 1  556  557 f
-drwxrwxr-x 2  556  444 group-owned
----------- 1  556  557 secret
-drwxrwsr-x 2  556  557 setgid
--rwsrw-r-- 1  556  557 setuid
-lrwxrwxrwx 1  556  557 symlink
-d--------- 2  556  557 unreadable
+drwxrwxr-x  556  557 dir
+-rw-rw-r--  556  557 f
+drwxrwxr-x  556  444 group-owned
+----------  556  557 secret
+drwxrwsr-x  556  557 setgid
+-rwsrw-r--  556  557 setuid
+lrwxrwxrwx  556  557 symlink
+d---------  556  557 unreadable
 
 ./dir:
--rw-rw-r-- 1  556  557 f
--rwsrw-r-- 1  556  557 setuid
-lrwxrwxrwx 1  556  557 symlink
+-rw-rw-r--  556  557 f
+-rwsrw-r--  556  557 setuid
+lrwxrwxrwx  556  557 symlink
 
 ./group-owned:
--rw-rw-r-- 1  556  444 f
--rwsrw-r-- 1  556  444 setuid
-lrwxrwxrwx 1  556  444 symlink
+-rw-rw-r--  556  444 f
+-rwsrw-r--  556  444 setuid
+lrwxrwxrwx  556  444 symlink
 
 ./setgid:
 
 ./unreadable:
----------- 1  556  557 f
+----------  556  557 f
 EOF
 if [ $? -ne 0 ]; then
     exit 1
