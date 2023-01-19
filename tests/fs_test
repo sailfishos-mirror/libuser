@@ -19,19 +19,29 @@
 #
 # Author: Miloslav Trmač <mitr@redhat.com>
 
-if ! fakeroot --version &>/dev/null; then
-    echo 'fakeroot not available, skipping test' >&2
-    exit 77
+# Some tests runs only as root. If you want to run those tests,
+# you must run it as a real root and set the variable USE_FAKEROOT=no
+# Make sure you have backups!
+if [ -z "$USE_FAKEROOT" ] ; then
+    USE_FAKEROOT=yes
+fi
+
+export USE_FAKEROOT
+
+if [ "$USE_FAKEROOT" != "no" ]; then
+    if ! fakeroot --version &>/dev/null; then
+        echo 'fakeroot not available, skipping test' >&2
+        exit 77
+    fi
 fi
 
 run_test() {
-    fakeroot "$@"
+    if [ "$USE_FAKEROOT" = "no" ]; then
+        ( "$@"; )
+    else
+        fakeroot "$@"
+    fi
 }
-# If you want to test this as real root, use the following instead, and run the
-# test manually.  Make sure you have backups!
-#run_test() {
-#    ( "$@"; )
-#}
 
 srcdir=$srcdir/tests
 
@@ -232,12 +242,14 @@ test_lu_homedir_move1() {
 
     filtered_ls "$workdir"/home2
 }
-export -f test_lu_homedir_move1
-run_test test_lu_homedir_move1 > "$workdir"/mv_output
 
-# Special files and fifos are not copied over.  Ownership and permissions are
-# preserved.
-diff "$workdir"/mv_output - <<EOF
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_move1
+    run_test test_lu_homedir_move1 > "$workdir"/mv_output
+
+    # Special files and fifos are not copied over.  Ownership and permissions are
+    # preserved.
+    diff "$workdir"/mv_output - <<EOF
 .:
 drwxrwxr-x  555  555 dir
 -rw-rw-r--  555  555 f
@@ -263,9 +275,12 @@ lrwxrwxrwx  555  444 symlink
 ./unreadable:
 ----------  555  555 f
 EOF
-if [ $? -ne 0 ]; then
-    echo "Failed: test_lu_homedir_move1" >&2
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_move1" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_move1" >&2
 fi
 
 # Moving onto an existing directory is prohibited
@@ -275,17 +290,21 @@ test_lu_homedir_move2() {
     $VALGRIND $PYTHON "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
     echo $?
 }
-export -f test_lu_homedir_move2
-run_test test_lu_homedir_move2 > "$workdir"/mv2_output 2>&1
-diff "$workdir"/mv2_output - <<EOF
+
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_move2
+    run_test test_lu_homedir_move2 > "$workdir"/mv2_output 2>&1
+    diff "$workdir"/mv2_output - <<EOF
 Error creating \`$workdir/mv2home2': File exists
 1
 EOF
-if [ $? -ne 0 ]; then
-    echo "Failed: test_lu_homedir_move2" >&2
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_move2" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_move2" >&2
 fi
-
 
 # Test lu_homedir_populate()
 function test_lu_homedir_populate1() {
@@ -304,12 +323,14 @@ function test_lu_homedir_populate1() {
 
     filtered_ls "$workdir"/newhome
 }
-export -f test_lu_homedir_populate1
-run_test test_lu_homedir_populate1 > "$workdir"/pop_output
 
-# Special files and fifos are not copied over.  Permissions are preserved,
-# ownership is changed to the desired values except for non-root groups
-diff "$workdir"/pop_output - <<EOF
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_populate1
+    run_test test_lu_homedir_populate1 > "$workdir"/pop_output
+
+    # Special files and fifos are not copied over.  Permissions are preserved,
+    # ownership is changed to the desired values except for non-root groups
+    diff "$workdir"/pop_output - <<EOF
 .:
 drwxrwxr-x  556  557 dir
 -rw-rw-r--  556  557 f
@@ -335,9 +356,12 @@ lrwxrwxrwx  556  444 symlink
 ./unreadable:
 ----------  556  557 f
 EOF
-if [ $? -ne 0 ]; then
-    echo "Failed: test_lu_homedir_populate1" >&2
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_populate1" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_populate1" >&2
 fi
 
 # Populating an existing directory is prohibited
