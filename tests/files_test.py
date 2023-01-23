@@ -278,6 +278,15 @@ class Tests(unittest.TestCase):
             e[field] = str(e[field][0]) + '\nx'
             self.assertRaises(RuntimeError, self.a.addUser, e, False, False)
 
+    def testUserAdd10(self):
+        # Adding a duplicate user UID
+        e = self.a.initUser('user6_10')
+        self.a.addUser(e, False, False)
+
+        e2 = self.a.initUser('user6_10_2')
+        e2[libuser.UIDNUMBER] = e[libuser.UIDNUMBER]
+        self.assertRaises(RuntimeError, self.a.addUser, e2, False, False)
+
     def testUserMod1(self):
         # A minimal case
         e = self.a.initUser('user7_1')
@@ -301,8 +310,8 @@ class Tests(unittest.TestCase):
         e[libuser.USERNAME] = 'user7_2username'
         self.assertNotEqual(e[libuser.USERPASSWORD], ['!!pwuser7_2'])
         e[libuser.USERPASSWORD] = '!!pwuser7_2'
-        self.assertNotEqual(e[libuser.UIDNUMBER], [4237])
-        e[libuser.UIDNUMBER] = 4237
+        self.assertNotEqual(e[libuser.UIDNUMBER], [4238])
+        e[libuser.UIDNUMBER] = 4238
         self.assertNotEqual(e[libuser.GIDNUMBER], [3742])
         e[libuser.GIDNUMBER] = 3742
         self.assertNotEqual(e[libuser.GECOS], ['Full Name,Office,1234,4321'])
@@ -336,7 +345,7 @@ class Tests(unittest.TestCase):
         self.assertIsNotNone(e)
         self.assertEqual(e[libuser.USERNAME], ['user7_2username'])
         self.assertEqual(e[libuser.USERPASSWORD], ['!!pwuser7_2'])
-        self.assertEqual(e[libuser.UIDNUMBER], [4237])
+        self.assertEqual(e[libuser.UIDNUMBER], [4238])
         self.assertEqual(e[libuser.GIDNUMBER], [3742])
         self.assertEqual(e[libuser.GECOS], ['Full Name,Office,1234,4321'])
         self.assertEqual(e[libuser.HOMEDIRECTORY], ['/home/user7_2home'])
@@ -456,6 +465,21 @@ class Tests(unittest.TestCase):
             self.assertNotIn('\n', str(e[field][0]))
             e[field] = str(e[field][0]) + '\nx'
             self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
+
+    def testUserMod9(self):
+        # Attempt to modify to create UID duplicates
+        e = self.a.initUser('user7_9')
+        self.a.addUser(e, False, False)
+        e_uid = e[libuser.UIDNUMBER]
+        del e
+
+        e = self.a.initUser('user7_9_2')
+        self.a.addUser(e, False, False)
+        del e
+
+        e = self.a.lookupUserByName('user7_9_2')
+        e[libuser.UIDNUMBER] = e_uid
+        self.assertRaises(RuntimeError, self.a.modifyUser, e, False)
 
     def testUserDel(self):
         e = self.a.initUser('user8_1')
@@ -946,6 +970,19 @@ class Tests(unittest.TestCase):
                 e[field] = field + '\nx'
             self.assertRaises(RuntimeError, self.a.addGroup, e)
 
+    def testGroupAdd7(self):
+        # Adding a duplicate group GID
+        e = self.a.initGroup('group21_7')
+        e[libuser.MEMBERNAME] = ['group21_7member1', 'group21_7member2']
+        self.a.addGroup(e)
+        e_gid = e[libuser.GIDNUMBER]
+        del e
+
+        e_dup = self.a.initGroup('group21_7_dup')
+        self.assertNotEqual(e_dup[libuser.GIDNUMBER], [e_gid])
+        e_dup[libuser.GIDNUMBER] = e_gid
+        self.assertRaises(RuntimeError, self.a.modifyGroup, e_dup)
+
     def testGroupMod1(self):
         # A minimal case
         e = self.a.initGroup('group22_1')
@@ -971,7 +1008,7 @@ class Tests(unittest.TestCase):
         self.assertNotEqual(e[libuser.GROUPPASSWORD], ['!!grgroup22_2'])
         e[libuser.GROUPPASSWORD] = '!!grgroup22_2'
         self.assertNotEqual(e[libuser.GIDNUMBER], [4237])
-        e[libuser.GIDNUMBER] = 4237
+        e[libuser.GIDNUMBER] = 4238
         v = sorted(e[libuser.MEMBERNAME])
         self.assertNotEqual(v, ['group22_2member1', 'group22_2member3'])
         e[libuser.MEMBERNAME] = ['group22_2member1', 'group22_2member3']
@@ -986,7 +1023,7 @@ class Tests(unittest.TestCase):
         self.assertIsNotNone(e)
         self.assertEqual(e[libuser.GROUPNAME], ['group22_2groupname'])
         self.assertEqual(e[libuser.GROUPPASSWORD], ['!!grgroup22_2'])
-        self.assertEqual(e[libuser.GIDNUMBER], [4237])
+        self.assertEqual(e[libuser.GIDNUMBER], [4238])
         v = e[libuser.MEMBERNAME]
         v.sort()
         self.assertEqual(v, ['group22_2member1', 'group22_2member3'])
@@ -1076,6 +1113,25 @@ class Tests(unittest.TestCase):
             else:
                 e[field] = field + '\nx'
             self.assertRaises(RuntimeError, self.a.modifyGroup, e)
+
+    def testGroupMod8(self):
+        # GID duplicate tests
+        e = self.a.initGroup('group22_8')
+        e[libuser.MEMBERNAME] = ['group22_8member1', 'group22_8member2']
+        self.a.addGroup(e)
+        e_gid = e[libuser.GIDNUMBER]
+        del e
+
+        e_dup = self.a.initGroup('group22_8_2')
+        e_dup[libuser.MEMBERNAME] = ['group22_8member1', 'group22_8member2']
+        self.a.addGroup(e_dup)
+        del e_dup
+
+        # Changing GID to e's should not work
+        e_dup = self.a.lookupGroupByName('group22_8_2')
+        self.assertNotEqual(e_dup[libuser.GIDNUMBER], [e_gid])
+        e_dup[libuser.GIDNUMBER] = e_gid
+        self.assertRaises(RuntimeError, self.a.modifyGroup, e_dup)
 
     def testGroupDel(self):
         e = self.a.initGroup('group23_1')
