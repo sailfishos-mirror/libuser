@@ -285,6 +285,10 @@ Allow module initialization when not invoked as the
 .B root
 user if the value is \fByes\fR.
 
+.TP
+.B allow_id_duplicates
+Allow to use duplicate uid/gid.The default value is \fBno\fR.
+
 .SH \fB[shadow]\fR
 Configures the
 .B files
