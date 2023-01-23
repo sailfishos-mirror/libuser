@@ -19,19 +19,29 @@
 #
 # Author: Miloslav Trmač <mitr@redhat.com>
 
-if ! fakeroot --version &>/dev/null; then
-    echo 'fakeroot not available, skipping test' >&2
-    exit 77
+# Some tests runs only as root. If you want to run those tests,
+# you must run it as a real root and set the variable USE_FAKEROOT=no
+# Make sure you have backups!
+if [ -z "$USE_FAKEROOT" ] ; then
+    USE_FAKEROOT=yes
+fi
+
+export USE_FAKEROOT
+
+if [ "$USE_FAKEROOT" != "no" ]; then
+    if ! fakeroot --version &>/dev/null; then
+        echo 'fakeroot not available, skipping test' >&2
+        exit 77
+    fi
 fi
 
 run_test() {
-    fakeroot "$@"
+    if [ "$USE_FAKEROOT" = "no" ]; then
+        ( "$@"; )
+    else
+        fakeroot "$@"
+    fi
 }
-# If you want to test this as real root, use the following instead, and run the
-# test manually.  Make sure you have backups!
-#run_test() {
-#    ( "$@"; )
-#}
 
 srcdir=$srcdir/tests
 
@@ -70,7 +80,7 @@ filtered_ls() {
     (
 	cd "$1";
 	LC_ALL=C ls -lnR | \
-	    awk 'NF > 3 { printf("%.10s %d %4d %4d %s\n", $1, $2, $3, $4, $9); }
+	    awk 'NF > 3 { printf("%.10s %4d %4d %s\n", $1, $3, $4, $9); }
              NF <= 3 && !/total/ { print }';
     )
 }
@@ -82,7 +92,7 @@ test_lu_homedir_remove() {
     # User's "own" content
     mkdir -p "$workdir"/rm/root/{dir,unreadable}
     touch "$workdir"/rm/{kept,root/{dir,unreadable}/f}
-    mkfifo "$workdir"/rm/root/fifo
+    mkfifo "$workdir"/rm/root/fifo 2>/dev/null
     ln -s ../kept "$workdir"/rm/root/symlink
     chown -R 555:555 "$workdir"/rm/root
     chmod 701 "$workdir"/rm/root
@@ -107,10 +117,11 @@ run_test test_lu_homedir_remove > "$workdir"/rm_output
 
 diff "$workdir"/rm_output - <<EOF
 .:
--rw-rw-r-- 1    0    0 kept
----------- 1    0    0 secret
+-rw-rw-r--    0    0 kept
+----------    0    0 secret
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove" >&1
     exit 1
 fi
 
@@ -142,6 +153,7 @@ diff "$workdir"/rm_owned_output1 - <<EOF
 .:
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove_for_user_if_owned1" >&1
     exit 1
 fi
 
@@ -172,19 +184,20 @@ diff "$workdir"/rm_owned_output2 - <<EOF
 \`$workdir/rm_owned2/root' is not owned by UID \`555'
 1
 .:
-drwx-----x 4  444  444 root
+drwx-----x  444  444 root
 
 ./root:
-drwxrwxr-x 2  555  555 dir
-drwxrwxr-x 2    0    0 non-owned-dir
+drwxrwxr-x  555  555 dir
+drwxrwxr-x    0    0 non-owned-dir
 
 ./root/dir:
--rw-rw-r-- 1  555  555 f
+-rw-rw-r--  555  555 f
 
 ./root/non-owned-dir:
--rw-rw-r-- 1    0    0 f
+-rw-rw-r--    0    0 f
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_remove_for_user_if_owned2" >&1
     exit 1
 fi
 
@@ -196,7 +209,7 @@ create_source_directory() {
     # User's "own" content
     for i in "$1" "$1"/dir "$1"/group-owned; do
 	touch "$i"/f "$i"/setuid
-	mkfifo "$i"/fifo
+	mkfifo "$i"/fifo 2>/dev/null
 	ln -s ../outside "$i"/symlink
     done
     mkdir "$1"/setgid
@@ -229,39 +242,45 @@ test_lu_homedir_move1() {
 
     filtered_ls "$workdir"/home2
 }
-export -f test_lu_homedir_move1
-run_test test_lu_homedir_move1 > "$workdir"/mv_output
 
-# Special files and fifos are not copied over.  Ownership and permissions are
-# preserved.
-diff "$workdir"/mv_output - <<EOF
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_move1
+    run_test test_lu_homedir_move1 > "$workdir"/mv_output
+
+    # Special files and fifos are not copied over.  Ownership and permissions are
+    # preserved.
+    diff "$workdir"/mv_output - <<EOF
 .:
-drwxrwxr-x 2  555  555 dir
--rw-rw-r-- 1  555  555 f
-drwxrwxr-x 2  555  444 group-owned
----------- 1    0    0 secret
-drwxrwsr-x 2  555  555 setgid
--rwsrw-r-- 1  555  555 setuid
-lrwxrwxrwx 1  555  555 symlink
-d--------- 2  555  555 unreadable
+drwxrwxr-x  555  555 dir
+-rw-rw-r--  555  555 f
+drwxrwxr-x  555  444 group-owned
+----------    0    0 secret
+drwxrwsr-x  555  555 setgid
+-rwsrw-r--  555  555 setuid
+lrwxrwxrwx  555  555 symlink
+d---------  555  555 unreadable
 
 ./dir:
--rw-rw-r-- 1  555  555 f
--rwsrw-r-- 1  555  555 setuid
-lrwxrwxrwx 1  555  555 symlink
+-rw-rw-r--  555  555 f
+-rwsrw-r--  555  555 setuid
+lrwxrwxrwx  555  555 symlink
 
 ./group-owned:
--rw-rw-r-- 1  555  444 f
--rwsrw-r-- 1  555  444 setuid
-lrwxrwxrwx 1  555  444 symlink
+-rw-rw-r--  555  444 f
+-rwsrw-r--  555  444 setuid
+lrwxrwxrwx  555  444 symlink
 
 ./setgid:
 
 ./unreadable:
----------- 1  555  555 f
+----------  555  555 f
 EOF
-if [ $? -ne 0 ]; then
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_move1" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_move1" >&2
 fi
 
 # Moving onto an existing directory is prohibited
@@ -271,16 +290,21 @@ test_lu_homedir_move2() {
     $VALGRIND $PYTHON "$srcdir"/fs_test.py --move "$workdir"/mv2home{1,2}
     echo $?
 }
-export -f test_lu_homedir_move2
-run_test test_lu_homedir_move2 > "$workdir"/mv2_output 2>&1
-diff "$workdir"/mv2_output - <<EOF
+
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_move2
+    run_test test_lu_homedir_move2 > "$workdir"/mv2_output 2>&1
+    diff "$workdir"/mv2_output - <<EOF
 Error creating \`$workdir/mv2home2': File exists
 1
 EOF
-if [ $? -ne 0 ]; then
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_move2" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_move2" >&2
 fi
-
 
 # Test lu_homedir_populate()
 function test_lu_homedir_populate1() {
@@ -299,39 +323,45 @@ function test_lu_homedir_populate1() {
 
     filtered_ls "$workdir"/newhome
 }
-export -f test_lu_homedir_populate1
-run_test test_lu_homedir_populate1 > "$workdir"/pop_output
 
-# Special files and fifos are not copied over.  Permissions are preserved,
-# ownership is changed to the desired values except for non-root groups
-diff "$workdir"/pop_output - <<EOF
+if [ $USE_FAKEROOT = "no" ] ; then
+    export -f test_lu_homedir_populate1
+    run_test test_lu_homedir_populate1 > "$workdir"/pop_output
+
+    # Special files and fifos are not copied over.  Permissions are preserved,
+    # ownership is changed to the desired values except for non-root groups
+    diff "$workdir"/pop_output - <<EOF
 .:
-drwxrwxr-x 2  556  557 dir
--rw-rw-r-- 1  556  557 f
-drwxrwxr-x 2  556  444 group-owned
----------- 1  556  557 secret
-drwxrwsr-x 2  556  557 setgid
--rwsrw-r-- 1  556  557 setuid
-lrwxrwxrwx 1  556  557 symlink
-d--------- 2  556  557 unreadable
+drwxrwxr-x  556  557 dir
+-rw-rw-r--  556  557 f
+drwxrwxr-x  556  444 group-owned
+----------  556  557 secret
+drwxrwsr-x  556  557 setgid
+-rwsrw-r--  556  557 setuid
+lrwxrwxrwx  556  557 symlink
+d---------  556  557 unreadable
 
 ./dir:
--rw-rw-r-- 1  556  557 f
--rwsrw-r-- 1  556  557 setuid
-lrwxrwxrwx 1  556  557 symlink
+-rw-rw-r--  556  557 f
+-rwsrw-r--  556  557 setuid
+lrwxrwxrwx  556  557 symlink
 
 ./group-owned:
--rw-rw-r-- 1  556  444 f
--rwsrw-r-- 1  556  444 setuid
-lrwxrwxrwx 1  556  444 symlink
+-rw-rw-r--  556  444 f
+-rwsrw-r--  556  444 setuid
+lrwxrwxrwx  556  444 symlink
 
 ./setgid:
 
 ./unreadable:
----------- 1  556  557 f
+----------  556  557 f
 EOF
-if [ $? -ne 0 ]; then
-    exit 1
+    if [ $? -ne 0 ]; then
+        echo "Failed: test_lu_homedir_populate1" >&2
+        exit 1
+    fi
+else
+    echo "Skipped: test_lu_homedir_populate1" >&2
 fi
 
 # Populating an existing directory is prohibited
@@ -349,5 +379,6 @@ Error creating \`$workdir/pop2': File exists
 1
 EOF
 if [ $? -ne 0 ]; then
+    echo "Failed: test_lu_homedir_populate2" >&2
     exit 1
 fi
