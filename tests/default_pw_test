@@ -29,6 +29,10 @@ trap '(exit 1); exit 1' 1 2 13 15
 rm -rf "$workdir"
 mkdir "$workdir"
 
+if [ ! -x /usr/sbin/slapd ] ; then
+    have_ldap=no
+fi
+
 # Create a SSL key
 /usr/bin/openssl req -newkey rsa:2048 -keyout "$workdir"/key1 -nodes \
     -x509 -days 2 -out "$workdir"/key3 2>/dev/null <<EOF
@@ -87,6 +91,9 @@ for modules in \
 	'files ldap' 'files shadow' 'ldap files' 'shadow files' \
 	'files ldap shadow' 'files shadow ldap' 'ldap files shadow' \
 	'ldap shadow files' 'shadow files ldap' 'shadow ldap files'; do
+
+    need_ldap=`echo $modules | grep ldap | wc -l`
+    test "$need_ldap" != "0" && test "$have_ldap" = "no" && continue
 
     echo ">>>modules: $modules" >&2
 

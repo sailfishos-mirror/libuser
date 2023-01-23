@@ -19,6 +19,11 @@
 #
 # Author: Miloslav Trmac <mitr@redhat.com>
 
+if [ ! -x /usr/sbin/slapd ] ; then
+    echo "The openldap server not found" >&2
+    exit 77
+fi
+
 srcdir=$srcdir/tests
 
 workdir=$(pwd)/test_ldap
