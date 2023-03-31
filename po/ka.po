@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: libuser\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2022-09-04 11:26+0200\n"
+"PO-Revision-Date: 2023-03-17 21:20+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
-"Language-Team: Georgian (http://www.transifex.com/projects/p/fedora/language/"
-"ka/)\n"
+"Language-Team: Georgian <https://translate.fedoraproject.org/projects/"
+"libuser/master/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -137,9 +137,7 @@ msgstr "მომხმარებლის სახელი მითით�
 #: samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr ""
-"%s-ის ინიციალიზაციის შეცდომა: %s.\n"
-"\n"
+msgstr "%s-ის ინიციალიზაციის შეცდომა: %s.\n"
 
 #: apps/lchage.c:150 apps/lchfn.c:118 apps/lchsh.c:105 apps/lpasswd.c:151
 #: apps/luserdel.c:92 apps/lusermod.c:176
@@ -160,9 +158,7 @@ msgstr "ანგარიში დაბლოკილი არაა.\n"
 #: apps/lchage.c:170
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr ""
-"მინიმუმ:\t%ld\n"
-"\n"
+msgstr "მინიმუმ:\t%ld\n"
 
 #: apps/lchage.c:174
 #, c-format
@@ -710,10 +706,9 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "ჯგუფის (%s) წაშლის შეცდომა: %s.\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
-#| msgid "error removing home directory for user"
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "შეცდომა მომხმარებლის საწყისი საქაღალდის წაშლისას"
+msgstr "შეცდომა მომხმარებლის საწყისი საქაღალდის წაშლისას: %s.\n"
 
 #: apps/luserdel.c:171
 #, c-format
@@ -946,10 +941,8 @@ msgid "invalid module combination"
 msgstr "მოდულების არასწორი კომბინაცია"
 
 #: lib/error.c:109
-#, fuzzy
-#| msgid "home directory for new user"
 msgid "user's home directory not owned by them"
-msgstr "მომხმარებლის საწყისი საქაღალდე"
+msgstr "მომხმარებლის საწყისი საქაღალდის მფლობელი თვითონ არაა"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -1093,10 +1086,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "უსაფრთხოების კონტექსტის %s-ზე დაყენების შეცდომა: %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "ნაგულისხმები უსაფრთხოების კონტექსტის მიღების შეცდომა: %s"
+msgstr "ფაილის კონტექსტის selabel-ის მიღების შეცდომა: %s"
 
 #: lib/util.c:872
 #, c-format
@@ -1153,64 +1145,59 @@ msgstr "%s-დან წაკითხვა შეუძლებელია:
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "ბლოკის '%s' არასწორი შემცველობა"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "ბლოკი %s ეკუთვნის პროცესს %ju"
 
 #: modules/files.c:269
-#, fuzzy, c-format
-#| msgid "Error moving %s to %s: %s.\n"
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "%s-ის %s-მდე გადატანის პრობლემა: %s.\n"
+msgstr "გაჭედილი ბლოკის '%s' წაშლის შეცდომა: %s"
 
 #: modules/files.c:297
-#, fuzzy, c-format
-#| msgid "Error changing mode of `%s': %s"
+#, c-format
 msgid "error opening temporary file for `%s': %s"
-msgstr "%s-ის მოდელის შეცვლის შეცდომა: %s"
+msgstr "'%s'-სთვის დროებითი ფაილის გახსნის შეცდომა: %s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "ბლოკის ('%s') მიღების შეცდომა: %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
-#| msgid "Error reading `%s': %s"
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "შეცდომა '%s'-ის კითხვისას: %s"
+msgstr "'%s'-ის ამოხსნის შეცდომა: %s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
-#| msgid "Error reading `%s': %s"
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "შეცდომა '%s'-ის კითხვისას: %s"
+msgstr "'%s'-ის ჩანაცვლების შეცდომა: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "ობიექტს ატრიბუტი (%s) არ გააჩნია"
+msgstr "დუბლირებულ ობიექტს ატრიბუტი %s არ გააჩნია"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "ობიექტს ატრიბუტი (%s) არ გააჩნია"
+msgstr "ორიგინალ ობიექტს ატრიბუტი %s არ გააჩნია"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "ID %lu უკვე გამოიყენება %s-ის მიერ"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
-#| msgid "%s value `%s': `:' not allowed"
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s-ის ნიშვნელობა '%s' დაუშვებელია"
+msgstr ""
+"%s-ის ნიშვნელობა '%s': '\\n"
+"' დაუშვებელია"
 
 #: modules/files.c:1032
 #, c-format
@@ -1237,10 +1224,10 @@ msgid "entry with conflicting name already present in file"
 msgstr "ფაილში ჩანაწერი იგივე სახელით, უკვე არსებობს"
 
 #: modules/files.c:1953
-#, fuzzy
-#| msgid "`:' not allowed in encrypted password"
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "დაშიფრულ პაროლში \":\" დაუშვებელია"
+msgstr ""
+"დაშიფრულ პაროლში ':' და '\\n"
+"' დაუშვებელია"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
