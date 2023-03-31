@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-07-23 21:13+0200\n"
+"POT-Creation-Date: 2023-03-14 15:37+0100\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/fedora/language/"
@@ -22,804 +22,803 @@ msgstr ""
 "2:1));\n"
 "X-Generator: Zanata 3.6.2\n"
 
-#: apps/apputil.c:197 apps/apputil.c:201
+#: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "Eşec în eliminarea privilegiilor.\n"
 
-#: apps/apputil.c:210
+#: apps/apputil.c:208
 #, c-format
 msgid "Internal error.\n"
 msgstr "Eroare internă.\n"
 
-#: apps/apputil.c:231
+#: apps/apputil.c:234
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "%s nu este autorizat să schimbe informaţiile finger pentru %s\n"
 
-#: apps/apputil.c:233
+#: apps/apputil.c:236
 msgid "Unknown user context"
 msgstr "Context necunoscut de utilizator"
 
-#: apps/apputil.c:241
+#: apps/apputil.c:245
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "Nu se poate seta contextul implicit pentru /etc/passwd\n"
 
-#: apps/apputil.c:250
+#: apps/apputil.c:254
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "Eroare la iniţializarea PAM.\n"
 
-#: apps/apputil.c:260 apps/apputil.c:287
+#: apps/apputil.c:264 apps/apputil.c:291
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "Autentificarea a eşuat pentru %s.\n"
 
-#: apps/apputil.c:268
+#: apps/apputil.c:272
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "Eroare internă PAM „%s”.\n"
 
-#: apps/apputil.c:273
+#: apps/apputil.c:277
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "Utilizator autentificat necunoscut.\n"
 
-#: apps/apputil.c:277
+#: apps/apputil.c:281
 #, c-format
 msgid "User mismatch.\n"
 msgstr "Utilizatorul nu se potriveşte.\n"
 
-#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
-#: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
-#: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
+#: apps/lchage.c:86 apps/lchfn.c:54 apps/lchsh.c:46 apps/lgroupadd.c:48
+#: apps/lgroupdel.c:44 apps/lgroupmod.c:56 apps/lid.c:116 apps/lnewusers.c:47
+#: apps/lpasswd.c:48 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:57
 msgid "prompt for all information"
 msgstr ""
 
-#: apps/lchage.c:86
+#: apps/lchage.c:88
 msgid "list aging parameters for the user"
 msgstr ""
 
-#: apps/lchage.c:88
+#: apps/lchage.c:90
 msgid "minimum days between password changes"
 msgstr ""
 
-#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
-#: apps/lchage.c:99 apps/lchage.c:102
+#: apps/lchage.c:90 apps/lchage.c:92 apps/lchage.c:95 apps/lchage.c:98
+#: apps/lchage.c:101 apps/lchage.c:104
 msgid "DAYS"
 msgstr ""
 
-#: apps/lchage.c:90
+#: apps/lchage.c:92
 msgid "maximum days between password changes"
 msgstr ""
 
-#: apps/lchage.c:92
+#: apps/lchage.c:94
 msgid "date of last password change in days since 1/1/70"
 msgstr ""
 
-#: apps/lchage.c:95
+#: apps/lchage.c:97
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
 
-#: apps/lchage.c:98
+#: apps/lchage.c:100
 msgid "password expiration date in days since 1/1/70"
 msgstr ""
 
-#: apps/lchage.c:101
+#: apps/lchage.c:103
 msgid "days before expiration to begin warning user"
 msgstr ""
 
-#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
-#: apps/luserdel.c:59 apps/lusermod.c:101
+#: apps/lchage.c:116 apps/lid.c:131 apps/lpasswd.c:69 apps/luseradd.c:102
+#: apps/luserdel.c:61 apps/lusermod.c:102
 msgid "[OPTION...] user"
 msgstr "[OPŢIUNE  ] utilizator"
 
-#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
-#: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
-#: apps/lusermod.c:104
+#: apps/lchage.c:119 apps/lchfn.c:72 apps/lchsh.c:60 apps/lgroupadd.c:66
+#: apps/lgroupdel.c:58 apps/lgroupmod.c:87 apps/lid.c:134 apps/lnewusers.c:68
+#: apps/lpasswd.c:72 apps/luseradd.c:105 apps/luserdel.c:64 apps/lusermod.c:105
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "Eroare la analiza argumentelor: %s.\n"
 
-#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
-#: apps/lusermod.c:115
+#: apps/lchage.c:129 apps/lpasswd.c:87 apps/luseradd.c:121 apps/luserdel.c:73
+#: apps/lusermod.c:117
 #, c-format
 msgid "No user name specified.\n"
 msgstr "Niciun utilizator specificat.\n"
 
-#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
-#: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
-#: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
-#: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
+#: apps/lchage.c:140 apps/lchfn.c:106 apps/lchsh.c:93 apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:122 apps/lid.c:181 apps/lnewusers.c:80
+#: apps/lpasswd.c:98 apps/luseradd.c:146 apps/luserdel.c:83 apps/lusermod.c:160
+#: samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "Eroare la iniţializarea %s: %s.\n"
 
-#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
-#: apps/luserdel.c:89 apps/lusermod.c:171
+#: apps/lchage.c:150 apps/lchfn.c:118 apps/lchsh.c:105 apps/lpasswd.c:151
+#: apps/luserdel.c:92 apps/lusermod.c:176
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "Utilizatorul %s nu există.\n"
 
-#: apps/lchage.c:160
+#: apps/lchage.c:164
 #, c-format
 msgid "Account is locked.\n"
 msgstr "Contul este blocat.\n"
 
-#: apps/lchage.c:162
+#: apps/lchage.c:166
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "Contul nu este blocat.\n"
 
-#: apps/lchage.c:166
+#: apps/lchage.c:170
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minim:\t%ld\n"
 
-#: apps/lchage.c:170
+#: apps/lchage.c:174
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maxim:\t%ld\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:176
 #, c-format
 msgid "Maximum:\tNone\n"
 msgstr ""
 
-#: apps/lchage.c:175
+#: apps/lchage.c:179
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Avertisment:\t%ld\n"
 
-#: apps/lchage.c:180
+#: apps/lchage.c:184
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Inactiv:\t%ld\n"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:186
 #, c-format
 msgid "Inactive:\tNever\n"
 msgstr ""
 
-#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+#: apps/lchage.c:190 apps/lchage.c:198 apps/lchage.c:208
 msgid "Must change password on next login"
 msgstr ""
 
-#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
+#: apps/lchage.c:192 apps/lchage.c:200 apps/lchage.c:210 apps/lchage.c:219
 msgid "Never"
 msgstr "Niciodată"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:195
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "Ultima schimbare:\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:205
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "Parola expiră:\t%s\n"
 
-#: apps/lchage.c:213
+#: apps/lchage.c:217
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "Parolă inactivă:\t%s\n"
 
-#: apps/lchage.c:219
+#: apps/lchage.c:223
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "Contul expiră:\t%s\n"
 
-#: apps/lchage.c:240
+#: apps/lchage.c:244
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "Modificarea informaţiilor de timp pentru %s a eşuat: %s\n"
 
-#: apps/lchfn.c:67 apps/lchsh.c:55
+#: apps/lchfn.c:69 apps/lchsh.c:57
 msgid "[OPTION...] [user]"
 msgstr "[OPŢIUNE..] [utilizator]"
 
-#: apps/lchfn.c:86 apps/lchsh.c:74 apps/lid.c:164
+#: apps/lchfn.c:89 apps/lchsh.c:77 apps/lid.c:167
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "Niciun utilizator specificat, niciun nume pentru uid %d.\n"
 
-#: apps/lchfn.c:96
+#: apps/lchfn.c:99
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "Schimbare informaţii de finger pentru %s.\n"
 
-#: apps/lchfn.c:136
+#: apps/lchfn.c:141
 msgid "Full Name"
 msgstr "Nume complet"
 
-#: apps/lchfn.c:146
+#: apps/lchfn.c:151
 msgid "Surname"
 msgstr "Nume de familie"
 
-#: apps/lchfn.c:157
+#: apps/lchfn.c:162
 msgid "Given Name"
 msgstr "Pseudonim"
 
-#: apps/lchfn.c:167
+#: apps/lchfn.c:172
 msgid "Office"
 msgstr "Birou"
 
-#: apps/lchfn.c:176
+#: apps/lchfn.c:181
 msgid "Office Phone"
 msgstr "Telefonul de la birou"
 
-#: apps/lchfn.c:185
+#: apps/lchfn.c:190
 msgid "Home Phone"
 msgstr "Telefonul de acasă"
 
-#: apps/lchfn.c:195
+#: apps/lchfn.c:200
 msgid "E-Mail Address"
 msgstr "Adresă de poştă electronică"
 
-#: apps/lchfn.c:208
+#: apps/lchfn.c:213
 #, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "Informaţiile finger nu s-au schimbat:  eroare de intrare.\n"
 
-#: apps/lchfn.c:270
+#: apps/lchfn.c:276
 msgid "Finger information changed.\n"
 msgstr "Informaţiile de finger s-au schimbat.\n"
 
-#: apps/lchfn.c:273
+#: apps/lchfn.c:279
 #, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "Informaţiile de finger nu s-au schimbat: %s.\n"
 
-#: apps/lchsh.c:84
+#: apps/lchsh.c:86
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "Schimbare shell pentru %s.\n"
 
-#: apps/lchsh.c:114
+#: apps/lchsh.c:118
 msgid "New Shell"
 msgstr "Shell nou"
 
-#: apps/lchsh.c:121 apps/lchsh.c:136
+#: apps/lchsh.c:125 apps/lchsh.c:145
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "Shell-ul nu s-a schimbat: %s\n"
 
-#: apps/lchsh.c:133
+#: apps/lchsh.c:140
 msgid "Shell changed.\n"
 msgstr "Shell-ul s-a schimbat.\n"
 
-#: apps/lgroupadd.c:49
+#: apps/lgroupadd.c:50
 msgid "gid for new group"
 msgstr ""
 
-#: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
-#: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
+#: apps/lgroupadd.c:50 apps/lgroupmod.c:58 apps/lpasswd.c:57 apps/lpasswd.c:60
+#: apps/luseradd.c:69 apps/lusermod.c:67 apps/lusermod.c:69
 msgid "NUM"
 msgstr ""
 
-#: apps/lgroupadd.c:51
+#: apps/lgroupadd.c:52
 msgid "create a system group"
 msgstr ""
 
-#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
+#: apps/lgroupadd.c:63 apps/lgroupdel.c:55 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
 msgstr "[OPŢIUNE  ] grup"
 
-#: apps/lgroupadd.c:74 apps/lgroupdel.c:65 apps/lgroupmod.c:93
+#: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
 msgstr "Niciun nume de grup specificat.\n"
 
-#: apps/lgroupadd.c:87 apps/lgroupmod.c:105 apps/lnewusers.c:172
-#: apps/luseradd.c:164 apps/lusermod.c:127
+#: apps/lgroupadd.c:90 apps/lgroupmod.c:109 apps/lnewusers.c:175
+#: apps/luseradd.c:168 apps/lusermod.c:130
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "ID invalid de grup %s\n"
 
-#: apps/lgroupadd.c:119
+#: apps/lgroupadd.c:122
 #, c-format
 msgid "Group creation failed: %s\n"
 msgstr "Crearea grupului a eşuat: %s\n"
 
-#: apps/lgroupdel.c:85 apps/lgroupmod.c:132 apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:137 apps/lpasswd.c:157
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "Grupul %s nu există.\n"
 
-#: apps/lgroupdel.c:91
+#: apps/lgroupdel.c:95
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
 msgstr "Grupul %s nu poate fi şters: %s\n"
 
-#: apps/lgroupmod.c:56
+#: apps/lgroupmod.c:58
 msgid "set GID for group"
 msgstr ""
 
-#: apps/lgroupmod.c:58
+#: apps/lgroupmod.c:60
 msgid "change group to have given name"
 msgstr ""
 
-#: apps/lgroupmod.c:58
+#: apps/lgroupmod.c:60
 msgid "NAME"
 msgstr ""
 
-#: apps/lgroupmod.c:60 apps/luseradd.c:75
+#: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "plaintext password for use with group"
 msgstr ""
 
-#: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
-#: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
-#: apps/lpasswd.c:51 apps/lpasswd.c:53 apps/luseradd.c:59 apps/luseradd.c:61
-#: apps/luseradd.c:63 apps/luseradd.c:65 apps/luseradd.c:69 apps/luseradd.c:75
-#: apps/luseradd.c:77 apps/luseradd.c:79 apps/luseradd.c:81 apps/luseradd.c:83
-#: apps/luseradd.c:85 apps/luseradd.c:87 apps/luseradd.c:89 apps/lusermod.c:58
-#: apps/lusermod.c:60 apps/lusermod.c:64 apps/lusermod.c:70 apps/lusermod.c:72
-#: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
-#: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
+#: apps/lgroupmod.c:62 apps/lgroupmod.c:64 apps/lgroupmod.c:66
+#: apps/lgroupmod.c:68 apps/lgroupmod.c:70 apps/lgroupmod.c:72
+#: apps/lpasswd.c:52 apps/lpasswd.c:54 apps/luseradd.c:61 apps/luseradd.c:63
+#: apps/luseradd.c:65 apps/luseradd.c:67 apps/luseradd.c:71 apps/luseradd.c:77
+#: apps/luseradd.c:79 apps/luseradd.c:81 apps/luseradd.c:83 apps/luseradd.c:85
+#: apps/luseradd.c:87 apps/luseradd.c:89 apps/luseradd.c:91 apps/lusermod.c:59
+#: apps/lusermod.c:61 apps/lusermod.c:65 apps/lusermod.c:71 apps/lusermod.c:73
+#: apps/lusermod.c:75 apps/lusermod.c:81 apps/lusermod.c:83 apps/lusermod.c:85
+#: apps/lusermod.c:87 apps/lusermod.c:89 apps/lusermod.c:91
 msgid "STRING"
 msgstr ""
 
-#: apps/lgroupmod.c:62 apps/luseradd.c:77
+#: apps/lgroupmod.c:64 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
 msgstr ""
 
-#: apps/lgroupmod.c:64
+#: apps/lgroupmod.c:66
 msgid "list of administrators to add"
 msgstr ""
 
-#: apps/lgroupmod.c:66
+#: apps/lgroupmod.c:68
 msgid "list of administrators to remove"
 msgstr ""
 
-#: apps/lgroupmod.c:68
+#: apps/lgroupmod.c:70
 msgid "list of group members to add"
 msgstr ""
 
-#: apps/lgroupmod.c:70
+#: apps/lgroupmod.c:72
 msgid "list of group members to remove"
 msgstr ""
 
-#: apps/lgroupmod.c:71
+#: apps/lgroupmod.c:73
 msgid "lock group"
 msgstr ""
 
-#: apps/lgroupmod.c:72
+#: apps/lgroupmod.c:74
 msgid "unlock group"
 msgstr ""
 
-#: apps/lgroupmod.c:125 apps/lusermod.c:164
+#: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "S-a specificat atât L cât şi U.\n"
 
-#: apps/lgroupmod.c:139 apps/lgroupmod.c:148
+#: apps/lgroupmod.c:145 apps/lgroupmod.c:161
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "Setarea parolei pentru grupul %s a eşuat: %s\n"
 
-#: apps/lgroupmod.c:157
+#: apps/lgroupmod.c:177
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "Grupul %s nu poate fi blocat: %s\n"
 
-#: apps/lgroupmod.c:166
+#: apps/lgroupmod.c:193
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "Grupul %s nu poate fi deblocat: %s\n"
 
-#: apps/lgroupmod.c:242 apps/lgroupmod.c:257
+#: apps/lgroupmod.c:276 apps/lgroupmod.c:298
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "Grupul %s nu poate fi modificat: %s\n"
 
-#: apps/lid.c:42 apps/lid.c:74 apps/lid.c:188
+#: apps/lid.c:42 apps/lid.c:74 apps/lid.c:191
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "Eroare la căutarea %s: %s\n"
 
-#: apps/lid.c:117
+#: apps/lid.c:118
 msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
 
-#: apps/lid.c:120
+#: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
 msgstr ""
 
-#: apps/lid.c:146
+#: apps/lid.c:148
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "Nu s-a specificat niciun nume de grup, se va folosi %s.\n"
 
-#: apps/lid.c:150
+#: apps/lid.c:152
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "Nu s-a specificat niciun nume de grup, niciun nume pentru gid %d.\n"
 
-#: apps/lid.c:160
+#: apps/lid.c:163
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "Niciun nume de utilizator specificat, se va folosi %s.\n"
 
-#: apps/lid.c:192
+#: apps/lid.c:195
 #, c-format
 msgid "%s does not exist\n"
 msgstr ""
 
-#: apps/lnewusers.c:47
+#: apps/lnewusers.c:49
 msgid "file with user information records"
 msgstr ""
 
-#: apps/lnewusers.c:47
+#: apps/lnewusers.c:49
 msgid "PATH"
 msgstr ""
 
-#: apps/lnewusers.c:49
+#: apps/lnewusers.c:51
 msgid "don't create home directories"
 msgstr ""
 
-#: apps/lnewusers.c:51
+#: apps/lnewusers.c:53
 msgid "don't create mail spools"
 msgstr ""
 
-#: apps/lnewusers.c:63
+#: apps/lnewusers.c:65
 msgid "[OPTION...]"
 msgstr "[OPŢIUNE..]"
 
-#: apps/lnewusers.c:88
+#: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "Eroare la deschiderea „%s”: %s.\n"
 
-#: apps/lnewusers.c:118
+#: apps/lnewusers.c:121
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "Eroare la crearea contului „%s”: linie incorect formatată.\n"
 
-#: apps/lnewusers.c:129 apps/luseradd.c:128 apps/lusermod.c:142
+#: apps/lnewusers.c:132 apps/luseradd.c:132 apps/lusermod.c:146
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:136
+#: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
 msgstr ""
 
-#: apps/lnewusers.c:206
+#: apps/lnewusers.c:209
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:246
+#: apps/lnewusers.c:249
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
 
-#: apps/lnewusers.c:257
+#: apps/lnewusers.c:260
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:270
+#: apps/lnewusers.c:273
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:285
+#: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr ""
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:298
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr ""
 
-#: apps/lpasswd.c:49
+#: apps/lpasswd.c:50
 msgid "set group password instead of user password"
 msgstr ""
 
-#: apps/lpasswd.c:51
+#: apps/lpasswd.c:52
 msgid "new plain password"
 msgstr ""
 
-#: apps/lpasswd.c:53
+#: apps/lpasswd.c:54
 msgid "new crypted password"
 msgstr ""
 
-#: apps/lpasswd.c:55
+#: apps/lpasswd.c:56
 msgid "read new plain password from given descriptor"
 msgstr ""
 
-#: apps/lpasswd.c:58
+#: apps/lpasswd.c:59
 msgid "read new crypted password from given descriptor"
 msgstr ""
 
-#: apps/lpasswd.c:83
+#: apps/lpasswd.c:85
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "Schimbare parolă pentru %s.\n"
 
-#: apps/lpasswd.c:111
+#: apps/lpasswd.c:113
 msgid "New password"
 msgstr "Parolă nouă"
 
-#: apps/lpasswd.c:114
+#: apps/lpasswd.c:116
 msgid "New password (confirm)"
 msgstr "Parolă nouă (confirmare)"
 
-#: apps/lpasswd.c:128
+#: apps/lpasswd.c:130
 #, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "Parolele nu se potrivesc, încercaţi din nou.\n"
 
-#: apps/lpasswd.c:133
+#: apps/lpasswd.c:135
 #, c-format
 msgid "Password change canceled.\n"
 msgstr "Schimbarea parolei a fost anulată.\n"
 
-#: apps/lpasswd.c:165 apps/lpasswd.c:182
+#: apps/lpasswd.c:170 apps/lpasswd.c:188
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
 msgstr ""
 
-#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
+#: apps/lpasswd.c:210 apps/luseradd.c:323 apps/luseradd.c:333
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "Eroare la setarea parolei pentru utilizatorul %s: %s.\n"
 
-#: apps/lpasswd.c:212
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "Eroare la setarea parolei pentru grupul %s: %s.\n"
 
-#: apps/lpasswd.c:224
+#: apps/lpasswd.c:229
 #, c-format
 msgid "Password changed.\n"
 msgstr "Parola a fost schimbată.\n"
 
-#: apps/luseradd.c:57
+#: apps/luseradd.c:59
 msgid "create a system user"
 msgstr ""
 
-#: apps/luseradd.c:59
+#: apps/luseradd.c:61
 msgid "GECOS information for new user"
 msgstr ""
 
-#: apps/luseradd.c:61
+#: apps/luseradd.c:63
 msgid "home directory for new user"
 msgstr ""
 
-#: apps/luseradd.c:63
+#: apps/luseradd.c:65
 msgid "directory with files for the new user"
 msgstr ""
 
-#: apps/luseradd.c:65
+#: apps/luseradd.c:67
 msgid "shell for new user"
 msgstr ""
 
-#: apps/luseradd.c:67
+#: apps/luseradd.c:69
 msgid "uid for new user"
 msgstr ""
 
-#: apps/luseradd.c:69
+#: apps/luseradd.c:71
 msgid "group for new user"
 msgstr ""
 
-#: apps/luseradd.c:71
+#: apps/luseradd.c:73
 msgid "don't create home directory for user"
 msgstr ""
 
-#: apps/luseradd.c:73
+#: apps/luseradd.c:75
 msgid "don't create group with same name as user"
 msgstr ""
 
-#: apps/luseradd.c:79
+#: apps/luseradd.c:81
 msgid "common name for new user"
 msgstr ""
 
-#: apps/luseradd.c:81
+#: apps/luseradd.c:83
 msgid "given name for new user"
 msgstr ""
 
-#: apps/luseradd.c:83
+#: apps/luseradd.c:85
 msgid "surname for new user"
 msgstr ""
 
-#: apps/luseradd.c:85
+#: apps/luseradd.c:87
 msgid "room number for new user"
 msgstr ""
 
-#: apps/luseradd.c:87
+#: apps/luseradd.c:89
 msgid "telephone number for new user"
 msgstr ""
 
-#: apps/luseradd.c:89
+#: apps/luseradd.c:91
 msgid "home telephone number for new user"
 msgstr ""
 
-#: apps/luseradd.c:189
+#: apps/luseradd.c:194
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr ""
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:213 apps/luseradd.c:230
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr ""
 
-#: apps/luseradd.c:260
+#: apps/luseradd.c:270
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:283
+#: apps/luseradd.c:298
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr ""
 
-#: apps/luseradd.c:290
+#: apps/luseradd.c:310
 #, c-format
 msgid "Error creating mail spool: %s\n"
 msgstr ""
 
-#: apps/luserdel.c:47
+#: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
 msgstr ""
 
-#: apps/luserdel.c:50
+#: apps/luserdel.c:52
 msgid "remove the user's home directory"
 msgstr ""
 
-#: apps/luserdel.c:94
+#: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr ""
 
-#: apps/luserdel.c:108
+#: apps/luserdel.c:117
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr ""
 
-#: apps/luserdel.c:114
+#: apps/luserdel.c:124
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr ""
 
-#: apps/luserdel.c:120
+#: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr ""
 
-#: apps/luserdel.c:126
+#: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr ""
 
-#: apps/luserdel.c:139
+#: apps/luserdel.c:158
 #, fuzzy, c-format
 msgid "Error removing home directory: %s.\n"
 msgstr "Eroare la analiza argumentelor: %s.\n"
 
-#: apps/luserdel.c:145
+#: apps/luserdel.c:171
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr ""
 
-#: apps/lusermod.c:58
+#: apps/lusermod.c:59
 msgid "GECOS information"
 msgstr ""
 
-#: apps/lusermod.c:60
+#: apps/lusermod.c:61
 msgid "home directory"
 msgstr ""
 
-#: apps/lusermod.c:62
+#: apps/lusermod.c:63
 msgid "move home directory contents"
 msgstr ""
 
-#: apps/lusermod.c:64
+#: apps/lusermod.c:65
 msgid "set shell for user"
 msgstr ""
 
-#: apps/lusermod.c:66
+#: apps/lusermod.c:67
 msgid "set UID for user"
 msgstr ""
 
-#: apps/lusermod.c:68
+#: apps/lusermod.c:69
 msgid "set primary GID for user"
 msgstr ""
 
-#: apps/lusermod.c:70
+#: apps/lusermod.c:71
 msgid "change login name for user"
 msgstr ""
 
-#: apps/lusermod.c:72
+#: apps/lusermod.c:73
 msgid "plaintext password for the user"
 msgstr ""
 
-#: apps/lusermod.c:74
+#: apps/lusermod.c:75
 msgid "pre-hashed password for the user"
 msgstr ""
 
-#: apps/lusermod.c:75
+#: apps/lusermod.c:76
 msgid "lock account"
 msgstr ""
 
-#: apps/lusermod.c:78
+#: apps/lusermod.c:79
 msgid "unlock account"
 msgstr ""
 
-#: apps/lusermod.c:80
+#: apps/lusermod.c:81
 msgid "set common name for user"
 msgstr ""
 
-#: apps/lusermod.c:82
+#: apps/lusermod.c:83
 msgid "set given name for user"
 msgstr ""
 
-#: apps/lusermod.c:84
+#: apps/lusermod.c:85
 msgid "set surname for user"
 msgstr ""
 
-#: apps/lusermod.c:86
+#: apps/lusermod.c:87
 msgid "set room number for user"
 msgstr ""
 
-#: apps/lusermod.c:88
+#: apps/lusermod.c:89
 msgid "set telephone number for user"
 msgstr ""
 
-#: apps/lusermod.c:90
+#: apps/lusermod.c:91
 msgid "set home telephone number for user"
 msgstr ""
 
-#: apps/lusermod.c:180 apps/lusermod.c:193
+#: apps/lusermod.c:186 apps/lusermod.c:205
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "Setarea parolei pentru %s a eşuat: %s.\n"
 
-#: apps/lusermod.c:203
+#: apps/lusermod.c:221
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:211
+#: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:232
+#: apps/lusermod.c:262
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr ""
 
-#: apps/lusermod.c:275
+#: apps/lusermod.c:305
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:326
+#: apps/lusermod.c:362
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:342
+#: apps/lusermod.c:385
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:391
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr ""
 
-#: apps/lusermod.c:353
+#: apps/lusermod.c:398
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr ""
@@ -1051,52 +1050,57 @@ msgstr ""
 msgid "group has neither a name nor a GID"
 msgstr ""
 
-#: lib/user.c:1311
+#: lib/user.c:1326
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr ""
 
-#: lib/user.c:2310
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr ""
 
-#: lib/util.c:300 modules/files.c:374
+#: lib/util.c:350 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr ""
 
-#: lib/util.c:704
+#: lib/util.c:754
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr ""
 
-#: lib/util.c:731 lib/util.c:757 lib/util.c:783
+#: lib/util.c:781 lib/util.c:807 lib/util.c:833
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr ""
 
-#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
+#: lib/util.c:787 lib/util.c:813 lib/util.c:839 lib/util.c:882
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr ""
 
-#: lib/util.c:813
+#: lib/util.c:862
+#, c-format
+msgid "couldn't obtain selabel file context handle: %s"
+msgstr ""
+
+#: lib/util.c:872
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr ""
 
-#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
-#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
-#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
-#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
-#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1735
+#: modules/files.c:2070 modules/files.c:2080 modules/files.c:2162
+#: modules/files.c:2173 modules/files.c:2239 modules/files.c:2251
+#: modules/files.c:2341 modules/files.c:2350 modules/files.c:2405
+#: modules/files.c:2414 modules/files.c:2509 modules/files.c:2518
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr ""
 
-#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
-#: modules/files.c:1329
+#: modules/files.c:137 modules/files.c:1116 modules/files.c:1323
+#: modules/files.c:1479
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr ""
@@ -1127,8 +1131,8 @@ msgstr "Eroare la citirea „%s”: %s"
 msgid "Error writing `%s': %s"
 msgstr "Eroare la scrierea „%s”: %s"
 
-#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
-#: modules/files.c:1338
+#: modules/files.c:247 modules/files.c:1127 modules/files.c:1331
+#: modules/files.c:1488
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr ""
@@ -1168,53 +1172,68 @@ msgstr "Eroare la citirea „%s”: %s"
 msgid "Error replacing `%s': %s"
 msgstr "Eroare la citirea „%s”: %s"
 
-#: modules/files.c:903
+#: modules/files.c:920
+#, c-format
+msgid "duplicate object has no %s attribute"
+msgstr ""
+
+#: modules/files.c:930
+#, c-format
+msgid "original object has no %s attribute"
+msgstr ""
+
+#: modules/files.c:942
+#, c-format
+msgid "ID %lu already in use by %s"
+msgstr ""
+
+#: modules/files.c:1025
 #, c-format
 msgid "%s value `%s': `\\n' not allowed"
 msgstr ""
 
-#: modules/files.c:910
+#: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr ""
 
-#: modules/files.c:1014
+#: modules/files.c:1136
 msgid "entry already present in file"
 msgstr ""
 
-#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
-#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
+#: modules/files.c:1143 modules/files.c:1153 modules/files.c:1163
+#: modules/files.c:1543 modules/files.c:1551 modules/files.c:1559
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr ""
 
-#: modules/files.c:1173
+#: modules/files.c:1309
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr ""
 
-#: modules/files.c:1215
+#: modules/files.c:1351
 msgid "entry with conflicting name already present in file"
 msgstr ""
 
-#: modules/files.c:1803
+#: modules/files.c:1953
 msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr ""
 
-#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "eroare la criptarea parolei"
 
-#: modules/files.c:2517 modules/ldap.c:2410
+#: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr ""
 
-#: modules/files.c:2601 modules/files.c:2679
+#: modules/files.c:2751 modules/files.c:2829
 msgid "not executing with superuser privileges"
 msgstr ""
 
-#: modules/files.c:2692
+#: modules/files.c:2842
 msgid "no shadow file present -- disabling"
 msgstr ""
 
