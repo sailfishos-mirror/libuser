@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2013-04-29 04:37-0400\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Korean (http://www.transifex.com/projects/p/fedora/language/"
-"ko/)\n"
+"PO-Revision-Date: 2023-03-31 05:20+0000\n"
+"Last-Translator: 김인수 <simmon@nplob.com>\n"
+"Language-Team: Korean <https://translate.fedoraproject.org/projects/libuser/"
+"master/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 3.6.2\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -40,7 +40,7 @@ msgstr "내부 오류가 발생했습니다.\n"
 #: apps/apputil.c:234
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s은(는) %s의 finger 정보를 변경할 권한이 없습니다\n"
+msgstr "%s는 %s의 finger 정보를 변경할 권한이 없습니다\n"
 
 #: apps/apputil.c:236
 msgid "Unknown user context"
@@ -49,7 +49,7 @@ msgstr "알 수 없는 사용자 문맥"
 #: apps/apputil.c:245
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
-msgstr "/etc/passwd의 기본 문맥을 설정할 수 없습니다\n"
+msgstr "/etc/passwd의 기본 문맥을 설정 할 수 없습니다\n"
 
 #: apps/apputil.c:254
 #, c-format
@@ -64,7 +64,7 @@ msgstr "%s의 인증에 실패했습니다.\n"
 #: apps/apputil.c:272
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "내부 PAM 오류 `%s'(이)가 발생했습니다.\n"
+msgstr "내부 PAM 오류 `%s'.\n"
 
 #: apps/apputil.c:277
 #, c-format
@@ -80,15 +80,15 @@ msgstr "사용자가 일치하지 않습니다.\n"
 #: apps/lgroupdel.c:44 apps/lgroupmod.c:56 apps/lid.c:116 apps/lnewusers.c:47
 #: apps/lpasswd.c:48 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:57
 msgid "prompt for all information"
-msgstr "모든 정보를 요청하다."
+msgstr "모든 정보를 요청하다"
 
 #: apps/lchage.c:88
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "사용자를 위한 시간경과 매개변수 나열"
 
 #: apps/lchage.c:90
 msgid "minimum days between password changes"
-msgstr "최소한의 암호 유지기간"
+msgstr "최소한의 비밀번호 유지기간"
 
 #: apps/lchage.c:90 apps/lchage.c:92 apps/lchage.c:95 apps/lchage.c:98
 #: apps/lchage.c:101 apps/lchage.c:104
@@ -97,25 +97,25 @@ msgstr "일"
 
 #: apps/lchage.c:92
 msgid "maximum days between password changes"
-msgstr "암호 최대 유지기간"
+msgstr "비밀번호 최대 유지기간"
 
 #: apps/lchage.c:94
 msgid "date of last password change in days since 1/1/70"
-msgstr "일단위로 표시한 1970년 1월 1일 이후 마지막으로 암호가 변경될 날짜"
+msgstr "일단위로 표시한 1970년 1월 1일 이후 마지막으로 비밀번호가 변경될 날짜"
 
 #: apps/lchage.c:97
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
-msgstr ""
+msgstr "계정이 비활성화 된 걸로 간주 할 때에 비밀번호 만료 날짜 이후의 일수"
 
 #: apps/lchage.c:100
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "일단위 1/1/70 이후 비밀번호 만료 날짜"
 
 #: apps/lchage.c:103
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "사용자에게 경고를 시작하는 만료 전 날짜"
 
 #: apps/lchage.c:116 apps/lid.c:131 apps/lpasswd.c:69 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:102
@@ -141,7 +141,7 @@ msgstr "사용자 이름이 지정되지 않았습니다.\n"
 #: samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
-msgstr "%s(을)를 초기화하는 도중 오류 발생: %s.\n"
+msgstr "%s를 초기화하는 중 오류: %s.\n"
 
 #: apps/lchage.c:150 apps/lchfn.c:118 apps/lchsh.c:105 apps/lpasswd.c:151
 #: apps/luserdel.c:92 apps/lusermod.c:176
@@ -172,7 +172,7 @@ msgstr "최대값:\t%ld\n"
 #: apps/lchage.c:176
 #, c-format
 msgid "Maximum:\tNone\n"
-msgstr ""
+msgstr "최대:\t없음\n"
 
 #: apps/lchage.c:179
 #, c-format
@@ -187,11 +187,11 @@ msgstr "비활성:\t%ld\n"
 #: apps/lchage.c:186
 #, c-format
 msgid "Inactive:\tNever\n"
-msgstr ""
+msgstr "비활성: \t사용하지 않음\n"
 
 #: apps/lchage.c:190 apps/lchage.c:198 apps/lchage.c:208
 msgid "Must change password on next login"
-msgstr ""
+msgstr "다음 로그인에서 비밀번호를 변경해야 합니다"
 
 #: apps/lchage.c:192 apps/lchage.c:200 apps/lchage.c:210 apps/lchage.c:219
 msgid "Never"
@@ -234,7 +234,7 @@ msgstr "사용자 이름과 uid %d에 대한 이름이 지정되지 않았습니
 #: apps/lchfn.c:99
 #, c-format
 msgid "Changing finger information for %s.\n"
-msgstr "%s의 finger (핑거) 정보를 변경합니다.\n"
+msgstr "%s를 위한 finger 정보를 변경하기\n"
 
 #: apps/lchfn.c:141
 msgid "Full Name"
@@ -298,16 +298,16 @@ msgstr "쉘이 변경되었습니다.\n"
 
 #: apps/lgroupadd.c:50
 msgid "gid for new group"
-msgstr ""
+msgstr "신규 그룹을 위한 gid"
 
 #: apps/lgroupadd.c:50 apps/lgroupmod.c:58 apps/lpasswd.c:57 apps/lpasswd.c:60
 #: apps/luseradd.c:69 apps/lusermod.c:67 apps/lusermod.c:69
 msgid "NUM"
-msgstr ""
+msgstr "NUM"
 
 #: apps/lgroupadd.c:52
 msgid "create a system group"
-msgstr ""
+msgstr "시스템 그룹을 생성합니다"
 
 #: apps/lgroupadd.c:63 apps/lgroupdel.c:55 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -341,19 +341,19 @@ msgstr "%s 그룹을 삭제할 수 없습니다: %s\n"
 
 #: apps/lgroupmod.c:58
 msgid "set GID for group"
-msgstr ""
+msgstr "그룹을 위한 GID 설정"
 
 #: apps/lgroupmod.c:60
 msgid "change group to have given name"
-msgstr ""
+msgstr "그룹 이름을 지정하도록 변경합니다"
 
 #: apps/lgroupmod.c:60
 msgid "NAME"
-msgstr ""
+msgstr "이름"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "그룹과 함께 사용하기 위한 일반텍스트 비밀번호"
 
 #: apps/lgroupmod.c:62 apps/lgroupmod.c:64 apps/lgroupmod.c:66
 #: apps/lgroupmod.c:68 apps/lgroupmod.c:70 apps/lgroupmod.c:72
@@ -365,35 +365,35 @@ msgstr ""
 #: apps/lusermod.c:75 apps/lusermod.c:81 apps/lusermod.c:83 apps/lusermod.c:85
 #: apps/lusermod.c:87 apps/lusermod.c:89 apps/lusermod.c:91
 msgid "STRING"
-msgstr ""
+msgstr "문자열"
 
 #: apps/lgroupmod.c:64 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "그룹과 함께 사용하기 위한 사전-해쉬된 비밀번호"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to add"
-msgstr ""
+msgstr "추가하려는 관리자의 목록"
 
 #: apps/lgroupmod.c:68
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "제거하려는 관리자의 목록"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to add"
-msgstr ""
+msgstr "추가하려는 그룹 구성원의 목록"
 
 #: apps/lgroupmod.c:72
 msgid "list of group members to remove"
-msgstr ""
+msgstr "제거하려는 그룹 구성원의 목록"
 
 #: apps/lgroupmod.c:73
 msgid "lock group"
-msgstr ""
+msgstr "잠금 그룹"
 
 #: apps/lgroupmod.c:74
 msgid "unlock group"
-msgstr ""
+msgstr "해제 그룹"
 
 #: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
@@ -429,11 +429,11 @@ msgstr "%s(을)를 조회하는 도중 오류 발생: %s.\n"
 msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
-msgstr ""
+msgstr "명명된 사용자의 그룹 구성원 대신에 명명된 그룹의 구성원 목록"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
-msgstr ""
+msgstr "이름 (UID/GID가 아닌)으로 회원 정보만 나열합니다"
 
 #: apps/lid.c:148
 #, c-format
@@ -457,19 +457,19 @@ msgstr "%s이(가) 존재하지 않습니다\n"
 
 #: apps/lnewusers.c:49
 msgid "file with user information records"
-msgstr ""
+msgstr "사용자 정보 기록을 갖는 파일"
 
 #: apps/lnewusers.c:49
 msgid "PATH"
-msgstr ""
+msgstr "경로"
 
 #: apps/lnewusers.c:51
 msgid "don't create home directories"
-msgstr ""
+msgstr "홈 디렉토리를 생성하지 않습니다"
 
 #: apps/lnewusers.c:53
 msgid "don't create mail spools"
-msgstr ""
+msgstr "메일 스풀을 생성하지 않습니다"
 
 #: apps/lnewusers.c:65
 msgid "[OPTION...]"
@@ -515,7 +515,7 @@ msgstr "%s의 홈 디렉토리를 생성하는 도중 오류가 발생했습니�
 #: apps/lnewusers.c:273
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "%s를 위한 전자우편 스풀 생성 중 오류 : %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -529,23 +529,23 @@ msgstr "%s의 사용자 계정을 생성하는 도중 오류 발생: %s.\n"
 
 #: apps/lpasswd.c:50
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "사용자 비밀번호 대신에 그룹 비밀번호를 설정"
 
 #: apps/lpasswd.c:52
 msgid "new plain password"
-msgstr ""
+msgstr "신규 일반 비밀번호"
 
 #: apps/lpasswd.c:54
 msgid "new crypted password"
-msgstr ""
+msgstr "신규 암호화된 비밀번호"
 
 #: apps/lpasswd.c:56
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "제공된 설명자에서 신규 일반 비밀번호를 읽습니다"
 
 #: apps/lpasswd.c:59
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "제공된 설명자에서 신규 암호화된 비밀번호를 읽습니다"
 
 #: apps/lpasswd.c:85
 #, c-format
@@ -592,63 +592,63 @@ msgstr "암호가 변경되었습니다.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "시스템 사용자를 생성합니다"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 GECOS 정보"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 홈 디렉토리"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "신규 사용자를 위한 파일이 있는 디렉토리"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 쉘"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 uid"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 그룹"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "사용자를 위한 홈 디렉토리를 생성하지 않습니다"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "사용자와 같은 동일 이름을 갖는 그룹을 생성하지 않습니다"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 일반 이름"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "신규 사용자를 위해 제공된 이름"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 성"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 방 번호"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 전화 번호"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "신규 사용자를 위한 집 전화 번호"
 
 #: apps/luseradd.c:194
 #, c-format
@@ -673,15 +673,15 @@ msgstr "%s(을)를 생성하는 도중 오류 발생: %s.\n"
 #: apps/luseradd.c:310
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "전자우편 스풀 생성 중 오류: %s\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr ""
+msgstr "만약 사용자가 개인 그룹을 가지고 있으면, 사용자의 개인 그룹을 제거하지 마세요"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "사용자의 홈 디렉토리를 제거합니다"
 
 #: apps/luserdel.c:98
 #, c-format
@@ -709,82 +709,82 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "%s 그룹은 삭제할 수 없습니다: %s.\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "사용자의 홈 디렉토리를 삭제하는 중 오류 발생"
+msgstr "홈 디렉토리 제거 중 오류 발생: %s.\n"
 
 #: apps/luserdel.c:171
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "전자우편 스풀 제거 중 오류: %s"
 
 #: apps/lusermod.c:59
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS 정보"
 
 #: apps/lusermod.c:61
 msgid "home directory"
-msgstr ""
+msgstr "홈 디렉토리"
 
 #: apps/lusermod.c:63
 msgid "move home directory contents"
-msgstr ""
+msgstr "홈 디렉토리 내용을 이동"
 
 #: apps/lusermod.c:65
 msgid "set shell for user"
-msgstr ""
+msgstr "사용자를 위한 쉘 설정"
 
 #: apps/lusermod.c:67
 msgid "set UID for user"
-msgstr ""
+msgstr "사용자를 위한 UID 설정"
 
 #: apps/lusermod.c:69
 msgid "set primary GID for user"
-msgstr ""
+msgstr "사용자를 위한 기본 GID 설정"
 
 #: apps/lusermod.c:71
 msgid "change login name for user"
-msgstr ""
+msgstr "사용자를 위한 로그인 이름 변경"
 
 #: apps/lusermod.c:73
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "사용자를 위한 일반 텍스트 비밀번호"
 
 #: apps/lusermod.c:75
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "사용자를 위한 사전-해쉬된 비밀번호"
 
 #: apps/lusermod.c:76
 msgid "lock account"
-msgstr ""
+msgstr "계정 잠김"
 
 #: apps/lusermod.c:79
 msgid "unlock account"
-msgstr ""
+msgstr "계정 잠김 해제"
 
 #: apps/lusermod.c:81
 msgid "set common name for user"
-msgstr ""
+msgstr "사용자를 위한 일반 이름 설정"
 
 #: apps/lusermod.c:83
 msgid "set given name for user"
-msgstr ""
+msgstr "사용자를 위해 제공된 이름 설정"
 
 #: apps/lusermod.c:85
 msgid "set surname for user"
-msgstr ""
+msgstr "사용자를 위한 성 설정"
 
 #: apps/lusermod.c:87
 msgid "set room number for user"
-msgstr ""
+msgstr "사용자를 위한 방 번호 설정"
 
 #: apps/lusermod.c:89
 msgid "set telephone number for user"
-msgstr ""
+msgstr "사용자를 위한 전화 번호 설정"
 
 #: apps/lusermod.c:91
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "사용자를 위한 집 전화 번호 설정"
 
 #: apps/lusermod.c:186 apps/lusermod.c:205
 #, c-format
@@ -937,15 +937,15 @@ msgstr "잠금 해제하시면 암호 입력란이 비워집니다"
 
 #: lib/error.c:105
 msgid "invalid attribute value"
-msgstr "올바르지 않은 속성 "
+msgstr "올바르지 않은 속성 값"
 
 #: lib/error.c:107
 msgid "invalid module combination"
-msgstr "올바르지 않은 모듈 "
+msgstr "올바르지 않은 모듈 결합"
 
 #: lib/error.c:109
 msgid "user's home directory not owned by them"
-msgstr ""
+msgstr "소유하지 않은 사용자의 홈 디렉토리"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -953,11 +953,11 @@ msgstr "알 수 없는 오류"
 
 #: lib/misc.c:240
 msgid "invalid number"
-msgstr "잘못된 번호 "
+msgstr "잘못된 번호"
 
 #: lib/misc.c:254
 msgid "invalid ID"
-msgstr "잘못된 ID "
+msgstr "잘못된 ID"
 
 #: lib/modules.c:61
 #, c-format
@@ -972,7 +972,7 @@ msgstr "`%s'의 모듈 버젼이 일치하지 않습니다"
 #: lib/modules.c:92
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "`%s'  모듈은 `%s'을(를) 정의하지 않습니다"
+msgstr "모듈`%s'는 `%s'를 정의하지 않습니다"
 
 #: lib/prompt.c:88
 msgid "error reading terminal attributes"
@@ -988,11 +988,11 @@ msgstr "터미널로 부터 읽는 도중 오류 발생"
 
 #: lib/user.c:218
 msgid "name is not set"
-msgstr "이름이 설정되지 않았습니다."
+msgstr "이름이 설정되지 않았습니다"
 
 #: lib/user.c:223
 msgid "name is too short"
-msgstr "이름이 너무 짧습니다."
+msgstr "이름이 너무 짧습니다"
 
 #: lib/user.c:228
 #, c-format
@@ -1001,15 +1001,15 @@ msgstr "이름이 너무 깁니다 (%zu > %d)"
 
 #: lib/user.c:235
 msgid "name contains non-ASCII characters"
-msgstr "이름에 아스키 (ASCII)가 아닌 문자가 들어 있습니다."
+msgstr "이름은 비-아스키 (ASCII) 문자를 포함합니다"
 
 #: lib/user.c:242
 msgid "name contains control characters"
-msgstr "이름에 제어 문자가 포함되어 있습니다."
+msgstr "이름은 제어 문자를 포함합니다"
 
 #: lib/user.c:249
 msgid "name contains whitespace"
-msgstr "이름에 공백이 포함되어 있습니다."
+msgstr "이름은 공백을 포함합니다"
 
 #: lib/user.c:261
 msgid "name starts with a hyphen"
@@ -1018,7 +1018,7 @@ msgstr "이름이 하이픈(연결 부호)로 시작합니다"
 #: lib/user.c:272
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "이름에 잘못된 문자 `%c'가 있습니다."
+msgstr "이름은 유효하지 않은 문자 `%c'를 포함합니다"
 
 #: lib/user.c:308 lib/user.c:360
 #, c-format
@@ -1028,7 +1028,7 @@ msgstr "사용자 %s는 UID가 없습니다"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "사용자 %s를 찾을 수 없음"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1038,7 +1038,7 @@ msgstr "그룹 %s는 GID가 없습니다"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "그룹 %s를 찾을 수 없음"
 
 #: lib/user.c:355
 #, c-format
@@ -1061,7 +1061,7 @@ msgstr "그룹은 이름과 GID가 없습니다"
 #: lib/user.c:1326
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
-msgstr "기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다  "
+msgstr "기본값으로 안전하지 않은 `%s' 홈 디렉토리 사용을 거부합니다"
 
 #: lib/user.c:2326
 #, c-format
@@ -1076,12 +1076,12 @@ msgstr "파일을 잠그는 도중 오류 발생: %s"
 #: lib/util.c:754
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr "기본 보안 문맥을 읽어오지 못했습니다: %s  "
+msgstr "기본 보안 문맥을 가져 올 수 없습니다: %s"
 
 #: lib/util.c:781 lib/util.c:807 lib/util.c:833
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "`%s'의 보안 문맥을 읽어오지 못했습니다: %s "
+msgstr "`%s'의 보안 문맥을 가져 올 수 없습니다: %s"
 
 #: lib/util.c:787 lib/util.c:813 lib/util.c:839 lib/util.c:882
 #, c-format
@@ -1089,15 +1089,14 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "기본 보안 문맥을 `%s'으로 설정할 수 없습니다: %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "기본 보안 문맥을 읽어오지 못했습니다: %s  "
+msgstr "셀라벨 파일 문맥 처리를 가져 올 수 없습니다: %s"
 
 #: lib/util.c:872
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "`%s'의 보안 문맥을 결정하지 못했습니다: %s "
+msgstr "`%s'의 보안 문맥을 결정 할 수 없습니다: %s"
 
 #: modules/files.c:129 modules/files.c:692 modules/files.c:1735
 #: modules/files.c:2070 modules/files.c:2080 modules/files.c:2162
@@ -1149,64 +1148,64 @@ msgstr "`%s'(을)를 읽을 수 없음: %s"
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "잠김 `%s'의 잘못된 내용"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "잠김 %s는 프로세서 %ju에 의해 유지됩니다"
 
 #: modules/files.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "%s에서 %s(으)로 이동하는 도중 오류 발생: %s.\n"
+msgstr "오래된 잠금 `%s' 제거 중 오류 발생: %s"
 
 #: modules/files.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "error opening temporary file for `%s': %s"
-msgstr "`%s' 모드 변경 도중 오류 발생: %s"
+msgstr "`%s'를 위한 임시 파일 열기 중 오류: %s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "잠김 `%s'를 가져 올 수 없습니다: %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "`%s'(을)를 읽는 도중 오류 발생: %s"
+msgstr "`%s'를 해결 중 오류: %s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "`%s'(을)를 읽는 도중 오류 발생: %s"
+msgstr "`%s'를 대체 중 오류: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "entity 개체에 %s 속성이 없습니다"
+msgstr "중복 대상은 %s 속성이 없습니다"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "개체에 %s 속성이 없습니다"
+msgstr "기본 객체에 %s 속성이 없습니다"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "ID %lu는 이미 %s에 의해 사용 중입니다"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s 값 `%s': `:'은 허용되지 않음 "
+msgstr ""
+"%s 값 `%s': `\\n"
+"'은 허용되지 않음"
 
 #: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s 값 `%s': `:'은 허용되지 않음 "
+msgstr "%s 값 `%s': `:'은 허용되지 않음"
 
 #: modules/files.c:1136
 msgid "entry already present in file"
@@ -1225,12 +1224,13 @@ msgstr "entity 개체에 %s 속성이 없습니다"
 
 #: modules/files.c:1351
 msgid "entry with conflicting name already present in file"
-msgstr "목록에 이미 중복되는 이름을 가진  파일이 존재합니다."
+msgstr "이름이 충돌하는 항목이 이미 파일에 있습니다"
 
 #: modules/files.c:1953
-#, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "`:'은 암호화된 암호에서 허용되지 않음 "
+msgstr ""
+"`:'과 `\\n"
+"'은 암호화된 비밀번호에서 허용되지 않습니다"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
@@ -1239,7 +1239,7 @@ msgstr "암호를 암호화하는 도중 오류 발생"
 #: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr "'%s', '%s 모듈은 같이 사용될 수 없습니다."
+msgstr "`%s' 및 '%s' 모듈은 조합 할 수 없습니다"
 
 #: modules/files.c:2751 modules/files.c:2829
 msgid "not executing with superuser privileges"
@@ -1314,7 +1314,7 @@ msgstr "개체에 %s 속성이 없습니다"
 
 #: modules/ldap.c:1533
 msgid "unsupported password encryption scheme"
-msgstr "지원되지 않는 암호화 체계입니다  "
+msgstr "지원되지 않는 비밀번호 암호화 체계"
 
 #: modules/ldap.c:1658
 msgid "no such object in LDAP directory"
@@ -1340,7 +1340,7 @@ msgstr "LDAP 검색 기반 DN"
 
 #: modules/ldap.c:2458
 msgid "LDAP Bind DN"
-msgstr "LDAP Bind DN "
+msgstr "LDAP 바인드 DN"
 
 #: modules/ldap.c:2465
 msgid "LDAP Bind Password"
