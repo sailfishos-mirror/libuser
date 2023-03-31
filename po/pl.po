@@ -15,17 +15,17 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2015-03-17 03:18-0400\n"
+"PO-Revision-Date: 2023-03-18 12:14+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/fedora/language/"
-"pl/)\n"
+"Language-Team: Polish <https://translate.fedoraproject.org/projects/libuser/"
+"master/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Zanata 3.6.2\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -40,7 +40,7 @@ msgstr "Błąd wewnętrzny.\n"
 #: apps/apputil.c:234
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
-msgstr "%s nie jest upoważniony do zmiany informacji fingera o %s\n"
+msgstr "%s nie jest upoważniony do zmiany informacji fingera o %s\n"
 
 #: apps/apputil.c:236
 msgid "Unknown user context"
@@ -64,23 +64,23 @@ msgstr "Uwierzytelnienie się nie powiodło dla %s.\n"
 #: apps/apputil.c:272
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "Wewnętrzny błąd PAM \"%s\".\n"
+msgstr "Wewnętrzny błąd PAM „%s”.\n"
 
 #: apps/apputil.c:277
 #, c-format
 msgid "Unknown user authenticated.\n"
-msgstr "Nieznany upoważniony użytkownik.\n"
+msgstr "Nieznany uwierzytelniony użytkownik.\n"
 
 #: apps/apputil.c:281
 #, c-format
 msgid "User mismatch.\n"
-msgstr "Użytkownik nie zgadza się.\n"
+msgstr "Użytkownik się nie zgadza.\n"
 
 #: apps/lchage.c:86 apps/lchfn.c:54 apps/lchsh.c:46 apps/lgroupadd.c:48
 #: apps/lgroupdel.c:44 apps/lgroupmod.c:56 apps/lid.c:116 apps/lnewusers.c:47
 #: apps/lpasswd.c:48 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:57
 msgid "prompt for all information"
-msgstr "pyta o wszystkie informacje"
+msgstr "pyta o wszystkie informacje"
 
 #: apps/lchage.c:88
 msgid "list aging parameters for the user"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: apps/lchage.c:100
 msgid "password expiration date in days since 1/1/70"
-msgstr "data wygaśnięcia hasła w dniach od 1 stycznia 1970"
+msgstr "data wygaśnięcia hasła w dniach od 1 stycznia 1970"
 
 #: apps/lchage.c:103
 msgid "days before expiration to begin warning user"
@@ -122,7 +122,7 @@ msgstr "liczba dni przed wygaśnięciem, podczas których ostrzegać użytkownik
 #: apps/lchage.c:116 apps/lid.c:131 apps/lpasswd.c:69 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:102
 msgid "[OPTION...] user"
-msgstr "[OPCJA...] użytkownik"
+msgstr "[OPCJA…] użytkownik"
 
 #: apps/lchage.c:119 apps/lchfn.c:72 apps/lchsh.c:60 apps/lgroupadd.c:66
 #: apps/lgroupdel.c:58 apps/lgroupmod.c:87 apps/lid.c:134 apps/lnewusers.c:68
@@ -226,7 +226,7 @@ msgstr "Wystąpił błąd podczas próby modyfikacji okresu ważności dla %s: %
 
 #: apps/lchfn.c:69 apps/lchsh.c:57
 msgid "[OPTION...] [user]"
-msgstr "[OPCJA...] [użytkownik]"
+msgstr "[OPCJA…] [użytkownik]"
 
 #: apps/lchfn.c:89 apps/lchsh.c:77 apps/lid.c:167
 #, c-format
@@ -240,7 +240,7 @@ msgstr "Zmienianie informacji fingera dla %s.\n"
 
 #: apps/lchfn.c:141
 msgid "Full Name"
-msgstr "Imię i nazwisko"
+msgstr "Imię i nazwisko"
 
 #: apps/lchfn.c:151
 msgid "Surname"
@@ -313,7 +313,7 @@ msgstr "tworzy grupę systemową"
 
 #: apps/lgroupadd.c:63 apps/lgroupdel.c:55 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
-msgstr "[OPCJA...] grupa"
+msgstr "[OPCJA…] grupa"
 
 #: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:96
 #, c-format
@@ -355,7 +355,7 @@ msgstr "NAZWA"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr "hasło w zwykłym tekście do użycia z grupą"
+msgstr "hasło w zwykłym tekście do użycia z grupą"
 
 #: apps/lgroupmod.c:62 apps/lgroupmod.c:64 apps/lgroupmod.c:66
 #: apps/lgroupmod.c:68 apps/lgroupmod.c:70 apps/lgroupmod.c:72
@@ -371,7 +371,7 @@ msgstr "CIĄG"
 
 #: apps/lgroupmod.c:64 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr "uprzednio wymieszane hasło do użycia z grupą"
+msgstr "uprzednio wymieszane hasło do użycia z grupą"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to add"
@@ -400,7 +400,7 @@ msgstr "odblokowuje grupę"
 #: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr "Podano jednocześnie opcje -L i -U.\n"
+msgstr "Podano jednocześnie opcje -L i -U.\n"
 
 #: apps/lgroupmod.c:145 apps/lgroupmod.c:161
 #, c-format
@@ -432,13 +432,13 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
-"wyświetla listę członków nazwanej grupy zamiast członkostwa w grupie dla "
+"wyświetla listę członków nazwanej grupy zamiast członkostwa w grupie dla "
 "nazwanego użytkownika"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
 msgstr ""
-"wyświetla listę tylko informacji o członkostwie według nazwy, bez UID/GID"
+"wyświetla listę tylko informacji o członkostwie według nazwy, bez UID/GID"
 
 #: apps/lid.c:148
 #, c-format
@@ -462,7 +462,7 @@ msgstr "%s nie istnieje\n"
 
 #: apps/lnewusers.c:49
 msgid "file with user information records"
-msgstr "plik z wpisami informacji o użytkowniku"
+msgstr "plik z wpisami informacji o użytkowniku"
 
 #: apps/lnewusers.c:49
 msgid "PATH"
@@ -478,19 +478,19 @@ msgstr "bez tworzenia kolejek poczty"
 
 #: apps/lnewusers.c:65
 msgid "[OPTION...]"
-msgstr "[OPCJA...]"
+msgstr "[OPCJA…]"
 
 #: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
-msgstr "Błąd podczas otwierania \"%s\": %s.\n"
+msgstr "Błąd podczas otwierania „%s”: %s.\n"
 
 #: apps/lnewusers.c:121
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr ""
-"Błąd podczas tworzenia konta dla \"%s\": wiersz jest niepoprawnie "
-"sformatowany.\n"
+"Błąd podczas tworzenia konta dla „%s”: wiersz jest niepoprawnie sformatowany."
+"\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:132 apps/lusermod.c:146
 #, c-format
@@ -499,19 +499,18 @@ msgstr "Nieprawidłowy identyfikator użytkownika %s\n"
 
 #: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
-msgstr "Nie można utworzyć konta o UID 0.\n"
+msgstr "Nie można utworzyć konta o UID 0.\n"
 
 #: apps/lnewusers.c:209
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
-msgstr "Błąd podczas tworzenie grupy dla \"%s\" z GID %jd: %s\n"
+msgstr "Błąd podczas tworzenia grupy dla „%s” z GID %jd: %s\n"
 
 #: apps/lnewusers.c:249
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr ""
-"Odmawianie domyślnego użycia niebezpiecznego katalogu domowego \"%s\" dla "
-"%s\n"
+"Odmawianie domyślnego użycia niebezpiecznego katalogu domowego „%s” dla %s\n"
 
 #: apps/lnewusers.c:260
 #, c-format
@@ -547,11 +546,11 @@ msgstr "nowe zaszyfrowane hasło"
 
 #: apps/lpasswd.c:56
 msgid "read new plain password from given descriptor"
-msgstr "odczytuje nowe zwykłe hasło z podanego deskryptora"
+msgstr "odczytuje nowe zwykłe hasło z podanego deskryptora"
 
 #: apps/lpasswd.c:59
 msgid "read new crypted password from given descriptor"
-msgstr "odczytuje nowe zaszyfrowane hasło z podanego deskryptora"
+msgstr "odczytuje nowe zaszyfrowane hasło z podanego deskryptora"
 
 #: apps/lpasswd.c:85
 #, c-format
@@ -579,7 +578,7 @@ msgstr "Zmiana hasła została anulowana.\n"
 #: apps/lpasswd.c:170 apps/lpasswd.c:188
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
-msgstr "Błąd podczas odczytywania z deskryptora pliku %d.\n"
+msgstr "Błąd podczas odczytywania z deskryptora pliku %d.\n"
 
 #: apps/lpasswd.c:210 apps/luseradd.c:323 apps/luseradd.c:333
 #, c-format
@@ -610,7 +609,7 @@ msgstr "katalog domowy dla nowego użytkownika"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr "katalog z plikami dla nowego użytkownika"
+msgstr "katalog z plikami dla nowego użytkownika"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
@@ -630,7 +629,7 @@ msgstr "bez tworzenia katalogu domowego dla nowego użytkownika"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr "bez tworzenia grupy o tej samej nazwie co użytkownik"
+msgstr "bez tworzenia grupy o tej samej nazwie co użytkownik"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
@@ -664,7 +663,7 @@ msgstr "Grupa %jd nie istnieje\n"
 #: apps/luseradd.c:213 apps/luseradd.c:230
 #, c-format
 msgid "Error creating group `%s': %s\n"
-msgstr "Błąd podczas tworzenia grupy \"%s\": %s\n"
+msgstr "Błąd podczas tworzenia grupy „%s”: %s\n"
 
 #: apps/luseradd.c:270
 #, c-format
@@ -683,7 +682,7 @@ msgstr "Błąd podczas tworzenia bufora poczty: %s\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr "bez usuwania prywatnej grupy użytkownika, jeśli użytkownik ją posiada"
+msgstr "bez usuwania prywatnej grupy użytkownika, jeśli użytkownik ją ma"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
@@ -697,17 +696,17 @@ msgstr "Użytkownik %s nie może zostać usunięty: %s.\n"
 #: apps/luserdel.c:117
 #, c-format
 msgid "%s did not have a gid number.\n"
-msgstr "%s nie posiadał numeru GID.\n"
+msgstr "%s nie ma numeru GID.\n"
 
 #: apps/luserdel.c:124
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
-msgstr "Nie istnieje żadna grupa z GID %jd, nie zostanie usunięta.\n"
+msgstr "Nie istnieje żadna grupa z GID %jd, nie zostanie usunięta.\n"
 
 #: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
-msgstr "Grupa z GID %jd nie posiada nazwy.\n"
+msgstr "Grupa z GID %jd nie ma nazwy.\n"
 
 #: apps/luserdel.c:138
 #, c-format
@@ -754,7 +753,7 @@ msgstr "zmienia nazwę logowania dla użytkownika"
 
 #: apps/lusermod.c:73
 msgid "plaintext password for the user"
-msgstr "hasło w zwykłym tekście dla użytkownika"
+msgstr "hasło w zwykłym tekście dla użytkownika"
 
 #: apps/lusermod.c:75
 msgid "pre-hashed password for the user"
@@ -810,7 +809,7 @@ msgstr "Użytkownik %s nie może zostać odblokowany: %s.\n"
 #: apps/lusermod.c:262
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
-msgstr "Ostrzeżenie: grupa o identyfikatorze %jd nie istnieje.\n"
+msgstr "Ostrzeżenie: grupa o identyfikatorze %jd nie istnieje.\n"
 
 #: apps/lusermod.c:305
 #, c-format
@@ -840,22 +839,22 @@ msgstr "Błąd podczas przenoszenia %s do %s: %s.\n"
 #: lib/config.c:128
 #, c-format
 msgid "could not open configuration file `%s': %s"
-msgstr "nie można otworzyć pliku konfiguracyjnego \"%s\": %s"
+msgstr "nie można otworzyć pliku konfiguracyjnego „%s”: %s"
 
 #: lib/config.c:134
 #, c-format
 msgid "could not stat configuration file `%s': %s"
-msgstr "nie można wykonać \"stat\" na pliku konfiguracyjnym \"%s\": %s"
+msgstr "nie można wykonać „stat” na pliku konfiguracyjnym „%s”: %s"
 
 #: lib/config.c:143
 #, c-format
 msgid "configuration file `%s' is too large"
-msgstr "plik konfiguracyjny \"%s\" jest za duży"
+msgstr "plik konfiguracyjny „%s” jest za duży"
 
 #: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "nie można odczytać pliku konfiguracyjnego \"%s\": %s"
+msgstr "nie można odczytać pliku konfiguracyjnego „%s”: %s"
 
 #: lib/error.c:62
 msgid "success"
@@ -863,7 +862,7 @@ msgstr "powodzenie"
 
 #: lib/error.c:64
 msgid "module disabled by configuration"
-msgstr "moduł wyłączony w konfiguracji"
+msgstr "moduł wyłączony w konfiguracji"
 
 #: lib/error.c:66
 msgid "generic error"
@@ -875,7 +874,7 @@ msgstr "brak wystarczających uprawnień"
 
 #: lib/error.c:70
 msgid "access denied"
-msgstr "dostęp zabroniony"
+msgstr "brak dostępu"
 
 #: lib/error.c:72
 msgid "bad user/group name"
@@ -907,7 +906,7 @@ msgstr "błąd podczas blokowania pliku"
 
 #: lib/error.c:86
 msgid "error statting file"
-msgstr "błąd podczas wykonywania \"stat\" na pliku"
+msgstr "błąd podczas wykonywania „stat” na pliku"
 
 #: lib/error.c:88
 msgid "error reading file"
@@ -919,7 +918,7 @@ msgstr "błąd podczas zapisywania do pliku"
 
 #: lib/error.c:92
 msgid "data not found in file"
-msgstr "dane w pliku nie zostały odnalezione"
+msgstr "dane w pliku nie zostały odnalezione"
 
 #: lib/error.c:94
 msgid "internal initialization error"
@@ -931,7 +930,7 @@ msgstr "błąd podczas wczytywania modułu"
 
 #: lib/error.c:98
 msgid "error resolving symbol in module"
-msgstr "błąd podczas wyszukiwaniu symbolu w module"
+msgstr "błąd podczas wyszukiwaniu symbolu w module"
 
 #: lib/error.c:100
 msgid "library/module version mismatch"
@@ -968,17 +967,17 @@ msgstr "nieprawidłowy identyfikator"
 #: lib/modules.c:61
 #, c-format
 msgid "no initialization function %s in `%s'"
-msgstr "brak funkcji inicjującej %s w \"%s\""
+msgstr "brak funkcji inicjującej %s w „%s”"
 
 #: lib/modules.c:79
 #, c-format
 msgid "module version mismatch in `%s'"
-msgstr "niezgodna wersja modułu w \"%s\""
+msgstr "niezgodna wersja modułu w „%s”"
 
 #: lib/modules.c:92
 #, c-format
 msgid "module `%s' does not define `%s'"
-msgstr "moduł \"%s\" nie określa \"%s\""
+msgstr "moduł „%s” nie określa „%s”"
 
 #: lib/prompt.c:88
 msgid "error reading terminal attributes"
@@ -990,7 +989,7 @@ msgstr "błąd podczas ustawiania atrybutów terminala"
 
 #: lib/prompt.c:101
 msgid "error reading from terminal"
-msgstr "błąd podczas odczytywania z terminalu"
+msgstr "błąd podczas odczytywania z terminalu"
 
 #: lib/user.c:218
 msgid "name is not set"
@@ -1024,12 +1023,12 @@ msgstr "nazwa zaczyna się od myślnika"
 #: lib/user.c:272
 #, c-format
 msgid "name contains invalid char `%c'"
-msgstr "nazwa zawiera nieprawidłowy znak \"%c\""
+msgstr "nazwa zawiera nieprawidłowy znak „%c”"
 
 #: lib/user.c:308 lib/user.c:360
 #, c-format
 msgid "user %s has no UID"
-msgstr "użytkownik %s nie posiada UID"
+msgstr "użytkownik %s nie ma UID"
 
 #: lib/user.c:310
 #, c-format
@@ -1039,7 +1038,7 @@ msgstr "nie odnaleziono użytkownika %s"
 #: lib/user.c:333 lib/user.c:361
 #, c-format
 msgid "group %s has no GID"
-msgstr "grupa %s nie posiada GID"
+msgstr "grupa %s nie ma GID"
 
 #: lib/user.c:335
 #, c-format
@@ -1049,25 +1048,25 @@ msgstr "nie odnaleziono grupy %s"
 #: lib/user.c:355
 #, c-format
 msgid "user %jd has no name"
-msgstr "użytkownik %jd nie posiada nazwy"
+msgstr "użytkownik %jd nie ma nazwy"
 
 #: lib/user.c:356
 #, c-format
 msgid "group %jd has no name"
-msgstr "grupa %jd nie posiada nazwy"
+msgstr "grupa %jd nie ma nazwy"
 
 #: lib/user.c:364
 msgid "user has neither a name nor an UID"
-msgstr "użytkownik nie posiada nazwy ani UID"
+msgstr "użytkownik nie ma nazwy ani UID"
 
 #: lib/user.c:365
 msgid "group has neither a name nor a GID"
-msgstr "grupa nie posiada nazwy ani GID"
+msgstr "grupa nie ma nazwy ani GID"
 
 #: lib/user.c:1326
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
-msgstr "Odmawianie domyślnego użycia niebezpiecznego katalogu domowego \"%s\""
+msgstr "Odmawianie domyślnego użycia niebezpiecznego katalogu domowego „%s”"
 
 #: lib/user.c:2326
 #, c-format
@@ -1082,28 +1081,27 @@ msgstr "błąd podczas blokowania pliku %s"
 #: lib/util.c:754
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr "nie można uzyskać domyślnego kontekstu bezpieczeństwa: %s"
+msgstr "nie można uzyskać domyślnego kontekstu zabezpieczeń: %s"
 
 #: lib/util.c:781 lib/util.c:807 lib/util.c:833
 #, c-format
 msgid "couldn't get security context of `%s': %s"
-msgstr "nie można uzyskać domyślnego kontekstu bezpieczeństwa \"%s\": %s"
+msgstr "nie można uzyskać domyślnego kontekstu zabezpieczeń „%s”: %s"
 
 #: lib/util.c:787 lib/util.c:813 lib/util.c:839 lib/util.c:882
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
-msgstr "nie można ustawić domyślnego kontekstu bezpieczeństwa na \"%s\": %s"
+msgstr "nie można ustawić domyślnego kontekstu zabezpieczeń na „%s”: %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "nie można uzyskać domyślnego kontekstu bezpieczeństwa: %s"
+msgstr "nie można uzyskać uchwytu kontekstu pliku SELinuksa: %s"
 
 #: lib/util.c:872
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "nie można ustalić domyślnego kontekstu bezpieczeństwa dla \"%s\": %s"
+msgstr "nie można ustalić domyślnego kontekstu zabezpieczeń dla „%s”: %s"
 
 #: modules/files.c:129 modules/files.c:692 modules/files.c:1735
 #: modules/files.c:2070 modules/files.c:2080 modules/files.c:2162
@@ -1112,131 +1110,132 @@ msgstr "nie można ustalić domyślnego kontekstu bezpieczeństwa dla \"%s\": %s
 #: modules/files.c:2414 modules/files.c:2509 modules/files.c:2518
 #, c-format
 msgid "couldn't open `%s': %s"
-msgstr "nie można otworzyć \"%s\": %s"
+msgstr "nie można otworzyć „%s”: %s"
 
 #: modules/files.c:137 modules/files.c:1116 modules/files.c:1323
 #: modules/files.c:1479
 #, c-format
 msgid "couldn't stat `%s': %s"
-msgstr "nie można wykonać \"stat\" na \"%s\": %s"
+msgstr "nie można wykonać „stat” na „%s”: %s"
 
 #: modules/files.c:161
 #, c-format
 msgid "error creating `%s': %s"
-msgstr "błąd podczas tworzenia \"%s\": %s"
+msgstr "błąd podczas tworzenia „%s”: %s"
 
 #: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "Błąd podczas zmieniania właściciela \"%s\": %s"
+msgstr "Błąd podczas zmieniania właściciela „%s”: %s"
 
 #: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr "Błąd podczas zmieniania trybu \"%s\": %s"
+msgstr "Błąd podczas zmieniania trybu „%s”: %s"
 
 #: modules/files.c:191
 #, c-format
 msgid "Error reading `%s': %s"
-msgstr "Błąd podczas odczytywania \"%s\": %s"
+msgstr "Błąd podczas odczytywania „%s”: %s"
 
 #: modules/files.c:206 modules/files.c:217 modules/files.c:305
 #: modules/files.c:467
 #, c-format
 msgid "Error writing `%s': %s"
-msgstr "Błąd podczas zapisywania \"%s\": %s"
+msgstr "Błąd podczas zapisywania „%s”: %s"
 
 #: modules/files.c:247 modules/files.c:1127 modules/files.c:1331
 #: modules/files.c:1488
 #, c-format
 msgid "couldn't read from `%s': %s"
-msgstr "nie można odczytać z \"%s\": %s"
+msgstr "nie można odczytać z „%s”: %s"
 
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "Nieprawidłowa zawartość blokady „%s”"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "Blokada %s jest zajmowana przez proces %ju"
 
 #: modules/files.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "Błąd podczas przenoszenia %s do %s: %s.\n"
+msgstr "Błąd podczas usuwania nieaktualnej blokady „%s”: %s"
 
 #: modules/files.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "error opening temporary file for `%s': %s"
-msgstr "Błąd podczas zmieniania trybu \"%s\": %s"
+msgstr "błąd podczas otwierania pliku tymczasowego dla „%s”: %s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "Nie można uzyskać blokady „%s”: %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "Błąd podczas odczytywania \"%s\": %s"
+msgstr "Błąd podczas rozwiązywania „%s”: %s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "Błąd podczas odczytywania \"%s\": %s"
+msgstr "Błąd podczas zastępowania „%s”: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "obiekt nie posiada atrybutu %s"
+msgstr "podwójny obiekt nie ma atrybutu %s"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "obiekt nie posiada atrybutu %s"
+msgstr "oryginalny obiekt nie ma atrybutu %s"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "identyfikator %lu jest już używany przez %s"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s wartość \"%s\": \":\" jest niedozwolona"
+msgstr ""
+"%s wartość „%s”: „\\n"
+"” jest niedozwolone"
 
 #: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s wartość \"%s\": \":\" jest niedozwolona"
+msgstr "%s wartość „%s”: „:” jest niedozwolone"
 
 #: modules/files.c:1136
 msgid "entry already present in file"
-msgstr "wpis znajduje się już w pliku"
+msgstr "wpis znajduje się już w pliku"
 
 #: modules/files.c:1143 modules/files.c:1153 modules/files.c:1163
 #: modules/files.c:1543 modules/files.c:1551 modules/files.c:1559
 #, c-format
 msgid "couldn't write to `%s': %s"
-msgstr "nie można zapisać do \"%s\": %s"
+msgstr "nie można zapisać do „%s”: %s"
 
 #: modules/files.c:1309
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "obiekt nie posiada atrybutu %s"
+msgstr "obiekt nie ma atrybutu %s"
 
 #: modules/files.c:1351
 msgid "entry with conflicting name already present in file"
-msgstr "wpis o nazwie w konflikcie znajduje się już w pliku"
+msgstr "wpis o sprzecznej nazwie znajduje się już w pliku"
 
 #: modules/files.c:1953
-#, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "\":\" nie jest dozwolone w zaszyfrowanym haśle"
+msgstr ""
+"„:” i „\\n"
+"” są niedozwolone w zaszyfrowanych hasłach"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
@@ -1245,15 +1244,15 @@ msgstr "błąd podczas szyfrowania hasła"
 #: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr "modułów \"%s\" i \"%s\" nie można łączyć"
+msgstr "modułów „%s” i „%s” nie można łączyć"
 
 #: modules/files.c:2751 modules/files.c:2829
 msgid "not executing with superuser privileges"
-msgstr "bez uruchamiania z uprawnieniami superużytkownika"
+msgstr "bez uruchamiania z uprawnieniami superużytkownika"
 
 #: modules/files.c:2842
 msgid "no shadow file present -- disabling"
-msgstr "plik shadow nieobecny - wyłączanie"
+msgstr "plik shadow nieobecny — wyłączanie"
 
 #: modules/ldap.c:199
 msgid "error initializing ldap library"
@@ -1266,57 +1265,57 @@ msgstr "nie można ustawić protokołu LDAP do wersji %d"
 
 #: modules/ldap.c:229
 msgid "could not negotiate TLS with LDAP server"
-msgstr "nie można uzgodnić TLS z serwerem LDAP"
+msgstr "nie można uzgodnić TLS z serwerem LDAP"
 
 #: modules/ldap.c:424
 msgid "could not bind to LDAP server"
-msgstr "nie można powiązać z serwerem LDAP"
+msgstr "nie można powiązać z serwerem LDAP"
 
 #: modules/ldap.c:427
 #, c-format
 msgid "could not bind to LDAP server, first attempt as `%s': %s"
-msgstr "nie można dołączyć się do serwera LDAP, pierwsza próba jako \"%s\": %s"
+msgstr "nie można dołączyć się do serwera LDAP, pierwsza próba jako „%s”: %s"
 
 #: modules/ldap.c:1315
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "obiekt użytkownika nie posiada atrybutu %s"
+msgstr "obiekt użytkownika nie ma atrybutu %s"
 
 #: modules/ldap.c:1324
 #, c-format
 msgid "user object was created with no `%s'"
-msgstr "obiekt użytkownika został utworzony bez \"%s\""
+msgstr "obiekt użytkownika został utworzony bez „%s”"
 
 #: modules/ldap.c:1344
 #, c-format
 msgid "error creating a LDAP directory entry: %s"
-msgstr "błąd podczas tworzenia wpisu w katalogu LDAP: %s"
+msgstr "błąd podczas tworzenia wpisu w katalogu LDAP: %s"
 
 #: modules/ldap.c:1370 modules/ldap.c:1604
 #, c-format
 msgid "error modifying LDAP directory entry: %s"
-msgstr "błąd podczas modyfikacji pozycji w katalogu LDAP: %s"
+msgstr "błąd podczas modyfikacji pozycji w katalogu LDAP: %s"
 
 #: modules/ldap.c:1395
 #, c-format
 msgid "error renaming LDAP directory entry: %s"
-msgstr "błąd podczas zmieniania nazwy wpisu w katalogu LDAP: %s"
+msgstr "błąd podczas zmieniania nazwy wpisu w katalogu LDAP: %s"
 
 #: modules/ldap.c:1440
 #, c-format
 msgid "object had no %s attribute"
-msgstr "obiekt nie posiadał atrybutu %s"
+msgstr "obiekt nie miał atrybutu %s"
 
 #: modules/ldap.c:1456
 #, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "błąd podczas usuwania wpisu w katalogu LDAP: %s"
+msgstr "błąd podczas usuwania wpisu w katalogu LDAP: %s"
 
 #: modules/ldap.c:1506 modules/ldap.c:1521 modules/ldap.c:1635
 #: modules/ldap.c:1730
 #, c-format
 msgid "object has no %s attribute"
-msgstr "obiekt nie posiada atrybutu %s"
+msgstr "obiekt nie ma atrybutu %s"
 
 #: modules/ldap.c:1533
 msgid "unsupported password encryption scheme"
@@ -1324,17 +1323,17 @@ msgstr "nieobsługiwany schemat szyfrowania hasła"
 
 #: modules/ldap.c:1658
 msgid "no such object in LDAP directory"
-msgstr "nie ma takiego obiektu w katalogu LDAP"
+msgstr "nie ma takiego obiektu w katalogu LDAP"
 
 #: modules/ldap.c:1670
 #, c-format
 msgid "no `%s' attribute found"
-msgstr "nie odnaleziono atrybutu \"%s\""
+msgstr "nie odnaleziono atrybutu „%s”"
 
 #: modules/ldap.c:1843
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "błąd podczas ustawiania hasła w katalogu LDAP dla %s: %s"
+msgstr "błąd podczas ustawiania hasła w katalogu LDAP dla %s: %s"
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
@@ -1346,11 +1345,11 @@ msgstr "Podstawowy DN dla LDAP"
 
 #: modules/ldap.c:2458
 msgid "LDAP Bind DN"
-msgstr "DN do powiązania z LDAP"
+msgstr "DN do powiązania z LDAP"
 
 #: modules/ldap.c:2465
 msgid "LDAP Bind Password"
-msgstr "Hasło powiązania z LDAP"
+msgstr "Hasło powiązania z LDAP"
 
 #: modules/ldap.c:2471
 msgid "LDAP SASL User"
@@ -1363,12 +1362,12 @@ msgstr "Upoważnienie użytkownika SASL LDAP"
 #: modules/sasldb.c:132
 #, c-format
 msgid "Cyrus SASL error creating user: %s"
-msgstr "Błąd w bibliotece Cyrus SASL podczas tworzenia użytkownika: %s"
+msgstr "Błąd w bibliotece Cyrus SASL podczas tworzenia użytkownika: %s"
 
 #: modules/sasldb.c:136
 #, c-format
 msgid "Cyrus SASL error removing user: %s"
-msgstr "Błąd w bibliotece Cyrus SASL podczas usuwania użytkownika: %s"
+msgstr "Błąd w bibliotece Cyrus SASL podczas usuwania użytkownika: %s"
 
 #: modules/sasldb.c:503 modules/sasldb.c:511
 #, c-format
@@ -1400,22 +1399,22 @@ msgstr "Nieprawidłowy identyfikator %s\n"
 #: samples/lookup.c:88
 #, c-format
 msgid "Searching for group with ID %jd.\n"
-msgstr "Wyszukiwanie grupy o identyfikatorze %jd.\n"
+msgstr "Wyszukiwanie grupy o identyfikatorze %jd.\n"
 
 #: samples/lookup.c:92
 #, c-format
 msgid "Searching for group named %s.\n"
-msgstr "Wyszukiwanie grupy o nazwie %s.\n"
+msgstr "Wyszukiwanie grupy o nazwie %s.\n"
 
 #: samples/lookup.c:99
 #, c-format
 msgid "Searching for user with ID %jd.\n"
-msgstr "Wyszukiwanie użytkownika o identyfikatorze %jd.\n"
+msgstr "Wyszukiwanie użytkownika o identyfikatorze %jd.\n"
 
 #: samples/lookup.c:103
 #, c-format
 msgid "Searching for user named %s.\n"
-msgstr "Wyszukiwanie użytkownika o nazwie %s.\n"
+msgstr "Wyszukiwanie użytkownika o nazwie %s.\n"
 
 #: samples/lookup.c:117
 msgid "Entry not found.\n"
@@ -1423,7 +1422,7 @@ msgstr "Nie odnaleziono wpisu.\n"
 
 #: samples/prompt.c:48
 msgid "Prompts succeeded.\n"
-msgstr "Znak zachęty powiódł się.\n"
+msgstr "Znak zachęty się powiódł.\n"
 
 #: samples/prompt.c:58
 msgid "Prompts failed.\n"
