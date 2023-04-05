@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
-"POT-Creation-Date: 2015-07-23 21:13+0200\n"
+"POT-Creation-Date: 2023-03-14 15:37+0100\n"
 "PO-Revision-Date: 2013-04-29 04:37-0400\n"
 "Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/fedora/"
@@ -25,804 +25,803 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Zanata 3.6.2\n"
 
-#: apps/apputil.c:197 apps/apputil.c:201
+#: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
 msgid "Failed to drop privileges.\n"
 msgstr "無法卸下特權。\n"
 
-#: apps/apputil.c:210
+#: apps/apputil.c:208
 #, c-format
 msgid "Internal error.\n"
 msgstr "內部錯誤。\n"
 
-#: apps/apputil.c:231
+#: apps/apputil.c:234
 #, c-format
 msgid "%s is not authorized to change the finger info of %s\n"
 msgstr "並未授權 %s 修改 %s 的 finger 資訊\n"
 
-#: apps/apputil.c:233
+#: apps/apputil.c:236
 msgid "Unknown user context"
 msgstr "不明的使用者情境"
 
-#: apps/apputil.c:241
+#: apps/apputil.c:245
 #, c-format
 msgid "Can't set default context for /etc/passwd\n"
 msgstr "無法為 /etc/passwd 設定預設的情境\n"
 
-#: apps/apputil.c:250
+#: apps/apputil.c:254
 #, c-format
 msgid "Error initializing PAM.\n"
 msgstr "初始化 PAM 時發生錯誤。\n"
 
-#: apps/apputil.c:260 apps/apputil.c:287
+#: apps/apputil.c:264 apps/apputil.c:291
 #, c-format
 msgid "Authentication failed for %s.\n"
 msgstr "%s 認證時失敗。\n"
 
-#: apps/apputil.c:268
+#: apps/apputil.c:272
 #, c-format
 msgid "Internal PAM error `%s'.\n"
 msgstr "內部 PAM 錯誤「%s」。\n"
 
-#: apps/apputil.c:273
+#: apps/apputil.c:277
 #, c-format
 msgid "Unknown user authenticated.\n"
 msgstr "不明的使用者通過身份認證。\n"
 
-#: apps/apputil.c:277
+#: apps/apputil.c:281
 #, c-format
 msgid "User mismatch.\n"
 msgstr "使用者不符。\n"
 
-#: apps/lchage.c:84 apps/lchfn.c:53 apps/lchsh.c:44 apps/lgroupadd.c:47
-#: apps/lgroupdel.c:42 apps/lgroupmod.c:54 apps/lid.c:115 apps/lnewusers.c:45
-#: apps/lpasswd.c:47 apps/luseradd.c:55 apps/luserdel.c:45 apps/lusermod.c:56
+#: apps/lchage.c:86 apps/lchfn.c:54 apps/lchsh.c:46 apps/lgroupadd.c:48
+#: apps/lgroupdel.c:44 apps/lgroupmod.c:56 apps/lid.c:116 apps/lnewusers.c:47
+#: apps/lpasswd.c:48 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:57
 msgid "prompt for all information"
 msgstr "提示請求所有資訊"
 
-#: apps/lchage.c:86
+#: apps/lchage.c:88
 msgid "list aging parameters for the user"
 msgstr "列出使用者的過時參數"
 
-#: apps/lchage.c:88
+#: apps/lchage.c:90
 msgid "minimum days between password changes"
 msgstr "密碼更動之間的最小天數"
 
-#: apps/lchage.c:88 apps/lchage.c:90 apps/lchage.c:93 apps/lchage.c:96
-#: apps/lchage.c:99 apps/lchage.c:102
+#: apps/lchage.c:90 apps/lchage.c:92 apps/lchage.c:95 apps/lchage.c:98
+#: apps/lchage.c:101 apps/lchage.c:104
 msgid "DAYS"
 msgstr "DAYS"
 
-#: apps/lchage.c:90
+#: apps/lchage.c:92
 msgid "maximum days between password changes"
 msgstr "密碼更動之間的最大天數"
 
-#: apps/lchage.c:92
+#: apps/lchage.c:94
 msgid "date of last password change in days since 1/1/70"
 msgstr "上次密碼更動的日期，日子是從 1/1/70 算起"
 
-#: apps/lchage.c:95
+#: apps/lchage.c:97
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr "當帳號在密碼過期日後多少天才被視為失效"
 
-#: apps/lchage.c:98
+#: apps/lchage.c:100
 msgid "password expiration date in days since 1/1/70"
 msgstr "密碼過期日，日子是從 1/1/70 算起"
 
-#: apps/lchage.c:101
+#: apps/lchage.c:103
 msgid "days before expiration to begin warning user"
 msgstr "在過期之前開始警告使用者的天數"
 
-#: apps/lchage.c:114 apps/lid.c:130 apps/lpasswd.c:68 apps/luseradd.c:100
-#: apps/luserdel.c:59 apps/lusermod.c:101
+#: apps/lchage.c:116 apps/lid.c:131 apps/lpasswd.c:69 apps/luseradd.c:102
+#: apps/luserdel.c:61 apps/lusermod.c:102
 msgid "[OPTION...] user"
 msgstr "[選項...] 使用者"
 
-#: apps/lchage.c:117 apps/lchfn.c:70 apps/lchsh.c:58 apps/lgroupadd.c:65
-#: apps/lgroupdel.c:56 apps/lgroupmod.c:85 apps/lid.c:133 apps/lnewusers.c:66
-#: apps/lpasswd.c:71 apps/luseradd.c:103 apps/luserdel.c:62
-#: apps/lusermod.c:104
+#: apps/lchage.c:119 apps/lchfn.c:72 apps/lchsh.c:60 apps/lgroupadd.c:66
+#: apps/lgroupdel.c:58 apps/lgroupmod.c:87 apps/lid.c:134 apps/lnewusers.c:68
+#: apps/lpasswd.c:72 apps/luseradd.c:105 apps/luserdel.c:64 apps/lusermod.c:105
 #, c-format
 msgid "Error parsing arguments: %s.\n"
 msgstr "解析引數時發生錯誤：%s。\n"
 
-#: apps/lchage.c:126 apps/lpasswd.c:85 apps/luseradd.c:118 apps/luserdel.c:70
-#: apps/lusermod.c:115
+#: apps/lchage.c:129 apps/lpasswd.c:87 apps/luseradd.c:121 apps/luserdel.c:73
+#: apps/lusermod.c:117
 #, c-format
 msgid "No user name specified.\n"
 msgstr "沒有指定使用者名稱。\n"
 
-#: apps/lchage.c:138 apps/lchfn.c:103 apps/lchsh.c:91 apps/lgroupadd.c:102
-#: apps/lgroupdel.c:77 apps/lgroupmod.c:119 apps/lid.c:179 apps/lnewusers.c:79
-#: apps/lpasswd.c:97 apps/luseradd.c:143 apps/luserdel.c:81
-#: apps/lusermod.c:157 samples/enum.c:56 samples/testuser.c:71
+#: apps/lchage.c:140 apps/lchfn.c:106 apps/lchsh.c:93 apps/lgroupadd.c:104
+#: apps/lgroupdel.c:79 apps/lgroupmod.c:122 apps/lid.c:181 apps/lnewusers.c:80
+#: apps/lpasswd.c:98 apps/luseradd.c:146 apps/luserdel.c:83 apps/lusermod.c:160
+#: samples/enum.c:56 samples/testuser.c:71
 #, c-format
 msgid "Error initializing %s: %s.\n"
 msgstr "初始化 %s 時發生錯誤：%s。\n"
 
-#: apps/lchage.c:147 apps/lchfn.c:114 apps/lchsh.c:102 apps/lpasswd.c:148
-#: apps/luserdel.c:89 apps/lusermod.c:171
+#: apps/lchage.c:150 apps/lchfn.c:118 apps/lchsh.c:105 apps/lpasswd.c:151
+#: apps/luserdel.c:92 apps/lusermod.c:176
 #, c-format
 msgid "User %s does not exist.\n"
 msgstr "使用者 %s 不存在。\n"
 
-#: apps/lchage.c:160
+#: apps/lchage.c:164
 #, c-format
 msgid "Account is locked.\n"
 msgstr "帳號已鎖住。\n"
 
-#: apps/lchage.c:162
+#: apps/lchage.c:166
 #, c-format
 msgid "Account is not locked.\n"
 msgstr "帳號未鎖住。\n"
 
-#: apps/lchage.c:166
+#: apps/lchage.c:170
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "最小值：\t%ld\n"
 
-#: apps/lchage.c:170
+#: apps/lchage.c:174
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "最大值：\t%ld\n"
 
-#: apps/lchage.c:172
+#: apps/lchage.c:176
 #, c-format
 msgid "Maximum:\tNone\n"
 msgstr "最大值：\t無\n"
 
-#: apps/lchage.c:175
+#: apps/lchage.c:179
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "警告：\t%ld\n"
 
-#: apps/lchage.c:180
+#: apps/lchage.c:184
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "失效：\t%ld\n"
 
-#: apps/lchage.c:182
+#: apps/lchage.c:186
 #, c-format
 msgid "Inactive:\tNever\n"
 msgstr "失效：\t永不\n"
 
-#: apps/lchage.c:186 apps/lchage.c:194 apps/lchage.c:204
+#: apps/lchage.c:190 apps/lchage.c:198 apps/lchage.c:208
 msgid "Must change password on next login"
 msgstr "下次登入時必須更改密碼"
 
-#: apps/lchage.c:188 apps/lchage.c:196 apps/lchage.c:206 apps/lchage.c:215
+#: apps/lchage.c:192 apps/lchage.c:200 apps/lchage.c:210 apps/lchage.c:219
 msgid "Never"
 msgstr "永不"
 
-#: apps/lchage.c:191
+#: apps/lchage.c:195
 #, c-format
 msgid "Last Change:\t%s\n"
 msgstr "上次更改：\t%s\n"
 
-#: apps/lchage.c:201
+#: apps/lchage.c:205
 #, c-format
 msgid "Password Expires:\t%s\n"
 msgstr "密碼過期：\t%s\n"
 
-#: apps/lchage.c:213
+#: apps/lchage.c:217
 #, c-format
 msgid "Password Inactive:\t%s\n"
 msgstr "密碼失效：\t%s\n"
 
-#: apps/lchage.c:219
+#: apps/lchage.c:223
 #, c-format
 msgid "Account Expires:\t%s\n"
 msgstr "帳號過期：\t%s\n"
 
-#: apps/lchage.c:240
+#: apps/lchage.c:244
 #, c-format
 msgid "Failed to modify aging information for %s: %s\n"
 msgstr "修改 %s 的過時資訊時失敗：%s\n"
 
-#: apps/lchfn.c:67 apps/lchsh.c:55
+#: apps/lchfn.c:69 apps/lchsh.c:57
 msgid "[OPTION...] [user]"
 msgstr "[選項...] [使用者]"
 
-#: apps/lchfn.c:86 apps/lchsh.c:74 apps/lid.c:164
+#: apps/lchfn.c:89 apps/lchsh.c:77 apps/lid.c:167
 #, c-format
 msgid "No user name specified, no name for uid %d.\n"
 msgstr "沒有指定使用者名稱，uid %d 沒有名稱。\n"
 
-#: apps/lchfn.c:96
+#: apps/lchfn.c:99
 #, c-format
 msgid "Changing finger information for %s.\n"
 msgstr "修改 %s 的 finger 資訊。\n"
 
-#: apps/lchfn.c:136
+#: apps/lchfn.c:141
 msgid "Full Name"
 msgstr "全名"
 
-#: apps/lchfn.c:146
+#: apps/lchfn.c:151
 msgid "Surname"
 msgstr "姓氏"
 
-#: apps/lchfn.c:157
+#: apps/lchfn.c:162
 msgid "Given Name"
 msgstr "名字"
 
-#: apps/lchfn.c:167
+#: apps/lchfn.c:172
 msgid "Office"
 msgstr "辦公室"
 
-#: apps/lchfn.c:176
+#: apps/lchfn.c:181
 msgid "Office Phone"
 msgstr "辦公電話"
 
-#: apps/lchfn.c:185
+#: apps/lchfn.c:190
 msgid "Home Phone"
 msgstr "住家電話"
 
-#: apps/lchfn.c:195
+#: apps/lchfn.c:200
 msgid "E-Mail Address"
 msgstr "電子郵件位址"
 
-#: apps/lchfn.c:208
+#: apps/lchfn.c:213
 #, c-format
 msgid "Finger information not changed:  input error.\n"
 msgstr "finger 的資訊未變更：輸入發生錯誤。\n"
 
-#: apps/lchfn.c:270
+#: apps/lchfn.c:276
 msgid "Finger information changed.\n"
 msgstr "finger 的資訊已變更。\n"
 
-#: apps/lchfn.c:273
+#: apps/lchfn.c:279
 #, c-format
 msgid "Finger information not changed: %s.\n"
 msgstr "finger 的資訊未變更：%s。\n"
 
-#: apps/lchsh.c:84
+#: apps/lchsh.c:86
 #, c-format
 msgid "Changing shell for %s.\n"
 msgstr "變更 %s 的 shell。\n"
 
-#: apps/lchsh.c:114
+#: apps/lchsh.c:118
 msgid "New Shell"
 msgstr "新的 shell"
 
-#: apps/lchsh.c:121 apps/lchsh.c:136
+#: apps/lchsh.c:125 apps/lchsh.c:145
 #, c-format
 msgid "Shell not changed: %s\n"
 msgstr "shell 未變更：%s\n"
 
-#: apps/lchsh.c:133
+#: apps/lchsh.c:140
 msgid "Shell changed.\n"
 msgstr "shell 已變更。\n"
 
-#: apps/lgroupadd.c:49
+#: apps/lgroupadd.c:50
 msgid "gid for new group"
 msgstr "新群組的 GID"
 
-#: apps/lgroupadd.c:49 apps/lgroupmod.c:56 apps/lpasswd.c:56 apps/lpasswd.c:59
-#: apps/luseradd.c:67 apps/lusermod.c:66 apps/lusermod.c:68
+#: apps/lgroupadd.c:50 apps/lgroupmod.c:58 apps/lpasswd.c:57 apps/lpasswd.c:60
+#: apps/luseradd.c:69 apps/lusermod.c:67 apps/lusermod.c:69
 msgid "NUM"
 msgstr "NUM"
 
-#: apps/lgroupadd.c:51
+#: apps/lgroupadd.c:52
 msgid "create a system group"
 msgstr "建立系統群組"
 
-#: apps/lgroupadd.c:62 apps/lgroupdel.c:53 apps/lgroupmod.c:82
+#: apps/lgroupadd.c:63 apps/lgroupdel.c:55 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
 msgstr "[選項...] 群組"
 
-#: apps/lgroupadd.c:74 apps/lgroupdel.c:65 apps/lgroupmod.c:93
+#: apps/lgroupadd.c:76 apps/lgroupdel.c:68 apps/lgroupmod.c:96
 #, c-format
 msgid "No group name specified.\n"
 msgstr "沒有指定群組名稱。\n"
 
-#: apps/lgroupadd.c:87 apps/lgroupmod.c:105 apps/lnewusers.c:172
-#: apps/luseradd.c:164 apps/lusermod.c:127
+#: apps/lgroupadd.c:90 apps/lgroupmod.c:109 apps/lnewusers.c:175
+#: apps/luseradd.c:168 apps/lusermod.c:130
 #, c-format
 msgid "Invalid group ID %s\n"
 msgstr "無效的群組 ID %s\n"
 
-#: apps/lgroupadd.c:119
+#: apps/lgroupadd.c:122
 #, c-format
 msgid "Group creation failed: %s\n"
 msgstr "群組建立失敗：%s\n"
 
-#: apps/lgroupdel.c:85 apps/lgroupmod.c:132 apps/lpasswd.c:153
+#: apps/lgroupdel.c:88 apps/lgroupmod.c:137 apps/lpasswd.c:157
 #, c-format
 msgid "Group %s does not exist.\n"
 msgstr "%s 群組不存在。\n"
 
-#: apps/lgroupdel.c:91
+#: apps/lgroupdel.c:95
 #, c-format
 msgid "Group %s could not be deleted: %s\n"
 msgstr "無法刪除 %s 群組：%s\n"
 
-#: apps/lgroupmod.c:56
+#: apps/lgroupmod.c:58
 msgid "set GID for group"
 msgstr "設定群組的 GID"
 
-#: apps/lgroupmod.c:58
+#: apps/lgroupmod.c:60
 msgid "change group to have given name"
 msgstr "變更群組以擁有名字"
 
-#: apps/lgroupmod.c:58
+#: apps/lgroupmod.c:60
 msgid "NAME"
 msgstr "NAME"
 
-#: apps/lgroupmod.c:60 apps/luseradd.c:75
+#: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "plaintext password for use with group"
 msgstr "群組要使用的明文密碼"
 
-#: apps/lgroupmod.c:60 apps/lgroupmod.c:62 apps/lgroupmod.c:64
-#: apps/lgroupmod.c:66 apps/lgroupmod.c:68 apps/lgroupmod.c:70
-#: apps/lpasswd.c:51 apps/lpasswd.c:53 apps/luseradd.c:59 apps/luseradd.c:61
-#: apps/luseradd.c:63 apps/luseradd.c:65 apps/luseradd.c:69 apps/luseradd.c:75
-#: apps/luseradd.c:77 apps/luseradd.c:79 apps/luseradd.c:81 apps/luseradd.c:83
-#: apps/luseradd.c:85 apps/luseradd.c:87 apps/luseradd.c:89 apps/lusermod.c:58
-#: apps/lusermod.c:60 apps/lusermod.c:64 apps/lusermod.c:70 apps/lusermod.c:72
-#: apps/lusermod.c:74 apps/lusermod.c:80 apps/lusermod.c:82 apps/lusermod.c:84
-#: apps/lusermod.c:86 apps/lusermod.c:88 apps/lusermod.c:90
+#: apps/lgroupmod.c:62 apps/lgroupmod.c:64 apps/lgroupmod.c:66
+#: apps/lgroupmod.c:68 apps/lgroupmod.c:70 apps/lgroupmod.c:72
+#: apps/lpasswd.c:52 apps/lpasswd.c:54 apps/luseradd.c:61 apps/luseradd.c:63
+#: apps/luseradd.c:65 apps/luseradd.c:67 apps/luseradd.c:71 apps/luseradd.c:77
+#: apps/luseradd.c:79 apps/luseradd.c:81 apps/luseradd.c:83 apps/luseradd.c:85
+#: apps/luseradd.c:87 apps/luseradd.c:89 apps/luseradd.c:91 apps/lusermod.c:59
+#: apps/lusermod.c:61 apps/lusermod.c:65 apps/lusermod.c:71 apps/lusermod.c:73
+#: apps/lusermod.c:75 apps/lusermod.c:81 apps/lusermod.c:83 apps/lusermod.c:85
+#: apps/lusermod.c:87 apps/lusermod.c:89 apps/lusermod.c:91
 msgid "STRING"
 msgstr "STRING"
 
-#: apps/lgroupmod.c:62 apps/luseradd.c:77
+#: apps/lgroupmod.c:64 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
 msgstr "群組要使用的預先雜湊密碼"
 
-#: apps/lgroupmod.c:64
+#: apps/lgroupmod.c:66
 msgid "list of administrators to add"
 msgstr "要加入的管理員清單"
 
-#: apps/lgroupmod.c:66
+#: apps/lgroupmod.c:68
 msgid "list of administrators to remove"
 msgstr "要移除的管理員清單"
 
-#: apps/lgroupmod.c:68
+#: apps/lgroupmod.c:70
 msgid "list of group members to add"
 msgstr "要加入的群組成員清單"
 
-#: apps/lgroupmod.c:70
+#: apps/lgroupmod.c:72
 msgid "list of group members to remove"
 msgstr "要移除的群組成員清單"
 
-#: apps/lgroupmod.c:71
+#: apps/lgroupmod.c:73
 msgid "lock group"
 msgstr "鎖住群組"
 
-#: apps/lgroupmod.c:72
+#: apps/lgroupmod.c:74
 msgid "unlock group"
 msgstr "解除群組鎖"
 
-#: apps/lgroupmod.c:125 apps/lusermod.c:164
+#: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
 msgid "Both -L and -U specified.\n"
 msgstr "-L 與 -U 兩者皆指定。\n"
 
-#: apps/lgroupmod.c:139 apps/lgroupmod.c:148
+#: apps/lgroupmod.c:145 apps/lgroupmod.c:161
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
 msgstr "設定 %s 群組的密碼失敗：%s\n"
 
-#: apps/lgroupmod.c:157
+#: apps/lgroupmod.c:177
 #, c-format
 msgid "Group %s could not be locked: %s\n"
 msgstr "無法鎖定 %s 群組：%s\n"
 
-#: apps/lgroupmod.c:166
+#: apps/lgroupmod.c:193
 #, c-format
 msgid "Group %s could not be unlocked: %s\n"
 msgstr "%s 群組無法被解除鎖定：%s\n"
 
-#: apps/lgroupmod.c:242 apps/lgroupmod.c:257
+#: apps/lgroupmod.c:276 apps/lgroupmod.c:298
 #, c-format
 msgid "Group %s could not be modified: %s\n"
 msgstr "%s 群組無法修改：%s\n"
 
-#: apps/lid.c:42 apps/lid.c:74 apps/lid.c:188
+#: apps/lid.c:42 apps/lid.c:74 apps/lid.c:191
 #, c-format
 msgid "Error looking up %s: %s\n"
 msgstr "查詢 %s 時發生錯誤：%s\n"
 
-#: apps/lid.c:117
+#: apps/lid.c:118
 msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr "列出已命名群組的成員，而不是已命名使用者的群組成員關係"
 
-#: apps/lid.c:120
+#: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
 msgstr "僅依名稱列出成員資訊，而不是 UID/GID"
 
-#: apps/lid.c:146
+#: apps/lid.c:148
 #, c-format
 msgid "No group name specified, using %s.\n"
 msgstr "沒有指定群組名稱，所以使用 %s。\n"
 
-#: apps/lid.c:150
+#: apps/lid.c:152
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
 msgstr "沒有指定群組名稱，GID %d 沒有指定名稱。\n"
 
-#: apps/lid.c:160
+#: apps/lid.c:163
 #, c-format
 msgid "No user name specified, using %s.\n"
 msgstr "沒有指定使用者名稱，所以使用 %s。\n"
 
-#: apps/lid.c:192
+#: apps/lid.c:195
 #, c-format
 msgid "%s does not exist\n"
 msgstr "%s 不存在\n"
 
-#: apps/lnewusers.c:47
+#: apps/lnewusers.c:49
 msgid "file with user information records"
 msgstr "含有使用者資訊記錄的檔案"
 
-#: apps/lnewusers.c:47
+#: apps/lnewusers.c:49
 msgid "PATH"
 msgstr "PATH"
 
-#: apps/lnewusers.c:49
+#: apps/lnewusers.c:51
 msgid "don't create home directories"
 msgstr "不要建立家目錄"
 
-#: apps/lnewusers.c:51
+#: apps/lnewusers.c:53
 msgid "don't create mail spools"
 msgstr "不要建立郵件池"
 
-#: apps/lnewusers.c:63
+#: apps/lnewusers.c:65
 msgid "[OPTION...]"
 msgstr "[選項...]"
 
-#: apps/lnewusers.c:88
+#: apps/lnewusers.c:90
 #, c-format
 msgid "Error opening `%s': %s.\n"
 msgstr "開啟「%s」時發生錯誤：%s。\n"
 
-#: apps/lnewusers.c:118
+#: apps/lnewusers.c:121
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
 msgstr "建立「%s」的帳號時發生錯誤：含有不當格式的列。\n"
 
-#: apps/lnewusers.c:129 apps/luseradd.c:128 apps/lusermod.c:142
+#: apps/lnewusers.c:132 apps/luseradd.c:132 apps/lusermod.c:146
 #, c-format
 msgid "Invalid user ID %s\n"
 msgstr "無效的使用者 ID %s\n"
 
-#: apps/lnewusers.c:136
+#: apps/lnewusers.c:139
 msgid "Refusing to create account with UID 0.\n"
 msgstr "拒絕建立 UID 為 0 的帳號。\n"
 
-#: apps/lnewusers.c:206
+#: apps/lnewusers.c:209
 #, c-format
 msgid "Error creating group for `%s' with GID %jd: %s\n"
 msgstr "為「%s」建立群組時 (使用 GID %jd) 發生錯誤：%s\n"
 
-#: apps/lnewusers.c:246
+#: apps/lnewusers.c:249
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' for %s by default\n"
 msgstr "預設狀況下拒絕為 %2$s 使用危險的「%1$s」家目錄\n"
 
-#: apps/lnewusers.c:257
+#: apps/lnewusers.c:260
 #, c-format
 msgid "Error creating home directory for %s: %s\n"
 msgstr "建立 %s 的家目錄時發生錯誤：%s\n"
 
-#: apps/lnewusers.c:270
+#: apps/lnewusers.c:273
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
 msgstr "為 %s 建立郵件池時發生錯誤：%s\n"
 
-#: apps/lnewusers.c:285
+#: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
 msgstr "為 %s 設定初始密碼時發生錯誤：%s\n"
 
-#: apps/lnewusers.c:295
+#: apps/lnewusers.c:298
 #, c-format
 msgid "Error creating user account for %s: %s\n"
 msgstr "建立 %s 的使用者帳號時發生錯誤：%s。\n"
 
-#: apps/lpasswd.c:49
+#: apps/lpasswd.c:50
 msgid "set group password instead of user password"
 msgstr "設定群組密碼而不是使用者密碼"
 
-#: apps/lpasswd.c:51
+#: apps/lpasswd.c:52
 msgid "new plain password"
 msgstr "新的明文密碼"
 
-#: apps/lpasswd.c:53
+#: apps/lpasswd.c:54
 msgid "new crypted password"
 msgstr "新的加密密碼"
 
-#: apps/lpasswd.c:55
+#: apps/lpasswd.c:56
 msgid "read new plain password from given descriptor"
 msgstr "從給定的描述元讀取新的明文密碼"
 
-#: apps/lpasswd.c:58
+#: apps/lpasswd.c:59
 msgid "read new crypted password from given descriptor"
 msgstr "從給定的描述元讀取新的加密密碼"
 
-#: apps/lpasswd.c:83
+#: apps/lpasswd.c:85
 #, c-format
 msgid "Changing password for %s.\n"
 msgstr "更改 %s 的密碼。\n"
 
-#: apps/lpasswd.c:111
+#: apps/lpasswd.c:113
 msgid "New password"
 msgstr "新密碼"
 
-#: apps/lpasswd.c:114
+#: apps/lpasswd.c:116
 msgid "New password (confirm)"
 msgstr "新密碼 (確認)"
 
-#: apps/lpasswd.c:128
+#: apps/lpasswd.c:130
 #, c-format
 msgid "Passwords do not match, try again.\n"
 msgstr "密碼不符，請再試一次。\n"
 
-#: apps/lpasswd.c:133
+#: apps/lpasswd.c:135
 #, c-format
 msgid "Password change canceled.\n"
 msgstr "取消密碼變更。\n"
 
-#: apps/lpasswd.c:165 apps/lpasswd.c:182
+#: apps/lpasswd.c:170 apps/lpasswd.c:188
 #, c-format
 msgid "Error reading from file descriptor %d.\n"
 msgstr "從檔案描述元 %d 讀取時發生錯誤。\n"
 
-#: apps/lpasswd.c:203 apps/luseradd.c:302 apps/luseradd.c:311
+#: apps/lpasswd.c:210 apps/luseradd.c:323 apps/luseradd.c:333
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
 msgstr "為使用者 %s 設定密碼發生錯誤：%s。\n"
 
-#: apps/lpasswd.c:212
+#: apps/lpasswd.c:220
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
 msgstr "為群組 %s 設定密碼時發生錯誤：%s。\n"
 
-#: apps/lpasswd.c:224
+#: apps/lpasswd.c:229
 #, c-format
 msgid "Password changed.\n"
 msgstr "密碼已變更。\n"
 
-#: apps/luseradd.c:57
+#: apps/luseradd.c:59
 msgid "create a system user"
 msgstr "建立系統使用者"
 
-#: apps/luseradd.c:59
+#: apps/luseradd.c:61
 msgid "GECOS information for new user"
 msgstr "新使用者的 GECOS 資訊"
 
-#: apps/luseradd.c:61
+#: apps/luseradd.c:63
 msgid "home directory for new user"
 msgstr "新使用者的家目錄"
 
-#: apps/luseradd.c:63
+#: apps/luseradd.c:65
 msgid "directory with files for the new user"
 msgstr "新使用者的含檔案家目錄"
 
-#: apps/luseradd.c:65
+#: apps/luseradd.c:67
 msgid "shell for new user"
 msgstr "新使用者的 shell"
 
-#: apps/luseradd.c:67
+#: apps/luseradd.c:69
 msgid "uid for new user"
 msgstr "新使用者的 UID"
 
-#: apps/luseradd.c:69
+#: apps/luseradd.c:71
 msgid "group for new user"
 msgstr "新使用者的群組"
 
-#: apps/luseradd.c:71
+#: apps/luseradd.c:73
 msgid "don't create home directory for user"
 msgstr "不要為使用者建立家目錄"
 
-#: apps/luseradd.c:73
+#: apps/luseradd.c:75
 msgid "don't create group with same name as user"
 msgstr "不要用與使用者相同的名稱建立群組"
 
-#: apps/luseradd.c:79
+#: apps/luseradd.c:81
 msgid "common name for new user"
 msgstr "新使用者的通用名稱"
 
-#: apps/luseradd.c:81
+#: apps/luseradd.c:83
 msgid "given name for new user"
 msgstr "新使用者的名字"
 
-#: apps/luseradd.c:83
+#: apps/luseradd.c:85
 msgid "surname for new user"
 msgstr "新使用者的姓氏"
 
-#: apps/luseradd.c:85
+#: apps/luseradd.c:87
 msgid "room number for new user"
 msgstr "新使用者的房間號碼"
 
-#: apps/luseradd.c:87
+#: apps/luseradd.c:89
 msgid "telephone number for new user"
 msgstr "新使用者的電話號碼"
 
-#: apps/luseradd.c:89
+#: apps/luseradd.c:91
 msgid "home telephone number for new user"
 msgstr "新使用者的家用電話號碼"
 
-#: apps/luseradd.c:189
+#: apps/luseradd.c:194
 #, c-format
 msgid "Group %jd does not exist\n"
 msgstr "%jd 群組不存在\n"
 
-#: apps/luseradd.c:207 apps/luseradd.c:220
+#: apps/luseradd.c:213 apps/luseradd.c:230
 #, c-format
 msgid "Error creating group `%s': %s\n"
 msgstr "建立「%s」群組發生錯誤：%s\n"
 
-#: apps/luseradd.c:260
+#: apps/luseradd.c:270
 #, c-format
 msgid "Account creation failed: %s.\n"
 msgstr "帳號建立失敗：%s。\n"
 
-#: apps/luseradd.c:283
+#: apps/luseradd.c:298
 #, c-format
 msgid "Error creating %s: %s.\n"
 msgstr "建立 %s 發生錯誤：%s。\n"
 
-#: apps/luseradd.c:290
+#: apps/luseradd.c:310
 #, c-format
 msgid "Error creating mail spool: %s\n"
 msgstr "建立郵件池時發生錯誤：%s\n"
 
-#: apps/luserdel.c:47
+#: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
 msgstr "不要移除使用者的私人群組，如果使用者擁有的話"
 
-#: apps/luserdel.c:50
+#: apps/luserdel.c:52
 msgid "remove the user's home directory"
 msgstr "移除使用者的家目錄"
 
-#: apps/luserdel.c:94
+#: apps/luserdel.c:98
 #, c-format
 msgid "User %s could not be deleted: %s.\n"
 msgstr "無法刪除 %s 使用者：%s。\n"
 
-#: apps/luserdel.c:108
+#: apps/luserdel.c:117
 #, c-format
 msgid "%s did not have a gid number.\n"
 msgstr "%s 沒有群組 ID (gid) 號碼。\n"
 
-#: apps/luserdel.c:114
+#: apps/luserdel.c:124
 #, c-format
 msgid "No group with GID %jd exists, not removing.\n"
 msgstr "GID %jd 的群組不存在，所以無法移除。\n"
 
-#: apps/luserdel.c:120
+#: apps/luserdel.c:131
 #, c-format
 msgid "Group with GID %jd did not have a group name.\n"
 msgstr "GID %jd 的群組沒有群組名稱。\n"
 
-#: apps/luserdel.c:126
+#: apps/luserdel.c:138
 #, c-format
 msgid "Group %s could not be deleted: %s.\n"
 msgstr "無法刪除 %s 群組：%s。\n"
 
-#: apps/luserdel.c:139
+#: apps/luserdel.c:158
 #, fuzzy, c-format
 msgid "Error removing home directory: %s.\n"
 msgstr "為使用者移除家目錄時發生錯誤"
 
-#: apps/luserdel.c:145
+#: apps/luserdel.c:171
 #, c-format
 msgid "Error removing mail spool: %s"
 msgstr "移除郵件池時發生錯誤：%s"
 
-#: apps/lusermod.c:58
+#: apps/lusermod.c:59
 msgid "GECOS information"
 msgstr "GECOS 資訊"
 
-#: apps/lusermod.c:60
+#: apps/lusermod.c:61
 msgid "home directory"
 msgstr "家目錄"
 
-#: apps/lusermod.c:62
+#: apps/lusermod.c:63
 msgid "move home directory contents"
 msgstr "移動家目錄內容"
 
-#: apps/lusermod.c:64
+#: apps/lusermod.c:65
 msgid "set shell for user"
 msgstr "設定使用者的 shell"
 
-#: apps/lusermod.c:66
+#: apps/lusermod.c:67
 msgid "set UID for user"
 msgstr "設定使用者的 UID"
 
-#: apps/lusermod.c:68
+#: apps/lusermod.c:69
 msgid "set primary GID for user"
 msgstr "設定使用者的主要 GID"
 
-#: apps/lusermod.c:70
+#: apps/lusermod.c:71
 msgid "change login name for user"
 msgstr "改變使用者的登入名稱"
 
-#: apps/lusermod.c:72
+#: apps/lusermod.c:73
 msgid "plaintext password for the user"
 msgstr "使用者的明文密碼"
 
-#: apps/lusermod.c:74
+#: apps/lusermod.c:75
 msgid "pre-hashed password for the user"
 msgstr "使用者的預先雜湊密碼"
 
-#: apps/lusermod.c:75
+#: apps/lusermod.c:76
 msgid "lock account"
 msgstr "鎖住帳號"
 
-#: apps/lusermod.c:78
+#: apps/lusermod.c:79
 msgid "unlock account"
 msgstr "解除帳號鎖"
 
-#: apps/lusermod.c:80
+#: apps/lusermod.c:81
 msgid "set common name for user"
 msgstr "設定使用者的通用名稱"
 
-#: apps/lusermod.c:82
+#: apps/lusermod.c:83
 msgid "set given name for user"
 msgstr "設定使用者的名字"
 
-#: apps/lusermod.c:84
+#: apps/lusermod.c:85
 msgid "set surname for user"
 msgstr "設定使用者的姓氏"
 
-#: apps/lusermod.c:86
+#: apps/lusermod.c:87
 msgid "set room number for user"
 msgstr "設定使用者的房間號碼"
 
-#: apps/lusermod.c:88
+#: apps/lusermod.c:89
 msgid "set telephone number for user"
 msgstr "設定使用者的電話號碼"
 
-#: apps/lusermod.c:90
+#: apps/lusermod.c:91
 msgid "set home telephone number for user"
 msgstr "設定使用者的家用電話號碼"
 
-#: apps/lusermod.c:180 apps/lusermod.c:193
+#: apps/lusermod.c:186 apps/lusermod.c:205
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
 msgstr "為 %s 使用者設定密碼失敗：%s。\n"
 
-#: apps/lusermod.c:203
+#: apps/lusermod.c:221
 #, c-format
 msgid "User %s could not be locked: %s.\n"
 msgstr "無法鎖定 %s 使用者：%s。\n"
 
-#: apps/lusermod.c:211
+#: apps/lusermod.c:235
 #, c-format
 msgid "User %s could not be unlocked: %s.\n"
 msgstr "無法被解除 %s 使用者的鎖定：%s。\n"
 
-#: apps/lusermod.c:232
+#: apps/lusermod.c:262
 #, c-format
 msgid "Warning: Group with ID %jd does not exist.\n"
 msgstr "警告：ID 為 %jd 的群組不存在。\n"
 
-#: apps/lusermod.c:275
+#: apps/lusermod.c:305
 #, c-format
 msgid "User %s could not be modified: %s.\n"
 msgstr "無法修改 %s 使用者：%s。\n"
 
-#: apps/lusermod.c:326
+#: apps/lusermod.c:362
 #, c-format
 msgid "Group %s could not be modified: %s.\n"
 msgstr "無法修改 %s 群組：%s。\n"
 
-#: apps/lusermod.c:342
+#: apps/lusermod.c:385
 #, c-format
 msgid "No old home directory for %s.\n"
 msgstr "%s 沒有舊的家目錄。\n"
 
-#: apps/lusermod.c:347
+#: apps/lusermod.c:391
 #, c-format
 msgid "No new home directory for %s.\n"
 msgstr "%s 沒有新的家目錄。\n"
 
-#: apps/lusermod.c:353
+#: apps/lusermod.c:398
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
 msgstr "將 %s 移動至 %s 時發生錯誤：%s。\n"
@@ -1055,52 +1054,58 @@ msgstr "使用者沒有名稱也沒有 UID"
 msgid "group has neither a name nor a GID"
 msgstr "群組沒有名稱也沒有 GID"
 
-#: lib/user.c:1311
+#: lib/user.c:1326
 #, c-format
 msgid "Refusing to use dangerous home directory `%s' by default"
 msgstr "預設情況下拒絕使用危險的「%s」家目錄"
 
-#: lib/user.c:2310
+#: lib/user.c:2326
 #, c-format
 msgid "Invalid default value of field %s: %s"
 msgstr "欄位 %s 的預設值無效：%s"
 
-#: lib/util.c:300 modules/files.c:374
+#: lib/util.c:350 modules/files.c:374
 #, c-format
 msgid "error locking file: %s"
 msgstr "鎖定檔案時發生錯誤：%s"
 
-#: lib/util.c:704
+#: lib/util.c:754
 #, c-format
 msgid "couldn't get default security context: %s"
 msgstr "無法取得預設的安全情境：%s"
 
-#: lib/util.c:731 lib/util.c:757 lib/util.c:783
+#: lib/util.c:781 lib/util.c:807 lib/util.c:833
 #, c-format
 msgid "couldn't get security context of `%s': %s"
 msgstr "無法取得「%s」的安全情境：%s"
 
-#: lib/util.c:737 lib/util.c:763 lib/util.c:789 lib/util.c:821
+#: lib/util.c:787 lib/util.c:813 lib/util.c:839 lib/util.c:882
 #, c-format
 msgid "couldn't set default security context to `%s': %s"
 msgstr "無將預設安全情境設為「%s」：%s"
 
-#: lib/util.c:813
+#: lib/util.c:862
+#, fuzzy, c-format
+#| msgid "couldn't get default security context: %s"
+msgid "couldn't obtain selabel file context handle: %s"
+msgstr "無法取得預設的安全情境：%s"
+
+#: lib/util.c:872
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
 msgstr "無法判定「%s」的安全情境：%s"
 
-#: modules/files.c:129 modules/files.c:692 modules/files.c:1585
-#: modules/files.c:1920 modules/files.c:1930 modules/files.c:2012
-#: modules/files.c:2023 modules/files.c:2089 modules/files.c:2101
-#: modules/files.c:2191 modules/files.c:2200 modules/files.c:2255
-#: modules/files.c:2264 modules/files.c:2359 modules/files.c:2368
+#: modules/files.c:129 modules/files.c:692 modules/files.c:1735
+#: modules/files.c:2070 modules/files.c:2080 modules/files.c:2162
+#: modules/files.c:2173 modules/files.c:2239 modules/files.c:2251
+#: modules/files.c:2341 modules/files.c:2350 modules/files.c:2405
+#: modules/files.c:2414 modules/files.c:2509 modules/files.c:2518
 #, c-format
 msgid "couldn't open `%s': %s"
 msgstr "無法開啟「%s」：%s"
 
-#: modules/files.c:137 modules/files.c:994 modules/files.c:1187
-#: modules/files.c:1329
+#: modules/files.c:137 modules/files.c:1116 modules/files.c:1323
+#: modules/files.c:1479
 #, c-format
 msgid "couldn't stat `%s': %s"
 msgstr "無法取得「%s」的狀態：%s"
@@ -1131,8 +1136,8 @@ msgstr "讀取「%s」時發生錯誤：%s"
 msgid "Error writing `%s': %s"
 msgstr "寫入「%s」時發生錯誤：%s"
 
-#: modules/files.c:247 modules/files.c:1005 modules/files.c:1195
-#: modules/files.c:1338
+#: modules/files.c:247 modules/files.c:1127 modules/files.c:1331
+#: modules/files.c:1488
 #, c-format
 msgid "couldn't read from `%s': %s"
 msgstr "無法從「%s」讀取：%s"
@@ -1172,54 +1177,71 @@ msgstr "讀取「%s」時發生錯誤：%s"
 msgid "Error replacing `%s': %s"
 msgstr "讀取「%s」時發生錯誤：%s"
 
-#: modules/files.c:903
+#: modules/files.c:920
+#, fuzzy, c-format
+#| msgid "entity object has no %s attribute"
+msgid "duplicate object has no %s attribute"
+msgstr "實體物件沒有 %s 特性"
+
+#: modules/files.c:930
+#, fuzzy, c-format
+#| msgid "object has no %s attribute"
+msgid "original object has no %s attribute"
+msgstr "物件沒有 %s 特性"
+
+#: modules/files.c:942
+#, c-format
+msgid "ID %lu already in use by %s"
+msgstr ""
+
+#: modules/files.c:1025
 #, fuzzy, c-format
 msgid "%s value `%s': `\\n' not allowed"
 msgstr "%s 值「%s」：不允許有「:」"
 
-#: modules/files.c:910
+#: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
 msgstr "%s 值「%s」：不允許有「:」"
 
-#: modules/files.c:1014
+#: modules/files.c:1136
 msgid "entry already present in file"
 msgstr "條目已存在檔案中"
 
-#: modules/files.c:1021 modules/files.c:1031 modules/files.c:1041
-#: modules/files.c:1393 modules/files.c:1401 modules/files.c:1409
+#: modules/files.c:1143 modules/files.c:1153 modules/files.c:1163
+#: modules/files.c:1543 modules/files.c:1551 modules/files.c:1559
 #, c-format
 msgid "couldn't write to `%s': %s"
 msgstr "無法寫入「%s」：%s"
 
-#: modules/files.c:1173
+#: modules/files.c:1309
 #, c-format
 msgid "entity object has no %s attribute"
 msgstr "實體物件沒有 %s 特性"
 
-#: modules/files.c:1215
+#: modules/files.c:1351
 msgid "entry with conflicting name already present in file"
 msgstr "名稱產生衝突的條目已存在檔案中"
 
-#: modules/files.c:1803
+#: modules/files.c:1953
 #, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
 msgstr "加密的密碼中不允許使用「:」"
 
-#: modules/files.c:1815 modules/ldap.c:1543 modules/ldap.c:1812
+#: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
 msgstr "加密密碼時發生錯誤"
 
-#: modules/files.c:2517 modules/ldap.c:2410
+#: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
 msgstr "無法組合「%s」與「%s」模組"
 
-#: modules/files.c:2601 modules/files.c:2679
+#: modules/files.c:2751 modules/files.c:2829
 msgid "not executing with superuser privileges"
 msgstr "非以超級使用者的特權執行中"
 
-#: modules/files.c:2692
+#: modules/files.c:2842
 msgid "no shadow file present -- disabling"
 msgstr "shadow 檔案不存在 -- 停用中"
 
