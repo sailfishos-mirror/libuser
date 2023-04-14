@@ -22,16 +22,16 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2018-01-09 01:19+0000\n"
-"Last-Translator: amoewaki <amoewaki@redhat.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/projects/p/fedora/language/"
-"ja/)\n"
+"PO-Revision-Date: 2023-04-13 07:20+0000\n"
+"Last-Translator: Ludek Janda <ljanda@redhat.com>\n"
+"Language-Team: Japanese <https://translate.fedoraproject.org/projects/"
+"libuser/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 4.3.2\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -60,7 +60,7 @@ msgstr "/etc/passwd 用のデフォルトのコンテキストが設定できま
 #: apps/apputil.c:254
 #, c-format
 msgid "Error initializing PAM.\n"
-msgstr "PAM の初期化に失敗\n"
+msgstr "PAM の初期化に失敗しました。\n"
 
 #: apps/apputil.c:264 apps/apputil.c:291
 #, c-format
@@ -70,7 +70,7 @@ msgstr "%s の認証に失敗しました。\n"
 #: apps/apputil.c:272
 #, c-format
 msgid "Internal PAM error `%s'.\n"
-msgstr "内部 PAM エラー `%s'\n"
+msgstr "内部 PAM エラー `%s'。\n"
 
 #: apps/apputil.c:277
 #, c-format
@@ -300,7 +300,7 @@ msgstr "シェル変更不可能: %s\n"
 
 #: apps/lchsh.c:140
 msgid "Shell changed.\n"
-msgstr "シェル変更済み\n"
+msgstr "シェルが変更されました。\n"
 
 #: apps/lgroupadd.c:50
 msgid "gid for new group"
@@ -328,7 +328,7 @@ msgstr "グループ名は指定されていません。\n"
 #: apps/luseradd.c:168 apps/lusermod.c:130
 #, c-format
 msgid "Invalid group ID %s\n"
-msgstr "無効なグループ ID: %s\n"
+msgstr "無効なグループ ID %s\n"
 
 #: apps/lgroupadd.c:122
 #, c-format
@@ -446,22 +446,22 @@ msgstr "UID/GID ではなく、名前でのみメンバー情報を一覧表示�
 #: apps/lid.c:148
 #, c-format
 msgid "No group name specified, using %s.\n"
-msgstr "グループ名は未指定です。%s を使用中\n"
+msgstr "グループ名が未指定のため、%s を使用しています。\n"
 
 #: apps/lid.c:152
 #, c-format
 msgid "No group name specified, no name for gid %d.\n"
-msgstr "グループ名は未指定です。gid %d の名前は未設定\n"
+msgstr "グループ名が未指定のため、gid %d の名前は未設定です。\n"
 
 #: apps/lid.c:163
 #, c-format
 msgid "No user name specified, using %s.\n"
-msgstr "ユーザー名が未指定です。%s を使用中\n"
+msgstr "ユーザー名が未指定のため、%s を使用しています。\n"
 
 #: apps/lid.c:195
 #, c-format
 msgid "%s does not exist\n"
-msgstr "%s は存在しません。\n"
+msgstr "%s は存在しません\n"
 
 #: apps/lnewusers.c:49
 msgid "file with user information records"
@@ -491,7 +491,7 @@ msgstr "%s の読み込みエラー: %s\n"
 #: apps/lnewusers.c:121
 #, c-format
 msgid "Error creating account for `%s': line improperly formatted.\n"
-msgstr "`%s' 用のアカウント作成に失敗:  不正な書式が含まれています。\n"
+msgstr "`%s' 用のアカウント作成に失敗: 不正な書式が含まれています。\n"
 
 #: apps/lnewusers.c:132 apps/luseradd.c:132 apps/lusermod.c:146
 #, c-format
@@ -531,7 +531,7 @@ msgstr "%s 用の初期パスワード設定中にエラーが発生しました
 #: apps/lnewusers.c:298
 #, c-format
 msgid "Error creating user account for %s: %s\n"
-msgstr "%s 用のユーザーアカウント作成に失敗しました: %s。\n"
+msgstr "%s 用のユーザーアカウント作成に失敗しました: %s\n"
 
 #: apps/lpasswd.c:50
 msgid "set group password instead of user password"
@@ -683,7 +683,7 @@ msgstr "メールスプールの作成中にエラーが発生しました: %s\n
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
-msgstr "ユーザーがプライベートグループを持っていても、それを削除しません。"
+msgstr "ユーザーがプライベートグループを持っている場合は、それを削除しないでください"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
@@ -835,9 +835,7 @@ msgstr "%s には、新しいホームディレクトリーがありません。
 #: apps/lusermod.c:398
 #, c-format
 msgid "Error moving %s to %s: %s.\n"
-msgstr ""
-"%s を %s に移動できませんでした: %s\n"
-"\n"
+msgstr "%s を %s に移動できませんでした: %s\n"
 
 #: lib/config.c:128
 #, c-format
@@ -857,7 +855,7 @@ msgstr "設定ファイル `%s' が大きすぎます"
 #: lib/config.c:159
 #, c-format
 msgid "could not read configuration file `%s': %s"
-msgstr "設定ファイル `%s' を開けませんでした: %s"
+msgstr "設定ファイル `%s' を読み込むことができませんでした: %s"
 
 #: lib/error.c:62
 msgid "success"
@@ -865,7 +863,7 @@ msgstr "成功"
 
 #: lib/error.c:64
 msgid "module disabled by configuration"
-msgstr "モジュールが設定で無効になっています。"
+msgstr "モジュールが設定で無効になっています"
 
 #: lib/error.c:66
 msgid "generic error"
@@ -933,7 +931,7 @@ msgstr "モジュールのロードに失敗"
 
 #: lib/error.c:98
 msgid "error resolving symbol in module"
-msgstr "モジュールのシンボル解決に失敗しました。"
+msgstr "モジュールのシンボル解決に失敗しました"
 
 #: lib/error.c:100
 msgid "library/module version mismatch"
@@ -1031,7 +1029,7 @@ msgstr "名前に無効な文字 `%c' があります"
 #: lib/user.c:308 lib/user.c:360
 #, c-format
 msgid "user %s has no UID"
-msgstr "ユーザー %s には UID がありません。"
+msgstr "ユーザー %s には UID がありません"
 
 #: lib/user.c:310
 #, c-format
@@ -1041,7 +1039,7 @@ msgstr "ユーザー %s が見つかりませんでした"
 #: lib/user.c:333 lib/user.c:361
 #, c-format
 msgid "group %s has no GID"
-msgstr "グループ %s には GID がありません。"
+msgstr "グループ %s には GID がありません"
 
 #: lib/user.c:335
 #, c-format
@@ -1051,20 +1049,20 @@ msgstr "グループ %s が見つかりませんでした"
 #: lib/user.c:355
 #, c-format
 msgid "user %jd has no name"
-msgstr "ユーザー %jd には名前がありません。"
+msgstr "ユーザー %jd には名前がありません"
 
 #: lib/user.c:356
 #, c-format
 msgid "group %jd has no name"
-msgstr "グループ %jd には名前がありません。"
+msgstr "グループ %jd には名前がありません"
 
 #: lib/user.c:364
 msgid "user has neither a name nor an UID"
-msgstr "ユーザーには、名前もしくは UID がありません。"
+msgstr "ユーザーには、名前もしくは UID がありません"
 
 #: lib/user.c:365
 msgid "group has neither a name nor a GID"
-msgstr "グループには、名前もしくは GID がありません。"
+msgstr "グループには、名前もしくは GID がありません"
 
 #: lib/user.c:1326
 #, c-format
@@ -1097,10 +1095,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "`%s' にデフォルトのセキュリティーコンテキストを設定できません: %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "デフォルトのセキュリティーコンテキストを取得できません: %s"
+msgstr "selabel ファイルコンテキストハンドルを取得できませんでした: %s"
 
 #: lib/util.c:872
 #, c-format
@@ -1135,7 +1132,7 @@ msgstr "`%s' の所有者変更に失敗: %s"
 #: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr "エラー: `%s' のモードを変更できません: %s "
+msgstr "エラー: `%s' のモードを変更できません: %s"
 
 #: modules/files.c:191
 #, c-format
@@ -1157,12 +1154,12 @@ msgstr "`%s' から読み込めません: %s"
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr "ロック `%s' の内容が無効です。"
+msgstr "ロック `%s' の内容が無効です"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr "ロック %s は、プロセス %ju に保持されています。"
+msgstr "ロック %s は、プロセス %ju に保持されています"
 
 #: modules/files.c:269
 #, c-format
@@ -1190,21 +1187,19 @@ msgid "Error replacing `%s': %s"
 msgstr "`%s' を置き換える際にエラーが発生しました: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "エンティティーオブジェクトに %s 属性がありません"
+msgstr "重複オブジェクトに %s 属性がありません"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "オブジェクトには、%s 属性がありません"
+msgstr "元のオブジェクトに %s 属性がありません"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "ID %lu は %s がすでに使用しています"
 
 #: modules/files.c:1025
 #, c-format
@@ -1246,7 +1241,7 @@ msgstr "パスワードの暗号化中にエラーが発生しました"
 #: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
 msgid "the `%s' and `%s' modules can not be combined"
-msgstr "`%s' と `%s' のモジュールは、組み合わせることができません。"
+msgstr "`%s' と `%s' のモジュールは組み合わせることができません"
 
 #: modules/files.c:2751 modules/files.c:2829
 msgid "not executing with superuser privileges"
@@ -1282,7 +1277,7 @@ msgstr ""
 #: modules/ldap.c:1315
 #, c-format
 msgid "user object had no %s attribute"
-msgstr "ユーザーオブジェクトには、%s 属性がありません"
+msgstr "ユーザーオブジェクトには、%s 属性がありませんでした"
 
 #: modules/ldap.c:1324
 #, c-format
@@ -1307,7 +1302,7 @@ msgstr "LDAP ディレクトリーエントリーの名前変更でエラー: %s
 #: modules/ldap.c:1440
 #, c-format
 msgid "object had no %s attribute"
-msgstr "オブジェクトには、%s 属性がありません"
+msgstr "オブジェクトには、%s 属性がありませんでした"
 
 #: modules/ldap.c:1456
 #, c-format

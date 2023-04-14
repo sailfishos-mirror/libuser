@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2013-09-22 07:49-0400\n"
-"Last-Translator: Christopher Meng <cickumqt@gmail.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/fedora/"
-"language/zh_CN/)\n"
+"PO-Revision-Date: 2023-04-13 07:20+0000\n"
+"Last-Translator: Ludek Janda <ljanda@redhat.com>\n"
+"Language-Team: Chinese (Simplified) <https://translate.fedoraproject.org/"
+"projects/libuser/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 3.6.2\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -399,7 +399,7 @@ msgstr "解锁组"
 #: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
 msgid "Both -L and -U specified.\n"
-msgstr " -L 和 -U 两者皆被指定。\n"
+msgstr "-L 和 -U 两者皆被指定。\n"
 
 #: apps/lgroupmod.c:145 apps/lgroupmod.c:161
 #, c-format
@@ -424,7 +424,7 @@ msgstr "组群 %s 无法被修改：%s\n"
 #: apps/lid.c:42 apps/lid.c:74 apps/lid.c:191
 #, c-format
 msgid "Error looking up %s: %s\n"
-msgstr "查找 %s 时出错：%s \n"
+msgstr "查找 %s 时出错：%s\n"
 
 #: apps/lid.c:118
 msgid ""
@@ -707,9 +707,9 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "组群 %s 无法被删除：%s。\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "删除用户的主目录时出错"
+msgstr "删除主目录时出错：%s。\n"
 
 #: apps/luserdel.c:171
 #, c-format
@@ -942,9 +942,8 @@ msgid "invalid module combination"
 msgstr "无效模块组合"
 
 #: lib/error.c:109
-#, fuzzy
 msgid "user's home directory not owned by them"
-msgstr "新用户的主文件夹"
+msgstr "他们不拥有用户主目录"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -1051,11 +1050,11 @@ msgstr "组群 %jd 没有名字"
 
 #: lib/user.c:364
 msgid "user has neither a name nor an UID"
-msgstr "用户 %s 没有名字也没有 UID"
+msgstr "用户既没有名字也没有 UID"
 
 #: lib/user.c:365
 msgid "group has neither a name nor a GID"
-msgstr "组 %s 没有名字也没有 UID"
+msgstr "组既没有名字也没有 UID"
 
 #: lib/user.c:1326
 #, c-format
@@ -1075,7 +1074,7 @@ msgstr "锁文件时出错：%s"
 #: lib/util.c:754
 #, c-format
 msgid "couldn't get default security context: %s"
-msgstr "无法获取默认的安全内容：%s"
+msgstr "无法获取默认的安全上下文：%s"
 
 #: lib/util.c:781 lib/util.c:807 lib/util.c:833
 #, c-format
@@ -1088,15 +1087,14 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "无法为`%s': %s 设置默认的上下文"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "无法获取默认的安全内容：%s"
+msgstr "无法获得 selabel 文件上下文句柄：%s"
 
 #: lib/util.c:872
 #, c-format
 msgid "couldn't determine security context for `%s': %s"
-msgstr "无法为 `%s': %s 决定安全内容"
+msgstr "无法为 `%s': %s 决定安全上下文"
 
 #: modules/files.c:129 modules/files.c:692 modules/files.c:1735
 #: modules/files.c:2070 modules/files.c:2080 modules/files.c:2162
@@ -1121,7 +1119,7 @@ msgstr "创建“%s”时出错：%s"
 #: modules/files.c:169
 #, c-format
 msgid "Error changing owner of `%s': %s"
-msgstr "创建组群`%s': %s出错。"
+msgstr "创建组群`%s': %s出错"
 
 #: modules/files.c:175
 #, c-format
@@ -1148,64 +1146,64 @@ msgstr "无法从`%s': %s中读取"
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "锁 '%s' 的无效内容"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "锁 %s 由进程 %ju 持有"
 
 #: modules/files.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "将 %s 移至 %s 时出错：%s。\n"
+msgstr "删除过时锁 '%s' 时出错：%s"
 
 #: modules/files.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "error opening temporary file for `%s': %s"
-msgstr "变更 `%s' 模式出错： %s"
+msgstr "为 '%s' 打开临时文件时出错：%s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "无法获得锁 '%s': %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "读取`%s': %s时出错"
+msgstr "解析 '%s' 时出错：%s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "读取`%s': %s时出错"
+msgstr "替换 '%s' 时出错：%s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "实体对象没有任何 %s 属性"
+msgstr "重复的对象没有 %s 属性"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "对象没有任何 %s 属性"
+msgstr "原始对象没有 %s 属性"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "ID %lu 已被 %s 使用"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s 值 `%s'：不允许 `:'"
+msgstr ""
+"%s 值 '%s': '\\n"
+"' 不允许"
 
 #: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s 值 `%s'：不允许 `:'"
+msgstr "%s 值 `%s': `:' 不允许"
 
 #: modules/files.c:1136
 msgid "entry already present in file"
@@ -1227,9 +1225,10 @@ msgid "entry with conflicting name already present in file"
 msgstr "文件中出现带冲突名称的条目"
 
 #: modules/files.c:1953
-#, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "加密密码中不允许有 `:'"
+msgstr ""
+"加密密码中不允许使用 `:' 和 `\\n"
+"'"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
@@ -1303,7 +1302,7 @@ msgstr "对象没有任何 %s 属性"
 #: modules/ldap.c:1456
 #, c-format
 msgid "error removing LDAP directory entry: %s"
-msgstr "删除 LDAP 目录项目时出错：%s。"
+msgstr "删除 LDAP 目录项目时出错：%s"
 
 #: modules/ldap.c:1506 modules/ldap.c:1521 modules/ldap.c:1635
 #: modules/ldap.c:1730
