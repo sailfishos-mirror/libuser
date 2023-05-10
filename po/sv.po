@@ -25,16 +25,16 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2015-03-24 09:22-0400\n"
+"PO-Revision-Date: 2023-04-24 11:20+0000\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/fedora/language/"
-"sv/)\n"
+"Language-Team: Swedish <https://translate.fedoraproject.org/projects/libuser/"
+"master/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Zanata 3.6.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -1097,10 +1097,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "det gick inte att sätta standardsäkerhetskontext till \"%s\": %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "det gick inte att få standardsäkerhetskontext: %s"
+msgstr "det gick inte att få fram selabel-filens kontexthandtag: %s"
 
 #: lib/util.c:872
 #, c-format
@@ -1157,59 +1156,59 @@ msgstr "det gick inte att läsa från \"%s\": %s"
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "Felaktigt inehåll i låset ”%s”"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "Låset %s hålls av processen %ju"
 
 #: modules/files.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "Fel när %s flyttades till %s: %s.\n"
+msgstr "Fel när det förlegade låset ”%s”: %s."
 
 #: modules/files.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "error opening temporary file for `%s': %s"
 msgstr "Fel vid ändring av rättigheter på ”%s”: %s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "Kan inte få låset ”%s”: %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "Fel när \"%s\" lästes: %s"
+msgstr "Fel när %s\" slogs upp: %s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "Fel när \"%s\" lästes: %s"
+msgstr "Fel när \"%s\" ersattes: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "entitetsobjektet har inget %s-attribut"
+msgstr "dubblerat objekt har inget %s-attribut"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "objektet har inget %s-attribut"
+msgstr "originalobjektet har inget %s-attribut"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "ID %lu används redan av %s"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s värde \"%s\": \":\" är inte tillåtet"
+msgstr ""
+"%s värde \"%s\": \"\\n"
+"\" är inte tillåtet"
 
 #: modules/files.c:1032
 #, c-format
@@ -1236,9 +1235,10 @@ msgid "entry with conflicting name already present in file"
 msgstr "en post med motstridigt namn finns redan i filen"
 
 #: modules/files.c:1953
-#, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "\":\" är inte tillåtet i krypterade lösenord"
+msgstr ""
+"\":\" och ”\\n"
+"” är inte tillåtna i krypterade lösenord"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
