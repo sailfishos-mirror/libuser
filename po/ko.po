@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2023-03-31 05:20+0000\n"
+"PO-Revision-Date: 2023-05-18 18:20+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/libuser/"
 "master/ko/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -554,11 +554,11 @@ msgstr "`%s'의 암호를 변경합니다.\n"
 
 #: apps/lpasswd.c:113
 msgid "New password"
-msgstr "새 암호"
+msgstr "신규 비밀번호"
 
 #: apps/lpasswd.c:116
 msgid "New password (confirm)"
-msgstr "새 암호 (확인)"
+msgstr "신규 비밀번호 (확인)"
 
 #: apps/lpasswd.c:130
 #, c-format
