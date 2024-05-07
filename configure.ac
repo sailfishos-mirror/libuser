@@ -169,7 +169,7 @@ if test "$GCC" = yes ; then
      AC_MSG_RESULT([$enable_Werror])
 fi
 
-GTK_DOC_CHECK
+GTK_DOC_CHECK([1.14],[--flavour no-tmpl --docdir docs/reference])
 
 AC_CONFIG_FILES([Makefile po/Makefile.in docs/Makefile docs/reference/Makefile
 libuser.pc])
