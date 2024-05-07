@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2023-04-24 11:20+0000\n"
+"PO-Revision-Date: 2024-02-03 20:36+0000\n"
 "Last-Translator: Göran Uddeborg <goeran@uddeborg.se>\n"
 "Language-Team: Swedish <https://translate.fedoraproject.org/projects/libuser/"
 "master/sv/>\n"
@@ -34,12 +34,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.3.1\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
 msgid "Failed to drop privileges.\n"
-msgstr "Det gick inte att släppa rättigheter.\n"
+msgstr "Misslyckades att släppa privilegier.\n"
 
 #: apps/apputil.c:208
 #, c-format

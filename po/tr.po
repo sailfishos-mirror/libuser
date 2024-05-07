@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2013-04-29 04:37-0400\n"
-"Last-Translator: Miloslav Trmač <mitr@volny.cz>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/fedora/language/"
-"tr/)\n"
+"PO-Revision-Date: 2023-08-04 17:21+0000\n"
+"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"Language-Team: Turkish <https://translate.fedoraproject.org/projects/libuser/"
+"master/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Zanata 3.6.2\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+"X-Generator: Weblate 4.18.2\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -76,42 +76,44 @@ msgstr "Kullanıcı aynı değil.\n"
 #: apps/lgroupdel.c:44 apps/lgroupmod.c:56 apps/lid.c:116 apps/lnewusers.c:47
 #: apps/lpasswd.c:48 apps/luseradd.c:57 apps/luserdel.c:47 apps/lusermod.c:57
 msgid "prompt for all information"
-msgstr ""
+msgstr "tüm bilgiler için sor"
 
 #: apps/lchage.c:88
 msgid "list aging parameters for the user"
-msgstr ""
+msgstr "kullanıcı için dönemsellik parametrelerini listele"
 
 #: apps/lchage.c:90
 msgid "minimum days between password changes"
-msgstr ""
+msgstr "parola değişiklikleri arasındaki en az gün sayısı"
 
 #: apps/lchage.c:90 apps/lchage.c:92 apps/lchage.c:95 apps/lchage.c:98
 #: apps/lchage.c:101 apps/lchage.c:104
 msgid "DAYS"
-msgstr ""
+msgstr "GÜN"
 
 #: apps/lchage.c:92
 msgid "maximum days between password changes"
-msgstr ""
+msgstr "parola değişiklikleri arasındaki en çok gün sayısı"
 
 #: apps/lchage.c:94
 msgid "date of last password change in days since 1/1/70"
-msgstr ""
+msgstr "1/1/1970'den bu yana geçen gün cinsinden son parola değişikliği tarihi"
 
 #: apps/lchage.c:97
 msgid ""
 "number of days after password expiration date when account is considered "
 "inactive"
 msgstr ""
+"hesabın etkin olmadığının kabul edileceği parola zaman aşımı tarihinden "
+"sonraki gün sayısı"
 
 #: apps/lchage.c:100
 msgid "password expiration date in days since 1/1/70"
-msgstr ""
+msgstr "1/1/1970 tarihinden itibaren gün cinsinden parola zaman aşımı tarihi"
 
 #: apps/lchage.c:103
 msgid "days before expiration to begin warning user"
-msgstr ""
+msgstr "kullanıcının uyarılmaya başlanacağı zaman aşımından önceki gün sayısı"
 
 #: apps/lchage.c:116 apps/lid.c:131 apps/lpasswd.c:69 apps/luseradd.c:102
 #: apps/luserdel.c:61 apps/lusermod.c:102
@@ -168,7 +170,7 @@ msgstr "En çok:\t%ld\n"
 #: apps/lchage.c:176
 #, c-format
 msgid "Maximum:\tNone\n"
-msgstr ""
+msgstr "En çok:\tYok\n"
 
 #: apps/lchage.c:179
 #, c-format
@@ -183,11 +185,11 @@ msgstr "Etkin olmayan:\t%ld\n"
 #: apps/lchage.c:186
 #, c-format
 msgid "Inactive:\tNever\n"
-msgstr ""
+msgstr "Etkin değil:\tAsla\n"
 
 #: apps/lchage.c:190 apps/lchage.c:198 apps/lchage.c:208
 msgid "Must change password on next login"
-msgstr ""
+msgstr "Bir sonraki oturum açmada parola değiştirilmeli"
 
 #: apps/lchage.c:192 apps/lchage.c:200 apps/lchage.c:210 apps/lchage.c:219
 msgid "Never"
@@ -242,7 +244,7 @@ msgstr "Soyadı"
 
 #: apps/lchfn.c:162
 msgid "Given Name"
-msgstr "Verilen İsim"
+msgstr "Verilen Ad"
 
 #: apps/lchfn.c:172
 msgid "Office"
@@ -294,16 +296,16 @@ msgstr "Kabuk değişti.\n"
 
 #: apps/lgroupadd.c:50
 msgid "gid for new group"
-msgstr ""
+msgstr "yeni grubun grup kimliği"
 
 #: apps/lgroupadd.c:50 apps/lgroupmod.c:58 apps/lpasswd.c:57 apps/lpasswd.c:60
 #: apps/luseradd.c:69 apps/lusermod.c:67 apps/lusermod.c:69
 msgid "NUM"
-msgstr ""
+msgstr "SAYI"
 
 #: apps/lgroupadd.c:52
 msgid "create a system group"
-msgstr ""
+msgstr "sistem grubu oluştur"
 
 #: apps/lgroupadd.c:63 apps/lgroupdel.c:55 apps/lgroupmod.c:84
 msgid "[OPTION...] group"
@@ -337,19 +339,19 @@ msgstr "%s grubu silinemedi: %s\n"
 
 #: apps/lgroupmod.c:58
 msgid "set GID for group"
-msgstr ""
+msgstr "grup için grup kimliğini ayarla"
 
 #: apps/lgroupmod.c:60
 msgid "change group to have given name"
-msgstr ""
+msgstr "grubu verilen ada sahip olacak şekilde değiştir"
 
 #: apps/lgroupmod.c:60
 msgid "NAME"
-msgstr ""
+msgstr "AD"
 
 #: apps/lgroupmod.c:62 apps/luseradd.c:77
 msgid "plaintext password for use with group"
-msgstr ""
+msgstr "grup ile kullanılacak düz metin biçiminde parola"
 
 #: apps/lgroupmod.c:62 apps/lgroupmod.c:64 apps/lgroupmod.c:66
 #: apps/lgroupmod.c:68 apps/lgroupmod.c:70 apps/lgroupmod.c:72
@@ -361,35 +363,35 @@ msgstr ""
 #: apps/lusermod.c:75 apps/lusermod.c:81 apps/lusermod.c:83 apps/lusermod.c:85
 #: apps/lusermod.c:87 apps/lusermod.c:89 apps/lusermod.c:91
 msgid "STRING"
-msgstr ""
+msgstr "DİZGE"
 
 #: apps/lgroupmod.c:64 apps/luseradd.c:79
 msgid "pre-hashed password for use with group"
-msgstr ""
+msgstr "grup ile kullanılacak önceden şifrelenen parola"
 
 #: apps/lgroupmod.c:66
 msgid "list of administrators to add"
-msgstr ""
+msgstr "eklenecek yöneticilerin listesi"
 
 #: apps/lgroupmod.c:68
 msgid "list of administrators to remove"
-msgstr ""
+msgstr "kaldırılacak yöneticilerin listesi"
 
 #: apps/lgroupmod.c:70
 msgid "list of group members to add"
-msgstr ""
+msgstr "eklenecek grup üyelerinin listesi"
 
 #: apps/lgroupmod.c:72
 msgid "list of group members to remove"
-msgstr ""
+msgstr "kaldırılacak grup üyelerinin listesi"
 
 #: apps/lgroupmod.c:73
 msgid "lock group"
-msgstr ""
+msgstr "grubu kilitle"
 
 #: apps/lgroupmod.c:74
 msgid "unlock group"
-msgstr ""
+msgstr "grubun kilidini kaldır"
 
 #: apps/lgroupmod.c:129 apps/lusermod.c:168
 #, c-format
@@ -426,10 +428,14 @@ msgid ""
 "list members of a named group instead of the group memberships for the named "
 "user"
 msgstr ""
+"belirtilen kullanıcı için grup üyelikleri yerine belirtilen bir grubun "
+"üyelerini listele"
 
 #: apps/lid.c:121
 msgid "only list membership information by name, and not UID/GID"
 msgstr ""
+"üyelik bilgilerini kullanıcı/grup kimliğine göre değil, yalnızca ada göre "
+"listele"
 
 #: apps/lid.c:148
 #, c-format
@@ -453,19 +459,19 @@ msgstr "Kullanıcı %s yok\n"
 
 #: apps/lnewusers.c:49
 msgid "file with user information records"
-msgstr ""
+msgstr "kullanıcı bilgileri kayıtlarını içeren dosya"
 
 #: apps/lnewusers.c:49
 msgid "PATH"
-msgstr ""
+msgstr "YOL"
 
 #: apps/lnewusers.c:51
 msgid "don't create home directories"
-msgstr ""
+msgstr "ev dizinleri oluşturulmasın"
 
 #: apps/lnewusers.c:53
 msgid "don't create mail spools"
-msgstr ""
+msgstr "e-posta kuyrukları oluşturulmasın"
 
 #: apps/lnewusers.c:65
 msgid "[OPTION...]"
@@ -510,7 +516,7 @@ msgstr "%s için ev dizini oluşturulurken hata: %s.\n"
 #: apps/lnewusers.c:273
 #, c-format
 msgid "Error creating mail spool for %s: %s\n"
-msgstr ""
+msgstr "%s için e-posta kuyruğu oluşturulurken hata: %s\n"
 
 #: apps/lnewusers.c:288
 #, c-format
@@ -524,23 +530,23 @@ msgstr "%s için kullanıcı hesabı oluşturulurken hata: %s.\n"
 
 #: apps/lpasswd.c:50
 msgid "set group password instead of user password"
-msgstr ""
+msgstr "kullanıcı parolası yerine grup parolası ayarla"
 
 #: apps/lpasswd.c:52
 msgid "new plain password"
-msgstr ""
+msgstr "yeni düz metin biçiminde parola"
 
 #: apps/lpasswd.c:54
 msgid "new crypted password"
-msgstr ""
+msgstr "yeni şifreli parola"
 
 #: apps/lpasswd.c:56
 msgid "read new plain password from given descriptor"
-msgstr ""
+msgstr "verilen tanımlayıcıdan yeni düz metin biçimindeki parolayı oku"
 
 #: apps/lpasswd.c:59
 msgid "read new crypted password from given descriptor"
-msgstr ""
+msgstr "verilen tanımlayıcıdan yeni şifreli parolayı oku"
 
 #: apps/lpasswd.c:85
 #, c-format
@@ -587,63 +593,63 @@ msgstr "Parola değişti.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
-msgstr ""
+msgstr "sistem kullanıcısı oluştur"
 
 #: apps/luseradd.c:61
 msgid "GECOS information for new user"
-msgstr ""
+msgstr "yeni kullanıcının GECOS bilgileri"
 
 #: apps/luseradd.c:63
 msgid "home directory for new user"
-msgstr ""
+msgstr "yeni kullanıcının ev dizini"
 
 #: apps/luseradd.c:65
 msgid "directory with files for the new user"
-msgstr ""
+msgstr "yeni kullanıcı için dosyaları içeren dizin"
 
 #: apps/luseradd.c:67
 msgid "shell for new user"
-msgstr ""
+msgstr "yeni kullanıcının kabuğu"
 
 #: apps/luseradd.c:69
 msgid "uid for new user"
-msgstr ""
+msgstr "yeni kullanıcının kullanıcı kimliği"
 
 #: apps/luseradd.c:71
 msgid "group for new user"
-msgstr ""
+msgstr "yeni kullanıcının grubu"
 
 #: apps/luseradd.c:73
 msgid "don't create home directory for user"
-msgstr ""
+msgstr "kullanıcı için ev dizini oluşturulmasın"
 
 #: apps/luseradd.c:75
 msgid "don't create group with same name as user"
-msgstr ""
+msgstr "kullanıcı ile aynı ada sahip grup oluşturulmasın"
 
 #: apps/luseradd.c:81
 msgid "common name for new user"
-msgstr ""
+msgstr "yeni kullanıcının yaygın adı"
 
 #: apps/luseradd.c:83
 msgid "given name for new user"
-msgstr ""
+msgstr "yeni kullanıcının adı"
 
 #: apps/luseradd.c:85
 msgid "surname for new user"
-msgstr ""
+msgstr "yeni kullanıcının soyadı"
 
 #: apps/luseradd.c:87
 msgid "room number for new user"
-msgstr ""
+msgstr "yeni kullanıcının oda numarası"
 
 #: apps/luseradd.c:89
 msgid "telephone number for new user"
-msgstr ""
+msgstr "yeni kullanıcının telefon numarası"
 
 #: apps/luseradd.c:91
 msgid "home telephone number for new user"
-msgstr ""
+msgstr "yeni kullanıcının ev telefonu numarası"
 
 #: apps/luseradd.c:194
 #, c-format
@@ -668,15 +674,16 @@ msgstr "%s oluşturulurken hata: %s.\n"
 #: apps/luseradd.c:310
 #, c-format
 msgid "Error creating mail spool: %s\n"
-msgstr ""
+msgstr "E-posta kuyruğu oluşturulurken hata: %s\n"
 
 #: apps/luserdel.c:49
 msgid "don't remove the user's private group, if the user has one"
 msgstr ""
+"kullanıcının bir özel grubu varsa, kullanıcının özel grubu kaldırılmasın"
 
 #: apps/luserdel.c:52
 msgid "remove the user's home directory"
-msgstr ""
+msgstr "kullanıcının ev dizinini kaldır"
 
 #: apps/luserdel.c:98
 #, c-format
@@ -704,82 +711,82 @@ msgid "Group %s could not be deleted: %s.\n"
 msgstr "%s grubu silinemedi: %s.\n"
 
 #: apps/luserdel.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing home directory: %s.\n"
-msgstr "bu kullanıcı için ev dizini silinirken hata oluştu"
+msgstr "Ev dizini kaldırılırken hata oluştu: %s.\n"
 
 #: apps/luserdel.c:171
 #, c-format
 msgid "Error removing mail spool: %s"
-msgstr ""
+msgstr "E-posta kuyruğu kaldırılırken hata: %s"
 
 #: apps/lusermod.c:59
 msgid "GECOS information"
-msgstr ""
+msgstr "GECOS bilgileri"
 
 #: apps/lusermod.c:61
 msgid "home directory"
-msgstr ""
+msgstr "ev dizini"
 
 #: apps/lusermod.c:63
 msgid "move home directory contents"
-msgstr ""
+msgstr "ev dizini içeriğini taşı"
 
 #: apps/lusermod.c:65
 msgid "set shell for user"
-msgstr ""
+msgstr "kullanıcının kabuğunu ayarla"
 
 #: apps/lusermod.c:67
 msgid "set UID for user"
-msgstr ""
+msgstr "kullanıcının kimliğini ayarla"
 
 #: apps/lusermod.c:69
 msgid "set primary GID for user"
-msgstr ""
+msgstr "kullanıcının birincil grup kimliğini ayarla"
 
 #: apps/lusermod.c:71
 msgid "change login name for user"
-msgstr ""
+msgstr "kullanıcının oturum açma adını değiştir"
 
 #: apps/lusermod.c:73
 msgid "plaintext password for the user"
-msgstr ""
+msgstr "kullanıcının düz metin biçiminde parolası"
 
 #: apps/lusermod.c:75
 msgid "pre-hashed password for the user"
-msgstr ""
+msgstr "kullanıcının önceden şifrelenen parolası"
 
 #: apps/lusermod.c:76
 msgid "lock account"
-msgstr ""
+msgstr "hesabı kilitle"
 
 #: apps/lusermod.c:79
 msgid "unlock account"
-msgstr ""
+msgstr "hesabın kilidini kaldır"
 
 #: apps/lusermod.c:81
 msgid "set common name for user"
-msgstr ""
+msgstr "kullanıcının yaygın adını ayarla"
 
 #: apps/lusermod.c:83
 msgid "set given name for user"
-msgstr ""
+msgstr "kullanıcının adını ayarla"
 
 #: apps/lusermod.c:85
 msgid "set surname for user"
-msgstr ""
+msgstr "kullanıcının soyadını ayarla"
 
 #: apps/lusermod.c:87
 msgid "set room number for user"
-msgstr ""
+msgstr "kullanıcının oda numarasını ayarla"
 
 #: apps/lusermod.c:89
 msgid "set telephone number for user"
-msgstr ""
+msgstr "kullanıcının telefon numarasını ayarla"
 
 #: apps/lusermod.c:91
 msgid "set home telephone number for user"
-msgstr ""
+msgstr "kullanıcının ev telefonu numarasını ayarla"
 
 #: apps/lusermod.c:186 apps/lusermod.c:205
 #, c-format
@@ -940,7 +947,7 @@ msgstr "geçersiz modül kombinasyonu"
 
 #: lib/error.c:109
 msgid "user's home directory not owned by them"
-msgstr ""
+msgstr "kullanıcının ev dizininin sahibi kendisi değil"
 
 #: lib/error.c:115
 msgid "unknown error"
@@ -1023,7 +1030,7 @@ msgstr "%s kullanıcısının kimliği yok"
 #: lib/user.c:310
 #, c-format
 msgid "user %s not found"
-msgstr ""
+msgstr "%s kullanıcısı bulunamadı"
 
 #: lib/user.c:333 lib/user.c:361
 #, c-format
@@ -1033,7 +1040,7 @@ msgstr "%s grubunun kimliği yok"
 #: lib/user.c:335
 #, c-format
 msgid "group %s not found"
-msgstr ""
+msgstr "%s grubu bulunamadı"
 
 #: lib/user.c:355
 #, c-format
@@ -1084,10 +1091,9 @@ msgid "couldn't set default security context to `%s': %s"
 msgstr "öntanımlı güvenlik kapsamı `%s' olarak ayarlanamadı: %s"
 
 #: lib/util.c:862
-#, fuzzy, c-format
-#| msgid "couldn't get default security context: %s"
+#, c-format
 msgid "couldn't obtain selabel file context handle: %s"
-msgstr "öntanımlı güvenlik kapsamı alınamadı: %s"
+msgstr "selabel dosya bağlam tanıtıcısı alınamadı: %s"
 
 #: lib/util.c:872
 #, c-format
@@ -1122,7 +1128,7 @@ msgstr "`%s' dosya/dizininin sahipliği değiştirilirken hata: %s"
 #: modules/files.c:175
 #, c-format
 msgid "Error changing mode of `%s': %s"
-msgstr ""
+msgstr "`%s' için mod değiştirilirken hata: %s"
 
 #: modules/files.c:191
 #, c-format
@@ -1144,64 +1150,64 @@ msgstr "`%s'den okunamadı: %s"
 #: modules/files.c:256
 #, c-format
 msgid "Invalid contents of lock `%s'"
-msgstr ""
+msgstr "`%s' kilidinin içeriği geçersiz"
 
 #: modules/files.c:261
 #, c-format
 msgid "The lock %s is held by process %ju"
-msgstr ""
+msgstr "%s kilidi %ju işlemi tarafından tutuluyor"
 
 #: modules/files.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Error removing stale lock `%s': %s"
-msgstr "%s %s'e taşınırken hata: %s.\n"
+msgstr "`%s' durum kilidi kaldırılırken hata: %s"
 
 #: modules/files.c:297
-#, fuzzy, c-format
+#, c-format
 msgid "error opening temporary file for `%s': %s"
-msgstr "`%s' açılırken hata: %s\n"
+msgstr "`%s' için geçici dosya açılırken hata: %s"
 
 #: modules/files.c:321
 #, c-format
 msgid "Cannot obtain lock `%s': %s"
-msgstr ""
+msgstr "`%s' kilidi alınamıyor: %s"
 
 #: modules/files.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "Error resolving `%s': %s"
-msgstr "`%s' okunurken hata: %s"
+msgstr "`%s' çözümlenirken hata: %s"
 
 #: modules/files.c:442
-#, fuzzy, c-format
+#, c-format
 msgid "Error replacing `%s': %s"
-msgstr "`%s' okunurken hata: %s"
+msgstr "`%s' değiştirilirken hata: %s"
 
 #: modules/files.c:920
-#, fuzzy, c-format
-#| msgid "entity object has no %s attribute"
+#, c-format
 msgid "duplicate object has no %s attribute"
-msgstr "öğe nesnesi %s özelliğine sahip değil"
+msgstr "yinelenen nesne %s özelliğini içermiyor"
 
 #: modules/files.c:930
-#, fuzzy, c-format
-#| msgid "object has no %s attribute"
+#, c-format
 msgid "original object has no %s attribute"
-msgstr "nesne %s özelliğini içermiyor"
+msgstr "asıl nesne %s özelliğini içermiyor"
 
 #: modules/files.c:942
 #, c-format
 msgid "ID %lu already in use by %s"
-msgstr ""
+msgstr "%lu kimliği %s tarafından zaten kullanılıyor"
 
 #: modules/files.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid "%s value `%s': `\\n' not allowed"
-msgstr "%s değeri `%s': `:' karakterine izin verilmedi"
+msgstr ""
+"%s değeri `%s': `\\n"
+"' karakterine izin verilmiyor"
 
 #: modules/files.c:1032
 #, c-format
 msgid "%s value `%s': `:' not allowed"
-msgstr "%s değeri `%s': `:' karakterine izin verilmedi"
+msgstr "%s değeri `%s': `:' karakterine izin verilmiyor"
 
 #: modules/files.c:1136
 msgid "entry already present in file"
@@ -1216,16 +1222,17 @@ msgstr "`%s'e yazılamadı: %s"
 #: modules/files.c:1309
 #, c-format
 msgid "entity object has no %s attribute"
-msgstr "öğe nesnesi %s özelliğine sahip değil"
+msgstr "öğe nesnesi %s özelliğini içermiyor"
 
 #: modules/files.c:1351
 msgid "entry with conflicting name already present in file"
 msgstr "ismi çakışan girdi zaten dosyada var"
 
 #: modules/files.c:1953
-#, fuzzy
 msgid "`:' and `\\n' not allowed in encrypted password"
-msgstr "`:' karakterine şifrelenmiş parolada izin verilmiyor"
+msgstr ""
+"`:' ve `\\n"
+"' karakterlerine şifrelenen parolada izin verilmiyor"
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: libuser 0.60\n"
 "Report-Msgid-Bugs-To: http://bugzilla.redhat.com/bugzilla/\n"
 "POT-Creation-Date: 2023-03-14 15:37+0100\n"
-"PO-Revision-Date: 2023-05-18 18:20+0000\n"
+"PO-Revision-Date: 2024-02-13 09:36+0000\n"
 "Last-Translator: 김인수 <simmon@nplob.com>\n"
 "Language-Team: Korean <https://translate.fedoraproject.org/projects/libuser/"
 "master/ko/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.3.1\n"
 
 #: apps/apputil.c:195 apps/apputil.c:199
 #, c-format
@@ -403,7 +403,7 @@ msgstr "-L 와 -U 이 함께 지정되었습니다.\n"
 #: apps/lgroupmod.c:145 apps/lgroupmod.c:161
 #, c-format
 msgid "Failed to set password for group %s: %s\n"
-msgstr "%s 그룹의 암호를 설정하는데 실패했습니다: %s\n"
+msgstr "그룹의 비밀번호 설정하는 데 실패함 %s: %s\n"
 
 #: apps/lgroupmod.c:177
 #, c-format
@@ -520,7 +520,7 @@ msgstr "%s를 위한 전자우편 스풀 생성 중 오류 : %s\n"
 #: apps/lnewusers.c:288
 #, c-format
 msgid "Error setting initial password for %s: %s\n"
-msgstr "`%s'의 초기 암호를 설정하는 도중 오류가 발생했습니다: %s\n"
+msgstr "초기 비밀번호를 설정 오류 %s: %s\n"
 
 #: apps/lnewusers.c:298
 #, c-format
@@ -550,7 +550,7 @@ msgstr "제공된 설명자에서 신규 암호화된 비밀번호를 읽습니�
 #: apps/lpasswd.c:85
 #, c-format
 msgid "Changing password for %s.\n"
-msgstr "`%s'의 암호를 변경합니다.\n"
+msgstr "`%s' 비밀번호를 변경하기.\n"
 
 #: apps/lpasswd.c:113
 msgid "New password"
@@ -563,12 +563,12 @@ msgstr "신규 비밀번호 (확인)"
 #: apps/lpasswd.c:130
 #, c-format
 msgid "Passwords do not match, try again.\n"
-msgstr "암호가 일치하지 않습니다, 다시 입력해 주십시오.\n"
+msgstr "비밀번호가 일치하지 않습니다, 다시 입력해 주세요.\n"
 
 #: apps/lpasswd.c:135
 #, c-format
 msgid "Password change canceled.\n"
-msgstr "암호 변경이 취소되었습니다.\n"
+msgstr "비밀번호 변경이 취소되었습니다.\n"
 
 #: apps/lpasswd.c:170 apps/lpasswd.c:188
 #, c-format
@@ -578,17 +578,17 @@ msgstr "파일 기술어 %d를 읽지 못했습니다.\n"
 #: apps/lpasswd.c:210 apps/luseradd.c:323 apps/luseradd.c:333
 #, c-format
 msgid "Error setting password for user %s: %s.\n"
-msgstr "%s 사용자의 암호를 설정하는데 오류 발생: %s.\n"
+msgstr "사용자 비밀번호 설정 오류 %s: %s.\n"
 
 #: apps/lpasswd.c:220
 #, c-format
 msgid "Error setting password for group %s: %s.\n"
-msgstr "`%s' 그룹의 암호를 설정하는 도중 오류 발생: %s.\n"
+msgstr "그룹 비밀번호 설정 오류 %s: %s.\n"
 
 #: apps/lpasswd.c:229
 #, c-format
 msgid "Password changed.\n"
-msgstr "암호가 변경되었습니다.\n"
+msgstr "비밀번호가 변경되었습니다.\n"
 
 #: apps/luseradd.c:59
 msgid "create a system user"
@@ -789,7 +789,7 @@ msgstr "사용자를 위한 집 전화 번호 설정"
 #: apps/lusermod.c:186 apps/lusermod.c:205
 #, c-format
 msgid "Failed to set password for user %s: %s.\n"
-msgstr "%s 사용자의 암호를 설정하는데 실패함: %s.\n"
+msgstr "사용자 비밀번호를 설정하는데 실패함 %s: %s.\n"
 
 #: apps/lusermod.c:221
 #, c-format
@@ -933,7 +933,7 @@ msgstr "라이브러리/모듈 버젼이 일치하지 않음"
 
 #: lib/error.c:102
 msgid "unlocking would make the password field empty"
-msgstr "잠금 해제하시면 암호 입력란이 비워집니다"
+msgstr "잠금 해제는 비밀번호 입력란이 비워집니다"
 
 #: lib/error.c:105
 msgid "invalid attribute value"
@@ -1234,7 +1234,7 @@ msgstr ""
 
 #: modules/files.c:1965 modules/ldap.c:1543 modules/ldap.c:1812
 msgid "error encrypting password"
-msgstr "암호를 암호화하는 도중 오류 발생"
+msgstr "비밀번호 암호화 중 오류"
 
 #: modules/files.c:2667 modules/ldap.c:2410
 #, c-format
@@ -1314,7 +1314,7 @@ msgstr "개체에 %s 속성이 없습니다"
 
 #: modules/ldap.c:1533
 msgid "unsupported password encryption scheme"
-msgstr "지원되지 않는 비밀번호 암호화 체계"
+msgstr "미지원 비밀번호 암호화 체계"
 
 #: modules/ldap.c:1658
 msgid "no such object in LDAP directory"
@@ -1328,7 +1328,7 @@ msgstr "`%s' 속성을 찾을 수 없습니다"
 #: modules/ldap.c:1843
 #, c-format
 msgid "error setting password in LDAP directory for %s: %s"
-msgstr "%s의 LDAP 디렉토리 안에 암호를 설정하는 도중 오류 발생: %s"
+msgstr "LDAP 디렉토리의 비밀번호 설정 중 오류 %s: %s"
 
 #: modules/ldap.c:2446
 msgid "LDAP Server Name"
@@ -1344,7 +1344,7 @@ msgstr "LDAP 바인드 DN"
 
 #: modules/ldap.c:2465
 msgid "LDAP Bind Password"
-msgstr "LDAP Bind 암호"
+msgstr "LDAP Bind 비밀번호"
 
 #: modules/ldap.c:2471
 msgid "LDAP SASL User"
