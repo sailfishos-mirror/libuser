@@ -1,9 +1,14 @@
-import crypt
 import libuser
 import os
 import os.path
 import sys
 import unittest
+
+# crypt was dropped from Python standard library in 3.13
+try:
+    import crypt_r as crypt
+except ImportError:
+    import crypt
 
 LARGE_ID = 2147483648
 

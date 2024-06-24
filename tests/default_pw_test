@@ -79,7 +79,13 @@ get_ldap_password() # entry filter
 
 valid_password() # encoded value
 {
-    local v=$($PYTHON -c "import crypt; print(crypt.crypt('password', '$1'))")
+    local v=$($PYTHON -c "
+try:
+    import crypt_r as crypt
+except ImportError:
+    import crypt
+print(crypt.crypt('password', '$1'))
+")
     [ "x$v" = "x$1" ]
 }
 
