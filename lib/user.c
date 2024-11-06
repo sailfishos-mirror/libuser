@@ -223,10 +223,10 @@ lu_name_allowed(struct lu_ent *ent, struct lu_error **error)
 		lu_error_new(error, lu_error_name_bad, _("name is too short"));
 		return FALSE;
 	}
-	if (len > UT_NAMESIZE - 1) {
+	if (len > UT_NAMESIZE) {
 		lu_error_new(error, lu_error_name_bad,
 			     _("name is too long (%zu > %d)"), len,
-			     UT_NAMESIZE - 1);
+			     UT_NAMESIZE);
 		return FALSE;
 	}
 	for (i = 0; sdata[i] != '\0'; i++) {
