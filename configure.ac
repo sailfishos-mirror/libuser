@@ -1,4 +1,4 @@
-AC_INIT([libuser], [0.62], [https://pagure.io/libuser], ,
+AC_INIT([libuser], [0.64], [https://pagure.io/libuser], ,
         [https://pagure.io/libuser])
 AC_PREREQ([2.63b])
 AC_CONFIG_HEADERS(config.h)
